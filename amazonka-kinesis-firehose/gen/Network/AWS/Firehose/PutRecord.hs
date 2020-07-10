@@ -21,7 +21,7 @@
 -- Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use 'PutRecordBatch' . Applications using these operations are referred to as producers.
 --
 --
--- By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use 'PutRecord' and 'PutRecordBatch' , the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <http://docs.aws.amazon.com/firehose/latest/dev/limits.html Amazon Kinesis Data Firehose Limits> .
+-- By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use 'PutRecord' and 'PutRecordBatch' , the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <https://docs.aws.amazon.com/firehose/latest/dev/limits.html Amazon Kinesis Data Firehose Limits> . 
 --
 -- You must specify the name of the delivery stream and the data record when using 'PutRecord' . The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it can be a segment from a log file, geographic location data, website clickstream data, and so on.
 --
@@ -29,9 +29,11 @@
 --
 -- The @PutRecord@ operation returns a @RecordId@ , which is a unique string assigned to each record. Producer applications can use this ID for purposes such as auditability and investigation.
 --
--- If the @PutRecord@ operation throws a @ServiceUnavailableException@ , back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream.
+-- If the @PutRecord@ operation throws a @ServiceUnavailableException@ , back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. 
 --
 -- Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it tries to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.
+--
+-- /Important:/ Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding.
 --
 module Network.AWS.Firehose.PutRecord
     (
@@ -46,6 +48,7 @@ module Network.AWS.Firehose.PutRecord
     , putRecordResponse
     , PutRecordResponse
     -- * Response Lenses
+    , prrsEncrypted
     , prrsResponseStatus
     , prrsRecordId
     ) where
@@ -58,11 +61,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putRecord' smart constructor.
-data PutRecord = PutRecord'
-  { _prDeliveryStreamName :: !Text
-  , _prRecord             :: !Record
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRecord = PutRecord'{_prDeliveryStreamName ::
+                            !Text,
+                            _prRecord :: !Record}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutRecord' with the minimum fields required to make a request.
 --
@@ -75,10 +77,10 @@ putRecord
     :: Text -- ^ 'prDeliveryStreamName'
     -> Record -- ^ 'prRecord'
     -> PutRecord
-putRecord pDeliveryStreamName_ pRecord_ =
-  PutRecord'
-    {_prDeliveryStreamName = pDeliveryStreamName_, _prRecord = pRecord_}
-
+putRecord pDeliveryStreamName_ pRecord_
+  = PutRecord'{_prDeliveryStreamName =
+                 pDeliveryStreamName_,
+               _prRecord = pRecord_}
 
 -- | The name of the delivery stream.
 prDeliveryStreamName :: Lens' PutRecord Text
@@ -95,7 +97,8 @@ instance AWSRequest PutRecord where
           = receiveJSON
               (\ s h x ->
                  PutRecordResponse' <$>
-                   (pure (fromEnum s)) <*> (x .:> "RecordId"))
+                   (x .?> "Encrypted") <*> (pure (fromEnum s)) <*>
+                     (x .:> "RecordId"))
 
 instance Hashable PutRecord where
 
@@ -125,15 +128,17 @@ instance ToQuery PutRecord where
         toQuery = const mempty
 
 -- | /See:/ 'putRecordResponse' smart constructor.
-data PutRecordResponse = PutRecordResponse'
-  { _prrsResponseStatus :: !Int
-  , _prrsRecordId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRecordResponse = PutRecordResponse'{_prrsEncrypted
+                                            :: !(Maybe Bool),
+                                            _prrsResponseStatus :: !Int,
+                                            _prrsRecordId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutRecordResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'prrsEncrypted' - Indicates whether server-side encryption (SSE) was enabled during this operation.
 --
 -- * 'prrsResponseStatus' - -- | The response status code.
 --
@@ -142,10 +147,14 @@ putRecordResponse
     :: Int -- ^ 'prrsResponseStatus'
     -> Text -- ^ 'prrsRecordId'
     -> PutRecordResponse
-putRecordResponse pResponseStatus_ pRecordId_ =
-  PutRecordResponse'
-    {_prrsResponseStatus = pResponseStatus_, _prrsRecordId = pRecordId_}
+putRecordResponse pResponseStatus_ pRecordId_
+  = PutRecordResponse'{_prrsEncrypted = Nothing,
+                       _prrsResponseStatus = pResponseStatus_,
+                       _prrsRecordId = pRecordId_}
 
+-- | Indicates whether server-side encryption (SSE) was enabled during this operation.
+prrsEncrypted :: Lens' PutRecordResponse (Maybe Bool)
+prrsEncrypted = lens _prrsEncrypted (\ s a -> s{_prrsEncrypted = a})
 
 -- | -- | The response status code.
 prrsResponseStatus :: Lens' PutRecordResponse Int

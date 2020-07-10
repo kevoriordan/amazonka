@@ -55,12 +55,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listRepositories' smart constructor.
-data ListRepositories = ListRepositories'
-  { _lrNextToken :: !(Maybe Text)
-  , _lrOrder     :: !(Maybe OrderEnum)
-  , _lrSortBy    :: !(Maybe SortByEnum)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRepositories = ListRepositories'{_lrNextToken
+                                          :: !(Maybe Text),
+                                          _lrOrder :: !(Maybe OrderEnum),
+                                          _lrSortBy :: !(Maybe SortByEnum)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRepositories' with the minimum fields required to make a request.
 --
@@ -73,10 +72,9 @@ data ListRepositories = ListRepositories'
 -- * 'lrSortBy' - The criteria used to sort the results of a list repositories operation.
 listRepositories
     :: ListRepositories
-listRepositories =
-  ListRepositories'
-    {_lrNextToken = Nothing, _lrOrder = Nothing, _lrSortBy = Nothing}
-
+listRepositories
+  = ListRepositories'{_lrNextToken = Nothing,
+                      _lrOrder = Nothing, _lrSortBy = Nothing}
 
 -- | An enumeration token that allows the operation to batch the results of the operation. Batch sizes are 1,000 for list repository operations. When the client sends the token back to AWS CodeCommit, another page of 1,000 records is retrieved.
 lrNextToken :: Lens' ListRepositories (Maybe Text)
@@ -141,12 +139,16 @@ instance ToQuery ListRepositories where
 --
 --
 -- /See:/ 'listRepositoriesResponse' smart constructor.
-data ListRepositoriesResponse = ListRepositoriesResponse'
-  { _lrrsRepositories   :: !(Maybe [RepositoryNameIdPair])
-  , _lrrsNextToken      :: !(Maybe Text)
-  , _lrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRepositoriesResponse = ListRepositoriesResponse'{_lrrsRepositories
+                                                          ::
+                                                          !(Maybe
+                                                              [RepositoryNameIdPair]),
+                                                          _lrrsNextToken ::
+                                                          !(Maybe Text),
+                                                          _lrrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListRepositoriesResponse' with the minimum fields required to make a request.
 --
@@ -160,13 +162,11 @@ data ListRepositoriesResponse = ListRepositoriesResponse'
 listRepositoriesResponse
     :: Int -- ^ 'lrrsResponseStatus'
     -> ListRepositoriesResponse
-listRepositoriesResponse pResponseStatus_ =
-  ListRepositoriesResponse'
-    { _lrrsRepositories = Nothing
-    , _lrrsNextToken = Nothing
-    , _lrrsResponseStatus = pResponseStatus_
-    }
-
+listRepositoriesResponse pResponseStatus_
+  = ListRepositoriesResponse'{_lrrsRepositories =
+                                Nothing,
+                              _lrrsNextToken = Nothing,
+                              _lrrsResponseStatus = pResponseStatus_}
 
 -- | Lists the repositories called by the list repositories operation.
 lrrsRepositories :: Lens' ListRepositoriesResponse [RepositoryNameIdPair]

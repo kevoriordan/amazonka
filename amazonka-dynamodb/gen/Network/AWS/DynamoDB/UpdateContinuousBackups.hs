@@ -21,9 +21,9 @@
 -- @UpdateContinuousBackups@ enables or disables point in time recovery for the specified table. A successful @UpdateContinuousBackups@ call returns the current @ContinuousBackupsDescription@ . Continuous backups are @ENABLED@ on all tables at table creation. If point in time recovery is enabled, @PointInTimeRecoveryStatus@ will be set to ENABLED.
 --
 --
--- Once continuous backups and point in time recovery are enabled, you can restore to any point in time within @EarliestRestorableDateTime@ and @LatestRestorableDateTime@ .
+-- Once continuous backups and point in time recovery are enabled, you can restore to any point in time within @EarliestRestorableDateTime@ and @LatestRestorableDateTime@ . 
 --
--- @LatestRestorableDateTime@ is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days..
+-- @LatestRestorableDateTime@ is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days. 
 --
 module Network.AWS.DynamoDB.UpdateContinuousBackups
     (
@@ -50,11 +50,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateContinuousBackups' smart constructor.
-data UpdateContinuousBackups = UpdateContinuousBackups'
-  { _ucbTableName                        :: !Text
-  , _ucbPointInTimeRecoverySpecification :: !PointInTimeRecoverySpecification
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateContinuousBackups = UpdateContinuousBackups'{_ucbTableName
+                                                        :: !Text,
+                                                        _ucbPointInTimeRecoverySpecification
+                                                        ::
+                                                        !PointInTimeRecoverySpecification}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateContinuousBackups' with the minimum fields required to make a request.
 --
@@ -67,12 +69,12 @@ updateContinuousBackups
     :: Text -- ^ 'ucbTableName'
     -> PointInTimeRecoverySpecification -- ^ 'ucbPointInTimeRecoverySpecification'
     -> UpdateContinuousBackups
-updateContinuousBackups pTableName_ pPointInTimeRecoverySpecification_ =
-  UpdateContinuousBackups'
-    { _ucbTableName = pTableName_
-    , _ucbPointInTimeRecoverySpecification = pPointInTimeRecoverySpecification_
-    }
-
+updateContinuousBackups pTableName_
+  pPointInTimeRecoverySpecification_
+  = UpdateContinuousBackups'{_ucbTableName =
+                               pTableName_,
+                             _ucbPointInTimeRecoverySpecification =
+                               pPointInTimeRecoverySpecification_}
 
 -- | The name of the table.
 ucbTableName :: Lens' UpdateContinuousBackups Text
@@ -123,11 +125,14 @@ instance ToQuery UpdateContinuousBackups where
         toQuery = const mempty
 
 -- | /See:/ 'updateContinuousBackupsResponse' smart constructor.
-data UpdateContinuousBackupsResponse = UpdateContinuousBackupsResponse'
-  { _ucbrsContinuousBackupsDescription :: !(Maybe ContinuousBackupsDescription)
-  , _ucbrsResponseStatus               :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateContinuousBackupsResponse = UpdateContinuousBackupsResponse'{_ucbrsContinuousBackupsDescription
+                                                                        ::
+                                                                        !(Maybe
+                                                                            ContinuousBackupsDescription),
+                                                                        _ucbrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateContinuousBackupsResponse' with the minimum fields required to make a request.
 --
@@ -139,12 +144,10 @@ data UpdateContinuousBackupsResponse = UpdateContinuousBackupsResponse'
 updateContinuousBackupsResponse
     :: Int -- ^ 'ucbrsResponseStatus'
     -> UpdateContinuousBackupsResponse
-updateContinuousBackupsResponse pResponseStatus_ =
-  UpdateContinuousBackupsResponse'
-    { _ucbrsContinuousBackupsDescription = Nothing
-    , _ucbrsResponseStatus = pResponseStatus_
-    }
-
+updateContinuousBackupsResponse pResponseStatus_
+  = UpdateContinuousBackupsResponse'{_ucbrsContinuousBackupsDescription
+                                       = Nothing,
+                                     _ucbrsResponseStatus = pResponseStatus_}
 
 -- | Represents the continuous backups and point in time recovery settings on the table.
 ucbrsContinuousBackupsDescription :: Lens' UpdateContinuousBackupsResponse (Maybe ContinuousBackupsDescription)

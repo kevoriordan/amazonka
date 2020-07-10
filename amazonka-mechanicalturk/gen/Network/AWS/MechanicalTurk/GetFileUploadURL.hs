@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @GetFileUploadURL@ operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. Pending Deprecation on December 12, 2017. The Answer Specification structure will no longer support the @FileUploadAnswer@ element to be used for the QuestionForm data structure. Instead, we recommend that Requesters who want to create HITs asking Workers to upload files to use Amazon S3.
+-- The @GetFileUploadURL@ operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. Pending Deprecation on December 12, 2017. The Answer Specification structure will no longer support the @FileUploadAnswer@ element to be used for the QuestionForm data structure. Instead, we recommend that Requesters who want to create HITs asking Workers to upload files to use Amazon S3. 
 --
 --
 module Network.AWS.MechanicalTurk.GetFileUploadURL
@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getFileUploadURL' smart constructor.
-data GetFileUploadURL = GetFileUploadURL'
-  { _gfuuAssignmentId       :: !Text
-  , _gfuuQuestionIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetFileUploadURL = GetFileUploadURL'{_gfuuAssignmentId
+                                          :: !Text,
+                                          _gfuuQuestionIdentifier :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetFileUploadURL' with the minimum fields required to make a request.
 --
@@ -63,12 +62,10 @@ getFileUploadURL
     :: Text -- ^ 'gfuuAssignmentId'
     -> Text -- ^ 'gfuuQuestionIdentifier'
     -> GetFileUploadURL
-getFileUploadURL pAssignmentId_ pQuestionIdentifier_ =
-  GetFileUploadURL'
-    { _gfuuAssignmentId = pAssignmentId_
-    , _gfuuQuestionIdentifier = pQuestionIdentifier_
-    }
-
+getFileUploadURL pAssignmentId_ pQuestionIdentifier_
+  = GetFileUploadURL'{_gfuuAssignmentId =
+                        pAssignmentId_,
+                      _gfuuQuestionIdentifier = pQuestionIdentifier_}
 
 -- | The ID of the assignment that contains the question with a FileUploadAnswer.
 gfuuAssignmentId :: Lens' GetFileUploadURL Text
@@ -116,28 +113,29 @@ instance ToQuery GetFileUploadURL where
         toQuery = const mempty
 
 -- | /See:/ 'getFileUploadURLResponse' smart constructor.
-data GetFileUploadURLResponse = GetFileUploadURLResponse'
-  { _gfuursFileUploadURL  :: !(Maybe Text)
-  , _gfuursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetFileUploadURLResponse = GetFileUploadURLResponse'{_gfuursFileUploadURL
+                                                          :: !(Maybe Text),
+                                                          _gfuursResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetFileUploadURLResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gfuursFileUploadURL' - A temporary URL for the file that the Worker uploaded for the answer.
+-- * 'gfuursFileUploadURL' - A temporary URL for the file that the Worker uploaded for the answer. 
 --
 -- * 'gfuursResponseStatus' - -- | The response status code.
 getFileUploadURLResponse
     :: Int -- ^ 'gfuursResponseStatus'
     -> GetFileUploadURLResponse
-getFileUploadURLResponse pResponseStatus_ =
-  GetFileUploadURLResponse'
-    {_gfuursFileUploadURL = Nothing, _gfuursResponseStatus = pResponseStatus_}
+getFileUploadURLResponse pResponseStatus_
+  = GetFileUploadURLResponse'{_gfuursFileUploadURL =
+                                Nothing,
+                              _gfuursResponseStatus = pResponseStatus_}
 
-
--- | A temporary URL for the file that the Worker uploaded for the answer.
+-- | A temporary URL for the file that the Worker uploaded for the answer. 
 gfuursFileUploadURL :: Lens' GetFileUploadURLResponse (Maybe Text)
 gfuursFileUploadURL = lens _gfuursFileUploadURL (\ s a -> s{_gfuursFileUploadURL = a})
 

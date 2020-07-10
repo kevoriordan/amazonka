@@ -18,13 +18,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a @NextToken@ that you can provide to the next call to @ListReceiptRuleSets@ to retrieve the additional entries.
+-- Lists the receipt rule sets that exist under your AWS account in the current AWS Region. If there are additional receipt rule sets to be retrieved, you will receive a @NextToken@ that you can provide to the next call to @ListReceiptRuleSets@ to retrieve the additional entries.
 --
 --
--- For information about managing receipt rule sets, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html Amazon SES Developer Guide> .
+-- For information about managing receipt rule sets, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SES.ListReceiptRuleSets
     (
     -- * Creating a Request
@@ -43,21 +45,22 @@ module Network.AWS.SES.ListReceiptRuleSets
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to list the receipt rule sets that exist under your AWS account. You use receipt rule sets to receive email with Amazon SES. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
+-- | Represents a request to list the receipt rule sets that exist under your AWS account. You use receipt rule sets to receive email with Amazon SES. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'listReceiptRuleSets' smart constructor.
-newtype ListReceiptRuleSets = ListReceiptRuleSets'
-  { _lrrsNextToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListReceiptRuleSets = ListReceiptRuleSets'{_lrrsNextToken
+                                                   :: Maybe Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListReceiptRuleSets' with the minimum fields required to make a request.
 --
@@ -66,12 +69,19 @@ newtype ListReceiptRuleSets = ListReceiptRuleSets'
 -- * 'lrrsNextToken' - A token returned from a previous call to @ListReceiptRuleSets@ to indicate the position in the receipt rule set list.
 listReceiptRuleSets
     :: ListReceiptRuleSets
-listReceiptRuleSets = ListReceiptRuleSets' {_lrrsNextToken = Nothing}
-
+listReceiptRuleSets
+  = ListReceiptRuleSets'{_lrrsNextToken = Nothing}
 
 -- | A token returned from a previous call to @ListReceiptRuleSets@ to indicate the position in the receipt rule set list.
 lrrsNextToken :: Lens' ListReceiptRuleSets (Maybe Text)
 lrrsNextToken = lens _lrrsNextToken (\ s a -> s{_lrrsNextToken = a})
+
+instance AWSPager ListReceiptRuleSets where
+        page rq rs
+          | stop (rs ^. lrrsrsNextToken) = Nothing
+          | stop (rs ^. lrrsrsRuleSets) = Nothing
+          | otherwise =
+            Just $ rq & lrrsNextToken .~ rs ^. lrrsrsNextToken
 
 instance AWSRequest ListReceiptRuleSets where
         type Rs ListReceiptRuleSets =
@@ -108,12 +118,17 @@ instance ToQuery ListReceiptRuleSets where
 --
 --
 -- /See:/ 'listReceiptRuleSetsResponse' smart constructor.
-data ListReceiptRuleSetsResponse = ListReceiptRuleSetsResponse'
-  { _lrrsrsRuleSets       :: !(Maybe [ReceiptRuleSetMetadata])
-  , _lrrsrsNextToken      :: !(Maybe Text)
-  , _lrrsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReceiptRuleSetsResponse = ListReceiptRuleSetsResponse'{_lrrsrsRuleSets
+                                                                ::
+                                                                !(Maybe
+                                                                    [ReceiptRuleSetMetadata]),
+                                                                _lrrsrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lrrsrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListReceiptRuleSetsResponse' with the minimum fields required to make a request.
 --
@@ -127,13 +142,11 @@ data ListReceiptRuleSetsResponse = ListReceiptRuleSetsResponse'
 listReceiptRuleSetsResponse
     :: Int -- ^ 'lrrsrsResponseStatus'
     -> ListReceiptRuleSetsResponse
-listReceiptRuleSetsResponse pResponseStatus_ =
-  ListReceiptRuleSetsResponse'
-    { _lrrsrsRuleSets = Nothing
-    , _lrrsrsNextToken = Nothing
-    , _lrrsrsResponseStatus = pResponseStatus_
-    }
-
+listReceiptRuleSetsResponse pResponseStatus_
+  = ListReceiptRuleSetsResponse'{_lrrsrsRuleSets =
+                                   Nothing,
+                                 _lrrsrsNextToken = Nothing,
+                                 _lrrsrsResponseStatus = pResponseStatus_}
 
 -- | The metadata for the currently active receipt rule set. The metadata consists of the rule set name and the timestamp of when the rule set was created.
 lrrsrsRuleSets :: Lens' ListReceiptRuleSetsResponse [ReceiptRuleSetMetadata]

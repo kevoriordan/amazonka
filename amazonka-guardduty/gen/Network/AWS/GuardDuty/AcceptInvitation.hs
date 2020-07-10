@@ -19,15 +19,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Accepts the invitation to be monitored by a master GuardDuty account.
+--
+--
 module Network.AWS.GuardDuty.AcceptInvitation
     (
     -- * Creating a Request
       acceptInvitation
     , AcceptInvitation
     -- * Request Lenses
+    , aiDetectorId
     , aiMasterId
     , aiInvitationId
-    , aiDetectorId
 
     -- * Destructuring the Response
     , acceptInvitationResponse
@@ -43,47 +45,44 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | AcceptInvitation request body.
---
--- /See:/ 'acceptInvitation' smart constructor.
-data AcceptInvitation = AcceptInvitation'
-  { _aiMasterId     :: !(Maybe Text)
-  , _aiInvitationId :: !(Maybe Text)
-  , _aiDetectorId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'acceptInvitation' smart constructor.
+data AcceptInvitation = AcceptInvitation'{_aiDetectorId
+                                          :: !Text,
+                                          _aiMasterId :: !Text,
+                                          _aiInvitationId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceptInvitation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'aiDetectorId' - The unique ID of the detector of the GuardDuty member account.
+--
 -- * 'aiMasterId' - The account ID of the master GuardDuty account whose invitation you're accepting.
 --
--- * 'aiInvitationId' - This value is used to validate the master account to the member account.
---
--- * 'aiDetectorId' - The unique ID of the detector of the GuardDuty member account.
+-- * 'aiInvitationId' - The value that is used to validate the master account to the member account.
 acceptInvitation
     :: Text -- ^ 'aiDetectorId'
+    -> Text -- ^ 'aiMasterId'
+    -> Text -- ^ 'aiInvitationId'
     -> AcceptInvitation
-acceptInvitation pDetectorId_ =
-  AcceptInvitation'
-    { _aiMasterId = Nothing
-    , _aiInvitationId = Nothing
-    , _aiDetectorId = pDetectorId_
-    }
-
-
--- | The account ID of the master GuardDuty account whose invitation you're accepting.
-aiMasterId :: Lens' AcceptInvitation (Maybe Text)
-aiMasterId = lens _aiMasterId (\ s a -> s{_aiMasterId = a})
-
--- | This value is used to validate the master account to the member account.
-aiInvitationId :: Lens' AcceptInvitation (Maybe Text)
-aiInvitationId = lens _aiInvitationId (\ s a -> s{_aiInvitationId = a})
+acceptInvitation pDetectorId_ pMasterId_
+  pInvitationId_
+  = AcceptInvitation'{_aiDetectorId = pDetectorId_,
+                      _aiMasterId = pMasterId_,
+                      _aiInvitationId = pInvitationId_}
 
 -- | The unique ID of the detector of the GuardDuty member account.
 aiDetectorId :: Lens' AcceptInvitation Text
 aiDetectorId = lens _aiDetectorId (\ s a -> s{_aiDetectorId = a})
+
+-- | The account ID of the master GuardDuty account whose invitation you're accepting.
+aiMasterId :: Lens' AcceptInvitation Text
+aiMasterId = lens _aiMasterId (\ s a -> s{_aiMasterId = a})
+
+-- | The value that is used to validate the master account to the member account.
+aiInvitationId :: Lens' AcceptInvitation Text
+aiInvitationId = lens _aiInvitationId (\ s a -> s{_aiInvitationId = a})
 
 instance AWSRequest AcceptInvitation where
         type Rs AcceptInvitation = AcceptInvitationResponse
@@ -108,8 +107,8 @@ instance ToJSON AcceptInvitation where
         toJSON AcceptInvitation'{..}
           = object
               (catMaybes
-                 [("masterId" .=) <$> _aiMasterId,
-                  ("invitationId" .=) <$> _aiInvitationId])
+                 [Just ("masterId" .= _aiMasterId),
+                  Just ("invitationId" .= _aiInvitationId)])
 
 instance ToPath AcceptInvitation where
         toPath AcceptInvitation'{..}
@@ -120,10 +119,10 @@ instance ToQuery AcceptInvitation where
         toQuery = const mempty
 
 -- | /See:/ 'acceptInvitationResponse' smart constructor.
-newtype AcceptInvitationResponse = AcceptInvitationResponse'
-  { _airsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AcceptInvitationResponse = AcceptInvitationResponse'{_airsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AcceptInvitationResponse' with the minimum fields required to make a request.
 --
@@ -133,9 +132,9 @@ newtype AcceptInvitationResponse = AcceptInvitationResponse'
 acceptInvitationResponse
     :: Int -- ^ 'airsResponseStatus'
     -> AcceptInvitationResponse
-acceptInvitationResponse pResponseStatus_ =
-  AcceptInvitationResponse' {_airsResponseStatus = pResponseStatus_}
-
+acceptInvitationResponse pResponseStatus_
+  = AcceptInvitationResponse'{_airsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 airsResponseStatus :: Lens' AcceptInvitationResponse Int

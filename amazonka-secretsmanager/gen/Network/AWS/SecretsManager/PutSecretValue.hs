@@ -27,23 +27,21 @@
 --
 --     * If this operation moves the staging label @AWSCURRENT@ from another version to this version (because you included it in the @StagingLabels@ parameter) then Secrets Manager also automatically moves the staging label @AWSPREVIOUS@ to the version that @AWSCURRENT@ was removed from.
 --
---     * This operation is idempotent. If a version with a @SecretVersionId@ with the same value as the @ClientRequestToken@ parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.
+--     * This operation is idempotent. If a version with a @VersionId@ with the same value as the @ClientRequestToken@ parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.
 --
 --
 --
--- __Minimum permissions__
+-- __Minimum permissions__ 
 --
 -- To run this command, you must have the following permissions:
 --
 --     * secretsmanager:PutSecretValue
 --
---     * kms:GenerateDataKey - needed only if you use a customer-created KMS key to encrypt the secret. You do not need this permission to use the account's AWS managed CMK for Secrets Manager.
---
---     * kms:Encrypt - needed only if you use a customer-created KMS key to encrypt the secret. You do not need this permission to use the account's AWS managed CMK for Secrets Manager.
+--     * kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.
 --
 --
 --
--- __Related operations__
+-- __Related operations__ 
 --
 --     * To retrieve the encrypted value you store in the version of a secret, use 'GetSecretValue' .
 --
@@ -86,14 +84,15 @@ import Network.AWS.SecretsManager.Types
 import Network.AWS.SecretsManager.Types.Product
 
 -- | /See:/ 'putSecretValue' smart constructor.
-data PutSecretValue = PutSecretValue'
-  { _psvVersionStages      :: !(Maybe (List1 Text))
-  , _psvSecretBinary       :: !(Maybe (Sensitive Base64))
-  , _psvSecretString       :: !(Maybe (Sensitive Text))
-  , _psvClientRequestToken :: !(Maybe Text)
-  , _psvSecretId           :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data PutSecretValue = PutSecretValue'{_psvVersionStages
+                                      :: !(Maybe (List1 Text)),
+                                      _psvSecretBinary ::
+                                      !(Maybe (Sensitive Base64)),
+                                      _psvSecretString ::
+                                      !(Maybe (Sensitive Text)),
+                                      _psvClientRequestToken :: !(Maybe Text),
+                                      _psvSecretId :: !Text}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutSecretValue' with the minimum fields required to make a request.
 --
@@ -103,23 +102,20 @@ data PutSecretValue = PutSecretValue'
 --
 -- * 'psvSecretBinary' - (Optional) Specifies binary data that you want to encrypt and store in the new version of the secret. To use this parameter in the command-line tools, we recommend that you store your binary data in a file and then use the appropriate technique for your tool to pass the contents of the file as a parameter. Either @SecretBinary@ or @SecretString@ must have a value, but not both. They cannot both be empty. This parameter is not accessible if the secret using the Secrets Manager console.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 --
--- * 'psvSecretString' - (Optional) Specifies text data that you want to encrypt and store in this new version of the secret. Either @SecretString@ or @SecretBinary@ must have a value, but not both. They cannot both be empty. If you create this secret by using the Secrets Manager console then Secrets Manager puts the protected secret text in only the @SecretString@ parameter. The Secrets Manager console stores the information as a JSON structure of key/value pairs that the default Lambda rotation function knows how to parse. For storing multiple values, we recommend that you use a JSON text string argument and specify key/value pairs. For information on how to format a JSON parameter for the various command line tool environments, see <http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ .
+-- * 'psvSecretString' - (Optional) Specifies text data that you want to encrypt and store in this new version of the secret. Either @SecretString@ or @SecretBinary@ must have a value, but not both. They cannot both be empty. If you create this secret by using the Secrets Manager console then Secrets Manager puts the protected secret text in only the @SecretString@ parameter. The Secrets Manager console stores the information as a JSON structure of key/value pairs that the default Lambda rotation function knows how to parse. For storing multiple values, we recommend that you use a JSON text string argument and specify key/value pairs. For information on how to format a JSON parameter for the various command line tool environments, see <https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For example: @[{"username":"bob"},{"password":"abc123xyz456"}]@  If your command-line tool or SDK requires quotation marks around the parameter, you should use single quotes to avoid confusion with the double quotes required in the JSON text.
 --
--- * 'psvClientRequestToken' - (Optional) Specifies a unique identifier for the new version of the secret.  This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during the Lambda rotation function's processing. We recommend that you generate a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value to ensure uniqueness within the specified secret.      * If the @ClientRequestToken@ value isn't already associated with a version of the secret then a new version of the secret is created.      * If a version with this value already exists and that version's @SecretString@ or @SecretBinary@ values are the same as those in the request then the request is ignored (the operation is idempotent).      * If a version with this value already exists and that version's @SecretString@ and @SecretBinary@ values are different from those in the request then the request fails because you cannot modify an existing secret version. You can only create new versions to store new secret values. This value becomes the @SecretVersionId@ of the new version.
+-- * 'psvClientRequestToken' - (Optional) Specifies a unique identifier for the new version of the secret.  This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during the Lambda rotation function's processing. We recommend that you generate a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value to ensure uniqueness within the specified secret.      * If the @ClientRequestToken@ value isn't already associated with a version of the secret then a new version of the secret is created.      * If a version with this value already exists and that version's @SecretString@ or @SecretBinary@ values are the same as those in the request then the request is ignored (the operation is idempotent).      * If a version with this value already exists and that version's @SecretString@ and @SecretBinary@ values are different from those in the request then the request fails because you cannot modify an existing secret version. You can only create new versions to store new secret values. This value becomes the @VersionId@ of the new version.
 --
 -- * 'psvSecretId' - Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
 putSecretValue
     :: Text -- ^ 'psvSecretId'
     -> PutSecretValue
-putSecretValue pSecretId_ =
-  PutSecretValue'
-    { _psvVersionStages = Nothing
-    , _psvSecretBinary = Nothing
-    , _psvSecretString = Nothing
-    , _psvClientRequestToken = Nothing
-    , _psvSecretId = pSecretId_
-    }
-
+putSecretValue pSecretId_
+  = PutSecretValue'{_psvVersionStages = Nothing,
+                    _psvSecretBinary = Nothing,
+                    _psvSecretString = Nothing,
+                    _psvClientRequestToken = Nothing,
+                    _psvSecretId = pSecretId_}
 
 -- | (Optional) Specifies a list of staging labels that are attached to this version of the secret. These staging labels are used to track the versions through the rotation process by the Lambda rotation function. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value for @VersionStages@ then Secrets Manager automatically moves the staging label @AWSCURRENT@ to this new version.
 psvVersionStages :: Lens' PutSecretValue (Maybe (NonEmpty Text))
@@ -129,11 +125,11 @@ psvVersionStages = lens _psvVersionStages (\ s a -> s{_psvVersionStages = a}) . 
 psvSecretBinary :: Lens' PutSecretValue (Maybe ByteString)
 psvSecretBinary = lens _psvSecretBinary (\ s a -> s{_psvSecretBinary = a}) . mapping (_Sensitive . _Base64)
 
--- | (Optional) Specifies text data that you want to encrypt and store in this new version of the secret. Either @SecretString@ or @SecretBinary@ must have a value, but not both. They cannot both be empty. If you create this secret by using the Secrets Manager console then Secrets Manager puts the protected secret text in only the @SecretString@ parameter. The Secrets Manager console stores the information as a JSON structure of key/value pairs that the default Lambda rotation function knows how to parse. For storing multiple values, we recommend that you use a JSON text string argument and specify key/value pairs. For information on how to format a JSON parameter for the various command line tool environments, see <http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ .
+-- | (Optional) Specifies text data that you want to encrypt and store in this new version of the secret. Either @SecretString@ or @SecretBinary@ must have a value, but not both. They cannot both be empty. If you create this secret by using the Secrets Manager console then Secrets Manager puts the protected secret text in only the @SecretString@ parameter. The Secrets Manager console stores the information as a JSON structure of key/value pairs that the default Lambda rotation function knows how to parse. For storing multiple values, we recommend that you use a JSON text string argument and specify key/value pairs. For information on how to format a JSON parameter for the various command line tool environments, see <https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For example: @[{"username":"bob"},{"password":"abc123xyz456"}]@  If your command-line tool or SDK requires quotation marks around the parameter, you should use single quotes to avoid confusion with the double quotes required in the JSON text.
 psvSecretString :: Lens' PutSecretValue (Maybe Text)
 psvSecretString = lens _psvSecretString (\ s a -> s{_psvSecretString = a}) . mapping _Sensitive
 
--- | (Optional) Specifies a unique identifier for the new version of the secret.  This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during the Lambda rotation function's processing. We recommend that you generate a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value to ensure uniqueness within the specified secret.      * If the @ClientRequestToken@ value isn't already associated with a version of the secret then a new version of the secret is created.      * If a version with this value already exists and that version's @SecretString@ or @SecretBinary@ values are the same as those in the request then the request is ignored (the operation is idempotent).      * If a version with this value already exists and that version's @SecretString@ and @SecretBinary@ values are different from those in the request then the request fails because you cannot modify an existing secret version. You can only create new versions to store new secret values. This value becomes the @SecretVersionId@ of the new version.
+-- | (Optional) Specifies a unique identifier for the new version of the secret.  This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during the Lambda rotation function's processing. We recommend that you generate a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value to ensure uniqueness within the specified secret.      * If the @ClientRequestToken@ value isn't already associated with a version of the secret then a new version of the secret is created.      * If a version with this value already exists and that version's @SecretString@ or @SecretBinary@ values are the same as those in the request then the request is ignored (the operation is idempotent).      * If a version with this value already exists and that version's @SecretString@ and @SecretBinary@ values are different from those in the request then the request fails because you cannot modify an existing secret version. You can only create new versions to store new secret values. This value becomes the @VersionId@ of the new version.
 psvClientRequestToken :: Lens' PutSecretValue (Maybe Text)
 psvClientRequestToken = lens _psvClientRequestToken (\ s a -> s{_psvClientRequestToken = a})
 
@@ -183,14 +179,18 @@ instance ToQuery PutSecretValue where
         toQuery = const mempty
 
 -- | /See:/ 'putSecretValueResponse' smart constructor.
-data PutSecretValueResponse = PutSecretValueResponse'
-  { _psvrsVersionId      :: !(Maybe Text)
-  , _psvrsARN            :: !(Maybe Text)
-  , _psvrsVersionStages  :: !(Maybe (List1 Text))
-  , _psvrsName           :: !(Maybe Text)
-  , _psvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutSecretValueResponse = PutSecretValueResponse'{_psvrsVersionId
+                                                      :: !(Maybe Text),
+                                                      _psvrsARN ::
+                                                      !(Maybe Text),
+                                                      _psvrsVersionStages ::
+                                                      !(Maybe (List1 Text)),
+                                                      _psvrsName ::
+                                                      !(Maybe Text),
+                                                      _psvrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'PutSecretValueResponse' with the minimum fields required to make a request.
 --
@@ -208,15 +208,11 @@ data PutSecretValueResponse = PutSecretValueResponse'
 putSecretValueResponse
     :: Int -- ^ 'psvrsResponseStatus'
     -> PutSecretValueResponse
-putSecretValueResponse pResponseStatus_ =
-  PutSecretValueResponse'
-    { _psvrsVersionId = Nothing
-    , _psvrsARN = Nothing
-    , _psvrsVersionStages = Nothing
-    , _psvrsName = Nothing
-    , _psvrsResponseStatus = pResponseStatus_
-    }
-
+putSecretValueResponse pResponseStatus_
+  = PutSecretValueResponse'{_psvrsVersionId = Nothing,
+                            _psvrsARN = Nothing, _psvrsVersionStages = Nothing,
+                            _psvrsName = Nothing,
+                            _psvrsResponseStatus = pResponseStatus_}
 
 -- | The unique identifier of the version of the secret you just created or updated.
 psvrsVersionId :: Lens' PutSecretValueResponse (Maybe Text)

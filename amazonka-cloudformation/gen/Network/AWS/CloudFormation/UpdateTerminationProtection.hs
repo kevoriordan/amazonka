@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates termination protection for the specified stack. If a user attempts to delete a stack with termination protection enabled, the operation fails and the stack remains unchanged. For more information, see <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html Protecting a Stack From Being Deleted> in the /AWS CloudFormation User Guide/ .
+-- Updates termination protection for the specified stack. If a user attempts to delete a stack with termination protection enabled, the operation fails and the stack remains unchanged. For more information, see <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html Protecting a Stack From Being Deleted> in the /AWS CloudFormation User Guide/ .
 --
 --
--- For <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html nested stacks> , termination protection is set on the root stack and cannot be changed directly on the nested stack.
+-- For <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html nested stacks> , termination protection is set on the root stack and cannot be changed directly on the nested stack.
 --
 module Network.AWS.CloudFormation.UpdateTerminationProtection
     (
@@ -48,11 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateTerminationProtection' smart constructor.
-data UpdateTerminationProtection = UpdateTerminationProtection'
-  { _utpEnableTerminationProtection :: !Bool
-  , _utpStackName                   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTerminationProtection = UpdateTerminationProtection'{_utpEnableTerminationProtection
+                                                                :: !Bool,
+                                                                _utpStackName ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateTerminationProtection' with the minimum fields required to make a request.
 --
@@ -65,12 +66,11 @@ updateTerminationProtection
     :: Bool -- ^ 'utpEnableTerminationProtection'
     -> Text -- ^ 'utpStackName'
     -> UpdateTerminationProtection
-updateTerminationProtection pEnableTerminationProtection_ pStackName_ =
-  UpdateTerminationProtection'
-    { _utpEnableTerminationProtection = pEnableTerminationProtection_
-    , _utpStackName = pStackName_
-    }
-
+updateTerminationProtection
+  pEnableTerminationProtection_ pStackName_
+  = UpdateTerminationProtection'{_utpEnableTerminationProtection
+                                   = pEnableTerminationProtection_,
+                                 _utpStackName = pStackName_}
 
 -- | Whether to enable termination protection on the specified stack.
 utpEnableTerminationProtection :: Lens' UpdateTerminationProtection Bool
@@ -112,11 +112,15 @@ instance ToQuery UpdateTerminationProtection where
                "StackName" =: _utpStackName]
 
 -- | /See:/ 'updateTerminationProtectionResponse' smart constructor.
-data UpdateTerminationProtectionResponse = UpdateTerminationProtectionResponse'
-  { _utprsStackId        :: !(Maybe Text)
-  , _utprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTerminationProtectionResponse = UpdateTerminationProtectionResponse'{_utprsStackId
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _utprsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'UpdateTerminationProtectionResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +132,11 @@ data UpdateTerminationProtectionResponse = UpdateTerminationProtectionResponse'
 updateTerminationProtectionResponse
     :: Int -- ^ 'utprsResponseStatus'
     -> UpdateTerminationProtectionResponse
-updateTerminationProtectionResponse pResponseStatus_ =
-  UpdateTerminationProtectionResponse'
-    {_utprsStackId = Nothing, _utprsResponseStatus = pResponseStatus_}
-
+updateTerminationProtectionResponse pResponseStatus_
+  = UpdateTerminationProtectionResponse'{_utprsStackId
+                                           = Nothing,
+                                         _utprsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The unique ID of the stack.
 utprsStackId :: Lens' UpdateTerminationProtectionResponse (Maybe Text)

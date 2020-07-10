@@ -1,7 +1,8 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE LambdaCase         #-}
 {-# LANGUAGE OverloadedStrings  #-}
-{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE PatternSynonyms    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -15,8 +16,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Network.AWS.MarketplaceAnalytics.Types.Product where
+module Network.AWS.MarketplaceAnalytics.Types.Product (
+  ) where
 
 import Network.AWS.Lens
-import Network.AWS.MarketplaceAnalytics.Types.Sum
 import Network.AWS.Prelude

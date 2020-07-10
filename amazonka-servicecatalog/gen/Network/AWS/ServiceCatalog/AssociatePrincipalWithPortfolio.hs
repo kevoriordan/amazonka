@@ -47,13 +47,21 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'associatePrincipalWithPortfolio' smart constructor.
-data AssociatePrincipalWithPortfolio = AssociatePrincipalWithPortfolio'
-  { _aAcceptLanguage :: !(Maybe Text)
-  , _aPortfolioId    :: !Text
-  , _aPrincipalARN   :: !Text
-  , _aPrincipalType  :: !PrincipalType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociatePrincipalWithPortfolio = AssociatePrincipalWithPortfolio'{_aAcceptLanguage
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _aPortfolioId
+                                                                        ::
+                                                                        !Text,
+                                                                        _aPrincipalARN
+                                                                        ::
+                                                                        !Text,
+                                                                        _aPrincipalType
+                                                                        ::
+                                                                        !PrincipalType}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'AssociatePrincipalWithPortfolio' with the minimum fields required to make a request.
 --
@@ -71,14 +79,13 @@ associatePrincipalWithPortfolio
     -> Text -- ^ 'aPrincipalARN'
     -> PrincipalType -- ^ 'aPrincipalType'
     -> AssociatePrincipalWithPortfolio
-associatePrincipalWithPortfolio pPortfolioId_ pPrincipalARN_ pPrincipalType_ =
-  AssociatePrincipalWithPortfolio'
-    { _aAcceptLanguage = Nothing
-    , _aPortfolioId = pPortfolioId_
-    , _aPrincipalARN = pPrincipalARN_
-    , _aPrincipalType = pPrincipalType_
-    }
-
+associatePrincipalWithPortfolio pPortfolioId_
+  pPrincipalARN_ pPrincipalType_
+  = AssociatePrincipalWithPortfolio'{_aAcceptLanguage =
+                                       Nothing,
+                                     _aPortfolioId = pPortfolioId_,
+                                     _aPrincipalARN = pPrincipalARN_,
+                                     _aPrincipalType = pPrincipalType_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 aAcceptLanguage :: Lens' AssociatePrincipalWithPortfolio (Maybe Text)
@@ -140,10 +147,12 @@ instance ToQuery AssociatePrincipalWithPortfolio
         toQuery = const mempty
 
 -- | /See:/ 'associatePrincipalWithPortfolioResponse' smart constructor.
-newtype AssociatePrincipalWithPortfolioResponse = AssociatePrincipalWithPortfolioResponse'
-  { _apwprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociatePrincipalWithPortfolioResponse = AssociatePrincipalWithPortfolioResponse'{_apwprsResponseStatus
+                                                                                           ::
+                                                                                           Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'AssociatePrincipalWithPortfolioResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +162,10 @@ newtype AssociatePrincipalWithPortfolioResponse = AssociatePrincipalWithPortfoli
 associatePrincipalWithPortfolioResponse
     :: Int -- ^ 'apwprsResponseStatus'
     -> AssociatePrincipalWithPortfolioResponse
-associatePrincipalWithPortfolioResponse pResponseStatus_ =
-  AssociatePrincipalWithPortfolioResponse'
-    {_apwprsResponseStatus = pResponseStatus_}
-
+associatePrincipalWithPortfolioResponse
+  pResponseStatus_
+  = AssociatePrincipalWithPortfolioResponse'{_apwprsResponseStatus
+                                               = pResponseStatus_}
 
 -- | -- | The response status code.
 apwprsResponseStatus :: Lens' AssociatePrincipalWithPortfolioResponse Int

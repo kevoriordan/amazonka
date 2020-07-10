@@ -23,7 +23,7 @@
 --
 -- After you delete a gateway, you cannot reactivate it. Completed snapshots of the gateway volumes are not deleted upon deleting the gateway, however, pending snapshots will not complete. After you delete a gateway, your next step is to remove it from your environment.
 --
--- /Important:/ You no longer pay software charges after the gateway is deleted; however, your existing Amazon EBS snapshots persist and you will continue to be billed for these snapshots. You can choose to remove all remaining Amazon EBS snapshots by canceling your Amazon EC2 subscription.  If you prefer not to cancel your Amazon EC2 subscription, you can delete your snapshots using the Amazon EC2 console. For more information, see the <http://aws.amazon.com/storagegateway AWS Storage Gateway Detail Page> .
+-- /Important:/ You no longer pay software charges after the gateway is deleted; however, your existing Amazon EBS snapshots persist and you will continue to be billed for these snapshots. You can choose to remove all remaining Amazon EBS snapshots by canceling your Amazon EC2 subscription.  If you prefer not to cancel your Amazon EC2 subscription, you can delete your snapshots using the Amazon EC2 console. For more information, see the <http://aws.amazon.com/storagegateway AWS Storage Gateway Detail Page> . 
 --
 module Network.AWS.StorageGateway.DeleteGateway
     (
@@ -53,10 +53,9 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'deleteGateway' smart constructor.
-newtype DeleteGateway = DeleteGateway'
-  { _dgGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteGateway = DeleteGateway'{_dgGatewayARN
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGateway' with the minimum fields required to make a request.
 --
@@ -66,8 +65,8 @@ newtype DeleteGateway = DeleteGateway'
 deleteGateway
     :: Text -- ^ 'dgGatewayARN'
     -> DeleteGateway
-deleteGateway pGatewayARN_ = DeleteGateway' {_dgGatewayARN = pGatewayARN_}
-
+deleteGateway pGatewayARN_
+  = DeleteGateway'{_dgGatewayARN = pGatewayARN_}
 
 -- | Undocumented member.
 dgGatewayARN :: Lens' DeleteGateway Text
@@ -112,11 +111,11 @@ instance ToQuery DeleteGateway where
 --
 --
 -- /See:/ 'deleteGatewayResponse' smart constructor.
-data DeleteGatewayResponse = DeleteGatewayResponse'
-  { _dgrsGatewayARN     :: !(Maybe Text)
-  , _dgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGatewayResponse = DeleteGatewayResponse'{_dgrsGatewayARN
+                                                    :: !(Maybe Text),
+                                                    _dgrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteGatewayResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +127,9 @@ data DeleteGatewayResponse = DeleteGatewayResponse'
 deleteGatewayResponse
     :: Int -- ^ 'dgrsResponseStatus'
     -> DeleteGatewayResponse
-deleteGatewayResponse pResponseStatus_ =
-  DeleteGatewayResponse'
-    {_dgrsGatewayARN = Nothing, _dgrsResponseStatus = pResponseStatus_}
-
+deleteGatewayResponse pResponseStatus_
+  = DeleteGatewayResponse'{_dgrsGatewayARN = Nothing,
+                           _dgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 dgrsGatewayARN :: Lens' DeleteGatewayResponse (Maybe Text)

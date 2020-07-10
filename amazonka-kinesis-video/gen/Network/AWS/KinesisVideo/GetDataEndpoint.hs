@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an endpoint for a specified stream for either reading or writing. Use this endpoint in your application to read from the specified stream (using the @GetMedia@ or @GetMediaForFragmentList@ operations) or write to it (using the @PutMedia@ operation).
+-- Gets an endpoint for a specified stream for either reading or writing. Use this endpoint in your application to read from the specified stream (using the @GetMedia@ or @GetMediaForFragmentList@ operations) or write to it (using the @PutMedia@ operation). 
 --
 --
 -- In the request, specify the stream either by @StreamName@ or @StreamARN@ .
@@ -49,18 +49,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDataEndpoint' smart constructor.
-data GetDataEndpoint = GetDataEndpoint'
-  { _gdeStreamARN  :: !(Maybe Text)
-  , _gdeStreamName :: !(Maybe Text)
-  , _gdeAPIName    :: !APIName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDataEndpoint = GetDataEndpoint'{_gdeStreamARN
+                                        :: !(Maybe Text),
+                                        _gdeStreamName :: !(Maybe Text),
+                                        _gdeAPIName :: !APIName}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDataEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdeStreamARN' - The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for. You must specify either this parameter or a @StreamName@ in the request.
+-- * 'gdeStreamARN' - The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for. You must specify either this parameter or a @StreamName@ in the request. 
 --
 -- * 'gdeStreamName' - The name of the stream that you want to get the endpoint for. You must specify either this parameter or a @StreamARN@ in the request.
 --
@@ -68,12 +67,11 @@ data GetDataEndpoint = GetDataEndpoint'
 getDataEndpoint
     :: APIName -- ^ 'gdeAPIName'
     -> GetDataEndpoint
-getDataEndpoint pAPIName_ =
-  GetDataEndpoint'
-    {_gdeStreamARN = Nothing, _gdeStreamName = Nothing, _gdeAPIName = pAPIName_}
+getDataEndpoint pAPIName_
+  = GetDataEndpoint'{_gdeStreamARN = Nothing,
+                     _gdeStreamName = Nothing, _gdeAPIName = pAPIName_}
 
-
--- | The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for. You must specify either this parameter or a @StreamName@ in the request.
+-- | The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for. You must specify either this parameter or a @StreamName@ in the request. 
 gdeStreamARN :: Lens' GetDataEndpoint (Maybe Text)
 gdeStreamARN = lens _gdeStreamARN (\ s a -> s{_gdeStreamARN = a})
 
@@ -116,11 +114,12 @@ instance ToQuery GetDataEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'getDataEndpointResponse' smart constructor.
-data GetDataEndpointResponse = GetDataEndpointResponse'
-  { _gdersDataEndpoint   :: !(Maybe Text)
-  , _gdersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDataEndpointResponse = GetDataEndpointResponse'{_gdersDataEndpoint
+                                                        :: !(Maybe Text),
+                                                        _gdersResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetDataEndpointResponse' with the minimum fields required to make a request.
 --
@@ -132,10 +131,10 @@ data GetDataEndpointResponse = GetDataEndpointResponse'
 getDataEndpointResponse
     :: Int -- ^ 'gdersResponseStatus'
     -> GetDataEndpointResponse
-getDataEndpointResponse pResponseStatus_ =
-  GetDataEndpointResponse'
-    {_gdersDataEndpoint = Nothing, _gdersResponseStatus = pResponseStatus_}
-
+getDataEndpointResponse pResponseStatus_
+  = GetDataEndpointResponse'{_gdersDataEndpoint =
+                               Nothing,
+                             _gdersResponseStatus = pResponseStatus_}
 
 -- | The endpoint value. To read data from the stream or to write data to it, specify this endpoint in your application.
 gdersDataEndpoint :: Lens' GetDataEndpointResponse (Maybe Text)

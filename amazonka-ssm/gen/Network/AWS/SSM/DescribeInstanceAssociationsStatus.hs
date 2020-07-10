@@ -21,6 +21,8 @@
 -- The status of the associations for the instance(s).
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeInstanceAssociationsStatus
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.DescribeInstanceAssociationsStatus
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,19 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeInstanceAssociationsStatus' smart constructor.
-data DescribeInstanceAssociationsStatus = DescribeInstanceAssociationsStatus'
-  { _diasNextToken  :: !(Maybe Text)
-  , _diasMaxResults :: !(Maybe Nat)
-  , _diasInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstanceAssociationsStatus = DescribeInstanceAssociationsStatus'{_diasNextToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _diasMaxResults
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Nat),
+                                                                              _diasInstanceId
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeInstanceAssociationsStatus' with the minimum fields required to make a request.
 --
@@ -67,13 +77,11 @@ data DescribeInstanceAssociationsStatus = DescribeInstanceAssociationsStatus'
 describeInstanceAssociationsStatus
     :: Text -- ^ 'diasInstanceId'
     -> DescribeInstanceAssociationsStatus
-describeInstanceAssociationsStatus pInstanceId_ =
-  DescribeInstanceAssociationsStatus'
-    { _diasNextToken = Nothing
-    , _diasMaxResults = Nothing
-    , _diasInstanceId = pInstanceId_
-    }
-
+describeInstanceAssociationsStatus pInstanceId_
+  = DescribeInstanceAssociationsStatus'{_diasNextToken
+                                          = Nothing,
+                                        _diasMaxResults = Nothing,
+                                        _diasInstanceId = pInstanceId_}
 
 -- | The token for the next set of items to return. (You received this token from a previous call.)
 diasNextToken :: Lens' DescribeInstanceAssociationsStatus (Maybe Text)
@@ -86,6 +94,15 @@ diasMaxResults = lens _diasMaxResults (\ s a -> s{_diasMaxResults = a}) . mappin
 -- | The instance IDs for which you want association status information.
 diasInstanceId :: Lens' DescribeInstanceAssociationsStatus Text
 diasInstanceId = lens _diasInstanceId (\ s a -> s{_diasInstanceId = a})
+
+instance AWSPager DescribeInstanceAssociationsStatus
+         where
+        page rq rs
+          | stop (rs ^. diasrsNextToken) = Nothing
+          | stop (rs ^. diasrsInstanceAssociationStatusInfos) =
+            Nothing
+          | otherwise =
+            Just $ rq & diasNextToken .~ rs ^. diasrsNextToken
 
 instance AWSRequest
            DescribeInstanceAssociationsStatus
@@ -136,12 +153,20 @@ instance ToQuery DescribeInstanceAssociationsStatus
         toQuery = const mempty
 
 -- | /See:/ 'describeInstanceAssociationsStatusResponse' smart constructor.
-data DescribeInstanceAssociationsStatusResponse = DescribeInstanceAssociationsStatusResponse'
-  { _diasrsInstanceAssociationStatusInfos :: !(Maybe [InstanceAssociationStatusInfo])
-  , _diasrsNextToken :: !(Maybe Text)
-  , _diasrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstanceAssociationsStatusResponse = DescribeInstanceAssociationsStatusResponse'{_diasrsInstanceAssociationStatusInfos
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  [InstanceAssociationStatusInfo]),
+                                                                                              _diasrsNextToken
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _diasrsResponseStatus
+                                                                                              ::
+                                                                                              !Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'DescribeInstanceAssociationsStatusResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +180,13 @@ data DescribeInstanceAssociationsStatusResponse = DescribeInstanceAssociationsSt
 describeInstanceAssociationsStatusResponse
     :: Int -- ^ 'diasrsResponseStatus'
     -> DescribeInstanceAssociationsStatusResponse
-describeInstanceAssociationsStatusResponse pResponseStatus_ =
-  DescribeInstanceAssociationsStatusResponse'
-    { _diasrsInstanceAssociationStatusInfos = Nothing
-    , _diasrsNextToken = Nothing
-    , _diasrsResponseStatus = pResponseStatus_
-    }
-
+describeInstanceAssociationsStatusResponse
+  pResponseStatus_
+  = DescribeInstanceAssociationsStatusResponse'{_diasrsInstanceAssociationStatusInfos
+                                                  = Nothing,
+                                                _diasrsNextToken = Nothing,
+                                                _diasrsResponseStatus =
+                                                  pResponseStatus_}
 
 -- | Status information about the association.
 diasrsInstanceAssociationStatusInfos :: Lens' DescribeInstanceAssociationsStatusResponse [InstanceAssociationStatusInfo]

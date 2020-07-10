@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDevice' smart constructor.
-data UpdateDevice = UpdateDevice'
-  { _udDeviceARN  :: !(Maybe Text)
-  , _udDeviceName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDevice = UpdateDevice'{_udDeviceARN ::
+                                  !(Maybe Text),
+                                  _udDeviceName :: !(Maybe Text)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDevice' with the minimum fields required to make a request.
 --
@@ -60,8 +59,9 @@ data UpdateDevice = UpdateDevice'
 -- * 'udDeviceName' - The updated device name. Required.
 updateDevice
     :: UpdateDevice
-updateDevice = UpdateDevice' {_udDeviceARN = Nothing, _udDeviceName = Nothing}
-
+updateDevice
+  = UpdateDevice'{_udDeviceARN = Nothing,
+                  _udDeviceName = Nothing}
 
 -- | The ARN of the device to update. Required.
 udDeviceARN :: Lens' UpdateDevice (Maybe Text)
@@ -106,10 +106,10 @@ instance ToQuery UpdateDevice where
         toQuery = const mempty
 
 -- | /See:/ 'updateDeviceResponse' smart constructor.
-newtype UpdateDeviceResponse = UpdateDeviceResponse'
-  { _udrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateDeviceResponse = UpdateDeviceResponse'{_udrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateDeviceResponse' with the minimum fields required to make a request.
 --
@@ -119,9 +119,9 @@ newtype UpdateDeviceResponse = UpdateDeviceResponse'
 updateDeviceResponse
     :: Int -- ^ 'udrsResponseStatus'
     -> UpdateDeviceResponse
-updateDeviceResponse pResponseStatus_ =
-  UpdateDeviceResponse' {_udrsResponseStatus = pResponseStatus_}
-
+updateDeviceResponse pResponseStatus_
+  = UpdateDeviceResponse'{_udrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 udrsResponseStatus :: Lens' UpdateDeviceResponse Int

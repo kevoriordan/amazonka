@@ -38,6 +38,7 @@ module Network.AWS.StorageGateway.DescribeSnapshotSchedule
     , dssrsRecurrenceInHours
     , dssrsTimezone
     , dssrsDescription
+    , dssrsTags
     , dssrsResponseStatus
     ) where
 
@@ -53,10 +54,10 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'describeSnapshotSchedule' smart constructor.
-newtype DescribeSnapshotSchedule = DescribeSnapshotSchedule'
-  { _dssVolumeARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeSnapshotSchedule = DescribeSnapshotSchedule'{_dssVolumeARN
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeSnapshotSchedule' with the minimum fields required to make a request.
 --
@@ -66,9 +67,9 @@ newtype DescribeSnapshotSchedule = DescribeSnapshotSchedule'
 describeSnapshotSchedule
     :: Text -- ^ 'dssVolumeARN'
     -> DescribeSnapshotSchedule
-describeSnapshotSchedule pVolumeARN_ =
-  DescribeSnapshotSchedule' {_dssVolumeARN = pVolumeARN_}
-
+describeSnapshotSchedule pVolumeARN_
+  = DescribeSnapshotSchedule'{_dssVolumeARN =
+                                pVolumeARN_}
 
 -- | The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 dssVolumeARN :: Lens' DescribeSnapshotSchedule Text
@@ -86,6 +87,7 @@ instance AWSRequest DescribeSnapshotSchedule where
                      (x .?> "RecurrenceInHours")
                      <*> (x .?> "Timezone")
                      <*> (x .?> "Description")
+                     <*> (x .?> "Tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable DescribeSnapshotSchedule where
@@ -114,64 +116,89 @@ instance ToQuery DescribeSnapshotSchedule where
         toQuery = const mempty
 
 -- | /See:/ 'describeSnapshotScheduleResponse' smart constructor.
-data DescribeSnapshotScheduleResponse = DescribeSnapshotScheduleResponse'
-  { _dssrsStartAt           :: !(Maybe Nat)
-  , _dssrsVolumeARN         :: !(Maybe Text)
-  , _dssrsRecurrenceInHours :: !(Maybe Nat)
-  , _dssrsTimezone          :: !(Maybe Text)
-  , _dssrsDescription       :: !(Maybe Text)
-  , _dssrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSnapshotScheduleResponse = DescribeSnapshotScheduleResponse'{_dssrsStartAt
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Nat),
+                                                                          _dssrsVolumeARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dssrsRecurrenceInHours
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Nat),
+                                                                          _dssrsTimezone
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dssrsDescription
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dssrsTags
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [Tag]),
+                                                                          _dssrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeSnapshotScheduleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dssrsStartAt' - Undocumented member.
+-- * 'dssrsStartAt' - The hour of the day at which the snapshot schedule begins represented as /hh/ , where /hh/ is the hour (0 to 23). The hour of the day is in the time zone of the gateway.
 --
--- * 'dssrsVolumeARN' - Undocumented member.
+-- * 'dssrsVolumeARN' - The Amazon Resource Name (ARN) of the volume that was specified in the request.
 --
--- * 'dssrsRecurrenceInHours' - Undocumented member.
+-- * 'dssrsRecurrenceInHours' - The number of hours between snapshots.
 --
--- * 'dssrsTimezone' - Undocumented member.
+-- * 'dssrsTimezone' - A value that indicates the time zone of the gateway.
 --
--- * 'dssrsDescription' - Undocumented member.
+-- * 'dssrsDescription' - The snapshot description.
+--
+-- * 'dssrsTags' - A list of up to 50 tags assigned to the snapshot schedule, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the @ListTagsForResource@ API operation.
 --
 -- * 'dssrsResponseStatus' - -- | The response status code.
 describeSnapshotScheduleResponse
     :: Int -- ^ 'dssrsResponseStatus'
     -> DescribeSnapshotScheduleResponse
-describeSnapshotScheduleResponse pResponseStatus_ =
-  DescribeSnapshotScheduleResponse'
-    { _dssrsStartAt = Nothing
-    , _dssrsVolumeARN = Nothing
-    , _dssrsRecurrenceInHours = Nothing
-    , _dssrsTimezone = Nothing
-    , _dssrsDescription = Nothing
-    , _dssrsResponseStatus = pResponseStatus_
-    }
+describeSnapshotScheduleResponse pResponseStatus_
+  = DescribeSnapshotScheduleResponse'{_dssrsStartAt =
+                                        Nothing,
+                                      _dssrsVolumeARN = Nothing,
+                                      _dssrsRecurrenceInHours = Nothing,
+                                      _dssrsTimezone = Nothing,
+                                      _dssrsDescription = Nothing,
+                                      _dssrsTags = Nothing,
+                                      _dssrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | The hour of the day at which the snapshot schedule begins represented as /hh/ , where /hh/ is the hour (0 to 23). The hour of the day is in the time zone of the gateway.
 dssrsStartAt :: Lens' DescribeSnapshotScheduleResponse (Maybe Natural)
 dssrsStartAt = lens _dssrsStartAt (\ s a -> s{_dssrsStartAt = a}) . mapping _Nat
 
--- | Undocumented member.
+-- | The Amazon Resource Name (ARN) of the volume that was specified in the request.
 dssrsVolumeARN :: Lens' DescribeSnapshotScheduleResponse (Maybe Text)
 dssrsVolumeARN = lens _dssrsVolumeARN (\ s a -> s{_dssrsVolumeARN = a})
 
--- | Undocumented member.
+-- | The number of hours between snapshots.
 dssrsRecurrenceInHours :: Lens' DescribeSnapshotScheduleResponse (Maybe Natural)
 dssrsRecurrenceInHours = lens _dssrsRecurrenceInHours (\ s a -> s{_dssrsRecurrenceInHours = a}) . mapping _Nat
 
--- | Undocumented member.
+-- | A value that indicates the time zone of the gateway.
 dssrsTimezone :: Lens' DescribeSnapshotScheduleResponse (Maybe Text)
 dssrsTimezone = lens _dssrsTimezone (\ s a -> s{_dssrsTimezone = a})
 
--- | Undocumented member.
+-- | The snapshot description.
 dssrsDescription :: Lens' DescribeSnapshotScheduleResponse (Maybe Text)
 dssrsDescription = lens _dssrsDescription (\ s a -> s{_dssrsDescription = a})
+
+-- | A list of up to 50 tags assigned to the snapshot schedule, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the @ListTagsForResource@ API operation.
+dssrsTags :: Lens' DescribeSnapshotScheduleResponse [Tag]
+dssrsTags = lens _dssrsTags (\ s a -> s{_dssrsTags = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
 dssrsResponseStatus :: Lens' DescribeSnapshotScheduleResponse Int

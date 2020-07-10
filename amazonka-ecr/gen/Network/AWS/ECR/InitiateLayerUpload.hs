@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Notify Amazon ECR that you intend to upload an image layer.
+-- Notifies Amazon ECR that you intend to upload an image layer.
 --
+--
+-- When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether or not an image layer has been uploaded is determined by the BatchCheckLayerAvailability API action.
 --
 module Network.AWS.ECR.InitiateLayerUpload
     (
@@ -47,11 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'initiateLayerUpload' smart constructor.
-data InitiateLayerUpload = InitiateLayerUpload'
-  { _iluRegistryId     :: !(Maybe Text)
-  , _iluRepositoryName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data InitiateLayerUpload = InitiateLayerUpload'{_iluRegistryId
+                                                :: !(Maybe Text),
+                                                _iluRepositoryName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InitiateLayerUpload' with the minimum fields required to make a request.
 --
@@ -63,10 +64,9 @@ data InitiateLayerUpload = InitiateLayerUpload'
 initiateLayerUpload
     :: Text -- ^ 'iluRepositoryName'
     -> InitiateLayerUpload
-initiateLayerUpload pRepositoryName_ =
-  InitiateLayerUpload'
-    {_iluRegistryId = Nothing, _iluRepositoryName = pRepositoryName_}
-
+initiateLayerUpload pRepositoryName_
+  = InitiateLayerUpload'{_iluRegistryId = Nothing,
+                         _iluRepositoryName = pRepositoryName_}
 
 -- | The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.
 iluRegistryId :: Lens' InitiateLayerUpload (Maybe Text)
@@ -115,12 +115,15 @@ instance ToQuery InitiateLayerUpload where
         toQuery = const mempty
 
 -- | /See:/ 'initiateLayerUploadResponse' smart constructor.
-data InitiateLayerUploadResponse = InitiateLayerUploadResponse'
-  { _ilursPartSize       :: !(Maybe Nat)
-  , _ilursUploadId       :: !(Maybe Text)
-  , _ilursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data InitiateLayerUploadResponse = InitiateLayerUploadResponse'{_ilursPartSize
+                                                                :: !(Maybe Nat),
+                                                                _ilursUploadId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _ilursResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'InitiateLayerUploadResponse' with the minimum fields required to make a request.
 --
@@ -134,13 +137,11 @@ data InitiateLayerUploadResponse = InitiateLayerUploadResponse'
 initiateLayerUploadResponse
     :: Int -- ^ 'ilursResponseStatus'
     -> InitiateLayerUploadResponse
-initiateLayerUploadResponse pResponseStatus_ =
-  InitiateLayerUploadResponse'
-    { _ilursPartSize = Nothing
-    , _ilursUploadId = Nothing
-    , _ilursResponseStatus = pResponseStatus_
-    }
-
+initiateLayerUploadResponse pResponseStatus_
+  = InitiateLayerUploadResponse'{_ilursPartSize =
+                                   Nothing,
+                                 _ilursUploadId = Nothing,
+                                 _ilursResponseStatus = pResponseStatus_}
 
 -- | The size, in bytes, that Amazon ECR expects future layer part uploads to be.
 ilursPartSize :: Lens' InitiateLayerUploadResponse (Maybe Natural)

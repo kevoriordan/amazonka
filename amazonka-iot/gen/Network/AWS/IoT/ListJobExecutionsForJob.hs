@@ -21,6 +21,8 @@
 -- Lists the job executions for a job.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListJobExecutionsForJob
     (
     -- * Creating a Request
@@ -44,18 +46,23 @@ module Network.AWS.IoT.ListJobExecutionsForJob
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listJobExecutionsForJob' smart constructor.
-data ListJobExecutionsForJob = ListJobExecutionsForJob'
-  { _ljefjStatus     :: !(Maybe JobExecutionStatus)
-  , _ljefjNextToken  :: !(Maybe Text)
-  , _ljefjMaxResults :: !(Maybe Nat)
-  , _ljefjJobId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListJobExecutionsForJob = ListJobExecutionsForJob'{_ljefjStatus
+                                                        ::
+                                                        !(Maybe
+                                                            JobExecutionStatus),
+                                                        _ljefjNextToken ::
+                                                        !(Maybe Text),
+                                                        _ljefjMaxResults ::
+                                                        !(Maybe Nat),
+                                                        _ljefjJobId :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListJobExecutionsForJob' with the minimum fields required to make a request.
 --
@@ -71,14 +78,10 @@ data ListJobExecutionsForJob = ListJobExecutionsForJob'
 listJobExecutionsForJob
     :: Text -- ^ 'ljefjJobId'
     -> ListJobExecutionsForJob
-listJobExecutionsForJob pJobId_ =
-  ListJobExecutionsForJob'
-    { _ljefjStatus = Nothing
-    , _ljefjNextToken = Nothing
-    , _ljefjMaxResults = Nothing
-    , _ljefjJobId = pJobId_
-    }
-
+listJobExecutionsForJob pJobId_
+  = ListJobExecutionsForJob'{_ljefjStatus = Nothing,
+                             _ljefjNextToken = Nothing,
+                             _ljefjMaxResults = Nothing, _ljefjJobId = pJobId_}
 
 -- | The status of the job.
 ljefjStatus :: Lens' ListJobExecutionsForJob (Maybe JobExecutionStatus)
@@ -95,6 +98,13 @@ ljefjMaxResults = lens _ljefjMaxResults (\ s a -> s{_ljefjMaxResults = a}) . map
 -- | The unique identifier you assigned to this job when it was created.
 ljefjJobId :: Lens' ListJobExecutionsForJob Text
 ljefjJobId = lens _ljefjJobId (\ s a -> s{_ljefjJobId = a})
+
+instance AWSPager ListJobExecutionsForJob where
+        page rq rs
+          | stop (rs ^. ljefjrsNextToken) = Nothing
+          | stop (rs ^. ljefjrsExecutionSummaries) = Nothing
+          | otherwise =
+            Just $ rq & ljefjNextToken .~ rs ^. ljefjrsNextToken
 
 instance AWSRequest ListJobExecutionsForJob where
         type Rs ListJobExecutionsForJob =
@@ -127,12 +137,18 @@ instance ToQuery ListJobExecutionsForJob where
                "maxResults" =: _ljefjMaxResults]
 
 -- | /See:/ 'listJobExecutionsForJobResponse' smart constructor.
-data ListJobExecutionsForJobResponse = ListJobExecutionsForJobResponse'
-  { _ljefjrsExecutionSummaries :: !(Maybe [JobExecutionSummaryForJob])
-  , _ljefjrsNextToken          :: !(Maybe Text)
-  , _ljefjrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListJobExecutionsForJobResponse = ListJobExecutionsForJobResponse'{_ljefjrsExecutionSummaries
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [JobExecutionSummaryForJob]),
+                                                                        _ljefjrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _ljefjrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListJobExecutionsForJobResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +162,11 @@ data ListJobExecutionsForJobResponse = ListJobExecutionsForJobResponse'
 listJobExecutionsForJobResponse
     :: Int -- ^ 'ljefjrsResponseStatus'
     -> ListJobExecutionsForJobResponse
-listJobExecutionsForJobResponse pResponseStatus_ =
-  ListJobExecutionsForJobResponse'
-    { _ljefjrsExecutionSummaries = Nothing
-    , _ljefjrsNextToken = Nothing
-    , _ljefjrsResponseStatus = pResponseStatus_
-    }
-
+listJobExecutionsForJobResponse pResponseStatus_
+  = ListJobExecutionsForJobResponse'{_ljefjrsExecutionSummaries
+                                       = Nothing,
+                                     _ljefjrsNextToken = Nothing,
+                                     _ljefjrsResponseStatus = pResponseStatus_}
 
 -- | A list of job execution summaries.
 ljefjrsExecutionSummaries :: Lens' ListJobExecutionsForJobResponse [JobExecutionSummaryForJob]

@@ -48,38 +48,34 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTags' smart constructor.
-data ListTags = ListTags'
-  { _ltNextToken   :: !(Maybe Text)
-  , _ltMaxResults  :: !(Maybe Int)
-  , _ltResourceARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTags = ListTags'{_ltNextToken ::
+                          !(Maybe Text),
+                          _ltMaxResults :: !(Maybe Int),
+                          _ltResourceARN :: !Text}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltNextToken' - Do not use. A validation exception occurs if you add a @NextToken@ parameter to a @ListTagsRequest@ call.
+-- * 'ltNextToken' - Do not use. A validation exception occurs if you add a @NextToken@ parameter to a @ListTagsRequest@ call. 
 --
--- * 'ltMaxResults' - Do not use. A validation exception occurs if you add a @MaxResults@ parameter to a @ListTagsRequest@ call.
+-- * 'ltMaxResults' - Do not use. A validation exception occurs if you add a @MaxResults@ parameter to a @ListTagsRequest@ call. 
 --
 -- * 'ltResourceARN' - The stack or layer's Amazon Resource Number (ARN).
 listTags
     :: Text -- ^ 'ltResourceARN'
     -> ListTags
-listTags pResourceARN_ =
-  ListTags'
-    { _ltNextToken = Nothing
-    , _ltMaxResults = Nothing
-    , _ltResourceARN = pResourceARN_
-    }
+listTags pResourceARN_
+  = ListTags'{_ltNextToken = Nothing,
+              _ltMaxResults = Nothing,
+              _ltResourceARN = pResourceARN_}
 
-
--- | Do not use. A validation exception occurs if you add a @NextToken@ parameter to a @ListTagsRequest@ call.
+-- | Do not use. A validation exception occurs if you add a @NextToken@ parameter to a @ListTagsRequest@ call. 
 ltNextToken :: Lens' ListTags (Maybe Text)
 ltNextToken = lens _ltNextToken (\ s a -> s{_ltNextToken = a})
 
--- | Do not use. A validation exception occurs if you add a @MaxResults@ parameter to a @ListTagsRequest@ call.
+-- | Do not use. A validation exception occurs if you add a @MaxResults@ parameter to a @ListTagsRequest@ call. 
 ltMaxResults :: Lens' ListTags (Maybe Int)
 ltMaxResults = lens _ltMaxResults (\ s a -> s{_ltMaxResults = a})
 
@@ -129,18 +125,17 @@ instance ToQuery ListTags where
 --
 --
 -- /See:/ 'listTagsResponse' smart constructor.
-data ListTagsResponse = ListTagsResponse'
-  { _ltrsNextToken      :: !(Maybe Text)
-  , _ltrsTags           :: !(Maybe (Map Text Text))
-  , _ltrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsResponse = ListTagsResponse'{_ltrsNextToken
+                                          :: !(Maybe Text),
+                                          _ltrsTags :: !(Maybe (Map Text Text)),
+                                          _ltrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltrsNextToken' - If a paginated request does not return all of the remaining results, this parameter is set to a token that you can assign to the request object's @NextToken@ parameter to get the next set of results. If the previous paginated request returned all of the remaining results, this parameter is set to @null@ .
+-- * 'ltrsNextToken' - If a paginated request does not return all of the remaining results, this parameter is set to a token that you can assign to the request object's @NextToken@ parameter to get the next set of results. If the previous paginated request returned all of the remaining results, this parameter is set to @null@ . 
 --
 -- * 'ltrsTags' - A set of key-value pairs that contain tag keys and tag values that are attached to a stack or layer.
 --
@@ -148,15 +143,12 @@ data ListTagsResponse = ListTagsResponse'
 listTagsResponse
     :: Int -- ^ 'ltrsResponseStatus'
     -> ListTagsResponse
-listTagsResponse pResponseStatus_ =
-  ListTagsResponse'
-    { _ltrsNextToken = Nothing
-    , _ltrsTags = Nothing
-    , _ltrsResponseStatus = pResponseStatus_
-    }
+listTagsResponse pResponseStatus_
+  = ListTagsResponse'{_ltrsNextToken = Nothing,
+                      _ltrsTags = Nothing,
+                      _ltrsResponseStatus = pResponseStatus_}
 
-
--- | If a paginated request does not return all of the remaining results, this parameter is set to a token that you can assign to the request object's @NextToken@ parameter to get the next set of results. If the previous paginated request returned all of the remaining results, this parameter is set to @null@ .
+-- | If a paginated request does not return all of the remaining results, this parameter is set to a token that you can assign to the request object's @NextToken@ parameter to get the next set of results. If the previous paginated request returned all of the remaining results, this parameter is set to @null@ . 
 ltrsNextToken :: Lens' ListTagsResponse (Maybe Text)
 ltrsNextToken = lens _ltrsNextToken (\ s a -> s{_ltrsNextToken = a})
 

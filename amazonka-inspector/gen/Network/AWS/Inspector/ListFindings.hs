@@ -52,13 +52,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listFindings' smart constructor.
-data ListFindings = ListFindings'
-  { _lfAssessmentRunARNs :: !(Maybe [Text])
-  , _lfNextToken         :: !(Maybe Text)
-  , _lfFilter            :: !(Maybe FindingFilter)
-  , _lfMaxResults        :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFindings = ListFindings'{_lfAssessmentRunARNs
+                                  :: !(Maybe [Text]),
+                                  _lfNextToken :: !(Maybe Text),
+                                  _lfFilter :: !(Maybe FindingFilter),
+                                  _lfMaxResults :: !(Maybe Int)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFindings' with the minimum fields required to make a request.
 --
@@ -73,14 +72,10 @@ data ListFindings = ListFindings'
 -- * 'lfMaxResults' - You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
 listFindings
     :: ListFindings
-listFindings =
-  ListFindings'
-    { _lfAssessmentRunARNs = Nothing
-    , _lfNextToken = Nothing
-    , _lfFilter = Nothing
-    , _lfMaxResults = Nothing
-    }
-
+listFindings
+  = ListFindings'{_lfAssessmentRunARNs = Nothing,
+                  _lfNextToken = Nothing, _lfFilter = Nothing,
+                  _lfMaxResults = Nothing}
 
 -- | The ARNs of the assessment runs that generate the findings that you want to list.
 lfAssessmentRunARNs :: Lens' ListFindings [Text]
@@ -144,12 +139,11 @@ instance ToQuery ListFindings where
         toQuery = const mempty
 
 -- | /See:/ 'listFindingsResponse' smart constructor.
-data ListFindingsResponse = ListFindingsResponse'
-  { _lfrsNextToken      :: !(Maybe Text)
-  , _lfrsResponseStatus :: !Int
-  , _lfrsFindingARNs    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFindingsResponse = ListFindingsResponse'{_lfrsNextToken
+                                                  :: !(Maybe Text),
+                                                  _lfrsResponseStatus :: !Int,
+                                                  _lfrsFindingARNs :: ![Text]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFindingsResponse' with the minimum fields required to make a request.
 --
@@ -163,13 +157,10 @@ data ListFindingsResponse = ListFindingsResponse'
 listFindingsResponse
     :: Int -- ^ 'lfrsResponseStatus'
     -> ListFindingsResponse
-listFindingsResponse pResponseStatus_ =
-  ListFindingsResponse'
-    { _lfrsNextToken = Nothing
-    , _lfrsResponseStatus = pResponseStatus_
-    , _lfrsFindingARNs = mempty
-    }
-
+listFindingsResponse pResponseStatus_
+  = ListFindingsResponse'{_lfrsNextToken = Nothing,
+                          _lfrsResponseStatus = pResponseStatus_,
+                          _lfrsFindingARNs = mempty}
 
 -- | When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the __nextToken__ parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.
 lfrsNextToken :: Lens' ListFindingsResponse (Maybe Text)

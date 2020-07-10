@@ -27,9 +27,10 @@ module Network.AWS.ElastiCache.CreateSnapshot
       createSnapshot
     , CreateSnapshot
     -- * Request Lenses
-    , csCacheClusterId
-    , csReplicationGroupId
-    , csSnapshotName
+    , cCacheClusterId
+    , cKMSKeyId
+    , cReplicationGroupId
+    , cSnapshotName
 
     -- * Destructuring the Response
     , createSnapshotResponse
@@ -51,44 +52,47 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createSnapshot' smart constructor.
-data CreateSnapshot = CreateSnapshot'
-  { _csCacheClusterId     :: !(Maybe Text)
-  , _csReplicationGroupId :: !(Maybe Text)
-  , _csSnapshotName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshot = CreateSnapshot'{_cCacheClusterId
+                                      :: !(Maybe Text),
+                                      _cKMSKeyId :: !(Maybe Text),
+                                      _cReplicationGroupId :: !(Maybe Text),
+                                      _cSnapshotName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csCacheClusterId' - The identifier of an existing cluster. The snapshot is created from this cluster.
+-- * 'cCacheClusterId' - The identifier of an existing cluster. The snapshot is created from this cluster.
 --
--- * 'csReplicationGroupId' - The identifier of an existing replication group. The snapshot is created from this replication group.
+-- * 'cKMSKeyId' - The ID of the KMS key used to encrypt the snapshot.
 --
--- * 'csSnapshotName' - A name for the snapshot being created.
+-- * 'cReplicationGroupId' - The identifier of an existing replication group. The snapshot is created from this replication group.
+--
+-- * 'cSnapshotName' - A name for the snapshot being created.
 createSnapshot
-    :: Text -- ^ 'csSnapshotName'
+    :: Text -- ^ 'cSnapshotName'
     -> CreateSnapshot
-createSnapshot pSnapshotName_ =
-  CreateSnapshot'
-    { _csCacheClusterId = Nothing
-    , _csReplicationGroupId = Nothing
-    , _csSnapshotName = pSnapshotName_
-    }
-
+createSnapshot pSnapshotName_
+  = CreateSnapshot'{_cCacheClusterId = Nothing,
+                    _cKMSKeyId = Nothing, _cReplicationGroupId = Nothing,
+                    _cSnapshotName = pSnapshotName_}
 
 -- | The identifier of an existing cluster. The snapshot is created from this cluster.
-csCacheClusterId :: Lens' CreateSnapshot (Maybe Text)
-csCacheClusterId = lens _csCacheClusterId (\ s a -> s{_csCacheClusterId = a})
+cCacheClusterId :: Lens' CreateSnapshot (Maybe Text)
+cCacheClusterId = lens _cCacheClusterId (\ s a -> s{_cCacheClusterId = a})
+
+-- | The ID of the KMS key used to encrypt the snapshot.
+cKMSKeyId :: Lens' CreateSnapshot (Maybe Text)
+cKMSKeyId = lens _cKMSKeyId (\ s a -> s{_cKMSKeyId = a})
 
 -- | The identifier of an existing replication group. The snapshot is created from this replication group.
-csReplicationGroupId :: Lens' CreateSnapshot (Maybe Text)
-csReplicationGroupId = lens _csReplicationGroupId (\ s a -> s{_csReplicationGroupId = a})
+cReplicationGroupId :: Lens' CreateSnapshot (Maybe Text)
+cReplicationGroupId = lens _cReplicationGroupId (\ s a -> s{_cReplicationGroupId = a})
 
 -- | A name for the snapshot being created.
-csSnapshotName :: Lens' CreateSnapshot Text
-csSnapshotName = lens _csSnapshotName (\ s a -> s{_csSnapshotName = a})
+cSnapshotName :: Lens' CreateSnapshot Text
+cSnapshotName = lens _cSnapshotName (\ s a -> s{_cSnapshotName = a})
 
 instance AWSRequest CreateSnapshot where
         type Rs CreateSnapshot = CreateSnapshotResponse
@@ -114,16 +118,18 @@ instance ToQuery CreateSnapshot where
           = mconcat
               ["Action" =: ("CreateSnapshot" :: ByteString),
                "Version" =: ("2015-02-02" :: ByteString),
-               "CacheClusterId" =: _csCacheClusterId,
-               "ReplicationGroupId" =: _csReplicationGroupId,
-               "SnapshotName" =: _csSnapshotName]
+               "CacheClusterId" =: _cCacheClusterId,
+               "KmsKeyId" =: _cKMSKeyId,
+               "ReplicationGroupId" =: _cReplicationGroupId,
+               "SnapshotName" =: _cSnapshotName]
 
 -- | /See:/ 'createSnapshotResponse' smart constructor.
-data CreateSnapshotResponse = CreateSnapshotResponse'
-  { _crersSnapshot       :: !(Maybe Snapshot)
-  , _crersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshotResponse = CreateSnapshotResponse'{_crersSnapshot
+                                                      :: !(Maybe Snapshot),
+                                                      _crersResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -135,10 +141,9 @@ data CreateSnapshotResponse = CreateSnapshotResponse'
 createSnapshotResponse
     :: Int -- ^ 'crersResponseStatus'
     -> CreateSnapshotResponse
-createSnapshotResponse pResponseStatus_ =
-  CreateSnapshotResponse'
-    {_crersSnapshot = Nothing, _crersResponseStatus = pResponseStatus_}
-
+createSnapshotResponse pResponseStatus_
+  = CreateSnapshotResponse'{_crersSnapshot = Nothing,
+                            _crersResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 crersSnapshot :: Lens' CreateSnapshotResponse (Maybe Snapshot)

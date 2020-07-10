@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers a specified Amazon ECS cluster with a stack. You can register only one cluster with a stack. A cluster can be registered with only one stack. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html Resource Management> .
+-- Registers a specified Amazon ECS cluster with a stack. You can register only one cluster with a stack. A cluster can be registered with only one stack. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html Resource Management> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.RegisterEcsCluster
     (
@@ -48,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'registerEcsCluster' smart constructor.
-data RegisterEcsCluster = RegisterEcsCluster'
-  { _recEcsClusterARN :: !Text
-  , _recStackId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterEcsCluster = RegisterEcsCluster'{_recEcsClusterARN
+                                              :: !Text,
+                                              _recStackId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterEcsCluster' with the minimum fields required to make a request.
 --
@@ -65,10 +64,10 @@ registerEcsCluster
     :: Text -- ^ 'recEcsClusterARN'
     -> Text -- ^ 'recStackId'
     -> RegisterEcsCluster
-registerEcsCluster pEcsClusterARN_ pStackId_ =
-  RegisterEcsCluster'
-    {_recEcsClusterARN = pEcsClusterARN_, _recStackId = pStackId_}
-
+registerEcsCluster pEcsClusterARN_ pStackId_
+  = RegisterEcsCluster'{_recEcsClusterARN =
+                          pEcsClusterARN_,
+                        _recStackId = pStackId_}
 
 -- | The cluster's ARN.
 recEcsClusterARN :: Lens' RegisterEcsCluster Text
@@ -120,11 +119,12 @@ instance ToQuery RegisterEcsCluster where
 --
 --
 -- /See:/ 'registerEcsClusterResponse' smart constructor.
-data RegisterEcsClusterResponse = RegisterEcsClusterResponse'
-  { _recrsEcsClusterARN  :: !(Maybe Text)
-  , _recrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterEcsClusterResponse = RegisterEcsClusterResponse'{_recrsEcsClusterARN
+                                                              :: !(Maybe Text),
+                                                              _recrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'RegisterEcsClusterResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +136,10 @@ data RegisterEcsClusterResponse = RegisterEcsClusterResponse'
 registerEcsClusterResponse
     :: Int -- ^ 'recrsResponseStatus'
     -> RegisterEcsClusterResponse
-registerEcsClusterResponse pResponseStatus_ =
-  RegisterEcsClusterResponse'
-    {_recrsEcsClusterARN = Nothing, _recrsResponseStatus = pResponseStatus_}
-
+registerEcsClusterResponse pResponseStatus_
+  = RegisterEcsClusterResponse'{_recrsEcsClusterARN =
+                                  Nothing,
+                                _recrsResponseStatus = pResponseStatus_}
 
 -- | The cluster's ARN.
 recrsEcsClusterARN :: Lens' RegisterEcsClusterResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval.
+-- Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your @ConfigurationItems@ between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the @ConfigurationItems@ for the specified retention period. 
 --
 --
 -- The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the @limit@ parameter. The response includes a @nextToken@ string. To get the next page of results, run the request again and specify the string for the @nextToken@ parameter.
@@ -61,16 +61,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getResourceConfigHistory' smart constructor.
-data GetResourceConfigHistory = GetResourceConfigHistory'
-  { _grchChronologicalOrder :: !(Maybe ChronologicalOrder)
-  , _grchNextToken          :: !(Maybe Text)
-  , _grchLimit              :: !(Maybe Nat)
-  , _grchLaterTime          :: !(Maybe POSIX)
-  , _grchEarlierTime        :: !(Maybe POSIX)
-  , _grchResourceType       :: !ResourceType
-  , _grchResourceId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetResourceConfigHistory = GetResourceConfigHistory'{_grchChronologicalOrder
+                                                          ::
+                                                          !(Maybe
+                                                              ChronologicalOrder),
+                                                          _grchNextToken ::
+                                                          !(Maybe Text),
+                                                          _grchLimit ::
+                                                          !(Maybe Nat),
+                                                          _grchLaterTime ::
+                                                          !(Maybe POSIX),
+                                                          _grchEarlierTime ::
+                                                          !(Maybe POSIX),
+                                                          _grchResourceType ::
+                                                          !ResourceType,
+                                                          _grchResourceId ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetResourceConfigHistory' with the minimum fields required to make a request.
 --
@@ -93,17 +101,14 @@ getResourceConfigHistory
     :: ResourceType -- ^ 'grchResourceType'
     -> Text -- ^ 'grchResourceId'
     -> GetResourceConfigHistory
-getResourceConfigHistory pResourceType_ pResourceId_ =
-  GetResourceConfigHistory'
-    { _grchChronologicalOrder = Nothing
-    , _grchNextToken = Nothing
-    , _grchLimit = Nothing
-    , _grchLaterTime = Nothing
-    , _grchEarlierTime = Nothing
-    , _grchResourceType = pResourceType_
-    , _grchResourceId = pResourceId_
-    }
-
+getResourceConfigHistory pResourceType_ pResourceId_
+  = GetResourceConfigHistory'{_grchChronologicalOrder =
+                                Nothing,
+                              _grchNextToken = Nothing, _grchLimit = Nothing,
+                              _grchLaterTime = Nothing,
+                              _grchEarlierTime = Nothing,
+                              _grchResourceType = pResourceType_,
+                              _grchResourceId = pResourceId_}
 
 -- | The chronological order for configuration items listed. By default, the results are listed in reverse chronological order.
 grchChronologicalOrder :: Lens' GetResourceConfigHistory (Maybe ChronologicalOrder)
@@ -190,12 +195,19 @@ instance ToQuery GetResourceConfigHistory where
 --
 --
 -- /See:/ 'getResourceConfigHistoryResponse' smart constructor.
-data GetResourceConfigHistoryResponse = GetResourceConfigHistoryResponse'
-  { _grchrsNextToken          :: !(Maybe Text)
-  , _grchrsConfigurationItems :: !(Maybe [ConfigurationItem])
-  , _grchrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetResourceConfigHistoryResponse = GetResourceConfigHistoryResponse'{_grchrsNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _grchrsConfigurationItems
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [ConfigurationItem]),
+                                                                          _grchrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetResourceConfigHistoryResponse' with the minimum fields required to make a request.
 --
@@ -209,13 +221,11 @@ data GetResourceConfigHistoryResponse = GetResourceConfigHistoryResponse'
 getResourceConfigHistoryResponse
     :: Int -- ^ 'grchrsResponseStatus'
     -> GetResourceConfigHistoryResponse
-getResourceConfigHistoryResponse pResponseStatus_ =
-  GetResourceConfigHistoryResponse'
-    { _grchrsNextToken = Nothing
-    , _grchrsConfigurationItems = Nothing
-    , _grchrsResponseStatus = pResponseStatus_
-    }
-
+getResourceConfigHistoryResponse pResponseStatus_
+  = GetResourceConfigHistoryResponse'{_grchrsNextToken
+                                        = Nothing,
+                                      _grchrsConfigurationItems = Nothing,
+                                      _grchrsResponseStatus = pResponseStatus_}
 
 -- | The string that you use in a subsequent request to get the next page of results in a paginated response.
 grchrsNextToken :: Lens' GetResourceConfigHistoryResponse (Maybe Text)

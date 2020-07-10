@@ -36,6 +36,7 @@ module Network.AWS.MediaPackage.UpdateChannel
     , ucrsARN
     , ucrsId
     , ucrsDescription
+    , ucrsTags
     , ucrsResponseStatus
     ) where
 
@@ -49,11 +50,10 @@ import Network.AWS.Response
 -- | Configuration parameters used to update the Channel.
 --
 -- /See:/ 'updateChannel' smart constructor.
-data UpdateChannel = UpdateChannel'
-  { _ucDescription :: !(Maybe Text)
-  , _ucId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateChannel = UpdateChannel'{_ucDescription ::
+                                    !(Maybe Text),
+                                    _ucId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateChannel' with the minimum fields required to make a request.
 --
@@ -65,8 +65,9 @@ data UpdateChannel = UpdateChannel'
 updateChannel
     :: Text -- ^ 'ucId'
     -> UpdateChannel
-updateChannel pId_ = UpdateChannel' {_ucDescription = Nothing, _ucId = pId_}
-
+updateChannel pId_
+  = UpdateChannel'{_ucDescription = Nothing,
+                   _ucId = pId_}
 
 -- | A short text description of the Channel.
 ucDescription :: Lens' UpdateChannel (Maybe Text)
@@ -86,6 +87,7 @@ instance AWSRequest UpdateChannel where
                    (x .?> "hlsIngest") <*> (x .?> "arn") <*>
                      (x .?> "id")
                      <*> (x .?> "description")
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable UpdateChannel where
@@ -112,14 +114,17 @@ instance ToQuery UpdateChannel where
         toQuery = const mempty
 
 -- | /See:/ 'updateChannelResponse' smart constructor.
-data UpdateChannelResponse = UpdateChannelResponse'
-  { _ucrsHlsIngest      :: !(Maybe HlsIngest)
-  , _ucrsARN            :: !(Maybe Text)
-  , _ucrsId             :: !(Maybe Text)
-  , _ucrsDescription    :: !(Maybe Text)
-  , _ucrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateChannelResponse = UpdateChannelResponse'{_ucrsHlsIngest
+                                                    :: !(Maybe HlsIngest),
+                                                    _ucrsARN :: !(Maybe Text),
+                                                    _ucrsId :: !(Maybe Text),
+                                                    _ucrsDescription ::
+                                                    !(Maybe Text),
+                                                    _ucrsTags ::
+                                                    !(Maybe (Map Text Text)),
+                                                    _ucrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateChannelResponse' with the minimum fields required to make a request.
 --
@@ -133,19 +138,17 @@ data UpdateChannelResponse = UpdateChannelResponse'
 --
 -- * 'ucrsDescription' - A short text description of the Channel.
 --
+-- * 'ucrsTags' - Undocumented member.
+--
 -- * 'ucrsResponseStatus' - -- | The response status code.
 updateChannelResponse
     :: Int -- ^ 'ucrsResponseStatus'
     -> UpdateChannelResponse
-updateChannelResponse pResponseStatus_ =
-  UpdateChannelResponse'
-    { _ucrsHlsIngest = Nothing
-    , _ucrsARN = Nothing
-    , _ucrsId = Nothing
-    , _ucrsDescription = Nothing
-    , _ucrsResponseStatus = pResponseStatus_
-    }
-
+updateChannelResponse pResponseStatus_
+  = UpdateChannelResponse'{_ucrsHlsIngest = Nothing,
+                           _ucrsARN = Nothing, _ucrsId = Nothing,
+                           _ucrsDescription = Nothing, _ucrsTags = Nothing,
+                           _ucrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ucrsHlsIngest :: Lens' UpdateChannelResponse (Maybe HlsIngest)
@@ -162,6 +165,10 @@ ucrsId = lens _ucrsId (\ s a -> s{_ucrsId = a})
 -- | A short text description of the Channel.
 ucrsDescription :: Lens' UpdateChannelResponse (Maybe Text)
 ucrsDescription = lens _ucrsDescription (\ s a -> s{_ucrsDescription = a})
+
+-- | Undocumented member.
+ucrsTags :: Lens' UpdateChannelResponse (HashMap Text Text)
+ucrsTags = lens _ucrsTags (\ s a -> s{_ucrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 ucrsResponseStatus :: Lens' UpdateChannelResponse Int

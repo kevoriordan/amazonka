@@ -49,13 +49,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchGetPartition' smart constructor.
-data BatchGetPartition = BatchGetPartition'
-  { _bgpCatalogId       :: !(Maybe Text)
-  , _bgpDatabaseName    :: !Text
-  , _bgpTableName       :: !Text
-  , _bgpPartitionsToGet :: ![PartitionValueList]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetPartition = BatchGetPartition'{_bgpCatalogId
+                                            :: !(Maybe Text),
+                                            _bgpDatabaseName :: !Text,
+                                            _bgpTableName :: !Text,
+                                            _bgpPartitionsToGet ::
+                                            ![PartitionValueList]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetPartition' with the minimum fields required to make a request.
 --
@@ -72,14 +72,11 @@ batchGetPartition
     :: Text -- ^ 'bgpDatabaseName'
     -> Text -- ^ 'bgpTableName'
     -> BatchGetPartition
-batchGetPartition pDatabaseName_ pTableName_ =
-  BatchGetPartition'
-    { _bgpCatalogId = Nothing
-    , _bgpDatabaseName = pDatabaseName_
-    , _bgpTableName = pTableName_
-    , _bgpPartitionsToGet = mempty
-    }
-
+batchGetPartition pDatabaseName_ pTableName_
+  = BatchGetPartition'{_bgpCatalogId = Nothing,
+                       _bgpDatabaseName = pDatabaseName_,
+                       _bgpTableName = pTableName_,
+                       _bgpPartitionsToGet = mempty}
 
 -- | The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
 bgpCatalogId :: Lens' BatchGetPartition (Maybe Text)
@@ -137,18 +134,23 @@ instance ToQuery BatchGetPartition where
         toQuery = const mempty
 
 -- | /See:/ 'batchGetPartitionResponse' smart constructor.
-data BatchGetPartitionResponse = BatchGetPartitionResponse'
-  { _bgprsUnprocessedKeys :: !(Maybe [PartitionValueList])
-  , _bgprsPartitions      :: !(Maybe [Partition])
-  , _bgprsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetPartitionResponse = BatchGetPartitionResponse'{_bgprsUnprocessedKeys
+                                                            ::
+                                                            !(Maybe
+                                                                [PartitionValueList]),
+                                                            _bgprsPartitions ::
+                                                            !(Maybe
+                                                                [Partition]),
+                                                            _bgprsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'BatchGetPartitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bgprsUnprocessedKeys' - A list of the partition values in the request for which partions were not returned.
+-- * 'bgprsUnprocessedKeys' - A list of the partition values in the request for which partitions were not returned.
 --
 -- * 'bgprsPartitions' - A list of the requested partitions.
 --
@@ -156,15 +158,13 @@ data BatchGetPartitionResponse = BatchGetPartitionResponse'
 batchGetPartitionResponse
     :: Int -- ^ 'bgprsResponseStatus'
     -> BatchGetPartitionResponse
-batchGetPartitionResponse pResponseStatus_ =
-  BatchGetPartitionResponse'
-    { _bgprsUnprocessedKeys = Nothing
-    , _bgprsPartitions = Nothing
-    , _bgprsResponseStatus = pResponseStatus_
-    }
+batchGetPartitionResponse pResponseStatus_
+  = BatchGetPartitionResponse'{_bgprsUnprocessedKeys =
+                                 Nothing,
+                               _bgprsPartitions = Nothing,
+                               _bgprsResponseStatus = pResponseStatus_}
 
-
--- | A list of the partition values in the request for which partions were not returned.
+-- | A list of the partition values in the request for which partitions were not returned.
 bgprsUnprocessedKeys :: Lens' BatchGetPartitionResponse [PartitionValueList]
 bgprsUnprocessedKeys = lens _bgprsUnprocessedKeys (\ s a -> s{_bgprsUnprocessedKeys = a}) . _Default . _Coerce
 

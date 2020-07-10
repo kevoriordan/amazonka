@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getFieldLevelEncryptionConfig' smart constructor.
-newtype GetFieldLevelEncryptionConfig = GetFieldLevelEncryptionConfig'
-  { _gflecId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetFieldLevelEncryptionConfig = GetFieldLevelEncryptionConfig'{_gflecId
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetFieldLevelEncryptionConfig' with the minimum fields required to make a request.
 --
@@ -59,9 +59,8 @@ newtype GetFieldLevelEncryptionConfig = GetFieldLevelEncryptionConfig'
 getFieldLevelEncryptionConfig
     :: Text -- ^ 'gflecId'
     -> GetFieldLevelEncryptionConfig
-getFieldLevelEncryptionConfig pId_ =
-  GetFieldLevelEncryptionConfig' {_gflecId = pId_}
-
+getFieldLevelEncryptionConfig pId_
+  = GetFieldLevelEncryptionConfig'{_gflecId = pId_}
 
 -- | Request the ID for the field-level encryption configuration information.
 gflecId :: Lens' GetFieldLevelEncryptionConfig Text
@@ -90,19 +89,26 @@ instance ToHeaders GetFieldLevelEncryptionConfig
 instance ToPath GetFieldLevelEncryptionConfig where
         toPath GetFieldLevelEncryptionConfig'{..}
           = mconcat
-              ["/2017-10-30/field-level-encryption/",
+              ["/2019-03-26/field-level-encryption/",
                toBS _gflecId, "/config"]
 
 instance ToQuery GetFieldLevelEncryptionConfig where
         toQuery = const mempty
 
 -- | /See:/ 'getFieldLevelEncryptionConfigResponse' smart constructor.
-data GetFieldLevelEncryptionConfigResponse = GetFieldLevelEncryptionConfigResponse'
-  { _gflecrsETag                       :: !(Maybe Text)
-  , _gflecrsFieldLevelEncryptionConfig :: !(Maybe FieldLevelEncryptionConfig)
-  , _gflecrsResponseStatus             :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetFieldLevelEncryptionConfigResponse = GetFieldLevelEncryptionConfigResponse'{_gflecrsETag
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _gflecrsFieldLevelEncryptionConfig
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        FieldLevelEncryptionConfig),
+                                                                                    _gflecrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'GetFieldLevelEncryptionConfigResponse' with the minimum fields required to make a request.
 --
@@ -116,13 +122,14 @@ data GetFieldLevelEncryptionConfigResponse = GetFieldLevelEncryptionConfigRespon
 getFieldLevelEncryptionConfigResponse
     :: Int -- ^ 'gflecrsResponseStatus'
     -> GetFieldLevelEncryptionConfigResponse
-getFieldLevelEncryptionConfigResponse pResponseStatus_ =
-  GetFieldLevelEncryptionConfigResponse'
-    { _gflecrsETag = Nothing
-    , _gflecrsFieldLevelEncryptionConfig = Nothing
-    , _gflecrsResponseStatus = pResponseStatus_
-    }
-
+getFieldLevelEncryptionConfigResponse
+  pResponseStatus_
+  = GetFieldLevelEncryptionConfigResponse'{_gflecrsETag
+                                             = Nothing,
+                                           _gflecrsFieldLevelEncryptionConfig =
+                                             Nothing,
+                                           _gflecrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The current version of the field level encryption configuration. For example: @E2QWRUHAPOMQZL@ .
 gflecrsETag :: Lens' GetFieldLevelEncryptionConfigResponse (Maybe Text)

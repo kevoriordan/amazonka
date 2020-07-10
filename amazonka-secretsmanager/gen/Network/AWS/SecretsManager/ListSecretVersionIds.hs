@@ -21,7 +21,7 @@
 -- Lists all of the versions attached to the specified secret. The output does not include the @SecretString@ or @SecretBinary@ fields. By default, the list includes only versions that have at least one staging label in @VersionStage@ attached.
 --
 --
--- __Minimum permissions__
+-- __Minimum permissions__ 
 --
 -- To run this command, you must have the following permissions:
 --
@@ -29,12 +29,14 @@
 --
 --
 --
--- __Related operations__
+-- __Related operations__ 
 --
 --     * To list the secrets in an account, use 'ListSecrets' .
 --
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SecretsManager.ListSecretVersionIds
     (
     -- * Creating a Request
@@ -58,6 +60,7 @@ module Network.AWS.SecretsManager.ListSecretVersionIds
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -65,13 +68,14 @@ import Network.AWS.SecretsManager.Types
 import Network.AWS.SecretsManager.Types.Product
 
 -- | /See:/ 'listSecretVersionIds' smart constructor.
-data ListSecretVersionIds = ListSecretVersionIds'
-  { _lsviNextToken         :: !(Maybe Text)
-  , _lsviIncludeDeprecated :: !(Maybe Bool)
-  , _lsviMaxResults        :: !(Maybe Nat)
-  , _lsviSecretId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSecretVersionIds = ListSecretVersionIds'{_lsviNextToken
+                                                  :: !(Maybe Text),
+                                                  _lsviIncludeDeprecated ::
+                                                  !(Maybe Bool),
+                                                  _lsviMaxResults ::
+                                                  !(Maybe Nat),
+                                                  _lsviSecretId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSecretVersionIds' with the minimum fields required to make a request.
 --
@@ -87,14 +91,11 @@ data ListSecretVersionIds = ListSecretVersionIds'
 listSecretVersionIds
     :: Text -- ^ 'lsviSecretId'
     -> ListSecretVersionIds
-listSecretVersionIds pSecretId_ =
-  ListSecretVersionIds'
-    { _lsviNextToken = Nothing
-    , _lsviIncludeDeprecated = Nothing
-    , _lsviMaxResults = Nothing
-    , _lsviSecretId = pSecretId_
-    }
-
+listSecretVersionIds pSecretId_
+  = ListSecretVersionIds'{_lsviNextToken = Nothing,
+                          _lsviIncludeDeprecated = Nothing,
+                          _lsviMaxResults = Nothing,
+                          _lsviSecretId = pSecretId_}
 
 -- | (Optional) Use this parameter in a request if you receive a @NextToken@ response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
 lsviNextToken :: Lens' ListSecretVersionIds (Maybe Text)
@@ -111,6 +112,13 @@ lsviMaxResults = lens _lsviMaxResults (\ s a -> s{_lsviMaxResults = a}) . mappin
 -- | The identifier for the secret containing the versions you want to list. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
 lsviSecretId :: Lens' ListSecretVersionIds Text
 lsviSecretId = lens _lsviSecretId (\ s a -> s{_lsviSecretId = a})
+
+instance AWSPager ListSecretVersionIds where
+        page rq rs
+          | stop (rs ^. lsvirsNextToken) = Nothing
+          | stop (rs ^. lsvirsVersions) = Nothing
+          | otherwise =
+            Just $ rq & lsviNextToken .~ rs ^. lsvirsNextToken
 
 instance AWSRequest ListSecretVersionIds where
         type Rs ListSecretVersionIds =
@@ -155,14 +163,22 @@ instance ToQuery ListSecretVersionIds where
         toQuery = const mempty
 
 -- | /See:/ 'listSecretVersionIdsResponse' smart constructor.
-data ListSecretVersionIdsResponse = ListSecretVersionIdsResponse'
-  { _lsvirsARN            :: !(Maybe Text)
-  , _lsvirsVersions       :: !(Maybe [SecretVersionsListEntry])
-  , _lsvirsNextToken      :: !(Maybe Text)
-  , _lsvirsName           :: !(Maybe Text)
-  , _lsvirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSecretVersionIdsResponse = ListSecretVersionIdsResponse'{_lsvirsARN
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lsvirsVersions
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [SecretVersionsListEntry]),
+                                                                  _lsvirsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lsvirsName ::
+                                                                  !(Maybe Text),
+                                                                  _lsvirsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListSecretVersionIdsResponse' with the minimum fields required to make a request.
 --
@@ -180,15 +196,12 @@ data ListSecretVersionIdsResponse = ListSecretVersionIdsResponse'
 listSecretVersionIdsResponse
     :: Int -- ^ 'lsvirsResponseStatus'
     -> ListSecretVersionIdsResponse
-listSecretVersionIdsResponse pResponseStatus_ =
-  ListSecretVersionIdsResponse'
-    { _lsvirsARN = Nothing
-    , _lsvirsVersions = Nothing
-    , _lsvirsNextToken = Nothing
-    , _lsvirsName = Nothing
-    , _lsvirsResponseStatus = pResponseStatus_
-    }
-
+listSecretVersionIdsResponse pResponseStatus_
+  = ListSecretVersionIdsResponse'{_lsvirsARN = Nothing,
+                                  _lsvirsVersions = Nothing,
+                                  _lsvirsNextToken = Nothing,
+                                  _lsvirsName = Nothing,
+                                  _lsvirsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) for the secret.
 lsvirsARN :: Lens' ListSecretVersionIdsResponse (Maybe Text)

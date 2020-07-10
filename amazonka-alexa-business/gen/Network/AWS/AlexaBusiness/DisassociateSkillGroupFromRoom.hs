@@ -45,11 +45,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateSkillGroupFromRoom' smart constructor.
-data DisassociateSkillGroupFromRoom = DisassociateSkillGroupFromRoom'
-  { _dsgfrSkillGroupARN :: !(Maybe Text)
-  , _dsgfrRoomARN       :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateSkillGroupFromRoom = DisassociateSkillGroupFromRoom'{_dsgfrSkillGroupARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dsgfrRoomARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text)}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DisassociateSkillGroupFromRoom' with the minimum fields required to make a request.
 --
@@ -60,10 +65,10 @@ data DisassociateSkillGroupFromRoom = DisassociateSkillGroupFromRoom'
 -- * 'dsgfrRoomARN' - The ARN of the room from which the skill group is to be disassociated. Required.
 disassociateSkillGroupFromRoom
     :: DisassociateSkillGroupFromRoom
-disassociateSkillGroupFromRoom =
-  DisassociateSkillGroupFromRoom'
-    {_dsgfrSkillGroupARN = Nothing, _dsgfrRoomARN = Nothing}
-
+disassociateSkillGroupFromRoom
+  = DisassociateSkillGroupFromRoom'{_dsgfrSkillGroupARN
+                                      = Nothing,
+                                    _dsgfrRoomARN = Nothing}
 
 -- | The ARN of the skill group to disassociate from a room. Required.
 dsgfrSkillGroupARN :: Lens' DisassociateSkillGroupFromRoom (Maybe Text)
@@ -114,10 +119,12 @@ instance ToQuery DisassociateSkillGroupFromRoom where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateSkillGroupFromRoomResponse' smart constructor.
-newtype DisassociateSkillGroupFromRoomResponse = DisassociateSkillGroupFromRoomResponse'
-  { _dsgfrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateSkillGroupFromRoomResponse = DisassociateSkillGroupFromRoomResponse'{_dsgfrrsResponseStatus
+                                                                                         ::
+                                                                                         Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'DisassociateSkillGroupFromRoomResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +134,10 @@ newtype DisassociateSkillGroupFromRoomResponse = DisassociateSkillGroupFromRoomR
 disassociateSkillGroupFromRoomResponse
     :: Int -- ^ 'dsgfrrsResponseStatus'
     -> DisassociateSkillGroupFromRoomResponse
-disassociateSkillGroupFromRoomResponse pResponseStatus_ =
-  DisassociateSkillGroupFromRoomResponse'
-    {_dsgfrrsResponseStatus = pResponseStatus_}
-
+disassociateSkillGroupFromRoomResponse
+  pResponseStatus_
+  = DisassociateSkillGroupFromRoomResponse'{_dsgfrrsResponseStatus
+                                              = pResponseStatus_}
 
 -- | -- | The response status code.
 dsgfrrsResponseStatus :: Lens' DisassociateSkillGroupFromRoomResponse Int

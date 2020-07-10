@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Use to update a campaign.
+-- Updates the configuration and other settings for a campaign.
+--
+--
 module Network.AWS.Pinpoint.UpdateCampaign
     (
     -- * Creating a Request
@@ -45,20 +47,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateCampaign' smart constructor.
-data UpdateCampaign = UpdateCampaign'
-  { _ucCampaignId           :: !Text
-  , _ucApplicationId        :: !Text
-  , _ucWriteCampaignRequest :: !WriteCampaignRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCampaign = UpdateCampaign'{_ucCampaignId
+                                      :: !Text,
+                                      _ucApplicationId :: !Text,
+                                      _ucWriteCampaignRequest ::
+                                      !WriteCampaignRequest}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateCampaign' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ucCampaignId' - Undocumented member.
+-- * 'ucCampaignId' - The unique identifier for the campaign.
 --
--- * 'ucApplicationId' - Undocumented member.
+-- * 'ucApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'ucWriteCampaignRequest' - Undocumented member.
 updateCampaign
@@ -66,19 +68,17 @@ updateCampaign
     -> Text -- ^ 'ucApplicationId'
     -> WriteCampaignRequest -- ^ 'ucWriteCampaignRequest'
     -> UpdateCampaign
-updateCampaign pCampaignId_ pApplicationId_ pWriteCampaignRequest_ =
-  UpdateCampaign'
-    { _ucCampaignId = pCampaignId_
-    , _ucApplicationId = pApplicationId_
-    , _ucWriteCampaignRequest = pWriteCampaignRequest_
-    }
+updateCampaign pCampaignId_ pApplicationId_
+  pWriteCampaignRequest_
+  = UpdateCampaign'{_ucCampaignId = pCampaignId_,
+                    _ucApplicationId = pApplicationId_,
+                    _ucWriteCampaignRequest = pWriteCampaignRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the campaign.
 ucCampaignId :: Lens' UpdateCampaign Text
 ucCampaignId = lens _ucCampaignId (\ s a -> s{_ucCampaignId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 ucApplicationId :: Lens' UpdateCampaign Text
 ucApplicationId = lens _ucApplicationId (\ s a -> s{_ucApplicationId = a})
 
@@ -123,11 +123,12 @@ instance ToQuery UpdateCampaign where
         toQuery = const mempty
 
 -- | /See:/ 'updateCampaignResponse' smart constructor.
-data UpdateCampaignResponse = UpdateCampaignResponse'
-  { _ucrsResponseStatus   :: !Int
-  , _ucrsCampaignResponse :: !CampaignResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCampaignResponse = UpdateCampaignResponse'{_ucrsResponseStatus
+                                                      :: !Int,
+                                                      _ucrsCampaignResponse ::
+                                                      !CampaignResponse}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateCampaignResponse' with the minimum fields required to make a request.
 --
@@ -140,12 +141,11 @@ updateCampaignResponse
     :: Int -- ^ 'ucrsResponseStatus'
     -> CampaignResponse -- ^ 'ucrsCampaignResponse'
     -> UpdateCampaignResponse
-updateCampaignResponse pResponseStatus_ pCampaignResponse_ =
-  UpdateCampaignResponse'
-    { _ucrsResponseStatus = pResponseStatus_
-    , _ucrsCampaignResponse = pCampaignResponse_
-    }
-
+updateCampaignResponse pResponseStatus_
+  pCampaignResponse_
+  = UpdateCampaignResponse'{_ucrsResponseStatus =
+                              pResponseStatus_,
+                            _ucrsCampaignResponse = pCampaignResponse_}
 
 -- | -- | The response status code.
 ucrsResponseStatus :: Lens' UpdateCampaignResponse Int

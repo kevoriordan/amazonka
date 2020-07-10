@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists your things. Use the __attributeName__ and __attributeValue__ parameters to filter your things. For example, calling @ListThings@ with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute __Color__ with the value __Red__ .
+-- Lists your things. Use the __attributeName__ and __attributeValue__ parameters to filter your things. For example, calling @ListThings@ with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute __Color__ with the value __Red__ . 
 --
 --
 --
@@ -57,14 +57,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listThings' smart constructor.
-data ListThings = ListThings'
-  { _ltAttributeValue :: !(Maybe Text)
-  , _ltThingTypeName  :: !(Maybe Text)
-  , _ltNextToken      :: !(Maybe Text)
-  , _ltAttributeName  :: !(Maybe Text)
-  , _ltMaxResults     :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThings = ListThings'{_ltAttributeValue ::
+                              !(Maybe Text),
+                              _ltThingTypeName :: !(Maybe Text),
+                              _ltNextToken :: !(Maybe Text),
+                              _ltAttributeName :: !(Maybe Text),
+                              _ltMaxResults :: !(Maybe Nat)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListThings' with the minimum fields required to make a request.
 --
@@ -74,22 +73,17 @@ data ListThings = ListThings'
 --
 -- * 'ltThingTypeName' - The name of the thing type used to search for things.
 --
--- * 'ltNextToken' - The token used to get the next set of results, or __null__ if there are no additional results.
+-- * 'ltNextToken' - The token to retrieve the next set of results.
 --
 -- * 'ltAttributeName' - The attribute name used to search for things.
 --
 -- * 'ltMaxResults' - The maximum number of results to return in this operation.
 listThings
     :: ListThings
-listThings =
-  ListThings'
-    { _ltAttributeValue = Nothing
-    , _ltThingTypeName = Nothing
-    , _ltNextToken = Nothing
-    , _ltAttributeName = Nothing
-    , _ltMaxResults = Nothing
-    }
-
+listThings
+  = ListThings'{_ltAttributeValue = Nothing,
+                _ltThingTypeName = Nothing, _ltNextToken = Nothing,
+                _ltAttributeName = Nothing, _ltMaxResults = Nothing}
 
 -- | The attribute value used to search for things.
 ltAttributeValue :: Lens' ListThings (Maybe Text)
@@ -99,7 +93,7 @@ ltAttributeValue = lens _ltAttributeValue (\ s a -> s{_ltAttributeValue = a})
 ltThingTypeName :: Lens' ListThings (Maybe Text)
 ltThingTypeName = lens _ltThingTypeName (\ s a -> s{_ltThingTypeName = a})
 
--- | The token used to get the next set of results, or __null__ if there are no additional results.
+-- | The token to retrieve the next set of results.
 ltNextToken :: Lens' ListThings (Maybe Text)
 ltNextToken = lens _ltNextToken (\ s a -> s{_ltNextToken = a})
 
@@ -152,12 +146,12 @@ instance ToQuery ListThings where
 --
 --
 -- /See:/ 'listThingsResponse' smart constructor.
-data ListThingsResponse = ListThingsResponse'
-  { _ltrsNextToken      :: !(Maybe Text)
-  , _ltrsThings         :: !(Maybe [ThingAttribute])
-  , _ltrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThingsResponse = ListThingsResponse'{_ltrsNextToken
+                                              :: !(Maybe Text),
+                                              _ltrsThings ::
+                                              !(Maybe [ThingAttribute]),
+                                              _ltrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListThingsResponse' with the minimum fields required to make a request.
 --
@@ -171,13 +165,10 @@ data ListThingsResponse = ListThingsResponse'
 listThingsResponse
     :: Int -- ^ 'ltrsResponseStatus'
     -> ListThingsResponse
-listThingsResponse pResponseStatus_ =
-  ListThingsResponse'
-    { _ltrsNextToken = Nothing
-    , _ltrsThings = Nothing
-    , _ltrsResponseStatus = pResponseStatus_
-    }
-
+listThingsResponse pResponseStatus_
+  = ListThingsResponse'{_ltrsNextToken = Nothing,
+                        _ltrsThings = Nothing,
+                        _ltrsResponseStatus = pResponseStatus_}
 
 -- | The token used to get the next set of results, or __null__ if there are no additional results.
 ltrsNextToken :: Lens' ListThingsResponse (Maybe Text)

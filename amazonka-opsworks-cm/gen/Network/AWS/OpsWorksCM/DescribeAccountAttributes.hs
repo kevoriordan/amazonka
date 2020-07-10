@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes your account attributes, and creates requests to increase limits before they are reached or exceeded.
+-- Describes your OpsWorks-CM account attributes. 
 --
 --
--- This operation is synchronous.
+-- This operation is synchronous. 
 --
 module Network.AWS.OpsWorksCM.DescribeAccountAttributes
     (
@@ -45,17 +45,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeAccountAttributes' smart constructor.
-data DescribeAccountAttributes =
-  DescribeAccountAttributes'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAccountAttributes = DescribeAccountAttributes'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeAccountAttributes' with the minimum fields required to make a request.
 --
 describeAccountAttributes
     :: DescribeAccountAttributes
-describeAccountAttributes = DescribeAccountAttributes'
-
+describeAccountAttributes
+  = DescribeAccountAttributes'
 
 instance AWSRequest DescribeAccountAttributes where
         type Rs DescribeAccountAttributes =
@@ -92,28 +91,32 @@ instance ToQuery DescribeAccountAttributes where
         toQuery = const mempty
 
 -- | /See:/ 'describeAccountAttributesResponse' smart constructor.
-data DescribeAccountAttributesResponse = DescribeAccountAttributesResponse'
-  { _daarsAttributes     :: !(Maybe [AccountAttribute])
-  , _daarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAccountAttributesResponse = DescribeAccountAttributesResponse'{_daarsAttributes
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [AccountAttribute]),
+                                                                            _daarsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeAccountAttributesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daarsAttributes' - The attributes that are currently set for the account.
+-- * 'daarsAttributes' - The attributes that are currently set for the account. 
 --
 -- * 'daarsResponseStatus' - -- | The response status code.
 describeAccountAttributesResponse
     :: Int -- ^ 'daarsResponseStatus'
     -> DescribeAccountAttributesResponse
-describeAccountAttributesResponse pResponseStatus_ =
-  DescribeAccountAttributesResponse'
-    {_daarsAttributes = Nothing, _daarsResponseStatus = pResponseStatus_}
+describeAccountAttributesResponse pResponseStatus_
+  = DescribeAccountAttributesResponse'{_daarsAttributes
+                                         = Nothing,
+                                       _daarsResponseStatus = pResponseStatus_}
 
-
--- | The attributes that are currently set for the account.
+-- | The attributes that are currently set for the account. 
 daarsAttributes :: Lens' DescribeAccountAttributesResponse [AccountAttribute]
 daarsAttributes = lens _daarsAttributes (\ s a -> s{_daarsAttributes = a}) . _Default . _Coerce
 

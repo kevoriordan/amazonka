@@ -46,27 +46,26 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'activateUser' smart constructor.
-data ActivateUser = ActivateUser'
-  { _auAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _auUserId              :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ActivateUser = ActivateUser'{_auAuthenticationToken
+                                  :: !(Maybe (Sensitive Text)),
+                                  _auUserId :: !Text}
+                      deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivateUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'auAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'auUserId' - The ID of the user.
 activateUser
     :: Text -- ^ 'auUserId'
     -> ActivateUser
-activateUser pUserId_ =
-  ActivateUser' {_auAuthenticationToken = Nothing, _auUserId = pUserId_}
+activateUser pUserId_
+  = ActivateUser'{_auAuthenticationToken = Nothing,
+                  _auUserId = pUserId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 auAuthenticationToken :: Lens' ActivateUser (Maybe Text)
 auAuthenticationToken = lens _auAuthenticationToken (\ s a -> s{_auAuthenticationToken = a}) . mapping _Sensitive
 
@@ -106,11 +105,10 @@ instance ToQuery ActivateUser where
         toQuery = const mempty
 
 -- | /See:/ 'activateUserResponse' smart constructor.
-data ActivateUserResponse = ActivateUserResponse'
-  { _aursUser           :: !(Maybe User)
-  , _aursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ActivateUserResponse = ActivateUserResponse'{_aursUser
+                                                  :: !(Maybe User),
+                                                  _aursResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivateUserResponse' with the minimum fields required to make a request.
 --
@@ -122,10 +120,9 @@ data ActivateUserResponse = ActivateUserResponse'
 activateUserResponse
     :: Int -- ^ 'aursResponseStatus'
     -> ActivateUserResponse
-activateUserResponse pResponseStatus_ =
-  ActivateUserResponse'
-    {_aursUser = Nothing, _aursResponseStatus = pResponseStatus_}
-
+activateUserResponse pResponseStatus_
+  = ActivateUserResponse'{_aursUser = Nothing,
+                          _aursResponseStatus = pResponseStatus_}
 
 -- | The user information.
 aursUser :: Lens' ActivateUserResponse (Maybe User)

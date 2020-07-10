@@ -58,11 +58,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'deleteGeoMatchSet' smart constructor.
-data DeleteGeoMatchSet = DeleteGeoMatchSet'
-  { _dgmsGeoMatchSetId :: !Text
-  , _dgmsChangeToken   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGeoMatchSet = DeleteGeoMatchSet'{_dgmsGeoMatchSetId
+                                            :: !Text,
+                                            _dgmsChangeToken :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGeoMatchSet' with the minimum fields required to make a request.
 --
@@ -75,10 +74,10 @@ deleteGeoMatchSet
     :: Text -- ^ 'dgmsGeoMatchSetId'
     -> Text -- ^ 'dgmsChangeToken'
     -> DeleteGeoMatchSet
-deleteGeoMatchSet pGeoMatchSetId_ pChangeToken_ =
-  DeleteGeoMatchSet'
-    {_dgmsGeoMatchSetId = pGeoMatchSetId_, _dgmsChangeToken = pChangeToken_}
-
+deleteGeoMatchSet pGeoMatchSetId_ pChangeToken_
+  = DeleteGeoMatchSet'{_dgmsGeoMatchSetId =
+                         pGeoMatchSetId_,
+                       _dgmsChangeToken = pChangeToken_}
 
 -- | The @GeoMatchSetID@ of the 'GeoMatchSet' that you want to delete. @GeoMatchSetId@ is returned by 'CreateGeoMatchSet' and by 'ListGeoMatchSets' .
 dgmsGeoMatchSetId :: Lens' DeleteGeoMatchSet Text
@@ -124,11 +123,12 @@ instance ToQuery DeleteGeoMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteGeoMatchSetResponse' smart constructor.
-data DeleteGeoMatchSetResponse = DeleteGeoMatchSetResponse'
-  { _dgmsrsChangeToken    :: !(Maybe Text)
-  , _dgmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGeoMatchSetResponse = DeleteGeoMatchSetResponse'{_dgmsrsChangeToken
+                                                            :: !(Maybe Text),
+                                                            _dgmsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteGeoMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +140,10 @@ data DeleteGeoMatchSetResponse = DeleteGeoMatchSetResponse'
 deleteGeoMatchSetResponse
     :: Int -- ^ 'dgmsrsResponseStatus'
     -> DeleteGeoMatchSetResponse
-deleteGeoMatchSetResponse pResponseStatus_ =
-  DeleteGeoMatchSetResponse'
-    {_dgmsrsChangeToken = Nothing, _dgmsrsResponseStatus = pResponseStatus_}
-
+deleteGeoMatchSetResponse pResponseStatus_
+  = DeleteGeoMatchSetResponse'{_dgmsrsChangeToken =
+                                 Nothing,
+                               _dgmsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteGeoMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 dgmsrsChangeToken :: Lens' DeleteGeoMatchSetResponse (Maybe Text)

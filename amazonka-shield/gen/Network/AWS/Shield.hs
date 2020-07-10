@@ -11,9 +11,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS Shield Advanced__
+-- __AWS Shield Advanced__ 
 --
--- This is the /AWS Shield Advanced API Reference/ . This guide is for developers who need detailed information about the AWS Shield Advanced API actions, data types, and errors. For detailed information about AWS WAF and AWS Shield Advanced features and an overview of how to use the AWS WAF and AWS Shield Advanced APIs, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF and AWS Shield Developer Guide> .
+-- This is the /AWS Shield Advanced API Reference/ . This guide is for developers who need detailed information about the AWS Shield Advanced API actions, data types, and errors. For detailed information about AWS WAF and AWS Shield Advanced features and an overview of how to use the AWS WAF and AWS Shield Advanced APIs, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF and AWS Shield Developer Guide> .
 --
 module Network.AWS.Shield
     (
@@ -23,32 +23,44 @@ module Network.AWS.Shield
     -- * Errors
     -- $errors
 
-    -- ** InvalidResourceException
-    , _InvalidResourceException
-
-    -- ** InvalidParameterException
-    , _InvalidParameterException
+    -- ** AccessDeniedForDependencyException
+    , _AccessDeniedForDependencyException
 
     -- ** LimitsExceededException
     , _LimitsExceededException
 
-    -- ** InternalErrorException
-    , _InternalErrorException
+    -- ** InvalidParameterException
+    , _InvalidParameterException
 
-    -- ** ResourceAlreadyExistsException
-    , _ResourceAlreadyExistsException
+    -- ** AccessDeniedException
+    , _AccessDeniedException
 
-    -- ** OptimisticLockException
-    , _OptimisticLockException
+    -- ** InvalidPaginationTokenException
+    , _InvalidPaginationTokenException
 
-    -- ** InvalidOperationException
-    , _InvalidOperationException
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
 
     -- ** LockedSubscriptionException
     , _LockedSubscriptionException
 
-    -- ** ResourceNotFoundException
-    , _ResourceNotFoundException
+    -- ** ResourceAlreadyExistsException
+    , _ResourceAlreadyExistsException
+
+    -- ** InvalidOperationException
+    , _InvalidOperationException
+
+    -- ** InternalErrorException
+    , _InternalErrorException
+
+    -- ** NoAssociatedRoleException
+    , _NoAssociatedRoleException
+
+    -- ** OptimisticLockException
+    , _OptimisticLockException
+
+    -- ** InvalidResourceException
+    , _InvalidResourceException
 
     -- * Waiters
     -- $waiters
@@ -56,35 +68,62 @@ module Network.AWS.Shield
     -- * Operations
     -- $operations
 
-    -- ** CreateSubscription
+    -- ** AssociateDRTLogBucket 
+    , module Network.AWS.Shield.AssociateDRTLogBucket
+
+    -- ** DisassociateDRTRole 
+    , module Network.AWS.Shield.DisassociateDRTRole
+
+    -- ** CreateSubscription 
     , module Network.AWS.Shield.CreateSubscription
 
     -- ** ListProtections (Paginated)
     , module Network.AWS.Shield.ListProtections
 
-    -- ** DeleteSubscription
-    , module Network.AWS.Shield.DeleteSubscription
+    -- ** AssociateDRTRole 
+    , module Network.AWS.Shield.AssociateDRTRole
 
-    -- ** DescribeAttack
+    -- ** UpdateSubscription 
+    , module Network.AWS.Shield.UpdateSubscription
+
+    -- ** DisassociateDRTLogBucket 
+    , module Network.AWS.Shield.DisassociateDRTLogBucket
+
+    -- ** DescribeAttack 
     , module Network.AWS.Shield.DescribeAttack
 
-    -- ** DescribeProtection
+    -- ** UpdateEmergencyContactSettings 
+    , module Network.AWS.Shield.UpdateEmergencyContactSettings
+
+    -- ** DisassociateHealthCheck 
+    , module Network.AWS.Shield.DisassociateHealthCheck
+
+    -- ** DescribeProtection 
     , module Network.AWS.Shield.DescribeProtection
 
-    -- ** ListAttacks
+    -- ** ListAttacks (Paginated)
     , module Network.AWS.Shield.ListAttacks
 
-    -- ** CreateProtection
+    -- ** DescribeEmergencyContactSettings 
+    , module Network.AWS.Shield.DescribeEmergencyContactSettings
+
+    -- ** CreateProtection 
     , module Network.AWS.Shield.CreateProtection
 
-    -- ** DeleteProtection
+    -- ** DeleteProtection 
     , module Network.AWS.Shield.DeleteProtection
 
-    -- ** GetSubscriptionState
+    -- ** GetSubscriptionState 
     , module Network.AWS.Shield.GetSubscriptionState
 
-    -- ** DescribeSubscription
+    -- ** DescribeDRTAccess 
+    , module Network.AWS.Shield.DescribeDRTAccess
+
+    -- ** DescribeSubscription 
     , module Network.AWS.Shield.DescribeSubscription
+
+    -- ** AssociateHealthCheck 
+    , module Network.AWS.Shield.AssociateHealthCheck
 
     -- * Types
 
@@ -93,6 +132,9 @@ module Network.AWS.Shield
 
     -- ** AttackPropertyIdentifier
     , AttackPropertyIdentifier (..)
+
+    -- ** AutoRenew
+    , AutoRenew (..)
 
     -- ** SubResourceType
     , SubResourceType (..)
@@ -144,6 +186,17 @@ module Network.AWS.Shield
     , cValue
     , cName
 
+    -- ** EmergencyContact
+    , EmergencyContact
+    , emergencyContact
+    , ecEmailAddress
+
+    -- ** Limit
+    , Limit
+    , limit
+    , lMax
+    , lType
+
     -- ** Mitigation
     , Mitigation
     , mitigation
@@ -152,6 +205,7 @@ module Network.AWS.Shield
     -- ** Protection
     , Protection
     , protection
+    , pHealthCheckIds
     , pResourceARN
     , pName
     , pId
@@ -169,6 +223,9 @@ module Network.AWS.Shield
     , subscription
     , sTimeCommitmentInSeconds
     , sStartTime
+    , sLimits
+    , sAutoRenew
+    , sEndTime
 
     -- ** SummarizedAttackVector
     , SummarizedAttackVector
@@ -193,17 +250,26 @@ module Network.AWS.Shield
     , trToExclusive
     ) where
 
+import Network.AWS.Shield.AssociateDRTLogBucket
+import Network.AWS.Shield.AssociateDRTRole
+import Network.AWS.Shield.AssociateHealthCheck
 import Network.AWS.Shield.CreateProtection
 import Network.AWS.Shield.CreateSubscription
 import Network.AWS.Shield.DeleteProtection
-import Network.AWS.Shield.DeleteSubscription
 import Network.AWS.Shield.DescribeAttack
+import Network.AWS.Shield.DescribeDRTAccess
+import Network.AWS.Shield.DescribeEmergencyContactSettings
 import Network.AWS.Shield.DescribeProtection
 import Network.AWS.Shield.DescribeSubscription
+import Network.AWS.Shield.DisassociateDRTLogBucket
+import Network.AWS.Shield.DisassociateDRTRole
+import Network.AWS.Shield.DisassociateHealthCheck
 import Network.AWS.Shield.GetSubscriptionState
 import Network.AWS.Shield.ListAttacks
 import Network.AWS.Shield.ListProtections
 import Network.AWS.Shield.Types
+import Network.AWS.Shield.UpdateEmergencyContactSettings
+import Network.AWS.Shield.UpdateSubscription
 import Network.AWS.Shield.Waiters
 
 {- $errors

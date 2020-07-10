@@ -48,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeUser' smart constructor.
-data DescribeUser = DescribeUser'
-  { _duUsername :: !Text
-  , _duBrokerId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUser = DescribeUser'{_duUsername ::
+                                  !Text,
+                                  _duBrokerId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeUser' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ describeUser
     :: Text -- ^ 'duUsername'
     -> Text -- ^ 'duBrokerId'
     -> DescribeUser
-describeUser pUsername_ pBrokerId_ =
-  DescribeUser' {_duUsername = pUsername_, _duBrokerId = pBrokerId_}
-
+describeUser pUsername_ pBrokerId_
+  = DescribeUser'{_duUsername = pUsername_,
+                  _duBrokerId = pBrokerId_}
 
 -- | The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
 duUsername :: Lens' DescribeUser Text
@@ -111,15 +110,18 @@ instance ToQuery DescribeUser where
         toQuery = const mempty
 
 -- | /See:/ 'describeUserResponse' smart constructor.
-data DescribeUserResponse = DescribeUserResponse'
-  { _dursGroups         :: !(Maybe [Text])
-  , _dursPending        :: !(Maybe UserPendingChanges)
-  , _dursConsoleAccess  :: !(Maybe Bool)
-  , _dursUsername       :: !(Maybe Text)
-  , _dursBrokerId       :: !(Maybe Text)
-  , _dursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUserResponse = DescribeUserResponse'{_dursGroups
+                                                  :: !(Maybe [Text]),
+                                                  _dursPending ::
+                                                  !(Maybe UserPendingChanges),
+                                                  _dursConsoleAccess ::
+                                                  !(Maybe Bool),
+                                                  _dursUsername ::
+                                                  !(Maybe Text),
+                                                  _dursBrokerId ::
+                                                  !(Maybe Text),
+                                                  _dursResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeUserResponse' with the minimum fields required to make a request.
 --
@@ -139,16 +141,11 @@ data DescribeUserResponse = DescribeUserResponse'
 describeUserResponse
     :: Int -- ^ 'dursResponseStatus'
     -> DescribeUserResponse
-describeUserResponse pResponseStatus_ =
-  DescribeUserResponse'
-    { _dursGroups = Nothing
-    , _dursPending = Nothing
-    , _dursConsoleAccess = Nothing
-    , _dursUsername = Nothing
-    , _dursBrokerId = Nothing
-    , _dursResponseStatus = pResponseStatus_
-    }
-
+describeUserResponse pResponseStatus_
+  = DescribeUserResponse'{_dursGroups = Nothing,
+                          _dursPending = Nothing, _dursConsoleAccess = Nothing,
+                          _dursUsername = Nothing, _dursBrokerId = Nothing,
+                          _dursResponseStatus = pResponseStatus_}
 
 -- | The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
 dursGroups :: Lens' DescribeUserResponse [Text]

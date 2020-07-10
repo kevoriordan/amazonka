@@ -40,6 +40,7 @@ module Network.AWS.APIGateway.GetUsagePlan
     , upQuota
     , upDescription
     , upProductCode
+    , upTags
     ) where
 
 import Network.AWS.APIGateway.Types
@@ -54,10 +55,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getUsagePlan' smart constructor.
-newtype GetUsagePlan = GetUsagePlan'
-  { _gupUsagePlanId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetUsagePlan = GetUsagePlan'{_gupUsagePlanId
+                                     :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetUsagePlan' with the minimum fields required to make a request.
 --
@@ -67,8 +67,8 @@ newtype GetUsagePlan = GetUsagePlan'
 getUsagePlan
     :: Text -- ^ 'gupUsagePlanId'
     -> GetUsagePlan
-getUsagePlan pUsagePlanId_ = GetUsagePlan' {_gupUsagePlanId = pUsagePlanId_}
-
+getUsagePlan pUsagePlanId_
+  = GetUsagePlan'{_gupUsagePlanId = pUsagePlanId_}
 
 -- | [Required] The identifier of the 'UsagePlan' resource to be retrieved.
 gupUsagePlanId :: Lens' GetUsagePlan Text

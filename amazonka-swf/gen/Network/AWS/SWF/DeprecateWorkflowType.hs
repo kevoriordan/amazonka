@@ -21,7 +21,7 @@
 -- Deprecates the specified /workflow type/ . After a workflow type has been deprecated, you cannot create new executions of that type. Executions that were started before the type was deprecated continues to run. A deprecated workflow type may still be used when calling visibility actions.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -39,7 +39,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.DeprecateWorkflowType
     (
@@ -63,11 +63,12 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'deprecateWorkflowType' smart constructor.
-data DeprecateWorkflowType = DeprecateWorkflowType'
-  { _dDomain       :: !Text
-  , _dWorkflowType :: !WorkflowType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeprecateWorkflowType = DeprecateWorkflowType'{_dDomain
+                                                    :: !Text,
+                                                    _dWorkflowType ::
+                                                    !WorkflowType}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeprecateWorkflowType' with the minimum fields required to make a request.
 --
@@ -80,9 +81,9 @@ deprecateWorkflowType
     :: Text -- ^ 'dDomain'
     -> WorkflowType -- ^ 'dWorkflowType'
     -> DeprecateWorkflowType
-deprecateWorkflowType pDomain_ pWorkflowType_ =
-  DeprecateWorkflowType' {_dDomain = pDomain_, _dWorkflowType = pWorkflowType_}
-
+deprecateWorkflowType pDomain_ pWorkflowType_
+  = DeprecateWorkflowType'{_dDomain = pDomain_,
+                           _dWorkflowType = pWorkflowType_}
 
 -- | The name of the domain in which the workflow type is registered.
 dDomain :: Lens' DeprecateWorkflowType Text
@@ -126,16 +127,15 @@ instance ToQuery DeprecateWorkflowType where
         toQuery = const mempty
 
 -- | /See:/ 'deprecateWorkflowTypeResponse' smart constructor.
-data DeprecateWorkflowTypeResponse =
-  DeprecateWorkflowTypeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeprecateWorkflowTypeResponse = DeprecateWorkflowTypeResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeprecateWorkflowTypeResponse' with the minimum fields required to make a request.
 --
 deprecateWorkflowTypeResponse
     :: DeprecateWorkflowTypeResponse
-deprecateWorkflowTypeResponse = DeprecateWorkflowTypeResponse'
-
+deprecateWorkflowTypeResponse
+  = DeprecateWorkflowTypeResponse'
 
 instance NFData DeprecateWorkflowTypeResponse where

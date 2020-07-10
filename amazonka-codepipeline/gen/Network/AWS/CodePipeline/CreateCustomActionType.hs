@@ -29,6 +29,7 @@ module Network.AWS.CodePipeline.CreateCustomActionType
     -- * Request Lenses
     , ccatSettings
     , ccatConfigurationProperties
+    , ccatTags
     , ccatCategory
     , ccatProvider
     , ccatVersion
@@ -39,6 +40,7 @@ module Network.AWS.CodePipeline.CreateCustomActionType
     , createCustomActionTypeResponse
     , CreateCustomActionTypeResponse
     -- * Response Lenses
+    , ccatrsTags
     , ccatrsResponseStatus
     , ccatrsActionType
     ) where
@@ -55,24 +57,36 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createCustomActionType' smart constructor.
-data CreateCustomActionType = CreateCustomActionType'
-  { _ccatSettings                :: !(Maybe ActionTypeSettings)
-  , _ccatConfigurationProperties :: !(Maybe [ActionConfigurationProperty])
-  , _ccatCategory                :: !ActionCategory
-  , _ccatProvider                :: !Text
-  , _ccatVersion                 :: !Text
-  , _ccatInputArtifactDetails    :: !ArtifactDetails
-  , _ccatOutputArtifactDetails   :: !ArtifactDetails
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCustomActionType = CreateCustomActionType'{_ccatSettings
+                                                      ::
+                                                      !(Maybe
+                                                          ActionTypeSettings),
+                                                      _ccatConfigurationProperties
+                                                      ::
+                                                      !(Maybe
+                                                          [ActionConfigurationProperty]),
+                                                      _ccatTags ::
+                                                      !(Maybe [Tag]),
+                                                      _ccatCategory ::
+                                                      !ActionCategory,
+                                                      _ccatProvider :: !Text,
+                                                      _ccatVersion :: !Text,
+                                                      _ccatInputArtifactDetails
+                                                      :: !ArtifactDetails,
+                                                      _ccatOutputArtifactDetails
+                                                      :: !ArtifactDetails}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateCustomActionType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccatSettings' - Returns information about the settings for an action type.
+-- * 'ccatSettings' - URLs that provide users information about this custom action.
 --
 -- * 'ccatConfigurationProperties' - The configuration properties for the custom action.
+--
+-- * 'ccatTags' - The tags for the custom action.
 --
 -- * 'ccatCategory' - The category of the custom action, such as a build action or a test action.
 --
@@ -90,25 +104,29 @@ createCustomActionType
     -> ArtifactDetails -- ^ 'ccatInputArtifactDetails'
     -> ArtifactDetails -- ^ 'ccatOutputArtifactDetails'
     -> CreateCustomActionType
-createCustomActionType pCategory_ pProvider_ pVersion_ pInputArtifactDetails_ pOutputArtifactDetails_ =
-  CreateCustomActionType'
-    { _ccatSettings = Nothing
-    , _ccatConfigurationProperties = Nothing
-    , _ccatCategory = pCategory_
-    , _ccatProvider = pProvider_
-    , _ccatVersion = pVersion_
-    , _ccatInputArtifactDetails = pInputArtifactDetails_
-    , _ccatOutputArtifactDetails = pOutputArtifactDetails_
-    }
+createCustomActionType pCategory_ pProvider_
+  pVersion_ pInputArtifactDetails_
+  pOutputArtifactDetails_
+  = CreateCustomActionType'{_ccatSettings = Nothing,
+                            _ccatConfigurationProperties = Nothing,
+                            _ccatTags = Nothing, _ccatCategory = pCategory_,
+                            _ccatProvider = pProvider_,
+                            _ccatVersion = pVersion_,
+                            _ccatInputArtifactDetails = pInputArtifactDetails_,
+                            _ccatOutputArtifactDetails =
+                              pOutputArtifactDetails_}
 
-
--- | Returns information about the settings for an action type.
+-- | URLs that provide users information about this custom action.
 ccatSettings :: Lens' CreateCustomActionType (Maybe ActionTypeSettings)
 ccatSettings = lens _ccatSettings (\ s a -> s{_ccatSettings = a})
 
 -- | The configuration properties for the custom action.
 ccatConfigurationProperties :: Lens' CreateCustomActionType [ActionConfigurationProperty]
 ccatConfigurationProperties = lens _ccatConfigurationProperties (\ s a -> s{_ccatConfigurationProperties = a}) . _Default . _Coerce
+
+-- | The tags for the custom action.
+ccatTags :: Lens' CreateCustomActionType [Tag]
+ccatTags = lens _ccatTags (\ s a -> s{_ccatTags = a}) . _Default . _Coerce
 
 -- | The category of the custom action, such as a build action or a test action.
 ccatCategory :: Lens' CreateCustomActionType ActionCategory
@@ -138,7 +156,8 @@ instance AWSRequest CreateCustomActionType where
           = receiveJSON
               (\ s h x ->
                  CreateCustomActionTypeResponse' <$>
-                   (pure (fromEnum s)) <*> (x .:> "actionType"))
+                   (x .?> "tags" .!@ mempty) <*> (pure (fromEnum s)) <*>
+                     (x .:> "actionType"))
 
 instance Hashable CreateCustomActionType where
 
@@ -161,6 +180,7 @@ instance ToJSON CreateCustomActionType where
                  [("settings" .=) <$> _ccatSettings,
                   ("configurationProperties" .=) <$>
                     _ccatConfigurationProperties,
+                  ("tags" .=) <$> _ccatTags,
                   Just ("category" .= _ccatCategory),
                   Just ("provider" .= _ccatProvider),
                   Just ("version" .= _ccatVersion),
@@ -177,20 +197,28 @@ instance ToPath CreateCustomActionType where
 instance ToQuery CreateCustomActionType where
         toQuery = const mempty
 
--- | Represents the output of a CreateCustomActionType operation.
+-- | Represents the output of a @CreateCustomActionType@ operation.
 --
 --
 --
 -- /See:/ 'createCustomActionTypeResponse' smart constructor.
-data CreateCustomActionTypeResponse = CreateCustomActionTypeResponse'
-  { _ccatrsResponseStatus :: !Int
-  , _ccatrsActionType     :: !ActionType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCustomActionTypeResponse = CreateCustomActionTypeResponse'{_ccatrsTags
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Tag]),
+                                                                      _ccatrsResponseStatus
+                                                                      :: !Int,
+                                                                      _ccatrsActionType
+                                                                      ::
+                                                                      !ActionType}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateCustomActionTypeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccatrsTags' - Specifies the tags applied to the custom action.
 --
 -- * 'ccatrsResponseStatus' - -- | The response status code.
 --
@@ -199,10 +227,16 @@ createCustomActionTypeResponse
     :: Int -- ^ 'ccatrsResponseStatus'
     -> ActionType -- ^ 'ccatrsActionType'
     -> CreateCustomActionTypeResponse
-createCustomActionTypeResponse pResponseStatus_ pActionType_ =
-  CreateCustomActionTypeResponse'
-    {_ccatrsResponseStatus = pResponseStatus_, _ccatrsActionType = pActionType_}
+createCustomActionTypeResponse pResponseStatus_
+  pActionType_
+  = CreateCustomActionTypeResponse'{_ccatrsTags =
+                                      Nothing,
+                                    _ccatrsResponseStatus = pResponseStatus_,
+                                    _ccatrsActionType = pActionType_}
 
+-- | Specifies the tags applied to the custom action.
+ccatrsTags :: Lens' CreateCustomActionTypeResponse [Tag]
+ccatrsTags = lens _ccatrsTags (\ s a -> s{_ccatrsTags = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
 ccatrsResponseStatus :: Lens' CreateCustomActionTypeResponse Int

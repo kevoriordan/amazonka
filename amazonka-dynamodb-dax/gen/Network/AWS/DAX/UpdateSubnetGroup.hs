@@ -47,12 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateSubnetGroup' smart constructor.
-data UpdateSubnetGroup = UpdateSubnetGroup'
-  { _usgSubnetIds       :: !(Maybe [Text])
-  , _usgDescription     :: !(Maybe Text)
-  , _usgSubnetGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSubnetGroup = UpdateSubnetGroup'{_usgSubnetIds
+                                            :: !(Maybe [Text]),
+                                            _usgDescription :: !(Maybe Text),
+                                            _usgSubnetGroupName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSubnetGroup' with the minimum fields required to make a request.
 --
@@ -66,13 +65,10 @@ data UpdateSubnetGroup = UpdateSubnetGroup'
 updateSubnetGroup
     :: Text -- ^ 'usgSubnetGroupName'
     -> UpdateSubnetGroup
-updateSubnetGroup pSubnetGroupName_ =
-  UpdateSubnetGroup'
-    { _usgSubnetIds = Nothing
-    , _usgDescription = Nothing
-    , _usgSubnetGroupName = pSubnetGroupName_
-    }
-
+updateSubnetGroup pSubnetGroupName_
+  = UpdateSubnetGroup'{_usgSubnetIds = Nothing,
+                       _usgDescription = Nothing,
+                       _usgSubnetGroupName = pSubnetGroupName_}
 
 -- | A list of subnet IDs in the subnet group.
 usgSubnetIds :: Lens' UpdateSubnetGroup [Text]
@@ -123,11 +119,14 @@ instance ToQuery UpdateSubnetGroup where
         toQuery = const mempty
 
 -- | /See:/ 'updateSubnetGroupResponse' smart constructor.
-data UpdateSubnetGroupResponse = UpdateSubnetGroupResponse'
-  { _usgrsSubnetGroup    :: !(Maybe SubnetGroup)
-  , _usgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSubnetGroupResponse = UpdateSubnetGroupResponse'{_usgrsSubnetGroup
+                                                            ::
+                                                            !(Maybe
+                                                                SubnetGroup),
+                                                            _usgrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +138,10 @@ data UpdateSubnetGroupResponse = UpdateSubnetGroupResponse'
 updateSubnetGroupResponse
     :: Int -- ^ 'usgrsResponseStatus'
     -> UpdateSubnetGroupResponse
-updateSubnetGroupResponse pResponseStatus_ =
-  UpdateSubnetGroupResponse'
-    {_usgrsSubnetGroup = Nothing, _usgrsResponseStatus = pResponseStatus_}
-
+updateSubnetGroupResponse pResponseStatus_
+  = UpdateSubnetGroupResponse'{_usgrsSubnetGroup =
+                                 Nothing,
+                               _usgrsResponseStatus = pResponseStatus_}
 
 -- | The subnet group that has been modified.
 usgrsSubnetGroup :: Lens' UpdateSubnetGroupResponse (Maybe SubnetGroup)

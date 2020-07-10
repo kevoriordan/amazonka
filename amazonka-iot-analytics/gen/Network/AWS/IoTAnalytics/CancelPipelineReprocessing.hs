@@ -45,11 +45,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'cancelPipelineReprocessing' smart constructor.
-data CancelPipelineReprocessing = CancelPipelineReprocessing'
-  { _cprPipelineName   :: !Text
-  , _cprReprocessingId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelPipelineReprocessing = CancelPipelineReprocessing'{_cprPipelineName
+                                                              :: !Text,
+                                                              _cprReprocessingId
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CancelPipelineReprocessing' with the minimum fields required to make a request.
 --
@@ -62,10 +63,11 @@ cancelPipelineReprocessing
     :: Text -- ^ 'cprPipelineName'
     -> Text -- ^ 'cprReprocessingId'
     -> CancelPipelineReprocessing
-cancelPipelineReprocessing pPipelineName_ pReprocessingId_ =
-  CancelPipelineReprocessing'
-    {_cprPipelineName = pPipelineName_, _cprReprocessingId = pReprocessingId_}
-
+cancelPipelineReprocessing pPipelineName_
+  pReprocessingId_
+  = CancelPipelineReprocessing'{_cprPipelineName =
+                                  pPipelineName_,
+                                _cprReprocessingId = pReprocessingId_}
 
 -- | The name of pipeline for which data reprocessing is canceled.
 cprPipelineName :: Lens' CancelPipelineReprocessing Text
@@ -102,10 +104,11 @@ instance ToQuery CancelPipelineReprocessing where
         toQuery = const mempty
 
 -- | /See:/ 'cancelPipelineReprocessingResponse' smart constructor.
-newtype CancelPipelineReprocessingResponse = CancelPipelineReprocessingResponse'
-  { _cprrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelPipelineReprocessingResponse = CancelPipelineReprocessingResponse'{_cprrsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'CancelPipelineReprocessingResponse' with the minimum fields required to make a request.
 --
@@ -115,9 +118,9 @@ newtype CancelPipelineReprocessingResponse = CancelPipelineReprocessingResponse'
 cancelPipelineReprocessingResponse
     :: Int -- ^ 'cprrsResponseStatus'
     -> CancelPipelineReprocessingResponse
-cancelPipelineReprocessingResponse pResponseStatus_ =
-  CancelPipelineReprocessingResponse' {_cprrsResponseStatus = pResponseStatus_}
-
+cancelPipelineReprocessingResponse pResponseStatus_
+  = CancelPipelineReprocessingResponse'{_cprrsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 cprrsResponseStatus :: Lens' CancelPipelineReprocessingResponse Int

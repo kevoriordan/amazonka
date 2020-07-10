@@ -21,7 +21,7 @@
 -- Retrieves information about the specified server certificate stored in IAM.
 --
 --
--- For more information about working with server certificates, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html Working with Server Certificates> in the /IAM User Guide/ . This topic includes a list of AWS services that can use the server certificates that you manage with IAM.
+-- For more information about working with server certificates, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html Working with Server Certificates> in the /IAM User Guide/ . This topic includes a list of AWS services that can use the server certificates that you manage with IAM.
 --
 module Network.AWS.IAM.GetServerCertificate
     (
@@ -47,24 +47,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getServerCertificate' smart constructor.
-newtype GetServerCertificate = GetServerCertificate'
-  { _gscServerCertificateName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetServerCertificate = GetServerCertificate'{_gscServerCertificateName
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetServerCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gscServerCertificateName' - The name of the server certificate you want to retrieve information about. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'gscServerCertificateName' - The name of the server certificate you want to retrieve information about. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 getServerCertificate
     :: Text -- ^ 'gscServerCertificateName'
     -> GetServerCertificate
-getServerCertificate pServerCertificateName_ =
-  GetServerCertificate' {_gscServerCertificateName = pServerCertificateName_}
+getServerCertificate pServerCertificateName_
+  = GetServerCertificate'{_gscServerCertificateName =
+                            pServerCertificateName_}
 
-
--- | The name of the server certificate you want to retrieve information about. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name of the server certificate you want to retrieve information about. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 gscServerCertificateName :: Lens' GetServerCertificate Text
 gscServerCertificateName = lens _gscServerCertificateName (\ s a -> s{_gscServerCertificateName = a})
 
@@ -95,16 +95,18 @@ instance ToQuery GetServerCertificate where
                "Version" =: ("2010-05-08" :: ByteString),
                "ServerCertificateName" =: _gscServerCertificateName]
 
--- | Contains the response to a successful 'GetServerCertificate' request.
+-- | Contains the response to a successful 'GetServerCertificate' request. 
 --
 --
 --
 -- /See:/ 'getServerCertificateResponse' smart constructor.
-data GetServerCertificateResponse = GetServerCertificateResponse'
-  { _gscrsResponseStatus    :: !Int
-  , _gscrsServerCertificate :: !ServerCertificate
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetServerCertificateResponse = GetServerCertificateResponse'{_gscrsResponseStatus
+                                                                  :: !Int,
+                                                                  _gscrsServerCertificate
+                                                                  ::
+                                                                  !ServerCertificate}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetServerCertificateResponse' with the minimum fields required to make a request.
 --
@@ -117,12 +119,11 @@ getServerCertificateResponse
     :: Int -- ^ 'gscrsResponseStatus'
     -> ServerCertificate -- ^ 'gscrsServerCertificate'
     -> GetServerCertificateResponse
-getServerCertificateResponse pResponseStatus_ pServerCertificate_ =
-  GetServerCertificateResponse'
-    { _gscrsResponseStatus = pResponseStatus_
-    , _gscrsServerCertificate = pServerCertificate_
-    }
-
+getServerCertificateResponse pResponseStatus_
+  pServerCertificate_
+  = GetServerCertificateResponse'{_gscrsResponseStatus
+                                    = pResponseStatus_,
+                                  _gscrsServerCertificate = pServerCertificate_}
 
 -- | -- | The response status code.
 gscrsResponseStatus :: Lens' GetServerCertificateResponse Int

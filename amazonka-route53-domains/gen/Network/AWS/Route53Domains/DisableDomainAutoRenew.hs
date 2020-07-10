@@ -44,10 +44,10 @@ import Network.AWS.Route53Domains.Types
 import Network.AWS.Route53Domains.Types.Product
 
 -- | /See:/ 'disableDomainAutoRenew' smart constructor.
-newtype DisableDomainAutoRenew = DisableDomainAutoRenew'
-  { _ddarDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableDomainAutoRenew = DisableDomainAutoRenew'{_ddarDomainName
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DisableDomainAutoRenew' with the minimum fields required to make a request.
 --
@@ -57,9 +57,9 @@ newtype DisableDomainAutoRenew = DisableDomainAutoRenew'
 disableDomainAutoRenew
     :: Text -- ^ 'ddarDomainName'
     -> DisableDomainAutoRenew
-disableDomainAutoRenew pDomainName_ =
-  DisableDomainAutoRenew' {_ddarDomainName = pDomainName_}
-
+disableDomainAutoRenew pDomainName_
+  = DisableDomainAutoRenew'{_ddarDomainName =
+                              pDomainName_}
 
 -- | The name of the domain that you want to disable automatic renewal for.
 ddarDomainName :: Lens' DisableDomainAutoRenew Text
@@ -101,10 +101,10 @@ instance ToQuery DisableDomainAutoRenew where
         toQuery = const mempty
 
 -- | /See:/ 'disableDomainAutoRenewResponse' smart constructor.
-newtype DisableDomainAutoRenewResponse = DisableDomainAutoRenewResponse'
-  { _ddarrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableDomainAutoRenewResponse = DisableDomainAutoRenewResponse'{_ddarrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DisableDomainAutoRenewResponse' with the minimum fields required to make a request.
 --
@@ -114,9 +114,9 @@ newtype DisableDomainAutoRenewResponse = DisableDomainAutoRenewResponse'
 disableDomainAutoRenewResponse
     :: Int -- ^ 'ddarrsResponseStatus'
     -> DisableDomainAutoRenewResponse
-disableDomainAutoRenewResponse pResponseStatus_ =
-  DisableDomainAutoRenewResponse' {_ddarrsResponseStatus = pResponseStatus_}
-
+disableDomainAutoRenewResponse pResponseStatus_
+  = DisableDomainAutoRenewResponse'{_ddarrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 ddarrsResponseStatus :: Lens' DisableDomainAutoRenewResponse Int

@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Disassociates the current GuardDuty member account from its master account.
+--
+--
 module Network.AWS.GuardDuty.DisassociateFromMasterAccount
     (
     -- * Creating a Request
@@ -42,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateFromMasterAccount' smart constructor.
-newtype DisassociateFromMasterAccount = DisassociateFromMasterAccount'
-  { _dfmaDetectorId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateFromMasterAccount = DisassociateFromMasterAccount'{_dfmaDetectorId
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DisassociateFromMasterAccount' with the minimum fields required to make a request.
 --
@@ -55,9 +57,9 @@ newtype DisassociateFromMasterAccount = DisassociateFromMasterAccount'
 disassociateFromMasterAccount
     :: Text -- ^ 'dfmaDetectorId'
     -> DisassociateFromMasterAccount
-disassociateFromMasterAccount pDetectorId_ =
-  DisassociateFromMasterAccount' {_dfmaDetectorId = pDetectorId_}
-
+disassociateFromMasterAccount pDetectorId_
+  = DisassociateFromMasterAccount'{_dfmaDetectorId =
+                                     pDetectorId_}
 
 -- | The unique ID of the detector of the GuardDuty member account.
 dfmaDetectorId :: Lens' DisassociateFromMasterAccount Text
@@ -99,10 +101,12 @@ instance ToQuery DisassociateFromMasterAccount where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateFromMasterAccountResponse' smart constructor.
-newtype DisassociateFromMasterAccountResponse = DisassociateFromMasterAccountResponse'
-  { _dfmarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateFromMasterAccountResponse = DisassociateFromMasterAccountResponse'{_dfmarsResponseStatus
+                                                                                       ::
+                                                                                       Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DisassociateFromMasterAccountResponse' with the minimum fields required to make a request.
 --
@@ -112,10 +116,10 @@ newtype DisassociateFromMasterAccountResponse = DisassociateFromMasterAccountRes
 disassociateFromMasterAccountResponse
     :: Int -- ^ 'dfmarsResponseStatus'
     -> DisassociateFromMasterAccountResponse
-disassociateFromMasterAccountResponse pResponseStatus_ =
-  DisassociateFromMasterAccountResponse'
-    {_dfmarsResponseStatus = pResponseStatus_}
-
+disassociateFromMasterAccountResponse
+  pResponseStatus_
+  = DisassociateFromMasterAccountResponse'{_dfmarsResponseStatus
+                                             = pResponseStatus_}
 
 -- | -- | The response status code.
 dfmarsResponseStatus :: Lens' DisassociateFromMasterAccountResponse Int

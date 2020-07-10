@@ -21,6 +21,8 @@
 -- Describes a budget.
 --
 --
+-- /Important:/ The Request Syntax section shows the @BudgetLimit@ syntax. For @PlannedBudgetLimits@ , see the <https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples Examples> section. 
+--
 module Network.AWS.Budgets.DescribeBudget
     (
     -- * Creating a Request
@@ -45,16 +47,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request of DescribeBudget
+-- | Request of DescribeBudget 
 --
 --
 --
 -- /See:/ 'describeBudget' smart constructor.
-data DescribeBudget = DescribeBudget'
-  { _desAccountId  :: !Text
-  , _desBudgetName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBudget = DescribeBudget'{_desAccountId
+                                      :: !Text,
+                                      _desBudgetName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeBudget' with the minimum fields required to make a request.
 --
@@ -67,9 +68,9 @@ describeBudget
     :: Text -- ^ 'desAccountId'
     -> Text -- ^ 'desBudgetName'
     -> DescribeBudget
-describeBudget pAccountId_ pBudgetName_ =
-  DescribeBudget' {_desAccountId = pAccountId_, _desBudgetName = pBudgetName_}
-
+describeBudget pAccountId_ pBudgetName_
+  = DescribeBudget'{_desAccountId = pAccountId_,
+                    _desBudgetName = pBudgetName_}
 
 -- | The @accountId@ that is associated with the budget that you want a description of.
 desAccountId :: Lens' DescribeBudget Text
@@ -115,16 +116,17 @@ instance ToPath DescribeBudget where
 instance ToQuery DescribeBudget where
         toQuery = const mempty
 
--- | Response of DescribeBudget
+-- | Response of DescribeBudget 
 --
 --
 --
 -- /See:/ 'describeBudgetResponse' smart constructor.
-data DescribeBudgetResponse = DescribeBudgetResponse'
-  { _desrsBudget         :: !(Maybe Budget)
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBudgetResponse = DescribeBudgetResponse'{_desrsBudget
+                                                      :: !(Maybe Budget),
+                                                      _desrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeBudgetResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +138,9 @@ data DescribeBudgetResponse = DescribeBudgetResponse'
 describeBudgetResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeBudgetResponse
-describeBudgetResponse pResponseStatus_ =
-  DescribeBudgetResponse'
-    {_desrsBudget = Nothing, _desrsResponseStatus = pResponseStatus_}
-
+describeBudgetResponse pResponseStatus_
+  = DescribeBudgetResponse'{_desrsBudget = Nothing,
+                            _desrsResponseStatus = pResponseStatus_}
 
 -- | The description of the budget.
 desrsBudget :: Lens' DescribeBudgetResponse (Maybe Budget)

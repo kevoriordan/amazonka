@@ -18,54 +18,44 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the inbound connection permissions for a fleet. Connection permissions include a range of IP addresses and port settings that incoming traffic can use to access server processes in the fleet. To get a fleet's inbound connection permissions, specify a fleet ID. If successful, a collection of 'IpPermission' objects is returned for the requested fleet ID. If the requested fleet has been deleted, the result set is empty.
+-- Retrieves a fleet's inbound connection permissions. Connection permissions specify the range of IP addresses and port settings that incoming traffic can use to access server processes in the fleet. Game sessions that are running on instances in the fleet use connections that fall in this range. 
 --
 --
--- Fleet-related operations include:
+-- To get a fleet's inbound connection permissions, specify the fleet's unique identifier. If successful, a collection of 'IpPermission' objects is returned for the requested fleet ID. If the requested fleet has been deleted, the result set is empty.
 --
---     * 'CreateFleet'
+-- __Learn more__ 
 --
---     * 'ListFleets'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html Setting up GameLift Fleets> 
 --
---     * 'DeleteFleet'
+-- __Related operations__ 
+--
+--     * 'CreateFleet' 
+--
+--     * 'ListFleets' 
+--
+--     * 'DeleteFleet' 
 --
 --     * Describe fleets:
 --
---     * 'DescribeFleetAttributes'
+--     * 'DescribeFleetAttributes' 
 --
---     * 'DescribeFleetCapacity'
+--     * 'DescribeFleetCapacity' 
 --
---     * 'DescribeFleetPortSettings'
+--     * 'DescribeFleetPortSettings' 
 --
---     * 'DescribeFleetUtilization'
+--     * 'DescribeFleetUtilization' 
 --
---     * 'DescribeRuntimeConfiguration'
+--     * 'DescribeRuntimeConfiguration' 
 --
---     * 'DescribeEC2InstanceLimits'
+--     * 'DescribeEC2InstanceLimits' 
 --
---     * 'DescribeFleetEvents'
---
---
---
---     * Update fleets:
---
---     * 'UpdateFleetAttributes'
---
---     * 'UpdateFleetCapacity'
---
---     * 'UpdateFleetPortSettings'
---
---     * 'UpdateRuntimeConfiguration'
+--     * 'DescribeFleetEvents' 
 --
 --
 --
---     * Manage fleet actions:
+--     * 'UpdateFleetAttributes' 
 --
---     * 'StartFleetActions'
---
---     * 'StopFleetActions'
---
---
+--     * 'StartFleetActions' or 'StopFleetActions' 
 --
 --
 --
@@ -97,24 +87,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeFleetPortSettings' smart constructor.
-newtype DescribeFleetPortSettings = DescribeFleetPortSettings'
-  { _dfpsFleetId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeFleetPortSettings = DescribeFleetPortSettings'{_dfpsFleetId
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeFleetPortSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfpsFleetId' - Unique identifier for a fleet to retrieve port settings for.
+-- * 'dfpsFleetId' - A unique identifier for a fleet to retrieve port settings for. You can use either the fleet ID or ARN value.
 describeFleetPortSettings
     :: Text -- ^ 'dfpsFleetId'
     -> DescribeFleetPortSettings
-describeFleetPortSettings pFleetId_ =
-  DescribeFleetPortSettings' {_dfpsFleetId = pFleetId_}
+describeFleetPortSettings pFleetId_
+  = DescribeFleetPortSettings'{_dfpsFleetId =
+                                 pFleetId_}
 
-
--- | Unique identifier for a fleet to retrieve port settings for.
+-- | A unique identifier for a fleet to retrieve port settings for. You can use either the fleet ID or ARN value.
 dfpsFleetId :: Lens' DescribeFleetPortSettings Text
 dfpsFleetId = lens _dfpsFleetId (\ s a -> s{_dfpsFleetId = a})
 
@@ -158,30 +148,32 @@ instance ToQuery DescribeFleetPortSettings where
 --
 --
 -- /See:/ 'describeFleetPortSettingsResponse' smart constructor.
-data DescribeFleetPortSettingsResponse = DescribeFleetPortSettingsResponse'
-  { _dfpsrsInboundPermissions :: !(Maybe [IPPermission])
-  , _dfpsrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleetPortSettingsResponse = DescribeFleetPortSettingsResponse'{_dfpsrsInboundPermissions
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [IPPermission]),
+                                                                            _dfpsrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeFleetPortSettingsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfpsrsInboundPermissions' - Object that contains port settings for the requested fleet ID.
+-- * 'dfpsrsInboundPermissions' - The port settings for the requested fleet ID.
 --
 -- * 'dfpsrsResponseStatus' - -- | The response status code.
 describeFleetPortSettingsResponse
     :: Int -- ^ 'dfpsrsResponseStatus'
     -> DescribeFleetPortSettingsResponse
-describeFleetPortSettingsResponse pResponseStatus_ =
-  DescribeFleetPortSettingsResponse'
-    { _dfpsrsInboundPermissions = Nothing
-    , _dfpsrsResponseStatus = pResponseStatus_
-    }
+describeFleetPortSettingsResponse pResponseStatus_
+  = DescribeFleetPortSettingsResponse'{_dfpsrsInboundPermissions
+                                         = Nothing,
+                                       _dfpsrsResponseStatus = pResponseStatus_}
 
-
--- | Object that contains port settings for the requested fleet ID.
+-- | The port settings for the requested fleet ID.
 dfpsrsInboundPermissions :: Lens' DescribeFleetPortSettingsResponse [IPPermission]
 dfpsrsInboundPermissions = lens _dfpsrsInboundPermissions (\ s a -> s{_dfpsrsInboundPermissions = a}) . _Default . _Coerce
 

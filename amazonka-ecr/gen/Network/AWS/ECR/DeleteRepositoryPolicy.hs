@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the repository policy from a specified repository.
+-- Deletes the repository policy associated with the specified repository.
 --
 --
 module Network.AWS.ECR.DeleteRepositoryPolicy
@@ -48,11 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteRepositoryPolicy' smart constructor.
-data DeleteRepositoryPolicy = DeleteRepositoryPolicy'
-  { _drpRegistryId     :: !(Maybe Text)
-  , _drpRepositoryName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRepositoryPolicy = DeleteRepositoryPolicy'{_drpRegistryId
+                                                      :: !(Maybe Text),
+                                                      _drpRepositoryName ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteRepositoryPolicy' with the minimum fields required to make a request.
 --
@@ -64,10 +65,9 @@ data DeleteRepositoryPolicy = DeleteRepositoryPolicy'
 deleteRepositoryPolicy
     :: Text -- ^ 'drpRepositoryName'
     -> DeleteRepositoryPolicy
-deleteRepositoryPolicy pRepositoryName_ =
-  DeleteRepositoryPolicy'
-    {_drpRegistryId = Nothing, _drpRepositoryName = pRepositoryName_}
-
+deleteRepositoryPolicy pRepositoryName_
+  = DeleteRepositoryPolicy'{_drpRegistryId = Nothing,
+                            _drpRepositoryName = pRepositoryName_}
 
 -- | The AWS account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.
 drpRegistryId :: Lens' DeleteRepositoryPolicy (Maybe Text)
@@ -117,13 +117,22 @@ instance ToQuery DeleteRepositoryPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deleteRepositoryPolicyResponse' smart constructor.
-data DeleteRepositoryPolicyResponse = DeleteRepositoryPolicyResponse'
-  { _drprsRegistryId     :: !(Maybe Text)
-  , _drprsRepositoryName :: !(Maybe Text)
-  , _drprsPolicyText     :: !(Maybe Text)
-  , _drprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRepositoryPolicyResponse = DeleteRepositoryPolicyResponse'{_drprsRegistryId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _drprsRepositoryName
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _drprsPolicyText
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _drprsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteRepositoryPolicyResponse' with the minimum fields required to make a request.
 --
@@ -139,14 +148,12 @@ data DeleteRepositoryPolicyResponse = DeleteRepositoryPolicyResponse'
 deleteRepositoryPolicyResponse
     :: Int -- ^ 'drprsResponseStatus'
     -> DeleteRepositoryPolicyResponse
-deleteRepositoryPolicyResponse pResponseStatus_ =
-  DeleteRepositoryPolicyResponse'
-    { _drprsRegistryId = Nothing
-    , _drprsRepositoryName = Nothing
-    , _drprsPolicyText = Nothing
-    , _drprsResponseStatus = pResponseStatus_
-    }
-
+deleteRepositoryPolicyResponse pResponseStatus_
+  = DeleteRepositoryPolicyResponse'{_drprsRegistryId =
+                                      Nothing,
+                                    _drprsRepositoryName = Nothing,
+                                    _drprsPolicyText = Nothing,
+                                    _drprsResponseStatus = pResponseStatus_}
 
 -- | The registry ID associated with the request.
 drprsRegistryId :: Lens' DeleteRepositoryPolicyResponse (Maybe Text)

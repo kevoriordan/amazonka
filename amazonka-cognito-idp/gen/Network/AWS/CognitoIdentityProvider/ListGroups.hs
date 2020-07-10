@@ -21,8 +21,10 @@
 -- Lists the groups associated with a user pool.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CognitoIdentityProvider.ListGroups
     (
     -- * Creating a Request
@@ -45,17 +47,16 @@ module Network.AWS.CognitoIdentityProvider.ListGroups
 import Network.AWS.CognitoIdentityProvider.Types
 import Network.AWS.CognitoIdentityProvider.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listGroups' smart constructor.
-data ListGroups = ListGroups'
-  { _lgNextToken  :: !(Maybe Text)
-  , _lgLimit      :: !(Maybe Nat)
-  , _lgUserPoolId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGroups = ListGroups'{_lgNextToken ::
+                              !(Maybe Text),
+                              _lgLimit :: !(Maybe Nat), _lgUserPoolId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroups' with the minimum fields required to make a request.
 --
@@ -69,10 +70,9 @@ data ListGroups = ListGroups'
 listGroups
     :: Text -- ^ 'lgUserPoolId'
     -> ListGroups
-listGroups pUserPoolId_ =
-  ListGroups'
-    {_lgNextToken = Nothing, _lgLimit = Nothing, _lgUserPoolId = pUserPoolId_}
-
+listGroups pUserPoolId_
+  = ListGroups'{_lgNextToken = Nothing,
+                _lgLimit = Nothing, _lgUserPoolId = pUserPoolId_}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lgNextToken :: Lens' ListGroups (Maybe Text)
@@ -85,6 +85,13 @@ lgLimit = lens _lgLimit (\ s a -> s{_lgLimit = a}) . mapping _Nat
 -- | The user pool ID for the user pool.
 lgUserPoolId :: Lens' ListGroups Text
 lgUserPoolId = lens _lgUserPoolId (\ s a -> s{_lgUserPoolId = a})
+
+instance AWSPager ListGroups where
+        page rq rs
+          | stop (rs ^. lgrsNextToken) = Nothing
+          | stop (rs ^. lgrsGroups) = Nothing
+          | otherwise =
+            Just $ rq & lgNextToken .~ rs ^. lgrsNextToken
 
 instance AWSRequest ListGroups where
         type Rs ListGroups = ListGroupsResponse
@@ -125,12 +132,11 @@ instance ToQuery ListGroups where
         toQuery = const mempty
 
 -- | /See:/ 'listGroupsResponse' smart constructor.
-data ListGroupsResponse = ListGroupsResponse'
-  { _lgrsGroups         :: !(Maybe [GroupType])
-  , _lgrsNextToken      :: !(Maybe Text)
-  , _lgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGroupsResponse = ListGroupsResponse'{_lgrsGroups
+                                              :: !(Maybe [GroupType]),
+                                              _lgrsNextToken :: !(Maybe Text),
+                                              _lgrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
 --
@@ -144,13 +150,10 @@ data ListGroupsResponse = ListGroupsResponse'
 listGroupsResponse
     :: Int -- ^ 'lgrsResponseStatus'
     -> ListGroupsResponse
-listGroupsResponse pResponseStatus_ =
-  ListGroupsResponse'
-    { _lgrsGroups = Nothing
-    , _lgrsNextToken = Nothing
-    , _lgrsResponseStatus = pResponseStatus_
-    }
-
+listGroupsResponse pResponseStatus_
+  = ListGroupsResponse'{_lgrsGroups = Nothing,
+                        _lgrsNextToken = Nothing,
+                        _lgrsResponseStatus = pResponseStatus_}
 
 -- | The group objects for the groups.
 lgrsGroups :: Lens' ListGroupsResponse [GroupType]

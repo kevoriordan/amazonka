@@ -21,6 +21,8 @@
 -- Returns the ID and status of each active change set for a stack. For example, AWS CloudFormation lists change sets that are in the @CREATE_IN_PROGRESS@ or @CREATE_PENDING@ state.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CloudFormation.ListChangeSets
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.CloudFormation.ListChangeSets
 import Network.AWS.CloudFormation.Types
 import Network.AWS.CloudFormation.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -51,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listChangeSets' smart constructor.
-data ListChangeSets = ListChangeSets'
-  { _lcsNextToken :: !(Maybe Text)
-  , _lcsStackName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListChangeSets = ListChangeSets'{_lcsNextToken
+                                      :: !(Maybe Text),
+                                      _lcsStackName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListChangeSets' with the minimum fields required to make a request.
 --
@@ -67,9 +69,9 @@ data ListChangeSets = ListChangeSets'
 listChangeSets
     :: Text -- ^ 'lcsStackName'
     -> ListChangeSets
-listChangeSets pStackName_ =
-  ListChangeSets' {_lcsNextToken = Nothing, _lcsStackName = pStackName_}
-
+listChangeSets pStackName_
+  = ListChangeSets'{_lcsNextToken = Nothing,
+                    _lcsStackName = pStackName_}
 
 -- | A string (provided by the 'ListChangeSets' response output) that identifies the next page of change sets that you want to retrieve.
 lcsNextToken :: Lens' ListChangeSets (Maybe Text)
@@ -78,6 +80,13 @@ lcsNextToken = lens _lcsNextToken (\ s a -> s{_lcsNextToken = a})
 -- | The name or the Amazon Resource Name (ARN) of the stack for which you want to list change sets.
 lcsStackName :: Lens' ListChangeSets Text
 lcsStackName = lens _lcsStackName (\ s a -> s{_lcsStackName = a})
+
+instance AWSPager ListChangeSets where
+        page rq rs
+          | stop (rs ^. lcsrsNextToken) = Nothing
+          | stop (rs ^. lcsrsSummaries) = Nothing
+          | otherwise =
+            Just $ rq & lcsNextToken .~ rs ^. lcsrsNextToken
 
 instance AWSRequest ListChangeSets where
         type Rs ListChangeSets = ListChangeSetsResponse
@@ -114,12 +123,15 @@ instance ToQuery ListChangeSets where
 --
 --
 -- /See:/ 'listChangeSetsResponse' smart constructor.
-data ListChangeSetsResponse = ListChangeSetsResponse'
-  { _lcsrsNextToken      :: !(Maybe Text)
-  , _lcsrsSummaries      :: !(Maybe [ChangeSetSummary])
-  , _lcsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListChangeSetsResponse = ListChangeSetsResponse'{_lcsrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _lcsrsSummaries ::
+                                                      !(Maybe
+                                                          [ChangeSetSummary]),
+                                                      _lcsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListChangeSetsResponse' with the minimum fields required to make a request.
 --
@@ -133,13 +145,10 @@ data ListChangeSetsResponse = ListChangeSetsResponse'
 listChangeSetsResponse
     :: Int -- ^ 'lcsrsResponseStatus'
     -> ListChangeSetsResponse
-listChangeSetsResponse pResponseStatus_ =
-  ListChangeSetsResponse'
-    { _lcsrsNextToken = Nothing
-    , _lcsrsSummaries = Nothing
-    , _lcsrsResponseStatus = pResponseStatus_
-    }
-
+listChangeSetsResponse pResponseStatus_
+  = ListChangeSetsResponse'{_lcsrsNextToken = Nothing,
+                            _lcsrsSummaries = Nothing,
+                            _lcsrsResponseStatus = pResponseStatus_}
 
 -- | If the output exceeds 1 MB, a string that identifies the next page of change sets. If there is no additional page, this value is null.
 lcsrsNextToken :: Lens' ListChangeSetsResponse (Maybe Text)

@@ -23,7 +23,7 @@
 --
 -- Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the 'GetUtterancesView' operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.
 --
--- Use the @DeleteStoredUtterances@ operation to manually delete stored utterances for a specific user.
+-- Use the @DeleteUtterances@ operation to manually delete stored utterances for a specific user. When you use the @DeleteUtterances@ operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the @GetUtterancesView@ operation are deleted after 15 days.
 --
 -- This operation requires permissions for the @lex:DeleteUtterances@ action.
 --
@@ -49,11 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteUtterances' smart constructor.
-data DeleteUtterances = DeleteUtterances'
-  { _duBotName :: !Text
-  , _duUserId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUtterances = DeleteUtterances'{_duBotName
+                                          :: !Text,
+                                          _duUserId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUtterances' with the minimum fields required to make a request.
 --
@@ -66,9 +65,9 @@ deleteUtterances
     :: Text -- ^ 'duBotName'
     -> Text -- ^ 'duUserId'
     -> DeleteUtterances
-deleteUtterances pBotName_ pUserId_ =
-  DeleteUtterances' {_duBotName = pBotName_, _duUserId = pUserId_}
-
+deleteUtterances pBotName_ pUserId_
+  = DeleteUtterances'{_duBotName = pBotName_,
+                      _duUserId = pUserId_}
 
 -- | The name of the bot that stored the utterances.
 duBotName :: Lens' DeleteUtterances Text
@@ -104,16 +103,14 @@ instance ToQuery DeleteUtterances where
         toQuery = const mempty
 
 -- | /See:/ 'deleteUtterancesResponse' smart constructor.
-data DeleteUtterancesResponse =
-  DeleteUtterancesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUtterancesResponse = DeleteUtterancesResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteUtterancesResponse' with the minimum fields required to make a request.
 --
 deleteUtterancesResponse
     :: DeleteUtterancesResponse
 deleteUtterancesResponse = DeleteUtterancesResponse'
-
 
 instance NFData DeleteUtterancesResponse where

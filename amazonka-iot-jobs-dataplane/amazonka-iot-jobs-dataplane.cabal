@@ -53,12 +53,16 @@ library
         , Network.AWS.IoTJobsData.Waiters
 
     other-modules:
-          Network.AWS.IoTJobsData.Types.Product
-        , Network.AWS.IoTJobsData.Types.Sum
+          Network.AWS.IoTJobsData.Types.JobExecution
+        , Network.AWS.IoTJobsData.Types.JobExecutionState
+        , Network.AWS.IoTJobsData.Types.JobExecutionStatus
+        , Network.AWS.IoTJobsData.Types.JobExecutionSummary
+        , Network.AWS.IoTJobsData.Types.Product
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-iot-jobs-dataplane-test
     type:              exitcode-stdio-1.0
@@ -82,6 +86,7 @@ test-suite amazonka-iot-jobs-dataplane-test
         , amazonka-iot-jobs-dataplane
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

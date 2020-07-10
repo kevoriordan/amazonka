@@ -52,11 +52,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeConditionalForwarders' smart constructor.
-data DescribeConditionalForwarders = DescribeConditionalForwarders'
-  { _dcfRemoteDomainNames :: !(Maybe [Text])
-  , _dcfDirectoryId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConditionalForwarders = DescribeConditionalForwarders'{_dcfRemoteDomainNames
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [Text]),
+                                                                    _dcfDirectoryId
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeConditionalForwarders' with the minimum fields required to make a request.
 --
@@ -68,10 +71,10 @@ data DescribeConditionalForwarders = DescribeConditionalForwarders'
 describeConditionalForwarders
     :: Text -- ^ 'dcfDirectoryId'
     -> DescribeConditionalForwarders
-describeConditionalForwarders pDirectoryId_ =
-  DescribeConditionalForwarders'
-    {_dcfRemoteDomainNames = Nothing, _dcfDirectoryId = pDirectoryId_}
-
+describeConditionalForwarders pDirectoryId_
+  = DescribeConditionalForwarders'{_dcfRemoteDomainNames
+                                     = Nothing,
+                                   _dcfDirectoryId = pDirectoryId_}
 
 -- | The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders. If this member is null, all conditional forwarders are returned.
 dcfRemoteDomainNames :: Lens' DescribeConditionalForwarders [Text]
@@ -126,11 +129,15 @@ instance ToQuery DescribeConditionalForwarders where
 --
 --
 -- /See:/ 'describeConditionalForwardersResponse' smart constructor.
-data DescribeConditionalForwardersResponse = DescribeConditionalForwardersResponse'
-  { _dcfrsConditionalForwarders :: !(Maybe [ConditionalForwarder])
-  , _dcfrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConditionalForwardersResponse = DescribeConditionalForwardersResponse'{_dcfrsConditionalForwarders
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [ConditionalForwarder]),
+                                                                                    _dcfrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeConditionalForwardersResponse' with the minimum fields required to make a request.
 --
@@ -142,12 +149,12 @@ data DescribeConditionalForwardersResponse = DescribeConditionalForwardersRespon
 describeConditionalForwardersResponse
     :: Int -- ^ 'dcfrsResponseStatus'
     -> DescribeConditionalForwardersResponse
-describeConditionalForwardersResponse pResponseStatus_ =
-  DescribeConditionalForwardersResponse'
-    { _dcfrsConditionalForwarders = Nothing
-    , _dcfrsResponseStatus = pResponseStatus_
-    }
-
+describeConditionalForwardersResponse
+  pResponseStatus_
+  = DescribeConditionalForwardersResponse'{_dcfrsConditionalForwarders
+                                             = Nothing,
+                                           _dcfrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The list of conditional forwarders that have been created.
 dcfrsConditionalForwarders :: Lens' DescribeConditionalForwardersResponse [ConditionalForwarder]

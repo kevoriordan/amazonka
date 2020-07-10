@@ -21,7 +21,7 @@
 -- Deletes a group. Currently only groups with no members can be deleted.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.DeleteGroup
     (
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteGroup' smart constructor.
-data DeleteGroup = DeleteGroup'
-  { _dgGroupName  :: !Text
-  , _dgUserPoolId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGroup = DeleteGroup'{_dgGroupName ::
+                                !Text,
+                                _dgUserPoolId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGroup' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ deleteGroup
     :: Text -- ^ 'dgGroupName'
     -> Text -- ^ 'dgUserPoolId'
     -> DeleteGroup
-deleteGroup pGroupName_ pUserPoolId_ =
-  DeleteGroup' {_dgGroupName = pGroupName_, _dgUserPoolId = pUserPoolId_}
-
+deleteGroup pGroupName_ pUserPoolId_
+  = DeleteGroup'{_dgGroupName = pGroupName_,
+                 _dgUserPoolId = pUserPoolId_}
 
 -- | The name of the group.
 dgGroupName :: Lens' DeleteGroup Text
@@ -107,16 +106,13 @@ instance ToQuery DeleteGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteGroupResponse' smart constructor.
-data DeleteGroupResponse =
-  DeleteGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGroupResponse = DeleteGroupResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGroupResponse' with the minimum fields required to make a request.
 --
 deleteGroupResponse
     :: DeleteGroupResponse
 deleteGroupResponse = DeleteGroupResponse'
-
 
 instance NFData DeleteGroupResponse where

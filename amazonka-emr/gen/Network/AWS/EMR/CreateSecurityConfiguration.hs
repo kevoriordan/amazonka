@@ -47,11 +47,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createSecurityConfiguration' smart constructor.
-data CreateSecurityConfiguration = CreateSecurityConfiguration'
-  { _cscName                  :: !Text
-  , _cscSecurityConfiguration :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSecurityConfiguration = CreateSecurityConfiguration'{_cscName
+                                                                :: !Text,
+                                                                _cscSecurityConfiguration
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateSecurityConfiguration' with the minimum fields required to make a request.
 --
@@ -59,21 +60,22 @@ data CreateSecurityConfiguration = CreateSecurityConfiguration'
 --
 -- * 'cscName' - The name of the security configuration.
 --
--- * 'cscSecurityConfiguration' - The security configuration details in JSON format. For JSON parameters and examples, see <http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html Use Security Configurations to Set Up Cluster Security> in the /Amazon EMR Management Guide/ .
+-- * 'cscSecurityConfiguration' - The security configuration details in JSON format. For JSON parameters and examples, see <https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html Use Security Configurations to Set Up Cluster Security> in the /Amazon EMR Management Guide/ .
 createSecurityConfiguration
     :: Text -- ^ 'cscName'
     -> Text -- ^ 'cscSecurityConfiguration'
     -> CreateSecurityConfiguration
-createSecurityConfiguration pName_ pSecurityConfiguration_ =
-  CreateSecurityConfiguration'
-    {_cscName = pName_, _cscSecurityConfiguration = pSecurityConfiguration_}
-
+createSecurityConfiguration pName_
+  pSecurityConfiguration_
+  = CreateSecurityConfiguration'{_cscName = pName_,
+                                 _cscSecurityConfiguration =
+                                   pSecurityConfiguration_}
 
 -- | The name of the security configuration.
 cscName :: Lens' CreateSecurityConfiguration Text
 cscName = lens _cscName (\ s a -> s{_cscName = a})
 
--- | The security configuration details in JSON format. For JSON parameters and examples, see <http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html Use Security Configurations to Set Up Cluster Security> in the /Amazon EMR Management Guide/ .
+-- | The security configuration details in JSON format. For JSON parameters and examples, see <https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html Use Security Configurations to Set Up Cluster Security> in the /Amazon EMR Management Guide/ .
 cscSecurityConfiguration :: Lens' CreateSecurityConfiguration Text
 cscSecurityConfiguration = lens _cscSecurityConfiguration (\ s a -> s{_cscSecurityConfiguration = a})
 
@@ -118,12 +120,17 @@ instance ToQuery CreateSecurityConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'createSecurityConfigurationResponse' smart constructor.
-data CreateSecurityConfigurationResponse = CreateSecurityConfigurationResponse'
-  { _cscrsResponseStatus   :: !Int
-  , _cscrsName             :: !Text
-  , _cscrsCreationDateTime :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSecurityConfigurationResponse = CreateSecurityConfigurationResponse'{_cscrsResponseStatus
+                                                                                ::
+                                                                                !Int,
+                                                                                _cscrsName
+                                                                                ::
+                                                                                !Text,
+                                                                                _cscrsCreationDateTime
+                                                                                ::
+                                                                                !POSIX}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'CreateSecurityConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -139,13 +146,13 @@ createSecurityConfigurationResponse
     -> Text -- ^ 'cscrsName'
     -> UTCTime -- ^ 'cscrsCreationDateTime'
     -> CreateSecurityConfigurationResponse
-createSecurityConfigurationResponse pResponseStatus_ pName_ pCreationDateTime_ =
-  CreateSecurityConfigurationResponse'
-    { _cscrsResponseStatus = pResponseStatus_
-    , _cscrsName = pName_
-    , _cscrsCreationDateTime = _Time # pCreationDateTime_
-    }
-
+createSecurityConfigurationResponse pResponseStatus_
+  pName_ pCreationDateTime_
+  = CreateSecurityConfigurationResponse'{_cscrsResponseStatus
+                                           = pResponseStatus_,
+                                         _cscrsName = pName_,
+                                         _cscrsCreationDateTime =
+                                           _Time # pCreationDateTime_}
 
 -- | -- | The response status code.
 cscrsResponseStatus :: Lens' CreateSecurityConfigurationResponse Int

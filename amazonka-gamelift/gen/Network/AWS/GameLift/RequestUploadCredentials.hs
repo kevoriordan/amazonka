@@ -23,6 +23,24 @@
 --
 -- To request new credentials, specify the build ID as returned with an initial @CreateBuild@ request. If successful, a new set of credentials are returned, along with the S3 storage location associated with the build ID.
 --
+-- __Learn more__ 
+--
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build Create a Build with Files in S3> 
+--
+-- __Related operations__ 
+--
+--     * 'CreateBuild' 
+--
+--     * 'ListBuilds' 
+--
+--     * 'DescribeBuild' 
+--
+--     * 'UpdateBuild' 
+--
+--     * 'DeleteBuild' 
+--
+--
+--
 module Network.AWS.GameLift.RequestUploadCredentials
     (
     -- * Creating a Request
@@ -52,24 +70,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'requestUploadCredentials' smart constructor.
-newtype RequestUploadCredentials = RequestUploadCredentials'
-  { _rucBuildId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RequestUploadCredentials = RequestUploadCredentials'{_rucBuildId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'RequestUploadCredentials' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rucBuildId' - Unique identifier for a build to get credentials for.
+-- * 'rucBuildId' - A unique identifier for a build to get credentials for. You can use either the build ID or ARN value. 
 requestUploadCredentials
     :: Text -- ^ 'rucBuildId'
     -> RequestUploadCredentials
-requestUploadCredentials pBuildId_ =
-  RequestUploadCredentials' {_rucBuildId = pBuildId_}
+requestUploadCredentials pBuildId_
+  = RequestUploadCredentials'{_rucBuildId = pBuildId_}
 
-
--- | Unique identifier for a build to get credentials for.
+-- | A unique identifier for a build to get credentials for. You can use either the build ID or ARN value. 
 rucBuildId :: Lens' RequestUploadCredentials Text
 rucBuildId = lens _rucBuildId (\ s a -> s{_rucBuildId = a})
 
@@ -114,12 +131,20 @@ instance ToQuery RequestUploadCredentials where
 --
 --
 -- /See:/ 'requestUploadCredentialsResponse' smart constructor.
-data RequestUploadCredentialsResponse = RequestUploadCredentialsResponse'
-  { _rucrsStorageLocation   :: !(Maybe S3Location)
-  , _rucrsUploadCredentials :: !(Maybe (Sensitive AWSCredentials))
-  , _rucrsResponseStatus    :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data RequestUploadCredentialsResponse = RequestUploadCredentialsResponse'{_rucrsStorageLocation
+                                                                          ::
+                                                                          !(Maybe
+                                                                              S3Location),
+                                                                          _rucrsUploadCredentials
+                                                                          ::
+                                                                          !(Maybe
+                                                                              (Sensitive
+                                                                                 AWSCredentials)),
+                                                                          _rucrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Show, Data, Typeable,
+                                                    Generic)
 
 -- | Creates a value of 'RequestUploadCredentialsResponse' with the minimum fields required to make a request.
 --
@@ -133,13 +158,11 @@ data RequestUploadCredentialsResponse = RequestUploadCredentialsResponse'
 requestUploadCredentialsResponse
     :: Int -- ^ 'rucrsResponseStatus'
     -> RequestUploadCredentialsResponse
-requestUploadCredentialsResponse pResponseStatus_ =
-  RequestUploadCredentialsResponse'
-    { _rucrsStorageLocation = Nothing
-    , _rucrsUploadCredentials = Nothing
-    , _rucrsResponseStatus = pResponseStatus_
-    }
-
+requestUploadCredentialsResponse pResponseStatus_
+  = RequestUploadCredentialsResponse'{_rucrsStorageLocation
+                                        = Nothing,
+                                      _rucrsUploadCredentials = Nothing,
+                                      _rucrsResponseStatus = pResponseStatus_}
 
 -- | Amazon S3 path and key, identifying where the game build files are stored.
 rucrsStorageLocation :: Lens' RequestUploadCredentialsResponse (Maybe S3Location)

@@ -61,16 +61,15 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeEvents' smart constructor.
-data DescribeEvents = DescribeEvents'
-  { _deStartTime        :: !(Maybe ISO8601)
-  , _deSourceType       :: !(Maybe SourceType)
-  , _deSourceIdentifier :: !(Maybe Text)
-  , _deMarker           :: !(Maybe Text)
-  , _deMaxRecords       :: !(Maybe Int)
-  , _deEndTime          :: !(Maybe ISO8601)
-  , _deDuration         :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEvents = DescribeEvents'{_deStartTime ::
+                                      !(Maybe ISO8601),
+                                      _deSourceType :: !(Maybe SourceType),
+                                      _deSourceIdentifier :: !(Maybe Text),
+                                      _deMarker :: !(Maybe Text),
+                                      _deMaxRecords :: !(Maybe Int),
+                                      _deEndTime :: !(Maybe ISO8601),
+                                      _deDuration :: !(Maybe Int)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEvents' with the minimum fields required to make a request.
 --
@@ -91,17 +90,12 @@ data DescribeEvents = DescribeEvents'
 -- * 'deDuration' - The number of minutes worth of events to retrieve.
 describeEvents
     :: DescribeEvents
-describeEvents =
-  DescribeEvents'
-    { _deStartTime = Nothing
-    , _deSourceType = Nothing
-    , _deSourceIdentifier = Nothing
-    , _deMarker = Nothing
-    , _deMaxRecords = Nothing
-    , _deEndTime = Nothing
-    , _deDuration = Nothing
-    }
-
+describeEvents
+  = DescribeEvents'{_deStartTime = Nothing,
+                    _deSourceType = Nothing,
+                    _deSourceIdentifier = Nothing, _deMarker = Nothing,
+                    _deMaxRecords = Nothing, _deEndTime = Nothing,
+                    _deDuration = Nothing}
 
 -- | The beginning of the time interval to retrieve events for, specified in ISO 8601 format. __Example:__ 2017-03-30T07:03:49.555Z
 deStartTime :: Lens' DescribeEvents (Maybe UTCTime)
@@ -176,12 +170,14 @@ instance ToQuery DescribeEvents where
 --
 --
 -- /See:/ 'describeEventsResponse' smart constructor.
-data DescribeEventsResponse = DescribeEventsResponse'
-  { _dersEvents         :: !(Maybe [Event])
-  , _dersMarker         :: !(Maybe Text)
-  , _dersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventsResponse = DescribeEventsResponse'{_dersEvents
+                                                      :: !(Maybe [Event]),
+                                                      _dersMarker ::
+                                                      !(Maybe Text),
+                                                      _dersResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeEventsResponse' with the minimum fields required to make a request.
 --
@@ -195,13 +191,10 @@ data DescribeEventsResponse = DescribeEventsResponse'
 describeEventsResponse
     :: Int -- ^ 'dersResponseStatus'
     -> DescribeEventsResponse
-describeEventsResponse pResponseStatus_ =
-  DescribeEventsResponse'
-    { _dersEvents = Nothing
-    , _dersMarker = Nothing
-    , _dersResponseStatus = pResponseStatus_
-    }
-
+describeEventsResponse pResponseStatus_
+  = DescribeEventsResponse'{_dersEvents = Nothing,
+                            _dersMarker = Nothing,
+                            _dersResponseStatus = pResponseStatus_}
 
 -- | A list of events. Each element in the list contains detailed information about one event.
 dersEvents :: Lens' DescribeEventsResponse [Event]

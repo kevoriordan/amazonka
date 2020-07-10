@@ -45,10 +45,9 @@ import Network.AWS.ResourceGroups.Types.Product
 import Network.AWS.Response
 
 -- | /See:/ 'getGroupQuery' smart constructor.
-newtype GetGroupQuery = GetGroupQuery'
-  { _ggqGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetGroupQuery = GetGroupQuery'{_ggqGroupName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetGroupQuery' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetGroupQuery = GetGroupQuery'
 getGroupQuery
     :: Text -- ^ 'ggqGroupName'
     -> GetGroupQuery
-getGroupQuery pGroupName_ = GetGroupQuery' {_ggqGroupName = pGroupName_}
-
+getGroupQuery pGroupName_
+  = GetGroupQuery'{_ggqGroupName = pGroupName_}
 
 -- | The name of the resource group.
 ggqGroupName :: Lens' GetGroupQuery Text
@@ -89,11 +88,12 @@ instance ToQuery GetGroupQuery where
         toQuery = const mempty
 
 -- | /See:/ 'getGroupQueryResponse' smart constructor.
-data GetGroupQueryResponse = GetGroupQueryResponse'
-  { _ggqrsGroupQuery     :: !(Maybe GroupQuery)
-  , _ggqrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGroupQueryResponse = GetGroupQueryResponse'{_ggqrsGroupQuery
+                                                    :: !(Maybe GroupQuery),
+                                                    _ggqrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetGroupQueryResponse' with the minimum fields required to make a request.
 --
@@ -105,10 +105,9 @@ data GetGroupQueryResponse = GetGroupQueryResponse'
 getGroupQueryResponse
     :: Int -- ^ 'ggqrsResponseStatus'
     -> GetGroupQueryResponse
-getGroupQueryResponse pResponseStatus_ =
-  GetGroupQueryResponse'
-    {_ggqrsGroupQuery = Nothing, _ggqrsResponseStatus = pResponseStatus_}
-
+getGroupQueryResponse pResponseStatus_
+  = GetGroupQueryResponse'{_ggqrsGroupQuery = Nothing,
+                           _ggqrsResponseStatus = pResponseStatus_}
 
 -- | The resource query associated with the specified group.
 ggqrsGroupQuery :: Lens' GetGroupQueryResponse (Maybe GroupQuery)

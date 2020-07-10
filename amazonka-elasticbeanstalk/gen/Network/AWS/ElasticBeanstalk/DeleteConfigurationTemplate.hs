@@ -47,11 +47,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteConfigurationTemplate' smart constructor.
-data DeleteConfigurationTemplate = DeleteConfigurationTemplate'
-  { _dctApplicationName :: !Text
-  , _dctTemplateName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConfigurationTemplate = DeleteConfigurationTemplate'{_dctApplicationName
+                                                                :: !Text,
+                                                                _dctTemplateName
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteConfigurationTemplate' with the minimum fields required to make a request.
 --
@@ -64,10 +65,11 @@ deleteConfigurationTemplate
     :: Text -- ^ 'dctApplicationName'
     -> Text -- ^ 'dctTemplateName'
     -> DeleteConfigurationTemplate
-deleteConfigurationTemplate pApplicationName_ pTemplateName_ =
-  DeleteConfigurationTemplate'
-    {_dctApplicationName = pApplicationName_, _dctTemplateName = pTemplateName_}
-
+deleteConfigurationTemplate pApplicationName_
+  pTemplateName_
+  = DeleteConfigurationTemplate'{_dctApplicationName =
+                                   pApplicationName_,
+                                 _dctTemplateName = pTemplateName_}
 
 -- | The name of the application to delete the configuration template from.
 dctApplicationName :: Lens' DeleteConfigurationTemplate Text
@@ -104,17 +106,16 @@ instance ToQuery DeleteConfigurationTemplate where
                "TemplateName" =: _dctTemplateName]
 
 -- | /See:/ 'deleteConfigurationTemplateResponse' smart constructor.
-data DeleteConfigurationTemplateResponse =
-  DeleteConfigurationTemplateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConfigurationTemplateResponse = DeleteConfigurationTemplateResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteConfigurationTemplateResponse' with the minimum fields required to make a request.
 --
 deleteConfigurationTemplateResponse
     :: DeleteConfigurationTemplateResponse
-deleteConfigurationTemplateResponse = DeleteConfigurationTemplateResponse'
-
+deleteConfigurationTemplateResponse
+  = DeleteConfigurationTemplateResponse'
 
 instance NFData DeleteConfigurationTemplateResponse
          where

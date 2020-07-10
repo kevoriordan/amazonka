@@ -53,14 +53,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describePullRequestEvents' smart constructor.
-data DescribePullRequestEvents = DescribePullRequestEvents'
-  { _dprePullRequestEventType :: !(Maybe PullRequestEventType)
-  , _dpreActorARN             :: !(Maybe Text)
-  , _dpreNextToken            :: !(Maybe Text)
-  , _dpreMaxResults           :: !(Maybe Int)
-  , _dprePullRequestId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePullRequestEvents = DescribePullRequestEvents'{_dprePullRequestEventType
+                                                            ::
+                                                            !(Maybe
+                                                                PullRequestEventType),
+                                                            _dpreActorARN ::
+                                                            !(Maybe Text),
+                                                            _dpreNextToken ::
+                                                            !(Maybe Text),
+                                                            _dpreMaxResults ::
+                                                            !(Maybe Int),
+                                                            _dprePullRequestId
+                                                            :: !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribePullRequestEvents' with the minimum fields required to make a request.
 --
@@ -68,39 +74,37 @@ data DescribePullRequestEvents = DescribePullRequestEvents'
 --
 -- * 'dprePullRequestEventType' - Optional. The pull request event type about which you want to return information.
 --
--- * 'dpreActorARN' - The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
+-- * 'dpreActorARN' - The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with more commits or changing the status of a pull request.
 --
--- * 'dpreNextToken' - An enumeration token that when provided in a request, returns the next batch of the results.
+-- * 'dpreNextToken' - An enumeration token that, when provided in a request, returns the next batch of the results.
 --
--- * 'dpreMaxResults' - A non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.
+-- * 'dpreMaxResults' - A non-zero, non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.
 --
 -- * 'dprePullRequestId' - The system-generated ID of the pull request. To get this ID, use 'ListPullRequests' .
 describePullRequestEvents
     :: Text -- ^ 'dprePullRequestId'
     -> DescribePullRequestEvents
-describePullRequestEvents pPullRequestId_ =
-  DescribePullRequestEvents'
-    { _dprePullRequestEventType = Nothing
-    , _dpreActorARN = Nothing
-    , _dpreNextToken = Nothing
-    , _dpreMaxResults = Nothing
-    , _dprePullRequestId = pPullRequestId_
-    }
-
+describePullRequestEvents pPullRequestId_
+  = DescribePullRequestEvents'{_dprePullRequestEventType
+                                 = Nothing,
+                               _dpreActorARN = Nothing,
+                               _dpreNextToken = Nothing,
+                               _dpreMaxResults = Nothing,
+                               _dprePullRequestId = pPullRequestId_}
 
 -- | Optional. The pull request event type about which you want to return information.
 dprePullRequestEventType :: Lens' DescribePullRequestEvents (Maybe PullRequestEventType)
 dprePullRequestEventType = lens _dprePullRequestEventType (\ s a -> s{_dprePullRequestEventType = a})
 
--- | The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with additional commits or changing the status of a pull request.
+-- | The Amazon Resource Name (ARN) of the user whose actions resulted in the event. Examples include updating the pull request with more commits or changing the status of a pull request.
 dpreActorARN :: Lens' DescribePullRequestEvents (Maybe Text)
 dpreActorARN = lens _dpreActorARN (\ s a -> s{_dpreActorARN = a})
 
--- | An enumeration token that when provided in a request, returns the next batch of the results.
+-- | An enumeration token that, when provided in a request, returns the next batch of the results.
 dpreNextToken :: Lens' DescribePullRequestEvents (Maybe Text)
 dpreNextToken = lens _dpreNextToken (\ s a -> s{_dpreNextToken = a})
 
--- | A non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.
+-- | A non-zero, non-negative integer used to limit the number of returned results. The default is 100 events, which is also the maximum number of events that can be returned in a result.
 dpreMaxResults :: Lens' DescribePullRequestEvents (Maybe Int)
 dpreMaxResults = lens _dpreMaxResults (\ s a -> s{_dpreMaxResults = a})
 
@@ -158,12 +162,18 @@ instance ToQuery DescribePullRequestEvents where
         toQuery = const mempty
 
 -- | /See:/ 'describePullRequestEventsResponse' smart constructor.
-data DescribePullRequestEventsResponse = DescribePullRequestEventsResponse'
-  { _dprersNextToken         :: !(Maybe Text)
-  , _dprersResponseStatus    :: !Int
-  , _dprersPullRequestEvents :: ![PullRequestEvent]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePullRequestEventsResponse = DescribePullRequestEventsResponse'{_dprersNextToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _dprersResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _dprersPullRequestEvents
+                                                                            ::
+                                                                            ![PullRequestEvent]}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribePullRequestEventsResponse' with the minimum fields required to make a request.
 --
@@ -177,13 +187,11 @@ data DescribePullRequestEventsResponse = DescribePullRequestEventsResponse'
 describePullRequestEventsResponse
     :: Int -- ^ 'dprersResponseStatus'
     -> DescribePullRequestEventsResponse
-describePullRequestEventsResponse pResponseStatus_ =
-  DescribePullRequestEventsResponse'
-    { _dprersNextToken = Nothing
-    , _dprersResponseStatus = pResponseStatus_
-    , _dprersPullRequestEvents = mempty
-    }
-
+describePullRequestEventsResponse pResponseStatus_
+  = DescribePullRequestEventsResponse'{_dprersNextToken
+                                         = Nothing,
+                                       _dprersResponseStatus = pResponseStatus_,
+                                       _dprersPullRequestEvents = mempty}
 
 -- | An enumeration token that can be used in a request to return the next batch of the results.
 dprersNextToken :: Lens' DescribePullRequestEventsResponse (Maybe Text)

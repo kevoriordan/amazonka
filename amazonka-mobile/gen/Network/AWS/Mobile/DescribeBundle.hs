@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get the bundle details for the requested bundle id.
+-- Get the bundle details for the requested bundle id. 
 --
 --
 module Network.AWS.Mobile.DescribeBundle
@@ -44,28 +44,27 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure to request the details of a specific bundle.
+-- | Request structure to request the details of a specific bundle. 
 --
 --
 --
 -- /See:/ 'describeBundle' smart constructor.
-newtype DescribeBundle = DescribeBundle'
-  { _dbBundleId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeBundle = DescribeBundle'{_dbBundleId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeBundle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbBundleId' - Unique bundle identifier.
+-- * 'dbBundleId' - Unique bundle identifier. 
 describeBundle
     :: Text -- ^ 'dbBundleId'
     -> DescribeBundle
-describeBundle pBundleId_ = DescribeBundle' {_dbBundleId = pBundleId_}
+describeBundle pBundleId_
+  = DescribeBundle'{_dbBundleId = pBundleId_}
 
-
--- | Unique bundle identifier.
+-- | Unique bundle identifier. 
 dbBundleId :: Lens' DescribeBundle Text
 dbBundleId = lens _dbBundleId (\ s a -> s{_dbBundleId = a})
 
@@ -96,33 +95,33 @@ instance ToPath DescribeBundle where
 instance ToQuery DescribeBundle where
         toQuery = const mempty
 
--- | Result structure contains the details of the bundle.
+-- | Result structure contains the details of the bundle. 
 --
 --
 --
 -- /See:/ 'describeBundleResponse' smart constructor.
-data DescribeBundleResponse = DescribeBundleResponse'
-  { _dbrsDetails        :: !(Maybe BundleDetails)
-  , _dbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBundleResponse = DescribeBundleResponse'{_dbrsDetails
+                                                      :: !(Maybe BundleDetails),
+                                                      _dbrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeBundleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbrsDetails' - The details of the bundle.
+-- * 'dbrsDetails' - The details of the bundle. 
 --
 -- * 'dbrsResponseStatus' - -- | The response status code.
 describeBundleResponse
     :: Int -- ^ 'dbrsResponseStatus'
     -> DescribeBundleResponse
-describeBundleResponse pResponseStatus_ =
-  DescribeBundleResponse'
-    {_dbrsDetails = Nothing, _dbrsResponseStatus = pResponseStatus_}
+describeBundleResponse pResponseStatus_
+  = DescribeBundleResponse'{_dbrsDetails = Nothing,
+                            _dbrsResponseStatus = pResponseStatus_}
 
-
--- | The details of the bundle.
+-- | The details of the bundle. 
 dbrsDetails :: Lens' DescribeBundleResponse (Maybe BundleDetails)
 dbrsDetails = lens _dbrsDetails (\ s a -> s{_dbrsDetails = a})
 

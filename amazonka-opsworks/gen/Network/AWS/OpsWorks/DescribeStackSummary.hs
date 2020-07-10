@@ -21,7 +21,7 @@
 -- Describes the number of layers and apps in a specified stack, and the number of instances in each state, such as @running_setup@ or @online@ .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeStackSummary
     (
@@ -47,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeStackSummary' smart constructor.
-newtype DescribeStackSummary = DescribeStackSummary'
-  { _dssStackId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeStackSummary = DescribeStackSummary'{_dssStackId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeStackSummary' with the minimum fields required to make a request.
 --
@@ -60,8 +60,8 @@ newtype DescribeStackSummary = DescribeStackSummary'
 describeStackSummary
     :: Text -- ^ 'dssStackId'
     -> DescribeStackSummary
-describeStackSummary pStackId_ = DescribeStackSummary' {_dssStackId = pStackId_}
-
+describeStackSummary pStackId_
+  = DescribeStackSummary'{_dssStackId = pStackId_}
 
 -- | The stack ID.
 dssStackId :: Lens' DescribeStackSummary Text
@@ -107,11 +107,14 @@ instance ToQuery DescribeStackSummary where
 --
 --
 -- /See:/ 'describeStackSummaryResponse' smart constructor.
-data DescribeStackSummaryResponse = DescribeStackSummaryResponse'
-  { _dssrsStackSummary   :: !(Maybe StackSummary)
-  , _dssrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackSummaryResponse = DescribeStackSummaryResponse'{_dssrsStackSummary
+                                                                  ::
+                                                                  !(Maybe
+                                                                      StackSummary),
+                                                                  _dssrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeStackSummaryResponse' with the minimum fields required to make a request.
 --
@@ -123,10 +126,10 @@ data DescribeStackSummaryResponse = DescribeStackSummaryResponse'
 describeStackSummaryResponse
     :: Int -- ^ 'dssrsResponseStatus'
     -> DescribeStackSummaryResponse
-describeStackSummaryResponse pResponseStatus_ =
-  DescribeStackSummaryResponse'
-    {_dssrsStackSummary = Nothing, _dssrsResponseStatus = pResponseStatus_}
-
+describeStackSummaryResponse pResponseStatus_
+  = DescribeStackSummaryResponse'{_dssrsStackSummary =
+                                    Nothing,
+                                  _dssrsResponseStatus = pResponseStatus_}
 
 -- | A @StackSummary@ object that contains the results.
 dssrsStackSummary :: Lens' DescribeStackSummaryResponse (Maybe StackSummary)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @DeleteDomain@ operation deletes a domain. Any items (and their attributes) in the domain are deleted as well. The @DeleteDomain@ operation might take 10 or more seconds to complete.
+-- The @DeleteDomain@ operation deletes a domain. Any items (and their attributes) in the domain are deleted as well. The @DeleteDomain@ operation might take 10 or more seconds to complete. 
 --
 --
 module Network.AWS.SDB.DeleteDomain
@@ -42,10 +42,9 @@ import Network.AWS.SDB.Types
 import Network.AWS.SDB.Types.Product
 
 -- | /See:/ 'deleteDomain' smart constructor.
-newtype DeleteDomain = DeleteDomain'
-  { _ddDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDomain = DeleteDomain'{_ddDomainName ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDomain' with the minimum fields required to make a request.
 --
@@ -55,8 +54,8 @@ newtype DeleteDomain = DeleteDomain'
 deleteDomain
     :: Text -- ^ 'ddDomainName'
     -> DeleteDomain
-deleteDomain pDomainName_ = DeleteDomain' {_ddDomainName = pDomainName_}
-
+deleteDomain pDomainName_
+  = DeleteDomain'{_ddDomainName = pDomainName_}
 
 -- | The name of the domain to delete.
 ddDomainName :: Lens' DeleteDomain Text
@@ -85,16 +84,13 @@ instance ToQuery DeleteDomain where
                "DomainName" =: _ddDomainName]
 
 -- | /See:/ 'deleteDomainResponse' smart constructor.
-data DeleteDomainResponse =
-  DeleteDomainResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDomainResponse = DeleteDomainResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDomainResponse' with the minimum fields required to make a request.
 --
 deleteDomainResponse
     :: DeleteDomainResponse
 deleteDomainResponse = DeleteDomainResponse'
-
 
 instance NFData DeleteDomainResponse where

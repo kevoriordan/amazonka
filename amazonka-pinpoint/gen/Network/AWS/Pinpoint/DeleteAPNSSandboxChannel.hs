@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete an APNS sandbox channel
+-- Disables the APNs sandbox channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteAPNSSandboxChannel
     (
     -- * Creating a Request
@@ -43,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAPNSSandboxChannel' smart constructor.
-newtype DeleteAPNSSandboxChannel = DeleteAPNSSandboxChannel'
-  { _dascApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAPNSSandboxChannel = DeleteAPNSSandboxChannel'{_dascApplicationId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteAPNSSandboxChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dascApplicationId' - Undocumented member.
+-- * 'dascApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteAPNSSandboxChannel
     :: Text -- ^ 'dascApplicationId'
     -> DeleteAPNSSandboxChannel
-deleteAPNSSandboxChannel pApplicationId_ =
-  DeleteAPNSSandboxChannel' {_dascApplicationId = pApplicationId_}
+deleteAPNSSandboxChannel pApplicationId_
+  = DeleteAPNSSandboxChannel'{_dascApplicationId =
+                                pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 dascApplicationId :: Lens' DeleteAPNSSandboxChannel Text
 dascApplicationId = lens _dascApplicationId (\ s a -> s{_dascApplicationId = a})
 
@@ -95,11 +97,14 @@ instance ToQuery DeleteAPNSSandboxChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAPNSSandboxChannelResponse' smart constructor.
-data DeleteAPNSSandboxChannelResponse = DeleteAPNSSandboxChannelResponse'
-  { _dascrsResponseStatus             :: !Int
-  , _dascrsAPNSSandboxChannelResponse :: !APNSSandboxChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAPNSSandboxChannelResponse = DeleteAPNSSandboxChannelResponse'{_dascrsResponseStatus
+                                                                          ::
+                                                                          !Int,
+                                                                          _dascrsAPNSSandboxChannelResponse
+                                                                          ::
+                                                                          !APNSSandboxChannelResponse}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteAPNSSandboxChannelResponse' with the minimum fields required to make a request.
 --
@@ -112,12 +117,12 @@ deleteAPNSSandboxChannelResponse
     :: Int -- ^ 'dascrsResponseStatus'
     -> APNSSandboxChannelResponse -- ^ 'dascrsAPNSSandboxChannelResponse'
     -> DeleteAPNSSandboxChannelResponse
-deleteAPNSSandboxChannelResponse pResponseStatus_ pAPNSSandboxChannelResponse_ =
-  DeleteAPNSSandboxChannelResponse'
-    { _dascrsResponseStatus = pResponseStatus_
-    , _dascrsAPNSSandboxChannelResponse = pAPNSSandboxChannelResponse_
-    }
-
+deleteAPNSSandboxChannelResponse pResponseStatus_
+  pAPNSSandboxChannelResponse_
+  = DeleteAPNSSandboxChannelResponse'{_dascrsResponseStatus
+                                        = pResponseStatus_,
+                                      _dascrsAPNSSandboxChannelResponse =
+                                        pAPNSSandboxChannelResponse_}
 
 -- | -- | The response status code.
 dascrsResponseStatus :: Lens' DeleteAPNSSandboxChannelResponse Int

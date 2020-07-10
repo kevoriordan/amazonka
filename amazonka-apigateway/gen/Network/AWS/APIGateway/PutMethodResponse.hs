@@ -55,15 +55,15 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'putMethodResponse' smart constructor.
-data PutMethodResponse = PutMethodResponse'
-  { _pmResponseModels     :: !(Maybe (Map Text Text))
-  , _pmResponseParameters :: !(Maybe (Map Text Bool))
-  , _pmRestAPIId          :: !Text
-  , _pmResourceId         :: !Text
-  , _pmHttpMethod         :: !Text
-  , _pmStatusCode         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutMethodResponse = PutMethodResponse'{_pmResponseModels
+                                            :: !(Maybe (Map Text Text)),
+                                            _pmResponseParameters ::
+                                            !(Maybe (Map Text Bool)),
+                                            _pmRestAPIId :: !Text,
+                                            _pmResourceId :: !Text,
+                                            _pmHttpMethod :: !Text,
+                                            _pmStatusCode :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutMethodResponse' with the minimum fields required to make a request.
 --
@@ -86,16 +86,14 @@ putMethodResponse
     -> Text -- ^ 'pmHttpMethod'
     -> Text -- ^ 'pmStatusCode'
     -> PutMethodResponse
-putMethodResponse pRestAPIId_ pResourceId_ pHttpMethod_ pStatusCode_ =
-  PutMethodResponse'
-    { _pmResponseModels = Nothing
-    , _pmResponseParameters = Nothing
-    , _pmRestAPIId = pRestAPIId_
-    , _pmResourceId = pResourceId_
-    , _pmHttpMethod = pHttpMethod_
-    , _pmStatusCode = pStatusCode_
-    }
-
+putMethodResponse pRestAPIId_ pResourceId_
+  pHttpMethod_ pStatusCode_
+  = PutMethodResponse'{_pmResponseModels = Nothing,
+                       _pmResponseParameters = Nothing,
+                       _pmRestAPIId = pRestAPIId_,
+                       _pmResourceId = pResourceId_,
+                       _pmHttpMethod = pHttpMethod_,
+                       _pmStatusCode = pStatusCode_}
 
 -- | Specifies the 'Model' resources used for the response's content type. Response models are represented as a key/value map, with a content type as the key and a 'Model' name as the value.
 pmResponseModels :: Lens' PutMethodResponse (HashMap Text Text)

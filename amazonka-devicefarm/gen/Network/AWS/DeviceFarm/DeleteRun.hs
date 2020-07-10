@@ -21,7 +21,7 @@
 -- Deletes the run, given the run ARN.
 --
 --
--- __Note__ Deleting this resource does not stop an in-progress run.
+-- Deleting this resource does not stop an in-progress run.
 --
 module Network.AWS.DeviceFarm.DeleteRun
     (
@@ -50,23 +50,20 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteRun' smart constructor.
-newtype DeleteRun = DeleteRun'
-  { _drArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRun = DeleteRun'{_drArn :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drArn' - The Amazon Resource Name (ARN) for the run you wish to delete.
+-- * 'drArn' - The Amazon Resource Name (ARN) for the run to delete.
 deleteRun
     :: Text -- ^ 'drArn'
     -> DeleteRun
-deleteRun pArn_ = DeleteRun' {_drArn = pArn_}
+deleteRun pArn_ = DeleteRun'{_drArn = pArn_}
 
-
--- | The Amazon Resource Name (ARN) for the run you wish to delete.
+-- | The Amazon Resource Name (ARN) for the run to delete.
 drArn :: Lens' DeleteRun Text
 drArn = lens _drArn (\ s a -> s{_drArn = a})
 
@@ -106,10 +103,9 @@ instance ToQuery DeleteRun where
 --
 --
 -- /See:/ 'deleteRunResponse' smart constructor.
-newtype DeleteRunResponse = DeleteRunResponse'
-  { _drrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRunResponse = DeleteRunResponse'{_drrsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRunResponse' with the minimum fields required to make a request.
 --
@@ -119,9 +115,9 @@ newtype DeleteRunResponse = DeleteRunResponse'
 deleteRunResponse
     :: Int -- ^ 'drrsResponseStatus'
     -> DeleteRunResponse
-deleteRunResponse pResponseStatus_ =
-  DeleteRunResponse' {_drrsResponseStatus = pResponseStatus_}
-
+deleteRunResponse pResponseStatus_
+  = DeleteRunResponse'{_drrsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 drrsResponseStatus :: Lens' DeleteRunResponse Int

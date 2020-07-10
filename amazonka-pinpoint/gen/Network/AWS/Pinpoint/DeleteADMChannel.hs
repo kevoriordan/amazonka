@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete an ADM channel
+-- Disables the ADM channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteADMChannel
     (
     -- * Creating a Request
@@ -43,24 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteADMChannel' smart constructor.
-newtype DeleteADMChannel = DeleteADMChannel'
-  { _dadmcApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteADMChannel = DeleteADMChannel'{_dadmcApplicationId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteADMChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dadmcApplicationId' - Undocumented member.
+-- * 'dadmcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteADMChannel
     :: Text -- ^ 'dadmcApplicationId'
     -> DeleteADMChannel
-deleteADMChannel pApplicationId_ =
-  DeleteADMChannel' {_dadmcApplicationId = pApplicationId_}
+deleteADMChannel pApplicationId_
+  = DeleteADMChannel'{_dadmcApplicationId =
+                        pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 dadmcApplicationId :: Lens' DeleteADMChannel Text
 dadmcApplicationId = lens _dadmcApplicationId (\ s a -> s{_dadmcApplicationId = a})
 
@@ -94,11 +95,13 @@ instance ToQuery DeleteADMChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteADMChannelResponse' smart constructor.
-data DeleteADMChannelResponse = DeleteADMChannelResponse'
-  { _dadmcrsResponseStatus     :: !Int
-  , _dadmcrsADMChannelResponse :: !ADMChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteADMChannelResponse = DeleteADMChannelResponse'{_dadmcrsResponseStatus
+                                                          :: !Int,
+                                                          _dadmcrsADMChannelResponse
+                                                          ::
+                                                          !ADMChannelResponse}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteADMChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +114,11 @@ deleteADMChannelResponse
     :: Int -- ^ 'dadmcrsResponseStatus'
     -> ADMChannelResponse -- ^ 'dadmcrsADMChannelResponse'
     -> DeleteADMChannelResponse
-deleteADMChannelResponse pResponseStatus_ pADMChannelResponse_ =
-  DeleteADMChannelResponse'
-    { _dadmcrsResponseStatus = pResponseStatus_
-    , _dadmcrsADMChannelResponse = pADMChannelResponse_
-    }
-
+deleteADMChannelResponse pResponseStatus_
+  pADMChannelResponse_
+  = DeleteADMChannelResponse'{_dadmcrsResponseStatus =
+                                pResponseStatus_,
+                              _dadmcrsADMChannelResponse = pADMChannelResponse_}
 
 -- | -- | The response status code.
 dadmcrsResponseStatus :: Lens' DeleteADMChannelResponse Int

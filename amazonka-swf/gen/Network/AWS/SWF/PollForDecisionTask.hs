@@ -27,7 +27,7 @@
 --
 -- /Important:/ Because the number of workflow history events for a single workflow execution might be very large, the result returned might be split up across a number of pages. To retrieve subsequent pages, make additional calls to @PollForDecisionTask@ using the @nextPageToken@ returned by the initial call. Note that you do /not/ call @GetWorkflowExecutionHistory@ with this @nextPageToken@ . Instead, call @PollForDecisionTask@ again.
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -39,7 +39,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 --
 -- This operation returns paginated results.
@@ -79,47 +79,44 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'pollForDecisionTask' smart constructor.
-data PollForDecisionTask = PollForDecisionTask'
-  { _pfdtNextPageToken   :: !(Maybe Text)
-  , _pfdtReverseOrder    :: !(Maybe Bool)
-  , _pfdtMaximumPageSize :: !(Maybe Nat)
-  , _pfdtIdentity        :: !(Maybe Text)
-  , _pfdtDomain          :: !Text
-  , _pfdtTaskList        :: !TaskList
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PollForDecisionTask = PollForDecisionTask'{_pfdtNextPageToken
+                                                :: !(Maybe Text),
+                                                _pfdtReverseOrder ::
+                                                !(Maybe Bool),
+                                                _pfdtMaximumPageSize ::
+                                                !(Maybe Nat),
+                                                _pfdtIdentity :: !(Maybe Text),
+                                                _pfdtDomain :: !Text,
+                                                _pfdtTaskList :: !TaskList}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PollForDecisionTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pfdtNextPageToken' - If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
+-- * 'pfdtNextPageToken' - If @NextPageToken@ is returned there are more results available. The value of @NextPageToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a @400@ error: "@Specified token has exceeded its maximum lifetime@ ".  The configured @maximumPageSize@ determines how many results can be returned in a single call. 
 --
 -- * 'pfdtReverseOrder' - When set to @true@ , returns the events in reverse order. By default the results are returned in ascending order of the @eventTimestamp@ of the events.
 --
--- * 'pfdtMaximumPageSize' - The maximum number of results that are returned per call. @nextPageToken@ can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size /smaller/ than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+-- * 'pfdtMaximumPageSize' - The maximum number of results that are returned per call. Use @nextPageToken@ to obtain further pages of results.  This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
 --
 -- * 'pfdtIdentity' - Identity of the decider making the request, which is recorded in the DecisionTaskStarted event in the workflow history. This enables diagnostic tracing when problems arise. The form of this identity is user defined.
 --
 -- * 'pfdtDomain' - The name of the domain containing the task lists to poll.
 --
--- * 'pfdtTaskList' - Specifies the task list to poll for decision tasks. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not contain the literal string @arn@ .
+-- * 'pfdtTaskList' - Specifies the task list to poll for decision tasks. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not /be/ the literal string @arn@ .
 pollForDecisionTask
     :: Text -- ^ 'pfdtDomain'
     -> TaskList -- ^ 'pfdtTaskList'
     -> PollForDecisionTask
-pollForDecisionTask pDomain_ pTaskList_ =
-  PollForDecisionTask'
-    { _pfdtNextPageToken = Nothing
-    , _pfdtReverseOrder = Nothing
-    , _pfdtMaximumPageSize = Nothing
-    , _pfdtIdentity = Nothing
-    , _pfdtDomain = pDomain_
-    , _pfdtTaskList = pTaskList_
-    }
+pollForDecisionTask pDomain_ pTaskList_
+  = PollForDecisionTask'{_pfdtNextPageToken = Nothing,
+                         _pfdtReverseOrder = Nothing,
+                         _pfdtMaximumPageSize = Nothing,
+                         _pfdtIdentity = Nothing, _pfdtDomain = pDomain_,
+                         _pfdtTaskList = pTaskList_}
 
-
--- | If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
+-- | If @NextPageToken@ is returned there are more results available. The value of @NextPageToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a @400@ error: "@Specified token has exceeded its maximum lifetime@ ".  The configured @maximumPageSize@ determines how many results can be returned in a single call. 
 pfdtNextPageToken :: Lens' PollForDecisionTask (Maybe Text)
 pfdtNextPageToken = lens _pfdtNextPageToken (\ s a -> s{_pfdtNextPageToken = a})
 
@@ -127,7 +124,7 @@ pfdtNextPageToken = lens _pfdtNextPageToken (\ s a -> s{_pfdtNextPageToken = a})
 pfdtReverseOrder :: Lens' PollForDecisionTask (Maybe Bool)
 pfdtReverseOrder = lens _pfdtReverseOrder (\ s a -> s{_pfdtReverseOrder = a})
 
--- | The maximum number of results that are returned per call. @nextPageToken@ can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size /smaller/ than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+-- | The maximum number of results that are returned per call. Use @nextPageToken@ to obtain further pages of results.  This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
 pfdtMaximumPageSize :: Lens' PollForDecisionTask (Maybe Natural)
 pfdtMaximumPageSize = lens _pfdtMaximumPageSize (\ s a -> s{_pfdtMaximumPageSize = a}) . mapping _Nat
 
@@ -139,7 +136,7 @@ pfdtIdentity = lens _pfdtIdentity (\ s a -> s{_pfdtIdentity = a})
 pfdtDomain :: Lens' PollForDecisionTask Text
 pfdtDomain = lens _pfdtDomain (\ s a -> s{_pfdtDomain = a})
 
--- | Specifies the task list to poll for decision tasks. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not contain the literal string @arn@ .
+-- | Specifies the task list to poll for decision tasks. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not /be/ the literal string @arn@ .
 pfdtTaskList :: Lens' PollForDecisionTask TaskList
 pfdtTaskList = lens _pfdtTaskList (\ s a -> s{_pfdtTaskList = a})
 
@@ -203,17 +200,33 @@ instance ToQuery PollForDecisionTask where
 --
 --
 -- /See:/ 'pollForDecisionTaskResponse' smart constructor.
-data PollForDecisionTaskResponse = PollForDecisionTaskResponse'
-  { _pfdtrsNextPageToken          :: !(Maybe Text)
-  , _pfdtrsWorkflowType           :: !(Maybe WorkflowType)
-  , _pfdtrsPreviousStartedEventId :: !(Maybe Integer)
-  , _pfdtrsEvents                 :: !(Maybe [HistoryEvent])
-  , _pfdtrsTaskToken              :: !(Maybe Text)
-  , _pfdtrsWorkflowExecution      :: !(Maybe WorkflowExecution)
-  , _pfdtrsResponseStatus         :: !Int
-  , _pfdtrsStartedEventId         :: !Integer
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PollForDecisionTaskResponse = PollForDecisionTaskResponse'{_pfdtrsNextPageToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _pfdtrsWorkflowType
+                                                                ::
+                                                                !(Maybe
+                                                                    WorkflowType),
+                                                                _pfdtrsPreviousStartedEventId
+                                                                ::
+                                                                !(Maybe
+                                                                    Integer),
+                                                                _pfdtrsEvents ::
+                                                                !(Maybe
+                                                                    [HistoryEvent]),
+                                                                _pfdtrsTaskToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _pfdtrsWorkflowExecution
+                                                                ::
+                                                                !(Maybe
+                                                                    WorkflowExecution),
+                                                                _pfdtrsResponseStatus
+                                                                :: !Int,
+                                                                _pfdtrsStartedEventId
+                                                                :: !Integer}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'PollForDecisionTaskResponse' with the minimum fields required to make a request.
 --
@@ -238,18 +251,17 @@ pollForDecisionTaskResponse
     :: Int -- ^ 'pfdtrsResponseStatus'
     -> Integer -- ^ 'pfdtrsStartedEventId'
     -> PollForDecisionTaskResponse
-pollForDecisionTaskResponse pResponseStatus_ pStartedEventId_ =
-  PollForDecisionTaskResponse'
-    { _pfdtrsNextPageToken = Nothing
-    , _pfdtrsWorkflowType = Nothing
-    , _pfdtrsPreviousStartedEventId = Nothing
-    , _pfdtrsEvents = Nothing
-    , _pfdtrsTaskToken = Nothing
-    , _pfdtrsWorkflowExecution = Nothing
-    , _pfdtrsResponseStatus = pResponseStatus_
-    , _pfdtrsStartedEventId = pStartedEventId_
-    }
-
+pollForDecisionTaskResponse pResponseStatus_
+  pStartedEventId_
+  = PollForDecisionTaskResponse'{_pfdtrsNextPageToken =
+                                   Nothing,
+                                 _pfdtrsWorkflowType = Nothing,
+                                 _pfdtrsPreviousStartedEventId = Nothing,
+                                 _pfdtrsEvents = Nothing,
+                                 _pfdtrsTaskToken = Nothing,
+                                 _pfdtrsWorkflowExecution = Nothing,
+                                 _pfdtrsResponseStatus = pResponseStatus_,
+                                 _pfdtrsStartedEventId = pStartedEventId_}
 
 -- | If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
 pfdtrsNextPageToken :: Lens' PollForDecisionTaskResponse (Maybe Text)

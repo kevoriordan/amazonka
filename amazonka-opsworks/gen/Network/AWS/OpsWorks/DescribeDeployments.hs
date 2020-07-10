@@ -21,7 +21,7 @@
 -- Requests a description of a specified set of deployments.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeDeployments
     (
@@ -49,12 +49,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeDeployments' smart constructor.
-data DescribeDeployments = DescribeDeployments'
-  { _ddAppId         :: !(Maybe Text)
-  , _ddDeploymentIds :: !(Maybe [Text])
-  , _ddStackId       :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDeployments = DescribeDeployments'{_ddAppId
+                                                :: !(Maybe Text),
+                                                _ddDeploymentIds ::
+                                                !(Maybe [Text]),
+                                                _ddStackId :: !(Maybe Text)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeDeployments' with the minimum fields required to make a request.
 --
@@ -67,10 +67,9 @@ data DescribeDeployments = DescribeDeployments'
 -- * 'ddStackId' - The stack ID. If you include this parameter, the command returns a description of the commands associated with the specified stack.
 describeDeployments
     :: DescribeDeployments
-describeDeployments =
-  DescribeDeployments'
-    {_ddAppId = Nothing, _ddDeploymentIds = Nothing, _ddStackId = Nothing}
-
+describeDeployments
+  = DescribeDeployments'{_ddAppId = Nothing,
+                         _ddDeploymentIds = Nothing, _ddStackId = Nothing}
 
 -- | The app ID. If you include this parameter, the command returns a description of the commands associated with the specified app.
 ddAppId :: Lens' DescribeDeployments (Maybe Text)
@@ -128,11 +127,14 @@ instance ToQuery DescribeDeployments where
 --
 --
 -- /See:/ 'describeDeploymentsResponse' smart constructor.
-data DescribeDeploymentsResponse = DescribeDeploymentsResponse'
-  { _ddrsDeployments    :: !(Maybe [Deployment])
-  , _ddrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDeploymentsResponse = DescribeDeploymentsResponse'{_ddrsDeployments
+                                                                ::
+                                                                !(Maybe
+                                                                    [Deployment]),
+                                                                _ddrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeDeploymentsResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +146,10 @@ data DescribeDeploymentsResponse = DescribeDeploymentsResponse'
 describeDeploymentsResponse
     :: Int -- ^ 'ddrsResponseStatus'
     -> DescribeDeploymentsResponse
-describeDeploymentsResponse pResponseStatus_ =
-  DescribeDeploymentsResponse'
-    {_ddrsDeployments = Nothing, _ddrsResponseStatus = pResponseStatus_}
-
+describeDeploymentsResponse pResponseStatus_
+  = DescribeDeploymentsResponse'{_ddrsDeployments =
+                                   Nothing,
+                                 _ddrsResponseStatus = pResponseStatus_}
 
 -- | An array of @Deployment@ objects that describe the deployments.
 ddrsDeployments :: Lens' DescribeDeploymentsResponse [Deployment]

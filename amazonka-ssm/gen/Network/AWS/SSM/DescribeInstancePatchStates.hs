@@ -21,6 +21,8 @@
 -- Retrieves the high-level patch state of one or more instances.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeInstancePatchStates
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.DescribeInstancePatchStates
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,15 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeInstancePatchStates' smart constructor.
-data DescribeInstancePatchStates = DescribeInstancePatchStates'
-  { _dipsNextToken   :: !(Maybe Text)
-  , _dipsMaxResults  :: !(Maybe Nat)
-  , _dipsInstanceIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstancePatchStates = DescribeInstancePatchStates'{_dipsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dipsMaxResults
+                                                                :: !(Maybe Nat),
+                                                                _dipsInstanceIds
+                                                                :: ![Text]}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeInstancePatchStates' with the minimum fields required to make a request.
 --
@@ -66,13 +72,11 @@ data DescribeInstancePatchStates = DescribeInstancePatchStates'
 -- * 'dipsInstanceIds' - The ID of the instance whose patch state information should be retrieved.
 describeInstancePatchStates
     :: DescribeInstancePatchStates
-describeInstancePatchStates =
-  DescribeInstancePatchStates'
-    { _dipsNextToken = Nothing
-    , _dipsMaxResults = Nothing
-    , _dipsInstanceIds = mempty
-    }
-
+describeInstancePatchStates
+  = DescribeInstancePatchStates'{_dipsNextToken =
+                                   Nothing,
+                                 _dipsMaxResults = Nothing,
+                                 _dipsInstanceIds = mempty}
 
 -- | The token for the next set of items to return. (You received this token from a previous call.)
 dipsNextToken :: Lens' DescribeInstancePatchStates (Maybe Text)
@@ -85,6 +89,13 @@ dipsMaxResults = lens _dipsMaxResults (\ s a -> s{_dipsMaxResults = a}) . mappin
 -- | The ID of the instance whose patch state information should be retrieved.
 dipsInstanceIds :: Lens' DescribeInstancePatchStates [Text]
 dipsInstanceIds = lens _dipsInstanceIds (\ s a -> s{_dipsInstanceIds = a}) . _Coerce
+
+instance AWSPager DescribeInstancePatchStates where
+        page rq rs
+          | stop (rs ^. dipsrsNextToken) = Nothing
+          | stop (rs ^. dipsrsInstancePatchStates) = Nothing
+          | otherwise =
+            Just $ rq & dipsNextToken .~ rs ^. dipsrsNextToken
 
 instance AWSRequest DescribeInstancePatchStates where
         type Rs DescribeInstancePatchStates =
@@ -127,12 +138,19 @@ instance ToQuery DescribeInstancePatchStates where
         toQuery = const mempty
 
 -- | /See:/ 'describeInstancePatchStatesResponse' smart constructor.
-data DescribeInstancePatchStatesResponse = DescribeInstancePatchStatesResponse'
-  { _dipsrsNextToken           :: !(Maybe Text)
-  , _dipsrsInstancePatchStates :: !(Maybe [InstancePatchState])
-  , _dipsrsResponseStatus      :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeInstancePatchStatesResponse = DescribeInstancePatchStatesResponse'{_dipsrsNextToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dipsrsInstancePatchStates
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [InstancePatchState]),
+                                                                                _dipsrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Show, Data, Typeable,
+                                                       Generic)
 
 -- | Creates a value of 'DescribeInstancePatchStatesResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +164,12 @@ data DescribeInstancePatchStatesResponse = DescribeInstancePatchStatesResponse'
 describeInstancePatchStatesResponse
     :: Int -- ^ 'dipsrsResponseStatus'
     -> DescribeInstancePatchStatesResponse
-describeInstancePatchStatesResponse pResponseStatus_ =
-  DescribeInstancePatchStatesResponse'
-    { _dipsrsNextToken = Nothing
-    , _dipsrsInstancePatchStates = Nothing
-    , _dipsrsResponseStatus = pResponseStatus_
-    }
-
+describeInstancePatchStatesResponse pResponseStatus_
+  = DescribeInstancePatchStatesResponse'{_dipsrsNextToken
+                                           = Nothing,
+                                         _dipsrsInstancePatchStates = Nothing,
+                                         _dipsrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 dipsrsNextToken :: Lens' DescribeInstancePatchStatesResponse (Maybe Text)

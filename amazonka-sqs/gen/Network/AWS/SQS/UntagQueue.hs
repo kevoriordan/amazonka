@@ -18,24 +18,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Remove cost allocation tags from the specified Amazon SQS queue. For an overview, see <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-tagging-queues.html Tagging Amazon SQS Queues> in the /Amazon Simple Queue Service Developer Guide/ .
+-- Remove cost allocation tags from the specified Amazon SQS queue. For an overview, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html Tagging Your Amazon SQS Queues> in the /Amazon Simple Queue Service Developer Guide/ .
 --
---
--- When you use queue tags, keep the following guidelines in mind:
---
---     * Adding more than 50 tags to a queue isn't recommended.
---
---     * Tags don't have any semantic meaning. Amazon SQS interprets tags as character strings.
---
---     * Tags are case-sensitive.
---
---     * A new tag with a key identical to that of an existing tag overwrites the existing tag.
---
---     * Tagging API actions are limited to 5 TPS per AWS account. If your application requires a higher throughput, file a <https://console.aws.amazon.com/support/home#/case/create?issueType=technical technical support request> .
---
---
---
--- For a full list of tag restrictions, see <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html Limits Related to Queues> in the /Amazon Simple Queue Service Developer Guide/ .
 --
 module Network.AWS.SQS.UntagQueue
     (
@@ -59,11 +43,9 @@ import Network.AWS.SQS.Types
 import Network.AWS.SQS.Types.Product
 
 -- | /See:/ 'untagQueue' smart constructor.
-data UntagQueue = UntagQueue'
-  { _uqQueueURL :: !Text
-  , _uqTagKeys  :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagQueue = UntagQueue'{_uqQueueURL :: !Text,
+                              _uqTagKeys :: ![Text]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagQueue' with the minimum fields required to make a request.
 --
@@ -75,9 +57,9 @@ data UntagQueue = UntagQueue'
 untagQueue
     :: Text -- ^ 'uqQueueURL'
     -> UntagQueue
-untagQueue pQueueURL_ =
-  UntagQueue' {_uqQueueURL = pQueueURL_, _uqTagKeys = mempty}
-
+untagQueue pQueueURL_
+  = UntagQueue'{_uqQueueURL = pQueueURL_,
+                _uqTagKeys = mempty}
 
 -- | The URL of the queue.
 uqQueueURL :: Lens' UntagQueue Text
@@ -111,16 +93,13 @@ instance ToQuery UntagQueue where
                toQueryList "TagKey" _uqTagKeys]
 
 -- | /See:/ 'untagQueueResponse' smart constructor.
-data UntagQueueResponse =
-  UntagQueueResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagQueueResponse = UntagQueueResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagQueueResponse' with the minimum fields required to make a request.
 --
 untagQueueResponse
     :: UntagQueueResponse
 untagQueueResponse = UntagQueueResponse'
-
 
 instance NFData UntagQueueResponse where

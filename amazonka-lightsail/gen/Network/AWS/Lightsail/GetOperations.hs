@@ -51,22 +51,21 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getOperations' smart constructor.
-newtype GetOperations = GetOperations'
-  { _goPageToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetOperations = GetOperations'{_goPageToken
+                                       :: Maybe Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOperations' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'goPageToken' - A token used for advancing to the next page of results from your get operations request.
+-- * 'goPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetOperations@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getOperations
     :: GetOperations
-getOperations = GetOperations' {_goPageToken = Nothing}
+getOperations
+  = GetOperations'{_goPageToken = Nothing}
 
-
--- | A token used for advancing to the next page of results from your get operations request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetOperations@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 goPageToken :: Lens' GetOperations (Maybe Text)
 goPageToken = lens _goPageToken (\ s a -> s{_goPageToken = a})
 
@@ -113,38 +112,38 @@ instance ToQuery GetOperations where
         toQuery = const mempty
 
 -- | /See:/ 'getOperationsResponse' smart constructor.
-data GetOperationsResponse = GetOperationsResponse'
-  { _gosrsNextPageToken  :: !(Maybe Text)
-  , _gosrsOperations     :: !(Maybe [Operation])
-  , _gosrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetOperationsResponse = GetOperationsResponse'{_gosrsNextPageToken
+                                                    :: !(Maybe Text),
+                                                    _gosrsOperations ::
+                                                    !(Maybe [Operation]),
+                                                    _gosrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetOperationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gosrsNextPageToken' - A token used for advancing to the next page of results from your get operations request.
+-- * 'gosrsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetOperations@ request and specify the next page token using the @pageToken@ parameter.
 --
--- * 'gosrsOperations' - An array of key-value pairs containing information about the results of your get operations request.
+-- * 'gosrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'gosrsResponseStatus' - -- | The response status code.
 getOperationsResponse
     :: Int -- ^ 'gosrsResponseStatus'
     -> GetOperationsResponse
-getOperationsResponse pResponseStatus_ =
-  GetOperationsResponse'
-    { _gosrsNextPageToken = Nothing
-    , _gosrsOperations = Nothing
-    , _gosrsResponseStatus = pResponseStatus_
-    }
+getOperationsResponse pResponseStatus_
+  = GetOperationsResponse'{_gosrsNextPageToken =
+                             Nothing,
+                           _gosrsOperations = Nothing,
+                           _gosrsResponseStatus = pResponseStatus_}
 
-
--- | A token used for advancing to the next page of results from your get operations request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetOperations@ request and specify the next page token using the @pageToken@ parameter.
 gosrsNextPageToken :: Lens' GetOperationsResponse (Maybe Text)
 gosrsNextPageToken = lens _gosrsNextPageToken (\ s a -> s{_gosrsNextPageToken = a})
 
--- | An array of key-value pairs containing information about the results of your get operations request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 gosrsOperations :: Lens' GetOperationsResponse [Operation]
 gosrsOperations = lens _gosrsOperations (\ s a -> s{_gosrsOperations = a}) . _Default . _Coerce
 

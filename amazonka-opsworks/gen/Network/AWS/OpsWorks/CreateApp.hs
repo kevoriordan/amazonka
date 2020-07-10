@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an app for a specified stack. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html Creating Apps> .
+-- Creates an app for a specified stack. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html Creating Apps> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.CreateApp
     (
@@ -58,21 +58,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createApp' smart constructor.
-data CreateApp = CreateApp'
-  { _caSSLConfiguration :: !(Maybe SSLConfiguration)
-  , _caEnvironment      :: !(Maybe [EnvironmentVariable])
-  , _caEnableSSL        :: !(Maybe Bool)
-  , _caShortname        :: !(Maybe Text)
-  , _caDataSources      :: !(Maybe [DataSource])
-  , _caAppSource        :: !(Maybe Source)
-  , _caAttributes       :: !(Maybe (Map AppAttributesKeys Text))
-  , _caDomains          :: !(Maybe [Text])
-  , _caDescription      :: !(Maybe Text)
-  , _caStackId          :: !Text
-  , _caName             :: !Text
-  , _caType             :: !AppType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateApp = CreateApp'{_caSSLConfiguration ::
+                            !(Maybe SSLConfiguration),
+                            _caEnvironment :: !(Maybe [EnvironmentVariable]),
+                            _caEnableSSL :: !(Maybe Bool),
+                            _caShortname :: !(Maybe Text),
+                            _caDataSources :: !(Maybe [DataSource]),
+                            _caAppSource :: !(Maybe Source),
+                            _caAttributes ::
+                            !(Maybe (Map AppAttributesKeys Text)),
+                            _caDomains :: !(Maybe [Text]),
+                            _caDescription :: !(Maybe Text),
+                            _caStackId :: !Text, _caName :: !Text,
+                            _caType :: !AppType}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateApp' with the minimum fields required to make a request.
 --
@@ -80,7 +79,7 @@ data CreateApp = CreateApp'
 --
 -- * 'caSSLConfiguration' - An @SslConfiguration@ object with the SSL configuration.
 --
--- * 'caEnvironment' - An array of @EnvironmentVariable@ objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instance. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment Environment Variables> . There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 10KB)."
+-- * 'caEnvironment' - An array of @EnvironmentVariable@ objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instance. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment Environment Variables> . There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 20 KB. This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 20KB)."
 --
 -- * 'caEnableSSL' - Whether to enable SSL for the app.
 --
@@ -92,7 +91,7 @@ data CreateApp = CreateApp'
 --
 -- * 'caAttributes' - One or more user-defined key/value pairs to be added to the stack attributes.
 --
--- * 'caDomains' - The app virtual host settings, with multiple domains separated by commas. For example: @'www.example.com, example.com'@
+-- * 'caDomains' - The app virtual host settings, with multiple domains separated by commas. For example: @'www.example.com, example.com'@ 
 --
 -- * 'caDescription' - A description of the app.
 --
@@ -106,28 +105,20 @@ createApp
     -> Text -- ^ 'caName'
     -> AppType -- ^ 'caType'
     -> CreateApp
-createApp pStackId_ pName_ pType_ =
-  CreateApp'
-    { _caSSLConfiguration = Nothing
-    , _caEnvironment = Nothing
-    , _caEnableSSL = Nothing
-    , _caShortname = Nothing
-    , _caDataSources = Nothing
-    , _caAppSource = Nothing
-    , _caAttributes = Nothing
-    , _caDomains = Nothing
-    , _caDescription = Nothing
-    , _caStackId = pStackId_
-    , _caName = pName_
-    , _caType = pType_
-    }
-
+createApp pStackId_ pName_ pType_
+  = CreateApp'{_caSSLConfiguration = Nothing,
+               _caEnvironment = Nothing, _caEnableSSL = Nothing,
+               _caShortname = Nothing, _caDataSources = Nothing,
+               _caAppSource = Nothing, _caAttributes = Nothing,
+               _caDomains = Nothing, _caDescription = Nothing,
+               _caStackId = pStackId_, _caName = pName_,
+               _caType = pType_}
 
 -- | An @SslConfiguration@ object with the SSL configuration.
 caSSLConfiguration :: Lens' CreateApp (Maybe SSLConfiguration)
 caSSLConfiguration = lens _caSSLConfiguration (\ s a -> s{_caSSLConfiguration = a})
 
--- | An array of @EnvironmentVariable@ objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instance. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment Environment Variables> . There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 10KB)."
+-- | An array of @EnvironmentVariable@ objects that specify environment variables to be associated with the app. After you deploy the app, these variables are defined on the associated app server instance. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment Environment Variables> . There is no specific limit on the number of environment variables. However, the size of the associated data structure - which includes the variables' names, values, and protected flag values - cannot exceed 20 KB. This limit should accommodate most if not all use cases. Exceeding it will cause an exception with the message, "Environment: is too large (maximum is 20KB)."
 caEnvironment :: Lens' CreateApp [EnvironmentVariable]
 caEnvironment = lens _caEnvironment (\ s a -> s{_caEnvironment = a}) . _Default . _Coerce
 
@@ -151,7 +142,7 @@ caAppSource = lens _caAppSource (\ s a -> s{_caAppSource = a})
 caAttributes :: Lens' CreateApp (HashMap AppAttributesKeys Text)
 caAttributes = lens _caAttributes (\ s a -> s{_caAttributes = a}) . _Default . _Map
 
--- | The app virtual host settings, with multiple domains separated by commas. For example: @'www.example.com, example.com'@
+-- | The app virtual host settings, with multiple domains separated by commas. For example: @'www.example.com, example.com'@ 
 caDomains :: Lens' CreateApp [Text]
 caDomains = lens _caDomains (\ s a -> s{_caDomains = a}) . _Default . _Coerce
 
@@ -220,11 +211,10 @@ instance ToQuery CreateApp where
 --
 --
 -- /See:/ 'createAppResponse' smart constructor.
-data CreateAppResponse = CreateAppResponse'
-  { _carsAppId          :: !(Maybe Text)
-  , _carsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAppResponse = CreateAppResponse'{_carsAppId
+                                            :: !(Maybe Text),
+                                            _carsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateAppResponse' with the minimum fields required to make a request.
 --
@@ -236,10 +226,9 @@ data CreateAppResponse = CreateAppResponse'
 createAppResponse
     :: Int -- ^ 'carsResponseStatus'
     -> CreateAppResponse
-createAppResponse pResponseStatus_ =
-  CreateAppResponse'
-    {_carsAppId = Nothing, _carsResponseStatus = pResponseStatus_}
-
+createAppResponse pResponseStatus_
+  = CreateAppResponse'{_carsAppId = Nothing,
+                       _carsResponseStatus = pResponseStatus_}
 
 -- | The app ID.
 carsAppId :: Lens' CreateAppResponse (Maybe Text)

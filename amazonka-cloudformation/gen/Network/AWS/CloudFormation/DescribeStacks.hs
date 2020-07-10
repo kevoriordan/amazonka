@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeStacks' smart constructor.
-data DescribeStacks = DescribeStacks'
-  { _dNextToken :: !(Maybe Text)
-  , _dStackName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStacks = DescribeStacks'{_dNextToken ::
+                                      !(Maybe Text),
+                                      _dStackName :: !(Maybe Text)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeStacks' with the minimum fields required to make a request.
 --
@@ -69,8 +68,9 @@ data DescribeStacks = DescribeStacks'
 -- * 'dStackName' - The name or the unique stack ID that is associated with the stack, which are not always interchangeable:     * Running stacks: You can specify either the stack's name or its unique stack ID.     * Deleted stacks: You must specify the unique stack ID. Default: There is no default value.
 describeStacks
     :: DescribeStacks
-describeStacks = DescribeStacks' {_dNextToken = Nothing, _dStackName = Nothing}
-
+describeStacks
+  = DescribeStacks'{_dNextToken = Nothing,
+                    _dStackName = Nothing}
 
 -- | A string that identifies the next page of stacks that you want to retrieve.
 dNextToken :: Lens' DescribeStacks (Maybe Text)
@@ -122,12 +122,14 @@ instance ToQuery DescribeStacks where
 --
 --
 -- /See:/ 'describeStacksResponse' smart constructor.
-data DescribeStacksResponse = DescribeStacksResponse'
-  { _dsrsNextToken      :: !(Maybe Text)
-  , _dsrsStacks         :: !(Maybe [Stack])
-  , _dsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStacksResponse = DescribeStacksResponse'{_dsrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _dsrsStacks ::
+                                                      !(Maybe [Stack]),
+                                                      _dsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeStacksResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +143,10 @@ data DescribeStacksResponse = DescribeStacksResponse'
 describeStacksResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DescribeStacksResponse
-describeStacksResponse pResponseStatus_ =
-  DescribeStacksResponse'
-    { _dsrsNextToken = Nothing
-    , _dsrsStacks = Nothing
-    , _dsrsResponseStatus = pResponseStatus_
-    }
-
+describeStacksResponse pResponseStatus_
+  = DescribeStacksResponse'{_dsrsNextToken = Nothing,
+                            _dsrsStacks = Nothing,
+                            _dsrsResponseStatus = pResponseStatus_}
 
 -- | If the output exceeds 1 MB in size, a string that identifies the next page of stacks. If no additional page exists, this value is null.
 dsrsNextToken :: Lens' DescribeStacksResponse (Maybe Text)

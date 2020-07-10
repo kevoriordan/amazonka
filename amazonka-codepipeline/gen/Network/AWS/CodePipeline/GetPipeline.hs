@@ -46,35 +46,35 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a GetPipeline action.
+-- | Represents the input of a @GetPipeline@ action.
 --
 --
 --
 -- /See:/ 'getPipeline' smart constructor.
-data GetPipeline = GetPipeline'
-  { _gpVersion :: !(Maybe Nat)
-  , _gpName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPipeline = GetPipeline'{_gpVersion ::
+                                !(Maybe Nat),
+                                _gpName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPipeline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gpVersion' - The version number of the pipeline. If you do not specify a version, defaults to the most current version.
+-- * 'gpVersion' - The version number of the pipeline. If you do not specify a version, defaults to the current version.
 --
--- * 'gpName' - The name of the pipeline for which you want to get information. Pipeline names must be unique under an Amazon Web Services (AWS) user account.
+-- * 'gpName' - The name of the pipeline for which you want to get information. Pipeline names must be unique under an AWS user account.
 getPipeline
     :: Text -- ^ 'gpName'
     -> GetPipeline
-getPipeline pName_ = GetPipeline' {_gpVersion = Nothing, _gpName = pName_}
+getPipeline pName_
+  = GetPipeline'{_gpVersion = Nothing,
+                 _gpName = pName_}
 
-
--- | The version number of the pipeline. If you do not specify a version, defaults to the most current version.
+-- | The version number of the pipeline. If you do not specify a version, defaults to the current version.
 gpVersion :: Lens' GetPipeline (Maybe Natural)
 gpVersion = lens _gpVersion (\ s a -> s{_gpVersion = a}) . mapping _Nat
 
--- | The name of the pipeline for which you want to get information. Pipeline names must be unique under an Amazon Web Services (AWS) user account.
+-- | The name of the pipeline for which you want to get information. Pipeline names must be unique under an AWS user account.
 gpName :: Lens' GetPipeline Text
 gpName = lens _gpName (\ s a -> s{_gpName = a})
 
@@ -114,43 +114,40 @@ instance ToPath GetPipeline where
 instance ToQuery GetPipeline where
         toQuery = const mempty
 
--- | Represents the output of a GetPipeline action.
+-- | Represents the output of a @GetPipeline@ action.
 --
 --
 --
 -- /See:/ 'getPipelineResponse' smart constructor.
-data GetPipelineResponse = GetPipelineResponse'
-  { _gprsPipeline       :: !(Maybe PipelineDeclaration)
-  , _gprsMetadata       :: !(Maybe PipelineMetadata)
-  , _gprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPipelineResponse = GetPipelineResponse'{_gprsPipeline
+                                                :: !(Maybe PipelineDeclaration),
+                                                _gprsMetadata ::
+                                                !(Maybe PipelineMetadata),
+                                                _gprsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPipelineResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gprsPipeline' - Represents the structure of actions and stages to be performed in the pipeline.
+-- * 'gprsPipeline' - Represents the structure of actions and stages to be performed in the pipeline. 
 --
--- * 'gprsMetadata' - Represents the pipeline metadata information returned as part of the output of a GetPipeline action.
+-- * 'gprsMetadata' - Represents the pipeline metadata information returned as part of the output of a @GetPipeline@ action.
 --
 -- * 'gprsResponseStatus' - -- | The response status code.
 getPipelineResponse
     :: Int -- ^ 'gprsResponseStatus'
     -> GetPipelineResponse
-getPipelineResponse pResponseStatus_ =
-  GetPipelineResponse'
-    { _gprsPipeline = Nothing
-    , _gprsMetadata = Nothing
-    , _gprsResponseStatus = pResponseStatus_
-    }
+getPipelineResponse pResponseStatus_
+  = GetPipelineResponse'{_gprsPipeline = Nothing,
+                         _gprsMetadata = Nothing,
+                         _gprsResponseStatus = pResponseStatus_}
 
-
--- | Represents the structure of actions and stages to be performed in the pipeline.
+-- | Represents the structure of actions and stages to be performed in the pipeline. 
 gprsPipeline :: Lens' GetPipelineResponse (Maybe PipelineDeclaration)
 gprsPipeline = lens _gprsPipeline (\ s a -> s{_gprsPipeline = a})
 
--- | Represents the pipeline metadata information returned as part of the output of a GetPipeline action.
+-- | Represents the pipeline metadata information returned as part of the output of a @GetPipeline@ action.
 gprsMetadata :: Lens' GetPipelineResponse (Maybe PipelineMetadata)
 gprsMetadata = lens _gprsMetadata (\ s a -> s{_gprsMetadata = a})
 

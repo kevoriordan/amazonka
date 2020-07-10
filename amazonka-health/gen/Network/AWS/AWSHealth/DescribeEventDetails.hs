@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns detailed information about one or more specified events. Information includes standard event data (region, service, etc., as returned by 'DescribeEvents' ), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included; to retrieve those, use the 'DescribeAffectedEntities' operation.
+-- Returns detailed information about one or more specified events. Information includes standard event data (region, service, and so on, as returned by 'DescribeEvents' ), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included; to retrieve those, use the 'DescribeAffectedEntities' operation.
 --
 --
 -- If a specified event cannot be retrieved, an error message is returned for that event.
@@ -49,11 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEventDetails' smart constructor.
-data DescribeEventDetails = DescribeEventDetails'
-  { _dedLocale    :: !(Maybe Text)
-  , _dedEventARNs :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventDetails = DescribeEventDetails'{_dedLocale
+                                                  :: !(Maybe Text),
+                                                  _dedEventARNs ::
+                                                  !(List1 Text)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEventDetails' with the minimum fields required to make a request.
 --
@@ -61,20 +61,19 @@ data DescribeEventDetails = DescribeEventDetails'
 --
 -- * 'dedLocale' - The locale (language) to return information in. English (en) is the default and the only supported value at this time.
 --
--- * 'dedEventARNs' - A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"@
+-- * 'dedEventARNs' - A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"@ 
 describeEventDetails
     :: NonEmpty Text -- ^ 'dedEventARNs'
     -> DescribeEventDetails
-describeEventDetails pEventARNs_ =
-  DescribeEventDetails'
-    {_dedLocale = Nothing, _dedEventARNs = _List1 # pEventARNs_}
-
+describeEventDetails pEventARNs_
+  = DescribeEventDetails'{_dedLocale = Nothing,
+                          _dedEventARNs = _List1 # pEventARNs_}
 
 -- | The locale (language) to return information in. English (en) is the default and the only supported value at this time.
 dedLocale :: Lens' DescribeEventDetails (Maybe Text)
 dedLocale = lens _dedLocale (\ s a -> s{_dedLocale = a})
 
--- | A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"@
+-- | A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"@ 
 dedEventARNs :: Lens' DescribeEventDetails (NonEmpty Text)
 dedEventARNs = lens _dedEventARNs (\ s a -> s{_dedEventARNs = a}) . _List1
 
@@ -118,12 +117,18 @@ instance ToQuery DescribeEventDetails where
         toQuery = const mempty
 
 -- | /See:/ 'describeEventDetailsResponse' smart constructor.
-data DescribeEventDetailsResponse = DescribeEventDetailsResponse'
-  { _dedrsSuccessfulSet  :: !(Maybe [EventDetails])
-  , _dedrsFailedSet      :: !(Maybe [EventDetailsErrorItem])
-  , _dedrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventDetailsResponse = DescribeEventDetailsResponse'{_dedrsSuccessfulSet
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [EventDetails]),
+                                                                  _dedrsFailedSet
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [EventDetailsErrorItem]),
+                                                                  _dedrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeEventDetailsResponse' with the minimum fields required to make a request.
 --
@@ -137,13 +142,11 @@ data DescribeEventDetailsResponse = DescribeEventDetailsResponse'
 describeEventDetailsResponse
     :: Int -- ^ 'dedrsResponseStatus'
     -> DescribeEventDetailsResponse
-describeEventDetailsResponse pResponseStatus_ =
-  DescribeEventDetailsResponse'
-    { _dedrsSuccessfulSet = Nothing
-    , _dedrsFailedSet = Nothing
-    , _dedrsResponseStatus = pResponseStatus_
-    }
-
+describeEventDetailsResponse pResponseStatus_
+  = DescribeEventDetailsResponse'{_dedrsSuccessfulSet =
+                                    Nothing,
+                                  _dedrsFailedSet = Nothing,
+                                  _dedrsResponseStatus = pResponseStatus_}
 
 -- | Information about the events that could be retrieved.
 dedrsSuccessfulSet :: Lens' DescribeEventDetailsResponse [EventDetails]

@@ -33,7 +33,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAF.CreateByteMatchSet
     (
@@ -61,11 +61,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'createByteMatchSet' smart constructor.
-data CreateByteMatchSet = CreateByteMatchSet'
-  { _cbmsName        :: !Text
-  , _cbmsChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateByteMatchSet = CreateByteMatchSet'{_cbmsName
+                                              :: !Text,
+                                              _cbmsChangeToken :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateByteMatchSet' with the minimum fields required to make a request.
 --
@@ -78,9 +77,9 @@ createByteMatchSet
     :: Text -- ^ 'cbmsName'
     -> Text -- ^ 'cbmsChangeToken'
     -> CreateByteMatchSet
-createByteMatchSet pName_ pChangeToken_ =
-  CreateByteMatchSet' {_cbmsName = pName_, _cbmsChangeToken = pChangeToken_}
-
+createByteMatchSet pName_ pChangeToken_
+  = CreateByteMatchSet'{_cbmsName = pName_,
+                        _cbmsChangeToken = pChangeToken_}
 
 -- | A friendly name or description of the 'ByteMatchSet' . You can't change @Name@ after you create a @ByteMatchSet@ .
 cbmsName :: Lens' CreateByteMatchSet Text
@@ -128,12 +127,16 @@ instance ToQuery CreateByteMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'createByteMatchSetResponse' smart constructor.
-data CreateByteMatchSetResponse = CreateByteMatchSetResponse'
-  { _cbmsrsByteMatchSet   :: !(Maybe ByteMatchSet)
-  , _cbmsrsChangeToken    :: !(Maybe Text)
-  , _cbmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateByteMatchSetResponse = CreateByteMatchSetResponse'{_cbmsrsByteMatchSet
+                                                              ::
+                                                              !(Maybe
+                                                                  ByteMatchSet),
+                                                              _cbmsrsChangeToken
+                                                              :: !(Maybe Text),
+                                                              _cbmsrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateByteMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -147,13 +150,11 @@ data CreateByteMatchSetResponse = CreateByteMatchSetResponse'
 createByteMatchSetResponse
     :: Int -- ^ 'cbmsrsResponseStatus'
     -> CreateByteMatchSetResponse
-createByteMatchSetResponse pResponseStatus_ =
-  CreateByteMatchSetResponse'
-    { _cbmsrsByteMatchSet = Nothing
-    , _cbmsrsChangeToken = Nothing
-    , _cbmsrsResponseStatus = pResponseStatus_
-    }
-
+createByteMatchSetResponse pResponseStatus_
+  = CreateByteMatchSetResponse'{_cbmsrsByteMatchSet =
+                                  Nothing,
+                                _cbmsrsChangeToken = Nothing,
+                                _cbmsrsResponseStatus = pResponseStatus_}
 
 -- | A 'ByteMatchSet' that contains no @ByteMatchTuple@ objects.
 cbmsrsByteMatchSet :: Lens' CreateByteMatchSetResponse (Maybe ByteMatchSet)

@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'allocateStaticIP' smart constructor.
-newtype AllocateStaticIP = AllocateStaticIP'
-  { _asiStaticIPName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AllocateStaticIP = AllocateStaticIP'{_asiStaticIPName
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AllocateStaticIP' with the minimum fields required to make a request.
 --
@@ -58,9 +57,9 @@ newtype AllocateStaticIP = AllocateStaticIP'
 allocateStaticIP
     :: Text -- ^ 'asiStaticIPName'
     -> AllocateStaticIP
-allocateStaticIP pStaticIPName_ =
-  AllocateStaticIP' {_asiStaticIPName = pStaticIPName_}
-
+allocateStaticIP pStaticIPName_
+  = AllocateStaticIP'{_asiStaticIPName =
+                        pStaticIPName_}
 
 -- | The name of the static IP address.
 asiStaticIPName :: Lens' AllocateStaticIP Text
@@ -103,28 +102,30 @@ instance ToQuery AllocateStaticIP where
         toQuery = const mempty
 
 -- | /See:/ 'allocateStaticIPResponse' smart constructor.
-data AllocateStaticIPResponse = AllocateStaticIPResponse'
-  { _asirsOperations     :: !(Maybe [Operation])
-  , _asirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AllocateStaticIPResponse = AllocateStaticIPResponse'{_asirsOperations
+                                                          ::
+                                                          !(Maybe [Operation]),
+                                                          _asirsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'AllocateStaticIPResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asirsOperations' - An array of key-value pairs containing information about the static IP address you allocated.
+-- * 'asirsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'asirsResponseStatus' - -- | The response status code.
 allocateStaticIPResponse
     :: Int -- ^ 'asirsResponseStatus'
     -> AllocateStaticIPResponse
-allocateStaticIPResponse pResponseStatus_ =
-  AllocateStaticIPResponse'
-    {_asirsOperations = Nothing, _asirsResponseStatus = pResponseStatus_}
+allocateStaticIPResponse pResponseStatus_
+  = AllocateStaticIPResponse'{_asirsOperations =
+                                Nothing,
+                              _asirsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the static IP address you allocated.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 asirsOperations :: Lens' AllocateStaticIPResponse [Operation]
 asirsOperations = lens _asirsOperations (\ s a -> s{_asirsOperations = a}) . _Default . _Coerce
 

@@ -11,13 +11,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS Marketplace Entitlement Service__
+-- __AWS Marketplace Entitlement Service__ 
 --
 -- This reference provides descriptions of the AWS Marketplace Entitlement Service API.
 --
 -- AWS Marketplace Entitlement Service is used to determine the entitlement of a customer to a given product. An entitlement represents capacity in a product owned by the customer. For example, a customer might own some number of users or seats in an SaaS application or some amount of data capacity in a multi-tenant database.
 --
--- __Getting Entitlement Records__
+-- __Getting Entitlement Records__ 
 --
 --     * /GetEntitlements/ - Gets the entitlements for a Marketplace product.
 --
@@ -34,11 +34,11 @@ module Network.AWS.MarketplaceEntitlement
     -- ** InvalidParameterException
     , _InvalidParameterException
 
-    -- ** ThrottlingException
-    , _ThrottlingException
-
     -- ** InternalServiceErrorException
     , _InternalServiceErrorException
+
+    -- ** ThrottlingException
+    , _ThrottlingException
 
     -- * Waiters
     -- $waiters
@@ -46,7 +46,7 @@ module Network.AWS.MarketplaceEntitlement
     -- * Operations
     -- $operations
 
-    -- ** GetEntitlements
+    -- ** GetEntitlements (Paginated)
     , module Network.AWS.MarketplaceEntitlement.GetEntitlements
 
     -- * Types

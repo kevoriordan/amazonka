@@ -51,18 +51,17 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'listTags' smart constructor.
-data ListTags = ListTags'
-  { _ltNextToken   :: !(Maybe Text)
-  , _ltMaxResults  :: !(Maybe Nat)
-  , _ltResourceARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTags = ListTags'{_ltNextToken ::
+                          !(Maybe Text),
+                          _ltMaxResults :: !(Maybe Nat),
+                          _ltResourceARN :: !Text}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltNextToken' - If the response to the previous @ListTags@ request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request.
+-- * 'ltNextToken' - If the response to the previous @ListTags@ request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request. 
 --
 -- * 'ltMaxResults' - Maximum number of tags to return.
 --
@@ -70,15 +69,12 @@ data ListTags = ListTags'
 listTags
     :: Text -- ^ 'ltResourceARN'
     -> ListTags
-listTags pResourceARN_ =
-  ListTags'
-    { _ltNextToken = Nothing
-    , _ltMaxResults = Nothing
-    , _ltResourceARN = pResourceARN_
-    }
+listTags pResourceARN_
+  = ListTags'{_ltNextToken = Nothing,
+              _ltMaxResults = Nothing,
+              _ltResourceARN = pResourceARN_}
 
-
--- | If the response to the previous @ListTags@ request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request.
+-- | If the response to the previous @ListTags@ request is truncated, Amazon SageMaker returns this token. To retrieve the next set of tags, use it in the subsequent request. 
 ltNextToken :: Lens' ListTags (Maybe Text)
 ltNextToken = lens _ltNextToken (\ s a -> s{_ltNextToken = a})
 
@@ -135,18 +131,17 @@ instance ToQuery ListTags where
         toQuery = const mempty
 
 -- | /See:/ 'listTagsResponse' smart constructor.
-data ListTagsResponse = ListTagsResponse'
-  { _ltrsNextToken      :: !(Maybe Text)
-  , _ltrsTags           :: !(Maybe [Tag])
-  , _ltrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsResponse = ListTagsResponse'{_ltrsNextToken
+                                          :: !(Maybe Text),
+                                          _ltrsTags :: !(Maybe [Tag]),
+                                          _ltrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltrsNextToken' - If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens.
+-- * 'ltrsNextToken' - If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. 
 --
 -- * 'ltrsTags' - An array of @Tag@ objects, each with a tag key and a value.
 --
@@ -154,15 +149,12 @@ data ListTagsResponse = ListTagsResponse'
 listTagsResponse
     :: Int -- ^ 'ltrsResponseStatus'
     -> ListTagsResponse
-listTagsResponse pResponseStatus_ =
-  ListTagsResponse'
-    { _ltrsNextToken = Nothing
-    , _ltrsTags = Nothing
-    , _ltrsResponseStatus = pResponseStatus_
-    }
+listTagsResponse pResponseStatus_
+  = ListTagsResponse'{_ltrsNextToken = Nothing,
+                      _ltrsTags = Nothing,
+                      _ltrsResponseStatus = pResponseStatus_}
 
-
--- | If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens.
+-- | If response is truncated, Amazon SageMaker includes a token in the response. You can use this token in your subsequent request to fetch next set of tokens. 
 ltrsNextToken :: Lens' ListTagsResponse (Maybe Text)
 ltrsNextToken = lens _ltrsNextToken (\ s a -> s{_ltrsNextToken = a})
 

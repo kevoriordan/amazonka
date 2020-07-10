@@ -21,7 +21,7 @@
 -- Sets the position of the specified receipt rule in the receipt rule set.
 --
 --
--- For information about managing receipt rules, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html Amazon SES Developer Guide> .
+-- For information about managing receipt rules, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
@@ -49,17 +49,17 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to set the position of a receipt rule in a receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
+-- | Represents a request to set the position of a receipt rule in a receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'setReceiptRulePosition' smart constructor.
-data SetReceiptRulePosition = SetReceiptRulePosition'
-  { _srrpAfter       :: !(Maybe Text)
-  , _srrpRuleSetName :: !Text
-  , _srrpRuleName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetReceiptRulePosition = SetReceiptRulePosition'{_srrpAfter
+                                                      :: !(Maybe Text),
+                                                      _srrpRuleSetName :: !Text,
+                                                      _srrpRuleName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'SetReceiptRulePosition' with the minimum fields required to make a request.
 --
@@ -74,13 +74,10 @@ setReceiptRulePosition
     :: Text -- ^ 'srrpRuleSetName'
     -> Text -- ^ 'srrpRuleName'
     -> SetReceiptRulePosition
-setReceiptRulePosition pRuleSetName_ pRuleName_ =
-  SetReceiptRulePosition'
-    { _srrpAfter = Nothing
-    , _srrpRuleSetName = pRuleSetName_
-    , _srrpRuleName = pRuleName_
-    }
-
+setReceiptRulePosition pRuleSetName_ pRuleName_
+  = SetReceiptRulePosition'{_srrpAfter = Nothing,
+                            _srrpRuleSetName = pRuleSetName_,
+                            _srrpRuleName = pRuleName_}
 
 -- | The name of the receipt rule after which to place the specified receipt rule.
 srrpAfter :: Lens' SetReceiptRulePosition (Maybe Text)
@@ -129,10 +126,10 @@ instance ToQuery SetReceiptRulePosition where
 --
 --
 -- /See:/ 'setReceiptRulePositionResponse' smart constructor.
-newtype SetReceiptRulePositionResponse = SetReceiptRulePositionResponse'
-  { _srrprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetReceiptRulePositionResponse = SetReceiptRulePositionResponse'{_srrprsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'SetReceiptRulePositionResponse' with the minimum fields required to make a request.
 --
@@ -142,9 +139,9 @@ newtype SetReceiptRulePositionResponse = SetReceiptRulePositionResponse'
 setReceiptRulePositionResponse
     :: Int -- ^ 'srrprsResponseStatus'
     -> SetReceiptRulePositionResponse
-setReceiptRulePositionResponse pResponseStatus_ =
-  SetReceiptRulePositionResponse' {_srrprsResponseStatus = pResponseStatus_}
-
+setReceiptRulePositionResponse pResponseStatus_
+  = SetReceiptRulePositionResponse'{_srrprsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 srrprsResponseStatus :: Lens' SetReceiptRulePositionResponse Int

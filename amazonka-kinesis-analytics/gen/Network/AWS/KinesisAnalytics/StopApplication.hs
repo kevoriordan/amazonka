@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops the application from processing input data. You can stop an application only if it is in the running state. You can use the 'DescribeApplication' operation to find the application state. After the application is stopped, Amazon Kinesis Analytics stops reading data from the input, the application stops processing data, and there is no output written to the destination.
+-- Stops the application from processing input data. You can stop an application only if it is in the running state. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to find the application state. After the application is stopped, Amazon Kinesis Analytics stops reading data from the input, the application stops processing data, and there is no output written to the destination. 
 --
 --
 -- This operation requires permissions to perform the @kinesisanalytics:StopApplication@ action.
@@ -45,15 +45,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'stopApplication' smart constructor.
-newtype StopApplication = StopApplication'
-  { _sApplicationName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopApplication = StopApplication'{_sApplicationName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopApplication' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ newtype StopApplication = StopApplication'
 stopApplication
     :: Text -- ^ 'sApplicationName'
     -> StopApplication
-stopApplication pApplicationName_ =
-  StopApplication' {_sApplicationName = pApplicationName_}
-
+stopApplication pApplicationName_
+  = StopApplication'{_sApplicationName =
+                       pApplicationName_}
 
 -- | Name of the running application to stop.
 sApplicationName :: Lens' StopApplication Text
@@ -105,15 +104,15 @@ instance ToPath StopApplication where
 instance ToQuery StopApplication where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'stopApplicationResponse' smart constructor.
-newtype StopApplicationResponse = StopApplicationResponse'
-  { _srsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopApplicationResponse = StopApplicationResponse'{_srsResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'StopApplicationResponse' with the minimum fields required to make a request.
 --
@@ -123,9 +122,9 @@ newtype StopApplicationResponse = StopApplicationResponse'
 stopApplicationResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopApplicationResponse
-stopApplicationResponse pResponseStatus_ =
-  StopApplicationResponse' {_srsResponseStatus = pResponseStatus_}
-
+stopApplicationResponse pResponseStatus_
+  = StopApplicationResponse'{_srsResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 srsResponseStatus :: Lens' StopApplicationResponse Int

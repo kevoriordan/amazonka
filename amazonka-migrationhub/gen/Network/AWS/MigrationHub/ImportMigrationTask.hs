@@ -48,12 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'importMigrationTask' smart constructor.
-data ImportMigrationTask = ImportMigrationTask'
-  { _imtDryRun               :: !(Maybe Bool)
-  , _imtProgressUpdateStream :: !Text
-  , _imtMigrationTaskName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ImportMigrationTask = ImportMigrationTask'{_imtDryRun
+                                                :: !(Maybe Bool),
+                                                _imtProgressUpdateStream ::
+                                                !Text,
+                                                _imtMigrationTaskName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImportMigrationTask' with the minimum fields required to make a request.
 --
@@ -61,30 +61,28 @@ data ImportMigrationTask = ImportMigrationTask'
 --
 -- * 'imtDryRun' - Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
 --
--- * 'imtProgressUpdateStream' - The name of the ProgressUpdateStream.
+-- * 'imtProgressUpdateStream' - The name of the ProgressUpdateStream. >
 --
--- * 'imtMigrationTaskName' - Unique identifier that references the migration task.
+-- * 'imtMigrationTaskName' - Unique identifier that references the migration task. /Do not store personal data in this field./ 
 importMigrationTask
     :: Text -- ^ 'imtProgressUpdateStream'
     -> Text -- ^ 'imtMigrationTaskName'
     -> ImportMigrationTask
-importMigrationTask pProgressUpdateStream_ pMigrationTaskName_ =
-  ImportMigrationTask'
-    { _imtDryRun = Nothing
-    , _imtProgressUpdateStream = pProgressUpdateStream_
-    , _imtMigrationTaskName = pMigrationTaskName_
-    }
-
+importMigrationTask pProgressUpdateStream_
+  pMigrationTaskName_
+  = ImportMigrationTask'{_imtDryRun = Nothing,
+                         _imtProgressUpdateStream = pProgressUpdateStream_,
+                         _imtMigrationTaskName = pMigrationTaskName_}
 
 -- | Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
 imtDryRun :: Lens' ImportMigrationTask (Maybe Bool)
 imtDryRun = lens _imtDryRun (\ s a -> s{_imtDryRun = a})
 
--- | The name of the ProgressUpdateStream.
+-- | The name of the ProgressUpdateStream. >
 imtProgressUpdateStream :: Lens' ImportMigrationTask Text
 imtProgressUpdateStream = lens _imtProgressUpdateStream (\ s a -> s{_imtProgressUpdateStream = a})
 
--- | Unique identifier that references the migration task.
+-- | Unique identifier that references the migration task. /Do not store personal data in this field./ 
 imtMigrationTaskName :: Lens' ImportMigrationTask Text
 imtMigrationTaskName = lens _imtMigrationTaskName (\ s a -> s{_imtMigrationTaskName = a})
 
@@ -127,10 +125,10 @@ instance ToQuery ImportMigrationTask where
         toQuery = const mempty
 
 -- | /See:/ 'importMigrationTaskResponse' smart constructor.
-newtype ImportMigrationTaskResponse = ImportMigrationTaskResponse'
-  { _imtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ImportMigrationTaskResponse = ImportMigrationTaskResponse'{_imtrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ImportMigrationTaskResponse' with the minimum fields required to make a request.
 --
@@ -140,9 +138,9 @@ newtype ImportMigrationTaskResponse = ImportMigrationTaskResponse'
 importMigrationTaskResponse
     :: Int -- ^ 'imtrsResponseStatus'
     -> ImportMigrationTaskResponse
-importMigrationTaskResponse pResponseStatus_ =
-  ImportMigrationTaskResponse' {_imtrsResponseStatus = pResponseStatus_}
-
+importMigrationTaskResponse pResponseStatus_
+  = ImportMigrationTaskResponse'{_imtrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 imtrsResponseStatus :: Lens' ImportMigrationTaskResponse Int

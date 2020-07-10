@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see 'AuthorizeClusterSecurityGroupIngress' . For information about managing security groups, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html Amazon Redshift Cluster Security Groups> in the /Amazon Redshift Cluster Management Guide/ .
+-- Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see 'AuthorizeClusterSecurityGroupIngress' . For information about managing security groups, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html Amazon Redshift Cluster Security Groups> in the /Amazon Redshift Cluster Management Guide/ . 
 --
 --
 module Network.AWS.Redshift.RevokeClusterSecurityGroupIngress
@@ -47,51 +47,61 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'revokeClusterSecurityGroupIngress' smart constructor.
-data RevokeClusterSecurityGroupIngress = RevokeClusterSecurityGroupIngress'
-  { _rcsgiEC2SecurityGroupOwnerId  :: !(Maybe Text)
-  , _rcsgiEC2SecurityGroupName     :: !(Maybe Text)
-  , _rcsgiCIdRIP                   :: !(Maybe Text)
-  , _rcsgiClusterSecurityGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeClusterSecurityGroupIngress = RevokeClusterSecurityGroupIngress'{_rcsgiEC2SecurityGroupOwnerId
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _rcsgiEC2SecurityGroupName
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _rcsgiCIdRIP
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _rcsgiClusterSecurityGroupName
+                                                                            ::
+                                                                            !Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RevokeClusterSecurityGroupIngress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcsgiEC2SecurityGroupOwnerId' - The AWS account number of the owner of the security group specified in the @EC2SecurityGroupName@ parameter. The AWS access key ID is not an acceptable value. If @EC2SecurityGroupOwnerId@ is specified, @EC2SecurityGroupName@ must also be provided. and @CIDRIP@ cannot be provided.  Example: @111122223333@
+-- * 'rcsgiEC2SecurityGroupOwnerId' - The AWS account number of the owner of the security group specified in the @EC2SecurityGroupName@ parameter. The AWS access key ID is not an acceptable value. If @EC2SecurityGroupOwnerId@ is specified, @EC2SecurityGroupName@ must also be provided. and @CIDRIP@ cannot be provided.  Example: @111122223333@ 
 --
--- * 'rcsgiEC2SecurityGroupName' - The name of the EC2 Security Group whose access is to be revoked. If @EC2SecurityGroupName@ is specified, @EC2SecurityGroupOwnerId@ must also be provided and @CIDRIP@ cannot be provided.
+-- * 'rcsgiEC2SecurityGroupName' - The name of the EC2 Security Group whose access is to be revoked. If @EC2SecurityGroupName@ is specified, @EC2SecurityGroupOwnerId@ must also be provided and @CIDRIP@ cannot be provided. 
 --
--- * 'rcsgiCIdRIP' - The IP range for which to revoke access. This range must be a valid Classless Inter-Domain Routing (CIDR) block of IP addresses. If @CIDRIP@ is specified, @EC2SecurityGroupName@ and @EC2SecurityGroupOwnerId@ cannot be provided.
+-- * 'rcsgiCIdRIP' - The IP range for which to revoke access. This range must be a valid Classless Inter-Domain Routing (CIDR) block of IP addresses. If @CIDRIP@ is specified, @EC2SecurityGroupName@ and @EC2SecurityGroupOwnerId@ cannot be provided. 
 --
 -- * 'rcsgiClusterSecurityGroupName' - The name of the security Group from which to revoke the ingress rule.
 revokeClusterSecurityGroupIngress
     :: Text -- ^ 'rcsgiClusterSecurityGroupName'
     -> RevokeClusterSecurityGroupIngress
-revokeClusterSecurityGroupIngress pClusterSecurityGroupName_ =
-  RevokeClusterSecurityGroupIngress'
-    { _rcsgiEC2SecurityGroupOwnerId = Nothing
-    , _rcsgiEC2SecurityGroupName = Nothing
-    , _rcsgiCIdRIP = Nothing
-    , _rcsgiClusterSecurityGroupName = pClusterSecurityGroupName_
-    }
+revokeClusterSecurityGroupIngress
+  pClusterSecurityGroupName_
+  = RevokeClusterSecurityGroupIngress'{_rcsgiEC2SecurityGroupOwnerId
+                                         = Nothing,
+                                       _rcsgiEC2SecurityGroupName = Nothing,
+                                       _rcsgiCIdRIP = Nothing,
+                                       _rcsgiClusterSecurityGroupName =
+                                         pClusterSecurityGroupName_}
 
-
--- | The AWS account number of the owner of the security group specified in the @EC2SecurityGroupName@ parameter. The AWS access key ID is not an acceptable value. If @EC2SecurityGroupOwnerId@ is specified, @EC2SecurityGroupName@ must also be provided. and @CIDRIP@ cannot be provided.  Example: @111122223333@
+-- | The AWS account number of the owner of the security group specified in the @EC2SecurityGroupName@ parameter. The AWS access key ID is not an acceptable value. If @EC2SecurityGroupOwnerId@ is specified, @EC2SecurityGroupName@ must also be provided. and @CIDRIP@ cannot be provided.  Example: @111122223333@ 
 rcsgiEC2SecurityGroupOwnerId :: Lens' RevokeClusterSecurityGroupIngress (Maybe Text)
 rcsgiEC2SecurityGroupOwnerId = lens _rcsgiEC2SecurityGroupOwnerId (\ s a -> s{_rcsgiEC2SecurityGroupOwnerId = a})
 
--- | The name of the EC2 Security Group whose access is to be revoked. If @EC2SecurityGroupName@ is specified, @EC2SecurityGroupOwnerId@ must also be provided and @CIDRIP@ cannot be provided.
+-- | The name of the EC2 Security Group whose access is to be revoked. If @EC2SecurityGroupName@ is specified, @EC2SecurityGroupOwnerId@ must also be provided and @CIDRIP@ cannot be provided. 
 rcsgiEC2SecurityGroupName :: Lens' RevokeClusterSecurityGroupIngress (Maybe Text)
 rcsgiEC2SecurityGroupName = lens _rcsgiEC2SecurityGroupName (\ s a -> s{_rcsgiEC2SecurityGroupName = a})
 
--- | The IP range for which to revoke access. This range must be a valid Classless Inter-Domain Routing (CIDR) block of IP addresses. If @CIDRIP@ is specified, @EC2SecurityGroupName@ and @EC2SecurityGroupOwnerId@ cannot be provided.
+-- | The IP range for which to revoke access. This range must be a valid Classless Inter-Domain Routing (CIDR) block of IP addresses. If @CIDRIP@ is specified, @EC2SecurityGroupName@ and @EC2SecurityGroupOwnerId@ cannot be provided. 
 rcsgiCIdRIP :: Lens' RevokeClusterSecurityGroupIngress (Maybe Text)
 rcsgiCIdRIP = lens _rcsgiCIdRIP (\ s a -> s{_rcsgiCIdRIP = a})
 
@@ -141,11 +151,16 @@ instance ToQuery RevokeClusterSecurityGroupIngress
                  _rcsgiClusterSecurityGroupName]
 
 -- | /See:/ 'revokeClusterSecurityGroupIngressResponse' smart constructor.
-data RevokeClusterSecurityGroupIngressResponse = RevokeClusterSecurityGroupIngressResponse'
-  { _rcsgirsClusterSecurityGroup :: !(Maybe ClusterSecurityGroup)
-  , _rcsgirsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeClusterSecurityGroupIngressResponse = RevokeClusterSecurityGroupIngressResponse'{_rcsgirsClusterSecurityGroup
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                ClusterSecurityGroup),
+                                                                                            _rcsgirsResponseStatus
+                                                                                            ::
+                                                                                            !Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'RevokeClusterSecurityGroupIngressResponse' with the minimum fields required to make a request.
 --
@@ -157,12 +172,12 @@ data RevokeClusterSecurityGroupIngressResponse = RevokeClusterSecurityGroupIngre
 revokeClusterSecurityGroupIngressResponse
     :: Int -- ^ 'rcsgirsResponseStatus'
     -> RevokeClusterSecurityGroupIngressResponse
-revokeClusterSecurityGroupIngressResponse pResponseStatus_ =
-  RevokeClusterSecurityGroupIngressResponse'
-    { _rcsgirsClusterSecurityGroup = Nothing
-    , _rcsgirsResponseStatus = pResponseStatus_
-    }
-
+revokeClusterSecurityGroupIngressResponse
+  pResponseStatus_
+  = RevokeClusterSecurityGroupIngressResponse'{_rcsgirsClusterSecurityGroup
+                                                 = Nothing,
+                                               _rcsgirsResponseStatus =
+                                                 pResponseStatus_}
 
 -- | Undocumented member.
 rcsgirsClusterSecurityGroup :: Lens' RevokeClusterSecurityGroupIngressResponse (Maybe ClusterSecurityGroup)

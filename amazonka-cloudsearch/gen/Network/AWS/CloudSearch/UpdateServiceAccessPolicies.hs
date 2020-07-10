@@ -50,11 +50,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateServiceAccessPolicies' smart constructor.
-data UpdateServiceAccessPolicies = UpdateServiceAccessPolicies'
-  { _usapDomainName     :: !Text
-  , _usapAccessPolicies :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateServiceAccessPolicies = UpdateServiceAccessPolicies'{_usapDomainName
+                                                                :: !Text,
+                                                                _usapAccessPolicies
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateServiceAccessPolicies' with the minimum fields required to make a request.
 --
@@ -62,21 +63,22 @@ data UpdateServiceAccessPolicies = UpdateServiceAccessPolicies'
 --
 -- * 'usapDomainName' - Undocumented member.
 --
--- * 'usapAccessPolicies' - The access rules you want to configure. These rules replace any existing rules.
+-- * 'usapAccessPolicies' - The access rules you want to configure. These rules replace any existing rules. 
 updateServiceAccessPolicies
     :: Text -- ^ 'usapDomainName'
     -> Text -- ^ 'usapAccessPolicies'
     -> UpdateServiceAccessPolicies
-updateServiceAccessPolicies pDomainName_ pAccessPolicies_ =
-  UpdateServiceAccessPolicies'
-    {_usapDomainName = pDomainName_, _usapAccessPolicies = pAccessPolicies_}
-
+updateServiceAccessPolicies pDomainName_
+  pAccessPolicies_
+  = UpdateServiceAccessPolicies'{_usapDomainName =
+                                   pDomainName_,
+                                 _usapAccessPolicies = pAccessPolicies_}
 
 -- | Undocumented member.
 usapDomainName :: Lens' UpdateServiceAccessPolicies Text
 usapDomainName = lens _usapDomainName (\ s a -> s{_usapDomainName = a})
 
--- | The access rules you want to configure. These rules replace any existing rules.
+-- | The access rules you want to configure. These rules replace any existing rules. 
 usapAccessPolicies :: Lens' UpdateServiceAccessPolicies Text
 usapAccessPolicies = lens _usapAccessPolicies (\ s a -> s{_usapAccessPolicies = a})
 
@@ -115,11 +117,14 @@ instance ToQuery UpdateServiceAccessPolicies where
 --
 --
 -- /See:/ 'updateServiceAccessPoliciesResponse' smart constructor.
-data UpdateServiceAccessPoliciesResponse = UpdateServiceAccessPoliciesResponse'
-  { _usaprsResponseStatus :: !Int
-  , _usaprsAccessPolicies :: !AccessPoliciesStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateServiceAccessPoliciesResponse = UpdateServiceAccessPoliciesResponse'{_usaprsResponseStatus
+                                                                                ::
+                                                                                !Int,
+                                                                                _usaprsAccessPolicies
+                                                                                ::
+                                                                                !AccessPoliciesStatus}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'UpdateServiceAccessPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -132,12 +137,12 @@ updateServiceAccessPoliciesResponse
     :: Int -- ^ 'usaprsResponseStatus'
     -> AccessPoliciesStatus -- ^ 'usaprsAccessPolicies'
     -> UpdateServiceAccessPoliciesResponse
-updateServiceAccessPoliciesResponse pResponseStatus_ pAccessPolicies_ =
-  UpdateServiceAccessPoliciesResponse'
-    { _usaprsResponseStatus = pResponseStatus_
-    , _usaprsAccessPolicies = pAccessPolicies_
-    }
-
+updateServiceAccessPoliciesResponse pResponseStatus_
+  pAccessPolicies_
+  = UpdateServiceAccessPoliciesResponse'{_usaprsResponseStatus
+                                           = pResponseStatus_,
+                                         _usaprsAccessPolicies =
+                                           pAccessPolicies_}
 
 -- | -- | The response status code.
 usaprsResponseStatus :: Lens' UpdateServiceAccessPoliciesResponse Int

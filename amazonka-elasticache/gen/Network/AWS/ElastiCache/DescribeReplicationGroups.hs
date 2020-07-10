@@ -55,12 +55,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeReplicationGroups' smart constructor.
-data DescribeReplicationGroups = DescribeReplicationGroups'
-  { _drgsMarker             :: !(Maybe Text)
-  , _drgsMaxRecords         :: !(Maybe Int)
-  , _drgsReplicationGroupId :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationGroups = DescribeReplicationGroups'{_drgsMarker
+                                                            :: !(Maybe Text),
+                                                            _drgsMaxRecords ::
+                                                            !(Maybe Int),
+                                                            _drgsReplicationGroupId
+                                                            :: !(Maybe Text)}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeReplicationGroups' with the minimum fields required to make a request.
 --
@@ -73,13 +75,10 @@ data DescribeReplicationGroups = DescribeReplicationGroups'
 -- * 'drgsReplicationGroupId' - The identifier for the replication group to be described. This parameter is not case sensitive. If you do not specify this parameter, information about all replication groups is returned.
 describeReplicationGroups
     :: DescribeReplicationGroups
-describeReplicationGroups =
-  DescribeReplicationGroups'
-    { _drgsMarker = Nothing
-    , _drgsMaxRecords = Nothing
-    , _drgsReplicationGroupId = Nothing
-    }
-
+describeReplicationGroups
+  = DescribeReplicationGroups'{_drgsMarker = Nothing,
+                               _drgsMaxRecords = Nothing,
+                               _drgsReplicationGroupId = Nothing}
 
 -- | An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
 drgsMarker :: Lens' DescribeReplicationGroups (Maybe Text)
@@ -138,12 +137,19 @@ instance ToQuery DescribeReplicationGroups where
 --
 --
 -- /See:/ 'describeReplicationGroupsResponse' smart constructor.
-data DescribeReplicationGroupsResponse = DescribeReplicationGroupsResponse'
-  { _drgrsMarker            :: !(Maybe Text)
-  , _drgrsReplicationGroups :: !(Maybe [ReplicationGroup])
-  , _drgrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationGroupsResponse = DescribeReplicationGroupsResponse'{_drgrsMarker
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _drgrsReplicationGroups
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [ReplicationGroup]),
+                                                                            _drgrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeReplicationGroupsResponse' with the minimum fields required to make a request.
 --
@@ -157,13 +163,11 @@ data DescribeReplicationGroupsResponse = DescribeReplicationGroupsResponse'
 describeReplicationGroupsResponse
     :: Int -- ^ 'drgrsResponseStatus'
     -> DescribeReplicationGroupsResponse
-describeReplicationGroupsResponse pResponseStatus_ =
-  DescribeReplicationGroupsResponse'
-    { _drgrsMarker = Nothing
-    , _drgrsReplicationGroups = Nothing
-    , _drgrsResponseStatus = pResponseStatus_
-    }
-
+describeReplicationGroupsResponse pResponseStatus_
+  = DescribeReplicationGroupsResponse'{_drgrsMarker =
+                                         Nothing,
+                                       _drgrsReplicationGroups = Nothing,
+                                       _drgrsResponseStatus = pResponseStatus_}
 
 -- | Provides an identifier to allow retrieval of paginated results.
 drgrsMarker :: Lens' DescribeReplicationGroupsResponse (Maybe Text)

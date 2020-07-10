@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update an existing project.
+-- Update an existing project. 
 --
 --
 module Network.AWS.Mobile.UpdateProject
@@ -45,36 +45,35 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure used for requests to update project configuration.
+-- | Request structure used for requests to update project configuration. 
 --
 --
 --
 -- /See:/ 'updateProject' smart constructor.
-data UpdateProject = UpdateProject'
-  { _upContents  :: !(Maybe ByteString)
-  , _upProjectId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProject = UpdateProject'{_upContents ::
+                                    !(Maybe ByteString),
+                                    _upProjectId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upContents' - ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation.
+-- * 'upContents' - ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. 
 --
--- * 'upProjectId' - Unique project identifier.
+-- * 'upProjectId' - Unique project identifier. 
 updateProject
     :: Text -- ^ 'upProjectId'
     -> UpdateProject
-updateProject pProjectId_ =
-  UpdateProject' {_upContents = Nothing, _upProjectId = pProjectId_}
+updateProject pProjectId_
+  = UpdateProject'{_upContents = Nothing,
+                   _upProjectId = pProjectId_}
 
-
--- | ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation.
+-- | ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. 
 upContents :: Lens' UpdateProject (Maybe ByteString)
 upContents = lens _upContents (\ s a -> s{_upContents = a})
 
--- | Unique project identifier.
+-- | Unique project identifier. 
 upProjectId :: Lens' UpdateProject Text
 upProjectId = lens _upProjectId (\ s a -> s{_upProjectId = a})
 
@@ -108,33 +107,32 @@ instance ToQuery UpdateProject where
         toQuery UpdateProject'{..}
           = mconcat ["projectId" =: _upProjectId]
 
--- | Result structure used for requests to updated project configuration.
+-- | Result structure used for requests to updated project configuration. 
 --
 --
 --
 -- /See:/ 'updateProjectResponse' smart constructor.
-data UpdateProjectResponse = UpdateProjectResponse'
-  { _uprsDetails        :: !(Maybe ProjectDetails)
-  , _uprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProjectResponse = UpdateProjectResponse'{_uprsDetails
+                                                    :: !(Maybe ProjectDetails),
+                                                    _uprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateProjectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uprsDetails' - Detailed information about the updated AWS Mobile Hub project.
+-- * 'uprsDetails' - Detailed information about the updated AWS Mobile Hub project. 
 --
 -- * 'uprsResponseStatus' - -- | The response status code.
 updateProjectResponse
     :: Int -- ^ 'uprsResponseStatus'
     -> UpdateProjectResponse
-updateProjectResponse pResponseStatus_ =
-  UpdateProjectResponse'
-    {_uprsDetails = Nothing, _uprsResponseStatus = pResponseStatus_}
+updateProjectResponse pResponseStatus_
+  = UpdateProjectResponse'{_uprsDetails = Nothing,
+                           _uprsResponseStatus = pResponseStatus_}
 
-
--- | Detailed information about the updated AWS Mobile Hub project.
+-- | Detailed information about the updated AWS Mobile Hub project. 
 uprsDetails :: Lens' UpdateProjectResponse (Maybe ProjectDetails)
 uprsDetails = lens _uprsDetails (\ s a -> s{_uprsDetails = a})
 

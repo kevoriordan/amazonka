@@ -18,34 +18,34 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts or deletes 'Predicate' objects in a rule and updates the @RateLimit@ in the rule.
+-- Inserts or deletes 'Predicate' objects in a rule and updates the @RateLimit@ in the rule. 
 --
 --
 -- Each @Predicate@ object identifies a predicate, such as a 'ByteMatchSet' or an 'IPSet' , that specifies the web requests that you want to block or count. The @RateLimit@ specifies the number of requests every five minutes that triggers the rule.
 --
 -- If you add more than one predicate to a @RateBasedRule@ , a request must match all the predicates and exceed the @RateLimit@ to be counted or blocked. For example, suppose you add the following to a @RateBasedRule@ :
 --
---     * An @IPSet@ that matches the IP address @192.0.2.44/32@
+--     * An @IPSet@ that matches the IP address @192.0.2.44/32@ 
 --
 --     * A @ByteMatchSet@ that matches @BadBot@ in the @User-Agent@ header
 --
 --
 --
--- Further, you specify a @RateLimit@ of 15,000.
+-- Further, you specify a @RateLimit@ of 1,000.
 --
--- You then add the @RateBasedRule@ to a @WebACL@ and specify that you want to block requests that satisfy the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 /and/ the @User-Agent@ header in the request must contain the value @BadBot@ . Further, requests that match these two conditions much be received at a rate of more than 15,000 every five minutes. If the rate drops below this limit, AWS WAF no longer blocks the requests.
+-- You then add the @RateBasedRule@ to a @WebACL@ and specify that you want to block requests that satisfy the rule. For a request to be blocked, it must come from the IP address 192.0.2.44 /and/ the @User-Agent@ header in the request must contain the value @BadBot@ . Further, requests that match these two conditions much be received at a rate of more than 1,000 every five minutes. If the rate drops below this limit, AWS WAF no longer blocks the requests.
 --
 -- As a second example, suppose you want to limit requests to a particular page on your site. To do this, you could add the following to a @RateBasedRule@ :
 --
---     * A @ByteMatchSet@ with @FieldToMatch@ of @URI@
+--     * A @ByteMatchSet@ with @FieldToMatch@ of @URI@ 
 --
---     * A @PositionalConstraint@ of @STARTS_WITH@
+--     * A @PositionalConstraint@ of @STARTS_WITH@ 
 --
---     * A @TargetString@ of @login@
+--     * A @TargetString@ of @login@ 
 --
 --
 --
--- Further, you specify a @RateLimit@ of 15,000.
+-- Further, you specify a @RateLimit@ of 1,000.
 --
 -- By adding this @RateBasedRule@ to a @WebACL@ , you could limit requests to your login page without affecting the rest of your site.
 --
@@ -76,13 +76,12 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'updateRateBasedRule' smart constructor.
-data UpdateRateBasedRule = UpdateRateBasedRule'
-  { _urbrRuleId      :: !Text
-  , _urbrChangeToken :: !Text
-  , _urbrUpdates     :: ![RuleUpdate]
-  , _urbrRateLimit   :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRateBasedRule = UpdateRateBasedRule'{_urbrRuleId
+                                                :: !Text,
+                                                _urbrChangeToken :: !Text,
+                                                _urbrUpdates :: ![RuleUpdate],
+                                                _urbrRateLimit :: !Nat}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRateBasedRule' with the minimum fields required to make a request.
 --
@@ -92,7 +91,7 @@ data UpdateRateBasedRule = UpdateRateBasedRule'
 --
 -- * 'urbrChangeToken' - The value returned by the most recent call to 'GetChangeToken' .
 --
--- * 'urbrUpdates' - An array of @RuleUpdate@ objects that you want to insert into or delete from a 'RateBasedRule' .
+-- * 'urbrUpdates' - An array of @RuleUpdate@ objects that you want to insert into or delete from a 'RateBasedRule' . 
 --
 -- * 'urbrRateLimit' - The maximum number of requests, which have an identical value in the field specified by the @RateKey@ , allowed in a five-minute period. If the number of requests exceeds the @RateLimit@ and the other predicates specified in the rule are also met, AWS WAF triggers the action that is specified for this rule.
 updateRateBasedRule
@@ -100,14 +99,12 @@ updateRateBasedRule
     -> Text -- ^ 'urbrChangeToken'
     -> Natural -- ^ 'urbrRateLimit'
     -> UpdateRateBasedRule
-updateRateBasedRule pRuleId_ pChangeToken_ pRateLimit_ =
-  UpdateRateBasedRule'
-    { _urbrRuleId = pRuleId_
-    , _urbrChangeToken = pChangeToken_
-    , _urbrUpdates = mempty
-    , _urbrRateLimit = _Nat # pRateLimit_
-    }
-
+updateRateBasedRule pRuleId_ pChangeToken_
+  pRateLimit_
+  = UpdateRateBasedRule'{_urbrRuleId = pRuleId_,
+                         _urbrChangeToken = pChangeToken_,
+                         _urbrUpdates = mempty,
+                         _urbrRateLimit = _Nat # pRateLimit_}
 
 -- | The @RuleId@ of the @RateBasedRule@ that you want to update. @RuleId@ is returned by @CreateRateBasedRule@ and by 'ListRateBasedRules' .
 urbrRuleId :: Lens' UpdateRateBasedRule Text
@@ -117,7 +114,7 @@ urbrRuleId = lens _urbrRuleId (\ s a -> s{_urbrRuleId = a})
 urbrChangeToken :: Lens' UpdateRateBasedRule Text
 urbrChangeToken = lens _urbrChangeToken (\ s a -> s{_urbrChangeToken = a})
 
--- | An array of @RuleUpdate@ objects that you want to insert into or delete from a 'RateBasedRule' .
+-- | An array of @RuleUpdate@ objects that you want to insert into or delete from a 'RateBasedRule' . 
 urbrUpdates :: Lens' UpdateRateBasedRule [RuleUpdate]
 urbrUpdates = lens _urbrUpdates (\ s a -> s{_urbrUpdates = a}) . _Coerce
 
@@ -165,11 +162,13 @@ instance ToQuery UpdateRateBasedRule where
         toQuery = const mempty
 
 -- | /See:/ 'updateRateBasedRuleResponse' smart constructor.
-data UpdateRateBasedRuleResponse = UpdateRateBasedRuleResponse'
-  { _urbrrsChangeToken    :: !(Maybe Text)
-  , _urbrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRateBasedRuleResponse = UpdateRateBasedRuleResponse'{_urbrrsChangeToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _urbrrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateRateBasedRuleResponse' with the minimum fields required to make a request.
 --
@@ -181,10 +180,10 @@ data UpdateRateBasedRuleResponse = UpdateRateBasedRuleResponse'
 updateRateBasedRuleResponse
     :: Int -- ^ 'urbrrsResponseStatus'
     -> UpdateRateBasedRuleResponse
-updateRateBasedRuleResponse pResponseStatus_ =
-  UpdateRateBasedRuleResponse'
-    {_urbrrsChangeToken = Nothing, _urbrrsResponseStatus = pResponseStatus_}
-
+updateRateBasedRuleResponse pResponseStatus_
+  = UpdateRateBasedRuleResponse'{_urbrrsChangeToken =
+                                   Nothing,
+                                 _urbrrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @UpdateRateBasedRule@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 urbrrsChangeToken :: Lens' UpdateRateBasedRuleResponse (Maybe Text)

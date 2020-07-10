@@ -18,11 +18,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the email templates present in your Amazon SES account.
+-- Lists the email templates present in your Amazon SES account in the current AWS Region.
 --
 --
 -- You can execute this operation no more than once per second.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SES.ListTemplates
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.SES.ListTemplates
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -49,11 +52,10 @@ import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
 -- | /See:/ 'listTemplates' smart constructor.
-data ListTemplates = ListTemplates'
-  { _ltNextToken :: !(Maybe Text)
-  , _ltMaxItems  :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTemplates = ListTemplates'{_ltNextToken ::
+                                    !(Maybe Text),
+                                    _ltMaxItems :: !(Maybe Int)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTemplates' with the minimum fields required to make a request.
 --
@@ -64,8 +66,9 @@ data ListTemplates = ListTemplates'
 -- * 'ltMaxItems' - The maximum number of templates to return. This value must be at least 1 and less than or equal to 10. If you do not specify a value, or if you specify a value less than 1 or greater than 10, the operation will return up to 10 results.
 listTemplates
     :: ListTemplates
-listTemplates = ListTemplates' {_ltNextToken = Nothing, _ltMaxItems = Nothing}
-
+listTemplates
+  = ListTemplates'{_ltNextToken = Nothing,
+                   _ltMaxItems = Nothing}
 
 -- | A token returned from a previous call to @ListTemplates@ to indicate the position in the list of email templates.
 ltNextToken :: Lens' ListTemplates (Maybe Text)
@@ -74,6 +77,13 @@ ltNextToken = lens _ltNextToken (\ s a -> s{_ltNextToken = a})
 -- | The maximum number of templates to return. This value must be at least 1 and less than or equal to 10. If you do not specify a value, or if you specify a value less than 1 or greater than 10, the operation will return up to 10 results.
 ltMaxItems :: Lens' ListTemplates (Maybe Int)
 ltMaxItems = lens _ltMaxItems (\ s a -> s{_ltMaxItems = a})
+
+instance AWSPager ListTemplates where
+        page rq rs
+          | stop (rs ^. ltrsNextToken) = Nothing
+          | stop (rs ^. ltrsTemplatesMetadata) = Nothing
+          | otherwise =
+            Just $ rq & ltNextToken .~ rs ^. ltrsNextToken
 
 instance AWSRequest ListTemplates where
         type Rs ListTemplates = ListTemplatesResponse
@@ -106,12 +116,14 @@ instance ToQuery ListTemplates where
                "MaxItems" =: _ltMaxItems]
 
 -- | /See:/ 'listTemplatesResponse' smart constructor.
-data ListTemplatesResponse = ListTemplatesResponse'
-  { _ltrsTemplatesMetadata :: !(Maybe [TemplateMetadata])
-  , _ltrsNextToken         :: !(Maybe Text)
-  , _ltrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTemplatesResponse = ListTemplatesResponse'{_ltrsTemplatesMetadata
+                                                    ::
+                                                    !(Maybe [TemplateMetadata]),
+                                                    _ltrsNextToken ::
+                                                    !(Maybe Text),
+                                                    _ltrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListTemplatesResponse' with the minimum fields required to make a request.
 --
@@ -125,13 +137,11 @@ data ListTemplatesResponse = ListTemplatesResponse'
 listTemplatesResponse
     :: Int -- ^ 'ltrsResponseStatus'
     -> ListTemplatesResponse
-listTemplatesResponse pResponseStatus_ =
-  ListTemplatesResponse'
-    { _ltrsTemplatesMetadata = Nothing
-    , _ltrsNextToken = Nothing
-    , _ltrsResponseStatus = pResponseStatus_
-    }
-
+listTemplatesResponse pResponseStatus_
+  = ListTemplatesResponse'{_ltrsTemplatesMetadata =
+                             Nothing,
+                           _ltrsNextToken = Nothing,
+                           _ltrsResponseStatus = pResponseStatus_}
 
 -- | An array the contains the name and creation time stamp for each template in your Amazon SES account.
 ltrsTemplatesMetadata :: Lens' ListTemplatesResponse [TemplateMetadata]

@@ -31,7 +31,7 @@ module Network.AWS.Greengrass.DeleteCoreDefinition
     , deleteCoreDefinitionResponse
     , DeleteCoreDefinitionResponse
     -- * Response Lenses
-    , dcdrsResponseStatus
+    , drsResponseStatus
     ) where
 
 import Network.AWS.Greengrass.Types
@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteCoreDefinition' smart constructor.
-newtype DeleteCoreDefinition = DeleteCoreDefinition'
-  { _dcdCoreDefinitionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCoreDefinition = DeleteCoreDefinition'{_dcdCoreDefinitionId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteCoreDefinition' with the minimum fields required to make a request.
 --
@@ -55,9 +55,9 @@ newtype DeleteCoreDefinition = DeleteCoreDefinition'
 deleteCoreDefinition
     :: Text -- ^ 'dcdCoreDefinitionId'
     -> DeleteCoreDefinition
-deleteCoreDefinition pCoreDefinitionId_ =
-  DeleteCoreDefinition' {_dcdCoreDefinitionId = pCoreDefinitionId_}
-
+deleteCoreDefinition pCoreDefinitionId_
+  = DeleteCoreDefinition'{_dcdCoreDefinitionId =
+                            pCoreDefinitionId_}
 
 -- | The ID of the core definition.
 dcdCoreDefinitionId :: Lens' DeleteCoreDefinition Text
@@ -94,25 +94,25 @@ instance ToQuery DeleteCoreDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCoreDefinitionResponse' smart constructor.
-newtype DeleteCoreDefinitionResponse = DeleteCoreDefinitionResponse'
-  { _dcdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCoreDefinitionResponse = DeleteCoreDefinitionResponse'{_drsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteCoreDefinitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcdrsResponseStatus' - -- | The response status code.
+-- * 'drsResponseStatus' - -- | The response status code.
 deleteCoreDefinitionResponse
-    :: Int -- ^ 'dcdrsResponseStatus'
+    :: Int -- ^ 'drsResponseStatus'
     -> DeleteCoreDefinitionResponse
-deleteCoreDefinitionResponse pResponseStatus_ =
-  DeleteCoreDefinitionResponse' {_dcdrsResponseStatus = pResponseStatus_}
-
+deleteCoreDefinitionResponse pResponseStatus_
+  = DeleteCoreDefinitionResponse'{_drsResponseStatus =
+                                    pResponseStatus_}
 
 -- | -- | The response status code.
-dcdrsResponseStatus :: Lens' DeleteCoreDefinitionResponse Int
-dcdrsResponseStatus = lens _dcdrsResponseStatus (\ s a -> s{_dcdrsResponseStatus = a})
+drsResponseStatus :: Lens' DeleteCoreDefinitionResponse Int
+drsResponseStatus = lens _drsResponseStatus (\ s a -> s{_drsResponseStatus = a})
 
 instance NFData DeleteCoreDefinitionResponse where

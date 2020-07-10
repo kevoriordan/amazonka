@@ -47,10 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateIAMInstanceProfile' smart constructor.
-newtype DisassociateIAMInstanceProfile = DisassociateIAMInstanceProfile'
-  { _diapAssociationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateIAMInstanceProfile = DisassociateIAMInstanceProfile'{_diapAssociationId
+                                                                         ::
+                                                                         Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DisassociateIAMInstanceProfile' with the minimum fields required to make a request.
 --
@@ -60,9 +61,9 @@ newtype DisassociateIAMInstanceProfile = DisassociateIAMInstanceProfile'
 disassociateIAMInstanceProfile
     :: Text -- ^ 'diapAssociationId'
     -> DisassociateIAMInstanceProfile
-disassociateIAMInstanceProfile pAssociationId_ =
-  DisassociateIAMInstanceProfile' {_diapAssociationId = pAssociationId_}
-
+disassociateIAMInstanceProfile pAssociationId_
+  = DisassociateIAMInstanceProfile'{_diapAssociationId
+                                      = pAssociationId_}
 
 -- | The ID of the IAM instance profile association.
 diapAssociationId :: Lens' DisassociateIAMInstanceProfile Text
@@ -101,11 +102,15 @@ instance ToQuery DisassociateIAMInstanceProfile where
                "AssociationId" =: _diapAssociationId]
 
 -- | /See:/ 'disassociateIAMInstanceProfileResponse' smart constructor.
-data DisassociateIAMInstanceProfileResponse = DisassociateIAMInstanceProfileResponse'
-  { _diaprsIAMInstanceProfileAssociation :: !(Maybe IAMInstanceProfileAssociation)
-  , _diaprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateIAMInstanceProfileResponse = DisassociateIAMInstanceProfileResponse'{_diaprsIAMInstanceProfileAssociation
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          IAMInstanceProfileAssociation),
+                                                                                      _diaprsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DisassociateIAMInstanceProfileResponse' with the minimum fields required to make a request.
 --
@@ -117,12 +122,12 @@ data DisassociateIAMInstanceProfileResponse = DisassociateIAMInstanceProfileResp
 disassociateIAMInstanceProfileResponse
     :: Int -- ^ 'diaprsResponseStatus'
     -> DisassociateIAMInstanceProfileResponse
-disassociateIAMInstanceProfileResponse pResponseStatus_ =
-  DisassociateIAMInstanceProfileResponse'
-    { _diaprsIAMInstanceProfileAssociation = Nothing
-    , _diaprsResponseStatus = pResponseStatus_
-    }
-
+disassociateIAMInstanceProfileResponse
+  pResponseStatus_
+  = DisassociateIAMInstanceProfileResponse'{_diaprsIAMInstanceProfileAssociation
+                                              = Nothing,
+                                            _diaprsResponseStatus =
+                                              pResponseStatus_}
 
 -- | Information about the IAM instance profile association.
 diaprsIAMInstanceProfileAssociation :: Lens' DisassociateIAMInstanceProfileResponse (Maybe IAMInstanceProfileAssociation)

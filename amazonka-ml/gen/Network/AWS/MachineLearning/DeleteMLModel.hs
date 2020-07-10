@@ -49,10 +49,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteMLModel' smart constructor.
-newtype DeleteMLModel = DeleteMLModel'
-  { _dmlmMLModelId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteMLModel = DeleteMLModel'{_dmlmMLModelId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteMLModel' with the minimum fields required to make a request.
 --
@@ -62,8 +61,8 @@ newtype DeleteMLModel = DeleteMLModel'
 deleteMLModel
     :: Text -- ^ 'dmlmMLModelId'
     -> DeleteMLModel
-deleteMLModel pMLModelId_ = DeleteMLModel' {_dmlmMLModelId = pMLModelId_}
-
+deleteMLModel pMLModelId_
+  = DeleteMLModel'{_dmlmMLModelId = pMLModelId_}
 
 -- | A user-supplied ID that uniquely identifies the @MLModel@ .
 dmlmMLModelId :: Lens' DeleteMLModel Text
@@ -109,11 +108,12 @@ instance ToQuery DeleteMLModel where
 --
 --
 -- /See:/ 'deleteMLModelResponse' smart constructor.
-data DeleteMLModelResponse = DeleteMLModelResponse'
-  { _dmlmrsMLModelId      :: !(Maybe Text)
-  , _dmlmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteMLModelResponse = DeleteMLModelResponse'{_dmlmrsMLModelId
+                                                    :: !(Maybe Text),
+                                                    _dmlmrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteMLModelResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +125,9 @@ data DeleteMLModelResponse = DeleteMLModelResponse'
 deleteMLModelResponse
     :: Int -- ^ 'dmlmrsResponseStatus'
     -> DeleteMLModelResponse
-deleteMLModelResponse pResponseStatus_ =
-  DeleteMLModelResponse'
-    {_dmlmrsMLModelId = Nothing, _dmlmrsResponseStatus = pResponseStatus_}
-
+deleteMLModelResponse pResponseStatus_
+  = DeleteMLModelResponse'{_dmlmrsMLModelId = Nothing,
+                           _dmlmrsResponseStatus = pResponseStatus_}
 
 -- | A user-supplied ID that uniquely identifies the @MLModel@ . This value should be identical to the value of the @MLModelID@ in the request.
 dmlmrsMLModelId :: Lens' DeleteMLModelResponse (Maybe Text)

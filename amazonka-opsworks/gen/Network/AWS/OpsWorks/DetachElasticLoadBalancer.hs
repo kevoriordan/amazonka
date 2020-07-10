@@ -21,7 +21,7 @@
 -- Detaches a specified Elastic Load Balancing instance from its layer.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DetachElasticLoadBalancer
     (
@@ -45,11 +45,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detachElasticLoadBalancer' smart constructor.
-data DetachElasticLoadBalancer = DetachElasticLoadBalancer'
-  { _delbElasticLoadBalancerName :: !Text
-  , _delbLayerId                 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachElasticLoadBalancer = DetachElasticLoadBalancer'{_delbElasticLoadBalancerName
+                                                            :: !Text,
+                                                            _delbLayerId ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DetachElasticLoadBalancer' with the minimum fields required to make a request.
 --
@@ -62,12 +63,11 @@ detachElasticLoadBalancer
     :: Text -- ^ 'delbElasticLoadBalancerName'
     -> Text -- ^ 'delbLayerId'
     -> DetachElasticLoadBalancer
-detachElasticLoadBalancer pElasticLoadBalancerName_ pLayerId_ =
-  DetachElasticLoadBalancer'
-    { _delbElasticLoadBalancerName = pElasticLoadBalancerName_
-    , _delbLayerId = pLayerId_
-    }
-
+detachElasticLoadBalancer pElasticLoadBalancerName_
+  pLayerId_
+  = DetachElasticLoadBalancer'{_delbElasticLoadBalancerName
+                                 = pElasticLoadBalancerName_,
+                               _delbLayerId = pLayerId_}
 
 -- | The Elastic Load Balancing instance's name.
 delbElasticLoadBalancerName :: Lens' DetachElasticLoadBalancer Text
@@ -114,17 +114,16 @@ instance ToQuery DetachElasticLoadBalancer where
         toQuery = const mempty
 
 -- | /See:/ 'detachElasticLoadBalancerResponse' smart constructor.
-data DetachElasticLoadBalancerResponse =
-  DetachElasticLoadBalancerResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachElasticLoadBalancerResponse = DetachElasticLoadBalancerResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DetachElasticLoadBalancerResponse' with the minimum fields required to make a request.
 --
 detachElasticLoadBalancerResponse
     :: DetachElasticLoadBalancerResponse
-detachElasticLoadBalancerResponse = DetachElasticLoadBalancerResponse'
-
+detachElasticLoadBalancerResponse
+  = DetachElasticLoadBalancerResponse'
 
 instance NFData DetachElasticLoadBalancerResponse
          where

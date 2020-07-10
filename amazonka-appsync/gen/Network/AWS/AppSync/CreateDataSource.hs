@@ -28,7 +28,9 @@ module Network.AWS.AppSync.CreateDataSource
     , CreateDataSource
     -- * Request Lenses
     , cdsServiceRoleARN
+    , cdsRelationalDatabaseConfig
     , cdsDynamodbConfig
+    , cdsHttpConfig
     , cdsLambdaConfig
     , cdsDescription
     , cdsElasticsearchConfig
@@ -52,31 +54,42 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDataSource' smart constructor.
-data CreateDataSource = CreateDataSource'
-  { _cdsServiceRoleARN      :: !(Maybe Text)
-  , _cdsDynamodbConfig      :: !(Maybe DynamodbDataSourceConfig)
-  , _cdsLambdaConfig        :: !(Maybe LambdaDataSourceConfig)
-  , _cdsDescription         :: !(Maybe Text)
-  , _cdsElasticsearchConfig :: !(Maybe ElasticsearchDataSourceConfig)
-  , _cdsApiId               :: !Text
-  , _cdsName                :: !Text
-  , _cdsType                :: !DataSourceType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDataSource = CreateDataSource'{_cdsServiceRoleARN
+                                          :: !(Maybe Text),
+                                          _cdsRelationalDatabaseConfig ::
+                                          !(Maybe
+                                              RelationalDatabaseDataSourceConfig),
+                                          _cdsDynamodbConfig ::
+                                          !(Maybe DynamodbDataSourceConfig),
+                                          _cdsHttpConfig ::
+                                          !(Maybe HTTPDataSourceConfig),
+                                          _cdsLambdaConfig ::
+                                          !(Maybe LambdaDataSourceConfig),
+                                          _cdsDescription :: !(Maybe Text),
+                                          _cdsElasticsearchConfig ::
+                                          !(Maybe
+                                              ElasticsearchDataSourceConfig),
+                                          _cdsApiId :: !Text, _cdsName :: !Text,
+                                          _cdsType :: !DataSourceType}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDataSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdsServiceRoleARN' - The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+-- * 'cdsServiceRoleARN' - The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
 --
--- * 'cdsDynamodbConfig' - DynamoDB settings.
+-- * 'cdsRelationalDatabaseConfig' - Relational database settings.
+--
+-- * 'cdsDynamodbConfig' - Amazon DynamoDB settings.
+--
+-- * 'cdsHttpConfig' - HTTP endpoint settings.
 --
 -- * 'cdsLambdaConfig' - AWS Lambda settings.
 --
 -- * 'cdsDescription' - A description of the @DataSource@ .
 --
--- * 'cdsElasticsearchConfig' - Amazon Elasticsearch settings.
+-- * 'cdsElasticsearchConfig' - Amazon Elasticsearch Service settings.
 --
 -- * 'cdsApiId' - The API ID for the GraphQL API for the @DataSource@ .
 --
@@ -88,26 +101,31 @@ createDataSource
     -> Text -- ^ 'cdsName'
     -> DataSourceType -- ^ 'cdsType'
     -> CreateDataSource
-createDataSource pApiId_ pName_ pType_ =
-  CreateDataSource'
-    { _cdsServiceRoleARN = Nothing
-    , _cdsDynamodbConfig = Nothing
-    , _cdsLambdaConfig = Nothing
-    , _cdsDescription = Nothing
-    , _cdsElasticsearchConfig = Nothing
-    , _cdsApiId = pApiId_
-    , _cdsName = pName_
-    , _cdsType = pType_
-    }
+createDataSource pApiId_ pName_ pType_
+  = CreateDataSource'{_cdsServiceRoleARN = Nothing,
+                      _cdsRelationalDatabaseConfig = Nothing,
+                      _cdsDynamodbConfig = Nothing,
+                      _cdsHttpConfig = Nothing, _cdsLambdaConfig = Nothing,
+                      _cdsDescription = Nothing,
+                      _cdsElasticsearchConfig = Nothing,
+                      _cdsApiId = pApiId_, _cdsName = pName_,
+                      _cdsType = pType_}
 
-
--- | The IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+-- | The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
 cdsServiceRoleARN :: Lens' CreateDataSource (Maybe Text)
 cdsServiceRoleARN = lens _cdsServiceRoleARN (\ s a -> s{_cdsServiceRoleARN = a})
 
--- | DynamoDB settings.
+-- | Relational database settings.
+cdsRelationalDatabaseConfig :: Lens' CreateDataSource (Maybe RelationalDatabaseDataSourceConfig)
+cdsRelationalDatabaseConfig = lens _cdsRelationalDatabaseConfig (\ s a -> s{_cdsRelationalDatabaseConfig = a})
+
+-- | Amazon DynamoDB settings.
 cdsDynamodbConfig :: Lens' CreateDataSource (Maybe DynamodbDataSourceConfig)
 cdsDynamodbConfig = lens _cdsDynamodbConfig (\ s a -> s{_cdsDynamodbConfig = a})
+
+-- | HTTP endpoint settings.
+cdsHttpConfig :: Lens' CreateDataSource (Maybe HTTPDataSourceConfig)
+cdsHttpConfig = lens _cdsHttpConfig (\ s a -> s{_cdsHttpConfig = a})
 
 -- | AWS Lambda settings.
 cdsLambdaConfig :: Lens' CreateDataSource (Maybe LambdaDataSourceConfig)
@@ -117,7 +135,7 @@ cdsLambdaConfig = lens _cdsLambdaConfig (\ s a -> s{_cdsLambdaConfig = a})
 cdsDescription :: Lens' CreateDataSource (Maybe Text)
 cdsDescription = lens _cdsDescription (\ s a -> s{_cdsDescription = a})
 
--- | Amazon Elasticsearch settings.
+-- | Amazon Elasticsearch Service settings.
 cdsElasticsearchConfig :: Lens' CreateDataSource (Maybe ElasticsearchDataSourceConfig)
 cdsElasticsearchConfig = lens _cdsElasticsearchConfig (\ s a -> s{_cdsElasticsearchConfig = a})
 
@@ -158,7 +176,10 @@ instance ToJSON CreateDataSource where
           = object
               (catMaybes
                  [("serviceRoleArn" .=) <$> _cdsServiceRoleARN,
+                  ("relationalDatabaseConfig" .=) <$>
+                    _cdsRelationalDatabaseConfig,
                   ("dynamodbConfig" .=) <$> _cdsDynamodbConfig,
+                  ("httpConfig" .=) <$> _cdsHttpConfig,
                   ("lambdaConfig" .=) <$> _cdsLambdaConfig,
                   ("description" .=) <$> _cdsDescription,
                   ("elasticsearchConfig" .=) <$>
@@ -175,11 +196,13 @@ instance ToQuery CreateDataSource where
         toQuery = const mempty
 
 -- | /See:/ 'createDataSourceResponse' smart constructor.
-data CreateDataSourceResponse = CreateDataSourceResponse'
-  { _cdsrsDataSource     :: !(Maybe DataSource)
-  , _cdsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDataSourceResponse = CreateDataSourceResponse'{_cdsrsDataSource
+                                                          ::
+                                                          !(Maybe DataSource),
+                                                          _cdsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -191,10 +214,10 @@ data CreateDataSourceResponse = CreateDataSourceResponse'
 createDataSourceResponse
     :: Int -- ^ 'cdsrsResponseStatus'
     -> CreateDataSourceResponse
-createDataSourceResponse pResponseStatus_ =
-  CreateDataSourceResponse'
-    {_cdsrsDataSource = Nothing, _cdsrsResponseStatus = pResponseStatus_}
-
+createDataSourceResponse pResponseStatus_
+  = CreateDataSourceResponse'{_cdsrsDataSource =
+                                Nothing,
+                              _cdsrsResponseStatus = pResponseStatus_}
 
 -- | The @DataSource@ object.
 cdsrsDataSource :: Lens' CreateDataSourceResponse (Maybe DataSource)

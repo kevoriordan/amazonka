@@ -52,11 +52,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'reportTaskProgress' smart constructor.
-data ReportTaskProgress = ReportTaskProgress'
-  { _rtpFields :: !(Maybe [Field])
-  , _rtpTaskId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ReportTaskProgress = ReportTaskProgress'{_rtpFields
+                                              :: !(Maybe [Field]),
+                                              _rtpTaskId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReportTaskProgress' with the minimum fields required to make a request.
 --
@@ -68,9 +67,9 @@ data ReportTaskProgress = ReportTaskProgress'
 reportTaskProgress
     :: Text -- ^ 'rtpTaskId'
     -> ReportTaskProgress
-reportTaskProgress pTaskId_ =
-  ReportTaskProgress' {_rtpFields = Nothing, _rtpTaskId = pTaskId_}
-
+reportTaskProgress pTaskId_
+  = ReportTaskProgress'{_rtpFields = Nothing,
+                        _rtpTaskId = pTaskId_}
 
 -- | Key-value pairs that define the properties of the ReportTaskProgressInput object.
 rtpFields :: Lens' ReportTaskProgress [Field]
@@ -121,11 +120,12 @@ instance ToQuery ReportTaskProgress where
 --
 --
 -- /See:/ 'reportTaskProgressResponse' smart constructor.
-data ReportTaskProgressResponse = ReportTaskProgressResponse'
-  { _rtprsResponseStatus :: !Int
-  , _rtprsCanceled       :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ReportTaskProgressResponse = ReportTaskProgressResponse'{_rtprsResponseStatus
+                                                              :: !Int,
+                                                              _rtprsCanceled ::
+                                                              !Bool}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ReportTaskProgressResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +138,11 @@ reportTaskProgressResponse
     :: Int -- ^ 'rtprsResponseStatus'
     -> Bool -- ^ 'rtprsCanceled'
     -> ReportTaskProgressResponse
-reportTaskProgressResponse pResponseStatus_ pCanceled_ =
-  ReportTaskProgressResponse'
-    {_rtprsResponseStatus = pResponseStatus_, _rtprsCanceled = pCanceled_}
-
+reportTaskProgressResponse pResponseStatus_
+  pCanceled_
+  = ReportTaskProgressResponse'{_rtprsResponseStatus =
+                                  pResponseStatus_,
+                                _rtprsCanceled = pCanceled_}
 
 -- | -- | The response status code.
 rtprsResponseStatus :: Lens' ReportTaskProgressResponse Int

@@ -59,19 +59,25 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyImageAttribute' smart constructor.
-data ModifyImageAttribute = ModifyImageAttribute'
-  { _miaAttribute        :: !(Maybe Text)
-  , _miaUserIds          :: !(Maybe [Text])
-  , _miaUserGroups       :: !(Maybe [Text])
-  , _miaValue            :: !(Maybe Text)
-  , _miaLaunchPermission :: !(Maybe LaunchPermissionModifications)
-  , _miaOperationType    :: !(Maybe OperationType)
-  , _miaProductCodes     :: !(Maybe [Text])
-  , _miaDescription      :: !(Maybe AttributeValue)
-  , _miaDryRun           :: !(Maybe Bool)
-  , _miaImageId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyImageAttribute = ModifyImageAttribute'{_miaAttribute
+                                                  :: !(Maybe Text),
+                                                  _miaUserIds ::
+                                                  !(Maybe [Text]),
+                                                  _miaUserGroups ::
+                                                  !(Maybe [Text]),
+                                                  _miaValue :: !(Maybe Text),
+                                                  _miaLaunchPermission ::
+                                                  !(Maybe
+                                                      LaunchPermissionModifications),
+                                                  _miaOperationType ::
+                                                  !(Maybe OperationType),
+                                                  _miaProductCodes ::
+                                                  !(Maybe [Text]),
+                                                  _miaDescription ::
+                                                  !(Maybe AttributeValue),
+                                                  _miaDryRun :: !(Maybe Bool),
+                                                  _miaImageId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyImageAttribute' with the minimum fields required to make a request.
 --
@@ -79,9 +85,9 @@ data ModifyImageAttribute = ModifyImageAttribute'
 --
 -- * 'miaAttribute' - The name of the attribute to modify. The valid values are @description@ , @launchPermission@ , and @productCodes@ .
 --
--- * 'miaUserIds' - One or more AWS account IDs. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
+-- * 'miaUserIds' - The AWS account IDs. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
 --
--- * 'miaUserGroups' - One or more user groups. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
+-- * 'miaUserGroups' - The user groups. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
 --
 -- * 'miaValue' - The value of the attribute being modified. This parameter can be used only when the @Attribute@ parameter is @description@ or @productCodes@ .
 --
@@ -89,7 +95,7 @@ data ModifyImageAttribute = ModifyImageAttribute'
 --
 -- * 'miaOperationType' - The operation type. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
 --
--- * 'miaProductCodes' - One or more DevPay product codes. After you add a product code to an AMI, it can't be removed.
+-- * 'miaProductCodes' - The DevPay product codes. After you add a product code to an AMI, it can't be removed.
 --
 -- * 'miaDescription' - A new description for the AMI.
 --
@@ -99,30 +105,24 @@ data ModifyImageAttribute = ModifyImageAttribute'
 modifyImageAttribute
     :: Text -- ^ 'miaImageId'
     -> ModifyImageAttribute
-modifyImageAttribute pImageId_ =
-  ModifyImageAttribute'
-    { _miaAttribute = Nothing
-    , _miaUserIds = Nothing
-    , _miaUserGroups = Nothing
-    , _miaValue = Nothing
-    , _miaLaunchPermission = Nothing
-    , _miaOperationType = Nothing
-    , _miaProductCodes = Nothing
-    , _miaDescription = Nothing
-    , _miaDryRun = Nothing
-    , _miaImageId = pImageId_
-    }
-
+modifyImageAttribute pImageId_
+  = ModifyImageAttribute'{_miaAttribute = Nothing,
+                          _miaUserIds = Nothing, _miaUserGroups = Nothing,
+                          _miaValue = Nothing, _miaLaunchPermission = Nothing,
+                          _miaOperationType = Nothing,
+                          _miaProductCodes = Nothing,
+                          _miaDescription = Nothing, _miaDryRun = Nothing,
+                          _miaImageId = pImageId_}
 
 -- | The name of the attribute to modify. The valid values are @description@ , @launchPermission@ , and @productCodes@ .
 miaAttribute :: Lens' ModifyImageAttribute (Maybe Text)
 miaAttribute = lens _miaAttribute (\ s a -> s{_miaAttribute = a})
 
--- | One or more AWS account IDs. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
+-- | The AWS account IDs. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
 miaUserIds :: Lens' ModifyImageAttribute [Text]
 miaUserIds = lens _miaUserIds (\ s a -> s{_miaUserIds = a}) . _Default . _Coerce
 
--- | One or more user groups. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
+-- | The user groups. This parameter can be used only when the @Attribute@ parameter is @launchPermission@ .
 miaUserGroups :: Lens' ModifyImageAttribute [Text]
 miaUserGroups = lens _miaUserGroups (\ s a -> s{_miaUserGroups = a}) . _Default . _Coerce
 
@@ -138,7 +138,7 @@ miaLaunchPermission = lens _miaLaunchPermission (\ s a -> s{_miaLaunchPermission
 miaOperationType :: Lens' ModifyImageAttribute (Maybe OperationType)
 miaOperationType = lens _miaOperationType (\ s a -> s{_miaOperationType = a})
 
--- | One or more DevPay product codes. After you add a product code to an AMI, it can't be removed.
+-- | The DevPay product codes. After you add a product code to an AMI, it can't be removed.
 miaProductCodes :: Lens' ModifyImageAttribute [Text]
 miaProductCodes = lens _miaProductCodes (\ s a -> s{_miaProductCodes = a}) . _Default . _Coerce
 
@@ -187,16 +187,15 @@ instance ToQuery ModifyImageAttribute where
                "DryRun" =: _miaDryRun, "ImageId" =: _miaImageId]
 
 -- | /See:/ 'modifyImageAttributeResponse' smart constructor.
-data ModifyImageAttributeResponse =
-  ModifyImageAttributeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyImageAttributeResponse = ModifyImageAttributeResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ModifyImageAttributeResponse' with the minimum fields required to make a request.
 --
 modifyImageAttributeResponse
     :: ModifyImageAttributeResponse
-modifyImageAttributeResponse = ModifyImageAttributeResponse'
-
+modifyImageAttributeResponse
+  = ModifyImageAttributeResponse'
 
 instance NFData ModifyImageAttributeResponse where

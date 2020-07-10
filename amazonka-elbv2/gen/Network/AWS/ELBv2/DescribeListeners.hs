@@ -21,6 +21,8 @@
 -- Describes the specified listeners or the listeners for the specified Application Load Balancer or Network Load Balancer. You must specify either a load balancer or one or more listeners.
 --
 --
+-- For an HTTPS or TLS listener, the output includes the default certificate for the listener. To describe the certificate list for the listener, use 'DescribeListenerCertificates' .
+--
 --
 -- This operation returns paginated results.
 module Network.AWS.ELBv2.DescribeListeners
@@ -52,13 +54,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeListeners' smart constructor.
-data DescribeListeners = DescribeListeners'
-  { _dlListenerARNs    :: !(Maybe [Text])
-  , _dlLoadBalancerARN :: !(Maybe Text)
-  , _dlMarker          :: !(Maybe Text)
-  , _dlPageSize        :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeListeners = DescribeListeners'{_dlListenerARNs
+                                            :: !(Maybe [Text]),
+                                            _dlLoadBalancerARN :: !(Maybe Text),
+                                            _dlMarker :: !(Maybe Text),
+                                            _dlPageSize :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeListeners' with the minimum fields required to make a request.
 --
@@ -73,14 +74,10 @@ data DescribeListeners = DescribeListeners'
 -- * 'dlPageSize' - The maximum number of results to return with this call.
 describeListeners
     :: DescribeListeners
-describeListeners =
-  DescribeListeners'
-    { _dlListenerARNs = Nothing
-    , _dlLoadBalancerARN = Nothing
-    , _dlMarker = Nothing
-    , _dlPageSize = Nothing
-    }
-
+describeListeners
+  = DescribeListeners'{_dlListenerARNs = Nothing,
+                       _dlLoadBalancerARN = Nothing, _dlMarker = Nothing,
+                       _dlPageSize = Nothing}
 
 -- | The Amazon Resource Names (ARN) of the listeners.
 dlListenerARNs :: Lens' DescribeListeners [Text]
@@ -138,18 +135,20 @@ instance ToQuery DescribeListeners where
                "Marker" =: _dlMarker, "PageSize" =: _dlPageSize]
 
 -- | /See:/ 'describeListenersResponse' smart constructor.
-data DescribeListenersResponse = DescribeListenersResponse'
-  { _dlsrsNextMarker     :: !(Maybe Text)
-  , _dlsrsListeners      :: !(Maybe [Listener])
-  , _dlsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeListenersResponse = DescribeListenersResponse'{_dlsrsNextMarker
+                                                            :: !(Maybe Text),
+                                                            _dlsrsListeners ::
+                                                            !(Maybe [Listener]),
+                                                            _dlsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeListenersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlsrsNextMarker' - The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+-- * 'dlsrsNextMarker' - If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
 --
 -- * 'dlsrsListeners' - Information about the listeners.
 --
@@ -157,15 +156,13 @@ data DescribeListenersResponse = DescribeListenersResponse'
 describeListenersResponse
     :: Int -- ^ 'dlsrsResponseStatus'
     -> DescribeListenersResponse
-describeListenersResponse pResponseStatus_ =
-  DescribeListenersResponse'
-    { _dlsrsNextMarker = Nothing
-    , _dlsrsListeners = Nothing
-    , _dlsrsResponseStatus = pResponseStatus_
-    }
+describeListenersResponse pResponseStatus_
+  = DescribeListenersResponse'{_dlsrsNextMarker =
+                                 Nothing,
+                               _dlsrsListeners = Nothing,
+                               _dlsrsResponseStatus = pResponseStatus_}
 
-
--- | The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+-- | If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
 dlsrsNextMarker :: Lens' DescribeListenersResponse (Maybe Text)
 dlsrsNextMarker = lens _dlsrsNextMarker (\ s a -> s{_dlsrsNextMarker = a})
 

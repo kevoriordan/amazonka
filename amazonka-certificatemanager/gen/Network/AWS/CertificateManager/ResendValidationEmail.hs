@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resends the email that requests domain ownership validation. The domain owner or an authorized representative must approve the ACM certificate before it can be issued. The certificate can be approved by clicking a link in the mail to navigate to the Amazon certificate approval website and then clicking __I Approve__ . However, the validation email can be blocked by spam filters. Therefore, if you do not receive the original mail, you can request that the mail be resent within 72 hours of requesting the ACM certificate. If more than 72 hours have elapsed since your original request or since your last attempt to resend validation mail, you must request a new certificate. For more information about setting up your contact email addresses, see <http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html Configure Email for your Domain> .
+-- Resends the email that requests domain ownership validation. The domain owner or an authorized representative must approve the ACM certificate before it can be issued. The certificate can be approved by clicking a link in the mail to navigate to the Amazon certificate approval website and then clicking __I Approve__ . However, the validation email can be blocked by spam filters. Therefore, if you do not receive the original mail, you can request that the mail be resent within 72 hours of requesting the ACM certificate. If more than 72 hours have elapsed since your original request or since your last attempt to resend validation mail, you must request a new certificate. For more information about setting up your contact email addresses, see <https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html Configure Email for your Domain> . 
 --
 --
 module Network.AWS.CertificateManager.ResendValidationEmail
@@ -44,18 +44,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'resendValidationEmail' smart constructor.
-data ResendValidationEmail = ResendValidationEmail'
-  { _rveCertificateARN   :: !Text
-  , _rveDomain           :: !Text
-  , _rveValidationDomain :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResendValidationEmail = ResendValidationEmail'{_rveCertificateARN
+                                                    :: !Text,
+                                                    _rveDomain :: !Text,
+                                                    _rveValidationDomain ::
+                                                    !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ResendValidationEmail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rveCertificateARN' - String that contains the ARN of the requested certificate. The certificate ARN is generated and returned by the 'RequestCertificate' action as soon as the request is made. By default, using this parameter causes email to be sent to all top-level domains you specified in the certificate request. The ARN must be of the form:  @arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012@
+-- * 'rveCertificateARN' - String that contains the ARN of the requested certificate. The certificate ARN is generated and returned by the 'RequestCertificate' action as soon as the request is made. By default, using this parameter causes email to be sent to all top-level domains you specified in the certificate request. The ARN must be of the form:  @arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012@ 
 --
 -- * 'rveDomain' - The fully qualified domain name (FQDN) of the certificate that needs to be validated.
 --
@@ -65,15 +66,14 @@ resendValidationEmail
     -> Text -- ^ 'rveDomain'
     -> Text -- ^ 'rveValidationDomain'
     -> ResendValidationEmail
-resendValidationEmail pCertificateARN_ pDomain_ pValidationDomain_ =
-  ResendValidationEmail'
-    { _rveCertificateARN = pCertificateARN_
-    , _rveDomain = pDomain_
-    , _rveValidationDomain = pValidationDomain_
-    }
+resendValidationEmail pCertificateARN_ pDomain_
+  pValidationDomain_
+  = ResendValidationEmail'{_rveCertificateARN =
+                             pCertificateARN_,
+                           _rveDomain = pDomain_,
+                           _rveValidationDomain = pValidationDomain_}
 
-
--- | String that contains the ARN of the requested certificate. The certificate ARN is generated and returned by the 'RequestCertificate' action as soon as the request is made. By default, using this parameter causes email to be sent to all top-level domains you specified in the certificate request. The ARN must be of the form:  @arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012@
+-- | String that contains the ARN of the requested certificate. The certificate ARN is generated and returned by the 'RequestCertificate' action as soon as the request is made. By default, using this parameter causes email to be sent to all top-level domains you specified in the certificate request. The ARN must be of the form:  @arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012@ 
 rveCertificateARN :: Lens' ResendValidationEmail Text
 rveCertificateARN = lens _rveCertificateARN (\ s a -> s{_rveCertificateARN = a})
 
@@ -120,16 +120,15 @@ instance ToQuery ResendValidationEmail where
         toQuery = const mempty
 
 -- | /See:/ 'resendValidationEmailResponse' smart constructor.
-data ResendValidationEmailResponse =
-  ResendValidationEmailResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResendValidationEmailResponse = ResendValidationEmailResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ResendValidationEmailResponse' with the minimum fields required to make a request.
 --
 resendValidationEmailResponse
     :: ResendValidationEmailResponse
-resendValidationEmailResponse = ResendValidationEmailResponse'
-
+resendValidationEmailResponse
+  = ResendValidationEmailResponse'
 
 instance NFData ResendValidationEmailResponse where

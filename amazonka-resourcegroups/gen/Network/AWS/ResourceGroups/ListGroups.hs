@@ -29,6 +29,7 @@ module Network.AWS.ResourceGroups.ListGroups
       listGroups
     , ListGroups
     -- * Request Lenses
+    , lgFilters
     , lgNextToken
     , lgMaxResults
 
@@ -38,6 +39,7 @@ module Network.AWS.ResourceGroups.ListGroups
     -- * Response Lenses
     , lgrsGroups
     , lgrsNextToken
+    , lgrsGroupIdentifiers
     , lgrsResponseStatus
     ) where
 
@@ -50,23 +52,30 @@ import Network.AWS.ResourceGroups.Types.Product
 import Network.AWS.Response
 
 -- | /See:/ 'listGroups' smart constructor.
-data ListGroups = ListGroups'
-  { _lgNextToken  :: !(Maybe Text)
-  , _lgMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGroups = ListGroups'{_lgFilters ::
+                              !(Maybe [GroupFilter]),
+                              _lgNextToken :: !(Maybe Text),
+                              _lgMaxResults :: !(Maybe Nat)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgFilters' - Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.     * @resource-type@ - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.
 --
 -- * 'lgNextToken' - The NextToken value that is returned in a paginated @ListGroups@ request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.
 --
 -- * 'lgMaxResults' - The maximum number of resource group results that are returned by ListGroups in paginated output. By default, this number is 50.
 listGroups
     :: ListGroups
-listGroups = ListGroups' {_lgNextToken = Nothing, _lgMaxResults = Nothing}
+listGroups
+  = ListGroups'{_lgFilters = Nothing,
+                _lgNextToken = Nothing, _lgMaxResults = Nothing}
 
+-- | Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.     * @resource-type@ - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.
+lgFilters :: Lens' ListGroups [GroupFilter]
+lgFilters = lens _lgFilters (\ s a -> s{_lgFilters = a}) . _Default . _Coerce
 
 -- | The NextToken value that is returned in a paginated @ListGroups@ request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.
 lgNextToken :: Lens' ListGroups (Maybe Text)
@@ -79,18 +88,20 @@ lgMaxResults = lens _lgMaxResults (\ s a -> s{_lgMaxResults = a}) . mapping _Nat
 instance AWSPager ListGroups where
         page rq rs
           | stop (rs ^. lgrsNextToken) = Nothing
+          | stop (rs ^. lgrsGroupIdentifiers) = Nothing
           | stop (rs ^. lgrsGroups) = Nothing
           | otherwise =
             Just $ rq & lgNextToken .~ rs ^. lgrsNextToken
 
 instance AWSRequest ListGroups where
         type Rs ListGroups = ListGroupsResponse
-        request = get resourceGroups
+        request = postJSON resourceGroups
         response
           = receiveJSON
               (\ s h x ->
                  ListGroupsResponse' <$>
                    (x .?> "Groups" .!@ mempty) <*> (x .?> "NextToken")
+                     <*> (x .?> "GroupIdentifiers" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable ListGroups where
@@ -100,8 +111,12 @@ instance NFData ListGroups where
 instance ToHeaders ListGroups where
         toHeaders = const mempty
 
+instance ToJSON ListGroups where
+        toJSON ListGroups'{..}
+          = object (catMaybes [("Filters" .=) <$> _lgFilters])
+
 instance ToPath ListGroups where
-        toPath = const "/groups"
+        toPath = const "/groups-list"
 
 instance ToQuery ListGroups where
         toQuery ListGroups'{..}
@@ -110,12 +125,13 @@ instance ToQuery ListGroups where
                "maxResults" =: _lgMaxResults]
 
 -- | /See:/ 'listGroupsResponse' smart constructor.
-data ListGroupsResponse = ListGroupsResponse'
-  { _lgrsGroups         :: !(Maybe [Group])
-  , _lgrsNextToken      :: !(Maybe Text)
-  , _lgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGroupsResponse = ListGroupsResponse'{_lgrsGroups
+                                              :: !(Maybe [Group]),
+                                              _lgrsNextToken :: !(Maybe Text),
+                                              _lgrsGroupIdentifiers ::
+                                              !(Maybe [GroupIdentifier]),
+                                              _lgrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
 --
@@ -125,17 +141,17 @@ data ListGroupsResponse = ListGroupsResponse'
 --
 -- * 'lgrsNextToken' - The NextToken value to include in a subsequent @ListGroups@ request, to get more results.
 --
+-- * 'lgrsGroupIdentifiers' - A list of GroupIdentifier objects. Each identifier is an object that contains both the GroupName and the GroupArn.
+--
 -- * 'lgrsResponseStatus' - -- | The response status code.
 listGroupsResponse
     :: Int -- ^ 'lgrsResponseStatus'
     -> ListGroupsResponse
-listGroupsResponse pResponseStatus_ =
-  ListGroupsResponse'
-    { _lgrsGroups = Nothing
-    , _lgrsNextToken = Nothing
-    , _lgrsResponseStatus = pResponseStatus_
-    }
-
+listGroupsResponse pResponseStatus_
+  = ListGroupsResponse'{_lgrsGroups = Nothing,
+                        _lgrsNextToken = Nothing,
+                        _lgrsGroupIdentifiers = Nothing,
+                        _lgrsResponseStatus = pResponseStatus_}
 
 -- | A list of resource groups.
 lgrsGroups :: Lens' ListGroupsResponse [Group]
@@ -144,6 +160,10 @@ lgrsGroups = lens _lgrsGroups (\ s a -> s{_lgrsGroups = a}) . _Default . _Coerce
 -- | The NextToken value to include in a subsequent @ListGroups@ request, to get more results.
 lgrsNextToken :: Lens' ListGroupsResponse (Maybe Text)
 lgrsNextToken = lens _lgrsNextToken (\ s a -> s{_lgrsNextToken = a})
+
+-- | A list of GroupIdentifier objects. Each identifier is an object that contains both the GroupName and the GroupArn.
+lgrsGroupIdentifiers :: Lens' ListGroupsResponse [GroupIdentifier]
+lgrsGroupIdentifiers = lens _lgrsGroupIdentifiers (\ s a -> s{_lgrsGroupIdentifiers = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
 lgrsResponseStatus :: Lens' ListGroupsResponse Int

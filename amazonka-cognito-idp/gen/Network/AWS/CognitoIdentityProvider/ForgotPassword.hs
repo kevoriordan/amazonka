@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the @Username@ parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, @InvalidParameterException@ is thrown. To use the confirmation code for resetting the password, call .
+-- Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the @Username@ parameter, you can use the username or user alias. The method used to send the confirmation code is sent according to the specified AccountRecoverySetting. For more information, see < Recovering User Accounts> in the /Amazon Cognito Developer Guide/ . If neither a verified phone number nor a verified email exists, an @InvalidParameterException@ is thrown. To use the confirmation code for resetting the password, call .
 --
 --
 module Network.AWS.CognitoIdentityProvider.ForgotPassword
@@ -27,6 +27,7 @@ module Network.AWS.CognitoIdentityProvider.ForgotPassword
       forgotPassword
     , ForgotPassword
     -- * Request Lenses
+    , fpClientMetadata
     , fpAnalyticsMetadata
     , fpUserContextData
     , fpSecretHash
@@ -53,18 +54,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'forgotPassword' smart constructor.
-data ForgotPassword = ForgotPassword'
-  { _fpAnalyticsMetadata :: !(Maybe AnalyticsMetadataType)
-  , _fpUserContextData   :: !(Maybe UserContextDataType)
-  , _fpSecretHash        :: !(Maybe (Sensitive Text))
-  , _fpClientId          :: !(Sensitive Text)
-  , _fpUsername          :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ForgotPassword = ForgotPassword'{_fpClientMetadata
+                                      :: !(Maybe (Map Text Text)),
+                                      _fpAnalyticsMetadata ::
+                                      !(Maybe AnalyticsMetadataType),
+                                      _fpUserContextData ::
+                                      !(Maybe UserContextDataType),
+                                      _fpSecretHash ::
+                                      !(Maybe (Sensitive Text)),
+                                      _fpClientId :: !(Sensitive Text),
+                                      _fpUsername :: !(Sensitive Text)}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForgotPassword' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fpClientMetadata' - A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ForgotPassword API action, Amazon Cognito invokes any functions that are assigned to the following triggers: /pre sign-up/ , /custom message/ , and /user migration/ . When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the function receives as input. This payload contains a @clientMetadata@ attribute, which provides the data that you assigned to the ClientMetadata parameter in your ForgotPassword request. In your function code in AWS Lambda, you can process the @clientMetadata@ value to enhance your workflow for your specific needs. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html Customizing User Pool Workflows with Lambda Triggers> in the /Amazon Cognito Developer Guide/ .
 --
 -- * 'fpAnalyticsMetadata' - The Amazon Pinpoint analytics metadata for collecting metrics for @ForgotPassword@ calls.
 --
@@ -79,15 +85,17 @@ forgotPassword
     :: Text -- ^ 'fpClientId'
     -> Text -- ^ 'fpUsername'
     -> ForgotPassword
-forgotPassword pClientId_ pUsername_ =
-  ForgotPassword'
-    { _fpAnalyticsMetadata = Nothing
-    , _fpUserContextData = Nothing
-    , _fpSecretHash = Nothing
-    , _fpClientId = _Sensitive # pClientId_
-    , _fpUsername = _Sensitive # pUsername_
-    }
+forgotPassword pClientId_ pUsername_
+  = ForgotPassword'{_fpClientMetadata = Nothing,
+                    _fpAnalyticsMetadata = Nothing,
+                    _fpUserContextData = Nothing,
+                    _fpSecretHash = Nothing,
+                    _fpClientId = _Sensitive # pClientId_,
+                    _fpUsername = _Sensitive # pUsername_}
 
+-- | A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ForgotPassword API action, Amazon Cognito invokes any functions that are assigned to the following triggers: /pre sign-up/ , /custom message/ , and /user migration/ . When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the function receives as input. This payload contains a @clientMetadata@ attribute, which provides the data that you assigned to the ClientMetadata parameter in your ForgotPassword request. In your function code in AWS Lambda, you can process the @clientMetadata@ value to enhance your workflow for your specific needs. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html Customizing User Pool Workflows with Lambda Triggers> in the /Amazon Cognito Developer Guide/ .
+fpClientMetadata :: Lens' ForgotPassword (HashMap Text Text)
+fpClientMetadata = lens _fpClientMetadata (\ s a -> s{_fpClientMetadata = a}) . _Default . _Map
 
 -- | The Amazon Pinpoint analytics metadata for collecting metrics for @ForgotPassword@ calls.
 fpAnalyticsMetadata :: Lens' ForgotPassword (Maybe AnalyticsMetadataType)
@@ -137,7 +145,8 @@ instance ToJSON ForgotPassword where
         toJSON ForgotPassword'{..}
           = object
               (catMaybes
-                 [("AnalyticsMetadata" .=) <$> _fpAnalyticsMetadata,
+                 [("ClientMetadata" .=) <$> _fpClientMetadata,
+                  ("AnalyticsMetadata" .=) <$> _fpAnalyticsMetadata,
                   ("UserContextData" .=) <$> _fpUserContextData,
                   ("SecretHash" .=) <$> _fpSecretHash,
                   Just ("ClientId" .= _fpClientId),
@@ -154,11 +163,14 @@ instance ToQuery ForgotPassword where
 --
 --
 -- /See:/ 'forgotPasswordResponse' smart constructor.
-data ForgotPasswordResponse = ForgotPasswordResponse'
-  { _fprsCodeDeliveryDetails :: !(Maybe CodeDeliveryDetailsType)
-  , _fprsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ForgotPasswordResponse = ForgotPasswordResponse'{_fprsCodeDeliveryDetails
+                                                      ::
+                                                      !(Maybe
+                                                          CodeDeliveryDetailsType),
+                                                      _fprsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ForgotPasswordResponse' with the minimum fields required to make a request.
 --
@@ -170,10 +182,10 @@ data ForgotPasswordResponse = ForgotPasswordResponse'
 forgotPasswordResponse
     :: Int -- ^ 'fprsResponseStatus'
     -> ForgotPasswordResponse
-forgotPasswordResponse pResponseStatus_ =
-  ForgotPasswordResponse'
-    {_fprsCodeDeliveryDetails = Nothing, _fprsResponseStatus = pResponseStatus_}
-
+forgotPasswordResponse pResponseStatus_
+  = ForgotPasswordResponse'{_fprsCodeDeliveryDetails =
+                              Nothing,
+                            _fprsResponseStatus = pResponseStatus_}
 
 -- | The code delivery details returned by the server in response to the request to reset a password.
 fprsCodeDeliveryDetails :: Lens' ForgotPasswordResponse (Maybe CodeDeliveryDetailsType)

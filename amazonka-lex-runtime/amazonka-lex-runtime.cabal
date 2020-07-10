@@ -45,18 +45,33 @@ library
 
     exposed-modules:
           Network.AWS.LexRuntime
+        , Network.AWS.LexRuntime.DeleteSession
+        , Network.AWS.LexRuntime.GetSession
         , Network.AWS.LexRuntime.PostContent
         , Network.AWS.LexRuntime.PostText
+        , Network.AWS.LexRuntime.PutSession
         , Network.AWS.LexRuntime.Types
         , Network.AWS.LexRuntime.Waiters
 
     other-modules:
-          Network.AWS.LexRuntime.Types.Product
-        , Network.AWS.LexRuntime.Types.Sum
+          Network.AWS.LexRuntime.Types.Button
+        , Network.AWS.LexRuntime.Types.ConfirmationStatus
+        , Network.AWS.LexRuntime.Types.ContentType
+        , Network.AWS.LexRuntime.Types.DialogAction
+        , Network.AWS.LexRuntime.Types.DialogActionType
+        , Network.AWS.LexRuntime.Types.DialogState
+        , Network.AWS.LexRuntime.Types.FulfillmentState
+        , Network.AWS.LexRuntime.Types.GenericAttachment
+        , Network.AWS.LexRuntime.Types.IntentSummary
+        , Network.AWS.LexRuntime.Types.MessageFormatType
+        , Network.AWS.LexRuntime.Types.Product
+        , Network.AWS.LexRuntime.Types.ResponseCard
+        , Network.AWS.LexRuntime.Types.SentimentResponse
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-lex-runtime-test
     type:              exitcode-stdio-1.0
@@ -80,6 +95,7 @@ test-suite amazonka-lex-runtime-test
         , amazonka-lex-runtime
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

@@ -24,48 +24,38 @@ import Network.AWS.Waiter
 
 -- | Polls 'Network.AWS.AppStream.DescribeFleets' every 30 seconds until a successful state is reached. An error is returned after 40 failed checks.
 fleetStopped :: Wait DescribeFleets
-fleetStopped =
-  Wait
-    { _waitName = "FleetStopped"
-    , _waitAttempts = 40
-    , _waitDelay = 30
-    , _waitAcceptors =
-        [ matchAll
-            "INACTIVE"
-            AcceptSuccess
-            (folding (concatOf dfsrsFleets) . fState . to toTextCI)
-        , matchAny
-            "PENDING_ACTIVATE"
-            AcceptFailure
-            (folding (concatOf dfsrsFleets) . fState . to toTextCI)
-        , matchAny
-            "ACTIVE"
-            AcceptFailure
-            (folding (concatOf dfsrsFleets) . fState . to toTextCI)
-        ]
-    }
-
+fleetStopped
+  = Wait{_waitName = "FleetStopped",
+         _waitAttempts = 40, _waitDelay = 30,
+         _waitAcceptors =
+           [matchAll "INACTIVE" AcceptSuccess
+              (folding (concatOf (dfsrsFleets . to toList)) .
+                 fState
+                 . to toTextCI),
+            matchAny "PENDING_ACTIVATE" AcceptFailure
+              (folding (concatOf (dfsrsFleets . to toList)) .
+                 fState
+                 . to toTextCI),
+            matchAny "ACTIVE" AcceptFailure
+              (folding (concatOf (dfsrsFleets . to toList)) .
+                 fState
+                 . to toTextCI)]}
 
 -- | Polls 'Network.AWS.AppStream.DescribeFleets' every 30 seconds until a successful state is reached. An error is returned after 40 failed checks.
 fleetStarted :: Wait DescribeFleets
-fleetStarted =
-  Wait
-    { _waitName = "FleetStarted"
-    , _waitAttempts = 40
-    , _waitDelay = 30
-    , _waitAcceptors =
-        [ matchAll
-            "ACTIVE"
-            AcceptSuccess
-            (folding (concatOf dfsrsFleets) . fState . to toTextCI)
-        , matchAny
-            "PENDING_DEACTIVATE"
-            AcceptFailure
-            (folding (concatOf dfsrsFleets) . fState . to toTextCI)
-        , matchAny
-            "INACTIVE"
-            AcceptFailure
-            (folding (concatOf dfsrsFleets) . fState . to toTextCI)
-        ]
-    }
-
+fleetStarted
+  = Wait{_waitName = "FleetStarted",
+         _waitAttempts = 40, _waitDelay = 30,
+         _waitAcceptors =
+           [matchAll "ACTIVE" AcceptSuccess
+              (folding (concatOf (dfsrsFleets . to toList)) .
+                 fState
+                 . to toTextCI),
+            matchAny "PENDING_DEACTIVATE" AcceptFailure
+              (folding (concatOf (dfsrsFleets . to toList)) .
+                 fState
+                 . to toTextCI),
+            matchAny "INACTIVE" AcceptFailure
+              (folding (concatOf (dfsrsFleets . to toList)) .
+                 fState
+                 . to toTextCI)]}

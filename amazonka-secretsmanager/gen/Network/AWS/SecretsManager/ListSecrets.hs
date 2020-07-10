@@ -21,7 +21,7 @@
 -- Lists all of the secrets that are stored by Secrets Manager in the AWS account. To list the versions currently stored for a specific secret, use 'ListSecretVersionIds' . The encrypted fields @SecretString@ and @SecretBinary@ are not included in the output. To get that information, call the 'GetSecretValue' operation.
 --
 --
--- __Minimum permissions__
+-- __Minimum permissions__ 
 --
 -- To run this command, you must have the following permissions:
 --
@@ -29,12 +29,14 @@
 --
 --
 --
--- __Related operations__
+-- __Related operations__ 
 --
 --     * To list the versions attached to a secret, use 'ListSecretVersionIds' .
 --
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SecretsManager.ListSecrets
     (
     -- * Creating a Request
@@ -54,6 +56,7 @@ module Network.AWS.SecretsManager.ListSecrets
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -61,11 +64,10 @@ import Network.AWS.SecretsManager.Types
 import Network.AWS.SecretsManager.Types.Product
 
 -- | /See:/ 'listSecrets' smart constructor.
-data ListSecrets = ListSecrets'
-  { _lsNextToken  :: !(Maybe Text)
-  , _lsMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSecrets = ListSecrets'{_lsNextToken ::
+                                !(Maybe Text),
+                                _lsMaxResults :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSecrets' with the minimum fields required to make a request.
 --
@@ -76,8 +78,9 @@ data ListSecrets = ListSecrets'
 -- * 'lsMaxResults' - (Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, it defaults to a value that's specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (isn't null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Secrets Manager might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
 listSecrets
     :: ListSecrets
-listSecrets = ListSecrets' {_lsNextToken = Nothing, _lsMaxResults = Nothing}
-
+listSecrets
+  = ListSecrets'{_lsNextToken = Nothing,
+                 _lsMaxResults = Nothing}
 
 -- | (Optional) Use this parameter in a request if you receive a @NextToken@ response in a previous request that indicates that there's more output available. In a subsequent call, set it to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
 lsNextToken :: Lens' ListSecrets (Maybe Text)
@@ -86,6 +89,13 @@ lsNextToken = lens _lsNextToken (\ s a -> s{_lsNextToken = a})
 -- | (Optional) Limits the number of results that you want to include in the response. If you don't include this parameter, it defaults to a value that's specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (isn't null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Secrets Manager might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
 lsMaxResults :: Lens' ListSecrets (Maybe Natural)
 lsMaxResults = lens _lsMaxResults (\ s a -> s{_lsMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListSecrets where
+        page rq rs
+          | stop (rs ^. lsrsNextToken) = Nothing
+          | stop (rs ^. lsrsSecretList) = Nothing
+          | otherwise =
+            Just $ rq & lsNextToken .~ rs ^. lsrsNextToken
 
 instance AWSRequest ListSecrets where
         type Rs ListSecrets = ListSecretsResponse
@@ -125,12 +135,12 @@ instance ToQuery ListSecrets where
         toQuery = const mempty
 
 -- | /See:/ 'listSecretsResponse' smart constructor.
-data ListSecretsResponse = ListSecretsResponse'
-  { _lsrsNextToken      :: !(Maybe Text)
-  , _lsrsSecretList     :: !(Maybe [SecretListEntry])
-  , _lsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSecretsResponse = ListSecretsResponse'{_lsrsNextToken
+                                                :: !(Maybe Text),
+                                                _lsrsSecretList ::
+                                                !(Maybe [SecretListEntry]),
+                                                _lsrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSecretsResponse' with the minimum fields required to make a request.
 --
@@ -144,13 +154,10 @@ data ListSecretsResponse = ListSecretsResponse'
 listSecretsResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListSecretsResponse
-listSecretsResponse pResponseStatus_ =
-  ListSecretsResponse'
-    { _lsrsNextToken = Nothing
-    , _lsrsSecretList = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
-
+listSecretsResponse pResponseStatus_
+  = ListSecretsResponse'{_lsrsNextToken = Nothing,
+                         _lsrsSecretList = Nothing,
+                         _lsrsResponseStatus = pResponseStatus_}
 
 -- | If present in the response, this value indicates that there's more output available than what's included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the @NextToken@ response element comes back empty (as @null@ ).
 lsrsNextToken :: Lens' ListSecretsResponse (Maybe Text)

@@ -56,19 +56,25 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeClusterSubnetGroups' smart constructor.
-data DescribeClusterSubnetGroups = DescribeClusterSubnetGroups'
-  { _dcsgsTagValues              :: !(Maybe [Text])
-  , _dcsgsTagKeys                :: !(Maybe [Text])
-  , _dcsgsClusterSubnetGroupName :: !(Maybe Text)
-  , _dcsgsMarker                 :: !(Maybe Text)
-  , _dcsgsMaxRecords             :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusterSubnetGroups = DescribeClusterSubnetGroups'{_dcsgsTagValues
+                                                                ::
+                                                                !(Maybe [Text]),
+                                                                _dcsgsTagKeys ::
+                                                                !(Maybe [Text]),
+                                                                _dcsgsClusterSubnetGroupName
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dcsgsMarker ::
+                                                                !(Maybe Text),
+                                                                _dcsgsMaxRecords
+                                                                :: !(Maybe Int)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeClusterSubnetGroups' with the minimum fields required to make a request.
 --
@@ -80,20 +86,18 @@ data DescribeClusterSubnetGroups = DescribeClusterSubnetGroups'
 --
 -- * 'dcsgsClusterSubnetGroupName' - The name of the cluster subnet group for which information is requested.
 --
--- * 'dcsgsMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterSubnetGroups' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- * 'dcsgsMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterSubnetGroups' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 --
 -- * 'dcsgsMaxRecords' - The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified @MaxRecords@ value, a value is returned in a @marker@ field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: @100@  Constraints: minimum 20, maximum 100.
 describeClusterSubnetGroups
     :: DescribeClusterSubnetGroups
-describeClusterSubnetGroups =
-  DescribeClusterSubnetGroups'
-    { _dcsgsTagValues = Nothing
-    , _dcsgsTagKeys = Nothing
-    , _dcsgsClusterSubnetGroupName = Nothing
-    , _dcsgsMarker = Nothing
-    , _dcsgsMaxRecords = Nothing
-    }
-
+describeClusterSubnetGroups
+  = DescribeClusterSubnetGroups'{_dcsgsTagValues =
+                                   Nothing,
+                                 _dcsgsTagKeys = Nothing,
+                                 _dcsgsClusterSubnetGroupName = Nothing,
+                                 _dcsgsMarker = Nothing,
+                                 _dcsgsMaxRecords = Nothing}
 
 -- | A tag value or values for which you want to return all matching cluster subnet groups that are associated with the specified tag value or values. For example, suppose that you have subnet groups that are tagged with values called @admin@ and @test@ . If you specify both of these tag values in the request, Amazon Redshift returns a response with the subnet groups that have either or both of these tag values associated with them.
 dcsgsTagValues :: Lens' DescribeClusterSubnetGroups [Text]
@@ -107,7 +111,7 @@ dcsgsTagKeys = lens _dcsgsTagKeys (\ s a -> s{_dcsgsTagKeys = a}) . _Default . _
 dcsgsClusterSubnetGroupName :: Lens' DescribeClusterSubnetGroups (Maybe Text)
 dcsgsClusterSubnetGroupName = lens _dcsgsClusterSubnetGroupName (\ s a -> s{_dcsgsClusterSubnetGroupName = a})
 
--- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterSubnetGroups' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterSubnetGroups' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 dcsgsMarker :: Lens' DescribeClusterSubnetGroups (Maybe Text)
 dcsgsMarker = lens _dcsgsMarker (\ s a -> s{_dcsgsMarker = a})
 
@@ -161,43 +165,49 @@ instance ToQuery DescribeClusterSubnetGroups where
                "Marker" =: _dcsgsMarker,
                "MaxRecords" =: _dcsgsMaxRecords]
 
--- | Contains the output from the 'DescribeClusterSubnetGroups' action.
+-- | Contains the output from the 'DescribeClusterSubnetGroups' action. 
 --
 --
 --
 -- /See:/ 'describeClusterSubnetGroupsResponse' smart constructor.
-data DescribeClusterSubnetGroupsResponse = DescribeClusterSubnetGroupsResponse'
-  { _dcsgrsClusterSubnetGroups :: !(Maybe [ClusterSubnetGroup])
-  , _dcsgrsMarker              :: !(Maybe Text)
-  , _dcsgrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusterSubnetGroupsResponse = DescribeClusterSubnetGroupsResponse'{_dcsgrsClusterSubnetGroups
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [ClusterSubnetGroup]),
+                                                                                _dcsgrsMarker
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dcsgrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeClusterSubnetGroupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcsgrsClusterSubnetGroups' - A list of 'ClusterSubnetGroup' instances.
+-- * 'dcsgrsClusterSubnetGroups' - A list of 'ClusterSubnetGroup' instances. 
 --
--- * 'dcsgrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- * 'dcsgrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 --
 -- * 'dcsgrsResponseStatus' - -- | The response status code.
 describeClusterSubnetGroupsResponse
     :: Int -- ^ 'dcsgrsResponseStatus'
     -> DescribeClusterSubnetGroupsResponse
-describeClusterSubnetGroupsResponse pResponseStatus_ =
-  DescribeClusterSubnetGroupsResponse'
-    { _dcsgrsClusterSubnetGroups = Nothing
-    , _dcsgrsMarker = Nothing
-    , _dcsgrsResponseStatus = pResponseStatus_
-    }
+describeClusterSubnetGroupsResponse pResponseStatus_
+  = DescribeClusterSubnetGroupsResponse'{_dcsgrsClusterSubnetGroups
+                                           = Nothing,
+                                         _dcsgrsMarker = Nothing,
+                                         _dcsgrsResponseStatus =
+                                           pResponseStatus_}
 
-
--- | A list of 'ClusterSubnetGroup' instances.
+-- | A list of 'ClusterSubnetGroup' instances. 
 dcsgrsClusterSubnetGroups :: Lens' DescribeClusterSubnetGroupsResponse [ClusterSubnetGroup]
 dcsgrsClusterSubnetGroups = lens _dcsgrsClusterSubnetGroups (\ s a -> s{_dcsgrsClusterSubnetGroups = a}) . _Default . _Coerce
 
--- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 dcsgrsMarker :: Lens' DescribeClusterSubnetGroupsResponse (Maybe Text)
 dcsgrsMarker = lens _dcsgrsMarker (\ s a -> s{_dcsgrsMarker = a})
 

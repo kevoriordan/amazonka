@@ -46,35 +46,35 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeMigrationTask' smart constructor.
-data DescribeMigrationTask = DescribeMigrationTask'
-  { _dmtProgressUpdateStream :: !Text
-  , _dmtMigrationTaskName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMigrationTask = DescribeMigrationTask'{_dmtProgressUpdateStream
+                                                    :: !Text,
+                                                    _dmtMigrationTaskName ::
+                                                    !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeMigrationTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmtProgressUpdateStream' - The name of the ProgressUpdateStream.
+-- * 'dmtProgressUpdateStream' - The name of the ProgressUpdateStream. 
 --
--- * 'dmtMigrationTaskName' - The identifier given to the MigrationTask.
+-- * 'dmtMigrationTaskName' - The identifier given to the MigrationTask. /Do not store personal data in this field./ 
 describeMigrationTask
     :: Text -- ^ 'dmtProgressUpdateStream'
     -> Text -- ^ 'dmtMigrationTaskName'
     -> DescribeMigrationTask
-describeMigrationTask pProgressUpdateStream_ pMigrationTaskName_ =
-  DescribeMigrationTask'
-    { _dmtProgressUpdateStream = pProgressUpdateStream_
-    , _dmtMigrationTaskName = pMigrationTaskName_
-    }
+describeMigrationTask pProgressUpdateStream_
+  pMigrationTaskName_
+  = DescribeMigrationTask'{_dmtProgressUpdateStream =
+                             pProgressUpdateStream_,
+                           _dmtMigrationTaskName = pMigrationTaskName_}
 
-
--- | The name of the ProgressUpdateStream.
+-- | The name of the ProgressUpdateStream. 
 dmtProgressUpdateStream :: Lens' DescribeMigrationTask Text
 dmtProgressUpdateStream = lens _dmtProgressUpdateStream (\ s a -> s{_dmtProgressUpdateStream = a})
 
--- | The identifier given to the MigrationTask.
+-- | The identifier given to the MigrationTask. /Do not store personal data in this field./ 
 dmtMigrationTaskName :: Lens' DescribeMigrationTask Text
 dmtMigrationTaskName = lens _dmtMigrationTaskName (\ s a -> s{_dmtMigrationTaskName = a})
 
@@ -117,11 +117,14 @@ instance ToQuery DescribeMigrationTask where
         toQuery = const mempty
 
 -- | /See:/ 'describeMigrationTaskResponse' smart constructor.
-data DescribeMigrationTaskResponse = DescribeMigrationTaskResponse'
-  { _dmtrsMigrationTask  :: !(Maybe MigrationTask)
-  , _dmtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMigrationTaskResponse = DescribeMigrationTaskResponse'{_dmtrsMigrationTask
+                                                                    ::
+                                                                    !(Maybe
+                                                                        MigrationTask),
+                                                                    _dmtrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeMigrationTaskResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +136,10 @@ data DescribeMigrationTaskResponse = DescribeMigrationTaskResponse'
 describeMigrationTaskResponse
     :: Int -- ^ 'dmtrsResponseStatus'
     -> DescribeMigrationTaskResponse
-describeMigrationTaskResponse pResponseStatus_ =
-  DescribeMigrationTaskResponse'
-    {_dmtrsMigrationTask = Nothing, _dmtrsResponseStatus = pResponseStatus_}
-
+describeMigrationTaskResponse pResponseStatus_
+  = DescribeMigrationTaskResponse'{_dmtrsMigrationTask
+                                     = Nothing,
+                                   _dmtrsResponseStatus = pResponseStatus_}
 
 -- | Object encapsulating information about the migration task.
 dmtrsMigrationTask :: Lens' DescribeMigrationTaskResponse (Maybe MigrationTask)

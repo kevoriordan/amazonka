@@ -19,6 +19,20 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the replication configuration from the bucket.
+--
+--
+-- To use this operation, you must have permissions to perform the @s3:PutReplicationConfiguration@ action. The bucket owner has these permissions by default and can grant it to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources> . 
+--
+-- For information about replication configuration, see < https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html Replication> in the /Amazon S3 Developer Guide/ . 
+--
+-- The following operations are related to @DeleteBucketReplication@ :
+--
+--     * 'PutBucketReplication' 
+--
+--     * 'GetBucketReplication' 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketReplication
     (
     -- * Creating a Request
@@ -40,24 +54,23 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketReplication' smart constructor.
-newtype DeleteBucketReplication = DeleteBucketReplication'
-  { _dbrBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBucketReplication = DeleteBucketReplication'{_dbrBucket
+                                                           :: BucketName}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteBucketReplication' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbrBucket' - Undocumented member.
+-- * 'dbrBucket' - The bucket name. 
 deleteBucketReplication
     :: BucketName -- ^ 'dbrBucket'
     -> DeleteBucketReplication
-deleteBucketReplication pBucket_ =
-  DeleteBucketReplication' {_dbrBucket = pBucket_}
+deleteBucketReplication pBucket_
+  = DeleteBucketReplication'{_dbrBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name. 
 dbrBucket :: Lens' DeleteBucketReplication BucketName
 dbrBucket = lens _dbrBucket (\ s a -> s{_dbrBucket = a})
 
@@ -83,16 +96,15 @@ instance ToQuery DeleteBucketReplication where
         toQuery = const (mconcat ["replication"])
 
 -- | /See:/ 'deleteBucketReplicationResponse' smart constructor.
-data DeleteBucketReplicationResponse =
-  DeleteBucketReplicationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketReplicationResponse = DeleteBucketReplicationResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteBucketReplicationResponse' with the minimum fields required to make a request.
 --
 deleteBucketReplicationResponse
     :: DeleteBucketReplicationResponse
-deleteBucketReplicationResponse = DeleteBucketReplicationResponse'
-
+deleteBucketReplicationResponse
+  = DeleteBucketReplicationResponse'
 
 instance NFData DeleteBucketReplicationResponse where

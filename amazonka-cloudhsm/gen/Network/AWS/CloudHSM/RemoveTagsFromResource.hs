@@ -52,11 +52,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'removeTagsFromResource' smart constructor.
-data RemoveTagsFromResource = RemoveTagsFromResource'
-  { _rtfrResourceARN :: !Text
-  , _rtfrTagKeyList  :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveTagsFromResource = RemoveTagsFromResource'{_rtfrResourceARN
+                                                      :: !Text,
+                                                      _rtfrTagKeyList ::
+                                                      ![Text]}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'RemoveTagsFromResource' with the minimum fields required to make a request.
 --
@@ -68,10 +69,10 @@ data RemoveTagsFromResource = RemoveTagsFromResource'
 removeTagsFromResource
     :: Text -- ^ 'rtfrResourceARN'
     -> RemoveTagsFromResource
-removeTagsFromResource pResourceARN_ =
-  RemoveTagsFromResource'
-    {_rtfrResourceARN = pResourceARN_, _rtfrTagKeyList = mempty}
-
+removeTagsFromResource pResourceARN_
+  = RemoveTagsFromResource'{_rtfrResourceARN =
+                              pResourceARN_,
+                            _rtfrTagKeyList = mempty}
 
 -- | The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
 rtfrResourceARN :: Lens' RemoveTagsFromResource Text
@@ -119,11 +120,12 @@ instance ToQuery RemoveTagsFromResource where
         toQuery = const mempty
 
 -- | /See:/ 'removeTagsFromResourceResponse' smart constructor.
-data RemoveTagsFromResourceResponse = RemoveTagsFromResourceResponse'
-  { _rtfrrsResponseStatus :: !Int
-  , _rtfrrsStatus         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveTagsFromResourceResponse = RemoveTagsFromResourceResponse'{_rtfrrsResponseStatus
+                                                                      :: !Int,
+                                                                      _rtfrrsStatus
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'RemoveTagsFromResourceResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +138,11 @@ removeTagsFromResourceResponse
     :: Int -- ^ 'rtfrrsResponseStatus'
     -> Text -- ^ 'rtfrrsStatus'
     -> RemoveTagsFromResourceResponse
-removeTagsFromResourceResponse pResponseStatus_ pStatus_ =
-  RemoveTagsFromResourceResponse'
-    {_rtfrrsResponseStatus = pResponseStatus_, _rtfrrsStatus = pStatus_}
-
+removeTagsFromResourceResponse pResponseStatus_
+  pStatus_
+  = RemoveTagsFromResourceResponse'{_rtfrrsResponseStatus
+                                      = pResponseStatus_,
+                                    _rtfrrsStatus = pStatus_}
 
 -- | -- | The response status code.
 rtfrrsResponseStatus :: Lens' RemoveTagsFromResourceResponse Int

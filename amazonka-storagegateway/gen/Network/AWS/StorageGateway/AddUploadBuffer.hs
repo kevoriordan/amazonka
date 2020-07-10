@@ -48,11 +48,10 @@ import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'addUploadBuffer' smart constructor.
-data AddUploadBuffer = AddUploadBuffer'
-  { _aubGatewayARN :: !Text
-  , _aubDiskIds    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddUploadBuffer = AddUploadBuffer'{_aubGatewayARN
+                                        :: !Text,
+                                        _aubDiskIds :: ![Text]}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddUploadBuffer' with the minimum fields required to make a request.
 --
@@ -60,19 +59,19 @@ data AddUploadBuffer = AddUploadBuffer'
 --
 -- * 'aubGatewayARN' - Undocumented member.
 --
--- * 'aubDiskIds' - Undocumented member.
+-- * 'aubDiskIds' - An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the 'ListLocalDisks' API.
 addUploadBuffer
     :: Text -- ^ 'aubGatewayARN'
     -> AddUploadBuffer
-addUploadBuffer pGatewayARN_ =
-  AddUploadBuffer' {_aubGatewayARN = pGatewayARN_, _aubDiskIds = mempty}
-
+addUploadBuffer pGatewayARN_
+  = AddUploadBuffer'{_aubGatewayARN = pGatewayARN_,
+                     _aubDiskIds = mempty}
 
 -- | Undocumented member.
 aubGatewayARN :: Lens' AddUploadBuffer Text
 aubGatewayARN = lens _aubGatewayARN (\ s a -> s{_aubGatewayARN = a})
 
--- | Undocumented member.
+-- | An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the 'ListLocalDisks' API.
 aubDiskIds :: Lens' AddUploadBuffer [Text]
 aubDiskIds = lens _aubDiskIds (\ s a -> s{_aubDiskIds = a}) . _Coerce
 
@@ -113,11 +112,12 @@ instance ToQuery AddUploadBuffer where
         toQuery = const mempty
 
 -- | /See:/ 'addUploadBufferResponse' smart constructor.
-data AddUploadBufferResponse = AddUploadBufferResponse'
-  { _aubrsGatewayARN     :: !(Maybe Text)
-  , _aubrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddUploadBufferResponse = AddUploadBufferResponse'{_aubrsGatewayARN
+                                                        :: !(Maybe Text),
+                                                        _aubrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AddUploadBufferResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +129,10 @@ data AddUploadBufferResponse = AddUploadBufferResponse'
 addUploadBufferResponse
     :: Int -- ^ 'aubrsResponseStatus'
     -> AddUploadBufferResponse
-addUploadBufferResponse pResponseStatus_ =
-  AddUploadBufferResponse'
-    {_aubrsGatewayARN = Nothing, _aubrsResponseStatus = pResponseStatus_}
-
+addUploadBufferResponse pResponseStatus_
+  = AddUploadBufferResponse'{_aubrsGatewayARN =
+                               Nothing,
+                             _aubrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 aubrsGatewayARN :: Lens' AddUploadBufferResponse (Maybe Text)

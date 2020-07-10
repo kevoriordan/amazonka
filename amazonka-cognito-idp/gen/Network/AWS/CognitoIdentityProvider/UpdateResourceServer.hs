@@ -21,6 +21,8 @@
 -- Updates the name and scopes of resource server. All other fields are read-only.
 --
 --
+-- /Important:/ If you don't provide a value for an attribute, it will be set to the default value.
+--
 module Network.AWS.CognitoIdentityProvider.UpdateResourceServer
     (
     -- * Creating a Request
@@ -48,13 +50,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateResourceServer' smart constructor.
-data UpdateResourceServer = UpdateResourceServer'
-  { _ursScopes     :: !(Maybe [ResourceServerScopeType])
-  , _ursUserPoolId :: !Text
-  , _ursIdentifier :: !Text
-  , _ursName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateResourceServer = UpdateResourceServer'{_ursScopes
+                                                  ::
+                                                  !(Maybe
+                                                      [ResourceServerScopeType]),
+                                                  _ursUserPoolId :: !Text,
+                                                  _ursIdentifier :: !Text,
+                                                  _ursName :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateResourceServer' with the minimum fields required to make a request.
 --
@@ -72,14 +75,10 @@ updateResourceServer
     -> Text -- ^ 'ursIdentifier'
     -> Text -- ^ 'ursName'
     -> UpdateResourceServer
-updateResourceServer pUserPoolId_ pIdentifier_ pName_ =
-  UpdateResourceServer'
-    { _ursScopes = Nothing
-    , _ursUserPoolId = pUserPoolId_
-    , _ursIdentifier = pIdentifier_
-    , _ursName = pName_
-    }
-
+updateResourceServer pUserPoolId_ pIdentifier_ pName_
+  = UpdateResourceServer'{_ursScopes = Nothing,
+                          _ursUserPoolId = pUserPoolId_,
+                          _ursIdentifier = pIdentifier_, _ursName = pName_}
 
 -- | The scope values to be set for the resource server.
 ursScopes :: Lens' UpdateResourceServer [ResourceServerScopeType]
@@ -137,11 +136,13 @@ instance ToQuery UpdateResourceServer where
         toQuery = const mempty
 
 -- | /See:/ 'updateResourceServerResponse' smart constructor.
-data UpdateResourceServerResponse = UpdateResourceServerResponse'
-  { _ursrsResponseStatus :: !Int
-  , _ursrsResourceServer :: !ResourceServerType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateResourceServerResponse = UpdateResourceServerResponse'{_ursrsResponseStatus
+                                                                  :: !Int,
+                                                                  _ursrsResourceServer
+                                                                  ::
+                                                                  !ResourceServerType}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateResourceServerResponse' with the minimum fields required to make a request.
 --
@@ -154,12 +155,11 @@ updateResourceServerResponse
     :: Int -- ^ 'ursrsResponseStatus'
     -> ResourceServerType -- ^ 'ursrsResourceServer'
     -> UpdateResourceServerResponse
-updateResourceServerResponse pResponseStatus_ pResourceServer_ =
-  UpdateResourceServerResponse'
-    { _ursrsResponseStatus = pResponseStatus_
-    , _ursrsResourceServer = pResourceServer_
-    }
-
+updateResourceServerResponse pResponseStatus_
+  pResourceServer_
+  = UpdateResourceServerResponse'{_ursrsResponseStatus
+                                    = pResponseStatus_,
+                                  _ursrsResourceServer = pResourceServer_}
 
 -- | -- | The response status code.
 ursrsResponseStatus :: Lens' UpdateResourceServerResponse Int

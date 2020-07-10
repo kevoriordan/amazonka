@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a vocabulary from Amazon Transcribe.
+-- Deletes a vocabulary from Amazon Transcribe. 
 --
 --
 module Network.AWS.Transcribe.DeleteVocabulary
@@ -42,24 +42,23 @@ import Network.AWS.Transcribe.Types
 import Network.AWS.Transcribe.Types.Product
 
 -- | /See:/ 'deleteVocabulary' smart constructor.
-newtype DeleteVocabulary = DeleteVocabulary'
-  { _dvVocabularyName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteVocabulary = DeleteVocabulary'{_dvVocabularyName
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVocabulary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvVocabularyName' - The name of the vocabulary to delete.
+-- * 'dvVocabularyName' - The name of the vocabulary to delete. 
 deleteVocabulary
     :: Text -- ^ 'dvVocabularyName'
     -> DeleteVocabulary
-deleteVocabulary pVocabularyName_ =
-  DeleteVocabulary' {_dvVocabularyName = pVocabularyName_}
+deleteVocabulary pVocabularyName_
+  = DeleteVocabulary'{_dvVocabularyName =
+                        pVocabularyName_}
 
-
--- | The name of the vocabulary to delete.
+-- | The name of the vocabulary to delete. 
 dvVocabularyName :: Lens' DeleteVocabulary Text
 dvVocabularyName = lens _dvVocabularyName (\ s a -> s{_dvVocabularyName = a})
 
@@ -94,16 +93,14 @@ instance ToQuery DeleteVocabulary where
         toQuery = const mempty
 
 -- | /See:/ 'deleteVocabularyResponse' smart constructor.
-data DeleteVocabularyResponse =
-  DeleteVocabularyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVocabularyResponse = DeleteVocabularyResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteVocabularyResponse' with the minimum fields required to make a request.
 --
 deleteVocabularyResponse
     :: DeleteVocabularyResponse
 deleteVocabularyResponse = DeleteVocabularyResponse'
-
 
 instance NFData DeleteVocabularyResponse where

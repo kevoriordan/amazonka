@@ -18,10 +18,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a Boolean value that indicates whether automatic rotation of the key material is enabled for the specified customer master key (CMK).
+-- Gets a Boolean value that indicates whether <https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html automatic rotation of the key material> is enabled for the specified customer master key (CMK).
 --
 --
--- To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the KeyId parameter.
+-- You cannot enable automatic rotation of asymmetric CMKs, CMKs with imported key material, or CMKs in a <https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html custom key store> . The key rotation status for these CMKs is always @false@ .
+--
+-- The CMK that you use for this operation must be in a compatible key state. For details, see <https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html How Key State Affects Use of a Customer Master Key> in the /AWS Key Management Service Developer Guide/ .
+--
+--     * Disabled: The key rotation status does not change when you disable a CMK. However, while the CMK is disabled, AWS KMS does not rotate the backing key.
+--
+--     * Pending deletion: While a CMK is pending deletion, its key rotation status is @false@ and AWS KMS does not rotate the backing key. If you cancel the deletion, the original key rotation status is restored.
+--
+--
+--
+-- To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the @KeyId@ parameter.
 --
 module Network.AWS.KMS.GetKeyRotationStatus
     (
@@ -47,10 +57,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getKeyRotationStatus' smart constructor.
-newtype GetKeyRotationStatus = GetKeyRotationStatus'
-  { _gkrsKeyId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetKeyRotationStatus = GetKeyRotationStatus'{_gkrsKeyId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetKeyRotationStatus' with the minimum fields required to make a request.
 --
@@ -60,8 +70,8 @@ newtype GetKeyRotationStatus = GetKeyRotationStatus'
 getKeyRotationStatus
     :: Text -- ^ 'gkrsKeyId'
     -> GetKeyRotationStatus
-getKeyRotationStatus pKeyId_ = GetKeyRotationStatus' {_gkrsKeyId = pKeyId_}
-
+getKeyRotationStatus pKeyId_
+  = GetKeyRotationStatus'{_gkrsKeyId = pKeyId_}
 
 -- | A unique identifier for the customer master key (CMK). Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN. For example:     * Key ID: @1234abcd-12ab-34cd-56ef-1234567890ab@      * Key ARN: @arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab@  To get the key ID and key ARN for a CMK, use 'ListKeys' or 'DescribeKey' .
 gkrsKeyId :: Lens' GetKeyRotationStatus Text
@@ -101,11 +111,13 @@ instance ToQuery GetKeyRotationStatus where
         toQuery = const mempty
 
 -- | /See:/ 'getKeyRotationStatusResponse' smart constructor.
-data GetKeyRotationStatusResponse = GetKeyRotationStatusResponse'
-  { _gkrsrsKeyRotationEnabled :: !(Maybe Bool)
-  , _gkrsrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetKeyRotationStatusResponse = GetKeyRotationStatusResponse'{_gkrsrsKeyRotationEnabled
+                                                                  ::
+                                                                  !(Maybe Bool),
+                                                                  _gkrsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetKeyRotationStatusResponse' with the minimum fields required to make a request.
 --
@@ -117,12 +129,10 @@ data GetKeyRotationStatusResponse = GetKeyRotationStatusResponse'
 getKeyRotationStatusResponse
     :: Int -- ^ 'gkrsrsResponseStatus'
     -> GetKeyRotationStatusResponse
-getKeyRotationStatusResponse pResponseStatus_ =
-  GetKeyRotationStatusResponse'
-    { _gkrsrsKeyRotationEnabled = Nothing
-    , _gkrsrsResponseStatus = pResponseStatus_
-    }
-
+getKeyRotationStatusResponse pResponseStatus_
+  = GetKeyRotationStatusResponse'{_gkrsrsKeyRotationEnabled
+                                    = Nothing,
+                                  _gkrsrsResponseStatus = pResponseStatus_}
 
 -- | A Boolean value that specifies whether key rotation is enabled.
 gkrsrsKeyRotationEnabled :: Lens' GetKeyRotationStatusResponse (Maybe Bool)

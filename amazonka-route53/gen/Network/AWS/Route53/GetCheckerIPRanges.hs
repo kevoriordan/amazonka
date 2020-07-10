@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- @GetCheckerIpRanges@ still works, but we recommend that you download ip-ranges.json, which includes IP address ranges for all AWS services. For more information, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html IP Address Ranges of Amazon Route 53 Servers> in the /Amazon Route 53 Developer Guide/ .
+-- /Important:/ @GetCheckerIpRanges@ still works, but we recommend that you download ip-ranges.json, which includes IP address ranges for all AWS services. For more information, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html IP Address Ranges of Amazon Route 53 Servers> in the /Amazon Route 53 Developer Guide/ .
 --
 --
 module Network.AWS.Route53.GetCheckerIPRanges
@@ -42,18 +42,19 @@ import Network.AWS.Response
 import Network.AWS.Route53.Types
 import Network.AWS.Route53.Types.Product
 
--- | /See:/ 'getCheckerIPRanges' smart constructor.
-data GetCheckerIPRanges =
-  GetCheckerIPRanges'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | Empty request.
+--
+--
+--
+-- /See:/ 'getCheckerIPRanges' smart constructor.
+data GetCheckerIPRanges = GetCheckerIPRanges'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCheckerIPRanges' with the minimum fields required to make a request.
 --
 getCheckerIPRanges
     :: GetCheckerIPRanges
 getCheckerIPRanges = GetCheckerIPRanges'
-
 
 instance AWSRequest GetCheckerIPRanges where
         type Rs GetCheckerIPRanges =
@@ -80,12 +81,17 @@ instance ToPath GetCheckerIPRanges where
 instance ToQuery GetCheckerIPRanges where
         toQuery = const mempty
 
--- | /See:/ 'getCheckerIPRangesResponse' smart constructor.
-data GetCheckerIPRangesResponse = GetCheckerIPRangesResponse'
-  { _gcirrsResponseStatus  :: !Int
-  , _gcirrsCheckerIPRanges :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | A complex type that contains the @CheckerIpRanges@ element.
+--
+--
+--
+-- /See:/ 'getCheckerIPRangesResponse' smart constructor.
+data GetCheckerIPRangesResponse = GetCheckerIPRangesResponse'{_gcirrsResponseStatus
+                                                              :: !Int,
+                                                              _gcirrsCheckerIPRanges
+                                                              :: ![Text]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetCheckerIPRangesResponse' with the minimum fields required to make a request.
 --
@@ -93,20 +99,20 @@ data GetCheckerIPRangesResponse = GetCheckerIPRangesResponse'
 --
 -- * 'gcirrsResponseStatus' - -- | The response status code.
 --
--- * 'gcirrsCheckerIPRanges' - Undocumented member.
+-- * 'gcirrsCheckerIPRanges' - A complex type that contains sorted list of IP ranges in CIDR format for Amazon Route 53 health checkers.
 getCheckerIPRangesResponse
     :: Int -- ^ 'gcirrsResponseStatus'
     -> GetCheckerIPRangesResponse
-getCheckerIPRangesResponse pResponseStatus_ =
-  GetCheckerIPRangesResponse'
-    {_gcirrsResponseStatus = pResponseStatus_, _gcirrsCheckerIPRanges = mempty}
-
+getCheckerIPRangesResponse pResponseStatus_
+  = GetCheckerIPRangesResponse'{_gcirrsResponseStatus =
+                                  pResponseStatus_,
+                                _gcirrsCheckerIPRanges = mempty}
 
 -- | -- | The response status code.
 gcirrsResponseStatus :: Lens' GetCheckerIPRangesResponse Int
 gcirrsResponseStatus = lens _gcirrsResponseStatus (\ s a -> s{_gcirrsResponseStatus = a})
 
--- | Undocumented member.
+-- | A complex type that contains sorted list of IP ranges in CIDR format for Amazon Route 53 health checkers.
 gcirrsCheckerIPRanges :: Lens' GetCheckerIPRangesResponse [Text]
 gcirrsCheckerIPRanges = lens _gcirrsCheckerIPRanges (\ s a -> s{_gcirrsCheckerIPRanges = a}) . _Coerce
 

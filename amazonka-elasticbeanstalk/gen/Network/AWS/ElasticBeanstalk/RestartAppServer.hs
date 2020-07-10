@@ -42,35 +42,34 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'restartAppServer' smart constructor.
-data RestartAppServer = RestartAppServer'
-  { _rasEnvironmentName :: !(Maybe Text)
-  , _rasEnvironmentId   :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RestartAppServer = RestartAppServer'{_rasEnvironmentName
+                                          :: !(Maybe Text),
+                                          _rasEnvironmentId :: !(Maybe Text)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RestartAppServer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rasEnvironmentName' - The name of the environment to restart the server for. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- * 'rasEnvironmentName' - The name of the environment to restart the server for. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 --
--- * 'rasEnvironmentId' - The ID of the environment to restart the server for. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- * 'rasEnvironmentId' - The ID of the environment to restart the server for. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 restartAppServer
     :: RestartAppServer
-restartAppServer =
-  RestartAppServer' {_rasEnvironmentName = Nothing, _rasEnvironmentId = Nothing}
+restartAppServer
+  = RestartAppServer'{_rasEnvironmentName = Nothing,
+                      _rasEnvironmentId = Nothing}
 
-
--- | The name of the environment to restart the server for. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- | The name of the environment to restart the server for. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 rasEnvironmentName :: Lens' RestartAppServer (Maybe Text)
 rasEnvironmentName = lens _rasEnvironmentName (\ s a -> s{_rasEnvironmentName = a})
 
--- | The ID of the environment to restart the server for. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- | The ID of the environment to restart the server for. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 rasEnvironmentId :: Lens' RestartAppServer (Maybe Text)
 rasEnvironmentId = lens _rasEnvironmentId (\ s a -> s{_rasEnvironmentId = a})
 
@@ -98,16 +97,14 @@ instance ToQuery RestartAppServer where
                "EnvironmentId" =: _rasEnvironmentId]
 
 -- | /See:/ 'restartAppServerResponse' smart constructor.
-data RestartAppServerResponse =
-  RestartAppServerResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RestartAppServerResponse = RestartAppServerResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'RestartAppServerResponse' with the minimum fields required to make a request.
 --
 restartAppServerResponse
     :: RestartAppServerResponse
 restartAppServerResponse = RestartAppServerResponse'
-
 
 instance NFData RestartAppServerResponse where

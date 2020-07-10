@@ -21,19 +21,19 @@
 -- Modifies the placement attributes for a specified instance. You can do the following:
 --
 --
---     * Modify the affinity between an instance and a <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html Dedicated Host> . When affinity is set to @host@ and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.
+--     * Modify the affinity between an instance and a <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html Dedicated Host> . When affinity is set to @host@ and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.
 --
 --     * Change the Dedicated Host with which an instance is associated.
 --
 --     * Change the instance tenancy of an instance from @host@ to @dedicated@ , or from @dedicated@ to @host@ .
 --
---     * Move an instance to or from a <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html placement group> .
+--     * Move an instance to or from a <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html placement group> .
 --
 --
 --
 -- At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request.
 --
--- To modify the host ID, tenancy, or placement group for an instance, the instance must be in the @stopped@ state.
+-- To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the @stopped@ state.
 --
 module Network.AWS.EC2.ModifyInstancePlacement
     (
@@ -43,8 +43,10 @@ module Network.AWS.EC2.ModifyInstancePlacement
     -- * Request Lenses
     , mipAffinity
     , mipHostId
+    , mipPartitionNumber
     , mipTenancy
     , mipGroupName
+    , mipHostResourceGroupARN
     , mipInstanceId
 
     -- * Destructuring the Response
@@ -62,19 +64,22 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for ModifyInstancePlacement.
---
---
---
--- /See:/ 'modifyInstancePlacement' smart constructor.
-data ModifyInstancePlacement = ModifyInstancePlacement'
-  { _mipAffinity   :: !(Maybe Affinity)
-  , _mipHostId     :: !(Maybe Text)
-  , _mipTenancy    :: !(Maybe HostTenancy)
-  , _mipGroupName  :: !(Maybe Text)
-  , _mipInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'modifyInstancePlacement' smart constructor.
+data ModifyInstancePlacement = ModifyInstancePlacement'{_mipAffinity
+                                                        :: !(Maybe Affinity),
+                                                        _mipHostId ::
+                                                        !(Maybe Text),
+                                                        _mipPartitionNumber ::
+                                                        !(Maybe Int),
+                                                        _mipTenancy ::
+                                                        !(Maybe HostTenancy),
+                                                        _mipGroupName ::
+                                                        !(Maybe Text),
+                                                        _mipHostResourceGroupARN
+                                                        :: !(Maybe Text),
+                                                        _mipInstanceId :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ModifyInstancePlacement' with the minimum fields required to make a request.
 --
@@ -84,23 +89,25 @@ data ModifyInstancePlacement = ModifyInstancePlacement'
 --
 -- * 'mipHostId' - The ID of the Dedicated Host with which to associate the instance.
 --
+-- * 'mipPartitionNumber' - Reserved for future use.
+--
 -- * 'mipTenancy' - The tenancy for the instance.
 --
--- * 'mipGroupName' - The name of the placement group in which to place the instance. For spread placement groups, the instance must have a tenancy of @default@ . For cluster placement groups, the instance must have a tenancy of @default@ or @dedicated@ . To remove an instance from a placement group, specify an empty string ("").
+-- * 'mipGroupName' - The name of the placement group in which to place the instance. For spread placement groups, the instance must have a tenancy of @default@ . For cluster and partition placement groups, the instance must have a tenancy of @default@ or @dedicated@ . To remove an instance from a placement group, specify an empty string ("").
+--
+-- * 'mipHostResourceGroupARN' - The ARN of the host resource group in which to place the instance.
 --
 -- * 'mipInstanceId' - The ID of the instance that you are modifying.
 modifyInstancePlacement
     :: Text -- ^ 'mipInstanceId'
     -> ModifyInstancePlacement
-modifyInstancePlacement pInstanceId_ =
-  ModifyInstancePlacement'
-    { _mipAffinity = Nothing
-    , _mipHostId = Nothing
-    , _mipTenancy = Nothing
-    , _mipGroupName = Nothing
-    , _mipInstanceId = pInstanceId_
-    }
-
+modifyInstancePlacement pInstanceId_
+  = ModifyInstancePlacement'{_mipAffinity = Nothing,
+                             _mipHostId = Nothing,
+                             _mipPartitionNumber = Nothing,
+                             _mipTenancy = Nothing, _mipGroupName = Nothing,
+                             _mipHostResourceGroupARN = Nothing,
+                             _mipInstanceId = pInstanceId_}
 
 -- | The affinity setting for the instance.
 mipAffinity :: Lens' ModifyInstancePlacement (Maybe Affinity)
@@ -110,13 +117,21 @@ mipAffinity = lens _mipAffinity (\ s a -> s{_mipAffinity = a})
 mipHostId :: Lens' ModifyInstancePlacement (Maybe Text)
 mipHostId = lens _mipHostId (\ s a -> s{_mipHostId = a})
 
+-- | Reserved for future use.
+mipPartitionNumber :: Lens' ModifyInstancePlacement (Maybe Int)
+mipPartitionNumber = lens _mipPartitionNumber (\ s a -> s{_mipPartitionNumber = a})
+
 -- | The tenancy for the instance.
 mipTenancy :: Lens' ModifyInstancePlacement (Maybe HostTenancy)
 mipTenancy = lens _mipTenancy (\ s a -> s{_mipTenancy = a})
 
--- | The name of the placement group in which to place the instance. For spread placement groups, the instance must have a tenancy of @default@ . For cluster placement groups, the instance must have a tenancy of @default@ or @dedicated@ . To remove an instance from a placement group, specify an empty string ("").
+-- | The name of the placement group in which to place the instance. For spread placement groups, the instance must have a tenancy of @default@ . For cluster and partition placement groups, the instance must have a tenancy of @default@ or @dedicated@ . To remove an instance from a placement group, specify an empty string ("").
 mipGroupName :: Lens' ModifyInstancePlacement (Maybe Text)
 mipGroupName = lens _mipGroupName (\ s a -> s{_mipGroupName = a})
+
+-- | The ARN of the host resource group in which to place the instance.
+mipHostResourceGroupARN :: Lens' ModifyInstancePlacement (Maybe Text)
+mipHostResourceGroupARN = lens _mipHostResourceGroupARN (\ s a -> s{_mipHostResourceGroupARN = a})
 
 -- | The ID of the instance that you are modifying.
 mipInstanceId :: Lens' ModifyInstancePlacement Text
@@ -149,20 +164,21 @@ instance ToQuery ModifyInstancePlacement where
                  ("ModifyInstancePlacement" :: ByteString),
                "Version" =: ("2016-11-15" :: ByteString),
                "Affinity" =: _mipAffinity, "HostId" =: _mipHostId,
+               "PartitionNumber" =: _mipPartitionNumber,
                "Tenancy" =: _mipTenancy,
                "GroupName" =: _mipGroupName,
+               "HostResourceGroupArn" =: _mipHostResourceGroupARN,
                "InstanceId" =: _mipInstanceId]
 
--- | Contains the output of ModifyInstancePlacement.
---
---
---
--- /See:/ 'modifyInstancePlacementResponse' smart constructor.
-data ModifyInstancePlacementResponse = ModifyInstancePlacementResponse'
-  { _miprsReturn         :: !(Maybe Bool)
-  , _miprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'modifyInstancePlacementResponse' smart constructor.
+data ModifyInstancePlacementResponse = ModifyInstancePlacementResponse'{_miprsReturn
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Bool),
+                                                                        _miprsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ModifyInstancePlacementResponse' with the minimum fields required to make a request.
 --
@@ -174,10 +190,10 @@ data ModifyInstancePlacementResponse = ModifyInstancePlacementResponse'
 modifyInstancePlacementResponse
     :: Int -- ^ 'miprsResponseStatus'
     -> ModifyInstancePlacementResponse
-modifyInstancePlacementResponse pResponseStatus_ =
-  ModifyInstancePlacementResponse'
-    {_miprsReturn = Nothing, _miprsResponseStatus = pResponseStatus_}
-
+modifyInstancePlacementResponse pResponseStatus_
+  = ModifyInstancePlacementResponse'{_miprsReturn =
+                                       Nothing,
+                                     _miprsResponseStatus = pResponseStatus_}
 
 -- | Is @true@ if the request succeeds, and an error otherwise.
 miprsReturn :: Lens' ModifyInstancePlacementResponse (Maybe Bool)

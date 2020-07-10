@@ -21,7 +21,7 @@
 -- Gets information about all of the versions of an intent.
 --
 --
--- The @GetIntentVersions@ operation returns an @IntentMetadata@ object for each version of an intent. For example, if an intent has three numbered versions, the @GetIntentVersions@ operation returns four @IntentMetadata@ objects in the response, one for each numbered version and one for the @> LATEST@ version.
+-- The @GetIntentVersions@ operation returns an @IntentMetadata@ object for each version of an intent. For example, if an intent has three numbered versions, the @GetIntentVersions@ operation returns four @IntentMetadata@ objects in the response, one for each numbered version and one for the @> LATEST@ version. 
 --
 -- The @GetIntentVersions@ operation always returns at least one version, the @> LATEST@ version.
 --
@@ -57,18 +57,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getIntentVersions' smart constructor.
-data GetIntentVersions = GetIntentVersions'
-  { _givNextToken  :: !(Maybe Text)
-  , _givMaxResults :: !(Maybe Nat)
-  , _givName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIntentVersions = GetIntentVersions'{_givNextToken
+                                            :: !(Maybe Text),
+                                            _givMaxResults :: !(Maybe Nat),
+                                            _givName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetIntentVersions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'givNextToken' - A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- * 'givNextToken' - A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 --
 -- * 'givMaxResults' - The maximum number of intent versions to return in the response. The default is 10.
 --
@@ -76,12 +75,11 @@ data GetIntentVersions = GetIntentVersions'
 getIntentVersions
     :: Text -- ^ 'givName'
     -> GetIntentVersions
-getIntentVersions pName_ =
-  GetIntentVersions'
-    {_givNextToken = Nothing, _givMaxResults = Nothing, _givName = pName_}
+getIntentVersions pName_
+  = GetIntentVersions'{_givNextToken = Nothing,
+                       _givMaxResults = Nothing, _givName = pName_}
 
-
--- | A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- | A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 givNextToken :: Lens' GetIntentVersions (Maybe Text)
 givNextToken = lens _givNextToken (\ s a -> s{_givNextToken = a})
 
@@ -132,12 +130,16 @@ instance ToQuery GetIntentVersions where
                "maxResults" =: _givMaxResults]
 
 -- | /See:/ 'getIntentVersionsResponse' smart constructor.
-data GetIntentVersionsResponse = GetIntentVersionsResponse'
-  { _givrsIntents        :: !(Maybe [IntentMetadata])
-  , _givrsNextToken      :: !(Maybe Text)
-  , _givrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIntentVersionsResponse = GetIntentVersionsResponse'{_givrsIntents
+                                                            ::
+                                                            !(Maybe
+                                                                [IntentMetadata]),
+                                                            _givrsNextToken ::
+                                                            !(Maybe Text),
+                                                            _givrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetIntentVersionsResponse' with the minimum fields required to make a request.
 --
@@ -145,25 +147,22 @@ data GetIntentVersionsResponse = GetIntentVersionsResponse'
 --
 -- * 'givrsIntents' - An array of @IntentMetadata@ objects, one for each numbered version of the intent plus one for the @> LATEST@ version.
 --
--- * 'givrsNextToken' - A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- * 'givrsNextToken' - A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 --
 -- * 'givrsResponseStatus' - -- | The response status code.
 getIntentVersionsResponse
     :: Int -- ^ 'givrsResponseStatus'
     -> GetIntentVersionsResponse
-getIntentVersionsResponse pResponseStatus_ =
-  GetIntentVersionsResponse'
-    { _givrsIntents = Nothing
-    , _givrsNextToken = Nothing
-    , _givrsResponseStatus = pResponseStatus_
-    }
-
+getIntentVersionsResponse pResponseStatus_
+  = GetIntentVersionsResponse'{_givrsIntents = Nothing,
+                               _givrsNextToken = Nothing,
+                               _givrsResponseStatus = pResponseStatus_}
 
 -- | An array of @IntentMetadata@ objects, one for each numbered version of the intent plus one for the @> LATEST@ version.
 givrsIntents :: Lens' GetIntentVersionsResponse [IntentMetadata]
 givrsIntents = lens _givrsIntents (\ s a -> s{_givrsIntents = a}) . _Default . _Coerce
 
--- | A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- | A pagination token for fetching the next page of intent versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 givrsNextToken :: Lens' GetIntentVersionsResponse (Maybe Text)
 givrsNextToken = lens _givrsNextToken (\ s a -> s{_givrsNextToken = a})
 

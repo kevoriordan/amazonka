@@ -18,8 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to @ALARM@ sends an SNS message. The alarm returns to its actual state (often within seconds). Because the alarm state change happens quickly, it is typically only visible in the alarm's __History__ tab in the Amazon CloudWatch console or through 'DescribeAlarmHistory' .
+-- Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to @ALARM@ sends an SNS message.
 --
+--
+-- Metric alarms returns to their actual state quickly, often within seconds. Because the metric alarm state change happens quickly, it is typically only visible in the alarm's __History__ tab in the Amazon CloudWatch console or through <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html DescribeAlarmHistory> .
+--
+-- If you use @SetAlarmState@ on a composite alarm, the composite alarm is not guaranteed to return to its actual state. It will return to its actual state only once any of its children alarms change state. It is also re-evaluated if you update its configuration.
+--
+-- If an alarm triggers EC2 Auto Scaling policies or application Auto Scaling policies, you must include information in the @StateReasonData@ parameter to enable the policy to take the correct action.
 --
 module Network.AWS.CloudWatch.SetAlarmState
     (
@@ -45,19 +51,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setAlarmState' smart constructor.
-data SetAlarmState = SetAlarmState'
-  { _sasStateReasonData :: !(Maybe Text)
-  , _sasAlarmName       :: !Text
-  , _sasStateValue      :: !StateValue
-  , _sasStateReason     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetAlarmState = SetAlarmState'{_sasStateReasonData
+                                    :: !(Maybe Text),
+                                    _sasAlarmName :: !Text,
+                                    _sasStateValue :: !StateValue,
+                                    _sasStateReason :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetAlarmState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sasStateReasonData' - The reason that this alarm is set to this specific state, in JSON format.
+-- * 'sasStateReasonData' - The reason that this alarm is set to this specific state, in JSON format. For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling or application Auto Scaling alarm actions, the Auto Scaling policy uses the information in this field to take the correct action.
 --
 -- * 'sasAlarmName' - The name for the alarm. This name must be unique within the AWS account. The maximum length is 255 characters.
 --
@@ -69,16 +74,13 @@ setAlarmState
     -> StateValue -- ^ 'sasStateValue'
     -> Text -- ^ 'sasStateReason'
     -> SetAlarmState
-setAlarmState pAlarmName_ pStateValue_ pStateReason_ =
-  SetAlarmState'
-    { _sasStateReasonData = Nothing
-    , _sasAlarmName = pAlarmName_
-    , _sasStateValue = pStateValue_
-    , _sasStateReason = pStateReason_
-    }
+setAlarmState pAlarmName_ pStateValue_ pStateReason_
+  = SetAlarmState'{_sasStateReasonData = Nothing,
+                   _sasAlarmName = pAlarmName_,
+                   _sasStateValue = pStateValue_,
+                   _sasStateReason = pStateReason_}
 
-
--- | The reason that this alarm is set to this specific state, in JSON format.
+-- | The reason that this alarm is set to this specific state, in JSON format. For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling or application Auto Scaling alarm actions, the Auto Scaling policy uses the information in this field to take the correct action.
 sasStateReasonData :: Lens' SetAlarmState (Maybe Text)
 sasStateReasonData = lens _sasStateReasonData (\ s a -> s{_sasStateReasonData = a})
 
@@ -120,16 +122,14 @@ instance ToQuery SetAlarmState where
                "StateReason" =: _sasStateReason]
 
 -- | /See:/ 'setAlarmStateResponse' smart constructor.
-data SetAlarmStateResponse =
-  SetAlarmStateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetAlarmStateResponse = SetAlarmStateResponse'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'SetAlarmStateResponse' with the minimum fields required to make a request.
 --
 setAlarmStateResponse
     :: SetAlarmStateResponse
 setAlarmStateResponse = SetAlarmStateResponse'
-
 
 instance NFData SetAlarmStateResponse where

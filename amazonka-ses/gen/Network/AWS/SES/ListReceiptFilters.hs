@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the IP address filters associated with your AWS account.
+-- Lists the IP address filters associated with your AWS account in the current AWS Region.
 --
 --
--- For information about managing IP address filters, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html Amazon SES Developer Guide> .
+-- For information about managing IP address filters, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
@@ -46,22 +46,19 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to list the IP address filters that exist under your AWS account. You use IP address filters when you receive email with Amazon SES. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
+-- | Represents a request to list the IP address filters that exist under your AWS account. You use IP address filters when you receive email with Amazon SES. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'listReceiptFilters' smart constructor.
-data ListReceiptFilters =
-  ListReceiptFilters'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReceiptFilters = ListReceiptFilters'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListReceiptFilters' with the minimum fields required to make a request.
 --
 listReceiptFilters
     :: ListReceiptFilters
 listReceiptFilters = ListReceiptFilters'
-
 
 instance AWSRequest ListReceiptFilters where
         type Rs ListReceiptFilters =
@@ -97,11 +94,14 @@ instance ToQuery ListReceiptFilters where
 --
 --
 -- /See:/ 'listReceiptFiltersResponse' smart constructor.
-data ListReceiptFiltersResponse = ListReceiptFiltersResponse'
-  { _lrfrsFilters        :: !(Maybe [ReceiptFilter])
-  , _lrfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReceiptFiltersResponse = ListReceiptFiltersResponse'{_lrfrsFilters
+                                                              ::
+                                                              !(Maybe
+                                                                  [ReceiptFilter]),
+                                                              _lrfrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListReceiptFiltersResponse' with the minimum fields required to make a request.
 --
@@ -113,10 +113,10 @@ data ListReceiptFiltersResponse = ListReceiptFiltersResponse'
 listReceiptFiltersResponse
     :: Int -- ^ 'lrfrsResponseStatus'
     -> ListReceiptFiltersResponse
-listReceiptFiltersResponse pResponseStatus_ =
-  ListReceiptFiltersResponse'
-    {_lrfrsFilters = Nothing, _lrfrsResponseStatus = pResponseStatus_}
-
+listReceiptFiltersResponse pResponseStatus_
+  = ListReceiptFiltersResponse'{_lrfrsFilters =
+                                  Nothing,
+                                _lrfrsResponseStatus = pResponseStatus_}
 
 -- | A list of IP address filter data structures, which each consist of a name, an IP address range, and whether to allow or block mail from it.
 lrfrsFilters :: Lens' ListReceiptFiltersResponse [ReceiptFilter]

@@ -57,11 +57,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'batchMeterUsage' smart constructor.
-data BatchMeterUsage = BatchMeterUsage'
-  { _bmuUsageRecords :: ![UsageRecord]
-  , _bmuProductCode  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchMeterUsage = BatchMeterUsage'{_bmuUsageRecords
+                                        :: ![UsageRecord],
+                                        _bmuProductCode :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchMeterUsage' with the minimum fields required to make a request.
 --
@@ -73,9 +72,9 @@ data BatchMeterUsage = BatchMeterUsage'
 batchMeterUsage
     :: Text -- ^ 'bmuProductCode'
     -> BatchMeterUsage
-batchMeterUsage pProductCode_ =
-  BatchMeterUsage' {_bmuUsageRecords = mempty, _bmuProductCode = pProductCode_}
-
+batchMeterUsage pProductCode_
+  = BatchMeterUsage'{_bmuUsageRecords = mempty,
+                     _bmuProductCode = pProductCode_}
 
 -- | The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at a time.
 bmuUsageRecords :: Lens' BatchMeterUsage [UsageRecord]
@@ -128,12 +127,17 @@ instance ToQuery BatchMeterUsage where
 --
 --
 -- /See:/ 'batchMeterUsageResponse' smart constructor.
-data BatchMeterUsageResponse = BatchMeterUsageResponse'
-  { _bmursResults            :: !(Maybe [UsageRecordResult])
-  , _bmursUnprocessedRecords :: !(Maybe [UsageRecord])
-  , _bmursResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchMeterUsageResponse = BatchMeterUsageResponse'{_bmursResults
+                                                        ::
+                                                        !(Maybe
+                                                            [UsageRecordResult]),
+                                                        _bmursUnprocessedRecords
+                                                        ::
+                                                        !(Maybe [UsageRecord]),
+                                                        _bmursResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'BatchMeterUsageResponse' with the minimum fields required to make a request.
 --
@@ -147,13 +151,10 @@ data BatchMeterUsageResponse = BatchMeterUsageResponse'
 batchMeterUsageResponse
     :: Int -- ^ 'bmursResponseStatus'
     -> BatchMeterUsageResponse
-batchMeterUsageResponse pResponseStatus_ =
-  BatchMeterUsageResponse'
-    { _bmursResults = Nothing
-    , _bmursUnprocessedRecords = Nothing
-    , _bmursResponseStatus = pResponseStatus_
-    }
-
+batchMeterUsageResponse pResponseStatus_
+  = BatchMeterUsageResponse'{_bmursResults = Nothing,
+                             _bmursUnprocessedRecords = Nothing,
+                             _bmursResponseStatus = pResponseStatus_}
 
 -- | Contains all UsageRecords processed by BatchMeterUsage. These records were either honored by AWS Marketplace Metering Service or were invalid.
 bmursResults :: Lens' BatchMeterUsageResponse [UsageRecordResult]

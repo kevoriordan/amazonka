@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets detailed information for specified images within a specified repository. Images are specified with either @imageTag@ or @imageDigest@ .
+-- Gets detailed information for an image. Images are specified with either an @imageTag@ or @imageDigest@ .
 --
+--
+-- When an image is pulled, the BatchGetImage API is called once to retrieve the image manifest.
 --
 module Network.AWS.ECR.BatchGetImage
     (
@@ -49,13 +51,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchGetImage' smart constructor.
-data BatchGetImage = BatchGetImage'
-  { _bgiRegistryId         :: !(Maybe Text)
-  , _bgiAcceptedMediaTypes :: !(Maybe (List1 Text))
-  , _bgiRepositoryName     :: !Text
-  , _bgiImageIds           :: ![ImageIdentifier]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetImage = BatchGetImage'{_bgiRegistryId ::
+                                    !(Maybe Text),
+                                    _bgiAcceptedMediaTypes ::
+                                    !(Maybe (List1 Text)),
+                                    _bgiRepositoryName :: !Text,
+                                    _bgiImageIds :: ![ImageIdentifier]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetImage' with the minimum fields required to make a request.
 --
@@ -63,7 +65,7 @@ data BatchGetImage = BatchGetImage'
 --
 -- * 'bgiRegistryId' - The AWS account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.
 --
--- * 'bgiAcceptedMediaTypes' - The accepted media types for the request. Valid values: @application/vnd.docker.distribution.manifest.v1+json@ | @application/vnd.docker.distribution.manifest.v2+json@ | @application/vnd.oci.image.manifest.v1+json@
+-- * 'bgiAcceptedMediaTypes' - The accepted media types for the request. Valid values: @application/vnd.docker.distribution.manifest.v1+json@ | @application/vnd.docker.distribution.manifest.v2+json@ | @application/vnd.oci.image.manifest.v1+json@ 
 --
 -- * 'bgiRepositoryName' - The repository that contains the images to describe.
 --
@@ -71,20 +73,17 @@ data BatchGetImage = BatchGetImage'
 batchGetImage
     :: Text -- ^ 'bgiRepositoryName'
     -> BatchGetImage
-batchGetImage pRepositoryName_ =
-  BatchGetImage'
-    { _bgiRegistryId = Nothing
-    , _bgiAcceptedMediaTypes = Nothing
-    , _bgiRepositoryName = pRepositoryName_
-    , _bgiImageIds = mempty
-    }
-
+batchGetImage pRepositoryName_
+  = BatchGetImage'{_bgiRegistryId = Nothing,
+                   _bgiAcceptedMediaTypes = Nothing,
+                   _bgiRepositoryName = pRepositoryName_,
+                   _bgiImageIds = mempty}
 
 -- | The AWS account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.
 bgiRegistryId :: Lens' BatchGetImage (Maybe Text)
 bgiRegistryId = lens _bgiRegistryId (\ s a -> s{_bgiRegistryId = a})
 
--- | The accepted media types for the request. Valid values: @application/vnd.docker.distribution.manifest.v1+json@ | @application/vnd.docker.distribution.manifest.v2+json@ | @application/vnd.oci.image.manifest.v1+json@
+-- | The accepted media types for the request. Valid values: @application/vnd.docker.distribution.manifest.v1+json@ | @application/vnd.docker.distribution.manifest.v2+json@ | @application/vnd.oci.image.manifest.v1+json@ 
 bgiAcceptedMediaTypes :: Lens' BatchGetImage (Maybe (NonEmpty Text))
 bgiAcceptedMediaTypes = lens _bgiAcceptedMediaTypes (\ s a -> s{_bgiAcceptedMediaTypes = a}) . mapping _List1
 
@@ -137,12 +136,14 @@ instance ToQuery BatchGetImage where
         toQuery = const mempty
 
 -- | /See:/ 'batchGetImageResponse' smart constructor.
-data BatchGetImageResponse = BatchGetImageResponse'
-  { _bgirsImages         :: !(Maybe [Image])
-  , _bgirsFailures       :: !(Maybe [ImageFailure])
-  , _bgirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetImageResponse = BatchGetImageResponse'{_bgirsImages
+                                                    :: !(Maybe [Image]),
+                                                    _bgirsFailures ::
+                                                    !(Maybe [ImageFailure]),
+                                                    _bgirsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'BatchGetImageResponse' with the minimum fields required to make a request.
 --
@@ -156,13 +157,10 @@ data BatchGetImageResponse = BatchGetImageResponse'
 batchGetImageResponse
     :: Int -- ^ 'bgirsResponseStatus'
     -> BatchGetImageResponse
-batchGetImageResponse pResponseStatus_ =
-  BatchGetImageResponse'
-    { _bgirsImages = Nothing
-    , _bgirsFailures = Nothing
-    , _bgirsResponseStatus = pResponseStatus_
-    }
-
+batchGetImageResponse pResponseStatus_
+  = BatchGetImageResponse'{_bgirsImages = Nothing,
+                           _bgirsFailures = Nothing,
+                           _bgirsResponseStatus = pResponseStatus_}
 
 -- | A list of image objects corresponding to the image references in the request.
 bgirsImages :: Lens' BatchGetImageResponse [Image]

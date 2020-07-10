@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes the association of tags from an Amazon DynamoDB resource. You can call UntagResource up to 5 times per second, per account.
+-- Removes the association of tags from an Amazon DynamoDB resource. You can call @UntagResource@ up to five times per second, per account. 
 --
 --
--- For an overview on tagging DynamoDB resources, see <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html Tagging for DynamoDB> in the /Amazon DynamoDB Developer Guide/ .
+-- For an overview on tagging DynamoDB resources, see <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html Tagging for DynamoDB> in the /Amazon DynamoDB Developer Guide/ .
 --
 module Network.AWS.DynamoDB.UntagResource
     (
@@ -45,31 +45,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'untagResource' smart constructor.
-data UntagResource = UntagResource'
-  { _urResourceARN :: !Text
-  , _urTagKeys     :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagResource = UntagResource'{_urResourceARN ::
+                                    !Text,
+                                    _urTagKeys :: ![Text]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urResourceARN' - The Amazon DyanamoDB resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
+-- * 'urResourceARN' - The DynamoDB resource that the tags will be removed from. This value is an Amazon Resource Name (ARN).
 --
--- * 'urTagKeys' - A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.
+-- * 'urTagKeys' - A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the DynamoDB resource.
 untagResource
     :: Text -- ^ 'urResourceARN'
     -> UntagResource
-untagResource pResourceARN_ =
-  UntagResource' {_urResourceARN = pResourceARN_, _urTagKeys = mempty}
+untagResource pResourceARN_
+  = UntagResource'{_urResourceARN = pResourceARN_,
+                   _urTagKeys = mempty}
 
-
--- | The Amazon DyanamoDB resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
+-- | The DynamoDB resource that the tags will be removed from. This value is an Amazon Resource Name (ARN).
 urResourceARN :: Lens' UntagResource Text
 urResourceARN = lens _urResourceARN (\ s a -> s{_urResourceARN = a})
 
--- | A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the Amazon DynamoDB resource.
+-- | A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the DynamoDB resource.
 urTagKeys :: Lens' UntagResource [Text]
 urTagKeys = lens _urTagKeys (\ s a -> s{_urTagKeys = a}) . _Coerce
 
@@ -105,16 +104,14 @@ instance ToQuery UntagResource where
         toQuery = const mempty
 
 -- | /See:/ 'untagResourceResponse' smart constructor.
-data UntagResourceResponse =
-  UntagResourceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagResourceResponse = UntagResourceResponse'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UntagResourceResponse' with the minimum fields required to make a request.
 --
 untagResourceResponse
     :: UntagResourceResponse
 untagResourceResponse = UntagResourceResponse'
-
 
 instance NFData UntagResourceResponse where

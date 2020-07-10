@@ -11,9 +11,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS Firewall Manager__
+-- __AWS Firewall Manager__ 
 --
--- This is the /AWS Firewall Manager API Reference/ . This guide is for developers who need detailed information about the AWS Firewall Manager API actions, data types, and errors. For detailed information about AWS Firewall Manager features, see the <http://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html AWS Firewall Manager Developer Guide> .
+-- This is the /AWS Firewall Manager API Reference/ . This guide is for developers who need detailed information about the AWS Firewall Manager API actions, data types, and errors. For detailed information about AWS Firewall Manager features, see the <https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html AWS Firewall Manager Developer Guide> .
 --
 module Network.AWS.FMS
     (
@@ -23,20 +23,23 @@ module Network.AWS.FMS
     -- * Errors
     -- $errors
 
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
+
+    -- ** InvalidOperationException
+    , _InvalidOperationException
+
     -- ** InternalErrorException
     , _InternalErrorException
 
     -- ** InvalidInputException
     , _InvalidInputException
 
-    -- ** InvalidOperationException
-    , _InvalidOperationException
-
-    -- ** ResourceNotFoundException
-    , _ResourceNotFoundException
-
     -- ** LimitExceededException
     , _LimitExceededException
+
+    -- ** InvalidTypeException
+    , _InvalidTypeException
 
     -- * Waiters
     -- $waiters
@@ -44,43 +47,67 @@ module Network.AWS.FMS
     -- * Operations
     -- $operations
 
-    -- ** ListPolicies
+    -- ** ListPolicies (Paginated)
     , module Network.AWS.FMS.ListPolicies
 
-    -- ** GetComplianceDetail
+    -- ** GetComplianceDetail 
     , module Network.AWS.FMS.GetComplianceDetail
 
-    -- ** GetNotificationChannel
+    -- ** ListTagsForResource 
+    , module Network.AWS.FMS.ListTagsForResource
+
+    -- ** GetNotificationChannel 
     , module Network.AWS.FMS.GetNotificationChannel
 
-    -- ** GetAdminAccount
+    -- ** GetAdminAccount 
     , module Network.AWS.FMS.GetAdminAccount
 
-    -- ** ListComplianceStatus
+    -- ** ListComplianceStatus (Paginated)
     , module Network.AWS.FMS.ListComplianceStatus
 
-    -- ** PutPolicy
+    -- ** PutPolicy 
     , module Network.AWS.FMS.PutPolicy
 
-    -- ** DeletePolicy
+    -- ** DeletePolicy 
     , module Network.AWS.FMS.DeletePolicy
 
-    -- ** DisassociateAdminAccount
+    -- ** DisassociateAdminAccount 
     , module Network.AWS.FMS.DisassociateAdminAccount
 
-    -- ** PutNotificationChannel
+    -- ** PutNotificationChannel 
     , module Network.AWS.FMS.PutNotificationChannel
 
-    -- ** DeleteNotificationChannel
+    -- ** DeleteNotificationChannel 
     , module Network.AWS.FMS.DeleteNotificationChannel
 
-    -- ** AssociateAdminAccount
+    -- ** AssociateAdminAccount 
     , module Network.AWS.FMS.AssociateAdminAccount
 
-    -- ** GetPolicy
+    -- ** ListMemberAccounts (Paginated)
+    , module Network.AWS.FMS.ListMemberAccounts
+
+    -- ** TagResource 
+    , module Network.AWS.FMS.TagResource
+
+    -- ** UntagResource 
+    , module Network.AWS.FMS.UntagResource
+
+    -- ** GetPolicy 
     , module Network.AWS.FMS.GetPolicy
 
+    -- ** GetProtectionStatus 
+    , module Network.AWS.FMS.GetProtectionStatus
+
     -- * Types
+
+    -- ** AccountRoleStatus
+    , AccountRoleStatus (..)
+
+    -- ** CustomerPolicyScopeIdType
+    , CustomerPolicyScopeIdType (..)
+
+    -- ** DependentServiceName
+    , DependentServiceName (..)
 
     -- ** PolicyComplianceStatusType
     , PolicyComplianceStatusType (..)
@@ -109,8 +136,11 @@ module Network.AWS.FMS
     , Policy
     , policy
     , pPolicyId
+    , pResourceTypeList
     , pResourceTags
     , pPolicyUpdateToken
+    , pExcludeMap
+    , pIncludeMap
     , pPolicyName
     , pSecurityServicePolicyData
     , pResourceType
@@ -124,6 +154,7 @@ module Network.AWS.FMS
     , pcdPolicyId
     , pcdViolators
     , pcdEvaluationLimitExceeded
+    , pcdIssueInfoMap
     , pcdPolicyOwner
     , pcdMemberAccount
 
@@ -134,6 +165,7 @@ module Network.AWS.FMS
     , pcsLastUpdated
     , pcsPolicyName
     , pcsPolicyId
+    , pcsIssueInfoMap
     , pcsPolicyOwner
     , pcsMemberAccount
 
@@ -158,6 +190,12 @@ module Network.AWS.FMS
     , securityServicePolicyData
     , sspdManagedServiceData
     , sspdType
+
+    -- ** Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
     ) where
 
 import Network.AWS.FMS.AssociateAdminAccount
@@ -168,11 +206,16 @@ import Network.AWS.FMS.GetAdminAccount
 import Network.AWS.FMS.GetComplianceDetail
 import Network.AWS.FMS.GetNotificationChannel
 import Network.AWS.FMS.GetPolicy
+import Network.AWS.FMS.GetProtectionStatus
 import Network.AWS.FMS.ListComplianceStatus
+import Network.AWS.FMS.ListMemberAccounts
 import Network.AWS.FMS.ListPolicies
+import Network.AWS.FMS.ListTagsForResource
 import Network.AWS.FMS.PutNotificationChannel
 import Network.AWS.FMS.PutPolicy
+import Network.AWS.FMS.TagResource
 import Network.AWS.FMS.Types
+import Network.AWS.FMS.UntagResource
 import Network.AWS.FMS.Waiters
 
 {- $errors

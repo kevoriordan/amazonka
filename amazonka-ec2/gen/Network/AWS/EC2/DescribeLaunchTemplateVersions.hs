@@ -21,6 +21,8 @@
 -- Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribeLaunchTemplateVersions
     (
     -- * Creating a Request
@@ -49,23 +51,50 @@ module Network.AWS.EC2.DescribeLaunchTemplateVersions
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLaunchTemplateVersions' smart constructor.
-data DescribeLaunchTemplateVersions = DescribeLaunchTemplateVersions'
-  { _dltvsLaunchTemplateName :: !(Maybe Text)
-  , _dltvsLaunchTemplateId   :: !(Maybe Text)
-  , _dltvsMinVersion         :: !(Maybe Text)
-  , _dltvsFilters            :: !(Maybe [Filter])
-  , _dltvsMaxVersion         :: !(Maybe Text)
-  , _dltvsVersions           :: !(Maybe [Text])
-  , _dltvsNextToken          :: !(Maybe Text)
-  , _dltvsDryRun             :: !(Maybe Bool)
-  , _dltvsMaxResults         :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLaunchTemplateVersions = DescribeLaunchTemplateVersions'{_dltvsLaunchTemplateName
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dltvsLaunchTemplateId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dltvsMinVersion
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dltvsFilters
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Filter]),
+                                                                      _dltvsMaxVersion
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dltvsVersions
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Text]),
+                                                                      _dltvsNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dltvsDryRun
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Bool),
+                                                                      _dltvsMaxResults
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Int)}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeLaunchTemplateVersions' with the minimum fields required to make a request.
 --
@@ -87,22 +116,20 @@ data DescribeLaunchTemplateVersions = DescribeLaunchTemplateVersions'
 --
 -- * 'dltvsDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'dltvsMaxResults' - The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 5 and 1000.
+-- * 'dltvsMaxResults' - The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 1 and 200.
 describeLaunchTemplateVersions
     :: DescribeLaunchTemplateVersions
-describeLaunchTemplateVersions =
-  DescribeLaunchTemplateVersions'
-    { _dltvsLaunchTemplateName = Nothing
-    , _dltvsLaunchTemplateId = Nothing
-    , _dltvsMinVersion = Nothing
-    , _dltvsFilters = Nothing
-    , _dltvsMaxVersion = Nothing
-    , _dltvsVersions = Nothing
-    , _dltvsNextToken = Nothing
-    , _dltvsDryRun = Nothing
-    , _dltvsMaxResults = Nothing
-    }
-
+describeLaunchTemplateVersions
+  = DescribeLaunchTemplateVersions'{_dltvsLaunchTemplateName
+                                      = Nothing,
+                                    _dltvsLaunchTemplateId = Nothing,
+                                    _dltvsMinVersion = Nothing,
+                                    _dltvsFilters = Nothing,
+                                    _dltvsMaxVersion = Nothing,
+                                    _dltvsVersions = Nothing,
+                                    _dltvsNextToken = Nothing,
+                                    _dltvsDryRun = Nothing,
+                                    _dltvsMaxResults = Nothing}
 
 -- | The name of the launch template. You must specify either the launch template ID or launch template name in the request.
 dltvsLaunchTemplateName :: Lens' DescribeLaunchTemplateVersions (Maybe Text)
@@ -136,9 +163,17 @@ dltvsNextToken = lens _dltvsNextToken (\ s a -> s{_dltvsNextToken = a})
 dltvsDryRun :: Lens' DescribeLaunchTemplateVersions (Maybe Bool)
 dltvsDryRun = lens _dltvsDryRun (\ s a -> s{_dltvsDryRun = a})
 
--- | The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 5 and 1000.
+-- | The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 1 and 200.
 dltvsMaxResults :: Lens' DescribeLaunchTemplateVersions (Maybe Int)
 dltvsMaxResults = lens _dltvsMaxResults (\ s a -> s{_dltvsMaxResults = a})
+
+instance AWSPager DescribeLaunchTemplateVersions
+         where
+        page rq rs
+          | stop (rs ^. dltvrsNextToken) = Nothing
+          | stop (rs ^. dltvrsLaunchTemplateVersions) = Nothing
+          | otherwise =
+            Just $ rq & dltvsNextToken .~ rs ^. dltvrsNextToken
 
 instance AWSRequest DescribeLaunchTemplateVersions
          where
@@ -185,12 +220,19 @@ instance ToQuery DescribeLaunchTemplateVersions where
                "MaxResults" =: _dltvsMaxResults]
 
 -- | /See:/ 'describeLaunchTemplateVersionsResponse' smart constructor.
-data DescribeLaunchTemplateVersionsResponse = DescribeLaunchTemplateVersionsResponse'
-  { _dltvrsNextToken              :: !(Maybe Text)
-  , _dltvrsLaunchTemplateVersions :: !(Maybe [LaunchTemplateVersion])
-  , _dltvrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLaunchTemplateVersionsResponse = DescribeLaunchTemplateVersionsResponse'{_dltvrsNextToken
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _dltvrsLaunchTemplateVersions
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [LaunchTemplateVersion]),
+                                                                                      _dltvrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DescribeLaunchTemplateVersionsResponse' with the minimum fields required to make a request.
 --
@@ -204,13 +246,14 @@ data DescribeLaunchTemplateVersionsResponse = DescribeLaunchTemplateVersionsResp
 describeLaunchTemplateVersionsResponse
     :: Int -- ^ 'dltvrsResponseStatus'
     -> DescribeLaunchTemplateVersionsResponse
-describeLaunchTemplateVersionsResponse pResponseStatus_ =
-  DescribeLaunchTemplateVersionsResponse'
-    { _dltvrsNextToken = Nothing
-    , _dltvrsLaunchTemplateVersions = Nothing
-    , _dltvrsResponseStatus = pResponseStatus_
-    }
-
+describeLaunchTemplateVersionsResponse
+  pResponseStatus_
+  = DescribeLaunchTemplateVersionsResponse'{_dltvrsNextToken
+                                              = Nothing,
+                                            _dltvrsLaunchTemplateVersions =
+                                              Nothing,
+                                            _dltvrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | The token to use to retrieve the next page of results. This value is @null@ when there are no more results to return.
 dltvrsNextToken :: Lens' DescribeLaunchTemplateVersionsResponse (Maybe Text)

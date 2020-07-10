@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteCORSPolicy' smart constructor.
-newtype DeleteCORSPolicy = DeleteCORSPolicy'
-  { _dcpContainerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCORSPolicy = DeleteCORSPolicy'{_dcpContainerName
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteCORSPolicy' with the minimum fields required to make a request.
 --
@@ -59,9 +58,9 @@ newtype DeleteCORSPolicy = DeleteCORSPolicy'
 deleteCORSPolicy
     :: Text -- ^ 'dcpContainerName'
     -> DeleteCORSPolicy
-deleteCORSPolicy pContainerName_ =
-  DeleteCORSPolicy' {_dcpContainerName = pContainerName_}
-
+deleteCORSPolicy pContainerName_
+  = DeleteCORSPolicy'{_dcpContainerName =
+                        pContainerName_}
 
 -- | The name of the container to remove the policy from.
 dcpContainerName :: Lens' DeleteCORSPolicy Text
@@ -102,10 +101,10 @@ instance ToQuery DeleteCORSPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCORSPolicyResponse' smart constructor.
-newtype DeleteCORSPolicyResponse = DeleteCORSPolicyResponse'
-  { _dcorsprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCORSPolicyResponse = DeleteCORSPolicyResponse'{_dcorsprsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteCORSPolicyResponse' with the minimum fields required to make a request.
 --
@@ -115,9 +114,9 @@ newtype DeleteCORSPolicyResponse = DeleteCORSPolicyResponse'
 deleteCORSPolicyResponse
     :: Int -- ^ 'dcorsprsResponseStatus'
     -> DeleteCORSPolicyResponse
-deleteCORSPolicyResponse pResponseStatus_ =
-  DeleteCORSPolicyResponse' {_dcorsprsResponseStatus = pResponseStatus_}
-
+deleteCORSPolicyResponse pResponseStatus_
+  = DeleteCORSPolicyResponse'{_dcorsprsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 dcorsprsResponseStatus :: Lens' DeleteCORSPolicyResponse Int

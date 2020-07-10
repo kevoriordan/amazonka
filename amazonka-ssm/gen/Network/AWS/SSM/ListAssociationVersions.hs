@@ -21,6 +21,8 @@
 -- Retrieves all versions of an association for a specific association ID.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.ListAssociationVersions
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.ListAssociationVersions
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,18 +51,20 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listAssociationVersions' smart constructor.
-data ListAssociationVersions = ListAssociationVersions'
-  { _lavNextToken     :: !(Maybe Text)
-  , _lavMaxResults    :: !(Maybe Nat)
-  , _lavAssociationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssociationVersions = ListAssociationVersions'{_lavNextToken
+                                                        :: !(Maybe Text),
+                                                        _lavMaxResults ::
+                                                        !(Maybe Nat),
+                                                        _lavAssociationId ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListAssociationVersions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lavNextToken' - A token to start the list. Use this token to get the next set of results.
+-- * 'lavNextToken' - A token to start the list. Use this token to get the next set of results. 
 --
 -- * 'lavMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 --
@@ -67,15 +72,12 @@ data ListAssociationVersions = ListAssociationVersions'
 listAssociationVersions
     :: Text -- ^ 'lavAssociationId'
     -> ListAssociationVersions
-listAssociationVersions pAssociationId_ =
-  ListAssociationVersions'
-    { _lavNextToken = Nothing
-    , _lavMaxResults = Nothing
-    , _lavAssociationId = pAssociationId_
-    }
+listAssociationVersions pAssociationId_
+  = ListAssociationVersions'{_lavNextToken = Nothing,
+                             _lavMaxResults = Nothing,
+                             _lavAssociationId = pAssociationId_}
 
-
--- | A token to start the list. Use this token to get the next set of results.
+-- | A token to start the list. Use this token to get the next set of results. 
 lavNextToken :: Lens' ListAssociationVersions (Maybe Text)
 lavNextToken = lens _lavNextToken (\ s a -> s{_lavNextToken = a})
 
@@ -86,6 +88,13 @@ lavMaxResults = lens _lavMaxResults (\ s a -> s{_lavMaxResults = a}) . mapping _
 -- | The association ID for which you want to view all versions.
 lavAssociationId :: Lens' ListAssociationVersions Text
 lavAssociationId = lens _lavAssociationId (\ s a -> s{_lavAssociationId = a})
+
+instance AWSPager ListAssociationVersions where
+        page rq rs
+          | stop (rs ^. lavrsNextToken) = Nothing
+          | stop (rs ^. lavrsAssociationVersions) = Nothing
+          | otherwise =
+            Just $ rq & lavNextToken .~ rs ^. lavrsNextToken
 
 instance AWSRequest ListAssociationVersions where
         type Rs ListAssociationVersions =
@@ -126,12 +135,19 @@ instance ToQuery ListAssociationVersions where
         toQuery = const mempty
 
 -- | /See:/ 'listAssociationVersionsResponse' smart constructor.
-data ListAssociationVersionsResponse = ListAssociationVersionsResponse'
-  { _lavrsNextToken           :: !(Maybe Text)
-  , _lavrsAssociationVersions :: !(Maybe (List1 AssociationVersionInfo))
-  , _lavrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssociationVersionsResponse = ListAssociationVersionsResponse'{_lavrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lavrsAssociationVersions
+                                                                        ::
+                                                                        !(Maybe
+                                                                            (List1
+                                                                               AssociationVersionInfo)),
+                                                                        _lavrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListAssociationVersionsResponse' with the minimum fields required to make a request.
 --
@@ -145,13 +161,11 @@ data ListAssociationVersionsResponse = ListAssociationVersionsResponse'
 listAssociationVersionsResponse
     :: Int -- ^ 'lavrsResponseStatus'
     -> ListAssociationVersionsResponse
-listAssociationVersionsResponse pResponseStatus_ =
-  ListAssociationVersionsResponse'
-    { _lavrsNextToken = Nothing
-    , _lavrsAssociationVersions = Nothing
-    , _lavrsResponseStatus = pResponseStatus_
-    }
-
+listAssociationVersionsResponse pResponseStatus_
+  = ListAssociationVersionsResponse'{_lavrsNextToken =
+                                       Nothing,
+                                     _lavrsAssociationVersions = Nothing,
+                                     _lavrsResponseStatus = pResponseStatus_}
 
 -- | The token for the next set of items to return. Use this token to get the next set of results.
 lavrsNextToken :: Lens' ListAssociationVersionsResponse (Maybe Text)

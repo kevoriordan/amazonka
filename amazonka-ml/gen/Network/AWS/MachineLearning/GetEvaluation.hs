@@ -59,23 +59,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getEvaluation' smart constructor.
-newtype GetEvaluation = GetEvaluation'
-  { _geEvaluationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetEvaluation = GetEvaluation'{_geEvaluationId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetEvaluation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'geEvaluationId' - The ID of the @Evaluation@ to retrieve. The evaluation of each @MLModel@ is recorded and cataloged. The ID provides the means to access the information.
+-- * 'geEvaluationId' - The ID of the @Evaluation@ to retrieve. The evaluation of each @MLModel@ is recorded and cataloged. The ID provides the means to access the information. 
 getEvaluation
     :: Text -- ^ 'geEvaluationId'
     -> GetEvaluation
-getEvaluation pEvaluationId_ = GetEvaluation' {_geEvaluationId = pEvaluationId_}
+getEvaluation pEvaluationId_
+  = GetEvaluation'{_geEvaluationId = pEvaluationId_}
 
-
--- | The ID of the @Evaluation@ to retrieve. The evaluation of each @MLModel@ is recorded and cataloged. The ID provides the means to access the information.
+-- | The ID of the @Evaluation@ to retrieve. The evaluation of each @MLModel@ is recorded and cataloged. The ID provides the means to access the information. 
 geEvaluationId :: Lens' GetEvaluation Text
 geEvaluationId = lens _geEvaluationId (\ s a -> s{_geEvaluationId = a})
 
@@ -132,25 +131,38 @@ instance ToQuery GetEvaluation where
 --
 --
 -- /See:/ 'getEvaluationResponse' smart constructor.
-data GetEvaluationResponse = GetEvaluationResponse'
-  { _gersStatus                 :: !(Maybe EntityStatus)
-  , _gersPerformanceMetrics     :: !(Maybe PerformanceMetrics)
-  , _gersLastUpdatedAt          :: !(Maybe POSIX)
-  , _gersCreatedAt              :: !(Maybe POSIX)
-  , _gersComputeTime            :: !(Maybe Integer)
-  , _gersInputDataLocationS3    :: !(Maybe Text)
-  , _gersMLModelId              :: !(Maybe Text)
-  , _gersStartedAt              :: !(Maybe POSIX)
-  , _gersFinishedAt             :: !(Maybe POSIX)
-  , _gersCreatedByIAMUser       :: !(Maybe Text)
-  , _gersName                   :: !(Maybe Text)
-  , _gersLogURI                 :: !(Maybe Text)
-  , _gersEvaluationId           :: !(Maybe Text)
-  , _gersMessage                :: !(Maybe Text)
-  , _gersEvaluationDataSourceId :: !(Maybe Text)
-  , _gersResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetEvaluationResponse = GetEvaluationResponse'{_gersStatus
+                                                    :: !(Maybe EntityStatus),
+                                                    _gersPerformanceMetrics ::
+                                                    !(Maybe PerformanceMetrics),
+                                                    _gersLastUpdatedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gersCreatedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gersComputeTime ::
+                                                    !(Maybe Integer),
+                                                    _gersInputDataLocationS3 ::
+                                                    !(Maybe Text),
+                                                    _gersMLModelId ::
+                                                    !(Maybe Text),
+                                                    _gersStartedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gersFinishedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gersCreatedByIAMUser ::
+                                                    !(Maybe Text),
+                                                    _gersName :: !(Maybe Text),
+                                                    _gersLogURI ::
+                                                    !(Maybe Text),
+                                                    _gersEvaluationId ::
+                                                    !(Maybe Text),
+                                                    _gersMessage ::
+                                                    !(Maybe Text),
+                                                    _gersEvaluationDataSourceId
+                                                    :: !(Maybe Text),
+                                                    _gersResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetEvaluationResponse' with the minimum fields required to make a request.
 --
@@ -158,7 +170,7 @@ data GetEvaluationResponse = GetEvaluationResponse'
 --
 -- * 'gersStatus' - The status of the evaluation. This element can have one of the following values:     * @PENDING@ - Amazon Machine Language (Amazon ML) submitted a request to evaluate an @MLModel@ .    * @INPROGRESS@ - The evaluation is underway.    * @FAILED@ - The request to evaluate an @MLModel@ did not run to completion. It is not usable.    * @COMPLETED@ - The evaluation process completed successfully.    * @DELETED@ - The @Evaluation@ is marked as deleted. It is not usable.
 --
--- * 'gersPerformanceMetrics' - Measurements of how well the @MLModel@ performed using observations referenced by the @DataSource@ . One of the following metric is returned based on the type of the @MLModel@ :      * BinaryAUC: A binary @MLModel@ uses the Area Under the Curve (AUC) technique to measure performance.      * RegressionRMSE: A regression @MLModel@ uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.     * MulticlassAvgFScore: A multiclass @MLModel@ uses the F1 score technique to measure performance.  For more information about performance metrics, please see the <http://docs.aws.amazon.com/machine-learning/latest/dg Amazon Machine Learning Developer Guide> .
+-- * 'gersPerformanceMetrics' - Measurements of how well the @MLModel@ performed using observations referenced by the @DataSource@ . One of the following metric is returned based on the type of the @MLModel@ :      * BinaryAUC: A binary @MLModel@ uses the Area Under the Curve (AUC) technique to measure performance.      * RegressionRMSE: A regression @MLModel@ uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.     * MulticlassAvgFScore: A multiclass @MLModel@ uses the F1 score technique to measure performance.  For more information about performance metrics, please see the <http://docs.aws.amazon.com/machine-learning/latest/dg Amazon Machine Learning Developer Guide> . 
 --
 -- * 'gersLastUpdatedAt' - The time of the most recent edit to the @Evaluation@ . The time is expressed in epoch time.
 --
@@ -176,7 +188,7 @@ data GetEvaluationResponse = GetEvaluationResponse'
 --
 -- * 'gersCreatedByIAMUser' - The AWS user account that invoked the evaluation. The account type can be either an AWS root account or an AWS Identity and Access Management (IAM) user account.
 --
--- * 'gersName' - A user-supplied name or description of the @Evaluation@ .
+-- * 'gersName' - A user-supplied name or description of the @Evaluation@ . 
 --
 -- * 'gersLogURI' - A link to the file that contains logs of the @CreateEvaluation@ operation.
 --
@@ -190,32 +202,25 @@ data GetEvaluationResponse = GetEvaluationResponse'
 getEvaluationResponse
     :: Int -- ^ 'gersResponseStatus'
     -> GetEvaluationResponse
-getEvaluationResponse pResponseStatus_ =
-  GetEvaluationResponse'
-    { _gersStatus = Nothing
-    , _gersPerformanceMetrics = Nothing
-    , _gersLastUpdatedAt = Nothing
-    , _gersCreatedAt = Nothing
-    , _gersComputeTime = Nothing
-    , _gersInputDataLocationS3 = Nothing
-    , _gersMLModelId = Nothing
-    , _gersStartedAt = Nothing
-    , _gersFinishedAt = Nothing
-    , _gersCreatedByIAMUser = Nothing
-    , _gersName = Nothing
-    , _gersLogURI = Nothing
-    , _gersEvaluationId = Nothing
-    , _gersMessage = Nothing
-    , _gersEvaluationDataSourceId = Nothing
-    , _gersResponseStatus = pResponseStatus_
-    }
-
+getEvaluationResponse pResponseStatus_
+  = GetEvaluationResponse'{_gersStatus = Nothing,
+                           _gersPerformanceMetrics = Nothing,
+                           _gersLastUpdatedAt = Nothing,
+                           _gersCreatedAt = Nothing, _gersComputeTime = Nothing,
+                           _gersInputDataLocationS3 = Nothing,
+                           _gersMLModelId = Nothing, _gersStartedAt = Nothing,
+                           _gersFinishedAt = Nothing,
+                           _gersCreatedByIAMUser = Nothing, _gersName = Nothing,
+                           _gersLogURI = Nothing, _gersEvaluationId = Nothing,
+                           _gersMessage = Nothing,
+                           _gersEvaluationDataSourceId = Nothing,
+                           _gersResponseStatus = pResponseStatus_}
 
 -- | The status of the evaluation. This element can have one of the following values:     * @PENDING@ - Amazon Machine Language (Amazon ML) submitted a request to evaluate an @MLModel@ .    * @INPROGRESS@ - The evaluation is underway.    * @FAILED@ - The request to evaluate an @MLModel@ did not run to completion. It is not usable.    * @COMPLETED@ - The evaluation process completed successfully.    * @DELETED@ - The @Evaluation@ is marked as deleted. It is not usable.
 gersStatus :: Lens' GetEvaluationResponse (Maybe EntityStatus)
 gersStatus = lens _gersStatus (\ s a -> s{_gersStatus = a})
 
--- | Measurements of how well the @MLModel@ performed using observations referenced by the @DataSource@ . One of the following metric is returned based on the type of the @MLModel@ :      * BinaryAUC: A binary @MLModel@ uses the Area Under the Curve (AUC) technique to measure performance.      * RegressionRMSE: A regression @MLModel@ uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.     * MulticlassAvgFScore: A multiclass @MLModel@ uses the F1 score technique to measure performance.  For more information about performance metrics, please see the <http://docs.aws.amazon.com/machine-learning/latest/dg Amazon Machine Learning Developer Guide> .
+-- | Measurements of how well the @MLModel@ performed using observations referenced by the @DataSource@ . One of the following metric is returned based on the type of the @MLModel@ :      * BinaryAUC: A binary @MLModel@ uses the Area Under the Curve (AUC) technique to measure performance.      * RegressionRMSE: A regression @MLModel@ uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.     * MulticlassAvgFScore: A multiclass @MLModel@ uses the F1 score technique to measure performance.  For more information about performance metrics, please see the <http://docs.aws.amazon.com/machine-learning/latest/dg Amazon Machine Learning Developer Guide> . 
 gersPerformanceMetrics :: Lens' GetEvaluationResponse (Maybe PerformanceMetrics)
 gersPerformanceMetrics = lens _gersPerformanceMetrics (\ s a -> s{_gersPerformanceMetrics = a})
 
@@ -251,7 +256,7 @@ gersFinishedAt = lens _gersFinishedAt (\ s a -> s{_gersFinishedAt = a}) . mappin
 gersCreatedByIAMUser :: Lens' GetEvaluationResponse (Maybe Text)
 gersCreatedByIAMUser = lens _gersCreatedByIAMUser (\ s a -> s{_gersCreatedByIAMUser = a})
 
--- | A user-supplied name or description of the @Evaluation@ .
+-- | A user-supplied name or description of the @Evaluation@ . 
 gersName :: Lens' GetEvaluationResponse (Maybe Text)
 gersName = lens _gersName (\ s a -> s{_gersName = a})
 

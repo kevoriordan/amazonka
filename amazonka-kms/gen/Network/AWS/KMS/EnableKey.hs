@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the state of a customer master key (CMK) to enabled, thereby permitting its use for cryptographic operations. You cannot perform this operation on a CMK in a different AWS account.
+-- Sets the key state of a customer master key (CMK) to enabled. This allows you to use the CMK for cryptographic operations. You cannot perform this operation on a CMK in a different AWS account.
 --
+--
+-- The CMK that you use for this operation must be in a compatible key state. For details, see <https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html How Key State Affects Use of a Customer Master Key> in the /AWS Key Management Service Developer Guide/ .
 --
 module Network.AWS.KMS.EnableKey
     (
@@ -42,10 +44,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'enableKey' smart constructor.
-newtype EnableKey = EnableKey'
-  { _ekKeyId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype EnableKey = EnableKey'{_ekKeyId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableKey' with the minimum fields required to make a request.
 --
@@ -55,8 +55,7 @@ newtype EnableKey = EnableKey'
 enableKey
     :: Text -- ^ 'ekKeyId'
     -> EnableKey
-enableKey pKeyId_ = EnableKey' {_ekKeyId = pKeyId_}
-
+enableKey pKeyId_ = EnableKey'{_ekKeyId = pKeyId_}
 
 -- | A unique identifier for the customer master key (CMK). Specify the key ID or the Amazon Resource Name (ARN) of the CMK. For example:     * Key ID: @1234abcd-12ab-34cd-56ef-1234567890ab@      * Key ARN: @arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab@  To get the key ID and key ARN for a CMK, use 'ListKeys' or 'DescribeKey' .
 ekKeyId :: Lens' EnableKey Text
@@ -91,16 +90,13 @@ instance ToQuery EnableKey where
         toQuery = const mempty
 
 -- | /See:/ 'enableKeyResponse' smart constructor.
-data EnableKeyResponse =
-  EnableKeyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableKeyResponse = EnableKeyResponse'
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableKeyResponse' with the minimum fields required to make a request.
 --
 enableKeyResponse
     :: EnableKeyResponse
 enableKeyResponse = EnableKeyResponse'
-
 
 instance NFData EnableKeyResponse where

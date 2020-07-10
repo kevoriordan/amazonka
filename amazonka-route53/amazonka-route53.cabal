@@ -106,12 +106,57 @@ library
 
     other-modules:
           Network.AWS.Route53.Internal
+        , Network.AWS.Route53.Types.AccountLimit
+        , Network.AWS.Route53.Types.AccountLimitType
+        , Network.AWS.Route53.Types.AlarmIdentifier
+        , Network.AWS.Route53.Types.AliasTarget
+        , Network.AWS.Route53.Types.Change
+        , Network.AWS.Route53.Types.ChangeAction
+        , Network.AWS.Route53.Types.ChangeBatch
+        , Network.AWS.Route53.Types.ChangeInfo
+        , Network.AWS.Route53.Types.ChangeStatus
+        , Network.AWS.Route53.Types.CloudWatchAlarmConfiguration
+        , Network.AWS.Route53.Types.CloudWatchRegion
+        , Network.AWS.Route53.Types.ComparisonOperator
+        , Network.AWS.Route53.Types.DelegationSet
+        , Network.AWS.Route53.Types.Dimension
+        , Network.AWS.Route53.Types.Failover
+        , Network.AWS.Route53.Types.GeoLocation
+        , Network.AWS.Route53.Types.GeoLocationDetails
+        , Network.AWS.Route53.Types.HealthCheck
+        , Network.AWS.Route53.Types.HealthCheckConfig
+        , Network.AWS.Route53.Types.HealthCheckObservation
+        , Network.AWS.Route53.Types.HealthCheckRegion
+        , Network.AWS.Route53.Types.HealthCheckType
+        , Network.AWS.Route53.Types.HostedZone
+        , Network.AWS.Route53.Types.HostedZoneConfig
+        , Network.AWS.Route53.Types.HostedZoneLimit
+        , Network.AWS.Route53.Types.HostedZoneLimitType
+        , Network.AWS.Route53.Types.InsufficientDataHealthStatus
+        , Network.AWS.Route53.Types.LinkedService
         , Network.AWS.Route53.Types.Product
-        , Network.AWS.Route53.Types.Sum
+        , Network.AWS.Route53.Types.QueryLoggingConfig
+        , Network.AWS.Route53.Types.RecordType
+        , Network.AWS.Route53.Types.ResettableElementName
+        , Network.AWS.Route53.Types.ResourceRecord
+        , Network.AWS.Route53.Types.ResourceRecordSet
+        , Network.AWS.Route53.Types.ResourceTagSet
+        , Network.AWS.Route53.Types.ReusableDelegationSetLimit
+        , Network.AWS.Route53.Types.ReusableDelegationSetLimitType
+        , Network.AWS.Route53.Types.Statistic
+        , Network.AWS.Route53.Types.StatusReport
+        , Network.AWS.Route53.Types.Tag
+        , Network.AWS.Route53.Types.TagResourceType
+        , Network.AWS.Route53.Types.TrafficPolicy
+        , Network.AWS.Route53.Types.TrafficPolicyInstance
+        , Network.AWS.Route53.Types.TrafficPolicySummary
+        , Network.AWS.Route53.Types.VPC
+        , Network.AWS.Route53.Types.VPCRegion
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
         , text >= 1.1
 
 test-suite amazonka-route53-test
@@ -136,6 +181,7 @@ test-suite amazonka-route53-test
         , amazonka-route53
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

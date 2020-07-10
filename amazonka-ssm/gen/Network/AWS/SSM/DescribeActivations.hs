@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Details about the activation, including: the date and time the activation was created, the expiration date, the IAM role assigned to the instances in the activation, and the number of instances activated by this registration.
+-- Describes details about the activation, such as the date and time the activation was created, its expiration date, the IAM role assigned to the instances in the activation, and the number of instances registered by using this activation.
 --
 --
 --
@@ -51,12 +51,13 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeActivations' smart constructor.
-data DescribeActivations = DescribeActivations'
-  { _daFilters    :: !(Maybe [DescribeActivationsFilter])
-  , _daNextToken  :: !(Maybe Text)
-  , _daMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeActivations = DescribeActivations'{_daFilters
+                                                ::
+                                                !(Maybe
+                                                    [DescribeActivationsFilter]),
+                                                _daNextToken :: !(Maybe Text),
+                                                _daMaxResults :: !(Maybe Nat)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeActivations' with the minimum fields required to make a request.
 --
@@ -64,21 +65,20 @@ data DescribeActivations = DescribeActivations'
 --
 -- * 'daFilters' - A filter to view information about your activations.
 --
--- * 'daNextToken' - A token to start the list. Use this token to get the next set of results.
+-- * 'daNextToken' - A token to start the list. Use this token to get the next set of results. 
 --
 -- * 'daMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 describeActivations
     :: DescribeActivations
-describeActivations =
-  DescribeActivations'
-    {_daFilters = Nothing, _daNextToken = Nothing, _daMaxResults = Nothing}
-
+describeActivations
+  = DescribeActivations'{_daFilters = Nothing,
+                         _daNextToken = Nothing, _daMaxResults = Nothing}
 
 -- | A filter to view information about your activations.
 daFilters :: Lens' DescribeActivations [DescribeActivationsFilter]
 daFilters = lens _daFilters (\ s a -> s{_daFilters = a}) . _Default . _Coerce
 
--- | A token to start the list. Use this token to get the next set of results.
+-- | A token to start the list. Use this token to get the next set of results. 
 daNextToken :: Lens' DescribeActivations (Maybe Text)
 daNextToken = lens _daNextToken (\ s a -> s{_daNextToken = a})
 
@@ -133,12 +133,17 @@ instance ToQuery DescribeActivations where
         toQuery = const mempty
 
 -- | /See:/ 'describeActivationsResponse' smart constructor.
-data DescribeActivationsResponse = DescribeActivationsResponse'
-  { _darsActivationList :: !(Maybe [Activation])
-  , _darsNextToken      :: !(Maybe Text)
-  , _darsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeActivationsResponse = DescribeActivationsResponse'{_darsActivationList
+                                                                ::
+                                                                !(Maybe
+                                                                    [Activation]),
+                                                                _darsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _darsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeActivationsResponse' with the minimum fields required to make a request.
 --
@@ -146,25 +151,23 @@ data DescribeActivationsResponse = DescribeActivationsResponse'
 --
 -- * 'darsActivationList' - A list of activations for your AWS account.
 --
--- * 'darsNextToken' - The token for the next set of items to return. Use this token to get the next set of results.
+-- * 'darsNextToken' - The token for the next set of items to return. Use this token to get the next set of results. 
 --
 -- * 'darsResponseStatus' - -- | The response status code.
 describeActivationsResponse
     :: Int -- ^ 'darsResponseStatus'
     -> DescribeActivationsResponse
-describeActivationsResponse pResponseStatus_ =
-  DescribeActivationsResponse'
-    { _darsActivationList = Nothing
-    , _darsNextToken = Nothing
-    , _darsResponseStatus = pResponseStatus_
-    }
-
+describeActivationsResponse pResponseStatus_
+  = DescribeActivationsResponse'{_darsActivationList =
+                                   Nothing,
+                                 _darsNextToken = Nothing,
+                                 _darsResponseStatus = pResponseStatus_}
 
 -- | A list of activations for your AWS account.
 darsActivationList :: Lens' DescribeActivationsResponse [Activation]
 darsActivationList = lens _darsActivationList (\ s a -> s{_darsActivationList = a}) . _Default . _Coerce
 
--- | The token for the next set of items to return. Use this token to get the next set of results.
+-- | The token for the next set of items to return. Use this token to get the next set of results. 
 darsNextToken :: Lens' DescribeActivationsResponse (Maybe Text)
 darsNextToken = lens _darsNextToken (\ s a -> s{_darsNextToken = a})
 

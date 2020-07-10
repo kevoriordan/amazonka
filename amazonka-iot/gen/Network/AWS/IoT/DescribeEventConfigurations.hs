@@ -45,17 +45,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEventConfigurations' smart constructor.
-data DescribeEventConfigurations =
-  DescribeEventConfigurations'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventConfigurations = DescribeEventConfigurations'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeEventConfigurations' with the minimum fields required to make a request.
 --
 describeEventConfigurations
     :: DescribeEventConfigurations
-describeEventConfigurations = DescribeEventConfigurations'
-
+describeEventConfigurations
+  = DescribeEventConfigurations'
 
 instance AWSRequest DescribeEventConfigurations where
         type Rs DescribeEventConfigurations =
@@ -84,13 +83,25 @@ instance ToQuery DescribeEventConfigurations where
         toQuery = const mempty
 
 -- | /See:/ 'describeEventConfigurationsResponse' smart constructor.
-data DescribeEventConfigurationsResponse = DescribeEventConfigurationsResponse'
-  { _decrsLastModifiedDate    :: !(Maybe POSIX)
-  , _decrsEventConfigurations :: !(Maybe (Map EventType Configuration))
-  , _decrsCreationDate        :: !(Maybe POSIX)
-  , _decrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventConfigurationsResponse = DescribeEventConfigurationsResponse'{_decrsLastModifiedDate
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    POSIX),
+                                                                                _decrsEventConfigurations
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    (Map
+                                                                                       EventType
+                                                                                       Configuration)),
+                                                                                _decrsCreationDate
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    POSIX),
+                                                                                _decrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeEventConfigurationsResponse' with the minimum fields required to make a request.
 --
@@ -106,14 +117,13 @@ data DescribeEventConfigurationsResponse = DescribeEventConfigurationsResponse'
 describeEventConfigurationsResponse
     :: Int -- ^ 'decrsResponseStatus'
     -> DescribeEventConfigurationsResponse
-describeEventConfigurationsResponse pResponseStatus_ =
-  DescribeEventConfigurationsResponse'
-    { _decrsLastModifiedDate = Nothing
-    , _decrsEventConfigurations = Nothing
-    , _decrsCreationDate = Nothing
-    , _decrsResponseStatus = pResponseStatus_
-    }
-
+describeEventConfigurationsResponse pResponseStatus_
+  = DescribeEventConfigurationsResponse'{_decrsLastModifiedDate
+                                           = Nothing,
+                                         _decrsEventConfigurations = Nothing,
+                                         _decrsCreationDate = Nothing,
+                                         _decrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The date the event configurations were last modified.
 decrsLastModifiedDate :: Lens' DescribeEventConfigurationsResponse (Maybe UTCTime)

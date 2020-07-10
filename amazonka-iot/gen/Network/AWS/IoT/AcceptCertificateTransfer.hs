@@ -49,11 +49,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'acceptCertificateTransfer' smart constructor.
-data AcceptCertificateTransfer = AcceptCertificateTransfer'
-  { _actSetAsActive   :: !(Maybe Bool)
-  , _actCertificateId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptCertificateTransfer = AcceptCertificateTransfer'{_actSetAsActive
+                                                            :: !(Maybe Bool),
+                                                            _actCertificateId ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'AcceptCertificateTransfer' with the minimum fields required to make a request.
 --
@@ -65,10 +66,10 @@ data AcceptCertificateTransfer = AcceptCertificateTransfer'
 acceptCertificateTransfer
     :: Text -- ^ 'actCertificateId'
     -> AcceptCertificateTransfer
-acceptCertificateTransfer pCertificateId_ =
-  AcceptCertificateTransfer'
-    {_actSetAsActive = Nothing, _actCertificateId = pCertificateId_}
-
+acceptCertificateTransfer pCertificateId_
+  = AcceptCertificateTransfer'{_actSetAsActive =
+                                 Nothing,
+                               _actCertificateId = pCertificateId_}
 
 -- | Specifies whether the certificate is active.
 actSetAsActive :: Lens' AcceptCertificateTransfer (Maybe Bool)
@@ -106,17 +107,16 @@ instance ToQuery AcceptCertificateTransfer where
           = mconcat ["setAsActive" =: _actSetAsActive]
 
 -- | /See:/ 'acceptCertificateTransferResponse' smart constructor.
-data AcceptCertificateTransferResponse =
-  AcceptCertificateTransferResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptCertificateTransferResponse = AcceptCertificateTransferResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'AcceptCertificateTransferResponse' with the minimum fields required to make a request.
 --
 acceptCertificateTransferResponse
     :: AcceptCertificateTransferResponse
-acceptCertificateTransferResponse = AcceptCertificateTransferResponse'
-
+acceptCertificateTransferResponse
+  = AcceptCertificateTransferResponse'
 
 instance NFData AcceptCertificateTransferResponse
          where

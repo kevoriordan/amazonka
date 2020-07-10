@@ -18,18 +18,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @UpdateQualificationType@ operation modifies the attributes of an existing Qualification type, which is represented by a QualificationType data structure. Only the owner of a Qualification type can modify its attributes.
+-- The @UpdateQualificationType@ operation modifies the attributes of an existing Qualification type, which is represented by a QualificationType data structure. Only the owner of a Qualification type can modify its attributes. 
 --
 --
--- Most attributes of a Qualification type can be changed after the type has been created. However, the Name and Keywords fields cannot be modified. The RetryDelayInSeconds parameter can be modified or added to change the delay or to enable retries, but RetryDelayInSeconds cannot be used to disable retries.
+-- Most attributes of a Qualification type can be changed after the type has been created. However, the Name and Keywords fields cannot be modified. The RetryDelayInSeconds parameter can be modified or added to change the delay or to enable retries, but RetryDelayInSeconds cannot be used to disable retries. 
 --
--- You can use this operation to update the test for a Qualification type. The test is updated based on the values specified for the Test, TestDurationInSeconds and AnswerKey parameters. All three parameters specify the updated test. If you are updating the test for a type, you must specify the Test and TestDurationInSeconds parameters. The AnswerKey parameter is optional; omitting it specifies that the updated test does not have an answer key.
+-- You can use this operation to update the test for a Qualification type. The test is updated based on the values specified for the Test, TestDurationInSeconds and AnswerKey parameters. All three parameters specify the updated test. If you are updating the test for a type, you must specify the Test and TestDurationInSeconds parameters. The AnswerKey parameter is optional; omitting it specifies that the updated test does not have an answer key. 
 --
--- If you omit the Test parameter, the test for the Qualification type is unchanged. There is no way to remove a test from a Qualification type that has one. If the type already has a test, you cannot update it to be AutoGranted. If the Qualification type does not have a test and one is provided by an update, the type will henceforth have a test.
+-- If you omit the Test parameter, the test for the Qualification type is unchanged. There is no way to remove a test from a Qualification type that has one. If the type already has a test, you cannot update it to be AutoGranted. If the Qualification type does not have a test and one is provided by an update, the type will henceforth have a test. 
 --
--- If you want to update the test duration or answer key for an existing test without changing the questions, you must specify a Test parameter with the original questions, along with the updated values.
+-- If you want to update the test duration or answer key for an existing test without changing the questions, you must specify a Test parameter with the original questions, along with the updated values. 
 --
--- If you provide an updated Test but no AnswerKey, the new test will not have an answer key. Requests for such Qualifications must be granted manually.
+-- If you provide an updated Test but no AnswerKey, the new test will not have an answer key. Requests for such Qualifications must be granted manually. 
 --
 -- You can also update the AutoGranted and AutoGrantedValue attributes of the Qualification type.
 --
@@ -65,18 +65,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateQualificationType' smart constructor.
-data UpdateQualificationType = UpdateQualificationType'
-  { _uqtTestDurationInSeconds   :: !(Maybe Integer)
-  , _uqtQualificationTypeStatus :: !(Maybe QualificationTypeStatus)
-  , _uqtAnswerKey               :: !(Maybe Text)
-  , _uqtTest                    :: !(Maybe Text)
-  , _uqtAutoGranted             :: !(Maybe Bool)
-  , _uqtAutoGrantedValue        :: !(Maybe Int)
-  , _uqtDescription             :: !(Maybe Text)
-  , _uqtRetryDelayInSeconds     :: !(Maybe Integer)
-  , _uqtQualificationTypeId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateQualificationType = UpdateQualificationType'{_uqtTestDurationInSeconds
+                                                        :: !(Maybe Integer),
+                                                        _uqtQualificationTypeStatus
+                                                        ::
+                                                        !(Maybe
+                                                            QualificationTypeStatus),
+                                                        _uqtAnswerKey ::
+                                                        !(Maybe Text),
+                                                        _uqtTest ::
+                                                        !(Maybe Text),
+                                                        _uqtAutoGranted ::
+                                                        !(Maybe Bool),
+                                                        _uqtAutoGrantedValue ::
+                                                        !(Maybe Int),
+                                                        _uqtDescription ::
+                                                        !(Maybe Text),
+                                                        _uqtRetryDelayInSeconds
+                                                        :: !(Maybe Integer),
+                                                        _uqtQualificationTypeId
+                                                        :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateQualificationType' with the minimum fields required to make a request.
 --
@@ -102,19 +112,16 @@ data UpdateQualificationType = UpdateQualificationType'
 updateQualificationType
     :: Text -- ^ 'uqtQualificationTypeId'
     -> UpdateQualificationType
-updateQualificationType pQualificationTypeId_ =
-  UpdateQualificationType'
-    { _uqtTestDurationInSeconds = Nothing
-    , _uqtQualificationTypeStatus = Nothing
-    , _uqtAnswerKey = Nothing
-    , _uqtTest = Nothing
-    , _uqtAutoGranted = Nothing
-    , _uqtAutoGrantedValue = Nothing
-    , _uqtDescription = Nothing
-    , _uqtRetryDelayInSeconds = Nothing
-    , _uqtQualificationTypeId = pQualificationTypeId_
-    }
-
+updateQualificationType pQualificationTypeId_
+  = UpdateQualificationType'{_uqtTestDurationInSeconds
+                               = Nothing,
+                             _uqtQualificationTypeStatus = Nothing,
+                             _uqtAnswerKey = Nothing, _uqtTest = Nothing,
+                             _uqtAutoGranted = Nothing,
+                             _uqtAutoGrantedValue = Nothing,
+                             _uqtDescription = Nothing,
+                             _uqtRetryDelayInSeconds = Nothing,
+                             _uqtQualificationTypeId = pQualificationTypeId_}
 
 -- | The number of seconds the Worker has to complete the Qualification test, starting from the time the Worker requests the Qualification.
 uqtTestDurationInSeconds :: Lens' UpdateQualificationType (Maybe Integer)
@@ -201,11 +208,14 @@ instance ToQuery UpdateQualificationType where
         toQuery = const mempty
 
 -- | /See:/ 'updateQualificationTypeResponse' smart constructor.
-data UpdateQualificationTypeResponse = UpdateQualificationTypeResponse'
-  { _uqtrsQualificationType :: !(Maybe QualificationType)
-  , _uqtrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateQualificationTypeResponse = UpdateQualificationTypeResponse'{_uqtrsQualificationType
+                                                                        ::
+                                                                        !(Maybe
+                                                                            QualificationType),
+                                                                        _uqtrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateQualificationTypeResponse' with the minimum fields required to make a request.
 --
@@ -217,10 +227,10 @@ data UpdateQualificationTypeResponse = UpdateQualificationTypeResponse'
 updateQualificationTypeResponse
     :: Int -- ^ 'uqtrsResponseStatus'
     -> UpdateQualificationTypeResponse
-updateQualificationTypeResponse pResponseStatus_ =
-  UpdateQualificationTypeResponse'
-    {_uqtrsQualificationType = Nothing, _uqtrsResponseStatus = pResponseStatus_}
-
+updateQualificationTypeResponse pResponseStatus_
+  = UpdateQualificationTypeResponse'{_uqtrsQualificationType
+                                       = Nothing,
+                                     _uqtrsResponseStatus = pResponseStatus_}
 
 -- | Contains a QualificationType data structure.
 uqtrsQualificationType :: Lens' UpdateQualificationTypeResponse (Maybe QualificationType)

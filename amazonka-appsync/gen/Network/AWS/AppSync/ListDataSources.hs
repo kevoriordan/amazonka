@@ -21,6 +21,8 @@
 -- Lists the data sources for a given API.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AppSync.ListDataSources
     (
     -- * Creating a Request
@@ -43,23 +45,23 @@ module Network.AWS.AppSync.ListDataSources
 import Network.AWS.AppSync.Types
 import Network.AWS.AppSync.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDataSources' smart constructor.
-data ListDataSources = ListDataSources'
-  { _ldsNextToken  :: !(Maybe Text)
-  , _ldsMaxResults :: !(Maybe Nat)
-  , _ldsApiId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDataSources = ListDataSources'{_ldsNextToken
+                                        :: !(Maybe Text),
+                                        _ldsMaxResults :: !(Maybe Nat),
+                                        _ldsApiId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDataSources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldsNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+-- * 'ldsNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. 
 --
 -- * 'ldsMaxResults' - The maximum number of results you want the request to return.
 --
@@ -67,12 +69,11 @@ data ListDataSources = ListDataSources'
 listDataSources
     :: Text -- ^ 'ldsApiId'
     -> ListDataSources
-listDataSources pApiId_ =
-  ListDataSources'
-    {_ldsNextToken = Nothing, _ldsMaxResults = Nothing, _ldsApiId = pApiId_}
+listDataSources pApiId_
+  = ListDataSources'{_ldsNextToken = Nothing,
+                     _ldsMaxResults = Nothing, _ldsApiId = pApiId_}
 
-
--- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+-- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. 
 ldsNextToken :: Lens' ListDataSources (Maybe Text)
 ldsNextToken = lens _ldsNextToken (\ s a -> s{_ldsNextToken = a})
 
@@ -83,6 +84,13 @@ ldsMaxResults = lens _ldsMaxResults (\ s a -> s{_ldsMaxResults = a}) . mapping _
 -- | The API ID.
 ldsApiId :: Lens' ListDataSources Text
 ldsApiId = lens _ldsApiId (\ s a -> s{_ldsApiId = a})
+
+instance AWSPager ListDataSources where
+        page rq rs
+          | stop (rs ^. ldsrsNextToken) = Nothing
+          | stop (rs ^. ldsrsDataSources) = Nothing
+          | otherwise =
+            Just $ rq & ldsNextToken .~ rs ^. ldsrsNextToken
 
 instance AWSRequest ListDataSources where
         type Rs ListDataSources = ListDataSourcesResponse
@@ -118,12 +126,15 @@ instance ToQuery ListDataSources where
                "maxResults" =: _ldsMaxResults]
 
 -- | /See:/ 'listDataSourcesResponse' smart constructor.
-data ListDataSourcesResponse = ListDataSourcesResponse'
-  { _ldsrsDataSources    :: !(Maybe [DataSource])
-  , _ldsrsNextToken      :: !(Maybe Text)
-  , _ldsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDataSourcesResponse = ListDataSourcesResponse'{_ldsrsDataSources
+                                                        ::
+                                                        !(Maybe [DataSource]),
+                                                        _ldsrsNextToken ::
+                                                        !(Maybe Text),
+                                                        _ldsrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
 --
@@ -137,13 +148,11 @@ data ListDataSourcesResponse = ListDataSourcesResponse'
 listDataSourcesResponse
     :: Int -- ^ 'ldsrsResponseStatus'
     -> ListDataSourcesResponse
-listDataSourcesResponse pResponseStatus_ =
-  ListDataSourcesResponse'
-    { _ldsrsDataSources = Nothing
-    , _ldsrsNextToken = Nothing
-    , _ldsrsResponseStatus = pResponseStatus_
-    }
-
+listDataSourcesResponse pResponseStatus_
+  = ListDataSourcesResponse'{_ldsrsDataSources =
+                               Nothing,
+                             _ldsrsNextToken = Nothing,
+                             _ldsrsResponseStatus = pResponseStatus_}
 
 -- | The @DataSource@ objects.
 ldsrsDataSources :: Lens' ListDataSourcesResponse [DataSource]

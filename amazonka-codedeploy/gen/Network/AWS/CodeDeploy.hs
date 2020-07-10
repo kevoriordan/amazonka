@@ -11,41 +11,41 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS CodeDeploy__
+-- __AWS CodeDeploy__ 
 --
--- AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances running in your own facility, or serverless AWS Lambda functions.
+-- AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances running in your own facility, serverless AWS Lambda functions, or applications in an Amazon ECS service.
 --
--- You can deploy a nearly unlimited variety of application content, such as an updated Lambda function, code, web and configuration files, executables, packages, scripts, multimedia files, and so on. AWS CodeDeploy can deploy application content stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. You do not need to make changes to your existing code before you can use AWS CodeDeploy.
+-- You can deploy a nearly unlimited variety of application content, such as an updated Lambda function, updated applications in an Amazon ECS service, code, web and configuration files, executables, packages, scripts, multimedia files, and so on. AWS CodeDeploy can deploy application content stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. You do not need to make changes to your existing code before you can use AWS CodeDeploy.
 --
 -- AWS CodeDeploy makes it easier for you to rapidly release new features, helps you avoid downtime during application deployment, and handles the complexity of updating your applications, without many of the risks associated with error-prone manual deployments.
 --
--- __AWS CodeDeploy Components__
+-- __AWS CodeDeploy Components__ 
 --
 -- Use the information in this guide to help you work with the following AWS CodeDeploy components:
 --
 --     * __Application__ : A name that uniquely identifies the application you want to deploy. AWS CodeDeploy uses this name, which functions as a container, to ensure the correct combination of revision, deployment configuration, and deployment group are referenced during a deployment.
 --
---     * __Deployment group__ : A set of individual instances or CodeDeploy Lambda applications. A Lambda deployment group contains a group of applications. An EC2/On-premises deployment group contains individually tagged instances, Amazon EC2 instances in Auto Scaling groups, or both.
+--     * __Deployment group__ : A set of individual instances, CodeDeploy Lambda deployment configuration settings, or an Amazon ECS service and network details. A Lambda deployment group specifies how to route traffic to a new version of a Lambda function. An Amazon ECS deployment group specifies the service created in Amazon ECS to deploy, a load balancer, and a listener to reroute production traffic to an updated containerized application. An EC2/On-premises deployment group contains individually tagged instances, Amazon EC2 instances in Amazon EC2 Auto Scaling groups, or both. All deployment groups can specify optional trigger, alarm, and rollback settings.
 --
 --     * __Deployment configuration__ : A set of deployment rules and deployment success and failure conditions used by AWS CodeDeploy during a deployment.
 --
---     * __Deployment__ : The process and the components used in the process of updating a Lambda function or of installing content on one or more instances.
+--     * __Deployment__ : The process and the components used when updating a Lambda function, a containerized application in an Amazon ECS service, or of installing content on one or more instances. 
 --
---     * __Application revisions__ : For an AWS Lambda deployment, this is an AppSpec file that specifies the Lambda function to update and one or more functions to validate deployment lifecycle events. For an EC2/On-premises deployment, this is an archive file containing source content—source code, web pages, executable files, and deployment scripts—along with an AppSpec file. Revisions are stored in Amazon S3 buckets or GitHub repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both. For GitHub, a revision is uniquely identified by its commit ID.
+--     * __Application revisions__ : For an AWS Lambda deployment, this is an AppSpec file that specifies the Lambda function to be updated and one or more functions to validate deployment lifecycle events. For an Amazon ECS deployment, this is an AppSpec file that specifies the Amazon ECS task definition, container, and port where production traffic is rerouted. For an EC2/On-premises deployment, this is an archive file that contains source content—source code, webpages, executable files, and deployment scripts—along with an AppSpec file. Revisions are stored in Amazon S3 buckets or GitHub repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both. For GitHub, a revision is uniquely identified by its commit ID.
 --
 --
 --
--- This guide also contains information to help you get details about the instances in your deployments, to make on-premises instances available for AWS CodeDeploy deployments, and to get details about a Lambda function deployment.
+-- This guide also contains information to help you get details about the instances in your deployments, to make on-premises instances available for AWS CodeDeploy deployments, to get details about a Lambda function deployment, and to get details about Amazon ECS service deployments.
 --
--- __AWS CodeDeploy Information Resources__
+-- __AWS CodeDeploy Information Resources__ 
 --
---     * <http://docs.aws.amazon.com/codedeploy/latest/userguide AWS CodeDeploy User Guide>
+--     * <https://docs.aws.amazon.com/codedeploy/latest/userguide AWS CodeDeploy User Guide> 
 --
---     * <http://docs.aws.amazon.com/codedeploy/latest/APIReference/ AWS CodeDeploy API Reference Guide>
+--     * <https://docs.aws.amazon.com/codedeploy/latest/APIReference/ AWS CodeDeploy API Reference Guide> 
 --
---     * <http://docs.aws.amazon.com/cli/latest/reference/deploy/index.html AWS CLI Reference for AWS CodeDeploy>
+--     * <https://docs.aws.amazon.com/cli/latest/reference/deploy/index.html AWS CLI Reference for AWS CodeDeploy> 
 --
---     * <https://forums.aws.amazon.com/forum.jspa?forumID=179 AWS CodeDeploy Developer Forum>
+--     * <https://forums.aws.amazon.com/forum.jspa?forumID=179 AWS CodeDeploy Developer Forum> 
 --
 --
 --
@@ -57,137 +57,137 @@ module Network.AWS.CodeDeploy
     -- * Errors
     -- $errors
 
-    -- ** LifecycleHookLimitExceededException
-    , _LifecycleHookLimitExceededException
+    -- ** InvalidDeploymentTargetIdException
+    , _InvalidDeploymentTargetIdException
 
-    -- ** InvalidTimeRangeException
-    , _InvalidTimeRangeException
+    -- ** InvalidDeploymentStatusException
+    , _InvalidDeploymentStatusException
 
-    -- ** InvalidComputePlatformException
-    , _InvalidComputePlatformException
+    -- ** MultipleIAMARNsProvidedException
+    , _MultipleIAMARNsProvidedException
 
-    -- ** InvalidTagException
-    , _InvalidTagException
-
-    -- ** InvalidFileExistsBehaviorException
-    , _InvalidFileExistsBehaviorException
-
-    -- ** InvalidAlarmConfigException
-    , _InvalidAlarmConfigException
-
-    -- ** InstanceNameAlreadyRegisteredException
-    , _InstanceNameAlreadyRegisteredException
-
-    -- ** IAMUserARNRequiredException
-    , _IAMUserARNRequiredException
-
-    -- ** InvalidDeploymentGroupNameException
-    , _InvalidDeploymentGroupNameException
-
-    -- ** InvalidInstanceTypeException
-    , _InvalidInstanceTypeException
-
-    -- ** IAMSessionARNAlreadyRegisteredException
-    , _IAMSessionARNAlreadyRegisteredException
-
-    -- ** InvalidTrafficRoutingConfigurationException
-    , _InvalidTrafficRoutingConfigurationException
-
-    -- ** DescriptionTooLongException
-    , _DescriptionTooLongException
-
-    -- ** InvalidIAMUserARNException
-    , _InvalidIAMUserARNException
-
-    -- ** InvalidOnPremisesTagCombinationException
-    , _InvalidOnPremisesTagCombinationException
-
-    -- ** DeploymentNotStartedException
-    , _DeploymentNotStartedException
-
-    -- ** DeploymentConfigLimitExceededException
-    , _DeploymentConfigLimitExceededException
-
-    -- ** RoleRequiredException
-    , _RoleRequiredException
-
-    -- ** InvalidLoadBalancerInfoException
-    , _InvalidLoadBalancerInfoException
-
-    -- ** InvalidBlueGreenDeploymentConfigurationException
-    , _InvalidBlueGreenDeploymentConfigurationException
-
-    -- ** InvalidRoleException
-    , _InvalidRoleException
-
-    -- ** DeploymentConfigAlreadyExistsException
-    , _DeploymentConfigAlreadyExistsException
-
-    -- ** InvalidTargetInstancesException
-    , _InvalidTargetInstancesException
-
-    -- ** DeploymentLimitExceededException
-    , _DeploymentLimitExceededException
-
-    -- ** IAMUserARNAlreadyRegisteredException
-    , _IAMUserARNAlreadyRegisteredException
-
-    -- ** InvalidIAMSessionARNException
-    , _InvalidIAMSessionARNException
-
-    -- ** InstanceLimitExceededException
-    , _InstanceLimitExceededException
-
-    -- ** InvalidLifecycleEventHookExecutionIdException
-    , _InvalidLifecycleEventHookExecutionIdException
-
-    -- ** InvalidDeploymentStyleException
-    , _InvalidDeploymentStyleException
-
-    -- ** InvalidDeployedStateFilterException
-    , _InvalidDeployedStateFilterException
-
-    -- ** InvalidAutoScalingGroupException
-    , _InvalidAutoScalingGroupException
-
-    -- ** InvalidApplicationNameException
-    , _InvalidApplicationNameException
+    -- ** TagSetListLimitExceededException
+    , _TagSetListLimitExceededException
 
     -- ** GitHubAccountTokenDoesNotExistException
     , _GitHubAccountTokenDoesNotExistException
 
-    -- ** ApplicationDoesNotExistException
-    , _ApplicationDoesNotExistException
+    -- ** InvalidDeployedStateFilterException
+    , _InvalidDeployedStateFilterException
 
-    -- ** InvalidMinimumHealthyHostValueException
-    , _InvalidMinimumHealthyHostValueException
+    -- ** TriggerTargetsLimitExceededException
+    , _TriggerTargetsLimitExceededException
 
-    -- ** UnsupportedActionForDeploymentTypeException
-    , _UnsupportedActionForDeploymentTypeException
+    -- ** InvalidInstanceStatusException
+    , _InvalidInstanceStatusException
 
-    -- ** ResourceValidationException
-    , _ResourceValidationException
+    -- ** InvalidRegistrationStatusException
+    , _InvalidRegistrationStatusException
 
-    -- ** InvalidGitHubAccountTokenException
-    , _InvalidGitHubAccountTokenException
+    -- ** InstanceNotRegisteredException
+    , _InstanceNotRegisteredException
 
-    -- ** InvalidEC2TagCombinationException
-    , _InvalidEC2TagCombinationException
+    -- ** ApplicationNameRequiredException
+    , _ApplicationNameRequiredException
 
-    -- ** InvalidLifecycleEventHookExecutionStatusException
-    , _InvalidLifecycleEventHookExecutionStatusException
+    -- ** DeploymentTargetListSizeExceededException
+    , _DeploymentTargetListSizeExceededException
 
-    -- ** AlarmsLimitExceededException
-    , _AlarmsLimitExceededException
+    -- ** InvalidApplicationNameException
+    , _InvalidApplicationNameException
 
-    -- ** OperationNotSupportedException
-    , _OperationNotSupportedException
+    -- ** InvalidIAMSessionARNException
+    , _InvalidIAMSessionARNException
 
-    -- ** InvalidTagFilterException
-    , _InvalidTagFilterException
+    -- ** InvalidInstanceNameException
+    , _InvalidInstanceNameException
 
-    -- ** InvalidTriggerConfigException
-    , _InvalidTriggerConfigException
+    -- ** InvalidLifecycleEventHookExecutionIdException
+    , _InvalidLifecycleEventHookExecutionIdException
+
+    -- ** InvalidDeploymentConfigIdException
+    , _InvalidDeploymentConfigIdException
+
+    -- ** InvalidEC2TagException
+    , _InvalidEC2TagException
+
+    -- ** DeploymentConfigInUseException
+    , _DeploymentConfigInUseException
+
+    -- ** InvalidDeploymentStyleException
+    , _InvalidDeploymentStyleException
+
+    -- ** InvalidAutoRollbackConfigException
+    , _InvalidAutoRollbackConfigException
+
+    -- ** InvalidTagsToAddException
+    , _InvalidTagsToAddException
+
+    -- ** InvalidTargetInstancesException
+    , _InvalidTargetInstancesException
+
+    -- ** InvalidRevisionException
+    , _InvalidRevisionException
+
+    -- ** InvalidInstanceIdException
+    , _InvalidInstanceIdException
+
+    -- ** DeploymentGroupDoesNotExistException
+    , _DeploymentGroupDoesNotExistException
+
+    -- ** DeploymentIsNotInReadyStateException
+    , _DeploymentIsNotInReadyStateException
+
+    -- ** RoleRequiredException
+    , _RoleRequiredException
+
+    -- ** InvalidDeploymentIdException
+    , _InvalidDeploymentIdException
+
+    -- ** InvalidDeploymentConfigNameException
+    , _InvalidDeploymentConfigNameException
+
+    -- ** DeploymentNotStartedException
+    , _DeploymentNotStartedException
+
+    -- ** InvalidBucketNameFilterException
+    , _InvalidBucketNameFilterException
+
+    -- ** DeploymentGroupNameRequiredException
+    , _DeploymentGroupNameRequiredException
+
+    -- ** InvalidDeploymentGroupNameException
+    , _InvalidDeploymentGroupNameException
+
+    -- ** InvalidAlarmConfigException
+    , _InvalidAlarmConfigException
+
+    -- ** IAMSessionARNAlreadyRegisteredException
+    , _IAMSessionARNAlreadyRegisteredException
+
+    -- ** IAMUserARNRequiredException
+    , _IAMUserARNRequiredException
+
+    -- ** InvalidTargetException
+    , _InvalidTargetException
+
+    -- ** DescriptionTooLongException
+    , _DescriptionTooLongException
+
+    -- ** InvalidTrafficRoutingConfigurationException
+    , _InvalidTrafficRoutingConfigurationException
+
+    -- ** InvalidSortByException
+    , _InvalidSortByException
+
+    -- ** InvalidTimeRangeException
+    , _InvalidTimeRangeException
+
+    -- ** TagRequiredException
+    , _TagRequiredException
+
+    -- ** LifecycleHookLimitExceededException
+    , _LifecycleHookLimitExceededException
 
     -- ** InvalidIgnoreApplicationStopFailuresValueException
     , _InvalidIgnoreApplicationStopFailuresValueException
@@ -195,80 +195,86 @@ module Network.AWS.CodeDeploy
     -- ** InvalidUpdateOutdatedInstancesOnlyValueException
     , _InvalidUpdateOutdatedInstancesOnlyValueException
 
-    -- ** TagRequiredException
-    , _TagRequiredException
+    -- ** InvalidComputePlatformException
+    , _InvalidComputePlatformException
 
-    -- ** DeploymentGroupNameRequiredException
-    , _DeploymentGroupNameRequiredException
+    -- ** InvalidTagException
+    , _InvalidTagException
 
-    -- ** BucketNameFilterRequiredException
-    , _BucketNameFilterRequiredException
+    -- ** InvalidDeploymentWaitTypeException
+    , _InvalidDeploymentWaitTypeException
 
-    -- ** DeploymentConfigDoesNotExistException
-    , _DeploymentConfigDoesNotExistException
+    -- ** AlarmsLimitExceededException
+    , _AlarmsLimitExceededException
 
-    -- ** InvalidBucketNameFilterException
-    , _InvalidBucketNameFilterException
+    -- ** DeploymentAlreadyStartedException
+    , _DeploymentAlreadyStartedException
 
-    -- ** DeploymentGroupAlreadyExistsException
-    , _DeploymentGroupAlreadyExistsException
+    -- ** ARNNotSupportedException
+    , _ARNNotSupportedException
 
-    -- ** InvalidSortByException
-    , _InvalidSortByException
+    -- ** InvalidGitHubAccountTokenException
+    , _InvalidGitHubAccountTokenException
 
-    -- ** RevisionDoesNotExistException
-    , _RevisionDoesNotExistException
+    -- ** InvalidKeyPrefixFilterException
+    , _InvalidKeyPrefixFilterException
 
-    -- ** DeploymentGroupLimitExceededException
-    , _DeploymentGroupLimitExceededException
+    -- ** OperationNotSupportedException
+    , _OperationNotSupportedException
 
-    -- ** DeploymentGroupDoesNotExistException
-    , _DeploymentGroupDoesNotExistException
+    -- ** IAMARNRequiredException
+    , _IAMARNRequiredException
 
-    -- ** ThrottlingException
-    , _ThrottlingException
+    -- ** GitHubAccountTokenNameRequiredException
+    , _GitHubAccountTokenNameRequiredException
 
-    -- ** InvalidDeploymentConfigNameException
-    , _InvalidDeploymentConfigNameException
+    -- ** LifecycleEventAlreadyCompletedException
+    , _LifecycleEventAlreadyCompletedException
 
-    -- ** DeploymentConfigNameRequiredException
-    , _DeploymentConfigNameRequiredException
+    -- ** ApplicationDoesNotExistException
+    , _ApplicationDoesNotExistException
 
-    -- ** DeploymentIdRequiredException
-    , _DeploymentIdRequiredException
+    -- ** ApplicationAlreadyExistsException
+    , _ApplicationAlreadyExistsException
 
-    -- ** InvalidInstanceIdException
-    , _InvalidInstanceIdException
+    -- ** ApplicationLimitExceededException
+    , _ApplicationLimitExceededException
 
-    -- ** DeploymentIsNotInReadyStateException
-    , _DeploymentIsNotInReadyStateException
+    -- ** InvalidOperationException
+    , _InvalidOperationException
 
-    -- ** InvalidNextTokenException
-    , _InvalidNextTokenException
+    -- ** InvalidARNException
+    , _InvalidARNException
 
-    -- ** InstanceIdRequiredException
-    , _InstanceIdRequiredException
+    -- ** DeploymentTargetIdRequiredException
+    , _DeploymentTargetIdRequiredException
 
-    -- ** InvalidDeploymentIdException
-    , _InvalidDeploymentIdException
+    -- ** InvalidAutoScalingGroupException
+    , _InvalidAutoScalingGroupException
 
-    -- ** InvalidSortOrderException
-    , _InvalidSortOrderException
+    -- ** TagLimitExceededException
+    , _TagLimitExceededException
 
-    -- ** InvalidAutoRollbackConfigException
-    , _InvalidAutoRollbackConfigException
+    -- ** DeploymentLimitExceededException
+    , _DeploymentLimitExceededException
 
-    -- ** DeploymentAlreadyCompletedException
-    , _DeploymentAlreadyCompletedException
+    -- ** InstanceNameRequiredException
+    , _InstanceNameRequiredException
+
+    -- ** IAMUserARNAlreadyRegisteredException
+    , _IAMUserARNAlreadyRegisteredException
+
+    -- ** InvalidInputException
+    , _InvalidInputException
+
+    -- ** InvalidTargetFilterNameException
+    , _InvalidTargetFilterNameException
+
+    -- ** InstanceLimitExceededException
+    , _InstanceLimitExceededException
 
     -- ** DeploymentDoesNotExistException
     , _DeploymentDoesNotExistException
-
-    -- ** BatchLimitExceededException
-    , _BatchLimitExceededException
-
-    -- ** InvalidRevisionException
-    , _InvalidRevisionException
 
     -- ** RevisionRequiredException
     , _RevisionRequiredException
@@ -276,74 +282,116 @@ module Network.AWS.CodeDeploy
     -- ** InstanceDoesNotExistException
     , _InstanceDoesNotExistException
 
-    -- ** DeploymentConfigInUseException
-    , _DeploymentConfigInUseException
+    -- ** DeploymentAlreadyCompletedException
+    , _DeploymentAlreadyCompletedException
 
-    -- ** InvalidInputException
-    , _InvalidInputException
+    -- ** BatchLimitExceededException
+    , _BatchLimitExceededException
 
-    -- ** InvalidEC2TagException
-    , _InvalidEC2TagException
+    -- ** ECSServiceMappingLimitExceededException
+    , _ECSServiceMappingLimitExceededException
 
-    -- ** InvalidInstanceNameException
-    , _InvalidInstanceNameException
+    -- ** InvalidOnPremisesTagCombinationException
+    , _InvalidOnPremisesTagCombinationException
 
-    -- ** InstanceNameRequiredException
-    , _InstanceNameRequiredException
+    -- ** DeploymentConfigNameRequiredException
+    , _DeploymentConfigNameRequiredException
 
-    -- ** MultipleIAMARNsProvidedException
-    , _MultipleIAMARNsProvidedException
+    -- ** DeploymentConfigLimitExceededException
+    , _DeploymentConfigLimitExceededException
 
-    -- ** TriggerTargetsLimitExceededException
-    , _TriggerTargetsLimitExceededException
+    -- ** InvalidBlueGreenDeploymentConfigurationException
+    , _InvalidBlueGreenDeploymentConfigurationException
 
-    -- ** InvalidDeploymentStatusException
-    , _InvalidDeploymentStatusException
+    -- ** DeploymentIdRequiredException
+    , _DeploymentIdRequiredException
 
-    -- ** InvalidRegistrationStatusException
-    , _InvalidRegistrationStatusException
+    -- ** ThrottlingException
+    , _ThrottlingException
 
-    -- ** ApplicationNameRequiredException
-    , _ApplicationNameRequiredException
+    -- ** InvalidLoadBalancerInfoException
+    , _InvalidLoadBalancerInfoException
 
-    -- ** InstanceNotRegisteredException
-    , _InstanceNotRegisteredException
+    -- ** DeploymentConfigAlreadyExistsException
+    , _DeploymentConfigAlreadyExistsException
 
-    -- ** ApplicationAlreadyExistsException
-    , _ApplicationAlreadyExistsException
+    -- ** InvalidNextTokenException
+    , _InvalidNextTokenException
 
-    -- ** InvalidInstanceStatusException
-    , _InvalidInstanceStatusException
+    -- ** InstanceIdRequiredException
+    , _InstanceIdRequiredException
 
-    -- ** TagLimitExceededException
-    , _TagLimitExceededException
+    -- ** InvalidTargetGroupPairException
+    , _InvalidTargetGroupPairException
 
-    -- ** ApplicationLimitExceededException
-    , _ApplicationLimitExceededException
+    -- ** InvalidRoleException
+    , _InvalidRoleException
 
-    -- ** TagSetListLimitExceededException
-    , _TagSetListLimitExceededException
+    -- ** InvalidSortOrderException
+    , _InvalidSortOrderException
 
-    -- ** InvalidOperationException
-    , _InvalidOperationException
+    -- ** DeploymentConfigDoesNotExistException
+    , _DeploymentConfigDoesNotExistException
 
-    -- ** GitHubAccountTokenNameRequiredException
-    , _GitHubAccountTokenNameRequiredException
+    -- ** RevisionDoesNotExistException
+    , _RevisionDoesNotExistException
+
+    -- ** DeploymentGroupAlreadyExistsException
+    , _DeploymentGroupAlreadyExistsException
+
+    -- ** DeploymentGroupLimitExceededException
+    , _DeploymentGroupLimitExceededException
+
+    -- ** InvalidInstanceTypeException
+    , _InvalidInstanceTypeException
+
+    -- ** BucketNameFilterRequiredException
+    , _BucketNameFilterRequiredException
+
+    -- ** InvalidIAMUserARNException
+    , _InvalidIAMUserARNException
+
+    -- ** InstanceNameAlreadyRegisteredException
+    , _InstanceNameAlreadyRegisteredException
+
+    -- ** InvalidTriggerConfigException
+    , _InvalidTriggerConfigException
+
+    -- ** DeploymentTargetDoesNotExistException
+    , _DeploymentTargetDoesNotExistException
+
+    -- ** InvalidTagFilterException
+    , _InvalidTagFilterException
+
+    -- ** InvalidFileExistsBehaviorException
+    , _InvalidFileExistsBehaviorException
+
+    -- ** ResourceARNRequiredException
+    , _ResourceARNRequiredException
+
+    -- ** InvalidEC2TagCombinationException
+    , _InvalidEC2TagCombinationException
+
+    -- ** InvalidLifecycleEventHookExecutionStatusException
+    , _InvalidLifecycleEventHookExecutionStatusException
 
     -- ** InvalidDeploymentInstanceTypeException
     , _InvalidDeploymentInstanceTypeException
 
-    -- ** IAMARNRequiredException
-    , _IAMARNRequiredException
-
     -- ** InvalidGitHubAccountTokenNameException
     , _InvalidGitHubAccountTokenNameException
 
-    -- ** LifecycleEventAlreadyCompletedException
-    , _LifecycleEventAlreadyCompletedException
+    -- ** InvalidECSServiceException
+    , _InvalidECSServiceException
 
-    -- ** InvalidKeyPrefixFilterException
-    , _InvalidKeyPrefixFilterException
+    -- ** ResourceValidationException
+    , _ResourceValidationException
+
+    -- ** InvalidMinimumHealthyHostValueException
+    , _InvalidMinimumHealthyHostValueException
+
+    -- ** UnsupportedActionForDeploymentTypeException
+    , _UnsupportedActionForDeploymentTypeException
 
     -- * Waiters
     -- $waiters
@@ -354,113 +402,116 @@ module Network.AWS.CodeDeploy
     -- * Operations
     -- $operations
 
-    -- ** RemoveTagsFromOnPremisesInstances
+    -- ** RemoveTagsFromOnPremisesInstances 
     , module Network.AWS.CodeDeploy.RemoveTagsFromOnPremisesInstances
 
-    -- ** BatchGetDeploymentGroups
+    -- ** BatchGetDeploymentGroups 
     , module Network.AWS.CodeDeploy.BatchGetDeploymentGroups
 
-    -- ** DeleteDeploymentGroup
+    -- ** DeleteDeploymentGroup 
     , module Network.AWS.CodeDeploy.DeleteDeploymentGroup
 
-    -- ** UpdateDeploymentGroup
+    -- ** UpdateDeploymentGroup 
     , module Network.AWS.CodeDeploy.UpdateDeploymentGroup
 
-    -- ** ListOnPremisesInstances
+    -- ** ListOnPremisesInstances (Paginated)
     , module Network.AWS.CodeDeploy.ListOnPremisesInstances
 
-    -- ** CreateDeploymentConfig
+    -- ** CreateDeploymentConfig 
     , module Network.AWS.CodeDeploy.CreateDeploymentConfig
 
-    -- ** GetApplicationRevision
+    -- ** GetApplicationRevision 
     , module Network.AWS.CodeDeploy.GetApplicationRevision
 
-    -- ** GetDeployment
+    -- ** GetDeployment 
     , module Network.AWS.CodeDeploy.GetDeployment
 
-    -- ** DeleteDeploymentConfig
+    -- ** DeleteDeploymentConfig 
     , module Network.AWS.CodeDeploy.DeleteDeploymentConfig
 
-    -- ** GetDeploymentConfig
+    -- ** ListTagsForResource 
+    , module Network.AWS.CodeDeploy.ListTagsForResource
+
+    -- ** GetDeploymentConfig 
     , module Network.AWS.CodeDeploy.GetDeploymentConfig
 
-    -- ** CreateDeployment
+    -- ** CreateDeployment 
     , module Network.AWS.CodeDeploy.CreateDeployment
 
-    -- ** BatchGetApplicationRevisions
+    -- ** BatchGetApplicationRevisions 
     , module Network.AWS.CodeDeploy.BatchGetApplicationRevisions
 
-    -- ** BatchGetDeployments
+    -- ** BatchGetDeployments 
     , module Network.AWS.CodeDeploy.BatchGetDeployments
 
-    -- ** GetOnPremisesInstance
+    -- ** GetOnPremisesInstance 
     , module Network.AWS.CodeDeploy.GetOnPremisesInstance
 
-    -- ** RegisterApplicationRevision
+    -- ** RegisterApplicationRevision 
     , module Network.AWS.CodeDeploy.RegisterApplicationRevision
 
-    -- ** ContinueDeployment
+    -- ** ContinueDeployment 
     , module Network.AWS.CodeDeploy.ContinueDeployment
 
-    -- ** BatchGetApplications
+    -- ** BatchGetApplications 
     , module Network.AWS.CodeDeploy.BatchGetApplications
 
-    -- ** DeleteApplication
+    -- ** DeleteApplication 
     , module Network.AWS.CodeDeploy.DeleteApplication
 
-    -- ** UpdateApplication
+    -- ** UpdateApplication 
     , module Network.AWS.CodeDeploy.UpdateApplication
 
-    -- ** DeleteGitHubAccountToken
+    -- ** DeleteGitHubAccountToken 
     , module Network.AWS.CodeDeploy.DeleteGitHubAccountToken
 
-    -- ** GetDeploymentInstance
-    , module Network.AWS.CodeDeploy.GetDeploymentInstance
-
-    -- ** DeregisterOnPremisesInstance
+    -- ** DeregisterOnPremisesInstance 
     , module Network.AWS.CodeDeploy.DeregisterOnPremisesInstance
 
-    -- ** PutLifecycleEventHookExecutionStatus
+    -- ** PutLifecycleEventHookExecutionStatus 
     , module Network.AWS.CodeDeploy.PutLifecycleEventHookExecutionStatus
 
-    -- ** CreateApplication
+    -- ** GetDeploymentTarget 
+    , module Network.AWS.CodeDeploy.GetDeploymentTarget
+
+    -- ** CreateApplication 
     , module Network.AWS.CodeDeploy.CreateApplication
 
-    -- ** StopDeployment
+    -- ** BatchGetDeploymentTargets 
+    , module Network.AWS.CodeDeploy.BatchGetDeploymentTargets
+
+    -- ** StopDeployment 
     , module Network.AWS.CodeDeploy.StopDeployment
 
-    -- ** ListGitHubAccountTokenNames
+    -- ** ListGitHubAccountTokenNames (Paginated)
     , module Network.AWS.CodeDeploy.ListGitHubAccountTokenNames
 
-    -- ** BatchGetDeploymentInstances
-    , module Network.AWS.CodeDeploy.BatchGetDeploymentInstances
-
-    -- ** SkipWaitTimeForInstanceTermination
-    , module Network.AWS.CodeDeploy.SkipWaitTimeForInstanceTermination
-
-    -- ** GetApplication
+    -- ** GetApplication 
     , module Network.AWS.CodeDeploy.GetApplication
 
     -- ** ListDeploymentGroups (Paginated)
     , module Network.AWS.CodeDeploy.ListDeploymentGroups
 
-    -- ** BatchGetOnPremisesInstances
+    -- ** BatchGetOnPremisesInstances 
     , module Network.AWS.CodeDeploy.BatchGetOnPremisesInstances
 
-    -- ** RegisterOnPremisesInstance
+    -- ** RegisterOnPremisesInstance 
     , module Network.AWS.CodeDeploy.RegisterOnPremisesInstance
 
-    -- ** CreateDeploymentGroup
+    -- ** CreateDeploymentGroup 
     , module Network.AWS.CodeDeploy.CreateDeploymentGroup
 
     -- ** ListDeploymentConfigs (Paginated)
     , module Network.AWS.CodeDeploy.ListDeploymentConfigs
 
-    -- ** GetDeploymentGroup
+    -- ** GetDeploymentGroup 
     , module Network.AWS.CodeDeploy.GetDeploymentGroup
 
     -- ** ListDeployments (Paginated)
     , module Network.AWS.CodeDeploy.ListDeployments
+
+    -- ** TagResource 
+    , module Network.AWS.CodeDeploy.TagResource
 
     -- ** ListApplicationRevisions (Paginated)
     , module Network.AWS.CodeDeploy.ListApplicationRevisions
@@ -468,11 +519,14 @@ module Network.AWS.CodeDeploy
     -- ** ListApplications (Paginated)
     , module Network.AWS.CodeDeploy.ListApplications
 
-    -- ** AddTagsToOnPremisesInstances
+    -- ** UntagResource 
+    , module Network.AWS.CodeDeploy.UntagResource
+
+    -- ** AddTagsToOnPremisesInstances 
     , module Network.AWS.CodeDeploy.AddTagsToOnPremisesInstances
 
-    -- ** ListDeploymentInstances (Paginated)
-    , module Network.AWS.CodeDeploy.ListDeploymentInstances
+    -- ** ListDeploymentTargets (Paginated)
+    , module Network.AWS.CodeDeploy.ListDeploymentTargets
 
     -- * Types
 
@@ -503,8 +557,14 @@ module Network.AWS.CodeDeploy
     -- ** DeploymentStatus
     , DeploymentStatus (..)
 
+    -- ** DeploymentTargetType
+    , DeploymentTargetType (..)
+
     -- ** DeploymentType
     , DeploymentType (..)
+
+    -- ** DeploymentWaitType
+    , DeploymentWaitType (..)
 
     -- ** EC2TagFilterType
     , EC2TagFilterType (..)
@@ -517,12 +577,6 @@ module Network.AWS.CodeDeploy
 
     -- ** InstanceAction
     , InstanceAction (..)
-
-    -- ** InstanceStatus
-    , InstanceStatus (..)
-
-    -- ** InstanceType
-    , InstanceType (..)
 
     -- ** LifecycleErrorCode
     , LifecycleErrorCode (..)
@@ -551,6 +605,15 @@ module Network.AWS.CodeDeploy
     -- ** TagFilterType
     , TagFilterType (..)
 
+    -- ** TargetFilterName
+    , TargetFilterName (..)
+
+    -- ** TargetLabel
+    , TargetLabel (..)
+
+    -- ** TargetStatus
+    , TargetStatus (..)
+
     -- ** TrafficRoutingType
     , TrafficRoutingType (..)
 
@@ -568,6 +631,12 @@ module Network.AWS.CodeDeploy
     , acIgnorePollAlarmFailure
     , acEnabled
     , acAlarms
+
+    -- ** AppSpecContent
+    , AppSpecContent
+    , appSpecContent
+    , ascContent
+    , ascSha256
 
     -- ** ApplicationInfo
     , ApplicationInfo
@@ -625,6 +694,7 @@ module Network.AWS.CodeDeploy
     , dgiComputePlatform
     , dgiTargetRevision
     , dgiEc2TagFilters
+    , dgiEcsServices
     , dgiBlueGreenDeploymentConfiguration
     , dgiLoadBalancerInfo
     , dgiOnPremisesInstanceTagFilters
@@ -691,6 +761,14 @@ module Network.AWS.CodeDeploy
     , dsDeploymentOption
     , dsDeploymentType
 
+    -- ** DeploymentTarget
+    , DeploymentTarget
+    , deploymentTarget
+    , dtInstanceTarget
+    , dtEcsTarget
+    , dtDeploymentTargetType
+    , dtLambdaTarget
+
     -- ** Diagnostics
     , Diagnostics
     , diagnostics
@@ -710,6 +788,35 @@ module Network.AWS.CodeDeploy
     , EC2TagSet
     , ec2TagSet
     , etsEc2TagSetList
+
+    -- ** ECSService
+    , ECSService
+    , eCSService
+    , ecssServiceName
+    , ecssClusterName
+
+    -- ** ECSTarget
+    , ECSTarget
+    , eCSTarget
+    , ecstTargetARN
+    , ecstTargetId
+    , ecstStatus
+    , ecstDeploymentId
+    , ecstLastUpdatedAt
+    , ecstTaskSetsInfo
+    , ecstLifecycleEvents
+
+    -- ** ECSTaskSet
+    , ECSTaskSet
+    , eCSTaskSet
+    , ecstsRunningCount
+    , ecstsStatus
+    , ecstsIdentifer
+    , ecstsDesiredCount
+    , ecstsPendingCount
+    , ecstsTrafficWeight
+    , ecstsTargetGroup
+    , ecstsTaskSetLabel
 
     -- ** ELBInfo
     , ELBInfo
@@ -753,15 +860,36 @@ module Network.AWS.CodeDeploy
     , iiIamSessionARN
     , iiTags
 
-    -- ** InstanceSummary
-    , InstanceSummary
-    , instanceSummary
-    , isInstanceId
-    , isStatus
-    , isDeploymentId
-    , isLastUpdatedAt
-    , isLifecycleEvents
-    , isInstanceType
+    -- ** InstanceTarget
+    , InstanceTarget
+    , instanceTarget
+    , itTargetARN
+    , itTargetId
+    , itStatus
+    , itDeploymentId
+    , itInstanceLabel
+    , itLastUpdatedAt
+    , itLifecycleEvents
+
+    -- ** LambdaFunctionInfo
+    , LambdaFunctionInfo
+    , lambdaFunctionInfo
+    , lfiCurrentVersion
+    , lfiFunctionAlias
+    , lfiFunctionName
+    , lfiTargetVersion
+    , lfiTargetVersionWeight
+
+    -- ** LambdaTarget
+    , LambdaTarget
+    , lambdaTarget
+    , ltTargetARN
+    , ltTargetId
+    , ltStatus
+    , ltDeploymentId
+    , ltLastUpdatedAt
+    , ltLifecycleEvents
+    , ltLambdaFunctionInfo
 
     -- ** LastDeploymentInfo
     , LastDeploymentInfo
@@ -785,6 +913,7 @@ module Network.AWS.CodeDeploy
     , loadBalancerInfo
     , lbiElbInfoList
     , lbiTargetGroupInfoList
+    , lbiTargetGroupPairInfoList
 
     -- ** MinimumHealthyHosts
     , MinimumHealthyHosts
@@ -815,6 +944,7 @@ module Network.AWS.CodeDeploy
     , rlString
     , rlRevisionType
     , rlS3Location
+    , rlAppSpecContent
     , rlGitHubLocation
 
     -- ** RollbackInfo
@@ -851,6 +981,13 @@ module Network.AWS.CodeDeploy
     , targetGroupInfo
     , tgiName
 
+    -- ** TargetGroupPairInfo
+    , TargetGroupPairInfo
+    , targetGroupPairInfo
+    , tgpiProdTrafficRoute
+    , tgpiTestTrafficRoute
+    , tgpiTargetGroups
+
     -- ** TargetInstances
     , TargetInstances
     , targetInstances
@@ -876,6 +1013,11 @@ module Network.AWS.CodeDeploy
     , trStart
     , trEnd
 
+    -- ** TrafficRoute
+    , TrafficRoute
+    , trafficRoute
+    , trListenerARNs
+
     -- ** TrafficRoutingConfig
     , TrafficRoutingConfig
     , trafficRoutingConfig
@@ -895,7 +1037,7 @@ import Network.AWS.CodeDeploy.AddTagsToOnPremisesInstances
 import Network.AWS.CodeDeploy.BatchGetApplicationRevisions
 import Network.AWS.CodeDeploy.BatchGetApplications
 import Network.AWS.CodeDeploy.BatchGetDeploymentGroups
-import Network.AWS.CodeDeploy.BatchGetDeploymentInstances
+import Network.AWS.CodeDeploy.BatchGetDeploymentTargets
 import Network.AWS.CodeDeploy.BatchGetDeployments
 import Network.AWS.CodeDeploy.BatchGetOnPremisesInstances
 import Network.AWS.CodeDeploy.ContinueDeployment
@@ -913,23 +1055,25 @@ import Network.AWS.CodeDeploy.GetApplicationRevision
 import Network.AWS.CodeDeploy.GetDeployment
 import Network.AWS.CodeDeploy.GetDeploymentConfig
 import Network.AWS.CodeDeploy.GetDeploymentGroup
-import Network.AWS.CodeDeploy.GetDeploymentInstance
+import Network.AWS.CodeDeploy.GetDeploymentTarget
 import Network.AWS.CodeDeploy.GetOnPremisesInstance
 import Network.AWS.CodeDeploy.ListApplicationRevisions
 import Network.AWS.CodeDeploy.ListApplications
 import Network.AWS.CodeDeploy.ListDeploymentConfigs
 import Network.AWS.CodeDeploy.ListDeploymentGroups
-import Network.AWS.CodeDeploy.ListDeploymentInstances
+import Network.AWS.CodeDeploy.ListDeploymentTargets
 import Network.AWS.CodeDeploy.ListDeployments
 import Network.AWS.CodeDeploy.ListGitHubAccountTokenNames
 import Network.AWS.CodeDeploy.ListOnPremisesInstances
+import Network.AWS.CodeDeploy.ListTagsForResource
 import Network.AWS.CodeDeploy.PutLifecycleEventHookExecutionStatus
 import Network.AWS.CodeDeploy.RegisterApplicationRevision
 import Network.AWS.CodeDeploy.RegisterOnPremisesInstance
 import Network.AWS.CodeDeploy.RemoveTagsFromOnPremisesInstances
-import Network.AWS.CodeDeploy.SkipWaitTimeForInstanceTermination
 import Network.AWS.CodeDeploy.StopDeployment
+import Network.AWS.CodeDeploy.TagResource
 import Network.AWS.CodeDeploy.Types
+import Network.AWS.CodeDeploy.UntagResource
 import Network.AWS.CodeDeploy.UpdateApplication
 import Network.AWS.CodeDeploy.UpdateDeploymentGroup
 import Network.AWS.CodeDeploy.Waiters

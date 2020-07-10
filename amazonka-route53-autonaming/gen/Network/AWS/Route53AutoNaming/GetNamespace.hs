@@ -45,10 +45,8 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'getNamespace' smart constructor.
-newtype GetNamespace = GetNamespace'
-  { _gnId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetNamespace = GetNamespace'{_gnId :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetNamespace' with the minimum fields required to make a request.
 --
@@ -58,8 +56,7 @@ newtype GetNamespace = GetNamespace'
 getNamespace
     :: Text -- ^ 'gnId'
     -> GetNamespace
-getNamespace pId_ = GetNamespace' {_gnId = pId_}
-
+getNamespace pId_ = GetNamespace'{_gnId = pId_}
 
 -- | The ID of the namespace that you want to get information about.
 gnId :: Lens' GetNamespace Text
@@ -99,11 +96,10 @@ instance ToQuery GetNamespace where
         toQuery = const mempty
 
 -- | /See:/ 'getNamespaceResponse' smart constructor.
-data GetNamespaceResponse = GetNamespaceResponse'
-  { _gnrsNamespace      :: !(Maybe Namespace)
-  , _gnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetNamespaceResponse = GetNamespaceResponse'{_gnrsNamespace
+                                                  :: !(Maybe Namespace),
+                                                  _gnrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetNamespaceResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +111,9 @@ data GetNamespaceResponse = GetNamespaceResponse'
 getNamespaceResponse
     :: Int -- ^ 'gnrsResponseStatus'
     -> GetNamespaceResponse
-getNamespaceResponse pResponseStatus_ =
-  GetNamespaceResponse'
-    {_gnrsNamespace = Nothing, _gnrsResponseStatus = pResponseStatus_}
-
+getNamespaceResponse pResponseStatus_
+  = GetNamespaceResponse'{_gnrsNamespace = Nothing,
+                          _gnrsResponseStatus = pResponseStatus_}
 
 -- | A complex type that contains information about the specified namespace.
 gnrsNamespace :: Lens' GetNamespaceResponse (Maybe Namespace)

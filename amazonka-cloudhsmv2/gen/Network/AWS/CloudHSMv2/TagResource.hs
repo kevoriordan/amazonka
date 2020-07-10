@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'tagResource' smart constructor.
-data TagResource = TagResource'
-  { _trResourceId :: !Text
-  , _trTagList    :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagResource = TagResource'{_trResourceId ::
+                                !Text,
+                                _trTagList :: ![Tag]}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagResource' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data TagResource = TagResource'
 tagResource
     :: Text -- ^ 'trResourceId'
     -> TagResource
-tagResource pResourceId_ =
-  TagResource' {_trResourceId = pResourceId_, _trTagList = mempty}
-
+tagResource pResourceId_
+  = TagResource'{_trResourceId = pResourceId_,
+                 _trTagList = mempty}
 
 -- | The cluster identifier (ID) for the cluster that you are tagging. To find the cluster ID, use 'DescribeClusters' .
 trResourceId :: Lens' TagResource Text
@@ -108,10 +107,10 @@ instance ToQuery TagResource where
         toQuery = const mempty
 
 -- | /See:/ 'tagResourceResponse' smart constructor.
-newtype TagResourceResponse = TagResourceResponse'
-  { _trrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype TagResourceResponse = TagResourceResponse'{_trrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'TagResourceResponse' with the minimum fields required to make a request.
 --
@@ -121,9 +120,9 @@ newtype TagResourceResponse = TagResourceResponse'
 tagResourceResponse
     :: Int -- ^ 'trrsResponseStatus'
     -> TagResourceResponse
-tagResourceResponse pResponseStatus_ =
-  TagResourceResponse' {_trrsResponseStatus = pResponseStatus_}
-
+tagResourceResponse pResponseStatus_
+  = TagResourceResponse'{_trrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 trrsResponseStatus :: Lens' TagResourceResponse Int

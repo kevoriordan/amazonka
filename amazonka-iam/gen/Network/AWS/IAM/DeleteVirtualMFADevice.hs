@@ -42,24 +42,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteVirtualMFADevice' smart constructor.
-newtype DeleteVirtualMFADevice = DeleteVirtualMFADevice'
-  { _dvmdSerialNumber :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteVirtualMFADevice = DeleteVirtualMFADevice'{_dvmdSerialNumber
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteVirtualMFADevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvmdSerialNumber' - The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the same as the ARN. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@:/-
+-- * 'dvmdSerialNumber' - The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the same as the ARN. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@:/-
 deleteVirtualMFADevice
     :: Text -- ^ 'dvmdSerialNumber'
     -> DeleteVirtualMFADevice
-deleteVirtualMFADevice pSerialNumber_ =
-  DeleteVirtualMFADevice' {_dvmdSerialNumber = pSerialNumber_}
+deleteVirtualMFADevice pSerialNumber_
+  = DeleteVirtualMFADevice'{_dvmdSerialNumber =
+                              pSerialNumber_}
 
-
--- | The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the same as the ARN. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@:/-
+-- | The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the same as the ARN. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: =,.@:/-
 dvmdSerialNumber :: Lens' DeleteVirtualMFADevice Text
 dvmdSerialNumber = lens _dvmdSerialNumber (\ s a -> s{_dvmdSerialNumber = a})
 
@@ -89,16 +89,15 @@ instance ToQuery DeleteVirtualMFADevice where
                "SerialNumber" =: _dvmdSerialNumber]
 
 -- | /See:/ 'deleteVirtualMFADeviceResponse' smart constructor.
-data DeleteVirtualMFADeviceResponse =
-  DeleteVirtualMFADeviceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVirtualMFADeviceResponse = DeleteVirtualMFADeviceResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteVirtualMFADeviceResponse' with the minimum fields required to make a request.
 --
 deleteVirtualMFADeviceResponse
     :: DeleteVirtualMFADeviceResponse
-deleteVirtualMFADeviceResponse = DeleteVirtualMFADeviceResponse'
-
+deleteVirtualMFADeviceResponse
+  = DeleteVirtualMFADeviceResponse'
 
 instance NFData DeleteVirtualMFADeviceResponse where

@@ -18,7 +18,21 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the cors configuration information set for the bucket.
+-- Deletes the @cors@ configuration information set for the bucket.
+--
+--
+-- To use this operation, you must have permission to perform the @s3:PutBucketCORS@ action. The bucket owner has this permission by default and can grant this permission to others. 
+--
+-- For information about @cors@ , see <https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html Enabling Cross-Origin Resource Sharing> in the /Amazon Simple Storage Service Developer Guide/ .
+--
+-- __Related Resources:__ 
+--
+--     * 
+--
+--     * 'RESTOPTIONSobject' 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketCORS
     (
     -- * Creating a Request
@@ -40,23 +54,22 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketCORS' smart constructor.
-newtype DeleteBucketCORS = DeleteBucketCORS'
-  { _dbcBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBucketCORS = DeleteBucketCORS'{_dbcBucket
+                                             :: BucketName}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBucketCORS' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbcBucket' - Undocumented member.
+-- * 'dbcBucket' - Specifies the bucket whose @cors@ configuration is being deleted.
 deleteBucketCORS
     :: BucketName -- ^ 'dbcBucket'
     -> DeleteBucketCORS
-deleteBucketCORS pBucket_ = DeleteBucketCORS' {_dbcBucket = pBucket_}
+deleteBucketCORS pBucket_
+  = DeleteBucketCORS'{_dbcBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | Specifies the bucket whose @cors@ configuration is being deleted.
 dbcBucket :: Lens' DeleteBucketCORS BucketName
 dbcBucket = lens _dbcBucket (\ s a -> s{_dbcBucket = a})
 
@@ -80,16 +93,14 @@ instance ToQuery DeleteBucketCORS where
         toQuery = const (mconcat ["cors"])
 
 -- | /See:/ 'deleteBucketCORSResponse' smart constructor.
-data DeleteBucketCORSResponse =
-  DeleteBucketCORSResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketCORSResponse = DeleteBucketCORSResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteBucketCORSResponse' with the minimum fields required to make a request.
 --
 deleteBucketCORSResponse
     :: DeleteBucketCORSResponse
 deleteBucketCORSResponse = DeleteBucketCORSResponse'
-
 
 instance NFData DeleteBucketCORSResponse where

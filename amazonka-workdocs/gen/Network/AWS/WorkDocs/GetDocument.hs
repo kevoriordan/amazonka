@@ -48,18 +48,17 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'getDocument' smart constructor.
-data GetDocument = GetDocument'
-  { _gdAuthenticationToken   :: !(Maybe (Sensitive Text))
-  , _gdIncludeCustomMetadata :: !(Maybe Bool)
-  , _gdDocumentId            :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetDocument = GetDocument'{_gdAuthenticationToken
+                                :: !(Maybe (Sensitive Text)),
+                                _gdIncludeCustomMetadata :: !(Maybe Bool),
+                                _gdDocumentId :: !Text}
+                     deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDocument' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'gdAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'gdIncludeCustomMetadata' - Set this to @TRUE@ to include custom metadata in the response.
 --
@@ -67,15 +66,12 @@ data GetDocument = GetDocument'
 getDocument
     :: Text -- ^ 'gdDocumentId'
     -> GetDocument
-getDocument pDocumentId_ =
-  GetDocument'
-    { _gdAuthenticationToken = Nothing
-    , _gdIncludeCustomMetadata = Nothing
-    , _gdDocumentId = pDocumentId_
-    }
+getDocument pDocumentId_
+  = GetDocument'{_gdAuthenticationToken = Nothing,
+                 _gdIncludeCustomMetadata = Nothing,
+                 _gdDocumentId = pDocumentId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 gdAuthenticationToken :: Lens' GetDocument (Maybe Text)
 gdAuthenticationToken = lens _gdAuthenticationToken (\ s a -> s{_gdAuthenticationToken = a}) . mapping _Sensitive
 
@@ -119,12 +115,12 @@ instance ToQuery GetDocument where
               ["includeCustomMetadata" =: _gdIncludeCustomMetadata]
 
 -- | /See:/ 'getDocumentResponse' smart constructor.
-data GetDocumentResponse = GetDocumentResponse'
-  { _gdrsCustomMetadata :: !(Maybe (Map Text Text))
-  , _gdrsMetadata       :: !(Maybe DocumentMetadata)
-  , _gdrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetDocumentResponse = GetDocumentResponse'{_gdrsCustomMetadata
+                                                :: !(Maybe (Map Text Text)),
+                                                _gdrsMetadata ::
+                                                !(Maybe DocumentMetadata),
+                                                _gdrsResponseStatus :: !Int}
+                             deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDocumentResponse' with the minimum fields required to make a request.
 --
@@ -138,13 +134,10 @@ data GetDocumentResponse = GetDocumentResponse'
 getDocumentResponse
     :: Int -- ^ 'gdrsResponseStatus'
     -> GetDocumentResponse
-getDocumentResponse pResponseStatus_ =
-  GetDocumentResponse'
-    { _gdrsCustomMetadata = Nothing
-    , _gdrsMetadata = Nothing
-    , _gdrsResponseStatus = pResponseStatus_
-    }
-
+getDocumentResponse pResponseStatus_
+  = GetDocumentResponse'{_gdrsCustomMetadata = Nothing,
+                         _gdrsMetadata = Nothing,
+                         _gdrsResponseStatus = pResponseStatus_}
 
 -- | The custom metadata on the document.
 gdrsCustomMetadata :: Lens' GetDocumentResponse (HashMap Text Text)

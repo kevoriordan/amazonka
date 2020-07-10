@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the APNs channel for an app.
+-- Disables the APNs channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteAPNSChannel
     (
     -- * Creating a Request
@@ -43,24 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAPNSChannel' smart constructor.
-newtype DeleteAPNSChannel = DeleteAPNSChannel'
-  { _dacApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAPNSChannel = DeleteAPNSChannel'{_dacApplicationId
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAPNSChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dacApplicationId' - Undocumented member.
+-- * 'dacApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteAPNSChannel
     :: Text -- ^ 'dacApplicationId'
     -> DeleteAPNSChannel
-deleteAPNSChannel pApplicationId_ =
-  DeleteAPNSChannel' {_dacApplicationId = pApplicationId_}
+deleteAPNSChannel pApplicationId_
+  = DeleteAPNSChannel'{_dacApplicationId =
+                         pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 dacApplicationId :: Lens' DeleteAPNSChannel Text
 dacApplicationId = lens _dacApplicationId (\ s a -> s{_dacApplicationId = a})
 
@@ -94,11 +95,13 @@ instance ToQuery DeleteAPNSChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAPNSChannelResponse' smart constructor.
-data DeleteAPNSChannelResponse = DeleteAPNSChannelResponse'
-  { _dacrsResponseStatus      :: !Int
-  , _dacrsAPNSChannelResponse :: !APNSChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAPNSChannelResponse = DeleteAPNSChannelResponse'{_dacrsResponseStatus
+                                                            :: !Int,
+                                                            _dacrsAPNSChannelResponse
+                                                            ::
+                                                            !APNSChannelResponse}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteAPNSChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +114,12 @@ deleteAPNSChannelResponse
     :: Int -- ^ 'dacrsResponseStatus'
     -> APNSChannelResponse -- ^ 'dacrsAPNSChannelResponse'
     -> DeleteAPNSChannelResponse
-deleteAPNSChannelResponse pResponseStatus_ pAPNSChannelResponse_ =
-  DeleteAPNSChannelResponse'
-    { _dacrsResponseStatus = pResponseStatus_
-    , _dacrsAPNSChannelResponse = pAPNSChannelResponse_
-    }
-
+deleteAPNSChannelResponse pResponseStatus_
+  pAPNSChannelResponse_
+  = DeleteAPNSChannelResponse'{_dacrsResponseStatus =
+                                 pResponseStatus_,
+                               _dacrsAPNSChannelResponse =
+                                 pAPNSChannelResponse_}
 
 -- | -- | The response status code.
 dacrsResponseStatus :: Lens' DeleteAPNSChannelResponse Int

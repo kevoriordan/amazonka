@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the email sending status of the Amazon SES account.
+-- Returns the email sending status of the Amazon SES account for the current region.
 --
 --
 -- You can execute this operation no more than once per second.
@@ -45,17 +45,15 @@ import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
 -- | /See:/ 'getAccountSendingEnabled' smart constructor.
-data GetAccountSendingEnabled =
-  GetAccountSendingEnabled'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountSendingEnabled = GetAccountSendingEnabled'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetAccountSendingEnabled' with the minimum fields required to make a request.
 --
 getAccountSendingEnabled
     :: GetAccountSendingEnabled
 getAccountSendingEnabled = GetAccountSendingEnabled'
-
 
 instance AWSRequest GetAccountSendingEnabled where
         type Rs GetAccountSendingEnabled =
@@ -85,33 +83,37 @@ instance ToQuery GetAccountSendingEnabled where
                     ("GetAccountSendingEnabled" :: ByteString),
                   "Version" =: ("2010-12-01" :: ByteString)])
 
--- | Represents a request to return the email sending status for your Amazon SES account.
+-- | Represents a request to return the email sending status for your Amazon SES account in the current AWS Region.
 --
 --
 --
 -- /See:/ 'getAccountSendingEnabledResponse' smart constructor.
-data GetAccountSendingEnabledResponse = GetAccountSendingEnabledResponse'
-  { _gasersEnabled        :: !(Maybe Bool)
-  , _gasersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountSendingEnabledResponse = GetAccountSendingEnabledResponse'{_gasersEnabled
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Bool),
+                                                                          _gasersResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetAccountSendingEnabledResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gasersEnabled' - Describes whether email sending is enabled or disabled for your Amazon SES account.
+-- * 'gasersEnabled' - Describes whether email sending is enabled or disabled for your Amazon SES account in the current AWS Region.
 --
 -- * 'gasersResponseStatus' - -- | The response status code.
 getAccountSendingEnabledResponse
     :: Int -- ^ 'gasersResponseStatus'
     -> GetAccountSendingEnabledResponse
-getAccountSendingEnabledResponse pResponseStatus_ =
-  GetAccountSendingEnabledResponse'
-    {_gasersEnabled = Nothing, _gasersResponseStatus = pResponseStatus_}
+getAccountSendingEnabledResponse pResponseStatus_
+  = GetAccountSendingEnabledResponse'{_gasersEnabled =
+                                        Nothing,
+                                      _gasersResponseStatus = pResponseStatus_}
 
-
--- | Describes whether email sending is enabled or disabled for your Amazon SES account.
+-- | Describes whether email sending is enabled or disabled for your Amazon SES account in the current AWS Region.
 gasersEnabled :: Lens' GetAccountSendingEnabledResponse (Maybe Bool)
 gasersEnabled = lens _gasersEnabled (\ s a -> s{_gasersEnabled = a})
 

@@ -45,13 +45,19 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'removeResourcePermission' smart constructor.
-data RemoveResourcePermission = RemoveResourcePermission'
-  { _rrpPrincipalType       :: !(Maybe PrincipalType)
-  , _rrpAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _rrpResourceId          :: !Text
-  , _rrpPrincipalId         :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data RemoveResourcePermission = RemoveResourcePermission'{_rrpPrincipalType
+                                                          ::
+                                                          !(Maybe
+                                                              PrincipalType),
+                                                          _rrpAuthenticationToken
+                                                          ::
+                                                          !(Maybe
+                                                              (Sensitive Text)),
+                                                          _rrpResourceId ::
+                                                          !Text,
+                                                          _rrpPrincipalId ::
+                                                          !Text}
+                                  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RemoveResourcePermission' with the minimum fields required to make a request.
 --
@@ -59,7 +65,7 @@ data RemoveResourcePermission = RemoveResourcePermission'
 --
 -- * 'rrpPrincipalType' - The principal type of the resource.
 --
--- * 'rrpAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'rrpAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'rrpResourceId' - The ID of the resource.
 --
@@ -68,20 +74,18 @@ removeResourcePermission
     :: Text -- ^ 'rrpResourceId'
     -> Text -- ^ 'rrpPrincipalId'
     -> RemoveResourcePermission
-removeResourcePermission pResourceId_ pPrincipalId_ =
-  RemoveResourcePermission'
-    { _rrpPrincipalType = Nothing
-    , _rrpAuthenticationToken = Nothing
-    , _rrpResourceId = pResourceId_
-    , _rrpPrincipalId = pPrincipalId_
-    }
-
+removeResourcePermission pResourceId_ pPrincipalId_
+  = RemoveResourcePermission'{_rrpPrincipalType =
+                                Nothing,
+                              _rrpAuthenticationToken = Nothing,
+                              _rrpResourceId = pResourceId_,
+                              _rrpPrincipalId = pPrincipalId_}
 
 -- | The principal type of the resource.
 rrpPrincipalType :: Lens' RemoveResourcePermission (Maybe PrincipalType)
 rrpPrincipalType = lens _rrpPrincipalType (\ s a -> s{_rrpPrincipalType = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 rrpAuthenticationToken :: Lens' RemoveResourcePermission (Maybe Text)
 rrpAuthenticationToken = lens _rrpAuthenticationToken (\ s a -> s{_rrpAuthenticationToken = a}) . mapping _Sensitive
 
@@ -122,17 +126,16 @@ instance ToQuery RemoveResourcePermission where
           = mconcat ["type" =: _rrpPrincipalType]
 
 -- | /See:/ 'removeResourcePermissionResponse' smart constructor.
-data RemoveResourcePermissionResponse =
-  RemoveResourcePermissionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveResourcePermissionResponse = RemoveResourcePermissionResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'RemoveResourcePermissionResponse' with the minimum fields required to make a request.
 --
 removeResourcePermissionResponse
     :: RemoveResourcePermissionResponse
-removeResourcePermissionResponse = RemoveResourcePermissionResponse'
-
+removeResourcePermissionResponse
+  = RemoveResourcePermissionResponse'
 
 instance NFData RemoveResourcePermissionResponse
          where

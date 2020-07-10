@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getModelTemplate' smart constructor.
-data GetModelTemplate = GetModelTemplate'
-  { _gmtRestAPIId :: !Text
-  , _gmtModelName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetModelTemplate = GetModelTemplate'{_gmtRestAPIId
+                                          :: !Text,
+                                          _gmtModelName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetModelTemplate' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ getModelTemplate
     :: Text -- ^ 'gmtRestAPIId'
     -> Text -- ^ 'gmtModelName'
     -> GetModelTemplate
-getModelTemplate pRestAPIId_ pModelName_ =
-  GetModelTemplate' {_gmtRestAPIId = pRestAPIId_, _gmtModelName = pModelName_}
-
+getModelTemplate pRestAPIId_ pModelName_
+  = GetModelTemplate'{_gmtRestAPIId = pRestAPIId_,
+                      _gmtModelName = pModelName_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 gmtRestAPIId :: Lens' GetModelTemplate Text
@@ -110,31 +109,31 @@ instance ToQuery GetModelTemplate where
 -- | Represents a mapping template used to transform a payload.
 --
 --
--- <http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings Mapping Templates>
+-- <https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings Mapping Templates> 
 --
 -- /See:/ 'getModelTemplateResponse' smart constructor.
-data GetModelTemplateResponse = GetModelTemplateResponse'
-  { _gmtrsValue          :: !(Maybe Text)
-  , _gmtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetModelTemplateResponse = GetModelTemplateResponse'{_gmtrsValue
+                                                          :: !(Maybe Text),
+                                                          _gmtrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetModelTemplateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gmtrsValue' - The Apache <http://velocity.apache.org/engine/devel/vtl-reference-guide.html Velocity Template Language (VTL)> template content used for the template resource.
+-- * 'gmtrsValue' - The Apache <https://velocity.apache.org/engine/devel/vtl-reference-guide.html Velocity Template Language (VTL)> template content used for the template resource.
 --
 -- * 'gmtrsResponseStatus' - -- | The response status code.
 getModelTemplateResponse
     :: Int -- ^ 'gmtrsResponseStatus'
     -> GetModelTemplateResponse
-getModelTemplateResponse pResponseStatus_ =
-  GetModelTemplateResponse'
-    {_gmtrsValue = Nothing, _gmtrsResponseStatus = pResponseStatus_}
+getModelTemplateResponse pResponseStatus_
+  = GetModelTemplateResponse'{_gmtrsValue = Nothing,
+                              _gmtrsResponseStatus = pResponseStatus_}
 
-
--- | The Apache <http://velocity.apache.org/engine/devel/vtl-reference-guide.html Velocity Template Language (VTL)> template content used for the template resource.
+-- | The Apache <https://velocity.apache.org/engine/devel/vtl-reference-guide.html Velocity Template Language (VTL)> template content used for the template resource.
 gmtrsValue :: Lens' GetModelTemplateResponse (Maybe Text)
 gmtrsValue = lens _gmtrsValue (\ s a -> s{_gmtrsValue = a})
 

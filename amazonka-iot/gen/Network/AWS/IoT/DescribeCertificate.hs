@@ -49,10 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeCertificate' smart constructor.
-newtype DescribeCertificate = DescribeCertificate'
-  { _desCertificateId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeCertificate = DescribeCertificate'{_desCertificateId
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeCertificate' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DescribeCertificate = DescribeCertificate'
 describeCertificate
     :: Text -- ^ 'desCertificateId'
     -> DescribeCertificate
-describeCertificate pCertificateId_ =
-  DescribeCertificate' {_desCertificateId = pCertificateId_}
-
+describeCertificate pCertificateId_
+  = DescribeCertificate'{_desCertificateId =
+                           pCertificateId_}
 
 -- | The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
 desCertificateId :: Lens' DescribeCertificate Text
@@ -100,11 +100,14 @@ instance ToQuery DescribeCertificate where
 --
 --
 -- /See:/ 'describeCertificateResponse' smart constructor.
-data DescribeCertificateResponse = DescribeCertificateResponse'
-  { _dcrsCertificateDescription :: !(Maybe CertificateDescription)
-  , _dcrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCertificateResponse = DescribeCertificateResponse'{_dcrsCertificateDescription
+                                                                ::
+                                                                !(Maybe
+                                                                    CertificateDescription),
+                                                                _dcrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeCertificateResponse' with the minimum fields required to make a request.
 --
@@ -116,12 +119,10 @@ data DescribeCertificateResponse = DescribeCertificateResponse'
 describeCertificateResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeCertificateResponse
-describeCertificateResponse pResponseStatus_ =
-  DescribeCertificateResponse'
-    { _dcrsCertificateDescription = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
-
+describeCertificateResponse pResponseStatus_
+  = DescribeCertificateResponse'{_dcrsCertificateDescription
+                                   = Nothing,
+                                 _dcrsResponseStatus = pResponseStatus_}
 
 -- | The description of the certificate.
 dcrsCertificateDescription :: Lens' DescribeCertificateResponse (Maybe CertificateDescription)

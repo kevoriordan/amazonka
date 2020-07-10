@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Route53Domains where
 
 import Data.Proxy
-import Network.AWS.Route53Domains
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.Route53Domains.Internal
 import Test.Tasty
+import Network.AWS.Route53Domains
+import Test.AWS.Route53Domains.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -42,6 +42,9 @@ import Test.Tasty
 --
 --         , requestGetOperationDetail $
 --             getOperationDetail
+--
+--         , requestRejectDomainTransferFromAnotherAWSAccount $
+--             rejectDomainTransferFromAnotherAWSAccount
 --
 --         , requestEnableDomainAutoRenew $
 --             enableDomainAutoRenew
@@ -76,6 +79,12 @@ import Test.Tasty
 --         , requestCheckDomainAvailability $
 --             checkDomainAvailability
 --
+--         , requestTransferDomainToAnotherAWSAccount $
+--             transferDomainToAnotherAWSAccount
+--
+--         , requestAcceptDomainTransferFromAnotherAWSAccount $
+--             acceptDomainTransferFromAnotherAWSAccount
+--
 --         , requestGetContactReachabilityStatus $
 --             getContactReachabilityStatus
 --
@@ -100,6 +109,9 @@ import Test.Tasty
 --         , requestListDomains $
 --             listDomains
 --
+--         , requestCancelDomainTransferToAnotherAWSAccount $
+--             cancelDomainTransferToAnotherAWSAccount
+--
 --           ]
 
 --     , testGroup "response"
@@ -117,6 +129,9 @@ import Test.Tasty
 --
 --         , responseGetOperationDetail $
 --             getOperationDetailResponse
+--
+--         , responseRejectDomainTransferFromAnotherAWSAccount $
+--             rejectDomainTransferFromAnotherAWSAccountResponse
 --
 --         , responseEnableDomainAutoRenew $
 --             enableDomainAutoRenewResponse
@@ -151,6 +166,12 @@ import Test.Tasty
 --         , responseCheckDomainAvailability $
 --             checkDomainAvailabilityResponse
 --
+--         , responseTransferDomainToAnotherAWSAccount $
+--             transferDomainToAnotherAWSAccountResponse
+--
+--         , responseAcceptDomainTransferFromAnotherAWSAccount $
+--             acceptDomainTransferFromAnotherAWSAccountResponse
+--
 --         , responseGetContactReachabilityStatus $
 --             getContactReachabilityStatusResponse
 --
@@ -174,6 +195,9 @@ import Test.Tasty
 --
 --         , responseListDomains $
 --             listDomainsResponse
+--
+--         , responseCancelDomainTransferToAnotherAWSAccount $
+--             cancelDomainTransferToAnotherAWSAccountResponse
 --
 --           ]
 --     ]
@@ -204,6 +228,11 @@ requestGetOperationDetail :: GetOperationDetail -> TestTree
 requestGetOperationDetail = req
     "GetOperationDetail"
     "fixture/GetOperationDetail.yaml"
+
+requestRejectDomainTransferFromAnotherAWSAccount :: RejectDomainTransferFromAnotherAWSAccount -> TestTree
+requestRejectDomainTransferFromAnotherAWSAccount = req
+    "RejectDomainTransferFromAnotherAWSAccount"
+    "fixture/RejectDomainTransferFromAnotherAWSAccount.yaml"
 
 requestEnableDomainAutoRenew :: EnableDomainAutoRenew -> TestTree
 requestEnableDomainAutoRenew = req
@@ -260,6 +289,16 @@ requestCheckDomainAvailability = req
     "CheckDomainAvailability"
     "fixture/CheckDomainAvailability.yaml"
 
+requestTransferDomainToAnotherAWSAccount :: TransferDomainToAnotherAWSAccount -> TestTree
+requestTransferDomainToAnotherAWSAccount = req
+    "TransferDomainToAnotherAWSAccount"
+    "fixture/TransferDomainToAnotherAWSAccount.yaml"
+
+requestAcceptDomainTransferFromAnotherAWSAccount :: AcceptDomainTransferFromAnotherAWSAccount -> TestTree
+requestAcceptDomainTransferFromAnotherAWSAccount = req
+    "AcceptDomainTransferFromAnotherAWSAccount"
+    "fixture/AcceptDomainTransferFromAnotherAWSAccount.yaml"
+
 requestGetContactReachabilityStatus :: GetContactReachabilityStatus -> TestTree
 requestGetContactReachabilityStatus = req
     "GetContactReachabilityStatus"
@@ -300,6 +339,11 @@ requestListDomains = req
     "ListDomains"
     "fixture/ListDomains.yaml"
 
+requestCancelDomainTransferToAnotherAWSAccount :: CancelDomainTransferToAnotherAWSAccount -> TestTree
+requestCancelDomainTransferToAnotherAWSAccount = req
+    "CancelDomainTransferToAnotherAWSAccount"
+    "fixture/CancelDomainTransferToAnotherAWSAccount.yaml"
+
 -- Responses
 
 responseListOperations :: ListOperationsResponse -> TestTree
@@ -336,6 +380,13 @@ responseGetOperationDetail = res
     "fixture/GetOperationDetailResponse.proto"
     route53Domains
     (Proxy :: Proxy GetOperationDetail)
+
+responseRejectDomainTransferFromAnotherAWSAccount :: RejectDomainTransferFromAnotherAWSAccountResponse -> TestTree
+responseRejectDomainTransferFromAnotherAWSAccount = res
+    "RejectDomainTransferFromAnotherAWSAccountResponse"
+    "fixture/RejectDomainTransferFromAnotherAWSAccountResponse.proto"
+    route53Domains
+    (Proxy :: Proxy RejectDomainTransferFromAnotherAWSAccount)
 
 responseEnableDomainAutoRenew :: EnableDomainAutoRenewResponse -> TestTree
 responseEnableDomainAutoRenew = res
@@ -414,6 +465,20 @@ responseCheckDomainAvailability = res
     route53Domains
     (Proxy :: Proxy CheckDomainAvailability)
 
+responseTransferDomainToAnotherAWSAccount :: TransferDomainToAnotherAWSAccountResponse -> TestTree
+responseTransferDomainToAnotherAWSAccount = res
+    "TransferDomainToAnotherAWSAccountResponse"
+    "fixture/TransferDomainToAnotherAWSAccountResponse.proto"
+    route53Domains
+    (Proxy :: Proxy TransferDomainToAnotherAWSAccount)
+
+responseAcceptDomainTransferFromAnotherAWSAccount :: AcceptDomainTransferFromAnotherAWSAccountResponse -> TestTree
+responseAcceptDomainTransferFromAnotherAWSAccount = res
+    "AcceptDomainTransferFromAnotherAWSAccountResponse"
+    "fixture/AcceptDomainTransferFromAnotherAWSAccountResponse.proto"
+    route53Domains
+    (Proxy :: Proxy AcceptDomainTransferFromAnotherAWSAccount)
+
 responseGetContactReachabilityStatus :: GetContactReachabilityStatusResponse -> TestTree
 responseGetContactReachabilityStatus = res
     "GetContactReachabilityStatusResponse"
@@ -469,3 +534,10 @@ responseListDomains = res
     "fixture/ListDomainsResponse.proto"
     route53Domains
     (Proxy :: Proxy ListDomains)
+
+responseCancelDomainTransferToAnotherAWSAccount :: CancelDomainTransferToAnotherAWSAccountResponse -> TestTree
+responseCancelDomainTransferToAnotherAWSAccount = res
+    "CancelDomainTransferToAnotherAWSAccountResponse"
+    "fixture/CancelDomainTransferToAnotherAWSAccountResponse.proto"
+    route53Domains
+    (Proxy :: Proxy CancelDomainTransferToAnotherAWSAccount)

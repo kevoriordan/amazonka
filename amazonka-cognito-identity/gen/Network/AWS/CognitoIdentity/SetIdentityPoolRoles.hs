@@ -50,12 +50,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setIdentityPoolRoles' smart constructor.
-data SetIdentityPoolRoles = SetIdentityPoolRoles'
-  { _siprRoleMappings   :: !(Maybe (Map Text RoleMapping))
-  , _siprIdentityPoolId :: !Text
-  , _siprRoles          :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetIdentityPoolRoles = SetIdentityPoolRoles'{_siprRoleMappings
+                                                  ::
+                                                  !(Maybe
+                                                      (Map Text RoleMapping)),
+                                                  _siprIdentityPoolId :: !Text,
+                                                  _siprRoles ::
+                                                  !(Map Text Text)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetIdentityPoolRoles' with the minimum fields required to make a request.
 --
@@ -69,13 +71,10 @@ data SetIdentityPoolRoles = SetIdentityPoolRoles'
 setIdentityPoolRoles
     :: Text -- ^ 'siprIdentityPoolId'
     -> SetIdentityPoolRoles
-setIdentityPoolRoles pIdentityPoolId_ =
-  SetIdentityPoolRoles'
-    { _siprRoleMappings = Nothing
-    , _siprIdentityPoolId = pIdentityPoolId_
-    , _siprRoles = mempty
-    }
-
+setIdentityPoolRoles pIdentityPoolId_
+  = SetIdentityPoolRoles'{_siprRoleMappings = Nothing,
+                          _siprIdentityPoolId = pIdentityPoolId_,
+                          _siprRoles = mempty}
 
 -- | How users for a specific identity provider are to mapped to roles. This is a string to 'RoleMapping' object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id". Up to 25 rules can be specified per identity provider.
 siprRoleMappings :: Lens' SetIdentityPoolRoles (HashMap Text RoleMapping)
@@ -124,16 +123,15 @@ instance ToQuery SetIdentityPoolRoles where
         toQuery = const mempty
 
 -- | /See:/ 'setIdentityPoolRolesResponse' smart constructor.
-data SetIdentityPoolRolesResponse =
-  SetIdentityPoolRolesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetIdentityPoolRolesResponse = SetIdentityPoolRolesResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'SetIdentityPoolRolesResponse' with the minimum fields required to make a request.
 --
 setIdentityPoolRolesResponse
     :: SetIdentityPoolRolesResponse
-setIdentityPoolRolesResponse = SetIdentityPoolRolesResponse'
-
+setIdentityPoolRolesResponse
+  = SetIdentityPoolRolesResponse'
 
 instance NFData SetIdentityPoolRolesResponse where

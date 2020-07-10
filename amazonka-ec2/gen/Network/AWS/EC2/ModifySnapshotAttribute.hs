@@ -18,10 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single API call. If you need to both add and remove account IDs for a snapshot, you must use multiple API calls.
+-- Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single operation. If you need to both add and remove account IDs for a snapshot, you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation.
 --
 --
--- For more information on modifying snapshot permissions, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html Sharing Snapshots> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Encrypted snapshots and snapshots with AWS Marketplace product codes cannot be made public. Snapshots encrypted with your default CMK cannot be shared with other accounts.
+--
+-- For more information about modifying snapshot permissions, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html Sharing Snapshots> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.ModifySnapshotAttribute
     (
@@ -49,27 +51,32 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for ModifySnapshotAttribute.
---
---
---
--- /See:/ 'modifySnapshotAttribute' smart constructor.
-data ModifySnapshotAttribute = ModifySnapshotAttribute'
-  { _msaAttribute              :: !(Maybe SnapshotAttributeName)
-  , _msaCreateVolumePermission :: !(Maybe CreateVolumePermissionModifications)
-  , _msaUserIds                :: !(Maybe [Text])
-  , _msaGroupNames             :: !(Maybe [Text])
-  , _msaOperationType          :: !(Maybe OperationType)
-  , _msaDryRun                 :: !(Maybe Bool)
-  , _msaSnapshotId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'modifySnapshotAttribute' smart constructor.
+data ModifySnapshotAttribute = ModifySnapshotAttribute'{_msaAttribute
+                                                        ::
+                                                        !(Maybe
+                                                            SnapshotAttributeName),
+                                                        _msaCreateVolumePermission
+                                                        ::
+                                                        !(Maybe
+                                                            CreateVolumePermissionModifications),
+                                                        _msaUserIds ::
+                                                        !(Maybe [Text]),
+                                                        _msaGroupNames ::
+                                                        !(Maybe [Text]),
+                                                        _msaOperationType ::
+                                                        !(Maybe OperationType),
+                                                        _msaDryRun ::
+                                                        !(Maybe Bool),
+                                                        _msaSnapshotId :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ModifySnapshotAttribute' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'msaAttribute' - The snapshot attribute to modify.
+-- * 'msaAttribute' - The snapshot attribute to modify. Only volume creation permissions can be modified.
 --
 -- * 'msaCreateVolumePermission' - A JSON representation of the snapshot attribute modification.
 --
@@ -85,19 +92,14 @@ data ModifySnapshotAttribute = ModifySnapshotAttribute'
 modifySnapshotAttribute
     :: Text -- ^ 'msaSnapshotId'
     -> ModifySnapshotAttribute
-modifySnapshotAttribute pSnapshotId_ =
-  ModifySnapshotAttribute'
-    { _msaAttribute = Nothing
-    , _msaCreateVolumePermission = Nothing
-    , _msaUserIds = Nothing
-    , _msaGroupNames = Nothing
-    , _msaOperationType = Nothing
-    , _msaDryRun = Nothing
-    , _msaSnapshotId = pSnapshotId_
-    }
+modifySnapshotAttribute pSnapshotId_
+  = ModifySnapshotAttribute'{_msaAttribute = Nothing,
+                             _msaCreateVolumePermission = Nothing,
+                             _msaUserIds = Nothing, _msaGroupNames = Nothing,
+                             _msaOperationType = Nothing, _msaDryRun = Nothing,
+                             _msaSnapshotId = pSnapshotId_}
 
-
--- | The snapshot attribute to modify.
+-- | The snapshot attribute to modify. Only volume creation permissions can be modified.
 msaAttribute :: Lens' ModifySnapshotAttribute (Maybe SnapshotAttributeName)
 msaAttribute = lens _msaAttribute (\ s a -> s{_msaAttribute = a})
 
@@ -158,16 +160,15 @@ instance ToQuery ModifySnapshotAttribute where
                "SnapshotId" =: _msaSnapshotId]
 
 -- | /See:/ 'modifySnapshotAttributeResponse' smart constructor.
-data ModifySnapshotAttributeResponse =
-  ModifySnapshotAttributeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifySnapshotAttributeResponse = ModifySnapshotAttributeResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ModifySnapshotAttributeResponse' with the minimum fields required to make a request.
 --
 modifySnapshotAttributeResponse
     :: ModifySnapshotAttributeResponse
-modifySnapshotAttributeResponse = ModifySnapshotAttributeResponse'
-
+modifySnapshotAttributeResponse
+  = ModifySnapshotAttributeResponse'
 
 instance NFData ModifySnapshotAttributeResponse where

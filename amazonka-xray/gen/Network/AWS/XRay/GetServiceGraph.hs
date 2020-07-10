@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
+-- Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the <https://docs.aws.amazon.com/xray/index.html AWS X-Ray SDK> . Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
 --
 --
 --
@@ -30,6 +30,8 @@ module Network.AWS.XRay.GetServiceGraph
     , GetServiceGraph
     -- * Request Lenses
     , gsgNextToken
+    , gsgGroupARN
+    , gsgGroupName
     , gsgStartTime
     , gsgEndTime
 
@@ -37,6 +39,7 @@ module Network.AWS.XRay.GetServiceGraph
     , getServiceGraphResponse
     , GetServiceGraphResponse
     -- * Response Lenses
+    , gsgrsContainsOldGroupVersions
     , gsgrsStartTime
     , gsgrsNextToken
     , gsgrsEndTime
@@ -53,43 +56,54 @@ import Network.AWS.XRay.Types
 import Network.AWS.XRay.Types.Product
 
 -- | /See:/ 'getServiceGraph' smart constructor.
-data GetServiceGraph = GetServiceGraph'
-  { _gsgNextToken :: !(Maybe Text)
-  , _gsgStartTime :: !POSIX
-  , _gsgEndTime   :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetServiceGraph = GetServiceGraph'{_gsgNextToken
+                                        :: !(Maybe Text),
+                                        _gsgGroupARN :: !(Maybe Text),
+                                        _gsgGroupName :: !(Maybe Text),
+                                        _gsgStartTime :: !POSIX,
+                                        _gsgEndTime :: !POSIX}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetServiceGraph' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsgNextToken' - Pagination token. Not used.
+-- * 'gsgNextToken' - Pagination token.
+--
+-- * 'gsgGroupARN' - The ARN of a group to generate a graph based on.
+--
+-- * 'gsgGroupName' - The name of a group to generate a graph based on.
 --
 -- * 'gsgStartTime' - The start of the time frame for which to generate a graph.
 --
--- * 'gsgEndTime' - The end of the time frame for which to generate a graph.
+-- * 'gsgEndTime' - The end of the timeframe for which to generate a graph.
 getServiceGraph
     :: UTCTime -- ^ 'gsgStartTime'
     -> UTCTime -- ^ 'gsgEndTime'
     -> GetServiceGraph
-getServiceGraph pStartTime_ pEndTime_ =
-  GetServiceGraph'
-    { _gsgNextToken = Nothing
-    , _gsgStartTime = _Time # pStartTime_
-    , _gsgEndTime = _Time # pEndTime_
-    }
+getServiceGraph pStartTime_ pEndTime_
+  = GetServiceGraph'{_gsgNextToken = Nothing,
+                     _gsgGroupARN = Nothing, _gsgGroupName = Nothing,
+                     _gsgStartTime = _Time # pStartTime_,
+                     _gsgEndTime = _Time # pEndTime_}
 
-
--- | Pagination token. Not used.
+-- | Pagination token.
 gsgNextToken :: Lens' GetServiceGraph (Maybe Text)
 gsgNextToken = lens _gsgNextToken (\ s a -> s{_gsgNextToken = a})
+
+-- | The ARN of a group to generate a graph based on.
+gsgGroupARN :: Lens' GetServiceGraph (Maybe Text)
+gsgGroupARN = lens _gsgGroupARN (\ s a -> s{_gsgGroupARN = a})
+
+-- | The name of a group to generate a graph based on.
+gsgGroupName :: Lens' GetServiceGraph (Maybe Text)
+gsgGroupName = lens _gsgGroupName (\ s a -> s{_gsgGroupName = a})
 
 -- | The start of the time frame for which to generate a graph.
 gsgStartTime :: Lens' GetServiceGraph UTCTime
 gsgStartTime = lens _gsgStartTime (\ s a -> s{_gsgStartTime = a}) . _Time
 
--- | The end of the time frame for which to generate a graph.
+-- | The end of the timeframe for which to generate a graph.
 gsgEndTime :: Lens' GetServiceGraph UTCTime
 gsgEndTime = lens _gsgEndTime (\ s a -> s{_gsgEndTime = a}) . _Time
 
@@ -107,8 +121,10 @@ instance AWSRequest GetServiceGraph where
           = receiveJSON
               (\ s h x ->
                  GetServiceGraphResponse' <$>
-                   (x .?> "StartTime") <*> (x .?> "NextToken") <*>
-                     (x .?> "EndTime")
+                   (x .?> "ContainsOldGroupVersions") <*>
+                     (x .?> "StartTime")
+                     <*> (x .?> "NextToken")
+                     <*> (x .?> "EndTime")
                      <*> (x .?> "Services" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
@@ -124,6 +140,8 @@ instance ToJSON GetServiceGraph where
           = object
               (catMaybes
                  [("NextToken" .=) <$> _gsgNextToken,
+                  ("GroupARN" .=) <$> _gsgGroupARN,
+                  ("GroupName" .=) <$> _gsgGroupName,
                   Just ("StartTime" .= _gsgStartTime),
                   Just ("EndTime" .= _gsgEndTime)])
 
@@ -134,22 +152,30 @@ instance ToQuery GetServiceGraph where
         toQuery = const mempty
 
 -- | /See:/ 'getServiceGraphResponse' smart constructor.
-data GetServiceGraphResponse = GetServiceGraphResponse'
-  { _gsgrsStartTime      :: !(Maybe POSIX)
-  , _gsgrsNextToken      :: !(Maybe Text)
-  , _gsgrsEndTime        :: !(Maybe POSIX)
-  , _gsgrsServices       :: !(Maybe [ServiceInfo])
-  , _gsgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetServiceGraphResponse = GetServiceGraphResponse'{_gsgrsContainsOldGroupVersions
+                                                        :: !(Maybe Bool),
+                                                        _gsgrsStartTime ::
+                                                        !(Maybe POSIX),
+                                                        _gsgrsNextToken ::
+                                                        !(Maybe Text),
+                                                        _gsgrsEndTime ::
+                                                        !(Maybe POSIX),
+                                                        _gsgrsServices ::
+                                                        !(Maybe [ServiceInfo]),
+                                                        _gsgrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetServiceGraphResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gsgrsContainsOldGroupVersions' - A flag indicating whether the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.
+--
 -- * 'gsgrsStartTime' - The start of the time frame for which the graph was generated.
 --
--- * 'gsgrsNextToken' - Pagination token. Not used.
+-- * 'gsgrsNextToken' - Pagination token.
 --
 -- * 'gsgrsEndTime' - The end of the time frame for which the graph was generated.
 --
@@ -159,21 +185,23 @@ data GetServiceGraphResponse = GetServiceGraphResponse'
 getServiceGraphResponse
     :: Int -- ^ 'gsgrsResponseStatus'
     -> GetServiceGraphResponse
-getServiceGraphResponse pResponseStatus_ =
-  GetServiceGraphResponse'
-    { _gsgrsStartTime = Nothing
-    , _gsgrsNextToken = Nothing
-    , _gsgrsEndTime = Nothing
-    , _gsgrsServices = Nothing
-    , _gsgrsResponseStatus = pResponseStatus_
-    }
+getServiceGraphResponse pResponseStatus_
+  = GetServiceGraphResponse'{_gsgrsContainsOldGroupVersions
+                               = Nothing,
+                             _gsgrsStartTime = Nothing,
+                             _gsgrsNextToken = Nothing, _gsgrsEndTime = Nothing,
+                             _gsgrsServices = Nothing,
+                             _gsgrsResponseStatus = pResponseStatus_}
 
+-- | A flag indicating whether the group's filter expression has been consistent, or if the returned service graph may show traces from an older version of the group's filter expression.
+gsgrsContainsOldGroupVersions :: Lens' GetServiceGraphResponse (Maybe Bool)
+gsgrsContainsOldGroupVersions = lens _gsgrsContainsOldGroupVersions (\ s a -> s{_gsgrsContainsOldGroupVersions = a})
 
 -- | The start of the time frame for which the graph was generated.
 gsgrsStartTime :: Lens' GetServiceGraphResponse (Maybe UTCTime)
 gsgrsStartTime = lens _gsgrsStartTime (\ s a -> s{_gsgrsStartTime = a}) . mapping _Time
 
--- | Pagination token. Not used.
+-- | Pagination token.
 gsgrsNextToken :: Lens' GetServiceGraphResponse (Maybe Text)
 gsgrsNextToken = lens _gsgrsNextToken (\ s a -> s{_gsgrsNextToken = a})
 

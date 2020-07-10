@@ -48,12 +48,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createLoggerDefinitionVersion' smart constructor.
-data CreateLoggerDefinitionVersion = CreateLoggerDefinitionVersion'
-  { _cldvLoggers            :: !(Maybe [GreengrassLogger])
-  , _cldvAmznClientToken    :: !(Maybe Text)
-  , _cldvLoggerDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateLoggerDefinitionVersion = CreateLoggerDefinitionVersion'{_cldvLoggers
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [GreengrassLogger]),
+                                                                    _cldvAmznClientToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _cldvLoggerDefinitionId
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateLoggerDefinitionVersion' with the minimum fields required to make a request.
 --
@@ -67,13 +73,12 @@ data CreateLoggerDefinitionVersion = CreateLoggerDefinitionVersion'
 createLoggerDefinitionVersion
     :: Text -- ^ 'cldvLoggerDefinitionId'
     -> CreateLoggerDefinitionVersion
-createLoggerDefinitionVersion pLoggerDefinitionId_ =
-  CreateLoggerDefinitionVersion'
-    { _cldvLoggers = Nothing
-    , _cldvAmznClientToken = Nothing
-    , _cldvLoggerDefinitionId = pLoggerDefinitionId_
-    }
-
+createLoggerDefinitionVersion pLoggerDefinitionId_
+  = CreateLoggerDefinitionVersion'{_cldvLoggers =
+                                     Nothing,
+                                   _cldvAmznClientToken = Nothing,
+                                   _cldvLoggerDefinitionId =
+                                     pLoggerDefinitionId_}
 
 -- | A list of loggers.
 cldvLoggers :: Lens' CreateLoggerDefinitionVersion [GreengrassLogger]
@@ -128,14 +133,27 @@ instance ToQuery CreateLoggerDefinitionVersion where
         toQuery = const mempty
 
 -- | /See:/ 'createLoggerDefinitionVersionResponse' smart constructor.
-data CreateLoggerDefinitionVersionResponse = CreateLoggerDefinitionVersionResponse'
-  { _cldvrsARN               :: !(Maybe Text)
-  , _cldvrsCreationTimestamp :: !(Maybe Text)
-  , _cldvrsVersion           :: !(Maybe Text)
-  , _cldvrsId                :: !(Maybe Text)
-  , _cldvrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateLoggerDefinitionVersionResponse = CreateLoggerDefinitionVersionResponse'{_cldvrsARN
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cldvrsCreationTimestamp
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cldvrsVersion
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cldvrsId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cldvrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'CreateLoggerDefinitionVersionResponse' with the minimum fields required to make a request.
 --
@@ -145,23 +163,23 @@ data CreateLoggerDefinitionVersionResponse = CreateLoggerDefinitionVersionRespon
 --
 -- * 'cldvrsCreationTimestamp' - The time, in milliseconds since the epoch, when the version was created.
 --
--- * 'cldvrsVersion' - The unique ID of the version.
+-- * 'cldvrsVersion' - The ID of the version.
 --
--- * 'cldvrsId' - The ID of the version.
+-- * 'cldvrsId' - The ID of the parent definition that the version is associated with.
 --
 -- * 'cldvrsResponseStatus' - -- | The response status code.
 createLoggerDefinitionVersionResponse
     :: Int -- ^ 'cldvrsResponseStatus'
     -> CreateLoggerDefinitionVersionResponse
-createLoggerDefinitionVersionResponse pResponseStatus_ =
-  CreateLoggerDefinitionVersionResponse'
-    { _cldvrsARN = Nothing
-    , _cldvrsCreationTimestamp = Nothing
-    , _cldvrsVersion = Nothing
-    , _cldvrsId = Nothing
-    , _cldvrsResponseStatus = pResponseStatus_
-    }
-
+createLoggerDefinitionVersionResponse
+  pResponseStatus_
+  = CreateLoggerDefinitionVersionResponse'{_cldvrsARN =
+                                             Nothing,
+                                           _cldvrsCreationTimestamp = Nothing,
+                                           _cldvrsVersion = Nothing,
+                                           _cldvrsId = Nothing,
+                                           _cldvrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The ARN of the version.
 cldvrsARN :: Lens' CreateLoggerDefinitionVersionResponse (Maybe Text)
@@ -171,11 +189,11 @@ cldvrsARN = lens _cldvrsARN (\ s a -> s{_cldvrsARN = a})
 cldvrsCreationTimestamp :: Lens' CreateLoggerDefinitionVersionResponse (Maybe Text)
 cldvrsCreationTimestamp = lens _cldvrsCreationTimestamp (\ s a -> s{_cldvrsCreationTimestamp = a})
 
--- | The unique ID of the version.
+-- | The ID of the version.
 cldvrsVersion :: Lens' CreateLoggerDefinitionVersionResponse (Maybe Text)
 cldvrsVersion = lens _cldvrsVersion (\ s a -> s{_cldvrsVersion = a})
 
--- | The ID of the version.
+-- | The ID of the parent definition that the version is associated with.
 cldvrsId :: Lens' CreateLoggerDefinitionVersionResponse (Maybe Text)
 cldvrsId = lens _cldvrsId (\ s a -> s{_cldvrsId = a})
 

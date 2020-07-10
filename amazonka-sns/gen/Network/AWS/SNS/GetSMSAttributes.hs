@@ -51,22 +51,21 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'getSMSAttributes' smart constructor.
-newtype GetSMSAttributes = GetSMSAttributes'
-  { _gsmsaAttributes :: Maybe [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetSMSAttributes = GetSMSAttributes'{_gsmsaAttributes
+                                             :: Maybe [Text]}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSMSAttributes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsmsaAttributes' - A list of the individual attribute names, such as @MonthlySpendLimit@ , for which you want values. For all attribute names, see <http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html SetSMSAttributes> . If you don't use this parameter, Amazon SNS returns all SMS attributes.
+-- * 'gsmsaAttributes' - A list of the individual attribute names, such as @MonthlySpendLimit@ , for which you want values. For all attribute names, see <https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html SetSMSAttributes> . If you don't use this parameter, Amazon SNS returns all SMS attributes.
 getSMSAttributes
     :: GetSMSAttributes
-getSMSAttributes = GetSMSAttributes' {_gsmsaAttributes = Nothing}
+getSMSAttributes
+  = GetSMSAttributes'{_gsmsaAttributes = Nothing}
 
-
--- | A list of the individual attribute names, such as @MonthlySpendLimit@ , for which you want values. For all attribute names, see <http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html SetSMSAttributes> . If you don't use this parameter, Amazon SNS returns all SMS attributes.
+-- | A list of the individual attribute names, such as @MonthlySpendLimit@ , for which you want values. For all attribute names, see <https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html SetSMSAttributes> . If you don't use this parameter, Amazon SNS returns all SMS attributes.
 gsmsaAttributes :: Lens' GetSMSAttributes [Text]
 gsmsaAttributes = lens _gsmsaAttributes (\ s a -> s{_gsmsaAttributes = a}) . _Default . _Coerce
 
@@ -104,11 +103,14 @@ instance ToQuery GetSMSAttributes where
 --
 --
 -- /See:/ 'getSMSAttributesResponse' smart constructor.
-data GetSMSAttributesResponse = GetSMSAttributesResponse'
-  { _gsmsarsAttributes     :: !(Maybe (Map Text Text))
-  , _gsmsarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSMSAttributesResponse = GetSMSAttributesResponse'{_gsmsarsAttributes
+                                                          ::
+                                                          !(Maybe
+                                                              (Map Text Text)),
+                                                          _gsmsarsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetSMSAttributesResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +122,10 @@ data GetSMSAttributesResponse = GetSMSAttributesResponse'
 getSMSAttributesResponse
     :: Int -- ^ 'gsmsarsResponseStatus'
     -> GetSMSAttributesResponse
-getSMSAttributesResponse pResponseStatus_ =
-  GetSMSAttributesResponse'
-    {_gsmsarsAttributes = Nothing, _gsmsarsResponseStatus = pResponseStatus_}
-
+getSMSAttributesResponse pResponseStatus_
+  = GetSMSAttributesResponse'{_gsmsarsAttributes =
+                                Nothing,
+                              _gsmsarsResponseStatus = pResponseStatus_}
 
 -- | The SMS attribute names and their values.
 gsmsarsAttributes :: Lens' GetSMSAttributesResponse (HashMap Text Text)

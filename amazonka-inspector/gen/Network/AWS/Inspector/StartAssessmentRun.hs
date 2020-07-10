@@ -46,11 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startAssessmentRun' smart constructor.
-data StartAssessmentRun = StartAssessmentRun'
-  { _sarAssessmentRunName     :: !(Maybe Text)
-  , _sarAssessmentTemplateARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartAssessmentRun = StartAssessmentRun'{_sarAssessmentRunName
+                                              :: !(Maybe Text),
+                                              _sarAssessmentTemplateARN ::
+                                              !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartAssessmentRun' with the minimum fields required to make a request.
 --
@@ -62,12 +62,10 @@ data StartAssessmentRun = StartAssessmentRun'
 startAssessmentRun
     :: Text -- ^ 'sarAssessmentTemplateARN'
     -> StartAssessmentRun
-startAssessmentRun pAssessmentTemplateARN_ =
-  StartAssessmentRun'
-    { _sarAssessmentRunName = Nothing
-    , _sarAssessmentTemplateARN = pAssessmentTemplateARN_
-    }
-
+startAssessmentRun pAssessmentTemplateARN_
+  = StartAssessmentRun'{_sarAssessmentRunName =
+                          Nothing,
+                        _sarAssessmentTemplateARN = pAssessmentTemplateARN_}
 
 -- | You can specify the name for the assessment run. The name must be unique for the assessment template whose ARN is used to start the assessment run.
 sarAssessmentRunName :: Lens' StartAssessmentRun (Maybe Text)
@@ -117,11 +115,12 @@ instance ToQuery StartAssessmentRun where
         toQuery = const mempty
 
 -- | /See:/ 'startAssessmentRunResponse' smart constructor.
-data StartAssessmentRunResponse = StartAssessmentRunResponse'
-  { _sarrsResponseStatus   :: !Int
-  , _sarrsAssessmentRunARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartAssessmentRunResponse = StartAssessmentRunResponse'{_sarrsResponseStatus
+                                                              :: !Int,
+                                                              _sarrsAssessmentRunARN
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'StartAssessmentRunResponse' with the minimum fields required to make a request.
 --
@@ -134,12 +133,11 @@ startAssessmentRunResponse
     :: Int -- ^ 'sarrsResponseStatus'
     -> Text -- ^ 'sarrsAssessmentRunARN'
     -> StartAssessmentRunResponse
-startAssessmentRunResponse pResponseStatus_ pAssessmentRunARN_ =
-  StartAssessmentRunResponse'
-    { _sarrsResponseStatus = pResponseStatus_
-    , _sarrsAssessmentRunARN = pAssessmentRunARN_
-    }
-
+startAssessmentRunResponse pResponseStatus_
+  pAssessmentRunARN_
+  = StartAssessmentRunResponse'{_sarrsResponseStatus =
+                                  pResponseStatus_,
+                                _sarrsAssessmentRunARN = pAssessmentRunARN_}
 
 -- | -- | The response status code.
 sarrsResponseStatus :: Lens' StartAssessmentRunResponse Int

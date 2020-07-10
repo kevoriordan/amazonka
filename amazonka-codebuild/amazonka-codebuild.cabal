@@ -48,29 +48,115 @@ library
         , Network.AWS.CodeBuild.BatchDeleteBuilds
         , Network.AWS.CodeBuild.BatchGetBuilds
         , Network.AWS.CodeBuild.BatchGetProjects
+        , Network.AWS.CodeBuild.BatchGetReportGroups
+        , Network.AWS.CodeBuild.BatchGetReports
         , Network.AWS.CodeBuild.CreateProject
+        , Network.AWS.CodeBuild.CreateReportGroup
         , Network.AWS.CodeBuild.CreateWebhook
         , Network.AWS.CodeBuild.DeleteProject
+        , Network.AWS.CodeBuild.DeleteReport
+        , Network.AWS.CodeBuild.DeleteReportGroup
+        , Network.AWS.CodeBuild.DeleteResourcePolicy
+        , Network.AWS.CodeBuild.DeleteSourceCredentials
         , Network.AWS.CodeBuild.DeleteWebhook
+        , Network.AWS.CodeBuild.DescribeTestCases
+        , Network.AWS.CodeBuild.GetResourcePolicy
+        , Network.AWS.CodeBuild.ImportSourceCredentials
         , Network.AWS.CodeBuild.InvalidateProjectCache
         , Network.AWS.CodeBuild.ListBuilds
         , Network.AWS.CodeBuild.ListBuildsForProject
         , Network.AWS.CodeBuild.ListCuratedEnvironmentImages
         , Network.AWS.CodeBuild.ListProjects
+        , Network.AWS.CodeBuild.ListReportGroups
+        , Network.AWS.CodeBuild.ListReports
+        , Network.AWS.CodeBuild.ListReportsForReportGroup
+        , Network.AWS.CodeBuild.ListSharedProjects
+        , Network.AWS.CodeBuild.ListSharedReportGroups
+        , Network.AWS.CodeBuild.ListSourceCredentials
+        , Network.AWS.CodeBuild.PutResourcePolicy
         , Network.AWS.CodeBuild.StartBuild
         , Network.AWS.CodeBuild.StopBuild
         , Network.AWS.CodeBuild.Types
         , Network.AWS.CodeBuild.UpdateProject
+        , Network.AWS.CodeBuild.UpdateReportGroup
         , Network.AWS.CodeBuild.UpdateWebhook
         , Network.AWS.CodeBuild.Waiters
 
     other-modules:
-          Network.AWS.CodeBuild.Types.Product
-        , Network.AWS.CodeBuild.Types.Sum
+          Network.AWS.CodeBuild.Types.ArtifactNamespace
+        , Network.AWS.CodeBuild.Types.ArtifactPackaging
+        , Network.AWS.CodeBuild.Types.ArtifactsType
+        , Network.AWS.CodeBuild.Types.AuthType
+        , Network.AWS.CodeBuild.Types.Build
+        , Network.AWS.CodeBuild.Types.BuildArtifacts
+        , Network.AWS.CodeBuild.Types.BuildNotDeleted
+        , Network.AWS.CodeBuild.Types.BuildPhase
+        , Network.AWS.CodeBuild.Types.BuildPhaseType
+        , Network.AWS.CodeBuild.Types.CacheMode
+        , Network.AWS.CodeBuild.Types.CacheType
+        , Network.AWS.CodeBuild.Types.CloudWatchLogsConfig
+        , Network.AWS.CodeBuild.Types.ComputeType
+        , Network.AWS.CodeBuild.Types.CredentialProviderType
+        , Network.AWS.CodeBuild.Types.EnvironmentImage
+        , Network.AWS.CodeBuild.Types.EnvironmentLanguage
+        , Network.AWS.CodeBuild.Types.EnvironmentPlatform
+        , Network.AWS.CodeBuild.Types.EnvironmentType
+        , Network.AWS.CodeBuild.Types.EnvironmentVariable
+        , Network.AWS.CodeBuild.Types.EnvironmentVariableType
+        , Network.AWS.CodeBuild.Types.ExportedEnvironmentVariable
+        , Network.AWS.CodeBuild.Types.FileSystemType
+        , Network.AWS.CodeBuild.Types.GitSubmodulesConfig
+        , Network.AWS.CodeBuild.Types.ImagePullCredentialsType
+        , Network.AWS.CodeBuild.Types.LanguageType
+        , Network.AWS.CodeBuild.Types.LogsConfig
+        , Network.AWS.CodeBuild.Types.LogsConfigStatusType
+        , Network.AWS.CodeBuild.Types.LogsLocation
+        , Network.AWS.CodeBuild.Types.NetworkInterface
+        , Network.AWS.CodeBuild.Types.PhaseContext
+        , Network.AWS.CodeBuild.Types.PlatformType
+        , Network.AWS.CodeBuild.Types.Product
+        , Network.AWS.CodeBuild.Types.Project
+        , Network.AWS.CodeBuild.Types.ProjectArtifacts
+        , Network.AWS.CodeBuild.Types.ProjectBadge
+        , Network.AWS.CodeBuild.Types.ProjectCache
+        , Network.AWS.CodeBuild.Types.ProjectEnvironment
+        , Network.AWS.CodeBuild.Types.ProjectFileSystemLocation
+        , Network.AWS.CodeBuild.Types.ProjectSortByType
+        , Network.AWS.CodeBuild.Types.ProjectSource
+        , Network.AWS.CodeBuild.Types.ProjectSourceVersion
+        , Network.AWS.CodeBuild.Types.RegistryCredential
+        , Network.AWS.CodeBuild.Types.Report
+        , Network.AWS.CodeBuild.Types.ReportExportConfig
+        , Network.AWS.CodeBuild.Types.ReportExportConfigType
+        , Network.AWS.CodeBuild.Types.ReportFilter
+        , Network.AWS.CodeBuild.Types.ReportGroup
+        , Network.AWS.CodeBuild.Types.ReportGroupSortByType
+        , Network.AWS.CodeBuild.Types.ReportPackagingType
+        , Network.AWS.CodeBuild.Types.ReportStatusType
+        , Network.AWS.CodeBuild.Types.ReportType
+        , Network.AWS.CodeBuild.Types.S3LogsConfig
+        , Network.AWS.CodeBuild.Types.S3ReportExportConfig
+        , Network.AWS.CodeBuild.Types.ServerType
+        , Network.AWS.CodeBuild.Types.SharedResourceSortByType
+        , Network.AWS.CodeBuild.Types.SortOrderType
+        , Network.AWS.CodeBuild.Types.SourceAuth
+        , Network.AWS.CodeBuild.Types.SourceAuthType
+        , Network.AWS.CodeBuild.Types.SourceCredentialsInfo
+        , Network.AWS.CodeBuild.Types.SourceType
+        , Network.AWS.CodeBuild.Types.StatusType
+        , Network.AWS.CodeBuild.Types.Tag
+        , Network.AWS.CodeBuild.Types.TestCase
+        , Network.AWS.CodeBuild.Types.TestCaseFilter
+        , Network.AWS.CodeBuild.Types.TestReportSummary
+        , Network.AWS.CodeBuild.Types.VPCConfig
+        , Network.AWS.CodeBuild.Types.Webhook
+        , Network.AWS.CodeBuild.Types.WebhookFilter
+        , Network.AWS.CodeBuild.Types.WebhookFilterType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-codebuild-test
     type:              exitcode-stdio-1.0
@@ -94,6 +180,7 @@ test-suite amazonka-codebuild-test
         , amazonka-codebuild
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

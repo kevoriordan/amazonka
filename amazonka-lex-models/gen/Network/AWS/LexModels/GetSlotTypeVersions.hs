@@ -21,7 +21,7 @@
 -- Gets information about all versions of a slot type.
 --
 --
--- The @GetSlotTypeVersions@ operation returns a @SlotTypeMetadata@ object for each version of a slot type. For example, if a slot type has three numbered versions, the @GetSlotTypeVersions@ operation returns four @SlotTypeMetadata@ objects in the response, one for each numbered version and one for the @> LATEST@ version.
+-- The @GetSlotTypeVersions@ operation returns a @SlotTypeMetadata@ object for each version of a slot type. For example, if a slot type has three numbered versions, the @GetSlotTypeVersions@ operation returns four @SlotTypeMetadata@ objects in the response, one for each numbered version and one for the @> LATEST@ version. 
 --
 -- The @GetSlotTypeVersions@ operation always returns at least one version, the @> LATEST@ version.
 --
@@ -57,18 +57,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getSlotTypeVersions' smart constructor.
-data GetSlotTypeVersions = GetSlotTypeVersions'
-  { _gstvNextToken  :: !(Maybe Text)
-  , _gstvMaxResults :: !(Maybe Nat)
-  , _gstvName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSlotTypeVersions = GetSlotTypeVersions'{_gstvNextToken
+                                                :: !(Maybe Text),
+                                                _gstvMaxResults :: !(Maybe Nat),
+                                                _gstvName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSlotTypeVersions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gstvNextToken' - A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- * 'gstvNextToken' - A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 --
 -- * 'gstvMaxResults' - The maximum number of slot type versions to return in the response. The default is 10.
 --
@@ -76,12 +75,11 @@ data GetSlotTypeVersions = GetSlotTypeVersions'
 getSlotTypeVersions
     :: Text -- ^ 'gstvName'
     -> GetSlotTypeVersions
-getSlotTypeVersions pName_ =
-  GetSlotTypeVersions'
-    {_gstvNextToken = Nothing, _gstvMaxResults = Nothing, _gstvName = pName_}
+getSlotTypeVersions pName_
+  = GetSlotTypeVersions'{_gstvNextToken = Nothing,
+                         _gstvMaxResults = Nothing, _gstvName = pName_}
 
-
--- | A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- | A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 gstvNextToken :: Lens' GetSlotTypeVersions (Maybe Text)
 gstvNextToken = lens _gstvNextToken (\ s a -> s{_gstvNextToken = a})
 
@@ -135,18 +133,23 @@ instance ToQuery GetSlotTypeVersions where
                "maxResults" =: _gstvMaxResults]
 
 -- | /See:/ 'getSlotTypeVersionsResponse' smart constructor.
-data GetSlotTypeVersionsResponse = GetSlotTypeVersionsResponse'
-  { _gstvrsNextToken      :: !(Maybe Text)
-  , _gstvrsSlotTypes      :: !(Maybe [SlotTypeMetadata])
-  , _gstvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSlotTypeVersionsResponse = GetSlotTypeVersionsResponse'{_gstvrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gstvrsSlotTypes
+                                                                ::
+                                                                !(Maybe
+                                                                    [SlotTypeMetadata]),
+                                                                _gstvrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetSlotTypeVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gstvrsNextToken' - A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- * 'gstvrsNextToken' - A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 --
 -- * 'gstvrsSlotTypes' - An array of @SlotTypeMetadata@ objects, one for each numbered version of the slot type plus one for the @> LATEST@ version.
 --
@@ -154,15 +157,13 @@ data GetSlotTypeVersionsResponse = GetSlotTypeVersionsResponse'
 getSlotTypeVersionsResponse
     :: Int -- ^ 'gstvrsResponseStatus'
     -> GetSlotTypeVersionsResponse
-getSlotTypeVersionsResponse pResponseStatus_ =
-  GetSlotTypeVersionsResponse'
-    { _gstvrsNextToken = Nothing
-    , _gstvrsSlotTypes = Nothing
-    , _gstvrsResponseStatus = pResponseStatus_
-    }
+getSlotTypeVersionsResponse pResponseStatus_
+  = GetSlotTypeVersionsResponse'{_gstvrsNextToken =
+                                   Nothing,
+                                 _gstvrsSlotTypes = Nothing,
+                                 _gstvrsResponseStatus = pResponseStatus_}
 
-
--- | A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- | A pagination token for fetching the next page of slot type versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 gstvrsNextToken :: Lens' GetSlotTypeVersionsResponse (Maybe Text)
 gstvrsNextToken = lens _gstvrsNextToken (\ s a -> s{_gstvrsNextToken = a})
 

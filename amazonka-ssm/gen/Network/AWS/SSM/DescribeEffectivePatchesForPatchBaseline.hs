@@ -21,6 +21,8 @@
 -- Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Note that this API applies only to Windows patch baselines.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeEffectivePatchesForPatchBaseline
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.DescribeEffectivePatchesForPatchBaseline
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,20 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeEffectivePatchesForPatchBaseline' smart constructor.
-data DescribeEffectivePatchesForPatchBaseline = DescribeEffectivePatchesForPatchBaseline'
-  { _depfpbNextToken  :: !(Maybe Text)
-  , _depfpbMaxResults :: !(Maybe Nat)
-  , _depfpbBaselineId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEffectivePatchesForPatchBaseline = DescribeEffectivePatchesForPatchBaseline'{_depfpbNextToken
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _depfpbMaxResults
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Nat),
+                                                                                          _depfpbBaselineId
+                                                                                          ::
+                                                                                          !Text}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DescribeEffectivePatchesForPatchBaseline' with the minimum fields required to make a request.
 --
@@ -67,13 +78,11 @@ data DescribeEffectivePatchesForPatchBaseline = DescribeEffectivePatchesForPatch
 describeEffectivePatchesForPatchBaseline
     :: Text -- ^ 'depfpbBaselineId'
     -> DescribeEffectivePatchesForPatchBaseline
-describeEffectivePatchesForPatchBaseline pBaselineId_ =
-  DescribeEffectivePatchesForPatchBaseline'
-    { _depfpbNextToken = Nothing
-    , _depfpbMaxResults = Nothing
-    , _depfpbBaselineId = pBaselineId_
-    }
-
+describeEffectivePatchesForPatchBaseline pBaselineId_
+  = DescribeEffectivePatchesForPatchBaseline'{_depfpbNextToken
+                                                = Nothing,
+                                              _depfpbMaxResults = Nothing,
+                                              _depfpbBaselineId = pBaselineId_}
 
 -- | The token for the next set of items to return. (You received this token from a previous call.)
 depfpbNextToken :: Lens' DescribeEffectivePatchesForPatchBaseline (Maybe Text)
@@ -86,6 +95,16 @@ depfpbMaxResults = lens _depfpbMaxResults (\ s a -> s{_depfpbMaxResults = a}) . 
 -- | The ID of the patch baseline to retrieve the effective patches for.
 depfpbBaselineId :: Lens' DescribeEffectivePatchesForPatchBaseline Text
 depfpbBaselineId = lens _depfpbBaselineId (\ s a -> s{_depfpbBaselineId = a})
+
+instance AWSPager
+           DescribeEffectivePatchesForPatchBaseline
+         where
+        page rq rs
+          | stop (rs ^. depfpbrsNextToken) = Nothing
+          | stop (rs ^. depfpbrsEffectivePatches) = Nothing
+          | otherwise =
+            Just $ rq &
+              depfpbNextToken .~ rs ^. depfpbrsNextToken
 
 instance AWSRequest
            DescribeEffectivePatchesForPatchBaseline
@@ -142,12 +161,21 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'describeEffectivePatchesForPatchBaselineResponse' smart constructor.
-data DescribeEffectivePatchesForPatchBaselineResponse = DescribeEffectivePatchesForPatchBaselineResponse'
-  { _depfpbrsEffectivePatches :: !(Maybe [EffectivePatch])
-  , _depfpbrsNextToken        :: !(Maybe Text)
-  , _depfpbrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEffectivePatchesForPatchBaselineResponse = DescribeEffectivePatchesForPatchBaselineResponse'{_depfpbrsEffectivePatches
+                                                                                                          ::
+                                                                                                          !(Maybe
+                                                                                                              [EffectivePatch]),
+                                                                                                          _depfpbrsNextToken
+                                                                                                          ::
+                                                                                                          !(Maybe
+                                                                                                              Text),
+                                                                                                          _depfpbrsResponseStatus
+                                                                                                          ::
+                                                                                                          !Int}
+                                                          deriving (Eq, Read,
+                                                                    Show, Data,
+                                                                    Typeable,
+                                                                    Generic)
 
 -- | Creates a value of 'DescribeEffectivePatchesForPatchBaselineResponse' with the minimum fields required to make a request.
 --
@@ -161,13 +189,14 @@ data DescribeEffectivePatchesForPatchBaselineResponse = DescribeEffectivePatches
 describeEffectivePatchesForPatchBaselineResponse
     :: Int -- ^ 'depfpbrsResponseStatus'
     -> DescribeEffectivePatchesForPatchBaselineResponse
-describeEffectivePatchesForPatchBaselineResponse pResponseStatus_ =
-  DescribeEffectivePatchesForPatchBaselineResponse'
-    { _depfpbrsEffectivePatches = Nothing
-    , _depfpbrsNextToken = Nothing
-    , _depfpbrsResponseStatus = pResponseStatus_
-    }
-
+describeEffectivePatchesForPatchBaselineResponse
+  pResponseStatus_
+  = DescribeEffectivePatchesForPatchBaselineResponse'{_depfpbrsEffectivePatches
+                                                        = Nothing,
+                                                      _depfpbrsNextToken =
+                                                        Nothing,
+                                                      _depfpbrsResponseStatus =
+                                                        pResponseStatus_}
 
 -- | An array of patches and patch status.
 depfpbrsEffectivePatches :: Lens' DescribeEffectivePatchesForPatchBaselineResponse [EffectivePatch]

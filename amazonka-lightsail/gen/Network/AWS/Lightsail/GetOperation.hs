@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getOperation' smart constructor.
-newtype GetOperation = GetOperation'
-  { _goOperationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetOperation = GetOperation'{_goOperationId
+                                     :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOperation' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetOperation = GetOperation'
 getOperation
     :: Text -- ^ 'goOperationId'
     -> GetOperation
-getOperation pOperationId_ = GetOperation' {_goOperationId = pOperationId_}
-
+getOperation pOperationId_
+  = GetOperation'{_goOperationId = pOperationId_}
 
 -- | A GUID used to identify the operation.
 goOperationId :: Lens' GetOperation Text
@@ -99,28 +98,26 @@ instance ToQuery GetOperation where
         toQuery = const mempty
 
 -- | /See:/ 'getOperationResponse' smart constructor.
-data GetOperationResponse = GetOperationResponse'
-  { _gorsOperation      :: !(Maybe Operation)
-  , _gorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetOperationResponse = GetOperationResponse'{_gorsOperation
+                                                  :: !(Maybe Operation),
+                                                  _gorsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOperationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gorsOperation' - An array of key-value pairs containing information about the results of your get operation request.
+-- * 'gorsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'gorsResponseStatus' - -- | The response status code.
 getOperationResponse
     :: Int -- ^ 'gorsResponseStatus'
     -> GetOperationResponse
-getOperationResponse pResponseStatus_ =
-  GetOperationResponse'
-    {_gorsOperation = Nothing, _gorsResponseStatus = pResponseStatus_}
+getOperationResponse pResponseStatus_
+  = GetOperationResponse'{_gorsOperation = Nothing,
+                          _gorsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your get operation request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 gorsOperation :: Lens' GetOperationResponse (Maybe Operation)
 gorsOperation = lens _gorsOperation (\ s a -> s{_gorsOperation = a})
 

@@ -52,13 +52,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeSubscriptionFilters' smart constructor.
-data DescribeSubscriptionFilters = DescribeSubscriptionFilters'
-  { _dsfFilterNamePrefix :: !(Maybe Text)
-  , _dsfNextToken        :: !(Maybe Text)
-  , _dsfLimit            :: !(Maybe Nat)
-  , _dsfLogGroupName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubscriptionFilters = DescribeSubscriptionFilters'{_dsfFilterNamePrefix
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dsfNextToken ::
+                                                                !(Maybe Text),
+                                                                _dsfLimit ::
+                                                                !(Maybe Nat),
+                                                                _dsfLogGroupName
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeSubscriptionFilters' with the minimum fields required to make a request.
 --
@@ -74,14 +78,11 @@ data DescribeSubscriptionFilters = DescribeSubscriptionFilters'
 describeSubscriptionFilters
     :: Text -- ^ 'dsfLogGroupName'
     -> DescribeSubscriptionFilters
-describeSubscriptionFilters pLogGroupName_ =
-  DescribeSubscriptionFilters'
-    { _dsfFilterNamePrefix = Nothing
-    , _dsfNextToken = Nothing
-    , _dsfLimit = Nothing
-    , _dsfLogGroupName = pLogGroupName_
-    }
-
+describeSubscriptionFilters pLogGroupName_
+  = DescribeSubscriptionFilters'{_dsfFilterNamePrefix =
+                                   Nothing,
+                                 _dsfNextToken = Nothing, _dsfLimit = Nothing,
+                                 _dsfLogGroupName = pLogGroupName_}
 
 -- | The prefix to match. If you don't specify a value, no prefix filter is applied.
 dsfFilterNamePrefix :: Lens' DescribeSubscriptionFilters (Maybe Text)
@@ -148,12 +149,19 @@ instance ToQuery DescribeSubscriptionFilters where
         toQuery = const mempty
 
 -- | /See:/ 'describeSubscriptionFiltersResponse' smart constructor.
-data DescribeSubscriptionFiltersResponse = DescribeSubscriptionFiltersResponse'
-  { _dsfrsSubscriptionFilters :: !(Maybe [SubscriptionFilter])
-  , _dsfrsNextToken           :: !(Maybe Text)
-  , _dsfrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubscriptionFiltersResponse = DescribeSubscriptionFiltersResponse'{_dsfrsSubscriptionFilters
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [SubscriptionFilter]),
+                                                                                _dsfrsNextToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dsfrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeSubscriptionFiltersResponse' with the minimum fields required to make a request.
 --
@@ -167,13 +175,12 @@ data DescribeSubscriptionFiltersResponse = DescribeSubscriptionFiltersResponse'
 describeSubscriptionFiltersResponse
     :: Int -- ^ 'dsfrsResponseStatus'
     -> DescribeSubscriptionFiltersResponse
-describeSubscriptionFiltersResponse pResponseStatus_ =
-  DescribeSubscriptionFiltersResponse'
-    { _dsfrsSubscriptionFilters = Nothing
-    , _dsfrsNextToken = Nothing
-    , _dsfrsResponseStatus = pResponseStatus_
-    }
-
+describeSubscriptionFiltersResponse pResponseStatus_
+  = DescribeSubscriptionFiltersResponse'{_dsfrsSubscriptionFilters
+                                           = Nothing,
+                                         _dsfrsNextToken = Nothing,
+                                         _dsfrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The subscription filters.
 dsfrsSubscriptionFilters :: Lens' DescribeSubscriptionFiltersResponse [SubscriptionFilter]

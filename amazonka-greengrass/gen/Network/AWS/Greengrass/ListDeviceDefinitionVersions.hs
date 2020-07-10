@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the versions of a device definition.
+--
+-- This operation returns paginated results.
 module Network.AWS.Greengrass.ListDeviceDefinitionVersions
     (
     -- * Creating a Request
@@ -41,17 +43,22 @@ module Network.AWS.Greengrass.ListDeviceDefinitionVersions
 import Network.AWS.Greengrass.Types
 import Network.AWS.Greengrass.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDeviceDefinitionVersions' smart constructor.
-data ListDeviceDefinitionVersions = ListDeviceDefinitionVersions'
-  { _lddvNextToken          :: !(Maybe Text)
-  , _lddvMaxResults         :: !(Maybe Text)
-  , _lddvDeviceDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDeviceDefinitionVersions = ListDeviceDefinitionVersions'{_lddvNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lddvMaxResults
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lddvDeviceDefinitionId
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListDeviceDefinitionVersions' with the minimum fields required to make a request.
 --
@@ -65,13 +72,12 @@ data ListDeviceDefinitionVersions = ListDeviceDefinitionVersions'
 listDeviceDefinitionVersions
     :: Text -- ^ 'lddvDeviceDefinitionId'
     -> ListDeviceDefinitionVersions
-listDeviceDefinitionVersions pDeviceDefinitionId_ =
-  ListDeviceDefinitionVersions'
-    { _lddvNextToken = Nothing
-    , _lddvMaxResults = Nothing
-    , _lddvDeviceDefinitionId = pDeviceDefinitionId_
-    }
-
+listDeviceDefinitionVersions pDeviceDefinitionId_
+  = ListDeviceDefinitionVersions'{_lddvNextToken =
+                                    Nothing,
+                                  _lddvMaxResults = Nothing,
+                                  _lddvDeviceDefinitionId =
+                                    pDeviceDefinitionId_}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lddvNextToken :: Lens' ListDeviceDefinitionVersions (Maybe Text)
@@ -84,6 +90,13 @@ lddvMaxResults = lens _lddvMaxResults (\ s a -> s{_lddvMaxResults = a})
 -- | The ID of the device definition.
 lddvDeviceDefinitionId :: Lens' ListDeviceDefinitionVersions Text
 lddvDeviceDefinitionId = lens _lddvDeviceDefinitionId (\ s a -> s{_lddvDeviceDefinitionId = a})
+
+instance AWSPager ListDeviceDefinitionVersions where
+        page rq rs
+          | stop (rs ^. lddvrsNextToken) = Nothing
+          | stop (rs ^. lddvrsVersions) = Nothing
+          | otherwise =
+            Just $ rq & lddvNextToken .~ rs ^. lddvrsNextToken
 
 instance AWSRequest ListDeviceDefinitionVersions
          where
@@ -121,12 +134,19 @@ instance ToQuery ListDeviceDefinitionVersions where
                "MaxResults" =: _lddvMaxResults]
 
 -- | /See:/ 'listDeviceDefinitionVersionsResponse' smart constructor.
-data ListDeviceDefinitionVersionsResponse = ListDeviceDefinitionVersionsResponse'
-  { _lddvrsVersions       :: !(Maybe [VersionInformation])
-  , _lddvrsNextToken      :: !(Maybe Text)
-  , _lddvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDeviceDefinitionVersionsResponse = ListDeviceDefinitionVersionsResponse'{_lddvrsVersions
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [VersionInformation]),
+                                                                                  _lddvrsNextToken
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _lddvrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ListDeviceDefinitionVersionsResponse' with the minimum fields required to make a request.
 --
@@ -140,13 +160,12 @@ data ListDeviceDefinitionVersionsResponse = ListDeviceDefinitionVersionsResponse
 listDeviceDefinitionVersionsResponse
     :: Int -- ^ 'lddvrsResponseStatus'
     -> ListDeviceDefinitionVersionsResponse
-listDeviceDefinitionVersionsResponse pResponseStatus_ =
-  ListDeviceDefinitionVersionsResponse'
-    { _lddvrsVersions = Nothing
-    , _lddvrsNextToken = Nothing
-    , _lddvrsResponseStatus = pResponseStatus_
-    }
-
+listDeviceDefinitionVersionsResponse pResponseStatus_
+  = ListDeviceDefinitionVersionsResponse'{_lddvrsVersions
+                                            = Nothing,
+                                          _lddvrsNextToken = Nothing,
+                                          _lddvrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Information about a version.
 lddvrsVersions :: Lens' ListDeviceDefinitionVersionsResponse [VersionInformation]

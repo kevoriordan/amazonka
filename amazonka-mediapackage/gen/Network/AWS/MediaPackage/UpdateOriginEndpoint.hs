@@ -28,12 +28,14 @@ module Network.AWS.MediaPackage.UpdateOriginEndpoint
     , uoeWhitelist
     , uoeHlsPackage
     , uoeManifestName
+    , uoeAuthorization
     , uoeStartoverWindowSeconds
     , uoeDashPackage
     , uoeMssPackage
     , uoeTimeDelaySeconds
     , uoeCmafPackage
     , uoeDescription
+    , uoeOrigination
     , uoeId
 
     -- * Destructuring the Response
@@ -45,6 +47,7 @@ module Network.AWS.MediaPackage.UpdateOriginEndpoint
     , uoersARN
     , uoersManifestName
     , uoersURL
+    , uoersAuthorization
     , uoersChannelId
     , uoersStartoverWindowSeconds
     , uoersDashPackage
@@ -53,6 +56,8 @@ module Network.AWS.MediaPackage.UpdateOriginEndpoint
     , uoersTimeDelaySeconds
     , uoersCmafPackage
     , uoersDescription
+    , uoersTags
+    , uoersOrigination
     , uoersResponseStatus
     ) where
 
@@ -66,19 +71,31 @@ import Network.AWS.Response
 -- | Configuration parameters used to update an existing OriginEndpoint.
 --
 -- /See:/ 'updateOriginEndpoint' smart constructor.
-data UpdateOriginEndpoint = UpdateOriginEndpoint'
-  { _uoeWhitelist              :: !(Maybe [Text])
-  , _uoeHlsPackage             :: !(Maybe HlsPackage)
-  , _uoeManifestName           :: !(Maybe Text)
-  , _uoeStartoverWindowSeconds :: !(Maybe Int)
-  , _uoeDashPackage            :: !(Maybe DashPackage)
-  , _uoeMssPackage             :: !(Maybe MssPackage)
-  , _uoeTimeDelaySeconds       :: !(Maybe Int)
-  , _uoeCmafPackage            :: !(Maybe CmafPackageCreateOrUpdateParameters)
-  , _uoeDescription            :: !(Maybe Text)
-  , _uoeId                     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateOriginEndpoint = UpdateOriginEndpoint'{_uoeWhitelist
+                                                  :: !(Maybe [Text]),
+                                                  _uoeHlsPackage ::
+                                                  !(Maybe HlsPackage),
+                                                  _uoeManifestName ::
+                                                  !(Maybe Text),
+                                                  _uoeAuthorization ::
+                                                  !(Maybe Authorization),
+                                                  _uoeStartoverWindowSeconds ::
+                                                  !(Maybe Int),
+                                                  _uoeDashPackage ::
+                                                  !(Maybe DashPackage),
+                                                  _uoeMssPackage ::
+                                                  !(Maybe MssPackage),
+                                                  _uoeTimeDelaySeconds ::
+                                                  !(Maybe Int),
+                                                  _uoeCmafPackage ::
+                                                  !(Maybe
+                                                      CmafPackageCreateOrUpdateParameters),
+                                                  _uoeDescription ::
+                                                  !(Maybe Text),
+                                                  _uoeOrigination ::
+                                                  !(Maybe Origination),
+                                                  _uoeId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateOriginEndpoint' with the minimum fields required to make a request.
 --
@@ -89,6 +106,8 @@ data UpdateOriginEndpoint = UpdateOriginEndpoint'
 -- * 'uoeHlsPackage' - Undocumented member.
 --
 -- * 'uoeManifestName' - A short string that will be appended to the end of the Endpoint URL.
+--
+-- * 'uoeAuthorization' - Undocumented member.
 --
 -- * 'uoeStartoverWindowSeconds' - Maximum duration (in seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.
 --
@@ -102,24 +121,21 @@ data UpdateOriginEndpoint = UpdateOriginEndpoint'
 --
 -- * 'uoeDescription' - A short text description of the OriginEndpoint.
 --
+-- * 'uoeOrigination' - Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+--
 -- * 'uoeId' - The ID of the OriginEndpoint to update.
 updateOriginEndpoint
     :: Text -- ^ 'uoeId'
     -> UpdateOriginEndpoint
-updateOriginEndpoint pId_ =
-  UpdateOriginEndpoint'
-    { _uoeWhitelist = Nothing
-    , _uoeHlsPackage = Nothing
-    , _uoeManifestName = Nothing
-    , _uoeStartoverWindowSeconds = Nothing
-    , _uoeDashPackage = Nothing
-    , _uoeMssPackage = Nothing
-    , _uoeTimeDelaySeconds = Nothing
-    , _uoeCmafPackage = Nothing
-    , _uoeDescription = Nothing
-    , _uoeId = pId_
-    }
-
+updateOriginEndpoint pId_
+  = UpdateOriginEndpoint'{_uoeWhitelist = Nothing,
+                          _uoeHlsPackage = Nothing, _uoeManifestName = Nothing,
+                          _uoeAuthorization = Nothing,
+                          _uoeStartoverWindowSeconds = Nothing,
+                          _uoeDashPackage = Nothing, _uoeMssPackage = Nothing,
+                          _uoeTimeDelaySeconds = Nothing,
+                          _uoeCmafPackage = Nothing, _uoeDescription = Nothing,
+                          _uoeOrigination = Nothing, _uoeId = pId_}
 
 -- | A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
 uoeWhitelist :: Lens' UpdateOriginEndpoint [Text]
@@ -132,6 +148,10 @@ uoeHlsPackage = lens _uoeHlsPackage (\ s a -> s{_uoeHlsPackage = a})
 -- | A short string that will be appended to the end of the Endpoint URL.
 uoeManifestName :: Lens' UpdateOriginEndpoint (Maybe Text)
 uoeManifestName = lens _uoeManifestName (\ s a -> s{_uoeManifestName = a})
+
+-- | Undocumented member.
+uoeAuthorization :: Lens' UpdateOriginEndpoint (Maybe Authorization)
+uoeAuthorization = lens _uoeAuthorization (\ s a -> s{_uoeAuthorization = a})
 
 -- | Maximum duration (in seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.
 uoeStartoverWindowSeconds :: Lens' UpdateOriginEndpoint (Maybe Int)
@@ -157,6 +177,10 @@ uoeCmafPackage = lens _uoeCmafPackage (\ s a -> s{_uoeCmafPackage = a})
 uoeDescription :: Lens' UpdateOriginEndpoint (Maybe Text)
 uoeDescription = lens _uoeDescription (\ s a -> s{_uoeDescription = a})
 
+-- | Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+uoeOrigination :: Lens' UpdateOriginEndpoint (Maybe Origination)
+uoeOrigination = lens _uoeOrigination (\ s a -> s{_uoeOrigination = a})
+
 -- | The ID of the OriginEndpoint to update.
 uoeId :: Lens' UpdateOriginEndpoint Text
 uoeId = lens _uoeId (\ s a -> s{_uoeId = a})
@@ -174,6 +198,7 @@ instance AWSRequest UpdateOriginEndpoint where
                      <*> (x .?> "arn")
                      <*> (x .?> "manifestName")
                      <*> (x .?> "url")
+                     <*> (x .?> "authorization")
                      <*> (x .?> "channelId")
                      <*> (x .?> "startoverWindowSeconds")
                      <*> (x .?> "dashPackage")
@@ -182,6 +207,8 @@ instance AWSRequest UpdateOriginEndpoint where
                      <*> (x .?> "timeDelaySeconds")
                      <*> (x .?> "cmafPackage")
                      <*> (x .?> "description")
+                     <*> (x .?> "tags" .!@ mempty)
+                     <*> (x .?> "origination")
                      <*> (pure (fromEnum s)))
 
 instance Hashable UpdateOriginEndpoint where
@@ -202,13 +229,15 @@ instance ToJSON UpdateOriginEndpoint where
                  [("whitelist" .=) <$> _uoeWhitelist,
                   ("hlsPackage" .=) <$> _uoeHlsPackage,
                   ("manifestName" .=) <$> _uoeManifestName,
+                  ("authorization" .=) <$> _uoeAuthorization,
                   ("startoverWindowSeconds" .=) <$>
                     _uoeStartoverWindowSeconds,
                   ("dashPackage" .=) <$> _uoeDashPackage,
                   ("mssPackage" .=) <$> _uoeMssPackage,
                   ("timeDelaySeconds" .=) <$> _uoeTimeDelaySeconds,
                   ("cmafPackage" .=) <$> _uoeCmafPackage,
-                  ("description" .=) <$> _uoeDescription])
+                  ("description" .=) <$> _uoeDescription,
+                  ("origination" .=) <$> _uoeOrigination])
 
 instance ToPath UpdateOriginEndpoint where
         toPath UpdateOriginEndpoint'{..}
@@ -218,23 +247,63 @@ instance ToQuery UpdateOriginEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'updateOriginEndpointResponse' smart constructor.
-data UpdateOriginEndpointResponse = UpdateOriginEndpointResponse'
-  { _uoersWhitelist              :: !(Maybe [Text])
-  , _uoersHlsPackage             :: !(Maybe HlsPackage)
-  , _uoersARN                    :: !(Maybe Text)
-  , _uoersManifestName           :: !(Maybe Text)
-  , _uoersURL                    :: !(Maybe Text)
-  , _uoersChannelId              :: !(Maybe Text)
-  , _uoersStartoverWindowSeconds :: !(Maybe Int)
-  , _uoersDashPackage            :: !(Maybe DashPackage)
-  , _uoersMssPackage             :: !(Maybe MssPackage)
-  , _uoersId                     :: !(Maybe Text)
-  , _uoersTimeDelaySeconds       :: !(Maybe Int)
-  , _uoersCmafPackage            :: !(Maybe CmafPackage)
-  , _uoersDescription            :: !(Maybe Text)
-  , _uoersResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateOriginEndpointResponse = UpdateOriginEndpointResponse'{_uoersWhitelist
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Text]),
+                                                                  _uoersHlsPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      HlsPackage),
+                                                                  _uoersARN ::
+                                                                  !(Maybe Text),
+                                                                  _uoersManifestName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _uoersURL ::
+                                                                  !(Maybe Text),
+                                                                  _uoersAuthorization
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Authorization),
+                                                                  _uoersChannelId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _uoersStartoverWindowSeconds
+                                                                  ::
+                                                                  !(Maybe Int),
+                                                                  _uoersDashPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      DashPackage),
+                                                                  _uoersMssPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      MssPackage),
+                                                                  _uoersId ::
+                                                                  !(Maybe Text),
+                                                                  _uoersTimeDelaySeconds
+                                                                  ::
+                                                                  !(Maybe Int),
+                                                                  _uoersCmafPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      CmafPackage),
+                                                                  _uoersDescription
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _uoersTags ::
+                                                                  !(Maybe
+                                                                      (Map Text
+                                                                         Text)),
+                                                                  _uoersOrigination
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Origination),
+                                                                  _uoersResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateOriginEndpointResponse' with the minimum fields required to make a request.
 --
@@ -249,6 +318,8 @@ data UpdateOriginEndpointResponse = UpdateOriginEndpointResponse'
 -- * 'uoersManifestName' - A short string appended to the end of the OriginEndpoint URL.
 --
 -- * 'uoersURL' - The URL of the packaged OriginEndpoint for consumption.
+--
+-- * 'uoersAuthorization' - Undocumented member.
 --
 -- * 'uoersChannelId' - The ID of the Channel the OriginEndpoint is associated with.
 --
@@ -266,28 +337,33 @@ data UpdateOriginEndpointResponse = UpdateOriginEndpointResponse'
 --
 -- * 'uoersDescription' - A short text description of the OriginEndpoint.
 --
+-- * 'uoersTags' - Undocumented member.
+--
+-- * 'uoersOrigination' - Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+--
 -- * 'uoersResponseStatus' - -- | The response status code.
 updateOriginEndpointResponse
     :: Int -- ^ 'uoersResponseStatus'
     -> UpdateOriginEndpointResponse
-updateOriginEndpointResponse pResponseStatus_ =
-  UpdateOriginEndpointResponse'
-    { _uoersWhitelist = Nothing
-    , _uoersHlsPackage = Nothing
-    , _uoersARN = Nothing
-    , _uoersManifestName = Nothing
-    , _uoersURL = Nothing
-    , _uoersChannelId = Nothing
-    , _uoersStartoverWindowSeconds = Nothing
-    , _uoersDashPackage = Nothing
-    , _uoersMssPackage = Nothing
-    , _uoersId = Nothing
-    , _uoersTimeDelaySeconds = Nothing
-    , _uoersCmafPackage = Nothing
-    , _uoersDescription = Nothing
-    , _uoersResponseStatus = pResponseStatus_
-    }
-
+updateOriginEndpointResponse pResponseStatus_
+  = UpdateOriginEndpointResponse'{_uoersWhitelist =
+                                    Nothing,
+                                  _uoersHlsPackage = Nothing,
+                                  _uoersARN = Nothing,
+                                  _uoersManifestName = Nothing,
+                                  _uoersURL = Nothing,
+                                  _uoersAuthorization = Nothing,
+                                  _uoersChannelId = Nothing,
+                                  _uoersStartoverWindowSeconds = Nothing,
+                                  _uoersDashPackage = Nothing,
+                                  _uoersMssPackage = Nothing,
+                                  _uoersId = Nothing,
+                                  _uoersTimeDelaySeconds = Nothing,
+                                  _uoersCmafPackage = Nothing,
+                                  _uoersDescription = Nothing,
+                                  _uoersTags = Nothing,
+                                  _uoersOrigination = Nothing,
+                                  _uoersResponseStatus = pResponseStatus_}
 
 -- | A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
 uoersWhitelist :: Lens' UpdateOriginEndpointResponse [Text]
@@ -308,6 +384,10 @@ uoersManifestName = lens _uoersManifestName (\ s a -> s{_uoersManifestName = a})
 -- | The URL of the packaged OriginEndpoint for consumption.
 uoersURL :: Lens' UpdateOriginEndpointResponse (Maybe Text)
 uoersURL = lens _uoersURL (\ s a -> s{_uoersURL = a})
+
+-- | Undocumented member.
+uoersAuthorization :: Lens' UpdateOriginEndpointResponse (Maybe Authorization)
+uoersAuthorization = lens _uoersAuthorization (\ s a -> s{_uoersAuthorization = a})
 
 -- | The ID of the Channel the OriginEndpoint is associated with.
 uoersChannelId :: Lens' UpdateOriginEndpointResponse (Maybe Text)
@@ -340,6 +420,14 @@ uoersCmafPackage = lens _uoersCmafPackage (\ s a -> s{_uoersCmafPackage = a})
 -- | A short text description of the OriginEndpoint.
 uoersDescription :: Lens' UpdateOriginEndpointResponse (Maybe Text)
 uoersDescription = lens _uoersDescription (\ s a -> s{_uoersDescription = a})
+
+-- | Undocumented member.
+uoersTags :: Lens' UpdateOriginEndpointResponse (HashMap Text Text)
+uoersTags = lens _uoersTags (\ s a -> s{_uoersTags = a}) . _Default . _Map
+
+-- | Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+uoersOrigination :: Lens' UpdateOriginEndpointResponse (Maybe Origination)
+uoersOrigination = lens _uoersOrigination (\ s a -> s{_uoersOrigination = a})
 
 -- | -- | The response status code.
 uoersResponseStatus :: Lens' UpdateOriginEndpointResponse Int

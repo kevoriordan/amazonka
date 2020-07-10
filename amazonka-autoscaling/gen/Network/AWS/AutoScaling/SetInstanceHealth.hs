@@ -21,7 +21,7 @@
 -- Sets the health status of the specified instance.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html Health Checks> in the /Auto Scaling User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html Health Checks for Auto Scaling Instances> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.SetInstanceHealth
     (
@@ -46,35 +46,32 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setInstanceHealth' smart constructor.
-data SetInstanceHealth = SetInstanceHealth'
-  { _sihShouldRespectGracePeriod :: !(Maybe Bool)
-  , _sihInstanceId               :: !Text
-  , _sihHealthStatus             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetInstanceHealth = SetInstanceHealth'{_sihShouldRespectGracePeriod
+                                            :: !(Maybe Bool),
+                                            _sihInstanceId :: !Text,
+                                            _sihHealthStatus :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetInstanceHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sihShouldRespectGracePeriod' - If the Auto Scaling group of the specified instance has a @HealthCheckGracePeriod@ specified for the group, by default, this call will respect the grace period. Set this to @False@ , if you do not want the call to respect the grace period associated with the group. For more information, see the description of the health check grace period for 'CreateAutoScalingGroup' .
+-- * 'sihShouldRespectGracePeriod' - If the Auto Scaling group of the specified instance has a @HealthCheckGracePeriod@ specified for the group, by default, this call respects the grace period. Set this to @False@ , to have the call not respect the grace period associated with the group. For more information about the health check grace period, see 'CreateAutoScalingGroup' .
 --
 -- * 'sihInstanceId' - The ID of the instance.
 --
--- * 'sihHealthStatus' - The health status of the instance. Set to @Healthy@ if you want the instance to remain in service. Set to @Unhealthy@ if you want the instance to be out of service. Auto Scaling will terminate and replace the unhealthy instance.
+-- * 'sihHealthStatus' - The health status of the instance. Set to @Healthy@ to have the instance remain in service. Set to @Unhealthy@ to have the instance be out of service. Amazon EC2 Auto Scaling terminates and replaces the unhealthy instance.
 setInstanceHealth
     :: Text -- ^ 'sihInstanceId'
     -> Text -- ^ 'sihHealthStatus'
     -> SetInstanceHealth
-setInstanceHealth pInstanceId_ pHealthStatus_ =
-  SetInstanceHealth'
-    { _sihShouldRespectGracePeriod = Nothing
-    , _sihInstanceId = pInstanceId_
-    , _sihHealthStatus = pHealthStatus_
-    }
+setInstanceHealth pInstanceId_ pHealthStatus_
+  = SetInstanceHealth'{_sihShouldRespectGracePeriod =
+                         Nothing,
+                       _sihInstanceId = pInstanceId_,
+                       _sihHealthStatus = pHealthStatus_}
 
-
--- | If the Auto Scaling group of the specified instance has a @HealthCheckGracePeriod@ specified for the group, by default, this call will respect the grace period. Set this to @False@ , if you do not want the call to respect the grace period associated with the group. For more information, see the description of the health check grace period for 'CreateAutoScalingGroup' .
+-- | If the Auto Scaling group of the specified instance has a @HealthCheckGracePeriod@ specified for the group, by default, this call respects the grace period. Set this to @False@ , to have the call not respect the grace period associated with the group. For more information about the health check grace period, see 'CreateAutoScalingGroup' .
 sihShouldRespectGracePeriod :: Lens' SetInstanceHealth (Maybe Bool)
 sihShouldRespectGracePeriod = lens _sihShouldRespectGracePeriod (\ s a -> s{_sihShouldRespectGracePeriod = a})
 
@@ -82,7 +79,7 @@ sihShouldRespectGracePeriod = lens _sihShouldRespectGracePeriod (\ s a -> s{_sih
 sihInstanceId :: Lens' SetInstanceHealth Text
 sihInstanceId = lens _sihInstanceId (\ s a -> s{_sihInstanceId = a})
 
--- | The health status of the instance. Set to @Healthy@ if you want the instance to remain in service. Set to @Unhealthy@ if you want the instance to be out of service. Auto Scaling will terminate and replace the unhealthy instance.
+-- | The health status of the instance. Set to @Healthy@ to have the instance remain in service. Set to @Unhealthy@ to have the instance be out of service. Amazon EC2 Auto Scaling terminates and replaces the unhealthy instance.
 sihHealthStatus :: Lens' SetInstanceHealth Text
 sihHealthStatus = lens _sihHealthStatus (\ s a -> s{_sihHealthStatus = a})
 
@@ -112,16 +109,15 @@ instance ToQuery SetInstanceHealth where
                "HealthStatus" =: _sihHealthStatus]
 
 -- | /See:/ 'setInstanceHealthResponse' smart constructor.
-data SetInstanceHealthResponse =
-  SetInstanceHealthResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetInstanceHealthResponse = SetInstanceHealthResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'SetInstanceHealthResponse' with the minimum fields required to make a request.
 --
 setInstanceHealthResponse
     :: SetInstanceHealthResponse
-setInstanceHealthResponse = SetInstanceHealthResponse'
-
+setInstanceHealthResponse
+  = SetInstanceHealthResponse'
 
 instance NFData SetInstanceHealthResponse where

@@ -23,13 +23,15 @@
 --
 --     * @Action@ : Whether to insert the object into or delete the object from the array. To change a @SqlInjectionMatchTuple@ , you delete the existing object and add a new one.
 --
---     * @FieldToMatch@ : The part of web requests that you want AWS WAF to inspect and, if you want AWS WAF to inspect a header, the name of the header.
+--     * @FieldToMatch@ : The part of web requests that you want AWS WAF to inspect and, if you want AWS WAF to inspect a header or custom query parameter, the name of the header or parameter.
 --
 --     * @TextTransformation@ : Which text transformation, if any, to perform on the web request before inspecting the request for snippets of malicious SQL code.
 --
+-- You can only specify a single type of TextTransformation.
 --
 --
--- You use @SqlInjectionMatchSet@ objects to specify which CloudFront requests you want to allow, block, or count. For example, if you're receiving requests that contain snippets of SQL code in the query string and you want to block the requests, you can create a @SqlInjectionMatchSet@ with the applicable settings, and then configure AWS WAF to block the requests.
+--
+-- You use @SqlInjectionMatchSet@ objects to specify which CloudFront requests that you want to allow, block, or count. For example, if you're receiving requests that contain snippets of SQL code in the query string and you want to block the requests, you can create a @SqlInjectionMatchSet@ with the applicable settings, and then configure AWS WAF to block the requests. 
 --
 -- To create and configure a @SqlInjectionMatchSet@ , perform the following steps:
 --
@@ -41,7 +43,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAFRegional.UpdateSqlInjectionMatchSet
     (
@@ -73,12 +75,15 @@ import Network.AWS.WAFRegional.Types.Product
 --
 --
 -- /See:/ 'updateSqlInjectionMatchSet' smart constructor.
-data UpdateSqlInjectionMatchSet = UpdateSqlInjectionMatchSet'
-  { _usimsSqlInjectionMatchSetId :: !Text
-  , _usimsChangeToken            :: !Text
-  , _usimsUpdates                :: !(List1 SqlInjectionMatchSetUpdate)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSqlInjectionMatchSet = UpdateSqlInjectionMatchSet'{_usimsSqlInjectionMatchSetId
+                                                              :: !Text,
+                                                              _usimsChangeToken
+                                                              :: !Text,
+                                                              _usimsUpdates ::
+                                                              !(List1
+                                                                  SqlInjectionMatchSetUpdate)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UpdateSqlInjectionMatchSet' with the minimum fields required to make a request.
 --
@@ -88,19 +93,18 @@ data UpdateSqlInjectionMatchSet = UpdateSqlInjectionMatchSet'
 --
 -- * 'usimsChangeToken' - The value returned by the most recent call to 'GetChangeToken' .
 --
--- * 'usimsUpdates' - An array of @SqlInjectionMatchSetUpdate@ objects that you want to insert into or delete from a 'SqlInjectionMatchSet' . For more information, see the applicable data types:     * 'SqlInjectionMatchSetUpdate' : Contains @Action@ and @SqlInjectionMatchTuple@      * 'SqlInjectionMatchTuple' : Contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- * 'usimsUpdates' - An array of @SqlInjectionMatchSetUpdate@ objects that you want to insert into or delete from a 'SqlInjectionMatchSet' . For more information, see the applicable data types:     * 'SqlInjectionMatchSetUpdate' : Contains @Action@ and @SqlInjectionMatchTuple@      * 'SqlInjectionMatchTuple' : Contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 updateSqlInjectionMatchSet
     :: Text -- ^ 'usimsSqlInjectionMatchSetId'
     -> Text -- ^ 'usimsChangeToken'
     -> NonEmpty SqlInjectionMatchSetUpdate -- ^ 'usimsUpdates'
     -> UpdateSqlInjectionMatchSet
-updateSqlInjectionMatchSet pSqlInjectionMatchSetId_ pChangeToken_ pUpdates_ =
-  UpdateSqlInjectionMatchSet'
-    { _usimsSqlInjectionMatchSetId = pSqlInjectionMatchSetId_
-    , _usimsChangeToken = pChangeToken_
-    , _usimsUpdates = _List1 # pUpdates_
-    }
-
+updateSqlInjectionMatchSet pSqlInjectionMatchSetId_
+  pChangeToken_ pUpdates_
+  = UpdateSqlInjectionMatchSet'{_usimsSqlInjectionMatchSetId
+                                  = pSqlInjectionMatchSetId_,
+                                _usimsChangeToken = pChangeToken_,
+                                _usimsUpdates = _List1 # pUpdates_}
 
 -- | The @SqlInjectionMatchSetId@ of the @SqlInjectionMatchSet@ that you want to update. @SqlInjectionMatchSetId@ is returned by 'CreateSqlInjectionMatchSet' and by 'ListSqlInjectionMatchSets' .
 usimsSqlInjectionMatchSetId :: Lens' UpdateSqlInjectionMatchSet Text
@@ -110,7 +114,7 @@ usimsSqlInjectionMatchSetId = lens _usimsSqlInjectionMatchSetId (\ s a -> s{_usi
 usimsChangeToken :: Lens' UpdateSqlInjectionMatchSet Text
 usimsChangeToken = lens _usimsChangeToken (\ s a -> s{_usimsChangeToken = a})
 
--- | An array of @SqlInjectionMatchSetUpdate@ objects that you want to insert into or delete from a 'SqlInjectionMatchSet' . For more information, see the applicable data types:     * 'SqlInjectionMatchSetUpdate' : Contains @Action@ and @SqlInjectionMatchTuple@      * 'SqlInjectionMatchTuple' : Contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- | An array of @SqlInjectionMatchSetUpdate@ objects that you want to insert into or delete from a 'SqlInjectionMatchSet' . For more information, see the applicable data types:     * 'SqlInjectionMatchSetUpdate' : Contains @Action@ and @SqlInjectionMatchTuple@      * 'SqlInjectionMatchTuple' : Contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 usimsUpdates :: Lens' UpdateSqlInjectionMatchSet (NonEmpty SqlInjectionMatchSetUpdate)
 usimsUpdates = lens _usimsUpdates (\ s a -> s{_usimsUpdates = a}) . _List1
 
@@ -159,11 +163,15 @@ instance ToQuery UpdateSqlInjectionMatchSet where
 --
 --
 -- /See:/ 'updateSqlInjectionMatchSetResponse' smart constructor.
-data UpdateSqlInjectionMatchSetResponse = UpdateSqlInjectionMatchSetResponse'
-  { _usimsrsChangeToken    :: !(Maybe Text)
-  , _usimsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSqlInjectionMatchSetResponse = UpdateSqlInjectionMatchSetResponse'{_usimsrsChangeToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _usimsrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'UpdateSqlInjectionMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -175,10 +183,11 @@ data UpdateSqlInjectionMatchSetResponse = UpdateSqlInjectionMatchSetResponse'
 updateSqlInjectionMatchSetResponse
     :: Int -- ^ 'usimsrsResponseStatus'
     -> UpdateSqlInjectionMatchSetResponse
-updateSqlInjectionMatchSetResponse pResponseStatus_ =
-  UpdateSqlInjectionMatchSetResponse'
-    {_usimsrsChangeToken = Nothing, _usimsrsResponseStatus = pResponseStatus_}
-
+updateSqlInjectionMatchSetResponse pResponseStatus_
+  = UpdateSqlInjectionMatchSetResponse'{_usimsrsChangeToken
+                                          = Nothing,
+                                        _usimsrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @UpdateSqlInjectionMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 usimsrsChangeToken :: Lens' UpdateSqlInjectionMatchSetResponse (Maybe Text)

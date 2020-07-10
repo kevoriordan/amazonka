@@ -45,10 +45,8 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'getService' smart constructor.
-newtype GetService = GetService'
-  { _gsId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetService = GetService'{_gsId :: Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetService' with the minimum fields required to make a request.
 --
@@ -58,8 +56,7 @@ newtype GetService = GetService'
 getService
     :: Text -- ^ 'gsId'
     -> GetService
-getService pId_ = GetService' {_gsId = pId_}
-
+getService pId_ = GetService'{_gsId = pId_}
 
 -- | The ID of the service that you want to get settings for.
 gsId :: Lens' GetService Text
@@ -99,11 +96,10 @@ instance ToQuery GetService where
         toQuery = const mempty
 
 -- | /See:/ 'getServiceResponse' smart constructor.
-data GetServiceResponse = GetServiceResponse'
-  { _gsrsService        :: !(Maybe ServiceInfo)
-  , _gsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetServiceResponse = GetServiceResponse'{_gsrsService
+                                              :: !(Maybe ServiceInfo),
+                                              _gsrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetServiceResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +111,9 @@ data GetServiceResponse = GetServiceResponse'
 getServiceResponse
     :: Int -- ^ 'gsrsResponseStatus'
     -> GetServiceResponse
-getServiceResponse pResponseStatus_ =
-  GetServiceResponse'
-    {_gsrsService = Nothing, _gsrsResponseStatus = pResponseStatus_}
-
+getServiceResponse pResponseStatus_
+  = GetServiceResponse'{_gsrsService = Nothing,
+                        _gsrsResponseStatus = pResponseStatus_}
 
 -- | A complex type that contains information about the service.
 gsrsService :: Lens' GetServiceResponse (Maybe ServiceInfo)

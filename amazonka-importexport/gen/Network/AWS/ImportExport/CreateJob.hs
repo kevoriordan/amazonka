@@ -54,14 +54,12 @@ import Network.AWS.Response
 -- | Input structure for the CreateJob operation.
 --
 -- /See:/ 'createJob' smart constructor.
-data CreateJob = CreateJob'
-  { _cjAPIVersion       :: !(Maybe Text)
-  , _cjManifestAddendum :: !(Maybe Text)
-  , _cjJobType          :: !JobType
-  , _cjManifest         :: !Text
-  , _cjValidateOnly     :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJob = CreateJob'{_cjAPIVersion ::
+                            !(Maybe Text),
+                            _cjManifestAddendum :: !(Maybe Text),
+                            _cjJobType :: !JobType, _cjManifest :: !Text,
+                            _cjValidateOnly :: !Bool}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJob' with the minimum fields required to make a request.
 --
@@ -81,15 +79,11 @@ createJob
     -> Text -- ^ 'cjManifest'
     -> Bool -- ^ 'cjValidateOnly'
     -> CreateJob
-createJob pJobType_ pManifest_ pValidateOnly_ =
-  CreateJob'
-    { _cjAPIVersion = Nothing
-    , _cjManifestAddendum = Nothing
-    , _cjJobType = pJobType_
-    , _cjManifest = pManifest_
-    , _cjValidateOnly = pValidateOnly_
-    }
-
+createJob pJobType_ pManifest_ pValidateOnly_
+  = CreateJob'{_cjAPIVersion = Nothing,
+               _cjManifestAddendum = Nothing,
+               _cjJobType = pJobType_, _cjManifest = pManifest_,
+               _cjValidateOnly = pValidateOnly_}
 
 -- | Undocumented member.
 cjAPIVersion :: Lens' CreateJob (Maybe Text)
@@ -151,16 +145,18 @@ instance ToQuery CreateJob where
 -- | Output structure for the CreateJob operation.
 --
 -- /See:/ 'createJobResponse' smart constructor.
-data CreateJobResponse = CreateJobResponse'
-  { _cjrsSignature             :: !(Maybe Text)
-  , _cjrsJobType               :: !(Maybe JobType)
-  , _cjrsJobId                 :: !(Maybe Text)
-  , _cjrsSignatureFileContents :: !(Maybe Text)
-  , _cjrsWarningMessage        :: !(Maybe Text)
-  , _cjrsArtifactList          :: !(Maybe [Artifact])
-  , _cjrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJobResponse = CreateJobResponse'{_cjrsSignature
+                                            :: !(Maybe Text),
+                                            _cjrsJobType :: !(Maybe JobType),
+                                            _cjrsJobId :: !(Maybe Text),
+                                            _cjrsSignatureFileContents ::
+                                            !(Maybe Text),
+                                            _cjrsWarningMessage ::
+                                            !(Maybe Text),
+                                            _cjrsArtifactList ::
+                                            !(Maybe [Artifact]),
+                                            _cjrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJobResponse' with the minimum fields required to make a request.
 --
@@ -182,17 +178,13 @@ data CreateJobResponse = CreateJobResponse'
 createJobResponse
     :: Int -- ^ 'cjrsResponseStatus'
     -> CreateJobResponse
-createJobResponse pResponseStatus_ =
-  CreateJobResponse'
-    { _cjrsSignature = Nothing
-    , _cjrsJobType = Nothing
-    , _cjrsJobId = Nothing
-    , _cjrsSignatureFileContents = Nothing
-    , _cjrsWarningMessage = Nothing
-    , _cjrsArtifactList = Nothing
-    , _cjrsResponseStatus = pResponseStatus_
-    }
-
+createJobResponse pResponseStatus_
+  = CreateJobResponse'{_cjrsSignature = Nothing,
+                       _cjrsJobType = Nothing, _cjrsJobId = Nothing,
+                       _cjrsSignatureFileContents = Nothing,
+                       _cjrsWarningMessage = Nothing,
+                       _cjrsArtifactList = Nothing,
+                       _cjrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 cjrsSignature :: Lens' CreateJobResponse (Maybe Text)

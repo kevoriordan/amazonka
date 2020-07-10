@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a Maintenance Window.
+-- Deletes a maintenance window.
 --
 --
 module Network.AWS.SSM.DeleteMaintenanceWindow
@@ -45,24 +45,23 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'deleteMaintenanceWindow' smart constructor.
-newtype DeleteMaintenanceWindow = DeleteMaintenanceWindow'
-  { _dmwWindowId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteMaintenanceWindow = DeleteMaintenanceWindow'{_dmwWindowId
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteMaintenanceWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmwWindowId' - The ID of the Maintenance Window to delete.
+-- * 'dmwWindowId' - The ID of the maintenance window to delete.
 deleteMaintenanceWindow
     :: Text -- ^ 'dmwWindowId'
     -> DeleteMaintenanceWindow
-deleteMaintenanceWindow pWindowId_ =
-  DeleteMaintenanceWindow' {_dmwWindowId = pWindowId_}
+deleteMaintenanceWindow pWindowId_
+  = DeleteMaintenanceWindow'{_dmwWindowId = pWindowId_}
 
-
--- | The ID of the Maintenance Window to delete.
+-- | The ID of the maintenance window to delete.
 dmwWindowId :: Lens' DeleteMaintenanceWindow Text
 dmwWindowId = lens _dmwWindowId (\ s a -> s{_dmwWindowId = a})
 
@@ -101,28 +100,31 @@ instance ToQuery DeleteMaintenanceWindow where
         toQuery = const mempty
 
 -- | /See:/ 'deleteMaintenanceWindowResponse' smart constructor.
-data DeleteMaintenanceWindowResponse = DeleteMaintenanceWindowResponse'
-  { _dmwrsWindowId       :: !(Maybe Text)
-  , _dmwrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteMaintenanceWindowResponse = DeleteMaintenanceWindowResponse'{_dmwrsWindowId
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dmwrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteMaintenanceWindowResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmwrsWindowId' - The ID of the deleted Maintenance Window.
+-- * 'dmwrsWindowId' - The ID of the deleted maintenance window.
 --
 -- * 'dmwrsResponseStatus' - -- | The response status code.
 deleteMaintenanceWindowResponse
     :: Int -- ^ 'dmwrsResponseStatus'
     -> DeleteMaintenanceWindowResponse
-deleteMaintenanceWindowResponse pResponseStatus_ =
-  DeleteMaintenanceWindowResponse'
-    {_dmwrsWindowId = Nothing, _dmwrsResponseStatus = pResponseStatus_}
+deleteMaintenanceWindowResponse pResponseStatus_
+  = DeleteMaintenanceWindowResponse'{_dmwrsWindowId =
+                                       Nothing,
+                                     _dmwrsResponseStatus = pResponseStatus_}
 
-
--- | The ID of the deleted Maintenance Window.
+-- | The ID of the deleted maintenance window.
 dmwrsWindowId :: Lens' DeleteMaintenanceWindowResponse (Maybe Text)
 dmwrsWindowId = lens _dmwrsWindowId (\ s a -> s{_dmwrsWindowId = a})
 

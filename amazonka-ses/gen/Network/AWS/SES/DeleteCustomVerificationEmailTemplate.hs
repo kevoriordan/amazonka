@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an existing custom verification email template.
+-- Deletes an existing custom verification email template. 
 --
 --
 -- For more information about custom verification email templates, see <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html Using Custom Verification Email Templates> in the /Amazon SES Developer Guide/ .
@@ -50,10 +50,12 @@ import Network.AWS.SES.Types.Product
 --
 --
 -- /See:/ 'deleteCustomVerificationEmailTemplate' smart constructor.
-newtype DeleteCustomVerificationEmailTemplate = DeleteCustomVerificationEmailTemplate'
-  { _dcvetTemplateName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCustomVerificationEmailTemplate = DeleteCustomVerificationEmailTemplate'{_dcvetTemplateName
+                                                                                       ::
+                                                                                       Text}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DeleteCustomVerificationEmailTemplate' with the minimum fields required to make a request.
 --
@@ -63,9 +65,9 @@ newtype DeleteCustomVerificationEmailTemplate = DeleteCustomVerificationEmailTem
 deleteCustomVerificationEmailTemplate
     :: Text -- ^ 'dcvetTemplateName'
     -> DeleteCustomVerificationEmailTemplate
-deleteCustomVerificationEmailTemplate pTemplateName_ =
-  DeleteCustomVerificationEmailTemplate' {_dcvetTemplateName = pTemplateName_}
-
+deleteCustomVerificationEmailTemplate pTemplateName_
+  = DeleteCustomVerificationEmailTemplate'{_dcvetTemplateName
+                                             = pTemplateName_}
 
 -- | The name of the custom verification email template that you want to delete.
 dcvetTemplateName :: Lens' DeleteCustomVerificationEmailTemplate Text
@@ -109,18 +111,17 @@ instance ToQuery
                "TemplateName" =: _dcvetTemplateName]
 
 -- | /See:/ 'deleteCustomVerificationEmailTemplateResponse' smart constructor.
-data DeleteCustomVerificationEmailTemplateResponse =
-  DeleteCustomVerificationEmailTemplateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCustomVerificationEmailTemplateResponse = DeleteCustomVerificationEmailTemplateResponse'
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'DeleteCustomVerificationEmailTemplateResponse' with the minimum fields required to make a request.
 --
 deleteCustomVerificationEmailTemplateResponse
     :: DeleteCustomVerificationEmailTemplateResponse
-deleteCustomVerificationEmailTemplateResponse =
-  DeleteCustomVerificationEmailTemplateResponse'
-
+deleteCustomVerificationEmailTemplateResponse
+  = DeleteCustomVerificationEmailTemplateResponse'
 
 instance NFData
            DeleteCustomVerificationEmailTemplateResponse

@@ -43,15 +43,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteEvaluationResults' smart constructor.
-newtype DeleteEvaluationResults = DeleteEvaluationResults'
-  { _derConfigRuleName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEvaluationResults = DeleteEvaluationResults'{_derConfigRuleName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteEvaluationResults' with the minimum fields required to make a request.
 --
@@ -61,9 +61,9 @@ newtype DeleteEvaluationResults = DeleteEvaluationResults'
 deleteEvaluationResults
     :: Text -- ^ 'derConfigRuleName'
     -> DeleteEvaluationResults
-deleteEvaluationResults pConfigRuleName_ =
-  DeleteEvaluationResults' {_derConfigRuleName = pConfigRuleName_}
-
+deleteEvaluationResults pConfigRuleName_
+  = DeleteEvaluationResults'{_derConfigRuleName =
+                               pConfigRuleName_}
 
 -- | The name of the AWS Config rule for which you want to delete the evaluation results.
 derConfigRuleName :: Lens' DeleteEvaluationResults Text
@@ -110,10 +110,11 @@ instance ToQuery DeleteEvaluationResults where
 --
 --
 -- /See:/ 'deleteEvaluationResultsResponse' smart constructor.
-newtype DeleteEvaluationResultsResponse = DeleteEvaluationResultsResponse'
-  { _derrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEvaluationResultsResponse = DeleteEvaluationResultsResponse'{_derrsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteEvaluationResultsResponse' with the minimum fields required to make a request.
 --
@@ -123,9 +124,9 @@ newtype DeleteEvaluationResultsResponse = DeleteEvaluationResultsResponse'
 deleteEvaluationResultsResponse
     :: Int -- ^ 'derrsResponseStatus'
     -> DeleteEvaluationResultsResponse
-deleteEvaluationResultsResponse pResponseStatus_ =
-  DeleteEvaluationResultsResponse' {_derrsResponseStatus = pResponseStatus_}
-
+deleteEvaluationResultsResponse pResponseStatus_
+  = DeleteEvaluationResultsResponse'{_derrsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 derrsResponseStatus :: Lens' DeleteEvaluationResultsResponse Int

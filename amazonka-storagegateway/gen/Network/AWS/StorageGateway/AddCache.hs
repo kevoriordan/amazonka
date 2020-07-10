@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway type (see <http://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html Storage Gateway Concepts> ).
+-- Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway type (see <https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html Storage Gateway Concepts> ).
 --
 --
 -- In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.
@@ -48,11 +48,9 @@ import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'addCache' smart constructor.
-data AddCache = AddCache'
-  { _acGatewayARN :: !Text
-  , _acDiskIds    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddCache = AddCache'{_acGatewayARN :: !Text,
+                          _acDiskIds :: ![Text]}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddCache' with the minimum fields required to make a request.
 --
@@ -60,19 +58,19 @@ data AddCache = AddCache'
 --
 -- * 'acGatewayARN' - Undocumented member.
 --
--- * 'acDiskIds' - Undocumented member.
+-- * 'acDiskIds' - An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the 'ListLocalDisks' API.
 addCache
     :: Text -- ^ 'acGatewayARN'
     -> AddCache
-addCache pGatewayARN_ =
-  AddCache' {_acGatewayARN = pGatewayARN_, _acDiskIds = mempty}
-
+addCache pGatewayARN_
+  = AddCache'{_acGatewayARN = pGatewayARN_,
+              _acDiskIds = mempty}
 
 -- | Undocumented member.
 acGatewayARN :: Lens' AddCache Text
 acGatewayARN = lens _acGatewayARN (\ s a -> s{_acGatewayARN = a})
 
--- | Undocumented member.
+-- | An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the 'ListLocalDisks' API.
 acDiskIds :: Lens' AddCache [Text]
 acDiskIds = lens _acDiskIds (\ s a -> s{_acDiskIds = a}) . _Coerce
 
@@ -112,11 +110,10 @@ instance ToQuery AddCache where
         toQuery = const mempty
 
 -- | /See:/ 'addCacheResponse' smart constructor.
-data AddCacheResponse = AddCacheResponse'
-  { _acrsGatewayARN     :: !(Maybe Text)
-  , _acrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddCacheResponse = AddCacheResponse'{_acrsGatewayARN
+                                          :: !(Maybe Text),
+                                          _acrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddCacheResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +125,9 @@ data AddCacheResponse = AddCacheResponse'
 addCacheResponse
     :: Int -- ^ 'acrsResponseStatus'
     -> AddCacheResponse
-addCacheResponse pResponseStatus_ =
-  AddCacheResponse'
-    {_acrsGatewayARN = Nothing, _acrsResponseStatus = pResponseStatus_}
-
+addCacheResponse pResponseStatus_
+  = AddCacheResponse'{_acrsGatewayARN = Nothing,
+                      _acrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 acrsGatewayARN :: Lens' AddCacheResponse (Maybe Text)

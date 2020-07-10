@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds an alias to the set of a given member of Amazon WorkMail.
+-- Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
 --
 --
 module Network.AWS.WorkMail.CreateAlias
@@ -46,44 +46,38 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'createAlias' smart constructor.
-data CreateAlias = CreateAlias'
-  { _caOrganizationId :: !Text
-  , _caEntityId       :: !Text
-  , _caAlias          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAlias = CreateAlias'{_caOrganizationId ::
+                                !Text,
+                                _caEntityId :: !Text, _caAlias :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'caOrganizationId' - The organization under which the member exists.
+-- * 'caOrganizationId' - The organization under which the member (user or group) exists.
 --
--- * 'caEntityId' - The alias is added to this Amazon WorkMail entity.
+-- * 'caEntityId' - The member (user or group) to which this alias is added.
 --
--- * 'caAlias' - The alias to add to the user.
+-- * 'caAlias' - The alias to add to the member set.
 createAlias
     :: Text -- ^ 'caOrganizationId'
     -> Text -- ^ 'caEntityId'
     -> Text -- ^ 'caAlias'
     -> CreateAlias
-createAlias pOrganizationId_ pEntityId_ pAlias_ =
-  CreateAlias'
-    { _caOrganizationId = pOrganizationId_
-    , _caEntityId = pEntityId_
-    , _caAlias = pAlias_
-    }
+createAlias pOrganizationId_ pEntityId_ pAlias_
+  = CreateAlias'{_caOrganizationId = pOrganizationId_,
+                 _caEntityId = pEntityId_, _caAlias = pAlias_}
 
-
--- | The organization under which the member exists.
+-- | The organization under which the member (user or group) exists.
 caOrganizationId :: Lens' CreateAlias Text
 caOrganizationId = lens _caOrganizationId (\ s a -> s{_caOrganizationId = a})
 
--- | The alias is added to this Amazon WorkMail entity.
+-- | The member (user or group) to which this alias is added.
 caEntityId :: Lens' CreateAlias Text
 caEntityId = lens _caEntityId (\ s a -> s{_caEntityId = a})
 
--- | The alias to add to the user.
+-- | The alias to add to the member set.
 caAlias :: Lens' CreateAlias Text
 caAlias = lens _caAlias (\ s a -> s{_caAlias = a})
 
@@ -123,10 +117,10 @@ instance ToQuery CreateAlias where
         toQuery = const mempty
 
 -- | /See:/ 'createAliasResponse' smart constructor.
-newtype CreateAliasResponse = CreateAliasResponse'
-  { _carsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateAliasResponse = CreateAliasResponse'{_carsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateAliasResponse' with the minimum fields required to make a request.
 --
@@ -136,9 +130,9 @@ newtype CreateAliasResponse = CreateAliasResponse'
 createAliasResponse
     :: Int -- ^ 'carsResponseStatus'
     -> CreateAliasResponse
-createAliasResponse pResponseStatus_ =
-  CreateAliasResponse' {_carsResponseStatus = pResponseStatus_}
-
+createAliasResponse pResponseStatus_
+  = CreateAliasResponse'{_carsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 carsResponseStatus :: Lens' CreateAliasResponse Int

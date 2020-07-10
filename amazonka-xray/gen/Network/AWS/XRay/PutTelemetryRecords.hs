@@ -47,49 +47,48 @@ import Network.AWS.XRay.Types
 import Network.AWS.XRay.Types.Product
 
 -- | /See:/ 'putTelemetryRecords' smart constructor.
-data PutTelemetryRecords = PutTelemetryRecords'
-  { _ptrHostname         :: !(Maybe Text)
-  , _ptrEC2InstanceId    :: !(Maybe Text)
-  , _ptrResourceARN      :: !(Maybe Text)
-  , _ptrTelemetryRecords :: ![TelemetryRecord]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutTelemetryRecords = PutTelemetryRecords'{_ptrHostname
+                                                :: !(Maybe Text),
+                                                _ptrEC2InstanceId ::
+                                                !(Maybe Text),
+                                                _ptrResourceARN ::
+                                                !(Maybe Text),
+                                                _ptrTelemetryRecords ::
+                                                ![TelemetryRecord]}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutTelemetryRecords' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ptrHostname' -
+-- * 'ptrHostname' - 
 --
--- * 'ptrEC2InstanceId' -
+-- * 'ptrEC2InstanceId' - 
 --
--- * 'ptrResourceARN' -
+-- * 'ptrResourceARN' - 
 --
--- * 'ptrTelemetryRecords' -
+-- * 'ptrTelemetryRecords' - 
 putTelemetryRecords
     :: PutTelemetryRecords
-putTelemetryRecords =
-  PutTelemetryRecords'
-    { _ptrHostname = Nothing
-    , _ptrEC2InstanceId = Nothing
-    , _ptrResourceARN = Nothing
-    , _ptrTelemetryRecords = mempty
-    }
+putTelemetryRecords
+  = PutTelemetryRecords'{_ptrHostname = Nothing,
+                         _ptrEC2InstanceId = Nothing,
+                         _ptrResourceARN = Nothing,
+                         _ptrTelemetryRecords = mempty}
 
-
--- |
+-- | 
 ptrHostname :: Lens' PutTelemetryRecords (Maybe Text)
 ptrHostname = lens _ptrHostname (\ s a -> s{_ptrHostname = a})
 
--- |
+-- | 
 ptrEC2InstanceId :: Lens' PutTelemetryRecords (Maybe Text)
 ptrEC2InstanceId = lens _ptrEC2InstanceId (\ s a -> s{_ptrEC2InstanceId = a})
 
--- |
+-- | 
 ptrResourceARN :: Lens' PutTelemetryRecords (Maybe Text)
 ptrResourceARN = lens _ptrResourceARN (\ s a -> s{_ptrResourceARN = a})
 
--- |
+-- | 
 ptrTelemetryRecords :: Lens' PutTelemetryRecords [TelemetryRecord]
 ptrTelemetryRecords = lens _ptrTelemetryRecords (\ s a -> s{_ptrTelemetryRecords = a}) . _Coerce
 
@@ -125,10 +124,10 @@ instance ToQuery PutTelemetryRecords where
         toQuery = const mempty
 
 -- | /See:/ 'putTelemetryRecordsResponse' smart constructor.
-newtype PutTelemetryRecordsResponse = PutTelemetryRecordsResponse'
-  { _ptrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype PutTelemetryRecordsResponse = PutTelemetryRecordsResponse'{_ptrrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'PutTelemetryRecordsResponse' with the minimum fields required to make a request.
 --
@@ -138,9 +137,9 @@ newtype PutTelemetryRecordsResponse = PutTelemetryRecordsResponse'
 putTelemetryRecordsResponse
     :: Int -- ^ 'ptrrsResponseStatus'
     -> PutTelemetryRecordsResponse
-putTelemetryRecordsResponse pResponseStatus_ =
-  PutTelemetryRecordsResponse' {_ptrrsResponseStatus = pResponseStatus_}
-
+putTelemetryRecordsResponse pResponseStatus_
+  = PutTelemetryRecordsResponse'{_ptrrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 ptrrsResponseStatus :: Lens' PutTelemetryRecordsResponse Int

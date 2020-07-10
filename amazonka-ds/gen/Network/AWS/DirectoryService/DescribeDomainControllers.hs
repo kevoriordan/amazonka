@@ -52,19 +52,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeDomainControllers' smart constructor.
-data DescribeDomainControllers = DescribeDomainControllers'
-  { _ddcNextToken           :: !(Maybe Text)
-  , _ddcDomainControllerIds :: !(Maybe [Text])
-  , _ddcLimit               :: !(Maybe Nat)
-  , _ddcDirectoryId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDomainControllers = DescribeDomainControllers'{_ddcNextToken
+                                                            :: !(Maybe Text),
+                                                            _ddcDomainControllerIds
+                                                            :: !(Maybe [Text]),
+                                                            _ddcLimit ::
+                                                            !(Maybe Nat),
+                                                            _ddcDirectoryId ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeDomainControllers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddcNextToken' - The /DescribeDomainControllers.NextToken/ value from a previous call to 'DescribeDomainControllers' . Pass null if this is the first call.
+-- * 'ddcNextToken' - The /DescribeDomainControllers.NextToken/ value from a previous call to 'DescribeDomainControllers' . Pass null if this is the first call. 
 --
 -- * 'ddcDomainControllerIds' - A list of identifiers for the domain controllers whose information will be provided.
 --
@@ -74,16 +77,13 @@ data DescribeDomainControllers = DescribeDomainControllers'
 describeDomainControllers
     :: Text -- ^ 'ddcDirectoryId'
     -> DescribeDomainControllers
-describeDomainControllers pDirectoryId_ =
-  DescribeDomainControllers'
-    { _ddcNextToken = Nothing
-    , _ddcDomainControllerIds = Nothing
-    , _ddcLimit = Nothing
-    , _ddcDirectoryId = pDirectoryId_
-    }
+describeDomainControllers pDirectoryId_
+  = DescribeDomainControllers'{_ddcNextToken = Nothing,
+                               _ddcDomainControllerIds = Nothing,
+                               _ddcLimit = Nothing,
+                               _ddcDirectoryId = pDirectoryId_}
 
-
--- | The /DescribeDomainControllers.NextToken/ value from a previous call to 'DescribeDomainControllers' . Pass null if this is the first call.
+-- | The /DescribeDomainControllers.NextToken/ value from a previous call to 'DescribeDomainControllers' . Pass null if this is the first call. 
 ddcNextToken :: Lens' DescribeDomainControllers (Maybe Text)
 ddcNextToken = lens _ddcNextToken (\ s a -> s{_ddcNextToken = a})
 
@@ -149,12 +149,19 @@ instance ToQuery DescribeDomainControllers where
         toQuery = const mempty
 
 -- | /See:/ 'describeDomainControllersResponse' smart constructor.
-data DescribeDomainControllersResponse = DescribeDomainControllersResponse'
-  { _ddcrsNextToken         :: !(Maybe Text)
-  , _ddcrsDomainControllers :: !(Maybe [DomainController])
-  , _ddcrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDomainControllersResponse = DescribeDomainControllersResponse'{_ddcrsNextToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _ddcrsDomainControllers
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [DomainController]),
+                                                                            _ddcrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeDomainControllersResponse' with the minimum fields required to make a request.
 --
@@ -168,13 +175,11 @@ data DescribeDomainControllersResponse = DescribeDomainControllersResponse'
 describeDomainControllersResponse
     :: Int -- ^ 'ddcrsResponseStatus'
     -> DescribeDomainControllersResponse
-describeDomainControllersResponse pResponseStatus_ =
-  DescribeDomainControllersResponse'
-    { _ddcrsNextToken = Nothing
-    , _ddcrsDomainControllers = Nothing
-    , _ddcrsResponseStatus = pResponseStatus_
-    }
-
+describeDomainControllersResponse pResponseStatus_
+  = DescribeDomainControllersResponse'{_ddcrsNextToken
+                                         = Nothing,
+                                       _ddcrsDomainControllers = Nothing,
+                                       _ddcrsResponseStatus = pResponseStatus_}
 
 -- | If not null, more results are available. Pass this value for the @NextToken@ parameter in a subsequent call to 'DescribeDomainControllers' retrieve the next set of items.
 ddcrsNextToken :: Lens' DescribeDomainControllersResponse (Maybe Text)

@@ -60,15 +60,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyHSM' smart constructor.
-data ModifyHSM = ModifyHSM'
-  { _mhIAMRoleARN :: !(Maybe Text)
-  , _mhSubnetId   :: !(Maybe Text)
-  , _mhSyslogIP   :: !(Maybe Text)
-  , _mhExternalId :: !(Maybe Text)
-  , _mhEniIP      :: !(Maybe Text)
-  , _mhHSMARN     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyHSM = ModifyHSM'{_mhIAMRoleARN ::
+                            !(Maybe Text),
+                            _mhSubnetId :: !(Maybe Text),
+                            _mhSyslogIP :: !(Maybe Text),
+                            _mhExternalId :: !(Maybe Text),
+                            _mhEniIP :: !(Maybe Text), _mhHSMARN :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyHSM' with the minimum fields required to make a request.
 --
@@ -88,16 +86,11 @@ data ModifyHSM = ModifyHSM'
 modifyHSM
     :: Text -- ^ 'mhHSMARN'
     -> ModifyHSM
-modifyHSM pHSMARN_ =
-  ModifyHSM'
-    { _mhIAMRoleARN = Nothing
-    , _mhSubnetId = Nothing
-    , _mhSyslogIP = Nothing
-    , _mhExternalId = Nothing
-    , _mhEniIP = Nothing
-    , _mhHSMARN = pHSMARN_
-    }
-
+modifyHSM pHSMARN_
+  = ModifyHSM'{_mhIAMRoleARN = Nothing,
+               _mhSubnetId = Nothing, _mhSyslogIP = Nothing,
+               _mhExternalId = Nothing, _mhEniIP = Nothing,
+               _mhHSMARN = pHSMARN_}
 
 -- | The new IAM role ARN.
 mhIAMRoleARN :: Lens' ModifyHSM (Maybe Text)
@@ -167,11 +160,10 @@ instance ToQuery ModifyHSM where
 --
 --
 -- /See:/ 'modifyHSMResponse' smart constructor.
-data ModifyHSMResponse = ModifyHSMResponse'
-  { _mhsmrsHSMARN         :: !(Maybe Text)
-  , _mhsmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyHSMResponse = ModifyHSMResponse'{_mhsmrsHSMARN
+                                            :: !(Maybe Text),
+                                            _mhsmrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyHSMResponse' with the minimum fields required to make a request.
 --
@@ -183,10 +175,9 @@ data ModifyHSMResponse = ModifyHSMResponse'
 modifyHSMResponse
     :: Int -- ^ 'mhsmrsResponseStatus'
     -> ModifyHSMResponse
-modifyHSMResponse pResponseStatus_ =
-  ModifyHSMResponse'
-    {_mhsmrsHSMARN = Nothing, _mhsmrsResponseStatus = pResponseStatus_}
-
+modifyHSMResponse pResponseStatus_
+  = ModifyHSMResponse'{_mhsmrsHSMARN = Nothing,
+                       _mhsmrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the HSM.
 mhsmrsHSMARN :: Lens' ModifyHSMResponse (Maybe Text)

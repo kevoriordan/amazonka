@@ -23,7 +23,7 @@
 --
 -- To list the tags for a log group, use 'ListTagsLogGroup' . To remove tags, use 'UntagLogGroup' .
 --
--- For more information about tags, see <http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html Tag Log Groups in Amazon CloudWatch Logs> in the /Amazon CloudWatch Logs User Guide/ .
+-- For more information about tags, see <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html Tag Log Groups in Amazon CloudWatch Logs> in the /Amazon CloudWatch Logs User Guide/ .
 --
 module Network.AWS.CloudWatchLogs.TagLogGroup
     (
@@ -47,11 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'tagLogGroup' smart constructor.
-data TagLogGroup = TagLogGroup'
-  { _tlgLogGroupName :: !Text
-  , _tlgTags         :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagLogGroup = TagLogGroup'{_tlgLogGroupName ::
+                                !Text,
+                                _tlgTags :: !(Map Text Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagLogGroup' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ data TagLogGroup = TagLogGroup'
 tagLogGroup
     :: Text -- ^ 'tlgLogGroupName'
     -> TagLogGroup
-tagLogGroup pLogGroupName_ =
-  TagLogGroup' {_tlgLogGroupName = pLogGroupName_, _tlgTags = mempty}
-
+tagLogGroup pLogGroupName_
+  = TagLogGroup'{_tlgLogGroupName = pLogGroupName_,
+                 _tlgTags = mempty}
 
 -- | The name of the log group.
 tlgLogGroupName :: Lens' TagLogGroup Text
@@ -107,16 +106,13 @@ instance ToQuery TagLogGroup where
         toQuery = const mempty
 
 -- | /See:/ 'tagLogGroupResponse' smart constructor.
-data TagLogGroupResponse =
-  TagLogGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagLogGroupResponse = TagLogGroupResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagLogGroupResponse' with the minimum fields required to make a request.
 --
 tagLogGroupResponse
     :: TagLogGroupResponse
 tagLogGroupResponse = TagLogGroupResponse'
-
 
 instance NFData TagLogGroupResponse where

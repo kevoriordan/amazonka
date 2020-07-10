@@ -21,7 +21,7 @@
 -- Describes one or more of your virtual private gateways.
 --
 --
--- For more information about virtual private gateways, see <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html AWS Managed VPN Connections> in the /Amazon Virtual Private Cloud User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html AWS Site-to-Site VPN> in the /AWS Site-to-Site VPN User Guide/ .
 --
 module Network.AWS.EC2.DescribeVPNGateways
     (
@@ -53,33 +53,29 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeVPNGateways' smart constructor.
-data DescribeVPNGateways = DescribeVPNGateways'
-  { _dvgsFilters       :: !(Maybe [Filter])
-  , _dvgsVPNGatewayIds :: !(Maybe [Text])
-  , _dvgsDryRun        :: !(Maybe Bool)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeVPNGateways = DescribeVPNGateways'{_dvgsFilters
+                                                :: !(Maybe [Filter]),
+                                                _dvgsVPNGatewayIds ::
+                                                !(Maybe [Text]),
+                                                _dvgsDryRun :: !(Maybe Bool)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeVPNGateways' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvgsFilters' - One or more filters.     * @amazon-side-asn@ - The Autonomous System Number (ASN) for the Amazon side of the gateway.     * @attachment.state@ - The current state of the attachment between the gateway and the VPC (@attaching@ | @attached@ | @detaching@ | @detached@ ).     * @attachment.vpc-id@ - The ID of an attached VPC.     * @availability-zone@ - The Availability Zone for the virtual private gateway (if applicable).     * @state@ - The state of the virtual private gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @tag@ :/key/ =/value/ - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify @tag:Purpose@ for the filter name and @X@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. This filter is independent of the @tag-value@ filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the @tag@ :/key/ =/value/ filter.     * @tag-value@ - The value of a tag assigned to the resource. This filter is independent of the @tag-key@ filter.     * @type@ - The type of virtual private gateway. Currently the only supported type is @ipsec.1@ .     * @vpn-gateway-id@ - The ID of the virtual private gateway.
+-- * 'dvgsFilters' - One or more filters.     * @amazon-side-asn@ - The Autonomous System Number (ASN) for the Amazon side of the gateway.     * @attachment.state@ - The current state of the attachment between the gateway and the VPC (@attaching@ | @attached@ | @detaching@ | @detached@ ).     * @attachment.vpc-id@ - The ID of an attached VPC.     * @availability-zone@ - The Availability Zone for the virtual private gateway (if applicable).     * @state@ - The state of the virtual private gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @tag@ :<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key @Owner@ and the value @TeamA@ , specify @tag:Owner@ for the filter name and @TeamA@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.     * @type@ - The type of virtual private gateway. Currently the only supported type is @ipsec.1@ .     * @vpn-gateway-id@ - The ID of the virtual private gateway.
 --
 -- * 'dvgsVPNGatewayIds' - One or more virtual private gateway IDs. Default: Describes all your virtual private gateways.
 --
 -- * 'dvgsDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 describeVPNGateways
     :: DescribeVPNGateways
-describeVPNGateways =
-  DescribeVPNGateways'
-    { _dvgsFilters = Nothing
-    , _dvgsVPNGatewayIds = Nothing
-    , _dvgsDryRun = Nothing
-    }
+describeVPNGateways
+  = DescribeVPNGateways'{_dvgsFilters = Nothing,
+                         _dvgsVPNGatewayIds = Nothing, _dvgsDryRun = Nothing}
 
-
--- | One or more filters.     * @amazon-side-asn@ - The Autonomous System Number (ASN) for the Amazon side of the gateway.     * @attachment.state@ - The current state of the attachment between the gateway and the VPC (@attaching@ | @attached@ | @detaching@ | @detached@ ).     * @attachment.vpc-id@ - The ID of an attached VPC.     * @availability-zone@ - The Availability Zone for the virtual private gateway (if applicable).     * @state@ - The state of the virtual private gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @tag@ :/key/ =/value/ - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify @tag:Purpose@ for the filter name and @X@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. This filter is independent of the @tag-value@ filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the @tag@ :/key/ =/value/ filter.     * @tag-value@ - The value of a tag assigned to the resource. This filter is independent of the @tag-key@ filter.     * @type@ - The type of virtual private gateway. Currently the only supported type is @ipsec.1@ .     * @vpn-gateway-id@ - The ID of the virtual private gateway.
+-- | One or more filters.     * @amazon-side-asn@ - The Autonomous System Number (ASN) for the Amazon side of the gateway.     * @attachment.state@ - The current state of the attachment between the gateway and the VPC (@attaching@ | @attached@ | @detaching@ | @detached@ ).     * @attachment.vpc-id@ - The ID of an attached VPC.     * @availability-zone@ - The Availability Zone for the virtual private gateway (if applicable).     * @state@ - The state of the virtual private gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @tag@ :<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key @Owner@ and the value @TeamA@ , specify @tag:Owner@ for the filter name and @TeamA@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.     * @type@ - The type of virtual private gateway. Currently the only supported type is @ipsec.1@ .     * @vpn-gateway-id@ - The ID of the virtual private gateway.
 dvgsFilters :: Lens' DescribeVPNGateways [Filter]
 dvgsFilters = lens _dvgsFilters (\ s a -> s{_dvgsFilters = a}) . _Default . _Coerce
 
@@ -128,11 +124,14 @@ instance ToQuery DescribeVPNGateways where
 --
 --
 -- /See:/ 'describeVPNGatewaysResponse' smart constructor.
-data DescribeVPNGatewaysResponse = DescribeVPNGatewaysResponse'
-  { _dvgrsVPNGateways    :: !(Maybe [VPNGateway])
-  , _dvgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeVPNGatewaysResponse = DescribeVPNGatewaysResponse'{_dvgrsVPNGateways
+                                                                ::
+                                                                !(Maybe
+                                                                    [VPNGateway]),
+                                                                _dvgrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeVPNGatewaysResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +143,10 @@ data DescribeVPNGatewaysResponse = DescribeVPNGatewaysResponse'
 describeVPNGatewaysResponse
     :: Int -- ^ 'dvgrsResponseStatus'
     -> DescribeVPNGatewaysResponse
-describeVPNGatewaysResponse pResponseStatus_ =
-  DescribeVPNGatewaysResponse'
-    {_dvgrsVPNGateways = Nothing, _dvgrsResponseStatus = pResponseStatus_}
-
+describeVPNGatewaysResponse pResponseStatus_
+  = DescribeVPNGatewaysResponse'{_dvgrsVPNGateways =
+                                   Nothing,
+                                 _dvgrsResponseStatus = pResponseStatus_}
 
 -- | Information about one or more virtual private gateways.
 dvgrsVPNGateways :: Lens' DescribeVPNGatewaysResponse [VPNGateway]

@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteMetricFilter' smart constructor.
-data DeleteMetricFilter = DeleteMetricFilter'
-  { _delLogGroupName :: !Text
-  , _delFilterName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteMetricFilter = DeleteMetricFilter'{_delLogGroupName
+                                              :: !Text,
+                                              _delFilterName :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteMetricFilter' with the minimum fields required to make a request.
 --
@@ -60,10 +59,10 @@ deleteMetricFilter
     :: Text -- ^ 'delLogGroupName'
     -> Text -- ^ 'delFilterName'
     -> DeleteMetricFilter
-deleteMetricFilter pLogGroupName_ pFilterName_ =
-  DeleteMetricFilter'
-    {_delLogGroupName = pLogGroupName_, _delFilterName = pFilterName_}
-
+deleteMetricFilter pLogGroupName_ pFilterName_
+  = DeleteMetricFilter'{_delLogGroupName =
+                          pLogGroupName_,
+                        _delFilterName = pFilterName_}
 
 -- | The name of the log group.
 delLogGroupName :: Lens' DeleteMetricFilter Text
@@ -106,16 +105,15 @@ instance ToQuery DeleteMetricFilter where
         toQuery = const mempty
 
 -- | /See:/ 'deleteMetricFilterResponse' smart constructor.
-data DeleteMetricFilterResponse =
-  DeleteMetricFilterResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteMetricFilterResponse = DeleteMetricFilterResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteMetricFilterResponse' with the minimum fields required to make a request.
 --
 deleteMetricFilterResponse
     :: DeleteMetricFilterResponse
-deleteMetricFilterResponse = DeleteMetricFilterResponse'
-
+deleteMetricFilterResponse
+  = DeleteMetricFilterResponse'
 
 instance NFData DeleteMetricFilterResponse where

@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the details of the filter specified by the filter name.
+--
+--
 module Network.AWS.GuardDuty.GetFilter
     (
     -- * Creating a Request
@@ -32,12 +34,13 @@ module Network.AWS.GuardDuty.GetFilter
     , getFilterResponse
     , GetFilterResponse
     -- * Response Lenses
-    , gfrsFindingCriteria
-    , gfrsAction
-    , gfrsName
     , gfrsDescription
     , gfrsRank
+    , gfrsTags
     , gfrsResponseStatus
+    , gfrsName
+    , gfrsAction
+    , gfrsFindingCriteria
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -48,32 +51,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getFilter' smart constructor.
-data GetFilter = GetFilter'
-  { _gDetectorId :: !Text
-  , _gFilterName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetFilter = GetFilter'{_gDetectorId :: !Text,
+                            _gFilterName :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gDetectorId' - The detector ID that specifies the GuardDuty service where you want to list the details of the specified filter.
+-- * 'gDetectorId' - The unique ID of the detector that the filter is associated with.
 --
--- * 'gFilterName' - The name of the filter whose details you want to get.
+-- * 'gFilterName' - The name of the filter you want to get.
 getFilter
     :: Text -- ^ 'gDetectorId'
     -> Text -- ^ 'gFilterName'
     -> GetFilter
-getFilter pDetectorId_ pFilterName_ =
-  GetFilter' {_gDetectorId = pDetectorId_, _gFilterName = pFilterName_}
+getFilter pDetectorId_ pFilterName_
+  = GetFilter'{_gDetectorId = pDetectorId_,
+               _gFilterName = pFilterName_}
 
-
--- | The detector ID that specifies the GuardDuty service where you want to list the details of the specified filter.
+-- | The unique ID of the detector that the filter is associated with.
 gDetectorId :: Lens' GetFilter Text
 gDetectorId = lens _gDetectorId (\ s a -> s{_gDetectorId = a})
 
--- | The name of the filter whose details you want to get.
+-- | The name of the filter you want to get.
 gFilterName :: Lens' GetFilter Text
 gFilterName = lens _gFilterName (\ s a -> s{_gFilterName = a})
 
@@ -84,11 +85,12 @@ instance AWSRequest GetFilter where
           = receiveJSON
               (\ s h x ->
                  GetFilterResponse' <$>
-                   (x .?> "findingCriteria") <*> (x .?> "action") <*>
-                     (x .?> "name")
-                     <*> (x .?> "description")
-                     <*> (x .?> "rank")
-                     <*> (pure (fromEnum s)))
+                   (x .?> "description") <*> (x .?> "rank") <*>
+                     (x .?> "tags" .!@ mempty)
+                     <*> (pure (fromEnum s))
+                     <*> (x .:> "name")
+                     <*> (x .:> "action")
+                     <*> (x .:> "findingCriteria"))
 
 instance Hashable GetFilter where
 
@@ -111,67 +113,75 @@ instance ToQuery GetFilter where
         toQuery = const mempty
 
 -- | /See:/ 'getFilterResponse' smart constructor.
-data GetFilterResponse = GetFilterResponse'
-  { _gfrsFindingCriteria :: !(Maybe FindingCriteria)
-  , _gfrsAction          :: !(Maybe FilterAction)
-  , _gfrsName            :: !(Maybe Text)
-  , _gfrsDescription     :: !(Maybe Text)
-  , _gfrsRank            :: !(Maybe Int)
-  , _gfrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetFilterResponse = GetFilterResponse'{_gfrsDescription
+                                            :: !(Maybe Text),
+                                            _gfrsRank :: !(Maybe Nat),
+                                            _gfrsTags ::
+                                            !(Maybe (Map Text Text)),
+                                            _gfrsResponseStatus :: !Int,
+                                            _gfrsName :: !Text,
+                                            _gfrsAction :: !FilterAction,
+                                            _gfrsFindingCriteria ::
+                                            !FindingCriteria}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetFilterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gfrsFindingCriteria' - Represents the criteria to be used in the filter for querying findings.
---
--- * 'gfrsAction' - Specifies the action that is to be applied to the findings that match the filter.
---
--- * 'gfrsName' - The name of the filter.
---
 -- * 'gfrsDescription' - The description of the filter.
 --
 -- * 'gfrsRank' - Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
 --
+-- * 'gfrsTags' - The tags of the filter resource.
+--
 -- * 'gfrsResponseStatus' - -- | The response status code.
+--
+-- * 'gfrsName' - The name of the filter.
+--
+-- * 'gfrsAction' - Specifies the action that is to be applied to the findings that match the filter.
+--
+-- * 'gfrsFindingCriteria' - Represents the criteria to be used in the filter for querying findings.
 getFilterResponse
     :: Int -- ^ 'gfrsResponseStatus'
+    -> Text -- ^ 'gfrsName'
+    -> FilterAction -- ^ 'gfrsAction'
+    -> FindingCriteria -- ^ 'gfrsFindingCriteria'
     -> GetFilterResponse
-getFilterResponse pResponseStatus_ =
-  GetFilterResponse'
-    { _gfrsFindingCriteria = Nothing
-    , _gfrsAction = Nothing
-    , _gfrsName = Nothing
-    , _gfrsDescription = Nothing
-    , _gfrsRank = Nothing
-    , _gfrsResponseStatus = pResponseStatus_
-    }
-
-
--- | Represents the criteria to be used in the filter for querying findings.
-gfrsFindingCriteria :: Lens' GetFilterResponse (Maybe FindingCriteria)
-gfrsFindingCriteria = lens _gfrsFindingCriteria (\ s a -> s{_gfrsFindingCriteria = a})
-
--- | Specifies the action that is to be applied to the findings that match the filter.
-gfrsAction :: Lens' GetFilterResponse (Maybe FilterAction)
-gfrsAction = lens _gfrsAction (\ s a -> s{_gfrsAction = a})
-
--- | The name of the filter.
-gfrsName :: Lens' GetFilterResponse (Maybe Text)
-gfrsName = lens _gfrsName (\ s a -> s{_gfrsName = a})
+getFilterResponse pResponseStatus_ pName_ pAction_
+  pFindingCriteria_
+  = GetFilterResponse'{_gfrsDescription = Nothing,
+                       _gfrsRank = Nothing, _gfrsTags = Nothing,
+                       _gfrsResponseStatus = pResponseStatus_,
+                       _gfrsName = pName_, _gfrsAction = pAction_,
+                       _gfrsFindingCriteria = pFindingCriteria_}
 
 -- | The description of the filter.
 gfrsDescription :: Lens' GetFilterResponse (Maybe Text)
 gfrsDescription = lens _gfrsDescription (\ s a -> s{_gfrsDescription = a})
 
 -- | Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
-gfrsRank :: Lens' GetFilterResponse (Maybe Int)
-gfrsRank = lens _gfrsRank (\ s a -> s{_gfrsRank = a})
+gfrsRank :: Lens' GetFilterResponse (Maybe Natural)
+gfrsRank = lens _gfrsRank (\ s a -> s{_gfrsRank = a}) . mapping _Nat
+
+-- | The tags of the filter resource.
+gfrsTags :: Lens' GetFilterResponse (HashMap Text Text)
+gfrsTags = lens _gfrsTags (\ s a -> s{_gfrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 gfrsResponseStatus :: Lens' GetFilterResponse Int
 gfrsResponseStatus = lens _gfrsResponseStatus (\ s a -> s{_gfrsResponseStatus = a})
+
+-- | The name of the filter.
+gfrsName :: Lens' GetFilterResponse Text
+gfrsName = lens _gfrsName (\ s a -> s{_gfrsName = a})
+
+-- | Specifies the action that is to be applied to the findings that match the filter.
+gfrsAction :: Lens' GetFilterResponse FilterAction
+gfrsAction = lens _gfrsAction (\ s a -> s{_gfrsAction = a})
+
+-- | Represents the criteria to be used in the filter for querying findings.
+gfrsFindingCriteria :: Lens' GetFilterResponse FindingCriteria
+gfrsFindingCriteria = lens _gfrsFindingCriteria (\ s a -> s{_gfrsFindingCriteria = a})
 
 instance NFData GetFilterResponse where

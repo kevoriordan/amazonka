@@ -21,7 +21,7 @@
 -- Changes the password of the IAM user who is calling this operation. The AWS account root user password is not affected by this operation.
 --
 --
--- To change the password for a different user, see 'UpdateLoginProfile' . For more information about modifying passwords, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html Managing Passwords> in the /IAM User Guide/ .
+-- To change the password for a different user, see 'UpdateLoginProfile' . For more information about modifying passwords, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html Managing Passwords> in the /IAM User Guide/ .
 --
 module Network.AWS.IAM.ChangePassword
     (
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'changePassword' smart constructor.
-data ChangePassword = ChangePassword'
-  { _cpOldPassword :: !(Sensitive Text)
-  , _cpNewPassword :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ChangePassword = ChangePassword'{_cpOldPassword
+                                      :: !(Sensitive Text),
+                                      _cpNewPassword :: !(Sensitive Text)}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ChangePassword' with the minimum fields required to make a request.
 --
@@ -57,23 +56,21 @@ data ChangePassword = ChangePassword'
 --
 -- * 'cpOldPassword' - The IAM user's current password.
 --
--- * 'cpNewPassword' - The new password. The new password must conform to the AWS account's password policy, if one exists. The <http://wikipedia.org/wiki/regex regex pattern> that is used to validate this parameter is a string of characters. That string can include almost any printable ASCII character from the space (\u0020) through the end of the ASCII character range (\u00FF). You can also include the tab (\u0009), line feed (\u000A), and carriage return (\u000D) characters. Any of these characters are valid in a password. However, many tools, such as the AWS Management Console, might restrict the ability to type certain characters because they have special meaning within that tool.
+-- * 'cpNewPassword' - The new password. The new password must conform to the AWS account's password policy, if one exists. The <http://wikipedia.org/wiki/regex regex pattern> that is used to validate this parameter is a string of characters. That string can include almost any printable ASCII character from the space (@\u0020@ ) through the end of the ASCII character range (@\u00FF@ ). You can also include the tab (@\u0009@ ), line feed (@\u000A@ ), and carriage return (@\u000D@ ) characters. Any of these characters are valid in a password. However, many tools, such as the AWS Management Console, might restrict the ability to type certain characters because they have special meaning within that tool.
 changePassword
     :: Text -- ^ 'cpOldPassword'
     -> Text -- ^ 'cpNewPassword'
     -> ChangePassword
-changePassword pOldPassword_ pNewPassword_ =
-  ChangePassword'
-    { _cpOldPassword = _Sensitive # pOldPassword_
-    , _cpNewPassword = _Sensitive # pNewPassword_
-    }
-
+changePassword pOldPassword_ pNewPassword_
+  = ChangePassword'{_cpOldPassword =
+                      _Sensitive # pOldPassword_,
+                    _cpNewPassword = _Sensitive # pNewPassword_}
 
 -- | The IAM user's current password.
 cpOldPassword :: Lens' ChangePassword Text
 cpOldPassword = lens _cpOldPassword (\ s a -> s{_cpOldPassword = a}) . _Sensitive
 
--- | The new password. The new password must conform to the AWS account's password policy, if one exists. The <http://wikipedia.org/wiki/regex regex pattern> that is used to validate this parameter is a string of characters. That string can include almost any printable ASCII character from the space (\u0020) through the end of the ASCII character range (\u00FF). You can also include the tab (\u0009), line feed (\u000A), and carriage return (\u000D) characters. Any of these characters are valid in a password. However, many tools, such as the AWS Management Console, might restrict the ability to type certain characters because they have special meaning within that tool.
+-- | The new password. The new password must conform to the AWS account's password policy, if one exists. The <http://wikipedia.org/wiki/regex regex pattern> that is used to validate this parameter is a string of characters. That string can include almost any printable ASCII character from the space (@\u0020@ ) through the end of the ASCII character range (@\u00FF@ ). You can also include the tab (@\u0009@ ), line feed (@\u000A@ ), and carriage return (@\u000D@ ) characters. Any of these characters are valid in a password. However, many tools, such as the AWS Management Console, might restrict the ability to type certain characters because they have special meaning within that tool.
 cpNewPassword :: Lens' ChangePassword Text
 cpNewPassword = lens _cpNewPassword (\ s a -> s{_cpNewPassword = a}) . _Sensitive
 
@@ -101,16 +98,14 @@ instance ToQuery ChangePassword where
                "NewPassword" =: _cpNewPassword]
 
 -- | /See:/ 'changePasswordResponse' smart constructor.
-data ChangePasswordResponse =
-  ChangePasswordResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ChangePasswordResponse = ChangePasswordResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ChangePasswordResponse' with the minimum fields required to make a request.
 --
 changePasswordResponse
     :: ChangePasswordResponse
 changePasswordResponse = ChangePasswordResponse'
-
 
 instance NFData ChangePasswordResponse where

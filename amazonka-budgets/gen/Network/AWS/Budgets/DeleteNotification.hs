@@ -21,7 +21,7 @@
 -- Deletes a notification.
 --
 --
--- __Deleting a notification also deletes the subscribers associated with the notification.__
+-- /Important:/ Deleting a notification also deletes the subscribers that are associated with the notification.
 --
 module Network.AWS.Budgets.DeleteNotification
     (
@@ -47,17 +47,16 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request of DeleteNotification
+-- | Request of DeleteNotification 
 --
 --
 --
 -- /See:/ 'deleteNotification' smart constructor.
-data DeleteNotification = DeleteNotification'
-  { _dnAccountId    :: !Text
-  , _dnBudgetName   :: !Text
-  , _dnNotification :: !Notification
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNotification = DeleteNotification'{_dnAccountId
+                                              :: !Text,
+                                              _dnBudgetName :: !Text,
+                                              _dnNotification :: !Notification}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteNotification' with the minimum fields required to make a request.
 --
@@ -73,13 +72,11 @@ deleteNotification
     -> Text -- ^ 'dnBudgetName'
     -> Notification -- ^ 'dnNotification'
     -> DeleteNotification
-deleteNotification pAccountId_ pBudgetName_ pNotification_ =
-  DeleteNotification'
-    { _dnAccountId = pAccountId_
-    , _dnBudgetName = pBudgetName_
-    , _dnNotification = pNotification_
-    }
-
+deleteNotification pAccountId_ pBudgetName_
+  pNotification_
+  = DeleteNotification'{_dnAccountId = pAccountId_,
+                        _dnBudgetName = pBudgetName_,
+                        _dnNotification = pNotification_}
 
 -- | The @accountId@ that is associated with the budget whose notification you want to delete.
 dnAccountId :: Lens' DeleteNotification Text
@@ -130,15 +127,15 @@ instance ToPath DeleteNotification where
 instance ToQuery DeleteNotification where
         toQuery = const mempty
 
--- | Response of DeleteNotification
+-- | Response of DeleteNotification 
 --
 --
 --
 -- /See:/ 'deleteNotificationResponse' smart constructor.
-newtype DeleteNotificationResponse = DeleteNotificationResponse'
-  { _dnrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteNotificationResponse = DeleteNotificationResponse'{_dnrsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteNotificationResponse' with the minimum fields required to make a request.
 --
@@ -148,9 +145,9 @@ newtype DeleteNotificationResponse = DeleteNotificationResponse'
 deleteNotificationResponse
     :: Int -- ^ 'dnrsResponseStatus'
     -> DeleteNotificationResponse
-deleteNotificationResponse pResponseStatus_ =
-  DeleteNotificationResponse' {_dnrsResponseStatus = pResponseStatus_}
-
+deleteNotificationResponse pResponseStatus_
+  = DeleteNotificationResponse'{_dnrsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 dnrsResponseStatus :: Lens' DeleteNotificationResponse Int

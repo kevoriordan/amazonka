@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about a specified job and whether that job has been received by the job worker. Only used for custom actions.
+-- Returns information about a specified job and whether that job has been received by the job worker. Used for custom actions only.
 --
 --
 module Network.AWS.CodePipeline.AcknowledgeJob
@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'acknowledgeJob' smart constructor.
-data AcknowledgeJob = AcknowledgeJob'
-  { _ajJobId :: !Text
-  , _ajNonce :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcknowledgeJob = AcknowledgeJob'{_ajJobId ::
+                                      !Text,
+                                      _ajNonce :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcknowledgeJob' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ acknowledgeJob
     :: Text -- ^ 'ajJobId'
     -> Text -- ^ 'ajNonce'
     -> AcknowledgeJob
-acknowledgeJob pJobId_ pNonce_ =
-  AcknowledgeJob' {_ajJobId = pJobId_, _ajNonce = pNonce_}
-
+acknowledgeJob pJobId_ pNonce_
+  = AcknowledgeJob'{_ajJobId = pJobId_,
+                    _ajNonce = pNonce_}
 
 -- | The unique system-generated ID of the job for which you want to confirm receipt.
 ajJobId :: Lens' AcknowledgeJob Text
@@ -120,11 +119,12 @@ instance ToQuery AcknowledgeJob where
 --
 --
 -- /See:/ 'acknowledgeJobResponse' smart constructor.
-data AcknowledgeJobResponse = AcknowledgeJobResponse'
-  { _ajrsStatus         :: !(Maybe JobStatus)
-  , _ajrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcknowledgeJobResponse = AcknowledgeJobResponse'{_ajrsStatus
+                                                      :: !(Maybe JobStatus),
+                                                      _ajrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AcknowledgeJobResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +136,9 @@ data AcknowledgeJobResponse = AcknowledgeJobResponse'
 acknowledgeJobResponse
     :: Int -- ^ 'ajrsResponseStatus'
     -> AcknowledgeJobResponse
-acknowledgeJobResponse pResponseStatus_ =
-  AcknowledgeJobResponse'
-    {_ajrsStatus = Nothing, _ajrsResponseStatus = pResponseStatus_}
-
+acknowledgeJobResponse pResponseStatus_
+  = AcknowledgeJobResponse'{_ajrsStatus = Nothing,
+                            _ajrsResponseStatus = pResponseStatus_}
 
 -- | Whether the job worker has received the specified job.
 ajrsStatus :: Lens' AcknowledgeJobResponse (Maybe JobStatus)

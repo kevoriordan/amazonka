@@ -27,6 +27,7 @@ module Network.AWS.CloudHSMv2.CreateCluster
       createCluster
     , CreateCluster
     -- * Request Lenses
+    , ccTagList
     , ccSourceBackupId
     , ccSubnetIds
     , ccHSMType
@@ -47,16 +48,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createCluster' smart constructor.
-data CreateCluster = CreateCluster'
-  { _ccSourceBackupId :: !(Maybe Text)
-  , _ccSubnetIds      :: !(List1 Text)
-  , _ccHSMType        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCluster = CreateCluster'{_ccTagList ::
+                                    !(Maybe [Tag]),
+                                    _ccSourceBackupId :: !(Maybe Text),
+                                    _ccSubnetIds :: !(List1 Text),
+                                    _ccHSMType :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCluster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccTagList' - Undocumented member.
 --
 -- * 'ccSourceBackupId' - The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use 'DescribeBackups' .
 --
@@ -67,13 +70,15 @@ createCluster
     :: NonEmpty Text -- ^ 'ccSubnetIds'
     -> Text -- ^ 'ccHSMType'
     -> CreateCluster
-createCluster pSubnetIds_ pHSMType_ =
-  CreateCluster'
-    { _ccSourceBackupId = Nothing
-    , _ccSubnetIds = _List1 # pSubnetIds_
-    , _ccHSMType = pHSMType_
-    }
+createCluster pSubnetIds_ pHSMType_
+  = CreateCluster'{_ccTagList = Nothing,
+                   _ccSourceBackupId = Nothing,
+                   _ccSubnetIds = _List1 # pSubnetIds_,
+                   _ccHSMType = pHSMType_}
 
+-- | Undocumented member.
+ccTagList :: Lens' CreateCluster [Tag]
+ccTagList = lens _ccTagList (\ s a -> s{_ccTagList = a}) . _Default . _Coerce
 
 -- | The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use 'DescribeBackups' .
 ccSourceBackupId :: Lens' CreateCluster (Maybe Text)
@@ -113,7 +118,8 @@ instance ToJSON CreateCluster where
         toJSON CreateCluster'{..}
           = object
               (catMaybes
-                 [("SourceBackupId" .=) <$> _ccSourceBackupId,
+                 [("TagList" .=) <$> _ccTagList,
+                  ("SourceBackupId" .=) <$> _ccSourceBackupId,
                   Just ("SubnetIds" .= _ccSubnetIds),
                   Just ("HsmType" .= _ccHSMType)])
 
@@ -124,11 +130,11 @@ instance ToQuery CreateCluster where
         toQuery = const mempty
 
 -- | /See:/ 'createClusterResponse' smart constructor.
-data CreateClusterResponse = CreateClusterResponse'
-  { _ccrsCluster        :: !(Maybe Cluster)
-  , _ccrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateClusterResponse = CreateClusterResponse'{_ccrsCluster
+                                                    :: !(Maybe Cluster),
+                                                    _ccrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateClusterResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +146,9 @@ data CreateClusterResponse = CreateClusterResponse'
 createClusterResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CreateClusterResponse
-createClusterResponse pResponseStatus_ =
-  CreateClusterResponse'
-    {_ccrsCluster = Nothing, _ccrsResponseStatus = pResponseStatus_}
-
+createClusterResponse pResponseStatus_
+  = CreateClusterResponse'{_ccrsCluster = Nothing,
+                           _ccrsResponseStatus = pResponseStatus_}
 
 -- | Information about the cluster that was created.
 ccrsCluster :: Lens' CreateClusterResponse (Maybe Cluster)

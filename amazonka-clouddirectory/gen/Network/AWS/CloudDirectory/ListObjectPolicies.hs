@@ -53,14 +53,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listObjectPolicies' smart constructor.
-data ListObjectPolicies = ListObjectPolicies'
-  { _lConsistencyLevel :: !(Maybe ConsistencyLevel)
-  , _lNextToken        :: !(Maybe Text)
-  , _lMaxResults       :: !(Maybe Nat)
-  , _lDirectoryARN     :: !Text
-  , _lObjectReference  :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectPolicies = ListObjectPolicies'{_lConsistencyLevel
+                                              :: !(Maybe ConsistencyLevel),
+                                              _lNextToken :: !(Maybe Text),
+                                              _lMaxResults :: !(Maybe Nat),
+                                              _lDirectoryARN :: !Text,
+                                              _lObjectReference ::
+                                              !ObjectReference}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListObjectPolicies' with the minimum fields required to make a request.
 --
@@ -79,15 +79,11 @@ listObjectPolicies
     :: Text -- ^ 'lDirectoryARN'
     -> ObjectReference -- ^ 'lObjectReference'
     -> ListObjectPolicies
-listObjectPolicies pDirectoryARN_ pObjectReference_ =
-  ListObjectPolicies'
-    { _lConsistencyLevel = Nothing
-    , _lNextToken = Nothing
-    , _lMaxResults = Nothing
-    , _lDirectoryARN = pDirectoryARN_
-    , _lObjectReference = pObjectReference_
-    }
-
+listObjectPolicies pDirectoryARN_ pObjectReference_
+  = ListObjectPolicies'{_lConsistencyLevel = Nothing,
+                        _lNextToken = Nothing, _lMaxResults = Nothing,
+                        _lDirectoryARN = pDirectoryARN_,
+                        _lObjectReference = pObjectReference_}
 
 -- | Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
 lConsistencyLevel :: Lens' ListObjectPolicies (Maybe ConsistencyLevel)
@@ -155,12 +151,15 @@ instance ToQuery ListObjectPolicies where
         toQuery = const mempty
 
 -- | /See:/ 'listObjectPoliciesResponse' smart constructor.
-data ListObjectPoliciesResponse = ListObjectPoliciesResponse'
-  { _loprsNextToken         :: !(Maybe Text)
-  , _loprsAttachedPolicyIds :: !(Maybe [Text])
-  , _loprsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectPoliciesResponse = ListObjectPoliciesResponse'{_loprsNextToken
+                                                              :: !(Maybe Text),
+                                                              _loprsAttachedPolicyIds
+                                                              ::
+                                                              !(Maybe [Text]),
+                                                              _loprsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListObjectPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -174,13 +173,11 @@ data ListObjectPoliciesResponse = ListObjectPoliciesResponse'
 listObjectPoliciesResponse
     :: Int -- ^ 'loprsResponseStatus'
     -> ListObjectPoliciesResponse
-listObjectPoliciesResponse pResponseStatus_ =
-  ListObjectPoliciesResponse'
-    { _loprsNextToken = Nothing
-    , _loprsAttachedPolicyIds = Nothing
-    , _loprsResponseStatus = pResponseStatus_
-    }
-
+listObjectPoliciesResponse pResponseStatus_
+  = ListObjectPoliciesResponse'{_loprsNextToken =
+                                  Nothing,
+                                _loprsAttachedPolicyIds = Nothing,
+                                _loprsResponseStatus = pResponseStatus_}
 
 -- | The pagination token.
 loprsNextToken :: Lens' ListObjectPoliciesResponse (Maybe Text)

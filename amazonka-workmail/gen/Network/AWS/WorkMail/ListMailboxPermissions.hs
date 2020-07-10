@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the mailbox permissions associated with a mailbox.
+-- Lists the mailbox permissions associated with a user, group, or resource mailbox.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WorkMail.ListMailboxPermissions
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.WorkMail.ListMailboxPermissions
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -49,13 +52,15 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'listMailboxPermissions' smart constructor.
-data ListMailboxPermissions = ListMailboxPermissions'
-  { _lmpNextToken      :: !(Maybe Text)
-  , _lmpMaxResults     :: !(Maybe Nat)
-  , _lmpOrganizationId :: !Text
-  , _lmpEntityId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMailboxPermissions = ListMailboxPermissions'{_lmpNextToken
+                                                      :: !(Maybe Text),
+                                                      _lmpMaxResults ::
+                                                      !(Maybe Nat),
+                                                      _lmpOrganizationId ::
+                                                      !Text,
+                                                      _lmpEntityId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListMailboxPermissions' with the minimum fields required to make a request.
 --
@@ -65,21 +70,18 @@ data ListMailboxPermissions = ListMailboxPermissions'
 --
 -- * 'lmpMaxResults' - The maximum number of results to return in a single call.
 --
--- * 'lmpOrganizationId' - The identifier of the organization under which the entity (user or group) exists.
+-- * 'lmpOrganizationId' - The identifier of the organization under which the user, group, or resource exists.
 --
--- * 'lmpEntityId' - The identifier of the entity (user or group) for which to list mailbox permissions.
+-- * 'lmpEntityId' - The identifier of the user, group, or resource for which to list mailbox permissions.
 listMailboxPermissions
     :: Text -- ^ 'lmpOrganizationId'
     -> Text -- ^ 'lmpEntityId'
     -> ListMailboxPermissions
-listMailboxPermissions pOrganizationId_ pEntityId_ =
-  ListMailboxPermissions'
-    { _lmpNextToken = Nothing
-    , _lmpMaxResults = Nothing
-    , _lmpOrganizationId = pOrganizationId_
-    , _lmpEntityId = pEntityId_
-    }
-
+listMailboxPermissions pOrganizationId_ pEntityId_
+  = ListMailboxPermissions'{_lmpNextToken = Nothing,
+                            _lmpMaxResults = Nothing,
+                            _lmpOrganizationId = pOrganizationId_,
+                            _lmpEntityId = pEntityId_}
 
 -- | The token to use to retrieve the next page of results. The first call does not contain any tokens.
 lmpNextToken :: Lens' ListMailboxPermissions (Maybe Text)
@@ -89,13 +91,20 @@ lmpNextToken = lens _lmpNextToken (\ s a -> s{_lmpNextToken = a})
 lmpMaxResults :: Lens' ListMailboxPermissions (Maybe Natural)
 lmpMaxResults = lens _lmpMaxResults (\ s a -> s{_lmpMaxResults = a}) . mapping _Nat
 
--- | The identifier of the organization under which the entity (user or group) exists.
+-- | The identifier of the organization under which the user, group, or resource exists.
 lmpOrganizationId :: Lens' ListMailboxPermissions Text
 lmpOrganizationId = lens _lmpOrganizationId (\ s a -> s{_lmpOrganizationId = a})
 
--- | The identifier of the entity (user or group) for which to list mailbox permissions.
+-- | The identifier of the user, group, or resource for which to list mailbox permissions.
 lmpEntityId :: Lens' ListMailboxPermissions Text
 lmpEntityId = lens _lmpEntityId (\ s a -> s{_lmpEntityId = a})
+
+instance AWSPager ListMailboxPermissions where
+        page rq rs
+          | stop (rs ^. lmprsNextToken) = Nothing
+          | stop (rs ^. lmprsPermissions) = Nothing
+          | otherwise =
+            Just $ rq & lmpNextToken .~ rs ^. lmprsNextToken
 
 instance AWSRequest ListMailboxPermissions where
         type Rs ListMailboxPermissions =
@@ -139,12 +148,18 @@ instance ToQuery ListMailboxPermissions where
         toQuery = const mempty
 
 -- | /See:/ 'listMailboxPermissionsResponse' smart constructor.
-data ListMailboxPermissionsResponse = ListMailboxPermissionsResponse'
-  { _lmprsNextToken      :: !(Maybe Text)
-  , _lmprsPermissions    :: !(Maybe [Permission])
-  , _lmprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMailboxPermissionsResponse = ListMailboxPermissionsResponse'{_lmprsNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _lmprsPermissions
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Permission]),
+                                                                      _lmprsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ListMailboxPermissionsResponse' with the minimum fields required to make a request.
 --
@@ -152,25 +167,23 @@ data ListMailboxPermissionsResponse = ListMailboxPermissionsResponse'
 --
 -- * 'lmprsNextToken' - The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
 --
--- * 'lmprsPermissions' - One page of the entity's mailbox permissions.
+-- * 'lmprsPermissions' - One page of the user, group, or resource mailbox permissions.
 --
 -- * 'lmprsResponseStatus' - -- | The response status code.
 listMailboxPermissionsResponse
     :: Int -- ^ 'lmprsResponseStatus'
     -> ListMailboxPermissionsResponse
-listMailboxPermissionsResponse pResponseStatus_ =
-  ListMailboxPermissionsResponse'
-    { _lmprsNextToken = Nothing
-    , _lmprsPermissions = Nothing
-    , _lmprsResponseStatus = pResponseStatus_
-    }
-
+listMailboxPermissionsResponse pResponseStatus_
+  = ListMailboxPermissionsResponse'{_lmprsNextToken =
+                                      Nothing,
+                                    _lmprsPermissions = Nothing,
+                                    _lmprsResponseStatus = pResponseStatus_}
 
 -- | The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
 lmprsNextToken :: Lens' ListMailboxPermissionsResponse (Maybe Text)
 lmprsNextToken = lens _lmprsNextToken (\ s a -> s{_lmprsNextToken = a})
 
--- | One page of the entity's mailbox permissions.
+-- | One page of the user, group, or resource mailbox permissions.
 lmprsPermissions :: Lens' ListMailboxPermissionsResponse [Permission]
 lmprsPermissions = lens _lmprsPermissions (\ s a -> s{_lmprsPermissions = a}) . _Default . _Coerce
 

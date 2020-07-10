@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @DisassociateQualificationFromWorker@ revokes a previously granted Qualification from a user.
+-- The @DisassociateQualificationFromWorker@ revokes a previously granted Qualification from a user. 
 --
 --
--- You can provide a text message explaining why the Qualification was revoked. The user who had the Qualification can see this message.
+-- You can provide a text message explaining why the Qualification was revoked. The user who had the Qualification can see this message. 
 --
 module Network.AWS.MechanicalTurk.DisassociateQualificationFromWorker
     (
@@ -48,12 +48,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateQualificationFromWorker' smart constructor.
-data DisassociateQualificationFromWorker = DisassociateQualificationFromWorker'
-  { _dqfwReason              :: !(Maybe Text)
-  , _dqfwWorkerId            :: !Text
-  , _dqfwQualificationTypeId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateQualificationFromWorker = DisassociateQualificationFromWorker'{_dqfwReason
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dqfwWorkerId
+                                                                                ::
+                                                                                !Text,
+                                                                                _dqfwQualificationTypeId
+                                                                                ::
+                                                                                !Text}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DisassociateQualificationFromWorker' with the minimum fields required to make a request.
 --
@@ -68,13 +74,13 @@ disassociateQualificationFromWorker
     :: Text -- ^ 'dqfwWorkerId'
     -> Text -- ^ 'dqfwQualificationTypeId'
     -> DisassociateQualificationFromWorker
-disassociateQualificationFromWorker pWorkerId_ pQualificationTypeId_ =
-  DisassociateQualificationFromWorker'
-    { _dqfwReason = Nothing
-    , _dqfwWorkerId = pWorkerId_
-    , _dqfwQualificationTypeId = pQualificationTypeId_
-    }
-
+disassociateQualificationFromWorker pWorkerId_
+  pQualificationTypeId_
+  = DisassociateQualificationFromWorker'{_dqfwReason =
+                                           Nothing,
+                                         _dqfwWorkerId = pWorkerId_,
+                                         _dqfwQualificationTypeId =
+                                           pQualificationTypeId_}
 
 -- | A text message that explains why the Qualification was revoked. The user who had the Qualification sees this message.
 dqfwReason :: Lens' DisassociateQualificationFromWorker (Maybe Text)
@@ -137,10 +143,13 @@ instance ToQuery DisassociateQualificationFromWorker
         toQuery = const mempty
 
 -- | /See:/ 'disassociateQualificationFromWorkerResponse' smart constructor.
-newtype DisassociateQualificationFromWorkerResponse = DisassociateQualificationFromWorkerResponse'
-  { _dqfwrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateQualificationFromWorkerResponse = DisassociateQualificationFromWorkerResponse'{_dqfwrsResponseStatus
+                                                                                                   ::
+                                                                                                   Int}
+                                                        deriving (Eq, Read,
+                                                                  Show, Data,
+                                                                  Typeable,
+                                                                  Generic)
 
 -- | Creates a value of 'DisassociateQualificationFromWorkerResponse' with the minimum fields required to make a request.
 --
@@ -150,10 +159,10 @@ newtype DisassociateQualificationFromWorkerResponse = DisassociateQualificationF
 disassociateQualificationFromWorkerResponse
     :: Int -- ^ 'dqfwrsResponseStatus'
     -> DisassociateQualificationFromWorkerResponse
-disassociateQualificationFromWorkerResponse pResponseStatus_ =
-  DisassociateQualificationFromWorkerResponse'
-    {_dqfwrsResponseStatus = pResponseStatus_}
-
+disassociateQualificationFromWorkerResponse
+  pResponseStatus_
+  = DisassociateQualificationFromWorkerResponse'{_dqfwrsResponseStatus
+                                                   = pResponseStatus_}
 
 -- | -- | The response status code.
 dqfwrsResponseStatus :: Lens' DisassociateQualificationFromWorkerResponse Int

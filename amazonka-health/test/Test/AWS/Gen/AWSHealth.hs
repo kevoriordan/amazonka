@@ -14,11 +14,11 @@
 module Test.AWS.Gen.AWSHealth where
 
 import Data.Proxy
-import Network.AWS.AWSHealth
-import Test.AWS.AWSHealth.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.AWSHealth
+import Test.AWS.AWSHealth.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,11 +28,20 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestDescribeEntityAggregates $
+--         [ requestEnableHealthServiceAccessForOrganization $
+--             enableHealthServiceAccessForOrganization
+--
+--         , requestDescribeEntityAggregates $
 --             describeEntityAggregates
 --
 --         , requestDescribeEvents $
 --             describeEvents
+--
+--         , requestDescribeEventsForOrganization $
+--             describeEventsForOrganization
+--
+--         , requestDescribeAffectedAccountsForOrganization $
+--             describeAffectedAccountsForOrganization
 --
 --         , requestDescribeEventDetails $
 --             describeEventDetails
@@ -46,14 +55,35 @@ import Test.Tasty
 --         , requestDescribeEventTypes $
 --             describeEventTypes
 --
+--         , requestDescribeAffectedEntitiesForOrganization $
+--             describeAffectedEntitiesForOrganization
+--
+--         , requestDescribeHealthServiceStatusForOrganization $
+--             describeHealthServiceStatusForOrganization
+--
+--         , requestDescribeEventDetailsForOrganization $
+--             describeEventDetailsForOrganization
+--
+--         , requestDisableHealthServiceAccessForOrganization $
+--             disableHealthServiceAccessForOrganization
+--
 --           ]
 
 --     , testGroup "response"
---         [ responseDescribeEntityAggregates $
+--         [ responseEnableHealthServiceAccessForOrganization $
+--             enableHealthServiceAccessForOrganizationResponse
+--
+--         , responseDescribeEntityAggregates $
 --             describeEntityAggregatesResponse
 --
 --         , responseDescribeEvents $
 --             describeEventsResponse
+--
+--         , responseDescribeEventsForOrganization $
+--             describeEventsForOrganizationResponse
+--
+--         , responseDescribeAffectedAccountsForOrganization $
+--             describeAffectedAccountsForOrganizationResponse
 --
 --         , responseDescribeEventDetails $
 --             describeEventDetailsResponse
@@ -67,10 +97,27 @@ import Test.Tasty
 --         , responseDescribeEventTypes $
 --             describeEventTypesResponse
 --
+--         , responseDescribeAffectedEntitiesForOrganization $
+--             describeAffectedEntitiesForOrganizationResponse
+--
+--         , responseDescribeHealthServiceStatusForOrganization $
+--             describeHealthServiceStatusForOrganizationResponse
+--
+--         , responseDescribeEventDetailsForOrganization $
+--             describeEventDetailsForOrganizationResponse
+--
+--         , responseDisableHealthServiceAccessForOrganization $
+--             disableHealthServiceAccessForOrganizationResponse
+--
 --           ]
 --     ]
 
 -- Requests
+
+requestEnableHealthServiceAccessForOrganization :: EnableHealthServiceAccessForOrganization -> TestTree
+requestEnableHealthServiceAccessForOrganization = req
+    "EnableHealthServiceAccessForOrganization"
+    "fixture/EnableHealthServiceAccessForOrganization.yaml"
 
 requestDescribeEntityAggregates :: DescribeEntityAggregates -> TestTree
 requestDescribeEntityAggregates = req
@@ -81,6 +128,16 @@ requestDescribeEvents :: DescribeEvents -> TestTree
 requestDescribeEvents = req
     "DescribeEvents"
     "fixture/DescribeEvents.yaml"
+
+requestDescribeEventsForOrganization :: DescribeEventsForOrganization -> TestTree
+requestDescribeEventsForOrganization = req
+    "DescribeEventsForOrganization"
+    "fixture/DescribeEventsForOrganization.yaml"
+
+requestDescribeAffectedAccountsForOrganization :: DescribeAffectedAccountsForOrganization -> TestTree
+requestDescribeAffectedAccountsForOrganization = req
+    "DescribeAffectedAccountsForOrganization"
+    "fixture/DescribeAffectedAccountsForOrganization.yaml"
 
 requestDescribeEventDetails :: DescribeEventDetails -> TestTree
 requestDescribeEventDetails = req
@@ -102,7 +159,34 @@ requestDescribeEventTypes = req
     "DescribeEventTypes"
     "fixture/DescribeEventTypes.yaml"
 
+requestDescribeAffectedEntitiesForOrganization :: DescribeAffectedEntitiesForOrganization -> TestTree
+requestDescribeAffectedEntitiesForOrganization = req
+    "DescribeAffectedEntitiesForOrganization"
+    "fixture/DescribeAffectedEntitiesForOrganization.yaml"
+
+requestDescribeHealthServiceStatusForOrganization :: DescribeHealthServiceStatusForOrganization -> TestTree
+requestDescribeHealthServiceStatusForOrganization = req
+    "DescribeHealthServiceStatusForOrganization"
+    "fixture/DescribeHealthServiceStatusForOrganization.yaml"
+
+requestDescribeEventDetailsForOrganization :: DescribeEventDetailsForOrganization -> TestTree
+requestDescribeEventDetailsForOrganization = req
+    "DescribeEventDetailsForOrganization"
+    "fixture/DescribeEventDetailsForOrganization.yaml"
+
+requestDisableHealthServiceAccessForOrganization :: DisableHealthServiceAccessForOrganization -> TestTree
+requestDisableHealthServiceAccessForOrganization = req
+    "DisableHealthServiceAccessForOrganization"
+    "fixture/DisableHealthServiceAccessForOrganization.yaml"
+
 -- Responses
+
+responseEnableHealthServiceAccessForOrganization :: EnableHealthServiceAccessForOrganizationResponse -> TestTree
+responseEnableHealthServiceAccessForOrganization = res
+    "EnableHealthServiceAccessForOrganizationResponse"
+    "fixture/EnableHealthServiceAccessForOrganizationResponse.proto"
+    awsHealth
+    (Proxy :: Proxy EnableHealthServiceAccessForOrganization)
 
 responseDescribeEntityAggregates :: DescribeEntityAggregatesResponse -> TestTree
 responseDescribeEntityAggregates = res
@@ -117,6 +201,20 @@ responseDescribeEvents = res
     "fixture/DescribeEventsResponse.proto"
     awsHealth
     (Proxy :: Proxy DescribeEvents)
+
+responseDescribeEventsForOrganization :: DescribeEventsForOrganizationResponse -> TestTree
+responseDescribeEventsForOrganization = res
+    "DescribeEventsForOrganizationResponse"
+    "fixture/DescribeEventsForOrganizationResponse.proto"
+    awsHealth
+    (Proxy :: Proxy DescribeEventsForOrganization)
+
+responseDescribeAffectedAccountsForOrganization :: DescribeAffectedAccountsForOrganizationResponse -> TestTree
+responseDescribeAffectedAccountsForOrganization = res
+    "DescribeAffectedAccountsForOrganizationResponse"
+    "fixture/DescribeAffectedAccountsForOrganizationResponse.proto"
+    awsHealth
+    (Proxy :: Proxy DescribeAffectedAccountsForOrganization)
 
 responseDescribeEventDetails :: DescribeEventDetailsResponse -> TestTree
 responseDescribeEventDetails = res
@@ -145,3 +243,31 @@ responseDescribeEventTypes = res
     "fixture/DescribeEventTypesResponse.proto"
     awsHealth
     (Proxy :: Proxy DescribeEventTypes)
+
+responseDescribeAffectedEntitiesForOrganization :: DescribeAffectedEntitiesForOrganizationResponse -> TestTree
+responseDescribeAffectedEntitiesForOrganization = res
+    "DescribeAffectedEntitiesForOrganizationResponse"
+    "fixture/DescribeAffectedEntitiesForOrganizationResponse.proto"
+    awsHealth
+    (Proxy :: Proxy DescribeAffectedEntitiesForOrganization)
+
+responseDescribeHealthServiceStatusForOrganization :: DescribeHealthServiceStatusForOrganizationResponse -> TestTree
+responseDescribeHealthServiceStatusForOrganization = res
+    "DescribeHealthServiceStatusForOrganizationResponse"
+    "fixture/DescribeHealthServiceStatusForOrganizationResponse.proto"
+    awsHealth
+    (Proxy :: Proxy DescribeHealthServiceStatusForOrganization)
+
+responseDescribeEventDetailsForOrganization :: DescribeEventDetailsForOrganizationResponse -> TestTree
+responseDescribeEventDetailsForOrganization = res
+    "DescribeEventDetailsForOrganizationResponse"
+    "fixture/DescribeEventDetailsForOrganizationResponse.proto"
+    awsHealth
+    (Proxy :: Proxy DescribeEventDetailsForOrganization)
+
+responseDisableHealthServiceAccessForOrganization :: DisableHealthServiceAccessForOrganizationResponse -> TestTree
+responseDisableHealthServiceAccessForOrganization = res
+    "DisableHealthServiceAccessForOrganizationResponse"
+    "fixture/DisableHealthServiceAccessForOrganizationResponse.proto"
+    awsHealth
+    (Proxy :: Proxy DisableHealthServiceAccessForOrganization)

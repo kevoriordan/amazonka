@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes an event source mapping. This means AWS Lambda will no longer invoke the function for events in the associated source.
+-- Deletes an <https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html event source mapping> . You can get the identifier of a mapping from the output of 'ListEventSourceMappings' .
 --
 --
--- This operation requires permission for the @lambda:DeleteEventSourceMapping@ action.
+-- When you delete an event source mapping, it enters a @Deleting@ state and might not be completely deleted for several seconds.
 --
 module Network.AWS.Lambda.DeleteEventSourceMapping
     (
@@ -38,11 +38,17 @@ module Network.AWS.Lambda.DeleteEventSourceMapping
     , esmcEventSourceARN
     , esmcState
     , esmcFunctionARN
+    , esmcBisectBatchOnFunctionError
     , esmcUUId
+    , esmcParallelizationFactor
     , esmcLastProcessingResult
+    , esmcMaximumRetryAttempts
     , esmcBatchSize
     , esmcStateTransitionReason
+    , esmcMaximumBatchingWindowInSeconds
+    , esmcMaximumRecordAgeInSeconds
     , esmcLastModified
+    , esmcDestinationConfig
     ) where
 
 import Network.AWS.Lambda.Types
@@ -52,28 +58,24 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
---
---
---
--- /See:/ 'deleteEventSourceMapping' smart constructor.
-newtype DeleteEventSourceMapping = DeleteEventSourceMapping'
-  { _desmUUId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteEventSourceMapping' smart constructor.
+newtype DeleteEventSourceMapping = DeleteEventSourceMapping'{_desmUUId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteEventSourceMapping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'desmUUId' - The event source mapping ID.
+-- * 'desmUUId' - The identifier of the event source mapping.
 deleteEventSourceMapping
     :: Text -- ^ 'desmUUId'
     -> DeleteEventSourceMapping
-deleteEventSourceMapping pUUId_ = DeleteEventSourceMapping' {_desmUUId = pUUId_}
+deleteEventSourceMapping pUUId_
+  = DeleteEventSourceMapping'{_desmUUId = pUUId_}
 
-
--- | The event source mapping ID.
+-- | The identifier of the event source mapping.
 desmUUId :: Lens' DeleteEventSourceMapping Text
 desmUUId = lens _desmUUId (\ s a -> s{_desmUUId = a})
 

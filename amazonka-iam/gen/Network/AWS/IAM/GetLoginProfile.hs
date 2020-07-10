@@ -45,23 +45,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getLoginProfile' smart constructor.
-newtype GetLoginProfile = GetLoginProfile'
-  { _glpUserName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetLoginProfile = GetLoginProfile'{_glpUserName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetLoginProfile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'glpUserName' - The name of the user whose login profile you want to retrieve. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'glpUserName' - The name of the user whose login profile you want to retrieve. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 getLoginProfile
     :: Text -- ^ 'glpUserName'
     -> GetLoginProfile
-getLoginProfile pUserName_ = GetLoginProfile' {_glpUserName = pUserName_}
+getLoginProfile pUserName_
+  = GetLoginProfile'{_glpUserName = pUserName_}
 
-
--- | The name of the user whose login profile you want to retrieve. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name of the user whose login profile you want to retrieve. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 glpUserName :: Lens' GetLoginProfile Text
 glpUserName = lens _glpUserName (\ s a -> s{_glpUserName = a})
 
@@ -91,16 +90,17 @@ instance ToQuery GetLoginProfile where
                "Version" =: ("2010-05-08" :: ByteString),
                "UserName" =: _glpUserName]
 
--- | Contains the response to a successful 'GetLoginProfile' request.
+-- | Contains the response to a successful 'GetLoginProfile' request. 
 --
 --
 --
 -- /See:/ 'getLoginProfileResponse' smart constructor.
-data GetLoginProfileResponse = GetLoginProfileResponse'
-  { _glprsResponseStatus :: !Int
-  , _glprsLoginProfile   :: !LoginProfile
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetLoginProfileResponse = GetLoginProfileResponse'{_glprsResponseStatus
+                                                        :: !Int,
+                                                        _glprsLoginProfile ::
+                                                        !LoginProfile}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetLoginProfileResponse' with the minimum fields required to make a request.
 --
@@ -113,12 +113,11 @@ getLoginProfileResponse
     :: Int -- ^ 'glprsResponseStatus'
     -> LoginProfile -- ^ 'glprsLoginProfile'
     -> GetLoginProfileResponse
-getLoginProfileResponse pResponseStatus_ pLoginProfile_ =
-  GetLoginProfileResponse'
-    { _glprsResponseStatus = pResponseStatus_
-    , _glprsLoginProfile = pLoginProfile_
-    }
-
+getLoginProfileResponse pResponseStatus_
+  pLoginProfile_
+  = GetLoginProfileResponse'{_glprsResponseStatus =
+                               pResponseStatus_,
+                             _glprsLoginProfile = pLoginProfile_}
 
 -- | -- | The response status code.
 glprsResponseStatus :: Lens' GetLoginProfileResponse Int

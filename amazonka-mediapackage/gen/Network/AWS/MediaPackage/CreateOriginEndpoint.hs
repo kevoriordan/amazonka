@@ -28,14 +28,17 @@ module Network.AWS.MediaPackage.CreateOriginEndpoint
     , coeWhitelist
     , coeHlsPackage
     , coeManifestName
+    , coeAuthorization
     , coeStartoverWindowSeconds
     , coeDashPackage
     , coeMssPackage
     , coeTimeDelaySeconds
     , coeCmafPackage
     , coeDescription
-    , coeChannelId
+    , coeTags
+    , coeOrigination
     , coeId
+    , coeChannelId
 
     -- * Destructuring the Response
     , createOriginEndpointResponse
@@ -46,6 +49,7 @@ module Network.AWS.MediaPackage.CreateOriginEndpoint
     , coersARN
     , coersManifestName
     , coersURL
+    , coersAuthorization
     , coersChannelId
     , coersStartoverWindowSeconds
     , coersDashPackage
@@ -54,6 +58,8 @@ module Network.AWS.MediaPackage.CreateOriginEndpoint
     , coersTimeDelaySeconds
     , coersCmafPackage
     , coersDescription
+    , coersTags
+    , coersOrigination
     , coersResponseStatus
     ) where
 
@@ -67,20 +73,34 @@ import Network.AWS.Response
 -- | Configuration parameters used to create a new OriginEndpoint.
 --
 -- /See:/ 'createOriginEndpoint' smart constructor.
-data CreateOriginEndpoint = CreateOriginEndpoint'
-  { _coeWhitelist              :: !(Maybe [Text])
-  , _coeHlsPackage             :: !(Maybe HlsPackage)
-  , _coeManifestName           :: !(Maybe Text)
-  , _coeStartoverWindowSeconds :: !(Maybe Int)
-  , _coeDashPackage            :: !(Maybe DashPackage)
-  , _coeMssPackage             :: !(Maybe MssPackage)
-  , _coeTimeDelaySeconds       :: !(Maybe Int)
-  , _coeCmafPackage            :: !(Maybe CmafPackageCreateOrUpdateParameters)
-  , _coeDescription            :: !(Maybe Text)
-  , _coeChannelId              :: !Text
-  , _coeId                     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateOriginEndpoint = CreateOriginEndpoint'{_coeWhitelist
+                                                  :: !(Maybe [Text]),
+                                                  _coeHlsPackage ::
+                                                  !(Maybe HlsPackage),
+                                                  _coeManifestName ::
+                                                  !(Maybe Text),
+                                                  _coeAuthorization ::
+                                                  !(Maybe Authorization),
+                                                  _coeStartoverWindowSeconds ::
+                                                  !(Maybe Int),
+                                                  _coeDashPackage ::
+                                                  !(Maybe DashPackage),
+                                                  _coeMssPackage ::
+                                                  !(Maybe MssPackage),
+                                                  _coeTimeDelaySeconds ::
+                                                  !(Maybe Int),
+                                                  _coeCmafPackage ::
+                                                  !(Maybe
+                                                      CmafPackageCreateOrUpdateParameters),
+                                                  _coeDescription ::
+                                                  !(Maybe Text),
+                                                  _coeTags ::
+                                                  !(Maybe (Map Text Text)),
+                                                  _coeOrigination ::
+                                                  !(Maybe Origination),
+                                                  _coeId :: !Text,
+                                                  _coeChannelId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateOriginEndpoint' with the minimum fields required to make a request.
 --
@@ -91,6 +111,8 @@ data CreateOriginEndpoint = CreateOriginEndpoint'
 -- * 'coeHlsPackage' - Undocumented member.
 --
 -- * 'coeManifestName' - A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
+--
+-- * 'coeAuthorization' - Undocumented member.
 --
 -- * 'coeStartoverWindowSeconds' - Maximum duration (seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.
 --
@@ -104,28 +126,27 @@ data CreateOriginEndpoint = CreateOriginEndpoint'
 --
 -- * 'coeDescription' - A short text description of the OriginEndpoint.
 --
--- * 'coeChannelId' - The ID of the Channel that the OriginEndpoint will be associated with. This cannot be changed after the OriginEndpoint is created.
+-- * 'coeTags' - Undocumented member.
+--
+-- * 'coeOrigination' - Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
 --
 -- * 'coeId' - The ID of the OriginEndpoint.  The ID must be unique within the region and it cannot be changed after the OriginEndpoint is created.
+--
+-- * 'coeChannelId' - The ID of the Channel that the OriginEndpoint will be associated with. This cannot be changed after the OriginEndpoint is created.
 createOriginEndpoint
-    :: Text -- ^ 'coeChannelId'
-    -> Text -- ^ 'coeId'
+    :: Text -- ^ 'coeId'
+    -> Text -- ^ 'coeChannelId'
     -> CreateOriginEndpoint
-createOriginEndpoint pChannelId_ pId_ =
-  CreateOriginEndpoint'
-    { _coeWhitelist = Nothing
-    , _coeHlsPackage = Nothing
-    , _coeManifestName = Nothing
-    , _coeStartoverWindowSeconds = Nothing
-    , _coeDashPackage = Nothing
-    , _coeMssPackage = Nothing
-    , _coeTimeDelaySeconds = Nothing
-    , _coeCmafPackage = Nothing
-    , _coeDescription = Nothing
-    , _coeChannelId = pChannelId_
-    , _coeId = pId_
-    }
-
+createOriginEndpoint pId_ pChannelId_
+  = CreateOriginEndpoint'{_coeWhitelist = Nothing,
+                          _coeHlsPackage = Nothing, _coeManifestName = Nothing,
+                          _coeAuthorization = Nothing,
+                          _coeStartoverWindowSeconds = Nothing,
+                          _coeDashPackage = Nothing, _coeMssPackage = Nothing,
+                          _coeTimeDelaySeconds = Nothing,
+                          _coeCmafPackage = Nothing, _coeDescription = Nothing,
+                          _coeTags = Nothing, _coeOrigination = Nothing,
+                          _coeId = pId_, _coeChannelId = pChannelId_}
 
 -- | A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
 coeWhitelist :: Lens' CreateOriginEndpoint [Text]
@@ -138,6 +159,10 @@ coeHlsPackage = lens _coeHlsPackage (\ s a -> s{_coeHlsPackage = a})
 -- | A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
 coeManifestName :: Lens' CreateOriginEndpoint (Maybe Text)
 coeManifestName = lens _coeManifestName (\ s a -> s{_coeManifestName = a})
+
+-- | Undocumented member.
+coeAuthorization :: Lens' CreateOriginEndpoint (Maybe Authorization)
+coeAuthorization = lens _coeAuthorization (\ s a -> s{_coeAuthorization = a})
 
 -- | Maximum duration (seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.
 coeStartoverWindowSeconds :: Lens' CreateOriginEndpoint (Maybe Int)
@@ -163,13 +188,21 @@ coeCmafPackage = lens _coeCmafPackage (\ s a -> s{_coeCmafPackage = a})
 coeDescription :: Lens' CreateOriginEndpoint (Maybe Text)
 coeDescription = lens _coeDescription (\ s a -> s{_coeDescription = a})
 
--- | The ID of the Channel that the OriginEndpoint will be associated with. This cannot be changed after the OriginEndpoint is created.
-coeChannelId :: Lens' CreateOriginEndpoint Text
-coeChannelId = lens _coeChannelId (\ s a -> s{_coeChannelId = a})
+-- | Undocumented member.
+coeTags :: Lens' CreateOriginEndpoint (HashMap Text Text)
+coeTags = lens _coeTags (\ s a -> s{_coeTags = a}) . _Default . _Map
+
+-- | Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+coeOrigination :: Lens' CreateOriginEndpoint (Maybe Origination)
+coeOrigination = lens _coeOrigination (\ s a -> s{_coeOrigination = a})
 
 -- | The ID of the OriginEndpoint.  The ID must be unique within the region and it cannot be changed after the OriginEndpoint is created.
 coeId :: Lens' CreateOriginEndpoint Text
 coeId = lens _coeId (\ s a -> s{_coeId = a})
+
+-- | The ID of the Channel that the OriginEndpoint will be associated with. This cannot be changed after the OriginEndpoint is created.
+coeChannelId :: Lens' CreateOriginEndpoint Text
+coeChannelId = lens _coeChannelId (\ s a -> s{_coeChannelId = a})
 
 instance AWSRequest CreateOriginEndpoint where
         type Rs CreateOriginEndpoint =
@@ -184,6 +217,7 @@ instance AWSRequest CreateOriginEndpoint where
                      <*> (x .?> "arn")
                      <*> (x .?> "manifestName")
                      <*> (x .?> "url")
+                     <*> (x .?> "authorization")
                      <*> (x .?> "channelId")
                      <*> (x .?> "startoverWindowSeconds")
                      <*> (x .?> "dashPackage")
@@ -192,6 +226,8 @@ instance AWSRequest CreateOriginEndpoint where
                      <*> (x .?> "timeDelaySeconds")
                      <*> (x .?> "cmafPackage")
                      <*> (x .?> "description")
+                     <*> (x .?> "tags" .!@ mempty)
+                     <*> (x .?> "origination")
                      <*> (pure (fromEnum s)))
 
 instance Hashable CreateOriginEndpoint where
@@ -212,6 +248,7 @@ instance ToJSON CreateOriginEndpoint where
                  [("whitelist" .=) <$> _coeWhitelist,
                   ("hlsPackage" .=) <$> _coeHlsPackage,
                   ("manifestName" .=) <$> _coeManifestName,
+                  ("authorization" .=) <$> _coeAuthorization,
                   ("startoverWindowSeconds" .=) <$>
                     _coeStartoverWindowSeconds,
                   ("dashPackage" .=) <$> _coeDashPackage,
@@ -219,8 +256,10 @@ instance ToJSON CreateOriginEndpoint where
                   ("timeDelaySeconds" .=) <$> _coeTimeDelaySeconds,
                   ("cmafPackage" .=) <$> _coeCmafPackage,
                   ("description" .=) <$> _coeDescription,
-                  Just ("channelId" .= _coeChannelId),
-                  Just ("id" .= _coeId)])
+                  ("tags" .=) <$> _coeTags,
+                  ("origination" .=) <$> _coeOrigination,
+                  Just ("id" .= _coeId),
+                  Just ("channelId" .= _coeChannelId)])
 
 instance ToPath CreateOriginEndpoint where
         toPath = const "/origin_endpoints"
@@ -229,23 +268,63 @@ instance ToQuery CreateOriginEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'createOriginEndpointResponse' smart constructor.
-data CreateOriginEndpointResponse = CreateOriginEndpointResponse'
-  { _coersWhitelist              :: !(Maybe [Text])
-  , _coersHlsPackage             :: !(Maybe HlsPackage)
-  , _coersARN                    :: !(Maybe Text)
-  , _coersManifestName           :: !(Maybe Text)
-  , _coersURL                    :: !(Maybe Text)
-  , _coersChannelId              :: !(Maybe Text)
-  , _coersStartoverWindowSeconds :: !(Maybe Int)
-  , _coersDashPackage            :: !(Maybe DashPackage)
-  , _coersMssPackage             :: !(Maybe MssPackage)
-  , _coersId                     :: !(Maybe Text)
-  , _coersTimeDelaySeconds       :: !(Maybe Int)
-  , _coersCmafPackage            :: !(Maybe CmafPackage)
-  , _coersDescription            :: !(Maybe Text)
-  , _coersResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateOriginEndpointResponse = CreateOriginEndpointResponse'{_coersWhitelist
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Text]),
+                                                                  _coersHlsPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      HlsPackage),
+                                                                  _coersARN ::
+                                                                  !(Maybe Text),
+                                                                  _coersManifestName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _coersURL ::
+                                                                  !(Maybe Text),
+                                                                  _coersAuthorization
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Authorization),
+                                                                  _coersChannelId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _coersStartoverWindowSeconds
+                                                                  ::
+                                                                  !(Maybe Int),
+                                                                  _coersDashPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      DashPackage),
+                                                                  _coersMssPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      MssPackage),
+                                                                  _coersId ::
+                                                                  !(Maybe Text),
+                                                                  _coersTimeDelaySeconds
+                                                                  ::
+                                                                  !(Maybe Int),
+                                                                  _coersCmafPackage
+                                                                  ::
+                                                                  !(Maybe
+                                                                      CmafPackage),
+                                                                  _coersDescription
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _coersTags ::
+                                                                  !(Maybe
+                                                                      (Map Text
+                                                                         Text)),
+                                                                  _coersOrigination
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Origination),
+                                                                  _coersResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'CreateOriginEndpointResponse' with the minimum fields required to make a request.
 --
@@ -260,6 +339,8 @@ data CreateOriginEndpointResponse = CreateOriginEndpointResponse'
 -- * 'coersManifestName' - A short string appended to the end of the OriginEndpoint URL.
 --
 -- * 'coersURL' - The URL of the packaged OriginEndpoint for consumption.
+--
+-- * 'coersAuthorization' - Undocumented member.
 --
 -- * 'coersChannelId' - The ID of the Channel the OriginEndpoint is associated with.
 --
@@ -277,28 +358,33 @@ data CreateOriginEndpointResponse = CreateOriginEndpointResponse'
 --
 -- * 'coersDescription' - A short text description of the OriginEndpoint.
 --
+-- * 'coersTags' - Undocumented member.
+--
+-- * 'coersOrigination' - Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+--
 -- * 'coersResponseStatus' - -- | The response status code.
 createOriginEndpointResponse
     :: Int -- ^ 'coersResponseStatus'
     -> CreateOriginEndpointResponse
-createOriginEndpointResponse pResponseStatus_ =
-  CreateOriginEndpointResponse'
-    { _coersWhitelist = Nothing
-    , _coersHlsPackage = Nothing
-    , _coersARN = Nothing
-    , _coersManifestName = Nothing
-    , _coersURL = Nothing
-    , _coersChannelId = Nothing
-    , _coersStartoverWindowSeconds = Nothing
-    , _coersDashPackage = Nothing
-    , _coersMssPackage = Nothing
-    , _coersId = Nothing
-    , _coersTimeDelaySeconds = Nothing
-    , _coersCmafPackage = Nothing
-    , _coersDescription = Nothing
-    , _coersResponseStatus = pResponseStatus_
-    }
-
+createOriginEndpointResponse pResponseStatus_
+  = CreateOriginEndpointResponse'{_coersWhitelist =
+                                    Nothing,
+                                  _coersHlsPackage = Nothing,
+                                  _coersARN = Nothing,
+                                  _coersManifestName = Nothing,
+                                  _coersURL = Nothing,
+                                  _coersAuthorization = Nothing,
+                                  _coersChannelId = Nothing,
+                                  _coersStartoverWindowSeconds = Nothing,
+                                  _coersDashPackage = Nothing,
+                                  _coersMssPackage = Nothing,
+                                  _coersId = Nothing,
+                                  _coersTimeDelaySeconds = Nothing,
+                                  _coersCmafPackage = Nothing,
+                                  _coersDescription = Nothing,
+                                  _coersTags = Nothing,
+                                  _coersOrigination = Nothing,
+                                  _coersResponseStatus = pResponseStatus_}
 
 -- | A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
 coersWhitelist :: Lens' CreateOriginEndpointResponse [Text]
@@ -319,6 +405,10 @@ coersManifestName = lens _coersManifestName (\ s a -> s{_coersManifestName = a})
 -- | The URL of the packaged OriginEndpoint for consumption.
 coersURL :: Lens' CreateOriginEndpointResponse (Maybe Text)
 coersURL = lens _coersURL (\ s a -> s{_coersURL = a})
+
+-- | Undocumented member.
+coersAuthorization :: Lens' CreateOriginEndpointResponse (Maybe Authorization)
+coersAuthorization = lens _coersAuthorization (\ s a -> s{_coersAuthorization = a})
 
 -- | The ID of the Channel the OriginEndpoint is associated with.
 coersChannelId :: Lens' CreateOriginEndpointResponse (Maybe Text)
@@ -351,6 +441,14 @@ coersCmafPackage = lens _coersCmafPackage (\ s a -> s{_coersCmafPackage = a})
 -- | A short text description of the OriginEndpoint.
 coersDescription :: Lens' CreateOriginEndpointResponse (Maybe Text)
 coersDescription = lens _coersDescription (\ s a -> s{_coersDescription = a})
+
+-- | Undocumented member.
+coersTags :: Lens' CreateOriginEndpointResponse (HashMap Text Text)
+coersTags = lens _coersTags (\ s a -> s{_coersTags = a}) . _Default . _Map
+
+-- | Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+coersOrigination :: Lens' CreateOriginEndpointResponse (Maybe Origination)
+coersOrigination = lens _coersOrigination (\ s a -> s{_coersOrigination = a})
 
 -- | -- | The response status code.
 coersResponseStatus :: Lens' CreateOriginEndpointResponse Int

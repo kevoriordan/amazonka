@@ -18,7 +18,23 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
+-- This implementation of the GET operation returns an analytics configuration (identified by the analytics configuration ID) from the bucket.
+--
+--
+-- To use this operation, you must have permissions to perform the @s3:GetAnalyticsConfiguration@ action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources> in the /Amazon Simple Storage Service Developer Guide/ . 
+--
+-- For information about Amazon S3 analytics feature, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html Amazon S3 Analytics – Storage Class Analysis> in the /Amazon Simple Storage Service Developer Guide/ .
+--
+-- __Related Resources__ 
+--
+--     * 
+--
+--     * 
+--
+--     * 
+--
+--
+--
 module Network.AWS.S3.GetBucketAnalyticsConfiguration
     (
     -- * Creating a Request
@@ -44,11 +60,14 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'getBucketAnalyticsConfiguration' smart constructor.
-data GetBucketAnalyticsConfiguration = GetBucketAnalyticsConfiguration'
-  { _getBucket :: !BucketName
-  , _getId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBucketAnalyticsConfiguration = GetBucketAnalyticsConfiguration'{_getBucket
+                                                                        ::
+                                                                        !BucketName,
+                                                                        _getId
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'GetBucketAnalyticsConfiguration' with the minimum fields required to make a request.
 --
@@ -56,20 +75,21 @@ data GetBucketAnalyticsConfiguration = GetBucketAnalyticsConfiguration'
 --
 -- * 'getBucket' - The name of the bucket from which an analytics configuration is retrieved.
 --
--- * 'getId' - The identifier used to represent an analytics configuration.
+-- * 'getId' - The ID that identifies the analytics configuration.
 getBucketAnalyticsConfiguration
     :: BucketName -- ^ 'getBucket'
     -> Text -- ^ 'getId'
     -> GetBucketAnalyticsConfiguration
-getBucketAnalyticsConfiguration pBucket_ pId_ =
-  GetBucketAnalyticsConfiguration' {_getBucket = pBucket_, _getId = pId_}
-
+getBucketAnalyticsConfiguration pBucket_ pId_
+  = GetBucketAnalyticsConfiguration'{_getBucket =
+                                       pBucket_,
+                                     _getId = pId_}
 
 -- | The name of the bucket from which an analytics configuration is retrieved.
 getBucket :: Lens' GetBucketAnalyticsConfiguration BucketName
 getBucket = lens _getBucket (\ s a -> s{_getBucket = a})
 
--- | The identifier used to represent an analytics configuration.
+-- | The ID that identifies the analytics configuration.
 getId :: Lens' GetBucketAnalyticsConfiguration Text
 getId = lens _getId (\ s a -> s{_getId = a})
 
@@ -103,11 +123,15 @@ instance ToQuery GetBucketAnalyticsConfiguration
           = mconcat ["id" =: _getId, "analytics"]
 
 -- | /See:/ 'getBucketAnalyticsConfigurationResponse' smart constructor.
-data GetBucketAnalyticsConfigurationResponse = GetBucketAnalyticsConfigurationResponse'
-  { _gbacrsAnalyticsConfiguration :: !(Maybe AnalyticsConfiguration)
-  , _gbacrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBucketAnalyticsConfigurationResponse = GetBucketAnalyticsConfigurationResponse'{_gbacrsAnalyticsConfiguration
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            AnalyticsConfiguration),
+                                                                                        _gbacrsResponseStatus
+                                                                                        ::
+                                                                                        !Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'GetBucketAnalyticsConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -119,12 +143,12 @@ data GetBucketAnalyticsConfigurationResponse = GetBucketAnalyticsConfigurationRe
 getBucketAnalyticsConfigurationResponse
     :: Int -- ^ 'gbacrsResponseStatus'
     -> GetBucketAnalyticsConfigurationResponse
-getBucketAnalyticsConfigurationResponse pResponseStatus_ =
-  GetBucketAnalyticsConfigurationResponse'
-    { _gbacrsAnalyticsConfiguration = Nothing
-    , _gbacrsResponseStatus = pResponseStatus_
-    }
-
+getBucketAnalyticsConfigurationResponse
+  pResponseStatus_
+  = GetBucketAnalyticsConfigurationResponse'{_gbacrsAnalyticsConfiguration
+                                               = Nothing,
+                                             _gbacrsResponseStatus =
+                                               pResponseStatus_}
 
 -- | The configuration and any analyses for the analytics filter.
 gbacrsAnalyticsConfiguration :: Lens' GetBucketAnalyticsConfigurationResponse (Maybe AnalyticsConfiguration)

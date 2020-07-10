@@ -48,59 +48,66 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'revokeDBSecurityGroupIngress' smart constructor.
-data RevokeDBSecurityGroupIngress = RevokeDBSecurityGroupIngress'
-  { _rdsgiEC2SecurityGroupOwnerId :: !(Maybe Text)
-  , _rdsgiEC2SecurityGroupName    :: !(Maybe Text)
-  , _rdsgiCIdRIP                  :: !(Maybe Text)
-  , _rdsgiEC2SecurityGroupId      :: !(Maybe Text)
-  , _rdsgiDBSecurityGroupName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeDBSecurityGroupIngress = RevokeDBSecurityGroupIngress'{_rdsgiEC2SecurityGroupOwnerId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _rdsgiEC2SecurityGroupName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _rdsgiCIdRIP
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _rdsgiEC2SecurityGroupId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _rdsgiDBSecurityGroupName
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'RevokeDBSecurityGroupIngress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdsgiEC2SecurityGroupOwnerId' - The AWS Account Number of the owner of the EC2 security group specified in the @EC2SecurityGroupName@ parameter. The AWS Access Key ID is not an acceptable value. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided.
+-- * 'rdsgiEC2SecurityGroupOwnerId' - The AWS account number of the owner of the EC2 security group specified in the @EC2SecurityGroupName@ parameter. The AWS access key ID isn't an acceptable value. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided. 
 --
--- * 'rdsgiEC2SecurityGroupName' - The name of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided.
+-- * 'rdsgiEC2SecurityGroupName' - The name of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided. 
 --
--- * 'rdsgiCIdRIP' - The IP range to revoke access from. Must be a valid CIDR range. If @CIDRIP@ is specified, @EC2SecurityGroupName@ , @EC2SecurityGroupId@ and @EC2SecurityGroupOwnerId@ can't be provided.
+-- * 'rdsgiCIdRIP' - The IP range to revoke access from. Must be a valid CIDR range. If @CIDRIP@ is specified, @EC2SecurityGroupName@ , @EC2SecurityGroupId@ and @EC2SecurityGroupOwnerId@ can't be provided. 
 --
--- * 'rdsgiEC2SecurityGroupId' - The id of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided.
+-- * 'rdsgiEC2SecurityGroupId' - The id of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided. 
 --
 -- * 'rdsgiDBSecurityGroupName' - The name of the DB security group to revoke ingress from.
 revokeDBSecurityGroupIngress
     :: Text -- ^ 'rdsgiDBSecurityGroupName'
     -> RevokeDBSecurityGroupIngress
-revokeDBSecurityGroupIngress pDBSecurityGroupName_ =
-  RevokeDBSecurityGroupIngress'
-    { _rdsgiEC2SecurityGroupOwnerId = Nothing
-    , _rdsgiEC2SecurityGroupName = Nothing
-    , _rdsgiCIdRIP = Nothing
-    , _rdsgiEC2SecurityGroupId = Nothing
-    , _rdsgiDBSecurityGroupName = pDBSecurityGroupName_
-    }
+revokeDBSecurityGroupIngress pDBSecurityGroupName_
+  = RevokeDBSecurityGroupIngress'{_rdsgiEC2SecurityGroupOwnerId
+                                    = Nothing,
+                                  _rdsgiEC2SecurityGroupName = Nothing,
+                                  _rdsgiCIdRIP = Nothing,
+                                  _rdsgiEC2SecurityGroupId = Nothing,
+                                  _rdsgiDBSecurityGroupName =
+                                    pDBSecurityGroupName_}
 
-
--- | The AWS Account Number of the owner of the EC2 security group specified in the @EC2SecurityGroupName@ parameter. The AWS Access Key ID is not an acceptable value. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided.
+-- | The AWS account number of the owner of the EC2 security group specified in the @EC2SecurityGroupName@ parameter. The AWS access key ID isn't an acceptable value. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided. 
 rdsgiEC2SecurityGroupOwnerId :: Lens' RevokeDBSecurityGroupIngress (Maybe Text)
 rdsgiEC2SecurityGroupOwnerId = lens _rdsgiEC2SecurityGroupOwnerId (\ s a -> s{_rdsgiEC2SecurityGroupOwnerId = a})
 
--- | The name of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided.
+-- | The name of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided. 
 rdsgiEC2SecurityGroupName :: Lens' RevokeDBSecurityGroupIngress (Maybe Text)
 rdsgiEC2SecurityGroupName = lens _rdsgiEC2SecurityGroupName (\ s a -> s{_rdsgiEC2SecurityGroupName = a})
 
--- | The IP range to revoke access from. Must be a valid CIDR range. If @CIDRIP@ is specified, @EC2SecurityGroupName@ , @EC2SecurityGroupId@ and @EC2SecurityGroupOwnerId@ can't be provided.
+-- | The IP range to revoke access from. Must be a valid CIDR range. If @CIDRIP@ is specified, @EC2SecurityGroupName@ , @EC2SecurityGroupId@ and @EC2SecurityGroupOwnerId@ can't be provided. 
 rdsgiCIdRIP :: Lens' RevokeDBSecurityGroupIngress (Maybe Text)
 rdsgiCIdRIP = lens _rdsgiCIdRIP (\ s a -> s{_rdsgiCIdRIP = a})
 
--- | The id of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided.
+-- | The id of the EC2 security group to revoke access from. For VPC DB security groups, @EC2SecurityGroupId@ must be provided. Otherwise, EC2SecurityGroupOwnerId and either @EC2SecurityGroupName@ or @EC2SecurityGroupId@ must be provided. 
 rdsgiEC2SecurityGroupId :: Lens' RevokeDBSecurityGroupIngress (Maybe Text)
 rdsgiEC2SecurityGroupId = lens _rdsgiEC2SecurityGroupId (\ s a -> s{_rdsgiEC2SecurityGroupId = a})
 
@@ -144,11 +151,15 @@ instance ToQuery RevokeDBSecurityGroupIngress where
                "DBSecurityGroupName" =: _rdsgiDBSecurityGroupName]
 
 -- | /See:/ 'revokeDBSecurityGroupIngressResponse' smart constructor.
-data RevokeDBSecurityGroupIngressResponse = RevokeDBSecurityGroupIngressResponse'
-  { _rdsgirsDBSecurityGroup :: !(Maybe DBSecurityGroup)
-  , _rdsgirsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeDBSecurityGroupIngressResponse = RevokeDBSecurityGroupIngressResponse'{_rdsgirsDBSecurityGroup
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      DBSecurityGroup),
+                                                                                  _rdsgirsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'RevokeDBSecurityGroupIngressResponse' with the minimum fields required to make a request.
 --
@@ -160,12 +171,11 @@ data RevokeDBSecurityGroupIngressResponse = RevokeDBSecurityGroupIngressResponse
 revokeDBSecurityGroupIngressResponse
     :: Int -- ^ 'rdsgirsResponseStatus'
     -> RevokeDBSecurityGroupIngressResponse
-revokeDBSecurityGroupIngressResponse pResponseStatus_ =
-  RevokeDBSecurityGroupIngressResponse'
-    { _rdsgirsDBSecurityGroup = Nothing
-    , _rdsgirsResponseStatus = pResponseStatus_
-    }
-
+revokeDBSecurityGroupIngressResponse pResponseStatus_
+  = RevokeDBSecurityGroupIngressResponse'{_rdsgirsDBSecurityGroup
+                                            = Nothing,
+                                          _rdsgirsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Undocumented member.
 rdsgirsDBSecurityGroup :: Lens' RevokeDBSecurityGroupIngressResponse (Maybe DBSecurityGroup)

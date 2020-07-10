@@ -27,7 +27,7 @@ module Network.AWS.DynamoDB.DescribeTable
       describeTable
     , DescribeTable
     -- * Request Lenses
-    , dTableName
+    , desTableName
 
     -- * Destructuring the Response
     , describeTableResponse
@@ -49,25 +49,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeTable' smart constructor.
-newtype DescribeTable = DescribeTable'
-  { _dTableName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeTable = DescribeTable'{_desTableName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dTableName' - The name of the table to describe.
+-- * 'desTableName' - The name of the table to describe.
 describeTable
-    :: Text -- ^ 'dTableName'
+    :: Text -- ^ 'desTableName'
     -> DescribeTable
-describeTable pTableName_ = DescribeTable' {_dTableName = pTableName_}
-
+describeTable pTableName_
+  = DescribeTable'{_desTableName = pTableName_}
 
 -- | The name of the table to describe.
-dTableName :: Lens' DescribeTable Text
-dTableName = lens _dTableName (\ s a -> s{_dTableName = a})
+desTableName :: Lens' DescribeTable Text
+desTableName = lens _desTableName (\ s a -> s{_desTableName = a})
 
 instance AWSRequest DescribeTable where
         type Rs DescribeTable = DescribeTableResponse
@@ -94,7 +93,7 @@ instance ToHeaders DescribeTable where
 instance ToJSON DescribeTable where
         toJSON DescribeTable'{..}
           = object
-              (catMaybes [Just ("TableName" .= _dTableName)])
+              (catMaybes [Just ("TableName" .= _desTableName)])
 
 instance ToPath DescribeTable where
         toPath = const "/"
@@ -107,11 +106,12 @@ instance ToQuery DescribeTable where
 --
 --
 -- /See:/ 'describeTableResponse' smart constructor.
-data DescribeTableResponse = DescribeTableResponse'
-  { _drsTable          :: !(Maybe TableDescription)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTableResponse = DescribeTableResponse'{_drsTable
+                                                    ::
+                                                    !(Maybe TableDescription),
+                                                    _drsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeTableResponse' with the minimum fields required to make a request.
 --
@@ -123,10 +123,9 @@ data DescribeTableResponse = DescribeTableResponse'
 describeTableResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeTableResponse
-describeTableResponse pResponseStatus_ =
-  DescribeTableResponse'
-    {_drsTable = Nothing, _drsResponseStatus = pResponseStatus_}
-
+describeTableResponse pResponseStatus_
+  = DescribeTableResponse'{_drsTable = Nothing,
+                           _drsResponseStatus = pResponseStatus_}
 
 -- | The properties of the table.
 drsTable :: Lens' DescribeTableResponse (Maybe TableDescription)

@@ -21,6 +21,8 @@
 -- List bulk thing provisioning tasks.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListThingRegistrationTasks
     (
     -- * Creating a Request
@@ -43,17 +45,22 @@ module Network.AWS.IoT.ListThingRegistrationTasks
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listThingRegistrationTasks' smart constructor.
-data ListThingRegistrationTasks = ListThingRegistrationTasks'
-  { _ltrtStatus     :: !(Maybe TaskStatus)
-  , _ltrtNextToken  :: !(Maybe Text)
-  , _ltrtMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThingRegistrationTasks = ListThingRegistrationTasks'{_ltrtStatus
+                                                              ::
+                                                              !(Maybe
+                                                                  TaskStatus),
+                                                              _ltrtNextToken ::
+                                                              !(Maybe Text),
+                                                              _ltrtMaxResults ::
+                                                              !(Maybe Nat)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListThingRegistrationTasks' with the minimum fields required to make a request.
 --
@@ -61,27 +68,34 @@ data ListThingRegistrationTasks = ListThingRegistrationTasks'
 --
 -- * 'ltrtStatus' - The status of the bulk thing provisioning task.
 --
--- * 'ltrtNextToken' - The token used to get the next set of results, or __null__ if there are no additional results.
+-- * 'ltrtNextToken' - The token to retrieve the next set of results.
 --
 -- * 'ltrtMaxResults' - The maximum number of results to return at one time.
 listThingRegistrationTasks
     :: ListThingRegistrationTasks
-listThingRegistrationTasks =
-  ListThingRegistrationTasks'
-    {_ltrtStatus = Nothing, _ltrtNextToken = Nothing, _ltrtMaxResults = Nothing}
-
+listThingRegistrationTasks
+  = ListThingRegistrationTasks'{_ltrtStatus = Nothing,
+                                _ltrtNextToken = Nothing,
+                                _ltrtMaxResults = Nothing}
 
 -- | The status of the bulk thing provisioning task.
 ltrtStatus :: Lens' ListThingRegistrationTasks (Maybe TaskStatus)
 ltrtStatus = lens _ltrtStatus (\ s a -> s{_ltrtStatus = a})
 
--- | The token used to get the next set of results, or __null__ if there are no additional results.
+-- | The token to retrieve the next set of results.
 ltrtNextToken :: Lens' ListThingRegistrationTasks (Maybe Text)
 ltrtNextToken = lens _ltrtNextToken (\ s a -> s{_ltrtNextToken = a})
 
 -- | The maximum number of results to return at one time.
 ltrtMaxResults :: Lens' ListThingRegistrationTasks (Maybe Natural)
 ltrtMaxResults = lens _ltrtMaxResults (\ s a -> s{_ltrtMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListThingRegistrationTasks where
+        page rq rs
+          | stop (rs ^. ltrtrsNextToken) = Nothing
+          | stop (rs ^. ltrtrsTaskIds) = Nothing
+          | otherwise =
+            Just $ rq & ltrtNextToken .~ rs ^. ltrtrsNextToken
 
 instance AWSRequest ListThingRegistrationTasks where
         type Rs ListThingRegistrationTasks =
@@ -112,12 +126,19 @@ instance ToQuery ListThingRegistrationTasks where
                "maxResults" =: _ltrtMaxResults]
 
 -- | /See:/ 'listThingRegistrationTasksResponse' smart constructor.
-data ListThingRegistrationTasksResponse = ListThingRegistrationTasksResponse'
-  { _ltrtrsNextToken      :: !(Maybe Text)
-  , _ltrtrsTaskIds        :: !(Maybe [Text])
-  , _ltrtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThingRegistrationTasksResponse = ListThingRegistrationTasksResponse'{_ltrtrsNextToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _ltrtrsTaskIds
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [Text]),
+                                                                              _ltrtrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListThingRegistrationTasksResponse' with the minimum fields required to make a request.
 --
@@ -131,13 +152,12 @@ data ListThingRegistrationTasksResponse = ListThingRegistrationTasksResponse'
 listThingRegistrationTasksResponse
     :: Int -- ^ 'ltrtrsResponseStatus'
     -> ListThingRegistrationTasksResponse
-listThingRegistrationTasksResponse pResponseStatus_ =
-  ListThingRegistrationTasksResponse'
-    { _ltrtrsNextToken = Nothing
-    , _ltrtrsTaskIds = Nothing
-    , _ltrtrsResponseStatus = pResponseStatus_
-    }
-
+listThingRegistrationTasksResponse pResponseStatus_
+  = ListThingRegistrationTasksResponse'{_ltrtrsNextToken
+                                          = Nothing,
+                                        _ltrtrsTaskIds = Nothing,
+                                        _ltrtrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | The token used to get the next set of results, or __null__ if there are no additional results.
 ltrtrsNextToken :: Lens' ListThingRegistrationTasksResponse (Maybe Text)

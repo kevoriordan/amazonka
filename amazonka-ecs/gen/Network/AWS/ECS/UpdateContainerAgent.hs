@@ -21,7 +21,7 @@
 -- Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.
 --
 --
--- @UpdateContainerAgent@ requires the Amazon ECS-optimized AMI or Amazon Linux with the @ecs-init@ service installed and running. For help updating the Amazon ECS container agent on other operating systems, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent Manually Updating the Amazon ECS Container Agent> in the /Amazon Elastic Container Service Developer Guide/ .
+-- @UpdateContainerAgent@ requires the Amazon ECS-optimized AMI or Amazon Linux with the @ecs-init@ service installed and running. For help updating the Amazon ECS container agent on other operating systems, see <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent Manually Updating the Amazon ECS Container Agent> in the /Amazon Elastic Container Service Developer Guide/ .
 --
 module Network.AWS.ECS.UpdateContainerAgent
     (
@@ -48,11 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateContainerAgent' smart constructor.
-data UpdateContainerAgent = UpdateContainerAgent'
-  { _ucaCluster           :: !(Maybe Text)
-  , _ucaContainerInstance :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateContainerAgent = UpdateContainerAgent'{_ucaCluster
+                                                  :: !(Maybe Text),
+                                                  _ucaContainerInstance ::
+                                                  !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateContainerAgent' with the minimum fields required to make a request.
 --
@@ -64,10 +64,9 @@ data UpdateContainerAgent = UpdateContainerAgent'
 updateContainerAgent
     :: Text -- ^ 'ucaContainerInstance'
     -> UpdateContainerAgent
-updateContainerAgent pContainerInstance_ =
-  UpdateContainerAgent'
-    {_ucaCluster = Nothing, _ucaContainerInstance = pContainerInstance_}
-
+updateContainerAgent pContainerInstance_
+  = UpdateContainerAgent'{_ucaCluster = Nothing,
+                          _ucaContainerInstance = pContainerInstance_}
 
 -- | The short name or full Amazon Resource Name (ARN) of the cluster that your container instance is running on. If you do not specify a cluster, the default cluster is assumed.
 ucaCluster :: Lens' UpdateContainerAgent (Maybe Text)
@@ -115,11 +114,14 @@ instance ToQuery UpdateContainerAgent where
         toQuery = const mempty
 
 -- | /See:/ 'updateContainerAgentResponse' smart constructor.
-data UpdateContainerAgentResponse = UpdateContainerAgentResponse'
-  { _ucarsContainerInstance :: !(Maybe ContainerInstance)
-  , _ucarsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateContainerAgentResponse = UpdateContainerAgentResponse'{_ucarsContainerInstance
+                                                                  ::
+                                                                  !(Maybe
+                                                                      ContainerInstance),
+                                                                  _ucarsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateContainerAgentResponse' with the minimum fields required to make a request.
 --
@@ -131,10 +133,10 @@ data UpdateContainerAgentResponse = UpdateContainerAgentResponse'
 updateContainerAgentResponse
     :: Int -- ^ 'ucarsResponseStatus'
     -> UpdateContainerAgentResponse
-updateContainerAgentResponse pResponseStatus_ =
-  UpdateContainerAgentResponse'
-    {_ucarsContainerInstance = Nothing, _ucarsResponseStatus = pResponseStatus_}
-
+updateContainerAgentResponse pResponseStatus_
+  = UpdateContainerAgentResponse'{_ucarsContainerInstance
+                                    = Nothing,
+                                  _ucarsResponseStatus = pResponseStatus_}
 
 -- | The container instance for which the container agent was updated.
 ucarsContainerInstance :: Lens' UpdateContainerAgentResponse (Maybe ContainerInstance)

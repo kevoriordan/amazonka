@@ -18,14 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an application-level backup of a server. While the server is in the @BACKING_UP@ state, the server cannot be changed, and no additional backup can be created.
+-- Creates an application-level backup of a server. While the server is in the @BACKING_UP@ state, the server cannot be changed, and no additional backup can be created. 
 --
 --
--- Backups can be created for servers in @RUNNING@ , @HEALTHY@ , and @UNHEALTHY@ states. By default, you can create a maximum of 50 manual backups.
+-- Backups can be created for servers in @RUNNING@ , @HEALTHY@ , and @UNHEALTHY@ states. By default, you can create a maximum of 50 manual backups. 
 --
--- This operation is asynchronous.
+-- This operation is asynchronous. 
 --
--- A @LimitExceededException@ is thrown when the maximum number of manual backups is reached. An @InvalidStateException@ is thrown when the server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY. A @ResourceNotFoundException@ is thrown when the server is not found. A @ValidationException@ is thrown when parameters of the request are not valid.
+-- A @LimitExceededException@ is thrown when the maximum number of manual backups is reached. An @InvalidStateException@ is thrown when the server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY. A @ResourceNotFoundException@ is thrown when the server is not found. A @ValidationException@ is thrown when parameters of the request are not valid. 
 --
 module Network.AWS.OpsWorksCM.CreateBackup
     (
@@ -34,6 +34,7 @@ module Network.AWS.OpsWorksCM.CreateBackup
     , CreateBackup
     -- * Request Lenses
     , cbDescription
+    , cbTags
     , cbServerName
 
     -- * Destructuring the Response
@@ -52,31 +53,37 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createBackup' smart constructor.
-data CreateBackup = CreateBackup'
-  { _cbDescription :: !(Maybe Text)
-  , _cbServerName  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBackup = CreateBackup'{_cbDescription ::
+                                  !(Maybe Text),
+                                  _cbTags :: !(Maybe [Tag]),
+                                  _cbServerName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBackup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cbDescription' - A user-defined description of the backup.
+-- * 'cbDescription' - A user-defined description of the backup. 
 --
--- * 'cbServerName' - The name of the server that you want to back up.
+-- * 'cbTags' - A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.     * The key cannot be empty.     * The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: @+ - = . _ : /@      * The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: @+ - = . _ : /@      * Leading and trailing white spaces are trimmed from both the key and value.     * A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.
+--
+-- * 'cbServerName' - The name of the server that you want to back up. 
 createBackup
     :: Text -- ^ 'cbServerName'
     -> CreateBackup
-createBackup pServerName_ =
-  CreateBackup' {_cbDescription = Nothing, _cbServerName = pServerName_}
+createBackup pServerName_
+  = CreateBackup'{_cbDescription = Nothing,
+                  _cbTags = Nothing, _cbServerName = pServerName_}
 
-
--- | A user-defined description of the backup.
+-- | A user-defined description of the backup. 
 cbDescription :: Lens' CreateBackup (Maybe Text)
 cbDescription = lens _cbDescription (\ s a -> s{_cbDescription = a})
 
--- | The name of the server that you want to back up.
+-- | A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.     * The key cannot be empty.     * The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: @+ - = . _ : /@      * The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: @+ - = . _ : /@      * Leading and trailing white spaces are trimmed from both the key and value.     * A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.
+cbTags :: Lens' CreateBackup [Tag]
+cbTags = lens _cbTags (\ s a -> s{_cbTags = a}) . _Default . _Coerce
+
+-- | The name of the server that you want to back up. 
 cbServerName :: Lens' CreateBackup Text
 cbServerName = lens _cbServerName (\ s a -> s{_cbServerName = a})
 
@@ -108,6 +115,7 @@ instance ToJSON CreateBackup where
           = object
               (catMaybes
                  [("Description" .=) <$> _cbDescription,
+                  ("Tags" .=) <$> _cbTags,
                   Just ("ServerName" .= _cbServerName)])
 
 instance ToPath CreateBackup where
@@ -117,11 +125,10 @@ instance ToQuery CreateBackup where
         toQuery = const mempty
 
 -- | /See:/ 'createBackupResponse' smart constructor.
-data CreateBackupResponse = CreateBackupResponse'
-  { _cbrsBackup         :: !(Maybe Backup)
-  , _cbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBackupResponse = CreateBackupResponse'{_cbrsBackup
+                                                  :: !(Maybe Backup),
+                                                  _cbrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBackupResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +140,9 @@ data CreateBackupResponse = CreateBackupResponse'
 createBackupResponse
     :: Int -- ^ 'cbrsResponseStatus'
     -> CreateBackupResponse
-createBackupResponse pResponseStatus_ =
-  CreateBackupResponse'
-    {_cbrsBackup = Nothing, _cbrsResponseStatus = pResponseStatus_}
-
+createBackupResponse pResponseStatus_
+  = CreateBackupResponse'{_cbrsBackup = Nothing,
+                          _cbrsResponseStatus = pResponseStatus_}
 
 -- | Backup created by request.
 cbrsBackup :: Lens' CreateBackupResponse (Maybe Backup)

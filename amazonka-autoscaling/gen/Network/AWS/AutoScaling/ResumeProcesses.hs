@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resumes the specified suspended Auto Scaling processes, or all suspended process, for the specified Auto Scaling group.
+-- Resumes the specified suspended automatic scaling processes, or all suspended process, for the specified Auto Scaling group.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html Suspending and Resuming Auto Scaling Processes> in the /Auto Scaling User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html Suspending and Resuming Scaling Processes> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.ResumeProcesses
     (
@@ -45,30 +45,26 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'resumeProcesses' smart constructor.
-data ResumeProcesses = ResumeProcesses'
-  { _rpScalingProcesses     :: !(Maybe [Text])
-  , _rpAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResumeProcesses = ResumeProcesses'{_rpScalingProcesses
+                                        :: !(Maybe [Text]),
+                                        _rpAutoScalingGroupName :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResumeProcesses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rpScalingProcesses' - One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@
+-- * 'rpScalingProcesses' - One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@ 
 --
 -- * 'rpAutoScalingGroupName' - The name of the Auto Scaling group.
 resumeProcesses
     :: Text -- ^ 'rpAutoScalingGroupName'
     -> ResumeProcesses
-resumeProcesses pAutoScalingGroupName_ =
-  ResumeProcesses'
-    { _rpScalingProcesses = Nothing
-    , _rpAutoScalingGroupName = pAutoScalingGroupName_
-    }
+resumeProcesses pAutoScalingGroupName_
+  = ResumeProcesses'{_rpScalingProcesses = Nothing,
+                     _rpAutoScalingGroupName = pAutoScalingGroupName_}
 
-
--- | One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@
+-- | One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@ 
 rpScalingProcesses :: Lens' ResumeProcesses [Text]
 rpScalingProcesses = lens _rpScalingProcesses (\ s a -> s{_rpScalingProcesses = a}) . _Default . _Coerce
 
@@ -102,16 +98,14 @@ instance ToQuery ResumeProcesses where
                "AutoScalingGroupName" =: _rpAutoScalingGroupName]
 
 -- | /See:/ 'resumeProcessesResponse' smart constructor.
-data ResumeProcessesResponse =
-  ResumeProcessesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResumeProcessesResponse = ResumeProcessesResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ResumeProcessesResponse' with the minimum fields required to make a request.
 --
 resumeProcessesResponse
     :: ResumeProcessesResponse
 resumeProcessesResponse = ResumeProcessesResponse'
-
 
 instance NFData ResumeProcessesResponse where

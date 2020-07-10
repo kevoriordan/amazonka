@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS Import/Export Service__
+-- __AWS Import/Export Service__ 
 module Network.AWS.ImportExport
     (
     -- * Service Configuration
@@ -20,65 +20,65 @@ module Network.AWS.ImportExport
     -- * Errors
     -- $errors
 
-    -- ** InvalidJobIdException
-    , _InvalidJobIdException
-
-    -- ** InvalidParameterException
-    , _InvalidParameterException
+    -- ** InvalidAccessKeyIdException
+    , _InvalidAccessKeyIdException
 
     -- ** ExpiredJobIdException
     , _ExpiredJobIdException
 
-    -- ** InvalidFileSystemException
-    , _InvalidFileSystemException
+    -- ** CanceledJobIdException
+    , _CanceledJobIdException
 
-    -- ** InvalidAccessKeyIdException
-    , _InvalidAccessKeyIdException
-
-    -- ** UnableToUpdateJobIdException
-    , _UnableToUpdateJobIdException
-
-    -- ** UnableToCancelJobIdException
-    , _UnableToCancelJobIdException
-
-    -- ** MultipleRegionsException
-    , _MultipleRegionsException
-
-    -- ** InvalidVersionException
-    , _InvalidVersionException
+    -- ** InvalidParameterException
+    , _InvalidParameterException
 
     -- ** MalformedManifestException
     , _MalformedManifestException
 
-    -- ** MissingParameterException
-    , _MissingParameterException
+    -- ** InvalidJobIdException
+    , _InvalidJobIdException
 
-    -- ** CanceledJobIdException
-    , _CanceledJobIdException
+    -- ** MultipleRegionsException
+    , _MultipleRegionsException
 
-    -- ** BucketPermissionException
-    , _BucketPermissionException
+    -- ** UnableToCancelJobIdException
+    , _UnableToCancelJobIdException
 
-    -- ** NoSuchBucketException
-    , _NoSuchBucketException
+    -- ** CreateJobQuotaExceededException
+    , _CreateJobQuotaExceededException
 
-    -- ** InvalidAddressException
-    , _InvalidAddressException
-
-    -- ** MissingCustomsException
-    , _MissingCustomsException
-
-    -- ** InvalidManifestFieldException
-    , _InvalidManifestFieldException
-
-    -- ** InvalidCustomsException
-    , _InvalidCustomsException
+    -- ** UnableToUpdateJobIdException
+    , _UnableToUpdateJobIdException
 
     -- ** MissingManifestFieldException
     , _MissingManifestFieldException
 
-    -- ** CreateJobQuotaExceededException
-    , _CreateJobQuotaExceededException
+    -- ** InvalidCustomsException
+    , _InvalidCustomsException
+
+    -- ** InvalidManifestFieldException
+    , _InvalidManifestFieldException
+
+    -- ** MissingCustomsException
+    , _MissingCustomsException
+
+    -- ** InvalidAddressException
+    , _InvalidAddressException
+
+    -- ** NoSuchBucketException
+    , _NoSuchBucketException
+
+    -- ** InvalidFileSystemException
+    , _InvalidFileSystemException
+
+    -- ** MissingParameterException
+    , _MissingParameterException
+
+    -- ** BucketPermissionException
+    , _BucketPermissionException
+
+    -- ** InvalidVersionException
+    , _InvalidVersionException
 
     -- * Waiters
     -- $waiters
@@ -86,22 +86,22 @@ module Network.AWS.ImportExport
     -- * Operations
     -- $operations
 
-    -- ** GetShippingLabel
+    -- ** GetShippingLabel 
     , module Network.AWS.ImportExport.GetShippingLabel
 
-    -- ** CreateJob
+    -- ** CreateJob 
     , module Network.AWS.ImportExport.CreateJob
 
     -- ** ListJobs (Paginated)
     , module Network.AWS.ImportExport.ListJobs
 
-    -- ** UpdateJob
+    -- ** UpdateJob 
     , module Network.AWS.ImportExport.UpdateJob
 
-    -- ** GetStatus
+    -- ** GetStatus 
     , module Network.AWS.ImportExport.GetStatus
 
-    -- ** CancelJob
+    -- ** CancelJob 
     , module Network.AWS.ImportExport.CancelJob
 
     -- * Types

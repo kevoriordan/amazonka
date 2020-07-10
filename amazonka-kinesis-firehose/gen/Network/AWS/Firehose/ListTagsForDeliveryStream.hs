@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the tags for the specified delivery stream. This operation has a limit of five transactions per second per account.
+-- Lists the tags for the specified delivery stream. This operation has a limit of five transactions per second per account. 
 --
 --
 module Network.AWS.Firehose.ListTagsForDeliveryStream
@@ -48,18 +48,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTagsForDeliveryStream' smart constructor.
-data ListTagsForDeliveryStream = ListTagsForDeliveryStream'
-  { _ltfdsLimit                :: !(Maybe Nat)
-  , _ltfdsExclusiveStartTagKey :: !(Maybe Text)
-  , _ltfdsDeliveryStreamName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForDeliveryStream = ListTagsForDeliveryStream'{_ltfdsLimit
+                                                            :: !(Maybe Nat),
+                                                            _ltfdsExclusiveStartTagKey
+                                                            :: !(Maybe Text),
+                                                            _ltfdsDeliveryStreamName
+                                                            :: !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListTagsForDeliveryStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltfdsLimit' - The number of tags to return. If this number is less than the total number of tags associated with the delivery stream, @HasMoreTags@ is set to @true@ in the response. To list additional tags, set @ExclusiveStartTagKey@ to the last key in the response.
+-- * 'ltfdsLimit' - The number of tags to return. If this number is less than the total number of tags associated with the delivery stream, @HasMoreTags@ is set to @true@ in the response. To list additional tags, set @ExclusiveStartTagKey@ to the last key in the response. 
 --
 -- * 'ltfdsExclusiveStartTagKey' - The key to use as the starting point for the list of tags. If you set this parameter, @ListTagsForDeliveryStream@ gets all tags that occur after @ExclusiveStartTagKey@ .
 --
@@ -67,15 +69,12 @@ data ListTagsForDeliveryStream = ListTagsForDeliveryStream'
 listTagsForDeliveryStream
     :: Text -- ^ 'ltfdsDeliveryStreamName'
     -> ListTagsForDeliveryStream
-listTagsForDeliveryStream pDeliveryStreamName_ =
-  ListTagsForDeliveryStream'
-    { _ltfdsLimit = Nothing
-    , _ltfdsExclusiveStartTagKey = Nothing
-    , _ltfdsDeliveryStreamName = pDeliveryStreamName_
-    }
+listTagsForDeliveryStream pDeliveryStreamName_
+  = ListTagsForDeliveryStream'{_ltfdsLimit = Nothing,
+                               _ltfdsExclusiveStartTagKey = Nothing,
+                               _ltfdsDeliveryStreamName = pDeliveryStreamName_}
 
-
--- | The number of tags to return. If this number is less than the total number of tags associated with the delivery stream, @HasMoreTags@ is set to @true@ in the response. To list additional tags, set @ExclusiveStartTagKey@ to the last key in the response.
+-- | The number of tags to return. If this number is less than the total number of tags associated with the delivery stream, @HasMoreTags@ is set to @true@ in the response. To list additional tags, set @ExclusiveStartTagKey@ to the last key in the response. 
 ltfdsLimit :: Lens' ListTagsForDeliveryStream (Maybe Natural)
 ltfdsLimit = lens _ltfdsLimit (\ s a -> s{_ltfdsLimit = a}) . mapping _Nat
 
@@ -129,12 +128,17 @@ instance ToQuery ListTagsForDeliveryStream where
         toQuery = const mempty
 
 -- | /See:/ 'listTagsForDeliveryStreamResponse' smart constructor.
-data ListTagsForDeliveryStreamResponse = ListTagsForDeliveryStreamResponse'
-  { _ltfdsrsResponseStatus :: !Int
-  , _ltfdsrsTags           :: ![Tag]
-  , _ltfdsrsHasMoreTags    :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForDeliveryStreamResponse = ListTagsForDeliveryStreamResponse'{_ltfdsrsResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _ltfdsrsTags
+                                                                            ::
+                                                                            ![Tag],
+                                                                            _ltfdsrsHasMoreTags
+                                                                            ::
+                                                                            !Bool}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'ListTagsForDeliveryStreamResponse' with the minimum fields required to make a request.
 --
@@ -149,13 +153,12 @@ listTagsForDeliveryStreamResponse
     :: Int -- ^ 'ltfdsrsResponseStatus'
     -> Bool -- ^ 'ltfdsrsHasMoreTags'
     -> ListTagsForDeliveryStreamResponse
-listTagsForDeliveryStreamResponse pResponseStatus_ pHasMoreTags_ =
-  ListTagsForDeliveryStreamResponse'
-    { _ltfdsrsResponseStatus = pResponseStatus_
-    , _ltfdsrsTags = mempty
-    , _ltfdsrsHasMoreTags = pHasMoreTags_
-    }
-
+listTagsForDeliveryStreamResponse pResponseStatus_
+  pHasMoreTags_
+  = ListTagsForDeliveryStreamResponse'{_ltfdsrsResponseStatus
+                                         = pResponseStatus_,
+                                       _ltfdsrsTags = mempty,
+                                       _ltfdsrsHasMoreTags = pHasMoreTags_}
 
 -- | -- | The response status code.
 ltfdsrsResponseStatus :: Lens' ListTagsForDeliveryStreamResponse Int

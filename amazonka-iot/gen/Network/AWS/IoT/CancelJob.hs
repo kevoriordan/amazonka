@@ -27,6 +27,8 @@ module Network.AWS.IoT.CancelJob
       cancelJob
     , CancelJob
     -- * Request Lenses
+    , cForce
+    , cReasonCode
     , cComment
     , cJobId
 
@@ -34,10 +36,10 @@ module Network.AWS.IoT.CancelJob
     , cancelJobResponse
     , CancelJobResponse
     -- * Response Lenses
-    , crsJobId
-    , crsJobARN
-    , crsDescription
-    , crsResponseStatus
+    , canrsJobId
+    , canrsJobARN
+    , canrsDescription
+    , canrsResponseStatus
     ) where
 
 import Network.AWS.IoT.Types
@@ -48,15 +50,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'cancelJob' smart constructor.
-data CancelJob = CancelJob'
-  { _cComment :: !(Maybe Text)
-  , _cJobId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelJob = CancelJob'{_cForce :: !(Maybe Bool),
+                            _cReasonCode :: !(Maybe Text),
+                            _cComment :: !(Maybe Text), _cJobId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cForce' - (Optional) If @true@ job executions with status "IN_PROGRESS" and "QUEUED" are canceled, otherwise only job executions with status "QUEUED" are canceled. The default is @false@ . Canceling a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to update the job execution status. Use caution and ensure that each device executing a job which is canceled is able to recover to a valid state.
+--
+-- * 'cReasonCode' - (Optional)A reason code string that explains why the job was canceled.
 --
 -- * 'cComment' - An optional comment string describing why the job was canceled.
 --
@@ -64,8 +69,18 @@ data CancelJob = CancelJob'
 cancelJob
     :: Text -- ^ 'cJobId'
     -> CancelJob
-cancelJob pJobId_ = CancelJob' {_cComment = Nothing, _cJobId = pJobId_}
+cancelJob pJobId_
+  = CancelJob'{_cForce = Nothing,
+               _cReasonCode = Nothing, _cComment = Nothing,
+               _cJobId = pJobId_}
 
+-- | (Optional) If @true@ job executions with status "IN_PROGRESS" and "QUEUED" are canceled, otherwise only job executions with status "QUEUED" are canceled. The default is @false@ . Canceling a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to update the job execution status. Use caution and ensure that each device executing a job which is canceled is able to recover to a valid state.
+cForce :: Lens' CancelJob (Maybe Bool)
+cForce = lens _cForce (\ s a -> s{_cForce = a})
+
+-- | (Optional)A reason code string that explains why the job was canceled.
+cReasonCode :: Lens' CancelJob (Maybe Text)
+cReasonCode = lens _cReasonCode (\ s a -> s{_cReasonCode = a})
 
 -- | An optional comment string describing why the job was canceled.
 cComment :: Lens' CancelJob (Maybe Text)
@@ -95,61 +110,59 @@ instance ToHeaders CancelJob where
 
 instance ToJSON CancelJob where
         toJSON CancelJob'{..}
-          = object (catMaybes [("comment" .=) <$> _cComment])
+          = object
+              (catMaybes
+                 [("reasonCode" .=) <$> _cReasonCode,
+                  ("comment" .=) <$> _cComment])
 
 instance ToPath CancelJob where
         toPath CancelJob'{..}
           = mconcat ["/jobs/", toBS _cJobId, "/cancel"]
 
 instance ToQuery CancelJob where
-        toQuery = const mempty
+        toQuery CancelJob'{..} = mconcat ["force" =: _cForce]
 
 -- | /See:/ 'cancelJobResponse' smart constructor.
-data CancelJobResponse = CancelJobResponse'
-  { _crsJobId          :: !(Maybe Text)
-  , _crsJobARN         :: !(Maybe Text)
-  , _crsDescription    :: !(Maybe Text)
-  , _crsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelJobResponse = CancelJobResponse'{_canrsJobId
+                                            :: !(Maybe Text),
+                                            _canrsJobARN :: !(Maybe Text),
+                                            _canrsDescription :: !(Maybe Text),
+                                            _canrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJobResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'crsJobId' - The unique identifier you assigned to this job when it was created.
+-- * 'canrsJobId' - The unique identifier you assigned to this job when it was created.
 --
--- * 'crsJobARN' - The job ARN.
+-- * 'canrsJobARN' - The job ARN.
 --
--- * 'crsDescription' - A short text description of the job.
+-- * 'canrsDescription' - A short text description of the job.
 --
--- * 'crsResponseStatus' - -- | The response status code.
+-- * 'canrsResponseStatus' - -- | The response status code.
 cancelJobResponse
-    :: Int -- ^ 'crsResponseStatus'
+    :: Int -- ^ 'canrsResponseStatus'
     -> CancelJobResponse
-cancelJobResponse pResponseStatus_ =
-  CancelJobResponse'
-    { _crsJobId = Nothing
-    , _crsJobARN = Nothing
-    , _crsDescription = Nothing
-    , _crsResponseStatus = pResponseStatus_
-    }
-
+cancelJobResponse pResponseStatus_
+  = CancelJobResponse'{_canrsJobId = Nothing,
+                       _canrsJobARN = Nothing, _canrsDescription = Nothing,
+                       _canrsResponseStatus = pResponseStatus_}
 
 -- | The unique identifier you assigned to this job when it was created.
-crsJobId :: Lens' CancelJobResponse (Maybe Text)
-crsJobId = lens _crsJobId (\ s a -> s{_crsJobId = a})
+canrsJobId :: Lens' CancelJobResponse (Maybe Text)
+canrsJobId = lens _canrsJobId (\ s a -> s{_canrsJobId = a})
 
 -- | The job ARN.
-crsJobARN :: Lens' CancelJobResponse (Maybe Text)
-crsJobARN = lens _crsJobARN (\ s a -> s{_crsJobARN = a})
+canrsJobARN :: Lens' CancelJobResponse (Maybe Text)
+canrsJobARN = lens _canrsJobARN (\ s a -> s{_canrsJobARN = a})
 
 -- | A short text description of the job.
-crsDescription :: Lens' CancelJobResponse (Maybe Text)
-crsDescription = lens _crsDescription (\ s a -> s{_crsDescription = a})
+canrsDescription :: Lens' CancelJobResponse (Maybe Text)
+canrsDescription = lens _canrsDescription (\ s a -> s{_canrsDescription = a})
 
 -- | -- | The response status code.
-crsResponseStatus :: Lens' CancelJobResponse Int
-crsResponseStatus = lens _crsResponseStatus (\ s a -> s{_crsResponseStatus = a})
+canrsResponseStatus :: Lens' CancelJobResponse Int
+canrsResponseStatus = lens _canrsResponseStatus (\ s a -> s{_canrsResponseStatus = a})
 
 instance NFData CancelJobResponse where

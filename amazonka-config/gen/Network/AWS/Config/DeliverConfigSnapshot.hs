@@ -57,10 +57,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deliverConfigSnapshot' smart constructor.
-newtype DeliverConfigSnapshot = DeliverConfigSnapshot'
-  { _dcsDeliveryChannelName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeliverConfigSnapshot = DeliverConfigSnapshot'{_dcsDeliveryChannelName
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeliverConfigSnapshot' with the minimum fields required to make a request.
 --
@@ -70,9 +70,9 @@ newtype DeliverConfigSnapshot = DeliverConfigSnapshot'
 deliverConfigSnapshot
     :: Text -- ^ 'dcsDeliveryChannelName'
     -> DeliverConfigSnapshot
-deliverConfigSnapshot pDeliveryChannelName_ =
-  DeliverConfigSnapshot' {_dcsDeliveryChannelName = pDeliveryChannelName_}
-
+deliverConfigSnapshot pDeliveryChannelName_
+  = DeliverConfigSnapshot'{_dcsDeliveryChannelName =
+                             pDeliveryChannelName_}
 
 -- | The name of the delivery channel through which the snapshot is delivered.
 dcsDeliveryChannelName :: Lens' DeliverConfigSnapshot Text
@@ -120,11 +120,14 @@ instance ToQuery DeliverConfigSnapshot where
 --
 --
 -- /See:/ 'deliverConfigSnapshotResponse' smart constructor.
-data DeliverConfigSnapshotResponse = DeliverConfigSnapshotResponse'
-  { _dcsrsConfigSnapshotId :: !(Maybe Text)
-  , _dcsrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeliverConfigSnapshotResponse = DeliverConfigSnapshotResponse'{_dcsrsConfigSnapshotId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dcsrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeliverConfigSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +139,10 @@ data DeliverConfigSnapshotResponse = DeliverConfigSnapshotResponse'
 deliverConfigSnapshotResponse
     :: Int -- ^ 'dcsrsResponseStatus'
     -> DeliverConfigSnapshotResponse
-deliverConfigSnapshotResponse pResponseStatus_ =
-  DeliverConfigSnapshotResponse'
-    {_dcsrsConfigSnapshotId = Nothing, _dcsrsResponseStatus = pResponseStatus_}
-
+deliverConfigSnapshotResponse pResponseStatus_
+  = DeliverConfigSnapshotResponse'{_dcsrsConfigSnapshotId
+                                     = Nothing,
+                                   _dcsrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the snapshot that is being created.
 dcsrsConfigSnapshotId :: Lens' DeliverConfigSnapshotResponse (Maybe Text)

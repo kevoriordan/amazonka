@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an ADM channel
+-- Retrieves information about the status and settings of the ADM channel for an application.
+--
+--
 module Network.AWS.Pinpoint.GetADMChannel
     (
     -- * Creating a Request
@@ -43,24 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getADMChannel' smart constructor.
-newtype GetADMChannel = GetADMChannel'
-  { _gadmcApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetADMChannel = GetADMChannel'{_gadmcApplicationId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetADMChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gadmcApplicationId' - Undocumented member.
+-- * 'gadmcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getADMChannel
     :: Text -- ^ 'gadmcApplicationId'
     -> GetADMChannel
-getADMChannel pApplicationId_ =
-  GetADMChannel' {_gadmcApplicationId = pApplicationId_}
+getADMChannel pApplicationId_
+  = GetADMChannel'{_gadmcApplicationId =
+                     pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gadmcApplicationId :: Lens' GetADMChannel Text
 gadmcApplicationId = lens _gadmcApplicationId (\ s a -> s{_gadmcApplicationId = a})
 
@@ -94,11 +95,12 @@ instance ToQuery GetADMChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getADMChannelResponse' smart constructor.
-data GetADMChannelResponse = GetADMChannelResponse'
-  { _gadmcrsResponseStatus     :: !Int
-  , _gadmcrsADMChannelResponse :: !ADMChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetADMChannelResponse = GetADMChannelResponse'{_gadmcrsResponseStatus
+                                                    :: !Int,
+                                                    _gadmcrsADMChannelResponse
+                                                    :: !ADMChannelResponse}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetADMChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +113,11 @@ getADMChannelResponse
     :: Int -- ^ 'gadmcrsResponseStatus'
     -> ADMChannelResponse -- ^ 'gadmcrsADMChannelResponse'
     -> GetADMChannelResponse
-getADMChannelResponse pResponseStatus_ pADMChannelResponse_ =
-  GetADMChannelResponse'
-    { _gadmcrsResponseStatus = pResponseStatus_
-    , _gadmcrsADMChannelResponse = pADMChannelResponse_
-    }
-
+getADMChannelResponse pResponseStatus_
+  pADMChannelResponse_
+  = GetADMChannelResponse'{_gadmcrsResponseStatus =
+                             pResponseStatus_,
+                           _gadmcrsADMChannelResponse = pADMChannelResponse_}
 
 -- | -- | The response status code.
 gadmcrsResponseStatus :: Lens' GetADMChannelResponse Int

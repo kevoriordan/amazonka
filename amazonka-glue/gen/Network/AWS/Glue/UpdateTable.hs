@@ -47,21 +47,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateTable' smart constructor.
-data UpdateTable = UpdateTable'
-  { _utSkipArchive  :: !(Maybe Bool)
-  , _utCatalogId    :: !(Maybe Text)
-  , _utDatabaseName :: !Text
-  , _utTableInput   :: !TableInput
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTable = UpdateTable'{_utSkipArchive ::
+                                !(Maybe Bool),
+                                _utCatalogId :: !(Maybe Text),
+                                _utDatabaseName :: !Text,
+                                _utTableInput :: !TableInput}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'utSkipArchive' - By default, @UpdateTable@ always creates an archived version of the table before updating it. If @skipArchive@ is set to true, however, @UpdateTable@ does not create the archived version.
+-- * 'utSkipArchive' - By default, @UpdateTable@ always creates an archived version of the table before updating it. However, if @skipArchive@ is set to true, @UpdateTable@ does not create the archived version.
 --
--- * 'utCatalogId' - The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+-- * 'utCatalogId' - The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
 --
 -- * 'utDatabaseName' - The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.
 --
@@ -70,20 +69,17 @@ updateTable
     :: Text -- ^ 'utDatabaseName'
     -> TableInput -- ^ 'utTableInput'
     -> UpdateTable
-updateTable pDatabaseName_ pTableInput_ =
-  UpdateTable'
-    { _utSkipArchive = Nothing
-    , _utCatalogId = Nothing
-    , _utDatabaseName = pDatabaseName_
-    , _utTableInput = pTableInput_
-    }
+updateTable pDatabaseName_ pTableInput_
+  = UpdateTable'{_utSkipArchive = Nothing,
+                 _utCatalogId = Nothing,
+                 _utDatabaseName = pDatabaseName_,
+                 _utTableInput = pTableInput_}
 
-
--- | By default, @UpdateTable@ always creates an archived version of the table before updating it. If @skipArchive@ is set to true, however, @UpdateTable@ does not create the archived version.
+-- | By default, @UpdateTable@ always creates an archived version of the table before updating it. However, if @skipArchive@ is set to true, @UpdateTable@ does not create the archived version.
 utSkipArchive :: Lens' UpdateTable (Maybe Bool)
 utSkipArchive = lens _utSkipArchive (\ s a -> s{_utSkipArchive = a})
 
--- | The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
 utCatalogId :: Lens' UpdateTable (Maybe Text)
 utCatalogId = lens _utCatalogId (\ s a -> s{_utCatalogId = a})
 
@@ -132,10 +128,10 @@ instance ToQuery UpdateTable where
         toQuery = const mempty
 
 -- | /See:/ 'updateTableResponse' smart constructor.
-newtype UpdateTableResponse = UpdateTableResponse'
-  { _utrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateTableResponse = UpdateTableResponse'{_utrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateTableResponse' with the minimum fields required to make a request.
 --
@@ -145,9 +141,9 @@ newtype UpdateTableResponse = UpdateTableResponse'
 updateTableResponse
     :: Int -- ^ 'utrsResponseStatus'
     -> UpdateTableResponse
-updateTableResponse pResponseStatus_ =
-  UpdateTableResponse' {_utrsResponseStatus = pResponseStatus_}
-
+updateTableResponse pResponseStatus_
+  = UpdateTableResponse'{_utrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 utrsResponseStatus :: Lens' UpdateTableResponse Int

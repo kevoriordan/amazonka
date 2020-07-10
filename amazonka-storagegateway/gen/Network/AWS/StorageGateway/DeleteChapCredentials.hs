@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair.
+-- Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target and initiator pair. This operation is supported in volume and tape gateway types.
 --
 --
 module Network.AWS.StorageGateway.DeleteChapCredentials
@@ -49,19 +49,19 @@ import Network.AWS.StorageGateway.Types.Product
 -- | A JSON object containing one or more of the following fields:
 --
 --
---     * 'DeleteChapCredentialsInput$InitiatorName'
+--     * 'DeleteChapCredentialsInput$InitiatorName' 
 --
---     * 'DeleteChapCredentialsInput$TargetARN'
+--     * 'DeleteChapCredentialsInput$TargetARN' 
 --
 --
 --
 --
 -- /See:/ 'deleteChapCredentials' smart constructor.
-data DeleteChapCredentials = DeleteChapCredentials'
-  { _dTargetARN     :: !Text
-  , _dInitiatorName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteChapCredentials = DeleteChapCredentials'{_dTargetARN
+                                                    :: !Text,
+                                                    _dInitiatorName :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteChapCredentials' with the minimum fields required to make a request.
 --
@@ -74,10 +74,9 @@ deleteChapCredentials
     :: Text -- ^ 'dTargetARN'
     -> Text -- ^ 'dInitiatorName'
     -> DeleteChapCredentials
-deleteChapCredentials pTargetARN_ pInitiatorName_ =
-  DeleteChapCredentials'
-    {_dTargetARN = pTargetARN_, _dInitiatorName = pInitiatorName_}
-
+deleteChapCredentials pTargetARN_ pInitiatorName_
+  = DeleteChapCredentials'{_dTargetARN = pTargetARN_,
+                           _dInitiatorName = pInitiatorName_}
 
 -- | The Amazon Resource Name (ARN) of the iSCSI volume target. Use the 'DescribeStorediSCSIVolumes' operation to return to retrieve the TargetARN for specified VolumeARN.
 dTargetARN :: Lens' DeleteChapCredentials Text
@@ -130,12 +129,18 @@ instance ToQuery DeleteChapCredentials where
 --
 --
 -- /See:/ 'deleteChapCredentialsResponse' smart constructor.
-data DeleteChapCredentialsResponse = DeleteChapCredentialsResponse'
-  { _drsTargetARN      :: !(Maybe Text)
-  , _drsInitiatorName  :: !(Maybe Text)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteChapCredentialsResponse = DeleteChapCredentialsResponse'{_drsTargetARN
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _drsInitiatorName
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _drsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteChapCredentialsResponse' with the minimum fields required to make a request.
 --
@@ -149,13 +154,11 @@ data DeleteChapCredentialsResponse = DeleteChapCredentialsResponse'
 deleteChapCredentialsResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteChapCredentialsResponse
-deleteChapCredentialsResponse pResponseStatus_ =
-  DeleteChapCredentialsResponse'
-    { _drsTargetARN = Nothing
-    , _drsInitiatorName = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+deleteChapCredentialsResponse pResponseStatus_
+  = DeleteChapCredentialsResponse'{_drsTargetARN =
+                                     Nothing,
+                                   _drsInitiatorName = Nothing,
+                                   _drsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the target.
 drsTargetARN :: Lens' DeleteChapCredentialsResponse (Maybe Text)

@@ -58,10 +58,11 @@ import Network.AWS.SES.Types.Product
 --
 --
 -- /See:/ 'getCustomVerificationEmailTemplate' smart constructor.
-newtype GetCustomVerificationEmailTemplate = GetCustomVerificationEmailTemplate'
-  { _gcvetTemplateName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetCustomVerificationEmailTemplate = GetCustomVerificationEmailTemplate'{_gcvetTemplateName
+                                                                                 ::
+                                                                                 Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'GetCustomVerificationEmailTemplate' with the minimum fields required to make a request.
 --
@@ -71,9 +72,9 @@ newtype GetCustomVerificationEmailTemplate = GetCustomVerificationEmailTemplate'
 getCustomVerificationEmailTemplate
     :: Text -- ^ 'gcvetTemplateName'
     -> GetCustomVerificationEmailTemplate
-getCustomVerificationEmailTemplate pTemplateName_ =
-  GetCustomVerificationEmailTemplate' {_gcvetTemplateName = pTemplateName_}
-
+getCustomVerificationEmailTemplate pTemplateName_
+  = GetCustomVerificationEmailTemplate'{_gcvetTemplateName
+                                          = pTemplateName_}
 
 -- | The name of the custom verification email template that you want to retrieve.
 gcvetTemplateName :: Lens' GetCustomVerificationEmailTemplate Text
@@ -125,16 +126,36 @@ instance ToQuery GetCustomVerificationEmailTemplate
 --
 --
 -- /See:/ 'getCustomVerificationEmailTemplateResponse' smart constructor.
-data GetCustomVerificationEmailTemplateResponse = GetCustomVerificationEmailTemplateResponse'
-  { _gcvetrsFromEmailAddress      :: !(Maybe Text)
-  , _gcvetrsTemplateName          :: !(Maybe Text)
-  , _gcvetrsFailureRedirectionURL :: !(Maybe Text)
-  , _gcvetrsTemplateSubject       :: !(Maybe Text)
-  , _gcvetrsSuccessRedirectionURL :: !(Maybe Text)
-  , _gcvetrsTemplateContent       :: !(Maybe Text)
-  , _gcvetrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCustomVerificationEmailTemplateResponse = GetCustomVerificationEmailTemplateResponse'{_gcvetrsFromEmailAddress
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _gcvetrsTemplateName
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _gcvetrsFailureRedirectionURL
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _gcvetrsTemplateSubject
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _gcvetrsSuccessRedirectionURL
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _gcvetrsTemplateContent
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _gcvetrsResponseStatus
+                                                                                              ::
+                                                                                              !Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'GetCustomVerificationEmailTemplateResponse' with the minimum fields required to make a request.
 --
@@ -156,17 +177,21 @@ data GetCustomVerificationEmailTemplateResponse = GetCustomVerificationEmailTemp
 getCustomVerificationEmailTemplateResponse
     :: Int -- ^ 'gcvetrsResponseStatus'
     -> GetCustomVerificationEmailTemplateResponse
-getCustomVerificationEmailTemplateResponse pResponseStatus_ =
-  GetCustomVerificationEmailTemplateResponse'
-    { _gcvetrsFromEmailAddress = Nothing
-    , _gcvetrsTemplateName = Nothing
-    , _gcvetrsFailureRedirectionURL = Nothing
-    , _gcvetrsTemplateSubject = Nothing
-    , _gcvetrsSuccessRedirectionURL = Nothing
-    , _gcvetrsTemplateContent = Nothing
-    , _gcvetrsResponseStatus = pResponseStatus_
-    }
-
+getCustomVerificationEmailTemplateResponse
+  pResponseStatus_
+  = GetCustomVerificationEmailTemplateResponse'{_gcvetrsFromEmailAddress
+                                                  = Nothing,
+                                                _gcvetrsTemplateName = Nothing,
+                                                _gcvetrsFailureRedirectionURL =
+                                                  Nothing,
+                                                _gcvetrsTemplateSubject =
+                                                  Nothing,
+                                                _gcvetrsSuccessRedirectionURL =
+                                                  Nothing,
+                                                _gcvetrsTemplateContent =
+                                                  Nothing,
+                                                _gcvetrsResponseStatus =
+                                                  pResponseStatus_}
 
 -- | The email address that the custom verification email is sent from.
 gcvetrsFromEmailAddress :: Lens' GetCustomVerificationEmailTemplateResponse (Maybe Text)

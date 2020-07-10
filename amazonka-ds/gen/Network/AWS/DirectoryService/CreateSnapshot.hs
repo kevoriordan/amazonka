@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createSnapshot' smart constructor.
-data CreateSnapshot = CreateSnapshot'
-  { _csName        :: !(Maybe Text)
-  , _csDirectoryId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshot = CreateSnapshot'{_csName ::
+                                      !(Maybe Text),
+                                      _csDirectoryId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSnapshot' with the minimum fields required to make a request.
 --
@@ -66,9 +65,9 @@ data CreateSnapshot = CreateSnapshot'
 createSnapshot
     :: Text -- ^ 'csDirectoryId'
     -> CreateSnapshot
-createSnapshot pDirectoryId_ =
-  CreateSnapshot' {_csName = Nothing, _csDirectoryId = pDirectoryId_}
-
+createSnapshot pDirectoryId_
+  = CreateSnapshot'{_csName = Nothing,
+                    _csDirectoryId = pDirectoryId_}
 
 -- | The descriptive name to apply to the snapshot.
 csName :: Lens' CreateSnapshot (Maybe Text)
@@ -119,11 +118,12 @@ instance ToQuery CreateSnapshot where
 --
 --
 -- /See:/ 'createSnapshotResponse' smart constructor.
-data CreateSnapshotResponse = CreateSnapshotResponse'
-  { _csrsSnapshotId     :: !(Maybe Text)
-  , _csrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshotResponse = CreateSnapshotResponse'{_csrsSnapshotId
+                                                      :: !(Maybe Text),
+                                                      _csrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -135,10 +135,9 @@ data CreateSnapshotResponse = CreateSnapshotResponse'
 createSnapshotResponse
     :: Int -- ^ 'csrsResponseStatus'
     -> CreateSnapshotResponse
-createSnapshotResponse pResponseStatus_ =
-  CreateSnapshotResponse'
-    {_csrsSnapshotId = Nothing, _csrsResponseStatus = pResponseStatus_}
-
+createSnapshotResponse pResponseStatus_
+  = CreateSnapshotResponse'{_csrsSnapshotId = Nothing,
+                            _csrsResponseStatus = pResponseStatus_}
 
 -- | The identifier of the snapshot that was created.
 csrsSnapshotId :: Lens' CreateSnapshotResponse (Maybe Text)

@@ -29,7 +29,7 @@
 --
 -- Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started.
 --
--- For information about notebook instance lifestyle configurations, see 'notebook-lifecycle-config' .
+-- For information about notebook instance lifestyle configurations, see <https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html Step 2.1: (Optional) Customize a Notebook Instance> .
 --
 module Network.AWS.SageMaker.CreateNotebookInstanceLifecycleConfig
     (
@@ -57,39 +57,46 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'createNotebookInstanceLifecycleConfig' smart constructor.
-data CreateNotebookInstanceLifecycleConfig = CreateNotebookInstanceLifecycleConfig'
-  { _cnilcOnCreate :: !(Maybe [NotebookInstanceLifecycleHook])
-  , _cnilcOnStart :: !(Maybe [NotebookInstanceLifecycleHook])
-  , _cnilcNotebookInstanceLifecycleConfigName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNotebookInstanceLifecycleConfig = CreateNotebookInstanceLifecycleConfig'{_cnilcOnCreate
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [NotebookInstanceLifecycleHook]),
+                                                                                    _cnilcOnStart
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [NotebookInstanceLifecycleHook]),
+                                                                                    _cnilcNotebookInstanceLifecycleConfigName
+                                                                                    ::
+                                                                                    !Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'CreateNotebookInstanceLifecycleConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cnilcOnCreate' - A shell script that runs only once, when you create a notebook instance.
+-- * 'cnilcOnCreate' - A shell script that runs only once, when you create a notebook instance. The shell script must be a base64-encoded string.
 --
--- * 'cnilcOnStart' - A shell script that runs every time you start a notebook instance, including when you create the notebook instance.
+-- * 'cnilcOnStart' - A shell script that runs every time you start a notebook instance, including when you create the notebook instance. The shell script must be a base64-encoded string.
 --
 -- * 'cnilcNotebookInstanceLifecycleConfigName' - The name of the lifecycle configuration.
 createNotebookInstanceLifecycleConfig
     :: Text -- ^ 'cnilcNotebookInstanceLifecycleConfigName'
     -> CreateNotebookInstanceLifecycleConfig
-createNotebookInstanceLifecycleConfig pNotebookInstanceLifecycleConfigName_ =
-  CreateNotebookInstanceLifecycleConfig'
-    { _cnilcOnCreate = Nothing
-    , _cnilcOnStart = Nothing
-    , _cnilcNotebookInstanceLifecycleConfigName =
-        pNotebookInstanceLifecycleConfigName_
-    }
+createNotebookInstanceLifecycleConfig
+  pNotebookInstanceLifecycleConfigName_
+  = CreateNotebookInstanceLifecycleConfig'{_cnilcOnCreate
+                                             = Nothing,
+                                           _cnilcOnStart = Nothing,
+                                           _cnilcNotebookInstanceLifecycleConfigName
+                                             =
+                                             pNotebookInstanceLifecycleConfigName_}
 
-
--- | A shell script that runs only once, when you create a notebook instance.
+-- | A shell script that runs only once, when you create a notebook instance. The shell script must be a base64-encoded string.
 cnilcOnCreate :: Lens' CreateNotebookInstanceLifecycleConfig [NotebookInstanceLifecycleHook]
 cnilcOnCreate = lens _cnilcOnCreate (\ s a -> s{_cnilcOnCreate = a}) . _Default . _Coerce
 
--- | A shell script that runs every time you start a notebook instance, including when you create the notebook instance.
+-- | A shell script that runs every time you start a notebook instance, including when you create the notebook instance. The shell script must be a base64-encoded string.
 cnilcOnStart :: Lens' CreateNotebookInstanceLifecycleConfig [NotebookInstanceLifecycleHook]
 cnilcOnStart = lens _cnilcOnStart (\ s a -> s{_cnilcOnStart = a}) . _Default . _Coerce
 
@@ -150,11 +157,16 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'createNotebookInstanceLifecycleConfigResponse' smart constructor.
-data CreateNotebookInstanceLifecycleConfigResponse = CreateNotebookInstanceLifecycleConfigResponse'
-  { _cnilcrsNotebookInstanceLifecycleConfigARN :: !(Maybe Text)
-  , _cnilcrsResponseStatus                     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNotebookInstanceLifecycleConfigResponse = CreateNotebookInstanceLifecycleConfigResponse'{_cnilcrsNotebookInstanceLifecycleConfigARN
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Text),
+                                                                                                    _cnilcrsResponseStatus
+                                                                                                    ::
+                                                                                                    !Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'CreateNotebookInstanceLifecycleConfigResponse' with the minimum fields required to make a request.
 --
@@ -166,12 +178,12 @@ data CreateNotebookInstanceLifecycleConfigResponse = CreateNotebookInstanceLifec
 createNotebookInstanceLifecycleConfigResponse
     :: Int -- ^ 'cnilcrsResponseStatus'
     -> CreateNotebookInstanceLifecycleConfigResponse
-createNotebookInstanceLifecycleConfigResponse pResponseStatus_ =
-  CreateNotebookInstanceLifecycleConfigResponse'
-    { _cnilcrsNotebookInstanceLifecycleConfigARN = Nothing
-    , _cnilcrsResponseStatus = pResponseStatus_
-    }
-
+createNotebookInstanceLifecycleConfigResponse
+  pResponseStatus_
+  = CreateNotebookInstanceLifecycleConfigResponse'{_cnilcrsNotebookInstanceLifecycleConfigARN
+                                                     = Nothing,
+                                                   _cnilcrsResponseStatus =
+                                                     pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the lifecycle configuration.
 cnilcrsNotebookInstanceLifecycleConfigARN :: Lens' CreateNotebookInstanceLifecycleConfigResponse (Maybe Text)

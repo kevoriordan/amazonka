@@ -23,7 +23,7 @@
 --
 -- /Important:/ We recommend that you enable integration between AWS Organizations and the specified AWS service by using the console or commands that are provided by the specified service. Doing so ensures that the service is aware that it can create the resources that are required for the integration. How the service creates those resources in the organization's accounts depends on that service. For more information, see the documentation for the other AWS service.
 --
--- For more information about enabling services to integrate with AWS Organizations, see <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html Integrating AWS Organizations with Other AWS Services> in the /AWS Organizations User Guide/ .
+-- For more information about enabling services to integrate with AWS Organizations, see <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html Integrating AWS Organizations with Other AWS Services> in the /AWS Organizations User Guide./ 
 --
 -- This operation can be called only from the organization's master account and only if the organization has <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html enabled all features> .
 --
@@ -48,10 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'enableAWSServiceAccess' smart constructor.
-newtype EnableAWSServiceAccess = EnableAWSServiceAccess'
-  { _easaServicePrincipal :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype EnableAWSServiceAccess = EnableAWSServiceAccess'{_easaServicePrincipal
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'EnableAWSServiceAccess' with the minimum fields required to make a request.
 --
@@ -61,9 +61,9 @@ newtype EnableAWSServiceAccess = EnableAWSServiceAccess'
 enableAWSServiceAccess
     :: Text -- ^ 'easaServicePrincipal'
     -> EnableAWSServiceAccess
-enableAWSServiceAccess pServicePrincipal_ =
-  EnableAWSServiceAccess' {_easaServicePrincipal = pServicePrincipal_}
-
+enableAWSServiceAccess pServicePrincipal_
+  = EnableAWSServiceAccess'{_easaServicePrincipal =
+                              pServicePrincipal_}
 
 -- | The service principal name of the AWS service for which you want to enable integration with your organization. This is typically in the form of a URL, such as @/service-abbreviation/ .amazonaws.com@ .
 easaServicePrincipal :: Lens' EnableAWSServiceAccess Text
@@ -103,16 +103,15 @@ instance ToQuery EnableAWSServiceAccess where
         toQuery = const mempty
 
 -- | /See:/ 'enableAWSServiceAccessResponse' smart constructor.
-data EnableAWSServiceAccessResponse =
-  EnableAWSServiceAccessResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableAWSServiceAccessResponse = EnableAWSServiceAccessResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'EnableAWSServiceAccessResponse' with the minimum fields required to make a request.
 --
 enableAWSServiceAccessResponse
     :: EnableAWSServiceAccessResponse
-enableAWSServiceAccessResponse = EnableAWSServiceAccessResponse'
-
+enableAWSServiceAccessResponse
+  = EnableAWSServiceAccessResponse'
 
 instance NFData EnableAWSServiceAccessResponse where

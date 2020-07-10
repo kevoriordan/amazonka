@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Shield where
 
 import Data.Proxy
-import Network.AWS.Shield
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.Shield.Internal
 import Test.Tasty
+import Network.AWS.Shield
+import Test.AWS.Shield.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,23 +28,44 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestCreateSubscription $
+--         [ requestAssociateDRTLogBucket $
+--             associateDRTLogBucket
+--
+--         , requestDisassociateDRTRole $
+--             disassociateDRTRole
+--
+--         , requestCreateSubscription $
 --             createSubscription
 --
 --         , requestListProtections $
 --             listProtections
 --
---         , requestDeleteSubscription $
---             deleteSubscription
+--         , requestAssociateDRTRole $
+--             associateDRTRole
+--
+--         , requestUpdateSubscription $
+--             updateSubscription
+--
+--         , requestDisassociateDRTLogBucket $
+--             disassociateDRTLogBucket
 --
 --         , requestDescribeAttack $
 --             describeAttack
+--
+--         , requestUpdateEmergencyContactSettings $
+--             updateEmergencyContactSettings
+--
+--         , requestDisassociateHealthCheck $
+--             disassociateHealthCheck
 --
 --         , requestDescribeProtection $
 --             describeProtection
 --
 --         , requestListAttacks $
 --             listAttacks
+--
+--         , requestDescribeEmergencyContactSettings $
+--             describeEmergencyContactSettings
 --
 --         , requestCreateProtection $
 --             createProtection
@@ -55,29 +76,56 @@ import Test.Tasty
 --         , requestGetSubscriptionState $
 --             getSubscriptionState
 --
+--         , requestDescribeDRTAccess $
+--             describeDRTAccess
+--
 --         , requestDescribeSubscription $
 --             describeSubscription
+--
+--         , requestAssociateHealthCheck $
+--             associateHealthCheck
 --
 --           ]
 
 --     , testGroup "response"
---         [ responseCreateSubscription $
+--         [ responseAssociateDRTLogBucket $
+--             associateDRTLogBucketResponse
+--
+--         , responseDisassociateDRTRole $
+--             disassociateDRTRoleResponse
+--
+--         , responseCreateSubscription $
 --             createSubscriptionResponse
 --
 --         , responseListProtections $
 --             listProtectionsResponse
 --
---         , responseDeleteSubscription $
---             deleteSubscriptionResponse
+--         , responseAssociateDRTRole $
+--             associateDRTRoleResponse
+--
+--         , responseUpdateSubscription $
+--             updateSubscriptionResponse
+--
+--         , responseDisassociateDRTLogBucket $
+--             disassociateDRTLogBucketResponse
 --
 --         , responseDescribeAttack $
 --             describeAttackResponse
+--
+--         , responseUpdateEmergencyContactSettings $
+--             updateEmergencyContactSettingsResponse
+--
+--         , responseDisassociateHealthCheck $
+--             disassociateHealthCheckResponse
 --
 --         , responseDescribeProtection $
 --             describeProtectionResponse
 --
 --         , responseListAttacks $
 --             listAttacksResponse
+--
+--         , responseDescribeEmergencyContactSettings $
+--             describeEmergencyContactSettingsResponse
 --
 --         , responseCreateProtection $
 --             createProtectionResponse
@@ -88,13 +136,29 @@ import Test.Tasty
 --         , responseGetSubscriptionState $
 --             getSubscriptionStateResponse
 --
+--         , responseDescribeDRTAccess $
+--             describeDRTAccessResponse
+--
 --         , responseDescribeSubscription $
 --             describeSubscriptionResponse
+--
+--         , responseAssociateHealthCheck $
+--             associateHealthCheckResponse
 --
 --           ]
 --     ]
 
 -- Requests
+
+requestAssociateDRTLogBucket :: AssociateDRTLogBucket -> TestTree
+requestAssociateDRTLogBucket = req
+    "AssociateDRTLogBucket"
+    "fixture/AssociateDRTLogBucket.yaml"
+
+requestDisassociateDRTRole :: DisassociateDRTRole -> TestTree
+requestDisassociateDRTRole = req
+    "DisassociateDRTRole"
+    "fixture/DisassociateDRTRole.yaml"
 
 requestCreateSubscription :: CreateSubscription -> TestTree
 requestCreateSubscription = req
@@ -106,15 +170,35 @@ requestListProtections = req
     "ListProtections"
     "fixture/ListProtections.yaml"
 
-requestDeleteSubscription :: DeleteSubscription -> TestTree
-requestDeleteSubscription = req
-    "DeleteSubscription"
-    "fixture/DeleteSubscription.yaml"
+requestAssociateDRTRole :: AssociateDRTRole -> TestTree
+requestAssociateDRTRole = req
+    "AssociateDRTRole"
+    "fixture/AssociateDRTRole.yaml"
+
+requestUpdateSubscription :: UpdateSubscription -> TestTree
+requestUpdateSubscription = req
+    "UpdateSubscription"
+    "fixture/UpdateSubscription.yaml"
+
+requestDisassociateDRTLogBucket :: DisassociateDRTLogBucket -> TestTree
+requestDisassociateDRTLogBucket = req
+    "DisassociateDRTLogBucket"
+    "fixture/DisassociateDRTLogBucket.yaml"
 
 requestDescribeAttack :: DescribeAttack -> TestTree
 requestDescribeAttack = req
     "DescribeAttack"
     "fixture/DescribeAttack.yaml"
+
+requestUpdateEmergencyContactSettings :: UpdateEmergencyContactSettings -> TestTree
+requestUpdateEmergencyContactSettings = req
+    "UpdateEmergencyContactSettings"
+    "fixture/UpdateEmergencyContactSettings.yaml"
+
+requestDisassociateHealthCheck :: DisassociateHealthCheck -> TestTree
+requestDisassociateHealthCheck = req
+    "DisassociateHealthCheck"
+    "fixture/DisassociateHealthCheck.yaml"
 
 requestDescribeProtection :: DescribeProtection -> TestTree
 requestDescribeProtection = req
@@ -125,6 +209,11 @@ requestListAttacks :: ListAttacks -> TestTree
 requestListAttacks = req
     "ListAttacks"
     "fixture/ListAttacks.yaml"
+
+requestDescribeEmergencyContactSettings :: DescribeEmergencyContactSettings -> TestTree
+requestDescribeEmergencyContactSettings = req
+    "DescribeEmergencyContactSettings"
+    "fixture/DescribeEmergencyContactSettings.yaml"
 
 requestCreateProtection :: CreateProtection -> TestTree
 requestCreateProtection = req
@@ -141,12 +230,36 @@ requestGetSubscriptionState = req
     "GetSubscriptionState"
     "fixture/GetSubscriptionState.yaml"
 
+requestDescribeDRTAccess :: DescribeDRTAccess -> TestTree
+requestDescribeDRTAccess = req
+    "DescribeDRTAccess"
+    "fixture/DescribeDRTAccess.yaml"
+
 requestDescribeSubscription :: DescribeSubscription -> TestTree
 requestDescribeSubscription = req
     "DescribeSubscription"
     "fixture/DescribeSubscription.yaml"
 
+requestAssociateHealthCheck :: AssociateHealthCheck -> TestTree
+requestAssociateHealthCheck = req
+    "AssociateHealthCheck"
+    "fixture/AssociateHealthCheck.yaml"
+
 -- Responses
+
+responseAssociateDRTLogBucket :: AssociateDRTLogBucketResponse -> TestTree
+responseAssociateDRTLogBucket = res
+    "AssociateDRTLogBucketResponse"
+    "fixture/AssociateDRTLogBucketResponse.proto"
+    shield
+    (Proxy :: Proxy AssociateDRTLogBucket)
+
+responseDisassociateDRTRole :: DisassociateDRTRoleResponse -> TestTree
+responseDisassociateDRTRole = res
+    "DisassociateDRTRoleResponse"
+    "fixture/DisassociateDRTRoleResponse.proto"
+    shield
+    (Proxy :: Proxy DisassociateDRTRole)
 
 responseCreateSubscription :: CreateSubscriptionResponse -> TestTree
 responseCreateSubscription = res
@@ -162,12 +275,26 @@ responseListProtections = res
     shield
     (Proxy :: Proxy ListProtections)
 
-responseDeleteSubscription :: DeleteSubscriptionResponse -> TestTree
-responseDeleteSubscription = res
-    "DeleteSubscriptionResponse"
-    "fixture/DeleteSubscriptionResponse.proto"
+responseAssociateDRTRole :: AssociateDRTRoleResponse -> TestTree
+responseAssociateDRTRole = res
+    "AssociateDRTRoleResponse"
+    "fixture/AssociateDRTRoleResponse.proto"
     shield
-    (Proxy :: Proxy DeleteSubscription)
+    (Proxy :: Proxy AssociateDRTRole)
+
+responseUpdateSubscription :: UpdateSubscriptionResponse -> TestTree
+responseUpdateSubscription = res
+    "UpdateSubscriptionResponse"
+    "fixture/UpdateSubscriptionResponse.proto"
+    shield
+    (Proxy :: Proxy UpdateSubscription)
+
+responseDisassociateDRTLogBucket :: DisassociateDRTLogBucketResponse -> TestTree
+responseDisassociateDRTLogBucket = res
+    "DisassociateDRTLogBucketResponse"
+    "fixture/DisassociateDRTLogBucketResponse.proto"
+    shield
+    (Proxy :: Proxy DisassociateDRTLogBucket)
 
 responseDescribeAttack :: DescribeAttackResponse -> TestTree
 responseDescribeAttack = res
@@ -175,6 +302,20 @@ responseDescribeAttack = res
     "fixture/DescribeAttackResponse.proto"
     shield
     (Proxy :: Proxy DescribeAttack)
+
+responseUpdateEmergencyContactSettings :: UpdateEmergencyContactSettingsResponse -> TestTree
+responseUpdateEmergencyContactSettings = res
+    "UpdateEmergencyContactSettingsResponse"
+    "fixture/UpdateEmergencyContactSettingsResponse.proto"
+    shield
+    (Proxy :: Proxy UpdateEmergencyContactSettings)
+
+responseDisassociateHealthCheck :: DisassociateHealthCheckResponse -> TestTree
+responseDisassociateHealthCheck = res
+    "DisassociateHealthCheckResponse"
+    "fixture/DisassociateHealthCheckResponse.proto"
+    shield
+    (Proxy :: Proxy DisassociateHealthCheck)
 
 responseDescribeProtection :: DescribeProtectionResponse -> TestTree
 responseDescribeProtection = res
@@ -189,6 +330,13 @@ responseListAttacks = res
     "fixture/ListAttacksResponse.proto"
     shield
     (Proxy :: Proxy ListAttacks)
+
+responseDescribeEmergencyContactSettings :: DescribeEmergencyContactSettingsResponse -> TestTree
+responseDescribeEmergencyContactSettings = res
+    "DescribeEmergencyContactSettingsResponse"
+    "fixture/DescribeEmergencyContactSettingsResponse.proto"
+    shield
+    (Proxy :: Proxy DescribeEmergencyContactSettings)
 
 responseCreateProtection :: CreateProtectionResponse -> TestTree
 responseCreateProtection = res
@@ -211,9 +359,23 @@ responseGetSubscriptionState = res
     shield
     (Proxy :: Proxy GetSubscriptionState)
 
+responseDescribeDRTAccess :: DescribeDRTAccessResponse -> TestTree
+responseDescribeDRTAccess = res
+    "DescribeDRTAccessResponse"
+    "fixture/DescribeDRTAccessResponse.proto"
+    shield
+    (Proxy :: Proxy DescribeDRTAccess)
+
 responseDescribeSubscription :: DescribeSubscriptionResponse -> TestTree
 responseDescribeSubscription = res
     "DescribeSubscriptionResponse"
     "fixture/DescribeSubscriptionResponse.proto"
     shield
     (Proxy :: Proxy DescribeSubscription)
+
+responseAssociateHealthCheck :: AssociateHealthCheckResponse -> TestTree
+responseAssociateHealthCheck = res
+    "AssociateHealthCheckResponse"
+    "fixture/AssociateHealthCheckResponse.proto"
+    shield
+    (Proxy :: Proxy AssociateHealthCheck)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListWorkersWithQualificationType@ operation returns all of the Workers that have been associated with a given Qualification type.
+-- The @ListWorkersWithQualificationType@ operation returns all of the Workers that have been associated with a given Qualification type. 
 --
 --
 --
@@ -53,38 +53,48 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listWorkersWithQualificationType' smart constructor.
-data ListWorkersWithQualificationType = ListWorkersWithQualificationType'
-  { _lwwqtStatus              :: !(Maybe QualificationStatus)
-  , _lwwqtNextToken           :: !(Maybe Text)
-  , _lwwqtMaxResults          :: !(Maybe Nat)
-  , _lwwqtQualificationTypeId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListWorkersWithQualificationType = ListWorkersWithQualificationType'{_lwwqtStatus
+                                                                          ::
+                                                                          !(Maybe
+                                                                              QualificationStatus),
+                                                                          _lwwqtNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _lwwqtMaxResults
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Nat),
+                                                                          _lwwqtQualificationTypeId
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'ListWorkersWithQualificationType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lwwqtStatus' - The status of the Qualifications to return. Can be @Granted | Revoked@ .
+-- * 'lwwqtStatus' - The status of the Qualifications to return. Can be @Granted | Revoked@ . 
 --
 -- * 'lwwqtNextToken' - Pagination Token
 --
--- * 'lwwqtMaxResults' - Limit the number of results returned.
+-- * 'lwwqtMaxResults' - Limit the number of results returned. 
 --
 -- * 'lwwqtQualificationTypeId' - The ID of the Qualification type of the Qualifications to return.
 listWorkersWithQualificationType
     :: Text -- ^ 'lwwqtQualificationTypeId'
     -> ListWorkersWithQualificationType
-listWorkersWithQualificationType pQualificationTypeId_ =
-  ListWorkersWithQualificationType'
-    { _lwwqtStatus = Nothing
-    , _lwwqtNextToken = Nothing
-    , _lwwqtMaxResults = Nothing
-    , _lwwqtQualificationTypeId = pQualificationTypeId_
-    }
+listWorkersWithQualificationType
+  pQualificationTypeId_
+  = ListWorkersWithQualificationType'{_lwwqtStatus =
+                                        Nothing,
+                                      _lwwqtNextToken = Nothing,
+                                      _lwwqtMaxResults = Nothing,
+                                      _lwwqtQualificationTypeId =
+                                        pQualificationTypeId_}
 
-
--- | The status of the Qualifications to return. Can be @Granted | Revoked@ .
+-- | The status of the Qualifications to return. Can be @Granted | Revoked@ . 
 lwwqtStatus :: Lens' ListWorkersWithQualificationType (Maybe QualificationStatus)
 lwwqtStatus = lens _lwwqtStatus (\ s a -> s{_lwwqtStatus = a})
 
@@ -92,7 +102,7 @@ lwwqtStatus = lens _lwwqtStatus (\ s a -> s{_lwwqtStatus = a})
 lwwqtNextToken :: Lens' ListWorkersWithQualificationType (Maybe Text)
 lwwqtNextToken = lens _lwwqtNextToken (\ s a -> s{_lwwqtNextToken = a})
 
--- | Limit the number of results returned.
+-- | Limit the number of results returned. 
 lwwqtMaxResults :: Lens' ListWorkersWithQualificationType (Maybe Natural)
 lwwqtMaxResults = lens _lwwqtMaxResults (\ s a -> s{_lwwqtMaxResults = a}) . mapping _Nat
 
@@ -159,13 +169,24 @@ instance ToQuery ListWorkersWithQualificationType
         toQuery = const mempty
 
 -- | /See:/ 'listWorkersWithQualificationTypeResponse' smart constructor.
-data ListWorkersWithQualificationTypeResponse = ListWorkersWithQualificationTypeResponse'
-  { _lwwqtrsNextToken      :: !(Maybe Text)
-  , _lwwqtrsNumResults     :: !(Maybe Int)
-  , _lwwqtrsQualifications :: !(Maybe [Qualification])
-  , _lwwqtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListWorkersWithQualificationTypeResponse = ListWorkersWithQualificationTypeResponse'{_lwwqtrsNextToken
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _lwwqtrsNumResults
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Int),
+                                                                                          _lwwqtrsQualifications
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              [Qualification]),
+                                                                                          _lwwqtrsResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'ListWorkersWithQualificationTypeResponse' with the minimum fields required to make a request.
 --
@@ -175,20 +196,20 @@ data ListWorkersWithQualificationTypeResponse = ListWorkersWithQualificationType
 --
 -- * 'lwwqtrsNumResults' - The number of Qualifications on this page in the filtered results list, equivalent to the number of Qualifications being returned by this call.
 --
--- * 'lwwqtrsQualifications' - The list of Qualification elements returned by this call.
+-- * 'lwwqtrsQualifications' - The list of Qualification elements returned by this call. 
 --
 -- * 'lwwqtrsResponseStatus' - -- | The response status code.
 listWorkersWithQualificationTypeResponse
     :: Int -- ^ 'lwwqtrsResponseStatus'
     -> ListWorkersWithQualificationTypeResponse
-listWorkersWithQualificationTypeResponse pResponseStatus_ =
-  ListWorkersWithQualificationTypeResponse'
-    { _lwwqtrsNextToken = Nothing
-    , _lwwqtrsNumResults = Nothing
-    , _lwwqtrsQualifications = Nothing
-    , _lwwqtrsResponseStatus = pResponseStatus_
-    }
-
+listWorkersWithQualificationTypeResponse
+  pResponseStatus_
+  = ListWorkersWithQualificationTypeResponse'{_lwwqtrsNextToken
+                                                = Nothing,
+                                              _lwwqtrsNumResults = Nothing,
+                                              _lwwqtrsQualifications = Nothing,
+                                              _lwwqtrsResponseStatus =
+                                                pResponseStatus_}
 
 -- | Undocumented member.
 lwwqtrsNextToken :: Lens' ListWorkersWithQualificationTypeResponse (Maybe Text)
@@ -198,7 +219,7 @@ lwwqtrsNextToken = lens _lwwqtrsNextToken (\ s a -> s{_lwwqtrsNextToken = a})
 lwwqtrsNumResults :: Lens' ListWorkersWithQualificationTypeResponse (Maybe Int)
 lwwqtrsNumResults = lens _lwwqtrsNumResults (\ s a -> s{_lwwqtrsNumResults = a})
 
--- | The list of Qualification elements returned by this call.
+-- | The list of Qualification elements returned by this call. 
 lwwqtrsQualifications :: Lens' ListWorkersWithQualificationTypeResponse [Qualification]
 lwwqtrsQualifications = lens _lwwqtrsQualifications (\ s a -> s{_lwwqtrsQualifications = a}) . _Default . _Coerce
 

@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deregisterEventTopic' smart constructor.
-data DeregisterEventTopic = DeregisterEventTopic'
-  { _detDirectoryId :: !Text
-  , _detTopicName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterEventTopic = DeregisterEventTopic'{_detDirectoryId
+                                                  :: !Text,
+                                                  _detTopicName :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeregisterEventTopic' with the minimum fields required to make a request.
 --
@@ -66,10 +65,10 @@ deregisterEventTopic
     :: Text -- ^ 'detDirectoryId'
     -> Text -- ^ 'detTopicName'
     -> DeregisterEventTopic
-deregisterEventTopic pDirectoryId_ pTopicName_ =
-  DeregisterEventTopic'
-    {_detDirectoryId = pDirectoryId_, _detTopicName = pTopicName_}
-
+deregisterEventTopic pDirectoryId_ pTopicName_
+  = DeregisterEventTopic'{_detDirectoryId =
+                            pDirectoryId_,
+                          _detTopicName = pTopicName_}
 
 -- | The Directory ID to remove as a publisher. This directory will no longer send messages to the specified SNS topic.
 detDirectoryId :: Lens' DeregisterEventTopic Text
@@ -121,10 +120,10 @@ instance ToQuery DeregisterEventTopic where
 --
 --
 -- /See:/ 'deregisterEventTopicResponse' smart constructor.
-newtype DeregisterEventTopicResponse = DeregisterEventTopicResponse'
-  { _derrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeregisterEventTopicResponse = DeregisterEventTopicResponse'{_derrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeregisterEventTopicResponse' with the minimum fields required to make a request.
 --
@@ -134,9 +133,9 @@ newtype DeregisterEventTopicResponse = DeregisterEventTopicResponse'
 deregisterEventTopicResponse
     :: Int -- ^ 'derrsResponseStatus'
     -> DeregisterEventTopicResponse
-deregisterEventTopicResponse pResponseStatus_ =
-  DeregisterEventTopicResponse' {_derrsResponseStatus = pResponseStatus_}
-
+deregisterEventTopicResponse pResponseStatus_
+  = DeregisterEventTopicResponse'{_derrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 derrsResponseStatus :: Lens' DeregisterEventTopicResponse Int

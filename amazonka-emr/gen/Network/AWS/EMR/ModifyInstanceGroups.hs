@@ -47,11 +47,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyInstanceGroups' smart constructor.
-data ModifyInstanceGroups = ModifyInstanceGroups'
-  { _migClusterId      :: !(Maybe Text)
-  , _migInstanceGroups :: !(Maybe [InstanceGroupModifyConfig])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyInstanceGroups = ModifyInstanceGroups'{_migClusterId
+                                                  :: !(Maybe Text),
+                                                  _migInstanceGroups ::
+                                                  !(Maybe
+                                                      [InstanceGroupModifyConfig])}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyInstanceGroups' with the minimum fields required to make a request.
 --
@@ -62,9 +63,9 @@ data ModifyInstanceGroups = ModifyInstanceGroups'
 -- * 'migInstanceGroups' - Instance groups to change.
 modifyInstanceGroups
     :: ModifyInstanceGroups
-modifyInstanceGroups =
-  ModifyInstanceGroups' {_migClusterId = Nothing, _migInstanceGroups = Nothing}
-
+modifyInstanceGroups
+  = ModifyInstanceGroups'{_migClusterId = Nothing,
+                          _migInstanceGroups = Nothing}
 
 -- | The ID of the cluster to which the instance group belongs.
 migClusterId :: Lens' ModifyInstanceGroups (Maybe Text)
@@ -108,16 +109,15 @@ instance ToQuery ModifyInstanceGroups where
         toQuery = const mempty
 
 -- | /See:/ 'modifyInstanceGroupsResponse' smart constructor.
-data ModifyInstanceGroupsResponse =
-  ModifyInstanceGroupsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyInstanceGroupsResponse = ModifyInstanceGroupsResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ModifyInstanceGroupsResponse' with the minimum fields required to make a request.
 --
 modifyInstanceGroupsResponse
     :: ModifyInstanceGroupsResponse
-modifyInstanceGroupsResponse = ModifyInstanceGroupsResponse'
-
+modifyInstanceGroupsResponse
+  = ModifyInstanceGroupsResponse'
 
 instance NFData ModifyInstanceGroupsResponse where

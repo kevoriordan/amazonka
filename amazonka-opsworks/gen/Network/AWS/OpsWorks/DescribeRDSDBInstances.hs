@@ -21,7 +21,7 @@
 -- Describes Amazon RDS instances.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 -- This call accepts only one resource-identifying parameter.
 --
@@ -50,11 +50,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeRDSDBInstances' smart constructor.
-data DescribeRDSDBInstances = DescribeRDSDBInstances'
-  { _drdiRDSDBInstanceARNs :: !(Maybe [Text])
-  , _drdiStackId           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRDSDBInstances = DescribeRDSDBInstances'{_drdiRDSDBInstanceARNs
+                                                      :: !(Maybe [Text]),
+                                                      _drdiStackId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeRDSDBInstances' with the minimum fields required to make a request.
 --
@@ -62,20 +62,20 @@ data DescribeRDSDBInstances = DescribeRDSDBInstances'
 --
 -- * 'drdiRDSDBInstanceARNs' - An array containing the ARNs of the instances to be described.
 --
--- * 'drdiStackId' - The stack ID that the instances are registered with. The operation returns descriptions of all registered Amazon RDS instances.
+-- * 'drdiStackId' - The ID of the stack with which the instances are registered. The operation returns descriptions of all registered Amazon RDS instances.
 describeRDSDBInstances
     :: Text -- ^ 'drdiStackId'
     -> DescribeRDSDBInstances
-describeRDSDBInstances pStackId_ =
-  DescribeRDSDBInstances'
-    {_drdiRDSDBInstanceARNs = Nothing, _drdiStackId = pStackId_}
-
+describeRDSDBInstances pStackId_
+  = DescribeRDSDBInstances'{_drdiRDSDBInstanceARNs =
+                              Nothing,
+                            _drdiStackId = pStackId_}
 
 -- | An array containing the ARNs of the instances to be described.
 drdiRDSDBInstanceARNs :: Lens' DescribeRDSDBInstances [Text]
 drdiRDSDBInstanceARNs = lens _drdiRDSDBInstanceARNs (\ s a -> s{_drdiRDSDBInstanceARNs = a}) . _Default . _Coerce
 
--- | The stack ID that the instances are registered with. The operation returns descriptions of all registered Amazon RDS instances.
+-- | The ID of the stack with which the instances are registered. The operation returns descriptions of all registered Amazon RDS instances.
 drdiStackId :: Lens' DescribeRDSDBInstances Text
 drdiStackId = lens _drdiStackId (\ s a -> s{_drdiStackId = a})
 
@@ -122,11 +122,14 @@ instance ToQuery DescribeRDSDBInstances where
 --
 --
 -- /See:/ 'describeRDSDBInstancesResponse' smart constructor.
-data DescribeRDSDBInstancesResponse = DescribeRDSDBInstancesResponse'
-  { _drdirsRDSDBInstances :: !(Maybe [RDSDBInstance])
-  , _drdirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRDSDBInstancesResponse = DescribeRDSDBInstancesResponse'{_drdirsRDSDBInstances
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [RDSDBInstance]),
+                                                                      _drdirsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeRDSDBInstancesResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +141,10 @@ data DescribeRDSDBInstancesResponse = DescribeRDSDBInstancesResponse'
 describeRDSDBInstancesResponse
     :: Int -- ^ 'drdirsResponseStatus'
     -> DescribeRDSDBInstancesResponse
-describeRDSDBInstancesResponse pResponseStatus_ =
-  DescribeRDSDBInstancesResponse'
-    {_drdirsRDSDBInstances = Nothing, _drdirsResponseStatus = pResponseStatus_}
-
+describeRDSDBInstancesResponse pResponseStatus_
+  = DescribeRDSDBInstancesResponse'{_drdirsRDSDBInstances
+                                      = Nothing,
+                                    _drdirsResponseStatus = pResponseStatus_}
 
 -- | An a array of @RdsDbInstance@ objects that describe the instances.
 drdirsRDSDBInstances :: Lens' DescribeRDSDBInstancesResponse [RDSDBInstance]

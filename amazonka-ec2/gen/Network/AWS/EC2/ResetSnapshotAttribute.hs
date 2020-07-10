@@ -21,7 +21,7 @@
 -- Resets permission settings for the specified snapshot.
 --
 --
--- For more information on modifying snapshot permissions, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html Sharing Snapshots> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- For more information about modifying snapshot permissions, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html Sharing Snapshots> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.ResetSnapshotAttribute
     (
@@ -45,17 +45,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for ResetSnapshotAttribute.
---
---
---
--- /See:/ 'resetSnapshotAttribute' smart constructor.
-data ResetSnapshotAttribute = ResetSnapshotAttribute'
-  { _rsaDryRun     :: !(Maybe Bool)
-  , _rsaAttribute  :: !SnapshotAttributeName
-  , _rsaSnapshotId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'resetSnapshotAttribute' smart constructor.
+data ResetSnapshotAttribute = ResetSnapshotAttribute'{_rsaDryRun
+                                                      :: !(Maybe Bool),
+                                                      _rsaAttribute ::
+                                                      !SnapshotAttributeName,
+                                                      _rsaSnapshotId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ResetSnapshotAttribute' with the minimum fields required to make a request.
 --
@@ -70,13 +67,10 @@ resetSnapshotAttribute
     :: SnapshotAttributeName -- ^ 'rsaAttribute'
     -> Text -- ^ 'rsaSnapshotId'
     -> ResetSnapshotAttribute
-resetSnapshotAttribute pAttribute_ pSnapshotId_ =
-  ResetSnapshotAttribute'
-    { _rsaDryRun = Nothing
-    , _rsaAttribute = pAttribute_
-    , _rsaSnapshotId = pSnapshotId_
-    }
-
+resetSnapshotAttribute pAttribute_ pSnapshotId_
+  = ResetSnapshotAttribute'{_rsaDryRun = Nothing,
+                            _rsaAttribute = pAttribute_,
+                            _rsaSnapshotId = pSnapshotId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 rsaDryRun :: Lens' ResetSnapshotAttribute (Maybe Bool)
@@ -117,16 +111,15 @@ instance ToQuery ResetSnapshotAttribute where
                "SnapshotId" =: _rsaSnapshotId]
 
 -- | /See:/ 'resetSnapshotAttributeResponse' smart constructor.
-data ResetSnapshotAttributeResponse =
-  ResetSnapshotAttributeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetSnapshotAttributeResponse = ResetSnapshotAttributeResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ResetSnapshotAttributeResponse' with the minimum fields required to make a request.
 --
 resetSnapshotAttributeResponse
     :: ResetSnapshotAttributeResponse
-resetSnapshotAttributeResponse = ResetSnapshotAttributeResponse'
-
+resetSnapshotAttributeResponse
+  = ResetSnapshotAttributeResponse'
 
 instance NFData ResetSnapshotAttributeResponse where

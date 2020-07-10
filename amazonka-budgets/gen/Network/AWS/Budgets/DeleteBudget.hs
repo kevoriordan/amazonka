@@ -21,7 +21,7 @@
 -- Deletes a budget. You can delete your budget at any time.
 --
 --
--- __Deleting a budget also deletes the notifications and subscribers associated with that budget.__
+-- /Important:/ Deleting a budget also deletes the notifications and subscribers that are associated with that budget.
 --
 module Network.AWS.Budgets.DeleteBudget
     (
@@ -46,16 +46,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request of DeleteBudget
+-- | Request of DeleteBudget 
 --
 --
 --
 -- /See:/ 'deleteBudget' smart constructor.
-data DeleteBudget = DeleteBudget'
-  { _dAccountId  :: !Text
-  , _dBudgetName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBudget = DeleteBudget'{_dAccountId ::
+                                  !Text,
+                                  _dBudgetName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBudget' with the minimum fields required to make a request.
 --
@@ -68,9 +67,9 @@ deleteBudget
     :: Text -- ^ 'dAccountId'
     -> Text -- ^ 'dBudgetName'
     -> DeleteBudget
-deleteBudget pAccountId_ pBudgetName_ =
-  DeleteBudget' {_dAccountId = pAccountId_, _dBudgetName = pBudgetName_}
-
+deleteBudget pAccountId_ pBudgetName_
+  = DeleteBudget'{_dAccountId = pAccountId_,
+                  _dBudgetName = pBudgetName_}
 
 -- | The @accountId@ that is associated with the budget that you want to delete.
 dAccountId :: Lens' DeleteBudget Text
@@ -115,15 +114,15 @@ instance ToPath DeleteBudget where
 instance ToQuery DeleteBudget where
         toQuery = const mempty
 
--- | Response of DeleteBudget
+-- | Response of DeleteBudget 
 --
 --
 --
 -- /See:/ 'deleteBudgetResponse' smart constructor.
-newtype DeleteBudgetResponse = DeleteBudgetResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBudgetResponse = DeleteBudgetResponse'{_drsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteBudgetResponse' with the minimum fields required to make a request.
 --
@@ -133,9 +132,9 @@ newtype DeleteBudgetResponse = DeleteBudgetResponse'
 deleteBudgetResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteBudgetResponse
-deleteBudgetResponse pResponseStatus_ =
-  DeleteBudgetResponse' {_drsResponseStatus = pResponseStatus_}
-
+deleteBudgetResponse pResponseStatus_
+  = DeleteBudgetResponse'{_drsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeleteBudgetResponse Int

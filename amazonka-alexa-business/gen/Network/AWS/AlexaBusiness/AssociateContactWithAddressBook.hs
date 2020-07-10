@@ -45,11 +45,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateContactWithAddressBook' smart constructor.
-data AssociateContactWithAddressBook = AssociateContactWithAddressBook'
-  { _acwabContactARN     :: !Text
-  , _acwabAddressBookARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateContactWithAddressBook = AssociateContactWithAddressBook'{_acwabContactARN
+                                                                        ::
+                                                                        !Text,
+                                                                        _acwabAddressBookARN
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'AssociateContactWithAddressBook' with the minimum fields required to make a request.
 --
@@ -62,10 +65,11 @@ associateContactWithAddressBook
     :: Text -- ^ 'acwabContactARN'
     -> Text -- ^ 'acwabAddressBookARN'
     -> AssociateContactWithAddressBook
-associateContactWithAddressBook pContactARN_ pAddressBookARN_ =
-  AssociateContactWithAddressBook'
-    {_acwabContactARN = pContactARN_, _acwabAddressBookARN = pAddressBookARN_}
-
+associateContactWithAddressBook pContactARN_
+  pAddressBookARN_
+  = AssociateContactWithAddressBook'{_acwabContactARN =
+                                       pContactARN_,
+                                     _acwabAddressBookARN = pAddressBookARN_}
 
 -- | The ARN of the contact to associate with an address book.
 acwabContactARN :: Lens' AssociateContactWithAddressBook Text
@@ -117,10 +121,12 @@ instance ToQuery AssociateContactWithAddressBook
         toQuery = const mempty
 
 -- | /See:/ 'associateContactWithAddressBookResponse' smart constructor.
-newtype AssociateContactWithAddressBookResponse = AssociateContactWithAddressBookResponse'
-  { _acwabrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateContactWithAddressBookResponse = AssociateContactWithAddressBookResponse'{_acwabrsResponseStatus
+                                                                                           ::
+                                                                                           Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'AssociateContactWithAddressBookResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +136,10 @@ newtype AssociateContactWithAddressBookResponse = AssociateContactWithAddressBoo
 associateContactWithAddressBookResponse
     :: Int -- ^ 'acwabrsResponseStatus'
     -> AssociateContactWithAddressBookResponse
-associateContactWithAddressBookResponse pResponseStatus_ =
-  AssociateContactWithAddressBookResponse'
-    {_acwabrsResponseStatus = pResponseStatus_}
-
+associateContactWithAddressBookResponse
+  pResponseStatus_
+  = AssociateContactWithAddressBookResponse'{_acwabrsResponseStatus
+                                               = pResponseStatus_}
 
 -- | -- | The response status code.
 acwabrsResponseStatus :: Lens' AssociateContactWithAddressBookResponse Int

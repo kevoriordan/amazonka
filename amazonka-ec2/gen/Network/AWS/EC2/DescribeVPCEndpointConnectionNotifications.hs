@@ -21,6 +21,8 @@
 -- Describes the connection notifications for VPC endpoints and VPC endpoint services.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribeVPCEndpointConnectionNotifications
     (
     -- * Creating a Request
@@ -45,25 +47,41 @@ module Network.AWS.EC2.DescribeVPCEndpointConnectionNotifications
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeVPCEndpointConnectionNotifications' smart constructor.
-data DescribeVPCEndpointConnectionNotifications = DescribeVPCEndpointConnectionNotifications'
-  { _dvpcecnFilters                  :: !(Maybe [Filter])
-  , _dvpcecnNextToken                :: !(Maybe Text)
-  , _dvpcecnConnectionNotificationId :: !(Maybe Text)
-  , _dvpcecnDryRun                   :: !(Maybe Bool)
-  , _dvpcecnMaxResults               :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeVPCEndpointConnectionNotifications = DescribeVPCEndpointConnectionNotifications'{_dvpcecnFilters
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  [Filter]),
+                                                                                              _dvpcecnNextToken
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _dvpcecnConnectionNotificationId
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _dvpcecnDryRun
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Bool),
+                                                                                              _dvpcecnMaxResults
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Int)}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'DescribeVPCEndpointConnectionNotifications' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvpcecnFilters' - One or more filters.     * @connection-notification-arn@ - The ARN of SNS topic for the notification.     * @connection-notification-id@ - The ID of the notification.     * @connection-notification-state@ - The state of the notification (@Enabled@ | @Disabled@ ).     * @connection-notification-type@ - The type of notification (@Topic@ ).     * @service-id@ - The ID of the endpoint service.     * @vpc-endpoint-id@ - The ID of the VPC endpoint.
+-- * 'dvpcecnFilters' - One or more filters.     * @connection-notification-arn@ - The ARN of the SNS topic for the notification.     * @connection-notification-id@ - The ID of the notification.     * @connection-notification-state@ - The state of the notification (@Enabled@ | @Disabled@ ).     * @connection-notification-type@ - The type of notification (@Topic@ ).     * @service-id@ - The ID of the endpoint service.     * @vpc-endpoint-id@ - The ID of the VPC endpoint.
 --
 -- * 'dvpcecnNextToken' - The token to request the next page of results.
 --
@@ -74,17 +92,16 @@ data DescribeVPCEndpointConnectionNotifications = DescribeVPCEndpointConnectionN
 -- * 'dvpcecnMaxResults' - The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned @NextToken@ value.
 describeVPCEndpointConnectionNotifications
     :: DescribeVPCEndpointConnectionNotifications
-describeVPCEndpointConnectionNotifications =
-  DescribeVPCEndpointConnectionNotifications'
-    { _dvpcecnFilters = Nothing
-    , _dvpcecnNextToken = Nothing
-    , _dvpcecnConnectionNotificationId = Nothing
-    , _dvpcecnDryRun = Nothing
-    , _dvpcecnMaxResults = Nothing
-    }
+describeVPCEndpointConnectionNotifications
+  = DescribeVPCEndpointConnectionNotifications'{_dvpcecnFilters
+                                                  = Nothing,
+                                                _dvpcecnNextToken = Nothing,
+                                                _dvpcecnConnectionNotificationId
+                                                  = Nothing,
+                                                _dvpcecnDryRun = Nothing,
+                                                _dvpcecnMaxResults = Nothing}
 
-
--- | One or more filters.     * @connection-notification-arn@ - The ARN of SNS topic for the notification.     * @connection-notification-id@ - The ID of the notification.     * @connection-notification-state@ - The state of the notification (@Enabled@ | @Disabled@ ).     * @connection-notification-type@ - The type of notification (@Topic@ ).     * @service-id@ - The ID of the endpoint service.     * @vpc-endpoint-id@ - The ID of the VPC endpoint.
+-- | One or more filters.     * @connection-notification-arn@ - The ARN of the SNS topic for the notification.     * @connection-notification-id@ - The ID of the notification.     * @connection-notification-state@ - The state of the notification (@Enabled@ | @Disabled@ ).     * @connection-notification-type@ - The type of notification (@Topic@ ).     * @service-id@ - The ID of the endpoint service.     * @vpc-endpoint-id@ - The ID of the VPC endpoint.
 dvpcecnFilters :: Lens' DescribeVPCEndpointConnectionNotifications [Filter]
 dvpcecnFilters = lens _dvpcecnFilters (\ s a -> s{_dvpcecnFilters = a}) . _Default . _Coerce
 
@@ -103,6 +120,17 @@ dvpcecnDryRun = lens _dvpcecnDryRun (\ s a -> s{_dvpcecnDryRun = a})
 -- | The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned @NextToken@ value.
 dvpcecnMaxResults :: Lens' DescribeVPCEndpointConnectionNotifications (Maybe Int)
 dvpcecnMaxResults = lens _dvpcecnMaxResults (\ s a -> s{_dvpcecnMaxResults = a})
+
+instance AWSPager
+           DescribeVPCEndpointConnectionNotifications
+         where
+        page rq rs
+          | stop (rs ^. dvpcecnrsNextToken) = Nothing
+          | stop (rs ^. dvpcecnrsConnectionNotificationSet) =
+            Nothing
+          | otherwise =
+            Just $ rq &
+              dvpcecnNextToken .~ rs ^. dvpcecnrsNextToken
 
 instance AWSRequest
            DescribeVPCEndpointConnectionNotifications
@@ -156,12 +184,22 @@ instance ToQuery
                "MaxResults" =: _dvpcecnMaxResults]
 
 -- | /See:/ 'describeVPCEndpointConnectionNotificationsResponse' smart constructor.
-data DescribeVPCEndpointConnectionNotificationsResponse = DescribeVPCEndpointConnectionNotificationsResponse'
-  { _dvpcecnrsConnectionNotificationSet :: !(Maybe [ConnectionNotification])
-  , _dvpcecnrsNextToken                 :: !(Maybe Text)
-  , _dvpcecnrsResponseStatus            :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeVPCEndpointConnectionNotificationsResponse = DescribeVPCEndpointConnectionNotificationsResponse'{_dvpcecnrsConnectionNotificationSet
+                                                                                                              ::
+                                                                                                              !(Maybe
+                                                                                                                  [ConnectionNotification]),
+                                                                                                              _dvpcecnrsNextToken
+                                                                                                              ::
+                                                                                                              !(Maybe
+                                                                                                                  Text),
+                                                                                                              _dvpcecnrsResponseStatus
+                                                                                                              ::
+                                                                                                              !Int}
+                                                            deriving (Eq, Read,
+                                                                      Show,
+                                                                      Data,
+                                                                      Typeable,
+                                                                      Generic)
 
 -- | Creates a value of 'DescribeVPCEndpointConnectionNotificationsResponse' with the minimum fields required to make a request.
 --
@@ -175,13 +213,14 @@ data DescribeVPCEndpointConnectionNotificationsResponse = DescribeVPCEndpointCon
 describeVPCEndpointConnectionNotificationsResponse
     :: Int -- ^ 'dvpcecnrsResponseStatus'
     -> DescribeVPCEndpointConnectionNotificationsResponse
-describeVPCEndpointConnectionNotificationsResponse pResponseStatus_ =
-  DescribeVPCEndpointConnectionNotificationsResponse'
-    { _dvpcecnrsConnectionNotificationSet = Nothing
-    , _dvpcecnrsNextToken = Nothing
-    , _dvpcecnrsResponseStatus = pResponseStatus_
-    }
-
+describeVPCEndpointConnectionNotificationsResponse
+  pResponseStatus_
+  = DescribeVPCEndpointConnectionNotificationsResponse'{_dvpcecnrsConnectionNotificationSet
+                                                          = Nothing,
+                                                        _dvpcecnrsNextToken =
+                                                          Nothing,
+                                                        _dvpcecnrsResponseStatus
+                                                          = pResponseStatus_}
 
 -- | One or more notifications.
 dvpcecnrsConnectionNotificationSet :: Lens' DescribeVPCEndpointConnectionNotificationsResponse [ConnectionNotification]

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Transforms a Python script into a directed acyclic graph (DAG).
+-- Transforms a Python script into a directed acyclic graph (DAG). 
 --
 --
 module Network.AWS.Glue.GetDataflowGraph
@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDataflowGraph' smart constructor.
-newtype GetDataflowGraph = GetDataflowGraph'
-  { _gdgPythonScript :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDataflowGraph = GetDataflowGraph'{_gdgPythonScript
+                                             :: Maybe Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDataflowGraph' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetDataflowGraph = GetDataflowGraph'
 -- * 'gdgPythonScript' - The Python script to transform.
 getDataflowGraph
     :: GetDataflowGraph
-getDataflowGraph = GetDataflowGraph' {_gdgPythonScript = Nothing}
-
+getDataflowGraph
+  = GetDataflowGraph'{_gdgPythonScript = Nothing}
 
 -- | The Python script to transform.
 gdgPythonScript :: Lens' GetDataflowGraph (Maybe Text)
@@ -102,12 +101,17 @@ instance ToQuery GetDataflowGraph where
         toQuery = const mempty
 
 -- | /See:/ 'getDataflowGraphResponse' smart constructor.
-data GetDataflowGraphResponse = GetDataflowGraphResponse'
-  { _gdgrsDagEdges       :: !(Maybe [CodeGenEdge])
-  , _gdgrsDagNodes       :: !(Maybe [CodeGenNode])
-  , _gdgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDataflowGraphResponse = GetDataflowGraphResponse'{_gdgrsDagEdges
+                                                          ::
+                                                          !(Maybe
+                                                              [CodeGenEdge]),
+                                                          _gdgrsDagNodes ::
+                                                          !(Maybe
+                                                              [CodeGenNode]),
+                                                          _gdgrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetDataflowGraphResponse' with the minimum fields required to make a request.
 --
@@ -121,13 +125,10 @@ data GetDataflowGraphResponse = GetDataflowGraphResponse'
 getDataflowGraphResponse
     :: Int -- ^ 'gdgrsResponseStatus'
     -> GetDataflowGraphResponse
-getDataflowGraphResponse pResponseStatus_ =
-  GetDataflowGraphResponse'
-    { _gdgrsDagEdges = Nothing
-    , _gdgrsDagNodes = Nothing
-    , _gdgrsResponseStatus = pResponseStatus_
-    }
-
+getDataflowGraphResponse pResponseStatus_
+  = GetDataflowGraphResponse'{_gdgrsDagEdges = Nothing,
+                              _gdgrsDagNodes = Nothing,
+                              _gdgrsResponseStatus = pResponseStatus_}
 
 -- | A list of the edges in the resulting DAG.
 gdgrsDagEdges :: Lens' GetDataflowGraphResponse [CodeGenEdge]

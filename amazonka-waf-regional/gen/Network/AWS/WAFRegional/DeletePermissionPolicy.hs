@@ -46,10 +46,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'deletePermissionPolicy' smart constructor.
-newtype DeletePermissionPolicy = DeletePermissionPolicy'
-  { _dppResourceARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePermissionPolicy = DeletePermissionPolicy'{_dppResourceARN
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeletePermissionPolicy' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DeletePermissionPolicy = DeletePermissionPolicy'
 deletePermissionPolicy
     :: Text -- ^ 'dppResourceARN'
     -> DeletePermissionPolicy
-deletePermissionPolicy pResourceARN_ =
-  DeletePermissionPolicy' {_dppResourceARN = pResourceARN_}
-
+deletePermissionPolicy pResourceARN_
+  = DeletePermissionPolicy'{_dppResourceARN =
+                              pResourceARN_}
 
 -- | The Amazon Resource Name (ARN) of the RuleGroup from which you want to delete the policy. The user making the request must be the owner of the RuleGroup.
 dppResourceARN :: Lens' DeletePermissionPolicy Text
@@ -103,10 +103,10 @@ instance ToQuery DeletePermissionPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deletePermissionPolicyResponse' smart constructor.
-newtype DeletePermissionPolicyResponse = DeletePermissionPolicyResponse'
-  { _dpprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePermissionPolicyResponse = DeletePermissionPolicyResponse'{_dpprsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeletePermissionPolicyResponse' with the minimum fields required to make a request.
 --
@@ -116,9 +116,9 @@ newtype DeletePermissionPolicyResponse = DeletePermissionPolicyResponse'
 deletePermissionPolicyResponse
     :: Int -- ^ 'dpprsResponseStatus'
     -> DeletePermissionPolicyResponse
-deletePermissionPolicyResponse pResponseStatus_ =
-  DeletePermissionPolicyResponse' {_dpprsResponseStatus = pResponseStatus_}
-
+deletePermissionPolicyResponse pResponseStatus_
+  = DeletePermissionPolicyResponse'{_dpprsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 dpprsResponseStatus :: Lens' DeletePermissionPolicyResponse Int

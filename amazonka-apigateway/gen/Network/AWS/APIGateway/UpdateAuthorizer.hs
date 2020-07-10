@@ -21,16 +21,16 @@
 -- Updates an existing 'Authorizer' resource.
 --
 --
--- <http://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html AWS CLI>
+-- <https://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html AWS CLI> 
 module Network.AWS.APIGateway.UpdateAuthorizer
     (
     -- * Creating a Request
       updateAuthorizer
     , UpdateAuthorizer
     -- * Request Lenses
-    , uaaPatchOperations
-    , uaaRestAPIId
-    , uaaAuthorizerId
+    , updtathrzrPatchOperations
+    , updtathrzrRestAPIId
+    , updtathrzrAuthorizerId
 
     -- * Destructuring the Response
     , authorizer
@@ -60,45 +60,42 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateAuthorizer' smart constructor.
-data UpdateAuthorizer = UpdateAuthorizer'
-  { _uaaPatchOperations :: !(Maybe [PatchOperation])
-  , _uaaRestAPIId       :: !Text
-  , _uaaAuthorizerId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAuthorizer = UpdateAuthorizer'{_updtathrzrPatchOperations
+                                          :: !(Maybe [PatchOperation]),
+                                          _updtathrzrRestAPIId :: !Text,
+                                          _updtathrzrAuthorizerId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateAuthorizer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uaaPatchOperations' - A list of update operations to be applied to the specified resource and in the order specified in this list.
+-- * 'updtathrzrPatchOperations' - A list of update operations to be applied to the specified resource and in the order specified in this list.
 --
--- * 'uaaRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
+-- * 'updtathrzrRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
--- * 'uaaAuthorizerId' - [Required] The identifier of the 'Authorizer' resource.
+-- * 'updtathrzrAuthorizerId' - [Required] The identifier of the 'Authorizer' resource.
 updateAuthorizer
-    :: Text -- ^ 'uaaRestAPIId'
-    -> Text -- ^ 'uaaAuthorizerId'
+    :: Text -- ^ 'updtathrzrRestAPIId'
+    -> Text -- ^ 'updtathrzrAuthorizerId'
     -> UpdateAuthorizer
-updateAuthorizer pRestAPIId_ pAuthorizerId_ =
-  UpdateAuthorizer'
-    { _uaaPatchOperations = Nothing
-    , _uaaRestAPIId = pRestAPIId_
-    , _uaaAuthorizerId = pAuthorizerId_
-    }
-
+updateAuthorizer pRestAPIId_ pAuthorizerId_
+  = UpdateAuthorizer'{_updtathrzrPatchOperations =
+                        Nothing,
+                      _updtathrzrRestAPIId = pRestAPIId_,
+                      _updtathrzrAuthorizerId = pAuthorizerId_}
 
 -- | A list of update operations to be applied to the specified resource and in the order specified in this list.
-uaaPatchOperations :: Lens' UpdateAuthorizer [PatchOperation]
-uaaPatchOperations = lens _uaaPatchOperations (\ s a -> s{_uaaPatchOperations = a}) . _Default . _Coerce
+updtathrzrPatchOperations :: Lens' UpdateAuthorizer [PatchOperation]
+updtathrzrPatchOperations = lens _updtathrzrPatchOperations (\ s a -> s{_updtathrzrPatchOperations = a}) . _Default . _Coerce
 
 -- | [Required] The string identifier of the associated 'RestApi' .
-uaaRestAPIId :: Lens' UpdateAuthorizer Text
-uaaRestAPIId = lens _uaaRestAPIId (\ s a -> s{_uaaRestAPIId = a})
+updtathrzrRestAPIId :: Lens' UpdateAuthorizer Text
+updtathrzrRestAPIId = lens _updtathrzrRestAPIId (\ s a -> s{_updtathrzrRestAPIId = a})
 
 -- | [Required] The identifier of the 'Authorizer' resource.
-uaaAuthorizerId :: Lens' UpdateAuthorizer Text
-uaaAuthorizerId = lens _uaaAuthorizerId (\ s a -> s{_uaaAuthorizerId = a})
+updtathrzrAuthorizerId :: Lens' UpdateAuthorizer Text
+updtathrzrAuthorizerId = lens _updtathrzrAuthorizerId (\ s a -> s{_updtathrzrAuthorizerId = a})
 
 instance AWSRequest UpdateAuthorizer where
         type Rs UpdateAuthorizer = Authorizer
@@ -119,13 +116,14 @@ instance ToJSON UpdateAuthorizer where
         toJSON UpdateAuthorizer'{..}
           = object
               (catMaybes
-                 [("patchOperations" .=) <$> _uaaPatchOperations])
+                 [("patchOperations" .=) <$>
+                    _updtathrzrPatchOperations])
 
 instance ToPath UpdateAuthorizer where
         toPath UpdateAuthorizer'{..}
           = mconcat
-              ["/restapis/", toBS _uaaRestAPIId, "/authorizers/",
-               toBS _uaaAuthorizerId]
+              ["/restapis/", toBS _updtathrzrRestAPIId,
+               "/authorizers/", toBS _updtathrzrAuthorizerId]
 
 instance ToQuery UpdateAuthorizer where
         toQuery = const mempty

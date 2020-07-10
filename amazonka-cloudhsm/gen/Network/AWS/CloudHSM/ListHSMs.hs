@@ -27,6 +27,8 @@
 --
 -- This operation supports pagination with the use of the @NextToken@ member. If more results are available, the @NextToken@ member of the response contains a token that you pass in the next call to @ListHsms@ to retrieve the next set of items.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CloudHSM.ListHSMs
     (
     -- * Creating a Request
@@ -47,15 +49,15 @@ module Network.AWS.CloudHSM.ListHSMs
 import Network.AWS.CloudHSM.Types
 import Network.AWS.CloudHSM.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listHSMs' smart constructor.
-newtype ListHSMs = ListHSMs'
-  { _lhsmNextToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListHSMs = ListHSMs'{_lhsmNextToken ::
+                             Maybe Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListHSMs' with the minimum fields required to make a request.
 --
@@ -64,12 +66,18 @@ newtype ListHSMs = ListHSMs'
 -- * 'lhsmNextToken' - The @NextToken@ value from a previous call to @ListHsms@ . Pass null if this is the first call.
 listHSMs
     :: ListHSMs
-listHSMs = ListHSMs' {_lhsmNextToken = Nothing}
-
+listHSMs = ListHSMs'{_lhsmNextToken = Nothing}
 
 -- | The @NextToken@ value from a previous call to @ListHsms@ . Pass null if this is the first call.
 lhsmNextToken :: Lens' ListHSMs (Maybe Text)
 lhsmNextToken = lens _lhsmNextToken (\ s a -> s{_lhsmNextToken = a})
+
+instance AWSPager ListHSMs where
+        page rq rs
+          | stop (rs ^. lhsmrsNextToken) = Nothing
+          | stop (rs ^. lhsmrsHSMList) = Nothing
+          | otherwise =
+            Just $ rq & lhsmNextToken .~ rs ^. lhsmrsNextToken
 
 instance AWSRequest ListHSMs where
         type Rs ListHSMs = ListHSMsResponse
@@ -110,12 +118,11 @@ instance ToQuery ListHSMs where
 --
 --
 -- /See:/ 'listHSMsResponse' smart constructor.
-data ListHSMsResponse = ListHSMsResponse'
-  { _lhsmrsNextToken      :: !(Maybe Text)
-  , _lhsmrsHSMList        :: !(Maybe [Text])
-  , _lhsmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListHSMsResponse = ListHSMsResponse'{_lhsmrsNextToken
+                                          :: !(Maybe Text),
+                                          _lhsmrsHSMList :: !(Maybe [Text]),
+                                          _lhsmrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListHSMsResponse' with the minimum fields required to make a request.
 --
@@ -129,13 +136,10 @@ data ListHSMsResponse = ListHSMsResponse'
 listHSMsResponse
     :: Int -- ^ 'lhsmrsResponseStatus'
     -> ListHSMsResponse
-listHSMsResponse pResponseStatus_ =
-  ListHSMsResponse'
-    { _lhsmrsNextToken = Nothing
-    , _lhsmrsHSMList = Nothing
-    , _lhsmrsResponseStatus = pResponseStatus_
-    }
-
+listHSMsResponse pResponseStatus_
+  = ListHSMsResponse'{_lhsmrsNextToken = Nothing,
+                      _lhsmrsHSMList = Nothing,
+                      _lhsmrsResponseStatus = pResponseStatus_}
 
 -- | If not null, more results are available. Pass this value to @ListHsms@ to retrieve the next set of items.
 lhsmrsNextToken :: Lens' ListHSMsResponse (Maybe Text)

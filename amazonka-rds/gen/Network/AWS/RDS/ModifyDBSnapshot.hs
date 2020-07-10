@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a manual DB snapshot, which can be encrypted or not encrypted, with a new engine version.
+-- Updates a manual DB snapshot with a new engine version. The snapshot can be encrypted or unencrypted, but not shared or public. 
 --
 --
--- Amazon RDS supports upgrading DB snapshots for MySQL and Oracle.
+-- Amazon RDS supports upgrading DB snapshots for MySQL, Oracle, and PostgreSQL. 
 --
 module Network.AWS.RDS.ModifyDBSnapshot
     (
@@ -49,38 +49,34 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyDBSnapshot' smart constructor.
-data ModifyDBSnapshot = ModifyDBSnapshot'
-  { _mdsEngineVersion        :: !(Maybe Text)
-  , _mdsOptionGroupName      :: !(Maybe Text)
-  , _mdsDBSnapshotIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyDBSnapshot = ModifyDBSnapshot'{_mdsEngineVersion
+                                          :: !(Maybe Text),
+                                          _mdsOptionGroupName :: !(Maybe Text),
+                                          _mdsDBSnapshotIdentifier :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyDBSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdsEngineVersion' - The engine version to upgrade the DB snapshot to.  The following are the database engines and engine versions that are available when you upgrade a DB snapshot.  __MySQL__      * @5.5.46@ (supported for 5.1 DB snapshots) __Oracle__      * @12.1.0.2.v8@ (supported for 12.1.0.1 DB snapshots)     * @11.2.0.4.v12@ (supported for 11.2.0.2 DB snapshots)     * @11.2.0.4.v11@ (supported for 11.2.0.3 DB snapshots)
+-- * 'mdsEngineVersion' - The engine version to upgrade the DB snapshot to.  The following are the database engines and engine versions that are available when you upgrade a DB snapshot.  __MySQL__      * @5.5.46@ (supported for 5.1 DB snapshots) __Oracle__      * @12.1.0.2.v8@ (supported for 12.1.0.1 DB snapshots)     * @11.2.0.4.v12@ (supported for 11.2.0.2 DB snapshots)     * @11.2.0.4.v11@ (supported for 11.2.0.3 DB snapshots) __PostgreSQL__  For the list of engine versions that are available for upgrading a DB snapshot, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion Upgrading the PostgreSQL DB Engine for Amazon RDS> . 
 --
--- * 'mdsOptionGroupName' - The option group to identify with the upgraded DB snapshot.  You can specify this parameter when you upgrade an Oracle DB snapshot. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG Option Group Considerations> .
+-- * 'mdsOptionGroupName' - The option group to identify with the upgraded DB snapshot.  You can specify this parameter when you upgrade an Oracle DB snapshot. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG Option Group Considerations> in the /Amazon RDS User Guide./ 
 --
 -- * 'mdsDBSnapshotIdentifier' - The identifier of the DB snapshot to modify.
 modifyDBSnapshot
     :: Text -- ^ 'mdsDBSnapshotIdentifier'
     -> ModifyDBSnapshot
-modifyDBSnapshot pDBSnapshotIdentifier_ =
-  ModifyDBSnapshot'
-    { _mdsEngineVersion = Nothing
-    , _mdsOptionGroupName = Nothing
-    , _mdsDBSnapshotIdentifier = pDBSnapshotIdentifier_
-    }
+modifyDBSnapshot pDBSnapshotIdentifier_
+  = ModifyDBSnapshot'{_mdsEngineVersion = Nothing,
+                      _mdsOptionGroupName = Nothing,
+                      _mdsDBSnapshotIdentifier = pDBSnapshotIdentifier_}
 
-
--- | The engine version to upgrade the DB snapshot to.  The following are the database engines and engine versions that are available when you upgrade a DB snapshot.  __MySQL__      * @5.5.46@ (supported for 5.1 DB snapshots) __Oracle__      * @12.1.0.2.v8@ (supported for 12.1.0.1 DB snapshots)     * @11.2.0.4.v12@ (supported for 11.2.0.2 DB snapshots)     * @11.2.0.4.v11@ (supported for 11.2.0.3 DB snapshots)
+-- | The engine version to upgrade the DB snapshot to.  The following are the database engines and engine versions that are available when you upgrade a DB snapshot.  __MySQL__      * @5.5.46@ (supported for 5.1 DB snapshots) __Oracle__      * @12.1.0.2.v8@ (supported for 12.1.0.1 DB snapshots)     * @11.2.0.4.v12@ (supported for 11.2.0.2 DB snapshots)     * @11.2.0.4.v11@ (supported for 11.2.0.3 DB snapshots) __PostgreSQL__  For the list of engine versions that are available for upgrading a DB snapshot, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion Upgrading the PostgreSQL DB Engine for Amazon RDS> . 
 mdsEngineVersion :: Lens' ModifyDBSnapshot (Maybe Text)
 mdsEngineVersion = lens _mdsEngineVersion (\ s a -> s{_mdsEngineVersion = a})
 
--- | The option group to identify with the upgraded DB snapshot.  You can specify this parameter when you upgrade an Oracle DB snapshot. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG Option Group Considerations> .
+-- | The option group to identify with the upgraded DB snapshot.  You can specify this parameter when you upgrade an Oracle DB snapshot. The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG Option Group Considerations> in the /Amazon RDS User Guide./ 
 mdsOptionGroupName :: Lens' ModifyDBSnapshot (Maybe Text)
 mdsOptionGroupName = lens _mdsOptionGroupName (\ s a -> s{_mdsOptionGroupName = a})
 
@@ -117,11 +113,13 @@ instance ToQuery ModifyDBSnapshot where
                "DBSnapshotIdentifier" =: _mdsDBSnapshotIdentifier]
 
 -- | /See:/ 'modifyDBSnapshotResponse' smart constructor.
-data ModifyDBSnapshotResponse = ModifyDBSnapshotResponse'
-  { _mdsrsDBSnapshot     :: !(Maybe DBSnapshot)
-  , _mdsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyDBSnapshotResponse = ModifyDBSnapshotResponse'{_mdsrsDBSnapshot
+                                                          ::
+                                                          !(Maybe DBSnapshot),
+                                                          _mdsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ModifyDBSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +131,10 @@ data ModifyDBSnapshotResponse = ModifyDBSnapshotResponse'
 modifyDBSnapshotResponse
     :: Int -- ^ 'mdsrsResponseStatus'
     -> ModifyDBSnapshotResponse
-modifyDBSnapshotResponse pResponseStatus_ =
-  ModifyDBSnapshotResponse'
-    {_mdsrsDBSnapshot = Nothing, _mdsrsResponseStatus = pResponseStatus_}
-
+modifyDBSnapshotResponse pResponseStatus_
+  = ModifyDBSnapshotResponse'{_mdsrsDBSnapshot =
+                                Nothing,
+                              _mdsrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 mdsrsDBSnapshot :: Lens' ModifyDBSnapshotResponse (Maybe DBSnapshot)

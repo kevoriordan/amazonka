@@ -21,15 +21,21 @@
 -- Lists the resource record sets in a specified hosted zone.
 --
 --
--- @ListResourceRecordSets@ returns up to 100 resource record sets at a time in ASCII order, beginning at a position specified by the @name@ and @type@ elements. The action sorts results first by DNS name with the labels reversed, for example:
+-- @ListResourceRecordSets@ returns up to 100 resource record sets at a time in ASCII order, beginning at a position specified by the @name@ and @type@ elements.
 --
--- @com.example.www.@
+-- __Sort order__ 
 --
--- Note the trailing dot, which can change the sort order in some circumstances.
+-- @ListResourceRecordSets@ sorts results first by DNS name with the labels reversed, for example:
 --
--- When multiple records have the same DNS name, the action sorts results by the record type.
+-- @com.example.www.@ 
 --
--- You can use the name and type elements to adjust the beginning position of the list of resource record sets returned:
+-- Note the trailing dot, which can change the sort order when the record name contains characters that appear before @.@ (decimal 46) in the ASCII table. These characters include the following: @! " # $ % & ' ( ) * + , -@ 
+--
+-- When multiple records have the same DNS name, @ListResourceRecordSets@ sorts results by the record type.
+--
+-- __Specifying where to start listing records__ 
+--
+-- You can use the name and type elements to specify the resource record set that the list begins with:
 --
 --     * If you do not specify Name or Type    * The results begin with the first resource record set that the hosted zone contains.
 --
@@ -41,9 +47,17 @@
 --
 --
 --
--- This action returns the most current version of the records. This includes records that are @PENDING@ , and that are not yet available on all Amazon Route 53 DNS servers.
+-- __Resource record sets that are PENDING__ 
+--
+-- This action returns the most current version of the records. This includes records that are @PENDING@ , and that are not yet available on all Route 53 DNS servers.
+--
+-- __Changing resource record sets__ 
 --
 -- To ensure that you get an accurate listing of the resource record sets for a hosted zone at a point in time, do not submit a @ChangeResourceRecordSets@ request while you're paging through the results of a @ListResourceRecordSets@ request. If you do, some pages may display results without the latest changes while other pages display results with the latest changes.
+--
+-- __Displaying the next page of results__ 
+--
+-- If a @ListResourceRecordSets@ command returns more than one page of results, the value of @IsTruncated@ is @true@ . To display the next page of results, get the values of @NextRecordName@ , @NextRecordType@ , and @NextRecordIdentifier@ (if any) from the response. Then submit another @ListResourceRecordSets@ request, and specify those values for @StartRecordName@ , @StartRecordType@ , and @StartRecordIdentifier@ .
 --
 --
 -- This operation returns paginated results.
@@ -85,24 +99,28 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'listResourceRecordSets' smart constructor.
-data ListResourceRecordSets = ListResourceRecordSets'
-  { _lrrsStartRecordName       :: !(Maybe Text)
-  , _lrrsStartRecordType       :: !(Maybe RecordType)
-  , _lrrsStartRecordIdentifier :: !(Maybe Text)
-  , _lrrsMaxItems              :: !(Maybe Text)
-  , _lrrsHostedZoneId          :: !ResourceId
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceRecordSets = ListResourceRecordSets'{_lrrsStartRecordName
+                                                      :: !(Maybe Text),
+                                                      _lrrsStartRecordType ::
+                                                      !(Maybe RecordType),
+                                                      _lrrsStartRecordIdentifier
+                                                      :: !(Maybe Text),
+                                                      _lrrsMaxItems ::
+                                                      !(Maybe Text),
+                                                      _lrrsHostedZoneId ::
+                                                      !ResourceId}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListResourceRecordSets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrrsStartRecordName' - The first name in the lexicographic ordering of resource record sets that you want to list.
+-- * 'lrrsStartRecordName' - The first name in the lexicographic ordering of resource record sets that you want to list. If the specified record name doesn't exist, the results begin with the first resource record set that has a name greater than the value of @name@ .
 --
--- * 'lrrsStartRecordType' - The type of resource record set to begin the record listing from. Valid values for basic resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @NS@ | @PTR@ | @SOA@ | @SPF@ | @SRV@ | @TXT@  Values for weighted, latency, geo, and failover resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @PTR@ | @SPF@ | @SRV@ | @TXT@  Values for alias resource record sets:      * __CloudFront distribution__ : A or AAAA     * __Elastic Beanstalk environment that has a regionalized subdomain__ : A     * __ELB load balancer__ : A | AAAA     * __Amazon S3 bucket__ : A     * __Another resource record set in this hosted zone:__ The type of the resource record set that the alias references. Constraint: Specifying @type@ without specifying @name@ returns an @InvalidInput@ error.
+-- * 'lrrsStartRecordType' - The type of resource record set to begin the record listing from. Valid values for basic resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @NS@ | @PTR@ | @SOA@ | @SPF@ | @SRV@ | @TXT@  Values for weighted, latency, geolocation, and failover resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @PTR@ | @SPF@ | @SRV@ | @TXT@  Values for alias resource record sets:      * __API Gateway custom regional API or edge-optimized API__ : A     * __CloudFront distribution__ : A or AAAA     * __Elastic Beanstalk environment that has a regionalized subdomain__ : A     * __Elastic Load Balancing load balancer__ : A | AAAA     * __S3 bucket__ : A     * __VPC interface VPC endpoint__ : A     * __Another resource record set in this hosted zone:__ The type of the resource record set that the alias references. Constraint: Specifying @type@ without specifying @name@ returns an @InvalidInput@ error.
 --
--- * 'lrrsStartRecordIdentifier' - /Weighted resource record sets only:/ If results were truncated for a given DNS name and type, specify the value of @NextRecordIdentifier@ from the previous response to get the next resource record set that has the current DNS name and type.
+-- * 'lrrsStartRecordIdentifier' - /Resource record sets that have a routing policy other than simple:/ If results were truncated for a given DNS name and type, specify the value of @NextRecordIdentifier@ from the previous response to get the next resource record set that has the current DNS name and type.
 --
 -- * 'lrrsMaxItems' - (Optional) The maximum number of resource records sets to include in the response body for this request. If the response includes more than @maxitems@ resource record sets, the value of the @IsTruncated@ element in the response is @true@ , and the values of the @NextRecordName@ and @NextRecordType@ elements in the response identify the first resource record set in the next group of @maxitems@ resource record sets.
 --
@@ -110,25 +128,23 @@ data ListResourceRecordSets = ListResourceRecordSets'
 listResourceRecordSets
     :: ResourceId -- ^ 'lrrsHostedZoneId'
     -> ListResourceRecordSets
-listResourceRecordSets pHostedZoneId_ =
-  ListResourceRecordSets'
-    { _lrrsStartRecordName = Nothing
-    , _lrrsStartRecordType = Nothing
-    , _lrrsStartRecordIdentifier = Nothing
-    , _lrrsMaxItems = Nothing
-    , _lrrsHostedZoneId = pHostedZoneId_
-    }
+listResourceRecordSets pHostedZoneId_
+  = ListResourceRecordSets'{_lrrsStartRecordName =
+                              Nothing,
+                            _lrrsStartRecordType = Nothing,
+                            _lrrsStartRecordIdentifier = Nothing,
+                            _lrrsMaxItems = Nothing,
+                            _lrrsHostedZoneId = pHostedZoneId_}
 
-
--- | The first name in the lexicographic ordering of resource record sets that you want to list.
+-- | The first name in the lexicographic ordering of resource record sets that you want to list. If the specified record name doesn't exist, the results begin with the first resource record set that has a name greater than the value of @name@ .
 lrrsStartRecordName :: Lens' ListResourceRecordSets (Maybe Text)
 lrrsStartRecordName = lens _lrrsStartRecordName (\ s a -> s{_lrrsStartRecordName = a})
 
--- | The type of resource record set to begin the record listing from. Valid values for basic resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @NS@ | @PTR@ | @SOA@ | @SPF@ | @SRV@ | @TXT@  Values for weighted, latency, geo, and failover resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @PTR@ | @SPF@ | @SRV@ | @TXT@  Values for alias resource record sets:      * __CloudFront distribution__ : A or AAAA     * __Elastic Beanstalk environment that has a regionalized subdomain__ : A     * __ELB load balancer__ : A | AAAA     * __Amazon S3 bucket__ : A     * __Another resource record set in this hosted zone:__ The type of the resource record set that the alias references. Constraint: Specifying @type@ without specifying @name@ returns an @InvalidInput@ error.
+-- | The type of resource record set to begin the record listing from. Valid values for basic resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @NS@ | @PTR@ | @SOA@ | @SPF@ | @SRV@ | @TXT@  Values for weighted, latency, geolocation, and failover resource record sets: @A@ | @AAAA@ | @CAA@ | @CNAME@ | @MX@ | @NAPTR@ | @PTR@ | @SPF@ | @SRV@ | @TXT@  Values for alias resource record sets:      * __API Gateway custom regional API or edge-optimized API__ : A     * __CloudFront distribution__ : A or AAAA     * __Elastic Beanstalk environment that has a regionalized subdomain__ : A     * __Elastic Load Balancing load balancer__ : A | AAAA     * __S3 bucket__ : A     * __VPC interface VPC endpoint__ : A     * __Another resource record set in this hosted zone:__ The type of the resource record set that the alias references. Constraint: Specifying @type@ without specifying @name@ returns an @InvalidInput@ error.
 lrrsStartRecordType :: Lens' ListResourceRecordSets (Maybe RecordType)
 lrrsStartRecordType = lens _lrrsStartRecordType (\ s a -> s{_lrrsStartRecordType = a})
 
--- | /Weighted resource record sets only:/ If results were truncated for a given DNS name and type, specify the value of @NextRecordIdentifier@ from the previous response to get the next resource record set that has the current DNS name and type.
+-- | /Resource record sets that have a routing policy other than simple:/ If results were truncated for a given DNS name and type, specify the value of @NextRecordIdentifier@ from the previous response to get the next resource record set that has the current DNS name and type.
 lrrsStartRecordIdentifier :: Lens' ListResourceRecordSets (Maybe Text)
 lrrsStartRecordIdentifier = lens _lrrsStartRecordIdentifier (\ s a -> s{_lrrsStartRecordIdentifier = a})
 
@@ -198,26 +214,39 @@ instance ToQuery ListResourceRecordSets where
 --
 --
 -- /See:/ 'listResourceRecordSetsResponse' smart constructor.
-data ListResourceRecordSetsResponse = ListResourceRecordSetsResponse'
-  { _lrrsrsNextRecordType       :: !(Maybe RecordType)
-  , _lrrsrsNextRecordName       :: !(Maybe Text)
-  , _lrrsrsNextRecordIdentifier :: !(Maybe Text)
-  , _lrrsrsResponseStatus       :: !Int
-  , _lrrsrsResourceRecordSets   :: ![ResourceRecordSet]
-  , _lrrsrsIsTruncated          :: !Bool
-  , _lrrsrsMaxItems             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceRecordSetsResponse = ListResourceRecordSetsResponse'{_lrrsrsNextRecordType
+                                                                      ::
+                                                                      !(Maybe
+                                                                          RecordType),
+                                                                      _lrrsrsNextRecordName
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _lrrsrsNextRecordIdentifier
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _lrrsrsResponseStatus
+                                                                      :: !Int,
+                                                                      _lrrsrsResourceRecordSets
+                                                                      ::
+                                                                      ![ResourceRecordSet],
+                                                                      _lrrsrsIsTruncated
+                                                                      :: !Bool,
+                                                                      _lrrsrsMaxItems
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ListResourceRecordSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrrsrsNextRecordType' - If the results were truncated, the type of the next record in the list. This element is present only if @IsTruncated@ is true.
+-- * 'lrrsrsNextRecordType' - If the results were truncated, the type of the next record in the list. This element is present only if @IsTruncated@ is true. 
 --
--- * 'lrrsrsNextRecordName' - If the results were truncated, the name of the next record in the list. This element is present only if @IsTruncated@ is true.
+-- * 'lrrsrsNextRecordName' - If the results were truncated, the name of the next record in the list. This element is present only if @IsTruncated@ is true. 
 --
--- * 'lrrsrsNextRecordIdentifier' - /Weighted, latency, geolocation, and failover resource record sets only/ : If results were truncated for a given DNS name and type, the value of @SetIdentifier@ for the next resource record set that has the current DNS name and type.
+-- * 'lrrsrsNextRecordIdentifier' - /Resource record sets that have a routing policy other than simple:/ If results were truncated for a given DNS name and type, the value of @SetIdentifier@ for the next resource record set that has the current DNS name and type. For information about routing policies, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html Choosing a Routing Policy> in the /Amazon Route 53 Developer Guide/ .
 --
 -- * 'lrrsrsResponseStatus' - -- | The response status code.
 --
@@ -231,27 +260,26 @@ listResourceRecordSetsResponse
     -> Bool -- ^ 'lrrsrsIsTruncated'
     -> Text -- ^ 'lrrsrsMaxItems'
     -> ListResourceRecordSetsResponse
-listResourceRecordSetsResponse pResponseStatus_ pIsTruncated_ pMaxItems_ =
-  ListResourceRecordSetsResponse'
-    { _lrrsrsNextRecordType = Nothing
-    , _lrrsrsNextRecordName = Nothing
-    , _lrrsrsNextRecordIdentifier = Nothing
-    , _lrrsrsResponseStatus = pResponseStatus_
-    , _lrrsrsResourceRecordSets = mempty
-    , _lrrsrsIsTruncated = pIsTruncated_
-    , _lrrsrsMaxItems = pMaxItems_
-    }
+listResourceRecordSetsResponse pResponseStatus_
+  pIsTruncated_ pMaxItems_
+  = ListResourceRecordSetsResponse'{_lrrsrsNextRecordType
+                                      = Nothing,
+                                    _lrrsrsNextRecordName = Nothing,
+                                    _lrrsrsNextRecordIdentifier = Nothing,
+                                    _lrrsrsResponseStatus = pResponseStatus_,
+                                    _lrrsrsResourceRecordSets = mempty,
+                                    _lrrsrsIsTruncated = pIsTruncated_,
+                                    _lrrsrsMaxItems = pMaxItems_}
 
-
--- | If the results were truncated, the type of the next record in the list. This element is present only if @IsTruncated@ is true.
+-- | If the results were truncated, the type of the next record in the list. This element is present only if @IsTruncated@ is true. 
 lrrsrsNextRecordType :: Lens' ListResourceRecordSetsResponse (Maybe RecordType)
 lrrsrsNextRecordType = lens _lrrsrsNextRecordType (\ s a -> s{_lrrsrsNextRecordType = a})
 
--- | If the results were truncated, the name of the next record in the list. This element is present only if @IsTruncated@ is true.
+-- | If the results were truncated, the name of the next record in the list. This element is present only if @IsTruncated@ is true. 
 lrrsrsNextRecordName :: Lens' ListResourceRecordSetsResponse (Maybe Text)
 lrrsrsNextRecordName = lens _lrrsrsNextRecordName (\ s a -> s{_lrrsrsNextRecordName = a})
 
--- | /Weighted, latency, geolocation, and failover resource record sets only/ : If results were truncated for a given DNS name and type, the value of @SetIdentifier@ for the next resource record set that has the current DNS name and type.
+-- | /Resource record sets that have a routing policy other than simple:/ If results were truncated for a given DNS name and type, the value of @SetIdentifier@ for the next resource record set that has the current DNS name and type. For information about routing policies, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html Choosing a Routing Policy> in the /Amazon Route 53 Developer Guide/ .
 lrrsrsNextRecordIdentifier :: Lens' ListResourceRecordSetsResponse (Maybe Text)
 lrrsrsNextRecordIdentifier = lens _lrrsrsNextRecordIdentifier (\ s a -> s{_lrrsrsNextRecordIdentifier = a})
 

@@ -30,6 +30,7 @@ module Network.AWS.DMS.DescribeReplicationTasks
     , DescribeReplicationTasks
     -- * Request Lenses
     , drtFilters
+    , drtWithoutSettings
     , drtMarker
     , drtMaxRecords
 
@@ -50,17 +51,21 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeReplicationTasks' smart constructor.
-data DescribeReplicationTasks = DescribeReplicationTasks'
-  { _drtFilters    :: !(Maybe [Filter])
-  , _drtMarker     :: !(Maybe Text)
-  , _drtMaxRecords :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationTasks = DescribeReplicationTasks'{_drtFilters
+                                                          :: !(Maybe [Filter]),
+                                                          _drtWithoutSettings ::
+                                                          !(Maybe Bool),
+                                                          _drtMarker ::
+                                                          !(Maybe Text),
+                                                          _drtMaxRecords ::
+                                                          !(Maybe Int)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeReplicationTasks' with the minimum fields required to make a request.
 --
@@ -68,21 +73,27 @@ data DescribeReplicationTasks = DescribeReplicationTasks'
 --
 -- * 'drtFilters' - Filters applied to the describe action. Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn
 --
--- * 'drtMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'drtWithoutSettings' - An option to set to avoid returning information about settings. Use this to reduce overhead when setting information is too large. To use this option, choose @true@ ; otherwise, choose @false@ (the default).
+--
+-- * 'drtMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
 -- * 'drtMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
 describeReplicationTasks
     :: DescribeReplicationTasks
-describeReplicationTasks =
-  DescribeReplicationTasks'
-    {_drtFilters = Nothing, _drtMarker = Nothing, _drtMaxRecords = Nothing}
-
+describeReplicationTasks
+  = DescribeReplicationTasks'{_drtFilters = Nothing,
+                              _drtWithoutSettings = Nothing,
+                              _drtMarker = Nothing, _drtMaxRecords = Nothing}
 
 -- | Filters applied to the describe action. Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn
 drtFilters :: Lens' DescribeReplicationTasks [Filter]
 drtFilters = lens _drtFilters (\ s a -> s{_drtFilters = a}) . _Default . _Coerce
 
--- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An option to set to avoid returning information about settings. Use this to reduce overhead when setting information is too large. To use this option, choose @true@ ; otherwise, choose @false@ (the default).
+drtWithoutSettings :: Lens' DescribeReplicationTasks (Maybe Bool)
+drtWithoutSettings = lens _drtWithoutSettings (\ s a -> s{_drtWithoutSettings = a})
+
+-- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 drtMarker :: Lens' DescribeReplicationTasks (Maybe Text)
 drtMarker = lens _drtMarker (\ s a -> s{_drtMarker = a})
 
@@ -128,6 +139,7 @@ instance ToJSON DescribeReplicationTasks where
           = object
               (catMaybes
                  [("Filters" .=) <$> _drtFilters,
+                  ("WithoutSettings" .=) <$> _drtWithoutSettings,
                   ("Marker" .=) <$> _drtMarker,
                   ("MaxRecords" .=) <$> _drtMaxRecords])
 
@@ -137,17 +149,24 @@ instance ToPath DescribeReplicationTasks where
 instance ToQuery DescribeReplicationTasks where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeReplicationTasksResponse' smart constructor.
-data DescribeReplicationTasksResponse = DescribeReplicationTasksResponse'
-  { _drtsrsReplicationTasks :: !(Maybe [ReplicationTask])
-  , _drtsrsMarker           :: !(Maybe Text)
-  , _drtsrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationTasksResponse = DescribeReplicationTasksResponse'{_drtsrsReplicationTasks
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [ReplicationTask]),
+                                                                          _drtsrsMarker
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _drtsrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeReplicationTasksResponse' with the minimum fields required to make a request.
 --
@@ -155,25 +174,23 @@ data DescribeReplicationTasksResponse = DescribeReplicationTasksResponse'
 --
 -- * 'drtsrsReplicationTasks' - A description of the replication tasks.
 --
--- * 'drtsrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'drtsrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
 -- * 'drtsrsResponseStatus' - -- | The response status code.
 describeReplicationTasksResponse
     :: Int -- ^ 'drtsrsResponseStatus'
     -> DescribeReplicationTasksResponse
-describeReplicationTasksResponse pResponseStatus_ =
-  DescribeReplicationTasksResponse'
-    { _drtsrsReplicationTasks = Nothing
-    , _drtsrsMarker = Nothing
-    , _drtsrsResponseStatus = pResponseStatus_
-    }
-
+describeReplicationTasksResponse pResponseStatus_
+  = DescribeReplicationTasksResponse'{_drtsrsReplicationTasks
+                                        = Nothing,
+                                      _drtsrsMarker = Nothing,
+                                      _drtsrsResponseStatus = pResponseStatus_}
 
 -- | A description of the replication tasks.
 drtsrsReplicationTasks :: Lens' DescribeReplicationTasksResponse [ReplicationTask]
 drtsrsReplicationTasks = lens _drtsrsReplicationTasks (\ s a -> s{_drtsrsReplicationTasks = a}) . _Default . _Coerce
 
--- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 drtsrsMarker :: Lens' DescribeReplicationTasksResponse (Maybe Text)
 drtsrsMarker = lens _drtsrsMarker (\ s a -> s{_drtsrsMarker = a})
 

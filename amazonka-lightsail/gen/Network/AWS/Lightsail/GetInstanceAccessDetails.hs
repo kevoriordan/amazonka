@@ -21,6 +21,8 @@
 -- Returns temporary SSH keys you can use to connect to a specific virtual private server, or /instance/ .
 --
 --
+-- The @get instance access details@ operation supports tag-based access control via resource tags applied to the resource identified by @instance name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.GetInstanceAccessDetails
     (
     -- * Creating a Request
@@ -46,11 +48,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getInstanceAccessDetails' smart constructor.
-data GetInstanceAccessDetails = GetInstanceAccessDetails'
-  { _giadProtocol     :: !(Maybe InstanceAccessProtocol)
-  , _giadInstanceName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstanceAccessDetails = GetInstanceAccessDetails'{_giadProtocol
+                                                          ::
+                                                          !(Maybe
+                                                              InstanceAccessProtocol),
+                                                          _giadInstanceName ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetInstanceAccessDetails' with the minimum fields required to make a request.
 --
@@ -62,10 +67,9 @@ data GetInstanceAccessDetails = GetInstanceAccessDetails'
 getInstanceAccessDetails
     :: Text -- ^ 'giadInstanceName'
     -> GetInstanceAccessDetails
-getInstanceAccessDetails pInstanceName_ =
-  GetInstanceAccessDetails'
-    {_giadProtocol = Nothing, _giadInstanceName = pInstanceName_}
-
+getInstanceAccessDetails pInstanceName_
+  = GetInstanceAccessDetails'{_giadProtocol = Nothing,
+                              _giadInstanceName = pInstanceName_}
 
 -- | The protocol to use to connect to your instance. Defaults to @ssh@ .
 giadProtocol :: Lens' GetInstanceAccessDetails (Maybe InstanceAccessProtocol)
@@ -113,11 +117,15 @@ instance ToQuery GetInstanceAccessDetails where
         toQuery = const mempty
 
 -- | /See:/ 'getInstanceAccessDetailsResponse' smart constructor.
-data GetInstanceAccessDetailsResponse = GetInstanceAccessDetailsResponse'
-  { _giadrsAccessDetails  :: !(Maybe InstanceAccessDetails)
-  , _giadrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstanceAccessDetailsResponse = GetInstanceAccessDetailsResponse'{_giadrsAccessDetails
+                                                                          ::
+                                                                          !(Maybe
+                                                                              InstanceAccessDetails),
+                                                                          _giadrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetInstanceAccessDetailsResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +137,10 @@ data GetInstanceAccessDetailsResponse = GetInstanceAccessDetailsResponse'
 getInstanceAccessDetailsResponse
     :: Int -- ^ 'giadrsResponseStatus'
     -> GetInstanceAccessDetailsResponse
-getInstanceAccessDetailsResponse pResponseStatus_ =
-  GetInstanceAccessDetailsResponse'
-    {_giadrsAccessDetails = Nothing, _giadrsResponseStatus = pResponseStatus_}
-
+getInstanceAccessDetailsResponse pResponseStatus_
+  = GetInstanceAccessDetailsResponse'{_giadrsAccessDetails
+                                        = Nothing,
+                                      _giadrsResponseStatus = pResponseStatus_}
 
 -- | An array of key-value pairs containing information about a get instance access request.
 giadrsAccessDetails :: Lens' GetInstanceAccessDetailsResponse (Maybe InstanceAccessDetails)

@@ -51,12 +51,11 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listTagOptions' smart constructor.
-data ListTagOptions = ListTagOptions'
-  { _ltoFilters   :: !(Maybe ListTagOptionsFilters)
-  , _ltoPageToken :: !(Maybe Text)
-  , _ltoPageSize  :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagOptions = ListTagOptions'{_ltoFilters ::
+                                      !(Maybe ListTagOptionsFilters),
+                                      _ltoPageToken :: !(Maybe Text),
+                                      _ltoPageSize :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagOptions' with the minimum fields required to make a request.
 --
@@ -69,10 +68,9 @@ data ListTagOptions = ListTagOptions'
 -- * 'ltoPageSize' - The maximum number of items to return with this call.
 listTagOptions
     :: ListTagOptions
-listTagOptions =
-  ListTagOptions'
-    {_ltoFilters = Nothing, _ltoPageToken = Nothing, _ltoPageSize = Nothing}
-
+listTagOptions
+  = ListTagOptions'{_ltoFilters = Nothing,
+                    _ltoPageToken = Nothing, _ltoPageSize = Nothing}
 
 -- | The search filters. If no search filters are specified, the output includes all TagOptions.
 ltoFilters :: Lens' ListTagOptions (Maybe ListTagOptionsFilters)
@@ -133,12 +131,15 @@ instance ToQuery ListTagOptions where
         toQuery = const mempty
 
 -- | /See:/ 'listTagOptionsResponse' smart constructor.
-data ListTagOptionsResponse = ListTagOptionsResponse'
-  { _ltorsPageToken        :: !(Maybe Text)
-  , _ltorsTagOptionDetails :: !(Maybe [TagOptionDetail])
-  , _ltorsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagOptionsResponse = ListTagOptionsResponse'{_ltorsPageToken
+                                                      :: !(Maybe Text),
+                                                      _ltorsTagOptionDetails ::
+                                                      !(Maybe
+                                                          [TagOptionDetail]),
+                                                      _ltorsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListTagOptionsResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +153,10 @@ data ListTagOptionsResponse = ListTagOptionsResponse'
 listTagOptionsResponse
     :: Int -- ^ 'ltorsResponseStatus'
     -> ListTagOptionsResponse
-listTagOptionsResponse pResponseStatus_ =
-  ListTagOptionsResponse'
-    { _ltorsPageToken = Nothing
-    , _ltorsTagOptionDetails = Nothing
-    , _ltorsResponseStatus = pResponseStatus_
-    }
-
+listTagOptionsResponse pResponseStatus_
+  = ListTagOptionsResponse'{_ltorsPageToken = Nothing,
+                            _ltorsTagOptionDetails = Nothing,
+                            _ltorsResponseStatus = pResponseStatus_}
 
 -- | The page token for the next set of results. To retrieve the first set of results, use null.
 ltorsPageToken :: Lens' ListTagOptionsResponse (Maybe Text)

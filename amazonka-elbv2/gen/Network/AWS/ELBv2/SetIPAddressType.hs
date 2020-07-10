@@ -21,8 +21,6 @@
 -- Sets the type of IP addresses used by the subnets of the specified Application Load Balancer or Network Load Balancer.
 --
 --
--- Note that Network Load Balancers must use @ipv4@ .
---
 module Network.AWS.ELBv2.SetIPAddressType
     (
     -- * Creating a Request
@@ -48,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setIPAddressType' smart constructor.
-data SetIPAddressType = SetIPAddressType'
-  { _siatLoadBalancerARN :: !Text
-  , _siatIPAddressType   :: !IPAddressType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetIPAddressType = SetIPAddressType'{_siatLoadBalancerARN
+                                          :: !Text,
+                                          _siatIPAddressType :: !IPAddressType}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetIPAddressType' with the minimum fields required to make a request.
 --
@@ -60,23 +57,21 @@ data SetIPAddressType = SetIPAddressType'
 --
 -- * 'siatLoadBalancerARN' - The Amazon Resource Name (ARN) of the load balancer.
 --
--- * 'siatIPAddressType' - The IP address type. The possible values are @ipv4@ (for IPv4 addresses) and @dualstack@ (for IPv4 and IPv6 addresses). Internal load balancers must use @ipv4@ .
+-- * 'siatIPAddressType' - The IP address type. The possible values are @ipv4@ (for IPv4 addresses) and @dualstack@ (for IPv4 and IPv6 addresses). Internal load balancers must use @ipv4@ . Network Load Balancers must use @ipv4@ .
 setIPAddressType
     :: Text -- ^ 'siatLoadBalancerARN'
     -> IPAddressType -- ^ 'siatIPAddressType'
     -> SetIPAddressType
-setIPAddressType pLoadBalancerARN_ pIPAddressType_ =
-  SetIPAddressType'
-    { _siatLoadBalancerARN = pLoadBalancerARN_
-    , _siatIPAddressType = pIPAddressType_
-    }
-
+setIPAddressType pLoadBalancerARN_ pIPAddressType_
+  = SetIPAddressType'{_siatLoadBalancerARN =
+                        pLoadBalancerARN_,
+                      _siatIPAddressType = pIPAddressType_}
 
 -- | The Amazon Resource Name (ARN) of the load balancer.
 siatLoadBalancerARN :: Lens' SetIPAddressType Text
 siatLoadBalancerARN = lens _siatLoadBalancerARN (\ s a -> s{_siatLoadBalancerARN = a})
 
--- | The IP address type. The possible values are @ipv4@ (for IPv4 addresses) and @dualstack@ (for IPv4 and IPv6 addresses). Internal load balancers must use @ipv4@ .
+-- | The IP address type. The possible values are @ipv4@ (for IPv4 addresses) and @dualstack@ (for IPv4 and IPv6 addresses). Internal load balancers must use @ipv4@ . Network Load Balancers must use @ipv4@ .
 siatIPAddressType :: Lens' SetIPAddressType IPAddressType
 siatIPAddressType = lens _siatIPAddressType (\ s a -> s{_siatIPAddressType = a})
 
@@ -108,11 +103,14 @@ instance ToQuery SetIPAddressType where
                "IpAddressType" =: _siatIPAddressType]
 
 -- | /See:/ 'setIPAddressTypeResponse' smart constructor.
-data SetIPAddressTypeResponse = SetIPAddressTypeResponse'
-  { _siatrsIPAddressType  :: !(Maybe IPAddressType)
-  , _siatrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetIPAddressTypeResponse = SetIPAddressTypeResponse'{_siatrsIPAddressType
+                                                          ::
+                                                          !(Maybe
+                                                              IPAddressType),
+                                                          _siatrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'SetIPAddressTypeResponse' with the minimum fields required to make a request.
 --
@@ -124,10 +122,10 @@ data SetIPAddressTypeResponse = SetIPAddressTypeResponse'
 setIPAddressTypeResponse
     :: Int -- ^ 'siatrsResponseStatus'
     -> SetIPAddressTypeResponse
-setIPAddressTypeResponse pResponseStatus_ =
-  SetIPAddressTypeResponse'
-    {_siatrsIPAddressType = Nothing, _siatrsResponseStatus = pResponseStatus_}
-
+setIPAddressTypeResponse pResponseStatus_
+  = SetIPAddressTypeResponse'{_siatrsIPAddressType =
+                                Nothing,
+                              _siatrsResponseStatus = pResponseStatus_}
 
 -- | The IP address type.
 siatrsIPAddressType :: Lens' SetIPAddressTypeResponse (Maybe IPAddressType)

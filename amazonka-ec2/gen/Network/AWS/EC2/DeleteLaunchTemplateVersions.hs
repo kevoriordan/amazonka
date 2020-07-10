@@ -49,13 +49,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLaunchTemplateVersions' smart constructor.
-data DeleteLaunchTemplateVersions = DeleteLaunchTemplateVersions'
-  { _dltvLaunchTemplateName :: !(Maybe Text)
-  , _dltvLaunchTemplateId   :: !(Maybe Text)
-  , _dltvDryRun             :: !(Maybe Bool)
-  , _dltvVersions           :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLaunchTemplateVersions = DeleteLaunchTemplateVersions'{_dltvLaunchTemplateName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dltvLaunchTemplateId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dltvDryRun ::
+                                                                  !(Maybe Bool),
+                                                                  _dltvVersions
+                                                                  :: ![Text]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteLaunchTemplateVersions' with the minimum fields required to make a request.
 --
@@ -70,14 +75,11 @@ data DeleteLaunchTemplateVersions = DeleteLaunchTemplateVersions'
 -- * 'dltvVersions' - The version numbers of one or more launch template versions to delete.
 deleteLaunchTemplateVersions
     :: DeleteLaunchTemplateVersions
-deleteLaunchTemplateVersions =
-  DeleteLaunchTemplateVersions'
-    { _dltvLaunchTemplateName = Nothing
-    , _dltvLaunchTemplateId = Nothing
-    , _dltvDryRun = Nothing
-    , _dltvVersions = mempty
-    }
-
+deleteLaunchTemplateVersions
+  = DeleteLaunchTemplateVersions'{_dltvLaunchTemplateName
+                                    = Nothing,
+                                  _dltvLaunchTemplateId = Nothing,
+                                  _dltvDryRun = Nothing, _dltvVersions = mempty}
 
 -- | The name of the launch template. You must specify either the launch template ID or launch template name in the request.
 dltvLaunchTemplateName :: Lens' DeleteLaunchTemplateVersions (Maybe Text)
@@ -136,12 +138,19 @@ instance ToQuery DeleteLaunchTemplateVersions where
                toQueryList "LaunchTemplateVersion" _dltvVersions]
 
 -- | /See:/ 'deleteLaunchTemplateVersionsResponse' smart constructor.
-data DeleteLaunchTemplateVersionsResponse = DeleteLaunchTemplateVersionsResponse'
-  { _dltvsrsSuccessfullyDeletedLaunchTemplateVersions :: !(Maybe [DeleteLaunchTemplateVersionsResponseSuccessItem])
-  , _dltvsrsUnsuccessfullyDeletedLaunchTemplateVersions :: !(Maybe [DeleteLaunchTemplateVersionsResponseErrorItem])
-  , _dltvsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLaunchTemplateVersionsResponse = DeleteLaunchTemplateVersionsResponse'{_dltvsrsSuccessfullyDeletedLaunchTemplateVersions
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [DeleteLaunchTemplateVersionsResponseSuccessItem]),
+                                                                                  _dltvsrsUnsuccessfullyDeletedLaunchTemplateVersions
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [DeleteLaunchTemplateVersionsResponseErrorItem]),
+                                                                                  _dltvsrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DeleteLaunchTemplateVersionsResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +164,13 @@ data DeleteLaunchTemplateVersionsResponse = DeleteLaunchTemplateVersionsResponse
 deleteLaunchTemplateVersionsResponse
     :: Int -- ^ 'dltvsrsResponseStatus'
     -> DeleteLaunchTemplateVersionsResponse
-deleteLaunchTemplateVersionsResponse pResponseStatus_ =
-  DeleteLaunchTemplateVersionsResponse'
-    { _dltvsrsSuccessfullyDeletedLaunchTemplateVersions = Nothing
-    , _dltvsrsUnsuccessfullyDeletedLaunchTemplateVersions = Nothing
-    , _dltvsrsResponseStatus = pResponseStatus_
-    }
-
+deleteLaunchTemplateVersionsResponse pResponseStatus_
+  = DeleteLaunchTemplateVersionsResponse'{_dltvsrsSuccessfullyDeletedLaunchTemplateVersions
+                                            = Nothing,
+                                          _dltvsrsUnsuccessfullyDeletedLaunchTemplateVersions
+                                            = Nothing,
+                                          _dltvsrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Information about the launch template versions that were successfully deleted.
 dltvsrsSuccessfullyDeletedLaunchTemplateVersions :: Lens' DeleteLaunchTemplateVersionsResponse [DeleteLaunchTemplateVersionsResponseSuccessItem]

@@ -23,7 +23,7 @@
 --
 --     * Using the path
 --
---     * Using @ObjectIdentifier@
+--     * Using @ObjectIdentifier@ 
 --
 --
 --
@@ -54,13 +54,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachObject' smart constructor.
-data AttachObject = AttachObject'
-  { _aoDirectoryARN    :: !Text
-  , _aoParentReference :: !ObjectReference
-  , _aoChildReference  :: !ObjectReference
-  , _aoLinkName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachObject = AttachObject'{_aoDirectoryARN ::
+                                  !Text,
+                                  _aoParentReference :: !ObjectReference,
+                                  _aoChildReference :: !ObjectReference,
+                                  _aoLinkName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachObject' with the minimum fields required to make a request.
 --
@@ -79,14 +78,12 @@ attachObject
     -> ObjectReference -- ^ 'aoChildReference'
     -> Text -- ^ 'aoLinkName'
     -> AttachObject
-attachObject pDirectoryARN_ pParentReference_ pChildReference_ pLinkName_ =
-  AttachObject'
-    { _aoDirectoryARN = pDirectoryARN_
-    , _aoParentReference = pParentReference_
-    , _aoChildReference = pChildReference_
-    , _aoLinkName = pLinkName_
-    }
-
+attachObject pDirectoryARN_ pParentReference_
+  pChildReference_ pLinkName_
+  = AttachObject'{_aoDirectoryARN = pDirectoryARN_,
+                  _aoParentReference = pParentReference_,
+                  _aoChildReference = pChildReference_,
+                  _aoLinkName = pLinkName_}
 
 -- | Amazon Resource Name (ARN) that is associated with the 'Directory' where both objects reside. For more information, see 'arns' .
 aoDirectoryARN :: Lens' AttachObject Text
@@ -139,11 +136,10 @@ instance ToQuery AttachObject where
         toQuery = const mempty
 
 -- | /See:/ 'attachObjectResponse' smart constructor.
-data AttachObjectResponse = AttachObjectResponse'
-  { _aorsAttachedObjectIdentifier :: !(Maybe Text)
-  , _aorsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachObjectResponse = AttachObjectResponse'{_aorsAttachedObjectIdentifier
+                                                  :: !(Maybe Text),
+                                                  _aorsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachObjectResponse' with the minimum fields required to make a request.
 --
@@ -155,12 +151,10 @@ data AttachObjectResponse = AttachObjectResponse'
 attachObjectResponse
     :: Int -- ^ 'aorsResponseStatus'
     -> AttachObjectResponse
-attachObjectResponse pResponseStatus_ =
-  AttachObjectResponse'
-    { _aorsAttachedObjectIdentifier = Nothing
-    , _aorsResponseStatus = pResponseStatus_
-    }
-
+attachObjectResponse pResponseStatus_
+  = AttachObjectResponse'{_aorsAttachedObjectIdentifier
+                            = Nothing,
+                          _aorsResponseStatus = pResponseStatus_}
 
 -- | The attached @ObjectIdentifier@ , which is the child @ObjectIdentifier@ .
 aorsAttachedObjectIdentifier :: Lens' AttachObjectResponse (Maybe Text)

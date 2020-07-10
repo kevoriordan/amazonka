@@ -21,7 +21,7 @@
 -- Requests a description of a set of instances.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeInstances
     (
@@ -49,12 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeInstances' smart constructor.
-data DescribeInstances = DescribeInstances'
-  { _diInstanceIds :: !(Maybe [Text])
-  , _diStackId     :: !(Maybe Text)
-  , _diLayerId     :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstances = DescribeInstances'{_diInstanceIds
+                                            :: !(Maybe [Text]),
+                                            _diStackId :: !(Maybe Text),
+                                            _diLayerId :: !(Maybe Text)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeInstances' with the minimum fields required to make a request.
 --
@@ -67,10 +66,9 @@ data DescribeInstances = DescribeInstances'
 -- * 'diLayerId' - A layer ID. If you use this parameter, @DescribeInstances@ returns descriptions of the instances associated with the specified layer.
 describeInstances
     :: DescribeInstances
-describeInstances =
-  DescribeInstances'
-    {_diInstanceIds = Nothing, _diStackId = Nothing, _diLayerId = Nothing}
-
+describeInstances
+  = DescribeInstances'{_diInstanceIds = Nothing,
+                       _diStackId = Nothing, _diLayerId = Nothing}
 
 -- | An array of instance IDs to be described. If you use this parameter, @DescribeInstances@ returns a description of the specified instances. Otherwise, it returns a description of every instance.
 diInstanceIds :: Lens' DescribeInstances [Text]
@@ -127,11 +125,13 @@ instance ToQuery DescribeInstances where
 --
 --
 -- /See:/ 'describeInstancesResponse' smart constructor.
-data DescribeInstancesResponse = DescribeInstancesResponse'
-  { _dirsInstances      :: !(Maybe [Instance])
-  , _dirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstancesResponse = DescribeInstancesResponse'{_dirsInstances
+                                                            ::
+                                                            !(Maybe [Instance]),
+                                                            _dirsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeInstancesResponse' with the minimum fields required to make a request.
 --
@@ -143,10 +143,10 @@ data DescribeInstancesResponse = DescribeInstancesResponse'
 describeInstancesResponse
     :: Int -- ^ 'dirsResponseStatus'
     -> DescribeInstancesResponse
-describeInstancesResponse pResponseStatus_ =
-  DescribeInstancesResponse'
-    {_dirsInstances = Nothing, _dirsResponseStatus = pResponseStatus_}
-
+describeInstancesResponse pResponseStatus_
+  = DescribeInstancesResponse'{_dirsInstances =
+                                 Nothing,
+                               _dirsResponseStatus = pResponseStatus_}
 
 -- | An array of @Instance@ objects that describe the instances.
 dirsInstances :: Lens' DescribeInstancesResponse [Instance]

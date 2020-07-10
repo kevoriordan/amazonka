@@ -29,6 +29,7 @@ module Network.AWS.StorageGateway.UpdateGatewayInformation
     -- * Request Lenses
     , ugiGatewayName
     , ugiGatewayTimezone
+    , ugiCloudWatchLogGroupARN
     , ugiGatewayARN
 
     -- * Destructuring the Response
@@ -48,12 +49,16 @@ import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'updateGatewayInformation' smart constructor.
-data UpdateGatewayInformation = UpdateGatewayInformation'
-  { _ugiGatewayName     :: !(Maybe Text)
-  , _ugiGatewayTimezone :: !(Maybe Text)
-  , _ugiGatewayARN      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGatewayInformation = UpdateGatewayInformation'{_ugiGatewayName
+                                                          :: !(Maybe Text),
+                                                          _ugiGatewayTimezone ::
+                                                          !(Maybe Text),
+                                                          _ugiCloudWatchLogGroupARN
+                                                          :: !(Maybe Text),
+                                                          _ugiGatewayARN ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateGatewayInformation' with the minimum fields required to make a request.
 --
@@ -61,27 +66,32 @@ data UpdateGatewayInformation = UpdateGatewayInformation'
 --
 -- * 'ugiGatewayName' - Undocumented member.
 --
--- * 'ugiGatewayTimezone' - Undocumented member.
+-- * 'ugiGatewayTimezone' - A value that indicates the time zone of the gateway.
+--
+-- * 'ugiCloudWatchLogGroupARN' - The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use to monitor and log events in the gateway.  For more information, see <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html What Is Amazon CloudWatch Logs?> .
 --
 -- * 'ugiGatewayARN' - Undocumented member.
 updateGatewayInformation
     :: Text -- ^ 'ugiGatewayARN'
     -> UpdateGatewayInformation
-updateGatewayInformation pGatewayARN_ =
-  UpdateGatewayInformation'
-    { _ugiGatewayName = Nothing
-    , _ugiGatewayTimezone = Nothing
-    , _ugiGatewayARN = pGatewayARN_
-    }
-
+updateGatewayInformation pGatewayARN_
+  = UpdateGatewayInformation'{_ugiGatewayName =
+                                Nothing,
+                              _ugiGatewayTimezone = Nothing,
+                              _ugiCloudWatchLogGroupARN = Nothing,
+                              _ugiGatewayARN = pGatewayARN_}
 
 -- | Undocumented member.
 ugiGatewayName :: Lens' UpdateGatewayInformation (Maybe Text)
 ugiGatewayName = lens _ugiGatewayName (\ s a -> s{_ugiGatewayName = a})
 
--- | Undocumented member.
+-- | A value that indicates the time zone of the gateway.
 ugiGatewayTimezone :: Lens' UpdateGatewayInformation (Maybe Text)
 ugiGatewayTimezone = lens _ugiGatewayTimezone (\ s a -> s{_ugiGatewayTimezone = a})
+
+-- | The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use to monitor and log events in the gateway.  For more information, see <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html What Is Amazon CloudWatch Logs?> .
+ugiCloudWatchLogGroupARN :: Lens' UpdateGatewayInformation (Maybe Text)
+ugiCloudWatchLogGroupARN = lens _ugiCloudWatchLogGroupARN (\ s a -> s{_ugiCloudWatchLogGroupARN = a})
 
 -- | Undocumented member.
 ugiGatewayARN :: Lens' UpdateGatewayInformation Text
@@ -118,6 +128,8 @@ instance ToJSON UpdateGatewayInformation where
               (catMaybes
                  [("GatewayName" .=) <$> _ugiGatewayName,
                   ("GatewayTimezone" .=) <$> _ugiGatewayTimezone,
+                  ("CloudWatchLogGroupARN" .=) <$>
+                    _ugiCloudWatchLogGroupARN,
                   Just ("GatewayARN" .= _ugiGatewayARN)])
 
 instance ToPath UpdateGatewayInformation where
@@ -131,12 +143,19 @@ instance ToQuery UpdateGatewayInformation where
 --
 --
 -- /See:/ 'updateGatewayInformationResponse' smart constructor.
-data UpdateGatewayInformationResponse = UpdateGatewayInformationResponse'
-  { _ugirsGatewayARN     :: !(Maybe Text)
-  , _ugirsGatewayName    :: !(Maybe Text)
-  , _ugirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGatewayInformationResponse = UpdateGatewayInformationResponse'{_ugirsGatewayARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ugirsGatewayName
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ugirsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'UpdateGatewayInformationResponse' with the minimum fields required to make a request.
 --
@@ -144,25 +163,23 @@ data UpdateGatewayInformationResponse = UpdateGatewayInformationResponse'
 --
 -- * 'ugirsGatewayARN' - Undocumented member.
 --
--- * 'ugirsGatewayName' - Undocumented member.
+-- * 'ugirsGatewayName' - The name you configured for your gateway.
 --
 -- * 'ugirsResponseStatus' - -- | The response status code.
 updateGatewayInformationResponse
     :: Int -- ^ 'ugirsResponseStatus'
     -> UpdateGatewayInformationResponse
-updateGatewayInformationResponse pResponseStatus_ =
-  UpdateGatewayInformationResponse'
-    { _ugirsGatewayARN = Nothing
-    , _ugirsGatewayName = Nothing
-    , _ugirsResponseStatus = pResponseStatus_
-    }
-
+updateGatewayInformationResponse pResponseStatus_
+  = UpdateGatewayInformationResponse'{_ugirsGatewayARN
+                                        = Nothing,
+                                      _ugirsGatewayName = Nothing,
+                                      _ugirsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ugirsGatewayARN :: Lens' UpdateGatewayInformationResponse (Maybe Text)
 ugirsGatewayARN = lens _ugirsGatewayARN (\ s a -> s{_ugirsGatewayARN = a})
 
--- | Undocumented member.
+-- | The name you configured for your gateway.
 ugirsGatewayName :: Lens' UpdateGatewayInformationResponse (Maybe Text)
 ugirsGatewayName = lens _ugirsGatewayName (\ s a -> s{_ugirsGatewayName = a})
 

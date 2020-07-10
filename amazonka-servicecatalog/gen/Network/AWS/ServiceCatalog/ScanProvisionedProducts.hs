@@ -23,6 +23,8 @@
 --
 -- To use additional filtering, see 'SearchProvisionedProducts' .
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.ServiceCatalog.ScanProvisionedProducts
     (
     -- * Creating a Request
@@ -44,6 +46,7 @@ module Network.AWS.ServiceCatalog.ScanProvisionedProducts
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -51,13 +54,17 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'scanProvisionedProducts' smart constructor.
-data ScanProvisionedProducts = ScanProvisionedProducts'
-  { _sAcceptLanguage    :: !(Maybe Text)
-  , _sAccessLevelFilter :: !(Maybe AccessLevelFilter)
-  , _sPageToken         :: !(Maybe Text)
-  , _sPageSize          :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ScanProvisionedProducts = ScanProvisionedProducts'{_sAcceptLanguage
+                                                        :: !(Maybe Text),
+                                                        _sAccessLevelFilter ::
+                                                        !(Maybe
+                                                            AccessLevelFilter),
+                                                        _sPageToken ::
+                                                        !(Maybe Text),
+                                                        _sPageSize ::
+                                                        !(Maybe Nat)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ScanProvisionedProducts' with the minimum fields required to make a request.
 --
@@ -72,14 +79,11 @@ data ScanProvisionedProducts = ScanProvisionedProducts'
 -- * 'sPageSize' - The maximum number of items to return with this call.
 scanProvisionedProducts
     :: ScanProvisionedProducts
-scanProvisionedProducts =
-  ScanProvisionedProducts'
-    { _sAcceptLanguage = Nothing
-    , _sAccessLevelFilter = Nothing
-    , _sPageToken = Nothing
-    , _sPageSize = Nothing
-    }
-
+scanProvisionedProducts
+  = ScanProvisionedProducts'{_sAcceptLanguage =
+                               Nothing,
+                             _sAccessLevelFilter = Nothing,
+                             _sPageToken = Nothing, _sPageSize = Nothing}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 sAcceptLanguage :: Lens' ScanProvisionedProducts (Maybe Text)
@@ -96,6 +100,13 @@ sPageToken = lens _sPageToken (\ s a -> s{_sPageToken = a})
 -- | The maximum number of items to return with this call.
 sPageSize :: Lens' ScanProvisionedProducts (Maybe Natural)
 sPageSize = lens _sPageSize (\ s a -> s{_sPageSize = a}) . mapping _Nat
+
+instance AWSPager ScanProvisionedProducts where
+        page rq rs
+          | stop (rs ^. spprsNextPageToken) = Nothing
+          | stop (rs ^. spprsProvisionedProducts) = Nothing
+          | otherwise =
+            Just $ rq & sPageToken .~ rs ^. spprsNextPageToken
 
 instance AWSRequest ScanProvisionedProducts where
         type Rs ScanProvisionedProducts =
@@ -139,12 +150,18 @@ instance ToQuery ScanProvisionedProducts where
         toQuery = const mempty
 
 -- | /See:/ 'scanProvisionedProductsResponse' smart constructor.
-data ScanProvisionedProductsResponse = ScanProvisionedProductsResponse'
-  { _spprsNextPageToken       :: !(Maybe Text)
-  , _spprsProvisionedProducts :: !(Maybe [ProvisionedProductDetail])
-  , _spprsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ScanProvisionedProductsResponse = ScanProvisionedProductsResponse'{_spprsNextPageToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _spprsProvisionedProducts
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [ProvisionedProductDetail]),
+                                                                        _spprsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ScanProvisionedProductsResponse' with the minimum fields required to make a request.
 --
@@ -158,13 +175,11 @@ data ScanProvisionedProductsResponse = ScanProvisionedProductsResponse'
 scanProvisionedProductsResponse
     :: Int -- ^ 'spprsResponseStatus'
     -> ScanProvisionedProductsResponse
-scanProvisionedProductsResponse pResponseStatus_ =
-  ScanProvisionedProductsResponse'
-    { _spprsNextPageToken = Nothing
-    , _spprsProvisionedProducts = Nothing
-    , _spprsResponseStatus = pResponseStatus_
-    }
-
+scanProvisionedProductsResponse pResponseStatus_
+  = ScanProvisionedProductsResponse'{_spprsNextPageToken
+                                       = Nothing,
+                                     _spprsProvisionedProducts = Nothing,
+                                     _spprsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 spprsNextPageToken :: Lens' ScanProvisionedProductsResponse (Maybe Text)

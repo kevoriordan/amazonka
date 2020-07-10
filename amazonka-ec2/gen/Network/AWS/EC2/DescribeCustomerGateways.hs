@@ -21,7 +21,7 @@
 -- Describes one or more of your VPN customer gateways.
 --
 --
--- For more information about VPN customer gateways, see <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html AWS Managed VPN Connections> in the /Amazon Virtual Private Cloud User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html AWS Site-to-Site VPN> in the /AWS Site-to-Site VPN User Guide/ .
 --
 module Network.AWS.EC2.DescribeCustomerGateways
     (
@@ -53,12 +53,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeCustomerGateways' smart constructor.
-data DescribeCustomerGateways = DescribeCustomerGateways'
-  { _dcgCustomerGatewayIds :: !(Maybe [Text])
-  , _dcgFilters            :: !(Maybe [Filter])
-  , _dcgDryRun             :: !(Maybe Bool)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCustomerGateways = DescribeCustomerGateways'{_dcgCustomerGatewayIds
+                                                          :: !(Maybe [Text]),
+                                                          _dcgFilters ::
+                                                          !(Maybe [Filter]),
+                                                          _dcgDryRun ::
+                                                          !(Maybe Bool)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeCustomerGateways' with the minimum fields required to make a request.
 --
@@ -66,24 +68,21 @@ data DescribeCustomerGateways = DescribeCustomerGateways'
 --
 -- * 'dcgCustomerGatewayIds' - One or more customer gateway IDs. Default: Describes all your customer gateways.
 --
--- * 'dcgFilters' - One or more filters.     * @bgp-asn@ - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).     * @customer-gateway-id@ - The ID of the customer gateway.     * @ip-address@ - The IP address of the customer gateway's Internet-routable external interface.     * @state@ - The state of the customer gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @type@ - The type of customer gateway. Currently, the only supported type is @ipsec.1@ .     * @tag@ :/key/ =/value/ - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify @tag:Purpose@ for the filter name and @X@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. This filter is independent of the @tag-value@ filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the @tag@ :/key/ =/value/ filter.     * @tag-value@ - The value of a tag assigned to the resource. This filter is independent of the @tag-key@ filter.
+-- * 'dcgFilters' - One or more filters.     * @bgp-asn@ - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).     * @customer-gateway-id@ - The ID of the customer gateway.     * @ip-address@ - The IP address of the customer gateway's Internet-routable external interface.     * @state@ - The state of the customer gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @type@ - The type of customer gateway. Currently, the only supported type is @ipsec.1@ .     * @tag@ :<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key @Owner@ and the value @TeamA@ , specify @tag:Owner@ for the filter name and @TeamA@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
 --
 -- * 'dcgDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 describeCustomerGateways
     :: DescribeCustomerGateways
-describeCustomerGateways =
-  DescribeCustomerGateways'
-    { _dcgCustomerGatewayIds = Nothing
-    , _dcgFilters = Nothing
-    , _dcgDryRun = Nothing
-    }
-
+describeCustomerGateways
+  = DescribeCustomerGateways'{_dcgCustomerGatewayIds =
+                                Nothing,
+                              _dcgFilters = Nothing, _dcgDryRun = Nothing}
 
 -- | One or more customer gateway IDs. Default: Describes all your customer gateways.
 dcgCustomerGatewayIds :: Lens' DescribeCustomerGateways [Text]
 dcgCustomerGatewayIds = lens _dcgCustomerGatewayIds (\ s a -> s{_dcgCustomerGatewayIds = a}) . _Default . _Coerce
 
--- | One or more filters.     * @bgp-asn@ - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).     * @customer-gateway-id@ - The ID of the customer gateway.     * @ip-address@ - The IP address of the customer gateway's Internet-routable external interface.     * @state@ - The state of the customer gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @type@ - The type of customer gateway. Currently, the only supported type is @ipsec.1@ .     * @tag@ :/key/ =/value/ - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify @tag:Purpose@ for the filter name and @X@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. This filter is independent of the @tag-value@ filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag's value is), and the tag value X (regardless of what the tag's key is). If you want to list only resources where Purpose is X, see the @tag@ :/key/ =/value/ filter.     * @tag-value@ - The value of a tag assigned to the resource. This filter is independent of the @tag-key@ filter.
+-- | One or more filters.     * @bgp-asn@ - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).     * @customer-gateway-id@ - The ID of the customer gateway.     * @ip-address@ - The IP address of the customer gateway's Internet-routable external interface.     * @state@ - The state of the customer gateway (@pending@ | @available@ | @deleting@ | @deleted@ ).     * @type@ - The type of customer gateway. Currently, the only supported type is @ipsec.1@ .     * @tag@ :<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key @Owner@ and the value @TeamA@ , specify @tag:Owner@ for the filter name and @TeamA@ for the filter value.     * @tag-key@ - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.
 dcgFilters :: Lens' DescribeCustomerGateways [Filter]
 dcgFilters = lens _dcgFilters (\ s a -> s{_dcgFilters = a}) . _Default . _Coerce
 
@@ -130,11 +129,15 @@ instance ToQuery DescribeCustomerGateways where
 --
 --
 -- /See:/ 'describeCustomerGatewaysResponse' smart constructor.
-data DescribeCustomerGatewaysResponse = DescribeCustomerGatewaysResponse'
-  { _dcgrsCustomerGateways :: !(Maybe [CustomerGateway])
-  , _dcgrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCustomerGatewaysResponse = DescribeCustomerGatewaysResponse'{_dcgrsCustomerGateways
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [CustomerGateway]),
+                                                                          _dcgrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeCustomerGatewaysResponse' with the minimum fields required to make a request.
 --
@@ -146,10 +149,10 @@ data DescribeCustomerGatewaysResponse = DescribeCustomerGatewaysResponse'
 describeCustomerGatewaysResponse
     :: Int -- ^ 'dcgrsResponseStatus'
     -> DescribeCustomerGatewaysResponse
-describeCustomerGatewaysResponse pResponseStatus_ =
-  DescribeCustomerGatewaysResponse'
-    {_dcgrsCustomerGateways = Nothing, _dcgrsResponseStatus = pResponseStatus_}
-
+describeCustomerGatewaysResponse pResponseStatus_
+  = DescribeCustomerGatewaysResponse'{_dcgrsCustomerGateways
+                                        = Nothing,
+                                      _dcgrsResponseStatus = pResponseStatus_}
 
 -- | Information about one or more customer gateways.
 dcgrsCustomerGateways :: Lens' DescribeCustomerGatewaysResponse [CustomerGateway]

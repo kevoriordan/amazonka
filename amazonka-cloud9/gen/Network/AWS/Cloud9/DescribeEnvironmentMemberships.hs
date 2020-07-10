@@ -53,14 +53,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEnvironmentMemberships' smart constructor.
-data DescribeEnvironmentMemberships = DescribeEnvironmentMemberships'
-  { _dUserARN       :: !(Maybe Text)
-  , _dNextToken     :: !(Maybe Text)
-  , _dPermissions   :: !(Maybe [Permissions])
-  , _dEnvironmentId :: !(Maybe Text)
-  , _dMaxResults    :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEnvironmentMemberships = DescribeEnvironmentMemberships'{_dUserARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dPermissions
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Permissions]),
+                                                                      _dEnvironmentId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dMaxResults
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Nat)}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeEnvironmentMemberships' with the minimum fields required to make a request.
 --
@@ -77,15 +91,13 @@ data DescribeEnvironmentMemberships = DescribeEnvironmentMemberships'
 -- * 'dMaxResults' - The maximum number of environment members to get information about.
 describeEnvironmentMemberships
     :: DescribeEnvironmentMemberships
-describeEnvironmentMemberships =
-  DescribeEnvironmentMemberships'
-    { _dUserARN = Nothing
-    , _dNextToken = Nothing
-    , _dPermissions = Nothing
-    , _dEnvironmentId = Nothing
-    , _dMaxResults = Nothing
-    }
-
+describeEnvironmentMemberships
+  = DescribeEnvironmentMemberships'{_dUserARN =
+                                      Nothing,
+                                    _dNextToken = Nothing,
+                                    _dPermissions = Nothing,
+                                    _dEnvironmentId = Nothing,
+                                    _dMaxResults = Nothing}
 
 -- | The Amazon Resource Name (ARN) of an individual environment member to get information about. If no value is specified, information about all environment members are returned.
 dUserARN :: Lens' DescribeEnvironmentMemberships (Maybe Text)
@@ -161,12 +173,19 @@ instance ToQuery DescribeEnvironmentMemberships where
         toQuery = const mempty
 
 -- | /See:/ 'describeEnvironmentMembershipsResponse' smart constructor.
-data DescribeEnvironmentMembershipsResponse = DescribeEnvironmentMembershipsResponse'
-  { _drsNextToken      :: !(Maybe Text)
-  , _drsMemberships    :: !(Maybe [EnvironmentMember])
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEnvironmentMembershipsResponse = DescribeEnvironmentMembershipsResponse'{_drsNextToken
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _drsMemberships
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [EnvironmentMember]),
+                                                                                      _drsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DescribeEnvironmentMembershipsResponse' with the minimum fields required to make a request.
 --
@@ -180,13 +199,13 @@ data DescribeEnvironmentMembershipsResponse = DescribeEnvironmentMembershipsResp
 describeEnvironmentMembershipsResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeEnvironmentMembershipsResponse
-describeEnvironmentMembershipsResponse pResponseStatus_ =
-  DescribeEnvironmentMembershipsResponse'
-    { _drsNextToken = Nothing
-    , _drsMemberships = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeEnvironmentMembershipsResponse
+  pResponseStatus_
+  = DescribeEnvironmentMembershipsResponse'{_drsNextToken
+                                              = Nothing,
+                                            _drsMemberships = Nothing,
+                                            _drsResponseStatus =
+                                              pResponseStatus_}
 
 -- | If there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a /next token/ . To get the next batch of items in the list, call this operation again, adding the next token to the call.
 drsNextToken :: Lens' DescribeEnvironmentMembershipsResponse (Maybe Text)

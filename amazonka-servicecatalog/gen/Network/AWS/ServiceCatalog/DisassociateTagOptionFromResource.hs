@@ -45,11 +45,14 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'disassociateTagOptionFromResource' smart constructor.
-data DisassociateTagOptionFromResource = DisassociateTagOptionFromResource'
-  { _dtofrResourceId  :: !Text
-  , _dtofrTagOptionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateTagOptionFromResource = DisassociateTagOptionFromResource'{_dtofrResourceId
+                                                                            ::
+                                                                            !Text,
+                                                                            _dtofrTagOptionId
+                                                                            ::
+                                                                            !Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DisassociateTagOptionFromResource' with the minimum fields required to make a request.
 --
@@ -62,10 +65,11 @@ disassociateTagOptionFromResource
     :: Text -- ^ 'dtofrResourceId'
     -> Text -- ^ 'dtofrTagOptionId'
     -> DisassociateTagOptionFromResource
-disassociateTagOptionFromResource pResourceId_ pTagOptionId_ =
-  DisassociateTagOptionFromResource'
-    {_dtofrResourceId = pResourceId_, _dtofrTagOptionId = pTagOptionId_}
-
+disassociateTagOptionFromResource pResourceId_
+  pTagOptionId_
+  = DisassociateTagOptionFromResource'{_dtofrResourceId
+                                         = pResourceId_,
+                                       _dtofrTagOptionId = pTagOptionId_}
 
 -- | The resource identifier.
 dtofrResourceId :: Lens' DisassociateTagOptionFromResource Text
@@ -120,10 +124,12 @@ instance ToQuery DisassociateTagOptionFromResource
         toQuery = const mempty
 
 -- | /See:/ 'disassociateTagOptionFromResourceResponse' smart constructor.
-newtype DisassociateTagOptionFromResourceResponse = DisassociateTagOptionFromResourceResponse'
-  { _dtofrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateTagOptionFromResourceResponse = DisassociateTagOptionFromResourceResponse'{_dtofrrsResponseStatus
+                                                                                               ::
+                                                                                               Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'DisassociateTagOptionFromResourceResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +139,10 @@ newtype DisassociateTagOptionFromResourceResponse = DisassociateTagOptionFromRes
 disassociateTagOptionFromResourceResponse
     :: Int -- ^ 'dtofrrsResponseStatus'
     -> DisassociateTagOptionFromResourceResponse
-disassociateTagOptionFromResourceResponse pResponseStatus_ =
-  DisassociateTagOptionFromResourceResponse'
-    {_dtofrrsResponseStatus = pResponseStatus_}
-
+disassociateTagOptionFromResourceResponse
+  pResponseStatus_
+  = DisassociateTagOptionFromResourceResponse'{_dtofrrsResponseStatus
+                                                 = pResponseStatus_}
 
 -- | -- | The response status code.
 dtofrrsResponseStatus :: Lens' DisassociateTagOptionFromResourceResponse Int

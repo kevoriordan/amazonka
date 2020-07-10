@@ -23,7 +23,7 @@
 --
 -- You can execute this operation no more than once per second.
 --
--- For more information about using notifications with Amazon SES, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html Amazon SES Developer Guide> .
+-- For more information about using notifications with Amazon SES, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html Amazon SES Developer Guide> .
 --
 module Network.AWS.SES.SetIdentityFeedbackForwardingEnabled
     (
@@ -48,16 +48,19 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to enable or disable whether Amazon SES forwards you bounce and complaint notifications through email. For information about email feedback forwarding, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html Amazon SES Developer Guide> .
+-- | Represents a request to enable or disable whether Amazon SES forwards you bounce and complaint notifications through email. For information about email feedback forwarding, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'setIdentityFeedbackForwardingEnabled' smart constructor.
-data SetIdentityFeedbackForwardingEnabled = SetIdentityFeedbackForwardingEnabled'
-  { _siffeIdentity          :: !Text
-  , _siffeForwardingEnabled :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetIdentityFeedbackForwardingEnabled = SetIdentityFeedbackForwardingEnabled'{_siffeIdentity
+                                                                                  ::
+                                                                                  !Text,
+                                                                                  _siffeForwardingEnabled
+                                                                                  ::
+                                                                                  !Bool}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'SetIdentityFeedbackForwardingEnabled' with the minimum fields required to make a request.
 --
@@ -70,10 +73,12 @@ setIdentityFeedbackForwardingEnabled
     :: Text -- ^ 'siffeIdentity'
     -> Bool -- ^ 'siffeForwardingEnabled'
     -> SetIdentityFeedbackForwardingEnabled
-setIdentityFeedbackForwardingEnabled pIdentity_ pForwardingEnabled_ =
-  SetIdentityFeedbackForwardingEnabled'
-    {_siffeIdentity = pIdentity_, _siffeForwardingEnabled = pForwardingEnabled_}
-
+setIdentityFeedbackForwardingEnabled pIdentity_
+  pForwardingEnabled_
+  = SetIdentityFeedbackForwardingEnabled'{_siffeIdentity
+                                            = pIdentity_,
+                                          _siffeForwardingEnabled =
+                                            pForwardingEnabled_}
 
 -- | The identity for which to set bounce and complaint notification forwarding. Examples: @user@example.com@ , @example.com@ .
 siffeIdentity :: Lens' SetIdentityFeedbackForwardingEnabled Text
@@ -128,10 +133,13 @@ instance ToQuery SetIdentityFeedbackForwardingEnabled
 --
 --
 -- /See:/ 'setIdentityFeedbackForwardingEnabledResponse' smart constructor.
-newtype SetIdentityFeedbackForwardingEnabledResponse = SetIdentityFeedbackForwardingEnabledResponse'
-  { _siffersResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetIdentityFeedbackForwardingEnabledResponse = SetIdentityFeedbackForwardingEnabledResponse'{_siffersResponseStatus
+                                                                                                     ::
+                                                                                                     Int}
+                                                         deriving (Eq, Read,
+                                                                   Show, Data,
+                                                                   Typeable,
+                                                                   Generic)
 
 -- | Creates a value of 'SetIdentityFeedbackForwardingEnabledResponse' with the minimum fields required to make a request.
 --
@@ -141,10 +149,10 @@ newtype SetIdentityFeedbackForwardingEnabledResponse = SetIdentityFeedbackForwar
 setIdentityFeedbackForwardingEnabledResponse
     :: Int -- ^ 'siffersResponseStatus'
     -> SetIdentityFeedbackForwardingEnabledResponse
-setIdentityFeedbackForwardingEnabledResponse pResponseStatus_ =
-  SetIdentityFeedbackForwardingEnabledResponse'
-    {_siffersResponseStatus = pResponseStatus_}
-
+setIdentityFeedbackForwardingEnabledResponse
+  pResponseStatus_
+  = SetIdentityFeedbackForwardingEnabledResponse'{_siffersResponseStatus
+                                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 siffersResponseStatus :: Lens' SetIdentityFeedbackForwardingEnabledResponse Int

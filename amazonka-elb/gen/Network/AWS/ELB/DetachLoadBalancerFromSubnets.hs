@@ -52,11 +52,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'detachLoadBalancerFromSubnets' smart constructor.
-data DetachLoadBalancerFromSubnets = DetachLoadBalancerFromSubnets'
-  { _dlbfsLoadBalancerName :: !Text
-  , _dlbfsSubnets          :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachLoadBalancerFromSubnets = DetachLoadBalancerFromSubnets'{_dlbfsLoadBalancerName
+                                                                    :: !Text,
+                                                                    _dlbfsSubnets
+                                                                    :: ![Text]}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DetachLoadBalancerFromSubnets' with the minimum fields required to make a request.
 --
@@ -68,10 +69,10 @@ data DetachLoadBalancerFromSubnets = DetachLoadBalancerFromSubnets'
 detachLoadBalancerFromSubnets
     :: Text -- ^ 'dlbfsLoadBalancerName'
     -> DetachLoadBalancerFromSubnets
-detachLoadBalancerFromSubnets pLoadBalancerName_ =
-  DetachLoadBalancerFromSubnets'
-    {_dlbfsLoadBalancerName = pLoadBalancerName_, _dlbfsSubnets = mempty}
-
+detachLoadBalancerFromSubnets pLoadBalancerName_
+  = DetachLoadBalancerFromSubnets'{_dlbfsLoadBalancerName
+                                     = pLoadBalancerName_,
+                                   _dlbfsSubnets = mempty}
 
 -- | The name of the load balancer.
 dlbfsLoadBalancerName :: Lens' DetachLoadBalancerFromSubnets Text
@@ -120,11 +121,15 @@ instance ToQuery DetachLoadBalancerFromSubnets where
 --
 --
 -- /See:/ 'detachLoadBalancerFromSubnetsResponse' smart constructor.
-data DetachLoadBalancerFromSubnetsResponse = DetachLoadBalancerFromSubnetsResponse'
-  { _dlbfsrsSubnets        :: !(Maybe [Text])
-  , _dlbfsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachLoadBalancerFromSubnetsResponse = DetachLoadBalancerFromSubnetsResponse'{_dlbfsrsSubnets
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [Text]),
+                                                                                    _dlbfsrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DetachLoadBalancerFromSubnetsResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +141,12 @@ data DetachLoadBalancerFromSubnetsResponse = DetachLoadBalancerFromSubnetsRespon
 detachLoadBalancerFromSubnetsResponse
     :: Int -- ^ 'dlbfsrsResponseStatus'
     -> DetachLoadBalancerFromSubnetsResponse
-detachLoadBalancerFromSubnetsResponse pResponseStatus_ =
-  DetachLoadBalancerFromSubnetsResponse'
-    {_dlbfsrsSubnets = Nothing, _dlbfsrsResponseStatus = pResponseStatus_}
-
+detachLoadBalancerFromSubnetsResponse
+  pResponseStatus_
+  = DetachLoadBalancerFromSubnetsResponse'{_dlbfsrsSubnets
+                                             = Nothing,
+                                           _dlbfsrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The IDs of the remaining subnets for the load balancer.
 dlbfsrsSubnets :: Lens' DetachLoadBalancerFromSubnetsResponse [Text]

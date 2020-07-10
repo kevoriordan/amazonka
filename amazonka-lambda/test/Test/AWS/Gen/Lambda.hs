@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Lambda where
 
 import Data.Proxy
-import Network.AWS.Lambda
 import Test.AWS.Fixture
-import Test.AWS.Lambda.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.Lambda
+import Test.AWS.Lambda.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -37,6 +37,9 @@ import Test.Tasty
 --         , requestUpdateEventSourceMapping $
 --             updateEventSourceMapping
 --
+--         , requestGetLayerVersion $
+--             getLayerVersion
+--
 --         , requestCreateAlias $
 --             createAlias
 --
@@ -49,14 +52,35 @@ import Test.Tasty
 --         , requestRemovePermission $
 --             removePermission
 --
+--         , requestDeleteFunctionEventInvokeConfig $
+--             deleteFunctionEventInvokeConfig
+--
+--         , requestUpdateFunctionEventInvokeConfig $
+--             updateFunctionEventInvokeConfig
+--
+--         , requestPutFunctionEventInvokeConfig $
+--             putFunctionEventInvokeConfig
+--
 --         , requestInvoke $
 --             invoke
+--
+--         , requestDeleteLayerVersion $
+--             deleteLayerVersion
 --
 --         , requestGetAlias $
 --             getAlias
 --
+--         , requestPublishLayerVersion $
+--             publishLayerVersion
+--
 --         , requestGetEventSourceMapping $
 --             getEventSourceMapping
+--
+--         , requestAddLayerVersionPermission $
+--             addLayerVersionPermission
+--
+--         , requestListProvisionedConcurrencyConfigs $
+--             listProvisionedConcurrencyConfigs
 --
 --         , requestPutFunctionConcurrency $
 --             putFunctionConcurrency
@@ -67,14 +91,29 @@ import Test.Tasty
 --         , requestDeleteFunctionConcurrency $
 --             deleteFunctionConcurrency
 --
+--         , requestGetLayerVersionByARN $
+--             getLayerVersionByARN
+--
+--         , requestGetFunctionConcurrency $
+--             getFunctionConcurrency
+--
 --         , requestCreateEventSourceMapping $
 --             createEventSourceMapping
+--
+--         , requestGetProvisionedConcurrencyConfig $
+--             getProvisionedConcurrencyConfig
+--
+--         , requestRemoveLayerVersionPermission $
+--             removeLayerVersionPermission
 --
 --         , requestGetFunction $
 --             getFunction
 --
 --         , requestListEventSourceMappings $
 --             listEventSourceMappings
+--
+--         , requestGetLayerVersionPolicy $
+--             getLayerVersionPolicy
 --
 --         , requestDeleteAlias $
 --             deleteAlias
@@ -85,8 +124,20 @@ import Test.Tasty
 --         , requestGetAccountSettings $
 --             getAccountSettings
 --
+--         , requestGetFunctionEventInvokeConfig $
+--             getFunctionEventInvokeConfig
+--
 --         , requestAddPermission $
 --             addPermission
+--
+--         , requestListLayers $
+--             listLayers
+--
+--         , requestListFunctionEventInvokeConfigs $
+--             listFunctionEventInvokeConfigs
+--
+--         , requestListLayerVersions $
+--             listLayerVersions
 --
 --         , requestTagResource $
 --             tagResource
@@ -112,8 +163,14 @@ import Test.Tasty
 --         , requestUpdateFunctionCode $
 --             updateFunctionCode
 --
+--         , requestDeleteProvisionedConcurrencyConfig $
+--             deleteProvisionedConcurrencyConfig
+--
 --         , requestGetPolicy $
 --             getPolicy
+--
+--         , requestPutProvisionedConcurrencyConfig $
+--             putProvisionedConcurrencyConfig
 --
 --           ]
 
@@ -127,6 +184,9 @@ import Test.Tasty
 --         , responseUpdateEventSourceMapping $
 --             eventSourceMappingConfiguration
 --
+--         , responseGetLayerVersion $
+--             getLayerVersionResponse
+--
 --         , responseCreateAlias $
 --             aliasConfiguration
 --
@@ -139,14 +199,35 @@ import Test.Tasty
 --         , responseRemovePermission $
 --             removePermissionResponse
 --
+--         , responseDeleteFunctionEventInvokeConfig $
+--             deleteFunctionEventInvokeConfigResponse
+--
+--         , responseUpdateFunctionEventInvokeConfig $
+--             functionEventInvokeConfig
+--
+--         , responsePutFunctionEventInvokeConfig $
+--             functionEventInvokeConfig
+--
 --         , responseInvoke $
 --             invokeResponse
+--
+--         , responseDeleteLayerVersion $
+--             deleteLayerVersionResponse
 --
 --         , responseGetAlias $
 --             aliasConfiguration
 --
+--         , responsePublishLayerVersion $
+--             publishLayerVersionResponse
+--
 --         , responseGetEventSourceMapping $
 --             eventSourceMappingConfiguration
+--
+--         , responseAddLayerVersionPermission $
+--             addLayerVersionPermissionResponse
+--
+--         , responseListProvisionedConcurrencyConfigs $
+--             listProvisionedConcurrencyConfigsResponse
 --
 --         , responsePutFunctionConcurrency $
 --             concurrency
@@ -157,14 +238,29 @@ import Test.Tasty
 --         , responseDeleteFunctionConcurrency $
 --             deleteFunctionConcurrencyResponse
 --
+--         , responseGetLayerVersionByARN $
+--             getLayerVersionResponse
+--
+--         , responseGetFunctionConcurrency $
+--             getFunctionConcurrencyResponse
+--
 --         , responseCreateEventSourceMapping $
 --             eventSourceMappingConfiguration
+--
+--         , responseGetProvisionedConcurrencyConfig $
+--             getProvisionedConcurrencyConfigResponse
+--
+--         , responseRemoveLayerVersionPermission $
+--             removeLayerVersionPermissionResponse
 --
 --         , responseGetFunction $
 --             getFunctionResponse
 --
 --         , responseListEventSourceMappings $
 --             listEventSourceMappingsResponse
+--
+--         , responseGetLayerVersionPolicy $
+--             getLayerVersionPolicyResponse
 --
 --         , responseDeleteAlias $
 --             deleteAliasResponse
@@ -175,8 +271,20 @@ import Test.Tasty
 --         , responseGetAccountSettings $
 --             getAccountSettingsResponse
 --
+--         , responseGetFunctionEventInvokeConfig $
+--             functionEventInvokeConfig
+--
 --         , responseAddPermission $
 --             addPermissionResponse
+--
+--         , responseListLayers $
+--             listLayersResponse
+--
+--         , responseListFunctionEventInvokeConfigs $
+--             listFunctionEventInvokeConfigsResponse
+--
+--         , responseListLayerVersions $
+--             listLayerVersionsResponse
 --
 --         , responseTagResource $
 --             tagResourceResponse
@@ -202,8 +310,14 @@ import Test.Tasty
 --         , responseUpdateFunctionCode $
 --             functionConfiguration
 --
+--         , responseDeleteProvisionedConcurrencyConfig $
+--             deleteProvisionedConcurrencyConfigResponse
+--
 --         , responseGetPolicy $
 --             getPolicyResponse
+--
+--         , responsePutProvisionedConcurrencyConfig $
+--             putProvisionedConcurrencyConfigResponse
 --
 --           ]
 --     ]
@@ -225,6 +339,11 @@ requestUpdateEventSourceMapping = req
     "UpdateEventSourceMapping"
     "fixture/UpdateEventSourceMapping.yaml"
 
+requestGetLayerVersion :: GetLayerVersion -> TestTree
+requestGetLayerVersion = req
+    "GetLayerVersion"
+    "fixture/GetLayerVersion.yaml"
+
 requestCreateAlias :: CreateAlias -> TestTree
 requestCreateAlias = req
     "CreateAlias"
@@ -245,20 +364,55 @@ requestRemovePermission = req
     "RemovePermission"
     "fixture/RemovePermission.yaml"
 
+requestDeleteFunctionEventInvokeConfig :: DeleteFunctionEventInvokeConfig -> TestTree
+requestDeleteFunctionEventInvokeConfig = req
+    "DeleteFunctionEventInvokeConfig"
+    "fixture/DeleteFunctionEventInvokeConfig.yaml"
+
+requestUpdateFunctionEventInvokeConfig :: UpdateFunctionEventInvokeConfig -> TestTree
+requestUpdateFunctionEventInvokeConfig = req
+    "UpdateFunctionEventInvokeConfig"
+    "fixture/UpdateFunctionEventInvokeConfig.yaml"
+
+requestPutFunctionEventInvokeConfig :: PutFunctionEventInvokeConfig -> TestTree
+requestPutFunctionEventInvokeConfig = req
+    "PutFunctionEventInvokeConfig"
+    "fixture/PutFunctionEventInvokeConfig.yaml"
+
 requestInvoke :: Invoke -> TestTree
 requestInvoke = req
     "Invoke"
     "fixture/Invoke.yaml"
+
+requestDeleteLayerVersion :: DeleteLayerVersion -> TestTree
+requestDeleteLayerVersion = req
+    "DeleteLayerVersion"
+    "fixture/DeleteLayerVersion.yaml"
 
 requestGetAlias :: GetAlias -> TestTree
 requestGetAlias = req
     "GetAlias"
     "fixture/GetAlias.yaml"
 
+requestPublishLayerVersion :: PublishLayerVersion -> TestTree
+requestPublishLayerVersion = req
+    "PublishLayerVersion"
+    "fixture/PublishLayerVersion.yaml"
+
 requestGetEventSourceMapping :: GetEventSourceMapping -> TestTree
 requestGetEventSourceMapping = req
     "GetEventSourceMapping"
     "fixture/GetEventSourceMapping.yaml"
+
+requestAddLayerVersionPermission :: AddLayerVersionPermission -> TestTree
+requestAddLayerVersionPermission = req
+    "AddLayerVersionPermission"
+    "fixture/AddLayerVersionPermission.yaml"
+
+requestListProvisionedConcurrencyConfigs :: ListProvisionedConcurrencyConfigs -> TestTree
+requestListProvisionedConcurrencyConfigs = req
+    "ListProvisionedConcurrencyConfigs"
+    "fixture/ListProvisionedConcurrencyConfigs.yaml"
 
 requestPutFunctionConcurrency :: PutFunctionConcurrency -> TestTree
 requestPutFunctionConcurrency = req
@@ -275,10 +429,30 @@ requestDeleteFunctionConcurrency = req
     "DeleteFunctionConcurrency"
     "fixture/DeleteFunctionConcurrency.yaml"
 
+requestGetLayerVersionByARN :: GetLayerVersionByARN -> TestTree
+requestGetLayerVersionByARN = req
+    "GetLayerVersionByARN"
+    "fixture/GetLayerVersionByARN.yaml"
+
+requestGetFunctionConcurrency :: GetFunctionConcurrency -> TestTree
+requestGetFunctionConcurrency = req
+    "GetFunctionConcurrency"
+    "fixture/GetFunctionConcurrency.yaml"
+
 requestCreateEventSourceMapping :: CreateEventSourceMapping -> TestTree
 requestCreateEventSourceMapping = req
     "CreateEventSourceMapping"
     "fixture/CreateEventSourceMapping.yaml"
+
+requestGetProvisionedConcurrencyConfig :: GetProvisionedConcurrencyConfig -> TestTree
+requestGetProvisionedConcurrencyConfig = req
+    "GetProvisionedConcurrencyConfig"
+    "fixture/GetProvisionedConcurrencyConfig.yaml"
+
+requestRemoveLayerVersionPermission :: RemoveLayerVersionPermission -> TestTree
+requestRemoveLayerVersionPermission = req
+    "RemoveLayerVersionPermission"
+    "fixture/RemoveLayerVersionPermission.yaml"
 
 requestGetFunction :: GetFunction -> TestTree
 requestGetFunction = req
@@ -289,6 +463,11 @@ requestListEventSourceMappings :: ListEventSourceMappings -> TestTree
 requestListEventSourceMappings = req
     "ListEventSourceMappings"
     "fixture/ListEventSourceMappings.yaml"
+
+requestGetLayerVersionPolicy :: GetLayerVersionPolicy -> TestTree
+requestGetLayerVersionPolicy = req
+    "GetLayerVersionPolicy"
+    "fixture/GetLayerVersionPolicy.yaml"
 
 requestDeleteAlias :: DeleteAlias -> TestTree
 requestDeleteAlias = req
@@ -305,10 +484,30 @@ requestGetAccountSettings = req
     "GetAccountSettings"
     "fixture/GetAccountSettings.yaml"
 
+requestGetFunctionEventInvokeConfig :: GetFunctionEventInvokeConfig -> TestTree
+requestGetFunctionEventInvokeConfig = req
+    "GetFunctionEventInvokeConfig"
+    "fixture/GetFunctionEventInvokeConfig.yaml"
+
 requestAddPermission :: AddPermission -> TestTree
 requestAddPermission = req
     "AddPermission"
     "fixture/AddPermission.yaml"
+
+requestListLayers :: ListLayers -> TestTree
+requestListLayers = req
+    "ListLayers"
+    "fixture/ListLayers.yaml"
+
+requestListFunctionEventInvokeConfigs :: ListFunctionEventInvokeConfigs -> TestTree
+requestListFunctionEventInvokeConfigs = req
+    "ListFunctionEventInvokeConfigs"
+    "fixture/ListFunctionEventInvokeConfigs.yaml"
+
+requestListLayerVersions :: ListLayerVersions -> TestTree
+requestListLayerVersions = req
+    "ListLayerVersions"
+    "fixture/ListLayerVersions.yaml"
 
 requestTagResource :: TagResource -> TestTree
 requestTagResource = req
@@ -350,10 +549,20 @@ requestUpdateFunctionCode = req
     "UpdateFunctionCode"
     "fixture/UpdateFunctionCode.yaml"
 
+requestDeleteProvisionedConcurrencyConfig :: DeleteProvisionedConcurrencyConfig -> TestTree
+requestDeleteProvisionedConcurrencyConfig = req
+    "DeleteProvisionedConcurrencyConfig"
+    "fixture/DeleteProvisionedConcurrencyConfig.yaml"
+
 requestGetPolicy :: GetPolicy -> TestTree
 requestGetPolicy = req
     "GetPolicy"
     "fixture/GetPolicy.yaml"
+
+requestPutProvisionedConcurrencyConfig :: PutProvisionedConcurrencyConfig -> TestTree
+requestPutProvisionedConcurrencyConfig = req
+    "PutProvisionedConcurrencyConfig"
+    "fixture/PutProvisionedConcurrencyConfig.yaml"
 
 -- Responses
 
@@ -377,6 +586,13 @@ responseUpdateEventSourceMapping = res
     "fixture/UpdateEventSourceMappingResponse.proto"
     lambda
     (Proxy :: Proxy UpdateEventSourceMapping)
+
+responseGetLayerVersion :: GetLayerVersionResponse -> TestTree
+responseGetLayerVersion = res
+    "GetLayerVersionResponse"
+    "fixture/GetLayerVersionResponse.proto"
+    lambda
+    (Proxy :: Proxy GetLayerVersion)
 
 responseCreateAlias :: AliasConfiguration -> TestTree
 responseCreateAlias = res
@@ -406,12 +622,40 @@ responseRemovePermission = res
     lambda
     (Proxy :: Proxy RemovePermission)
 
+responseDeleteFunctionEventInvokeConfig :: DeleteFunctionEventInvokeConfigResponse -> TestTree
+responseDeleteFunctionEventInvokeConfig = res
+    "DeleteFunctionEventInvokeConfigResponse"
+    "fixture/DeleteFunctionEventInvokeConfigResponse.proto"
+    lambda
+    (Proxy :: Proxy DeleteFunctionEventInvokeConfig)
+
+responseUpdateFunctionEventInvokeConfig :: FunctionEventInvokeConfig -> TestTree
+responseUpdateFunctionEventInvokeConfig = res
+    "UpdateFunctionEventInvokeConfigResponse"
+    "fixture/UpdateFunctionEventInvokeConfigResponse.proto"
+    lambda
+    (Proxy :: Proxy UpdateFunctionEventInvokeConfig)
+
+responsePutFunctionEventInvokeConfig :: FunctionEventInvokeConfig -> TestTree
+responsePutFunctionEventInvokeConfig = res
+    "PutFunctionEventInvokeConfigResponse"
+    "fixture/PutFunctionEventInvokeConfigResponse.proto"
+    lambda
+    (Proxy :: Proxy PutFunctionEventInvokeConfig)
+
 responseInvoke :: InvokeResponse -> TestTree
 responseInvoke = res
     "InvokeResponse"
     "fixture/InvokeResponse.proto"
     lambda
     (Proxy :: Proxy Invoke)
+
+responseDeleteLayerVersion :: DeleteLayerVersionResponse -> TestTree
+responseDeleteLayerVersion = res
+    "DeleteLayerVersionResponse"
+    "fixture/DeleteLayerVersionResponse.proto"
+    lambda
+    (Proxy :: Proxy DeleteLayerVersion)
 
 responseGetAlias :: AliasConfiguration -> TestTree
 responseGetAlias = res
@@ -420,12 +664,33 @@ responseGetAlias = res
     lambda
     (Proxy :: Proxy GetAlias)
 
+responsePublishLayerVersion :: PublishLayerVersionResponse -> TestTree
+responsePublishLayerVersion = res
+    "PublishLayerVersionResponse"
+    "fixture/PublishLayerVersionResponse.proto"
+    lambda
+    (Proxy :: Proxy PublishLayerVersion)
+
 responseGetEventSourceMapping :: EventSourceMappingConfiguration -> TestTree
 responseGetEventSourceMapping = res
     "GetEventSourceMappingResponse"
     "fixture/GetEventSourceMappingResponse.proto"
     lambda
     (Proxy :: Proxy GetEventSourceMapping)
+
+responseAddLayerVersionPermission :: AddLayerVersionPermissionResponse -> TestTree
+responseAddLayerVersionPermission = res
+    "AddLayerVersionPermissionResponse"
+    "fixture/AddLayerVersionPermissionResponse.proto"
+    lambda
+    (Proxy :: Proxy AddLayerVersionPermission)
+
+responseListProvisionedConcurrencyConfigs :: ListProvisionedConcurrencyConfigsResponse -> TestTree
+responseListProvisionedConcurrencyConfigs = res
+    "ListProvisionedConcurrencyConfigsResponse"
+    "fixture/ListProvisionedConcurrencyConfigsResponse.proto"
+    lambda
+    (Proxy :: Proxy ListProvisionedConcurrencyConfigs)
 
 responsePutFunctionConcurrency :: Concurrency -> TestTree
 responsePutFunctionConcurrency = res
@@ -448,12 +713,40 @@ responseDeleteFunctionConcurrency = res
     lambda
     (Proxy :: Proxy DeleteFunctionConcurrency)
 
+responseGetLayerVersionByARN :: GetLayerVersionResponse -> TestTree
+responseGetLayerVersionByARN = res
+    "GetLayerVersionByARNResponse"
+    "fixture/GetLayerVersionByARNResponse.proto"
+    lambda
+    (Proxy :: Proxy GetLayerVersionByARN)
+
+responseGetFunctionConcurrency :: GetFunctionConcurrencyResponse -> TestTree
+responseGetFunctionConcurrency = res
+    "GetFunctionConcurrencyResponse"
+    "fixture/GetFunctionConcurrencyResponse.proto"
+    lambda
+    (Proxy :: Proxy GetFunctionConcurrency)
+
 responseCreateEventSourceMapping :: EventSourceMappingConfiguration -> TestTree
 responseCreateEventSourceMapping = res
     "CreateEventSourceMappingResponse"
     "fixture/CreateEventSourceMappingResponse.proto"
     lambda
     (Proxy :: Proxy CreateEventSourceMapping)
+
+responseGetProvisionedConcurrencyConfig :: GetProvisionedConcurrencyConfigResponse -> TestTree
+responseGetProvisionedConcurrencyConfig = res
+    "GetProvisionedConcurrencyConfigResponse"
+    "fixture/GetProvisionedConcurrencyConfigResponse.proto"
+    lambda
+    (Proxy :: Proxy GetProvisionedConcurrencyConfig)
+
+responseRemoveLayerVersionPermission :: RemoveLayerVersionPermissionResponse -> TestTree
+responseRemoveLayerVersionPermission = res
+    "RemoveLayerVersionPermissionResponse"
+    "fixture/RemoveLayerVersionPermissionResponse.proto"
+    lambda
+    (Proxy :: Proxy RemoveLayerVersionPermission)
 
 responseGetFunction :: GetFunctionResponse -> TestTree
 responseGetFunction = res
@@ -468,6 +761,13 @@ responseListEventSourceMappings = res
     "fixture/ListEventSourceMappingsResponse.proto"
     lambda
     (Proxy :: Proxy ListEventSourceMappings)
+
+responseGetLayerVersionPolicy :: GetLayerVersionPolicyResponse -> TestTree
+responseGetLayerVersionPolicy = res
+    "GetLayerVersionPolicyResponse"
+    "fixture/GetLayerVersionPolicyResponse.proto"
+    lambda
+    (Proxy :: Proxy GetLayerVersionPolicy)
 
 responseDeleteAlias :: DeleteAliasResponse -> TestTree
 responseDeleteAlias = res
@@ -490,12 +790,40 @@ responseGetAccountSettings = res
     lambda
     (Proxy :: Proxy GetAccountSettings)
 
+responseGetFunctionEventInvokeConfig :: FunctionEventInvokeConfig -> TestTree
+responseGetFunctionEventInvokeConfig = res
+    "GetFunctionEventInvokeConfigResponse"
+    "fixture/GetFunctionEventInvokeConfigResponse.proto"
+    lambda
+    (Proxy :: Proxy GetFunctionEventInvokeConfig)
+
 responseAddPermission :: AddPermissionResponse -> TestTree
 responseAddPermission = res
     "AddPermissionResponse"
     "fixture/AddPermissionResponse.proto"
     lambda
     (Proxy :: Proxy AddPermission)
+
+responseListLayers :: ListLayersResponse -> TestTree
+responseListLayers = res
+    "ListLayersResponse"
+    "fixture/ListLayersResponse.proto"
+    lambda
+    (Proxy :: Proxy ListLayers)
+
+responseListFunctionEventInvokeConfigs :: ListFunctionEventInvokeConfigsResponse -> TestTree
+responseListFunctionEventInvokeConfigs = res
+    "ListFunctionEventInvokeConfigsResponse"
+    "fixture/ListFunctionEventInvokeConfigsResponse.proto"
+    lambda
+    (Proxy :: Proxy ListFunctionEventInvokeConfigs)
+
+responseListLayerVersions :: ListLayerVersionsResponse -> TestTree
+responseListLayerVersions = res
+    "ListLayerVersionsResponse"
+    "fixture/ListLayerVersionsResponse.proto"
+    lambda
+    (Proxy :: Proxy ListLayerVersions)
 
 responseTagResource :: TagResourceResponse -> TestTree
 responseTagResource = res
@@ -553,9 +881,23 @@ responseUpdateFunctionCode = res
     lambda
     (Proxy :: Proxy UpdateFunctionCode)
 
+responseDeleteProvisionedConcurrencyConfig :: DeleteProvisionedConcurrencyConfigResponse -> TestTree
+responseDeleteProvisionedConcurrencyConfig = res
+    "DeleteProvisionedConcurrencyConfigResponse"
+    "fixture/DeleteProvisionedConcurrencyConfigResponse.proto"
+    lambda
+    (Proxy :: Proxy DeleteProvisionedConcurrencyConfig)
+
 responseGetPolicy :: GetPolicyResponse -> TestTree
 responseGetPolicy = res
     "GetPolicyResponse"
     "fixture/GetPolicyResponse.proto"
     lambda
     (Proxy :: Proxy GetPolicy)
+
+responsePutProvisionedConcurrencyConfig :: PutProvisionedConcurrencyConfigResponse -> TestTree
+responsePutProvisionedConcurrencyConfig = res
+    "PutProvisionedConcurrencyConfigResponse"
+    "fixture/PutProvisionedConcurrencyConfigResponse.proto"
+    lambda
+    (Proxy :: Proxy PutProvisionedConcurrencyConfig)

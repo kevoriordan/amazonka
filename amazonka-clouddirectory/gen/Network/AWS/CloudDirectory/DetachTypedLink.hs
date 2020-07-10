@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Detaches a typed link from a specified source and target object. For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- Detaches a typed link from a specified source and target object. For more information, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 --
 --
 module Network.AWS.CloudDirectory.DetachTypedLink
@@ -43,11 +43,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detachTypedLink' smart constructor.
-data DetachTypedLink = DetachTypedLink'
-  { _dtlDirectoryARN       :: !Text
-  , _dtlTypedLinkSpecifier :: !TypedLinkSpecifier
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachTypedLink = DetachTypedLink'{_dtlDirectoryARN
+                                        :: !Text,
+                                        _dtlTypedLinkSpecifier ::
+                                        !TypedLinkSpecifier}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DetachTypedLink' with the minimum fields required to make a request.
 --
@@ -60,12 +60,9 @@ detachTypedLink
     :: Text -- ^ 'dtlDirectoryARN'
     -> TypedLinkSpecifier -- ^ 'dtlTypedLinkSpecifier'
     -> DetachTypedLink
-detachTypedLink pDirectoryARN_ pTypedLinkSpecifier_ =
-  DetachTypedLink'
-    { _dtlDirectoryARN = pDirectoryARN_
-    , _dtlTypedLinkSpecifier = pTypedLinkSpecifier_
-    }
-
+detachTypedLink pDirectoryARN_ pTypedLinkSpecifier_
+  = DetachTypedLink'{_dtlDirectoryARN = pDirectoryARN_,
+                     _dtlTypedLinkSpecifier = pTypedLinkSpecifier_}
 
 -- | The Amazon Resource Name (ARN) of the directory where you want to detach the typed link.
 dtlDirectoryARN :: Lens' DetachTypedLink Text
@@ -105,16 +102,14 @@ instance ToQuery DetachTypedLink where
         toQuery = const mempty
 
 -- | /See:/ 'detachTypedLinkResponse' smart constructor.
-data DetachTypedLinkResponse =
-  DetachTypedLinkResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachTypedLinkResponse = DetachTypedLinkResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DetachTypedLinkResponse' with the minimum fields required to make a request.
 --
 detachTypedLinkResponse
     :: DetachTypedLinkResponse
 detachTypedLinkResponse = DetachTypedLinkResponse'
-
 
 instance NFData DetachTypedLinkResponse where

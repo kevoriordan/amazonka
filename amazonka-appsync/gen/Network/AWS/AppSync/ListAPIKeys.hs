@@ -21,6 +21,8 @@
 -- Lists the API keys for a given API.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AppSync.ListAPIKeys
     (
     -- * Creating a Request
@@ -43,17 +45,17 @@ module Network.AWS.AppSync.ListAPIKeys
 import Network.AWS.AppSync.Types
 import Network.AWS.AppSync.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAPIKeys' smart constructor.
-data ListAPIKeys = ListAPIKeys'
-  { _lakNextToken  :: !(Maybe Text)
-  , _lakMaxResults :: !(Maybe Nat)
-  , _lakApiId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAPIKeys = ListAPIKeys'{_lakNextToken ::
+                                !(Maybe Text),
+                                _lakMaxResults :: !(Maybe Nat),
+                                _lakApiId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAPIKeys' with the minimum fields required to make a request.
 --
@@ -67,10 +69,9 @@ data ListAPIKeys = ListAPIKeys'
 listAPIKeys
     :: Text -- ^ 'lakApiId'
     -> ListAPIKeys
-listAPIKeys pApiId_ =
-  ListAPIKeys'
-    {_lakNextToken = Nothing, _lakMaxResults = Nothing, _lakApiId = pApiId_}
-
+listAPIKeys pApiId_
+  = ListAPIKeys'{_lakNextToken = Nothing,
+                 _lakMaxResults = Nothing, _lakApiId = pApiId_}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lakNextToken :: Lens' ListAPIKeys (Maybe Text)
@@ -83,6 +84,13 @@ lakMaxResults = lens _lakMaxResults (\ s a -> s{_lakMaxResults = a}) . mapping _
 -- | The API ID.
 lakApiId :: Lens' ListAPIKeys Text
 lakApiId = lens _lakApiId (\ s a -> s{_lakApiId = a})
+
+instance AWSPager ListAPIKeys where
+        page rq rs
+          | stop (rs ^. lakrsNextToken) = Nothing
+          | stop (rs ^. lakrsApiKeys) = Nothing
+          | otherwise =
+            Just $ rq & lakNextToken .~ rs ^. lakrsNextToken
 
 instance AWSRequest ListAPIKeys where
         type Rs ListAPIKeys = ListAPIKeysResponse
@@ -116,12 +124,12 @@ instance ToQuery ListAPIKeys where
                "maxResults" =: _lakMaxResults]
 
 -- | /See:/ 'listAPIKeysResponse' smart constructor.
-data ListAPIKeysResponse = ListAPIKeysResponse'
-  { _lakrsApiKeys        :: !(Maybe [APIKey])
-  , _lakrsNextToken      :: !(Maybe Text)
-  , _lakrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAPIKeysResponse = ListAPIKeysResponse'{_lakrsApiKeys
+                                                :: !(Maybe [APIKey]),
+                                                _lakrsNextToken ::
+                                                !(Maybe Text),
+                                                _lakrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAPIKeysResponse' with the minimum fields required to make a request.
 --
@@ -135,13 +143,10 @@ data ListAPIKeysResponse = ListAPIKeysResponse'
 listAPIKeysResponse
     :: Int -- ^ 'lakrsResponseStatus'
     -> ListAPIKeysResponse
-listAPIKeysResponse pResponseStatus_ =
-  ListAPIKeysResponse'
-    { _lakrsApiKeys = Nothing
-    , _lakrsNextToken = Nothing
-    , _lakrsResponseStatus = pResponseStatus_
-    }
-
+listAPIKeysResponse pResponseStatus_
+  = ListAPIKeysResponse'{_lakrsApiKeys = Nothing,
+                         _lakrsNextToken = Nothing,
+                         _lakrsResponseStatus = pResponseStatus_}
 
 -- | The @ApiKey@ objects.
 lakrsApiKeys :: Lens' ListAPIKeysResponse [APIKey]

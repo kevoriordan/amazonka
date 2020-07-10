@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getPullRequest' smart constructor.
-newtype GetPullRequest = GetPullRequest'
-  { _gprPullRequestId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetPullRequest = GetPullRequest'{_gprPullRequestId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPullRequest' with the minimum fields required to make a request.
 --
@@ -58,9 +57,9 @@ newtype GetPullRequest = GetPullRequest'
 getPullRequest
     :: Text -- ^ 'gprPullRequestId'
     -> GetPullRequest
-getPullRequest pPullRequestId_ =
-  GetPullRequest' {_gprPullRequestId = pPullRequestId_}
-
+getPullRequest pPullRequestId_
+  = GetPullRequest'{_gprPullRequestId =
+                      pPullRequestId_}
 
 -- | The system-generated ID of the pull request. To get this ID, use 'ListPullRequests' .
 gprPullRequestId :: Lens' GetPullRequest Text
@@ -101,11 +100,12 @@ instance ToQuery GetPullRequest where
         toQuery = const mempty
 
 -- | /See:/ 'getPullRequestResponse' smart constructor.
-data GetPullRequestResponse = GetPullRequestResponse'
-  { _gprrsResponseStatus :: !Int
-  , _gprrsPullRequest    :: !PullRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPullRequestResponse = GetPullRequestResponse'{_gprrsResponseStatus
+                                                      :: !Int,
+                                                      _gprrsPullRequest ::
+                                                      !PullRequest}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetPullRequestResponse' with the minimum fields required to make a request.
 --
@@ -118,10 +118,10 @@ getPullRequestResponse
     :: Int -- ^ 'gprrsResponseStatus'
     -> PullRequest -- ^ 'gprrsPullRequest'
     -> GetPullRequestResponse
-getPullRequestResponse pResponseStatus_ pPullRequest_ =
-  GetPullRequestResponse'
-    {_gprrsResponseStatus = pResponseStatus_, _gprrsPullRequest = pPullRequest_}
-
+getPullRequestResponse pResponseStatus_ pPullRequest_
+  = GetPullRequestResponse'{_gprrsResponseStatus =
+                              pResponseStatus_,
+                            _gprrsPullRequest = pPullRequest_}
 
 -- | -- | The response status code.
 gprrsResponseStatus :: Lens' GetPullRequestResponse Int

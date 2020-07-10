@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get details of a parameter.
+-- Get details of a parameter. Don't confuse this API action with the 'GetParameter' API action.
 --
 --
 module Network.AWS.SSM.GetParameters
@@ -47,11 +47,10 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getParameters' smart constructor.
-data GetParameters = GetParameters'
-  { _gpWithDecryption :: !(Maybe Bool)
-  , _gpNames          :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetParameters = GetParameters'{_gpWithDecryption
+                                    :: !(Maybe Bool),
+                                    _gpNames :: !(List1 Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetParameters' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ data GetParameters = GetParameters'
 getParameters
     :: NonEmpty Text -- ^ 'gpNames'
     -> GetParameters
-getParameters pNames_ =
-  GetParameters' {_gpWithDecryption = Nothing, _gpNames = _List1 # pNames_}
-
+getParameters pNames_
+  = GetParameters'{_gpWithDecryption = Nothing,
+                   _gpNames = _List1 # pNames_}
 
 -- | Return decrypted secure string value. Return decrypted values for secure string parameters. This flag is ignored for String and StringList parameter types.
 gpWithDecryption :: Lens' GetParameters (Maybe Bool)
@@ -113,12 +112,13 @@ instance ToQuery GetParameters where
         toQuery = const mempty
 
 -- | /See:/ 'getParametersResponse' smart constructor.
-data GetParametersResponse = GetParametersResponse'
-  { _grsParameters        :: !(Maybe [Parameter])
-  , _grsInvalidParameters :: !(Maybe [Text])
-  , _grsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetParametersResponse = GetParametersResponse'{_grsParameters
+                                                    :: !(Maybe [Parameter]),
+                                                    _grsInvalidParameters ::
+                                                    !(Maybe [Text]),
+                                                    _grsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetParametersResponse' with the minimum fields required to make a request.
 --
@@ -126,25 +126,22 @@ data GetParametersResponse = GetParametersResponse'
 --
 -- * 'grsParameters' - A list of details for a parameter.
 --
--- * 'grsInvalidParameters' - A list of parameters that are not formatted correctly or do not run when executed.
+-- * 'grsInvalidParameters' - A list of parameters that are not formatted correctly or do not run during an execution.
 --
 -- * 'grsResponseStatus' - -- | The response status code.
 getParametersResponse
     :: Int -- ^ 'grsResponseStatus'
     -> GetParametersResponse
-getParametersResponse pResponseStatus_ =
-  GetParametersResponse'
-    { _grsParameters = Nothing
-    , _grsInvalidParameters = Nothing
-    , _grsResponseStatus = pResponseStatus_
-    }
-
+getParametersResponse pResponseStatus_
+  = GetParametersResponse'{_grsParameters = Nothing,
+                           _grsInvalidParameters = Nothing,
+                           _grsResponseStatus = pResponseStatus_}
 
 -- | A list of details for a parameter.
 grsParameters :: Lens' GetParametersResponse [Parameter]
 grsParameters = lens _grsParameters (\ s a -> s{_grsParameters = a}) . _Default . _Coerce
 
--- | A list of parameters that are not formatted correctly or do not run when executed.
+-- | A list of parameters that are not formatted correctly or do not run during an execution.
 grsInvalidParameters :: Lens' GetParametersResponse [Text]
 grsInvalidParameters = lens _grsInvalidParameters (\ s a -> s{_grsInvalidParameters = a}) . _Default . _Coerce
 

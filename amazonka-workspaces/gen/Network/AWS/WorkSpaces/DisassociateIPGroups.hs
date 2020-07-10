@@ -45,31 +45,31 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'disassociateIPGroups' smart constructor.
-data DisassociateIPGroups = DisassociateIPGroups'
-  { _digDirectoryId :: !Text
-  , _digGroupIds    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateIPGroups = DisassociateIPGroups'{_digDirectoryId
+                                                  :: !Text,
+                                                  _digGroupIds :: ![Text]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisassociateIPGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'digDirectoryId' - The ID of the directory.
+-- * 'digDirectoryId' - The identifier of the directory.
 --
--- * 'digGroupIds' - The IDs of one or more IP access control groups.
+-- * 'digGroupIds' - The identifiers of one or more IP access control groups.
 disassociateIPGroups
     :: Text -- ^ 'digDirectoryId'
     -> DisassociateIPGroups
-disassociateIPGroups pDirectoryId_ =
-  DisassociateIPGroups' {_digDirectoryId = pDirectoryId_, _digGroupIds = mempty}
+disassociateIPGroups pDirectoryId_
+  = DisassociateIPGroups'{_digDirectoryId =
+                            pDirectoryId_,
+                          _digGroupIds = mempty}
 
-
--- | The ID of the directory.
+-- | The identifier of the directory.
 digDirectoryId :: Lens' DisassociateIPGroups Text
 digDirectoryId = lens _digDirectoryId (\ s a -> s{_digDirectoryId = a})
 
--- | The IDs of one or more IP access control groups.
+-- | The identifiers of one or more IP access control groups.
 digGroupIds :: Lens' DisassociateIPGroups [Text]
 digGroupIds = lens _digGroupIds (\ s a -> s{_digGroupIds = a}) . _Coerce
 
@@ -111,10 +111,10 @@ instance ToQuery DisassociateIPGroups where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateIPGroupsResponse' smart constructor.
-newtype DisassociateIPGroupsResponse = DisassociateIPGroupsResponse'
-  { _digrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateIPGroupsResponse = DisassociateIPGroupsResponse'{_digrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DisassociateIPGroupsResponse' with the minimum fields required to make a request.
 --
@@ -124,9 +124,9 @@ newtype DisassociateIPGroupsResponse = DisassociateIPGroupsResponse'
 disassociateIPGroupsResponse
     :: Int -- ^ 'digrsResponseStatus'
     -> DisassociateIPGroupsResponse
-disassociateIPGroupsResponse pResponseStatus_ =
-  DisassociateIPGroupsResponse' {_digrsResponseStatus = pResponseStatus_}
-
+disassociateIPGroupsResponse pResponseStatus_
+  = DisassociateIPGroupsResponse'{_digrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 digrsResponseStatus :: Lens' DisassociateIPGroupsResponse Int

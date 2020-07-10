@@ -47,17 +47,18 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteApplicationOutput' smart constructor.
-data DeleteApplicationOutput = DeleteApplicationOutput'
-  { _daoApplicationName             :: !Text
-  , _daoCurrentApplicationVersionId :: !Nat
-  , _daoOutputId                    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplicationOutput = DeleteApplicationOutput'{_daoApplicationName
+                                                        :: !Text,
+                                                        _daoCurrentApplicationVersionId
+                                                        :: !Nat,
+                                                        _daoOutputId :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteApplicationOutput' with the minimum fields required to make a request.
 --
@@ -65,31 +66,31 @@ data DeleteApplicationOutput = DeleteApplicationOutput'
 --
 -- * 'daoApplicationName' - Amazon Kinesis Analytics application name.
 --
--- * 'daoCurrentApplicationVersionId' - Amazon Kinesis Analytics application version. You can use the 'DescribeApplication' operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned.
+-- * 'daoCurrentApplicationVersionId' - Amazon Kinesis Analytics application version. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned. 
 --
--- * 'daoOutputId' - The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the 'AddApplicationOutput' operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the 'DescribeApplication' operation to get the specific @OutputId@ .
+-- * 'daoOutputId' - The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html AddApplicationOutput> operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the specific @OutputId@ . 
 deleteApplicationOutput
     :: Text -- ^ 'daoApplicationName'
     -> Natural -- ^ 'daoCurrentApplicationVersionId'
     -> Text -- ^ 'daoOutputId'
     -> DeleteApplicationOutput
-deleteApplicationOutput pApplicationName_ pCurrentApplicationVersionId_ pOutputId_ =
-  DeleteApplicationOutput'
-    { _daoApplicationName = pApplicationName_
-    , _daoCurrentApplicationVersionId = _Nat # pCurrentApplicationVersionId_
-    , _daoOutputId = pOutputId_
-    }
-
+deleteApplicationOutput pApplicationName_
+  pCurrentApplicationVersionId_ pOutputId_
+  = DeleteApplicationOutput'{_daoApplicationName =
+                               pApplicationName_,
+                             _daoCurrentApplicationVersionId =
+                               _Nat # pCurrentApplicationVersionId_,
+                             _daoOutputId = pOutputId_}
 
 -- | Amazon Kinesis Analytics application name.
 daoApplicationName :: Lens' DeleteApplicationOutput Text
 daoApplicationName = lens _daoApplicationName (\ s a -> s{_daoApplicationName = a})
 
--- | Amazon Kinesis Analytics application version. You can use the 'DescribeApplication' operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned.
+-- | Amazon Kinesis Analytics application version. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned. 
 daoCurrentApplicationVersionId :: Lens' DeleteApplicationOutput Natural
 daoCurrentApplicationVersionId = lens _daoCurrentApplicationVersionId (\ s a -> s{_daoCurrentApplicationVersionId = a}) . _Nat
 
--- | The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the 'AddApplicationOutput' operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the 'DescribeApplication' operation to get the specific @OutputId@ .
+-- | The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html AddApplicationOutput> operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the specific @OutputId@ . 
 daoOutputId :: Lens' DeleteApplicationOutput Text
 daoOutputId = lens _daoOutputId (\ s a -> s{_daoOutputId = a})
 
@@ -133,15 +134,16 @@ instance ToPath DeleteApplicationOutput where
 instance ToQuery DeleteApplicationOutput where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteApplicationOutputResponse' smart constructor.
-newtype DeleteApplicationOutputResponse = DeleteApplicationOutputResponse'
-  { _daorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteApplicationOutputResponse = DeleteApplicationOutputResponse'{_daorsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteApplicationOutputResponse' with the minimum fields required to make a request.
 --
@@ -151,9 +153,9 @@ newtype DeleteApplicationOutputResponse = DeleteApplicationOutputResponse'
 deleteApplicationOutputResponse
     :: Int -- ^ 'daorsResponseStatus'
     -> DeleteApplicationOutputResponse
-deleteApplicationOutputResponse pResponseStatus_ =
-  DeleteApplicationOutputResponse' {_daorsResponseStatus = pResponseStatus_}
-
+deleteApplicationOutputResponse pResponseStatus_
+  = DeleteApplicationOutputResponse'{_daorsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 daorsResponseStatus :: Lens' DeleteApplicationOutputResponse Int

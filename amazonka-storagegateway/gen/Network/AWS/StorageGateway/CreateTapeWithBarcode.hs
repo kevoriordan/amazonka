@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape . This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.
+-- Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and cannot be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.
 --
 --
 module Network.AWS.StorageGateway.CreateTapeWithBarcode
@@ -27,6 +27,10 @@ module Network.AWS.StorageGateway.CreateTapeWithBarcode
       createTapeWithBarcode
     , CreateTapeWithBarcode
     -- * Request Lenses
+    , ctwbKMSKey
+    , ctwbKMSEncrypted
+    , ctwbPoolId
+    , ctwbTags
     , ctwbGatewayARN
     , ctwbTapeSizeInBytes
     , ctwbTapeBarcode
@@ -51,18 +55,33 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'createTapeWithBarcode' smart constructor.
-data CreateTapeWithBarcode = CreateTapeWithBarcode'
-  { _ctwbGatewayARN      :: !Text
-  , _ctwbTapeSizeInBytes :: !Integer
-  , _ctwbTapeBarcode     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTapeWithBarcode = CreateTapeWithBarcode'{_ctwbKMSKey
+                                                    :: !(Maybe Text),
+                                                    _ctwbKMSEncrypted ::
+                                                    !(Maybe Bool),
+                                                    _ctwbPoolId ::
+                                                    !(Maybe Text),
+                                                    _ctwbTags :: !(Maybe [Tag]),
+                                                    _ctwbGatewayARN :: !Text,
+                                                    _ctwbTapeSizeInBytes ::
+                                                    !Integer,
+                                                    _ctwbTapeBarcode :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateTapeWithBarcode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctwbGatewayARN' - The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the 'ListGateways' operation to return a list of gateways for your account and region.
+-- * 'ctwbKMSKey' - The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
+--
+-- * 'ctwbKMSEncrypted' - True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+--
+-- * 'ctwbPoolId' - The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+--
+-- * 'ctwbTags' - A list of up to 50 tags that can be assigned to a virtual tape that has a barcode. Each tag is a key-value pair.
+--
+-- * 'ctwbGatewayARN' - The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the 'ListGateways' operation to return a list of gateways for your account and AWS Region.
 --
 -- * 'ctwbTapeSizeInBytes' - The size, in bytes, of the virtual tape that you want to create.
 --
@@ -72,15 +91,31 @@ createTapeWithBarcode
     -> Integer -- ^ 'ctwbTapeSizeInBytes'
     -> Text -- ^ 'ctwbTapeBarcode'
     -> CreateTapeWithBarcode
-createTapeWithBarcode pGatewayARN_ pTapeSizeInBytes_ pTapeBarcode_ =
-  CreateTapeWithBarcode'
-    { _ctwbGatewayARN = pGatewayARN_
-    , _ctwbTapeSizeInBytes = pTapeSizeInBytes_
-    , _ctwbTapeBarcode = pTapeBarcode_
-    }
+createTapeWithBarcode pGatewayARN_ pTapeSizeInBytes_
+  pTapeBarcode_
+  = CreateTapeWithBarcode'{_ctwbKMSKey = Nothing,
+                           _ctwbKMSEncrypted = Nothing, _ctwbPoolId = Nothing,
+                           _ctwbTags = Nothing, _ctwbGatewayARN = pGatewayARN_,
+                           _ctwbTapeSizeInBytes = pTapeSizeInBytes_,
+                           _ctwbTapeBarcode = pTapeBarcode_}
 
+-- | The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
+ctwbKMSKey :: Lens' CreateTapeWithBarcode (Maybe Text)
+ctwbKMSKey = lens _ctwbKMSKey (\ s a -> s{_ctwbKMSKey = a})
 
--- | The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the 'ListGateways' operation to return a list of gateways for your account and region.
+-- | True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+ctwbKMSEncrypted :: Lens' CreateTapeWithBarcode (Maybe Bool)
+ctwbKMSEncrypted = lens _ctwbKMSEncrypted (\ s a -> s{_ctwbKMSEncrypted = a})
+
+-- | The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+ctwbPoolId :: Lens' CreateTapeWithBarcode (Maybe Text)
+ctwbPoolId = lens _ctwbPoolId (\ s a -> s{_ctwbPoolId = a})
+
+-- | A list of up to 50 tags that can be assigned to a virtual tape that has a barcode. Each tag is a key-value pair.
+ctwbTags :: Lens' CreateTapeWithBarcode [Tag]
+ctwbTags = lens _ctwbTags (\ s a -> s{_ctwbTags = a}) . _Default . _Coerce
+
+-- | The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the 'ListGateways' operation to return a list of gateways for your account and AWS Region.
 ctwbGatewayARN :: Lens' CreateTapeWithBarcode Text
 ctwbGatewayARN = lens _ctwbGatewayARN (\ s a -> s{_ctwbGatewayARN = a})
 
@@ -120,7 +155,11 @@ instance ToJSON CreateTapeWithBarcode where
         toJSON CreateTapeWithBarcode'{..}
           = object
               (catMaybes
-                 [Just ("GatewayARN" .= _ctwbGatewayARN),
+                 [("KMSKey" .=) <$> _ctwbKMSKey,
+                  ("KMSEncrypted" .=) <$> _ctwbKMSEncrypted,
+                  ("PoolId" .=) <$> _ctwbPoolId,
+                  ("Tags" .=) <$> _ctwbTags,
+                  Just ("GatewayARN" .= _ctwbGatewayARN),
                   Just ("TapeSizeInBytes" .= _ctwbTapeSizeInBytes),
                   Just ("TapeBarcode" .= _ctwbTapeBarcode)])
 
@@ -135,11 +174,14 @@ instance ToQuery CreateTapeWithBarcode where
 --
 --
 -- /See:/ 'createTapeWithBarcodeResponse' smart constructor.
-data CreateTapeWithBarcodeResponse = CreateTapeWithBarcodeResponse'
-  { _ctwbrsTapeARN        :: !(Maybe Text)
-  , _ctwbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTapeWithBarcodeResponse = CreateTapeWithBarcodeResponse'{_ctwbrsTapeARN
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _ctwbrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateTapeWithBarcodeResponse' with the minimum fields required to make a request.
 --
@@ -151,10 +193,10 @@ data CreateTapeWithBarcodeResponse = CreateTapeWithBarcodeResponse'
 createTapeWithBarcodeResponse
     :: Int -- ^ 'ctwbrsResponseStatus'
     -> CreateTapeWithBarcodeResponse
-createTapeWithBarcodeResponse pResponseStatus_ =
-  CreateTapeWithBarcodeResponse'
-    {_ctwbrsTapeARN = Nothing, _ctwbrsResponseStatus = pResponseStatus_}
-
+createTapeWithBarcodeResponse pResponseStatus_
+  = CreateTapeWithBarcodeResponse'{_ctwbrsTapeARN =
+                                     Nothing,
+                                   _ctwbrsResponseStatus = pResponseStatus_}
 
 -- | A unique Amazon Resource Name (ARN) that represents the virtual tape that was created.
 ctwbrsTapeARN :: Lens' CreateTapeWithBarcodeResponse (Maybe Text)

@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update an APNS VoIP channel
+-- Enables the APNs VoIP channel for an application or updates the status and settings of the APNs VoIP channel for an application.
+--
+--
 module Network.AWS.Pinpoint.UpdateAPNSVoipChannel
     (
     -- * Creating a Request
@@ -44,31 +46,32 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateAPNSVoipChannel' smart constructor.
-data UpdateAPNSVoipChannel = UpdateAPNSVoipChannel'
-  { _uavcApplicationId          :: !Text
-  , _uavcAPNSVoipChannelRequest :: !APNSVoipChannelRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAPNSVoipChannel = UpdateAPNSVoipChannel'{_uavcApplicationId
+                                                    :: !Text,
+                                                    _uavcAPNSVoipChannelRequest
+                                                    :: !APNSVoipChannelRequest}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateAPNSVoipChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uavcApplicationId' - Undocumented member.
+-- * 'uavcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'uavcAPNSVoipChannelRequest' - Undocumented member.
 updateAPNSVoipChannel
     :: Text -- ^ 'uavcApplicationId'
     -> APNSVoipChannelRequest -- ^ 'uavcAPNSVoipChannelRequest'
     -> UpdateAPNSVoipChannel
-updateAPNSVoipChannel pApplicationId_ pAPNSVoipChannelRequest_ =
-  UpdateAPNSVoipChannel'
-    { _uavcApplicationId = pApplicationId_
-    , _uavcAPNSVoipChannelRequest = pAPNSVoipChannelRequest_
-    }
+updateAPNSVoipChannel pApplicationId_
+  pAPNSVoipChannelRequest_
+  = UpdateAPNSVoipChannel'{_uavcApplicationId =
+                             pApplicationId_,
+                           _uavcAPNSVoipChannelRequest =
+                             pAPNSVoipChannelRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 uavcApplicationId :: Lens' UpdateAPNSVoipChannel Text
 uavcApplicationId = lens _uavcApplicationId (\ s a -> s{_uavcApplicationId = a})
 
@@ -115,11 +118,13 @@ instance ToQuery UpdateAPNSVoipChannel where
         toQuery = const mempty
 
 -- | /See:/ 'updateAPNSVoipChannelResponse' smart constructor.
-data UpdateAPNSVoipChannelResponse = UpdateAPNSVoipChannelResponse'
-  { _uavcrsResponseStatus          :: !Int
-  , _uavcrsAPNSVoipChannelResponse :: !APNSVoipChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAPNSVoipChannelResponse = UpdateAPNSVoipChannelResponse'{_uavcrsResponseStatus
+                                                                    :: !Int,
+                                                                    _uavcrsAPNSVoipChannelResponse
+                                                                    ::
+                                                                    !APNSVoipChannelResponse}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'UpdateAPNSVoipChannelResponse' with the minimum fields required to make a request.
 --
@@ -132,12 +137,12 @@ updateAPNSVoipChannelResponse
     :: Int -- ^ 'uavcrsResponseStatus'
     -> APNSVoipChannelResponse -- ^ 'uavcrsAPNSVoipChannelResponse'
     -> UpdateAPNSVoipChannelResponse
-updateAPNSVoipChannelResponse pResponseStatus_ pAPNSVoipChannelResponse_ =
-  UpdateAPNSVoipChannelResponse'
-    { _uavcrsResponseStatus = pResponseStatus_
-    , _uavcrsAPNSVoipChannelResponse = pAPNSVoipChannelResponse_
-    }
-
+updateAPNSVoipChannelResponse pResponseStatus_
+  pAPNSVoipChannelResponse_
+  = UpdateAPNSVoipChannelResponse'{_uavcrsResponseStatus
+                                     = pResponseStatus_,
+                                   _uavcrsAPNSVoipChannelResponse =
+                                     pAPNSVoipChannelResponse_}
 
 -- | -- | The response status code.
 uavcrsResponseStatus :: Lens' UpdateAPNSVoipChannelResponse Int

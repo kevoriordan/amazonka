@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the password policy for the AWS account. For more information about using a password policy, go to <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html Managing an IAM Password Policy> .
+-- Retrieves the password policy for the AWS account. For more information about using a password policy, go to <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html Managing an IAM Password Policy> .
 --
 --
 module Network.AWS.IAM.GetAccountPasswordPolicy
@@ -43,17 +43,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAccountPasswordPolicy' smart constructor.
-data GetAccountPasswordPolicy =
-  GetAccountPasswordPolicy'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountPasswordPolicy = GetAccountPasswordPolicy'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetAccountPasswordPolicy' with the minimum fields required to make a request.
 --
 getAccountPasswordPolicy
     :: GetAccountPasswordPolicy
 getAccountPasswordPolicy = GetAccountPasswordPolicy'
-
 
 instance AWSRequest GetAccountPasswordPolicy where
         type Rs GetAccountPasswordPolicy =
@@ -83,16 +81,19 @@ instance ToQuery GetAccountPasswordPolicy where
                     ("GetAccountPasswordPolicy" :: ByteString),
                   "Version" =: ("2010-05-08" :: ByteString)])
 
--- | Contains the response to a successful 'GetAccountPasswordPolicy' request.
+-- | Contains the response to a successful 'GetAccountPasswordPolicy' request. 
 --
 --
 --
 -- /See:/ 'getAccountPasswordPolicyResponse' smart constructor.
-data GetAccountPasswordPolicyResponse = GetAccountPasswordPolicyResponse'
-  { _gapprsResponseStatus :: !Int
-  , _gapprsPasswordPolicy :: !PasswordPolicy
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountPasswordPolicyResponse = GetAccountPasswordPolicyResponse'{_gapprsResponseStatus
+                                                                          ::
+                                                                          !Int,
+                                                                          _gapprsPasswordPolicy
+                                                                          ::
+                                                                          !PasswordPolicy}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetAccountPasswordPolicyResponse' with the minimum fields required to make a request.
 --
@@ -105,12 +106,11 @@ getAccountPasswordPolicyResponse
     :: Int -- ^ 'gapprsResponseStatus'
     -> PasswordPolicy -- ^ 'gapprsPasswordPolicy'
     -> GetAccountPasswordPolicyResponse
-getAccountPasswordPolicyResponse pResponseStatus_ pPasswordPolicy_ =
-  GetAccountPasswordPolicyResponse'
-    { _gapprsResponseStatus = pResponseStatus_
-    , _gapprsPasswordPolicy = pPasswordPolicy_
-    }
-
+getAccountPasswordPolicyResponse pResponseStatus_
+  pPasswordPolicy_
+  = GetAccountPasswordPolicyResponse'{_gapprsResponseStatus
+                                        = pResponseStatus_,
+                                      _gapprsPasswordPolicy = pPasswordPolicy_}
 
 -- | -- | The response status code.
 gapprsResponseStatus :: Lens' GetAccountPasswordPolicyResponse Int

@@ -50,17 +50,22 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeReplicationInstances' smart constructor.
-data DescribeReplicationInstances = DescribeReplicationInstances'
-  { _driFilters    :: !(Maybe [Filter])
-  , _driMarker     :: !(Maybe Text)
-  , _driMaxRecords :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationInstances = DescribeReplicationInstances'{_driFilters
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Filter]),
+                                                                  _driMarker ::
+                                                                  !(Maybe Text),
+                                                                  _driMaxRecords
+                                                                  ::
+                                                                  !(Maybe Int)}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeReplicationInstances' with the minimum fields required to make a request.
 --
@@ -68,21 +73,22 @@ data DescribeReplicationInstances = DescribeReplicationInstances'
 --
 -- * 'driFilters' - Filters applied to the describe action. Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version
 --
--- * 'driMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'driMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
 -- * 'driMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
 describeReplicationInstances
     :: DescribeReplicationInstances
-describeReplicationInstances =
-  DescribeReplicationInstances'
-    {_driFilters = Nothing, _driMarker = Nothing, _driMaxRecords = Nothing}
-
+describeReplicationInstances
+  = DescribeReplicationInstances'{_driFilters =
+                                    Nothing,
+                                  _driMarker = Nothing,
+                                  _driMaxRecords = Nothing}
 
 -- | Filters applied to the describe action. Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version
 driFilters :: Lens' DescribeReplicationInstances [Filter]
 driFilters = lens _driFilters (\ s a -> s{_driFilters = a}) . _Default . _Coerce
 
--- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 driMarker :: Lens' DescribeReplicationInstances (Maybe Text)
 driMarker = lens _driMarker (\ s a -> s{_driMarker = a})
 
@@ -138,23 +144,30 @@ instance ToPath DescribeReplicationInstances where
 instance ToQuery DescribeReplicationInstances where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeReplicationInstancesResponse' smart constructor.
-data DescribeReplicationInstancesResponse = DescribeReplicationInstancesResponse'
-  { _drisrsMarker               :: !(Maybe Text)
-  , _drisrsReplicationInstances :: !(Maybe [ReplicationInstance])
-  , _drisrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationInstancesResponse = DescribeReplicationInstancesResponse'{_drisrsMarker
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _drisrsReplicationInstances
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [ReplicationInstance]),
+                                                                                  _drisrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeReplicationInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drisrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'drisrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
 -- * 'drisrsReplicationInstances' - The replication instances described.
 --
@@ -162,15 +175,14 @@ data DescribeReplicationInstancesResponse = DescribeReplicationInstancesResponse
 describeReplicationInstancesResponse
     :: Int -- ^ 'drisrsResponseStatus'
     -> DescribeReplicationInstancesResponse
-describeReplicationInstancesResponse pResponseStatus_ =
-  DescribeReplicationInstancesResponse'
-    { _drisrsMarker = Nothing
-    , _drisrsReplicationInstances = Nothing
-    , _drisrsResponseStatus = pResponseStatus_
-    }
+describeReplicationInstancesResponse pResponseStatus_
+  = DescribeReplicationInstancesResponse'{_drisrsMarker
+                                            = Nothing,
+                                          _drisrsReplicationInstances = Nothing,
+                                          _drisrsResponseStatus =
+                                            pResponseStatus_}
 
-
--- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 drisrsMarker :: Lens' DescribeReplicationInstancesResponse (Maybe Text)
 drisrsMarker = lens _drisrsMarker (\ s a -> s{_drisrsMarker = a})
 

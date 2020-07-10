@@ -32,6 +32,7 @@ module Network.AWS.Greengrass.CreateGroupVersion
     , cgvDeviceDefinitionVersionARN
     , cgvFunctionDefinitionVersionARN
     , cgvLoggerDefinitionVersionARN
+    , cgvConnectorDefinitionVersionARN
     , cgvGroupId
 
     -- * Destructuring the Response
@@ -53,17 +54,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createGroupVersion' smart constructor.
-data CreateGroupVersion = CreateGroupVersion'
-  { _cgvAmznClientToken                  :: !(Maybe Text)
-  , _cgvResourceDefinitionVersionARN     :: !(Maybe Text)
-  , _cgvSubscriptionDefinitionVersionARN :: !(Maybe Text)
-  , _cgvCoreDefinitionVersionARN         :: !(Maybe Text)
-  , _cgvDeviceDefinitionVersionARN       :: !(Maybe Text)
-  , _cgvFunctionDefinitionVersionARN     :: !(Maybe Text)
-  , _cgvLoggerDefinitionVersionARN       :: !(Maybe Text)
-  , _cgvGroupId                          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGroupVersion = CreateGroupVersion'{_cgvAmznClientToken
+                                              :: !(Maybe Text),
+                                              _cgvResourceDefinitionVersionARN
+                                              :: !(Maybe Text),
+                                              _cgvSubscriptionDefinitionVersionARN
+                                              :: !(Maybe Text),
+                                              _cgvCoreDefinitionVersionARN ::
+                                              !(Maybe Text),
+                                              _cgvDeviceDefinitionVersionARN ::
+                                              !(Maybe Text),
+                                              _cgvFunctionDefinitionVersionARN
+                                              :: !(Maybe Text),
+                                              _cgvLoggerDefinitionVersionARN ::
+                                              !(Maybe Text),
+                                              _cgvConnectorDefinitionVersionARN
+                                              :: !(Maybe Text),
+                                              _cgvGroupId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateGroupVersion' with the minimum fields required to make a request.
 --
@@ -71,7 +79,7 @@ data CreateGroupVersion = CreateGroupVersion'
 --
 -- * 'cgvAmznClientToken' - A client token used to correlate requests and responses.
 --
--- * 'cgvResourceDefinitionVersionARN' - The resource definition version ARN for this group.
+-- * 'cgvResourceDefinitionVersionARN' - The ARN of the resource definition version for this group.
 --
 -- * 'cgvSubscriptionDefinitionVersionARN' - The ARN of the subscription definition version for this group.
 --
@@ -83,28 +91,28 @@ data CreateGroupVersion = CreateGroupVersion'
 --
 -- * 'cgvLoggerDefinitionVersionARN' - The ARN of the logger definition version for this group.
 --
--- * 'cgvGroupId' - The ID of the AWS Greengrass group.
+-- * 'cgvConnectorDefinitionVersionARN' - The ARN of the connector definition version for this group.
+--
+-- * 'cgvGroupId' - The ID of the Greengrass group.
 createGroupVersion
     :: Text -- ^ 'cgvGroupId'
     -> CreateGroupVersion
-createGroupVersion pGroupId_ =
-  CreateGroupVersion'
-    { _cgvAmznClientToken = Nothing
-    , _cgvResourceDefinitionVersionARN = Nothing
-    , _cgvSubscriptionDefinitionVersionARN = Nothing
-    , _cgvCoreDefinitionVersionARN = Nothing
-    , _cgvDeviceDefinitionVersionARN = Nothing
-    , _cgvFunctionDefinitionVersionARN = Nothing
-    , _cgvLoggerDefinitionVersionARN = Nothing
-    , _cgvGroupId = pGroupId_
-    }
-
+createGroupVersion pGroupId_
+  = CreateGroupVersion'{_cgvAmznClientToken = Nothing,
+                        _cgvResourceDefinitionVersionARN = Nothing,
+                        _cgvSubscriptionDefinitionVersionARN = Nothing,
+                        _cgvCoreDefinitionVersionARN = Nothing,
+                        _cgvDeviceDefinitionVersionARN = Nothing,
+                        _cgvFunctionDefinitionVersionARN = Nothing,
+                        _cgvLoggerDefinitionVersionARN = Nothing,
+                        _cgvConnectorDefinitionVersionARN = Nothing,
+                        _cgvGroupId = pGroupId_}
 
 -- | A client token used to correlate requests and responses.
 cgvAmznClientToken :: Lens' CreateGroupVersion (Maybe Text)
 cgvAmznClientToken = lens _cgvAmznClientToken (\ s a -> s{_cgvAmznClientToken = a})
 
--- | The resource definition version ARN for this group.
+-- | The ARN of the resource definition version for this group.
 cgvResourceDefinitionVersionARN :: Lens' CreateGroupVersion (Maybe Text)
 cgvResourceDefinitionVersionARN = lens _cgvResourceDefinitionVersionARN (\ s a -> s{_cgvResourceDefinitionVersionARN = a})
 
@@ -128,7 +136,11 @@ cgvFunctionDefinitionVersionARN = lens _cgvFunctionDefinitionVersionARN (\ s a -
 cgvLoggerDefinitionVersionARN :: Lens' CreateGroupVersion (Maybe Text)
 cgvLoggerDefinitionVersionARN = lens _cgvLoggerDefinitionVersionARN (\ s a -> s{_cgvLoggerDefinitionVersionARN = a})
 
--- | The ID of the AWS Greengrass group.
+-- | The ARN of the connector definition version for this group.
+cgvConnectorDefinitionVersionARN :: Lens' CreateGroupVersion (Maybe Text)
+cgvConnectorDefinitionVersionARN = lens _cgvConnectorDefinitionVersionARN (\ s a -> s{_cgvConnectorDefinitionVersionARN = a})
+
+-- | The ID of the Greengrass group.
 cgvGroupId :: Lens' CreateGroupVersion Text
 cgvGroupId = lens _cgvGroupId (\ s a -> s{_cgvGroupId = a})
 
@@ -171,7 +183,9 @@ instance ToJSON CreateGroupVersion where
                   ("FunctionDefinitionVersionArn" .=) <$>
                     _cgvFunctionDefinitionVersionARN,
                   ("LoggerDefinitionVersionArn" .=) <$>
-                    _cgvLoggerDefinitionVersionARN])
+                    _cgvLoggerDefinitionVersionARN,
+                  ("ConnectorDefinitionVersionArn" .=) <$>
+                    _cgvConnectorDefinitionVersionARN])
 
 instance ToPath CreateGroupVersion where
         toPath CreateGroupVersion'{..}
@@ -183,14 +197,18 @@ instance ToQuery CreateGroupVersion where
         toQuery = const mempty
 
 -- | /See:/ 'createGroupVersionResponse' smart constructor.
-data CreateGroupVersionResponse = CreateGroupVersionResponse'
-  { _cgvrsARN               :: !(Maybe Text)
-  , _cgvrsCreationTimestamp :: !(Maybe Text)
-  , _cgvrsVersion           :: !(Maybe Text)
-  , _cgvrsId                :: !(Maybe Text)
-  , _cgvrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGroupVersionResponse = CreateGroupVersionResponse'{_cgvrsARN
+                                                              :: !(Maybe Text),
+                                                              _cgvrsCreationTimestamp
+                                                              :: !(Maybe Text),
+                                                              _cgvrsVersion ::
+                                                              !(Maybe Text),
+                                                              _cgvrsId ::
+                                                              !(Maybe Text),
+                                                              _cgvrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateGroupVersionResponse' with the minimum fields required to make a request.
 --
@@ -200,23 +218,19 @@ data CreateGroupVersionResponse = CreateGroupVersionResponse'
 --
 -- * 'cgvrsCreationTimestamp' - The time, in milliseconds since the epoch, when the version was created.
 --
--- * 'cgvrsVersion' - The unique ID of the version.
+-- * 'cgvrsVersion' - The ID of the version.
 --
--- * 'cgvrsId' - The ID of the version.
+-- * 'cgvrsId' - The ID of the parent definition that the version is associated with.
 --
 -- * 'cgvrsResponseStatus' - -- | The response status code.
 createGroupVersionResponse
     :: Int -- ^ 'cgvrsResponseStatus'
     -> CreateGroupVersionResponse
-createGroupVersionResponse pResponseStatus_ =
-  CreateGroupVersionResponse'
-    { _cgvrsARN = Nothing
-    , _cgvrsCreationTimestamp = Nothing
-    , _cgvrsVersion = Nothing
-    , _cgvrsId = Nothing
-    , _cgvrsResponseStatus = pResponseStatus_
-    }
-
+createGroupVersionResponse pResponseStatus_
+  = CreateGroupVersionResponse'{_cgvrsARN = Nothing,
+                                _cgvrsCreationTimestamp = Nothing,
+                                _cgvrsVersion = Nothing, _cgvrsId = Nothing,
+                                _cgvrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the version.
 cgvrsARN :: Lens' CreateGroupVersionResponse (Maybe Text)
@@ -226,11 +240,11 @@ cgvrsARN = lens _cgvrsARN (\ s a -> s{_cgvrsARN = a})
 cgvrsCreationTimestamp :: Lens' CreateGroupVersionResponse (Maybe Text)
 cgvrsCreationTimestamp = lens _cgvrsCreationTimestamp (\ s a -> s{_cgvrsCreationTimestamp = a})
 
--- | The unique ID of the version.
+-- | The ID of the version.
 cgvrsVersion :: Lens' CreateGroupVersionResponse (Maybe Text)
 cgvrsVersion = lens _cgvrsVersion (\ s a -> s{_cgvrsVersion = a})
 
--- | The ID of the version.
+-- | The ID of the parent definition that the version is associated with.
 cgvrsId :: Lens' CreateGroupVersionResponse (Maybe Text)
 cgvrsId = lens _cgvrsId (\ s a -> s{_cgvrsId = a})
 

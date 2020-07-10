@@ -48,29 +48,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDeploymentStatus' smart constructor.
-data GetDeploymentStatus = GetDeploymentStatus'
-  { _gdsGroupId      :: !Text
-  , _gdsDeploymentId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeploymentStatus = GetDeploymentStatus'{_gdsGroupId
+                                                :: !Text,
+                                                _gdsDeploymentId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDeploymentStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdsGroupId' - The ID of the AWS Greengrass group.
+-- * 'gdsGroupId' - The ID of the Greengrass group.
 --
 -- * 'gdsDeploymentId' - The ID of the deployment.
 getDeploymentStatus
     :: Text -- ^ 'gdsGroupId'
     -> Text -- ^ 'gdsDeploymentId'
     -> GetDeploymentStatus
-getDeploymentStatus pGroupId_ pDeploymentId_ =
-  GetDeploymentStatus'
-    {_gdsGroupId = pGroupId_, _gdsDeploymentId = pDeploymentId_}
+getDeploymentStatus pGroupId_ pDeploymentId_
+  = GetDeploymentStatus'{_gdsGroupId = pGroupId_,
+                         _gdsDeploymentId = pDeploymentId_}
 
-
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 gdsGroupId :: Lens' GetDeploymentStatus Text
 gdsGroupId = lens _gdsGroupId (\ s a -> s{_gdsGroupId = a})
 
@@ -114,15 +112,27 @@ instance ToQuery GetDeploymentStatus where
         toQuery = const mempty
 
 -- | /See:/ 'getDeploymentStatusResponse' smart constructor.
-data GetDeploymentStatusResponse = GetDeploymentStatusResponse'
-  { _gdsrsDeploymentType   :: !(Maybe DeploymentType)
-  , _gdsrsErrorDetails     :: !(Maybe [ErrorDetail])
-  , _gdsrsDeploymentStatus :: !(Maybe Text)
-  , _gdsrsUpdatedAt        :: !(Maybe Text)
-  , _gdsrsErrorMessage     :: !(Maybe Text)
-  , _gdsrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeploymentStatusResponse = GetDeploymentStatusResponse'{_gdsrsDeploymentType
+                                                                ::
+                                                                !(Maybe
+                                                                    DeploymentType),
+                                                                _gdsrsErrorDetails
+                                                                ::
+                                                                !(Maybe
+                                                                    [ErrorDetail]),
+                                                                _gdsrsDeploymentStatus
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gdsrsUpdatedAt
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gdsrsErrorMessage
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gdsrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetDeploymentStatusResponse' with the minimum fields required to make a request.
 --
@@ -132,7 +142,7 @@ data GetDeploymentStatusResponse = GetDeploymentStatusResponse'
 --
 -- * 'gdsrsErrorDetails' - Error details
 --
--- * 'gdsrsDeploymentStatus' - The status of the deployment.
+-- * 'gdsrsDeploymentStatus' - The status of the deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
 --
 -- * 'gdsrsUpdatedAt' - The time, in milliseconds since the epoch, when the deployment status was updated.
 --
@@ -142,16 +152,14 @@ data GetDeploymentStatusResponse = GetDeploymentStatusResponse'
 getDeploymentStatusResponse
     :: Int -- ^ 'gdsrsResponseStatus'
     -> GetDeploymentStatusResponse
-getDeploymentStatusResponse pResponseStatus_ =
-  GetDeploymentStatusResponse'
-    { _gdsrsDeploymentType = Nothing
-    , _gdsrsErrorDetails = Nothing
-    , _gdsrsDeploymentStatus = Nothing
-    , _gdsrsUpdatedAt = Nothing
-    , _gdsrsErrorMessage = Nothing
-    , _gdsrsResponseStatus = pResponseStatus_
-    }
-
+getDeploymentStatusResponse pResponseStatus_
+  = GetDeploymentStatusResponse'{_gdsrsDeploymentType =
+                                   Nothing,
+                                 _gdsrsErrorDetails = Nothing,
+                                 _gdsrsDeploymentStatus = Nothing,
+                                 _gdsrsUpdatedAt = Nothing,
+                                 _gdsrsErrorMessage = Nothing,
+                                 _gdsrsResponseStatus = pResponseStatus_}
 
 -- | The type of the deployment.
 gdsrsDeploymentType :: Lens' GetDeploymentStatusResponse (Maybe DeploymentType)
@@ -161,7 +169,7 @@ gdsrsDeploymentType = lens _gdsrsDeploymentType (\ s a -> s{_gdsrsDeploymentType
 gdsrsErrorDetails :: Lens' GetDeploymentStatusResponse [ErrorDetail]
 gdsrsErrorDetails = lens _gdsrsErrorDetails (\ s a -> s{_gdsrsErrorDetails = a}) . _Default . _Coerce
 
--- | The status of the deployment.
+-- | The status of the deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
 gdsrsDeploymentStatus :: Lens' GetDeploymentStatusResponse (Maybe Text)
 gdsrsDeploymentStatus = lens _gdsrsDeploymentStatus (\ s a -> s{_gdsrsDeploymentStatus = a})
 

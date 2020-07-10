@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds one or more tags to a specified resource.
+-- Adds tags to a cluster.
 --
 --
--- A resource can have up to 10 tags. If you try to create more than 10 tags for a resource, you will receive an error and the attempt will fail.
+-- A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.
 --
 -- If you specify a key that already exists for the resource, the value for that key will be updated with the new value.
 --
@@ -46,36 +46,35 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the output from the @CreateTags@ action.
+-- | Contains the output from the @CreateTags@ action. 
 --
 --
 --
 -- /See:/ 'createTags' smart constructor.
-data CreateTags = CreateTags'
-  { _ctResourceName :: !Text
-  , _ctTags         :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTags = CreateTags'{_ctResourceName ::
+                              !Text,
+                              _ctTags :: ![Tag]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctResourceName' - The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, @arn:aws:redshift:us-east-1:123456789:cluster:t1@ .
+-- * 'ctResourceName' - The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, @arn:aws:redshift:us-east-2:123456789:cluster:t1@ . 
 --
--- * 'ctTags' - One or more name/value pairs to add as tags to the specified resource. Each tag name is passed in with the parameter @Key@ and the corresponding value is passed in with the parameter @Value@ . The @Key@ and @Value@ parameters are separated by a comma (,). Separate multiple tags with a space. For example, @--tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0"@ .
+-- * 'ctTags' - One or more name/value pairs to add as tags to the specified resource. Each tag name is passed in with the parameter @Key@ and the corresponding value is passed in with the parameter @Value@ . The @Key@ and @Value@ parameters are separated by a comma (,). Separate multiple tags with a space. For example, @--tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0"@ . 
 createTags
     :: Text -- ^ 'ctResourceName'
     -> CreateTags
-createTags pResourceName_ =
-  CreateTags' {_ctResourceName = pResourceName_, _ctTags = mempty}
+createTags pResourceName_
+  = CreateTags'{_ctResourceName = pResourceName_,
+                _ctTags = mempty}
 
-
--- | The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, @arn:aws:redshift:us-east-1:123456789:cluster:t1@ .
+-- | The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, @arn:aws:redshift:us-east-2:123456789:cluster:t1@ . 
 ctResourceName :: Lens' CreateTags Text
 ctResourceName = lens _ctResourceName (\ s a -> s{_ctResourceName = a})
 
--- | One or more name/value pairs to add as tags to the specified resource. Each tag name is passed in with the parameter @Key@ and the corresponding value is passed in with the parameter @Value@ . The @Key@ and @Value@ parameters are separated by a comma (,). Separate multiple tags with a space. For example, @--tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0"@ .
+-- | One or more name/value pairs to add as tags to the specified resource. Each tag name is passed in with the parameter @Key@ and the corresponding value is passed in with the parameter @Value@ . The @Key@ and @Value@ parameters are separated by a comma (,). Separate multiple tags with a space. For example, @--tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0"@ . 
 ctTags :: Lens' CreateTags [Tag]
 ctTags = lens _ctTags (\ s a -> s{_ctTags = a}) . _Coerce
 
@@ -103,16 +102,13 @@ instance ToQuery CreateTags where
                "Tags" =: toQueryList "Tag" _ctTags]
 
 -- | /See:/ 'createTagsResponse' smart constructor.
-data CreateTagsResponse =
-  CreateTagsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTagsResponse = CreateTagsResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTagsResponse' with the minimum fields required to make a request.
 --
 createTagsResponse
     :: CreateTagsResponse
 createTagsResponse = CreateTagsResponse'
-
 
 instance NFData CreateTagsResponse where

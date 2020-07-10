@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @CreateAdditionalAssignmentsForHIT@ operation increases the maximum number of assignments of an existing HIT.
+-- The @CreateAdditionalAssignmentsForHIT@ operation increases the maximum number of assignments of an existing HIT. 
 --
 --
 -- To extend the maximum number of assignments, specify the number of additional assignments.
@@ -48,18 +48,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createAdditionalAssignmentsForHIT' smart constructor.
-data CreateAdditionalAssignmentsForHIT = CreateAdditionalAssignmentsForHIT'
-  { _caafhitUniqueRequestToken            :: !(Maybe Text)
-  , _caafhitHITId                         :: !Text
-  , _caafhitNumberOfAdditionalAssignments :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAdditionalAssignmentsForHIT = CreateAdditionalAssignmentsForHIT'{_caafhitUniqueRequestToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _caafhitHITId
+                                                                            ::
+                                                                            !Text,
+                                                                            _caafhitNumberOfAdditionalAssignments
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'CreateAdditionalAssignmentsForHIT' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'caafhitUniqueRequestToken' - A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the extend HIT already exists in the system from a previous call using the same @UniqueRequestToken@ , subsequent calls will return an error with a message containing the request ID.
+-- * 'caafhitUniqueRequestToken' - A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the extend HIT already exists in the system from a previous call using the same @UniqueRequestToken@ , subsequent calls will return an error with a message containing the request ID. 
 --
 -- * 'caafhitHITId' - The ID of the HIT to extend.
 --
@@ -68,15 +74,15 @@ createAdditionalAssignmentsForHIT
     :: Text -- ^ 'caafhitHITId'
     -> Int -- ^ 'caafhitNumberOfAdditionalAssignments'
     -> CreateAdditionalAssignmentsForHIT
-createAdditionalAssignmentsForHIT pHITId_ pNumberOfAdditionalAssignments_ =
-  CreateAdditionalAssignmentsForHIT'
-    { _caafhitUniqueRequestToken = Nothing
-    , _caafhitHITId = pHITId_
-    , _caafhitNumberOfAdditionalAssignments = pNumberOfAdditionalAssignments_
-    }
+createAdditionalAssignmentsForHIT pHITId_
+  pNumberOfAdditionalAssignments_
+  = CreateAdditionalAssignmentsForHIT'{_caafhitUniqueRequestToken
+                                         = Nothing,
+                                       _caafhitHITId = pHITId_,
+                                       _caafhitNumberOfAdditionalAssignments =
+                                         pNumberOfAdditionalAssignments_}
 
-
--- | A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the extend HIT already exists in the system from a previous call using the same @UniqueRequestToken@ , subsequent calls will return an error with a message containing the request ID.
+-- | A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the extend HIT already exists in the system from a previous call using the same @UniqueRequestToken@ , subsequent calls will return an error with a message containing the request ID. 
 caafhitUniqueRequestToken :: Lens' CreateAdditionalAssignmentsForHIT (Maybe Text)
 caafhitUniqueRequestToken = lens _caafhitUniqueRequestToken (\ s a -> s{_caafhitUniqueRequestToken = a})
 
@@ -137,10 +143,12 @@ instance ToQuery CreateAdditionalAssignmentsForHIT
         toQuery = const mempty
 
 -- | /See:/ 'createAdditionalAssignmentsForHITResponse' smart constructor.
-newtype CreateAdditionalAssignmentsForHITResponse = CreateAdditionalAssignmentsForHITResponse'
-  { _caafhitrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateAdditionalAssignmentsForHITResponse = CreateAdditionalAssignmentsForHITResponse'{_caafhitrsResponseStatus
+                                                                                               ::
+                                                                                               Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'CreateAdditionalAssignmentsForHITResponse' with the minimum fields required to make a request.
 --
@@ -150,10 +158,10 @@ newtype CreateAdditionalAssignmentsForHITResponse = CreateAdditionalAssignmentsF
 createAdditionalAssignmentsForHITResponse
     :: Int -- ^ 'caafhitrsResponseStatus'
     -> CreateAdditionalAssignmentsForHITResponse
-createAdditionalAssignmentsForHITResponse pResponseStatus_ =
-  CreateAdditionalAssignmentsForHITResponse'
-    {_caafhitrsResponseStatus = pResponseStatus_}
-
+createAdditionalAssignmentsForHITResponse
+  pResponseStatus_
+  = CreateAdditionalAssignmentsForHITResponse'{_caafhitrsResponseStatus
+                                                 = pResponseStatus_}
 
 -- | -- | The response status code.
 caafhitrsResponseStatus :: Lens' CreateAdditionalAssignmentsForHITResponse Int

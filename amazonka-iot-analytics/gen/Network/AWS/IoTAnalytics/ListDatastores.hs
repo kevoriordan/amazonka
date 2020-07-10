@@ -21,6 +21,8 @@
 -- Retrieves a list of data stores.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoTAnalytics.ListDatastores
     (
     -- * Creating a Request
@@ -42,16 +44,16 @@ module Network.AWS.IoTAnalytics.ListDatastores
 import Network.AWS.IoTAnalytics.Types
 import Network.AWS.IoTAnalytics.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDatastores' smart constructor.
-data ListDatastores = ListDatastores'
-  { _ldNextToken  :: !(Maybe Text)
-  , _ldMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDatastores = ListDatastores'{_ldNextToken ::
+                                      !(Maybe Text),
+                                      _ldMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDatastores' with the minimum fields required to make a request.
 --
@@ -62,9 +64,9 @@ data ListDatastores = ListDatastores'
 -- * 'ldMaxResults' - The maximum number of results to return in this request. The default value is 100.
 listDatastores
     :: ListDatastores
-listDatastores =
-  ListDatastores' {_ldNextToken = Nothing, _ldMaxResults = Nothing}
-
+listDatastores
+  = ListDatastores'{_ldNextToken = Nothing,
+                    _ldMaxResults = Nothing}
 
 -- | The token for the next set of results.
 ldNextToken :: Lens' ListDatastores (Maybe Text)
@@ -73,6 +75,13 @@ ldNextToken = lens _ldNextToken (\ s a -> s{_ldNextToken = a})
 -- | The maximum number of results to return in this request. The default value is 100.
 ldMaxResults :: Lens' ListDatastores (Maybe Natural)
 ldMaxResults = lens _ldMaxResults (\ s a -> s{_ldMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListDatastores where
+        page rq rs
+          | stop (rs ^. ldrsNextToken) = Nothing
+          | stop (rs ^. ldrsDatastoreSummaries) = Nothing
+          | otherwise =
+            Just $ rq & ldNextToken .~ rs ^. ldrsNextToken
 
 instance AWSRequest ListDatastores where
         type Rs ListDatastores = ListDatastoresResponse
@@ -102,12 +111,15 @@ instance ToQuery ListDatastores where
                "maxResults" =: _ldMaxResults]
 
 -- | /See:/ 'listDatastoresResponse' smart constructor.
-data ListDatastoresResponse = ListDatastoresResponse'
-  { _ldrsNextToken          :: !(Maybe Text)
-  , _ldrsDatastoreSummaries :: !(Maybe [DatastoreSummary])
-  , _ldrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDatastoresResponse = ListDatastoresResponse'{_ldrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _ldrsDatastoreSummaries ::
+                                                      !(Maybe
+                                                          [DatastoreSummary]),
+                                                      _ldrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListDatastoresResponse' with the minimum fields required to make a request.
 --
@@ -121,13 +133,10 @@ data ListDatastoresResponse = ListDatastoresResponse'
 listDatastoresResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDatastoresResponse
-listDatastoresResponse pResponseStatus_ =
-  ListDatastoresResponse'
-    { _ldrsNextToken = Nothing
-    , _ldrsDatastoreSummaries = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    }
-
+listDatastoresResponse pResponseStatus_
+  = ListDatastoresResponse'{_ldrsNextToken = Nothing,
+                            _ldrsDatastoreSummaries = Nothing,
+                            _ldrsResponseStatus = pResponseStatus_}
 
 -- | The token to retrieve the next set of results, or @null@ if there are no more results.
 ldrsNextToken :: Lens' ListDatastoresResponse (Maybe Text)

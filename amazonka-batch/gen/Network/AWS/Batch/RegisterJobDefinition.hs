@@ -31,6 +31,7 @@ module Network.AWS.Batch.RegisterJobDefinition
     , rjdParameters
     , rjdTimeout
     , rjdContainerProperties
+    , rjdNodeProperties
     , rjdJobDefinitionName
     , rjdType
 
@@ -52,15 +53,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'registerJobDefinition' smart constructor.
-data RegisterJobDefinition = RegisterJobDefinition'
-  { _rjdRetryStrategy       :: !(Maybe RetryStrategy)
-  , _rjdParameters          :: !(Maybe (Map Text Text))
-  , _rjdTimeout             :: !(Maybe JobTimeout)
-  , _rjdContainerProperties :: !(Maybe ContainerProperties)
-  , _rjdJobDefinitionName   :: !Text
-  , _rjdType                :: !JobDefinitionType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterJobDefinition = RegisterJobDefinition'{_rjdRetryStrategy
+                                                    :: !(Maybe RetryStrategy),
+                                                    _rjdParameters ::
+                                                    !(Maybe (Map Text Text)),
+                                                    _rjdTimeout ::
+                                                    !(Maybe JobTimeout),
+                                                    _rjdContainerProperties ::
+                                                    !(Maybe
+                                                        ContainerProperties),
+                                                    _rjdNodeProperties ::
+                                                    !(Maybe NodeProperties),
+                                                    _rjdJobDefinitionName ::
+                                                    !Text,
+                                                    _rjdType ::
+                                                    !JobDefinitionType}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RegisterJobDefinition' with the minimum fields required to make a request.
 --
@@ -70,9 +79,11 @@ data RegisterJobDefinition = RegisterJobDefinition'
 --
 -- * 'rjdParameters' - Default parameter substitution placeholders to set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a @SubmitJob@ request override any corresponding parameter defaults from the job definition.
 --
--- * 'rjdTimeout' - The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a 'SubmitJob' operation overrides the timeout configuration defined here. For more information, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html Job Timeouts> in the /Amazon Elastic Container Service Developer Guide/ .
+-- * 'rjdTimeout' - The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a 'SubmitJob' operation overrides the timeout configuration defined here. For more information, see <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html Job Timeouts> in the /Amazon Elastic Container Service Developer Guide/ .
 --
--- * 'rjdContainerProperties' - An object with various properties specific for container-based jobs. This parameter is required if the @type@ parameter is @container@ .
+-- * 'rjdContainerProperties' - An object with various properties specific to single-node container-based jobs. If the job definition's @type@ parameter is @container@ , then you must specify either @containerProperties@ or @nodeProperties@ .
+--
+-- * 'rjdNodeProperties' - An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see <https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html Multi-node Parallel Jobs> in the /AWS Batch User Guide/ . If the job definition's @type@ parameter is @container@ , then you must specify either @containerProperties@ or @nodeProperties@ .
 --
 -- * 'rjdJobDefinitionName' - The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
 --
@@ -81,16 +92,13 @@ registerJobDefinition
     :: Text -- ^ 'rjdJobDefinitionName'
     -> JobDefinitionType -- ^ 'rjdType'
     -> RegisterJobDefinition
-registerJobDefinition pJobDefinitionName_ pType_ =
-  RegisterJobDefinition'
-    { _rjdRetryStrategy = Nothing
-    , _rjdParameters = Nothing
-    , _rjdTimeout = Nothing
-    , _rjdContainerProperties = Nothing
-    , _rjdJobDefinitionName = pJobDefinitionName_
-    , _rjdType = pType_
-    }
-
+registerJobDefinition pJobDefinitionName_ pType_
+  = RegisterJobDefinition'{_rjdRetryStrategy = Nothing,
+                           _rjdParameters = Nothing, _rjdTimeout = Nothing,
+                           _rjdContainerProperties = Nothing,
+                           _rjdNodeProperties = Nothing,
+                           _rjdJobDefinitionName = pJobDefinitionName_,
+                           _rjdType = pType_}
 
 -- | The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a 'SubmitJob' operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried.
 rjdRetryStrategy :: Lens' RegisterJobDefinition (Maybe RetryStrategy)
@@ -100,13 +108,17 @@ rjdRetryStrategy = lens _rjdRetryStrategy (\ s a -> s{_rjdRetryStrategy = a})
 rjdParameters :: Lens' RegisterJobDefinition (HashMap Text Text)
 rjdParameters = lens _rjdParameters (\ s a -> s{_rjdParameters = a}) . _Default . _Map
 
--- | The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a 'SubmitJob' operation overrides the timeout configuration defined here. For more information, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html Job Timeouts> in the /Amazon Elastic Container Service Developer Guide/ .
+-- | The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a 'SubmitJob' operation overrides the timeout configuration defined here. For more information, see <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html Job Timeouts> in the /Amazon Elastic Container Service Developer Guide/ .
 rjdTimeout :: Lens' RegisterJobDefinition (Maybe JobTimeout)
 rjdTimeout = lens _rjdTimeout (\ s a -> s{_rjdTimeout = a})
 
--- | An object with various properties specific for container-based jobs. This parameter is required if the @type@ parameter is @container@ .
+-- | An object with various properties specific to single-node container-based jobs. If the job definition's @type@ parameter is @container@ , then you must specify either @containerProperties@ or @nodeProperties@ .
 rjdContainerProperties :: Lens' RegisterJobDefinition (Maybe ContainerProperties)
 rjdContainerProperties = lens _rjdContainerProperties (\ s a -> s{_rjdContainerProperties = a})
+
+-- | An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see <https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html Multi-node Parallel Jobs> in the /AWS Batch User Guide/ . If the job definition's @type@ parameter is @container@ , then you must specify either @containerProperties@ or @nodeProperties@ .
+rjdNodeProperties :: Lens' RegisterJobDefinition (Maybe NodeProperties)
+rjdNodeProperties = lens _rjdNodeProperties (\ s a -> s{_rjdNodeProperties = a})
 
 -- | The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
 rjdJobDefinitionName :: Lens' RegisterJobDefinition Text
@@ -148,6 +160,7 @@ instance ToJSON RegisterJobDefinition where
                   ("timeout" .=) <$> _rjdTimeout,
                   ("containerProperties" .=) <$>
                     _rjdContainerProperties,
+                  ("nodeProperties" .=) <$> _rjdNodeProperties,
                   Just ("jobDefinitionName" .= _rjdJobDefinitionName),
                   Just ("type" .= _rjdType)])
 
@@ -158,13 +171,16 @@ instance ToQuery RegisterJobDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'registerJobDefinitionResponse' smart constructor.
-data RegisterJobDefinitionResponse = RegisterJobDefinitionResponse'
-  { _rjdrsResponseStatus    :: !Int
-  , _rjdrsJobDefinitionName :: !Text
-  , _rjdrsJobDefinitionARN  :: !Text
-  , _rjdrsRevision          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterJobDefinitionResponse = RegisterJobDefinitionResponse'{_rjdrsResponseStatus
+                                                                    :: !Int,
+                                                                    _rjdrsJobDefinitionName
+                                                                    :: !Text,
+                                                                    _rjdrsJobDefinitionARN
+                                                                    :: !Text,
+                                                                    _rjdrsRevision
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'RegisterJobDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -183,14 +199,14 @@ registerJobDefinitionResponse
     -> Text -- ^ 'rjdrsJobDefinitionARN'
     -> Int -- ^ 'rjdrsRevision'
     -> RegisterJobDefinitionResponse
-registerJobDefinitionResponse pResponseStatus_ pJobDefinitionName_ pJobDefinitionARN_ pRevision_ =
-  RegisterJobDefinitionResponse'
-    { _rjdrsResponseStatus = pResponseStatus_
-    , _rjdrsJobDefinitionName = pJobDefinitionName_
-    , _rjdrsJobDefinitionARN = pJobDefinitionARN_
-    , _rjdrsRevision = pRevision_
-    }
-
+registerJobDefinitionResponse pResponseStatus_
+  pJobDefinitionName_ pJobDefinitionARN_ pRevision_
+  = RegisterJobDefinitionResponse'{_rjdrsResponseStatus
+                                     = pResponseStatus_,
+                                   _rjdrsJobDefinitionName =
+                                     pJobDefinitionName_,
+                                   _rjdrsJobDefinitionARN = pJobDefinitionARN_,
+                                   _rjdrsRevision = pRevision_}
 
 -- | -- | The response status code.
 rjdrsResponseStatus :: Lens' RegisterJobDefinitionResponse Int

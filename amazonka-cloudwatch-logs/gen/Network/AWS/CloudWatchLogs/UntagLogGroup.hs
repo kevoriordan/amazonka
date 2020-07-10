@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'untagLogGroup' smart constructor.
-data UntagLogGroup = UntagLogGroup'
-  { _ulgLogGroupName :: !Text
-  , _ulgTags         :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagLogGroup = UntagLogGroup'{_ulgLogGroupName
+                                    :: !Text,
+                                    _ulgTags :: !(List1 Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagLogGroup' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ untagLogGroup
     :: Text -- ^ 'ulgLogGroupName'
     -> NonEmpty Text -- ^ 'ulgTags'
     -> UntagLogGroup
-untagLogGroup pLogGroupName_ pTags_ =
-  UntagLogGroup' {_ulgLogGroupName = pLogGroupName_, _ulgTags = _List1 # pTags_}
-
+untagLogGroup pLogGroupName_ pTags_
+  = UntagLogGroup'{_ulgLogGroupName = pLogGroupName_,
+                   _ulgTags = _List1 # pTags_}
 
 -- | The name of the log group.
 ulgLogGroupName :: Lens' UntagLogGroup Text
@@ -106,16 +105,14 @@ instance ToQuery UntagLogGroup where
         toQuery = const mempty
 
 -- | /See:/ 'untagLogGroupResponse' smart constructor.
-data UntagLogGroupResponse =
-  UntagLogGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagLogGroupResponse = UntagLogGroupResponse'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UntagLogGroupResponse' with the minimum fields required to make a request.
 --
 untagLogGroupResponse
     :: UntagLogGroupResponse
 untagLogGroupResponse = UntagLogGroupResponse'
-
 
 instance NFData UntagLogGroupResponse where

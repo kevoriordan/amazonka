@@ -21,7 +21,7 @@
 -- Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
 --
 --
--- For more information on Amazon Aurora, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html Aurora on Amazon RDS> in the /Amazon RDS User Guide./
+-- For more information on Amazon Aurora, see <https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html What Is Amazon Aurora?> in the /Amazon Aurora User Guide./ 
 --
 module Network.AWS.RDS.DeleteDBClusterParameterGroup
     (
@@ -43,30 +43,30 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteDBClusterParameterGroup' smart constructor.
-newtype DeleteDBClusterParameterGroup = DeleteDBClusterParameterGroup'
-  { _ddbcpgDBClusterParameterGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDBClusterParameterGroup = DeleteDBClusterParameterGroup'{_ddbcpgDBClusterParameterGroupName
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteDBClusterParameterGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddbcpgDBClusterParameterGroupName' - The name of the DB cluster parameter group. Constraints:     * Must be the name of an existing DB cluster parameter group.     * You can't delete a default DB cluster parameter group.     * Cannot be associated with any DB clusters.
+-- * 'ddbcpgDBClusterParameterGroupName' - The name of the DB cluster parameter group. Constraints:     * Must be the name of an existing DB cluster parameter group.     * You can't delete a default DB cluster parameter group.     * Can't be associated with any DB clusters.
 deleteDBClusterParameterGroup
     :: Text -- ^ 'ddbcpgDBClusterParameterGroupName'
     -> DeleteDBClusterParameterGroup
-deleteDBClusterParameterGroup pDBClusterParameterGroupName_ =
-  DeleteDBClusterParameterGroup'
-    {_ddbcpgDBClusterParameterGroupName = pDBClusterParameterGroupName_}
+deleteDBClusterParameterGroup
+  pDBClusterParameterGroupName_
+  = DeleteDBClusterParameterGroup'{_ddbcpgDBClusterParameterGroupName
+                                     = pDBClusterParameterGroupName_}
 
-
--- | The name of the DB cluster parameter group. Constraints:     * Must be the name of an existing DB cluster parameter group.     * You can't delete a default DB cluster parameter group.     * Cannot be associated with any DB clusters.
+-- | The name of the DB cluster parameter group. Constraints:     * Must be the name of an existing DB cluster parameter group.     * You can't delete a default DB cluster parameter group.     * Can't be associated with any DB clusters.
 ddbcpgDBClusterParameterGroupName :: Lens' DeleteDBClusterParameterGroup Text
 ddbcpgDBClusterParameterGroupName = lens _ddbcpgDBClusterParameterGroupName (\ s a -> s{_ddbcpgDBClusterParameterGroupName = a})
 
@@ -99,17 +99,16 @@ instance ToQuery DeleteDBClusterParameterGroup where
                  _ddbcpgDBClusterParameterGroupName]
 
 -- | /See:/ 'deleteDBClusterParameterGroupResponse' smart constructor.
-data DeleteDBClusterParameterGroupResponse =
-  DeleteDBClusterParameterGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDBClusterParameterGroupResponse = DeleteDBClusterParameterGroupResponse'
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DeleteDBClusterParameterGroupResponse' with the minimum fields required to make a request.
 --
 deleteDBClusterParameterGroupResponse
     :: DeleteDBClusterParameterGroupResponse
-deleteDBClusterParameterGroupResponse = DeleteDBClusterParameterGroupResponse'
-
+deleteDBClusterParameterGroupResponse
+  = DeleteDBClusterParameterGroupResponse'
 
 instance NFData DeleteDBClusterParameterGroupResponse
          where

@@ -23,6 +23,8 @@
 --
 -- When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.
 --
+-- The @delete disk snapshot@ operation supports tag-based access control via resource tags applied to the resource identified by @disk snapshot name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.DeleteDiskSnapshot
     (
     -- * Creating a Request
@@ -47,10 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteDiskSnapshot' smart constructor.
-newtype DeleteDiskSnapshot = DeleteDiskSnapshot'
-  { _ddsDiskSnapshotName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDiskSnapshot = DeleteDiskSnapshot'{_ddsDiskSnapshotName
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteDiskSnapshot' with the minimum fields required to make a request.
 --
@@ -60,9 +62,9 @@ newtype DeleteDiskSnapshot = DeleteDiskSnapshot'
 deleteDiskSnapshot
     :: Text -- ^ 'ddsDiskSnapshotName'
     -> DeleteDiskSnapshot
-deleteDiskSnapshot pDiskSnapshotName_ =
-  DeleteDiskSnapshot' {_ddsDiskSnapshotName = pDiskSnapshotName_}
-
+deleteDiskSnapshot pDiskSnapshotName_
+  = DeleteDiskSnapshot'{_ddsDiskSnapshotName =
+                          pDiskSnapshotName_}
 
 -- | The name of the disk snapshot you want to delete (e.g., @my-disk-snapshot@ ).
 ddsDiskSnapshotName :: Lens' DeleteDiskSnapshot Text
@@ -106,28 +108,31 @@ instance ToQuery DeleteDiskSnapshot where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDiskSnapshotResponse' smart constructor.
-data DeleteDiskSnapshotResponse = DeleteDiskSnapshotResponse'
-  { _ddsrsOperations     :: !(Maybe [Operation])
-  , _ddsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDiskSnapshotResponse = DeleteDiskSnapshotResponse'{_ddsrsOperations
+                                                              ::
+                                                              !(Maybe
+                                                                  [Operation]),
+                                                              _ddsrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteDiskSnapshotResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddsrsOperations' - An object describing the API operations.
+-- * 'ddsrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'ddsrsResponseStatus' - -- | The response status code.
 deleteDiskSnapshotResponse
     :: Int -- ^ 'ddsrsResponseStatus'
     -> DeleteDiskSnapshotResponse
-deleteDiskSnapshotResponse pResponseStatus_ =
-  DeleteDiskSnapshotResponse'
-    {_ddsrsOperations = Nothing, _ddsrsResponseStatus = pResponseStatus_}
+deleteDiskSnapshotResponse pResponseStatus_
+  = DeleteDiskSnapshotResponse'{_ddsrsOperations =
+                                  Nothing,
+                                _ddsrsResponseStatus = pResponseStatus_}
 
-
--- | An object describing the API operations.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 ddsrsOperations :: Lens' DeleteDiskSnapshotResponse [Operation]
 ddsrsOperations = lens _ddsrsOperations (\ s a -> s{_ddsrsOperations = a}) . _Default . _Coerce
 

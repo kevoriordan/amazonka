@@ -21,7 +21,7 @@
 -- Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.
 --
 --
--- For more information about managing snapshot copy grants, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html Amazon Redshift Database Encryption> in the /Amazon Redshift Cluster Management Guide/ .
+-- For more information about managing snapshot copy grants, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html Amazon Redshift Database Encryption> in the /Amazon Redshift Cluster Management Guide/ . 
 --
 module Network.AWS.Redshift.CreateSnapshotCopyGrant
     (
@@ -53,12 +53,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createSnapshotCopyGrant' smart constructor.
-data CreateSnapshotCopyGrant = CreateSnapshotCopyGrant'
-  { _cscgKMSKeyId              :: !(Maybe Text)
-  , _cscgTags                  :: !(Maybe [Tag])
-  , _cscgSnapshotCopyGrantName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshotCopyGrant = CreateSnapshotCopyGrant'{_cscgKMSKeyId
+                                                        :: !(Maybe Text),
+                                                        _cscgTags ::
+                                                        !(Maybe [Tag]),
+                                                        _cscgSnapshotCopyGrantName
+                                                        :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateSnapshotCopyGrant' with the minimum fields required to make a request.
 --
@@ -72,13 +74,11 @@ data CreateSnapshotCopyGrant = CreateSnapshotCopyGrant'
 createSnapshotCopyGrant
     :: Text -- ^ 'cscgSnapshotCopyGrantName'
     -> CreateSnapshotCopyGrant
-createSnapshotCopyGrant pSnapshotCopyGrantName_ =
-  CreateSnapshotCopyGrant'
-    { _cscgKMSKeyId = Nothing
-    , _cscgTags = Nothing
-    , _cscgSnapshotCopyGrantName = pSnapshotCopyGrantName_
-    }
-
+createSnapshotCopyGrant pSnapshotCopyGrantName_
+  = CreateSnapshotCopyGrant'{_cscgKMSKeyId = Nothing,
+                             _cscgTags = Nothing,
+                             _cscgSnapshotCopyGrantName =
+                               pSnapshotCopyGrantName_}
 
 -- | The unique identifier of the customer master key (CMK) to which to grant Amazon Redshift permission. If no key is specified, the default key is used.
 cscgKMSKeyId :: Lens' CreateSnapshotCopyGrant (Maybe Text)
@@ -124,11 +124,14 @@ instance ToQuery CreateSnapshotCopyGrant where
                  _cscgSnapshotCopyGrantName]
 
 -- | /See:/ 'createSnapshotCopyGrantResponse' smart constructor.
-data CreateSnapshotCopyGrantResponse = CreateSnapshotCopyGrantResponse'
-  { _cscgrsSnapshotCopyGrant :: !(Maybe SnapshotCopyGrant)
-  , _cscgrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshotCopyGrantResponse = CreateSnapshotCopyGrantResponse'{_cscgrsSnapshotCopyGrant
+                                                                        ::
+                                                                        !(Maybe
+                                                                            SnapshotCopyGrant),
+                                                                        _cscgrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateSnapshotCopyGrantResponse' with the minimum fields required to make a request.
 --
@@ -140,12 +143,10 @@ data CreateSnapshotCopyGrantResponse = CreateSnapshotCopyGrantResponse'
 createSnapshotCopyGrantResponse
     :: Int -- ^ 'cscgrsResponseStatus'
     -> CreateSnapshotCopyGrantResponse
-createSnapshotCopyGrantResponse pResponseStatus_ =
-  CreateSnapshotCopyGrantResponse'
-    { _cscgrsSnapshotCopyGrant = Nothing
-    , _cscgrsResponseStatus = pResponseStatus_
-    }
-
+createSnapshotCopyGrantResponse pResponseStatus_
+  = CreateSnapshotCopyGrantResponse'{_cscgrsSnapshotCopyGrant
+                                       = Nothing,
+                                     _cscgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 cscgrsSnapshotCopyGrant :: Lens' CreateSnapshotCopyGrantResponse (Maybe SnapshotCopyGrant)

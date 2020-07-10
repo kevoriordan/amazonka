@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.
+-- Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a <https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException CrawlerRunningException> .
 --
 --
 module Network.AWS.Glue.StartCrawler
@@ -44,10 +44,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startCrawler' smart constructor.
-newtype StartCrawler = StartCrawler'
-  { _scName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartCrawler = StartCrawler'{_scName :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartCrawler' with the minimum fields required to make a request.
 --
@@ -57,8 +55,7 @@ newtype StartCrawler = StartCrawler'
 startCrawler
     :: Text -- ^ 'scName'
     -> StartCrawler
-startCrawler pName_ = StartCrawler' {_scName = pName_}
-
+startCrawler pName_ = StartCrawler'{_scName = pName_}
 
 -- | Name of the crawler to start.
 scName :: Lens' StartCrawler Text
@@ -96,10 +93,10 @@ instance ToQuery StartCrawler where
         toQuery = const mempty
 
 -- | /See:/ 'startCrawlerResponse' smart constructor.
-newtype StartCrawlerResponse = StartCrawlerResponse'
-  { _scrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartCrawlerResponse = StartCrawlerResponse'{_scrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'StartCrawlerResponse' with the minimum fields required to make a request.
 --
@@ -109,9 +106,9 @@ newtype StartCrawlerResponse = StartCrawlerResponse'
 startCrawlerResponse
     :: Int -- ^ 'scrsResponseStatus'
     -> StartCrawlerResponse
-startCrawlerResponse pResponseStatus_ =
-  StartCrawlerResponse' {_scrsResponseStatus = pResponseStatus_}
-
+startCrawlerResponse pResponseStatus_
+  = StartCrawlerResponse'{_scrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 scrsResponseStatus :: Lens' StartCrawlerResponse Int

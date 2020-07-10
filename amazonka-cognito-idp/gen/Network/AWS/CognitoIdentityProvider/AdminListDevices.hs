@@ -21,7 +21,7 @@
 -- Lists devices, as an administrator.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminListDevices
     (
@@ -55,13 +55,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'adminListDevices' smart constructor.
-data AdminListDevices = AdminListDevices'
-  { _aldPaginationToken :: !(Maybe Text)
-  , _aldLimit           :: !(Maybe Nat)
-  , _aldUserPoolId      :: !Text
-  , _aldUsername        :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminListDevices = AdminListDevices'{_aldPaginationToken
+                                          :: !(Maybe Text),
+                                          _aldLimit :: !(Maybe Nat),
+                                          _aldUserPoolId :: !Text,
+                                          _aldUsername :: !(Sensitive Text)}
+                          deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminListDevices' with the minimum fields required to make a request.
 --
@@ -78,14 +77,10 @@ adminListDevices
     :: Text -- ^ 'aldUserPoolId'
     -> Text -- ^ 'aldUsername'
     -> AdminListDevices
-adminListDevices pUserPoolId_ pUsername_ =
-  AdminListDevices'
-    { _aldPaginationToken = Nothing
-    , _aldLimit = Nothing
-    , _aldUserPoolId = pUserPoolId_
-    , _aldUsername = _Sensitive # pUsername_
-    }
-
+adminListDevices pUserPoolId_ pUsername_
+  = AdminListDevices'{_aldPaginationToken = Nothing,
+                      _aldLimit = Nothing, _aldUserPoolId = pUserPoolId_,
+                      _aldUsername = _Sensitive # pUsername_}
 
 -- | The pagination token.
 aldPaginationToken :: Lens' AdminListDevices (Maybe Text)
@@ -148,12 +143,13 @@ instance ToQuery AdminListDevices where
 --
 --
 -- /See:/ 'adminListDevicesResponse' smart constructor.
-data AdminListDevicesResponse = AdminListDevicesResponse'
-  { _aldrsPaginationToken :: !(Maybe Text)
-  , _aldrsDevices         :: !(Maybe [DeviceType])
-  , _aldrsResponseStatus  :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminListDevicesResponse = AdminListDevicesResponse'{_aldrsPaginationToken
+                                                          :: !(Maybe Text),
+                                                          _aldrsDevices ::
+                                                          !(Maybe [DeviceType]),
+                                                          _aldrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminListDevicesResponse' with the minimum fields required to make a request.
 --
@@ -167,13 +163,11 @@ data AdminListDevicesResponse = AdminListDevicesResponse'
 adminListDevicesResponse
     :: Int -- ^ 'aldrsResponseStatus'
     -> AdminListDevicesResponse
-adminListDevicesResponse pResponseStatus_ =
-  AdminListDevicesResponse'
-    { _aldrsPaginationToken = Nothing
-    , _aldrsDevices = Nothing
-    , _aldrsResponseStatus = pResponseStatus_
-    }
-
+adminListDevicesResponse pResponseStatus_
+  = AdminListDevicesResponse'{_aldrsPaginationToken =
+                                Nothing,
+                              _aldrsDevices = Nothing,
+                              _aldrsResponseStatus = pResponseStatus_}
 
 -- | The pagination token.
 aldrsPaginationToken :: Lens' AdminListDevicesResponse (Maybe Text)

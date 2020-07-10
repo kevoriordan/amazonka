@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteDataSource' smart constructor.
-data DeleteDataSource = DeleteDataSource'
-  { _ddsApiId :: !Text
-  , _ddsName  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDataSource = DeleteDataSource'{_ddsApiId
+                                          :: !Text,
+                                          _ddsName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDataSource' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ deleteDataSource
     :: Text -- ^ 'ddsApiId'
     -> Text -- ^ 'ddsName'
     -> DeleteDataSource
-deleteDataSource pApiId_ pName_ =
-  DeleteDataSource' {_ddsApiId = pApiId_, _ddsName = pName_}
-
+deleteDataSource pApiId_ pName_
+  = DeleteDataSource'{_ddsApiId = pApiId_,
+                      _ddsName = pName_}
 
 -- | The API ID.
 ddsApiId :: Lens' DeleteDataSource Text
@@ -103,10 +102,10 @@ instance ToQuery DeleteDataSource where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDataSourceResponse' smart constructor.
-newtype DeleteDataSourceResponse = DeleteDataSourceResponse'
-  { _ddsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDataSourceResponse = DeleteDataSourceResponse'{_ddsrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -116,9 +115,9 @@ newtype DeleteDataSourceResponse = DeleteDataSourceResponse'
 deleteDataSourceResponse
     :: Int -- ^ 'ddsrsResponseStatus'
     -> DeleteDataSourceResponse
-deleteDataSourceResponse pResponseStatus_ =
-  DeleteDataSourceResponse' {_ddsrsResponseStatus = pResponseStatus_}
-
+deleteDataSourceResponse pResponseStatus_
+  = DeleteDataSourceResponse'{_ddsrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 ddsrsResponseStatus :: Lens' DeleteDataSourceResponse Int

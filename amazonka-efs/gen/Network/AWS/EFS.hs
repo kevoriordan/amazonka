@@ -11,9 +11,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Amazon Elastic File System__
+-- __Amazon Elastic File System__ 
 --
--- Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <http://docs.aws.amazon.com/efs/latest/ug/api-reference.html User Guide> .
+-- Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the <https://docs.aws.amazon.com/efs/latest/ug/api-reference.html User Guide> .
 --
 module Network.AWS.EFS
     (
@@ -23,23 +23,17 @@ module Network.AWS.EFS
     -- * Errors
     -- $errors
 
-    -- ** MountTargetNotFound
-    , _MountTargetNotFound
+    -- ** InsufficientThroughputCapacity
+    , _InsufficientThroughputCapacity
 
-    -- ** SecurityGroupLimitExceeded
-    , _SecurityGroupLimitExceeded
+    -- ** IPAddressInUse
+    , _IPAddressInUse
 
-    -- ** SecurityGroupNotFound
-    , _SecurityGroupNotFound
+    -- ** IncorrectFileSystemLifeCycleState
+    , _IncorrectFileSystemLifeCycleState
 
-    -- ** MountTargetConflict
-    , _MountTargetConflict
-
-    -- ** UnsupportedAvailabilityZone
-    , _UnsupportedAvailabilityZone
-
-    -- ** FileSystemLimitExceeded
-    , _FileSystemLimitExceeded
+    -- ** PolicyNotFound
+    , _PolicyNotFound
 
     -- ** NetworkInterfaceLimitExceeded
     , _NetworkInterfaceLimitExceeded
@@ -47,26 +41,35 @@ module Network.AWS.EFS
     -- ** FileSystemAlreadyExists
     , _FileSystemAlreadyExists
 
+    -- ** TooManyRequests
+    , _TooManyRequests
+
+    -- ** FileSystemLimitExceeded
+    , _FileSystemLimitExceeded
+
+    -- ** UnsupportedAvailabilityZone
+    , _UnsupportedAvailabilityZone
+
+    -- ** MountTargetConflict
+    , _MountTargetConflict
+
+    -- ** SecurityGroupNotFound
+    , _SecurityGroupNotFound
+
+    -- ** MountTargetNotFound
+    , _MountTargetNotFound
+
+    -- ** BadRequest
+    , _BadRequest
+
+    -- ** AccessPointNotFound
+    , _AccessPointNotFound
+
     -- ** SubnetNotFound
     , _SubnetNotFound
 
     -- ** FileSystemNotFound
     , _FileSystemNotFound
-
-    -- ** IncorrectFileSystemLifeCycleState
-    , _IncorrectFileSystemLifeCycleState
-
-    -- ** BadRequest
-    , _BadRequest
-
-    -- ** NoFreeAddressesInSubnet
-    , _NoFreeAddressesInSubnet
-
-    -- ** DependencyTimeout
-    , _DependencyTimeout
-
-    -- ** FileSystemInUse
-    , _FileSystemInUse
 
     -- ** IncorrectMountTargetState
     , _IncorrectMountTargetState
@@ -74,8 +77,29 @@ module Network.AWS.EFS
     -- ** InternalServerError
     , _InternalServerError
 
-    -- ** IPAddressInUse
-    , _IPAddressInUse
+    -- ** SecurityGroupLimitExceeded
+    , _SecurityGroupLimitExceeded
+
+    -- ** FileSystemInUse
+    , _FileSystemInUse
+
+    -- ** DependencyTimeout
+    , _DependencyTimeout
+
+    -- ** ThroughputLimitExceeded
+    , _ThroughputLimitExceeded
+
+    -- ** NoFreeAddressesInSubnet
+    , _NoFreeAddressesInSubnet
+
+    -- ** AccessPointLimitExceeded
+    , _AccessPointLimitExceeded
+
+    -- ** InvalidPolicyException
+    , _InvalidPolicyException
+
+    -- ** AccessPointAlreadyExists
+    , _AccessPointAlreadyExists
 
     -- * Waiters
     -- $waiters
@@ -83,38 +107,65 @@ module Network.AWS.EFS
     -- * Operations
     -- $operations
 
-    -- ** DescribeTags (Paginated)
-    , module Network.AWS.EFS.DescribeTags
+    -- ** CreateAccessPoint 
+    , module Network.AWS.EFS.CreateAccessPoint
 
     -- ** DescribeMountTargets (Paginated)
     , module Network.AWS.EFS.DescribeMountTargets
 
+    -- ** DeleteFileSystemPolicy 
+    , module Network.AWS.EFS.DeleteFileSystemPolicy
+
+    -- ** ListTagsForResource 
+    , module Network.AWS.EFS.ListTagsForResource
+
+    -- ** PutFileSystemPolicy 
+    , module Network.AWS.EFS.PutFileSystemPolicy
+
     -- ** DescribeFileSystems (Paginated)
     , module Network.AWS.EFS.DescribeFileSystems
 
-    -- ** DeleteMountTarget
+    -- ** DeleteMountTarget 
     , module Network.AWS.EFS.DeleteMountTarget
 
-    -- ** CreateTags
-    , module Network.AWS.EFS.CreateTags
-
-    -- ** DeleteTags
-    , module Network.AWS.EFS.DeleteTags
-
-    -- ** DescribeMountTargetSecurityGroups
+    -- ** DescribeMountTargetSecurityGroups 
     , module Network.AWS.EFS.DescribeMountTargetSecurityGroups
 
-    -- ** ModifyMountTargetSecurityGroups
+    -- ** DescribeAccessPoints 
+    , module Network.AWS.EFS.DescribeAccessPoints
+
+    -- ** ModifyMountTargetSecurityGroups 
     , module Network.AWS.EFS.ModifyMountTargetSecurityGroups
 
-    -- ** CreateFileSystem
+    -- ** CreateFileSystem 
     , module Network.AWS.EFS.CreateFileSystem
 
-    -- ** DeleteFileSystem
+    -- ** PutLifecycleConfiguration 
+    , module Network.AWS.EFS.PutLifecycleConfiguration
+
+    -- ** DeleteFileSystem 
     , module Network.AWS.EFS.DeleteFileSystem
 
-    -- ** CreateMountTarget
+    -- ** UpdateFileSystem 
+    , module Network.AWS.EFS.UpdateFileSystem
+
+    -- ** CreateMountTarget 
     , module Network.AWS.EFS.CreateMountTarget
+
+    -- ** TagResource 
+    , module Network.AWS.EFS.TagResource
+
+    -- ** DescribeLifecycleConfiguration 
+    , module Network.AWS.EFS.DescribeLifecycleConfiguration
+
+    -- ** UntagResource 
+    , module Network.AWS.EFS.UntagResource
+
+    -- ** DescribeFileSystemPolicy 
+    , module Network.AWS.EFS.DescribeFileSystemPolicy
+
+    -- ** DeleteAccessPoint 
+    , module Network.AWS.EFS.DeleteAccessPoint
 
     -- * Types
 
@@ -124,10 +175,39 @@ module Network.AWS.EFS
     -- ** PerformanceMode
     , PerformanceMode (..)
 
+    -- ** ThroughputMode
+    , ThroughputMode (..)
+
+    -- ** TransitionToIARules
+    , TransitionToIARules (..)
+
+    -- ** AccessPointDescription
+    , AccessPointDescription
+    , accessPointDescription
+    , apdPosixUser
+    , apdRootDirectory
+    , apdClientToken
+    , apdAccessPointId
+    , apdFileSystemId
+    , apdOwnerId
+    , apdName
+    , apdAccessPointARN
+    , apdLifeCycleState
+    , apdTags
+
+    -- ** CreationInfo
+    , CreationInfo
+    , creationInfo
+    , ciOwnerUid
+    , ciOwnerGid
+    , ciPermissions
+
     -- ** FileSystemDescription
     , FileSystemDescription
     , fileSystemDescription
+    , fsdProvisionedThroughputInMibps
     , fsdEncrypted
+    , fsdThroughputMode
     , fsdKMSKeyId
     , fsdName
     , fsdOwnerId
@@ -138,23 +218,57 @@ module Network.AWS.EFS
     , fsdNumberOfMountTargets
     , fsdSizeInBytes
     , fsdPerformanceMode
+    , fsdTags
+
+    -- ** FileSystemPolicyDescription
+    , FileSystemPolicyDescription
+    , fileSystemPolicyDescription
+    , fspdFileSystemId
+    , fspdPolicy
 
     -- ** FileSystemSize
     , FileSystemSize
     , fileSystemSize
+    , fssValueInIA
+    , fssValueInStandard
     , fssTimestamp
     , fssValue
+
+    -- ** LifecycleConfigurationDescription
+    , LifecycleConfigurationDescription
+    , lifecycleConfigurationDescription
+    , lcdLifecyclePolicies
+
+    -- ** LifecyclePolicy
+    , LifecyclePolicy
+    , lifecyclePolicy
+    , lpTransitionToIA
 
     -- ** MountTargetDescription
     , MountTargetDescription
     , mountTargetDescription
     , mtdIPAddress
+    , mtdAvailabilityZoneId
+    , mtdAvailabilityZoneName
     , mtdNetworkInterfaceId
     , mtdOwnerId
     , mtdMountTargetId
     , mtdFileSystemId
     , mtdSubnetId
     , mtdLifeCycleState
+
+    -- ** PosixUser
+    , PosixUser
+    , posixUser
+    , puSecondaryGids
+    , puUid
+    , puGid
+
+    -- ** RootDirectory
+    , RootDirectory
+    , rootDirectory
+    , rdCreationInfo
+    , rdPath
 
     -- ** Tag
     , Tag
@@ -163,18 +277,27 @@ module Network.AWS.EFS
     , tagValue
     ) where
 
+import Network.AWS.EFS.CreateAccessPoint
 import Network.AWS.EFS.CreateFileSystem
 import Network.AWS.EFS.CreateMountTarget
-import Network.AWS.EFS.CreateTags
+import Network.AWS.EFS.DeleteAccessPoint
 import Network.AWS.EFS.DeleteFileSystem
+import Network.AWS.EFS.DeleteFileSystemPolicy
 import Network.AWS.EFS.DeleteMountTarget
-import Network.AWS.EFS.DeleteTags
+import Network.AWS.EFS.DescribeAccessPoints
+import Network.AWS.EFS.DescribeFileSystemPolicy
 import Network.AWS.EFS.DescribeFileSystems
-import Network.AWS.EFS.DescribeMountTargets
+import Network.AWS.EFS.DescribeLifecycleConfiguration
 import Network.AWS.EFS.DescribeMountTargetSecurityGroups
-import Network.AWS.EFS.DescribeTags
+import Network.AWS.EFS.DescribeMountTargets
+import Network.AWS.EFS.ListTagsForResource
 import Network.AWS.EFS.ModifyMountTargetSecurityGroups
+import Network.AWS.EFS.PutFileSystemPolicy
+import Network.AWS.EFS.PutLifecycleConfiguration
+import Network.AWS.EFS.TagResource
 import Network.AWS.EFS.Types
+import Network.AWS.EFS.UntagResource
+import Network.AWS.EFS.UpdateFileSystem
 import Network.AWS.EFS.Waiters
 
 {- $errors

@@ -47,11 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeFindings' smart constructor.
-data DescribeFindings = DescribeFindings'
-  { _dfLocale      :: !(Maybe Locale)
-  , _dfFindingARNs :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFindings = DescribeFindings'{_dfLocale
+                                          :: !(Maybe Locale),
+                                          _dfFindingARNs :: !(List1 Text)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeFindings' with the minimum fields required to make a request.
 --
@@ -63,10 +62,9 @@ data DescribeFindings = DescribeFindings'
 describeFindings
     :: NonEmpty Text -- ^ 'dfFindingARNs'
     -> DescribeFindings
-describeFindings pFindingARNs_ =
-  DescribeFindings'
-    {_dfLocale = Nothing, _dfFindingARNs = _List1 # pFindingARNs_}
-
+describeFindings pFindingARNs_
+  = DescribeFindings'{_dfLocale = Nothing,
+                      _dfFindingARNs = _List1 # pFindingARNs_}
 
 -- | The locale into which you want to translate a finding description, recommendation, and the short description that identifies the finding.
 dfLocale :: Lens' DescribeFindings (Maybe Locale)
@@ -113,12 +111,15 @@ instance ToQuery DescribeFindings where
         toQuery = const mempty
 
 -- | /See:/ 'describeFindingsResponse' smart constructor.
-data DescribeFindingsResponse = DescribeFindingsResponse'
-  { _dfrsResponseStatus :: !Int
-  , _dfrsFindings       :: ![Finding]
-  , _dfrsFailedItems    :: !(Map Text FailedItemDetails)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFindingsResponse = DescribeFindingsResponse'{_dfrsResponseStatus
+                                                          :: !Int,
+                                                          _dfrsFindings ::
+                                                          ![Finding],
+                                                          _dfrsFailedItems ::
+                                                          !(Map Text
+                                                              FailedItemDetails)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeFindingsResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +133,10 @@ data DescribeFindingsResponse = DescribeFindingsResponse'
 describeFindingsResponse
     :: Int -- ^ 'dfrsResponseStatus'
     -> DescribeFindingsResponse
-describeFindingsResponse pResponseStatus_ =
-  DescribeFindingsResponse'
-    { _dfrsResponseStatus = pResponseStatus_
-    , _dfrsFindings = mempty
-    , _dfrsFailedItems = mempty
-    }
-
+describeFindingsResponse pResponseStatus_
+  = DescribeFindingsResponse'{_dfrsResponseStatus =
+                                pResponseStatus_,
+                              _dfrsFindings = mempty, _dfrsFailedItems = mempty}
 
 -- | -- | The response status code.
 dfrsResponseStatus :: Lens' DescribeFindingsResponse Int

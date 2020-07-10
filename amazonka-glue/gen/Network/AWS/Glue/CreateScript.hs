@@ -48,12 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createScript' smart constructor.
-data CreateScript = CreateScript'
-  { _csDagEdges :: !(Maybe [CodeGenEdge])
-  , _csLanguage :: !(Maybe Language)
-  , _csDagNodes :: !(Maybe [CodeGenNode])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateScript = CreateScript'{_csDagEdges ::
+                                  !(Maybe [CodeGenEdge]),
+                                  _csLanguage :: !(Maybe Language),
+                                  _csDagNodes :: !(Maybe [CodeGenNode])}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateScript' with the minimum fields required to make a request.
 --
@@ -66,10 +65,9 @@ data CreateScript = CreateScript'
 -- * 'csDagNodes' - A list of the nodes in the DAG.
 createScript
     :: CreateScript
-createScript =
-  CreateScript'
-    {_csDagEdges = Nothing, _csLanguage = Nothing, _csDagNodes = Nothing}
-
+createScript
+  = CreateScript'{_csDagEdges = Nothing,
+                  _csLanguage = Nothing, _csDagNodes = Nothing}
 
 -- | A list of the edges in the DAG.
 csDagEdges :: Lens' CreateScript [CodeGenEdge]
@@ -121,12 +119,12 @@ instance ToQuery CreateScript where
         toQuery = const mempty
 
 -- | /See:/ 'createScriptResponse' smart constructor.
-data CreateScriptResponse = CreateScriptResponse'
-  { _csrsPythonScript   :: !(Maybe Text)
-  , _csrsScalaCode      :: !(Maybe Text)
-  , _csrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateScriptResponse = CreateScriptResponse'{_csrsPythonScript
+                                                  :: !(Maybe Text),
+                                                  _csrsScalaCode ::
+                                                  !(Maybe Text),
+                                                  _csrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateScriptResponse' with the minimum fields required to make a request.
 --
@@ -140,13 +138,10 @@ data CreateScriptResponse = CreateScriptResponse'
 createScriptResponse
     :: Int -- ^ 'csrsResponseStatus'
     -> CreateScriptResponse
-createScriptResponse pResponseStatus_ =
-  CreateScriptResponse'
-    { _csrsPythonScript = Nothing
-    , _csrsScalaCode = Nothing
-    , _csrsResponseStatus = pResponseStatus_
-    }
-
+createScriptResponse pResponseStatus_
+  = CreateScriptResponse'{_csrsPythonScript = Nothing,
+                          _csrsScalaCode = Nothing,
+                          _csrsResponseStatus = pResponseStatus_}
 
 -- | The Python script generated from the DAG.
 csrsPythonScript :: Lens' CreateScriptResponse (Maybe Text)

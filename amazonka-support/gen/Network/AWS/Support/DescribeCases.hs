@@ -66,23 +66,18 @@ import Network.AWS.Response
 import Network.AWS.Support.Types
 import Network.AWS.Support.Types.Product
 
--- |
---
---
---
--- /See:/ 'describeCases' smart constructor.
-data DescribeCases = DescribeCases'
-  { _dcIncludeResolvedCases  :: !(Maybe Bool)
-  , _dcCaseIdList            :: !(Maybe [Text])
-  , _dcAfterTime             :: !(Maybe Text)
-  , _dcBeforeTime            :: !(Maybe Text)
-  , _dcNextToken             :: !(Maybe Text)
-  , _dcIncludeCommunications :: !(Maybe Bool)
-  , _dcDisplayId             :: !(Maybe Text)
-  , _dcLanguage              :: !(Maybe Text)
-  , _dcMaxResults            :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeCases' smart constructor.
+data DescribeCases = DescribeCases'{_dcIncludeResolvedCases
+                                    :: !(Maybe Bool),
+                                    _dcCaseIdList :: !(Maybe [Text]),
+                                    _dcAfterTime :: !(Maybe Text),
+                                    _dcBeforeTime :: !(Maybe Text),
+                                    _dcNextToken :: !(Maybe Text),
+                                    _dcIncludeCommunications :: !(Maybe Bool),
+                                    _dcDisplayId :: !(Maybe Text),
+                                    _dcLanguage :: !(Maybe Text),
+                                    _dcMaxResults :: !(Maybe Nat)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeCases' with the minimum fields required to make a request.
 --
@@ -107,19 +102,13 @@ data DescribeCases = DescribeCases'
 -- * 'dcMaxResults' - The maximum number of results to return before paginating.
 describeCases
     :: DescribeCases
-describeCases =
-  DescribeCases'
-    { _dcIncludeResolvedCases = Nothing
-    , _dcCaseIdList = Nothing
-    , _dcAfterTime = Nothing
-    , _dcBeforeTime = Nothing
-    , _dcNextToken = Nothing
-    , _dcIncludeCommunications = Nothing
-    , _dcDisplayId = Nothing
-    , _dcLanguage = Nothing
-    , _dcMaxResults = Nothing
-    }
-
+describeCases
+  = DescribeCases'{_dcIncludeResolvedCases = Nothing,
+                   _dcCaseIdList = Nothing, _dcAfterTime = Nothing,
+                   _dcBeforeTime = Nothing, _dcNextToken = Nothing,
+                   _dcIncludeCommunications = Nothing,
+                   _dcDisplayId = Nothing, _dcLanguage = Nothing,
+                   _dcMaxResults = Nothing}
 
 -- | Specifies whether resolved support cases should be included in the 'DescribeCases' results. The default is /false/ .
 dcIncludeResolvedCases :: Lens' DescribeCases (Maybe Bool)
@@ -214,12 +203,13 @@ instance ToQuery DescribeCases where
 --
 --
 -- /See:/ 'describeCasesResponse' smart constructor.
-data DescribeCasesResponse = DescribeCasesResponse'
-  { _drsCases          :: !(Maybe [CaseDetails])
-  , _drsNextToken      :: !(Maybe Text)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCasesResponse = DescribeCasesResponse'{_drsCases
+                                                    :: !(Maybe [CaseDetails]),
+                                                    _drsNextToken ::
+                                                    !(Maybe Text),
+                                                    _drsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeCasesResponse' with the minimum fields required to make a request.
 --
@@ -233,13 +223,10 @@ data DescribeCasesResponse = DescribeCasesResponse'
 describeCasesResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeCasesResponse
-describeCasesResponse pResponseStatus_ =
-  DescribeCasesResponse'
-    { _drsCases = Nothing
-    , _drsNextToken = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeCasesResponse pResponseStatus_
+  = DescribeCasesResponse'{_drsCases = Nothing,
+                           _drsNextToken = Nothing,
+                           _drsResponseStatus = pResponseStatus_}
 
 -- | The details for the cases that match the request.
 drsCases :: Lens' DescribeCasesResponse [CaseDetails]

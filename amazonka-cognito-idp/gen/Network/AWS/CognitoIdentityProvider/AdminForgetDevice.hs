@@ -21,7 +21,7 @@
 -- Forgets the device, as an administrator.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminForgetDevice
     (
@@ -50,12 +50,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'adminForgetDevice' smart constructor.
-data AdminForgetDevice = AdminForgetDevice'
-  { _afdUserPoolId :: !Text
-  , _afdUsername   :: !(Sensitive Text)
-  , _afdDeviceKey  :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminForgetDevice = AdminForgetDevice'{_afdUserPoolId
+                                            :: !Text,
+                                            _afdUsername :: !(Sensitive Text),
+                                            _afdDeviceKey :: !Text}
+                           deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminForgetDevice' with the minimum fields required to make a request.
 --
@@ -71,13 +70,10 @@ adminForgetDevice
     -> Text -- ^ 'afdUsername'
     -> Text -- ^ 'afdDeviceKey'
     -> AdminForgetDevice
-adminForgetDevice pUserPoolId_ pUsername_ pDeviceKey_ =
-  AdminForgetDevice'
-    { _afdUserPoolId = pUserPoolId_
-    , _afdUsername = _Sensitive # pUsername_
-    , _afdDeviceKey = pDeviceKey_
-    }
-
+adminForgetDevice pUserPoolId_ pUsername_ pDeviceKey_
+  = AdminForgetDevice'{_afdUserPoolId = pUserPoolId_,
+                       _afdUsername = _Sensitive # pUsername_,
+                       _afdDeviceKey = pDeviceKey_}
 
 -- | The user pool ID.
 afdUserPoolId :: Lens' AdminForgetDevice Text
@@ -125,16 +121,15 @@ instance ToQuery AdminForgetDevice where
         toQuery = const mempty
 
 -- | /See:/ 'adminForgetDeviceResponse' smart constructor.
-data AdminForgetDeviceResponse =
-  AdminForgetDeviceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AdminForgetDeviceResponse = AdminForgetDeviceResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'AdminForgetDeviceResponse' with the minimum fields required to make a request.
 --
 adminForgetDeviceResponse
     :: AdminForgetDeviceResponse
-adminForgetDeviceResponse = AdminForgetDeviceResponse'
-
+adminForgetDeviceResponse
+  = AdminForgetDeviceResponse'
 
 instance NFData AdminForgetDeviceResponse where

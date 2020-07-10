@@ -48,12 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'addTags' smart constructor.
-data AddTags = AddTags'
-  { _atTags         :: ![Tag]
-  , _atResourceId   :: !Text
-  , _atResourceType :: !TaggableResourceType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTags = AddTags'{_atTags :: ![Tag],
+                        _atResourceId :: !Text,
+                        _atResourceType :: !TaggableResourceType}
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTags' with the minimum fields required to make a request.
 --
@@ -63,18 +61,15 @@ data AddTags = AddTags'
 --
 -- * 'atResourceId' - The ID of the ML object to tag. For example, @exampleModelId@ .
 --
--- * 'atResourceType' - The type of the ML object to tag.
+-- * 'atResourceType' - The type of the ML object to tag. 
 addTags
     :: Text -- ^ 'atResourceId'
     -> TaggableResourceType -- ^ 'atResourceType'
     -> AddTags
-addTags pResourceId_ pResourceType_ =
-  AddTags'
-    { _atTags = mempty
-    , _atResourceId = pResourceId_
-    , _atResourceType = pResourceType_
-    }
-
+addTags pResourceId_ pResourceType_
+  = AddTags'{_atTags = mempty,
+             _atResourceId = pResourceId_,
+             _atResourceType = pResourceType_}
 
 -- | The key-value pairs to use to create tags. If you specify a key without specifying a value, Amazon ML creates a tag with the specified key and a value of null.
 atTags :: Lens' AddTags [Tag]
@@ -84,7 +79,7 @@ atTags = lens _atTags (\ s a -> s{_atTags = a}) . _Coerce
 atResourceId :: Lens' AddTags Text
 atResourceId = lens _atResourceId (\ s a -> s{_atResourceId = a})
 
--- | The type of the ML object to tag.
+-- | The type of the ML object to tag. 
 atResourceType :: Lens' AddTags TaggableResourceType
 atResourceType = lens _atResourceType (\ s a -> s{_atResourceType = a})
 
@@ -125,17 +120,17 @@ instance ToPath AddTags where
 instance ToQuery AddTags where
         toQuery = const mempty
 
--- | Amazon ML returns the following elements.
+-- | Amazon ML returns the following elements. 
 --
 --
 --
 -- /See:/ 'addTagsResponse' smart constructor.
-data AddTagsResponse = AddTagsResponse'
-  { _atrsResourceId     :: !(Maybe Text)
-  , _atrsResourceType   :: !(Maybe TaggableResourceType)
-  , _atrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsResponse = AddTagsResponse'{_atrsResourceId
+                                        :: !(Maybe Text),
+                                        _atrsResourceType ::
+                                        !(Maybe TaggableResourceType),
+                                        _atrsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsResponse' with the minimum fields required to make a request.
 --
@@ -149,13 +144,10 @@ data AddTagsResponse = AddTagsResponse'
 addTagsResponse
     :: Int -- ^ 'atrsResponseStatus'
     -> AddTagsResponse
-addTagsResponse pResponseStatus_ =
-  AddTagsResponse'
-    { _atrsResourceId = Nothing
-    , _atrsResourceType = Nothing
-    , _atrsResponseStatus = pResponseStatus_
-    }
-
+addTagsResponse pResponseStatus_
+  = AddTagsResponse'{_atrsResourceId = Nothing,
+                     _atrsResourceType = Nothing,
+                     _atrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the ML object that was tagged.
 atrsResourceId :: Lens' AddTagsResponse (Maybe Text)

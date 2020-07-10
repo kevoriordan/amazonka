@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deregister a registered Amazon EC2 or on-premises instance. This action removes the instance from the stack and returns it to your control. This action can not be used with instances that were created with AWS OpsWorks Stacks.
+-- Deregister a registered Amazon EC2 or on-premises instance. This action removes the instance from the stack and returns it to your control. This action cannot be used with instances that were created with AWS OpsWorks Stacks.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DeregisterInstance
     (
@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deregisterInstance' smart constructor.
-newtype DeregisterInstance = DeregisterInstance'
-  { _dInstanceId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeregisterInstance = DeregisterInstance'{_dInstanceId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeregisterInstance' with the minimum fields required to make a request.
 --
@@ -57,9 +57,8 @@ newtype DeregisterInstance = DeregisterInstance'
 deregisterInstance
     :: Text -- ^ 'dInstanceId'
     -> DeregisterInstance
-deregisterInstance pInstanceId_ =
-  DeregisterInstance' {_dInstanceId = pInstanceId_}
-
+deregisterInstance pInstanceId_
+  = DeregisterInstance'{_dInstanceId = pInstanceId_}
 
 -- | The instance ID.
 dInstanceId :: Lens' DeregisterInstance Text
@@ -97,16 +96,15 @@ instance ToQuery DeregisterInstance where
         toQuery = const mempty
 
 -- | /See:/ 'deregisterInstanceResponse' smart constructor.
-data DeregisterInstanceResponse =
-  DeregisterInstanceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterInstanceResponse = DeregisterInstanceResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeregisterInstanceResponse' with the minimum fields required to make a request.
 --
 deregisterInstanceResponse
     :: DeregisterInstanceResponse
-deregisterInstanceResponse = DeregisterInstanceResponse'
-
+deregisterInstanceResponse
+  = DeregisterInstanceResponse'
 
 instance NFData DeregisterInstanceResponse where

@@ -52,13 +52,12 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getParameterHistory' smart constructor.
-data GetParameterHistory = GetParameterHistory'
-  { _gphWithDecryption :: !(Maybe Bool)
-  , _gphNextToken      :: !(Maybe Text)
-  , _gphMaxResults     :: !(Maybe Nat)
-  , _gphName           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetParameterHistory = GetParameterHistory'{_gphWithDecryption
+                                                :: !(Maybe Bool),
+                                                _gphNextToken :: !(Maybe Text),
+                                                _gphMaxResults :: !(Maybe Nat),
+                                                _gphName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetParameterHistory' with the minimum fields required to make a request.
 --
@@ -74,14 +73,10 @@ data GetParameterHistory = GetParameterHistory'
 getParameterHistory
     :: Text -- ^ 'gphName'
     -> GetParameterHistory
-getParameterHistory pName_ =
-  GetParameterHistory'
-    { _gphWithDecryption = Nothing
-    , _gphNextToken = Nothing
-    , _gphMaxResults = Nothing
-    , _gphName = pName_
-    }
-
+getParameterHistory pName_
+  = GetParameterHistory'{_gphWithDecryption = Nothing,
+                         _gphNextToken = Nothing, _gphMaxResults = Nothing,
+                         _gphName = pName_}
 
 -- | Return decrypted values for secure string parameters. This flag is ignored for String and StringList parameter types.
 gphWithDecryption :: Lens' GetParameterHistory (Maybe Bool)
@@ -147,12 +142,17 @@ instance ToQuery GetParameterHistory where
         toQuery = const mempty
 
 -- | /See:/ 'getParameterHistoryResponse' smart constructor.
-data GetParameterHistoryResponse = GetParameterHistoryResponse'
-  { _gphrsNextToken      :: !(Maybe Text)
-  , _gphrsParameters     :: !(Maybe [ParameterHistory])
-  , _gphrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetParameterHistoryResponse = GetParameterHistoryResponse'{_gphrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gphrsParameters
+                                                                ::
+                                                                !(Maybe
+                                                                    [ParameterHistory]),
+                                                                _gphrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetParameterHistoryResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +166,11 @@ data GetParameterHistoryResponse = GetParameterHistoryResponse'
 getParameterHistoryResponse
     :: Int -- ^ 'gphrsResponseStatus'
     -> GetParameterHistoryResponse
-getParameterHistoryResponse pResponseStatus_ =
-  GetParameterHistoryResponse'
-    { _gphrsNextToken = Nothing
-    , _gphrsParameters = Nothing
-    , _gphrsResponseStatus = pResponseStatus_
-    }
-
+getParameterHistoryResponse pResponseStatus_
+  = GetParameterHistoryResponse'{_gphrsNextToken =
+                                   Nothing,
+                                 _gphrsParameters = Nothing,
+                                 _gphrsResponseStatus = pResponseStatus_}
 
 -- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 gphrsNextToken :: Lens' GetParameterHistoryResponse (Maybe Text)

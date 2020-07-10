@@ -46,17 +46,16 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'modifyDBSubnetGroup' smart constructor.
-data ModifyDBSubnetGroup = ModifyDBSubnetGroup'
-  { _mdsgDBSubnetGroupDescription :: !(Maybe Text)
-  , _mdsgDBSubnetGroupName        :: !Text
-  , _mdsgSubnetIds                :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyDBSubnetGroup = ModifyDBSubnetGroup'{_mdsgDBSubnetGroupDescription
+                                                :: !(Maybe Text),
+                                                _mdsgDBSubnetGroupName :: !Text,
+                                                _mdsgSubnetIds :: ![Text]}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyDBSubnetGroup' with the minimum fields required to make a request.
 --
@@ -64,25 +63,23 @@ data ModifyDBSubnetGroup = ModifyDBSubnetGroup'
 --
 -- * 'mdsgDBSubnetGroupDescription' - The description for the DB subnet group.
 --
--- * 'mdsgDBSubnetGroupName' - The name for the DB subnet group. This value is stored as a lowercase string. You can't modify the default subnet group.  Constraints: Must match the name of an existing DBSubnetGroup. Must not be default. Example: @mySubnetgroup@
+-- * 'mdsgDBSubnetGroupName' - The name for the DB subnet group. This value is stored as a lowercase string. You can't modify the default subnet group.  Constraints: Must match the name of an existing DBSubnetGroup. Must not be default. Example: @mySubnetgroup@ 
 --
 -- * 'mdsgSubnetIds' - The EC2 subnet IDs for the DB subnet group.
 modifyDBSubnetGroup
     :: Text -- ^ 'mdsgDBSubnetGroupName'
     -> ModifyDBSubnetGroup
-modifyDBSubnetGroup pDBSubnetGroupName_ =
-  ModifyDBSubnetGroup'
-    { _mdsgDBSubnetGroupDescription = Nothing
-    , _mdsgDBSubnetGroupName = pDBSubnetGroupName_
-    , _mdsgSubnetIds = mempty
-    }
-
+modifyDBSubnetGroup pDBSubnetGroupName_
+  = ModifyDBSubnetGroup'{_mdsgDBSubnetGroupDescription
+                           = Nothing,
+                         _mdsgDBSubnetGroupName = pDBSubnetGroupName_,
+                         _mdsgSubnetIds = mempty}
 
 -- | The description for the DB subnet group.
 mdsgDBSubnetGroupDescription :: Lens' ModifyDBSubnetGroup (Maybe Text)
 mdsgDBSubnetGroupDescription = lens _mdsgDBSubnetGroupDescription (\ s a -> s{_mdsgDBSubnetGroupDescription = a})
 
--- | The name for the DB subnet group. This value is stored as a lowercase string. You can't modify the default subnet group.  Constraints: Must match the name of an existing DBSubnetGroup. Must not be default. Example: @mySubnetgroup@
+-- | The name for the DB subnet group. This value is stored as a lowercase string. You can't modify the default subnet group.  Constraints: Must match the name of an existing DBSubnetGroup. Must not be default. Example: @mySubnetgroup@ 
 mdsgDBSubnetGroupName :: Lens' ModifyDBSubnetGroup Text
 mdsgDBSubnetGroupName = lens _mdsgDBSubnetGroupName (\ s a -> s{_mdsgDBSubnetGroupName = a})
 
@@ -122,11 +119,14 @@ instance ToQuery ModifyDBSubnetGroup where
                  toQueryList "SubnetIdentifier" _mdsgSubnetIds]
 
 -- | /See:/ 'modifyDBSubnetGroupResponse' smart constructor.
-data ModifyDBSubnetGroupResponse = ModifyDBSubnetGroupResponse'
-  { _mdsgrsDBSubnetGroup  :: !(Maybe DBSubnetGroup)
-  , _mdsgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyDBSubnetGroupResponse = ModifyDBSubnetGroupResponse'{_mdsgrsDBSubnetGroup
+                                                                ::
+                                                                !(Maybe
+                                                                    DBSubnetGroup),
+                                                                _mdsgrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ModifyDBSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +138,10 @@ data ModifyDBSubnetGroupResponse = ModifyDBSubnetGroupResponse'
 modifyDBSubnetGroupResponse
     :: Int -- ^ 'mdsgrsResponseStatus'
     -> ModifyDBSubnetGroupResponse
-modifyDBSubnetGroupResponse pResponseStatus_ =
-  ModifyDBSubnetGroupResponse'
-    {_mdsgrsDBSubnetGroup = Nothing, _mdsgrsResponseStatus = pResponseStatus_}
-
+modifyDBSubnetGroupResponse pResponseStatus_
+  = ModifyDBSubnetGroupResponse'{_mdsgrsDBSubnetGroup =
+                                   Nothing,
+                                 _mdsgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 mdsgrsDBSubnetGroup :: Lens' ModifyDBSubnetGroupResponse (Maybe DBSubnetGroup)

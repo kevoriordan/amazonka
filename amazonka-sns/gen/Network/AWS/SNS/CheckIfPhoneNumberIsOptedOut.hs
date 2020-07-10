@@ -51,10 +51,10 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'checkIfPhoneNumberIsOptedOut' smart constructor.
-newtype CheckIfPhoneNumberIsOptedOut = CheckIfPhoneNumberIsOptedOut'
-  { _cipniooPhoneNumber :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CheckIfPhoneNumberIsOptedOut = CheckIfPhoneNumberIsOptedOut'{_cipniooPhoneNumber
+                                                                     :: Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CheckIfPhoneNumberIsOptedOut' with the minimum fields required to make a request.
 --
@@ -64,9 +64,9 @@ newtype CheckIfPhoneNumberIsOptedOut = CheckIfPhoneNumberIsOptedOut'
 checkIfPhoneNumberIsOptedOut
     :: Text -- ^ 'cipniooPhoneNumber'
     -> CheckIfPhoneNumberIsOptedOut
-checkIfPhoneNumberIsOptedOut pPhoneNumber_ =
-  CheckIfPhoneNumberIsOptedOut' {_cipniooPhoneNumber = pPhoneNumber_}
-
+checkIfPhoneNumberIsOptedOut pPhoneNumber_
+  = CheckIfPhoneNumberIsOptedOut'{_cipniooPhoneNumber =
+                                    pPhoneNumber_}
 
 -- | The phone number for which you want to check the opt out status.
 cipniooPhoneNumber :: Lens' CheckIfPhoneNumberIsOptedOut Text
@@ -107,11 +107,15 @@ instance ToQuery CheckIfPhoneNumberIsOptedOut where
 --
 --
 -- /See:/ 'checkIfPhoneNumberIsOptedOutResponse' smart constructor.
-data CheckIfPhoneNumberIsOptedOutResponse = CheckIfPhoneNumberIsOptedOutResponse'
-  { _cipnioorsIsOptedOut     :: !(Maybe Bool)
-  , _cipnioorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CheckIfPhoneNumberIsOptedOutResponse = CheckIfPhoneNumberIsOptedOutResponse'{_cipnioorsIsOptedOut
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Bool),
+                                                                                  _cipnioorsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'CheckIfPhoneNumberIsOptedOutResponse' with the minimum fields required to make a request.
 --
@@ -123,12 +127,11 @@ data CheckIfPhoneNumberIsOptedOutResponse = CheckIfPhoneNumberIsOptedOutResponse
 checkIfPhoneNumberIsOptedOutResponse
     :: Int -- ^ 'cipnioorsResponseStatus'
     -> CheckIfPhoneNumberIsOptedOutResponse
-checkIfPhoneNumberIsOptedOutResponse pResponseStatus_ =
-  CheckIfPhoneNumberIsOptedOutResponse'
-    { _cipnioorsIsOptedOut = Nothing
-    , _cipnioorsResponseStatus = pResponseStatus_
-    }
-
+checkIfPhoneNumberIsOptedOutResponse pResponseStatus_
+  = CheckIfPhoneNumberIsOptedOutResponse'{_cipnioorsIsOptedOut
+                                            = Nothing,
+                                          _cipnioorsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Indicates whether the phone number is opted out:     * @true@ – The phone number is opted out, meaning you cannot publish SMS messages to it.     * @false@ – The phone number is opted in, meaning you can publish SMS messages to it.
 cipnioorsIsOptedOut :: Lens' CheckIfPhoneNumberIsOptedOutResponse (Maybe Bool)

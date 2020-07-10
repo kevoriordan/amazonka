@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListDomains@ operation lists all domains associated with the Access Key ID. It returns domain names up to the limit set by <#MaxNumberOfDomains MaxNumberOfDomains> . A <#NextToken NextToken> is returned if there are more than @MaxNumberOfDomains@ domains. Calling @ListDomains@ successive times with the @NextToken@ provided by the operation returns up to @MaxNumberOfDomains@ more domain names with each successive operation call.
+-- The @ListDomains@ operation lists all domains associated with the Access Key ID. It returns domain names up to the limit set by <#MaxNumberOfDomains MaxNumberOfDomains> . A <#NextToken NextToken> is returned if there are more than @MaxNumberOfDomains@ domains. Calling @ListDomains@ successive times with the @NextToken@ provided by the operation returns up to @MaxNumberOfDomains@ more domain names with each successive operation call. 
 --
 --
 --
@@ -50,11 +50,10 @@ import Network.AWS.SDB.Types
 import Network.AWS.SDB.Types.Product
 
 -- | /See:/ 'listDomains' smart constructor.
-data ListDomains = ListDomains'
-  { _ldMaxNumberOfDomains :: !(Maybe Int)
-  , _ldNextToken          :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDomains = ListDomains'{_ldMaxNumberOfDomains
+                                :: !(Maybe Int),
+                                _ldNextToken :: !(Maybe Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDomains' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data ListDomains = ListDomains'
 -- * 'ldNextToken' - A string informing Amazon SimpleDB where to start the next list of domain names.
 listDomains
     :: ListDomains
-listDomains =
-  ListDomains' {_ldMaxNumberOfDomains = Nothing, _ldNextToken = Nothing}
-
+listDomains
+  = ListDomains'{_ldMaxNumberOfDomains = Nothing,
+                 _ldNextToken = Nothing}
 
 -- | The maximum number of domain names you want returned. The range is 1 to 100. The default setting is 100.
 ldMaxNumberOfDomains :: Lens' ListDomains (Maybe Int)
@@ -114,12 +113,11 @@ instance ToQuery ListDomains where
                "NextToken" =: _ldNextToken]
 
 -- | /See:/ 'listDomainsResponse' smart constructor.
-data ListDomainsResponse = ListDomainsResponse'
-  { _ldrsDomainNames    :: !(Maybe [Text])
-  , _ldrsNextToken      :: !(Maybe Text)
-  , _ldrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDomainsResponse = ListDomainsResponse'{_ldrsDomainNames
+                                                :: !(Maybe [Text]),
+                                                _ldrsNextToken :: !(Maybe Text),
+                                                _ldrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDomainsResponse' with the minimum fields required to make a request.
 --
@@ -127,25 +125,22 @@ data ListDomainsResponse = ListDomainsResponse'
 --
 -- * 'ldrsDomainNames' - A list of domain names that match the expression.
 --
--- * 'ldrsNextToken' - @MaxNumberOfDomains@
+-- * 'ldrsNextToken' - @MaxNumberOfDomains@ 
 --
 -- * 'ldrsResponseStatus' - -- | The response status code.
 listDomainsResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDomainsResponse
-listDomainsResponse pResponseStatus_ =
-  ListDomainsResponse'
-    { _ldrsDomainNames = Nothing
-    , _ldrsNextToken = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    }
-
+listDomainsResponse pResponseStatus_
+  = ListDomainsResponse'{_ldrsDomainNames = Nothing,
+                         _ldrsNextToken = Nothing,
+                         _ldrsResponseStatus = pResponseStatus_}
 
 -- | A list of domain names that match the expression.
 ldrsDomainNames :: Lens' ListDomainsResponse [Text]
 ldrsDomainNames = lens _ldrsDomainNames (\ s a -> s{_ldrsDomainNames = a}) . _Default . _Coerce
 
--- | @MaxNumberOfDomains@
+-- | @MaxNumberOfDomains@ 
 ldrsNextToken :: Lens' ListDomainsResponse (Maybe Text)
 ldrsNextToken = lens _ldrsNextToken (\ s a -> s{_ldrsNextToken = a})
 

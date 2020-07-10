@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds one or more tags to a stream. A /tag/ is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the /AWS Billing and Cost Management User Guide/ .
+-- Adds one or more tags to a stream. A /tag/ is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the /AWS Billing and Cost Management User Guide/ . 
 --
 --
 -- You must provide either the @StreamName@ or the @StreamARN@ .
@@ -52,12 +52,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'tagStream' smart constructor.
-data TagStream = TagStream'
-  { _tsStreamARN  :: !(Maybe Text)
-  , _tsStreamName :: !(Maybe Text)
-  , _tsTags       :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagStream = TagStream'{_tsStreamARN ::
+                            !(Maybe Text),
+                            _tsStreamName :: !(Maybe Text),
+                            _tsTags :: !(Map Text Text)}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagStream' with the minimum fields required to make a request.
 --
@@ -70,9 +69,9 @@ data TagStream = TagStream'
 -- * 'tsTags' - A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
 tagStream
     :: TagStream
-tagStream =
-  TagStream' {_tsStreamARN = Nothing, _tsStreamName = Nothing, _tsTags = mempty}
-
+tagStream
+  = TagStream'{_tsStreamARN = Nothing,
+               _tsStreamName = Nothing, _tsTags = mempty}
 
 -- | The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.
 tsStreamARN :: Lens' TagStream (Maybe Text)
@@ -116,10 +115,9 @@ instance ToQuery TagStream where
         toQuery = const mempty
 
 -- | /See:/ 'tagStreamResponse' smart constructor.
-newtype TagStreamResponse = TagStreamResponse'
-  { _tsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype TagStreamResponse = TagStreamResponse'{_tsrsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagStreamResponse' with the minimum fields required to make a request.
 --
@@ -129,9 +127,9 @@ newtype TagStreamResponse = TagStreamResponse'
 tagStreamResponse
     :: Int -- ^ 'tsrsResponseStatus'
     -> TagStreamResponse
-tagStreamResponse pResponseStatus_ =
-  TagStreamResponse' {_tsrsResponseStatus = pResponseStatus_}
-
+tagStreamResponse pResponseStatus_
+  = TagStreamResponse'{_tsrsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 tsrsResponseStatus :: Lens' TagStreamResponse Int

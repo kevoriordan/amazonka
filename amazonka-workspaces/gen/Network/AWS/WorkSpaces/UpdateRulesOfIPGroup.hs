@@ -45,27 +45,27 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'updateRulesOfIPGroup' smart constructor.
-data UpdateRulesOfIPGroup = UpdateRulesOfIPGroup'
-  { _uroigGroupId   :: !Text
-  , _uroigUserRules :: ![IPRuleItem]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRulesOfIPGroup = UpdateRulesOfIPGroup'{_uroigGroupId
+                                                  :: !Text,
+                                                  _uroigUserRules ::
+                                                  ![IPRuleItem]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRulesOfIPGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uroigGroupId' - The ID of the group.
+-- * 'uroigGroupId' - The identifier of the group.
 --
 -- * 'uroigUserRules' - One or more rules.
 updateRulesOfIPGroup
     :: Text -- ^ 'uroigGroupId'
     -> UpdateRulesOfIPGroup
-updateRulesOfIPGroup pGroupId_ =
-  UpdateRulesOfIPGroup' {_uroigGroupId = pGroupId_, _uroigUserRules = mempty}
+updateRulesOfIPGroup pGroupId_
+  = UpdateRulesOfIPGroup'{_uroigGroupId = pGroupId_,
+                          _uroigUserRules = mempty}
 
-
--- | The ID of the group.
+-- | The identifier of the group.
 uroigGroupId :: Lens' UpdateRulesOfIPGroup Text
 uroigGroupId = lens _uroigGroupId (\ s a -> s{_uroigGroupId = a})
 
@@ -111,10 +111,10 @@ instance ToQuery UpdateRulesOfIPGroup where
         toQuery = const mempty
 
 -- | /See:/ 'updateRulesOfIPGroupResponse' smart constructor.
-newtype UpdateRulesOfIPGroupResponse = UpdateRulesOfIPGroupResponse'
-  { _uroigrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateRulesOfIPGroupResponse = UpdateRulesOfIPGroupResponse'{_uroigrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateRulesOfIPGroupResponse' with the minimum fields required to make a request.
 --
@@ -124,9 +124,9 @@ newtype UpdateRulesOfIPGroupResponse = UpdateRulesOfIPGroupResponse'
 updateRulesOfIPGroupResponse
     :: Int -- ^ 'uroigrsResponseStatus'
     -> UpdateRulesOfIPGroupResponse
-updateRulesOfIPGroupResponse pResponseStatus_ =
-  UpdateRulesOfIPGroupResponse' {_uroigrsResponseStatus = pResponseStatus_}
-
+updateRulesOfIPGroupResponse pResponseStatus_
+  = UpdateRulesOfIPGroupResponse'{_uroigrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 uroigrsResponseStatus :: Lens' UpdateRulesOfIPGroupResponse Int

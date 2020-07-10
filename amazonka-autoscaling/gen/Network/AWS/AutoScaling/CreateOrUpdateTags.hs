@@ -23,7 +23,7 @@
 --
 -- When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html Tagging Auto Scaling Groups and Instances> in the /Auto Scaling User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html Tagging Auto Scaling Groups and Instances> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.CreateOrUpdateTags
     (
@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createOrUpdateTags' smart constructor.
-newtype CreateOrUpdateTags = CreateOrUpdateTags'
-  { _coutTags :: [Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateOrUpdateTags = CreateOrUpdateTags'{_coutTags
+                                                 :: [Tag]}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateOrUpdateTags' with the minimum fields required to make a request.
 --
@@ -58,8 +58,8 @@ newtype CreateOrUpdateTags = CreateOrUpdateTags'
 -- * 'coutTags' - One or more tags.
 createOrUpdateTags
     :: CreateOrUpdateTags
-createOrUpdateTags = CreateOrUpdateTags' {_coutTags = mempty}
-
+createOrUpdateTags
+  = CreateOrUpdateTags'{_coutTags = mempty}
 
 -- | One or more tags.
 coutTags :: Lens' CreateOrUpdateTags [Tag]
@@ -89,16 +89,15 @@ instance ToQuery CreateOrUpdateTags where
                "Tags" =: toQueryList "member" _coutTags]
 
 -- | /See:/ 'createOrUpdateTagsResponse' smart constructor.
-data CreateOrUpdateTagsResponse =
-  CreateOrUpdateTagsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateOrUpdateTagsResponse = CreateOrUpdateTagsResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateOrUpdateTagsResponse' with the minimum fields required to make a request.
 --
 createOrUpdateTagsResponse
     :: CreateOrUpdateTagsResponse
-createOrUpdateTagsResponse = CreateOrUpdateTagsResponse'
-
+createOrUpdateTagsResponse
+  = CreateOrUpdateTagsResponse'
 
 instance NFData CreateOrUpdateTagsResponse where

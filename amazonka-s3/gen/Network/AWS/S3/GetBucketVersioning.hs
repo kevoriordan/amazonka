@@ -19,6 +19,22 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the versioning state of a bucket.
+--
+--
+-- To retrieve the versioning state of a bucket, you must be the bucket owner.
+--
+-- This implementation also returns the MFA Delete status of the versioning state. If the MFA Delete status is @enabled@ , the bucket owner must use an authentication device to change the versioning state of the bucket.
+--
+-- The following operations are related to @GetBucketVersioning@ :
+--
+--     * 'GetObject' 
+--
+--     * 'PutObject' 
+--
+--     * 'DeleteObject' 
+--
+--
+--
 module Network.AWS.S3.GetBucketVersioning
     (
     -- * Creating a Request
@@ -44,23 +60,23 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'getBucketVersioning' smart constructor.
-newtype GetBucketVersioning = GetBucketVersioning'
-  { _gbvBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBucketVersioning = GetBucketVersioning'{_gbvBucket
+                                                   :: BucketName}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetBucketVersioning' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbvBucket' - Undocumented member.
+-- * 'gbvBucket' - The name of the bucket for which to get the versioning information.
 getBucketVersioning
     :: BucketName -- ^ 'gbvBucket'
     -> GetBucketVersioning
-getBucketVersioning pBucket_ = GetBucketVersioning' {_gbvBucket = pBucket_}
+getBucketVersioning pBucket_
+  = GetBucketVersioning'{_gbvBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The name of the bucket for which to get the versioning information.
 gbvBucket :: Lens' GetBucketVersioning BucketName
 gbvBucket = lens _gbvBucket (\ s a -> s{_gbvBucket = a})
 
@@ -90,12 +106,18 @@ instance ToQuery GetBucketVersioning where
         toQuery = const (mconcat ["versioning"])
 
 -- | /See:/ 'getBucketVersioningResponse' smart constructor.
-data GetBucketVersioningResponse = GetBucketVersioningResponse'
-  { _gbvrsStatus         :: !(Maybe BucketVersioningStatus)
-  , _gbvrsMFADelete      :: !(Maybe MFADeleteStatus)
-  , _gbvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBucketVersioningResponse = GetBucketVersioningResponse'{_gbvrsStatus
+                                                                ::
+                                                                !(Maybe
+                                                                    BucketVersioningStatus),
+                                                                _gbvrsMFADelete
+                                                                ::
+                                                                !(Maybe
+                                                                    MFADeleteStatus),
+                                                                _gbvrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetBucketVersioningResponse' with the minimum fields required to make a request.
 --
@@ -109,13 +131,11 @@ data GetBucketVersioningResponse = GetBucketVersioningResponse'
 getBucketVersioningResponse
     :: Int -- ^ 'gbvrsResponseStatus'
     -> GetBucketVersioningResponse
-getBucketVersioningResponse pResponseStatus_ =
-  GetBucketVersioningResponse'
-    { _gbvrsStatus = Nothing
-    , _gbvrsMFADelete = Nothing
-    , _gbvrsResponseStatus = pResponseStatus_
-    }
-
+getBucketVersioningResponse pResponseStatus_
+  = GetBucketVersioningResponse'{_gbvrsStatus =
+                                   Nothing,
+                                 _gbvrsMFADelete = Nothing,
+                                 _gbvrsResponseStatus = pResponseStatus_}
 
 -- | The versioning state of the bucket.
 gbvrsStatus :: Lens' GetBucketVersioningResponse (Maybe BucketVersioningStatus)

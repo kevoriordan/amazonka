@@ -49,10 +49,9 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'rebootWorkspaces' smart constructor.
-newtype RebootWorkspaces = RebootWorkspaces'
-  { _rwRebootWorkspaceRequests :: List1 RebootRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RebootWorkspaces = RebootWorkspaces'{_rwRebootWorkspaceRequests
+                                             :: List1 RebootRequest}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RebootWorkspaces' with the minimum fields required to make a request.
 --
@@ -62,10 +61,9 @@ newtype RebootWorkspaces = RebootWorkspaces'
 rebootWorkspaces
     :: NonEmpty RebootRequest -- ^ 'rwRebootWorkspaceRequests'
     -> RebootWorkspaces
-rebootWorkspaces pRebootWorkspaceRequests_ =
-  RebootWorkspaces'
-    {_rwRebootWorkspaceRequests = _List1 # pRebootWorkspaceRequests_}
-
+rebootWorkspaces pRebootWorkspaceRequests_
+  = RebootWorkspaces'{_rwRebootWorkspaceRequests =
+                        _List1 # pRebootWorkspaceRequests_}
 
 -- | The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
 rwRebootWorkspaceRequests :: Lens' RebootWorkspaces (NonEmpty RebootRequest)
@@ -109,11 +107,14 @@ instance ToQuery RebootWorkspaces where
         toQuery = const mempty
 
 -- | /See:/ 'rebootWorkspacesResponse' smart constructor.
-data RebootWorkspacesResponse = RebootWorkspacesResponse'
-  { _rrsFailedRequests :: !(Maybe [FailedWorkspaceChangeRequest])
-  , _rrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootWorkspacesResponse = RebootWorkspacesResponse'{_rrsFailedRequests
+                                                          ::
+                                                          !(Maybe
+                                                              [FailedWorkspaceChangeRequest]),
+                                                          _rrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'RebootWorkspacesResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +126,10 @@ data RebootWorkspacesResponse = RebootWorkspacesResponse'
 rebootWorkspacesResponse
     :: Int -- ^ 'rrsResponseStatus'
     -> RebootWorkspacesResponse
-rebootWorkspacesResponse pResponseStatus_ =
-  RebootWorkspacesResponse'
-    {_rrsFailedRequests = Nothing, _rrsResponseStatus = pResponseStatus_}
-
+rebootWorkspacesResponse pResponseStatus_
+  = RebootWorkspacesResponse'{_rrsFailedRequests =
+                                Nothing,
+                              _rrsResponseStatus = pResponseStatus_}
 
 -- | Information about the WorkSpaces that could not be rebooted.
 rrsFailedRequests :: Lens' RebootWorkspacesResponse [FailedWorkspaceChangeRequest]

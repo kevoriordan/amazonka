@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDataSource' smart constructor.
-data GetDataSource = GetDataSource'
-  { _gdsApiId :: !Text
-  , _gdsName  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDataSource = GetDataSource'{_gdsApiId ::
+                                    !Text,
+                                    _gdsName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDataSource' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ getDataSource
     :: Text -- ^ 'gdsApiId'
     -> Text -- ^ 'gdsName'
     -> GetDataSource
-getDataSource pApiId_ pName_ =
-  GetDataSource' {_gdsApiId = pApiId_, _gdsName = pName_}
-
+getDataSource pApiId_ pName_
+  = GetDataSource'{_gdsApiId = pApiId_,
+                   _gdsName = pName_}
 
 -- | The API ID.
 gdsApiId :: Lens' GetDataSource Text
@@ -105,11 +104,12 @@ instance ToQuery GetDataSource where
         toQuery = const mempty
 
 -- | /See:/ 'getDataSourceResponse' smart constructor.
-data GetDataSourceResponse = GetDataSourceResponse'
-  { _gdsrsDataSource     :: !(Maybe DataSource)
-  , _gdsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDataSourceResponse = GetDataSourceResponse'{_gdsrsDataSource
+                                                    :: !(Maybe DataSource),
+                                                    _gdsrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +121,9 @@ data GetDataSourceResponse = GetDataSourceResponse'
 getDataSourceResponse
     :: Int -- ^ 'gdsrsResponseStatus'
     -> GetDataSourceResponse
-getDataSourceResponse pResponseStatus_ =
-  GetDataSourceResponse'
-    {_gdsrsDataSource = Nothing, _gdsrsResponseStatus = pResponseStatus_}
-
+getDataSourceResponse pResponseStatus_
+  = GetDataSourceResponse'{_gdsrsDataSource = Nothing,
+                           _gdsrsResponseStatus = pResponseStatus_}
 
 -- | The @DataSource@ object.
 gdsrsDataSource :: Lens' GetDataSourceResponse (Maybe DataSource)

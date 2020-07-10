@@ -53,14 +53,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTaskDefinitions' smart constructor.
-data ListTaskDefinitions = ListTaskDefinitions'
-  { _ltdStatus       :: !(Maybe TaskDefinitionStatus)
-  , _ltdFamilyPrefix :: !(Maybe Text)
-  , _ltdNextToken    :: !(Maybe Text)
-  , _ltdSort         :: !(Maybe SortOrder)
-  , _ltdMaxResults   :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTaskDefinitions = ListTaskDefinitions'{_ltdStatus
+                                                ::
+                                                !(Maybe TaskDefinitionStatus),
+                                                _ltdFamilyPrefix ::
+                                                !(Maybe Text),
+                                                _ltdNextToken :: !(Maybe Text),
+                                                _ltdSort :: !(Maybe SortOrder),
+                                                _ltdMaxResults :: !(Maybe Int)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTaskDefinitions' with the minimum fields required to make a request.
 --
@@ -70,22 +71,17 @@ data ListTaskDefinitions = ListTaskDefinitions'
 --
 -- * 'ltdFamilyPrefix' - The full family name with which to filter the @ListTaskDefinitions@ results. Specifying a @familyPrefix@ limits the listed task definitions to task definition revisions that belong to that family.
 --
--- * 'ltdNextToken' - The @nextToken@ value returned from a previous paginated @ListTaskDefinitions@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- * 'ltdNextToken' - The @nextToken@ value returned from a @ListTaskDefinitions@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 --
 -- * 'ltdSort' - The order in which to sort the results. Valid values are @ASC@ and @DESC@ . By default (@ASC@ ), task definitions are listed lexicographically by family name and in ascending numerical order by revision so that the newest task definitions in a family are listed last. Setting this parameter to @DESC@ reverses the sort order on family name and revision so that the newest task definitions in a family are listed first.
 --
 -- * 'ltdMaxResults' - The maximum number of task definition results returned by @ListTaskDefinitions@ in paginated output. When this parameter is used, @ListTaskDefinitions@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListTaskDefinitions@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListTaskDefinitions@ returns up to 100 results and a @nextToken@ value if applicable.
 listTaskDefinitions
     :: ListTaskDefinitions
-listTaskDefinitions =
-  ListTaskDefinitions'
-    { _ltdStatus = Nothing
-    , _ltdFamilyPrefix = Nothing
-    , _ltdNextToken = Nothing
-    , _ltdSort = Nothing
-    , _ltdMaxResults = Nothing
-    }
-
+listTaskDefinitions
+  = ListTaskDefinitions'{_ltdStatus = Nothing,
+                         _ltdFamilyPrefix = Nothing, _ltdNextToken = Nothing,
+                         _ltdSort = Nothing, _ltdMaxResults = Nothing}
 
 -- | The task definition status with which to filter the @ListTaskDefinitions@ results. By default, only @ACTIVE@ task definitions are listed. By setting this parameter to @INACTIVE@ , you can view task definitions that are @INACTIVE@ as long as an active task or service still references them. If you paginate the resulting output, be sure to keep the @status@ value constant in each subsequent request.
 ltdStatus :: Lens' ListTaskDefinitions (Maybe TaskDefinitionStatus)
@@ -95,7 +91,7 @@ ltdStatus = lens _ltdStatus (\ s a -> s{_ltdStatus = a})
 ltdFamilyPrefix :: Lens' ListTaskDefinitions (Maybe Text)
 ltdFamilyPrefix = lens _ltdFamilyPrefix (\ s a -> s{_ltdFamilyPrefix = a})
 
--- | The @nextToken@ value returned from a previous paginated @ListTaskDefinitions@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- | The @nextToken@ value returned from a @ListTaskDefinitions@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 ltdNextToken :: Lens' ListTaskDefinitions (Maybe Text)
 ltdNextToken = lens _ltdNextToken (\ s a -> s{_ltdNextToken = a})
 
@@ -157,12 +153,16 @@ instance ToQuery ListTaskDefinitions where
         toQuery = const mempty
 
 -- | /See:/ 'listTaskDefinitionsResponse' smart constructor.
-data ListTaskDefinitionsResponse = ListTaskDefinitionsResponse'
-  { _ltdrsTaskDefinitionARNs :: !(Maybe [Text])
-  , _ltdrsNextToken          :: !(Maybe Text)
-  , _ltdrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTaskDefinitionsResponse = ListTaskDefinitionsResponse'{_ltdrsTaskDefinitionARNs
+                                                                ::
+                                                                !(Maybe [Text]),
+                                                                _ltdrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _ltdrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListTaskDefinitionsResponse' with the minimum fields required to make a request.
 --
@@ -176,13 +176,11 @@ data ListTaskDefinitionsResponse = ListTaskDefinitionsResponse'
 listTaskDefinitionsResponse
     :: Int -- ^ 'ltdrsResponseStatus'
     -> ListTaskDefinitionsResponse
-listTaskDefinitionsResponse pResponseStatus_ =
-  ListTaskDefinitionsResponse'
-    { _ltdrsTaskDefinitionARNs = Nothing
-    , _ltdrsNextToken = Nothing
-    , _ltdrsResponseStatus = pResponseStatus_
-    }
-
+listTaskDefinitionsResponse pResponseStatus_
+  = ListTaskDefinitionsResponse'{_ltdrsTaskDefinitionARNs
+                                   = Nothing,
+                                 _ltdrsNextToken = Nothing,
+                                 _ltdrsResponseStatus = pResponseStatus_}
 
 -- | The list of task definition Amazon Resource Name (ARN) entries for the @ListTaskDefinitions@ request.
 ltdrsTaskDefinitionARNs :: Lens' ListTaskDefinitionsResponse [Text]

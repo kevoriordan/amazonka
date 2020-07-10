@@ -21,9 +21,9 @@
 -- Registers instances that were created outside of AWS OpsWorks Stacks with a specified stack.
 --
 --
--- Registered instances have the same requirements as instances that are created by using the 'CreateInstance' API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see <http://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html Preparing the Instance> .
+-- Registered instances have the same requirements as instances that are created by using the 'CreateInstance' API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see <https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html Preparing the Instance> .
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.RegisterInstance
     (
@@ -55,16 +55,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'registerInstance' smart constructor.
-data RegisterInstance = RegisterInstance'
-  { _riPrivateIP               :: !(Maybe Text)
-  , _riHostname                :: !(Maybe Text)
-  , _riInstanceIdentity        :: !(Maybe InstanceIdentity)
-  , _riPublicIP                :: !(Maybe Text)
-  , _riRsaPublicKeyFingerprint :: !(Maybe Text)
-  , _riRsaPublicKey            :: !(Maybe Text)
-  , _riStackId                 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterInstance = RegisterInstance'{_riPrivateIP
+                                          :: !(Maybe Text),
+                                          _riHostname :: !(Maybe Text),
+                                          _riInstanceIdentity ::
+                                          !(Maybe InstanceIdentity),
+                                          _riPublicIP :: !(Maybe Text),
+                                          _riRsaPublicKeyFingerprint ::
+                                          !(Maybe Text),
+                                          _riRsaPublicKey :: !(Maybe Text),
+                                          _riStackId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterInstance' with the minimum fields required to make a request.
 --
@@ -86,17 +87,12 @@ data RegisterInstance = RegisterInstance'
 registerInstance
     :: Text -- ^ 'riStackId'
     -> RegisterInstance
-registerInstance pStackId_ =
-  RegisterInstance'
-    { _riPrivateIP = Nothing
-    , _riHostname = Nothing
-    , _riInstanceIdentity = Nothing
-    , _riPublicIP = Nothing
-    , _riRsaPublicKeyFingerprint = Nothing
-    , _riRsaPublicKey = Nothing
-    , _riStackId = pStackId_
-    }
-
+registerInstance pStackId_
+  = RegisterInstance'{_riPrivateIP = Nothing,
+                      _riHostname = Nothing, _riInstanceIdentity = Nothing,
+                      _riPublicIP = Nothing,
+                      _riRsaPublicKeyFingerprint = Nothing,
+                      _riRsaPublicKey = Nothing, _riStackId = pStackId_}
 
 -- | The instance's private IP address.
 riPrivateIP :: Lens' RegisterInstance (Maybe Text)
@@ -172,11 +168,12 @@ instance ToQuery RegisterInstance where
 --
 --
 -- /See:/ 'registerInstanceResponse' smart constructor.
-data RegisterInstanceResponse = RegisterInstanceResponse'
-  { _rirsInstanceId     :: !(Maybe Text)
-  , _rirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterInstanceResponse = RegisterInstanceResponse'{_rirsInstanceId
+                                                          :: !(Maybe Text),
+                                                          _rirsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'RegisterInstanceResponse' with the minimum fields required to make a request.
 --
@@ -188,10 +185,10 @@ data RegisterInstanceResponse = RegisterInstanceResponse'
 registerInstanceResponse
     :: Int -- ^ 'rirsResponseStatus'
     -> RegisterInstanceResponse
-registerInstanceResponse pResponseStatus_ =
-  RegisterInstanceResponse'
-    {_rirsInstanceId = Nothing, _rirsResponseStatus = pResponseStatus_}
-
+registerInstanceResponse pResponseStatus_
+  = RegisterInstanceResponse'{_rirsInstanceId =
+                                Nothing,
+                              _rirsResponseStatus = pResponseStatus_}
 
 -- | The registered instance's AWS OpsWorks Stacks ID.
 rirsInstanceId :: Lens' RegisterInstanceResponse (Maybe Text)

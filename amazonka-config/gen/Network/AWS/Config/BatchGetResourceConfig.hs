@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.
+-- Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list. 
 --
 --
 module Network.AWS.Config.BatchGetResourceConfig
@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchGetResourceConfig' smart constructor.
-newtype BatchGetResourceConfig = BatchGetResourceConfig'
-  { _bgrcResourceKeys :: List1 ResourceKey
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype BatchGetResourceConfig = BatchGetResourceConfig'{_bgrcResourceKeys
+                                                         :: List1 ResourceKey}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'BatchGetResourceConfig' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype BatchGetResourceConfig = BatchGetResourceConfig'
 batchGetResourceConfig
     :: NonEmpty ResourceKey -- ^ 'bgrcResourceKeys'
     -> BatchGetResourceConfig
-batchGetResourceConfig pResourceKeys_ =
-  BatchGetResourceConfig' {_bgrcResourceKeys = _List1 # pResourceKeys_}
-
+batchGetResourceConfig pResourceKeys_
+  = BatchGetResourceConfig'{_bgrcResourceKeys =
+                              _List1 # pResourceKeys_}
 
 -- | A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID.
 bgrcResourceKeys :: Lens' BatchGetResourceConfig (NonEmpty ResourceKey)
@@ -106,12 +106,19 @@ instance ToQuery BatchGetResourceConfig where
         toQuery = const mempty
 
 -- | /See:/ 'batchGetResourceConfigResponse' smart constructor.
-data BatchGetResourceConfigResponse = BatchGetResourceConfigResponse'
-  { _bgrcrsBaseConfigurationItems  :: !(Maybe [BaseConfigurationItem])
-  , _bgrcrsUnprocessedResourceKeys :: !(Maybe (List1 ResourceKey))
-  , _bgrcrsResponseStatus          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetResourceConfigResponse = BatchGetResourceConfigResponse'{_bgrcrsBaseConfigurationItems
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [BaseConfigurationItem]),
+                                                                      _bgrcrsUnprocessedResourceKeys
+                                                                      ::
+                                                                      !(Maybe
+                                                                          (List1
+                                                                             ResourceKey)),
+                                                                      _bgrcrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'BatchGetResourceConfigResponse' with the minimum fields required to make a request.
 --
@@ -119,25 +126,23 @@ data BatchGetResourceConfigResponse = BatchGetResourceConfigResponse'
 --
 -- * 'bgrcrsBaseConfigurationItems' - A list that contains the current configuration of one or more resources.
 --
--- * 'bgrcrsUnprocessedResourceKeys' - A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list.
+-- * 'bgrcrsUnprocessedResourceKeys' - A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list. 
 --
 -- * 'bgrcrsResponseStatus' - -- | The response status code.
 batchGetResourceConfigResponse
     :: Int -- ^ 'bgrcrsResponseStatus'
     -> BatchGetResourceConfigResponse
-batchGetResourceConfigResponse pResponseStatus_ =
-  BatchGetResourceConfigResponse'
-    { _bgrcrsBaseConfigurationItems = Nothing
-    , _bgrcrsUnprocessedResourceKeys = Nothing
-    , _bgrcrsResponseStatus = pResponseStatus_
-    }
-
+batchGetResourceConfigResponse pResponseStatus_
+  = BatchGetResourceConfigResponse'{_bgrcrsBaseConfigurationItems
+                                      = Nothing,
+                                    _bgrcrsUnprocessedResourceKeys = Nothing,
+                                    _bgrcrsResponseStatus = pResponseStatus_}
 
 -- | A list that contains the current configuration of one or more resources.
 bgrcrsBaseConfigurationItems :: Lens' BatchGetResourceConfigResponse [BaseConfigurationItem]
 bgrcrsBaseConfigurationItems = lens _bgrcrsBaseConfigurationItems (\ s a -> s{_bgrcrsBaseConfigurationItems = a}) . _Default . _Coerce
 
--- | A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list.
+-- | A list of resource keys that were not processed with the current response. The unprocessesResourceKeys value is in the same form as ResourceKeys, so the value can be directly provided to a subsequent BatchGetResourceConfig operation. If there are no unprocessed resource keys, the response contains an empty unprocessedResourceKeys list. 
 bgrcrsUnprocessedResourceKeys :: Lens' BatchGetResourceConfigResponse (Maybe (NonEmpty ResourceKey))
 bgrcrsUnprocessedResourceKeys = lens _bgrcrsUnprocessedResourceKeys (\ s a -> s{_bgrcrsUnprocessedResourceKeys = a}) . mapping _List1
 

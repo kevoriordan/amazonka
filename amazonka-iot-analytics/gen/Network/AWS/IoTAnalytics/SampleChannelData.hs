@@ -48,13 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'sampleChannelData' smart constructor.
-data SampleChannelData = SampleChannelData'
-  { _scdStartTime   :: !(Maybe POSIX)
-  , _scdMaxMessages :: !(Maybe Nat)
-  , _scdEndTime     :: !(Maybe POSIX)
-  , _scdChannelName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SampleChannelData = SampleChannelData'{_scdStartTime
+                                            :: !(Maybe POSIX),
+                                            _scdMaxMessages :: !(Maybe Nat),
+                                            _scdEndTime :: !(Maybe POSIX),
+                                            _scdChannelName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SampleChannelData' with the minimum fields required to make a request.
 --
@@ -70,14 +69,10 @@ data SampleChannelData = SampleChannelData'
 sampleChannelData
     :: Text -- ^ 'scdChannelName'
     -> SampleChannelData
-sampleChannelData pChannelName_ =
-  SampleChannelData'
-    { _scdStartTime = Nothing
-    , _scdMaxMessages = Nothing
-    , _scdEndTime = Nothing
-    , _scdChannelName = pChannelName_
-    }
-
+sampleChannelData pChannelName_
+  = SampleChannelData'{_scdStartTime = Nothing,
+                       _scdMaxMessages = Nothing, _scdEndTime = Nothing,
+                       _scdChannelName = pChannelName_}
 
 -- | The start of the time window from which sample messages are retrieved.
 scdStartTime :: Lens' SampleChannelData (Maybe UTCTime)
@@ -124,11 +119,14 @@ instance ToQuery SampleChannelData where
                "endTime" =: _scdEndTime]
 
 -- | /See:/ 'sampleChannelDataResponse' smart constructor.
-data SampleChannelDataResponse = SampleChannelDataResponse'
-  { _scdrsPayloads       :: !(Maybe (List1 Base64))
-  , _scdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SampleChannelDataResponse = SampleChannelDataResponse'{_scdrsPayloads
+                                                            ::
+                                                            !(Maybe
+                                                                (List1 Base64)),
+                                                            _scdrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'SampleChannelDataResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +138,10 @@ data SampleChannelDataResponse = SampleChannelDataResponse'
 sampleChannelDataResponse
     :: Int -- ^ 'scdrsResponseStatus'
     -> SampleChannelDataResponse
-sampleChannelDataResponse pResponseStatus_ =
-  SampleChannelDataResponse'
-    {_scdrsPayloads = Nothing, _scdrsResponseStatus = pResponseStatus_}
-
+sampleChannelDataResponse pResponseStatus_
+  = SampleChannelDataResponse'{_scdrsPayloads =
+                                 Nothing,
+                               _scdrsResponseStatus = pResponseStatus_}
 
 -- | The list of message samples. Each sample message is returned as a base64-encoded string.
 scdrsPayloads :: Lens' SampleChannelDataResponse (Maybe (NonEmpty ByteString))

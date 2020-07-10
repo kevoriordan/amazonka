@@ -18,7 +18,23 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the lifecycle configuration from the bucket.
+-- Deletes the lifecycle configuration from the specified bucket. Amazon S3 removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration.
+--
+--
+-- To use this operation, you must have permission to perform the @s3:PutLifecycleConfiguration@ action. By default, the bucket owner has this permission and the bucket owner can grant this permission to others.
+--
+-- There is usually some time lag before lifecycle configuration deletion is fully propagated to all the Amazon S3 systems.
+--
+-- For more information about the object expiration, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions Elements to Describe Lifecycle Actions> .
+--
+-- Related actions include:
+--
+--     * 'PutBucketLifecycleConfiguration' 
+--
+--     * 'GetBucketLifecycleConfiguration' 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketLifecycle
     (
     -- * Creating a Request
@@ -40,23 +56,23 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketLifecycle' smart constructor.
-newtype DeleteBucketLifecycle = DeleteBucketLifecycle'
-  { _dblBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBucketLifecycle = DeleteBucketLifecycle'{_dblBucket
+                                                       :: BucketName}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteBucketLifecycle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dblBucket' - Undocumented member.
+-- * 'dblBucket' - The bucket name of the lifecycle to delete.
 deleteBucketLifecycle
     :: BucketName -- ^ 'dblBucket'
     -> DeleteBucketLifecycle
-deleteBucketLifecycle pBucket_ = DeleteBucketLifecycle' {_dblBucket = pBucket_}
+deleteBucketLifecycle pBucket_
+  = DeleteBucketLifecycle'{_dblBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name of the lifecycle to delete.
 dblBucket :: Lens' DeleteBucketLifecycle BucketName
 dblBucket = lens _dblBucket (\ s a -> s{_dblBucket = a})
 
@@ -81,16 +97,15 @@ instance ToQuery DeleteBucketLifecycle where
         toQuery = const (mconcat ["lifecycle"])
 
 -- | /See:/ 'deleteBucketLifecycleResponse' smart constructor.
-data DeleteBucketLifecycleResponse =
-  DeleteBucketLifecycleResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketLifecycleResponse = DeleteBucketLifecycleResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteBucketLifecycleResponse' with the minimum fields required to make a request.
 --
 deleteBucketLifecycleResponse
     :: DeleteBucketLifecycleResponse
-deleteBucketLifecycleResponse = DeleteBucketLifecycleResponse'
-
+deleteBucketLifecycleResponse
+  = DeleteBucketLifecycleResponse'
 
 instance NFData DeleteBucketLifecycleResponse where

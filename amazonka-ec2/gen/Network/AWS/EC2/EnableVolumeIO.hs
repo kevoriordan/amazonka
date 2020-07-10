@@ -42,16 +42,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for EnableVolumeIO.
---
---
---
--- /See:/ 'enableVolumeIO' smart constructor.
-data EnableVolumeIO = EnableVolumeIO'
-  { _evioDryRun   :: !(Maybe Bool)
-  , _evioVolumeId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'enableVolumeIO' smart constructor.
+data EnableVolumeIO = EnableVolumeIO'{_evioDryRun ::
+                                      !(Maybe Bool),
+                                      _evioVolumeId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableVolumeIO' with the minimum fields required to make a request.
 --
@@ -63,9 +58,9 @@ data EnableVolumeIO = EnableVolumeIO'
 enableVolumeIO
     :: Text -- ^ 'evioVolumeId'
     -> EnableVolumeIO
-enableVolumeIO pVolumeId_ =
-  EnableVolumeIO' {_evioDryRun = Nothing, _evioVolumeId = pVolumeId_}
-
+enableVolumeIO pVolumeId_
+  = EnableVolumeIO'{_evioDryRun = Nothing,
+                    _evioVolumeId = pVolumeId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 evioDryRun :: Lens' EnableVolumeIO (Maybe Bool)
@@ -98,16 +93,14 @@ instance ToQuery EnableVolumeIO where
                "DryRun" =: _evioDryRun, "VolumeId" =: _evioVolumeId]
 
 -- | /See:/ 'enableVolumeIOResponse' smart constructor.
-data EnableVolumeIOResponse =
-  EnableVolumeIOResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableVolumeIOResponse = EnableVolumeIOResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'EnableVolumeIOResponse' with the minimum fields required to make a request.
 --
 enableVolumeIOResponse
     :: EnableVolumeIOResponse
 enableVolumeIOResponse = EnableVolumeIOResponse'
-
 
 instance NFData EnableVolumeIOResponse where

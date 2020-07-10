@@ -14,11 +14,11 @@
 module Test.AWS.Gen.CloudTrail where
 
 import Data.Proxy
-import Network.AWS.CloudTrail
-import Test.AWS.CloudTrail.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.CloudTrail
+import Test.AWS.CloudTrail.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -52,8 +52,14 @@ import Test.Tasty
 --         , requestCreateTrail $
 --             createTrail
 --
+--         , requestPutInsightSelectors $
+--             putInsightSelectors
+--
 --         , requestGetEventSelectors $
 --             getEventSelectors
+--
+--         , requestGetTrail $
+--             getTrail
 --
 --         , requestGetTrailStatus $
 --             getTrailStatus
@@ -69,6 +75,12 @@ import Test.Tasty
 --
 --         , requestStartLogging $
 --             startLogging
+--
+--         , requestListTrails $
+--             listTrails
+--
+--         , requestGetInsightSelectors $
+--             getInsightSelectors
 --
 --           ]
 
@@ -97,8 +109,14 @@ import Test.Tasty
 --         , responseCreateTrail $
 --             createTrailResponse
 --
+--         , responsePutInsightSelectors $
+--             putInsightSelectorsResponse
+--
 --         , responseGetEventSelectors $
 --             getEventSelectorsResponse
+--
+--         , responseGetTrail $
+--             getTrailResponse
 --
 --         , responseGetTrailStatus $
 --             getTrailStatusResponse
@@ -114,6 +132,12 @@ import Test.Tasty
 --
 --         , responseStartLogging $
 --             startLoggingResponse
+--
+--         , responseListTrails $
+--             listTrailsResponse
+--
+--         , responseGetInsightSelectors $
+--             getInsightSelectorsResponse
 --
 --           ]
 --     ]
@@ -160,10 +184,20 @@ requestCreateTrail = req
     "CreateTrail"
     "fixture/CreateTrail.yaml"
 
+requestPutInsightSelectors :: PutInsightSelectors -> TestTree
+requestPutInsightSelectors = req
+    "PutInsightSelectors"
+    "fixture/PutInsightSelectors.yaml"
+
 requestGetEventSelectors :: GetEventSelectors -> TestTree
 requestGetEventSelectors = req
     "GetEventSelectors"
     "fixture/GetEventSelectors.yaml"
+
+requestGetTrail :: GetTrail -> TestTree
+requestGetTrail = req
+    "GetTrail"
+    "fixture/GetTrail.yaml"
 
 requestGetTrailStatus :: GetTrailStatus -> TestTree
 requestGetTrailStatus = req
@@ -189,6 +223,16 @@ requestStartLogging :: StartLogging -> TestTree
 requestStartLogging = req
     "StartLogging"
     "fixture/StartLogging.yaml"
+
+requestListTrails :: ListTrails -> TestTree
+requestListTrails = req
+    "ListTrails"
+    "fixture/ListTrails.yaml"
+
+requestGetInsightSelectors :: GetInsightSelectors -> TestTree
+requestGetInsightSelectors = req
+    "GetInsightSelectors"
+    "fixture/GetInsightSelectors.yaml"
 
 -- Responses
 
@@ -248,12 +292,26 @@ responseCreateTrail = res
     cloudTrail
     (Proxy :: Proxy CreateTrail)
 
+responsePutInsightSelectors :: PutInsightSelectorsResponse -> TestTree
+responsePutInsightSelectors = res
+    "PutInsightSelectorsResponse"
+    "fixture/PutInsightSelectorsResponse.proto"
+    cloudTrail
+    (Proxy :: Proxy PutInsightSelectors)
+
 responseGetEventSelectors :: GetEventSelectorsResponse -> TestTree
 responseGetEventSelectors = res
     "GetEventSelectorsResponse"
     "fixture/GetEventSelectorsResponse.proto"
     cloudTrail
     (Proxy :: Proxy GetEventSelectors)
+
+responseGetTrail :: GetTrailResponse -> TestTree
+responseGetTrail = res
+    "GetTrailResponse"
+    "fixture/GetTrailResponse.proto"
+    cloudTrail
+    (Proxy :: Proxy GetTrail)
 
 responseGetTrailStatus :: GetTrailStatusResponse -> TestTree
 responseGetTrailStatus = res
@@ -289,3 +347,17 @@ responseStartLogging = res
     "fixture/StartLoggingResponse.proto"
     cloudTrail
     (Proxy :: Proxy StartLogging)
+
+responseListTrails :: ListTrailsResponse -> TestTree
+responseListTrails = res
+    "ListTrailsResponse"
+    "fixture/ListTrailsResponse.proto"
+    cloudTrail
+    (Proxy :: Proxy ListTrails)
+
+responseGetInsightSelectors :: GetInsightSelectorsResponse -> TestTree
+responseGetInsightSelectors = res
+    "GetInsightSelectorsResponse"
+    "fixture/GetInsightSelectorsResponse.proto"
+    cloudTrail
+    (Proxy :: Proxy GetInsightSelectors)

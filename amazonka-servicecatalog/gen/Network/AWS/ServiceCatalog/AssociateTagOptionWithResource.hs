@@ -45,11 +45,12 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'associateTagOptionWithResource' smart constructor.
-data AssociateTagOptionWithResource = AssociateTagOptionWithResource'
-  { _atowrResourceId  :: !Text
-  , _atowrTagOptionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateTagOptionWithResource = AssociateTagOptionWithResource'{_atowrResourceId
+                                                                      :: !Text,
+                                                                      _atowrTagOptionId
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'AssociateTagOptionWithResource' with the minimum fields required to make a request.
 --
@@ -62,10 +63,11 @@ associateTagOptionWithResource
     :: Text -- ^ 'atowrResourceId'
     -> Text -- ^ 'atowrTagOptionId'
     -> AssociateTagOptionWithResource
-associateTagOptionWithResource pResourceId_ pTagOptionId_ =
-  AssociateTagOptionWithResource'
-    {_atowrResourceId = pResourceId_, _atowrTagOptionId = pTagOptionId_}
-
+associateTagOptionWithResource pResourceId_
+  pTagOptionId_
+  = AssociateTagOptionWithResource'{_atowrResourceId =
+                                      pResourceId_,
+                                    _atowrTagOptionId = pTagOptionId_}
 
 -- | The resource identifier.
 atowrResourceId :: Lens' AssociateTagOptionWithResource Text
@@ -116,10 +118,12 @@ instance ToQuery AssociateTagOptionWithResource where
         toQuery = const mempty
 
 -- | /See:/ 'associateTagOptionWithResourceResponse' smart constructor.
-newtype AssociateTagOptionWithResourceResponse = AssociateTagOptionWithResourceResponse'
-  { _atowrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateTagOptionWithResourceResponse = AssociateTagOptionWithResourceResponse'{_atowrrsResponseStatus
+                                                                                         ::
+                                                                                         Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'AssociateTagOptionWithResourceResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +133,10 @@ newtype AssociateTagOptionWithResourceResponse = AssociateTagOptionWithResourceR
 associateTagOptionWithResourceResponse
     :: Int -- ^ 'atowrrsResponseStatus'
     -> AssociateTagOptionWithResourceResponse
-associateTagOptionWithResourceResponse pResponseStatus_ =
-  AssociateTagOptionWithResourceResponse'
-    {_atowrrsResponseStatus = pResponseStatus_}
-
+associateTagOptionWithResourceResponse
+  pResponseStatus_
+  = AssociateTagOptionWithResourceResponse'{_atowrrsResponseStatus
+                                              = pResponseStatus_}
 
 -- | -- | The response status code.
 atowrrsResponseStatus :: Lens' AssociateTagOptionWithResourceResponse Int

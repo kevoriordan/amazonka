@@ -46,32 +46,109 @@ library
     exposed-modules:
           Network.AWS.ElasticSearch
         , Network.AWS.ElasticSearch.AddTags
+        , Network.AWS.ElasticSearch.AssociatePackage
+        , Network.AWS.ElasticSearch.CancelElasticsearchServiceSoftwareUpdate
         , Network.AWS.ElasticSearch.CreateElasticsearchDomain
+        , Network.AWS.ElasticSearch.CreatePackage
         , Network.AWS.ElasticSearch.DeleteElasticsearchDomain
         , Network.AWS.ElasticSearch.DeleteElasticsearchServiceRole
+        , Network.AWS.ElasticSearch.DeletePackage
         , Network.AWS.ElasticSearch.DescribeElasticsearchDomain
         , Network.AWS.ElasticSearch.DescribeElasticsearchDomainConfig
         , Network.AWS.ElasticSearch.DescribeElasticsearchDomains
         , Network.AWS.ElasticSearch.DescribeElasticsearchInstanceTypeLimits
+        , Network.AWS.ElasticSearch.DescribePackages
         , Network.AWS.ElasticSearch.DescribeReservedElasticsearchInstanceOfferings
         , Network.AWS.ElasticSearch.DescribeReservedElasticsearchInstances
+        , Network.AWS.ElasticSearch.DissociatePackage
+        , Network.AWS.ElasticSearch.GetCompatibleElasticsearchVersions
+        , Network.AWS.ElasticSearch.GetUpgradeHistory
+        , Network.AWS.ElasticSearch.GetUpgradeStatus
         , Network.AWS.ElasticSearch.ListDomainNames
+        , Network.AWS.ElasticSearch.ListDomainsForPackage
         , Network.AWS.ElasticSearch.ListElasticsearchInstanceTypes
         , Network.AWS.ElasticSearch.ListElasticsearchVersions
+        , Network.AWS.ElasticSearch.ListPackagesForDomain
         , Network.AWS.ElasticSearch.ListTags
         , Network.AWS.ElasticSearch.PurchaseReservedElasticsearchInstanceOffering
         , Network.AWS.ElasticSearch.RemoveTags
+        , Network.AWS.ElasticSearch.StartElasticsearchServiceSoftwareUpdate
         , Network.AWS.ElasticSearch.Types
         , Network.AWS.ElasticSearch.UpdateElasticsearchDomainConfig
+        , Network.AWS.ElasticSearch.UpgradeElasticsearchDomain
         , Network.AWS.ElasticSearch.Waiters
 
     other-modules:
-          Network.AWS.ElasticSearch.Types.Product
-        , Network.AWS.ElasticSearch.Types.Sum
+          Network.AWS.ElasticSearch.Types.AccessPoliciesStatus
+        , Network.AWS.ElasticSearch.Types.AdditionalLimit
+        , Network.AWS.ElasticSearch.Types.AdvancedOptionsStatus
+        , Network.AWS.ElasticSearch.Types.AdvancedSecurityOptions
+        , Network.AWS.ElasticSearch.Types.AdvancedSecurityOptionsInput
+        , Network.AWS.ElasticSearch.Types.AdvancedSecurityOptionsStatus
+        , Network.AWS.ElasticSearch.Types.CognitoOptions
+        , Network.AWS.ElasticSearch.Types.CognitoOptionsStatus
+        , Network.AWS.ElasticSearch.Types.CompatibleVersionsMap
+        , Network.AWS.ElasticSearch.Types.DeploymentStatus
+        , Network.AWS.ElasticSearch.Types.DescribePackagesFilter
+        , Network.AWS.ElasticSearch.Types.DescribePackagesFilterName
+        , Network.AWS.ElasticSearch.Types.DomainEndpointOptions
+        , Network.AWS.ElasticSearch.Types.DomainEndpointOptionsStatus
+        , Network.AWS.ElasticSearch.Types.DomainInfo
+        , Network.AWS.ElasticSearch.Types.DomainPackageDetails
+        , Network.AWS.ElasticSearch.Types.DomainPackageStatus
+        , Network.AWS.ElasticSearch.Types.EBSOptions
+        , Network.AWS.ElasticSearch.Types.EBSOptionsStatus
+        , Network.AWS.ElasticSearch.Types.ESPartitionInstanceType
+        , Network.AWS.ElasticSearch.Types.ESWarmPartitionInstanceType
+        , Network.AWS.ElasticSearch.Types.ElasticsearchClusterConfig
+        , Network.AWS.ElasticSearch.Types.ElasticsearchClusterConfigStatus
+        , Network.AWS.ElasticSearch.Types.ElasticsearchDomainConfig
+        , Network.AWS.ElasticSearch.Types.ElasticsearchDomainStatus
+        , Network.AWS.ElasticSearch.Types.ElasticsearchVersionStatus
+        , Network.AWS.ElasticSearch.Types.EncryptionAtRestOptions
+        , Network.AWS.ElasticSearch.Types.EncryptionAtRestOptionsStatus
+        , Network.AWS.ElasticSearch.Types.ErrorDetails
+        , Network.AWS.ElasticSearch.Types.InstanceCountLimits
+        , Network.AWS.ElasticSearch.Types.InstanceLimits
+        , Network.AWS.ElasticSearch.Types.Limits
+        , Network.AWS.ElasticSearch.Types.LogPublishingOption
+        , Network.AWS.ElasticSearch.Types.LogPublishingOptionsStatus
+        , Network.AWS.ElasticSearch.Types.LogType
+        , Network.AWS.ElasticSearch.Types.MasterUserOptions
+        , Network.AWS.ElasticSearch.Types.NodeToNodeEncryptionOptions
+        , Network.AWS.ElasticSearch.Types.NodeToNodeEncryptionOptionsStatus
+        , Network.AWS.ElasticSearch.Types.OptionState
+        , Network.AWS.ElasticSearch.Types.OptionStatus
+        , Network.AWS.ElasticSearch.Types.PackageDetails
+        , Network.AWS.ElasticSearch.Types.PackageSource
+        , Network.AWS.ElasticSearch.Types.PackageStatus
+        , Network.AWS.ElasticSearch.Types.PackageType
+        , Network.AWS.ElasticSearch.Types.Product
+        , Network.AWS.ElasticSearch.Types.RecurringCharge
+        , Network.AWS.ElasticSearch.Types.ReservedElasticsearchInstance
+        , Network.AWS.ElasticSearch.Types.ReservedElasticsearchInstanceOffering
+        , Network.AWS.ElasticSearch.Types.ReservedElasticsearchInstancePaymentOption
+        , Network.AWS.ElasticSearch.Types.ServiceSoftwareOptions
+        , Network.AWS.ElasticSearch.Types.SnapshotOptions
+        , Network.AWS.ElasticSearch.Types.SnapshotOptionsStatus
+        , Network.AWS.ElasticSearch.Types.StorageType
+        , Network.AWS.ElasticSearch.Types.StorageTypeLimit
+        , Network.AWS.ElasticSearch.Types.TLSSecurityPolicy
+        , Network.AWS.ElasticSearch.Types.Tag
+        , Network.AWS.ElasticSearch.Types.UpgradeHistory
+        , Network.AWS.ElasticSearch.Types.UpgradeStatus
+        , Network.AWS.ElasticSearch.Types.UpgradeStep
+        , Network.AWS.ElasticSearch.Types.UpgradeStepItem
+        , Network.AWS.ElasticSearch.Types.VPCDerivedInfo
+        , Network.AWS.ElasticSearch.Types.VPCDerivedInfoStatus
+        , Network.AWS.ElasticSearch.Types.VPCOptions
+        , Network.AWS.ElasticSearch.Types.VolumeType
+        , Network.AWS.ElasticSearch.Types.ZoneAwarenessConfig
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-elasticsearch-test
     type:              exitcode-stdio-1.0
@@ -95,6 +172,7 @@ test-suite amazonka-elasticsearch-test
         , amazonka-elasticsearch
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

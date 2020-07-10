@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an audit report that lists every time that the your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The 'IssueCertificate' and 'RevokeCertificate' functions use the private key. You can generate a new report every 30 minutes.
+-- Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The 'IssueCertificate' and 'RevokeCertificate' actions use the private key.
 --
 --
 module Network.AWS.CertificateManagerPCA.CreateCertificateAuthorityAuditReport
@@ -48,44 +48,50 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createCertificateAuthorityAuditReport' smart constructor.
-data CreateCertificateAuthorityAuditReport = CreateCertificateAuthorityAuditReport'
-  { _ccaarCertificateAuthorityARN   :: !Text
-  , _ccaarS3BucketName              :: !Text
-  , _ccaarAuditReportResponseFormat :: !AuditReportResponseFormat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCertificateAuthorityAuditReport = CreateCertificateAuthorityAuditReport'{_ccaarCertificateAuthorityARN
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ccaarS3BucketName
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ccaarAuditReportResponseFormat
+                                                                                    ::
+                                                                                    !AuditReportResponseFormat}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'CreateCertificateAuthorityAuditReport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccaarCertificateAuthorityARN' - Amazon Resource Name (ARN) of the CA to be audited. This is of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ .
+-- * 'ccaarCertificateAuthorityARN' - The Amazon Resource Name (ARN) of the CA to be audited. This is of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ .
 --
--- * 'ccaarS3BucketName' - Name of the S3 bucket that will contain the audit report.
+-- * 'ccaarS3BucketName' - The name of the S3 bucket that will contain the audit report.
 --
--- * 'ccaarAuditReportResponseFormat' - Format in which to create the report. This can be either __JSON__ or __CSV__ .
+-- * 'ccaarAuditReportResponseFormat' - The format in which to create the report. This can be either __JSON__ or __CSV__ .
 createCertificateAuthorityAuditReport
     :: Text -- ^ 'ccaarCertificateAuthorityARN'
     -> Text -- ^ 'ccaarS3BucketName'
     -> AuditReportResponseFormat -- ^ 'ccaarAuditReportResponseFormat'
     -> CreateCertificateAuthorityAuditReport
-createCertificateAuthorityAuditReport pCertificateAuthorityARN_ pS3BucketName_ pAuditReportResponseFormat_ =
-  CreateCertificateAuthorityAuditReport'
-    { _ccaarCertificateAuthorityARN = pCertificateAuthorityARN_
-    , _ccaarS3BucketName = pS3BucketName_
-    , _ccaarAuditReportResponseFormat = pAuditReportResponseFormat_
-    }
+createCertificateAuthorityAuditReport
+  pCertificateAuthorityARN_ pS3BucketName_
+  pAuditReportResponseFormat_
+  = CreateCertificateAuthorityAuditReport'{_ccaarCertificateAuthorityARN
+                                             = pCertificateAuthorityARN_,
+                                           _ccaarS3BucketName = pS3BucketName_,
+                                           _ccaarAuditReportResponseFormat =
+                                             pAuditReportResponseFormat_}
 
-
--- | Amazon Resource Name (ARN) of the CA to be audited. This is of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ .
+-- | The Amazon Resource Name (ARN) of the CA to be audited. This is of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ .
 ccaarCertificateAuthorityARN :: Lens' CreateCertificateAuthorityAuditReport Text
 ccaarCertificateAuthorityARN = lens _ccaarCertificateAuthorityARN (\ s a -> s{_ccaarCertificateAuthorityARN = a})
 
--- | Name of the S3 bucket that will contain the audit report.
+-- | The name of the S3 bucket that will contain the audit report.
 ccaarS3BucketName :: Lens' CreateCertificateAuthorityAuditReport Text
 ccaarS3BucketName = lens _ccaarS3BucketName (\ s a -> s{_ccaarS3BucketName = a})
 
--- | Format in which to create the report. This can be either __JSON__ or __CSV__ .
+-- | The format in which to create the report. This can be either __JSON__ or __CSV__ .
 ccaarAuditReportResponseFormat :: Lens' CreateCertificateAuthorityAuditReport AuditReportResponseFormat
 ccaarAuditReportResponseFormat = lens _ccaarAuditReportResponseFormat (\ s a -> s{_ccaarAuditReportResponseFormat = a})
 
@@ -144,12 +150,20 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'createCertificateAuthorityAuditReportResponse' smart constructor.
-data CreateCertificateAuthorityAuditReportResponse = CreateCertificateAuthorityAuditReportResponse'
-  { _ccaarrsS3Key          :: !(Maybe Text)
-  , _ccaarrsAuditReportId  :: !(Maybe Text)
-  , _ccaarrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCertificateAuthorityAuditReportResponse = CreateCertificateAuthorityAuditReportResponse'{_ccaarrsS3Key
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Text),
+                                                                                                    _ccaarrsAuditReportId
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Text),
+                                                                                                    _ccaarrsResponseStatus
+                                                                                                    ::
+                                                                                                    !Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'CreateCertificateAuthorityAuditReportResponse' with the minimum fields required to make a request.
 --
@@ -163,13 +177,14 @@ data CreateCertificateAuthorityAuditReportResponse = CreateCertificateAuthorityA
 createCertificateAuthorityAuditReportResponse
     :: Int -- ^ 'ccaarrsResponseStatus'
     -> CreateCertificateAuthorityAuditReportResponse
-createCertificateAuthorityAuditReportResponse pResponseStatus_ =
-  CreateCertificateAuthorityAuditReportResponse'
-    { _ccaarrsS3Key = Nothing
-    , _ccaarrsAuditReportId = Nothing
-    , _ccaarrsResponseStatus = pResponseStatus_
-    }
-
+createCertificateAuthorityAuditReportResponse
+  pResponseStatus_
+  = CreateCertificateAuthorityAuditReportResponse'{_ccaarrsS3Key
+                                                     = Nothing,
+                                                   _ccaarrsAuditReportId =
+                                                     Nothing,
+                                                   _ccaarrsResponseStatus =
+                                                     pResponseStatus_}
 
 -- | The __key__ that uniquely identifies the report file in your S3 bucket.
 ccaarrsS3Key :: Lens' CreateCertificateAuthorityAuditReportResponse (Maybe Text)

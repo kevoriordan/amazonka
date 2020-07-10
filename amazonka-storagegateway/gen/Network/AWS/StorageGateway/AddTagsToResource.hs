@@ -23,17 +23,15 @@
 --
 --     * Storage gateways of all types
 --
+--     * Storage volumes
 --
+--     * Virtual tapes
 --
---     * Storage Volumes
---
---
---
---     * Virtual Tapes
+--     * NFS and SMB file shares
 --
 --
 --
--- You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
+-- You can create a maximum of 50 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
 --
 module Network.AWS.StorageGateway.AddTagsToResource
     (
@@ -64,11 +62,10 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'addTagsToResource' smart constructor.
-data AddTagsToResource = AddTagsToResource'
-  { _attrResourceARN :: !Text
-  , _attrTags        :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToResource = AddTagsToResource'{_attrResourceARN
+                                            :: !Text,
+                                            _attrTags :: ![Tag]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsToResource' with the minimum fields required to make a request.
 --
@@ -80,9 +77,10 @@ data AddTagsToResource = AddTagsToResource'
 addTagsToResource
     :: Text -- ^ 'attrResourceARN'
     -> AddTagsToResource
-addTagsToResource pResourceARN_ =
-  AddTagsToResource' {_attrResourceARN = pResourceARN_, _attrTags = mempty}
-
+addTagsToResource pResourceARN_
+  = AddTagsToResource'{_attrResourceARN =
+                         pResourceARN_,
+                       _attrTags = mempty}
 
 -- | The Amazon Resource Name (ARN) of the resource you want to add tags to.
 attrResourceARN :: Lens' AddTagsToResource Text
@@ -133,11 +131,12 @@ instance ToQuery AddTagsToResource where
 --
 --
 -- /See:/ 'addTagsToResourceResponse' smart constructor.
-data AddTagsToResourceResponse = AddTagsToResourceResponse'
-  { _attrrsResourceARN    :: !(Maybe Text)
-  , _attrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToResourceResponse = AddTagsToResourceResponse'{_attrrsResourceARN
+                                                            :: !(Maybe Text),
+                                                            _attrrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'AddTagsToResourceResponse' with the minimum fields required to make a request.
 --
@@ -149,10 +148,10 @@ data AddTagsToResourceResponse = AddTagsToResourceResponse'
 addTagsToResourceResponse
     :: Int -- ^ 'attrrsResponseStatus'
     -> AddTagsToResourceResponse
-addTagsToResourceResponse pResponseStatus_ =
-  AddTagsToResourceResponse'
-    {_attrrsResourceARN = Nothing, _attrrsResponseStatus = pResponseStatus_}
-
+addTagsToResourceResponse pResponseStatus_
+  = AddTagsToResourceResponse'{_attrrsResourceARN =
+                                 Nothing,
+                               _attrrsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the resource you want to add tags to.
 attrrsResourceARN :: Lens' AddTagsToResourceResponse (Maybe Text)

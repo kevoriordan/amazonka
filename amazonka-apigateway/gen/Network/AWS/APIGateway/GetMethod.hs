@@ -27,9 +27,9 @@ module Network.AWS.APIGateway.GetMethod
       getMethod
     , GetMethod
     -- * Request Lenses
-    , gmmRestAPIId
-    , gmmResourceId
-    , gmmHttpMethod
+    , gtmthdRestAPIId
+    , gtmthdResourceId
+    , gtmthdHttpMethod
 
     -- * Destructuring the Response
     , method
@@ -60,46 +60,42 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getMethod' smart constructor.
-data GetMethod = GetMethod'
-  { _gmmRestAPIId  :: !Text
-  , _gmmResourceId :: !Text
-  , _gmmHttpMethod :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetMethod = GetMethod'{_gtmthdRestAPIId ::
+                            !Text,
+                            _gtmthdResourceId :: !Text,
+                            _gtmthdHttpMethod :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetMethod' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gmmRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
+-- * 'gtmthdRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
--- * 'gmmResourceId' - [Required] The 'Resource' identifier for the 'Method' resource.
+-- * 'gtmthdResourceId' - [Required] The 'Resource' identifier for the 'Method' resource.
 --
--- * 'gmmHttpMethod' - [Required] Specifies the method request's HTTP method type.
+-- * 'gtmthdHttpMethod' - [Required] Specifies the method request's HTTP method type.
 getMethod
-    :: Text -- ^ 'gmmRestAPIId'
-    -> Text -- ^ 'gmmResourceId'
-    -> Text -- ^ 'gmmHttpMethod'
+    :: Text -- ^ 'gtmthdRestAPIId'
+    -> Text -- ^ 'gtmthdResourceId'
+    -> Text -- ^ 'gtmthdHttpMethod'
     -> GetMethod
-getMethod pRestAPIId_ pResourceId_ pHttpMethod_ =
-  GetMethod'
-    { _gmmRestAPIId = pRestAPIId_
-    , _gmmResourceId = pResourceId_
-    , _gmmHttpMethod = pHttpMethod_
-    }
-
+getMethod pRestAPIId_ pResourceId_ pHttpMethod_
+  = GetMethod'{_gtmthdRestAPIId = pRestAPIId_,
+               _gtmthdResourceId = pResourceId_,
+               _gtmthdHttpMethod = pHttpMethod_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
-gmmRestAPIId :: Lens' GetMethod Text
-gmmRestAPIId = lens _gmmRestAPIId (\ s a -> s{_gmmRestAPIId = a})
+gtmthdRestAPIId :: Lens' GetMethod Text
+gtmthdRestAPIId = lens _gtmthdRestAPIId (\ s a -> s{_gtmthdRestAPIId = a})
 
 -- | [Required] The 'Resource' identifier for the 'Method' resource.
-gmmResourceId :: Lens' GetMethod Text
-gmmResourceId = lens _gmmResourceId (\ s a -> s{_gmmResourceId = a})
+gtmthdResourceId :: Lens' GetMethod Text
+gtmthdResourceId = lens _gtmthdResourceId (\ s a -> s{_gtmthdResourceId = a})
 
 -- | [Required] Specifies the method request's HTTP method type.
-gmmHttpMethod :: Lens' GetMethod Text
-gmmHttpMethod = lens _gmmHttpMethod (\ s a -> s{_gmmHttpMethod = a})
+gtmthdHttpMethod :: Lens' GetMethod Text
+gtmthdHttpMethod = lens _gtmthdHttpMethod (\ s a -> s{_gtmthdHttpMethod = a})
 
 instance AWSRequest GetMethod where
         type Rs GetMethod = Method
@@ -119,9 +115,9 @@ instance ToHeaders GetMethod where
 instance ToPath GetMethod where
         toPath GetMethod'{..}
           = mconcat
-              ["/restapis/", toBS _gmmRestAPIId, "/resources/",
-               toBS _gmmResourceId, "/methods/",
-               toBS _gmmHttpMethod]
+              ["/restapis/", toBS _gtmthdRestAPIId, "/resources/",
+               toBS _gtmthdResourceId, "/methods/",
+               toBS _gtmthdHttpMethod]
 
 instance ToQuery GetMethod where
         toQuery = const mempty

@@ -50,12 +50,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateConditionalForwarder' smart constructor.
-data UpdateConditionalForwarder = UpdateConditionalForwarder'
-  { _ucfDirectoryId      :: !Text
-  , _ucfRemoteDomainName :: !Text
-  , _ucfDNSIPAddrs       :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConditionalForwarder = UpdateConditionalForwarder'{_ucfDirectoryId
+                                                              :: !Text,
+                                                              _ucfRemoteDomainName
+                                                              :: !Text,
+                                                              _ucfDNSIPAddrs ::
+                                                              ![Text]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UpdateConditionalForwarder' with the minimum fields required to make a request.
 --
@@ -70,13 +72,12 @@ updateConditionalForwarder
     :: Text -- ^ 'ucfDirectoryId'
     -> Text -- ^ 'ucfRemoteDomainName'
     -> UpdateConditionalForwarder
-updateConditionalForwarder pDirectoryId_ pRemoteDomainName_ =
-  UpdateConditionalForwarder'
-    { _ucfDirectoryId = pDirectoryId_
-    , _ucfRemoteDomainName = pRemoteDomainName_
-    , _ucfDNSIPAddrs = mempty
-    }
-
+updateConditionalForwarder pDirectoryId_
+  pRemoteDomainName_
+  = UpdateConditionalForwarder'{_ucfDirectoryId =
+                                  pDirectoryId_,
+                                _ucfRemoteDomainName = pRemoteDomainName_,
+                                _ucfDNSIPAddrs = mempty}
 
 -- | The directory ID of the AWS directory for which to update the conditional forwarder.
 ucfDirectoryId :: Lens' UpdateConditionalForwarder Text
@@ -133,10 +134,11 @@ instance ToQuery UpdateConditionalForwarder where
 --
 --
 -- /See:/ 'updateConditionalForwarderResponse' smart constructor.
-newtype UpdateConditionalForwarderResponse = UpdateConditionalForwarderResponse'
-  { _ucfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateConditionalForwarderResponse = UpdateConditionalForwarderResponse'{_ucfrsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'UpdateConditionalForwarderResponse' with the minimum fields required to make a request.
 --
@@ -146,9 +148,9 @@ newtype UpdateConditionalForwarderResponse = UpdateConditionalForwarderResponse'
 updateConditionalForwarderResponse
     :: Int -- ^ 'ucfrsResponseStatus'
     -> UpdateConditionalForwarderResponse
-updateConditionalForwarderResponse pResponseStatus_ =
-  UpdateConditionalForwarderResponse' {_ucfrsResponseStatus = pResponseStatus_}
-
+updateConditionalForwarderResponse pResponseStatus_
+  = UpdateConditionalForwarderResponse'{_ucfrsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 ucfrsResponseStatus :: Lens' UpdateConditionalForwarderResponse Int

@@ -50,11 +50,11 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'updateHostedZoneComment' smart constructor.
-data UpdateHostedZoneComment = UpdateHostedZoneComment'
-  { _uhzcComment :: !(Maybe Text)
-  , _uhzcId      :: !ResourceId
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateHostedZoneComment = UpdateHostedZoneComment'{_uhzcComment
+                                                        :: !(Maybe Text),
+                                                        _uhzcId :: !ResourceId}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateHostedZoneComment' with the minimum fields required to make a request.
 --
@@ -66,9 +66,9 @@ data UpdateHostedZoneComment = UpdateHostedZoneComment'
 updateHostedZoneComment
     :: ResourceId -- ^ 'uhzcId'
     -> UpdateHostedZoneComment
-updateHostedZoneComment pId_ =
-  UpdateHostedZoneComment' {_uhzcComment = Nothing, _uhzcId = pId_}
-
+updateHostedZoneComment pId_
+  = UpdateHostedZoneComment'{_uhzcComment = Nothing,
+                             _uhzcId = pId_}
 
 -- | The new comment for the hosted zone. If you don't specify a value for @Comment@ , Amazon Route 53 deletes the existing value of the @Comment@ element, if any.
 uhzcComment :: Lens' UpdateHostedZoneComment (Maybe Text)
@@ -116,11 +116,13 @@ instance ToXML UpdateHostedZoneComment where
 --
 --
 -- /See:/ 'updateHostedZoneCommentResponse' smart constructor.
-data UpdateHostedZoneCommentResponse = UpdateHostedZoneCommentResponse'
-  { _uhzcrsResponseStatus :: !Int
-  , _uhzcrsHostedZone     :: !HostedZone
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateHostedZoneCommentResponse = UpdateHostedZoneCommentResponse'{_uhzcrsResponseStatus
+                                                                        :: !Int,
+                                                                        _uhzcrsHostedZone
+                                                                        ::
+                                                                        !HostedZone}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateHostedZoneCommentResponse' with the minimum fields required to make a request.
 --
@@ -128,21 +130,22 @@ data UpdateHostedZoneCommentResponse = UpdateHostedZoneCommentResponse'
 --
 -- * 'uhzcrsResponseStatus' - -- | The response status code.
 --
--- * 'uhzcrsHostedZone' - Undocumented member.
+-- * 'uhzcrsHostedZone' - A complex type that contains the response to the @UpdateHostedZoneComment@ request.
 updateHostedZoneCommentResponse
     :: Int -- ^ 'uhzcrsResponseStatus'
     -> HostedZone -- ^ 'uhzcrsHostedZone'
     -> UpdateHostedZoneCommentResponse
-updateHostedZoneCommentResponse pResponseStatus_ pHostedZone_ =
-  UpdateHostedZoneCommentResponse'
-    {_uhzcrsResponseStatus = pResponseStatus_, _uhzcrsHostedZone = pHostedZone_}
-
+updateHostedZoneCommentResponse pResponseStatus_
+  pHostedZone_
+  = UpdateHostedZoneCommentResponse'{_uhzcrsResponseStatus
+                                       = pResponseStatus_,
+                                     _uhzcrsHostedZone = pHostedZone_}
 
 -- | -- | The response status code.
 uhzcrsResponseStatus :: Lens' UpdateHostedZoneCommentResponse Int
 uhzcrsResponseStatus = lens _uhzcrsResponseStatus (\ s a -> s{_uhzcrsResponseStatus = a})
 
--- | Undocumented member.
+-- | A complex type that contains the response to the @UpdateHostedZoneComment@ request.
 uhzcrsHostedZone :: Lens' UpdateHostedZoneCommentResponse HostedZone
 uhzcrsHostedZone = lens _uhzcrsHostedZone (\ s a -> s{_uhzcrsHostedZone = a})
 

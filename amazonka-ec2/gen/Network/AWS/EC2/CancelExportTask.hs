@@ -41,15 +41,10 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CancelExportTask.
---
---
---
--- /See:/ 'cancelExportTask' smart constructor.
-newtype CancelExportTask = CancelExportTask'
-  { _cetExportTaskId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'cancelExportTask' smart constructor.
+newtype CancelExportTask = CancelExportTask'{_cetExportTaskId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelExportTask' with the minimum fields required to make a request.
 --
@@ -59,9 +54,9 @@ newtype CancelExportTask = CancelExportTask'
 cancelExportTask
     :: Text -- ^ 'cetExportTaskId'
     -> CancelExportTask
-cancelExportTask pExportTaskId_ =
-  CancelExportTask' {_cetExportTaskId = pExportTaskId_}
-
+cancelExportTask pExportTaskId_
+  = CancelExportTask'{_cetExportTaskId =
+                        pExportTaskId_}
 
 -- | The ID of the export task. This is the ID returned by @CreateInstanceExportTask@ .
 cetExportTaskId :: Lens' CancelExportTask Text
@@ -90,16 +85,14 @@ instance ToQuery CancelExportTask where
                "ExportTaskId" =: _cetExportTaskId]
 
 -- | /See:/ 'cancelExportTaskResponse' smart constructor.
-data CancelExportTaskResponse =
-  CancelExportTaskResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelExportTaskResponse = CancelExportTaskResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CancelExportTaskResponse' with the minimum fields required to make a request.
 --
 cancelExportTaskResponse
     :: CancelExportTaskResponse
 cancelExportTaskResponse = CancelExportTaskResponse'
-
 
 instance NFData CancelExportTaskResponse where

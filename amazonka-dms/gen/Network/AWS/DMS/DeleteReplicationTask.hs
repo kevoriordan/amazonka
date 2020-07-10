@@ -44,15 +44,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteReplicationTask' smart constructor.
-newtype DeleteReplicationTask = DeleteReplicationTask'
-  { _drtReplicationTaskARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReplicationTask = DeleteReplicationTask'{_drtReplicationTaskARN
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteReplicationTask' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DeleteReplicationTask = DeleteReplicationTask'
 deleteReplicationTask
     :: Text -- ^ 'drtReplicationTaskARN'
     -> DeleteReplicationTask
-deleteReplicationTask pReplicationTaskARN_ =
-  DeleteReplicationTask' {_drtReplicationTaskARN = pReplicationTaskARN_}
-
+deleteReplicationTask pReplicationTaskARN_
+  = DeleteReplicationTask'{_drtReplicationTaskARN =
+                             pReplicationTaskARN_}
 
 -- | The Amazon Resource Name (ARN) of the replication task to be deleted.
 drtReplicationTaskARN :: Lens' DeleteReplicationTask Text
@@ -107,16 +107,19 @@ instance ToPath DeleteReplicationTask where
 instance ToQuery DeleteReplicationTask where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteReplicationTaskResponse' smart constructor.
-data DeleteReplicationTaskResponse = DeleteReplicationTaskResponse'
-  { _drtrsReplicationTask :: !(Maybe ReplicationTask)
-  , _drtrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteReplicationTaskResponse = DeleteReplicationTaskResponse'{_drtrsReplicationTask
+                                                                    ::
+                                                                    !(Maybe
+                                                                        ReplicationTask),
+                                                                    _drtrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteReplicationTaskResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +131,10 @@ data DeleteReplicationTaskResponse = DeleteReplicationTaskResponse'
 deleteReplicationTaskResponse
     :: Int -- ^ 'drtrsResponseStatus'
     -> DeleteReplicationTaskResponse
-deleteReplicationTaskResponse pResponseStatus_ =
-  DeleteReplicationTaskResponse'
-    {_drtrsReplicationTask = Nothing, _drtrsResponseStatus = pResponseStatus_}
-
+deleteReplicationTaskResponse pResponseStatus_
+  = DeleteReplicationTaskResponse'{_drtrsReplicationTask
+                                     = Nothing,
+                                   _drtrsResponseStatus = pResponseStatus_}
 
 -- | The deleted replication task.
 drtrsReplicationTask :: Lens' DeleteReplicationTaskResponse (Maybe ReplicationTask)

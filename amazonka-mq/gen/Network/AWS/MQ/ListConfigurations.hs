@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listConfigurations' smart constructor.
-data ListConfigurations = ListConfigurations'
-  { _lcNextToken  :: !(Maybe Text)
-  , _lcMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListConfigurations = ListConfigurations'{_lcNextToken
+                                              :: !(Maybe Text),
+                                              _lcMaxResults :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListConfigurations' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data ListConfigurations = ListConfigurations'
 -- * 'lcMaxResults' - The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
 listConfigurations
     :: ListConfigurations
-listConfigurations =
-  ListConfigurations' {_lcNextToken = Nothing, _lcMaxResults = Nothing}
-
+listConfigurations
+  = ListConfigurations'{_lcNextToken = Nothing,
+                        _lcMaxResults = Nothing}
 
 -- | The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
 lcNextToken :: Lens' ListConfigurations (Maybe Text)
@@ -107,13 +106,18 @@ instance ToQuery ListConfigurations where
                "maxResults" =: _lcMaxResults]
 
 -- | /See:/ 'listConfigurationsResponse' smart constructor.
-data ListConfigurationsResponse = ListConfigurationsResponse'
-  { _lcrsConfigurations :: !(Maybe [Configuration])
-  , _lcrsNextToken      :: !(Maybe Text)
-  , _lcrsMaxResults     :: !(Maybe Int)
-  , _lcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListConfigurationsResponse = ListConfigurationsResponse'{_lcrsConfigurations
+                                                              ::
+                                                              !(Maybe
+                                                                  [Configuration]),
+                                                              _lcrsNextToken ::
+                                                              !(Maybe Text),
+                                                              _lcrsMaxResults ::
+                                                              !(Maybe Int),
+                                                              _lcrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListConfigurationsResponse' with the minimum fields required to make a request.
 --
@@ -129,14 +133,12 @@ data ListConfigurationsResponse = ListConfigurationsResponse'
 listConfigurationsResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListConfigurationsResponse
-listConfigurationsResponse pResponseStatus_ =
-  ListConfigurationsResponse'
-    { _lcrsConfigurations = Nothing
-    , _lcrsNextToken = Nothing
-    , _lcrsMaxResults = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
-
+listConfigurationsResponse pResponseStatus_
+  = ListConfigurationsResponse'{_lcrsConfigurations =
+                                  Nothing,
+                                _lcrsNextToken = Nothing,
+                                _lcrsMaxResults = Nothing,
+                                _lcrsResponseStatus = pResponseStatus_}
 
 -- | The list of all revisions for the specified configuration.
 lcrsConfigurations :: Lens' ListConfigurationsResponse [Configuration]

@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds or updates tags for the specified delivery stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the /AWS Billing and Cost Management User Guide/ .
+-- Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the /AWS Billing and Cost Management User Guide/ . 
 --
 --
--- Each delivery stream can have up to 50 tags.
+-- Each delivery stream can have up to 50 tags. 
 --
--- This operation has a limit of five transactions per second per account.
+-- This operation has a limit of five transactions per second per account. 
 --
 module Network.AWS.Firehose.TagDeliveryStream
     (
@@ -49,11 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'tagDeliveryStream' smart constructor.
-data TagDeliveryStream = TagDeliveryStream'
-  { _tdsDeliveryStreamName :: !Text
-  , _tdsTags               :: !(List1 Tag)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagDeliveryStream = TagDeliveryStream'{_tdsDeliveryStreamName
+                                            :: !Text,
+                                            _tdsTags :: !(List1 Tag)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagDeliveryStream' with the minimum fields required to make a request.
 --
@@ -66,10 +65,10 @@ tagDeliveryStream
     :: Text -- ^ 'tdsDeliveryStreamName'
     -> NonEmpty Tag -- ^ 'tdsTags'
     -> TagDeliveryStream
-tagDeliveryStream pDeliveryStreamName_ pTags_ =
-  TagDeliveryStream'
-    {_tdsDeliveryStreamName = pDeliveryStreamName_, _tdsTags = _List1 # pTags_}
-
+tagDeliveryStream pDeliveryStreamName_ pTags_
+  = TagDeliveryStream'{_tdsDeliveryStreamName =
+                         pDeliveryStreamName_,
+                       _tdsTags = _List1 # pTags_}
 
 -- | The name of the delivery stream to which you want to add the tags.
 tdsDeliveryStreamName :: Lens' TagDeliveryStream Text
@@ -116,10 +115,10 @@ instance ToQuery TagDeliveryStream where
         toQuery = const mempty
 
 -- | /See:/ 'tagDeliveryStreamResponse' smart constructor.
-newtype TagDeliveryStreamResponse = TagDeliveryStreamResponse'
-  { _tdsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype TagDeliveryStreamResponse = TagDeliveryStreamResponse'{_tdsrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'TagDeliveryStreamResponse' with the minimum fields required to make a request.
 --
@@ -129,9 +128,9 @@ newtype TagDeliveryStreamResponse = TagDeliveryStreamResponse'
 tagDeliveryStreamResponse
     :: Int -- ^ 'tdsrsResponseStatus'
     -> TagDeliveryStreamResponse
-tagDeliveryStreamResponse pResponseStatus_ =
-  TagDeliveryStreamResponse' {_tdsrsResponseStatus = pResponseStatus_}
-
+tagDeliveryStreamResponse pResponseStatus_
+  = TagDeliveryStreamResponse'{_tdsrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 tdsrsResponseStatus :: Lens' TagDeliveryStreamResponse Int

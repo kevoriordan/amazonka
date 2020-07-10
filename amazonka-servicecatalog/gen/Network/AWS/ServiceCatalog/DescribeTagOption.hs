@@ -45,10 +45,9 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describeTagOption' smart constructor.
-newtype DescribeTagOption = DescribeTagOption'
-  { _dtoId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeTagOption = DescribeTagOption'{_dtoId
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeTagOption' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype DescribeTagOption = DescribeTagOption'
 describeTagOption
     :: Text -- ^ 'dtoId'
     -> DescribeTagOption
-describeTagOption pId_ = DescribeTagOption' {_dtoId = pId_}
-
+describeTagOption pId_
+  = DescribeTagOption'{_dtoId = pId_}
 
 -- | The TagOption identifier.
 dtoId :: Lens' DescribeTagOption Text
@@ -99,11 +98,14 @@ instance ToQuery DescribeTagOption where
         toQuery = const mempty
 
 -- | /See:/ 'describeTagOptionResponse' smart constructor.
-data DescribeTagOptionResponse = DescribeTagOptionResponse'
-  { _dtorsTagOptionDetail :: !(Maybe TagOptionDetail)
-  , _dtorsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTagOptionResponse = DescribeTagOptionResponse'{_dtorsTagOptionDetail
+                                                            ::
+                                                            !(Maybe
+                                                                TagOptionDetail),
+                                                            _dtorsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeTagOptionResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +117,10 @@ data DescribeTagOptionResponse = DescribeTagOptionResponse'
 describeTagOptionResponse
     :: Int -- ^ 'dtorsResponseStatus'
     -> DescribeTagOptionResponse
-describeTagOptionResponse pResponseStatus_ =
-  DescribeTagOptionResponse'
-    {_dtorsTagOptionDetail = Nothing, _dtorsResponseStatus = pResponseStatus_}
-
+describeTagOptionResponse pResponseStatus_
+  = DescribeTagOptionResponse'{_dtorsTagOptionDetail =
+                                 Nothing,
+                               _dtorsResponseStatus = pResponseStatus_}
 
 -- | Information about the TagOption.
 dtorsTagOptionDetail :: Lens' DescribeTagOptionResponse (Maybe TagOptionDetail)

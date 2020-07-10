@@ -11,20 +11,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Amazon Glacier is a storage solution for "cold data."
+-- Amazon S3 Glacier (Glacier) is a storage solution for "cold data."
 --
 --
--- Amazon Glacier is an extremely low-cost storage service that provides secure, durable, and easy-to-use storage for data backup and archival. With Amazon Glacier, customers can store their data cost effectively for months, years, or decades. Amazon Glacier also enables customers to offload the administrative burdens of operating and scaling storage to AWS, so they don't have to worry about capacity planning, hardware provisioning, data replication, hardware failure and recovery, or time-consuming hardware migrations.
+-- Glacier is an extremely low-cost storage service that provides secure, durable, and easy-to-use storage for data backup and archival. With Glacier, customers can store their data cost effectively for months, years, or decades. Glacier also enables customers to offload the administrative burdens of operating and scaling storage to AWS, so they don't have to worry about capacity planning, hardware provisioning, data replication, hardware failure and recovery, or time-consuming hardware migrations.
 --
--- Amazon Glacier is a great storage choice when low storage cost is paramount, your data is rarely retrieved, and retrieval latency of several hours is acceptable. If your application requires fast or frequent access to your data, consider using Amazon S3. For more information, see <http://aws.amazon.com/s3/ Amazon Simple Storage Service (Amazon S3)> .
+-- Glacier is a great storage choice when low storage cost is paramount and your data is rarely retrieved. If your application requires fast or frequent access to your data, consider using Amazon S3. For more information, see <http://aws.amazon.com/s3/ Amazon Simple Storage Service (Amazon S3)> .
 --
--- You can store any kind of data in any format. There is no maximum limit on the total amount of data you can store in Amazon Glacier.
+-- You can store any kind of data in any format. There is no maximum limit on the total amount of data you can store in Glacier.
 --
--- If you are a first-time user of Amazon Glacier, we recommend that you begin by reading the following sections in the /Amazon Glacier Developer Guide/ :
+-- If you are a first-time user of Glacier, we recommend that you begin by reading the following sections in the /Amazon S3 Glacier Developer Guide/ :
 --
---     * <http://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html What is Amazon Glacier> - This section of the Developer Guide describes the underlying data model, the operations it supports, and the AWS SDKs that you can use to interact with the service.
+--     * <https://docs.aws.amazon.com/amazonglacier/latest/dev/introduction.html What is Amazon S3 Glacier> - This section of the Developer Guide describes the underlying data model, the operations it supports, and the AWS SDKs that you can use to interact with the service.
 --
---     * <http://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html Getting Started with Amazon Glacier> - The Getting Started section walks you through the process of creating a vault, uploading archives, creating jobs to download archives, retrieving the job output, and deleting archives.
+--     * <https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html Getting Started with Amazon S3 Glacier> - The Getting Started section walks you through the process of creating a vault, uploading archives, creating jobs to download archives, retrieving the job output, and deleting archives.
 --
 --
 --
@@ -42,17 +42,17 @@ module Network.AWS.Glacier
     -- ** InvalidParameterValueException
     , _InvalidParameterValueException
 
-    -- ** RequestTimeoutException
-    , _RequestTimeoutException
-
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
-
     -- ** InsufficientCapacityException
     , _InsufficientCapacityException
 
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
+
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
+
+    -- ** RequestTimeoutException
+    , _RequestTimeoutException
 
     -- ** LimitExceededException
     , _LimitExceededException
@@ -72,103 +72,103 @@ module Network.AWS.Glacier
     -- * Operations
     -- $operations
 
-    -- ** SetVaultAccessPolicy
+    -- ** SetVaultAccessPolicy 
     , module Network.AWS.Glacier.SetVaultAccessPolicy
 
-    -- ** InitiateJob
+    -- ** InitiateJob 
     , module Network.AWS.Glacier.InitiateJob
 
-    -- ** SetDataRetrievalPolicy
+    -- ** SetDataRetrievalPolicy 
     , module Network.AWS.Glacier.SetDataRetrievalPolicy
 
-    -- ** DeleteVaultAccessPolicy
+    -- ** DeleteVaultAccessPolicy 
     , module Network.AWS.Glacier.DeleteVaultAccessPolicy
 
-    -- ** GetVaultNotifications
+    -- ** GetVaultNotifications 
     , module Network.AWS.Glacier.GetVaultNotifications
 
-    -- ** ListTagsForVault
+    -- ** ListTagsForVault 
     , module Network.AWS.Glacier.ListTagsForVault
 
-    -- ** UploadMultipartPart
+    -- ** UploadMultipartPart 
     , module Network.AWS.Glacier.UploadMultipartPart
 
-    -- ** DeleteVaultNotifications
+    -- ** DeleteVaultNotifications 
     , module Network.AWS.Glacier.DeleteVaultNotifications
 
-    -- ** CompleteVaultLock
+    -- ** CompleteVaultLock 
     , module Network.AWS.Glacier.CompleteVaultLock
 
-    -- ** AbortVaultLock
+    -- ** AbortVaultLock 
     , module Network.AWS.Glacier.AbortVaultLock
 
     -- ** ListVaults (Paginated)
     , module Network.AWS.Glacier.ListVaults
 
-    -- ** ListProvisionedCapacity
+    -- ** ListProvisionedCapacity 
     , module Network.AWS.Glacier.ListProvisionedCapacity
 
     -- ** ListJobs (Paginated)
     , module Network.AWS.Glacier.ListJobs
 
-    -- ** SetVaultNotifications
+    -- ** SetVaultNotifications 
     , module Network.AWS.Glacier.SetVaultNotifications
 
-    -- ** GetJobOutput
+    -- ** GetJobOutput 
     , module Network.AWS.Glacier.GetJobOutput
 
-    -- ** CompleteMultipartUpload
+    -- ** CompleteMultipartUpload 
     , module Network.AWS.Glacier.CompleteMultipartUpload
 
     -- ** ListMultipartUploads (Paginated)
     , module Network.AWS.Glacier.ListMultipartUploads
 
-    -- ** AbortMultipartUpload
+    -- ** AbortMultipartUpload 
     , module Network.AWS.Glacier.AbortMultipartUpload
 
-    -- ** PurchaseProvisionedCapacity
+    -- ** PurchaseProvisionedCapacity 
     , module Network.AWS.Glacier.PurchaseProvisionedCapacity
 
-    -- ** DescribeVault
+    -- ** DescribeVault 
     , module Network.AWS.Glacier.DescribeVault
 
-    -- ** GetVaultLock
+    -- ** GetVaultLock 
     , module Network.AWS.Glacier.GetVaultLock
 
-    -- ** DescribeJob
+    -- ** DescribeJob 
     , module Network.AWS.Glacier.DescribeJob
 
-    -- ** InitiateVaultLock
+    -- ** InitiateVaultLock 
     , module Network.AWS.Glacier.InitiateVaultLock
 
-    -- ** GetVaultAccessPolicy
+    -- ** GetVaultAccessPolicy 
     , module Network.AWS.Glacier.GetVaultAccessPolicy
 
-    -- ** GetDataRetrievalPolicy
+    -- ** GetDataRetrievalPolicy 
     , module Network.AWS.Glacier.GetDataRetrievalPolicy
 
-    -- ** RemoveTagsFromVault
+    -- ** RemoveTagsFromVault 
     , module Network.AWS.Glacier.RemoveTagsFromVault
 
-    -- ** DeleteVault
+    -- ** DeleteVault 
     , module Network.AWS.Glacier.DeleteVault
 
-    -- ** DeleteArchive
+    -- ** DeleteArchive 
     , module Network.AWS.Glacier.DeleteArchive
 
-    -- ** CreateVault
+    -- ** CreateVault 
     , module Network.AWS.Glacier.CreateVault
 
-    -- ** InitiateMultipartUpload
+    -- ** InitiateMultipartUpload 
     , module Network.AWS.Glacier.InitiateMultipartUpload
 
     -- ** ListParts (Paginated)
     , module Network.AWS.Glacier.ListParts
 
-    -- ** AddTagsToVault
+    -- ** AddTagsToVault 
     , module Network.AWS.Glacier.AddTagsToVault
 
-    -- ** UploadArchive
+    -- ** UploadArchive 
     , module Network.AWS.Glacier.UploadArchive
 
     -- * Types

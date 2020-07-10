@@ -56,14 +56,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createModel' smart constructor.
-data CreateModel = CreateModel'
-  { _cmSchema      :: !(Maybe Text)
-  , _cmDescription :: !(Maybe Text)
-  , _cmRestAPIId   :: !Text
-  , _cmName        :: !Text
-  , _cmContentType :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateModel = CreateModel'{_cmSchema ::
+                                !(Maybe Text),
+                                _cmDescription :: !(Maybe Text),
+                                _cmRestAPIId :: !Text, _cmName :: !Text,
+                                _cmContentType :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateModel' with the minimum fields required to make a request.
 --
@@ -83,15 +81,10 @@ createModel
     -> Text -- ^ 'cmName'
     -> Text -- ^ 'cmContentType'
     -> CreateModel
-createModel pRestAPIId_ pName_ pContentType_ =
-  CreateModel'
-    { _cmSchema = Nothing
-    , _cmDescription = Nothing
-    , _cmRestAPIId = pRestAPIId_
-    , _cmName = pName_
-    , _cmContentType = pContentType_
-    }
-
+createModel pRestAPIId_ pName_ pContentType_
+  = CreateModel'{_cmSchema = Nothing,
+                 _cmDescription = Nothing, _cmRestAPIId = pRestAPIId_,
+                 _cmName = pName_, _cmContentType = pContentType_}
 
 -- | The schema for the model. For @application/json@ models, this should be <https://tools.ietf.org/html/draft-zyp-json-schema-04 JSON schema draft 4> model.
 cmSchema :: Lens' CreateModel (Maybe Text)

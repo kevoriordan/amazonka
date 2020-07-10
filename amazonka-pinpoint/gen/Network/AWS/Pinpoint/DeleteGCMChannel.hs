@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the GCM channel for an app.
+-- Disables the GCM channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteGCMChannel
     (
     -- * Creating a Request
@@ -43,24 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteGCMChannel' smart constructor.
-newtype DeleteGCMChannel = DeleteGCMChannel'
-  { _dgcApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteGCMChannel = DeleteGCMChannel'{_dgcApplicationId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGCMChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dgcApplicationId' - Undocumented member.
+-- * 'dgcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteGCMChannel
     :: Text -- ^ 'dgcApplicationId'
     -> DeleteGCMChannel
-deleteGCMChannel pApplicationId_ =
-  DeleteGCMChannel' {_dgcApplicationId = pApplicationId_}
+deleteGCMChannel pApplicationId_
+  = DeleteGCMChannel'{_dgcApplicationId =
+                        pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 dgcApplicationId :: Lens' DeleteGCMChannel Text
 dgcApplicationId = lens _dgcApplicationId (\ s a -> s{_dgcApplicationId = a})
 
@@ -94,11 +95,13 @@ instance ToQuery DeleteGCMChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteGCMChannelResponse' smart constructor.
-data DeleteGCMChannelResponse = DeleteGCMChannelResponse'
-  { _dgcrsResponseStatus     :: !Int
-  , _dgcrsGCMChannelResponse :: !GCMChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGCMChannelResponse = DeleteGCMChannelResponse'{_dgcrsResponseStatus
+                                                          :: !Int,
+                                                          _dgcrsGCMChannelResponse
+                                                          ::
+                                                          !GCMChannelResponse}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteGCMChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +114,11 @@ deleteGCMChannelResponse
     :: Int -- ^ 'dgcrsResponseStatus'
     -> GCMChannelResponse -- ^ 'dgcrsGCMChannelResponse'
     -> DeleteGCMChannelResponse
-deleteGCMChannelResponse pResponseStatus_ pGCMChannelResponse_ =
-  DeleteGCMChannelResponse'
-    { _dgcrsResponseStatus = pResponseStatus_
-    , _dgcrsGCMChannelResponse = pGCMChannelResponse_
-    }
-
+deleteGCMChannelResponse pResponseStatus_
+  pGCMChannelResponse_
+  = DeleteGCMChannelResponse'{_dgcrsResponseStatus =
+                                pResponseStatus_,
+                              _dgcrsGCMChannelResponse = pGCMChannelResponse_}
 
 -- | -- | The response status code.
 dgcrsResponseStatus :: Lens' DeleteGCMChannelResponse Int

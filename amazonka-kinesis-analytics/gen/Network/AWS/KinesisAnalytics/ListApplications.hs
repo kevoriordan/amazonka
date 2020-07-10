@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of Amazon Kinesis Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status. If the response returns the @HasMoreApplications@ value as true, you can send another request by adding the @ExclusiveStartApplicationName@ in the request body, and set the value of this to the last application name from the previous response.
+-- Returns a list of Amazon Kinesis Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status. If the response returns the @HasMoreApplications@ value as true, you can send another request by adding the @ExclusiveStartApplicationName@ in the request body, and set the value of this to the last application name from the previous response. 
 --
 --
--- If you want detailed information about a specific application, use 'DescribeApplication' .
+-- If you want detailed information about a specific application, use <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> .
 --
 -- This operation requires permissions to perform the @kinesisanalytics:ListApplications@ action.
 --
@@ -50,16 +50,16 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'listApplications' smart constructor.
-data ListApplications = ListApplications'
-  { _laLimit                         :: !(Maybe Nat)
-  , _laExclusiveStartApplicationName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListApplications = ListApplications'{_laLimit ::
+                                          !(Maybe Nat),
+                                          _laExclusiveStartApplicationName ::
+                                          !(Maybe Text)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListApplications' with the minimum fields required to make a request.
 --
@@ -70,10 +70,9 @@ data ListApplications = ListApplications'
 -- * 'laExclusiveStartApplicationName' - Name of the application to start the list with. When using pagination to retrieve the list, you don't need to specify this parameter in the first request. However, in subsequent requests, you add the last application name from the previous response to get the next page of applications.
 listApplications
     :: ListApplications
-listApplications =
-  ListApplications'
-    {_laLimit = Nothing, _laExclusiveStartApplicationName = Nothing}
-
+listApplications
+  = ListApplications'{_laLimit = Nothing,
+                      _laExclusiveStartApplicationName = Nothing}
 
 -- | Maximum number of applications to list.
 laLimit :: Lens' ListApplications (Maybe Natural)
@@ -122,17 +121,20 @@ instance ToPath ListApplications where
 instance ToQuery ListApplications where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'listApplicationsResponse' smart constructor.
-data ListApplicationsResponse = ListApplicationsResponse'
-  { _larsResponseStatus       :: !Int
-  , _larsApplicationSummaries :: ![ApplicationSummary]
-  , _larsHasMoreApplications  :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListApplicationsResponse = ListApplicationsResponse'{_larsResponseStatus
+                                                          :: !Int,
+                                                          _larsApplicationSummaries
+                                                          ::
+                                                          ![ApplicationSummary],
+                                                          _larsHasMoreApplications
+                                                          :: !Bool}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListApplicationsResponse' with the minimum fields required to make a request.
 --
@@ -140,26 +142,25 @@ data ListApplicationsResponse = ListApplicationsResponse'
 --
 -- * 'larsResponseStatus' - -- | The response status code.
 --
--- * 'larsApplicationSummaries' - List of @ApplicationSummary@ objects.
+-- * 'larsApplicationSummaries' - List of @ApplicationSummary@ objects. 
 --
 -- * 'larsHasMoreApplications' - Returns true if there are more applications to retrieve.
 listApplicationsResponse
     :: Int -- ^ 'larsResponseStatus'
     -> Bool -- ^ 'larsHasMoreApplications'
     -> ListApplicationsResponse
-listApplicationsResponse pResponseStatus_ pHasMoreApplications_ =
-  ListApplicationsResponse'
-    { _larsResponseStatus = pResponseStatus_
-    , _larsApplicationSummaries = mempty
-    , _larsHasMoreApplications = pHasMoreApplications_
-    }
-
+listApplicationsResponse pResponseStatus_
+  pHasMoreApplications_
+  = ListApplicationsResponse'{_larsResponseStatus =
+                                pResponseStatus_,
+                              _larsApplicationSummaries = mempty,
+                              _larsHasMoreApplications = pHasMoreApplications_}
 
 -- | -- | The response status code.
 larsResponseStatus :: Lens' ListApplicationsResponse Int
 larsResponseStatus = lens _larsResponseStatus (\ s a -> s{_larsResponseStatus = a})
 
--- | List of @ApplicationSummary@ objects.
+-- | List of @ApplicationSummary@ objects. 
 larsApplicationSummaries :: Lens' ListApplicationsResponse [ApplicationSummary]
 larsApplicationSummaries = lens _larsApplicationSummaries (\ s a -> s{_larsApplicationSummaries = a}) . _Coerce
 

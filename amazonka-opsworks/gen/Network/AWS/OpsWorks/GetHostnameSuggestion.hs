@@ -21,7 +21,7 @@
 -- Gets a generated host name for the specified layer, based on the current host name theme.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.GetHostnameSuggestion
     (
@@ -48,10 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getHostnameSuggestion' smart constructor.
-newtype GetHostnameSuggestion = GetHostnameSuggestion'
-  { _ghsLayerId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetHostnameSuggestion = GetHostnameSuggestion'{_ghsLayerId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetHostnameSuggestion' with the minimum fields required to make a request.
 --
@@ -61,9 +61,8 @@ newtype GetHostnameSuggestion = GetHostnameSuggestion'
 getHostnameSuggestion
     :: Text -- ^ 'ghsLayerId'
     -> GetHostnameSuggestion
-getHostnameSuggestion pLayerId_ =
-  GetHostnameSuggestion' {_ghsLayerId = pLayerId_}
-
+getHostnameSuggestion pLayerId_
+  = GetHostnameSuggestion'{_ghsLayerId = pLayerId_}
 
 -- | The layer ID.
 ghsLayerId :: Lens' GetHostnameSuggestion Text
@@ -110,12 +109,18 @@ instance ToQuery GetHostnameSuggestion where
 --
 --
 -- /See:/ 'getHostnameSuggestionResponse' smart constructor.
-data GetHostnameSuggestionResponse = GetHostnameSuggestionResponse'
-  { _ghsrsHostname       :: !(Maybe Text)
-  , _ghsrsLayerId        :: !(Maybe Text)
-  , _ghsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetHostnameSuggestionResponse = GetHostnameSuggestionResponse'{_ghsrsHostname
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _ghsrsLayerId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _ghsrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetHostnameSuggestionResponse' with the minimum fields required to make a request.
 --
@@ -129,13 +134,11 @@ data GetHostnameSuggestionResponse = GetHostnameSuggestionResponse'
 getHostnameSuggestionResponse
     :: Int -- ^ 'ghsrsResponseStatus'
     -> GetHostnameSuggestionResponse
-getHostnameSuggestionResponse pResponseStatus_ =
-  GetHostnameSuggestionResponse'
-    { _ghsrsHostname = Nothing
-    , _ghsrsLayerId = Nothing
-    , _ghsrsResponseStatus = pResponseStatus_
-    }
-
+getHostnameSuggestionResponse pResponseStatus_
+  = GetHostnameSuggestionResponse'{_ghsrsHostname =
+                                     Nothing,
+                                   _ghsrsLayerId = Nothing,
+                                   _ghsrsResponseStatus = pResponseStatus_}
 
 -- | The generated host name.
 ghsrsHostname :: Lens' GetHostnameSuggestionResponse (Maybe Text)

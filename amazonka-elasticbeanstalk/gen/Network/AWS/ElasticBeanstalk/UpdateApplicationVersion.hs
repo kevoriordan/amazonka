@@ -45,17 +45,19 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'updateApplicationVersion' smart constructor.
-data UpdateApplicationVersion = UpdateApplicationVersion'
-  { _uavDescription     :: !(Maybe Text)
-  , _uavApplicationName :: !Text
-  , _uavVersionLabel    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplicationVersion = UpdateApplicationVersion'{_uavDescription
+                                                          :: !(Maybe Text),
+                                                          _uavApplicationName ::
+                                                          !Text,
+                                                          _uavVersionLabel ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateApplicationVersion' with the minimum fields required to make a request.
 --
@@ -65,18 +67,17 @@ data UpdateApplicationVersion = UpdateApplicationVersion'
 --
 -- * 'uavApplicationName' - The name of the application associated with this version. If no application is found with this name, @UpdateApplication@ returns an @InvalidParameterValue@ error.
 --
--- * 'uavVersionLabel' - The name of the version to update. If no application version is found with this label, @UpdateApplication@ returns an @InvalidParameterValue@ error.
+-- * 'uavVersionLabel' - The name of the version to update. If no application version is found with this label, @UpdateApplication@ returns an @InvalidParameterValue@ error. 
 updateApplicationVersion
     :: Text -- ^ 'uavApplicationName'
     -> Text -- ^ 'uavVersionLabel'
     -> UpdateApplicationVersion
-updateApplicationVersion pApplicationName_ pVersionLabel_ =
-  UpdateApplicationVersion'
-    { _uavDescription = Nothing
-    , _uavApplicationName = pApplicationName_
-    , _uavVersionLabel = pVersionLabel_
-    }
-
+updateApplicationVersion pApplicationName_
+  pVersionLabel_
+  = UpdateApplicationVersion'{_uavDescription =
+                                Nothing,
+                              _uavApplicationName = pApplicationName_,
+                              _uavVersionLabel = pVersionLabel_}
 
 -- | A new description for this version.
 uavDescription :: Lens' UpdateApplicationVersion (Maybe Text)
@@ -86,7 +87,7 @@ uavDescription = lens _uavDescription (\ s a -> s{_uavDescription = a})
 uavApplicationName :: Lens' UpdateApplicationVersion Text
 uavApplicationName = lens _uavApplicationName (\ s a -> s{_uavApplicationName = a})
 
--- | The name of the version to update. If no application version is found with this label, @UpdateApplication@ returns an @InvalidParameterValue@ error.
+-- | The name of the version to update. If no application version is found with this label, @UpdateApplication@ returns an @InvalidParameterValue@ error. 
 uavVersionLabel :: Lens' UpdateApplicationVersion Text
 uavVersionLabel = lens _uavVersionLabel (\ s a -> s{_uavVersionLabel = a})
 

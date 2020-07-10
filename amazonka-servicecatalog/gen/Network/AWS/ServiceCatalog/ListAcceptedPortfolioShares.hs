@@ -29,6 +29,7 @@ module Network.AWS.ServiceCatalog.ListAcceptedPortfolioShares
       listAcceptedPortfolioShares
     , ListAcceptedPortfolioShares
     -- * Request Lenses
+    , lapsPortfolioShareType
     , lapsAcceptLanguage
     , lapsPageToken
     , lapsPageSize
@@ -51,16 +52,26 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listAcceptedPortfolioShares' smart constructor.
-data ListAcceptedPortfolioShares = ListAcceptedPortfolioShares'
-  { _lapsAcceptLanguage :: !(Maybe Text)
-  , _lapsPageToken      :: !(Maybe Text)
-  , _lapsPageSize       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAcceptedPortfolioShares = ListAcceptedPortfolioShares'{_lapsPortfolioShareType
+                                                                ::
+                                                                !(Maybe
+                                                                    PortfolioShareType),
+                                                                _lapsAcceptLanguage
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lapsPageToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lapsPageSize ::
+                                                                !(Maybe Nat)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListAcceptedPortfolioShares' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lapsPortfolioShareType' - The type of shared portfolios to list. The default is to list imported portfolios.     * @AWS_ORGANIZATIONS@ - List portfolios shared by the master account of your organization     * @AWS_SERVICECATALOG@ - List default portfolios     * @IMPORTED@ - List imported portfolios
 --
 -- * 'lapsAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 --
@@ -69,13 +80,16 @@ data ListAcceptedPortfolioShares = ListAcceptedPortfolioShares'
 -- * 'lapsPageSize' - The maximum number of items to return with this call.
 listAcceptedPortfolioShares
     :: ListAcceptedPortfolioShares
-listAcceptedPortfolioShares =
-  ListAcceptedPortfolioShares'
-    { _lapsAcceptLanguage = Nothing
-    , _lapsPageToken = Nothing
-    , _lapsPageSize = Nothing
-    }
+listAcceptedPortfolioShares
+  = ListAcceptedPortfolioShares'{_lapsPortfolioShareType
+                                   = Nothing,
+                                 _lapsAcceptLanguage = Nothing,
+                                 _lapsPageToken = Nothing,
+                                 _lapsPageSize = Nothing}
 
+-- | The type of shared portfolios to list. The default is to list imported portfolios.     * @AWS_ORGANIZATIONS@ - List portfolios shared by the master account of your organization     * @AWS_SERVICECATALOG@ - List default portfolios     * @IMPORTED@ - List imported portfolios
+lapsPortfolioShareType :: Lens' ListAcceptedPortfolioShares (Maybe PortfolioShareType)
+lapsPortfolioShareType = lens _lapsPortfolioShareType (\ s a -> s{_lapsPortfolioShareType = a})
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 lapsAcceptLanguage :: Lens' ListAcceptedPortfolioShares (Maybe Text)
@@ -127,7 +141,9 @@ instance ToJSON ListAcceptedPortfolioShares where
         toJSON ListAcceptedPortfolioShares'{..}
           = object
               (catMaybes
-                 [("AcceptLanguage" .=) <$> _lapsAcceptLanguage,
+                 [("PortfolioShareType" .=) <$>
+                    _lapsPortfolioShareType,
+                  ("AcceptLanguage" .=) <$> _lapsAcceptLanguage,
                   ("PageToken" .=) <$> _lapsPageToken,
                   ("PageSize" .=) <$> _lapsPageSize])
 
@@ -138,12 +154,19 @@ instance ToQuery ListAcceptedPortfolioShares where
         toQuery = const mempty
 
 -- | /See:/ 'listAcceptedPortfolioSharesResponse' smart constructor.
-data ListAcceptedPortfolioSharesResponse = ListAcceptedPortfolioSharesResponse'
-  { _lapsrsNextPageToken    :: !(Maybe Text)
-  , _lapsrsPortfolioDetails :: !(Maybe [PortfolioDetail])
-  , _lapsrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAcceptedPortfolioSharesResponse = ListAcceptedPortfolioSharesResponse'{_lapsrsNextPageToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _lapsrsPortfolioDetails
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [PortfolioDetail]),
+                                                                                _lapsrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'ListAcceptedPortfolioSharesResponse' with the minimum fields required to make a request.
 --
@@ -157,13 +180,12 @@ data ListAcceptedPortfolioSharesResponse = ListAcceptedPortfolioSharesResponse'
 listAcceptedPortfolioSharesResponse
     :: Int -- ^ 'lapsrsResponseStatus'
     -> ListAcceptedPortfolioSharesResponse
-listAcceptedPortfolioSharesResponse pResponseStatus_ =
-  ListAcceptedPortfolioSharesResponse'
-    { _lapsrsNextPageToken = Nothing
-    , _lapsrsPortfolioDetails = Nothing
-    , _lapsrsResponseStatus = pResponseStatus_
-    }
-
+listAcceptedPortfolioSharesResponse pResponseStatus_
+  = ListAcceptedPortfolioSharesResponse'{_lapsrsNextPageToken
+                                           = Nothing,
+                                         _lapsrsPortfolioDetails = Nothing,
+                                         _lapsrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 lapsrsNextPageToken :: Lens' ListAcceptedPortfolioSharesResponse (Maybe Text)

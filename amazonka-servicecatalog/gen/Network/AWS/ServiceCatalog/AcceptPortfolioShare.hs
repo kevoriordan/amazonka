@@ -27,6 +27,7 @@ module Network.AWS.ServiceCatalog.AcceptPortfolioShare
       acceptPortfolioShare
     , AcceptPortfolioShare
     -- * Request Lenses
+    , apsPortfolioShareType
     , apsAcceptLanguage
     , apsPortfolioId
 
@@ -45,15 +46,19 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'acceptPortfolioShare' smart constructor.
-data AcceptPortfolioShare = AcceptPortfolioShare'
-  { _apsAcceptLanguage :: !(Maybe Text)
-  , _apsPortfolioId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptPortfolioShare = AcceptPortfolioShare'{_apsPortfolioShareType
+                                                  ::
+                                                  !(Maybe PortfolioShareType),
+                                                  _apsAcceptLanguage ::
+                                                  !(Maybe Text),
+                                                  _apsPortfolioId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceptPortfolioShare' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apsPortfolioShareType' - The type of shared portfolios to accept. The default is to accept imported portfolios.     * @AWS_ORGANIZATIONS@ - Accept portfolios shared by the master account of your organization.     * @IMPORTED@ - Accept imported portfolios.     * @AWS_SERVICECATALOG@ - Not supported. (Throws ResourceNotFoundException.) For example, @aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS@ 
 --
 -- * 'apsAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 --
@@ -61,10 +66,15 @@ data AcceptPortfolioShare = AcceptPortfolioShare'
 acceptPortfolioShare
     :: Text -- ^ 'apsPortfolioId'
     -> AcceptPortfolioShare
-acceptPortfolioShare pPortfolioId_ =
-  AcceptPortfolioShare'
-    {_apsAcceptLanguage = Nothing, _apsPortfolioId = pPortfolioId_}
+acceptPortfolioShare pPortfolioId_
+  = AcceptPortfolioShare'{_apsPortfolioShareType =
+                            Nothing,
+                          _apsAcceptLanguage = Nothing,
+                          _apsPortfolioId = pPortfolioId_}
 
+-- | The type of shared portfolios to accept. The default is to accept imported portfolios.     * @AWS_ORGANIZATIONS@ - Accept portfolios shared by the master account of your organization.     * @IMPORTED@ - Accept imported portfolios.     * @AWS_SERVICECATALOG@ - Not supported. (Throws ResourceNotFoundException.) For example, @aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS@ 
+apsPortfolioShareType :: Lens' AcceptPortfolioShare (Maybe PortfolioShareType)
+apsPortfolioShareType = lens _apsPortfolioShareType (\ s a -> s{_apsPortfolioShareType = a})
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 apsAcceptLanguage :: Lens' AcceptPortfolioShare (Maybe Text)
@@ -102,7 +112,9 @@ instance ToJSON AcceptPortfolioShare where
         toJSON AcceptPortfolioShare'{..}
           = object
               (catMaybes
-                 [("AcceptLanguage" .=) <$> _apsAcceptLanguage,
+                 [("PortfolioShareType" .=) <$>
+                    _apsPortfolioShareType,
+                  ("AcceptLanguage" .=) <$> _apsAcceptLanguage,
                   Just ("PortfolioId" .= _apsPortfolioId)])
 
 instance ToPath AcceptPortfolioShare where
@@ -112,10 +124,10 @@ instance ToQuery AcceptPortfolioShare where
         toQuery = const mempty
 
 -- | /See:/ 'acceptPortfolioShareResponse' smart constructor.
-newtype AcceptPortfolioShareResponse = AcceptPortfolioShareResponse'
-  { _apsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AcceptPortfolioShareResponse = AcceptPortfolioShareResponse'{_apsrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'AcceptPortfolioShareResponse' with the minimum fields required to make a request.
 --
@@ -125,9 +137,9 @@ newtype AcceptPortfolioShareResponse = AcceptPortfolioShareResponse'
 acceptPortfolioShareResponse
     :: Int -- ^ 'apsrsResponseStatus'
     -> AcceptPortfolioShareResponse
-acceptPortfolioShareResponse pResponseStatus_ =
-  AcceptPortfolioShareResponse' {_apsrsResponseStatus = pResponseStatus_}
-
+acceptPortfolioShareResponse pResponseStatus_
+  = AcceptPortfolioShareResponse'{_apsrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 apsrsResponseStatus :: Lens' AcceptPortfolioShareResponse Int

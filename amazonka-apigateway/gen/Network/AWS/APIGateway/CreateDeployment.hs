@@ -29,6 +29,7 @@ module Network.AWS.APIGateway.CreateDeployment
     -- * Request Lenses
     , cdStageDescription
     , cdVariables
+    , cdTracingEnabled
     , cdCacheClusterSize
     , cdCanarySettings
     , cdCacheClusterEnabled
@@ -58,17 +59,21 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createDeployment' smart constructor.
-data CreateDeployment = CreateDeployment'
-  { _cdStageDescription    :: !(Maybe Text)
-  , _cdVariables           :: !(Maybe (Map Text Text))
-  , _cdCacheClusterSize    :: !(Maybe CacheClusterSize)
-  , _cdCanarySettings      :: !(Maybe DeploymentCanarySettings)
-  , _cdCacheClusterEnabled :: !(Maybe Bool)
-  , _cdStageName           :: !(Maybe Text)
-  , _cdDescription         :: !(Maybe Text)
-  , _cdRestAPIId           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeployment = CreateDeployment'{_cdStageDescription
+                                          :: !(Maybe Text),
+                                          _cdVariables ::
+                                          !(Maybe (Map Text Text)),
+                                          _cdTracingEnabled :: !(Maybe Bool),
+                                          _cdCacheClusterSize ::
+                                          !(Maybe CacheClusterSize),
+                                          _cdCanarySettings ::
+                                          !(Maybe DeploymentCanarySettings),
+                                          _cdCacheClusterEnabled ::
+                                          !(Maybe Bool),
+                                          _cdStageName :: !(Maybe Text),
+                                          _cdDescription :: !(Maybe Text),
+                                          _cdRestAPIId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDeployment' with the minimum fields required to make a request.
 --
@@ -78,9 +83,11 @@ data CreateDeployment = CreateDeployment'
 --
 -- * 'cdVariables' - A map that defines the stage variables for the 'Stage' resource that is associated with the new deployment. Variable names can have alphanumeric and underscore characters, and the values must match @[A-Za-z0-9-._~:/?#&=,]+@ .
 --
+-- * 'cdTracingEnabled' - Specifies whether active tracing with X-ray is enabled for the 'Stage' .
+--
 -- * 'cdCacheClusterSize' - Specifies the cache cluster size for the 'Stage' resource specified in the input, if a cache cluster is enabled.
 --
--- * 'cdCanarySettings' - The input configuration for the canary deployment when the deployment is a canary release deployment.
+-- * 'cdCanarySettings' - The input configuration for the canary deployment when the deployment is a canary release deployment. 
 --
 -- * 'cdCacheClusterEnabled' - Enables a cache cluster for the 'Stage' resource specified in the input.
 --
@@ -92,18 +99,14 @@ data CreateDeployment = CreateDeployment'
 createDeployment
     :: Text -- ^ 'cdRestAPIId'
     -> CreateDeployment
-createDeployment pRestAPIId_ =
-  CreateDeployment'
-    { _cdStageDescription = Nothing
-    , _cdVariables = Nothing
-    , _cdCacheClusterSize = Nothing
-    , _cdCanarySettings = Nothing
-    , _cdCacheClusterEnabled = Nothing
-    , _cdStageName = Nothing
-    , _cdDescription = Nothing
-    , _cdRestAPIId = pRestAPIId_
-    }
-
+createDeployment pRestAPIId_
+  = CreateDeployment'{_cdStageDescription = Nothing,
+                      _cdVariables = Nothing, _cdTracingEnabled = Nothing,
+                      _cdCacheClusterSize = Nothing,
+                      _cdCanarySettings = Nothing,
+                      _cdCacheClusterEnabled = Nothing,
+                      _cdStageName = Nothing, _cdDescription = Nothing,
+                      _cdRestAPIId = pRestAPIId_}
 
 -- | The description of the 'Stage' resource for the 'Deployment' resource to create.
 cdStageDescription :: Lens' CreateDeployment (Maybe Text)
@@ -113,11 +116,15 @@ cdStageDescription = lens _cdStageDescription (\ s a -> s{_cdStageDescription = 
 cdVariables :: Lens' CreateDeployment (HashMap Text Text)
 cdVariables = lens _cdVariables (\ s a -> s{_cdVariables = a}) . _Default . _Map
 
+-- | Specifies whether active tracing with X-ray is enabled for the 'Stage' .
+cdTracingEnabled :: Lens' CreateDeployment (Maybe Bool)
+cdTracingEnabled = lens _cdTracingEnabled (\ s a -> s{_cdTracingEnabled = a})
+
 -- | Specifies the cache cluster size for the 'Stage' resource specified in the input, if a cache cluster is enabled.
 cdCacheClusterSize :: Lens' CreateDeployment (Maybe CacheClusterSize)
 cdCacheClusterSize = lens _cdCacheClusterSize (\ s a -> s{_cdCacheClusterSize = a})
 
--- | The input configuration for the canary deployment when the deployment is a canary release deployment.
+-- | The input configuration for the canary deployment when the deployment is a canary release deployment. 
 cdCanarySettings :: Lens' CreateDeployment (Maybe DeploymentCanarySettings)
 cdCanarySettings = lens _cdCanarySettings (\ s a -> s{_cdCanarySettings = a})
 
@@ -158,6 +165,7 @@ instance ToJSON CreateDeployment where
               (catMaybes
                  [("stageDescription" .=) <$> _cdStageDescription,
                   ("variables" .=) <$> _cdVariables,
+                  ("tracingEnabled" .=) <$> _cdTracingEnabled,
                   ("cacheClusterSize" .=) <$> _cdCacheClusterSize,
                   ("canarySettings" .=) <$> _cdCanarySettings,
                   ("cacheClusterEnabled" .=) <$>

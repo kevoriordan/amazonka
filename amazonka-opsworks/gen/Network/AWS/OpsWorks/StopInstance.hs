@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops a specified instance. When you stop a standard instance, the data disappears and must be reinstalled when you restart the instance. You can stop an Amazon EBS-backed instance without losing data. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html Starting, Stopping, and Rebooting Instances> .
+-- Stops a specified instance. When you stop a standard instance, the data disappears and must be reinstalled when you restart the instance. You can stop an Amazon EBS-backed instance without losing data. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html Starting, Stopping, and Rebooting Instances> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.StopInstance
     (
@@ -45,27 +45,26 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopInstance' smart constructor.
-data StopInstance = StopInstance'
-  { _siForce      :: !(Maybe Bool)
-  , _siInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopInstance = StopInstance'{_siForce ::
+                                  !(Maybe Bool),
+                                  _siInstanceId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'siForce' - Undocumented member.
+-- * 'siForce' - Specifies whether to force an instance to stop. If the instance's root device type is @ebs@ , or EBS-backed, adding the @Force@ parameter to the @StopInstances@ API call disassociates the AWS OpsWorks Stacks instance from EC2, and forces deletion of /only/ the OpsWorks Stacks instance. You must also delete the formerly-associated instance in EC2 after troubleshooting and replacing the AWS OpsWorks Stacks instance with a new one.
 --
 -- * 'siInstanceId' - The instance ID.
 stopInstance
     :: Text -- ^ 'siInstanceId'
     -> StopInstance
-stopInstance pInstanceId_ =
-  StopInstance' {_siForce = Nothing, _siInstanceId = pInstanceId_}
+stopInstance pInstanceId_
+  = StopInstance'{_siForce = Nothing,
+                  _siInstanceId = pInstanceId_}
 
-
--- | Undocumented member.
+-- | Specifies whether to force an instance to stop. If the instance's root device type is @ebs@ , or EBS-backed, adding the @Force@ parameter to the @StopInstances@ API call disassociates the AWS OpsWorks Stacks instance from EC2, and forces deletion of /only/ the OpsWorks Stacks instance. You must also delete the formerly-associated instance in EC2 after troubleshooting and replacing the AWS OpsWorks Stacks instance with a new one.
 siForce :: Lens' StopInstance (Maybe Bool)
 siForce = lens _siForce (\ s a -> s{_siForce = a})
 
@@ -105,16 +104,13 @@ instance ToQuery StopInstance where
         toQuery = const mempty
 
 -- | /See:/ 'stopInstanceResponse' smart constructor.
-data StopInstanceResponse =
-  StopInstanceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopInstanceResponse = StopInstanceResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopInstanceResponse' with the minimum fields required to make a request.
 --
 stopInstanceResponse
     :: StopInstanceResponse
 stopInstanceResponse = StopInstanceResponse'
-
 
 instance NFData StopInstanceResponse where

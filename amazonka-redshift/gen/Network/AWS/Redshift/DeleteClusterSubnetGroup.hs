@@ -41,15 +41,15 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteClusterSubnetGroup' smart constructor.
-newtype DeleteClusterSubnetGroup = DeleteClusterSubnetGroup'
-  { _dcsgClusterSubnetGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteClusterSubnetGroup = DeleteClusterSubnetGroup'{_dcsgClusterSubnetGroupName
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteClusterSubnetGroup' with the minimum fields required to make a request.
 --
@@ -59,10 +59,9 @@ newtype DeleteClusterSubnetGroup = DeleteClusterSubnetGroup'
 deleteClusterSubnetGroup
     :: Text -- ^ 'dcsgClusterSubnetGroupName'
     -> DeleteClusterSubnetGroup
-deleteClusterSubnetGroup pClusterSubnetGroupName_ =
-  DeleteClusterSubnetGroup'
-    {_dcsgClusterSubnetGroupName = pClusterSubnetGroupName_}
-
+deleteClusterSubnetGroup pClusterSubnetGroupName_
+  = DeleteClusterSubnetGroup'{_dcsgClusterSubnetGroupName
+                                = pClusterSubnetGroupName_}
 
 -- | The name of the cluster subnet group name to be deleted.
 dcsgClusterSubnetGroupName :: Lens' DeleteClusterSubnetGroup Text
@@ -95,17 +94,16 @@ instance ToQuery DeleteClusterSubnetGroup where
                  _dcsgClusterSubnetGroupName]
 
 -- | /See:/ 'deleteClusterSubnetGroupResponse' smart constructor.
-data DeleteClusterSubnetGroupResponse =
-  DeleteClusterSubnetGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteClusterSubnetGroupResponse = DeleteClusterSubnetGroupResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteClusterSubnetGroupResponse' with the minimum fields required to make a request.
 --
 deleteClusterSubnetGroupResponse
     :: DeleteClusterSubnetGroupResponse
-deleteClusterSubnetGroupResponse = DeleteClusterSubnetGroupResponse'
-
+deleteClusterSubnetGroupResponse
+  = DeleteClusterSubnetGroupResponse'
 
 instance NFData DeleteClusterSubnetGroupResponse
          where

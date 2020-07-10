@@ -49,10 +49,10 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'getSubscriptionAttributes' smart constructor.
-newtype GetSubscriptionAttributes = GetSubscriptionAttributes'
-  { _gsaSubscriptionARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetSubscriptionAttributes = GetSubscriptionAttributes'{_gsaSubscriptionARN
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetSubscriptionAttributes' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype GetSubscriptionAttributes = GetSubscriptionAttributes'
 getSubscriptionAttributes
     :: Text -- ^ 'gsaSubscriptionARN'
     -> GetSubscriptionAttributes
-getSubscriptionAttributes pSubscriptionARN_ =
-  GetSubscriptionAttributes' {_gsaSubscriptionARN = pSubscriptionARN_}
-
+getSubscriptionAttributes pSubscriptionARN_
+  = GetSubscriptionAttributes'{_gsaSubscriptionARN =
+                                 pSubscriptionARN_}
 
 -- | The ARN of the subscription whose properties you want to get.
 gsaSubscriptionARN :: Lens' GetSubscriptionAttributes Text
@@ -105,28 +105,34 @@ instance ToQuery GetSubscriptionAttributes where
 --
 --
 -- /See:/ 'getSubscriptionAttributesResponse' smart constructor.
-data GetSubscriptionAttributesResponse = GetSubscriptionAttributesResponse'
-  { _gsarsAttributes     :: !(Maybe (Map Text Text))
-  , _gsarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSubscriptionAttributesResponse = GetSubscriptionAttributesResponse'{_gsarsAttributes
+                                                                            ::
+                                                                            !(Maybe
+                                                                                (Map
+                                                                                   Text
+                                                                                   Text)),
+                                                                            _gsarsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'GetSubscriptionAttributesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsarsAttributes' - A map of the subscription's attributes. Attributes in this map include the following:     * @SubscriptionArn@ -- the subscription's ARN     * @TopicArn@ -- the topic ARN that the subscription is associated with     * @Owner@ -- the AWS account ID of the subscription's owner     * @ConfirmationWasAuthenticated@ -- true if the subscription confirmation request was authenticated     * @DeliveryPolicy@ -- the JSON serialization of the subscription's delivery policy     * @EffectiveDeliveryPolicy@ -- the JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults
+-- * 'gsarsAttributes' - A map of the subscription's attributes. Attributes in this map include the following:     * @ConfirmationWasAuthenticated@ – @true@ if the subscription confirmation request was authenticated.     * @DeliveryPolicy@ – The JSON serialization of the subscription's delivery policy.     * @EffectiveDeliveryPolicy@ – The JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults.     * @FilterPolicy@ – The filter policy JSON that is assigned to the subscription.     * @Owner@ – The AWS account ID of the subscription's owner.     * @PendingConfirmation@ – @true@ if the subscription hasn't been confirmed. To confirm a pending subscription, call the @ConfirmSubscription@ action with a confirmation token.     * @RawMessageDelivery@ – @true@ if raw message delivery is enabled for the subscription. Raw messages are free of JSON formatting and can be sent to HTTP/S and Amazon SQS endpoints.     * @RedrivePolicy@ – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing.     * @SubscriptionArn@ – The subscription's ARN.     * @TopicArn@ – The topic ARN that the subscription is associated with.
 --
 -- * 'gsarsResponseStatus' - -- | The response status code.
 getSubscriptionAttributesResponse
     :: Int -- ^ 'gsarsResponseStatus'
     -> GetSubscriptionAttributesResponse
-getSubscriptionAttributesResponse pResponseStatus_ =
-  GetSubscriptionAttributesResponse'
-    {_gsarsAttributes = Nothing, _gsarsResponseStatus = pResponseStatus_}
+getSubscriptionAttributesResponse pResponseStatus_
+  = GetSubscriptionAttributesResponse'{_gsarsAttributes
+                                         = Nothing,
+                                       _gsarsResponseStatus = pResponseStatus_}
 
-
--- | A map of the subscription's attributes. Attributes in this map include the following:     * @SubscriptionArn@ -- the subscription's ARN     * @TopicArn@ -- the topic ARN that the subscription is associated with     * @Owner@ -- the AWS account ID of the subscription's owner     * @ConfirmationWasAuthenticated@ -- true if the subscription confirmation request was authenticated     * @DeliveryPolicy@ -- the JSON serialization of the subscription's delivery policy     * @EffectiveDeliveryPolicy@ -- the JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults
+-- | A map of the subscription's attributes. Attributes in this map include the following:     * @ConfirmationWasAuthenticated@ – @true@ if the subscription confirmation request was authenticated.     * @DeliveryPolicy@ – The JSON serialization of the subscription's delivery policy.     * @EffectiveDeliveryPolicy@ – The JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults.     * @FilterPolicy@ – The filter policy JSON that is assigned to the subscription.     * @Owner@ – The AWS account ID of the subscription's owner.     * @PendingConfirmation@ – @true@ if the subscription hasn't been confirmed. To confirm a pending subscription, call the @ConfirmSubscription@ action with a confirmation token.     * @RawMessageDelivery@ – @true@ if raw message delivery is enabled for the subscription. Raw messages are free of JSON formatting and can be sent to HTTP/S and Amazon SQS endpoints.     * @RedrivePolicy@ – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing.     * @SubscriptionArn@ – The subscription's ARN.     * @TopicArn@ – The topic ARN that the subscription is associated with.
 gsarsAttributes :: Lens' GetSubscriptionAttributesResponse (HashMap Text Text)
 gsarsAttributes = lens _gsarsAttributes (\ s a -> s{_gsarsAttributes = a}) . _Default . _Map
 

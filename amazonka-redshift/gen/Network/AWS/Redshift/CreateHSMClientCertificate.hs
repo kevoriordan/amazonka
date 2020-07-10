@@ -21,7 +21,7 @@
 -- Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client's HSM in order to store and retrieve the keys used to encrypt the cluster databases.
 --
 --
--- The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html Hardware Security Modules> in the Amazon Redshift Cluster Management Guide.
+-- The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html Hardware Security Modules> in the Amazon Redshift Cluster Management Guide.
 --
 module Network.AWS.Redshift.CreateHSMClientCertificate
     (
@@ -47,16 +47,17 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'createHSMClientCertificate' smart constructor.
-data CreateHSMClientCertificate = CreateHSMClientCertificate'
-  { _chccTags                           :: !(Maybe [Tag])
-  , _chccHSMClientCertificateIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSMClientCertificate = CreateHSMClientCertificate'{_chccTags
+                                                              :: !(Maybe [Tag]),
+                                                              _chccHSMClientCertificateIdentifier
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateHSMClientCertificate' with the minimum fields required to make a request.
 --
@@ -68,12 +69,11 @@ data CreateHSMClientCertificate = CreateHSMClientCertificate'
 createHSMClientCertificate
     :: Text -- ^ 'chccHSMClientCertificateIdentifier'
     -> CreateHSMClientCertificate
-createHSMClientCertificate pHSMClientCertificateIdentifier_ =
-  CreateHSMClientCertificate'
-    { _chccTags = Nothing
-    , _chccHSMClientCertificateIdentifier = pHSMClientCertificateIdentifier_
-    }
-
+createHSMClientCertificate
+  pHSMClientCertificateIdentifier_
+  = CreateHSMClientCertificate'{_chccTags = Nothing,
+                                _chccHSMClientCertificateIdentifier =
+                                  pHSMClientCertificateIdentifier_}
 
 -- | A list of tag instances.
 chccTags :: Lens' CreateHSMClientCertificate [Tag]
@@ -116,11 +116,15 @@ instance ToQuery CreateHSMClientCertificate where
                  _chccHSMClientCertificateIdentifier]
 
 -- | /See:/ 'createHSMClientCertificateResponse' smart constructor.
-data CreateHSMClientCertificateResponse = CreateHSMClientCertificateResponse'
-  { _chccrsHSMClientCertificate :: !(Maybe HSMClientCertificate)
-  , _chccrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSMClientCertificateResponse = CreateHSMClientCertificateResponse'{_chccrsHSMClientCertificate
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  HSMClientCertificate),
+                                                                              _chccrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'CreateHSMClientCertificateResponse' with the minimum fields required to make a request.
 --
@@ -132,12 +136,11 @@ data CreateHSMClientCertificateResponse = CreateHSMClientCertificateResponse'
 createHSMClientCertificateResponse
     :: Int -- ^ 'chccrsResponseStatus'
     -> CreateHSMClientCertificateResponse
-createHSMClientCertificateResponse pResponseStatus_ =
-  CreateHSMClientCertificateResponse'
-    { _chccrsHSMClientCertificate = Nothing
-    , _chccrsResponseStatus = pResponseStatus_
-    }
-
+createHSMClientCertificateResponse pResponseStatus_
+  = CreateHSMClientCertificateResponse'{_chccrsHSMClientCertificate
+                                          = Nothing,
+                                        _chccrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | Undocumented member.
 chccrsHSMClientCertificate :: Lens' CreateHSMClientCertificateResponse (Maybe HSMClientCertificate)

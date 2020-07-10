@@ -50,11 +50,11 @@ import Network.AWS.Response
 -- | A request for information about the usage of an identity pool.
 --
 -- /See:/ 'describeIdentityUsage' smart constructor.
-data DescribeIdentityUsage = DescribeIdentityUsage'
-  { _diuIdentityPoolId :: !Text
-  , _diuIdentityId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeIdentityUsage = DescribeIdentityUsage'{_diuIdentityPoolId
+                                                    :: !Text,
+                                                    _diuIdentityId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeIdentityUsage' with the minimum fields required to make a request.
 --
@@ -67,10 +67,10 @@ describeIdentityUsage
     :: Text -- ^ 'diuIdentityPoolId'
     -> Text -- ^ 'diuIdentityId'
     -> DescribeIdentityUsage
-describeIdentityUsage pIdentityPoolId_ pIdentityId_ =
-  DescribeIdentityUsage'
-    {_diuIdentityPoolId = pIdentityPoolId_, _diuIdentityId = pIdentityId_}
-
+describeIdentityUsage pIdentityPoolId_ pIdentityId_
+  = DescribeIdentityUsage'{_diuIdentityPoolId =
+                             pIdentityPoolId_,
+                           _diuIdentityId = pIdentityId_}
 
 -- | A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.
 diuIdentityPoolId :: Lens' DescribeIdentityUsage Text
@@ -113,11 +113,14 @@ instance ToQuery DescribeIdentityUsage where
 -- | The response to a successful DescribeIdentityUsage request.
 --
 -- /See:/ 'describeIdentityUsageResponse' smart constructor.
-data DescribeIdentityUsageResponse = DescribeIdentityUsageResponse'
-  { _diursIdentityUsage  :: !(Maybe IdentityUsage)
-  , _diursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeIdentityUsageResponse = DescribeIdentityUsageResponse'{_diursIdentityUsage
+                                                                    ::
+                                                                    !(Maybe
+                                                                        IdentityUsage),
+                                                                    _diursResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeIdentityUsageResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +132,10 @@ data DescribeIdentityUsageResponse = DescribeIdentityUsageResponse'
 describeIdentityUsageResponse
     :: Int -- ^ 'diursResponseStatus'
     -> DescribeIdentityUsageResponse
-describeIdentityUsageResponse pResponseStatus_ =
-  DescribeIdentityUsageResponse'
-    {_diursIdentityUsage = Nothing, _diursResponseStatus = pResponseStatus_}
-
+describeIdentityUsageResponse pResponseStatus_
+  = DescribeIdentityUsageResponse'{_diursIdentityUsage
+                                     = Nothing,
+                                   _diursResponseStatus = pResponseStatus_}
 
 -- | Usage information for the identity.
 diursIdentityUsage :: Lens' DescribeIdentityUsageResponse (Maybe IdentityUsage)

@@ -28,7 +28,9 @@ module Network.AWS.AppSync.UpdateDataSource
     , UpdateDataSource
     -- * Request Lenses
     , udsServiceRoleARN
+    , udsRelationalDatabaseConfig
     , udsDynamodbConfig
+    , udsHttpConfig
     , udsLambdaConfig
     , udsDescription
     , udsElasticsearchConfig
@@ -52,17 +54,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDataSource' smart constructor.
-data UpdateDataSource = UpdateDataSource'
-  { _udsServiceRoleARN      :: !(Maybe Text)
-  , _udsDynamodbConfig      :: !(Maybe DynamodbDataSourceConfig)
-  , _udsLambdaConfig        :: !(Maybe LambdaDataSourceConfig)
-  , _udsDescription         :: !(Maybe Text)
-  , _udsElasticsearchConfig :: !(Maybe ElasticsearchDataSourceConfig)
-  , _udsApiId               :: !Text
-  , _udsName                :: !Text
-  , _udsType                :: !DataSourceType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDataSource = UpdateDataSource'{_udsServiceRoleARN
+                                          :: !(Maybe Text),
+                                          _udsRelationalDatabaseConfig ::
+                                          !(Maybe
+                                              RelationalDatabaseDataSourceConfig),
+                                          _udsDynamodbConfig ::
+                                          !(Maybe DynamodbDataSourceConfig),
+                                          _udsHttpConfig ::
+                                          !(Maybe HTTPDataSourceConfig),
+                                          _udsLambdaConfig ::
+                                          !(Maybe LambdaDataSourceConfig),
+                                          _udsDescription :: !(Maybe Text),
+                                          _udsElasticsearchConfig ::
+                                          !(Maybe
+                                              ElasticsearchDataSourceConfig),
+                                          _udsApiId :: !Text, _udsName :: !Text,
+                                          _udsType :: !DataSourceType}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDataSource' with the minimum fields required to make a request.
 --
@@ -70,13 +79,17 @@ data UpdateDataSource = UpdateDataSource'
 --
 -- * 'udsServiceRoleARN' - The new service role ARN for the data source.
 --
--- * 'udsDynamodbConfig' - The new DynamoDB configuration.
+-- * 'udsRelationalDatabaseConfig' - The new relational database configuration.
 --
--- * 'udsLambdaConfig' - The new Lambda configuration.
+-- * 'udsDynamodbConfig' - The new Amazon DynamoDB configuration.
+--
+-- * 'udsHttpConfig' - The new HTTP endpoint configuration.
+--
+-- * 'udsLambdaConfig' - The new AWS Lambda configuration.
 --
 -- * 'udsDescription' - The new description for the data source.
 --
--- * 'udsElasticsearchConfig' - The new Elasticsearch configuration.
+-- * 'udsElasticsearchConfig' - The new Elasticsearch Service configuration.
 --
 -- * 'udsApiId' - The API ID.
 --
@@ -88,28 +101,33 @@ updateDataSource
     -> Text -- ^ 'udsName'
     -> DataSourceType -- ^ 'udsType'
     -> UpdateDataSource
-updateDataSource pApiId_ pName_ pType_ =
-  UpdateDataSource'
-    { _udsServiceRoleARN = Nothing
-    , _udsDynamodbConfig = Nothing
-    , _udsLambdaConfig = Nothing
-    , _udsDescription = Nothing
-    , _udsElasticsearchConfig = Nothing
-    , _udsApiId = pApiId_
-    , _udsName = pName_
-    , _udsType = pType_
-    }
-
+updateDataSource pApiId_ pName_ pType_
+  = UpdateDataSource'{_udsServiceRoleARN = Nothing,
+                      _udsRelationalDatabaseConfig = Nothing,
+                      _udsDynamodbConfig = Nothing,
+                      _udsHttpConfig = Nothing, _udsLambdaConfig = Nothing,
+                      _udsDescription = Nothing,
+                      _udsElasticsearchConfig = Nothing,
+                      _udsApiId = pApiId_, _udsName = pName_,
+                      _udsType = pType_}
 
 -- | The new service role ARN for the data source.
 udsServiceRoleARN :: Lens' UpdateDataSource (Maybe Text)
 udsServiceRoleARN = lens _udsServiceRoleARN (\ s a -> s{_udsServiceRoleARN = a})
 
--- | The new DynamoDB configuration.
+-- | The new relational database configuration.
+udsRelationalDatabaseConfig :: Lens' UpdateDataSource (Maybe RelationalDatabaseDataSourceConfig)
+udsRelationalDatabaseConfig = lens _udsRelationalDatabaseConfig (\ s a -> s{_udsRelationalDatabaseConfig = a})
+
+-- | The new Amazon DynamoDB configuration.
 udsDynamodbConfig :: Lens' UpdateDataSource (Maybe DynamodbDataSourceConfig)
 udsDynamodbConfig = lens _udsDynamodbConfig (\ s a -> s{_udsDynamodbConfig = a})
 
--- | The new Lambda configuration.
+-- | The new HTTP endpoint configuration.
+udsHttpConfig :: Lens' UpdateDataSource (Maybe HTTPDataSourceConfig)
+udsHttpConfig = lens _udsHttpConfig (\ s a -> s{_udsHttpConfig = a})
+
+-- | The new AWS Lambda configuration.
 udsLambdaConfig :: Lens' UpdateDataSource (Maybe LambdaDataSourceConfig)
 udsLambdaConfig = lens _udsLambdaConfig (\ s a -> s{_udsLambdaConfig = a})
 
@@ -117,7 +135,7 @@ udsLambdaConfig = lens _udsLambdaConfig (\ s a -> s{_udsLambdaConfig = a})
 udsDescription :: Lens' UpdateDataSource (Maybe Text)
 udsDescription = lens _udsDescription (\ s a -> s{_udsDescription = a})
 
--- | The new Elasticsearch configuration.
+-- | The new Elasticsearch Service configuration.
 udsElasticsearchConfig :: Lens' UpdateDataSource (Maybe ElasticsearchDataSourceConfig)
 udsElasticsearchConfig = lens _udsElasticsearchConfig (\ s a -> s{_udsElasticsearchConfig = a})
 
@@ -158,7 +176,10 @@ instance ToJSON UpdateDataSource where
           = object
               (catMaybes
                  [("serviceRoleArn" .=) <$> _udsServiceRoleARN,
+                  ("relationalDatabaseConfig" .=) <$>
+                    _udsRelationalDatabaseConfig,
                   ("dynamodbConfig" .=) <$> _udsDynamodbConfig,
+                  ("httpConfig" .=) <$> _udsHttpConfig,
                   ("lambdaConfig" .=) <$> _udsLambdaConfig,
                   ("description" .=) <$> _udsDescription,
                   ("elasticsearchConfig" .=) <$>
@@ -175,11 +196,13 @@ instance ToQuery UpdateDataSource where
         toQuery = const mempty
 
 -- | /See:/ 'updateDataSourceResponse' smart constructor.
-data UpdateDataSourceResponse = UpdateDataSourceResponse'
-  { _udsrsDataSource     :: !(Maybe DataSource)
-  , _udsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDataSourceResponse = UpdateDataSourceResponse'{_udsrsDataSource
+                                                          ::
+                                                          !(Maybe DataSource),
+                                                          _udsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -191,10 +214,10 @@ data UpdateDataSourceResponse = UpdateDataSourceResponse'
 updateDataSourceResponse
     :: Int -- ^ 'udsrsResponseStatus'
     -> UpdateDataSourceResponse
-updateDataSourceResponse pResponseStatus_ =
-  UpdateDataSourceResponse'
-    {_udsrsDataSource = Nothing, _udsrsResponseStatus = pResponseStatus_}
-
+updateDataSourceResponse pResponseStatus_
+  = UpdateDataSourceResponse'{_udsrsDataSource =
+                                Nothing,
+                              _udsrsResponseStatus = pResponseStatus_}
 
 -- | The updated @DataSource@ object.
 udsrsDataSource :: Lens' UpdateDataSourceResponse (Maybe DataSource)

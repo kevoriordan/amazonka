@@ -46,15 +46,12 @@ import Network.AWS.Response
 import Network.AWS.Support.Types
 import Network.AWS.Support.Types.Product
 
--- |
---
---
---
--- /See:/ 'describeTrustedAdvisorCheckSummaries' smart constructor.
-newtype DescribeTrustedAdvisorCheckSummaries = DescribeTrustedAdvisorCheckSummaries'
-  { _dtacsCheckIds :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeTrustedAdvisorCheckSummaries' smart constructor.
+newtype DescribeTrustedAdvisorCheckSummaries = DescribeTrustedAdvisorCheckSummaries'{_dtacsCheckIds
+                                                                                     ::
+                                                                                     [Text]}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DescribeTrustedAdvisorCheckSummaries' with the minimum fields required to make a request.
 --
@@ -63,9 +60,9 @@ newtype DescribeTrustedAdvisorCheckSummaries = DescribeTrustedAdvisorCheckSummar
 -- * 'dtacsCheckIds' - The IDs of the Trusted Advisor checks.
 describeTrustedAdvisorCheckSummaries
     :: DescribeTrustedAdvisorCheckSummaries
-describeTrustedAdvisorCheckSummaries =
-  DescribeTrustedAdvisorCheckSummaries' {_dtacsCheckIds = mempty}
-
+describeTrustedAdvisorCheckSummaries
+  = DescribeTrustedAdvisorCheckSummaries'{_dtacsCheckIds
+                                            = mempty}
 
 -- | The IDs of the Trusted Advisor checks.
 dtacsCheckIds :: Lens' DescribeTrustedAdvisorCheckSummaries [Text]
@@ -122,11 +119,15 @@ instance ToQuery DescribeTrustedAdvisorCheckSummaries
 --
 --
 -- /See:/ 'describeTrustedAdvisorCheckSummariesResponse' smart constructor.
-data DescribeTrustedAdvisorCheckSummariesResponse = DescribeTrustedAdvisorCheckSummariesResponse'
-  { _dtacsrsResponseStatus :: !Int
-  , _dtacsrsSummaries      :: ![TrustedAdvisorCheckSummary]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTrustedAdvisorCheckSummariesResponse = DescribeTrustedAdvisorCheckSummariesResponse'{_dtacsrsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int,
+                                                                                                  _dtacsrsSummaries
+                                                                                                  ::
+                                                                                                  ![TrustedAdvisorCheckSummary]}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'DescribeTrustedAdvisorCheckSummariesResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +139,11 @@ data DescribeTrustedAdvisorCheckSummariesResponse = DescribeTrustedAdvisorCheckS
 describeTrustedAdvisorCheckSummariesResponse
     :: Int -- ^ 'dtacsrsResponseStatus'
     -> DescribeTrustedAdvisorCheckSummariesResponse
-describeTrustedAdvisorCheckSummariesResponse pResponseStatus_ =
-  DescribeTrustedAdvisorCheckSummariesResponse'
-    {_dtacsrsResponseStatus = pResponseStatus_, _dtacsrsSummaries = mempty}
-
+describeTrustedAdvisorCheckSummariesResponse
+  pResponseStatus_
+  = DescribeTrustedAdvisorCheckSummariesResponse'{_dtacsrsResponseStatus
+                                                    = pResponseStatus_,
+                                                  _dtacsrsSummaries = mempty}
 
 -- | -- | The response status code.
 dtacsrsResponseStatus :: Lens' DescribeTrustedAdvisorCheckSummariesResponse Int

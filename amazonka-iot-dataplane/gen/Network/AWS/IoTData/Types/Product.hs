@@ -1,7 +1,8 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE LambdaCase         #-}
 {-# LANGUAGE OverloadedStrings  #-}
-{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE PatternSynonyms    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -15,8 +16,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Network.AWS.IoTData.Types.Product where
+module Network.AWS.IoTData.Types.Product (
+  ) where
 
-import Network.AWS.IoTData.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude

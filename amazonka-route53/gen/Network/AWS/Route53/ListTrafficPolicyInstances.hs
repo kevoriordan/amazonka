@@ -21,7 +21,7 @@
 -- Gets information about the traffic policy instances that you created by using the current AWS account.
 --
 --
--- Amazon Route 53 returns a maximum of 100 items in each response. If you have a lot of traffic policy instances, you can use the @MaxItems@ parameter to list them in groups of up to 100.
+-- Route 53 returns a maximum of 100 items in each response. If you have a lot of traffic policy instances, you can use the @MaxItems@ parameter to list them in groups of up to 100.
 --
 module Network.AWS.Route53.ListTrafficPolicyInstances
     (
@@ -59,13 +59,20 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'listTrafficPolicyInstances' smart constructor.
-data ListTrafficPolicyInstances = ListTrafficPolicyInstances'
-  { _ltpiTrafficPolicyInstanceTypeMarker :: !(Maybe RecordType)
-  , _ltpiMaxItems                        :: !(Maybe Text)
-  , _ltpiHostedZoneIdMarker              :: !(Maybe ResourceId)
-  , _ltpiTrafficPolicyInstanceNameMarker :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTrafficPolicyInstances = ListTrafficPolicyInstances'{_ltpiTrafficPolicyInstanceTypeMarker
+                                                              ::
+                                                              !(Maybe
+                                                                  RecordType),
+                                                              _ltpiMaxItems ::
+                                                              !(Maybe Text),
+                                                              _ltpiHostedZoneIdMarker
+                                                              ::
+                                                              !(Maybe
+                                                                  ResourceId),
+                                                              _ltpiTrafficPolicyInstanceNameMarker
+                                                              :: !(Maybe Text)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListTrafficPolicyInstances' with the minimum fields required to make a request.
 --
@@ -80,14 +87,12 @@ data ListTrafficPolicyInstances = ListTrafficPolicyInstances'
 -- * 'ltpiTrafficPolicyInstanceNameMarker' - If the value of @IsTruncated@ in the previous response was @true@ , you have more traffic policy instances. To get more traffic policy instances, submit another @ListTrafficPolicyInstances@ request. For the value of @trafficpolicyinstancename@ , specify the value of @TrafficPolicyInstanceNameMarker@ from the previous response, which is the name of the first traffic policy instance in the next group of traffic policy instances. If the value of @IsTruncated@ in the previous response was @false@ , there are no more traffic policy instances to get.
 listTrafficPolicyInstances
     :: ListTrafficPolicyInstances
-listTrafficPolicyInstances =
-  ListTrafficPolicyInstances'
-    { _ltpiTrafficPolicyInstanceTypeMarker = Nothing
-    , _ltpiMaxItems = Nothing
-    , _ltpiHostedZoneIdMarker = Nothing
-    , _ltpiTrafficPolicyInstanceNameMarker = Nothing
-    }
-
+listTrafficPolicyInstances
+  = ListTrafficPolicyInstances'{_ltpiTrafficPolicyInstanceTypeMarker
+                                  = Nothing,
+                                _ltpiMaxItems = Nothing,
+                                _ltpiHostedZoneIdMarker = Nothing,
+                                _ltpiTrafficPolicyInstanceNameMarker = Nothing}
 
 -- | If the value of @IsTruncated@ in the previous response was @true@ , you have more traffic policy instances. To get more traffic policy instances, submit another @ListTrafficPolicyInstances@ request. For the value of @trafficpolicyinstancetype@ , specify the value of @TrafficPolicyInstanceTypeMarker@ from the previous response, which is the type of the first traffic policy instance in the next group of traffic policy instances. If the value of @IsTruncated@ in the previous response was @false@ , there are no more traffic policy instances to get.
 ltpiTrafficPolicyInstanceTypeMarker :: Lens' ListTrafficPolicyInstances (Maybe RecordType)
@@ -148,26 +153,42 @@ instance ToQuery ListTrafficPolicyInstances where
 --
 --
 -- /See:/ 'listTrafficPolicyInstancesResponse' smart constructor.
-data ListTrafficPolicyInstancesResponse = ListTrafficPolicyInstancesResponse'
-  { _ltpirsTrafficPolicyInstanceTypeMarker :: !(Maybe RecordType)
-  , _ltpirsHostedZoneIdMarker              :: !(Maybe ResourceId)
-  , _ltpirsTrafficPolicyInstanceNameMarker :: !(Maybe Text)
-  , _ltpirsResponseStatus                  :: !Int
-  , _ltpirsTrafficPolicyInstances          :: ![TrafficPolicyInstance]
-  , _ltpirsIsTruncated                     :: !Bool
-  , _ltpirsMaxItems                        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTrafficPolicyInstancesResponse = ListTrafficPolicyInstancesResponse'{_ltpirsTrafficPolicyInstanceTypeMarker
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  RecordType),
+                                                                              _ltpirsHostedZoneIdMarker
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  ResourceId),
+                                                                              _ltpirsTrafficPolicyInstanceNameMarker
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _ltpirsResponseStatus
+                                                                              ::
+                                                                              !Int,
+                                                                              _ltpirsTrafficPolicyInstances
+                                                                              ::
+                                                                              ![TrafficPolicyInstance],
+                                                                              _ltpirsIsTruncated
+                                                                              ::
+                                                                              !Bool,
+                                                                              _ltpirsMaxItems
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListTrafficPolicyInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltpirsTrafficPolicyInstanceTypeMarker' - If @IsTruncated@ is @true@ , @TrafficPolicyInstanceTypeMarker@ is the DNS type of the resource record sets that are associated with the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request.
+-- * 'ltpirsTrafficPolicyInstanceTypeMarker' - If @IsTruncated@ is @true@ , @TrafficPolicyInstanceTypeMarker@ is the DNS type of the resource record sets that are associated with the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request. 
 --
--- * 'ltpirsHostedZoneIdMarker' - If @IsTruncated@ is @true@ , @HostedZoneIdMarker@ is the ID of the hosted zone of the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request.
+-- * 'ltpirsHostedZoneIdMarker' - If @IsTruncated@ is @true@ , @HostedZoneIdMarker@ is the ID of the hosted zone of the first traffic policy instance that Route 53 will return if you submit another @ListTrafficPolicyInstances@ request. 
 --
--- * 'ltpirsTrafficPolicyInstanceNameMarker' - If @IsTruncated@ is @true@ , @TrafficPolicyInstanceNameMarker@ is the name of the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request.
+-- * 'ltpirsTrafficPolicyInstanceNameMarker' - If @IsTruncated@ is @true@ , @TrafficPolicyInstanceNameMarker@ is the name of the first traffic policy instance that Route 53 will return if you submit another @ListTrafficPolicyInstances@ request. 
 --
 -- * 'ltpirsResponseStatus' - -- | The response status code.
 --
@@ -181,27 +202,28 @@ listTrafficPolicyInstancesResponse
     -> Bool -- ^ 'ltpirsIsTruncated'
     -> Text -- ^ 'ltpirsMaxItems'
     -> ListTrafficPolicyInstancesResponse
-listTrafficPolicyInstancesResponse pResponseStatus_ pIsTruncated_ pMaxItems_ =
-  ListTrafficPolicyInstancesResponse'
-    { _ltpirsTrafficPolicyInstanceTypeMarker = Nothing
-    , _ltpirsHostedZoneIdMarker = Nothing
-    , _ltpirsTrafficPolicyInstanceNameMarker = Nothing
-    , _ltpirsResponseStatus = pResponseStatus_
-    , _ltpirsTrafficPolicyInstances = mempty
-    , _ltpirsIsTruncated = pIsTruncated_
-    , _ltpirsMaxItems = pMaxItems_
-    }
+listTrafficPolicyInstancesResponse pResponseStatus_
+  pIsTruncated_ pMaxItems_
+  = ListTrafficPolicyInstancesResponse'{_ltpirsTrafficPolicyInstanceTypeMarker
+                                          = Nothing,
+                                        _ltpirsHostedZoneIdMarker = Nothing,
+                                        _ltpirsTrafficPolicyInstanceNameMarker =
+                                          Nothing,
+                                        _ltpirsResponseStatus =
+                                          pResponseStatus_,
+                                        _ltpirsTrafficPolicyInstances = mempty,
+                                        _ltpirsIsTruncated = pIsTruncated_,
+                                        _ltpirsMaxItems = pMaxItems_}
 
-
--- | If @IsTruncated@ is @true@ , @TrafficPolicyInstanceTypeMarker@ is the DNS type of the resource record sets that are associated with the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request.
+-- | If @IsTruncated@ is @true@ , @TrafficPolicyInstanceTypeMarker@ is the DNS type of the resource record sets that are associated with the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request. 
 ltpirsTrafficPolicyInstanceTypeMarker :: Lens' ListTrafficPolicyInstancesResponse (Maybe RecordType)
 ltpirsTrafficPolicyInstanceTypeMarker = lens _ltpirsTrafficPolicyInstanceTypeMarker (\ s a -> s{_ltpirsTrafficPolicyInstanceTypeMarker = a})
 
--- | If @IsTruncated@ is @true@ , @HostedZoneIdMarker@ is the ID of the hosted zone of the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request.
+-- | If @IsTruncated@ is @true@ , @HostedZoneIdMarker@ is the ID of the hosted zone of the first traffic policy instance that Route 53 will return if you submit another @ListTrafficPolicyInstances@ request. 
 ltpirsHostedZoneIdMarker :: Lens' ListTrafficPolicyInstancesResponse (Maybe ResourceId)
 ltpirsHostedZoneIdMarker = lens _ltpirsHostedZoneIdMarker (\ s a -> s{_ltpirsHostedZoneIdMarker = a})
 
--- | If @IsTruncated@ is @true@ , @TrafficPolicyInstanceNameMarker@ is the name of the first traffic policy instance that Amazon Route 53 will return if you submit another @ListTrafficPolicyInstances@ request.
+-- | If @IsTruncated@ is @true@ , @TrafficPolicyInstanceNameMarker@ is the name of the first traffic policy instance that Route 53 will return if you submit another @ListTrafficPolicyInstances@ request. 
 ltpirsTrafficPolicyInstanceNameMarker :: Lens' ListTrafficPolicyInstancesResponse (Maybe Text)
 ltpirsTrafficPolicyInstanceNameMarker = lens _ltpirsTrafficPolicyInstanceNameMarker (\ s a -> s{_ltpirsTrafficPolicyInstanceNameMarker = a})
 

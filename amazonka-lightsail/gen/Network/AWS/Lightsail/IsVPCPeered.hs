@@ -43,17 +43,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'isVPCPeered' smart constructor.
-data IsVPCPeered =
-  IsVPCPeered'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data IsVPCPeered = IsVPCPeered'
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IsVPCPeered' with the minimum fields required to make a request.
 --
 isVPCPeered
     :: IsVPCPeered
 isVPCPeered = IsVPCPeered'
-
 
 instance AWSRequest IsVPCPeered where
         type Rs IsVPCPeered = IsVPCPeeredResponse
@@ -87,11 +84,10 @@ instance ToQuery IsVPCPeered where
         toQuery = const mempty
 
 -- | /See:/ 'isVPCPeeredResponse' smart constructor.
-data IsVPCPeeredResponse = IsVPCPeeredResponse'
-  { _ivprsIsPeered       :: !(Maybe Bool)
-  , _ivprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data IsVPCPeeredResponse = IsVPCPeeredResponse'{_ivprsIsPeered
+                                                :: !(Maybe Bool),
+                                                _ivprsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IsVPCPeeredResponse' with the minimum fields required to make a request.
 --
@@ -103,10 +99,9 @@ data IsVPCPeeredResponse = IsVPCPeeredResponse'
 isVPCPeeredResponse
     :: Int -- ^ 'ivprsResponseStatus'
     -> IsVPCPeeredResponse
-isVPCPeeredResponse pResponseStatus_ =
-  IsVPCPeeredResponse'
-    {_ivprsIsPeered = Nothing, _ivprsResponseStatus = pResponseStatus_}
-
+isVPCPeeredResponse pResponseStatus_
+  = IsVPCPeeredResponse'{_ivprsIsPeered = Nothing,
+                         _ivprsResponseStatus = pResponseStatus_}
 
 -- | Returns @true@ if the Lightsail VPC is peered; otherwise, @false@ .
 ivprsIsPeered :: Lens' IsVPCPeeredResponse (Maybe Bool)

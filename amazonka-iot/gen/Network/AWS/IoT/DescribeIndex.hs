@@ -47,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeIndex' smart constructor.
-newtype DescribeIndex = DescribeIndex'
-  { _diIndexName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeIndex = DescribeIndex'{_diIndexName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeIndex' with the minimum fields required to make a request.
 --
@@ -60,8 +59,8 @@ newtype DescribeIndex = DescribeIndex'
 describeIndex
     :: Text -- ^ 'diIndexName'
     -> DescribeIndex
-describeIndex pIndexName_ = DescribeIndex' {_diIndexName = pIndexName_}
-
+describeIndex pIndexName_
+  = DescribeIndex'{_diIndexName = pIndexName_}
 
 -- | The index name.
 diIndexName :: Lens' DescribeIndex Text
@@ -93,13 +92,15 @@ instance ToQuery DescribeIndex where
         toQuery = const mempty
 
 -- | /See:/ 'describeIndexResponse' smart constructor.
-data DescribeIndexResponse = DescribeIndexResponse'
-  { _dirsIndexStatus    :: !(Maybe IndexStatus)
-  , _dirsSchema         :: !(Maybe Text)
-  , _dirsIndexName      :: !(Maybe Text)
-  , _dirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeIndexResponse = DescribeIndexResponse'{_dirsIndexStatus
+                                                    :: !(Maybe IndexStatus),
+                                                    _dirsSchema ::
+                                                    !(Maybe Text),
+                                                    _dirsIndexName ::
+                                                    !(Maybe Text),
+                                                    _dirsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeIndexResponse' with the minimum fields required to make a request.
 --
@@ -107,7 +108,7 @@ data DescribeIndexResponse = DescribeIndexResponse'
 --
 -- * 'dirsIndexStatus' - The index status.
 --
--- * 'dirsSchema' - Contains a value that specifies the type of indexing performed. Valid values are:     * REGISTRY – Your thing index will contain only registry data.     * REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.
+-- * 'dirsSchema' - Contains a value that specifies the type of indexing performed. Valid values are:     * REGISTRY – Your thing index contains only registry data.     * REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.     * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and thing connectivity status data.     * REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry data, shadow data, and thing connectivity status data.
 --
 -- * 'dirsIndexName' - The index name.
 --
@@ -115,20 +116,16 @@ data DescribeIndexResponse = DescribeIndexResponse'
 describeIndexResponse
     :: Int -- ^ 'dirsResponseStatus'
     -> DescribeIndexResponse
-describeIndexResponse pResponseStatus_ =
-  DescribeIndexResponse'
-    { _dirsIndexStatus = Nothing
-    , _dirsSchema = Nothing
-    , _dirsIndexName = Nothing
-    , _dirsResponseStatus = pResponseStatus_
-    }
-
+describeIndexResponse pResponseStatus_
+  = DescribeIndexResponse'{_dirsIndexStatus = Nothing,
+                           _dirsSchema = Nothing, _dirsIndexName = Nothing,
+                           _dirsResponseStatus = pResponseStatus_}
 
 -- | The index status.
 dirsIndexStatus :: Lens' DescribeIndexResponse (Maybe IndexStatus)
 dirsIndexStatus = lens _dirsIndexStatus (\ s a -> s{_dirsIndexStatus = a})
 
--- | Contains a value that specifies the type of indexing performed. Valid values are:     * REGISTRY – Your thing index will contain only registry data.     * REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.
+-- | Contains a value that specifies the type of indexing performed. Valid values are:     * REGISTRY – Your thing index contains only registry data.     * REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.     * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and thing connectivity status data.     * REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry data, shadow data, and thing connectivity status data.
 dirsSchema :: Lens' DescribeIndexResponse (Maybe Text)
 dirsSchema = lens _dirsSchema (\ s a -> s{_dirsSchema = a})
 

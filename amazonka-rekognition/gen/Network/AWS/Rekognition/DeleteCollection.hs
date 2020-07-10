@@ -47,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteCollection' smart constructor.
-newtype DeleteCollection = DeleteCollection'
-  { _dcCollectionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCollection = DeleteCollection'{_dcCollectionId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteCollection' with the minimum fields required to make a request.
 --
@@ -60,9 +59,8 @@ newtype DeleteCollection = DeleteCollection'
 deleteCollection
     :: Text -- ^ 'dcCollectionId'
     -> DeleteCollection
-deleteCollection pCollectionId_ =
-  DeleteCollection' {_dcCollectionId = pCollectionId_}
-
+deleteCollection pCollectionId_
+  = DeleteCollection'{_dcCollectionId = pCollectionId_}
 
 -- | ID of the collection to delete.
 dcCollectionId :: Lens' DeleteCollection Text
@@ -104,11 +102,12 @@ instance ToQuery DeleteCollection where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCollectionResponse' smart constructor.
-data DeleteCollectionResponse = DeleteCollectionResponse'
-  { _dcrsStatusCode     :: !(Maybe Nat)
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCollectionResponse = DeleteCollectionResponse'{_dcrsStatusCode
+                                                          :: !(Maybe Nat),
+                                                          _dcrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteCollectionResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +119,10 @@ data DeleteCollectionResponse = DeleteCollectionResponse'
 deleteCollectionResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DeleteCollectionResponse
-deleteCollectionResponse pResponseStatus_ =
-  DeleteCollectionResponse'
-    {_dcrsStatusCode = Nothing, _dcrsResponseStatus = pResponseStatus_}
-
+deleteCollectionResponse pResponseStatus_
+  = DeleteCollectionResponse'{_dcrsStatusCode =
+                                Nothing,
+                              _dcrsResponseStatus = pResponseStatus_}
 
 -- | HTTP status code that indicates the result of the operation.
 dcrsStatusCode :: Lens' DeleteCollectionResponse (Maybe Natural)

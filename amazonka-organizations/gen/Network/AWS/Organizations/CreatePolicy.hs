@@ -21,7 +21,7 @@
 -- Creates a policy of a specified type that you can attach to a root, an organizational unit (OU), or an individual AWS account.
 --
 --
--- For more information about policies and their use, see <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html Managing Organization Policies> .
+-- For more information about policies and their use, see <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html Managing Organization Policies> .
 --
 -- This operation can be called only from the organization's master account.
 --
@@ -52,19 +52,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createPolicy' smart constructor.
-data CreatePolicy = CreatePolicy'
-  { _cpContent     :: !Text
-  , _cpDescription :: !Text
-  , _cpName        :: !Text
-  , _cpType        :: !PolicyType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePolicy = CreatePolicy'{_cpContent ::
+                                  !Text,
+                                  _cpDescription :: !Text, _cpName :: !Text,
+                                  _cpType :: !PolicyType}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpContent' - The policy content to add to the new policy. For example, if you create a <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html service control policy> (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html Service Control Policy Syntax> in the /AWS Organizations User Guide/ .
+-- * 'cpContent' - The policy content to add to the new policy. For example, if you create a <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html service control policy> (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html Service Control Policy Syntax> in the /AWS Organizations User Guide./ 
 --
 -- * 'cpDescription' - An optional description to assign to the policy.
 --
@@ -77,16 +75,12 @@ createPolicy
     -> Text -- ^ 'cpName'
     -> PolicyType -- ^ 'cpType'
     -> CreatePolicy
-createPolicy pContent_ pDescription_ pName_ pType_ =
-  CreatePolicy'
-    { _cpContent = pContent_
-    , _cpDescription = pDescription_
-    , _cpName = pName_
-    , _cpType = pType_
-    }
+createPolicy pContent_ pDescription_ pName_ pType_
+  = CreatePolicy'{_cpContent = pContent_,
+                  _cpDescription = pDescription_, _cpName = pName_,
+                  _cpType = pType_}
 
-
--- | The policy content to add to the new policy. For example, if you create a <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html service control policy> (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html Service Control Policy Syntax> in the /AWS Organizations User Guide/ .
+-- | The policy content to add to the new policy. For example, if you create a <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html service control policy> (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html Service Control Policy Syntax> in the /AWS Organizations User Guide./ 
 cpContent :: Lens' CreatePolicy Text
 cpContent = lens _cpContent (\ s a -> s{_cpContent = a})
 
@@ -140,11 +134,10 @@ instance ToQuery CreatePolicy where
         toQuery = const mempty
 
 -- | /See:/ 'createPolicyResponse' smart constructor.
-data CreatePolicyResponse = CreatePolicyResponse'
-  { _cprsPolicy         :: !(Maybe Policy)
-  , _cprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePolicyResponse = CreatePolicyResponse'{_cprsPolicy
+                                                  :: !(Maybe Policy),
+                                                  _cprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePolicyResponse' with the minimum fields required to make a request.
 --
@@ -156,10 +149,9 @@ data CreatePolicyResponse = CreatePolicyResponse'
 createPolicyResponse
     :: Int -- ^ 'cprsResponseStatus'
     -> CreatePolicyResponse
-createPolicyResponse pResponseStatus_ =
-  CreatePolicyResponse'
-    {_cprsPolicy = Nothing, _cprsResponseStatus = pResponseStatus_}
-
+createPolicyResponse pResponseStatus_
+  = CreatePolicyResponse'{_cprsPolicy = Nothing,
+                          _cprsResponseStatus = pResponseStatus_}
 
 -- | A structure that contains details about the newly created policy.
 cprsPolicy :: Lens' CreatePolicyResponse (Maybe Policy)

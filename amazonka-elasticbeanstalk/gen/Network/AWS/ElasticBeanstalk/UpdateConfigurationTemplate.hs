@@ -23,7 +23,7 @@
 --
 -- Related Topics
 --
---     * 'DescribeConfigurationOptions'
+--     * 'DescribeConfigurationOptions' 
 --
 --
 --
@@ -67,43 +67,51 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateConfigurationTemplate' smart constructor.
-data UpdateConfigurationTemplate = UpdateConfigurationTemplate'
-  { _uctOptionsToRemove :: !(Maybe [OptionSpecification])
-  , _uctOptionSettings  :: !(Maybe [ConfigurationOptionSetting])
-  , _uctDescription     :: !(Maybe Text)
-  , _uctApplicationName :: !Text
-  , _uctTemplateName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConfigurationTemplate = UpdateConfigurationTemplate'{_uctOptionsToRemove
+                                                                ::
+                                                                !(Maybe
+                                                                    [OptionSpecification]),
+                                                                _uctOptionSettings
+                                                                ::
+                                                                !(Maybe
+                                                                    [ConfigurationOptionSetting]),
+                                                                _uctDescription
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _uctApplicationName
+                                                                :: !Text,
+                                                                _uctTemplateName
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateConfigurationTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uctOptionsToRemove' - A list of configuration options to remove from the configuration set. Constraint: You can remove only @UserDefined@ configuration options.
+-- * 'uctOptionsToRemove' - A list of configuration options to remove from the configuration set. Constraint: You can remove only @UserDefined@ configuration options. 
 --
 -- * 'uctOptionSettings' - A list of configuration option settings to update with the new specified option value.
 --
 -- * 'uctDescription' - A new description for the configuration.
 --
--- * 'uctApplicationName' - The name of the application associated with the configuration template to update. If no application is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error.
+-- * 'uctApplicationName' - The name of the application associated with the configuration template to update. If no application is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error. 
 --
--- * 'uctTemplateName' - The name of the configuration template to update. If no configuration template is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error.
+-- * 'uctTemplateName' - The name of the configuration template to update. If no configuration template is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error. 
 updateConfigurationTemplate
     :: Text -- ^ 'uctApplicationName'
     -> Text -- ^ 'uctTemplateName'
     -> UpdateConfigurationTemplate
-updateConfigurationTemplate pApplicationName_ pTemplateName_ =
-  UpdateConfigurationTemplate'
-    { _uctOptionsToRemove = Nothing
-    , _uctOptionSettings = Nothing
-    , _uctDescription = Nothing
-    , _uctApplicationName = pApplicationName_
-    , _uctTemplateName = pTemplateName_
-    }
+updateConfigurationTemplate pApplicationName_
+  pTemplateName_
+  = UpdateConfigurationTemplate'{_uctOptionsToRemove =
+                                   Nothing,
+                                 _uctOptionSettings = Nothing,
+                                 _uctDescription = Nothing,
+                                 _uctApplicationName = pApplicationName_,
+                                 _uctTemplateName = pTemplateName_}
 
-
--- | A list of configuration options to remove from the configuration set. Constraint: You can remove only @UserDefined@ configuration options.
+-- | A list of configuration options to remove from the configuration set. Constraint: You can remove only @UserDefined@ configuration options. 
 uctOptionsToRemove :: Lens' UpdateConfigurationTemplate [OptionSpecification]
 uctOptionsToRemove = lens _uctOptionsToRemove (\ s a -> s{_uctOptionsToRemove = a}) . _Default . _Coerce
 
@@ -115,11 +123,11 @@ uctOptionSettings = lens _uctOptionSettings (\ s a -> s{_uctOptionSettings = a})
 uctDescription :: Lens' UpdateConfigurationTemplate (Maybe Text)
 uctDescription = lens _uctDescription (\ s a -> s{_uctDescription = a})
 
--- | The name of the application associated with the configuration template to update. If no application is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error.
+-- | The name of the application associated with the configuration template to update. If no application is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error. 
 uctApplicationName :: Lens' UpdateConfigurationTemplate Text
 uctApplicationName = lens _uctApplicationName (\ s a -> s{_uctApplicationName = a})
 
--- | The name of the configuration template to update. If no configuration template is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error.
+-- | The name of the configuration template to update. If no configuration template is found with this name, @UpdateConfigurationTemplate@ returns an @InvalidParameterValue@ error. 
 uctTemplateName :: Lens' UpdateConfigurationTemplate Text
 uctTemplateName = lens _uctTemplateName (\ s a -> s{_uctTemplateName = a})
 

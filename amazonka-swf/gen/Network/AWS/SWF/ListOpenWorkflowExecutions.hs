@@ -21,7 +21,7 @@
 -- Returns a list of open workflow executions in the specified domain that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextPageToken returned by the initial call.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -41,7 +41,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 --
 -- This operation returns paginated results.
@@ -77,23 +77,35 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'listOpenWorkflowExecutions' smart constructor.
-data ListOpenWorkflowExecutions = ListOpenWorkflowExecutions'
-  { _loweNextPageToken   :: !(Maybe Text)
-  , _loweExecutionFilter :: !(Maybe WorkflowExecutionFilter)
-  , _loweTypeFilter      :: !(Maybe WorkflowTypeFilter)
-  , _loweReverseOrder    :: !(Maybe Bool)
-  , _loweTagFilter       :: !(Maybe TagFilter)
-  , _loweMaximumPageSize :: !(Maybe Nat)
-  , _loweDomain          :: !Text
-  , _loweStartTimeFilter :: !ExecutionTimeFilter
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOpenWorkflowExecutions = ListOpenWorkflowExecutions'{_loweNextPageToken
+                                                              :: !(Maybe Text),
+                                                              _loweExecutionFilter
+                                                              ::
+                                                              !(Maybe
+                                                                  WorkflowExecutionFilter),
+                                                              _loweTypeFilter ::
+                                                              !(Maybe
+                                                                  WorkflowTypeFilter),
+                                                              _loweReverseOrder
+                                                              :: !(Maybe Bool),
+                                                              _loweTagFilter ::
+                                                              !(Maybe
+                                                                  TagFilter),
+                                                              _loweMaximumPageSize
+                                                              :: !(Maybe Nat),
+                                                              _loweDomain ::
+                                                              !Text,
+                                                              _loweStartTimeFilter
+                                                              ::
+                                                              !ExecutionTimeFilter}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListOpenWorkflowExecutions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'loweNextPageToken' - If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
+-- * 'loweNextPageToken' - If @NextPageToken@ is returned there are more results available. The value of @NextPageToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a @400@ error: "@Specified token has exceeded its maximum lifetime@ ".  The configured @maximumPageSize@ determines how many results can be returned in a single call. 
 --
 -- * 'loweExecutionFilter' - If specified, only workflow executions matching the workflow ID specified in the filter are returned.
 --
@@ -103,7 +115,7 @@ data ListOpenWorkflowExecutions = ListOpenWorkflowExecutions'
 --
 -- * 'loweTagFilter' - If specified, only executions that have the matching tag are listed.
 --
--- * 'loweMaximumPageSize' - The maximum number of results that are returned per call. @nextPageToken@ can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size /smaller/ than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+-- * 'loweMaximumPageSize' - The maximum number of results that are returned per call. Use @nextPageToken@ to obtain further pages of results. 
 --
 -- * 'loweDomain' - The name of the domain that contains the workflow executions to list.
 --
@@ -112,20 +124,18 @@ listOpenWorkflowExecutions
     :: Text -- ^ 'loweDomain'
     -> ExecutionTimeFilter -- ^ 'loweStartTimeFilter'
     -> ListOpenWorkflowExecutions
-listOpenWorkflowExecutions pDomain_ pStartTimeFilter_ =
-  ListOpenWorkflowExecutions'
-    { _loweNextPageToken = Nothing
-    , _loweExecutionFilter = Nothing
-    , _loweTypeFilter = Nothing
-    , _loweReverseOrder = Nothing
-    , _loweTagFilter = Nothing
-    , _loweMaximumPageSize = Nothing
-    , _loweDomain = pDomain_
-    , _loweStartTimeFilter = pStartTimeFilter_
-    }
+listOpenWorkflowExecutions pDomain_ pStartTimeFilter_
+  = ListOpenWorkflowExecutions'{_loweNextPageToken =
+                                  Nothing,
+                                _loweExecutionFilter = Nothing,
+                                _loweTypeFilter = Nothing,
+                                _loweReverseOrder = Nothing,
+                                _loweTagFilter = Nothing,
+                                _loweMaximumPageSize = Nothing,
+                                _loweDomain = pDomain_,
+                                _loweStartTimeFilter = pStartTimeFilter_}
 
-
--- | If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
+-- | If @NextPageToken@ is returned there are more results available. The value of @NextPageToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a @400@ error: "@Specified token has exceeded its maximum lifetime@ ".  The configured @maximumPageSize@ determines how many results can be returned in a single call. 
 loweNextPageToken :: Lens' ListOpenWorkflowExecutions (Maybe Text)
 loweNextPageToken = lens _loweNextPageToken (\ s a -> s{_loweNextPageToken = a})
 
@@ -145,7 +155,7 @@ loweReverseOrder = lens _loweReverseOrder (\ s a -> s{_loweReverseOrder = a})
 loweTagFilter :: Lens' ListOpenWorkflowExecutions (Maybe TagFilter)
 loweTagFilter = lens _loweTagFilter (\ s a -> s{_loweTagFilter = a})
 
--- | The maximum number of results that are returned per call. @nextPageToken@ can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size /smaller/ than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+-- | The maximum number of results that are returned per call. Use @nextPageToken@ to obtain further pages of results. 
 loweMaximumPageSize :: Lens' ListOpenWorkflowExecutions (Maybe Natural)
 loweMaximumPageSize = lens _loweMaximumPageSize (\ s a -> s{_loweMaximumPageSize = a}) . mapping _Nat
 

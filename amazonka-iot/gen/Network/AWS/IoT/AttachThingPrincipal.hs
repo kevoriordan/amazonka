@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Attaches the specified principal to the specified thing.
+-- Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
 --
 --
 module Network.AWS.IoT.AttachThingPrincipal
@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'attachThingPrincipal' smart constructor.
-data AttachThingPrincipal = AttachThingPrincipal'
-  { _atpThingName :: !Text
-  , _atpPrincipal :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachThingPrincipal = AttachThingPrincipal'{_atpThingName
+                                                  :: !Text,
+                                                  _atpPrincipal :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachThingPrincipal' with the minimum fields required to make a request.
 --
@@ -61,21 +60,20 @@ data AttachThingPrincipal = AttachThingPrincipal'
 --
 -- * 'atpThingName' - The name of the thing.
 --
--- * 'atpPrincipal' - The principal, such as a certificate or other credential.
+-- * 'atpPrincipal' - The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID.
 attachThingPrincipal
     :: Text -- ^ 'atpThingName'
     -> Text -- ^ 'atpPrincipal'
     -> AttachThingPrincipal
-attachThingPrincipal pThingName_ pPrincipal_ =
-  AttachThingPrincipal'
-    {_atpThingName = pThingName_, _atpPrincipal = pPrincipal_}
-
+attachThingPrincipal pThingName_ pPrincipal_
+  = AttachThingPrincipal'{_atpThingName = pThingName_,
+                          _atpPrincipal = pPrincipal_}
 
 -- | The name of the thing.
 atpThingName :: Lens' AttachThingPrincipal Text
 atpThingName = lens _atpThingName (\ s a -> s{_atpThingName = a})
 
--- | The principal, such as a certificate or other credential.
+-- | The principal, which can be a certificate ARN (as returned from the CreateCertificate operation) or an Amazon Cognito ID.
 atpPrincipal :: Lens' AttachThingPrincipal Text
 atpPrincipal = lens _atpPrincipal (\ s a -> s{_atpPrincipal = a})
 
@@ -113,10 +111,10 @@ instance ToQuery AttachThingPrincipal where
 --
 --
 -- /See:/ 'attachThingPrincipalResponse' smart constructor.
-newtype AttachThingPrincipalResponse = AttachThingPrincipalResponse'
-  { _atprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AttachThingPrincipalResponse = AttachThingPrincipalResponse'{_atprsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'AttachThingPrincipalResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +124,9 @@ newtype AttachThingPrincipalResponse = AttachThingPrincipalResponse'
 attachThingPrincipalResponse
     :: Int -- ^ 'atprsResponseStatus'
     -> AttachThingPrincipalResponse
-attachThingPrincipalResponse pResponseStatus_ =
-  AttachThingPrincipalResponse' {_atprsResponseStatus = pResponseStatus_}
-
+attachThingPrincipalResponse pResponseStatus_
+  = AttachThingPrincipalResponse'{_atprsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 atprsResponseStatus :: Lens' AttachThingPrincipalResponse Int

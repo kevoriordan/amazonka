@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAssessmentTemplate' smart constructor.
-newtype DeleteAssessmentTemplate = DeleteAssessmentTemplate'
-  { _datAssessmentTemplateARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAssessmentTemplate = DeleteAssessmentTemplate'{_datAssessmentTemplateARN
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteAssessmentTemplate' with the minimum fields required to make a request.
 --
@@ -55,10 +55,9 @@ newtype DeleteAssessmentTemplate = DeleteAssessmentTemplate'
 deleteAssessmentTemplate
     :: Text -- ^ 'datAssessmentTemplateARN'
     -> DeleteAssessmentTemplate
-deleteAssessmentTemplate pAssessmentTemplateARN_ =
-  DeleteAssessmentTemplate'
-    {_datAssessmentTemplateARN = pAssessmentTemplateARN_}
-
+deleteAssessmentTemplate pAssessmentTemplateARN_
+  = DeleteAssessmentTemplate'{_datAssessmentTemplateARN
+                                = pAssessmentTemplateARN_}
 
 -- | The ARN that specifies the assessment template that you want to delete.
 datAssessmentTemplateARN :: Lens' DeleteAssessmentTemplate Text
@@ -100,17 +99,16 @@ instance ToQuery DeleteAssessmentTemplate where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAssessmentTemplateResponse' smart constructor.
-data DeleteAssessmentTemplateResponse =
-  DeleteAssessmentTemplateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAssessmentTemplateResponse = DeleteAssessmentTemplateResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteAssessmentTemplateResponse' with the minimum fields required to make a request.
 --
 deleteAssessmentTemplateResponse
     :: DeleteAssessmentTemplateResponse
-deleteAssessmentTemplateResponse = DeleteAssessmentTemplateResponse'
-
+deleteAssessmentTemplateResponse
+  = DeleteAssessmentTemplateResponse'
 
 instance NFData DeleteAssessmentTemplateResponse
          where

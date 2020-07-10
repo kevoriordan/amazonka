@@ -42,23 +42,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteGroup' smart constructor.
-newtype DeleteGroup = DeleteGroup'
-  { _dgGroupId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteGroup = DeleteGroup'{_dgGroupId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dgGroupId' - The ID of the AWS Greengrass group.
+-- * 'dgGroupId' - The ID of the Greengrass group.
 deleteGroup
     :: Text -- ^ 'dgGroupId'
     -> DeleteGroup
-deleteGroup pGroupId_ = DeleteGroup' {_dgGroupId = pGroupId_}
+deleteGroup pGroupId_
+  = DeleteGroup'{_dgGroupId = pGroupId_}
 
-
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 dgGroupId :: Lens' DeleteGroup Text
 dgGroupId = lens _dgGroupId (\ s a -> s{_dgGroupId = a})
 
@@ -89,10 +88,10 @@ instance ToQuery DeleteGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteGroupResponse' smart constructor.
-newtype DeleteGroupResponse = DeleteGroupResponse'
-  { _dgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteGroupResponse = DeleteGroupResponse'{_dgrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteGroupResponse' with the minimum fields required to make a request.
 --
@@ -102,9 +101,9 @@ newtype DeleteGroupResponse = DeleteGroupResponse'
 deleteGroupResponse
     :: Int -- ^ 'dgrsResponseStatus'
     -> DeleteGroupResponse
-deleteGroupResponse pResponseStatus_ =
-  DeleteGroupResponse' {_dgrsResponseStatus = pResponseStatus_}
-
+deleteGroupResponse pResponseStatus_
+  = DeleteGroupResponse'{_dgrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 dgrsResponseStatus :: Lens' DeleteGroupResponse Int

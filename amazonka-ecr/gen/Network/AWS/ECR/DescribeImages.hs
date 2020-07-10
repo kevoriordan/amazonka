@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns metadata about the images in a repository, including image size, image tags, and creation date.
+-- Returns metadata about the images in a repository.
 --
 --
 --
@@ -54,15 +54,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeImages' smart constructor.
-data DescribeImages = DescribeImages'
-  { _diRegistryId     :: !(Maybe Text)
-  , _diImageIds       :: !(Maybe [ImageIdentifier])
-  , _diNextToken      :: !(Maybe Text)
-  , _diFilter         :: !(Maybe DescribeImagesFilter)
-  , _diMaxResults     :: !(Maybe Nat)
-  , _diRepositoryName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeImages = DescribeImages'{_diRegistryId
+                                      :: !(Maybe Text),
+                                      _diImageIds :: !(Maybe [ImageIdentifier]),
+                                      _diNextToken :: !(Maybe Text),
+                                      _diFilter ::
+                                      !(Maybe DescribeImagesFilter),
+                                      _diMaxResults :: !(Maybe Nat),
+                                      _diRepositoryName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeImages' with the minimum fields required to make a request.
 --
@@ -76,22 +76,17 @@ data DescribeImages = DescribeImages'
 --
 -- * 'diFilter' - The filter key and value with which to filter your @DescribeImages@ results.
 --
--- * 'diMaxResults' - The maximum number of repository results returned by @DescribeImages@ in paginated output. When this parameter is used, @DescribeImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @DescribeImages@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @DescribeImages@ returns up to 100 results and a @nextToken@ value, if applicable. This option cannot be used when you specify images with @imageIds@ .
+-- * 'diMaxResults' - The maximum number of repository results returned by @DescribeImages@ in paginated output. When this parameter is used, @DescribeImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @DescribeImages@ request with the returned @nextToken@ value. This value can be between 1 and 1000. If this parameter is not used, then @DescribeImages@ returns up to 100 results and a @nextToken@ value, if applicable. This option cannot be used when you specify images with @imageIds@ .
 --
--- * 'diRepositoryName' - A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.
+-- * 'diRepositoryName' - The repository that contains the images to describe.
 describeImages
     :: Text -- ^ 'diRepositoryName'
     -> DescribeImages
-describeImages pRepositoryName_ =
-  DescribeImages'
-    { _diRegistryId = Nothing
-    , _diImageIds = Nothing
-    , _diNextToken = Nothing
-    , _diFilter = Nothing
-    , _diMaxResults = Nothing
-    , _diRepositoryName = pRepositoryName_
-    }
-
+describeImages pRepositoryName_
+  = DescribeImages'{_diRegistryId = Nothing,
+                    _diImageIds = Nothing, _diNextToken = Nothing,
+                    _diFilter = Nothing, _diMaxResults = Nothing,
+                    _diRepositoryName = pRepositoryName_}
 
 -- | The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.
 diRegistryId :: Lens' DescribeImages (Maybe Text)
@@ -109,11 +104,11 @@ diNextToken = lens _diNextToken (\ s a -> s{_diNextToken = a})
 diFilter :: Lens' DescribeImages (Maybe DescribeImagesFilter)
 diFilter = lens _diFilter (\ s a -> s{_diFilter = a})
 
--- | The maximum number of repository results returned by @DescribeImages@ in paginated output. When this parameter is used, @DescribeImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @DescribeImages@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @DescribeImages@ returns up to 100 results and a @nextToken@ value, if applicable. This option cannot be used when you specify images with @imageIds@ .
+-- | The maximum number of repository results returned by @DescribeImages@ in paginated output. When this parameter is used, @DescribeImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @DescribeImages@ request with the returned @nextToken@ value. This value can be between 1 and 1000. If this parameter is not used, then @DescribeImages@ returns up to 100 results and a @nextToken@ value, if applicable. This option cannot be used when you specify images with @imageIds@ .
 diMaxResults :: Lens' DescribeImages (Maybe Natural)
 diMaxResults = lens _diMaxResults (\ s a -> s{_diMaxResults = a}) . mapping _Nat
 
--- | A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.
+-- | The repository that contains the images to describe.
 diRepositoryName :: Lens' DescribeImages Text
 diRepositoryName = lens _diRepositoryName (\ s a -> s{_diRepositoryName = a})
 
@@ -167,12 +162,14 @@ instance ToQuery DescribeImages where
         toQuery = const mempty
 
 -- | /See:/ 'describeImagesResponse' smart constructor.
-data DescribeImagesResponse = DescribeImagesResponse'
-  { _dirsImageDetails   :: !(Maybe [ImageDetail])
-  , _dirsNextToken      :: !(Maybe Text)
-  , _dirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeImagesResponse = DescribeImagesResponse'{_dirsImageDetails
+                                                      :: !(Maybe [ImageDetail]),
+                                                      _dirsNextToken ::
+                                                      !(Maybe Text),
+                                                      _dirsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeImagesResponse' with the minimum fields required to make a request.
 --
@@ -186,13 +183,11 @@ data DescribeImagesResponse = DescribeImagesResponse'
 describeImagesResponse
     :: Int -- ^ 'dirsResponseStatus'
     -> DescribeImagesResponse
-describeImagesResponse pResponseStatus_ =
-  DescribeImagesResponse'
-    { _dirsImageDetails = Nothing
-    , _dirsNextToken = Nothing
-    , _dirsResponseStatus = pResponseStatus_
-    }
-
+describeImagesResponse pResponseStatus_
+  = DescribeImagesResponse'{_dirsImageDetails =
+                              Nothing,
+                            _dirsNextToken = Nothing,
+                            _dirsResponseStatus = pResponseStatus_}
 
 -- | A list of 'ImageDetail' objects that contain data about the image.
 dirsImageDetails :: Lens' DescribeImagesResponse [ImageDetail]

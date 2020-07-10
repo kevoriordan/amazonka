@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists details about all member accounts for the current GuardDuty master account.
+-- Lists details about associated member accounts for the current GuardDuty master account.
+--
+--
 --
 -- This operation returns paginated results.
 module Network.AWS.GuardDuty.ListMembers
@@ -50,50 +52,45 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listMembers' smart constructor.
-data ListMembers = ListMembers'
-  { _lmOnlyAssociated :: !(Maybe Text)
-  , _lmNextToken      :: !(Maybe Text)
-  , _lmMaxResults     :: !(Maybe Nat)
-  , _lmDetectorId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMembers = ListMembers'{_lmOnlyAssociated ::
+                                !(Maybe Text),
+                                _lmNextToken :: !(Maybe Text),
+                                _lmMaxResults :: !(Maybe Nat),
+                                _lmDetectorId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMembers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lmOnlyAssociated' - Specifies what member accounts the response is to include based on their relationship status with the master account. The default value is TRUE. If onlyAssociated is set to TRUE, the response will include member accounts whose relationship status with the master is set to Enabled, Disabled. If onlyAssociated is set to FALSE, the response will include all existing member accounts.
+-- * 'lmOnlyAssociated' - Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
 --
--- * 'lmNextToken' - You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMembers action. Subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+-- * 'lmNextToken' - You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
 --
--- * 'lmMaxResults' - You can use this parameter to indicate the maximum number of items you want in the response. The default value is 1. The maximum value is 50.
+-- * 'lmMaxResults' - You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
 --
--- * 'lmDetectorId' - The unique ID of the detector of the GuardDuty account whose members you want to list.
+-- * 'lmDetectorId' - The unique ID of the detector the member is associated with.
 listMembers
     :: Text -- ^ 'lmDetectorId'
     -> ListMembers
-listMembers pDetectorId_ =
-  ListMembers'
-    { _lmOnlyAssociated = Nothing
-    , _lmNextToken = Nothing
-    , _lmMaxResults = Nothing
-    , _lmDetectorId = pDetectorId_
-    }
+listMembers pDetectorId_
+  = ListMembers'{_lmOnlyAssociated = Nothing,
+                 _lmNextToken = Nothing, _lmMaxResults = Nothing,
+                 _lmDetectorId = pDetectorId_}
 
-
--- | Specifies what member accounts the response is to include based on their relationship status with the master account. The default value is TRUE. If onlyAssociated is set to TRUE, the response will include member accounts whose relationship status with the master is set to Enabled, Disabled. If onlyAssociated is set to FALSE, the response will include all existing member accounts.
+-- | Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
 lmOnlyAssociated :: Lens' ListMembers (Maybe Text)
 lmOnlyAssociated = lens _lmOnlyAssociated (\ s a -> s{_lmOnlyAssociated = a})
 
--- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMembers action. Subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+-- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
 lmNextToken :: Lens' ListMembers (Maybe Text)
 lmNextToken = lens _lmNextToken (\ s a -> s{_lmNextToken = a})
 
--- | You can use this parameter to indicate the maximum number of items you want in the response. The default value is 1. The maximum value is 50.
+-- | You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
 lmMaxResults :: Lens' ListMembers (Maybe Natural)
 lmMaxResults = lens _lmMaxResults (\ s a -> s{_lmMaxResults = a}) . mapping _Nat
 
--- | The unique ID of the detector of the GuardDuty account whose members you want to list.
+-- | The unique ID of the detector the member is associated with.
 lmDetectorId :: Lens' ListMembers Text
 lmDetectorId = lens _lmDetectorId (\ s a -> s{_lmDetectorId = a})
 
@@ -138,38 +135,34 @@ instance ToQuery ListMembers where
                "maxResults" =: _lmMaxResults]
 
 -- | /See:/ 'listMembersResponse' smart constructor.
-data ListMembersResponse = ListMembersResponse'
-  { _lmrsMembers        :: !(Maybe [Member])
-  , _lmrsNextToken      :: !(Maybe Text)
-  , _lmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMembersResponse = ListMembersResponse'{_lmrsMembers
+                                                :: !(Maybe [Member]),
+                                                _lmrsNextToken :: !(Maybe Text),
+                                                _lmrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMembersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lmrsMembers' - Undocumented member.
+-- * 'lmrsMembers' - A list of members.
 --
--- * 'lmrsNextToken' - Undocumented member.
+-- * 'lmrsNextToken' - The pagination parameter to be used on the next list operation to retrieve more items.
 --
 -- * 'lmrsResponseStatus' - -- | The response status code.
 listMembersResponse
     :: Int -- ^ 'lmrsResponseStatus'
     -> ListMembersResponse
-listMembersResponse pResponseStatus_ =
-  ListMembersResponse'
-    { _lmrsMembers = Nothing
-    , _lmrsNextToken = Nothing
-    , _lmrsResponseStatus = pResponseStatus_
-    }
+listMembersResponse pResponseStatus_
+  = ListMembersResponse'{_lmrsMembers = Nothing,
+                         _lmrsNextToken = Nothing,
+                         _lmrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | A list of members.
 lmrsMembers :: Lens' ListMembersResponse [Member]
 lmrsMembers = lens _lmrsMembers (\ s a -> s{_lmrsMembers = a}) . _Default . _Coerce
 
--- | Undocumented member.
+-- | The pagination parameter to be used on the next list operation to retrieve more items.
 lmrsNextToken :: Lens' ListMembersResponse (Maybe Text)
 lmrsNextToken = lens _lmrsNextToken (\ s a -> s{_lmrsNextToken = a})
 

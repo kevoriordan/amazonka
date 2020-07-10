@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeUserPoolDomain' smart constructor.
-newtype DescribeUserPoolDomain = DescribeUserPoolDomain'
-  { _dDomain :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeUserPoolDomain = DescribeUserPoolDomain'{_dDomain
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeUserPoolDomain' with the minimum fields required to make a request.
 --
@@ -58,8 +58,8 @@ newtype DescribeUserPoolDomain = DescribeUserPoolDomain'
 describeUserPoolDomain
     :: Text -- ^ 'dDomain'
     -> DescribeUserPoolDomain
-describeUserPoolDomain pDomain_ = DescribeUserPoolDomain' {_dDomain = pDomain_}
-
+describeUserPoolDomain pDomain_
+  = DescribeUserPoolDomain'{_dDomain = pDomain_}
 
 -- | The domain string.
 dDomain :: Lens' DescribeUserPoolDomain Text
@@ -100,11 +100,14 @@ instance ToQuery DescribeUserPoolDomain where
         toQuery = const mempty
 
 -- | /See:/ 'describeUserPoolDomainResponse' smart constructor.
-data DescribeUserPoolDomainResponse = DescribeUserPoolDomainResponse'
-  { _drsDomainDescription :: !(Maybe DomainDescriptionType)
-  , _drsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUserPoolDomainResponse = DescribeUserPoolDomainResponse'{_drsDomainDescription
+                                                                      ::
+                                                                      !(Maybe
+                                                                          DomainDescriptionType),
+                                                                      _drsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeUserPoolDomainResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +119,10 @@ data DescribeUserPoolDomainResponse = DescribeUserPoolDomainResponse'
 describeUserPoolDomainResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeUserPoolDomainResponse
-describeUserPoolDomainResponse pResponseStatus_ =
-  DescribeUserPoolDomainResponse'
-    {_drsDomainDescription = Nothing, _drsResponseStatus = pResponseStatus_}
-
+describeUserPoolDomainResponse pResponseStatus_
+  = DescribeUserPoolDomainResponse'{_drsDomainDescription
+                                      = Nothing,
+                                    _drsResponseStatus = pResponseStatus_}
 
 -- | A domain description object containing information about the domain.
 drsDomainDescription :: Lens' DescribeUserPoolDomainResponse (Maybe DomainDescriptionType)

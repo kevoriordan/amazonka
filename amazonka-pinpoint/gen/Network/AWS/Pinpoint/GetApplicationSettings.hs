@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Used to request the settings for an app.
+-- Retrieves information about the settings for an application.
+--
+--
 module Network.AWS.Pinpoint.GetApplicationSettings
     (
     -- * Creating a Request
@@ -43,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getApplicationSettings' smart constructor.
-newtype GetApplicationSettings = GetApplicationSettings'
-  { _gasApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetApplicationSettings = GetApplicationSettings'{_gasApplicationId
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetApplicationSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gasApplicationId' - Undocumented member.
+-- * 'gasApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getApplicationSettings
     :: Text -- ^ 'gasApplicationId'
     -> GetApplicationSettings
-getApplicationSettings pApplicationId_ =
-  GetApplicationSettings' {_gasApplicationId = pApplicationId_}
+getApplicationSettings pApplicationId_
+  = GetApplicationSettings'{_gasApplicationId =
+                              pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gasApplicationId :: Lens' GetApplicationSettings Text
 gasApplicationId = lens _gasApplicationId (\ s a -> s{_gasApplicationId = a})
 
@@ -94,11 +96,13 @@ instance ToQuery GetApplicationSettings where
         toQuery = const mempty
 
 -- | /See:/ 'getApplicationSettingsResponse' smart constructor.
-data GetApplicationSettingsResponse = GetApplicationSettingsResponse'
-  { _gassrsResponseStatus              :: !Int
-  , _gassrsApplicationSettingsResource :: !ApplicationSettingsResource
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetApplicationSettingsResponse = GetApplicationSettingsResponse'{_gassrsResponseStatus
+                                                                      :: !Int,
+                                                                      _gassrsApplicationSettingsResource
+                                                                      ::
+                                                                      !ApplicationSettingsResource}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'GetApplicationSettingsResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +115,12 @@ getApplicationSettingsResponse
     :: Int -- ^ 'gassrsResponseStatus'
     -> ApplicationSettingsResource -- ^ 'gassrsApplicationSettingsResource'
     -> GetApplicationSettingsResponse
-getApplicationSettingsResponse pResponseStatus_ pApplicationSettingsResource_ =
-  GetApplicationSettingsResponse'
-    { _gassrsResponseStatus = pResponseStatus_
-    , _gassrsApplicationSettingsResource = pApplicationSettingsResource_
-    }
-
+getApplicationSettingsResponse pResponseStatus_
+  pApplicationSettingsResource_
+  = GetApplicationSettingsResponse'{_gassrsResponseStatus
+                                      = pResponseStatus_,
+                                    _gassrsApplicationSettingsResource =
+                                      pApplicationSettingsResource_}
 
 -- | -- | The response status code.
 gassrsResponseStatus :: Lens' GetApplicationSettingsResponse Int

@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Snowball where
 
 import Data.Proxy
-import Network.AWS.Snowball
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.Snowball.Internal
 import Test.Tasty
+import Network.AWS.Snowball
+import Test.AWS.Snowball.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -43,8 +43,14 @@ import Test.Tasty
 --         , requestDescribeAddresses $
 --             describeAddresses
 --
+--         , requestListCompatibleImages $
+--             listCompatibleImages
+--
 --         , requestUpdateCluster $
 --             updateCluster
+--
+--         , requestGetSoftwareUpdates $
+--             getSoftwareUpdates
 --
 --         , requestCreateJob $
 --             createJob
@@ -97,8 +103,14 @@ import Test.Tasty
 --         , responseDescribeAddresses $
 --             describeAddressesResponse
 --
+--         , responseListCompatibleImages $
+--             listCompatibleImagesResponse
+--
 --         , responseUpdateCluster $
 --             updateClusterResponse
+--
+--         , responseGetSoftwareUpdates $
+--             getSoftwareUpdatesResponse
 --
 --         , responseCreateJob $
 --             createJobResponse
@@ -163,10 +175,20 @@ requestDescribeAddresses = req
     "DescribeAddresses"
     "fixture/DescribeAddresses.yaml"
 
+requestListCompatibleImages :: ListCompatibleImages -> TestTree
+requestListCompatibleImages = req
+    "ListCompatibleImages"
+    "fixture/ListCompatibleImages.yaml"
+
 requestUpdateCluster :: UpdateCluster -> TestTree
 requestUpdateCluster = req
     "UpdateCluster"
     "fixture/UpdateCluster.yaml"
+
+requestGetSoftwareUpdates :: GetSoftwareUpdates -> TestTree
+requestGetSoftwareUpdates = req
+    "GetSoftwareUpdates"
+    "fixture/GetSoftwareUpdates.yaml"
 
 requestCreateJob :: CreateJob -> TestTree
 requestCreateJob = req
@@ -260,12 +282,26 @@ responseDescribeAddresses = res
     snowball
     (Proxy :: Proxy DescribeAddresses)
 
+responseListCompatibleImages :: ListCompatibleImagesResponse -> TestTree
+responseListCompatibleImages = res
+    "ListCompatibleImagesResponse"
+    "fixture/ListCompatibleImagesResponse.proto"
+    snowball
+    (Proxy :: Proxy ListCompatibleImages)
+
 responseUpdateCluster :: UpdateClusterResponse -> TestTree
 responseUpdateCluster = res
     "UpdateClusterResponse"
     "fixture/UpdateClusterResponse.proto"
     snowball
     (Proxy :: Proxy UpdateCluster)
+
+responseGetSoftwareUpdates :: GetSoftwareUpdatesResponse -> TestTree
+responseGetSoftwareUpdates = res
+    "GetSoftwareUpdatesResponse"
+    "fixture/GetSoftwareUpdatesResponse.proto"
+    snowball
+    (Proxy :: Proxy GetSoftwareUpdates)
 
 responseCreateJob :: CreateJobResponse -> TestTree
 responseCreateJob = res

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of container instances in a specified cluster. You can filter the results of a @ListContainerInstances@ operation with cluster query language statements inside the @filter@ parameter. For more information, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html Cluster Query Language> in the /Amazon Elastic Container Service Developer Guide/ .
+-- Returns a list of container instances in a specified cluster. You can filter the results of a @ListContainerInstances@ operation with cluster query language statements inside the @filter@ parameter. For more information, see <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html Cluster Query Language> in the /Amazon Elastic Container Service Developer Guide/ .
 --
 --
 --
@@ -53,41 +53,42 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listContainerInstances' smart constructor.
-data ListContainerInstances = ListContainerInstances'
-  { _lciStatus     :: !(Maybe ContainerInstanceStatus)
-  , _lciCluster    :: !(Maybe Text)
-  , _lciNextToken  :: !(Maybe Text)
-  , _lciFilter     :: !(Maybe Text)
-  , _lciMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListContainerInstances = ListContainerInstances'{_lciStatus
+                                                      ::
+                                                      !(Maybe
+                                                          ContainerInstanceStatus),
+                                                      _lciCluster ::
+                                                      !(Maybe Text),
+                                                      _lciNextToken ::
+                                                      !(Maybe Text),
+                                                      _lciFilter ::
+                                                      !(Maybe Text),
+                                                      _lciMaxResults ::
+                                                      !(Maybe Int)}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListContainerInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lciStatus' - Filters the container instances by status. For example, if you specify the @DRAINING@ status, the results include only container instances that have been set to @DRAINING@ using 'UpdateContainerInstancesState' . If you do not specify this parameter, the default is to include container instances set to @ACTIVE@ and @DRAINING@ .
+-- * 'lciStatus' - Filters the container instances by status. For example, if you specify the @DRAINING@ status, the results include only container instances that have been set to @DRAINING@ using 'UpdateContainerInstancesState' . If you do not specify this parameter, the default is to include container instances set to all states other than @INACTIVE@ .
 --
 -- * 'lciCluster' - The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to list. If you do not specify a cluster, the default cluster is assumed.
 --
--- * 'lciNextToken' - The @nextToken@ value returned from a previous paginated @ListContainerInstances@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- * 'lciNextToken' - The @nextToken@ value returned from a @ListContainerInstances@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 --
--- * 'lciFilter' - You can filter the results of a @ListContainerInstances@ operation with cluster query language statements. For more information, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html Cluster Query Language> in the /Amazon Elastic Container Service Developer Guide/ .
+-- * 'lciFilter' - You can filter the results of a @ListContainerInstances@ operation with cluster query language statements. For more information, see <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html Cluster Query Language> in the /Amazon Elastic Container Service Developer Guide/ .
 --
 -- * 'lciMaxResults' - The maximum number of container instance results returned by @ListContainerInstances@ in paginated output. When this parameter is used, @ListContainerInstances@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListContainerInstances@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListContainerInstances@ returns up to 100 results and a @nextToken@ value if applicable.
 listContainerInstances
     :: ListContainerInstances
-listContainerInstances =
-  ListContainerInstances'
-    { _lciStatus = Nothing
-    , _lciCluster = Nothing
-    , _lciNextToken = Nothing
-    , _lciFilter = Nothing
-    , _lciMaxResults = Nothing
-    }
+listContainerInstances
+  = ListContainerInstances'{_lciStatus = Nothing,
+                            _lciCluster = Nothing, _lciNextToken = Nothing,
+                            _lciFilter = Nothing, _lciMaxResults = Nothing}
 
-
--- | Filters the container instances by status. For example, if you specify the @DRAINING@ status, the results include only container instances that have been set to @DRAINING@ using 'UpdateContainerInstancesState' . If you do not specify this parameter, the default is to include container instances set to @ACTIVE@ and @DRAINING@ .
+-- | Filters the container instances by status. For example, if you specify the @DRAINING@ status, the results include only container instances that have been set to @DRAINING@ using 'UpdateContainerInstancesState' . If you do not specify this parameter, the default is to include container instances set to all states other than @INACTIVE@ .
 lciStatus :: Lens' ListContainerInstances (Maybe ContainerInstanceStatus)
 lciStatus = lens _lciStatus (\ s a -> s{_lciStatus = a})
 
@@ -95,11 +96,11 @@ lciStatus = lens _lciStatus (\ s a -> s{_lciStatus = a})
 lciCluster :: Lens' ListContainerInstances (Maybe Text)
 lciCluster = lens _lciCluster (\ s a -> s{_lciCluster = a})
 
--- | The @nextToken@ value returned from a previous paginated @ListContainerInstances@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- | The @nextToken@ value returned from a @ListContainerInstances@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 lciNextToken :: Lens' ListContainerInstances (Maybe Text)
 lciNextToken = lens _lciNextToken (\ s a -> s{_lciNextToken = a})
 
--- | You can filter the results of a @ListContainerInstances@ operation with cluster query language statements. For more information, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html Cluster Query Language> in the /Amazon Elastic Container Service Developer Guide/ .
+-- | You can filter the results of a @ListContainerInstances@ operation with cluster query language statements. For more information, see <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html Cluster Query Language> in the /Amazon Elastic Container Service Developer Guide/ .
 lciFilter :: Lens' ListContainerInstances (Maybe Text)
 lciFilter = lens _lciFilter (\ s a -> s{_lciFilter = a})
 
@@ -157,12 +158,18 @@ instance ToQuery ListContainerInstances where
         toQuery = const mempty
 
 -- | /See:/ 'listContainerInstancesResponse' smart constructor.
-data ListContainerInstancesResponse = ListContainerInstancesResponse'
-  { _lcirsContainerInstanceARNs :: !(Maybe [Text])
-  , _lcirsNextToken             :: !(Maybe Text)
-  , _lcirsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListContainerInstancesResponse = ListContainerInstancesResponse'{_lcirsContainerInstanceARNs
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Text]),
+                                                                      _lcirsNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _lcirsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ListContainerInstancesResponse' with the minimum fields required to make a request.
 --
@@ -176,13 +183,11 @@ data ListContainerInstancesResponse = ListContainerInstancesResponse'
 listContainerInstancesResponse
     :: Int -- ^ 'lcirsResponseStatus'
     -> ListContainerInstancesResponse
-listContainerInstancesResponse pResponseStatus_ =
-  ListContainerInstancesResponse'
-    { _lcirsContainerInstanceARNs = Nothing
-    , _lcirsNextToken = Nothing
-    , _lcirsResponseStatus = pResponseStatus_
-    }
-
+listContainerInstancesResponse pResponseStatus_
+  = ListContainerInstancesResponse'{_lcirsContainerInstanceARNs
+                                      = Nothing,
+                                    _lcirsNextToken = Nothing,
+                                    _lcirsResponseStatus = pResponseStatus_}
 
 -- | The list of container instances with full ARN entries for each container instance associated with the specified cluster.
 lcirsContainerInstanceARNs :: Lens' ListContainerInstancesResponse [Text]

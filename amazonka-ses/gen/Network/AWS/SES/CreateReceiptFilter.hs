@@ -21,7 +21,7 @@
 -- Creates a new IP address filter.
 --
 --
--- For information about setting up IP address filters, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html Amazon SES Developer Guide> .
+-- For information about setting up IP address filters, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
@@ -47,15 +47,15 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to create a new IP address filter. You use IP address filters when you receive email with Amazon SES. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
+-- | Represents a request to create a new IP address filter. You use IP address filters when you receive email with Amazon SES. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'createReceiptFilter' smart constructor.
-newtype CreateReceiptFilter = CreateReceiptFilter'
-  { _crfFilter :: ReceiptFilter
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateReceiptFilter = CreateReceiptFilter'{_crfFilter
+                                                   :: ReceiptFilter}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateReceiptFilter' with the minimum fields required to make a request.
 --
@@ -65,8 +65,8 @@ newtype CreateReceiptFilter = CreateReceiptFilter'
 createReceiptFilter
     :: ReceiptFilter -- ^ 'crfFilter'
     -> CreateReceiptFilter
-createReceiptFilter pFilter_ = CreateReceiptFilter' {_crfFilter = pFilter_}
-
+createReceiptFilter pFilter_
+  = CreateReceiptFilter'{_crfFilter = pFilter_}
 
 -- | A data structure that describes the IP address filter to create, which consists of a name, an IP address range, and whether to allow or block mail from it.
 crfFilter :: Lens' CreateReceiptFilter ReceiptFilter
@@ -103,10 +103,10 @@ instance ToQuery CreateReceiptFilter where
 --
 --
 -- /See:/ 'createReceiptFilterResponse' smart constructor.
-newtype CreateReceiptFilterResponse = CreateReceiptFilterResponse'
-  { _crfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateReceiptFilterResponse = CreateReceiptFilterResponse'{_crfrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateReceiptFilterResponse' with the minimum fields required to make a request.
 --
@@ -116,9 +116,9 @@ newtype CreateReceiptFilterResponse = CreateReceiptFilterResponse'
 createReceiptFilterResponse
     :: Int -- ^ 'crfrsResponseStatus'
     -> CreateReceiptFilterResponse
-createReceiptFilterResponse pResponseStatus_ =
-  CreateReceiptFilterResponse' {_crfrsResponseStatus = pResponseStatus_}
-
+createReceiptFilterResponse pResponseStatus_
+  = CreateReceiptFilterResponse'{_crfrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 crfrsResponseStatus :: Lens' CreateReceiptFilterResponse Int

@@ -23,7 +23,7 @@
 --
 -- __Note: __ Using this action to change the security groups associated with an elastic network interface (ENI) attached to an instance in a VPC can result in an error if the instance has more than one ENI. To change the security groups associated with an ENI attached to an instance that has multiple ENIs, we recommend that you use the 'ModifyNetworkInterfaceAttribute' action.
 --
--- To modify some attributes, the instance must be stopped. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html Modifying Attributes of a Stopped Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- To modify some attributes, the instance must be stopped. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html Modifying Attributes of a Stopped Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.ModifyInstanceAttribute
     (
@@ -60,30 +60,49 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for ModifyInstanceAttribute.
---
---
---
--- /See:/ 'modifyInstanceAttribute' smart constructor.
-data ModifyInstanceAttribute = ModifyInstanceAttribute'
-  { _mGroups :: !(Maybe [Text])
-  , _mAttribute :: !(Maybe InstanceAttributeName)
-  , _mEnaSupport :: !(Maybe AttributeBooleanValue)
-  , _mSourceDestCheck :: !(Maybe AttributeBooleanValue)
-  , _mDisableAPITermination :: !(Maybe AttributeBooleanValue)
-  , _mKernel :: !(Maybe AttributeValue)
-  , _mRAMDisk :: !(Maybe AttributeValue)
-  , _mValue :: !(Maybe Text)
-  , _mInstanceType :: !(Maybe AttributeValue)
-  , _mSRIOVNetSupport :: !(Maybe AttributeValue)
-  , _mEBSOptimized :: !(Maybe AttributeBooleanValue)
-  , _mUserData :: !(Maybe BlobAttributeValue)
-  , _mInstanceInitiatedShutdownBehavior :: !(Maybe AttributeValue)
-  , _mBlockDeviceMappings :: !(Maybe [InstanceBlockDeviceMappingSpecification])
-  , _mDryRun :: !(Maybe Bool)
-  , _mInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'modifyInstanceAttribute' smart constructor.
+data ModifyInstanceAttribute = ModifyInstanceAttribute'{_mGroups
+                                                        :: !(Maybe [Text]),
+                                                        _mAttribute ::
+                                                        !(Maybe
+                                                            InstanceAttributeName),
+                                                        _mEnaSupport ::
+                                                        !(Maybe
+                                                            AttributeBooleanValue),
+                                                        _mSourceDestCheck ::
+                                                        !(Maybe
+                                                            AttributeBooleanValue),
+                                                        _mDisableAPITermination
+                                                        ::
+                                                        !(Maybe
+                                                            AttributeBooleanValue),
+                                                        _mKernel ::
+                                                        !(Maybe AttributeValue),
+                                                        _mRAMDisk ::
+                                                        !(Maybe AttributeValue),
+                                                        _mValue ::
+                                                        !(Maybe Text),
+                                                        _mInstanceType ::
+                                                        !(Maybe AttributeValue),
+                                                        _mSRIOVNetSupport ::
+                                                        !(Maybe AttributeValue),
+                                                        _mEBSOptimized ::
+                                                        !(Maybe
+                                                            AttributeBooleanValue),
+                                                        _mUserData ::
+                                                        !(Maybe
+                                                            BlobAttributeValue),
+                                                        _mInstanceInitiatedShutdownBehavior
+                                                        ::
+                                                        !(Maybe AttributeValue),
+                                                        _mBlockDeviceMappings ::
+                                                        !(Maybe
+                                                            [InstanceBlockDeviceMappingSpecification]),
+                                                        _mDryRun ::
+                                                        !(Maybe Bool),
+                                                        _mInstanceId :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ModifyInstanceAttribute' with the minimum fields required to make a request.
 --
@@ -99,13 +118,13 @@ data ModifyInstanceAttribute = ModifyInstanceAttribute'
 --
 -- * 'mDisableAPITermination' - If the value is @true@ , you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot Instances.
 --
--- * 'mKernel' - Changes the instance's kernel to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
+-- * 'mKernel' - Changes the instance's kernel to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
 --
--- * 'mRAMDisk' - Changes the instance's RAM disk to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
+-- * 'mRAMDisk' - Changes the instance's RAM disk to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
 --
 -- * 'mValue' - A new value for the attribute. Use only with the @kernel@ , @ramdisk@ , @userData@ , @disableApiTermination@ , or @instanceInitiatedShutdownBehavior@ attribute.
 --
--- * 'mInstanceType' - Changes the instance type to the specified value. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html Instance Types> . If the instance type is not valid, the error returned is @InvalidInstanceAttributeValue@ .
+-- * 'mInstanceType' - Changes the instance type to the specified value. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html Instance Types> . If the instance type is not valid, the error returned is @InvalidInstanceAttributeValue@ .
 --
 -- * 'mSRIOVNetSupport' - Set to @simple@ to enable enhanced networking with the Intel 82599 Virtual Function interface for the instance. There is no way to disable enhanced networking with the Intel 82599 Virtual Function interface at this time. This option is supported only for HVM instances. Specifying this option with a PV instance can make it unreachable.
 --
@@ -115,7 +134,7 @@ data ModifyInstanceAttribute = ModifyInstanceAttribute'
 --
 -- * 'mInstanceInitiatedShutdownBehavior' - Specifies whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).
 --
--- * 'mBlockDeviceMappings' - Modifies the @DeleteOnTermination@ attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for @DeleteOnTermination@ , the default is @true@ and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM Updating the Block Device Mapping when Launching an Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- * 'mBlockDeviceMappings' - Modifies the @DeleteOnTermination@ attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for @DeleteOnTermination@ , the default is @true@ and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM Updating the Block Device Mapping when Launching an Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 -- * 'mDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
@@ -123,26 +142,18 @@ data ModifyInstanceAttribute = ModifyInstanceAttribute'
 modifyInstanceAttribute
     :: Text -- ^ 'mInstanceId'
     -> ModifyInstanceAttribute
-modifyInstanceAttribute pInstanceId_ =
-  ModifyInstanceAttribute'
-    { _mGroups = Nothing
-    , _mAttribute = Nothing
-    , _mEnaSupport = Nothing
-    , _mSourceDestCheck = Nothing
-    , _mDisableAPITermination = Nothing
-    , _mKernel = Nothing
-    , _mRAMDisk = Nothing
-    , _mValue = Nothing
-    , _mInstanceType = Nothing
-    , _mSRIOVNetSupport = Nothing
-    , _mEBSOptimized = Nothing
-    , _mUserData = Nothing
-    , _mInstanceInitiatedShutdownBehavior = Nothing
-    , _mBlockDeviceMappings = Nothing
-    , _mDryRun = Nothing
-    , _mInstanceId = pInstanceId_
-    }
-
+modifyInstanceAttribute pInstanceId_
+  = ModifyInstanceAttribute'{_mGroups = Nothing,
+                             _mAttribute = Nothing, _mEnaSupport = Nothing,
+                             _mSourceDestCheck = Nothing,
+                             _mDisableAPITermination = Nothing,
+                             _mKernel = Nothing, _mRAMDisk = Nothing,
+                             _mValue = Nothing, _mInstanceType = Nothing,
+                             _mSRIOVNetSupport = Nothing,
+                             _mEBSOptimized = Nothing, _mUserData = Nothing,
+                             _mInstanceInitiatedShutdownBehavior = Nothing,
+                             _mBlockDeviceMappings = Nothing,
+                             _mDryRun = Nothing, _mInstanceId = pInstanceId_}
 
 -- | [EC2-VPC] Changes the security groups of the instance. You must specify at least one security group, even if it's just the default security group for the VPC. You must specify the security group ID, not the security group name.
 mGroups :: Lens' ModifyInstanceAttribute [Text]
@@ -164,11 +175,11 @@ mSourceDestCheck = lens _mSourceDestCheck (\ s a -> s{_mSourceDestCheck = a})
 mDisableAPITermination :: Lens' ModifyInstanceAttribute (Maybe AttributeBooleanValue)
 mDisableAPITermination = lens _mDisableAPITermination (\ s a -> s{_mDisableAPITermination = a})
 
--- | Changes the instance's kernel to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
+-- | Changes the instance's kernel to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
 mKernel :: Lens' ModifyInstanceAttribute (Maybe AttributeValue)
 mKernel = lens _mKernel (\ s a -> s{_mKernel = a})
 
--- | Changes the instance's RAM disk to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
+-- | Changes the instance's RAM disk to the specified value. We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html PV-GRUB> .
 mRAMDisk :: Lens' ModifyInstanceAttribute (Maybe AttributeValue)
 mRAMDisk = lens _mRAMDisk (\ s a -> s{_mRAMDisk = a})
 
@@ -176,7 +187,7 @@ mRAMDisk = lens _mRAMDisk (\ s a -> s{_mRAMDisk = a})
 mValue :: Lens' ModifyInstanceAttribute (Maybe Text)
 mValue = lens _mValue (\ s a -> s{_mValue = a})
 
--- | Changes the instance type to the specified value. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html Instance Types> . If the instance type is not valid, the error returned is @InvalidInstanceAttributeValue@ .
+-- | Changes the instance type to the specified value. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html Instance Types> . If the instance type is not valid, the error returned is @InvalidInstanceAttributeValue@ .
 mInstanceType :: Lens' ModifyInstanceAttribute (Maybe AttributeValue)
 mInstanceType = lens _mInstanceType (\ s a -> s{_mInstanceType = a})
 
@@ -196,7 +207,7 @@ mUserData = lens _mUserData (\ s a -> s{_mUserData = a})
 mInstanceInitiatedShutdownBehavior :: Lens' ModifyInstanceAttribute (Maybe AttributeValue)
 mInstanceInitiatedShutdownBehavior = lens _mInstanceInitiatedShutdownBehavior (\ s a -> s{_mInstanceInitiatedShutdownBehavior = a})
 
--- | Modifies the @DeleteOnTermination@ attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for @DeleteOnTermination@ , the default is @true@ and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM Updating the Block Device Mapping when Launching an Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- | Modifies the @DeleteOnTermination@ attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for @DeleteOnTermination@ , the default is @true@ and the volume is deleted when the instance is terminated. To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM Updating the Block Device Mapping when Launching an Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
 mBlockDeviceMappings :: Lens' ModifyInstanceAttribute [InstanceBlockDeviceMappingSpecification]
 mBlockDeviceMappings = lens _mBlockDeviceMappings (\ s a -> s{_mBlockDeviceMappings = a}) . _Default . _Coerce
 
@@ -249,16 +260,15 @@ instance ToQuery ModifyInstanceAttribute where
                "DryRun" =: _mDryRun, "InstanceId" =: _mInstanceId]
 
 -- | /See:/ 'modifyInstanceAttributeResponse' smart constructor.
-data ModifyInstanceAttributeResponse =
-  ModifyInstanceAttributeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyInstanceAttributeResponse = ModifyInstanceAttributeResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ModifyInstanceAttributeResponse' with the minimum fields required to make a request.
 --
 modifyInstanceAttributeResponse
     :: ModifyInstanceAttributeResponse
-modifyInstanceAttributeResponse = ModifyInstanceAttributeResponse'
-
+modifyInstanceAttributeResponse
+  = ModifyInstanceAttributeResponse'
 
 instance NFData ModifyInstanceAttributeResponse where

@@ -40,17 +40,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAccountPasswordPolicy' smart constructor.
-data DeleteAccountPasswordPolicy =
-  DeleteAccountPasswordPolicy'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAccountPasswordPolicy = DeleteAccountPasswordPolicy'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteAccountPasswordPolicy' with the minimum fields required to make a request.
 --
 deleteAccountPasswordPolicy
     :: DeleteAccountPasswordPolicy
-deleteAccountPasswordPolicy = DeleteAccountPasswordPolicy'
-
+deleteAccountPasswordPolicy
+  = DeleteAccountPasswordPolicy'
 
 instance AWSRequest DeleteAccountPasswordPolicy where
         type Rs DeleteAccountPasswordPolicy =
@@ -78,17 +77,16 @@ instance ToQuery DeleteAccountPasswordPolicy where
                   "Version" =: ("2010-05-08" :: ByteString)])
 
 -- | /See:/ 'deleteAccountPasswordPolicyResponse' smart constructor.
-data DeleteAccountPasswordPolicyResponse =
-  DeleteAccountPasswordPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAccountPasswordPolicyResponse = DeleteAccountPasswordPolicyResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteAccountPasswordPolicyResponse' with the minimum fields required to make a request.
 --
 deleteAccountPasswordPolicyResponse
     :: DeleteAccountPasswordPolicyResponse
-deleteAccountPasswordPolicyResponse = DeleteAccountPasswordPolicyResponse'
-
+deleteAccountPasswordPolicyResponse
+  = DeleteAccountPasswordPolicyResponse'
 
 instance NFData DeleteAccountPasswordPolicyResponse
          where

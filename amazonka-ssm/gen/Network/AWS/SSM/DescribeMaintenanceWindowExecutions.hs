@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the executions of a Maintenance Window. This includes information about when the Maintenance Window was scheduled to be active, and information about tasks registered and run with the Maintenance Window.
+-- Lists the executions of a maintenance window. This includes information about when the maintenance window was scheduled to be active, and information about tasks registered and run with the maintenance window.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeMaintenanceWindowExecutions
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.SSM.DescribeMaintenanceWindowExecutions
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -49,13 +52,23 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeMaintenanceWindowExecutions' smart constructor.
-data DescribeMaintenanceWindowExecutions = DescribeMaintenanceWindowExecutions'
-  { _dmweFilters    :: !(Maybe [MaintenanceWindowFilter])
-  , _dmweNextToken  :: !(Maybe Text)
-  , _dmweMaxResults :: !(Maybe Nat)
-  , _dmweWindowId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMaintenanceWindowExecutions = DescribeMaintenanceWindowExecutions'{_dmweFilters
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [MaintenanceWindowFilter]),
+                                                                                _dmweNextToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dmweMaxResults
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Nat),
+                                                                                _dmweWindowId
+                                                                                ::
+                                                                                !Text}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeMaintenanceWindowExecutions' with the minimum fields required to make a request.
 --
@@ -67,18 +80,16 @@ data DescribeMaintenanceWindowExecutions = DescribeMaintenanceWindowExecutions'
 --
 -- * 'dmweMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 --
--- * 'dmweWindowId' - The ID of the Maintenance Window whose executions should be retrieved.
+-- * 'dmweWindowId' - The ID of the maintenance window whose executions should be retrieved.
 describeMaintenanceWindowExecutions
     :: Text -- ^ 'dmweWindowId'
     -> DescribeMaintenanceWindowExecutions
-describeMaintenanceWindowExecutions pWindowId_ =
-  DescribeMaintenanceWindowExecutions'
-    { _dmweFilters = Nothing
-    , _dmweNextToken = Nothing
-    , _dmweMaxResults = Nothing
-    , _dmweWindowId = pWindowId_
-    }
-
+describeMaintenanceWindowExecutions pWindowId_
+  = DescribeMaintenanceWindowExecutions'{_dmweFilters =
+                                           Nothing,
+                                         _dmweNextToken = Nothing,
+                                         _dmweMaxResults = Nothing,
+                                         _dmweWindowId = pWindowId_}
 
 -- | Each entry in the array is a structure containing: Key (string, between 1 and 128 characters) Values (array of strings, each string is between 1 and 256 characters) The supported Keys are ExecutedBefore and ExecutedAfter with the value being a date/time string such as 2016-11-04T05:00:00Z.
 dmweFilters :: Lens' DescribeMaintenanceWindowExecutions [MaintenanceWindowFilter]
@@ -92,9 +103,17 @@ dmweNextToken = lens _dmweNextToken (\ s a -> s{_dmweNextToken = a})
 dmweMaxResults :: Lens' DescribeMaintenanceWindowExecutions (Maybe Natural)
 dmweMaxResults = lens _dmweMaxResults (\ s a -> s{_dmweMaxResults = a}) . mapping _Nat
 
--- | The ID of the Maintenance Window whose executions should be retrieved.
+-- | The ID of the maintenance window whose executions should be retrieved.
 dmweWindowId :: Lens' DescribeMaintenanceWindowExecutions Text
 dmweWindowId = lens _dmweWindowId (\ s a -> s{_dmweWindowId = a})
+
+instance AWSPager DescribeMaintenanceWindowExecutions
+         where
+        page rq rs
+          | stop (rs ^. dmwersNextToken) = Nothing
+          | stop (rs ^. dmwersWindowExecutions) = Nothing
+          | otherwise =
+            Just $ rq & dmweNextToken .~ rs ^. dmwersNextToken
 
 instance AWSRequest
            DescribeMaintenanceWindowExecutions
@@ -147,18 +166,26 @@ instance ToQuery DescribeMaintenanceWindowExecutions
         toQuery = const mempty
 
 -- | /See:/ 'describeMaintenanceWindowExecutionsResponse' smart constructor.
-data DescribeMaintenanceWindowExecutionsResponse = DescribeMaintenanceWindowExecutionsResponse'
-  { _dmwersWindowExecutions :: !(Maybe [MaintenanceWindowExecution])
-  , _dmwersNextToken        :: !(Maybe Text)
-  , _dmwersResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMaintenanceWindowExecutionsResponse = DescribeMaintenanceWindowExecutionsResponse'{_dmwersWindowExecutions
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    [MaintenanceWindowExecution]),
+                                                                                                _dmwersNextToken
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _dmwersResponseStatus
+                                                                                                ::
+                                                                                                !Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DescribeMaintenanceWindowExecutionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmwersWindowExecutions' - Information about the Maintenance Windows execution.
+-- * 'dmwersWindowExecutions' - Information about the maintenance window executions.
 --
 -- * 'dmwersNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 --
@@ -166,15 +193,15 @@ data DescribeMaintenanceWindowExecutionsResponse = DescribeMaintenanceWindowExec
 describeMaintenanceWindowExecutionsResponse
     :: Int -- ^ 'dmwersResponseStatus'
     -> DescribeMaintenanceWindowExecutionsResponse
-describeMaintenanceWindowExecutionsResponse pResponseStatus_ =
-  DescribeMaintenanceWindowExecutionsResponse'
-    { _dmwersWindowExecutions = Nothing
-    , _dmwersNextToken = Nothing
-    , _dmwersResponseStatus = pResponseStatus_
-    }
+describeMaintenanceWindowExecutionsResponse
+  pResponseStatus_
+  = DescribeMaintenanceWindowExecutionsResponse'{_dmwersWindowExecutions
+                                                   = Nothing,
+                                                 _dmwersNextToken = Nothing,
+                                                 _dmwersResponseStatus =
+                                                   pResponseStatus_}
 
-
--- | Information about the Maintenance Windows execution.
+-- | Information about the maintenance window executions.
 dmwersWindowExecutions :: Lens' DescribeMaintenanceWindowExecutionsResponse [MaintenanceWindowExecution]
 dmwersWindowExecutions = lens _dmwersWindowExecutions (\ s a -> s{_dmwersWindowExecutions = a}) . _Default . _Coerce
 

@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Use to update a batch of endpoints.
+-- Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes for a batch of endpoints. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
+--
+--
 module Network.AWS.Pinpoint.UpdateEndpointsBatch
     (
     -- * Creating a Request
@@ -44,31 +46,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateEndpointsBatch' smart constructor.
-data UpdateEndpointsBatch = UpdateEndpointsBatch'
-  { _uebApplicationId        :: !Text
-  , _uebEndpointBatchRequest :: !EndpointBatchRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEndpointsBatch = UpdateEndpointsBatch'{_uebApplicationId
+                                                  :: !Text,
+                                                  _uebEndpointBatchRequest ::
+                                                  !EndpointBatchRequest}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateEndpointsBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uebApplicationId' - Undocumented member.
+-- * 'uebApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'uebEndpointBatchRequest' - Undocumented member.
 updateEndpointsBatch
     :: Text -- ^ 'uebApplicationId'
     -> EndpointBatchRequest -- ^ 'uebEndpointBatchRequest'
     -> UpdateEndpointsBatch
-updateEndpointsBatch pApplicationId_ pEndpointBatchRequest_ =
-  UpdateEndpointsBatch'
-    { _uebApplicationId = pApplicationId_
-    , _uebEndpointBatchRequest = pEndpointBatchRequest_
-    }
+updateEndpointsBatch pApplicationId_
+  pEndpointBatchRequest_
+  = UpdateEndpointsBatch'{_uebApplicationId =
+                            pApplicationId_,
+                          _uebEndpointBatchRequest = pEndpointBatchRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 uebApplicationId :: Lens' UpdateEndpointsBatch Text
 uebApplicationId = lens _uebApplicationId (\ s a -> s{_uebApplicationId = a})
 
@@ -114,11 +115,13 @@ instance ToQuery UpdateEndpointsBatch where
         toQuery = const mempty
 
 -- | /See:/ 'updateEndpointsBatchResponse' smart constructor.
-data UpdateEndpointsBatchResponse = UpdateEndpointsBatchResponse'
-  { _uebrsResponseStatus :: !Int
-  , _uebrsMessageBody    :: !MessageBody
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEndpointsBatchResponse = UpdateEndpointsBatchResponse'{_uebrsResponseStatus
+                                                                  :: !Int,
+                                                                  _uebrsMessageBody
+                                                                  ::
+                                                                  !MessageBody}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateEndpointsBatchResponse' with the minimum fields required to make a request.
 --
@@ -131,10 +134,11 @@ updateEndpointsBatchResponse
     :: Int -- ^ 'uebrsResponseStatus'
     -> MessageBody -- ^ 'uebrsMessageBody'
     -> UpdateEndpointsBatchResponse
-updateEndpointsBatchResponse pResponseStatus_ pMessageBody_ =
-  UpdateEndpointsBatchResponse'
-    {_uebrsResponseStatus = pResponseStatus_, _uebrsMessageBody = pMessageBody_}
-
+updateEndpointsBatchResponse pResponseStatus_
+  pMessageBody_
+  = UpdateEndpointsBatchResponse'{_uebrsResponseStatus
+                                    = pResponseStatus_,
+                                  _uebrsMessageBody = pMessageBody_}
 
 -- | -- | The response status code.
 uebrsResponseStatus :: Lens' UpdateEndpointsBatchResponse Int

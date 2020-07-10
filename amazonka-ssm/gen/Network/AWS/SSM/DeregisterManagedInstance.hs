@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling the SSM Agent first.
+-- Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
 --
 --
 module Network.AWS.SSM.DeregisterManagedInstance
@@ -44,24 +44,24 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'deregisterManagedInstance' smart constructor.
-newtype DeregisterManagedInstance = DeregisterManagedInstance'
-  { _dmiInstanceId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeregisterManagedInstance = DeregisterManagedInstance'{_dmiInstanceId
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeregisterManagedInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmiInstanceId' - The ID assigned to the managed instance when you registered it using the activation process.
+-- * 'dmiInstanceId' - The ID assigned to the managed instance when you registered it using the activation process. 
 deregisterManagedInstance
     :: Text -- ^ 'dmiInstanceId'
     -> DeregisterManagedInstance
-deregisterManagedInstance pInstanceId_ =
-  DeregisterManagedInstance' {_dmiInstanceId = pInstanceId_}
+deregisterManagedInstance pInstanceId_
+  = DeregisterManagedInstance'{_dmiInstanceId =
+                                 pInstanceId_}
 
-
--- | The ID assigned to the managed instance when you registered it using the activation process.
+-- | The ID assigned to the managed instance when you registered it using the activation process. 
 dmiInstanceId :: Lens' DeregisterManagedInstance Text
 dmiInstanceId = lens _dmiInstanceId (\ s a -> s{_dmiInstanceId = a})
 
@@ -101,10 +101,11 @@ instance ToQuery DeregisterManagedInstance where
         toQuery = const mempty
 
 -- | /See:/ 'deregisterManagedInstanceResponse' smart constructor.
-newtype DeregisterManagedInstanceResponse = DeregisterManagedInstanceResponse'
-  { _dmirsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeregisterManagedInstanceResponse = DeregisterManagedInstanceResponse'{_dmirsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DeregisterManagedInstanceResponse' with the minimum fields required to make a request.
 --
@@ -114,9 +115,9 @@ newtype DeregisterManagedInstanceResponse = DeregisterManagedInstanceResponse'
 deregisterManagedInstanceResponse
     :: Int -- ^ 'dmirsResponseStatus'
     -> DeregisterManagedInstanceResponse
-deregisterManagedInstanceResponse pResponseStatus_ =
-  DeregisterManagedInstanceResponse' {_dmirsResponseStatus = pResponseStatus_}
-
+deregisterManagedInstanceResponse pResponseStatus_
+  = DeregisterManagedInstanceResponse'{_dmirsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 dmirsResponseStatus :: Lens' DeregisterManagedInstanceResponse Int

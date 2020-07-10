@@ -53,11 +53,10 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'describeResource' smart constructor.
-data DescribeResource = DescribeResource'
-  { _drOrganizationId :: !Text
-  , _drResourceId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeResource = DescribeResource'{_drOrganizationId
+                                          :: !Text,
+                                          _drResourceId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeResource' with the minimum fields required to make a request.
 --
@@ -70,10 +69,10 @@ describeResource
     :: Text -- ^ 'drOrganizationId'
     -> Text -- ^ 'drResourceId'
     -> DescribeResource
-describeResource pOrganizationId_ pResourceId_ =
-  DescribeResource'
-    {_drOrganizationId = pOrganizationId_, _drResourceId = pResourceId_}
-
+describeResource pOrganizationId_ pResourceId_
+  = DescribeResource'{_drOrganizationId =
+                        pOrganizationId_,
+                      _drResourceId = pResourceId_}
 
 -- | The identifier associated with the organization for which the resource is described.
 drOrganizationId :: Lens' DescribeResource Text
@@ -126,18 +125,27 @@ instance ToQuery DescribeResource where
         toQuery = const mempty
 
 -- | /See:/ 'describeResourceResponse' smart constructor.
-data DescribeResourceResponse = DescribeResourceResponse'
-  { _drrsEmail          :: !(Maybe Text)
-  , _drrsState          :: !(Maybe EntityState)
-  , _drrsResourceId     :: !(Maybe Text)
-  , _drrsDisabledDate   :: !(Maybe POSIX)
-  , _drrsName           :: !(Maybe Text)
-  , _drrsType           :: !(Maybe ResourceType)
-  , _drrsEnabledDate    :: !(Maybe POSIX)
-  , _drrsBookingOptions :: !(Maybe BookingOptions)
-  , _drrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeResourceResponse = DescribeResourceResponse'{_drrsEmail
+                                                          :: !(Maybe Text),
+                                                          _drrsState ::
+                                                          !(Maybe EntityState),
+                                                          _drrsResourceId ::
+                                                          !(Maybe Text),
+                                                          _drrsDisabledDate ::
+                                                          !(Maybe POSIX),
+                                                          _drrsName ::
+                                                          !(Maybe Text),
+                                                          _drrsType ::
+                                                          !(Maybe ResourceType),
+                                                          _drrsEnabledDate ::
+                                                          !(Maybe POSIX),
+                                                          _drrsBookingOptions ::
+                                                          !(Maybe
+                                                              BookingOptions),
+                                                          _drrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeResourceResponse' with the minimum fields required to make a request.
 --
@@ -145,17 +153,17 @@ data DescribeResourceResponse = DescribeResourceResponse'
 --
 -- * 'drrsEmail' - The email of the described resource.
 --
--- * 'drrsState' - The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).
+-- * 'drrsState' - The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.
 --
 -- * 'drrsResourceId' - The identifier of the described resource.
 --
--- * 'drrsDisabledDate' - The date and time when a resource was registered from Amazon WorkMail, in UNIX epoch time format.
+-- * 'drrsDisabledDate' - The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.
 --
 -- * 'drrsName' - The name of the described resource.
 --
 -- * 'drrsType' - The type of the described resource.
 --
--- * 'drrsEnabledDate' - The date and time when a resource was registered to Amazon WorkMail, in UNIX epoch time format.
+-- * 'drrsEnabledDate' - The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.
 --
 -- * 'drrsBookingOptions' - The booking options for the described resource.
 --
@@ -163,25 +171,19 @@ data DescribeResourceResponse = DescribeResourceResponse'
 describeResourceResponse
     :: Int -- ^ 'drrsResponseStatus'
     -> DescribeResourceResponse
-describeResourceResponse pResponseStatus_ =
-  DescribeResourceResponse'
-    { _drrsEmail = Nothing
-    , _drrsState = Nothing
-    , _drrsResourceId = Nothing
-    , _drrsDisabledDate = Nothing
-    , _drrsName = Nothing
-    , _drrsType = Nothing
-    , _drrsEnabledDate = Nothing
-    , _drrsBookingOptions = Nothing
-    , _drrsResponseStatus = pResponseStatus_
-    }
-
+describeResourceResponse pResponseStatus_
+  = DescribeResourceResponse'{_drrsEmail = Nothing,
+                              _drrsState = Nothing, _drrsResourceId = Nothing,
+                              _drrsDisabledDate = Nothing, _drrsName = Nothing,
+                              _drrsType = Nothing, _drrsEnabledDate = Nothing,
+                              _drrsBookingOptions = Nothing,
+                              _drrsResponseStatus = pResponseStatus_}
 
 -- | The email of the described resource.
 drrsEmail :: Lens' DescribeResourceResponse (Maybe Text)
 drrsEmail = lens _drrsEmail (\ s a -> s{_drrsEmail = a})
 
--- | The state of the resource: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).
+-- | The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.
 drrsState :: Lens' DescribeResourceResponse (Maybe EntityState)
 drrsState = lens _drrsState (\ s a -> s{_drrsState = a})
 
@@ -189,7 +191,7 @@ drrsState = lens _drrsState (\ s a -> s{_drrsState = a})
 drrsResourceId :: Lens' DescribeResourceResponse (Maybe Text)
 drrsResourceId = lens _drrsResourceId (\ s a -> s{_drrsResourceId = a})
 
--- | The date and time when a resource was registered from Amazon WorkMail, in UNIX epoch time format.
+-- | The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.
 drrsDisabledDate :: Lens' DescribeResourceResponse (Maybe UTCTime)
 drrsDisabledDate = lens _drrsDisabledDate (\ s a -> s{_drrsDisabledDate = a}) . mapping _Time
 
@@ -201,7 +203,7 @@ drrsName = lens _drrsName (\ s a -> s{_drrsName = a})
 drrsType :: Lens' DescribeResourceResponse (Maybe ResourceType)
 drrsType = lens _drrsType (\ s a -> s{_drrsType = a})
 
--- | The date and time when a resource was registered to Amazon WorkMail, in UNIX epoch time format.
+-- | The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.
 drrsEnabledDate :: Lens' DescribeResourceResponse (Maybe UTCTime)
 drrsEnabledDate = lens _drrsEnabledDate (\ s a -> s{_drrsEnabledDate = a}) . mapping _Time
 

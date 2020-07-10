@@ -49,10 +49,8 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listTags' smart constructor.
-newtype ListTags = ListTags'
-  { _ltARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListTags = ListTags'{_ltARN :: Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTags' with the minimum fields required to make a request.
 --
@@ -62,8 +60,7 @@ newtype ListTags = ListTags'
 listTags
     :: Text -- ^ 'ltARN'
     -> ListTags
-listTags pARN_ = ListTags' {_ltARN = pARN_}
-
+listTags pARN_ = ListTags'{_ltARN = pARN_}
 
 -- | Specify the @ARN@ for the Elasticsearch domain to which the tags are attached that you want to view.
 ltARN :: Lens' ListTags Text
@@ -96,11 +93,10 @@ instance ToQuery ListTags where
 --
 --
 -- /See:/ 'listTagsResponse' smart constructor.
-data ListTagsResponse = ListTagsResponse'
-  { _ltrsTagList        :: !(Maybe [Tag])
-  , _ltrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsResponse = ListTagsResponse'{_ltrsTagList
+                                          :: !(Maybe [Tag]),
+                                          _ltrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
@@ -112,10 +108,9 @@ data ListTagsResponse = ListTagsResponse'
 listTagsResponse
     :: Int -- ^ 'ltrsResponseStatus'
     -> ListTagsResponse
-listTagsResponse pResponseStatus_ =
-  ListTagsResponse'
-    {_ltrsTagList = Nothing, _ltrsResponseStatus = pResponseStatus_}
-
+listTagsResponse pResponseStatus_
+  = ListTagsResponse'{_ltrsTagList = Nothing,
+                      _ltrsResponseStatus = pResponseStatus_}
 
 -- | List of @Tag@ for the requested Elasticsearch domain.
 ltrsTagList :: Lens' ListTagsResponse [Tag]

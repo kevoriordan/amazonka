@@ -57,13 +57,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getOpenIdTokenForDeveloperIdentity' smart constructor.
-data GetOpenIdTokenForDeveloperIdentity = GetOpenIdTokenForDeveloperIdentity'
-  { _goitfdiTokenDuration  :: !(Maybe Nat)
-  , _goitfdiIdentityId     :: !(Maybe Text)
-  , _goitfdiIdentityPoolId :: !Text
-  , _goitfdiLogins         :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetOpenIdTokenForDeveloperIdentity = GetOpenIdTokenForDeveloperIdentity'{_goitfdiTokenDuration
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Nat),
+                                                                              _goitfdiIdentityId
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _goitfdiIdentityPoolId
+                                                                              ::
+                                                                              !Text,
+                                                                              _goitfdiLogins
+                                                                              ::
+                                                                              !(Map
+                                                                                  Text
+                                                                                  Text)}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'GetOpenIdTokenForDeveloperIdentity' with the minimum fields required to make a request.
 --
@@ -79,14 +90,13 @@ data GetOpenIdTokenForDeveloperIdentity = GetOpenIdTokenForDeveloperIdentity'
 getOpenIdTokenForDeveloperIdentity
     :: Text -- ^ 'goitfdiIdentityPoolId'
     -> GetOpenIdTokenForDeveloperIdentity
-getOpenIdTokenForDeveloperIdentity pIdentityPoolId_ =
-  GetOpenIdTokenForDeveloperIdentity'
-    { _goitfdiTokenDuration = Nothing
-    , _goitfdiIdentityId = Nothing
-    , _goitfdiIdentityPoolId = pIdentityPoolId_
-    , _goitfdiLogins = mempty
-    }
-
+getOpenIdTokenForDeveloperIdentity pIdentityPoolId_
+  = GetOpenIdTokenForDeveloperIdentity'{_goitfdiTokenDuration
+                                          = Nothing,
+                                        _goitfdiIdentityId = Nothing,
+                                        _goitfdiIdentityPoolId =
+                                          pIdentityPoolId_,
+                                        _goitfdiLogins = mempty}
 
 -- | The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don't provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token's duration.
 goitfdiTokenDuration :: Lens' GetOpenIdTokenForDeveloperIdentity (Maybe Natural)
@@ -157,12 +167,20 @@ instance ToQuery GetOpenIdTokenForDeveloperIdentity
 --
 --
 -- /See:/ 'getOpenIdTokenForDeveloperIdentityResponse' smart constructor.
-data GetOpenIdTokenForDeveloperIdentityResponse = GetOpenIdTokenForDeveloperIdentityResponse'
-  { _goitfdirsToken          :: !(Maybe Text)
-  , _goitfdirsIdentityId     :: !(Maybe Text)
-  , _goitfdirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetOpenIdTokenForDeveloperIdentityResponse = GetOpenIdTokenForDeveloperIdentityResponse'{_goitfdirsToken
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _goitfdirsIdentityId
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _goitfdirsResponseStatus
+                                                                                              ::
+                                                                                              !Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'GetOpenIdTokenForDeveloperIdentityResponse' with the minimum fields required to make a request.
 --
@@ -176,13 +194,13 @@ data GetOpenIdTokenForDeveloperIdentityResponse = GetOpenIdTokenForDeveloperIden
 getOpenIdTokenForDeveloperIdentityResponse
     :: Int -- ^ 'goitfdirsResponseStatus'
     -> GetOpenIdTokenForDeveloperIdentityResponse
-getOpenIdTokenForDeveloperIdentityResponse pResponseStatus_ =
-  GetOpenIdTokenForDeveloperIdentityResponse'
-    { _goitfdirsToken = Nothing
-    , _goitfdirsIdentityId = Nothing
-    , _goitfdirsResponseStatus = pResponseStatus_
-    }
-
+getOpenIdTokenForDeveloperIdentityResponse
+  pResponseStatus_
+  = GetOpenIdTokenForDeveloperIdentityResponse'{_goitfdirsToken
+                                                  = Nothing,
+                                                _goitfdirsIdentityId = Nothing,
+                                                _goitfdirsResponseStatus =
+                                                  pResponseStatus_}
 
 -- | An OpenID token.
 goitfdirsToken :: Lens' GetOpenIdTokenForDeveloperIdentityResponse (Maybe Text)

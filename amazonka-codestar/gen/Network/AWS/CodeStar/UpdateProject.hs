@@ -46,12 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateProject' smart constructor.
-data UpdateProject = UpdateProject'
-  { _upName        :: !(Maybe (Sensitive Text))
-  , _upDescription :: !(Maybe (Sensitive Text))
-  , _upId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateProject = UpdateProject'{_upName ::
+                                    !(Maybe (Sensitive Text)),
+                                    _upDescription :: !(Maybe (Sensitive Text)),
+                                    _upId :: !Text}
+                       deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateProject' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data UpdateProject = UpdateProject'
 updateProject
     :: Text -- ^ 'upId'
     -> UpdateProject
-updateProject pId_ =
-  UpdateProject' {_upName = Nothing, _upDescription = Nothing, _upId = pId_}
-
+updateProject pId_
+  = UpdateProject'{_upName = Nothing,
+                   _upDescription = Nothing, _upId = pId_}
 
 -- | The name of the project you want to update.
 upName :: Lens' UpdateProject (Maybe Text)
@@ -117,10 +116,10 @@ instance ToQuery UpdateProject where
         toQuery = const mempty
 
 -- | /See:/ 'updateProjectResponse' smart constructor.
-newtype UpdateProjectResponse = UpdateProjectResponse'
-  { _uprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateProjectResponse = UpdateProjectResponse'{_uprsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateProjectResponse' with the minimum fields required to make a request.
 --
@@ -130,9 +129,9 @@ newtype UpdateProjectResponse = UpdateProjectResponse'
 updateProjectResponse
     :: Int -- ^ 'uprsResponseStatus'
     -> UpdateProjectResponse
-updateProjectResponse pResponseStatus_ =
-  UpdateProjectResponse' {_uprsResponseStatus = pResponseStatus_}
-
+updateProjectResponse pResponseStatus_
+  = UpdateProjectResponse'{_uprsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 uprsResponseStatus :: Lens' UpdateProjectResponse Int

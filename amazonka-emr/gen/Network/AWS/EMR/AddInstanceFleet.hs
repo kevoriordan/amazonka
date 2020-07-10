@@ -34,6 +34,7 @@ module Network.AWS.EMR.AddInstanceFleet
     , addInstanceFleetResponse
     , AddInstanceFleetResponse
     -- * Response Lenses
+    , aifrsClusterARN
     , aifrsClusterId
     , aifrsInstanceFleetId
     , aifrsResponseStatus
@@ -47,11 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'addInstanceFleet' smart constructor.
-data AddInstanceFleet = AddInstanceFleet'
-  { _aifClusterId     :: !Text
-  , _aifInstanceFleet :: !InstanceFleetConfig
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddInstanceFleet = AddInstanceFleet'{_aifClusterId
+                                          :: !Text,
+                                          _aifInstanceFleet ::
+                                          !InstanceFleetConfig}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddInstanceFleet' with the minimum fields required to make a request.
 --
@@ -64,10 +65,9 @@ addInstanceFleet
     :: Text -- ^ 'aifClusterId'
     -> InstanceFleetConfig -- ^ 'aifInstanceFleet'
     -> AddInstanceFleet
-addInstanceFleet pClusterId_ pInstanceFleet_ =
-  AddInstanceFleet'
-    {_aifClusterId = pClusterId_, _aifInstanceFleet = pInstanceFleet_}
-
+addInstanceFleet pClusterId_ pInstanceFleet_
+  = AddInstanceFleet'{_aifClusterId = pClusterId_,
+                      _aifInstanceFleet = pInstanceFleet_}
 
 -- | The unique identifier of the cluster.
 aifClusterId :: Lens' AddInstanceFleet Text
@@ -84,8 +84,9 @@ instance AWSRequest AddInstanceFleet where
           = receiveJSON
               (\ s h x ->
                  AddInstanceFleetResponse' <$>
-                   (x .?> "ClusterId") <*> (x .?> "InstanceFleetId") <*>
-                     (pure (fromEnum s)))
+                   (x .?> "ClusterArn") <*> (x .?> "ClusterId") <*>
+                     (x .?> "InstanceFleetId")
+                     <*> (pure (fromEnum s)))
 
 instance Hashable AddInstanceFleet where
 
@@ -114,16 +115,22 @@ instance ToQuery AddInstanceFleet where
         toQuery = const mempty
 
 -- | /See:/ 'addInstanceFleetResponse' smart constructor.
-data AddInstanceFleetResponse = AddInstanceFleetResponse'
-  { _aifrsClusterId       :: !(Maybe Text)
-  , _aifrsInstanceFleetId :: !(Maybe Text)
-  , _aifrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddInstanceFleetResponse = AddInstanceFleetResponse'{_aifrsClusterARN
+                                                          :: !(Maybe Text),
+                                                          _aifrsClusterId ::
+                                                          !(Maybe Text),
+                                                          _aifrsInstanceFleetId
+                                                          :: !(Maybe Text),
+                                                          _aifrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'AddInstanceFleetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aifrsClusterARN' - The Amazon Resource Name of the cluster.
 --
 -- * 'aifrsClusterId' - The unique identifier of the cluster.
 --
@@ -133,13 +140,16 @@ data AddInstanceFleetResponse = AddInstanceFleetResponse'
 addInstanceFleetResponse
     :: Int -- ^ 'aifrsResponseStatus'
     -> AddInstanceFleetResponse
-addInstanceFleetResponse pResponseStatus_ =
-  AddInstanceFleetResponse'
-    { _aifrsClusterId = Nothing
-    , _aifrsInstanceFleetId = Nothing
-    , _aifrsResponseStatus = pResponseStatus_
-    }
+addInstanceFleetResponse pResponseStatus_
+  = AddInstanceFleetResponse'{_aifrsClusterARN =
+                                Nothing,
+                              _aifrsClusterId = Nothing,
+                              _aifrsInstanceFleetId = Nothing,
+                              _aifrsResponseStatus = pResponseStatus_}
 
+-- | The Amazon Resource Name of the cluster.
+aifrsClusterARN :: Lens' AddInstanceFleetResponse (Maybe Text)
+aifrsClusterARN = lens _aifrsClusterARN (\ s a -> s{_aifrsClusterARN = a})
 
 -- | The unique identifier of the cluster.
 aifrsClusterId :: Lens' AddInstanceFleetResponse (Maybe Text)

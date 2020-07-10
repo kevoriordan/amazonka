@@ -36,6 +36,7 @@ module Network.AWS.CognitoIdentityProvider.CreateUserPool
     , cupUsernameAttributes
     , cupAliasAttributes
     , cupSchema
+    , cupAccountRecoverySetting
     , cupEmailConfiguration
     , cupSmsVerificationMessage
     , cupMFAConfiguration
@@ -45,6 +46,7 @@ module Network.AWS.CognitoIdentityProvider.CreateUserPool
     , cupDeviceConfiguration
     , cupAutoVerifiedAttributes
     , cupPolicies
+    , cupUsernameConfiguration
     , cupPoolName
 
     -- * Destructuring the Response
@@ -67,34 +69,54 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createUserPool' smart constructor.
-data CreateUserPool = CreateUserPool'
-  { _cupUserPoolTags                :: !(Maybe (Map Text Text))
-  , _cupVerificationMessageTemplate :: !(Maybe VerificationMessageTemplateType)
-  , _cupEmailVerificationMessage    :: !(Maybe Text)
-  , _cupSmsAuthenticationMessage    :: !(Maybe Text)
-  , _cupUserPoolAddOns              :: !(Maybe UserPoolAddOnsType)
-  , _cupEmailVerificationSubject    :: !(Maybe Text)
-  , _cupUsernameAttributes          :: !(Maybe [UsernameAttributeType])
-  , _cupAliasAttributes             :: !(Maybe [AliasAttributeType])
-  , _cupSchema                      :: !(Maybe (List1 SchemaAttributeType))
-  , _cupEmailConfiguration          :: !(Maybe EmailConfigurationType)
-  , _cupSmsVerificationMessage      :: !(Maybe Text)
-  , _cupMFAConfiguration            :: !(Maybe UserPoolMFAType)
-  , _cupLambdaConfig                :: !(Maybe LambdaConfigType)
-  , _cupSmsConfiguration            :: !(Maybe SmsConfigurationType)
-  , _cupAdminCreateUserConfig       :: !(Maybe AdminCreateUserConfigType)
-  , _cupDeviceConfiguration         :: !(Maybe DeviceConfigurationType)
-  , _cupAutoVerifiedAttributes      :: !(Maybe [VerifiedAttributeType])
-  , _cupPolicies                    :: !(Maybe UserPoolPolicyType)
-  , _cupPoolName                    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserPool = CreateUserPool'{_cupUserPoolTags
+                                      :: !(Maybe (Map Text Text)),
+                                      _cupVerificationMessageTemplate ::
+                                      !(Maybe VerificationMessageTemplateType),
+                                      _cupEmailVerificationMessage ::
+                                      !(Maybe Text),
+                                      _cupSmsAuthenticationMessage ::
+                                      !(Maybe Text),
+                                      _cupUserPoolAddOns ::
+                                      !(Maybe UserPoolAddOnsType),
+                                      _cupEmailVerificationSubject ::
+                                      !(Maybe Text),
+                                      _cupUsernameAttributes ::
+                                      !(Maybe [UsernameAttributeType]),
+                                      _cupAliasAttributes ::
+                                      !(Maybe [AliasAttributeType]),
+                                      _cupSchema ::
+                                      !(Maybe (List1 SchemaAttributeType)),
+                                      _cupAccountRecoverySetting ::
+                                      !(Maybe AccountRecoverySettingType),
+                                      _cupEmailConfiguration ::
+                                      !(Maybe EmailConfigurationType),
+                                      _cupSmsVerificationMessage ::
+                                      !(Maybe Text),
+                                      _cupMFAConfiguration ::
+                                      !(Maybe UserPoolMFAType),
+                                      _cupLambdaConfig ::
+                                      !(Maybe LambdaConfigType),
+                                      _cupSmsConfiguration ::
+                                      !(Maybe SmsConfigurationType),
+                                      _cupAdminCreateUserConfig ::
+                                      !(Maybe AdminCreateUserConfigType),
+                                      _cupDeviceConfiguration ::
+                                      !(Maybe DeviceConfigurationType),
+                                      _cupAutoVerifiedAttributes ::
+                                      !(Maybe [VerifiedAttributeType]),
+                                      _cupPolicies ::
+                                      !(Maybe UserPoolPolicyType),
+                                      _cupUsernameConfiguration ::
+                                      !(Maybe UsernameConfigurationType),
+                                      _cupPoolName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUserPool' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cupUserPoolTags' - The cost allocation tags for the user pool. For more information, see <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html Adding Cost Allocation Tags to Your User Pool>
+-- * 'cupUserPoolTags' - The tag keys and values to assign to the user pool. A tag is a label that you can use to categorize and manage user pools in different ways, such as by purpose, owner, environment, or other criteria.
 --
 -- * 'cupVerificationMessageTemplate' - The template for the verification message that the user sees when the app requests permission to access the user's information.
 --
@@ -111,6 +133,8 @@ data CreateUserPool = CreateUserPool'
 -- * 'cupAliasAttributes' - Attributes supported as an alias for this user pool. Possible values: __phone_number__ , __email__ , or __preferred_username__ .
 --
 -- * 'cupSchema' - An array of schema attributes for the new user pool. These attributes can be standard or custom attributes.
+--
+-- * 'cupAccountRecoverySetting' - Use this setting to define which verified available method a user can use to recover their password when they call @ForgotPassword@ . It allows you to define a preferred method when a user has more than one method available. With this setting, SMS does not qualify for a valid password recovery mechanism if the user also has SMS MFA enabled. In the absence of this setting, Cognito uses the legacy behavior to determine the recovery method where SMS is preferred over email.
 --
 -- * 'cupEmailConfiguration' - The email configuration.
 --
@@ -130,35 +154,35 @@ data CreateUserPool = CreateUserPool'
 --
 -- * 'cupPolicies' - The policies associated with the new user pool.
 --
+-- * 'cupUsernameConfiguration' - You can choose to set case sensitivity on the username input for the selected sign-in option. For example, when this is set to @False@ , users will be able to sign in using either "username" or "Username". This configuration is immutable once it has been set. For more information, see .
+--
 -- * 'cupPoolName' - A string used to name the user pool.
 createUserPool
     :: Text -- ^ 'cupPoolName'
     -> CreateUserPool
-createUserPool pPoolName_ =
-  CreateUserPool'
-    { _cupUserPoolTags = Nothing
-    , _cupVerificationMessageTemplate = Nothing
-    , _cupEmailVerificationMessage = Nothing
-    , _cupSmsAuthenticationMessage = Nothing
-    , _cupUserPoolAddOns = Nothing
-    , _cupEmailVerificationSubject = Nothing
-    , _cupUsernameAttributes = Nothing
-    , _cupAliasAttributes = Nothing
-    , _cupSchema = Nothing
-    , _cupEmailConfiguration = Nothing
-    , _cupSmsVerificationMessage = Nothing
-    , _cupMFAConfiguration = Nothing
-    , _cupLambdaConfig = Nothing
-    , _cupSmsConfiguration = Nothing
-    , _cupAdminCreateUserConfig = Nothing
-    , _cupDeviceConfiguration = Nothing
-    , _cupAutoVerifiedAttributes = Nothing
-    , _cupPolicies = Nothing
-    , _cupPoolName = pPoolName_
-    }
+createUserPool pPoolName_
+  = CreateUserPool'{_cupUserPoolTags = Nothing,
+                    _cupVerificationMessageTemplate = Nothing,
+                    _cupEmailVerificationMessage = Nothing,
+                    _cupSmsAuthenticationMessage = Nothing,
+                    _cupUserPoolAddOns = Nothing,
+                    _cupEmailVerificationSubject = Nothing,
+                    _cupUsernameAttributes = Nothing,
+                    _cupAliasAttributes = Nothing, _cupSchema = Nothing,
+                    _cupAccountRecoverySetting = Nothing,
+                    _cupEmailConfiguration = Nothing,
+                    _cupSmsVerificationMessage = Nothing,
+                    _cupMFAConfiguration = Nothing,
+                    _cupLambdaConfig = Nothing,
+                    _cupSmsConfiguration = Nothing,
+                    _cupAdminCreateUserConfig = Nothing,
+                    _cupDeviceConfiguration = Nothing,
+                    _cupAutoVerifiedAttributes = Nothing,
+                    _cupPolicies = Nothing,
+                    _cupUsernameConfiguration = Nothing,
+                    _cupPoolName = pPoolName_}
 
-
--- | The cost allocation tags for the user pool. For more information, see <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html Adding Cost Allocation Tags to Your User Pool>
+-- | The tag keys and values to assign to the user pool. A tag is a label that you can use to categorize and manage user pools in different ways, such as by purpose, owner, environment, or other criteria.
 cupUserPoolTags :: Lens' CreateUserPool (HashMap Text Text)
 cupUserPoolTags = lens _cupUserPoolTags (\ s a -> s{_cupUserPoolTags = a}) . _Default . _Map
 
@@ -193,6 +217,10 @@ cupAliasAttributes = lens _cupAliasAttributes (\ s a -> s{_cupAliasAttributes = 
 -- | An array of schema attributes for the new user pool. These attributes can be standard or custom attributes.
 cupSchema :: Lens' CreateUserPool (Maybe (NonEmpty SchemaAttributeType))
 cupSchema = lens _cupSchema (\ s a -> s{_cupSchema = a}) . mapping _List1
+
+-- | Use this setting to define which verified available method a user can use to recover their password when they call @ForgotPassword@ . It allows you to define a preferred method when a user has more than one method available. With this setting, SMS does not qualify for a valid password recovery mechanism if the user also has SMS MFA enabled. In the absence of this setting, Cognito uses the legacy behavior to determine the recovery method where SMS is preferred over email.
+cupAccountRecoverySetting :: Lens' CreateUserPool (Maybe AccountRecoverySettingType)
+cupAccountRecoverySetting = lens _cupAccountRecoverySetting (\ s a -> s{_cupAccountRecoverySetting = a})
 
 -- | The email configuration.
 cupEmailConfiguration :: Lens' CreateUserPool (Maybe EmailConfigurationType)
@@ -229,6 +257,10 @@ cupAutoVerifiedAttributes = lens _cupAutoVerifiedAttributes (\ s a -> s{_cupAuto
 -- | The policies associated with the new user pool.
 cupPolicies :: Lens' CreateUserPool (Maybe UserPoolPolicyType)
 cupPolicies = lens _cupPolicies (\ s a -> s{_cupPolicies = a})
+
+-- | You can choose to set case sensitivity on the username input for the selected sign-in option. For example, when this is set to @False@ , users will be able to sign in using either "username" or "Username". This configuration is immutable once it has been set. For more information, see .
+cupUsernameConfiguration :: Lens' CreateUserPool (Maybe UsernameConfigurationType)
+cupUsernameConfiguration = lens _cupUsernameConfiguration (\ s a -> s{_cupUsernameConfiguration = a})
 
 -- | A string used to name the user pool.
 cupPoolName :: Lens' CreateUserPool Text
@@ -274,6 +306,8 @@ instance ToJSON CreateUserPool where
                   ("UsernameAttributes" .=) <$> _cupUsernameAttributes,
                   ("AliasAttributes" .=) <$> _cupAliasAttributes,
                   ("Schema" .=) <$> _cupSchema,
+                  ("AccountRecoverySetting" .=) <$>
+                    _cupAccountRecoverySetting,
                   ("EmailConfiguration" .=) <$> _cupEmailConfiguration,
                   ("SmsVerificationMessage" .=) <$>
                     _cupSmsVerificationMessage,
@@ -287,6 +321,8 @@ instance ToJSON CreateUserPool where
                   ("AutoVerifiedAttributes" .=) <$>
                     _cupAutoVerifiedAttributes,
                   ("Policies" .=) <$> _cupPolicies,
+                  ("UsernameConfiguration" .=) <$>
+                    _cupUsernameConfiguration,
                   Just ("PoolName" .= _cupPoolName)])
 
 instance ToPath CreateUserPool where
@@ -300,11 +336,12 @@ instance ToQuery CreateUserPool where
 --
 --
 -- /See:/ 'createUserPoolResponse' smart constructor.
-data CreateUserPoolResponse = CreateUserPoolResponse'
-  { _cuprsUserPool       :: !(Maybe UserPoolType)
-  , _cuprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserPoolResponse = CreateUserPoolResponse'{_cuprsUserPool
+                                                      :: !(Maybe UserPoolType),
+                                                      _cuprsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateUserPoolResponse' with the minimum fields required to make a request.
 --
@@ -316,10 +353,9 @@ data CreateUserPoolResponse = CreateUserPoolResponse'
 createUserPoolResponse
     :: Int -- ^ 'cuprsResponseStatus'
     -> CreateUserPoolResponse
-createUserPoolResponse pResponseStatus_ =
-  CreateUserPoolResponse'
-    {_cuprsUserPool = Nothing, _cuprsResponseStatus = pResponseStatus_}
-
+createUserPoolResponse pResponseStatus_
+  = CreateUserPoolResponse'{_cuprsUserPool = Nothing,
+                            _cuprsResponseStatus = pResponseStatus_}
 
 -- | A container for the user pool details.
 cuprsUserPool :: Lens' CreateUserPoolResponse (Maybe UserPoolType)

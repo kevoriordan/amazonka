@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an export job.
+-- Creates an export job for an application.
+--
+--
 module Network.AWS.Pinpoint.CreateExportJob
     (
     -- * Creating a Request
@@ -44,31 +46,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createExportJob' smart constructor.
-data CreateExportJob = CreateExportJob'
-  { _cejApplicationId    :: !Text
-  , _cejExportJobRequest :: !ExportJobRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateExportJob = CreateExportJob'{_cejApplicationId
+                                        :: !Text,
+                                        _cejExportJobRequest ::
+                                        !ExportJobRequest}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateExportJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cejApplicationId' - Undocumented member.
+-- * 'cejApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'cejExportJobRequest' - Undocumented member.
 createExportJob
     :: Text -- ^ 'cejApplicationId'
     -> ExportJobRequest -- ^ 'cejExportJobRequest'
     -> CreateExportJob
-createExportJob pApplicationId_ pExportJobRequest_ =
-  CreateExportJob'
-    { _cejApplicationId = pApplicationId_
-    , _cejExportJobRequest = pExportJobRequest_
-    }
+createExportJob pApplicationId_ pExportJobRequest_
+  = CreateExportJob'{_cejApplicationId =
+                       pApplicationId_,
+                     _cejExportJobRequest = pExportJobRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 cejApplicationId :: Lens' CreateExportJob Text
 cejApplicationId = lens _cejApplicationId (\ s a -> s{_cejApplicationId = a})
 
@@ -111,11 +111,12 @@ instance ToQuery CreateExportJob where
         toQuery = const mempty
 
 -- | /See:/ 'createExportJobResponse' smart constructor.
-data CreateExportJobResponse = CreateExportJobResponse'
-  { _cejrsResponseStatus    :: !Int
-  , _cejrsExportJobResponse :: !ExportJobResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateExportJobResponse = CreateExportJobResponse'{_cejrsResponseStatus
+                                                        :: !Int,
+                                                        _cejrsExportJobResponse
+                                                        :: !ExportJobResponse}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateExportJobResponse' with the minimum fields required to make a request.
 --
@@ -128,12 +129,11 @@ createExportJobResponse
     :: Int -- ^ 'cejrsResponseStatus'
     -> ExportJobResponse -- ^ 'cejrsExportJobResponse'
     -> CreateExportJobResponse
-createExportJobResponse pResponseStatus_ pExportJobResponse_ =
-  CreateExportJobResponse'
-    { _cejrsResponseStatus = pResponseStatus_
-    , _cejrsExportJobResponse = pExportJobResponse_
-    }
-
+createExportJobResponse pResponseStatus_
+  pExportJobResponse_
+  = CreateExportJobResponse'{_cejrsResponseStatus =
+                               pResponseStatus_,
+                             _cejrsExportJobResponse = pExportJobResponse_}
 
 -- | -- | The response status code.
 cejrsResponseStatus :: Lens' CreateExportJobResponse Int

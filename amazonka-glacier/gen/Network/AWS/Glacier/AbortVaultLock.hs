@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This operation aborts the vault locking process if the vault lock is not in the @Locked@ state. If the vault lock is in the @Locked@ state when this operation is requested, the operation returns an @AccessDeniedException@ error. Aborting the vault locking process removes the vault lock policy from the specified vault.
+-- This operation aborts the vault locking process if the vault lock is not in the @Locked@ state. If the vault lock is in the @Locked@ state when this operation is requested, the operation returns an @AccessDeniedException@ error. Aborting the vault locking process removes the vault lock policy from the specified vault. 
 --
 --
--- A vault lock is put into the @InProgress@ state by calling 'InitiateVaultLock' . A vault lock is put into the @Locked@ state by calling 'CompleteVaultLock' . You can get the state of a vault lock by calling 'GetVaultLock' . For more information about the vault locking process, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html Amazon Glacier Vault Lock> . For more information about vault lock policies, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html Amazon Glacier Access Control with Vault Lock Policies> .
+-- A vault lock is put into the @InProgress@ state by calling 'InitiateVaultLock' . A vault lock is put into the @Locked@ state by calling 'CompleteVaultLock' . You can get the state of a vault lock by calling 'GetVaultLock' . For more information about the vault locking process, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html Amazon Glacier Vault Lock> . For more information about vault lock policies, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html Amazon Glacier Access Control with Vault Lock Policies> . 
 --
 -- This operation is idempotent. You can successfully invoke this operation multiple times, if the vault lock is in the @InProgress@ state or if there is no policy associated with the vault.
 --
@@ -51,11 +51,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'abortVaultLock' smart constructor.
-data AbortVaultLock = AbortVaultLock'
-  { _avlAccountId :: !Text
-  , _avlVaultName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AbortVaultLock = AbortVaultLock'{_avlAccountId
+                                      :: !Text,
+                                      _avlVaultName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AbortVaultLock' with the minimum fields required to make a request.
 --
@@ -68,9 +67,9 @@ abortVaultLock
     :: Text -- ^ 'avlAccountId'
     -> Text -- ^ 'avlVaultName'
     -> AbortVaultLock
-abortVaultLock pAccountId_ pVaultName_ =
-  AbortVaultLock' {_avlAccountId = pAccountId_, _avlVaultName = pVaultName_}
-
+abortVaultLock pAccountId_ pVaultName_
+  = AbortVaultLock'{_avlAccountId = pAccountId_,
+                    _avlVaultName = pVaultName_}
 
 -- | The @AccountId@ value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID.
 avlAccountId :: Lens' AbortVaultLock Text
@@ -102,16 +101,14 @@ instance ToQuery AbortVaultLock where
         toQuery = const mempty
 
 -- | /See:/ 'abortVaultLockResponse' smart constructor.
-data AbortVaultLockResponse =
-  AbortVaultLockResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AbortVaultLockResponse = AbortVaultLockResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AbortVaultLockResponse' with the minimum fields required to make a request.
 --
 abortVaultLockResponse
     :: AbortVaultLockResponse
 abortVaultLockResponse = AbortVaultLockResponse'
-
 
 instance NFData AbortVaultLockResponse where

@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the permissions for your network interfaces.
+-- Describes the permissions for your network interfaces. 
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribeNetworkInterfacePermissions
     (
     -- * Creating a Request
@@ -44,6 +46,7 @@ module Network.AWS.EC2.DescribeNetworkInterfacePermissions
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -53,13 +56,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeNetworkInterfacePermissions' smart constructor.
-data DescribeNetworkInterfacePermissions = DescribeNetworkInterfacePermissions'
-  { _dnipFilters                       :: !(Maybe [Filter])
-  , _dnipNextToken                     :: !(Maybe Text)
-  , _dnipNetworkInterfacePermissionIds :: !(Maybe [Text])
-  , _dnipMaxResults                    :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeNetworkInterfacePermissions = DescribeNetworkInterfacePermissions'{_dnipFilters
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Filter]),
+                                                                                _dnipNextToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dnipNetworkInterfacePermissionIds
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Text]),
+                                                                                _dnipMaxResults
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Nat)}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeNetworkInterfacePermissions' with the minimum fields required to make a request.
 --
@@ -74,14 +88,13 @@ data DescribeNetworkInterfacePermissions = DescribeNetworkInterfacePermissions'
 -- * 'dnipMaxResults' - The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. If this parameter is not specified, up to 50 results are returned by default.
 describeNetworkInterfacePermissions
     :: DescribeNetworkInterfacePermissions
-describeNetworkInterfacePermissions =
-  DescribeNetworkInterfacePermissions'
-    { _dnipFilters = Nothing
-    , _dnipNextToken = Nothing
-    , _dnipNetworkInterfacePermissionIds = Nothing
-    , _dnipMaxResults = Nothing
-    }
-
+describeNetworkInterfacePermissions
+  = DescribeNetworkInterfacePermissions'{_dnipFilters =
+                                           Nothing,
+                                         _dnipNextToken = Nothing,
+                                         _dnipNetworkInterfacePermissionIds =
+                                           Nothing,
+                                         _dnipMaxResults = Nothing}
 
 -- | One or more filters.     * @network-interface-permission.network-interface-permission-id@ - The ID of the permission.     * @network-interface-permission.network-interface-id@ - The ID of the network interface.     * @network-interface-permission.aws-account-id@ - The AWS account ID.     * @network-interface-permission.aws-service@ - The AWS service.     * @network-interface-permission.permission@ - The type of permission (@INSTANCE-ATTACH@ | @EIP-ASSOCIATE@ ).
 dnipFilters :: Lens' DescribeNetworkInterfacePermissions [Filter]
@@ -96,8 +109,17 @@ dnipNetworkInterfacePermissionIds :: Lens' DescribeNetworkInterfacePermissions [
 dnipNetworkInterfacePermissionIds = lens _dnipNetworkInterfacePermissionIds (\ s a -> s{_dnipNetworkInterfacePermissionIds = a}) . _Default . _Coerce
 
 -- | The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. If this parameter is not specified, up to 50 results are returned by default.
-dnipMaxResults :: Lens' DescribeNetworkInterfacePermissions (Maybe Int)
-dnipMaxResults = lens _dnipMaxResults (\ s a -> s{_dnipMaxResults = a})
+dnipMaxResults :: Lens' DescribeNetworkInterfacePermissions (Maybe Natural)
+dnipMaxResults = lens _dnipMaxResults (\ s a -> s{_dnipMaxResults = a}) . mapping _Nat
+
+instance AWSPager DescribeNetworkInterfacePermissions
+         where
+        page rq rs
+          | stop (rs ^. dnipsrsNextToken) = Nothing
+          | stop (rs ^. dnipsrsNetworkInterfacePermissions) =
+            Nothing
+          | otherwise =
+            Just $ rq & dnipNextToken .~ rs ^. dnipsrsNextToken
 
 instance AWSRequest
            DescribeNetworkInterfacePermissions
@@ -149,12 +171,20 @@ instance ToQuery DescribeNetworkInterfacePermissions
 --
 --
 -- /See:/ 'describeNetworkInterfacePermissionsResponse' smart constructor.
-data DescribeNetworkInterfacePermissionsResponse = DescribeNetworkInterfacePermissionsResponse'
-  { _dnipsrsNetworkInterfacePermissions :: !(Maybe [NetworkInterfacePermission])
-  , _dnipsrsNextToken                   :: !(Maybe Text)
-  , _dnipsrsResponseStatus              :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeNetworkInterfacePermissionsResponse = DescribeNetworkInterfacePermissionsResponse'{_dnipsrsNetworkInterfacePermissions
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    [NetworkInterfacePermission]),
+                                                                                                _dnipsrsNextToken
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _dnipsrsResponseStatus
+                                                                                                ::
+                                                                                                !Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DescribeNetworkInterfacePermissionsResponse' with the minimum fields required to make a request.
 --
@@ -168,13 +198,13 @@ data DescribeNetworkInterfacePermissionsResponse = DescribeNetworkInterfacePermi
 describeNetworkInterfacePermissionsResponse
     :: Int -- ^ 'dnipsrsResponseStatus'
     -> DescribeNetworkInterfacePermissionsResponse
-describeNetworkInterfacePermissionsResponse pResponseStatus_ =
-  DescribeNetworkInterfacePermissionsResponse'
-    { _dnipsrsNetworkInterfacePermissions = Nothing
-    , _dnipsrsNextToken = Nothing
-    , _dnipsrsResponseStatus = pResponseStatus_
-    }
-
+describeNetworkInterfacePermissionsResponse
+  pResponseStatus_
+  = DescribeNetworkInterfacePermissionsResponse'{_dnipsrsNetworkInterfacePermissions
+                                                   = Nothing,
+                                                 _dnipsrsNextToken = Nothing,
+                                                 _dnipsrsResponseStatus =
+                                                   pResponseStatus_}
 
 -- | The network interface permissions.
 dnipsrsNetworkInterfacePermissions :: Lens' DescribeNetworkInterfacePermissionsResponse [NetworkInterfacePermission]

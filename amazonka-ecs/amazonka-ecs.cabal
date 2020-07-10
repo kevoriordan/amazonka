@@ -45,47 +45,177 @@ library
 
     exposed-modules:
           Network.AWS.ECS
+        , Network.AWS.ECS.CreateCapacityProvider
         , Network.AWS.ECS.CreateCluster
         , Network.AWS.ECS.CreateService
+        , Network.AWS.ECS.CreateTaskSet
+        , Network.AWS.ECS.DeleteAccountSetting
         , Network.AWS.ECS.DeleteAttributes
         , Network.AWS.ECS.DeleteCluster
         , Network.AWS.ECS.DeleteService
+        , Network.AWS.ECS.DeleteTaskSet
         , Network.AWS.ECS.DeregisterContainerInstance
         , Network.AWS.ECS.DeregisterTaskDefinition
+        , Network.AWS.ECS.DescribeCapacityProviders
         , Network.AWS.ECS.DescribeClusters
         , Network.AWS.ECS.DescribeContainerInstances
         , Network.AWS.ECS.DescribeServices
         , Network.AWS.ECS.DescribeTaskDefinition
+        , Network.AWS.ECS.DescribeTaskSets
         , Network.AWS.ECS.DescribeTasks
         , Network.AWS.ECS.DiscoverPollEndpoint
+        , Network.AWS.ECS.ListAccountSettings
         , Network.AWS.ECS.ListAttributes
         , Network.AWS.ECS.ListClusters
         , Network.AWS.ECS.ListContainerInstances
         , Network.AWS.ECS.ListServices
+        , Network.AWS.ECS.ListTagsForResource
         , Network.AWS.ECS.ListTaskDefinitionFamilies
         , Network.AWS.ECS.ListTaskDefinitions
         , Network.AWS.ECS.ListTasks
+        , Network.AWS.ECS.PutAccountSetting
+        , Network.AWS.ECS.PutAccountSettingDefault
         , Network.AWS.ECS.PutAttributes
+        , Network.AWS.ECS.PutClusterCapacityProviders
         , Network.AWS.ECS.RegisterContainerInstance
         , Network.AWS.ECS.RegisterTaskDefinition
         , Network.AWS.ECS.RunTask
         , Network.AWS.ECS.StartTask
         , Network.AWS.ECS.StopTask
+        , Network.AWS.ECS.SubmitAttachmentStateChanges
         , Network.AWS.ECS.SubmitContainerStateChange
         , Network.AWS.ECS.SubmitTaskStateChange
+        , Network.AWS.ECS.TagResource
         , Network.AWS.ECS.Types
+        , Network.AWS.ECS.UntagResource
+        , Network.AWS.ECS.UpdateClusterSettings
         , Network.AWS.ECS.UpdateContainerAgent
         , Network.AWS.ECS.UpdateContainerInstancesState
         , Network.AWS.ECS.UpdateService
+        , Network.AWS.ECS.UpdateServicePrimaryTaskSet
+        , Network.AWS.ECS.UpdateTaskSet
         , Network.AWS.ECS.Waiters
 
     other-modules:
-          Network.AWS.ECS.Types.Product
-        , Network.AWS.ECS.Types.Sum
+          Network.AWS.ECS.Types.AWSVPCConfiguration
+        , Network.AWS.ECS.Types.AgentUpdateStatus
+        , Network.AWS.ECS.Types.AssignPublicIP
+        , Network.AWS.ECS.Types.Attachment
+        , Network.AWS.ECS.Types.AttachmentStateChange
+        , Network.AWS.ECS.Types.Attribute
+        , Network.AWS.ECS.Types.AutoScalingGroupProvider
+        , Network.AWS.ECS.Types.CapacityProvider
+        , Network.AWS.ECS.Types.CapacityProviderField
+        , Network.AWS.ECS.Types.CapacityProviderStatus
+        , Network.AWS.ECS.Types.CapacityProviderStrategyItem
+        , Network.AWS.ECS.Types.Cluster
+        , Network.AWS.ECS.Types.ClusterField
+        , Network.AWS.ECS.Types.ClusterSetting
+        , Network.AWS.ECS.Types.ClusterSettingName
+        , Network.AWS.ECS.Types.Compatibility
+        , Network.AWS.ECS.Types.Connectivity
+        , Network.AWS.ECS.Types.Container
+        , Network.AWS.ECS.Types.ContainerCondition
+        , Network.AWS.ECS.Types.ContainerDefinition
+        , Network.AWS.ECS.Types.ContainerDependency
+        , Network.AWS.ECS.Types.ContainerInstance
+        , Network.AWS.ECS.Types.ContainerInstanceField
+        , Network.AWS.ECS.Types.ContainerInstanceStatus
+        , Network.AWS.ECS.Types.ContainerOverride
+        , Network.AWS.ECS.Types.ContainerService
+        , Network.AWS.ECS.Types.ContainerStateChange
+        , Network.AWS.ECS.Types.Deployment
+        , Network.AWS.ECS.Types.DeploymentConfiguration
+        , Network.AWS.ECS.Types.DeploymentController
+        , Network.AWS.ECS.Types.DeploymentControllerType
+        , Network.AWS.ECS.Types.DesiredStatus
+        , Network.AWS.ECS.Types.Device
+        , Network.AWS.ECS.Types.DeviceCgroupPermission
+        , Network.AWS.ECS.Types.DockerVolumeConfiguration
+        , Network.AWS.ECS.Types.EFSAuthorizationConfig
+        , Network.AWS.ECS.Types.EFSAuthorizationConfigIAM
+        , Network.AWS.ECS.Types.EFSTransitEncryption
+        , Network.AWS.ECS.Types.EFSVolumeConfiguration
+        , Network.AWS.ECS.Types.Failure
+        , Network.AWS.ECS.Types.FirelensConfiguration
+        , Network.AWS.ECS.Types.FirelensConfigurationType
+        , Network.AWS.ECS.Types.HealthCheck
+        , Network.AWS.ECS.Types.HealthStatus
+        , Network.AWS.ECS.Types.HostEntry
+        , Network.AWS.ECS.Types.HostVolumeProperties
+        , Network.AWS.ECS.Types.IPcMode
+        , Network.AWS.ECS.Types.InferenceAccelerator
+        , Network.AWS.ECS.Types.InferenceAcceleratorOverride
+        , Network.AWS.ECS.Types.KernelCapabilities
+        , Network.AWS.ECS.Types.KeyValuePair
+        , Network.AWS.ECS.Types.LaunchType
+        , Network.AWS.ECS.Types.LinuxParameters
+        , Network.AWS.ECS.Types.LoadBalancer
+        , Network.AWS.ECS.Types.LogConfiguration
+        , Network.AWS.ECS.Types.LogDriver
+        , Network.AWS.ECS.Types.ManagedScaling
+        , Network.AWS.ECS.Types.ManagedScalingStatus
+        , Network.AWS.ECS.Types.ManagedTerminationProtection
+        , Network.AWS.ECS.Types.MountPoint
+        , Network.AWS.ECS.Types.NetworkBinding
+        , Network.AWS.ECS.Types.NetworkConfiguration
+        , Network.AWS.ECS.Types.NetworkInterface
+        , Network.AWS.ECS.Types.NetworkMode
+        , Network.AWS.ECS.Types.PidMode
+        , Network.AWS.ECS.Types.PlacementConstraint
+        , Network.AWS.ECS.Types.PlacementConstraintType
+        , Network.AWS.ECS.Types.PlacementStrategy
+        , Network.AWS.ECS.Types.PlacementStrategyType
+        , Network.AWS.ECS.Types.PlatformDevice
+        , Network.AWS.ECS.Types.PlatformDeviceType
+        , Network.AWS.ECS.Types.PortMapping
+        , Network.AWS.ECS.Types.Product
+        , Network.AWS.ECS.Types.PropagateTags
+        , Network.AWS.ECS.Types.ProxyConfiguration
+        , Network.AWS.ECS.Types.ProxyConfigurationType
+        , Network.AWS.ECS.Types.RepositoryCredentials
+        , Network.AWS.ECS.Types.Resource
+        , Network.AWS.ECS.Types.ResourceRequirement
+        , Network.AWS.ECS.Types.ResourceType
+        , Network.AWS.ECS.Types.Scale
+        , Network.AWS.ECS.Types.ScaleUnit
+        , Network.AWS.ECS.Types.SchedulingStrategy
+        , Network.AWS.ECS.Types.Scope
+        , Network.AWS.ECS.Types.Secret
+        , Network.AWS.ECS.Types.ServiceEvent
+        , Network.AWS.ECS.Types.ServiceField
+        , Network.AWS.ECS.Types.ServiceRegistry
+        , Network.AWS.ECS.Types.Setting
+        , Network.AWS.ECS.Types.SettingName
+        , Network.AWS.ECS.Types.SortOrder
+        , Network.AWS.ECS.Types.StabilityStatus
+        , Network.AWS.ECS.Types.SystemControl
+        , Network.AWS.ECS.Types.Tag
+        , Network.AWS.ECS.Types.TargetType
+        , Network.AWS.ECS.Types.Task
+        , Network.AWS.ECS.Types.TaskDefinition
+        , Network.AWS.ECS.Types.TaskDefinitionFamilyStatus
+        , Network.AWS.ECS.Types.TaskDefinitionField
+        , Network.AWS.ECS.Types.TaskDefinitionPlacementConstraint
+        , Network.AWS.ECS.Types.TaskDefinitionPlacementConstraintType
+        , Network.AWS.ECS.Types.TaskDefinitionStatus
+        , Network.AWS.ECS.Types.TaskField
+        , Network.AWS.ECS.Types.TaskOverride
+        , Network.AWS.ECS.Types.TaskSet
+        , Network.AWS.ECS.Types.TaskSetField
+        , Network.AWS.ECS.Types.TaskStopCode
+        , Network.AWS.ECS.Types.Tmpfs
+        , Network.AWS.ECS.Types.TransportProtocol
+        , Network.AWS.ECS.Types.Ulimit
+        , Network.AWS.ECS.Types.UlimitName
+        , Network.AWS.ECS.Types.VersionInfo
+        , Network.AWS.ECS.Types.Volume
+        , Network.AWS.ECS.Types.VolumeFrom
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-ecs-test
     type:              exitcode-stdio-1.0
@@ -109,6 +239,7 @@ test-suite amazonka-ecs-test
         , amazonka-ecs
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

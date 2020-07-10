@@ -56,13 +56,15 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listCertificatesByCA' smart constructor.
-data ListCertificatesByCA = ListCertificatesByCA'
-  { _lcbcaMarker          :: !(Maybe Text)
-  , _lcbcaAscendingOrder  :: !(Maybe Bool)
-  , _lcbcaPageSize        :: !(Maybe Nat)
-  , _lcbcaCaCertificateId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCertificatesByCA = ListCertificatesByCA'{_lcbcaMarker
+                                                  :: !(Maybe Text),
+                                                  _lcbcaAscendingOrder ::
+                                                  !(Maybe Bool),
+                                                  _lcbcaPageSize ::
+                                                  !(Maybe Nat),
+                                                  _lcbcaCaCertificateId ::
+                                                  !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCertificatesByCA' with the minimum fields required to make a request.
 --
@@ -78,14 +80,11 @@ data ListCertificatesByCA = ListCertificatesByCA'
 listCertificatesByCA
     :: Text -- ^ 'lcbcaCaCertificateId'
     -> ListCertificatesByCA
-listCertificatesByCA pCaCertificateId_ =
-  ListCertificatesByCA'
-    { _lcbcaMarker = Nothing
-    , _lcbcaAscendingOrder = Nothing
-    , _lcbcaPageSize = Nothing
-    , _lcbcaCaCertificateId = pCaCertificateId_
-    }
-
+listCertificatesByCA pCaCertificateId_
+  = ListCertificatesByCA'{_lcbcaMarker = Nothing,
+                          _lcbcaAscendingOrder = Nothing,
+                          _lcbcaPageSize = Nothing,
+                          _lcbcaCaCertificateId = pCaCertificateId_}
 
 -- | The marker for the next set of results.
 lcbcaMarker :: Lens' ListCertificatesByCA (Maybe Text)
@@ -146,12 +145,17 @@ instance ToQuery ListCertificatesByCA where
 --
 --
 -- /See:/ 'listCertificatesByCAResponse' smart constructor.
-data ListCertificatesByCAResponse = ListCertificatesByCAResponse'
-  { _lcbcarsCertificates   :: !(Maybe [Certificate])
-  , _lcbcarsNextMarker     :: !(Maybe Text)
-  , _lcbcarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCertificatesByCAResponse = ListCertificatesByCAResponse'{_lcbcarsCertificates
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Certificate]),
+                                                                  _lcbcarsNextMarker
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lcbcarsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListCertificatesByCAResponse' with the minimum fields required to make a request.
 --
@@ -165,13 +169,11 @@ data ListCertificatesByCAResponse = ListCertificatesByCAResponse'
 listCertificatesByCAResponse
     :: Int -- ^ 'lcbcarsResponseStatus'
     -> ListCertificatesByCAResponse
-listCertificatesByCAResponse pResponseStatus_ =
-  ListCertificatesByCAResponse'
-    { _lcbcarsCertificates = Nothing
-    , _lcbcarsNextMarker = Nothing
-    , _lcbcarsResponseStatus = pResponseStatus_
-    }
-
+listCertificatesByCAResponse pResponseStatus_
+  = ListCertificatesByCAResponse'{_lcbcarsCertificates
+                                    = Nothing,
+                                  _lcbcarsNextMarker = Nothing,
+                                  _lcbcarsResponseStatus = pResponseStatus_}
 
 -- | The device certificates signed by the specified CA certificate.
 lcbcarsCertificates :: Lens' ListCertificatesByCAResponse [Certificate]

@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteParameterGroup' smart constructor.
-newtype DeleteParameterGroup = DeleteParameterGroup'
-  { _dpgParameterGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteParameterGroup = DeleteParameterGroup'{_dpgParameterGroupName
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteParameterGroup' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype DeleteParameterGroup = DeleteParameterGroup'
 deleteParameterGroup
     :: Text -- ^ 'dpgParameterGroupName'
     -> DeleteParameterGroup
-deleteParameterGroup pParameterGroupName_ =
-  DeleteParameterGroup' {_dpgParameterGroupName = pParameterGroupName_}
-
+deleteParameterGroup pParameterGroupName_
+  = DeleteParameterGroup'{_dpgParameterGroupName =
+                            pParameterGroupName_}
 
 -- | The name of the parameter group to delete.
 dpgParameterGroupName :: Lens' DeleteParameterGroup Text
@@ -103,11 +103,13 @@ instance ToQuery DeleteParameterGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteParameterGroupResponse' smart constructor.
-data DeleteParameterGroupResponse = DeleteParameterGroupResponse'
-  { _dpgrsDeletionMessage :: !(Maybe Text)
-  , _dpgrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteParameterGroupResponse = DeleteParameterGroupResponse'{_dpgrsDeletionMessage
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dpgrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteParameterGroupResponse' with the minimum fields required to make a request.
 --
@@ -119,10 +121,10 @@ data DeleteParameterGroupResponse = DeleteParameterGroupResponse'
 deleteParameterGroupResponse
     :: Int -- ^ 'dpgrsResponseStatus'
     -> DeleteParameterGroupResponse
-deleteParameterGroupResponse pResponseStatus_ =
-  DeleteParameterGroupResponse'
-    {_dpgrsDeletionMessage = Nothing, _dpgrsResponseStatus = pResponseStatus_}
-
+deleteParameterGroupResponse pResponseStatus_
+  = DeleteParameterGroupResponse'{_dpgrsDeletionMessage
+                                    = Nothing,
+                                  _dpgrsResponseStatus = pResponseStatus_}
 
 -- | A user-specified message for this action (i.e., a reason for deleting the parameter group).
 dpgrsDeletionMessage :: Lens' DeleteParameterGroupResponse (Maybe Text)

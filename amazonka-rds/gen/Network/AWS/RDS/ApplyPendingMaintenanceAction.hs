@@ -46,25 +46,27 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'applyPendingMaintenanceAction' smart constructor.
-data ApplyPendingMaintenanceAction = ApplyPendingMaintenanceAction'
-  { _apmaResourceIdentifier :: !Text
-  , _apmaApplyAction        :: !Text
-  , _apmaOptInType          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ApplyPendingMaintenanceAction = ApplyPendingMaintenanceAction'{_apmaResourceIdentifier
+                                                                    :: !Text,
+                                                                    _apmaApplyAction
+                                                                    :: !Text,
+                                                                    _apmaOptInType
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ApplyPendingMaintenanceAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apmaResourceIdentifier' - The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to. For information about creating an ARN, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing Constructing an RDS Amazon Resource Name (ARN)> .
+-- * 'apmaResourceIdentifier' - The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to. For information about creating an ARN, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing Constructing an RDS Amazon Resource Name (ARN)> .
 --
--- * 'apmaApplyAction' - The pending maintenance action to apply to this resource. Valid values: @system-update@ , @db-upgrade@
+-- * 'apmaApplyAction' - The pending maintenance action to apply to this resource. Valid values: @system-update@ , @db-upgrade@ , @hardware-maintenance@ , @ca-certificate-rotation@ 
 --
 -- * 'apmaOptInType' - A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in request of type @immediate@ can't be undone. Valid values:     * @immediate@ - Apply the maintenance action immediately.     * @next-maintenance@ - Apply the maintenance action during the next maintenance window for the resource.     * @undo-opt-in@ - Cancel any existing @next-maintenance@ opt-in requests.
 applyPendingMaintenanceAction
@@ -72,19 +74,18 @@ applyPendingMaintenanceAction
     -> Text -- ^ 'apmaApplyAction'
     -> Text -- ^ 'apmaOptInType'
     -> ApplyPendingMaintenanceAction
-applyPendingMaintenanceAction pResourceIdentifier_ pApplyAction_ pOptInType_ =
-  ApplyPendingMaintenanceAction'
-    { _apmaResourceIdentifier = pResourceIdentifier_
-    , _apmaApplyAction = pApplyAction_
-    , _apmaOptInType = pOptInType_
-    }
+applyPendingMaintenanceAction pResourceIdentifier_
+  pApplyAction_ pOptInType_
+  = ApplyPendingMaintenanceAction'{_apmaResourceIdentifier
+                                     = pResourceIdentifier_,
+                                   _apmaApplyAction = pApplyAction_,
+                                   _apmaOptInType = pOptInType_}
 
-
--- | The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to. For information about creating an ARN, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing Constructing an RDS Amazon Resource Name (ARN)> .
+-- | The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to. For information about creating an ARN, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing Constructing an RDS Amazon Resource Name (ARN)> .
 apmaResourceIdentifier :: Lens' ApplyPendingMaintenanceAction Text
 apmaResourceIdentifier = lens _apmaResourceIdentifier (\ s a -> s{_apmaResourceIdentifier = a})
 
--- | The pending maintenance action to apply to this resource. Valid values: @system-update@ , @db-upgrade@
+-- | The pending maintenance action to apply to this resource. Valid values: @system-update@ , @db-upgrade@ , @hardware-maintenance@ , @ca-certificate-rotation@ 
 apmaApplyAction :: Lens' ApplyPendingMaintenanceAction Text
 apmaApplyAction = lens _apmaApplyAction (\ s a -> s{_apmaApplyAction = a})
 
@@ -127,11 +128,15 @@ instance ToQuery ApplyPendingMaintenanceAction where
                "OptInType" =: _apmaOptInType]
 
 -- | /See:/ 'applyPendingMaintenanceActionResponse' smart constructor.
-data ApplyPendingMaintenanceActionResponse = ApplyPendingMaintenanceActionResponse'
-  { _apmarsResourcePendingMaintenanceActions :: !(Maybe ResourcePendingMaintenanceActions)
-  , _apmarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ApplyPendingMaintenanceActionResponse = ApplyPendingMaintenanceActionResponse'{_apmarsResourcePendingMaintenanceActions
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        ResourcePendingMaintenanceActions),
+                                                                                    _apmarsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'ApplyPendingMaintenanceActionResponse' with the minimum fields required to make a request.
 --
@@ -143,12 +148,12 @@ data ApplyPendingMaintenanceActionResponse = ApplyPendingMaintenanceActionRespon
 applyPendingMaintenanceActionResponse
     :: Int -- ^ 'apmarsResponseStatus'
     -> ApplyPendingMaintenanceActionResponse
-applyPendingMaintenanceActionResponse pResponseStatus_ =
-  ApplyPendingMaintenanceActionResponse'
-    { _apmarsResourcePendingMaintenanceActions = Nothing
-    , _apmarsResponseStatus = pResponseStatus_
-    }
-
+applyPendingMaintenanceActionResponse
+  pResponseStatus_
+  = ApplyPendingMaintenanceActionResponse'{_apmarsResourcePendingMaintenanceActions
+                                             = Nothing,
+                                           _apmarsResponseStatus =
+                                             pResponseStatus_}
 
 -- | Undocumented member.
 apmarsResourcePendingMaintenanceActions :: Lens' ApplyPendingMaintenanceActionResponse (Maybe ResourcePendingMaintenanceActions)

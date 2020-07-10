@@ -21,6 +21,8 @@
 -- Query inventory information.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.GetInventory
     (
     -- * Creating a Request
@@ -43,6 +45,7 @@ module Network.AWS.SSM.GetInventory
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -50,14 +53,15 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getInventory' smart constructor.
-data GetInventory = GetInventory'
-  { _giAggregators      :: !(Maybe (List1 InventoryAggregator))
-  , _giFilters          :: !(Maybe (List1 InventoryFilter))
-  , _giResultAttributes :: !(Maybe (List1 ResultAttribute))
-  , _giNextToken        :: !(Maybe Text)
-  , _giMaxResults       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInventory = GetInventory'{_giAggregators ::
+                                  !(Maybe (List1 InventoryAggregator)),
+                                  _giFilters ::
+                                  !(Maybe (List1 InventoryFilter)),
+                                  _giResultAttributes ::
+                                  !(Maybe (List1 ResultAttribute)),
+                                  _giNextToken :: !(Maybe Text),
+                                  _giMaxResults :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetInventory' with the minimum fields required to make a request.
 --
@@ -74,15 +78,10 @@ data GetInventory = GetInventory'
 -- * 'giMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 getInventory
     :: GetInventory
-getInventory =
-  GetInventory'
-    { _giAggregators = Nothing
-    , _giFilters = Nothing
-    , _giResultAttributes = Nothing
-    , _giNextToken = Nothing
-    , _giMaxResults = Nothing
-    }
-
+getInventory
+  = GetInventory'{_giAggregators = Nothing,
+                  _giFilters = Nothing, _giResultAttributes = Nothing,
+                  _giNextToken = Nothing, _giMaxResults = Nothing}
 
 -- | Returns counts of inventory types based on one or more expressions. For example, if you aggregate by using an expression that uses the @AWS:InstanceInformation.PlatformType@ type, you can see a count of how many Windows and Linux instances exist in your inventoried fleet.
 giAggregators :: Lens' GetInventory (Maybe (NonEmpty InventoryAggregator))
@@ -103,6 +102,13 @@ giNextToken = lens _giNextToken (\ s a -> s{_giNextToken = a})
 -- | The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 giMaxResults :: Lens' GetInventory (Maybe Natural)
 giMaxResults = lens _giMaxResults (\ s a -> s{_giMaxResults = a}) . mapping _Nat
+
+instance AWSPager GetInventory where
+        page rq rs
+          | stop (rs ^. girsNextToken) = Nothing
+          | stop (rs ^. girsEntities) = Nothing
+          | otherwise =
+            Just $ rq & giNextToken .~ rs ^. girsNextToken
 
 instance AWSRequest GetInventory where
         type Rs GetInventory = GetInventoryResponse
@@ -144,18 +150,20 @@ instance ToQuery GetInventory where
         toQuery = const mempty
 
 -- | /See:/ 'getInventoryResponse' smart constructor.
-data GetInventoryResponse = GetInventoryResponse'
-  { _girsEntities       :: !(Maybe [InventoryResultEntity])
-  , _girsNextToken      :: !(Maybe Text)
-  , _girsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInventoryResponse = GetInventoryResponse'{_girsEntities
+                                                  ::
+                                                  !(Maybe
+                                                      [InventoryResultEntity]),
+                                                  _girsNextToken ::
+                                                  !(Maybe Text),
+                                                  _girsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetInventoryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'girsEntities' - Collection of inventory entities such as a collection of instance inventory.
+-- * 'girsEntities' - Collection of inventory entities such as a collection of instance inventory. 
 --
 -- * 'girsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 --
@@ -163,15 +171,12 @@ data GetInventoryResponse = GetInventoryResponse'
 getInventoryResponse
     :: Int -- ^ 'girsResponseStatus'
     -> GetInventoryResponse
-getInventoryResponse pResponseStatus_ =
-  GetInventoryResponse'
-    { _girsEntities = Nothing
-    , _girsNextToken = Nothing
-    , _girsResponseStatus = pResponseStatus_
-    }
+getInventoryResponse pResponseStatus_
+  = GetInventoryResponse'{_girsEntities = Nothing,
+                          _girsNextToken = Nothing,
+                          _girsResponseStatus = pResponseStatus_}
 
-
--- | Collection of inventory entities such as a collection of instance inventory.
+-- | Collection of inventory entities such as a collection of instance inventory. 
 girsEntities :: Lens' GetInventoryResponse [InventoryResultEntity]
 girsEntities = lens _girsEntities (\ s a -> s{_girsEntities = a}) . _Default . _Coerce
 

@@ -11,9 +11,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Amazon Simple Email Service__
+-- __Amazon Simple Email Service__ 
 --
--- This is the API Reference for <https://aws.amazon.com/ses/ Amazon Simple Email Service> (Amazon SES). This documentation is intended to be used in conjunction with the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html Amazon SES Developer Guide> .
+-- This document contains reference information for the <https://aws.amazon.com/ses/ Amazon Simple Email Service> (Amazon SES) API, version 2010-12-01. This document is best used in conjunction with the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html Amazon SES Developer Guide> . 
 --
 module Network.AWS.SES
     (
@@ -23,35 +23,50 @@ module Network.AWS.SES
     -- * Errors
     -- $errors
 
-    -- ** InvalidConfigurationSetException
-    , _InvalidConfigurationSetException
+    -- ** TrackingOptionsDoesNotExistException
+    , _TrackingOptionsDoesNotExistException
 
-    -- ** InvalidSNSDestinationException
-    , _InvalidSNSDestinationException
+    -- ** InvalidFirehoseDestinationException
+    , _InvalidFirehoseDestinationException
 
-    -- ** TemplateDoesNotExistException
-    , _TemplateDoesNotExistException
-
-    -- ** ConfigurationSetSendingPausedException
-    , _ConfigurationSetSendingPausedException
-
-    -- ** CannotDeleteException
-    , _CannotDeleteException
-
-    -- ** ProductionAccessNotGrantedException
-    , _ProductionAccessNotGrantedException
-
-    -- ** RuleDoesNotExistException
-    , _RuleDoesNotExistException
+    -- ** InvalidLambdaFunctionException
+    , _InvalidLambdaFunctionException
 
     -- ** MessageRejected
     , _MessageRejected
 
-    -- ** InvalidRenderingParameterException
-    , _InvalidRenderingParameterException
+    -- ** RuleDoesNotExistException
+    , _RuleDoesNotExistException
 
-    -- ** MissingRenderingAttributeException
-    , _MissingRenderingAttributeException
+    -- ** ProductionAccessNotGrantedException
+    , _ProductionAccessNotGrantedException
+
+    -- ** CustomVerificationEmailTemplateDoesNotExistException
+    , _CustomVerificationEmailTemplateDoesNotExistException
+
+    -- ** CannotDeleteException
+    , _CannotDeleteException
+
+    -- ** TemplateDoesNotExistException
+    , _TemplateDoesNotExistException
+
+    -- ** CustomVerificationEmailInvalidContentException
+    , _CustomVerificationEmailInvalidContentException
+
+    -- ** ConfigurationSetDoesNotExistException
+    , _ConfigurationSetDoesNotExistException
+
+    -- ** TrackingOptionsAlreadyExistsException
+    , _TrackingOptionsAlreadyExistsException
+
+    -- ** InvalidS3ConfigurationException
+    , _InvalidS3ConfigurationException
+
+    -- ** ConfigurationSetAlreadyExistsException
+    , _ConfigurationSetAlreadyExistsException
+
+    -- ** MailFromDomainNotVerifiedException
+    , _MailFromDomainNotVerifiedException
 
     -- ** FromEmailAddressNotVerifiedException
     , _FromEmailAddressNotVerifiedException
@@ -59,20 +74,23 @@ module Network.AWS.SES
     -- ** RuleSetDoesNotExistException
     , _RuleSetDoesNotExistException
 
-    -- ** MailFromDomainNotVerifiedException
-    , _MailFromDomainNotVerifiedException
+    -- ** MissingRenderingAttributeException
+    , _MissingRenderingAttributeException
 
-    -- ** InvalidFirehoseDestinationException
-    , _InvalidFirehoseDestinationException
+    -- ** InvalidRenderingParameterException
+    , _InvalidRenderingParameterException
 
-    -- ** ConfigurationSetAlreadyExistsException
-    , _ConfigurationSetAlreadyExistsException
+    -- ** InvalidDeliveryOptionsException
+    , _InvalidDeliveryOptionsException
 
-    -- ** CustomVerificationEmailInvalidContentException
-    , _CustomVerificationEmailInvalidContentException
+    -- ** InvalidCloudWatchDestinationException
+    , _InvalidCloudWatchDestinationException
 
-    -- ** InvalidTrackingOptionsException
-    , _InvalidTrackingOptionsException
+    -- ** CustomVerificationEmailTemplateAlreadyExistsException
+    , _CustomVerificationEmailTemplateAlreadyExistsException
+
+    -- ** ConfigurationSetSendingPausedException
+    , _ConfigurationSetSendingPausedException
 
     -- ** AccountSendingPausedException
     , _AccountSendingPausedException
@@ -80,47 +98,32 @@ module Network.AWS.SES
     -- ** EventDestinationDoesNotExistException
     , _EventDestinationDoesNotExistException
 
-    -- ** CustomVerificationEmailTemplateAlreadyExistsException
-    , _CustomVerificationEmailTemplateAlreadyExistsException
+    -- ** InvalidConfigurationSetException
+    , _InvalidConfigurationSetException
 
-    -- ** CustomVerificationEmailTemplateDoesNotExistException
-    , _CustomVerificationEmailTemplateDoesNotExistException
+    -- ** InvalidSNSDestinationException
+    , _InvalidSNSDestinationException
 
-    -- ** InvalidCloudWatchDestinationException
-    , _InvalidCloudWatchDestinationException
-
-    -- ** InvalidLambdaFunctionException
-    , _InvalidLambdaFunctionException
-
-    -- ** TrackingOptionsDoesNotExistException
-    , _TrackingOptionsDoesNotExistException
-
-    -- ** InvalidTemplateException
-    , _InvalidTemplateException
-
-    -- ** ConfigurationSetDoesNotExistException
-    , _ConfigurationSetDoesNotExistException
-
-    -- ** InvalidPolicyException
-    , _InvalidPolicyException
-
-    -- ** InvalidS3ConfigurationException
-    , _InvalidS3ConfigurationException
-
-    -- ** TrackingOptionsAlreadyExistsException
-    , _TrackingOptionsAlreadyExistsException
+    -- ** LimitExceededException
+    , _LimitExceededException
 
     -- ** InvalidSNSTopicException
     , _InvalidSNSTopicException
 
-    -- ** EventDestinationAlreadyExistsException
-    , _EventDestinationAlreadyExistsException
-
     -- ** AlreadyExistsException
     , _AlreadyExistsException
 
-    -- ** LimitExceededException
-    , _LimitExceededException
+    -- ** EventDestinationAlreadyExistsException
+    , _EventDestinationAlreadyExistsException
+
+    -- ** InvalidTrackingOptionsException
+    , _InvalidTrackingOptionsException
+
+    -- ** InvalidTemplateException
+    , _InvalidTemplateException
+
+    -- ** InvalidPolicyException
+    , _InvalidPolicyException
 
     -- * Waiters
     -- $waiters
@@ -128,214 +131,217 @@ module Network.AWS.SES
     -- * Operations
     -- $operations
 
-    -- ** CreateTemplate
+    -- ** CreateTemplate 
     , module Network.AWS.SES.CreateTemplate
 
-    -- ** DeleteConfigurationSetTrackingOptions
+    -- ** DeleteConfigurationSetTrackingOptions 
     , module Network.AWS.SES.DeleteConfigurationSetTrackingOptions
 
-    -- ** UpdateConfigurationSetTrackingOptions
+    -- ** UpdateConfigurationSetTrackingOptions 
     , module Network.AWS.SES.UpdateConfigurationSetTrackingOptions
 
-    -- ** CreateReceiptRuleSet
+    -- ** CreateReceiptRuleSet 
     , module Network.AWS.SES.CreateReceiptRuleSet
 
-    -- ** SetIdentityHeadersInNotificationsEnabled
+    -- ** SetIdentityHeadersInNotificationsEnabled 
     , module Network.AWS.SES.SetIdentityHeadersInNotificationsEnabled
 
-    -- ** GetSendQuota
+    -- ** GetSendQuota 
     , module Network.AWS.SES.GetSendQuota
 
-    -- ** DescribeConfigurationSet
+    -- ** PutConfigurationSetDeliveryOptions 
+    , module Network.AWS.SES.PutConfigurationSetDeliveryOptions
+
+    -- ** DescribeConfigurationSet 
     , module Network.AWS.SES.DescribeConfigurationSet
 
-    -- ** PutIdentityPolicy
+    -- ** PutIdentityPolicy 
     , module Network.AWS.SES.PutIdentityPolicy
 
-    -- ** DeleteCustomVerificationEmailTemplate
+    -- ** DeleteCustomVerificationEmailTemplate 
     , module Network.AWS.SES.DeleteCustomVerificationEmailTemplate
 
-    -- ** DeleteIdentityPolicy
+    -- ** DeleteIdentityPolicy 
     , module Network.AWS.SES.DeleteIdentityPolicy
 
-    -- ** UpdateCustomVerificationEmailTemplate
+    -- ** UpdateCustomVerificationEmailTemplate 
     , module Network.AWS.SES.UpdateCustomVerificationEmailTemplate
 
-    -- ** SendCustomVerificationEmail
+    -- ** SendCustomVerificationEmail 
     , module Network.AWS.SES.SendCustomVerificationEmail
 
-    -- ** GetIdentityNotificationAttributes
+    -- ** GetIdentityNotificationAttributes 
     , module Network.AWS.SES.GetIdentityNotificationAttributes
 
-    -- ** UpdateConfigurationSetReputationMetricsEnabled
+    -- ** UpdateConfigurationSetReputationMetricsEnabled 
     , module Network.AWS.SES.UpdateConfigurationSetReputationMetricsEnabled
 
-    -- ** ListIdentityPolicies
+    -- ** ListIdentityPolicies 
     , module Network.AWS.SES.ListIdentityPolicies
 
-    -- ** SetIdentityDkimEnabled
+    -- ** SetIdentityDkimEnabled 
     , module Network.AWS.SES.SetIdentityDkimEnabled
 
-    -- ** ListReceiptFilters
+    -- ** ListReceiptFilters 
     , module Network.AWS.SES.ListReceiptFilters
 
-    -- ** DescribeReceiptRuleSet
+    -- ** DescribeReceiptRuleSet 
     , module Network.AWS.SES.DescribeReceiptRuleSet
 
-    -- ** GetIdentityMailFromDomainAttributes
+    -- ** GetIdentityMailFromDomainAttributes 
     , module Network.AWS.SES.GetIdentityMailFromDomainAttributes
 
-    -- ** CreateReceiptFilter
+    -- ** CreateReceiptFilter 
     , module Network.AWS.SES.CreateReceiptFilter
 
-    -- ** UpdateConfigurationSetEventDestination
+    -- ** UpdateConfigurationSetEventDestination 
     , module Network.AWS.SES.UpdateConfigurationSetEventDestination
 
-    -- ** DeleteConfigurationSetEventDestination
+    -- ** DeleteConfigurationSetEventDestination 
     , module Network.AWS.SES.DeleteConfigurationSetEventDestination
 
-    -- ** SetIdentityMailFromDomain
+    -- ** SetIdentityMailFromDomain 
     , module Network.AWS.SES.SetIdentityMailFromDomain
 
-    -- ** SetIdentityFeedbackForwardingEnabled
+    -- ** SetIdentityFeedbackForwardingEnabled 
     , module Network.AWS.SES.SetIdentityFeedbackForwardingEnabled
 
-    -- ** ListConfigurationSets
+    -- ** ListConfigurationSets (Paginated)
     , module Network.AWS.SES.ListConfigurationSets
 
-    -- ** DeleteConfigurationSet
+    -- ** DeleteConfigurationSet 
     , module Network.AWS.SES.DeleteConfigurationSet
 
-    -- ** GetIdentityVerificationAttributes
+    -- ** GetIdentityVerificationAttributes 
     , module Network.AWS.SES.GetIdentityVerificationAttributes
 
-    -- ** GetIdentityPolicies
+    -- ** GetIdentityPolicies 
     , module Network.AWS.SES.GetIdentityPolicies
 
-    -- ** ListTemplates
+    -- ** ListTemplates (Paginated)
     , module Network.AWS.SES.ListTemplates
 
-    -- ** VerifyDomainIdentity
+    -- ** VerifyDomainIdentity 
     , module Network.AWS.SES.VerifyDomainIdentity
 
-    -- ** UpdateTemplate
+    -- ** UpdateTemplate 
     , module Network.AWS.SES.UpdateTemplate
 
-    -- ** DeleteTemplate
+    -- ** DeleteTemplate 
     , module Network.AWS.SES.DeleteTemplate
 
-    -- ** ReorderReceiptRuleSet
+    -- ** ReorderReceiptRuleSet 
     , module Network.AWS.SES.ReorderReceiptRuleSet
 
-    -- ** ListReceiptRuleSets
+    -- ** ListReceiptRuleSets (Paginated)
     , module Network.AWS.SES.ListReceiptRuleSets
 
-    -- ** DeleteReceiptRuleSet
+    -- ** DeleteReceiptRuleSet 
     , module Network.AWS.SES.DeleteReceiptRuleSet
 
-    -- ** SetReceiptRulePosition
+    -- ** SetReceiptRulePosition 
     , module Network.AWS.SES.SetReceiptRulePosition
 
-    -- ** SendBounce
+    -- ** SendBounce 
     , module Network.AWS.SES.SendBounce
 
-    -- ** GetIdentityDkimAttributes
+    -- ** GetIdentityDkimAttributes 
     , module Network.AWS.SES.GetIdentityDkimAttributes
 
-    -- ** SendTemplatedEmail
+    -- ** SendTemplatedEmail 
     , module Network.AWS.SES.SendTemplatedEmail
 
-    -- ** VerifyDomainDkim
+    -- ** VerifyDomainDkim 
     , module Network.AWS.SES.VerifyDomainDkim
 
-    -- ** TestRenderTemplate
+    -- ** TestRenderTemplate 
     , module Network.AWS.SES.TestRenderTemplate
 
-    -- ** SendBulkTemplatedEmail
+    -- ** SendBulkTemplatedEmail 
     , module Network.AWS.SES.SendBulkTemplatedEmail
 
-    -- ** SendRawEmail
+    -- ** SendRawEmail 
     , module Network.AWS.SES.SendRawEmail
 
-    -- ** GetSendStatistics
+    -- ** GetSendStatistics 
     , module Network.AWS.SES.GetSendStatistics
 
     -- ** ListCustomVerificationEmailTemplates (Paginated)
     , module Network.AWS.SES.ListCustomVerificationEmailTemplates
 
-    -- ** DeleteIdentity
+    -- ** DeleteIdentity 
     , module Network.AWS.SES.DeleteIdentity
 
-    -- ** DescribeReceiptRule
+    -- ** DescribeReceiptRule 
     , module Network.AWS.SES.DescribeReceiptRule
 
     -- ** ListIdentities (Paginated)
     , module Network.AWS.SES.ListIdentities
 
-    -- ** UpdateConfigurationSetSendingEnabled
+    -- ** UpdateConfigurationSetSendingEnabled 
     , module Network.AWS.SES.UpdateConfigurationSetSendingEnabled
 
-    -- ** CreateCustomVerificationEmailTemplate
+    -- ** CreateCustomVerificationEmailTemplate 
     , module Network.AWS.SES.CreateCustomVerificationEmailTemplate
 
-    -- ** VerifyEmailIdentity
+    -- ** VerifyEmailIdentity 
     , module Network.AWS.SES.VerifyEmailIdentity
 
-    -- ** VerifyEmailAddress
+    -- ** VerifyEmailAddress 
     , module Network.AWS.SES.VerifyEmailAddress
 
-    -- ** DeleteVerifiedEmailAddress
+    -- ** DeleteVerifiedEmailAddress 
     , module Network.AWS.SES.DeleteVerifiedEmailAddress
 
-    -- ** DeleteReceiptFilter
+    -- ** DeleteReceiptFilter 
     , module Network.AWS.SES.DeleteReceiptFilter
 
-    -- ** ListVerifiedEmailAddresses
+    -- ** ListVerifiedEmailAddresses 
     , module Network.AWS.SES.ListVerifiedEmailAddresses
 
-    -- ** GetCustomVerificationEmailTemplate
+    -- ** GetCustomVerificationEmailTemplate 
     , module Network.AWS.SES.GetCustomVerificationEmailTemplate
 
-    -- ** SetIdentityNotificationTopic
+    -- ** SetIdentityNotificationTopic 
     , module Network.AWS.SES.SetIdentityNotificationTopic
 
-    -- ** SendEmail
+    -- ** SendEmail 
     , module Network.AWS.SES.SendEmail
 
-    -- ** DeleteReceiptRule
+    -- ** DeleteReceiptRule 
     , module Network.AWS.SES.DeleteReceiptRule
 
-    -- ** UpdateReceiptRule
+    -- ** UpdateReceiptRule 
     , module Network.AWS.SES.UpdateReceiptRule
 
-    -- ** CloneReceiptRuleSet
+    -- ** CloneReceiptRuleSet 
     , module Network.AWS.SES.CloneReceiptRuleSet
 
-    -- ** CreateConfigurationSetEventDestination
+    -- ** CreateConfigurationSetEventDestination 
     , module Network.AWS.SES.CreateConfigurationSetEventDestination
 
-    -- ** GetAccountSendingEnabled
+    -- ** GetAccountSendingEnabled 
     , module Network.AWS.SES.GetAccountSendingEnabled
 
-    -- ** CreateReceiptRule
+    -- ** CreateReceiptRule 
     , module Network.AWS.SES.CreateReceiptRule
 
-    -- ** GetTemplate
+    -- ** GetTemplate 
     , module Network.AWS.SES.GetTemplate
 
-    -- ** SetActiveReceiptRuleSet
+    -- ** SetActiveReceiptRuleSet 
     , module Network.AWS.SES.SetActiveReceiptRuleSet
 
-    -- ** CreateConfigurationSet
+    -- ** CreateConfigurationSet 
     , module Network.AWS.SES.CreateConfigurationSet
 
-    -- ** UpdateAccountSendingEnabled
+    -- ** UpdateAccountSendingEnabled 
     , module Network.AWS.SES.UpdateAccountSendingEnabled
 
-    -- ** CreateConfigurationSetTrackingOptions
+    -- ** CreateConfigurationSetTrackingOptions 
     , module Network.AWS.SES.CreateConfigurationSetTrackingOptions
 
-    -- ** DescribeActiveReceiptRuleSet
+    -- ** DescribeActiveReceiptRuleSet 
     , module Network.AWS.SES.DescribeActiveReceiptRuleSet
 
     -- * Types
@@ -462,6 +468,11 @@ module Network.AWS.SES
     , cvetFailureRedirectionURL
     , cvetTemplateSubject
     , cvetSuccessRedirectionURL
+
+    -- ** DeliveryOptions
+    , DeliveryOptions
+    , deliveryOptions
+    , doTLSPolicy
 
     -- ** Destination
     , Destination
@@ -713,6 +724,7 @@ import Network.AWS.SES.ListReceiptFilters
 import Network.AWS.SES.ListReceiptRuleSets
 import Network.AWS.SES.ListTemplates
 import Network.AWS.SES.ListVerifiedEmailAddresses
+import Network.AWS.SES.PutConfigurationSetDeliveryOptions
 import Network.AWS.SES.PutIdentityPolicy
 import Network.AWS.SES.ReorderReceiptRuleSet
 import Network.AWS.SES.SendBounce

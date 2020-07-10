@@ -45,10 +45,10 @@ import Network.AWS.Support.Types
 import Network.AWS.Support.Types.Product
 
 -- | /See:/ 'describeAttachment' smart constructor.
-newtype DescribeAttachment = DescribeAttachment'
-  { _daAttachmentId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeAttachment = DescribeAttachment'{_daAttachmentId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeAttachment' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype DescribeAttachment = DescribeAttachment'
 describeAttachment
     :: Text -- ^ 'daAttachmentId'
     -> DescribeAttachment
-describeAttachment pAttachmentId_ =
-  DescribeAttachment' {_daAttachmentId = pAttachmentId_}
-
+describeAttachment pAttachmentId_
+  = DescribeAttachment'{_daAttachmentId =
+                          pAttachmentId_}
 
 -- | The ID of the attachment to return. Attachment IDs are returned by the 'DescribeCommunications' operation.
 daAttachmentId :: Lens' DescribeAttachment Text
@@ -107,11 +107,14 @@ instance ToQuery DescribeAttachment where
 --
 --
 -- /See:/ 'describeAttachmentResponse' smart constructor.
-data DescribeAttachmentResponse = DescribeAttachmentResponse'
-  { _darsAttachment     :: !(Maybe Attachment)
-  , _darsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAttachmentResponse = DescribeAttachmentResponse'{_darsAttachment
+                                                              ::
+                                                              !(Maybe
+                                                                  Attachment),
+                                                              _darsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeAttachmentResponse' with the minimum fields required to make a request.
 --
@@ -123,10 +126,10 @@ data DescribeAttachmentResponse = DescribeAttachmentResponse'
 describeAttachmentResponse
     :: Int -- ^ 'darsResponseStatus'
     -> DescribeAttachmentResponse
-describeAttachmentResponse pResponseStatus_ =
-  DescribeAttachmentResponse'
-    {_darsAttachment = Nothing, _darsResponseStatus = pResponseStatus_}
-
+describeAttachmentResponse pResponseStatus_
+  = DescribeAttachmentResponse'{_darsAttachment =
+                                  Nothing,
+                                _darsResponseStatus = pResponseStatus_}
 
 -- | The attachment content and file name.
 darsAttachment :: Lens' DescribeAttachmentResponse (Maybe Attachment)

@@ -53,12 +53,26 @@ library
         , Network.AWS.DynamoDBStreams.Waiters
 
     other-modules:
-          Network.AWS.DynamoDBStreams.Types.Product
-        , Network.AWS.DynamoDBStreams.Types.Sum
+          Network.AWS.DynamoDBStreams.Types.AttributeValue
+        , Network.AWS.DynamoDBStreams.Types.Identity
+        , Network.AWS.DynamoDBStreams.Types.KeySchemaElement
+        , Network.AWS.DynamoDBStreams.Types.KeyType
+        , Network.AWS.DynamoDBStreams.Types.OperationType
+        , Network.AWS.DynamoDBStreams.Types.Product
+        , Network.AWS.DynamoDBStreams.Types.Record
+        , Network.AWS.DynamoDBStreams.Types.SequenceNumberRange
+        , Network.AWS.DynamoDBStreams.Types.Shard
+        , Network.AWS.DynamoDBStreams.Types.ShardIteratorType
+        , Network.AWS.DynamoDBStreams.Types.Stream
+        , Network.AWS.DynamoDBStreams.Types.StreamDescription
+        , Network.AWS.DynamoDBStreams.Types.StreamRecord
+        , Network.AWS.DynamoDBStreams.Types.StreamStatus
+        , Network.AWS.DynamoDBStreams.Types.StreamViewType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-dynamodb-streams-test
     type:              exitcode-stdio-1.0
@@ -82,6 +96,7 @@ test-suite amazonka-dynamodb-streams-test
         , amazonka-dynamodb-streams
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

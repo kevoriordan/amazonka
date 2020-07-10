@@ -47,11 +47,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'listWebACLs' smart constructor.
-data ListWebACLs = ListWebACLs'
-  { _lwaNextMarker :: !(Maybe Text)
-  , _lwaLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListWebACLs = ListWebACLs'{_lwaNextMarker ::
+                                !(Maybe Text),
+                                _lwaLimit :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListWebACLs' with the minimum fields required to make a request.
 --
@@ -62,8 +61,9 @@ data ListWebACLs = ListWebACLs'
 -- * 'lwaLimit' - Specifies the number of @WebACL@ objects that you want AWS WAF to return for this request. If you have more @WebACL@ objects than the number that you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @WebACL@ objects.
 listWebACLs
     :: ListWebACLs
-listWebACLs = ListWebACLs' {_lwaNextMarker = Nothing, _lwaLimit = Nothing}
-
+listWebACLs
+  = ListWebACLs'{_lwaNextMarker = Nothing,
+                 _lwaLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @WebACL@ objects than the number that you specify for @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @WebACL@ objects. For the second and subsequent @ListWebACLs@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @WebACL@ objects.
 lwaNextMarker :: Lens' ListWebACLs (Maybe Text)
@@ -111,12 +111,12 @@ instance ToQuery ListWebACLs where
         toQuery = const mempty
 
 -- | /See:/ 'listWebACLsResponse' smart constructor.
-data ListWebACLsResponse = ListWebACLsResponse'
-  { _lwarsWebACLs        :: !(Maybe [WebACLSummary])
-  , _lwarsNextMarker     :: !(Maybe Text)
-  , _lwarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListWebACLsResponse = ListWebACLsResponse'{_lwarsWebACLs
+                                                :: !(Maybe [WebACLSummary]),
+                                                _lwarsNextMarker ::
+                                                !(Maybe Text),
+                                                _lwarsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListWebACLsResponse' with the minimum fields required to make a request.
 --
@@ -130,13 +130,10 @@ data ListWebACLsResponse = ListWebACLsResponse'
 listWebACLsResponse
     :: Int -- ^ 'lwarsResponseStatus'
     -> ListWebACLsResponse
-listWebACLsResponse pResponseStatus_ =
-  ListWebACLsResponse'
-    { _lwarsWebACLs = Nothing
-    , _lwarsNextMarker = Nothing
-    , _lwarsResponseStatus = pResponseStatus_
-    }
-
+listWebACLsResponse pResponseStatus_
+  = ListWebACLsResponse'{_lwarsWebACLs = Nothing,
+                         _lwarsNextMarker = Nothing,
+                         _lwarsResponseStatus = pResponseStatus_}
 
 -- | An array of 'WebACLSummary' objects.
 lwarsWebACLs :: Lens' ListWebACLsResponse [WebACLSummary]

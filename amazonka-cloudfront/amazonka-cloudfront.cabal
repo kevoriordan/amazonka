@@ -59,7 +59,6 @@ library
         , Network.AWS.CloudFront.DeleteFieldLevelEncryptionConfig
         , Network.AWS.CloudFront.DeleteFieldLevelEncryptionProfile
         , Network.AWS.CloudFront.DeletePublicKey
-        , Network.AWS.CloudFront.DeleteServiceLinkedRole
         , Network.AWS.CloudFront.DeleteStreamingDistribution
         , Network.AWS.CloudFront.GetCloudFrontOriginAccessIdentity
         , Network.AWS.CloudFront.GetCloudFrontOriginAccessIdentityConfig
@@ -95,12 +94,108 @@ library
         , Network.AWS.CloudFront.Waiters
 
     other-modules:
-          Network.AWS.CloudFront.Types.Product
-        , Network.AWS.CloudFront.Types.Sum
+          Network.AWS.CloudFront.Types.ActiveTrustedSigners
+        , Network.AWS.CloudFront.Types.AliasICPRecordal
+        , Network.AWS.CloudFront.Types.Aliases
+        , Network.AWS.CloudFront.Types.AllowedMethods
+        , Network.AWS.CloudFront.Types.CacheBehavior
+        , Network.AWS.CloudFront.Types.CacheBehaviors
+        , Network.AWS.CloudFront.Types.CachedMethods
+        , Network.AWS.CloudFront.Types.CertificateSource
+        , Network.AWS.CloudFront.Types.CloudFrontOriginAccessIdentity
+        , Network.AWS.CloudFront.Types.CloudFrontOriginAccessIdentityConfig
+        , Network.AWS.CloudFront.Types.CloudFrontOriginAccessIdentityList
+        , Network.AWS.CloudFront.Types.CloudFrontOriginAccessIdentitySummary
+        , Network.AWS.CloudFront.Types.ContentTypeProfile
+        , Network.AWS.CloudFront.Types.ContentTypeProfileConfig
+        , Network.AWS.CloudFront.Types.ContentTypeProfiles
+        , Network.AWS.CloudFront.Types.CookieNames
+        , Network.AWS.CloudFront.Types.CookiePreference
+        , Network.AWS.CloudFront.Types.CustomErrorResponse
+        , Network.AWS.CloudFront.Types.CustomErrorResponses
+        , Network.AWS.CloudFront.Types.CustomHeaders
+        , Network.AWS.CloudFront.Types.CustomOriginConfig
+        , Network.AWS.CloudFront.Types.DefaultCacheBehavior
+        , Network.AWS.CloudFront.Types.Distribution
+        , Network.AWS.CloudFront.Types.DistributionConfig
+        , Network.AWS.CloudFront.Types.DistributionConfigWithTags
+        , Network.AWS.CloudFront.Types.DistributionList
+        , Network.AWS.CloudFront.Types.DistributionSummary
+        , Network.AWS.CloudFront.Types.EncryptionEntities
+        , Network.AWS.CloudFront.Types.EncryptionEntity
+        , Network.AWS.CloudFront.Types.EventType
+        , Network.AWS.CloudFront.Types.FieldLevelEncryption
+        , Network.AWS.CloudFront.Types.FieldLevelEncryptionConfig
+        , Network.AWS.CloudFront.Types.FieldLevelEncryptionList
+        , Network.AWS.CloudFront.Types.FieldLevelEncryptionProfile
+        , Network.AWS.CloudFront.Types.FieldLevelEncryptionProfileConfig
+        , Network.AWS.CloudFront.Types.FieldLevelEncryptionProfileList
+        , Network.AWS.CloudFront.Types.FieldLevelEncryptionProfileSummary
+        , Network.AWS.CloudFront.Types.FieldLevelEncryptionSummary
+        , Network.AWS.CloudFront.Types.FieldPatterns
+        , Network.AWS.CloudFront.Types.Format
+        , Network.AWS.CloudFront.Types.ForwardedValues
+        , Network.AWS.CloudFront.Types.GeoRestriction
+        , Network.AWS.CloudFront.Types.GeoRestrictionType
+        , Network.AWS.CloudFront.Types.HTTPVersion
+        , Network.AWS.CloudFront.Types.Headers
+        , Network.AWS.CloudFront.Types.ICPRecordalStatus
+        , Network.AWS.CloudFront.Types.Invalidation
+        , Network.AWS.CloudFront.Types.InvalidationBatch
+        , Network.AWS.CloudFront.Types.InvalidationList
+        , Network.AWS.CloudFront.Types.InvalidationSummary
+        , Network.AWS.CloudFront.Types.ItemSelection
+        , Network.AWS.CloudFront.Types.KeyPairIds
+        , Network.AWS.CloudFront.Types.LambdaFunctionAssociation
+        , Network.AWS.CloudFront.Types.LambdaFunctionAssociations
+        , Network.AWS.CloudFront.Types.LoggingConfig
+        , Network.AWS.CloudFront.Types.Method
+        , Network.AWS.CloudFront.Types.MinimumProtocolVersion
+        , Network.AWS.CloudFront.Types.Origin
+        , Network.AWS.CloudFront.Types.OriginCustomHeader
+        , Network.AWS.CloudFront.Types.OriginGroup
+        , Network.AWS.CloudFront.Types.OriginGroupFailoverCriteria
+        , Network.AWS.CloudFront.Types.OriginGroupMember
+        , Network.AWS.CloudFront.Types.OriginGroupMembers
+        , Network.AWS.CloudFront.Types.OriginGroups
+        , Network.AWS.CloudFront.Types.OriginProtocolPolicy
+        , Network.AWS.CloudFront.Types.OriginSSLProtocols
+        , Network.AWS.CloudFront.Types.Origins
+        , Network.AWS.CloudFront.Types.Paths
+        , Network.AWS.CloudFront.Types.PriceClass
+        , Network.AWS.CloudFront.Types.Product
+        , Network.AWS.CloudFront.Types.PublicKey
+        , Network.AWS.CloudFront.Types.PublicKeyConfig
+        , Network.AWS.CloudFront.Types.PublicKeyList
+        , Network.AWS.CloudFront.Types.PublicKeySummary
+        , Network.AWS.CloudFront.Types.QueryArgProfile
+        , Network.AWS.CloudFront.Types.QueryArgProfileConfig
+        , Network.AWS.CloudFront.Types.QueryArgProfiles
+        , Network.AWS.CloudFront.Types.QueryStringCacheKeys
+        , Network.AWS.CloudFront.Types.Restrictions
+        , Network.AWS.CloudFront.Types.S3Origin
+        , Network.AWS.CloudFront.Types.S3OriginConfig
+        , Network.AWS.CloudFront.Types.SSLProtocol
+        , Network.AWS.CloudFront.Types.SSLSupportMethod
+        , Network.AWS.CloudFront.Types.Signer
+        , Network.AWS.CloudFront.Types.StatusCodes
+        , Network.AWS.CloudFront.Types.StreamingDistribution
+        , Network.AWS.CloudFront.Types.StreamingDistributionConfig
+        , Network.AWS.CloudFront.Types.StreamingDistributionConfigWithTags
+        , Network.AWS.CloudFront.Types.StreamingDistributionList
+        , Network.AWS.CloudFront.Types.StreamingDistributionSummary
+        , Network.AWS.CloudFront.Types.StreamingLoggingConfig
+        , Network.AWS.CloudFront.Types.Tag
+        , Network.AWS.CloudFront.Types.TagKeys
+        , Network.AWS.CloudFront.Types.Tags
+        , Network.AWS.CloudFront.Types.TrustedSigners
+        , Network.AWS.CloudFront.Types.ViewerCertificate
+        , Network.AWS.CloudFront.Types.ViewerProtocolPolicy
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cloudfront-test
     type:              exitcode-stdio-1.0
@@ -124,6 +219,7 @@ test-suite amazonka-cloudfront-test
         , amazonka-cloudfront
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

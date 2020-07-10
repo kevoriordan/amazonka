@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deletePublicKey' smart constructor.
-data DeletePublicKey = DeletePublicKey'
-  { _dpkIfMatch :: !(Maybe Text)
-  , _dpkId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePublicKey = DeletePublicKey'{_dpkIfMatch
+                                        :: !(Maybe Text),
+                                        _dpkId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePublicKey' with the minimum fields required to make a request.
 --
@@ -59,8 +58,9 @@ data DeletePublicKey = DeletePublicKey'
 deletePublicKey
     :: Text -- ^ 'dpkId'
     -> DeletePublicKey
-deletePublicKey pId_ = DeletePublicKey' {_dpkIfMatch = Nothing, _dpkId = pId_}
-
+deletePublicKey pId_
+  = DeletePublicKey'{_dpkIfMatch = Nothing,
+                     _dpkId = pId_}
 
 -- | The value of the @ETag@ header that you received when retrieving the public key identity to delete. For example: @E2QWRUHAPOMQZL@ .
 dpkIfMatch :: Lens' DeletePublicKey (Maybe Text)
@@ -85,22 +85,20 @@ instance ToHeaders DeletePublicKey where
 
 instance ToPath DeletePublicKey where
         toPath DeletePublicKey'{..}
-          = mconcat ["/2017-10-30/public-key/", toBS _dpkId]
+          = mconcat ["/2019-03-26/public-key/", toBS _dpkId]
 
 instance ToQuery DeletePublicKey where
         toQuery = const mempty
 
 -- | /See:/ 'deletePublicKeyResponse' smart constructor.
-data DeletePublicKeyResponse =
-  DeletePublicKeyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePublicKeyResponse = DeletePublicKeyResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeletePublicKeyResponse' with the minimum fields required to make a request.
 --
 deletePublicKeyResponse
     :: DeletePublicKeyResponse
 deletePublicKeyResponse = DeletePublicKeyResponse'
-
 
 instance NFData DeletePublicKeyResponse where

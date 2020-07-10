@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an alias for the specified bot.
+-- Deletes an alias for the specified bot. 
 --
 --
 -- You can't delete an alias that is used in the association between a bot and a messaging channel. If an alias is used in a channel association, the @DeleteBot@ operation returns a @ResourceInUseException@ exception that includes a reference to the channel association that refers to the bot. You can remove the reference to the alias by deleting the channel association. If you get the same exception again, delete the referring association until the @DeleteBotAlias@ operation is successful.
@@ -45,28 +45,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteBotAlias' smart constructor.
-data DeleteBotAlias = DeleteBotAlias'
-  { _dbaName    :: !Text
-  , _dbaBotName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBotAlias = DeleteBotAlias'{_dbaName ::
+                                      !Text,
+                                      _dbaBotName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBotAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbaName' - The name of the alias to delete. The name is case sensitive.
+-- * 'dbaName' - The name of the alias to delete. The name is case sensitive. 
 --
 -- * 'dbaBotName' - The name of the bot that the alias points to.
 deleteBotAlias
     :: Text -- ^ 'dbaName'
     -> Text -- ^ 'dbaBotName'
     -> DeleteBotAlias
-deleteBotAlias pName_ pBotName_ =
-  DeleteBotAlias' {_dbaName = pName_, _dbaBotName = pBotName_}
+deleteBotAlias pName_ pBotName_
+  = DeleteBotAlias'{_dbaName = pName_,
+                    _dbaBotName = pBotName_}
 
-
--- | The name of the alias to delete. The name is case sensitive.
+-- | The name of the alias to delete. The name is case sensitive. 
 dbaName :: Lens' DeleteBotAlias Text
 dbaName = lens _dbaName (\ s a -> s{_dbaName = a})
 
@@ -100,16 +99,14 @@ instance ToQuery DeleteBotAlias where
         toQuery = const mempty
 
 -- | /See:/ 'deleteBotAliasResponse' smart constructor.
-data DeleteBotAliasResponse =
-  DeleteBotAliasResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBotAliasResponse = DeleteBotAliasResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteBotAliasResponse' with the minimum fields required to make a request.
 --
 deleteBotAliasResponse
     :: DeleteBotAliasResponse
 deleteBotAliasResponse = DeleteBotAliasResponse'
-
 
 instance NFData DeleteBotAliasResponse where

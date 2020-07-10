@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Amazon SageMaker runtime API.
+-- The Amazon SageMaker runtime API. 
 --
 --
 module Network.AWS.SageMakerRuntime
@@ -22,17 +22,17 @@ module Network.AWS.SageMakerRuntime
     -- * Errors
     -- $errors
 
-    -- ** ServiceUnavailable
-    , _ServiceUnavailable
-
-    -- ** ModelError
-    , _ModelError
+    -- ** ValidationError
+    , _ValidationError
 
     -- ** InternalFailure
     , _InternalFailure
 
-    -- ** ValidationError
-    , _ValidationError
+    -- ** ModelError
+    , _ModelError
+
+    -- ** ServiceUnavailable
+    , _ServiceUnavailable
 
     -- * Waiters
     -- $waiters
@@ -40,7 +40,7 @@ module Network.AWS.SageMakerRuntime
     -- * Operations
     -- $operations
 
-    -- ** InvokeEndpoint
+    -- ** InvokeEndpoint 
     , module Network.AWS.SageMakerRuntime.InvokeEndpoint
 
     -- * Types

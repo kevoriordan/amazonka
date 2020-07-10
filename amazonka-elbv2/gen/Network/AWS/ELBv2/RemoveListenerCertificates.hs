@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes the specified certificate from the specified secure listener.
+-- Removes the specified certificate from the certificate list for the specified HTTPS or TLS listener.
 --
 --
 -- You can't remove the default certificate for a listener. To replace the default certificate, call 'ModifyListener' .
@@ -49,11 +49,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'removeListenerCertificates' smart constructor.
-data RemoveListenerCertificates = RemoveListenerCertificates'
-  { _rlcListenerARN  :: !Text
-  , _rlcCertificates :: ![Certificate]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveListenerCertificates = RemoveListenerCertificates'{_rlcListenerARN
+                                                              :: !Text,
+                                                              _rlcCertificates
+                                                              :: ![Certificate]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'RemoveListenerCertificates' with the minimum fields required to make a request.
 --
@@ -61,20 +62,20 @@ data RemoveListenerCertificates = RemoveListenerCertificates'
 --
 -- * 'rlcListenerARN' - The Amazon Resource Name (ARN) of the listener.
 --
--- * 'rlcCertificates' - The certificate to remove. You can specify one certificate per call.
+-- * 'rlcCertificates' - The certificate to remove. You can specify one certificate per call. Set @CertificateArn@ to the certificate ARN but do not set @IsDefault@ .
 removeListenerCertificates
     :: Text -- ^ 'rlcListenerARN'
     -> RemoveListenerCertificates
-removeListenerCertificates pListenerARN_ =
-  RemoveListenerCertificates'
-    {_rlcListenerARN = pListenerARN_, _rlcCertificates = mempty}
-
+removeListenerCertificates pListenerARN_
+  = RemoveListenerCertificates'{_rlcListenerARN =
+                                  pListenerARN_,
+                                _rlcCertificates = mempty}
 
 -- | The Amazon Resource Name (ARN) of the listener.
 rlcListenerARN :: Lens' RemoveListenerCertificates Text
 rlcListenerARN = lens _rlcListenerARN (\ s a -> s{_rlcListenerARN = a})
 
--- | The certificate to remove. You can specify one certificate per call.
+-- | The certificate to remove. You can specify one certificate per call. Set @CertificateArn@ to the certificate ARN but do not set @IsDefault@ .
 rlcCertificates :: Lens' RemoveListenerCertificates [Certificate]
 rlcCertificates = lens _rlcCertificates (\ s a -> s{_rlcCertificates = a}) . _Coerce
 
@@ -110,10 +111,11 @@ instance ToQuery RemoveListenerCertificates where
                  toQueryList "member" _rlcCertificates]
 
 -- | /See:/ 'removeListenerCertificatesResponse' smart constructor.
-newtype RemoveListenerCertificatesResponse = RemoveListenerCertificatesResponse'
-  { _rlcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RemoveListenerCertificatesResponse = RemoveListenerCertificatesResponse'{_rlcrsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'RemoveListenerCertificatesResponse' with the minimum fields required to make a request.
 --
@@ -123,9 +125,9 @@ newtype RemoveListenerCertificatesResponse = RemoveListenerCertificatesResponse'
 removeListenerCertificatesResponse
     :: Int -- ^ 'rlcrsResponseStatus'
     -> RemoveListenerCertificatesResponse
-removeListenerCertificatesResponse pResponseStatus_ =
-  RemoveListenerCertificatesResponse' {_rlcrsResponseStatus = pResponseStatus_}
-
+removeListenerCertificatesResponse pResponseStatus_
+  = RemoveListenerCertificatesResponse'{_rlcrsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 rlcrsResponseStatus :: Lens' RemoveListenerCertificatesResponse Int

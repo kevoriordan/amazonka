@@ -47,11 +47,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'addTagsToOnPremisesInstances' smart constructor.
-data AddTagsToOnPremisesInstances = AddTagsToOnPremisesInstances'
-  { _attopiTags          :: ![Tag]
-  , _attopiInstanceNames :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToOnPremisesInstances = AddTagsToOnPremisesInstances'{_attopiTags
+                                                                  :: ![Tag],
+                                                                  _attopiInstanceNames
+                                                                  :: ![Text]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'AddTagsToOnPremisesInstances' with the minimum fields required to make a request.
 --
@@ -62,10 +63,9 @@ data AddTagsToOnPremisesInstances = AddTagsToOnPremisesInstances'
 -- * 'attopiInstanceNames' - The names of the on-premises instances to which to add tags.
 addTagsToOnPremisesInstances
     :: AddTagsToOnPremisesInstances
-addTagsToOnPremisesInstances =
-  AddTagsToOnPremisesInstances'
-    {_attopiTags = mempty, _attopiInstanceNames = mempty}
-
+addTagsToOnPremisesInstances
+  = AddTagsToOnPremisesInstances'{_attopiTags = mempty,
+                                  _attopiInstanceNames = mempty}
 
 -- | The tag key-value pairs to add to the on-premises instances. Keys and values are both required. Keys cannot be null or empty strings. Value-only tags are not allowed.
 attopiTags :: Lens' AddTagsToOnPremisesInstances [Tag]
@@ -111,17 +111,16 @@ instance ToQuery AddTagsToOnPremisesInstances where
         toQuery = const mempty
 
 -- | /See:/ 'addTagsToOnPremisesInstancesResponse' smart constructor.
-data AddTagsToOnPremisesInstancesResponse =
-  AddTagsToOnPremisesInstancesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToOnPremisesInstancesResponse = AddTagsToOnPremisesInstancesResponse'
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'AddTagsToOnPremisesInstancesResponse' with the minimum fields required to make a request.
 --
 addTagsToOnPremisesInstancesResponse
     :: AddTagsToOnPremisesInstancesResponse
-addTagsToOnPremisesInstancesResponse = AddTagsToOnPremisesInstancesResponse'
-
+addTagsToOnPremisesInstancesResponse
+  = AddTagsToOnPremisesInstancesResponse'
 
 instance NFData AddTagsToOnPremisesInstancesResponse
          where

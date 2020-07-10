@@ -48,42 +48,38 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'importCertificate' smart constructor.
-data ImportCertificate = ImportCertificate'
-  { _icCertificatePem        :: !(Maybe Text)
-  , _icCertificateWallet     :: !(Maybe Base64)
-  , _icTags                  :: !(Maybe [Tag])
-  , _icCertificateIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ImportCertificate = ImportCertificate'{_icCertificatePem
+                                            :: !(Maybe Text),
+                                            _icCertificateWallet ::
+                                            !(Maybe Base64),
+                                            _icTags :: !(Maybe [Tag]),
+                                            _icCertificateIdentifier :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImportCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'icCertificatePem' - The contents of the .pem X.509 certificate file for the certificate.
+-- * 'icCertificatePem' - The contents of a @.pem@ file, which contains an X.509 certificate.
 --
--- * 'icCertificateWallet' - The location of the imported Oracle Wallet certificate for use with SSL.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
+-- * 'icCertificateWallet' - The location of an imported Oracle Wallet certificate for use with SSL.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 --
 -- * 'icTags' - The tags associated with the certificate.
 --
--- * 'icCertificateIdentifier' - The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
+-- * 'icCertificateIdentifier' - A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
 importCertificate
     :: Text -- ^ 'icCertificateIdentifier'
     -> ImportCertificate
-importCertificate pCertificateIdentifier_ =
-  ImportCertificate'
-    { _icCertificatePem = Nothing
-    , _icCertificateWallet = Nothing
-    , _icTags = Nothing
-    , _icCertificateIdentifier = pCertificateIdentifier_
-    }
+importCertificate pCertificateIdentifier_
+  = ImportCertificate'{_icCertificatePem = Nothing,
+                       _icCertificateWallet = Nothing, _icTags = Nothing,
+                       _icCertificateIdentifier = pCertificateIdentifier_}
 
-
--- | The contents of the .pem X.509 certificate file for the certificate.
+-- | The contents of a @.pem@ file, which contains an X.509 certificate.
 icCertificatePem :: Lens' ImportCertificate (Maybe Text)
 icCertificatePem = lens _icCertificatePem (\ s a -> s{_icCertificatePem = a})
 
--- | The location of the imported Oracle Wallet certificate for use with SSL.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
+-- | The location of an imported Oracle Wallet certificate for use with SSL.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 icCertificateWallet :: Lens' ImportCertificate (Maybe ByteString)
 icCertificateWallet = lens _icCertificateWallet (\ s a -> s{_icCertificateWallet = a}) . mapping _Base64
 
@@ -91,7 +87,7 @@ icCertificateWallet = lens _icCertificateWallet (\ s a -> s{_icCertificateWallet
 icTags :: Lens' ImportCertificate [Tag]
 icTags = lens _icTags (\ s a -> s{_icTags = a}) . _Default . _Coerce
 
--- | The customer-assigned name of the certificate. Valid characters are A-z and 0-9.
+-- | A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
 icCertificateIdentifier :: Lens' ImportCertificate Text
 icCertificateIdentifier = lens _icCertificateIdentifier (\ s a -> s{_icCertificateIdentifier = a})
 
@@ -136,11 +132,14 @@ instance ToQuery ImportCertificate where
         toQuery = const mempty
 
 -- | /See:/ 'importCertificateResponse' smart constructor.
-data ImportCertificateResponse = ImportCertificateResponse'
-  { _icrsCertificate    :: !(Maybe Certificate)
-  , _icrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ImportCertificateResponse = ImportCertificateResponse'{_icrsCertificate
+                                                            ::
+                                                            !(Maybe
+                                                                Certificate),
+                                                            _icrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ImportCertificateResponse' with the minimum fields required to make a request.
 --
@@ -152,10 +151,10 @@ data ImportCertificateResponse = ImportCertificateResponse'
 importCertificateResponse
     :: Int -- ^ 'icrsResponseStatus'
     -> ImportCertificateResponse
-importCertificateResponse pResponseStatus_ =
-  ImportCertificateResponse'
-    {_icrsCertificate = Nothing, _icrsResponseStatus = pResponseStatus_}
-
+importCertificateResponse pResponseStatus_
+  = ImportCertificateResponse'{_icrsCertificate =
+                                 Nothing,
+                               _icrsResponseStatus = pResponseStatus_}
 
 -- | The certificate to be uploaded.
 icrsCertificate :: Lens' ImportCertificateResponse (Maybe Certificate)

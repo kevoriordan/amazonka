@@ -18,22 +18,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the fleet ID that a specified alias is currently pointing to.
+-- Retrieves the fleet ID that an alias is currently pointing to.
 --
 --
--- Alias-related operations include:
+--     * 'CreateAlias' 
 --
---     * 'CreateAlias'
+--     * 'ListAliases' 
 --
---     * 'ListAliases'
+--     * 'DescribeAlias' 
 --
---     * 'DescribeAlias'
+--     * 'UpdateAlias' 
 --
---     * 'UpdateAlias'
+--     * 'DeleteAlias' 
 --
---     * 'DeleteAlias'
---
---     * 'ResolveAlias'
+--     * 'ResolveAlias' 
 --
 --
 --
@@ -49,6 +47,7 @@ module Network.AWS.GameLift.ResolveAlias
     , resolveAliasResponse
     , ResolveAliasResponse
     -- * Response Lenses
+    , rarsFleetARN
     , rarsFleetId
     , rarsResponseStatus
     ) where
@@ -65,23 +64,22 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'resolveAlias' smart constructor.
-newtype ResolveAlias = ResolveAlias'
-  { _raAliasId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ResolveAlias = ResolveAlias'{_raAliasId ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResolveAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'raAliasId' - Unique identifier for the alias you want to resolve.
+-- * 'raAliasId' - The unique identifier of the alias that you want to retrieve a fleet ID for. You can use either the alias ID or ARN value.
 resolveAlias
     :: Text -- ^ 'raAliasId'
     -> ResolveAlias
-resolveAlias pAliasId_ = ResolveAlias' {_raAliasId = pAliasId_}
+resolveAlias pAliasId_
+  = ResolveAlias'{_raAliasId = pAliasId_}
 
-
--- | Unique identifier for the alias you want to resolve.
+-- | The unique identifier of the alias that you want to retrieve a fleet ID for. You can use either the alias ID or ARN value.
 raAliasId :: Lens' ResolveAlias Text
 raAliasId = lens _raAliasId (\ s a -> s{_raAliasId = a})
 
@@ -92,7 +90,8 @@ instance AWSRequest ResolveAlias where
           = receiveJSON
               (\ s h x ->
                  ResolveAliasResponse' <$>
-                   (x .?> "FleetId") <*> (pure (fromEnum s)))
+                   (x .?> "FleetArn") <*> (x .?> "FleetId") <*>
+                     (pure (fromEnum s)))
 
 instance Hashable ResolveAlias where
 
@@ -122,28 +121,34 @@ instance ToQuery ResolveAlias where
 --
 --
 -- /See:/ 'resolveAliasResponse' smart constructor.
-data ResolveAliasResponse = ResolveAliasResponse'
-  { _rarsFleetId        :: !(Maybe Text)
-  , _rarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResolveAliasResponse = ResolveAliasResponse'{_rarsFleetARN
+                                                  :: !(Maybe Text),
+                                                  _rarsFleetId :: !(Maybe Text),
+                                                  _rarsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResolveAliasResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rarsFleetId' - Fleet identifier that is associated with the requested alias.
+-- * 'rarsFleetARN' - The Amazon Resource Name (<https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html ARN> ) associated with the GameLift fleet resource that this alias points to. 
+--
+-- * 'rarsFleetId' - The fleet identifier that the alias is pointing to.
 --
 -- * 'rarsResponseStatus' - -- | The response status code.
 resolveAliasResponse
     :: Int -- ^ 'rarsResponseStatus'
     -> ResolveAliasResponse
-resolveAliasResponse pResponseStatus_ =
-  ResolveAliasResponse'
-    {_rarsFleetId = Nothing, _rarsResponseStatus = pResponseStatus_}
+resolveAliasResponse pResponseStatus_
+  = ResolveAliasResponse'{_rarsFleetARN = Nothing,
+                          _rarsFleetId = Nothing,
+                          _rarsResponseStatus = pResponseStatus_}
 
+-- | The Amazon Resource Name (<https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html ARN> ) associated with the GameLift fleet resource that this alias points to. 
+rarsFleetARN :: Lens' ResolveAliasResponse (Maybe Text)
+rarsFleetARN = lens _rarsFleetARN (\ s a -> s{_rarsFleetARN = a})
 
--- | Fleet identifier that is associated with the requested alias.
+-- | The fleet identifier that the alias is pointing to.
 rarsFleetId :: Lens' ResolveAliasResponse (Maybe Text)
 rarsFleetId = lens _rarsFleetId (\ s a -> s{_rarsFleetId = a})
 

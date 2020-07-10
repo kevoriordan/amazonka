@@ -21,12 +21,15 @@
 -- Creates a domain resource for the specified domain (e.g., example.com).
 --
 --
+-- The @create domain@ operation supports tag-based access control via request tags. For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.CreateDomain
     (
     -- * Creating a Request
       createDomain
     , CreateDomain
     -- * Request Lenses
+    , cdTags
     , cdDomainName
 
     -- * Destructuring the Response
@@ -45,21 +48,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDomain' smart constructor.
-newtype CreateDomain = CreateDomain'
-  { _cdDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDomain = CreateDomain'{_cdTags ::
+                                  !(Maybe [Tag]),
+                                  _cdDomainName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDomain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cdTags' - The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the @tag resource@ operation.
+--
 -- * 'cdDomainName' - The domain name to manage (e.g., @example.com@ ).
 createDomain
     :: Text -- ^ 'cdDomainName'
     -> CreateDomain
-createDomain pDomainName_ = CreateDomain' {_cdDomainName = pDomainName_}
+createDomain pDomainName_
+  = CreateDomain'{_cdTags = Nothing,
+                  _cdDomainName = pDomainName_}
 
+-- | The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the @tag resource@ operation.
+cdTags :: Lens' CreateDomain [Tag]
+cdTags = lens _cdTags (\ s a -> s{_cdTags = a}) . _Default . _Coerce
 
 -- | The domain name to manage (e.g., @example.com@ ).
 cdDomainName :: Lens' CreateDomain Text
@@ -90,7 +100,9 @@ instance ToHeaders CreateDomain where
 instance ToJSON CreateDomain where
         toJSON CreateDomain'{..}
           = object
-              (catMaybes [Just ("domainName" .= _cdDomainName)])
+              (catMaybes
+                 [("tags" .=) <$> _cdTags,
+                  Just ("domainName" .= _cdDomainName)])
 
 instance ToPath CreateDomain where
         toPath = const "/"
@@ -99,28 +111,26 @@ instance ToQuery CreateDomain where
         toQuery = const mempty
 
 -- | /See:/ 'createDomainResponse' smart constructor.
-data CreateDomainResponse = CreateDomainResponse'
-  { _cdrsOperation      :: !(Maybe Operation)
-  , _cdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDomainResponse = CreateDomainResponse'{_cdrsOperation
+                                                  :: !(Maybe Operation),
+                                                  _cdrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDomainResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdrsOperation' - An array of key-value pairs containing information about the domain resource you created.
+-- * 'cdrsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'cdrsResponseStatus' - -- | The response status code.
 createDomainResponse
     :: Int -- ^ 'cdrsResponseStatus'
     -> CreateDomainResponse
-createDomainResponse pResponseStatus_ =
-  CreateDomainResponse'
-    {_cdrsOperation = Nothing, _cdrsResponseStatus = pResponseStatus_}
+createDomainResponse pResponseStatus_
+  = CreateDomainResponse'{_cdrsOperation = Nothing,
+                          _cdrsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the domain resource you created.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 cdrsOperation :: Lens' CreateDomainResponse (Maybe Operation)
 cdrsOperation = lens _cdrsOperation (\ s a -> s{_cdrsOperation = a})
 

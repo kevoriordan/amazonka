@@ -18,12 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer.
+-- Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC.
 --
+--
+-- For load balancers in a non-default VPC, use 'DetachLoadBalancerFromSubnets' .
 --
 -- There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the @OutOfService@ state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones.
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html Add or Remove Availability Zones> in the /Classic Load Balancer Guide/ .
+-- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html Add or Remove Availability Zones> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.DisableAvailabilityZonesForLoadBalancer
     (
@@ -54,11 +56,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'disableAvailabilityZonesForLoadBalancer' smart constructor.
-data DisableAvailabilityZonesForLoadBalancer = DisableAvailabilityZonesForLoadBalancer'
-  { _dazflbLoadBalancerName  :: !Text
-  , _dazflbAvailabilityZones :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableAvailabilityZonesForLoadBalancer = DisableAvailabilityZonesForLoadBalancer'{_dazflbLoadBalancerName
+                                                                                        ::
+                                                                                        !Text,
+                                                                                        _dazflbAvailabilityZones
+                                                                                        ::
+                                                                                        ![Text]}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DisableAvailabilityZonesForLoadBalancer' with the minimum fields required to make a request.
 --
@@ -70,12 +75,11 @@ data DisableAvailabilityZonesForLoadBalancer = DisableAvailabilityZonesForLoadBa
 disableAvailabilityZonesForLoadBalancer
     :: Text -- ^ 'dazflbLoadBalancerName'
     -> DisableAvailabilityZonesForLoadBalancer
-disableAvailabilityZonesForLoadBalancer pLoadBalancerName_ =
-  DisableAvailabilityZonesForLoadBalancer'
-    { _dazflbLoadBalancerName = pLoadBalancerName_
-    , _dazflbAvailabilityZones = mempty
-    }
-
+disableAvailabilityZonesForLoadBalancer
+  pLoadBalancerName_
+  = DisableAvailabilityZonesForLoadBalancer'{_dazflbLoadBalancerName
+                                               = pLoadBalancerName_,
+                                             _dazflbAvailabilityZones = mempty}
 
 -- | The name of the load balancer.
 dazflbLoadBalancerName :: Lens' DisableAvailabilityZonesForLoadBalancer Text
@@ -136,11 +140,17 @@ instance ToQuery
 --
 --
 -- /See:/ 'disableAvailabilityZonesForLoadBalancerResponse' smart constructor.
-data DisableAvailabilityZonesForLoadBalancerResponse = DisableAvailabilityZonesForLoadBalancerResponse'
-  { _dazflbrsAvailabilityZones :: !(Maybe [Text])
-  , _dazflbrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableAvailabilityZonesForLoadBalancerResponse = DisableAvailabilityZonesForLoadBalancerResponse'{_dazflbrsAvailabilityZones
+                                                                                                        ::
+                                                                                                        !(Maybe
+                                                                                                            [Text]),
+                                                                                                        _dazflbrsResponseStatus
+                                                                                                        ::
+                                                                                                        !Int}
+                                                         deriving (Eq, Read,
+                                                                   Show, Data,
+                                                                   Typeable,
+                                                                   Generic)
 
 -- | Creates a value of 'DisableAvailabilityZonesForLoadBalancerResponse' with the minimum fields required to make a request.
 --
@@ -152,12 +162,12 @@ data DisableAvailabilityZonesForLoadBalancerResponse = DisableAvailabilityZonesF
 disableAvailabilityZonesForLoadBalancerResponse
     :: Int -- ^ 'dazflbrsResponseStatus'
     -> DisableAvailabilityZonesForLoadBalancerResponse
-disableAvailabilityZonesForLoadBalancerResponse pResponseStatus_ =
-  DisableAvailabilityZonesForLoadBalancerResponse'
-    { _dazflbrsAvailabilityZones = Nothing
-    , _dazflbrsResponseStatus = pResponseStatus_
-    }
-
+disableAvailabilityZonesForLoadBalancerResponse
+  pResponseStatus_
+  = DisableAvailabilityZonesForLoadBalancerResponse'{_dazflbrsAvailabilityZones
+                                                       = Nothing,
+                                                     _dazflbrsResponseStatus =
+                                                       pResponseStatus_}
 
 -- | The remaining Availability Zones for the load balancer.
 dazflbrsAvailabilityZones :: Lens' DisableAvailabilityZonesForLoadBalancerResponse [Text]

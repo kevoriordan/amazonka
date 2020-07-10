@@ -51,12 +51,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeExpressions' smart constructor.
-data DescribeExpressions = DescribeExpressions'
-  { _deDeployed        :: !(Maybe Bool)
-  , _deExpressionNames :: !(Maybe [Text])
-  , _deDomainName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeExpressions = DescribeExpressions'{_deDeployed
+                                                :: !(Maybe Bool),
+                                                _deExpressionNames ::
+                                                !(Maybe [Text]),
+                                                _deDomainName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeExpressions' with the minimum fields required to make a request.
 --
@@ -70,13 +70,10 @@ data DescribeExpressions = DescribeExpressions'
 describeExpressions
     :: Text -- ^ 'deDomainName'
     -> DescribeExpressions
-describeExpressions pDomainName_ =
-  DescribeExpressions'
-    { _deDeployed = Nothing
-    , _deExpressionNames = Nothing
-    , _deDomainName = pDomainName_
-    }
-
+describeExpressions pDomainName_
+  = DescribeExpressions'{_deDeployed = Nothing,
+                         _deExpressionNames = Nothing,
+                         _deDomainName = pDomainName_}
 
 -- | Whether to display the deployed configuration (@true@ ) or include any pending changes (@false@ ). Defaults to @false@ .
 deDeployed :: Lens' DescribeExpressions (Maybe Bool)
@@ -128,11 +125,13 @@ instance ToQuery DescribeExpressions where
 --
 --
 -- /See:/ 'describeExpressionsResponse' smart constructor.
-data DescribeExpressionsResponse = DescribeExpressionsResponse'
-  { _drsResponseStatus :: !Int
-  , _drsExpressions    :: ![ExpressionStatus]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeExpressionsResponse = DescribeExpressionsResponse'{_drsResponseStatus
+                                                                :: !Int,
+                                                                _drsExpressions
+                                                                ::
+                                                                ![ExpressionStatus]}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeExpressionsResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +143,10 @@ data DescribeExpressionsResponse = DescribeExpressionsResponse'
 describeExpressionsResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeExpressionsResponse
-describeExpressionsResponse pResponseStatus_ =
-  DescribeExpressionsResponse'
-    {_drsResponseStatus = pResponseStatus_, _drsExpressions = mempty}
-
+describeExpressionsResponse pResponseStatus_
+  = DescribeExpressionsResponse'{_drsResponseStatus =
+                                   pResponseStatus_,
+                                 _drsExpressions = mempty}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DescribeExpressionsResponse Int

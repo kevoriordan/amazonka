@@ -33,6 +33,7 @@ module Network.AWS.CodeStar.DescribeProject
     , describeProjectResponse
     , DescribeProjectResponse
     -- * Response Lenses
+    , drsStatus
     , drsArn
     , drsProjectTemplateId
     , drsName
@@ -52,10 +53,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeProject' smart constructor.
-newtype DescribeProject = DescribeProject'
-  { _dId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeProject = DescribeProject'{_dId ::
+                                           Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeProject' with the minimum fields required to make a request.
 --
@@ -65,8 +65,7 @@ newtype DescribeProject = DescribeProject'
 describeProject
     :: Text -- ^ 'dId'
     -> DescribeProject
-describeProject pId_ = DescribeProject' {_dId = pId_}
-
+describeProject pId_ = DescribeProject'{_dId = pId_}
 
 -- | The ID of the project.
 dId :: Lens' DescribeProject Text
@@ -79,8 +78,9 @@ instance AWSRequest DescribeProject where
           = receiveJSON
               (\ s h x ->
                  DescribeProjectResponse' <$>
-                   (x .?> "arn") <*> (x .?> "projectTemplateId") <*>
-                     (x .?> "name")
+                   (x .?> "status") <*> (x .?> "arn") <*>
+                     (x .?> "projectTemplateId")
+                     <*> (x .?> "name")
                      <*> (x .?> "id")
                      <*> (x .?> "stackId")
                      <*> (x .?> "clientRequestToken")
@@ -112,22 +112,35 @@ instance ToQuery DescribeProject where
         toQuery = const mempty
 
 -- | /See:/ 'describeProjectResponse' smart constructor.
-data DescribeProjectResponse = DescribeProjectResponse'
-  { _drsArn                :: !(Maybe Text)
-  , _drsProjectTemplateId  :: !(Maybe Text)
-  , _drsName               :: !(Maybe (Sensitive Text))
-  , _drsId                 :: !(Maybe Text)
-  , _drsStackId            :: !(Maybe Text)
-  , _drsClientRequestToken :: !(Maybe Text)
-  , _drsCreatedTimeStamp   :: !(Maybe POSIX)
-  , _drsDescription        :: !(Maybe (Sensitive Text))
-  , _drsResponseStatus     :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeProjectResponse = DescribeProjectResponse'{_drsStatus
+                                                        ::
+                                                        !(Maybe ProjectStatus),
+                                                        _drsArn ::
+                                                        !(Maybe Text),
+                                                        _drsProjectTemplateId ::
+                                                        !(Maybe Text),
+                                                        _drsName ::
+                                                        !(Maybe
+                                                            (Sensitive Text)),
+                                                        _drsId :: !(Maybe Text),
+                                                        _drsStackId ::
+                                                        !(Maybe Text),
+                                                        _drsClientRequestToken
+                                                        :: !(Maybe Text),
+                                                        _drsCreatedTimeStamp ::
+                                                        !(Maybe POSIX),
+                                                        _drsDescription ::
+                                                        !(Maybe
+                                                            (Sensitive Text)),
+                                                        _drsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeProjectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drsStatus' - The project creation or deletion status.
 --
 -- * 'drsArn' - The Amazon Resource Name (ARN) for the project.
 --
@@ -139,7 +152,7 @@ data DescribeProjectResponse = DescribeProjectResponse'
 --
 -- * 'drsStackId' - The ID of the primary stack in AWS CloudFormation used to generate resources for the project.
 --
--- * 'drsClientRequestToken' - A user- or system-generated token that identifies the entity that requested project creation.
+-- * 'drsClientRequestToken' - A user- or system-generated token that identifies the entity that requested project creation. 
 --
 -- * 'drsCreatedTimeStamp' - The date and time the project was created, in timestamp format.
 --
@@ -149,19 +162,19 @@ data DescribeProjectResponse = DescribeProjectResponse'
 describeProjectResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeProjectResponse
-describeProjectResponse pResponseStatus_ =
-  DescribeProjectResponse'
-    { _drsArn = Nothing
-    , _drsProjectTemplateId = Nothing
-    , _drsName = Nothing
-    , _drsId = Nothing
-    , _drsStackId = Nothing
-    , _drsClientRequestToken = Nothing
-    , _drsCreatedTimeStamp = Nothing
-    , _drsDescription = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
+describeProjectResponse pResponseStatus_
+  = DescribeProjectResponse'{_drsStatus = Nothing,
+                             _drsArn = Nothing, _drsProjectTemplateId = Nothing,
+                             _drsName = Nothing, _drsId = Nothing,
+                             _drsStackId = Nothing,
+                             _drsClientRequestToken = Nothing,
+                             _drsCreatedTimeStamp = Nothing,
+                             _drsDescription = Nothing,
+                             _drsResponseStatus = pResponseStatus_}
 
+-- | The project creation or deletion status.
+drsStatus :: Lens' DescribeProjectResponse (Maybe ProjectStatus)
+drsStatus = lens _drsStatus (\ s a -> s{_drsStatus = a})
 
 -- | The Amazon Resource Name (ARN) for the project.
 drsArn :: Lens' DescribeProjectResponse (Maybe Text)
@@ -183,7 +196,7 @@ drsId = lens _drsId (\ s a -> s{_drsId = a})
 drsStackId :: Lens' DescribeProjectResponse (Maybe Text)
 drsStackId = lens _drsStackId (\ s a -> s{_drsStackId = a})
 
--- | A user- or system-generated token that identifies the entity that requested project creation.
+-- | A user- or system-generated token that identifies the entity that requested project creation. 
 drsClientRequestToken :: Lens' DescribeProjectResponse (Maybe Text)
 drsClientRequestToken = lens _drsClientRequestToken (\ s a -> s{_drsClientRequestToken = a})
 

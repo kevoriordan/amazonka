@@ -47,12 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createType' smart constructor.
-data CreateType = CreateType'
-  { _ctApiId      :: !Text
-  , _ctDefinition :: !Text
-  , _ctFormat     :: !TypeDefinitionFormat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateType = CreateType'{_ctApiId :: !Text,
+                              _ctDefinition :: !Text,
+                              _ctFormat :: !TypeDefinitionFormat}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateType' with the minimum fields required to make a request.
 --
@@ -68,10 +66,9 @@ createType
     -> Text -- ^ 'ctDefinition'
     -> TypeDefinitionFormat -- ^ 'ctFormat'
     -> CreateType
-createType pApiId_ pDefinition_ pFormat_ =
-  CreateType'
-    {_ctApiId = pApiId_, _ctDefinition = pDefinition_, _ctFormat = pFormat_}
-
+createType pApiId_ pDefinition_ pFormat_
+  = CreateType'{_ctApiId = pApiId_,
+                _ctDefinition = pDefinition_, _ctFormat = pFormat_}
 
 -- | The API ID.
 ctApiId :: Lens' CreateType Text
@@ -120,11 +117,10 @@ instance ToQuery CreateType where
         toQuery = const mempty
 
 -- | /See:/ 'createTypeResponse' smart constructor.
-data CreateTypeResponse = CreateTypeResponse'
-  { _ctrsType           :: !(Maybe Type)
-  , _ctrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTypeResponse = CreateTypeResponse'{_ctrsType
+                                              :: !(Maybe Type),
+                                              _ctrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTypeResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +132,9 @@ data CreateTypeResponse = CreateTypeResponse'
 createTypeResponse
     :: Int -- ^ 'ctrsResponseStatus'
     -> CreateTypeResponse
-createTypeResponse pResponseStatus_ =
-  CreateTypeResponse'
-    {_ctrsType = Nothing, _ctrsResponseStatus = pResponseStatus_}
-
+createTypeResponse pResponseStatus_
+  = CreateTypeResponse'{_ctrsType = Nothing,
+                        _ctrsResponseStatus = pResponseStatus_}
 
 -- | The @Type@ object.
 ctrsType :: Lens' CreateTypeResponse (Maybe Type)

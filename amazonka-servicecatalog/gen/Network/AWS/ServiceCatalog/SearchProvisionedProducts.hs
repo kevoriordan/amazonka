@@ -53,22 +53,34 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'searchProvisionedProducts' smart constructor.
-data SearchProvisionedProducts = SearchProvisionedProducts'
-  { _sppFilters :: !(Maybe (Map ProvisionedProductViewFilterBy [Text]))
-  , _sppSortOrder :: !(Maybe SortOrder)
-  , _sppAcceptLanguage :: !(Maybe Text)
-  , _sppAccessLevelFilter :: !(Maybe AccessLevelFilter)
-  , _sppPageToken :: !(Maybe Text)
-  , _sppPageSize :: !(Maybe Nat)
-  , _sppSortBy :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProvisionedProducts = SearchProvisionedProducts'{_sppFilters
+                                                            ::
+                                                            !(Maybe
+                                                                (Map
+                                                                   ProvisionedProductViewFilterBy
+                                                                   [Text])),
+                                                            _sppSortOrder ::
+                                                            !(Maybe SortOrder),
+                                                            _sppAcceptLanguage
+                                                            :: !(Maybe Text),
+                                                            _sppAccessLevelFilter
+                                                            ::
+                                                            !(Maybe
+                                                                AccessLevelFilter),
+                                                            _sppPageToken ::
+                                                            !(Maybe Text),
+                                                            _sppPageSize ::
+                                                            !(Maybe Nat),
+                                                            _sppSortBy ::
+                                                            !(Maybe Text)}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'SearchProvisionedProducts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sppFilters' - The search filters. When the key is @SearchQuery@ , the searchable fields are @arn@ , @createdTime@ , @id@ , @lastRecordId@ , @idempotencyToken@ , @name@ , @physicalId@ , @productId@ , @provisioningArtifact@ , @type@ , @status@ , @tags@ , @userArn@ , and @userArnSession@ . Example: @"SearchQuery":["status:AVAILABLE"]@
+-- * 'sppFilters' - The search filters. When the key is @SearchQuery@ , the searchable fields are @arn@ , @createdTime@ , @id@ , @lastRecordId@ , @idempotencyToken@ , @name@ , @physicalId@ , @productId@ , @provisioningArtifact@ , @type@ , @status@ , @tags@ , @userArn@ , and @userArnSession@ . Example: @"SearchQuery":["status:AVAILABLE"]@ 
 --
 -- * 'sppSortOrder' - The sort order. If no value is specified, the results are not sorted.
 --
@@ -83,19 +95,15 @@ data SearchProvisionedProducts = SearchProvisionedProducts'
 -- * 'sppSortBy' - The sort field. If no value is specified, the results are not sorted. The valid values are @arn@ , @id@ , @name@ , and @lastRecordId@ .
 searchProvisionedProducts
     :: SearchProvisionedProducts
-searchProvisionedProducts =
-  SearchProvisionedProducts'
-    { _sppFilters = Nothing
-    , _sppSortOrder = Nothing
-    , _sppAcceptLanguage = Nothing
-    , _sppAccessLevelFilter = Nothing
-    , _sppPageToken = Nothing
-    , _sppPageSize = Nothing
-    , _sppSortBy = Nothing
-    }
+searchProvisionedProducts
+  = SearchProvisionedProducts'{_sppFilters = Nothing,
+                               _sppSortOrder = Nothing,
+                               _sppAcceptLanguage = Nothing,
+                               _sppAccessLevelFilter = Nothing,
+                               _sppPageToken = Nothing, _sppPageSize = Nothing,
+                               _sppSortBy = Nothing}
 
-
--- | The search filters. When the key is @SearchQuery@ , the searchable fields are @arn@ , @createdTime@ , @id@ , @lastRecordId@ , @idempotencyToken@ , @name@ , @physicalId@ , @productId@ , @provisioningArtifact@ , @type@ , @status@ , @tags@ , @userArn@ , and @userArnSession@ . Example: @"SearchQuery":["status:AVAILABLE"]@
+-- | The search filters. When the key is @SearchQuery@ , the searchable fields are @arn@ , @createdTime@ , @id@ , @lastRecordId@ , @idempotencyToken@ , @name@ , @physicalId@ , @productId@ , @provisioningArtifact@ , @type@ , @status@ , @tags@ , @userArn@ , and @userArnSession@ . Example: @"SearchQuery":["status:AVAILABLE"]@ 
 sppFilters :: Lens' SearchProvisionedProducts (HashMap ProvisionedProductViewFilterBy [Text])
 sppFilters = lens _sppFilters (\ s a -> s{_sppFilters = a}) . _Default . _Map
 
@@ -169,13 +177,23 @@ instance ToQuery SearchProvisionedProducts where
         toQuery = const mempty
 
 -- | /See:/ 'searchProvisionedProductsResponse' smart constructor.
-data SearchProvisionedProductsResponse = SearchProvisionedProductsResponse'
-  { _srsNextPageToken       :: !(Maybe Text)
-  , _srsProvisionedProducts :: !(Maybe [ProvisionedProductAttribute])
-  , _srsTotalResultsCount   :: !(Maybe Int)
-  , _srsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProvisionedProductsResponse = SearchProvisionedProductsResponse'{_srsNextPageToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _srsProvisionedProducts
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [ProvisionedProductAttribute]),
+                                                                            _srsTotalResultsCount
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Int),
+                                                                            _srsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'SearchProvisionedProductsResponse' with the minimum fields required to make a request.
 --
@@ -191,14 +209,12 @@ data SearchProvisionedProductsResponse = SearchProvisionedProductsResponse'
 searchProvisionedProductsResponse
     :: Int -- ^ 'srsResponseStatus'
     -> SearchProvisionedProductsResponse
-searchProvisionedProductsResponse pResponseStatus_ =
-  SearchProvisionedProductsResponse'
-    { _srsNextPageToken = Nothing
-    , _srsProvisionedProducts = Nothing
-    , _srsTotalResultsCount = Nothing
-    , _srsResponseStatus = pResponseStatus_
-    }
-
+searchProvisionedProductsResponse pResponseStatus_
+  = SearchProvisionedProductsResponse'{_srsNextPageToken
+                                         = Nothing,
+                                       _srsProvisionedProducts = Nothing,
+                                       _srsTotalResultsCount = Nothing,
+                                       _srsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 srsNextPageToken :: Lens' SearchProvisionedProductsResponse (Maybe Text)

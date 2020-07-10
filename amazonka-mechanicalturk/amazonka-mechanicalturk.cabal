@@ -88,12 +88,43 @@ library
         , Network.AWS.MechanicalTurk.Waiters
 
     other-modules:
-          Network.AWS.MechanicalTurk.Types.Product
-        , Network.AWS.MechanicalTurk.Types.Sum
+          Network.AWS.MechanicalTurk.Types.Assignment
+        , Network.AWS.MechanicalTurk.Types.AssignmentStatus
+        , Network.AWS.MechanicalTurk.Types.BonusPayment
+        , Network.AWS.MechanicalTurk.Types.Comparator
+        , Network.AWS.MechanicalTurk.Types.EventType
+        , Network.AWS.MechanicalTurk.Types.HIT
+        , Network.AWS.MechanicalTurk.Types.HITAccessActions
+        , Network.AWS.MechanicalTurk.Types.HITLayoutParameter
+        , Network.AWS.MechanicalTurk.Types.HITReviewStatus
+        , Network.AWS.MechanicalTurk.Types.HITStatus
+        , Network.AWS.MechanicalTurk.Types.Locale
+        , Network.AWS.MechanicalTurk.Types.NotificationSpecification
+        , Network.AWS.MechanicalTurk.Types.NotificationTransport
+        , Network.AWS.MechanicalTurk.Types.NotifyWorkersFailureCode
+        , Network.AWS.MechanicalTurk.Types.NotifyWorkersFailureStatus
+        , Network.AWS.MechanicalTurk.Types.ParameterMapEntry
+        , Network.AWS.MechanicalTurk.Types.PolicyParameter
+        , Network.AWS.MechanicalTurk.Types.Product
+        , Network.AWS.MechanicalTurk.Types.Qualification
+        , Network.AWS.MechanicalTurk.Types.QualificationRequest
+        , Network.AWS.MechanicalTurk.Types.QualificationRequirement
+        , Network.AWS.MechanicalTurk.Types.QualificationStatus
+        , Network.AWS.MechanicalTurk.Types.QualificationType
+        , Network.AWS.MechanicalTurk.Types.QualificationTypeStatus
+        , Network.AWS.MechanicalTurk.Types.ReviewActionDetail
+        , Network.AWS.MechanicalTurk.Types.ReviewActionStatus
+        , Network.AWS.MechanicalTurk.Types.ReviewPolicy
+        , Network.AWS.MechanicalTurk.Types.ReviewPolicyLevel
+        , Network.AWS.MechanicalTurk.Types.ReviewReport
+        , Network.AWS.MechanicalTurk.Types.ReviewResultDetail
+        , Network.AWS.MechanicalTurk.Types.ReviewableHITStatus
+        , Network.AWS.MechanicalTurk.Types.WorkerBlock
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-mechanicalturk-test
     type:              exitcode-stdio-1.0
@@ -117,6 +148,7 @@ test-suite amazonka-mechanicalturk-test
         , amazonka-mechanicalturk
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

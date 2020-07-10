@@ -51,12 +51,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyHAPG' smart constructor.
-data ModifyHAPG = ModifyHAPG'
-  { _mhPartitionSerialList :: !(Maybe [Text])
-  , _mhLabel               :: !(Maybe Text)
-  , _mhHAPGARN             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyHAPG = ModifyHAPG'{_mhPartitionSerialList
+                              :: !(Maybe [Text]),
+                              _mhLabel :: !(Maybe Text), _mhHAPGARN :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyHAPG' with the minimum fields required to make a request.
 --
@@ -70,13 +68,9 @@ data ModifyHAPG = ModifyHAPG'
 modifyHAPG
     :: Text -- ^ 'mhHAPGARN'
     -> ModifyHAPG
-modifyHAPG pHAPGARN_ =
-  ModifyHAPG'
-    { _mhPartitionSerialList = Nothing
-    , _mhLabel = Nothing
-    , _mhHAPGARN = pHAPGARN_
-    }
-
+modifyHAPG pHAPGARN_
+  = ModifyHAPG'{_mhPartitionSerialList = Nothing,
+                _mhLabel = Nothing, _mhHAPGARN = pHAPGARN_}
 
 -- | The list of partition serial numbers to make members of the high-availability partition group.
 mhPartitionSerialList :: Lens' ModifyHAPG [Text]
@@ -128,11 +122,10 @@ instance ToQuery ModifyHAPG where
         toQuery = const mempty
 
 -- | /See:/ 'modifyHAPGResponse' smart constructor.
-data ModifyHAPGResponse = ModifyHAPGResponse'
-  { _mhrsHAPGARN        :: !(Maybe Text)
-  , _mhrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyHAPGResponse = ModifyHAPGResponse'{_mhrsHAPGARN
+                                              :: !(Maybe Text),
+                                              _mhrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyHAPGResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +137,9 @@ data ModifyHAPGResponse = ModifyHAPGResponse'
 modifyHAPGResponse
     :: Int -- ^ 'mhrsResponseStatus'
     -> ModifyHAPGResponse
-modifyHAPGResponse pResponseStatus_ =
-  ModifyHAPGResponse'
-    {_mhrsHAPGARN = Nothing, _mhrsResponseStatus = pResponseStatus_}
-
+modifyHAPGResponse pResponseStatus_
+  = ModifyHAPGResponse'{_mhrsHAPGARN = Nothing,
+                        _mhrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the high-availability partition group.
 mhrsHAPGARN :: Lens' ModifyHAPGResponse (Maybe Text)

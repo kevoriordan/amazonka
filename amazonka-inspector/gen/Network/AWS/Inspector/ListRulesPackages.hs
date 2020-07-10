@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listRulesPackages' smart constructor.
-data ListRulesPackages = ListRulesPackages'
-  { _lrpNextToken  :: !(Maybe Text)
-  , _lrpMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRulesPackages = ListRulesPackages'{_lrpNextToken
+                                            :: !(Maybe Text),
+                                            _lrpMaxResults :: !(Maybe Int)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRulesPackages' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data ListRulesPackages = ListRulesPackages'
 -- * 'lrpMaxResults' - You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
 listRulesPackages
     :: ListRulesPackages
-listRulesPackages =
-  ListRulesPackages' {_lrpNextToken = Nothing, _lrpMaxResults = Nothing}
-
+listRulesPackages
+  = ListRulesPackages'{_lrpNextToken = Nothing,
+                       _lrpMaxResults = Nothing}
 
 -- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the __ListRulesPackages__ action. Subsequent calls to the action fill __nextToken__ in the request with the value of __NextToken__ from the previous response to continue listing data.
 lrpNextToken :: Lens' ListRulesPackages (Maybe Text)
@@ -121,12 +120,14 @@ instance ToQuery ListRulesPackages where
         toQuery = const mempty
 
 -- | /See:/ 'listRulesPackagesResponse' smart constructor.
-data ListRulesPackagesResponse = ListRulesPackagesResponse'
-  { _lrprsNextToken        :: !(Maybe Text)
-  , _lrprsResponseStatus   :: !Int
-  , _lrprsRulesPackageARNs :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRulesPackagesResponse = ListRulesPackagesResponse'{_lrprsNextToken
+                                                            :: !(Maybe Text),
+                                                            _lrprsResponseStatus
+                                                            :: !Int,
+                                                            _lrprsRulesPackageARNs
+                                                            :: ![Text]}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListRulesPackagesResponse' with the minimum fields required to make a request.
 --
@@ -140,13 +141,11 @@ data ListRulesPackagesResponse = ListRulesPackagesResponse'
 listRulesPackagesResponse
     :: Int -- ^ 'lrprsResponseStatus'
     -> ListRulesPackagesResponse
-listRulesPackagesResponse pResponseStatus_ =
-  ListRulesPackagesResponse'
-    { _lrprsNextToken = Nothing
-    , _lrprsResponseStatus = pResponseStatus_
-    , _lrprsRulesPackageARNs = mempty
-    }
-
+listRulesPackagesResponse pResponseStatus_
+  = ListRulesPackagesResponse'{_lrprsNextToken =
+                                 Nothing,
+                               _lrprsResponseStatus = pResponseStatus_,
+                               _lrprsRulesPackageARNs = mempty}
 
 -- | When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the __nextToken__ parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.
 lrprsNextToken :: Lens' ListRulesPackagesResponse (Maybe Text)

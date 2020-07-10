@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListReviewableHITs@ operation retrieves the HITs with Status equal to Reviewable or Status equal to Reviewing that belong to the Requester calling the operation.
+-- The @ListReviewableHITs@ operation retrieves the HITs with Status equal to Reviewable or Status equal to Reviewing that belong to the Requester calling the operation. 
 --
 --
 --
@@ -53,41 +53,36 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listReviewableHITs' smart constructor.
-data ListReviewableHITs = ListReviewableHITs'
-  { _lrhitStatus     :: !(Maybe ReviewableHITStatus)
-  , _lrhitHITTypeId  :: !(Maybe Text)
-  , _lrhitNextToken  :: !(Maybe Text)
-  , _lrhitMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReviewableHITs = ListReviewableHITs'{_lrhitStatus
+                                              :: !(Maybe ReviewableHITStatus),
+                                              _lrhitHITTypeId :: !(Maybe Text),
+                                              _lrhitNextToken :: !(Maybe Text),
+                                              _lrhitMaxResults :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListReviewableHITs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrhitStatus' - Can be either @Reviewable@ or @Reviewing@ . Reviewable is the default value.
+-- * 'lrhitStatus' - Can be either @Reviewable@ or @Reviewing@ . Reviewable is the default value. 
 --
--- * 'lrhitHITTypeId' - The ID of the HIT type of the HITs to consider for the query. If not specified, all HITs for the Reviewer are considered
+-- * 'lrhitHITTypeId' - The ID of the HIT type of the HITs to consider for the query. If not specified, all HITs for the Reviewer are considered 
 --
 -- * 'lrhitNextToken' - Pagination Token
 --
--- * 'lrhitMaxResults' - Limit the number of results returned.
+-- * 'lrhitMaxResults' - Limit the number of results returned. 
 listReviewableHITs
     :: ListReviewableHITs
-listReviewableHITs =
-  ListReviewableHITs'
-    { _lrhitStatus = Nothing
-    , _lrhitHITTypeId = Nothing
-    , _lrhitNextToken = Nothing
-    , _lrhitMaxResults = Nothing
-    }
+listReviewableHITs
+  = ListReviewableHITs'{_lrhitStatus = Nothing,
+                        _lrhitHITTypeId = Nothing, _lrhitNextToken = Nothing,
+                        _lrhitMaxResults = Nothing}
 
-
--- | Can be either @Reviewable@ or @Reviewing@ . Reviewable is the default value.
+-- | Can be either @Reviewable@ or @Reviewing@ . Reviewable is the default value. 
 lrhitStatus :: Lens' ListReviewableHITs (Maybe ReviewableHITStatus)
 lrhitStatus = lens _lrhitStatus (\ s a -> s{_lrhitStatus = a})
 
--- | The ID of the HIT type of the HITs to consider for the query. If not specified, all HITs for the Reviewer are considered
+-- | The ID of the HIT type of the HITs to consider for the query. If not specified, all HITs for the Reviewer are considered 
 lrhitHITTypeId :: Lens' ListReviewableHITs (Maybe Text)
 lrhitHITTypeId = lens _lrhitHITTypeId (\ s a -> s{_lrhitHITTypeId = a})
 
@@ -95,7 +90,7 @@ lrhitHITTypeId = lens _lrhitHITTypeId (\ s a -> s{_lrhitHITTypeId = a})
 lrhitNextToken :: Lens' ListReviewableHITs (Maybe Text)
 lrhitNextToken = lens _lrhitNextToken (\ s a -> s{_lrhitNextToken = a})
 
--- | Limit the number of results returned.
+-- | Limit the number of results returned. 
 lrhitMaxResults :: Lens' ListReviewableHITs (Maybe Natural)
 lrhitMaxResults = lens _lrhitMaxResults (\ s a -> s{_lrhitMaxResults = a}) . mapping _Nat
 
@@ -148,13 +143,16 @@ instance ToQuery ListReviewableHITs where
         toQuery = const mempty
 
 -- | /See:/ 'listReviewableHITsResponse' smart constructor.
-data ListReviewableHITsResponse = ListReviewableHITsResponse'
-  { _lrhitrsNextToken      :: !(Maybe Text)
-  , _lrhitrsNumResults     :: !(Maybe Int)
-  , _lrhitrsHITs           :: !(Maybe [HIT])
-  , _lrhitrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReviewableHITsResponse = ListReviewableHITsResponse'{_lrhitrsNextToken
+                                                              :: !(Maybe Text),
+                                                              _lrhitrsNumResults
+                                                              :: !(Maybe Int),
+                                                              _lrhitrsHITs ::
+                                                              !(Maybe [HIT]),
+                                                              _lrhitrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListReviewableHITsResponse' with the minimum fields required to make a request.
 --
@@ -162,7 +160,7 @@ data ListReviewableHITsResponse = ListReviewableHITsResponse'
 --
 -- * 'lrhitrsNextToken' - Undocumented member.
 --
--- * 'lrhitrsNumResults' - The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call.
+-- * 'lrhitrsNumResults' - The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call. 
 --
 -- * 'lrhitrsHITs' - The list of HIT elements returned by the query.
 --
@@ -170,20 +168,18 @@ data ListReviewableHITsResponse = ListReviewableHITsResponse'
 listReviewableHITsResponse
     :: Int -- ^ 'lrhitrsResponseStatus'
     -> ListReviewableHITsResponse
-listReviewableHITsResponse pResponseStatus_ =
-  ListReviewableHITsResponse'
-    { _lrhitrsNextToken = Nothing
-    , _lrhitrsNumResults = Nothing
-    , _lrhitrsHITs = Nothing
-    , _lrhitrsResponseStatus = pResponseStatus_
-    }
-
+listReviewableHITsResponse pResponseStatus_
+  = ListReviewableHITsResponse'{_lrhitrsNextToken =
+                                  Nothing,
+                                _lrhitrsNumResults = Nothing,
+                                _lrhitrsHITs = Nothing,
+                                _lrhitrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 lrhitrsNextToken :: Lens' ListReviewableHITsResponse (Maybe Text)
 lrhitrsNextToken = lens _lrhitrsNextToken (\ s a -> s{_lrhitrsNextToken = a})
 
--- | The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call.
+-- | The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call. 
 lrhitrsNumResults :: Lens' ListReviewableHITsResponse (Maybe Int)
 lrhitrsNumResults = lens _lrhitrsNumResults (\ s a -> s{_lrhitrsNumResults = a})
 

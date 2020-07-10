@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @CreateDomain@ operation creates a new domain. The domain name should be unique among the domains associated with the Access Key ID provided in the request. The @CreateDomain@ operation may take 10 or more seconds to complete.
+-- The @CreateDomain@ operation creates a new domain. The domain name should be unique among the domains associated with the Access Key ID provided in the request. The @CreateDomain@ operation may take 10 or more seconds to complete. 
 --
 --
--- The client can create up to 100 domains per account.
+-- The client can create up to 100 domains per account. 
 --
--- If the client requires additional domains, go to <http://aws.amazon.com/contact-us/simpledb-limit-request/ http://aws.amazon.com/contact-us/simpledb-limit-request/> .
+-- If the client requires additional domains, go to <http://aws.amazon.com/contact-us/simpledb-limit-request/ http://aws.amazon.com/contact-us/simpledb-limit-request/> . 
 --
 module Network.AWS.SDB.CreateDomain
     (
@@ -46,10 +46,9 @@ import Network.AWS.SDB.Types
 import Network.AWS.SDB.Types.Product
 
 -- | /See:/ 'createDomain' smart constructor.
-newtype CreateDomain = CreateDomain'
-  { _cdDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateDomain = CreateDomain'{_cdDomainName ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDomain' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype CreateDomain = CreateDomain'
 createDomain
     :: Text -- ^ 'cdDomainName'
     -> CreateDomain
-createDomain pDomainName_ = CreateDomain' {_cdDomainName = pDomainName_}
-
+createDomain pDomainName_
+  = CreateDomain'{_cdDomainName = pDomainName_}
 
 -- | The name of the domain to create. The name can range between 3 and 255 characters and can contain the following characters: a-z, A-Z, 0-9, '_', '-', and '.'.
 cdDomainName :: Lens' CreateDomain Text
@@ -89,16 +88,13 @@ instance ToQuery CreateDomain where
                "DomainName" =: _cdDomainName]
 
 -- | /See:/ 'createDomainResponse' smart constructor.
-data CreateDomainResponse =
-  CreateDomainResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDomainResponse = CreateDomainResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDomainResponse' with the minimum fields required to make a request.
 --
 createDomainResponse
     :: CreateDomainResponse
 createDomainResponse = CreateDomainResponse'
-
 
 instance NFData CreateDomainResponse where

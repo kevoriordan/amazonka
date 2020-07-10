@@ -25,10 +25,11 @@ module Network.AWS.MediaConvert.CreatePreset
       createPreset
     , CreatePreset
     -- * Request Lenses
-    , cpSettings
     , cpCategory
-    , cpName
     , cpDescription
+    , cpTags
+    , cpSettings
+    , cpName
 
     -- * Destructuring the Response
     , createPresetResponse
@@ -46,51 +47,55 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createPreset' smart constructor.
-data CreatePreset = CreatePreset'
-  { _cpSettings    :: !(Maybe PresetSettings)
-  , _cpCategory    :: !(Maybe Text)
-  , _cpName        :: !(Maybe Text)
-  , _cpDescription :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePreset = CreatePreset'{_cpCategory ::
+                                  !(Maybe Text),
+                                  _cpDescription :: !(Maybe Text),
+                                  _cpTags :: !(Maybe (Map Text Text)),
+                                  _cpSettings :: !PresetSettings,
+                                  _cpName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePreset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpSettings' - Undocumented member.
---
 -- * 'cpCategory' - Optional. A category for the preset you are creating.
 --
--- * 'cpName' - The name of the preset you are creating.
---
 -- * 'cpDescription' - Optional. A description of the preset you are creating.
+--
+-- * 'cpTags' - The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+--
+-- * 'cpSettings' - Settings for preset
+--
+-- * 'cpName' - The name of the preset you are creating.
 createPreset
-    :: CreatePreset
-createPreset =
-  CreatePreset'
-    { _cpSettings = Nothing
-    , _cpCategory = Nothing
-    , _cpName = Nothing
-    , _cpDescription = Nothing
-    }
-
-
--- | Undocumented member.
-cpSettings :: Lens' CreatePreset (Maybe PresetSettings)
-cpSettings = lens _cpSettings (\ s a -> s{_cpSettings = a})
+    :: PresetSettings -- ^ 'cpSettings'
+    -> Text -- ^ 'cpName'
+    -> CreatePreset
+createPreset pSettings_ pName_
+  = CreatePreset'{_cpCategory = Nothing,
+                  _cpDescription = Nothing, _cpTags = Nothing,
+                  _cpSettings = pSettings_, _cpName = pName_}
 
 -- | Optional. A category for the preset you are creating.
 cpCategory :: Lens' CreatePreset (Maybe Text)
 cpCategory = lens _cpCategory (\ s a -> s{_cpCategory = a})
 
--- | The name of the preset you are creating.
-cpName :: Lens' CreatePreset (Maybe Text)
-cpName = lens _cpName (\ s a -> s{_cpName = a})
-
 -- | Optional. A description of the preset you are creating.
 cpDescription :: Lens' CreatePreset (Maybe Text)
 cpDescription = lens _cpDescription (\ s a -> s{_cpDescription = a})
+
+-- | The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+cpTags :: Lens' CreatePreset (HashMap Text Text)
+cpTags = lens _cpTags (\ s a -> s{_cpTags = a}) . _Default . _Map
+
+-- | Settings for preset
+cpSettings :: Lens' CreatePreset PresetSettings
+cpSettings = lens _cpSettings (\ s a -> s{_cpSettings = a})
+
+-- | The name of the preset you are creating.
+cpName :: Lens' CreatePreset Text
+cpName = lens _cpName (\ s a -> s{_cpName = a})
 
 instance AWSRequest CreatePreset where
         type Rs CreatePreset = CreatePresetResponse
@@ -116,10 +121,11 @@ instance ToJSON CreatePreset where
         toJSON CreatePreset'{..}
           = object
               (catMaybes
-                 [("settings" .=) <$> _cpSettings,
-                  ("category" .=) <$> _cpCategory,
-                  ("name" .=) <$> _cpName,
-                  ("description" .=) <$> _cpDescription])
+                 [("category" .=) <$> _cpCategory,
+                  ("description" .=) <$> _cpDescription,
+                  ("tags" .=) <$> _cpTags,
+                  Just ("settings" .= _cpSettings),
+                  Just ("name" .= _cpName)])
 
 instance ToPath CreatePreset where
         toPath = const "/2017-08-29/presets"
@@ -128,28 +134,26 @@ instance ToQuery CreatePreset where
         toQuery = const mempty
 
 -- | /See:/ 'createPresetResponse' smart constructor.
-data CreatePresetResponse = CreatePresetResponse'
-  { _cprsPreset         :: !(Maybe Preset)
-  , _cprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePresetResponse = CreatePresetResponse'{_cprsPreset
+                                                  :: !(Maybe Preset),
+                                                  _cprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePresetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cprsPreset' - Undocumented member.
+-- * 'cprsPreset' - A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
 --
 -- * 'cprsResponseStatus' - -- | The response status code.
 createPresetResponse
     :: Int -- ^ 'cprsResponseStatus'
     -> CreatePresetResponse
-createPresetResponse pResponseStatus_ =
-  CreatePresetResponse'
-    {_cprsPreset = Nothing, _cprsResponseStatus = pResponseStatus_}
+createPresetResponse pResponseStatus_
+  = CreatePresetResponse'{_cprsPreset = Nothing,
+                          _cprsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
 cprsPreset :: Lens' CreatePresetResponse (Maybe Preset)
 cprsPreset = lens _cprsPreset (\ s a -> s{_cprsPreset = a})
 

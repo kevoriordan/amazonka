@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the subscribers associated with a notification.
+-- Lists the subscribers that are associated with a notification.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.Budgets.DescribeSubscribersForNotification
     (
     -- * Creating a Request
@@ -45,31 +47,43 @@ module Network.AWS.Budgets.DescribeSubscribersForNotification
 import Network.AWS.Budgets.Types
 import Network.AWS.Budgets.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request of DescribeSubscribersForNotification
+-- | Request of DescribeSubscribersForNotification 
 --
 --
 --
 -- /See:/ 'describeSubscribersForNotification' smart constructor.
-data DescribeSubscribersForNotification = DescribeSubscribersForNotification'
-  { _dsfnNextToken    :: !(Maybe Text)
-  , _dsfnMaxResults   :: !(Maybe Nat)
-  , _dsfnAccountId    :: !Text
-  , _dsfnBudgetName   :: !Text
-  , _dsfnNotification :: !Notification
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubscribersForNotification = DescribeSubscribersForNotification'{_dsfnNextToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _dsfnMaxResults
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Nat),
+                                                                              _dsfnAccountId
+                                                                              ::
+                                                                              !Text,
+                                                                              _dsfnBudgetName
+                                                                              ::
+                                                                              !Text,
+                                                                              _dsfnNotification
+                                                                              ::
+                                                                              !Notification}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeSubscribersForNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsfnNextToken' - The pagination token that indicates the next set of results to retrieve.
+-- * 'dsfnNextToken' - The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
 --
--- * 'dsfnMaxResults' - Optional integer. Specifies the maximum number of results to return in response.
+-- * 'dsfnMaxResults' - An optional integer that represents how many entries a paginated response contains. The maximum is 100.
 --
 -- * 'dsfnAccountId' - The @accountId@ that is associated with the budget whose subscribers you want descriptions of.
 --
@@ -81,21 +95,20 @@ describeSubscribersForNotification
     -> Text -- ^ 'dsfnBudgetName'
     -> Notification -- ^ 'dsfnNotification'
     -> DescribeSubscribersForNotification
-describeSubscribersForNotification pAccountId_ pBudgetName_ pNotification_ =
-  DescribeSubscribersForNotification'
-    { _dsfnNextToken = Nothing
-    , _dsfnMaxResults = Nothing
-    , _dsfnAccountId = pAccountId_
-    , _dsfnBudgetName = pBudgetName_
-    , _dsfnNotification = pNotification_
-    }
+describeSubscribersForNotification pAccountId_
+  pBudgetName_ pNotification_
+  = DescribeSubscribersForNotification'{_dsfnNextToken
+                                          = Nothing,
+                                        _dsfnMaxResults = Nothing,
+                                        _dsfnAccountId = pAccountId_,
+                                        _dsfnBudgetName = pBudgetName_,
+                                        _dsfnNotification = pNotification_}
 
-
--- | The pagination token that indicates the next set of results to retrieve.
+-- | The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
 dsfnNextToken :: Lens' DescribeSubscribersForNotification (Maybe Text)
 dsfnNextToken = lens _dsfnNextToken (\ s a -> s{_dsfnNextToken = a})
 
--- | Optional integer. Specifies the maximum number of results to return in response.
+-- | An optional integer that represents how many entries a paginated response contains. The maximum is 100.
 dsfnMaxResults :: Lens' DescribeSubscribersForNotification (Maybe Natural)
 dsfnMaxResults = lens _dsfnMaxResults (\ s a -> s{_dsfnMaxResults = a}) . mapping _Nat
 
@@ -110,6 +123,14 @@ dsfnBudgetName = lens _dsfnBudgetName (\ s a -> s{_dsfnBudgetName = a})
 -- | The notification whose subscribers you want to list.
 dsfnNotification :: Lens' DescribeSubscribersForNotification Notification
 dsfnNotification = lens _dsfnNotification (\ s a -> s{_dsfnNotification = a})
+
+instance AWSPager DescribeSubscribersForNotification
+         where
+        page rq rs
+          | stop (rs ^. dsfnrsNextToken) = Nothing
+          | stop (rs ^. dsfnrsSubscribers) = Nothing
+          | otherwise =
+            Just $ rq & dsfnNextToken .~ rs ^. dsfnrsNextToken
 
 instance AWSRequest
            DescribeSubscribersForNotification
@@ -160,43 +181,51 @@ instance ToQuery DescribeSubscribersForNotification
          where
         toQuery = const mempty
 
--- | Response of DescribeSubscribersForNotification
+-- | Response of DescribeSubscribersForNotification 
 --
 --
 --
 -- /See:/ 'describeSubscribersForNotificationResponse' smart constructor.
-data DescribeSubscribersForNotificationResponse = DescribeSubscribersForNotificationResponse'
-  { _dsfnrsNextToken      :: !(Maybe Text)
-  , _dsfnrsSubscribers    :: !(Maybe (List1 Subscriber))
-  , _dsfnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubscribersForNotificationResponse = DescribeSubscribersForNotificationResponse'{_dsfnrsNextToken
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _dsfnrsSubscribers
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  (List1
+                                                                                                     Subscriber)),
+                                                                                              _dsfnrsResponseStatus
+                                                                                              ::
+                                                                                              !Int}
+                                                    deriving (Eq, Show, Data,
+                                                              Typeable, Generic)
 
 -- | Creates a value of 'DescribeSubscribersForNotificationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsfnrsNextToken' - The pagination token that indicates the next set of results that you can retrieve.
+-- * 'dsfnrsNextToken' - The pagination token in the service response that indicates the next set of results that you can retrieve.
 --
--- * 'dsfnrsSubscribers' - A list of subscribers associated with a notification.
+-- * 'dsfnrsSubscribers' - A list of subscribers that are associated with a notification.
 --
 -- * 'dsfnrsResponseStatus' - -- | The response status code.
 describeSubscribersForNotificationResponse
     :: Int -- ^ 'dsfnrsResponseStatus'
     -> DescribeSubscribersForNotificationResponse
-describeSubscribersForNotificationResponse pResponseStatus_ =
-  DescribeSubscribersForNotificationResponse'
-    { _dsfnrsNextToken = Nothing
-    , _dsfnrsSubscribers = Nothing
-    , _dsfnrsResponseStatus = pResponseStatus_
-    }
+describeSubscribersForNotificationResponse
+  pResponseStatus_
+  = DescribeSubscribersForNotificationResponse'{_dsfnrsNextToken
+                                                  = Nothing,
+                                                _dsfnrsSubscribers = Nothing,
+                                                _dsfnrsResponseStatus =
+                                                  pResponseStatus_}
 
-
--- | The pagination token that indicates the next set of results that you can retrieve.
+-- | The pagination token in the service response that indicates the next set of results that you can retrieve.
 dsfnrsNextToken :: Lens' DescribeSubscribersForNotificationResponse (Maybe Text)
 dsfnrsNextToken = lens _dsfnrsNextToken (\ s a -> s{_dsfnrsNextToken = a})
 
--- | A list of subscribers associated with a notification.
+-- | A list of subscribers that are associated with a notification.
 dsfnrsSubscribers :: Lens' DescribeSubscribersForNotificationResponse (Maybe (NonEmpty Subscriber))
 dsfnrsSubscribers = lens _dsfnrsSubscribers (\ s a -> s{_dsfnrsSubscribers = a}) . mapping _List1
 

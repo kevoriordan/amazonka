@@ -46,11 +46,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateIAMInstanceProfile' smart constructor.
-data AssociateIAMInstanceProfile = AssociateIAMInstanceProfile'
-  { _aiapIAMInstanceProfile :: !IAMInstanceProfileSpecification
-  , _aiapInstanceId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateIAMInstanceProfile = AssociateIAMInstanceProfile'{_aiapIAMInstanceProfile
+                                                                ::
+                                                                !IAMInstanceProfileSpecification,
+                                                                _aiapInstanceId
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AssociateIAMInstanceProfile' with the minimum fields required to make a request.
 --
@@ -63,12 +65,11 @@ associateIAMInstanceProfile
     :: IAMInstanceProfileSpecification -- ^ 'aiapIAMInstanceProfile'
     -> Text -- ^ 'aiapInstanceId'
     -> AssociateIAMInstanceProfile
-associateIAMInstanceProfile pIAMInstanceProfile_ pInstanceId_ =
-  AssociateIAMInstanceProfile'
-    { _aiapIAMInstanceProfile = pIAMInstanceProfile_
-    , _aiapInstanceId = pInstanceId_
-    }
-
+associateIAMInstanceProfile pIAMInstanceProfile_
+  pInstanceId_
+  = AssociateIAMInstanceProfile'{_aiapIAMInstanceProfile
+                                   = pIAMInstanceProfile_,
+                                 _aiapInstanceId = pInstanceId_}
 
 -- | The IAM instance profile.
 aiapIAMInstanceProfile :: Lens' AssociateIAMInstanceProfile IAMInstanceProfileSpecification
@@ -109,11 +110,15 @@ instance ToQuery AssociateIAMInstanceProfile where
                "InstanceId" =: _aiapInstanceId]
 
 -- | /See:/ 'associateIAMInstanceProfileResponse' smart constructor.
-data AssociateIAMInstanceProfileResponse = AssociateIAMInstanceProfileResponse'
-  { _aiaprsIAMInstanceProfileAssociation :: !(Maybe IAMInstanceProfileAssociation)
-  , _aiaprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateIAMInstanceProfileResponse = AssociateIAMInstanceProfileResponse'{_aiaprsIAMInstanceProfileAssociation
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    IAMInstanceProfileAssociation),
+                                                                                _aiaprsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'AssociateIAMInstanceProfileResponse' with the minimum fields required to make a request.
 --
@@ -125,12 +130,11 @@ data AssociateIAMInstanceProfileResponse = AssociateIAMInstanceProfileResponse'
 associateIAMInstanceProfileResponse
     :: Int -- ^ 'aiaprsResponseStatus'
     -> AssociateIAMInstanceProfileResponse
-associateIAMInstanceProfileResponse pResponseStatus_ =
-  AssociateIAMInstanceProfileResponse'
-    { _aiaprsIAMInstanceProfileAssociation = Nothing
-    , _aiaprsResponseStatus = pResponseStatus_
-    }
-
+associateIAMInstanceProfileResponse pResponseStatus_
+  = AssociateIAMInstanceProfileResponse'{_aiaprsIAMInstanceProfileAssociation
+                                           = Nothing,
+                                         _aiaprsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Information about the IAM instance profile association.
 aiaprsIAMInstanceProfileAssociation :: Lens' AssociateIAMInstanceProfileResponse (Maybe IAMInstanceProfileAssociation)

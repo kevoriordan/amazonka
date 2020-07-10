@@ -21,6 +21,8 @@
 -- Lists the resource servers for a user pool.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CognitoIdentityProvider.ListResourceServers
     (
     -- * Creating a Request
@@ -43,17 +45,17 @@ module Network.AWS.CognitoIdentityProvider.ListResourceServers
 import Network.AWS.CognitoIdentityProvider.Types
 import Network.AWS.CognitoIdentityProvider.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listResourceServers' smart constructor.
-data ListResourceServers = ListResourceServers'
-  { _lrsNextToken  :: !(Maybe Text)
-  , _lrsMaxResults :: !(Maybe Nat)
-  , _lrsUserPoolId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceServers = ListResourceServers'{_lrsNextToken
+                                                :: !(Maybe Text),
+                                                _lrsMaxResults :: !(Maybe Nat),
+                                                _lrsUserPoolId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListResourceServers' with the minimum fields required to make a request.
 --
@@ -67,13 +69,10 @@ data ListResourceServers = ListResourceServers'
 listResourceServers
     :: Text -- ^ 'lrsUserPoolId'
     -> ListResourceServers
-listResourceServers pUserPoolId_ =
-  ListResourceServers'
-    { _lrsNextToken = Nothing
-    , _lrsMaxResults = Nothing
-    , _lrsUserPoolId = pUserPoolId_
-    }
-
+listResourceServers pUserPoolId_
+  = ListResourceServers'{_lrsNextToken = Nothing,
+                         _lrsMaxResults = Nothing,
+                         _lrsUserPoolId = pUserPoolId_}
 
 -- | A pagination token.
 lrsNextToken :: Lens' ListResourceServers (Maybe Text)
@@ -86,6 +85,13 @@ lrsMaxResults = lens _lrsMaxResults (\ s a -> s{_lrsMaxResults = a}) . mapping _
 -- | The user pool ID for the user pool.
 lrsUserPoolId :: Lens' ListResourceServers Text
 lrsUserPoolId = lens _lrsUserPoolId (\ s a -> s{_lrsUserPoolId = a})
+
+instance AWSPager ListResourceServers where
+        page rq rs
+          | stop (rs ^. lrsrsNextToken) = Nothing
+          | stop (rs ^. lrsrsResourceServers) = Nothing
+          | otherwise =
+            Just $ rq & lrsNextToken .~ rs ^. lrsrsNextToken
 
 instance AWSRequest ListResourceServers where
         type Rs ListResourceServers =
@@ -127,12 +133,16 @@ instance ToQuery ListResourceServers where
         toQuery = const mempty
 
 -- | /See:/ 'listResourceServersResponse' smart constructor.
-data ListResourceServersResponse = ListResourceServersResponse'
-  { _lrsrsNextToken       :: !(Maybe Text)
-  , _lrsrsResponseStatus  :: !Int
-  , _lrsrsResourceServers :: ![ResourceServerType]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceServersResponse = ListResourceServersResponse'{_lrsrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lrsrsResponseStatus
+                                                                :: !Int,
+                                                                _lrsrsResourceServers
+                                                                ::
+                                                                ![ResourceServerType]}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListResourceServersResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +156,11 @@ data ListResourceServersResponse = ListResourceServersResponse'
 listResourceServersResponse
     :: Int -- ^ 'lrsrsResponseStatus'
     -> ListResourceServersResponse
-listResourceServersResponse pResponseStatus_ =
-  ListResourceServersResponse'
-    { _lrsrsNextToken = Nothing
-    , _lrsrsResponseStatus = pResponseStatus_
-    , _lrsrsResourceServers = mempty
-    }
-
+listResourceServersResponse pResponseStatus_
+  = ListResourceServersResponse'{_lrsrsNextToken =
+                                   Nothing,
+                                 _lrsrsResponseStatus = pResponseStatus_,
+                                 _lrsrsResourceServers = mempty}
 
 -- | A pagination token.
 lrsrsNextToken :: Lens' ListResourceServersResponse (Maybe Text)

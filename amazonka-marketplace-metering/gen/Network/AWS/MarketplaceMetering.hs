@@ -11,25 +11,33 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS Marketplace Metering Service__
+-- __AWS Marketplace Metering Service__ 
 --
 -- This reference provides descriptions of the low-level AWS Marketplace Metering Service API.
 --
 -- AWS Marketplace sellers can use this API to submit usage data for custom usage dimensions.
 --
--- __Submitting Metering Records__
+-- __Submitting Metering Records__ 
 --
---     * /MeterUsage/ - Submits the metering record for a Marketplace product. MeterUsage is called from an EC2 instance.
+--     * /MeterUsage/ - Submits the metering record for a Marketplace product. MeterUsage is called from an EC2 instance or a container running on EKS or ECS.
 --
 --     * /BatchMeterUsage/ - Submits the metering record for a set of customers. BatchMeterUsage is called from a software-as-a-service (SaaS) application.
 --
 --
 --
--- __Accepting New Customers__
+-- __Accepting New Customers__ 
 --
 --     * /ResolveCustomer/ - Called by a SaaS application during the registration process. When a buyer visits your website during the registration process, the buyer submits a Registration Token through the browser. The Registration Token is resolved through this API to obtain a CustomerIdentifier and Product Code.
 --
 --
+--
+-- __Entitlement and Metering for Paid Container Products__ 
+--
+--     * Paid container software products sold through AWS Marketplace must integrate with the AWS Marketplace Metering Service and call the RegisterUsage operation for software entitlement and metering. Free and BYOL products for Amazon ECS or Amazon EKS aren't required to call RegisterUsage, but you can do so if you want to receive usage data in your seller reports. For more information on using the RegisterUsage operation, see <https://docs.aws.amazon.com/marketplace/latest/userguide/container-based-products.html Container-Based Products> . 
+--
+--
+--
+-- BatchMeterUsage API calls are captured by AWS CloudTrail. You can use Cloudtrail to verify that the SaaS metering records that you sent are accurate by searching for records with the eventName of BatchMeterUsage. You can also use CloudTrail to audit records over time. For more information, see the /<http:\/\/docs.aws.amazon.com\/awscloudtrail\/latest\/userguide\/cloudtrail-concepts.html AWS CloudTrail User Guide> / .
 --
 module Network.AWS.MarketplaceMetering
     (
@@ -39,35 +47,50 @@ module Network.AWS.MarketplaceMetering
     -- * Errors
     -- $errors
 
-    -- ** InvalidEndpointRegionException
-    , _InvalidEndpointRegionException
+    -- ** PlatformNotSupportedException
+    , _PlatformNotSupportedException
 
     -- ** InvalidProductCodeException
     , _InvalidProductCodeException
 
-    -- ** InvalidUsageDimensionException
-    , _InvalidUsageDimensionException
+    -- ** InvalidPublicKeyVersionException
+    , _InvalidPublicKeyVersionException
 
-    -- ** DuplicateRequestException
-    , _DuplicateRequestException
+    -- ** DisabledAPIException
+    , _DisabledAPIException
 
-    -- ** TimestampOutOfBoundsException
-    , _TimestampOutOfBoundsException
-
-    -- ** ThrottlingException
-    , _ThrottlingException
-
-    -- ** InternalServiceErrorException
-    , _InternalServiceErrorException
-
-    -- ** InvalidTokenException
-    , _InvalidTokenException
+    -- ** CustomerNotEntitledException
+    , _CustomerNotEntitledException
 
     -- ** ExpiredTokenException
     , _ExpiredTokenException
 
+    -- ** InvalidUsageDimensionException
+    , _InvalidUsageDimensionException
+
+    -- ** InvalidTokenException
+    , _InvalidTokenException
+
+    -- ** InvalidEndpointRegionException
+    , _InvalidEndpointRegionException
+
+    -- ** InternalServiceErrorException
+    , _InternalServiceErrorException
+
+    -- ** ThrottlingException
+    , _ThrottlingException
+
+    -- ** TimestampOutOfBoundsException
+    , _TimestampOutOfBoundsException
+
     -- ** InvalidCustomerIdentifierException
     , _InvalidCustomerIdentifierException
+
+    -- ** DuplicateRequestException
+    , _DuplicateRequestException
+
+    -- ** InvalidRegionException
+    , _InvalidRegionException
 
     -- * Waiters
     -- $waiters
@@ -75,13 +98,16 @@ module Network.AWS.MarketplaceMetering
     -- * Operations
     -- $operations
 
-    -- ** BatchMeterUsage
+    -- ** RegisterUsage 
+    , module Network.AWS.MarketplaceMetering.RegisterUsage
+
+    -- ** BatchMeterUsage 
     , module Network.AWS.MarketplaceMetering.BatchMeterUsage
 
-    -- ** ResolveCustomer
+    -- ** ResolveCustomer 
     , module Network.AWS.MarketplaceMetering.ResolveCustomer
 
-    -- ** MeterUsage
+    -- ** MeterUsage 
     , module Network.AWS.MarketplaceMetering.MeterUsage
 
     -- * Types
@@ -92,10 +118,10 @@ module Network.AWS.MarketplaceMetering
     -- ** UsageRecord
     , UsageRecord
     , usageRecord
+    , urQuantity
     , urTimestamp
     , urCustomerIdentifier
     , urDimension
-    , urQuantity
 
     -- ** UsageRecordResult
     , UsageRecordResult
@@ -107,6 +133,7 @@ module Network.AWS.MarketplaceMetering
 
 import Network.AWS.MarketplaceMetering.BatchMeterUsage
 import Network.AWS.MarketplaceMetering.MeterUsage
+import Network.AWS.MarketplaceMetering.RegisterUsage
 import Network.AWS.MarketplaceMetering.ResolveCustomer
 import Network.AWS.MarketplaceMetering.Types
 import Network.AWS.MarketplaceMetering.Waiters

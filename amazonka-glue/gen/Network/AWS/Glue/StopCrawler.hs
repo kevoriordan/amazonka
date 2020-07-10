@@ -27,7 +27,7 @@ module Network.AWS.Glue.StopCrawler
       stopCrawler
     , StopCrawler
     -- * Request Lenses
-    , sName
+    , stoName
 
     -- * Destructuring the Response
     , stopCrawlerResponse
@@ -44,25 +44,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopCrawler' smart constructor.
-newtype StopCrawler = StopCrawler'
-  { _sName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopCrawler = StopCrawler'{_stoName :: Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopCrawler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sName' - Name of the crawler to stop.
+-- * 'stoName' - Name of the crawler to stop.
 stopCrawler
-    :: Text -- ^ 'sName'
+    :: Text -- ^ 'stoName'
     -> StopCrawler
-stopCrawler pName_ = StopCrawler' {_sName = pName_}
-
+stopCrawler pName_ = StopCrawler'{_stoName = pName_}
 
 -- | Name of the crawler to stop.
-sName :: Lens' StopCrawler Text
-sName = lens _sName (\ s a -> s{_sName = a})
+stoName :: Lens' StopCrawler Text
+stoName = lens _stoName (\ s a -> s{_stoName = a})
 
 instance AWSRequest StopCrawler where
         type Rs StopCrawler = StopCrawlerResponse
@@ -87,7 +84,7 @@ instance ToHeaders StopCrawler where
 
 instance ToJSON StopCrawler where
         toJSON StopCrawler'{..}
-          = object (catMaybes [Just ("Name" .= _sName)])
+          = object (catMaybes [Just ("Name" .= _stoName)])
 
 instance ToPath StopCrawler where
         toPath = const "/"
@@ -96,10 +93,10 @@ instance ToQuery StopCrawler where
         toQuery = const mempty
 
 -- | /See:/ 'stopCrawlerResponse' smart constructor.
-newtype StopCrawlerResponse = StopCrawlerResponse'
-  { _srsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopCrawlerResponse = StopCrawlerResponse'{_srsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StopCrawlerResponse' with the minimum fields required to make a request.
 --
@@ -109,9 +106,9 @@ newtype StopCrawlerResponse = StopCrawlerResponse'
 stopCrawlerResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopCrawlerResponse
-stopCrawlerResponse pResponseStatus_ =
-  StopCrawlerResponse' {_srsResponseStatus = pResponseStatus_}
-
+stopCrawlerResponse pResponseStatus_
+  = StopCrawlerResponse'{_srsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 srsResponseStatus :: Lens' StopCrawlerResponse Int

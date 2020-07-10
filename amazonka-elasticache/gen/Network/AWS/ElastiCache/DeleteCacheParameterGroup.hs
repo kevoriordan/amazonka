@@ -46,10 +46,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteCacheParameterGroup' smart constructor.
-newtype DeleteCacheParameterGroup = DeleteCacheParameterGroup'
-  { _dCacheParameterGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCacheParameterGroup = DeleteCacheParameterGroup'{_dCacheParameterGroupName
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteCacheParameterGroup' with the minimum fields required to make a request.
 --
@@ -59,10 +59,9 @@ newtype DeleteCacheParameterGroup = DeleteCacheParameterGroup'
 deleteCacheParameterGroup
     :: Text -- ^ 'dCacheParameterGroupName'
     -> DeleteCacheParameterGroup
-deleteCacheParameterGroup pCacheParameterGroupName_ =
-  DeleteCacheParameterGroup'
-    {_dCacheParameterGroupName = pCacheParameterGroupName_}
-
+deleteCacheParameterGroup pCacheParameterGroupName_
+  = DeleteCacheParameterGroup'{_dCacheParameterGroupName
+                                 = pCacheParameterGroupName_}
 
 -- | The name of the cache parameter group to delete.
 dCacheParameterGroupName :: Lens' DeleteCacheParameterGroup Text
@@ -95,17 +94,16 @@ instance ToQuery DeleteCacheParameterGroup where
                  _dCacheParameterGroupName]
 
 -- | /See:/ 'deleteCacheParameterGroupResponse' smart constructor.
-data DeleteCacheParameterGroupResponse =
-  DeleteCacheParameterGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCacheParameterGroupResponse = DeleteCacheParameterGroupResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteCacheParameterGroupResponse' with the minimum fields required to make a request.
 --
 deleteCacheParameterGroupResponse
     :: DeleteCacheParameterGroupResponse
-deleteCacheParameterGroupResponse = DeleteCacheParameterGroupResponse'
-
+deleteCacheParameterGroupResponse
+  = DeleteCacheParameterGroupResponse'
 
 instance NFData DeleteCacheParameterGroupResponse
          where

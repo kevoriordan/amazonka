@@ -61,10 +61,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeHAPG' smart constructor.
-newtype DescribeHAPG = DescribeHAPG'
-  { _dhapgHAPGARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeHAPG = DescribeHAPG'{_dhapgHAPGARN ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeHAPG' with the minimum fields required to make a request.
 --
@@ -74,8 +73,8 @@ newtype DescribeHAPG = DescribeHAPG'
 describeHAPG
     :: Text -- ^ 'dhapgHAPGARN'
     -> DescribeHAPG
-describeHAPG pHAPGARN_ = DescribeHAPG' {_dhapgHAPGARN = pHAPGARN_}
-
+describeHAPG pHAPGARN_
+  = DescribeHAPG'{_dhapgHAPGARN = pHAPGARN_}
 
 -- | The ARN of the high-availability partition group to describe.
 dhapgHAPGARN :: Lens' DescribeHAPG Text
@@ -128,19 +127,28 @@ instance ToQuery DescribeHAPG where
 --
 --
 -- /See:/ 'describeHAPGResponse' smart constructor.
-data DescribeHAPGResponse = DescribeHAPGResponse'
-  { _dhapgrsState                   :: !(Maybe CloudHSMObjectState)
-  , _dhapgrsLastModifiedTimestamp   :: !(Maybe Text)
-  , _dhapgrsHSMsPendingRegistration :: !(Maybe [Text])
-  , _dhapgrsHSMsPendingDeletion     :: !(Maybe [Text])
-  , _dhapgrsHAPGSerial              :: !(Maybe Text)
-  , _dhapgrsHSMsLastActionFailed    :: !(Maybe [Text])
-  , _dhapgrsPartitionSerialList     :: !(Maybe [Text])
-  , _dhapgrsHAPGARN                 :: !(Maybe Text)
-  , _dhapgrsLabel                   :: !(Maybe Text)
-  , _dhapgrsResponseStatus          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeHAPGResponse = DescribeHAPGResponse'{_dhapgrsState
+                                                  ::
+                                                  !(Maybe CloudHSMObjectState),
+                                                  _dhapgrsLastModifiedTimestamp
+                                                  :: !(Maybe Text),
+                                                  _dhapgrsHSMsPendingRegistration
+                                                  :: !(Maybe [Text]),
+                                                  _dhapgrsHSMsPendingDeletion ::
+                                                  !(Maybe [Text]),
+                                                  _dhapgrsHAPGSerial ::
+                                                  !(Maybe Text),
+                                                  _dhapgrsHSMsLastActionFailed
+                                                  :: !(Maybe [Text]),
+                                                  _dhapgrsPartitionSerialList ::
+                                                  !(Maybe [Text]),
+                                                  _dhapgrsHAPGARN ::
+                                                  !(Maybe Text),
+                                                  _dhapgrsLabel ::
+                                                  !(Maybe Text),
+                                                  _dhapgrsResponseStatus ::
+                                                  !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeHAPGResponse' with the minimum fields required to make a request.
 --
@@ -150,13 +158,13 @@ data DescribeHAPGResponse = DescribeHAPGResponse'
 --
 -- * 'dhapgrsLastModifiedTimestamp' - The date and time the high-availability partition group was last modified.
 --
--- * 'dhapgrsHSMsPendingRegistration' -
+-- * 'dhapgrsHSMsPendingRegistration' - 
 --
--- * 'dhapgrsHSMsPendingDeletion' -
+-- * 'dhapgrsHSMsPendingDeletion' - 
 --
 -- * 'dhapgrsHAPGSerial' - The serial number of the high-availability partition group.
 --
--- * 'dhapgrsHSMsLastActionFailed' -
+-- * 'dhapgrsHSMsLastActionFailed' - 
 --
 -- * 'dhapgrsPartitionSerialList' - The list of partition serial numbers that belong to the high-availability partition group.
 --
@@ -168,20 +176,16 @@ data DescribeHAPGResponse = DescribeHAPGResponse'
 describeHAPGResponse
     :: Int -- ^ 'dhapgrsResponseStatus'
     -> DescribeHAPGResponse
-describeHAPGResponse pResponseStatus_ =
-  DescribeHAPGResponse'
-    { _dhapgrsState = Nothing
-    , _dhapgrsLastModifiedTimestamp = Nothing
-    , _dhapgrsHSMsPendingRegistration = Nothing
-    , _dhapgrsHSMsPendingDeletion = Nothing
-    , _dhapgrsHAPGSerial = Nothing
-    , _dhapgrsHSMsLastActionFailed = Nothing
-    , _dhapgrsPartitionSerialList = Nothing
-    , _dhapgrsHAPGARN = Nothing
-    , _dhapgrsLabel = Nothing
-    , _dhapgrsResponseStatus = pResponseStatus_
-    }
-
+describeHAPGResponse pResponseStatus_
+  = DescribeHAPGResponse'{_dhapgrsState = Nothing,
+                          _dhapgrsLastModifiedTimestamp = Nothing,
+                          _dhapgrsHSMsPendingRegistration = Nothing,
+                          _dhapgrsHSMsPendingDeletion = Nothing,
+                          _dhapgrsHAPGSerial = Nothing,
+                          _dhapgrsHSMsLastActionFailed = Nothing,
+                          _dhapgrsPartitionSerialList = Nothing,
+                          _dhapgrsHAPGARN = Nothing, _dhapgrsLabel = Nothing,
+                          _dhapgrsResponseStatus = pResponseStatus_}
 
 -- | The state of the high-availability partition group.
 dhapgrsState :: Lens' DescribeHAPGResponse (Maybe CloudHSMObjectState)
@@ -191,11 +195,11 @@ dhapgrsState = lens _dhapgrsState (\ s a -> s{_dhapgrsState = a})
 dhapgrsLastModifiedTimestamp :: Lens' DescribeHAPGResponse (Maybe Text)
 dhapgrsLastModifiedTimestamp = lens _dhapgrsLastModifiedTimestamp (\ s a -> s{_dhapgrsLastModifiedTimestamp = a})
 
--- |
+-- | 
 dhapgrsHSMsPendingRegistration :: Lens' DescribeHAPGResponse [Text]
 dhapgrsHSMsPendingRegistration = lens _dhapgrsHSMsPendingRegistration (\ s a -> s{_dhapgrsHSMsPendingRegistration = a}) . _Default . _Coerce
 
--- |
+-- | 
 dhapgrsHSMsPendingDeletion :: Lens' DescribeHAPGResponse [Text]
 dhapgrsHSMsPendingDeletion = lens _dhapgrsHSMsPendingDeletion (\ s a -> s{_dhapgrsHSMsPendingDeletion = a}) . _Default . _Coerce
 
@@ -203,7 +207,7 @@ dhapgrsHSMsPendingDeletion = lens _dhapgrsHSMsPendingDeletion (\ s a -> s{_dhapg
 dhapgrsHAPGSerial :: Lens' DescribeHAPGResponse (Maybe Text)
 dhapgrsHAPGSerial = lens _dhapgrsHAPGSerial (\ s a -> s{_dhapgrsHAPGSerial = a})
 
--- |
+-- | 
 dhapgrsHSMsLastActionFailed :: Lens' DescribeHAPGResponse [Text]
 dhapgrsHSMsLastActionFailed = lens _dhapgrsHSMsLastActionFailed (\ s a -> s{_dhapgrsHSMsLastActionFailed = a}) . _Default . _Coerce
 

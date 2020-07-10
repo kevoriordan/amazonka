@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putRetentionPolicy' smart constructor.
-data PutRetentionPolicy = PutRetentionPolicy'
-  { _prpLogGroupName    :: !Text
-  , _prpRetentionInDays :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRetentionPolicy = PutRetentionPolicy'{_prpLogGroupName
+                                              :: !Text,
+                                              _prpRetentionInDays :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutRetentionPolicy' with the minimum fields required to make a request.
 --
@@ -60,10 +59,10 @@ putRetentionPolicy
     :: Text -- ^ 'prpLogGroupName'
     -> Int -- ^ 'prpRetentionInDays'
     -> PutRetentionPolicy
-putRetentionPolicy pLogGroupName_ pRetentionInDays_ =
-  PutRetentionPolicy'
-    {_prpLogGroupName = pLogGroupName_, _prpRetentionInDays = pRetentionInDays_}
-
+putRetentionPolicy pLogGroupName_ pRetentionInDays_
+  = PutRetentionPolicy'{_prpLogGroupName =
+                          pLogGroupName_,
+                        _prpRetentionInDays = pRetentionInDays_}
 
 -- | The name of the log group.
 prpLogGroupName :: Lens' PutRetentionPolicy Text
@@ -106,16 +105,15 @@ instance ToQuery PutRetentionPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'putRetentionPolicyResponse' smart constructor.
-data PutRetentionPolicyResponse =
-  PutRetentionPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRetentionPolicyResponse = PutRetentionPolicyResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'PutRetentionPolicyResponse' with the minimum fields required to make a request.
 --
 putRetentionPolicyResponse
     :: PutRetentionPolicyResponse
-putRetentionPolicyResponse = PutRetentionPolicyResponse'
-
+putRetentionPolicyResponse
+  = PutRetentionPolicyResponse'
 
 instance NFData PutRetentionPolicyResponse where

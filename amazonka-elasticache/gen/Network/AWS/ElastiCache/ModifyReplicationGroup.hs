@@ -21,7 +21,13 @@
 -- Modifies the settings for a replication group.
 --
 --
--- /Important:/ Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.
+-- For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster's node type or engine version. For more information, see:
+--
+--     * <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html Scaling for Amazon ElastiCache for Redis (cluster mode enabled)> in the ElastiCache User Guide
+--
+--     * <https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html ModifyReplicationGroupShardConfiguration> in the ElastiCache API Reference
+--
+--
 --
 module Network.AWS.ElastiCache.ModifyReplicationGroup
     (
@@ -38,12 +44,14 @@ module Network.AWS.ElastiCache.ModifyReplicationGroup
     , mrgCacheParameterGroupName
     , mrgReplicationGroupDescription
     , mrgSnapshotWindow
+    , mrgAuthToken
     , mrgPrimaryClusterId
     , mrgPreferredMaintenanceWindow
     , mrgNodeGroupId
     , mrgSnapshotRetentionLimit
     , mrgNotificationTopicStatus
     , mrgApplyImmediately
+    , mrgAuthTokenUpdateStrategy
     , mrgNotificationTopicARN
     , mrgCacheSecurityGroupNames
     , mrgReplicationGroupId
@@ -68,35 +76,58 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyReplicationGroup' smart constructor.
-data ModifyReplicationGroup = ModifyReplicationGroup'
-  { _mrgAutomaticFailoverEnabled    :: !(Maybe Bool)
-  , _mrgEngineVersion               :: !(Maybe Text)
-  , _mrgCacheNodeType               :: !(Maybe Text)
-  , _mrgSnapshottingClusterId       :: !(Maybe Text)
-  , _mrgSecurityGroupIds            :: !(Maybe [Text])
-  , _mrgAutoMinorVersionUpgrade     :: !(Maybe Bool)
-  , _mrgCacheParameterGroupName     :: !(Maybe Text)
-  , _mrgReplicationGroupDescription :: !(Maybe Text)
-  , _mrgSnapshotWindow              :: !(Maybe Text)
-  , _mrgPrimaryClusterId            :: !(Maybe Text)
-  , _mrgPreferredMaintenanceWindow  :: !(Maybe Text)
-  , _mrgNodeGroupId                 :: !(Maybe Text)
-  , _mrgSnapshotRetentionLimit      :: !(Maybe Int)
-  , _mrgNotificationTopicStatus     :: !(Maybe Text)
-  , _mrgApplyImmediately            :: !(Maybe Bool)
-  , _mrgNotificationTopicARN        :: !(Maybe Text)
-  , _mrgCacheSecurityGroupNames     :: !(Maybe [Text])
-  , _mrgReplicationGroupId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyReplicationGroup = ModifyReplicationGroup'{_mrgAutomaticFailoverEnabled
+                                                      :: !(Maybe Bool),
+                                                      _mrgEngineVersion ::
+                                                      !(Maybe Text),
+                                                      _mrgCacheNodeType ::
+                                                      !(Maybe Text),
+                                                      _mrgSnapshottingClusterId
+                                                      :: !(Maybe Text),
+                                                      _mrgSecurityGroupIds ::
+                                                      !(Maybe [Text]),
+                                                      _mrgAutoMinorVersionUpgrade
+                                                      :: !(Maybe Bool),
+                                                      _mrgCacheParameterGroupName
+                                                      :: !(Maybe Text),
+                                                      _mrgReplicationGroupDescription
+                                                      :: !(Maybe Text),
+                                                      _mrgSnapshotWindow ::
+                                                      !(Maybe Text),
+                                                      _mrgAuthToken ::
+                                                      !(Maybe Text),
+                                                      _mrgPrimaryClusterId ::
+                                                      !(Maybe Text),
+                                                      _mrgPreferredMaintenanceWindow
+                                                      :: !(Maybe Text),
+                                                      _mrgNodeGroupId ::
+                                                      !(Maybe Text),
+                                                      _mrgSnapshotRetentionLimit
+                                                      :: !(Maybe Int),
+                                                      _mrgNotificationTopicStatus
+                                                      :: !(Maybe Text),
+                                                      _mrgApplyImmediately ::
+                                                      !(Maybe Bool),
+                                                      _mrgAuthTokenUpdateStrategy
+                                                      ::
+                                                      !(Maybe
+                                                          AuthTokenUpdateStrategyType),
+                                                      _mrgNotificationTopicARN
+                                                      :: !(Maybe Text),
+                                                      _mrgCacheSecurityGroupNames
+                                                      :: !(Maybe [Text]),
+                                                      _mrgReplicationGroupId ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ModifyReplicationGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mrgAutomaticFailoverEnabled' - Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure. Valid values: @true@ | @false@  Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:     * Redis versions earlier than 2.8.6.     * Redis (cluster mode disabled): T1 and T2 cache node types.     * Redis (cluster mode enabled): T1 node types.
+-- * 'mrgAutomaticFailoverEnabled' - Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure. Valid values: @true@ | @false@  Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:     * Redis versions earlier than 2.8.6.     * Redis (cluster mode disabled): T1 node types.     * Redis (cluster mode enabled): T1 node types.
 --
--- * 'mrgEngineVersion' - The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version.
+-- * 'mrgEngineVersion' - The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version. 
 --
 -- * 'mrgCacheNodeType' - A valid cache node type that you want to scale this replication group to.
 --
@@ -112,17 +143,21 @@ data ModifyReplicationGroup = ModifyReplicationGroup'
 --
 -- * 'mrgSnapshotWindow' - The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of the node group (shard) specified by @SnapshottingClusterId@ . Example: @05:00-09:00@  If you do not specify this parameter, ElastiCache automatically chooses an appropriate time range.
 --
+-- * 'mrgAuthToken' - Reserved parameter. The password used to access a password protected server. This parameter must be specified with the @auth-token-update-strategy @ parameter. Password constraints:     * Must be only printable ASCII characters     * Must be at least 16 characters and no more than 128 characters in length     * Cannot contain any of the following characters: '/', '"', or '@', '%' For more information, see AUTH password at <http://redis.io/commands/AUTH AUTH> .
+--
 -- * 'mrgPrimaryClusterId' - For replication groups with a single primary, if this parameter is specified, ElastiCache promotes the specified cluster in the specified replication group to the primary role. The nodes of all other clusters in the replication group are read replicas.
 --
--- * 'mrgPreferredMaintenanceWindow' - Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@
+-- * 'mrgPreferredMaintenanceWindow' - Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@ 
 --
--- * 'mrgNodeGroupId' - The name of the Node Group (called shard in the console).
+-- * 'mrgNodeGroupId' - Deprecated. This parameter is not used.
 --
 -- * 'mrgSnapshotRetentionLimit' - The number of days for which ElastiCache retains automatic node group (shard) snapshots before deleting them. For example, if you set @SnapshotRetentionLimit@ to 5, a snapshot that was taken today is retained for 5 days before being deleted. __Important__ If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
 --
--- * 'mrgNotificationTopicStatus' - The status of the Amazon SNS notification topic for the replication group. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@
+-- * 'mrgNotificationTopicStatus' - The status of the Amazon SNS notification topic for the replication group. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@ 
 --
--- * 'mrgApplyImmediately' - If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the replication group. If @false@ , changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. Valid values: @true@ | @false@  Default: @false@
+-- * 'mrgApplyImmediately' - If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the replication group. If @false@ , changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. Valid values: @true@ | @false@  Default: @false@ 
+--
+-- * 'mrgAuthTokenUpdateStrategy' - Specifies the strategy to use to update the AUTH token. This parameter must be specified with the @auth-token@ parameter. Possible values:     * Rotate     * Set For more information, see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html Authenticating Users with Redis AUTH> 
 --
 -- * 'mrgNotificationTopicARN' - The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications are sent.
 --
@@ -132,34 +167,34 @@ data ModifyReplicationGroup = ModifyReplicationGroup'
 modifyReplicationGroup
     :: Text -- ^ 'mrgReplicationGroupId'
     -> ModifyReplicationGroup
-modifyReplicationGroup pReplicationGroupId_ =
-  ModifyReplicationGroup'
-    { _mrgAutomaticFailoverEnabled = Nothing
-    , _mrgEngineVersion = Nothing
-    , _mrgCacheNodeType = Nothing
-    , _mrgSnapshottingClusterId = Nothing
-    , _mrgSecurityGroupIds = Nothing
-    , _mrgAutoMinorVersionUpgrade = Nothing
-    , _mrgCacheParameterGroupName = Nothing
-    , _mrgReplicationGroupDescription = Nothing
-    , _mrgSnapshotWindow = Nothing
-    , _mrgPrimaryClusterId = Nothing
-    , _mrgPreferredMaintenanceWindow = Nothing
-    , _mrgNodeGroupId = Nothing
-    , _mrgSnapshotRetentionLimit = Nothing
-    , _mrgNotificationTopicStatus = Nothing
-    , _mrgApplyImmediately = Nothing
-    , _mrgNotificationTopicARN = Nothing
-    , _mrgCacheSecurityGroupNames = Nothing
-    , _mrgReplicationGroupId = pReplicationGroupId_
-    }
+modifyReplicationGroup pReplicationGroupId_
+  = ModifyReplicationGroup'{_mrgAutomaticFailoverEnabled
+                              = Nothing,
+                            _mrgEngineVersion = Nothing,
+                            _mrgCacheNodeType = Nothing,
+                            _mrgSnapshottingClusterId = Nothing,
+                            _mrgSecurityGroupIds = Nothing,
+                            _mrgAutoMinorVersionUpgrade = Nothing,
+                            _mrgCacheParameterGroupName = Nothing,
+                            _mrgReplicationGroupDescription = Nothing,
+                            _mrgSnapshotWindow = Nothing,
+                            _mrgAuthToken = Nothing,
+                            _mrgPrimaryClusterId = Nothing,
+                            _mrgPreferredMaintenanceWindow = Nothing,
+                            _mrgNodeGroupId = Nothing,
+                            _mrgSnapshotRetentionLimit = Nothing,
+                            _mrgNotificationTopicStatus = Nothing,
+                            _mrgApplyImmediately = Nothing,
+                            _mrgAuthTokenUpdateStrategy = Nothing,
+                            _mrgNotificationTopicARN = Nothing,
+                            _mrgCacheSecurityGroupNames = Nothing,
+                            _mrgReplicationGroupId = pReplicationGroupId_}
 
-
--- | Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure. Valid values: @true@ | @false@  Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:     * Redis versions earlier than 2.8.6.     * Redis (cluster mode disabled): T1 and T2 cache node types.     * Redis (cluster mode enabled): T1 node types.
+-- | Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure. Valid values: @true@ | @false@  Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:     * Redis versions earlier than 2.8.6.     * Redis (cluster mode disabled): T1 node types.     * Redis (cluster mode enabled): T1 node types.
 mrgAutomaticFailoverEnabled :: Lens' ModifyReplicationGroup (Maybe Bool)
 mrgAutomaticFailoverEnabled = lens _mrgAutomaticFailoverEnabled (\ s a -> s{_mrgAutomaticFailoverEnabled = a})
 
--- | The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version.
+-- | The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version. 
 mrgEngineVersion :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgEngineVersion = lens _mrgEngineVersion (\ s a -> s{_mrgEngineVersion = a})
 
@@ -191,15 +226,19 @@ mrgReplicationGroupDescription = lens _mrgReplicationGroupDescription (\ s a -> 
 mrgSnapshotWindow :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgSnapshotWindow = lens _mrgSnapshotWindow (\ s a -> s{_mrgSnapshotWindow = a})
 
+-- | Reserved parameter. The password used to access a password protected server. This parameter must be specified with the @auth-token-update-strategy @ parameter. Password constraints:     * Must be only printable ASCII characters     * Must be at least 16 characters and no more than 128 characters in length     * Cannot contain any of the following characters: '/', '"', or '@', '%' For more information, see AUTH password at <http://redis.io/commands/AUTH AUTH> .
+mrgAuthToken :: Lens' ModifyReplicationGroup (Maybe Text)
+mrgAuthToken = lens _mrgAuthToken (\ s a -> s{_mrgAuthToken = a})
+
 -- | For replication groups with a single primary, if this parameter is specified, ElastiCache promotes the specified cluster in the specified replication group to the primary role. The nodes of all other clusters in the replication group are read replicas.
 mrgPrimaryClusterId :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgPrimaryClusterId = lens _mrgPrimaryClusterId (\ s a -> s{_mrgPrimaryClusterId = a})
 
--- | Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@
+-- | Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@ 
 mrgPreferredMaintenanceWindow :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgPreferredMaintenanceWindow = lens _mrgPreferredMaintenanceWindow (\ s a -> s{_mrgPreferredMaintenanceWindow = a})
 
--- | The name of the Node Group (called shard in the console).
+-- | Deprecated. This parameter is not used.
 mrgNodeGroupId :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgNodeGroupId = lens _mrgNodeGroupId (\ s a -> s{_mrgNodeGroupId = a})
 
@@ -207,13 +246,17 @@ mrgNodeGroupId = lens _mrgNodeGroupId (\ s a -> s{_mrgNodeGroupId = a})
 mrgSnapshotRetentionLimit :: Lens' ModifyReplicationGroup (Maybe Int)
 mrgSnapshotRetentionLimit = lens _mrgSnapshotRetentionLimit (\ s a -> s{_mrgSnapshotRetentionLimit = a})
 
--- | The status of the Amazon SNS notification topic for the replication group. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@
+-- | The status of the Amazon SNS notification topic for the replication group. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@ 
 mrgNotificationTopicStatus :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgNotificationTopicStatus = lens _mrgNotificationTopicStatus (\ s a -> s{_mrgNotificationTopicStatus = a})
 
--- | If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the replication group. If @false@ , changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. Valid values: @true@ | @false@  Default: @false@
+-- | If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the replication group. If @false@ , changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. Valid values: @true@ | @false@  Default: @false@ 
 mrgApplyImmediately :: Lens' ModifyReplicationGroup (Maybe Bool)
 mrgApplyImmediately = lens _mrgApplyImmediately (\ s a -> s{_mrgApplyImmediately = a})
+
+-- | Specifies the strategy to use to update the AUTH token. This parameter must be specified with the @auth-token@ parameter. Possible values:     * Rotate     * Set For more information, see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html Authenticating Users with Redis AUTH> 
+mrgAuthTokenUpdateStrategy :: Lens' ModifyReplicationGroup (Maybe AuthTokenUpdateStrategyType)
+mrgAuthTokenUpdateStrategy = lens _mrgAuthTokenUpdateStrategy (\ s a -> s{_mrgAuthTokenUpdateStrategy = a})
 
 -- | The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications are sent.
 mrgNotificationTopicARN :: Lens' ModifyReplicationGroup (Maybe Text)
@@ -269,6 +312,7 @@ instance ToQuery ModifyReplicationGroup where
                "ReplicationGroupDescription" =:
                  _mrgReplicationGroupDescription,
                "SnapshotWindow" =: _mrgSnapshotWindow,
+               "AuthToken" =: _mrgAuthToken,
                "PrimaryClusterId" =: _mrgPrimaryClusterId,
                "PreferredMaintenanceWindow" =:
                  _mrgPreferredMaintenanceWindow,
@@ -278,6 +322,8 @@ instance ToQuery ModifyReplicationGroup where
                "NotificationTopicStatus" =:
                  _mrgNotificationTopicStatus,
                "ApplyImmediately" =: _mrgApplyImmediately,
+               "AuthTokenUpdateStrategy" =:
+                 _mrgAuthTokenUpdateStrategy,
                "NotificationTopicArn" =: _mrgNotificationTopicARN,
                "CacheSecurityGroupNames" =:
                  toQuery
@@ -286,11 +332,14 @@ instance ToQuery ModifyReplicationGroup where
                "ReplicationGroupId" =: _mrgReplicationGroupId]
 
 -- | /See:/ 'modifyReplicationGroupResponse' smart constructor.
-data ModifyReplicationGroupResponse = ModifyReplicationGroupResponse'
-  { _mrgrsReplicationGroup :: !(Maybe ReplicationGroup)
-  , _mrgrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyReplicationGroupResponse = ModifyReplicationGroupResponse'{_mrgrsReplicationGroup
+                                                                      ::
+                                                                      !(Maybe
+                                                                          ReplicationGroup),
+                                                                      _mrgrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ModifyReplicationGroupResponse' with the minimum fields required to make a request.
 --
@@ -302,10 +351,10 @@ data ModifyReplicationGroupResponse = ModifyReplicationGroupResponse'
 modifyReplicationGroupResponse
     :: Int -- ^ 'mrgrsResponseStatus'
     -> ModifyReplicationGroupResponse
-modifyReplicationGroupResponse pResponseStatus_ =
-  ModifyReplicationGroupResponse'
-    {_mrgrsReplicationGroup = Nothing, _mrgrsResponseStatus = pResponseStatus_}
-
+modifyReplicationGroupResponse pResponseStatus_
+  = ModifyReplicationGroupResponse'{_mrgrsReplicationGroup
+                                      = Nothing,
+                                    _mrgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 mrgrsReplicationGroup :: Lens' ModifyReplicationGroupResponse (Maybe ReplicationGroup)

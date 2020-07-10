@@ -51,13 +51,16 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createDocumentationVersion' smart constructor.
-data CreateDocumentationVersion = CreateDocumentationVersion'
-  { _cdvStageName            :: !(Maybe Text)
-  , _cdvDescription          :: !(Maybe Text)
-  , _cdvRestAPIId            :: !Text
-  , _cdvDocumentationVersion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDocumentationVersion = CreateDocumentationVersion'{_cdvStageName
+                                                              :: !(Maybe Text),
+                                                              _cdvDescription ::
+                                                              !(Maybe Text),
+                                                              _cdvRestAPIId ::
+                                                              !Text,
+                                                              _cdvDocumentationVersion
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateDocumentationVersion' with the minimum fields required to make a request.
 --
@@ -74,14 +77,14 @@ createDocumentationVersion
     :: Text -- ^ 'cdvRestAPIId'
     -> Text -- ^ 'cdvDocumentationVersion'
     -> CreateDocumentationVersion
-createDocumentationVersion pRestAPIId_ pDocumentationVersion_ =
-  CreateDocumentationVersion'
-    { _cdvStageName = Nothing
-    , _cdvDescription = Nothing
-    , _cdvRestAPIId = pRestAPIId_
-    , _cdvDocumentationVersion = pDocumentationVersion_
-    }
-
+createDocumentationVersion pRestAPIId_
+  pDocumentationVersion_
+  = CreateDocumentationVersion'{_cdvStageName =
+                                  Nothing,
+                                _cdvDescription = Nothing,
+                                _cdvRestAPIId = pRestAPIId_,
+                                _cdvDocumentationVersion =
+                                  pDocumentationVersion_}
 
 -- | The stage name to be associated with the new documentation snapshot.
 cdvStageName :: Lens' CreateDocumentationVersion (Maybe Text)

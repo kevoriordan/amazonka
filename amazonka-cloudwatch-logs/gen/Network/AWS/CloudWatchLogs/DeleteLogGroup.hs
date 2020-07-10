@@ -42,10 +42,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLogGroup' smart constructor.
-newtype DeleteLogGroup = DeleteLogGroup'
-  { _dlgLogGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLogGroup = DeleteLogGroup'{_dlgLogGroupName
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteLogGroup' with the minimum fields required to make a request.
 --
@@ -55,9 +54,8 @@ newtype DeleteLogGroup = DeleteLogGroup'
 deleteLogGroup
     :: Text -- ^ 'dlgLogGroupName'
     -> DeleteLogGroup
-deleteLogGroup pLogGroupName_ =
-  DeleteLogGroup' {_dlgLogGroupName = pLogGroupName_}
-
+deleteLogGroup pLogGroupName_
+  = DeleteLogGroup'{_dlgLogGroupName = pLogGroupName_}
 
 -- | The name of the log group.
 dlgLogGroupName :: Lens' DeleteLogGroup Text
@@ -94,16 +92,14 @@ instance ToQuery DeleteLogGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteLogGroupResponse' smart constructor.
-data DeleteLogGroupResponse =
-  DeleteLogGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLogGroupResponse = DeleteLogGroupResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteLogGroupResponse' with the minimum fields required to make a request.
 --
 deleteLogGroupResponse
     :: DeleteLogGroupResponse
 deleteLogGroupResponse = DeleteLogGroupResponse'
-
 
 instance NFData DeleteLogGroupResponse where

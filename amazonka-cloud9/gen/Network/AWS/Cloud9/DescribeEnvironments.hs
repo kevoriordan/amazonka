@@ -33,8 +33,8 @@ module Network.AWS.Cloud9.DescribeEnvironments
     , describeEnvironmentsResponse
     , DescribeEnvironmentsResponse
     -- * Response Lenses
-    , deersEnvironments
-    , deersResponseStatus
+    , dscrbenvrnmntsrsEnvironments
+    , dscrbenvrnmntsrsResponseStatus
     ) where
 
 import Network.AWS.Cloud9.Types
@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEnvironments' smart constructor.
-newtype DescribeEnvironments = DescribeEnvironments'
-  { _deEnvironmentIds :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeEnvironments = DescribeEnvironments'{_deEnvironmentIds
+                                                     :: List1 Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeEnvironments' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype DescribeEnvironments = DescribeEnvironments'
 describeEnvironments
     :: NonEmpty Text -- ^ 'deEnvironmentIds'
     -> DescribeEnvironments
-describeEnvironments pEnvironmentIds_ =
-  DescribeEnvironments' {_deEnvironmentIds = _List1 # pEnvironmentIds_}
-
+describeEnvironments pEnvironmentIds_
+  = DescribeEnvironments'{_deEnvironmentIds =
+                            _List1 # pEnvironmentIds_}
 
 -- | The IDs of individual environments to get information about.
 deEnvironmentIds :: Lens' DescribeEnvironments (NonEmpty Text)
@@ -104,33 +104,37 @@ instance ToQuery DescribeEnvironments where
         toQuery = const mempty
 
 -- | /See:/ 'describeEnvironmentsResponse' smart constructor.
-data DescribeEnvironmentsResponse = DescribeEnvironmentsResponse'
-  { _deersEnvironments   :: !(Maybe [Environment])
-  , _deersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEnvironmentsResponse = DescribeEnvironmentsResponse'{_dscrbenvrnmntsrsEnvironments
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Environment]),
+                                                                  _dscrbenvrnmntsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeEnvironmentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'deersEnvironments' - Information about the environments that are returned.
+-- * 'dscrbenvrnmntsrsEnvironments' - Information about the environments that are returned.
 --
--- * 'deersResponseStatus' - -- | The response status code.
+-- * 'dscrbenvrnmntsrsResponseStatus' - -- | The response status code.
 describeEnvironmentsResponse
-    :: Int -- ^ 'deersResponseStatus'
+    :: Int -- ^ 'dscrbenvrnmntsrsResponseStatus'
     -> DescribeEnvironmentsResponse
-describeEnvironmentsResponse pResponseStatus_ =
-  DescribeEnvironmentsResponse'
-    {_deersEnvironments = Nothing, _deersResponseStatus = pResponseStatus_}
-
+describeEnvironmentsResponse pResponseStatus_
+  = DescribeEnvironmentsResponse'{_dscrbenvrnmntsrsEnvironments
+                                    = Nothing,
+                                  _dscrbenvrnmntsrsResponseStatus =
+                                    pResponseStatus_}
 
 -- | Information about the environments that are returned.
-deersEnvironments :: Lens' DescribeEnvironmentsResponse [Environment]
-deersEnvironments = lens _deersEnvironments (\ s a -> s{_deersEnvironments = a}) . _Default . _Coerce
+dscrbenvrnmntsrsEnvironments :: Lens' DescribeEnvironmentsResponse [Environment]
+dscrbenvrnmntsrsEnvironments = lens _dscrbenvrnmntsrsEnvironments (\ s a -> s{_dscrbenvrnmntsrsEnvironments = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
-deersResponseStatus :: Lens' DescribeEnvironmentsResponse Int
-deersResponseStatus = lens _deersResponseStatus (\ s a -> s{_deersResponseStatus = a})
+dscrbenvrnmntsrsResponseStatus :: Lens' DescribeEnvironmentsResponse Int
+dscrbenvrnmntsrsResponseStatus = lens _dscrbenvrnmntsrsResponseStatus (\ s a -> s{_dscrbenvrnmntsrsResponseStatus = a})
 
 instance NFData DescribeEnvironmentsResponse where

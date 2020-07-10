@@ -47,40 +47,43 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateUserDefinedFunction' smart constructor.
-data UpdateUserDefinedFunction = UpdateUserDefinedFunction'
-  { _uudfCatalogId     :: !(Maybe Text)
-  , _uudfDatabaseName  :: !Text
-  , _uudfFunctionName  :: !Text
-  , _uudfFunctionInput :: !UserDefinedFunctionInput
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateUserDefinedFunction = UpdateUserDefinedFunction'{_uudfCatalogId
+                                                            :: !(Maybe Text),
+                                                            _uudfDatabaseName ::
+                                                            !Text,
+                                                            _uudfFunctionName ::
+                                                            !Text,
+                                                            _uudfFunctionInput
+                                                            ::
+                                                            !UserDefinedFunctionInput}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateUserDefinedFunction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uudfCatalogId' - The ID of the Data Catalog where the function to be updated is located. If none is supplied, the AWS account ID is used by default.
+-- * 'uudfCatalogId' - The ID of the Data Catalog where the function to be updated is located. If none is provided, the AWS account ID is used by default.
 --
 -- * 'uudfDatabaseName' - The name of the catalog database where the function to be updated is located.
 --
 -- * 'uudfFunctionName' - The name of the function.
 --
--- * 'uudfFunctionInput' - A @FunctionInput@ object that re-defines the function in the Data Catalog.
+-- * 'uudfFunctionInput' - A @FunctionInput@ object that redefines the function in the Data Catalog.
 updateUserDefinedFunction
     :: Text -- ^ 'uudfDatabaseName'
     -> Text -- ^ 'uudfFunctionName'
     -> UserDefinedFunctionInput -- ^ 'uudfFunctionInput'
     -> UpdateUserDefinedFunction
-updateUserDefinedFunction pDatabaseName_ pFunctionName_ pFunctionInput_ =
-  UpdateUserDefinedFunction'
-    { _uudfCatalogId = Nothing
-    , _uudfDatabaseName = pDatabaseName_
-    , _uudfFunctionName = pFunctionName_
-    , _uudfFunctionInput = pFunctionInput_
-    }
+updateUserDefinedFunction pDatabaseName_
+  pFunctionName_ pFunctionInput_
+  = UpdateUserDefinedFunction'{_uudfCatalogId =
+                                 Nothing,
+                               _uudfDatabaseName = pDatabaseName_,
+                               _uudfFunctionName = pFunctionName_,
+                               _uudfFunctionInput = pFunctionInput_}
 
-
--- | The ID of the Data Catalog where the function to be updated is located. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the function to be updated is located. If none is provided, the AWS account ID is used by default.
 uudfCatalogId :: Lens' UpdateUserDefinedFunction (Maybe Text)
 uudfCatalogId = lens _uudfCatalogId (\ s a -> s{_uudfCatalogId = a})
 
@@ -92,7 +95,7 @@ uudfDatabaseName = lens _uudfDatabaseName (\ s a -> s{_uudfDatabaseName = a})
 uudfFunctionName :: Lens' UpdateUserDefinedFunction Text
 uudfFunctionName = lens _uudfFunctionName (\ s a -> s{_uudfFunctionName = a})
 
--- | A @FunctionInput@ object that re-defines the function in the Data Catalog.
+-- | A @FunctionInput@ object that redefines the function in the Data Catalog.
 uudfFunctionInput :: Lens' UpdateUserDefinedFunction UserDefinedFunctionInput
 uudfFunctionInput = lens _uudfFunctionInput (\ s a -> s{_uudfFunctionInput = a})
 
@@ -135,10 +138,11 @@ instance ToQuery UpdateUserDefinedFunction where
         toQuery = const mempty
 
 -- | /See:/ 'updateUserDefinedFunctionResponse' smart constructor.
-newtype UpdateUserDefinedFunctionResponse = UpdateUserDefinedFunctionResponse'
-  { _uudfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateUserDefinedFunctionResponse = UpdateUserDefinedFunctionResponse'{_uudfrsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'UpdateUserDefinedFunctionResponse' with the minimum fields required to make a request.
 --
@@ -148,9 +152,9 @@ newtype UpdateUserDefinedFunctionResponse = UpdateUserDefinedFunctionResponse'
 updateUserDefinedFunctionResponse
     :: Int -- ^ 'uudfrsResponseStatus'
     -> UpdateUserDefinedFunctionResponse
-updateUserDefinedFunctionResponse pResponseStatus_ =
-  UpdateUserDefinedFunctionResponse' {_uudfrsResponseStatus = pResponseStatus_}
-
+updateUserDefinedFunctionResponse pResponseStatus_
+  = UpdateUserDefinedFunctionResponse'{_uudfrsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 uudfrsResponseStatus :: Lens' UpdateUserDefinedFunctionResponse Int

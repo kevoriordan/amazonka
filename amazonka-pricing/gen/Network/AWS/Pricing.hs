@@ -40,14 +40,14 @@ module Network.AWS.Pricing
     -- ** InternalErrorException
     , _InternalErrorException
 
-    -- ** ExpiredNextTokenException
-    , _ExpiredNextTokenException
+    -- ** InvalidNextTokenException
+    , _InvalidNextTokenException
 
     -- ** NotFoundException
     , _NotFoundException
 
-    -- ** InvalidNextTokenException
-    , _InvalidNextTokenException
+    -- ** ExpiredNextTokenException
+    , _ExpiredNextTokenException
 
     -- * Waiters
     -- $waiters

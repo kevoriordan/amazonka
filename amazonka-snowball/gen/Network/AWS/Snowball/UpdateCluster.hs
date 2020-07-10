@@ -51,17 +51,17 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'updateCluster' smart constructor.
-data UpdateCluster = UpdateCluster'
-  { _ucNotification        :: !(Maybe Notification)
-  , _ucForwardingAddressId :: !(Maybe Text)
-  , _ucAddressId           :: !(Maybe Text)
-  , _ucShippingOption      :: !(Maybe ShippingOption)
-  , _ucResources           :: !(Maybe JobResource)
-  , _ucDescription         :: !(Maybe Text)
-  , _ucRoleARN             :: !(Maybe Text)
-  , _ucClusterId           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCluster = UpdateCluster'{_ucNotification
+                                    :: !(Maybe Notification),
+                                    _ucForwardingAddressId :: !(Maybe Text),
+                                    _ucAddressId :: !(Maybe Text),
+                                    _ucShippingOption ::
+                                    !(Maybe ShippingOption),
+                                    _ucResources :: !(Maybe JobResource),
+                                    _ucDescription :: !(Maybe Text),
+                                    _ucRoleARN :: !(Maybe Text),
+                                    _ucClusterId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateCluster' with the minimum fields required to make a request.
 --
@@ -79,24 +79,18 @@ data UpdateCluster = UpdateCluster'
 --
 -- * 'ucDescription' - The updated description of this cluster.
 --
--- * 'ucRoleARN' - The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> API action in AWS Identity and Access Management (IAM).
+-- * 'ucRoleARN' - The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> API action in AWS Identity and Access Management (IAM).
 --
 -- * 'ucClusterId' - The cluster ID of the cluster that you want to update, for example @CID123e4567-e89b-12d3-a456-426655440000@ .
 updateCluster
     :: Text -- ^ 'ucClusterId'
     -> UpdateCluster
-updateCluster pClusterId_ =
-  UpdateCluster'
-    { _ucNotification = Nothing
-    , _ucForwardingAddressId = Nothing
-    , _ucAddressId = Nothing
-    , _ucShippingOption = Nothing
-    , _ucResources = Nothing
-    , _ucDescription = Nothing
-    , _ucRoleARN = Nothing
-    , _ucClusterId = pClusterId_
-    }
-
+updateCluster pClusterId_
+  = UpdateCluster'{_ucNotification = Nothing,
+                   _ucForwardingAddressId = Nothing,
+                   _ucAddressId = Nothing, _ucShippingOption = Nothing,
+                   _ucResources = Nothing, _ucDescription = Nothing,
+                   _ucRoleARN = Nothing, _ucClusterId = pClusterId_}
 
 -- | The new or updated 'Notification' object.
 ucNotification :: Lens' UpdateCluster (Maybe Notification)
@@ -122,7 +116,7 @@ ucResources = lens _ucResources (\ s a -> s{_ucResources = a})
 ucDescription :: Lens' UpdateCluster (Maybe Text)
 ucDescription = lens _ucDescription (\ s a -> s{_ucDescription = a})
 
--- | The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> API action in AWS Identity and Access Management (IAM).
+-- | The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> API action in AWS Identity and Access Management (IAM).
 ucRoleARN :: Lens' UpdateCluster (Maybe Text)
 ucRoleARN = lens _ucRoleARN (\ s a -> s{_ucRoleARN = a})
 
@@ -173,10 +167,10 @@ instance ToQuery UpdateCluster where
         toQuery = const mempty
 
 -- | /See:/ 'updateClusterResponse' smart constructor.
-newtype UpdateClusterResponse = UpdateClusterResponse'
-  { _ucrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateClusterResponse = UpdateClusterResponse'{_ucrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateClusterResponse' with the minimum fields required to make a request.
 --
@@ -186,9 +180,9 @@ newtype UpdateClusterResponse = UpdateClusterResponse'
 updateClusterResponse
     :: Int -- ^ 'ucrsResponseStatus'
     -> UpdateClusterResponse
-updateClusterResponse pResponseStatus_ =
-  UpdateClusterResponse' {_ucrsResponseStatus = pResponseStatus_}
-
+updateClusterResponse pResponseStatus_
+  = UpdateClusterResponse'{_ucrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 ucrsResponseStatus :: Lens' UpdateClusterResponse Int

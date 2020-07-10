@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Amazon Kinesis Data Streams Service API Reference__
+-- __Amazon Kinesis Data Streams Service API Reference__ 
 --
 -- Amazon Kinesis Data Streams is a managed service that scales elastically for real-time processing of streaming big data.
 --
@@ -23,35 +23,38 @@ module Network.AWS.Kinesis
     -- * Errors
     -- $errors
 
-    -- ** KMSInvalidStateException
-    , _KMSInvalidStateException
-
-    -- ** KMSThrottlingException
-    , _KMSThrottlingException
-
-    -- ** ExpiredIteratorException
-    , _ExpiredIteratorException
-
-    -- ** InvalidArgumentException
-    , _InvalidArgumentException
-
-    -- ** KMSOptInRequired
-    , _KMSOptInRequired
-
-    -- ** ProvisionedThroughputExceededException
-    , _ProvisionedThroughputExceededException
-
-    -- ** KMSNotFoundException
-    , _KMSNotFoundException
-
-    -- ** ExpiredNextTokenException
-    , _ExpiredNextTokenException
+    -- ** InternalFailureException
+    , _InternalFailureException
 
     -- ** KMSDisabledException
     , _KMSDisabledException
 
+    -- ** KMSNotFoundException
+    , _KMSNotFoundException
+
+    -- ** ProvisionedThroughputExceededException
+    , _ProvisionedThroughputExceededException
+
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
+
+    -- ** KMSOptInRequired
+    , _KMSOptInRequired
+
+    -- ** InvalidArgumentException
+    , _InvalidArgumentException
+
+    -- ** ExpiredIteratorException
+    , _ExpiredIteratorException
+
+    -- ** KMSThrottlingException
+    , _KMSThrottlingException
+
+    -- ** ExpiredNextTokenException
+    , _ExpiredNextTokenException
+
+    -- ** KMSInvalidStateException
+    , _KMSInvalidStateException
 
     -- ** KMSAccessDeniedException
     , _KMSAccessDeniedException
@@ -74,76 +77,94 @@ module Network.AWS.Kinesis
     -- * Operations
     -- $operations
 
-    -- ** PutRecord
+    -- ** PutRecord 
     , module Network.AWS.Kinesis.PutRecord
 
-    -- ** DecreaseStreamRetentionPeriod
+    -- ** SubscribeToShard 
+    , module Network.AWS.Kinesis.SubscribeToShard
+
+    -- ** DecreaseStreamRetentionPeriod 
     , module Network.AWS.Kinesis.DecreaseStreamRetentionPeriod
 
-    -- ** MergeShards
+    -- ** MergeShards 
     , module Network.AWS.Kinesis.MergeShards
 
-    -- ** DescribeStreamSummary
+    -- ** DeregisterStreamConsumer 
+    , module Network.AWS.Kinesis.DeregisterStreamConsumer
+
+    -- ** DescribeStreamSummary 
     , module Network.AWS.Kinesis.DescribeStreamSummary
 
-    -- ** GetShardIterator
+    -- ** GetShardIterator 
     , module Network.AWS.Kinesis.GetShardIterator
 
-    -- ** GetRecords
+    -- ** GetRecords 
     , module Network.AWS.Kinesis.GetRecords
 
-    -- ** StopStreamEncryption
+    -- ** StopStreamEncryption 
     , module Network.AWS.Kinesis.StopStreamEncryption
 
-    -- ** EnableEnhancedMonitoring
+    -- ** EnableEnhancedMonitoring 
     , module Network.AWS.Kinesis.EnableEnhancedMonitoring
 
-    -- ** DescribeLimits
+    -- ** DescribeLimits 
     , module Network.AWS.Kinesis.DescribeLimits
 
-    -- ** DisableEnhancedMonitoring
+    -- ** RegisterStreamConsumer 
+    , module Network.AWS.Kinesis.RegisterStreamConsumer
+
+    -- ** DisableEnhancedMonitoring 
     , module Network.AWS.Kinesis.DisableEnhancedMonitoring
 
-    -- ** UpdateShardCount
+    -- ** UpdateShardCount 
     , module Network.AWS.Kinesis.UpdateShardCount
 
-    -- ** ListTagsForStream
+    -- ** ListTagsForStream 
     , module Network.AWS.Kinesis.ListTagsForStream
 
-    -- ** AddTagsToStream
+    -- ** DescribeStreamConsumer 
+    , module Network.AWS.Kinesis.DescribeStreamConsumer
+
+    -- ** AddTagsToStream 
     , module Network.AWS.Kinesis.AddTagsToStream
 
-    -- ** PutRecords
+    -- ** PutRecords 
     , module Network.AWS.Kinesis.PutRecords
 
-    -- ** ListShards
+    -- ** ListShards (Paginated)
     , module Network.AWS.Kinesis.ListShards
 
-    -- ** DeleteStream
+    -- ** DeleteStream 
     , module Network.AWS.Kinesis.DeleteStream
 
-    -- ** RemoveTagsFromStream
+    -- ** RemoveTagsFromStream 
     , module Network.AWS.Kinesis.RemoveTagsFromStream
 
     -- ** ListStreams (Paginated)
     , module Network.AWS.Kinesis.ListStreams
 
-    -- ** CreateStream
+    -- ** CreateStream 
     , module Network.AWS.Kinesis.CreateStream
 
-    -- ** StartStreamEncryption
+    -- ** StartStreamEncryption 
     , module Network.AWS.Kinesis.StartStreamEncryption
 
-    -- ** SplitShard
+    -- ** ListStreamConsumers (Paginated)
+    , module Network.AWS.Kinesis.ListStreamConsumers
+
+    -- ** SplitShard 
     , module Network.AWS.Kinesis.SplitShard
 
-    -- ** IncreaseStreamRetentionPeriod
+    -- ** IncreaseStreamRetentionPeriod 
     , module Network.AWS.Kinesis.IncreaseStreamRetentionPeriod
 
     -- ** DescribeStream (Paginated)
     , module Network.AWS.Kinesis.DescribeStream
 
     -- * Types
+
+    -- ** ConsumerStatus
+    , ConsumerStatus (..)
 
     -- ** EncryptionType
     , EncryptionType (..)
@@ -159,6 +180,23 @@ module Network.AWS.Kinesis
 
     -- ** StreamStatus
     , StreamStatus (..)
+
+    -- ** Consumer
+    , Consumer
+    , consumer
+    , cConsumerName
+    , cConsumerARN
+    , cConsumerStatus
+    , cConsumerCreationTimestamp
+
+    -- ** ConsumerDescription
+    , ConsumerDescription
+    , consumerDescription
+    , cdConsumerName
+    , cdConsumerARN
+    , cdConsumerStatus
+    , cdConsumerCreationTimestamp
+    , cdStreamARN
 
     -- ** EnhancedMetrics
     , EnhancedMetrics
@@ -177,6 +215,41 @@ module Network.AWS.Kinesis
     , hashKeyRange
     , hkrStartingHashKey
     , hkrEndingHashKey
+
+    -- ** InternalFailureException
+    , InternalFailureException
+    , internalFailureException
+    , ifeMessage
+
+    -- ** KMSAccessDeniedException
+    , KMSAccessDeniedException
+    , kmsAccessDeniedException
+    , kadeMessage
+
+    -- ** KMSDisabledException
+    , KMSDisabledException
+    , kmsDisabledException
+    , kdeMessage
+
+    -- ** KMSInvalidStateException
+    , KMSInvalidStateException
+    , kmsInvalidStateException
+    , kiseMessage
+
+    -- ** KMSNotFoundException
+    , KMSNotFoundException
+    , kmsNotFoundException
+    , knfeMessage
+
+    -- ** KMSOptInRequired
+    , KMSOptInRequired
+    , kmsOptInRequired
+    , koirMessage
+
+    -- ** KMSThrottlingException
+    , KMSThrottlingException
+    , kmsThrottlingException
+    , kteMessage
 
     -- ** PutRecordsRequestEntry
     , PutRecordsRequestEntry
@@ -202,6 +275,16 @@ module Network.AWS.Kinesis
     , rData
     , rPartitionKey
 
+    -- ** ResourceInUseException
+    , ResourceInUseException
+    , resourceInUseException
+    , riueMessage
+
+    -- ** ResourceNotFoundException
+    , ResourceNotFoundException
+    , resourceNotFoundException
+    , rnfeMessage
+
     -- ** SequenceNumberRange
     , SequenceNumberRange
     , sequenceNumberRange
@@ -216,6 +299,13 @@ module Network.AWS.Kinesis
     , sShardId
     , sHashKeyRange
     , sSequenceNumberRange
+
+    -- ** StartingPosition
+    , StartingPosition
+    , startingPosition
+    , spSequenceNumber
+    , spTimestamp
+    , spType
 
     -- ** StreamDescription
     , StreamDescription
@@ -236,6 +326,7 @@ module Network.AWS.Kinesis
     , streamDescriptionSummary
     , sdsEncryptionType
     , sdsKeyId
+    , sdsConsumerCount
     , sdsStreamName
     , sdsStreamARN
     , sdsStreamStatus
@@ -243,6 +334,27 @@ module Network.AWS.Kinesis
     , sdsStreamCreationTimestamp
     , sdsEnhancedMonitoring
     , sdsOpenShardCount
+
+    -- ** SubscribeToShardEvent
+    , SubscribeToShardEvent
+    , subscribeToShardEvent
+    , stseRecords
+    , stseContinuationSequenceNumber
+    , stseMillisBehindLatest
+
+    -- ** SubscribeToShardEventStream
+    , SubscribeToShardEventStream
+    , subscribeToShardEventStream
+    , stsesKMSInvalidStateException
+    , stsesKMSThrottlingException
+    , stsesKMSOptInRequired
+    , stsesKMSNotFoundException
+    , stsesKMSDisabledException
+    , stsesInternalFailureException
+    , stsesResourceNotFoundException
+    , stsesKMSAccessDeniedException
+    , stsesResourceInUseException
+    , stsesSubscribeToShardEvent
 
     -- ** Tag
     , Tag
@@ -255,8 +367,10 @@ import Network.AWS.Kinesis.AddTagsToStream
 import Network.AWS.Kinesis.CreateStream
 import Network.AWS.Kinesis.DecreaseStreamRetentionPeriod
 import Network.AWS.Kinesis.DeleteStream
+import Network.AWS.Kinesis.DeregisterStreamConsumer
 import Network.AWS.Kinesis.DescribeLimits
 import Network.AWS.Kinesis.DescribeStream
+import Network.AWS.Kinesis.DescribeStreamConsumer
 import Network.AWS.Kinesis.DescribeStreamSummary
 import Network.AWS.Kinesis.DisableEnhancedMonitoring
 import Network.AWS.Kinesis.EnableEnhancedMonitoring
@@ -264,15 +378,18 @@ import Network.AWS.Kinesis.GetRecords
 import Network.AWS.Kinesis.GetShardIterator
 import Network.AWS.Kinesis.IncreaseStreamRetentionPeriod
 import Network.AWS.Kinesis.ListShards
+import Network.AWS.Kinesis.ListStreamConsumers
 import Network.AWS.Kinesis.ListStreams
 import Network.AWS.Kinesis.ListTagsForStream
 import Network.AWS.Kinesis.MergeShards
 import Network.AWS.Kinesis.PutRecord
 import Network.AWS.Kinesis.PutRecords
+import Network.AWS.Kinesis.RegisterStreamConsumer
 import Network.AWS.Kinesis.RemoveTagsFromStream
 import Network.AWS.Kinesis.SplitShard
 import Network.AWS.Kinesis.StartStreamEncryption
 import Network.AWS.Kinesis.StopStreamEncryption
+import Network.AWS.Kinesis.SubscribeToShard
 import Network.AWS.Kinesis.Types
 import Network.AWS.Kinesis.UpdateShardCount
 import Network.AWS.Kinesis.Waiters

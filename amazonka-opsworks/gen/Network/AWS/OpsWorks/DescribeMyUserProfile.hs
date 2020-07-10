@@ -21,7 +21,7 @@
 -- Describes a user's SSH information.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeMyUserProfile
     (
@@ -45,17 +45,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeMyUserProfile' smart constructor.
-data DescribeMyUserProfile =
-  DescribeMyUserProfile'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMyUserProfile = DescribeMyUserProfile'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeMyUserProfile' with the minimum fields required to make a request.
 --
 describeMyUserProfile
     :: DescribeMyUserProfile
 describeMyUserProfile = DescribeMyUserProfile'
-
 
 instance AWSRequest DescribeMyUserProfile where
         type Rs DescribeMyUserProfile =
@@ -95,11 +93,14 @@ instance ToQuery DescribeMyUserProfile where
 --
 --
 -- /See:/ 'describeMyUserProfileResponse' smart constructor.
-data DescribeMyUserProfileResponse = DescribeMyUserProfileResponse'
-  { _dmuprsUserProfile    :: !(Maybe SelfUserProfile)
-  , _dmuprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMyUserProfileResponse = DescribeMyUserProfileResponse'{_dmuprsUserProfile
+                                                                    ::
+                                                                    !(Maybe
+                                                                        SelfUserProfile),
+                                                                    _dmuprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeMyUserProfileResponse' with the minimum fields required to make a request.
 --
@@ -111,10 +112,10 @@ data DescribeMyUserProfileResponse = DescribeMyUserProfileResponse'
 describeMyUserProfileResponse
     :: Int -- ^ 'dmuprsResponseStatus'
     -> DescribeMyUserProfileResponse
-describeMyUserProfileResponse pResponseStatus_ =
-  DescribeMyUserProfileResponse'
-    {_dmuprsUserProfile = Nothing, _dmuprsResponseStatus = pResponseStatus_}
-
+describeMyUserProfileResponse pResponseStatus_
+  = DescribeMyUserProfileResponse'{_dmuprsUserProfile =
+                                     Nothing,
+                                   _dmuprsResponseStatus = pResponseStatus_}
 
 -- | A @UserProfile@ object that describes the user's SSH information.
 dmuprsUserProfile :: Lens' DescribeMyUserProfileResponse (Maybe SelfUserProfile)

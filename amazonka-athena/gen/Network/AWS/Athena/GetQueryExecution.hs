@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about a single execution of a query. Each time a query executes, information about the query execution is saved with a unique ID.
+-- Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.
 --
 --
 module Network.AWS.Athena.GetQueryExecution
@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getQueryExecution' smart constructor.
-newtype GetQueryExecution = GetQueryExecution'
-  { _gqeQueryExecutionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetQueryExecution = GetQueryExecution'{_gqeQueryExecutionId
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetQueryExecution' with the minimum fields required to make a request.
 --
@@ -58,9 +57,9 @@ newtype GetQueryExecution = GetQueryExecution'
 getQueryExecution
     :: Text -- ^ 'gqeQueryExecutionId'
     -> GetQueryExecution
-getQueryExecution pQueryExecutionId_ =
-  GetQueryExecution' {_gqeQueryExecutionId = pQueryExecutionId_}
-
+getQueryExecution pQueryExecutionId_
+  = GetQueryExecution'{_gqeQueryExecutionId =
+                         pQueryExecutionId_}
 
 -- | The unique ID of the query execution.
 gqeQueryExecutionId :: Lens' GetQueryExecution Text
@@ -101,11 +100,14 @@ instance ToQuery GetQueryExecution where
         toQuery = const mempty
 
 -- | /See:/ 'getQueryExecutionResponse' smart constructor.
-data GetQueryExecutionResponse = GetQueryExecutionResponse'
-  { _gqersQueryExecution :: !(Maybe QueryExecution)
-  , _gqersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQueryExecutionResponse = GetQueryExecutionResponse'{_gqersQueryExecution
+                                                            ::
+                                                            !(Maybe
+                                                                QueryExecution),
+                                                            _gqersResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetQueryExecutionResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +119,10 @@ data GetQueryExecutionResponse = GetQueryExecutionResponse'
 getQueryExecutionResponse
     :: Int -- ^ 'gqersResponseStatus'
     -> GetQueryExecutionResponse
-getQueryExecutionResponse pResponseStatus_ =
-  GetQueryExecutionResponse'
-    {_gqersQueryExecution = Nothing, _gqersResponseStatus = pResponseStatus_}
-
+getQueryExecutionResponse pResponseStatus_
+  = GetQueryExecutionResponse'{_gqersQueryExecution =
+                                 Nothing,
+                               _gqersResponseStatus = pResponseStatus_}
 
 -- | Information about the query execution.
 gqersQueryExecution :: Lens' GetQueryExecutionResponse (Maybe QueryExecution)

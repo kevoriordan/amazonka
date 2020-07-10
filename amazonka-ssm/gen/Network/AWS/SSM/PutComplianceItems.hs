@@ -61,6 +61,7 @@ module Network.AWS.SSM.PutComplianceItems
       putComplianceItems
     , PutComplianceItems
     -- * Request Lenses
+    , pciUploadType
     , pciItemContentHash
     , pciResourceId
     , pciResourceType
@@ -83,19 +84,24 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'putComplianceItems' smart constructor.
-data PutComplianceItems = PutComplianceItems'
-  { _pciItemContentHash  :: !(Maybe Text)
-  , _pciResourceId       :: !Text
-  , _pciResourceType     :: !Text
-  , _pciComplianceType   :: !Text
-  , _pciExecutionSummary :: !ComplianceExecutionSummary
-  , _pciItems            :: ![ComplianceItemEntry]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutComplianceItems = PutComplianceItems'{_pciUploadType
+                                              :: !(Maybe ComplianceUploadType),
+                                              _pciItemContentHash ::
+                                              !(Maybe Text),
+                                              _pciResourceId :: !Text,
+                                              _pciResourceType :: !Text,
+                                              _pciComplianceType :: !Text,
+                                              _pciExecutionSummary ::
+                                              !ComplianceExecutionSummary,
+                                              _pciItems ::
+                                              ![ComplianceItemEntry]}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutComplianceItems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pciUploadType' - The mode for uploading compliance items. You can specify @COMPLETE@ or @PARTIAL@ . In @COMPLETE@ mode, the system overwrites all existing compliance information for the resource. You must provide a full list of compliance items each time you send the request. In @PARTIAL@ mode, the system overwrites compliance information for a specific association. The association must be configured with @SyncCompliance@ set to @MANUAL@ . By default, all requests use @COMPLETE@ mode.
 --
 -- * 'pciItemContentHash' - MD5 or SHA-256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, the request to put compliance information is ignored.
 --
@@ -107,23 +113,26 @@ data PutComplianceItems = PutComplianceItems'
 --
 -- * 'pciExecutionSummary' - A summary of the call execution that includes an execution ID, the type of execution (for example, @Command@ ), and the date/time of the execution using a datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
 --
--- * 'pciItems' - Information about the compliance as defined by the resource type. For example, for a patch compliance type, @Items@ includes information about the PatchSeverity, Classification, etc.
+-- * 'pciItems' - Information about the compliance as defined by the resource type. For example, for a patch compliance type, @Items@ includes information about the PatchSeverity, Classification, and so on.
 putComplianceItems
     :: Text -- ^ 'pciResourceId'
     -> Text -- ^ 'pciResourceType'
     -> Text -- ^ 'pciComplianceType'
     -> ComplianceExecutionSummary -- ^ 'pciExecutionSummary'
     -> PutComplianceItems
-putComplianceItems pResourceId_ pResourceType_ pComplianceType_ pExecutionSummary_ =
-  PutComplianceItems'
-    { _pciItemContentHash = Nothing
-    , _pciResourceId = pResourceId_
-    , _pciResourceType = pResourceType_
-    , _pciComplianceType = pComplianceType_
-    , _pciExecutionSummary = pExecutionSummary_
-    , _pciItems = mempty
-    }
+putComplianceItems pResourceId_ pResourceType_
+  pComplianceType_ pExecutionSummary_
+  = PutComplianceItems'{_pciUploadType = Nothing,
+                        _pciItemContentHash = Nothing,
+                        _pciResourceId = pResourceId_,
+                        _pciResourceType = pResourceType_,
+                        _pciComplianceType = pComplianceType_,
+                        _pciExecutionSummary = pExecutionSummary_,
+                        _pciItems = mempty}
 
+-- | The mode for uploading compliance items. You can specify @COMPLETE@ or @PARTIAL@ . In @COMPLETE@ mode, the system overwrites all existing compliance information for the resource. You must provide a full list of compliance items each time you send the request. In @PARTIAL@ mode, the system overwrites compliance information for a specific association. The association must be configured with @SyncCompliance@ set to @MANUAL@ . By default, all requests use @COMPLETE@ mode.
+pciUploadType :: Lens' PutComplianceItems (Maybe ComplianceUploadType)
+pciUploadType = lens _pciUploadType (\ s a -> s{_pciUploadType = a})
 
 -- | MD5 or SHA-256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, the request to put compliance information is ignored.
 pciItemContentHash :: Lens' PutComplianceItems (Maybe Text)
@@ -145,7 +154,7 @@ pciComplianceType = lens _pciComplianceType (\ s a -> s{_pciComplianceType = a})
 pciExecutionSummary :: Lens' PutComplianceItems ComplianceExecutionSummary
 pciExecutionSummary = lens _pciExecutionSummary (\ s a -> s{_pciExecutionSummary = a})
 
--- | Information about the compliance as defined by the resource type. For example, for a patch compliance type, @Items@ includes information about the PatchSeverity, Classification, etc.
+-- | Information about the compliance as defined by the resource type. For example, for a patch compliance type, @Items@ includes information about the PatchSeverity, Classification, and so on.
 pciItems :: Lens' PutComplianceItems [ComplianceItemEntry]
 pciItems = lens _pciItems (\ s a -> s{_pciItems = a}) . _Coerce
 
@@ -175,7 +184,8 @@ instance ToJSON PutComplianceItems where
         toJSON PutComplianceItems'{..}
           = object
               (catMaybes
-                 [("ItemContentHash" .=) <$> _pciItemContentHash,
+                 [("UploadType" .=) <$> _pciUploadType,
+                  ("ItemContentHash" .=) <$> _pciItemContentHash,
                   Just ("ResourceId" .= _pciResourceId),
                   Just ("ResourceType" .= _pciResourceType),
                   Just ("ComplianceType" .= _pciComplianceType),
@@ -189,10 +199,10 @@ instance ToQuery PutComplianceItems where
         toQuery = const mempty
 
 -- | /See:/ 'putComplianceItemsResponse' smart constructor.
-newtype PutComplianceItemsResponse = PutComplianceItemsResponse'
-  { _pcirsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype PutComplianceItemsResponse = PutComplianceItemsResponse'{_pcirsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'PutComplianceItemsResponse' with the minimum fields required to make a request.
 --
@@ -202,9 +212,9 @@ newtype PutComplianceItemsResponse = PutComplianceItemsResponse'
 putComplianceItemsResponse
     :: Int -- ^ 'pcirsResponseStatus'
     -> PutComplianceItemsResponse
-putComplianceItemsResponse pResponseStatus_ =
-  PutComplianceItemsResponse' {_pcirsResponseStatus = pResponseStatus_}
-
+putComplianceItemsResponse pResponseStatus_
+  = PutComplianceItemsResponse'{_pcirsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 pcirsResponseStatus :: Lens' PutComplianceItemsResponse Int

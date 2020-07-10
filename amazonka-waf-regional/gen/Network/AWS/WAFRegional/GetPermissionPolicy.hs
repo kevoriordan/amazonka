@@ -45,10 +45,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'getPermissionPolicy' smart constructor.
-newtype GetPermissionPolicy = GetPermissionPolicy'
-  { _gppResourceARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetPermissionPolicy = GetPermissionPolicy'{_gppResourceARN
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetPermissionPolicy' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetPermissionPolicy = GetPermissionPolicy'
 getPermissionPolicy
     :: Text -- ^ 'gppResourceARN'
     -> GetPermissionPolicy
-getPermissionPolicy pResourceARN_ =
-  GetPermissionPolicy' {_gppResourceARN = pResourceARN_}
-
+getPermissionPolicy pResourceARN_
+  = GetPermissionPolicy'{_gppResourceARN =
+                           pResourceARN_}
 
 -- | The Amazon Resource Name (ARN) of the RuleGroup for which you want to get the policy.
 gppResourceARN :: Lens' GetPermissionPolicy Text
@@ -102,11 +102,13 @@ instance ToQuery GetPermissionPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'getPermissionPolicyResponse' smart constructor.
-data GetPermissionPolicyResponse = GetPermissionPolicyResponse'
-  { _gpprsPolicy         :: !(Maybe Text)
-  , _gpprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPermissionPolicyResponse = GetPermissionPolicyResponse'{_gpprsPolicy
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gpprsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetPermissionPolicyResponse' with the minimum fields required to make a request.
 --
@@ -118,10 +120,10 @@ data GetPermissionPolicyResponse = GetPermissionPolicyResponse'
 getPermissionPolicyResponse
     :: Int -- ^ 'gpprsResponseStatus'
     -> GetPermissionPolicyResponse
-getPermissionPolicyResponse pResponseStatus_ =
-  GetPermissionPolicyResponse'
-    {_gpprsPolicy = Nothing, _gpprsResponseStatus = pResponseStatus_}
-
+getPermissionPolicyResponse pResponseStatus_
+  = GetPermissionPolicyResponse'{_gpprsPolicy =
+                                   Nothing,
+                                 _gpprsResponseStatus = pResponseStatus_}
 
 -- | The IAM policy attached to the specified RuleGroup.
 gpprsPolicy :: Lens' GetPermissionPolicyResponse (Maybe Text)

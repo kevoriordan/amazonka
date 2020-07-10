@@ -23,7 +23,7 @@
 --
 -- If you submit a deletion request for a service-linked role whose linked service is still accessing a resource, then the deletion task fails. If it fails, the 'GetServiceLinkedRoleDeletionStatus' API operation returns the reason for the failure, usually including the resources that must be deleted. To delete the service-linked role, you must first remove those resources from the linked service and then submit the deletion request again. Resources are specific to the service that is linked to the role. For more information about removing resources from a service, see the <http://docs.aws.amazon.com/ AWS documentation> for your service.
 --
--- For more information about service-linked roles, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role Roles Terms and Concepts: AWS Service-Linked Role> in the /IAM User Guide/ .
+-- For more information about service-linked roles, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role Roles Terms and Concepts: AWS Service-Linked Role> in the /IAM User Guide/ .
 --
 module Network.AWS.IAM.DeleteServiceLinkedRole
     (
@@ -49,10 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteServiceLinkedRole' smart constructor.
-newtype DeleteServiceLinkedRole = DeleteServiceLinkedRole'
-  { _dslrRoleName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteServiceLinkedRole = DeleteServiceLinkedRole'{_dslrRoleName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteServiceLinkedRole' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DeleteServiceLinkedRole = DeleteServiceLinkedRole'
 deleteServiceLinkedRole
     :: Text -- ^ 'dslrRoleName'
     -> DeleteServiceLinkedRole
-deleteServiceLinkedRole pRoleName_ =
-  DeleteServiceLinkedRole' {_dslrRoleName = pRoleName_}
-
+deleteServiceLinkedRole pRoleName_
+  = DeleteServiceLinkedRole'{_dslrRoleName =
+                               pRoleName_}
 
 -- | The name of the service-linked role to be deleted.
 dslrRoleName :: Lens' DeleteServiceLinkedRole Text
@@ -99,11 +99,13 @@ instance ToQuery DeleteServiceLinkedRole where
                "RoleName" =: _dslrRoleName]
 
 -- | /See:/ 'deleteServiceLinkedRoleResponse' smart constructor.
-data DeleteServiceLinkedRoleResponse = DeleteServiceLinkedRoleResponse'
-  { _dslrrsResponseStatus :: !Int
-  , _dslrrsDeletionTaskId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteServiceLinkedRoleResponse = DeleteServiceLinkedRoleResponse'{_dslrrsResponseStatus
+                                                                        :: !Int,
+                                                                        _dslrrsDeletionTaskId
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteServiceLinkedRoleResponse' with the minimum fields required to make a request.
 --
@@ -116,12 +118,11 @@ deleteServiceLinkedRoleResponse
     :: Int -- ^ 'dslrrsResponseStatus'
     -> Text -- ^ 'dslrrsDeletionTaskId'
     -> DeleteServiceLinkedRoleResponse
-deleteServiceLinkedRoleResponse pResponseStatus_ pDeletionTaskId_ =
-  DeleteServiceLinkedRoleResponse'
-    { _dslrrsResponseStatus = pResponseStatus_
-    , _dslrrsDeletionTaskId = pDeletionTaskId_
-    }
-
+deleteServiceLinkedRoleResponse pResponseStatus_
+  pDeletionTaskId_
+  = DeleteServiceLinkedRoleResponse'{_dslrrsResponseStatus
+                                       = pResponseStatus_,
+                                     _dslrrsDeletionTaskId = pDeletionTaskId_}
 
 -- | -- | The response status code.
 dslrrsResponseStatus :: Lens' DeleteServiceLinkedRoleResponse Int

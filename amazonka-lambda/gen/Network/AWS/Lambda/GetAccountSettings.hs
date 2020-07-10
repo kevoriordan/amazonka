@@ -18,10 +18,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a customer's account settings.
+-- Retrieves details about your account's <https://docs.aws.amazon.com/lambda/latest/dg/limits.html limits> and usage in an AWS Region.
 --
---
--- You can use this operation to retrieve Lambda limits information, such as code size and concurrency limits. For more information about limits, see <http://docs.aws.amazon.com/lambda/latest/dg/limits.html AWS Lambda Limits> . You can also retrieve resource usage statistics, such as code storage usage and function count.
 --
 module Network.AWS.Lambda.GetAccountSettings
     (
@@ -46,17 +44,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAccountSettings' smart constructor.
-data GetAccountSettings =
-  GetAccountSettings'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountSettings = GetAccountSettings'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAccountSettings' with the minimum fields required to make a request.
 --
 getAccountSettings
     :: GetAccountSettings
 getAccountSettings = GetAccountSettings'
-
 
 instance AWSRequest GetAccountSettings where
         type Rs GetAccountSettings =
@@ -83,38 +78,42 @@ instance ToQuery GetAccountSettings where
         toQuery = const mempty
 
 -- | /See:/ 'getAccountSettingsResponse' smart constructor.
-data GetAccountSettingsResponse = GetAccountSettingsResponse'
-  { _gasrsAccountLimit   :: !(Maybe AccountLimit)
-  , _gasrsAccountUsage   :: !(Maybe AccountUsage)
-  , _gasrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountSettingsResponse = GetAccountSettingsResponse'{_gasrsAccountLimit
+                                                              ::
+                                                              !(Maybe
+                                                                  AccountLimit),
+                                                              _gasrsAccountUsage
+                                                              ::
+                                                              !(Maybe
+                                                                  AccountUsage),
+                                                              _gasrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetAccountSettingsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gasrsAccountLimit' - Undocumented member.
+-- * 'gasrsAccountLimit' - Limits that are related to concurrency and code storage.
 --
--- * 'gasrsAccountUsage' - Undocumented member.
+-- * 'gasrsAccountUsage' - The number of functions and amount of storage in use.
 --
 -- * 'gasrsResponseStatus' - -- | The response status code.
 getAccountSettingsResponse
     :: Int -- ^ 'gasrsResponseStatus'
     -> GetAccountSettingsResponse
-getAccountSettingsResponse pResponseStatus_ =
-  GetAccountSettingsResponse'
-    { _gasrsAccountLimit = Nothing
-    , _gasrsAccountUsage = Nothing
-    , _gasrsResponseStatus = pResponseStatus_
-    }
+getAccountSettingsResponse pResponseStatus_
+  = GetAccountSettingsResponse'{_gasrsAccountLimit =
+                                  Nothing,
+                                _gasrsAccountUsage = Nothing,
+                                _gasrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Limits that are related to concurrency and code storage.
 gasrsAccountLimit :: Lens' GetAccountSettingsResponse (Maybe AccountLimit)
 gasrsAccountLimit = lens _gasrsAccountLimit (\ s a -> s{_gasrsAccountLimit = a})
 
--- | Undocumented member.
+-- | The number of functions and amount of storage in use.
 gasrsAccountUsage :: Lens' GetAccountSettingsResponse (Maybe AccountUsage)
 gasrsAccountUsage = lens _gasrsAccountUsage (\ s a -> s{_gasrsAccountUsage = a})
 

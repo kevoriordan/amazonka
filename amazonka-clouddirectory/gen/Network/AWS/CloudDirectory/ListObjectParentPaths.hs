@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure Directory Structure> .
+-- Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html Directory Structure> .
 --
 --
 -- Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined @MaxResults@ , in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.
@@ -54,13 +54,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listObjectParentPaths' smart constructor.
-data ListObjectParentPaths = ListObjectParentPaths'
-  { _loppNextToken       :: !(Maybe Text)
-  , _loppMaxResults      :: !(Maybe Nat)
-  , _loppDirectoryARN    :: !Text
-  , _loppObjectReference :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectParentPaths = ListObjectParentPaths'{_loppNextToken
+                                                    :: !(Maybe Text),
+                                                    _loppMaxResults ::
+                                                    !(Maybe Nat),
+                                                    _loppDirectoryARN :: !Text,
+                                                    _loppObjectReference ::
+                                                    !ObjectReference}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListObjectParentPaths' with the minimum fields required to make a request.
 --
@@ -77,14 +79,12 @@ listObjectParentPaths
     :: Text -- ^ 'loppDirectoryARN'
     -> ObjectReference -- ^ 'loppObjectReference'
     -> ListObjectParentPaths
-listObjectParentPaths pDirectoryARN_ pObjectReference_ =
-  ListObjectParentPaths'
-    { _loppNextToken = Nothing
-    , _loppMaxResults = Nothing
-    , _loppDirectoryARN = pDirectoryARN_
-    , _loppObjectReference = pObjectReference_
-    }
-
+listObjectParentPaths pDirectoryARN_
+  pObjectReference_
+  = ListObjectParentPaths'{_loppNextToken = Nothing,
+                           _loppMaxResults = Nothing,
+                           _loppDirectoryARN = pDirectoryARN_,
+                           _loppObjectReference = pObjectReference_}
 
 -- | The pagination token.
 loppNextToken :: Lens' ListObjectParentPaths (Maybe Text)
@@ -148,12 +148,18 @@ instance ToQuery ListObjectParentPaths where
         toQuery = const mempty
 
 -- | /See:/ 'listObjectParentPathsResponse' smart constructor.
-data ListObjectParentPathsResponse = ListObjectParentPathsResponse'
-  { _lopprsPathToObjectIdentifiersList :: !(Maybe [PathToObjectIdentifiers])
-  , _lopprsNextToken                   :: !(Maybe Text)
-  , _lopprsResponseStatus              :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectParentPathsResponse = ListObjectParentPathsResponse'{_lopprsPathToObjectIdentifiersList
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [PathToObjectIdentifiers]),
+                                                                    _lopprsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _lopprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListObjectParentPathsResponse' with the minimum fields required to make a request.
 --
@@ -167,13 +173,11 @@ data ListObjectParentPathsResponse = ListObjectParentPathsResponse'
 listObjectParentPathsResponse
     :: Int -- ^ 'lopprsResponseStatus'
     -> ListObjectParentPathsResponse
-listObjectParentPathsResponse pResponseStatus_ =
-  ListObjectParentPathsResponse'
-    { _lopprsPathToObjectIdentifiersList = Nothing
-    , _lopprsNextToken = Nothing
-    , _lopprsResponseStatus = pResponseStatus_
-    }
-
+listObjectParentPathsResponse pResponseStatus_
+  = ListObjectParentPathsResponse'{_lopprsPathToObjectIdentifiersList
+                                     = Nothing,
+                                   _lopprsNextToken = Nothing,
+                                   _lopprsResponseStatus = pResponseStatus_}
 
 -- | Returns the path to the @ObjectIdentifiers@ that are associated with the directory.
 lopprsPathToObjectIdentifiersList :: Lens' ListObjectParentPathsResponse [PathToObjectIdentifiers]

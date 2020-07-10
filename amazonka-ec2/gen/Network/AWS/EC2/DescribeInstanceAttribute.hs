@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Valid attribute values are: @instanceType@ | @kernel@ | @ramdisk@ | @userData@ | @disableApiTermination@ | @instanceInitiatedShutdownBehavior@ | @rootDeviceName@ | @blockDeviceMapping@ | @productCodes@ | @sourceDestCheck@ | @groupSet@ | @ebsOptimized@ | @sriovNetSupport@
+-- Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Valid attribute values are: @instanceType@ | @kernel@ | @ramdisk@ | @userData@ | @disableApiTermination@ | @instanceInitiatedShutdownBehavior@ | @rootDeviceName@ | @blockDeviceMapping@ | @productCodes@ | @sourceDestCheck@ | @groupSet@ | @ebsOptimized@ | @sriovNetSupport@ 
 --
 --
 module Network.AWS.EC2.DescribeInstanceAttribute
@@ -60,17 +60,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DescribeInstanceAttribute.
---
---
---
--- /See:/ 'describeInstanceAttribute' smart constructor.
-data DescribeInstanceAttribute = DescribeInstanceAttribute'
-  { _diaDryRun     :: !(Maybe Bool)
-  , _diaAttribute  :: !InstanceAttributeName
-  , _diaInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeInstanceAttribute' smart constructor.
+data DescribeInstanceAttribute = DescribeInstanceAttribute'{_diaDryRun
+                                                            :: !(Maybe Bool),
+                                                            _diaAttribute ::
+                                                            !InstanceAttributeName,
+                                                            _diaInstanceId ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeInstanceAttribute' with the minimum fields required to make a request.
 --
@@ -85,13 +83,10 @@ describeInstanceAttribute
     :: InstanceAttributeName -- ^ 'diaAttribute'
     -> Text -- ^ 'diaInstanceId'
     -> DescribeInstanceAttribute
-describeInstanceAttribute pAttribute_ pInstanceId_ =
-  DescribeInstanceAttribute'
-    { _diaDryRun = Nothing
-    , _diaAttribute = pAttribute_
-    , _diaInstanceId = pInstanceId_
-    }
-
+describeInstanceAttribute pAttribute_ pInstanceId_
+  = DescribeInstanceAttribute'{_diaDryRun = Nothing,
+                               _diaAttribute = pAttribute_,
+                               _diaInstanceId = pInstanceId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 diaDryRun :: Lens' DescribeInstanceAttribute (Maybe Bool)
@@ -159,25 +154,71 @@ instance ToQuery DescribeInstanceAttribute where
 --
 --
 -- /See:/ 'describeInstanceAttributeResponse' smart constructor.
-data DescribeInstanceAttributeResponse = DescribeInstanceAttributeResponse'
-  { _desrsInstanceId :: !(Maybe Text)
-  , _desrsGroups :: !(Maybe [GroupIdentifier])
-  , _desrsEnaSupport :: !(Maybe AttributeBooleanValue)
-  , _desrsSourceDestCheck :: !(Maybe AttributeBooleanValue)
-  , _desrsDisableAPITermination :: !(Maybe AttributeBooleanValue)
-  , _desrsRAMDiskId :: !(Maybe AttributeValue)
-  , _desrsKernelId :: !(Maybe AttributeValue)
-  , _desrsRootDeviceName :: !(Maybe AttributeValue)
-  , _desrsInstanceType :: !(Maybe AttributeValue)
-  , _desrsSRIOVNetSupport :: !(Maybe AttributeValue)
-  , _desrsEBSOptimized :: !(Maybe AttributeBooleanValue)
-  , _desrsUserData :: !(Maybe AttributeValue)
-  , _desrsInstanceInitiatedShutdownBehavior :: !(Maybe AttributeValue)
-  , _desrsProductCodes :: !(Maybe [ProductCode])
-  , _desrsBlockDeviceMappings :: !(Maybe [InstanceBlockDeviceMapping])
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstanceAttributeResponse = DescribeInstanceAttributeResponse'{_desrsInstanceId
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _desrsGroups
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [GroupIdentifier]),
+                                                                            _desrsEnaSupport
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeBooleanValue),
+                                                                            _desrsSourceDestCheck
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeBooleanValue),
+                                                                            _desrsDisableAPITermination
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeBooleanValue),
+                                                                            _desrsRAMDiskId
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeValue),
+                                                                            _desrsKernelId
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeValue),
+                                                                            _desrsRootDeviceName
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeValue),
+                                                                            _desrsInstanceType
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeValue),
+                                                                            _desrsSRIOVNetSupport
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeValue),
+                                                                            _desrsEBSOptimized
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeBooleanValue),
+                                                                            _desrsUserData
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeValue),
+                                                                            _desrsInstanceInitiatedShutdownBehavior
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AttributeValue),
+                                                                            _desrsProductCodes
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [ProductCode]),
+                                                                            _desrsBlockDeviceMappings
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [InstanceBlockDeviceMapping]),
+                                                                            _desrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeInstanceAttributeResponse' with the minimum fields required to make a request.
 --
@@ -217,26 +258,25 @@ data DescribeInstanceAttributeResponse = DescribeInstanceAttributeResponse'
 describeInstanceAttributeResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeInstanceAttributeResponse
-describeInstanceAttributeResponse pResponseStatus_ =
-  DescribeInstanceAttributeResponse'
-    { _desrsInstanceId = Nothing
-    , _desrsGroups = Nothing
-    , _desrsEnaSupport = Nothing
-    , _desrsSourceDestCheck = Nothing
-    , _desrsDisableAPITermination = Nothing
-    , _desrsRAMDiskId = Nothing
-    , _desrsKernelId = Nothing
-    , _desrsRootDeviceName = Nothing
-    , _desrsInstanceType = Nothing
-    , _desrsSRIOVNetSupport = Nothing
-    , _desrsEBSOptimized = Nothing
-    , _desrsUserData = Nothing
-    , _desrsInstanceInitiatedShutdownBehavior = Nothing
-    , _desrsProductCodes = Nothing
-    , _desrsBlockDeviceMappings = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
-
+describeInstanceAttributeResponse pResponseStatus_
+  = DescribeInstanceAttributeResponse'{_desrsInstanceId
+                                         = Nothing,
+                                       _desrsGroups = Nothing,
+                                       _desrsEnaSupport = Nothing,
+                                       _desrsSourceDestCheck = Nothing,
+                                       _desrsDisableAPITermination = Nothing,
+                                       _desrsRAMDiskId = Nothing,
+                                       _desrsKernelId = Nothing,
+                                       _desrsRootDeviceName = Nothing,
+                                       _desrsInstanceType = Nothing,
+                                       _desrsSRIOVNetSupport = Nothing,
+                                       _desrsEBSOptimized = Nothing,
+                                       _desrsUserData = Nothing,
+                                       _desrsInstanceInitiatedShutdownBehavior =
+                                         Nothing,
+                                       _desrsProductCodes = Nothing,
+                                       _desrsBlockDeviceMappings = Nothing,
+                                       _desrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the instance.
 desrsInstanceId :: Lens' DescribeInstanceAttributeResponse (Maybe Text)

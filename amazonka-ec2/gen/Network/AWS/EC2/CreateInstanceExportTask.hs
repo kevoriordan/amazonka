@@ -21,7 +21,7 @@
 -- Exports a running or stopped instance to an S3 bucket.
 --
 --
--- For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <http://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html Exporting an Instance as a VM Using VM Import/Export> in the /VM Import\/Export User Guide/ .
+-- For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html Exporting an Instance as a VM Using VM Import/Export> in the /VM Import\/Export User Guide/ .
 --
 module Network.AWS.EC2.CreateInstanceExportTask
     (
@@ -49,18 +49,20 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CreateInstanceExportTask.
---
---
---
--- /See:/ 'createInstanceExportTask' smart constructor.
-data CreateInstanceExportTask = CreateInstanceExportTask'
-  { _cietTargetEnvironment :: !(Maybe ExportEnvironment)
-  , _cietExportToS3Task    :: !(Maybe ExportToS3TaskSpecification)
-  , _cietDescription       :: !(Maybe Text)
-  , _cietInstanceId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createInstanceExportTask' smart constructor.
+data CreateInstanceExportTask = CreateInstanceExportTask'{_cietTargetEnvironment
+                                                          ::
+                                                          !(Maybe
+                                                              ExportEnvironment),
+                                                          _cietExportToS3Task ::
+                                                          !(Maybe
+                                                              ExportToS3TaskSpecification),
+                                                          _cietDescription ::
+                                                          !(Maybe Text),
+                                                          _cietInstanceId ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateInstanceExportTask' with the minimum fields required to make a request.
 --
@@ -76,14 +78,12 @@ data CreateInstanceExportTask = CreateInstanceExportTask'
 createInstanceExportTask
     :: Text -- ^ 'cietInstanceId'
     -> CreateInstanceExportTask
-createInstanceExportTask pInstanceId_ =
-  CreateInstanceExportTask'
-    { _cietTargetEnvironment = Nothing
-    , _cietExportToS3Task = Nothing
-    , _cietDescription = Nothing
-    , _cietInstanceId = pInstanceId_
-    }
-
+createInstanceExportTask pInstanceId_
+  = CreateInstanceExportTask'{_cietTargetEnvironment =
+                                Nothing,
+                              _cietExportToS3Task = Nothing,
+                              _cietDescription = Nothing,
+                              _cietInstanceId = pInstanceId_}
 
 -- | The target virtualization environment.
 cietTargetEnvironment :: Lens' CreateInstanceExportTask (Maybe ExportEnvironment)
@@ -132,16 +132,16 @@ instance ToQuery CreateInstanceExportTask where
                "Description" =: _cietDescription,
                "InstanceId" =: _cietInstanceId]
 
--- | Contains the output for CreateInstanceExportTask.
---
---
---
--- /See:/ 'createInstanceExportTaskResponse' smart constructor.
-data CreateInstanceExportTaskResponse = CreateInstanceExportTaskResponse'
-  { _cietrsExportTask     :: !(Maybe ExportTask)
-  , _cietrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createInstanceExportTaskResponse' smart constructor.
+data CreateInstanceExportTaskResponse = CreateInstanceExportTaskResponse'{_cietrsExportTask
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ExportTask),
+                                                                          _cietrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'CreateInstanceExportTaskResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +153,10 @@ data CreateInstanceExportTaskResponse = CreateInstanceExportTaskResponse'
 createInstanceExportTaskResponse
     :: Int -- ^ 'cietrsResponseStatus'
     -> CreateInstanceExportTaskResponse
-createInstanceExportTaskResponse pResponseStatus_ =
-  CreateInstanceExportTaskResponse'
-    {_cietrsExportTask = Nothing, _cietrsResponseStatus = pResponseStatus_}
-
+createInstanceExportTaskResponse pResponseStatus_
+  = CreateInstanceExportTaskResponse'{_cietrsExportTask
+                                        = Nothing,
+                                      _cietrsResponseStatus = pResponseStatus_}
 
 -- | Information about the instance export task.
 cietrsExportTask :: Lens' CreateInstanceExportTaskResponse (Maybe ExportTask)

@@ -21,7 +21,7 @@
 -- Returns the estimated number of activity tasks in the specified task list. The count returned is an approximation and isn't guaranteed to be exact. If you specify a task list that no activity task was ever scheduled in then @0@ is returned.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -33,7 +33,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.CountPendingActivityTasks
     (
@@ -60,11 +60,12 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'countPendingActivityTasks' smart constructor.
-data CountPendingActivityTasks = CountPendingActivityTasks'
-  { _cpatDomain   :: !Text
-  , _cpatTaskList :: !TaskList
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CountPendingActivityTasks = CountPendingActivityTasks'{_cpatDomain
+                                                            :: !Text,
+                                                            _cpatTaskList ::
+                                                            !TaskList}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CountPendingActivityTasks' with the minimum fields required to make a request.
 --
@@ -77,10 +78,9 @@ countPendingActivityTasks
     :: Text -- ^ 'cpatDomain'
     -> TaskList -- ^ 'cpatTaskList'
     -> CountPendingActivityTasks
-countPendingActivityTasks pDomain_ pTaskList_ =
-  CountPendingActivityTasks'
-    {_cpatDomain = pDomain_, _cpatTaskList = pTaskList_}
-
+countPendingActivityTasks pDomain_ pTaskList_
+  = CountPendingActivityTasks'{_cpatDomain = pDomain_,
+                               _cpatTaskList = pTaskList_}
 
 -- | The name of the domain that contains the task list.
 cpatDomain :: Lens' CountPendingActivityTasks Text

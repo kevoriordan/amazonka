@@ -43,11 +43,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateResourceDefinition' smart constructor.
-data UpdateResourceDefinition = UpdateResourceDefinition'
-  { _urdName                 :: !(Maybe Text)
-  , _urdResourceDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateResourceDefinition = UpdateResourceDefinition'{_urdName
+                                                          :: !(Maybe Text),
+                                                          _urdResourceDefinitionId
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateResourceDefinition' with the minimum fields required to make a request.
 --
@@ -59,10 +60,9 @@ data UpdateResourceDefinition = UpdateResourceDefinition'
 updateResourceDefinition
     :: Text -- ^ 'urdResourceDefinitionId'
     -> UpdateResourceDefinition
-updateResourceDefinition pResourceDefinitionId_ =
-  UpdateResourceDefinition'
-    {_urdName = Nothing, _urdResourceDefinitionId = pResourceDefinitionId_}
-
+updateResourceDefinition pResourceDefinitionId_
+  = UpdateResourceDefinition'{_urdName = Nothing,
+                              _urdResourceDefinitionId = pResourceDefinitionId_}
 
 -- | The name of the definition.
 urdName :: Lens' UpdateResourceDefinition (Maybe Text)
@@ -107,10 +107,11 @@ instance ToQuery UpdateResourceDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'updateResourceDefinitionResponse' smart constructor.
-newtype UpdateResourceDefinitionResponse = UpdateResourceDefinitionResponse'
-  { _urdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateResourceDefinitionResponse = UpdateResourceDefinitionResponse'{_urdrsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'UpdateResourceDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +121,9 @@ newtype UpdateResourceDefinitionResponse = UpdateResourceDefinitionResponse'
 updateResourceDefinitionResponse
     :: Int -- ^ 'urdrsResponseStatus'
     -> UpdateResourceDefinitionResponse
-updateResourceDefinitionResponse pResponseStatus_ =
-  UpdateResourceDefinitionResponse' {_urdrsResponseStatus = pResponseStatus_}
-
+updateResourceDefinitionResponse pResponseStatus_
+  = UpdateResourceDefinitionResponse'{_urdrsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 urdrsResponseStatus :: Lens' UpdateResourceDefinitionResponse Int

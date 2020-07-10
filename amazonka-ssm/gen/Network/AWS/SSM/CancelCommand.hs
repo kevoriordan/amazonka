@@ -44,16 +44,15 @@ import Network.AWS.Response
 import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'cancelCommand' smart constructor.
-data CancelCommand = CancelCommand'
-  { _ccInstanceIds :: !(Maybe [Text])
-  , _ccCommandId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelCommand = CancelCommand'{_ccInstanceIds ::
+                                    !(Maybe [Text]),
+                                    _ccCommandId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelCommand' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data CancelCommand = CancelCommand'
 cancelCommand
     :: Text -- ^ 'ccCommandId'
     -> CancelCommand
-cancelCommand pCommandId_ =
-  CancelCommand' {_ccInstanceIds = Nothing, _ccCommandId = pCommandId_}
-
+cancelCommand pCommandId_
+  = CancelCommand'{_ccInstanceIds = Nothing,
+                   _ccCommandId = pCommandId_}
 
 -- | (Optional) A list of instance IDs on which you want to cancel the command. If not provided, the command is canceled on every instance on which it was requested.
 ccInstanceIds :: Lens' CancelCommand [Text]
@@ -116,10 +115,10 @@ instance ToQuery CancelCommand where
 --
 --
 -- /See:/ 'cancelCommandResponse' smart constructor.
-newtype CancelCommandResponse = CancelCommandResponse'
-  { _ccrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelCommandResponse = CancelCommandResponse'{_ccrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CancelCommandResponse' with the minimum fields required to make a request.
 --
@@ -129,9 +128,9 @@ newtype CancelCommandResponse = CancelCommandResponse'
 cancelCommandResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CancelCommandResponse
-cancelCommandResponse pResponseStatus_ =
-  CancelCommandResponse' {_ccrsResponseStatus = pResponseStatus_}
-
+cancelCommandResponse pResponseStatus_
+  = CancelCommandResponse'{_ccrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 ccrsResponseStatus :: Lens' CancelCommandResponse Int

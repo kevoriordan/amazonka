@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a specific version of a bot. To delete all versions of a bot, use the 'DeleteBot' operation.
+-- Deletes a specific version of a bot. To delete all versions of a bot, use the 'DeleteBot' operation. 
 --
 --
 -- This operation requires permissions for the @lex:DeleteBotVersion@ action.
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteBotVersion' smart constructor.
-data DeleteBotVersion = DeleteBotVersion'
-  { _dbvName    :: !Text
-  , _dbvVersion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBotVersion = DeleteBotVersion'{_dbvName ::
+                                          !Text,
+                                          _dbvVersion :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBotVersion' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ deleteBotVersion
     :: Text -- ^ 'dbvName'
     -> Text -- ^ 'dbvVersion'
     -> DeleteBotVersion
-deleteBotVersion pName_ pVersion_ =
-  DeleteBotVersion' {_dbvName = pName_, _dbvVersion = pVersion_}
-
+deleteBotVersion pName_ pVersion_
+  = DeleteBotVersion'{_dbvName = pName_,
+                      _dbvVersion = pVersion_}
 
 -- | The name of the bot.
 dbvName :: Lens' DeleteBotVersion Text
@@ -100,16 +99,14 @@ instance ToQuery DeleteBotVersion where
         toQuery = const mempty
 
 -- | /See:/ 'deleteBotVersionResponse' smart constructor.
-data DeleteBotVersionResponse =
-  DeleteBotVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBotVersionResponse = DeleteBotVersionResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteBotVersionResponse' with the minimum fields required to make a request.
 --
 deleteBotVersionResponse
     :: DeleteBotVersionResponse
 deleteBotVersionResponse = DeleteBotVersionResponse'
-
 
 instance NFData DeleteBotVersionResponse where

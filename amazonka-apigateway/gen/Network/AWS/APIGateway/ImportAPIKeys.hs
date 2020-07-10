@@ -52,12 +52,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'importAPIKeys' smart constructor.
-data ImportAPIKeys = ImportAPIKeys'
-  { _iakFailOnWarnings :: !(Maybe Bool)
-  , _iakBody           :: !ByteString
-  , _iakFormat         :: !APIKeysFormat
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ImportAPIKeys = ImportAPIKeys'{_iakFailOnWarnings
+                                    :: !(Maybe Bool),
+                                    _iakBody :: !ByteString,
+                                    _iakFormat :: !APIKeysFormat}
+                       deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImportAPIKeys' with the minimum fields required to make a request.
 --
@@ -65,23 +64,22 @@ data ImportAPIKeys = ImportAPIKeys'
 --
 -- * 'iakFailOnWarnings' - A query parameter to indicate whether to rollback 'ApiKey' importation (@true@ ) or not (@false@ ) when error is encountered.
 --
--- * 'iakBody' - The payload of the POST request to import API keys. For the payload format, see <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html API Key File Format> .
+-- * 'iakBody' - The payload of the POST request to import API keys. For the payload format, see <https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html API Key File Format> .
 --
 -- * 'iakFormat' - A query parameter to specify the input format to imported API keys. Currently, only the @csv@ format is supported.
 importAPIKeys
     :: ByteString -- ^ 'iakBody'
     -> APIKeysFormat -- ^ 'iakFormat'
     -> ImportAPIKeys
-importAPIKeys pBody_ pFormat_ =
-  ImportAPIKeys'
-    {_iakFailOnWarnings = Nothing, _iakBody = pBody_, _iakFormat = pFormat_}
-
+importAPIKeys pBody_ pFormat_
+  = ImportAPIKeys'{_iakFailOnWarnings = Nothing,
+                   _iakBody = pBody_, _iakFormat = pFormat_}
 
 -- | A query parameter to indicate whether to rollback 'ApiKey' importation (@true@ ) or not (@false@ ) when error is encountered.
 iakFailOnWarnings :: Lens' ImportAPIKeys (Maybe Bool)
 iakFailOnWarnings = lens _iakFailOnWarnings (\ s a -> s{_iakFailOnWarnings = a})
 
--- | The payload of the POST request to import API keys. For the payload format, see <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html API Key File Format> .
+-- | The payload of the POST request to import API keys. For the payload format, see <https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html API Key File Format> .
 iakBody :: Lens' ImportAPIKeys ByteString
 iakBody = lens _iakBody (\ s a -> s{_iakBody = a})
 
@@ -127,12 +125,14 @@ instance ToQuery ImportAPIKeys where
 --
 --
 -- /See:/ 'importAPIKeysResponse' smart constructor.
-data ImportAPIKeysResponse = ImportAPIKeysResponse'
-  { _iakrsIds            :: !(Maybe [Text])
-  , _iakrsWarnings       :: !(Maybe [Text])
-  , _iakrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ImportAPIKeysResponse = ImportAPIKeysResponse'{_iakrsIds
+                                                    :: !(Maybe [Text]),
+                                                    _iakrsWarnings ::
+                                                    !(Maybe [Text]),
+                                                    _iakrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ImportAPIKeysResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +146,10 @@ data ImportAPIKeysResponse = ImportAPIKeysResponse'
 importAPIKeysResponse
     :: Int -- ^ 'iakrsResponseStatus'
     -> ImportAPIKeysResponse
-importAPIKeysResponse pResponseStatus_ =
-  ImportAPIKeysResponse'
-    { _iakrsIds = Nothing
-    , _iakrsWarnings = Nothing
-    , _iakrsResponseStatus = pResponseStatus_
-    }
-
+importAPIKeysResponse pResponseStatus_
+  = ImportAPIKeysResponse'{_iakrsIds = Nothing,
+                           _iakrsWarnings = Nothing,
+                           _iakrsResponseStatus = pResponseStatus_}
 
 -- | A list of all the 'ApiKey' identifiers.
 iakrsIds :: Lens' ImportAPIKeysResponse [Text]

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a specified crawler from the Data Catalog, unless the crawler state is @RUNNING@ .
+-- Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is @RUNNING@ .
 --
 --
 module Network.AWS.Glue.DeleteCrawler
@@ -33,7 +33,7 @@ module Network.AWS.Glue.DeleteCrawler
     , deleteCrawlerResponse
     , DeleteCrawlerResponse
     -- * Response Lenses
-    , dccrsResponseStatus
+    , dltcrwlrrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -44,23 +44,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteCrawler' smart constructor.
-newtype DeleteCrawler = DeleteCrawler'
-  { _dcName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCrawler = DeleteCrawler'{_dcName ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteCrawler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcName' - Name of the crawler to remove.
+-- * 'dcName' - The name of the crawler to remove.
 deleteCrawler
     :: Text -- ^ 'dcName'
     -> DeleteCrawler
-deleteCrawler pName_ = DeleteCrawler' {_dcName = pName_}
+deleteCrawler pName_
+  = DeleteCrawler'{_dcName = pName_}
 
-
--- | Name of the crawler to remove.
+-- | The name of the crawler to remove.
 dcName :: Lens' DeleteCrawler Text
 dcName = lens _dcName (\ s a -> s{_dcName = a})
 
@@ -96,25 +95,25 @@ instance ToQuery DeleteCrawler where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCrawlerResponse' smart constructor.
-newtype DeleteCrawlerResponse = DeleteCrawlerResponse'
-  { _dccrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCrawlerResponse = DeleteCrawlerResponse'{_dltcrwlrrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteCrawlerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dccrsResponseStatus' - -- | The response status code.
+-- * 'dltcrwlrrsResponseStatus' - -- | The response status code.
 deleteCrawlerResponse
-    :: Int -- ^ 'dccrsResponseStatus'
+    :: Int -- ^ 'dltcrwlrrsResponseStatus'
     -> DeleteCrawlerResponse
-deleteCrawlerResponse pResponseStatus_ =
-  DeleteCrawlerResponse' {_dccrsResponseStatus = pResponseStatus_}
-
+deleteCrawlerResponse pResponseStatus_
+  = DeleteCrawlerResponse'{_dltcrwlrrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
-dccrsResponseStatus :: Lens' DeleteCrawlerResponse Int
-dccrsResponseStatus = lens _dccrsResponseStatus (\ s a -> s{_dccrsResponseStatus = a})
+dltcrwlrrsResponseStatus :: Lens' DeleteCrawlerResponse Int
+dltcrwlrrsResponseStatus = lens _dltcrwlrrsResponseStatus (\ s a -> s{_dltcrwlrrsResponseStatus = a})
 
 instance NFData DeleteCrawlerResponse where

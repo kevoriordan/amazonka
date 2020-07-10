@@ -53,12 +53,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getId' smart constructor.
-data GetId = GetId'
-  { _giAccountId      :: !(Maybe Text)
-  , _giLogins         :: !(Maybe (Map Text Text))
-  , _giIdentityPoolId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetId = GetId'{_giAccountId :: !(Maybe Text),
+                    _giLogins :: !(Maybe (Map Text Text)),
+                    _giIdentityPoolId :: !Text}
+               deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetId' with the minimum fields required to make a request.
 --
@@ -66,25 +64,21 @@ data GetId = GetId'
 --
 -- * 'giAccountId' - A standard AWS account ID (9+ digits).
 --
--- * 'giLogins' - A set of optional name-value pairs that map provider names to provider tokens. The available provider names for @Logins@ are as follows:     * Facebook: @graph.facebook.com@      * Amazon Cognito Identity Provider: @cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789@      * Google: @accounts.google.com@      * Amazon: @www.amazon.com@      * Twitter: @api.twitter.com@      * Digits: @www.digits.com@
+-- * 'giLogins' - A set of optional name-value pairs that map provider names to provider tokens. The available provider names for @Logins@ are as follows:     * Facebook: @graph.facebook.com@      * Amazon Cognito user pool: @cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>@ , for example, @cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789@ .      * Google: @accounts.google.com@      * Amazon: @www.amazon.com@      * Twitter: @api.twitter.com@      * Digits: @www.digits.com@ 
 --
 -- * 'giIdentityPoolId' - An identity pool ID in the format REGION:GUID.
 getId
     :: Text -- ^ 'giIdentityPoolId'
     -> GetId
-getId pIdentityPoolId_ =
-  GetId'
-    { _giAccountId = Nothing
-    , _giLogins = Nothing
-    , _giIdentityPoolId = pIdentityPoolId_
-    }
-
+getId pIdentityPoolId_
+  = GetId'{_giAccountId = Nothing, _giLogins = Nothing,
+           _giIdentityPoolId = pIdentityPoolId_}
 
 -- | A standard AWS account ID (9+ digits).
 giAccountId :: Lens' GetId (Maybe Text)
 giAccountId = lens _giAccountId (\ s a -> s{_giAccountId = a})
 
--- | A set of optional name-value pairs that map provider names to provider tokens. The available provider names for @Logins@ are as follows:     * Facebook: @graph.facebook.com@      * Amazon Cognito Identity Provider: @cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789@      * Google: @accounts.google.com@      * Amazon: @www.amazon.com@      * Twitter: @api.twitter.com@      * Digits: @www.digits.com@
+-- | A set of optional name-value pairs that map provider names to provider tokens. The available provider names for @Logins@ are as follows:     * Facebook: @graph.facebook.com@      * Amazon Cognito user pool: @cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>@ , for example, @cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789@ .      * Google: @accounts.google.com@      * Amazon: @www.amazon.com@      * Twitter: @api.twitter.com@      * Digits: @www.digits.com@ 
 giLogins :: Lens' GetId (HashMap Text Text)
 giLogins = lens _giLogins (\ s a -> s{_giLogins = a}) . _Default . _Map
 
@@ -133,11 +127,10 @@ instance ToQuery GetId where
 --
 --
 -- /See:/ 'getIdResponse' smart constructor.
-data GetIdResponse = GetIdResponse'
-  { _girsIdentityId     :: !(Maybe Text)
-  , _girsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIdResponse = GetIdResponse'{_girsIdentityId
+                                    :: !(Maybe Text),
+                                    _girsResponseStatus :: !Int}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetIdResponse' with the minimum fields required to make a request.
 --
@@ -149,10 +142,9 @@ data GetIdResponse = GetIdResponse'
 getIdResponse
     :: Int -- ^ 'girsResponseStatus'
     -> GetIdResponse
-getIdResponse pResponseStatus_ =
-  GetIdResponse'
-    {_girsIdentityId = Nothing, _girsResponseStatus = pResponseStatus_}
-
+getIdResponse pResponseStatus_
+  = GetIdResponse'{_girsIdentityId = Nothing,
+                   _girsResponseStatus = pResponseStatus_}
 
 -- | A unique identifier in the format REGION:GUID.
 girsIdentityId :: Lens' GetIdResponse (Maybe Text)

@@ -20,29 +20,29 @@ module Network.AWS.MachineLearning
     -- * Errors
     -- $errors
 
-    -- ** InvalidTagException
-    , _InvalidTagException
-
-    -- ** InternalServerException
-    , _InternalServerException
-
-    -- ** InvalidInputException
-    , _InvalidInputException
-
     -- ** IdempotentParameterMismatchException
     , _IdempotentParameterMismatchException
 
-    -- ** TagLimitExceededException
-    , _TagLimitExceededException
-
-    -- ** PredictorNotMountedException
-    , _PredictorNotMountedException
+    -- ** InvalidTagException
+    , _InvalidTagException
 
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
 
+    -- ** TagLimitExceededException
+    , _TagLimitExceededException
+
+    -- ** InvalidInputException
+    , _InvalidInputException
+
+    -- ** InternalServerException
+    , _InternalServerException
+
     -- ** LimitExceededException
     , _LimitExceededException
+
+    -- ** PredictorNotMountedException
+    , _PredictorNotMountedException
 
     -- * Waiters
     -- $waiters
@@ -62,82 +62,82 @@ module Network.AWS.MachineLearning
     -- * Operations
     -- $operations
 
-    -- ** UpdateDataSource
+    -- ** UpdateDataSource 
     , module Network.AWS.MachineLearning.UpdateDataSource
 
-    -- ** DeleteDataSource
+    -- ** DeleteDataSource 
     , module Network.AWS.MachineLearning.DeleteDataSource
 
-    -- ** DescribeTags
+    -- ** DescribeTags 
     , module Network.AWS.MachineLearning.DescribeTags
 
-    -- ** CreateDataSourceFromRedshift
+    -- ** CreateDataSourceFromRedshift 
     , module Network.AWS.MachineLearning.CreateDataSourceFromRedshift
 
-    -- ** CreateDataSourceFromS3
+    -- ** CreateDataSourceFromS3 
     , module Network.AWS.MachineLearning.CreateDataSourceFromS3
 
-    -- ** CreateMLModel
+    -- ** CreateMLModel 
     , module Network.AWS.MachineLearning.CreateMLModel
 
-    -- ** DeleteTags
+    -- ** DeleteTags 
     , module Network.AWS.MachineLearning.DeleteTags
 
-    -- ** DeleteBatchPrediction
+    -- ** DeleteBatchPrediction 
     , module Network.AWS.MachineLearning.DeleteBatchPrediction
 
-    -- ** UpdateBatchPrediction
+    -- ** UpdateBatchPrediction 
     , module Network.AWS.MachineLearning.UpdateBatchPrediction
 
-    -- ** GetMLModel
+    -- ** GetMLModel 
     , module Network.AWS.MachineLearning.GetMLModel
 
-    -- ** GetDataSource
+    -- ** GetDataSource 
     , module Network.AWS.MachineLearning.GetDataSource
 
-    -- ** UpdateEvaluation
+    -- ** UpdateEvaluation 
     , module Network.AWS.MachineLearning.UpdateEvaluation
 
-    -- ** DeleteEvaluation
+    -- ** DeleteEvaluation 
     , module Network.AWS.MachineLearning.DeleteEvaluation
 
-    -- ** DeleteMLModel
+    -- ** DeleteMLModel 
     , module Network.AWS.MachineLearning.DeleteMLModel
 
-    -- ** UpdateMLModel
+    -- ** UpdateMLModel 
     , module Network.AWS.MachineLearning.UpdateMLModel
 
-    -- ** GetBatchPrediction
+    -- ** GetBatchPrediction 
     , module Network.AWS.MachineLearning.GetBatchPrediction
 
     -- ** DescribeBatchPredictions (Paginated)
     , module Network.AWS.MachineLearning.DescribeBatchPredictions
 
-    -- ** CreateDataSourceFromRDS
+    -- ** CreateDataSourceFromRDS 
     , module Network.AWS.MachineLearning.CreateDataSourceFromRDS
 
-    -- ** CreateEvaluation
+    -- ** CreateEvaluation 
     , module Network.AWS.MachineLearning.CreateEvaluation
 
-    -- ** Predict
+    -- ** Predict 
     , module Network.AWS.MachineLearning.Predict
 
-    -- ** DeleteRealtimeEndpoint
+    -- ** DeleteRealtimeEndpoint 
     , module Network.AWS.MachineLearning.DeleteRealtimeEndpoint
 
-    -- ** CreateBatchPrediction
+    -- ** CreateBatchPrediction 
     , module Network.AWS.MachineLearning.CreateBatchPrediction
 
-    -- ** GetEvaluation
+    -- ** GetEvaluation 
     , module Network.AWS.MachineLearning.GetEvaluation
 
     -- ** DescribeEvaluations (Paginated)
     , module Network.AWS.MachineLearning.DescribeEvaluations
 
-    -- ** CreateRealtimeEndpoint
+    -- ** CreateRealtimeEndpoint 
     , module Network.AWS.MachineLearning.CreateRealtimeEndpoint
 
-    -- ** AddTags
+    -- ** AddTags 
     , module Network.AWS.MachineLearning.AddTags
 
     -- ** DescribeMLModels (Paginated)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an 'InputProcessingConfiguration' from an input.
+-- Deletes an <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html InputProcessingConfiguration> from an input.
 --
 --
 module Network.AWS.KinesisAnalytics.DeleteApplicationInputProcessingConfiguration
@@ -46,12 +46,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteApplicationInputProcessingConfiguration' smart constructor.
-data DeleteApplicationInputProcessingConfiguration = DeleteApplicationInputProcessingConfiguration'
-  { _daipcApplicationName             :: !Text
-  , _daipcCurrentApplicationVersionId :: !Nat
-  , _daipcInputId                     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplicationInputProcessingConfiguration = DeleteApplicationInputProcessingConfiguration'{_daipcApplicationName
+                                                                                                    ::
+                                                                                                    !Text,
+                                                                                                    _daipcCurrentApplicationVersionId
+                                                                                                    ::
+                                                                                                    !Nat,
+                                                                                                    _daipcInputId
+                                                                                                    ::
+                                                                                                    !Text}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'DeleteApplicationInputProcessingConfiguration' with the minimum fields required to make a request.
 --
@@ -61,19 +67,22 @@ data DeleteApplicationInputProcessingConfiguration = DeleteApplicationInputProce
 --
 -- * 'daipcCurrentApplicationVersionId' - The version ID of the Kinesis Analytics application.
 --
--- * 'daipcInputId' - The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the 'DescribeApplication' operation.
+-- * 'daipcInputId' - The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation.
 deleteApplicationInputProcessingConfiguration
     :: Text -- ^ 'daipcApplicationName'
     -> Natural -- ^ 'daipcCurrentApplicationVersionId'
     -> Text -- ^ 'daipcInputId'
     -> DeleteApplicationInputProcessingConfiguration
-deleteApplicationInputProcessingConfiguration pApplicationName_ pCurrentApplicationVersionId_ pInputId_ =
-  DeleteApplicationInputProcessingConfiguration'
-    { _daipcApplicationName = pApplicationName_
-    , _daipcCurrentApplicationVersionId = _Nat # pCurrentApplicationVersionId_
-    , _daipcInputId = pInputId_
-    }
-
+deleteApplicationInputProcessingConfiguration
+  pApplicationName_ pCurrentApplicationVersionId_
+  pInputId_
+  = DeleteApplicationInputProcessingConfiguration'{_daipcApplicationName
+                                                     = pApplicationName_,
+                                                   _daipcCurrentApplicationVersionId
+                                                     =
+                                                     _Nat #
+                                                       pCurrentApplicationVersionId_,
+                                                   _daipcInputId = pInputId_}
 
 -- | The Kinesis Analytics application name.
 daipcApplicationName :: Lens' DeleteApplicationInputProcessingConfiguration Text
@@ -83,7 +92,7 @@ daipcApplicationName = lens _daipcApplicationName (\ s a -> s{_daipcApplicationN
 daipcCurrentApplicationVersionId :: Lens' DeleteApplicationInputProcessingConfiguration Natural
 daipcCurrentApplicationVersionId = lens _daipcCurrentApplicationVersionId (\ s a -> s{_daipcCurrentApplicationVersionId = a}) . _Nat
 
--- | The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the 'DescribeApplication' operation.
+-- | The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation.
 daipcInputId :: Lens' DeleteApplicationInputProcessingConfiguration Text
 daipcInputId = lens _daipcInputId (\ s a -> s{_daipcInputId = a})
 
@@ -144,10 +153,15 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'deleteApplicationInputProcessingConfigurationResponse' smart constructor.
-newtype DeleteApplicationInputProcessingConfigurationResponse = DeleteApplicationInputProcessingConfigurationResponse'
-  { _daipcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteApplicationInputProcessingConfigurationResponse = DeleteApplicationInputProcessingConfigurationResponse'{_daipcrsResponseStatus
+                                                                                                                       ::
+                                                                                                                       Int}
+                                                                  deriving (Eq,
+                                                                            Read,
+                                                                            Show,
+                                                                            Data,
+                                                                            Typeable,
+                                                                            Generic)
 
 -- | Creates a value of 'DeleteApplicationInputProcessingConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -157,10 +171,10 @@ newtype DeleteApplicationInputProcessingConfigurationResponse = DeleteApplicatio
 deleteApplicationInputProcessingConfigurationResponse
     :: Int -- ^ 'daipcrsResponseStatus'
     -> DeleteApplicationInputProcessingConfigurationResponse
-deleteApplicationInputProcessingConfigurationResponse pResponseStatus_ =
-  DeleteApplicationInputProcessingConfigurationResponse'
-    {_daipcrsResponseStatus = pResponseStatus_}
-
+deleteApplicationInputProcessingConfigurationResponse
+  pResponseStatus_
+  = DeleteApplicationInputProcessingConfigurationResponse'{_daipcrsResponseStatus
+                                                             = pResponseStatus_}
 
 -- | -- | The response status code.
 daipcrsResponseStatus :: Lens' DeleteApplicationInputProcessingConfigurationResponse Int

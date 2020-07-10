@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of Lambda function definitions.
+--
+-- This operation returns paginated results.
 module Network.AWS.Greengrass.ListFunctionDefinitions
     (
     -- * Creating a Request
@@ -40,16 +42,18 @@ module Network.AWS.Greengrass.ListFunctionDefinitions
 import Network.AWS.Greengrass.Types
 import Network.AWS.Greengrass.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listFunctionDefinitions' smart constructor.
-data ListFunctionDefinitions = ListFunctionDefinitions'
-  { _lfdNextToken  :: !(Maybe Text)
-  , _lfdMaxResults :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFunctionDefinitions = ListFunctionDefinitions'{_lfdNextToken
+                                                        :: !(Maybe Text),
+                                                        _lfdMaxResults ::
+                                                        !(Maybe Text)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListFunctionDefinitions' with the minimum fields required to make a request.
 --
@@ -60,9 +64,9 @@ data ListFunctionDefinitions = ListFunctionDefinitions'
 -- * 'lfdMaxResults' - The maximum number of results to be returned per request.
 listFunctionDefinitions
     :: ListFunctionDefinitions
-listFunctionDefinitions =
-  ListFunctionDefinitions' {_lfdNextToken = Nothing, _lfdMaxResults = Nothing}
-
+listFunctionDefinitions
+  = ListFunctionDefinitions'{_lfdNextToken = Nothing,
+                             _lfdMaxResults = Nothing}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lfdNextToken :: Lens' ListFunctionDefinitions (Maybe Text)
@@ -71,6 +75,13 @@ lfdNextToken = lens _lfdNextToken (\ s a -> s{_lfdNextToken = a})
 -- | The maximum number of results to be returned per request.
 lfdMaxResults :: Lens' ListFunctionDefinitions (Maybe Text)
 lfdMaxResults = lens _lfdMaxResults (\ s a -> s{_lfdMaxResults = a})
+
+instance AWSPager ListFunctionDefinitions where
+        page rq rs
+          | stop (rs ^. lfdrsNextToken) = Nothing
+          | stop (rs ^. lfdrsDefinitions) = Nothing
+          | otherwise =
+            Just $ rq & lfdNextToken .~ rs ^. lfdrsNextToken
 
 instance AWSRequest ListFunctionDefinitions where
         type Rs ListFunctionDefinitions =
@@ -105,12 +116,18 @@ instance ToQuery ListFunctionDefinitions where
                "MaxResults" =: _lfdMaxResults]
 
 -- | /See:/ 'listFunctionDefinitionsResponse' smart constructor.
-data ListFunctionDefinitionsResponse = ListFunctionDefinitionsResponse'
-  { _lfdrsNextToken      :: !(Maybe Text)
-  , _lfdrsDefinitions    :: !(Maybe [DefinitionInformation])
-  , _lfdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFunctionDefinitionsResponse = ListFunctionDefinitionsResponse'{_lfdrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lfdrsDefinitions
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [DefinitionInformation]),
+                                                                        _lfdrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListFunctionDefinitionsResponse' with the minimum fields required to make a request.
 --
@@ -124,13 +141,11 @@ data ListFunctionDefinitionsResponse = ListFunctionDefinitionsResponse'
 listFunctionDefinitionsResponse
     :: Int -- ^ 'lfdrsResponseStatus'
     -> ListFunctionDefinitionsResponse
-listFunctionDefinitionsResponse pResponseStatus_ =
-  ListFunctionDefinitionsResponse'
-    { _lfdrsNextToken = Nothing
-    , _lfdrsDefinitions = Nothing
-    , _lfdrsResponseStatus = pResponseStatus_
-    }
-
+listFunctionDefinitionsResponse pResponseStatus_
+  = ListFunctionDefinitionsResponse'{_lfdrsNextToken =
+                                       Nothing,
+                                     _lfdrsDefinitions = Nothing,
+                                     _lfdrsResponseStatus = pResponseStatus_}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lfdrsNextToken :: Lens' ListFunctionDefinitionsResponse (Maybe Text)

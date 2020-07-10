@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Pinpoint where
 
 import Data.Proxy
-import Network.AWS.Pinpoint
 import Test.AWS.Fixture
-import Test.AWS.Pinpoint.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.Pinpoint
+import Test.AWS.Pinpoint.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -40,6 +40,12 @@ import Test.Tasty
 --         , requestGetImportJob $
 --             getImportJob
 --
+--         , requestDeleteSmsTemplate $
+--             deleteSmsTemplate
+--
+--         , requestUpdateSmsTemplate $
+--             updateSmsTemplate
+--
 --         , requestGetAPNSVoipSandboxChannel $
 --             getAPNSVoipSandboxChannel
 --
@@ -55,11 +61,23 @@ import Test.Tasty
 --         , requestGetSegmentVersion $
 --             getSegmentVersion
 --
+--         , requestDeletePushTemplate $
+--             deletePushTemplate
+--
+--         , requestUpdatePushTemplate $
+--             updatePushTemplate
+--
 --         , requestCreateExportJob $
 --             createExportJob
 --
 --         , requestCreateSegment $
 --             createSegment
+--
+--         , requestCreateRecommenderConfiguration $
+--             createRecommenderConfiguration
+--
+--         , requestCreateVoiceTemplate $
+--             createVoiceTemplate
 --
 --         , requestUpdateADMChannel $
 --             updateADMChannel
@@ -67,14 +85,29 @@ import Test.Tasty
 --         , requestDeleteADMChannel $
 --             deleteADMChannel
 --
+--         , requestDeleteRecommenderConfiguration $
+--             deleteRecommenderConfiguration
+--
+--         , requestUpdateRecommenderConfiguration $
+--             updateRecommenderConfiguration
+--
+--         , requestCreatePushTemplate $
+--             createPushTemplate
+--
 --         , requestDeleteEndpoint $
 --             deleteEndpoint
 --
 --         , requestUpdateEndpoint $
 --             updateEndpoint
 --
+--         , requestListTagsForResource $
+--             listTagsForResource
+--
 --         , requestCreateCampaign $
 --             createCampaign
+--
+--         , requestGetEmailTemplate $
+--             getEmailTemplate
 --
 --         , requestGetExportJob $
 --             getExportJob
@@ -85,6 +118,9 @@ import Test.Tasty
 --         , requestGetSegment $
 --             getSegment
 --
+--         , requestGetRecommenderConfiguration $
+--             getRecommenderConfiguration
+--
 --         , requestUpdateEndpointsBatch $
 --             updateEndpointsBatch
 --
@@ -93,6 +129,18 @@ import Test.Tasty
 --
 --         , requestGetCampaign $
 --             getCampaign
+--
+--         , requestGetVoiceTemplate $
+--             getVoiceTemplate
+--
+--         , requestGetPushTemplate $
+--             getPushTemplate
+--
+--         , requestDeleteUserEndpoints $
+--             deleteUserEndpoints
+--
+--         , requestCreateEmailTemplate $
+--             createEmailTemplate
 --
 --         , requestDeleteApp $
 --             deleteApp
@@ -112,8 +160,20 @@ import Test.Tasty
 --         , requestGetCampaignActivities $
 --             getCampaignActivities
 --
+--         , requestGetJourneyExecutionMetrics $
+--             getJourneyExecutionMetrics
+--
+--         , requestUpdateJourneyState $
+--             updateJourneyState
+--
 --         , requestGetEventStream $
 --             getEventStream
+--
+--         , requestGetChannels $
+--             getChannels
+--
+--         , requestGetJourney $
+--             getJourney
 --
 --         , requestDeleteEmailChannel $
 --             deleteEmailChannel
@@ -130,6 +190,12 @@ import Test.Tasty
 --         , requestUpdateAPNSChannel $
 --             updateAPNSChannel
 --
+--         , requestRemoveAttributes $
+--             removeAttributes
+--
+--         , requestListTemplates $
+--             listTemplates
+--
 --         , requestPutEventStream $
 --             putEventStream
 --
@@ -139,8 +205,23 @@ import Test.Tasty
 --         , requestGetCampaignVersions $
 --             getCampaignVersions
 --
+--         , requestDeleteJourney $
+--             deleteJourney
+--
+--         , requestUpdateJourney $
+--             updateJourney
+--
+--         , requestGetCampaignDateRangeKpi $
+--             getCampaignDateRangeKpi
+--
 --         , requestGetAPNSChannel $
 --             getAPNSChannel
+--
+--         , requestUpdateVoiceChannel $
+--             updateVoiceChannel
+--
+--         , requestDeleteVoiceChannel $
+--             deleteVoiceChannel
 --
 --         , requestGetApps $
 --             getApps
@@ -148,8 +229,26 @@ import Test.Tasty
 --         , requestGetAPNSSandboxChannel $
 --             getAPNSSandboxChannel
 --
+--         , requestCreateJourney $
+--             createJourney
+--
+--         , requestGetUserEndpoints $
+--             getUserEndpoints
+--
+--         , requestDeleteVoiceTemplate $
+--             deleteVoiceTemplate
+--
+--         , requestUpdateVoiceTemplate $
+--             updateVoiceTemplate
+--
 --         , requestGetImportJobs $
 --             getImportJobs
+--
+--         , requestGetJourneyDateRangeKpi $
+--             getJourneyDateRangeKpi
+--
+--         , requestUpdateTemplateActiveVersion $
+--             updateTemplateActiveVersion
 --
 --         , requestDeleteSmsChannel $
 --             deleteSmsChannel
@@ -169,14 +268,26 @@ import Test.Tasty
 --         , requestUpdateSegment $
 --             updateSegment
 --
+--         , requestGetApplicationDateRangeKpi $
+--             getApplicationDateRangeKpi
+--
 --         , requestCreateApp $
 --             createApp
 --
 --         , requestGetSegmentExportJobs $
 --             getSegmentExportJobs
 --
+--         , requestDeleteEmailTemplate $
+--             deleteEmailTemplate
+--
+--         , requestUpdateEmailTemplate $
+--             updateEmailTemplate
+--
 --         , requestGetSmsChannel $
 --             getSmsChannel
+--
+--         , requestTagResource $
+--             tagResource
 --
 --         , requestDeleteAPNSSandboxChannel $
 --             deleteAPNSSandboxChannel
@@ -187,8 +298,26 @@ import Test.Tasty
 --         , requestGetCampaigns $
 --             getCampaigns
 --
+--         , requestGetVoiceChannel $
+--             getVoiceChannel
+--
+--         , requestUntagResource $
+--             untagResource
+--
+--         , requestListTemplateVersions $
+--             listTemplateVersions
+--
+--         , requestGetSmsTemplate $
+--             getSmsTemplate
+--
+--         , requestPutEvents $
+--             putEvents
+--
 --         , requestUpdateApplicationSettings $
 --             updateApplicationSettings
+--
+--         , requestGetJourneyExecutionActivityMetrics $
+--             getJourneyExecutionActivityMetrics
 --
 --         , requestGetSegments $
 --             getSegments
@@ -198,6 +327,9 @@ import Test.Tasty
 --
 --         , requestCreateImportJob $
 --             createImportJob
+--
+--         , requestGetRecommenderConfigurations $
+--             getRecommenderConfigurations
 --
 --         , requestDeleteAPNSVoipChannel $
 --             deleteAPNSVoipChannel
@@ -216,6 +348,15 @@ import Test.Tasty
 --
 --         , requestUpdateBaiduChannel $
 --             updateBaiduChannel
+--
+--         , requestCreateSmsTemplate $
+--             createSmsTemplate
+--
+--         , requestPhoneNumberValidate $
+--             phoneNumberValidate
+--
+--         , requestListJourneys $
+--             listJourneys
 --
 --         , requestGetAPNSVoipChannel $
 --             getAPNSVoipChannel
@@ -238,6 +379,12 @@ import Test.Tasty
 --         , responseGetImportJob $
 --             getImportJobResponse
 --
+--         , responseDeleteSmsTemplate $
+--             deleteSmsTemplateResponse
+--
+--         , responseUpdateSmsTemplate $
+--             updateSmsTemplateResponse
+--
 --         , responseGetAPNSVoipSandboxChannel $
 --             getAPNSVoipSandboxChannelResponse
 --
@@ -253,11 +400,23 @@ import Test.Tasty
 --         , responseGetSegmentVersion $
 --             getSegmentVersionResponse
 --
+--         , responseDeletePushTemplate $
+--             deletePushTemplateResponse
+--
+--         , responseUpdatePushTemplate $
+--             updatePushTemplateResponse
+--
 --         , responseCreateExportJob $
 --             createExportJobResponse
 --
 --         , responseCreateSegment $
 --             createSegmentResponse
+--
+--         , responseCreateRecommenderConfiguration $
+--             createRecommenderConfigurationResponse
+--
+--         , responseCreateVoiceTemplate $
+--             createVoiceTemplateResponse
 --
 --         , responseUpdateADMChannel $
 --             updateADMChannelResponse
@@ -265,14 +424,29 @@ import Test.Tasty
 --         , responseDeleteADMChannel $
 --             deleteADMChannelResponse
 --
+--         , responseDeleteRecommenderConfiguration $
+--             deleteRecommenderConfigurationResponse
+--
+--         , responseUpdateRecommenderConfiguration $
+--             updateRecommenderConfigurationResponse
+--
+--         , responseCreatePushTemplate $
+--             createPushTemplateResponse
+--
 --         , responseDeleteEndpoint $
 --             deleteEndpointResponse
 --
 --         , responseUpdateEndpoint $
 --             updateEndpointResponse
 --
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
+--
 --         , responseCreateCampaign $
 --             createCampaignResponse
+--
+--         , responseGetEmailTemplate $
+--             getEmailTemplateResponse
 --
 --         , responseGetExportJob $
 --             getExportJobResponse
@@ -283,6 +457,9 @@ import Test.Tasty
 --         , responseGetSegment $
 --             getSegmentResponse
 --
+--         , responseGetRecommenderConfiguration $
+--             getRecommenderConfigurationResponse
+--
 --         , responseUpdateEndpointsBatch $
 --             updateEndpointsBatchResponse
 --
@@ -291,6 +468,18 @@ import Test.Tasty
 --
 --         , responseGetCampaign $
 --             getCampaignResponse
+--
+--         , responseGetVoiceTemplate $
+--             getVoiceTemplateResponse
+--
+--         , responseGetPushTemplate $
+--             getPushTemplateResponse
+--
+--         , responseDeleteUserEndpoints $
+--             deleteUserEndpointsResponse
+--
+--         , responseCreateEmailTemplate $
+--             createEmailTemplateResponse
 --
 --         , responseDeleteApp $
 --             deleteAppResponse
@@ -310,8 +499,20 @@ import Test.Tasty
 --         , responseGetCampaignActivities $
 --             getCampaignActivitiesResponse
 --
+--         , responseGetJourneyExecutionMetrics $
+--             getJourneyExecutionMetricsResponse
+--
+--         , responseUpdateJourneyState $
+--             updateJourneyStateResponse
+--
 --         , responseGetEventStream $
 --             getEventStreamResponse
+--
+--         , responseGetChannels $
+--             getChannelsResponse
+--
+--         , responseGetJourney $
+--             getJourneyResponse
 --
 --         , responseDeleteEmailChannel $
 --             deleteEmailChannelResponse
@@ -328,6 +529,12 @@ import Test.Tasty
 --         , responseUpdateAPNSChannel $
 --             updateAPNSChannelResponse
 --
+--         , responseRemoveAttributes $
+--             removeAttributesResponse
+--
+--         , responseListTemplates $
+--             listTemplatesResponse
+--
 --         , responsePutEventStream $
 --             putEventStreamResponse
 --
@@ -337,8 +544,23 @@ import Test.Tasty
 --         , responseGetCampaignVersions $
 --             getCampaignVersionsResponse
 --
+--         , responseDeleteJourney $
+--             deleteJourneyResponse
+--
+--         , responseUpdateJourney $
+--             updateJourneyResponse
+--
+--         , responseGetCampaignDateRangeKpi $
+--             getCampaignDateRangeKpiResponse
+--
 --         , responseGetAPNSChannel $
 --             getAPNSChannelResponse
+--
+--         , responseUpdateVoiceChannel $
+--             updateVoiceChannelResponse
+--
+--         , responseDeleteVoiceChannel $
+--             deleteVoiceChannelResponse
 --
 --         , responseGetApps $
 --             getAppsResponse
@@ -346,8 +568,26 @@ import Test.Tasty
 --         , responseGetAPNSSandboxChannel $
 --             getAPNSSandboxChannelResponse
 --
+--         , responseCreateJourney $
+--             createJourneyResponse
+--
+--         , responseGetUserEndpoints $
+--             getUserEndpointsResponse
+--
+--         , responseDeleteVoiceTemplate $
+--             deleteVoiceTemplateResponse
+--
+--         , responseUpdateVoiceTemplate $
+--             updateVoiceTemplateResponse
+--
 --         , responseGetImportJobs $
 --             getImportJobsResponse
+--
+--         , responseGetJourneyDateRangeKpi $
+--             getJourneyDateRangeKpiResponse
+--
+--         , responseUpdateTemplateActiveVersion $
+--             updateTemplateActiveVersionResponse
 --
 --         , responseDeleteSmsChannel $
 --             deleteSmsChannelResponse
@@ -367,14 +607,26 @@ import Test.Tasty
 --         , responseUpdateSegment $
 --             updateSegmentResponse
 --
+--         , responseGetApplicationDateRangeKpi $
+--             getApplicationDateRangeKpiResponse
+--
 --         , responseCreateApp $
 --             createAppResponse
 --
 --         , responseGetSegmentExportJobs $
 --             getSegmentExportJobsResponse
 --
+--         , responseDeleteEmailTemplate $
+--             deleteEmailTemplateResponse
+--
+--         , responseUpdateEmailTemplate $
+--             updateEmailTemplateResponse
+--
 --         , responseGetSmsChannel $
 --             getSmsChannelResponse
+--
+--         , responseTagResource $
+--             tagResourceResponse
 --
 --         , responseDeleteAPNSSandboxChannel $
 --             deleteAPNSSandboxChannelResponse
@@ -385,8 +637,26 @@ import Test.Tasty
 --         , responseGetCampaigns $
 --             getCampaignsResponse
 --
+--         , responseGetVoiceChannel $
+--             getVoiceChannelResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
+--
+--         , responseListTemplateVersions $
+--             listTemplateVersionsResponse
+--
+--         , responseGetSmsTemplate $
+--             getSmsTemplateResponse
+--
+--         , responsePutEvents $
+--             putEventsResponse
+--
 --         , responseUpdateApplicationSettings $
 --             updateApplicationSettingsResponse
+--
+--         , responseGetJourneyExecutionActivityMetrics $
+--             getJourneyExecutionActivityMetricsResponse
 --
 --         , responseGetSegments $
 --             getSegmentsResponse
@@ -396,6 +666,9 @@ import Test.Tasty
 --
 --         , responseCreateImportJob $
 --             createImportJobResponse
+--
+--         , responseGetRecommenderConfigurations $
+--             getRecommenderConfigurationsResponse
 --
 --         , responseDeleteAPNSVoipChannel $
 --             deleteAPNSVoipChannelResponse
@@ -414,6 +687,15 @@ import Test.Tasty
 --
 --         , responseUpdateBaiduChannel $
 --             updateBaiduChannelResponse
+--
+--         , responseCreateSmsTemplate $
+--             createSmsTemplateResponse
+--
+--         , responsePhoneNumberValidate $
+--             phoneNumberValidateResponse
+--
+--         , responseListJourneys $
+--             listJourneysResponse
 --
 --         , responseGetAPNSVoipChannel $
 --             getAPNSVoipChannelResponse
@@ -446,6 +728,16 @@ requestGetImportJob = req
     "GetImportJob"
     "fixture/GetImportJob.yaml"
 
+requestDeleteSmsTemplate :: DeleteSmsTemplate -> TestTree
+requestDeleteSmsTemplate = req
+    "DeleteSmsTemplate"
+    "fixture/DeleteSmsTemplate.yaml"
+
+requestUpdateSmsTemplate :: UpdateSmsTemplate -> TestTree
+requestUpdateSmsTemplate = req
+    "UpdateSmsTemplate"
+    "fixture/UpdateSmsTemplate.yaml"
+
 requestGetAPNSVoipSandboxChannel :: GetAPNSVoipSandboxChannel -> TestTree
 requestGetAPNSVoipSandboxChannel = req
     "GetAPNSVoipSandboxChannel"
@@ -471,6 +763,16 @@ requestGetSegmentVersion = req
     "GetSegmentVersion"
     "fixture/GetSegmentVersion.yaml"
 
+requestDeletePushTemplate :: DeletePushTemplate -> TestTree
+requestDeletePushTemplate = req
+    "DeletePushTemplate"
+    "fixture/DeletePushTemplate.yaml"
+
+requestUpdatePushTemplate :: UpdatePushTemplate -> TestTree
+requestUpdatePushTemplate = req
+    "UpdatePushTemplate"
+    "fixture/UpdatePushTemplate.yaml"
+
 requestCreateExportJob :: CreateExportJob -> TestTree
 requestCreateExportJob = req
     "CreateExportJob"
@@ -480,6 +782,16 @@ requestCreateSegment :: CreateSegment -> TestTree
 requestCreateSegment = req
     "CreateSegment"
     "fixture/CreateSegment.yaml"
+
+requestCreateRecommenderConfiguration :: CreateRecommenderConfiguration -> TestTree
+requestCreateRecommenderConfiguration = req
+    "CreateRecommenderConfiguration"
+    "fixture/CreateRecommenderConfiguration.yaml"
+
+requestCreateVoiceTemplate :: CreateVoiceTemplate -> TestTree
+requestCreateVoiceTemplate = req
+    "CreateVoiceTemplate"
+    "fixture/CreateVoiceTemplate.yaml"
 
 requestUpdateADMChannel :: UpdateADMChannel -> TestTree
 requestUpdateADMChannel = req
@@ -491,6 +803,21 @@ requestDeleteADMChannel = req
     "DeleteADMChannel"
     "fixture/DeleteADMChannel.yaml"
 
+requestDeleteRecommenderConfiguration :: DeleteRecommenderConfiguration -> TestTree
+requestDeleteRecommenderConfiguration = req
+    "DeleteRecommenderConfiguration"
+    "fixture/DeleteRecommenderConfiguration.yaml"
+
+requestUpdateRecommenderConfiguration :: UpdateRecommenderConfiguration -> TestTree
+requestUpdateRecommenderConfiguration = req
+    "UpdateRecommenderConfiguration"
+    "fixture/UpdateRecommenderConfiguration.yaml"
+
+requestCreatePushTemplate :: CreatePushTemplate -> TestTree
+requestCreatePushTemplate = req
+    "CreatePushTemplate"
+    "fixture/CreatePushTemplate.yaml"
+
 requestDeleteEndpoint :: DeleteEndpoint -> TestTree
 requestDeleteEndpoint = req
     "DeleteEndpoint"
@@ -501,10 +828,20 @@ requestUpdateEndpoint = req
     "UpdateEndpoint"
     "fixture/UpdateEndpoint.yaml"
 
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
+
 requestCreateCampaign :: CreateCampaign -> TestTree
 requestCreateCampaign = req
     "CreateCampaign"
     "fixture/CreateCampaign.yaml"
+
+requestGetEmailTemplate :: GetEmailTemplate -> TestTree
+requestGetEmailTemplate = req
+    "GetEmailTemplate"
+    "fixture/GetEmailTemplate.yaml"
 
 requestGetExportJob :: GetExportJob -> TestTree
 requestGetExportJob = req
@@ -521,6 +858,11 @@ requestGetSegment = req
     "GetSegment"
     "fixture/GetSegment.yaml"
 
+requestGetRecommenderConfiguration :: GetRecommenderConfiguration -> TestTree
+requestGetRecommenderConfiguration = req
+    "GetRecommenderConfiguration"
+    "fixture/GetRecommenderConfiguration.yaml"
+
 requestUpdateEndpointsBatch :: UpdateEndpointsBatch -> TestTree
 requestUpdateEndpointsBatch = req
     "UpdateEndpointsBatch"
@@ -535,6 +877,26 @@ requestGetCampaign :: GetCampaign -> TestTree
 requestGetCampaign = req
     "GetCampaign"
     "fixture/GetCampaign.yaml"
+
+requestGetVoiceTemplate :: GetVoiceTemplate -> TestTree
+requestGetVoiceTemplate = req
+    "GetVoiceTemplate"
+    "fixture/GetVoiceTemplate.yaml"
+
+requestGetPushTemplate :: GetPushTemplate -> TestTree
+requestGetPushTemplate = req
+    "GetPushTemplate"
+    "fixture/GetPushTemplate.yaml"
+
+requestDeleteUserEndpoints :: DeleteUserEndpoints -> TestTree
+requestDeleteUserEndpoints = req
+    "DeleteUserEndpoints"
+    "fixture/DeleteUserEndpoints.yaml"
+
+requestCreateEmailTemplate :: CreateEmailTemplate -> TestTree
+requestCreateEmailTemplate = req
+    "CreateEmailTemplate"
+    "fixture/CreateEmailTemplate.yaml"
 
 requestDeleteApp :: DeleteApp -> TestTree
 requestDeleteApp = req
@@ -566,10 +928,30 @@ requestGetCampaignActivities = req
     "GetCampaignActivities"
     "fixture/GetCampaignActivities.yaml"
 
+requestGetJourneyExecutionMetrics :: GetJourneyExecutionMetrics -> TestTree
+requestGetJourneyExecutionMetrics = req
+    "GetJourneyExecutionMetrics"
+    "fixture/GetJourneyExecutionMetrics.yaml"
+
+requestUpdateJourneyState :: UpdateJourneyState -> TestTree
+requestUpdateJourneyState = req
+    "UpdateJourneyState"
+    "fixture/UpdateJourneyState.yaml"
+
 requestGetEventStream :: GetEventStream -> TestTree
 requestGetEventStream = req
     "GetEventStream"
     "fixture/GetEventStream.yaml"
+
+requestGetChannels :: GetChannels -> TestTree
+requestGetChannels = req
+    "GetChannels"
+    "fixture/GetChannels.yaml"
+
+requestGetJourney :: GetJourney -> TestTree
+requestGetJourney = req
+    "GetJourney"
+    "fixture/GetJourney.yaml"
 
 requestDeleteEmailChannel :: DeleteEmailChannel -> TestTree
 requestDeleteEmailChannel = req
@@ -596,6 +978,16 @@ requestUpdateAPNSChannel = req
     "UpdateAPNSChannel"
     "fixture/UpdateAPNSChannel.yaml"
 
+requestRemoveAttributes :: RemoveAttributes -> TestTree
+requestRemoveAttributes = req
+    "RemoveAttributes"
+    "fixture/RemoveAttributes.yaml"
+
+requestListTemplates :: ListTemplates -> TestTree
+requestListTemplates = req
+    "ListTemplates"
+    "fixture/ListTemplates.yaml"
+
 requestPutEventStream :: PutEventStream -> TestTree
 requestPutEventStream = req
     "PutEventStream"
@@ -611,10 +1003,35 @@ requestGetCampaignVersions = req
     "GetCampaignVersions"
     "fixture/GetCampaignVersions.yaml"
 
+requestDeleteJourney :: DeleteJourney -> TestTree
+requestDeleteJourney = req
+    "DeleteJourney"
+    "fixture/DeleteJourney.yaml"
+
+requestUpdateJourney :: UpdateJourney -> TestTree
+requestUpdateJourney = req
+    "UpdateJourney"
+    "fixture/UpdateJourney.yaml"
+
+requestGetCampaignDateRangeKpi :: GetCampaignDateRangeKpi -> TestTree
+requestGetCampaignDateRangeKpi = req
+    "GetCampaignDateRangeKpi"
+    "fixture/GetCampaignDateRangeKpi.yaml"
+
 requestGetAPNSChannel :: GetAPNSChannel -> TestTree
 requestGetAPNSChannel = req
     "GetAPNSChannel"
     "fixture/GetAPNSChannel.yaml"
+
+requestUpdateVoiceChannel :: UpdateVoiceChannel -> TestTree
+requestUpdateVoiceChannel = req
+    "UpdateVoiceChannel"
+    "fixture/UpdateVoiceChannel.yaml"
+
+requestDeleteVoiceChannel :: DeleteVoiceChannel -> TestTree
+requestDeleteVoiceChannel = req
+    "DeleteVoiceChannel"
+    "fixture/DeleteVoiceChannel.yaml"
 
 requestGetApps :: GetApps -> TestTree
 requestGetApps = req
@@ -626,10 +1043,40 @@ requestGetAPNSSandboxChannel = req
     "GetAPNSSandboxChannel"
     "fixture/GetAPNSSandboxChannel.yaml"
 
+requestCreateJourney :: CreateJourney -> TestTree
+requestCreateJourney = req
+    "CreateJourney"
+    "fixture/CreateJourney.yaml"
+
+requestGetUserEndpoints :: GetUserEndpoints -> TestTree
+requestGetUserEndpoints = req
+    "GetUserEndpoints"
+    "fixture/GetUserEndpoints.yaml"
+
+requestDeleteVoiceTemplate :: DeleteVoiceTemplate -> TestTree
+requestDeleteVoiceTemplate = req
+    "DeleteVoiceTemplate"
+    "fixture/DeleteVoiceTemplate.yaml"
+
+requestUpdateVoiceTemplate :: UpdateVoiceTemplate -> TestTree
+requestUpdateVoiceTemplate = req
+    "UpdateVoiceTemplate"
+    "fixture/UpdateVoiceTemplate.yaml"
+
 requestGetImportJobs :: GetImportJobs -> TestTree
 requestGetImportJobs = req
     "GetImportJobs"
     "fixture/GetImportJobs.yaml"
+
+requestGetJourneyDateRangeKpi :: GetJourneyDateRangeKpi -> TestTree
+requestGetJourneyDateRangeKpi = req
+    "GetJourneyDateRangeKpi"
+    "fixture/GetJourneyDateRangeKpi.yaml"
+
+requestUpdateTemplateActiveVersion :: UpdateTemplateActiveVersion -> TestTree
+requestUpdateTemplateActiveVersion = req
+    "UpdateTemplateActiveVersion"
+    "fixture/UpdateTemplateActiveVersion.yaml"
 
 requestDeleteSmsChannel :: DeleteSmsChannel -> TestTree
 requestDeleteSmsChannel = req
@@ -661,6 +1108,11 @@ requestUpdateSegment = req
     "UpdateSegment"
     "fixture/UpdateSegment.yaml"
 
+requestGetApplicationDateRangeKpi :: GetApplicationDateRangeKpi -> TestTree
+requestGetApplicationDateRangeKpi = req
+    "GetApplicationDateRangeKpi"
+    "fixture/GetApplicationDateRangeKpi.yaml"
+
 requestCreateApp :: CreateApp -> TestTree
 requestCreateApp = req
     "CreateApp"
@@ -671,10 +1123,25 @@ requestGetSegmentExportJobs = req
     "GetSegmentExportJobs"
     "fixture/GetSegmentExportJobs.yaml"
 
+requestDeleteEmailTemplate :: DeleteEmailTemplate -> TestTree
+requestDeleteEmailTemplate = req
+    "DeleteEmailTemplate"
+    "fixture/DeleteEmailTemplate.yaml"
+
+requestUpdateEmailTemplate :: UpdateEmailTemplate -> TestTree
+requestUpdateEmailTemplate = req
+    "UpdateEmailTemplate"
+    "fixture/UpdateEmailTemplate.yaml"
+
 requestGetSmsChannel :: GetSmsChannel -> TestTree
 requestGetSmsChannel = req
     "GetSmsChannel"
     "fixture/GetSmsChannel.yaml"
+
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
 
 requestDeleteAPNSSandboxChannel :: DeleteAPNSSandboxChannel -> TestTree
 requestDeleteAPNSSandboxChannel = req
@@ -691,10 +1158,40 @@ requestGetCampaigns = req
     "GetCampaigns"
     "fixture/GetCampaigns.yaml"
 
+requestGetVoiceChannel :: GetVoiceChannel -> TestTree
+requestGetVoiceChannel = req
+    "GetVoiceChannel"
+    "fixture/GetVoiceChannel.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
+
+requestListTemplateVersions :: ListTemplateVersions -> TestTree
+requestListTemplateVersions = req
+    "ListTemplateVersions"
+    "fixture/ListTemplateVersions.yaml"
+
+requestGetSmsTemplate :: GetSmsTemplate -> TestTree
+requestGetSmsTemplate = req
+    "GetSmsTemplate"
+    "fixture/GetSmsTemplate.yaml"
+
+requestPutEvents :: PutEvents -> TestTree
+requestPutEvents = req
+    "PutEvents"
+    "fixture/PutEvents.yaml"
+
 requestUpdateApplicationSettings :: UpdateApplicationSettings -> TestTree
 requestUpdateApplicationSettings = req
     "UpdateApplicationSettings"
     "fixture/UpdateApplicationSettings.yaml"
+
+requestGetJourneyExecutionActivityMetrics :: GetJourneyExecutionActivityMetrics -> TestTree
+requestGetJourneyExecutionActivityMetrics = req
+    "GetJourneyExecutionActivityMetrics"
+    "fixture/GetJourneyExecutionActivityMetrics.yaml"
 
 requestGetSegments :: GetSegments -> TestTree
 requestGetSegments = req
@@ -710,6 +1207,11 @@ requestCreateImportJob :: CreateImportJob -> TestTree
 requestCreateImportJob = req
     "CreateImportJob"
     "fixture/CreateImportJob.yaml"
+
+requestGetRecommenderConfigurations :: GetRecommenderConfigurations -> TestTree
+requestGetRecommenderConfigurations = req
+    "GetRecommenderConfigurations"
+    "fixture/GetRecommenderConfigurations.yaml"
 
 requestDeleteAPNSVoipChannel :: DeleteAPNSVoipChannel -> TestTree
 requestDeleteAPNSVoipChannel = req
@@ -740,6 +1242,21 @@ requestUpdateBaiduChannel :: UpdateBaiduChannel -> TestTree
 requestUpdateBaiduChannel = req
     "UpdateBaiduChannel"
     "fixture/UpdateBaiduChannel.yaml"
+
+requestCreateSmsTemplate :: CreateSmsTemplate -> TestTree
+requestCreateSmsTemplate = req
+    "CreateSmsTemplate"
+    "fixture/CreateSmsTemplate.yaml"
+
+requestPhoneNumberValidate :: PhoneNumberValidate -> TestTree
+requestPhoneNumberValidate = req
+    "PhoneNumberValidate"
+    "fixture/PhoneNumberValidate.yaml"
+
+requestListJourneys :: ListJourneys -> TestTree
+requestListJourneys = req
+    "ListJourneys"
+    "fixture/ListJourneys.yaml"
 
 requestGetAPNSVoipChannel :: GetAPNSVoipChannel -> TestTree
 requestGetAPNSVoipChannel = req
@@ -781,6 +1298,20 @@ responseGetImportJob = res
     pinpoint
     (Proxy :: Proxy GetImportJob)
 
+responseDeleteSmsTemplate :: DeleteSmsTemplateResponse -> TestTree
+responseDeleteSmsTemplate = res
+    "DeleteSmsTemplateResponse"
+    "fixture/DeleteSmsTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeleteSmsTemplate)
+
+responseUpdateSmsTemplate :: UpdateSmsTemplateResponse -> TestTree
+responseUpdateSmsTemplate = res
+    "UpdateSmsTemplateResponse"
+    "fixture/UpdateSmsTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateSmsTemplate)
+
 responseGetAPNSVoipSandboxChannel :: GetAPNSVoipSandboxChannelResponse -> TestTree
 responseGetAPNSVoipSandboxChannel = res
     "GetAPNSVoipSandboxChannelResponse"
@@ -816,6 +1347,20 @@ responseGetSegmentVersion = res
     pinpoint
     (Proxy :: Proxy GetSegmentVersion)
 
+responseDeletePushTemplate :: DeletePushTemplateResponse -> TestTree
+responseDeletePushTemplate = res
+    "DeletePushTemplateResponse"
+    "fixture/DeletePushTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeletePushTemplate)
+
+responseUpdatePushTemplate :: UpdatePushTemplateResponse -> TestTree
+responseUpdatePushTemplate = res
+    "UpdatePushTemplateResponse"
+    "fixture/UpdatePushTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdatePushTemplate)
+
 responseCreateExportJob :: CreateExportJobResponse -> TestTree
 responseCreateExportJob = res
     "CreateExportJobResponse"
@@ -829,6 +1374,20 @@ responseCreateSegment = res
     "fixture/CreateSegmentResponse.proto"
     pinpoint
     (Proxy :: Proxy CreateSegment)
+
+responseCreateRecommenderConfiguration :: CreateRecommenderConfigurationResponse -> TestTree
+responseCreateRecommenderConfiguration = res
+    "CreateRecommenderConfigurationResponse"
+    "fixture/CreateRecommenderConfigurationResponse.proto"
+    pinpoint
+    (Proxy :: Proxy CreateRecommenderConfiguration)
+
+responseCreateVoiceTemplate :: CreateVoiceTemplateResponse -> TestTree
+responseCreateVoiceTemplate = res
+    "CreateVoiceTemplateResponse"
+    "fixture/CreateVoiceTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy CreateVoiceTemplate)
 
 responseUpdateADMChannel :: UpdateADMChannelResponse -> TestTree
 responseUpdateADMChannel = res
@@ -844,6 +1403,27 @@ responseDeleteADMChannel = res
     pinpoint
     (Proxy :: Proxy DeleteADMChannel)
 
+responseDeleteRecommenderConfiguration :: DeleteRecommenderConfigurationResponse -> TestTree
+responseDeleteRecommenderConfiguration = res
+    "DeleteRecommenderConfigurationResponse"
+    "fixture/DeleteRecommenderConfigurationResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeleteRecommenderConfiguration)
+
+responseUpdateRecommenderConfiguration :: UpdateRecommenderConfigurationResponse -> TestTree
+responseUpdateRecommenderConfiguration = res
+    "UpdateRecommenderConfigurationResponse"
+    "fixture/UpdateRecommenderConfigurationResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateRecommenderConfiguration)
+
+responseCreatePushTemplate :: CreatePushTemplateResponse -> TestTree
+responseCreatePushTemplate = res
+    "CreatePushTemplateResponse"
+    "fixture/CreatePushTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy CreatePushTemplate)
+
 responseDeleteEndpoint :: DeleteEndpointResponse -> TestTree
 responseDeleteEndpoint = res
     "DeleteEndpointResponse"
@@ -858,12 +1438,26 @@ responseUpdateEndpoint = res
     pinpoint
     (Proxy :: Proxy UpdateEndpoint)
 
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    pinpoint
+    (Proxy :: Proxy ListTagsForResource)
+
 responseCreateCampaign :: CreateCampaignResponse -> TestTree
 responseCreateCampaign = res
     "CreateCampaignResponse"
     "fixture/CreateCampaignResponse.proto"
     pinpoint
     (Proxy :: Proxy CreateCampaign)
+
+responseGetEmailTemplate :: GetEmailTemplateResponse -> TestTree
+responseGetEmailTemplate = res
+    "GetEmailTemplateResponse"
+    "fixture/GetEmailTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetEmailTemplate)
 
 responseGetExportJob :: GetExportJobResponse -> TestTree
 responseGetExportJob = res
@@ -886,6 +1480,13 @@ responseGetSegment = res
     pinpoint
     (Proxy :: Proxy GetSegment)
 
+responseGetRecommenderConfiguration :: GetRecommenderConfigurationResponse -> TestTree
+responseGetRecommenderConfiguration = res
+    "GetRecommenderConfigurationResponse"
+    "fixture/GetRecommenderConfigurationResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetRecommenderConfiguration)
+
 responseUpdateEndpointsBatch :: UpdateEndpointsBatchResponse -> TestTree
 responseUpdateEndpointsBatch = res
     "UpdateEndpointsBatchResponse"
@@ -906,6 +1507,34 @@ responseGetCampaign = res
     "fixture/GetCampaignResponse.proto"
     pinpoint
     (Proxy :: Proxy GetCampaign)
+
+responseGetVoiceTemplate :: GetVoiceTemplateResponse -> TestTree
+responseGetVoiceTemplate = res
+    "GetVoiceTemplateResponse"
+    "fixture/GetVoiceTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetVoiceTemplate)
+
+responseGetPushTemplate :: GetPushTemplateResponse -> TestTree
+responseGetPushTemplate = res
+    "GetPushTemplateResponse"
+    "fixture/GetPushTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetPushTemplate)
+
+responseDeleteUserEndpoints :: DeleteUserEndpointsResponse -> TestTree
+responseDeleteUserEndpoints = res
+    "DeleteUserEndpointsResponse"
+    "fixture/DeleteUserEndpointsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeleteUserEndpoints)
+
+responseCreateEmailTemplate :: CreateEmailTemplateResponse -> TestTree
+responseCreateEmailTemplate = res
+    "CreateEmailTemplateResponse"
+    "fixture/CreateEmailTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy CreateEmailTemplate)
 
 responseDeleteApp :: DeleteAppResponse -> TestTree
 responseDeleteApp = res
@@ -949,12 +1578,40 @@ responseGetCampaignActivities = res
     pinpoint
     (Proxy :: Proxy GetCampaignActivities)
 
+responseGetJourneyExecutionMetrics :: GetJourneyExecutionMetricsResponse -> TestTree
+responseGetJourneyExecutionMetrics = res
+    "GetJourneyExecutionMetricsResponse"
+    "fixture/GetJourneyExecutionMetricsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetJourneyExecutionMetrics)
+
+responseUpdateJourneyState :: UpdateJourneyStateResponse -> TestTree
+responseUpdateJourneyState = res
+    "UpdateJourneyStateResponse"
+    "fixture/UpdateJourneyStateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateJourneyState)
+
 responseGetEventStream :: GetEventStreamResponse -> TestTree
 responseGetEventStream = res
     "GetEventStreamResponse"
     "fixture/GetEventStreamResponse.proto"
     pinpoint
     (Proxy :: Proxy GetEventStream)
+
+responseGetChannels :: GetChannelsResponse -> TestTree
+responseGetChannels = res
+    "GetChannelsResponse"
+    "fixture/GetChannelsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetChannels)
+
+responseGetJourney :: GetJourneyResponse -> TestTree
+responseGetJourney = res
+    "GetJourneyResponse"
+    "fixture/GetJourneyResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetJourney)
 
 responseDeleteEmailChannel :: DeleteEmailChannelResponse -> TestTree
 responseDeleteEmailChannel = res
@@ -991,6 +1648,20 @@ responseUpdateAPNSChannel = res
     pinpoint
     (Proxy :: Proxy UpdateAPNSChannel)
 
+responseRemoveAttributes :: RemoveAttributesResponse -> TestTree
+responseRemoveAttributes = res
+    "RemoveAttributesResponse"
+    "fixture/RemoveAttributesResponse.proto"
+    pinpoint
+    (Proxy :: Proxy RemoveAttributes)
+
+responseListTemplates :: ListTemplatesResponse -> TestTree
+responseListTemplates = res
+    "ListTemplatesResponse"
+    "fixture/ListTemplatesResponse.proto"
+    pinpoint
+    (Proxy :: Proxy ListTemplates)
+
 responsePutEventStream :: PutEventStreamResponse -> TestTree
 responsePutEventStream = res
     "PutEventStreamResponse"
@@ -1012,12 +1683,47 @@ responseGetCampaignVersions = res
     pinpoint
     (Proxy :: Proxy GetCampaignVersions)
 
+responseDeleteJourney :: DeleteJourneyResponse -> TestTree
+responseDeleteJourney = res
+    "DeleteJourneyResponse"
+    "fixture/DeleteJourneyResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeleteJourney)
+
+responseUpdateJourney :: UpdateJourneyResponse -> TestTree
+responseUpdateJourney = res
+    "UpdateJourneyResponse"
+    "fixture/UpdateJourneyResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateJourney)
+
+responseGetCampaignDateRangeKpi :: GetCampaignDateRangeKpiResponse -> TestTree
+responseGetCampaignDateRangeKpi = res
+    "GetCampaignDateRangeKpiResponse"
+    "fixture/GetCampaignDateRangeKpiResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetCampaignDateRangeKpi)
+
 responseGetAPNSChannel :: GetAPNSChannelResponse -> TestTree
 responseGetAPNSChannel = res
     "GetAPNSChannelResponse"
     "fixture/GetAPNSChannelResponse.proto"
     pinpoint
     (Proxy :: Proxy GetAPNSChannel)
+
+responseUpdateVoiceChannel :: UpdateVoiceChannelResponse -> TestTree
+responseUpdateVoiceChannel = res
+    "UpdateVoiceChannelResponse"
+    "fixture/UpdateVoiceChannelResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateVoiceChannel)
+
+responseDeleteVoiceChannel :: DeleteVoiceChannelResponse -> TestTree
+responseDeleteVoiceChannel = res
+    "DeleteVoiceChannelResponse"
+    "fixture/DeleteVoiceChannelResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeleteVoiceChannel)
 
 responseGetApps :: GetAppsResponse -> TestTree
 responseGetApps = res
@@ -1033,12 +1739,54 @@ responseGetAPNSSandboxChannel = res
     pinpoint
     (Proxy :: Proxy GetAPNSSandboxChannel)
 
+responseCreateJourney :: CreateJourneyResponse -> TestTree
+responseCreateJourney = res
+    "CreateJourneyResponse"
+    "fixture/CreateJourneyResponse.proto"
+    pinpoint
+    (Proxy :: Proxy CreateJourney)
+
+responseGetUserEndpoints :: GetUserEndpointsResponse -> TestTree
+responseGetUserEndpoints = res
+    "GetUserEndpointsResponse"
+    "fixture/GetUserEndpointsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetUserEndpoints)
+
+responseDeleteVoiceTemplate :: DeleteVoiceTemplateResponse -> TestTree
+responseDeleteVoiceTemplate = res
+    "DeleteVoiceTemplateResponse"
+    "fixture/DeleteVoiceTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeleteVoiceTemplate)
+
+responseUpdateVoiceTemplate :: UpdateVoiceTemplateResponse -> TestTree
+responseUpdateVoiceTemplate = res
+    "UpdateVoiceTemplateResponse"
+    "fixture/UpdateVoiceTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateVoiceTemplate)
+
 responseGetImportJobs :: GetImportJobsResponse -> TestTree
 responseGetImportJobs = res
     "GetImportJobsResponse"
     "fixture/GetImportJobsResponse.proto"
     pinpoint
     (Proxy :: Proxy GetImportJobs)
+
+responseGetJourneyDateRangeKpi :: GetJourneyDateRangeKpiResponse -> TestTree
+responseGetJourneyDateRangeKpi = res
+    "GetJourneyDateRangeKpiResponse"
+    "fixture/GetJourneyDateRangeKpiResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetJourneyDateRangeKpi)
+
+responseUpdateTemplateActiveVersion :: UpdateTemplateActiveVersionResponse -> TestTree
+responseUpdateTemplateActiveVersion = res
+    "UpdateTemplateActiveVersionResponse"
+    "fixture/UpdateTemplateActiveVersionResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateTemplateActiveVersion)
 
 responseDeleteSmsChannel :: DeleteSmsChannelResponse -> TestTree
 responseDeleteSmsChannel = res
@@ -1082,6 +1830,13 @@ responseUpdateSegment = res
     pinpoint
     (Proxy :: Proxy UpdateSegment)
 
+responseGetApplicationDateRangeKpi :: GetApplicationDateRangeKpiResponse -> TestTree
+responseGetApplicationDateRangeKpi = res
+    "GetApplicationDateRangeKpiResponse"
+    "fixture/GetApplicationDateRangeKpiResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetApplicationDateRangeKpi)
+
 responseCreateApp :: CreateAppResponse -> TestTree
 responseCreateApp = res
     "CreateAppResponse"
@@ -1096,12 +1851,33 @@ responseGetSegmentExportJobs = res
     pinpoint
     (Proxy :: Proxy GetSegmentExportJobs)
 
+responseDeleteEmailTemplate :: DeleteEmailTemplateResponse -> TestTree
+responseDeleteEmailTemplate = res
+    "DeleteEmailTemplateResponse"
+    "fixture/DeleteEmailTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy DeleteEmailTemplate)
+
+responseUpdateEmailTemplate :: UpdateEmailTemplateResponse -> TestTree
+responseUpdateEmailTemplate = res
+    "UpdateEmailTemplateResponse"
+    "fixture/UpdateEmailTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UpdateEmailTemplate)
+
 responseGetSmsChannel :: GetSmsChannelResponse -> TestTree
 responseGetSmsChannel = res
     "GetSmsChannelResponse"
     "fixture/GetSmsChannelResponse.proto"
     pinpoint
     (Proxy :: Proxy GetSmsChannel)
+
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    pinpoint
+    (Proxy :: Proxy TagResource)
 
 responseDeleteAPNSSandboxChannel :: DeleteAPNSSandboxChannelResponse -> TestTree
 responseDeleteAPNSSandboxChannel = res
@@ -1124,12 +1900,54 @@ responseGetCampaigns = res
     pinpoint
     (Proxy :: Proxy GetCampaigns)
 
+responseGetVoiceChannel :: GetVoiceChannelResponse -> TestTree
+responseGetVoiceChannel = res
+    "GetVoiceChannelResponse"
+    "fixture/GetVoiceChannelResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetVoiceChannel)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    pinpoint
+    (Proxy :: Proxy UntagResource)
+
+responseListTemplateVersions :: ListTemplateVersionsResponse -> TestTree
+responseListTemplateVersions = res
+    "ListTemplateVersionsResponse"
+    "fixture/ListTemplateVersionsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy ListTemplateVersions)
+
+responseGetSmsTemplate :: GetSmsTemplateResponse -> TestTree
+responseGetSmsTemplate = res
+    "GetSmsTemplateResponse"
+    "fixture/GetSmsTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetSmsTemplate)
+
+responsePutEvents :: PutEventsResponse -> TestTree
+responsePutEvents = res
+    "PutEventsResponse"
+    "fixture/PutEventsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy PutEvents)
+
 responseUpdateApplicationSettings :: UpdateApplicationSettingsResponse -> TestTree
 responseUpdateApplicationSettings = res
     "UpdateApplicationSettingsResponse"
     "fixture/UpdateApplicationSettingsResponse.proto"
     pinpoint
     (Proxy :: Proxy UpdateApplicationSettings)
+
+responseGetJourneyExecutionActivityMetrics :: GetJourneyExecutionActivityMetricsResponse -> TestTree
+responseGetJourneyExecutionActivityMetrics = res
+    "GetJourneyExecutionActivityMetricsResponse"
+    "fixture/GetJourneyExecutionActivityMetricsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetJourneyExecutionActivityMetrics)
 
 responseGetSegments :: GetSegmentsResponse -> TestTree
 responseGetSegments = res
@@ -1151,6 +1969,13 @@ responseCreateImportJob = res
     "fixture/CreateImportJobResponse.proto"
     pinpoint
     (Proxy :: Proxy CreateImportJob)
+
+responseGetRecommenderConfigurations :: GetRecommenderConfigurationsResponse -> TestTree
+responseGetRecommenderConfigurations = res
+    "GetRecommenderConfigurationsResponse"
+    "fixture/GetRecommenderConfigurationsResponse.proto"
+    pinpoint
+    (Proxy :: Proxy GetRecommenderConfigurations)
 
 responseDeleteAPNSVoipChannel :: DeleteAPNSVoipChannelResponse -> TestTree
 responseDeleteAPNSVoipChannel = res
@@ -1193,6 +2018,27 @@ responseUpdateBaiduChannel = res
     "fixture/UpdateBaiduChannelResponse.proto"
     pinpoint
     (Proxy :: Proxy UpdateBaiduChannel)
+
+responseCreateSmsTemplate :: CreateSmsTemplateResponse -> TestTree
+responseCreateSmsTemplate = res
+    "CreateSmsTemplateResponse"
+    "fixture/CreateSmsTemplateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy CreateSmsTemplate)
+
+responsePhoneNumberValidate :: PhoneNumberValidateResponse -> TestTree
+responsePhoneNumberValidate = res
+    "PhoneNumberValidateResponse"
+    "fixture/PhoneNumberValidateResponse.proto"
+    pinpoint
+    (Proxy :: Proxy PhoneNumberValidate)
+
+responseListJourneys :: ListJourneysResponse -> TestTree
+responseListJourneys = res
+    "ListJourneysResponse"
+    "fixture/ListJourneysResponse.proto"
+    pinpoint
+    (Proxy :: Proxy ListJourneys)
 
 responseGetAPNSVoipChannel :: GetAPNSVoipChannelResponse -> TestTree
 responseGetAPNSVoipChannel = res

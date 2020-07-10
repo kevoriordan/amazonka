@@ -47,11 +47,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteModel' smart constructor.
-data DeleteModel = DeleteModel'
-  { _dRestAPIId :: !Text
-  , _dModelName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteModel = DeleteModel'{_dRestAPIId :: !Text,
+                                _dModelName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteModel' with the minimum fields required to make a request.
 --
@@ -64,9 +62,9 @@ deleteModel
     :: Text -- ^ 'dRestAPIId'
     -> Text -- ^ 'dModelName'
     -> DeleteModel
-deleteModel pRestAPIId_ pModelName_ =
-  DeleteModel' {_dRestAPIId = pRestAPIId_, _dModelName = pModelName_}
-
+deleteModel pRestAPIId_ pModelName_
+  = DeleteModel'{_dRestAPIId = pRestAPIId_,
+                 _dModelName = pModelName_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 dRestAPIId :: Lens' DeleteModel Text
@@ -101,16 +99,13 @@ instance ToQuery DeleteModel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteModelResponse' smart constructor.
-data DeleteModelResponse =
-  DeleteModelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteModelResponse = DeleteModelResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteModelResponse' with the minimum fields required to make a request.
 --
 deleteModelResponse
     :: DeleteModelResponse
 deleteModelResponse = DeleteModelResponse'
-
 
 instance NFData DeleteModelResponse where

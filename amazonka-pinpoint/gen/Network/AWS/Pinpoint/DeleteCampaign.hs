@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a campaign.
+-- Deletes a campaign from an application.
+--
+--
 module Network.AWS.Pinpoint.DeleteCampaign
     (
     -- * Creating a Request
@@ -44,33 +46,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteCampaign' smart constructor.
-data DeleteCampaign = DeleteCampaign'
-  { _dcCampaignId    :: !Text
-  , _dcApplicationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCampaign = DeleteCampaign'{_dcCampaignId
+                                      :: !Text,
+                                      _dcApplicationId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteCampaign' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcCampaignId' - Undocumented member.
+-- * 'dcCampaignId' - The unique identifier for the campaign.
 --
--- * 'dcApplicationId' - Undocumented member.
+-- * 'dcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteCampaign
     :: Text -- ^ 'dcCampaignId'
     -> Text -- ^ 'dcApplicationId'
     -> DeleteCampaign
-deleteCampaign pCampaignId_ pApplicationId_ =
-  DeleteCampaign'
-    {_dcCampaignId = pCampaignId_, _dcApplicationId = pApplicationId_}
+deleteCampaign pCampaignId_ pApplicationId_
+  = DeleteCampaign'{_dcCampaignId = pCampaignId_,
+                    _dcApplicationId = pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the campaign.
 dcCampaignId :: Lens' DeleteCampaign Text
 dcCampaignId = lens _dcCampaignId (\ s a -> s{_dcCampaignId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 dcApplicationId :: Lens' DeleteCampaign Text
 dcApplicationId = lens _dcApplicationId (\ s a -> s{_dcApplicationId = a})
 
@@ -104,11 +104,12 @@ instance ToQuery DeleteCampaign where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCampaignResponse' smart constructor.
-data DeleteCampaignResponse = DeleteCampaignResponse'
-  { _dcrsResponseStatus   :: !Int
-  , _dcrsCampaignResponse :: !CampaignResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCampaignResponse = DeleteCampaignResponse'{_dcrsResponseStatus
+                                                      :: !Int,
+                                                      _dcrsCampaignResponse ::
+                                                      !CampaignResponse}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteCampaignResponse' with the minimum fields required to make a request.
 --
@@ -121,12 +122,11 @@ deleteCampaignResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> CampaignResponse -- ^ 'dcrsCampaignResponse'
     -> DeleteCampaignResponse
-deleteCampaignResponse pResponseStatus_ pCampaignResponse_ =
-  DeleteCampaignResponse'
-    { _dcrsResponseStatus = pResponseStatus_
-    , _dcrsCampaignResponse = pCampaignResponse_
-    }
-
+deleteCampaignResponse pResponseStatus_
+  pCampaignResponse_
+  = DeleteCampaignResponse'{_dcrsResponseStatus =
+                              pResponseStatus_,
+                            _dcrsCampaignResponse = pCampaignResponse_}
 
 -- | -- | The response status code.
 dcrsResponseStatus :: Lens' DeleteCampaignResponse Int

@@ -14,11 +14,11 @@
 module Test.AWS.Gen.SSM where
 
 import Data.Proxy
-import Network.AWS.SSM
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.SSM.Internal
 import Test.Tasty
+import Network.AWS.SSM
+import Test.AWS.SSM.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,7 +28,10 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestDescribeInstancePatches $
+--         [ requestGetConnectionStatus $
+--             getConnectionStatus
+--
+--         , requestDescribeInstancePatches $
 --             describeInstancePatches
 --
 --         , requestGetInventory $
@@ -43,6 +46,9 @@ import Test.Tasty
 --         , requestUpdatePatchBaseline $
 --             updatePatchBaseline
 --
+--         , requestTerminateSession $
+--             terminateSession
+--
 --         , requestGetParameter $
 --             getParameter
 --
@@ -52,11 +58,20 @@ import Test.Tasty
 --         , requestListResourceDataSync $
 --             listResourceDataSync
 --
+--         , requestGetOpsItem $
+--             getOpsItem
+--
+--         , requestResumeSession $
+--             resumeSession
+--
 --         , requestGetDeployablePatchSnapshotForInstance $
 --             getDeployablePatchSnapshotForInstance
 --
 --         , requestDescribeParameters $
 --             describeParameters
+--
+--         , requestDescribeOpsItems $
+--             describeOpsItems
 --
 --         , requestGetParametersByPath $
 --             getParametersByPath
@@ -76,6 +91,9 @@ import Test.Tasty
 --         , requestDescribeDocument $
 --             describeDocument
 --
+--         , requestDescribePatchProperties $
+--             describePatchProperties
+--
 --         , requestCreateAssociation $
 --             createAssociation
 --
@@ -84,6 +102,12 @@ import Test.Tasty
 --
 --         , requestDescribeMaintenanceWindowExecutions $
 --             describeMaintenanceWindowExecutions
+--
+--         , requestDescribeMaintenanceWindowsForTarget $
+--             describeMaintenanceWindowsForTarget
+--
+--         , requestCancelMaintenanceWindowExecution $
+--             cancelMaintenanceWindowExecution
 --
 --         , requestGetInventorySchema $
 --             getInventorySchema
@@ -94,6 +118,9 @@ import Test.Tasty
 --         , requestStartAutomationExecution $
 --             startAutomationExecution
 --
+--         , requestCreateOpsItem $
+--             createOpsItem
+--
 --         , requestCreateActivation $
 --             createActivation
 --
@@ -102,6 +129,9 @@ import Test.Tasty
 --
 --         , requestUpdateMaintenanceWindow $
 --             updateMaintenanceWindow
+--
+--         , requestDescribeSessions $
+--             describeSessions
 --
 --         , requestDescribeMaintenanceWindowExecutionTasks $
 --             describeMaintenanceWindowExecutionTasks
@@ -117,6 +147,9 @@ import Test.Tasty
 --
 --         , requestRemoveTagsFromResource $
 --             removeTagsFromResource
+--
+--         , requestGetCalendarState $
+--             getCalendarState
 --
 --         , requestDeleteParameters $
 --             deleteParameters
@@ -136,6 +169,9 @@ import Test.Tasty
 --         , requestDescribeMaintenanceWindowTargets $
 --             describeMaintenanceWindowTargets
 --
+--         , requestResetServiceSetting $
+--             resetServiceSetting
+--
 --         , requestRegisterPatchBaselineForPatchGroup $
 --             registerPatchBaselineForPatchGroup
 --
@@ -144,6 +180,9 @@ import Test.Tasty
 --
 --         , requestDescribeInstancePatchStates $
 --             describeInstancePatchStates
+--
+--         , requestGetOpsSummary $
+--             getOpsSummary
 --
 --         , requestGetPatchBaselineForPatchGroup $
 --             getPatchBaselineForPatchGroup
@@ -156,6 +195,9 @@ import Test.Tasty
 --
 --         , requestGetDocument $
 --             getDocument
+--
+--         , requestDescribeMaintenanceWindowSchedule $
+--             describeMaintenanceWindowSchedule
 --
 --         , requestAddTagsToResource $
 --             addTagsToResource
@@ -178,8 +220,14 @@ import Test.Tasty
 --         , requestDescribeAssociation $
 --             describeAssociation
 --
+--         , requestDescribeAssociationExecutionTargets $
+--             describeAssociationExecutionTargets
+--
 --         , requestModifyDocumentPermission $
 --             modifyDocumentPermission
+--
+--         , requestUpdateResourceDataSync $
+--             updateResourceDataSync
 --
 --         , requestDeleteResourceDataSync $
 --             deleteResourceDataSync
@@ -217,6 +265,9 @@ import Test.Tasty
 --         , requestListAssociationVersions $
 --             listAssociationVersions
 --
+--         , requestUpdateServiceSetting $
+--             updateServiceSetting
+--
 --         , requestDescribeMaintenanceWindowTasks $
 --             describeMaintenanceWindowTasks
 --
@@ -229,11 +280,23 @@ import Test.Tasty
 --         , requestListInventoryEntries $
 --             listInventoryEntries
 --
+--         , requestLabelParameterVersion $
+--             labelParameterVersion
+--
 --         , requestUpdateMaintenanceWindowTask $
 --             updateMaintenanceWindowTask
 --
 --         , requestGetParameterHistory $
 --             getParameterHistory
+--
+--         , requestDescribeAssociationExecutions $
+--             describeAssociationExecutions
+--
+--         , requestGetServiceSetting $
+--             getServiceSetting
+--
+--         , requestStartAssociationsOnce $
+--             startAssociationsOnce
 --
 --         , requestCreateMaintenanceWindow $
 --             createMaintenanceWindow
@@ -264,6 +327,9 @@ import Test.Tasty
 --
 --         , requestListAssociations $
 --             listAssociations
+--
+--         , requestUpdateOpsItem $
+--             updateOpsItem
 --
 --         , requestDeleteAssociation $
 --             deleteAssociation
@@ -301,6 +367,9 @@ import Test.Tasty
 --         , requestRegisterTargetWithMaintenanceWindow $
 --             registerTargetWithMaintenanceWindow
 --
+--         , requestStartSession $
+--             startSession
+--
 --         , requestListCommands $
 --             listCommands
 --
@@ -328,7 +397,10 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseDescribeInstancePatches $
+--         [ responseGetConnectionStatus $
+--             getConnectionStatusResponse
+--
+--         , responseDescribeInstancePatches $
 --             describeInstancePatchesResponse
 --
 --         , responseGetInventory $
@@ -343,6 +415,9 @@ import Test.Tasty
 --         , responseUpdatePatchBaseline $
 --             updatePatchBaselineResponse
 --
+--         , responseTerminateSession $
+--             terminateSessionResponse
+--
 --         , responseGetParameter $
 --             getParameterResponse
 --
@@ -352,11 +427,20 @@ import Test.Tasty
 --         , responseListResourceDataSync $
 --             listResourceDataSyncResponse
 --
+--         , responseGetOpsItem $
+--             getOpsItemResponse
+--
+--         , responseResumeSession $
+--             resumeSessionResponse
+--
 --         , responseGetDeployablePatchSnapshotForInstance $
 --             getDeployablePatchSnapshotForInstanceResponse
 --
 --         , responseDescribeParameters $
 --             describeParametersResponse
+--
+--         , responseDescribeOpsItems $
+--             describeOpsItemsResponse
 --
 --         , responseGetParametersByPath $
 --             getParametersByPathResponse
@@ -376,6 +460,9 @@ import Test.Tasty
 --         , responseDescribeDocument $
 --             describeDocumentResponse
 --
+--         , responseDescribePatchProperties $
+--             describePatchPropertiesResponse
+--
 --         , responseCreateAssociation $
 --             createAssociationResponse
 --
@@ -384,6 +471,12 @@ import Test.Tasty
 --
 --         , responseDescribeMaintenanceWindowExecutions $
 --             describeMaintenanceWindowExecutionsResponse
+--
+--         , responseDescribeMaintenanceWindowsForTarget $
+--             describeMaintenanceWindowsForTargetResponse
+--
+--         , responseCancelMaintenanceWindowExecution $
+--             cancelMaintenanceWindowExecutionResponse
 --
 --         , responseGetInventorySchema $
 --             getInventorySchemaResponse
@@ -394,6 +487,9 @@ import Test.Tasty
 --         , responseStartAutomationExecution $
 --             startAutomationExecutionResponse
 --
+--         , responseCreateOpsItem $
+--             createOpsItemResponse
+--
 --         , responseCreateActivation $
 --             createActivationResponse
 --
@@ -402,6 +498,9 @@ import Test.Tasty
 --
 --         , responseUpdateMaintenanceWindow $
 --             updateMaintenanceWindowResponse
+--
+--         , responseDescribeSessions $
+--             describeSessionsResponse
 --
 --         , responseDescribeMaintenanceWindowExecutionTasks $
 --             describeMaintenanceWindowExecutionTasksResponse
@@ -417,6 +516,9 @@ import Test.Tasty
 --
 --         , responseRemoveTagsFromResource $
 --             removeTagsFromResourceResponse
+--
+--         , responseGetCalendarState $
+--             getCalendarStateResponse
 --
 --         , responseDeleteParameters $
 --             deleteParametersResponse
@@ -436,6 +538,9 @@ import Test.Tasty
 --         , responseDescribeMaintenanceWindowTargets $
 --             describeMaintenanceWindowTargetsResponse
 --
+--         , responseResetServiceSetting $
+--             resetServiceSettingResponse
+--
 --         , responseRegisterPatchBaselineForPatchGroup $
 --             registerPatchBaselineForPatchGroupResponse
 --
@@ -444,6 +549,9 @@ import Test.Tasty
 --
 --         , responseDescribeInstancePatchStates $
 --             describeInstancePatchStatesResponse
+--
+--         , responseGetOpsSummary $
+--             getOpsSummaryResponse
 --
 --         , responseGetPatchBaselineForPatchGroup $
 --             getPatchBaselineForPatchGroupResponse
@@ -456,6 +564,9 @@ import Test.Tasty
 --
 --         , responseGetDocument $
 --             getDocumentResponse
+--
+--         , responseDescribeMaintenanceWindowSchedule $
+--             describeMaintenanceWindowScheduleResponse
 --
 --         , responseAddTagsToResource $
 --             addTagsToResourceResponse
@@ -478,8 +589,14 @@ import Test.Tasty
 --         , responseDescribeAssociation $
 --             describeAssociationResponse
 --
+--         , responseDescribeAssociationExecutionTargets $
+--             describeAssociationExecutionTargetsResponse
+--
 --         , responseModifyDocumentPermission $
 --             modifyDocumentPermissionResponse
+--
+--         , responseUpdateResourceDataSync $
+--             updateResourceDataSyncResponse
 --
 --         , responseDeleteResourceDataSync $
 --             deleteResourceDataSyncResponse
@@ -517,6 +634,9 @@ import Test.Tasty
 --         , responseListAssociationVersions $
 --             listAssociationVersionsResponse
 --
+--         , responseUpdateServiceSetting $
+--             updateServiceSettingResponse
+--
 --         , responseDescribeMaintenanceWindowTasks $
 --             describeMaintenanceWindowTasksResponse
 --
@@ -529,11 +649,23 @@ import Test.Tasty
 --         , responseListInventoryEntries $
 --             listInventoryEntriesResponse
 --
+--         , responseLabelParameterVersion $
+--             labelParameterVersionResponse
+--
 --         , responseUpdateMaintenanceWindowTask $
 --             updateMaintenanceWindowTaskResponse
 --
 --         , responseGetParameterHistory $
 --             getParameterHistoryResponse
+--
+--         , responseDescribeAssociationExecutions $
+--             describeAssociationExecutionsResponse
+--
+--         , responseGetServiceSetting $
+--             getServiceSettingResponse
+--
+--         , responseStartAssociationsOnce $
+--             startAssociationsOnceResponse
 --
 --         , responseCreateMaintenanceWindow $
 --             createMaintenanceWindowResponse
@@ -564,6 +696,9 @@ import Test.Tasty
 --
 --         , responseListAssociations $
 --             listAssociationsResponse
+--
+--         , responseUpdateOpsItem $
+--             updateOpsItemResponse
 --
 --         , responseDeleteAssociation $
 --             deleteAssociationResponse
@@ -601,6 +736,9 @@ import Test.Tasty
 --         , responseRegisterTargetWithMaintenanceWindow $
 --             registerTargetWithMaintenanceWindowResponse
 --
+--         , responseStartSession $
+--             startSessionResponse
+--
 --         , responseListCommands $
 --             listCommandsResponse
 --
@@ -630,6 +768,11 @@ import Test.Tasty
 
 -- Requests
 
+requestGetConnectionStatus :: GetConnectionStatus -> TestTree
+requestGetConnectionStatus = req
+    "GetConnectionStatus"
+    "fixture/GetConnectionStatus.yaml"
+
 requestDescribeInstancePatches :: DescribeInstancePatches -> TestTree
 requestDescribeInstancePatches = req
     "DescribeInstancePatches"
@@ -655,6 +798,11 @@ requestUpdatePatchBaseline = req
     "UpdatePatchBaseline"
     "fixture/UpdatePatchBaseline.yaml"
 
+requestTerminateSession :: TerminateSession -> TestTree
+requestTerminateSession = req
+    "TerminateSession"
+    "fixture/TerminateSession.yaml"
+
 requestGetParameter :: GetParameter -> TestTree
 requestGetParameter = req
     "GetParameter"
@@ -670,6 +818,16 @@ requestListResourceDataSync = req
     "ListResourceDataSync"
     "fixture/ListResourceDataSync.yaml"
 
+requestGetOpsItem :: GetOpsItem -> TestTree
+requestGetOpsItem = req
+    "GetOpsItem"
+    "fixture/GetOpsItem.yaml"
+
+requestResumeSession :: ResumeSession -> TestTree
+requestResumeSession = req
+    "ResumeSession"
+    "fixture/ResumeSession.yaml"
+
 requestGetDeployablePatchSnapshotForInstance :: GetDeployablePatchSnapshotForInstance -> TestTree
 requestGetDeployablePatchSnapshotForInstance = req
     "GetDeployablePatchSnapshotForInstance"
@@ -679,6 +837,11 @@ requestDescribeParameters :: DescribeParameters -> TestTree
 requestDescribeParameters = req
     "DescribeParameters"
     "fixture/DescribeParameters.yaml"
+
+requestDescribeOpsItems :: DescribeOpsItems -> TestTree
+requestDescribeOpsItems = req
+    "DescribeOpsItems"
+    "fixture/DescribeOpsItems.yaml"
 
 requestGetParametersByPath :: GetParametersByPath -> TestTree
 requestGetParametersByPath = req
@@ -710,6 +873,11 @@ requestDescribeDocument = req
     "DescribeDocument"
     "fixture/DescribeDocument.yaml"
 
+requestDescribePatchProperties :: DescribePatchProperties -> TestTree
+requestDescribePatchProperties = req
+    "DescribePatchProperties"
+    "fixture/DescribePatchProperties.yaml"
+
 requestCreateAssociation :: CreateAssociation -> TestTree
 requestCreateAssociation = req
     "CreateAssociation"
@@ -724,6 +892,16 @@ requestDescribeMaintenanceWindowExecutions :: DescribeMaintenanceWindowExecution
 requestDescribeMaintenanceWindowExecutions = req
     "DescribeMaintenanceWindowExecutions"
     "fixture/DescribeMaintenanceWindowExecutions.yaml"
+
+requestDescribeMaintenanceWindowsForTarget :: DescribeMaintenanceWindowsForTarget -> TestTree
+requestDescribeMaintenanceWindowsForTarget = req
+    "DescribeMaintenanceWindowsForTarget"
+    "fixture/DescribeMaintenanceWindowsForTarget.yaml"
+
+requestCancelMaintenanceWindowExecution :: CancelMaintenanceWindowExecution -> TestTree
+requestCancelMaintenanceWindowExecution = req
+    "CancelMaintenanceWindowExecution"
+    "fixture/CancelMaintenanceWindowExecution.yaml"
 
 requestGetInventorySchema :: GetInventorySchema -> TestTree
 requestGetInventorySchema = req
@@ -740,6 +918,11 @@ requestStartAutomationExecution = req
     "StartAutomationExecution"
     "fixture/StartAutomationExecution.yaml"
 
+requestCreateOpsItem :: CreateOpsItem -> TestTree
+requestCreateOpsItem = req
+    "CreateOpsItem"
+    "fixture/CreateOpsItem.yaml"
+
 requestCreateActivation :: CreateActivation -> TestTree
 requestCreateActivation = req
     "CreateActivation"
@@ -754,6 +937,11 @@ requestUpdateMaintenanceWindow :: UpdateMaintenanceWindow -> TestTree
 requestUpdateMaintenanceWindow = req
     "UpdateMaintenanceWindow"
     "fixture/UpdateMaintenanceWindow.yaml"
+
+requestDescribeSessions :: DescribeSessions -> TestTree
+requestDescribeSessions = req
+    "DescribeSessions"
+    "fixture/DescribeSessions.yaml"
 
 requestDescribeMaintenanceWindowExecutionTasks :: DescribeMaintenanceWindowExecutionTasks -> TestTree
 requestDescribeMaintenanceWindowExecutionTasks = req
@@ -779,6 +967,11 @@ requestRemoveTagsFromResource :: RemoveTagsFromResource -> TestTree
 requestRemoveTagsFromResource = req
     "RemoveTagsFromResource"
     "fixture/RemoveTagsFromResource.yaml"
+
+requestGetCalendarState :: GetCalendarState -> TestTree
+requestGetCalendarState = req
+    "GetCalendarState"
+    "fixture/GetCalendarState.yaml"
 
 requestDeleteParameters :: DeleteParameters -> TestTree
 requestDeleteParameters = req
@@ -810,6 +1003,11 @@ requestDescribeMaintenanceWindowTargets = req
     "DescribeMaintenanceWindowTargets"
     "fixture/DescribeMaintenanceWindowTargets.yaml"
 
+requestResetServiceSetting :: ResetServiceSetting -> TestTree
+requestResetServiceSetting = req
+    "ResetServiceSetting"
+    "fixture/ResetServiceSetting.yaml"
+
 requestRegisterPatchBaselineForPatchGroup :: RegisterPatchBaselineForPatchGroup -> TestTree
 requestRegisterPatchBaselineForPatchGroup = req
     "RegisterPatchBaselineForPatchGroup"
@@ -824,6 +1022,11 @@ requestDescribeInstancePatchStates :: DescribeInstancePatchStates -> TestTree
 requestDescribeInstancePatchStates = req
     "DescribeInstancePatchStates"
     "fixture/DescribeInstancePatchStates.yaml"
+
+requestGetOpsSummary :: GetOpsSummary -> TestTree
+requestGetOpsSummary = req
+    "GetOpsSummary"
+    "fixture/GetOpsSummary.yaml"
 
 requestGetPatchBaselineForPatchGroup :: GetPatchBaselineForPatchGroup -> TestTree
 requestGetPatchBaselineForPatchGroup = req
@@ -844,6 +1047,11 @@ requestGetDocument :: GetDocument -> TestTree
 requestGetDocument = req
     "GetDocument"
     "fixture/GetDocument.yaml"
+
+requestDescribeMaintenanceWindowSchedule :: DescribeMaintenanceWindowSchedule -> TestTree
+requestDescribeMaintenanceWindowSchedule = req
+    "DescribeMaintenanceWindowSchedule"
+    "fixture/DescribeMaintenanceWindowSchedule.yaml"
 
 requestAddTagsToResource :: AddTagsToResource -> TestTree
 requestAddTagsToResource = req
@@ -880,10 +1088,20 @@ requestDescribeAssociation = req
     "DescribeAssociation"
     "fixture/DescribeAssociation.yaml"
 
+requestDescribeAssociationExecutionTargets :: DescribeAssociationExecutionTargets -> TestTree
+requestDescribeAssociationExecutionTargets = req
+    "DescribeAssociationExecutionTargets"
+    "fixture/DescribeAssociationExecutionTargets.yaml"
+
 requestModifyDocumentPermission :: ModifyDocumentPermission -> TestTree
 requestModifyDocumentPermission = req
     "ModifyDocumentPermission"
     "fixture/ModifyDocumentPermission.yaml"
+
+requestUpdateResourceDataSync :: UpdateResourceDataSync -> TestTree
+requestUpdateResourceDataSync = req
+    "UpdateResourceDataSync"
+    "fixture/UpdateResourceDataSync.yaml"
 
 requestDeleteResourceDataSync :: DeleteResourceDataSync -> TestTree
 requestDeleteResourceDataSync = req
@@ -945,6 +1163,11 @@ requestListAssociationVersions = req
     "ListAssociationVersions"
     "fixture/ListAssociationVersions.yaml"
 
+requestUpdateServiceSetting :: UpdateServiceSetting -> TestTree
+requestUpdateServiceSetting = req
+    "UpdateServiceSetting"
+    "fixture/UpdateServiceSetting.yaml"
+
 requestDescribeMaintenanceWindowTasks :: DescribeMaintenanceWindowTasks -> TestTree
 requestDescribeMaintenanceWindowTasks = req
     "DescribeMaintenanceWindowTasks"
@@ -965,6 +1188,11 @@ requestListInventoryEntries = req
     "ListInventoryEntries"
     "fixture/ListInventoryEntries.yaml"
 
+requestLabelParameterVersion :: LabelParameterVersion -> TestTree
+requestLabelParameterVersion = req
+    "LabelParameterVersion"
+    "fixture/LabelParameterVersion.yaml"
+
 requestUpdateMaintenanceWindowTask :: UpdateMaintenanceWindowTask -> TestTree
 requestUpdateMaintenanceWindowTask = req
     "UpdateMaintenanceWindowTask"
@@ -974,6 +1202,21 @@ requestGetParameterHistory :: GetParameterHistory -> TestTree
 requestGetParameterHistory = req
     "GetParameterHistory"
     "fixture/GetParameterHistory.yaml"
+
+requestDescribeAssociationExecutions :: DescribeAssociationExecutions -> TestTree
+requestDescribeAssociationExecutions = req
+    "DescribeAssociationExecutions"
+    "fixture/DescribeAssociationExecutions.yaml"
+
+requestGetServiceSetting :: GetServiceSetting -> TestTree
+requestGetServiceSetting = req
+    "GetServiceSetting"
+    "fixture/GetServiceSetting.yaml"
+
+requestStartAssociationsOnce :: StartAssociationsOnce -> TestTree
+requestStartAssociationsOnce = req
+    "StartAssociationsOnce"
+    "fixture/StartAssociationsOnce.yaml"
 
 requestCreateMaintenanceWindow :: CreateMaintenanceWindow -> TestTree
 requestCreateMaintenanceWindow = req
@@ -1024,6 +1267,11 @@ requestListAssociations :: ListAssociations -> TestTree
 requestListAssociations = req
     "ListAssociations"
     "fixture/ListAssociations.yaml"
+
+requestUpdateOpsItem :: UpdateOpsItem -> TestTree
+requestUpdateOpsItem = req
+    "UpdateOpsItem"
+    "fixture/UpdateOpsItem.yaml"
 
 requestDeleteAssociation :: DeleteAssociation -> TestTree
 requestDeleteAssociation = req
@@ -1085,6 +1333,11 @@ requestRegisterTargetWithMaintenanceWindow = req
     "RegisterTargetWithMaintenanceWindow"
     "fixture/RegisterTargetWithMaintenanceWindow.yaml"
 
+requestStartSession :: StartSession -> TestTree
+requestStartSession = req
+    "StartSession"
+    "fixture/StartSession.yaml"
+
 requestListCommands :: ListCommands -> TestTree
 requestListCommands = req
     "ListCommands"
@@ -1127,6 +1380,13 @@ requestCreatePatchBaseline = req
 
 -- Responses
 
+responseGetConnectionStatus :: GetConnectionStatusResponse -> TestTree
+responseGetConnectionStatus = res
+    "GetConnectionStatusResponse"
+    "fixture/GetConnectionStatusResponse.proto"
+    ssm
+    (Proxy :: Proxy GetConnectionStatus)
+
 responseDescribeInstancePatches :: DescribeInstancePatchesResponse -> TestTree
 responseDescribeInstancePatches = res
     "DescribeInstancePatchesResponse"
@@ -1162,6 +1422,13 @@ responseUpdatePatchBaseline = res
     ssm
     (Proxy :: Proxy UpdatePatchBaseline)
 
+responseTerminateSession :: TerminateSessionResponse -> TestTree
+responseTerminateSession = res
+    "TerminateSessionResponse"
+    "fixture/TerminateSessionResponse.proto"
+    ssm
+    (Proxy :: Proxy TerminateSession)
+
 responseGetParameter :: GetParameterResponse -> TestTree
 responseGetParameter = res
     "GetParameterResponse"
@@ -1183,6 +1450,20 @@ responseListResourceDataSync = res
     ssm
     (Proxy :: Proxy ListResourceDataSync)
 
+responseGetOpsItem :: GetOpsItemResponse -> TestTree
+responseGetOpsItem = res
+    "GetOpsItemResponse"
+    "fixture/GetOpsItemResponse.proto"
+    ssm
+    (Proxy :: Proxy GetOpsItem)
+
+responseResumeSession :: ResumeSessionResponse -> TestTree
+responseResumeSession = res
+    "ResumeSessionResponse"
+    "fixture/ResumeSessionResponse.proto"
+    ssm
+    (Proxy :: Proxy ResumeSession)
+
 responseGetDeployablePatchSnapshotForInstance :: GetDeployablePatchSnapshotForInstanceResponse -> TestTree
 responseGetDeployablePatchSnapshotForInstance = res
     "GetDeployablePatchSnapshotForInstanceResponse"
@@ -1196,6 +1477,13 @@ responseDescribeParameters = res
     "fixture/DescribeParametersResponse.proto"
     ssm
     (Proxy :: Proxy DescribeParameters)
+
+responseDescribeOpsItems :: DescribeOpsItemsResponse -> TestTree
+responseDescribeOpsItems = res
+    "DescribeOpsItemsResponse"
+    "fixture/DescribeOpsItemsResponse.proto"
+    ssm
+    (Proxy :: Proxy DescribeOpsItems)
 
 responseGetParametersByPath :: GetParametersByPathResponse -> TestTree
 responseGetParametersByPath = res
@@ -1239,6 +1527,13 @@ responseDescribeDocument = res
     ssm
     (Proxy :: Proxy DescribeDocument)
 
+responseDescribePatchProperties :: DescribePatchPropertiesResponse -> TestTree
+responseDescribePatchProperties = res
+    "DescribePatchPropertiesResponse"
+    "fixture/DescribePatchPropertiesResponse.proto"
+    ssm
+    (Proxy :: Proxy DescribePatchProperties)
+
 responseCreateAssociation :: CreateAssociationResponse -> TestTree
 responseCreateAssociation = res
     "CreateAssociationResponse"
@@ -1259,6 +1554,20 @@ responseDescribeMaintenanceWindowExecutions = res
     "fixture/DescribeMaintenanceWindowExecutionsResponse.proto"
     ssm
     (Proxy :: Proxy DescribeMaintenanceWindowExecutions)
+
+responseDescribeMaintenanceWindowsForTarget :: DescribeMaintenanceWindowsForTargetResponse -> TestTree
+responseDescribeMaintenanceWindowsForTarget = res
+    "DescribeMaintenanceWindowsForTargetResponse"
+    "fixture/DescribeMaintenanceWindowsForTargetResponse.proto"
+    ssm
+    (Proxy :: Proxy DescribeMaintenanceWindowsForTarget)
+
+responseCancelMaintenanceWindowExecution :: CancelMaintenanceWindowExecutionResponse -> TestTree
+responseCancelMaintenanceWindowExecution = res
+    "CancelMaintenanceWindowExecutionResponse"
+    "fixture/CancelMaintenanceWindowExecutionResponse.proto"
+    ssm
+    (Proxy :: Proxy CancelMaintenanceWindowExecution)
 
 responseGetInventorySchema :: GetInventorySchemaResponse -> TestTree
 responseGetInventorySchema = res
@@ -1281,6 +1590,13 @@ responseStartAutomationExecution = res
     ssm
     (Proxy :: Proxy StartAutomationExecution)
 
+responseCreateOpsItem :: CreateOpsItemResponse -> TestTree
+responseCreateOpsItem = res
+    "CreateOpsItemResponse"
+    "fixture/CreateOpsItemResponse.proto"
+    ssm
+    (Proxy :: Proxy CreateOpsItem)
+
 responseCreateActivation :: CreateActivationResponse -> TestTree
 responseCreateActivation = res
     "CreateActivationResponse"
@@ -1301,6 +1617,13 @@ responseUpdateMaintenanceWindow = res
     "fixture/UpdateMaintenanceWindowResponse.proto"
     ssm
     (Proxy :: Proxy UpdateMaintenanceWindow)
+
+responseDescribeSessions :: DescribeSessionsResponse -> TestTree
+responseDescribeSessions = res
+    "DescribeSessionsResponse"
+    "fixture/DescribeSessionsResponse.proto"
+    ssm
+    (Proxy :: Proxy DescribeSessions)
 
 responseDescribeMaintenanceWindowExecutionTasks :: DescribeMaintenanceWindowExecutionTasksResponse -> TestTree
 responseDescribeMaintenanceWindowExecutionTasks = res
@@ -1336,6 +1659,13 @@ responseRemoveTagsFromResource = res
     "fixture/RemoveTagsFromResourceResponse.proto"
     ssm
     (Proxy :: Proxy RemoveTagsFromResource)
+
+responseGetCalendarState :: GetCalendarStateResponse -> TestTree
+responseGetCalendarState = res
+    "GetCalendarStateResponse"
+    "fixture/GetCalendarStateResponse.proto"
+    ssm
+    (Proxy :: Proxy GetCalendarState)
 
 responseDeleteParameters :: DeleteParametersResponse -> TestTree
 responseDeleteParameters = res
@@ -1379,6 +1709,13 @@ responseDescribeMaintenanceWindowTargets = res
     ssm
     (Proxy :: Proxy DescribeMaintenanceWindowTargets)
 
+responseResetServiceSetting :: ResetServiceSettingResponse -> TestTree
+responseResetServiceSetting = res
+    "ResetServiceSettingResponse"
+    "fixture/ResetServiceSettingResponse.proto"
+    ssm
+    (Proxy :: Proxy ResetServiceSetting)
+
 responseRegisterPatchBaselineForPatchGroup :: RegisterPatchBaselineForPatchGroupResponse -> TestTree
 responseRegisterPatchBaselineForPatchGroup = res
     "RegisterPatchBaselineForPatchGroupResponse"
@@ -1399,6 +1736,13 @@ responseDescribeInstancePatchStates = res
     "fixture/DescribeInstancePatchStatesResponse.proto"
     ssm
     (Proxy :: Proxy DescribeInstancePatchStates)
+
+responseGetOpsSummary :: GetOpsSummaryResponse -> TestTree
+responseGetOpsSummary = res
+    "GetOpsSummaryResponse"
+    "fixture/GetOpsSummaryResponse.proto"
+    ssm
+    (Proxy :: Proxy GetOpsSummary)
 
 responseGetPatchBaselineForPatchGroup :: GetPatchBaselineForPatchGroupResponse -> TestTree
 responseGetPatchBaselineForPatchGroup = res
@@ -1427,6 +1771,13 @@ responseGetDocument = res
     "fixture/GetDocumentResponse.proto"
     ssm
     (Proxy :: Proxy GetDocument)
+
+responseDescribeMaintenanceWindowSchedule :: DescribeMaintenanceWindowScheduleResponse -> TestTree
+responseDescribeMaintenanceWindowSchedule = res
+    "DescribeMaintenanceWindowScheduleResponse"
+    "fixture/DescribeMaintenanceWindowScheduleResponse.proto"
+    ssm
+    (Proxy :: Proxy DescribeMaintenanceWindowSchedule)
 
 responseAddTagsToResource :: AddTagsToResourceResponse -> TestTree
 responseAddTagsToResource = res
@@ -1477,12 +1828,26 @@ responseDescribeAssociation = res
     ssm
     (Proxy :: Proxy DescribeAssociation)
 
+responseDescribeAssociationExecutionTargets :: DescribeAssociationExecutionTargetsResponse -> TestTree
+responseDescribeAssociationExecutionTargets = res
+    "DescribeAssociationExecutionTargetsResponse"
+    "fixture/DescribeAssociationExecutionTargetsResponse.proto"
+    ssm
+    (Proxy :: Proxy DescribeAssociationExecutionTargets)
+
 responseModifyDocumentPermission :: ModifyDocumentPermissionResponse -> TestTree
 responseModifyDocumentPermission = res
     "ModifyDocumentPermissionResponse"
     "fixture/ModifyDocumentPermissionResponse.proto"
     ssm
     (Proxy :: Proxy ModifyDocumentPermission)
+
+responseUpdateResourceDataSync :: UpdateResourceDataSyncResponse -> TestTree
+responseUpdateResourceDataSync = res
+    "UpdateResourceDataSyncResponse"
+    "fixture/UpdateResourceDataSyncResponse.proto"
+    ssm
+    (Proxy :: Proxy UpdateResourceDataSync)
 
 responseDeleteResourceDataSync :: DeleteResourceDataSyncResponse -> TestTree
 responseDeleteResourceDataSync = res
@@ -1568,6 +1933,13 @@ responseListAssociationVersions = res
     ssm
     (Proxy :: Proxy ListAssociationVersions)
 
+responseUpdateServiceSetting :: UpdateServiceSettingResponse -> TestTree
+responseUpdateServiceSetting = res
+    "UpdateServiceSettingResponse"
+    "fixture/UpdateServiceSettingResponse.proto"
+    ssm
+    (Proxy :: Proxy UpdateServiceSetting)
+
 responseDescribeMaintenanceWindowTasks :: DescribeMaintenanceWindowTasksResponse -> TestTree
 responseDescribeMaintenanceWindowTasks = res
     "DescribeMaintenanceWindowTasksResponse"
@@ -1596,6 +1968,13 @@ responseListInventoryEntries = res
     ssm
     (Proxy :: Proxy ListInventoryEntries)
 
+responseLabelParameterVersion :: LabelParameterVersionResponse -> TestTree
+responseLabelParameterVersion = res
+    "LabelParameterVersionResponse"
+    "fixture/LabelParameterVersionResponse.proto"
+    ssm
+    (Proxy :: Proxy LabelParameterVersion)
+
 responseUpdateMaintenanceWindowTask :: UpdateMaintenanceWindowTaskResponse -> TestTree
 responseUpdateMaintenanceWindowTask = res
     "UpdateMaintenanceWindowTaskResponse"
@@ -1609,6 +1988,27 @@ responseGetParameterHistory = res
     "fixture/GetParameterHistoryResponse.proto"
     ssm
     (Proxy :: Proxy GetParameterHistory)
+
+responseDescribeAssociationExecutions :: DescribeAssociationExecutionsResponse -> TestTree
+responseDescribeAssociationExecutions = res
+    "DescribeAssociationExecutionsResponse"
+    "fixture/DescribeAssociationExecutionsResponse.proto"
+    ssm
+    (Proxy :: Proxy DescribeAssociationExecutions)
+
+responseGetServiceSetting :: GetServiceSettingResponse -> TestTree
+responseGetServiceSetting = res
+    "GetServiceSettingResponse"
+    "fixture/GetServiceSettingResponse.proto"
+    ssm
+    (Proxy :: Proxy GetServiceSetting)
+
+responseStartAssociationsOnce :: StartAssociationsOnceResponse -> TestTree
+responseStartAssociationsOnce = res
+    "StartAssociationsOnceResponse"
+    "fixture/StartAssociationsOnceResponse.proto"
+    ssm
+    (Proxy :: Proxy StartAssociationsOnce)
 
 responseCreateMaintenanceWindow :: CreateMaintenanceWindowResponse -> TestTree
 responseCreateMaintenanceWindow = res
@@ -1679,6 +2079,13 @@ responseListAssociations = res
     "fixture/ListAssociationsResponse.proto"
     ssm
     (Proxy :: Proxy ListAssociations)
+
+responseUpdateOpsItem :: UpdateOpsItemResponse -> TestTree
+responseUpdateOpsItem = res
+    "UpdateOpsItemResponse"
+    "fixture/UpdateOpsItemResponse.proto"
+    ssm
+    (Proxy :: Proxy UpdateOpsItem)
 
 responseDeleteAssociation :: DeleteAssociationResponse -> TestTree
 responseDeleteAssociation = res
@@ -1763,6 +2170,13 @@ responseRegisterTargetWithMaintenanceWindow = res
     "fixture/RegisterTargetWithMaintenanceWindowResponse.proto"
     ssm
     (Proxy :: Proxy RegisterTargetWithMaintenanceWindow)
+
+responseStartSession :: StartSessionResponse -> TestTree
+responseStartSession = res
+    "StartSessionResponse"
+    "fixture/StartSessionResponse.proto"
+    ssm
+    (Proxy :: Proxy StartSession)
 
 responseListCommands :: ListCommandsResponse -> TestTree
 responseListCommands = res

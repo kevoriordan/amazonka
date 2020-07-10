@@ -59,16 +59,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeSnapshots' smart constructor.
-data DescribeSnapshots = DescribeSnapshots'
-  { _dsCacheClusterId      :: !(Maybe Text)
-  , _dsMarker              :: !(Maybe Text)
-  , _dsMaxRecords          :: !(Maybe Int)
-  , _dsSnapshotName        :: !(Maybe Text)
-  , _dsShowNodeGroupConfig :: !(Maybe Bool)
-  , _dsReplicationGroupId  :: !(Maybe Text)
-  , _dsSnapshotSource      :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSnapshots = DescribeSnapshots'{_dsCacheClusterId
+                                            :: !(Maybe Text),
+                                            _dsMarker :: !(Maybe Text),
+                                            _dsMaxRecords :: !(Maybe Int),
+                                            _dsSnapshotName :: !(Maybe Text),
+                                            _dsShowNodeGroupConfig ::
+                                            !(Maybe Bool),
+                                            _dsReplicationGroupId ::
+                                            !(Maybe Text),
+                                            _dsSnapshotSource :: !(Maybe Text)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeSnapshots' with the minimum fields required to make a request.
 --
@@ -89,17 +90,13 @@ data DescribeSnapshots = DescribeSnapshots'
 -- * 'dsSnapshotSource' - If set to @system@ , the output shows snapshots that were automatically created by ElastiCache. If set to @user@ the output shows snapshots that were manually created. If omitted, the output shows both automatically and manually created snapshots.
 describeSnapshots
     :: DescribeSnapshots
-describeSnapshots =
-  DescribeSnapshots'
-    { _dsCacheClusterId = Nothing
-    , _dsMarker = Nothing
-    , _dsMaxRecords = Nothing
-    , _dsSnapshotName = Nothing
-    , _dsShowNodeGroupConfig = Nothing
-    , _dsReplicationGroupId = Nothing
-    , _dsSnapshotSource = Nothing
-    }
-
+describeSnapshots
+  = DescribeSnapshots'{_dsCacheClusterId = Nothing,
+                       _dsMarker = Nothing, _dsMaxRecords = Nothing,
+                       _dsSnapshotName = Nothing,
+                       _dsShowNodeGroupConfig = Nothing,
+                       _dsReplicationGroupId = Nothing,
+                       _dsSnapshotSource = Nothing}
 
 -- | A user-supplied cluster identifier. If this parameter is specified, only snapshots associated with that specific cluster are described.
 dsCacheClusterId :: Lens' DescribeSnapshots (Maybe Text)
@@ -175,12 +172,15 @@ instance ToQuery DescribeSnapshots where
 --
 --
 -- /See:/ 'describeSnapshotsResponse' smart constructor.
-data DescribeSnapshotsResponse = DescribeSnapshotsResponse'
-  { _dssrsSnapshots      :: !(Maybe [Snapshot])
-  , _dssrsMarker         :: !(Maybe Text)
-  , _dssrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSnapshotsResponse = DescribeSnapshotsResponse'{_dssrsSnapshots
+                                                            ::
+                                                            !(Maybe [Snapshot]),
+                                                            _dssrsMarker ::
+                                                            !(Maybe Text),
+                                                            _dssrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeSnapshotsResponse' with the minimum fields required to make a request.
 --
@@ -194,13 +194,11 @@ data DescribeSnapshotsResponse = DescribeSnapshotsResponse'
 describeSnapshotsResponse
     :: Int -- ^ 'dssrsResponseStatus'
     -> DescribeSnapshotsResponse
-describeSnapshotsResponse pResponseStatus_ =
-  DescribeSnapshotsResponse'
-    { _dssrsSnapshots = Nothing
-    , _dssrsMarker = Nothing
-    , _dssrsResponseStatus = pResponseStatus_
-    }
-
+describeSnapshotsResponse pResponseStatus_
+  = DescribeSnapshotsResponse'{_dssrsSnapshots =
+                                 Nothing,
+                               _dssrsMarker = Nothing,
+                               _dssrsResponseStatus = pResponseStatus_}
 
 -- | A list of snapshots. Each item in the list contains detailed information about one snapshot.
 dssrsSnapshots :: Lens' DescribeSnapshotsResponse [Snapshot]

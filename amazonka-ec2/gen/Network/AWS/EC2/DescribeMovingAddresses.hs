@@ -21,6 +21,8 @@
 -- Describes your Elastic IP addresses that are being moved to the EC2-VPC platform, or that are being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribeMovingAddresses
     (
     -- * Creating a Request
@@ -45,23 +47,24 @@ module Network.AWS.EC2.DescribeMovingAddresses
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DescribeMovingAddresses.
---
---
---
--- /See:/ 'describeMovingAddresses' smart constructor.
-data DescribeMovingAddresses = DescribeMovingAddresses'
-  { _dmaFilters    :: !(Maybe [Filter])
-  , _dmaPublicIPs  :: !(Maybe [Text])
-  , _dmaNextToken  :: !(Maybe Text)
-  , _dmaDryRun     :: !(Maybe Bool)
-  , _dmaMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeMovingAddresses' smart constructor.
+data DescribeMovingAddresses = DescribeMovingAddresses'{_dmaFilters
+                                                        :: !(Maybe [Filter]),
+                                                        _dmaPublicIPs ::
+                                                        !(Maybe [Text]),
+                                                        _dmaNextToken ::
+                                                        !(Maybe Text),
+                                                        _dmaDryRun ::
+                                                        !(Maybe Bool),
+                                                        _dmaMaxResults ::
+                                                        !(Maybe Nat)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeMovingAddresses' with the minimum fields required to make a request.
 --
@@ -71,22 +74,17 @@ data DescribeMovingAddresses = DescribeMovingAddresses'
 --
 -- * 'dmaPublicIPs' - One or more Elastic IP addresses.
 --
--- * 'dmaNextToken' - The token to use to retrieve the next page of results.
+-- * 'dmaNextToken' - The token for the next page of results.
 --
 -- * 'dmaDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
 -- * 'dmaMaxResults' - The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned @NextToken@ value. This value can be between 5 and 1000; if @MaxResults@ is given a value outside of this range, an error is returned. Default: If no value is provided, the default is 1000.
 describeMovingAddresses
     :: DescribeMovingAddresses
-describeMovingAddresses =
-  DescribeMovingAddresses'
-    { _dmaFilters = Nothing
-    , _dmaPublicIPs = Nothing
-    , _dmaNextToken = Nothing
-    , _dmaDryRun = Nothing
-    , _dmaMaxResults = Nothing
-    }
-
+describeMovingAddresses
+  = DescribeMovingAddresses'{_dmaFilters = Nothing,
+                             _dmaPublicIPs = Nothing, _dmaNextToken = Nothing,
+                             _dmaDryRun = Nothing, _dmaMaxResults = Nothing}
 
 -- | One or more filters.     * @moving-status@ - The status of the Elastic IP address (@MovingToVpc@ | @RestoringToClassic@ ).
 dmaFilters :: Lens' DescribeMovingAddresses [Filter]
@@ -96,7 +94,7 @@ dmaFilters = lens _dmaFilters (\ s a -> s{_dmaFilters = a}) . _Default . _Coerce
 dmaPublicIPs :: Lens' DescribeMovingAddresses [Text]
 dmaPublicIPs = lens _dmaPublicIPs (\ s a -> s{_dmaPublicIPs = a}) . _Default . _Coerce
 
--- | The token to use to retrieve the next page of results.
+-- | The token for the next page of results.
 dmaNextToken :: Lens' DescribeMovingAddresses (Maybe Text)
 dmaNextToken = lens _dmaNextToken (\ s a -> s{_dmaNextToken = a})
 
@@ -105,8 +103,15 @@ dmaDryRun :: Lens' DescribeMovingAddresses (Maybe Bool)
 dmaDryRun = lens _dmaDryRun (\ s a -> s{_dmaDryRun = a})
 
 -- | The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned @NextToken@ value. This value can be between 5 and 1000; if @MaxResults@ is given a value outside of this range, an error is returned. Default: If no value is provided, the default is 1000.
-dmaMaxResults :: Lens' DescribeMovingAddresses (Maybe Int)
-dmaMaxResults = lens _dmaMaxResults (\ s a -> s{_dmaMaxResults = a})
+dmaMaxResults :: Lens' DescribeMovingAddresses (Maybe Natural)
+dmaMaxResults = lens _dmaMaxResults (\ s a -> s{_dmaMaxResults = a}) . mapping _Nat
+
+instance AWSPager DescribeMovingAddresses where
+        page rq rs
+          | stop (rs ^. dmarsNextToken) = Nothing
+          | stop (rs ^. dmarsMovingAddressStatuses) = Nothing
+          | otherwise =
+            Just $ rq & dmaNextToken .~ rs ^. dmarsNextToken
 
 instance AWSRequest DescribeMovingAddresses where
         type Rs DescribeMovingAddresses =
@@ -142,17 +147,19 @@ instance ToQuery DescribeMovingAddresses where
                "NextToken" =: _dmaNextToken, "DryRun" =: _dmaDryRun,
                "MaxResults" =: _dmaMaxResults]
 
--- | Contains the output of DescribeMovingAddresses.
---
---
---
--- /See:/ 'describeMovingAddressesResponse' smart constructor.
-data DescribeMovingAddressesResponse = DescribeMovingAddressesResponse'
-  { _dmarsMovingAddressStatuses :: !(Maybe [MovingAddressStatus])
-  , _dmarsNextToken             :: !(Maybe Text)
-  , _dmarsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeMovingAddressesResponse' smart constructor.
+data DescribeMovingAddressesResponse = DescribeMovingAddressesResponse'{_dmarsMovingAddressStatuses
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [MovingAddressStatus]),
+                                                                        _dmarsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dmarsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeMovingAddressesResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +173,11 @@ data DescribeMovingAddressesResponse = DescribeMovingAddressesResponse'
 describeMovingAddressesResponse
     :: Int -- ^ 'dmarsResponseStatus'
     -> DescribeMovingAddressesResponse
-describeMovingAddressesResponse pResponseStatus_ =
-  DescribeMovingAddressesResponse'
-    { _dmarsMovingAddressStatuses = Nothing
-    , _dmarsNextToken = Nothing
-    , _dmarsResponseStatus = pResponseStatus_
-    }
-
+describeMovingAddressesResponse pResponseStatus_
+  = DescribeMovingAddressesResponse'{_dmarsMovingAddressStatuses
+                                       = Nothing,
+                                     _dmarsNextToken = Nothing,
+                                     _dmarsResponseStatus = pResponseStatus_}
 
 -- | The status for each Elastic IP address.
 dmarsMovingAddressStatuses :: Lens' DescribeMovingAddressesResponse [MovingAddressStatus]

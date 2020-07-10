@@ -33,8 +33,8 @@ module Network.AWS.Lightsail.GetDisk
     , getDiskResponse
     , GetDiskResponse
     -- * Response Lenses
-    , getrsDisk
-    , getrsResponseStatus
+    , gtdskrsDisk
+    , gtdskrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -45,10 +45,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDisk' smart constructor.
-newtype GetDisk = GetDisk'
-  { _gdDiskName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDisk = GetDisk'{_gdDiskName :: Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDisk' with the minimum fields required to make a request.
 --
@@ -58,8 +56,8 @@ newtype GetDisk = GetDisk'
 getDisk
     :: Text -- ^ 'gdDiskName'
     -> GetDisk
-getDisk pDiskName_ = GetDisk' {_gdDiskName = pDiskName_}
-
+getDisk pDiskName_
+  = GetDisk'{_gdDiskName = pDiskName_}
 
 -- | The name of the disk (e.g., @my-disk@ ).
 gdDiskName :: Lens' GetDisk Text
@@ -99,33 +97,31 @@ instance ToQuery GetDisk where
         toQuery = const mempty
 
 -- | /See:/ 'getDiskResponse' smart constructor.
-data GetDiskResponse = GetDiskResponse'
-  { _getrsDisk           :: !(Maybe Disk)
-  , _getrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDiskResponse = GetDiskResponse'{_gtdskrsDisk
+                                        :: !(Maybe Disk),
+                                        _gtdskrsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDiskResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'getrsDisk' - An object containing information about the disk.
+-- * 'gtdskrsDisk' - An object containing information about the disk.
 --
--- * 'getrsResponseStatus' - -- | The response status code.
+-- * 'gtdskrsResponseStatus' - -- | The response status code.
 getDiskResponse
-    :: Int -- ^ 'getrsResponseStatus'
+    :: Int -- ^ 'gtdskrsResponseStatus'
     -> GetDiskResponse
-getDiskResponse pResponseStatus_ =
-  GetDiskResponse'
-    {_getrsDisk = Nothing, _getrsResponseStatus = pResponseStatus_}
-
+getDiskResponse pResponseStatus_
+  = GetDiskResponse'{_gtdskrsDisk = Nothing,
+                     _gtdskrsResponseStatus = pResponseStatus_}
 
 -- | An object containing information about the disk.
-getrsDisk :: Lens' GetDiskResponse (Maybe Disk)
-getrsDisk = lens _getrsDisk (\ s a -> s{_getrsDisk = a})
+gtdskrsDisk :: Lens' GetDiskResponse (Maybe Disk)
+gtdskrsDisk = lens _gtdskrsDisk (\ s a -> s{_gtdskrsDisk = a})
 
 -- | -- | The response status code.
-getrsResponseStatus :: Lens' GetDiskResponse Int
-getrsResponseStatus = lens _getrsResponseStatus (\ s a -> s{_getrsResponseStatus = a})
+gtdskrsResponseStatus :: Lens' GetDiskResponse Int
+gtdskrsResponseStatus = lens _gtdskrsResponseStatus (\ s a -> s{_gtdskrsResponseStatus = a})
 
 instance NFData GetDiskResponse where

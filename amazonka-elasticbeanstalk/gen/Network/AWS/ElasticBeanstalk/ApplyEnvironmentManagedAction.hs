@@ -54,12 +54,18 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'applyEnvironmentManagedAction' smart constructor.
-data ApplyEnvironmentManagedAction = ApplyEnvironmentManagedAction'
-  { _aemaEnvironmentName :: !(Maybe Text)
-  , _aemaEnvironmentId   :: !(Maybe Text)
-  , _aemaActionId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ApplyEnvironmentManagedAction = ApplyEnvironmentManagedAction'{_aemaEnvironmentName
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _aemaEnvironmentId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _aemaActionId
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ApplyEnvironmentManagedAction' with the minimum fields required to make a request.
 --
@@ -73,13 +79,11 @@ data ApplyEnvironmentManagedAction = ApplyEnvironmentManagedAction'
 applyEnvironmentManagedAction
     :: Text -- ^ 'aemaActionId'
     -> ApplyEnvironmentManagedAction
-applyEnvironmentManagedAction pActionId_ =
-  ApplyEnvironmentManagedAction'
-    { _aemaEnvironmentName = Nothing
-    , _aemaEnvironmentId = Nothing
-    , _aemaActionId = pActionId_
-    }
-
+applyEnvironmentManagedAction pActionId_
+  = ApplyEnvironmentManagedAction'{_aemaEnvironmentName
+                                     = Nothing,
+                                   _aemaEnvironmentId = Nothing,
+                                   _aemaActionId = pActionId_}
 
 -- | The name of the target environment.
 aemaEnvironmentName :: Lens' ApplyEnvironmentManagedAction (Maybe Text)
@@ -134,14 +138,27 @@ instance ToQuery ApplyEnvironmentManagedAction where
 --
 --
 -- /See:/ 'applyEnvironmentManagedActionResponse' smart constructor.
-data ApplyEnvironmentManagedActionResponse = ApplyEnvironmentManagedActionResponse'
-  { _aemarsStatus            :: !(Maybe Text)
-  , _aemarsActionId          :: !(Maybe Text)
-  , _aemarsActionDescription :: !(Maybe Text)
-  , _aemarsActionType        :: !(Maybe ActionType)
-  , _aemarsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ApplyEnvironmentManagedActionResponse = ApplyEnvironmentManagedActionResponse'{_aemarsStatus
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _aemarsActionId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _aemarsActionDescription
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _aemarsActionType
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        ActionType),
+                                                                                    _aemarsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'ApplyEnvironmentManagedActionResponse' with the minimum fields required to make a request.
 --
@@ -159,15 +176,15 @@ data ApplyEnvironmentManagedActionResponse = ApplyEnvironmentManagedActionRespon
 applyEnvironmentManagedActionResponse
     :: Int -- ^ 'aemarsResponseStatus'
     -> ApplyEnvironmentManagedActionResponse
-applyEnvironmentManagedActionResponse pResponseStatus_ =
-  ApplyEnvironmentManagedActionResponse'
-    { _aemarsStatus = Nothing
-    , _aemarsActionId = Nothing
-    , _aemarsActionDescription = Nothing
-    , _aemarsActionType = Nothing
-    , _aemarsResponseStatus = pResponseStatus_
-    }
-
+applyEnvironmentManagedActionResponse
+  pResponseStatus_
+  = ApplyEnvironmentManagedActionResponse'{_aemarsStatus
+                                             = Nothing,
+                                           _aemarsActionId = Nothing,
+                                           _aemarsActionDescription = Nothing,
+                                           _aemarsActionType = Nothing,
+                                           _aemarsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The status of the managed action.
 aemarsStatus :: Lens' ApplyEnvironmentManagedActionResponse (Maybe Text)

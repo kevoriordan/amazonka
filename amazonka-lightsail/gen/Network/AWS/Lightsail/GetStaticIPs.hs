@@ -49,22 +49,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getStaticIPs' smart constructor.
-newtype GetStaticIPs = GetStaticIPs'
-  { _gsiPageToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetStaticIPs = GetStaticIPs'{_gsiPageToken ::
+                                     Maybe Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetStaticIPs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsiPageToken' - A token used for advancing to the next page of results from your get static IPs request.
+-- * 'gsiPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetStaticIps@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getStaticIPs
     :: GetStaticIPs
-getStaticIPs = GetStaticIPs' {_gsiPageToken = Nothing}
+getStaticIPs = GetStaticIPs'{_gsiPageToken = Nothing}
 
-
--- | A token used for advancing to the next page of results from your get static IPs request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetStaticIps@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 gsiPageToken :: Lens' GetStaticIPs (Maybe Text)
 gsiPageToken = lens _gsiPageToken (\ s a -> s{_gsiPageToken = a})
 
@@ -111,18 +109,18 @@ instance ToQuery GetStaticIPs where
         toQuery = const mempty
 
 -- | /See:/ 'getStaticIPsResponse' smart constructor.
-data GetStaticIPsResponse = GetStaticIPsResponse'
-  { _gsiprsNextPageToken  :: !(Maybe Text)
-  , _gsiprsStaticIPs      :: !(Maybe [StaticIP])
-  , _gsiprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetStaticIPsResponse = GetStaticIPsResponse'{_gsiprsNextPageToken
+                                                  :: !(Maybe Text),
+                                                  _gsiprsStaticIPs ::
+                                                  !(Maybe [StaticIP]),
+                                                  _gsiprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetStaticIPsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsiprsNextPageToken' - A token used for advancing to the next page of results from your get static IPs request.
+-- * 'gsiprsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetStaticIps@ request and specify the next page token using the @pageToken@ parameter.
 --
 -- * 'gsiprsStaticIPs' - An array of key-value pairs containing information about your get static IPs request.
 --
@@ -130,15 +128,13 @@ data GetStaticIPsResponse = GetStaticIPsResponse'
 getStaticIPsResponse
     :: Int -- ^ 'gsiprsResponseStatus'
     -> GetStaticIPsResponse
-getStaticIPsResponse pResponseStatus_ =
-  GetStaticIPsResponse'
-    { _gsiprsNextPageToken = Nothing
-    , _gsiprsStaticIPs = Nothing
-    , _gsiprsResponseStatus = pResponseStatus_
-    }
+getStaticIPsResponse pResponseStatus_
+  = GetStaticIPsResponse'{_gsiprsNextPageToken =
+                            Nothing,
+                          _gsiprsStaticIPs = Nothing,
+                          _gsiprsResponseStatus = pResponseStatus_}
 
-
--- | A token used for advancing to the next page of results from your get static IPs request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetStaticIps@ request and specify the next page token using the @pageToken@ parameter.
 gsiprsNextPageToken :: Lens' GetStaticIPsResponse (Maybe Text)
 gsiprsNextPageToken = lens _gsiprsNextPageToken (\ s a -> s{_gsiprsNextPageToken = a})
 

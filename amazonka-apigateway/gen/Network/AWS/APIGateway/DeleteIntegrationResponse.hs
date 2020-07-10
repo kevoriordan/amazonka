@@ -49,13 +49,16 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteIntegrationResponse' smart constructor.
-data DeleteIntegrationResponse = DeleteIntegrationResponse'
-  { _diRestAPIId  :: !Text
-  , _diResourceId :: !Text
-  , _diHttpMethod :: !Text
-  , _diStatusCode :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIntegrationResponse = DeleteIntegrationResponse'{_diRestAPIId
+                                                            :: !Text,
+                                                            _diResourceId ::
+                                                            !Text,
+                                                            _diHttpMethod ::
+                                                            !Text,
+                                                            _diStatusCode ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteIntegrationResponse' with the minimum fields required to make a request.
 --
@@ -74,14 +77,13 @@ deleteIntegrationResponse
     -> Text -- ^ 'diHttpMethod'
     -> Text -- ^ 'diStatusCode'
     -> DeleteIntegrationResponse
-deleteIntegrationResponse pRestAPIId_ pResourceId_ pHttpMethod_ pStatusCode_ =
-  DeleteIntegrationResponse'
-    { _diRestAPIId = pRestAPIId_
-    , _diResourceId = pResourceId_
-    , _diHttpMethod = pHttpMethod_
-    , _diStatusCode = pStatusCode_
-    }
-
+deleteIntegrationResponse pRestAPIId_ pResourceId_
+  pHttpMethod_ pStatusCode_
+  = DeleteIntegrationResponse'{_diRestAPIId =
+                                 pRestAPIId_,
+                               _diResourceId = pResourceId_,
+                               _diHttpMethod = pHttpMethod_,
+                               _diStatusCode = pStatusCode_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 diRestAPIId :: Lens' DeleteIntegrationResponse Text
@@ -127,17 +129,16 @@ instance ToQuery DeleteIntegrationResponse where
         toQuery = const mempty
 
 -- | /See:/ 'deleteIntegrationResponseResponse' smart constructor.
-data DeleteIntegrationResponseResponse =
-  DeleteIntegrationResponseResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIntegrationResponseResponse = DeleteIntegrationResponseResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteIntegrationResponseResponse' with the minimum fields required to make a request.
 --
 deleteIntegrationResponseResponse
     :: DeleteIntegrationResponseResponse
-deleteIntegrationResponseResponse = DeleteIntegrationResponseResponse'
-
+deleteIntegrationResponseResponse
+  = DeleteIntegrationResponseResponse'
 
 instance NFData DeleteIntegrationResponseResponse
          where

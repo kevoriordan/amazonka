@@ -54,12 +54,19 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeEngineDefaultParameters' smart constructor.
-data DescribeEngineDefaultParameters = DescribeEngineDefaultParameters'
-  { _dedpMarker                    :: !(Maybe Text)
-  , _dedpMaxRecords                :: !(Maybe Int)
-  , _dedpCacheParameterGroupFamily :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEngineDefaultParameters = DescribeEngineDefaultParameters'{_dedpMarker
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dedpMaxRecords
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Int),
+                                                                        _dedpCacheParameterGroupFamily
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeEngineDefaultParameters' with the minimum fields required to make a request.
 --
@@ -69,17 +76,17 @@ data DescribeEngineDefaultParameters = DescribeEngineDefaultParameters'
 --
 -- * 'dedpMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: minimum 20; maximum 100.
 --
--- * 'dedpCacheParameterGroupFamily' - The name of the cache parameter group family. Valid values are: @memcached1.4@ | @redis2.6@ | @redis2.8@ | @redis3.2@
+-- * 'dedpCacheParameterGroupFamily' - The name of the cache parameter group family. Valid values are: @memcached1.4@ | @memcached1.5@ | @redis2.6@ | @redis2.8@ | @redis3.2@ | @redis4.0@ | @redis5.0@ | 
 describeEngineDefaultParameters
     :: Text -- ^ 'dedpCacheParameterGroupFamily'
     -> DescribeEngineDefaultParameters
-describeEngineDefaultParameters pCacheParameterGroupFamily_ =
-  DescribeEngineDefaultParameters'
-    { _dedpMarker = Nothing
-    , _dedpMaxRecords = Nothing
-    , _dedpCacheParameterGroupFamily = pCacheParameterGroupFamily_
-    }
-
+describeEngineDefaultParameters
+  pCacheParameterGroupFamily_
+  = DescribeEngineDefaultParameters'{_dedpMarker =
+                                       Nothing,
+                                     _dedpMaxRecords = Nothing,
+                                     _dedpCacheParameterGroupFamily =
+                                       pCacheParameterGroupFamily_}
 
 -- | An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
 dedpMarker :: Lens' DescribeEngineDefaultParameters (Maybe Text)
@@ -89,7 +96,7 @@ dedpMarker = lens _dedpMarker (\ s a -> s{_dedpMarker = a})
 dedpMaxRecords :: Lens' DescribeEngineDefaultParameters (Maybe Int)
 dedpMaxRecords = lens _dedpMaxRecords (\ s a -> s{_dedpMaxRecords = a})
 
--- | The name of the cache parameter group family. Valid values are: @memcached1.4@ | @redis2.6@ | @redis2.8@ | @redis3.2@
+-- | The name of the cache parameter group family. Valid values are: @memcached1.4@ | @memcached1.5@ | @redis2.6@ | @redis2.8@ | @redis3.2@ | @redis4.0@ | @redis5.0@ | 
 dedpCacheParameterGroupFamily :: Lens' DescribeEngineDefaultParameters Text
 dedpCacheParameterGroupFamily = lens _dedpCacheParameterGroupFamily (\ s a -> s{_dedpCacheParameterGroupFamily = a})
 
@@ -143,11 +150,14 @@ instance ToQuery DescribeEngineDefaultParameters
                  _dedpCacheParameterGroupFamily]
 
 -- | /See:/ 'describeEngineDefaultParametersResponse' smart constructor.
-data DescribeEngineDefaultParametersResponse = DescribeEngineDefaultParametersResponse'
-  { _dedprsResponseStatus :: !Int
-  , _dedprsEngineDefaults :: !EngineDefaults
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEngineDefaultParametersResponse = DescribeEngineDefaultParametersResponse'{_dedprsResponseStatus
+                                                                                        ::
+                                                                                        !Int,
+                                                                                        _dedprsEngineDefaults
+                                                                                        ::
+                                                                                        !EngineDefaults}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DescribeEngineDefaultParametersResponse' with the minimum fields required to make a request.
 --
@@ -160,12 +170,12 @@ describeEngineDefaultParametersResponse
     :: Int -- ^ 'dedprsResponseStatus'
     -> EngineDefaults -- ^ 'dedprsEngineDefaults'
     -> DescribeEngineDefaultParametersResponse
-describeEngineDefaultParametersResponse pResponseStatus_ pEngineDefaults_ =
-  DescribeEngineDefaultParametersResponse'
-    { _dedprsResponseStatus = pResponseStatus_
-    , _dedprsEngineDefaults = pEngineDefaults_
-    }
-
+describeEngineDefaultParametersResponse
+  pResponseStatus_ pEngineDefaults_
+  = DescribeEngineDefaultParametersResponse'{_dedprsResponseStatus
+                                               = pResponseStatus_,
+                                             _dedprsEngineDefaults =
+                                               pEngineDefaults_}
 
 -- | -- | The response status code.
 dedprsResponseStatus :: Lens' DescribeEngineDefaultParametersResponse Int

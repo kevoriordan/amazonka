@@ -32,6 +32,7 @@ module Network.AWS.Cloud9.CreateEnvironmentEC
     , ceecOwnerARN
     , ceecClientRequestToken
     , ceecDescription
+    , ceecTags
     , ceecName
     , ceecInstanceType
 
@@ -51,16 +52,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createEnvironmentEC' smart constructor.
-data CreateEnvironmentEC = CreateEnvironmentEC'
-  { _ceecAutomaticStopTimeMinutes :: !(Maybe Int)
-  , _ceecSubnetId                 :: !(Maybe Text)
-  , _ceecOwnerARN                 :: !(Maybe Text)
-  , _ceecClientRequestToken       :: !(Maybe Text)
-  , _ceecDescription              :: !(Maybe Text)
-  , _ceecName                     :: !Text
-  , _ceecInstanceType             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateEnvironmentEC = CreateEnvironmentEC'{_ceecAutomaticStopTimeMinutes
+                                                :: !(Maybe Int),
+                                                _ceecSubnetId :: !(Maybe Text),
+                                                _ceecOwnerARN :: !(Maybe Text),
+                                                _ceecClientRequestToken ::
+                                                !(Maybe Text),
+                                                _ceecDescription ::
+                                                !(Maybe (Sensitive Text)),
+                                                _ceecTags :: !(Maybe [Tag]),
+                                                _ceecName :: !Text,
+                                                _ceecInstanceType :: !Text}
+                             deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateEnvironmentEC' with the minimum fields required to make a request.
 --
@@ -76,6 +79,8 @@ data CreateEnvironmentEC = CreateEnvironmentEC'
 --
 -- * 'ceecDescription' - The description of the environment to create.
 --
+-- * 'ceecTags' - An array of key-value pairs that will be associated with the new AWS Cloud9 development environment.
+--
 -- * 'ceecName' - The name of the environment to create. This name is visible to other AWS IAM users in the same AWS account.
 --
 -- * 'ceecInstanceType' - The type of instance to connect to the environment (for example, @t2.micro@ ).
@@ -83,17 +88,14 @@ createEnvironmentEC
     :: Text -- ^ 'ceecName'
     -> Text -- ^ 'ceecInstanceType'
     -> CreateEnvironmentEC
-createEnvironmentEC pName_ pInstanceType_ =
-  CreateEnvironmentEC'
-    { _ceecAutomaticStopTimeMinutes = Nothing
-    , _ceecSubnetId = Nothing
-    , _ceecOwnerARN = Nothing
-    , _ceecClientRequestToken = Nothing
-    , _ceecDescription = Nothing
-    , _ceecName = pName_
-    , _ceecInstanceType = pInstanceType_
-    }
-
+createEnvironmentEC pName_ pInstanceType_
+  = CreateEnvironmentEC'{_ceecAutomaticStopTimeMinutes
+                           = Nothing,
+                         _ceecSubnetId = Nothing, _ceecOwnerARN = Nothing,
+                         _ceecClientRequestToken = Nothing,
+                         _ceecDescription = Nothing, _ceecTags = Nothing,
+                         _ceecName = pName_,
+                         _ceecInstanceType = pInstanceType_}
 
 -- | The number of minutes until the running instance is shut down after the environment has last been used.
 ceecAutomaticStopTimeMinutes :: Lens' CreateEnvironmentEC (Maybe Int)
@@ -113,7 +115,11 @@ ceecClientRequestToken = lens _ceecClientRequestToken (\ s a -> s{_ceecClientReq
 
 -- | The description of the environment to create.
 ceecDescription :: Lens' CreateEnvironmentEC (Maybe Text)
-ceecDescription = lens _ceecDescription (\ s a -> s{_ceecDescription = a})
+ceecDescription = lens _ceecDescription (\ s a -> s{_ceecDescription = a}) . mapping _Sensitive
+
+-- | An array of key-value pairs that will be associated with the new AWS Cloud9 development environment.
+ceecTags :: Lens' CreateEnvironmentEC [Tag]
+ceecTags = lens _ceecTags (\ s a -> s{_ceecTags = a}) . _Default . _Coerce
 
 -- | The name of the environment to create. This name is visible to other AWS IAM users in the same AWS account.
 ceecName :: Lens' CreateEnvironmentEC Text
@@ -158,6 +164,7 @@ instance ToJSON CreateEnvironmentEC where
                   ("clientRequestToken" .=) <$>
                     _ceecClientRequestToken,
                   ("description" .=) <$> _ceecDescription,
+                  ("tags" .=) <$> _ceecTags,
                   Just ("name" .= _ceecName),
                   Just ("instanceType" .= _ceecInstanceType)])
 
@@ -168,11 +175,13 @@ instance ToQuery CreateEnvironmentEC where
         toQuery = const mempty
 
 -- | /See:/ 'createEnvironmentECResponse' smart constructor.
-data CreateEnvironmentECResponse = CreateEnvironmentECResponse'
-  { _ceecrsEnvironmentId  :: !(Maybe Text)
-  , _ceecrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateEnvironmentECResponse = CreateEnvironmentECResponse'{_ceecrsEnvironmentId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _ceecrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateEnvironmentECResponse' with the minimum fields required to make a request.
 --
@@ -184,10 +193,10 @@ data CreateEnvironmentECResponse = CreateEnvironmentECResponse'
 createEnvironmentECResponse
     :: Int -- ^ 'ceecrsResponseStatus'
     -> CreateEnvironmentECResponse
-createEnvironmentECResponse pResponseStatus_ =
-  CreateEnvironmentECResponse'
-    {_ceecrsEnvironmentId = Nothing, _ceecrsResponseStatus = pResponseStatus_}
-
+createEnvironmentECResponse pResponseStatus_
+  = CreateEnvironmentECResponse'{_ceecrsEnvironmentId =
+                                   Nothing,
+                                 _ceecrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the environment that was created.
 ceecrsEnvironmentId :: Lens' CreateEnvironmentECResponse (Maybe Text)

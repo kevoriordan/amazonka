@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the 'DescribeReservedNodeOfferings' API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve.
+-- Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the 'DescribeReservedNodeOfferings' API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve. 
 --
 --
--- For more information about reserved node offerings, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html Purchasing Reserved Nodes> in the /Amazon Redshift Cluster Management Guide/ .
+-- For more information about reserved node offerings, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html Purchasing Reserved Nodes> in the /Amazon Redshift Cluster Management Guide/ .
 --
 module Network.AWS.Redshift.PurchaseReservedNodeOffering
     (
@@ -47,35 +47,36 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'purchaseReservedNodeOffering' smart constructor.
-data PurchaseReservedNodeOffering = PurchaseReservedNodeOffering'
-  { _prnoNodeCount              :: !(Maybe Int)
-  , _prnoReservedNodeOfferingId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PurchaseReservedNodeOffering = PurchaseReservedNodeOffering'{_prnoNodeCount
+                                                                  ::
+                                                                  !(Maybe Int),
+                                                                  _prnoReservedNodeOfferingId
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'PurchaseReservedNodeOffering' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'prnoNodeCount' - The number of reserved nodes that you want to purchase. Default: @1@
+-- * 'prnoNodeCount' - The number of reserved nodes that you want to purchase. Default: @1@ 
 --
 -- * 'prnoReservedNodeOfferingId' - The unique identifier of the reserved node offering you want to purchase.
 purchaseReservedNodeOffering
     :: Text -- ^ 'prnoReservedNodeOfferingId'
     -> PurchaseReservedNodeOffering
-purchaseReservedNodeOffering pReservedNodeOfferingId_ =
-  PurchaseReservedNodeOffering'
-    { _prnoNodeCount = Nothing
-    , _prnoReservedNodeOfferingId = pReservedNodeOfferingId_
-    }
+purchaseReservedNodeOffering pReservedNodeOfferingId_
+  = PurchaseReservedNodeOffering'{_prnoNodeCount =
+                                    Nothing,
+                                  _prnoReservedNodeOfferingId =
+                                    pReservedNodeOfferingId_}
 
-
--- | The number of reserved nodes that you want to purchase. Default: @1@
+-- | The number of reserved nodes that you want to purchase. Default: @1@ 
 prnoNodeCount :: Lens' PurchaseReservedNodeOffering (Maybe Int)
 prnoNodeCount = lens _prnoNodeCount (\ s a -> s{_prnoNodeCount = a})
 
@@ -116,11 +117,15 @@ instance ToQuery PurchaseReservedNodeOffering where
                  _prnoReservedNodeOfferingId]
 
 -- | /See:/ 'purchaseReservedNodeOfferingResponse' smart constructor.
-data PurchaseReservedNodeOfferingResponse = PurchaseReservedNodeOfferingResponse'
-  { _prnorsReservedNode   :: !(Maybe ReservedNode)
-  , _prnorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PurchaseReservedNodeOfferingResponse = PurchaseReservedNodeOfferingResponse'{_prnorsReservedNode
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      ReservedNode),
+                                                                                  _prnorsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'PurchaseReservedNodeOfferingResponse' with the minimum fields required to make a request.
 --
@@ -132,10 +137,11 @@ data PurchaseReservedNodeOfferingResponse = PurchaseReservedNodeOfferingResponse
 purchaseReservedNodeOfferingResponse
     :: Int -- ^ 'prnorsResponseStatus'
     -> PurchaseReservedNodeOfferingResponse
-purchaseReservedNodeOfferingResponse pResponseStatus_ =
-  PurchaseReservedNodeOfferingResponse'
-    {_prnorsReservedNode = Nothing, _prnorsResponseStatus = pResponseStatus_}
-
+purchaseReservedNodeOfferingResponse pResponseStatus_
+  = PurchaseReservedNodeOfferingResponse'{_prnorsReservedNode
+                                            = Nothing,
+                                          _prnorsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Undocumented member.
 prnorsReservedNode :: Lens' PurchaseReservedNodeOfferingResponse (Maybe ReservedNode)

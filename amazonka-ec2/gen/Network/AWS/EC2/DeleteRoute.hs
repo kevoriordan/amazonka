@@ -44,18 +44,13 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteRoute.
---
---
---
--- /See:/ 'deleteRoute' smart constructor.
-data DeleteRoute = DeleteRoute'
-  { _drDestinationIPv6CidrBlock :: !(Maybe Text)
-  , _drDryRun                   :: !(Maybe Bool)
-  , _drDestinationCidrBlock     :: !(Maybe Text)
-  , _drRouteTableId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteRoute' smart constructor.
+data DeleteRoute = DeleteRoute'{_drDestinationIPv6CidrBlock
+                                :: !(Maybe Text),
+                                _drDryRun :: !(Maybe Bool),
+                                _drDestinationCidrBlock :: !(Maybe Text),
+                                _drRouteTableId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRoute' with the minimum fields required to make a request.
 --
@@ -71,14 +66,11 @@ data DeleteRoute = DeleteRoute'
 deleteRoute
     :: Text -- ^ 'drRouteTableId'
     -> DeleteRoute
-deleteRoute pRouteTableId_ =
-  DeleteRoute'
-    { _drDestinationIPv6CidrBlock = Nothing
-    , _drDryRun = Nothing
-    , _drDestinationCidrBlock = Nothing
-    , _drRouteTableId = pRouteTableId_
-    }
-
+deleteRoute pRouteTableId_
+  = DeleteRoute'{_drDestinationIPv6CidrBlock = Nothing,
+                 _drDryRun = Nothing,
+                 _drDestinationCidrBlock = Nothing,
+                 _drRouteTableId = pRouteTableId_}
 
 -- | The IPv6 CIDR range for the route. The value you specify must match the CIDR for the route exactly.
 drDestinationIPv6CidrBlock :: Lens' DeleteRoute (Maybe Text)
@@ -123,16 +115,13 @@ instance ToQuery DeleteRoute where
                "RouteTableId" =: _drRouteTableId]
 
 -- | /See:/ 'deleteRouteResponse' smart constructor.
-data DeleteRouteResponse =
-  DeleteRouteResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRouteResponse = DeleteRouteResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRouteResponse' with the minimum fields required to make a request.
 --
 deleteRouteResponse
     :: DeleteRouteResponse
 deleteRouteResponse = DeleteRouteResponse'
-
 
 instance NFData DeleteRouteResponse where

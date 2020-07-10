@@ -21,7 +21,7 @@
 -- Deletes an AWS Directory Service directory.
 --
 --
--- Before you call /DeleteDirectory/ , ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the /DeleteDirectory/ operation, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference> .
+-- Before you call @DeleteDirectory@ , ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the @DeleteDirectory@ operation, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference> .
 --
 module Network.AWS.DirectoryService.DeleteDirectory
     (
@@ -29,7 +29,7 @@ module Network.AWS.DirectoryService.DeleteDirectory
       deleteDirectory
     , DeleteDirectory
     -- * Request Lenses
-    , dddDirectoryId
+    , dltdrctryDirectoryId
 
     -- * Destructuring the Response
     , deleteDirectoryResponse
@@ -51,26 +51,25 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteDirectory' smart constructor.
-newtype DeleteDirectory = DeleteDirectory'
-  { _dddDirectoryId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDirectory = DeleteDirectory'{_dltdrctryDirectoryId
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDirectory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dddDirectoryId' - The identifier of the directory to delete.
+-- * 'dltdrctryDirectoryId' - The identifier of the directory to delete.
 deleteDirectory
-    :: Text -- ^ 'dddDirectoryId'
+    :: Text -- ^ 'dltdrctryDirectoryId'
     -> DeleteDirectory
-deleteDirectory pDirectoryId_ =
-  DeleteDirectory' {_dddDirectoryId = pDirectoryId_}
-
+deleteDirectory pDirectoryId_
+  = DeleteDirectory'{_dltdrctryDirectoryId =
+                       pDirectoryId_}
 
 -- | The identifier of the directory to delete.
-dddDirectoryId :: Lens' DeleteDirectory Text
-dddDirectoryId = lens _dddDirectoryId (\ s a -> s{_dddDirectoryId = a})
+dltdrctryDirectoryId :: Lens' DeleteDirectory Text
+dltdrctryDirectoryId = lens _dltdrctryDirectoryId (\ s a -> s{_dltdrctryDirectoryId = a})
 
 instance AWSRequest DeleteDirectory where
         type Rs DeleteDirectory = DeleteDirectoryResponse
@@ -98,7 +97,8 @@ instance ToHeaders DeleteDirectory where
 instance ToJSON DeleteDirectory where
         toJSON DeleteDirectory'{..}
           = object
-              (catMaybes [Just ("DirectoryId" .= _dddDirectoryId)])
+              (catMaybes
+                 [Just ("DirectoryId" .= _dltdrctryDirectoryId)])
 
 instance ToPath DeleteDirectory where
         toPath = const "/"
@@ -111,11 +111,12 @@ instance ToQuery DeleteDirectory where
 --
 --
 -- /See:/ 'deleteDirectoryResponse' smart constructor.
-data DeleteDirectoryResponse = DeleteDirectoryResponse'
-  { _delrsDirectoryId    :: !(Maybe Text)
-  , _delrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDirectoryResponse = DeleteDirectoryResponse'{_delrsDirectoryId
+                                                        :: !(Maybe Text),
+                                                        _delrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteDirectoryResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +128,10 @@ data DeleteDirectoryResponse = DeleteDirectoryResponse'
 deleteDirectoryResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteDirectoryResponse
-deleteDirectoryResponse pResponseStatus_ =
-  DeleteDirectoryResponse'
-    {_delrsDirectoryId = Nothing, _delrsResponseStatus = pResponseStatus_}
-
+deleteDirectoryResponse pResponseStatus_
+  = DeleteDirectoryResponse'{_delrsDirectoryId =
+                               Nothing,
+                             _delrsResponseStatus = pResponseStatus_}
 
 -- | The directory identifier.
 delrsDirectoryId :: Lens' DeleteDirectoryResponse (Maybe Text)

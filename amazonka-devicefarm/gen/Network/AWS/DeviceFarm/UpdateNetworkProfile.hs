@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the network profile with specific settings.
+-- Updates the network profile.
 --
 --
 module Network.AWS.DeviceFarm.UpdateNetworkProfile
@@ -56,21 +56,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateNetworkProfile' smart constructor.
-data UpdateNetworkProfile = UpdateNetworkProfile'
-  { _unpUplinkJitterMs        :: !(Maybe Integer)
-  , _unpUplinkLossPercent     :: !(Maybe Nat)
-  , _unpDownlinkJitterMs      :: !(Maybe Integer)
-  , _unpName                  :: !(Maybe Text)
-  , _unpDownlinkLossPercent   :: !(Maybe Nat)
-  , _unpType                  :: !(Maybe NetworkProfileType)
-  , _unpUplinkDelayMs         :: !(Maybe Integer)
-  , _unpUplinkBandwidthBits   :: !(Maybe Integer)
-  , _unpDescription           :: !(Maybe Text)
-  , _unpDownlinkDelayMs       :: !(Maybe Integer)
-  , _unpDownlinkBandwidthBits :: !(Maybe Integer)
-  , _unpArn                   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateNetworkProfile = UpdateNetworkProfile'{_unpUplinkJitterMs
+                                                  :: !(Maybe Integer),
+                                                  _unpUplinkLossPercent ::
+                                                  !(Maybe Nat),
+                                                  _unpDownlinkJitterMs ::
+                                                  !(Maybe Integer),
+                                                  _unpName :: !(Maybe Text),
+                                                  _unpDownlinkLossPercent ::
+                                                  !(Maybe Nat),
+                                                  _unpType ::
+                                                  !(Maybe NetworkProfileType),
+                                                  _unpUplinkDelayMs ::
+                                                  !(Maybe Integer),
+                                                  _unpUplinkBandwidthBits ::
+                                                  !(Maybe Integer),
+                                                  _unpDescription ::
+                                                  !(Maybe Text),
+                                                  _unpDownlinkDelayMs ::
+                                                  !(Maybe Integer),
+                                                  _unpDownlinkBandwidthBits ::
+                                                  !(Maybe Integer),
+                                                  _unpArn :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateNetworkProfile' with the minimum fields required to make a request.
 --
@@ -86,13 +94,13 @@ data UpdateNetworkProfile = UpdateNetworkProfile'
 --
 -- * 'unpDownlinkLossPercent' - Proportion of received packets that fail to arrive from 0 to 100 percent.
 --
--- * 'unpType' - The type of network profile you wish to return information about. Valid values are listed below.
+-- * 'unpType' - The type of network profile to return information about. Valid values are listed here.
 --
 -- * 'unpUplinkDelayMs' - Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
 --
 -- * 'unpUplinkBandwidthBits' - The data throughput rate in bits per second, as an integer from 0 to 104857600.
 --
--- * 'unpDescription' - The descriptoin of the network profile about which you are returning information.
+-- * 'unpDescription' - The description of the network profile about which you are returning information.
 --
 -- * 'unpDownlinkDelayMs' - Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
 --
@@ -102,22 +110,16 @@ data UpdateNetworkProfile = UpdateNetworkProfile'
 updateNetworkProfile
     :: Text -- ^ 'unpArn'
     -> UpdateNetworkProfile
-updateNetworkProfile pArn_ =
-  UpdateNetworkProfile'
-    { _unpUplinkJitterMs = Nothing
-    , _unpUplinkLossPercent = Nothing
-    , _unpDownlinkJitterMs = Nothing
-    , _unpName = Nothing
-    , _unpDownlinkLossPercent = Nothing
-    , _unpType = Nothing
-    , _unpUplinkDelayMs = Nothing
-    , _unpUplinkBandwidthBits = Nothing
-    , _unpDescription = Nothing
-    , _unpDownlinkDelayMs = Nothing
-    , _unpDownlinkBandwidthBits = Nothing
-    , _unpArn = pArn_
-    }
-
+updateNetworkProfile pArn_
+  = UpdateNetworkProfile'{_unpUplinkJitterMs = Nothing,
+                          _unpUplinkLossPercent = Nothing,
+                          _unpDownlinkJitterMs = Nothing, _unpName = Nothing,
+                          _unpDownlinkLossPercent = Nothing,
+                          _unpType = Nothing, _unpUplinkDelayMs = Nothing,
+                          _unpUplinkBandwidthBits = Nothing,
+                          _unpDescription = Nothing,
+                          _unpDownlinkDelayMs = Nothing,
+                          _unpDownlinkBandwidthBits = Nothing, _unpArn = pArn_}
 
 -- | Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
 unpUplinkJitterMs :: Lens' UpdateNetworkProfile (Maybe Integer)
@@ -139,7 +141,7 @@ unpName = lens _unpName (\ s a -> s{_unpName = a})
 unpDownlinkLossPercent :: Lens' UpdateNetworkProfile (Maybe Natural)
 unpDownlinkLossPercent = lens _unpDownlinkLossPercent (\ s a -> s{_unpDownlinkLossPercent = a}) . mapping _Nat
 
--- | The type of network profile you wish to return information about. Valid values are listed below.
+-- | The type of network profile to return information about. Valid values are listed here.
 unpType :: Lens' UpdateNetworkProfile (Maybe NetworkProfileType)
 unpType = lens _unpType (\ s a -> s{_unpType = a})
 
@@ -151,7 +153,7 @@ unpUplinkDelayMs = lens _unpUplinkDelayMs (\ s a -> s{_unpUplinkDelayMs = a})
 unpUplinkBandwidthBits :: Lens' UpdateNetworkProfile (Maybe Integer)
 unpUplinkBandwidthBits = lens _unpUplinkBandwidthBits (\ s a -> s{_unpUplinkBandwidthBits = a})
 
--- | The descriptoin of the network profile about which you are returning information.
+-- | The description of the network profile about which you are returning information.
 unpDescription :: Lens' UpdateNetworkProfile (Maybe Text)
 unpDescription = lens _unpDescription (\ s a -> s{_unpDescription = a})
 
@@ -218,11 +220,14 @@ instance ToQuery UpdateNetworkProfile where
         toQuery = const mempty
 
 -- | /See:/ 'updateNetworkProfileResponse' smart constructor.
-data UpdateNetworkProfileResponse = UpdateNetworkProfileResponse'
-  { _unprsNetworkProfile :: !(Maybe NetworkProfile)
-  , _unprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateNetworkProfileResponse = UpdateNetworkProfileResponse'{_unprsNetworkProfile
+                                                                  ::
+                                                                  !(Maybe
+                                                                      NetworkProfile),
+                                                                  _unprsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateNetworkProfileResponse' with the minimum fields required to make a request.
 --
@@ -234,10 +239,10 @@ data UpdateNetworkProfileResponse = UpdateNetworkProfileResponse'
 updateNetworkProfileResponse
     :: Int -- ^ 'unprsResponseStatus'
     -> UpdateNetworkProfileResponse
-updateNetworkProfileResponse pResponseStatus_ =
-  UpdateNetworkProfileResponse'
-    {_unprsNetworkProfile = Nothing, _unprsResponseStatus = pResponseStatus_}
-
+updateNetworkProfileResponse pResponseStatus_
+  = UpdateNetworkProfileResponse'{_unprsNetworkProfile
+                                    = Nothing,
+                                  _unprsResponseStatus = pResponseStatus_}
 
 -- | A list of the available network profiles.
 unprsNetworkProfile :: Lens' UpdateNetworkProfileResponse (Maybe NetworkProfile)

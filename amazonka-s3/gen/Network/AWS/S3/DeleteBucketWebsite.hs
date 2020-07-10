@@ -18,7 +18,21 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This operation removes the website configuration from the bucket.
+-- This operation removes the website configuration for a bucket. Amazon S3 returns a @200 OK@ response upon successfully deleting a website configuration on the specified bucket. You will get a @200 OK@ response if the website configuration you are trying to delete does not exist on the bucket. Amazon S3 returns a @404@ response if the bucket specified in the request does not exist.
+--
+--
+-- This DELETE operation requires the @S3:DeleteBucketWebsite@ permission. By default, only the bucket owner can delete the website configuration attached to a bucket. However, bucket owners can grant other users permission to delete the website configuration by writing a bucket policy granting them the @S3:DeleteBucketWebsite@ permission. 
+--
+-- For more information about hosting websites, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html Hosting Websites on Amazon S3> . 
+--
+-- The following operations are related to @DeleteBucketWebsite@ :
+--
+--     * 'GetBucketWebsite' 
+--
+--     * 'PutBucketWebsite' 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketWebsite
     (
     -- * Creating a Request
@@ -40,23 +54,23 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketWebsite' smart constructor.
-newtype DeleteBucketWebsite = DeleteBucketWebsite'
-  { _dbwBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBucketWebsite = DeleteBucketWebsite'{_dbwBucket
+                                                   :: BucketName}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteBucketWebsite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbwBucket' - Undocumented member.
+-- * 'dbwBucket' - The bucket name for which you want to remove the website configuration. 
 deleteBucketWebsite
     :: BucketName -- ^ 'dbwBucket'
     -> DeleteBucketWebsite
-deleteBucketWebsite pBucket_ = DeleteBucketWebsite' {_dbwBucket = pBucket_}
+deleteBucketWebsite pBucket_
+  = DeleteBucketWebsite'{_dbwBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name for which you want to remove the website configuration. 
 dbwBucket :: Lens' DeleteBucketWebsite BucketName
 dbwBucket = lens _dbwBucket (\ s a -> s{_dbwBucket = a})
 
@@ -81,16 +95,15 @@ instance ToQuery DeleteBucketWebsite where
         toQuery = const (mconcat ["website"])
 
 -- | /See:/ 'deleteBucketWebsiteResponse' smart constructor.
-data DeleteBucketWebsiteResponse =
-  DeleteBucketWebsiteResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketWebsiteResponse = DeleteBucketWebsiteResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteBucketWebsiteResponse' with the minimum fields required to make a request.
 --
 deleteBucketWebsiteResponse
     :: DeleteBucketWebsiteResponse
-deleteBucketWebsiteResponse = DeleteBucketWebsiteResponse'
-
+deleteBucketWebsiteResponse
+  = DeleteBucketWebsiteResponse'
 
 instance NFData DeleteBucketWebsiteResponse where

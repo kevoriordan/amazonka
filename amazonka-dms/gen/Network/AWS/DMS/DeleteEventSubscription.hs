@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an AWS DMS event subscription.
+-- Deletes an AWS DMS event subscription. 
 --
 --
 module Network.AWS.DMS.DeleteEventSubscription
@@ -33,8 +33,8 @@ module Network.AWS.DMS.DeleteEventSubscription
     , deleteEventSubscriptionResponse
     , DeleteEventSubscriptionResponse
     -- * Response Lenses
-    , desersEventSubscription
-    , desersResponseStatus
+    , dltevntsbscrptnrsEventSubscription
+    , dltevntsbscrptnrsResponseStatus
     ) where
 
 import Network.AWS.DMS.Types
@@ -44,15 +44,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteEventSubscription' smart constructor.
-newtype DeleteEventSubscription = DeleteEventSubscription'
-  { _desSubscriptionName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEventSubscription = DeleteEventSubscription'{_desSubscriptionName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteEventSubscription' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DeleteEventSubscription = DeleteEventSubscription'
 deleteEventSubscription
     :: Text -- ^ 'desSubscriptionName'
     -> DeleteEventSubscription
-deleteEventSubscription pSubscriptionName_ =
-  DeleteEventSubscription' {_desSubscriptionName = pSubscriptionName_}
-
+deleteEventSubscription pSubscriptionName_
+  = DeleteEventSubscription'{_desSubscriptionName =
+                               pSubscriptionName_}
 
 -- | The name of the DMS event notification subscription to be deleted.
 desSubscriptionName :: Lens' DeleteEventSubscription Text
@@ -106,40 +106,42 @@ instance ToPath DeleteEventSubscription where
 instance ToQuery DeleteEventSubscription where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteEventSubscriptionResponse' smart constructor.
-data DeleteEventSubscriptionResponse = DeleteEventSubscriptionResponse'
-  { _desersEventSubscription :: !(Maybe EventSubscription)
-  , _desersResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEventSubscriptionResponse = DeleteEventSubscriptionResponse'{_dltevntsbscrptnrsEventSubscription
+                                                                        ::
+                                                                        !(Maybe
+                                                                            EventSubscription),
+                                                                        _dltevntsbscrptnrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteEventSubscriptionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'desersEventSubscription' - The event subscription that was deleted.
+-- * 'dltevntsbscrptnrsEventSubscription' - The event subscription that was deleted.
 --
--- * 'desersResponseStatus' - -- | The response status code.
+-- * 'dltevntsbscrptnrsResponseStatus' - -- | The response status code.
 deleteEventSubscriptionResponse
-    :: Int -- ^ 'desersResponseStatus'
+    :: Int -- ^ 'dltevntsbscrptnrsResponseStatus'
     -> DeleteEventSubscriptionResponse
-deleteEventSubscriptionResponse pResponseStatus_ =
-  DeleteEventSubscriptionResponse'
-    { _desersEventSubscription = Nothing
-    , _desersResponseStatus = pResponseStatus_
-    }
-
+deleteEventSubscriptionResponse pResponseStatus_
+  = DeleteEventSubscriptionResponse'{_dltevntsbscrptnrsEventSubscription
+                                       = Nothing,
+                                     _dltevntsbscrptnrsResponseStatus =
+                                       pResponseStatus_}
 
 -- | The event subscription that was deleted.
-desersEventSubscription :: Lens' DeleteEventSubscriptionResponse (Maybe EventSubscription)
-desersEventSubscription = lens _desersEventSubscription (\ s a -> s{_desersEventSubscription = a})
+dltevntsbscrptnrsEventSubscription :: Lens' DeleteEventSubscriptionResponse (Maybe EventSubscription)
+dltevntsbscrptnrsEventSubscription = lens _dltevntsbscrptnrsEventSubscription (\ s a -> s{_dltevntsbscrptnrsEventSubscription = a})
 
 -- | -- | The response status code.
-desersResponseStatus :: Lens' DeleteEventSubscriptionResponse Int
-desersResponseStatus = lens _desersResponseStatus (\ s a -> s{_desersResponseStatus = a})
+dltevntsbscrptnrsResponseStatus :: Lens' DeleteEventSubscriptionResponse Int
+dltevntsbscrptnrsResponseStatus = lens _dltevntsbscrptnrsResponseStatus (\ s a -> s{_dltevntsbscrptnrsResponseStatus = a})
 
 instance NFData DeleteEventSubscriptionResponse where

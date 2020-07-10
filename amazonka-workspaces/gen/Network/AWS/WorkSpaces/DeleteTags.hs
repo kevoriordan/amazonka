@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified tags from the specified WorkSpace.
+-- Deletes the specified tags from the specified WorkSpaces resource.
 --
 --
 module Network.AWS.WorkSpaces.DeleteTags
@@ -34,7 +34,7 @@ module Network.AWS.WorkSpaces.DeleteTags
     , deleteTagsResponse
     , DeleteTagsResponse
     -- * Response Lenses
-    , drsResponseStatus
+    , dtsrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -45,27 +45,25 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'deleteTags' smart constructor.
-data DeleteTags = DeleteTags'
-  { _dResourceId :: !Text
-  , _dTagKeys    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTags = DeleteTags'{_dResourceId :: !Text,
+                              _dTagKeys :: ![Text]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dResourceId' - The ID of the WorkSpace. To find this ID, use 'DescribeWorkspaces' .
+-- * 'dResourceId' - The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
 --
 -- * 'dTagKeys' - The tag keys.
 deleteTags
     :: Text -- ^ 'dResourceId'
     -> DeleteTags
-deleteTags pResourceId_ =
-  DeleteTags' {_dResourceId = pResourceId_, _dTagKeys = mempty}
+deleteTags pResourceId_
+  = DeleteTags'{_dResourceId = pResourceId_,
+                _dTagKeys = mempty}
 
-
--- | The ID of the WorkSpace. To find this ID, use 'DescribeWorkspaces' .
+-- | The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
 dResourceId :: Lens' DeleteTags Text
 dResourceId = lens _dResourceId (\ s a -> s{_dResourceId = a})
 
@@ -108,25 +106,25 @@ instance ToQuery DeleteTags where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTagsResponse' smart constructor.
-newtype DeleteTagsResponse = DeleteTagsResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTagsResponse = DeleteTagsResponse'{_dtsrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drsResponseStatus' - -- | The response status code.
+-- * 'dtsrsResponseStatus' - -- | The response status code.
 deleteTagsResponse
-    :: Int -- ^ 'drsResponseStatus'
+    :: Int -- ^ 'dtsrsResponseStatus'
     -> DeleteTagsResponse
-deleteTagsResponse pResponseStatus_ =
-  DeleteTagsResponse' {_drsResponseStatus = pResponseStatus_}
-
+deleteTagsResponse pResponseStatus_
+  = DeleteTagsResponse'{_dtsrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
-drsResponseStatus :: Lens' DeleteTagsResponse Int
-drsResponseStatus = lens _drsResponseStatus (\ s a -> s{_drsResponseStatus = a})
+dtsrsResponseStatus :: Lens' DeleteTagsResponse Int
+dtsrsResponseStatus = lens _dtsrsResponseStatus (\ s a -> s{_dtsrsResponseStatus = a})
 
 instance NFData DeleteTagsResponse where

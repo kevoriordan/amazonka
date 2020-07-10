@@ -11,7 +11,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Assess, monitor, manage, and remediate security issues across your AWS infrastructure, applications, and data.
+-- Amazon GuardDuty is a continuous security monitoring service that analyzes and processes the following data sources: VPC Flow Logs, AWS CloudTrail event logs, and DNS logs. It uses threat intelligence feeds (such as lists of malicious IPs and domains) and machine learning to identify unexpected, potentially unauthorized, and malicious activity within your AWS environment. This can include issues like escalations of privileges, uses of exposed credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can detect compromised EC2 instances that serve malware or mine bitcoin. 
+--
+--
+-- GuardDuty also monitors AWS account access behavior for signs of compromise. Some examples of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region that has never been used, or unusual API calls like a password policy change to reduce password strength. 
+--
+-- GuardDuty informs you of the status of your AWS environment by producing security findings that you can view in the GuardDuty console or through Amazon CloudWatch events. For more information, see the /<https:\/\/docs.aws.amazon.com\/guardduty\/latest\/ug\/what-is-guardduty.html Amazon GuardDuty User Guide> / . 
+--
 module Network.AWS.GuardDuty
     (
     -- * Service Configuration
@@ -32,70 +38,85 @@ module Network.AWS.GuardDuty
     -- * Operations
     -- $operations
 
-    -- ** CreateFilter
+    -- ** CreateFilter 
     , module Network.AWS.GuardDuty.CreateFilter
+
+    -- ** EnableOrganizationAdminAccount 
+    , module Network.AWS.GuardDuty.EnableOrganizationAdminAccount
 
     -- ** ListFindings (Paginated)
     , module Network.AWS.GuardDuty.ListFindings
 
-    -- ** CreateIPSet
+    -- ** ListOrganizationAdminAccounts (Paginated)
+    , module Network.AWS.GuardDuty.ListOrganizationAdminAccounts
+
+    -- ** CreateIPSet 
     , module Network.AWS.GuardDuty.CreateIPSet
 
-    -- ** DeleteThreatIntelSet
+    -- ** DeleteThreatIntelSet 
     , module Network.AWS.GuardDuty.DeleteThreatIntelSet
 
-    -- ** UpdateThreatIntelSet
+    -- ** UpdateThreatIntelSet 
     , module Network.AWS.GuardDuty.UpdateThreatIntelSet
 
-    -- ** StopMonitoringMembers
+    -- ** StopMonitoringMembers 
     , module Network.AWS.GuardDuty.StopMonitoringMembers
 
     -- ** ListThreatIntelSets (Paginated)
     , module Network.AWS.GuardDuty.ListThreatIntelSets
 
-    -- ** CreateThreatIntelSet
+    -- ** CreateThreatIntelSet 
     , module Network.AWS.GuardDuty.CreateThreatIntelSet
 
-    -- ** DeleteMembers
+    -- ** DeleteMembers 
     , module Network.AWS.GuardDuty.DeleteMembers
 
-    -- ** GetFindingsStatistics
+    -- ** ListTagsForResource 
+    , module Network.AWS.GuardDuty.ListTagsForResource
+
+    -- ** GetFindingsStatistics 
     , module Network.AWS.GuardDuty.GetFindingsStatistics
 
-    -- ** GetIPSet
+    -- ** GetIPSet 
     , module Network.AWS.GuardDuty.GetIPSet
 
     -- ** ListInvitations (Paginated)
     , module Network.AWS.GuardDuty.ListInvitations
 
-    -- ** GetThreatIntelSet
+    -- ** GetThreatIntelSet 
     , module Network.AWS.GuardDuty.GetThreatIntelSet
 
-    -- ** DeleteInvitations
+    -- ** DeleteInvitations 
     , module Network.AWS.GuardDuty.DeleteInvitations
 
-    -- ** GetMasterAccount
+    -- ** GetMasterAccount 
     , module Network.AWS.GuardDuty.GetMasterAccount
 
-    -- ** CreateDetector
+    -- ** CreateDetector 
     , module Network.AWS.GuardDuty.CreateDetector
 
-    -- ** DeclineInvitations
+    -- ** DeclineInvitations 
     , module Network.AWS.GuardDuty.DeclineInvitations
 
-    -- ** UpdateFilter
+    -- ** DescribeOrganizationConfiguration 
+    , module Network.AWS.GuardDuty.DescribeOrganizationConfiguration
+
+    -- ** CreatePublishingDestination 
+    , module Network.AWS.GuardDuty.CreatePublishingDestination
+
+    -- ** UpdateFilter 
     , module Network.AWS.GuardDuty.UpdateFilter
 
-    -- ** DeleteFilter
+    -- ** DeleteFilter 
     , module Network.AWS.GuardDuty.DeleteFilter
 
-    -- ** DisassociateMembers
+    -- ** DisassociateMembers 
     , module Network.AWS.GuardDuty.DisassociateMembers
 
-    -- ** DisassociateFromMasterAccount
+    -- ** DisassociateFromMasterAccount 
     , module Network.AWS.GuardDuty.DisassociateFromMasterAccount
 
-    -- ** AcceptInvitation
+    -- ** AcceptInvitation 
     , module Network.AWS.GuardDuty.AcceptInvitation
 
     -- ** ListFilters (Paginated)
@@ -104,61 +125,91 @@ module Network.AWS.GuardDuty
     -- ** ListMembers (Paginated)
     , module Network.AWS.GuardDuty.ListMembers
 
-    -- ** GetDetector
+    -- ** ListPublishingDestinations 
+    , module Network.AWS.GuardDuty.ListPublishingDestinations
+
+    -- ** DeletePublishingDestination 
+    , module Network.AWS.GuardDuty.DeletePublishingDestination
+
+    -- ** UpdatePublishingDestination 
+    , module Network.AWS.GuardDuty.UpdatePublishingDestination
+
+    -- ** GetDetector 
     , module Network.AWS.GuardDuty.GetDetector
 
-    -- ** CreateSampleFindings
+    -- ** CreateSampleFindings 
     , module Network.AWS.GuardDuty.CreateSampleFindings
 
-    -- ** ArchiveFindings
+    -- ** ArchiveFindings 
     , module Network.AWS.GuardDuty.ArchiveFindings
 
-    -- ** CreateMembers
+    -- ** CreateMembers 
     , module Network.AWS.GuardDuty.CreateMembers
 
-    -- ** UnarchiveFindings
+    -- ** UnarchiveFindings 
     , module Network.AWS.GuardDuty.UnarchiveFindings
 
-    -- ** GetInvitationsCount
+    -- ** GetInvitationsCount 
     , module Network.AWS.GuardDuty.GetInvitationsCount
 
-    -- ** StartMonitoringMembers
+    -- ** StartMonitoringMembers 
     , module Network.AWS.GuardDuty.StartMonitoringMembers
 
-    -- ** InviteMembers
+    -- ** UpdateOrganizationConfiguration 
+    , module Network.AWS.GuardDuty.UpdateOrganizationConfiguration
+
+    -- ** InviteMembers 
     , module Network.AWS.GuardDuty.InviteMembers
 
-    -- ** DeleteIPSet
+    -- ** DeleteIPSet 
     , module Network.AWS.GuardDuty.DeleteIPSet
 
-    -- ** UpdateIPSet
+    -- ** UpdateIPSet 
     , module Network.AWS.GuardDuty.UpdateIPSet
 
     -- ** ListIPSets (Paginated)
     , module Network.AWS.GuardDuty.ListIPSets
 
-    -- ** GetMembers
+    -- ** GetMembers 
     , module Network.AWS.GuardDuty.GetMembers
 
-    -- ** GetFindings
+    -- ** DescribePublishingDestination 
+    , module Network.AWS.GuardDuty.DescribePublishingDestination
+
+    -- ** TagResource 
+    , module Network.AWS.GuardDuty.TagResource
+
+    -- ** GetFindings 
     , module Network.AWS.GuardDuty.GetFindings
 
     -- ** ListDetectors (Paginated)
     , module Network.AWS.GuardDuty.ListDetectors
 
-    -- ** UpdateDetector
+    -- ** UntagResource 
+    , module Network.AWS.GuardDuty.UntagResource
+
+    -- ** UpdateDetector 
     , module Network.AWS.GuardDuty.UpdateDetector
 
-    -- ** DeleteDetector
+    -- ** DeleteDetector 
     , module Network.AWS.GuardDuty.DeleteDetector
 
-    -- ** UpdateFindingsFeedback
+    -- ** UpdateFindingsFeedback 
     , module Network.AWS.GuardDuty.UpdateFindingsFeedback
 
-    -- ** GetFilter
+    -- ** GetFilter 
     , module Network.AWS.GuardDuty.GetFilter
 
+    -- ** DisableOrganizationAdminAccount 
+    , module Network.AWS.GuardDuty.DisableOrganizationAdminAccount
+
     -- * Types
+
+    -- ** AdminStatus
+    , AdminStatus (..)
+
+    -- ** DestinationType
+    , DestinationType (..)
 
     -- ** DetectorStatus
     , DetectorStatus (..)
@@ -168,6 +219,9 @@ module Network.AWS.GuardDuty
 
     -- ** FilterAction
     , FilterAction (..)
+
+    -- ** FindingPublishingFrequency
+    , FindingPublishingFrequency (..)
 
     -- ** FindingStatisticType
     , FindingStatisticType (..)
@@ -180,6 +234,9 @@ module Network.AWS.GuardDuty
 
     -- ** OrderBy
     , OrderBy (..)
+
+    -- ** PublishingStatus
+    , PublishingStatus (..)
 
     -- ** ThreatIntelSetFormat
     , ThreatIntelSetFormat (..)
@@ -207,8 +264,8 @@ module Network.AWS.GuardDuty
     -- ** AccountDetail
     , AccountDetail
     , accountDetail
-    , adEmail
     , adAccountId
+    , adEmail
 
     -- ** Action
     , Action
@@ -219,6 +276,12 @@ module Network.AWS.GuardDuty
     , aDNSRequestAction
     , aAWSAPICallAction
 
+    -- ** AdminAccount
+    , AdminAccount
+    , adminAccount
+    , aaAdminAccountId
+    , aaAdminStatus
+
     -- ** City
     , City
     , city
@@ -228,11 +291,17 @@ module Network.AWS.GuardDuty
     , Condition
     , condition
     , cEQ
+    , cLessThan
     , cLte
+    , cGreaterThanOrEqual
+    , cLessThanOrEqual
     , cGT
+    , cEquals
     , cNeq
+    , cNotEquals
     , cLT
     , cGte
+    , cGreaterThan
 
     -- ** Country
     , Country
@@ -245,9 +314,28 @@ module Network.AWS.GuardDuty
     , dnsRequestAction
     , draDomain
 
+    -- ** Destination
+    , Destination
+    , destination
+    , dDestinationId
+    , dDestinationType
+    , dStatus
+
+    -- ** DestinationProperties
+    , DestinationProperties
+    , destinationProperties
+    , dpKMSKeyARN
+    , dpDestinationARN
+
     -- ** DomainDetails
     , DomainDetails
     , domainDetails
+    , ddDomain
+
+    -- ** Evidence
+    , Evidence
+    , evidence
+    , eThreatIntelligenceDetails
 
     -- ** Finding
     , Finding
@@ -258,15 +346,15 @@ module Network.AWS.GuardDuty
     , fTitle
     , fDescription
     , fAccountId
-    , fSchemaVersion
-    , fCreatedAt
-    , fResource
-    , fSeverity
-    , fUpdatedAt
-    , fType
-    , fRegion
-    , fId
     , fARN
+    , fCreatedAt
+    , fId
+    , fRegion
+    , fResource
+    , fSchemaVersion
+    , fSeverity
+    , fType
+    , fUpdatedAt
 
     -- ** FindingCriteria
     , FindingCriteria
@@ -297,6 +385,7 @@ module Network.AWS.GuardDuty
     , idPlatform
     , idLaunchTime
     , idNetworkInterfaces
+    , idOutpostARN
     , idInstanceType
     , idAvailabilityZone
     , idIAMInstanceProfile
@@ -313,6 +402,11 @@ module Network.AWS.GuardDuty
     , iRelationshipStatus
     , iInvitationId
     , iAccountId
+
+    -- ** LocalIPDetails
+    , LocalIPDetails
+    , localIPDetails
+    , lidIPAddressV4
 
     -- ** LocalPortDetails
     , LocalPortDetails
@@ -333,17 +427,18 @@ module Network.AWS.GuardDuty
     , member
     , mInvitedAt
     , mDetectorId
-    , mEmail
     , mAccountId
     , mMasterId
-    , mUpdatedAt
+    , mEmail
     , mRelationshipStatus
+    , mUpdatedAt
 
     -- ** NetworkConnectionAction
     , NetworkConnectionAction
     , networkConnectionAction
     , ncaRemoteIPDetails
     , ncaProtocol
+    , ncaLocalIPDetails
     , ncaRemotePortDetails
     , ncaBlocked
     , ncaConnectionDirection
@@ -381,6 +476,7 @@ module Network.AWS.GuardDuty
     , PortProbeDetail
     , portProbeDetail
     , ppdRemoteIPDetails
+    , ppdLocalIPDetails
     , ppdLocalPortDetails
 
     -- ** PrivateIPAddressDetails
@@ -432,6 +528,7 @@ module Network.AWS.GuardDuty
     , siDetectorId
     , siServiceName
     , siUserFeedback
+    , siEvidence
     , siEventLastSeen
     , siResourceRole
     , siArchived
@@ -448,6 +545,12 @@ module Network.AWS.GuardDuty
     , tagValue
     , tagKey
 
+    -- ** ThreatIntelligenceDetail
+    , ThreatIntelligenceDetail
+    , threatIntelligenceDetail
+    , tidThreatNames
+    , tidThreatListName
+
     -- ** UnprocessedAccount
     , UnprocessedAccount
     , unprocessedAccount
@@ -461,23 +564,29 @@ import Network.AWS.GuardDuty.CreateDetector
 import Network.AWS.GuardDuty.CreateFilter
 import Network.AWS.GuardDuty.CreateIPSet
 import Network.AWS.GuardDuty.CreateMembers
+import Network.AWS.GuardDuty.CreatePublishingDestination
 import Network.AWS.GuardDuty.CreateSampleFindings
 import Network.AWS.GuardDuty.CreateThreatIntelSet
 import Network.AWS.GuardDuty.DeclineInvitations
 import Network.AWS.GuardDuty.DeleteDetector
 import Network.AWS.GuardDuty.DeleteFilter
-import Network.AWS.GuardDuty.DeleteInvitations
 import Network.AWS.GuardDuty.DeleteIPSet
+import Network.AWS.GuardDuty.DeleteInvitations
 import Network.AWS.GuardDuty.DeleteMembers
+import Network.AWS.GuardDuty.DeletePublishingDestination
 import Network.AWS.GuardDuty.DeleteThreatIntelSet
+import Network.AWS.GuardDuty.DescribeOrganizationConfiguration
+import Network.AWS.GuardDuty.DescribePublishingDestination
+import Network.AWS.GuardDuty.DisableOrganizationAdminAccount
 import Network.AWS.GuardDuty.DisassociateFromMasterAccount
 import Network.AWS.GuardDuty.DisassociateMembers
+import Network.AWS.GuardDuty.EnableOrganizationAdminAccount
 import Network.AWS.GuardDuty.GetDetector
 import Network.AWS.GuardDuty.GetFilter
 import Network.AWS.GuardDuty.GetFindings
 import Network.AWS.GuardDuty.GetFindingsStatistics
-import Network.AWS.GuardDuty.GetInvitationsCount
 import Network.AWS.GuardDuty.GetIPSet
+import Network.AWS.GuardDuty.GetInvitationsCount
 import Network.AWS.GuardDuty.GetMasterAccount
 import Network.AWS.GuardDuty.GetMembers
 import Network.AWS.GuardDuty.GetThreatIntelSet
@@ -485,18 +594,25 @@ import Network.AWS.GuardDuty.InviteMembers
 import Network.AWS.GuardDuty.ListDetectors
 import Network.AWS.GuardDuty.ListFilters
 import Network.AWS.GuardDuty.ListFindings
-import Network.AWS.GuardDuty.ListInvitations
 import Network.AWS.GuardDuty.ListIPSets
+import Network.AWS.GuardDuty.ListInvitations
 import Network.AWS.GuardDuty.ListMembers
+import Network.AWS.GuardDuty.ListOrganizationAdminAccounts
+import Network.AWS.GuardDuty.ListPublishingDestinations
+import Network.AWS.GuardDuty.ListTagsForResource
 import Network.AWS.GuardDuty.ListThreatIntelSets
 import Network.AWS.GuardDuty.StartMonitoringMembers
 import Network.AWS.GuardDuty.StopMonitoringMembers
+import Network.AWS.GuardDuty.TagResource
 import Network.AWS.GuardDuty.Types
 import Network.AWS.GuardDuty.UnarchiveFindings
+import Network.AWS.GuardDuty.UntagResource
 import Network.AWS.GuardDuty.UpdateDetector
 import Network.AWS.GuardDuty.UpdateFilter
 import Network.AWS.GuardDuty.UpdateFindingsFeedback
 import Network.AWS.GuardDuty.UpdateIPSet
+import Network.AWS.GuardDuty.UpdateOrganizationConfiguration
+import Network.AWS.GuardDuty.UpdatePublishingDestination
 import Network.AWS.GuardDuty.UpdateThreatIntelSet
 import Network.AWS.GuardDuty.Waiters
 

@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Used to update the settings for an app.
+-- Updates the settings for an application.
+--
+--
 module Network.AWS.Pinpoint.UpdateApplicationSettings
     (
     -- * Creating a Request
@@ -44,31 +46,33 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateApplicationSettings' smart constructor.
-data UpdateApplicationSettings = UpdateApplicationSettings'
-  { _uasApplicationId                   :: !Text
-  , _uasWriteApplicationSettingsRequest :: !WriteApplicationSettingsRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplicationSettings = UpdateApplicationSettings'{_uasApplicationId
+                                                            :: !Text,
+                                                            _uasWriteApplicationSettingsRequest
+                                                            ::
+                                                            !WriteApplicationSettingsRequest}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateApplicationSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uasApplicationId' - Undocumented member.
+-- * 'uasApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'uasWriteApplicationSettingsRequest' - Undocumented member.
 updateApplicationSettings
     :: Text -- ^ 'uasApplicationId'
     -> WriteApplicationSettingsRequest -- ^ 'uasWriteApplicationSettingsRequest'
     -> UpdateApplicationSettings
-updateApplicationSettings pApplicationId_ pWriteApplicationSettingsRequest_ =
-  UpdateApplicationSettings'
-    { _uasApplicationId = pApplicationId_
-    , _uasWriteApplicationSettingsRequest = pWriteApplicationSettingsRequest_
-    }
+updateApplicationSettings pApplicationId_
+  pWriteApplicationSettingsRequest_
+  = UpdateApplicationSettings'{_uasApplicationId =
+                                 pApplicationId_,
+                               _uasWriteApplicationSettingsRequest =
+                                 pWriteApplicationSettingsRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 uasApplicationId :: Lens' UpdateApplicationSettings Text
 uasApplicationId = lens _uasApplicationId (\ s a -> s{_uasApplicationId = a})
 
@@ -114,11 +118,14 @@ instance ToQuery UpdateApplicationSettings where
         toQuery = const mempty
 
 -- | /See:/ 'updateApplicationSettingsResponse' smart constructor.
-data UpdateApplicationSettingsResponse = UpdateApplicationSettingsResponse'
-  { _uasrsResponseStatus              :: !Int
-  , _uasrsApplicationSettingsResource :: !ApplicationSettingsResource
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplicationSettingsResponse = UpdateApplicationSettingsResponse'{_uasrsResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _uasrsApplicationSettingsResource
+                                                                            ::
+                                                                            !ApplicationSettingsResource}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UpdateApplicationSettingsResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +138,12 @@ updateApplicationSettingsResponse
     :: Int -- ^ 'uasrsResponseStatus'
     -> ApplicationSettingsResource -- ^ 'uasrsApplicationSettingsResource'
     -> UpdateApplicationSettingsResponse
-updateApplicationSettingsResponse pResponseStatus_ pApplicationSettingsResource_ =
-  UpdateApplicationSettingsResponse'
-    { _uasrsResponseStatus = pResponseStatus_
-    , _uasrsApplicationSettingsResource = pApplicationSettingsResource_
-    }
-
+updateApplicationSettingsResponse pResponseStatus_
+  pApplicationSettingsResource_
+  = UpdateApplicationSettingsResponse'{_uasrsResponseStatus
+                                         = pResponseStatus_,
+                                       _uasrsApplicationSettingsResource =
+                                         pApplicationSettingsResource_}
 
 -- | -- | The response status code.
 uasrsResponseStatus :: Lens' UpdateApplicationSettingsResponse Int

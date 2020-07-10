@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Defines the default patch baseline.
+-- Defines the default patch baseline for the relevant operating system.
 --
+--
+-- To reset the AWS predefined patch baseline as the default, specify the full patch baseline ARN as the baseline ID value. For example, for CentOS, specify @arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed@ instead of @pb-0574b43a65ea646ed@ .
 --
 module Network.AWS.SSM.RegisterDefaultPatchBaseline
     (
@@ -45,10 +47,10 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'registerDefaultPatchBaseline' smart constructor.
-newtype RegisterDefaultPatchBaseline = RegisterDefaultPatchBaseline'
-  { _rdpbBaselineId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RegisterDefaultPatchBaseline = RegisterDefaultPatchBaseline'{_rdpbBaselineId
+                                                                     :: Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'RegisterDefaultPatchBaseline' with the minimum fields required to make a request.
 --
@@ -58,9 +60,9 @@ newtype RegisterDefaultPatchBaseline = RegisterDefaultPatchBaseline'
 registerDefaultPatchBaseline
     :: Text -- ^ 'rdpbBaselineId'
     -> RegisterDefaultPatchBaseline
-registerDefaultPatchBaseline pBaselineId_ =
-  RegisterDefaultPatchBaseline' {_rdpbBaselineId = pBaselineId_}
-
+registerDefaultPatchBaseline pBaselineId_
+  = RegisterDefaultPatchBaseline'{_rdpbBaselineId =
+                                    pBaselineId_}
 
 -- | The ID of the patch baseline that should be the default patch baseline.
 rdpbBaselineId :: Lens' RegisterDefaultPatchBaseline Text
@@ -103,11 +105,15 @@ instance ToQuery RegisterDefaultPatchBaseline where
         toQuery = const mempty
 
 -- | /See:/ 'registerDefaultPatchBaselineResponse' smart constructor.
-data RegisterDefaultPatchBaselineResponse = RegisterDefaultPatchBaselineResponse'
-  { _rdpbrsBaselineId     :: !(Maybe Text)
-  , _rdpbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterDefaultPatchBaselineResponse = RegisterDefaultPatchBaselineResponse'{_rdpbrsBaselineId
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _rdpbrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'RegisterDefaultPatchBaselineResponse' with the minimum fields required to make a request.
 --
@@ -119,10 +125,11 @@ data RegisterDefaultPatchBaselineResponse = RegisterDefaultPatchBaselineResponse
 registerDefaultPatchBaselineResponse
     :: Int -- ^ 'rdpbrsResponseStatus'
     -> RegisterDefaultPatchBaselineResponse
-registerDefaultPatchBaselineResponse pResponseStatus_ =
-  RegisterDefaultPatchBaselineResponse'
-    {_rdpbrsBaselineId = Nothing, _rdpbrsResponseStatus = pResponseStatus_}
-
+registerDefaultPatchBaselineResponse pResponseStatus_
+  = RegisterDefaultPatchBaselineResponse'{_rdpbrsBaselineId
+                                            = Nothing,
+                                          _rdpbrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | The ID of the default patch baseline.
 rdpbrsBaselineId :: Lens' RegisterDefaultPatchBaselineResponse (Maybe Text)

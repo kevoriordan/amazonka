@@ -51,13 +51,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createJobQueue' smart constructor.
-data CreateJobQueue = CreateJobQueue'
-  { _cjqState                   :: !(Maybe JQState)
-  , _cjqJobQueueName            :: !Text
-  , _cjqPriority                :: !Int
-  , _cjqComputeEnvironmentOrder :: ![ComputeEnvironmentOrder]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJobQueue = CreateJobQueue'{_cjqState ::
+                                      !(Maybe JQState),
+                                      _cjqJobQueueName :: !Text,
+                                      _cjqPriority :: !Int,
+                                      _cjqComputeEnvironmentOrder ::
+                                      ![ComputeEnvironmentOrder]}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJobQueue' with the minimum fields required to make a request.
 --
@@ -67,21 +67,18 @@ data CreateJobQueue = CreateJobQueue'
 --
 -- * 'cjqJobQueueName' - The name of the job queue.
 --
--- * 'cjqPriority' - The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
+-- * 'cjqPriority' - The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
 --
 -- * 'cjqComputeEnvironmentOrder' - The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the @VALID@ state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
 createJobQueue
     :: Text -- ^ 'cjqJobQueueName'
     -> Int -- ^ 'cjqPriority'
     -> CreateJobQueue
-createJobQueue pJobQueueName_ pPriority_ =
-  CreateJobQueue'
-    { _cjqState = Nothing
-    , _cjqJobQueueName = pJobQueueName_
-    , _cjqPriority = pPriority_
-    , _cjqComputeEnvironmentOrder = mempty
-    }
-
+createJobQueue pJobQueueName_ pPriority_
+  = CreateJobQueue'{_cjqState = Nothing,
+                    _cjqJobQueueName = pJobQueueName_,
+                    _cjqPriority = pPriority_,
+                    _cjqComputeEnvironmentOrder = mempty}
 
 -- | The state of the job queue. If the job queue state is @ENABLED@ , it is able to accept jobs.
 cjqState :: Lens' CreateJobQueue (Maybe JQState)
@@ -91,7 +88,7 @@ cjqState = lens _cjqState (\ s a -> s{_cjqState = a})
 cjqJobQueueName :: Lens' CreateJobQueue Text
 cjqJobQueueName = lens _cjqJobQueueName (\ s a -> s{_cjqJobQueueName = a})
 
--- | The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
+-- | The priority of the job queue. Job queues with a higher priority (or a higher integer value for the @priority@ parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of @10@ is given scheduling preference over a job queue with a priority value of @1@ .
 cjqPriority :: Lens' CreateJobQueue Int
 cjqPriority = lens _cjqPriority (\ s a -> s{_cjqPriority = a})
 
@@ -138,12 +135,14 @@ instance ToQuery CreateJobQueue where
         toQuery = const mempty
 
 -- | /See:/ 'createJobQueueResponse' smart constructor.
-data CreateJobQueueResponse = CreateJobQueueResponse'
-  { _cjqrsResponseStatus :: !Int
-  , _cjqrsJobQueueName   :: !Text
-  , _cjqrsJobQueueARN    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJobQueueResponse = CreateJobQueueResponse'{_cjqrsResponseStatus
+                                                      :: !Int,
+                                                      _cjqrsJobQueueName ::
+                                                      !Text,
+                                                      _cjqrsJobQueueARN ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateJobQueueResponse' with the minimum fields required to make a request.
 --
@@ -159,13 +158,12 @@ createJobQueueResponse
     -> Text -- ^ 'cjqrsJobQueueName'
     -> Text -- ^ 'cjqrsJobQueueARN'
     -> CreateJobQueueResponse
-createJobQueueResponse pResponseStatus_ pJobQueueName_ pJobQueueARN_ =
-  CreateJobQueueResponse'
-    { _cjqrsResponseStatus = pResponseStatus_
-    , _cjqrsJobQueueName = pJobQueueName_
-    , _cjqrsJobQueueARN = pJobQueueARN_
-    }
-
+createJobQueueResponse pResponseStatus_
+  pJobQueueName_ pJobQueueARN_
+  = CreateJobQueueResponse'{_cjqrsResponseStatus =
+                              pResponseStatus_,
+                            _cjqrsJobQueueName = pJobQueueName_,
+                            _cjqrsJobQueueARN = pJobQueueARN_}
 
 -- | -- | The response status code.
 cjqrsResponseStatus :: Lens' CreateJobQueueResponse Int

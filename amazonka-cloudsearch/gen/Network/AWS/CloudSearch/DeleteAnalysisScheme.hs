@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an analysis scheme. For more information, see <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html Configuring Analysis Schemes> in the /Amazon CloudSearch Developer Guide/ .
+-- Deletes an analysis scheme. For more information, see <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html Configuring Analysis Schemes> in the /Amazon CloudSearch Developer Guide/ . 
 --
 --
 module Network.AWS.CloudSearch.DeleteAnalysisScheme
@@ -34,8 +34,8 @@ module Network.AWS.CloudSearch.DeleteAnalysisScheme
     , deleteAnalysisSchemeResponse
     , DeleteAnalysisSchemeResponse
     -- * Response Lenses
-    , dasarsResponseStatus
-    , dasarsAnalysisScheme
+    , dltanlyssschmrsResponseStatus
+    , dltanlyssschmrsAnalysisScheme
     ) where
 
 import Network.AWS.CloudSearch.Types
@@ -45,16 +45,16 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the @'DeleteAnalysisScheme' @ operation. Specifies the name of the domain you want to update and the analysis scheme you want to delete.
+-- | Container for the parameters to the @'DeleteAnalysisScheme' @ operation. Specifies the name of the domain you want to update and the analysis scheme you want to delete. 
 --
 --
 --
 -- /See:/ 'deleteAnalysisScheme' smart constructor.
-data DeleteAnalysisScheme = DeleteAnalysisScheme'
-  { _dasDomainName         :: !Text
-  , _dasAnalysisSchemeName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAnalysisScheme = DeleteAnalysisScheme'{_dasDomainName
+                                                  :: !Text,
+                                                  _dasAnalysisSchemeName ::
+                                                  !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAnalysisScheme' with the minimum fields required to make a request.
 --
@@ -67,12 +67,11 @@ deleteAnalysisScheme
     :: Text -- ^ 'dasDomainName'
     -> Text -- ^ 'dasAnalysisSchemeName'
     -> DeleteAnalysisScheme
-deleteAnalysisScheme pDomainName_ pAnalysisSchemeName_ =
-  DeleteAnalysisScheme'
-    { _dasDomainName = pDomainName_
-    , _dasAnalysisSchemeName = pAnalysisSchemeName_
-    }
-
+deleteAnalysisScheme pDomainName_
+  pAnalysisSchemeName_
+  = DeleteAnalysisScheme'{_dasDomainName =
+                            pDomainName_,
+                          _dasAnalysisSchemeName = pAnalysisSchemeName_}
 
 -- | Undocumented member.
 dasDomainName :: Lens' DeleteAnalysisScheme Text
@@ -115,36 +114,38 @@ instance ToQuery DeleteAnalysisScheme where
 --
 --
 -- /See:/ 'deleteAnalysisSchemeResponse' smart constructor.
-data DeleteAnalysisSchemeResponse = DeleteAnalysisSchemeResponse'
-  { _dasarsResponseStatus :: !Int
-  , _dasarsAnalysisScheme :: !AnalysisSchemeStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAnalysisSchemeResponse = DeleteAnalysisSchemeResponse'{_dltanlyssschmrsResponseStatus
+                                                                  :: !Int,
+                                                                  _dltanlyssschmrsAnalysisScheme
+                                                                  ::
+                                                                  !AnalysisSchemeStatus}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteAnalysisSchemeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dasarsResponseStatus' - -- | The response status code.
+-- * 'dltanlyssschmrsResponseStatus' - -- | The response status code.
 --
--- * 'dasarsAnalysisScheme' - The status of the analysis scheme being deleted.
+-- * 'dltanlyssschmrsAnalysisScheme' - The status of the analysis scheme being deleted.
 deleteAnalysisSchemeResponse
-    :: Int -- ^ 'dasarsResponseStatus'
-    -> AnalysisSchemeStatus -- ^ 'dasarsAnalysisScheme'
+    :: Int -- ^ 'dltanlyssschmrsResponseStatus'
+    -> AnalysisSchemeStatus -- ^ 'dltanlyssschmrsAnalysisScheme'
     -> DeleteAnalysisSchemeResponse
-deleteAnalysisSchemeResponse pResponseStatus_ pAnalysisScheme_ =
-  DeleteAnalysisSchemeResponse'
-    { _dasarsResponseStatus = pResponseStatus_
-    , _dasarsAnalysisScheme = pAnalysisScheme_
-    }
-
+deleteAnalysisSchemeResponse pResponseStatus_
+  pAnalysisScheme_
+  = DeleteAnalysisSchemeResponse'{_dltanlyssschmrsResponseStatus
+                                    = pResponseStatus_,
+                                  _dltanlyssschmrsAnalysisScheme =
+                                    pAnalysisScheme_}
 
 -- | -- | The response status code.
-dasarsResponseStatus :: Lens' DeleteAnalysisSchemeResponse Int
-dasarsResponseStatus = lens _dasarsResponseStatus (\ s a -> s{_dasarsResponseStatus = a})
+dltanlyssschmrsResponseStatus :: Lens' DeleteAnalysisSchemeResponse Int
+dltanlyssschmrsResponseStatus = lens _dltanlyssschmrsResponseStatus (\ s a -> s{_dltanlyssschmrsResponseStatus = a})
 
 -- | The status of the analysis scheme being deleted.
-dasarsAnalysisScheme :: Lens' DeleteAnalysisSchemeResponse AnalysisSchemeStatus
-dasarsAnalysisScheme = lens _dasarsAnalysisScheme (\ s a -> s{_dasarsAnalysisScheme = a})
+dltanlyssschmrsAnalysisScheme :: Lens' DeleteAnalysisSchemeResponse AnalysisSchemeStatus
+dltanlyssschmrsAnalysisScheme = lens _dltanlyssschmrsAnalysisScheme (\ s a -> s{_dltanlyssschmrsAnalysisScheme = a})
 
 instance NFData DeleteAnalysisSchemeResponse where

@@ -43,11 +43,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteFieldLevelEncryptionConfig' smart constructor.
-data DeleteFieldLevelEncryptionConfig = DeleteFieldLevelEncryptionConfig'
-  { _dflecIfMatch :: !(Maybe Text)
-  , _dflecId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFieldLevelEncryptionConfig = DeleteFieldLevelEncryptionConfig'{_dflecIfMatch
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dflecId
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteFieldLevelEncryptionConfig' with the minimum fields required to make a request.
 --
@@ -59,9 +63,10 @@ data DeleteFieldLevelEncryptionConfig = DeleteFieldLevelEncryptionConfig'
 deleteFieldLevelEncryptionConfig
     :: Text -- ^ 'dflecId'
     -> DeleteFieldLevelEncryptionConfig
-deleteFieldLevelEncryptionConfig pId_ =
-  DeleteFieldLevelEncryptionConfig' {_dflecIfMatch = Nothing, _dflecId = pId_}
-
+deleteFieldLevelEncryptionConfig pId_
+  = DeleteFieldLevelEncryptionConfig'{_dflecIfMatch =
+                                        Nothing,
+                                      _dflecId = pId_}
 
 -- | The value of the @ETag@ header that you received when retrieving the configuration identity to delete. For example: @E2QWRUHAPOMQZL@ .
 dflecIfMatch :: Lens' DeleteFieldLevelEncryptionConfig (Maybe Text)
@@ -95,7 +100,7 @@ instance ToPath DeleteFieldLevelEncryptionConfig
          where
         toPath DeleteFieldLevelEncryptionConfig'{..}
           = mconcat
-              ["/2017-10-30/field-level-encryption/",
+              ["/2019-03-26/field-level-encryption/",
                toBS _dflecId]
 
 instance ToQuery DeleteFieldLevelEncryptionConfig
@@ -103,18 +108,17 @@ instance ToQuery DeleteFieldLevelEncryptionConfig
         toQuery = const mempty
 
 -- | /See:/ 'deleteFieldLevelEncryptionConfigResponse' smart constructor.
-data DeleteFieldLevelEncryptionConfigResponse =
-  DeleteFieldLevelEncryptionConfigResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFieldLevelEncryptionConfigResponse = DeleteFieldLevelEncryptionConfigResponse'
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DeleteFieldLevelEncryptionConfigResponse' with the minimum fields required to make a request.
 --
 deleteFieldLevelEncryptionConfigResponse
     :: DeleteFieldLevelEncryptionConfigResponse
-deleteFieldLevelEncryptionConfigResponse =
-  DeleteFieldLevelEncryptionConfigResponse'
-
+deleteFieldLevelEncryptionConfigResponse
+  = DeleteFieldLevelEncryptionConfigResponse'
 
 instance NFData
            DeleteFieldLevelEncryptionConfigResponse

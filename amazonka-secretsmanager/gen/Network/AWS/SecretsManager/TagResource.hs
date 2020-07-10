@@ -39,7 +39,7 @@
 --
 -- /Important:/ If you use tags as part of your security strategy, then adding or removing a tag can change permissions. If successfully completing this operation would result in you losing your permissions for this secret, then the operation is blocked and returns an Access Denied error.
 --
--- __Minimum permissions__
+-- __Minimum permissions__ 
 --
 -- To run this command, you must have the following permissions:
 --
@@ -47,7 +47,7 @@
 --
 --
 --
--- __Related operations__
+-- __Related operations__ 
 --
 --     * To remove one or more tags from the collection attached to a secret, use 'UntagResource' .
 --
@@ -77,11 +77,9 @@ import Network.AWS.SecretsManager.Types
 import Network.AWS.SecretsManager.Types.Product
 
 -- | /See:/ 'tagResource' smart constructor.
-data TagResource = TagResource'
-  { _trSecretId :: !Text
-  , _trTags     :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagResource = TagResource'{_trSecretId :: !Text,
+                                _trTags :: ![Tag]}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagResource' with the minimum fields required to make a request.
 --
@@ -89,19 +87,19 @@ data TagResource = TagResource'
 --
 -- * 'trSecretId' - The identifier for the secret that you want to attach tags to. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
 --
--- * 'trTags' - The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@
+-- * 'trTags' - The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@ 
 tagResource
     :: Text -- ^ 'trSecretId'
     -> TagResource
-tagResource pSecretId_ =
-  TagResource' {_trSecretId = pSecretId_, _trTags = mempty}
-
+tagResource pSecretId_
+  = TagResource'{_trSecretId = pSecretId_,
+                 _trTags = mempty}
 
 -- | The identifier for the secret that you want to attach tags to. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
 trSecretId :: Lens' TagResource Text
 trSecretId = lens _trSecretId (\ s a -> s{_trSecretId = a})
 
--- | The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@
+-- | The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@ 
 trTags :: Lens' TagResource [Tag]
 trTags = lens _trTags (\ s a -> s{_trTags = a}) . _Coerce
 
@@ -137,16 +135,13 @@ instance ToQuery TagResource where
         toQuery = const mempty
 
 -- | /See:/ 'tagResourceResponse' smart constructor.
-data TagResourceResponse =
-  TagResourceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagResourceResponse = TagResourceResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagResourceResponse' with the minimum fields required to make a request.
 --
 tagResourceResponse
     :: TagResourceResponse
 tagResourceResponse = TagResourceResponse'
-
 
 instance NFData TagResourceResponse where

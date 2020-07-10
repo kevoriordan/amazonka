@@ -47,11 +47,13 @@ import Network.AWS.Response
 -- | Connectivity information.
 --
 -- /See:/ 'updateConnectivityInfo' smart constructor.
-data UpdateConnectivityInfo = UpdateConnectivityInfo'
-  { _uciConnectivityInfo :: !(Maybe [ConnectivityInfo])
-  , _uciThingName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConnectivityInfo = UpdateConnectivityInfo'{_uciConnectivityInfo
+                                                      ::
+                                                      !(Maybe
+                                                          [ConnectivityInfo]),
+                                                      _uciThingName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateConnectivityInfo' with the minimum fields required to make a request.
 --
@@ -63,10 +65,10 @@ data UpdateConnectivityInfo = UpdateConnectivityInfo'
 updateConnectivityInfo
     :: Text -- ^ 'uciThingName'
     -> UpdateConnectivityInfo
-updateConnectivityInfo pThingName_ =
-  UpdateConnectivityInfo'
-    {_uciConnectivityInfo = Nothing, _uciThingName = pThingName_}
-
+updateConnectivityInfo pThingName_
+  = UpdateConnectivityInfo'{_uciConnectivityInfo =
+                              Nothing,
+                            _uciThingName = pThingName_}
 
 -- | A list of connectivity info.
 uciConnectivityInfo :: Lens' UpdateConnectivityInfo [ConnectivityInfo]
@@ -114,12 +116,18 @@ instance ToQuery UpdateConnectivityInfo where
         toQuery = const mempty
 
 -- | /See:/ 'updateConnectivityInfoResponse' smart constructor.
-data UpdateConnectivityInfoResponse = UpdateConnectivityInfoResponse'
-  { _ucirsVersion        :: !(Maybe Text)
-  , _ucirsMessage        :: !(Maybe Text)
-  , _ucirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConnectivityInfoResponse = UpdateConnectivityInfoResponse'{_ucirsVersion
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _ucirsMessage
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _ucirsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpdateConnectivityInfoResponse' with the minimum fields required to make a request.
 --
@@ -133,13 +141,11 @@ data UpdateConnectivityInfoResponse = UpdateConnectivityInfoResponse'
 updateConnectivityInfoResponse
     :: Int -- ^ 'ucirsResponseStatus'
     -> UpdateConnectivityInfoResponse
-updateConnectivityInfoResponse pResponseStatus_ =
-  UpdateConnectivityInfoResponse'
-    { _ucirsVersion = Nothing
-    , _ucirsMessage = Nothing
-    , _ucirsResponseStatus = pResponseStatus_
-    }
-
+updateConnectivityInfoResponse pResponseStatus_
+  = UpdateConnectivityInfoResponse'{_ucirsVersion =
+                                      Nothing,
+                                    _ucirsMessage = Nothing,
+                                    _ucirsResponseStatus = pResponseStatus_}
 
 -- | The new version of the connectivity info.
 ucirsVersion :: Lens' UpdateConnectivityInfoResponse (Maybe Text)

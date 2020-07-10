@@ -49,11 +49,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'removeTags' smart constructor.
-data RemoveTags = RemoveTags'
-  { _rtPipelineId :: !Text
-  , _rtTagKeys    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveTags = RemoveTags'{_rtPipelineId :: !Text,
+                              _rtTagKeys :: ![Text]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RemoveTags' with the minimum fields required to make a request.
 --
@@ -65,9 +63,9 @@ data RemoveTags = RemoveTags'
 removeTags
     :: Text -- ^ 'rtPipelineId'
     -> RemoveTags
-removeTags pPipelineId_ =
-  RemoveTags' {_rtPipelineId = pPipelineId_, _rtTagKeys = mempty}
-
+removeTags pPipelineId_
+  = RemoveTags'{_rtPipelineId = pPipelineId_,
+                _rtTagKeys = mempty}
 
 -- | The ID of the pipeline.
 rtPipelineId :: Lens' RemoveTags Text
@@ -116,10 +114,10 @@ instance ToQuery RemoveTags where
 --
 --
 -- /See:/ 'removeTagsResponse' smart constructor.
-newtype RemoveTagsResponse = RemoveTagsResponse'
-  { _rtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RemoveTagsResponse = RemoveTagsResponse'{_rtrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RemoveTagsResponse' with the minimum fields required to make a request.
 --
@@ -129,9 +127,9 @@ newtype RemoveTagsResponse = RemoveTagsResponse'
 removeTagsResponse
     :: Int -- ^ 'rtrsResponseStatus'
     -> RemoveTagsResponse
-removeTagsResponse pResponseStatus_ =
-  RemoveTagsResponse' {_rtrsResponseStatus = pResponseStatus_}
-
+removeTagsResponse pResponseStatus_
+  = RemoveTagsResponse'{_rtrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 rtrsResponseStatus :: Lens' RemoveTagsResponse Int

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the associations for the specified Systems Manager document or instance.
+-- Returns all State Manager associations in the current AWS account and Region. You can limit the results to a specific State Manager association document or instance by specifying a filter.
 --
 --
 --
@@ -51,12 +51,11 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listAssociations' smart constructor.
-data ListAssociations = ListAssociations'
-  { _laAssociationFilterList :: !(Maybe (List1 AssociationFilter))
-  , _laNextToken             :: !(Maybe Text)
-  , _laMaxResults            :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssociations = ListAssociations'{_laAssociationFilterList
+                                          :: !(Maybe (List1 AssociationFilter)),
+                                          _laNextToken :: !(Maybe Text),
+                                          _laMaxResults :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAssociations' with the minimum fields required to make a request.
 --
@@ -69,13 +68,10 @@ data ListAssociations = ListAssociations'
 -- * 'laMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 listAssociations
     :: ListAssociations
-listAssociations =
-  ListAssociations'
-    { _laAssociationFilterList = Nothing
-    , _laNextToken = Nothing
-    , _laMaxResults = Nothing
-    }
-
+listAssociations
+  = ListAssociations'{_laAssociationFilterList =
+                        Nothing,
+                      _laNextToken = Nothing, _laMaxResults = Nothing}
 
 -- | One or more filters. Use a filter to return a more specific list of results.
 laAssociationFilterList :: Lens' ListAssociations (Maybe (NonEmpty AssociationFilter))
@@ -136,12 +132,15 @@ instance ToQuery ListAssociations where
         toQuery = const mempty
 
 -- | /See:/ 'listAssociationsResponse' smart constructor.
-data ListAssociationsResponse = ListAssociationsResponse'
-  { _larsNextToken      :: !(Maybe Text)
-  , _larsAssociations   :: !(Maybe [Association])
-  , _larsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssociationsResponse = ListAssociationsResponse'{_larsNextToken
+                                                          :: !(Maybe Text),
+                                                          _larsAssociations ::
+                                                          !(Maybe
+                                                              [Association]),
+                                                          _larsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListAssociationsResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +154,10 @@ data ListAssociationsResponse = ListAssociationsResponse'
 listAssociationsResponse
     :: Int -- ^ 'larsResponseStatus'
     -> ListAssociationsResponse
-listAssociationsResponse pResponseStatus_ =
-  ListAssociationsResponse'
-    { _larsNextToken = Nothing
-    , _larsAssociations = Nothing
-    , _larsResponseStatus = pResponseStatus_
-    }
-
+listAssociationsResponse pResponseStatus_
+  = ListAssociationsResponse'{_larsNextToken = Nothing,
+                              _larsAssociations = Nothing,
+                              _larsResponseStatus = pResponseStatus_}
 
 -- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 larsNextToken :: Lens' ListAssociationsResponse (Maybe Text)

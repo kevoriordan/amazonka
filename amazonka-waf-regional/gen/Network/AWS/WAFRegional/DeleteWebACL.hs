@@ -56,11 +56,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'deleteWebACL' smart constructor.
-data DeleteWebACL = DeleteWebACL'
-  { _dwaWebACLId    :: !Text
-  , _dwaChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteWebACL = DeleteWebACL'{_dwaWebACLId ::
+                                  !Text,
+                                  _dwaChangeToken :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteWebACL' with the minimum fields required to make a request.
 --
@@ -73,9 +72,9 @@ deleteWebACL
     :: Text -- ^ 'dwaWebACLId'
     -> Text -- ^ 'dwaChangeToken'
     -> DeleteWebACL
-deleteWebACL pWebACLId_ pChangeToken_ =
-  DeleteWebACL' {_dwaWebACLId = pWebACLId_, _dwaChangeToken = pChangeToken_}
-
+deleteWebACL pWebACLId_ pChangeToken_
+  = DeleteWebACL'{_dwaWebACLId = pWebACLId_,
+                  _dwaChangeToken = pChangeToken_}
 
 -- | The @WebACLId@ of the 'WebACL' that you want to delete. @WebACLId@ is returned by 'CreateWebACL' and by 'ListWebACLs' .
 dwaWebACLId :: Lens' DeleteWebACL Text
@@ -122,11 +121,10 @@ instance ToQuery DeleteWebACL where
         toQuery = const mempty
 
 -- | /See:/ 'deleteWebACLResponse' smart constructor.
-data DeleteWebACLResponse = DeleteWebACLResponse'
-  { _dwarsChangeToken    :: !(Maybe Text)
-  , _dwarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteWebACLResponse = DeleteWebACLResponse'{_dwarsChangeToken
+                                                  :: !(Maybe Text),
+                                                  _dwarsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteWebACLResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +136,9 @@ data DeleteWebACLResponse = DeleteWebACLResponse'
 deleteWebACLResponse
     :: Int -- ^ 'dwarsResponseStatus'
     -> DeleteWebACLResponse
-deleteWebACLResponse pResponseStatus_ =
-  DeleteWebACLResponse'
-    {_dwarsChangeToken = Nothing, _dwarsResponseStatus = pResponseStatus_}
-
+deleteWebACLResponse pResponseStatus_
+  = DeleteWebACLResponse'{_dwarsChangeToken = Nothing,
+                          _dwarsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteWebACL@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 dwarsChangeToken :: Lens' DeleteWebACLResponse (Maybe Text)

@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the attributes for Amazon ECS resources within a specified target type and cluster. When you specify a target type and cluster, @ListAttributes@ returns a list of attribute objects, one for each attribute on each resource. You can filter the list of results to a single attribute name to only return results that have that name. You can also filter the results by attribute name and value, for example, to see which container instances in a cluster are running a Linux AMI (@ecs.os-type=linux@ ).
+-- Lists the attributes for Amazon ECS resources within a specified target type and cluster. When you specify a target type and cluster, @ListAttributes@ returns a list of attribute objects, one for each attribute on each resource. You can filter the list of results to a single attribute name to only return results that have that name. You can also filter the results by attribute name and value, for example, to see which container instances in a cluster are running a Linux AMI (@ecs.os-type=linux@ ). 
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.ECS.ListAttributes
     (
     -- * Creating a Request
@@ -46,20 +48,20 @@ module Network.AWS.ECS.ListAttributes
 import Network.AWS.ECS.Types
 import Network.AWS.ECS.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAttributes' smart constructor.
-data ListAttributes = ListAttributes'
-  { _laAttributeValue :: !(Maybe Text)
-  , _laCluster        :: !(Maybe Text)
-  , _laNextToken      :: !(Maybe Text)
-  , _laAttributeName  :: !(Maybe Text)
-  , _laMaxResults     :: !(Maybe Int)
-  , _laTargetType     :: !TargetType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAttributes = ListAttributes'{_laAttributeValue
+                                      :: !(Maybe Text),
+                                      _laCluster :: !(Maybe Text),
+                                      _laNextToken :: !(Maybe Text),
+                                      _laAttributeName :: !(Maybe Text),
+                                      _laMaxResults :: !(Maybe Int),
+                                      _laTargetType :: !TargetType}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAttributes' with the minimum fields required to make a request.
 --
@@ -69,9 +71,9 @@ data ListAttributes = ListAttributes'
 --
 -- * 'laCluster' - The short name or full Amazon Resource Name (ARN) of the cluster to list attributes. If you do not specify a cluster, the default cluster is assumed.
 --
--- * 'laNextToken' - The @nextToken@ value returned from a previous paginated @ListAttributes@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- * 'laNextToken' - The @nextToken@ value returned from a @ListAttributes@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 --
--- * 'laAttributeName' - The name of the attribute with which to filter the results.
+-- * 'laAttributeName' - The name of the attribute with which to filter the results. 
 --
 -- * 'laMaxResults' - The maximum number of cluster results returned by @ListAttributes@ in paginated output. When this parameter is used, @ListAttributes@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListAttributes@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListAttributes@ returns up to 100 results and a @nextToken@ value if applicable.
 --
@@ -79,16 +81,11 @@ data ListAttributes = ListAttributes'
 listAttributes
     :: TargetType -- ^ 'laTargetType'
     -> ListAttributes
-listAttributes pTargetType_ =
-  ListAttributes'
-    { _laAttributeValue = Nothing
-    , _laCluster = Nothing
-    , _laNextToken = Nothing
-    , _laAttributeName = Nothing
-    , _laMaxResults = Nothing
-    , _laTargetType = pTargetType_
-    }
-
+listAttributes pTargetType_
+  = ListAttributes'{_laAttributeValue = Nothing,
+                    _laCluster = Nothing, _laNextToken = Nothing,
+                    _laAttributeName = Nothing, _laMaxResults = Nothing,
+                    _laTargetType = pTargetType_}
 
 -- | The value of the attribute with which to filter results. You must also specify an attribute name to use this parameter.
 laAttributeValue :: Lens' ListAttributes (Maybe Text)
@@ -98,11 +95,11 @@ laAttributeValue = lens _laAttributeValue (\ s a -> s{_laAttributeValue = a})
 laCluster :: Lens' ListAttributes (Maybe Text)
 laCluster = lens _laCluster (\ s a -> s{_laCluster = a})
 
--- | The @nextToken@ value returned from a previous paginated @ListAttributes@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- | The @nextToken@ value returned from a @ListAttributes@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 laNextToken :: Lens' ListAttributes (Maybe Text)
 laNextToken = lens _laNextToken (\ s a -> s{_laNextToken = a})
 
--- | The name of the attribute with which to filter the results.
+-- | The name of the attribute with which to filter the results. 
 laAttributeName :: Lens' ListAttributes (Maybe Text)
 laAttributeName = lens _laAttributeName (\ s a -> s{_laAttributeName = a})
 
@@ -113,6 +110,13 @@ laMaxResults = lens _laMaxResults (\ s a -> s{_laMaxResults = a})
 -- | The type of the target with which to list attributes.
 laTargetType :: Lens' ListAttributes TargetType
 laTargetType = lens _laTargetType (\ s a -> s{_laTargetType = a})
+
+instance AWSPager ListAttributes where
+        page rq rs
+          | stop (rs ^. larsNextToken) = Nothing
+          | stop (rs ^. larsAttributes) = Nothing
+          | otherwise =
+            Just $ rq & laNextToken .~ rs ^. larsNextToken
 
 instance AWSRequest ListAttributes where
         type Rs ListAttributes = ListAttributesResponse
@@ -157,12 +161,14 @@ instance ToQuery ListAttributes where
         toQuery = const mempty
 
 -- | /See:/ 'listAttributesResponse' smart constructor.
-data ListAttributesResponse = ListAttributesResponse'
-  { _larsNextToken      :: !(Maybe Text)
-  , _larsAttributes     :: !(Maybe [Attribute])
-  , _larsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAttributesResponse = ListAttributesResponse'{_larsNextToken
+                                                      :: !(Maybe Text),
+                                                      _larsAttributes ::
+                                                      !(Maybe [Attribute]),
+                                                      _larsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListAttributesResponse' with the minimum fields required to make a request.
 --
@@ -176,13 +182,10 @@ data ListAttributesResponse = ListAttributesResponse'
 listAttributesResponse
     :: Int -- ^ 'larsResponseStatus'
     -> ListAttributesResponse
-listAttributesResponse pResponseStatus_ =
-  ListAttributesResponse'
-    { _larsNextToken = Nothing
-    , _larsAttributes = Nothing
-    , _larsResponseStatus = pResponseStatus_
-    }
-
+listAttributesResponse pResponseStatus_
+  = ListAttributesResponse'{_larsNextToken = Nothing,
+                            _larsAttributes = Nothing,
+                            _larsResponseStatus = pResponseStatus_}
 
 -- | The @nextToken@ value to include in a future @ListAttributes@ request. When the results of a @ListAttributes@ request exceed @maxResults@ , this value can be used to retrieve the next page of results. This value is @null@ when there are no more results to return.
 larsNextToken :: Lens' ListAttributesResponse (Maybe Text)

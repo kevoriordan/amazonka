@@ -18,10 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the name and additional information about a celebrity based on his or her Rekognition ID. The additional information is returned as an array of URLs. If there is no additional information about the celebrity, this list is empty. For more information, see 'get-celebrity-info-procedure' .
+-- Gets the name and additional information about a celebrity based on his or her Amazon Rekognition ID. The additional information is returned as an array of URLs. If there is no additional information about the celebrity, this list is empty.
 --
 --
--- This operation requires permissions to perform the @rekognition:GetCelebrityInfo@ action.
+-- For more information, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.
+--
+-- This operation requires permissions to perform the @rekognition:GetCelebrityInfo@ action. 
 --
 module Network.AWS.Rekognition.GetCelebrityInfo
     (
@@ -48,23 +50,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getCelebrityInfo' smart constructor.
-newtype GetCelebrityInfo = GetCelebrityInfo'
-  { _gciId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetCelebrityInfo = GetCelebrityInfo'{_gciId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCelebrityInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gciId' - The ID for the celebrity. You get the celebrity ID from a call to the operation, which recognizes celebrities in an image.
+-- * 'gciId' - The ID for the celebrity. You get the celebrity ID from a call to the 'RecognizeCelebrities' operation, which recognizes celebrities in an image. 
 getCelebrityInfo
     :: Text -- ^ 'gciId'
     -> GetCelebrityInfo
-getCelebrityInfo pId_ = GetCelebrityInfo' {_gciId = pId_}
+getCelebrityInfo pId_
+  = GetCelebrityInfo'{_gciId = pId_}
 
-
--- | The ID for the celebrity. You get the celebrity ID from a call to the operation, which recognizes celebrities in an image.
+-- | The ID for the celebrity. You get the celebrity ID from a call to the 'RecognizeCelebrities' operation, which recognizes celebrities in an image. 
 gciId :: Lens' GetCelebrityInfo Text
 gciId = lens _gciId (\ s a -> s{_gciId = a})
 
@@ -103,18 +104,20 @@ instance ToQuery GetCelebrityInfo where
         toQuery = const mempty
 
 -- | /See:/ 'getCelebrityInfoResponse' smart constructor.
-data GetCelebrityInfoResponse = GetCelebrityInfoResponse'
-  { _gcirsURLs           :: !(Maybe [Text])
-  , _gcirsName           :: !(Maybe Text)
-  , _gcirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCelebrityInfoResponse = GetCelebrityInfoResponse'{_gcirsURLs
+                                                          :: !(Maybe [Text]),
+                                                          _gcirsName ::
+                                                          !(Maybe Text),
+                                                          _gcirsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetCelebrityInfoResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcirsURLs' - An array of URLs pointing to additional celebrity information.
+-- * 'gcirsURLs' - An array of URLs pointing to additional celebrity information. 
 --
 -- * 'gcirsName' - The name of the celebrity.
 --
@@ -122,15 +125,12 @@ data GetCelebrityInfoResponse = GetCelebrityInfoResponse'
 getCelebrityInfoResponse
     :: Int -- ^ 'gcirsResponseStatus'
     -> GetCelebrityInfoResponse
-getCelebrityInfoResponse pResponseStatus_ =
-  GetCelebrityInfoResponse'
-    { _gcirsURLs = Nothing
-    , _gcirsName = Nothing
-    , _gcirsResponseStatus = pResponseStatus_
-    }
+getCelebrityInfoResponse pResponseStatus_
+  = GetCelebrityInfoResponse'{_gcirsURLs = Nothing,
+                              _gcirsName = Nothing,
+                              _gcirsResponseStatus = pResponseStatus_}
 
-
--- | An array of URLs pointing to additional celebrity information.
+-- | An array of URLs pointing to additional celebrity information. 
 gcirsURLs :: Lens' GetCelebrityInfoResponse [Text]
 gcirsURLs = lens _gcirsURLs (\ s a -> s{_gcirsURLs = a}) . _Default . _Coerce
 

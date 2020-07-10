@@ -51,10 +51,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getImport' smart constructor.
-newtype GetImport = GetImport'
-  { _giImportId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetImport = GetImport'{_giImportId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetImport' with the minimum fields required to make a request.
 --
@@ -64,8 +62,8 @@ newtype GetImport = GetImport'
 getImport
     :: Text -- ^ 'giImportId'
     -> GetImport
-getImport pImportId_ = GetImport' {_giImportId = pImportId_}
-
+getImport pImportId_
+  = GetImport'{_giImportId = pImportId_}
 
 -- | The identifier of the import job information to return.
 giImportId :: Lens' GetImport Text
@@ -106,17 +104,19 @@ instance ToQuery GetImport where
         toQuery = const mempty
 
 -- | /See:/ 'getImportResponse' smart constructor.
-data GetImportResponse = GetImportResponse'
-  { _girsFailureReason  :: !(Maybe [Text])
-  , _girsResourceType   :: !(Maybe ResourceType)
-  , _girsImportId       :: !(Maybe Text)
-  , _girsCreatedDate    :: !(Maybe POSIX)
-  , _girsName           :: !(Maybe Text)
-  , _girsMergeStrategy  :: !(Maybe MergeStrategy)
-  , _girsImportStatus   :: !(Maybe ImportStatus)
-  , _girsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetImportResponse = GetImportResponse'{_girsFailureReason
+                                            :: !(Maybe [Text]),
+                                            _girsResourceType ::
+                                            !(Maybe ResourceType),
+                                            _girsImportId :: !(Maybe Text),
+                                            _girsCreatedDate :: !(Maybe POSIX),
+                                            _girsName :: !(Maybe Text),
+                                            _girsMergeStrategy ::
+                                            !(Maybe MergeStrategy),
+                                            _girsImportStatus ::
+                                            !(Maybe ImportStatus),
+                                            _girsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetImportResponse' with the minimum fields required to make a request.
 --
@@ -140,18 +140,13 @@ data GetImportResponse = GetImportResponse'
 getImportResponse
     :: Int -- ^ 'girsResponseStatus'
     -> GetImportResponse
-getImportResponse pResponseStatus_ =
-  GetImportResponse'
-    { _girsFailureReason = Nothing
-    , _girsResourceType = Nothing
-    , _girsImportId = Nothing
-    , _girsCreatedDate = Nothing
-    , _girsName = Nothing
-    , _girsMergeStrategy = Nothing
-    , _girsImportStatus = Nothing
-    , _girsResponseStatus = pResponseStatus_
-    }
-
+getImportResponse pResponseStatus_
+  = GetImportResponse'{_girsFailureReason = Nothing,
+                       _girsResourceType = Nothing, _girsImportId = Nothing,
+                       _girsCreatedDate = Nothing, _girsName = Nothing,
+                       _girsMergeStrategy = Nothing,
+                       _girsImportStatus = Nothing,
+                       _girsResponseStatus = pResponseStatus_}
 
 -- | A string that describes why an import job failed to complete.
 girsFailureReason :: Lens' GetImportResponse [Text]

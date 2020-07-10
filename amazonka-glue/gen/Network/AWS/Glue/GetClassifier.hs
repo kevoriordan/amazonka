@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getClassifier' smart constructor.
-newtype GetClassifier = GetClassifier'
-  { _getName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetClassifier = GetClassifier'{_getName ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetClassifier' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetClassifier = GetClassifier'
 getClassifier
     :: Text -- ^ 'getName'
     -> GetClassifier
-getClassifier pName_ = GetClassifier' {_getName = pName_}
-
+getClassifier pName_
+  = GetClassifier'{_getName = pName_}
 
 -- | Name of the classifier to retrieve.
 getName :: Lens' GetClassifier Text
@@ -98,11 +97,11 @@ instance ToQuery GetClassifier where
         toQuery = const mempty
 
 -- | /See:/ 'getClassifierResponse' smart constructor.
-data GetClassifierResponse = GetClassifierResponse'
-  { _gcrsClassifier     :: !(Maybe Classifier)
-  , _gcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetClassifierResponse = GetClassifierResponse'{_gcrsClassifier
+                                                    :: !(Maybe Classifier),
+                                                    _gcrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetClassifierResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +113,9 @@ data GetClassifierResponse = GetClassifierResponse'
 getClassifierResponse
     :: Int -- ^ 'gcrsResponseStatus'
     -> GetClassifierResponse
-getClassifierResponse pResponseStatus_ =
-  GetClassifierResponse'
-    {_gcrsClassifier = Nothing, _gcrsResponseStatus = pResponseStatus_}
-
+getClassifierResponse pResponseStatus_
+  = GetClassifierResponse'{_gcrsClassifier = Nothing,
+                           _gcrsResponseStatus = pResponseStatus_}
 
 -- | The requested classifier.
 gcrsClassifier :: Lens' GetClassifierResponse (Maybe Classifier)

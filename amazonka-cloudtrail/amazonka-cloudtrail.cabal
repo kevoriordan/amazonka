@@ -50,11 +50,15 @@ library
         , Network.AWS.CloudTrail.DeleteTrail
         , Network.AWS.CloudTrail.DescribeTrails
         , Network.AWS.CloudTrail.GetEventSelectors
+        , Network.AWS.CloudTrail.GetInsightSelectors
+        , Network.AWS.CloudTrail.GetTrail
         , Network.AWS.CloudTrail.GetTrailStatus
         , Network.AWS.CloudTrail.ListPublicKeys
         , Network.AWS.CloudTrail.ListTags
+        , Network.AWS.CloudTrail.ListTrails
         , Network.AWS.CloudTrail.LookupEvents
         , Network.AWS.CloudTrail.PutEventSelectors
+        , Network.AWS.CloudTrail.PutInsightSelectors
         , Network.AWS.CloudTrail.RemoveTags
         , Network.AWS.CloudTrail.StartLogging
         , Network.AWS.CloudTrail.StopLogging
@@ -63,12 +67,27 @@ library
         , Network.AWS.CloudTrail.Waiters
 
     other-modules:
-          Network.AWS.CloudTrail.Types.Product
-        , Network.AWS.CloudTrail.Types.Sum
+          Network.AWS.CloudTrail.Types.DataResource
+        , Network.AWS.CloudTrail.Types.Event
+        , Network.AWS.CloudTrail.Types.EventCategory
+        , Network.AWS.CloudTrail.Types.EventSelector
+        , Network.AWS.CloudTrail.Types.InsightSelector
+        , Network.AWS.CloudTrail.Types.InsightType
+        , Network.AWS.CloudTrail.Types.LookupAttribute
+        , Network.AWS.CloudTrail.Types.LookupAttributeKey
+        , Network.AWS.CloudTrail.Types.Product
+        , Network.AWS.CloudTrail.Types.PublicKey
+        , Network.AWS.CloudTrail.Types.ReadWriteType
+        , Network.AWS.CloudTrail.Types.Resource
+        , Network.AWS.CloudTrail.Types.ResourceTag
+        , Network.AWS.CloudTrail.Types.Tag
+        , Network.AWS.CloudTrail.Types.Trail
+        , Network.AWS.CloudTrail.Types.TrailInfo
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cloudtrail-test
     type:              exitcode-stdio-1.0
@@ -92,6 +111,7 @@ test-suite amazonka-cloudtrail-test
         , amazonka-cloudtrail
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

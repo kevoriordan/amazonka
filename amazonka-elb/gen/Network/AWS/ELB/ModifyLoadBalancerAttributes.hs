@@ -23,15 +23,15 @@
 --
 -- You can modify the load balancer attributes, such as @AccessLogs@ , @ConnectionDraining@ , and @CrossZoneLoadBalancing@ by either enabling or disabling them. Or, you can modify the load balancer attribute @ConnectionSettings@ by specifying an idle connection timeout value for your load balancer.
 --
--- For more information, see the following in the /Classic Load Balancer Guide/ :
+-- For more information, see the following in the /Classic Load Balancers Guide/ :
 --
---     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html Cross-Zone Load Balancing>
+--     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html Cross-Zone Load Balancing> 
 --
---     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html Connection Draining>
+--     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html Connection Draining> 
 --
---     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html Access Logs>
+--     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html Access Logs> 
 --
---     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html Idle Connection Timeout>
+--     * <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html Idle Connection Timeout> 
 --
 --
 --
@@ -65,11 +65,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyLoadBalancerAttributes' smart constructor.
-data ModifyLoadBalancerAttributes = ModifyLoadBalancerAttributes'
-  { _mlbaLoadBalancerName       :: !Text
-  , _mlbaLoadBalancerAttributes :: !LoadBalancerAttributes
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyLoadBalancerAttributes = ModifyLoadBalancerAttributes'{_mlbaLoadBalancerName
+                                                                  :: !Text,
+                                                                  _mlbaLoadBalancerAttributes
+                                                                  ::
+                                                                  !LoadBalancerAttributes}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ModifyLoadBalancerAttributes' with the minimum fields required to make a request.
 --
@@ -82,12 +84,12 @@ modifyLoadBalancerAttributes
     :: Text -- ^ 'mlbaLoadBalancerName'
     -> LoadBalancerAttributes -- ^ 'mlbaLoadBalancerAttributes'
     -> ModifyLoadBalancerAttributes
-modifyLoadBalancerAttributes pLoadBalancerName_ pLoadBalancerAttributes_ =
-  ModifyLoadBalancerAttributes'
-    { _mlbaLoadBalancerName = pLoadBalancerName_
-    , _mlbaLoadBalancerAttributes = pLoadBalancerAttributes_
-    }
-
+modifyLoadBalancerAttributes pLoadBalancerName_
+  pLoadBalancerAttributes_
+  = ModifyLoadBalancerAttributes'{_mlbaLoadBalancerName
+                                    = pLoadBalancerName_,
+                                  _mlbaLoadBalancerAttributes =
+                                    pLoadBalancerAttributes_}
 
 -- | The name of the load balancer.
 mlbaLoadBalancerName :: Lens' ModifyLoadBalancerAttributes Text
@@ -136,12 +138,19 @@ instance ToQuery ModifyLoadBalancerAttributes where
 --
 --
 -- /See:/ 'modifyLoadBalancerAttributesResponse' smart constructor.
-data ModifyLoadBalancerAttributesResponse = ModifyLoadBalancerAttributesResponse'
-  { _mlbarsLoadBalancerName       :: !(Maybe Text)
-  , _mlbarsLoadBalancerAttributes :: !(Maybe LoadBalancerAttributes)
-  , _mlbarsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyLoadBalancerAttributesResponse = ModifyLoadBalancerAttributesResponse'{_mlbarsLoadBalancerName
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _mlbarsLoadBalancerAttributes
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      LoadBalancerAttributes),
+                                                                                  _mlbarsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ModifyLoadBalancerAttributesResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +164,13 @@ data ModifyLoadBalancerAttributesResponse = ModifyLoadBalancerAttributesResponse
 modifyLoadBalancerAttributesResponse
     :: Int -- ^ 'mlbarsResponseStatus'
     -> ModifyLoadBalancerAttributesResponse
-modifyLoadBalancerAttributesResponse pResponseStatus_ =
-  ModifyLoadBalancerAttributesResponse'
-    { _mlbarsLoadBalancerName = Nothing
-    , _mlbarsLoadBalancerAttributes = Nothing
-    , _mlbarsResponseStatus = pResponseStatus_
-    }
-
+modifyLoadBalancerAttributesResponse pResponseStatus_
+  = ModifyLoadBalancerAttributesResponse'{_mlbarsLoadBalancerName
+                                            = Nothing,
+                                          _mlbarsLoadBalancerAttributes =
+                                            Nothing,
+                                          _mlbarsResponseStatus =
+                                            pResponseStatus_}
 
 -- | The name of the load balancer.
 mlbarsLoadBalancerName :: Lens' ModifyLoadBalancerAttributesResponse (Maybe Text)

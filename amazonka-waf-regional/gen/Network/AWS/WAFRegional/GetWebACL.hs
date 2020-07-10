@@ -45,10 +45,8 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'getWebACL' smart constructor.
-newtype GetWebACL = GetWebACL'
-  { _gwaWebACLId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetWebACL = GetWebACL'{_gwaWebACLId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetWebACL' with the minimum fields required to make a request.
 --
@@ -58,8 +56,8 @@ newtype GetWebACL = GetWebACL'
 getWebACL
     :: Text -- ^ 'gwaWebACLId'
     -> GetWebACL
-getWebACL pWebACLId_ = GetWebACL' {_gwaWebACLId = pWebACLId_}
-
+getWebACL pWebACLId_
+  = GetWebACL'{_gwaWebACLId = pWebACLId_}
 
 -- | The @WebACLId@ of the 'WebACL' that you want to get. @WebACLId@ is returned by 'CreateWebACL' and by 'ListWebACLs' .
 gwaWebACLId :: Lens' GetWebACL Text
@@ -99,28 +97,26 @@ instance ToQuery GetWebACL where
         toQuery = const mempty
 
 -- | /See:/ 'getWebACLResponse' smart constructor.
-data GetWebACLResponse = GetWebACLResponse'
-  { _gwarsWebACL         :: !(Maybe WebACL)
-  , _gwarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetWebACLResponse = GetWebACLResponse'{_gwarsWebACL
+                                            :: !(Maybe WebACL),
+                                            _gwarsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetWebACLResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gwarsWebACL' - Information about the 'WebACL' that you specified in the @GetWebACL@ request. For more information, see the following topics:     * 'WebACL' : Contains @DefaultAction@ , @MetricName@ , @Name@ , an array of @Rule@ objects, and @WebACLId@      * @DefaultAction@ (Data type is 'WafAction' ): Contains @Type@      * @Rules@ : Contains an array of @ActivatedRule@ objects, which contain @Action@ , @Priority@ , and @RuleId@      * @Action@ : Contains @Type@
+-- * 'gwarsWebACL' - Information about the 'WebACL' that you specified in the @GetWebACL@ request. For more information, see the following topics:     * 'WebACL' : Contains @DefaultAction@ , @MetricName@ , @Name@ , an array of @Rule@ objects, and @WebACLId@      * @DefaultAction@ (Data type is 'WafAction' ): Contains @Type@      * @Rules@ : Contains an array of @ActivatedRule@ objects, which contain @Action@ , @Priority@ , and @RuleId@      * @Action@ : Contains @Type@ 
 --
 -- * 'gwarsResponseStatus' - -- | The response status code.
 getWebACLResponse
     :: Int -- ^ 'gwarsResponseStatus'
     -> GetWebACLResponse
-getWebACLResponse pResponseStatus_ =
-  GetWebACLResponse'
-    {_gwarsWebACL = Nothing, _gwarsResponseStatus = pResponseStatus_}
+getWebACLResponse pResponseStatus_
+  = GetWebACLResponse'{_gwarsWebACL = Nothing,
+                       _gwarsResponseStatus = pResponseStatus_}
 
-
--- | Information about the 'WebACL' that you specified in the @GetWebACL@ request. For more information, see the following topics:     * 'WebACL' : Contains @DefaultAction@ , @MetricName@ , @Name@ , an array of @Rule@ objects, and @WebACLId@      * @DefaultAction@ (Data type is 'WafAction' ): Contains @Type@      * @Rules@ : Contains an array of @ActivatedRule@ objects, which contain @Action@ , @Priority@ , and @RuleId@      * @Action@ : Contains @Type@
+-- | Information about the 'WebACL' that you specified in the @GetWebACL@ request. For more information, see the following topics:     * 'WebACL' : Contains @DefaultAction@ , @MetricName@ , @Name@ , an array of @Rule@ objects, and @WebACLId@      * @DefaultAction@ (Data type is 'WafAction' ): Contains @Type@      * @Rules@ : Contains an array of @ActivatedRule@ objects, which contain @Action@ , @Priority@ , and @RuleId@      * @Action@ : Contains @Type@ 
 gwarsWebACL :: Lens' GetWebACLResponse (Maybe WebACL)
 gwarsWebACL = lens _gwarsWebACL (\ s a -> s{_gwarsWebACL = a})
 

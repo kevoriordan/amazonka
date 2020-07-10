@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see 'DeleteStackInstances' .
+-- Deletes a stack set. Before you can delete a stack set, all of its member stack instances must be deleted. For more information about how to do this, see 'DeleteStackInstances' . 
 --
 --
 module Network.AWS.CloudFormation.DeleteStackSet
@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteStackSet' smart constructor.
-newtype DeleteStackSet = DeleteStackSet'
-  { _dssStackSetName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteStackSet = DeleteStackSet'{_dssStackSetName
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteStackSet' with the minimum fields required to make a request.
 --
@@ -57,9 +56,8 @@ newtype DeleteStackSet = DeleteStackSet'
 deleteStackSet
     :: Text -- ^ 'dssStackSetName'
     -> DeleteStackSet
-deleteStackSet pStackSetName_ =
-  DeleteStackSet' {_dssStackSetName = pStackSetName_}
-
+deleteStackSet pStackSetName_
+  = DeleteStackSet'{_dssStackSetName = pStackSetName_}
 
 -- | The name or unique ID of the stack set that you're deleting. You can obtain this value by running 'ListStackSets' .
 dssStackSetName :: Lens' DeleteStackSet Text
@@ -91,10 +89,10 @@ instance ToQuery DeleteStackSet where
                "StackSetName" =: _dssStackSetName]
 
 -- | /See:/ 'deleteStackSetResponse' smart constructor.
-newtype DeleteStackSetResponse = DeleteStackSetResponse'
-  { _dssrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteStackSetResponse = DeleteStackSetResponse'{_dssrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteStackSetResponse' with the minimum fields required to make a request.
 --
@@ -104,9 +102,9 @@ newtype DeleteStackSetResponse = DeleteStackSetResponse'
 deleteStackSetResponse
     :: Int -- ^ 'dssrsResponseStatus'
     -> DeleteStackSetResponse
-deleteStackSetResponse pResponseStatus_ =
-  DeleteStackSetResponse' {_dssrsResponseStatus = pResponseStatus_}
-
+deleteStackSetResponse pResponseStatus_
+  = DeleteStackSetResponse'{_dssrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 dssrsResponseStatus :: Lens' DeleteStackSetResponse Int

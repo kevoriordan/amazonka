@@ -54,11 +54,12 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'listReusableDelegationSets' smart constructor.
-data ListReusableDelegationSets = ListReusableDelegationSets'
-  { _lrdsMarker   :: !(Maybe Text)
-  , _lrdsMaxItems :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReusableDelegationSets = ListReusableDelegationSets'{_lrdsMarker
+                                                              :: !(Maybe Text),
+                                                              _lrdsMaxItems ::
+                                                              !(Maybe Text)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListReusableDelegationSets' with the minimum fields required to make a request.
 --
@@ -66,18 +67,18 @@ data ListReusableDelegationSets = ListReusableDelegationSets'
 --
 -- * 'lrdsMarker' - If the value of @IsTruncated@ in the previous response was @true@ , you have more reusable delegation sets. To get another group, submit another @ListReusableDelegationSets@ request.  For the value of @marker@ , specify the value of @NextMarker@ from the previous response, which is the ID of the first reusable delegation set that Amazon Route 53 will return if you submit another request. If the value of @IsTruncated@ in the previous response was @false@ , there are no more reusable delegation sets to get.
 --
--- * 'lrdsMaxItems' - The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request. If you specify a value greater than 100, Amazon Route 53 returns only the first 100 reusable delegation sets.
+-- * 'lrdsMaxItems' - The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request. If you specify a value greater than 100, Route 53 returns only the first 100 reusable delegation sets.
 listReusableDelegationSets
     :: ListReusableDelegationSets
-listReusableDelegationSets =
-  ListReusableDelegationSets' {_lrdsMarker = Nothing, _lrdsMaxItems = Nothing}
-
+listReusableDelegationSets
+  = ListReusableDelegationSets'{_lrdsMarker = Nothing,
+                                _lrdsMaxItems = Nothing}
 
 -- | If the value of @IsTruncated@ in the previous response was @true@ , you have more reusable delegation sets. To get another group, submit another @ListReusableDelegationSets@ request.  For the value of @marker@ , specify the value of @NextMarker@ from the previous response, which is the ID of the first reusable delegation set that Amazon Route 53 will return if you submit another request. If the value of @IsTruncated@ in the previous response was @false@ , there are no more reusable delegation sets to get.
 lrdsMarker :: Lens' ListReusableDelegationSets (Maybe Text)
 lrdsMarker = lens _lrdsMarker (\ s a -> s{_lrdsMarker = a})
 
--- | The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request. If you specify a value greater than 100, Amazon Route 53 returns only the first 100 reusable delegation sets.
+-- | The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request. If you specify a value greater than 100, Route 53 returns only the first 100 reusable delegation sets.
 lrdsMaxItems :: Lens' ListReusableDelegationSets (Maybe Text)
 lrdsMaxItems = lens _lrdsMaxItems (\ s a -> s{_lrdsMaxItems = a})
 
@@ -117,15 +118,27 @@ instance ToQuery ListReusableDelegationSets where
 --
 --
 -- /See:/ 'listReusableDelegationSetsResponse' smart constructor.
-data ListReusableDelegationSetsResponse = ListReusableDelegationSetsResponse'
-  { _lrdsrsNextMarker     :: !(Maybe Text)
-  , _lrdsrsResponseStatus :: !Int
-  , _lrdsrsDelegationSets :: ![DelegationSet]
-  , _lrdsrsMarker         :: !Text
-  , _lrdsrsIsTruncated    :: !Bool
-  , _lrdsrsMaxItems       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReusableDelegationSetsResponse = ListReusableDelegationSetsResponse'{_lrdsrsNextMarker
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _lrdsrsResponseStatus
+                                                                              ::
+                                                                              !Int,
+                                                                              _lrdsrsDelegationSets
+                                                                              ::
+                                                                              ![DelegationSet],
+                                                                              _lrdsrsMarker
+                                                                              ::
+                                                                              !Text,
+                                                                              _lrdsrsIsTruncated
+                                                                              ::
+                                                                              !Bool,
+                                                                              _lrdsrsMaxItems
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListReusableDelegationSetsResponse' with the minimum fields required to make a request.
 --
@@ -148,16 +161,16 @@ listReusableDelegationSetsResponse
     -> Bool -- ^ 'lrdsrsIsTruncated'
     -> Text -- ^ 'lrdsrsMaxItems'
     -> ListReusableDelegationSetsResponse
-listReusableDelegationSetsResponse pResponseStatus_ pMarker_ pIsTruncated_ pMaxItems_ =
-  ListReusableDelegationSetsResponse'
-    { _lrdsrsNextMarker = Nothing
-    , _lrdsrsResponseStatus = pResponseStatus_
-    , _lrdsrsDelegationSets = mempty
-    , _lrdsrsMarker = pMarker_
-    , _lrdsrsIsTruncated = pIsTruncated_
-    , _lrdsrsMaxItems = pMaxItems_
-    }
-
+listReusableDelegationSetsResponse pResponseStatus_
+  pMarker_ pIsTruncated_ pMaxItems_
+  = ListReusableDelegationSetsResponse'{_lrdsrsNextMarker
+                                          = Nothing,
+                                        _lrdsrsResponseStatus =
+                                          pResponseStatus_,
+                                        _lrdsrsDelegationSets = mempty,
+                                        _lrdsrsMarker = pMarker_,
+                                        _lrdsrsIsTruncated = pIsTruncated_,
+                                        _lrdsrsMaxItems = pMaxItems_}
 
 -- | If @IsTruncated@ is @true@ , the value of @NextMarker@ identifies the next reusable delegation set that Amazon Route 53 will return if you submit another @ListReusableDelegationSets@ request and specify the value of @NextMarker@ in the @marker@ parameter.
 lrdsrsNextMarker :: Lens' ListReusableDelegationSetsResponse (Maybe Text)

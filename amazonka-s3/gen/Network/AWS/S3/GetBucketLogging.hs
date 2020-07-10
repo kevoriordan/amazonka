@@ -19,6 +19,16 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.
+--
+--
+-- The following operations are related to @GetBucketLogging@ :
+--
+--     * 'CreateBucket' 
+--
+--     * 'PutBucketLogging' 
+--
+--
+--
 module Network.AWS.S3.GetBucketLogging
     (
     -- * Creating a Request
@@ -43,23 +53,22 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'getBucketLogging' smart constructor.
-newtype GetBucketLogging = GetBucketLogging'
-  { _gBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBucketLogging = GetBucketLogging'{_gBucket
+                                             :: BucketName}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBucketLogging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gBucket' - Undocumented member.
+-- * 'gBucket' - The bucket name for which to get the logging information.
 getBucketLogging
     :: BucketName -- ^ 'gBucket'
     -> GetBucketLogging
-getBucketLogging pBucket_ = GetBucketLogging' {_gBucket = pBucket_}
+getBucketLogging pBucket_
+  = GetBucketLogging'{_gBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name for which to get the logging information.
 gBucket :: Lens' GetBucketLogging BucketName
 gBucket = lens _gBucket (\ s a -> s{_gBucket = a})
 
@@ -87,11 +96,14 @@ instance ToQuery GetBucketLogging where
         toQuery = const (mconcat ["logging"])
 
 -- | /See:/ 'getBucketLoggingResponse' smart constructor.
-data GetBucketLoggingResponse = GetBucketLoggingResponse'
-  { _gblrsLoggingEnabled :: !(Maybe LoggingEnabled)
-  , _gblrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBucketLoggingResponse = GetBucketLoggingResponse'{_gblrsLoggingEnabled
+                                                          ::
+                                                          !(Maybe
+                                                              LoggingEnabled),
+                                                          _gblrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetBucketLoggingResponse' with the minimum fields required to make a request.
 --
@@ -103,10 +115,10 @@ data GetBucketLoggingResponse = GetBucketLoggingResponse'
 getBucketLoggingResponse
     :: Int -- ^ 'gblrsResponseStatus'
     -> GetBucketLoggingResponse
-getBucketLoggingResponse pResponseStatus_ =
-  GetBucketLoggingResponse'
-    {_gblrsLoggingEnabled = Nothing, _gblrsResponseStatus = pResponseStatus_}
-
+getBucketLoggingResponse pResponseStatus_
+  = GetBucketLoggingResponse'{_gblrsLoggingEnabled =
+                                Nothing,
+                              _gblrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 gblrsLoggingEnabled :: Lens' GetBucketLoggingResponse (Maybe LoggingEnabled)

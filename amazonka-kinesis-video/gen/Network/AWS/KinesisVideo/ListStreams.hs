@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns an array of @StreamInfo@ objects. Each object describes a stream. To retrieve only streams that satisfy a specific condition, you can specify a @StreamNameCondition@ .
+-- Returns an array of @StreamInfo@ objects. Each object describes a stream. To retrieve only streams that satisfy a specific condition, you can specify a @StreamNameCondition@ . 
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.KinesisVideo.ListStreams
     (
     -- * Creating a Request
@@ -43,17 +45,18 @@ module Network.AWS.KinesisVideo.ListStreams
 import Network.AWS.KinesisVideo.Types
 import Network.AWS.KinesisVideo.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listStreams' smart constructor.
-data ListStreams = ListStreams'
-  { _lsNextToken           :: !(Maybe Text)
-  , _lsStreamNameCondition :: !(Maybe StreamNameCondition)
-  , _lsMaxResults          :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreams = ListStreams'{_lsNextToken ::
+                                !(Maybe Text),
+                                _lsStreamNameCondition ::
+                                !(Maybe StreamNameCondition),
+                                _lsMaxResults :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreams' with the minimum fields required to make a request.
 --
@@ -61,30 +64,34 @@ data ListStreams = ListStreams'
 --
 -- * 'lsNextToken' - If you specify this parameter, when the result of a @ListStreams@ operation is truncated, the call returns the @NextToken@ in the response. To get another batch of streams, provide this token in your next request.
 --
--- * 'lsStreamNameCondition' - Optional: Returns only streams that satisfy a specific condition. Currently, you can specify only the prefix of a stream name as a condition.
+-- * 'lsStreamNameCondition' - Optional: Returns only streams that satisfy a specific condition. Currently, you can specify only the prefix of a stream name as a condition. 
 --
 -- * 'lsMaxResults' - The maximum number of streams to return in the response. The default is 10,000.
 listStreams
     :: ListStreams
-listStreams =
-  ListStreams'
-    { _lsNextToken = Nothing
-    , _lsStreamNameCondition = Nothing
-    , _lsMaxResults = Nothing
-    }
-
+listStreams
+  = ListStreams'{_lsNextToken = Nothing,
+                 _lsStreamNameCondition = Nothing,
+                 _lsMaxResults = Nothing}
 
 -- | If you specify this parameter, when the result of a @ListStreams@ operation is truncated, the call returns the @NextToken@ in the response. To get another batch of streams, provide this token in your next request.
 lsNextToken :: Lens' ListStreams (Maybe Text)
 lsNextToken = lens _lsNextToken (\ s a -> s{_lsNextToken = a})
 
--- | Optional: Returns only streams that satisfy a specific condition. Currently, you can specify only the prefix of a stream name as a condition.
+-- | Optional: Returns only streams that satisfy a specific condition. Currently, you can specify only the prefix of a stream name as a condition. 
 lsStreamNameCondition :: Lens' ListStreams (Maybe StreamNameCondition)
 lsStreamNameCondition = lens _lsStreamNameCondition (\ s a -> s{_lsStreamNameCondition = a})
 
 -- | The maximum number of streams to return in the response. The default is 10,000.
 lsMaxResults :: Lens' ListStreams (Maybe Natural)
 lsMaxResults = lens _lsMaxResults (\ s a -> s{_lsMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListStreams where
+        page rq rs
+          | stop (rs ^. lsrsNextToken) = Nothing
+          | stop (rs ^. lsrsStreamInfoList) = Nothing
+          | otherwise =
+            Just $ rq & lsNextToken .~ rs ^. lsrsNextToken
 
 instance AWSRequest ListStreams where
         type Rs ListStreams = ListStreamsResponse
@@ -120,12 +127,11 @@ instance ToQuery ListStreams where
         toQuery = const mempty
 
 -- | /See:/ 'listStreamsResponse' smart constructor.
-data ListStreamsResponse = ListStreamsResponse'
-  { _lsrsStreamInfoList :: !(Maybe [StreamInfo])
-  , _lsrsNextToken      :: !(Maybe Text)
-  , _lsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreamsResponse = ListStreamsResponse'{_lsrsStreamInfoList
+                                                :: !(Maybe [StreamInfo]),
+                                                _lsrsNextToken :: !(Maybe Text),
+                                                _lsrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreamsResponse' with the minimum fields required to make a request.
 --
@@ -133,25 +139,22 @@ data ListStreamsResponse = ListStreamsResponse'
 --
 -- * 'lsrsStreamInfoList' - An array of @StreamInfo@ objects.
 --
--- * 'lsrsNextToken' - If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request.
+-- * 'lsrsNextToken' - If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request. 
 --
 -- * 'lsrsResponseStatus' - -- | The response status code.
 listStreamsResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListStreamsResponse
-listStreamsResponse pResponseStatus_ =
-  ListStreamsResponse'
-    { _lsrsStreamInfoList = Nothing
-    , _lsrsNextToken = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
-
+listStreamsResponse pResponseStatus_
+  = ListStreamsResponse'{_lsrsStreamInfoList = Nothing,
+                         _lsrsNextToken = Nothing,
+                         _lsrsResponseStatus = pResponseStatus_}
 
 -- | An array of @StreamInfo@ objects.
 lsrsStreamInfoList :: Lens' ListStreamsResponse [StreamInfo]
 lsrsStreamInfoList = lens _lsrsStreamInfoList (\ s a -> s{_lsrsStreamInfoList = a}) . _Default . _Coerce
 
--- | If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request.
+-- | If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request. 
 lsrsNextToken :: Lens' ListStreamsResponse (Maybe Text)
 lsrsNextToken = lens _lsrsNextToken (\ s a -> s{_lsrsNextToken = a})
 

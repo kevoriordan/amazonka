@@ -51,12 +51,11 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'listNamespaces' smart constructor.
-data ListNamespaces = ListNamespaces'
-  { _lnFilters    :: !(Maybe [NamespaceFilter])
-  , _lnNextToken  :: !(Maybe Text)
-  , _lnMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListNamespaces = ListNamespaces'{_lnFilters ::
+                                      !(Maybe [NamespaceFilter]),
+                                      _lnNextToken :: !(Maybe Text),
+                                      _lnMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListNamespaces' with the minimum fields required to make a request.
 --
@@ -66,13 +65,12 @@ data ListNamespaces = ListNamespaces'
 --
 -- * 'lnNextToken' - For the first @ListNamespaces@ request, omit this value. If the response contains @NextToken@ , submit another @ListNamespaces@ request to get the next group of results. Specify the value of @NextToken@ from the previous response in the next request.
 --
--- * 'lnMaxResults' - The maximum number of namespaces that you want Amazon Route 53 to return in the response to a @ListNamespaces@ request. If you don't specify a value for @MaxResults@ , Route 53 returns up to 100 namespaces.
+-- * 'lnMaxResults' - The maximum number of namespaces that you want AWS Cloud Map to return in the response to a @ListNamespaces@ request. If you don't specify a value for @MaxResults@ , AWS Cloud Map returns up to 100 namespaces.
 listNamespaces
     :: ListNamespaces
-listNamespaces =
-  ListNamespaces'
-    {_lnFilters = Nothing, _lnNextToken = Nothing, _lnMaxResults = Nothing}
-
+listNamespaces
+  = ListNamespaces'{_lnFilters = Nothing,
+                    _lnNextToken = Nothing, _lnMaxResults = Nothing}
 
 -- | A complex type that contains specifications for the namespaces that you want to list. If you specify more than one filter, a namespace must match all filters to be returned by @ListNamespaces@ .
 lnFilters :: Lens' ListNamespaces [NamespaceFilter]
@@ -82,7 +80,7 @@ lnFilters = lens _lnFilters (\ s a -> s{_lnFilters = a}) . _Default . _Coerce
 lnNextToken :: Lens' ListNamespaces (Maybe Text)
 lnNextToken = lens _lnNextToken (\ s a -> s{_lnNextToken = a})
 
--- | The maximum number of namespaces that you want Amazon Route 53 to return in the response to a @ListNamespaces@ request. If you don't specify a value for @MaxResults@ , Route 53 returns up to 100 namespaces.
+-- | The maximum number of namespaces that you want AWS Cloud Map to return in the response to a @ListNamespaces@ request. If you don't specify a value for @MaxResults@ , AWS Cloud Map returns up to 100 namespaces.
 lnMaxResults :: Lens' ListNamespaces (Maybe Natural)
 lnMaxResults = lens _lnMaxResults (\ s a -> s{_lnMaxResults = a}) . mapping _Nat
 
@@ -133,12 +131,16 @@ instance ToQuery ListNamespaces where
         toQuery = const mempty
 
 -- | /See:/ 'listNamespacesResponse' smart constructor.
-data ListNamespacesResponse = ListNamespacesResponse'
-  { _lnrsNamespaces     :: !(Maybe [NamespaceSummary])
-  , _lnrsNextToken      :: !(Maybe Text)
-  , _lnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListNamespacesResponse = ListNamespacesResponse'{_lnrsNamespaces
+                                                      ::
+                                                      !(Maybe
+                                                          [NamespaceSummary]),
+                                                      _lnrsNextToken ::
+                                                      !(Maybe Text),
+                                                      _lnrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListNamespacesResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +154,10 @@ data ListNamespacesResponse = ListNamespacesResponse'
 listNamespacesResponse
     :: Int -- ^ 'lnrsResponseStatus'
     -> ListNamespacesResponse
-listNamespacesResponse pResponseStatus_ =
-  ListNamespacesResponse'
-    { _lnrsNamespaces = Nothing
-    , _lnrsNextToken = Nothing
-    , _lnrsResponseStatus = pResponseStatus_
-    }
-
+listNamespacesResponse pResponseStatus_
+  = ListNamespacesResponse'{_lnrsNamespaces = Nothing,
+                            _lnrsNextToken = Nothing,
+                            _lnrsResponseStatus = pResponseStatus_}
 
 -- | An array that contains one @NamespaceSummary@ object for each namespace that matches the specified filter criteria.
 lnrsNamespaces :: Lens' ListNamespacesResponse [NamespaceSummary]

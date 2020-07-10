@@ -47,10 +47,9 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'getRuleGroup' smart constructor.
-newtype GetRuleGroup = GetRuleGroup'
-  { _grgRuleGroupId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetRuleGroup = GetRuleGroup'{_grgRuleGroupId
+                                     :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRuleGroup' with the minimum fields required to make a request.
 --
@@ -60,8 +59,8 @@ newtype GetRuleGroup = GetRuleGroup'
 getRuleGroup
     :: Text -- ^ 'grgRuleGroupId'
     -> GetRuleGroup
-getRuleGroup pRuleGroupId_ = GetRuleGroup' {_grgRuleGroupId = pRuleGroupId_}
-
+getRuleGroup pRuleGroupId_
+  = GetRuleGroup'{_grgRuleGroupId = pRuleGroupId_}
 
 -- | The @RuleGroupId@ of the 'RuleGroup' that you want to get. @RuleGroupId@ is returned by 'CreateRuleGroup' and by 'ListRuleGroups' .
 grgRuleGroupId :: Lens' GetRuleGroup Text
@@ -101,28 +100,26 @@ instance ToQuery GetRuleGroup where
         toQuery = const mempty
 
 -- | /See:/ 'getRuleGroupResponse' smart constructor.
-data GetRuleGroupResponse = GetRuleGroupResponse'
-  { _grgrsRuleGroup      :: !(Maybe RuleGroup)
-  , _grgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRuleGroupResponse = GetRuleGroupResponse'{_grgrsRuleGroup
+                                                  :: !(Maybe RuleGroup),
+                                                  _grgrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRuleGroupResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grgrsRuleGroup' - Information about the 'RuleGroup' that you specified in the @GetRuleGroup@ request.
+-- * 'grgrsRuleGroup' - Information about the 'RuleGroup' that you specified in the @GetRuleGroup@ request. 
 --
 -- * 'grgrsResponseStatus' - -- | The response status code.
 getRuleGroupResponse
     :: Int -- ^ 'grgrsResponseStatus'
     -> GetRuleGroupResponse
-getRuleGroupResponse pResponseStatus_ =
-  GetRuleGroupResponse'
-    {_grgrsRuleGroup = Nothing, _grgrsResponseStatus = pResponseStatus_}
+getRuleGroupResponse pResponseStatus_
+  = GetRuleGroupResponse'{_grgrsRuleGroup = Nothing,
+                          _grgrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the 'RuleGroup' that you specified in the @GetRuleGroup@ request.
+-- | Information about the 'RuleGroup' that you specified in the @GetRuleGroup@ request. 
 grgrsRuleGroup :: Lens' GetRuleGroupResponse (Maybe RuleGroup)
 grgrsRuleGroup = lens _grgrsRuleGroup (\ s a -> s{_grgrsRuleGroup = a})
 

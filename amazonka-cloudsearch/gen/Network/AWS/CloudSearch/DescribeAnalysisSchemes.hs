@@ -46,17 +46,19 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the @'DescribeAnalysisSchemes' @ operation. Specifies the name of the domain you want to describe. To limit the response to particular analysis schemes, specify the names of the analysis schemes you want to describe. To show the active configuration and exclude any pending changes, set the @Deployed@ option to @true@ .
+-- | Container for the parameters to the @'DescribeAnalysisSchemes' @ operation. Specifies the name of the domain you want to describe. To limit the response to particular analysis schemes, specify the names of the analysis schemes you want to describe. To show the active configuration and exclude any pending changes, set the @Deployed@ option to @true@ . 
 --
 --
 --
 -- /See:/ 'describeAnalysisSchemes' smart constructor.
-data DescribeAnalysisSchemes = DescribeAnalysisSchemes'
-  { _dassDeployed            :: !(Maybe Bool)
-  , _dassAnalysisSchemeNames :: !(Maybe [Text])
-  , _dassDomainName          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAnalysisSchemes = DescribeAnalysisSchemes'{_dassDeployed
+                                                        :: !(Maybe Bool),
+                                                        _dassAnalysisSchemeNames
+                                                        :: !(Maybe [Text]),
+                                                        _dassDomainName ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeAnalysisSchemes' with the minimum fields required to make a request.
 --
@@ -70,13 +72,10 @@ data DescribeAnalysisSchemes = DescribeAnalysisSchemes'
 describeAnalysisSchemes
     :: Text -- ^ 'dassDomainName'
     -> DescribeAnalysisSchemes
-describeAnalysisSchemes pDomainName_ =
-  DescribeAnalysisSchemes'
-    { _dassDeployed = Nothing
-    , _dassAnalysisSchemeNames = Nothing
-    , _dassDomainName = pDomainName_
-    }
-
+describeAnalysisSchemes pDomainName_
+  = DescribeAnalysisSchemes'{_dassDeployed = Nothing,
+                             _dassAnalysisSchemeNames = Nothing,
+                             _dassDomainName = pDomainName_}
 
 -- | Whether to display the deployed configuration (@true@ ) or include any pending changes (@false@ ). Defaults to @false@ .
 dassDeployed :: Lens' DescribeAnalysisSchemes (Maybe Bool)
@@ -129,11 +128,13 @@ instance ToQuery DescribeAnalysisSchemes where
 --
 --
 -- /See:/ 'describeAnalysisSchemesResponse' smart constructor.
-data DescribeAnalysisSchemesResponse = DescribeAnalysisSchemesResponse'
-  { _dasrsResponseStatus  :: !Int
-  , _dasrsAnalysisSchemes :: ![AnalysisSchemeStatus]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAnalysisSchemesResponse = DescribeAnalysisSchemesResponse'{_dasrsResponseStatus
+                                                                        :: !Int,
+                                                                        _dasrsAnalysisSchemes
+                                                                        ::
+                                                                        ![AnalysisSchemeStatus]}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeAnalysisSchemesResponse' with the minimum fields required to make a request.
 --
@@ -145,10 +146,10 @@ data DescribeAnalysisSchemesResponse = DescribeAnalysisSchemesResponse'
 describeAnalysisSchemesResponse
     :: Int -- ^ 'dasrsResponseStatus'
     -> DescribeAnalysisSchemesResponse
-describeAnalysisSchemesResponse pResponseStatus_ =
-  DescribeAnalysisSchemesResponse'
-    {_dasrsResponseStatus = pResponseStatus_, _dasrsAnalysisSchemes = mempty}
-
+describeAnalysisSchemesResponse pResponseStatus_
+  = DescribeAnalysisSchemesResponse'{_dasrsResponseStatus
+                                       = pResponseStatus_,
+                                     _dasrsAnalysisSchemes = mempty}
 
 -- | -- | The response status code.
 dasrsResponseStatus :: Lens' DescribeAnalysisSchemesResponse Int

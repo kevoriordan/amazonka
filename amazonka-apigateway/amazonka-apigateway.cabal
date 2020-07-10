@@ -169,12 +169,68 @@ library
         , Network.AWS.APIGateway.Waiters
 
     other-modules:
-          Network.AWS.APIGateway.Types.Product
-        , Network.AWS.APIGateway.Types.Sum
+          Network.AWS.APIGateway.Types.APIKey
+        , Network.AWS.APIGateway.Types.APIKeySourceType
+        , Network.AWS.APIGateway.Types.APIKeysFormat
+        , Network.AWS.APIGateway.Types.APIStage
+        , Network.AWS.APIGateway.Types.AccessLogSettings
+        , Network.AWS.APIGateway.Types.Account
+        , Network.AWS.APIGateway.Types.Authorizer
+        , Network.AWS.APIGateway.Types.AuthorizerType
+        , Network.AWS.APIGateway.Types.BasePathMapping
+        , Network.AWS.APIGateway.Types.CacheClusterSize
+        , Network.AWS.APIGateway.Types.CacheClusterStatus
+        , Network.AWS.APIGateway.Types.CanarySettings
+        , Network.AWS.APIGateway.Types.ClientCertificate
+        , Network.AWS.APIGateway.Types.ConnectionType
+        , Network.AWS.APIGateway.Types.ContentHandlingStrategy
+        , Network.AWS.APIGateway.Types.Deployment
+        , Network.AWS.APIGateway.Types.DeploymentCanarySettings
+        , Network.AWS.APIGateway.Types.DocumentationPart
+        , Network.AWS.APIGateway.Types.DocumentationPartLocation
+        , Network.AWS.APIGateway.Types.DocumentationPartType
+        , Network.AWS.APIGateway.Types.DocumentationVersion
+        , Network.AWS.APIGateway.Types.DomainName
+        , Network.AWS.APIGateway.Types.DomainNameStatus
+        , Network.AWS.APIGateway.Types.EndpointConfiguration
+        , Network.AWS.APIGateway.Types.EndpointType
+        , Network.AWS.APIGateway.Types.GatewayResponse
+        , Network.AWS.APIGateway.Types.GatewayResponseType
+        , Network.AWS.APIGateway.Types.Integration
+        , Network.AWS.APIGateway.Types.IntegrationResponse
+        , Network.AWS.APIGateway.Types.IntegrationType
+        , Network.AWS.APIGateway.Types.LocationStatusType
+        , Network.AWS.APIGateway.Types.Method
+        , Network.AWS.APIGateway.Types.MethodResponse
+        , Network.AWS.APIGateway.Types.MethodSetting
+        , Network.AWS.APIGateway.Types.MethodSnapshot
+        , Network.AWS.APIGateway.Types.Model
+        , Network.AWS.APIGateway.Types.Op
+        , Network.AWS.APIGateway.Types.PatchOperation
+        , Network.AWS.APIGateway.Types.Product
+        , Network.AWS.APIGateway.Types.PutMode
+        , Network.AWS.APIGateway.Types.QuotaPeriodType
+        , Network.AWS.APIGateway.Types.QuotaSettings
+        , Network.AWS.APIGateway.Types.RequestValidator
+        , Network.AWS.APIGateway.Types.Resource
+        , Network.AWS.APIGateway.Types.RestAPI
+        , Network.AWS.APIGateway.Types.SDKConfigurationProperty
+        , Network.AWS.APIGateway.Types.SDKType
+        , Network.AWS.APIGateway.Types.SecurityPolicy
+        , Network.AWS.APIGateway.Types.Stage
+        , Network.AWS.APIGateway.Types.StageKey
+        , Network.AWS.APIGateway.Types.ThrottleSettings
+        , Network.AWS.APIGateway.Types.UnauthorizedCacheControlHeaderStrategy
+        , Network.AWS.APIGateway.Types.Usage
+        , Network.AWS.APIGateway.Types.UsagePlan
+        , Network.AWS.APIGateway.Types.UsagePlanKey
+        , Network.AWS.APIGateway.Types.VPCLink
+        , Network.AWS.APIGateway.Types.VPCLinkStatus
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-apigateway-test
     type:              exitcode-stdio-1.0
@@ -198,6 +254,7 @@ test-suite amazonka-apigateway-test
         , amazonka-apigateway
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

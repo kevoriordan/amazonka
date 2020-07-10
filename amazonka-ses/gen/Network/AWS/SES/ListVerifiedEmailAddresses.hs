@@ -43,17 +43,16 @@ import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
 -- | /See:/ 'listVerifiedEmailAddresses' smart constructor.
-data ListVerifiedEmailAddresses =
-  ListVerifiedEmailAddresses'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVerifiedEmailAddresses = ListVerifiedEmailAddresses'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListVerifiedEmailAddresses' with the minimum fields required to make a request.
 --
 listVerifiedEmailAddresses
     :: ListVerifiedEmailAddresses
-listVerifiedEmailAddresses = ListVerifiedEmailAddresses'
-
+listVerifiedEmailAddresses
+  = ListVerifiedEmailAddresses'
 
 instance AWSRequest ListVerifiedEmailAddresses where
         type Rs ListVerifiedEmailAddresses =
@@ -91,11 +90,15 @@ instance ToQuery ListVerifiedEmailAddresses where
 --
 --
 -- /See:/ 'listVerifiedEmailAddressesResponse' smart constructor.
-data ListVerifiedEmailAddressesResponse = ListVerifiedEmailAddressesResponse'
-  { _lvearsVerifiedEmailAddresses :: !(Maybe [Text])
-  , _lvearsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVerifiedEmailAddressesResponse = ListVerifiedEmailAddressesResponse'{_lvearsVerifiedEmailAddresses
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [Text]),
+                                                                              _lvearsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListVerifiedEmailAddressesResponse' with the minimum fields required to make a request.
 --
@@ -107,12 +110,11 @@ data ListVerifiedEmailAddressesResponse = ListVerifiedEmailAddressesResponse'
 listVerifiedEmailAddressesResponse
     :: Int -- ^ 'lvearsResponseStatus'
     -> ListVerifiedEmailAddressesResponse
-listVerifiedEmailAddressesResponse pResponseStatus_ =
-  ListVerifiedEmailAddressesResponse'
-    { _lvearsVerifiedEmailAddresses = Nothing
-    , _lvearsResponseStatus = pResponseStatus_
-    }
-
+listVerifiedEmailAddressesResponse pResponseStatus_
+  = ListVerifiedEmailAddressesResponse'{_lvearsVerifiedEmailAddresses
+                                          = Nothing,
+                                        _lvearsResponseStatus =
+                                          pResponseStatus_}
 
 -- | A list of email addresses that have been verified.
 lvearsVerifiedEmailAddresses :: Lens' ListVerifiedEmailAddressesResponse [Text]

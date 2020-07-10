@@ -48,39 +48,36 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchDeletePartition' smart constructor.
-data BatchDeletePartition = BatchDeletePartition'
-  { _bdpCatalogId          :: !(Maybe Text)
-  , _bdpDatabaseName       :: !Text
-  , _bdpTableName          :: !Text
-  , _bdpPartitionsToDelete :: ![PartitionValueList]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeletePartition = BatchDeletePartition'{_bdpCatalogId
+                                                  :: !(Maybe Text),
+                                                  _bdpDatabaseName :: !Text,
+                                                  _bdpTableName :: !Text,
+                                                  _bdpPartitionsToDelete ::
+                                                  ![PartitionValueList]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchDeletePartition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bdpCatalogId' - The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.
+-- * 'bdpCatalogId' - The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
 --
 -- * 'bdpDatabaseName' - The name of the catalog database in which the table in question resides.
 --
--- * 'bdpTableName' - The name of the table where the partitions to be deleted is located.
+-- * 'bdpTableName' - The name of the table that contains the partitions to be deleted.
 --
 -- * 'bdpPartitionsToDelete' - A list of @PartitionInput@ structures that define the partitions to be deleted.
 batchDeletePartition
     :: Text -- ^ 'bdpDatabaseName'
     -> Text -- ^ 'bdpTableName'
     -> BatchDeletePartition
-batchDeletePartition pDatabaseName_ pTableName_ =
-  BatchDeletePartition'
-    { _bdpCatalogId = Nothing
-    , _bdpDatabaseName = pDatabaseName_
-    , _bdpTableName = pTableName_
-    , _bdpPartitionsToDelete = mempty
-    }
+batchDeletePartition pDatabaseName_ pTableName_
+  = BatchDeletePartition'{_bdpCatalogId = Nothing,
+                          _bdpDatabaseName = pDatabaseName_,
+                          _bdpTableName = pTableName_,
+                          _bdpPartitionsToDelete = mempty}
 
-
--- | The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
 bdpCatalogId :: Lens' BatchDeletePartition (Maybe Text)
 bdpCatalogId = lens _bdpCatalogId (\ s a -> s{_bdpCatalogId = a})
 
@@ -88,7 +85,7 @@ bdpCatalogId = lens _bdpCatalogId (\ s a -> s{_bdpCatalogId = a})
 bdpDatabaseName :: Lens' BatchDeletePartition Text
 bdpDatabaseName = lens _bdpDatabaseName (\ s a -> s{_bdpDatabaseName = a})
 
--- | The name of the table where the partitions to be deleted is located.
+-- | The name of the table that contains the partitions to be deleted.
 bdpTableName :: Lens' BatchDeletePartition Text
 bdpTableName = lens _bdpTableName (\ s a -> s{_bdpTableName = a})
 
@@ -136,28 +133,31 @@ instance ToQuery BatchDeletePartition where
         toQuery = const mempty
 
 -- | /See:/ 'batchDeletePartitionResponse' smart constructor.
-data BatchDeletePartitionResponse = BatchDeletePartitionResponse'
-  { _bdprsErrors         :: !(Maybe [PartitionError])
-  , _bdprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeletePartitionResponse = BatchDeletePartitionResponse'{_bdprsErrors
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [PartitionError]),
+                                                                  _bdprsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'BatchDeletePartitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bdprsErrors' - Errors encountered when trying to delete the requested partitions.
+-- * 'bdprsErrors' - The errors encountered when trying to delete the requested partitions.
 --
 -- * 'bdprsResponseStatus' - -- | The response status code.
 batchDeletePartitionResponse
     :: Int -- ^ 'bdprsResponseStatus'
     -> BatchDeletePartitionResponse
-batchDeletePartitionResponse pResponseStatus_ =
-  BatchDeletePartitionResponse'
-    {_bdprsErrors = Nothing, _bdprsResponseStatus = pResponseStatus_}
+batchDeletePartitionResponse pResponseStatus_
+  = BatchDeletePartitionResponse'{_bdprsErrors =
+                                    Nothing,
+                                  _bdprsResponseStatus = pResponseStatus_}
 
-
--- | Errors encountered when trying to delete the requested partitions.
+-- | The errors encountered when trying to delete the requested partitions.
 bdprsErrors :: Lens' BatchDeletePartitionResponse [PartitionError]
 bdprsErrors = lens _bdprsErrors (\ s a -> s{_bdprsErrors = a}) . _Default . _Coerce
 

@@ -52,18 +52,18 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'updateJob' smart constructor.
-data UpdateJob = UpdateJob'
-  { _ujNotification               :: !(Maybe Notification)
-  , _ujForwardingAddressId        :: !(Maybe Text)
-  , _ujAddressId                  :: !(Maybe Text)
-  , _ujShippingOption             :: !(Maybe ShippingOption)
-  , _ujResources                  :: !(Maybe JobResource)
-  , _ujDescription                :: !(Maybe Text)
-  , _ujRoleARN                    :: !(Maybe Text)
-  , _ujSnowballCapacityPreference :: !(Maybe SnowballCapacity)
-  , _ujJobId                      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateJob = UpdateJob'{_ujNotification ::
+                            !(Maybe Notification),
+                            _ujForwardingAddressId :: !(Maybe Text),
+                            _ujAddressId :: !(Maybe Text),
+                            _ujShippingOption :: !(Maybe ShippingOption),
+                            _ujResources :: !(Maybe JobResource),
+                            _ujDescription :: !(Maybe Text),
+                            _ujRoleARN :: !(Maybe Text),
+                            _ujSnowballCapacityPreference ::
+                            !(Maybe SnowballCapacity),
+                            _ujJobId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateJob' with the minimum fields required to make a request.
 --
@@ -77,11 +77,11 @@ data UpdateJob = UpdateJob'
 --
 -- * 'ujShippingOption' - The updated shipping option value of this job's 'ShippingDetails' object.
 --
--- * 'ujResources' - The updated 'S3Resource' object (for a single Amazon S3 bucket or key range), or the updated 'JobResource' object (for multiple buckets or key ranges).
+-- * 'ujResources' - The updated @JobResource@ object, or the updated 'JobResource' object. 
 --
 -- * 'ujDescription' - The updated description of this job's 'JobMetadata' object.
 --
--- * 'ujRoleARN' - The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
+-- * 'ujRoleARN' - The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
 --
 -- * 'ujSnowballCapacityPreference' - The updated @SnowballCapacityPreference@ of this job's 'JobMetadata' object. The 50 TB Snowballs are only available in the US regions.
 --
@@ -89,19 +89,14 @@ data UpdateJob = UpdateJob'
 updateJob
     :: Text -- ^ 'ujJobId'
     -> UpdateJob
-updateJob pJobId_ =
-  UpdateJob'
-    { _ujNotification = Nothing
-    , _ujForwardingAddressId = Nothing
-    , _ujAddressId = Nothing
-    , _ujShippingOption = Nothing
-    , _ujResources = Nothing
-    , _ujDescription = Nothing
-    , _ujRoleARN = Nothing
-    , _ujSnowballCapacityPreference = Nothing
-    , _ujJobId = pJobId_
-    }
-
+updateJob pJobId_
+  = UpdateJob'{_ujNotification = Nothing,
+               _ujForwardingAddressId = Nothing,
+               _ujAddressId = Nothing, _ujShippingOption = Nothing,
+               _ujResources = Nothing, _ujDescription = Nothing,
+               _ujRoleARN = Nothing,
+               _ujSnowballCapacityPreference = Nothing,
+               _ujJobId = pJobId_}
 
 -- | The new or updated 'Notification' object.
 ujNotification :: Lens' UpdateJob (Maybe Notification)
@@ -119,7 +114,7 @@ ujAddressId = lens _ujAddressId (\ s a -> s{_ujAddressId = a})
 ujShippingOption :: Lens' UpdateJob (Maybe ShippingOption)
 ujShippingOption = lens _ujShippingOption (\ s a -> s{_ujShippingOption = a})
 
--- | The updated 'S3Resource' object (for a single Amazon S3 bucket or key range), or the updated 'JobResource' object (for multiple buckets or key ranges).
+-- | The updated @JobResource@ object, or the updated 'JobResource' object. 
 ujResources :: Lens' UpdateJob (Maybe JobResource)
 ujResources = lens _ujResources (\ s a -> s{_ujResources = a})
 
@@ -127,7 +122,7 @@ ujResources = lens _ujResources (\ s a -> s{_ujResources = a})
 ujDescription :: Lens' UpdateJob (Maybe Text)
 ujDescription = lens _ujDescription (\ s a -> s{_ujDescription = a})
 
--- | The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
+-- | The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
 ujRoleARN :: Lens' UpdateJob (Maybe Text)
 ujRoleARN = lens _ujRoleARN (\ s a -> s{_ujRoleARN = a})
 
@@ -184,10 +179,9 @@ instance ToQuery UpdateJob where
         toQuery = const mempty
 
 -- | /See:/ 'updateJobResponse' smart constructor.
-newtype UpdateJobResponse = UpdateJobResponse'
-  { _ujrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateJobResponse = UpdateJobResponse'{_ujrsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateJobResponse' with the minimum fields required to make a request.
 --
@@ -197,9 +191,9 @@ newtype UpdateJobResponse = UpdateJobResponse'
 updateJobResponse
     :: Int -- ^ 'ujrsResponseStatus'
     -> UpdateJobResponse
-updateJobResponse pResponseStatus_ =
-  UpdateJobResponse' {_ujrsResponseStatus = pResponseStatus_}
-
+updateJobResponse pResponseStatus_
+  = UpdateJobResponse'{_ujrsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 ujrsResponseStatus :: Lens' UpdateJobResponse Int

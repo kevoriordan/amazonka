@@ -18,24 +18,32 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Validates the syntax of a matchmaking rule or rule set. This operation checks that the rule set uses syntactically correct JSON and that it conforms to allowed property expressions. To validate syntax, provide a rule set string.
+-- Validates the syntax of a matchmaking rule or rule set. This operation checks that the rule set is using syntactically correct JSON and that it conforms to allowed property expressions. To validate syntax, provide a rule set JSON string.
 --
 --
--- Operations related to match configurations and rule sets include:
+-- __Learn more__ 
 --
---     * 'CreateMatchmakingConfiguration'
+--     * <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html Build a Rule Set> 
 --
---     * 'DescribeMatchmakingConfigurations'
 --
---     * 'UpdateMatchmakingConfiguration'
 --
---     * 'DeleteMatchmakingConfiguration'
+-- __Related operations__ 
 --
---     * 'CreateMatchmakingRuleSet'
+--     * 'CreateMatchmakingConfiguration' 
 --
---     * 'DescribeMatchmakingRuleSets'
+--     * 'DescribeMatchmakingConfigurations' 
 --
---     * 'ValidateMatchmakingRuleSet'
+--     * 'UpdateMatchmakingConfiguration' 
+--
+--     * 'DeleteMatchmakingConfiguration' 
+--
+--     * 'CreateMatchmakingRuleSet' 
+--
+--     * 'DescribeMatchmakingRuleSets' 
+--
+--     * 'ValidateMatchmakingRuleSet' 
+--
+--     * 'DeleteMatchmakingRuleSet' 
 --
 --
 --
@@ -67,24 +75,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'validateMatchmakingRuleSet' smart constructor.
-newtype ValidateMatchmakingRuleSet = ValidateMatchmakingRuleSet'
-  { _vmrsRuleSetBody :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ValidateMatchmakingRuleSet = ValidateMatchmakingRuleSet'{_vmrsRuleSetBody
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ValidateMatchmakingRuleSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vmrsRuleSetBody' - Collection of matchmaking rules to validate, formatted as a JSON string.
+-- * 'vmrsRuleSetBody' - A collection of matchmaking rules to validate, formatted as a JSON string.
 validateMatchmakingRuleSet
     :: Text -- ^ 'vmrsRuleSetBody'
     -> ValidateMatchmakingRuleSet
-validateMatchmakingRuleSet pRuleSetBody_ =
-  ValidateMatchmakingRuleSet' {_vmrsRuleSetBody = pRuleSetBody_}
+validateMatchmakingRuleSet pRuleSetBody_
+  = ValidateMatchmakingRuleSet'{_vmrsRuleSetBody =
+                                  pRuleSetBody_}
 
-
--- | Collection of matchmaking rules to validate, formatted as a JSON string.
+-- | A collection of matchmaking rules to validate, formatted as a JSON string.
 vmrsRuleSetBody :: Lens' ValidateMatchmakingRuleSet Text
 vmrsRuleSetBody = lens _vmrsRuleSetBody (\ s a -> s{_vmrsRuleSetBody = a})
 
@@ -129,28 +137,33 @@ instance ToQuery ValidateMatchmakingRuleSet where
 --
 --
 -- /See:/ 'validateMatchmakingRuleSetResponse' smart constructor.
-data ValidateMatchmakingRuleSetResponse = ValidateMatchmakingRuleSetResponse'
-  { _vmrsrsValid          :: !(Maybe Bool)
-  , _vmrsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ValidateMatchmakingRuleSetResponse = ValidateMatchmakingRuleSetResponse'{_vmrsrsValid
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Bool),
+                                                                              _vmrsrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ValidateMatchmakingRuleSetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vmrsrsValid' - Response indicating whether or not the rule set is valid.
+-- * 'vmrsrsValid' - A response indicating whether the rule set is valid.
 --
 -- * 'vmrsrsResponseStatus' - -- | The response status code.
 validateMatchmakingRuleSetResponse
     :: Int -- ^ 'vmrsrsResponseStatus'
     -> ValidateMatchmakingRuleSetResponse
-validateMatchmakingRuleSetResponse pResponseStatus_ =
-  ValidateMatchmakingRuleSetResponse'
-    {_vmrsrsValid = Nothing, _vmrsrsResponseStatus = pResponseStatus_}
+validateMatchmakingRuleSetResponse pResponseStatus_
+  = ValidateMatchmakingRuleSetResponse'{_vmrsrsValid =
+                                          Nothing,
+                                        _vmrsrsResponseStatus =
+                                          pResponseStatus_}
 
-
--- | Response indicating whether or not the rule set is valid.
+-- | A response indicating whether the rule set is valid.
 vmrsrsValid :: Lens' ValidateMatchmakingRuleSetResponse (Maybe Bool)
 vmrsrsValid = lens _vmrsrsValid (\ s a -> s{_vmrsrsValid = a})
 

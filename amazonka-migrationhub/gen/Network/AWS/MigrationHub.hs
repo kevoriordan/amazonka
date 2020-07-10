@@ -14,6 +14,8 @@
 -- The AWS Migration Hub API methods help to obtain server and application migration status and integrate your resource-specific migration tool by providing a programmatic interface to Migration Hub.
 --
 --
+-- Remember that you must set your AWS Migration Hub home region before you call any of these APIs, or a @HomeRegionNotSetException@ error will be returned. Also, you must make the API calls while in your home region.
+--
 module Network.AWS.MigrationHub
     (
     -- * Service Configuration
@@ -22,29 +24,35 @@ module Network.AWS.MigrationHub
     -- * Errors
     -- $errors
 
-    -- ** AccessDeniedException
-    , _AccessDeniedException
-
     -- ** DryRunOperation
     , _DryRunOperation
 
     -- ** PolicyErrorException
     , _PolicyErrorException
 
-    -- ** InternalServerError
-    , _InternalServerError
+    -- ** HomeRegionNotSetException
+    , _HomeRegionNotSetException
 
-    -- ** InvalidInputException
-    , _InvalidInputException
+    -- ** AccessDeniedException
+    , _AccessDeniedException
 
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
+    -- ** UnauthorizedOperation
+    , _UnauthorizedOperation
 
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
 
-    -- ** UnauthorizedOperation
-    , _UnauthorizedOperation
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
+
+    -- ** InvalidInputException
+    , _InvalidInputException
+
+    -- ** InternalServerError
+    , _InternalServerError
+
+    -- ** ThrottlingException
+    , _ThrottlingException
 
     -- * Waiters
     -- $waiters
@@ -52,52 +60,55 @@ module Network.AWS.MigrationHub
     -- * Operations
     -- $operations
 
-    -- ** AssociateDiscoveredResource
+    -- ** AssociateDiscoveredResource 
     , module Network.AWS.MigrationHub.AssociateDiscoveredResource
 
-    -- ** CreateProgressUpdateStream
+    -- ** CreateProgressUpdateStream 
     , module Network.AWS.MigrationHub.CreateProgressUpdateStream
 
-    -- ** ListCreatedArtifacts
+    -- ** ListApplicationStates (Paginated)
+    , module Network.AWS.MigrationHub.ListApplicationStates
+
+    -- ** ListCreatedArtifacts (Paginated)
     , module Network.AWS.MigrationHub.ListCreatedArtifacts
 
-    -- ** DisassociateDiscoveredResource
+    -- ** DisassociateDiscoveredResource 
     , module Network.AWS.MigrationHub.DisassociateDiscoveredResource
 
-    -- ** NotifyApplicationState
+    -- ** NotifyApplicationState 
     , module Network.AWS.MigrationHub.NotifyApplicationState
 
-    -- ** DeleteProgressUpdateStream
+    -- ** DeleteProgressUpdateStream 
     , module Network.AWS.MigrationHub.DeleteProgressUpdateStream
 
-    -- ** ListProgressUpdateStreams
+    -- ** ListProgressUpdateStreams (Paginated)
     , module Network.AWS.MigrationHub.ListProgressUpdateStreams
 
-    -- ** DisassociateCreatedArtifact
+    -- ** DisassociateCreatedArtifact 
     , module Network.AWS.MigrationHub.DisassociateCreatedArtifact
 
-    -- ** ImportMigrationTask
+    -- ** ImportMigrationTask 
     , module Network.AWS.MigrationHub.ImportMigrationTask
 
-    -- ** DescribeMigrationTask
+    -- ** DescribeMigrationTask 
     , module Network.AWS.MigrationHub.DescribeMigrationTask
 
-    -- ** PutResourceAttributes
+    -- ** PutResourceAttributes 
     , module Network.AWS.MigrationHub.PutResourceAttributes
 
-    -- ** AssociateCreatedArtifact
+    -- ** AssociateCreatedArtifact 
     , module Network.AWS.MigrationHub.AssociateCreatedArtifact
 
-    -- ** NotifyMigrationTaskState
+    -- ** NotifyMigrationTaskState 
     , module Network.AWS.MigrationHub.NotifyMigrationTaskState
 
-    -- ** DescribeApplicationState
+    -- ** DescribeApplicationState 
     , module Network.AWS.MigrationHub.DescribeApplicationState
 
-    -- ** ListMigrationTasks
+    -- ** ListMigrationTasks (Paginated)
     , module Network.AWS.MigrationHub.ListMigrationTasks
 
-    -- ** ListDiscoveredResources
+    -- ** ListDiscoveredResources (Paginated)
     , module Network.AWS.MigrationHub.ListDiscoveredResources
 
     -- * Types
@@ -110,6 +121,13 @@ module Network.AWS.MigrationHub
 
     -- ** ResourceAttributeType
     , ResourceAttributeType (..)
+
+    -- ** ApplicationState
+    , ApplicationState
+    , applicationState
+    , asLastUpdatedTime
+    , asApplicationId
+    , asApplicationStatus
 
     -- ** CreatedArtifact
     , CreatedArtifact
@@ -170,6 +188,7 @@ import Network.AWS.MigrationHub.DescribeMigrationTask
 import Network.AWS.MigrationHub.DisassociateCreatedArtifact
 import Network.AWS.MigrationHub.DisassociateDiscoveredResource
 import Network.AWS.MigrationHub.ImportMigrationTask
+import Network.AWS.MigrationHub.ListApplicationStates
 import Network.AWS.MigrationHub.ListCreatedArtifacts
 import Network.AWS.MigrationHub.ListDiscoveredResources
 import Network.AWS.MigrationHub.ListMigrationTasks

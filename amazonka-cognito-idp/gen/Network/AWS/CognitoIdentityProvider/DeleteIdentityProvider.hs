@@ -43,11 +43,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteIdentityProvider' smart constructor.
-data DeleteIdentityProvider = DeleteIdentityProvider'
-  { _delUserPoolId   :: !Text
-  , _delProviderName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIdentityProvider = DeleteIdentityProvider'{_delUserPoolId
+                                                      :: !Text,
+                                                      _delProviderName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteIdentityProvider' with the minimum fields required to make a request.
 --
@@ -60,10 +60,10 @@ deleteIdentityProvider
     :: Text -- ^ 'delUserPoolId'
     -> Text -- ^ 'delProviderName'
     -> DeleteIdentityProvider
-deleteIdentityProvider pUserPoolId_ pProviderName_ =
-  DeleteIdentityProvider'
-    {_delUserPoolId = pUserPoolId_, _delProviderName = pProviderName_}
-
+deleteIdentityProvider pUserPoolId_ pProviderName_
+  = DeleteIdentityProvider'{_delUserPoolId =
+                              pUserPoolId_,
+                            _delProviderName = pProviderName_}
 
 -- | The user pool ID.
 delUserPoolId :: Lens' DeleteIdentityProvider Text
@@ -108,16 +108,15 @@ instance ToQuery DeleteIdentityProvider where
         toQuery = const mempty
 
 -- | /See:/ 'deleteIdentityProviderResponse' smart constructor.
-data DeleteIdentityProviderResponse =
-  DeleteIdentityProviderResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIdentityProviderResponse = DeleteIdentityProviderResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteIdentityProviderResponse' with the minimum fields required to make a request.
 --
 deleteIdentityProviderResponse
     :: DeleteIdentityProviderResponse
-deleteIdentityProviderResponse = DeleteIdentityProviderResponse'
-
+deleteIdentityProviderResponse
+  = DeleteIdentityProviderResponse'
 
 instance NFData DeleteIdentityProviderResponse where

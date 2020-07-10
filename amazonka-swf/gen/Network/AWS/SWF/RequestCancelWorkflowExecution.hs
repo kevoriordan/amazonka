@@ -21,7 +21,7 @@
 -- Records a @WorkflowExecutionCancelRequested@ event in the currently running workflow execution identified by the given domain, workflowId, and runId. This logically requests the cancellation of the workflow execution as a whole. It is up to the decider to take appropriate actions when it receives an execution history with this event.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -33,7 +33,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.RequestCancelWorkflowExecution
     (
@@ -58,12 +58,16 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'requestCancelWorkflowExecution' smart constructor.
-data RequestCancelWorkflowExecution = RequestCancelWorkflowExecution'
-  { _rcweRunId      :: !(Maybe Text)
-  , _rcweDomain     :: !Text
-  , _rcweWorkflowId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RequestCancelWorkflowExecution = RequestCancelWorkflowExecution'{_rcweRunId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _rcweDomain
+                                                                      :: !Text,
+                                                                      _rcweWorkflowId
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'RequestCancelWorkflowExecution' with the minimum fields required to make a request.
 --
@@ -78,13 +82,11 @@ requestCancelWorkflowExecution
     :: Text -- ^ 'rcweDomain'
     -> Text -- ^ 'rcweWorkflowId'
     -> RequestCancelWorkflowExecution
-requestCancelWorkflowExecution pDomain_ pWorkflowId_ =
-  RequestCancelWorkflowExecution'
-    { _rcweRunId = Nothing
-    , _rcweDomain = pDomain_
-    , _rcweWorkflowId = pWorkflowId_
-    }
-
+requestCancelWorkflowExecution pDomain_ pWorkflowId_
+  = RequestCancelWorkflowExecution'{_rcweRunId =
+                                      Nothing,
+                                    _rcweDomain = pDomain_,
+                                    _rcweWorkflowId = pWorkflowId_}
 
 -- | The runId of the workflow execution to cancel.
 rcweRunId :: Lens' RequestCancelWorkflowExecution (Maybe Text)
@@ -137,17 +139,16 @@ instance ToQuery RequestCancelWorkflowExecution where
         toQuery = const mempty
 
 -- | /See:/ 'requestCancelWorkflowExecutionResponse' smart constructor.
-data RequestCancelWorkflowExecutionResponse =
-  RequestCancelWorkflowExecutionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RequestCancelWorkflowExecutionResponse = RequestCancelWorkflowExecutionResponse'
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'RequestCancelWorkflowExecutionResponse' with the minimum fields required to make a request.
 --
 requestCancelWorkflowExecutionResponse
     :: RequestCancelWorkflowExecutionResponse
-requestCancelWorkflowExecutionResponse = RequestCancelWorkflowExecutionResponse'
-
+requestCancelWorkflowExecutionResponse
+  = RequestCancelWorkflowExecutionResponse'
 
 instance NFData
            RequestCancelWorkflowExecutionResponse

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a model. The @DeleteModel@ API deletes only the model entry that was created in Amazon SageMaker when you called the <http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html CreateModel> API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model.
+-- Deletes a model. The @DeleteModel@ API deletes only the model entry that was created in Amazon SageMaker when you called the 'CreateModel' API. It does not delete model artifacts, inference code, or the IAM role that you specified when creating the model. 
 --
 --
 module Network.AWS.SageMaker.DeleteModel
@@ -42,10 +42,9 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'deleteModel' smart constructor.
-newtype DeleteModel = DeleteModel'
-  { _dmModelName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteModel = DeleteModel'{_dmModelName ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteModel' with the minimum fields required to make a request.
 --
@@ -55,8 +54,8 @@ newtype DeleteModel = DeleteModel'
 deleteModel
     :: Text -- ^ 'dmModelName'
     -> DeleteModel
-deleteModel pModelName_ = DeleteModel' {_dmModelName = pModelName_}
-
+deleteModel pModelName_
+  = DeleteModel'{_dmModelName = pModelName_}
 
 -- | The name of the model to delete.
 dmModelName :: Lens' DeleteModel Text
@@ -92,16 +91,13 @@ instance ToQuery DeleteModel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteModelResponse' smart constructor.
-data DeleteModelResponse =
-  DeleteModelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteModelResponse = DeleteModelResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteModelResponse' with the minimum fields required to make a request.
 --
 deleteModelResponse
     :: DeleteModelResponse
 deleteModelResponse = DeleteModelResponse'
-
 
 instance NFData DeleteModelResponse where

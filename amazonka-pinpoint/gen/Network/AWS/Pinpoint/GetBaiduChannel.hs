@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get a BAIDU GCM channel
+-- Retrieves information about the status and settings of the Baidu channel for an application.
+--
+--
 module Network.AWS.Pinpoint.GetBaiduChannel
     (
     -- * Creating a Request
@@ -43,24 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBaiduChannel' smart constructor.
-newtype GetBaiduChannel = GetBaiduChannel'
-  { _gbcApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBaiduChannel = GetBaiduChannel'{_gbcApplicationId
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBaiduChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbcApplicationId' - Undocumented member.
+-- * 'gbcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getBaiduChannel
     :: Text -- ^ 'gbcApplicationId'
     -> GetBaiduChannel
-getBaiduChannel pApplicationId_ =
-  GetBaiduChannel' {_gbcApplicationId = pApplicationId_}
+getBaiduChannel pApplicationId_
+  = GetBaiduChannel'{_gbcApplicationId =
+                       pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gbcApplicationId :: Lens' GetBaiduChannel Text
 gbcApplicationId = lens _gbcApplicationId (\ s a -> s{_gbcApplicationId = a})
 
@@ -94,11 +95,13 @@ instance ToQuery GetBaiduChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getBaiduChannelResponse' smart constructor.
-data GetBaiduChannelResponse = GetBaiduChannelResponse'
-  { _gbcrsResponseStatus       :: !Int
-  , _gbcrsBaiduChannelResponse :: !BaiduChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBaiduChannelResponse = GetBaiduChannelResponse'{_gbcrsResponseStatus
+                                                        :: !Int,
+                                                        _gbcrsBaiduChannelResponse
+                                                        ::
+                                                        !BaiduChannelResponse}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetBaiduChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +114,12 @@ getBaiduChannelResponse
     :: Int -- ^ 'gbcrsResponseStatus'
     -> BaiduChannelResponse -- ^ 'gbcrsBaiduChannelResponse'
     -> GetBaiduChannelResponse
-getBaiduChannelResponse pResponseStatus_ pBaiduChannelResponse_ =
-  GetBaiduChannelResponse'
-    { _gbcrsResponseStatus = pResponseStatus_
-    , _gbcrsBaiduChannelResponse = pBaiduChannelResponse_
-    }
-
+getBaiduChannelResponse pResponseStatus_
+  pBaiduChannelResponse_
+  = GetBaiduChannelResponse'{_gbcrsResponseStatus =
+                               pResponseStatus_,
+                             _gbcrsBaiduChannelResponse =
+                               pBaiduChannelResponse_}
 
 -- | -- | The response status code.
 gbcrsResponseStatus :: Lens' GetBaiduChannelResponse Int

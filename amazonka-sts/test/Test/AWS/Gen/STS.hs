@@ -14,11 +14,11 @@
 module Test.AWS.Gen.STS where
 
 import Data.Proxy
-import Network.AWS.STS
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.STS.Internal
 import Test.Tasty
+import Network.AWS.STS
+import Test.AWS.STS.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -33,6 +33,9 @@ import Test.Tasty
 --
 --         , requestAssumeRole $
 --             assumeRole
+--
+--         , requestGetAccessKeyInfo $
+--             getAccessKeyInfo
 --
 --         , requestDecodeAuthorizationMessage $
 --             decodeAuthorizationMessage
@@ -57,6 +60,9 @@ import Test.Tasty
 --
 --         , responseAssumeRole $
 --             assumeRoleResponse
+--
+--         , responseGetAccessKeyInfo $
+--             getAccessKeyInfoResponse
 --
 --         , responseDecodeAuthorizationMessage $
 --             decodeAuthorizationMessageResponse
@@ -87,6 +93,11 @@ requestAssumeRole :: AssumeRole -> TestTree
 requestAssumeRole = req
     "AssumeRole"
     "fixture/AssumeRole.yaml"
+
+requestGetAccessKeyInfo :: GetAccessKeyInfo -> TestTree
+requestGetAccessKeyInfo = req
+    "GetAccessKeyInfo"
+    "fixture/GetAccessKeyInfo.yaml"
 
 requestDecodeAuthorizationMessage :: DecodeAuthorizationMessage -> TestTree
 requestDecodeAuthorizationMessage = req
@@ -128,6 +139,13 @@ responseAssumeRole = res
     "fixture/AssumeRoleResponse.proto"
     sts
     (Proxy :: Proxy AssumeRole)
+
+responseGetAccessKeyInfo :: GetAccessKeyInfoResponse -> TestTree
+responseGetAccessKeyInfo = res
+    "GetAccessKeyInfoResponse"
+    "fixture/GetAccessKeyInfoResponse.proto"
+    sts
+    (Proxy :: Proxy GetAccessKeyInfo)
 
 responseDecodeAuthorizationMessage :: DecodeAuthorizationMessageResponse -> TestTree
 responseDecodeAuthorizationMessage = res

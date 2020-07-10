@@ -53,14 +53,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listPullRequests' smart constructor.
-data ListPullRequests = ListPullRequests'
-  { _lprAuthorARN         :: !(Maybe Text)
-  , _lprNextToken         :: !(Maybe Text)
-  , _lprPullRequestStatus :: !(Maybe PullRequestStatusEnum)
-  , _lprMaxResults        :: !(Maybe Int)
-  , _lprRepositoryName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPullRequests = ListPullRequests'{_lprAuthorARN
+                                          :: !(Maybe Text),
+                                          _lprNextToken :: !(Maybe Text),
+                                          _lprPullRequestStatus ::
+                                          !(Maybe PullRequestStatusEnum),
+                                          _lprMaxResults :: !(Maybe Int),
+                                          _lprRepositoryName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPullRequests' with the minimum fields required to make a request.
 --
@@ -68,31 +68,28 @@ data ListPullRequests = ListPullRequests'
 --
 -- * 'lprAuthorARN' - Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results to pull requests created by that user.
 --
--- * 'lprNextToken' - An enumeration token that when provided in a request, returns the next batch of the results.
+-- * 'lprNextToken' - An enumeration token that, when provided in a request, returns the next batch of the results.
 --
 -- * 'lprPullRequestStatus' - Optional. The status of the pull request. If used, this refines the results to the pull requests that match the specified status.
 --
--- * 'lprMaxResults' - A non-negative integer used to limit the number of returned results.
+-- * 'lprMaxResults' - A non-zero, non-negative integer used to limit the number of returned results.
 --
 -- * 'lprRepositoryName' - The name of the repository for which you want to list pull requests.
 listPullRequests
     :: Text -- ^ 'lprRepositoryName'
     -> ListPullRequests
-listPullRequests pRepositoryName_ =
-  ListPullRequests'
-    { _lprAuthorARN = Nothing
-    , _lprNextToken = Nothing
-    , _lprPullRequestStatus = Nothing
-    , _lprMaxResults = Nothing
-    , _lprRepositoryName = pRepositoryName_
-    }
-
+listPullRequests pRepositoryName_
+  = ListPullRequests'{_lprAuthorARN = Nothing,
+                      _lprNextToken = Nothing,
+                      _lprPullRequestStatus = Nothing,
+                      _lprMaxResults = Nothing,
+                      _lprRepositoryName = pRepositoryName_}
 
 -- | Optional. The Amazon Resource Name (ARN) of the user who created the pull request. If used, this filters the results to pull requests created by that user.
 lprAuthorARN :: Lens' ListPullRequests (Maybe Text)
 lprAuthorARN = lens _lprAuthorARN (\ s a -> s{_lprAuthorARN = a})
 
--- | An enumeration token that when provided in a request, returns the next batch of the results.
+-- | An enumeration token that, when provided in a request, returns the next batch of the results.
 lprNextToken :: Lens' ListPullRequests (Maybe Text)
 lprNextToken = lens _lprNextToken (\ s a -> s{_lprNextToken = a})
 
@@ -100,7 +97,7 @@ lprNextToken = lens _lprNextToken (\ s a -> s{_lprNextToken = a})
 lprPullRequestStatus :: Lens' ListPullRequests (Maybe PullRequestStatusEnum)
 lprPullRequestStatus = lens _lprPullRequestStatus (\ s a -> s{_lprPullRequestStatus = a})
 
--- | A non-negative integer used to limit the number of returned results.
+-- | A non-zero, non-negative integer used to limit the number of returned results.
 lprMaxResults :: Lens' ListPullRequests (Maybe Int)
 lprMaxResults = lens _lprMaxResults (\ s a -> s{_lprMaxResults = a})
 
@@ -156,18 +153,20 @@ instance ToQuery ListPullRequests where
         toQuery = const mempty
 
 -- | /See:/ 'listPullRequestsResponse' smart constructor.
-data ListPullRequestsResponse = ListPullRequestsResponse'
-  { _lprrsNextToken      :: !(Maybe Text)
-  , _lprrsResponseStatus :: !Int
-  , _lprrsPullRequestIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPullRequestsResponse = ListPullRequestsResponse'{_lprrsNextToken
+                                                          :: !(Maybe Text),
+                                                          _lprrsResponseStatus
+                                                          :: !Int,
+                                                          _lprrsPullRequestIds
+                                                          :: ![Text]}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListPullRequestsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lprrsNextToken' - An enumeration token that when provided in a request, returns the next batch of the results.
+-- * 'lprrsNextToken' - An enumeration token that allows the operation to batch the next results of the operation.
 --
 -- * 'lprrsResponseStatus' - -- | The response status code.
 --
@@ -175,15 +174,13 @@ data ListPullRequestsResponse = ListPullRequestsResponse'
 listPullRequestsResponse
     :: Int -- ^ 'lprrsResponseStatus'
     -> ListPullRequestsResponse
-listPullRequestsResponse pResponseStatus_ =
-  ListPullRequestsResponse'
-    { _lprrsNextToken = Nothing
-    , _lprrsResponseStatus = pResponseStatus_
-    , _lprrsPullRequestIds = mempty
-    }
+listPullRequestsResponse pResponseStatus_
+  = ListPullRequestsResponse'{_lprrsNextToken =
+                                Nothing,
+                              _lprrsResponseStatus = pResponseStatus_,
+                              _lprrsPullRequestIds = mempty}
 
-
--- | An enumeration token that when provided in a request, returns the next batch of the results.
+-- | An enumeration token that allows the operation to batch the next results of the operation.
 lprrsNextToken :: Lens' ListPullRequestsResponse (Maybe Text)
 lprrsNextToken = lens _lprrsNextToken (\ s a -> s{_lprrsNextToken = a})
 

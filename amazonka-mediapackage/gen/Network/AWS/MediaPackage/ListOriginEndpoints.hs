@@ -49,12 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listOriginEndpoints' smart constructor.
-data ListOriginEndpoints = ListOriginEndpoints'
-  { _loeChannelId  :: !(Maybe Text)
-  , _loeNextToken  :: !(Maybe Text)
-  , _loeMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOriginEndpoints = ListOriginEndpoints'{_loeChannelId
+                                                :: !(Maybe Text),
+                                                _loeNextToken :: !(Maybe Text),
+                                                _loeMaxResults :: !(Maybe Nat)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOriginEndpoints' with the minimum fields required to make a request.
 --
@@ -67,10 +66,9 @@ data ListOriginEndpoints = ListOriginEndpoints'
 -- * 'loeMaxResults' - The upper bound on the number of records to return.
 listOriginEndpoints
     :: ListOriginEndpoints
-listOriginEndpoints =
-  ListOriginEndpoints'
-    {_loeChannelId = Nothing, _loeNextToken = Nothing, _loeMaxResults = Nothing}
-
+listOriginEndpoints
+  = ListOriginEndpoints'{_loeChannelId = Nothing,
+                         _loeNextToken = Nothing, _loeMaxResults = Nothing}
 
 -- | When specified, the request will return only OriginEndpoints associated with the given Channel ID.
 loeChannelId :: Lens' ListOriginEndpoints (Maybe Text)
@@ -125,12 +123,17 @@ instance ToQuery ListOriginEndpoints where
                "maxResults" =: _loeMaxResults]
 
 -- | /See:/ 'listOriginEndpointsResponse' smart constructor.
-data ListOriginEndpointsResponse = ListOriginEndpointsResponse'
-  { _loersOriginEndpoints :: !(Maybe [OriginEndpoint])
-  , _loersNextToken       :: !(Maybe Text)
-  , _loersResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOriginEndpointsResponse = ListOriginEndpointsResponse'{_loersOriginEndpoints
+                                                                ::
+                                                                !(Maybe
+                                                                    [OriginEndpoint]),
+                                                                _loersNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _loersResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListOriginEndpointsResponse' with the minimum fields required to make a request.
 --
@@ -144,13 +147,11 @@ data ListOriginEndpointsResponse = ListOriginEndpointsResponse'
 listOriginEndpointsResponse
     :: Int -- ^ 'loersResponseStatus'
     -> ListOriginEndpointsResponse
-listOriginEndpointsResponse pResponseStatus_ =
-  ListOriginEndpointsResponse'
-    { _loersOriginEndpoints = Nothing
-    , _loersNextToken = Nothing
-    , _loersResponseStatus = pResponseStatus_
-    }
-
+listOriginEndpointsResponse pResponseStatus_
+  = ListOriginEndpointsResponse'{_loersOriginEndpoints
+                                   = Nothing,
+                                 _loersNextToken = Nothing,
+                                 _loersResponseStatus = pResponseStatus_}
 
 -- | A list of OriginEndpoint records.
 loersOriginEndpoints :: Lens' ListOriginEndpointsResponse [OriginEndpoint]

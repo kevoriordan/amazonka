@@ -45,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getContainerPolicy' smart constructor.
-newtype GetContainerPolicy = GetContainerPolicy'
-  { _gContainerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetContainerPolicy = GetContainerPolicy'{_gContainerName
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetContainerPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gContainerName' - The name of the container.
+-- * 'gContainerName' - The name of the container. 
 getContainerPolicy
     :: Text -- ^ 'gContainerName'
     -> GetContainerPolicy
-getContainerPolicy pContainerName_ =
-  GetContainerPolicy' {_gContainerName = pContainerName_}
+getContainerPolicy pContainerName_
+  = GetContainerPolicy'{_gContainerName =
+                          pContainerName_}
 
-
--- | The name of the container.
+-- | The name of the container. 
 gContainerName :: Lens' GetContainerPolicy Text
 gContainerName = lens _gContainerName (\ s a -> s{_gContainerName = a})
 
@@ -103,11 +103,12 @@ instance ToQuery GetContainerPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'getContainerPolicyResponse' smart constructor.
-data GetContainerPolicyResponse = GetContainerPolicyResponse'
-  { _gcprsResponseStatus :: !Int
-  , _gcprsPolicy         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetContainerPolicyResponse = GetContainerPolicyResponse'{_gcprsResponseStatus
+                                                              :: !Int,
+                                                              _gcprsPolicy ::
+                                                              !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetContainerPolicyResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +121,10 @@ getContainerPolicyResponse
     :: Int -- ^ 'gcprsResponseStatus'
     -> Text -- ^ 'gcprsPolicy'
     -> GetContainerPolicyResponse
-getContainerPolicyResponse pResponseStatus_ pPolicy_ =
-  GetContainerPolicyResponse'
-    {_gcprsResponseStatus = pResponseStatus_, _gcprsPolicy = pPolicy_}
-
+getContainerPolicyResponse pResponseStatus_ pPolicy_
+  = GetContainerPolicyResponse'{_gcprsResponseStatus =
+                                  pResponseStatus_,
+                                _gcprsPolicy = pPolicy_}
 
 -- | -- | The response status code.
 gcprsResponseStatus :: Lens' GetContainerPolicyResponse Int

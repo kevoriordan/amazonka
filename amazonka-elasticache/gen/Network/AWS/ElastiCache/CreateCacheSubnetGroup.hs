@@ -53,18 +53,19 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createCacheSubnetGroup' smart constructor.
-data CreateCacheSubnetGroup = CreateCacheSubnetGroup'
-  { _ccsgCacheSubnetGroupName        :: !Text
-  , _ccsgCacheSubnetGroupDescription :: !Text
-  , _ccsgSubnetIds                   :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCacheSubnetGroup = CreateCacheSubnetGroup'{_ccsgCacheSubnetGroupName
+                                                      :: !Text,
+                                                      _ccsgCacheSubnetGroupDescription
+                                                      :: !Text,
+                                                      _ccsgSubnetIds :: ![Text]}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateCacheSubnetGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccsgCacheSubnetGroupName' - A name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@
+-- * 'ccsgCacheSubnetGroupName' - A name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@ 
 --
 -- * 'ccsgCacheSubnetGroupDescription' - A description for the cache subnet group.
 --
@@ -73,15 +74,15 @@ createCacheSubnetGroup
     :: Text -- ^ 'ccsgCacheSubnetGroupName'
     -> Text -- ^ 'ccsgCacheSubnetGroupDescription'
     -> CreateCacheSubnetGroup
-createCacheSubnetGroup pCacheSubnetGroupName_ pCacheSubnetGroupDescription_ =
-  CreateCacheSubnetGroup'
-    { _ccsgCacheSubnetGroupName = pCacheSubnetGroupName_
-    , _ccsgCacheSubnetGroupDescription = pCacheSubnetGroupDescription_
-    , _ccsgSubnetIds = mempty
-    }
+createCacheSubnetGroup pCacheSubnetGroupName_
+  pCacheSubnetGroupDescription_
+  = CreateCacheSubnetGroup'{_ccsgCacheSubnetGroupName =
+                              pCacheSubnetGroupName_,
+                            _ccsgCacheSubnetGroupDescription =
+                              pCacheSubnetGroupDescription_,
+                            _ccsgSubnetIds = mempty}
 
-
--- | A name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@
+-- | A name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@ 
 ccsgCacheSubnetGroupName :: Lens' CreateCacheSubnetGroup Text
 ccsgCacheSubnetGroupName = lens _ccsgCacheSubnetGroupName (\ s a -> s{_ccsgCacheSubnetGroupName = a})
 
@@ -126,11 +127,14 @@ instance ToQuery CreateCacheSubnetGroup where
                  toQueryList "SubnetIdentifier" _ccsgSubnetIds]
 
 -- | /See:/ 'createCacheSubnetGroupResponse' smart constructor.
-data CreateCacheSubnetGroupResponse = CreateCacheSubnetGroupResponse'
-  { _crsCacheSubnetGroup :: !(Maybe CacheSubnetGroup)
-  , _crsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCacheSubnetGroupResponse = CreateCacheSubnetGroupResponse'{_crsCacheSubnetGroup
+                                                                      ::
+                                                                      !(Maybe
+                                                                          CacheSubnetGroup),
+                                                                      _crsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateCacheSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +146,10 @@ data CreateCacheSubnetGroupResponse = CreateCacheSubnetGroupResponse'
 createCacheSubnetGroupResponse
     :: Int -- ^ 'crsResponseStatus'
     -> CreateCacheSubnetGroupResponse
-createCacheSubnetGroupResponse pResponseStatus_ =
-  CreateCacheSubnetGroupResponse'
-    {_crsCacheSubnetGroup = Nothing, _crsResponseStatus = pResponseStatus_}
-
+createCacheSubnetGroupResponse pResponseStatus_
+  = CreateCacheSubnetGroupResponse'{_crsCacheSubnetGroup
+                                      = Nothing,
+                                    _crsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 crsCacheSubnetGroup :: Lens' CreateCacheSubnetGroupResponse (Maybe CacheSubnetGroup)

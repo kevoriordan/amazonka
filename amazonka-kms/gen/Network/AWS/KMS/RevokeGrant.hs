@@ -21,7 +21,7 @@
 -- Revokes the specified grant for the specified customer master key (CMK). You can revoke a grant to actively deny operations that depend on it.
 --
 --
--- To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the KeyId parameter.
+-- To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the @KeyId@ parameter.
 --
 module Network.AWS.KMS.RevokeGrant
     (
@@ -45,11 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'revokeGrant' smart constructor.
-data RevokeGrant = RevokeGrant'
-  { _rKeyId   :: !Text
-  , _rGrantId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeGrant = RevokeGrant'{_rKeyId :: !Text,
+                                _rGrantId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevokeGrant' with the minimum fields required to make a request.
 --
@@ -62,9 +60,9 @@ revokeGrant
     :: Text -- ^ 'rKeyId'
     -> Text -- ^ 'rGrantId'
     -> RevokeGrant
-revokeGrant pKeyId_ pGrantId_ =
-  RevokeGrant' {_rKeyId = pKeyId_, _rGrantId = pGrantId_}
-
+revokeGrant pKeyId_ pGrantId_
+  = RevokeGrant'{_rKeyId = pKeyId_,
+                 _rGrantId = pGrantId_}
 
 -- | A unique identifier for the customer master key associated with the grant. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN. For example:     * Key ID: @1234abcd-12ab-34cd-56ef-1234567890ab@      * Key ARN: @arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab@  To get the key ID and key ARN for a CMK, use 'ListKeys' or 'DescribeKey' .
 rKeyId :: Lens' RevokeGrant Text
@@ -106,16 +104,13 @@ instance ToQuery RevokeGrant where
         toQuery = const mempty
 
 -- | /See:/ 'revokeGrantResponse' smart constructor.
-data RevokeGrantResponse =
-  RevokeGrantResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeGrantResponse = RevokeGrantResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevokeGrantResponse' with the minimum fields required to make a request.
 --
 revokeGrantResponse
     :: RevokeGrantResponse
 revokeGrantResponse = RevokeGrantResponse'
-
 
 instance NFData RevokeGrantResponse where

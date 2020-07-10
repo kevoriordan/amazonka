@@ -50,11 +50,10 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'cancelRetrieval' smart constructor.
-data CancelRetrieval = CancelRetrieval'
-  { _crGatewayARN :: !Text
-  , _crTapeARN    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelRetrieval = CancelRetrieval'{_crGatewayARN
+                                        :: !Text,
+                                        _crTapeARN :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelRetrieval' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ cancelRetrieval
     :: Text -- ^ 'crGatewayARN'
     -> Text -- ^ 'crTapeARN'
     -> CancelRetrieval
-cancelRetrieval pGatewayARN_ pTapeARN_ =
-  CancelRetrieval' {_crGatewayARN = pGatewayARN_, _crTapeARN = pTapeARN_}
-
+cancelRetrieval pGatewayARN_ pTapeARN_
+  = CancelRetrieval'{_crGatewayARN = pGatewayARN_,
+                     _crTapeARN = pTapeARN_}
 
 -- | Undocumented member.
 crGatewayARN :: Lens' CancelRetrieval Text
@@ -120,11 +119,12 @@ instance ToQuery CancelRetrieval where
 --
 --
 -- /See:/ 'cancelRetrievalResponse' smart constructor.
-data CancelRetrievalResponse = CancelRetrievalResponse'
-  { _crrsTapeARN        :: !(Maybe Text)
-  , _crrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelRetrievalResponse = CancelRetrievalResponse'{_crrsTapeARN
+                                                        :: !(Maybe Text),
+                                                        _crrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CancelRetrievalResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +136,9 @@ data CancelRetrievalResponse = CancelRetrievalResponse'
 cancelRetrievalResponse
     :: Int -- ^ 'crrsResponseStatus'
     -> CancelRetrievalResponse
-cancelRetrievalResponse pResponseStatus_ =
-  CancelRetrievalResponse'
-    {_crrsTapeARN = Nothing, _crrsResponseStatus = pResponseStatus_}
-
+cancelRetrievalResponse pResponseStatus_
+  = CancelRetrievalResponse'{_crrsTapeARN = Nothing,
+                             _crrsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the virtual tape for which retrieval was canceled.
 crrsTapeARN :: Lens' CancelRetrievalResponse (Maybe Text)

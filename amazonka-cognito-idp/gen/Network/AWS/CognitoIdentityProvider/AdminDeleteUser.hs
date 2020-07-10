@@ -21,7 +21,7 @@
 -- Deletes a user as an administrator. Works on any user.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminDeleteUser
     (
@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'adminDeleteUser' smart constructor.
-data AdminDeleteUser = AdminDeleteUser'
-  { _aUserPoolId :: !Text
-  , _aUsername   :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminDeleteUser = AdminDeleteUser'{_aUserPoolId
+                                        :: !Text,
+                                        _aUsername :: !(Sensitive Text)}
+                         deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminDeleteUser' with the minimum fields required to make a request.
 --
@@ -66,10 +65,9 @@ adminDeleteUser
     :: Text -- ^ 'aUserPoolId'
     -> Text -- ^ 'aUsername'
     -> AdminDeleteUser
-adminDeleteUser pUserPoolId_ pUsername_ =
-  AdminDeleteUser'
-    {_aUserPoolId = pUserPoolId_, _aUsername = _Sensitive # pUsername_}
-
+adminDeleteUser pUserPoolId_ pUsername_
+  = AdminDeleteUser'{_aUserPoolId = pUserPoolId_,
+                     _aUsername = _Sensitive # pUsername_}
 
 -- | The user pool ID for the user pool where you want to delete the user.
 aUserPoolId :: Lens' AdminDeleteUser Text
@@ -112,16 +110,14 @@ instance ToQuery AdminDeleteUser where
         toQuery = const mempty
 
 -- | /See:/ 'adminDeleteUserResponse' smart constructor.
-data AdminDeleteUserResponse =
-  AdminDeleteUserResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AdminDeleteUserResponse = AdminDeleteUserResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AdminDeleteUserResponse' with the minimum fields required to make a request.
 --
 adminDeleteUserResponse
     :: AdminDeleteUserResponse
 adminDeleteUserResponse = AdminDeleteUserResponse'
-
 
 instance NFData AdminDeleteUserResponse where

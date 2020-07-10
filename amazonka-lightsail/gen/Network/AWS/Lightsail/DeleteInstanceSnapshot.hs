@@ -21,6 +21,8 @@
 -- Deletes a specific snapshot of a virtual private server (or /instance/ ).
 --
 --
+-- The @delete instance snapshot@ operation supports tag-based access control via resource tags applied to the resource identified by @instance snapshot name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.DeleteInstanceSnapshot
     (
     -- * Creating a Request
@@ -45,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteInstanceSnapshot' smart constructor.
-newtype DeleteInstanceSnapshot = DeleteInstanceSnapshot'
-  { _disInstanceSnapshotName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteInstanceSnapshot = DeleteInstanceSnapshot'{_disInstanceSnapshotName
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteInstanceSnapshot' with the minimum fields required to make a request.
 --
@@ -58,9 +60,9 @@ newtype DeleteInstanceSnapshot = DeleteInstanceSnapshot'
 deleteInstanceSnapshot
     :: Text -- ^ 'disInstanceSnapshotName'
     -> DeleteInstanceSnapshot
-deleteInstanceSnapshot pInstanceSnapshotName_ =
-  DeleteInstanceSnapshot' {_disInstanceSnapshotName = pInstanceSnapshotName_}
-
+deleteInstanceSnapshot pInstanceSnapshotName_
+  = DeleteInstanceSnapshot'{_disInstanceSnapshotName =
+                              pInstanceSnapshotName_}
 
 -- | The name of the snapshot to delete.
 disInstanceSnapshotName :: Lens' DeleteInstanceSnapshot Text
@@ -106,28 +108,31 @@ instance ToQuery DeleteInstanceSnapshot where
         toQuery = const mempty
 
 -- | /See:/ 'deleteInstanceSnapshotResponse' smart constructor.
-data DeleteInstanceSnapshotResponse = DeleteInstanceSnapshotResponse'
-  { _disrsOperations     :: !(Maybe [Operation])
-  , _disrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteInstanceSnapshotResponse = DeleteInstanceSnapshotResponse'{_disrsOperations
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Operation]),
+                                                                      _disrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteInstanceSnapshotResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'disrsOperations' - An array of key-value pairs containing information about the results of your delete instance snapshot request.
+-- * 'disrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'disrsResponseStatus' - -- | The response status code.
 deleteInstanceSnapshotResponse
     :: Int -- ^ 'disrsResponseStatus'
     -> DeleteInstanceSnapshotResponse
-deleteInstanceSnapshotResponse pResponseStatus_ =
-  DeleteInstanceSnapshotResponse'
-    {_disrsOperations = Nothing, _disrsResponseStatus = pResponseStatus_}
+deleteInstanceSnapshotResponse pResponseStatus_
+  = DeleteInstanceSnapshotResponse'{_disrsOperations =
+                                      Nothing,
+                                    _disrsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your delete instance snapshot request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 disrsOperations :: Lens' DeleteInstanceSnapshotResponse [Operation]
 disrsOperations = lens _disrsOperations (\ s a -> s{_disrsOperations = a}) . _Default . _Coerce
 

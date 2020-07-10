@@ -21,6 +21,8 @@
 -- Lists all the security configurations visible to this account, providing their creation dates and times, and their names. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListSecurityConfigurations calls.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EMR.ListSecurityConfigurations
     (
     -- * Creating a Request
@@ -41,15 +43,16 @@ module Network.AWS.EMR.ListSecurityConfigurations
 import Network.AWS.EMR.Types
 import Network.AWS.EMR.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listSecurityConfigurations' smart constructor.
-newtype ListSecurityConfigurations = ListSecurityConfigurations'
-  { _lscMarker :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListSecurityConfigurations = ListSecurityConfigurations'{_lscMarker
+                                                                 :: Maybe Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListSecurityConfigurations' with the minimum fields required to make a request.
 --
@@ -58,12 +61,19 @@ newtype ListSecurityConfigurations = ListSecurityConfigurations'
 -- * 'lscMarker' - The pagination token that indicates the set of results to retrieve.
 listSecurityConfigurations
     :: ListSecurityConfigurations
-listSecurityConfigurations = ListSecurityConfigurations' {_lscMarker = Nothing}
-
+listSecurityConfigurations
+  = ListSecurityConfigurations'{_lscMarker = Nothing}
 
 -- | The pagination token that indicates the set of results to retrieve.
 lscMarker :: Lens' ListSecurityConfigurations (Maybe Text)
 lscMarker = lens _lscMarker (\ s a -> s{_lscMarker = a})
+
+instance AWSPager ListSecurityConfigurations where
+        page rq rs
+          | stop (rs ^. lscrsMarker) = Nothing
+          | stop (rs ^. lscrsSecurityConfigurations) = Nothing
+          | otherwise =
+            Just $ rq & lscMarker .~ rs ^. lscrsMarker
 
 instance AWSRequest ListSecurityConfigurations where
         type Rs ListSecurityConfigurations =
@@ -102,12 +112,19 @@ instance ToQuery ListSecurityConfigurations where
         toQuery = const mempty
 
 -- | /See:/ 'listSecurityConfigurationsResponse' smart constructor.
-data ListSecurityConfigurationsResponse = ListSecurityConfigurationsResponse'
-  { _lscrsSecurityConfigurations :: !(Maybe [SecurityConfigurationSummary])
-  , _lscrsMarker                 :: !(Maybe Text)
-  , _lscrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSecurityConfigurationsResponse = ListSecurityConfigurationsResponse'{_lscrsSecurityConfigurations
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [SecurityConfigurationSummary]),
+                                                                              _lscrsMarker
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _lscrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListSecurityConfigurationsResponse' with the minimum fields required to make a request.
 --
@@ -121,13 +138,11 @@ data ListSecurityConfigurationsResponse = ListSecurityConfigurationsResponse'
 listSecurityConfigurationsResponse
     :: Int -- ^ 'lscrsResponseStatus'
     -> ListSecurityConfigurationsResponse
-listSecurityConfigurationsResponse pResponseStatus_ =
-  ListSecurityConfigurationsResponse'
-    { _lscrsSecurityConfigurations = Nothing
-    , _lscrsMarker = Nothing
-    , _lscrsResponseStatus = pResponseStatus_
-    }
-
+listSecurityConfigurationsResponse pResponseStatus_
+  = ListSecurityConfigurationsResponse'{_lscrsSecurityConfigurations
+                                          = Nothing,
+                                        _lscrsMarker = Nothing,
+                                        _lscrsResponseStatus = pResponseStatus_}
 
 -- | The creation date and time, and name, of each security configuration.
 lscrsSecurityConfigurations :: Lens' ListSecurityConfigurationsResponse [SecurityConfigurationSummary]

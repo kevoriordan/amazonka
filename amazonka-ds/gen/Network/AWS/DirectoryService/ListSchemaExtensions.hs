@@ -21,6 +21,8 @@
 -- Lists all schema extensions applied to a Microsoft AD Directory.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DirectoryService.ListSchemaExtensions
     (
     -- * Creating a Request
@@ -43,17 +45,17 @@ module Network.AWS.DirectoryService.ListSchemaExtensions
 import Network.AWS.DirectoryService.Types
 import Network.AWS.DirectoryService.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listSchemaExtensions' smart constructor.
-data ListSchemaExtensions = ListSchemaExtensions'
-  { _lseNextToken   :: !(Maybe Text)
-  , _lseLimit       :: !(Maybe Nat)
-  , _lseDirectoryId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSchemaExtensions = ListSchemaExtensions'{_lseNextToken
+                                                  :: !(Maybe Text),
+                                                  _lseLimit :: !(Maybe Nat),
+                                                  _lseDirectoryId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSchemaExtensions' with the minimum fields required to make a request.
 --
@@ -67,13 +69,9 @@ data ListSchemaExtensions = ListSchemaExtensions'
 listSchemaExtensions
     :: Text -- ^ 'lseDirectoryId'
     -> ListSchemaExtensions
-listSchemaExtensions pDirectoryId_ =
-  ListSchemaExtensions'
-    { _lseNextToken = Nothing
-    , _lseLimit = Nothing
-    , _lseDirectoryId = pDirectoryId_
-    }
-
+listSchemaExtensions pDirectoryId_
+  = ListSchemaExtensions'{_lseNextToken = Nothing,
+                          _lseLimit = Nothing, _lseDirectoryId = pDirectoryId_}
 
 -- | The @ListSchemaExtensions.NextToken@ value from a previous call to @ListSchemaExtensions@ . Pass null if this is the first call.
 lseNextToken :: Lens' ListSchemaExtensions (Maybe Text)
@@ -86,6 +84,13 @@ lseLimit = lens _lseLimit (\ s a -> s{_lseLimit = a}) . mapping _Nat
 -- | The identifier of the directory from which to retrieve the schema extension information.
 lseDirectoryId :: Lens' ListSchemaExtensions Text
 lseDirectoryId = lens _lseDirectoryId (\ s a -> s{_lseDirectoryId = a})
+
+instance AWSPager ListSchemaExtensions where
+        page rq rs
+          | stop (rs ^. lsersNextToken) = Nothing
+          | stop (rs ^. lsersSchemaExtensionsInfo) = Nothing
+          | otherwise =
+            Just $ rq & lseNextToken .~ rs ^. lsersNextToken
 
 instance AWSRequest ListSchemaExtensions where
         type Rs ListSchemaExtensions =
@@ -128,12 +133,17 @@ instance ToQuery ListSchemaExtensions where
         toQuery = const mempty
 
 -- | /See:/ 'listSchemaExtensionsResponse' smart constructor.
-data ListSchemaExtensionsResponse = ListSchemaExtensionsResponse'
-  { _lsersSchemaExtensionsInfo :: !(Maybe [SchemaExtensionInfo])
-  , _lsersNextToken            :: !(Maybe Text)
-  , _lsersResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSchemaExtensionsResponse = ListSchemaExtensionsResponse'{_lsersSchemaExtensionsInfo
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [SchemaExtensionInfo]),
+                                                                  _lsersNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lsersResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListSchemaExtensionsResponse' with the minimum fields required to make a request.
 --
@@ -147,13 +157,11 @@ data ListSchemaExtensionsResponse = ListSchemaExtensionsResponse'
 listSchemaExtensionsResponse
     :: Int -- ^ 'lsersResponseStatus'
     -> ListSchemaExtensionsResponse
-listSchemaExtensionsResponse pResponseStatus_ =
-  ListSchemaExtensionsResponse'
-    { _lsersSchemaExtensionsInfo = Nothing
-    , _lsersNextToken = Nothing
-    , _lsersResponseStatus = pResponseStatus_
-    }
-
+listSchemaExtensionsResponse pResponseStatus_
+  = ListSchemaExtensionsResponse'{_lsersSchemaExtensionsInfo
+                                    = Nothing,
+                                  _lsersNextToken = Nothing,
+                                  _lsersResponseStatus = pResponseStatus_}
 
 -- | Information about the schema extensions applied to the directory.
 lsersSchemaExtensionsInfo :: Lens' ListSchemaExtensionsResponse [SchemaExtensionInfo]

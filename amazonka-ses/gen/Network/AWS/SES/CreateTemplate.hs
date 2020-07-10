@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
+-- Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
 --
 --
 -- You can execute this operation no more than once per second.
@@ -45,15 +45,14 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to create an email template. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
+-- | Represents a request to create an email template. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'createTemplate' smart constructor.
-newtype CreateTemplate = CreateTemplate'
-  { _ctTemplate :: Template
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateTemplate = CreateTemplate'{_ctTemplate
+                                         :: Template}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTemplate' with the minimum fields required to make a request.
 --
@@ -63,8 +62,8 @@ newtype CreateTemplate = CreateTemplate'
 createTemplate
     :: Template -- ^ 'ctTemplate'
     -> CreateTemplate
-createTemplate pTemplate_ = CreateTemplate' {_ctTemplate = pTemplate_}
-
+createTemplate pTemplate_
+  = CreateTemplate'{_ctTemplate = pTemplate_}
 
 -- | The content of the email, composed of a subject line, an HTML part, and a text-only part.
 ctTemplate :: Lens' CreateTemplate Template
@@ -96,10 +95,10 @@ instance ToQuery CreateTemplate where
                "Template" =: _ctTemplate]
 
 -- | /See:/ 'createTemplateResponse' smart constructor.
-newtype CreateTemplateResponse = CreateTemplateResponse'
-  { _ctrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateTemplateResponse = CreateTemplateResponse'{_ctrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateTemplateResponse' with the minimum fields required to make a request.
 --
@@ -109,9 +108,9 @@ newtype CreateTemplateResponse = CreateTemplateResponse'
 createTemplateResponse
     :: Int -- ^ 'ctrsResponseStatus'
     -> CreateTemplateResponse
-createTemplateResponse pResponseStatus_ =
-  CreateTemplateResponse' {_ctrsResponseStatus = pResponseStatus_}
-
+createTemplateResponse pResponseStatus_
+  = CreateTemplateResponse'{_ctrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 ctrsResponseStatus :: Lens' CreateTemplateResponse Int

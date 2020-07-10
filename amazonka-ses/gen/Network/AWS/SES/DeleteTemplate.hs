@@ -45,15 +45,14 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to delete an email template. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
+-- | Represents a request to delete an email template. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'deleteTemplate' smart constructor.
-newtype DeleteTemplate = DeleteTemplate'
-  { _dtTemplateName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTemplate = DeleteTemplate'{_dtTemplateName
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTemplate' with the minimum fields required to make a request.
 --
@@ -63,9 +62,8 @@ newtype DeleteTemplate = DeleteTemplate'
 deleteTemplate
     :: Text -- ^ 'dtTemplateName'
     -> DeleteTemplate
-deleteTemplate pTemplateName_ =
-  DeleteTemplate' {_dtTemplateName = pTemplateName_}
-
+deleteTemplate pTemplateName_
+  = DeleteTemplate'{_dtTemplateName = pTemplateName_}
 
 -- | The name of the template to be deleted.
 dtTemplateName :: Lens' DeleteTemplate Text
@@ -97,10 +95,10 @@ instance ToQuery DeleteTemplate where
                "TemplateName" =: _dtTemplateName]
 
 -- | /See:/ 'deleteTemplateResponse' smart constructor.
-newtype DeleteTemplateResponse = DeleteTemplateResponse'
-  { _dtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTemplateResponse = DeleteTemplateResponse'{_dtrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteTemplateResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +108,9 @@ newtype DeleteTemplateResponse = DeleteTemplateResponse'
 deleteTemplateResponse
     :: Int -- ^ 'dtrsResponseStatus'
     -> DeleteTemplateResponse
-deleteTemplateResponse pResponseStatus_ =
-  DeleteTemplateResponse' {_dtrsResponseStatus = pResponseStatus_}
-
+deleteTemplateResponse pResponseStatus_
+  = DeleteTemplateResponse'{_dtrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 dtrsResponseStatus :: Lens' DeleteTemplateResponse Int

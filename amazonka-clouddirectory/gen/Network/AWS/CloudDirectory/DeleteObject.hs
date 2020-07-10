@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted.
+-- Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted. The maximum number of attributes that can be deleted during an object deletion is 30. For more information, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html Amazon Cloud Directory Limits> .
 --
 --
 module Network.AWS.CloudDirectory.DeleteObject
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteObject' smart constructor.
-data DeleteObject = DeleteObject'
-  { _doDirectoryARN    :: !Text
-  , _doObjectReference :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteObject = DeleteObject'{_doDirectoryARN ::
+                                  !Text,
+                                  _doObjectReference :: !ObjectReference}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteObject' with the minimum fields required to make a request.
 --
@@ -62,10 +61,9 @@ deleteObject
     :: Text -- ^ 'doDirectoryARN'
     -> ObjectReference -- ^ 'doObjectReference'
     -> DeleteObject
-deleteObject pDirectoryARN_ pObjectReference_ =
-  DeleteObject'
-    {_doDirectoryARN = pDirectoryARN_, _doObjectReference = pObjectReference_}
-
+deleteObject pDirectoryARN_ pObjectReference_
+  = DeleteObject'{_doDirectoryARN = pDirectoryARN_,
+                  _doObjectReference = pObjectReference_}
 
 -- | The Amazon Resource Name (ARN) that is associated with the 'Directory' where the object resides. For more information, see 'arns' .
 doDirectoryARN :: Lens' DeleteObject Text
@@ -106,10 +104,10 @@ instance ToQuery DeleteObject where
         toQuery = const mempty
 
 -- | /See:/ 'deleteObjectResponse' smart constructor.
-newtype DeleteObjectResponse = DeleteObjectResponse'
-  { _dorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteObjectResponse = DeleteObjectResponse'{_dorsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteObjectResponse' with the minimum fields required to make a request.
 --
@@ -119,9 +117,9 @@ newtype DeleteObjectResponse = DeleteObjectResponse'
 deleteObjectResponse
     :: Int -- ^ 'dorsResponseStatus'
     -> DeleteObjectResponse
-deleteObjectResponse pResponseStatus_ =
-  DeleteObjectResponse' {_dorsResponseStatus = pResponseStatus_}
-
+deleteObjectResponse pResponseStatus_
+  = DeleteObjectResponse'{_dorsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dorsResponseStatus :: Lens' DeleteObjectResponse Int

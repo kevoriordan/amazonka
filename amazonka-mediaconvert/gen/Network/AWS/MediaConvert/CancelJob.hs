@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
+-- Permanently cancel a job. Once you have canceled a job, you can't start it again.
 module Network.AWS.MediaConvert.CancelJob
     (
     -- * Creating a Request
@@ -42,10 +42,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'cancelJob' smart constructor.
-newtype CancelJob = CancelJob'
-  { _cjId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelJob = CancelJob'{_cjId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJob' with the minimum fields required to make a request.
 --
@@ -55,8 +53,7 @@ newtype CancelJob = CancelJob'
 cancelJob
     :: Text -- ^ 'cjId'
     -> CancelJob
-cancelJob pId_ = CancelJob' {_cjId = pId_}
-
+cancelJob pId_ = CancelJob'{_cjId = pId_}
 
 -- | The Job ID of the job to be cancelled.
 cjId :: Lens' CancelJob Text
@@ -89,10 +86,9 @@ instance ToQuery CancelJob where
         toQuery = const mempty
 
 -- | /See:/ 'cancelJobResponse' smart constructor.
-newtype CancelJobResponse = CancelJobResponse'
-  { _crsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelJobResponse = CancelJobResponse'{_crsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJobResponse' with the minimum fields required to make a request.
 --
@@ -102,9 +98,9 @@ newtype CancelJobResponse = CancelJobResponse'
 cancelJobResponse
     :: Int -- ^ 'crsResponseStatus'
     -> CancelJobResponse
-cancelJobResponse pResponseStatus_ =
-  CancelJobResponse' {_crsResponseStatus = pResponseStatus_}
-
+cancelJobResponse pResponseStatus_
+  = CancelJobResponse'{_crsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 crsResponseStatus :: Lens' CancelJobResponse Int

@@ -78,6 +78,7 @@ library
         , Network.AWS.WorkDocs.GetDocumentVersion
         , Network.AWS.WorkDocs.GetFolder
         , Network.AWS.WorkDocs.GetFolderPath
+        , Network.AWS.WorkDocs.GetResources
         , Network.AWS.WorkDocs.InitiateDocumentVersionUpload
         , Network.AWS.WorkDocs.RemoveAllResourcePermissions
         , Network.AWS.WorkDocs.RemoveResourcePermission
@@ -89,12 +90,60 @@ library
         , Network.AWS.WorkDocs.Waiters
 
     other-modules:
-          Network.AWS.WorkDocs.Types.Product
-        , Network.AWS.WorkDocs.Types.Sum
+          Network.AWS.WorkDocs.Types.Activity
+        , Network.AWS.WorkDocs.Types.ActivityType
+        , Network.AWS.WorkDocs.Types.BooleanEnumType
+        , Network.AWS.WorkDocs.Types.Comment
+        , Network.AWS.WorkDocs.Types.CommentMetadata
+        , Network.AWS.WorkDocs.Types.CommentStatusType
+        , Network.AWS.WorkDocs.Types.CommentVisibilityType
+        , Network.AWS.WorkDocs.Types.DocumentMetadata
+        , Network.AWS.WorkDocs.Types.DocumentSourceType
+        , Network.AWS.WorkDocs.Types.DocumentStatusType
+        , Network.AWS.WorkDocs.Types.DocumentThumbnailType
+        , Network.AWS.WorkDocs.Types.DocumentVersionMetadata
+        , Network.AWS.WorkDocs.Types.DocumentVersionStatus
+        , Network.AWS.WorkDocs.Types.FolderContentType
+        , Network.AWS.WorkDocs.Types.FolderMetadata
+        , Network.AWS.WorkDocs.Types.GroupMetadata
+        , Network.AWS.WorkDocs.Types.LocaleType
+        , Network.AWS.WorkDocs.Types.NotificationOptions
+        , Network.AWS.WorkDocs.Types.OrderType
+        , Network.AWS.WorkDocs.Types.Participants
+        , Network.AWS.WorkDocs.Types.PermissionInfo
+        , Network.AWS.WorkDocs.Types.Principal
+        , Network.AWS.WorkDocs.Types.PrincipalType
+        , Network.AWS.WorkDocs.Types.Product
+        , Network.AWS.WorkDocs.Types.ResourceCollectionType
+        , Network.AWS.WorkDocs.Types.ResourceMetadata
+        , Network.AWS.WorkDocs.Types.ResourcePath
+        , Network.AWS.WorkDocs.Types.ResourcePathComponent
+        , Network.AWS.WorkDocs.Types.ResourceSortType
+        , Network.AWS.WorkDocs.Types.ResourceStateType
+        , Network.AWS.WorkDocs.Types.ResourceType
+        , Network.AWS.WorkDocs.Types.RolePermissionType
+        , Network.AWS.WorkDocs.Types.RoleType
+        , Network.AWS.WorkDocs.Types.SharePrincipal
+        , Network.AWS.WorkDocs.Types.ShareResult
+        , Network.AWS.WorkDocs.Types.ShareStatusType
+        , Network.AWS.WorkDocs.Types.StorageRuleType
+        , Network.AWS.WorkDocs.Types.StorageType
+        , Network.AWS.WorkDocs.Types.Subscription
+        , Network.AWS.WorkDocs.Types.SubscriptionProtocolType
+        , Network.AWS.WorkDocs.Types.SubscriptionType
+        , Network.AWS.WorkDocs.Types.UploadMetadata
+        , Network.AWS.WorkDocs.Types.User
+        , Network.AWS.WorkDocs.Types.UserFilterType
+        , Network.AWS.WorkDocs.Types.UserMetadata
+        , Network.AWS.WorkDocs.Types.UserSortType
+        , Network.AWS.WorkDocs.Types.UserStatusType
+        , Network.AWS.WorkDocs.Types.UserStorageMetadata
+        , Network.AWS.WorkDocs.Types.UserType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-workdocs-test
     type:              exitcode-stdio-1.0
@@ -118,6 +167,7 @@ test-suite amazonka-workdocs-test
         , amazonka-workdocs
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

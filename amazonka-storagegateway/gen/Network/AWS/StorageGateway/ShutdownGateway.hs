@@ -23,7 +23,7 @@
 --
 -- The operation shuts down the gateway service component running in the gateway's virtual machine (VM) and not the host VM.
 --
--- After the gateway is shutdown, you cannot call any other API except 'StartGateway' , 'DescribeGatewayInformation' , and 'ListGateways' . For more information, see 'ActivateGateway' . Your applications cannot read from or write to the gateway's storage volumes, and there are no snapshots taken.
+-- After the gateway is shutdown, you cannot call any other API except 'StartGateway' , 'DescribeGatewayInformation' and 'ListGateways' . For more information, see 'ActivateGateway' . Your applications cannot read from or write to the gateway's storage volumes, and there are no snapshots taken.
 --
 -- If do not intend to use the gateway again, you must delete the gateway (using 'DeleteGateway' ) to no longer pay software charges associated with the gateway.
 --
@@ -50,15 +50,14 @@ import Network.AWS.Response
 import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
--- | A JSON object containing the of the gateway to shut down.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway to shut down.
 --
 --
 --
 -- /See:/ 'shutdownGateway' smart constructor.
-newtype ShutdownGateway = ShutdownGateway'
-  { _sGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ShutdownGateway = ShutdownGateway'{_sGatewayARN
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ShutdownGateway' with the minimum fields required to make a request.
 --
@@ -68,8 +67,8 @@ newtype ShutdownGateway = ShutdownGateway'
 shutdownGateway
     :: Text -- ^ 'sGatewayARN'
     -> ShutdownGateway
-shutdownGateway pGatewayARN_ = ShutdownGateway' {_sGatewayARN = pGatewayARN_}
-
+shutdownGateway pGatewayARN_
+  = ShutdownGateway'{_sGatewayARN = pGatewayARN_}
 
 -- | Undocumented member.
 sGatewayARN :: Lens' ShutdownGateway Text
@@ -109,16 +108,17 @@ instance ToPath ShutdownGateway where
 instance ToQuery ShutdownGateway where
         toQuery = const mempty
 
--- | A JSON object containing the of the gateway that was shut down.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway that was shut down.
 --
 --
 --
 -- /See:/ 'shutdownGatewayResponse' smart constructor.
-data ShutdownGatewayResponse = ShutdownGatewayResponse'
-  { _srsGatewayARN     :: !(Maybe Text)
-  , _srsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ShutdownGatewayResponse = ShutdownGatewayResponse'{_srsGatewayARN
+                                                        :: !(Maybe Text),
+                                                        _srsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ShutdownGatewayResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +130,9 @@ data ShutdownGatewayResponse = ShutdownGatewayResponse'
 shutdownGatewayResponse
     :: Int -- ^ 'srsResponseStatus'
     -> ShutdownGatewayResponse
-shutdownGatewayResponse pResponseStatus_ =
-  ShutdownGatewayResponse'
-    {_srsGatewayARN = Nothing, _srsResponseStatus = pResponseStatus_}
-
+shutdownGatewayResponse pResponseStatus_
+  = ShutdownGatewayResponse'{_srsGatewayARN = Nothing,
+                             _srsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 srsGatewayARN :: Lens' ShutdownGatewayResponse (Maybe Text)

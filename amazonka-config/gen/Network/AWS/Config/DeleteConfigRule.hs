@@ -45,15 +45,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteConfigRule' smart constructor.
-newtype DeleteConfigRule = DeleteConfigRule'
-  { _dcrConfigRuleName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConfigRule = DeleteConfigRule'{_dcrConfigRuleName
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteConfigRule' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ newtype DeleteConfigRule = DeleteConfigRule'
 deleteConfigRule
     :: Text -- ^ 'dcrConfigRuleName'
     -> DeleteConfigRule
-deleteConfigRule pConfigRuleName_ =
-  DeleteConfigRule' {_dcrConfigRuleName = pConfigRuleName_}
-
+deleteConfigRule pConfigRuleName_
+  = DeleteConfigRule'{_dcrConfigRuleName =
+                        pConfigRuleName_}
 
 -- | The name of the AWS Config rule that you want to delete.
 dcrConfigRuleName :: Lens' DeleteConfigRule Text
@@ -103,16 +102,14 @@ instance ToQuery DeleteConfigRule where
         toQuery = const mempty
 
 -- | /See:/ 'deleteConfigRuleResponse' smart constructor.
-data DeleteConfigRuleResponse =
-  DeleteConfigRuleResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConfigRuleResponse = DeleteConfigRuleResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteConfigRuleResponse' with the minimum fields required to make a request.
 --
 deleteConfigRuleResponse
     :: DeleteConfigRuleResponse
 deleteConfigRuleResponse = DeleteConfigRuleResponse'
-
 
 instance NFData DeleteConfigRuleResponse where

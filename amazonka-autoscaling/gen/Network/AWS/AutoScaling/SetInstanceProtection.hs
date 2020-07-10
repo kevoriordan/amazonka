@@ -21,7 +21,7 @@
 -- Updates the instance protection settings of the specified instances.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html#instance-protection Instance Protection> in the /Auto Scaling User Guide/ .
+-- For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection Instance Protection> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.SetInstanceProtection
     (
@@ -48,12 +48,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setInstanceProtection' smart constructor.
-data SetInstanceProtection = SetInstanceProtection'
-  { _sipInstanceIds          :: ![Text]
-  , _sipAutoScalingGroupName :: !Text
-  , _sipProtectedFromScaleIn :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetInstanceProtection = SetInstanceProtection'{_sipInstanceIds
+                                                    :: ![Text],
+                                                    _sipAutoScalingGroupName ::
+                                                    !Text,
+                                                    _sipProtectedFromScaleIn ::
+                                                    !Bool}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'SetInstanceProtection' with the minimum fields required to make a request.
 --
@@ -63,18 +65,16 @@ data SetInstanceProtection = SetInstanceProtection'
 --
 -- * 'sipAutoScalingGroupName' - The name of the Auto Scaling group.
 --
--- * 'sipProtectedFromScaleIn' - Indicates whether the instance is protected from termination by Auto Scaling when scaling in.
+-- * 'sipProtectedFromScaleIn' - Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
 setInstanceProtection
     :: Text -- ^ 'sipAutoScalingGroupName'
     -> Bool -- ^ 'sipProtectedFromScaleIn'
     -> SetInstanceProtection
-setInstanceProtection pAutoScalingGroupName_ pProtectedFromScaleIn_ =
-  SetInstanceProtection'
-    { _sipInstanceIds = mempty
-    , _sipAutoScalingGroupName = pAutoScalingGroupName_
-    , _sipProtectedFromScaleIn = pProtectedFromScaleIn_
-    }
-
+setInstanceProtection pAutoScalingGroupName_
+  pProtectedFromScaleIn_
+  = SetInstanceProtection'{_sipInstanceIds = mempty,
+                           _sipAutoScalingGroupName = pAutoScalingGroupName_,
+                           _sipProtectedFromScaleIn = pProtectedFromScaleIn_}
 
 -- | One or more instance IDs.
 sipInstanceIds :: Lens' SetInstanceProtection [Text]
@@ -84,7 +84,7 @@ sipInstanceIds = lens _sipInstanceIds (\ s a -> s{_sipInstanceIds = a}) . _Coerc
 sipAutoScalingGroupName :: Lens' SetInstanceProtection Text
 sipAutoScalingGroupName = lens _sipAutoScalingGroupName (\ s a -> s{_sipAutoScalingGroupName = a})
 
--- | Indicates whether the instance is protected from termination by Auto Scaling when scaling in.
+-- | Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
 sipProtectedFromScaleIn :: Lens' SetInstanceProtection Bool
 sipProtectedFromScaleIn = lens _sipProtectedFromScaleIn (\ s a -> s{_sipProtectedFromScaleIn = a})
 
@@ -119,10 +119,10 @@ instance ToQuery SetInstanceProtection where
                "ProtectedFromScaleIn" =: _sipProtectedFromScaleIn]
 
 -- | /See:/ 'setInstanceProtectionResponse' smart constructor.
-newtype SetInstanceProtectionResponse = SetInstanceProtectionResponse'
-  { _siprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetInstanceProtectionResponse = SetInstanceProtectionResponse'{_siprsResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'SetInstanceProtectionResponse' with the minimum fields required to make a request.
 --
@@ -132,9 +132,9 @@ newtype SetInstanceProtectionResponse = SetInstanceProtectionResponse'
 setInstanceProtectionResponse
     :: Int -- ^ 'siprsResponseStatus'
     -> SetInstanceProtectionResponse
-setInstanceProtectionResponse pResponseStatus_ =
-  SetInstanceProtectionResponse' {_siprsResponseStatus = pResponseStatus_}
-
+setInstanceProtectionResponse pResponseStatus_
+  = SetInstanceProtectionResponse'{_siprsResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 siprsResponseStatus :: Lens' SetInstanceProtectionResponse Int

@@ -56,19 +56,23 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeEventSubscriptions' smart constructor.
-data DescribeEventSubscriptions = DescribeEventSubscriptions'
-  { _dessSubscriptionName :: !(Maybe Text)
-  , _dessTagValues        :: !(Maybe [Text])
-  , _dessTagKeys          :: !(Maybe [Text])
-  , _dessMarker           :: !(Maybe Text)
-  , _dessMaxRecords       :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventSubscriptions = DescribeEventSubscriptions'{_dessSubscriptionName
+                                                              :: !(Maybe Text),
+                                                              _dessTagValues ::
+                                                              !(Maybe [Text]),
+                                                              _dessTagKeys ::
+                                                              !(Maybe [Text]),
+                                                              _dessMarker ::
+                                                              !(Maybe Text),
+                                                              _dessMaxRecords ::
+                                                              !(Maybe Int)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeEventSubscriptions' with the minimum fields required to make a request.
 --
@@ -80,20 +84,17 @@ data DescribeEventSubscriptions = DescribeEventSubscriptions'
 --
 -- * 'dessTagKeys' - A tag key or keys for which you want to return all matching event notification subscriptions that are associated with the specified key or keys. For example, suppose that you have subscriptions that are tagged with keys called @owner@ and @environment@ . If you specify both of these tag keys in the request, Amazon Redshift returns a response with the subscriptions that have either or both of these tag keys associated with them.
 --
--- * 'dessMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- * 'dessMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 --
 -- * 'dessMaxRecords' - The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified @MaxRecords@ value, a value is returned in a @marker@ field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: @100@  Constraints: minimum 20, maximum 100.
 describeEventSubscriptions
     :: DescribeEventSubscriptions
-describeEventSubscriptions =
-  DescribeEventSubscriptions'
-    { _dessSubscriptionName = Nothing
-    , _dessTagValues = Nothing
-    , _dessTagKeys = Nothing
-    , _dessMarker = Nothing
-    , _dessMaxRecords = Nothing
-    }
-
+describeEventSubscriptions
+  = DescribeEventSubscriptions'{_dessSubscriptionName =
+                                  Nothing,
+                                _dessTagValues = Nothing,
+                                _dessTagKeys = Nothing, _dessMarker = Nothing,
+                                _dessMaxRecords = Nothing}
 
 -- | The name of the Amazon Redshift event notification subscription to be described.
 dessSubscriptionName :: Lens' DescribeEventSubscriptions (Maybe Text)
@@ -107,7 +108,7 @@ dessTagValues = lens _dessTagValues (\ s a -> s{_dessTagValues = a}) . _Default 
 dessTagKeys :: Lens' DescribeEventSubscriptions [Text]
 dessTagKeys = lens _dessTagKeys (\ s a -> s{_dessTagKeys = a}) . _Default . _Coerce
 
--- | An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- | An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 dessMarker :: Lens' DescribeEventSubscriptions (Maybe Text)
 dessMarker = lens _dessMarker (\ s a -> s{_dessMarker = a})
 
@@ -160,17 +161,24 @@ instance ToQuery DescribeEventSubscriptions where
                "Marker" =: _dessMarker,
                "MaxRecords" =: _dessMaxRecords]
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeEventSubscriptionsResponse' smart constructor.
-data DescribeEventSubscriptionsResponse = DescribeEventSubscriptionsResponse'
-  { _desrsEventSubscriptionsList :: !(Maybe [EventSubscription])
-  , _desrsMarker                 :: !(Maybe Text)
-  , _desrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventSubscriptionsResponse = DescribeEventSubscriptionsResponse'{_desrsEventSubscriptionsList
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [EventSubscription]),
+                                                                              _desrsMarker
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _desrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeEventSubscriptionsResponse' with the minimum fields required to make a request.
 --
@@ -178,25 +186,23 @@ data DescribeEventSubscriptionsResponse = DescribeEventSubscriptionsResponse'
 --
 -- * 'desrsEventSubscriptionsList' - A list of event subscriptions.
 --
--- * 'desrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- * 'desrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 --
 -- * 'desrsResponseStatus' - -- | The response status code.
 describeEventSubscriptionsResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeEventSubscriptionsResponse
-describeEventSubscriptionsResponse pResponseStatus_ =
-  DescribeEventSubscriptionsResponse'
-    { _desrsEventSubscriptionsList = Nothing
-    , _desrsMarker = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
-
+describeEventSubscriptionsResponse pResponseStatus_
+  = DescribeEventSubscriptionsResponse'{_desrsEventSubscriptionsList
+                                          = Nothing,
+                                        _desrsMarker = Nothing,
+                                        _desrsResponseStatus = pResponseStatus_}
 
 -- | A list of event subscriptions.
 desrsEventSubscriptionsList :: Lens' DescribeEventSubscriptionsResponse [EventSubscription]
 desrsEventSubscriptionsList = lens _desrsEventSubscriptionsList (\ s a -> s{_desrsEventSubscriptionsList = a}) . _Default . _Coerce
 
--- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 desrsMarker :: Lens' DescribeEventSubscriptionsResponse (Maybe Text)
 desrsMarker = lens _desrsMarker (\ s a -> s{_desrsMarker = a})
 

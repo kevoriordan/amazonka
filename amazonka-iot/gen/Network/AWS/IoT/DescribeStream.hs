@@ -33,8 +33,8 @@ module Network.AWS.IoT.DescribeStream
     , describeStreamResponse
     , DescribeStreamResponse
     -- * Response Lenses
-    , dssrsStreamInfo
-    , dssrsResponseStatus
+    , dscrbstrmrsStreamInfo
+    , dscrbstrmrsResponseStatus
     ) where
 
 import Network.AWS.IoT.Types
@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeStream' smart constructor.
-newtype DescribeStream = DescribeStream'
-  { _dStreamId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeStream = DescribeStream'{_dStreamId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeStream' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype DescribeStream = DescribeStream'
 describeStream
     :: Text -- ^ 'dStreamId'
     -> DescribeStream
-describeStream pStreamId_ = DescribeStream' {_dStreamId = pStreamId_}
-
+describeStream pStreamId_
+  = DescribeStream'{_dStreamId = pStreamId_}
 
 -- | The stream ID.
 dStreamId :: Lens' DescribeStream Text
@@ -89,33 +88,34 @@ instance ToQuery DescribeStream where
         toQuery = const mempty
 
 -- | /See:/ 'describeStreamResponse' smart constructor.
-data DescribeStreamResponse = DescribeStreamResponse'
-  { _dssrsStreamInfo     :: !(Maybe StreamInfo)
-  , _dssrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStreamResponse = DescribeStreamResponse'{_dscrbstrmrsStreamInfo
+                                                      :: !(Maybe StreamInfo),
+                                                      _dscrbstrmrsResponseStatus
+                                                      :: !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeStreamResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dssrsStreamInfo' - Information about the stream.
+-- * 'dscrbstrmrsStreamInfo' - Information about the stream.
 --
--- * 'dssrsResponseStatus' - -- | The response status code.
+-- * 'dscrbstrmrsResponseStatus' - -- | The response status code.
 describeStreamResponse
-    :: Int -- ^ 'dssrsResponseStatus'
+    :: Int -- ^ 'dscrbstrmrsResponseStatus'
     -> DescribeStreamResponse
-describeStreamResponse pResponseStatus_ =
-  DescribeStreamResponse'
-    {_dssrsStreamInfo = Nothing, _dssrsResponseStatus = pResponseStatus_}
-
+describeStreamResponse pResponseStatus_
+  = DescribeStreamResponse'{_dscrbstrmrsStreamInfo =
+                              Nothing,
+                            _dscrbstrmrsResponseStatus = pResponseStatus_}
 
 -- | Information about the stream.
-dssrsStreamInfo :: Lens' DescribeStreamResponse (Maybe StreamInfo)
-dssrsStreamInfo = lens _dssrsStreamInfo (\ s a -> s{_dssrsStreamInfo = a})
+dscrbstrmrsStreamInfo :: Lens' DescribeStreamResponse (Maybe StreamInfo)
+dscrbstrmrsStreamInfo = lens _dscrbstrmrsStreamInfo (\ s a -> s{_dscrbstrmrsStreamInfo = a})
 
 -- | -- | The response status code.
-dssrsResponseStatus :: Lens' DescribeStreamResponse Int
-dssrsResponseStatus = lens _dssrsResponseStatus (\ s a -> s{_dssrsResponseStatus = a})
+dscrbstrmrsResponseStatus :: Lens' DescribeStreamResponse Int
+dscrbstrmrsResponseStatus = lens _dscrbstrmrsResponseStatus (\ s a -> s{_dscrbstrmrsResponseStatus = a})
 
 instance NFData DescribeStreamResponse where

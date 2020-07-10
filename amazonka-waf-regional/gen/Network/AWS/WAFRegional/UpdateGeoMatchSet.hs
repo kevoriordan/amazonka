@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts or deletes 'GeoMatchConstraint' objects in an @GeoMatchSet@ . For each @GeoMatchConstraint@ object, you specify the following values:
+-- Inserts or deletes 'GeoMatchConstraint' objects in an @GeoMatchSet@ . For each @GeoMatchConstraint@ object, you specify the following values: 
 --
 --
 --     * Whether to insert or delete the object from the array. If you want to change an @GeoMatchConstraint@ object, you delete the existing object and add a new one.
@@ -41,7 +41,7 @@
 --
 -- When you update an @GeoMatchSet@ , you specify the country that you want to add and/or the country that you want to delete. If you want to change a country, you delete the existing country and add the new one.
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAFRegional.UpdateGeoMatchSet
     (
@@ -69,12 +69,12 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'updateGeoMatchSet' smart constructor.
-data UpdateGeoMatchSet = UpdateGeoMatchSet'
-  { _ugmsGeoMatchSetId :: !Text
-  , _ugmsChangeToken   :: !Text
-  , _ugmsUpdates       :: !(List1 GeoMatchSetUpdate)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGeoMatchSet = UpdateGeoMatchSet'{_ugmsGeoMatchSetId
+                                            :: !Text,
+                                            _ugmsChangeToken :: !Text,
+                                            _ugmsUpdates ::
+                                            !(List1 GeoMatchSetUpdate)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateGeoMatchSet' with the minimum fields required to make a request.
 --
@@ -90,13 +90,12 @@ updateGeoMatchSet
     -> Text -- ^ 'ugmsChangeToken'
     -> NonEmpty GeoMatchSetUpdate -- ^ 'ugmsUpdates'
     -> UpdateGeoMatchSet
-updateGeoMatchSet pGeoMatchSetId_ pChangeToken_ pUpdates_ =
-  UpdateGeoMatchSet'
-    { _ugmsGeoMatchSetId = pGeoMatchSetId_
-    , _ugmsChangeToken = pChangeToken_
-    , _ugmsUpdates = _List1 # pUpdates_
-    }
-
+updateGeoMatchSet pGeoMatchSetId_ pChangeToken_
+  pUpdates_
+  = UpdateGeoMatchSet'{_ugmsGeoMatchSetId =
+                         pGeoMatchSetId_,
+                       _ugmsChangeToken = pChangeToken_,
+                       _ugmsUpdates = _List1 # pUpdates_}
 
 -- | The @GeoMatchSetId@ of the 'GeoMatchSet' that you want to update. @GeoMatchSetId@ is returned by 'CreateGeoMatchSet' and by 'ListGeoMatchSets' .
 ugmsGeoMatchSetId :: Lens' UpdateGeoMatchSet Text
@@ -148,11 +147,12 @@ instance ToQuery UpdateGeoMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'updateGeoMatchSetResponse' smart constructor.
-data UpdateGeoMatchSetResponse = UpdateGeoMatchSetResponse'
-  { _ugmsrsChangeToken    :: !(Maybe Text)
-  , _ugmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGeoMatchSetResponse = UpdateGeoMatchSetResponse'{_ugmsrsChangeToken
+                                                            :: !(Maybe Text),
+                                                            _ugmsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateGeoMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -164,10 +164,10 @@ data UpdateGeoMatchSetResponse = UpdateGeoMatchSetResponse'
 updateGeoMatchSetResponse
     :: Int -- ^ 'ugmsrsResponseStatus'
     -> UpdateGeoMatchSetResponse
-updateGeoMatchSetResponse pResponseStatus_ =
-  UpdateGeoMatchSetResponse'
-    {_ugmsrsChangeToken = Nothing, _ugmsrsResponseStatus = pResponseStatus_}
-
+updateGeoMatchSetResponse pResponseStatus_
+  = UpdateGeoMatchSetResponse'{_ugmsrsChangeToken =
+                                 Nothing,
+                               _ugmsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @UpdateGeoMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 ugmsrsChangeToken :: Lens' UpdateGeoMatchSetResponse (Maybe Text)

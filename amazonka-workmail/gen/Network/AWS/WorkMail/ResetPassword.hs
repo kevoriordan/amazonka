@@ -46,12 +46,11 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'resetPassword' smart constructor.
-data ResetPassword = ResetPassword'
-  { _rpOrganizationId :: !Text
-  , _rpUserId         :: !Text
-  , _rpPassword       :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ResetPassword = ResetPassword'{_rpOrganizationId
+                                    :: !Text,
+                                    _rpUserId :: !Text,
+                                    _rpPassword :: !(Sensitive Text)}
+                       deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResetPassword' with the minimum fields required to make a request.
 --
@@ -67,13 +66,11 @@ resetPassword
     -> Text -- ^ 'rpUserId'
     -> Text -- ^ 'rpPassword'
     -> ResetPassword
-resetPassword pOrganizationId_ pUserId_ pPassword_ =
-  ResetPassword'
-    { _rpOrganizationId = pOrganizationId_
-    , _rpUserId = pUserId_
-    , _rpPassword = _Sensitive # pPassword_
-    }
-
+resetPassword pOrganizationId_ pUserId_ pPassword_
+  = ResetPassword'{_rpOrganizationId =
+                     pOrganizationId_,
+                   _rpUserId = pUserId_,
+                   _rpPassword = _Sensitive # pPassword_}
 
 -- | The identifier of the organization that contains the user for which the password is reset.
 rpOrganizationId :: Lens' ResetPassword Text
@@ -123,10 +120,10 @@ instance ToQuery ResetPassword where
         toQuery = const mempty
 
 -- | /See:/ 'resetPasswordResponse' smart constructor.
-newtype ResetPasswordResponse = ResetPasswordResponse'
-  { _rprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ResetPasswordResponse = ResetPasswordResponse'{_rprsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ResetPasswordResponse' with the minimum fields required to make a request.
 --
@@ -136,9 +133,9 @@ newtype ResetPasswordResponse = ResetPasswordResponse'
 resetPasswordResponse
     :: Int -- ^ 'rprsResponseStatus'
     -> ResetPasswordResponse
-resetPasswordResponse pResponseStatus_ =
-  ResetPasswordResponse' {_rprsResponseStatus = pResponseStatus_}
-
+resetPasswordResponse pResponseStatus_
+  = ResetPasswordResponse'{_rprsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 rprsResponseStatus :: Lens' ResetPasswordResponse Int

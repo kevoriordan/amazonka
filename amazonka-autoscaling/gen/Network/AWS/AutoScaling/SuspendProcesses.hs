@@ -18,14 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Suspends the specified Auto Scaling processes, or all processes, for the specified Auto Scaling group.
+-- Suspends the specified automatic scaling processes, or all processes, for the specified Auto Scaling group.
 --
 --
--- Note that if you suspend either the @Launch@ or @Terminate@ process types, it can prevent other process types from functioning properly.
+-- If you suspend either the @Launch@ or @Terminate@ process types, it can prevent other process types from functioning properly.
 --
 -- To resume processes that have been suspended, use 'ResumeProcesses' .
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html Suspending and Resuming Auto Scaling Processes> in the /Auto Scaling User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html Suspending and Resuming Scaling Processes> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.SuspendProcesses
     (
@@ -49,30 +49,26 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'suspendProcesses' smart constructor.
-data SuspendProcesses = SuspendProcesses'
-  { _spScalingProcesses     :: !(Maybe [Text])
-  , _spAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SuspendProcesses = SuspendProcesses'{_spScalingProcesses
+                                          :: !(Maybe [Text]),
+                                          _spAutoScalingGroupName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SuspendProcesses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'spScalingProcesses' - One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@
+-- * 'spScalingProcesses' - One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@ 
 --
 -- * 'spAutoScalingGroupName' - The name of the Auto Scaling group.
 suspendProcesses
     :: Text -- ^ 'spAutoScalingGroupName'
     -> SuspendProcesses
-suspendProcesses pAutoScalingGroupName_ =
-  SuspendProcesses'
-    { _spScalingProcesses = Nothing
-    , _spAutoScalingGroupName = pAutoScalingGroupName_
-    }
+suspendProcesses pAutoScalingGroupName_
+  = SuspendProcesses'{_spScalingProcesses = Nothing,
+                      _spAutoScalingGroupName = pAutoScalingGroupName_}
 
-
--- | One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@
+-- | One or more of the following processes. If you omit this parameter, all processes are specified.     * @Launch@      * @Terminate@      * @HealthCheck@      * @ReplaceUnhealthy@      * @AZRebalance@      * @AlarmNotification@      * @ScheduledActions@      * @AddToLoadBalancer@ 
 spScalingProcesses :: Lens' SuspendProcesses [Text]
 spScalingProcesses = lens _spScalingProcesses (\ s a -> s{_spScalingProcesses = a}) . _Default . _Coerce
 
@@ -106,16 +102,14 @@ instance ToQuery SuspendProcesses where
                "AutoScalingGroupName" =: _spAutoScalingGroupName]
 
 -- | /See:/ 'suspendProcessesResponse' smart constructor.
-data SuspendProcessesResponse =
-  SuspendProcessesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SuspendProcessesResponse = SuspendProcessesResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'SuspendProcessesResponse' with the minimum fields required to make a request.
 --
 suspendProcessesResponse
     :: SuspendProcessesResponse
 suspendProcessesResponse = SuspendProcessesResponse'
-
 
 instance NFData SuspendProcessesResponse where

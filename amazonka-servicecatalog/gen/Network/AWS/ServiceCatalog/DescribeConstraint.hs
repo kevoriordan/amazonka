@@ -48,11 +48,10 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describeConstraint' smart constructor.
-data DescribeConstraint = DescribeConstraint'
-  { _dAcceptLanguage :: !(Maybe Text)
-  , _dId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConstraint = DescribeConstraint'{_dAcceptLanguage
+                                              :: !(Maybe Text),
+                                              _dId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeConstraint' with the minimum fields required to make a request.
 --
@@ -64,9 +63,9 @@ data DescribeConstraint = DescribeConstraint'
 describeConstraint
     :: Text -- ^ 'dId'
     -> DescribeConstraint
-describeConstraint pId_ =
-  DescribeConstraint' {_dAcceptLanguage = Nothing, _dId = pId_}
-
+describeConstraint pId_
+  = DescribeConstraint'{_dAcceptLanguage = Nothing,
+                        _dId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 dAcceptLanguage :: Lens' DescribeConstraint (Maybe Text)
@@ -116,13 +115,20 @@ instance ToQuery DescribeConstraint where
         toQuery = const mempty
 
 -- | /See:/ 'describeConstraintResponse' smart constructor.
-data DescribeConstraintResponse = DescribeConstraintResponse'
-  { _desrsStatus               :: !(Maybe RequestStatus)
-  , _desrsConstraintDetail     :: !(Maybe ConstraintDetail)
-  , _desrsConstraintParameters :: !(Maybe Text)
-  , _desrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConstraintResponse = DescribeConstraintResponse'{_desrsStatus
+                                                              ::
+                                                              !(Maybe
+                                                                  RequestStatus),
+                                                              _desrsConstraintDetail
+                                                              ::
+                                                              !(Maybe
+                                                                  ConstraintDetail),
+                                                              _desrsConstraintParameters
+                                                              :: !(Maybe Text),
+                                                              _desrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeConstraintResponse' with the minimum fields required to make a request.
 --
@@ -138,14 +144,11 @@ data DescribeConstraintResponse = DescribeConstraintResponse'
 describeConstraintResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeConstraintResponse
-describeConstraintResponse pResponseStatus_ =
-  DescribeConstraintResponse'
-    { _desrsStatus = Nothing
-    , _desrsConstraintDetail = Nothing
-    , _desrsConstraintParameters = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
-
+describeConstraintResponse pResponseStatus_
+  = DescribeConstraintResponse'{_desrsStatus = Nothing,
+                                _desrsConstraintDetail = Nothing,
+                                _desrsConstraintParameters = Nothing,
+                                _desrsResponseStatus = pResponseStatus_}
 
 -- | The status of the current request.
 desrsStatus :: Lens' DescribeConstraintResponse (Maybe RequestStatus)

@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a default VPC with a size @/16@ IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html Default VPC and Default Subnets> in the /Amazon Virtual Private Cloud User Guide/ . You cannot specify the components of the default VPC yourself.
+-- Creates a default VPC with a size @/16@ IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html Default VPC and Default Subnets> in the /Amazon Virtual Private Cloud User Guide/ . You cannot specify the components of the default VPC yourself.
 --
 --
--- You can create a default VPC if you deleted your previous default VPC. You cannot have more than one default VPC per region.
+-- If you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.
 --
--- If your account supports EC2-Classic, you cannot use this action to create a default VPC in a region that supports EC2-Classic. If you want a default VPC in a region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the <http://aws.amazon.com/vpc/faqs/#Default_VPCs Default VPCs FAQ> .
+-- If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the <http://aws.amazon.com/vpc/faqs/#Default_VPCs Default VPCs FAQ> .
 --
 module Network.AWS.EC2.CreateDefaultVPC
     (
@@ -48,15 +48,10 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CreateDefaultVpc.
---
---
---
--- /See:/ 'createDefaultVPC' smart constructor.
-newtype CreateDefaultVPC = CreateDefaultVPC'
-  { _cdvDryRun :: Maybe Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createDefaultVPC' smart constructor.
+newtype CreateDefaultVPC = CreateDefaultVPC'{_cdvDryRun
+                                             :: Maybe Bool}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDefaultVPC' with the minimum fields required to make a request.
 --
@@ -65,8 +60,8 @@ newtype CreateDefaultVPC = CreateDefaultVPC'
 -- * 'cdvDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 createDefaultVPC
     :: CreateDefaultVPC
-createDefaultVPC = CreateDefaultVPC' {_cdvDryRun = Nothing}
-
+createDefaultVPC
+  = CreateDefaultVPC'{_cdvDryRun = Nothing}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 cdvDryRun :: Lens' CreateDefaultVPC (Maybe Bool)
@@ -98,16 +93,13 @@ instance ToQuery CreateDefaultVPC where
                "Version" =: ("2016-11-15" :: ByteString),
                "DryRun" =: _cdvDryRun]
 
--- | Contains the output of CreateDefaultVpc.
---
---
---
--- /See:/ 'createDefaultVPCResponse' smart constructor.
-data CreateDefaultVPCResponse = CreateDefaultVPCResponse'
-  { _cdvrsVPC            :: !(Maybe VPC)
-  , _cdvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createDefaultVPCResponse' smart constructor.
+data CreateDefaultVPCResponse = CreateDefaultVPCResponse'{_cdvrsVPC
+                                                          :: !(Maybe VPC),
+                                                          _cdvrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateDefaultVPCResponse' with the minimum fields required to make a request.
 --
@@ -119,10 +111,9 @@ data CreateDefaultVPCResponse = CreateDefaultVPCResponse'
 createDefaultVPCResponse
     :: Int -- ^ 'cdvrsResponseStatus'
     -> CreateDefaultVPCResponse
-createDefaultVPCResponse pResponseStatus_ =
-  CreateDefaultVPCResponse'
-    {_cdvrsVPC = Nothing, _cdvrsResponseStatus = pResponseStatus_}
-
+createDefaultVPCResponse pResponseStatus_
+  = CreateDefaultVPCResponse'{_cdvrsVPC = Nothing,
+                              _cdvrsResponseStatus = pResponseStatus_}
 
 -- | Information about the VPC.
 cdvrsVPC :: Lens' CreateDefaultVPCResponse (Maybe VPC)

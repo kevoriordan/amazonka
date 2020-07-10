@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds one or more tags to a trail, up to a limit of 50. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).
+-- Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all AWS Regions only from the Region in which the trail was created (also known as its home region).
 --
 --
 module Network.AWS.CloudTrail.AddTags
@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'addTags' smart constructor.
-data AddTags = AddTags'
-  { _atTagsList   :: !(Maybe [Tag])
-  , _atResourceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTags = AddTags'{_atTagsList ::
+                        !(Maybe [Tag]),
+                        _atResourceId :: !Text}
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTags' with the minimum fields required to make a request.
 --
@@ -61,19 +60,19 @@ data AddTags = AddTags'
 --
 -- * 'atTagsList' - Contains a list of CloudTrail tags, up to a limit of 50
 --
--- * 'atResourceId' - Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is: @arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail@
+-- * 'atResourceId' - Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is: @arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail@ 
 addTags
     :: Text -- ^ 'atResourceId'
     -> AddTags
-addTags pResourceId_ =
-  AddTags' {_atTagsList = Nothing, _atResourceId = pResourceId_}
-
+addTags pResourceId_
+  = AddTags'{_atTagsList = Nothing,
+             _atResourceId = pResourceId_}
 
 -- | Contains a list of CloudTrail tags, up to a limit of 50
 atTagsList :: Lens' AddTags [Tag]
 atTagsList = lens _atTagsList (\ s a -> s{_atTagsList = a}) . _Default . _Coerce
 
--- | Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is: @arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail@
+-- | Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is: @arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail@ 
 atResourceId :: Lens' AddTags Text
 atResourceId = lens _atResourceId (\ s a -> s{_atResourceId = a})
 
@@ -116,10 +115,9 @@ instance ToQuery AddTags where
 --
 --
 -- /See:/ 'addTagsResponse' smart constructor.
-newtype AddTagsResponse = AddTagsResponse'
-  { _atrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddTagsResponse = AddTagsResponse'{_atrsResponseStatus
+                                           :: Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsResponse' with the minimum fields required to make a request.
 --
@@ -129,9 +127,9 @@ newtype AddTagsResponse = AddTagsResponse'
 addTagsResponse
     :: Int -- ^ 'atrsResponseStatus'
     -> AddTagsResponse
-addTagsResponse pResponseStatus_ =
-  AddTagsResponse' {_atrsResponseStatus = pResponseStatus_}
-
+addTagsResponse pResponseStatus_
+  = AddTagsResponse'{_atrsResponseStatus =
+                       pResponseStatus_}
 
 -- | -- | The response status code.
 atrsResponseStatus :: Lens' AddTagsResponse Int

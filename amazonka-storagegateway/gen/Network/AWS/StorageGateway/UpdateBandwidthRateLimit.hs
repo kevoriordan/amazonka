@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains.
+-- Updates the bandwidth rate limits of a gateway. You can update both the upload and download bandwidth rate limit or specify only one of the two. If you don't set a bandwidth rate limit, the existing rate limit remains. This operation is supported for the stored volume, cached volume and tape gateway types.'
 --
 --
 -- By default, a gateway's bandwidth rate limits are not set. If you don't set any limit, the gateway does not have any limitations on its bandwidth usage and could potentially use the maximum available bandwidth.
@@ -53,20 +53,22 @@ import Network.AWS.StorageGateway.Types.Product
 -- | A JSON object containing one or more of the following fields:
 --
 --
---     * 'UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec'
+--     * 'UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec' 
 --
---     * 'UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec'
+--     * 'UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec' 
 --
 --
 --
 --
 -- /See:/ 'updateBandwidthRateLimit' smart constructor.
-data UpdateBandwidthRateLimit = UpdateBandwidthRateLimit'
-  { _ubrlAverageUploadRateLimitInBitsPerSec   :: !(Maybe Nat)
-  , _ubrlAverageDownloadRateLimitInBitsPerSec :: !(Maybe Nat)
-  , _ubrlGatewayARN                           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateBandwidthRateLimit = UpdateBandwidthRateLimit'{_ubrlAverageUploadRateLimitInBitsPerSec
+                                                          :: !(Maybe Nat),
+                                                          _ubrlAverageDownloadRateLimitInBitsPerSec
+                                                          :: !(Maybe Nat),
+                                                          _ubrlGatewayARN ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateBandwidthRateLimit' with the minimum fields required to make a request.
 --
@@ -80,13 +82,12 @@ data UpdateBandwidthRateLimit = UpdateBandwidthRateLimit'
 updateBandwidthRateLimit
     :: Text -- ^ 'ubrlGatewayARN'
     -> UpdateBandwidthRateLimit
-updateBandwidthRateLimit pGatewayARN_ =
-  UpdateBandwidthRateLimit'
-    { _ubrlAverageUploadRateLimitInBitsPerSec = Nothing
-    , _ubrlAverageDownloadRateLimitInBitsPerSec = Nothing
-    , _ubrlGatewayARN = pGatewayARN_
-    }
-
+updateBandwidthRateLimit pGatewayARN_
+  = UpdateBandwidthRateLimit'{_ubrlAverageUploadRateLimitInBitsPerSec
+                                = Nothing,
+                              _ubrlAverageDownloadRateLimitInBitsPerSec =
+                                Nothing,
+                              _ubrlGatewayARN = pGatewayARN_}
 
 -- | The average upload bandwidth rate limit in bits per second.
 ubrlAverageUploadRateLimitInBitsPerSec :: Lens' UpdateBandwidthRateLimit (Maybe Natural)
@@ -140,16 +141,20 @@ instance ToPath UpdateBandwidthRateLimit where
 instance ToQuery UpdateBandwidthRateLimit where
         toQuery = const mempty
 
--- | A JSON object containing the of the gateway whose throttle information was updated.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway whose throttle information was updated.
 --
 --
 --
 -- /See:/ 'updateBandwidthRateLimitResponse' smart constructor.
-data UpdateBandwidthRateLimitResponse = UpdateBandwidthRateLimitResponse'
-  { _ubrlrsGatewayARN     :: !(Maybe Text)
-  , _ubrlrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateBandwidthRateLimitResponse = UpdateBandwidthRateLimitResponse'{_ubrlrsGatewayARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ubrlrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'UpdateBandwidthRateLimitResponse' with the minimum fields required to make a request.
 --
@@ -161,10 +166,10 @@ data UpdateBandwidthRateLimitResponse = UpdateBandwidthRateLimitResponse'
 updateBandwidthRateLimitResponse
     :: Int -- ^ 'ubrlrsResponseStatus'
     -> UpdateBandwidthRateLimitResponse
-updateBandwidthRateLimitResponse pResponseStatus_ =
-  UpdateBandwidthRateLimitResponse'
-    {_ubrlrsGatewayARN = Nothing, _ubrlrsResponseStatus = pResponseStatus_}
-
+updateBandwidthRateLimitResponse pResponseStatus_
+  = UpdateBandwidthRateLimitResponse'{_ubrlrsGatewayARN
+                                        = Nothing,
+                                      _ubrlrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ubrlrsGatewayARN :: Lens' UpdateBandwidthRateLimitResponse (Maybe Text)

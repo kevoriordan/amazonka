@@ -48,12 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'untagStream' smart constructor.
-data UntagStream = UntagStream'
-  { _usStreamARN  :: !(Maybe Text)
-  , _usStreamName :: !(Maybe Text)
-  , _usTagKeyList :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagStream = UntagStream'{_usStreamARN ::
+                                !(Maybe Text),
+                                _usStreamName :: !(Maybe Text),
+                                _usTagKeyList :: !(List1 Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagStream' with the minimum fields required to make a request.
 --
@@ -67,13 +66,10 @@ data UntagStream = UntagStream'
 untagStream
     :: NonEmpty Text -- ^ 'usTagKeyList'
     -> UntagStream
-untagStream pTagKeyList_ =
-  UntagStream'
-    { _usStreamARN = Nothing
-    , _usStreamName = Nothing
-    , _usTagKeyList = _List1 # pTagKeyList_
-    }
-
+untagStream pTagKeyList_
+  = UntagStream'{_usStreamARN = Nothing,
+                 _usStreamName = Nothing,
+                 _usTagKeyList = _List1 # pTagKeyList_}
 
 -- | The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
 usStreamARN :: Lens' UntagStream (Maybe Text)
@@ -117,10 +113,10 @@ instance ToQuery UntagStream where
         toQuery = const mempty
 
 -- | /See:/ 'untagStreamResponse' smart constructor.
-newtype UntagStreamResponse = UntagStreamResponse'
-  { _ursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UntagStreamResponse = UntagStreamResponse'{_ursResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UntagStreamResponse' with the minimum fields required to make a request.
 --
@@ -130,9 +126,9 @@ newtype UntagStreamResponse = UntagStreamResponse'
 untagStreamResponse
     :: Int -- ^ 'ursResponseStatus'
     -> UntagStreamResponse
-untagStreamResponse pResponseStatus_ =
-  UntagStreamResponse' {_ursResponseStatus = pResponseStatus_}
-
+untagStreamResponse pResponseStatus_
+  = UntagStreamResponse'{_ursResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 ursResponseStatus :: Lens' UntagStreamResponse Int

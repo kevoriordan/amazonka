@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.
+-- Resets all cache disks that have encountered an error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters an error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point, you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.
 --
 --
 -- /Important:/ If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly.
@@ -47,10 +47,9 @@ import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'resetCache' smart constructor.
-newtype ResetCache = ResetCache'
-  { _rcGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ResetCache = ResetCache'{_rcGatewayARN ::
+                                 Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResetCache' with the minimum fields required to make a request.
 --
@@ -60,8 +59,8 @@ newtype ResetCache = ResetCache'
 resetCache
     :: Text -- ^ 'rcGatewayARN'
     -> ResetCache
-resetCache pGatewayARN_ = ResetCache' {_rcGatewayARN = pGatewayARN_}
-
+resetCache pGatewayARN_
+  = ResetCache'{_rcGatewayARN = pGatewayARN_}
 
 -- | Undocumented member.
 rcGatewayARN :: Lens' ResetCache Text
@@ -101,11 +100,10 @@ instance ToQuery ResetCache where
         toQuery = const mempty
 
 -- | /See:/ 'resetCacheResponse' smart constructor.
-data ResetCacheResponse = ResetCacheResponse'
-  { _rrsGatewayARN     :: !(Maybe Text)
-  , _rrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetCacheResponse = ResetCacheResponse'{_rrsGatewayARN
+                                              :: !(Maybe Text),
+                                              _rrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResetCacheResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +115,9 @@ data ResetCacheResponse = ResetCacheResponse'
 resetCacheResponse
     :: Int -- ^ 'rrsResponseStatus'
     -> ResetCacheResponse
-resetCacheResponse pResponseStatus_ =
-  ResetCacheResponse'
-    {_rrsGatewayARN = Nothing, _rrsResponseStatus = pResponseStatus_}
-
+resetCacheResponse pResponseStatus_
+  = ResetCacheResponse'{_rrsGatewayARN = Nothing,
+                        _rrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 rrsGatewayARN :: Lens' ResetCacheResponse (Maybe Text)

@@ -29,6 +29,7 @@ module Network.AWS.IoT.UpdateThingGroupsForThing
     -- * Request Lenses
     , utgftThingGroupsToAdd
     , utgftThingGroupsToRemove
+    , utgftOverrideDynamicGroups
     , utgftThingName
 
     -- * Destructuring the Response
@@ -46,12 +47,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateThingGroupsForThing' smart constructor.
-data UpdateThingGroupsForThing = UpdateThingGroupsForThing'
-  { _utgftThingGroupsToAdd    :: !(Maybe [Text])
-  , _utgftThingGroupsToRemove :: !(Maybe [Text])
-  , _utgftThingName           :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateThingGroupsForThing = UpdateThingGroupsForThing'{_utgftThingGroupsToAdd
+                                                            :: !(Maybe [Text]),
+                                                            _utgftThingGroupsToRemove
+                                                            :: !(Maybe [Text]),
+                                                            _utgftOverrideDynamicGroups
+                                                            :: !(Maybe Bool),
+                                                            _utgftThingName ::
+                                                            !(Maybe Text)}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateThingGroupsForThing' with the minimum fields required to make a request.
 --
@@ -61,16 +66,17 @@ data UpdateThingGroupsForThing = UpdateThingGroupsForThing'
 --
 -- * 'utgftThingGroupsToRemove' - The groups from which the thing will be removed.
 --
+-- * 'utgftOverrideDynamicGroups' - Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+--
 -- * 'utgftThingName' - The thing whose group memberships will be updated.
 updateThingGroupsForThing
     :: UpdateThingGroupsForThing
-updateThingGroupsForThing =
-  UpdateThingGroupsForThing'
-    { _utgftThingGroupsToAdd = Nothing
-    , _utgftThingGroupsToRemove = Nothing
-    , _utgftThingName = Nothing
-    }
-
+updateThingGroupsForThing
+  = UpdateThingGroupsForThing'{_utgftThingGroupsToAdd =
+                                 Nothing,
+                               _utgftThingGroupsToRemove = Nothing,
+                               _utgftOverrideDynamicGroups = Nothing,
+                               _utgftThingName = Nothing}
 
 -- | The groups to which the thing will be added.
 utgftThingGroupsToAdd :: Lens' UpdateThingGroupsForThing [Text]
@@ -79,6 +85,10 @@ utgftThingGroupsToAdd = lens _utgftThingGroupsToAdd (\ s a -> s{_utgftThingGroup
 -- | The groups from which the thing will be removed.
 utgftThingGroupsToRemove :: Lens' UpdateThingGroupsForThing [Text]
 utgftThingGroupsToRemove = lens _utgftThingGroupsToRemove (\ s a -> s{_utgftThingGroupsToRemove = a}) . _Default . _Coerce
+
+-- | Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+utgftOverrideDynamicGroups :: Lens' UpdateThingGroupsForThing (Maybe Bool)
+utgftOverrideDynamicGroups = lens _utgftOverrideDynamicGroups (\ s a -> s{_utgftOverrideDynamicGroups = a})
 
 -- | The thing whose group memberships will be updated.
 utgftThingName :: Lens' UpdateThingGroupsForThing (Maybe Text)
@@ -108,6 +118,8 @@ instance ToJSON UpdateThingGroupsForThing where
                  [("thingGroupsToAdd" .=) <$> _utgftThingGroupsToAdd,
                   ("thingGroupsToRemove" .=) <$>
                     _utgftThingGroupsToRemove,
+                  ("overrideDynamicGroups" .=) <$>
+                    _utgftOverrideDynamicGroups,
                   ("thingName" .=) <$> _utgftThingName])
 
 instance ToPath UpdateThingGroupsForThing where
@@ -118,10 +130,11 @@ instance ToQuery UpdateThingGroupsForThing where
         toQuery = const mempty
 
 -- | /See:/ 'updateThingGroupsForThingResponse' smart constructor.
-newtype UpdateThingGroupsForThingResponse = UpdateThingGroupsForThingResponse'
-  { _utgftrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateThingGroupsForThingResponse = UpdateThingGroupsForThingResponse'{_utgftrsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'UpdateThingGroupsForThingResponse' with the minimum fields required to make a request.
 --
@@ -131,9 +144,9 @@ newtype UpdateThingGroupsForThingResponse = UpdateThingGroupsForThingResponse'
 updateThingGroupsForThingResponse
     :: Int -- ^ 'utgftrsResponseStatus'
     -> UpdateThingGroupsForThingResponse
-updateThingGroupsForThingResponse pResponseStatus_ =
-  UpdateThingGroupsForThingResponse' {_utgftrsResponseStatus = pResponseStatus_}
-
+updateThingGroupsForThingResponse pResponseStatus_
+  = UpdateThingGroupsForThingResponse'{_utgftrsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 utgftrsResponseStatus :: Lens' UpdateThingGroupsForThingResponse Int

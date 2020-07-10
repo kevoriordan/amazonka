@@ -54,19 +54,32 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyFpgaImageAttribute' smart constructor.
-data ModifyFpgaImageAttribute = ModifyFpgaImageAttribute'
-  { _mfiaAttribute      :: !(Maybe FpgaImageAttributeName)
-  , _mfiaUserIds        :: !(Maybe [Text])
-  , _mfiaUserGroups     :: !(Maybe [Text])
-  , _mfiaLoadPermission :: !(Maybe LoadPermissionModifications)
-  , _mfiaName           :: !(Maybe Text)
-  , _mfiaOperationType  :: !(Maybe OperationType)
-  , _mfiaProductCodes   :: !(Maybe [Text])
-  , _mfiaDescription    :: !(Maybe Text)
-  , _mfiaDryRun         :: !(Maybe Bool)
-  , _mfiaFpgaImageId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyFpgaImageAttribute = ModifyFpgaImageAttribute'{_mfiaAttribute
+                                                          ::
+                                                          !(Maybe
+                                                              FpgaImageAttributeName),
+                                                          _mfiaUserIds ::
+                                                          !(Maybe [Text]),
+                                                          _mfiaUserGroups ::
+                                                          !(Maybe [Text]),
+                                                          _mfiaLoadPermission ::
+                                                          !(Maybe
+                                                              LoadPermissionModifications),
+                                                          _mfiaName ::
+                                                          !(Maybe Text),
+                                                          _mfiaOperationType ::
+                                                          !(Maybe
+                                                              OperationType),
+                                                          _mfiaProductCodes ::
+                                                          !(Maybe [Text]),
+                                                          _mfiaDescription ::
+                                                          !(Maybe Text),
+                                                          _mfiaDryRun ::
+                                                          !(Maybe Bool),
+                                                          _mfiaFpgaImageId ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ModifyFpgaImageAttribute' with the minimum fields required to make a request.
 --
@@ -74,9 +87,9 @@ data ModifyFpgaImageAttribute = ModifyFpgaImageAttribute'
 --
 -- * 'mfiaAttribute' - The name of the attribute.
 --
--- * 'mfiaUserIds' - One or more AWS account IDs. This parameter is valid only when modifying the @loadPermission@ attribute.
+-- * 'mfiaUserIds' - The AWS account IDs. This parameter is valid only when modifying the @loadPermission@ attribute.
 --
--- * 'mfiaUserGroups' - One or more user groups. This parameter is valid only when modifying the @loadPermission@ attribute.
+-- * 'mfiaUserGroups' - The user groups. This parameter is valid only when modifying the @loadPermission@ attribute.
 --
 -- * 'mfiaLoadPermission' - The load permission for the AFI.
 --
@@ -84,7 +97,7 @@ data ModifyFpgaImageAttribute = ModifyFpgaImageAttribute'
 --
 -- * 'mfiaOperationType' - The operation type.
 --
--- * 'mfiaProductCodes' - One or more product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the @productCodes@ attribute.
+-- * 'mfiaProductCodes' - The product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the @productCodes@ attribute.
 --
 -- * 'mfiaDescription' - A description for the AFI.
 --
@@ -94,30 +107,24 @@ data ModifyFpgaImageAttribute = ModifyFpgaImageAttribute'
 modifyFpgaImageAttribute
     :: Text -- ^ 'mfiaFpgaImageId'
     -> ModifyFpgaImageAttribute
-modifyFpgaImageAttribute pFpgaImageId_ =
-  ModifyFpgaImageAttribute'
-    { _mfiaAttribute = Nothing
-    , _mfiaUserIds = Nothing
-    , _mfiaUserGroups = Nothing
-    , _mfiaLoadPermission = Nothing
-    , _mfiaName = Nothing
-    , _mfiaOperationType = Nothing
-    , _mfiaProductCodes = Nothing
-    , _mfiaDescription = Nothing
-    , _mfiaDryRun = Nothing
-    , _mfiaFpgaImageId = pFpgaImageId_
-    }
-
+modifyFpgaImageAttribute pFpgaImageId_
+  = ModifyFpgaImageAttribute'{_mfiaAttribute = Nothing,
+                              _mfiaUserIds = Nothing, _mfiaUserGroups = Nothing,
+                              _mfiaLoadPermission = Nothing,
+                              _mfiaName = Nothing, _mfiaOperationType = Nothing,
+                              _mfiaProductCodes = Nothing,
+                              _mfiaDescription = Nothing, _mfiaDryRun = Nothing,
+                              _mfiaFpgaImageId = pFpgaImageId_}
 
 -- | The name of the attribute.
 mfiaAttribute :: Lens' ModifyFpgaImageAttribute (Maybe FpgaImageAttributeName)
 mfiaAttribute = lens _mfiaAttribute (\ s a -> s{_mfiaAttribute = a})
 
--- | One or more AWS account IDs. This parameter is valid only when modifying the @loadPermission@ attribute.
+-- | The AWS account IDs. This parameter is valid only when modifying the @loadPermission@ attribute.
 mfiaUserIds :: Lens' ModifyFpgaImageAttribute [Text]
 mfiaUserIds = lens _mfiaUserIds (\ s a -> s{_mfiaUserIds = a}) . _Default . _Coerce
 
--- | One or more user groups. This parameter is valid only when modifying the @loadPermission@ attribute.
+-- | The user groups. This parameter is valid only when modifying the @loadPermission@ attribute.
 mfiaUserGroups :: Lens' ModifyFpgaImageAttribute [Text]
 mfiaUserGroups = lens _mfiaUserGroups (\ s a -> s{_mfiaUserGroups = a}) . _Default . _Coerce
 
@@ -133,7 +140,7 @@ mfiaName = lens _mfiaName (\ s a -> s{_mfiaName = a})
 mfiaOperationType :: Lens' ModifyFpgaImageAttribute (Maybe OperationType)
 mfiaOperationType = lens _mfiaOperationType (\ s a -> s{_mfiaOperationType = a})
 
--- | One or more product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the @productCodes@ attribute.
+-- | The product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the @productCodes@ attribute.
 mfiaProductCodes :: Lens' ModifyFpgaImageAttribute [Text]
 mfiaProductCodes = lens _mfiaProductCodes (\ s a -> s{_mfiaProductCodes = a}) . _Default . _Coerce
 
@@ -189,11 +196,15 @@ instance ToQuery ModifyFpgaImageAttribute where
                "FpgaImageId" =: _mfiaFpgaImageId]
 
 -- | /See:/ 'modifyFpgaImageAttributeResponse' smart constructor.
-data ModifyFpgaImageAttributeResponse = ModifyFpgaImageAttributeResponse'
-  { _mfiarsFpgaImageAttribute :: !(Maybe FpgaImageAttribute)
-  , _mfiarsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyFpgaImageAttributeResponse = ModifyFpgaImageAttributeResponse'{_mfiarsFpgaImageAttribute
+                                                                          ::
+                                                                          !(Maybe
+                                                                              FpgaImageAttribute),
+                                                                          _mfiarsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'ModifyFpgaImageAttributeResponse' with the minimum fields required to make a request.
 --
@@ -205,12 +216,10 @@ data ModifyFpgaImageAttributeResponse = ModifyFpgaImageAttributeResponse'
 modifyFpgaImageAttributeResponse
     :: Int -- ^ 'mfiarsResponseStatus'
     -> ModifyFpgaImageAttributeResponse
-modifyFpgaImageAttributeResponse pResponseStatus_ =
-  ModifyFpgaImageAttributeResponse'
-    { _mfiarsFpgaImageAttribute = Nothing
-    , _mfiarsResponseStatus = pResponseStatus_
-    }
-
+modifyFpgaImageAttributeResponse pResponseStatus_
+  = ModifyFpgaImageAttributeResponse'{_mfiarsFpgaImageAttribute
+                                        = Nothing,
+                                      _mfiarsResponseStatus = pResponseStatus_}
 
 -- | Information about the attribute.
 mfiarsFpgaImageAttribute :: Lens' ModifyFpgaImageAttributeResponse (Maybe FpgaImageAttribute)

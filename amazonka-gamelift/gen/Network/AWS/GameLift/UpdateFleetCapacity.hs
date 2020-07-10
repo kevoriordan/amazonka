@@ -25,51 +25,33 @@
 --
 -- To update fleet capacity, specify the fleet ID and the number of instances you want the fleet to host. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling 'DescribeFleetCapacity' . If the desired instance count is higher than the instance type's limit, the "Limit Exceeded" exception occurs.
 --
--- Fleet-related operations include:
+-- __Learn more__ 
 --
---     * 'CreateFleet'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html Setting up GameLift Fleets> 
 --
---     * 'ListFleets'
+-- __Related operations__ 
 --
---     * 'DeleteFleet'
+--     * 'CreateFleet' 
 --
---     * Describe fleets:
+--     * 'ListFleets' 
 --
---     * 'DescribeFleetAttributes'
+--     * 'DeleteFleet' 
 --
---     * 'DescribeFleetCapacity'
---
---     * 'DescribeFleetPortSettings'
---
---     * 'DescribeFleetUtilization'
---
---     * 'DescribeRuntimeConfiguration'
---
---     * 'DescribeEC2InstanceLimits'
---
---     * 'DescribeFleetEvents'
---
---
+--     * 'DescribeFleetAttributes' 
 --
 --     * Update fleets:
 --
---     * 'UpdateFleetAttributes'
+--     * 'UpdateFleetAttributes' 
 --
---     * 'UpdateFleetCapacity'
+--     * 'UpdateFleetCapacity' 
 --
---     * 'UpdateFleetPortSettings'
+--     * 'UpdateFleetPortSettings' 
 --
---     * 'UpdateRuntimeConfiguration'
---
---
---
---     * Manage fleet actions:
---
---     * 'StartFleetActions'
---
---     * 'StopFleetActions'
+--     * 'UpdateRuntimeConfiguration' 
 --
 --
+--
+--     * 'StartFleetActions' or 'StopFleetActions' 
 --
 --
 --
@@ -104,42 +86,39 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateFleetCapacity' smart constructor.
-data UpdateFleetCapacity = UpdateFleetCapacity'
-  { _ufcMaxSize          :: !(Maybe Nat)
-  , _ufcMinSize          :: !(Maybe Nat)
-  , _ufcDesiredInstances :: !(Maybe Nat)
-  , _ufcFleetId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateFleetCapacity = UpdateFleetCapacity'{_ufcMaxSize
+                                                :: !(Maybe Nat),
+                                                _ufcMinSize :: !(Maybe Nat),
+                                                _ufcDesiredInstances ::
+                                                !(Maybe Nat),
+                                                _ufcFleetId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateFleetCapacity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ufcMaxSize' - Maximum value allowed for the fleet's instance count. Default if not set is 1.
+-- * 'ufcMaxSize' - The maximum value allowed for the fleet's instance count. Default if not set is 1.
 --
--- * 'ufcMinSize' - Minimum value allowed for the fleet's instance count. Default if not set is 0.
+-- * 'ufcMinSize' - The minimum value allowed for the fleet's instance count. Default if not set is 0.
 --
 -- * 'ufcDesiredInstances' - Number of EC2 instances you want this fleet to host.
 --
--- * 'ufcFleetId' - Unique identifier for a fleet to update capacity for.
+-- * 'ufcFleetId' - A unique identifier for a fleet to update capacity for. You can use either the fleet ID or ARN value.
 updateFleetCapacity
     :: Text -- ^ 'ufcFleetId'
     -> UpdateFleetCapacity
-updateFleetCapacity pFleetId_ =
-  UpdateFleetCapacity'
-    { _ufcMaxSize = Nothing
-    , _ufcMinSize = Nothing
-    , _ufcDesiredInstances = Nothing
-    , _ufcFleetId = pFleetId_
-    }
+updateFleetCapacity pFleetId_
+  = UpdateFleetCapacity'{_ufcMaxSize = Nothing,
+                         _ufcMinSize = Nothing,
+                         _ufcDesiredInstances = Nothing,
+                         _ufcFleetId = pFleetId_}
 
-
--- | Maximum value allowed for the fleet's instance count. Default if not set is 1.
+-- | The maximum value allowed for the fleet's instance count. Default if not set is 1.
 ufcMaxSize :: Lens' UpdateFleetCapacity (Maybe Natural)
 ufcMaxSize = lens _ufcMaxSize (\ s a -> s{_ufcMaxSize = a}) . mapping _Nat
 
--- | Minimum value allowed for the fleet's instance count. Default if not set is 0.
+-- | The minimum value allowed for the fleet's instance count. Default if not set is 0.
 ufcMinSize :: Lens' UpdateFleetCapacity (Maybe Natural)
 ufcMinSize = lens _ufcMinSize (\ s a -> s{_ufcMinSize = a}) . mapping _Nat
 
@@ -147,7 +126,7 @@ ufcMinSize = lens _ufcMinSize (\ s a -> s{_ufcMinSize = a}) . mapping _Nat
 ufcDesiredInstances :: Lens' UpdateFleetCapacity (Maybe Natural)
 ufcDesiredInstances = lens _ufcDesiredInstances (\ s a -> s{_ufcDesiredInstances = a}) . mapping _Nat
 
--- | Unique identifier for a fleet to update capacity for.
+-- | A unique identifier for a fleet to update capacity for. You can use either the fleet ID or ARN value.
 ufcFleetId :: Lens' UpdateFleetCapacity Text
 ufcFleetId = lens _ufcFleetId (\ s a -> s{_ufcFleetId = a})
 
@@ -194,28 +173,30 @@ instance ToQuery UpdateFleetCapacity where
 --
 --
 -- /See:/ 'updateFleetCapacityResponse' smart constructor.
-data UpdateFleetCapacityResponse = UpdateFleetCapacityResponse'
-  { _ufcrsFleetId        :: !(Maybe Text)
-  , _ufcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateFleetCapacityResponse = UpdateFleetCapacityResponse'{_ufcrsFleetId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _ufcrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateFleetCapacityResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ufcrsFleetId' - Unique identifier for a fleet that was updated.
+-- * 'ufcrsFleetId' - A unique identifier for a fleet that was updated.
 --
 -- * 'ufcrsResponseStatus' - -- | The response status code.
 updateFleetCapacityResponse
     :: Int -- ^ 'ufcrsResponseStatus'
     -> UpdateFleetCapacityResponse
-updateFleetCapacityResponse pResponseStatus_ =
-  UpdateFleetCapacityResponse'
-    {_ufcrsFleetId = Nothing, _ufcrsResponseStatus = pResponseStatus_}
+updateFleetCapacityResponse pResponseStatus_
+  = UpdateFleetCapacityResponse'{_ufcrsFleetId =
+                                   Nothing,
+                                 _ufcrsResponseStatus = pResponseStatus_}
 
-
--- | Unique identifier for a fleet that was updated.
+-- | A unique identifier for a fleet that was updated.
 ufcrsFleetId :: Lens' UpdateFleetCapacityResponse (Maybe Text)
 ufcrsFleetId = lens _ufcrsFleetId (\ s a -> s{_ufcrsFleetId = a})
 

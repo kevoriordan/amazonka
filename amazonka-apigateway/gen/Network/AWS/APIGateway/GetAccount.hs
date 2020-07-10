@@ -49,17 +49,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getAccount' smart constructor.
-data GetAccount =
-  GetAccount'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccount = GetAccount'
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAccount' with the minimum fields required to make a request.
 --
 getAccount
     :: GetAccount
 getAccount = GetAccount'
-
 
 instance AWSRequest GetAccount where
         type Rs GetAccount = Account

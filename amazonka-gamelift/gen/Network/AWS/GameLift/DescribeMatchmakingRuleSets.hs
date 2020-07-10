@@ -18,27 +18,37 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the details for FlexMatch matchmaking rule sets. You can request all existing rule sets for the region, or provide a list of one or more rule set names. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a rule set is returned for each requested name.
+-- Retrieves the details for FlexMatch matchmaking rule sets. You can request all existing rule sets for the Region, or provide a list of one or more rule set names. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a rule set is returned for each requested name. 
 --
 --
--- Operations related to match configurations and rule sets include:
+-- __Learn more__ 
 --
---     * 'CreateMatchmakingConfiguration'
---
---     * 'DescribeMatchmakingConfigurations'
---
---     * 'UpdateMatchmakingConfiguration'
---
---     * 'DeleteMatchmakingConfiguration'
---
---     * 'CreateMatchmakingRuleSet'
---
---     * 'DescribeMatchmakingRuleSets'
---
---     * 'ValidateMatchmakingRuleSet'
+--     * <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html Build a Rule Set> 
 --
 --
 --
+-- __Related operations__ 
+--
+--     * 'CreateMatchmakingConfiguration' 
+--
+--     * 'DescribeMatchmakingConfigurations' 
+--
+--     * 'UpdateMatchmakingConfiguration' 
+--
+--     * 'DeleteMatchmakingConfiguration' 
+--
+--     * 'CreateMatchmakingRuleSet' 
+--
+--     * 'DescribeMatchmakingRuleSets' 
+--
+--     * 'ValidateMatchmakingRuleSet' 
+--
+--     * 'DeleteMatchmakingRuleSet' 
+--
+--
+--
+--
+-- This operation returns paginated results.
 module Network.AWS.GameLift.DescribeMatchmakingRuleSets
     (
     -- * Creating a Request
@@ -53,14 +63,15 @@ module Network.AWS.GameLift.DescribeMatchmakingRuleSets
     , describeMatchmakingRuleSetsResponse
     , DescribeMatchmakingRuleSetsResponse
     -- * Response Lenses
-    , dmrsrsNextToken
-    , dmrsrsResponseStatus
-    , dmrsrsRuleSets
+    , dmrssrsNextToken
+    , dmrssrsResponseStatus
+    , dmrssrsRuleSets
     ) where
 
 import Network.AWS.GameLift.Types
 import Network.AWS.GameLift.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -70,40 +81,52 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeMatchmakingRuleSets' smart constructor.
-data DescribeMatchmakingRuleSets = DescribeMatchmakingRuleSets'
-  { _dmrsNextToken :: !(Maybe Text)
-  , _dmrsNames     :: !(Maybe (List1 Text))
-  , _dmrsLimit     :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMatchmakingRuleSets = DescribeMatchmakingRuleSets'{_dmrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dmrsNames ::
+                                                                !(Maybe
+                                                                    (List1
+                                                                       Text)),
+                                                                _dmrsLimit ::
+                                                                !(Maybe Nat)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeMatchmakingRuleSets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmrsNextToken' - Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+-- * 'dmrsNextToken' - A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
 --
--- * 'dmrsNames' - Unique identifier for a matchmaking rule set. This name is used to identify the rule set associated with a matchmaking configuration.
+-- * 'dmrsNames' - A list of one or more matchmaking rule set names to retrieve details for. (Note: The rule set name is different from the optional "name" field in the rule set body.) You can use either the rule set name or ARN value. 
 --
--- * 'dmrsLimit' - Maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
+-- * 'dmrsLimit' - The maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
 describeMatchmakingRuleSets
     :: DescribeMatchmakingRuleSets
-describeMatchmakingRuleSets =
-  DescribeMatchmakingRuleSets'
-    {_dmrsNextToken = Nothing, _dmrsNames = Nothing, _dmrsLimit = Nothing}
+describeMatchmakingRuleSets
+  = DescribeMatchmakingRuleSets'{_dmrsNextToken =
+                                   Nothing,
+                                 _dmrsNames = Nothing, _dmrsLimit = Nothing}
 
-
--- | Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+-- | A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
 dmrsNextToken :: Lens' DescribeMatchmakingRuleSets (Maybe Text)
 dmrsNextToken = lens _dmrsNextToken (\ s a -> s{_dmrsNextToken = a})
 
--- | Unique identifier for a matchmaking rule set. This name is used to identify the rule set associated with a matchmaking configuration.
+-- | A list of one or more matchmaking rule set names to retrieve details for. (Note: The rule set name is different from the optional "name" field in the rule set body.) You can use either the rule set name or ARN value. 
 dmrsNames :: Lens' DescribeMatchmakingRuleSets (Maybe (NonEmpty Text))
 dmrsNames = lens _dmrsNames (\ s a -> s{_dmrsNames = a}) . mapping _List1
 
--- | Maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
+-- | The maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
 dmrsLimit :: Lens' DescribeMatchmakingRuleSets (Maybe Natural)
 dmrsLimit = lens _dmrsLimit (\ s a -> s{_dmrsLimit = a}) . mapping _Nat
+
+instance AWSPager DescribeMatchmakingRuleSets where
+        page rq rs
+          | stop (rs ^. dmrssrsNextToken) = Nothing
+          | stop (rs ^. dmrssrsRuleSets) = Nothing
+          | otherwise =
+            Just $ rq & dmrsNextToken .~ rs ^. dmrssrsNextToken
 
 instance AWSRequest DescribeMatchmakingRuleSets where
         type Rs DescribeMatchmakingRuleSets =
@@ -149,44 +172,49 @@ instance ToQuery DescribeMatchmakingRuleSets where
 --
 --
 -- /See:/ 'describeMatchmakingRuleSetsResponse' smart constructor.
-data DescribeMatchmakingRuleSetsResponse = DescribeMatchmakingRuleSetsResponse'
-  { _dmrsrsNextToken      :: !(Maybe Text)
-  , _dmrsrsResponseStatus :: !Int
-  , _dmrsrsRuleSets       :: ![MatchmakingRuleSet]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMatchmakingRuleSetsResponse = DescribeMatchmakingRuleSetsResponse'{_dmrssrsNextToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dmrssrsResponseStatus
+                                                                                ::
+                                                                                !Int,
+                                                                                _dmrssrsRuleSets
+                                                                                ::
+                                                                                ![MatchmakingRuleSet]}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeMatchmakingRuleSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmrsrsNextToken' - Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+-- * 'dmrssrsNextToken' - A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
 --
--- * 'dmrsrsResponseStatus' - -- | The response status code.
+-- * 'dmrssrsResponseStatus' - -- | The response status code.
 --
--- * 'dmrsrsRuleSets' - Collection of requested matchmaking rule set objects.
+-- * 'dmrssrsRuleSets' - A collection of requested matchmaking rule set objects. 
 describeMatchmakingRuleSetsResponse
-    :: Int -- ^ 'dmrsrsResponseStatus'
+    :: Int -- ^ 'dmrssrsResponseStatus'
     -> DescribeMatchmakingRuleSetsResponse
-describeMatchmakingRuleSetsResponse pResponseStatus_ =
-  DescribeMatchmakingRuleSetsResponse'
-    { _dmrsrsNextToken = Nothing
-    , _dmrsrsResponseStatus = pResponseStatus_
-    , _dmrsrsRuleSets = mempty
-    }
+describeMatchmakingRuleSetsResponse pResponseStatus_
+  = DescribeMatchmakingRuleSetsResponse'{_dmrssrsNextToken
+                                           = Nothing,
+                                         _dmrssrsResponseStatus =
+                                           pResponseStatus_,
+                                         _dmrssrsRuleSets = mempty}
 
-
--- | Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
-dmrsrsNextToken :: Lens' DescribeMatchmakingRuleSetsResponse (Maybe Text)
-dmrsrsNextToken = lens _dmrsrsNextToken (\ s a -> s{_dmrsrsNextToken = a})
+-- | A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+dmrssrsNextToken :: Lens' DescribeMatchmakingRuleSetsResponse (Maybe Text)
+dmrssrsNextToken = lens _dmrssrsNextToken (\ s a -> s{_dmrssrsNextToken = a})
 
 -- | -- | The response status code.
-dmrsrsResponseStatus :: Lens' DescribeMatchmakingRuleSetsResponse Int
-dmrsrsResponseStatus = lens _dmrsrsResponseStatus (\ s a -> s{_dmrsrsResponseStatus = a})
+dmrssrsResponseStatus :: Lens' DescribeMatchmakingRuleSetsResponse Int
+dmrssrsResponseStatus = lens _dmrssrsResponseStatus (\ s a -> s{_dmrssrsResponseStatus = a})
 
--- | Collection of requested matchmaking rule set objects.
-dmrsrsRuleSets :: Lens' DescribeMatchmakingRuleSetsResponse [MatchmakingRuleSet]
-dmrsrsRuleSets = lens _dmrsrsRuleSets (\ s a -> s{_dmrsrsRuleSets = a}) . _Coerce
+-- | A collection of requested matchmaking rule set objects. 
+dmrssrsRuleSets :: Lens' DescribeMatchmakingRuleSetsResponse [MatchmakingRuleSet]
+dmrssrsRuleSets = lens _dmrssrsRuleSets (\ s a -> s{_dmrssrsRuleSets = a}) . _Coerce
 
 instance NFData DescribeMatchmakingRuleSetsResponse
          where

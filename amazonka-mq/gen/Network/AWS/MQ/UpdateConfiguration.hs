@@ -35,6 +35,7 @@ module Network.AWS.MQ.UpdateConfiguration
     -- * Response Lenses
     , ucrsARN
     , ucrsLatestRevision
+    , ucrsCreated
     , ucrsWarnings
     , ucrsName
     , ucrsId
@@ -51,12 +52,11 @@ import Network.AWS.Response
 -- | Updates the specified configuration.
 --
 -- /See:/ 'updateConfiguration' smart constructor.
-data UpdateConfiguration = UpdateConfiguration'
-  { _ucData            :: !(Maybe Text)
-  , _ucDescription     :: !(Maybe Text)
-  , _ucConfigurationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConfiguration = UpdateConfiguration'{_ucData
+                                                :: !(Maybe Text),
+                                                _ucDescription :: !(Maybe Text),
+                                                _ucConfigurationId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateConfiguration' with the minimum fields required to make a request.
 --
@@ -70,13 +70,10 @@ data UpdateConfiguration = UpdateConfiguration'
 updateConfiguration
     :: Text -- ^ 'ucConfigurationId'
     -> UpdateConfiguration
-updateConfiguration pConfigurationId_ =
-  UpdateConfiguration'
-    { _ucData = Nothing
-    , _ucDescription = Nothing
-    , _ucConfigurationId = pConfigurationId_
-    }
-
+updateConfiguration pConfigurationId_
+  = UpdateConfiguration'{_ucData = Nothing,
+                         _ucDescription = Nothing,
+                         _ucConfigurationId = pConfigurationId_}
 
 -- | Required. The base64-encoded XML configuration.
 ucData :: Lens' UpdateConfiguration (Maybe Text)
@@ -99,7 +96,8 @@ instance AWSRequest UpdateConfiguration where
               (\ s h x ->
                  UpdateConfigurationResponse' <$>
                    (x .?> "arn") <*> (x .?> "latestRevision") <*>
-                     (x .?> "warnings" .!@ mempty)
+                     (x .?> "created")
+                     <*> (x .?> "warnings" .!@ mempty)
                      <*> (x .?> "name")
                      <*> (x .?> "id")
                      <*> (pure (fromEnum s)))
@@ -131,15 +129,26 @@ instance ToQuery UpdateConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'updateConfigurationResponse' smart constructor.
-data UpdateConfigurationResponse = UpdateConfigurationResponse'
-  { _ucrsARN            :: !(Maybe Text)
-  , _ucrsLatestRevision :: !(Maybe ConfigurationRevision)
-  , _ucrsWarnings       :: !(Maybe [SanitizationWarning])
-  , _ucrsName           :: !(Maybe Text)
-  , _ucrsId             :: !(Maybe Text)
-  , _ucrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConfigurationResponse = UpdateConfigurationResponse'{_ucrsARN
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _ucrsLatestRevision
+                                                                ::
+                                                                !(Maybe
+                                                                    ConfigurationRevision),
+                                                                _ucrsCreated ::
+                                                                !(Maybe POSIX),
+                                                                _ucrsWarnings ::
+                                                                !(Maybe
+                                                                    [SanitizationWarning]),
+                                                                _ucrsName ::
+                                                                !(Maybe Text),
+                                                                _ucrsId ::
+                                                                !(Maybe Text),
+                                                                _ucrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -148,6 +157,8 @@ data UpdateConfigurationResponse = UpdateConfigurationResponse'
 -- * 'ucrsARN' - Required. The Amazon Resource Name (ARN) of the configuration.
 --
 -- * 'ucrsLatestRevision' - The latest revision of the configuration.
+--
+-- * 'ucrsCreated' - Required. The date and time of the configuration.
 --
 -- * 'ucrsWarnings' - The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
 --
@@ -159,16 +170,13 @@ data UpdateConfigurationResponse = UpdateConfigurationResponse'
 updateConfigurationResponse
     :: Int -- ^ 'ucrsResponseStatus'
     -> UpdateConfigurationResponse
-updateConfigurationResponse pResponseStatus_ =
-  UpdateConfigurationResponse'
-    { _ucrsARN = Nothing
-    , _ucrsLatestRevision = Nothing
-    , _ucrsWarnings = Nothing
-    , _ucrsName = Nothing
-    , _ucrsId = Nothing
-    , _ucrsResponseStatus = pResponseStatus_
-    }
-
+updateConfigurationResponse pResponseStatus_
+  = UpdateConfigurationResponse'{_ucrsARN = Nothing,
+                                 _ucrsLatestRevision = Nothing,
+                                 _ucrsCreated = Nothing,
+                                 _ucrsWarnings = Nothing, _ucrsName = Nothing,
+                                 _ucrsId = Nothing,
+                                 _ucrsResponseStatus = pResponseStatus_}
 
 -- | Required. The Amazon Resource Name (ARN) of the configuration.
 ucrsARN :: Lens' UpdateConfigurationResponse (Maybe Text)
@@ -177,6 +185,10 @@ ucrsARN = lens _ucrsARN (\ s a -> s{_ucrsARN = a})
 -- | The latest revision of the configuration.
 ucrsLatestRevision :: Lens' UpdateConfigurationResponse (Maybe ConfigurationRevision)
 ucrsLatestRevision = lens _ucrsLatestRevision (\ s a -> s{_ucrsLatestRevision = a})
+
+-- | Required. The date and time of the configuration.
+ucrsCreated :: Lens' UpdateConfigurationResponse (Maybe UTCTime)
+ucrsCreated = lens _ucrsCreated (\ s a -> s{_ucrsCreated = a}) . mapping _Time
 
 -- | The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
 ucrsWarnings :: Lens' UpdateConfigurationResponse [SanitizationWarning]

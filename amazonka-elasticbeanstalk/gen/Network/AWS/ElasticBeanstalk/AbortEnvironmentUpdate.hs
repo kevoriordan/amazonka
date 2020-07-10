@@ -42,16 +42,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'abortEnvironmentUpdate' smart constructor.
-data AbortEnvironmentUpdate = AbortEnvironmentUpdate'
-  { _aeuEnvironmentName :: !(Maybe Text)
-  , _aeuEnvironmentId   :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AbortEnvironmentUpdate = AbortEnvironmentUpdate'{_aeuEnvironmentName
+                                                      :: !(Maybe Text),
+                                                      _aeuEnvironmentId ::
+                                                      !(Maybe Text)}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AbortEnvironmentUpdate' with the minimum fields required to make a request.
 --
@@ -62,10 +63,10 @@ data AbortEnvironmentUpdate = AbortEnvironmentUpdate'
 -- * 'aeuEnvironmentId' - This specifies the ID of the environment with the in-progress update that you want to cancel.
 abortEnvironmentUpdate
     :: AbortEnvironmentUpdate
-abortEnvironmentUpdate =
-  AbortEnvironmentUpdate'
-    {_aeuEnvironmentName = Nothing, _aeuEnvironmentId = Nothing}
-
+abortEnvironmentUpdate
+  = AbortEnvironmentUpdate'{_aeuEnvironmentName =
+                              Nothing,
+                            _aeuEnvironmentId = Nothing}
 
 -- | This specifies the name of the environment with the in-progress update that you want to cancel.
 aeuEnvironmentName :: Lens' AbortEnvironmentUpdate (Maybe Text)
@@ -102,16 +103,15 @@ instance ToQuery AbortEnvironmentUpdate where
                "EnvironmentId" =: _aeuEnvironmentId]
 
 -- | /See:/ 'abortEnvironmentUpdateResponse' smart constructor.
-data AbortEnvironmentUpdateResponse =
-  AbortEnvironmentUpdateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AbortEnvironmentUpdateResponse = AbortEnvironmentUpdateResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'AbortEnvironmentUpdateResponse' with the minimum fields required to make a request.
 --
 abortEnvironmentUpdateResponse
     :: AbortEnvironmentUpdateResponse
-abortEnvironmentUpdateResponse = AbortEnvironmentUpdateResponse'
-
+abortEnvironmentUpdateResponse
+  = AbortEnvironmentUpdateResponse'
 
 instance NFData AbortEnvironmentUpdateResponse where

@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about the APNs channel for an app.
+-- Retrieves information about the status and settings of the APNs channel for an application.
+--
+--
 module Network.AWS.Pinpoint.GetAPNSChannel
     (
     -- * Creating a Request
@@ -43,24 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAPNSChannel' smart constructor.
-newtype GetAPNSChannel = GetAPNSChannel'
-  { _gacApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetAPNSChannel = GetAPNSChannel'{_gacApplicationId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAPNSChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gacApplicationId' - Undocumented member.
+-- * 'gacApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getAPNSChannel
     :: Text -- ^ 'gacApplicationId'
     -> GetAPNSChannel
-getAPNSChannel pApplicationId_ =
-  GetAPNSChannel' {_gacApplicationId = pApplicationId_}
+getAPNSChannel pApplicationId_
+  = GetAPNSChannel'{_gacApplicationId =
+                      pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gacApplicationId :: Lens' GetAPNSChannel Text
 gacApplicationId = lens _gacApplicationId (\ s a -> s{_gacApplicationId = a})
 
@@ -94,11 +95,12 @@ instance ToQuery GetAPNSChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getAPNSChannelResponse' smart constructor.
-data GetAPNSChannelResponse = GetAPNSChannelResponse'
-  { _gacrsResponseStatus      :: !Int
-  , _gacrsAPNSChannelResponse :: !APNSChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAPNSChannelResponse = GetAPNSChannelResponse'{_gacrsResponseStatus
+                                                      :: !Int,
+                                                      _gacrsAPNSChannelResponse
+                                                      :: !APNSChannelResponse}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetAPNSChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +113,11 @@ getAPNSChannelResponse
     :: Int -- ^ 'gacrsResponseStatus'
     -> APNSChannelResponse -- ^ 'gacrsAPNSChannelResponse'
     -> GetAPNSChannelResponse
-getAPNSChannelResponse pResponseStatus_ pAPNSChannelResponse_ =
-  GetAPNSChannelResponse'
-    { _gacrsResponseStatus = pResponseStatus_
-    , _gacrsAPNSChannelResponse = pAPNSChannelResponse_
-    }
-
+getAPNSChannelResponse pResponseStatus_
+  pAPNSChannelResponse_
+  = GetAPNSChannelResponse'{_gacrsResponseStatus =
+                              pResponseStatus_,
+                            _gacrsAPNSChannelResponse = pAPNSChannelResponse_}
 
 -- | -- | The response status code.
 gacrsResponseStatus :: Lens' GetAPNSChannelResponse Int

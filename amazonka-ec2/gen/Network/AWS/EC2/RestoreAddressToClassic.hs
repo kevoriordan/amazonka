@@ -46,16 +46,12 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for RestoreAddressToClassic.
---
---
---
--- /See:/ 'restoreAddressToClassic' smart constructor.
-data RestoreAddressToClassic = RestoreAddressToClassic'
-  { _ratcDryRun   :: !(Maybe Bool)
-  , _ratcPublicIP :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'restoreAddressToClassic' smart constructor.
+data RestoreAddressToClassic = RestoreAddressToClassic'{_ratcDryRun
+                                                        :: !(Maybe Bool),
+                                                        _ratcPublicIP :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'RestoreAddressToClassic' with the minimum fields required to make a request.
 --
@@ -67,9 +63,9 @@ data RestoreAddressToClassic = RestoreAddressToClassic'
 restoreAddressToClassic
     :: Text -- ^ 'ratcPublicIP'
     -> RestoreAddressToClassic
-restoreAddressToClassic pPublicIP_ =
-  RestoreAddressToClassic' {_ratcDryRun = Nothing, _ratcPublicIP = pPublicIP_}
-
+restoreAddressToClassic pPublicIP_
+  = RestoreAddressToClassic'{_ratcDryRun = Nothing,
+                             _ratcPublicIP = pPublicIP_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 ratcDryRun :: Lens' RestoreAddressToClassic (Maybe Bool)
@@ -108,17 +104,19 @@ instance ToQuery RestoreAddressToClassic where
                "Version" =: ("2016-11-15" :: ByteString),
                "DryRun" =: _ratcDryRun, "PublicIp" =: _ratcPublicIP]
 
--- | Contains the output of RestoreAddressToClassic.
---
---
---
--- /See:/ 'restoreAddressToClassicResponse' smart constructor.
-data RestoreAddressToClassicResponse = RestoreAddressToClassicResponse'
-  { _ratcrsStatus         :: !(Maybe AddressStatus)
-  , _ratcrsPublicIP       :: !(Maybe Text)
-  , _ratcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'restoreAddressToClassicResponse' smart constructor.
+data RestoreAddressToClassicResponse = RestoreAddressToClassicResponse'{_ratcrsStatus
+                                                                        ::
+                                                                        !(Maybe
+                                                                            AddressStatus),
+                                                                        _ratcrsPublicIP
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _ratcrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'RestoreAddressToClassicResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +130,11 @@ data RestoreAddressToClassicResponse = RestoreAddressToClassicResponse'
 restoreAddressToClassicResponse
     :: Int -- ^ 'ratcrsResponseStatus'
     -> RestoreAddressToClassicResponse
-restoreAddressToClassicResponse pResponseStatus_ =
-  RestoreAddressToClassicResponse'
-    { _ratcrsStatus = Nothing
-    , _ratcrsPublicIP = Nothing
-    , _ratcrsResponseStatus = pResponseStatus_
-    }
-
+restoreAddressToClassicResponse pResponseStatus_
+  = RestoreAddressToClassicResponse'{_ratcrsStatus =
+                                       Nothing,
+                                     _ratcrsPublicIP = Nothing,
+                                     _ratcrsResponseStatus = pResponseStatus_}
 
 -- | The move status for the IP address.
 ratcrsStatus :: Lens' RestoreAddressToClassicResponse (Maybe AddressStatus)

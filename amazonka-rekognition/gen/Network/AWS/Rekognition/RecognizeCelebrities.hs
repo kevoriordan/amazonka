@@ -18,18 +18,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns an array of celebrities recognized in the input image. For more information, see 'celebrities' .
+-- Returns an array of celebrities recognized in the input image. For more information, see Recognizing Celebrities in the Amazon Rekognition Developer Guide. 
 --
 --
--- @RecognizeCelebrities@ returns the 100 largest faces in the image. It lists recognized celebrities in the @CelebrityFaces@ array and unrecognized faces in the @UnrecognizedFaces@ array. @RecognizeCelebrities@ doesn't return celebrities whose faces are not amongst the largest 100 faces in the image.
+-- @RecognizeCelebrities@ returns the 100 largest faces in the image. It lists recognized celebrities in the @CelebrityFaces@ array and unrecognized faces in the @UnrecognizedFaces@ array. @RecognizeCelebrities@ doesn't return celebrities whose faces aren't among the largest 100 faces in the image.
 --
--- For each celebrity recognized, the @RecognizeCelebrities@ returns a @Celebrity@ object. The @Celebrity@ object contains the celebrity name, ID, URL links to additional information, match confidence, and a @ComparedFace@ object that you can use to locate the celebrity's face on the image.
+-- For each celebrity recognized, @RecognizeCelebrities@ returns a @Celebrity@ object. The @Celebrity@ object contains the celebrity name, ID, URL links to additional information, match confidence, and a @ComparedFace@ object that you can use to locate the celebrity's face on the image.
 --
--- Rekognition does not retain information about which images a celebrity has been recognized in. Your application must store this information and use the @Celebrity@ ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by @RecognizeCelebrities@ , you will need the ID to identify the celebrity in a call to the operation.
+-- Amazon Rekognition doesn't retain information about which images a celebrity has been recognized in. Your application must store this information and use the @Celebrity@ ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by @RecognizeCelebrities@ , you will need the ID to identify the celebrity in a call to the 'GetCelebrityInfo' operation.
 --
--- You pass the imput image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.
+-- You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. 
 --
--- For an example, see 'celebrities-procedure-image' .
+-- For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.
 --
 -- This operation requires permissions to perform the @rekognition:RecognizeCelebrities@ operation.
 --
@@ -59,23 +59,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'recognizeCelebrities' smart constructor.
-newtype RecognizeCelebrities = RecognizeCelebrities'
-  { _rcImage :: Image
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RecognizeCelebrities = RecognizeCelebrities'{_rcImage
+                                                     :: Image}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'RecognizeCelebrities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcImage' - The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.
+-- * 'rcImage' - The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.  If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the @Bytes@ field. For more information, see Images in the Amazon Rekognition developer guide.
 recognizeCelebrities
     :: Image -- ^ 'rcImage'
     -> RecognizeCelebrities
-recognizeCelebrities pImage_ = RecognizeCelebrities' {_rcImage = pImage_}
+recognizeCelebrities pImage_
+  = RecognizeCelebrities'{_rcImage = pImage_}
 
-
--- | The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.
+-- | The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.  If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the @Bytes@ field. For more information, see Images in the Amazon Rekognition developer guide.
 rcImage :: Lens' RecognizeCelebrities Image
 rcImage = lens _rcImage (\ s a -> s{_rcImage = a})
 
@@ -117,13 +117,22 @@ instance ToQuery RecognizeCelebrities where
         toQuery = const mempty
 
 -- | /See:/ 'recognizeCelebritiesResponse' smart constructor.
-data RecognizeCelebritiesResponse = RecognizeCelebritiesResponse'
-  { _rcrsCelebrityFaces        :: !(Maybe [Celebrity])
-  , _rcrsOrientationCorrection :: !(Maybe OrientationCorrection)
-  , _rcrsUnrecognizedFaces     :: !(Maybe [ComparedFace])
-  , _rcrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RecognizeCelebritiesResponse = RecognizeCelebritiesResponse'{_rcrsCelebrityFaces
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Celebrity]),
+                                                                  _rcrsOrientationCorrection
+                                                                  ::
+                                                                  !(Maybe
+                                                                      OrientationCorrection),
+                                                                  _rcrsUnrecognizedFaces
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [ComparedFace]),
+                                                                  _rcrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'RecognizeCelebritiesResponse' with the minimum fields required to make a request.
 --
@@ -131,7 +140,7 @@ data RecognizeCelebritiesResponse = RecognizeCelebritiesResponse'
 --
 -- * 'rcrsCelebrityFaces' - Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 15 celebrities in an image.
 --
--- * 'rcrsOrientationCorrection' - The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in @CelebrityFaces@ and @UnrecognizedFaces@ represent face locations before the image orientation is corrected.
+-- * 'rcrsOrientationCorrection' - The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in @CelebrityFaces@ and @UnrecognizedFaces@ represent face locations before the image orientation is corrected. 
 --
 -- * 'rcrsUnrecognizedFaces' - Details about each unrecognized face in the image.
 --
@@ -139,20 +148,18 @@ data RecognizeCelebritiesResponse = RecognizeCelebritiesResponse'
 recognizeCelebritiesResponse
     :: Int -- ^ 'rcrsResponseStatus'
     -> RecognizeCelebritiesResponse
-recognizeCelebritiesResponse pResponseStatus_ =
-  RecognizeCelebritiesResponse'
-    { _rcrsCelebrityFaces = Nothing
-    , _rcrsOrientationCorrection = Nothing
-    , _rcrsUnrecognizedFaces = Nothing
-    , _rcrsResponseStatus = pResponseStatus_
-    }
-
+recognizeCelebritiesResponse pResponseStatus_
+  = RecognizeCelebritiesResponse'{_rcrsCelebrityFaces =
+                                    Nothing,
+                                  _rcrsOrientationCorrection = Nothing,
+                                  _rcrsUnrecognizedFaces = Nothing,
+                                  _rcrsResponseStatus = pResponseStatus_}
 
 -- | Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 15 celebrities in an image.
 rcrsCelebrityFaces :: Lens' RecognizeCelebritiesResponse [Celebrity]
 rcrsCelebrityFaces = lens _rcrsCelebrityFaces (\ s a -> s{_rcrsCelebrityFaces = a}) . _Default . _Coerce
 
--- | The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in @CelebrityFaces@ and @UnrecognizedFaces@ represent face locations before the image orientation is corrected.
+-- | The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in @CelebrityFaces@ and @UnrecognizedFaces@ represent face locations before the image orientation is corrected. 
 rcrsOrientationCorrection :: Lens' RecognizeCelebritiesResponse (Maybe OrientationCorrection)
 rcrsOrientationCorrection = lens _rcrsOrientationCorrection (\ s a -> s{_rcrsOrientationCorrection = a})
 

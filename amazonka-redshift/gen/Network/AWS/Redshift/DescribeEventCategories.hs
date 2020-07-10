@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html Amazon Redshift Event Notifications> .
+-- Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html Amazon Redshift Event Notifications> .
 --
 --
 module Network.AWS.Redshift.DescribeEventCategories
@@ -44,27 +44,27 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeEventCategories' smart constructor.
-newtype DescribeEventCategories = DescribeEventCategories'
-  { _decSourceType :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeEventCategories = DescribeEventCategories'{_decSourceType
+                                                           :: Maybe Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeEventCategories' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'decSourceType' - The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, cluster-snapshot, cluster-parameter-group, and cluster-security-group.
+-- * 'decSourceType' - The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.
 describeEventCategories
     :: DescribeEventCategories
-describeEventCategories = DescribeEventCategories' {_decSourceType = Nothing}
+describeEventCategories
+  = DescribeEventCategories'{_decSourceType = Nothing}
 
-
--- | The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, cluster-snapshot, cluster-parameter-group, and cluster-security-group.
+-- | The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.
 decSourceType :: Lens' DescribeEventCategories (Maybe Text)
 decSourceType = lens _decSourceType (\ s a -> s{_decSourceType = a})
 
@@ -98,16 +98,19 @@ instance ToQuery DescribeEventCategories where
                "Version" =: ("2012-12-01" :: ByteString),
                "SourceType" =: _decSourceType]
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeEventCategoriesResponse' smart constructor.
-data DescribeEventCategoriesResponse = DescribeEventCategoriesResponse'
-  { _decrsEventCategoriesMapList :: !(Maybe [EventCategoriesMap])
-  , _decrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventCategoriesResponse = DescribeEventCategoriesResponse'{_decrsEventCategoriesMapList
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [EventCategoriesMap]),
+                                                                        _decrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeEventCategoriesResponse' with the minimum fields required to make a request.
 --
@@ -119,12 +122,10 @@ data DescribeEventCategoriesResponse = DescribeEventCategoriesResponse'
 describeEventCategoriesResponse
     :: Int -- ^ 'decrsResponseStatus'
     -> DescribeEventCategoriesResponse
-describeEventCategoriesResponse pResponseStatus_ =
-  DescribeEventCategoriesResponse'
-    { _decrsEventCategoriesMapList = Nothing
-    , _decrsResponseStatus = pResponseStatus_
-    }
-
+describeEventCategoriesResponse pResponseStatus_
+  = DescribeEventCategoriesResponse'{_decrsEventCategoriesMapList
+                                       = Nothing,
+                                     _decrsResponseStatus = pResponseStatus_}
 
 -- | A list of event categories descriptions.
 decrsEventCategoriesMapList :: Lens' DescribeEventCategoriesResponse [EventCategoriesMap]

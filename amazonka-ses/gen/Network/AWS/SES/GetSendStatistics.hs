@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides sending statistics for the Amazon SES account. The result is a list of data points, representing the last two weeks of sending activity. Each data point in the list contains statistics for a 15-minute period of time.
+-- Provides sending statistics for the current AWS Region. The result is a list of data points, representing the last two weeks of sending activity. Each data point in the list contains statistics for a 15-minute period of time.
 --
 --
 -- You can execute this operation no more than once per second.
@@ -45,17 +45,14 @@ import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
 -- | /See:/ 'getSendStatistics' smart constructor.
-data GetSendStatistics =
-  GetSendStatistics'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSendStatistics = GetSendStatistics'
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSendStatistics' with the minimum fields required to make a request.
 --
 getSendStatistics
     :: GetSendStatistics
 getSendStatistics = GetSendStatistics'
-
 
 instance AWSRequest GetSendStatistics where
         type Rs GetSendStatistics = GetSendStatisticsResponse
@@ -90,11 +87,14 @@ instance ToQuery GetSendStatistics where
 --
 --
 -- /See:/ 'getSendStatisticsResponse' smart constructor.
-data GetSendStatisticsResponse = GetSendStatisticsResponse'
-  { _gssrsSendDataPoints :: !(Maybe [SendDataPoint])
-  , _gssrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSendStatisticsResponse = GetSendStatisticsResponse'{_gssrsSendDataPoints
+                                                            ::
+                                                            !(Maybe
+                                                                [SendDataPoint]),
+                                                            _gssrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetSendStatisticsResponse' with the minimum fields required to make a request.
 --
@@ -106,10 +106,10 @@ data GetSendStatisticsResponse = GetSendStatisticsResponse'
 getSendStatisticsResponse
     :: Int -- ^ 'gssrsResponseStatus'
     -> GetSendStatisticsResponse
-getSendStatisticsResponse pResponseStatus_ =
-  GetSendStatisticsResponse'
-    {_gssrsSendDataPoints = Nothing, _gssrsResponseStatus = pResponseStatus_}
-
+getSendStatisticsResponse pResponseStatus_
+  = GetSendStatisticsResponse'{_gssrsSendDataPoints =
+                                 Nothing,
+                               _gssrsResponseStatus = pResponseStatus_}
 
 -- | A list of data points, each of which represents 15 minutes of activity.
 gssrsSendDataPoints :: Lens' GetSendStatisticsResponse [SendDataPoint]

@@ -21,6 +21,8 @@
 -- Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DeviceFarm.ListVPCEConfigurations
     (
     -- * Creating a Request
@@ -42,16 +44,18 @@ module Network.AWS.DeviceFarm.ListVPCEConfigurations
 import Network.AWS.DeviceFarm.Types
 import Network.AWS.DeviceFarm.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listVPCEConfigurations' smart constructor.
-data ListVPCEConfigurations = ListVPCEConfigurations'
-  { _lvecNextToken  :: !(Maybe Text)
-  , _lvecMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVPCEConfigurations = ListVPCEConfigurations'{_lvecNextToken
+                                                      :: !(Maybe Text),
+                                                      _lvecMaxResults ::
+                                                      !(Maybe Int)}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListVPCEConfigurations' with the minimum fields required to make a request.
 --
@@ -59,20 +63,27 @@ data ListVPCEConfigurations = ListVPCEConfigurations'
 --
 -- * 'lvecNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 --
--- * 'lvecMaxResults' - An integer specifying the maximum number of items you want to return in the API response.
+-- * 'lvecMaxResults' - An integer that specifies the maximum number of items you want to return in the API response.
 listVPCEConfigurations
     :: ListVPCEConfigurations
-listVPCEConfigurations =
-  ListVPCEConfigurations' {_lvecNextToken = Nothing, _lvecMaxResults = Nothing}
-
+listVPCEConfigurations
+  = ListVPCEConfigurations'{_lvecNextToken = Nothing,
+                            _lvecMaxResults = Nothing}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lvecNextToken :: Lens' ListVPCEConfigurations (Maybe Text)
 lvecNextToken = lens _lvecNextToken (\ s a -> s{_lvecNextToken = a})
 
--- | An integer specifying the maximum number of items you want to return in the API response.
+-- | An integer that specifies the maximum number of items you want to return in the API response.
 lvecMaxResults :: Lens' ListVPCEConfigurations (Maybe Int)
 lvecMaxResults = lens _lvecMaxResults (\ s a -> s{_lvecMaxResults = a})
+
+instance AWSPager ListVPCEConfigurations where
+        page rq rs
+          | stop (rs ^. lvecrsNextToken) = Nothing
+          | stop (rs ^. lvecrsVpceConfigurations) = Nothing
+          | otherwise =
+            Just $ rq & lvecNextToken .~ rs ^. lvecrsNextToken
 
 instance AWSRequest ListVPCEConfigurations where
         type Rs ListVPCEConfigurations =
@@ -114,12 +125,18 @@ instance ToQuery ListVPCEConfigurations where
         toQuery = const mempty
 
 -- | /See:/ 'listVPCEConfigurationsResponse' smart constructor.
-data ListVPCEConfigurationsResponse = ListVPCEConfigurationsResponse'
-  { _lvecrsNextToken          :: !(Maybe Text)
-  , _lvecrsVpceConfigurations :: !(Maybe [VPCEConfiguration])
-  , _lvecrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVPCEConfigurationsResponse = ListVPCEConfigurationsResponse'{_lvecrsNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _lvecrsVpceConfigurations
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [VPCEConfiguration]),
+                                                                      _lvecrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ListVPCEConfigurationsResponse' with the minimum fields required to make a request.
 --
@@ -127,25 +144,23 @@ data ListVPCEConfigurationsResponse = ListVPCEConfigurationsResponse'
 --
 -- * 'lvecrsNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 --
--- * 'lvecrsVpceConfigurations' - An array of @VPCEConfiguration@ objects containing information about your VPC endpoint configuration.
+-- * 'lvecrsVpceConfigurations' - An array of @VPCEConfiguration@ objects that contain information about your VPC endpoint configuration.
 --
 -- * 'lvecrsResponseStatus' - -- | The response status code.
 listVPCEConfigurationsResponse
     :: Int -- ^ 'lvecrsResponseStatus'
     -> ListVPCEConfigurationsResponse
-listVPCEConfigurationsResponse pResponseStatus_ =
-  ListVPCEConfigurationsResponse'
-    { _lvecrsNextToken = Nothing
-    , _lvecrsVpceConfigurations = Nothing
-    , _lvecrsResponseStatus = pResponseStatus_
-    }
-
+listVPCEConfigurationsResponse pResponseStatus_
+  = ListVPCEConfigurationsResponse'{_lvecrsNextToken =
+                                      Nothing,
+                                    _lvecrsVpceConfigurations = Nothing,
+                                    _lvecrsResponseStatus = pResponseStatus_}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lvecrsNextToken :: Lens' ListVPCEConfigurationsResponse (Maybe Text)
 lvecrsNextToken = lens _lvecrsNextToken (\ s a -> s{_lvecrsNextToken = a})
 
--- | An array of @VPCEConfiguration@ objects containing information about your VPC endpoint configuration.
+-- | An array of @VPCEConfiguration@ objects that contain information about your VPC endpoint configuration.
 lvecrsVpceConfigurations :: Lens' ListVPCEConfigurationsResponse [VPCEConfiguration]
 lvecrsVpceConfigurations = lens _lvecrsVpceConfigurations (\ s a -> s{_lvecrsVpceConfigurations = a}) . _Default . _Coerce
 

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a specified layer. You must first stop and then delete all associated instances or unassign registered instances. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-delete.html How to Delete a Layer> .
+-- Deletes a specified layer. You must first stop and then delete all associated instances or unassign registered instances. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-delete.html How to Delete a Layer> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DeleteLayer
     (
@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLayer' smart constructor.
-newtype DeleteLayer = DeleteLayer'
-  { _dlLayerId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLayer = DeleteLayer'{_dlLayerId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteLayer' with the minimum fields required to make a request.
 --
@@ -57,8 +56,8 @@ newtype DeleteLayer = DeleteLayer'
 deleteLayer
     :: Text -- ^ 'dlLayerId'
     -> DeleteLayer
-deleteLayer pLayerId_ = DeleteLayer' {_dlLayerId = pLayerId_}
-
+deleteLayer pLayerId_
+  = DeleteLayer'{_dlLayerId = pLayerId_}
 
 -- | The layer ID.
 dlLayerId :: Lens' DeleteLayer Text
@@ -93,16 +92,13 @@ instance ToQuery DeleteLayer where
         toQuery = const mempty
 
 -- | /See:/ 'deleteLayerResponse' smart constructor.
-data DeleteLayerResponse =
-  DeleteLayerResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLayerResponse = DeleteLayerResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteLayerResponse' with the minimum fields required to make a request.
 --
 deleteLayerResponse
     :: DeleteLayerResponse
 deleteLayerResponse = DeleteLayerResponse'
-
 
 instance NFData DeleteLayerResponse where

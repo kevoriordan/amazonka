@@ -14,11 +14,11 @@
 module Test.AWS.Gen.SNS where
 
 import Data.Proxy
-import Network.AWS.SNS
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.SNS.Internal
 import Test.Tasty
+import Network.AWS.SNS
+import Test.AWS.SNS.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -33,6 +33,9 @@ import Test.Tasty
 --
 --         , requestDeleteEndpoint $
 --             deleteEndpoint
+--
+--         , requestListTagsForResource $
+--             listTagsForResource
 --
 --         , requestRemovePermission $
 --             removePermission
@@ -100,8 +103,14 @@ import Test.Tasty
 --         , requestCheckIfPhoneNumberIsOptedOut $
 --             checkIfPhoneNumberIsOptedOut
 --
+--         , requestTagResource $
+--             tagResource
+--
 --         , requestSubscribe $
 --             subscribe
+--
+--         , requestUntagResource $
+--             untagResource
 --
 --         , requestUnsubscribe $
 --             unsubscribe
@@ -126,6 +135,9 @@ import Test.Tasty
 --
 --         , responseDeleteEndpoint $
 --             deleteEndpointResponse
+--
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
 --
 --         , responseRemovePermission $
 --             removePermissionResponse
@@ -193,8 +205,14 @@ import Test.Tasty
 --         , responseCheckIfPhoneNumberIsOptedOut $
 --             checkIfPhoneNumberIsOptedOutResponse
 --
+--         , responseTagResource $
+--             tagResourceResponse
+--
 --         , responseSubscribe $
 --             subscribeResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
 --
 --         , responseUnsubscribe $
 --             unsubscribeResponse
@@ -225,6 +243,11 @@ requestDeleteEndpoint :: DeleteEndpoint -> TestTree
 requestDeleteEndpoint = req
     "DeleteEndpoint"
     "fixture/DeleteEndpoint.yaml"
+
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
 
 requestRemovePermission :: RemovePermission -> TestTree
 requestRemovePermission = req
@@ -336,10 +359,20 @@ requestCheckIfPhoneNumberIsOptedOut = req
     "CheckIfPhoneNumberIsOptedOut"
     "fixture/CheckIfPhoneNumberIsOptedOut.yaml"
 
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
+
 requestSubscribe :: Subscribe -> TestTree
 requestSubscribe = req
     "Subscribe"
     "fixture/Subscribe.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
 
 requestUnsubscribe :: Unsubscribe -> TestTree
 requestUnsubscribe = req
@@ -381,6 +414,13 @@ responseDeleteEndpoint = res
     "fixture/DeleteEndpointResponse.proto"
     sns
     (Proxy :: Proxy DeleteEndpoint)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    sns
+    (Proxy :: Proxy ListTagsForResource)
 
 responseRemovePermission :: RemovePermissionResponse -> TestTree
 responseRemovePermission = res
@@ -536,12 +576,26 @@ responseCheckIfPhoneNumberIsOptedOut = res
     sns
     (Proxy :: Proxy CheckIfPhoneNumberIsOptedOut)
 
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    sns
+    (Proxy :: Proxy TagResource)
+
 responseSubscribe :: SubscribeResponse -> TestTree
 responseSubscribe = res
     "SubscribeResponse"
     "fixture/SubscribeResponse.proto"
     sns
     (Proxy :: Proxy Subscribe)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    sns
+    (Proxy :: Proxy UntagResource)
 
 responseUnsubscribe :: UnsubscribeResponse -> TestTree
 responseUnsubscribe = res

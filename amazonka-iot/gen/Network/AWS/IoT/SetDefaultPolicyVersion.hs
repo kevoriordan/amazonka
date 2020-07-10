@@ -47,11 +47,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setDefaultPolicyVersion' smart constructor.
-data SetDefaultPolicyVersion = SetDefaultPolicyVersion'
-  { _sdpvPolicyName      :: !Text
-  , _sdpvPolicyVersionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetDefaultPolicyVersion = SetDefaultPolicyVersion'{_sdpvPolicyName
+                                                        :: !Text,
+                                                        _sdpvPolicyVersionId ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'SetDefaultPolicyVersion' with the minimum fields required to make a request.
 --
@@ -64,10 +65,11 @@ setDefaultPolicyVersion
     :: Text -- ^ 'sdpvPolicyName'
     -> Text -- ^ 'sdpvPolicyVersionId'
     -> SetDefaultPolicyVersion
-setDefaultPolicyVersion pPolicyName_ pPolicyVersionId_ =
-  SetDefaultPolicyVersion'
-    {_sdpvPolicyName = pPolicyName_, _sdpvPolicyVersionId = pPolicyVersionId_}
-
+setDefaultPolicyVersion pPolicyName_
+  pPolicyVersionId_
+  = SetDefaultPolicyVersion'{_sdpvPolicyName =
+                               pPolicyName_,
+                             _sdpvPolicyVersionId = pPolicyVersionId_}
 
 -- | The policy name.
 sdpvPolicyName :: Lens' SetDefaultPolicyVersion Text
@@ -104,16 +106,15 @@ instance ToQuery SetDefaultPolicyVersion where
         toQuery = const mempty
 
 -- | /See:/ 'setDefaultPolicyVersionResponse' smart constructor.
-data SetDefaultPolicyVersionResponse =
-  SetDefaultPolicyVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetDefaultPolicyVersionResponse = SetDefaultPolicyVersionResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'SetDefaultPolicyVersionResponse' with the minimum fields required to make a request.
 --
 setDefaultPolicyVersionResponse
     :: SetDefaultPolicyVersionResponse
-setDefaultPolicyVersionResponse = SetDefaultPolicyVersionResponse'
-
+setDefaultPolicyVersionResponse
+  = SetDefaultPolicyVersionResponse'
 
 instance NFData SetDefaultPolicyVersionResponse where

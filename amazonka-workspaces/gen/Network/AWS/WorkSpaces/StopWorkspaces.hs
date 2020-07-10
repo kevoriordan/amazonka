@@ -47,10 +47,9 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'stopWorkspaces' smart constructor.
-newtype StopWorkspaces = StopWorkspaces'
-  { _swStopWorkspaceRequests :: List1 StopRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopWorkspaces = StopWorkspaces'{_swStopWorkspaceRequests
+                                         :: List1 StopRequest}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopWorkspaces' with the minimum fields required to make a request.
 --
@@ -60,9 +59,9 @@ newtype StopWorkspaces = StopWorkspaces'
 stopWorkspaces
     :: NonEmpty StopRequest -- ^ 'swStopWorkspaceRequests'
     -> StopWorkspaces
-stopWorkspaces pStopWorkspaceRequests_ =
-  StopWorkspaces' {_swStopWorkspaceRequests = _List1 # pStopWorkspaceRequests_}
-
+stopWorkspaces pStopWorkspaceRequests_
+  = StopWorkspaces'{_swStopWorkspaceRequests =
+                      _List1 # pStopWorkspaceRequests_}
 
 -- | The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
 swStopWorkspaceRequests :: Lens' StopWorkspaces (NonEmpty StopRequest)
@@ -106,11 +105,14 @@ instance ToQuery StopWorkspaces where
         toQuery = const mempty
 
 -- | /See:/ 'stopWorkspacesResponse' smart constructor.
-data StopWorkspacesResponse = StopWorkspacesResponse'
-  { _srsFailedRequests :: !(Maybe [FailedWorkspaceChangeRequest])
-  , _srsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopWorkspacesResponse = StopWorkspacesResponse'{_srsFailedRequests
+                                                      ::
+                                                      !(Maybe
+                                                          [FailedWorkspaceChangeRequest]),
+                                                      _srsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StopWorkspacesResponse' with the minimum fields required to make a request.
 --
@@ -122,10 +124,10 @@ data StopWorkspacesResponse = StopWorkspacesResponse'
 stopWorkspacesResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopWorkspacesResponse
-stopWorkspacesResponse pResponseStatus_ =
-  StopWorkspacesResponse'
-    {_srsFailedRequests = Nothing, _srsResponseStatus = pResponseStatus_}
-
+stopWorkspacesResponse pResponseStatus_
+  = StopWorkspacesResponse'{_srsFailedRequests =
+                              Nothing,
+                            _srsResponseStatus = pResponseStatus_}
 
 -- | Information about the WorkSpaces that could not be stopped.
 srsFailedRequests :: Lens' StopWorkspacesResponse [FailedWorkspaceChangeRequest]

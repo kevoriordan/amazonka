@@ -53,24 +53,22 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'createUser' smart constructor.
-data CreateUser = CreateUser'
-  { _cuAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _cuStorageRule         :: !(Maybe StorageRuleType)
-  , _cuEmailAddress        :: !(Maybe Text)
-  , _cuTimeZoneId          :: !(Maybe Text)
-  , _cuOrganizationId      :: !(Maybe Text)
-  , _cuUsername            :: !Text
-  , _cuGivenName           :: !Text
-  , _cuSurname             :: !Text
-  , _cuPassword            :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateUser = CreateUser'{_cuAuthenticationToken
+                              :: !(Maybe (Sensitive Text)),
+                              _cuStorageRule :: !(Maybe StorageRuleType),
+                              _cuEmailAddress :: !(Maybe Text),
+                              _cuTimeZoneId :: !(Maybe Text),
+                              _cuOrganizationId :: !(Maybe Text),
+                              _cuUsername :: !Text, _cuGivenName :: !Text,
+                              _cuSurname :: !Text,
+                              _cuPassword :: !(Sensitive Text)}
+                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'cuAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'cuStorageRule' - The amount of storage for the user.
 --
@@ -93,21 +91,16 @@ createUser
     -> Text -- ^ 'cuSurname'
     -> Text -- ^ 'cuPassword'
     -> CreateUser
-createUser pUsername_ pGivenName_ pSurname_ pPassword_ =
-  CreateUser'
-    { _cuAuthenticationToken = Nothing
-    , _cuStorageRule = Nothing
-    , _cuEmailAddress = Nothing
-    , _cuTimeZoneId = Nothing
-    , _cuOrganizationId = Nothing
-    , _cuUsername = pUsername_
-    , _cuGivenName = pGivenName_
-    , _cuSurname = pSurname_
-    , _cuPassword = _Sensitive # pPassword_
-    }
+createUser pUsername_ pGivenName_ pSurname_
+  pPassword_
+  = CreateUser'{_cuAuthenticationToken = Nothing,
+                _cuStorageRule = Nothing, _cuEmailAddress = Nothing,
+                _cuTimeZoneId = Nothing, _cuOrganizationId = Nothing,
+                _cuUsername = pUsername_, _cuGivenName = pGivenName_,
+                _cuSurname = pSurname_,
+                _cuPassword = _Sensitive # pPassword_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 cuAuthenticationToken :: Lens' CreateUser (Maybe Text)
 cuAuthenticationToken = lens _cuAuthenticationToken (\ s a -> s{_cuAuthenticationToken = a}) . mapping _Sensitive
 
@@ -183,11 +176,10 @@ instance ToQuery CreateUser where
         toQuery = const mempty
 
 -- | /See:/ 'createUserResponse' smart constructor.
-data CreateUserResponse = CreateUserResponse'
-  { _cursUser           :: !(Maybe User)
-  , _cursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserResponse = CreateUserResponse'{_cursUser
+                                              :: !(Maybe User),
+                                              _cursResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUserResponse' with the minimum fields required to make a request.
 --
@@ -199,10 +191,9 @@ data CreateUserResponse = CreateUserResponse'
 createUserResponse
     :: Int -- ^ 'cursResponseStatus'
     -> CreateUserResponse
-createUserResponse pResponseStatus_ =
-  CreateUserResponse'
-    {_cursUser = Nothing, _cursResponseStatus = pResponseStatus_}
-
+createUserResponse pResponseStatus_
+  = CreateUserResponse'{_cursUser = Nothing,
+                        _cursResponseStatus = pResponseStatus_}
 
 -- | The user information.
 cursUser :: Lens' CreateUserResponse (Maybe User)

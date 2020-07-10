@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieve a JSON array of up to twenty of your job templates. This will return the templates themselves, not just a list of them. To retrieve the next twenty templates, use the nextToken string returned with the array
+--
+-- This operation returns paginated results.
 module Network.AWS.MediaConvert.ListJobTemplates
     (
     -- * Creating a Request
@@ -43,19 +45,20 @@ module Network.AWS.MediaConvert.ListJobTemplates
 import Network.AWS.Lens
 import Network.AWS.MediaConvert.Types
 import Network.AWS.MediaConvert.Types.Product
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listJobTemplates' smart constructor.
-data ListJobTemplates = ListJobTemplates'
-  { _ljtCategory   :: !(Maybe Text)
-  , _ljtListBy     :: !(Maybe JobTemplateListBy)
-  , _ljtNextToken  :: !(Maybe Text)
-  , _ljtOrder      :: !(Maybe Order)
-  , _ljtMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListJobTemplates = ListJobTemplates'{_ljtCategory
+                                          :: !(Maybe Text),
+                                          _ljtListBy ::
+                                          !(Maybe JobTemplateListBy),
+                                          _ljtNextToken :: !(Maybe Text),
+                                          _ljtOrder :: !(Maybe Order),
+                                          _ljtMaxResults :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListJobTemplates' with the minimum fields required to make a request.
 --
@@ -63,30 +66,25 @@ data ListJobTemplates = ListJobTemplates'
 --
 -- * 'ljtCategory' - Optionally, specify a job template category to limit responses to only job templates from that category.
 --
--- * 'ljtListBy' - Undocumented member.
+-- * 'ljtListBy' - Optional. When you request a list of job templates, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don't specify, the service will list them by name.
 --
 -- * 'ljtNextToken' - Use this string, provided with the response to a previous request, to request the next batch of job templates.
 --
--- * 'ljtOrder' - Undocumented member.
+-- * 'ljtOrder' - Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 --
 -- * 'ljtMaxResults' - Optional. Number of job templates, up to twenty, that will be returned at one time.
 listJobTemplates
     :: ListJobTemplates
-listJobTemplates =
-  ListJobTemplates'
-    { _ljtCategory = Nothing
-    , _ljtListBy = Nothing
-    , _ljtNextToken = Nothing
-    , _ljtOrder = Nothing
-    , _ljtMaxResults = Nothing
-    }
-
+listJobTemplates
+  = ListJobTemplates'{_ljtCategory = Nothing,
+                      _ljtListBy = Nothing, _ljtNextToken = Nothing,
+                      _ljtOrder = Nothing, _ljtMaxResults = Nothing}
 
 -- | Optionally, specify a job template category to limit responses to only job templates from that category.
 ljtCategory :: Lens' ListJobTemplates (Maybe Text)
 ljtCategory = lens _ljtCategory (\ s a -> s{_ljtCategory = a})
 
--- | Undocumented member.
+-- | Optional. When you request a list of job templates, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don't specify, the service will list them by name.
 ljtListBy :: Lens' ListJobTemplates (Maybe JobTemplateListBy)
 ljtListBy = lens _ljtListBy (\ s a -> s{_ljtListBy = a})
 
@@ -94,13 +92,20 @@ ljtListBy = lens _ljtListBy (\ s a -> s{_ljtListBy = a})
 ljtNextToken :: Lens' ListJobTemplates (Maybe Text)
 ljtNextToken = lens _ljtNextToken (\ s a -> s{_ljtNextToken = a})
 
--- | Undocumented member.
+-- | Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 ljtOrder :: Lens' ListJobTemplates (Maybe Order)
 ljtOrder = lens _ljtOrder (\ s a -> s{_ljtOrder = a})
 
 -- | Optional. Number of job templates, up to twenty, that will be returned at one time.
-ljtMaxResults :: Lens' ListJobTemplates (Maybe Int)
-ljtMaxResults = lens _ljtMaxResults (\ s a -> s{_ljtMaxResults = a})
+ljtMaxResults :: Lens' ListJobTemplates (Maybe Natural)
+ljtMaxResults = lens _ljtMaxResults (\ s a -> s{_ljtMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListJobTemplates where
+        page rq rs
+          | stop (rs ^. ljtrsNextToken) = Nothing
+          | stop (rs ^. ljtrsJobTemplates) = Nothing
+          | otherwise =
+            Just $ rq & ljtNextToken .~ rs ^. ljtrsNextToken
 
 instance AWSRequest ListJobTemplates where
         type Rs ListJobTemplates = ListJobTemplatesResponse
@@ -135,12 +140,16 @@ instance ToQuery ListJobTemplates where
                "maxResults" =: _ljtMaxResults]
 
 -- | /See:/ 'listJobTemplatesResponse' smart constructor.
-data ListJobTemplatesResponse = ListJobTemplatesResponse'
-  { _ljtrsJobTemplates   :: !(Maybe [JobTemplate])
-  , _ljtrsNextToken      :: !(Maybe Text)
-  , _ljtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListJobTemplatesResponse = ListJobTemplatesResponse'{_ljtrsJobTemplates
+                                                          ::
+                                                          !(Maybe
+                                                              [JobTemplate]),
+                                                          _ljtrsNextToken ::
+                                                          !(Maybe Text),
+                                                          _ljtrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListJobTemplatesResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +163,11 @@ data ListJobTemplatesResponse = ListJobTemplatesResponse'
 listJobTemplatesResponse
     :: Int -- ^ 'ljtrsResponseStatus'
     -> ListJobTemplatesResponse
-listJobTemplatesResponse pResponseStatus_ =
-  ListJobTemplatesResponse'
-    { _ljtrsJobTemplates = Nothing
-    , _ljtrsNextToken = Nothing
-    , _ljtrsResponseStatus = pResponseStatus_
-    }
-
+listJobTemplatesResponse pResponseStatus_
+  = ListJobTemplatesResponse'{_ljtrsJobTemplates =
+                                Nothing,
+                              _ljtrsNextToken = Nothing,
+                              _ljtrsResponseStatus = pResponseStatus_}
 
 -- | List of Job templates.
 ljtrsJobTemplates :: Lens' ListJobTemplatesResponse [JobTemplate]

@@ -14,11 +14,11 @@
 module Test.AWS.Gen.CodePipeline where
 
 import Data.Proxy
-import Network.AWS.CodePipeline
-import Test.AWS.CodePipeline.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.CodePipeline
+import Test.AWS.CodePipeline.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -42,6 +42,9 @@ import Test.Tasty
 --
 --         , requestPutThirdPartyJobFailureResult $
 --             putThirdPartyJobFailureResult
+--
+--         , requestListTagsForResource $
+--             listTagsForResource
 --
 --         , requestRegisterWebhookWithThirdParty $
 --             registerWebhookWithThirdParty
@@ -109,6 +112,18 @@ import Test.Tasty
 --         , requestListWebhooks $
 --             listWebhooks
 --
+--         , requestListActionExecutions $
+--             listActionExecutions
+--
+--         , requestStopPipelineExecution $
+--             stopPipelineExecution
+--
+--         , requestTagResource $
+--             tagResource
+--
+--         , requestUntagResource $
+--             untagResource
+--
 --         , requestCreatePipeline $
 --             createPipeline
 --
@@ -141,6 +156,9 @@ import Test.Tasty
 --
 --         , responsePutThirdPartyJobFailureResult $
 --             putThirdPartyJobFailureResultResponse
+--
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
 --
 --         , responseRegisterWebhookWithThirdParty $
 --             registerWebhookWithThirdPartyResponse
@@ -208,6 +226,18 @@ import Test.Tasty
 --         , responseListWebhooks $
 --             listWebhooksResponse
 --
+--         , responseListActionExecutions $
+--             listActionExecutionsResponse
+--
+--         , responseStopPipelineExecution $
+--             stopPipelineExecutionResponse
+--
+--         , responseTagResource $
+--             tagResourceResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
+--
 --         , responseCreatePipeline $
 --             createPipelineResponse
 --
@@ -252,6 +282,11 @@ requestPutThirdPartyJobFailureResult :: PutThirdPartyJobFailureResult -> TestTre
 requestPutThirdPartyJobFailureResult = req
     "PutThirdPartyJobFailureResult"
     "fixture/PutThirdPartyJobFailureResult.yaml"
+
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
 
 requestRegisterWebhookWithThirdParty :: RegisterWebhookWithThirdParty -> TestTree
 requestRegisterWebhookWithThirdParty = req
@@ -363,6 +398,26 @@ requestListWebhooks = req
     "ListWebhooks"
     "fixture/ListWebhooks.yaml"
 
+requestListActionExecutions :: ListActionExecutions -> TestTree
+requestListActionExecutions = req
+    "ListActionExecutions"
+    "fixture/ListActionExecutions.yaml"
+
+requestStopPipelineExecution :: StopPipelineExecution -> TestTree
+requestStopPipelineExecution = req
+    "StopPipelineExecution"
+    "fixture/StopPipelineExecution.yaml"
+
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
+
 requestCreatePipeline :: CreatePipeline -> TestTree
 requestCreatePipeline = req
     "CreatePipeline"
@@ -424,6 +479,13 @@ responsePutThirdPartyJobFailureResult = res
     "fixture/PutThirdPartyJobFailureResultResponse.proto"
     codePipeline
     (Proxy :: Proxy PutThirdPartyJobFailureResult)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    codePipeline
+    (Proxy :: Proxy ListTagsForResource)
 
 responseRegisterWebhookWithThirdParty :: RegisterWebhookWithThirdPartyResponse -> TestTree
 responseRegisterWebhookWithThirdParty = res
@@ -578,6 +640,34 @@ responseListWebhooks = res
     "fixture/ListWebhooksResponse.proto"
     codePipeline
     (Proxy :: Proxy ListWebhooks)
+
+responseListActionExecutions :: ListActionExecutionsResponse -> TestTree
+responseListActionExecutions = res
+    "ListActionExecutionsResponse"
+    "fixture/ListActionExecutionsResponse.proto"
+    codePipeline
+    (Proxy :: Proxy ListActionExecutions)
+
+responseStopPipelineExecution :: StopPipelineExecutionResponse -> TestTree
+responseStopPipelineExecution = res
+    "StopPipelineExecutionResponse"
+    "fixture/StopPipelineExecutionResponse.proto"
+    codePipeline
+    (Proxy :: Proxy StopPipelineExecution)
+
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    codePipeline
+    (Proxy :: Proxy TagResource)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    codePipeline
+    (Proxy :: Proxy UntagResource)
 
 responseCreatePipeline :: CreatePipelineResponse -> TestTree
 responseCreatePipeline = res

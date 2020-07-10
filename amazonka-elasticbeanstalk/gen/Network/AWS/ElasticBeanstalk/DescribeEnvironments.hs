@@ -21,6 +21,8 @@
 -- Returns descriptions for existing environments.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.ElasticBeanstalk.DescribeEnvironments
     (
     -- * Creating a Request
@@ -47,6 +49,7 @@ module Network.AWS.ElasticBeanstalk.DescribeEnvironments
 import Network.AWS.ElasticBeanstalk.Types
 import Network.AWS.ElasticBeanstalk.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -56,17 +59,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeEnvironments' smart constructor.
-data DescribeEnvironments = DescribeEnvironments'
-  { _desEnvironmentIds        :: !(Maybe [Text])
-  , _desEnvironmentNames      :: !(Maybe [Text])
-  , _desNextToken             :: !(Maybe Text)
-  , _desVersionLabel          :: !(Maybe Text)
-  , _desMaxRecords            :: !(Maybe Nat)
-  , _desApplicationName       :: !(Maybe Text)
-  , _desIncludedDeletedBackTo :: !(Maybe ISO8601)
-  , _desIncludeDeleted        :: !(Maybe Bool)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEnvironments = DescribeEnvironments'{_desEnvironmentIds
+                                                  :: !(Maybe [Text]),
+                                                  _desEnvironmentNames ::
+                                                  !(Maybe [Text]),
+                                                  _desNextToken ::
+                                                  !(Maybe Text),
+                                                  _desVersionLabel ::
+                                                  !(Maybe Text),
+                                                  _desMaxRecords ::
+                                                  !(Maybe Nat),
+                                                  _desApplicationName ::
+                                                  !(Maybe Text),
+                                                  _desIncludedDeletedBackTo ::
+                                                  !(Maybe ISO8601),
+                                                  _desIncludeDeleted ::
+                                                  !(Maybe Bool)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEnvironments' with the minimum fields required to make a request.
 --
@@ -84,23 +93,19 @@ data DescribeEnvironments = DescribeEnvironments'
 --
 -- * 'desApplicationName' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that are associated with this application.
 --
--- * 'desIncludedDeletedBackTo' - If specified when @IncludeDeleted@ is set to @true@ , then environments deleted after this date are displayed.
+-- * 'desIncludedDeletedBackTo' - If specified when @IncludeDeleted@ is set to @true@ , then environments deleted after this date are displayed. 
 --
 -- * 'desIncludeDeleted' - Indicates whether to include deleted environments: @true@ : Environments that have been deleted after @IncludedDeletedBackTo@ are displayed. @false@ : Do not include deleted environments.
 describeEnvironments
     :: DescribeEnvironments
-describeEnvironments =
-  DescribeEnvironments'
-    { _desEnvironmentIds = Nothing
-    , _desEnvironmentNames = Nothing
-    , _desNextToken = Nothing
-    , _desVersionLabel = Nothing
-    , _desMaxRecords = Nothing
-    , _desApplicationName = Nothing
-    , _desIncludedDeletedBackTo = Nothing
-    , _desIncludeDeleted = Nothing
-    }
-
+describeEnvironments
+  = DescribeEnvironments'{_desEnvironmentIds = Nothing,
+                          _desEnvironmentNames = Nothing,
+                          _desNextToken = Nothing, _desVersionLabel = Nothing,
+                          _desMaxRecords = Nothing,
+                          _desApplicationName = Nothing,
+                          _desIncludedDeletedBackTo = Nothing,
+                          _desIncludeDeleted = Nothing}
 
 -- | If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those that have the specified IDs.
 desEnvironmentIds :: Lens' DescribeEnvironments [Text]
@@ -126,13 +131,20 @@ desMaxRecords = lens _desMaxRecords (\ s a -> s{_desMaxRecords = a}) . mapping _
 desApplicationName :: Lens' DescribeEnvironments (Maybe Text)
 desApplicationName = lens _desApplicationName (\ s a -> s{_desApplicationName = a})
 
--- | If specified when @IncludeDeleted@ is set to @true@ , then environments deleted after this date are displayed.
+-- | If specified when @IncludeDeleted@ is set to @true@ , then environments deleted after this date are displayed. 
 desIncludedDeletedBackTo :: Lens' DescribeEnvironments (Maybe UTCTime)
 desIncludedDeletedBackTo = lens _desIncludedDeletedBackTo (\ s a -> s{_desIncludedDeletedBackTo = a}) . mapping _Time
 
 -- | Indicates whether to include deleted environments: @true@ : Environments that have been deleted after @IncludedDeletedBackTo@ are displayed. @false@ : Do not include deleted environments.
 desIncludeDeleted :: Lens' DescribeEnvironments (Maybe Bool)
 desIncludeDeleted = lens _desIncludeDeleted (\ s a -> s{_desIncludeDeleted = a})
+
+instance AWSPager DescribeEnvironments where
+        page rq rs
+          | stop (rs ^. edmNextToken) = Nothing
+          | stop (rs ^. edmEnvironments) = Nothing
+          | otherwise =
+            Just $ rq & desNextToken .~ rs ^. edmNextToken
 
 instance AWSRequest DescribeEnvironments where
         type Rs DescribeEnvironments =

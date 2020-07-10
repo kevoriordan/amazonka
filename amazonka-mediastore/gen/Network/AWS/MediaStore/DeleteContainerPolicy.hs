@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteContainerPolicy' smart constructor.
-newtype DeleteContainerPolicy = DeleteContainerPolicy'
-  { _delContainerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteContainerPolicy = DeleteContainerPolicy'{_delContainerName
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteContainerPolicy' with the minimum fields required to make a request.
 --
@@ -57,9 +57,9 @@ newtype DeleteContainerPolicy = DeleteContainerPolicy'
 deleteContainerPolicy
     :: Text -- ^ 'delContainerName'
     -> DeleteContainerPolicy
-deleteContainerPolicy pContainerName_ =
-  DeleteContainerPolicy' {_delContainerName = pContainerName_}
-
+deleteContainerPolicy pContainerName_
+  = DeleteContainerPolicy'{_delContainerName =
+                             pContainerName_}
 
 -- | The name of the container that holds the policy.
 delContainerName :: Lens' DeleteContainerPolicy Text
@@ -102,10 +102,10 @@ instance ToQuery DeleteContainerPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deleteContainerPolicyResponse' smart constructor.
-newtype DeleteContainerPolicyResponse = DeleteContainerPolicyResponse'
-  { _dcprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteContainerPolicyResponse = DeleteContainerPolicyResponse'{_dcprsResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteContainerPolicyResponse' with the minimum fields required to make a request.
 --
@@ -115,9 +115,9 @@ newtype DeleteContainerPolicyResponse = DeleteContainerPolicyResponse'
 deleteContainerPolicyResponse
     :: Int -- ^ 'dcprsResponseStatus'
     -> DeleteContainerPolicyResponse
-deleteContainerPolicyResponse pResponseStatus_ =
-  DeleteContainerPolicyResponse' {_dcprsResponseStatus = pResponseStatus_}
-
+deleteContainerPolicyResponse pResponseStatus_
+  = DeleteContainerPolicyResponse'{_dcprsResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 dcprsResponseStatus :: Lens' DeleteContainerPolicyResponse Int

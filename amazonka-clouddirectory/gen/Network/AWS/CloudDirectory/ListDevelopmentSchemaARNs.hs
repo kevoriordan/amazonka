@@ -50,11 +50,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDevelopmentSchemaARNs' smart constructor.
-data ListDevelopmentSchemaARNs = ListDevelopmentSchemaARNs'
-  { _ldsaNextToken  :: !(Maybe Text)
-  , _ldsaMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDevelopmentSchemaARNs = ListDevelopmentSchemaARNs'{_ldsaNextToken
+                                                            :: !(Maybe Text),
+                                                            _ldsaMaxResults ::
+                                                            !(Maybe Nat)}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListDevelopmentSchemaARNs' with the minimum fields required to make a request.
 --
@@ -65,10 +66,10 @@ data ListDevelopmentSchemaARNs = ListDevelopmentSchemaARNs'
 -- * 'ldsaMaxResults' - The maximum number of results to retrieve.
 listDevelopmentSchemaARNs
     :: ListDevelopmentSchemaARNs
-listDevelopmentSchemaARNs =
-  ListDevelopmentSchemaARNs'
-    {_ldsaNextToken = Nothing, _ldsaMaxResults = Nothing}
-
+listDevelopmentSchemaARNs
+  = ListDevelopmentSchemaARNs'{_ldsaNextToken =
+                                 Nothing,
+                               _ldsaMaxResults = Nothing}
 
 -- | The pagination token.
 ldsaNextToken :: Lens' ListDevelopmentSchemaARNs (Maybe Text)
@@ -120,12 +121,19 @@ instance ToQuery ListDevelopmentSchemaARNs where
         toQuery = const mempty
 
 -- | /See:/ 'listDevelopmentSchemaARNsResponse' smart constructor.
-data ListDevelopmentSchemaARNsResponse = ListDevelopmentSchemaARNsResponse'
-  { _ldsarsSchemaARNs     :: !(Maybe [Text])
-  , _ldsarsNextToken      :: !(Maybe Text)
-  , _ldsarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDevelopmentSchemaARNsResponse = ListDevelopmentSchemaARNsResponse'{_ldsarsSchemaARNs
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [Text]),
+                                                                            _ldsarsNextToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _ldsarsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'ListDevelopmentSchemaARNsResponse' with the minimum fields required to make a request.
 --
@@ -139,13 +147,11 @@ data ListDevelopmentSchemaARNsResponse = ListDevelopmentSchemaARNsResponse'
 listDevelopmentSchemaARNsResponse
     :: Int -- ^ 'ldsarsResponseStatus'
     -> ListDevelopmentSchemaARNsResponse
-listDevelopmentSchemaARNsResponse pResponseStatus_ =
-  ListDevelopmentSchemaARNsResponse'
-    { _ldsarsSchemaARNs = Nothing
-    , _ldsarsNextToken = Nothing
-    , _ldsarsResponseStatus = pResponseStatus_
-    }
-
+listDevelopmentSchemaARNsResponse pResponseStatus_
+  = ListDevelopmentSchemaARNsResponse'{_ldsarsSchemaARNs
+                                         = Nothing,
+                                       _ldsarsNextToken = Nothing,
+                                       _ldsarsResponseStatus = pResponseStatus_}
 
 -- | The ARNs of retrieved development schemas.
 ldsarsSchemaARNs :: Lens' ListDevelopmentSchemaARNsResponse [Text]

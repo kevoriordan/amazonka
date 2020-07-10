@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -16,17 +16,17 @@ module Network.AWS.Route53AutoNaming.Types
       route53AutoNaming
 
     -- * Errors
-    , _ResourceLimitExceeded
-    , _InvalidInput
-    , _NamespaceAlreadyExists
     , _NamespaceNotFound
-    , _ServiceAlreadyExists
-    , _ResourceInUse
-    , _CustomHealthNotFound
     , _InstanceNotFound
-    , _DuplicateRequest
-    , _ServiceNotFound
+    , _CustomHealthNotFound
+    , _ResourceLimitExceeded
     , _OperationNotFound
+    , _ServiceNotFound
+    , _ServiceAlreadyExists
+    , _NamespaceAlreadyExists
+    , _InvalidInput
+    , _DuplicateRequest
+    , _ResourceInUse
 
     -- * CustomHealthStatus
     , CustomHealthStatus (..)
@@ -39,6 +39,9 @@ module Network.AWS.Route53AutoNaming.Types
 
     -- * HealthStatus
     , HealthStatus (..)
+
+    -- * HealthStatusFilter
+    , HealthStatusFilter (..)
 
     -- * NamespaceFilterName
     , NamespaceFilterName (..)
@@ -90,6 +93,20 @@ module Network.AWS.Route53AutoNaming.Types
     , drType
     , drTTL
 
+    -- * HTTPInstanceSummary
+    , HTTPInstanceSummary
+    , hTTPInstanceSummary
+    , httpisInstanceId
+    , httpisNamespaceName
+    , httpisAttributes
+    , httpisServiceName
+    , httpisHealthStatus
+
+    -- * HTTPProperties
+    , HTTPProperties
+    , hTTPProperties
+    , httppHTTPName
+
     -- * HealthCheckConfig
     , HealthCheckConfig
     , healthCheckConfig
@@ -139,14 +156,19 @@ module Network.AWS.Route53AutoNaming.Types
     , NamespaceProperties
     , namespaceProperties
     , npDNSProperties
+    , npHTTPProperties
 
     -- * NamespaceSummary
     , NamespaceSummary
     , namespaceSummary
     , nsARN
+    , nsCreateDate
+    , nsServiceCount
     , nsName
     , nsId
     , nsType
+    , nsDescription
+    , nsProperties
 
     -- * Operation
     , Operation
@@ -196,6 +218,7 @@ module Network.AWS.Route53AutoNaming.Types
     , siCreatorRequestId
     , siCreateDate
     , siHealthCheckCustomConfig
+    , siNamespaceId
     , siName
     , siId
     , siDNSConfig
@@ -206,131 +229,176 @@ module Network.AWS.Route53AutoNaming.Types
     , serviceSummary
     , ssInstanceCount
     , ssARN
+    , ssHealthCheckConfig
+    , ssCreateDate
+    , ssHealthCheckCustomConfig
     , ssName
     , ssId
+    , ssDNSConfig
     , ssDescription
     ) where
 
 import Network.AWS.Lens
 import Network.AWS.Prelude
-import Network.AWS.Route53AutoNaming.Types.Product
-import Network.AWS.Route53AutoNaming.Types.Sum
 import Network.AWS.Sign.V4
+import Network.AWS.Route53AutoNaming.Types.CustomHealthStatus
+import Network.AWS.Route53AutoNaming.Types.FilterCondition
+import Network.AWS.Route53AutoNaming.Types.HealthCheckType
+import Network.AWS.Route53AutoNaming.Types.HealthStatus
+import Network.AWS.Route53AutoNaming.Types.HealthStatusFilter
+import Network.AWS.Route53AutoNaming.Types.NamespaceFilterName
+import Network.AWS.Route53AutoNaming.Types.NamespaceType
+import Network.AWS.Route53AutoNaming.Types.OperationFilterName
+import Network.AWS.Route53AutoNaming.Types.OperationStatus
+import Network.AWS.Route53AutoNaming.Types.OperationTargetType
+import Network.AWS.Route53AutoNaming.Types.OperationType
+import Network.AWS.Route53AutoNaming.Types.RecordType
+import Network.AWS.Route53AutoNaming.Types.RoutingPolicy
+import Network.AWS.Route53AutoNaming.Types.ServiceFilterName
+import Network.AWS.Route53AutoNaming.Types.DNSConfig
+import Network.AWS.Route53AutoNaming.Types.DNSConfigChange
+import Network.AWS.Route53AutoNaming.Types.DNSProperties
+import Network.AWS.Route53AutoNaming.Types.DNSRecord
+import Network.AWS.Route53AutoNaming.Types.HTTPInstanceSummary
+import Network.AWS.Route53AutoNaming.Types.HTTPProperties
+import Network.AWS.Route53AutoNaming.Types.HealthCheckConfig
+import Network.AWS.Route53AutoNaming.Types.HealthCheckCustomConfig
+import Network.AWS.Route53AutoNaming.Types.Instance
+import Network.AWS.Route53AutoNaming.Types.InstanceSummary
+import Network.AWS.Route53AutoNaming.Types.Namespace
+import Network.AWS.Route53AutoNaming.Types.NamespaceFilter
+import Network.AWS.Route53AutoNaming.Types.NamespaceProperties
+import Network.AWS.Route53AutoNaming.Types.NamespaceSummary
+import Network.AWS.Route53AutoNaming.Types.Operation
+import Network.AWS.Route53AutoNaming.Types.OperationFilter
+import Network.AWS.Route53AutoNaming.Types.OperationSummary
+import Network.AWS.Route53AutoNaming.Types.ServiceChange
+import Network.AWS.Route53AutoNaming.Types.ServiceFilter
+import Network.AWS.Route53AutoNaming.Types.ServiceInfo
+import Network.AWS.Route53AutoNaming.Types.ServiceSummary
 
--- | API version @2017-03-14@ of the Amazon Route 53 Auto Naming SDK configuration.
+-- | API version @2017-03-14@ of the Amazon Cloud Map SDK configuration.
 route53AutoNaming :: Service
-route53AutoNaming =
-  Service
-    { _svcAbbrev = "Route53AutoNaming"
-    , _svcSigner = v4
-    , _svcPrefix = "servicediscovery"
-    , _svcVersion = "2017-03-14"
-    , _svcEndpoint = defaultEndpoint route53AutoNaming
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "Route53AutoNaming"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
-
-
--- | The resource can't be created because you've reached the limit on the number of resources.
---
---
-_ResourceLimitExceeded :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceLimitExceeded =
-  _MatchServiceError route53AutoNaming "ResourceLimitExceeded"
-
-
--- | One or more specified values aren't valid. For example, when you're creating a namespace, the value of @Name@ might not be a valid DNS name.
---
---
-_InvalidInput :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidInput = _MatchServiceError route53AutoNaming "InvalidInput"
-
-
--- | The namespace that you're trying to create already exists.
---
---
-_NamespaceAlreadyExists :: AsError a => Getting (First ServiceError) a ServiceError
-_NamespaceAlreadyExists =
-  _MatchServiceError route53AutoNaming "NamespaceAlreadyExists"
-
+route53AutoNaming
+  = Service{_svcAbbrev = "Route53AutoNaming",
+            _svcSigner = v4, _svcPrefix = "servicediscovery",
+            _svcVersion = "2017-03-14",
+            _svcEndpoint = defaultEndpoint route53AutoNaming,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "Route53AutoNaming",
+            _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
 -- | No namespace exists with the specified ID.
 --
 --
 _NamespaceNotFound :: AsError a => Getting (First ServiceError) a ServiceError
-_NamespaceNotFound = _MatchServiceError route53AutoNaming "NamespaceNotFound"
-
-
--- | The service can't be created because a service with the same name already exists.
---
---
-_ServiceAlreadyExists :: AsError a => Getting (First ServiceError) a ServiceError
-_ServiceAlreadyExists =
-  _MatchServiceError route53AutoNaming "ServiceAlreadyExists"
-
-
--- | The specified resource can't be deleted because it contains other resources. For example, you can't delete a service that contains any instances.
---
---
-_ResourceInUse :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceInUse = _MatchServiceError route53AutoNaming "ResourceInUse"
-
-
--- | Prism for CustomHealthNotFound' errors.
-_CustomHealthNotFound :: AsError a => Getting (First ServiceError) a ServiceError
-_CustomHealthNotFound =
-  _MatchServiceError route53AutoNaming "CustomHealthNotFound"
-
+_NamespaceNotFound
+  = _MatchServiceError route53AutoNaming
+      "NamespaceNotFound"
 
 -- | No instance exists with the specified ID, or the instance was recently registered, and information about the instance hasn't propagated yet.
 --
 --
 _InstanceNotFound :: AsError a => Getting (First ServiceError) a ServiceError
-_InstanceNotFound = _MatchServiceError route53AutoNaming "InstanceNotFound"
+_InstanceNotFound
+  = _MatchServiceError route53AutoNaming
+      "InstanceNotFound"
 
-
--- | The operation is already in progress.
+-- | The health check for the instance that is specified by @ServiceId@ and @InstanceId@ is not a custom health check. 
 --
 --
-_DuplicateRequest :: AsError a => Getting (First ServiceError) a ServiceError
-_DuplicateRequest = _MatchServiceError route53AutoNaming "DuplicateRequest"
+_CustomHealthNotFound :: AsError a => Getting (First ServiceError) a ServiceError
+_CustomHealthNotFound
+  = _MatchServiceError route53AutoNaming
+      "CustomHealthNotFound"
 
-
--- | No service exists with the specified ID.
+-- | The resource can't be created because you've reached the limit on the number of resources.
 --
 --
-_ServiceNotFound :: AsError a => Getting (First ServiceError) a ServiceError
-_ServiceNotFound = _MatchServiceError route53AutoNaming "ServiceNotFound"
-
+_ResourceLimitExceeded :: AsError a => Getting (First ServiceError) a ServiceError
+_ResourceLimitExceeded
+  = _MatchServiceError route53AutoNaming
+      "ResourceLimitExceeded"
 
 -- | No operation exists with the specified ID.
 --
 --
 _OperationNotFound :: AsError a => Getting (First ServiceError) a ServiceError
-_OperationNotFound = _MatchServiceError route53AutoNaming "OperationNotFound"
+_OperationNotFound
+  = _MatchServiceError route53AutoNaming
+      "OperationNotFound"
 
+-- | No service exists with the specified ID.
+--
+--
+_ServiceNotFound :: AsError a => Getting (First ServiceError) a ServiceError
+_ServiceNotFound
+  = _MatchServiceError route53AutoNaming
+      "ServiceNotFound"
+
+-- | The service can't be created because a service with the same name already exists.
+--
+--
+_ServiceAlreadyExists :: AsError a => Getting (First ServiceError) a ServiceError
+_ServiceAlreadyExists
+  = _MatchServiceError route53AutoNaming
+      "ServiceAlreadyExists"
+
+-- | The namespace that you're trying to create already exists.
+--
+--
+_NamespaceAlreadyExists :: AsError a => Getting (First ServiceError) a ServiceError
+_NamespaceAlreadyExists
+  = _MatchServiceError route53AutoNaming
+      "NamespaceAlreadyExists"
+
+-- | One or more specified values aren't valid. For example, a required value might be missing, a numeric value might be outside the allowed range, or a string value might exceed length constraints.
+--
+--
+_InvalidInput :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidInput
+  = _MatchServiceError route53AutoNaming "InvalidInput"
+
+-- | The operation is already in progress.
+--
+--
+_DuplicateRequest :: AsError a => Getting (First ServiceError) a ServiceError
+_DuplicateRequest
+  = _MatchServiceError route53AutoNaming
+      "DuplicateRequest"
+
+-- | The specified resource can't be deleted because it contains other resources. For example, you can't delete a service that contains any instances.
+--
+--
+_ResourceInUse :: AsError a => Getting (First ServiceError) a ServiceError
+_ResourceInUse
+  = _MatchServiceError route53AutoNaming
+      "ResourceInUse"

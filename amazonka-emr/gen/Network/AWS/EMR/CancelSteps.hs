@@ -27,8 +27,9 @@ module Network.AWS.EMR.CancelSteps
       cancelSteps
     , CancelSteps
     -- * Request Lenses
-    , csStepIds
+    , csStepCancellationOption
     , csClusterId
+    , csStepIds
 
     -- * Destructuring the Response
     , cancelStepsResponse
@@ -50,31 +51,38 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'cancelSteps' smart constructor.
-data CancelSteps = CancelSteps'
-  { _csStepIds   :: !(Maybe [Text])
-  , _csClusterId :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelSteps = CancelSteps'{_csStepCancellationOption
+                                :: !(Maybe StepCancellationOption),
+                                _csClusterId :: !Text, _csStepIds :: ![Text]}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelSteps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csStepIds' - The list of @StepIDs@ to cancel. Use 'ListSteps' to get steps and their states for the specified cluster.
+-- * 'csStepCancellationOption' - The option to choose for cancelling @RUNNING@ steps. By default, the value is @SEND_INTERRUPT@ .
 --
--- * 'csClusterId' - The @ClusterID@ for which specified steps will be canceled. Use 'RunJobFlow' and 'ListClusters' to get ClusterIDs.
+-- * 'csClusterId' - The @ClusterID@ for which specified steps will be canceled. Use 'RunJobFlow' and 'ListClusters' to get ClusterIDs. 
+--
+-- * 'csStepIds' - The list of @StepIDs@ to cancel. Use 'ListSteps' to get steps and their states for the specified cluster.
 cancelSteps
-    :: CancelSteps
-cancelSteps = CancelSteps' {_csStepIds = Nothing, _csClusterId = Nothing}
+    :: Text -- ^ 'csClusterId'
+    -> CancelSteps
+cancelSteps pClusterId_
+  = CancelSteps'{_csStepCancellationOption = Nothing,
+                 _csClusterId = pClusterId_, _csStepIds = mempty}
 
+-- | The option to choose for cancelling @RUNNING@ steps. By default, the value is @SEND_INTERRUPT@ .
+csStepCancellationOption :: Lens' CancelSteps (Maybe StepCancellationOption)
+csStepCancellationOption = lens _csStepCancellationOption (\ s a -> s{_csStepCancellationOption = a})
+
+-- | The @ClusterID@ for which specified steps will be canceled. Use 'RunJobFlow' and 'ListClusters' to get ClusterIDs. 
+csClusterId :: Lens' CancelSteps Text
+csClusterId = lens _csClusterId (\ s a -> s{_csClusterId = a})
 
 -- | The list of @StepIDs@ to cancel. Use 'ListSteps' to get steps and their states for the specified cluster.
 csStepIds :: Lens' CancelSteps [Text]
-csStepIds = lens _csStepIds (\ s a -> s{_csStepIds = a}) . _Default . _Coerce
-
--- | The @ClusterID@ for which specified steps will be canceled. Use 'RunJobFlow' and 'ListClusters' to get ClusterIDs.
-csClusterId :: Lens' CancelSteps (Maybe Text)
-csClusterId = lens _csClusterId (\ s a -> s{_csClusterId = a})
+csStepIds = lens _csStepIds (\ s a -> s{_csStepIds = a}) . _Coerce
 
 instance AWSRequest CancelSteps where
         type Rs CancelSteps = CancelStepsResponse
@@ -103,8 +111,10 @@ instance ToJSON CancelSteps where
         toJSON CancelSteps'{..}
           = object
               (catMaybes
-                 [("StepIds" .=) <$> _csStepIds,
-                  ("ClusterId" .=) <$> _csClusterId])
+                 [("StepCancellationOption" .=) <$>
+                    _csStepCancellationOption,
+                  Just ("ClusterId" .= _csClusterId),
+                  Just ("StepIds" .= _csStepIds)])
 
 instance ToPath CancelSteps where
         toPath = const "/"
@@ -112,16 +122,15 @@ instance ToPath CancelSteps where
 instance ToQuery CancelSteps where
         toQuery = const mempty
 
--- | The output for the 'CancelSteps' operation.
+-- | The output for the 'CancelSteps' operation. 
 --
 --
 --
 -- /See:/ 'cancelStepsResponse' smart constructor.
-data CancelStepsResponse = CancelStepsResponse'
-  { _csrsCancelStepsInfoList :: !(Maybe [CancelStepsInfo])
-  , _csrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelStepsResponse = CancelStepsResponse'{_csrsCancelStepsInfoList
+                                                :: !(Maybe [CancelStepsInfo]),
+                                                _csrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelStepsResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +142,10 @@ data CancelStepsResponse = CancelStepsResponse'
 cancelStepsResponse
     :: Int -- ^ 'csrsResponseStatus'
     -> CancelStepsResponse
-cancelStepsResponse pResponseStatus_ =
-  CancelStepsResponse'
-    {_csrsCancelStepsInfoList = Nothing, _csrsResponseStatus = pResponseStatus_}
-
+cancelStepsResponse pResponseStatus_
+  = CancelStepsResponse'{_csrsCancelStepsInfoList =
+                           Nothing,
+                         _csrsResponseStatus = pResponseStatus_}
 
 -- | A list of 'CancelStepsInfo' , which shows the status of specified cancel requests for each @StepID@ specified.
 csrsCancelStepsInfoList :: Lens' CancelStepsResponse [CancelStepsInfo]

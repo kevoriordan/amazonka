@@ -50,19 +50,24 @@ import Network.AWS.Transcribe.Types
 import Network.AWS.Transcribe.Types.Product
 
 -- | /See:/ 'listTranscriptionJobs' smart constructor.
-data ListTranscriptionJobs = ListTranscriptionJobs'
-  { _ltjStatus          :: !(Maybe TranscriptionJobStatus)
-  , _ltjNextToken       :: !(Maybe Text)
-  , _ltjJobNameContains :: !(Maybe Text)
-  , _ltjMaxResults      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTranscriptionJobs = ListTranscriptionJobs'{_ltjStatus
+                                                    ::
+                                                    !(Maybe
+                                                        TranscriptionJobStatus),
+                                                    _ltjNextToken ::
+                                                    !(Maybe Text),
+                                                    _ltjJobNameContains ::
+                                                    !(Maybe Text),
+                                                    _ltjMaxResults ::
+                                                    !(Maybe Nat)}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListTranscriptionJobs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltjStatus' - When specified, returns only transcription jobs with the specified status.
+-- * 'ltjStatus' - When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. 
 --
 -- * 'ltjNextToken' - If the result of the previous request to @ListTranscriptionJobs@ was truncated, include the @NextToken@ to fetch the next set of jobs.
 --
@@ -71,16 +76,13 @@ data ListTranscriptionJobs = ListTranscriptionJobs'
 -- * 'ltjMaxResults' - The maximum number of jobs to return in the response. If there are fewer results in the list, this response contains only the actual results.
 listTranscriptionJobs
     :: ListTranscriptionJobs
-listTranscriptionJobs =
-  ListTranscriptionJobs'
-    { _ltjStatus = Nothing
-    , _ltjNextToken = Nothing
-    , _ltjJobNameContains = Nothing
-    , _ltjMaxResults = Nothing
-    }
+listTranscriptionJobs
+  = ListTranscriptionJobs'{_ltjStatus = Nothing,
+                           _ltjNextToken = Nothing,
+                           _ltjJobNameContains = Nothing,
+                           _ltjMaxResults = Nothing}
 
-
--- | When specified, returns only transcription jobs with the specified status.
+-- | When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. 
 ltjStatus :: Lens' ListTranscriptionJobs (Maybe TranscriptionJobStatus)
 ltjStatus = lens _ltjStatus (\ s a -> s{_ltjStatus = a})
 
@@ -137,13 +139,22 @@ instance ToQuery ListTranscriptionJobs where
         toQuery = const mempty
 
 -- | /See:/ 'listTranscriptionJobsResponse' smart constructor.
-data ListTranscriptionJobsResponse = ListTranscriptionJobsResponse'
-  { _ltjrsStatus                    :: !(Maybe TranscriptionJobStatus)
-  , _ltjrsNextToken                 :: !(Maybe Text)
-  , _ltjrsTranscriptionJobSummaries :: !(Maybe [TranscriptionJobSummary])
-  , _ltjrsResponseStatus            :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTranscriptionJobsResponse = ListTranscriptionJobsResponse'{_ltjrsStatus
+                                                                    ::
+                                                                    !(Maybe
+                                                                        TranscriptionJobStatus),
+                                                                    _ltjrsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _ltjrsTranscriptionJobSummaries
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [TranscriptionJobSummary]),
+                                                                    _ltjrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListTranscriptionJobsResponse' with the minimum fields required to make a request.
 --
@@ -159,14 +170,12 @@ data ListTranscriptionJobsResponse = ListTranscriptionJobsResponse'
 listTranscriptionJobsResponse
     :: Int -- ^ 'ltjrsResponseStatus'
     -> ListTranscriptionJobsResponse
-listTranscriptionJobsResponse pResponseStatus_ =
-  ListTranscriptionJobsResponse'
-    { _ltjrsStatus = Nothing
-    , _ltjrsNextToken = Nothing
-    , _ltjrsTranscriptionJobSummaries = Nothing
-    , _ltjrsResponseStatus = pResponseStatus_
-    }
-
+listTranscriptionJobsResponse pResponseStatus_
+  = ListTranscriptionJobsResponse'{_ltjrsStatus =
+                                     Nothing,
+                                   _ltjrsNextToken = Nothing,
+                                   _ltjrsTranscriptionJobSummaries = Nothing,
+                                   _ltjrsResponseStatus = pResponseStatus_}
 
 -- | The requested status of the jobs returned.
 ltjrsStatus :: Lens' ListTranscriptionJobsResponse (Maybe TranscriptionJobStatus)

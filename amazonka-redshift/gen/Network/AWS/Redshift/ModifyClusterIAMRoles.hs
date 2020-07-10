@@ -48,17 +48,19 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'modifyClusterIAMRoles' smart constructor.
-data ModifyClusterIAMRoles = ModifyClusterIAMRoles'
-  { _mcirRemoveIAMRoles    :: !(Maybe [Text])
-  , _mcirAddIAMRoles       :: !(Maybe [Text])
-  , _mcirClusterIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyClusterIAMRoles = ModifyClusterIAMRoles'{_mcirRemoveIAMRoles
+                                                    :: !(Maybe [Text]),
+                                                    _mcirAddIAMRoles ::
+                                                    !(Maybe [Text]),
+                                                    _mcirClusterIdentifier ::
+                                                    !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ModifyClusterIAMRoles' with the minimum fields required to make a request.
 --
@@ -72,13 +74,11 @@ data ModifyClusterIAMRoles = ModifyClusterIAMRoles'
 modifyClusterIAMRoles
     :: Text -- ^ 'mcirClusterIdentifier'
     -> ModifyClusterIAMRoles
-modifyClusterIAMRoles pClusterIdentifier_ =
-  ModifyClusterIAMRoles'
-    { _mcirRemoveIAMRoles = Nothing
-    , _mcirAddIAMRoles = Nothing
-    , _mcirClusterIdentifier = pClusterIdentifier_
-    }
-
+modifyClusterIAMRoles pClusterIdentifier_
+  = ModifyClusterIAMRoles'{_mcirRemoveIAMRoles =
+                             Nothing,
+                           _mcirAddIAMRoles = Nothing,
+                           _mcirClusterIdentifier = pClusterIdentifier_}
 
 -- | Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.
 mcirRemoveIAMRoles :: Lens' ModifyClusterIAMRoles [Text]
@@ -126,11 +126,14 @@ instance ToQuery ModifyClusterIAMRoles where
                "ClusterIdentifier" =: _mcirClusterIdentifier]
 
 -- | /See:/ 'modifyClusterIAMRolesResponse' smart constructor.
-data ModifyClusterIAMRolesResponse = ModifyClusterIAMRolesResponse'
-  { _mcirrsCluster        :: !(Maybe Cluster)
-  , _mcirrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyClusterIAMRolesResponse = ModifyClusterIAMRolesResponse'{_mcirrsCluster
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Cluster),
+                                                                    _mcirrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ModifyClusterIAMRolesResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +145,10 @@ data ModifyClusterIAMRolesResponse = ModifyClusterIAMRolesResponse'
 modifyClusterIAMRolesResponse
     :: Int -- ^ 'mcirrsResponseStatus'
     -> ModifyClusterIAMRolesResponse
-modifyClusterIAMRolesResponse pResponseStatus_ =
-  ModifyClusterIAMRolesResponse'
-    {_mcirrsCluster = Nothing, _mcirrsResponseStatus = pResponseStatus_}
-
+modifyClusterIAMRolesResponse pResponseStatus_
+  = ModifyClusterIAMRolesResponse'{_mcirrsCluster =
+                                     Nothing,
+                                   _mcirrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 mcirrsCluster :: Lens' ModifyClusterIAMRolesResponse (Maybe Cluster)

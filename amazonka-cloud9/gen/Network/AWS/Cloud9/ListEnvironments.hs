@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listEnvironments' smart constructor.
-data ListEnvironments = ListEnvironments'
-  { _leNextToken  :: !(Maybe Text)
-  , _leMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListEnvironments = ListEnvironments'{_leNextToken
+                                          :: !(Maybe Text),
+                                          _leMaxResults :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListEnvironments' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data ListEnvironments = ListEnvironments'
 -- * 'leMaxResults' - The maximum number of environments to get identifiers for.
 listEnvironments
     :: ListEnvironments
-listEnvironments =
-  ListEnvironments' {_leNextToken = Nothing, _leMaxResults = Nothing}
-
+listEnvironments
+  = ListEnvironments'{_leNextToken = Nothing,
+                      _leMaxResults = Nothing}
 
 -- | During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a /next token/ . To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
 leNextToken :: Lens' ListEnvironments (Maybe Text)
@@ -123,12 +122,14 @@ instance ToQuery ListEnvironments where
         toQuery = const mempty
 
 -- | /See:/ 'listEnvironmentsResponse' smart constructor.
-data ListEnvironmentsResponse = ListEnvironmentsResponse'
-  { _lersEnvironmentIds :: !(Maybe [Text])
-  , _lersNextToken      :: !(Maybe Text)
-  , _lersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListEnvironmentsResponse = ListEnvironmentsResponse'{_lersEnvironmentIds
+                                                          :: !(Maybe [Text]),
+                                                          _lersNextToken ::
+                                                          !(Maybe Text),
+                                                          _lersResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListEnvironmentsResponse' with the minimum fields required to make a request.
 --
@@ -142,13 +143,11 @@ data ListEnvironmentsResponse = ListEnvironmentsResponse'
 listEnvironmentsResponse
     :: Int -- ^ 'lersResponseStatus'
     -> ListEnvironmentsResponse
-listEnvironmentsResponse pResponseStatus_ =
-  ListEnvironmentsResponse'
-    { _lersEnvironmentIds = Nothing
-    , _lersNextToken = Nothing
-    , _lersResponseStatus = pResponseStatus_
-    }
-
+listEnvironmentsResponse pResponseStatus_
+  = ListEnvironmentsResponse'{_lersEnvironmentIds =
+                                Nothing,
+                              _lersNextToken = Nothing,
+                              _lersResponseStatus = pResponseStatus_}
 
 -- | The list of environment identifiers.
 lersEnvironmentIds :: Lens' ListEnvironmentsResponse [Text]

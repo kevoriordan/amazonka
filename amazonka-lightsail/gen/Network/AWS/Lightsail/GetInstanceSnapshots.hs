@@ -49,22 +49,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getInstanceSnapshots' smart constructor.
-newtype GetInstanceSnapshots = GetInstanceSnapshots'
-  { _gisPageToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetInstanceSnapshots = GetInstanceSnapshots'{_gisPageToken
+                                                     :: Maybe Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetInstanceSnapshots' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gisPageToken' - A token used for advancing to the next page of results from your get instance snapshots request.
+-- * 'gisPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetInstanceSnapshots@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getInstanceSnapshots
     :: GetInstanceSnapshots
-getInstanceSnapshots = GetInstanceSnapshots' {_gisPageToken = Nothing}
+getInstanceSnapshots
+  = GetInstanceSnapshots'{_gisPageToken = Nothing}
 
-
--- | A token used for advancing to the next page of results from your get instance snapshots request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetInstanceSnapshots@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 gisPageToken :: Lens' GetInstanceSnapshots (Maybe Text)
 gisPageToken = lens _gisPageToken (\ s a -> s{_gisPageToken = a})
 
@@ -113,18 +113,23 @@ instance ToQuery GetInstanceSnapshots where
         toQuery = const mempty
 
 -- | /See:/ 'getInstanceSnapshotsResponse' smart constructor.
-data GetInstanceSnapshotsResponse = GetInstanceSnapshotsResponse'
-  { _gissrsNextPageToken     :: !(Maybe Text)
-  , _gissrsInstanceSnapshots :: !(Maybe [InstanceSnapshot])
-  , _gissrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstanceSnapshotsResponse = GetInstanceSnapshotsResponse'{_gissrsNextPageToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _gissrsInstanceSnapshots
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [InstanceSnapshot]),
+                                                                  _gissrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetInstanceSnapshotsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gissrsNextPageToken' - A token used for advancing to the next page of results from your get instance snapshots request.
+-- * 'gissrsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetInstanceSnapshots@ request and specify the next page token using the @pageToken@ parameter.
 --
 -- * 'gissrsInstanceSnapshots' - An array of key-value pairs containing information about the results of your get instance snapshots request.
 --
@@ -132,15 +137,13 @@ data GetInstanceSnapshotsResponse = GetInstanceSnapshotsResponse'
 getInstanceSnapshotsResponse
     :: Int -- ^ 'gissrsResponseStatus'
     -> GetInstanceSnapshotsResponse
-getInstanceSnapshotsResponse pResponseStatus_ =
-  GetInstanceSnapshotsResponse'
-    { _gissrsNextPageToken = Nothing
-    , _gissrsInstanceSnapshots = Nothing
-    , _gissrsResponseStatus = pResponseStatus_
-    }
+getInstanceSnapshotsResponse pResponseStatus_
+  = GetInstanceSnapshotsResponse'{_gissrsNextPageToken
+                                    = Nothing,
+                                  _gissrsInstanceSnapshots = Nothing,
+                                  _gissrsResponseStatus = pResponseStatus_}
 
-
--- | A token used for advancing to the next page of results from your get instance snapshots request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetInstanceSnapshots@ request and specify the next page token using the @pageToken@ parameter.
 gissrsNextPageToken :: Lens' GetInstanceSnapshotsResponse (Maybe Text)
 gissrsNextPageToken = lens _gissrsNextPageToken (\ s a -> s{_gissrsNextPageToken = a})
 

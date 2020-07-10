@@ -47,11 +47,9 @@ import Network.AWS.ResourceGroups.Types.Product
 import Network.AWS.Response
 
 -- | /See:/ 'untag' smart constructor.
-data Untag = Untag'
-  { _uARN  :: !Text
-  , _uKeys :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data Untag = Untag'{_uARN :: !Text,
+                    _uKeys :: ![Text]}
+               deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Untag' with the minimum fields required to make a request.
 --
@@ -63,8 +61,7 @@ data Untag = Untag'
 untag
     :: Text -- ^ 'uARN'
     -> Untag
-untag pARN_ = Untag' {_uARN = pARN_, _uKeys = mempty}
-
+untag pARN_ = Untag'{_uARN = pARN_, _uKeys = mempty}
 
 -- | The ARN of the resource from which to remove tags.
 uARN :: Lens' Untag Text
@@ -103,12 +100,11 @@ instance ToQuery Untag where
         toQuery = const mempty
 
 -- | /See:/ 'untagResponse' smart constructor.
-data UntagResponse = UntagResponse'
-  { _ursARN            :: !(Maybe Text)
-  , _ursKeys           :: !(Maybe [Text])
-  , _ursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagResponse = UntagResponse'{_ursARN ::
+                                    !(Maybe Text),
+                                    _ursKeys :: !(Maybe [Text]),
+                                    _ursResponseStatus :: !Int}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagResponse' with the minimum fields required to make a request.
 --
@@ -122,13 +118,10 @@ data UntagResponse = UntagResponse'
 untagResponse
     :: Int -- ^ 'ursResponseStatus'
     -> UntagResponse
-untagResponse pResponseStatus_ =
-  UntagResponse'
-    { _ursARN = Nothing
-    , _ursKeys = Nothing
-    , _ursResponseStatus = pResponseStatus_
-    }
-
+untagResponse pResponseStatus_
+  = UntagResponse'{_ursARN = Nothing,
+                   _ursKeys = Nothing,
+                   _ursResponseStatus = pResponseStatus_}
 
 -- | The ARN of the resource from which tags have been removed.
 ursARN :: Lens' UntagResponse (Maybe Text)

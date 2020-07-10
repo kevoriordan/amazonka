@@ -51,12 +51,11 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'listResources' smart constructor.
-data ListResources = ListResources'
-  { _lrNextToken      :: !(Maybe Text)
-  , _lrMaxResults     :: !(Maybe Nat)
-  , _lrOrganizationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResources = ListResources'{_lrNextToken ::
+                                    !(Maybe Text),
+                                    _lrMaxResults :: !(Maybe Nat),
+                                    _lrOrganizationId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListResources' with the minimum fields required to make a request.
 --
@@ -70,13 +69,10 @@ data ListResources = ListResources'
 listResources
     :: Text -- ^ 'lrOrganizationId'
     -> ListResources
-listResources pOrganizationId_ =
-  ListResources'
-    { _lrNextToken = Nothing
-    , _lrMaxResults = Nothing
-    , _lrOrganizationId = pOrganizationId_
-    }
-
+listResources pOrganizationId_
+  = ListResources'{_lrNextToken = Nothing,
+                   _lrMaxResults = Nothing,
+                   _lrOrganizationId = pOrganizationId_}
 
 -- | The token to use to retrieve the next page of results. The first call does not contain any tokens.
 lrNextToken :: Lens' ListResources (Maybe Text)
@@ -136,12 +132,13 @@ instance ToQuery ListResources where
         toQuery = const mempty
 
 -- | /See:/ 'listResourcesResponse' smart constructor.
-data ListResourcesResponse = ListResourcesResponse'
-  { _lrrsResources      :: !(Maybe [Resource])
-  , _lrrsNextToken      :: !(Maybe Text)
-  , _lrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourcesResponse = ListResourcesResponse'{_lrrsResources
+                                                    :: !(Maybe [Resource]),
+                                                    _lrrsNextToken ::
+                                                    !(Maybe Text),
+                                                    _lrrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListResourcesResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +152,10 @@ data ListResourcesResponse = ListResourcesResponse'
 listResourcesResponse
     :: Int -- ^ 'lrrsResponseStatus'
     -> ListResourcesResponse
-listResourcesResponse pResponseStatus_ =
-  ListResourcesResponse'
-    { _lrrsResources = Nothing
-    , _lrrsNextToken = Nothing
-    , _lrrsResponseStatus = pResponseStatus_
-    }
-
+listResourcesResponse pResponseStatus_
+  = ListResourcesResponse'{_lrrsResources = Nothing,
+                           _lrrsNextToken = Nothing,
+                           _lrrsResponseStatus = pResponseStatus_}
 
 -- | One page of the organization's resource representation.
 lrrsResources :: Lens' ListResourcesResponse [Resource]

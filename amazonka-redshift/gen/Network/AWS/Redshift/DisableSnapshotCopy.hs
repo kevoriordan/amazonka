@@ -21,7 +21,7 @@
 -- Disables the automatic copying of snapshots from one region to another region for a specified cluster.
 --
 --
--- If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use 'DeleteSnapshotCopyGrant' to delete the grant that grants Amazon Redshift permission to the CMK in the destination region.
+-- If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use 'DeleteSnapshotCopyGrant' to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
 --
 module Network.AWS.Redshift.DisableSnapshotCopy
     (
@@ -46,15 +46,15 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'disableSnapshotCopy' smart constructor.
-newtype DisableSnapshotCopy = DisableSnapshotCopy'
-  { _dscClusterIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableSnapshotCopy = DisableSnapshotCopy'{_dscClusterIdentifier
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DisableSnapshotCopy' with the minimum fields required to make a request.
 --
@@ -64,9 +64,9 @@ newtype DisableSnapshotCopy = DisableSnapshotCopy'
 disableSnapshotCopy
     :: Text -- ^ 'dscClusterIdentifier'
     -> DisableSnapshotCopy
-disableSnapshotCopy pClusterIdentifier_ =
-  DisableSnapshotCopy' {_dscClusterIdentifier = pClusterIdentifier_}
-
+disableSnapshotCopy pClusterIdentifier_
+  = DisableSnapshotCopy'{_dscClusterIdentifier =
+                           pClusterIdentifier_}
 
 -- | The unique identifier of the source cluster that you want to disable copying of snapshots to a destination region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
 dscClusterIdentifier :: Lens' DisableSnapshotCopy Text
@@ -100,11 +100,14 @@ instance ToQuery DisableSnapshotCopy where
                "ClusterIdentifier" =: _dscClusterIdentifier]
 
 -- | /See:/ 'disableSnapshotCopyResponse' smart constructor.
-data DisableSnapshotCopyResponse = DisableSnapshotCopyResponse'
-  { _dscrsCluster        :: !(Maybe Cluster)
-  , _dscrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableSnapshotCopyResponse = DisableSnapshotCopyResponse'{_dscrsCluster
+                                                                ::
+                                                                !(Maybe
+                                                                    Cluster),
+                                                                _dscrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DisableSnapshotCopyResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +119,10 @@ data DisableSnapshotCopyResponse = DisableSnapshotCopyResponse'
 disableSnapshotCopyResponse
     :: Int -- ^ 'dscrsResponseStatus'
     -> DisableSnapshotCopyResponse
-disableSnapshotCopyResponse pResponseStatus_ =
-  DisableSnapshotCopyResponse'
-    {_dscrsCluster = Nothing, _dscrsResponseStatus = pResponseStatus_}
-
+disableSnapshotCopyResponse pResponseStatus_
+  = DisableSnapshotCopyResponse'{_dscrsCluster =
+                                   Nothing,
+                                 _dscrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 dscrsCluster :: Lens' DisableSnapshotCopyResponse (Maybe Cluster)

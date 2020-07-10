@@ -47,12 +47,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'increaseReplicationFactor' smart constructor.
-data IncreaseReplicationFactor = IncreaseReplicationFactor'
-  { _irfAvailabilityZones    :: !(Maybe [Text])
-  , _irfClusterName          :: !Text
-  , _irfNewReplicationFactor :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data IncreaseReplicationFactor = IncreaseReplicationFactor'{_irfAvailabilityZones
+                                                            :: !(Maybe [Text]),
+                                                            _irfClusterName ::
+                                                            !Text,
+                                                            _irfNewReplicationFactor
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'IncreaseReplicationFactor' with the minimum fields required to make a request.
 --
@@ -67,13 +69,13 @@ increaseReplicationFactor
     :: Text -- ^ 'irfClusterName'
     -> Int -- ^ 'irfNewReplicationFactor'
     -> IncreaseReplicationFactor
-increaseReplicationFactor pClusterName_ pNewReplicationFactor_ =
-  IncreaseReplicationFactor'
-    { _irfAvailabilityZones = Nothing
-    , _irfClusterName = pClusterName_
-    , _irfNewReplicationFactor = pNewReplicationFactor_
-    }
-
+increaseReplicationFactor pClusterName_
+  pNewReplicationFactor_
+  = IncreaseReplicationFactor'{_irfAvailabilityZones =
+                                 Nothing,
+                               _irfClusterName = pClusterName_,
+                               _irfNewReplicationFactor =
+                                 pNewReplicationFactor_}
 
 -- | The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
 irfAvailabilityZones :: Lens' IncreaseReplicationFactor [Text]
@@ -128,11 +130,15 @@ instance ToQuery IncreaseReplicationFactor where
         toQuery = const mempty
 
 -- | /See:/ 'increaseReplicationFactorResponse' smart constructor.
-data IncreaseReplicationFactorResponse = IncreaseReplicationFactorResponse'
-  { _irfrsCluster        :: !(Maybe Cluster)
-  , _irfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data IncreaseReplicationFactorResponse = IncreaseReplicationFactorResponse'{_irfrsCluster
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Cluster),
+                                                                            _irfrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'IncreaseReplicationFactorResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +150,10 @@ data IncreaseReplicationFactorResponse = IncreaseReplicationFactorResponse'
 increaseReplicationFactorResponse
     :: Int -- ^ 'irfrsResponseStatus'
     -> IncreaseReplicationFactorResponse
-increaseReplicationFactorResponse pResponseStatus_ =
-  IncreaseReplicationFactorResponse'
-    {_irfrsCluster = Nothing, _irfrsResponseStatus = pResponseStatus_}
-
+increaseReplicationFactorResponse pResponseStatus_
+  = IncreaseReplicationFactorResponse'{_irfrsCluster =
+                                         Nothing,
+                                       _irfrsResponseStatus = pResponseStatus_}
 
 -- | A description of the DAX cluster. with its new replication factor.
 irfrsCluster :: Lens' IncreaseReplicationFactorResponse (Maybe Cluster)

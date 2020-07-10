@@ -47,10 +47,9 @@ import Network.AWS.StepFunctions.Types
 import Network.AWS.StepFunctions.Types.Product
 
 -- | /See:/ 'describeActivity' smart constructor.
-newtype DescribeActivity = DescribeActivity'
-  { _dActivityARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeActivity = DescribeActivity'{_dActivityARN
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeActivity' with the minimum fields required to make a request.
 --
@@ -60,9 +59,8 @@ newtype DescribeActivity = DescribeActivity'
 describeActivity
     :: Text -- ^ 'dActivityARN'
     -> DescribeActivity
-describeActivity pActivityARN_ =
-  DescribeActivity' {_dActivityARN = pActivityARN_}
-
+describeActivity pActivityARN_
+  = DescribeActivity'{_dActivityARN = pActivityARN_}
 
 -- | The Amazon Resource Name (ARN) of the activity to describe.
 dActivityARN :: Lens' DescribeActivity Text
@@ -104,13 +102,15 @@ instance ToQuery DescribeActivity where
         toQuery = const mempty
 
 -- | /See:/ 'describeActivityResponse' smart constructor.
-data DescribeActivityResponse = DescribeActivityResponse'
-  { _desrsResponseStatus :: !Int
-  , _desrsActivityARN    :: !Text
-  , _desrsName           :: !Text
-  , _desrsCreationDate   :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeActivityResponse = DescribeActivityResponse'{_desrsResponseStatus
+                                                          :: !Int,
+                                                          _desrsActivityARN ::
+                                                          !Text,
+                                                          _desrsName :: !Text,
+                                                          _desrsCreationDate ::
+                                                          !POSIX}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeActivityResponse' with the minimum fields required to make a request.
 --
@@ -120,7 +120,7 @@ data DescribeActivityResponse = DescribeActivityResponse'
 --
 -- * 'desrsActivityARN' - The Amazon Resource Name (ARN) that identifies the activity.
 --
--- * 'desrsName' - The name of the activity. A name must /not/ contain:     * whitespace     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ )
+-- * 'desrsName' - The name of the activity. A name must /not/ contain:     * white space     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ ) To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 --
 -- * 'desrsCreationDate' - The date the activity is created.
 describeActivityResponse
@@ -129,14 +129,13 @@ describeActivityResponse
     -> Text -- ^ 'desrsName'
     -> UTCTime -- ^ 'desrsCreationDate'
     -> DescribeActivityResponse
-describeActivityResponse pResponseStatus_ pActivityARN_ pName_ pCreationDate_ =
-  DescribeActivityResponse'
-    { _desrsResponseStatus = pResponseStatus_
-    , _desrsActivityARN = pActivityARN_
-    , _desrsName = pName_
-    , _desrsCreationDate = _Time # pCreationDate_
-    }
-
+describeActivityResponse pResponseStatus_
+  pActivityARN_ pName_ pCreationDate_
+  = DescribeActivityResponse'{_desrsResponseStatus =
+                                pResponseStatus_,
+                              _desrsActivityARN = pActivityARN_,
+                              _desrsName = pName_,
+                              _desrsCreationDate = _Time # pCreationDate_}
 
 -- | -- | The response status code.
 desrsResponseStatus :: Lens' DescribeActivityResponse Int
@@ -146,7 +145,7 @@ desrsResponseStatus = lens _desrsResponseStatus (\ s a -> s{_desrsResponseStatus
 desrsActivityARN :: Lens' DescribeActivityResponse Text
 desrsActivityARN = lens _desrsActivityARN (\ s a -> s{_desrsActivityARN = a})
 
--- | The name of the activity. A name must /not/ contain:     * whitespace     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ )
+-- | The name of the activity. A name must /not/ contain:     * white space     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ ) To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 desrsName :: Lens' DescribeActivityResponse Text
 desrsName = lens _desrsName (\ s a -> s{_desrsName = a})
 

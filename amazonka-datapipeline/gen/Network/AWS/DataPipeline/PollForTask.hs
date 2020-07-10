@@ -21,7 +21,7 @@
 -- Task runners call @PollForTask@ to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the @workerGroup@ parameter. The task returned can come from any of the pipelines that match the @workerGroup@ value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner.
 --
 --
--- If tasks are ready in the work queue, @PollForTask@ returns a response immediately. If no tasks are available in the queue, @PollForTask@ uses long-polling and holds on to a poll connection for up to a 90 seconds, during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call @PollForTask@ again on the same @workerGroup@ until it receives a response, and this can take up to 90 seconds.
+-- If tasks are ready in the work queue, @PollForTask@ returns a response immediately. If no tasks are available in the queue, @PollForTask@ uses long-polling and holds on to a poll connection for up to a 90 seconds, during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call @PollForTask@ again on the same @workerGroup@ until it receives a response, and this can take up to 90 seconds. 
 --
 module Network.AWS.DataPipeline.PollForTask
     (
@@ -53,12 +53,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'pollForTask' smart constructor.
-data PollForTask = PollForTask'
-  { _pftHostname         :: !(Maybe Text)
-  , _pftInstanceIdentity :: !(Maybe InstanceIdentity)
-  , _pftWorkerGroup      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PollForTask = PollForTask'{_pftHostname ::
+                                !(Maybe Text),
+                                _pftInstanceIdentity ::
+                                !(Maybe InstanceIdentity),
+                                _pftWorkerGroup :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PollForTask' with the minimum fields required to make a request.
 --
@@ -72,13 +72,10 @@ data PollForTask = PollForTask'
 pollForTask
     :: Text -- ^ 'pftWorkerGroup'
     -> PollForTask
-pollForTask pWorkerGroup_ =
-  PollForTask'
-    { _pftHostname = Nothing
-    , _pftInstanceIdentity = Nothing
-    , _pftWorkerGroup = pWorkerGroup_
-    }
-
+pollForTask pWorkerGroup_
+  = PollForTask'{_pftHostname = Nothing,
+                 _pftInstanceIdentity = Nothing,
+                 _pftWorkerGroup = pWorkerGroup_}
 
 -- | The public DNS name of the calling task runner.
 pftHostname :: Lens' PollForTask (Maybe Text)
@@ -133,11 +130,10 @@ instance ToQuery PollForTask where
 --
 --
 -- /See:/ 'pollForTaskResponse' smart constructor.
-data PollForTaskResponse = PollForTaskResponse'
-  { _pftrsTaskObject     :: !(Maybe TaskObject)
-  , _pftrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PollForTaskResponse = PollForTaskResponse'{_pftrsTaskObject
+                                                :: !(Maybe TaskObject),
+                                                _pftrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PollForTaskResponse' with the minimum fields required to make a request.
 --
@@ -149,10 +145,9 @@ data PollForTaskResponse = PollForTaskResponse'
 pollForTaskResponse
     :: Int -- ^ 'pftrsResponseStatus'
     -> PollForTaskResponse
-pollForTaskResponse pResponseStatus_ =
-  PollForTaskResponse'
-    {_pftrsTaskObject = Nothing, _pftrsResponseStatus = pResponseStatus_}
-
+pollForTaskResponse pResponseStatus_
+  = PollForTaskResponse'{_pftrsTaskObject = Nothing,
+                         _pftrsResponseStatus = pResponseStatus_}
 
 -- | The information needed to complete the task that is being assigned to the task runner. One of the fields returned in this object is @taskId@ , which contains an identifier for the task being assigned. The calling task runner uses @taskId@ in subsequent calls to 'ReportTaskProgress' and 'SetTaskStatus' .
 pftrsTaskObject :: Lens' PollForTaskResponse (Maybe TaskObject)

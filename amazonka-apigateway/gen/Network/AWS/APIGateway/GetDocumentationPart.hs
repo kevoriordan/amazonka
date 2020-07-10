@@ -49,11 +49,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDocumentationPart' smart constructor.
-data GetDocumentationPart = GetDocumentationPart'
-  { _getRestAPIId           :: !Text
-  , _getDocumentationPartId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDocumentationPart = GetDocumentationPart'{_getRestAPIId
+                                                  :: !Text,
+                                                  _getDocumentationPartId ::
+                                                  !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDocumentationPart' with the minimum fields required to make a request.
 --
@@ -66,12 +66,10 @@ getDocumentationPart
     :: Text -- ^ 'getRestAPIId'
     -> Text -- ^ 'getDocumentationPartId'
     -> GetDocumentationPart
-getDocumentationPart pRestAPIId_ pDocumentationPartId_ =
-  GetDocumentationPart'
-    { _getRestAPIId = pRestAPIId_
-    , _getDocumentationPartId = pDocumentationPartId_
-    }
-
+getDocumentationPart pRestAPIId_
+  pDocumentationPartId_
+  = GetDocumentationPart'{_getRestAPIId = pRestAPIId_,
+                          _getDocumentationPartId = pDocumentationPartId_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 getRestAPIId :: Lens' GetDocumentationPart Text

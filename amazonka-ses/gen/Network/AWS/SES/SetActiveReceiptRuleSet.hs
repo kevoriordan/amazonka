@@ -21,7 +21,7 @@
 -- Sets the specified receipt rule set as the active receipt rule set.
 --
 --
--- For information about managing receipt rule sets, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html Amazon SES Developer Guide> .
+-- For information about managing receipt rule sets, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
@@ -47,15 +47,15 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to set a receipt rule set as the active receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
+-- | Represents a request to set a receipt rule set as the active receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'setActiveReceiptRuleSet' smart constructor.
-newtype SetActiveReceiptRuleSet = SetActiveReceiptRuleSet'
-  { _sarrsRuleSetName :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetActiveReceiptRuleSet = SetActiveReceiptRuleSet'{_sarrsRuleSetName
+                                                           :: Maybe Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'SetActiveReceiptRuleSet' with the minimum fields required to make a request.
 --
@@ -64,8 +64,9 @@ newtype SetActiveReceiptRuleSet = SetActiveReceiptRuleSet'
 -- * 'sarrsRuleSetName' - The name of the receipt rule set to make active. Setting this value to null disables all email receiving.
 setActiveReceiptRuleSet
     :: SetActiveReceiptRuleSet
-setActiveReceiptRuleSet = SetActiveReceiptRuleSet' {_sarrsRuleSetName = Nothing}
-
+setActiveReceiptRuleSet
+  = SetActiveReceiptRuleSet'{_sarrsRuleSetName =
+                               Nothing}
 
 -- | The name of the receipt rule set to make active. Setting this value to null disables all email receiving.
 sarrsRuleSetName :: Lens' SetActiveReceiptRuleSet (Maybe Text)
@@ -104,10 +105,11 @@ instance ToQuery SetActiveReceiptRuleSet where
 --
 --
 -- /See:/ 'setActiveReceiptRuleSetResponse' smart constructor.
-newtype SetActiveReceiptRuleSetResponse = SetActiveReceiptRuleSetResponse'
-  { _sarrsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetActiveReceiptRuleSetResponse = SetActiveReceiptRuleSetResponse'{_sarrsrsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'SetActiveReceiptRuleSetResponse' with the minimum fields required to make a request.
 --
@@ -117,9 +119,9 @@ newtype SetActiveReceiptRuleSetResponse = SetActiveReceiptRuleSetResponse'
 setActiveReceiptRuleSetResponse
     :: Int -- ^ 'sarrsrsResponseStatus'
     -> SetActiveReceiptRuleSetResponse
-setActiveReceiptRuleSetResponse pResponseStatus_ =
-  SetActiveReceiptRuleSetResponse' {_sarrsrsResponseStatus = pResponseStatus_}
-
+setActiveReceiptRuleSetResponse pResponseStatus_
+  = SetActiveReceiptRuleSetResponse'{_sarrsrsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 sarrsrsResponseStatus :: Lens' SetActiveReceiptRuleSetResponse Int

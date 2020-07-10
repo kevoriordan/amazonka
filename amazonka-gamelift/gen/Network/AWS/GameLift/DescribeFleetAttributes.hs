@@ -18,57 +18,49 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves fleet properties, including metadata, status, and configuration, for one or more fleets. You can request attributes for all fleets, or specify a list of one or more fleet IDs. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a 'FleetAttributes' object is returned for each requested fleet ID. When specifying a list of fleet IDs, attribute objects are returned only for fleets that currently exist.
+-- Retrieves core properties, including configuration, status, and metadata, for a fleet. 
 --
 --
--- Fleet-related operations include:
+-- To get attributes for one or more fleets, provide a list of fleet IDs or fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier. When requesting attributes for multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a 'FleetAttributes' object is returned for each fleet requested, unless the fleet identifier is not found.
 --
---     * 'CreateFleet'
+-- __Learn more__ 
 --
---     * 'ListFleets'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html Setting up GameLift Fleets> 
 --
---     * 'DeleteFleet'
+-- __Related operations__ 
+--
+--     * 'CreateFleet' 
+--
+--     * 'ListFleets' 
+--
+--     * 'DeleteFleet' 
 --
 --     * Describe fleets:
 --
---     * 'DescribeFleetAttributes'
+--     * 'DescribeFleetAttributes' 
 --
---     * 'DescribeFleetCapacity'
+--     * 'DescribeFleetCapacity' 
 --
---     * 'DescribeFleetPortSettings'
+--     * 'DescribeFleetPortSettings' 
 --
---     * 'DescribeFleetUtilization'
+--     * 'DescribeFleetUtilization' 
 --
---     * 'DescribeRuntimeConfiguration'
+--     * 'DescribeRuntimeConfiguration' 
 --
---     * 'DescribeEC2InstanceLimits'
+--     * 'DescribeEC2InstanceLimits' 
 --
---     * 'DescribeFleetEvents'
---
---
---
---     * Update fleets:
---
---     * 'UpdateFleetAttributes'
---
---     * 'UpdateFleetCapacity'
---
---     * 'UpdateFleetPortSettings'
---
---     * 'UpdateRuntimeConfiguration'
+--     * 'DescribeFleetEvents' 
 --
 --
 --
---     * Manage fleet actions:
+--     * 'UpdateFleetAttributes' 
 --
---     * 'StartFleetActions'
---
---     * 'StopFleetActions'
+--     * 'StartFleetActions' or 'StopFleetActions' 
 --
 --
 --
 --
---
+-- This operation returns paginated results.
 module Network.AWS.GameLift.DescribeFleetAttributes
     (
     -- * Creating a Request
@@ -91,6 +83,7 @@ module Network.AWS.GameLift.DescribeFleetAttributes
 import Network.AWS.GameLift.Types
 import Network.AWS.GameLift.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -100,12 +93,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeFleetAttributes' smart constructor.
-data DescribeFleetAttributes = DescribeFleetAttributes'
-  { _dfaNextToken :: !(Maybe Text)
-  , _dfaLimit     :: !(Maybe Nat)
-  , _dfaFleetIds  :: !(Maybe (List1 Text))
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleetAttributes = DescribeFleetAttributes'{_dfaNextToken
+                                                        :: !(Maybe Text),
+                                                        _dfaLimit ::
+                                                        !(Maybe Nat),
+                                                        _dfaFleetIds ::
+                                                        !(Maybe (List1 Text))}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeFleetAttributes' with the minimum fields required to make a request.
 --
@@ -113,27 +108,33 @@ data DescribeFleetAttributes = DescribeFleetAttributes'
 --
 -- * 'dfaNextToken' - Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
 --
--- * 'dfaLimit' - Maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.
+-- * 'dfaLimit' - The maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.
 --
--- * 'dfaFleetIds' - Unique identifier for a fleet(s) to retrieve attributes for. To request attributes for all fleets, leave this parameter empty.
+-- * 'dfaFleetIds' - A list of unique fleet identifiers to retrieve attributes for. You can use either the fleet ID or ARN value. To retrieve attributes for all current fleets, do not include this parameter. If the list of fleet identifiers includes fleets that don't currently exist, the request succeeds but no attributes for that fleet are returned.
 describeFleetAttributes
     :: DescribeFleetAttributes
-describeFleetAttributes =
-  DescribeFleetAttributes'
-    {_dfaNextToken = Nothing, _dfaLimit = Nothing, _dfaFleetIds = Nothing}
-
+describeFleetAttributes
+  = DescribeFleetAttributes'{_dfaNextToken = Nothing,
+                             _dfaLimit = Nothing, _dfaFleetIds = Nothing}
 
 -- | Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
 dfaNextToken :: Lens' DescribeFleetAttributes (Maybe Text)
 dfaNextToken = lens _dfaNextToken (\ s a -> s{_dfaNextToken = a})
 
--- | Maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.
+-- | The maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages. This parameter is ignored when the request specifies one or a list of fleet IDs.
 dfaLimit :: Lens' DescribeFleetAttributes (Maybe Natural)
 dfaLimit = lens _dfaLimit (\ s a -> s{_dfaLimit = a}) . mapping _Nat
 
--- | Unique identifier for a fleet(s) to retrieve attributes for. To request attributes for all fleets, leave this parameter empty.
+-- | A list of unique fleet identifiers to retrieve attributes for. You can use either the fleet ID or ARN value. To retrieve attributes for all current fleets, do not include this parameter. If the list of fleet identifiers includes fleets that don't currently exist, the request succeeds but no attributes for that fleet are returned.
 dfaFleetIds :: Lens' DescribeFleetAttributes (Maybe (NonEmpty Text))
 dfaFleetIds = lens _dfaFleetIds (\ s a -> s{_dfaFleetIds = a}) . mapping _List1
+
+instance AWSPager DescribeFleetAttributes where
+        page rq rs
+          | stop (rs ^. dfarsNextToken) = Nothing
+          | stop (rs ^. dfarsFleetAttributes) = Nothing
+          | otherwise =
+            Just $ rq & dfaNextToken .~ rs ^. dfarsNextToken
 
 instance AWSRequest DescribeFleetAttributes where
         type Rs DescribeFleetAttributes =
@@ -179,12 +180,18 @@ instance ToQuery DescribeFleetAttributes where
 --
 --
 -- /See:/ 'describeFleetAttributesResponse' smart constructor.
-data DescribeFleetAttributesResponse = DescribeFleetAttributesResponse'
-  { _dfarsNextToken       :: !(Maybe Text)
-  , _dfarsFleetAttributes :: !(Maybe [FleetAttributes])
-  , _dfarsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleetAttributesResponse = DescribeFleetAttributesResponse'{_dfarsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dfarsFleetAttributes
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [FleetAttributes]),
+                                                                        _dfarsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeFleetAttributesResponse' with the minimum fields required to make a request.
 --
@@ -192,25 +199,23 @@ data DescribeFleetAttributesResponse = DescribeFleetAttributesResponse'
 --
 -- * 'dfarsNextToken' - Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
 --
--- * 'dfarsFleetAttributes' - Collection of objects containing attribute metadata for each requested fleet ID.
+-- * 'dfarsFleetAttributes' - A collection of objects containing attribute metadata for each requested fleet ID. Attribute objects are returned only for fleets that currently exist.
 --
 -- * 'dfarsResponseStatus' - -- | The response status code.
 describeFleetAttributesResponse
     :: Int -- ^ 'dfarsResponseStatus'
     -> DescribeFleetAttributesResponse
-describeFleetAttributesResponse pResponseStatus_ =
-  DescribeFleetAttributesResponse'
-    { _dfarsNextToken = Nothing
-    , _dfarsFleetAttributes = Nothing
-    , _dfarsResponseStatus = pResponseStatus_
-    }
-
+describeFleetAttributesResponse pResponseStatus_
+  = DescribeFleetAttributesResponse'{_dfarsNextToken =
+                                       Nothing,
+                                     _dfarsFleetAttributes = Nothing,
+                                     _dfarsResponseStatus = pResponseStatus_}
 
 -- | Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
 dfarsNextToken :: Lens' DescribeFleetAttributesResponse (Maybe Text)
 dfarsNextToken = lens _dfarsNextToken (\ s a -> s{_dfarsNextToken = a})
 
--- | Collection of objects containing attribute metadata for each requested fleet ID.
+-- | A collection of objects containing attribute metadata for each requested fleet ID. Attribute objects are returned only for fleets that currently exist.
 dfarsFleetAttributes :: Lens' DescribeFleetAttributesResponse [FleetAttributes]
 dfarsFleetAttributes = lens _dfarsFleetAttributes (\ s a -> s{_dfarsFleetAttributes = a}) . _Default . _Coerce
 

@@ -47,11 +47,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteStage' smart constructor.
-data DeleteStage = DeleteStage'
-  { _dsRestAPIId :: !Text
-  , _dsStageName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteStage = DeleteStage'{_dsRestAPIId ::
+                                !Text,
+                                _dsStageName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteStage' with the minimum fields required to make a request.
 --
@@ -64,9 +63,9 @@ deleteStage
     :: Text -- ^ 'dsRestAPIId'
     -> Text -- ^ 'dsStageName'
     -> DeleteStage
-deleteStage pRestAPIId_ pStageName_ =
-  DeleteStage' {_dsRestAPIId = pRestAPIId_, _dsStageName = pStageName_}
-
+deleteStage pRestAPIId_ pStageName_
+  = DeleteStage'{_dsRestAPIId = pRestAPIId_,
+                 _dsStageName = pStageName_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 dsRestAPIId :: Lens' DeleteStage Text
@@ -101,16 +100,13 @@ instance ToQuery DeleteStage where
         toQuery = const mempty
 
 -- | /See:/ 'deleteStageResponse' smart constructor.
-data DeleteStageResponse =
-  DeleteStageResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteStageResponse = DeleteStageResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteStageResponse' with the minimum fields required to make a request.
 --
 deleteStageResponse
     :: DeleteStageResponse
 deleteStageResponse = DeleteStageResponse'
-
 
 instance NFData DeleteStageResponse where

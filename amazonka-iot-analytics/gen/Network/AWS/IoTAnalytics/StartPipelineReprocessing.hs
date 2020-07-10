@@ -47,12 +47,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startPipelineReprocessing' smart constructor.
-data StartPipelineReprocessing = StartPipelineReprocessing'
-  { _sprStartTime    :: !(Maybe POSIX)
-  , _sprEndTime      :: !(Maybe POSIX)
-  , _sprPipelineName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartPipelineReprocessing = StartPipelineReprocessing'{_sprStartTime
+                                                            :: !(Maybe POSIX),
+                                                            _sprEndTime ::
+                                                            !(Maybe POSIX),
+                                                            _sprPipelineName ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'StartPipelineReprocessing' with the minimum fields required to make a request.
 --
@@ -66,13 +68,10 @@ data StartPipelineReprocessing = StartPipelineReprocessing'
 startPipelineReprocessing
     :: Text -- ^ 'sprPipelineName'
     -> StartPipelineReprocessing
-startPipelineReprocessing pPipelineName_ =
-  StartPipelineReprocessing'
-    { _sprStartTime = Nothing
-    , _sprEndTime = Nothing
-    , _sprPipelineName = pPipelineName_
-    }
-
+startPipelineReprocessing pPipelineName_
+  = StartPipelineReprocessing'{_sprStartTime = Nothing,
+                               _sprEndTime = Nothing,
+                               _sprPipelineName = pPipelineName_}
 
 -- | The start time (inclusive) of raw message data that is reprocessed.
 sprStartTime :: Lens' StartPipelineReprocessing (Maybe UTCTime)
@@ -120,11 +119,15 @@ instance ToQuery StartPipelineReprocessing where
         toQuery = const mempty
 
 -- | /See:/ 'startPipelineReprocessingResponse' smart constructor.
-data StartPipelineReprocessingResponse = StartPipelineReprocessingResponse'
-  { _sprrsReprocessingId :: !(Maybe Text)
-  , _sprrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartPipelineReprocessingResponse = StartPipelineReprocessingResponse'{_sprrsReprocessingId
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _sprrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'StartPipelineReprocessingResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +139,10 @@ data StartPipelineReprocessingResponse = StartPipelineReprocessingResponse'
 startPipelineReprocessingResponse
     :: Int -- ^ 'sprrsResponseStatus'
     -> StartPipelineReprocessingResponse
-startPipelineReprocessingResponse pResponseStatus_ =
-  StartPipelineReprocessingResponse'
-    {_sprrsReprocessingId = Nothing, _sprrsResponseStatus = pResponseStatus_}
-
+startPipelineReprocessingResponse pResponseStatus_
+  = StartPipelineReprocessingResponse'{_sprrsReprocessingId
+                                         = Nothing,
+                                       _sprrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the pipeline reprocessing activity that was started.
 sprrsReprocessingId :: Lens' StartPipelineReprocessingResponse (Maybe Text)

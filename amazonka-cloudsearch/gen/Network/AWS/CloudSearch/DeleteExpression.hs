@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteExpression' smart constructor.
-data DeleteExpression = DeleteExpression'
-  { _delDomainName     :: !Text
-  , _delExpressionName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteExpression = DeleteExpression'{_delDomainName
+                                          :: !Text,
+                                          _delExpressionName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteExpression' with the minimum fields required to make a request.
 --
@@ -67,10 +66,9 @@ deleteExpression
     :: Text -- ^ 'delDomainName'
     -> Text -- ^ 'delExpressionName'
     -> DeleteExpression
-deleteExpression pDomainName_ pExpressionName_ =
-  DeleteExpression'
-    {_delDomainName = pDomainName_, _delExpressionName = pExpressionName_}
-
+deleteExpression pDomainName_ pExpressionName_
+  = DeleteExpression'{_delDomainName = pDomainName_,
+                      _delExpressionName = pExpressionName_}
 
 -- | Undocumented member.
 delDomainName :: Lens' DeleteExpression Text
@@ -112,11 +110,12 @@ instance ToQuery DeleteExpression where
 --
 --
 -- /See:/ 'deleteExpressionResponse' smart constructor.
-data DeleteExpressionResponse = DeleteExpressionResponse'
-  { _delrsResponseStatus :: !Int
-  , _delrsExpression     :: !ExpressionStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteExpressionResponse = DeleteExpressionResponse'{_delrsResponseStatus
+                                                          :: !Int,
+                                                          _delrsExpression ::
+                                                          !ExpressionStatus}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteExpressionResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +128,11 @@ deleteExpressionResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> ExpressionStatus -- ^ 'delrsExpression'
     -> DeleteExpressionResponse
-deleteExpressionResponse pResponseStatus_ pExpression_ =
-  DeleteExpressionResponse'
-    {_delrsResponseStatus = pResponseStatus_, _delrsExpression = pExpression_}
-
+deleteExpressionResponse pResponseStatus_
+  pExpression_
+  = DeleteExpressionResponse'{_delrsResponseStatus =
+                                pResponseStatus_,
+                              _delrsExpression = pExpression_}
 
 -- | -- | The response status code.
 delrsResponseStatus :: Lens' DeleteExpressionResponse Int

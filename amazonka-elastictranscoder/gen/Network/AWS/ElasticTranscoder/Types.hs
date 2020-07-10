@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -16,11 +16,11 @@ module Network.AWS.ElasticTranscoder.Types
       elasticTranscoder
 
     -- * Errors
-    , _IncompatibleVersionException
-    , _ValidationException
-    , _AccessDeniedException
     , _InternalServiceException
+    , _AccessDeniedException
+    , _ValidationException
     , _ResourceNotFoundException
+    , _IncompatibleVersionException
     , _LimitExceededException
     , _ResourceInUseException
 
@@ -342,103 +342,136 @@ module Network.AWS.ElasticTranscoder.Types
     , wMessage
     ) where
 
-import Network.AWS.ElasticTranscoder.Types.Product
-import Network.AWS.ElasticTranscoder.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
+import Network.AWS.ElasticTranscoder.Types.Artwork
+import Network.AWS.ElasticTranscoder.Types.AudioCodecOptions
+import Network.AWS.ElasticTranscoder.Types.AudioParameters
+import Network.AWS.ElasticTranscoder.Types.CaptionFormat
+import Network.AWS.ElasticTranscoder.Types.CaptionSource
+import Network.AWS.ElasticTranscoder.Types.Captions
+import Network.AWS.ElasticTranscoder.Types.Clip
+import Network.AWS.ElasticTranscoder.Types.CreateJobOutput
+import Network.AWS.ElasticTranscoder.Types.CreateJobPlaylist
+import Network.AWS.ElasticTranscoder.Types.DetectedProperties
+import Network.AWS.ElasticTranscoder.Types.Encryption
+import Network.AWS.ElasticTranscoder.Types.HlsContentProtection
+import Network.AWS.ElasticTranscoder.Types.InputCaptions
+import Network.AWS.ElasticTranscoder.Types.Job'
+import Network.AWS.ElasticTranscoder.Types.JobAlbumArt
+import Network.AWS.ElasticTranscoder.Types.JobInput
+import Network.AWS.ElasticTranscoder.Types.JobOutput
+import Network.AWS.ElasticTranscoder.Types.JobWatermark
+import Network.AWS.ElasticTranscoder.Types.Notifications
+import Network.AWS.ElasticTranscoder.Types.Permission
+import Network.AWS.ElasticTranscoder.Types.Pipeline
+import Network.AWS.ElasticTranscoder.Types.PipelineOutputConfig
+import Network.AWS.ElasticTranscoder.Types.PlayReadyDrm
+import Network.AWS.ElasticTranscoder.Types.Playlist
+import Network.AWS.ElasticTranscoder.Types.Preset
+import Network.AWS.ElasticTranscoder.Types.PresetWatermark
+import Network.AWS.ElasticTranscoder.Types.Thumbnails
+import Network.AWS.ElasticTranscoder.Types.TimeSpan
+import Network.AWS.ElasticTranscoder.Types.Timing
+import Network.AWS.ElasticTranscoder.Types.VideoParameters
+import Network.AWS.ElasticTranscoder.Types.Warning
 
 -- | API version @2012-09-25@ of the Amazon Elastic Transcoder SDK configuration.
 elasticTranscoder :: Service
-elasticTranscoder =
-  Service
-    { _svcAbbrev = "ElasticTranscoder"
-    , _svcSigner = v4
-    , _svcPrefix = "elastictranscoder"
-    , _svcVersion = "2012-09-25"
-    , _svcEndpoint = defaultEndpoint elasticTranscoder
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "ElasticTranscoder"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
-
-
--- | Prism for IncompatibleVersionException' errors.
-_IncompatibleVersionException :: AsError a => Getting (First ServiceError) a ServiceError
-_IncompatibleVersionException =
-  _MatchServiceError elasticTranscoder "IncompatibleVersionException" .
-  hasStatus 400
-
-
--- | One or more required parameter values were not provided in the request.
---
---
-_ValidationException :: AsError a => Getting (First ServiceError) a ServiceError
-_ValidationException =
-  _MatchServiceError elasticTranscoder "ValidationException" . hasStatus 400
-
-
--- | General authentication failure. The request was not signed correctly.
---
---
-_AccessDeniedException :: AsError a => Getting (First ServiceError) a ServiceError
-_AccessDeniedException =
-  _MatchServiceError elasticTranscoder "AccessDeniedException" . hasStatus 403
-
+elasticTranscoder
+  = Service{_svcAbbrev = "ElasticTranscoder",
+            _svcSigner = v4, _svcPrefix = "elastictranscoder",
+            _svcVersion = "2012-09-25",
+            _svcEndpoint = defaultEndpoint elasticTranscoder,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "ElasticTranscoder",
+            _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
 -- | Elastic Transcoder encountered an unexpected exception while trying to fulfill the request.
 --
 --
 _InternalServiceException :: AsError a => Getting (First ServiceError) a ServiceError
-_InternalServiceException =
-  _MatchServiceError elasticTranscoder "InternalServiceException"
+_InternalServiceException
+  = _MatchServiceError elasticTranscoder
+      "InternalServiceException"
 
+-- | General authentication failure. The request was not signed correctly.
+--
+--
+_AccessDeniedException :: AsError a => Getting (First ServiceError) a ServiceError
+_AccessDeniedException
+  = _MatchServiceError elasticTranscoder
+      "AccessDeniedException"
+      . hasStatus 403
+
+-- | One or more required parameter values were not provided in the request.
+--
+--
+_ValidationException :: AsError a => Getting (First ServiceError) a ServiceError
+_ValidationException
+  = _MatchServiceError elasticTranscoder
+      "ValidationException"
+      . hasStatus 400
 
 -- | The requested resource does not exist or is not available. For example, the pipeline to which you're trying to add a job doesn't exist or is still being created.
 --
 --
 _ResourceNotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceNotFoundException =
-  _MatchServiceError elasticTranscoder "ResourceNotFoundException" .
-  hasStatus 404
+_ResourceNotFoundException
+  = _MatchServiceError elasticTranscoder
+      "ResourceNotFoundException"
+      . hasStatus 404
 
+-- | Prism for IncompatibleVersionException' errors.
+_IncompatibleVersionException :: AsError a => Getting (First ServiceError) a ServiceError
+_IncompatibleVersionException
+  = _MatchServiceError elasticTranscoder
+      "IncompatibleVersionException"
+      . hasStatus 400
 
 -- | Too many operations for a given AWS account. For example, the number of pipelines exceeds the maximum allowed.
 --
 --
 _LimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
-_LimitExceededException =
-  _MatchServiceError elasticTranscoder "LimitExceededException" . hasStatus 429
-
+_LimitExceededException
+  = _MatchServiceError elasticTranscoder
+      "LimitExceededException"
+      . hasStatus 429
 
 -- | The resource you are attempting to change is in use. For example, you are attempting to delete a pipeline that is currently in use.
 --
 --
 _ResourceInUseException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceInUseException =
-  _MatchServiceError elasticTranscoder "ResourceInUseException" . hasStatus 409
-
+_ResourceInUseException
+  = _MatchServiceError elasticTranscoder
+      "ResourceInUseException"
+      . hasStatus 409

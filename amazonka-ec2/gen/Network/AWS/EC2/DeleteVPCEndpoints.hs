@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteVPCEndpoints' smart constructor.
-data DeleteVPCEndpoints = DeleteVPCEndpoints'
-  { _dveDryRun         :: !(Maybe Bool)
-  , _dveVPCEndpointIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPCEndpoints = DeleteVPCEndpoints'{_dveDryRun
+                                              :: !(Maybe Bool),
+                                              _dveVPCEndpointIds :: ![Text]}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVPCEndpoints' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data DeleteVPCEndpoints = DeleteVPCEndpoints'
 -- * 'dveVPCEndpointIds' - One or more VPC endpoint IDs.
 deleteVPCEndpoints
     :: DeleteVPCEndpoints
-deleteVPCEndpoints =
-  DeleteVPCEndpoints' {_dveDryRun = Nothing, _dveVPCEndpointIds = mempty}
-
+deleteVPCEndpoints
+  = DeleteVPCEndpoints'{_dveDryRun = Nothing,
+                        _dveVPCEndpointIds = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 dveDryRun :: Lens' DeleteVPCEndpoints (Maybe Bool)
@@ -112,11 +111,14 @@ instance ToQuery DeleteVPCEndpoints where
 --
 --
 -- /See:/ 'deleteVPCEndpointsResponse' smart constructor.
-data DeleteVPCEndpointsResponse = DeleteVPCEndpointsResponse'
-  { _dversUnsuccessful   :: !(Maybe [UnsuccessfulItem])
-  , _dversResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPCEndpointsResponse = DeleteVPCEndpointsResponse'{_dversUnsuccessful
+                                                              ::
+                                                              !(Maybe
+                                                                  [UnsuccessfulItem]),
+                                                              _dversResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteVPCEndpointsResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +130,10 @@ data DeleteVPCEndpointsResponse = DeleteVPCEndpointsResponse'
 deleteVPCEndpointsResponse
     :: Int -- ^ 'dversResponseStatus'
     -> DeleteVPCEndpointsResponse
-deleteVPCEndpointsResponse pResponseStatus_ =
-  DeleteVPCEndpointsResponse'
-    {_dversUnsuccessful = Nothing, _dversResponseStatus = pResponseStatus_}
-
+deleteVPCEndpointsResponse pResponseStatus_
+  = DeleteVPCEndpointsResponse'{_dversUnsuccessful =
+                                  Nothing,
+                                _dversResponseStatus = pResponseStatus_}
 
 -- | Information about the VPC endpoints that were not successfully deleted.
 dversUnsuccessful :: Lens' DeleteVPCEndpointsResponse [UnsuccessfulItem]

@@ -21,6 +21,8 @@
 -- Lists all patch groups that have been registered with patch baselines.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribePatchGroups
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.DescribePatchGroups
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,13 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describePatchGroups' smart constructor.
-data DescribePatchGroups = DescribePatchGroups'
-  { _dpgFilters    :: !(Maybe [PatchOrchestratorFilter])
-  , _dpgNextToken  :: !(Maybe Text)
-  , _dpgMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePatchGroups = DescribePatchGroups'{_dpgFilters
+                                                ::
+                                                !(Maybe
+                                                    [PatchOrchestratorFilter]),
+                                                _dpgNextToken :: !(Maybe Text),
+                                                _dpgMaxResults :: !(Maybe Nat)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribePatchGroups' with the minimum fields required to make a request.
 --
@@ -66,10 +70,9 @@ data DescribePatchGroups = DescribePatchGroups'
 -- * 'dpgMaxResults' - The maximum number of patch groups to return (per page).
 describePatchGroups
     :: DescribePatchGroups
-describePatchGroups =
-  DescribePatchGroups'
-    {_dpgFilters = Nothing, _dpgNextToken = Nothing, _dpgMaxResults = Nothing}
-
+describePatchGroups
+  = DescribePatchGroups'{_dpgFilters = Nothing,
+                         _dpgNextToken = Nothing, _dpgMaxResults = Nothing}
 
 -- | One or more filters. Use a filter to return a more specific list of results.
 dpgFilters :: Lens' DescribePatchGroups [PatchOrchestratorFilter]
@@ -82,6 +85,13 @@ dpgNextToken = lens _dpgNextToken (\ s a -> s{_dpgNextToken = a})
 -- | The maximum number of patch groups to return (per page).
 dpgMaxResults :: Lens' DescribePatchGroups (Maybe Natural)
 dpgMaxResults = lens _dpgMaxResults (\ s a -> s{_dpgMaxResults = a}) . mapping _Nat
+
+instance AWSPager DescribePatchGroups where
+        page rq rs
+          | stop (rs ^. dpgrsNextToken) = Nothing
+          | stop (rs ^. dpgrsMappings) = Nothing
+          | otherwise =
+            Just $ rq & dpgNextToken .~ rs ^. dpgrsNextToken
 
 instance AWSRequest DescribePatchGroups where
         type Rs DescribePatchGroups =
@@ -122,18 +132,23 @@ instance ToQuery DescribePatchGroups where
         toQuery = const mempty
 
 -- | /See:/ 'describePatchGroupsResponse' smart constructor.
-data DescribePatchGroupsResponse = DescribePatchGroupsResponse'
-  { _dpgrsMappings       :: !(Maybe [PatchGroupPatchBaselineMapping])
-  , _dpgrsNextToken      :: !(Maybe Text)
-  , _dpgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePatchGroupsResponse = DescribePatchGroupsResponse'{_dpgrsMappings
+                                                                ::
+                                                                !(Maybe
+                                                                    [PatchGroupPatchBaselineMapping]),
+                                                                _dpgrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dpgrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribePatchGroupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpgrsMappings' - Each entry in the array contains: PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A PatchBaselineIdentity element.
+-- * 'dpgrsMappings' - Each entry in the array contains: PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A PatchBaselineIdentity element. 
 --
 -- * 'dpgrsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 --
@@ -141,15 +156,13 @@ data DescribePatchGroupsResponse = DescribePatchGroupsResponse'
 describePatchGroupsResponse
     :: Int -- ^ 'dpgrsResponseStatus'
     -> DescribePatchGroupsResponse
-describePatchGroupsResponse pResponseStatus_ =
-  DescribePatchGroupsResponse'
-    { _dpgrsMappings = Nothing
-    , _dpgrsNextToken = Nothing
-    , _dpgrsResponseStatus = pResponseStatus_
-    }
+describePatchGroupsResponse pResponseStatus_
+  = DescribePatchGroupsResponse'{_dpgrsMappings =
+                                   Nothing,
+                                 _dpgrsNextToken = Nothing,
+                                 _dpgrsResponseStatus = pResponseStatus_}
 
-
--- | Each entry in the array contains: PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A PatchBaselineIdentity element.
+-- | Each entry in the array contains: PatchGroup: string (between 1 and 256 characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A PatchBaselineIdentity element. 
 dpgrsMappings :: Lens' DescribePatchGroupsResponse [PatchGroupPatchBaselineMapping]
 dpgrsMappings = lens _dpgrsMappings (\ s a -> s{_dpgrsMappings = a}) . _Default . _Coerce
 

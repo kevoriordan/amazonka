@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deregisterTargets' smart constructor.
-data DeregisterTargets = DeregisterTargets'
-  { _dtTargetGroupARN :: !Text
-  , _dtTargets        :: ![TargetDescription]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterTargets = DeregisterTargets'{_dtTargetGroupARN
+                                            :: !Text,
+                                            _dtTargets :: ![TargetDescription]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeregisterTargets' with the minimum fields required to make a request.
 --
@@ -61,9 +60,10 @@ data DeregisterTargets = DeregisterTargets'
 deregisterTargets
     :: Text -- ^ 'dtTargetGroupARN'
     -> DeregisterTargets
-deregisterTargets pTargetGroupARN_ =
-  DeregisterTargets' {_dtTargetGroupARN = pTargetGroupARN_, _dtTargets = mempty}
-
+deregisterTargets pTargetGroupARN_
+  = DeregisterTargets'{_dtTargetGroupARN =
+                         pTargetGroupARN_,
+                       _dtTargets = mempty}
 
 -- | The Amazon Resource Name (ARN) of the target group.
 dtTargetGroupARN :: Lens' DeregisterTargets Text
@@ -100,10 +100,10 @@ instance ToQuery DeregisterTargets where
                "Targets" =: toQueryList "member" _dtTargets]
 
 -- | /See:/ 'deregisterTargetsResponse' smart constructor.
-newtype DeregisterTargetsResponse = DeregisterTargetsResponse'
-  { _dtsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeregisterTargetsResponse = DeregisterTargetsResponse'{_dtsrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeregisterTargetsResponse' with the minimum fields required to make a request.
 --
@@ -113,9 +113,9 @@ newtype DeregisterTargetsResponse = DeregisterTargetsResponse'
 deregisterTargetsResponse
     :: Int -- ^ 'dtsrsResponseStatus'
     -> DeregisterTargetsResponse
-deregisterTargetsResponse pResponseStatus_ =
-  DeregisterTargetsResponse' {_dtsrsResponseStatus = pResponseStatus_}
-
+deregisterTargetsResponse pResponseStatus_
+  = DeregisterTargetsResponse'{_dtsrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 dtsrsResponseStatus :: Lens' DeregisterTargetsResponse Int

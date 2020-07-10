@@ -28,6 +28,7 @@ module Network.AWS.ServiceCatalog.UpdateConstraint
     , UpdateConstraint
     -- * Request Lenses
     , ucAcceptLanguage
+    , ucParameters
     , ucDescription
     , ucId
 
@@ -49,12 +50,12 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'updateConstraint' smart constructor.
-data UpdateConstraint = UpdateConstraint'
-  { _ucAcceptLanguage :: !(Maybe Text)
-  , _ucDescription    :: !(Maybe Text)
-  , _ucId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConstraint = UpdateConstraint'{_ucAcceptLanguage
+                                          :: !(Maybe Text),
+                                          _ucParameters :: !(Maybe Text),
+                                          _ucDescription :: !(Maybe Text),
+                                          _ucId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateConstraint' with the minimum fields required to make a request.
 --
@@ -62,20 +63,26 @@ data UpdateConstraint = UpdateConstraint'
 --
 -- * 'ucAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 --
+-- * 'ucParameters' - The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:     * LAUNCH    * You are required to specify either the @RoleArn@ or the @LocalRoleName@ but can't use both. Specify the @RoleArn@ property as follows: @{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}@  Specify the @LocalRoleName@ property as follows: @{"LocalRoleName": "SCBasicLaunchRole"}@  If you specify the @LocalRoleName@ property, when an account uses the launch constraint, the IAM role with that name in the account will be used. This allows launch-role constraints to be account-agnostic so the administrator can create fewer resources per shared account. You cannot have both a @LAUNCH@ and a @STACKSET@ constraint. You also cannot have more than one @LAUNCH@ constraint on a product and portfolio.     * NOTIFICATION    * Specify the @NotificationArns@ property as follows: @{"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}@      * RESOURCE_UPDATE    * Specify the @TagUpdatesOnProvisionedProduct@ property as follows: @{"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}@  The @TagUpdatesOnProvisionedProduct@ property accepts a string value of @ALLOWED@ or @NOT_ALLOWED@ .     * STACKSET    * Specify the @Parameters@ property as follows: @{"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}@  You cannot have both a @LAUNCH@ and a @STACKSET@ constraint. You also cannot have more than one @STACKSET@ constraint on a product and portfolio. Products with a @STACKSET@ constraint will launch an AWS CloudFormation stack set.     * TEMPLATE    * Specify the @Rules@ property. For more information, see <http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html Template Constraint Rules> .
+--
 -- * 'ucDescription' - The updated description of the constraint.
 --
 -- * 'ucId' - The identifier of the constraint.
 updateConstraint
     :: Text -- ^ 'ucId'
     -> UpdateConstraint
-updateConstraint pId_ =
-  UpdateConstraint'
-    {_ucAcceptLanguage = Nothing, _ucDescription = Nothing, _ucId = pId_}
-
+updateConstraint pId_
+  = UpdateConstraint'{_ucAcceptLanguage = Nothing,
+                      _ucParameters = Nothing, _ucDescription = Nothing,
+                      _ucId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 ucAcceptLanguage :: Lens' UpdateConstraint (Maybe Text)
 ucAcceptLanguage = lens _ucAcceptLanguage (\ s a -> s{_ucAcceptLanguage = a})
+
+-- | The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:     * LAUNCH    * You are required to specify either the @RoleArn@ or the @LocalRoleName@ but can't use both. Specify the @RoleArn@ property as follows: @{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}@  Specify the @LocalRoleName@ property as follows: @{"LocalRoleName": "SCBasicLaunchRole"}@  If you specify the @LocalRoleName@ property, when an account uses the launch constraint, the IAM role with that name in the account will be used. This allows launch-role constraints to be account-agnostic so the administrator can create fewer resources per shared account. You cannot have both a @LAUNCH@ and a @STACKSET@ constraint. You also cannot have more than one @LAUNCH@ constraint on a product and portfolio.     * NOTIFICATION    * Specify the @NotificationArns@ property as follows: @{"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}@      * RESOURCE_UPDATE    * Specify the @TagUpdatesOnProvisionedProduct@ property as follows: @{"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}@  The @TagUpdatesOnProvisionedProduct@ property accepts a string value of @ALLOWED@ or @NOT_ALLOWED@ .     * STACKSET    * Specify the @Parameters@ property as follows: @{"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}@  You cannot have both a @LAUNCH@ and a @STACKSET@ constraint. You also cannot have more than one @STACKSET@ constraint on a product and portfolio. Products with a @STACKSET@ constraint will launch an AWS CloudFormation stack set.     * TEMPLATE    * Specify the @Rules@ property. For more information, see <http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html Template Constraint Rules> .
+ucParameters :: Lens' UpdateConstraint (Maybe Text)
+ucParameters = lens _ucParameters (\ s a -> s{_ucParameters = a})
 
 -- | The updated description of the constraint.
 ucDescription :: Lens' UpdateConstraint (Maybe Text)
@@ -115,6 +122,7 @@ instance ToJSON UpdateConstraint where
           = object
               (catMaybes
                  [("AcceptLanguage" .=) <$> _ucAcceptLanguage,
+                  ("Parameters" .=) <$> _ucParameters,
                   ("Description" .=) <$> _ucDescription,
                   Just ("Id" .= _ucId)])
 
@@ -125,13 +133,20 @@ instance ToQuery UpdateConstraint where
         toQuery = const mempty
 
 -- | /See:/ 'updateConstraintResponse' smart constructor.
-data UpdateConstraintResponse = UpdateConstraintResponse'
-  { _ucrsStatus               :: !(Maybe RequestStatus)
-  , _ucrsConstraintDetail     :: !(Maybe ConstraintDetail)
-  , _ucrsConstraintParameters :: !(Maybe Text)
-  , _ucrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConstraintResponse = UpdateConstraintResponse'{_ucrsStatus
+                                                          ::
+                                                          !(Maybe
+                                                              RequestStatus),
+                                                          _ucrsConstraintDetail
+                                                          ::
+                                                          !(Maybe
+                                                              ConstraintDetail),
+                                                          _ucrsConstraintParameters
+                                                          :: !(Maybe Text),
+                                                          _ucrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateConstraintResponse' with the minimum fields required to make a request.
 --
@@ -147,14 +162,11 @@ data UpdateConstraintResponse = UpdateConstraintResponse'
 updateConstraintResponse
     :: Int -- ^ 'ucrsResponseStatus'
     -> UpdateConstraintResponse
-updateConstraintResponse pResponseStatus_ =
-  UpdateConstraintResponse'
-    { _ucrsStatus = Nothing
-    , _ucrsConstraintDetail = Nothing
-    , _ucrsConstraintParameters = Nothing
-    , _ucrsResponseStatus = pResponseStatus_
-    }
-
+updateConstraintResponse pResponseStatus_
+  = UpdateConstraintResponse'{_ucrsStatus = Nothing,
+                              _ucrsConstraintDetail = Nothing,
+                              _ucrsConstraintParameters = Nothing,
+                              _ucrsResponseStatus = pResponseStatus_}
 
 -- | The status of the current request.
 ucrsStatus :: Lens' UpdateConstraintResponse (Maybe RequestStatus)

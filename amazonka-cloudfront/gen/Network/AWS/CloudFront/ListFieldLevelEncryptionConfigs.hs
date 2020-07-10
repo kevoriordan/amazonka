@@ -46,31 +46,36 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listFieldLevelEncryptionConfigs' smart constructor.
-data ListFieldLevelEncryptionConfigs = ListFieldLevelEncryptionConfigs'
-  { _lflecMarker   :: !(Maybe Text)
-  , _lflecMaxItems :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFieldLevelEncryptionConfigs = ListFieldLevelEncryptionConfigs'{_lflecMarker
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lflecMaxItems
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text)}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListFieldLevelEncryptionConfigs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lflecMarker' - Use this when paginating results to indicate where to begin in your list of configurations. The results include configurations in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last configuration on that page).
+-- * 'lflecMarker' - Use this when paginating results to indicate where to begin in your list of configurations. The results include configurations in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last configuration on that page). 
 --
--- * 'lflecMaxItems' - The maximum number of field-level encryption configurations you want in the response body.
+-- * 'lflecMaxItems' - The maximum number of field-level encryption configurations you want in the response body. 
 listFieldLevelEncryptionConfigs
     :: ListFieldLevelEncryptionConfigs
-listFieldLevelEncryptionConfigs =
-  ListFieldLevelEncryptionConfigs'
-    {_lflecMarker = Nothing, _lflecMaxItems = Nothing}
+listFieldLevelEncryptionConfigs
+  = ListFieldLevelEncryptionConfigs'{_lflecMarker =
+                                       Nothing,
+                                     _lflecMaxItems = Nothing}
 
-
--- | Use this when paginating results to indicate where to begin in your list of configurations. The results include configurations in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last configuration on that page).
+-- | Use this when paginating results to indicate where to begin in your list of configurations. The results include configurations in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last configuration on that page). 
 lflecMarker :: Lens' ListFieldLevelEncryptionConfigs (Maybe Text)
 lflecMarker = lens _lflecMarker (\ s a -> s{_lflecMarker = a})
 
--- | The maximum number of field-level encryption configurations you want in the response body.
+-- | The maximum number of field-level encryption configurations you want in the response body. 
 lflecMaxItems :: Lens' ListFieldLevelEncryptionConfigs (Maybe Text)
 lflecMaxItems = lens _lflecMaxItems (\ s a -> s{_lflecMaxItems = a})
 
@@ -95,7 +100,7 @@ instance ToHeaders ListFieldLevelEncryptionConfigs
         toHeaders = const mempty
 
 instance ToPath ListFieldLevelEncryptionConfigs where
-        toPath = const "/2017-10-30/field-level-encryption"
+        toPath = const "/2019-03-26/field-level-encryption"
 
 instance ToQuery ListFieldLevelEncryptionConfigs
          where
@@ -105,11 +110,15 @@ instance ToQuery ListFieldLevelEncryptionConfigs
                "MaxItems" =: _lflecMaxItems]
 
 -- | /See:/ 'listFieldLevelEncryptionConfigsResponse' smart constructor.
-data ListFieldLevelEncryptionConfigsResponse = ListFieldLevelEncryptionConfigsResponse'
-  { _lflecrsFieldLevelEncryptionList :: !(Maybe FieldLevelEncryptionList)
-  , _lflecrsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFieldLevelEncryptionConfigsResponse = ListFieldLevelEncryptionConfigsResponse'{_lflecrsFieldLevelEncryptionList
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            FieldLevelEncryptionList),
+                                                                                        _lflecrsResponseStatus
+                                                                                        ::
+                                                                                        !Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'ListFieldLevelEncryptionConfigsResponse' with the minimum fields required to make a request.
 --
@@ -121,12 +130,12 @@ data ListFieldLevelEncryptionConfigsResponse = ListFieldLevelEncryptionConfigsRe
 listFieldLevelEncryptionConfigsResponse
     :: Int -- ^ 'lflecrsResponseStatus'
     -> ListFieldLevelEncryptionConfigsResponse
-listFieldLevelEncryptionConfigsResponse pResponseStatus_ =
-  ListFieldLevelEncryptionConfigsResponse'
-    { _lflecrsFieldLevelEncryptionList = Nothing
-    , _lflecrsResponseStatus = pResponseStatus_
-    }
-
+listFieldLevelEncryptionConfigsResponse
+  pResponseStatus_
+  = ListFieldLevelEncryptionConfigsResponse'{_lflecrsFieldLevelEncryptionList
+                                               = Nothing,
+                                             _lflecrsResponseStatus =
+                                               pResponseStatus_}
 
 -- | Returns a list of all field-level encryption configurations that have been created in CloudFront for this account.
 lflecrsFieldLevelEncryptionList :: Lens' ListFieldLevelEncryptionConfigsResponse (Maybe FieldLevelEncryptionList)

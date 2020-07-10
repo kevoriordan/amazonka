@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an AWS Mobile Hub project.
+-- Creates an AWS Mobile Hub project. 
 --
 --
 module Network.AWS.Mobile.CreateProject
@@ -47,54 +47,49 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure used to request a project be created.
+-- | Request structure used to request a project be created. 
 --
 --
 --
 -- /See:/ 'createProject' smart constructor.
-data CreateProject = CreateProject'
-  { _cpContents   :: !(Maybe ByteString)
-  , _cpName       :: !(Maybe Text)
-  , _cpRegion     :: !(Maybe Text)
-  , _cpSnapshotId :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateProject = CreateProject'{_cpContents ::
+                                    !(Maybe ByteString),
+                                    _cpName :: !(Maybe Text),
+                                    _cpRegion :: !(Maybe Text),
+                                    _cpSnapshotId :: !(Maybe Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpContents' - ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation.
+-- * 'cpContents' - ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. 
 --
--- * 'cpName' - Name of the project.
+-- * 'cpName' - Name of the project. 
 --
--- * 'cpRegion' - Default region where project resources should be created.
+-- * 'cpRegion' - Default region where project resources should be created. 
 --
--- * 'cpSnapshotId' - Unique identifier for an exported snapshot of project configuration. This snapshot identifier is included in the share URL when a project is exported.
+-- * 'cpSnapshotId' - Unique identifier for an exported snapshot of project configuration. This snapshot identifier is included in the share URL when a project is exported. 
 createProject
     :: CreateProject
-createProject =
-  CreateProject'
-    { _cpContents = Nothing
-    , _cpName = Nothing
-    , _cpRegion = Nothing
-    , _cpSnapshotId = Nothing
-    }
+createProject
+  = CreateProject'{_cpContents = Nothing,
+                   _cpName = Nothing, _cpRegion = Nothing,
+                   _cpSnapshotId = Nothing}
 
-
--- | ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation.
+-- | ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. 
 cpContents :: Lens' CreateProject (Maybe ByteString)
 cpContents = lens _cpContents (\ s a -> s{_cpContents = a})
 
--- | Name of the project.
+-- | Name of the project. 
 cpName :: Lens' CreateProject (Maybe Text)
 cpName = lens _cpName (\ s a -> s{_cpName = a})
 
--- | Default region where project resources should be created.
+-- | Default region where project resources should be created. 
 cpRegion :: Lens' CreateProject (Maybe Text)
 cpRegion = lens _cpRegion (\ s a -> s{_cpRegion = a})
 
--- | Unique identifier for an exported snapshot of project configuration. This snapshot identifier is included in the share URL when a project is exported.
+-- | Unique identifier for an exported snapshot of project configuration. This snapshot identifier is included in the share URL when a project is exported. 
 cpSnapshotId :: Lens' CreateProject (Maybe Text)
 cpSnapshotId = lens _cpSnapshotId (\ s a -> s{_cpSnapshotId = a})
 
@@ -130,33 +125,32 @@ instance ToQuery CreateProject where
               ["name" =: _cpName, "region" =: _cpRegion,
                "snapshotId" =: _cpSnapshotId]
 
--- | Result structure used in response to a request to create a project.
+-- | Result structure used in response to a request to create a project. 
 --
 --
 --
 -- /See:/ 'createProjectResponse' smart constructor.
-data CreateProjectResponse = CreateProjectResponse'
-  { _cprsDetails        :: !(Maybe ProjectDetails)
-  , _cprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateProjectResponse = CreateProjectResponse'{_cprsDetails
+                                                    :: !(Maybe ProjectDetails),
+                                                    _cprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateProjectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cprsDetails' - Detailed information about the created AWS Mobile Hub project.
+-- * 'cprsDetails' - Detailed information about the created AWS Mobile Hub project. 
 --
 -- * 'cprsResponseStatus' - -- | The response status code.
 createProjectResponse
     :: Int -- ^ 'cprsResponseStatus'
     -> CreateProjectResponse
-createProjectResponse pResponseStatus_ =
-  CreateProjectResponse'
-    {_cprsDetails = Nothing, _cprsResponseStatus = pResponseStatus_}
+createProjectResponse pResponseStatus_
+  = CreateProjectResponse'{_cprsDetails = Nothing,
+                           _cprsResponseStatus = pResponseStatus_}
 
-
--- | Detailed information about the created AWS Mobile Hub project.
+-- | Detailed information about the created AWS Mobile Hub project. 
 cprsDetails :: Lens' CreateProjectResponse (Maybe ProjectDetails)
 cprsDetails = lens _cprsDetails (\ s a -> s{_cprsDetails = a})
 

@@ -53,13 +53,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'registerCertificate' smart constructor.
-data RegisterCertificate = RegisterCertificate'
-  { _rcStatus           :: !(Maybe CertificateStatus)
-  , _rcCaCertificatePem :: !(Maybe Text)
-  , _rcSetAsActive      :: !(Maybe Bool)
-  , _rcCertificatePem   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterCertificate = RegisterCertificate'{_rcStatus
+                                                :: !(Maybe CertificateStatus),
+                                                _rcCaCertificatePem ::
+                                                !(Maybe Text),
+                                                _rcSetAsActive :: !(Maybe Bool),
+                                                _rcCertificatePem :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterCertificate' with the minimum fields required to make a request.
 --
@@ -69,20 +69,17 @@ data RegisterCertificate = RegisterCertificate'
 --
 -- * 'rcCaCertificatePem' - The CA certificate used to sign the device certificate being registered.
 --
--- * 'rcSetAsActive' - A boolean value that specifies if the CA certificate is set to active.
+-- * 'rcSetAsActive' - A boolean value that specifies if the certificate is set to active.
 --
 -- * 'rcCertificatePem' - The certificate data, in PEM format.
 registerCertificate
     :: Text -- ^ 'rcCertificatePem'
     -> RegisterCertificate
-registerCertificate pCertificatePem_ =
-  RegisterCertificate'
-    { _rcStatus = Nothing
-    , _rcCaCertificatePem = Nothing
-    , _rcSetAsActive = Nothing
-    , _rcCertificatePem = pCertificatePem_
-    }
-
+registerCertificate pCertificatePem_
+  = RegisterCertificate'{_rcStatus = Nothing,
+                         _rcCaCertificatePem = Nothing,
+                         _rcSetAsActive = Nothing,
+                         _rcCertificatePem = pCertificatePem_}
 
 -- | The status of the register certificate request.
 rcStatus :: Lens' RegisterCertificate (Maybe CertificateStatus)
@@ -92,7 +89,7 @@ rcStatus = lens _rcStatus (\ s a -> s{_rcStatus = a})
 rcCaCertificatePem :: Lens' RegisterCertificate (Maybe Text)
 rcCaCertificatePem = lens _rcCaCertificatePem (\ s a -> s{_rcCaCertificatePem = a})
 
--- | A boolean value that specifies if the CA certificate is set to active.
+-- | A boolean value that specifies if the certificate is set to active.
 rcSetAsActive :: Lens' RegisterCertificate (Maybe Bool)
 rcSetAsActive = lens _rcSetAsActive (\ s a -> s{_rcSetAsActive = a})
 
@@ -138,12 +135,16 @@ instance ToQuery RegisterCertificate where
 --
 --
 -- /See:/ 'registerCertificateResponse' smart constructor.
-data RegisterCertificateResponse = RegisterCertificateResponse'
-  { _rcrsCertificateARN :: !(Maybe Text)
-  , _rcrsCertificateId  :: !(Maybe Text)
-  , _rcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterCertificateResponse = RegisterCertificateResponse'{_rcrsCertificateARN
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _rcrsCertificateId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _rcrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'RegisterCertificateResponse' with the minimum fields required to make a request.
 --
@@ -157,13 +158,11 @@ data RegisterCertificateResponse = RegisterCertificateResponse'
 registerCertificateResponse
     :: Int -- ^ 'rcrsResponseStatus'
     -> RegisterCertificateResponse
-registerCertificateResponse pResponseStatus_ =
-  RegisterCertificateResponse'
-    { _rcrsCertificateARN = Nothing
-    , _rcrsCertificateId = Nothing
-    , _rcrsResponseStatus = pResponseStatus_
-    }
-
+registerCertificateResponse pResponseStatus_
+  = RegisterCertificateResponse'{_rcrsCertificateARN =
+                                   Nothing,
+                                 _rcrsCertificateId = Nothing,
+                                 _rcrsResponseStatus = pResponseStatus_}
 
 -- | The certificate ARN.
 rcrsCertificateARN :: Lens' RegisterCertificateResponse (Maybe Text)

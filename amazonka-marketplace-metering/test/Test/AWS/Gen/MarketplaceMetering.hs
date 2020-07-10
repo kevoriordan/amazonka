@@ -14,11 +14,11 @@
 module Test.AWS.Gen.MarketplaceMetering where
 
 import Data.Proxy
-import Network.AWS.MarketplaceMetering
 import Test.AWS.Fixture
-import Test.AWS.MarketplaceMetering.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.MarketplaceMetering
+import Test.AWS.MarketplaceMetering.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,7 +28,10 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestBatchMeterUsage $
+--         [ requestRegisterUsage $
+--             registerUsage
+--
+--         , requestBatchMeterUsage $
 --             batchMeterUsage
 --
 --         , requestResolveCustomer $
@@ -40,7 +43,10 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseBatchMeterUsage $
+--         [ responseRegisterUsage $
+--             registerUsageResponse
+--
+--         , responseBatchMeterUsage $
 --             batchMeterUsageResponse
 --
 --         , responseResolveCustomer $
@@ -53,6 +59,11 @@ import Test.Tasty
 --     ]
 
 -- Requests
+
+requestRegisterUsage :: RegisterUsage -> TestTree
+requestRegisterUsage = req
+    "RegisterUsage"
+    "fixture/RegisterUsage.yaml"
 
 requestBatchMeterUsage :: BatchMeterUsage -> TestTree
 requestBatchMeterUsage = req
@@ -70,6 +81,13 @@ requestMeterUsage = req
     "fixture/MeterUsage.yaml"
 
 -- Responses
+
+responseRegisterUsage :: RegisterUsageResponse -> TestTree
+responseRegisterUsage = res
+    "RegisterUsageResponse"
+    "fixture/RegisterUsageResponse.proto"
+    marketplaceMetering
+    (Proxy :: Proxy RegisterUsage)
 
 responseBatchMeterUsage :: BatchMeterUsageResponse -> TestTree
 responseBatchMeterUsage = res

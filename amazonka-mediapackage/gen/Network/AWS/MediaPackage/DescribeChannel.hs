@@ -35,6 +35,7 @@ module Network.AWS.MediaPackage.DescribeChannel
     , dcrsARN
     , dcrsId
     , dcrsDescription
+    , dcrsTags
     , dcrsResponseStatus
     ) where
 
@@ -46,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeChannel' smart constructor.
-newtype DescribeChannel = DescribeChannel'
-  { _dId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeChannel = DescribeChannel'{_dId ::
+                                           Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeChannel' with the minimum fields required to make a request.
 --
@@ -59,8 +59,7 @@ newtype DescribeChannel = DescribeChannel'
 describeChannel
     :: Text -- ^ 'dId'
     -> DescribeChannel
-describeChannel pId_ = DescribeChannel' {_dId = pId_}
-
+describeChannel pId_ = DescribeChannel'{_dId = pId_}
 
 -- | The ID of a Channel.
 dId :: Lens' DescribeChannel Text
@@ -76,6 +75,7 @@ instance AWSRequest DescribeChannel where
                    (x .?> "hlsIngest") <*> (x .?> "arn") <*>
                      (x .?> "id")
                      <*> (x .?> "description")
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable DescribeChannel where
@@ -97,14 +97,21 @@ instance ToQuery DescribeChannel where
         toQuery = const mempty
 
 -- | /See:/ 'describeChannelResponse' smart constructor.
-data DescribeChannelResponse = DescribeChannelResponse'
-  { _dcrsHlsIngest      :: !(Maybe HlsIngest)
-  , _dcrsARN            :: !(Maybe Text)
-  , _dcrsId             :: !(Maybe Text)
-  , _dcrsDescription    :: !(Maybe Text)
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeChannelResponse = DescribeChannelResponse'{_dcrsHlsIngest
+                                                        :: !(Maybe HlsIngest),
+                                                        _dcrsARN ::
+                                                        !(Maybe Text),
+                                                        _dcrsId ::
+                                                        !(Maybe Text),
+                                                        _dcrsDescription ::
+                                                        !(Maybe Text),
+                                                        _dcrsTags ::
+                                                        !(Maybe
+                                                            (Map Text Text)),
+                                                        _dcrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeChannelResponse' with the minimum fields required to make a request.
 --
@@ -118,19 +125,17 @@ data DescribeChannelResponse = DescribeChannelResponse'
 --
 -- * 'dcrsDescription' - A short text description of the Channel.
 --
+-- * 'dcrsTags' - Undocumented member.
+--
 -- * 'dcrsResponseStatus' - -- | The response status code.
 describeChannelResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeChannelResponse
-describeChannelResponse pResponseStatus_ =
-  DescribeChannelResponse'
-    { _dcrsHlsIngest = Nothing
-    , _dcrsARN = Nothing
-    , _dcrsId = Nothing
-    , _dcrsDescription = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
-
+describeChannelResponse pResponseStatus_
+  = DescribeChannelResponse'{_dcrsHlsIngest = Nothing,
+                             _dcrsARN = Nothing, _dcrsId = Nothing,
+                             _dcrsDescription = Nothing, _dcrsTags = Nothing,
+                             _dcrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 dcrsHlsIngest :: Lens' DescribeChannelResponse (Maybe HlsIngest)
@@ -147,6 +152,10 @@ dcrsId = lens _dcrsId (\ s a -> s{_dcrsId = a})
 -- | A short text description of the Channel.
 dcrsDescription :: Lens' DescribeChannelResponse (Maybe Text)
 dcrsDescription = lens _dcrsDescription (\ s a -> s{_dcrsDescription = a})
+
+-- | Undocumented member.
+dcrsTags :: Lens' DescribeChannelResponse (HashMap Text Text)
+dcrsTags = lens _dcrsTags (\ s a -> s{_dcrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 dcrsResponseStatus :: Lens' DescribeChannelResponse Int

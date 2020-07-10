@@ -52,10 +52,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteLoadBalancer' smart constructor.
-newtype DeleteLoadBalancer = DeleteLoadBalancer'
-  { _dlbLoadBalancerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLoadBalancer = DeleteLoadBalancer'{_dlbLoadBalancerName
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteLoadBalancer' with the minimum fields required to make a request.
 --
@@ -65,9 +65,9 @@ newtype DeleteLoadBalancer = DeleteLoadBalancer'
 deleteLoadBalancer
     :: Text -- ^ 'dlbLoadBalancerName'
     -> DeleteLoadBalancer
-deleteLoadBalancer pLoadBalancerName_ =
-  DeleteLoadBalancer' {_dlbLoadBalancerName = pLoadBalancerName_}
-
+deleteLoadBalancer pLoadBalancerName_
+  = DeleteLoadBalancer'{_dlbLoadBalancerName =
+                          pLoadBalancerName_}
 
 -- | The name of the load balancer.
 dlbLoadBalancerName :: Lens' DeleteLoadBalancer Text
@@ -104,10 +104,10 @@ instance ToQuery DeleteLoadBalancer where
 --
 --
 -- /See:/ 'deleteLoadBalancerResponse' smart constructor.
-newtype DeleteLoadBalancerResponse = DeleteLoadBalancerResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLoadBalancerResponse = DeleteLoadBalancerResponse'{_drsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteLoadBalancerResponse' with the minimum fields required to make a request.
 --
@@ -117,9 +117,9 @@ newtype DeleteLoadBalancerResponse = DeleteLoadBalancerResponse'
 deleteLoadBalancerResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteLoadBalancerResponse
-deleteLoadBalancerResponse pResponseStatus_ =
-  DeleteLoadBalancerResponse' {_drsResponseStatus = pResponseStatus_}
-
+deleteLoadBalancerResponse pResponseStatus_
+  = DeleteLoadBalancerResponse'{_drsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeleteLoadBalancerResponse Int

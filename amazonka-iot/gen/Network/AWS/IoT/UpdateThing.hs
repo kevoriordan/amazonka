@@ -52,14 +52,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateThing' smart constructor.
-data UpdateThing = UpdateThing'
-  { _utRemoveThingType  :: !(Maybe Bool)
-  , _utThingTypeName    :: !(Maybe Text)
-  , _utExpectedVersion  :: !(Maybe Integer)
-  , _utAttributePayload :: !(Maybe AttributePayload)
-  , _utThingName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateThing = UpdateThing'{_utRemoveThingType ::
+                                !(Maybe Bool),
+                                _utThingTypeName :: !(Maybe Text),
+                                _utExpectedVersion :: !(Maybe Integer),
+                                _utAttributePayload ::
+                                !(Maybe AttributePayload),
+                                _utThingName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateThing' with the minimum fields required to make a request.
 --
@@ -73,19 +73,16 @@ data UpdateThing = UpdateThing'
 --
 -- * 'utAttributePayload' - A list of thing attributes, a JSON string containing name-value pairs. For example: @{\"attributes\":{\"name1\":\"value2\"}}@  This data is used to add new attributes or update existing attributes.
 --
--- * 'utThingName' - The name of the thing to update.
+-- * 'utThingName' - The name of the thing to update. You can't change a thing's name. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
 updateThing
     :: Text -- ^ 'utThingName'
     -> UpdateThing
-updateThing pThingName_ =
-  UpdateThing'
-    { _utRemoveThingType = Nothing
-    , _utThingTypeName = Nothing
-    , _utExpectedVersion = Nothing
-    , _utAttributePayload = Nothing
-    , _utThingName = pThingName_
-    }
-
+updateThing pThingName_
+  = UpdateThing'{_utRemoveThingType = Nothing,
+                 _utThingTypeName = Nothing,
+                 _utExpectedVersion = Nothing,
+                 _utAttributePayload = Nothing,
+                 _utThingName = pThingName_}
 
 -- | Remove a thing type association. If __true__ , the association is removed.
 utRemoveThingType :: Lens' UpdateThing (Maybe Bool)
@@ -103,7 +100,7 @@ utExpectedVersion = lens _utExpectedVersion (\ s a -> s{_utExpectedVersion = a})
 utAttributePayload :: Lens' UpdateThing (Maybe AttributePayload)
 utAttributePayload = lens _utAttributePayload (\ s a -> s{_utAttributePayload = a})
 
--- | The name of the thing to update.
+-- | The name of the thing to update. You can't change a thing's name. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
 utThingName :: Lens' UpdateThing Text
 utThingName = lens _utThingName (\ s a -> s{_utThingName = a})
 
@@ -143,10 +140,10 @@ instance ToQuery UpdateThing where
 --
 --
 -- /See:/ 'updateThingResponse' smart constructor.
-newtype UpdateThingResponse = UpdateThingResponse'
-  { _utrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateThingResponse = UpdateThingResponse'{_utrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateThingResponse' with the minimum fields required to make a request.
 --
@@ -156,9 +153,9 @@ newtype UpdateThingResponse = UpdateThingResponse'
 updateThingResponse
     :: Int -- ^ 'utrsResponseStatus'
     -> UpdateThingResponse
-updateThingResponse pResponseStatus_ =
-  UpdateThingResponse' {_utrsResponseStatus = pResponseStatus_}
-
+updateThingResponse pResponseStatus_
+  = UpdateThingResponse'{_utrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 utrsResponseStatus :: Lens' UpdateThingResponse Int

@@ -58,11 +58,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'deleteRegexMatchSet' smart constructor.
-data DeleteRegexMatchSet = DeleteRegexMatchSet'
-  { _drmsRegexMatchSetId :: !Text
-  , _drmsChangeToken     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRegexMatchSet = DeleteRegexMatchSet'{_drmsRegexMatchSetId
+                                                :: !Text,
+                                                _drmsChangeToken :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRegexMatchSet' with the minimum fields required to make a request.
 --
@@ -75,10 +74,10 @@ deleteRegexMatchSet
     :: Text -- ^ 'drmsRegexMatchSetId'
     -> Text -- ^ 'drmsChangeToken'
     -> DeleteRegexMatchSet
-deleteRegexMatchSet pRegexMatchSetId_ pChangeToken_ =
-  DeleteRegexMatchSet'
-    {_drmsRegexMatchSetId = pRegexMatchSetId_, _drmsChangeToken = pChangeToken_}
-
+deleteRegexMatchSet pRegexMatchSetId_ pChangeToken_
+  = DeleteRegexMatchSet'{_drmsRegexMatchSetId =
+                           pRegexMatchSetId_,
+                         _drmsChangeToken = pChangeToken_}
 
 -- | The @RegexMatchSetId@ of the 'RegexMatchSet' that you want to delete. @RegexMatchSetId@ is returned by 'CreateRegexMatchSet' and by 'ListRegexMatchSets' .
 drmsRegexMatchSetId :: Lens' DeleteRegexMatchSet Text
@@ -126,11 +125,13 @@ instance ToQuery DeleteRegexMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteRegexMatchSetResponse' smart constructor.
-data DeleteRegexMatchSetResponse = DeleteRegexMatchSetResponse'
-  { _drmsrsChangeToken    :: !(Maybe Text)
-  , _drmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRegexMatchSetResponse = DeleteRegexMatchSetResponse'{_drmsrsChangeToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _drmsrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteRegexMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +143,10 @@ data DeleteRegexMatchSetResponse = DeleteRegexMatchSetResponse'
 deleteRegexMatchSetResponse
     :: Int -- ^ 'drmsrsResponseStatus'
     -> DeleteRegexMatchSetResponse
-deleteRegexMatchSetResponse pResponseStatus_ =
-  DeleteRegexMatchSetResponse'
-    {_drmsrsChangeToken = Nothing, _drmsrsResponseStatus = pResponseStatus_}
-
+deleteRegexMatchSetResponse pResponseStatus_
+  = DeleteRegexMatchSetResponse'{_drmsrsChangeToken =
+                                   Nothing,
+                                 _drmsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteRegexMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 drmsrsChangeToken :: Lens' DeleteRegexMatchSetResponse (Maybe Text)

@@ -48,16 +48,21 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | The request to list origin access identities.
+-- | The request to list origin access identities. 
 --
 --
 --
 -- /See:/ 'listCloudFrontOriginAccessIdentities' smart constructor.
-data ListCloudFrontOriginAccessIdentities = ListCloudFrontOriginAccessIdentities'
-  { _lcfoaiMarker   :: !(Maybe Text)
-  , _lcfoaiMaxItems :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCloudFrontOriginAccessIdentities = ListCloudFrontOriginAccessIdentities'{_lcfoaiMarker
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _lcfoaiMaxItems
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text)}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ListCloudFrontOriginAccessIdentities' with the minimum fields required to make a request.
 --
@@ -65,19 +70,19 @@ data ListCloudFrontOriginAccessIdentities = ListCloudFrontOriginAccessIdentities
 --
 -- * 'lcfoaiMarker' - Use this when paginating results to indicate where to begin in your list of origin access identities. The results include identities in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last identity on that page).
 --
--- * 'lcfoaiMaxItems' - The maximum number of origin access identities you want in the response body.
+-- * 'lcfoaiMaxItems' - The maximum number of origin access identities you want in the response body. 
 listCloudFrontOriginAccessIdentities
     :: ListCloudFrontOriginAccessIdentities
-listCloudFrontOriginAccessIdentities =
-  ListCloudFrontOriginAccessIdentities'
-    {_lcfoaiMarker = Nothing, _lcfoaiMaxItems = Nothing}
-
+listCloudFrontOriginAccessIdentities
+  = ListCloudFrontOriginAccessIdentities'{_lcfoaiMarker
+                                            = Nothing,
+                                          _lcfoaiMaxItems = Nothing}
 
 -- | Use this when paginating results to indicate where to begin in your list of origin access identities. The results include identities in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last identity on that page).
 lcfoaiMarker :: Lens' ListCloudFrontOriginAccessIdentities (Maybe Text)
 lcfoaiMarker = lens _lcfoaiMarker (\ s a -> s{_lcfoaiMarker = a})
 
--- | The maximum number of origin access identities you want in the response body.
+-- | The maximum number of origin access identities you want in the response body. 
 lcfoaiMaxItems :: Lens' ListCloudFrontOriginAccessIdentities (Maybe Text)
 lcfoaiMaxItems = lens _lcfoaiMaxItems (\ s a -> s{_lcfoaiMaxItems = a})
 
@@ -130,7 +135,7 @@ instance ToPath ListCloudFrontOriginAccessIdentities
          where
         toPath
           = const
-              "/2017-10-30/origin-access-identity/cloudfront"
+              "/2019-03-26/origin-access-identity/cloudfront"
 
 instance ToQuery ListCloudFrontOriginAccessIdentities
          where
@@ -139,16 +144,20 @@ instance ToQuery ListCloudFrontOriginAccessIdentities
               ["Marker" =: _lcfoaiMarker,
                "MaxItems" =: _lcfoaiMaxItems]
 
--- | The returned result of the corresponding request.
+-- | The returned result of the corresponding request. 
 --
 --
 --
 -- /See:/ 'listCloudFrontOriginAccessIdentitiesResponse' smart constructor.
-data ListCloudFrontOriginAccessIdentitiesResponse = ListCloudFrontOriginAccessIdentitiesResponse'
-  { _lcfoairsResponseStatus :: !Int
-  , _lcfoairsCloudFrontOriginAccessIdentityList :: !CloudFrontOriginAccessIdentityList
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCloudFrontOriginAccessIdentitiesResponse = ListCloudFrontOriginAccessIdentitiesResponse'{_lcfoairsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int,
+                                                                                                  _lcfoairsCloudFrontOriginAccessIdentityList
+                                                                                                  ::
+                                                                                                  !CloudFrontOriginAccessIdentityList}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'ListCloudFrontOriginAccessIdentitiesResponse' with the minimum fields required to make a request.
 --
@@ -156,24 +165,24 @@ data ListCloudFrontOriginAccessIdentitiesResponse = ListCloudFrontOriginAccessId
 --
 -- * 'lcfoairsResponseStatus' - -- | The response status code.
 --
--- * 'lcfoairsCloudFrontOriginAccessIdentityList' - The @CloudFrontOriginAccessIdentityList@ type.
+-- * 'lcfoairsCloudFrontOriginAccessIdentityList' - The @CloudFrontOriginAccessIdentityList@ type. 
 listCloudFrontOriginAccessIdentitiesResponse
     :: Int -- ^ 'lcfoairsResponseStatus'
     -> CloudFrontOriginAccessIdentityList -- ^ 'lcfoairsCloudFrontOriginAccessIdentityList'
     -> ListCloudFrontOriginAccessIdentitiesResponse
-listCloudFrontOriginAccessIdentitiesResponse pResponseStatus_ pCloudFrontOriginAccessIdentityList_ =
-  ListCloudFrontOriginAccessIdentitiesResponse'
-    { _lcfoairsResponseStatus = pResponseStatus_
-    , _lcfoairsCloudFrontOriginAccessIdentityList =
-        pCloudFrontOriginAccessIdentityList_
-    }
-
+listCloudFrontOriginAccessIdentitiesResponse
+  pResponseStatus_ pCloudFrontOriginAccessIdentityList_
+  = ListCloudFrontOriginAccessIdentitiesResponse'{_lcfoairsResponseStatus
+                                                    = pResponseStatus_,
+                                                  _lcfoairsCloudFrontOriginAccessIdentityList
+                                                    =
+                                                    pCloudFrontOriginAccessIdentityList_}
 
 -- | -- | The response status code.
 lcfoairsResponseStatus :: Lens' ListCloudFrontOriginAccessIdentitiesResponse Int
 lcfoairsResponseStatus = lens _lcfoairsResponseStatus (\ s a -> s{_lcfoairsResponseStatus = a})
 
--- | The @CloudFrontOriginAccessIdentityList@ type.
+-- | The @CloudFrontOriginAccessIdentityList@ type. 
 lcfoairsCloudFrontOriginAccessIdentityList :: Lens' ListCloudFrontOriginAccessIdentitiesResponse CloudFrontOriginAccessIdentityList
 lcfoairsCloudFrontOriginAccessIdentityList = lens _lcfoairsCloudFrontOriginAccessIdentityList (\ s a -> s{_lcfoairsCloudFrontOriginAccessIdentityList = a})
 

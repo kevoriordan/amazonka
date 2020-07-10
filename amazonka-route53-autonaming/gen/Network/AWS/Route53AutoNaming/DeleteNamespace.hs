@@ -45,10 +45,9 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'deleteNamespace' smart constructor.
-newtype DeleteNamespace = DeleteNamespace'
-  { _dnId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteNamespace = DeleteNamespace'{_dnId ::
+                                           Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteNamespace' with the minimum fields required to make a request.
 --
@@ -58,8 +57,7 @@ newtype DeleteNamespace = DeleteNamespace'
 deleteNamespace
     :: Text -- ^ 'dnId'
     -> DeleteNamespace
-deleteNamespace pId_ = DeleteNamespace' {_dnId = pId_}
-
+deleteNamespace pId_ = DeleteNamespace'{_dnId = pId_}
 
 -- | The ID of the namespace that you want to delete.
 dnId :: Lens' DeleteNamespace Text
@@ -99,28 +97,29 @@ instance ToQuery DeleteNamespace where
         toQuery = const mempty
 
 -- | /See:/ 'deleteNamespaceResponse' smart constructor.
-data DeleteNamespaceResponse = DeleteNamespaceResponse'
-  { _dnrsOperationId    :: !(Maybe Text)
-  , _dnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNamespaceResponse = DeleteNamespaceResponse'{_dnrsOperationId
+                                                        :: !(Maybe Text),
+                                                        _dnrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteNamespaceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dnrsOperationId' - A value that you can use to determine whether the request completed successfully. To get the status of the operation, see 'GetOperation' .
+-- * 'dnrsOperationId' - A value that you can use to determine whether the request completed successfully. To get the status of the operation, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
 --
 -- * 'dnrsResponseStatus' - -- | The response status code.
 deleteNamespaceResponse
     :: Int -- ^ 'dnrsResponseStatus'
     -> DeleteNamespaceResponse
-deleteNamespaceResponse pResponseStatus_ =
-  DeleteNamespaceResponse'
-    {_dnrsOperationId = Nothing, _dnrsResponseStatus = pResponseStatus_}
+deleteNamespaceResponse pResponseStatus_
+  = DeleteNamespaceResponse'{_dnrsOperationId =
+                               Nothing,
+                             _dnrsResponseStatus = pResponseStatus_}
 
-
--- | A value that you can use to determine whether the request completed successfully. To get the status of the operation, see 'GetOperation' .
+-- | A value that you can use to determine whether the request completed successfully. To get the status of the operation, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
 dnrsOperationId :: Lens' DeleteNamespaceResponse (Maybe Text)
 dnrsOperationId = lens _dnrsOperationId (\ s a -> s{_dnrsOperationId = a})
 

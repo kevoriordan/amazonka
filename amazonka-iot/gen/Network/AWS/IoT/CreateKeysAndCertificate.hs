@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.
+-- Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call @CreateKeysAndCertificate@ over MQTT from a device, for more information, see <https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api Provisioning MQTT API> .
 --
 --
 -- __Note__ This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
@@ -54,10 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createKeysAndCertificate' smart constructor.
-newtype CreateKeysAndCertificate = CreateKeysAndCertificate'
-  { _ckacSetAsActive :: Maybe Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateKeysAndCertificate = CreateKeysAndCertificate'{_ckacSetAsActive
+                                                             :: Maybe Bool}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateKeysAndCertificate' with the minimum fields required to make a request.
 --
@@ -66,9 +66,9 @@ newtype CreateKeysAndCertificate = CreateKeysAndCertificate'
 -- * 'ckacSetAsActive' - Specifies whether the certificate is active.
 createKeysAndCertificate
     :: CreateKeysAndCertificate
-createKeysAndCertificate =
-  CreateKeysAndCertificate' {_ckacSetAsActive = Nothing}
-
+createKeysAndCertificate
+  = CreateKeysAndCertificate'{_ckacSetAsActive =
+                                Nothing}
 
 -- | Specifies whether the certificate is active.
 ckacSetAsActive :: Lens' CreateKeysAndCertificate (Maybe Bool)
@@ -109,14 +109,27 @@ instance ToQuery CreateKeysAndCertificate where
 --
 --
 -- /See:/ 'createKeysAndCertificateResponse' smart constructor.
-data CreateKeysAndCertificateResponse = CreateKeysAndCertificateResponse'
-  { _ckacrsKeyPair        :: !(Maybe KeyPair)
-  , _ckacrsCertificatePem :: !(Maybe Text)
-  , _ckacrsCertificateARN :: !(Maybe Text)
-  , _ckacrsCertificateId  :: !(Maybe Text)
-  , _ckacrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateKeysAndCertificateResponse = CreateKeysAndCertificateResponse'{_ckacrsKeyPair
+                                                                          ::
+                                                                          !(Maybe
+                                                                              KeyPair),
+                                                                          _ckacrsCertificatePem
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ckacrsCertificateARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ckacrsCertificateId
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ckacrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Show, Data, Typeable,
+                                                    Generic)
 
 -- | Creates a value of 'CreateKeysAndCertificateResponse' with the minimum fields required to make a request.
 --
@@ -134,15 +147,13 @@ data CreateKeysAndCertificateResponse = CreateKeysAndCertificateResponse'
 createKeysAndCertificateResponse
     :: Int -- ^ 'ckacrsResponseStatus'
     -> CreateKeysAndCertificateResponse
-createKeysAndCertificateResponse pResponseStatus_ =
-  CreateKeysAndCertificateResponse'
-    { _ckacrsKeyPair = Nothing
-    , _ckacrsCertificatePem = Nothing
-    , _ckacrsCertificateARN = Nothing
-    , _ckacrsCertificateId = Nothing
-    , _ckacrsResponseStatus = pResponseStatus_
-    }
-
+createKeysAndCertificateResponse pResponseStatus_
+  = CreateKeysAndCertificateResponse'{_ckacrsKeyPair =
+                                        Nothing,
+                                      _ckacrsCertificatePem = Nothing,
+                                      _ckacrsCertificateARN = Nothing,
+                                      _ckacrsCertificateId = Nothing,
+                                      _ckacrsResponseStatus = pResponseStatus_}
 
 -- | The generated key pair.
 ckacrsKeyPair :: Lens' CreateKeysAndCertificateResponse (Maybe KeyPair)

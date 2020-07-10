@@ -52,11 +52,12 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'retrieveTapeRecoveryPoint' smart constructor.
-data RetrieveTapeRecoveryPoint = RetrieveTapeRecoveryPoint'
-  { _rtrpTapeARN    :: !Text
-  , _rtrpGatewayARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetrieveTapeRecoveryPoint = RetrieveTapeRecoveryPoint'{_rtrpTapeARN
+                                                            :: !Text,
+                                                            _rtrpGatewayARN ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'RetrieveTapeRecoveryPoint' with the minimum fields required to make a request.
 --
@@ -69,10 +70,10 @@ retrieveTapeRecoveryPoint
     :: Text -- ^ 'rtrpTapeARN'
     -> Text -- ^ 'rtrpGatewayARN'
     -> RetrieveTapeRecoveryPoint
-retrieveTapeRecoveryPoint pTapeARN_ pGatewayARN_ =
-  RetrieveTapeRecoveryPoint'
-    {_rtrpTapeARN = pTapeARN_, _rtrpGatewayARN = pGatewayARN_}
-
+retrieveTapeRecoveryPoint pTapeARN_ pGatewayARN_
+  = RetrieveTapeRecoveryPoint'{_rtrpTapeARN =
+                                 pTapeARN_,
+                               _rtrpGatewayARN = pGatewayARN_}
 
 -- | The Amazon Resource Name (ARN) of the virtual tape for which you want to retrieve the recovery point.
 rtrpTapeARN :: Lens' RetrieveTapeRecoveryPoint Text
@@ -124,11 +125,15 @@ instance ToQuery RetrieveTapeRecoveryPoint where
 --
 --
 -- /See:/ 'retrieveTapeRecoveryPointResponse' smart constructor.
-data RetrieveTapeRecoveryPointResponse = RetrieveTapeRecoveryPointResponse'
-  { _rtrprsTapeARN        :: !(Maybe Text)
-  , _rtrprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetrieveTapeRecoveryPointResponse = RetrieveTapeRecoveryPointResponse'{_rtrprsTapeARN
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _rtrprsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RetrieveTapeRecoveryPointResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +145,10 @@ data RetrieveTapeRecoveryPointResponse = RetrieveTapeRecoveryPointResponse'
 retrieveTapeRecoveryPointResponse
     :: Int -- ^ 'rtrprsResponseStatus'
     -> RetrieveTapeRecoveryPointResponse
-retrieveTapeRecoveryPointResponse pResponseStatus_ =
-  RetrieveTapeRecoveryPointResponse'
-    {_rtrprsTapeARN = Nothing, _rtrprsResponseStatus = pResponseStatus_}
-
+retrieveTapeRecoveryPointResponse pResponseStatus_
+  = RetrieveTapeRecoveryPointResponse'{_rtrprsTapeARN =
+                                         Nothing,
+                                       _rtrprsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the virtual tape for which the recovery point was retrieved.
 rtrprsTapeARN :: Lens' RetrieveTapeRecoveryPointResponse (Maybe Text)

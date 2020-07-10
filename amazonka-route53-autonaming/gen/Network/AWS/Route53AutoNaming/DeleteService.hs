@@ -44,10 +44,8 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'deleteService' smart constructor.
-newtype DeleteService = DeleteService'
-  { _dsId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteService = DeleteService'{_dsId :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteService' with the minimum fields required to make a request.
 --
@@ -57,8 +55,7 @@ newtype DeleteService = DeleteService'
 deleteService
     :: Text -- ^ 'dsId'
     -> DeleteService
-deleteService pId_ = DeleteService' {_dsId = pId_}
-
+deleteService pId_ = DeleteService'{_dsId = pId_}
 
 -- | The ID of the service that you want to delete.
 dsId :: Lens' DeleteService Text
@@ -97,10 +94,10 @@ instance ToQuery DeleteService where
         toQuery = const mempty
 
 -- | /See:/ 'deleteServiceResponse' smart constructor.
-newtype DeleteServiceResponse = DeleteServiceResponse'
-  { _dsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteServiceResponse = DeleteServiceResponse'{_dsrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteServiceResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +107,9 @@ newtype DeleteServiceResponse = DeleteServiceResponse'
 deleteServiceResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DeleteServiceResponse
-deleteServiceResponse pResponseStatus_ =
-  DeleteServiceResponse' {_dsrsResponseStatus = pResponseStatus_}
-
+deleteServiceResponse pResponseStatus_
+  = DeleteServiceResponse'{_dsrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 dsrsResponseStatus :: Lens' DeleteServiceResponse Int

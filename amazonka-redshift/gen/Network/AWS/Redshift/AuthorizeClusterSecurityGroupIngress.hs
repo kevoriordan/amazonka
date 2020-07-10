@@ -21,11 +21,11 @@
 -- Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.
 --
 --
--- If you authorize access to an Amazon EC2 security group, specify /EC2SecurityGroupName/ and /EC2SecurityGroupOwnerId/ . The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS region.
+-- If you authorize access to an Amazon EC2 security group, specify /EC2SecurityGroupName/ and /EC2SecurityGroupOwnerId/ . The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region. 
 --
--- If you authorize access to a CIDR/IP address range, specify /CIDRIP/ . For an overview of CIDR blocks, see the Wikipedia article on <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing Classless Inter-Domain Routing> .
+-- If you authorize access to a CIDR/IP address range, specify /CIDRIP/ . For an overview of CIDR blocks, see the Wikipedia article on <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing Classless Inter-Domain Routing> . 
 --
--- You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html Working with Security Groups> in the /Amazon Redshift Cluster Management Guide/ .
+-- You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html Working with Security Groups> in the /Amazon Redshift Cluster Management Guide/ .
 --
 module Network.AWS.Redshift.AuthorizeClusterSecurityGroupIngress
     (
@@ -53,24 +53,34 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'authorizeClusterSecurityGroupIngress' smart constructor.
-data AuthorizeClusterSecurityGroupIngress = AuthorizeClusterSecurityGroupIngress'
-  { _acsgiEC2SecurityGroupOwnerId  :: !(Maybe Text)
-  , _acsgiEC2SecurityGroupName     :: !(Maybe Text)
-  , _acsgiCIdRIP                   :: !(Maybe Text)
-  , _acsgiClusterSecurityGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AuthorizeClusterSecurityGroupIngress = AuthorizeClusterSecurityGroupIngress'{_acsgiEC2SecurityGroupOwnerId
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _acsgiEC2SecurityGroupName
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _acsgiCIdRIP
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _acsgiClusterSecurityGroupName
+                                                                                  ::
+                                                                                  !Text}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'AuthorizeClusterSecurityGroupIngress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acsgiEC2SecurityGroupOwnerId' - The AWS account number of the owner of the security group specified by the /EC2SecurityGroupName/ parameter. The AWS Access Key ID is not an acceptable value.  Example: @111122223333@
+-- * 'acsgiEC2SecurityGroupOwnerId' - The AWS account number of the owner of the security group specified by the /EC2SecurityGroupName/ parameter. The AWS Access Key ID is not an acceptable value.  Example: @111122223333@ 
 --
 -- * 'acsgiEC2SecurityGroupName' - The EC2 security group to be added the Amazon Redshift security group.
 --
@@ -80,16 +90,16 @@ data AuthorizeClusterSecurityGroupIngress = AuthorizeClusterSecurityGroupIngress
 authorizeClusterSecurityGroupIngress
     :: Text -- ^ 'acsgiClusterSecurityGroupName'
     -> AuthorizeClusterSecurityGroupIngress
-authorizeClusterSecurityGroupIngress pClusterSecurityGroupName_ =
-  AuthorizeClusterSecurityGroupIngress'
-    { _acsgiEC2SecurityGroupOwnerId = Nothing
-    , _acsgiEC2SecurityGroupName = Nothing
-    , _acsgiCIdRIP = Nothing
-    , _acsgiClusterSecurityGroupName = pClusterSecurityGroupName_
-    }
+authorizeClusterSecurityGroupIngress
+  pClusterSecurityGroupName_
+  = AuthorizeClusterSecurityGroupIngress'{_acsgiEC2SecurityGroupOwnerId
+                                            = Nothing,
+                                          _acsgiEC2SecurityGroupName = Nothing,
+                                          _acsgiCIdRIP = Nothing,
+                                          _acsgiClusterSecurityGroupName =
+                                            pClusterSecurityGroupName_}
 
-
--- | The AWS account number of the owner of the security group specified by the /EC2SecurityGroupName/ parameter. The AWS Access Key ID is not an acceptable value.  Example: @111122223333@
+-- | The AWS account number of the owner of the security group specified by the /EC2SecurityGroupName/ parameter. The AWS Access Key ID is not an acceptable value.  Example: @111122223333@ 
 acsgiEC2SecurityGroupOwnerId :: Lens' AuthorizeClusterSecurityGroupIngress (Maybe Text)
 acsgiEC2SecurityGroupOwnerId = lens _acsgiEC2SecurityGroupOwnerId (\ s a -> s{_acsgiEC2SecurityGroupOwnerId = a})
 
@@ -151,11 +161,16 @@ instance ToQuery AuthorizeClusterSecurityGroupIngress
                  _acsgiClusterSecurityGroupName]
 
 -- | /See:/ 'authorizeClusterSecurityGroupIngressResponse' smart constructor.
-data AuthorizeClusterSecurityGroupIngressResponse = AuthorizeClusterSecurityGroupIngressResponse'
-  { _acsgirsClusterSecurityGroup :: !(Maybe ClusterSecurityGroup)
-  , _acsgirsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AuthorizeClusterSecurityGroupIngressResponse = AuthorizeClusterSecurityGroupIngressResponse'{_acsgirsClusterSecurityGroup
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      ClusterSecurityGroup),
+                                                                                                  _acsgirsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'AuthorizeClusterSecurityGroupIngressResponse' with the minimum fields required to make a request.
 --
@@ -167,12 +182,12 @@ data AuthorizeClusterSecurityGroupIngressResponse = AuthorizeClusterSecurityGrou
 authorizeClusterSecurityGroupIngressResponse
     :: Int -- ^ 'acsgirsResponseStatus'
     -> AuthorizeClusterSecurityGroupIngressResponse
-authorizeClusterSecurityGroupIngressResponse pResponseStatus_ =
-  AuthorizeClusterSecurityGroupIngressResponse'
-    { _acsgirsClusterSecurityGroup = Nothing
-    , _acsgirsResponseStatus = pResponseStatus_
-    }
-
+authorizeClusterSecurityGroupIngressResponse
+  pResponseStatus_
+  = AuthorizeClusterSecurityGroupIngressResponse'{_acsgirsClusterSecurityGroup
+                                                    = Nothing,
+                                                  _acsgirsResponseStatus =
+                                                    pResponseStatus_}
 
 -- | Undocumented member.
 acsgirsClusterSecurityGroup :: Lens' AuthorizeClusterSecurityGroupIngressResponse (Maybe ClusterSecurityGroup)

@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- AWS Greengrass seamlessly extends AWS onto physical devices so they can act locally on the data they generate, while still using the cloud for management, analytics, and durable storage. AWS Greengrass ensures your devices can respond quickly to local events and operate with intermittent connectivity. AWS Greengrass minimizes the cost of transmitting data to the cloud by allowing you to author AWS Lambda functions that execute locally.
+-- AWS IoT Greengrass seamlessly extends AWS onto physical devices so they can act locally on the data they generate, while still using the cloud for management, analytics, and durable storage. AWS IoT Greengrass ensures your devices can respond quickly to local events and operate with intermittent connectivity. AWS IoT Greengrass minimizes the cost of transmitting data to the cloud by allowing you to author AWS Lambda functions that execute locally.
 module Network.AWS.Greengrass
     (
     -- * Service Configuration
@@ -32,235 +32,289 @@ module Network.AWS.Greengrass
     -- * Operations
     -- $operations
 
-    -- ** GetGroupCertificateConfiguration
+    -- ** GetGroupCertificateConfiguration 
     , module Network.AWS.Greengrass.GetGroupCertificateConfiguration
 
-    -- ** ListGroupVersions
+    -- ** ListGroupVersions (Paginated)
     , module Network.AWS.Greengrass.ListGroupVersions
 
-    -- ** ListFunctionDefinitionVersions
+    -- ** ListFunctionDefinitionVersions (Paginated)
     , module Network.AWS.Greengrass.ListFunctionDefinitionVersions
 
-    -- ** ListDeviceDefinitions
+    -- ** ListDeviceDefinitions (Paginated)
     , module Network.AWS.Greengrass.ListDeviceDefinitions
 
-    -- ** AssociateRoleToGroup
+    -- ** AssociateRoleToGroup 
     , module Network.AWS.Greengrass.AssociateRoleToGroup
 
-    -- ** UpdateCoreDefinition
+    -- ** UpdateCoreDefinition 
     , module Network.AWS.Greengrass.UpdateCoreDefinition
 
-    -- ** DeleteCoreDefinition
+    -- ** DeleteCoreDefinition 
     , module Network.AWS.Greengrass.DeleteCoreDefinition
 
-    -- ** GetLoggerDefinition
+    -- ** GetLoggerDefinition 
     , module Network.AWS.Greengrass.GetLoggerDefinition
 
-    -- ** ListGroupCertificateAuthorities
+    -- ** ListGroupCertificateAuthorities 
     , module Network.AWS.Greengrass.ListGroupCertificateAuthorities
 
-    -- ** DisassociateRoleFromGroup
+    -- ** DisassociateRoleFromGroup 
     , module Network.AWS.Greengrass.DisassociateRoleFromGroup
 
-    -- ** UpdateSubscriptionDefinition
+    -- ** UpdateSubscriptionDefinition 
     , module Network.AWS.Greengrass.UpdateSubscriptionDefinition
 
-    -- ** DeleteSubscriptionDefinition
+    -- ** DeleteSubscriptionDefinition 
     , module Network.AWS.Greengrass.DeleteSubscriptionDefinition
 
-    -- ** ListCoreDefinitions
+    -- ** ListCoreDefinitions (Paginated)
     , module Network.AWS.Greengrass.ListCoreDefinitions
 
-    -- ** ListSubscriptionDefinitions
+    -- ** ListSubscriptionDefinitions (Paginated)
     , module Network.AWS.Greengrass.ListSubscriptionDefinitions
 
-    -- ** CreateGroupCertificateAuthority
+    -- ** CreateGroupCertificateAuthority 
     , module Network.AWS.Greengrass.CreateGroupCertificateAuthority
 
-    -- ** CreateLoggerDefinitionVersion
+    -- ** DeleteConnectorDefinition 
+    , module Network.AWS.Greengrass.DeleteConnectorDefinition
+
+    -- ** UpdateConnectorDefinition 
+    , module Network.AWS.Greengrass.UpdateConnectorDefinition
+
+    -- ** CreateLoggerDefinitionVersion 
     , module Network.AWS.Greengrass.CreateLoggerDefinitionVersion
 
-    -- ** CreateCoreDefinition
+    -- ** CreateCoreDefinition 
     , module Network.AWS.Greengrass.CreateCoreDefinition
 
-    -- ** UpdateConnectivityInfo
+    -- ** GetConnectorDefinitionVersion 
+    , module Network.AWS.Greengrass.GetConnectorDefinitionVersion
+
+    -- ** UpdateConnectivityInfo 
     , module Network.AWS.Greengrass.UpdateConnectivityInfo
 
-    -- ** CreateSubscriptionDefinition
+    -- ** CreateSubscriptionDefinition 
     , module Network.AWS.Greengrass.CreateSubscriptionDefinition
 
-    -- ** GetGroupCertificateAuthority
+    -- ** ListTagsForResource 
+    , module Network.AWS.Greengrass.ListTagsForResource
+
+    -- ** GetGroupCertificateAuthority 
     , module Network.AWS.Greengrass.GetGroupCertificateAuthority
 
-    -- ** GetLoggerDefinitionVersion
+    -- ** GetLoggerDefinitionVersion 
     , module Network.AWS.Greengrass.GetLoggerDefinitionVersion
 
-    -- ** GetServiceRoleForAccount
+    -- ** GetServiceRoleForAccount 
     , module Network.AWS.Greengrass.GetServiceRoleForAccount
 
-    -- ** CreateSoftwareUpdateJob
+    -- ** ListConnectorDefinitionVersions (Paginated)
+    , module Network.AWS.Greengrass.ListConnectorDefinitionVersions
+
+    -- ** CreateSoftwareUpdateJob 
     , module Network.AWS.Greengrass.CreateSoftwareUpdateJob
 
-    -- ** CreateLoggerDefinition
+    -- ** CreateLoggerDefinition 
     , module Network.AWS.Greengrass.CreateLoggerDefinition
 
-    -- ** GetConnectivityInfo
+    -- ** GetConnectivityInfo 
     , module Network.AWS.Greengrass.GetConnectivityInfo
 
-    -- ** CreateDeployment
+    -- ** CreateDeployment 
     , module Network.AWS.Greengrass.CreateDeployment
 
-    -- ** DeleteLoggerDefinition
+    -- ** DeleteLoggerDefinition 
     , module Network.AWS.Greengrass.DeleteLoggerDefinition
 
-    -- ** UpdateLoggerDefinition
+    -- ** UpdateLoggerDefinition 
     , module Network.AWS.Greengrass.UpdateLoggerDefinition
 
-    -- ** GetSubscriptionDefinition
+    -- ** GetSubscriptionDefinition 
     , module Network.AWS.Greengrass.GetSubscriptionDefinition
 
-    -- ** GetCoreDefinition
+    -- ** GetCoreDefinition 
     , module Network.AWS.Greengrass.GetCoreDefinition
 
-    -- ** GetDeploymentStatus
+    -- ** CreateConnectorDefinitionVersion 
+    , module Network.AWS.Greengrass.CreateConnectorDefinitionVersion
+
+    -- ** GetDeploymentStatus 
     , module Network.AWS.Greengrass.GetDeploymentStatus
 
-    -- ** CreateResourceDefinition
+    -- ** GetBulkDeploymentStatus 
+    , module Network.AWS.Greengrass.GetBulkDeploymentStatus
+
+    -- ** CreateResourceDefinition 
     , module Network.AWS.Greengrass.CreateResourceDefinition
 
-    -- ** GetResourceDefinitionVersion
+    -- ** GetResourceDefinitionVersion 
     , module Network.AWS.Greengrass.GetResourceDefinitionVersion
 
-    -- ** UpdateFunctionDefinition
+    -- ** UpdateFunctionDefinition 
     , module Network.AWS.Greengrass.UpdateFunctionDefinition
 
-    -- ** DeleteFunctionDefinition
+    -- ** DeleteFunctionDefinition 
     , module Network.AWS.Greengrass.DeleteFunctionDefinition
 
-    -- ** ListResourceDefinitions
+    -- ** ListResourceDefinitions (Paginated)
     , module Network.AWS.Greengrass.ListResourceDefinitions
 
-    -- ** CreateResourceDefinitionVersion
+    -- ** StopBulkDeployment 
+    , module Network.AWS.Greengrass.StopBulkDeployment
+
+    -- ** CreateResourceDefinitionVersion 
     , module Network.AWS.Greengrass.CreateResourceDefinitionVersion
 
-    -- ** GetResourceDefinition
+    -- ** GetResourceDefinition 
     , module Network.AWS.Greengrass.GetResourceDefinition
 
-    -- ** ListResourceDefinitionVersions
+    -- ** ListResourceDefinitionVersions (Paginated)
     , module Network.AWS.Greengrass.ListResourceDefinitionVersions
 
-    -- ** DisassociateServiceRoleFromAccount
+    -- ** DisassociateServiceRoleFromAccount 
     , module Network.AWS.Greengrass.DisassociateServiceRoleFromAccount
 
-    -- ** DeleteDeviceDefinition
+    -- ** DeleteDeviceDefinition 
     , module Network.AWS.Greengrass.DeleteDeviceDefinition
 
-    -- ** UpdateDeviceDefinition
+    -- ** UpdateDeviceDefinition 
     , module Network.AWS.Greengrass.UpdateDeviceDefinition
 
-    -- ** AssociateServiceRoleToAccount
+    -- ** AssociateServiceRoleToAccount 
     , module Network.AWS.Greengrass.AssociateServiceRoleToAccount
 
-    -- ** ResetDeployments
+    -- ** ResetDeployments 
     , module Network.AWS.Greengrass.ResetDeployments
 
-    -- ** GetSubscriptionDefinitionVersion
+    -- ** ListConnectorDefinitions (Paginated)
+    , module Network.AWS.Greengrass.ListConnectorDefinitions
+
+    -- ** GetSubscriptionDefinitionVersion 
     , module Network.AWS.Greengrass.GetSubscriptionDefinitionVersion
 
-    -- ** GetAssociatedRole
+    -- ** GetAssociatedRole 
     , module Network.AWS.Greengrass.GetAssociatedRole
 
-    -- ** ListLoggerDefinitionVersions
+    -- ** ListLoggerDefinitionVersions (Paginated)
     , module Network.AWS.Greengrass.ListLoggerDefinitionVersions
 
-    -- ** GetCoreDefinitionVersion
+    -- ** CreateConnectorDefinition 
+    , module Network.AWS.Greengrass.CreateConnectorDefinition
+
+    -- ** GetCoreDefinitionVersion 
     , module Network.AWS.Greengrass.GetCoreDefinitionVersion
 
-    -- ** ListSubscriptionDefinitionVersions
+    -- ** ListSubscriptionDefinitionVersions (Paginated)
     , module Network.AWS.Greengrass.ListSubscriptionDefinitionVersions
 
-    -- ** ListCoreDefinitionVersions
+    -- ** ListCoreDefinitionVersions (Paginated)
     , module Network.AWS.Greengrass.ListCoreDefinitionVersions
 
-    -- ** CreateCoreDefinitionVersion
+    -- ** CreateCoreDefinitionVersion 
     , module Network.AWS.Greengrass.CreateCoreDefinitionVersion
 
-    -- ** ListDeployments
+    -- ** ListBulkDeployments (Paginated)
+    , module Network.AWS.Greengrass.ListBulkDeployments
+
+    -- ** ListDeployments (Paginated)
     , module Network.AWS.Greengrass.ListDeployments
 
-    -- ** ListLoggerDefinitions
+    -- ** GetConnectorDefinition 
+    , module Network.AWS.Greengrass.GetConnectorDefinition
+
+    -- ** ListLoggerDefinitions (Paginated)
     , module Network.AWS.Greengrass.ListLoggerDefinitions
 
-    -- ** CreateSubscriptionDefinitionVersion
+    -- ** TagResource 
+    , module Network.AWS.Greengrass.TagResource
+
+    -- ** CreateSubscriptionDefinitionVersion 
     , module Network.AWS.Greengrass.CreateSubscriptionDefinitionVersion
 
-    -- ** GetGroupVersion
+    -- ** GetGroupVersion 
     , module Network.AWS.Greengrass.GetGroupVersion
 
-    -- ** UpdateGroupCertificateConfiguration
+    -- ** UpdateGroupCertificateConfiguration 
     , module Network.AWS.Greengrass.UpdateGroupCertificateConfiguration
 
-    -- ** GetFunctionDefinitionVersion
+    -- ** GetFunctionDefinitionVersion 
     , module Network.AWS.Greengrass.GetFunctionDefinitionVersion
 
-    -- ** GetDeviceDefinition
+    -- ** GetDeviceDefinition 
     , module Network.AWS.Greengrass.GetDeviceDefinition
 
-    -- ** CreateGroup
+    -- ** CreateGroup 
     , module Network.AWS.Greengrass.CreateGroup
 
-    -- ** CreateFunctionDefinition
+    -- ** CreateFunctionDefinition 
     , module Network.AWS.Greengrass.CreateFunctionDefinition
 
-    -- ** CreateDeviceDefinitionVersion
+    -- ** UntagResource 
+    , module Network.AWS.Greengrass.UntagResource
+
+    -- ** CreateDeviceDefinitionVersion 
     , module Network.AWS.Greengrass.CreateDeviceDefinitionVersion
 
-    -- ** DeleteGroup
+    -- ** DeleteGroup 
     , module Network.AWS.Greengrass.DeleteGroup
 
-    -- ** UpdateGroup
+    -- ** UpdateGroup 
     , module Network.AWS.Greengrass.UpdateGroup
 
-    -- ** ListGroups
+    -- ** ListGroups (Paginated)
     , module Network.AWS.Greengrass.ListGroups
 
-    -- ** DeleteResourceDefinition
+    -- ** ListBulkDeploymentDetailedReports (Paginated)
+    , module Network.AWS.Greengrass.ListBulkDeploymentDetailedReports
+
+    -- ** DeleteResourceDefinition 
     , module Network.AWS.Greengrass.DeleteResourceDefinition
 
-    -- ** UpdateResourceDefinition
+    -- ** UpdateResourceDefinition 
     , module Network.AWS.Greengrass.UpdateResourceDefinition
 
-    -- ** ListDeviceDefinitionVersions
+    -- ** ListDeviceDefinitionVersions (Paginated)
     , module Network.AWS.Greengrass.ListDeviceDefinitionVersions
 
-    -- ** ListFunctionDefinitions
+    -- ** ListFunctionDefinitions (Paginated)
     , module Network.AWS.Greengrass.ListFunctionDefinitions
 
-    -- ** GetFunctionDefinition
+    -- ** GetFunctionDefinition 
     , module Network.AWS.Greengrass.GetFunctionDefinition
 
-    -- ** GetGroup
+    -- ** GetGroup 
     , module Network.AWS.Greengrass.GetGroup
 
-    -- ** CreateDeviceDefinition
+    -- ** CreateDeviceDefinition 
     , module Network.AWS.Greengrass.CreateDeviceDefinition
 
-    -- ** CreateGroupVersion
+    -- ** CreateGroupVersion 
     , module Network.AWS.Greengrass.CreateGroupVersion
 
-    -- ** CreateFunctionDefinitionVersion
+    -- ** CreateFunctionDefinitionVersion 
     , module Network.AWS.Greengrass.CreateFunctionDefinitionVersion
 
-    -- ** GetDeviceDefinitionVersion
+    -- ** StartBulkDeployment 
+    , module Network.AWS.Greengrass.StartBulkDeployment
+
+    -- ** GetDeviceDefinitionVersion 
     , module Network.AWS.Greengrass.GetDeviceDefinitionVersion
 
     -- * Types
+
+    -- ** BulkDeploymentStatus
+    , BulkDeploymentStatus (..)
 
     -- ** DeploymentType
     , DeploymentType (..)
 
     -- ** EncodingType
     , EncodingType (..)
+
+    -- ** FunctionIsolationMode
+    , FunctionIsolationMode (..)
 
     -- ** LoggerComponent
     , LoggerComponent (..)
@@ -286,6 +340,32 @@ module Network.AWS.Greengrass
     -- ** UpdateTargetsOperatingSystem
     , UpdateTargetsOperatingSystem (..)
 
+    -- ** BulkDeployment
+    , BulkDeployment
+    , bulkDeployment
+    , bdBulkDeploymentARN
+    , bdBulkDeploymentId
+    , bdCreatedAt
+
+    -- ** BulkDeploymentMetrics
+    , BulkDeploymentMetrics
+    , bulkDeploymentMetrics
+    , bdmRecordsProcessed
+    , bdmRetryAttempts
+    , bdmInvalidInputRecords
+
+    -- ** BulkDeploymentResult
+    , BulkDeploymentResult
+    , bulkDeploymentResult
+    , bdrDeploymentId
+    , bdrDeploymentARN
+    , bdrCreatedAt
+    , bdrDeploymentType
+    , bdrErrorDetails
+    , bdrGroupARN
+    , bdrDeploymentStatus
+    , bdrErrorMessage
+
     -- ** ConnectivityInfo
     , ConnectivityInfo
     , connectivityInfo
@@ -294,13 +374,25 @@ module Network.AWS.Greengrass
     , ciMetadata
     , ciHostAddress
 
+    -- ** Connector
+    , Connector
+    , connector
+    , conParameters
+    , conConnectorARN
+    , conId
+
+    -- ** ConnectorDefinitionVersion
+    , ConnectorDefinitionVersion
+    , connectorDefinitionVersion
+    , cdvConnectors
+
     -- ** Core
     , Core
     , core
-    , cCertificateARN
-    , cThingARN
     , cSyncShadow
+    , cThingARN
     , cId
+    , cCertificateARN
 
     -- ** CoreDefinitionVersion
     , CoreDefinitionVersion
@@ -315,6 +407,7 @@ module Network.AWS.Greengrass
     , diName
     , diCreationTimestamp
     , diId
+    , diTags
     , diLatestVersion
     , diLastUpdatedTimestamp
 
@@ -330,10 +423,10 @@ module Network.AWS.Greengrass
     -- ** Device
     , Device
     , device
-    , dCertificateARN
-    , dThingARN
     , dSyncShadow
+    , dThingARN
     , dId
+    , dCertificateARN
 
     -- ** DeviceDefinitionVersion
     , DeviceDefinitionVersion
@@ -368,22 +461,47 @@ module Network.AWS.Greengrass
     , FunctionConfigurationEnvironment
     , functionConfigurationEnvironment
     , fceVariables
+    , fceExecution
     , fceResourceAccessPolicies
     , fceAccessSysfs
+
+    -- ** FunctionDefaultConfig
+    , FunctionDefaultConfig
+    , functionDefaultConfig
+    , fdcExecution
+
+    -- ** FunctionDefaultExecutionConfig
+    , FunctionDefaultExecutionConfig
+    , functionDefaultExecutionConfig
+    , fdecRunAs
+    , fdecIsolationMode
 
     -- ** FunctionDefinitionVersion
     , FunctionDefinitionVersion
     , functionDefinitionVersion
+    , fdvDefaultConfig
     , fdvFunctions
+
+    -- ** FunctionExecutionConfig
+    , FunctionExecutionConfig
+    , functionExecutionConfig
+    , fecRunAs
+    , fecIsolationMode
+
+    -- ** FunctionRunAsConfig
+    , FunctionRunAsConfig
+    , functionRunAsConfig
+    , fracUid
+    , fracGid
 
     -- ** GreengrassLogger
     , GreengrassLogger
     , greengrassLogger
     , glSpace
-    , glComponent
-    , glId
     , glType
     , glLevel
+    , glId
+    , glComponent
 
     -- ** GroupCertificateAuthorityProperties
     , GroupCertificateAuthorityProperties
@@ -417,6 +535,7 @@ module Network.AWS.Greengrass
     , gvDeviceDefinitionVersionARN
     , gvFunctionDefinitionVersionARN
     , gvLoggerDefinitionVersionARN
+    , gvConnectorDefinitionVersionARN
 
     -- ** LocalDeviceResourceData
     , LocalDeviceResourceData
@@ -440,14 +559,14 @@ module Network.AWS.Greengrass
     , Resource
     , resource
     , rResourceDataContainer
-    , rName
     , rId
+    , rName
 
     -- ** ResourceAccessPolicy
     , ResourceAccessPolicy
     , resourceAccessPolicy
-    , rapResourceId
     , rapPermission
+    , rapResourceId
 
     -- ** ResourceDataContainer
     , ResourceDataContainer
@@ -456,31 +575,46 @@ module Network.AWS.Greengrass
     , rdcSageMakerMachineLearningModelResourceData
     , rdcLocalVolumeResourceData
     , rdcLocalDeviceResourceData
+    , rdcSecretsManagerSecretResourceData
 
     -- ** ResourceDefinitionVersion
     , ResourceDefinitionVersion
     , resourceDefinitionVersion
     , rdvResources
 
+    -- ** ResourceDownloadOwnerSetting
+    , ResourceDownloadOwnerSetting
+    , resourceDownloadOwnerSetting
+    , rdosGroupOwner
+    , rdosGroupPermission
+
     -- ** S3MachineLearningModelResourceData
     , S3MachineLearningModelResourceData
     , s3MachineLearningModelResourceData
+    , smlmrdOwnerSetting
     , smlmrdDestinationPath
     , smlmrdS3URI
 
     -- ** SageMakerMachineLearningModelResourceData
     , SageMakerMachineLearningModelResourceData
     , sageMakerMachineLearningModelResourceData
+    , smmlmrdOwnerSetting
     , smmlmrdSageMakerJobARN
     , smmlmrdDestinationPath
+
+    -- ** SecretsManagerSecretResourceData
+    , SecretsManagerSecretResourceData
+    , secretsManagerSecretResourceData
+    , smsrdAdditionalStagingLabelsToDownload
+    , smsrdARN
 
     -- ** Subscription
     , Subscription
     , subscription
+    , sTarget
+    , sId
     , sSubject
     , sSource
-    , sId
-    , sTarget
 
     -- ** SubscriptionDefinitionVersion
     , SubscriptionDefinitionVersion
@@ -498,6 +632,8 @@ module Network.AWS.Greengrass
 
 import Network.AWS.Greengrass.AssociateRoleToGroup
 import Network.AWS.Greengrass.AssociateServiceRoleToAccount
+import Network.AWS.Greengrass.CreateConnectorDefinition
+import Network.AWS.Greengrass.CreateConnectorDefinitionVersion
 import Network.AWS.Greengrass.CreateCoreDefinition
 import Network.AWS.Greengrass.CreateCoreDefinitionVersion
 import Network.AWS.Greengrass.CreateDeployment
@@ -515,6 +651,7 @@ import Network.AWS.Greengrass.CreateResourceDefinitionVersion
 import Network.AWS.Greengrass.CreateSoftwareUpdateJob
 import Network.AWS.Greengrass.CreateSubscriptionDefinition
 import Network.AWS.Greengrass.CreateSubscriptionDefinitionVersion
+import Network.AWS.Greengrass.DeleteConnectorDefinition
 import Network.AWS.Greengrass.DeleteCoreDefinition
 import Network.AWS.Greengrass.DeleteDeviceDefinition
 import Network.AWS.Greengrass.DeleteFunctionDefinition
@@ -525,7 +662,10 @@ import Network.AWS.Greengrass.DeleteSubscriptionDefinition
 import Network.AWS.Greengrass.DisassociateRoleFromGroup
 import Network.AWS.Greengrass.DisassociateServiceRoleFromAccount
 import Network.AWS.Greengrass.GetAssociatedRole
+import Network.AWS.Greengrass.GetBulkDeploymentStatus
 import Network.AWS.Greengrass.GetConnectivityInfo
+import Network.AWS.Greengrass.GetConnectorDefinition
+import Network.AWS.Greengrass.GetConnectorDefinitionVersion
 import Network.AWS.Greengrass.GetCoreDefinition
 import Network.AWS.Greengrass.GetCoreDefinitionVersion
 import Network.AWS.Greengrass.GetDeploymentStatus
@@ -544,25 +684,35 @@ import Network.AWS.Greengrass.GetResourceDefinitionVersion
 import Network.AWS.Greengrass.GetServiceRoleForAccount
 import Network.AWS.Greengrass.GetSubscriptionDefinition
 import Network.AWS.Greengrass.GetSubscriptionDefinitionVersion
-import Network.AWS.Greengrass.ListCoreDefinitions
+import Network.AWS.Greengrass.ListBulkDeploymentDetailedReports
+import Network.AWS.Greengrass.ListBulkDeployments
+import Network.AWS.Greengrass.ListConnectorDefinitionVersions
+import Network.AWS.Greengrass.ListConnectorDefinitions
 import Network.AWS.Greengrass.ListCoreDefinitionVersions
+import Network.AWS.Greengrass.ListCoreDefinitions
 import Network.AWS.Greengrass.ListDeployments
-import Network.AWS.Greengrass.ListDeviceDefinitions
 import Network.AWS.Greengrass.ListDeviceDefinitionVersions
-import Network.AWS.Greengrass.ListFunctionDefinitions
+import Network.AWS.Greengrass.ListDeviceDefinitions
 import Network.AWS.Greengrass.ListFunctionDefinitionVersions
+import Network.AWS.Greengrass.ListFunctionDefinitions
 import Network.AWS.Greengrass.ListGroupCertificateAuthorities
-import Network.AWS.Greengrass.ListGroups
 import Network.AWS.Greengrass.ListGroupVersions
-import Network.AWS.Greengrass.ListLoggerDefinitions
+import Network.AWS.Greengrass.ListGroups
 import Network.AWS.Greengrass.ListLoggerDefinitionVersions
-import Network.AWS.Greengrass.ListResourceDefinitions
+import Network.AWS.Greengrass.ListLoggerDefinitions
 import Network.AWS.Greengrass.ListResourceDefinitionVersions
-import Network.AWS.Greengrass.ListSubscriptionDefinitions
+import Network.AWS.Greengrass.ListResourceDefinitions
 import Network.AWS.Greengrass.ListSubscriptionDefinitionVersions
+import Network.AWS.Greengrass.ListSubscriptionDefinitions
+import Network.AWS.Greengrass.ListTagsForResource
 import Network.AWS.Greengrass.ResetDeployments
+import Network.AWS.Greengrass.StartBulkDeployment
+import Network.AWS.Greengrass.StopBulkDeployment
+import Network.AWS.Greengrass.TagResource
 import Network.AWS.Greengrass.Types
+import Network.AWS.Greengrass.UntagResource
 import Network.AWS.Greengrass.UpdateConnectivityInfo
+import Network.AWS.Greengrass.UpdateConnectorDefinition
 import Network.AWS.Greengrass.UpdateCoreDefinition
 import Network.AWS.Greengrass.UpdateDeviceDefinition
 import Network.AWS.Greengrass.UpdateFunctionDefinition

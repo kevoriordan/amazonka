@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes one or more of your export tasks.
+-- Describes the specified export instance tasks or all your export instance tasks.
 --
 --
 module Network.AWS.EC2.DescribeExportTasks
@@ -27,6 +27,7 @@ module Network.AWS.EC2.DescribeExportTasks
       describeExportTasks
     , DescribeExportTasks
     -- * Request Lenses
+    , detFilters
     , detExportTaskIds
 
     -- * Destructuring the Response
@@ -44,27 +45,31 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DescribeExportTasks.
---
---
---
--- /See:/ 'describeExportTasks' smart constructor.
-newtype DescribeExportTasks = DescribeExportTasks'
-  { _detExportTaskIds :: Maybe [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeExportTasks' smart constructor.
+data DescribeExportTasks = DescribeExportTasks'{_detFilters
+                                                :: !(Maybe [Filter]),
+                                                _detExportTaskIds ::
+                                                !(Maybe [Text])}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeExportTasks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'detExportTaskIds' - One or more export task IDs.
+-- * 'detFilters' - the filters for the export tasks.
+--
+-- * 'detExportTaskIds' - The export task IDs.
 describeExportTasks
     :: DescribeExportTasks
-describeExportTasks = DescribeExportTasks' {_detExportTaskIds = Nothing}
+describeExportTasks
+  = DescribeExportTasks'{_detFilters = Nothing,
+                         _detExportTaskIds = Nothing}
 
+-- | the filters for the export tasks.
+detFilters :: Lens' DescribeExportTasks [Filter]
+detFilters = lens _detFilters (\ s a -> s{_detFilters = a}) . _Default . _Coerce
 
--- | One or more export task IDs.
+-- | The export task IDs.
 detExportTaskIds :: Lens' DescribeExportTasks [Text]
 detExportTaskIds = lens _detExportTaskIds (\ s a -> s{_detExportTaskIds = a}) . _Default . _Coerce
 
@@ -95,19 +100,19 @@ instance ToQuery DescribeExportTasks where
           = mconcat
               ["Action" =: ("DescribeExportTasks" :: ByteString),
                "Version" =: ("2016-11-15" :: ByteString),
+               toQuery (toQueryList "Filter" <$> _detFilters),
                toQuery
                  (toQueryList "ExportTaskId" <$> _detExportTaskIds)]
 
--- | Contains the output for DescribeExportTasks.
---
---
---
--- /See:/ 'describeExportTasksResponse' smart constructor.
-data DescribeExportTasksResponse = DescribeExportTasksResponse'
-  { _detrsExportTasks    :: !(Maybe [ExportTask])
-  , _detrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeExportTasksResponse' smart constructor.
+data DescribeExportTasksResponse = DescribeExportTasksResponse'{_detrsExportTasks
+                                                                ::
+                                                                !(Maybe
+                                                                    [ExportTask]),
+                                                                _detrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeExportTasksResponse' with the minimum fields required to make a request.
 --
@@ -119,10 +124,10 @@ data DescribeExportTasksResponse = DescribeExportTasksResponse'
 describeExportTasksResponse
     :: Int -- ^ 'detrsResponseStatus'
     -> DescribeExportTasksResponse
-describeExportTasksResponse pResponseStatus_ =
-  DescribeExportTasksResponse'
-    {_detrsExportTasks = Nothing, _detrsResponseStatus = pResponseStatus_}
-
+describeExportTasksResponse pResponseStatus_
+  = DescribeExportTasksResponse'{_detrsExportTasks =
+                                   Nothing,
+                                 _detrsResponseStatus = pResponseStatus_}
 
 -- | Information about the export tasks.
 detrsExportTasks :: Lens' DescribeExportTasksResponse [ExportTask]

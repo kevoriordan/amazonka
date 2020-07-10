@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchDeleteBuilds' smart constructor.
-newtype BatchDeleteBuilds = BatchDeleteBuilds'
-  { _bdbIds :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype BatchDeleteBuilds = BatchDeleteBuilds'{_bdbIds
+                                               :: List1 Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchDeleteBuilds' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype BatchDeleteBuilds = BatchDeleteBuilds'
 batchDeleteBuilds
     :: NonEmpty Text -- ^ 'bdbIds'
     -> BatchDeleteBuilds
-batchDeleteBuilds pIds_ = BatchDeleteBuilds' {_bdbIds = _List1 # pIds_}
-
+batchDeleteBuilds pIds_
+  = BatchDeleteBuilds'{_bdbIds = _List1 # pIds_}
 
 -- | The IDs of the builds to delete.
 bdbIds :: Lens' BatchDeleteBuilds (NonEmpty Text)
@@ -102,12 +101,18 @@ instance ToQuery BatchDeleteBuilds where
         toQuery = const mempty
 
 -- | /See:/ 'batchDeleteBuildsResponse' smart constructor.
-data BatchDeleteBuildsResponse = BatchDeleteBuildsResponse'
-  { _bdbrsBuildsNotDeleted :: !(Maybe [BuildNotDeleted])
-  , _bdbrsBuildsDeleted    :: !(Maybe (List1 Text))
-  , _bdbrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeleteBuildsResponse = BatchDeleteBuildsResponse'{_bdbrsBuildsNotDeleted
+                                                            ::
+                                                            !(Maybe
+                                                                [BuildNotDeleted]),
+                                                            _bdbrsBuildsDeleted
+                                                            ::
+                                                            !(Maybe
+                                                                (List1 Text)),
+                                                            _bdbrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'BatchDeleteBuildsResponse' with the minimum fields required to make a request.
 --
@@ -121,13 +126,11 @@ data BatchDeleteBuildsResponse = BatchDeleteBuildsResponse'
 batchDeleteBuildsResponse
     :: Int -- ^ 'bdbrsResponseStatus'
     -> BatchDeleteBuildsResponse
-batchDeleteBuildsResponse pResponseStatus_ =
-  BatchDeleteBuildsResponse'
-    { _bdbrsBuildsNotDeleted = Nothing
-    , _bdbrsBuildsDeleted = Nothing
-    , _bdbrsResponseStatus = pResponseStatus_
-    }
-
+batchDeleteBuildsResponse pResponseStatus_
+  = BatchDeleteBuildsResponse'{_bdbrsBuildsNotDeleted =
+                                 Nothing,
+                               _bdbrsBuildsDeleted = Nothing,
+                               _bdbrsResponseStatus = pResponseStatus_}
 
 -- | Information about any builds that could not be successfully deleted.
 bdbrsBuildsNotDeleted :: Lens' BatchDeleteBuildsResponse [BuildNotDeleted]

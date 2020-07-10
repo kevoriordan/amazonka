@@ -28,6 +28,7 @@ module Network.AWS.IoTAnalytics.UpdateChannel
     , UpdateChannel
     -- * Request Lenses
     , ucRetentionPeriod
+    , ucChannelStorage
     , ucChannelName
 
     -- * Destructuring the Response
@@ -43,29 +44,37 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateChannel' smart constructor.
-data UpdateChannel = UpdateChannel'
-  { _ucRetentionPeriod :: !(Maybe RetentionPeriod)
-  , _ucChannelName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateChannel = UpdateChannel'{_ucRetentionPeriod
+                                    :: !(Maybe RetentionPeriod),
+                                    _ucChannelStorage ::
+                                    !(Maybe ChannelStorage),
+                                    _ucChannelName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ucRetentionPeriod' - How long, in days, message data is kept for the channel.
+-- * 'ucRetentionPeriod' - How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel's S3 storage is customer-managed.
+--
+-- * 'ucChannelStorage' - Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.
 --
 -- * 'ucChannelName' - The name of the channel to be updated.
 updateChannel
     :: Text -- ^ 'ucChannelName'
     -> UpdateChannel
-updateChannel pChannelName_ =
-  UpdateChannel' {_ucRetentionPeriod = Nothing, _ucChannelName = pChannelName_}
+updateChannel pChannelName_
+  = UpdateChannel'{_ucRetentionPeriod = Nothing,
+                   _ucChannelStorage = Nothing,
+                   _ucChannelName = pChannelName_}
 
-
--- | How long, in days, message data is kept for the channel.
+-- | How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel's S3 storage is customer-managed.
 ucRetentionPeriod :: Lens' UpdateChannel (Maybe RetentionPeriod)
 ucRetentionPeriod = lens _ucRetentionPeriod (\ s a -> s{_ucRetentionPeriod = a})
+
+-- | Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.
+ucChannelStorage :: Lens' UpdateChannel (Maybe ChannelStorage)
+ucChannelStorage = lens _ucChannelStorage (\ s a -> s{_ucChannelStorage = a})
 
 -- | The name of the channel to be updated.
 ucChannelName :: Lens' UpdateChannel Text
@@ -87,7 +96,8 @@ instance ToJSON UpdateChannel where
         toJSON UpdateChannel'{..}
           = object
               (catMaybes
-                 [("retentionPeriod" .=) <$> _ucRetentionPeriod])
+                 [("retentionPeriod" .=) <$> _ucRetentionPeriod,
+                  ("channelStorage" .=) <$> _ucChannelStorage])
 
 instance ToPath UpdateChannel where
         toPath UpdateChannel'{..}
@@ -97,16 +107,14 @@ instance ToQuery UpdateChannel where
         toQuery = const mempty
 
 -- | /See:/ 'updateChannelResponse' smart constructor.
-data UpdateChannelResponse =
-  UpdateChannelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateChannelResponse = UpdateChannelResponse'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateChannelResponse' with the minimum fields required to make a request.
 --
 updateChannelResponse
     :: UpdateChannelResponse
 updateChannelResponse = UpdateChannelResponse'
-
 
 instance NFData UpdateChannelResponse where

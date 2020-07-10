@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Use to create or update the event stream for an app.
+-- Creates a new event stream for an application or updates the settings of an existing event stream for an application.
+--
+--
 module Network.AWS.Pinpoint.PutEventStream
     (
     -- * Creating a Request
@@ -44,35 +46,32 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putEventStream' smart constructor.
-data PutEventStream = PutEventStream'
-  { _pesApplicationId    :: !Text
-  , _pesWriteEventStream :: !WriteEventStream
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutEventStream = PutEventStream'{_pesApplicationId
+                                      :: !Text,
+                                      _pesWriteEventStream :: !WriteEventStream}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutEventStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pesApplicationId' - ApplicationId
+-- * 'pesApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
--- * 'pesWriteEventStream' - EventStream to write.
+-- * 'pesWriteEventStream' - Undocumented member.
 putEventStream
     :: Text -- ^ 'pesApplicationId'
     -> WriteEventStream -- ^ 'pesWriteEventStream'
     -> PutEventStream
-putEventStream pApplicationId_ pWriteEventStream_ =
-  PutEventStream'
-    { _pesApplicationId = pApplicationId_
-    , _pesWriteEventStream = pWriteEventStream_
-    }
+putEventStream pApplicationId_ pWriteEventStream_
+  = PutEventStream'{_pesApplicationId =
+                      pApplicationId_,
+                    _pesWriteEventStream = pWriteEventStream_}
 
-
--- | ApplicationId
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 pesApplicationId :: Lens' PutEventStream Text
 pesApplicationId = lens _pesApplicationId (\ s a -> s{_pesApplicationId = a})
 
--- | EventStream to write.
+-- | Undocumented member.
 pesWriteEventStream :: Lens' PutEventStream WriteEventStream
 pesWriteEventStream = lens _pesWriteEventStream (\ s a -> s{_pesWriteEventStream = a})
 
@@ -111,11 +110,12 @@ instance ToQuery PutEventStream where
         toQuery = const mempty
 
 -- | /See:/ 'putEventStreamResponse' smart constructor.
-data PutEventStreamResponse = PutEventStreamResponse'
-  { _pesrsResponseStatus :: !Int
-  , _pesrsEventStream    :: !EventStream
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutEventStreamResponse = PutEventStreamResponse'{_pesrsResponseStatus
+                                                      :: !Int,
+                                                      _pesrsEventStream ::
+                                                      !EventStream}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'PutEventStreamResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +128,10 @@ putEventStreamResponse
     :: Int -- ^ 'pesrsResponseStatus'
     -> EventStream -- ^ 'pesrsEventStream'
     -> PutEventStreamResponse
-putEventStreamResponse pResponseStatus_ pEventStream_ =
-  PutEventStreamResponse'
-    {_pesrsResponseStatus = pResponseStatus_, _pesrsEventStream = pEventStream_}
-
+putEventStreamResponse pResponseStatus_ pEventStream_
+  = PutEventStreamResponse'{_pesrsResponseStatus =
+                              pResponseStatus_,
+                            _pesrsEventStream = pEventStream_}
 
 -- | -- | The response status code.
 pesrsResponseStatus :: Lens' PutEventStreamResponse Int

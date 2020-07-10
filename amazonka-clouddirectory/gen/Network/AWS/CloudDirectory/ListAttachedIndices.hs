@@ -53,14 +53,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAttachedIndices' smart constructor.
-data ListAttachedIndices = ListAttachedIndices'
-  { _laiConsistencyLevel :: !(Maybe ConsistencyLevel)
-  , _laiNextToken        :: !(Maybe Text)
-  , _laiMaxResults       :: !(Maybe Nat)
-  , _laiDirectoryARN     :: !Text
-  , _laiTargetReference  :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAttachedIndices = ListAttachedIndices'{_laiConsistencyLevel
+                                                :: !(Maybe ConsistencyLevel),
+                                                _laiNextToken :: !(Maybe Text),
+                                                _laiMaxResults :: !(Maybe Nat),
+                                                _laiDirectoryARN :: !Text,
+                                                _laiTargetReference ::
+                                                !ObjectReference}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAttachedIndices' with the minimum fields required to make a request.
 --
@@ -79,15 +79,12 @@ listAttachedIndices
     :: Text -- ^ 'laiDirectoryARN'
     -> ObjectReference -- ^ 'laiTargetReference'
     -> ListAttachedIndices
-listAttachedIndices pDirectoryARN_ pTargetReference_ =
-  ListAttachedIndices'
-    { _laiConsistencyLevel = Nothing
-    , _laiNextToken = Nothing
-    , _laiMaxResults = Nothing
-    , _laiDirectoryARN = pDirectoryARN_
-    , _laiTargetReference = pTargetReference_
-    }
-
+listAttachedIndices pDirectoryARN_ pTargetReference_
+  = ListAttachedIndices'{_laiConsistencyLevel =
+                           Nothing,
+                         _laiNextToken = Nothing, _laiMaxResults = Nothing,
+                         _laiDirectoryARN = pDirectoryARN_,
+                         _laiTargetReference = pTargetReference_}
 
 -- | The consistency level to use for this operation.
 laiConsistencyLevel :: Lens' ListAttachedIndices (Maybe ConsistencyLevel)
@@ -155,12 +152,17 @@ instance ToQuery ListAttachedIndices where
         toQuery = const mempty
 
 -- | /See:/ 'listAttachedIndicesResponse' smart constructor.
-data ListAttachedIndicesResponse = ListAttachedIndicesResponse'
-  { _lairsIndexAttachments :: !(Maybe [IndexAttachment])
-  , _lairsNextToken        :: !(Maybe Text)
-  , _lairsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAttachedIndicesResponse = ListAttachedIndicesResponse'{_lairsIndexAttachments
+                                                                ::
+                                                                !(Maybe
+                                                                    [IndexAttachment]),
+                                                                _lairsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lairsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListAttachedIndicesResponse' with the minimum fields required to make a request.
 --
@@ -174,13 +176,11 @@ data ListAttachedIndicesResponse = ListAttachedIndicesResponse'
 listAttachedIndicesResponse
     :: Int -- ^ 'lairsResponseStatus'
     -> ListAttachedIndicesResponse
-listAttachedIndicesResponse pResponseStatus_ =
-  ListAttachedIndicesResponse'
-    { _lairsIndexAttachments = Nothing
-    , _lairsNextToken = Nothing
-    , _lairsResponseStatus = pResponseStatus_
-    }
-
+listAttachedIndicesResponse pResponseStatus_
+  = ListAttachedIndicesResponse'{_lairsIndexAttachments
+                                   = Nothing,
+                                 _lairsNextToken = Nothing,
+                                 _lairsResponseStatus = pResponseStatus_}
 
 -- | The indices attached to the specified object.
 lairsIndexAttachments :: Lens' ListAttachedIndicesResponse [IndexAttachment]

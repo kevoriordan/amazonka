@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. Amazon WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is /Disable/ .
+-- Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is /Disable/ .
 --
 --
 module Network.AWS.WorkMail.DeregisterFromWorkMail
@@ -45,11 +45,11 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'deregisterFromWorkMail' smart constructor.
-data DeregisterFromWorkMail = DeregisterFromWorkMail'
-  { _dfwmOrganizationId :: !Text
-  , _dfwmEntityId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterFromWorkMail = DeregisterFromWorkMail'{_dfwmOrganizationId
+                                                      :: !Text,
+                                                      _dfwmEntityId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeregisterFromWorkMail' with the minimum fields required to make a request.
 --
@@ -57,21 +57,21 @@ data DeregisterFromWorkMail = DeregisterFromWorkMail'
 --
 -- * 'dfwmOrganizationId' - The identifier for the organization under which the Amazon WorkMail entity exists.
 --
--- * 'dfwmEntityId' - The identifier for the entity to be updated.
+-- * 'dfwmEntityId' - The identifier for the member (user or group) to be updated.
 deregisterFromWorkMail
     :: Text -- ^ 'dfwmOrganizationId'
     -> Text -- ^ 'dfwmEntityId'
     -> DeregisterFromWorkMail
-deregisterFromWorkMail pOrganizationId_ pEntityId_ =
-  DeregisterFromWorkMail'
-    {_dfwmOrganizationId = pOrganizationId_, _dfwmEntityId = pEntityId_}
-
+deregisterFromWorkMail pOrganizationId_ pEntityId_
+  = DeregisterFromWorkMail'{_dfwmOrganizationId =
+                              pOrganizationId_,
+                            _dfwmEntityId = pEntityId_}
 
 -- | The identifier for the organization under which the Amazon WorkMail entity exists.
 dfwmOrganizationId :: Lens' DeregisterFromWorkMail Text
 dfwmOrganizationId = lens _dfwmOrganizationId (\ s a -> s{_dfwmOrganizationId = a})
 
--- | The identifier for the entity to be updated.
+-- | The identifier for the member (user or group) to be updated.
 dfwmEntityId :: Lens' DeregisterFromWorkMail Text
 dfwmEntityId = lens _dfwmEntityId (\ s a -> s{_dfwmEntityId = a})
 
@@ -113,10 +113,10 @@ instance ToQuery DeregisterFromWorkMail where
         toQuery = const mempty
 
 -- | /See:/ 'deregisterFromWorkMailResponse' smart constructor.
-newtype DeregisterFromWorkMailResponse = DeregisterFromWorkMailResponse'
-  { _dfwmrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeregisterFromWorkMailResponse = DeregisterFromWorkMailResponse'{_dfwmrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeregisterFromWorkMailResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +126,9 @@ newtype DeregisterFromWorkMailResponse = DeregisterFromWorkMailResponse'
 deregisterFromWorkMailResponse
     :: Int -- ^ 'dfwmrsResponseStatus'
     -> DeregisterFromWorkMailResponse
-deregisterFromWorkMailResponse pResponseStatus_ =
-  DeregisterFromWorkMailResponse' {_dfwmrsResponseStatus = pResponseStatus_}
-
+deregisterFromWorkMailResponse pResponseStatus_
+  = DeregisterFromWorkMailResponse'{_dfwmrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 dfwmrsResponseStatus :: Lens' DeregisterFromWorkMailResponse Int

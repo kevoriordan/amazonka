@@ -19,6 +19,22 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes an inventory configuration (identified by the inventory ID) from the bucket.
+--
+--
+-- To use this operation, you must have permissions to perform the @s3:PutInventoryConfiguration@ action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources> .
+--
+-- For information about the Amazon S3 inventory feature, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html Amazon S3 Inventory> .
+--
+-- Operations related to @DeleteBucketInventoryConfiguration@ include: 
+--
+--     * 'GetBucketInventoryConfiguration' 
+--
+--     * 'PutBucketInventoryConfiguration' 
+--
+--     * 'ListBucketInventoryConfigurations' 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketInventoryConfiguration
     (
     -- * Creating a Request
@@ -41,11 +57,14 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketInventoryConfiguration' smart constructor.
-data DeleteBucketInventoryConfiguration = DeleteBucketInventoryConfiguration'
-  { _dbicBucket :: !BucketName
-  , _dbicId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketInventoryConfiguration = DeleteBucketInventoryConfiguration'{_dbicBucket
+                                                                              ::
+                                                                              !BucketName,
+                                                                              _dbicId
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteBucketInventoryConfiguration' with the minimum fields required to make a request.
 --
@@ -58,9 +77,10 @@ deleteBucketInventoryConfiguration
     :: BucketName -- ^ 'dbicBucket'
     -> Text -- ^ 'dbicId'
     -> DeleteBucketInventoryConfiguration
-deleteBucketInventoryConfiguration pBucket_ pId_ =
-  DeleteBucketInventoryConfiguration' {_dbicBucket = pBucket_, _dbicId = pId_}
-
+deleteBucketInventoryConfiguration pBucket_ pId_
+  = DeleteBucketInventoryConfiguration'{_dbicBucket =
+                                          pBucket_,
+                                        _dbicId = pId_}
 
 -- | The name of the bucket containing the inventory configuration to delete.
 dbicBucket :: Lens' DeleteBucketInventoryConfiguration BucketName
@@ -101,18 +121,17 @@ instance ToQuery DeleteBucketInventoryConfiguration
           = mconcat ["id" =: _dbicId, "inventory"]
 
 -- | /See:/ 'deleteBucketInventoryConfigurationResponse' smart constructor.
-data DeleteBucketInventoryConfigurationResponse =
-  DeleteBucketInventoryConfigurationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketInventoryConfigurationResponse = DeleteBucketInventoryConfigurationResponse'
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'DeleteBucketInventoryConfigurationResponse' with the minimum fields required to make a request.
 --
 deleteBucketInventoryConfigurationResponse
     :: DeleteBucketInventoryConfigurationResponse
-deleteBucketInventoryConfigurationResponse =
-  DeleteBucketInventoryConfigurationResponse'
-
+deleteBucketInventoryConfigurationResponse
+  = DeleteBucketInventoryConfigurationResponse'
 
 instance NFData
            DeleteBucketInventoryConfigurationResponse

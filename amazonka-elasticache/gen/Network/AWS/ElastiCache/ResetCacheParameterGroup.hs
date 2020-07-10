@@ -50,18 +50,22 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'resetCacheParameterGroup' smart constructor.
-data ResetCacheParameterGroup = ResetCacheParameterGroup'
-  { _rcpgResetAllParameters      :: !(Maybe Bool)
-  , _rcpgParameterNameValues     :: !(Maybe [ParameterNameValue])
-  , _rcpgCacheParameterGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetCacheParameterGroup = ResetCacheParameterGroup'{_rcpgResetAllParameters
+                                                          :: !(Maybe Bool),
+                                                          _rcpgParameterNameValues
+                                                          ::
+                                                          !(Maybe
+                                                              [ParameterNameValue]),
+                                                          _rcpgCacheParameterGroupName
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ResetCacheParameterGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcpgResetAllParameters' - If @true@ , all parameters in the cache parameter group are reset to their default values. If @false@ , only the parameters listed by @ParameterNameValues@ are reset to their default values. Valid values: @true@ | @false@
+-- * 'rcpgResetAllParameters' - If @true@ , all parameters in the cache parameter group are reset to their default values. If @false@ , only the parameters listed by @ParameterNameValues@ are reset to their default values. Valid values: @true@ | @false@ 
 --
 -- * 'rcpgParameterNameValues' - An array of parameter names to reset to their default values. If @ResetAllParameters@ is @true@ , do not use @ParameterNameValues@ . If @ResetAllParameters@ is @false@ , you must specify the name of at least one parameter to reset.
 --
@@ -69,15 +73,14 @@ data ResetCacheParameterGroup = ResetCacheParameterGroup'
 resetCacheParameterGroup
     :: Text -- ^ 'rcpgCacheParameterGroupName'
     -> ResetCacheParameterGroup
-resetCacheParameterGroup pCacheParameterGroupName_ =
-  ResetCacheParameterGroup'
-    { _rcpgResetAllParameters = Nothing
-    , _rcpgParameterNameValues = Nothing
-    , _rcpgCacheParameterGroupName = pCacheParameterGroupName_
-    }
+resetCacheParameterGroup pCacheParameterGroupName_
+  = ResetCacheParameterGroup'{_rcpgResetAllParameters =
+                                Nothing,
+                              _rcpgParameterNameValues = Nothing,
+                              _rcpgCacheParameterGroupName =
+                                pCacheParameterGroupName_}
 
-
--- | If @true@ , all parameters in the cache parameter group are reset to their default values. If @false@ , only the parameters listed by @ParameterNameValues@ are reset to their default values. Valid values: @true@ | @false@
+-- | If @true@ , all parameters in the cache parameter group are reset to their default values. If @false@ , only the parameters listed by @ParameterNameValues@ are reset to their default values. Valid values: @true@ | @false@ 
 rcpgResetAllParameters :: Lens' ResetCacheParameterGroup (Maybe Bool)
 rcpgResetAllParameters = lens _rcpgResetAllParameters (\ s a -> s{_rcpgResetAllParameters = a})
 

@@ -45,10 +45,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getRoom' smart constructor.
-newtype GetRoom = GetRoom'
-  { _grRoomARN :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetRoom = GetRoom'{_grRoomARN :: Maybe Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRoom' with the minimum fields required to make a request.
 --
@@ -57,8 +55,7 @@ newtype GetRoom = GetRoom'
 -- * 'grRoomARN' - The ARN of the room for which to request details. Required.
 getRoom
     :: GetRoom
-getRoom = GetRoom' {_grRoomARN = Nothing}
-
+getRoom = GetRoom'{_grRoomARN = Nothing}
 
 -- | The ARN of the room for which to request details. Required.
 grRoomARN :: Lens' GetRoom (Maybe Text)
@@ -97,11 +94,10 @@ instance ToQuery GetRoom where
         toQuery = const mempty
 
 -- | /See:/ 'getRoomResponse' smart constructor.
-data GetRoomResponse = GetRoomResponse'
-  { _grrsRoom           :: !(Maybe Room)
-  , _grrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRoomResponse = GetRoomResponse'{_grrsRoom ::
+                                        !(Maybe Room),
+                                        _grrsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRoomResponse' with the minimum fields required to make a request.
 --
@@ -113,9 +109,9 @@ data GetRoomResponse = GetRoomResponse'
 getRoomResponse
     :: Int -- ^ 'grrsResponseStatus'
     -> GetRoomResponse
-getRoomResponse pResponseStatus_ =
-  GetRoomResponse' {_grrsRoom = Nothing, _grrsResponseStatus = pResponseStatus_}
-
+getRoomResponse pResponseStatus_
+  = GetRoomResponse'{_grrsRoom = Nothing,
+                     _grrsResponseStatus = pResponseStatus_}
 
 -- | The details of the room requested.
 grrsRoom :: Lens' GetRoomResponse (Maybe Room)

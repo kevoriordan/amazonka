@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html Amazon Redshift Clusters> in the /Amazon Redshift Cluster Management Guide/ .
+-- Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html Amazon Redshift Clusters> in the /Amazon Redshift Cluster Management Guide/ .
 --
 --
 -- If you specify both tag keys and tag values in the same request, Amazon Redshift returns all clusters that match any combination of the specified keys and values. For example, if you have @owner@ and @environment@ for tag keys, and @admin@ and @test@ for tag values, all clusters that have any combination of those values are returned.
@@ -56,19 +56,18 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeClusters' smart constructor.
-data DescribeClusters = DescribeClusters'
-  { _dcTagValues         :: !(Maybe [Text])
-  , _dcTagKeys           :: !(Maybe [Text])
-  , _dcClusterIdentifier :: !(Maybe Text)
-  , _dcMarker            :: !(Maybe Text)
-  , _dcMaxRecords        :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusters = DescribeClusters'{_dcTagValues
+                                          :: !(Maybe [Text]),
+                                          _dcTagKeys :: !(Maybe [Text]),
+                                          _dcClusterIdentifier :: !(Maybe Text),
+                                          _dcMarker :: !(Maybe Text),
+                                          _dcMaxRecords :: !(Maybe Int)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeClusters' with the minimum fields required to make a request.
 --
@@ -80,20 +79,15 @@ data DescribeClusters = DescribeClusters'
 --
 -- * 'dcClusterIdentifier' - The unique identifier of a cluster whose properties you are requesting. This parameter is case sensitive. The default is that all clusters defined for an account are returned.
 --
--- * 'dcMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusters' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.  Constraints: You can specify either the __ClusterIdentifier__ parameter or the __Marker__ parameter, but not both.
+-- * 'dcMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusters' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.  Constraints: You can specify either the __ClusterIdentifier__ parameter or the __Marker__ parameter, but not both. 
 --
 -- * 'dcMaxRecords' - The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified @MaxRecords@ value, a value is returned in a @marker@ field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: @100@  Constraints: minimum 20, maximum 100.
 describeClusters
     :: DescribeClusters
-describeClusters =
-  DescribeClusters'
-    { _dcTagValues = Nothing
-    , _dcTagKeys = Nothing
-    , _dcClusterIdentifier = Nothing
-    , _dcMarker = Nothing
-    , _dcMaxRecords = Nothing
-    }
-
+describeClusters
+  = DescribeClusters'{_dcTagValues = Nothing,
+                      _dcTagKeys = Nothing, _dcClusterIdentifier = Nothing,
+                      _dcMarker = Nothing, _dcMaxRecords = Nothing}
 
 -- | A tag value or values for which you want to return all matching clusters that are associated with the specified tag value or values. For example, suppose that you have clusters that are tagged with values called @admin@ and @test@ . If you specify both of these tag values in the request, Amazon Redshift returns a response with the clusters that have either or both of these tag values associated with them.
 dcTagValues :: Lens' DescribeClusters [Text]
@@ -107,7 +101,7 @@ dcTagKeys = lens _dcTagKeys (\ s a -> s{_dcTagKeys = a}) . _Default . _Coerce
 dcClusterIdentifier :: Lens' DescribeClusters (Maybe Text)
 dcClusterIdentifier = lens _dcClusterIdentifier (\ s a -> s{_dcClusterIdentifier = a})
 
--- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusters' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.  Constraints: You can specify either the __ClusterIdentifier__ parameter or the __Marker__ parameter, but not both.
+-- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusters' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.  Constraints: You can specify either the __ClusterIdentifier__ parameter or the __Marker__ parameter, but not both. 
 dcMarker :: Lens' DescribeClusters (Maybe Text)
 dcMarker = lens _dcMarker (\ s a -> s{_dcMarker = a})
 
@@ -156,43 +150,42 @@ instance ToQuery DescribeClusters where
                "ClusterIdentifier" =: _dcClusterIdentifier,
                "Marker" =: _dcMarker, "MaxRecords" =: _dcMaxRecords]
 
--- | Contains the output from the 'DescribeClusters' action.
+-- | Contains the output from the 'DescribeClusters' action. 
 --
 --
 --
 -- /See:/ 'describeClustersResponse' smart constructor.
-data DescribeClustersResponse = DescribeClustersResponse'
-  { _dcrsMarker         :: !(Maybe Text)
-  , _dcrsClusters       :: !(Maybe [Cluster])
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClustersResponse = DescribeClustersResponse'{_dcrsMarker
+                                                          :: !(Maybe Text),
+                                                          _dcrsClusters ::
+                                                          !(Maybe [Cluster]),
+                                                          _dcrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeClustersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- * 'dcrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 --
--- * 'dcrsClusters' - A list of @Cluster@ objects, where each object describes one cluster.
+-- * 'dcrsClusters' - A list of @Cluster@ objects, where each object describes one cluster. 
 --
 -- * 'dcrsResponseStatus' - -- | The response status code.
 describeClustersResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeClustersResponse
-describeClustersResponse pResponseStatus_ =
-  DescribeClustersResponse'
-    { _dcrsMarker = Nothing
-    , _dcrsClusters = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
+describeClustersResponse pResponseStatus_
+  = DescribeClustersResponse'{_dcrsMarker = Nothing,
+                              _dcrsClusters = Nothing,
+                              _dcrsResponseStatus = pResponseStatus_}
 
-
--- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 dcrsMarker :: Lens' DescribeClustersResponse (Maybe Text)
 dcrsMarker = lens _dcrsMarker (\ s a -> s{_dcrsMarker = a})
 
--- | A list of @Cluster@ objects, where each object describes one cluster.
+-- | A list of @Cluster@ objects, where each object describes one cluster. 
 dcrsClusters :: Lens' DescribeClustersResponse [Cluster]
 dcrsClusters = lens _dcrsClusters (\ s a -> s{_dcrsClusters = a}) . _Default . _Coerce
 

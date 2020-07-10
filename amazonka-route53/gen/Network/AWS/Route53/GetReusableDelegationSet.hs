@@ -49,10 +49,10 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'getReusableDelegationSet' smart constructor.
-newtype GetReusableDelegationSet = GetReusableDelegationSet'
-  { _grdsId :: ResourceId
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetReusableDelegationSet = GetReusableDelegationSet'{_grdsId
+                                                             :: ResourceId}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetReusableDelegationSet' with the minimum fields required to make a request.
 --
@@ -62,8 +62,8 @@ newtype GetReusableDelegationSet = GetReusableDelegationSet'
 getReusableDelegationSet
     :: ResourceId -- ^ 'grdsId'
     -> GetReusableDelegationSet
-getReusableDelegationSet pId_ = GetReusableDelegationSet' {_grdsId = pId_}
-
+getReusableDelegationSet pId_
+  = GetReusableDelegationSet'{_grdsId = pId_}
 
 -- | The ID of the reusable delegation set that you want to get a list of name servers for.
 grdsId :: Lens' GetReusableDelegationSet ResourceId
@@ -99,11 +99,14 @@ instance ToQuery GetReusableDelegationSet where
 --
 --
 -- /See:/ 'getReusableDelegationSetResponse' smart constructor.
-data GetReusableDelegationSetResponse = GetReusableDelegationSetResponse'
-  { _grdsrsResponseStatus :: !Int
-  , _grdsrsDelegationSet  :: !DelegationSet
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetReusableDelegationSetResponse = GetReusableDelegationSetResponse'{_grdsrsResponseStatus
+                                                                          ::
+                                                                          !Int,
+                                                                          _grdsrsDelegationSet
+                                                                          ::
+                                                                          !DelegationSet}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetReusableDelegationSetResponse' with the minimum fields required to make a request.
 --
@@ -116,12 +119,11 @@ getReusableDelegationSetResponse
     :: Int -- ^ 'grdsrsResponseStatus'
     -> DelegationSet -- ^ 'grdsrsDelegationSet'
     -> GetReusableDelegationSetResponse
-getReusableDelegationSetResponse pResponseStatus_ pDelegationSet_ =
-  GetReusableDelegationSetResponse'
-    { _grdsrsResponseStatus = pResponseStatus_
-    , _grdsrsDelegationSet = pDelegationSet_
-    }
-
+getReusableDelegationSetResponse pResponseStatus_
+  pDelegationSet_
+  = GetReusableDelegationSetResponse'{_grdsrsResponseStatus
+                                        = pResponseStatus_,
+                                      _grdsrsDelegationSet = pDelegationSet_}
 
 -- | -- | The response status code.
 grdsrsResponseStatus :: Lens' GetReusableDelegationSetResponse Int

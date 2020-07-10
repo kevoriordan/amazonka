@@ -48,14 +48,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateAuthEventFeedback' smart constructor.
-data UpdateAuthEventFeedback = UpdateAuthEventFeedback'
-  { _uaefUserPoolId    :: !Text
-  , _uaefUsername      :: !(Sensitive Text)
-  , _uaefEventId       :: !Text
-  , _uaefFeedbackToken :: !(Sensitive Text)
-  , _uaefFeedbackValue :: !FeedbackValueType
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateAuthEventFeedback = UpdateAuthEventFeedback'{_uaefUserPoolId
+                                                        :: !Text,
+                                                        _uaefUsername ::
+                                                        !(Sensitive Text),
+                                                        _uaefEventId :: !Text,
+                                                        _uaefFeedbackToken ::
+                                                        !(Sensitive Text),
+                                                        _uaefFeedbackValue ::
+                                                        !FeedbackValueType}
+                                 deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateAuthEventFeedback' with the minimum fields required to make a request.
 --
@@ -77,15 +79,14 @@ updateAuthEventFeedback
     -> Text -- ^ 'uaefFeedbackToken'
     -> FeedbackValueType -- ^ 'uaefFeedbackValue'
     -> UpdateAuthEventFeedback
-updateAuthEventFeedback pUserPoolId_ pUsername_ pEventId_ pFeedbackToken_ pFeedbackValue_ =
-  UpdateAuthEventFeedback'
-    { _uaefUserPoolId = pUserPoolId_
-    , _uaefUsername = _Sensitive # pUsername_
-    , _uaefEventId = pEventId_
-    , _uaefFeedbackToken = _Sensitive # pFeedbackToken_
-    , _uaefFeedbackValue = pFeedbackValue_
-    }
-
+updateAuthEventFeedback pUserPoolId_ pUsername_
+  pEventId_ pFeedbackToken_ pFeedbackValue_
+  = UpdateAuthEventFeedback'{_uaefUserPoolId =
+                               pUserPoolId_,
+                             _uaefUsername = _Sensitive # pUsername_,
+                             _uaefEventId = pEventId_,
+                             _uaefFeedbackToken = _Sensitive # pFeedbackToken_,
+                             _uaefFeedbackValue = pFeedbackValue_}
 
 -- | The user pool ID.
 uaefUserPoolId :: Lens' UpdateAuthEventFeedback Text
@@ -148,10 +149,11 @@ instance ToQuery UpdateAuthEventFeedback where
         toQuery = const mempty
 
 -- | /See:/ 'updateAuthEventFeedbackResponse' smart constructor.
-newtype UpdateAuthEventFeedbackResponse = UpdateAuthEventFeedbackResponse'
-  { _uaefrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateAuthEventFeedbackResponse = UpdateAuthEventFeedbackResponse'{_uaefrsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'UpdateAuthEventFeedbackResponse' with the minimum fields required to make a request.
 --
@@ -161,9 +163,9 @@ newtype UpdateAuthEventFeedbackResponse = UpdateAuthEventFeedbackResponse'
 updateAuthEventFeedbackResponse
     :: Int -- ^ 'uaefrsResponseStatus'
     -> UpdateAuthEventFeedbackResponse
-updateAuthEventFeedbackResponse pResponseStatus_ =
-  UpdateAuthEventFeedbackResponse' {_uaefrsResponseStatus = pResponseStatus_}
-
+updateAuthEventFeedbackResponse pResponseStatus_
+  = UpdateAuthEventFeedbackResponse'{_uaefrsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 uaefrsResponseStatus :: Lens' UpdateAuthEventFeedbackResponse Int

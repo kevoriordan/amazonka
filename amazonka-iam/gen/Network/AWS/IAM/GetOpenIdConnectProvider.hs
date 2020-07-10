@@ -48,25 +48,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getOpenIdConnectProvider' smart constructor.
-newtype GetOpenIdConnectProvider = GetOpenIdConnectProvider'
-  { _goicpOpenIdConnectProviderARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetOpenIdConnectProvider = GetOpenIdConnectProvider'{_goicpOpenIdConnectProviderARN
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetOpenIdConnectProvider' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'goicpOpenIdConnectProviderARN' - The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to get information for. You can get a list of OIDC provider resource ARNs by using the 'ListOpenIDConnectProviders' operation. For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
+-- * 'goicpOpenIdConnectProviderARN' - The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to get information for. You can get a list of OIDC provider resource ARNs by using the 'ListOpenIDConnectProviders' operation. For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
 getOpenIdConnectProvider
     :: Text -- ^ 'goicpOpenIdConnectProviderARN'
     -> GetOpenIdConnectProvider
-getOpenIdConnectProvider pOpenIdConnectProviderARN_ =
-  GetOpenIdConnectProvider'
-    {_goicpOpenIdConnectProviderARN = pOpenIdConnectProviderARN_}
+getOpenIdConnectProvider pOpenIdConnectProviderARN_
+  = GetOpenIdConnectProvider'{_goicpOpenIdConnectProviderARN
+                                = pOpenIdConnectProviderARN_}
 
-
--- | The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to get information for. You can get a list of OIDC provider resource ARNs by using the 'ListOpenIDConnectProviders' operation. For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
+-- | The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to get information for. You can get a list of OIDC provider resource ARNs by using the 'ListOpenIDConnectProviders' operation. For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
 goicpOpenIdConnectProviderARN :: Lens' GetOpenIdConnectProvider Text
 goicpOpenIdConnectProviderARN = lens _goicpOpenIdConnectProviderARN (\ s a -> s{_goicpOpenIdConnectProviderARN = a})
 
@@ -105,19 +104,32 @@ instance ToQuery GetOpenIdConnectProvider where
                "OpenIDConnectProviderArn" =:
                  _goicpOpenIdConnectProviderARN]
 
--- | Contains the response to a successful 'GetOpenIDConnectProvider' request.
+-- | Contains the response to a successful 'GetOpenIDConnectProvider' request. 
 --
 --
 --
 -- /See:/ 'getOpenIdConnectProviderResponse' smart constructor.
-data GetOpenIdConnectProviderResponse = GetOpenIdConnectProviderResponse'
-  { _goicprsCreateDate     :: !(Maybe ISO8601)
-  , _goicprsURL            :: !(Maybe Text)
-  , _goicprsThumbprintList :: !(Maybe [Text])
-  , _goicprsClientIdList   :: !(Maybe [Text])
-  , _goicprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetOpenIdConnectProviderResponse = GetOpenIdConnectProviderResponse'{_goicprsCreateDate
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ISO8601),
+                                                                          _goicprsURL
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _goicprsThumbprintList
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [Text]),
+                                                                          _goicprsClientIdList
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [Text]),
+                                                                          _goicprsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetOpenIdConnectProviderResponse' with the minimum fields required to make a request.
 --
@@ -127,7 +139,7 @@ data GetOpenIdConnectProviderResponse = GetOpenIdConnectProviderResponse'
 --
 -- * 'goicprsURL' - The URL that the IAM OIDC provider resource object is associated with. For more information, see 'CreateOpenIDConnectProvider' .
 --
--- * 'goicprsThumbprintList' - A list of certificate thumbprints that are associated with the specified IAM OIDC provider resource object. For more information, see 'CreateOpenIDConnectProvider' .
+-- * 'goicprsThumbprintList' - A list of certificate thumbprints that are associated with the specified IAM OIDC provider resource object. For more information, see 'CreateOpenIDConnectProvider' . 
 --
 -- * 'goicprsClientIdList' - A list of client IDs (also known as audiences) that are associated with the specified IAM OIDC provider resource object. For more information, see 'CreateOpenIDConnectProvider' .
 --
@@ -135,15 +147,13 @@ data GetOpenIdConnectProviderResponse = GetOpenIdConnectProviderResponse'
 getOpenIdConnectProviderResponse
     :: Int -- ^ 'goicprsResponseStatus'
     -> GetOpenIdConnectProviderResponse
-getOpenIdConnectProviderResponse pResponseStatus_ =
-  GetOpenIdConnectProviderResponse'
-    { _goicprsCreateDate = Nothing
-    , _goicprsURL = Nothing
-    , _goicprsThumbprintList = Nothing
-    , _goicprsClientIdList = Nothing
-    , _goicprsResponseStatus = pResponseStatus_
-    }
-
+getOpenIdConnectProviderResponse pResponseStatus_
+  = GetOpenIdConnectProviderResponse'{_goicprsCreateDate
+                                        = Nothing,
+                                      _goicprsURL = Nothing,
+                                      _goicprsThumbprintList = Nothing,
+                                      _goicprsClientIdList = Nothing,
+                                      _goicprsResponseStatus = pResponseStatus_}
 
 -- | The date and time when the IAM OIDC provider resource object was created in the AWS account.
 goicprsCreateDate :: Lens' GetOpenIdConnectProviderResponse (Maybe UTCTime)
@@ -153,7 +163,7 @@ goicprsCreateDate = lens _goicprsCreateDate (\ s a -> s{_goicprsCreateDate = a})
 goicprsURL :: Lens' GetOpenIdConnectProviderResponse (Maybe Text)
 goicprsURL = lens _goicprsURL (\ s a -> s{_goicprsURL = a})
 
--- | A list of certificate thumbprints that are associated with the specified IAM OIDC provider resource object. For more information, see 'CreateOpenIDConnectProvider' .
+-- | A list of certificate thumbprints that are associated with the specified IAM OIDC provider resource object. For more information, see 'CreateOpenIDConnectProvider' . 
 goicprsThumbprintList :: Lens' GetOpenIdConnectProviderResponse [Text]
 goicprsThumbprintList = lens _goicprsThumbprintList (\ s a -> s{_goicprsThumbprintList = a}) . _Default . _Coerce
 

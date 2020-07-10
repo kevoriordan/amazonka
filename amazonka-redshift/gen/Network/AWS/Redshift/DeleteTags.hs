@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
+-- Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
 --
 --
 module Network.AWS.Redshift.DeleteTags
@@ -42,32 +42,31 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the output from the @DeleteTags@ action.
+-- | Contains the output from the @DeleteTags@ action. 
 --
 --
 --
 -- /See:/ 'deleteTags' smart constructor.
-data DeleteTags = DeleteTags'
-  { _dtsResourceName :: !Text
-  , _dtsTagKeys      :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTags = DeleteTags'{_dtsResourceName ::
+                              !Text,
+                              _dtsTagKeys :: ![Text]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtsResourceName' - The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, @arn:aws:redshift:us-east-1:123456789:cluster:t1@ .
+-- * 'dtsResourceName' - The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, @arn:aws:redshift:us-east-2:123456789:cluster:t1@ . 
 --
 -- * 'dtsTagKeys' - The tag key that you want to delete.
 deleteTags
     :: Text -- ^ 'dtsResourceName'
     -> DeleteTags
-deleteTags pResourceName_ =
-  DeleteTags' {_dtsResourceName = pResourceName_, _dtsTagKeys = mempty}
+deleteTags pResourceName_
+  = DeleteTags'{_dtsResourceName = pResourceName_,
+                _dtsTagKeys = mempty}
 
-
--- | The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, @arn:aws:redshift:us-east-1:123456789:cluster:t1@ .
+-- | The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, @arn:aws:redshift:us-east-2:123456789:cluster:t1@ . 
 dtsResourceName :: Lens' DeleteTags Text
 dtsResourceName = lens _dtsResourceName (\ s a -> s{_dtsResourceName = a})
 
@@ -99,16 +98,13 @@ instance ToQuery DeleteTags where
                "TagKeys" =: toQueryList "TagKey" _dtsTagKeys]
 
 -- | /See:/ 'deleteTagsResponse' smart constructor.
-data DeleteTagsResponse =
-  DeleteTagsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTagsResponse = DeleteTagsResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTagsResponse' with the minimum fields required to make a request.
 --
 deleteTagsResponse
     :: DeleteTagsResponse
 deleteTagsResponse = DeleteTagsResponse'
-
 
 instance NFData DeleteTagsResponse where

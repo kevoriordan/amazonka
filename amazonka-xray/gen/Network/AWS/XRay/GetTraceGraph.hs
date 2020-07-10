@@ -50,25 +50,25 @@ import Network.AWS.XRay.Types
 import Network.AWS.XRay.Types.Product
 
 -- | /See:/ 'getTraceGraph' smart constructor.
-data GetTraceGraph = GetTraceGraph'
-  { _gtgNextToken :: !(Maybe Text)
-  , _gtgTraceIds  :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTraceGraph = GetTraceGraph'{_gtgNextToken ::
+                                    !(Maybe Text),
+                                    _gtgTraceIds :: ![Text]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTraceGraph' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtgNextToken' - Pagination token. Not used.
+-- * 'gtgNextToken' - Pagination token.
 --
 -- * 'gtgTraceIds' - Trace IDs of requests for which to generate a service graph.
 getTraceGraph
     :: GetTraceGraph
-getTraceGraph = GetTraceGraph' {_gtgNextToken = Nothing, _gtgTraceIds = mempty}
+getTraceGraph
+  = GetTraceGraph'{_gtgNextToken = Nothing,
+                   _gtgTraceIds = mempty}
 
-
--- | Pagination token. Not used.
+-- | Pagination token.
 gtgNextToken :: Lens' GetTraceGraph (Maybe Text)
 gtgNextToken = lens _gtgNextToken (\ s a -> s{_gtgNextToken = a})
 
@@ -114,18 +114,20 @@ instance ToQuery GetTraceGraph where
         toQuery = const mempty
 
 -- | /See:/ 'getTraceGraphResponse' smart constructor.
-data GetTraceGraphResponse = GetTraceGraphResponse'
-  { _gtgrsNextToken      :: !(Maybe Text)
-  , _gtgrsServices       :: !(Maybe [ServiceInfo])
-  , _gtgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTraceGraphResponse = GetTraceGraphResponse'{_gtgrsNextToken
+                                                    :: !(Maybe Text),
+                                                    _gtgrsServices ::
+                                                    !(Maybe [ServiceInfo]),
+                                                    _gtgrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetTraceGraphResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtgrsNextToken' - Pagination token. Not used.
+-- * 'gtgrsNextToken' - Pagination token.
 --
 -- * 'gtgrsServices' - The services that have processed one of the specified requests.
 --
@@ -133,15 +135,12 @@ data GetTraceGraphResponse = GetTraceGraphResponse'
 getTraceGraphResponse
     :: Int -- ^ 'gtgrsResponseStatus'
     -> GetTraceGraphResponse
-getTraceGraphResponse pResponseStatus_ =
-  GetTraceGraphResponse'
-    { _gtgrsNextToken = Nothing
-    , _gtgrsServices = Nothing
-    , _gtgrsResponseStatus = pResponseStatus_
-    }
+getTraceGraphResponse pResponseStatus_
+  = GetTraceGraphResponse'{_gtgrsNextToken = Nothing,
+                           _gtgrsServices = Nothing,
+                           _gtgrsResponseStatus = pResponseStatus_}
 
-
--- | Pagination token. Not used.
+-- | Pagination token.
 gtgrsNextToken :: Lens' GetTraceGraphResponse (Maybe Text)
 gtgrsNextToken = lens _gtgrsNextToken (\ s a -> s{_gtgrsNextToken = a})
 

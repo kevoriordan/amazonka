@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of subscription definitions.
+--
+-- This operation returns paginated results.
 module Network.AWS.Greengrass.ListSubscriptionDefinitions
     (
     -- * Creating a Request
@@ -40,16 +42,20 @@ module Network.AWS.Greengrass.ListSubscriptionDefinitions
 import Network.AWS.Greengrass.Types
 import Network.AWS.Greengrass.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listSubscriptionDefinitions' smart constructor.
-data ListSubscriptionDefinitions = ListSubscriptionDefinitions'
-  { _lsdNextToken  :: !(Maybe Text)
-  , _lsdMaxResults :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSubscriptionDefinitions = ListSubscriptionDefinitions'{_lsdNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lsdMaxResults
+                                                                ::
+                                                                !(Maybe Text)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListSubscriptionDefinitions' with the minimum fields required to make a request.
 --
@@ -60,10 +66,10 @@ data ListSubscriptionDefinitions = ListSubscriptionDefinitions'
 -- * 'lsdMaxResults' - The maximum number of results to be returned per request.
 listSubscriptionDefinitions
     :: ListSubscriptionDefinitions
-listSubscriptionDefinitions =
-  ListSubscriptionDefinitions'
-    {_lsdNextToken = Nothing, _lsdMaxResults = Nothing}
-
+listSubscriptionDefinitions
+  = ListSubscriptionDefinitions'{_lsdNextToken =
+                                   Nothing,
+                                 _lsdMaxResults = Nothing}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lsdNextToken :: Lens' ListSubscriptionDefinitions (Maybe Text)
@@ -72,6 +78,13 @@ lsdNextToken = lens _lsdNextToken (\ s a -> s{_lsdNextToken = a})
 -- | The maximum number of results to be returned per request.
 lsdMaxResults :: Lens' ListSubscriptionDefinitions (Maybe Text)
 lsdMaxResults = lens _lsdMaxResults (\ s a -> s{_lsdMaxResults = a})
+
+instance AWSPager ListSubscriptionDefinitions where
+        page rq rs
+          | stop (rs ^. lsdrsNextToken) = Nothing
+          | stop (rs ^. lsdrsDefinitions) = Nothing
+          | otherwise =
+            Just $ rq & lsdNextToken .~ rs ^. lsdrsNextToken
 
 instance AWSRequest ListSubscriptionDefinitions where
         type Rs ListSubscriptionDefinitions =
@@ -106,12 +119,19 @@ instance ToQuery ListSubscriptionDefinitions where
                "MaxResults" =: _lsdMaxResults]
 
 -- | /See:/ 'listSubscriptionDefinitionsResponse' smart constructor.
-data ListSubscriptionDefinitionsResponse = ListSubscriptionDefinitionsResponse'
-  { _lsdrsNextToken      :: !(Maybe Text)
-  , _lsdrsDefinitions    :: !(Maybe [DefinitionInformation])
-  , _lsdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSubscriptionDefinitionsResponse = ListSubscriptionDefinitionsResponse'{_lsdrsNextToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _lsdrsDefinitions
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [DefinitionInformation]),
+                                                                                _lsdrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'ListSubscriptionDefinitionsResponse' with the minimum fields required to make a request.
 --
@@ -125,13 +145,12 @@ data ListSubscriptionDefinitionsResponse = ListSubscriptionDefinitionsResponse'
 listSubscriptionDefinitionsResponse
     :: Int -- ^ 'lsdrsResponseStatus'
     -> ListSubscriptionDefinitionsResponse
-listSubscriptionDefinitionsResponse pResponseStatus_ =
-  ListSubscriptionDefinitionsResponse'
-    { _lsdrsNextToken = Nothing
-    , _lsdrsDefinitions = Nothing
-    , _lsdrsResponseStatus = pResponseStatus_
-    }
-
+listSubscriptionDefinitionsResponse pResponseStatus_
+  = ListSubscriptionDefinitionsResponse'{_lsdrsNextToken
+                                           = Nothing,
+                                         _lsdrsDefinitions = Nothing,
+                                         _lsdrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lsdrsNextToken :: Lens' ListSubscriptionDefinitionsResponse (Maybe Text)

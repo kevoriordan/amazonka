@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @RejectAssignment@ operation rejects the results of a completed assignment.
+-- The @RejectAssignment@ operation rejects the results of a completed assignment. 
 --
 --
--- You can include an optional feedback message with the rejection, which the Worker can see in the Status section of the web site. When you include a feedback message with the rejection, it helps the Worker understand why the assignment was rejected, and can improve the quality of the results the Worker submits in the future.
+-- You can include an optional feedback message with the rejection, which the Worker can see in the Status section of the web site. When you include a feedback message with the rejection, it helps the Worker understand why the assignment was rejected, and can improve the quality of the results the Worker submits in the future. 
 --
--- Only the Requester who created the HIT can reject an assignment for the HIT.
+-- Only the Requester who created the HIT can reject an assignment for the HIT. 
 --
 module Network.AWS.MechanicalTurk.RejectAssignment
     (
@@ -49,35 +49,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'rejectAssignment' smart constructor.
-data RejectAssignment = RejectAssignment'
-  { _raAssignmentId      :: !Text
-  , _raRequesterFeedback :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RejectAssignment = RejectAssignment'{_raAssignmentId
+                                          :: !Text,
+                                          _raRequesterFeedback :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RejectAssignment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'raAssignmentId' - The ID of the assignment. The assignment must correspond to a HIT created by the Requester.
+-- * 'raAssignmentId' - The ID of the assignment. The assignment must correspond to a HIT created by the Requester. 
 --
--- * 'raRequesterFeedback' - A message for the Worker, which the Worker can see in the Status section of the web site.
+-- * 'raRequesterFeedback' - A message for the Worker, which the Worker can see in the Status section of the web site. 
 rejectAssignment
     :: Text -- ^ 'raAssignmentId'
     -> Text -- ^ 'raRequesterFeedback'
     -> RejectAssignment
-rejectAssignment pAssignmentId_ pRequesterFeedback_ =
-  RejectAssignment'
-    { _raAssignmentId = pAssignmentId_
-    , _raRequesterFeedback = pRequesterFeedback_
-    }
+rejectAssignment pAssignmentId_ pRequesterFeedback_
+  = RejectAssignment'{_raAssignmentId = pAssignmentId_,
+                      _raRequesterFeedback = pRequesterFeedback_}
 
-
--- | The ID of the assignment. The assignment must correspond to a HIT created by the Requester.
+-- | The ID of the assignment. The assignment must correspond to a HIT created by the Requester. 
 raAssignmentId :: Lens' RejectAssignment Text
 raAssignmentId = lens _raAssignmentId (\ s a -> s{_raAssignmentId = a})
 
--- | A message for the Worker, which the Worker can see in the Status section of the web site.
+-- | A message for the Worker, which the Worker can see in the Status section of the web site. 
 raRequesterFeedback :: Lens' RejectAssignment Text
 raRequesterFeedback = lens _raRequesterFeedback (\ s a -> s{_raRequesterFeedback = a})
 
@@ -117,10 +113,10 @@ instance ToQuery RejectAssignment where
         toQuery = const mempty
 
 -- | /See:/ 'rejectAssignmentResponse' smart constructor.
-newtype RejectAssignmentResponse = RejectAssignmentResponse'
-  { _rarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RejectAssignmentResponse = RejectAssignmentResponse'{_rarsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'RejectAssignmentResponse' with the minimum fields required to make a request.
 --
@@ -130,9 +126,9 @@ newtype RejectAssignmentResponse = RejectAssignmentResponse'
 rejectAssignmentResponse
     :: Int -- ^ 'rarsResponseStatus'
     -> RejectAssignmentResponse
-rejectAssignmentResponse pResponseStatus_ =
-  RejectAssignmentResponse' {_rarsResponseStatus = pResponseStatus_}
-
+rejectAssignmentResponse pResponseStatus_
+  = RejectAssignmentResponse'{_rarsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 rarsResponseStatus :: Lens' RejectAssignmentResponse Int

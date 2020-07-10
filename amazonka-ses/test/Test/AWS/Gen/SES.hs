@@ -14,11 +14,11 @@
 module Test.AWS.Gen.SES where
 
 import Data.Proxy
-import Network.AWS.SES
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.SES.Internal
 import Test.Tasty
+import Network.AWS.SES
+import Test.AWS.SES.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -45,6 +45,9 @@ import Test.Tasty
 --
 --         , requestGetSendQuota $
 --             getSendQuota
+--
+--         , requestPutConfigurationSetDeliveryOptions $
+--             putConfigurationSetDeliveryOptions
 --
 --         , requestDescribeConfigurationSet $
 --             describeConfigurationSet
@@ -258,6 +261,9 @@ import Test.Tasty
 --
 --         , responseGetSendQuota $
 --             getSendQuotaResponse
+--
+--         , responsePutConfigurationSetDeliveryOptions $
+--             putConfigurationSetDeliveryOptionsResponse
 --
 --         , responseDescribeConfigurationSet $
 --             describeConfigurationSetResponse
@@ -485,6 +491,11 @@ requestGetSendQuota :: GetSendQuota -> TestTree
 requestGetSendQuota = req
     "GetSendQuota"
     "fixture/GetSendQuota.yaml"
+
+requestPutConfigurationSetDeliveryOptions :: PutConfigurationSetDeliveryOptions -> TestTree
+requestPutConfigurationSetDeliveryOptions = req
+    "PutConfigurationSetDeliveryOptions"
+    "fixture/PutConfigurationSetDeliveryOptions.yaml"
 
 requestDescribeConfigurationSet :: DescribeConfigurationSet -> TestTree
 requestDescribeConfigurationSet = req
@@ -849,6 +860,13 @@ responseGetSendQuota = res
     "fixture/GetSendQuotaResponse.proto"
     ses
     (Proxy :: Proxy GetSendQuota)
+
+responsePutConfigurationSetDeliveryOptions :: PutConfigurationSetDeliveryOptionsResponse -> TestTree
+responsePutConfigurationSetDeliveryOptions = res
+    "PutConfigurationSetDeliveryOptionsResponse"
+    "fixture/PutConfigurationSetDeliveryOptionsResponse.proto"
+    ses
+    (Proxy :: Proxy PutConfigurationSetDeliveryOptions)
 
 responseDescribeConfigurationSet :: DescribeConfigurationSetResponse -> TestTree
 responseDescribeConfigurationSet = res

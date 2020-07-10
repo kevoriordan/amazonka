@@ -43,17 +43,14 @@ import Network.AWS.Shield.Types
 import Network.AWS.Shield.Types.Product
 
 -- | /See:/ 'getSubscriptionState' smart constructor.
-data GetSubscriptionState =
-  GetSubscriptionState'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSubscriptionState = GetSubscriptionState'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSubscriptionState' with the minimum fields required to make a request.
 --
 getSubscriptionState
     :: GetSubscriptionState
 getSubscriptionState = GetSubscriptionState'
-
 
 instance AWSRequest GetSubscriptionState where
         type Rs GetSubscriptionState =
@@ -89,11 +86,13 @@ instance ToQuery GetSubscriptionState where
         toQuery = const mempty
 
 -- | /See:/ 'getSubscriptionStateResponse' smart constructor.
-data GetSubscriptionStateResponse = GetSubscriptionStateResponse'
-  { _gssrsResponseStatus    :: !Int
-  , _gssrsSubscriptionState :: !SubscriptionState
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSubscriptionStateResponse = GetSubscriptionStateResponse'{_gssrsResponseStatus
+                                                                  :: !Int,
+                                                                  _gssrsSubscriptionState
+                                                                  ::
+                                                                  !SubscriptionState}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetSubscriptionStateResponse' with the minimum fields required to make a request.
 --
@@ -106,12 +105,11 @@ getSubscriptionStateResponse
     :: Int -- ^ 'gssrsResponseStatus'
     -> SubscriptionState -- ^ 'gssrsSubscriptionState'
     -> GetSubscriptionStateResponse
-getSubscriptionStateResponse pResponseStatus_ pSubscriptionState_ =
-  GetSubscriptionStateResponse'
-    { _gssrsResponseStatus = pResponseStatus_
-    , _gssrsSubscriptionState = pSubscriptionState_
-    }
-
+getSubscriptionStateResponse pResponseStatus_
+  pSubscriptionState_
+  = GetSubscriptionStateResponse'{_gssrsResponseStatus
+                                    = pResponseStatus_,
+                                  _gssrsSubscriptionState = pSubscriptionState_}
 
 -- | -- | The response status code.
 gssrsResponseStatus :: Lens' GetSubscriptionStateResponse Int

@@ -18,17 +18,21 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the credit option for CPU usage of one or more of your T2 instances. The credit options are @standard@ and @unlimited@ .
+-- Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are @standard@ and @unlimited@ .
 --
 --
--- If you do not specify an instance ID, Amazon EC2 returns only the T2 instances with the @unlimited@ credit option. If you specify one or more instance IDs, Amazon EC2 returns the credit option (@standard@ or @unlimited@ ) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a T2 instance, an error is returned.
+-- If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the @unlimited@ credit option, as well as instances that were previously configured as T2, T3, and T3a with the @unlimited@ credit option. For example, if you resize a T2 instance, while it is configured as @unlimited@ , to an M4 instance, Amazon EC2 returns the M4 instance.
+--
+-- If you specify one or more instance IDs, Amazon EC2 returns the credit option (@standard@ or @unlimited@ ) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned.
 --
 -- Recently terminated instances might appear in the returned results. This interval is usually less than one hour.
 --
 -- If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.
 --
--- For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html T2 Instances> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html Burstable Performance Instances> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribeInstanceCreditSpecifications
     (
     -- * Creating a Request
@@ -53,46 +57,59 @@ module Network.AWS.EC2.DescribeInstanceCreditSpecifications
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeInstanceCreditSpecifications' smart constructor.
-data DescribeInstanceCreditSpecifications = DescribeInstanceCreditSpecifications'
-  { _dicsFilters     :: !(Maybe [Filter])
-  , _dicsNextToken   :: !(Maybe Text)
-  , _dicsInstanceIds :: !(Maybe [Text])
-  , _dicsDryRun      :: !(Maybe Bool)
-  , _dicsMaxResults  :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstanceCreditSpecifications = DescribeInstanceCreditSpecifications'{_dicsFilters
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [Filter]),
+                                                                                  _dicsNextToken
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _dicsInstanceIds
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [Text]),
+                                                                                  _dicsDryRun
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Bool),
+                                                                                  _dicsMaxResults
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Nat)}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeInstanceCreditSpecifications' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dicsFilters' - One or more filters.     * @instance-id@ - The ID of the instance.
+-- * 'dicsFilters' - The filters.     * @instance-id@ - The ID of the instance.
 --
 -- * 'dicsNextToken' - The token to retrieve the next page of results.
 --
--- * 'dicsInstanceIds' - One or more instance IDs. Default: Describes all your instances. Constraints: Maximum 1000 explicitly specified instance IDs.
+-- * 'dicsInstanceIds' - The instance IDs. Default: Describes all your instances. Constraints: Maximum 1000 explicitly specified instance IDs.
 --
 -- * 'dicsDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
 -- * 'dicsMaxResults' - The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
 describeInstanceCreditSpecifications
     :: DescribeInstanceCreditSpecifications
-describeInstanceCreditSpecifications =
-  DescribeInstanceCreditSpecifications'
-    { _dicsFilters = Nothing
-    , _dicsNextToken = Nothing
-    , _dicsInstanceIds = Nothing
-    , _dicsDryRun = Nothing
-    , _dicsMaxResults = Nothing
-    }
+describeInstanceCreditSpecifications
+  = DescribeInstanceCreditSpecifications'{_dicsFilters
+                                            = Nothing,
+                                          _dicsNextToken = Nothing,
+                                          _dicsInstanceIds = Nothing,
+                                          _dicsDryRun = Nothing,
+                                          _dicsMaxResults = Nothing}
 
-
--- | One or more filters.     * @instance-id@ - The ID of the instance.
+-- | The filters.     * @instance-id@ - The ID of the instance.
 dicsFilters :: Lens' DescribeInstanceCreditSpecifications [Filter]
 dicsFilters = lens _dicsFilters (\ s a -> s{_dicsFilters = a}) . _Default . _Coerce
 
@@ -100,7 +117,7 @@ dicsFilters = lens _dicsFilters (\ s a -> s{_dicsFilters = a}) . _Default . _Coe
 dicsNextToken :: Lens' DescribeInstanceCreditSpecifications (Maybe Text)
 dicsNextToken = lens _dicsNextToken (\ s a -> s{_dicsNextToken = a})
 
--- | One or more instance IDs. Default: Describes all your instances. Constraints: Maximum 1000 explicitly specified instance IDs.
+-- | The instance IDs. Default: Describes all your instances. Constraints: Maximum 1000 explicitly specified instance IDs.
 dicsInstanceIds :: Lens' DescribeInstanceCreditSpecifications [Text]
 dicsInstanceIds = lens _dicsInstanceIds (\ s a -> s{_dicsInstanceIds = a}) . _Default . _Coerce
 
@@ -109,8 +126,18 @@ dicsDryRun :: Lens' DescribeInstanceCreditSpecifications (Maybe Bool)
 dicsDryRun = lens _dicsDryRun (\ s a -> s{_dicsDryRun = a})
 
 -- | The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
-dicsMaxResults :: Lens' DescribeInstanceCreditSpecifications (Maybe Int)
-dicsMaxResults = lens _dicsMaxResults (\ s a -> s{_dicsMaxResults = a})
+dicsMaxResults :: Lens' DescribeInstanceCreditSpecifications (Maybe Natural)
+dicsMaxResults = lens _dicsMaxResults (\ s a -> s{_dicsMaxResults = a}) . mapping _Nat
+
+instance AWSPager
+           DescribeInstanceCreditSpecifications
+         where
+        page rq rs
+          | stop (rs ^. dicsrsNextToken) = Nothing
+          | stop (rs ^. dicsrsInstanceCreditSpecifications) =
+            Nothing
+          | otherwise =
+            Just $ rq & dicsNextToken .~ rs ^. dicsrsNextToken
 
 instance AWSRequest
            DescribeInstanceCreditSpecifications
@@ -159,12 +186,20 @@ instance ToQuery DescribeInstanceCreditSpecifications
                "MaxResults" =: _dicsMaxResults]
 
 -- | /See:/ 'describeInstanceCreditSpecificationsResponse' smart constructor.
-data DescribeInstanceCreditSpecificationsResponse = DescribeInstanceCreditSpecificationsResponse'
-  { _dicsrsNextToken :: !(Maybe Text)
-  , _dicsrsInstanceCreditSpecifications :: !(Maybe [InstanceCreditSpecification])
-  , _dicsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstanceCreditSpecificationsResponse = DescribeInstanceCreditSpecificationsResponse'{_dicsrsNextToken
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      Text),
+                                                                                                  _dicsrsInstanceCreditSpecifications
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      [InstanceCreditSpecification]),
+                                                                                                  _dicsrsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'DescribeInstanceCreditSpecificationsResponse' with the minimum fields required to make a request.
 --
@@ -178,13 +213,14 @@ data DescribeInstanceCreditSpecificationsResponse = DescribeInstanceCreditSpecif
 describeInstanceCreditSpecificationsResponse
     :: Int -- ^ 'dicsrsResponseStatus'
     -> DescribeInstanceCreditSpecificationsResponse
-describeInstanceCreditSpecificationsResponse pResponseStatus_ =
-  DescribeInstanceCreditSpecificationsResponse'
-    { _dicsrsNextToken = Nothing
-    , _dicsrsInstanceCreditSpecifications = Nothing
-    , _dicsrsResponseStatus = pResponseStatus_
-    }
-
+describeInstanceCreditSpecificationsResponse
+  pResponseStatus_
+  = DescribeInstanceCreditSpecificationsResponse'{_dicsrsNextToken
+                                                    = Nothing,
+                                                  _dicsrsInstanceCreditSpecifications
+                                                    = Nothing,
+                                                  _dicsrsResponseStatus =
+                                                    pResponseStatus_}
 
 -- | The token to use to retrieve the next page of results. This value is @null@ when there are no more results to return.
 dicsrsNextToken :: Lens' DescribeInstanceCreditSpecificationsResponse (Maybe Text)

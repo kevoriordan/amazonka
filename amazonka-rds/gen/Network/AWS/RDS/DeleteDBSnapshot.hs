@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a DBSnapshot. If the snapshot is being copied, the copy operation is terminated.
+-- Deletes a DB snapshot. If the snapshot is being copied, the copy operation is terminated.
 --
 --
 module Network.AWS.RDS.DeleteDBSnapshot
@@ -44,29 +44,28 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteDBSnapshot' smart constructor.
-newtype DeleteDBSnapshot = DeleteDBSnapshot'
-  { _ddbsDBSnapshotIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDBSnapshot = DeleteDBSnapshot'{_ddbsDBSnapshotIdentifier
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDBSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddbsDBSnapshotIdentifier' - The DBSnapshot identifier. Constraints: Must be the name of an existing DB snapshot in the @available@ state.
+-- * 'ddbsDBSnapshotIdentifier' - The DB snapshot identifier. Constraints: Must be the name of an existing DB snapshot in the @available@ state.
 deleteDBSnapshot
     :: Text -- ^ 'ddbsDBSnapshotIdentifier'
     -> DeleteDBSnapshot
-deleteDBSnapshot pDBSnapshotIdentifier_ =
-  DeleteDBSnapshot' {_ddbsDBSnapshotIdentifier = pDBSnapshotIdentifier_}
+deleteDBSnapshot pDBSnapshotIdentifier_
+  = DeleteDBSnapshot'{_ddbsDBSnapshotIdentifier =
+                        pDBSnapshotIdentifier_}
 
-
--- | The DBSnapshot identifier. Constraints: Must be the name of an existing DB snapshot in the @available@ state.
+-- | The DB snapshot identifier. Constraints: Must be the name of an existing DB snapshot in the @available@ state.
 ddbsDBSnapshotIdentifier :: Lens' DeleteDBSnapshot Text
 ddbsDBSnapshotIdentifier = lens _ddbsDBSnapshotIdentifier (\ s a -> s{_ddbsDBSnapshotIdentifier = a})
 
@@ -97,11 +96,13 @@ instance ToQuery DeleteDBSnapshot where
                "DBSnapshotIdentifier" =: _ddbsDBSnapshotIdentifier]
 
 -- | /See:/ 'deleteDBSnapshotResponse' smart constructor.
-data DeleteDBSnapshotResponse = DeleteDBSnapshotResponse'
-  { _ddbsrsDBSnapshot     :: !(Maybe DBSnapshot)
-  , _ddbsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDBSnapshotResponse = DeleteDBSnapshotResponse'{_ddbsrsDBSnapshot
+                                                          ::
+                                                          !(Maybe DBSnapshot),
+                                                          _ddbsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteDBSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -113,10 +114,10 @@ data DeleteDBSnapshotResponse = DeleteDBSnapshotResponse'
 deleteDBSnapshotResponse
     :: Int -- ^ 'ddbsrsResponseStatus'
     -> DeleteDBSnapshotResponse
-deleteDBSnapshotResponse pResponseStatus_ =
-  DeleteDBSnapshotResponse'
-    {_ddbsrsDBSnapshot = Nothing, _ddbsrsResponseStatus = pResponseStatus_}
-
+deleteDBSnapshotResponse pResponseStatus_
+  = DeleteDBSnapshotResponse'{_ddbsrsDBSnapshot =
+                                Nothing,
+                              _ddbsrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ddbsrsDBSnapshot :: Lens' DeleteDBSnapshotResponse (Maybe DBSnapshot)

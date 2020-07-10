@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @DeleteQualificationType@ deletes a Qualification type and deletes any HIT types that are associated with the Qualification type.
+-- The @DeleteQualificationType@ deletes a Qualification type and deletes any HIT types that are associated with the Qualification type. 
 --
 --
 -- This operation does not revoke Qualifications already assigned to Workers because the Qualifications might be needed for active HITs. If there are any pending requests for the Qualification type, Amazon Mechanical Turk rejects those requests. After you delete a Qualification type, you can no longer use it to create HITs or HIT types.
@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteQualificationType' smart constructor.
-newtype DeleteQualificationType = DeleteQualificationType'
-  { _dqtQualificationTypeId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteQualificationType = DeleteQualificationType'{_dqtQualificationTypeId
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteQualificationType' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DeleteQualificationType = DeleteQualificationType'
 deleteQualificationType
     :: Text -- ^ 'dqtQualificationTypeId'
     -> DeleteQualificationType
-deleteQualificationType pQualificationTypeId_ =
-  DeleteQualificationType' {_dqtQualificationTypeId = pQualificationTypeId_}
-
+deleteQualificationType pQualificationTypeId_
+  = DeleteQualificationType'{_dqtQualificationTypeId =
+                               pQualificationTypeId_}
 
 -- | The ID of the QualificationType to dispose.
 dqtQualificationTypeId :: Lens' DeleteQualificationType Text
@@ -105,10 +105,11 @@ instance ToQuery DeleteQualificationType where
         toQuery = const mempty
 
 -- | /See:/ 'deleteQualificationTypeResponse' smart constructor.
-newtype DeleteQualificationTypeResponse = DeleteQualificationTypeResponse'
-  { _dqtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteQualificationTypeResponse = DeleteQualificationTypeResponse'{_dqtrsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteQualificationTypeResponse' with the minimum fields required to make a request.
 --
@@ -118,9 +119,9 @@ newtype DeleteQualificationTypeResponse = DeleteQualificationTypeResponse'
 deleteQualificationTypeResponse
     :: Int -- ^ 'dqtrsResponseStatus'
     -> DeleteQualificationTypeResponse
-deleteQualificationTypeResponse pResponseStatus_ =
-  DeleteQualificationTypeResponse' {_dqtrsResponseStatus = pResponseStatus_}
-
+deleteQualificationTypeResponse pResponseStatus_
+  = DeleteQualificationTypeResponse'{_dqtrsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 dqtrsResponseStatus :: Lens' DeleteQualificationTypeResponse Int

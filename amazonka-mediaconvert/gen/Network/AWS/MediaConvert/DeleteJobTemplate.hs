@@ -42,10 +42,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteJobTemplate' smart constructor.
-newtype DeleteJobTemplate = DeleteJobTemplate'
-  { _djtName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteJobTemplate = DeleteJobTemplate'{_djtName
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteJobTemplate' with the minimum fields required to make a request.
 --
@@ -55,8 +54,8 @@ newtype DeleteJobTemplate = DeleteJobTemplate'
 deleteJobTemplate
     :: Text -- ^ 'djtName'
     -> DeleteJobTemplate
-deleteJobTemplate pName_ = DeleteJobTemplate' {_djtName = pName_}
-
+deleteJobTemplate pName_
+  = DeleteJobTemplate'{_djtName = pName_}
 
 -- | The name of the job template to be deleted.
 djtName :: Lens' DeleteJobTemplate Text
@@ -90,10 +89,10 @@ instance ToQuery DeleteJobTemplate where
         toQuery = const mempty
 
 -- | /See:/ 'deleteJobTemplateResponse' smart constructor.
-newtype DeleteJobTemplateResponse = DeleteJobTemplateResponse'
-  { _djtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteJobTemplateResponse = DeleteJobTemplateResponse'{_djtrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteJobTemplateResponse' with the minimum fields required to make a request.
 --
@@ -103,9 +102,9 @@ newtype DeleteJobTemplateResponse = DeleteJobTemplateResponse'
 deleteJobTemplateResponse
     :: Int -- ^ 'djtrsResponseStatus'
     -> DeleteJobTemplateResponse
-deleteJobTemplateResponse pResponseStatus_ =
-  DeleteJobTemplateResponse' {_djtrsResponseStatus = pResponseStatus_}
-
+deleteJobTemplateResponse pResponseStatus_
+  = DeleteJobTemplateResponse'{_djtrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 djtrsResponseStatus :: Lens' DeleteJobTemplateResponse Int

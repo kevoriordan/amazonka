@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about builds.
+-- Gets information about one or more builds.
 --
 --
 module Network.AWS.CodeBuild.BatchGetBuilds
@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchGetBuilds' smart constructor.
-newtype BatchGetBuilds = BatchGetBuilds'
-  { _bgbIds :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype BatchGetBuilds = BatchGetBuilds'{_bgbIds ::
+                                         List1 Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchGetBuilds' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype BatchGetBuilds = BatchGetBuilds'
 batchGetBuilds
     :: NonEmpty Text -- ^ 'bgbIds'
     -> BatchGetBuilds
-batchGetBuilds pIds_ = BatchGetBuilds' {_bgbIds = _List1 # pIds_}
-
+batchGetBuilds pIds_
+  = BatchGetBuilds'{_bgbIds = _List1 # pIds_}
 
 -- | The IDs of the builds.
 bgbIds :: Lens' BatchGetBuilds (NonEmpty Text)
@@ -101,12 +100,14 @@ instance ToQuery BatchGetBuilds where
         toQuery = const mempty
 
 -- | /See:/ 'batchGetBuildsResponse' smart constructor.
-data BatchGetBuildsResponse = BatchGetBuildsResponse'
-  { _bgbrsBuilds         :: !(Maybe [Build])
-  , _bgbrsBuildsNotFound :: !(Maybe (List1 Text))
-  , _bgbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetBuildsResponse = BatchGetBuildsResponse'{_bgbrsBuilds
+                                                      :: !(Maybe [Build]),
+                                                      _bgbrsBuildsNotFound ::
+                                                      !(Maybe (List1 Text)),
+                                                      _bgbrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'BatchGetBuildsResponse' with the minimum fields required to make a request.
 --
@@ -120,13 +121,10 @@ data BatchGetBuildsResponse = BatchGetBuildsResponse'
 batchGetBuildsResponse
     :: Int -- ^ 'bgbrsResponseStatus'
     -> BatchGetBuildsResponse
-batchGetBuildsResponse pResponseStatus_ =
-  BatchGetBuildsResponse'
-    { _bgbrsBuilds = Nothing
-    , _bgbrsBuildsNotFound = Nothing
-    , _bgbrsResponseStatus = pResponseStatus_
-    }
-
+batchGetBuildsResponse pResponseStatus_
+  = BatchGetBuildsResponse'{_bgbrsBuilds = Nothing,
+                            _bgbrsBuildsNotFound = Nothing,
+                            _bgbrsResponseStatus = pResponseStatus_}
 
 -- | Information about the requested builds.
 bgbrsBuilds :: Lens' BatchGetBuildsResponse [Build]

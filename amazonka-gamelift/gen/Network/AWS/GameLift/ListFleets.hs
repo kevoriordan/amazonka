@@ -18,57 +18,31 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a collection of fleet records for this AWS account. You can filter the result set by build ID. Use the pagination parameters to retrieve results in sequential pages.
+-- Retrieves a collection of fleet resources for this AWS account. You can filter the result set to find only those fleets that are deployed with a specific build or script. Use the pagination parameters to retrieve results in sequential pages.
 --
 --
--- Fleet-related operations include:
+-- __Learn more__ 
 --
---     * 'CreateFleet'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html Setting up GameLift Fleets> 
 --
---     * 'ListFleets'
+-- __Related operations__ 
 --
---     * 'DeleteFleet'
+--     * 'CreateFleet' 
 --
---     * Describe fleets:
+--     * 'ListFleets' 
 --
---     * 'DescribeFleetAttributes'
+--     * 'DeleteFleet' 
 --
---     * 'DescribeFleetCapacity'
+--     * 'DescribeFleetAttributes' 
 --
---     * 'DescribeFleetPortSettings'
+--     * 'UpdateFleetAttributes' 
 --
---     * 'DescribeFleetUtilization'
---
---     * 'DescribeRuntimeConfiguration'
---
---     * 'DescribeEC2InstanceLimits'
---
---     * 'DescribeFleetEvents'
---
---
---
---     * Update fleets:
---
---     * 'UpdateFleetAttributes'
---
---     * 'UpdateFleetCapacity'
---
---     * 'UpdateFleetPortSettings'
---
---     * 'UpdateRuntimeConfiguration'
---
---
---
---     * Manage fleet actions:
---
---     * 'StartFleetActions'
---
---     * 'StopFleetActions'
+--     * 'StartFleetActions' or 'StopFleetActions' 
 --
 --
 --
 --
---
+-- This operation returns paginated results.
 module Network.AWS.GameLift.ListFleets
     (
     -- * Creating a Request
@@ -77,6 +51,7 @@ module Network.AWS.GameLift.ListFleets
     -- * Request Lenses
     , lfBuildId
     , lfNextToken
+    , lfScriptId
     , lfLimit
 
     -- * Destructuring the Response
@@ -91,6 +66,7 @@ module Network.AWS.GameLift.ListFleets
 import Network.AWS.GameLift.Types
 import Network.AWS.GameLift.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -100,29 +76,32 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listFleets' smart constructor.
-data ListFleets = ListFleets'
-  { _lfBuildId   :: !(Maybe Text)
-  , _lfNextToken :: !(Maybe Text)
-  , _lfLimit     :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFleets = ListFleets'{_lfBuildId ::
+                              !(Maybe Text),
+                              _lfNextToken :: !(Maybe Text),
+                              _lfScriptId :: !(Maybe Text),
+                              _lfLimit :: !(Maybe Nat)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFleets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lfBuildId' - Unique identifier for a build to return fleets for. Use this parameter to return only fleets using the specified build. To retrieve all fleets, leave this parameter empty.
+-- * 'lfBuildId' - A unique identifier for a build to return fleets for. Use this parameter to return only fleets using a specified build. Use either the build ID or ARN value. To retrieve all fleets, do not include either a BuildId and ScriptID parameter.
 --
 -- * 'lfNextToken' - Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
 --
--- * 'lfLimit' - Maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
+-- * 'lfScriptId' - A unique identifier for a Realtime script to return fleets for. Use this parameter to return only fleets using a specified script. Use either the script ID or ARN value. To retrieve all fleets, leave this parameter empty.
+--
+-- * 'lfLimit' - The maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
 listFleets
     :: ListFleets
-listFleets =
-  ListFleets' {_lfBuildId = Nothing, _lfNextToken = Nothing, _lfLimit = Nothing}
+listFleets
+  = ListFleets'{_lfBuildId = Nothing,
+                _lfNextToken = Nothing, _lfScriptId = Nothing,
+                _lfLimit = Nothing}
 
-
--- | Unique identifier for a build to return fleets for. Use this parameter to return only fleets using the specified build. To retrieve all fleets, leave this parameter empty.
+-- | A unique identifier for a build to return fleets for. Use this parameter to return only fleets using a specified build. Use either the build ID or ARN value. To retrieve all fleets, do not include either a BuildId and ScriptID parameter.
 lfBuildId :: Lens' ListFleets (Maybe Text)
 lfBuildId = lens _lfBuildId (\ s a -> s{_lfBuildId = a})
 
@@ -130,9 +109,20 @@ lfBuildId = lens _lfBuildId (\ s a -> s{_lfBuildId = a})
 lfNextToken :: Lens' ListFleets (Maybe Text)
 lfNextToken = lens _lfNextToken (\ s a -> s{_lfNextToken = a})
 
--- | Maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
+-- | A unique identifier for a Realtime script to return fleets for. Use this parameter to return only fleets using a specified script. Use either the script ID or ARN value. To retrieve all fleets, leave this parameter empty.
+lfScriptId :: Lens' ListFleets (Maybe Text)
+lfScriptId = lens _lfScriptId (\ s a -> s{_lfScriptId = a})
+
+-- | The maximum number of results to return. Use this parameter with @NextToken@ to get results as a set of sequential pages.
 lfLimit :: Lens' ListFleets (Maybe Natural)
 lfLimit = lens _lfLimit (\ s a -> s{_lfLimit = a}) . mapping _Nat
+
+instance AWSPager ListFleets where
+        page rq rs
+          | stop (rs ^. lfrsNextToken) = Nothing
+          | stop (rs ^. lfrsFleetIds) = Nothing
+          | otherwise =
+            Just $ rq & lfNextToken .~ rs ^. lfrsNextToken
 
 instance AWSRequest ListFleets where
         type Rs ListFleets = ListFleetsResponse
@@ -163,6 +153,7 @@ instance ToJSON ListFleets where
               (catMaybes
                  [("BuildId" .=) <$> _lfBuildId,
                   ("NextToken" .=) <$> _lfNextToken,
+                  ("ScriptId" .=) <$> _lfScriptId,
                   ("Limit" .=) <$> _lfLimit])
 
 instance ToPath ListFleets where
@@ -176,12 +167,12 @@ instance ToQuery ListFleets where
 --
 --
 -- /See:/ 'listFleetsResponse' smart constructor.
-data ListFleetsResponse = ListFleetsResponse'
-  { _lfrsNextToken      :: !(Maybe Text)
-  , _lfrsFleetIds       :: !(Maybe (List1 Text))
-  , _lfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFleetsResponse = ListFleetsResponse'{_lfrsNextToken
+                                              :: !(Maybe Text),
+                                              _lfrsFleetIds ::
+                                              !(Maybe (List1 Text)),
+                                              _lfrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFleetsResponse' with the minimum fields required to make a request.
 --
@@ -195,13 +186,10 @@ data ListFleetsResponse = ListFleetsResponse'
 listFleetsResponse
     :: Int -- ^ 'lfrsResponseStatus'
     -> ListFleetsResponse
-listFleetsResponse pResponseStatus_ =
-  ListFleetsResponse'
-    { _lfrsNextToken = Nothing
-    , _lfrsFleetIds = Nothing
-    , _lfrsResponseStatus = pResponseStatus_
-    }
-
+listFleetsResponse pResponseStatus_
+  = ListFleetsResponse'{_lfrsNextToken = Nothing,
+                        _lfrsFleetIds = Nothing,
+                        _lfrsResponseStatus = pResponseStatus_}
 
 -- | Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
 lfrsNextToken :: Lens' ListFleetsResponse (Maybe Text)

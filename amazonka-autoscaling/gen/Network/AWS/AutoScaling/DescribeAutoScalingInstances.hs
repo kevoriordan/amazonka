@@ -51,12 +51,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeAutoScalingInstances' smart constructor.
-data DescribeAutoScalingInstances = DescribeAutoScalingInstances'
-  { _dasiNextToken   :: !(Maybe Text)
-  , _dasiInstanceIds :: !(Maybe [Text])
-  , _dasiMaxRecords  :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAutoScalingInstances = DescribeAutoScalingInstances'{_dasiNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dasiInstanceIds
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Text]),
+                                                                  _dasiMaxRecords
+                                                                  ::
+                                                                  !(Maybe Int)}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeAutoScalingInstances' with the minimum fields required to make a request.
 --
@@ -64,28 +70,26 @@ data DescribeAutoScalingInstances = DescribeAutoScalingInstances'
 --
 -- * 'dasiNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
--- * 'dasiInstanceIds' - The instances to describe; up to 50 instance IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.
+-- * 'dasiInstanceIds' - The IDs of the instances. You can specify up to @MaxRecords@ IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.
 --
--- * 'dasiMaxRecords' - The maximum number of items to return with this call. The default value is 50 and the maximum value is 50.
+-- * 'dasiMaxRecords' - The maximum number of items to return with this call. The default value is @50@ and the maximum value is @50@ .
 describeAutoScalingInstances
     :: DescribeAutoScalingInstances
-describeAutoScalingInstances =
-  DescribeAutoScalingInstances'
-    { _dasiNextToken = Nothing
-    , _dasiInstanceIds = Nothing
-    , _dasiMaxRecords = Nothing
-    }
-
+describeAutoScalingInstances
+  = DescribeAutoScalingInstances'{_dasiNextToken =
+                                    Nothing,
+                                  _dasiInstanceIds = Nothing,
+                                  _dasiMaxRecords = Nothing}
 
 -- | The token for the next set of items to return. (You received this token from a previous call.)
 dasiNextToken :: Lens' DescribeAutoScalingInstances (Maybe Text)
 dasiNextToken = lens _dasiNextToken (\ s a -> s{_dasiNextToken = a})
 
--- | The instances to describe; up to 50 instance IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.
+-- | The IDs of the instances. You can specify up to @MaxRecords@ IDs. If you omit this parameter, all Auto Scaling instances are described. If you specify an ID that does not exist, it is ignored with no error.
 dasiInstanceIds :: Lens' DescribeAutoScalingInstances [Text]
 dasiInstanceIds = lens _dasiInstanceIds (\ s a -> s{_dasiInstanceIds = a}) . _Default . _Coerce
 
--- | The maximum number of items to return with this call. The default value is 50 and the maximum value is 50.
+-- | The maximum number of items to return with this call. The default value is @50@ and the maximum value is @50@ .
 dasiMaxRecords :: Lens' DescribeAutoScalingInstances (Maybe Int)
 dasiMaxRecords = lens _dasiMaxRecords (\ s a -> s{_dasiMaxRecords = a})
 
@@ -133,18 +137,25 @@ instance ToQuery DescribeAutoScalingInstances where
                "MaxRecords" =: _dasiMaxRecords]
 
 -- | /See:/ 'describeAutoScalingInstancesResponse' smart constructor.
-data DescribeAutoScalingInstancesResponse = DescribeAutoScalingInstancesResponse'
-  { _dasirsNextToken            :: !(Maybe Text)
-  , _dasirsAutoScalingInstances :: !(Maybe [AutoScalingInstanceDetails])
-  , _dasirsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAutoScalingInstancesResponse = DescribeAutoScalingInstancesResponse'{_dasirsNextToken
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _dasirsAutoScalingInstances
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [AutoScalingInstanceDetails]),
+                                                                                  _dasirsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeAutoScalingInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dasirsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- * 'dasirsNextToken' - A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 --
 -- * 'dasirsAutoScalingInstances' - The instances.
 --
@@ -152,15 +163,14 @@ data DescribeAutoScalingInstancesResponse = DescribeAutoScalingInstancesResponse
 describeAutoScalingInstancesResponse
     :: Int -- ^ 'dasirsResponseStatus'
     -> DescribeAutoScalingInstancesResponse
-describeAutoScalingInstancesResponse pResponseStatus_ =
-  DescribeAutoScalingInstancesResponse'
-    { _dasirsNextToken = Nothing
-    , _dasirsAutoScalingInstances = Nothing
-    , _dasirsResponseStatus = pResponseStatus_
-    }
+describeAutoScalingInstancesResponse pResponseStatus_
+  = DescribeAutoScalingInstancesResponse'{_dasirsNextToken
+                                            = Nothing,
+                                          _dasirsAutoScalingInstances = Nothing,
+                                          _dasirsResponseStatus =
+                                            pResponseStatus_}
 
-
--- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- | A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 dasirsNextToken :: Lens' DescribeAutoScalingInstancesResponse (Maybe Text)
 dasirsNextToken = lens _dasirsNextToken (\ s a -> s{_dasirsNextToken = a})
 

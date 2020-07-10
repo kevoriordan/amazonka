@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Undocumented operation.
+--
+-- This operation returns paginated results.
 module Network.AWS.APIGateway.GetDocumentationParts
     (
     -- * Creating a Request
@@ -45,6 +47,7 @@ module Network.AWS.APIGateway.GetDocumentationParts
 import Network.AWS.APIGateway.Types
 import Network.AWS.APIGateway.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -54,16 +57,21 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDocumentationParts' smart constructor.
-data GetDocumentationParts = GetDocumentationParts'
-  { _gdpPath           :: !(Maybe Text)
-  , _gdpLocationStatus :: !(Maybe LocationStatusType)
-  , _gdpNameQuery      :: !(Maybe Text)
-  , _gdpLimit          :: !(Maybe Int)
-  , _gdpType           :: !(Maybe DocumentationPartType)
-  , _gdpPosition       :: !(Maybe Text)
-  , _gdpRestAPIId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDocumentationParts = GetDocumentationParts'{_gdpPath
+                                                    :: !(Maybe Text),
+                                                    _gdpLocationStatus ::
+                                                    !(Maybe LocationStatusType),
+                                                    _gdpNameQuery ::
+                                                    !(Maybe Text),
+                                                    _gdpLimit :: !(Maybe Int),
+                                                    _gdpType ::
+                                                    !(Maybe
+                                                        DocumentationPartType),
+                                                    _gdpPosition ::
+                                                    !(Maybe Text),
+                                                    _gdpRestAPIId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetDocumentationParts' with the minimum fields required to make a request.
 --
@@ -77,7 +85,7 @@ data GetDocumentationParts = GetDocumentationParts'
 --
 -- * 'gdpLimit' - The maximum number of returned results per page. The default value is 25 and the maximum value is 500.
 --
--- * 'gdpType' - The type of API entities of the to-be-retrieved documentation parts.
+-- * 'gdpType' - The type of API entities of the to-be-retrieved documentation parts. 
 --
 -- * 'gdpPosition' - The current pagination position in the paged result set.
 --
@@ -85,17 +93,12 @@ data GetDocumentationParts = GetDocumentationParts'
 getDocumentationParts
     :: Text -- ^ 'gdpRestAPIId'
     -> GetDocumentationParts
-getDocumentationParts pRestAPIId_ =
-  GetDocumentationParts'
-    { _gdpPath = Nothing
-    , _gdpLocationStatus = Nothing
-    , _gdpNameQuery = Nothing
-    , _gdpLimit = Nothing
-    , _gdpType = Nothing
-    , _gdpPosition = Nothing
-    , _gdpRestAPIId = pRestAPIId_
-    }
-
+getDocumentationParts pRestAPIId_
+  = GetDocumentationParts'{_gdpPath = Nothing,
+                           _gdpLocationStatus = Nothing,
+                           _gdpNameQuery = Nothing, _gdpLimit = Nothing,
+                           _gdpType = Nothing, _gdpPosition = Nothing,
+                           _gdpRestAPIId = pRestAPIId_}
 
 -- | The path of API entities of the to-be-retrieved documentation parts.
 gdpPath :: Lens' GetDocumentationParts (Maybe Text)
@@ -113,7 +116,7 @@ gdpNameQuery = lens _gdpNameQuery (\ s a -> s{_gdpNameQuery = a})
 gdpLimit :: Lens' GetDocumentationParts (Maybe Int)
 gdpLimit = lens _gdpLimit (\ s a -> s{_gdpLimit = a})
 
--- | The type of API entities of the to-be-retrieved documentation parts.
+-- | The type of API entities of the to-be-retrieved documentation parts. 
 gdpType :: Lens' GetDocumentationParts (Maybe DocumentationPartType)
 gdpType = lens _gdpType (\ s a -> s{_gdpType = a})
 
@@ -124,6 +127,13 @@ gdpPosition = lens _gdpPosition (\ s a -> s{_gdpPosition = a})
 -- | [Required] The string identifier of the associated 'RestApi' .
 gdpRestAPIId :: Lens' GetDocumentationParts Text
 gdpRestAPIId = lens _gdpRestAPIId (\ s a -> s{_gdpRestAPIId = a})
+
+instance AWSPager GetDocumentationParts where
+        page rq rs
+          | stop (rs ^. gdprsPosition) = Nothing
+          | stop (rs ^. gdprsItems) = Nothing
+          | otherwise =
+            Just $ rq & gdpPosition .~ rs ^. gdprsPosition
 
 instance AWSRequest GetDocumentationParts where
         type Rs GetDocumentationParts =
@@ -163,15 +173,21 @@ instance ToQuery GetDocumentationParts where
 -- | The collection of documentation parts of an API.
 --
 --
--- <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html Documenting an API> , 'DocumentationPart'
+-- <https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html Documenting an API> , 'DocumentationPart' 
 --
 -- /See:/ 'getDocumentationPartsResponse' smart constructor.
-data GetDocumentationPartsResponse = GetDocumentationPartsResponse'
-  { _gdprsItems          :: !(Maybe [DocumentationPart])
-  , _gdprsPosition       :: !(Maybe Text)
-  , _gdprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDocumentationPartsResponse = GetDocumentationPartsResponse'{_gdprsItems
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [DocumentationPart]),
+                                                                    _gdprsPosition
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _gdprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetDocumentationPartsResponse' with the minimum fields required to make a request.
 --
@@ -185,13 +201,11 @@ data GetDocumentationPartsResponse = GetDocumentationPartsResponse'
 getDocumentationPartsResponse
     :: Int -- ^ 'gdprsResponseStatus'
     -> GetDocumentationPartsResponse
-getDocumentationPartsResponse pResponseStatus_ =
-  GetDocumentationPartsResponse'
-    { _gdprsItems = Nothing
-    , _gdprsPosition = Nothing
-    , _gdprsResponseStatus = pResponseStatus_
-    }
-
+getDocumentationPartsResponse pResponseStatus_
+  = GetDocumentationPartsResponse'{_gdprsItems =
+                                     Nothing,
+                                   _gdprsPosition = Nothing,
+                                   _gdprsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gdprsItems :: Lens' GetDocumentationPartsResponse [DocumentationPart]

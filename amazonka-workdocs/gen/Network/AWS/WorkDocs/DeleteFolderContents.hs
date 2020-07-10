@@ -43,28 +43,27 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteFolderContents' smart constructor.
-data DeleteFolderContents = DeleteFolderContents'
-  { _dfcAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _dfcFolderId            :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteFolderContents = DeleteFolderContents'{_dfcAuthenticationToken
+                                                  :: !(Maybe (Sensitive Text)),
+                                                  _dfcFolderId :: !Text}
+                              deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFolderContents' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfcAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'dfcAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'dfcFolderId' - The ID of the folder.
 deleteFolderContents
     :: Text -- ^ 'dfcFolderId'
     -> DeleteFolderContents
-deleteFolderContents pFolderId_ =
-  DeleteFolderContents'
-    {_dfcAuthenticationToken = Nothing, _dfcFolderId = pFolderId_}
+deleteFolderContents pFolderId_
+  = DeleteFolderContents'{_dfcAuthenticationToken =
+                            Nothing,
+                          _dfcFolderId = pFolderId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 dfcAuthenticationToken :: Lens' DeleteFolderContents (Maybe Text)
 dfcAuthenticationToken = lens _dfcAuthenticationToken (\ s a -> s{_dfcAuthenticationToken = a}) . mapping _Sensitive
 
@@ -98,16 +97,15 @@ instance ToQuery DeleteFolderContents where
         toQuery = const mempty
 
 -- | /See:/ 'deleteFolderContentsResponse' smart constructor.
-data DeleteFolderContentsResponse =
-  DeleteFolderContentsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFolderContentsResponse = DeleteFolderContentsResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteFolderContentsResponse' with the minimum fields required to make a request.
 --
 deleteFolderContentsResponse
     :: DeleteFolderContentsResponse
-deleteFolderContentsResponse = DeleteFolderContentsResponse'
-
+deleteFolderContentsResponse
+  = DeleteFolderContentsResponse'
 
 instance NFData DeleteFolderContentsResponse where

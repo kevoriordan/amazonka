@@ -48,6 +48,7 @@ library
         , Network.AWS.Inspector.AddAttributesToFindings
         , Network.AWS.Inspector.CreateAssessmentTarget
         , Network.AWS.Inspector.CreateAssessmentTemplate
+        , Network.AWS.Inspector.CreateExclusionsPreview
         , Network.AWS.Inspector.CreateResourceGroup
         , Network.AWS.Inspector.DeleteAssessmentRun
         , Network.AWS.Inspector.DeleteAssessmentTarget
@@ -56,16 +57,19 @@ library
         , Network.AWS.Inspector.DescribeAssessmentTargets
         , Network.AWS.Inspector.DescribeAssessmentTemplates
         , Network.AWS.Inspector.DescribeCrossAccountAccessRole
+        , Network.AWS.Inspector.DescribeExclusions
         , Network.AWS.Inspector.DescribeFindings
         , Network.AWS.Inspector.DescribeResourceGroups
         , Network.AWS.Inspector.DescribeRulesPackages
         , Network.AWS.Inspector.GetAssessmentReport
+        , Network.AWS.Inspector.GetExclusionsPreview
         , Network.AWS.Inspector.GetTelemetryMetadata
         , Network.AWS.Inspector.ListAssessmentRunAgents
         , Network.AWS.Inspector.ListAssessmentRuns
         , Network.AWS.Inspector.ListAssessmentTargets
         , Network.AWS.Inspector.ListAssessmentTemplates
         , Network.AWS.Inspector.ListEventSubscriptions
+        , Network.AWS.Inspector.ListExclusions
         , Network.AWS.Inspector.ListFindings
         , Network.AWS.Inspector.ListRulesPackages
         , Network.AWS.Inspector.ListTagsForResource
@@ -82,12 +86,59 @@ library
         , Network.AWS.Inspector.Waiters
 
     other-modules:
-          Network.AWS.Inspector.Types.Product
-        , Network.AWS.Inspector.Types.Sum
+          Network.AWS.Inspector.Types.AgentFilter
+        , Network.AWS.Inspector.Types.AgentHealth
+        , Network.AWS.Inspector.Types.AgentHealthCode
+        , Network.AWS.Inspector.Types.AgentPreview
+        , Network.AWS.Inspector.Types.AssessmentRun
+        , Network.AWS.Inspector.Types.AssessmentRunAgent
+        , Network.AWS.Inspector.Types.AssessmentRunFilter
+        , Network.AWS.Inspector.Types.AssessmentRunNotification
+        , Network.AWS.Inspector.Types.AssessmentRunNotificationSNSStatusCode
+        , Network.AWS.Inspector.Types.AssessmentRunState
+        , Network.AWS.Inspector.Types.AssessmentRunStateChange
+        , Network.AWS.Inspector.Types.AssessmentTarget
+        , Network.AWS.Inspector.Types.AssessmentTargetFilter
+        , Network.AWS.Inspector.Types.AssessmentTemplate
+        , Network.AWS.Inspector.Types.AssessmentTemplateFilter
+        , Network.AWS.Inspector.Types.AssetAttributes
+        , Network.AWS.Inspector.Types.AssetType
+        , Network.AWS.Inspector.Types.Attribute
+        , Network.AWS.Inspector.Types.DurationRange
+        , Network.AWS.Inspector.Types.EventSubscription
+        , Network.AWS.Inspector.Types.Exclusion
+        , Network.AWS.Inspector.Types.ExclusionPreview
+        , Network.AWS.Inspector.Types.FailedItemDetails
+        , Network.AWS.Inspector.Types.FailedItemErrorCode
+        , Network.AWS.Inspector.Types.Finding
+        , Network.AWS.Inspector.Types.FindingFilter
+        , Network.AWS.Inspector.Types.InspectorEvent
+        , Network.AWS.Inspector.Types.InspectorServiceAttributes
+        , Network.AWS.Inspector.Types.Locale
+        , Network.AWS.Inspector.Types.NetworkInterface
+        , Network.AWS.Inspector.Types.PreviewStatus
+        , Network.AWS.Inspector.Types.PrivateIP
+        , Network.AWS.Inspector.Types.Product
+        , Network.AWS.Inspector.Types.ReportFileFormat
+        , Network.AWS.Inspector.Types.ReportStatus
+        , Network.AWS.Inspector.Types.ReportType
+        , Network.AWS.Inspector.Types.ResourceGroup
+        , Network.AWS.Inspector.Types.ResourceGroupTag
+        , Network.AWS.Inspector.Types.RulesPackage
+        , Network.AWS.Inspector.Types.Scope
+        , Network.AWS.Inspector.Types.ScopeType
+        , Network.AWS.Inspector.Types.SecurityGroup
+        , Network.AWS.Inspector.Types.Severity
+        , Network.AWS.Inspector.Types.StopAction
+        , Network.AWS.Inspector.Types.Subscription
+        , Network.AWS.Inspector.Types.Tag
+        , Network.AWS.Inspector.Types.TelemetryMetadata
+        , Network.AWS.Inspector.Types.TimestampRange
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-inspector-test
     type:              exitcode-stdio-1.0
@@ -111,6 +162,7 @@ test-suite amazonka-inspector-test
         , amazonka-inspector
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

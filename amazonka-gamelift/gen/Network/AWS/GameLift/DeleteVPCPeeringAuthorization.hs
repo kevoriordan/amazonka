@@ -18,22 +18,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels a pending VPC peering authorization for the specified VPC. If the authorization has already been used to create a peering connection, call 'DeleteVpcPeeringConnection' to remove the connection.
+-- Cancels a pending VPC peering authorization for the specified VPC. If you need to delete an existing VPC peering connection, call 'DeleteVpcPeeringConnection' . 
 --
 --
--- VPC peering connection operations include:
+--     * 'CreateVpcPeeringAuthorization' 
 --
---     * 'CreateVpcPeeringAuthorization'
+--     * 'DescribeVpcPeeringAuthorizations' 
 --
---     * 'DescribeVpcPeeringAuthorizations'
+--     * 'DeleteVpcPeeringAuthorization' 
 --
---     * 'DeleteVpcPeeringAuthorization'
+--     * 'CreateVpcPeeringConnection' 
 --
---     * 'CreateVpcPeeringConnection'
+--     * 'DescribeVpcPeeringConnections' 
 --
---     * 'DescribeVpcPeeringConnections'
---
---     * 'DeleteVpcPeeringConnection'
+--     * 'DeleteVpcPeeringConnection' 
 --
 --
 --
@@ -65,35 +63,35 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteVPCPeeringAuthorization' smart constructor.
-data DeleteVPCPeeringAuthorization = DeleteVPCPeeringAuthorization'
-  { _dvpaGameLiftAWSAccountId :: !Text
-  , _dvpaPeerVPCId            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPCPeeringAuthorization = DeleteVPCPeeringAuthorization'{_dvpaGameLiftAWSAccountId
+                                                                    :: !Text,
+                                                                    _dvpaPeerVPCId
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteVPCPeeringAuthorization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvpaGameLiftAWSAccountId' - Unique identifier for the AWS account that you use to manage your Amazon GameLift fleet. You can find your Account ID in the AWS Management Console under account settings.
+-- * 'dvpaGameLiftAWSAccountId' - A unique identifier for the AWS account that you use to manage your Amazon GameLift fleet. You can find your Account ID in the AWS Management Console under account settings.
 --
--- * 'dvpaPeerVPCId' - Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. To get VPC information, including IDs, use the Virtual Private Cloud service tools, including the VPC Dashboard in the AWS Management Console.
+-- * 'dvpaPeerVPCId' - A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region where your fleet is deployed. Look up a VPC ID using the <https://console.aws.amazon.com/vpc/ VPC Dashboard> in the AWS Management Console. Learn more about VPC peering in <https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html VPC Peering with Amazon GameLift Fleets> .
 deleteVPCPeeringAuthorization
     :: Text -- ^ 'dvpaGameLiftAWSAccountId'
     -> Text -- ^ 'dvpaPeerVPCId'
     -> DeleteVPCPeeringAuthorization
-deleteVPCPeeringAuthorization pGameLiftAWSAccountId_ pPeerVPCId_ =
-  DeleteVPCPeeringAuthorization'
-    { _dvpaGameLiftAWSAccountId = pGameLiftAWSAccountId_
-    , _dvpaPeerVPCId = pPeerVPCId_
-    }
+deleteVPCPeeringAuthorization pGameLiftAWSAccountId_
+  pPeerVPCId_
+  = DeleteVPCPeeringAuthorization'{_dvpaGameLiftAWSAccountId
+                                     = pGameLiftAWSAccountId_,
+                                   _dvpaPeerVPCId = pPeerVPCId_}
 
-
--- | Unique identifier for the AWS account that you use to manage your Amazon GameLift fleet. You can find your Account ID in the AWS Management Console under account settings.
+-- | A unique identifier for the AWS account that you use to manage your Amazon GameLift fleet. You can find your Account ID in the AWS Management Console under account settings.
 dvpaGameLiftAWSAccountId :: Lens' DeleteVPCPeeringAuthorization Text
 dvpaGameLiftAWSAccountId = lens _dvpaGameLiftAWSAccountId (\ s a -> s{_dvpaGameLiftAWSAccountId = a})
 
--- | Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. To get VPC information, including IDs, use the Virtual Private Cloud service tools, including the VPC Dashboard in the AWS Management Console.
+-- | A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region where your fleet is deployed. Look up a VPC ID using the <https://console.aws.amazon.com/vpc/ VPC Dashboard> in the AWS Management Console. Learn more about VPC peering in <https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html VPC Peering with Amazon GameLift Fleets> .
 dvpaPeerVPCId :: Lens' DeleteVPCPeeringAuthorization Text
 dvpaPeerVPCId = lens _dvpaPeerVPCId (\ s a -> s{_dvpaPeerVPCId = a})
 
@@ -139,10 +137,12 @@ instance ToQuery DeleteVPCPeeringAuthorization where
         toQuery = const mempty
 
 -- | /See:/ 'deleteVPCPeeringAuthorizationResponse' smart constructor.
-newtype DeleteVPCPeeringAuthorizationResponse = DeleteVPCPeeringAuthorizationResponse'
-  { _dvparsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteVPCPeeringAuthorizationResponse = DeleteVPCPeeringAuthorizationResponse'{_dvparsResponseStatus
+                                                                                       ::
+                                                                                       Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DeleteVPCPeeringAuthorizationResponse' with the minimum fields required to make a request.
 --
@@ -152,10 +152,10 @@ newtype DeleteVPCPeeringAuthorizationResponse = DeleteVPCPeeringAuthorizationRes
 deleteVPCPeeringAuthorizationResponse
     :: Int -- ^ 'dvparsResponseStatus'
     -> DeleteVPCPeeringAuthorizationResponse
-deleteVPCPeeringAuthorizationResponse pResponseStatus_ =
-  DeleteVPCPeeringAuthorizationResponse'
-    {_dvparsResponseStatus = pResponseStatus_}
-
+deleteVPCPeeringAuthorizationResponse
+  pResponseStatus_
+  = DeleteVPCPeeringAuthorizationResponse'{_dvparsResponseStatus
+                                             = pResponseStatus_}
 
 -- | -- | The response status code.
 dvparsResponseStatus :: Lens' DeleteVPCPeeringAuthorizationResponse Int

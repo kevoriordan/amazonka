@@ -21,7 +21,7 @@
 -- Sets the UI customization information for a user pool's built-in app UI.
 --
 --
--- You can specify app UI customization settings for a single client (with a specific @clientId@ ) or for all clients (by setting the @clientId@ to @ALL@ ). If you specify @ALL@ , the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the @ALL@ configuration.
+-- You can specify app UI customization settings for a single client (with a specific @clientId@ ) or for all clients (by setting the @clientId@ to @ALL@ ). If you specify @ALL@ , the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the @ALL@ configuration. 
 --
 module Network.AWS.CognitoIdentityProvider.SetUICustomization
     (
@@ -50,13 +50,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setUICustomization' smart constructor.
-data SetUICustomization = SetUICustomization'
-  { _suicClientId   :: !(Maybe (Sensitive Text))
-  , _suicCSS        :: !(Maybe Text)
-  , _suicImageFile  :: !(Maybe Base64)
-  , _suicUserPoolId :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data SetUICustomization = SetUICustomization'{_suicClientId
+                                              :: !(Maybe (Sensitive Text)),
+                                              _suicCSS :: !(Maybe Text),
+                                              _suicImageFile :: !(Maybe Base64),
+                                              _suicUserPoolId :: !Text}
+                            deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetUICustomization' with the minimum fields required to make a request.
 --
@@ -72,14 +71,10 @@ data SetUICustomization = SetUICustomization'
 setUICustomization
     :: Text -- ^ 'suicUserPoolId'
     -> SetUICustomization
-setUICustomization pUserPoolId_ =
-  SetUICustomization'
-    { _suicClientId = Nothing
-    , _suicCSS = Nothing
-    , _suicImageFile = Nothing
-    , _suicUserPoolId = pUserPoolId_
-    }
-
+setUICustomization pUserPoolId_
+  = SetUICustomization'{_suicClientId = Nothing,
+                        _suicCSS = Nothing, _suicImageFile = Nothing,
+                        _suicUserPoolId = pUserPoolId_}
 
 -- | The client ID for the client app.
 suicClientId :: Lens' SetUICustomization (Maybe Text)
@@ -137,11 +132,12 @@ instance ToQuery SetUICustomization where
         toQuery = const mempty
 
 -- | /See:/ 'setUICustomizationResponse' smart constructor.
-data SetUICustomizationResponse = SetUICustomizationResponse'
-  { _suicrsResponseStatus  :: !Int
-  , _suicrsUICustomization :: !UICustomizationType
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data SetUICustomizationResponse = SetUICustomizationResponse'{_suicrsResponseStatus
+                                                              :: !Int,
+                                                              _suicrsUICustomization
+                                                              ::
+                                                              !UICustomizationType}
+                                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetUICustomizationResponse' with the minimum fields required to make a request.
 --
@@ -154,12 +150,11 @@ setUICustomizationResponse
     :: Int -- ^ 'suicrsResponseStatus'
     -> UICustomizationType -- ^ 'suicrsUICustomization'
     -> SetUICustomizationResponse
-setUICustomizationResponse pResponseStatus_ pUICustomization_ =
-  SetUICustomizationResponse'
-    { _suicrsResponseStatus = pResponseStatus_
-    , _suicrsUICustomization = pUICustomization_
-    }
-
+setUICustomizationResponse pResponseStatus_
+  pUICustomization_
+  = SetUICustomizationResponse'{_suicrsResponseStatus =
+                                  pResponseStatus_,
+                                _suicrsUICustomization = pUICustomization_}
 
 -- | -- | The response status code.
 suicrsResponseStatus :: Lens' SetUICustomizationResponse Int

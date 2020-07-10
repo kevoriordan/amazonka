@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists notebook instance lifestyle configurations created with the API.
+-- Lists notebook instance lifestyle configurations created with the 'CreateNotebookInstanceLifecycleConfig' API.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SageMaker.ListNotebookInstanceLifecycleConfigs
     (
     -- * Creating a Request
@@ -47,6 +49,7 @@ module Network.AWS.SageMaker.ListNotebookInstanceLifecycleConfigs
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -54,18 +57,44 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'listNotebookInstanceLifecycleConfigs' smart constructor.
-data ListNotebookInstanceLifecycleConfigs = ListNotebookInstanceLifecycleConfigs'
-  { _lnilcNameContains :: !(Maybe Text)
-  , _lnilcLastModifiedTimeBefore :: !(Maybe POSIX)
-  , _lnilcCreationTimeAfter :: !(Maybe POSIX)
-  , _lnilcNextToken :: !(Maybe Text)
-  , _lnilcSortOrder :: !(Maybe NotebookInstanceLifecycleConfigSortOrder)
-  , _lnilcLastModifiedTimeAfter :: !(Maybe POSIX)
-  , _lnilcCreationTimeBefore :: !(Maybe POSIX)
-  , _lnilcMaxResults :: !(Maybe Nat)
-  , _lnilcSortBy :: !(Maybe NotebookInstanceLifecycleConfigSortKey)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListNotebookInstanceLifecycleConfigs = ListNotebookInstanceLifecycleConfigs'{_lnilcNameContains
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _lnilcLastModifiedTimeBefore
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      POSIX),
+                                                                                  _lnilcCreationTimeAfter
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      POSIX),
+                                                                                  _lnilcNextToken
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _lnilcSortOrder
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      NotebookInstanceLifecycleConfigSortOrder),
+                                                                                  _lnilcLastModifiedTimeAfter
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      POSIX),
+                                                                                  _lnilcCreationTimeBefore
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      POSIX),
+                                                                                  _lnilcMaxResults
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Nat),
+                                                                                  _lnilcSortBy
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      NotebookInstanceLifecycleConfigSortKey)}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ListNotebookInstanceLifecycleConfigs' with the minimum fields required to make a request.
 --
@@ -90,19 +119,18 @@ data ListNotebookInstanceLifecycleConfigs = ListNotebookInstanceLifecycleConfigs
 -- * 'lnilcSortBy' - Sorts the list of results. The default is @CreationTime@ .
 listNotebookInstanceLifecycleConfigs
     :: ListNotebookInstanceLifecycleConfigs
-listNotebookInstanceLifecycleConfigs =
-  ListNotebookInstanceLifecycleConfigs'
-    { _lnilcNameContains = Nothing
-    , _lnilcLastModifiedTimeBefore = Nothing
-    , _lnilcCreationTimeAfter = Nothing
-    , _lnilcNextToken = Nothing
-    , _lnilcSortOrder = Nothing
-    , _lnilcLastModifiedTimeAfter = Nothing
-    , _lnilcCreationTimeBefore = Nothing
-    , _lnilcMaxResults = Nothing
-    , _lnilcSortBy = Nothing
-    }
-
+listNotebookInstanceLifecycleConfigs
+  = ListNotebookInstanceLifecycleConfigs'{_lnilcNameContains
+                                            = Nothing,
+                                          _lnilcLastModifiedTimeBefore =
+                                            Nothing,
+                                          _lnilcCreationTimeAfter = Nothing,
+                                          _lnilcNextToken = Nothing,
+                                          _lnilcSortOrder = Nothing,
+                                          _lnilcLastModifiedTimeAfter = Nothing,
+                                          _lnilcCreationTimeBefore = Nothing,
+                                          _lnilcMaxResults = Nothing,
+                                          _lnilcSortBy = Nothing}
 
 -- | A string in the lifecycle configuration name. This filter returns only lifecycle configurations whose name contains the specified string.
 lnilcNameContains :: Lens' ListNotebookInstanceLifecycleConfigs (Maybe Text)
@@ -139,6 +167,17 @@ lnilcMaxResults = lens _lnilcMaxResults (\ s a -> s{_lnilcMaxResults = a}) . map
 -- | Sorts the list of results. The default is @CreationTime@ .
 lnilcSortBy :: Lens' ListNotebookInstanceLifecycleConfigs (Maybe NotebookInstanceLifecycleConfigSortKey)
 lnilcSortBy = lens _lnilcSortBy (\ s a -> s{_lnilcSortBy = a})
+
+instance AWSPager
+           ListNotebookInstanceLifecycleConfigs
+         where
+        page rq rs
+          | stop (rs ^. lnilcrsNextToken) = Nothing
+          | stop
+              (rs ^. lnilcrsNotebookInstanceLifecycleConfigs)
+            = Nothing
+          | otherwise =
+            Just $ rq & lnilcNextToken .~ rs ^. lnilcrsNextToken
 
 instance AWSRequest
            ListNotebookInstanceLifecycleConfigs
@@ -200,18 +239,26 @@ instance ToQuery ListNotebookInstanceLifecycleConfigs
         toQuery = const mempty
 
 -- | /See:/ 'listNotebookInstanceLifecycleConfigsResponse' smart constructor.
-data ListNotebookInstanceLifecycleConfigsResponse = ListNotebookInstanceLifecycleConfigsResponse'
-  { _lnilcrsNextToken :: !(Maybe Text)
-  , _lnilcrsNotebookInstanceLifecycleConfigs :: !(Maybe [NotebookInstanceLifecycleConfigSummary])
-  , _lnilcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListNotebookInstanceLifecycleConfigsResponse = ListNotebookInstanceLifecycleConfigsResponse'{_lnilcrsNextToken
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      Text),
+                                                                                                  _lnilcrsNotebookInstanceLifecycleConfigs
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      [NotebookInstanceLifecycleConfigSummary]),
+                                                                                                  _lnilcrsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'ListNotebookInstanceLifecycleConfigsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lnilcrsNextToken' - If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request.
+-- * 'lnilcrsNextToken' - If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request. 
 --
 -- * 'lnilcrsNotebookInstanceLifecycleConfigs' - An array of @NotebookInstanceLifecycleConfiguration@ objects, each listing a lifecycle configuration.
 --
@@ -219,15 +266,16 @@ data ListNotebookInstanceLifecycleConfigsResponse = ListNotebookInstanceLifecycl
 listNotebookInstanceLifecycleConfigsResponse
     :: Int -- ^ 'lnilcrsResponseStatus'
     -> ListNotebookInstanceLifecycleConfigsResponse
-listNotebookInstanceLifecycleConfigsResponse pResponseStatus_ =
-  ListNotebookInstanceLifecycleConfigsResponse'
-    { _lnilcrsNextToken = Nothing
-    , _lnilcrsNotebookInstanceLifecycleConfigs = Nothing
-    , _lnilcrsResponseStatus = pResponseStatus_
-    }
+listNotebookInstanceLifecycleConfigsResponse
+  pResponseStatus_
+  = ListNotebookInstanceLifecycleConfigsResponse'{_lnilcrsNextToken
+                                                    = Nothing,
+                                                  _lnilcrsNotebookInstanceLifecycleConfigs
+                                                    = Nothing,
+                                                  _lnilcrsResponseStatus =
+                                                    pResponseStatus_}
 
-
--- | If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request.
+-- | If the response is truncated, Amazon SageMaker returns this token. To get the next set of lifecycle configurations, use it in the next request. 
 lnilcrsNextToken :: Lens' ListNotebookInstanceLifecycleConfigsResponse (Maybe Text)
 lnilcrsNextToken = lens _lnilcrsNextToken (\ s a -> s{_lnilcrsNextToken = a})
 

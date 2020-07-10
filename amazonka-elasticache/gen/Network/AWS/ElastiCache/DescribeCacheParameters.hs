@@ -57,13 +57,16 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeCacheParameters' smart constructor.
-data DescribeCacheParameters = DescribeCacheParameters'
-  { _dcpMarker                  :: !(Maybe Text)
-  , _dcpMaxRecords              :: !(Maybe Int)
-  , _dcpSource                  :: !(Maybe Text)
-  , _dcpCacheParameterGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCacheParameters = DescribeCacheParameters'{_dcpMarker
+                                                        :: !(Maybe Text),
+                                                        _dcpMaxRecords ::
+                                                        !(Maybe Int),
+                                                        _dcpSource ::
+                                                        !(Maybe Text),
+                                                        _dcpCacheParameterGroupName
+                                                        :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeCacheParameters' with the minimum fields required to make a request.
 --
@@ -73,20 +76,17 @@ data DescribeCacheParameters = DescribeCacheParameters'
 --
 -- * 'dcpMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: minimum 20; maximum 100.
 --
--- * 'dcpSource' - The parameter types to return. Valid values: @user@ | @system@ | @engine-default@
+-- * 'dcpSource' - The parameter types to return. Valid values: @user@ | @system@ | @engine-default@ 
 --
 -- * 'dcpCacheParameterGroupName' - The name of a specific cache parameter group to return details for.
 describeCacheParameters
     :: Text -- ^ 'dcpCacheParameterGroupName'
     -> DescribeCacheParameters
-describeCacheParameters pCacheParameterGroupName_ =
-  DescribeCacheParameters'
-    { _dcpMarker = Nothing
-    , _dcpMaxRecords = Nothing
-    , _dcpSource = Nothing
-    , _dcpCacheParameterGroupName = pCacheParameterGroupName_
-    }
-
+describeCacheParameters pCacheParameterGroupName_
+  = DescribeCacheParameters'{_dcpMarker = Nothing,
+                             _dcpMaxRecords = Nothing, _dcpSource = Nothing,
+                             _dcpCacheParameterGroupName =
+                               pCacheParameterGroupName_}
 
 -- | An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
 dcpMarker :: Lens' DescribeCacheParameters (Maybe Text)
@@ -96,7 +96,7 @@ dcpMarker = lens _dcpMarker (\ s a -> s{_dcpMarker = a})
 dcpMaxRecords :: Lens' DescribeCacheParameters (Maybe Int)
 dcpMaxRecords = lens _dcpMaxRecords (\ s a -> s{_dcpMaxRecords = a})
 
--- | The parameter types to return. Valid values: @user@ | @system@ | @engine-default@
+-- | The parameter types to return. Valid values: @user@ | @system@ | @engine-default@ 
 dcpSource :: Lens' DescribeCacheParameters (Maybe Text)
 dcpSource = lens _dcpSource (\ s a -> s{_dcpSource = a})
 
@@ -155,13 +155,22 @@ instance ToQuery DescribeCacheParameters where
 --
 --
 -- /See:/ 'describeCacheParametersResponse' smart constructor.
-data DescribeCacheParametersResponse = DescribeCacheParametersResponse'
-  { _dcprsCacheNodeTypeSpecificParameters :: !(Maybe [CacheNodeTypeSpecificParameter])
-  , _dcprsMarker :: !(Maybe Text)
-  , _dcprsParameters :: !(Maybe [Parameter])
-  , _dcprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCacheParametersResponse = DescribeCacheParametersResponse'{_dcprsCacheNodeTypeSpecificParameters
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [CacheNodeTypeSpecificParameter]),
+                                                                        _dcprsMarker
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dcprsParameters
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [Parameter]),
+                                                                        _dcprsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeCacheParametersResponse' with the minimum fields required to make a request.
 --
@@ -177,14 +186,12 @@ data DescribeCacheParametersResponse = DescribeCacheParametersResponse'
 describeCacheParametersResponse
     :: Int -- ^ 'dcprsResponseStatus'
     -> DescribeCacheParametersResponse
-describeCacheParametersResponse pResponseStatus_ =
-  DescribeCacheParametersResponse'
-    { _dcprsCacheNodeTypeSpecificParameters = Nothing
-    , _dcprsMarker = Nothing
-    , _dcprsParameters = Nothing
-    , _dcprsResponseStatus = pResponseStatus_
-    }
-
+describeCacheParametersResponse pResponseStatus_
+  = DescribeCacheParametersResponse'{_dcprsCacheNodeTypeSpecificParameters
+                                       = Nothing,
+                                     _dcprsMarker = Nothing,
+                                     _dcprsParameters = Nothing,
+                                     _dcprsResponseStatus = pResponseStatus_}
 
 -- | A list of parameters specific to a particular cache node type. Each element in the list contains detailed information about one parameter.
 dcprsCacheNodeTypeSpecificParameters :: Lens' DescribeCacheParametersResponse [CacheNodeTypeSpecificParameter]

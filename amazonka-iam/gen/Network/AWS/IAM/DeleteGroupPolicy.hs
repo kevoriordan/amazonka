@@ -21,7 +21,7 @@
 -- Deletes the specified inline policy that is embedded in the specified IAM group.
 --
 --
--- A group can also have managed policies attached to it. To detach a managed policy from a group, use 'DetachGroupPolicy' . For more information about policies, refer to <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html Managed Policies and Inline Policies> in the /IAM User Guide/ .
+-- A group can also have managed policies attached to it. To detach a managed policy from a group, use 'DetachGroupPolicy' . For more information about policies, refer to <https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html Managed Policies and Inline Policies> in the /IAM User Guide/ .
 --
 module Network.AWS.IAM.DeleteGroupPolicy
     (
@@ -45,32 +45,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteGroupPolicy' smart constructor.
-data DeleteGroupPolicy = DeleteGroupPolicy'
-  { _dGroupName  :: !Text
-  , _dPolicyName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGroupPolicy = DeleteGroupPolicy'{_dGroupName
+                                            :: !Text,
+                                            _dPolicyName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGroupPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dGroupName' - The name (friendly name, not ARN) identifying the group that the policy is embedded in. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'dGroupName' - The name (friendly name, not ARN) identifying the group that the policy is embedded in. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 --
--- * 'dPolicyName' - The name identifying the policy document to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'dPolicyName' - The name identifying the policy document to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 deleteGroupPolicy
     :: Text -- ^ 'dGroupName'
     -> Text -- ^ 'dPolicyName'
     -> DeleteGroupPolicy
-deleteGroupPolicy pGroupName_ pPolicyName_ =
-  DeleteGroupPolicy' {_dGroupName = pGroupName_, _dPolicyName = pPolicyName_}
+deleteGroupPolicy pGroupName_ pPolicyName_
+  = DeleteGroupPolicy'{_dGroupName = pGroupName_,
+                       _dPolicyName = pPolicyName_}
 
-
--- | The name (friendly name, not ARN) identifying the group that the policy is embedded in. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name (friendly name, not ARN) identifying the group that the policy is embedded in. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 dGroupName :: Lens' DeleteGroupPolicy Text
 dGroupName = lens _dGroupName (\ s a -> s{_dGroupName = a})
 
--- | The name identifying the policy document to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name identifying the policy document to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 dPolicyName :: Lens' DeleteGroupPolicy Text
 dPolicyName = lens _dPolicyName (\ s a -> s{_dPolicyName = a})
 
@@ -98,16 +97,15 @@ instance ToQuery DeleteGroupPolicy where
                "PolicyName" =: _dPolicyName]
 
 -- | /See:/ 'deleteGroupPolicyResponse' smart constructor.
-data DeleteGroupPolicyResponse =
-  DeleteGroupPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGroupPolicyResponse = DeleteGroupPolicyResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteGroupPolicyResponse' with the minimum fields required to make a request.
 --
 deleteGroupPolicyResponse
     :: DeleteGroupPolicyResponse
-deleteGroupPolicyResponse = DeleteGroupPolicyResponse'
-
+deleteGroupPolicyResponse
+  = DeleteGroupPolicyResponse'
 
 instance NFData DeleteGroupPolicyResponse where

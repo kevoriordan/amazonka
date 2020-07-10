@@ -48,14 +48,12 @@ import Network.AWS.Response
 -- | Creates a new ActiveMQ user.
 --
 -- /See:/ 'createUser' smart constructor.
-data CreateUser = CreateUser'
-  { _cuGroups        :: !(Maybe [Text])
-  , _cuConsoleAccess :: !(Maybe Bool)
-  , _cuPassword      :: !(Maybe Text)
-  , _cuUsername      :: !Text
-  , _cuBrokerId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUser = CreateUser'{_cuGroups ::
+                              !(Maybe [Text]),
+                              _cuConsoleAccess :: !(Maybe Bool),
+                              _cuPassword :: !(Maybe Text),
+                              _cuUsername :: !Text, _cuBrokerId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUser' with the minimum fields required to make a request.
 --
@@ -74,15 +72,10 @@ createUser
     :: Text -- ^ 'cuUsername'
     -> Text -- ^ 'cuBrokerId'
     -> CreateUser
-createUser pUsername_ pBrokerId_ =
-  CreateUser'
-    { _cuGroups = Nothing
-    , _cuConsoleAccess = Nothing
-    , _cuPassword = Nothing
-    , _cuUsername = pUsername_
-    , _cuBrokerId = pBrokerId_
-    }
-
+createUser pUsername_ pBrokerId_
+  = CreateUser'{_cuGroups = Nothing,
+                _cuConsoleAccess = Nothing, _cuPassword = Nothing,
+                _cuUsername = pUsername_, _cuBrokerId = pBrokerId_}
 
 -- | The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
 cuGroups :: Lens' CreateUser [Text]
@@ -141,10 +134,10 @@ instance ToQuery CreateUser where
         toQuery = const mempty
 
 -- | /See:/ 'createUserResponse' smart constructor.
-newtype CreateUserResponse = CreateUserResponse'
-  { _cursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateUserResponse = CreateUserResponse'{_cursResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateUserResponse' with the minimum fields required to make a request.
 --
@@ -154,9 +147,9 @@ newtype CreateUserResponse = CreateUserResponse'
 createUserResponse
     :: Int -- ^ 'cursResponseStatus'
     -> CreateUserResponse
-createUserResponse pResponseStatus_ =
-  CreateUserResponse' {_cursResponseStatus = pResponseStatus_}
-
+createUserResponse pResponseStatus_
+  = CreateUserResponse'{_cursResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 cursResponseStatus :: Lens' CreateUserResponse Int

@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- For a given Maintenance Window execution, lists the tasks that were executed.
+-- For a given maintenance window execution, lists the tasks that were run.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeMaintenanceWindowExecutionTasks
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.SSM.DescribeMaintenanceWindowExecutionTasks
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -49,38 +52,48 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeMaintenanceWindowExecutionTasks' smart constructor.
-data DescribeMaintenanceWindowExecutionTasks = DescribeMaintenanceWindowExecutionTasks'
-  { _dmwetFilters           :: !(Maybe [MaintenanceWindowFilter])
-  , _dmwetNextToken         :: !(Maybe Text)
-  , _dmwetMaxResults        :: !(Maybe Nat)
-  , _dmwetWindowExecutionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMaintenanceWindowExecutionTasks = DescribeMaintenanceWindowExecutionTasks'{_dmwetFilters
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            [MaintenanceWindowFilter]),
+                                                                                        _dmwetNextToken
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Text),
+                                                                                        _dmwetMaxResults
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Nat),
+                                                                                        _dmwetWindowExecutionId
+                                                                                        ::
+                                                                                        !Text}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DescribeMaintenanceWindowExecutionTasks' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmwetFilters' - Optional filters used to scope down the returned tasks. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
+-- * 'dmwetFilters' - Optional filters used to scope down the returned tasks. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED. 
 --
 -- * 'dmwetNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
 -- * 'dmwetMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 --
--- * 'dmwetWindowExecutionId' - The ID of the Maintenance Window execution whose task executions should be retrieved.
+-- * 'dmwetWindowExecutionId' - The ID of the maintenance window execution whose task executions should be retrieved.
 describeMaintenanceWindowExecutionTasks
     :: Text -- ^ 'dmwetWindowExecutionId'
     -> DescribeMaintenanceWindowExecutionTasks
-describeMaintenanceWindowExecutionTasks pWindowExecutionId_ =
-  DescribeMaintenanceWindowExecutionTasks'
-    { _dmwetFilters = Nothing
-    , _dmwetNextToken = Nothing
-    , _dmwetMaxResults = Nothing
-    , _dmwetWindowExecutionId = pWindowExecutionId_
-    }
+describeMaintenanceWindowExecutionTasks
+  pWindowExecutionId_
+  = DescribeMaintenanceWindowExecutionTasks'{_dmwetFilters
+                                               = Nothing,
+                                             _dmwetNextToken = Nothing,
+                                             _dmwetMaxResults = Nothing,
+                                             _dmwetWindowExecutionId =
+                                               pWindowExecutionId_}
 
-
--- | Optional filters used to scope down the returned tasks. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED.
+-- | Optional filters used to scope down the returned tasks. The supported filter key is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and CANCELLED. 
 dmwetFilters :: Lens' DescribeMaintenanceWindowExecutionTasks [MaintenanceWindowFilter]
 dmwetFilters = lens _dmwetFilters (\ s a -> s{_dmwetFilters = a}) . _Default . _Coerce
 
@@ -92,9 +105,19 @@ dmwetNextToken = lens _dmwetNextToken (\ s a -> s{_dmwetNextToken = a})
 dmwetMaxResults :: Lens' DescribeMaintenanceWindowExecutionTasks (Maybe Natural)
 dmwetMaxResults = lens _dmwetMaxResults (\ s a -> s{_dmwetMaxResults = a}) . mapping _Nat
 
--- | The ID of the Maintenance Window execution whose task executions should be retrieved.
+-- | The ID of the maintenance window execution whose task executions should be retrieved.
 dmwetWindowExecutionId :: Lens' DescribeMaintenanceWindowExecutionTasks Text
 dmwetWindowExecutionId = lens _dmwetWindowExecutionId (\ s a -> s{_dmwetWindowExecutionId = a})
+
+instance AWSPager
+           DescribeMaintenanceWindowExecutionTasks
+         where
+        page rq rs
+          | stop (rs ^. dmwetrsNextToken) = Nothing
+          | stop (rs ^. dmwetrsWindowExecutionTaskIdentities) =
+            Nothing
+          | otherwise =
+            Just $ rq & dmwetNextToken .~ rs ^. dmwetrsNextToken
 
 instance AWSRequest
            DescribeMaintenanceWindowExecutionTasks
@@ -153,12 +176,21 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'describeMaintenanceWindowExecutionTasksResponse' smart constructor.
-data DescribeMaintenanceWindowExecutionTasksResponse = DescribeMaintenanceWindowExecutionTasksResponse'
-  { _dmwetrsNextToken :: !(Maybe Text)
-  , _dmwetrsWindowExecutionTaskIdentities :: !(Maybe [MaintenanceWindowExecutionTaskIdentity])
-  , _dmwetrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMaintenanceWindowExecutionTasksResponse = DescribeMaintenanceWindowExecutionTasksResponse'{_dmwetrsNextToken
+                                                                                                        ::
+                                                                                                        !(Maybe
+                                                                                                            Text),
+                                                                                                        _dmwetrsWindowExecutionTaskIdentities
+                                                                                                        ::
+                                                                                                        !(Maybe
+                                                                                                            [MaintenanceWindowExecutionTaskIdentity]),
+                                                                                                        _dmwetrsResponseStatus
+                                                                                                        ::
+                                                                                                        !Int}
+                                                         deriving (Eq, Read,
+                                                                   Show, Data,
+                                                                   Typeable,
+                                                                   Generic)
 
 -- | Creates a value of 'DescribeMaintenanceWindowExecutionTasksResponse' with the minimum fields required to make a request.
 --
@@ -172,13 +204,14 @@ data DescribeMaintenanceWindowExecutionTasksResponse = DescribeMaintenanceWindow
 describeMaintenanceWindowExecutionTasksResponse
     :: Int -- ^ 'dmwetrsResponseStatus'
     -> DescribeMaintenanceWindowExecutionTasksResponse
-describeMaintenanceWindowExecutionTasksResponse pResponseStatus_ =
-  DescribeMaintenanceWindowExecutionTasksResponse'
-    { _dmwetrsNextToken = Nothing
-    , _dmwetrsWindowExecutionTaskIdentities = Nothing
-    , _dmwetrsResponseStatus = pResponseStatus_
-    }
-
+describeMaintenanceWindowExecutionTasksResponse
+  pResponseStatus_
+  = DescribeMaintenanceWindowExecutionTasksResponse'{_dmwetrsNextToken
+                                                       = Nothing,
+                                                     _dmwetrsWindowExecutionTaskIdentities
+                                                       = Nothing,
+                                                     _dmwetrsResponseStatus =
+                                                       pResponseStatus_}
 
 -- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 dmwetrsNextToken :: Lens' DescribeMaintenanceWindowExecutionTasksResponse (Maybe Text)

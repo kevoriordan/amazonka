@@ -51,11 +51,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'batchGetDeploymentGroups' smart constructor.
-data BatchGetDeploymentGroups = BatchGetDeploymentGroups'
-  { _bgdgApplicationName      :: !Text
-  , _bgdgDeploymentGroupNames :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetDeploymentGroups = BatchGetDeploymentGroups'{_bgdgApplicationName
+                                                          :: !Text,
+                                                          _bgdgDeploymentGroupNames
+                                                          :: ![Text]}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'BatchGetDeploymentGroups' with the minimum fields required to make a request.
 --
@@ -63,22 +64,20 @@ data BatchGetDeploymentGroups = BatchGetDeploymentGroups'
 --
 -- * 'bgdgApplicationName' - The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
 --
--- * 'bgdgDeploymentGroupNames' - The deployment groups' names.
+-- * 'bgdgDeploymentGroupNames' - The names of the deployment groups.
 batchGetDeploymentGroups
     :: Text -- ^ 'bgdgApplicationName'
     -> BatchGetDeploymentGroups
-batchGetDeploymentGroups pApplicationName_ =
-  BatchGetDeploymentGroups'
-    { _bgdgApplicationName = pApplicationName_
-    , _bgdgDeploymentGroupNames = mempty
-    }
-
+batchGetDeploymentGroups pApplicationName_
+  = BatchGetDeploymentGroups'{_bgdgApplicationName =
+                                pApplicationName_,
+                              _bgdgDeploymentGroupNames = mempty}
 
 -- | The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
 bgdgApplicationName :: Lens' BatchGetDeploymentGroups Text
 bgdgApplicationName = lens _bgdgApplicationName (\ s a -> s{_bgdgApplicationName = a})
 
--- | The deployment groups' names.
+-- | The names of the deployment groups.
 bgdgDeploymentGroupNames :: Lens' BatchGetDeploymentGroups [Text]
 bgdgDeploymentGroupNames = lens _bgdgDeploymentGroupNames (\ s a -> s{_bgdgDeploymentGroupNames = a}) . _Coerce
 
@@ -128,12 +127,19 @@ instance ToQuery BatchGetDeploymentGroups where
 --
 --
 -- /See:/ 'batchGetDeploymentGroupsResponse' smart constructor.
-data BatchGetDeploymentGroupsResponse = BatchGetDeploymentGroupsResponse'
-  { _bgdgrsDeploymentGroupsInfo :: !(Maybe [DeploymentGroupInfo])
-  , _bgdgrsErrorMessage         :: !(Maybe Text)
-  , _bgdgrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetDeploymentGroupsResponse = BatchGetDeploymentGroupsResponse'{_bgdgrsDeploymentGroupsInfo
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [DeploymentGroupInfo]),
+                                                                          _bgdgrsErrorMessage
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _bgdgrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'BatchGetDeploymentGroupsResponse' with the minimum fields required to make a request.
 --
@@ -141,25 +147,23 @@ data BatchGetDeploymentGroupsResponse = BatchGetDeploymentGroupsResponse'
 --
 -- * 'bgdgrsDeploymentGroupsInfo' - Information about the deployment groups.
 --
--- * 'bgdgrsErrorMessage' - Information about errors that may have occurred during the API call.
+-- * 'bgdgrsErrorMessage' - Information about errors that might have occurred during the API call.
 --
 -- * 'bgdgrsResponseStatus' - -- | The response status code.
 batchGetDeploymentGroupsResponse
     :: Int -- ^ 'bgdgrsResponseStatus'
     -> BatchGetDeploymentGroupsResponse
-batchGetDeploymentGroupsResponse pResponseStatus_ =
-  BatchGetDeploymentGroupsResponse'
-    { _bgdgrsDeploymentGroupsInfo = Nothing
-    , _bgdgrsErrorMessage = Nothing
-    , _bgdgrsResponseStatus = pResponseStatus_
-    }
-
+batchGetDeploymentGroupsResponse pResponseStatus_
+  = BatchGetDeploymentGroupsResponse'{_bgdgrsDeploymentGroupsInfo
+                                        = Nothing,
+                                      _bgdgrsErrorMessage = Nothing,
+                                      _bgdgrsResponseStatus = pResponseStatus_}
 
 -- | Information about the deployment groups.
 bgdgrsDeploymentGroupsInfo :: Lens' BatchGetDeploymentGroupsResponse [DeploymentGroupInfo]
 bgdgrsDeploymentGroupsInfo = lens _bgdgrsDeploymentGroupsInfo (\ s a -> s{_bgdgrsDeploymentGroupsInfo = a}) . _Default . _Coerce
 
--- | Information about errors that may have occurred during the API call.
+-- | Information about errors that might have occurred during the API call.
 bgdgrsErrorMessage :: Lens' BatchGetDeploymentGroupsResponse (Maybe Text)
 bgdgrsErrorMessage = lens _bgdgrsErrorMessage (\ s a -> s{_bgdgrsErrorMessage = a})
 

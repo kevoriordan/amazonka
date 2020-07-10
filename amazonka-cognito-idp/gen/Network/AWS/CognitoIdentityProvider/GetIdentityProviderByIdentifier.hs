@@ -46,11 +46,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getIdentityProviderByIdentifier' smart constructor.
-data GetIdentityProviderByIdentifier = GetIdentityProviderByIdentifier'
-  { _gipbiUserPoolId    :: !Text
-  , _gipbiIdpIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIdentityProviderByIdentifier = GetIdentityProviderByIdentifier'{_gipbiUserPoolId
+                                                                        ::
+                                                                        !Text,
+                                                                        _gipbiIdpIdentifier
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'GetIdentityProviderByIdentifier' with the minimum fields required to make a request.
 --
@@ -63,10 +66,11 @@ getIdentityProviderByIdentifier
     :: Text -- ^ 'gipbiUserPoolId'
     -> Text -- ^ 'gipbiIdpIdentifier'
     -> GetIdentityProviderByIdentifier
-getIdentityProviderByIdentifier pUserPoolId_ pIdpIdentifier_ =
-  GetIdentityProviderByIdentifier'
-    {_gipbiUserPoolId = pUserPoolId_, _gipbiIdpIdentifier = pIdpIdentifier_}
-
+getIdentityProviderByIdentifier pUserPoolId_
+  pIdpIdentifier_
+  = GetIdentityProviderByIdentifier'{_gipbiUserPoolId =
+                                       pUserPoolId_,
+                                     _gipbiIdpIdentifier = pIdpIdentifier_}
 
 -- | The user pool ID.
 gipbiUserPoolId :: Lens' GetIdentityProviderByIdentifier Text
@@ -118,11 +122,14 @@ instance ToQuery GetIdentityProviderByIdentifier
         toQuery = const mempty
 
 -- | /See:/ 'getIdentityProviderByIdentifierResponse' smart constructor.
-data GetIdentityProviderByIdentifierResponse = GetIdentityProviderByIdentifierResponse'
-  { _gipbirsResponseStatus   :: !Int
-  , _gipbirsIdentityProvider :: !IdentityProviderType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIdentityProviderByIdentifierResponse = GetIdentityProviderByIdentifierResponse'{_gipbirsResponseStatus
+                                                                                        ::
+                                                                                        !Int,
+                                                                                        _gipbirsIdentityProvider
+                                                                                        ::
+                                                                                        !IdentityProviderType}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'GetIdentityProviderByIdentifierResponse' with the minimum fields required to make a request.
 --
@@ -135,12 +142,12 @@ getIdentityProviderByIdentifierResponse
     :: Int -- ^ 'gipbirsResponseStatus'
     -> IdentityProviderType -- ^ 'gipbirsIdentityProvider'
     -> GetIdentityProviderByIdentifierResponse
-getIdentityProviderByIdentifierResponse pResponseStatus_ pIdentityProvider_ =
-  GetIdentityProviderByIdentifierResponse'
-    { _gipbirsResponseStatus = pResponseStatus_
-    , _gipbirsIdentityProvider = pIdentityProvider_
-    }
-
+getIdentityProviderByIdentifierResponse
+  pResponseStatus_ pIdentityProvider_
+  = GetIdentityProviderByIdentifierResponse'{_gipbirsResponseStatus
+                                               = pResponseStatus_,
+                                             _gipbirsIdentityProvider =
+                                               pIdentityProvider_}
 
 -- | -- | The response status code.
 gipbirsResponseStatus :: Lens' GetIdentityProviderByIdentifierResponse Int

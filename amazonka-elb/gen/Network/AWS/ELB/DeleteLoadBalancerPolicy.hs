@@ -49,11 +49,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteLoadBalancerPolicy' smart constructor.
-data DeleteLoadBalancerPolicy = DeleteLoadBalancerPolicy'
-  { _dLoadBalancerName :: !Text
-  , _dPolicyName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLoadBalancerPolicy = DeleteLoadBalancerPolicy'{_dLoadBalancerName
+                                                          :: !Text,
+                                                          _dPolicyName :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteLoadBalancerPolicy' with the minimum fields required to make a request.
 --
@@ -66,10 +66,11 @@ deleteLoadBalancerPolicy
     :: Text -- ^ 'dLoadBalancerName'
     -> Text -- ^ 'dPolicyName'
     -> DeleteLoadBalancerPolicy
-deleteLoadBalancerPolicy pLoadBalancerName_ pPolicyName_ =
-  DeleteLoadBalancerPolicy'
-    {_dLoadBalancerName = pLoadBalancerName_, _dPolicyName = pPolicyName_}
-
+deleteLoadBalancerPolicy pLoadBalancerName_
+  pPolicyName_
+  = DeleteLoadBalancerPolicy'{_dLoadBalancerName =
+                                pLoadBalancerName_,
+                              _dPolicyName = pPolicyName_}
 
 -- | The name of the load balancer.
 dLoadBalancerName :: Lens' DeleteLoadBalancerPolicy Text
@@ -113,10 +114,11 @@ instance ToQuery DeleteLoadBalancerPolicy where
 --
 --
 -- /See:/ 'deleteLoadBalancerPolicyResponse' smart constructor.
-newtype DeleteLoadBalancerPolicyResponse = DeleteLoadBalancerPolicyResponse'
-  { _delrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLoadBalancerPolicyResponse = DeleteLoadBalancerPolicyResponse'{_delrsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteLoadBalancerPolicyResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +128,9 @@ newtype DeleteLoadBalancerPolicyResponse = DeleteLoadBalancerPolicyResponse'
 deleteLoadBalancerPolicyResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteLoadBalancerPolicyResponse
-deleteLoadBalancerPolicyResponse pResponseStatus_ =
-  DeleteLoadBalancerPolicyResponse' {_delrsResponseStatus = pResponseStatus_}
-
+deleteLoadBalancerPolicyResponse pResponseStatus_
+  = DeleteLoadBalancerPolicyResponse'{_delrsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 delrsResponseStatus :: Lens' DeleteLoadBalancerPolicyResponse Int

@@ -21,7 +21,7 @@
 -- Cancels an active conversion task. The task can be the import of an instance or volume. The action removes all artifacts of the conversion, including a partially uploaded volume or instance. If the conversion is complete or is in the process of transferring the final disk image, the command fails and returns an exception.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html Importing a Virtual Machine Using the Amazon EC2 CLI> .
+-- For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html Importing a Virtual Machine Using the Amazon EC2 CLI> .
 --
 module Network.AWS.EC2.CancelConversionTask
     (
@@ -45,17 +45,12 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CancelConversionTask.
---
---
---
--- /See:/ 'cancelConversionTask' smart constructor.
-data CancelConversionTask = CancelConversionTask'
-  { _cctReasonMessage    :: !(Maybe Text)
-  , _cctDryRun           :: !(Maybe Bool)
-  , _cctConversionTaskId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'cancelConversionTask' smart constructor.
+data CancelConversionTask = CancelConversionTask'{_cctReasonMessage
+                                                  :: !(Maybe Text),
+                                                  _cctDryRun :: !(Maybe Bool),
+                                                  _cctConversionTaskId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelConversionTask' with the minimum fields required to make a request.
 --
@@ -69,13 +64,10 @@ data CancelConversionTask = CancelConversionTask'
 cancelConversionTask
     :: Text -- ^ 'cctConversionTaskId'
     -> CancelConversionTask
-cancelConversionTask pConversionTaskId_ =
-  CancelConversionTask'
-    { _cctReasonMessage = Nothing
-    , _cctDryRun = Nothing
-    , _cctConversionTaskId = pConversionTaskId_
-    }
-
+cancelConversionTask pConversionTaskId_
+  = CancelConversionTask'{_cctReasonMessage = Nothing,
+                          _cctDryRun = Nothing,
+                          _cctConversionTaskId = pConversionTaskId_}
 
 -- | The reason for canceling the conversion task.
 cctReasonMessage :: Lens' CancelConversionTask (Maybe Text)
@@ -115,16 +107,15 @@ instance ToQuery CancelConversionTask where
                "ConversionTaskId" =: _cctConversionTaskId]
 
 -- | /See:/ 'cancelConversionTaskResponse' smart constructor.
-data CancelConversionTaskResponse =
-  CancelConversionTaskResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelConversionTaskResponse = CancelConversionTaskResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'CancelConversionTaskResponse' with the minimum fields required to make a request.
 --
 cancelConversionTaskResponse
     :: CancelConversionTaskResponse
-cancelConversionTaskResponse = CancelConversionTaskResponse'
-
+cancelConversionTaskResponse
+  = CancelConversionTaskResponse'
 
 instance NFData CancelConversionTaskResponse where

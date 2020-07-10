@@ -18,7 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The ImportServerCatalog API is used to gather the complete list of on-premises servers on your premises. This API call requires connectors to be installed and monitoring all servers you would like imported. This API call returns immediately, but may take some time to retrieve all of the servers.
+-- Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import.
+--
+--
+-- This call returns immediately, but might take additional time to retrieve all the servers.
+--
 module Network.AWS.SMS.ImportServerCatalog
     (
     -- * Creating a Request
@@ -40,17 +44,14 @@ import Network.AWS.SMS.Types
 import Network.AWS.SMS.Types.Product
 
 -- | /See:/ 'importServerCatalog' smart constructor.
-data ImportServerCatalog =
-  ImportServerCatalog'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ImportServerCatalog = ImportServerCatalog'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImportServerCatalog' with the minimum fields required to make a request.
 --
 importServerCatalog
     :: ImportServerCatalog
 importServerCatalog = ImportServerCatalog'
-
 
 instance AWSRequest ImportServerCatalog where
         type Rs ImportServerCatalog =
@@ -85,10 +86,10 @@ instance ToQuery ImportServerCatalog where
         toQuery = const mempty
 
 -- | /See:/ 'importServerCatalogResponse' smart constructor.
-newtype ImportServerCatalogResponse = ImportServerCatalogResponse'
-  { _iscrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ImportServerCatalogResponse = ImportServerCatalogResponse'{_iscrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ImportServerCatalogResponse' with the minimum fields required to make a request.
 --
@@ -98,9 +99,9 @@ newtype ImportServerCatalogResponse = ImportServerCatalogResponse'
 importServerCatalogResponse
     :: Int -- ^ 'iscrsResponseStatus'
     -> ImportServerCatalogResponse
-importServerCatalogResponse pResponseStatus_ =
-  ImportServerCatalogResponse' {_iscrsResponseStatus = pResponseStatus_}
-
+importServerCatalogResponse pResponseStatus_
+  = ImportServerCatalogResponse'{_iscrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 iscrsResponseStatus :: Lens' ImportServerCatalogResponse Int

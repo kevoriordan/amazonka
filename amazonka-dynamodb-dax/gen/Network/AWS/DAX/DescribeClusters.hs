@@ -29,6 +29,8 @@
 --
 -- If nodes are currently being removed from the DAX cluster, no endpoint information for the removed nodes is displayed.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DAX.DescribeClusters
     (
     -- * Creating a Request
@@ -51,17 +53,17 @@ module Network.AWS.DAX.DescribeClusters
 import Network.AWS.DAX.Types
 import Network.AWS.DAX.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeClusters' smart constructor.
-data DescribeClusters = DescribeClusters'
-  { _dcClusterNames :: !(Maybe [Text])
-  , _dcNextToken    :: !(Maybe Text)
-  , _dcMaxResults   :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusters = DescribeClusters'{_dcClusterNames
+                                          :: !(Maybe [Text]),
+                                          _dcNextToken :: !(Maybe Text),
+                                          _dcMaxResults :: !(Maybe Int)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeClusters' with the minimum fields required to make a request.
 --
@@ -74,10 +76,9 @@ data DescribeClusters = DescribeClusters'
 -- * 'dcMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. The value for @MaxResults@ must be between 20 and 100.
 describeClusters
     :: DescribeClusters
-describeClusters =
-  DescribeClusters'
-    {_dcClusterNames = Nothing, _dcNextToken = Nothing, _dcMaxResults = Nothing}
-
+describeClusters
+  = DescribeClusters'{_dcClusterNames = Nothing,
+                      _dcNextToken = Nothing, _dcMaxResults = Nothing}
 
 -- | The names of the DAX clusters being described.
 dcClusterNames :: Lens' DescribeClusters [Text]
@@ -90,6 +91,13 @@ dcNextToken = lens _dcNextToken (\ s a -> s{_dcNextToken = a})
 -- | The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. The value for @MaxResults@ must be between 20 and 100.
 dcMaxResults :: Lens' DescribeClusters (Maybe Int)
 dcMaxResults = lens _dcMaxResults (\ s a -> s{_dcMaxResults = a})
+
+instance AWSPager DescribeClusters where
+        page rq rs
+          | stop (rs ^. dcrsNextToken) = Nothing
+          | stop (rs ^. dcrsClusters) = Nothing
+          | otherwise =
+            Just $ rq & dcNextToken .~ rs ^. dcrsNextToken
 
 instance AWSRequest DescribeClusters where
         type Rs DescribeClusters = DescribeClustersResponse
@@ -129,12 +137,14 @@ instance ToQuery DescribeClusters where
         toQuery = const mempty
 
 -- | /See:/ 'describeClustersResponse' smart constructor.
-data DescribeClustersResponse = DescribeClustersResponse'
-  { _dcrsNextToken      :: !(Maybe Text)
-  , _dcrsClusters       :: !(Maybe [Cluster])
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClustersResponse = DescribeClustersResponse'{_dcrsNextToken
+                                                          :: !(Maybe Text),
+                                                          _dcrsClusters ::
+                                                          !(Maybe [Cluster]),
+                                                          _dcrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeClustersResponse' with the minimum fields required to make a request.
 --
@@ -148,13 +158,10 @@ data DescribeClustersResponse = DescribeClustersResponse'
 describeClustersResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeClustersResponse
-describeClustersResponse pResponseStatus_ =
-  DescribeClustersResponse'
-    { _dcrsNextToken = Nothing
-    , _dcrsClusters = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
-
+describeClustersResponse pResponseStatus_
+  = DescribeClustersResponse'{_dcrsNextToken = Nothing,
+                              _dcrsClusters = Nothing,
+                              _dcrsResponseStatus = pResponseStatus_}
 
 -- | Provides an identifier to allow retrieval of paginated results.
 dcrsNextToken :: Lens' DescribeClustersResponse (Maybe Text)

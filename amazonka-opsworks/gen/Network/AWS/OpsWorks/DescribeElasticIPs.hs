@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html Elastic IP addresses> .
+-- Describes <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html Elastic IP addresses> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeElasticIPs
     (
@@ -49,12 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeElasticIPs' smart constructor.
-data DescribeElasticIPs = DescribeElasticIPs'
-  { _deiInstanceId :: !(Maybe Text)
-  , _deiIPs        :: !(Maybe [Text])
-  , _deiStackId    :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticIPs = DescribeElasticIPs'{_deiInstanceId
+                                              :: !(Maybe Text),
+                                              _deiIPs :: !(Maybe [Text]),
+                                              _deiStackId :: !(Maybe Text)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeElasticIPs' with the minimum fields required to make a request.
 --
@@ -67,10 +66,9 @@ data DescribeElasticIPs = DescribeElasticIPs'
 -- * 'deiStackId' - A stack ID. If you include this parameter, @DescribeElasticIps@ returns a description of the Elastic IP addresses that are registered with the specified stack.
 describeElasticIPs
     :: DescribeElasticIPs
-describeElasticIPs =
-  DescribeElasticIPs'
-    {_deiInstanceId = Nothing, _deiIPs = Nothing, _deiStackId = Nothing}
-
+describeElasticIPs
+  = DescribeElasticIPs'{_deiInstanceId = Nothing,
+                        _deiIPs = Nothing, _deiStackId = Nothing}
 
 -- | The instance ID. If you include this parameter, @DescribeElasticIps@ returns a description of the Elastic IP addresses associated with the specified instance.
 deiInstanceId :: Lens' DescribeElasticIPs (Maybe Text)
@@ -128,11 +126,14 @@ instance ToQuery DescribeElasticIPs where
 --
 --
 -- /See:/ 'describeElasticIPsResponse' smart constructor.
-data DescribeElasticIPsResponse = DescribeElasticIPsResponse'
-  { _deirsElasticIPs     :: !(Maybe [ElasticIP])
-  , _deirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticIPsResponse = DescribeElasticIPsResponse'{_deirsElasticIPs
+                                                              ::
+                                                              !(Maybe
+                                                                  [ElasticIP]),
+                                                              _deirsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeElasticIPsResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +145,10 @@ data DescribeElasticIPsResponse = DescribeElasticIPsResponse'
 describeElasticIPsResponse
     :: Int -- ^ 'deirsResponseStatus'
     -> DescribeElasticIPsResponse
-describeElasticIPsResponse pResponseStatus_ =
-  DescribeElasticIPsResponse'
-    {_deirsElasticIPs = Nothing, _deirsResponseStatus = pResponseStatus_}
-
+describeElasticIPsResponse pResponseStatus_
+  = DescribeElasticIPsResponse'{_deirsElasticIPs =
+                                  Nothing,
+                                _deirsResponseStatus = pResponseStatus_}
 
 -- | An @ElasticIps@ object that describes the specified Elastic IP addresses.
 deirsElasticIPs :: Lens' DescribeElasticIPsResponse [ElasticIP]

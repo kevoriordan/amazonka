@@ -52,12 +52,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateBasePathMapping' smart constructor.
-data UpdateBasePathMapping = UpdateBasePathMapping'
-  { _ubpmPatchOperations :: !(Maybe [PatchOperation])
-  , _ubpmDomainName      :: !Text
-  , _ubpmBasePath        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateBasePathMapping = UpdateBasePathMapping'{_ubpmPatchOperations
+                                                    ::
+                                                    !(Maybe [PatchOperation]),
+                                                    _ubpmDomainName :: !Text,
+                                                    _ubpmBasePath :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateBasePathMapping' with the minimum fields required to make a request.
 --
@@ -67,18 +68,16 @@ data UpdateBasePathMapping = UpdateBasePathMapping'
 --
 -- * 'ubpmDomainName' - [Required] The domain name of the 'BasePathMapping' resource to change.
 --
--- * 'ubpmBasePath' - [Required] The base path of the 'BasePathMapping' resource to change.
+-- * 'ubpmBasePath' - [Required] The base path of the 'BasePathMapping' resource to change. To specify an empty base path, set this parameter to @'(none)'@ .
 updateBasePathMapping
     :: Text -- ^ 'ubpmDomainName'
     -> Text -- ^ 'ubpmBasePath'
     -> UpdateBasePathMapping
-updateBasePathMapping pDomainName_ pBasePath_ =
-  UpdateBasePathMapping'
-    { _ubpmPatchOperations = Nothing
-    , _ubpmDomainName = pDomainName_
-    , _ubpmBasePath = pBasePath_
-    }
-
+updateBasePathMapping pDomainName_ pBasePath_
+  = UpdateBasePathMapping'{_ubpmPatchOperations =
+                             Nothing,
+                           _ubpmDomainName = pDomainName_,
+                           _ubpmBasePath = pBasePath_}
 
 -- | A list of update operations to be applied to the specified resource and in the order specified in this list.
 ubpmPatchOperations :: Lens' UpdateBasePathMapping [PatchOperation]
@@ -88,7 +87,7 @@ ubpmPatchOperations = lens _ubpmPatchOperations (\ s a -> s{_ubpmPatchOperations
 ubpmDomainName :: Lens' UpdateBasePathMapping Text
 ubpmDomainName = lens _ubpmDomainName (\ s a -> s{_ubpmDomainName = a})
 
--- | [Required] The base path of the 'BasePathMapping' resource to change.
+-- | [Required] The base path of the 'BasePathMapping' resource to change. To specify an empty base path, set this parameter to @'(none)'@ .
 ubpmBasePath :: Lens' UpdateBasePathMapping Text
 ubpmBasePath = lens _ubpmBasePath (\ s a -> s{_ubpmBasePath = a})
 

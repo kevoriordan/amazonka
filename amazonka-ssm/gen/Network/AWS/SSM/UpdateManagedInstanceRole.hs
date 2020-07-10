@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Assigns or changes an Amazon Identity and Access Management (IAM) role to the managed instance.
+-- Changes the Amazon Identity and Access Management (IAM) role that is assigned to the on-premises instance or virtual machines (VM). IAM roles are first assigned to these hybrid instances during the activation process. For more information, see 'CreateActivation' .
 --
 --
 module Network.AWS.SSM.UpdateManagedInstanceRole
@@ -45,11 +45,12 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'updateManagedInstanceRole' smart constructor.
-data UpdateManagedInstanceRole = UpdateManagedInstanceRole'
-  { _umirInstanceId :: !Text
-  , _umirIAMRole    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateManagedInstanceRole = UpdateManagedInstanceRole'{_umirInstanceId
+                                                            :: !Text,
+                                                            _umirIAMRole ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateManagedInstanceRole' with the minimum fields required to make a request.
 --
@@ -62,10 +63,10 @@ updateManagedInstanceRole
     :: Text -- ^ 'umirInstanceId'
     -> Text -- ^ 'umirIAMRole'
     -> UpdateManagedInstanceRole
-updateManagedInstanceRole pInstanceId_ pIAMRole_ =
-  UpdateManagedInstanceRole'
-    {_umirInstanceId = pInstanceId_, _umirIAMRole = pIAMRole_}
-
+updateManagedInstanceRole pInstanceId_ pIAMRole_
+  = UpdateManagedInstanceRole'{_umirInstanceId =
+                                 pInstanceId_,
+                               _umirIAMRole = pIAMRole_}
 
 -- | The ID of the managed instance where you want to update the role.
 umirInstanceId :: Lens' UpdateManagedInstanceRole Text
@@ -113,10 +114,11 @@ instance ToQuery UpdateManagedInstanceRole where
         toQuery = const mempty
 
 -- | /See:/ 'updateManagedInstanceRoleResponse' smart constructor.
-newtype UpdateManagedInstanceRoleResponse = UpdateManagedInstanceRoleResponse'
-  { _umirrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateManagedInstanceRoleResponse = UpdateManagedInstanceRoleResponse'{_umirrsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'UpdateManagedInstanceRoleResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +128,9 @@ newtype UpdateManagedInstanceRoleResponse = UpdateManagedInstanceRoleResponse'
 updateManagedInstanceRoleResponse
     :: Int -- ^ 'umirrsResponseStatus'
     -> UpdateManagedInstanceRoleResponse
-updateManagedInstanceRoleResponse pResponseStatus_ =
-  UpdateManagedInstanceRoleResponse' {_umirrsResponseStatus = pResponseStatus_}
-
+updateManagedInstanceRoleResponse pResponseStatus_
+  = UpdateManagedInstanceRoleResponse'{_umirrsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 umirrsResponseStatus :: Lens' UpdateManagedInstanceRoleResponse Int

@@ -21,13 +21,13 @@
 -- Decodes additional information about the authorization status of a request from an encoded message returned in response to an AWS request.
 --
 --
--- For example, if a user is not authorized to perform an action that he or she has requested, the request returns a @Client.UnauthorizedOperation@ response (an HTTP 403 response). Some AWS actions additionally return an encoded message that can provide details about this authorization failure.
+-- For example, if a user is not authorized to perform an operation that he or she has requested, the request returns a @Client.UnauthorizedOperation@ response (an HTTP 403 response). Some AWS operations additionally return an encoded message that can provide details about this authorization failure. 
 --
--- The message is encoded because the details of the authorization status can constitute privileged information that the user who requested the action should not see. To decode an authorization status message, a user must be granted permissions via an IAM policy to request the @DecodeAuthorizationMessage@ (@sts:DecodeAuthorizationMessage@ ) action.
+-- The message is encoded because the details of the authorization status can constitute privileged information that the user who requested the operation should not see. To decode an authorization status message, a user must be granted permissions via an IAM policy to request the @DecodeAuthorizationMessage@ (@sts:DecodeAuthorizationMessage@ ) action. 
 --
 -- The decoded message includes the following type of information:
 --
---     * Whether the request was denied due to an explicit deny or due to the absence of an explicit allow. For more information, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-denyallow Determining Whether a Request is Allowed or Denied> in the /IAM User Guide/ .
+--     * Whether the request was denied due to an explicit deny or due to the absence of an explicit allow. For more information, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-denyallow Determining Whether a Request is Allowed or Denied> in the /IAM User Guide/ . 
 --
 --     * The principal who made the request.
 --
@@ -63,10 +63,10 @@ import Network.AWS.STS.Types
 import Network.AWS.STS.Types.Product
 
 -- | /See:/ 'decodeAuthorizationMessage' smart constructor.
-newtype DecodeAuthorizationMessage = DecodeAuthorizationMessage'
-  { _damEncodedMessage :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DecodeAuthorizationMessage = DecodeAuthorizationMessage'{_damEncodedMessage
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DecodeAuthorizationMessage' with the minimum fields required to make a request.
 --
@@ -76,9 +76,9 @@ newtype DecodeAuthorizationMessage = DecodeAuthorizationMessage'
 decodeAuthorizationMessage
     :: Text -- ^ 'damEncodedMessage'
     -> DecodeAuthorizationMessage
-decodeAuthorizationMessage pEncodedMessage_ =
-  DecodeAuthorizationMessage' {_damEncodedMessage = pEncodedMessage_}
-
+decodeAuthorizationMessage pEncodedMessage_
+  = DecodeAuthorizationMessage'{_damEncodedMessage =
+                                  pEncodedMessage_}
 
 -- | The encoded message that was returned with the response.
 damEncodedMessage :: Lens' DecodeAuthorizationMessage Text
@@ -118,11 +118,15 @@ instance ToQuery DecodeAuthorizationMessage where
 --
 --
 -- /See:/ 'decodeAuthorizationMessageResponse' smart constructor.
-data DecodeAuthorizationMessageResponse = DecodeAuthorizationMessageResponse'
-  { _damrsDecodedMessage :: !(Maybe Text)
-  , _damrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DecodeAuthorizationMessageResponse = DecodeAuthorizationMessageResponse'{_damrsDecodedMessage
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _damrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DecodeAuthorizationMessageResponse' with the minimum fields required to make a request.
 --
@@ -134,10 +138,10 @@ data DecodeAuthorizationMessageResponse = DecodeAuthorizationMessageResponse'
 decodeAuthorizationMessageResponse
     :: Int -- ^ 'damrsResponseStatus'
     -> DecodeAuthorizationMessageResponse
-decodeAuthorizationMessageResponse pResponseStatus_ =
-  DecodeAuthorizationMessageResponse'
-    {_damrsDecodedMessage = Nothing, _damrsResponseStatus = pResponseStatus_}
-
+decodeAuthorizationMessageResponse pResponseStatus_
+  = DecodeAuthorizationMessageResponse'{_damrsDecodedMessage
+                                          = Nothing,
+                                        _damrsResponseStatus = pResponseStatus_}
 
 -- | An XML document that contains the decoded message.
 damrsDecodedMessage :: Lens' DecodeAuthorizationMessageResponse (Maybe Text)

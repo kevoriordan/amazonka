@@ -21,7 +21,7 @@
 -- Cancels the scheduled deletion of a secret by removing the @DeletedDate@ time stamp. This makes the secret accessible to query once again.
 --
 --
--- __Minimum permissions__
+-- __Minimum permissions__ 
 --
 -- To run this command, you must have the following permissions:
 --
@@ -29,7 +29,7 @@
 --
 --
 --
--- __Related operations__
+-- __Related operations__ 
 --
 --     * To delete a secret, use 'DeleteSecret' .
 --
@@ -60,10 +60,9 @@ import Network.AWS.SecretsManager.Types
 import Network.AWS.SecretsManager.Types.Product
 
 -- | /See:/ 'restoreSecret' smart constructor.
-newtype RestoreSecret = RestoreSecret'
-  { _rSecretId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RestoreSecret = RestoreSecret'{_rSecretId ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RestoreSecret' with the minimum fields required to make a request.
 --
@@ -73,8 +72,8 @@ newtype RestoreSecret = RestoreSecret'
 restoreSecret
     :: Text -- ^ 'rSecretId'
     -> RestoreSecret
-restoreSecret pSecretId_ = RestoreSecret' {_rSecretId = pSecretId_}
-
+restoreSecret pSecretId_
+  = RestoreSecret'{_rSecretId = pSecretId_}
 
 -- | Specifies the secret that you want to restore from a previously scheduled deletion. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
 rSecretId :: Lens' RestoreSecret Text
@@ -115,12 +114,12 @@ instance ToQuery RestoreSecret where
         toQuery = const mempty
 
 -- | /See:/ 'restoreSecretResponse' smart constructor.
-data RestoreSecretResponse = RestoreSecretResponse'
-  { _rrsARN            :: !(Maybe Text)
-  , _rrsName           :: !(Maybe Text)
-  , _rrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RestoreSecretResponse = RestoreSecretResponse'{_rrsARN
+                                                    :: !(Maybe Text),
+                                                    _rrsName :: !(Maybe Text),
+                                                    _rrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RestoreSecretResponse' with the minimum fields required to make a request.
 --
@@ -134,13 +133,10 @@ data RestoreSecretResponse = RestoreSecretResponse'
 restoreSecretResponse
     :: Int -- ^ 'rrsResponseStatus'
     -> RestoreSecretResponse
-restoreSecretResponse pResponseStatus_ =
-  RestoreSecretResponse'
-    { _rrsARN = Nothing
-    , _rrsName = Nothing
-    , _rrsResponseStatus = pResponseStatus_
-    }
-
+restoreSecretResponse pResponseStatus_
+  = RestoreSecretResponse'{_rrsARN = Nothing,
+                           _rrsName = Nothing,
+                           _rrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the secret that was restored.
 rrsARN :: Lens' RestoreSecretResponse (Maybe Text)

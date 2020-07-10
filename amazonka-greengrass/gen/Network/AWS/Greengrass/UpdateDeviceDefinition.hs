@@ -43,11 +43,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDeviceDefinition' smart constructor.
-data UpdateDeviceDefinition = UpdateDeviceDefinition'
-  { _uddName               :: !(Maybe Text)
-  , _uddDeviceDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDeviceDefinition = UpdateDeviceDefinition'{_uddName
+                                                      :: !(Maybe Text),
+                                                      _uddDeviceDefinitionId ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateDeviceDefinition' with the minimum fields required to make a request.
 --
@@ -59,10 +60,9 @@ data UpdateDeviceDefinition = UpdateDeviceDefinition'
 updateDeviceDefinition
     :: Text -- ^ 'uddDeviceDefinitionId'
     -> UpdateDeviceDefinition
-updateDeviceDefinition pDeviceDefinitionId_ =
-  UpdateDeviceDefinition'
-    {_uddName = Nothing, _uddDeviceDefinitionId = pDeviceDefinitionId_}
-
+updateDeviceDefinition pDeviceDefinitionId_
+  = UpdateDeviceDefinition'{_uddName = Nothing,
+                            _uddDeviceDefinitionId = pDeviceDefinitionId_}
 
 -- | The name of the definition.
 uddName :: Lens' UpdateDeviceDefinition (Maybe Text)
@@ -107,10 +107,10 @@ instance ToQuery UpdateDeviceDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'updateDeviceDefinitionResponse' smart constructor.
-newtype UpdateDeviceDefinitionResponse = UpdateDeviceDefinitionResponse'
-  { _uddrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateDeviceDefinitionResponse = UpdateDeviceDefinitionResponse'{_uddrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UpdateDeviceDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +120,9 @@ newtype UpdateDeviceDefinitionResponse = UpdateDeviceDefinitionResponse'
 updateDeviceDefinitionResponse
     :: Int -- ^ 'uddrsResponseStatus'
     -> UpdateDeviceDefinitionResponse
-updateDeviceDefinitionResponse pResponseStatus_ =
-  UpdateDeviceDefinitionResponse' {_uddrsResponseStatus = pResponseStatus_}
-
+updateDeviceDefinitionResponse pResponseStatus_
+  = UpdateDeviceDefinitionResponse'{_uddrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 uddrsResponseStatus :: Lens' UpdateDeviceDefinitionResponse Int

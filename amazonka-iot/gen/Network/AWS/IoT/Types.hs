@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -16,35 +16,68 @@ module Network.AWS.IoT.Types
       ioT
 
     -- * Errors
-    , _CertificateConflictException
-    , _SqlParseException
-    , _IndexNotReadyException
-    , _InvalidRequestException
-    , _TransferConflictException
-    , _CertificateStateException
-    , _InvalidResponseException
-    , _RegistrationCodeValidationException
-    , _MalformedPolicyException
-    , _DeleteConflictException
-    , _ResourceAlreadyExistsException
-    , _NotConfiguredException
-    , _CertificateValidationException
-    , _ResourceRegistrationFailureException
-    , _InvalidQueryException
-    , _TransferAlreadyCompletedException
-    , _ThrottlingException
-    , _ConflictingResourceUpdateException
-    , _InternalFailureException
-    , _VersionsLimitExceededException
-    , _ServiceUnavailableException
-    , _InternalException
     , _VersionConflictException
-    , _UnauthorizedException
+    , _VersionsLimitExceededException
+    , _RegistrationCodeValidationException
+    , _DeleteConflictException
+    , _InternalFailureException
+    , _CertificateStateException
+    , _ConflictingResourceUpdateException
+    , _TransferConflictException
+    , _InvalidRequestException
+    , _ResourceRegistrationFailureException
+    , _SqlParseException
+    , _CertificateValidationException
+    , _InvalidStateTransitionException
+    , _NotConfiguredException
     , _ResourceNotFoundException
+    , _ResourceAlreadyExistsException
+    , _UnauthorizedException
+    , _ServiceUnavailableException
+    , _MalformedPolicyException
+    , _InternalException
+    , _InvalidResponseException
+    , _InvalidAggregationException
+    , _ThrottlingException
+    , _TransferAlreadyCompletedException
+    , _IndexNotReadyException
+    , _CertificateConflictException
+    , _InvalidQueryException
+    , _TaskAlreadyExistsException
     , _LimitExceededException
+
+    -- * AbortAction
+    , AbortAction (..)
 
     -- * ActionType
     , ActionType (..)
+
+    -- * AlertTargetType
+    , AlertTargetType (..)
+
+    -- * AuditCheckRunStatus
+    , AuditCheckRunStatus (..)
+
+    -- * AuditFindingSeverity
+    , AuditFindingSeverity (..)
+
+    -- * AuditFrequency
+    , AuditFrequency (..)
+
+    -- * AuditMitigationActionsExecutionStatus
+    , AuditMitigationActionsExecutionStatus (..)
+
+    -- * AuditMitigationActionsTaskStatus
+    , AuditMitigationActionsTaskStatus (..)
+
+    -- * AuditNotificationType
+    , AuditNotificationType (..)
+
+    -- * AuditTaskStatus
+    , AuditTaskStatus (..)
+
+    -- * AuditTaskType
+    , AuditTaskType (..)
 
     -- * AuthDecision
     , AuthDecision (..)
@@ -58,11 +91,41 @@ module Network.AWS.IoT.Types
     -- * CACertificateStatus
     , CACertificateStatus (..)
 
+    -- * CACertificateUpdateAction
+    , CACertificateUpdateAction (..)
+
     -- * CannedAccessControlList
     , CannedAccessControlList (..)
 
+    -- * CertificateMode
+    , CertificateMode (..)
+
     -- * CertificateStatus
     , CertificateStatus (..)
+
+    -- * ComparisonOperator
+    , ComparisonOperator (..)
+
+    -- * DayOfWeek
+    , DayOfWeek (..)
+
+    -- * DeviceCertificateUpdateAction
+    , DeviceCertificateUpdateAction (..)
+
+    -- * DimensionType
+    , DimensionType (..)
+
+    -- * DimensionValueOperator
+    , DimensionValueOperator (..)
+
+    -- * DomainConfigurationStatus
+    , DomainConfigurationStatus (..)
+
+    -- * DomainType
+    , DomainType (..)
+
+    -- * DynamicGroupStatus
+    , DynamicGroupStatus (..)
 
     -- * DynamoKeyType
     , DynamoKeyType (..)
@@ -70,8 +133,14 @@ module Network.AWS.IoT.Types
     -- * EventType
     , EventType (..)
 
+    -- * FieldType
+    , FieldType (..)
+
     -- * IndexStatus
     , IndexStatus (..)
+
+    -- * JobExecutionFailureType
+    , JobExecutionFailureType (..)
 
     -- * JobExecutionStatus
     , JobExecutionStatus (..)
@@ -88,11 +157,29 @@ module Network.AWS.IoT.Types
     -- * MessageFormat
     , MessageFormat (..)
 
+    -- * MitigationActionType
+    , MitigationActionType (..)
+
     -- * OTAUpdateStatus
     , OTAUpdateStatus (..)
 
+    -- * PolicyTemplateName
+    , PolicyTemplateName (..)
+
+    -- * Protocol
+    , Protocol (..)
+
     -- * ReportType
     , ReportType (..)
+
+    -- * ResourceType
+    , ResourceType (..)
+
+    -- * ServerCertificateStatus
+    , ServerCertificateStatus (..)
+
+    -- * ServiceType
+    , ServiceType (..)
 
     -- * TargetSelection
     , TargetSelection (..)
@@ -100,31 +187,115 @@ module Network.AWS.IoT.Types
     -- * TaskStatus
     , TaskStatus (..)
 
+    -- * ThingConnectivityIndexingMode
+    , ThingConnectivityIndexingMode (..)
+
+    -- * ThingGroupIndexingMode
+    , ThingGroupIndexingMode (..)
+
     -- * ThingIndexingMode
     , ThingIndexingMode (..)
+
+    -- * TopicRuleDestinationStatus
+    , TopicRuleDestinationStatus (..)
+
+    -- * ViolationEventType
+    , ViolationEventType (..)
+
+    -- * AWSJobExecutionsRolloutConfig
+    , AWSJobExecutionsRolloutConfig
+    , awsJobExecutionsRolloutConfig
+    , ajercMaximumPerMinute
+
+    -- * AWSJobPresignedURLConfig
+    , AWSJobPresignedURLConfig
+    , awsJobPresignedURLConfig
+    , ajpucExpiresInSec
+
+    -- * AbortConfig
+    , AbortConfig
+    , abortConfig
+    , acCriteriaList
+
+    -- * AbortCriteria
+    , AbortCriteria
+    , abortCriteria
+    , acFailureType
+    , acAction
+    , acThresholdPercentage
+    , acMinNumberOfExecutedThings
 
     -- * Action
     , Action
     , action
     , aCloudwatchMetric
+    , aCloudwatchLogs
     , aDynamoDBv2
+    , aStepFunctions
     , aCloudwatchAlarm
     , aSns
     , aDynamoDB
     , aFirehose
+    , aIotSiteWise
     , aIotAnalytics
     , aLambda
+    , aIotEvents
     , aSalesforce
     , aKinesis
     , aS3
+    , aHttp
     , aElasticsearch
     , aRepublish
     , aSqs
+
+    -- * ActiveViolation
+    , ActiveViolation
+    , activeViolation
+    , avLastViolationValue
+    , avLastViolationTime
+    , avViolationStartTime
+    , avViolationId
+    , avBehavior
+    , avSecurityProfileName
+    , avThingName
+
+    -- * AddThingsToThingGroupParams
+    , AddThingsToThingGroupParams
+    , addThingsToThingGroupParams
+    , atttgpOverrideDynamicGroups
+    , atttgpThingGroupNames
+
+    -- * AlertTarget
+    , AlertTarget
+    , alertTarget
+    , atAlertTargetARN
+    , atRoleARN
 
     -- * Allowed
     , Allowed
     , allowed
     , aPolicies
+
+    -- * AssetPropertyTimestamp
+    , AssetPropertyTimestamp
+    , assetPropertyTimestamp
+    , aptOffsetInNanos
+    , aptTimeInSeconds
+
+    -- * AssetPropertyValue
+    , AssetPropertyValue
+    , assetPropertyValue
+    , apvQuality
+    , apvValue
+    , apvTimestamp
+
+    -- * AssetPropertyVariant
+    , AssetPropertyVariant
+    , assetPropertyVariant
+    , apvIntegerValue
+    , apvDoubleValue
+    , apvStringValue
+    , apvBooleanValue
 
     -- * AttributePayload
     , AttributePayload
@@ -132,11 +303,81 @@ module Network.AWS.IoT.Types
     , apAttributes
     , apMerge
 
+    -- * AuditCheckConfiguration
+    , AuditCheckConfiguration
+    , auditCheckConfiguration
+    , accEnabled
+
+    -- * AuditCheckDetails
+    , AuditCheckDetails
+    , auditCheckDetails
+    , acdTotalResourcesCount
+    , acdCheckCompliant
+    , acdNonCompliantResourcesCount
+    , acdErrorCode
+    , acdMessage
+    , acdCheckRunStatus
+
+    -- * AuditFinding
+    , AuditFinding
+    , auditFinding
+    , afTaskId
+    , afFindingTime
+    , afTaskStartTime
+    , afReasonForNonComplianceCode
+    , afSeverity
+    , afRelatedResources
+    , afCheckName
+    , afNonCompliantResource
+    , afReasonForNonCompliance
+    , afFindingId
+
+    -- * AuditMitigationActionExecutionMetadata
+    , AuditMitigationActionExecutionMetadata
+    , auditMitigationActionExecutionMetadata
+    , amaemStatus
+    , amaemStartTime
+    , amaemTaskId
+    , amaemActionId
+    , amaemActionName
+    , amaemEndTime
+    , amaemErrorCode
+    , amaemFindingId
+    , amaemMessage
+
+    -- * AuditMitigationActionsTaskMetadata
+    , AuditMitigationActionsTaskMetadata
+    , auditMitigationActionsTaskMetadata
+    , amatmStartTime
+    , amatmTaskId
+    , amatmTaskStatus
+
+    -- * AuditMitigationActionsTaskTarget
+    , AuditMitigationActionsTaskTarget
+    , auditMitigationActionsTaskTarget
+    , amattAuditTaskId
+    , amattFindingIds
+    , amattAuditCheckToReasonCodeFilter
+
+    -- * AuditNotificationTarget
+    , AuditNotificationTarget
+    , auditNotificationTarget
+    , antTargetARN
+    , antEnabled
+    , antRoleARN
+
+    -- * AuditTaskMetadata
+    , AuditTaskMetadata
+    , auditTaskMetadata
+    , atmTaskType
+    , atmTaskId
+    , atmTaskStatus
+
     -- * AuthInfo
     , AuthInfo
     , authInfo
-    , aiResources
     , aiActionType
+    , aiResources
 
     -- * AuthResult
     , AuthResult
@@ -147,11 +388,18 @@ module Network.AWS.IoT.Types
     , arMissingContextValues
     , arAuthInfo
 
+    -- * AuthorizerConfig
+    , AuthorizerConfig
+    , authorizerConfig
+    , acAllowAuthorizerOverride
+    , acDefaultAuthorizerName
+
     -- * AuthorizerDescription
     , AuthorizerDescription
     , authorizerDescription
     , adStatus
     , adLastModifiedDate
+    , adSigningDisabled
     , adAuthorizerName
     , adAuthorizerFunctionARN
     , adAuthorizerARN
@@ -164,6 +412,34 @@ module Network.AWS.IoT.Types
     , authorizerSummary
     , asAuthorizerName
     , asAuthorizerARN
+
+    -- * Behavior
+    , Behavior
+    , behavior
+    , bMetricDimension
+    , bMetric
+    , bCriteria
+    , bName
+
+    -- * BehaviorCriteria
+    , BehaviorCriteria
+    , behaviorCriteria
+    , bcValue
+    , bcConsecutiveDatapointsToAlarm
+    , bcComparisonOperator
+    , bcStatisticalThreshold
+    , bcDurationSeconds
+    , bcConsecutiveDatapointsToClear
+
+    -- * BillingGroupMetadata
+    , BillingGroupMetadata
+    , billingGroupMetadata
+    , bgmCreationDate
+
+    -- * BillingGroupProperties
+    , BillingGroupProperties
+    , billingGroupProperties
+    , bgpBillingGroupDescription
 
     -- * CACertificate
     , CACertificate
@@ -182,6 +458,7 @@ module Network.AWS.IoT.Types
     , cacdCertificatePem
     , cacdCertificateARN
     , cacdCertificateId
+    , cacdValidity
     , cacdAutoRegistrationStatus
     , cacdCreationDate
     , cacdGenerationId
@@ -193,6 +470,7 @@ module Network.AWS.IoT.Types
     , cStatus
     , cCertificateARN
     , cCertificateId
+    , cCertificateMode
     , cCreationDate
 
     -- * CertificateDescription
@@ -206,10 +484,18 @@ module Network.AWS.IoT.Types
     , cdCertificatePem
     , cdCertificateARN
     , cdCertificateId
+    , cdCertificateMode
+    , cdValidity
     , cdCreationDate
     , cdGenerationId
     , cdTransferData
     , cdCustomerVersion
+
+    -- * CertificateValidity
+    , CertificateValidity
+    , certificateValidity
+    , cvNotBefore
+    , cvNotAfter
 
     -- * CloudwatchAlarmAction
     , CloudwatchAlarmAction
@@ -218,6 +504,12 @@ module Network.AWS.IoT.Types
     , caaAlarmName
     , caaStateReason
     , caaStateValue
+
+    -- * CloudwatchLogsAction
+    , CloudwatchLogsAction
+    , cloudwatchLogsAction
+    , claRoleARN
+    , claLogGroupName
 
     -- * CloudwatchMetricAction
     , CloudwatchMetricAction
@@ -233,19 +525,18 @@ module Network.AWS.IoT.Types
     , CodeSigning
     , codeSigning
     , csCustomCodeSigning
+    , csStartSigningJobParameter
     , csAwsSignerJobId
 
     -- * CodeSigningCertificateChain
     , CodeSigningCertificateChain
     , codeSigningCertificateChain
-    , csccStream
     , csccCertificateName
     , csccInlineDocument
 
     -- * CodeSigningSignature
     , CodeSigningSignature
     , codeSigningSignature
-    , cssStream
     , cssInlineDocument
 
     -- * Configuration
@@ -267,6 +558,18 @@ module Network.AWS.IoT.Types
     , dImplicitDeny
     , dExplicitDeny
 
+    -- * Destination
+    , Destination
+    , destination
+    , dS3Destination
+
+    -- * DomainConfigurationSummary
+    , DomainConfigurationSummary
+    , domainConfigurationSummary
+    , dcsDomainConfigurationName
+    , dcsDomainConfigurationARN
+    , dcsServiceType
+
     -- * DynamoDBAction
     , DynamoDBAction
     , dynamoDBAction
@@ -284,8 +587,8 @@ module Network.AWS.IoT.Types
     -- * DynamoDBv2Action
     , DynamoDBv2Action
     , dynamoDBv2Action
-    , ddaPutItem
     , ddaRoleARN
+    , ddaPutItem
 
     -- * EffectivePolicy
     , EffectivePolicy
@@ -303,6 +606,12 @@ module Network.AWS.IoT.Types
     , eaType
     , eaId
 
+    -- * EnableIOTLoggingParams
+    , EnableIOTLoggingParams
+    , enableIOTLoggingParams
+    , eiotlpRoleARNForLogging
+    , eiotlpLogLevel
+
     -- * ErrorInfo
     , ErrorInfo
     , errorInfo
@@ -313,6 +622,25 @@ module Network.AWS.IoT.Types
     , ExplicitDeny
     , explicitDeny
     , edPolicies
+
+    -- * ExponentialRolloutRate
+    , ExponentialRolloutRate
+    , exponentialRolloutRate
+    , errBaseRatePerMinute
+    , errIncrementFactor
+    , errRateIncreaseCriteria
+
+    -- * Field
+    , Field
+    , field
+    , fName
+    , fType
+
+    -- * FileLocation
+    , FileLocation
+    , fileLocation
+    , flStream
+    , flS3Location
 
     -- * FirehoseAction
     , FirehoseAction
@@ -327,6 +655,46 @@ module Network.AWS.IoT.Types
     , gnaaGroupARN
     , gnaaGroupName
 
+    -- * HTTPAction
+    , HTTPAction
+    , hTTPAction
+    , httpaConfirmationURL
+    , httpaAuth
+    , httpaHeaders
+    , httpaUrl
+
+    -- * HTTPActionHeader
+    , HTTPActionHeader
+    , hTTPActionHeader
+    , httpahKey
+    , httpahValue
+
+    -- * HTTPAuthorization
+    , HTTPAuthorization
+    , hTTPAuthorization
+    , httpaSigv4
+
+    -- * HTTPContext
+    , HTTPContext
+    , hTTPContext
+    , httpcHeaders
+    , httpcQueryString
+
+    -- * HTTPURLDestinationConfiguration
+    , HTTPURLDestinationConfiguration
+    , hTTPURLDestinationConfiguration
+    , httpudcConfirmationURL
+
+    -- * HTTPURLDestinationProperties
+    , HTTPURLDestinationProperties
+    , hTTPURLDestinationProperties
+    , httpudpConfirmationURL
+
+    -- * HTTPURLDestinationSummary
+    , HTTPURLDestinationSummary
+    , hTTPURLDestinationSummary
+    , httpudsConfirmationURL
+
     -- * ImplicitDeny
     , ImplicitDeny
     , implicitDeny
@@ -339,6 +707,19 @@ module Network.AWS.IoT.Types
     , iaaChannelName
     , iaaRoleARN
 
+    -- * IotEventsAction
+    , IotEventsAction
+    , iotEventsAction
+    , ieaMessageId
+    , ieaInputName
+    , ieaRoleARN
+
+    -- * IotSiteWiseAction
+    , IotSiteWiseAction
+    , iotSiteWiseAction
+    , iswaPutAssetPropertyValueEntries
+    , iswaRoleARN
+
     -- * Job
     , Job
     , job
@@ -348,14 +729,17 @@ module Network.AWS.IoT.Types
     , jobLastUpdatedAt
     , jobJobARN
     , jobCreatedAt
-    , jobDocumentParameters
+    , jobAbortConfig
     , jobJobProcessDetails
+    , jobReasonCode
     , jobPresignedURLConfig
+    , jobForceCanceled
     , jobTargets
     , jobCompletedAt
     , jobComment
     , jobDescription
     , jobTargetSelection
+    , jobTimeoutConfig
 
     -- * JobExecution
     , JobExecution
@@ -363,11 +747,14 @@ module Network.AWS.IoT.Types
     , jeStatus
     , jeJobId
     , jeLastUpdatedAt
+    , jeApproximateSecondsBeforeTimedOut
     , jeQueuedAt
     , jeStatusDetails
     , jeThingARN
     , jeExecutionNumber
+    , jeVersionNumber
     , jeStartedAt
+    , jeForceCanceled
 
     -- * JobExecutionStatusDetails
     , JobExecutionStatusDetails
@@ -398,6 +785,7 @@ module Network.AWS.IoT.Types
     -- * JobExecutionsRolloutConfig
     , JobExecutionsRolloutConfig
     , jobExecutionsRolloutConfig
+    , jercExponentialRate
     , jercMaximumPerMinute
 
     -- * JobProcessDetails
@@ -409,6 +797,7 @@ module Network.AWS.IoT.Types
     , jpdNumberOfSucceededThings
     , jpdNumberOfInProgressThings
     , jpdNumberOfCanceledThings
+    , jpdNumberOfTimedOutThings
     , jpdNumberOfRejectedThings
     , jpdProcessingTargets
 
@@ -460,12 +849,70 @@ module Network.AWS.IoT.Types
     , lopLogLevel
     , lopRoleARN
 
+    -- * MetricDimension
+    , MetricDimension
+    , metricDimension
+    , mdOperator
+    , mdDimensionName
+
+    -- * MetricToRetain
+    , MetricToRetain
+    , metricToRetain
+    , mtrMetricDimension
+    , mtrMetric
+
+    -- * MetricValue
+    , MetricValue
+    , metricValue
+    , mvCidrs
+    , mvCount
+    , mvPorts
+
+    -- * MitigationAction
+    , MitigationAction
+    , mitigationAction
+    , maActionParams
+    , maName
+    , maId
+    , maRoleARN
+
+    -- * MitigationActionIdentifier
+    , MitigationActionIdentifier
+    , mitigationActionIdentifier
+    , maiActionName
+    , maiCreationDate
+    , maiActionARN
+
+    -- * MitigationActionParams
+    , MitigationActionParams
+    , mitigationActionParams
+    , mapEnableIOTLoggingParams
+    , mapAddThingsToThingGroupParams
+    , mapUpdateCACertificateParams
+    , mapUpdateDeviceCertificateParams
+    , mapReplaceDefaultPolicyVersionParams
+    , mapPublishFindingToSNSParams
+
+    -- * MqttContext
+    , MqttContext
+    , mqttContext
+    , mcClientId
+    , mcUsername
+    , mcPassword
+
+    -- * NonCompliantResource
+    , NonCompliantResource
+    , nonCompliantResource
+    , ncrAdditionalInfo
+    , ncrResourceType
+    , ncrResourceIdentifier
+
     -- * OTAUpdateFile
     , OTAUpdateFile
     , oTAUpdateFile
+    , otaufFileLocation
     , otaufFileVersion
     , otaufAttributes
-    , otaufFileSource
     , otaufCodeSigning
     , otaufFileName
 
@@ -473,7 +920,10 @@ module Network.AWS.IoT.Types
     , OTAUpdateInfo
     , oTAUpdateInfo
     , otauiLastModifiedDate
+    , otauiAwsJobExecutionsRolloutConfig
     , otauiAwsIotJobId
+    , otauiProtocols
+    , otauiAwsJobPresignedURLConfig
     , otauiOtaUpdateFiles
     , otauiOtaUpdateStatus
     , otauiTargets
@@ -503,6 +953,12 @@ module Network.AWS.IoT.Types
     , ocCreationDate
     , ocTransferMessage
 
+    -- * PercentPair
+    , PercentPair
+    , percentPair
+    , ppValue
+    , ppPercent
+
     -- * Policy
     , Policy
     , policy
@@ -516,16 +972,65 @@ module Network.AWS.IoT.Types
     , pvCreateDate
     , pvIsDefaultVersion
 
+    -- * PolicyVersionIdentifier
+    , PolicyVersionIdentifier
+    , policyVersionIdentifier
+    , pviPolicyName
+    , pviPolicyVersionId
+
     -- * PresignedURLConfig
     , PresignedURLConfig
     , presignedURLConfig
     , pucExpiresInSec
     , pucRoleARN
 
+    -- * ProvisioningHook
+    , ProvisioningHook
+    , provisioningHook
+    , phPayloadVersion
+    , phTargetARN
+
+    -- * ProvisioningTemplateSummary
+    , ProvisioningTemplateSummary
+    , provisioningTemplateSummary
+    , ptsLastModifiedDate
+    , ptsTemplateName
+    , ptsEnabled
+    , ptsCreationDate
+    , ptsTemplateARN
+    , ptsDescription
+
+    -- * ProvisioningTemplateVersionSummary
+    , ProvisioningTemplateVersionSummary
+    , provisioningTemplateVersionSummary
+    , ptvsVersionId
+    , ptvsCreationDate
+    , ptvsIsDefaultVersion
+
+    -- * PublishFindingToSNSParams
+    , PublishFindingToSNSParams
+    , publishFindingToSNSParams
+    , pftspTopicARN
+
+    -- * PutAssetPropertyValueEntry
+    , PutAssetPropertyValueEntry
+    , putAssetPropertyValueEntry
+    , papveEntryId
+    , papvePropertyAlias
+    , papvePropertyId
+    , papveAssetId
+    , papvePropertyValues
+
     -- * PutItemInput
     , PutItemInput
     , putItemInput
     , piiTableName
+
+    -- * RateIncreaseCriteria
+    , RateIncreaseCriteria
+    , rateIncreaseCriteria
+    , ricNumberOfNotifiedThings
+    , ricNumberOfSucceededThings
 
     -- * RegistrationConfig
     , RegistrationConfig
@@ -533,11 +1038,36 @@ module Network.AWS.IoT.Types
     , rcTemplateBody
     , rcRoleARN
 
+    -- * RelatedResource
+    , RelatedResource
+    , relatedResource
+    , rrAdditionalInfo
+    , rrResourceType
+    , rrResourceIdentifier
+
+    -- * ReplaceDefaultPolicyVersionParams
+    , ReplaceDefaultPolicyVersionParams
+    , replaceDefaultPolicyVersionParams
+    , rdpvpTemplateName
+
     -- * RepublishAction
     , RepublishAction
     , republishAction
+    , raQos
     , raRoleARN
     , raTopic
+
+    -- * ResourceIdentifier
+    , ResourceIdentifier
+    , resourceIdentifier
+    , riIamRoleARN
+    , riClientId
+    , riRoleAliasARN
+    , riCaCertificateId
+    , riDeviceCertificateId
+    , riAccount
+    , riPolicyVersionIdentifier
+    , riCognitoIdentityPoolId
 
     -- * RoleAliasDescription
     , RoleAliasDescription
@@ -558,12 +1088,18 @@ module Network.AWS.IoT.Types
     , sBucketName
     , sKey
 
+    -- * S3Destination
+    , S3Destination
+    , s3Destination
+    , sdPrefix
+    , sdBucket
+
     -- * S3Location
     , S3Location
     , s3Location
-    , slVersion
     , slBucket
     , slKey
+    , slVersion
 
     -- * SNSAction
     , SNSAction
@@ -578,12 +1114,90 @@ module Network.AWS.IoT.Types
     , saToken
     , saUrl
 
+    -- * ScheduledAuditMetadata
+    , ScheduledAuditMetadata
+    , scheduledAuditMetadata
+    , samFrequency
+    , samScheduledAuditName
+    , samDayOfMonth
+    , samDayOfWeek
+    , samScheduledAuditARN
+
+    -- * SecurityProfileIdentifier
+    , SecurityProfileIdentifier
+    , securityProfileIdentifier
+    , spiName
+    , spiArn
+
+    -- * SecurityProfileTarget
+    , SecurityProfileTarget
+    , securityProfileTarget
+    , sptArn
+
+    -- * SecurityProfileTargetMapping
+    , SecurityProfileTargetMapping
+    , securityProfileTargetMapping
+    , sptmSecurityProfileIdentifier
+    , sptmTarget
+
+    -- * ServerCertificateSummary
+    , ServerCertificateSummary
+    , serverCertificateSummary
+    , scsServerCertificateStatusDetail
+    , scsServerCertificateStatus
+    , scsServerCertificateARN
+
+    -- * SigV4Authorization
+    , SigV4Authorization
+    , sigV4Authorization
+    , svaSigningRegion
+    , svaServiceName
+    , svaRoleARN
+
+    -- * SigningProfileParameter
+    , SigningProfileParameter
+    , signingProfileParameter
+    , sppPlatform
+    , sppCertificateARN
+    , sppCertificatePathOnDevice
+
     -- * SqsAction
     , SqsAction
     , sqsAction
     , saUseBase64
     , saRoleARN
     , saQueueURL
+
+    -- * StartSigningJobParameter
+    , StartSigningJobParameter
+    , startSigningJobParameter
+    , ssjpDestination
+    , ssjpSigningProfileName
+    , ssjpSigningProfileParameter
+
+    -- * StatisticalThreshold
+    , StatisticalThreshold
+    , statisticalThreshold
+    , stStatistic
+
+    -- * Statistics
+    , Statistics
+    , statistics
+    , sStdDeviation
+    , sMaximum
+    , sAverage
+    , sCount
+    , sMinimum
+    , sVariance
+    , sSumOfSquares
+    , sSum
+
+    -- * StepFunctionsAction
+    , StepFunctionsAction
+    , stepFunctionsAction
+    , sfaExecutionNamePrefix
+    , sfaStateMachineName
+    , sfaRoleARN
 
     -- * Stream
     , Stream
@@ -617,6 +1231,37 @@ module Network.AWS.IoT.Types
     , ssDescription
     , ssStreamId
 
+    -- * TLSContext
+    , TLSContext
+    , tlsContext
+    , tcServerName
+
+    -- * Tag
+    , Tag
+    , tag
+    , tagValue
+    , tagKey
+
+    -- * TaskStatistics
+    , TaskStatistics
+    , taskStatistics
+    , tsNonCompliantChecks
+    , tsWaitingForDataCollectionChecks
+    , tsFailedChecks
+    , tsTotalChecks
+    , tsInProgressChecks
+    , tsCompliantChecks
+    , tsCanceledChecks
+
+    -- * TaskStatisticsForAuditCheck
+    , TaskStatisticsForAuditCheck
+    , taskStatisticsForAuditCheck
+    , tsfacCanceledFindingsCount
+    , tsfacSkippedFindingsCount
+    , tsfacTotalFindingsCount
+    , tsfacFailedFindingsCount
+    , tsfacSucceededFindingsCount
+
     -- * ThingAttribute
     , ThingAttribute
     , thingAttribute
@@ -626,6 +1271,12 @@ module Network.AWS.IoT.Types
     , taVersion
     , taThingName
 
+    -- * ThingConnectivity
+    , ThingConnectivity
+    , thingConnectivity
+    , tcConnected
+    , tcTimestamp
+
     -- * ThingDocument
     , ThingDocument
     , thingDocument
@@ -633,8 +1284,25 @@ module Network.AWS.IoT.Types
     , tdThingTypeName
     , tdShadow
     , tdAttributes
+    , tdConnectivity
     , tdThingName
     , tdThingId
+
+    -- * ThingGroupDocument
+    , ThingGroupDocument
+    , thingGroupDocument
+    , tgdParentGroupNames
+    , tgdThingGroupId
+    , tgdThingGroupName
+    , tgdAttributes
+    , tgdThingGroupDescription
+
+    -- * ThingGroupIndexingConfiguration
+    , ThingGroupIndexingConfiguration
+    , thingGroupIndexingConfiguration
+    , tgicManagedFields
+    , tgicCustomFields
+    , tgicThingGroupIndexingMode
 
     -- * ThingGroupMetadata
     , ThingGroupMetadata
@@ -652,6 +1320,9 @@ module Network.AWS.IoT.Types
     -- * ThingIndexingConfiguration
     , ThingIndexingConfiguration
     , thingIndexingConfiguration
+    , ticManagedFields
+    , ticThingConnectivityIndexingMode
+    , ticCustomFields
     , ticThingIndexingMode
 
     -- * ThingTypeDefinition
@@ -675,6 +1346,11 @@ module Network.AWS.IoT.Types
     , ttpSearchableAttributes
     , ttpThingTypeDescription
 
+    -- * TimeoutConfig
+    , TimeoutConfig
+    , timeoutConfig
+    , tcInProgressTimeoutInMinutes
+
     -- * TopicRule
     , TopicRule
     , topicRule
@@ -686,6 +1362,27 @@ module Network.AWS.IoT.Types
     , trRuleName
     , trSql
     , trDescription
+
+    -- * TopicRuleDestination
+    , TopicRuleDestination
+    , topicRuleDestination
+    , trdStatus
+    , trdHttpURLProperties
+    , trdArn
+    , trdStatusReason
+
+    -- * TopicRuleDestinationConfiguration
+    , TopicRuleDestinationConfiguration
+    , topicRuleDestinationConfiguration
+    , trdcHttpURLConfiguration
+
+    -- * TopicRuleDestinationSummary
+    , TopicRuleDestinationSummary
+    , topicRuleDestinationSummary
+    , trdsStatus
+    , trdsHttpURLSummary
+    , trdsArn
+    , trdsStatusReason
 
     -- * TopicRuleListItem
     , TopicRuleListItem
@@ -714,255 +1411,528 @@ module Network.AWS.IoT.Types
     , tdTransferMessage
     , tdRejectDate
     , tdRejectReason
+
+    -- * UpdateCACertificateParams
+    , UpdateCACertificateParams
+    , updateCACertificateParams
+    , ucacpAction
+
+    -- * UpdateDeviceCertificateParams
+    , UpdateDeviceCertificateParams
+    , updateDeviceCertificateParams
+    , udcpAction
+
+    -- * ValidationError
+    , ValidationError
+    , validationError
+    , veErrorMessage
+
+    -- * ViolationEvent
+    , ViolationEvent
+    , violationEvent
+    , veViolationEventType
+    , veViolationId
+    , veBehavior
+    , veMetricValue
+    , veSecurityProfileName
+    , veViolationEventTime
+    , veThingName
     ) where
 
-import Network.AWS.IoT.Types.Product
-import Network.AWS.IoT.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
+import Network.AWS.IoT.Types.AbortAction
+import Network.AWS.IoT.Types.ActionType
+import Network.AWS.IoT.Types.AlertTargetType
+import Network.AWS.IoT.Types.AuditCheckRunStatus
+import Network.AWS.IoT.Types.AuditFindingSeverity
+import Network.AWS.IoT.Types.AuditFrequency
+import Network.AWS.IoT.Types.AuditMitigationActionsExecutionStatus
+import Network.AWS.IoT.Types.AuditMitigationActionsTaskStatus
+import Network.AWS.IoT.Types.AuditNotificationType
+import Network.AWS.IoT.Types.AuditTaskStatus
+import Network.AWS.IoT.Types.AuditTaskType
+import Network.AWS.IoT.Types.AuthDecision
+import Network.AWS.IoT.Types.AuthorizerStatus
+import Network.AWS.IoT.Types.AutoRegistrationStatus
+import Network.AWS.IoT.Types.CACertificateStatus
+import Network.AWS.IoT.Types.CACertificateUpdateAction
+import Network.AWS.IoT.Types.CannedAccessControlList
+import Network.AWS.IoT.Types.CertificateMode
+import Network.AWS.IoT.Types.CertificateStatus
+import Network.AWS.IoT.Types.ComparisonOperator
+import Network.AWS.IoT.Types.DayOfWeek
+import Network.AWS.IoT.Types.DeviceCertificateUpdateAction
+import Network.AWS.IoT.Types.DimensionType
+import Network.AWS.IoT.Types.DimensionValueOperator
+import Network.AWS.IoT.Types.DomainConfigurationStatus
+import Network.AWS.IoT.Types.DomainType
+import Network.AWS.IoT.Types.DynamicGroupStatus
+import Network.AWS.IoT.Types.DynamoKeyType
+import Network.AWS.IoT.Types.EventType
+import Network.AWS.IoT.Types.FieldType
+import Network.AWS.IoT.Types.IndexStatus
+import Network.AWS.IoT.Types.JobExecutionFailureType
+import Network.AWS.IoT.Types.JobExecutionStatus
+import Network.AWS.IoT.Types.JobStatus
+import Network.AWS.IoT.Types.LogLevel
+import Network.AWS.IoT.Types.LogTargetType
+import Network.AWS.IoT.Types.MessageFormat
+import Network.AWS.IoT.Types.MitigationActionType
+import Network.AWS.IoT.Types.OTAUpdateStatus
+import Network.AWS.IoT.Types.PolicyTemplateName
+import Network.AWS.IoT.Types.Protocol
+import Network.AWS.IoT.Types.ReportType
+import Network.AWS.IoT.Types.ResourceType
+import Network.AWS.IoT.Types.ServerCertificateStatus
+import Network.AWS.IoT.Types.ServiceType
+import Network.AWS.IoT.Types.TargetSelection
+import Network.AWS.IoT.Types.TaskStatus
+import Network.AWS.IoT.Types.ThingConnectivityIndexingMode
+import Network.AWS.IoT.Types.ThingGroupIndexingMode
+import Network.AWS.IoT.Types.ThingIndexingMode
+import Network.AWS.IoT.Types.TopicRuleDestinationStatus
+import Network.AWS.IoT.Types.ViolationEventType
+import Network.AWS.IoT.Types.AWSJobExecutionsRolloutConfig
+import Network.AWS.IoT.Types.AWSJobPresignedURLConfig
+import Network.AWS.IoT.Types.AbortConfig
+import Network.AWS.IoT.Types.AbortCriteria
+import Network.AWS.IoT.Types.Action
+import Network.AWS.IoT.Types.ActiveViolation
+import Network.AWS.IoT.Types.AddThingsToThingGroupParams
+import Network.AWS.IoT.Types.AlertTarget
+import Network.AWS.IoT.Types.Allowed
+import Network.AWS.IoT.Types.AssetPropertyTimestamp
+import Network.AWS.IoT.Types.AssetPropertyValue
+import Network.AWS.IoT.Types.AssetPropertyVariant
+import Network.AWS.IoT.Types.AttributePayload
+import Network.AWS.IoT.Types.AuditCheckConfiguration
+import Network.AWS.IoT.Types.AuditCheckDetails
+import Network.AWS.IoT.Types.AuditFinding
+import Network.AWS.IoT.Types.AuditMitigationActionExecutionMetadata
+import Network.AWS.IoT.Types.AuditMitigationActionsTaskMetadata
+import Network.AWS.IoT.Types.AuditMitigationActionsTaskTarget
+import Network.AWS.IoT.Types.AuditNotificationTarget
+import Network.AWS.IoT.Types.AuditTaskMetadata
+import Network.AWS.IoT.Types.AuthInfo
+import Network.AWS.IoT.Types.AuthResult
+import Network.AWS.IoT.Types.AuthorizerConfig
+import Network.AWS.IoT.Types.AuthorizerDescription
+import Network.AWS.IoT.Types.AuthorizerSummary
+import Network.AWS.IoT.Types.Behavior
+import Network.AWS.IoT.Types.BehaviorCriteria
+import Network.AWS.IoT.Types.BillingGroupMetadata
+import Network.AWS.IoT.Types.BillingGroupProperties
+import Network.AWS.IoT.Types.CACertificate
+import Network.AWS.IoT.Types.CACertificateDescription
+import Network.AWS.IoT.Types.Certificate
+import Network.AWS.IoT.Types.CertificateDescription
+import Network.AWS.IoT.Types.CertificateValidity
+import Network.AWS.IoT.Types.CloudwatchAlarmAction
+import Network.AWS.IoT.Types.CloudwatchLogsAction
+import Network.AWS.IoT.Types.CloudwatchMetricAction
+import Network.AWS.IoT.Types.CodeSigning
+import Network.AWS.IoT.Types.CodeSigningCertificateChain
+import Network.AWS.IoT.Types.CodeSigningSignature
+import Network.AWS.IoT.Types.Configuration
+import Network.AWS.IoT.Types.CustomCodeSigning
+import Network.AWS.IoT.Types.Denied
+import Network.AWS.IoT.Types.Destination
+import Network.AWS.IoT.Types.DomainConfigurationSummary
+import Network.AWS.IoT.Types.DynamoDBAction
+import Network.AWS.IoT.Types.DynamoDBv2Action
+import Network.AWS.IoT.Types.EffectivePolicy
+import Network.AWS.IoT.Types.ElasticsearchAction
+import Network.AWS.IoT.Types.EnableIOTLoggingParams
+import Network.AWS.IoT.Types.ErrorInfo
+import Network.AWS.IoT.Types.ExplicitDeny
+import Network.AWS.IoT.Types.ExponentialRolloutRate
+import Network.AWS.IoT.Types.Field
+import Network.AWS.IoT.Types.FileLocation
+import Network.AWS.IoT.Types.FirehoseAction
+import Network.AWS.IoT.Types.GroupNameAndARN
+import Network.AWS.IoT.Types.HTTPAction
+import Network.AWS.IoT.Types.HTTPActionHeader
+import Network.AWS.IoT.Types.HTTPAuthorization
+import Network.AWS.IoT.Types.HTTPContext
+import Network.AWS.IoT.Types.HTTPURLDestinationConfiguration
+import Network.AWS.IoT.Types.HTTPURLDestinationProperties
+import Network.AWS.IoT.Types.HTTPURLDestinationSummary
+import Network.AWS.IoT.Types.ImplicitDeny
+import Network.AWS.IoT.Types.IotAnalyticsAction
+import Network.AWS.IoT.Types.IotEventsAction
+import Network.AWS.IoT.Types.IotSiteWiseAction
+import Network.AWS.IoT.Types.Job
+import Network.AWS.IoT.Types.JobExecution
+import Network.AWS.IoT.Types.JobExecutionStatusDetails
+import Network.AWS.IoT.Types.JobExecutionSummary
+import Network.AWS.IoT.Types.JobExecutionSummaryForJob
+import Network.AWS.IoT.Types.JobExecutionSummaryForThing
+import Network.AWS.IoT.Types.JobExecutionsRolloutConfig
+import Network.AWS.IoT.Types.JobProcessDetails
+import Network.AWS.IoT.Types.JobSummary
+import Network.AWS.IoT.Types.KeyPair
+import Network.AWS.IoT.Types.KinesisAction
+import Network.AWS.IoT.Types.LambdaAction
+import Network.AWS.IoT.Types.LogTarget
+import Network.AWS.IoT.Types.LogTargetConfiguration
+import Network.AWS.IoT.Types.LoggingOptionsPayload
+import Network.AWS.IoT.Types.MetricDimension
+import Network.AWS.IoT.Types.MetricToRetain
+import Network.AWS.IoT.Types.MetricValue
+import Network.AWS.IoT.Types.MitigationAction
+import Network.AWS.IoT.Types.MitigationActionIdentifier
+import Network.AWS.IoT.Types.MitigationActionParams
+import Network.AWS.IoT.Types.MqttContext
+import Network.AWS.IoT.Types.NonCompliantResource
+import Network.AWS.IoT.Types.OTAUpdateFile
+import Network.AWS.IoT.Types.OTAUpdateInfo
+import Network.AWS.IoT.Types.OTAUpdateSummary
+import Network.AWS.IoT.Types.OutgoingCertificate
+import Network.AWS.IoT.Types.PercentPair
+import Network.AWS.IoT.Types.Policy
+import Network.AWS.IoT.Types.PolicyVersion
+import Network.AWS.IoT.Types.PolicyVersionIdentifier
+import Network.AWS.IoT.Types.PresignedURLConfig
+import Network.AWS.IoT.Types.ProvisioningHook
+import Network.AWS.IoT.Types.ProvisioningTemplateSummary
+import Network.AWS.IoT.Types.ProvisioningTemplateVersionSummary
+import Network.AWS.IoT.Types.PublishFindingToSNSParams
+import Network.AWS.IoT.Types.PutAssetPropertyValueEntry
+import Network.AWS.IoT.Types.PutItemInput
+import Network.AWS.IoT.Types.RateIncreaseCriteria
+import Network.AWS.IoT.Types.RegistrationConfig
+import Network.AWS.IoT.Types.RelatedResource
+import Network.AWS.IoT.Types.ReplaceDefaultPolicyVersionParams
+import Network.AWS.IoT.Types.RepublishAction
+import Network.AWS.IoT.Types.ResourceIdentifier
+import Network.AWS.IoT.Types.RoleAliasDescription
+import Network.AWS.IoT.Types.S3Action
+import Network.AWS.IoT.Types.S3Destination
+import Network.AWS.IoT.Types.S3Location
+import Network.AWS.IoT.Types.SNSAction
+import Network.AWS.IoT.Types.SalesforceAction
+import Network.AWS.IoT.Types.ScheduledAuditMetadata
+import Network.AWS.IoT.Types.SecurityProfileIdentifier
+import Network.AWS.IoT.Types.SecurityProfileTarget
+import Network.AWS.IoT.Types.SecurityProfileTargetMapping
+import Network.AWS.IoT.Types.ServerCertificateSummary
+import Network.AWS.IoT.Types.SigV4Authorization
+import Network.AWS.IoT.Types.SigningProfileParameter
+import Network.AWS.IoT.Types.SqsAction
+import Network.AWS.IoT.Types.StartSigningJobParameter
+import Network.AWS.IoT.Types.StatisticalThreshold
+import Network.AWS.IoT.Types.Statistics
+import Network.AWS.IoT.Types.StepFunctionsAction
+import Network.AWS.IoT.Types.Stream
+import Network.AWS.IoT.Types.StreamFile
+import Network.AWS.IoT.Types.StreamInfo
+import Network.AWS.IoT.Types.StreamSummary
+import Network.AWS.IoT.Types.TLSContext
+import Network.AWS.IoT.Types.Tag
+import Network.AWS.IoT.Types.TaskStatistics
+import Network.AWS.IoT.Types.TaskStatisticsForAuditCheck
+import Network.AWS.IoT.Types.ThingAttribute
+import Network.AWS.IoT.Types.ThingConnectivity
+import Network.AWS.IoT.Types.ThingDocument
+import Network.AWS.IoT.Types.ThingGroupDocument
+import Network.AWS.IoT.Types.ThingGroupIndexingConfiguration
+import Network.AWS.IoT.Types.ThingGroupMetadata
+import Network.AWS.IoT.Types.ThingGroupProperties
+import Network.AWS.IoT.Types.ThingIndexingConfiguration
+import Network.AWS.IoT.Types.ThingTypeDefinition
+import Network.AWS.IoT.Types.ThingTypeMetadata
+import Network.AWS.IoT.Types.ThingTypeProperties
+import Network.AWS.IoT.Types.TimeoutConfig
+import Network.AWS.IoT.Types.TopicRule
+import Network.AWS.IoT.Types.TopicRuleDestination
+import Network.AWS.IoT.Types.TopicRuleDestinationConfiguration
+import Network.AWS.IoT.Types.TopicRuleDestinationSummary
+import Network.AWS.IoT.Types.TopicRuleListItem
+import Network.AWS.IoT.Types.TopicRulePayload
+import Network.AWS.IoT.Types.TransferData
+import Network.AWS.IoT.Types.UpdateCACertificateParams
+import Network.AWS.IoT.Types.UpdateDeviceCertificateParams
+import Network.AWS.IoT.Types.ValidationError
+import Network.AWS.IoT.Types.ViolationEvent
 
 -- | API version @2015-05-28@ of the Amazon IoT SDK configuration.
 ioT :: Service
-ioT =
-  Service
-    { _svcAbbrev = "IoT"
-    , _svcSigner = v4
-    , _svcPrefix = "iot"
-    , _svcVersion = "2015-05-28"
-    , _svcEndpoint = defaultEndpoint ioT
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "IoT"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
+ioT
+  = Service{_svcAbbrev = "IoT", _svcSigner = v4,
+            _svcPrefix = "iot", _svcVersion = "2015-05-28",
+            _svcEndpoint = defaultEndpoint ioT,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "IoT", _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
-
--- | Unable to verify the CA certificate used to sign the device certificate you are attempting to register. This is happens when you have registered more than one CA certificate that has the same subject field and public key.
+-- | An exception thrown when the version of an entity specified with the @expectedVersion@ parameter does not match the latest version in the system.
 --
 --
-_CertificateConflictException :: AsError a => Getting (First ServiceError) a ServiceError
-_CertificateConflictException =
-  _MatchServiceError ioT "CertificateConflictException" . hasStatus 409
-
-
--- | The Rule-SQL expression can't be parsed correctly.
---
---
-_SqlParseException :: AsError a => Getting (First ServiceError) a ServiceError
-_SqlParseException = _MatchServiceError ioT "SqlParseException" . hasStatus 400
-
-
--- | The index is not ready.
---
---
-_IndexNotReadyException :: AsError a => Getting (First ServiceError) a ServiceError
-_IndexNotReadyException =
-  _MatchServiceError ioT "IndexNotReadyException" . hasStatus 400
-
-
--- | The request is not valid.
---
---
-_InvalidRequestException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidRequestException =
-  _MatchServiceError ioT "InvalidRequestException" . hasStatus 400
-
-
--- | You can't transfer the certificate because authorization policies are still attached.
---
---
-_TransferConflictException :: AsError a => Getting (First ServiceError) a ServiceError
-_TransferConflictException =
-  _MatchServiceError ioT "TransferConflictException" . hasStatus 409
-
-
--- | The certificate operation is not allowed.
---
---
-_CertificateStateException :: AsError a => Getting (First ServiceError) a ServiceError
-_CertificateStateException =
-  _MatchServiceError ioT "CertificateStateException" . hasStatus 406
-
-
--- | The response is invalid.
---
---
-_InvalidResponseException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidResponseException =
-  _MatchServiceError ioT "InvalidResponseException" . hasStatus 400
-
-
--- | The registration code is invalid.
---
---
-_RegistrationCodeValidationException :: AsError a => Getting (First ServiceError) a ServiceError
-_RegistrationCodeValidationException =
-  _MatchServiceError ioT "RegistrationCodeValidationException" . hasStatus 400
-
-
--- | The policy documentation is not valid.
---
---
-_MalformedPolicyException :: AsError a => Getting (First ServiceError) a ServiceError
-_MalformedPolicyException =
-  _MatchServiceError ioT "MalformedPolicyException" . hasStatus 400
-
-
--- | You can't delete the resource because it is attached to one or more resources.
---
---
-_DeleteConflictException :: AsError a => Getting (First ServiceError) a ServiceError
-_DeleteConflictException =
-  _MatchServiceError ioT "DeleteConflictException" . hasStatus 409
-
-
--- | The resource already exists.
---
---
-_ResourceAlreadyExistsException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceAlreadyExistsException =
-  _MatchServiceError ioT "ResourceAlreadyExistsException" . hasStatus 409
-
-
--- | The resource is not configured.
---
---
-_NotConfiguredException :: AsError a => Getting (First ServiceError) a ServiceError
-_NotConfiguredException =
-  _MatchServiceError ioT "NotConfiguredException" . hasStatus 404
-
-
--- | The certificate is invalid.
---
---
-_CertificateValidationException :: AsError a => Getting (First ServiceError) a ServiceError
-_CertificateValidationException =
-  _MatchServiceError ioT "CertificateValidationException" . hasStatus 400
-
-
--- | The resource registration failed.
---
---
-_ResourceRegistrationFailureException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceRegistrationFailureException =
-  _MatchServiceError ioT "ResourceRegistrationFailureException" . hasStatus 400
-
-
--- | The query is invalid.
---
---
-_InvalidQueryException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidQueryException =
-  _MatchServiceError ioT "InvalidQueryException" . hasStatus 400
-
-
--- | You can't revert the certificate transfer because the transfer is already complete.
---
---
-_TransferAlreadyCompletedException :: AsError a => Getting (First ServiceError) a ServiceError
-_TransferAlreadyCompletedException =
-  _MatchServiceError ioT "TransferAlreadyCompletedException" . hasStatus 410
-
-
--- | The rate exceeds the limit.
---
---
-_ThrottlingException :: AsError a => Getting (First ServiceError) a ServiceError
-_ThrottlingException =
-  _MatchServiceError ioT "ThrottlingException" . hasStatus 429
-
-
--- | A conflicting resource update exception. This exception is thrown when two pending updates cause a conflict.
---
---
-_ConflictingResourceUpdateException :: AsError a => Getting (First ServiceError) a ServiceError
-_ConflictingResourceUpdateException =
-  _MatchServiceError ioT "ConflictingResourceUpdateException" . hasStatus 409
-
-
--- | An unexpected error has occurred.
---
---
-_InternalFailureException :: AsError a => Getting (First ServiceError) a ServiceError
-_InternalFailureException =
-  _MatchServiceError ioT "InternalFailureException" . hasStatus 500
-
+_VersionConflictException :: AsError a => Getting (First ServiceError) a ServiceError
+_VersionConflictException
+  = _MatchServiceError ioT "VersionConflictException" .
+      hasStatus 409
 
 -- | The number of policy versions exceeds the limit.
 --
 --
 _VersionsLimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
-_VersionsLimitExceededException =
-  _MatchServiceError ioT "VersionsLimitExceededException" . hasStatus 409
+_VersionsLimitExceededException
+  = _MatchServiceError ioT
+      "VersionsLimitExceededException"
+      . hasStatus 409
 
-
--- | The service is temporarily unavailable.
+-- | The registration code is invalid.
 --
 --
-_ServiceUnavailableException :: AsError a => Getting (First ServiceError) a ServiceError
-_ServiceUnavailableException =
-  _MatchServiceError ioT "ServiceUnavailableException" . hasStatus 503
+_RegistrationCodeValidationException :: AsError a => Getting (First ServiceError) a ServiceError
+_RegistrationCodeValidationException
+  = _MatchServiceError ioT
+      "RegistrationCodeValidationException"
+      . hasStatus 400
 
+-- | You can't delete the resource because it is attached to one or more resources.
+--
+--
+_DeleteConflictException :: AsError a => Getting (First ServiceError) a ServiceError
+_DeleteConflictException
+  = _MatchServiceError ioT "DeleteConflictException" .
+      hasStatus 409
 
 -- | An unexpected error has occurred.
 --
 --
-_InternalException :: AsError a => Getting (First ServiceError) a ServiceError
-_InternalException = _MatchServiceError ioT "InternalException" . hasStatus 500
+_InternalFailureException :: AsError a => Getting (First ServiceError) a ServiceError
+_InternalFailureException
+  = _MatchServiceError ioT "InternalFailureException" .
+      hasStatus 500
 
-
--- | An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter.
+-- | The certificate operation is not allowed.
 --
 --
-_VersionConflictException :: AsError a => Getting (First ServiceError) a ServiceError
-_VersionConflictException =
-  _MatchServiceError ioT "VersionConflictException" . hasStatus 409
+_CertificateStateException :: AsError a => Getting (First ServiceError) a ServiceError
+_CertificateStateException
+  = _MatchServiceError ioT "CertificateStateException"
+      . hasStatus 406
 
-
--- | You are not authorized to perform this operation.
+-- | A conflicting resource update exception. This exception is thrown when two pending updates cause a conflict.
 --
 --
-_UnauthorizedException :: AsError a => Getting (First ServiceError) a ServiceError
-_UnauthorizedException =
-  _MatchServiceError ioT "UnauthorizedException" . hasStatus 401
+_ConflictingResourceUpdateException :: AsError a => Getting (First ServiceError) a ServiceError
+_ConflictingResourceUpdateException
+  = _MatchServiceError ioT
+      "ConflictingResourceUpdateException"
+      . hasStatus 409
 
+-- | You can't transfer the certificate because authorization policies are still attached.
+--
+--
+_TransferConflictException :: AsError a => Getting (First ServiceError) a ServiceError
+_TransferConflictException
+  = _MatchServiceError ioT "TransferConflictException"
+      . hasStatus 409
+
+-- | The request is not valid.
+--
+--
+_InvalidRequestException :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidRequestException
+  = _MatchServiceError ioT "InvalidRequestException" .
+      hasStatus 400
+
+-- | The resource registration failed.
+--
+--
+_ResourceRegistrationFailureException :: AsError a => Getting (First ServiceError) a ServiceError
+_ResourceRegistrationFailureException
+  = _MatchServiceError ioT
+      "ResourceRegistrationFailureException"
+      . hasStatus 400
+
+-- | The Rule-SQL expression can't be parsed correctly.
+--
+--
+_SqlParseException :: AsError a => Getting (First ServiceError) a ServiceError
+_SqlParseException
+  = _MatchServiceError ioT "SqlParseException" .
+      hasStatus 400
+
+-- | The certificate is invalid.
+--
+--
+_CertificateValidationException :: AsError a => Getting (First ServiceError) a ServiceError
+_CertificateValidationException
+  = _MatchServiceError ioT
+      "CertificateValidationException"
+      . hasStatus 400
+
+-- | An attempt was made to change to an invalid state, for example by deleting a job or a job execution which is "IN_PROGRESS" without setting the @force@ parameter.
+--
+--
+_InvalidStateTransitionException :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidStateTransitionException
+  = _MatchServiceError ioT
+      "InvalidStateTransitionException"
+      . hasStatus 409
+
+-- | The resource is not configured.
+--
+--
+_NotConfiguredException :: AsError a => Getting (First ServiceError) a ServiceError
+_NotConfiguredException
+  = _MatchServiceError ioT "NotConfiguredException" .
+      hasStatus 404
 
 -- | The specified resource does not exist.
 --
 --
 _ResourceNotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceNotFoundException =
-  _MatchServiceError ioT "ResourceNotFoundException" . hasStatus 404
+_ResourceNotFoundException
+  = _MatchServiceError ioT "ResourceNotFoundException"
+      . hasStatus 404
 
+-- | The resource already exists.
+--
+--
+_ResourceAlreadyExistsException :: AsError a => Getting (First ServiceError) a ServiceError
+_ResourceAlreadyExistsException
+  = _MatchServiceError ioT
+      "ResourceAlreadyExistsException"
+      . hasStatus 409
 
--- | The number of attached entities exceeds the limit.
+-- | You are not authorized to perform this operation.
+--
+--
+_UnauthorizedException :: AsError a => Getting (First ServiceError) a ServiceError
+_UnauthorizedException
+  = _MatchServiceError ioT "UnauthorizedException" .
+      hasStatus 401
+
+-- | The service is temporarily unavailable.
+--
+--
+_ServiceUnavailableException :: AsError a => Getting (First ServiceError) a ServiceError
+_ServiceUnavailableException
+  = _MatchServiceError ioT
+      "ServiceUnavailableException"
+      . hasStatus 503
+
+-- | The policy documentation is not valid.
+--
+--
+_MalformedPolicyException :: AsError a => Getting (First ServiceError) a ServiceError
+_MalformedPolicyException
+  = _MatchServiceError ioT "MalformedPolicyException" .
+      hasStatus 400
+
+-- | An unexpected error has occurred.
+--
+--
+_InternalException :: AsError a => Getting (First ServiceError) a ServiceError
+_InternalException
+  = _MatchServiceError ioT "InternalException" .
+      hasStatus 500
+
+-- | The response is invalid.
+--
+--
+_InvalidResponseException :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidResponseException
+  = _MatchServiceError ioT "InvalidResponseException" .
+      hasStatus 400
+
+-- | The aggregation is invalid.
+--
+--
+_InvalidAggregationException :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidAggregationException
+  = _MatchServiceError ioT
+      "InvalidAggregationException"
+      . hasStatus 400
+
+-- | The rate exceeds the limit.
+--
+--
+_ThrottlingException :: AsError a => Getting (First ServiceError) a ServiceError
+_ThrottlingException
+  = _MatchServiceError ioT "ThrottlingException" .
+      hasStatus 400
+
+-- | You can't revert the certificate transfer because the transfer is already complete.
+--
+--
+_TransferAlreadyCompletedException :: AsError a => Getting (First ServiceError) a ServiceError
+_TransferAlreadyCompletedException
+  = _MatchServiceError ioT
+      "TransferAlreadyCompletedException"
+      . hasStatus 410
+
+-- | The index is not ready.
+--
+--
+_IndexNotReadyException :: AsError a => Getting (First ServiceError) a ServiceError
+_IndexNotReadyException
+  = _MatchServiceError ioT "IndexNotReadyException" .
+      hasStatus 400
+
+-- | Unable to verify the CA certificate used to sign the device certificate you are attempting to register. This is happens when you have registered more than one CA certificate that has the same subject field and public key.
+--
+--
+_CertificateConflictException :: AsError a => Getting (First ServiceError) a ServiceError
+_CertificateConflictException
+  = _MatchServiceError ioT
+      "CertificateConflictException"
+      . hasStatus 409
+
+-- | The query is invalid.
+--
+--
+_InvalidQueryException :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidQueryException
+  = _MatchServiceError ioT "InvalidQueryException" .
+      hasStatus 400
+
+-- | This exception occurs if you attempt to start a task with the same task-id as an existing task but with a different clientRequestToken.
+--
+--
+_TaskAlreadyExistsException :: AsError a => Getting (First ServiceError) a ServiceError
+_TaskAlreadyExistsException
+  = _MatchServiceError ioT "TaskAlreadyExistsException"
+      . hasStatus 400
+
+-- | A limit has been exceeded.
 --
 --
 _LimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
-_LimitExceededException =
-  _MatchServiceError ioT "LimitExceededException" . hasStatus 410
-
+_LimitExceededException
+  = _MatchServiceError ioT "LimitExceededException" .
+      hasStatus 410

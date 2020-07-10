@@ -31,6 +31,7 @@ module Network.AWS.CloudHSMv2.DescribeBackups
       describeBackups
     , DescribeBackups
     -- * Request Lenses
+    , dbSortAscending
     , dbFilters
     , dbNextToken
     , dbMaxResults
@@ -39,9 +40,9 @@ module Network.AWS.CloudHSMv2.DescribeBackups
     , describeBackupsResponse
     , DescribeBackupsResponse
     -- * Response Lenses
-    , dbrsBackups
-    , dbrsNextToken
-    , dbrsResponseStatus
+    , dbsrsBackups
+    , dbsrsNextToken
+    , dbsrsResponseStatus
     ) where
 
 import Network.AWS.CloudHSMv2.Types
@@ -53,30 +54,37 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeBackups' smart constructor.
-data DescribeBackups = DescribeBackups'
-  { _dbFilters    :: !(Maybe (Map Text [Text]))
-  , _dbNextToken  :: !(Maybe Text)
-  , _dbMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBackups = DescribeBackups'{_dbSortAscending
+                                        :: !(Maybe Bool),
+                                        _dbFilters ::
+                                        !(Maybe (Map Text [Text])),
+                                        _dbNextToken :: !(Maybe Text),
+                                        _dbMaxResults :: !(Maybe Nat)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeBackups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbFilters' - One or more filters to limit the items returned in the response. Use the @backupIds@ filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the @clusterIds@ filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the @states@ filter to return only backups that match the specified state.
+-- * 'dbSortAscending' - Designates whether or not to sort the return backups by ascending chronological order of generation.
+--
+-- * 'dbFilters' - One or more filters to limit the items returned in the response. Use the @backupIds@ filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the @sourceBackupIds@ filter to return only the backups created from a source backup. The @sourceBackupID@ of a source backup is returned by the 'CopyBackupToRegion' operation. Use the @clusterIds@ filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the @states@ filter to return only backups that match the specified state.
 --
 -- * 'dbNextToken' - The @NextToken@ value that you received in the previous response. Use this value to get more backups.
 --
 -- * 'dbMaxResults' - The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a @NextToken@ value.
 describeBackups
     :: DescribeBackups
-describeBackups =
-  DescribeBackups'
-    {_dbFilters = Nothing, _dbNextToken = Nothing, _dbMaxResults = Nothing}
+describeBackups
+  = DescribeBackups'{_dbSortAscending = Nothing,
+                     _dbFilters = Nothing, _dbNextToken = Nothing,
+                     _dbMaxResults = Nothing}
 
+-- | Designates whether or not to sort the return backups by ascending chronological order of generation.
+dbSortAscending :: Lens' DescribeBackups (Maybe Bool)
+dbSortAscending = lens _dbSortAscending (\ s a -> s{_dbSortAscending = a})
 
--- | One or more filters to limit the items returned in the response. Use the @backupIds@ filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the @clusterIds@ filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the @states@ filter to return only backups that match the specified state.
+-- | One or more filters to limit the items returned in the response. Use the @backupIds@ filter to return only the specified backups. Specify backups by their backup identifier (ID). Use the @sourceBackupIds@ filter to return only the backups created from a source backup. The @sourceBackupID@ of a source backup is returned by the 'CopyBackupToRegion' operation. Use the @clusterIds@ filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID). Use the @states@ filter to return only backups that match the specified state.
 dbFilters :: Lens' DescribeBackups (HashMap Text [Text])
 dbFilters = lens _dbFilters (\ s a -> s{_dbFilters = a}) . _Default . _Map
 
@@ -90,10 +98,10 @@ dbMaxResults = lens _dbMaxResults (\ s a -> s{_dbMaxResults = a}) . mapping _Nat
 
 instance AWSPager DescribeBackups where
         page rq rs
-          | stop (rs ^. dbrsNextToken) = Nothing
-          | stop (rs ^. dbrsBackups) = Nothing
+          | stop (rs ^. dbsrsNextToken) = Nothing
+          | stop (rs ^. dbsrsBackups) = Nothing
           | otherwise =
-            Just $ rq & dbNextToken .~ rs ^. dbrsNextToken
+            Just $ rq & dbNextToken .~ rs ^. dbsrsNextToken
 
 instance AWSRequest DescribeBackups where
         type Rs DescribeBackups = DescribeBackupsResponse
@@ -122,7 +130,8 @@ instance ToJSON DescribeBackups where
         toJSON DescribeBackups'{..}
           = object
               (catMaybes
-                 [("Filters" .=) <$> _dbFilters,
+                 [("SortAscending" .=) <$> _dbSortAscending,
+                  ("Filters" .=) <$> _dbFilters,
                   ("NextToken" .=) <$> _dbNextToken,
                   ("MaxResults" .=) <$> _dbMaxResults])
 
@@ -133,43 +142,42 @@ instance ToQuery DescribeBackups where
         toQuery = const mempty
 
 -- | /See:/ 'describeBackupsResponse' smart constructor.
-data DescribeBackupsResponse = DescribeBackupsResponse'
-  { _dbrsBackups        :: !(Maybe [Backup])
-  , _dbrsNextToken      :: !(Maybe Text)
-  , _dbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBackupsResponse = DescribeBackupsResponse'{_dbsrsBackups
+                                                        :: !(Maybe [Backup]),
+                                                        _dbsrsNextToken ::
+                                                        !(Maybe Text),
+                                                        _dbsrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeBackupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbrsBackups' - A list of backups.
+-- * 'dbsrsBackups' - A list of backups.
 --
--- * 'dbrsNextToken' - An opaque string that indicates that the response contains only a subset of backups. Use this value in a subsequent @DescribeBackups@ request to get more backups.
+-- * 'dbsrsNextToken' - An opaque string that indicates that the response contains only a subset of backups. Use this value in a subsequent @DescribeBackups@ request to get more backups.
 --
--- * 'dbrsResponseStatus' - -- | The response status code.
+-- * 'dbsrsResponseStatus' - -- | The response status code.
 describeBackupsResponse
-    :: Int -- ^ 'dbrsResponseStatus'
+    :: Int -- ^ 'dbsrsResponseStatus'
     -> DescribeBackupsResponse
-describeBackupsResponse pResponseStatus_ =
-  DescribeBackupsResponse'
-    { _dbrsBackups = Nothing
-    , _dbrsNextToken = Nothing
-    , _dbrsResponseStatus = pResponseStatus_
-    }
-
+describeBackupsResponse pResponseStatus_
+  = DescribeBackupsResponse'{_dbsrsBackups = Nothing,
+                             _dbsrsNextToken = Nothing,
+                             _dbsrsResponseStatus = pResponseStatus_}
 
 -- | A list of backups.
-dbrsBackups :: Lens' DescribeBackupsResponse [Backup]
-dbrsBackups = lens _dbrsBackups (\ s a -> s{_dbrsBackups = a}) . _Default . _Coerce
+dbsrsBackups :: Lens' DescribeBackupsResponse [Backup]
+dbsrsBackups = lens _dbsrsBackups (\ s a -> s{_dbsrsBackups = a}) . _Default . _Coerce
 
 -- | An opaque string that indicates that the response contains only a subset of backups. Use this value in a subsequent @DescribeBackups@ request to get more backups.
-dbrsNextToken :: Lens' DescribeBackupsResponse (Maybe Text)
-dbrsNextToken = lens _dbrsNextToken (\ s a -> s{_dbrsNextToken = a})
+dbsrsNextToken :: Lens' DescribeBackupsResponse (Maybe Text)
+dbsrsNextToken = lens _dbsrsNextToken (\ s a -> s{_dbsrsNextToken = a})
 
 -- | -- | The response status code.
-dbrsResponseStatus :: Lens' DescribeBackupsResponse Int
-dbrsResponseStatus = lens _dbrsResponseStatus (\ s a -> s{_dbrsResponseStatus = a})
+dbsrsResponseStatus :: Lens' DescribeBackupsResponse Int
+dbsrsResponseStatus = lens _dbsrsResponseStatus (\ s a -> s{_dbsrsResponseStatus = a})
 
 instance NFData DescribeBackupsResponse where

@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopThingRegistrationTask' smart constructor.
-newtype StopThingRegistrationTask = StopThingRegistrationTask'
-  { _strtTaskId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopThingRegistrationTask = StopThingRegistrationTask'{_strtTaskId
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'StopThingRegistrationTask' with the minimum fields required to make a request.
 --
@@ -57,9 +57,8 @@ newtype StopThingRegistrationTask = StopThingRegistrationTask'
 stopThingRegistrationTask
     :: Text -- ^ 'strtTaskId'
     -> StopThingRegistrationTask
-stopThingRegistrationTask pTaskId_ =
-  StopThingRegistrationTask' {_strtTaskId = pTaskId_}
-
+stopThingRegistrationTask pTaskId_
+  = StopThingRegistrationTask'{_strtTaskId = pTaskId_}
 
 -- | The bulk thing provisioning task ID.
 strtTaskId :: Lens' StopThingRegistrationTask Text
@@ -95,10 +94,11 @@ instance ToQuery StopThingRegistrationTask where
         toQuery = const mempty
 
 -- | /See:/ 'stopThingRegistrationTaskResponse' smart constructor.
-newtype StopThingRegistrationTaskResponse = StopThingRegistrationTaskResponse'
-  { _srsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopThingRegistrationTaskResponse = StopThingRegistrationTaskResponse'{_srsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'StopThingRegistrationTaskResponse' with the minimum fields required to make a request.
 --
@@ -108,9 +108,9 @@ newtype StopThingRegistrationTaskResponse = StopThingRegistrationTaskResponse'
 stopThingRegistrationTaskResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopThingRegistrationTaskResponse
-stopThingRegistrationTaskResponse pResponseStatus_ =
-  StopThingRegistrationTaskResponse' {_srsResponseStatus = pResponseStatus_}
-
+stopThingRegistrationTaskResponse pResponseStatus_
+  = StopThingRegistrationTaskResponse'{_srsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 srsResponseStatus :: Lens' StopThingRegistrationTaskResponse Int

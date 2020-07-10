@@ -14,11 +14,11 @@
 module Test.AWS.Gen.ElasticSearch where
 
 import Data.Proxy
-import Network.AWS.ElasticSearch
-import Test.AWS.ElasticSearch.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.ElasticSearch
+import Test.AWS.ElasticSearch.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -34,8 +34,20 @@ import Test.Tasty
 --         , requestRemoveTags $
 --             removeTags
 --
+--         , requestGetCompatibleElasticsearchVersions $
+--             getCompatibleElasticsearchVersions
+--
 --         , requestDescribeElasticsearchDomains $
 --             describeElasticsearchDomains
+--
+--         , requestListDomainsForPackage $
+--             listDomainsForPackage
+--
+--         , requestListPackagesForDomain $
+--             listPackagesForDomain
+--
+--         , requestStartElasticsearchServiceSoftwareUpdate $
+--             startElasticsearchServiceSoftwareUpdate
 --
 --         , requestListElasticsearchInstanceTypes $
 --             listElasticsearchInstanceTypes
@@ -49,14 +61,29 @@ import Test.Tasty
 --         , requestListDomainNames $
 --             listDomainNames
 --
+--         , requestAssociatePackage $
+--             associatePackage
+--
 --         , requestDescribeElasticsearchInstanceTypeLimits $
 --             describeElasticsearchInstanceTypeLimits
+--
+--         , requestGetUpgradeHistory $
+--             getUpgradeHistory
+--
+--         , requestDescribePackages $
+--             describePackages
 --
 --         , requestDescribeElasticsearchDomainConfig $
 --             describeElasticsearchDomainConfig
 --
+--         , requestGetUpgradeStatus $
+--             getUpgradeStatus
+--
 --         , requestDeleteElasticsearchDomain $
 --             deleteElasticsearchDomain
+--
+--         , requestDissociatePackage $
+--             dissociatePackage
 --
 --         , requestPurchaseReservedElasticsearchInstanceOffering $
 --             purchaseReservedElasticsearchInstanceOffering
@@ -76,8 +103,20 @@ import Test.Tasty
 --         , requestDescribeReservedElasticsearchInstanceOfferings $
 --             describeReservedElasticsearchInstanceOfferings
 --
+--         , requestUpgradeElasticsearchDomain $
+--             upgradeElasticsearchDomain
+--
 --         , requestListTags $
 --             listTags
+--
+--         , requestDeletePackage $
+--             deletePackage
+--
+--         , requestCancelElasticsearchServiceSoftwareUpdate $
+--             cancelElasticsearchServiceSoftwareUpdate
+--
+--         , requestCreatePackage $
+--             createPackage
 --
 --           ]
 
@@ -88,8 +127,20 @@ import Test.Tasty
 --         , responseRemoveTags $
 --             removeTagsResponse
 --
+--         , responseGetCompatibleElasticsearchVersions $
+--             getCompatibleElasticsearchVersionsResponse
+--
 --         , responseDescribeElasticsearchDomains $
 --             describeElasticsearchDomainsResponse
+--
+--         , responseListDomainsForPackage $
+--             listDomainsForPackageResponse
+--
+--         , responseListPackagesForDomain $
+--             listPackagesForDomainResponse
+--
+--         , responseStartElasticsearchServiceSoftwareUpdate $
+--             startElasticsearchServiceSoftwareUpdateResponse
 --
 --         , responseListElasticsearchInstanceTypes $
 --             listElasticsearchInstanceTypesResponse
@@ -103,14 +154,29 @@ import Test.Tasty
 --         , responseListDomainNames $
 --             listDomainNamesResponse
 --
+--         , responseAssociatePackage $
+--             associatePackageResponse
+--
 --         , responseDescribeElasticsearchInstanceTypeLimits $
 --             describeElasticsearchInstanceTypeLimitsResponse
+--
+--         , responseGetUpgradeHistory $
+--             getUpgradeHistoryResponse
+--
+--         , responseDescribePackages $
+--             describePackagesResponse
 --
 --         , responseDescribeElasticsearchDomainConfig $
 --             describeElasticsearchDomainConfigResponse
 --
+--         , responseGetUpgradeStatus $
+--             getUpgradeStatusResponse
+--
 --         , responseDeleteElasticsearchDomain $
 --             deleteElasticsearchDomainResponse
+--
+--         , responseDissociatePackage $
+--             dissociatePackageResponse
 --
 --         , responsePurchaseReservedElasticsearchInstanceOffering $
 --             purchaseReservedElasticsearchInstanceOfferingResponse
@@ -130,8 +196,20 @@ import Test.Tasty
 --         , responseDescribeReservedElasticsearchInstanceOfferings $
 --             describeReservedElasticsearchInstanceOfferingsResponse
 --
+--         , responseUpgradeElasticsearchDomain $
+--             upgradeElasticsearchDomainResponse
+--
 --         , responseListTags $
 --             listTagsResponse
+--
+--         , responseDeletePackage $
+--             deletePackageResponse
+--
+--         , responseCancelElasticsearchServiceSoftwareUpdate $
+--             cancelElasticsearchServiceSoftwareUpdateResponse
+--
+--         , responseCreatePackage $
+--             createPackageResponse
 --
 --           ]
 --     ]
@@ -148,10 +226,30 @@ requestRemoveTags = req
     "RemoveTags"
     "fixture/RemoveTags.yaml"
 
+requestGetCompatibleElasticsearchVersions :: GetCompatibleElasticsearchVersions -> TestTree
+requestGetCompatibleElasticsearchVersions = req
+    "GetCompatibleElasticsearchVersions"
+    "fixture/GetCompatibleElasticsearchVersions.yaml"
+
 requestDescribeElasticsearchDomains :: DescribeElasticsearchDomains -> TestTree
 requestDescribeElasticsearchDomains = req
     "DescribeElasticsearchDomains"
     "fixture/DescribeElasticsearchDomains.yaml"
+
+requestListDomainsForPackage :: ListDomainsForPackage -> TestTree
+requestListDomainsForPackage = req
+    "ListDomainsForPackage"
+    "fixture/ListDomainsForPackage.yaml"
+
+requestListPackagesForDomain :: ListPackagesForDomain -> TestTree
+requestListPackagesForDomain = req
+    "ListPackagesForDomain"
+    "fixture/ListPackagesForDomain.yaml"
+
+requestStartElasticsearchServiceSoftwareUpdate :: StartElasticsearchServiceSoftwareUpdate -> TestTree
+requestStartElasticsearchServiceSoftwareUpdate = req
+    "StartElasticsearchServiceSoftwareUpdate"
+    "fixture/StartElasticsearchServiceSoftwareUpdate.yaml"
 
 requestListElasticsearchInstanceTypes :: ListElasticsearchInstanceTypes -> TestTree
 requestListElasticsearchInstanceTypes = req
@@ -173,20 +271,45 @@ requestListDomainNames = req
     "ListDomainNames"
     "fixture/ListDomainNames.yaml"
 
+requestAssociatePackage :: AssociatePackage -> TestTree
+requestAssociatePackage = req
+    "AssociatePackage"
+    "fixture/AssociatePackage.yaml"
+
 requestDescribeElasticsearchInstanceTypeLimits :: DescribeElasticsearchInstanceTypeLimits -> TestTree
 requestDescribeElasticsearchInstanceTypeLimits = req
     "DescribeElasticsearchInstanceTypeLimits"
     "fixture/DescribeElasticsearchInstanceTypeLimits.yaml"
+
+requestGetUpgradeHistory :: GetUpgradeHistory -> TestTree
+requestGetUpgradeHistory = req
+    "GetUpgradeHistory"
+    "fixture/GetUpgradeHistory.yaml"
+
+requestDescribePackages :: DescribePackages -> TestTree
+requestDescribePackages = req
+    "DescribePackages"
+    "fixture/DescribePackages.yaml"
 
 requestDescribeElasticsearchDomainConfig :: DescribeElasticsearchDomainConfig -> TestTree
 requestDescribeElasticsearchDomainConfig = req
     "DescribeElasticsearchDomainConfig"
     "fixture/DescribeElasticsearchDomainConfig.yaml"
 
+requestGetUpgradeStatus :: GetUpgradeStatus -> TestTree
+requestGetUpgradeStatus = req
+    "GetUpgradeStatus"
+    "fixture/GetUpgradeStatus.yaml"
+
 requestDeleteElasticsearchDomain :: DeleteElasticsearchDomain -> TestTree
 requestDeleteElasticsearchDomain = req
     "DeleteElasticsearchDomain"
     "fixture/DeleteElasticsearchDomain.yaml"
+
+requestDissociatePackage :: DissociatePackage -> TestTree
+requestDissociatePackage = req
+    "DissociatePackage"
+    "fixture/DissociatePackage.yaml"
 
 requestPurchaseReservedElasticsearchInstanceOffering :: PurchaseReservedElasticsearchInstanceOffering -> TestTree
 requestPurchaseReservedElasticsearchInstanceOffering = req
@@ -218,10 +341,30 @@ requestDescribeReservedElasticsearchInstanceOfferings = req
     "DescribeReservedElasticsearchInstanceOfferings"
     "fixture/DescribeReservedElasticsearchInstanceOfferings.yaml"
 
+requestUpgradeElasticsearchDomain :: UpgradeElasticsearchDomain -> TestTree
+requestUpgradeElasticsearchDomain = req
+    "UpgradeElasticsearchDomain"
+    "fixture/UpgradeElasticsearchDomain.yaml"
+
 requestListTags :: ListTags -> TestTree
 requestListTags = req
     "ListTags"
     "fixture/ListTags.yaml"
+
+requestDeletePackage :: DeletePackage -> TestTree
+requestDeletePackage = req
+    "DeletePackage"
+    "fixture/DeletePackage.yaml"
+
+requestCancelElasticsearchServiceSoftwareUpdate :: CancelElasticsearchServiceSoftwareUpdate -> TestTree
+requestCancelElasticsearchServiceSoftwareUpdate = req
+    "CancelElasticsearchServiceSoftwareUpdate"
+    "fixture/CancelElasticsearchServiceSoftwareUpdate.yaml"
+
+requestCreatePackage :: CreatePackage -> TestTree
+requestCreatePackage = req
+    "CreatePackage"
+    "fixture/CreatePackage.yaml"
 
 -- Responses
 
@@ -239,12 +382,40 @@ responseRemoveTags = res
     elasticSearch
     (Proxy :: Proxy RemoveTags)
 
+responseGetCompatibleElasticsearchVersions :: GetCompatibleElasticsearchVersionsResponse -> TestTree
+responseGetCompatibleElasticsearchVersions = res
+    "GetCompatibleElasticsearchVersionsResponse"
+    "fixture/GetCompatibleElasticsearchVersionsResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy GetCompatibleElasticsearchVersions)
+
 responseDescribeElasticsearchDomains :: DescribeElasticsearchDomainsResponse -> TestTree
 responseDescribeElasticsearchDomains = res
     "DescribeElasticsearchDomainsResponse"
     "fixture/DescribeElasticsearchDomainsResponse.proto"
     elasticSearch
     (Proxy :: Proxy DescribeElasticsearchDomains)
+
+responseListDomainsForPackage :: ListDomainsForPackageResponse -> TestTree
+responseListDomainsForPackage = res
+    "ListDomainsForPackageResponse"
+    "fixture/ListDomainsForPackageResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy ListDomainsForPackage)
+
+responseListPackagesForDomain :: ListPackagesForDomainResponse -> TestTree
+responseListPackagesForDomain = res
+    "ListPackagesForDomainResponse"
+    "fixture/ListPackagesForDomainResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy ListPackagesForDomain)
+
+responseStartElasticsearchServiceSoftwareUpdate :: StartElasticsearchServiceSoftwareUpdateResponse -> TestTree
+responseStartElasticsearchServiceSoftwareUpdate = res
+    "StartElasticsearchServiceSoftwareUpdateResponse"
+    "fixture/StartElasticsearchServiceSoftwareUpdateResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy StartElasticsearchServiceSoftwareUpdate)
 
 responseListElasticsearchInstanceTypes :: ListElasticsearchInstanceTypesResponse -> TestTree
 responseListElasticsearchInstanceTypes = res
@@ -274,12 +445,33 @@ responseListDomainNames = res
     elasticSearch
     (Proxy :: Proxy ListDomainNames)
 
+responseAssociatePackage :: AssociatePackageResponse -> TestTree
+responseAssociatePackage = res
+    "AssociatePackageResponse"
+    "fixture/AssociatePackageResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy AssociatePackage)
+
 responseDescribeElasticsearchInstanceTypeLimits :: DescribeElasticsearchInstanceTypeLimitsResponse -> TestTree
 responseDescribeElasticsearchInstanceTypeLimits = res
     "DescribeElasticsearchInstanceTypeLimitsResponse"
     "fixture/DescribeElasticsearchInstanceTypeLimitsResponse.proto"
     elasticSearch
     (Proxy :: Proxy DescribeElasticsearchInstanceTypeLimits)
+
+responseGetUpgradeHistory :: GetUpgradeHistoryResponse -> TestTree
+responseGetUpgradeHistory = res
+    "GetUpgradeHistoryResponse"
+    "fixture/GetUpgradeHistoryResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy GetUpgradeHistory)
+
+responseDescribePackages :: DescribePackagesResponse -> TestTree
+responseDescribePackages = res
+    "DescribePackagesResponse"
+    "fixture/DescribePackagesResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy DescribePackages)
 
 responseDescribeElasticsearchDomainConfig :: DescribeElasticsearchDomainConfigResponse -> TestTree
 responseDescribeElasticsearchDomainConfig = res
@@ -288,12 +480,26 @@ responseDescribeElasticsearchDomainConfig = res
     elasticSearch
     (Proxy :: Proxy DescribeElasticsearchDomainConfig)
 
+responseGetUpgradeStatus :: GetUpgradeStatusResponse -> TestTree
+responseGetUpgradeStatus = res
+    "GetUpgradeStatusResponse"
+    "fixture/GetUpgradeStatusResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy GetUpgradeStatus)
+
 responseDeleteElasticsearchDomain :: DeleteElasticsearchDomainResponse -> TestTree
 responseDeleteElasticsearchDomain = res
     "DeleteElasticsearchDomainResponse"
     "fixture/DeleteElasticsearchDomainResponse.proto"
     elasticSearch
     (Proxy :: Proxy DeleteElasticsearchDomain)
+
+responseDissociatePackage :: DissociatePackageResponse -> TestTree
+responseDissociatePackage = res
+    "DissociatePackageResponse"
+    "fixture/DissociatePackageResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy DissociatePackage)
 
 responsePurchaseReservedElasticsearchInstanceOffering :: PurchaseReservedElasticsearchInstanceOfferingResponse -> TestTree
 responsePurchaseReservedElasticsearchInstanceOffering = res
@@ -337,9 +543,37 @@ responseDescribeReservedElasticsearchInstanceOfferings = res
     elasticSearch
     (Proxy :: Proxy DescribeReservedElasticsearchInstanceOfferings)
 
+responseUpgradeElasticsearchDomain :: UpgradeElasticsearchDomainResponse -> TestTree
+responseUpgradeElasticsearchDomain = res
+    "UpgradeElasticsearchDomainResponse"
+    "fixture/UpgradeElasticsearchDomainResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy UpgradeElasticsearchDomain)
+
 responseListTags :: ListTagsResponse -> TestTree
 responseListTags = res
     "ListTagsResponse"
     "fixture/ListTagsResponse.proto"
     elasticSearch
     (Proxy :: Proxy ListTags)
+
+responseDeletePackage :: DeletePackageResponse -> TestTree
+responseDeletePackage = res
+    "DeletePackageResponse"
+    "fixture/DeletePackageResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy DeletePackage)
+
+responseCancelElasticsearchServiceSoftwareUpdate :: CancelElasticsearchServiceSoftwareUpdateResponse -> TestTree
+responseCancelElasticsearchServiceSoftwareUpdate = res
+    "CancelElasticsearchServiceSoftwareUpdateResponse"
+    "fixture/CancelElasticsearchServiceSoftwareUpdateResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy CancelElasticsearchServiceSoftwareUpdate)
+
+responseCreatePackage :: CreatePackageResponse -> TestTree
+responseCreatePackage = res
+    "CreatePackageResponse"
+    "fixture/CreatePackageResponse.proto"
+    elasticSearch
+    (Proxy :: Proxy CreatePackage)

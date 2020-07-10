@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'addTagsToResource' smart constructor.
-data AddTagsToResource = AddTagsToResource'
-  { _attrResourceId :: !Text
-  , _attrTags       :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToResource = AddTagsToResource'{_attrResourceId
+                                            :: !Text,
+                                            _attrTags :: ![Tag]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsToResource' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data AddTagsToResource = AddTagsToResource'
 addTagsToResource
     :: Text -- ^ 'attrResourceId'
     -> AddTagsToResource
-addTagsToResource pResourceId_ =
-  AddTagsToResource' {_attrResourceId = pResourceId_, _attrTags = mempty}
-
+addTagsToResource pResourceId_
+  = AddTagsToResource'{_attrResourceId = pResourceId_,
+                       _attrTags = mempty}
 
 -- | Identifier (ID) for the directory to which to add the tag.
 attrResourceId :: Lens' AddTagsToResource Text
@@ -109,10 +108,10 @@ instance ToQuery AddTagsToResource where
         toQuery = const mempty
 
 -- | /See:/ 'addTagsToResourceResponse' smart constructor.
-newtype AddTagsToResourceResponse = AddTagsToResourceResponse'
-  { _attrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddTagsToResourceResponse = AddTagsToResourceResponse'{_attrrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'AddTagsToResourceResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +121,9 @@ newtype AddTagsToResourceResponse = AddTagsToResourceResponse'
 addTagsToResourceResponse
     :: Int -- ^ 'attrrsResponseStatus'
     -> AddTagsToResourceResponse
-addTagsToResourceResponse pResponseStatus_ =
-  AddTagsToResourceResponse' {_attrrsResponseStatus = pResponseStatus_}
-
+addTagsToResourceResponse pResponseStatus_
+  = AddTagsToResourceResponse'{_attrrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 attrrsResponseStatus :: Lens' AddTagsToResourceResponse Int

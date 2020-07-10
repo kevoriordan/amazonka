@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the description of the specified stack set operation.
+-- Returns the description of the specified stack set operation. 
 --
 --
 module Network.AWS.CloudFormation.DescribeStackSetOperation
@@ -46,11 +46,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeStackSetOperation' smart constructor.
-data DescribeStackSetOperation = DescribeStackSetOperation'
-  { _dssoStackSetName :: !Text
-  , _dssoOperationId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackSetOperation = DescribeStackSetOperation'{_dssoStackSetName
+                                                            :: !Text,
+                                                            _dssoOperationId ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeStackSetOperation' with the minimum fields required to make a request.
 --
@@ -58,21 +59,22 @@ data DescribeStackSetOperation = DescribeStackSetOperation'
 --
 -- * 'dssoStackSetName' - The name or the unique stack ID of the stack set for the stack operation.
 --
--- * 'dssoOperationId' - The unique ID of the stack set operation.
+-- * 'dssoOperationId' - The unique ID of the stack set operation. 
 describeStackSetOperation
     :: Text -- ^ 'dssoStackSetName'
     -> Text -- ^ 'dssoOperationId'
     -> DescribeStackSetOperation
-describeStackSetOperation pStackSetName_ pOperationId_ =
-  DescribeStackSetOperation'
-    {_dssoStackSetName = pStackSetName_, _dssoOperationId = pOperationId_}
-
+describeStackSetOperation pStackSetName_
+  pOperationId_
+  = DescribeStackSetOperation'{_dssoStackSetName =
+                                 pStackSetName_,
+                               _dssoOperationId = pOperationId_}
 
 -- | The name or the unique stack ID of the stack set for the stack operation.
 dssoStackSetName :: Lens' DescribeStackSetOperation Text
 dssoStackSetName = lens _dssoStackSetName (\ s a -> s{_dssoStackSetName = a})
 
--- | The unique ID of the stack set operation.
+-- | The unique ID of the stack set operation. 
 dssoOperationId :: Lens' DescribeStackSetOperation Text
 dssoOperationId = lens _dssoOperationId (\ s a -> s{_dssoOperationId = a})
 
@@ -106,11 +108,15 @@ instance ToQuery DescribeStackSetOperation where
                "OperationId" =: _dssoOperationId]
 
 -- | /See:/ 'describeStackSetOperationResponse' smart constructor.
-data DescribeStackSetOperationResponse = DescribeStackSetOperationResponse'
-  { _dssorsStackSetOperation :: !(Maybe StackSetOperation)
-  , _dssorsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackSetOperationResponse = DescribeStackSetOperationResponse'{_dssorsStackSetOperation
+                                                                            ::
+                                                                            !(Maybe
+                                                                                StackSetOperation),
+                                                                            _dssorsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeStackSetOperationResponse' with the minimum fields required to make a request.
 --
@@ -122,12 +128,10 @@ data DescribeStackSetOperationResponse = DescribeStackSetOperationResponse'
 describeStackSetOperationResponse
     :: Int -- ^ 'dssorsResponseStatus'
     -> DescribeStackSetOperationResponse
-describeStackSetOperationResponse pResponseStatus_ =
-  DescribeStackSetOperationResponse'
-    { _dssorsStackSetOperation = Nothing
-    , _dssorsResponseStatus = pResponseStatus_
-    }
-
+describeStackSetOperationResponse pResponseStatus_
+  = DescribeStackSetOperationResponse'{_dssorsStackSetOperation
+                                         = Nothing,
+                                       _dssorsResponseStatus = pResponseStatus_}
 
 -- | The specified stack set operation.
 dssorsStackSetOperation :: Lens' DescribeStackSetOperationResponse (Maybe StackSetOperation)

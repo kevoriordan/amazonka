@@ -51,17 +51,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listAvailableZones' smart constructor.
-data ListAvailableZones =
-  ListAvailableZones'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAvailableZones = ListAvailableZones'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAvailableZones' with the minimum fields required to make a request.
 --
 listAvailableZones
     :: ListAvailableZones
 listAvailableZones = ListAvailableZones'
-
 
 instance AWSRequest ListAvailableZones where
         type Rs ListAvailableZones =
@@ -97,11 +94,13 @@ instance ToQuery ListAvailableZones where
         toQuery = const mempty
 
 -- | /See:/ 'listAvailableZonesResponse' smart constructor.
-data ListAvailableZonesResponse = ListAvailableZonesResponse'
-  { _lazrsAZList         :: !(Maybe [Text])
-  , _lazrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAvailableZonesResponse = ListAvailableZonesResponse'{_lazrsAZList
+                                                              ::
+                                                              !(Maybe [Text]),
+                                                              _lazrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListAvailableZonesResponse' with the minimum fields required to make a request.
 --
@@ -113,10 +112,9 @@ data ListAvailableZonesResponse = ListAvailableZonesResponse'
 listAvailableZonesResponse
     :: Int -- ^ 'lazrsResponseStatus'
     -> ListAvailableZonesResponse
-listAvailableZonesResponse pResponseStatus_ =
-  ListAvailableZonesResponse'
-    {_lazrsAZList = Nothing, _lazrsResponseStatus = pResponseStatus_}
-
+listAvailableZonesResponse pResponseStatus_
+  = ListAvailableZonesResponse'{_lazrsAZList = Nothing,
+                                _lazrsResponseStatus = pResponseStatus_}
 
 -- | The list of Availability Zones that have available AWS CloudHSM capacity.
 lazrsAZList :: Lens' ListAvailableZonesResponse [Text]

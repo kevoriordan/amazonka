@@ -27,8 +27,8 @@ module Network.AWS.EC2.DeleteRouteTable
       deleteRouteTable
     , DeleteRouteTable
     -- * Request Lenses
-    , drtrDryRun
-    , drtrRouteTableId
+    , dltrttblDryRun
+    , dltrttblRouteTableId
 
     -- * Destructuring the Response
     , deleteRouteTableResponse
@@ -42,38 +42,33 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteRouteTable.
---
---
---
--- /See:/ 'deleteRouteTable' smart constructor.
-data DeleteRouteTable = DeleteRouteTable'
-  { _drtrDryRun       :: !(Maybe Bool)
-  , _drtrRouteTableId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteRouteTable' smart constructor.
+data DeleteRouteTable = DeleteRouteTable'{_dltrttblDryRun
+                                          :: !(Maybe Bool),
+                                          _dltrttblRouteTableId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRouteTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drtrDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
+-- * 'dltrttblDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'drtrRouteTableId' - The ID of the route table.
+-- * 'dltrttblRouteTableId' - The ID of the route table.
 deleteRouteTable
-    :: Text -- ^ 'drtrRouteTableId'
+    :: Text -- ^ 'dltrttblRouteTableId'
     -> DeleteRouteTable
-deleteRouteTable pRouteTableId_ =
-  DeleteRouteTable' {_drtrDryRun = Nothing, _drtrRouteTableId = pRouteTableId_}
-
+deleteRouteTable pRouteTableId_
+  = DeleteRouteTable'{_dltrttblDryRun = Nothing,
+                      _dltrttblRouteTableId = pRouteTableId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
-drtrDryRun :: Lens' DeleteRouteTable (Maybe Bool)
-drtrDryRun = lens _drtrDryRun (\ s a -> s{_drtrDryRun = a})
+dltrttblDryRun :: Lens' DeleteRouteTable (Maybe Bool)
+dltrttblDryRun = lens _dltrttblDryRun (\ s a -> s{_dltrttblDryRun = a})
 
 -- | The ID of the route table.
-drtrRouteTableId :: Lens' DeleteRouteTable Text
-drtrRouteTableId = lens _drtrRouteTableId (\ s a -> s{_drtrRouteTableId = a})
+dltrttblRouteTableId :: Lens' DeleteRouteTable Text
+dltrttblRouteTableId = lens _dltrttblRouteTableId (\ s a -> s{_dltrttblRouteTableId = a})
 
 instance AWSRequest DeleteRouteTable where
         type Rs DeleteRouteTable = DeleteRouteTableResponse
@@ -95,20 +90,18 @@ instance ToQuery DeleteRouteTable where
           = mconcat
               ["Action" =: ("DeleteRouteTable" :: ByteString),
                "Version" =: ("2016-11-15" :: ByteString),
-               "DryRun" =: _drtrDryRun,
-               "RouteTableId" =: _drtrRouteTableId]
+               "DryRun" =: _dltrttblDryRun,
+               "RouteTableId" =: _dltrttblRouteTableId]
 
 -- | /See:/ 'deleteRouteTableResponse' smart constructor.
-data DeleteRouteTableResponse =
-  DeleteRouteTableResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRouteTableResponse = DeleteRouteTableResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteRouteTableResponse' with the minimum fields required to make a request.
 --
 deleteRouteTableResponse
     :: DeleteRouteTableResponse
 deleteRouteTableResponse = DeleteRouteTableResponse'
-
 
 instance NFData DeleteRouteTableResponse where

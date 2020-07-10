@@ -47,39 +47,35 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deletePartition' smart constructor.
-data DeletePartition = DeletePartition'
-  { _dpCatalogId       :: !(Maybe Text)
-  , _dpDatabaseName    :: !Text
-  , _dpTableName       :: !Text
-  , _dpPartitionValues :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePartition = DeletePartition'{_dpCatalogId
+                                        :: !(Maybe Text),
+                                        _dpDatabaseName :: !Text,
+                                        _dpTableName :: !Text,
+                                        _dpPartitionValues :: ![Text]}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePartition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpCatalogId' - The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.
+-- * 'dpCatalogId' - The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
 --
 -- * 'dpDatabaseName' - The name of the catalog database in which the table in question resides.
 --
--- * 'dpTableName' - The name of the table where the partition to be deleted is located.
+-- * 'dpTableName' - The name of the table that contains the partition to be deleted.
 --
 -- * 'dpPartitionValues' - The values that define the partition.
 deletePartition
     :: Text -- ^ 'dpDatabaseName'
     -> Text -- ^ 'dpTableName'
     -> DeletePartition
-deletePartition pDatabaseName_ pTableName_ =
-  DeletePartition'
-    { _dpCatalogId = Nothing
-    , _dpDatabaseName = pDatabaseName_
-    , _dpTableName = pTableName_
-    , _dpPartitionValues = mempty
-    }
+deletePartition pDatabaseName_ pTableName_
+  = DeletePartition'{_dpCatalogId = Nothing,
+                     _dpDatabaseName = pDatabaseName_,
+                     _dpTableName = pTableName_,
+                     _dpPartitionValues = mempty}
 
-
--- | The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
 dpCatalogId :: Lens' DeletePartition (Maybe Text)
 dpCatalogId = lens _dpCatalogId (\ s a -> s{_dpCatalogId = a})
 
@@ -87,7 +83,7 @@ dpCatalogId = lens _dpCatalogId (\ s a -> s{_dpCatalogId = a})
 dpDatabaseName :: Lens' DeletePartition Text
 dpDatabaseName = lens _dpDatabaseName (\ s a -> s{_dpDatabaseName = a})
 
--- | The name of the table where the partition to be deleted is located.
+-- | The name of the table that contains the partition to be deleted.
 dpTableName :: Lens' DeletePartition Text
 dpTableName = lens _dpTableName (\ s a -> s{_dpTableName = a})
 
@@ -132,10 +128,10 @@ instance ToQuery DeletePartition where
         toQuery = const mempty
 
 -- | /See:/ 'deletePartitionResponse' smart constructor.
-newtype DeletePartitionResponse = DeletePartitionResponse'
-  { _dprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePartitionResponse = DeletePartitionResponse'{_dprsResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeletePartitionResponse' with the minimum fields required to make a request.
 --
@@ -145,9 +141,9 @@ newtype DeletePartitionResponse = DeletePartitionResponse'
 deletePartitionResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DeletePartitionResponse
-deletePartitionResponse pResponseStatus_ =
-  DeletePartitionResponse' {_dprsResponseStatus = pResponseStatus_}
-
+deletePartitionResponse pResponseStatus_
+  = DeletePartitionResponse'{_dprsResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 dprsResponseStatus :: Lens' DeletePartitionResponse Int

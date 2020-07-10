@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an endpoint.
+-- Deletes an endpoint from an application.
+--
+--
 module Network.AWS.Pinpoint.DeleteEndpoint
     (
     -- * Creating a Request
@@ -44,33 +46,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteEndpoint' smart constructor.
-data DeleteEndpoint = DeleteEndpoint'
-  { _deApplicationId :: !Text
-  , _deEndpointId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEndpoint = DeleteEndpoint'{_deApplicationId
+                                      :: !Text,
+                                      _deEndpointId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'deApplicationId' - Undocumented member.
+-- * 'deApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
--- * 'deEndpointId' - Undocumented member.
+-- * 'deEndpointId' - The unique identifier for the endpoint.
 deleteEndpoint
     :: Text -- ^ 'deApplicationId'
     -> Text -- ^ 'deEndpointId'
     -> DeleteEndpoint
-deleteEndpoint pApplicationId_ pEndpointId_ =
-  DeleteEndpoint'
-    {_deApplicationId = pApplicationId_, _deEndpointId = pEndpointId_}
+deleteEndpoint pApplicationId_ pEndpointId_
+  = DeleteEndpoint'{_deApplicationId = pApplicationId_,
+                    _deEndpointId = pEndpointId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deApplicationId :: Lens' DeleteEndpoint Text
 deApplicationId = lens _deApplicationId (\ s a -> s{_deApplicationId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the endpoint.
 deEndpointId :: Lens' DeleteEndpoint Text
 deEndpointId = lens _deEndpointId (\ s a -> s{_deEndpointId = a})
 
@@ -104,11 +104,12 @@ instance ToQuery DeleteEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'deleteEndpointResponse' smart constructor.
-data DeleteEndpointResponse = DeleteEndpointResponse'
-  { _dersResponseStatus   :: !Int
-  , _dersEndpointResponse :: !EndpointResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEndpointResponse = DeleteEndpointResponse'{_dersResponseStatus
+                                                      :: !Int,
+                                                      _dersEndpointResponse ::
+                                                      !EndpointResponse}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteEndpointResponse' with the minimum fields required to make a request.
 --
@@ -121,12 +122,11 @@ deleteEndpointResponse
     :: Int -- ^ 'dersResponseStatus'
     -> EndpointResponse -- ^ 'dersEndpointResponse'
     -> DeleteEndpointResponse
-deleteEndpointResponse pResponseStatus_ pEndpointResponse_ =
-  DeleteEndpointResponse'
-    { _dersResponseStatus = pResponseStatus_
-    , _dersEndpointResponse = pEndpointResponse_
-    }
-
+deleteEndpointResponse pResponseStatus_
+  pEndpointResponse_
+  = DeleteEndpointResponse'{_dersResponseStatus =
+                              pResponseStatus_,
+                            _dersEndpointResponse = pEndpointResponse_}
 
 -- | -- | The response status code.
 dersResponseStatus :: Lens' DeleteEndpointResponse Int

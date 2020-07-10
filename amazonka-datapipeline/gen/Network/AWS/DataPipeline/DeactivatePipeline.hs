@@ -51,11 +51,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deactivatePipeline' smart constructor.
-data DeactivatePipeline = DeactivatePipeline'
-  { _dCancelActive :: !(Maybe Bool)
-  , _dPipelineId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeactivatePipeline = DeactivatePipeline'{_dCancelActive
+                                              :: !(Maybe Bool),
+                                              _dPipelineId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeactivatePipeline' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ data DeactivatePipeline = DeactivatePipeline'
 deactivatePipeline
     :: Text -- ^ 'dPipelineId'
     -> DeactivatePipeline
-deactivatePipeline pPipelineId_ =
-  DeactivatePipeline' {_dCancelActive = Nothing, _dPipelineId = pPipelineId_}
-
+deactivatePipeline pPipelineId_
+  = DeactivatePipeline'{_dCancelActive = Nothing,
+                        _dPipelineId = pPipelineId_}
 
 -- | Indicates whether to cancel any running objects. The default is true, which sets the state of any running objects to @CANCELED@ . If this value is false, the pipeline is deactivated after all running objects finish.
 dCancelActive :: Lens' DeactivatePipeline (Maybe Bool)
@@ -119,10 +118,10 @@ instance ToQuery DeactivatePipeline where
 --
 --
 -- /See:/ 'deactivatePipelineResponse' smart constructor.
-newtype DeactivatePipelineResponse = DeactivatePipelineResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeactivatePipelineResponse = DeactivatePipelineResponse'{_drsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeactivatePipelineResponse' with the minimum fields required to make a request.
 --
@@ -132,9 +131,9 @@ newtype DeactivatePipelineResponse = DeactivatePipelineResponse'
 deactivatePipelineResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeactivatePipelineResponse
-deactivatePipelineResponse pResponseStatus_ =
-  DeactivatePipelineResponse' {_drsResponseStatus = pResponseStatus_}
-
+deactivatePipelineResponse pResponseStatus_
+  = DeactivatePipelineResponse'{_drsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeactivatePipelineResponse Int

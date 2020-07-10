@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint.
+-- Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint. Currently, the services that support this action are Amazon S3 and Amazon DynamoDB.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribePrefixLists
     (
     -- * Creating a Request
@@ -45,23 +47,20 @@ module Network.AWS.EC2.DescribePrefixLists
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DescribePrefixLists.
---
---
---
--- /See:/ 'describePrefixLists' smart constructor.
-data DescribePrefixLists = DescribePrefixLists'
-  { _dplFilters       :: !(Maybe [Filter])
-  , _dplPrefixListIds :: !(Maybe [Text])
-  , _dplNextToken     :: !(Maybe Text)
-  , _dplDryRun        :: !(Maybe Bool)
-  , _dplMaxResults    :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describePrefixLists' smart constructor.
+data DescribePrefixLists = DescribePrefixLists'{_dplFilters
+                                                :: !(Maybe [Filter]),
+                                                _dplPrefixListIds ::
+                                                !(Maybe [Text]),
+                                                _dplNextToken :: !(Maybe Text),
+                                                _dplDryRun :: !(Maybe Bool),
+                                                _dplMaxResults :: !(Maybe Int)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribePrefixLists' with the minimum fields required to make a request.
 --
@@ -71,22 +70,17 @@ data DescribePrefixLists = DescribePrefixLists'
 --
 -- * 'dplPrefixListIds' - One or more prefix list IDs.
 --
--- * 'dplNextToken' - The token for the next set of items to return. (You received this token from a prior call.)
+-- * 'dplNextToken' - The token for the next page of results.
 --
 -- * 'dplDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'dplMaxResults' - The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value specified is greater than 1000, we return only 1000 items.
+-- * 'dplMaxResults' - The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned @nextToken@ value.
 describePrefixLists
     :: DescribePrefixLists
-describePrefixLists =
-  DescribePrefixLists'
-    { _dplFilters = Nothing
-    , _dplPrefixListIds = Nothing
-    , _dplNextToken = Nothing
-    , _dplDryRun = Nothing
-    , _dplMaxResults = Nothing
-    }
-
+describePrefixLists
+  = DescribePrefixLists'{_dplFilters = Nothing,
+                         _dplPrefixListIds = Nothing, _dplNextToken = Nothing,
+                         _dplDryRun = Nothing, _dplMaxResults = Nothing}
 
 -- | One or more filters.     * @prefix-list-id@ : The ID of a prefix list.     * @prefix-list-name@ : The name of a prefix list.
 dplFilters :: Lens' DescribePrefixLists [Filter]
@@ -96,7 +90,7 @@ dplFilters = lens _dplFilters (\ s a -> s{_dplFilters = a}) . _Default . _Coerce
 dplPrefixListIds :: Lens' DescribePrefixLists [Text]
 dplPrefixListIds = lens _dplPrefixListIds (\ s a -> s{_dplPrefixListIds = a}) . _Default . _Coerce
 
--- | The token for the next set of items to return. (You received this token from a prior call.)
+-- | The token for the next page of results.
 dplNextToken :: Lens' DescribePrefixLists (Maybe Text)
 dplNextToken = lens _dplNextToken (\ s a -> s{_dplNextToken = a})
 
@@ -104,9 +98,16 @@ dplNextToken = lens _dplNextToken (\ s a -> s{_dplNextToken = a})
 dplDryRun :: Lens' DescribePrefixLists (Maybe Bool)
 dplDryRun = lens _dplDryRun (\ s a -> s{_dplDryRun = a})
 
--- | The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value specified is greater than 1000, we return only 1000 items.
+-- | The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned @nextToken@ value.
 dplMaxResults :: Lens' DescribePrefixLists (Maybe Int)
 dplMaxResults = lens _dplMaxResults (\ s a -> s{_dplMaxResults = a})
+
+instance AWSPager DescribePrefixLists where
+        page rq rs
+          | stop (rs ^. dplrsNextToken) = Nothing
+          | stop (rs ^. dplrsPrefixLists) = Nothing
+          | otherwise =
+            Just $ rq & dplNextToken .~ rs ^. dplrsNextToken
 
 instance AWSRequest DescribePrefixLists where
         type Rs DescribePrefixLists =
@@ -142,23 +143,24 @@ instance ToQuery DescribePrefixLists where
                "NextToken" =: _dplNextToken, "DryRun" =: _dplDryRun,
                "MaxResults" =: _dplMaxResults]
 
--- | Contains the output of DescribePrefixLists.
---
---
---
--- /See:/ 'describePrefixListsResponse' smart constructor.
-data DescribePrefixListsResponse = DescribePrefixListsResponse'
-  { _dplrsNextToken      :: !(Maybe Text)
-  , _dplrsPrefixLists    :: !(Maybe [PrefixList])
-  , _dplrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describePrefixListsResponse' smart constructor.
+data DescribePrefixListsResponse = DescribePrefixListsResponse'{_dplrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dplrsPrefixLists
+                                                                ::
+                                                                !(Maybe
+                                                                    [PrefixList]),
+                                                                _dplrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribePrefixListsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dplrsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- * 'dplrsNextToken' - The token to use to retrieve the next page of results. This value is @null@ when there are no more results to return.
 --
 -- * 'dplrsPrefixLists' - All available prefix lists.
 --
@@ -166,15 +168,13 @@ data DescribePrefixListsResponse = DescribePrefixListsResponse'
 describePrefixListsResponse
     :: Int -- ^ 'dplrsResponseStatus'
     -> DescribePrefixListsResponse
-describePrefixListsResponse pResponseStatus_ =
-  DescribePrefixListsResponse'
-    { _dplrsNextToken = Nothing
-    , _dplrsPrefixLists = Nothing
-    , _dplrsResponseStatus = pResponseStatus_
-    }
+describePrefixListsResponse pResponseStatus_
+  = DescribePrefixListsResponse'{_dplrsNextToken =
+                                   Nothing,
+                                 _dplrsPrefixLists = Nothing,
+                                 _dplrsResponseStatus = pResponseStatus_}
 
-
--- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- | The token to use to retrieve the next page of results. This value is @null@ when there are no more results to return.
 dplrsNextToken :: Lens' DescribePrefixListsResponse (Maybe Text)
 dplrsNextToken = lens _dplrsNextToken (\ s a -> s{_dplrsNextToken = a})
 

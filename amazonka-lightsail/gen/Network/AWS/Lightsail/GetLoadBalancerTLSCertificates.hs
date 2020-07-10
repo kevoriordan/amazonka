@@ -49,10 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getLoadBalancerTLSCertificates' smart constructor.
-newtype GetLoadBalancerTLSCertificates = GetLoadBalancerTLSCertificates'
-  { _glbtcLoadBalancerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetLoadBalancerTLSCertificates = GetLoadBalancerTLSCertificates'{_glbtcLoadBalancerName
+                                                                         ::
+                                                                         Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'GetLoadBalancerTLSCertificates' with the minimum fields required to make a request.
 --
@@ -62,9 +63,9 @@ newtype GetLoadBalancerTLSCertificates = GetLoadBalancerTLSCertificates'
 getLoadBalancerTLSCertificates
     :: Text -- ^ 'glbtcLoadBalancerName'
     -> GetLoadBalancerTLSCertificates
-getLoadBalancerTLSCertificates pLoadBalancerName_ =
-  GetLoadBalancerTLSCertificates' {_glbtcLoadBalancerName = pLoadBalancerName_}
-
+getLoadBalancerTLSCertificates pLoadBalancerName_
+  = GetLoadBalancerTLSCertificates'{_glbtcLoadBalancerName
+                                      = pLoadBalancerName_}
 
 -- | The name of the load balancer you associated with your SSL/TLS certificate.
 glbtcLoadBalancerName :: Lens' GetLoadBalancerTLSCertificates Text
@@ -112,11 +113,15 @@ instance ToQuery GetLoadBalancerTLSCertificates where
         toQuery = const mempty
 
 -- | /See:/ 'getLoadBalancerTLSCertificatesResponse' smart constructor.
-data GetLoadBalancerTLSCertificatesResponse = GetLoadBalancerTLSCertificatesResponse'
-  { _glbtcrsTlsCertificates :: !(Maybe [LoadBalancerTLSCertificate])
-  , _glbtcrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetLoadBalancerTLSCertificatesResponse = GetLoadBalancerTLSCertificatesResponse'{_glbtcrsTlsCertificates
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [LoadBalancerTLSCertificate]),
+                                                                                      _glbtcrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'GetLoadBalancerTLSCertificatesResponse' with the minimum fields required to make a request.
 --
@@ -128,12 +133,12 @@ data GetLoadBalancerTLSCertificatesResponse = GetLoadBalancerTLSCertificatesResp
 getLoadBalancerTLSCertificatesResponse
     :: Int -- ^ 'glbtcrsResponseStatus'
     -> GetLoadBalancerTLSCertificatesResponse
-getLoadBalancerTLSCertificatesResponse pResponseStatus_ =
-  GetLoadBalancerTLSCertificatesResponse'
-    { _glbtcrsTlsCertificates = Nothing
-    , _glbtcrsResponseStatus = pResponseStatus_
-    }
-
+getLoadBalancerTLSCertificatesResponse
+  pResponseStatus_
+  = GetLoadBalancerTLSCertificatesResponse'{_glbtcrsTlsCertificates
+                                              = Nothing,
+                                            _glbtcrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | An array of LoadBalancerTlsCertificate objects describing your SSL/TLS certificates.
 glbtcrsTlsCertificates :: Lens' GetLoadBalancerTLSCertificatesResponse [LoadBalancerTLSCertificate]

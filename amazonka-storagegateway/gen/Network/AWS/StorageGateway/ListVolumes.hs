@@ -56,20 +56,19 @@ import Network.AWS.StorageGateway.Types.Product
 -- | A JSON object that contains one or more of the following fields:
 --
 --
---     * 'ListVolumesInput$Limit'
+--     * 'ListVolumesInput$Limit' 
 --
---     * 'ListVolumesInput$Marker'
+--     * 'ListVolumesInput$Marker' 
 --
 --
 --
 --
 -- /See:/ 'listVolumes' smart constructor.
-data ListVolumes = ListVolumes'
-  { _lvGatewayARN :: !(Maybe Text)
-  , _lvMarker     :: !(Maybe Text)
-  , _lvLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVolumes = ListVolumes'{_lvGatewayARN ::
+                                !(Maybe Text),
+                                _lvMarker :: !(Maybe Text),
+                                _lvLimit :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVolumes' with the minimum fields required to make a request.
 --
@@ -82,10 +81,9 @@ data ListVolumes = ListVolumes'
 -- * 'lvLimit' - Specifies that the list of volumes returned be limited to the specified number of items.
 listVolumes
     :: ListVolumes
-listVolumes =
-  ListVolumes'
-    {_lvGatewayARN = Nothing, _lvMarker = Nothing, _lvLimit = Nothing}
-
+listVolumes
+  = ListVolumes'{_lvGatewayARN = Nothing,
+                 _lvMarker = Nothing, _lvLimit = Nothing}
 
 -- | Undocumented member.
 lvGatewayARN :: Lens' ListVolumes (Maybe Text)
@@ -145,14 +143,24 @@ instance ToPath ListVolumes where
 instance ToQuery ListVolumes where
         toQuery = const mempty
 
--- | /See:/ 'listVolumesResponse' smart constructor.
-data ListVolumesResponse = ListVolumesResponse'
-  { _lvrsGatewayARN     :: !(Maybe Text)
-  , _lvrsMarker         :: !(Maybe Text)
-  , _lvrsVolumeInfos    :: !(Maybe [VolumeInfo])
-  , _lvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | A JSON object containing the following fields:
+--
+--
+--     * 'ListVolumesOutput$Marker' 
+--
+--     * 'ListVolumesOutput$VolumeInfos' 
+--
+--
+--
+--
+-- /See:/ 'listVolumesResponse' smart constructor.
+data ListVolumesResponse = ListVolumesResponse'{_lvrsGatewayARN
+                                                :: !(Maybe Text),
+                                                _lvrsMarker :: !(Maybe Text),
+                                                _lvrsVolumeInfos ::
+                                                !(Maybe [VolumeInfo]),
+                                                _lvrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVolumesResponse' with the minimum fields required to make a request.
 --
@@ -160,32 +168,28 @@ data ListVolumesResponse = ListVolumesResponse'
 --
 -- * 'lvrsGatewayARN' - Undocumented member.
 --
--- * 'lvrsMarker' - Undocumented member.
+-- * 'lvrsMarker' - Use the marker in your next request to continue pagination of iSCSI volumes. If there are no more volumes to list, this field does not appear in the response body.
 --
--- * 'lvrsVolumeInfos' - Undocumented member.
+-- * 'lvrsVolumeInfos' - An array of 'VolumeInfo' objects, where each object describes an iSCSI volume. If no volumes are defined for the gateway, then @VolumeInfos@ is an empty array "[]".
 --
 -- * 'lvrsResponseStatus' - -- | The response status code.
 listVolumesResponse
     :: Int -- ^ 'lvrsResponseStatus'
     -> ListVolumesResponse
-listVolumesResponse pResponseStatus_ =
-  ListVolumesResponse'
-    { _lvrsGatewayARN = Nothing
-    , _lvrsMarker = Nothing
-    , _lvrsVolumeInfos = Nothing
-    , _lvrsResponseStatus = pResponseStatus_
-    }
-
+listVolumesResponse pResponseStatus_
+  = ListVolumesResponse'{_lvrsGatewayARN = Nothing,
+                         _lvrsMarker = Nothing, _lvrsVolumeInfos = Nothing,
+                         _lvrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 lvrsGatewayARN :: Lens' ListVolumesResponse (Maybe Text)
 lvrsGatewayARN = lens _lvrsGatewayARN (\ s a -> s{_lvrsGatewayARN = a})
 
--- | Undocumented member.
+-- | Use the marker in your next request to continue pagination of iSCSI volumes. If there are no more volumes to list, this field does not appear in the response body.
 lvrsMarker :: Lens' ListVolumesResponse (Maybe Text)
 lvrsMarker = lens _lvrsMarker (\ s a -> s{_lvrsMarker = a})
 
--- | Undocumented member.
+-- | An array of 'VolumeInfo' objects, where each object describes an iSCSI volume. If no volumes are defined for the gateway, then @VolumeInfos@ is an empty array "[]".
 lvrsVolumeInfos :: Lens' ListVolumesResponse [VolumeInfo]
 lvrsVolumeInfos = lens _lvrsVolumeInfos (\ s a -> s{_lvrsVolumeInfos = a}) . _Default . _Coerce
 

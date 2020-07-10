@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createLunaClient' smart constructor.
-data CreateLunaClient = CreateLunaClient'
-  { _clcLabel       :: !(Maybe Text)
-  , _clcCertificate :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateLunaClient = CreateLunaClient'{_clcLabel
+                                          :: !(Maybe Text),
+                                          _clcCertificate :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateLunaClient' with the minimum fields required to make a request.
 --
@@ -70,9 +69,9 @@ data CreateLunaClient = CreateLunaClient'
 createLunaClient
     :: Text -- ^ 'clcCertificate'
     -> CreateLunaClient
-createLunaClient pCertificate_ =
-  CreateLunaClient' {_clcLabel = Nothing, _clcCertificate = pCertificate_}
-
+createLunaClient pCertificate_
+  = CreateLunaClient'{_clcLabel = Nothing,
+                      _clcCertificate = pCertificate_}
 
 -- | The label for the client.
 clcLabel :: Lens' CreateLunaClient (Maybe Text)
@@ -123,11 +122,12 @@ instance ToQuery CreateLunaClient where
 --
 --
 -- /See:/ 'createLunaClientResponse' smart constructor.
-data CreateLunaClientResponse = CreateLunaClientResponse'
-  { _clcrsClientARN      :: !(Maybe Text)
-  , _clcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateLunaClientResponse = CreateLunaClientResponse'{_clcrsClientARN
+                                                          :: !(Maybe Text),
+                                                          _clcrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateLunaClientResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +139,10 @@ data CreateLunaClientResponse = CreateLunaClientResponse'
 createLunaClientResponse
     :: Int -- ^ 'clcrsResponseStatus'
     -> CreateLunaClientResponse
-createLunaClientResponse pResponseStatus_ =
-  CreateLunaClientResponse'
-    {_clcrsClientARN = Nothing, _clcrsResponseStatus = pResponseStatus_}
-
+createLunaClientResponse pResponseStatus_
+  = CreateLunaClientResponse'{_clcrsClientARN =
+                                Nothing,
+                              _clcrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the client.
 clcrsClientARN :: Lens' CreateLunaClientResponse (Maybe Text)

@@ -54,14 +54,17 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listInventoryEntries' smart constructor.
-data ListInventoryEntries = ListInventoryEntries'
-  { _lieFilters    :: !(Maybe (List1 InventoryFilter))
-  , _lieNextToken  :: !(Maybe Text)
-  , _lieMaxResults :: !(Maybe Nat)
-  , _lieInstanceId :: !Text
-  , _lieTypeName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInventoryEntries = ListInventoryEntries'{_lieFilters
+                                                  ::
+                                                  !(Maybe
+                                                      (List1 InventoryFilter)),
+                                                  _lieNextToken ::
+                                                  !(Maybe Text),
+                                                  _lieMaxResults ::
+                                                  !(Maybe Nat),
+                                                  _lieInstanceId :: !Text,
+                                                  _lieTypeName :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInventoryEntries' with the minimum fields required to make a request.
 --
@@ -80,15 +83,11 @@ listInventoryEntries
     :: Text -- ^ 'lieInstanceId'
     -> Text -- ^ 'lieTypeName'
     -> ListInventoryEntries
-listInventoryEntries pInstanceId_ pTypeName_ =
-  ListInventoryEntries'
-    { _lieFilters = Nothing
-    , _lieNextToken = Nothing
-    , _lieMaxResults = Nothing
-    , _lieInstanceId = pInstanceId_
-    , _lieTypeName = pTypeName_
-    }
-
+listInventoryEntries pInstanceId_ pTypeName_
+  = ListInventoryEntries'{_lieFilters = Nothing,
+                          _lieNextToken = Nothing, _lieMaxResults = Nothing,
+                          _lieInstanceId = pInstanceId_,
+                          _lieTypeName = pTypeName_}
 
 -- | One or more filters. Use a filter to return a more specific list of results.
 lieFilters :: Lens' ListInventoryEntries (Maybe (NonEmpty InventoryFilter))
@@ -155,16 +154,30 @@ instance ToQuery ListInventoryEntries where
         toQuery = const mempty
 
 -- | /See:/ 'listInventoryEntriesResponse' smart constructor.
-data ListInventoryEntriesResponse = ListInventoryEntriesResponse'
-  { _liersInstanceId     :: !(Maybe Text)
-  , _liersTypeName       :: !(Maybe Text)
-  , _liersEntries        :: !(Maybe [Map Text Text])
-  , _liersSchemaVersion  :: !(Maybe Text)
-  , _liersCaptureTime    :: !(Maybe Text)
-  , _liersNextToken      :: !(Maybe Text)
-  , _liersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInventoryEntriesResponse = ListInventoryEntriesResponse'{_liersInstanceId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _liersTypeName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _liersEntries
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Map Text
+                                                                         Text]),
+                                                                  _liersSchemaVersion
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _liersCaptureTime
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _liersNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _liersResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListInventoryEntriesResponse' with the minimum fields required to make a request.
 --
@@ -186,17 +199,15 @@ data ListInventoryEntriesResponse = ListInventoryEntriesResponse'
 listInventoryEntriesResponse
     :: Int -- ^ 'liersResponseStatus'
     -> ListInventoryEntriesResponse
-listInventoryEntriesResponse pResponseStatus_ =
-  ListInventoryEntriesResponse'
-    { _liersInstanceId = Nothing
-    , _liersTypeName = Nothing
-    , _liersEntries = Nothing
-    , _liersSchemaVersion = Nothing
-    , _liersCaptureTime = Nothing
-    , _liersNextToken = Nothing
-    , _liersResponseStatus = pResponseStatus_
-    }
-
+listInventoryEntriesResponse pResponseStatus_
+  = ListInventoryEntriesResponse'{_liersInstanceId =
+                                    Nothing,
+                                  _liersTypeName = Nothing,
+                                  _liersEntries = Nothing,
+                                  _liersSchemaVersion = Nothing,
+                                  _liersCaptureTime = Nothing,
+                                  _liersNextToken = Nothing,
+                                  _liersResponseStatus = pResponseStatus_}
 
 -- | The instance ID targeted by the request to query inventory information.
 liersInstanceId :: Lens' ListInventoryEntriesResponse (Maybe Text)

@@ -27,7 +27,9 @@ module Network.AWS.AppSync.UpdateGraphqlAPI
       updateGraphqlAPI
     , UpdateGraphqlAPI
     -- * Request Lenses
+    , ugaXrayEnabled
     , ugaOpenIdConnectConfig
+    , ugaAdditionalAuthenticationProviders
     , ugaUserPoolConfig
     , ugaAuthenticationType
     , ugaLogConfig
@@ -50,27 +52,37 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateGraphqlAPI' smart constructor.
-data UpdateGraphqlAPI = UpdateGraphqlAPI'
-  { _ugaOpenIdConnectConfig :: !(Maybe OpenIdConnectConfig)
-  , _ugaUserPoolConfig      :: !(Maybe UserPoolConfig)
-  , _ugaAuthenticationType  :: !(Maybe AuthenticationType)
-  , _ugaLogConfig           :: !(Maybe LogConfig)
-  , _ugaApiId               :: !Text
-  , _ugaName                :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGraphqlAPI = UpdateGraphqlAPI'{_ugaXrayEnabled
+                                          :: !(Maybe Bool),
+                                          _ugaOpenIdConnectConfig ::
+                                          !(Maybe OpenIdConnectConfig),
+                                          _ugaAdditionalAuthenticationProviders
+                                          ::
+                                          !(Maybe
+                                              [AdditionalAuthenticationProvider]),
+                                          _ugaUserPoolConfig ::
+                                          !(Maybe UserPoolConfig),
+                                          _ugaAuthenticationType ::
+                                          !(Maybe AuthenticationType),
+                                          _ugaLogConfig :: !(Maybe LogConfig),
+                                          _ugaApiId :: !Text, _ugaName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateGraphqlAPI' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ugaOpenIdConnectConfig' - The Open Id Connect configuration configuration for the @GraphqlApi@ object.
+-- * 'ugaXrayEnabled' - A flag indicating whether to enable X-Ray tracing for the @GraphqlApi@ .
 --
--- * 'ugaUserPoolConfig' - The new Amazon Cognito User Pool configuration for the @GraphqlApi@ object.
+-- * 'ugaOpenIdConnectConfig' - The OpenID Connect configuration for the @GraphqlApi@ object.
+--
+-- * 'ugaAdditionalAuthenticationProviders' - A list of additional authentication providers for the @GraphqlApi@ API.
+--
+-- * 'ugaUserPoolConfig' - The new Amazon Cognito user pool configuration for the @GraphqlApi@ object.
 --
 -- * 'ugaAuthenticationType' - The new authentication type for the @GraphqlApi@ object.
 --
--- * 'ugaLogConfig' - The Amazon CloudWatch logs configuration for the @GraphqlApi@ object.
+-- * 'ugaLogConfig' - The Amazon CloudWatch Logs configuration for the @GraphqlApi@ object.
 --
 -- * 'ugaApiId' - The API ID.
 --
@@ -79,22 +91,28 @@ updateGraphqlAPI
     :: Text -- ^ 'ugaApiId'
     -> Text -- ^ 'ugaName'
     -> UpdateGraphqlAPI
-updateGraphqlAPI pApiId_ pName_ =
-  UpdateGraphqlAPI'
-    { _ugaOpenIdConnectConfig = Nothing
-    , _ugaUserPoolConfig = Nothing
-    , _ugaAuthenticationType = Nothing
-    , _ugaLogConfig = Nothing
-    , _ugaApiId = pApiId_
-    , _ugaName = pName_
-    }
+updateGraphqlAPI pApiId_ pName_
+  = UpdateGraphqlAPI'{_ugaXrayEnabled = Nothing,
+                      _ugaOpenIdConnectConfig = Nothing,
+                      _ugaAdditionalAuthenticationProviders = Nothing,
+                      _ugaUserPoolConfig = Nothing,
+                      _ugaAuthenticationType = Nothing,
+                      _ugaLogConfig = Nothing, _ugaApiId = pApiId_,
+                      _ugaName = pName_}
 
+-- | A flag indicating whether to enable X-Ray tracing for the @GraphqlApi@ .
+ugaXrayEnabled :: Lens' UpdateGraphqlAPI (Maybe Bool)
+ugaXrayEnabled = lens _ugaXrayEnabled (\ s a -> s{_ugaXrayEnabled = a})
 
--- | The Open Id Connect configuration configuration for the @GraphqlApi@ object.
+-- | The OpenID Connect configuration for the @GraphqlApi@ object.
 ugaOpenIdConnectConfig :: Lens' UpdateGraphqlAPI (Maybe OpenIdConnectConfig)
 ugaOpenIdConnectConfig = lens _ugaOpenIdConnectConfig (\ s a -> s{_ugaOpenIdConnectConfig = a})
 
--- | The new Amazon Cognito User Pool configuration for the @GraphqlApi@ object.
+-- | A list of additional authentication providers for the @GraphqlApi@ API.
+ugaAdditionalAuthenticationProviders :: Lens' UpdateGraphqlAPI [AdditionalAuthenticationProvider]
+ugaAdditionalAuthenticationProviders = lens _ugaAdditionalAuthenticationProviders (\ s a -> s{_ugaAdditionalAuthenticationProviders = a}) . _Default . _Coerce
+
+-- | The new Amazon Cognito user pool configuration for the @GraphqlApi@ object.
 ugaUserPoolConfig :: Lens' UpdateGraphqlAPI (Maybe UserPoolConfig)
 ugaUserPoolConfig = lens _ugaUserPoolConfig (\ s a -> s{_ugaUserPoolConfig = a})
 
@@ -102,7 +120,7 @@ ugaUserPoolConfig = lens _ugaUserPoolConfig (\ s a -> s{_ugaUserPoolConfig = a})
 ugaAuthenticationType :: Lens' UpdateGraphqlAPI (Maybe AuthenticationType)
 ugaAuthenticationType = lens _ugaAuthenticationType (\ s a -> s{_ugaAuthenticationType = a})
 
--- | The Amazon CloudWatch logs configuration for the @GraphqlApi@ object.
+-- | The Amazon CloudWatch Logs configuration for the @GraphqlApi@ object.
 ugaLogConfig :: Lens' UpdateGraphqlAPI (Maybe LogConfig)
 ugaLogConfig = lens _ugaLogConfig (\ s a -> s{_ugaLogConfig = a})
 
@@ -138,8 +156,11 @@ instance ToJSON UpdateGraphqlAPI where
         toJSON UpdateGraphqlAPI'{..}
           = object
               (catMaybes
-                 [("openIDConnectConfig" .=) <$>
+                 [("xrayEnabled" .=) <$> _ugaXrayEnabled,
+                  ("openIDConnectConfig" .=) <$>
                     _ugaOpenIdConnectConfig,
+                  ("additionalAuthenticationProviders" .=) <$>
+                    _ugaAdditionalAuthenticationProviders,
                   ("userPoolConfig" .=) <$> _ugaUserPoolConfig,
                   ("authenticationType" .=) <$> _ugaAuthenticationType,
                   ("logConfig" .=) <$> _ugaLogConfig,
@@ -153,11 +174,13 @@ instance ToQuery UpdateGraphqlAPI where
         toQuery = const mempty
 
 -- | /See:/ 'updateGraphqlAPIResponse' smart constructor.
-data UpdateGraphqlAPIResponse = UpdateGraphqlAPIResponse'
-  { _ugarsGraphqlAPI     :: !(Maybe GraphqlAPI)
-  , _ugarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGraphqlAPIResponse = UpdateGraphqlAPIResponse'{_ugarsGraphqlAPI
+                                                          ::
+                                                          !(Maybe GraphqlAPI),
+                                                          _ugarsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateGraphqlAPIResponse' with the minimum fields required to make a request.
 --
@@ -169,10 +192,10 @@ data UpdateGraphqlAPIResponse = UpdateGraphqlAPIResponse'
 updateGraphqlAPIResponse
     :: Int -- ^ 'ugarsResponseStatus'
     -> UpdateGraphqlAPIResponse
-updateGraphqlAPIResponse pResponseStatus_ =
-  UpdateGraphqlAPIResponse'
-    {_ugarsGraphqlAPI = Nothing, _ugarsResponseStatus = pResponseStatus_}
-
+updateGraphqlAPIResponse pResponseStatus_
+  = UpdateGraphqlAPIResponse'{_ugarsGraphqlAPI =
+                                Nothing,
+                              _ugarsResponseStatus = pResponseStatus_}
 
 -- | The updated @GraphqlApi@ object.
 ugarsGraphqlAPI :: Lens' UpdateGraphqlAPIResponse (Maybe GraphqlAPI)

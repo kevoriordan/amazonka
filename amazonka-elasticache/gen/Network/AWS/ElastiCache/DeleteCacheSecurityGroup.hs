@@ -46,10 +46,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteCacheSecurityGroup' smart constructor.
-newtype DeleteCacheSecurityGroup = DeleteCacheSecurityGroup'
-  { _dcsgCacheSecurityGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCacheSecurityGroup = DeleteCacheSecurityGroup'{_dcsgCacheSecurityGroupName
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteCacheSecurityGroup' with the minimum fields required to make a request.
 --
@@ -59,10 +59,9 @@ newtype DeleteCacheSecurityGroup = DeleteCacheSecurityGroup'
 deleteCacheSecurityGroup
     :: Text -- ^ 'dcsgCacheSecurityGroupName'
     -> DeleteCacheSecurityGroup
-deleteCacheSecurityGroup pCacheSecurityGroupName_ =
-  DeleteCacheSecurityGroup'
-    {_dcsgCacheSecurityGroupName = pCacheSecurityGroupName_}
-
+deleteCacheSecurityGroup pCacheSecurityGroupName_
+  = DeleteCacheSecurityGroup'{_dcsgCacheSecurityGroupName
+                                = pCacheSecurityGroupName_}
 
 -- | The name of the cache security group to delete.
 dcsgCacheSecurityGroupName :: Lens' DeleteCacheSecurityGroup Text
@@ -95,17 +94,16 @@ instance ToQuery DeleteCacheSecurityGroup where
                  _dcsgCacheSecurityGroupName]
 
 -- | /See:/ 'deleteCacheSecurityGroupResponse' smart constructor.
-data DeleteCacheSecurityGroupResponse =
-  DeleteCacheSecurityGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCacheSecurityGroupResponse = DeleteCacheSecurityGroupResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteCacheSecurityGroupResponse' with the minimum fields required to make a request.
 --
 deleteCacheSecurityGroupResponse
     :: DeleteCacheSecurityGroupResponse
-deleteCacheSecurityGroupResponse = DeleteCacheSecurityGroupResponse'
-
+deleteCacheSecurityGroupResponse
+  = DeleteCacheSecurityGroupResponse'
 
 instance NFData DeleteCacheSecurityGroupResponse
          where

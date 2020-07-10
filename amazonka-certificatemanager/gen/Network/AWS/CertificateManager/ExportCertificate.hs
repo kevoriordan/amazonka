@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Exports a private certificate issued by a private certificate authority (CA) for use anywhere. You can export the certificate, the certificate chain, and the encrypted private key associated with the public key embedded in the certificate. You must store the private key securely. The private key is a 2048 bit RSA key. You must provide a passphrase for the private key when exporting it. You can use the following OpenSSL command to decrypt it later. Provide the passphrase when prompted.
+-- Exports a private certificate issued by a private certificate authority (CA) for use anywhere. The exported file contains the certificate, the certificate chain, and the encrypted private 2048-bit RSA key associated with the public key that is embedded in the certificate. For security, you must assign a passphrase for the private key when exporting it. 
 --
 --
--- @openssl rsa -in encrypted_key.pem -out decrypted_key.pem@
+-- For information about exporting and formatting a certificate using the ACM console or CLI, see <https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html Export a Private Certificate> .
 --
 module Network.AWS.CertificateManager.ExportCertificate
     (
@@ -50,31 +50,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'exportCertificate' smart constructor.
-data ExportCertificate = ExportCertificate'
-  { _ecCertificateARN :: !Text
-  , _ecPassphrase     :: !(Sensitive Base64)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ExportCertificate = ExportCertificate'{_ecCertificateARN
+                                            :: !Text,
+                                            _ecPassphrase ::
+                                            !(Sensitive Base64)}
+                           deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExportCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ecCertificateARN' - An Amazon Resource Name (ARN) of the issued certificate. This must be of the form: @arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012@
+-- * 'ecCertificateARN' - An Amazon Resource Name (ARN) of the issued certificate. This must be of the form: @arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012@ 
 --
 -- * 'ecPassphrase' - Passphrase to associate with the encrypted exported private key. If you want to later decrypt the private key, you must have the passphrase. You can use the following OpenSSL command to decrypt a private key:  @openssl rsa -in encrypted_key.pem -out decrypted_key.pem@ -- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 exportCertificate
     :: Text -- ^ 'ecCertificateARN'
     -> ByteString -- ^ 'ecPassphrase'
     -> ExportCertificate
-exportCertificate pCertificateARN_ pPassphrase_ =
-  ExportCertificate'
-    { _ecCertificateARN = pCertificateARN_
-    , _ecPassphrase = _Sensitive . _Base64 # pPassphrase_
-    }
+exportCertificate pCertificateARN_ pPassphrase_
+  = ExportCertificate'{_ecCertificateARN =
+                         pCertificateARN_,
+                       _ecPassphrase = _Sensitive . _Base64 # pPassphrase_}
 
-
--- | An Amazon Resource Name (ARN) of the issued certificate. This must be of the form: @arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012@
+-- | An Amazon Resource Name (ARN) of the issued certificate. This must be of the form: @arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012@ 
 ecCertificateARN :: Lens' ExportCertificate Text
 ecCertificateARN = lens _ecCertificateARN (\ s a -> s{_ecCertificateARN = a})
 
@@ -121,19 +119,24 @@ instance ToQuery ExportCertificate where
         toQuery = const mempty
 
 -- | /See:/ 'exportCertificateResponse' smart constructor.
-data ExportCertificateResponse = ExportCertificateResponse'
-  { _ecrsPrivateKey       :: !(Maybe (Sensitive Text))
-  , _ecrsCertificate      :: !(Maybe Text)
-  , _ecrsCertificateChain :: !(Maybe Text)
-  , _ecrsResponseStatus   :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ExportCertificateResponse = ExportCertificateResponse'{_ecrsPrivateKey
+                                                            ::
+                                                            !(Maybe
+                                                                (Sensitive
+                                                                   Text)),
+                                                            _ecrsCertificate ::
+                                                            !(Maybe Text),
+                                                            _ecrsCertificateChain
+                                                            :: !(Maybe Text),
+                                                            _ecrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExportCertificateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ecrsPrivateKey' - The PEM-encoded private key associated with the public key in the certificate.
+-- * 'ecrsPrivateKey' - The encrypted private key associated with the public key in the certificate. The key is output in PKCS #8 format and is base64 PEM-encoded. 
 --
 -- * 'ecrsCertificate' - The base64 PEM-encoded certificate.
 --
@@ -143,16 +146,14 @@ data ExportCertificateResponse = ExportCertificateResponse'
 exportCertificateResponse
     :: Int -- ^ 'ecrsResponseStatus'
     -> ExportCertificateResponse
-exportCertificateResponse pResponseStatus_ =
-  ExportCertificateResponse'
-    { _ecrsPrivateKey = Nothing
-    , _ecrsCertificate = Nothing
-    , _ecrsCertificateChain = Nothing
-    , _ecrsResponseStatus = pResponseStatus_
-    }
+exportCertificateResponse pResponseStatus_
+  = ExportCertificateResponse'{_ecrsPrivateKey =
+                                 Nothing,
+                               _ecrsCertificate = Nothing,
+                               _ecrsCertificateChain = Nothing,
+                               _ecrsResponseStatus = pResponseStatus_}
 
-
--- | The PEM-encoded private key associated with the public key in the certificate.
+-- | The encrypted private key associated with the public key in the certificate. The key is output in PKCS #8 format and is base64 PEM-encoded. 
 ecrsPrivateKey :: Lens' ExportCertificateResponse (Maybe Text)
 ecrsPrivateKey = lens _ecrsPrivateKey (\ s a -> s{_ecrsPrivateKey = a}) . mapping _Sensitive
 

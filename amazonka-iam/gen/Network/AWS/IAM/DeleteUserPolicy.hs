@@ -21,7 +21,7 @@
 -- Deletes the specified inline policy that is embedded in the specified IAM user.
 --
 --
--- A user can also have managed policies attached to it. To detach a managed policy from a user, use 'DetachUserPolicy' . For more information about policies, refer to <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html Managed Policies and Inline Policies> in the /IAM User Guide/ .
+-- A user can also have managed policies attached to it. To detach a managed policy from a user, use 'DetachUserPolicy' . For more information about policies, refer to <https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html Managed Policies and Inline Policies> in the /IAM User Guide/ .
 --
 module Network.AWS.IAM.DeleteUserPolicy
     (
@@ -45,32 +45,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteUserPolicy' smart constructor.
-data DeleteUserPolicy = DeleteUserPolicy'
-  { _dupUserName   :: !Text
-  , _dupPolicyName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUserPolicy = DeleteUserPolicy'{_dupUserName
+                                          :: !Text,
+                                          _dupPolicyName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUserPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dupUserName' - The name (friendly name, not ARN) identifying the user that the policy is embedded in. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'dupUserName' - The name (friendly name, not ARN) identifying the user that the policy is embedded in. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 --
--- * 'dupPolicyName' - The name identifying the policy document to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'dupPolicyName' - The name identifying the policy document to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 deleteUserPolicy
     :: Text -- ^ 'dupUserName'
     -> Text -- ^ 'dupPolicyName'
     -> DeleteUserPolicy
-deleteUserPolicy pUserName_ pPolicyName_ =
-  DeleteUserPolicy' {_dupUserName = pUserName_, _dupPolicyName = pPolicyName_}
+deleteUserPolicy pUserName_ pPolicyName_
+  = DeleteUserPolicy'{_dupUserName = pUserName_,
+                      _dupPolicyName = pPolicyName_}
 
-
--- | The name (friendly name, not ARN) identifying the user that the policy is embedded in. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name (friendly name, not ARN) identifying the user that the policy is embedded in. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 dupUserName :: Lens' DeleteUserPolicy Text
 dupUserName = lens _dupUserName (\ s a -> s{_dupUserName = a})
 
--- | The name identifying the policy document to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name identifying the policy document to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 dupPolicyName :: Lens' DeleteUserPolicy Text
 dupPolicyName = lens _dupPolicyName (\ s a -> s{_dupPolicyName = a})
 
@@ -98,16 +97,14 @@ instance ToQuery DeleteUserPolicy where
                "PolicyName" =: _dupPolicyName]
 
 -- | /See:/ 'deleteUserPolicyResponse' smart constructor.
-data DeleteUserPolicyResponse =
-  DeleteUserPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUserPolicyResponse = DeleteUserPolicyResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteUserPolicyResponse' with the minimum fields required to make a request.
 --
 deleteUserPolicyResponse
     :: DeleteUserPolicyResponse
 deleteUserPolicyResponse = DeleteUserPolicyResponse'
-
 
 instance NFData DeleteUserPolicyResponse where

@@ -56,20 +56,19 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'updateProduct' smart constructor.
-data UpdateProduct = UpdateProduct'
-  { _upRemoveTags         :: !(Maybe [Text])
-  , _upOwner              :: !(Maybe Text)
-  , _upSupportURL         :: !(Maybe Text)
-  , _upDistributor        :: !(Maybe Text)
-  , _upName               :: !(Maybe Text)
-  , _upAcceptLanguage     :: !(Maybe Text)
-  , _upAddTags            :: !(Maybe [Tag])
-  , _upSupportEmail       :: !(Maybe Text)
-  , _upDescription        :: !(Maybe Text)
-  , _upSupportDescription :: !(Maybe Text)
-  , _upId                 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProduct = UpdateProduct'{_upRemoveTags ::
+                                    !(Maybe [Text]),
+                                    _upOwner :: !(Maybe Text),
+                                    _upSupportURL :: !(Maybe Text),
+                                    _upDistributor :: !(Maybe Text),
+                                    _upName :: !(Maybe Text),
+                                    _upAcceptLanguage :: !(Maybe Text),
+                                    _upAddTags :: !(Maybe [Tag]),
+                                    _upSupportEmail :: !(Maybe Text),
+                                    _upDescription :: !(Maybe Text),
+                                    _upSupportDescription :: !(Maybe Text),
+                                    _upId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateProduct' with the minimum fields required to make a request.
 --
@@ -99,21 +98,13 @@ data UpdateProduct = UpdateProduct'
 updateProduct
     :: Text -- ^ 'upId'
     -> UpdateProduct
-updateProduct pId_ =
-  UpdateProduct'
-    { _upRemoveTags = Nothing
-    , _upOwner = Nothing
-    , _upSupportURL = Nothing
-    , _upDistributor = Nothing
-    , _upName = Nothing
-    , _upAcceptLanguage = Nothing
-    , _upAddTags = Nothing
-    , _upSupportEmail = Nothing
-    , _upDescription = Nothing
-    , _upSupportDescription = Nothing
-    , _upId = pId_
-    }
-
+updateProduct pId_
+  = UpdateProduct'{_upRemoveTags = Nothing,
+                   _upOwner = Nothing, _upSupportURL = Nothing,
+                   _upDistributor = Nothing, _upName = Nothing,
+                   _upAcceptLanguage = Nothing, _upAddTags = Nothing,
+                   _upSupportEmail = Nothing, _upDescription = Nothing,
+                   _upSupportDescription = Nothing, _upId = pId_}
 
 -- | The tags to remove from the product.
 upRemoveTags :: Lens' UpdateProduct [Text]
@@ -207,12 +198,13 @@ instance ToQuery UpdateProduct where
         toQuery = const mempty
 
 -- | /See:/ 'updateProductResponse' smart constructor.
-data UpdateProductResponse = UpdateProductResponse'
-  { _ursProductViewDetail :: !(Maybe ProductViewDetail)
-  , _ursTags              :: !(Maybe [Tag])
-  , _ursResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProductResponse = UpdateProductResponse'{_ursProductViewDetail
+                                                    ::
+                                                    !(Maybe ProductViewDetail),
+                                                    _ursTags :: !(Maybe [Tag]),
+                                                    _ursResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateProductResponse' with the minimum fields required to make a request.
 --
@@ -226,13 +218,11 @@ data UpdateProductResponse = UpdateProductResponse'
 updateProductResponse
     :: Int -- ^ 'ursResponseStatus'
     -> UpdateProductResponse
-updateProductResponse pResponseStatus_ =
-  UpdateProductResponse'
-    { _ursProductViewDetail = Nothing
-    , _ursTags = Nothing
-    , _ursResponseStatus = pResponseStatus_
-    }
-
+updateProductResponse pResponseStatus_
+  = UpdateProductResponse'{_ursProductViewDetail =
+                             Nothing,
+                           _ursTags = Nothing,
+                           _ursResponseStatus = pResponseStatus_}
 
 -- | Information about the product view.
 ursProductViewDetail :: Lens' UpdateProductResponse (Maybe ProductViewDetail)

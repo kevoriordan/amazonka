@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListQualificationRequests@ operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation.
+-- The @ListQualificationRequests@ operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. 
 --
 --
 --
@@ -52,12 +52,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listQualificationRequests' smart constructor.
-data ListQualificationRequests = ListQualificationRequests'
-  { _lqrNextToken           :: !(Maybe Text)
-  , _lqrQualificationTypeId :: !(Maybe Text)
-  , _lqrMaxResults          :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListQualificationRequests = ListQualificationRequests'{_lqrNextToken
+                                                            :: !(Maybe Text),
+                                                            _lqrQualificationTypeId
+                                                            :: !(Maybe Text),
+                                                            _lqrMaxResults ::
+                                                            !(Maybe Nat)}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListQualificationRequests' with the minimum fields required to make a request.
 --
@@ -67,16 +69,13 @@ data ListQualificationRequests = ListQualificationRequests'
 --
 -- * 'lqrQualificationTypeId' - The ID of the QualificationType.
 --
--- * 'lqrMaxResults' - The maximum number of results to return in a single call.
+-- * 'lqrMaxResults' - The maximum number of results to return in a single call. 
 listQualificationRequests
     :: ListQualificationRequests
-listQualificationRequests =
-  ListQualificationRequests'
-    { _lqrNextToken = Nothing
-    , _lqrQualificationTypeId = Nothing
-    , _lqrMaxResults = Nothing
-    }
-
+listQualificationRequests
+  = ListQualificationRequests'{_lqrNextToken = Nothing,
+                               _lqrQualificationTypeId = Nothing,
+                               _lqrMaxResults = Nothing}
 
 -- | Undocumented member.
 lqrNextToken :: Lens' ListQualificationRequests (Maybe Text)
@@ -86,7 +85,7 @@ lqrNextToken = lens _lqrNextToken (\ s a -> s{_lqrNextToken = a})
 lqrQualificationTypeId :: Lens' ListQualificationRequests (Maybe Text)
 lqrQualificationTypeId = lens _lqrQualificationTypeId (\ s a -> s{_lqrQualificationTypeId = a})
 
--- | The maximum number of results to return in a single call.
+-- | The maximum number of results to return in a single call. 
 lqrMaxResults :: Lens' ListQualificationRequests (Maybe Natural)
 lqrMaxResults = lens _lqrMaxResults (\ s a -> s{_lqrMaxResults = a}) . mapping _Nat
 
@@ -140,13 +139,23 @@ instance ToQuery ListQualificationRequests where
         toQuery = const mempty
 
 -- | /See:/ 'listQualificationRequestsResponse' smart constructor.
-data ListQualificationRequestsResponse = ListQualificationRequestsResponse'
-  { _lqrrsQualificationRequests :: !(Maybe [QualificationRequest])
-  , _lqrrsNextToken             :: !(Maybe Text)
-  , _lqrrsNumResults            :: !(Maybe Int)
-  , _lqrrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListQualificationRequestsResponse = ListQualificationRequestsResponse'{_lqrrsQualificationRequests
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [QualificationRequest]),
+                                                                            _lqrrsNextToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _lqrrsNumResults
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Int),
+                                                                            _lqrrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'ListQualificationRequestsResponse' with the minimum fields required to make a request.
 --
@@ -162,14 +171,12 @@ data ListQualificationRequestsResponse = ListQualificationRequestsResponse'
 listQualificationRequestsResponse
     :: Int -- ^ 'lqrrsResponseStatus'
     -> ListQualificationRequestsResponse
-listQualificationRequestsResponse pResponseStatus_ =
-  ListQualificationRequestsResponse'
-    { _lqrrsQualificationRequests = Nothing
-    , _lqrrsNextToken = Nothing
-    , _lqrrsNumResults = Nothing
-    , _lqrrsResponseStatus = pResponseStatus_
-    }
-
+listQualificationRequestsResponse pResponseStatus_
+  = ListQualificationRequestsResponse'{_lqrrsQualificationRequests
+                                         = Nothing,
+                                       _lqrrsNextToken = Nothing,
+                                       _lqrrsNumResults = Nothing,
+                                       _lqrrsResponseStatus = pResponseStatus_}
 
 -- | The Qualification request. The response includes one QualificationRequest element for each Qualification request returned by the query.
 lqrrsQualificationRequests :: Lens' ListQualificationRequestsResponse [QualificationRequest]

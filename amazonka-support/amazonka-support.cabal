@@ -63,12 +63,28 @@ library
         , Network.AWS.Support.Waiters
 
     other-modules:
-          Network.AWS.Support.Types.Product
-        , Network.AWS.Support.Types.Sum
+          Network.AWS.Support.Types.Attachment
+        , Network.AWS.Support.Types.AttachmentDetails
+        , Network.AWS.Support.Types.CaseDetails
+        , Network.AWS.Support.Types.Category
+        , Network.AWS.Support.Types.Communication
+        , Network.AWS.Support.Types.Product
+        , Network.AWS.Support.Types.RecentCaseCommunications
+        , Network.AWS.Support.Types.SeverityLevel
+        , Network.AWS.Support.Types.SupportService
+        , Network.AWS.Support.Types.TrustedAdvisorCategorySpecificSummary
+        , Network.AWS.Support.Types.TrustedAdvisorCheckDescription
+        , Network.AWS.Support.Types.TrustedAdvisorCheckRefreshStatus
+        , Network.AWS.Support.Types.TrustedAdvisorCheckResult
+        , Network.AWS.Support.Types.TrustedAdvisorCheckSummary
+        , Network.AWS.Support.Types.TrustedAdvisorCostOptimizingSummary
+        , Network.AWS.Support.Types.TrustedAdvisorResourceDetail
+        , Network.AWS.Support.Types.TrustedAdvisorResourcesSummary
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-support-test
     type:              exitcode-stdio-1.0
@@ -92,6 +108,7 @@ test-suite amazonka-support-test
         , amazonka-support
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

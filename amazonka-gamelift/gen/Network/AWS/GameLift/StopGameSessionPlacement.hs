@@ -21,27 +21,25 @@
 -- Cancels a game session placement that is in @PENDING@ status. To stop a placement, provide the placement ID values. If successful, the placement is moved to @CANCELLED@ status.
 --
 --
--- Game-session-related operations include:
+--     * 'CreateGameSession' 
 --
---     * 'CreateGameSession'
+--     * 'DescribeGameSessions' 
 --
---     * 'DescribeGameSessions'
+--     * 'DescribeGameSessionDetails' 
 --
---     * 'DescribeGameSessionDetails'
+--     * 'SearchGameSessions' 
 --
---     * 'SearchGameSessions'
+--     * 'UpdateGameSession' 
 --
---     * 'UpdateGameSession'
---
---     * 'GetGameSessionLogUrl'
+--     * 'GetGameSessionLogUrl' 
 --
 --     * Game session placements
 --
---     * 'StartGameSessionPlacement'
+--     * 'StartGameSessionPlacement' 
 --
---     * 'DescribeGameSessionPlacement'
+--     * 'DescribeGameSessionPlacement' 
 --
---     * 'StopGameSessionPlacement'
+--     * 'StopGameSessionPlacement' 
 --
 --
 --
@@ -75,24 +73,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'stopGameSessionPlacement' smart constructor.
-newtype StopGameSessionPlacement = StopGameSessionPlacement'
-  { _sPlacementId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopGameSessionPlacement = StopGameSessionPlacement'{_sPlacementId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'StopGameSessionPlacement' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sPlacementId' - Unique identifier for a game session placement to cancel.
+-- * 'sPlacementId' - A unique identifier for a game session placement to cancel.
 stopGameSessionPlacement
     :: Text -- ^ 'sPlacementId'
     -> StopGameSessionPlacement
-stopGameSessionPlacement pPlacementId_ =
-  StopGameSessionPlacement' {_sPlacementId = pPlacementId_}
+stopGameSessionPlacement pPlacementId_
+  = StopGameSessionPlacement'{_sPlacementId =
+                                pPlacementId_}
 
-
--- | Unique identifier for a game session placement to cancel.
+-- | A unique identifier for a game session placement to cancel.
 sPlacementId :: Lens' StopGameSessionPlacement Text
 sPlacementId = lens _sPlacementId (\ s a -> s{_sPlacementId = a})
 
@@ -136,30 +134,32 @@ instance ToQuery StopGameSessionPlacement where
 --
 --
 -- /See:/ 'stopGameSessionPlacementResponse' smart constructor.
-data StopGameSessionPlacementResponse = StopGameSessionPlacementResponse'
-  { _storsGameSessionPlacement :: !(Maybe GameSessionPlacement)
-  , _storsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopGameSessionPlacementResponse = StopGameSessionPlacementResponse'{_storsGameSessionPlacement
+                                                                          ::
+                                                                          !(Maybe
+                                                                              GameSessionPlacement),
+                                                                          _storsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'StopGameSessionPlacementResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'storsGameSessionPlacement' - Object that describes the canceled game session placement, with @CANCELLED@ status and an end time stamp.
+-- * 'storsGameSessionPlacement' - Object that describes the canceled game session placement, with @CANCELLED@ status and an end time stamp. 
 --
 -- * 'storsResponseStatus' - -- | The response status code.
 stopGameSessionPlacementResponse
     :: Int -- ^ 'storsResponseStatus'
     -> StopGameSessionPlacementResponse
-stopGameSessionPlacementResponse pResponseStatus_ =
-  StopGameSessionPlacementResponse'
-    { _storsGameSessionPlacement = Nothing
-    , _storsResponseStatus = pResponseStatus_
-    }
+stopGameSessionPlacementResponse pResponseStatus_
+  = StopGameSessionPlacementResponse'{_storsGameSessionPlacement
+                                        = Nothing,
+                                      _storsResponseStatus = pResponseStatus_}
 
-
--- | Object that describes the canceled game session placement, with @CANCELLED@ status and an end time stamp.
+-- | Object that describes the canceled game session placement, with @CANCELLED@ status and an end time stamp. 
 storsGameSessionPlacement :: Lens' StopGameSessionPlacementResponse (Maybe GameSessionPlacement)
 storsGameSessionPlacement = lens _storsGameSessionPlacement (\ s a -> s{_storsGameSessionPlacement = a})
 

@@ -51,39 +51,38 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateProject' smart constructor.
-data UpdateProject = UpdateProject'
-  { _upName                     :: !(Maybe Text)
-  , _upDefaultJobTimeoutMinutes :: !(Maybe Int)
-  , _upArn                      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProject = UpdateProject'{_upName ::
+                                    !(Maybe Text),
+                                    _upDefaultJobTimeoutMinutes :: !(Maybe Int),
+                                    _upArn :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upName' - A string representing the new name of the project that you are updating.
+-- * 'upName' - A string that represents the new name of the project that you are updating.
 --
--- * 'upDefaultJobTimeoutMinutes' - The number of minutes a test run in the project will execute before it times out.
+-- * 'upDefaultJobTimeoutMinutes' - The number of minutes a test run in the project executes before it times out.
 --
--- * 'upArn' - The Amazon Resource Name (ARN) of the project whose name you wish to update.
+-- * 'upArn' - The Amazon Resource Name (ARN) of the project whose name to update.
 updateProject
     :: Text -- ^ 'upArn'
     -> UpdateProject
-updateProject pArn_ =
-  UpdateProject'
-    {_upName = Nothing, _upDefaultJobTimeoutMinutes = Nothing, _upArn = pArn_}
+updateProject pArn_
+  = UpdateProject'{_upName = Nothing,
+                   _upDefaultJobTimeoutMinutes = Nothing,
+                   _upArn = pArn_}
 
-
--- | A string representing the new name of the project that you are updating.
+-- | A string that represents the new name of the project that you are updating.
 upName :: Lens' UpdateProject (Maybe Text)
 upName = lens _upName (\ s a -> s{_upName = a})
 
--- | The number of minutes a test run in the project will execute before it times out.
+-- | The number of minutes a test run in the project executes before it times out.
 upDefaultJobTimeoutMinutes :: Lens' UpdateProject (Maybe Int)
 upDefaultJobTimeoutMinutes = lens _upDefaultJobTimeoutMinutes (\ s a -> s{_upDefaultJobTimeoutMinutes = a})
 
--- | The Amazon Resource Name (ARN) of the project whose name you wish to update.
+-- | The Amazon Resource Name (ARN) of the project whose name to update.
 upArn :: Lens' UpdateProject Text
 upArn = lens _upArn (\ s a -> s{_upArn = a})
 
@@ -129,28 +128,27 @@ instance ToQuery UpdateProject where
 --
 --
 -- /See:/ 'updateProjectResponse' smart constructor.
-data UpdateProjectResponse = UpdateProjectResponse'
-  { _uprsProject        :: !(Maybe Project)
-  , _uprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProjectResponse = UpdateProjectResponse'{_uprsProject
+                                                    :: !(Maybe Project),
+                                                    _uprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateProjectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uprsProject' - The project you wish to update.
+-- * 'uprsProject' - The project to update.
 --
 -- * 'uprsResponseStatus' - -- | The response status code.
 updateProjectResponse
     :: Int -- ^ 'uprsResponseStatus'
     -> UpdateProjectResponse
-updateProjectResponse pResponseStatus_ =
-  UpdateProjectResponse'
-    {_uprsProject = Nothing, _uprsResponseStatus = pResponseStatus_}
+updateProjectResponse pResponseStatus_
+  = UpdateProjectResponse'{_uprsProject = Nothing,
+                           _uprsResponseStatus = pResponseStatus_}
 
-
--- | The project you wish to update.
+-- | The project to update.
 uprsProject :: Lens' UpdateProjectResponse (Maybe Project)
 uprsProject = lens _uprsProject (\ s a -> s{_uprsProject = a})
 

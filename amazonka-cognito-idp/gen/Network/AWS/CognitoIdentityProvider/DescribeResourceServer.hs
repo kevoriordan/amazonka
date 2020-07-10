@@ -46,11 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeResourceServer' smart constructor.
-data DescribeResourceServer = DescribeResourceServer'
-  { _desUserPoolId :: !Text
-  , _desIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeResourceServer = DescribeResourceServer'{_desUserPoolId
+                                                      :: !Text,
+                                                      _desIdentifier :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeResourceServer' with the minimum fields required to make a request.
 --
@@ -63,10 +63,10 @@ describeResourceServer
     :: Text -- ^ 'desUserPoolId'
     -> Text -- ^ 'desIdentifier'
     -> DescribeResourceServer
-describeResourceServer pUserPoolId_ pIdentifier_ =
-  DescribeResourceServer'
-    {_desUserPoolId = pUserPoolId_, _desIdentifier = pIdentifier_}
-
+describeResourceServer pUserPoolId_ pIdentifier_
+  = DescribeResourceServer'{_desUserPoolId =
+                              pUserPoolId_,
+                            _desIdentifier = pIdentifier_}
 
 -- | The user pool ID for the user pool that hosts the resource server.
 desUserPoolId :: Lens' DescribeResourceServer Text
@@ -114,11 +114,13 @@ instance ToQuery DescribeResourceServer where
         toQuery = const mempty
 
 -- | /See:/ 'describeResourceServerResponse' smart constructor.
-data DescribeResourceServerResponse = DescribeResourceServerResponse'
-  { _drsrsResponseStatus :: !Int
-  , _drsrsResourceServer :: !ResourceServerType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeResourceServerResponse = DescribeResourceServerResponse'{_drsrsResponseStatus
+                                                                      :: !Int,
+                                                                      _drsrsResourceServer
+                                                                      ::
+                                                                      !ResourceServerType}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeResourceServerResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +133,11 @@ describeResourceServerResponse
     :: Int -- ^ 'drsrsResponseStatus'
     -> ResourceServerType -- ^ 'drsrsResourceServer'
     -> DescribeResourceServerResponse
-describeResourceServerResponse pResponseStatus_ pResourceServer_ =
-  DescribeResourceServerResponse'
-    { _drsrsResponseStatus = pResponseStatus_
-    , _drsrsResourceServer = pResourceServer_
-    }
-
+describeResourceServerResponse pResponseStatus_
+  pResourceServer_
+  = DescribeResourceServerResponse'{_drsrsResponseStatus
+                                      = pResponseStatus_,
+                                    _drsrsResourceServer = pResourceServer_}
 
 -- | -- | The response status code.
 drsrsResponseStatus :: Lens' DescribeResourceServerResponse Int

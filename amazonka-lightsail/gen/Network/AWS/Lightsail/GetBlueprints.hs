@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the list of available instance images, or /blueprints/ . You can use a blueprint to create a new virtual private server already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.
+-- Returns the list of available instance images, or /blueprints/ . You can use a blueprint to create a new instance already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.
 --
 --
 --
@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBlueprints' smart constructor.
-data GetBlueprints = GetBlueprints'
-  { _gbIncludeInactive :: !(Maybe Bool)
-  , _gbPageToken       :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBlueprints = GetBlueprints'{_gbIncludeInactive
+                                    :: !(Maybe Bool),
+                                    _gbPageToken :: !(Maybe Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBlueprints' with the minimum fields required to make a request.
 --
@@ -62,18 +61,18 @@ data GetBlueprints = GetBlueprints'
 --
 -- * 'gbIncludeInactive' - A Boolean value indicating whether to include inactive results in your request.
 --
--- * 'gbPageToken' - A token used for advancing to the next page of results from your get blueprints request.
+-- * 'gbPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetBlueprints@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getBlueprints
     :: GetBlueprints
-getBlueprints =
-  GetBlueprints' {_gbIncludeInactive = Nothing, _gbPageToken = Nothing}
-
+getBlueprints
+  = GetBlueprints'{_gbIncludeInactive = Nothing,
+                   _gbPageToken = Nothing}
 
 -- | A Boolean value indicating whether to include inactive results in your request.
 gbIncludeInactive :: Lens' GetBlueprints (Maybe Bool)
 gbIncludeInactive = lens _gbIncludeInactive (\ s a -> s{_gbIncludeInactive = a})
 
--- | A token used for advancing to the next page of results from your get blueprints request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetBlueprints@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 gbPageToken :: Lens' GetBlueprints (Maybe Text)
 gbPageToken = lens _gbPageToken (\ s a -> s{_gbPageToken = a})
 
@@ -122,12 +121,14 @@ instance ToQuery GetBlueprints where
         toQuery = const mempty
 
 -- | /See:/ 'getBlueprintsResponse' smart constructor.
-data GetBlueprintsResponse = GetBlueprintsResponse'
-  { _gbsrsBlueprints     :: !(Maybe [Blueprint])
-  , _gbsrsNextPageToken  :: !(Maybe Text)
-  , _gbsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBlueprintsResponse = GetBlueprintsResponse'{_gbsrsBlueprints
+                                                    :: !(Maybe [Blueprint]),
+                                                    _gbsrsNextPageToken ::
+                                                    !(Maybe Text),
+                                                    _gbsrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetBlueprintsResponse' with the minimum fields required to make a request.
 --
@@ -135,25 +136,22 @@ data GetBlueprintsResponse = GetBlueprintsResponse'
 --
 -- * 'gbsrsBlueprints' - An array of key-value pairs that contains information about the available blueprints.
 --
--- * 'gbsrsNextPageToken' - A token used for advancing to the next page of results from your get blueprints request.
+-- * 'gbsrsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetBlueprints@ request and specify the next page token using the @pageToken@ parameter.
 --
 -- * 'gbsrsResponseStatus' - -- | The response status code.
 getBlueprintsResponse
     :: Int -- ^ 'gbsrsResponseStatus'
     -> GetBlueprintsResponse
-getBlueprintsResponse pResponseStatus_ =
-  GetBlueprintsResponse'
-    { _gbsrsBlueprints = Nothing
-    , _gbsrsNextPageToken = Nothing
-    , _gbsrsResponseStatus = pResponseStatus_
-    }
-
+getBlueprintsResponse pResponseStatus_
+  = GetBlueprintsResponse'{_gbsrsBlueprints = Nothing,
+                           _gbsrsNextPageToken = Nothing,
+                           _gbsrsResponseStatus = pResponseStatus_}
 
 -- | An array of key-value pairs that contains information about the available blueprints.
 gbsrsBlueprints :: Lens' GetBlueprintsResponse [Blueprint]
 gbsrsBlueprints = lens _gbsrsBlueprints (\ s a -> s{_gbsrsBlueprints = a}) . _Default . _Coerce
 
--- | A token used for advancing to the next page of results from your get blueprints request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetBlueprints@ request and specify the next page token using the @pageToken@ parameter.
 gbsrsNextPageToken :: Lens' GetBlueprintsResponse (Maybe Text)
 gbsrsNextPageToken = lens _gbsrsNextPageToken (\ s a -> s{_gbsrsNextPageToken = a})
 

@@ -43,11 +43,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateFunctionDefinition' smart constructor.
-data UpdateFunctionDefinition = UpdateFunctionDefinition'
-  { _ufdName                 :: !(Maybe Text)
-  , _ufdFunctionDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateFunctionDefinition = UpdateFunctionDefinition'{_ufdName
+                                                          :: !(Maybe Text),
+                                                          _ufdFunctionDefinitionId
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateFunctionDefinition' with the minimum fields required to make a request.
 --
@@ -59,10 +60,9 @@ data UpdateFunctionDefinition = UpdateFunctionDefinition'
 updateFunctionDefinition
     :: Text -- ^ 'ufdFunctionDefinitionId'
     -> UpdateFunctionDefinition
-updateFunctionDefinition pFunctionDefinitionId_ =
-  UpdateFunctionDefinition'
-    {_ufdName = Nothing, _ufdFunctionDefinitionId = pFunctionDefinitionId_}
-
+updateFunctionDefinition pFunctionDefinitionId_
+  = UpdateFunctionDefinition'{_ufdName = Nothing,
+                              _ufdFunctionDefinitionId = pFunctionDefinitionId_}
 
 -- | The name of the definition.
 ufdName :: Lens' UpdateFunctionDefinition (Maybe Text)
@@ -107,10 +107,11 @@ instance ToQuery UpdateFunctionDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'updateFunctionDefinitionResponse' smart constructor.
-newtype UpdateFunctionDefinitionResponse = UpdateFunctionDefinitionResponse'
-  { _ufdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateFunctionDefinitionResponse = UpdateFunctionDefinitionResponse'{_ufdrsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'UpdateFunctionDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +121,9 @@ newtype UpdateFunctionDefinitionResponse = UpdateFunctionDefinitionResponse'
 updateFunctionDefinitionResponse
     :: Int -- ^ 'ufdrsResponseStatus'
     -> UpdateFunctionDefinitionResponse
-updateFunctionDefinitionResponse pResponseStatus_ =
-  UpdateFunctionDefinitionResponse' {_ufdrsResponseStatus = pResponseStatus_}
-
+updateFunctionDefinitionResponse pResponseStatus_
+  = UpdateFunctionDefinitionResponse'{_ufdrsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 ufdrsResponseStatus :: Lens' UpdateFunctionDefinitionResponse Int

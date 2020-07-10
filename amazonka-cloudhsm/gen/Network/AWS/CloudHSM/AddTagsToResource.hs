@@ -52,11 +52,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'addTagsToResource' smart constructor.
-data AddTagsToResource = AddTagsToResource'
-  { _attrResourceARN :: !Text
-  , _attrTagList     :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToResource = AddTagsToResource'{_attrResourceARN
+                                            :: !Text,
+                                            _attrTagList :: ![Tag]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsToResource' with the minimum fields required to make a request.
 --
@@ -68,9 +67,10 @@ data AddTagsToResource = AddTagsToResource'
 addTagsToResource
     :: Text -- ^ 'attrResourceARN'
     -> AddTagsToResource
-addTagsToResource pResourceARN_ =
-  AddTagsToResource' {_attrResourceARN = pResourceARN_, _attrTagList = mempty}
-
+addTagsToResource pResourceARN_
+  = AddTagsToResource'{_attrResourceARN =
+                         pResourceARN_,
+                       _attrTagList = mempty}
 
 -- | The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
 attrResourceARN :: Lens' AddTagsToResource Text
@@ -117,11 +117,12 @@ instance ToQuery AddTagsToResource where
         toQuery = const mempty
 
 -- | /See:/ 'addTagsToResourceResponse' smart constructor.
-data AddTagsToResourceResponse = AddTagsToResourceResponse'
-  { _attrrsResponseStatus :: !Int
-  , _attrrsStatus         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToResourceResponse = AddTagsToResourceResponse'{_attrrsResponseStatus
+                                                            :: !Int,
+                                                            _attrrsStatus ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'AddTagsToResourceResponse' with the minimum fields required to make a request.
 --
@@ -134,10 +135,10 @@ addTagsToResourceResponse
     :: Int -- ^ 'attrrsResponseStatus'
     -> Text -- ^ 'attrrsStatus'
     -> AddTagsToResourceResponse
-addTagsToResourceResponse pResponseStatus_ pStatus_ =
-  AddTagsToResourceResponse'
-    {_attrrsResponseStatus = pResponseStatus_, _attrrsStatus = pStatus_}
-
+addTagsToResourceResponse pResponseStatus_ pStatus_
+  = AddTagsToResourceResponse'{_attrrsResponseStatus =
+                                 pResponseStatus_,
+                               _attrrsStatus = pStatus_}
 
 -- | -- | The response status code.
 attrrsResponseStatus :: Lens' AddTagsToResourceResponse Int

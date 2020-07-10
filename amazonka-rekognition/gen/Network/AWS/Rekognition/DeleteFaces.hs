@@ -48,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteFaces' smart constructor.
-data DeleteFaces = DeleteFaces'
-  { _dfCollectionId :: !Text
-  , _dfFaceIds      :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFaces = DeleteFaces'{_dfCollectionId ::
+                                !Text,
+                                _dfFaceIds :: !(List1 Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFaces' with the minimum fields required to make a request.
 --
@@ -65,10 +64,9 @@ deleteFaces
     :: Text -- ^ 'dfCollectionId'
     -> NonEmpty Text -- ^ 'dfFaceIds'
     -> DeleteFaces
-deleteFaces pCollectionId_ pFaceIds_ =
-  DeleteFaces'
-    {_dfCollectionId = pCollectionId_, _dfFaceIds = _List1 # pFaceIds_}
-
+deleteFaces pCollectionId_ pFaceIds_
+  = DeleteFaces'{_dfCollectionId = pCollectionId_,
+                 _dfFaceIds = _List1 # pFaceIds_}
 
 -- | Collection from which to remove the specific faces.
 dfCollectionId :: Lens' DeleteFaces Text
@@ -114,11 +112,10 @@ instance ToQuery DeleteFaces where
         toQuery = const mempty
 
 -- | /See:/ 'deleteFacesResponse' smart constructor.
-data DeleteFacesResponse = DeleteFacesResponse'
-  { _dfsrsDeletedFaces   :: !(Maybe (List1 Text))
-  , _dfsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFacesResponse = DeleteFacesResponse'{_dfsrsDeletedFaces
+                                                :: !(Maybe (List1 Text)),
+                                                _dfsrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFacesResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +127,9 @@ data DeleteFacesResponse = DeleteFacesResponse'
 deleteFacesResponse
     :: Int -- ^ 'dfsrsResponseStatus'
     -> DeleteFacesResponse
-deleteFacesResponse pResponseStatus_ =
-  DeleteFacesResponse'
-    {_dfsrsDeletedFaces = Nothing, _dfsrsResponseStatus = pResponseStatus_}
-
+deleteFacesResponse pResponseStatus_
+  = DeleteFacesResponse'{_dfsrsDeletedFaces = Nothing,
+                         _dfsrsResponseStatus = pResponseStatus_}
 
 -- | An array of strings (face IDs) of the faces that were deleted.
 dfsrsDeletedFaces :: Lens' DeleteFacesResponse (Maybe (NonEmpty Text))

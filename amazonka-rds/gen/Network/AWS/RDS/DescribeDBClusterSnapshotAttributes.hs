@@ -23,7 +23,7 @@
 --
 -- When sharing snapshots with other AWS accounts, @DescribeDBClusterSnapshotAttributes@ returns the @restore@ attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If @all@ is included in the list of values for the @restore@ attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts.
 --
--- To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the 'ModifyDBClusterSnapshotAttribute' API action.
+-- To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the @ModifyDBClusterSnapshotAttribute@ API action.
 --
 module Network.AWS.RDS.DescribeDBClusterSnapshotAttributes
     (
@@ -48,15 +48,16 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeDBClusterSnapshotAttributes' smart constructor.
-newtype DescribeDBClusterSnapshotAttributes = DescribeDBClusterSnapshotAttributes'
-  { _ddcsaDBClusterSnapshotIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeDBClusterSnapshotAttributes = DescribeDBClusterSnapshotAttributes'{_ddcsaDBClusterSnapshotIdentifier
+                                                                                   ::
+                                                                                   Text}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DescribeDBClusterSnapshotAttributes' with the minimum fields required to make a request.
 --
@@ -66,10 +67,10 @@ newtype DescribeDBClusterSnapshotAttributes = DescribeDBClusterSnapshotAttribute
 describeDBClusterSnapshotAttributes
     :: Text -- ^ 'ddcsaDBClusterSnapshotIdentifier'
     -> DescribeDBClusterSnapshotAttributes
-describeDBClusterSnapshotAttributes pDBClusterSnapshotIdentifier_ =
-  DescribeDBClusterSnapshotAttributes'
-    {_ddcsaDBClusterSnapshotIdentifier = pDBClusterSnapshotIdentifier_}
-
+describeDBClusterSnapshotAttributes
+  pDBClusterSnapshotIdentifier_
+  = DescribeDBClusterSnapshotAttributes'{_ddcsaDBClusterSnapshotIdentifier
+                                           = pDBClusterSnapshotIdentifier_}
 
 -- | The identifier for the DB cluster snapshot to describe the attributes for.
 ddcsaDBClusterSnapshotIdentifier :: Lens' DescribeDBClusterSnapshotAttributes Text
@@ -116,11 +117,16 @@ instance ToQuery DescribeDBClusterSnapshotAttributes
                  _ddcsaDBClusterSnapshotIdentifier]
 
 -- | /See:/ 'describeDBClusterSnapshotAttributesResponse' smart constructor.
-data DescribeDBClusterSnapshotAttributesResponse = DescribeDBClusterSnapshotAttributesResponse'
-  { _ddcsarsDBClusterSnapshotAttributesResult :: !(Maybe DBClusterSnapshotAttributesResult)
-  , _ddcsarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDBClusterSnapshotAttributesResponse = DescribeDBClusterSnapshotAttributesResponse'{_ddcsarsDBClusterSnapshotAttributesResult
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    DBClusterSnapshotAttributesResult),
+                                                                                                _ddcsarsResponseStatus
+                                                                                                ::
+                                                                                                !Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DescribeDBClusterSnapshotAttributesResponse' with the minimum fields required to make a request.
 --
@@ -132,12 +138,12 @@ data DescribeDBClusterSnapshotAttributesResponse = DescribeDBClusterSnapshotAttr
 describeDBClusterSnapshotAttributesResponse
     :: Int -- ^ 'ddcsarsResponseStatus'
     -> DescribeDBClusterSnapshotAttributesResponse
-describeDBClusterSnapshotAttributesResponse pResponseStatus_ =
-  DescribeDBClusterSnapshotAttributesResponse'
-    { _ddcsarsDBClusterSnapshotAttributesResult = Nothing
-    , _ddcsarsResponseStatus = pResponseStatus_
-    }
-
+describeDBClusterSnapshotAttributesResponse
+  pResponseStatus_
+  = DescribeDBClusterSnapshotAttributesResponse'{_ddcsarsDBClusterSnapshotAttributesResult
+                                                   = Nothing,
+                                                 _ddcsarsResponseStatus =
+                                                   pResponseStatus_}
 
 -- | Undocumented member.
 ddcsarsDBClusterSnapshotAttributesResult :: Lens' DescribeDBClusterSnapshotAttributesResponse (Maybe DBClusterSnapshotAttributesResult)

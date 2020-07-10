@@ -21,7 +21,7 @@
 -- Updates a specified user profile.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.UpdateUserProfile
     (
@@ -47,38 +47,35 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateUserProfile' smart constructor.
-data UpdateUserProfile = UpdateUserProfile'
-  { _uupAllowSelfManagement :: !(Maybe Bool)
-  , _uupSSHPublicKey        :: !(Maybe Text)
-  , _uupSSHUsername         :: !(Maybe Text)
-  , _uupIAMUserARN          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateUserProfile = UpdateUserProfile'{_uupAllowSelfManagement
+                                            :: !(Maybe Bool),
+                                            _uupSSHPublicKey :: !(Maybe Text),
+                                            _uupSSHUsername :: !(Maybe Text),
+                                            _uupIAMUserARN :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateUserProfile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uupAllowSelfManagement' - Whether users can specify their own SSH public key through the My Settings page. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Managing User Permissions> .
+-- * 'uupAllowSelfManagement' - Whether users can specify their own SSH public key through the My Settings page. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Managing User Permissions> .
 --
 -- * 'uupSSHPublicKey' - The user's new SSH public key.
 --
--- * 'uupSSHUsername' - The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name.
+-- * 'uupSSHUsername' - The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name. 
 --
 -- * 'uupIAMUserARN' - The user IAM ARN. This can also be a federated user's ARN.
 updateUserProfile
     :: Text -- ^ 'uupIAMUserARN'
     -> UpdateUserProfile
-updateUserProfile pIAMUserARN_ =
-  UpdateUserProfile'
-    { _uupAllowSelfManagement = Nothing
-    , _uupSSHPublicKey = Nothing
-    , _uupSSHUsername = Nothing
-    , _uupIAMUserARN = pIAMUserARN_
-    }
+updateUserProfile pIAMUserARN_
+  = UpdateUserProfile'{_uupAllowSelfManagement =
+                         Nothing,
+                       _uupSSHPublicKey = Nothing,
+                       _uupSSHUsername = Nothing,
+                       _uupIAMUserARN = pIAMUserARN_}
 
-
--- | Whether users can specify their own SSH public key through the My Settings page. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Managing User Permissions> .
+-- | Whether users can specify their own SSH public key through the My Settings page. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Managing User Permissions> .
 uupAllowSelfManagement :: Lens' UpdateUserProfile (Maybe Bool)
 uupAllowSelfManagement = lens _uupAllowSelfManagement (\ s a -> s{_uupAllowSelfManagement = a})
 
@@ -86,7 +83,7 @@ uupAllowSelfManagement = lens _uupAllowSelfManagement (\ s a -> s{_uupAllowSelfM
 uupSSHPublicKey :: Lens' UpdateUserProfile (Maybe Text)
 uupSSHPublicKey = lens _uupSSHPublicKey (\ s a -> s{_uupSSHPublicKey = a})
 
--- | The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name.
+-- | The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name. 
 uupSSHUsername :: Lens' UpdateUserProfile (Maybe Text)
 uupSSHUsername = lens _uupSSHUsername (\ s a -> s{_uupSSHUsername = a})
 
@@ -130,16 +127,15 @@ instance ToQuery UpdateUserProfile where
         toQuery = const mempty
 
 -- | /See:/ 'updateUserProfileResponse' smart constructor.
-data UpdateUserProfileResponse =
-  UpdateUserProfileResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateUserProfileResponse = UpdateUserProfileResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateUserProfileResponse' with the minimum fields required to make a request.
 --
 updateUserProfileResponse
     :: UpdateUserProfileResponse
-updateUserProfileResponse = UpdateUserProfileResponse'
-
+updateUserProfileResponse
+  = UpdateUserProfileResponse'
 
 instance NFData UpdateUserProfileResponse where

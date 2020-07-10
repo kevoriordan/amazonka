@@ -46,10 +46,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteUser' smart constructor.
-newtype DeleteUser = DeleteUser'
-  { _duAccessToken :: Sensitive Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+newtype DeleteUser = DeleteUser'{_duAccessToken ::
+                                 Sensitive Text}
+                       deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUser' with the minimum fields required to make a request.
 --
@@ -59,9 +58,9 @@ newtype DeleteUser = DeleteUser'
 deleteUser
     :: Text -- ^ 'duAccessToken'
     -> DeleteUser
-deleteUser pAccessToken_ =
-  DeleteUser' {_duAccessToken = _Sensitive # pAccessToken_}
-
+deleteUser pAccessToken_
+  = DeleteUser'{_duAccessToken =
+                  _Sensitive # pAccessToken_}
 
 -- | The access token from a request to delete a user.
 duAccessToken :: Lens' DeleteUser Text
@@ -98,16 +97,13 @@ instance ToQuery DeleteUser where
         toQuery = const mempty
 
 -- | /See:/ 'deleteUserResponse' smart constructor.
-data DeleteUserResponse =
-  DeleteUserResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUserResponse = DeleteUserResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUserResponse' with the minimum fields required to make a request.
 --
 deleteUserResponse
     :: DeleteUserResponse
 deleteUserResponse = DeleteUserResponse'
-
 
 instance NFData DeleteUserResponse where

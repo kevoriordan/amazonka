@@ -50,11 +50,10 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'listJobs' smart constructor.
-data ListJobs = ListJobs'
-  { _ljNextToken  :: !(Maybe Text)
-  , _ljMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListJobs = ListJobs'{_ljNextToken ::
+                          !(Maybe Text),
+                          _ljMaxResults :: !(Maybe Nat)}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListJobs' with the minimum fields required to make a request.
 --
@@ -65,8 +64,9 @@ data ListJobs = ListJobs'
 -- * 'ljMaxResults' - The number of @JobListEntry@ objects to return.
 listJobs
     :: ListJobs
-listJobs = ListJobs' {_ljNextToken = Nothing, _ljMaxResults = Nothing}
-
+listJobs
+  = ListJobs'{_ljNextToken = Nothing,
+              _ljMaxResults = Nothing}
 
 -- | HTTP requests are stateless. To identify what object comes "next" in the list of @JobListEntry@ objects, you have the option of specifying @NextToken@ as the starting point for your returned list.
 ljNextToken :: Lens' ListJobs (Maybe Text)
@@ -122,18 +122,17 @@ instance ToQuery ListJobs where
         toQuery = const mempty
 
 -- | /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse'
-  { _ljrsJobListEntries :: !(Maybe [JobListEntry])
-  , _ljrsNextToken      :: !(Maybe Text)
-  , _ljrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListJobsResponse = ListJobsResponse'{_ljrsJobListEntries
+                                          :: !(Maybe [JobListEntry]),
+                                          _ljrsNextToken :: !(Maybe Text),
+                                          _ljrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ljrsJobListEntries' - Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs.
+-- * 'ljrsJobListEntries' - Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. 
 --
 -- * 'ljrsNextToken' - HTTP requests are stateless. If you use this automatically generated @NextToken@ value in your next @ListJobs@ call, your returned @JobListEntry@ objects will start from this point in the array.
 --
@@ -141,15 +140,12 @@ data ListJobsResponse = ListJobsResponse'
 listJobsResponse
     :: Int -- ^ 'ljrsResponseStatus'
     -> ListJobsResponse
-listJobsResponse pResponseStatus_ =
-  ListJobsResponse'
-    { _ljrsJobListEntries = Nothing
-    , _ljrsNextToken = Nothing
-    , _ljrsResponseStatus = pResponseStatus_
-    }
+listJobsResponse pResponseStatus_
+  = ListJobsResponse'{_ljrsJobListEntries = Nothing,
+                      _ljrsNextToken = Nothing,
+                      _ljrsResponseStatus = pResponseStatus_}
 
-
--- | Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs.
+-- | Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. 
 ljrsJobListEntries :: Lens' ListJobsResponse [JobListEntry]
 ljrsJobListEntries = lens _ljrsJobListEntries (\ s a -> s{_ljrsJobListEntries = a}) . _Default . _Coerce
 

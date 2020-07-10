@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteOpenIdConnectProvider' smart constructor.
-newtype DeleteOpenIdConnectProvider = DeleteOpenIdConnectProvider'
-  { _doicpOpenIdConnectProviderARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteOpenIdConnectProvider = DeleteOpenIdConnectProvider'{_doicpOpenIdConnectProviderARN
+                                                                   :: Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteOpenIdConnectProvider' with the minimum fields required to make a request.
 --
@@ -59,10 +59,10 @@ newtype DeleteOpenIdConnectProvider = DeleteOpenIdConnectProvider'
 deleteOpenIdConnectProvider
     :: Text -- ^ 'doicpOpenIdConnectProviderARN'
     -> DeleteOpenIdConnectProvider
-deleteOpenIdConnectProvider pOpenIdConnectProviderARN_ =
-  DeleteOpenIdConnectProvider'
-    {_doicpOpenIdConnectProviderARN = pOpenIdConnectProviderARN_}
-
+deleteOpenIdConnectProvider
+  pOpenIdConnectProviderARN_
+  = DeleteOpenIdConnectProvider'{_doicpOpenIdConnectProviderARN
+                                   = pOpenIdConnectProviderARN_}
 
 -- | The Amazon Resource Name (ARN) of the IAM OpenID Connect provider resource object to delete. You can get a list of OpenID Connect provider resource ARNs by using the 'ListOpenIDConnectProviders' operation.
 doicpOpenIdConnectProviderARN :: Lens' DeleteOpenIdConnectProvider Text
@@ -95,17 +95,16 @@ instance ToQuery DeleteOpenIdConnectProvider where
                  _doicpOpenIdConnectProviderARN]
 
 -- | /See:/ 'deleteOpenIdConnectProviderResponse' smart constructor.
-data DeleteOpenIdConnectProviderResponse =
-  DeleteOpenIdConnectProviderResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteOpenIdConnectProviderResponse = DeleteOpenIdConnectProviderResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteOpenIdConnectProviderResponse' with the minimum fields required to make a request.
 --
 deleteOpenIdConnectProviderResponse
     :: DeleteOpenIdConnectProviderResponse
-deleteOpenIdConnectProviderResponse = DeleteOpenIdConnectProviderResponse'
-
+deleteOpenIdConnectProviderResponse
+  = DeleteOpenIdConnectProviderResponse'
 
 instance NFData DeleteOpenIdConnectProviderResponse
          where

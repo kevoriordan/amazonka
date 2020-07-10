@@ -48,13 +48,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startThingRegistrationTask' smart constructor.
-data StartThingRegistrationTask = StartThingRegistrationTask'
-  { _strtTemplateBody    :: !Text
-  , _strtInputFileBucket :: !Text
-  , _strtInputFileKey    :: !Text
-  , _strtRoleARN         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartThingRegistrationTask = StartThingRegistrationTask'{_strtTemplateBody
+                                                              :: !Text,
+                                                              _strtInputFileBucket
+                                                              :: !Text,
+                                                              _strtInputFileKey
+                                                              :: !Text,
+                                                              _strtRoleARN ::
+                                                              !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'StartThingRegistrationTask' with the minimum fields required to make a request.
 --
@@ -73,14 +76,13 @@ startThingRegistrationTask
     -> Text -- ^ 'strtInputFileKey'
     -> Text -- ^ 'strtRoleARN'
     -> StartThingRegistrationTask
-startThingRegistrationTask pTemplateBody_ pInputFileBucket_ pInputFileKey_ pRoleARN_ =
-  StartThingRegistrationTask'
-    { _strtTemplateBody = pTemplateBody_
-    , _strtInputFileBucket = pInputFileBucket_
-    , _strtInputFileKey = pInputFileKey_
-    , _strtRoleARN = pRoleARN_
-    }
-
+startThingRegistrationTask pTemplateBody_
+  pInputFileBucket_ pInputFileKey_ pRoleARN_
+  = StartThingRegistrationTask'{_strtTemplateBody =
+                                  pTemplateBody_,
+                                _strtInputFileBucket = pInputFileBucket_,
+                                _strtInputFileKey = pInputFileKey_,
+                                _strtRoleARN = pRoleARN_}
 
 -- | The provisioning template.
 strtTemplateBody :: Lens' StartThingRegistrationTask Text
@@ -131,11 +133,15 @@ instance ToQuery StartThingRegistrationTask where
         toQuery = const mempty
 
 -- | /See:/ 'startThingRegistrationTaskResponse' smart constructor.
-data StartThingRegistrationTaskResponse = StartThingRegistrationTaskResponse'
-  { _strtrsTaskId         :: !(Maybe Text)
-  , _strtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartThingRegistrationTaskResponse = StartThingRegistrationTaskResponse'{_strtrsTaskId
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _strtrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'StartThingRegistrationTaskResponse' with the minimum fields required to make a request.
 --
@@ -147,10 +153,11 @@ data StartThingRegistrationTaskResponse = StartThingRegistrationTaskResponse'
 startThingRegistrationTaskResponse
     :: Int -- ^ 'strtrsResponseStatus'
     -> StartThingRegistrationTaskResponse
-startThingRegistrationTaskResponse pResponseStatus_ =
-  StartThingRegistrationTaskResponse'
-    {_strtrsTaskId = Nothing, _strtrsResponseStatus = pResponseStatus_}
-
+startThingRegistrationTaskResponse pResponseStatus_
+  = StartThingRegistrationTaskResponse'{_strtrsTaskId =
+                                          Nothing,
+                                        _strtrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | The bulk thing provisioning task ID.
 strtrsTaskId :: Lens' StartThingRegistrationTaskResponse (Maybe Text)

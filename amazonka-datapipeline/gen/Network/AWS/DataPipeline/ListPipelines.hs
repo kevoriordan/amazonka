@@ -54,10 +54,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listPipelines' smart constructor.
-newtype ListPipelines = ListPipelines'
-  { _lpMarker :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListPipelines = ListPipelines'{_lpMarker ::
+                                       Maybe Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPipelines' with the minimum fields required to make a request.
 --
@@ -66,8 +65,7 @@ newtype ListPipelines = ListPipelines'
 -- * 'lpMarker' - The starting point for the results to be returned. For the first call, this value should be empty. As long as there are more results, continue to call @ListPipelines@ with the marker value from the previous call to retrieve the next set of results.
 listPipelines
     :: ListPipelines
-listPipelines = ListPipelines' {_lpMarker = Nothing}
-
+listPipelines = ListPipelines'{_lpMarker = Nothing}
 
 -- | The starting point for the results to be returned. For the first call, this value should be empty. As long as there are more results, continue to call @ListPipelines@ with the marker value from the previous call to retrieve the next set of results.
 lpMarker :: Lens' ListPipelines (Maybe Text)
@@ -119,13 +117,15 @@ instance ToQuery ListPipelines where
 --
 --
 -- /See:/ 'listPipelinesResponse' smart constructor.
-data ListPipelinesResponse = ListPipelinesResponse'
-  { _lprsHasMoreResults :: !(Maybe Bool)
-  , _lprsMarker         :: !(Maybe Text)
-  , _lprsResponseStatus :: !Int
-  , _lprsPipelineIdList :: ![PipelineIdName]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPipelinesResponse = ListPipelinesResponse'{_lprsHasMoreResults
+                                                    :: !(Maybe Bool),
+                                                    _lprsMarker ::
+                                                    !(Maybe Text),
+                                                    _lprsResponseStatus :: !Int,
+                                                    _lprsPipelineIdList ::
+                                                    ![PipelineIdName]}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListPipelinesResponse' with the minimum fields required to make a request.
 --
@@ -141,14 +141,12 @@ data ListPipelinesResponse = ListPipelinesResponse'
 listPipelinesResponse
     :: Int -- ^ 'lprsResponseStatus'
     -> ListPipelinesResponse
-listPipelinesResponse pResponseStatus_ =
-  ListPipelinesResponse'
-    { _lprsHasMoreResults = Nothing
-    , _lprsMarker = Nothing
-    , _lprsResponseStatus = pResponseStatus_
-    , _lprsPipelineIdList = mempty
-    }
-
+listPipelinesResponse pResponseStatus_
+  = ListPipelinesResponse'{_lprsHasMoreResults =
+                             Nothing,
+                           _lprsMarker = Nothing,
+                           _lprsResponseStatus = pResponseStatus_,
+                           _lprsPipelineIdList = mempty}
 
 -- | Indicates whether there are more results that can be obtained by a subsequent call.
 lprsHasMoreResults :: Lens' ListPipelinesResponse (Maybe Bool)

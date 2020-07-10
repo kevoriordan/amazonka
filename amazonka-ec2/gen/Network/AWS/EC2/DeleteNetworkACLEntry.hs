@@ -44,18 +44,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteNetworkAclEntry.
---
---
---
--- /See:/ 'deleteNetworkACLEntry' smart constructor.
-data DeleteNetworkACLEntry = DeleteNetworkACLEntry'
-  { _dnaeDryRun       :: !(Maybe Bool)
-  , _dnaeEgress       :: !Bool
-  , _dnaeNetworkACLId :: !Text
-  , _dnaeRuleNumber   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteNetworkACLEntry' smart constructor.
+data DeleteNetworkACLEntry = DeleteNetworkACLEntry'{_dnaeDryRun
+                                                    :: !(Maybe Bool),
+                                                    _dnaeEgress :: !Bool,
+                                                    _dnaeNetworkACLId :: !Text,
+                                                    _dnaeRuleNumber :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteNetworkACLEntry' with the minimum fields required to make a request.
 --
@@ -73,14 +69,12 @@ deleteNetworkACLEntry
     -> Text -- ^ 'dnaeNetworkACLId'
     -> Int -- ^ 'dnaeRuleNumber'
     -> DeleteNetworkACLEntry
-deleteNetworkACLEntry pEgress_ pNetworkACLId_ pRuleNumber_ =
-  DeleteNetworkACLEntry'
-    { _dnaeDryRun = Nothing
-    , _dnaeEgress = pEgress_
-    , _dnaeNetworkACLId = pNetworkACLId_
-    , _dnaeRuleNumber = pRuleNumber_
-    }
-
+deleteNetworkACLEntry pEgress_ pNetworkACLId_
+  pRuleNumber_
+  = DeleteNetworkACLEntry'{_dnaeDryRun = Nothing,
+                           _dnaeEgress = pEgress_,
+                           _dnaeNetworkACLId = pNetworkACLId_,
+                           _dnaeRuleNumber = pRuleNumber_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 dnaeDryRun :: Lens' DeleteNetworkACLEntry (Maybe Bool)
@@ -124,16 +118,15 @@ instance ToQuery DeleteNetworkACLEntry where
                "RuleNumber" =: _dnaeRuleNumber]
 
 -- | /See:/ 'deleteNetworkACLEntryResponse' smart constructor.
-data DeleteNetworkACLEntryResponse =
-  DeleteNetworkACLEntryResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNetworkACLEntryResponse = DeleteNetworkACLEntryResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteNetworkACLEntryResponse' with the minimum fields required to make a request.
 --
 deleteNetworkACLEntryResponse
     :: DeleteNetworkACLEntryResponse
-deleteNetworkACLEntryResponse = DeleteNetworkACLEntryResponse'
-
+deleteNetworkACLEntryResponse
+  = DeleteNetworkACLEntryResponse'
 
 instance NFData DeleteNetworkACLEntryResponse where

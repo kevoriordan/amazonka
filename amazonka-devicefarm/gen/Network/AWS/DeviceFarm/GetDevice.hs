@@ -49,10 +49,8 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDevice' smart constructor.
-newtype GetDevice = GetDevice'
-  { _gdArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDevice = GetDevice'{_gdArn :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDevice' with the minimum fields required to make a request.
 --
@@ -62,8 +60,7 @@ newtype GetDevice = GetDevice'
 getDevice
     :: Text -- ^ 'gdArn'
     -> GetDevice
-getDevice pArn_ = GetDevice' {_gdArn = pArn_}
-
+getDevice pArn_ = GetDevice'{_gdArn = pArn_}
 
 -- | The device type's ARN.
 gdArn :: Lens' GetDevice Text
@@ -106,28 +103,26 @@ instance ToQuery GetDevice where
 --
 --
 -- /See:/ 'getDeviceResponse' smart constructor.
-data GetDeviceResponse = GetDeviceResponse'
-  { _gdrsDevice         :: !(Maybe Device)
-  , _gdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeviceResponse = GetDeviceResponse'{_gdrsDevice
+                                            :: !(Maybe Device),
+                                            _gdrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDeviceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdrsDevice' - An object containing information about the requested device.
+-- * 'gdrsDevice' - An object that contains information about the requested device.
 --
 -- * 'gdrsResponseStatus' - -- | The response status code.
 getDeviceResponse
     :: Int -- ^ 'gdrsResponseStatus'
     -> GetDeviceResponse
-getDeviceResponse pResponseStatus_ =
-  GetDeviceResponse'
-    {_gdrsDevice = Nothing, _gdrsResponseStatus = pResponseStatus_}
+getDeviceResponse pResponseStatus_
+  = GetDeviceResponse'{_gdrsDevice = Nothing,
+                       _gdrsResponseStatus = pResponseStatus_}
 
-
--- | An object containing information about the requested device.
+-- | An object that contains information about the requested device.
 gdrsDevice :: Lens' GetDeviceResponse (Maybe Device)
 gdrsDevice = lens _gdrsDevice (\ s a -> s{_gdrsDevice = a})
 

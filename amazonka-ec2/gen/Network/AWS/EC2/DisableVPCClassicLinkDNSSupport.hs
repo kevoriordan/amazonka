@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information about ClassicLink, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve to public IP addresses when addressed between a linked EC2-Classic instance and instances in the VPC to which it's linked. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 --
 module Network.AWS.EC2.DisableVPCClassicLinkDNSSupport
@@ -44,15 +44,13 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DisableVpcClassicLinkDnsSupport.
---
---
---
--- /See:/ 'disableVPCClassicLinkDNSSupport' smart constructor.
-newtype DisableVPCClassicLinkDNSSupport = DisableVPCClassicLinkDNSSupport'
-  { _dvcldsVPCId :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'disableVPCClassicLinkDNSSupport' smart constructor.
+newtype DisableVPCClassicLinkDNSSupport = DisableVPCClassicLinkDNSSupport'{_dvcldsVPCId
+                                                                           ::
+                                                                           Maybe
+                                                                             Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DisableVPCClassicLinkDNSSupport' with the minimum fields required to make a request.
 --
@@ -61,9 +59,9 @@ newtype DisableVPCClassicLinkDNSSupport = DisableVPCClassicLinkDNSSupport'
 -- * 'dvcldsVPCId' - The ID of the VPC.
 disableVPCClassicLinkDNSSupport
     :: DisableVPCClassicLinkDNSSupport
-disableVPCClassicLinkDNSSupport =
-  DisableVPCClassicLinkDNSSupport' {_dvcldsVPCId = Nothing}
-
+disableVPCClassicLinkDNSSupport
+  = DisableVPCClassicLinkDNSSupport'{_dvcldsVPCId =
+                                       Nothing}
 
 -- | The ID of the VPC.
 dvcldsVPCId :: Lens' DisableVPCClassicLinkDNSSupport (Maybe Text)
@@ -101,16 +99,16 @@ instance ToQuery DisableVPCClassicLinkDNSSupport
                "Version" =: ("2016-11-15" :: ByteString),
                "VpcId" =: _dvcldsVPCId]
 
--- | Contains the output of DisableVpcClassicLinkDnsSupport.
---
---
---
--- /See:/ 'disableVPCClassicLinkDNSSupportResponse' smart constructor.
-data DisableVPCClassicLinkDNSSupportResponse = DisableVPCClassicLinkDNSSupportResponse'
-  { _dvcldsrsReturn         :: !(Maybe Bool)
-  , _dvcldsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'disableVPCClassicLinkDNSSupportResponse' smart constructor.
+data DisableVPCClassicLinkDNSSupportResponse = DisableVPCClassicLinkDNSSupportResponse'{_dvcldsrsReturn
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Bool),
+                                                                                        _dvcldsrsResponseStatus
+                                                                                        ::
+                                                                                        !Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DisableVPCClassicLinkDNSSupportResponse' with the minimum fields required to make a request.
 --
@@ -122,10 +120,12 @@ data DisableVPCClassicLinkDNSSupportResponse = DisableVPCClassicLinkDNSSupportRe
 disableVPCClassicLinkDNSSupportResponse
     :: Int -- ^ 'dvcldsrsResponseStatus'
     -> DisableVPCClassicLinkDNSSupportResponse
-disableVPCClassicLinkDNSSupportResponse pResponseStatus_ =
-  DisableVPCClassicLinkDNSSupportResponse'
-    {_dvcldsrsReturn = Nothing, _dvcldsrsResponseStatus = pResponseStatus_}
-
+disableVPCClassicLinkDNSSupportResponse
+  pResponseStatus_
+  = DisableVPCClassicLinkDNSSupportResponse'{_dvcldsrsReturn
+                                               = Nothing,
+                                             _dvcldsrsResponseStatus =
+                                               pResponseStatus_}
 
 -- | Returns @true@ if the request succeeds; otherwise, it returns an error.
 dvcldsrsReturn :: Lens' DisableVPCClassicLinkDNSSupportResponse (Maybe Bool)

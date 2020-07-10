@@ -33,7 +33,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAFRegional.CreateSizeConstraintSet
     (
@@ -61,11 +61,12 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'createSizeConstraintSet' smart constructor.
-data CreateSizeConstraintSet = CreateSizeConstraintSet'
-  { _cscsName        :: !Text
-  , _cscsChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSizeConstraintSet = CreateSizeConstraintSet'{_cscsName
+                                                        :: !Text,
+                                                        _cscsChangeToken ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateSizeConstraintSet' with the minimum fields required to make a request.
 --
@@ -78,10 +79,9 @@ createSizeConstraintSet
     :: Text -- ^ 'cscsName'
     -> Text -- ^ 'cscsChangeToken'
     -> CreateSizeConstraintSet
-createSizeConstraintSet pName_ pChangeToken_ =
-  CreateSizeConstraintSet'
-    {_cscsName = pName_, _cscsChangeToken = pChangeToken_}
-
+createSizeConstraintSet pName_ pChangeToken_
+  = CreateSizeConstraintSet'{_cscsName = pName_,
+                             _cscsChangeToken = pChangeToken_}
 
 -- | A friendly name or description of the 'SizeConstraintSet' . You can't change @Name@ after you create a @SizeConstraintSet@ .
 cscsName :: Lens' CreateSizeConstraintSet Text
@@ -130,12 +130,18 @@ instance ToQuery CreateSizeConstraintSet where
         toQuery = const mempty
 
 -- | /See:/ 'createSizeConstraintSetResponse' smart constructor.
-data CreateSizeConstraintSetResponse = CreateSizeConstraintSetResponse'
-  { _cscsrsSizeConstraintSet :: !(Maybe SizeConstraintSet)
-  , _cscsrsChangeToken       :: !(Maybe Text)
-  , _cscsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSizeConstraintSetResponse = CreateSizeConstraintSetResponse'{_cscsrsSizeConstraintSet
+                                                                        ::
+                                                                        !(Maybe
+                                                                            SizeConstraintSet),
+                                                                        _cscsrsChangeToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _cscsrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateSizeConstraintSetResponse' with the minimum fields required to make a request.
 --
@@ -149,13 +155,11 @@ data CreateSizeConstraintSetResponse = CreateSizeConstraintSetResponse'
 createSizeConstraintSetResponse
     :: Int -- ^ 'cscsrsResponseStatus'
     -> CreateSizeConstraintSetResponse
-createSizeConstraintSetResponse pResponseStatus_ =
-  CreateSizeConstraintSetResponse'
-    { _cscsrsSizeConstraintSet = Nothing
-    , _cscsrsChangeToken = Nothing
-    , _cscsrsResponseStatus = pResponseStatus_
-    }
-
+createSizeConstraintSetResponse pResponseStatus_
+  = CreateSizeConstraintSetResponse'{_cscsrsSizeConstraintSet
+                                       = Nothing,
+                                     _cscsrsChangeToken = Nothing,
+                                     _cscsrsResponseStatus = pResponseStatus_}
 
 -- | A 'SizeConstraintSet' that contains no @SizeConstraint@ objects.
 cscsrsSizeConstraintSet :: Lens' CreateSizeConstraintSetResponse (Maybe SizeConstraintSet)

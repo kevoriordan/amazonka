@@ -43,11 +43,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putNotificationChannel' smart constructor.
-data PutNotificationChannel = PutNotificationChannel'
-  { _pncSNSTopicARN :: !Text
-  , _pncSNSRoleName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutNotificationChannel = PutNotificationChannel'{_pncSNSTopicARN
+                                                      :: !Text,
+                                                      _pncSNSRoleName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'PutNotificationChannel' with the minimum fields required to make a request.
 --
@@ -55,21 +55,21 @@ data PutNotificationChannel = PutNotificationChannel'
 --
 -- * 'pncSNSTopicARN' - The Amazon Resource Name (ARN) of the SNS topic that collects notifications from AWS Firewall Manager.
 --
--- * 'pncSNSRoleName' - The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to record AWS Firewall Manager activity.
+-- * 'pncSNSRoleName' - The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to record AWS Firewall Manager activity. 
 putNotificationChannel
     :: Text -- ^ 'pncSNSTopicARN'
     -> Text -- ^ 'pncSNSRoleName'
     -> PutNotificationChannel
-putNotificationChannel pSNSTopicARN_ pSNSRoleName_ =
-  PutNotificationChannel'
-    {_pncSNSTopicARN = pSNSTopicARN_, _pncSNSRoleName = pSNSRoleName_}
-
+putNotificationChannel pSNSTopicARN_ pSNSRoleName_
+  = PutNotificationChannel'{_pncSNSTopicARN =
+                              pSNSTopicARN_,
+                            _pncSNSRoleName = pSNSRoleName_}
 
 -- | The Amazon Resource Name (ARN) of the SNS topic that collects notifications from AWS Firewall Manager.
 pncSNSTopicARN :: Lens' PutNotificationChannel Text
 pncSNSTopicARN = lens _pncSNSTopicARN (\ s a -> s{_pncSNSTopicARN = a})
 
--- | The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to record AWS Firewall Manager activity.
+-- | The Amazon Resource Name (ARN) of the IAM role that allows Amazon SNS to record AWS Firewall Manager activity. 
 pncSNSRoleName :: Lens' PutNotificationChannel Text
 pncSNSRoleName = lens _pncSNSRoleName (\ s a -> s{_pncSNSRoleName = a})
 
@@ -108,16 +108,15 @@ instance ToQuery PutNotificationChannel where
         toQuery = const mempty
 
 -- | /See:/ 'putNotificationChannelResponse' smart constructor.
-data PutNotificationChannelResponse =
-  PutNotificationChannelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutNotificationChannelResponse = PutNotificationChannelResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'PutNotificationChannelResponse' with the minimum fields required to make a request.
 --
 putNotificationChannelResponse
     :: PutNotificationChannelResponse
-putNotificationChannelResponse = PutNotificationChannelResponse'
-
+putNotificationChannelResponse
+  = PutNotificationChannelResponse'
 
 instance NFData PutNotificationChannelResponse where

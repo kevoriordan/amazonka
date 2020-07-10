@@ -47,12 +47,13 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'updateAssociationStatus' smart constructor.
-data UpdateAssociationStatus = UpdateAssociationStatus'
-  { _uasName              :: !Text
-  , _uasInstanceId        :: !Text
-  , _uasAssociationStatus :: !AssociationStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAssociationStatus = UpdateAssociationStatus'{_uasName
+                                                        :: !Text,
+                                                        _uasInstanceId :: !Text,
+                                                        _uasAssociationStatus ::
+                                                        !AssociationStatus}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateAssociationStatus' with the minimum fields required to make a request.
 --
@@ -68,13 +69,11 @@ updateAssociationStatus
     -> Text -- ^ 'uasInstanceId'
     -> AssociationStatus -- ^ 'uasAssociationStatus'
     -> UpdateAssociationStatus
-updateAssociationStatus pName_ pInstanceId_ pAssociationStatus_ =
-  UpdateAssociationStatus'
-    { _uasName = pName_
-    , _uasInstanceId = pInstanceId_
-    , _uasAssociationStatus = pAssociationStatus_
-    }
-
+updateAssociationStatus pName_ pInstanceId_
+  pAssociationStatus_
+  = UpdateAssociationStatus'{_uasName = pName_,
+                             _uasInstanceId = pInstanceId_,
+                             _uasAssociationStatus = pAssociationStatus_}
 
 -- | The name of the Systems Manager document.
 uasName :: Lens' UpdateAssociationStatus Text
@@ -127,11 +126,14 @@ instance ToQuery UpdateAssociationStatus where
         toQuery = const mempty
 
 -- | /See:/ 'updateAssociationStatusResponse' smart constructor.
-data UpdateAssociationStatusResponse = UpdateAssociationStatusResponse'
-  { _uasrsAssociationDescription :: !(Maybe AssociationDescription)
-  , _uasrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAssociationStatusResponse = UpdateAssociationStatusResponse'{_uasrsAssociationDescription
+                                                                        ::
+                                                                        !(Maybe
+                                                                            AssociationDescription),
+                                                                        _uasrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateAssociationStatusResponse' with the minimum fields required to make a request.
 --
@@ -143,12 +145,10 @@ data UpdateAssociationStatusResponse = UpdateAssociationStatusResponse'
 updateAssociationStatusResponse
     :: Int -- ^ 'uasrsResponseStatus'
     -> UpdateAssociationStatusResponse
-updateAssociationStatusResponse pResponseStatus_ =
-  UpdateAssociationStatusResponse'
-    { _uasrsAssociationDescription = Nothing
-    , _uasrsResponseStatus = pResponseStatus_
-    }
-
+updateAssociationStatusResponse pResponseStatus_
+  = UpdateAssociationStatusResponse'{_uasrsAssociationDescription
+                                       = Nothing,
+                                     _uasrsResponseStatus = pResponseStatus_}
 
 -- | Information about the association.
 uasrsAssociationDescription :: Lens' UpdateAssociationStatusResponse (Maybe AssociationDescription)

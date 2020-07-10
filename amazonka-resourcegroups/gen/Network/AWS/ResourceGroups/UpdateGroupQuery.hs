@@ -46,11 +46,10 @@ import Network.AWS.ResourceGroups.Types.Product
 import Network.AWS.Response
 
 -- | /See:/ 'updateGroupQuery' smart constructor.
-data UpdateGroupQuery = UpdateGroupQuery'
-  { _ugqGroupName     :: !Text
-  , _ugqResourceQuery :: !ResourceQuery
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGroupQuery = UpdateGroupQuery'{_ugqGroupName
+                                          :: !Text,
+                                          _ugqResourceQuery :: !ResourceQuery}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateGroupQuery' with the minimum fields required to make a request.
 --
@@ -63,10 +62,9 @@ updateGroupQuery
     :: Text -- ^ 'ugqGroupName'
     -> ResourceQuery -- ^ 'ugqResourceQuery'
     -> UpdateGroupQuery
-updateGroupQuery pGroupName_ pResourceQuery_ =
-  UpdateGroupQuery'
-    {_ugqGroupName = pGroupName_, _ugqResourceQuery = pResourceQuery_}
-
+updateGroupQuery pGroupName_ pResourceQuery_
+  = UpdateGroupQuery'{_ugqGroupName = pGroupName_,
+                      _ugqResourceQuery = pResourceQuery_}
 
 -- | The name of the resource group for which you want to edit the query.
 ugqGroupName :: Lens' UpdateGroupQuery Text
@@ -106,11 +104,13 @@ instance ToQuery UpdateGroupQuery where
         toQuery = const mempty
 
 -- | /See:/ 'updateGroupQueryResponse' smart constructor.
-data UpdateGroupQueryResponse = UpdateGroupQueryResponse'
-  { _ugqrsGroupQuery     :: !(Maybe GroupQuery)
-  , _ugqrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGroupQueryResponse = UpdateGroupQueryResponse'{_ugqrsGroupQuery
+                                                          ::
+                                                          !(Maybe GroupQuery),
+                                                          _ugqrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateGroupQueryResponse' with the minimum fields required to make a request.
 --
@@ -122,10 +122,10 @@ data UpdateGroupQueryResponse = UpdateGroupQueryResponse'
 updateGroupQueryResponse
     :: Int -- ^ 'ugqrsResponseStatus'
     -> UpdateGroupQueryResponse
-updateGroupQueryResponse pResponseStatus_ =
-  UpdateGroupQueryResponse'
-    {_ugqrsGroupQuery = Nothing, _ugqrsResponseStatus = pResponseStatus_}
-
+updateGroupQueryResponse pResponseStatus_
+  = UpdateGroupQueryResponse'{_ugqrsGroupQuery =
+                                Nothing,
+                              _ugqrsResponseStatus = pResponseStatus_}
 
 -- | The resource query associated with the resource group after the update.
 ugqrsGroupQuery :: Lens' UpdateGroupQueryResponse (Maybe GroupQuery)

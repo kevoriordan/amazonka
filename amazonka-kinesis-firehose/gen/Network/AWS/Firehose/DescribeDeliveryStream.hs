@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the specified delivery stream and gets the status. For example, after your delivery stream is created, call @DescribeDeliveryStream@ to see whether the delivery stream is @ACTIVE@ and therefore ready for data to be sent to it.
+-- Describes the specified delivery stream and its status. For example, after your delivery stream is created, call @DescribeDeliveryStream@ to see whether the delivery stream is @ACTIVE@ and therefore ready for data to be sent to it. 
 --
+--
+-- If the status of a delivery stream is @CREATING_FAILED@ , this status doesn't change, and you can't invoke 'CreateDeliveryStream' again on it. However, you can invoke the 'DeleteDeliveryStream' operation to delete it. If the status is @DELETING_FAILED@ , you can force deletion by invoking 'DeleteDeliveryStream' again but with 'DeleteDeliveryStreamInput$AllowForceDelete' set to true.
 --
 module Network.AWS.Firehose.DescribeDeliveryStream
     (
@@ -47,12 +49,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeDeliveryStream' smart constructor.
-data DescribeDeliveryStream = DescribeDeliveryStream'
-  { _ddsExclusiveStartDestinationId :: !(Maybe Text)
-  , _ddsLimit                       :: !(Maybe Nat)
-  , _ddsDeliveryStreamName          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDeliveryStream = DescribeDeliveryStream'{_ddsExclusiveStartDestinationId
+                                                      :: !(Maybe Text),
+                                                      _ddsLimit :: !(Maybe Nat),
+                                                      _ddsDeliveryStreamName ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeDeliveryStream' with the minimum fields required to make a request.
 --
@@ -66,13 +69,11 @@ data DescribeDeliveryStream = DescribeDeliveryStream'
 describeDeliveryStream
     :: Text -- ^ 'ddsDeliveryStreamName'
     -> DescribeDeliveryStream
-describeDeliveryStream pDeliveryStreamName_ =
-  DescribeDeliveryStream'
-    { _ddsExclusiveStartDestinationId = Nothing
-    , _ddsLimit = Nothing
-    , _ddsDeliveryStreamName = pDeliveryStreamName_
-    }
-
+describeDeliveryStream pDeliveryStreamName_
+  = DescribeDeliveryStream'{_ddsExclusiveStartDestinationId
+                              = Nothing,
+                            _ddsLimit = Nothing,
+                            _ddsDeliveryStreamName = pDeliveryStreamName_}
 
 -- | The ID of the destination to start returning the destination information. Kinesis Data Firehose supports one destination per delivery stream.
 ddsExclusiveStartDestinationId :: Lens' DescribeDeliveryStream (Maybe Text)
@@ -128,11 +129,13 @@ instance ToQuery DescribeDeliveryStream where
         toQuery = const mempty
 
 -- | /See:/ 'describeDeliveryStreamResponse' smart constructor.
-data DescribeDeliveryStreamResponse = DescribeDeliveryStreamResponse'
-  { _ddsrsResponseStatus            :: !Int
-  , _ddsrsDeliveryStreamDescription :: !DeliveryStreamDescription
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeDeliveryStreamResponse = DescribeDeliveryStreamResponse'{_ddsrsResponseStatus
+                                                                      :: !Int,
+                                                                      _ddsrsDeliveryStreamDescription
+                                                                      ::
+                                                                      !DeliveryStreamDescription}
+                                        deriving (Eq, Show, Data, Typeable,
+                                                  Generic)
 
 -- | Creates a value of 'DescribeDeliveryStreamResponse' with the minimum fields required to make a request.
 --
@@ -145,12 +148,12 @@ describeDeliveryStreamResponse
     :: Int -- ^ 'ddsrsResponseStatus'
     -> DeliveryStreamDescription -- ^ 'ddsrsDeliveryStreamDescription'
     -> DescribeDeliveryStreamResponse
-describeDeliveryStreamResponse pResponseStatus_ pDeliveryStreamDescription_ =
-  DescribeDeliveryStreamResponse'
-    { _ddsrsResponseStatus = pResponseStatus_
-    , _ddsrsDeliveryStreamDescription = pDeliveryStreamDescription_
-    }
-
+describeDeliveryStreamResponse pResponseStatus_
+  pDeliveryStreamDescription_
+  = DescribeDeliveryStreamResponse'{_ddsrsResponseStatus
+                                      = pResponseStatus_,
+                                    _ddsrsDeliveryStreamDescription =
+                                      pDeliveryStreamDescription_}
 
 -- | -- | The response status code.
 ddsrsResponseStatus :: Lens' DescribeDeliveryStreamResponse Int

@@ -21,7 +21,7 @@
 -- Creates a @WebACL@ , which contains the @Rules@ that identify the CloudFront web requests that you want to allow, block, or count. AWS WAF evaluates @Rules@ in order based on the value of @Priority@ for each @Rule@ .
 --
 --
--- You also specify a default action, either @ALLOW@ or @BLOCK@ . If a web request doesn't match any of the @Rules@ in a @WebACL@ , AWS WAF responds to the request with the default action.
+-- You also specify a default action, either @ALLOW@ or @BLOCK@ . If a web request doesn't match any of the @Rules@ in a @WebACL@ , AWS WAF responds to the request with the default action. 
 --
 -- To create and configure a @WebACL@ , perform the following steps:
 --
@@ -39,7 +39,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAF.CreateWebACL
     (
@@ -47,6 +47,7 @@ module Network.AWS.WAF.CreateWebACL
       createWebACL
     , CreateWebACL
     -- * Request Lenses
+    , cwaTags
     , cwaName
     , cwaMetricName
     , cwaDefaultAction
@@ -69,21 +70,22 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'createWebACL' smart constructor.
-data CreateWebACL = CreateWebACL'
-  { _cwaName          :: !Text
-  , _cwaMetricName    :: !Text
-  , _cwaDefaultAction :: !WafAction
-  , _cwaChangeToken   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateWebACL = CreateWebACL'{_cwaTags ::
+                                  !(Maybe (List1 Tag)),
+                                  _cwaName :: !Text, _cwaMetricName :: !Text,
+                                  _cwaDefaultAction :: !WafAction,
+                                  _cwaChangeToken :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateWebACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cwaTags' - 
+--
 -- * 'cwaName' - A friendly name or description of the 'WebACL' . You can't change @Name@ after you create the @WebACL@ .
 --
--- * 'cwaMetricName' - A friendly name or description for the metrics for this @WebACL@ . The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change @MetricName@ after you create the @WebACL@ .
+-- * 'cwaMetricName' - A friendly name or description for the metrics for this @WebACL@ .The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can't contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can't change @MetricName@ after you create the @WebACL@ .
 --
 -- * 'cwaDefaultAction' - The action that you want AWS WAF to take when a request doesn't match the criteria specified in any of the @Rule@ objects that are associated with the @WebACL@ .
 --
@@ -94,20 +96,22 @@ createWebACL
     -> WafAction -- ^ 'cwaDefaultAction'
     -> Text -- ^ 'cwaChangeToken'
     -> CreateWebACL
-createWebACL pName_ pMetricName_ pDefaultAction_ pChangeToken_ =
-  CreateWebACL'
-    { _cwaName = pName_
-    , _cwaMetricName = pMetricName_
-    , _cwaDefaultAction = pDefaultAction_
-    , _cwaChangeToken = pChangeToken_
-    }
+createWebACL pName_ pMetricName_ pDefaultAction_
+  pChangeToken_
+  = CreateWebACL'{_cwaTags = Nothing,
+                  _cwaName = pName_, _cwaMetricName = pMetricName_,
+                  _cwaDefaultAction = pDefaultAction_,
+                  _cwaChangeToken = pChangeToken_}
 
+-- | 
+cwaTags :: Lens' CreateWebACL (Maybe (NonEmpty Tag))
+cwaTags = lens _cwaTags (\ s a -> s{_cwaTags = a}) . mapping _List1
 
 -- | A friendly name or description of the 'WebACL' . You can't change @Name@ after you create the @WebACL@ .
 cwaName :: Lens' CreateWebACL Text
 cwaName = lens _cwaName (\ s a -> s{_cwaName = a})
 
--- | A friendly name or description for the metrics for this @WebACL@ . The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change @MetricName@ after you create the @WebACL@ .
+-- | A friendly name or description for the metrics for this @WebACL@ .The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can't contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can't change @MetricName@ after you create the @WebACL@ .
 cwaMetricName :: Lens' CreateWebACL Text
 cwaMetricName = lens _cwaMetricName (\ s a -> s{_cwaMetricName = a})
 
@@ -146,7 +150,7 @@ instance ToJSON CreateWebACL where
         toJSON CreateWebACL'{..}
           = object
               (catMaybes
-                 [Just ("Name" .= _cwaName),
+                 [("Tags" .=) <$> _cwaTags, Just ("Name" .= _cwaName),
                   Just ("MetricName" .= _cwaMetricName),
                   Just ("DefaultAction" .= _cwaDefaultAction),
                   Just ("ChangeToken" .= _cwaChangeToken)])
@@ -158,12 +162,12 @@ instance ToQuery CreateWebACL where
         toQuery = const mempty
 
 -- | /See:/ 'createWebACLResponse' smart constructor.
-data CreateWebACLResponse = CreateWebACLResponse'
-  { _cwarsWebACL         :: !(Maybe WebACL)
-  , _cwarsChangeToken    :: !(Maybe Text)
-  , _cwarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateWebACLResponse = CreateWebACLResponse'{_cwarsWebACL
+                                                  :: !(Maybe WebACL),
+                                                  _cwarsChangeToken ::
+                                                  !(Maybe Text),
+                                                  _cwarsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateWebACLResponse' with the minimum fields required to make a request.
 --
@@ -177,13 +181,10 @@ data CreateWebACLResponse = CreateWebACLResponse'
 createWebACLResponse
     :: Int -- ^ 'cwarsResponseStatus'
     -> CreateWebACLResponse
-createWebACLResponse pResponseStatus_ =
-  CreateWebACLResponse'
-    { _cwarsWebACL = Nothing
-    , _cwarsChangeToken = Nothing
-    , _cwarsResponseStatus = pResponseStatus_
-    }
-
+createWebACLResponse pResponseStatus_
+  = CreateWebACLResponse'{_cwarsWebACL = Nothing,
+                          _cwarsChangeToken = Nothing,
+                          _cwarsResponseStatus = pResponseStatus_}
 
 -- | The 'WebACL' returned in the @CreateWebACL@ response.
 cwarsWebACL :: Lens' CreateWebACLResponse (Maybe WebACL)

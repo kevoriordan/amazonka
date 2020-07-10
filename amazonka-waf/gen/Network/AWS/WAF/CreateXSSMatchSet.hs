@@ -33,7 +33,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAF.CreateXSSMatchSet
     (
@@ -65,11 +65,10 @@ import Network.AWS.WAF.Types.Product
 --
 --
 -- /See:/ 'createXSSMatchSet' smart constructor.
-data CreateXSSMatchSet = CreateXSSMatchSet'
-  { _cxmsName        :: !Text
-  , _cxmsChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateXSSMatchSet = CreateXSSMatchSet'{_cxmsName
+                                            :: !Text,
+                                            _cxmsChangeToken :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateXSSMatchSet' with the minimum fields required to make a request.
 --
@@ -82,9 +81,9 @@ createXSSMatchSet
     :: Text -- ^ 'cxmsName'
     -> Text -- ^ 'cxmsChangeToken'
     -> CreateXSSMatchSet
-createXSSMatchSet pName_ pChangeToken_ =
-  CreateXSSMatchSet' {_cxmsName = pName_, _cxmsChangeToken = pChangeToken_}
-
+createXSSMatchSet pName_ pChangeToken_
+  = CreateXSSMatchSet'{_cxmsName = pName_,
+                       _cxmsChangeToken = pChangeToken_}
 
 -- | A friendly name or description for the 'XssMatchSet' that you're creating. You can't change @Name@ after you create the @XssMatchSet@ .
 cxmsName :: Lens' CreateXSSMatchSet Text
@@ -135,12 +134,16 @@ instance ToQuery CreateXSSMatchSet where
 --
 --
 -- /See:/ 'createXSSMatchSetResponse' smart constructor.
-data CreateXSSMatchSetResponse = CreateXSSMatchSetResponse'
-  { _cxmsrsXSSMatchSet    :: !(Maybe XSSMatchSet)
-  , _cxmsrsChangeToken    :: !(Maybe Text)
-  , _cxmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateXSSMatchSetResponse = CreateXSSMatchSetResponse'{_cxmsrsXSSMatchSet
+                                                            ::
+                                                            !(Maybe
+                                                                XSSMatchSet),
+                                                            _cxmsrsChangeToken
+                                                            :: !(Maybe Text),
+                                                            _cxmsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateXSSMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +157,11 @@ data CreateXSSMatchSetResponse = CreateXSSMatchSetResponse'
 createXSSMatchSetResponse
     :: Int -- ^ 'cxmsrsResponseStatus'
     -> CreateXSSMatchSetResponse
-createXSSMatchSetResponse pResponseStatus_ =
-  CreateXSSMatchSetResponse'
-    { _cxmsrsXSSMatchSet = Nothing
-    , _cxmsrsChangeToken = Nothing
-    , _cxmsrsResponseStatus = pResponseStatus_
-    }
-
+createXSSMatchSetResponse pResponseStatus_
+  = CreateXSSMatchSetResponse'{_cxmsrsXSSMatchSet =
+                                 Nothing,
+                               _cxmsrsChangeToken = Nothing,
+                               _cxmsrsResponseStatus = pResponseStatus_}
 
 -- | An 'XssMatchSet' .
 cxmsrsXSSMatchSet :: Lens' CreateXSSMatchSetResponse (Maybe XSSMatchSet)

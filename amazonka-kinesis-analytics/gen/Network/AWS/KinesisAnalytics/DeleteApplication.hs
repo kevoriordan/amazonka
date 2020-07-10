@@ -46,16 +46,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteApplication' smart constructor.
-data DeleteApplication = DeleteApplication'
-  { _dApplicationName :: !Text
-  , _dCreateTimestamp :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplication = DeleteApplication'{_dApplicationName
+                                            :: !Text,
+                                            _dCreateTimestamp :: !POSIX}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteApplication' with the minimum fields required to make a request.
 --
@@ -63,23 +62,21 @@ data DeleteApplication = DeleteApplication'
 --
 -- * 'dApplicationName' - Name of the Amazon Kinesis Analytics application to delete.
 --
--- * 'dCreateTimestamp' - You can use the @DescribeApplication@ operation to get this value.
+-- * 'dCreateTimestamp' - You can use the @DescribeApplication@ operation to get this value. 
 deleteApplication
     :: Text -- ^ 'dApplicationName'
     -> UTCTime -- ^ 'dCreateTimestamp'
     -> DeleteApplication
-deleteApplication pApplicationName_ pCreateTimestamp_ =
-  DeleteApplication'
-    { _dApplicationName = pApplicationName_
-    , _dCreateTimestamp = _Time # pCreateTimestamp_
-    }
-
+deleteApplication pApplicationName_ pCreateTimestamp_
+  = DeleteApplication'{_dApplicationName =
+                         pApplicationName_,
+                       _dCreateTimestamp = _Time # pCreateTimestamp_}
 
 -- | Name of the Amazon Kinesis Analytics application to delete.
 dApplicationName :: Lens' DeleteApplication Text
 dApplicationName = lens _dApplicationName (\ s a -> s{_dApplicationName = a})
 
--- | You can use the @DescribeApplication@ operation to get this value.
+-- | You can use the @DescribeApplication@ operation to get this value. 
 dCreateTimestamp :: Lens' DeleteApplication UTCTime
 dCreateTimestamp = lens _dCreateTimestamp (\ s a -> s{_dCreateTimestamp = a}) . _Time
 
@@ -118,15 +115,15 @@ instance ToPath DeleteApplication where
 instance ToQuery DeleteApplication where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteApplicationResponse' smart constructor.
-newtype DeleteApplicationResponse = DeleteApplicationResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteApplicationResponse = DeleteApplicationResponse'{_drsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteApplicationResponse' with the minimum fields required to make a request.
 --
@@ -136,9 +133,9 @@ newtype DeleteApplicationResponse = DeleteApplicationResponse'
 deleteApplicationResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteApplicationResponse
-deleteApplicationResponse pResponseStatus_ =
-  DeleteApplicationResponse' {_drsResponseStatus = pResponseStatus_}
-
+deleteApplicationResponse pResponseStatus_
+  = DeleteApplicationResponse'{_drsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeleteApplicationResponse Int

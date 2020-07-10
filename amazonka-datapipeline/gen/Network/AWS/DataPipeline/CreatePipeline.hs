@@ -52,13 +52,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createPipeline' smart constructor.
-data CreatePipeline = CreatePipeline'
-  { _cpDescription :: !(Maybe Text)
-  , _cpTags        :: !(Maybe [Tag])
-  , _cpName        :: !Text
-  , _cpUniqueId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePipeline = CreatePipeline'{_cpDescription
+                                      :: !(Maybe Text),
+                                      _cpTags :: !(Maybe [Tag]),
+                                      _cpName :: !Text, _cpUniqueId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePipeline' with the minimum fields required to make a request.
 --
@@ -75,14 +73,10 @@ createPipeline
     :: Text -- ^ 'cpName'
     -> Text -- ^ 'cpUniqueId'
     -> CreatePipeline
-createPipeline pName_ pUniqueId_ =
-  CreatePipeline'
-    { _cpDescription = Nothing
-    , _cpTags = Nothing
-    , _cpName = pName_
-    , _cpUniqueId = pUniqueId_
-    }
-
+createPipeline pName_ pUniqueId_
+  = CreatePipeline'{_cpDescription = Nothing,
+                    _cpTags = Nothing, _cpName = pName_,
+                    _cpUniqueId = pUniqueId_}
 
 -- | The description for the pipeline.
 cpDescription :: Lens' CreatePipeline (Maybe Text)
@@ -141,11 +135,11 @@ instance ToQuery CreatePipeline where
 --
 --
 -- /See:/ 'createPipelineResponse' smart constructor.
-data CreatePipelineResponse = CreatePipelineResponse'
-  { _cprsResponseStatus :: !Int
-  , _cprsPipelineId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePipelineResponse = CreatePipelineResponse'{_cprsResponseStatus
+                                                      :: !Int,
+                                                      _cprsPipelineId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreatePipelineResponse' with the minimum fields required to make a request.
 --
@@ -158,10 +152,10 @@ createPipelineResponse
     :: Int -- ^ 'cprsResponseStatus'
     -> Text -- ^ 'cprsPipelineId'
     -> CreatePipelineResponse
-createPipelineResponse pResponseStatus_ pPipelineId_ =
-  CreatePipelineResponse'
-    {_cprsResponseStatus = pResponseStatus_, _cprsPipelineId = pPipelineId_}
-
+createPipelineResponse pResponseStatus_ pPipelineId_
+  = CreatePipelineResponse'{_cprsResponseStatus =
+                              pResponseStatus_,
+                            _cprsPipelineId = pPipelineId_}
 
 -- | -- | The response status code.
 cprsResponseStatus :: Lens' CreatePipelineResponse Int

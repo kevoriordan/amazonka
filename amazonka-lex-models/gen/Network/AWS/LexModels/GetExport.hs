@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Exports the contents of a Amazon Lex resource in a specified format.
+-- Exports the contents of a Amazon Lex resource in a specified format. 
 --
 --
 module Network.AWS.LexModels.GetExport
@@ -54,13 +54,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getExport' smart constructor.
-data GetExport = GetExport'
-  { _geName         :: !Text
-  , _geVersion      :: !Text
-  , _geResourceType :: !ResourceType
-  , _geExportType   :: !ExportType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetExport = GetExport'{_geName :: !Text,
+                            _geVersion :: !Text,
+                            _geResourceType :: !ResourceType,
+                            _geExportType :: !ExportType}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetExport' with the minimum fields required to make a request.
 --
@@ -70,7 +68,7 @@ data GetExport = GetExport'
 --
 -- * 'geVersion' - The version of the bot to export.
 --
--- * 'geResourceType' - The type of resource to export.
+-- * 'geResourceType' - The type of resource to export. 
 --
 -- * 'geExportType' - The format of the exported data.
 getExport
@@ -79,14 +77,12 @@ getExport
     -> ResourceType -- ^ 'geResourceType'
     -> ExportType -- ^ 'geExportType'
     -> GetExport
-getExport pName_ pVersion_ pResourceType_ pExportType_ =
-  GetExport'
-    { _geName = pName_
-    , _geVersion = pVersion_
-    , _geResourceType = pResourceType_
-    , _geExportType = pExportType_
-    }
-
+getExport pName_ pVersion_ pResourceType_
+  pExportType_
+  = GetExport'{_geName = pName_,
+               _geVersion = pVersion_,
+               _geResourceType = pResourceType_,
+               _geExportType = pExportType_}
 
 -- | The name of the bot to export.
 geName :: Lens' GetExport Text
@@ -96,7 +92,7 @@ geName = lens _geName (\ s a -> s{_geName = a})
 geVersion :: Lens' GetExport Text
 geVersion = lens _geVersion (\ s a -> s{_geVersion = a})
 
--- | The type of resource to export.
+-- | The type of resource to export. 
 geResourceType :: Lens' GetExport ResourceType
 geResourceType = lens _geResourceType (\ s a -> s{_geResourceType = a})
 
@@ -141,17 +137,19 @@ instance ToQuery GetExport where
                "exportType" =: _geExportType]
 
 -- | /See:/ 'getExportResponse' smart constructor.
-data GetExportResponse = GetExportResponse'
-  { _gersFailureReason  :: !(Maybe Text)
-  , _gersResourceType   :: !(Maybe ResourceType)
-  , _gersExportStatus   :: !(Maybe ExportStatus)
-  , _gersUrl            :: !(Maybe Text)
-  , _gersExportType     :: !(Maybe ExportType)
-  , _gersName           :: !(Maybe Text)
-  , _gersVersion        :: !(Maybe Text)
-  , _gersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetExportResponse = GetExportResponse'{_gersFailureReason
+                                            :: !(Maybe Text),
+                                            _gersResourceType ::
+                                            !(Maybe ResourceType),
+                                            _gersExportStatus ::
+                                            !(Maybe ExportStatus),
+                                            _gersUrl :: !(Maybe Text),
+                                            _gersExportType ::
+                                            !(Maybe ExportType),
+                                            _gersName :: !(Maybe Text),
+                                            _gersVersion :: !(Maybe Text),
+                                            _gersResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetExportResponse' with the minimum fields required to make a request.
 --
@@ -175,18 +173,13 @@ data GetExportResponse = GetExportResponse'
 getExportResponse
     :: Int -- ^ 'gersResponseStatus'
     -> GetExportResponse
-getExportResponse pResponseStatus_ =
-  GetExportResponse'
-    { _gersFailureReason = Nothing
-    , _gersResourceType = Nothing
-    , _gersExportStatus = Nothing
-    , _gersUrl = Nothing
-    , _gersExportType = Nothing
-    , _gersName = Nothing
-    , _gersVersion = Nothing
-    , _gersResponseStatus = pResponseStatus_
-    }
-
+getExportResponse pResponseStatus_
+  = GetExportResponse'{_gersFailureReason = Nothing,
+                       _gersResourceType = Nothing,
+                       _gersExportStatus = Nothing, _gersUrl = Nothing,
+                       _gersExportType = Nothing, _gersName = Nothing,
+                       _gersVersion = Nothing,
+                       _gersResponseStatus = pResponseStatus_}
 
 -- | If @status@ is @FAILED@ , Amazon Lex provides the reason that it failed to export the resource.
 gersFailureReason :: Lens' GetExportResponse (Maybe Text)

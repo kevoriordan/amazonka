@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides the details for the GuardDuty master account to the current GuardDuty member account.
+-- Provides the details for the GuardDuty master account associated with the current GuardDuty member account.
+--
+--
 module Network.AWS.GuardDuty.GetMasterAccount
     (
     -- * Creating a Request
@@ -31,8 +33,8 @@ module Network.AWS.GuardDuty.GetMasterAccount
     , getMasterAccountResponse
     , GetMasterAccountResponse
     -- * Response Lenses
-    , gmarsMaster
     , gmarsResponseStatus
+    , gmarsMaster
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -43,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getMasterAccount' smart constructor.
-newtype GetMasterAccount = GetMasterAccount'
-  { _gmaDetectorId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetMasterAccount = GetMasterAccount'{_gmaDetectorId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetMasterAccount' with the minimum fields required to make a request.
 --
@@ -56,9 +57,8 @@ newtype GetMasterAccount = GetMasterAccount'
 getMasterAccount
     :: Text -- ^ 'gmaDetectorId'
     -> GetMasterAccount
-getMasterAccount pDetectorId_ =
-  GetMasterAccount' {_gmaDetectorId = pDetectorId_}
-
+getMasterAccount pDetectorId_
+  = GetMasterAccount'{_gmaDetectorId = pDetectorId_}
 
 -- | The unique ID of the detector of the GuardDuty member account.
 gmaDetectorId :: Lens' GetMasterAccount Text
@@ -71,7 +71,7 @@ instance AWSRequest GetMasterAccount where
           = receiveJSON
               (\ s h x ->
                  GetMasterAccountResponse' <$>
-                   (x .?> "master") <*> (pure (fromEnum s)))
+                   (pure (fromEnum s)) <*> (x .:> "master"))
 
 instance Hashable GetMasterAccount where
 
@@ -93,33 +93,35 @@ instance ToQuery GetMasterAccount where
         toQuery = const mempty
 
 -- | /See:/ 'getMasterAccountResponse' smart constructor.
-data GetMasterAccountResponse = GetMasterAccountResponse'
-  { _gmarsMaster         :: !(Maybe Master)
-  , _gmarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetMasterAccountResponse = GetMasterAccountResponse'{_gmarsResponseStatus
+                                                          :: !Int,
+                                                          _gmarsMaster ::
+                                                          !Master}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetMasterAccountResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gmarsMaster' - Undocumented member.
---
 -- * 'gmarsResponseStatus' - -- | The response status code.
+--
+-- * 'gmarsMaster' - The master account details.
 getMasterAccountResponse
     :: Int -- ^ 'gmarsResponseStatus'
+    -> Master -- ^ 'gmarsMaster'
     -> GetMasterAccountResponse
-getMasterAccountResponse pResponseStatus_ =
-  GetMasterAccountResponse'
-    {_gmarsMaster = Nothing, _gmarsResponseStatus = pResponseStatus_}
-
-
--- | Undocumented member.
-gmarsMaster :: Lens' GetMasterAccountResponse (Maybe Master)
-gmarsMaster = lens _gmarsMaster (\ s a -> s{_gmarsMaster = a})
+getMasterAccountResponse pResponseStatus_ pMaster_
+  = GetMasterAccountResponse'{_gmarsResponseStatus =
+                                pResponseStatus_,
+                              _gmarsMaster = pMaster_}
 
 -- | -- | The response status code.
 gmarsResponseStatus :: Lens' GetMasterAccountResponse Int
 gmarsResponseStatus = lens _gmarsResponseStatus (\ s a -> s{_gmarsResponseStatus = a})
+
+-- | The master account details.
+gmarsMaster :: Lens' GetMasterAccountResponse Master
+gmarsMaster = lens _gmarsMaster (\ s a -> s{_gmarsMaster = a})
 
 instance NFData GetMasterAccountResponse where

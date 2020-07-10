@@ -25,7 +25,7 @@
 --
 -- This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html Listeners for Your Application Load Balancers> in the /Application Load Balancers Guide/ and <http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html Listeners for Your Network Load Balancers> in the /Network Load Balancers Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html Listeners for Your Application Load Balancers> in the /Application Load Balancers Guide/ and <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html Listeners for Your Network Load Balancers> in the /Network Load Balancers Guide/ .
 --
 module Network.AWS.ELBv2.CreateListener
     (
@@ -56,52 +56,47 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createListener' smart constructor.
-data CreateListener = CreateListener'
-  { _clSSLPolicy       :: !(Maybe Text)
-  , _clCertificates    :: !(Maybe [Certificate])
-  , _clLoadBalancerARN :: !Text
-  , _clProtocol        :: !ProtocolEnum
-  , _clPort            :: !Nat
-  , _clDefaultActions  :: ![Action]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateListener = CreateListener'{_clSSLPolicy ::
+                                      !(Maybe Text),
+                                      _clCertificates :: !(Maybe [Certificate]),
+                                      _clLoadBalancerARN :: !Text,
+                                      _clProtocol :: !ProtocolEnum,
+                                      _clPort :: !Nat,
+                                      _clDefaultActions :: ![Action]}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateListener' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clSSLPolicy' - [HTTPS listeners] The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.
+-- * 'clSSLPolicy' - [HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. The following are the possible values:     * @ELBSecurityPolicy-2016-08@      * @ELBSecurityPolicy-TLS-1-0-2015-04@      * @ELBSecurityPolicy-TLS-1-1-2017-01@      * @ELBSecurityPolicy-TLS-1-2-2017-01@      * @ELBSecurityPolicy-TLS-1-2-Ext-2018-06@      * @ELBSecurityPolicy-FS-2018-06@      * @ELBSecurityPolicy-FS-1-1-2019-08@      * @ELBSecurityPolicy-FS-1-2-2019-08@      * @ELBSecurityPolicy-FS-1-2-Res-2019-08@  For more information, see <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies Security Policies> in the /Application Load Balancers Guide/ and <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies Security Policies> in the /Network Load Balancers Guide/ .
 --
--- * 'clCertificates' - [HTTPS listeners] The SSL server certificate. You must provide exactly one certificate.
+-- * 'clCertificates' - [HTTPS and TLS listeners] The default certificate for the listener. You must provide exactly one certificate. Set @CertificateArn@ to the certificate ARN but do not set @IsDefault@ . To create a certificate list for the listener, use 'AddListenerCertificates' .
 --
 -- * 'clLoadBalancerARN' - The Amazon Resource Name (ARN) of the load balancer.
 --
--- * 'clProtocol' - The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
+-- * 'clProtocol' - The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP.
 --
 -- * 'clPort' - The port on which the load balancer is listening.
 --
--- * 'clDefaultActions' - The default action for the listener. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.
+-- * 'clDefaultActions' - The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is @forward@ , you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer. [HTTPS listeners] If the action type is @authenticate-oidc@ , you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listeners] If the action type is @authenticate-cognito@ , you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is @redirect@ , you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is @fixed-response@ , you drop specified client requests and return a custom HTTP response.
 createListener
     :: Text -- ^ 'clLoadBalancerARN'
     -> ProtocolEnum -- ^ 'clProtocol'
     -> Natural -- ^ 'clPort'
     -> CreateListener
-createListener pLoadBalancerARN_ pProtocol_ pPort_ =
-  CreateListener'
-    { _clSSLPolicy = Nothing
-    , _clCertificates = Nothing
-    , _clLoadBalancerARN = pLoadBalancerARN_
-    , _clProtocol = pProtocol_
-    , _clPort = _Nat # pPort_
-    , _clDefaultActions = mempty
-    }
+createListener pLoadBalancerARN_ pProtocol_ pPort_
+  = CreateListener'{_clSSLPolicy = Nothing,
+                    _clCertificates = Nothing,
+                    _clLoadBalancerARN = pLoadBalancerARN_,
+                    _clProtocol = pProtocol_, _clPort = _Nat # pPort_,
+                    _clDefaultActions = mempty}
 
-
--- | [HTTPS listeners] The security policy that defines which ciphers and protocols are supported. The default is the current predefined security policy.
+-- | [HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. The following are the possible values:     * @ELBSecurityPolicy-2016-08@      * @ELBSecurityPolicy-TLS-1-0-2015-04@      * @ELBSecurityPolicy-TLS-1-1-2017-01@      * @ELBSecurityPolicy-TLS-1-2-2017-01@      * @ELBSecurityPolicy-TLS-1-2-Ext-2018-06@      * @ELBSecurityPolicy-FS-2018-06@      * @ELBSecurityPolicy-FS-1-1-2019-08@      * @ELBSecurityPolicy-FS-1-2-2019-08@      * @ELBSecurityPolicy-FS-1-2-Res-2019-08@  For more information, see <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies Security Policies> in the /Application Load Balancers Guide/ and <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies Security Policies> in the /Network Load Balancers Guide/ .
 clSSLPolicy :: Lens' CreateListener (Maybe Text)
 clSSLPolicy = lens _clSSLPolicy (\ s a -> s{_clSSLPolicy = a})
 
--- | [HTTPS listeners] The SSL server certificate. You must provide exactly one certificate.
+-- | [HTTPS and TLS listeners] The default certificate for the listener. You must provide exactly one certificate. Set @CertificateArn@ to the certificate ARN but do not set @IsDefault@ . To create a certificate list for the listener, use 'AddListenerCertificates' .
 clCertificates :: Lens' CreateListener [Certificate]
 clCertificates = lens _clCertificates (\ s a -> s{_clCertificates = a}) . _Default . _Coerce
 
@@ -109,7 +104,7 @@ clCertificates = lens _clCertificates (\ s a -> s{_clCertificates = a}) . _Defau
 clLoadBalancerARN :: Lens' CreateListener Text
 clLoadBalancerARN = lens _clLoadBalancerARN (\ s a -> s{_clLoadBalancerARN = a})
 
--- | The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
+-- | The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP.
 clProtocol :: Lens' CreateListener ProtocolEnum
 clProtocol = lens _clProtocol (\ s a -> s{_clProtocol = a})
 
@@ -117,7 +112,7 @@ clProtocol = lens _clProtocol (\ s a -> s{_clProtocol = a})
 clPort :: Lens' CreateListener Natural
 clPort = lens _clPort (\ s a -> s{_clPort = a}) . _Nat
 
--- | The default action for the listener. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.
+-- | The actions for the default rule. The rule must include one forward action or one or more fixed-response actions. If the action type is @forward@ , you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer. [HTTPS listeners] If the action type is @authenticate-oidc@ , you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant. [HTTPS listeners] If the action type is @authenticate-cognito@ , you authenticate users through the user pools supported by Amazon Cognito. [Application Load Balancer] If the action type is @redirect@ , you redirect specified client requests from one URL to another. [Application Load Balancer] If the action type is @fixed-response@ , you drop specified client requests and return a custom HTTP response.
 clDefaultActions :: Lens' CreateListener [Action]
 clDefaultActions = lens _clDefaultActions (\ s a -> s{_clDefaultActions = a}) . _Coerce
 
@@ -156,11 +151,12 @@ instance ToQuery CreateListener where
                  toQueryList "member" _clDefaultActions]
 
 -- | /See:/ 'createListenerResponse' smart constructor.
-data CreateListenerResponse = CreateListenerResponse'
-  { _clrsListeners      :: !(Maybe [Listener])
-  , _clrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateListenerResponse = CreateListenerResponse'{_clrsListeners
+                                                      :: !(Maybe [Listener]),
+                                                      _clrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateListenerResponse' with the minimum fields required to make a request.
 --
@@ -172,10 +168,9 @@ data CreateListenerResponse = CreateListenerResponse'
 createListenerResponse
     :: Int -- ^ 'clrsResponseStatus'
     -> CreateListenerResponse
-createListenerResponse pResponseStatus_ =
-  CreateListenerResponse'
-    {_clrsListeners = Nothing, _clrsResponseStatus = pResponseStatus_}
-
+createListenerResponse pResponseStatus_
+  = CreateListenerResponse'{_clrsListeners = Nothing,
+                            _clrsResponseStatus = pResponseStatus_}
 
 -- | Information about the listener.
 clrsListeners :: Lens' CreateListenerResponse [Listener]

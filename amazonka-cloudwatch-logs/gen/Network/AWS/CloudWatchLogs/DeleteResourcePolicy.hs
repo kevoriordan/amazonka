@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteResourcePolicy' smart constructor.
-newtype DeleteResourcePolicy = DeleteResourcePolicy'
-  { _drpPolicyName :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteResourcePolicy = DeleteResourcePolicy'{_drpPolicyName
+                                                     :: Maybe Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteResourcePolicy' with the minimum fields required to make a request.
 --
@@ -54,8 +54,8 @@ newtype DeleteResourcePolicy = DeleteResourcePolicy'
 -- * 'drpPolicyName' - The name of the policy to be revoked. This parameter is required.
 deleteResourcePolicy
     :: DeleteResourcePolicy
-deleteResourcePolicy = DeleteResourcePolicy' {_drpPolicyName = Nothing}
-
+deleteResourcePolicy
+  = DeleteResourcePolicy'{_drpPolicyName = Nothing}
 
 -- | The name of the policy to be revoked. This parameter is required.
 drpPolicyName :: Lens' DeleteResourcePolicy (Maybe Text)
@@ -92,16 +92,15 @@ instance ToQuery DeleteResourcePolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deleteResourcePolicyResponse' smart constructor.
-data DeleteResourcePolicyResponse =
-  DeleteResourcePolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteResourcePolicyResponse = DeleteResourcePolicyResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteResourcePolicyResponse' with the minimum fields required to make a request.
 --
 deleteResourcePolicyResponse
     :: DeleteResourcePolicyResponse
-deleteResourcePolicyResponse = DeleteResourcePolicyResponse'
-
+deleteResourcePolicyResponse
+  = DeleteResourcePolicyResponse'
 
 instance NFData DeleteResourcePolicyResponse where

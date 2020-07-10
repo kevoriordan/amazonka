@@ -23,9 +23,9 @@
 --
 -- This operation requires permissions for the following actions:
 --
---     * @elasticfilesystem:DescribeMountTargetSecurityGroups@ action on the mount target's file system.
+--     * @elasticfilesystem:DescribeMountTargetSecurityGroups@ action on the mount target's file system. 
 --
---     * @ec2:DescribeNetworkInterfaceAttribute@ action on the mount target's network interface.
+--     * @ec2:DescribeNetworkInterfaceAttribute@ action on the mount target's network interface. 
 --
 --
 --
@@ -52,29 +52,30 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeMountTargetSecurityGroups' smart constructor.
-newtype DescribeMountTargetSecurityGroups = DescribeMountTargetSecurityGroups'
-  { _dmtsgMountTargetId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeMountTargetSecurityGroups = DescribeMountTargetSecurityGroups'{_dmtsgMountTargetId
+                                                                               ::
+                                                                               Text}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeMountTargetSecurityGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmtsgMountTargetId' - ID of the mount target whose security groups you want to retrieve.
+-- * 'dmtsgMountTargetId' - The ID of the mount target whose security groups you want to retrieve.
 describeMountTargetSecurityGroups
     :: Text -- ^ 'dmtsgMountTargetId'
     -> DescribeMountTargetSecurityGroups
-describeMountTargetSecurityGroups pMountTargetId_ =
-  DescribeMountTargetSecurityGroups' {_dmtsgMountTargetId = pMountTargetId_}
+describeMountTargetSecurityGroups pMountTargetId_
+  = DescribeMountTargetSecurityGroups'{_dmtsgMountTargetId
+                                         = pMountTargetId_}
 
-
--- | ID of the mount target whose security groups you want to retrieve.
+-- | The ID of the mount target whose security groups you want to retrieve.
 dmtsgMountTargetId :: Lens' DescribeMountTargetSecurityGroups Text
 dmtsgMountTargetId = lens _dmtsgMountTargetId (\ s a -> s{_dmtsgMountTargetId = a})
 
@@ -112,11 +113,15 @@ instance ToQuery DescribeMountTargetSecurityGroups
         toQuery = const mempty
 
 -- | /See:/ 'describeMountTargetSecurityGroupsResponse' smart constructor.
-data DescribeMountTargetSecurityGroupsResponse = DescribeMountTargetSecurityGroupsResponse'
-  { _dmtsgrsResponseStatus :: !Int
-  , _dmtsgrsSecurityGroups :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMountTargetSecurityGroupsResponse = DescribeMountTargetSecurityGroupsResponse'{_dmtsgrsResponseStatus
+                                                                                            ::
+                                                                                            !Int,
+                                                                                            _dmtsgrsSecurityGroups
+                                                                                            ::
+                                                                                            ![Text]}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'DescribeMountTargetSecurityGroupsResponse' with the minimum fields required to make a request.
 --
@@ -124,20 +129,21 @@ data DescribeMountTargetSecurityGroupsResponse = DescribeMountTargetSecurityGrou
 --
 -- * 'dmtsgrsResponseStatus' - -- | The response status code.
 --
--- * 'dmtsgrsSecurityGroups' - Array of security groups.
+-- * 'dmtsgrsSecurityGroups' - An array of security groups.
 describeMountTargetSecurityGroupsResponse
     :: Int -- ^ 'dmtsgrsResponseStatus'
     -> DescribeMountTargetSecurityGroupsResponse
-describeMountTargetSecurityGroupsResponse pResponseStatus_ =
-  DescribeMountTargetSecurityGroupsResponse'
-    {_dmtsgrsResponseStatus = pResponseStatus_, _dmtsgrsSecurityGroups = mempty}
-
+describeMountTargetSecurityGroupsResponse
+  pResponseStatus_
+  = DescribeMountTargetSecurityGroupsResponse'{_dmtsgrsResponseStatus
+                                                 = pResponseStatus_,
+                                               _dmtsgrsSecurityGroups = mempty}
 
 -- | -- | The response status code.
 dmtsgrsResponseStatus :: Lens' DescribeMountTargetSecurityGroupsResponse Int
 dmtsgrsResponseStatus = lens _dmtsgrsResponseStatus (\ s a -> s{_dmtsgrsResponseStatus = a})
 
--- | Array of security groups.
+-- | An array of security groups.
 dmtsgrsSecurityGroups :: Lens' DescribeMountTargetSecurityGroupsResponse [Text]
 dmtsgrsSecurityGroups = lens _dmtsgrsSecurityGroups (\ s a -> s{_dmtsgrsSecurityGroups = a}) . _Coerce
 

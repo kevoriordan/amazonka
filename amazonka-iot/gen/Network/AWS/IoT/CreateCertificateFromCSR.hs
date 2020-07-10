@@ -21,7 +21,7 @@
 -- Creates an X.509 certificate using the specified certificate signing request.
 --
 --
--- __Note:__ The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.
+-- __Note:__ The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. 
 --
 -- __Note:__ Reusing the same certificate signing request (CSR) results in a distinct certificate.
 --
@@ -73,16 +73,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | The input for the CreateCertificateFromCSR operation.
+-- | The input for the CreateCertificateFromCsr operation.
 --
 --
 --
 -- /See:/ 'createCertificateFromCSR' smart constructor.
-data CreateCertificateFromCSR = CreateCertificateFromCSR'
-  { _ccfcsrSetAsActive               :: !(Maybe Bool)
-  , _ccfcsrCertificateSigningRequest :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCertificateFromCSR = CreateCertificateFromCSR'{_ccfcsrSetAsActive
+                                                          :: !(Maybe Bool),
+                                                          _ccfcsrCertificateSigningRequest
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateCertificateFromCSR' with the minimum fields required to make a request.
 --
@@ -94,12 +95,11 @@ data CreateCertificateFromCSR = CreateCertificateFromCSR'
 createCertificateFromCSR
     :: Text -- ^ 'ccfcsrCertificateSigningRequest'
     -> CreateCertificateFromCSR
-createCertificateFromCSR pCertificateSigningRequest_ =
-  CreateCertificateFromCSR'
-    { _ccfcsrSetAsActive = Nothing
-    , _ccfcsrCertificateSigningRequest = pCertificateSigningRequest_
-    }
-
+createCertificateFromCSR pCertificateSigningRequest_
+  = CreateCertificateFromCSR'{_ccfcsrSetAsActive =
+                                Nothing,
+                              _ccfcsrCertificateSigningRequest =
+                                pCertificateSigningRequest_}
 
 -- | Specifies whether the certificate is active.
 ccfcsrSetAsActive :: Lens' CreateCertificateFromCSR (Maybe Bool)
@@ -143,18 +143,28 @@ instance ToQuery CreateCertificateFromCSR where
         toQuery CreateCertificateFromCSR'{..}
           = mconcat ["setAsActive" =: _ccfcsrSetAsActive]
 
--- | The output from the CreateCertificateFromCSR operation.
+-- | The output from the CreateCertificateFromCsr operation.
 --
 --
 --
 -- /See:/ 'createCertificateFromCSRResponse' smart constructor.
-data CreateCertificateFromCSRResponse = CreateCertificateFromCSRResponse'
-  { _ccfcsrrsCertificatePem :: !(Maybe Text)
-  , _ccfcsrrsCertificateARN :: !(Maybe Text)
-  , _ccfcsrrsCertificateId  :: !(Maybe Text)
-  , _ccfcsrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCertificateFromCSRResponse = CreateCertificateFromCSRResponse'{_ccfcsrrsCertificatePem
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ccfcsrrsCertificateARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ccfcsrrsCertificateId
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ccfcsrrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'CreateCertificateFromCSRResponse' with the minimum fields required to make a request.
 --
@@ -170,14 +180,13 @@ data CreateCertificateFromCSRResponse = CreateCertificateFromCSRResponse'
 createCertificateFromCSRResponse
     :: Int -- ^ 'ccfcsrrsResponseStatus'
     -> CreateCertificateFromCSRResponse
-createCertificateFromCSRResponse pResponseStatus_ =
-  CreateCertificateFromCSRResponse'
-    { _ccfcsrrsCertificatePem = Nothing
-    , _ccfcsrrsCertificateARN = Nothing
-    , _ccfcsrrsCertificateId = Nothing
-    , _ccfcsrrsResponseStatus = pResponseStatus_
-    }
-
+createCertificateFromCSRResponse pResponseStatus_
+  = CreateCertificateFromCSRResponse'{_ccfcsrrsCertificatePem
+                                        = Nothing,
+                                      _ccfcsrrsCertificateARN = Nothing,
+                                      _ccfcsrrsCertificateId = Nothing,
+                                      _ccfcsrrsResponseStatus =
+                                        pResponseStatus_}
 
 -- | The certificate data, in PEM format.
 ccfcsrrsCertificatePem :: Lens' CreateCertificateFromCSRResponse (Maybe Text)

@@ -21,6 +21,8 @@
 -- Deletes the specified domain recordset and all of its domain records.
 --
 --
+-- The @delete domain@ operation supports tag-based access control via resource tags applied to the resource identified by @domain name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.DeleteDomain
     (
     -- * Creating a Request
@@ -45,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteDomain' smart constructor.
-newtype DeleteDomain = DeleteDomain'
-  { _ddDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDomain = DeleteDomain'{_ddDomainName ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDomain' with the minimum fields required to make a request.
 --
@@ -58,8 +59,8 @@ newtype DeleteDomain = DeleteDomain'
 deleteDomain
     :: Text -- ^ 'ddDomainName'
     -> DeleteDomain
-deleteDomain pDomainName_ = DeleteDomain' {_ddDomainName = pDomainName_}
-
+deleteDomain pDomainName_
+  = DeleteDomain'{_ddDomainName = pDomainName_}
 
 -- | The specific domain name to delete.
 ddDomainName :: Lens' DeleteDomain Text
@@ -99,28 +100,26 @@ instance ToQuery DeleteDomain where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDomainResponse' smart constructor.
-data DeleteDomainResponse = DeleteDomainResponse'
-  { _delrsOperation      :: !(Maybe Operation)
-  , _delrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDomainResponse = DeleteDomainResponse'{_delrsOperation
+                                                  :: !(Maybe Operation),
+                                                  _delrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDomainResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'delrsOperation' - An array of key-value pairs containing information about the results of your delete domain request.
+-- * 'delrsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'delrsResponseStatus' - -- | The response status code.
 deleteDomainResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteDomainResponse
-deleteDomainResponse pResponseStatus_ =
-  DeleteDomainResponse'
-    {_delrsOperation = Nothing, _delrsResponseStatus = pResponseStatus_}
+deleteDomainResponse pResponseStatus_
+  = DeleteDomainResponse'{_delrsOperation = Nothing,
+                          _delrsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your delete domain request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 delrsOperation :: Lens' DeleteDomainResponse (Maybe Operation)
 delrsOperation = lens _delrsOperation (\ s a -> s{_delrsOperation = a})
 

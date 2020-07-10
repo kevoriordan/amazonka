@@ -46,11 +46,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeRiskConfiguration' smart constructor.
-data DescribeRiskConfiguration = DescribeRiskConfiguration'
-  { _drcClientId   :: !(Maybe (Sensitive Text))
-  , _drcUserPoolId :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeRiskConfiguration = DescribeRiskConfiguration'{_drcClientId
+                                                            ::
+                                                            !(Maybe
+                                                                (Sensitive
+                                                                   Text)),
+                                                            _drcUserPoolId ::
+                                                            !Text}
+                                   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeRiskConfiguration' with the minimum fields required to make a request.
 --
@@ -62,10 +65,9 @@ data DescribeRiskConfiguration = DescribeRiskConfiguration'
 describeRiskConfiguration
     :: Text -- ^ 'drcUserPoolId'
     -> DescribeRiskConfiguration
-describeRiskConfiguration pUserPoolId_ =
-  DescribeRiskConfiguration'
-    {_drcClientId = Nothing, _drcUserPoolId = pUserPoolId_}
-
+describeRiskConfiguration pUserPoolId_
+  = DescribeRiskConfiguration'{_drcClientId = Nothing,
+                               _drcUserPoolId = pUserPoolId_}
 
 -- | The app client ID.
 drcClientId :: Lens' DescribeRiskConfiguration (Maybe Text)
@@ -113,11 +115,14 @@ instance ToQuery DescribeRiskConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'describeRiskConfigurationResponse' smart constructor.
-data DescribeRiskConfigurationResponse = DescribeRiskConfigurationResponse'
-  { _drcrsResponseStatus    :: !Int
-  , _drcrsRiskConfiguration :: !RiskConfigurationType
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeRiskConfigurationResponse = DescribeRiskConfigurationResponse'{_drcrsResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _drcrsRiskConfiguration
+                                                                            ::
+                                                                            !RiskConfigurationType}
+                                           deriving (Eq, Show, Data, Typeable,
+                                                     Generic)
 
 -- | Creates a value of 'DescribeRiskConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -130,12 +135,12 @@ describeRiskConfigurationResponse
     :: Int -- ^ 'drcrsResponseStatus'
     -> RiskConfigurationType -- ^ 'drcrsRiskConfiguration'
     -> DescribeRiskConfigurationResponse
-describeRiskConfigurationResponse pResponseStatus_ pRiskConfiguration_ =
-  DescribeRiskConfigurationResponse'
-    { _drcrsResponseStatus = pResponseStatus_
-    , _drcrsRiskConfiguration = pRiskConfiguration_
-    }
-
+describeRiskConfigurationResponse pResponseStatus_
+  pRiskConfiguration_
+  = DescribeRiskConfigurationResponse'{_drcrsResponseStatus
+                                         = pResponseStatus_,
+                                       _drcrsRiskConfiguration =
+                                         pRiskConfiguration_}
 
 -- | -- | The response status code.
 drcrsResponseStatus :: Lens' DescribeRiskConfigurationResponse Int

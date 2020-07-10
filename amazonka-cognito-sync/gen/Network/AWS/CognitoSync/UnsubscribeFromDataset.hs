@@ -53,13 +53,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'unsubscribeFromDataset' smart constructor.
-data UnsubscribeFromDataset = UnsubscribeFromDataset'
-  { _ufdIdentityPoolId :: !Text
-  , _ufdIdentityId     :: !Text
-  , _ufdDatasetName    :: !Text
-  , _ufdDeviceId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UnsubscribeFromDataset = UnsubscribeFromDataset'{_ufdIdentityPoolId
+                                                      :: !Text,
+                                                      _ufdIdentityId :: !Text,
+                                                      _ufdDatasetName :: !Text,
+                                                      _ufdDeviceId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UnsubscribeFromDataset' with the minimum fields required to make a request.
 --
@@ -78,14 +78,13 @@ unsubscribeFromDataset
     -> Text -- ^ 'ufdDatasetName'
     -> Text -- ^ 'ufdDeviceId'
     -> UnsubscribeFromDataset
-unsubscribeFromDataset pIdentityPoolId_ pIdentityId_ pDatasetName_ pDeviceId_ =
-  UnsubscribeFromDataset'
-    { _ufdIdentityPoolId = pIdentityPoolId_
-    , _ufdIdentityId = pIdentityId_
-    , _ufdDatasetName = pDatasetName_
-    , _ufdDeviceId = pDeviceId_
-    }
-
+unsubscribeFromDataset pIdentityPoolId_ pIdentityId_
+  pDatasetName_ pDeviceId_
+  = UnsubscribeFromDataset'{_ufdIdentityPoolId =
+                              pIdentityPoolId_,
+                            _ufdIdentityId = pIdentityId_,
+                            _ufdDatasetName = pDatasetName_,
+                            _ufdDeviceId = pDeviceId_}
 
 -- | A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which this identity belongs.
 ufdIdentityPoolId :: Lens' UnsubscribeFromDataset Text
@@ -140,10 +139,10 @@ instance ToQuery UnsubscribeFromDataset where
 --
 --
 -- /See:/ 'unsubscribeFromDatasetResponse' smart constructor.
-newtype UnsubscribeFromDatasetResponse = UnsubscribeFromDatasetResponse'
-  { _ufdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UnsubscribeFromDatasetResponse = UnsubscribeFromDatasetResponse'{_ufdrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UnsubscribeFromDatasetResponse' with the minimum fields required to make a request.
 --
@@ -153,9 +152,9 @@ newtype UnsubscribeFromDatasetResponse = UnsubscribeFromDatasetResponse'
 unsubscribeFromDatasetResponse
     :: Int -- ^ 'ufdrsResponseStatus'
     -> UnsubscribeFromDatasetResponse
-unsubscribeFromDatasetResponse pResponseStatus_ =
-  UnsubscribeFromDatasetResponse' {_ufdrsResponseStatus = pResponseStatus_}
-
+unsubscribeFromDatasetResponse pResponseStatus_
+  = UnsubscribeFromDatasetResponse'{_ufdrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 ufdrsResponseStatus :: Lens' UnsubscribeFromDatasetResponse Int

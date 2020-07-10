@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'defineSuggester' smart constructor.
-data DefineSuggester = DefineSuggester'
-  { _defDomainName :: !Text
-  , _defSuggester  :: !Suggester
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DefineSuggester = DefineSuggester'{_defDomainName
+                                        :: !Text,
+                                        _defSuggester :: !Suggester}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DefineSuggester' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ defineSuggester
     :: Text -- ^ 'defDomainName'
     -> Suggester -- ^ 'defSuggester'
     -> DefineSuggester
-defineSuggester pDomainName_ pSuggester_ =
-  DefineSuggester' {_defDomainName = pDomainName_, _defSuggester = pSuggester_}
-
+defineSuggester pDomainName_ pSuggester_
+  = DefineSuggester'{_defDomainName = pDomainName_,
+                     _defSuggester = pSuggester_}
 
 -- | Undocumented member.
 defDomainName :: Lens' DefineSuggester Text
@@ -111,11 +110,12 @@ instance ToQuery DefineSuggester where
 --
 --
 -- /See:/ 'defineSuggesterResponse' smart constructor.
-data DefineSuggesterResponse = DefineSuggesterResponse'
-  { _dsrsResponseStatus :: !Int
-  , _dsrsSuggester      :: !SuggesterStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DefineSuggesterResponse = DefineSuggesterResponse'{_dsrsResponseStatus
+                                                        :: !Int,
+                                                        _dsrsSuggester ::
+                                                        !SuggesterStatus}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DefineSuggesterResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +128,10 @@ defineSuggesterResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> SuggesterStatus -- ^ 'dsrsSuggester'
     -> DefineSuggesterResponse
-defineSuggesterResponse pResponseStatus_ pSuggester_ =
-  DefineSuggesterResponse'
-    {_dsrsResponseStatus = pResponseStatus_, _dsrsSuggester = pSuggester_}
-
+defineSuggesterResponse pResponseStatus_ pSuggester_
+  = DefineSuggesterResponse'{_dsrsResponseStatus =
+                               pResponseStatus_,
+                             _dsrsSuggester = pSuggester_}
 
 -- | -- | The response status code.
 dsrsResponseStatus :: Lens' DefineSuggesterResponse Int

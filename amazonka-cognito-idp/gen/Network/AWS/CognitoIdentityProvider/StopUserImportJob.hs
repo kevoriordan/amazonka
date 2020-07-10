@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'stopUserImportJob' smart constructor.
-data StopUserImportJob = StopUserImportJob'
-  { _sUserPoolId :: !Text
-  , _sJobId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopUserImportJob = StopUserImportJob'{_sUserPoolId
+                                            :: !Text,
+                                            _sJobId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopUserImportJob' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ stopUserImportJob
     :: Text -- ^ 'sUserPoolId'
     -> Text -- ^ 'sJobId'
     -> StopUserImportJob
-stopUserImportJob pUserPoolId_ pJobId_ =
-  StopUserImportJob' {_sUserPoolId = pUserPoolId_, _sJobId = pJobId_}
-
+stopUserImportJob pUserPoolId_ pJobId_
+  = StopUserImportJob'{_sUserPoolId = pUserPoolId_,
+                       _sJobId = pJobId_}
 
 -- | The user pool ID for the user pool that the users are being imported into.
 sUserPoolId :: Lens' StopUserImportJob Text
@@ -120,11 +119,14 @@ instance ToQuery StopUserImportJob where
 --
 --
 -- /See:/ 'stopUserImportJobResponse' smart constructor.
-data StopUserImportJobResponse = StopUserImportJobResponse'
-  { _srsUserImportJob  :: !(Maybe UserImportJobType)
-  , _srsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopUserImportJobResponse = StopUserImportJobResponse'{_srsUserImportJob
+                                                            ::
+                                                            !(Maybe
+                                                                UserImportJobType),
+                                                            _srsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'StopUserImportJobResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +138,10 @@ data StopUserImportJobResponse = StopUserImportJobResponse'
 stopUserImportJobResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopUserImportJobResponse
-stopUserImportJobResponse pResponseStatus_ =
-  StopUserImportJobResponse'
-    {_srsUserImportJob = Nothing, _srsResponseStatus = pResponseStatus_}
-
+stopUserImportJobResponse pResponseStatus_
+  = StopUserImportJobResponse'{_srsUserImportJob =
+                                 Nothing,
+                               _srsResponseStatus = pResponseStatus_}
 
 -- | The job object that represents the user import job.
 srsUserImportJob :: Lens' StopUserImportJobResponse (Maybe UserImportJobType)

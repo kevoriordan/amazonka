@@ -46,28 +46,27 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'putInventory' smart constructor.
-data PutInventory = PutInventory'
-  { _piInstanceId :: !Text
-  , _piItems      :: !(List1 InventoryItem)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutInventory = PutInventory'{_piInstanceId ::
+                                  !Text,
+                                  _piItems :: !(List1 InventoryItem)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutInventory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piInstanceId' - One or more instance IDs where you want to add or update inventory items.
+-- * 'piInstanceId' - An instance ID where you want to add or update inventory items.
 --
 -- * 'piItems' - The inventory items that you want to add or update on instances.
 putInventory
     :: Text -- ^ 'piInstanceId'
     -> NonEmpty InventoryItem -- ^ 'piItems'
     -> PutInventory
-putInventory pInstanceId_ pItems_ =
-  PutInventory' {_piInstanceId = pInstanceId_, _piItems = _List1 # pItems_}
+putInventory pInstanceId_ pItems_
+  = PutInventory'{_piInstanceId = pInstanceId_,
+                  _piItems = _List1 # pItems_}
 
-
--- | One or more instance IDs where you want to add or update inventory items.
+-- | An instance ID where you want to add or update inventory items.
 piInstanceId :: Lens' PutInventory Text
 piInstanceId = lens _piInstanceId (\ s a -> s{_piInstanceId = a})
 
@@ -111,11 +110,10 @@ instance ToQuery PutInventory where
         toQuery = const mempty
 
 -- | /See:/ 'putInventoryResponse' smart constructor.
-data PutInventoryResponse = PutInventoryResponse'
-  { _pirsMessage        :: !(Maybe Text)
-  , _pirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutInventoryResponse = PutInventoryResponse'{_pirsMessage
+                                                  :: !(Maybe Text),
+                                                  _pirsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutInventoryResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +125,9 @@ data PutInventoryResponse = PutInventoryResponse'
 putInventoryResponse
     :: Int -- ^ 'pirsResponseStatus'
     -> PutInventoryResponse
-putInventoryResponse pResponseStatus_ =
-  PutInventoryResponse'
-    {_pirsMessage = Nothing, _pirsResponseStatus = pResponseStatus_}
-
+putInventoryResponse pResponseStatus_
+  = PutInventoryResponse'{_pirsMessage = Nothing,
+                          _pirsResponseStatus = pResponseStatus_}
 
 -- | Information about the request.
 pirsMessage :: Lens' PutInventoryResponse (Maybe Text)

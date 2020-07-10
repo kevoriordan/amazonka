@@ -49,12 +49,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeReplicationInstanceTaskLogs' smart constructor.
-data DescribeReplicationInstanceTaskLogs = DescribeReplicationInstanceTaskLogs'
-  { _dritlMarker                 :: !(Maybe Text)
-  , _dritlMaxRecords             :: !(Maybe Int)
-  , _dritlReplicationInstanceARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationInstanceTaskLogs = DescribeReplicationInstanceTaskLogs'{_dritlMarker
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _dritlMaxRecords
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Int),
+                                                                                _dritlReplicationInstanceARN
+                                                                                ::
+                                                                                !Text}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeReplicationInstanceTaskLogs' with the minimum fields required to make a request.
 --
@@ -68,13 +75,13 @@ data DescribeReplicationInstanceTaskLogs = DescribeReplicationInstanceTaskLogs'
 describeReplicationInstanceTaskLogs
     :: Text -- ^ 'dritlReplicationInstanceARN'
     -> DescribeReplicationInstanceTaskLogs
-describeReplicationInstanceTaskLogs pReplicationInstanceARN_ =
-  DescribeReplicationInstanceTaskLogs'
-    { _dritlMarker = Nothing
-    , _dritlMaxRecords = Nothing
-    , _dritlReplicationInstanceARN = pReplicationInstanceARN_
-    }
-
+describeReplicationInstanceTaskLogs
+  pReplicationInstanceARN_
+  = DescribeReplicationInstanceTaskLogs'{_dritlMarker =
+                                           Nothing,
+                                         _dritlMaxRecords = Nothing,
+                                         _dritlReplicationInstanceARN =
+                                           pReplicationInstanceARN_}
 
 -- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
 dritlMarker :: Lens' DescribeReplicationInstanceTaskLogs (Maybe Text)
@@ -141,19 +148,30 @@ instance ToQuery DescribeReplicationInstanceTaskLogs
         toQuery = const mempty
 
 -- | /See:/ 'describeReplicationInstanceTaskLogsResponse' smart constructor.
-data DescribeReplicationInstanceTaskLogsResponse = DescribeReplicationInstanceTaskLogsResponse'
-  { _dritlrsReplicationInstanceTaskLogs :: !(Maybe [ReplicationInstanceTaskLog])
-  , _dritlrsMarker                      :: !(Maybe Text)
-  , _dritlrsReplicationInstanceARN      :: !(Maybe Text)
-  , _dritlrsResponseStatus              :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationInstanceTaskLogsResponse = DescribeReplicationInstanceTaskLogsResponse'{_dritlrsReplicationInstanceTaskLogs
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    [ReplicationInstanceTaskLog]),
+                                                                                                _dritlrsMarker
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _dritlrsReplicationInstanceARN
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _dritlrsResponseStatus
+                                                                                                ::
+                                                                                                !Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DescribeReplicationInstanceTaskLogsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dritlrsReplicationInstanceTaskLogs' - An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes).
+-- * 'dritlrsReplicationInstanceTaskLogs' - An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes). 
 --
 -- * 'dritlrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
 --
@@ -163,16 +181,17 @@ data DescribeReplicationInstanceTaskLogsResponse = DescribeReplicationInstanceTa
 describeReplicationInstanceTaskLogsResponse
     :: Int -- ^ 'dritlrsResponseStatus'
     -> DescribeReplicationInstanceTaskLogsResponse
-describeReplicationInstanceTaskLogsResponse pResponseStatus_ =
-  DescribeReplicationInstanceTaskLogsResponse'
-    { _dritlrsReplicationInstanceTaskLogs = Nothing
-    , _dritlrsMarker = Nothing
-    , _dritlrsReplicationInstanceARN = Nothing
-    , _dritlrsResponseStatus = pResponseStatus_
-    }
+describeReplicationInstanceTaskLogsResponse
+  pResponseStatus_
+  = DescribeReplicationInstanceTaskLogsResponse'{_dritlrsReplicationInstanceTaskLogs
+                                                   = Nothing,
+                                                 _dritlrsMarker = Nothing,
+                                                 _dritlrsReplicationInstanceARN
+                                                   = Nothing,
+                                                 _dritlrsResponseStatus =
+                                                   pResponseStatus_}
 
-
--- | An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes).
+-- | An array of replication task log metadata. Each member of the array contains the replication task name, ARN, and task log size (in bytes). 
 dritlrsReplicationInstanceTaskLogs :: Lens' DescribeReplicationInstanceTaskLogsResponse [ReplicationInstanceTaskLog]
 dritlrsReplicationInstanceTaskLogs = lens _dritlrsReplicationInstanceTaskLogs (\ s a -> s{_dritlrsReplicationInstanceTaskLogs = a}) . _Default . _Coerce
 

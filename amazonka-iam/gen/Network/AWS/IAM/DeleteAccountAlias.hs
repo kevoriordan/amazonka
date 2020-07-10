@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified AWS account alias. For information about using an AWS account alias, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html Using an Alias for Your AWS Account ID> in the /IAM User Guide/ .
+-- Deletes the specified AWS account alias. For information about using an AWS account alias, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html Using an Alias for Your AWS Account ID> in the /IAM User Guide/ .
 --
 --
 module Network.AWS.IAM.DeleteAccountAlias
@@ -42,24 +42,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAccountAlias' smart constructor.
-newtype DeleteAccountAlias = DeleteAccountAlias'
-  { _daaAccountAlias :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAccountAlias = DeleteAccountAlias'{_daaAccountAlias
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteAccountAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daaAccountAlias' - The name of the account alias to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
+-- * 'daaAccountAlias' - The name of the account alias to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
 deleteAccountAlias
     :: Text -- ^ 'daaAccountAlias'
     -> DeleteAccountAlias
-deleteAccountAlias pAccountAlias_ =
-  DeleteAccountAlias' {_daaAccountAlias = pAccountAlias_}
+deleteAccountAlias pAccountAlias_
+  = DeleteAccountAlias'{_daaAccountAlias =
+                          pAccountAlias_}
 
-
--- | The name of the account alias to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
+-- | The name of the account alias to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
 daaAccountAlias :: Lens' DeleteAccountAlias Text
 daaAccountAlias = lens _daaAccountAlias (\ s a -> s{_daaAccountAlias = a})
 
@@ -87,16 +87,15 @@ instance ToQuery DeleteAccountAlias where
                "AccountAlias" =: _daaAccountAlias]
 
 -- | /See:/ 'deleteAccountAliasResponse' smart constructor.
-data DeleteAccountAliasResponse =
-  DeleteAccountAliasResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAccountAliasResponse = DeleteAccountAliasResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteAccountAliasResponse' with the minimum fields required to make a request.
 --
 deleteAccountAliasResponse
     :: DeleteAccountAliasResponse
-deleteAccountAliasResponse = DeleteAccountAliasResponse'
-
+deleteAccountAliasResponse
+  = DeleteAccountAliasResponse'
 
 instance NFData DeleteAccountAliasResponse where

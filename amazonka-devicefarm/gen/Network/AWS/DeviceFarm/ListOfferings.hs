@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a @NotEligible@ error if the user is not permitted to invoke the operation. Please contact <mailto:aws-devicefarm-support@amazon.com aws-devicefarm-support@amazon.com> if you believe that you should be able to invoke this operation.
+-- Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a @NotEligible@ error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <mailto:aws-devicefarm-support@amazon.com aws-devicefarm-support@amazon.com> .
 --
 --
 --
@@ -53,10 +53,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listOfferings' smart constructor.
-newtype ListOfferings = ListOfferings'
-  { _loNextToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListOfferings = ListOfferings'{_loNextToken
+                                       :: Maybe Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOfferings' with the minimum fields required to make a request.
 --
@@ -65,8 +64,8 @@ newtype ListOfferings = ListOfferings'
 -- * 'loNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 listOfferings
     :: ListOfferings
-listOfferings = ListOfferings' {_loNextToken = Nothing}
-
+listOfferings
+  = ListOfferings'{_loNextToken = Nothing}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 loNextToken :: Lens' ListOfferings (Maybe Text)
@@ -119,12 +118,13 @@ instance ToQuery ListOfferings where
 --
 --
 -- /See:/ 'listOfferingsResponse' smart constructor.
-data ListOfferingsResponse = ListOfferingsResponse'
-  { _lorsNextToken      :: !(Maybe Text)
-  , _lorsOfferings      :: !(Maybe [Offering])
-  , _lorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOfferingsResponse = ListOfferingsResponse'{_lorsNextToken
+                                                    :: !(Maybe Text),
+                                                    _lorsOfferings ::
+                                                    !(Maybe [Offering]),
+                                                    _lorsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListOfferingsResponse' with the minimum fields required to make a request.
 --
@@ -132,25 +132,22 @@ data ListOfferingsResponse = ListOfferingsResponse'
 --
 -- * 'lorsNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 --
--- * 'lorsOfferings' - A value representing the list offering results.
+-- * 'lorsOfferings' - A value that represents the list offering results.
 --
 -- * 'lorsResponseStatus' - -- | The response status code.
 listOfferingsResponse
     :: Int -- ^ 'lorsResponseStatus'
     -> ListOfferingsResponse
-listOfferingsResponse pResponseStatus_ =
-  ListOfferingsResponse'
-    { _lorsNextToken = Nothing
-    , _lorsOfferings = Nothing
-    , _lorsResponseStatus = pResponseStatus_
-    }
-
+listOfferingsResponse pResponseStatus_
+  = ListOfferingsResponse'{_lorsNextToken = Nothing,
+                           _lorsOfferings = Nothing,
+                           _lorsResponseStatus = pResponseStatus_}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lorsNextToken :: Lens' ListOfferingsResponse (Maybe Text)
 lorsNextToken = lens _lorsNextToken (\ s a -> s{_lorsNextToken = a})
 
--- | A value representing the list offering results.
+-- | A value that represents the list offering results.
 lorsOfferings :: Lens' ListOfferingsResponse [Offering]
 lorsOfferings = lens _lorsOfferings (\ s a -> s{_lorsOfferings = a}) . _Default . _Coerce
 

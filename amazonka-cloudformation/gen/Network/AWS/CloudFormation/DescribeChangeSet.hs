@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html Updating Stacks Using Change Sets> in the AWS CloudFormation User Guide.
+-- Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html Updating Stacks Using Change Sets> in the AWS CloudFormation User Guide.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CloudFormation.DescribeChangeSet
     (
     -- * Creating a Request
@@ -35,28 +37,29 @@ module Network.AWS.CloudFormation.DescribeChangeSet
     , describeChangeSetResponse
     , DescribeChangeSetResponse
     -- * Response Lenses
-    , desrsCreationTime
-    , desrsChanges
-    , desrsNotificationARNs
-    , desrsChangeSetName
-    , desrsExecutionStatus
-    , desrsChangeSetId
-    , desrsNextToken
-    , desrsParameters
-    , desrsStatusReason
-    , desrsStackId
-    , desrsDescription
-    , desrsCapabilities
-    , desrsRollbackConfiguration
-    , desrsTags
-    , desrsStackName
-    , desrsResponseStatus
-    , desrsStatus
+    , dscrbchngstrsCreationTime
+    , dscrbchngstrsChanges
+    , dscrbchngstrsNotificationARNs
+    , dscrbchngstrsChangeSetName
+    , dscrbchngstrsExecutionStatus
+    , dscrbchngstrsChangeSetId
+    , dscrbchngstrsNextToken
+    , dscrbchngstrsParameters
+    , dscrbchngstrsStatusReason
+    , dscrbchngstrsStackId
+    , dscrbchngstrsDescription
+    , dscrbchngstrsCapabilities
+    , dscrbchngstrsRollbackConfiguration
+    , dscrbchngstrsTags
+    , dscrbchngstrsStackName
+    , dscrbchngstrsResponseStatus
+    , dscrbchngstrsStatus
     ) where
 
 import Network.AWS.CloudFormation.Types
 import Network.AWS.CloudFormation.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -66,12 +69,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeChangeSet' smart constructor.
-data DescribeChangeSet = DescribeChangeSet'
-  { _desNextToken     :: !(Maybe Text)
-  , _desStackName     :: !(Maybe Text)
-  , _desChangeSetName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeChangeSet = DescribeChangeSet'{_desNextToken
+                                            :: !(Maybe Text),
+                                            _desStackName :: !(Maybe Text),
+                                            _desChangeSetName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeChangeSet' with the minimum fields required to make a request.
 --
@@ -85,13 +87,10 @@ data DescribeChangeSet = DescribeChangeSet'
 describeChangeSet
     :: Text -- ^ 'desChangeSetName'
     -> DescribeChangeSet
-describeChangeSet pChangeSetName_ =
-  DescribeChangeSet'
-    { _desNextToken = Nothing
-    , _desStackName = Nothing
-    , _desChangeSetName = pChangeSetName_
-    }
-
+describeChangeSet pChangeSetName_
+  = DescribeChangeSet'{_desNextToken = Nothing,
+                       _desStackName = Nothing,
+                       _desChangeSetName = pChangeSetName_}
 
 -- | A string (provided by the 'DescribeChangeSet' response output) that identifies the next page of information that you want to retrieve.
 desNextToken :: Lens' DescribeChangeSet (Maybe Text)
@@ -104,6 +103,14 @@ desStackName = lens _desStackName (\ s a -> s{_desStackName = a})
 -- | The name or Amazon Resource Name (ARN) of the change set that you want to describe.
 desChangeSetName :: Lens' DescribeChangeSet Text
 desChangeSetName = lens _desChangeSetName (\ s a -> s{_desChangeSetName = a})
+
+instance AWSPager DescribeChangeSet where
+        page rq rs
+          | stop (rs ^. dscrbchngstrsNextToken) = Nothing
+          | stop (rs ^. dscrbchngstrsChanges) = Nothing
+          | otherwise =
+            Just $ rq &
+              desNextToken .~ rs ^. dscrbchngstrsNextToken
 
 instance AWSRequest DescribeChangeSet where
         type Rs DescribeChangeSet = DescribeChangeSetResponse
@@ -163,156 +170,179 @@ instance ToQuery DescribeChangeSet where
 --
 --
 -- /See:/ 'describeChangeSetResponse' smart constructor.
-data DescribeChangeSetResponse = DescribeChangeSetResponse'
-  { _desrsCreationTime          :: !(Maybe ISO8601)
-  , _desrsChanges               :: !(Maybe [Change])
-  , _desrsNotificationARNs      :: !(Maybe [Text])
-  , _desrsChangeSetName         :: !(Maybe Text)
-  , _desrsExecutionStatus       :: !(Maybe ExecutionStatus)
-  , _desrsChangeSetId           :: !(Maybe Text)
-  , _desrsNextToken             :: !(Maybe Text)
-  , _desrsParameters            :: !(Maybe [Parameter])
-  , _desrsStatusReason          :: !(Maybe Text)
-  , _desrsStackId               :: !(Maybe Text)
-  , _desrsDescription           :: !(Maybe Text)
-  , _desrsCapabilities          :: !(Maybe [Capability])
-  , _desrsRollbackConfiguration :: !(Maybe RollbackConfiguration)
-  , _desrsTags                  :: !(Maybe [Tag])
-  , _desrsStackName             :: !(Maybe Text)
-  , _desrsResponseStatus        :: !Int
-  , _desrsStatus                :: !ChangeSetStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeChangeSetResponse = DescribeChangeSetResponse'{_dscrbchngstrsCreationTime
+                                                            :: !(Maybe ISO8601),
+                                                            _dscrbchngstrsChanges
+                                                            ::
+                                                            !(Maybe [Change]),
+                                                            _dscrbchngstrsNotificationARNs
+                                                            :: !(Maybe [Text]),
+                                                            _dscrbchngstrsChangeSetName
+                                                            :: !(Maybe Text),
+                                                            _dscrbchngstrsExecutionStatus
+                                                            ::
+                                                            !(Maybe
+                                                                ExecutionStatus),
+                                                            _dscrbchngstrsChangeSetId
+                                                            :: !(Maybe Text),
+                                                            _dscrbchngstrsNextToken
+                                                            :: !(Maybe Text),
+                                                            _dscrbchngstrsParameters
+                                                            ::
+                                                            !(Maybe
+                                                                [Parameter]),
+                                                            _dscrbchngstrsStatusReason
+                                                            :: !(Maybe Text),
+                                                            _dscrbchngstrsStackId
+                                                            :: !(Maybe Text),
+                                                            _dscrbchngstrsDescription
+                                                            :: !(Maybe Text),
+                                                            _dscrbchngstrsCapabilities
+                                                            ::
+                                                            !(Maybe
+                                                                [Capability]),
+                                                            _dscrbchngstrsRollbackConfiguration
+                                                            ::
+                                                            !(Maybe
+                                                                RollbackConfiguration),
+                                                            _dscrbchngstrsTags
+                                                            :: !(Maybe [Tag]),
+                                                            _dscrbchngstrsStackName
+                                                            :: !(Maybe Text),
+                                                            _dscrbchngstrsResponseStatus
+                                                            :: !Int,
+                                                            _dscrbchngstrsStatus
+                                                            :: !ChangeSetStatus}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeChangeSetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'desrsCreationTime' - The start time when the change set was created, in UTC.
+-- * 'dscrbchngstrsCreationTime' - The start time when the change set was created, in UTC.
 --
--- * 'desrsChanges' - A list of @Change@ structures that describes the resources AWS CloudFormation changes if you execute the change set.
+-- * 'dscrbchngstrsChanges' - A list of @Change@ structures that describes the resources AWS CloudFormation changes if you execute the change set.
 --
--- * 'desrsNotificationARNs' - The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will be associated with the stack if you execute the change set.
+-- * 'dscrbchngstrsNotificationARNs' - The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will be associated with the stack if you execute the change set.
 --
--- * 'desrsChangeSetName' - The name of the change set.
+-- * 'dscrbchngstrsChangeSetName' - The name of the change set.
 --
--- * 'desrsExecutionStatus' - If the change set execution status is @AVAILABLE@ , you can execute the change set. If you can’t execute the change set, the status indicates why. For example, a change set might be in an @UNAVAILABLE@ state because AWS CloudFormation is still creating it or in an @OBSOLETE@ state because the stack was already updated.
+-- * 'dscrbchngstrsExecutionStatus' - If the change set execution status is @AVAILABLE@ , you can execute the change set. If you can’t execute the change set, the status indicates why. For example, a change set might be in an @UNAVAILABLE@ state because AWS CloudFormation is still creating it or in an @OBSOLETE@ state because the stack was already updated.
 --
--- * 'desrsChangeSetId' - The ARN of the change set.
+-- * 'dscrbchngstrsChangeSetId' - The ARN of the change set.
 --
--- * 'desrsNextToken' - If the output exceeds 1 MB, a string that identifies the next page of changes. If there is no additional page, this value is null.
+-- * 'dscrbchngstrsNextToken' - If the output exceeds 1 MB, a string that identifies the next page of changes. If there is no additional page, this value is null.
 --
--- * 'desrsParameters' - A list of @Parameter@ structures that describes the input parameters and their values used to create the change set. For more information, see the <http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html Parameter> data type.
+-- * 'dscrbchngstrsParameters' - A list of @Parameter@ structures that describes the input parameters and their values used to create the change set. For more information, see the <https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html Parameter> data type.
 --
--- * 'desrsStatusReason' - A description of the change set's status. For example, if your attempt to create a change set failed, AWS CloudFormation shows the error message.
+-- * 'dscrbchngstrsStatusReason' - A description of the change set's status. For example, if your attempt to create a change set failed, AWS CloudFormation shows the error message.
 --
--- * 'desrsStackId' - The ARN of the stack that is associated with the change set.
+-- * 'dscrbchngstrsStackId' - The ARN of the stack that is associated with the change set.
 --
--- * 'desrsDescription' - Information about the change set.
+-- * 'dscrbchngstrsDescription' - Information about the change set.
 --
--- * 'desrsCapabilities' - If you execute the change set, the list of capabilities that were explicitly acknowledged when the change set was created.
+-- * 'dscrbchngstrsCapabilities' - If you execute the change set, the list of capabilities that were explicitly acknowledged when the change set was created.
 --
--- * 'desrsRollbackConfiguration' - The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
+-- * 'dscrbchngstrsRollbackConfiguration' - The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
 --
--- * 'desrsTags' - If you execute the change set, the tags that will be associated with the stack.
+-- * 'dscrbchngstrsTags' - If you execute the change set, the tags that will be associated with the stack.
 --
--- * 'desrsStackName' - The name of the stack that is associated with the change set.
+-- * 'dscrbchngstrsStackName' - The name of the stack that is associated with the change set.
 --
--- * 'desrsResponseStatus' - -- | The response status code.
+-- * 'dscrbchngstrsResponseStatus' - -- | The response status code.
 --
--- * 'desrsStatus' - The current status of the change set, such as @CREATE_IN_PROGRESS@ , @CREATE_COMPLETE@ , or @FAILED@ .
+-- * 'dscrbchngstrsStatus' - The current status of the change set, such as @CREATE_IN_PROGRESS@ , @CREATE_COMPLETE@ , or @FAILED@ .
 describeChangeSetResponse
-    :: Int -- ^ 'desrsResponseStatus'
-    -> ChangeSetStatus -- ^ 'desrsStatus'
+    :: Int -- ^ 'dscrbchngstrsResponseStatus'
+    -> ChangeSetStatus -- ^ 'dscrbchngstrsStatus'
     -> DescribeChangeSetResponse
-describeChangeSetResponse pResponseStatus_ pStatus_ =
-  DescribeChangeSetResponse'
-    { _desrsCreationTime = Nothing
-    , _desrsChanges = Nothing
-    , _desrsNotificationARNs = Nothing
-    , _desrsChangeSetName = Nothing
-    , _desrsExecutionStatus = Nothing
-    , _desrsChangeSetId = Nothing
-    , _desrsNextToken = Nothing
-    , _desrsParameters = Nothing
-    , _desrsStatusReason = Nothing
-    , _desrsStackId = Nothing
-    , _desrsDescription = Nothing
-    , _desrsCapabilities = Nothing
-    , _desrsRollbackConfiguration = Nothing
-    , _desrsTags = Nothing
-    , _desrsStackName = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    , _desrsStatus = pStatus_
-    }
-
+describeChangeSetResponse pResponseStatus_ pStatus_
+  = DescribeChangeSetResponse'{_dscrbchngstrsCreationTime
+                                 = Nothing,
+                               _dscrbchngstrsChanges = Nothing,
+                               _dscrbchngstrsNotificationARNs = Nothing,
+                               _dscrbchngstrsChangeSetName = Nothing,
+                               _dscrbchngstrsExecutionStatus = Nothing,
+                               _dscrbchngstrsChangeSetId = Nothing,
+                               _dscrbchngstrsNextToken = Nothing,
+                               _dscrbchngstrsParameters = Nothing,
+                               _dscrbchngstrsStatusReason = Nothing,
+                               _dscrbchngstrsStackId = Nothing,
+                               _dscrbchngstrsDescription = Nothing,
+                               _dscrbchngstrsCapabilities = Nothing,
+                               _dscrbchngstrsRollbackConfiguration = Nothing,
+                               _dscrbchngstrsTags = Nothing,
+                               _dscrbchngstrsStackName = Nothing,
+                               _dscrbchngstrsResponseStatus = pResponseStatus_,
+                               _dscrbchngstrsStatus = pStatus_}
 
 -- | The start time when the change set was created, in UTC.
-desrsCreationTime :: Lens' DescribeChangeSetResponse (Maybe UTCTime)
-desrsCreationTime = lens _desrsCreationTime (\ s a -> s{_desrsCreationTime = a}) . mapping _Time
+dscrbchngstrsCreationTime :: Lens' DescribeChangeSetResponse (Maybe UTCTime)
+dscrbchngstrsCreationTime = lens _dscrbchngstrsCreationTime (\ s a -> s{_dscrbchngstrsCreationTime = a}) . mapping _Time
 
 -- | A list of @Change@ structures that describes the resources AWS CloudFormation changes if you execute the change set.
-desrsChanges :: Lens' DescribeChangeSetResponse [Change]
-desrsChanges = lens _desrsChanges (\ s a -> s{_desrsChanges = a}) . _Default . _Coerce
+dscrbchngstrsChanges :: Lens' DescribeChangeSetResponse [Change]
+dscrbchngstrsChanges = lens _dscrbchngstrsChanges (\ s a -> s{_dscrbchngstrsChanges = a}) . _Default . _Coerce
 
 -- | The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that will be associated with the stack if you execute the change set.
-desrsNotificationARNs :: Lens' DescribeChangeSetResponse [Text]
-desrsNotificationARNs = lens _desrsNotificationARNs (\ s a -> s{_desrsNotificationARNs = a}) . _Default . _Coerce
+dscrbchngstrsNotificationARNs :: Lens' DescribeChangeSetResponse [Text]
+dscrbchngstrsNotificationARNs = lens _dscrbchngstrsNotificationARNs (\ s a -> s{_dscrbchngstrsNotificationARNs = a}) . _Default . _Coerce
 
 -- | The name of the change set.
-desrsChangeSetName :: Lens' DescribeChangeSetResponse (Maybe Text)
-desrsChangeSetName = lens _desrsChangeSetName (\ s a -> s{_desrsChangeSetName = a})
+dscrbchngstrsChangeSetName :: Lens' DescribeChangeSetResponse (Maybe Text)
+dscrbchngstrsChangeSetName = lens _dscrbchngstrsChangeSetName (\ s a -> s{_dscrbchngstrsChangeSetName = a})
 
 -- | If the change set execution status is @AVAILABLE@ , you can execute the change set. If you can’t execute the change set, the status indicates why. For example, a change set might be in an @UNAVAILABLE@ state because AWS CloudFormation is still creating it or in an @OBSOLETE@ state because the stack was already updated.
-desrsExecutionStatus :: Lens' DescribeChangeSetResponse (Maybe ExecutionStatus)
-desrsExecutionStatus = lens _desrsExecutionStatus (\ s a -> s{_desrsExecutionStatus = a})
+dscrbchngstrsExecutionStatus :: Lens' DescribeChangeSetResponse (Maybe ExecutionStatus)
+dscrbchngstrsExecutionStatus = lens _dscrbchngstrsExecutionStatus (\ s a -> s{_dscrbchngstrsExecutionStatus = a})
 
 -- | The ARN of the change set.
-desrsChangeSetId :: Lens' DescribeChangeSetResponse (Maybe Text)
-desrsChangeSetId = lens _desrsChangeSetId (\ s a -> s{_desrsChangeSetId = a})
+dscrbchngstrsChangeSetId :: Lens' DescribeChangeSetResponse (Maybe Text)
+dscrbchngstrsChangeSetId = lens _dscrbchngstrsChangeSetId (\ s a -> s{_dscrbchngstrsChangeSetId = a})
 
 -- | If the output exceeds 1 MB, a string that identifies the next page of changes. If there is no additional page, this value is null.
-desrsNextToken :: Lens' DescribeChangeSetResponse (Maybe Text)
-desrsNextToken = lens _desrsNextToken (\ s a -> s{_desrsNextToken = a})
+dscrbchngstrsNextToken :: Lens' DescribeChangeSetResponse (Maybe Text)
+dscrbchngstrsNextToken = lens _dscrbchngstrsNextToken (\ s a -> s{_dscrbchngstrsNextToken = a})
 
--- | A list of @Parameter@ structures that describes the input parameters and their values used to create the change set. For more information, see the <http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html Parameter> data type.
-desrsParameters :: Lens' DescribeChangeSetResponse [Parameter]
-desrsParameters = lens _desrsParameters (\ s a -> s{_desrsParameters = a}) . _Default . _Coerce
+-- | A list of @Parameter@ structures that describes the input parameters and their values used to create the change set. For more information, see the <https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html Parameter> data type.
+dscrbchngstrsParameters :: Lens' DescribeChangeSetResponse [Parameter]
+dscrbchngstrsParameters = lens _dscrbchngstrsParameters (\ s a -> s{_dscrbchngstrsParameters = a}) . _Default . _Coerce
 
 -- | A description of the change set's status. For example, if your attempt to create a change set failed, AWS CloudFormation shows the error message.
-desrsStatusReason :: Lens' DescribeChangeSetResponse (Maybe Text)
-desrsStatusReason = lens _desrsStatusReason (\ s a -> s{_desrsStatusReason = a})
+dscrbchngstrsStatusReason :: Lens' DescribeChangeSetResponse (Maybe Text)
+dscrbchngstrsStatusReason = lens _dscrbchngstrsStatusReason (\ s a -> s{_dscrbchngstrsStatusReason = a})
 
 -- | The ARN of the stack that is associated with the change set.
-desrsStackId :: Lens' DescribeChangeSetResponse (Maybe Text)
-desrsStackId = lens _desrsStackId (\ s a -> s{_desrsStackId = a})
+dscrbchngstrsStackId :: Lens' DescribeChangeSetResponse (Maybe Text)
+dscrbchngstrsStackId = lens _dscrbchngstrsStackId (\ s a -> s{_dscrbchngstrsStackId = a})
 
 -- | Information about the change set.
-desrsDescription :: Lens' DescribeChangeSetResponse (Maybe Text)
-desrsDescription = lens _desrsDescription (\ s a -> s{_desrsDescription = a})
+dscrbchngstrsDescription :: Lens' DescribeChangeSetResponse (Maybe Text)
+dscrbchngstrsDescription = lens _dscrbchngstrsDescription (\ s a -> s{_dscrbchngstrsDescription = a})
 
 -- | If you execute the change set, the list of capabilities that were explicitly acknowledged when the change set was created.
-desrsCapabilities :: Lens' DescribeChangeSetResponse [Capability]
-desrsCapabilities = lens _desrsCapabilities (\ s a -> s{_desrsCapabilities = a}) . _Default . _Coerce
+dscrbchngstrsCapabilities :: Lens' DescribeChangeSetResponse [Capability]
+dscrbchngstrsCapabilities = lens _dscrbchngstrsCapabilities (\ s a -> s{_dscrbchngstrsCapabilities = a}) . _Default . _Coerce
 
 -- | The rollback triggers for AWS CloudFormation to monitor during stack creation and updating operations, and for the specified monitoring period afterwards.
-desrsRollbackConfiguration :: Lens' DescribeChangeSetResponse (Maybe RollbackConfiguration)
-desrsRollbackConfiguration = lens _desrsRollbackConfiguration (\ s a -> s{_desrsRollbackConfiguration = a})
+dscrbchngstrsRollbackConfiguration :: Lens' DescribeChangeSetResponse (Maybe RollbackConfiguration)
+dscrbchngstrsRollbackConfiguration = lens _dscrbchngstrsRollbackConfiguration (\ s a -> s{_dscrbchngstrsRollbackConfiguration = a})
 
 -- | If you execute the change set, the tags that will be associated with the stack.
-desrsTags :: Lens' DescribeChangeSetResponse [Tag]
-desrsTags = lens _desrsTags (\ s a -> s{_desrsTags = a}) . _Default . _Coerce
+dscrbchngstrsTags :: Lens' DescribeChangeSetResponse [Tag]
+dscrbchngstrsTags = lens _dscrbchngstrsTags (\ s a -> s{_dscrbchngstrsTags = a}) . _Default . _Coerce
 
 -- | The name of the stack that is associated with the change set.
-desrsStackName :: Lens' DescribeChangeSetResponse (Maybe Text)
-desrsStackName = lens _desrsStackName (\ s a -> s{_desrsStackName = a})
+dscrbchngstrsStackName :: Lens' DescribeChangeSetResponse (Maybe Text)
+dscrbchngstrsStackName = lens _dscrbchngstrsStackName (\ s a -> s{_dscrbchngstrsStackName = a})
 
 -- | -- | The response status code.
-desrsResponseStatus :: Lens' DescribeChangeSetResponse Int
-desrsResponseStatus = lens _desrsResponseStatus (\ s a -> s{_desrsResponseStatus = a})
+dscrbchngstrsResponseStatus :: Lens' DescribeChangeSetResponse Int
+dscrbchngstrsResponseStatus = lens _dscrbchngstrsResponseStatus (\ s a -> s{_dscrbchngstrsResponseStatus = a})
 
 -- | The current status of the change set, such as @CREATE_IN_PROGRESS@ , @CREATE_COMPLETE@ , or @FAILED@ .
-desrsStatus :: Lens' DescribeChangeSetResponse ChangeSetStatus
-desrsStatus = lens _desrsStatus (\ s a -> s{_desrsStatus = a})
+dscrbchngstrsStatus :: Lens' DescribeChangeSetResponse ChangeSetStatus
+dscrbchngstrsStatus = lens _dscrbchngstrsStatus (\ s a -> s{_dscrbchngstrsStatus = a})
 
 instance NFData DescribeChangeSetResponse where

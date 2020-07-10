@@ -52,10 +52,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deletePolicy' smart constructor.
-newtype DeletePolicy = DeletePolicy'
-  { _dpPolicyName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePolicy = DeletePolicy'{_dpPolicyName ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePolicy' with the minimum fields required to make a request.
 --
@@ -65,8 +64,8 @@ newtype DeletePolicy = DeletePolicy'
 deletePolicy
     :: Text -- ^ 'dpPolicyName'
     -> DeletePolicy
-deletePolicy pPolicyName_ = DeletePolicy' {_dpPolicyName = pPolicyName_}
-
+deletePolicy pPolicyName_
+  = DeletePolicy'{_dpPolicyName = pPolicyName_}
 
 -- | The name of the policy to delete.
 dpPolicyName :: Lens' DeletePolicy Text
@@ -92,16 +91,13 @@ instance ToQuery DeletePolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deletePolicyResponse' smart constructor.
-data DeletePolicyResponse =
-  DeletePolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePolicyResponse = DeletePolicyResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePolicyResponse' with the minimum fields required to make a request.
 --
 deletePolicyResponse
     :: DeletePolicyResponse
 deletePolicyResponse = DeletePolicyResponse'
-
 
 instance NFData DeletePolicyResponse where

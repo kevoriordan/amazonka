@@ -45,17 +45,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getV2LoggingOptions' smart constructor.
-data GetV2LoggingOptions =
-  GetV2LoggingOptions'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetV2LoggingOptions = GetV2LoggingOptions'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetV2LoggingOptions' with the minimum fields required to make a request.
 --
 getV2LoggingOptions
     :: GetV2LoggingOptions
 getV2LoggingOptions = GetV2LoggingOptions'
-
 
 instance AWSRequest GetV2LoggingOptions where
         type Rs GetV2LoggingOptions =
@@ -84,13 +81,20 @@ instance ToQuery GetV2LoggingOptions where
         toQuery = const mempty
 
 -- | /See:/ 'getV2LoggingOptionsResponse' smart constructor.
-data GetV2LoggingOptionsResponse = GetV2LoggingOptionsResponse'
-  { _gvlorsDisableAllLogs  :: !(Maybe Bool)
-  , _gvlorsDefaultLogLevel :: !(Maybe LogLevel)
-  , _gvlorsRoleARN         :: !(Maybe Text)
-  , _gvlorsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetV2LoggingOptionsResponse = GetV2LoggingOptionsResponse'{_gvlorsDisableAllLogs
+                                                                ::
+                                                                !(Maybe Bool),
+                                                                _gvlorsDefaultLogLevel
+                                                                ::
+                                                                !(Maybe
+                                                                    LogLevel),
+                                                                _gvlorsRoleARN
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gvlorsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetV2LoggingOptionsResponse' with the minimum fields required to make a request.
 --
@@ -106,14 +110,12 @@ data GetV2LoggingOptionsResponse = GetV2LoggingOptionsResponse'
 getV2LoggingOptionsResponse
     :: Int -- ^ 'gvlorsResponseStatus'
     -> GetV2LoggingOptionsResponse
-getV2LoggingOptionsResponse pResponseStatus_ =
-  GetV2LoggingOptionsResponse'
-    { _gvlorsDisableAllLogs = Nothing
-    , _gvlorsDefaultLogLevel = Nothing
-    , _gvlorsRoleARN = Nothing
-    , _gvlorsResponseStatus = pResponseStatus_
-    }
-
+getV2LoggingOptionsResponse pResponseStatus_
+  = GetV2LoggingOptionsResponse'{_gvlorsDisableAllLogs
+                                   = Nothing,
+                                 _gvlorsDefaultLogLevel = Nothing,
+                                 _gvlorsRoleARN = Nothing,
+                                 _gvlorsResponseStatus = pResponseStatus_}
 
 -- | Disables all logs.
 gvlorsDisableAllLogs :: Lens' GetV2LoggingOptionsResponse (Maybe Bool)

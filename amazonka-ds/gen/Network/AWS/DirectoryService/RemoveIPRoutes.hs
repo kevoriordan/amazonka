@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'removeIPRoutes' smart constructor.
-data RemoveIPRoutes = RemoveIPRoutes'
-  { _rirDirectoryId :: !Text
-  , _rirCidrIPs     :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveIPRoutes = RemoveIPRoutes'{_rirDirectoryId
+                                      :: !Text,
+                                      _rirCidrIPs :: ![Text]}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RemoveIPRoutes' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data RemoveIPRoutes = RemoveIPRoutes'
 removeIPRoutes
     :: Text -- ^ 'rirDirectoryId'
     -> RemoveIPRoutes
-removeIPRoutes pDirectoryId_ =
-  RemoveIPRoutes' {_rirDirectoryId = pDirectoryId_, _rirCidrIPs = mempty}
-
+removeIPRoutes pDirectoryId_
+  = RemoveIPRoutes'{_rirDirectoryId = pDirectoryId_,
+                    _rirCidrIPs = mempty}
 
 -- | Identifier (ID) of the directory from which you want to remove the IP addresses.
 rirDirectoryId :: Lens' RemoveIPRoutes Text
@@ -109,10 +108,10 @@ instance ToQuery RemoveIPRoutes where
         toQuery = const mempty
 
 -- | /See:/ 'removeIPRoutesResponse' smart constructor.
-newtype RemoveIPRoutesResponse = RemoveIPRoutesResponse'
-  { _rirrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RemoveIPRoutesResponse = RemoveIPRoutesResponse'{_rirrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'RemoveIPRoutesResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +121,9 @@ newtype RemoveIPRoutesResponse = RemoveIPRoutesResponse'
 removeIPRoutesResponse
     :: Int -- ^ 'rirrsResponseStatus'
     -> RemoveIPRoutesResponse
-removeIPRoutesResponse pResponseStatus_ =
-  RemoveIPRoutesResponse' {_rirrsResponseStatus = pResponseStatus_}
-
+removeIPRoutesResponse pResponseStatus_
+  = RemoveIPRoutesResponse'{_rirrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 rirrsResponseStatus :: Lens' RemoveIPRoutesResponse Int

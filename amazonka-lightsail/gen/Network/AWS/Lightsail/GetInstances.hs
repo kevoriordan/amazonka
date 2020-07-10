@@ -49,22 +49,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getInstances' smart constructor.
-newtype GetInstances = GetInstances'
-  { _giPageToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetInstances = GetInstances'{_giPageToken ::
+                                     Maybe Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'giPageToken' - A token used for advancing to the next page of results from your get instances request.
+-- * 'giPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetInstances@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getInstances
     :: GetInstances
-getInstances = GetInstances' {_giPageToken = Nothing}
+getInstances = GetInstances'{_giPageToken = Nothing}
 
-
--- | A token used for advancing to the next page of results from your get instances request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetInstances@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 giPageToken :: Lens' GetInstances (Maybe Text)
 giPageToken = lens _giPageToken (\ s a -> s{_giPageToken = a})
 
@@ -111,18 +109,18 @@ instance ToQuery GetInstances where
         toQuery = const mempty
 
 -- | /See:/ 'getInstancesResponse' smart constructor.
-data GetInstancesResponse = GetInstancesResponse'
-  { _grsNextPageToken  :: !(Maybe Text)
-  , _grsInstances      :: !(Maybe [Instance])
-  , _grsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstancesResponse = GetInstancesResponse'{_grsNextPageToken
+                                                  :: !(Maybe Text),
+                                                  _grsInstances ::
+                                                  !(Maybe [Instance]),
+                                                  _grsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grsNextPageToken' - A token used for advancing to the next page of results from your get instances request.
+-- * 'grsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetInstances@ request and specify the next page token using the @pageToken@ parameter.
 --
 -- * 'grsInstances' - An array of key-value pairs containing information about your instances.
 --
@@ -130,15 +128,12 @@ data GetInstancesResponse = GetInstancesResponse'
 getInstancesResponse
     :: Int -- ^ 'grsResponseStatus'
     -> GetInstancesResponse
-getInstancesResponse pResponseStatus_ =
-  GetInstancesResponse'
-    { _grsNextPageToken = Nothing
-    , _grsInstances = Nothing
-    , _grsResponseStatus = pResponseStatus_
-    }
+getInstancesResponse pResponseStatus_
+  = GetInstancesResponse'{_grsNextPageToken = Nothing,
+                          _grsInstances = Nothing,
+                          _grsResponseStatus = pResponseStatus_}
 
-
--- | A token used for advancing to the next page of results from your get instances request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetInstances@ request and specify the next page token using the @pageToken@ parameter.
 grsNextPageToken :: Lens' GetInstancesResponse (Maybe Text)
 grsNextPageToken = lens _grsNextPageToken (\ s a -> s{_grsNextPageToken = a})
 

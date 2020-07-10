@@ -21,7 +21,7 @@
 -- Stops a specified stack.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.StopStack
     (
@@ -44,10 +44,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopStack' smart constructor.
-newtype StopStack = StopStack'
-  { _stoStackId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopStack = StopStack'{_stoStackId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopStack' with the minimum fields required to make a request.
 --
@@ -57,8 +55,8 @@ newtype StopStack = StopStack'
 stopStack
     :: Text -- ^ 'stoStackId'
     -> StopStack
-stopStack pStackId_ = StopStack' {_stoStackId = pStackId_}
-
+stopStack pStackId_
+  = StopStack'{_stoStackId = pStackId_}
 
 -- | The stack ID.
 stoStackId :: Lens' StopStack Text
@@ -94,16 +92,13 @@ instance ToQuery StopStack where
         toQuery = const mempty
 
 -- | /See:/ 'stopStackResponse' smart constructor.
-data StopStackResponse =
-  StopStackResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopStackResponse = StopStackResponse'
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopStackResponse' with the minimum fields required to make a request.
 --
 stopStackResponse
     :: StopStackResponse
 stopStackResponse = StopStackResponse'
-
 
 instance NFData StopStackResponse where

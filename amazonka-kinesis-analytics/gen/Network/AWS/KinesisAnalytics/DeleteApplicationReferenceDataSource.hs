@@ -21,7 +21,7 @@
 -- Deletes a reference data source configuration from the specified application configuration.
 --
 --
--- If the application is running, Amazon Kinesis Analytics immediately removes the in-application table that you created using the 'AddApplicationReferenceDataSource' operation.
+-- If the application is running, Amazon Kinesis Analytics immediately removes the in-application table that you created using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html AddApplicationReferenceDataSource> operation. 
 --
 -- This operation requires permissions to perform the @kinesisanalytics.DeleteApplicationReferenceDataSource@ action.
 --
@@ -50,12 +50,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteApplicationReferenceDataSource' smart constructor.
-data DeleteApplicationReferenceDataSource = DeleteApplicationReferenceDataSource'
-  { _dardsApplicationName             :: !Text
-  , _dardsCurrentApplicationVersionId :: !Nat
-  , _dardsReferenceId                 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplicationReferenceDataSource = DeleteApplicationReferenceDataSource'{_dardsApplicationName
+                                                                                  ::
+                                                                                  !Text,
+                                                                                  _dardsCurrentApplicationVersionId
+                                                                                  ::
+                                                                                  !Nat,
+                                                                                  _dardsReferenceId
+                                                                                  ::
+                                                                                  !Text}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DeleteApplicationReferenceDataSource' with the minimum fields required to make a request.
 --
@@ -63,31 +68,33 @@ data DeleteApplicationReferenceDataSource = DeleteApplicationReferenceDataSource
 --
 -- * 'dardsApplicationName' - Name of an existing application.
 --
--- * 'dardsCurrentApplicationVersionId' - Version of the application. You can use the 'DescribeApplication' operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned.
+-- * 'dardsCurrentApplicationVersionId' - Version of the application. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned.
 --
--- * 'dardsReferenceId' - ID of the reference data source. When you add a reference data source to your application using the 'AddApplicationReferenceDataSource' , Amazon Kinesis Analytics assigns an ID. You can use the 'DescribeApplication' operation to get the reference ID.
+-- * 'dardsReferenceId' - ID of the reference data source. When you add a reference data source to your application using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html AddApplicationReferenceDataSource> , Amazon Kinesis Analytics assigns an ID. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the reference ID. 
 deleteApplicationReferenceDataSource
     :: Text -- ^ 'dardsApplicationName'
     -> Natural -- ^ 'dardsCurrentApplicationVersionId'
     -> Text -- ^ 'dardsReferenceId'
     -> DeleteApplicationReferenceDataSource
-deleteApplicationReferenceDataSource pApplicationName_ pCurrentApplicationVersionId_ pReferenceId_ =
-  DeleteApplicationReferenceDataSource'
-    { _dardsApplicationName = pApplicationName_
-    , _dardsCurrentApplicationVersionId = _Nat # pCurrentApplicationVersionId_
-    , _dardsReferenceId = pReferenceId_
-    }
-
+deleteApplicationReferenceDataSource
+  pApplicationName_ pCurrentApplicationVersionId_
+  pReferenceId_
+  = DeleteApplicationReferenceDataSource'{_dardsApplicationName
+                                            = pApplicationName_,
+                                          _dardsCurrentApplicationVersionId =
+                                            _Nat #
+                                              pCurrentApplicationVersionId_,
+                                          _dardsReferenceId = pReferenceId_}
 
 -- | Name of an existing application.
 dardsApplicationName :: Lens' DeleteApplicationReferenceDataSource Text
 dardsApplicationName = lens _dardsApplicationName (\ s a -> s{_dardsApplicationName = a})
 
--- | Version of the application. You can use the 'DescribeApplication' operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned.
+-- | Version of the application. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the current application version. If the version specified is not the current version, the @ConcurrentModificationException@ is returned.
 dardsCurrentApplicationVersionId :: Lens' DeleteApplicationReferenceDataSource Natural
 dardsCurrentApplicationVersionId = lens _dardsCurrentApplicationVersionId (\ s a -> s{_dardsCurrentApplicationVersionId = a}) . _Nat
 
--- | ID of the reference data source. When you add a reference data source to your application using the 'AddApplicationReferenceDataSource' , Amazon Kinesis Analytics assigns an ID. You can use the 'DescribeApplication' operation to get the reference ID.
+-- | ID of the reference data source. When you add a reference data source to your application using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html AddApplicationReferenceDataSource> , Amazon Kinesis Analytics assigns an ID. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to get the reference ID. 
 dardsReferenceId :: Lens' DeleteApplicationReferenceDataSource Text
 dardsReferenceId = lens _dardsReferenceId (\ s a -> s{_dardsReferenceId = a})
 
@@ -142,10 +149,13 @@ instance ToQuery DeleteApplicationReferenceDataSource
         toQuery = const mempty
 
 -- | /See:/ 'deleteApplicationReferenceDataSourceResponse' smart constructor.
-newtype DeleteApplicationReferenceDataSourceResponse = DeleteApplicationReferenceDataSourceResponse'
-  { _dardsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteApplicationReferenceDataSourceResponse = DeleteApplicationReferenceDataSourceResponse'{_dardsrsResponseStatus
+                                                                                                     ::
+                                                                                                     Int}
+                                                         deriving (Eq, Read,
+                                                                   Show, Data,
+                                                                   Typeable,
+                                                                   Generic)
 
 -- | Creates a value of 'DeleteApplicationReferenceDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -155,10 +165,10 @@ newtype DeleteApplicationReferenceDataSourceResponse = DeleteApplicationReferenc
 deleteApplicationReferenceDataSourceResponse
     :: Int -- ^ 'dardsrsResponseStatus'
     -> DeleteApplicationReferenceDataSourceResponse
-deleteApplicationReferenceDataSourceResponse pResponseStatus_ =
-  DeleteApplicationReferenceDataSourceResponse'
-    {_dardsrsResponseStatus = pResponseStatus_}
-
+deleteApplicationReferenceDataSourceResponse
+  pResponseStatus_
+  = DeleteApplicationReferenceDataSourceResponse'{_dardsrsResponseStatus
+                                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 dardsrsResponseStatus :: Lens' DeleteApplicationReferenceDataSourceResponse Int

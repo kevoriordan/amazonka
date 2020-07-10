@@ -11,7 +11,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- All public APIs for AWS Cost and Usage Report service
+-- The AWS Cost and Usage Report API enables you to programmatically create, query, and delete AWS Cost and Usage report definitions.
+--
+--
+-- AWS Cost and Usage reports track the monthly AWS costs and usage associated with your AWS account. The report contains line items for each unique combination of AWS product, usage type, and operation that your AWS account uses. You can configure the AWS Cost and Usage report to show only the data that you want, using the AWS Cost and Usage API.
+--
+-- Service Endpoint
+--
+-- The AWS Cost and Usage Report API provides the following endpoint:
+--
+--     * cur.us-east-1.amazonaws.com
+--
+--
+--
 module Network.AWS.CostAndUsageReport
     (
     -- * Service Configuration
@@ -23,11 +35,11 @@ module Network.AWS.CostAndUsageReport
     -- ** ValidationException
     , _ValidationException
 
-    -- ** InternalErrorException
-    , _InternalErrorException
-
     -- ** DuplicateReportNameException
     , _DuplicateReportNameException
+
+    -- ** InternalErrorException
+    , _InternalErrorException
 
     -- ** ReportLimitReachedException
     , _ReportLimitReachedException
@@ -38,11 +50,14 @@ module Network.AWS.CostAndUsageReport
     -- * Operations
     -- $operations
 
-    -- ** PutReportDefinition
+    -- ** PutReportDefinition 
     , module Network.AWS.CostAndUsageReport.PutReportDefinition
 
-    -- ** DeleteReportDefinition
+    -- ** DeleteReportDefinition 
     , module Network.AWS.CostAndUsageReport.DeleteReportDefinition
+
+    -- ** ModifyReportDefinition 
+    , module Network.AWS.CostAndUsageReport.ModifyReportDefinition
 
     -- ** DescribeReportDefinitions (Paginated)
     , module Network.AWS.CostAndUsageReport.DescribeReportDefinitions
@@ -61,6 +76,9 @@ module Network.AWS.CostAndUsageReport
     -- ** ReportFormat
     , ReportFormat (..)
 
+    -- ** ReportVersioning
+    , ReportVersioning (..)
+
     -- ** SchemaElement
     , SchemaElement (..)
 
@@ -70,7 +88,9 @@ module Network.AWS.CostAndUsageReport
     -- ** ReportDefinition
     , ReportDefinition
     , reportDefinition
+    , rdReportVersioning
     , rdAdditionalArtifacts
+    , rdRefreshClosedReports
     , rdReportName
     , rdTimeUnit
     , rdFormat
@@ -83,6 +103,7 @@ module Network.AWS.CostAndUsageReport
 
 import Network.AWS.CostAndUsageReport.DeleteReportDefinition
 import Network.AWS.CostAndUsageReport.DescribeReportDefinitions
+import Network.AWS.CostAndUsageReport.ModifyReportDefinition
 import Network.AWS.CostAndUsageReport.PutReportDefinition
 import Network.AWS.CostAndUsageReport.Types
 import Network.AWS.CostAndUsageReport.Waiters

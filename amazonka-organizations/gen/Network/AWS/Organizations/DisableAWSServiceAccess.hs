@@ -27,7 +27,7 @@
 --
 -- After you perform the @DisableAWSServiceAccess@ operation, the specified service can no longer perform operations in your organization's accounts unless the operations are explicitly permitted by the IAM policies that are attached to your roles.
 --
--- For more information about integrating other services with AWS Organizations, including the list of services that work with Organizations, see <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html Integrating AWS Organizations with Other AWS Services> in the /AWS Organizations User Guide/ .
+-- For more information about integrating other services with AWS Organizations, including the list of services that work with Organizations, see <http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html Integrating AWS Organizations with Other AWS Services> in the /AWS Organizations User Guide./ 
 --
 -- This operation can be called only from the organization's master account.
 --
@@ -52,10 +52,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disableAWSServiceAccess' smart constructor.
-newtype DisableAWSServiceAccess = DisableAWSServiceAccess'
-  { _dasaServicePrincipal :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableAWSServiceAccess = DisableAWSServiceAccess'{_dasaServicePrincipal
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DisableAWSServiceAccess' with the minimum fields required to make a request.
 --
@@ -65,9 +65,9 @@ newtype DisableAWSServiceAccess = DisableAWSServiceAccess'
 disableAWSServiceAccess
     :: Text -- ^ 'dasaServicePrincipal'
     -> DisableAWSServiceAccess
-disableAWSServiceAccess pServicePrincipal_ =
-  DisableAWSServiceAccess' {_dasaServicePrincipal = pServicePrincipal_}
-
+disableAWSServiceAccess pServicePrincipal_
+  = DisableAWSServiceAccess'{_dasaServicePrincipal =
+                               pServicePrincipal_}
 
 -- | The service principal name of the AWS service for which you want to disable integration with your organization. This is typically in the form of a URL, such as @/service-abbreviation/ .amazonaws.com@ .
 dasaServicePrincipal :: Lens' DisableAWSServiceAccess Text
@@ -107,16 +107,15 @@ instance ToQuery DisableAWSServiceAccess where
         toQuery = const mempty
 
 -- | /See:/ 'disableAWSServiceAccessResponse' smart constructor.
-data DisableAWSServiceAccessResponse =
-  DisableAWSServiceAccessResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableAWSServiceAccessResponse = DisableAWSServiceAccessResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DisableAWSServiceAccessResponse' with the minimum fields required to make a request.
 --
 disableAWSServiceAccessResponse
     :: DisableAWSServiceAccessResponse
-disableAWSServiceAccessResponse = DisableAWSServiceAccessResponse'
-
+disableAWSServiceAccessResponse
+  = DisableAWSServiceAccessResponse'
 
 instance NFData DisableAWSServiceAccessResponse where

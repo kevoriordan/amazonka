@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a @NotEligible@ error if the user is not permitted to invoke the operation. Please contact <mailto:aws-devicefarm-support@amazon.com aws-devicefarm-support@amazon.com> if you believe that you should be able to invoke this operation.
+-- Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a @NotEligible@ error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <mailto:aws-devicefarm-support@amazon.com aws-devicefarm-support@amazon.com> .
 --
 --
 --
@@ -53,10 +53,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listOfferingTransactions' smart constructor.
-newtype ListOfferingTransactions = ListOfferingTransactions'
-  { _lotNextToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListOfferingTransactions = ListOfferingTransactions'{_lotNextToken
+                                                             :: Maybe Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListOfferingTransactions' with the minimum fields required to make a request.
 --
@@ -65,8 +65,8 @@ newtype ListOfferingTransactions = ListOfferingTransactions'
 -- * 'lotNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 listOfferingTransactions
     :: ListOfferingTransactions
-listOfferingTransactions = ListOfferingTransactions' {_lotNextToken = Nothing}
-
+listOfferingTransactions
+  = ListOfferingTransactions'{_lotNextToken = Nothing}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lotNextToken :: Lens' ListOfferingTransactions (Maybe Text)
@@ -121,12 +121,19 @@ instance ToQuery ListOfferingTransactions where
 --
 --
 -- /See:/ 'listOfferingTransactionsResponse' smart constructor.
-data ListOfferingTransactionsResponse = ListOfferingTransactionsResponse'
-  { _lotrsOfferingTransactions :: !(Maybe [OfferingTransaction])
-  , _lotrsNextToken            :: !(Maybe Text)
-  , _lotrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOfferingTransactionsResponse = ListOfferingTransactionsResponse'{_lotrsOfferingTransactions
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [OfferingTransaction]),
+                                                                          _lotrsNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _lotrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'ListOfferingTransactionsResponse' with the minimum fields required to make a request.
 --
@@ -140,13 +147,11 @@ data ListOfferingTransactionsResponse = ListOfferingTransactionsResponse'
 listOfferingTransactionsResponse
     :: Int -- ^ 'lotrsResponseStatus'
     -> ListOfferingTransactionsResponse
-listOfferingTransactionsResponse pResponseStatus_ =
-  ListOfferingTransactionsResponse'
-    { _lotrsOfferingTransactions = Nothing
-    , _lotrsNextToken = Nothing
-    , _lotrsResponseStatus = pResponseStatus_
-    }
-
+listOfferingTransactionsResponse pResponseStatus_
+  = ListOfferingTransactionsResponse'{_lotrsOfferingTransactions
+                                        = Nothing,
+                                      _lotrsNextToken = Nothing,
+                                      _lotrsResponseStatus = pResponseStatus_}
 
 -- | The audit log of subscriptions you have purchased and modified through AWS Device Farm.
 lotrsOfferingTransactions :: Lens' ListOfferingTransactionsResponse [OfferingTransaction]

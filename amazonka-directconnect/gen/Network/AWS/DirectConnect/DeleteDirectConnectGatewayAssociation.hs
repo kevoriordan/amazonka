@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the association between a direct connect gateway and a virtual private gateway.
+-- Deletes the association between the specified Direct Connect gateway and virtual private gateway.
 --
+--
+-- We recommend that you specify the @associationID@ to delete the association. Alternatively, if you own virtual gateway and a Direct Connect gateway association, you can specify the @virtualGatewayId@ and @directConnectGatewayId@ to delete an association.
 --
 module Network.AWS.DirectConnect.DeleteDirectConnectGatewayAssociation
     (
@@ -27,8 +29,9 @@ module Network.AWS.DirectConnect.DeleteDirectConnectGatewayAssociation
       deleteDirectConnectGatewayAssociation
     , DeleteDirectConnectGatewayAssociation
     -- * Request Lenses
-    , delDirectConnectGatewayId
     , delVirtualGatewayId
+    , delAssociationId
+    , delDirectConnectGatewayId
 
     -- * Destructuring the Response
     , deleteDirectConnectGatewayAssociationResponse
@@ -45,42 +48,50 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the DeleteDirectConnectGatewayAssociation operation.
---
---
---
--- /See:/ 'deleteDirectConnectGatewayAssociation' smart constructor.
-data DeleteDirectConnectGatewayAssociation = DeleteDirectConnectGatewayAssociation'
-  { _delDirectConnectGatewayId :: !Text
-  , _delVirtualGatewayId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteDirectConnectGatewayAssociation' smart constructor.
+data DeleteDirectConnectGatewayAssociation = DeleteDirectConnectGatewayAssociation'{_delVirtualGatewayId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _delAssociationId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _delDirectConnectGatewayId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text)}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DeleteDirectConnectGatewayAssociation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'delDirectConnectGatewayId' - The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+-- * 'delVirtualGatewayId' - The ID of the virtual private gateway.
 --
--- * 'delVirtualGatewayId' - The ID of the virtual private gateway. Example: "vgw-abc123ef" Default: None
+-- * 'delAssociationId' - The ID of the Direct Connect gateway association.
+--
+-- * 'delDirectConnectGatewayId' - The ID of the Direct Connect gateway.
 deleteDirectConnectGatewayAssociation
-    :: Text -- ^ 'delDirectConnectGatewayId'
-    -> Text -- ^ 'delVirtualGatewayId'
-    -> DeleteDirectConnectGatewayAssociation
-deleteDirectConnectGatewayAssociation pDirectConnectGatewayId_ pVirtualGatewayId_ =
-  DeleteDirectConnectGatewayAssociation'
-    { _delDirectConnectGatewayId = pDirectConnectGatewayId_
-    , _delVirtualGatewayId = pVirtualGatewayId_
-    }
+    :: DeleteDirectConnectGatewayAssociation
+deleteDirectConnectGatewayAssociation
+  = DeleteDirectConnectGatewayAssociation'{_delVirtualGatewayId
+                                             = Nothing,
+                                           _delAssociationId = Nothing,
+                                           _delDirectConnectGatewayId = Nothing}
 
-
--- | The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
-delDirectConnectGatewayId :: Lens' DeleteDirectConnectGatewayAssociation Text
-delDirectConnectGatewayId = lens _delDirectConnectGatewayId (\ s a -> s{_delDirectConnectGatewayId = a})
-
--- | The ID of the virtual private gateway. Example: "vgw-abc123ef" Default: None
-delVirtualGatewayId :: Lens' DeleteDirectConnectGatewayAssociation Text
+-- | The ID of the virtual private gateway.
+delVirtualGatewayId :: Lens' DeleteDirectConnectGatewayAssociation (Maybe Text)
 delVirtualGatewayId = lens _delVirtualGatewayId (\ s a -> s{_delVirtualGatewayId = a})
+
+-- | The ID of the Direct Connect gateway association.
+delAssociationId :: Lens' DeleteDirectConnectGatewayAssociation (Maybe Text)
+delAssociationId = lens _delAssociationId (\ s a -> s{_delAssociationId = a})
+
+-- | The ID of the Direct Connect gateway.
+delDirectConnectGatewayId :: Lens' DeleteDirectConnectGatewayAssociation (Maybe Text)
+delDirectConnectGatewayId = lens _delDirectConnectGatewayId (\ s a -> s{_delDirectConnectGatewayId = a})
 
 instance AWSRequest
            DeleteDirectConnectGatewayAssociation
@@ -119,10 +130,10 @@ instance ToJSON DeleteDirectConnectGatewayAssociation
         toJSON DeleteDirectConnectGatewayAssociation'{..}
           = object
               (catMaybes
-                 [Just
-                    ("directConnectGatewayId" .=
-                       _delDirectConnectGatewayId),
-                  Just ("virtualGatewayId" .= _delVirtualGatewayId)])
+                 [("virtualGatewayId" .=) <$> _delVirtualGatewayId,
+                  ("associationId" .=) <$> _delAssociationId,
+                  ("directConnectGatewayId" .=) <$>
+                    _delDirectConnectGatewayId])
 
 instance ToPath DeleteDirectConnectGatewayAssociation
          where
@@ -133,35 +144,36 @@ instance ToQuery
          where
         toQuery = const mempty
 
--- | Container for the response from the DeleteDirectConnectGatewayAssociation API call
---
---
---
--- /See:/ 'deleteDirectConnectGatewayAssociationResponse' smart constructor.
-data DeleteDirectConnectGatewayAssociationResponse = DeleteDirectConnectGatewayAssociationResponse'
-  { _delrsDirectConnectGatewayAssociation :: !(Maybe DirectConnectGatewayAssociation)
-  , _delrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteDirectConnectGatewayAssociationResponse' smart constructor.
+data DeleteDirectConnectGatewayAssociationResponse = DeleteDirectConnectGatewayAssociationResponse'{_delrsDirectConnectGatewayAssociation
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        DirectConnectGatewayAssociation),
+                                                                                                    _delrsResponseStatus
+                                                                                                    ::
+                                                                                                    !Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'DeleteDirectConnectGatewayAssociationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'delrsDirectConnectGatewayAssociation' - The direct connect gateway association to be deleted.
+-- * 'delrsDirectConnectGatewayAssociation' - Information about the deleted association.
 --
 -- * 'delrsResponseStatus' - -- | The response status code.
 deleteDirectConnectGatewayAssociationResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteDirectConnectGatewayAssociationResponse
-deleteDirectConnectGatewayAssociationResponse pResponseStatus_ =
-  DeleteDirectConnectGatewayAssociationResponse'
-    { _delrsDirectConnectGatewayAssociation = Nothing
-    , _delrsResponseStatus = pResponseStatus_
-    }
+deleteDirectConnectGatewayAssociationResponse
+  pResponseStatus_
+  = DeleteDirectConnectGatewayAssociationResponse'{_delrsDirectConnectGatewayAssociation
+                                                     = Nothing,
+                                                   _delrsResponseStatus =
+                                                     pResponseStatus_}
 
-
--- | The direct connect gateway association to be deleted.
+-- | Information about the deleted association.
 delrsDirectConnectGatewayAssociation :: Lens' DeleteDirectConnectGatewayAssociationResponse (Maybe DirectConnectGatewayAssociation)
 delrsDirectConnectGatewayAssociation = lens _delrsDirectConnectGatewayAssociation (\ s a -> s{_delrsDirectConnectGatewayAssociation = a})
 

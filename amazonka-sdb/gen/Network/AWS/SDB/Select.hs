@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @Select@ operation returns a set of attributes for @ItemNames@ that match the select expression. @Select@ is similar to the standard SQL SELECT statement.
+-- The @Select@ operation returns a set of attributes for @ItemNames@ that match the select expression. @Select@ is similar to the standard SQL SELECT statement. 
 --
 --
--- The total size of the response cannot exceed 1 MB in total size. Amazon SimpleDB automatically adjusts the number of items returned per page to enforce this limit. For example, if the client asks to retrieve 2500 items, but each individual item is 10 kB in size, the system returns 100 items and an appropriate @NextToken@ so the client can access the next page of results.
+-- The total size of the response cannot exceed 1 MB in total size. Amazon SimpleDB automatically adjusts the number of items returned per page to enforce this limit. For example, if the client asks to retrieve 2500 items, but each individual item is 10 kB in size, the system returns 100 items and an appropriate @NextToken@ so the client can access the next page of results. 
 --
--- For information on how to construct select expressions, see Using Select to Create Amazon SimpleDB Queries in the Developer Guide.
+-- For information on how to construct select expressions, see Using Select to Create Amazon SimpleDB Queries in the Developer Guide. 
 --
 --
 -- This operation returns paginated results.
@@ -55,38 +55,34 @@ import Network.AWS.SDB.Types
 import Network.AWS.SDB.Types.Product
 
 -- | /See:/ 'select' smart constructor.
-data Select = Select'
-  { _sConsistentRead   :: !(Maybe Bool)
-  , _sNextToken        :: !(Maybe Text)
-  , _sSelectExpression :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data Select = Select'{_sConsistentRead ::
+                      !(Maybe Bool),
+                      _sNextToken :: !(Maybe Text),
+                      _sSelectExpression :: !Text}
+                deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Select' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sConsistentRead' - @true@
+-- * 'sConsistentRead' - @true@ 
 --
--- * 'sNextToken' - @ItemNames@
+-- * 'sNextToken' - @ItemNames@ 
 --
 -- * 'sSelectExpression' - The expression used to query the domain.
 select
     :: Text -- ^ 'sSelectExpression'
     -> Select
-select pSelectExpression_ =
-  Select'
-    { _sConsistentRead = Nothing
-    , _sNextToken = Nothing
-    , _sSelectExpression = pSelectExpression_
-    }
+select pSelectExpression_
+  = Select'{_sConsistentRead = Nothing,
+            _sNextToken = Nothing,
+            _sSelectExpression = pSelectExpression_}
 
-
--- | @true@
+-- | @true@ 
 sConsistentRead :: Lens' Select (Maybe Bool)
 sConsistentRead = lens _sConsistentRead (\ s a -> s{_sConsistentRead = a})
 
--- | @ItemNames@
+-- | @ItemNames@ 
 sNextToken :: Lens' Select (Maybe Text)
 sNextToken = lens _sNextToken (\ s a -> s{_sNextToken = a})
 
@@ -131,12 +127,11 @@ instance ToQuery Select where
                "SelectExpression" =: _sSelectExpression]
 
 -- | /See:/ 'selectResponse' smart constructor.
-data SelectResponse = SelectResponse'
-  { _srsItems          :: !(Maybe [Item])
-  , _srsNextToken      :: !(Maybe Text)
-  , _srsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SelectResponse = SelectResponse'{_srsItems ::
+                                      !(Maybe [Item]),
+                                      _srsNextToken :: !(Maybe Text),
+                                      _srsResponseStatus :: !Int}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SelectResponse' with the minimum fields required to make a request.
 --
@@ -144,25 +139,22 @@ data SelectResponse = SelectResponse'
 --
 -- * 'srsItems' - A list of items that match the select expression.
 --
--- * 'srsNextToken' - @MaxNumberOfItems@
+-- * 'srsNextToken' - @MaxNumberOfItems@ 
 --
 -- * 'srsResponseStatus' - -- | The response status code.
 selectResponse
     :: Int -- ^ 'srsResponseStatus'
     -> SelectResponse
-selectResponse pResponseStatus_ =
-  SelectResponse'
-    { _srsItems = Nothing
-    , _srsNextToken = Nothing
-    , _srsResponseStatus = pResponseStatus_
-    }
-
+selectResponse pResponseStatus_
+  = SelectResponse'{_srsItems = Nothing,
+                    _srsNextToken = Nothing,
+                    _srsResponseStatus = pResponseStatus_}
 
 -- | A list of items that match the select expression.
 srsItems :: Lens' SelectResponse [Item]
 srsItems = lens _srsItems (\ s a -> s{_srsItems = a}) . _Default . _Coerce
 
--- | @MaxNumberOfItems@
+-- | @MaxNumberOfItems@ 
 srsNextToken :: Lens' SelectResponse (Maybe Text)
 srsNextToken = lens _srsNextToken (\ s a -> s{_srsNextToken = a})
 

@@ -21,6 +21,10 @@
 -- Describes the current user's special folders; the @RootFolder@ and the @RecycleBin@ . @RootFolder@ is the root of user's files and folders and @RecycleBin@ is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
 --
 --
+-- This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see <https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html Authentication and Access Control for User Applications> in the /Amazon WorkDocs Developer Guide/ .
+--
+--
+-- This operation returns paginated results.
 module Network.AWS.WorkDocs.DescribeRootFolders
     (
     -- * Creating a Request
@@ -41,6 +45,7 @@ module Network.AWS.WorkDocs.DescribeRootFolders
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +53,12 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'describeRootFolders' smart constructor.
-data DescribeRootFolders = DescribeRootFolders'
-  { _drfMarker              :: !(Maybe Text)
-  , _drfLimit               :: !(Maybe Nat)
-  , _drfAuthenticationToken :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeRootFolders = DescribeRootFolders'{_drfMarker
+                                                :: !(Maybe Text),
+                                                _drfLimit :: !(Maybe Nat),
+                                                _drfAuthenticationToken ::
+                                                !(Sensitive Text)}
+                             deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeRootFolders' with the minimum fields required to make a request.
 --
@@ -63,17 +68,15 @@ data DescribeRootFolders = DescribeRootFolders'
 --
 -- * 'drfLimit' - The maximum number of items to return.
 --
--- * 'drfAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'drfAuthenticationToken' - Amazon WorkDocs authentication token.
 describeRootFolders
     :: Text -- ^ 'drfAuthenticationToken'
     -> DescribeRootFolders
-describeRootFolders pAuthenticationToken_ =
-  DescribeRootFolders'
-    { _drfMarker = Nothing
-    , _drfLimit = Nothing
-    , _drfAuthenticationToken = _Sensitive # pAuthenticationToken_
-    }
-
+describeRootFolders pAuthenticationToken_
+  = DescribeRootFolders'{_drfMarker = Nothing,
+                         _drfLimit = Nothing,
+                         _drfAuthenticationToken =
+                           _Sensitive # pAuthenticationToken_}
 
 -- | The marker for the next set of results. (You received this marker from a previous call.)
 drfMarker :: Lens' DescribeRootFolders (Maybe Text)
@@ -83,9 +86,16 @@ drfMarker = lens _drfMarker (\ s a -> s{_drfMarker = a})
 drfLimit :: Lens' DescribeRootFolders (Maybe Natural)
 drfLimit = lens _drfLimit (\ s a -> s{_drfLimit = a}) . mapping _Nat
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token.
 drfAuthenticationToken :: Lens' DescribeRootFolders Text
 drfAuthenticationToken = lens _drfAuthenticationToken (\ s a -> s{_drfAuthenticationToken = a}) . _Sensitive
+
+instance AWSPager DescribeRootFolders where
+        page rq rs
+          | stop (rs ^. drfrsMarker) = Nothing
+          | stop (rs ^. drfrsFolders) = Nothing
+          | otherwise =
+            Just $ rq & drfMarker .~ rs ^. drfrsMarker
 
 instance AWSRequest DescribeRootFolders where
         type Rs DescribeRootFolders =
@@ -118,12 +128,16 @@ instance ToQuery DescribeRootFolders where
               ["marker" =: _drfMarker, "limit" =: _drfLimit]
 
 -- | /See:/ 'describeRootFoldersResponse' smart constructor.
-data DescribeRootFoldersResponse = DescribeRootFoldersResponse'
-  { _drfrsFolders        :: !(Maybe [FolderMetadata])
-  , _drfrsMarker         :: !(Maybe Text)
-  , _drfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRootFoldersResponse = DescribeRootFoldersResponse'{_drfrsFolders
+                                                                ::
+                                                                !(Maybe
+                                                                    [FolderMetadata]),
+                                                                _drfrsMarker ::
+                                                                !(Maybe Text),
+                                                                _drfrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeRootFoldersResponse' with the minimum fields required to make a request.
 --
@@ -137,13 +151,11 @@ data DescribeRootFoldersResponse = DescribeRootFoldersResponse'
 describeRootFoldersResponse
     :: Int -- ^ 'drfrsResponseStatus'
     -> DescribeRootFoldersResponse
-describeRootFoldersResponse pResponseStatus_ =
-  DescribeRootFoldersResponse'
-    { _drfrsFolders = Nothing
-    , _drfrsMarker = Nothing
-    , _drfrsResponseStatus = pResponseStatus_
-    }
-
+describeRootFoldersResponse pResponseStatus_
+  = DescribeRootFoldersResponse'{_drfrsFolders =
+                                   Nothing,
+                                 _drfrsMarker = Nothing,
+                                 _drfrsResponseStatus = pResponseStatus_}
 
 -- | The user's special folders.
 drfrsFolders :: Lens' DescribeRootFoldersResponse [FolderMetadata]

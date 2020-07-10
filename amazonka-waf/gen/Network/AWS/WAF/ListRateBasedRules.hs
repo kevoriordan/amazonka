@@ -21,6 +21,8 @@
 -- Returns an array of 'RuleSummary' objects.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WAF.ListRateBasedRules
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.WAF.ListRateBasedRules
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -47,11 +50,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'listRateBasedRules' smart constructor.
-data ListRateBasedRules = ListRateBasedRules'
-  { _lrbrNextMarker :: !(Maybe Text)
-  , _lrbrLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRateBasedRules = ListRateBasedRules'{_lrbrNextMarker
+                                              :: !(Maybe Text),
+                                              _lrbrLimit :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRateBasedRules' with the minimum fields required to make a request.
 --
@@ -62,9 +64,9 @@ data ListRateBasedRules = ListRateBasedRules'
 -- * 'lrbrLimit' - Specifies the number of @Rules@ that you want AWS WAF to return for this request. If you have more @Rules@ than the number that you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @Rules@ .
 listRateBasedRules
     :: ListRateBasedRules
-listRateBasedRules =
-  ListRateBasedRules' {_lrbrNextMarker = Nothing, _lrbrLimit = Nothing}
-
+listRateBasedRules
+  = ListRateBasedRules'{_lrbrNextMarker = Nothing,
+                        _lrbrLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @Rules@ than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @Rules@ . For the second and subsequent @ListRateBasedRules@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @Rules@ .
 lrbrNextMarker :: Lens' ListRateBasedRules (Maybe Text)
@@ -73,6 +75,13 @@ lrbrNextMarker = lens _lrbrNextMarker (\ s a -> s{_lrbrNextMarker = a})
 -- | Specifies the number of @Rules@ that you want AWS WAF to return for this request. If you have more @Rules@ than the number that you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @Rules@ .
 lrbrLimit :: Lens' ListRateBasedRules (Maybe Natural)
 lrbrLimit = lens _lrbrLimit (\ s a -> s{_lrbrLimit = a}) . mapping _Nat
+
+instance AWSPager ListRateBasedRules where
+        page rq rs
+          | stop (rs ^. lrbrrsNextMarker) = Nothing
+          | stop (rs ^. lrbrrsRules) = Nothing
+          | otherwise =
+            Just $ rq & lrbrNextMarker .~ rs ^. lrbrrsNextMarker
 
 instance AWSRequest ListRateBasedRules where
         type Rs ListRateBasedRules =
@@ -112,12 +121,16 @@ instance ToQuery ListRateBasedRules where
         toQuery = const mempty
 
 -- | /See:/ 'listRateBasedRulesResponse' smart constructor.
-data ListRateBasedRulesResponse = ListRateBasedRulesResponse'
-  { _lrbrrsRules          :: !(Maybe [RuleSummary])
-  , _lrbrrsNextMarker     :: !(Maybe Text)
-  , _lrbrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRateBasedRulesResponse = ListRateBasedRulesResponse'{_lrbrrsRules
+                                                              ::
+                                                              !(Maybe
+                                                                  [RuleSummary]),
+                                                              _lrbrrsNextMarker
+                                                              :: !(Maybe Text),
+                                                              _lrbrrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListRateBasedRulesResponse' with the minimum fields required to make a request.
 --
@@ -131,13 +144,10 @@ data ListRateBasedRulesResponse = ListRateBasedRulesResponse'
 listRateBasedRulesResponse
     :: Int -- ^ 'lrbrrsResponseStatus'
     -> ListRateBasedRulesResponse
-listRateBasedRulesResponse pResponseStatus_ =
-  ListRateBasedRulesResponse'
-    { _lrbrrsRules = Nothing
-    , _lrbrrsNextMarker = Nothing
-    , _lrbrrsResponseStatus = pResponseStatus_
-    }
-
+listRateBasedRulesResponse pResponseStatus_
+  = ListRateBasedRulesResponse'{_lrbrrsRules = Nothing,
+                                _lrbrrsNextMarker = Nothing,
+                                _lrbrrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'RuleSummary' objects.
 lrbrrsRules :: Lens' ListRateBasedRulesResponse [RuleSummary]

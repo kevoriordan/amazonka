@@ -43,11 +43,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateLoggerDefinition' smart constructor.
-data UpdateLoggerDefinition = UpdateLoggerDefinition'
-  { _uldName               :: !(Maybe Text)
-  , _uldLoggerDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateLoggerDefinition = UpdateLoggerDefinition'{_uldName
+                                                      :: !(Maybe Text),
+                                                      _uldLoggerDefinitionId ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateLoggerDefinition' with the minimum fields required to make a request.
 --
@@ -59,10 +60,9 @@ data UpdateLoggerDefinition = UpdateLoggerDefinition'
 updateLoggerDefinition
     :: Text -- ^ 'uldLoggerDefinitionId'
     -> UpdateLoggerDefinition
-updateLoggerDefinition pLoggerDefinitionId_ =
-  UpdateLoggerDefinition'
-    {_uldName = Nothing, _uldLoggerDefinitionId = pLoggerDefinitionId_}
-
+updateLoggerDefinition pLoggerDefinitionId_
+  = UpdateLoggerDefinition'{_uldName = Nothing,
+                            _uldLoggerDefinitionId = pLoggerDefinitionId_}
 
 -- | The name of the definition.
 uldName :: Lens' UpdateLoggerDefinition (Maybe Text)
@@ -107,10 +107,10 @@ instance ToQuery UpdateLoggerDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'updateLoggerDefinitionResponse' smart constructor.
-newtype UpdateLoggerDefinitionResponse = UpdateLoggerDefinitionResponse'
-  { _uldrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateLoggerDefinitionResponse = UpdateLoggerDefinitionResponse'{_uldrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UpdateLoggerDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +120,9 @@ newtype UpdateLoggerDefinitionResponse = UpdateLoggerDefinitionResponse'
 updateLoggerDefinitionResponse
     :: Int -- ^ 'uldrsResponseStatus'
     -> UpdateLoggerDefinitionResponse
-updateLoggerDefinitionResponse pResponseStatus_ =
-  UpdateLoggerDefinitionResponse' {_uldrsResponseStatus = pResponseStatus_}
-
+updateLoggerDefinitionResponse pResponseStatus_
+  = UpdateLoggerDefinitionResponse'{_uldrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 uldrsResponseStatus :: Lens' UpdateLoggerDefinitionResponse Int

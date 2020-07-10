@@ -36,6 +36,7 @@ module Network.AWS.MediaPackage.DescribeOriginEndpoint
     , desrsARN
     , desrsManifestName
     , desrsURL
+    , desrsAuthorization
     , desrsChannelId
     , desrsStartoverWindowSeconds
     , desrsDashPackage
@@ -44,6 +45,8 @@ module Network.AWS.MediaPackage.DescribeOriginEndpoint
     , desrsTimeDelaySeconds
     , desrsCmafPackage
     , desrsDescription
+    , desrsTags
+    , desrsOrigination
     , desrsResponseStatus
     ) where
 
@@ -55,10 +58,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeOriginEndpoint' smart constructor.
-newtype DescribeOriginEndpoint = DescribeOriginEndpoint'
-  { _doeId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeOriginEndpoint = DescribeOriginEndpoint'{_doeId
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeOriginEndpoint' with the minimum fields required to make a request.
 --
@@ -68,8 +71,8 @@ newtype DescribeOriginEndpoint = DescribeOriginEndpoint'
 describeOriginEndpoint
     :: Text -- ^ 'doeId'
     -> DescribeOriginEndpoint
-describeOriginEndpoint pId_ = DescribeOriginEndpoint' {_doeId = pId_}
-
+describeOriginEndpoint pId_
+  = DescribeOriginEndpoint'{_doeId = pId_}
 
 -- | The ID of the OriginEndpoint.
 doeId :: Lens' DescribeOriginEndpoint Text
@@ -88,6 +91,7 @@ instance AWSRequest DescribeOriginEndpoint where
                      <*> (x .?> "arn")
                      <*> (x .?> "manifestName")
                      <*> (x .?> "url")
+                     <*> (x .?> "authorization")
                      <*> (x .?> "channelId")
                      <*> (x .?> "startoverWindowSeconds")
                      <*> (x .?> "dashPackage")
@@ -96,6 +100,8 @@ instance AWSRequest DescribeOriginEndpoint where
                      <*> (x .?> "timeDelaySeconds")
                      <*> (x .?> "cmafPackage")
                      <*> (x .?> "description")
+                     <*> (x .?> "tags" .!@ mempty)
+                     <*> (x .?> "origination")
                      <*> (pure (fromEnum s)))
 
 instance Hashable DescribeOriginEndpoint where
@@ -117,23 +123,76 @@ instance ToQuery DescribeOriginEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'describeOriginEndpointResponse' smart constructor.
-data DescribeOriginEndpointResponse = DescribeOriginEndpointResponse'
-  { _desrsWhitelist              :: !(Maybe [Text])
-  , _desrsHlsPackage             :: !(Maybe HlsPackage)
-  , _desrsARN                    :: !(Maybe Text)
-  , _desrsManifestName           :: !(Maybe Text)
-  , _desrsURL                    :: !(Maybe Text)
-  , _desrsChannelId              :: !(Maybe Text)
-  , _desrsStartoverWindowSeconds :: !(Maybe Int)
-  , _desrsDashPackage            :: !(Maybe DashPackage)
-  , _desrsMssPackage             :: !(Maybe MssPackage)
-  , _desrsId                     :: !(Maybe Text)
-  , _desrsTimeDelaySeconds       :: !(Maybe Int)
-  , _desrsCmafPackage            :: !(Maybe CmafPackage)
-  , _desrsDescription            :: !(Maybe Text)
-  , _desrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeOriginEndpointResponse = DescribeOriginEndpointResponse'{_desrsWhitelist
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Text]),
+                                                                      _desrsHlsPackage
+                                                                      ::
+                                                                      !(Maybe
+                                                                          HlsPackage),
+                                                                      _desrsARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _desrsManifestName
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _desrsURL
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _desrsAuthorization
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Authorization),
+                                                                      _desrsChannelId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _desrsStartoverWindowSeconds
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Int),
+                                                                      _desrsDashPackage
+                                                                      ::
+                                                                      !(Maybe
+                                                                          DashPackage),
+                                                                      _desrsMssPackage
+                                                                      ::
+                                                                      !(Maybe
+                                                                          MssPackage),
+                                                                      _desrsId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _desrsTimeDelaySeconds
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Int),
+                                                                      _desrsCmafPackage
+                                                                      ::
+                                                                      !(Maybe
+                                                                          CmafPackage),
+                                                                      _desrsDescription
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _desrsTags
+                                                                      ::
+                                                                      !(Maybe
+                                                                          (Map
+                                                                             Text
+                                                                             Text)),
+                                                                      _desrsOrigination
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Origination),
+                                                                      _desrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeOriginEndpointResponse' with the minimum fields required to make a request.
 --
@@ -148,6 +207,8 @@ data DescribeOriginEndpointResponse = DescribeOriginEndpointResponse'
 -- * 'desrsManifestName' - A short string appended to the end of the OriginEndpoint URL.
 --
 -- * 'desrsURL' - The URL of the packaged OriginEndpoint for consumption.
+--
+-- * 'desrsAuthorization' - Undocumented member.
 --
 -- * 'desrsChannelId' - The ID of the Channel the OriginEndpoint is associated with.
 --
@@ -165,28 +226,33 @@ data DescribeOriginEndpointResponse = DescribeOriginEndpointResponse'
 --
 -- * 'desrsDescription' - A short text description of the OriginEndpoint.
 --
+-- * 'desrsTags' - Undocumented member.
+--
+-- * 'desrsOrigination' - Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+--
 -- * 'desrsResponseStatus' - -- | The response status code.
 describeOriginEndpointResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeOriginEndpointResponse
-describeOriginEndpointResponse pResponseStatus_ =
-  DescribeOriginEndpointResponse'
-    { _desrsWhitelist = Nothing
-    , _desrsHlsPackage = Nothing
-    , _desrsARN = Nothing
-    , _desrsManifestName = Nothing
-    , _desrsURL = Nothing
-    , _desrsChannelId = Nothing
-    , _desrsStartoverWindowSeconds = Nothing
-    , _desrsDashPackage = Nothing
-    , _desrsMssPackage = Nothing
-    , _desrsId = Nothing
-    , _desrsTimeDelaySeconds = Nothing
-    , _desrsCmafPackage = Nothing
-    , _desrsDescription = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
-
+describeOriginEndpointResponse pResponseStatus_
+  = DescribeOriginEndpointResponse'{_desrsWhitelist =
+                                      Nothing,
+                                    _desrsHlsPackage = Nothing,
+                                    _desrsARN = Nothing,
+                                    _desrsManifestName = Nothing,
+                                    _desrsURL = Nothing,
+                                    _desrsAuthorization = Nothing,
+                                    _desrsChannelId = Nothing,
+                                    _desrsStartoverWindowSeconds = Nothing,
+                                    _desrsDashPackage = Nothing,
+                                    _desrsMssPackage = Nothing,
+                                    _desrsId = Nothing,
+                                    _desrsTimeDelaySeconds = Nothing,
+                                    _desrsCmafPackage = Nothing,
+                                    _desrsDescription = Nothing,
+                                    _desrsTags = Nothing,
+                                    _desrsOrigination = Nothing,
+                                    _desrsResponseStatus = pResponseStatus_}
 
 -- | A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
 desrsWhitelist :: Lens' DescribeOriginEndpointResponse [Text]
@@ -207,6 +273,10 @@ desrsManifestName = lens _desrsManifestName (\ s a -> s{_desrsManifestName = a})
 -- | The URL of the packaged OriginEndpoint for consumption.
 desrsURL :: Lens' DescribeOriginEndpointResponse (Maybe Text)
 desrsURL = lens _desrsURL (\ s a -> s{_desrsURL = a})
+
+-- | Undocumented member.
+desrsAuthorization :: Lens' DescribeOriginEndpointResponse (Maybe Authorization)
+desrsAuthorization = lens _desrsAuthorization (\ s a -> s{_desrsAuthorization = a})
 
 -- | The ID of the Channel the OriginEndpoint is associated with.
 desrsChannelId :: Lens' DescribeOriginEndpointResponse (Maybe Text)
@@ -239,6 +309,14 @@ desrsCmafPackage = lens _desrsCmafPackage (\ s a -> s{_desrsCmafPackage = a})
 -- | A short text description of the OriginEndpoint.
 desrsDescription :: Lens' DescribeOriginEndpointResponse (Maybe Text)
 desrsDescription = lens _desrsDescription (\ s a -> s{_desrsDescription = a})
+
+-- | Undocumented member.
+desrsTags :: Lens' DescribeOriginEndpointResponse (HashMap Text Text)
+desrsTags = lens _desrsTags (\ s a -> s{_desrsTags = a}) . _Default . _Map
+
+-- | Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+desrsOrigination :: Lens' DescribeOriginEndpointResponse (Maybe Origination)
+desrsOrigination = lens _desrsOrigination (\ s a -> s{_desrsOrigination = a})
 
 -- | -- | The response status code.
 desrsResponseStatus :: Lens' DescribeOriginEndpointResponse Int

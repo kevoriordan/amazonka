@@ -14,11 +14,11 @@
 module Test.AWS.Gen.ServerlessApplicationRepository where
 
 import Data.Proxy
-import Network.AWS.ServerlessApplicationRepository
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.ServerlessApplicationRepository.Internal
 import Test.Tasty
+import Network.AWS.ServerlessApplicationRepository
+import Test.AWS.ServerlessApplicationRepository.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -34,20 +34,32 @@ import Test.Tasty
 --         , requestCreateApplicationVersion $
 --             createApplicationVersion
 --
+--         , requestUnshareApplication $
+--             unshareApplication
+--
 --         , requestDeleteApplication $
 --             deleteApplication
 --
 --         , requestUpdateApplication $
 --             updateApplication
 --
+--         , requestCreateCloudFormationTemplate $
+--             createCloudFormationTemplate
+--
 --         , requestCreateApplication $
 --             createApplication
+--
+--         , requestListApplicationDependencies $
+--             listApplicationDependencies
 --
 --         , requestListApplicationVersions $
 --             listApplicationVersions
 --
 --         , requestGetApplication $
 --             getApplication
+--
+--         , requestGetCloudFormationTemplate $
+--             getCloudFormationTemplate
 --
 --         , requestCreateCloudFormationChangeSet $
 --             createCloudFormationChangeSet
@@ -67,20 +79,32 @@ import Test.Tasty
 --         , responseCreateApplicationVersion $
 --             createApplicationVersionResponse
 --
+--         , responseUnshareApplication $
+--             unshareApplicationResponse
+--
 --         , responseDeleteApplication $
 --             deleteApplicationResponse
 --
 --         , responseUpdateApplication $
 --             updateApplicationResponse
 --
+--         , responseCreateCloudFormationTemplate $
+--             createCloudFormationTemplateResponse
+--
 --         , responseCreateApplication $
 --             createApplicationResponse
+--
+--         , responseListApplicationDependencies $
+--             listApplicationDependenciesResponse
 --
 --         , responseListApplicationVersions $
 --             listApplicationVersionsResponse
 --
 --         , responseGetApplication $
 --             getApplicationResponse
+--
+--         , responseGetCloudFormationTemplate $
+--             getCloudFormationTemplateResponse
 --
 --         , responseCreateCloudFormationChangeSet $
 --             createCloudFormationChangeSetResponse
@@ -106,6 +130,11 @@ requestCreateApplicationVersion = req
     "CreateApplicationVersion"
     "fixture/CreateApplicationVersion.yaml"
 
+requestUnshareApplication :: UnshareApplication -> TestTree
+requestUnshareApplication = req
+    "UnshareApplication"
+    "fixture/UnshareApplication.yaml"
+
 requestDeleteApplication :: DeleteApplication -> TestTree
 requestDeleteApplication = req
     "DeleteApplication"
@@ -116,10 +145,20 @@ requestUpdateApplication = req
     "UpdateApplication"
     "fixture/UpdateApplication.yaml"
 
+requestCreateCloudFormationTemplate :: CreateCloudFormationTemplate -> TestTree
+requestCreateCloudFormationTemplate = req
+    "CreateCloudFormationTemplate"
+    "fixture/CreateCloudFormationTemplate.yaml"
+
 requestCreateApplication :: CreateApplication -> TestTree
 requestCreateApplication = req
     "CreateApplication"
     "fixture/CreateApplication.yaml"
+
+requestListApplicationDependencies :: ListApplicationDependencies -> TestTree
+requestListApplicationDependencies = req
+    "ListApplicationDependencies"
+    "fixture/ListApplicationDependencies.yaml"
 
 requestListApplicationVersions :: ListApplicationVersions -> TestTree
 requestListApplicationVersions = req
@@ -130,6 +169,11 @@ requestGetApplication :: GetApplication -> TestTree
 requestGetApplication = req
     "GetApplication"
     "fixture/GetApplication.yaml"
+
+requestGetCloudFormationTemplate :: GetCloudFormationTemplate -> TestTree
+requestGetCloudFormationTemplate = req
+    "GetCloudFormationTemplate"
+    "fixture/GetCloudFormationTemplate.yaml"
 
 requestCreateCloudFormationChangeSet :: CreateCloudFormationChangeSet -> TestTree
 requestCreateCloudFormationChangeSet = req
@@ -162,6 +206,13 @@ responseCreateApplicationVersion = res
     serverlessApplicationRepository
     (Proxy :: Proxy CreateApplicationVersion)
 
+responseUnshareApplication :: UnshareApplicationResponse -> TestTree
+responseUnshareApplication = res
+    "UnshareApplicationResponse"
+    "fixture/UnshareApplicationResponse.proto"
+    serverlessApplicationRepository
+    (Proxy :: Proxy UnshareApplication)
+
 responseDeleteApplication :: DeleteApplicationResponse -> TestTree
 responseDeleteApplication = res
     "DeleteApplicationResponse"
@@ -176,12 +227,26 @@ responseUpdateApplication = res
     serverlessApplicationRepository
     (Proxy :: Proxy UpdateApplication)
 
+responseCreateCloudFormationTemplate :: CreateCloudFormationTemplateResponse -> TestTree
+responseCreateCloudFormationTemplate = res
+    "CreateCloudFormationTemplateResponse"
+    "fixture/CreateCloudFormationTemplateResponse.proto"
+    serverlessApplicationRepository
+    (Proxy :: Proxy CreateCloudFormationTemplate)
+
 responseCreateApplication :: CreateApplicationResponse -> TestTree
 responseCreateApplication = res
     "CreateApplicationResponse"
     "fixture/CreateApplicationResponse.proto"
     serverlessApplicationRepository
     (Proxy :: Proxy CreateApplication)
+
+responseListApplicationDependencies :: ListApplicationDependenciesResponse -> TestTree
+responseListApplicationDependencies = res
+    "ListApplicationDependenciesResponse"
+    "fixture/ListApplicationDependenciesResponse.proto"
+    serverlessApplicationRepository
+    (Proxy :: Proxy ListApplicationDependencies)
 
 responseListApplicationVersions :: ListApplicationVersionsResponse -> TestTree
 responseListApplicationVersions = res
@@ -196,6 +261,13 @@ responseGetApplication = res
     "fixture/GetApplicationResponse.proto"
     serverlessApplicationRepository
     (Proxy :: Proxy GetApplication)
+
+responseGetCloudFormationTemplate :: GetCloudFormationTemplateResponse -> TestTree
+responseGetCloudFormationTemplate = res
+    "GetCloudFormationTemplateResponse"
+    "fixture/GetCloudFormationTemplateResponse.proto"
+    serverlessApplicationRepository
+    (Proxy :: Proxy GetCloudFormationTemplate)
 
 responseCreateCloudFormationChangeSet :: CreateCloudFormationChangeSetResponse -> TestTree
 responseCreateCloudFormationChangeSet = res

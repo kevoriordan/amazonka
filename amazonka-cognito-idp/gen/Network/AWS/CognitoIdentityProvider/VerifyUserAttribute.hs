@@ -50,12 +50,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'verifyUserAttribute' smart constructor.
-data VerifyUserAttribute = VerifyUserAttribute'
-  { _vuaAccessToken   :: !(Sensitive Text)
-  , _vuaAttributeName :: !Text
-  , _vuaCode          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data VerifyUserAttribute = VerifyUserAttribute'{_vuaAccessToken
+                                                :: !(Sensitive Text),
+                                                _vuaAttributeName :: !Text,
+                                                _vuaCode :: !Text}
+                             deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'VerifyUserAttribute' with the minimum fields required to make a request.
 --
@@ -71,13 +70,12 @@ verifyUserAttribute
     -> Text -- ^ 'vuaAttributeName'
     -> Text -- ^ 'vuaCode'
     -> VerifyUserAttribute
-verifyUserAttribute pAccessToken_ pAttributeName_ pCode_ =
-  VerifyUserAttribute'
-    { _vuaAccessToken = _Sensitive # pAccessToken_
-    , _vuaAttributeName = pAttributeName_
-    , _vuaCode = pCode_
-    }
-
+verifyUserAttribute pAccessToken_ pAttributeName_
+  pCode_
+  = VerifyUserAttribute'{_vuaAccessToken =
+                           _Sensitive # pAccessToken_,
+                         _vuaAttributeName = pAttributeName_,
+                         _vuaCode = pCode_}
 
 -- | Represents the access token of the request to verify user attributes.
 vuaAccessToken :: Lens' VerifyUserAttribute Text
@@ -133,10 +131,10 @@ instance ToQuery VerifyUserAttribute where
 --
 --
 -- /See:/ 'verifyUserAttributeResponse' smart constructor.
-newtype VerifyUserAttributeResponse = VerifyUserAttributeResponse'
-  { _vuarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype VerifyUserAttributeResponse = VerifyUserAttributeResponse'{_vuarsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'VerifyUserAttributeResponse' with the minimum fields required to make a request.
 --
@@ -146,9 +144,9 @@ newtype VerifyUserAttributeResponse = VerifyUserAttributeResponse'
 verifyUserAttributeResponse
     :: Int -- ^ 'vuarsResponseStatus'
     -> VerifyUserAttributeResponse
-verifyUserAttributeResponse pResponseStatus_ =
-  VerifyUserAttributeResponse' {_vuarsResponseStatus = pResponseStatus_}
-
+verifyUserAttributeResponse pResponseStatus_
+  = VerifyUserAttributeResponse'{_vuarsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 vuarsResponseStatus :: Lens' VerifyUserAttributeResponse Int

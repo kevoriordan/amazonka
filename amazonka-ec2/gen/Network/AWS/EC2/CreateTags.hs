@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds or overwrites one or more tags for the specified Amazon EC2 resource or resources. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.
+-- Adds or overwrites the specified tags for the specified Amazon EC2 resource or resources. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.
 --
 --
--- For more information about tags, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html Tagging Your Resources> in the /Amazon Elastic Compute Cloud User Guide/ . For more information about creating IAM policies that control users' access to resources based on tags, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html Supported Resource-Level Permissions for Amazon EC2 API Actions> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- For more information about tags, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html Tagging Your Resources> in the /Amazon Elastic Compute Cloud User Guide/ . For more information about creating IAM policies that control users' access to resources based on tags, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html Supported Resource-Level Permissions for Amazon EC2 API Actions> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.CreateTags
     (
@@ -45,17 +45,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CreateTags.
---
---
---
--- /See:/ 'createTags' smart constructor.
-data CreateTags = CreateTags'
-  { _cDryRun    :: !(Maybe Bool)
-  , _cResources :: ![Text]
-  , _cTags      :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createTags' smart constructor.
+data CreateTags = CreateTags'{_cDryRun ::
+                              !(Maybe Bool),
+                              _cResources :: ![Text], _cTags :: ![Tag]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTags' with the minimum fields required to make a request.
 --
@@ -63,24 +57,24 @@ data CreateTags = CreateTags'
 --
 -- * 'cDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'cResources' - The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+-- * 'cResources' - The IDs of the resources, separated by spaces. Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.
 --
--- * 'cTags' - One or more tags. The @value@ parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
+-- * 'cTags' - The tags. The @value@ parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
 createTags
     :: CreateTags
-createTags =
-  CreateTags' {_cDryRun = Nothing, _cResources = mempty, _cTags = mempty}
-
+createTags
+  = CreateTags'{_cDryRun = Nothing,
+                _cResources = mempty, _cTags = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 cDryRun :: Lens' CreateTags (Maybe Bool)
 cDryRun = lens _cDryRun (\ s a -> s{_cDryRun = a})
 
--- | The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+-- | The IDs of the resources, separated by spaces. Constraints: Up to 1000 resource IDs. We recommend breaking up this request into smaller batches.
 cResources :: Lens' CreateTags [Text]
 cResources = lens _cResources (\ s a -> s{_cResources = a}) . _Coerce
 
--- | One or more tags. The @value@ parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
+-- | The tags. The @value@ parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
 cTags :: Lens' CreateTags [Tag]
 cTags = lens _cTags (\ s a -> s{_cTags = a}) . _Coerce
 
@@ -109,16 +103,13 @@ instance ToQuery CreateTags where
                toQueryList "Tag" _cTags]
 
 -- | /See:/ 'createTagsResponse' smart constructor.
-data CreateTagsResponse =
-  CreateTagsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTagsResponse = CreateTagsResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTagsResponse' with the minimum fields required to make a request.
 --
 createTagsResponse
     :: CreateTagsResponse
 createTagsResponse = CreateTagsResponse'
-
 
 instance NFData CreateTagsResponse where

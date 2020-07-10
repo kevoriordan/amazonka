@@ -21,6 +21,8 @@
 -- Returns a resource-level summary count. The summary includes information about compliant and non-compliant statuses and detailed compliance-item severity counts, according to the filter criteria you specify.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.ListResourceComplianceSummaries
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.ListResourceComplianceSummaries
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,20 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listResourceComplianceSummaries' smart constructor.
-data ListResourceComplianceSummaries = ListResourceComplianceSummaries'
-  { _lrcsFilters    :: !(Maybe [ComplianceStringFilter])
-  , _lrcsNextToken  :: !(Maybe Text)
-  , _lrcsMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceComplianceSummaries = ListResourceComplianceSummaries'{_lrcsFilters
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [ComplianceStringFilter]),
+                                                                        _lrcsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lrcsMaxResults
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Nat)}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListResourceComplianceSummaries' with the minimum fields required to make a request.
 --
@@ -61,30 +72,37 @@ data ListResourceComplianceSummaries = ListResourceComplianceSummaries'
 --
 -- * 'lrcsFilters' - One or more filters. Use a filter to return a more specific list of results.
 --
--- * 'lrcsNextToken' - A token to start the list. Use this token to get the next set of results.
+-- * 'lrcsNextToken' - A token to start the list. Use this token to get the next set of results. 
 --
 -- * 'lrcsMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 listResourceComplianceSummaries
     :: ListResourceComplianceSummaries
-listResourceComplianceSummaries =
-  ListResourceComplianceSummaries'
-    { _lrcsFilters = Nothing
-    , _lrcsNextToken = Nothing
-    , _lrcsMaxResults = Nothing
-    }
-
+listResourceComplianceSummaries
+  = ListResourceComplianceSummaries'{_lrcsFilters =
+                                       Nothing,
+                                     _lrcsNextToken = Nothing,
+                                     _lrcsMaxResults = Nothing}
 
 -- | One or more filters. Use a filter to return a more specific list of results.
 lrcsFilters :: Lens' ListResourceComplianceSummaries [ComplianceStringFilter]
 lrcsFilters = lens _lrcsFilters (\ s a -> s{_lrcsFilters = a}) . _Default . _Coerce
 
--- | A token to start the list. Use this token to get the next set of results.
+-- | A token to start the list. Use this token to get the next set of results. 
 lrcsNextToken :: Lens' ListResourceComplianceSummaries (Maybe Text)
 lrcsNextToken = lens _lrcsNextToken (\ s a -> s{_lrcsNextToken = a})
 
 -- | The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 lrcsMaxResults :: Lens' ListResourceComplianceSummaries (Maybe Natural)
 lrcsMaxResults = lens _lrcsMaxResults (\ s a -> s{_lrcsMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListResourceComplianceSummaries
+         where
+        page rq rs
+          | stop (rs ^. lrcsrsNextToken) = Nothing
+          | stop (rs ^. lrcsrsResourceComplianceSummaryItems) =
+            Nothing
+          | otherwise =
+            Just $ rq & lrcsNextToken .~ rs ^. lrcsrsNextToken
 
 instance AWSRequest ListResourceComplianceSummaries
          where
@@ -131,18 +149,25 @@ instance ToQuery ListResourceComplianceSummaries
         toQuery = const mempty
 
 -- | /See:/ 'listResourceComplianceSummariesResponse' smart constructor.
-data ListResourceComplianceSummariesResponse = ListResourceComplianceSummariesResponse'
-  { _lrcsrsResourceComplianceSummaryItems :: !(Maybe [ResourceComplianceSummaryItem])
-  , _lrcsrsNextToken :: !(Maybe Text)
-  , _lrcsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceComplianceSummariesResponse = ListResourceComplianceSummariesResponse'{_lrcsrsResourceComplianceSummaryItems
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            [ResourceComplianceSummaryItem]),
+                                                                                        _lrcsrsNextToken
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Text),
+                                                                                        _lrcsrsResponseStatus
+                                                                                        ::
+                                                                                        !Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'ListResourceComplianceSummariesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrcsrsResourceComplianceSummaryItems' - A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify.
+-- * 'lrcsrsResourceComplianceSummaryItems' - A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. 
 --
 -- * 'lrcsrsNextToken' - The token for the next set of items to return. Use this token to get the next set of results.
 --
@@ -150,15 +175,15 @@ data ListResourceComplianceSummariesResponse = ListResourceComplianceSummariesRe
 listResourceComplianceSummariesResponse
     :: Int -- ^ 'lrcsrsResponseStatus'
     -> ListResourceComplianceSummariesResponse
-listResourceComplianceSummariesResponse pResponseStatus_ =
-  ListResourceComplianceSummariesResponse'
-    { _lrcsrsResourceComplianceSummaryItems = Nothing
-    , _lrcsrsNextToken = Nothing
-    , _lrcsrsResponseStatus = pResponseStatus_
-    }
+listResourceComplianceSummariesResponse
+  pResponseStatus_
+  = ListResourceComplianceSummariesResponse'{_lrcsrsResourceComplianceSummaryItems
+                                               = Nothing,
+                                             _lrcsrsNextToken = Nothing,
+                                             _lrcsrsResponseStatus =
+                                               pResponseStatus_}
 
-
--- | A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify.
+-- | A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. 
 lrcsrsResourceComplianceSummaryItems :: Lens' ListResourceComplianceSummariesResponse [ResourceComplianceSummaryItem]
 lrcsrsResourceComplianceSummaryItems = lens _lrcsrsResourceComplianceSummaryItems (\ s a -> s{_lrcsrsResourceComplianceSummaryItems = a}) . _Default . _Coerce
 

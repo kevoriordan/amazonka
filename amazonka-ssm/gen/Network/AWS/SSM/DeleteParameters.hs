@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete a list of parameters. This API is used to delete parameters by using the Amazon EC2 console.
+-- Delete a list of parameters.
 --
 --
 module Network.AWS.SSM.DeleteParameters
@@ -46,10 +46,9 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'deleteParameters' smart constructor.
-newtype DeleteParameters = DeleteParameters'
-  { _dpNames :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteParameters = DeleteParameters'{_dpNames
+                                             :: List1 Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteParameters' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype DeleteParameters = DeleteParameters'
 deleteParameters
     :: NonEmpty Text -- ^ 'dpNames'
     -> DeleteParameters
-deleteParameters pNames_ = DeleteParameters' {_dpNames = _List1 # pNames_}
-
+deleteParameters pNames_
+  = DeleteParameters'{_dpNames = _List1 # pNames_}
 
 -- | The names of the parameters to delete.
 dpNames :: Lens' DeleteParameters (NonEmpty Text)
@@ -101,12 +100,16 @@ instance ToQuery DeleteParameters where
         toQuery = const mempty
 
 -- | /See:/ 'deleteParametersResponse' smart constructor.
-data DeleteParametersResponse = DeleteParametersResponse'
-  { _drsDeletedParameters :: !(Maybe (List1 Text))
-  , _drsInvalidParameters :: !(Maybe (List1 Text))
-  , _drsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteParametersResponse = DeleteParametersResponse'{_drsDeletedParameters
+                                                          ::
+                                                          !(Maybe (List1 Text)),
+                                                          _drsInvalidParameters
+                                                          ::
+                                                          !(Maybe (List1 Text)),
+                                                          _drsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteParametersResponse' with the minimum fields required to make a request.
 --
@@ -120,13 +123,11 @@ data DeleteParametersResponse = DeleteParametersResponse'
 deleteParametersResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteParametersResponse
-deleteParametersResponse pResponseStatus_ =
-  DeleteParametersResponse'
-    { _drsDeletedParameters = Nothing
-    , _drsInvalidParameters = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+deleteParametersResponse pResponseStatus_
+  = DeleteParametersResponse'{_drsDeletedParameters =
+                                Nothing,
+                              _drsInvalidParameters = Nothing,
+                              _drsResponseStatus = pResponseStatus_}
 
 -- | The names of the deleted parameters.
 drsDeletedParameters :: Lens' DeleteParametersResponse (Maybe (NonEmpty Text))

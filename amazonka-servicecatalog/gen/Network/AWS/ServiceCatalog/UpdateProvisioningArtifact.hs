@@ -32,6 +32,7 @@ module Network.AWS.ServiceCatalog.UpdateProvisioningArtifact
     , upaActive
     , upaName
     , upaAcceptLanguage
+    , upaGuidance
     , upaDescription
     , upaProductId
     , upaProvisioningArtifactId
@@ -54,25 +55,35 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'updateProvisioningArtifact' smart constructor.
-data UpdateProvisioningArtifact = UpdateProvisioningArtifact'
-  { _upaActive                 :: !(Maybe Bool)
-  , _upaName                   :: !(Maybe Text)
-  , _upaAcceptLanguage         :: !(Maybe Text)
-  , _upaDescription            :: !(Maybe Text)
-  , _upaProductId              :: !Text
-  , _upaProvisioningArtifactId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProvisioningArtifact = UpdateProvisioningArtifact'{_upaActive
+                                                              :: !(Maybe Bool),
+                                                              _upaName ::
+                                                              !(Maybe Text),
+                                                              _upaAcceptLanguage
+                                                              :: !(Maybe Text),
+                                                              _upaGuidance ::
+                                                              !(Maybe
+                                                                  ProvisioningArtifactGuidance),
+                                                              _upaDescription ::
+                                                              !(Maybe Text),
+                                                              _upaProductId ::
+                                                              !Text,
+                                                              _upaProvisioningArtifactId
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UpdateProvisioningArtifact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upaActive' - Indicates whether the product version is active.
+-- * 'upaActive' - Indicates whether the product version is active. Inactive provisioning artifacts are invisible to end users. End users cannot launch or update a provisioned product from an inactive provisioning artifact.
 --
 -- * 'upaName' - The updated name of the provisioning artifact.
 --
 -- * 'upaAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
+--
+-- * 'upaGuidance' - Information set by the administrator to provide guidance to end users about which provisioning artifacts to use. The @DEFAULT@ value indicates that the product version is active. The administrator can set the guidance to @DEPRECATED@ to inform users that the product version is deprecated. Users are able to make updates to a provisioned product of a deprecated version but cannot launch new provisioned products using a deprecated version.
 --
 -- * 'upaDescription' - The updated description of the provisioning artifact.
 --
@@ -83,18 +94,18 @@ updateProvisioningArtifact
     :: Text -- ^ 'upaProductId'
     -> Text -- ^ 'upaProvisioningArtifactId'
     -> UpdateProvisioningArtifact
-updateProvisioningArtifact pProductId_ pProvisioningArtifactId_ =
-  UpdateProvisioningArtifact'
-    { _upaActive = Nothing
-    , _upaName = Nothing
-    , _upaAcceptLanguage = Nothing
-    , _upaDescription = Nothing
-    , _upaProductId = pProductId_
-    , _upaProvisioningArtifactId = pProvisioningArtifactId_
-    }
+updateProvisioningArtifact pProductId_
+  pProvisioningArtifactId_
+  = UpdateProvisioningArtifact'{_upaActive = Nothing,
+                                _upaName = Nothing,
+                                _upaAcceptLanguage = Nothing,
+                                _upaGuidance = Nothing,
+                                _upaDescription = Nothing,
+                                _upaProductId = pProductId_,
+                                _upaProvisioningArtifactId =
+                                  pProvisioningArtifactId_}
 
-
--- | Indicates whether the product version is active.
+-- | Indicates whether the product version is active. Inactive provisioning artifacts are invisible to end users. End users cannot launch or update a provisioned product from an inactive provisioning artifact.
 upaActive :: Lens' UpdateProvisioningArtifact (Maybe Bool)
 upaActive = lens _upaActive (\ s a -> s{_upaActive = a})
 
@@ -105,6 +116,10 @@ upaName = lens _upaName (\ s a -> s{_upaName = a})
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 upaAcceptLanguage :: Lens' UpdateProvisioningArtifact (Maybe Text)
 upaAcceptLanguage = lens _upaAcceptLanguage (\ s a -> s{_upaAcceptLanguage = a})
+
+-- | Information set by the administrator to provide guidance to end users about which provisioning artifacts to use. The @DEFAULT@ value indicates that the product version is active. The administrator can set the guidance to @DEPRECATED@ to inform users that the product version is deprecated. Users are able to make updates to a provisioned product of a deprecated version but cannot launch new provisioned products using a deprecated version.
+upaGuidance :: Lens' UpdateProvisioningArtifact (Maybe ProvisioningArtifactGuidance)
+upaGuidance = lens _upaGuidance (\ s a -> s{_upaGuidance = a})
 
 -- | The updated description of the provisioning artifact.
 upaDescription :: Lens' UpdateProvisioningArtifact (Maybe Text)
@@ -151,6 +166,7 @@ instance ToJSON UpdateProvisioningArtifact where
                  [("Active" .=) <$> _upaActive,
                   ("Name" .=) <$> _upaName,
                   ("AcceptLanguage" .=) <$> _upaAcceptLanguage,
+                  ("Guidance" .=) <$> _upaGuidance,
                   ("Description" .=) <$> _upaDescription,
                   Just ("ProductId" .= _upaProductId),
                   Just
@@ -164,13 +180,25 @@ instance ToQuery UpdateProvisioningArtifact where
         toQuery = const mempty
 
 -- | /See:/ 'updateProvisioningArtifactResponse' smart constructor.
-data UpdateProvisioningArtifactResponse = UpdateProvisioningArtifactResponse'
-  { _uparsStatus                     :: !(Maybe RequestStatus)
-  , _uparsInfo                       :: !(Maybe (Map Text Text))
-  , _uparsProvisioningArtifactDetail :: !(Maybe ProvisioningArtifactDetail)
-  , _uparsResponseStatus             :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProvisioningArtifactResponse = UpdateProvisioningArtifactResponse'{_uparsStatus
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  RequestStatus),
+                                                                              _uparsInfo
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  (Map
+                                                                                     Text
+                                                                                     Text)),
+                                                                              _uparsProvisioningArtifactDetail
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  ProvisioningArtifactDetail),
+                                                                              _uparsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'UpdateProvisioningArtifactResponse' with the minimum fields required to make a request.
 --
@@ -186,14 +214,13 @@ data UpdateProvisioningArtifactResponse = UpdateProvisioningArtifactResponse'
 updateProvisioningArtifactResponse
     :: Int -- ^ 'uparsResponseStatus'
     -> UpdateProvisioningArtifactResponse
-updateProvisioningArtifactResponse pResponseStatus_ =
-  UpdateProvisioningArtifactResponse'
-    { _uparsStatus = Nothing
-    , _uparsInfo = Nothing
-    , _uparsProvisioningArtifactDetail = Nothing
-    , _uparsResponseStatus = pResponseStatus_
-    }
-
+updateProvisioningArtifactResponse pResponseStatus_
+  = UpdateProvisioningArtifactResponse'{_uparsStatus =
+                                          Nothing,
+                                        _uparsInfo = Nothing,
+                                        _uparsProvisioningArtifactDetail =
+                                          Nothing,
+                                        _uparsResponseStatus = pResponseStatus_}
 
 -- | The status of the current request.
 uparsStatus :: Lens' UpdateProvisioningArtifactResponse (Maybe RequestStatus)

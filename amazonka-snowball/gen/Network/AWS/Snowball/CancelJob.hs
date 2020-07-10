@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels the specified job. You can only cancel a job before its @JobState@ value changes to @PreparingAppliance@ . Requesting the @ListJobs@ or @DescribeJob@ action will return a job's @JobState@ as part of the response element data returned.
+-- Cancels the specified job. You can only cancel a job before its @JobState@ value changes to @PreparingAppliance@ . Requesting the @ListJobs@ or @DescribeJob@ action returns a job's @JobState@ as part of the response element data returned.
 --
 --
 module Network.AWS.Snowball.CancelJob
@@ -44,10 +44,8 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'cancelJob' smart constructor.
-newtype CancelJob = CancelJob'
-  { _cjJobId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelJob = CancelJob'{_cjJobId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJob' with the minimum fields required to make a request.
 --
@@ -57,8 +55,7 @@ newtype CancelJob = CancelJob'
 cancelJob
     :: Text -- ^ 'cjJobId'
     -> CancelJob
-cancelJob pJobId_ = CancelJob' {_cjJobId = pJobId_}
-
+cancelJob pJobId_ = CancelJob'{_cjJobId = pJobId_}
 
 -- | The 39-character job ID for the job that you want to cancel, for example @JID123e4567-e89b-12d3-a456-426655440000@ .
 cjJobId :: Lens' CancelJob Text
@@ -97,10 +94,9 @@ instance ToQuery CancelJob where
         toQuery = const mempty
 
 -- | /See:/ 'cancelJobResponse' smart constructor.
-newtype CancelJobResponse = CancelJobResponse'
-  { _crsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelJobResponse = CancelJobResponse'{_crsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJobResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +106,9 @@ newtype CancelJobResponse = CancelJobResponse'
 cancelJobResponse
     :: Int -- ^ 'crsResponseStatus'
     -> CancelJobResponse
-cancelJobResponse pResponseStatus_ =
-  CancelJobResponse' {_crsResponseStatus = pResponseStatus_}
-
+cancelJobResponse pResponseStatus_
+  = CancelJobResponse'{_crsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 crsResponseStatus :: Lens' CancelJobResponse Int

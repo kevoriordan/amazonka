@@ -21,9 +21,9 @@
 -- Used by workers to tell the service that the 'ActivityTask' identified by the @taskToken@ has failed with @reason@ (if specified). The @reason@ and @details@ appear in the @ActivityTaskFailed@ event added to the workflow history.
 --
 --
--- A task is considered open from the time that it is scheduled until it is closed. Therefore a task is reported as open while a worker is processing it. A task is closed after it has been specified in a call to 'RespondActivityTaskCompleted' , 'RespondActivityTaskCanceled' , RespondActivityTaskFailed, or the task has <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types timed out> .
+-- A task is considered open from the time that it is scheduled until it is closed. Therefore a task is reported as open while a worker is processing it. A task is closed after it has been specified in a call to 'RespondActivityTaskCompleted' , 'RespondActivityTaskCanceled' , RespondActivityTaskFailed, or the task has <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types timed out> .
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -35,7 +35,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.RespondActivityTaskFailed
     (
@@ -60,12 +60,14 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'respondActivityTaskFailed' smart constructor.
-data RespondActivityTaskFailed = RespondActivityTaskFailed'
-  { _ratfReason    :: !(Maybe Text)
-  , _ratfDetails   :: !(Maybe Text)
-  , _ratfTaskToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RespondActivityTaskFailed = RespondActivityTaskFailed'{_ratfReason
+                                                            :: !(Maybe Text),
+                                                            _ratfDetails ::
+                                                            !(Maybe Text),
+                                                            _ratfTaskToken ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'RespondActivityTaskFailed' with the minimum fields required to make a request.
 --
@@ -79,13 +81,10 @@ data RespondActivityTaskFailed = RespondActivityTaskFailed'
 respondActivityTaskFailed
     :: Text -- ^ 'ratfTaskToken'
     -> RespondActivityTaskFailed
-respondActivityTaskFailed pTaskToken_ =
-  RespondActivityTaskFailed'
-    { _ratfReason = Nothing
-    , _ratfDetails = Nothing
-    , _ratfTaskToken = pTaskToken_
-    }
-
+respondActivityTaskFailed pTaskToken_
+  = RespondActivityTaskFailed'{_ratfReason = Nothing,
+                               _ratfDetails = Nothing,
+                               _ratfTaskToken = pTaskToken_}
 
 -- | Description of the error that may assist in diagnostics.
 ratfReason :: Lens' RespondActivityTaskFailed (Maybe Text)
@@ -135,17 +134,16 @@ instance ToQuery RespondActivityTaskFailed where
         toQuery = const mempty
 
 -- | /See:/ 'respondActivityTaskFailedResponse' smart constructor.
-data RespondActivityTaskFailedResponse =
-  RespondActivityTaskFailedResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RespondActivityTaskFailedResponse = RespondActivityTaskFailedResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RespondActivityTaskFailedResponse' with the minimum fields required to make a request.
 --
 respondActivityTaskFailedResponse
     :: RespondActivityTaskFailedResponse
-respondActivityTaskFailedResponse = RespondActivityTaskFailedResponse'
-
+respondActivityTaskFailedResponse
+  = RespondActivityTaskFailedResponse'
 
 instance NFData RespondActivityTaskFailedResponse
          where

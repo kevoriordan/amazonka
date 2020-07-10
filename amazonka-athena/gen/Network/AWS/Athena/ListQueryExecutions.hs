@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides a list of all available query execution IDs.
+-- Provides a list of available query execution IDs for the queries in the specified workgroup. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran.
 --
 --
 -- For code samples using the AWS SDK for Java, see <http://docs.aws.amazon.com/athena/latest/ug/code-samples.html Examples and Code Samples> in the /Amazon Athena User Guide/ .
@@ -32,6 +32,7 @@ module Network.AWS.Athena.ListQueryExecutions
     , ListQueryExecutions
     -- * Request Lenses
     , lqeNextToken
+    , lqeWorkGroup
     , lqeMaxResults
 
     -- * Destructuring the Response
@@ -52,11 +53,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listQueryExecutions' smart constructor.
-data ListQueryExecutions = ListQueryExecutions'
-  { _lqeNextToken  :: !(Maybe Text)
-  , _lqeMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListQueryExecutions = ListQueryExecutions'{_lqeNextToken
+                                                :: !(Maybe Text),
+                                                _lqeWorkGroup :: !(Maybe Text),
+                                                _lqeMaxResults :: !(Maybe Nat)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListQueryExecutions' with the minimum fields required to make a request.
 --
@@ -64,16 +65,22 @@ data ListQueryExecutions = ListQueryExecutions'
 --
 -- * 'lqeNextToken' - The token that specifies where to start pagination if a previous request was truncated.
 --
+-- * 'lqeWorkGroup' - The name of the workgroup from which queries are returned. If a workgroup is not specified, a list of available query execution IDs for the queries in the primary workgroup is returned.
+--
 -- * 'lqeMaxResults' - The maximum number of query executions to return in this request.
 listQueryExecutions
     :: ListQueryExecutions
-listQueryExecutions =
-  ListQueryExecutions' {_lqeNextToken = Nothing, _lqeMaxResults = Nothing}
-
+listQueryExecutions
+  = ListQueryExecutions'{_lqeNextToken = Nothing,
+                         _lqeWorkGroup = Nothing, _lqeMaxResults = Nothing}
 
 -- | The token that specifies where to start pagination if a previous request was truncated.
 lqeNextToken :: Lens' ListQueryExecutions (Maybe Text)
 lqeNextToken = lens _lqeNextToken (\ s a -> s{_lqeNextToken = a})
+
+-- | The name of the workgroup from which queries are returned. If a workgroup is not specified, a list of available query execution IDs for the queries in the primary workgroup is returned.
+lqeWorkGroup :: Lens' ListQueryExecutions (Maybe Text)
+lqeWorkGroup = lens _lqeWorkGroup (\ s a -> s{_lqeWorkGroup = a})
 
 -- | The maximum number of query executions to return in this request.
 lqeMaxResults :: Lens' ListQueryExecutions (Maybe Natural)
@@ -115,6 +122,7 @@ instance ToJSON ListQueryExecutions where
           = object
               (catMaybes
                  [("NextToken" .=) <$> _lqeNextToken,
+                  ("WorkGroup" .=) <$> _lqeWorkGroup,
                   ("MaxResults" .=) <$> _lqeMaxResults])
 
 instance ToPath ListQueryExecutions where
@@ -124,12 +132,18 @@ instance ToQuery ListQueryExecutions where
         toQuery = const mempty
 
 -- | /See:/ 'listQueryExecutionsResponse' smart constructor.
-data ListQueryExecutionsResponse = ListQueryExecutionsResponse'
-  { _lqersQueryExecutionIds :: !(Maybe (List1 Text))
-  , _lqersNextToken         :: !(Maybe Text)
-  , _lqersResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListQueryExecutionsResponse = ListQueryExecutionsResponse'{_lqersQueryExecutionIds
+                                                                ::
+                                                                !(Maybe
+                                                                    (List1
+                                                                       Text)),
+                                                                _lqersNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lqersResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListQueryExecutionsResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +157,11 @@ data ListQueryExecutionsResponse = ListQueryExecutionsResponse'
 listQueryExecutionsResponse
     :: Int -- ^ 'lqersResponseStatus'
     -> ListQueryExecutionsResponse
-listQueryExecutionsResponse pResponseStatus_ =
-  ListQueryExecutionsResponse'
-    { _lqersQueryExecutionIds = Nothing
-    , _lqersNextToken = Nothing
-    , _lqersResponseStatus = pResponseStatus_
-    }
-
+listQueryExecutionsResponse pResponseStatus_
+  = ListQueryExecutionsResponse'{_lqersQueryExecutionIds
+                                   = Nothing,
+                                 _lqersNextToken = Nothing,
+                                 _lqersResponseStatus = pResponseStatus_}
 
 -- | The unique IDs of each query execution as an array of strings.
 lqersQueryExecutionIds :: Lens' ListQueryExecutionsResponse (Maybe (NonEmpty Text))

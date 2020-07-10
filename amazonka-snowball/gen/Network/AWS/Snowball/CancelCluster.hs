@@ -44,10 +44,9 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'cancelCluster' smart constructor.
-newtype CancelCluster = CancelCluster'
-  { _ccClusterId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelCluster = CancelCluster'{_ccClusterId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelCluster' with the minimum fields required to make a request.
 --
@@ -57,8 +56,8 @@ newtype CancelCluster = CancelCluster'
 cancelCluster
     :: Text -- ^ 'ccClusterId'
     -> CancelCluster
-cancelCluster pClusterId_ = CancelCluster' {_ccClusterId = pClusterId_}
-
+cancelCluster pClusterId_
+  = CancelCluster'{_ccClusterId = pClusterId_}
 
 -- | The 39-character ID for the cluster that you want to cancel, for example @CID123e4567-e89b-12d3-a456-426655440000@ .
 ccClusterId :: Lens' CancelCluster Text
@@ -98,10 +97,10 @@ instance ToQuery CancelCluster where
         toQuery = const mempty
 
 -- | /See:/ 'cancelClusterResponse' smart constructor.
-newtype CancelClusterResponse = CancelClusterResponse'
-  { _ccrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelClusterResponse = CancelClusterResponse'{_ccrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CancelClusterResponse' with the minimum fields required to make a request.
 --
@@ -111,9 +110,9 @@ newtype CancelClusterResponse = CancelClusterResponse'
 cancelClusterResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CancelClusterResponse
-cancelClusterResponse pResponseStatus_ =
-  CancelClusterResponse' {_ccrsResponseStatus = pResponseStatus_}
-
+cancelClusterResponse pResponseStatus_
+  = CancelClusterResponse'{_ccrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 ccrsResponseStatus :: Lens' CancelClusterResponse Int

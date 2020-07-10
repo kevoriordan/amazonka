@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createTags' smart constructor.
-data CreateTags = CreateTags'
-  { _ctConfigurationIds :: ![Text]
-  , _ctTags             :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTags = CreateTags'{_ctConfigurationIds ::
+                              ![Text],
+                              _ctTags :: ![Tag]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTags' with the minimum fields required to make a request.
 --
@@ -57,17 +56,18 @@ data CreateTags = CreateTags'
 --
 -- * 'ctConfigurationIds' - A list of configuration items that you want to tag.
 --
--- * 'ctTags' - Tags that you want to associate with one or more configuration items. Specify the tags that you want to create in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@
+-- * 'ctTags' - Tags that you want to associate with one or more configuration items. Specify the tags that you want to create in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@ 
 createTags
     :: CreateTags
-createTags = CreateTags' {_ctConfigurationIds = mempty, _ctTags = mempty}
-
+createTags
+  = CreateTags'{_ctConfigurationIds = mempty,
+                _ctTags = mempty}
 
 -- | A list of configuration items that you want to tag.
 ctConfigurationIds :: Lens' CreateTags [Text]
 ctConfigurationIds = lens _ctConfigurationIds (\ s a -> s{_ctConfigurationIds = a}) . _Coerce
 
--- | Tags that you want to associate with one or more configuration items. Specify the tags that you want to create in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@
+-- | Tags that you want to associate with one or more configuration items. Specify the tags that you want to create in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@ 
 ctTags :: Lens' CreateTags [Tag]
 ctTags = lens _ctTags (\ s a -> s{_ctTags = a}) . _Coerce
 
@@ -107,10 +107,10 @@ instance ToQuery CreateTags where
         toQuery = const mempty
 
 -- | /See:/ 'createTagsResponse' smart constructor.
-newtype CreateTagsResponse = CreateTagsResponse'
-  { _ctrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateTagsResponse = CreateTagsResponse'{_ctrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateTagsResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +120,9 @@ newtype CreateTagsResponse = CreateTagsResponse'
 createTagsResponse
     :: Int -- ^ 'ctrsResponseStatus'
     -> CreateTagsResponse
-createTagsResponse pResponseStatus_ =
-  CreateTagsResponse' {_ctrsResponseStatus = pResponseStatus_}
-
+createTagsResponse pResponseStatus_
+  = CreateTagsResponse'{_ctrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 ctrsResponseStatus :: Lens' CreateTagsResponse Int

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListHITs@ operation returns all of a Requester's HITs. The operation returns HITs of any status, except for HITs that have been deleted of with the DeleteHIT operation or that have been auto-deleted.
+-- The @ListHITs@ operation returns all of a Requester's HITs. The operation returns HITs of any status, except for HITs that have been deleted of with the DeleteHIT operation or that have been auto-deleted. 
 --
 --
 --
@@ -51,11 +51,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listHITs' smart constructor.
-data ListHITs = ListHITs'
-  { _lhitNextToken  :: !(Maybe Text)
-  , _lhitMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListHITs = ListHITs'{_lhitNextToken ::
+                          !(Maybe Text),
+                          _lhitMaxResults :: !(Maybe Nat)}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListHITs' with the minimum fields required to make a request.
 --
@@ -66,8 +65,9 @@ data ListHITs = ListHITs'
 -- * 'lhitMaxResults' - Undocumented member.
 listHITs
     :: ListHITs
-listHITs = ListHITs' {_lhitNextToken = Nothing, _lhitMaxResults = Nothing}
-
+listHITs
+  = ListHITs'{_lhitNextToken = Nothing,
+              _lhitMaxResults = Nothing}
 
 -- | Pagination token
 lhitNextToken :: Lens' ListHITs (Maybe Text)
@@ -123,13 +123,12 @@ instance ToQuery ListHITs where
         toQuery = const mempty
 
 -- | /See:/ 'listHITsResponse' smart constructor.
-data ListHITsResponse = ListHITsResponse'
-  { _lhitrsNextToken      :: !(Maybe Text)
-  , _lhitrsNumResults     :: !(Maybe Int)
-  , _lhitrsHITs           :: !(Maybe [HIT])
-  , _lhitrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListHITsResponse = ListHITsResponse'{_lhitrsNextToken
+                                          :: !(Maybe Text),
+                                          _lhitrsNumResults :: !(Maybe Int),
+                                          _lhitrsHITs :: !(Maybe [HIT]),
+                                          _lhitrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListHITsResponse' with the minimum fields required to make a request.
 --
@@ -145,14 +144,10 @@ data ListHITsResponse = ListHITsResponse'
 listHITsResponse
     :: Int -- ^ 'lhitrsResponseStatus'
     -> ListHITsResponse
-listHITsResponse pResponseStatus_ =
-  ListHITsResponse'
-    { _lhitrsNextToken = Nothing
-    , _lhitrsNumResults = Nothing
-    , _lhitrsHITs = Nothing
-    , _lhitrsResponseStatus = pResponseStatus_
-    }
-
+listHITsResponse pResponseStatus_
+  = ListHITsResponse'{_lhitrsNextToken = Nothing,
+                      _lhitrsNumResults = Nothing, _lhitrsHITs = Nothing,
+                      _lhitrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 lhitrsNextToken :: Lens' ListHITsResponse (Maybe Text)

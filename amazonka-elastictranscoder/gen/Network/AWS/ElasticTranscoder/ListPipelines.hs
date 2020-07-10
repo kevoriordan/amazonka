@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listPipelines' smart constructor.
-data ListPipelines = ListPipelines'
-  { _lpAscending :: !(Maybe Text)
-  , _lpPageToken :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPipelines = ListPipelines'{_lpAscending ::
+                                    !(Maybe Text),
+                                    _lpPageToken :: !(Maybe Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPipelines' with the minimum fields required to make a request.
 --
@@ -66,17 +65,18 @@ data ListPipelines = ListPipelines'
 --
 -- * 'lpAscending' - To list pipelines in chronological order by the date and time that they were created, enter @true@ . To list pipelines in reverse chronological order, enter @false@ .
 --
--- * 'lpPageToken' - When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results.
+-- * 'lpPageToken' - When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results. 
 listPipelines
     :: ListPipelines
-listPipelines = ListPipelines' {_lpAscending = Nothing, _lpPageToken = Nothing}
-
+listPipelines
+  = ListPipelines'{_lpAscending = Nothing,
+                   _lpPageToken = Nothing}
 
 -- | To list pipelines in chronological order by the date and time that they were created, enter @true@ . To list pipelines in reverse chronological order, enter @false@ .
 lpAscending :: Lens' ListPipelines (Maybe Text)
 lpAscending = lens _lpAscending (\ s a -> s{_lpAscending = a})
 
--- | When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results.
+-- | When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results. 
 lpPageToken :: Lens' ListPipelines (Maybe Text)
 lpPageToken = lens _lpPageToken (\ s a -> s{_lpPageToken = a})
 
@@ -119,12 +119,13 @@ instance ToQuery ListPipelines where
 --
 --
 -- /See:/ 'listPipelinesResponse' smart constructor.
-data ListPipelinesResponse = ListPipelinesResponse'
-  { _lprsNextPageToken  :: !(Maybe Text)
-  , _lprsPipelines      :: !(Maybe [Pipeline])
-  , _lprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPipelinesResponse = ListPipelinesResponse'{_lprsNextPageToken
+                                                    :: !(Maybe Text),
+                                                    _lprsPipelines ::
+                                                    !(Maybe [Pipeline]),
+                                                    _lprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListPipelinesResponse' with the minimum fields required to make a request.
 --
@@ -138,13 +139,11 @@ data ListPipelinesResponse = ListPipelinesResponse'
 listPipelinesResponse
     :: Int -- ^ 'lprsResponseStatus'
     -> ListPipelinesResponse
-listPipelinesResponse pResponseStatus_ =
-  ListPipelinesResponse'
-    { _lprsNextPageToken = Nothing
-    , _lprsPipelines = Nothing
-    , _lprsResponseStatus = pResponseStatus_
-    }
-
+listPipelinesResponse pResponseStatus_
+  = ListPipelinesResponse'{_lprsNextPageToken =
+                             Nothing,
+                           _lprsPipelines = Nothing,
+                           _lprsResponseStatus = pResponseStatus_}
 
 -- | A value that you use to access the second and subsequent pages of results, if any. When the pipelines fit on one page or when you've reached the last page of results, the value of @NextPageToken@ is @null@ .
 lprsNextPageToken :: Lens' ListPipelinesResponse (Maybe Text)

@@ -46,25 +46,32 @@ library
     exposed-modules:
           Network.AWS.GameLift
         , Network.AWS.GameLift.AcceptMatch
+        , Network.AWS.GameLift.ClaimGameServer
         , Network.AWS.GameLift.CreateAlias
         , Network.AWS.GameLift.CreateBuild
         , Network.AWS.GameLift.CreateFleet
+        , Network.AWS.GameLift.CreateGameServerGroup
         , Network.AWS.GameLift.CreateGameSession
         , Network.AWS.GameLift.CreateGameSessionQueue
         , Network.AWS.GameLift.CreateMatchmakingConfiguration
         , Network.AWS.GameLift.CreateMatchmakingRuleSet
         , Network.AWS.GameLift.CreatePlayerSession
         , Network.AWS.GameLift.CreatePlayerSessions
+        , Network.AWS.GameLift.CreateScript
         , Network.AWS.GameLift.CreateVPCPeeringAuthorization
         , Network.AWS.GameLift.CreateVPCPeeringConnection
         , Network.AWS.GameLift.DeleteAlias
         , Network.AWS.GameLift.DeleteBuild
         , Network.AWS.GameLift.DeleteFleet
+        , Network.AWS.GameLift.DeleteGameServerGroup
         , Network.AWS.GameLift.DeleteGameSessionQueue
         , Network.AWS.GameLift.DeleteMatchmakingConfiguration
+        , Network.AWS.GameLift.DeleteMatchmakingRuleSet
         , Network.AWS.GameLift.DeleteScalingPolicy
+        , Network.AWS.GameLift.DeleteScript
         , Network.AWS.GameLift.DeleteVPCPeeringAuthorization
         , Network.AWS.GameLift.DeleteVPCPeeringConnection
+        , Network.AWS.GameLift.DeregisterGameServer
         , Network.AWS.GameLift.DescribeAlias
         , Network.AWS.GameLift.DescribeBuild
         , Network.AWS.GameLift.DescribeEC2InstanceLimits
@@ -73,6 +80,8 @@ library
         , Network.AWS.GameLift.DescribeFleetEvents
         , Network.AWS.GameLift.DescribeFleetPortSettings
         , Network.AWS.GameLift.DescribeFleetUtilization
+        , Network.AWS.GameLift.DescribeGameServer
+        , Network.AWS.GameLift.DescribeGameServerGroup
         , Network.AWS.GameLift.DescribeGameSessionDetails
         , Network.AWS.GameLift.DescribeGameSessionPlacement
         , Network.AWS.GameLift.DescribeGameSessionQueues
@@ -84,6 +93,7 @@ library
         , Network.AWS.GameLift.DescribePlayerSessions
         , Network.AWS.GameLift.DescribeRuntimeConfiguration
         , Network.AWS.GameLift.DescribeScalingPolicies
+        , Network.AWS.GameLift.DescribeScript
         , Network.AWS.GameLift.DescribeVPCPeeringAuthorizations
         , Network.AWS.GameLift.DescribeVPCPeeringConnections
         , Network.AWS.GameLift.GetGameSessionLogURL
@@ -91,9 +101,15 @@ library
         , Network.AWS.GameLift.ListAliases
         , Network.AWS.GameLift.ListBuilds
         , Network.AWS.GameLift.ListFleets
+        , Network.AWS.GameLift.ListGameServerGroups
+        , Network.AWS.GameLift.ListGameServers
+        , Network.AWS.GameLift.ListScripts
+        , Network.AWS.GameLift.ListTagsForResource
         , Network.AWS.GameLift.PutScalingPolicy
+        , Network.AWS.GameLift.RegisterGameServer
         , Network.AWS.GameLift.RequestUploadCredentials
         , Network.AWS.GameLift.ResolveAlias
+        , Network.AWS.GameLift.ResumeGameServerGroup
         , Network.AWS.GameLift.SearchGameSessions
         , Network.AWS.GameLift.StartFleetActions
         , Network.AWS.GameLift.StartGameSessionPlacement
@@ -102,26 +118,117 @@ library
         , Network.AWS.GameLift.StopFleetActions
         , Network.AWS.GameLift.StopGameSessionPlacement
         , Network.AWS.GameLift.StopMatchmaking
+        , Network.AWS.GameLift.SuspendGameServerGroup
+        , Network.AWS.GameLift.TagResource
         , Network.AWS.GameLift.Types
+        , Network.AWS.GameLift.UntagResource
         , Network.AWS.GameLift.UpdateAlias
         , Network.AWS.GameLift.UpdateBuild
         , Network.AWS.GameLift.UpdateFleetAttributes
         , Network.AWS.GameLift.UpdateFleetCapacity
         , Network.AWS.GameLift.UpdateFleetPortSettings
+        , Network.AWS.GameLift.UpdateGameServer
+        , Network.AWS.GameLift.UpdateGameServerGroup
         , Network.AWS.GameLift.UpdateGameSession
         , Network.AWS.GameLift.UpdateGameSessionQueue
         , Network.AWS.GameLift.UpdateMatchmakingConfiguration
         , Network.AWS.GameLift.UpdateRuntimeConfiguration
+        , Network.AWS.GameLift.UpdateScript
         , Network.AWS.GameLift.ValidateMatchmakingRuleSet
         , Network.AWS.GameLift.Waiters
 
     other-modules:
-          Network.AWS.GameLift.Types.Product
-        , Network.AWS.GameLift.Types.Sum
+          Network.AWS.GameLift.Types.AWSCredentials
+        , Network.AWS.GameLift.Types.AcceptanceType
+        , Network.AWS.GameLift.Types.Alias
+        , Network.AWS.GameLift.Types.AttributeValue
+        , Network.AWS.GameLift.Types.BackfillMode
+        , Network.AWS.GameLift.Types.BalancingStrategy
+        , Network.AWS.GameLift.Types.Build
+        , Network.AWS.GameLift.Types.BuildStatus
+        , Network.AWS.GameLift.Types.CertificateConfiguration
+        , Network.AWS.GameLift.Types.CertificateType
+        , Network.AWS.GameLift.Types.ComparisonOperatorType
+        , Network.AWS.GameLift.Types.DesiredPlayerSession
+        , Network.AWS.GameLift.Types.EC2InstanceCounts
+        , Network.AWS.GameLift.Types.EC2InstanceLimit
+        , Network.AWS.GameLift.Types.EC2InstanceType
+        , Network.AWS.GameLift.Types.Event
+        , Network.AWS.GameLift.Types.EventCode
+        , Network.AWS.GameLift.Types.FleetAction
+        , Network.AWS.GameLift.Types.FleetAttributes
+        , Network.AWS.GameLift.Types.FleetCapacity
+        , Network.AWS.GameLift.Types.FleetStatus
+        , Network.AWS.GameLift.Types.FleetType
+        , Network.AWS.GameLift.Types.FleetUtilization
+        , Network.AWS.GameLift.Types.GameProperty
+        , Network.AWS.GameLift.Types.GameServer
+        , Network.AWS.GameLift.Types.GameServerClaimStatus
+        , Network.AWS.GameLift.Types.GameServerGroup
+        , Network.AWS.GameLift.Types.GameServerGroupAction
+        , Network.AWS.GameLift.Types.GameServerGroupAutoScalingPolicy
+        , Network.AWS.GameLift.Types.GameServerGroupDeleteOption
+        , Network.AWS.GameLift.Types.GameServerGroupInstanceType
+        , Network.AWS.GameLift.Types.GameServerGroupStatus
+        , Network.AWS.GameLift.Types.GameServerHealthCheck
+        , Network.AWS.GameLift.Types.GameServerProtectionPolicy
+        , Network.AWS.GameLift.Types.GameServerUtilizationStatus
+        , Network.AWS.GameLift.Types.GameSession
+        , Network.AWS.GameLift.Types.GameSessionConnectionInfo
+        , Network.AWS.GameLift.Types.GameSessionDetail
+        , Network.AWS.GameLift.Types.GameSessionPlacement
+        , Network.AWS.GameLift.Types.GameSessionPlacementState
+        , Network.AWS.GameLift.Types.GameSessionQueue
+        , Network.AWS.GameLift.Types.GameSessionQueueDestination
+        , Network.AWS.GameLift.Types.GameSessionStatus
+        , Network.AWS.GameLift.Types.GameSessionStatusReason
+        , Network.AWS.GameLift.Types.IPPermission
+        , Network.AWS.GameLift.Types.IPProtocol
+        , Network.AWS.GameLift.Types.Instance
+        , Network.AWS.GameLift.Types.InstanceAccess
+        , Network.AWS.GameLift.Types.InstanceCredentials
+        , Network.AWS.GameLift.Types.InstanceDefinition
+        , Network.AWS.GameLift.Types.InstanceStatus
+        , Network.AWS.GameLift.Types.LaunchTemplateSpecification
+        , Network.AWS.GameLift.Types.MatchedPlayerSession
+        , Network.AWS.GameLift.Types.MatchmakingConfiguration
+        , Network.AWS.GameLift.Types.MatchmakingConfigurationStatus
+        , Network.AWS.GameLift.Types.MatchmakingRuleSet
+        , Network.AWS.GameLift.Types.MatchmakingTicket
+        , Network.AWS.GameLift.Types.MetricName
+        , Network.AWS.GameLift.Types.OperatingSystem
+        , Network.AWS.GameLift.Types.PlacedPlayerSession
+        , Network.AWS.GameLift.Types.Player
+        , Network.AWS.GameLift.Types.PlayerLatency
+        , Network.AWS.GameLift.Types.PlayerLatencyPolicy
+        , Network.AWS.GameLift.Types.PlayerSession
+        , Network.AWS.GameLift.Types.PlayerSessionCreationPolicy
+        , Network.AWS.GameLift.Types.PlayerSessionStatus
+        , Network.AWS.GameLift.Types.PolicyType
+        , Network.AWS.GameLift.Types.Product
+        , Network.AWS.GameLift.Types.ProtectionPolicy
+        , Network.AWS.GameLift.Types.ResourceCreationLimitPolicy
+        , Network.AWS.GameLift.Types.RoutingStrategy
+        , Network.AWS.GameLift.Types.RoutingStrategyType
+        , Network.AWS.GameLift.Types.RuntimeConfiguration
+        , Network.AWS.GameLift.Types.S3Location
+        , Network.AWS.GameLift.Types.ScalingAdjustmentType
+        , Network.AWS.GameLift.Types.ScalingPolicy
+        , Network.AWS.GameLift.Types.ScalingStatusType
+        , Network.AWS.GameLift.Types.Script
+        , Network.AWS.GameLift.Types.ServerProcess
+        , Network.AWS.GameLift.Types.SortOrder
+        , Network.AWS.GameLift.Types.Tag
+        , Network.AWS.GameLift.Types.TargetConfiguration
+        , Network.AWS.GameLift.Types.TargetTrackingConfiguration
+        , Network.AWS.GameLift.Types.VPCPeeringAuthorization
+        , Network.AWS.GameLift.Types.VPCPeeringConnection
+        , Network.AWS.GameLift.Types.VPCPeeringConnectionStatus
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-gamelift-test
     type:              exitcode-stdio-1.0
@@ -145,6 +252,7 @@ test-suite amazonka-gamelift-test
         , amazonka-gamelift
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

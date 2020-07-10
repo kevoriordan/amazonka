@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an import instance task using metadata from the specified disk image. @ImportInstance@ only supports single-volume VMs. To import multi-volume VMs, use 'ImportImage' . For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html Importing a Virtual Machine Using the Amazon EC2 CLI> .
+-- Creates an import instance task using metadata from the specified disk image. @ImportInstance@ only supports single-volume VMs. To import multi-volume VMs, use 'ImportImage' . For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html Importing a Virtual Machine Using the Amazon EC2 CLI> .
 --
 --
--- For information about the import manifest referenced by this API action, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html VM Import Manifest> .
+-- For information about the import manifest referenced by this API action, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html VM Import Manifest> .
 --
 module Network.AWS.EC2.ImportInstance
     (
@@ -50,19 +50,16 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for ImportInstance.
---
---
---
--- /See:/ 'importInstance' smart constructor.
-data ImportInstance = ImportInstance'
-  { _iiLaunchSpecification :: !(Maybe ImportInstanceLaunchSpecification)
-  , _iiDiskImages          :: !(Maybe [DiskImage])
-  , _iiDescription         :: !(Maybe Text)
-  , _iiDryRun              :: !(Maybe Bool)
-  , _iiPlatform            :: !PlatformValues
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'importInstance' smart constructor.
+data ImportInstance = ImportInstance'{_iiLaunchSpecification
+                                      ::
+                                      !(Maybe
+                                          ImportInstanceLaunchSpecification),
+                                      _iiDiskImages :: !(Maybe [DiskImage]),
+                                      _iiDescription :: !(Maybe Text),
+                                      _iiDryRun :: !(Maybe Bool),
+                                      _iiPlatform :: !PlatformValues}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImportInstance' with the minimum fields required to make a request.
 --
@@ -80,15 +77,10 @@ data ImportInstance = ImportInstance'
 importInstance
     :: PlatformValues -- ^ 'iiPlatform'
     -> ImportInstance
-importInstance pPlatform_ =
-  ImportInstance'
-    { _iiLaunchSpecification = Nothing
-    , _iiDiskImages = Nothing
-    , _iiDescription = Nothing
-    , _iiDryRun = Nothing
-    , _iiPlatform = pPlatform_
-    }
-
+importInstance pPlatform_
+  = ImportInstance'{_iiLaunchSpecification = Nothing,
+                    _iiDiskImages = Nothing, _iiDescription = Nothing,
+                    _iiDryRun = Nothing, _iiPlatform = pPlatform_}
 
 -- | The launch specification.
 iiLaunchSpecification :: Lens' ImportInstance (Maybe ImportInstanceLaunchSpecification)
@@ -139,16 +131,14 @@ instance ToQuery ImportInstance where
                "Description" =: _iiDescription,
                "DryRun" =: _iiDryRun, "Platform" =: _iiPlatform]
 
--- | Contains the output for ImportInstance.
---
---
---
--- /See:/ 'importInstanceResponse' smart constructor.
-data ImportInstanceResponse = ImportInstanceResponse'
-  { _iirsConversionTask :: !(Maybe ConversionTask)
-  , _iirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'importInstanceResponse' smart constructor.
+data ImportInstanceResponse = ImportInstanceResponse'{_iirsConversionTask
+                                                      ::
+                                                      !(Maybe ConversionTask),
+                                                      _iirsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ImportInstanceResponse' with the minimum fields required to make a request.
 --
@@ -160,10 +150,10 @@ data ImportInstanceResponse = ImportInstanceResponse'
 importInstanceResponse
     :: Int -- ^ 'iirsResponseStatus'
     -> ImportInstanceResponse
-importInstanceResponse pResponseStatus_ =
-  ImportInstanceResponse'
-    {_iirsConversionTask = Nothing, _iirsResponseStatus = pResponseStatus_}
-
+importInstanceResponse pResponseStatus_
+  = ImportInstanceResponse'{_iirsConversionTask =
+                              Nothing,
+                            _iirsResponseStatus = pResponseStatus_}
 
 -- | Information about the conversion task.
 iirsConversionTask :: Lens' ImportInstanceResponse (Maybe ConversionTask)

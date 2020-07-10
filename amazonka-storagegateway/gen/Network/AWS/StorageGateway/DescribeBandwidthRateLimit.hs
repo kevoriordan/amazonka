@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect.
+-- Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types.'
 --
 --
 -- This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
@@ -48,15 +48,15 @@ import Network.AWS.Response
 import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
--- | A JSON object containing the of the gateway.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 --
 --
 --
 -- /See:/ 'describeBandwidthRateLimit' smart constructor.
-newtype DescribeBandwidthRateLimit = DescribeBandwidthRateLimit'
-  { _dbrlGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeBandwidthRateLimit = DescribeBandwidthRateLimit'{_dbrlGatewayARN
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeBandwidthRateLimit' with the minimum fields required to make a request.
 --
@@ -66,9 +66,9 @@ newtype DescribeBandwidthRateLimit = DescribeBandwidthRateLimit'
 describeBandwidthRateLimit
     :: Text -- ^ 'dbrlGatewayARN'
     -> DescribeBandwidthRateLimit
-describeBandwidthRateLimit pGatewayARN_ =
-  DescribeBandwidthRateLimit' {_dbrlGatewayARN = pGatewayARN_}
-
+describeBandwidthRateLimit pGatewayARN_
+  = DescribeBandwidthRateLimit'{_dbrlGatewayARN =
+                                  pGatewayARN_}
 
 -- | Undocumented member.
 dbrlGatewayARN :: Lens' DescribeBandwidthRateLimit Text
@@ -117,13 +117,23 @@ instance ToQuery DescribeBandwidthRateLimit where
 --
 --
 -- /See:/ 'describeBandwidthRateLimitResponse' smart constructor.
-data DescribeBandwidthRateLimitResponse = DescribeBandwidthRateLimitResponse'
-  { _dbrlrsGatewayARN                           :: !(Maybe Text)
-  , _dbrlrsAverageUploadRateLimitInBitsPerSec   :: !(Maybe Nat)
-  , _dbrlrsAverageDownloadRateLimitInBitsPerSec :: !(Maybe Nat)
-  , _dbrlrsResponseStatus                       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBandwidthRateLimitResponse = DescribeBandwidthRateLimitResponse'{_dbrlrsGatewayARN
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _dbrlrsAverageUploadRateLimitInBitsPerSec
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Nat),
+                                                                              _dbrlrsAverageDownloadRateLimitInBitsPerSec
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Nat),
+                                                                              _dbrlrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeBandwidthRateLimitResponse' with the minimum fields required to make a request.
 --
@@ -139,14 +149,15 @@ data DescribeBandwidthRateLimitResponse = DescribeBandwidthRateLimitResponse'
 describeBandwidthRateLimitResponse
     :: Int -- ^ 'dbrlrsResponseStatus'
     -> DescribeBandwidthRateLimitResponse
-describeBandwidthRateLimitResponse pResponseStatus_ =
-  DescribeBandwidthRateLimitResponse'
-    { _dbrlrsGatewayARN = Nothing
-    , _dbrlrsAverageUploadRateLimitInBitsPerSec = Nothing
-    , _dbrlrsAverageDownloadRateLimitInBitsPerSec = Nothing
-    , _dbrlrsResponseStatus = pResponseStatus_
-    }
-
+describeBandwidthRateLimitResponse pResponseStatus_
+  = DescribeBandwidthRateLimitResponse'{_dbrlrsGatewayARN
+                                          = Nothing,
+                                        _dbrlrsAverageUploadRateLimitInBitsPerSec
+                                          = Nothing,
+                                        _dbrlrsAverageDownloadRateLimitInBitsPerSec
+                                          = Nothing,
+                                        _dbrlrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | Undocumented member.
 dbrlrsGatewayARN :: Lens' DescribeBandwidthRateLimitResponse (Maybe Text)

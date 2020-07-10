@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a private namespace based on DNS, which will be visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace @example.com@ and name your service @backend@ , the resulting DNS name for the service will be @backend.example.com@ . For the current limit on the number of namespaces that you can create using the same AWS account, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming Limits on Auto Naming> in the /Route 53 Developer Guide/ .
+-- Creates a private namespace based on DNS, which will be visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace @example.com@ and name your service @backend@ , the resulting DNS name for the service will be @backend.example.com@ . For the current limit on the number of namespaces that you can create using the same AWS account, see <https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html AWS Cloud Map Limits> in the /AWS Cloud Map Developer Guide/ .
 --
 --
 module Network.AWS.Route53AutoNaming.CreatePrivateDNSNamespace
@@ -48,13 +48,15 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'createPrivateDNSNamespace' smart constructor.
-data CreatePrivateDNSNamespace = CreatePrivateDNSNamespace'
-  { _cpdnsnCreatorRequestId :: !(Maybe Text)
-  , _cpdnsnDescription      :: !(Maybe Text)
-  , _cpdnsnName             :: !Text
-  , _cpdnsnVPC              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePrivateDNSNamespace = CreatePrivateDNSNamespace'{_cpdnsnCreatorRequestId
+                                                            :: !(Maybe Text),
+                                                            _cpdnsnDescription
+                                                            :: !(Maybe Text),
+                                                            _cpdnsnName ::
+                                                            !Text,
+                                                            _cpdnsnVPC :: !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreatePrivateDNSNamespace' with the minimum fields required to make a request.
 --
@@ -64,21 +66,18 @@ data CreatePrivateDNSNamespace = CreatePrivateDNSNamespace'
 --
 -- * 'cpdnsnDescription' - A description for the namespace.
 --
--- * 'cpdnsnName' - The name that you want to assign to this namespace. When you create a namespace, Amazon Route 53 automatically creates a hosted zone that has the same name as the namespace.
+-- * 'cpdnsnName' - The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.
 --
 -- * 'cpdnsnVPC' - The ID of the Amazon VPC that you want to associate the namespace with.
 createPrivateDNSNamespace
     :: Text -- ^ 'cpdnsnName'
     -> Text -- ^ 'cpdnsnVPC'
     -> CreatePrivateDNSNamespace
-createPrivateDNSNamespace pName_ pVPC_ =
-  CreatePrivateDNSNamespace'
-    { _cpdnsnCreatorRequestId = Nothing
-    , _cpdnsnDescription = Nothing
-    , _cpdnsnName = pName_
-    , _cpdnsnVPC = pVPC_
-    }
-
+createPrivateDNSNamespace pName_ pVPC_
+  = CreatePrivateDNSNamespace'{_cpdnsnCreatorRequestId
+                                 = Nothing,
+                               _cpdnsnDescription = Nothing,
+                               _cpdnsnName = pName_, _cpdnsnVPC = pVPC_}
 
 -- | A unique string that identifies the request and that allows failed @CreatePrivateDnsNamespace@ requests to be retried without the risk of executing the operation twice. @CreatorRequestId@ can be any unique string, for example, a date/time stamp.
 cpdnsnCreatorRequestId :: Lens' CreatePrivateDNSNamespace (Maybe Text)
@@ -88,7 +87,7 @@ cpdnsnCreatorRequestId = lens _cpdnsnCreatorRequestId (\ s a -> s{_cpdnsnCreator
 cpdnsnDescription :: Lens' CreatePrivateDNSNamespace (Maybe Text)
 cpdnsnDescription = lens _cpdnsnDescription (\ s a -> s{_cpdnsnDescription = a})
 
--- | The name that you want to assign to this namespace. When you create a namespace, Amazon Route 53 automatically creates a hosted zone that has the same name as the namespace.
+-- | The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.
 cpdnsnName :: Lens' CreatePrivateDNSNamespace Text
 cpdnsnName = lens _cpdnsnName (\ s a -> s{_cpdnsnName = a})
 
@@ -136,28 +135,33 @@ instance ToQuery CreatePrivateDNSNamespace where
         toQuery = const mempty
 
 -- | /See:/ 'createPrivateDNSNamespaceResponse' smart constructor.
-data CreatePrivateDNSNamespaceResponse = CreatePrivateDNSNamespaceResponse'
-  { _cpdnsnrsOperationId    :: !(Maybe Text)
-  , _cpdnsnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePrivateDNSNamespaceResponse = CreatePrivateDNSNamespaceResponse'{_cpdnsnrsOperationId
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _cpdnsnrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'CreatePrivateDNSNamespaceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpdnsnrsOperationId' - A value that you can use to determine whether the request completed successfully. To get the status of the operation, see 'GetOperation' .
+-- * 'cpdnsnrsOperationId' - A value that you can use to determine whether the request completed successfully. To get the status of the operation, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
 --
 -- * 'cpdnsnrsResponseStatus' - -- | The response status code.
 createPrivateDNSNamespaceResponse
     :: Int -- ^ 'cpdnsnrsResponseStatus'
     -> CreatePrivateDNSNamespaceResponse
-createPrivateDNSNamespaceResponse pResponseStatus_ =
-  CreatePrivateDNSNamespaceResponse'
-    {_cpdnsnrsOperationId = Nothing, _cpdnsnrsResponseStatus = pResponseStatus_}
+createPrivateDNSNamespaceResponse pResponseStatus_
+  = CreatePrivateDNSNamespaceResponse'{_cpdnsnrsOperationId
+                                         = Nothing,
+                                       _cpdnsnrsResponseStatus =
+                                         pResponseStatus_}
 
-
--- | A value that you can use to determine whether the request completed successfully. To get the status of the operation, see 'GetOperation' .
+-- | A value that you can use to determine whether the request completed successfully. To get the status of the operation, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
 cpdnsnrsOperationId :: Lens' CreatePrivateDNSNamespaceResponse (Maybe Text)
 cpdnsnrsOperationId = lens _cpdnsnrsOperationId (\ s a -> s{_cpdnsnrsOperationId = a})
 

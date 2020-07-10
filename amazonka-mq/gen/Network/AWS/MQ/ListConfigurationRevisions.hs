@@ -48,12 +48,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listConfigurationRevisions' smart constructor.
-data ListConfigurationRevisions = ListConfigurationRevisions'
-  { _lcrNextToken       :: !(Maybe Text)
-  , _lcrMaxResults      :: !(Maybe Nat)
-  , _lcrConfigurationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListConfigurationRevisions = ListConfigurationRevisions'{_lcrNextToken
+                                                              :: !(Maybe Text),
+                                                              _lcrMaxResults ::
+                                                              !(Maybe Nat),
+                                                              _lcrConfigurationId
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListConfigurationRevisions' with the minimum fields required to make a request.
 --
@@ -67,13 +69,11 @@ data ListConfigurationRevisions = ListConfigurationRevisions'
 listConfigurationRevisions
     :: Text -- ^ 'lcrConfigurationId'
     -> ListConfigurationRevisions
-listConfigurationRevisions pConfigurationId_ =
-  ListConfigurationRevisions'
-    { _lcrNextToken = Nothing
-    , _lcrMaxResults = Nothing
-    , _lcrConfigurationId = pConfigurationId_
-    }
-
+listConfigurationRevisions pConfigurationId_
+  = ListConfigurationRevisions'{_lcrNextToken =
+                                  Nothing,
+                                _lcrMaxResults = Nothing,
+                                _lcrConfigurationId = pConfigurationId_}
 
 -- | The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
 lcrNextToken :: Lens' ListConfigurationRevisions (Maybe Text)
@@ -124,14 +124,27 @@ instance ToQuery ListConfigurationRevisions where
                "maxResults" =: _lcrMaxResults]
 
 -- | /See:/ 'listConfigurationRevisionsResponse' smart constructor.
-data ListConfigurationRevisionsResponse = ListConfigurationRevisionsResponse'
-  { _lcrrsConfigurationId :: !(Maybe Text)
-  , _lcrrsNextToken       :: !(Maybe Text)
-  , _lcrrsRevisions       :: !(Maybe [ConfigurationRevision])
-  , _lcrrsMaxResults      :: !(Maybe Int)
-  , _lcrrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListConfigurationRevisionsResponse = ListConfigurationRevisionsResponse'{_lcrrsConfigurationId
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _lcrrsNextToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _lcrrsRevisions
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [ConfigurationRevision]),
+                                                                              _lcrrsMaxResults
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Int),
+                                                                              _lcrrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListConfigurationRevisionsResponse' with the minimum fields required to make a request.
 --
@@ -149,15 +162,13 @@ data ListConfigurationRevisionsResponse = ListConfigurationRevisionsResponse'
 listConfigurationRevisionsResponse
     :: Int -- ^ 'lcrrsResponseStatus'
     -> ListConfigurationRevisionsResponse
-listConfigurationRevisionsResponse pResponseStatus_ =
-  ListConfigurationRevisionsResponse'
-    { _lcrrsConfigurationId = Nothing
-    , _lcrrsNextToken = Nothing
-    , _lcrrsRevisions = Nothing
-    , _lcrrsMaxResults = Nothing
-    , _lcrrsResponseStatus = pResponseStatus_
-    }
-
+listConfigurationRevisionsResponse pResponseStatus_
+  = ListConfigurationRevisionsResponse'{_lcrrsConfigurationId
+                                          = Nothing,
+                                        _lcrrsNextToken = Nothing,
+                                        _lcrrsRevisions = Nothing,
+                                        _lcrrsMaxResults = Nothing,
+                                        _lcrrsResponseStatus = pResponseStatus_}
 
 -- | The unique ID that Amazon MQ generates for the configuration.
 lcrrsConfigurationId :: Lens' ListConfigurationRevisionsResponse (Maybe Text)

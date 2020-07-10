@@ -38,12 +38,16 @@ module Network.AWS.APIGateway.GetDomainName
     , dnRegionalCertificateARN
     , dnCertificateARN
     , dnDistributionHostedZoneId
+    , dnSecurityPolicy
     , dnDomainName
     , dnRegionalCertificateName
     , dnRegionalDomainName
     , dnCertificateUploadDate
     , dnDistributionDomainName
+    , dnDomainNameStatusMessage
     , dnEndpointConfiguration
+    , dnDomainNameStatus
+    , dnTags
     ) where
 
 import Network.AWS.APIGateway.Types
@@ -58,10 +62,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDomainName' smart constructor.
-newtype GetDomainName = GetDomainName'
-  { _gdnDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDomainName = GetDomainName'{_gdnDomainName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDomainName' with the minimum fields required to make a request.
 --
@@ -71,8 +74,8 @@ newtype GetDomainName = GetDomainName'
 getDomainName
     :: Text -- ^ 'gdnDomainName'
     -> GetDomainName
-getDomainName pDomainName_ = GetDomainName' {_gdnDomainName = pDomainName_}
-
+getDomainName pDomainName_
+  = GetDomainName'{_gdnDomainName = pDomainName_}
 
 -- | [Required] The name of the 'DomainName' resource.
 gdnDomainName :: Lens' GetDomainName Text

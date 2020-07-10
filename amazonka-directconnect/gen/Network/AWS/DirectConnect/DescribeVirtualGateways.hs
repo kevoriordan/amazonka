@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of virtual private gateways owned by the AWS account.
+-- Lists the virtual private gateways owned by the AWS account.
 --
 --
--- You can create one or more AWS Direct Connect private virtual interfaces linking to a virtual private gateway. A virtual private gateway can be managed via Amazon Virtual Private Cloud (VPC) console or the <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html EC2 CreateVpnGateway> action.
+-- You can create one or more AWS Direct Connect private virtual interfaces linked to a virtual private gateway.
 --
 module Network.AWS.DirectConnect.DescribeVirtualGateways
     (
@@ -45,17 +45,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeVirtualGateways' smart constructor.
-data DescribeVirtualGateways =
-  DescribeVirtualGateways'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeVirtualGateways = DescribeVirtualGateways'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeVirtualGateways' with the minimum fields required to make a request.
 --
 describeVirtualGateways
     :: DescribeVirtualGateways
 describeVirtualGateways = DescribeVirtualGateways'
-
 
 instance AWSRequest DescribeVirtualGateways where
         type Rs DescribeVirtualGateways =
@@ -91,33 +89,32 @@ instance ToPath DescribeVirtualGateways where
 instance ToQuery DescribeVirtualGateways where
         toQuery = const mempty
 
--- | A structure containing a list of virtual private gateways.
---
---
---
--- /See:/ 'describeVirtualGatewaysResponse' smart constructor.
-data DescribeVirtualGatewaysResponse = DescribeVirtualGatewaysResponse'
-  { _dvgrsVirtualGateways :: !(Maybe [VirtualGateway])
-  , _dvgrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeVirtualGatewaysResponse' smart constructor.
+data DescribeVirtualGatewaysResponse = DescribeVirtualGatewaysResponse'{_dvgrsVirtualGateways
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [VirtualGateway]),
+                                                                        _dvgrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeVirtualGatewaysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvgrsVirtualGateways' - A list of virtual private gateways.
+-- * 'dvgrsVirtualGateways' - The virtual private gateways.
 --
 -- * 'dvgrsResponseStatus' - -- | The response status code.
 describeVirtualGatewaysResponse
     :: Int -- ^ 'dvgrsResponseStatus'
     -> DescribeVirtualGatewaysResponse
-describeVirtualGatewaysResponse pResponseStatus_ =
-  DescribeVirtualGatewaysResponse'
-    {_dvgrsVirtualGateways = Nothing, _dvgrsResponseStatus = pResponseStatus_}
+describeVirtualGatewaysResponse pResponseStatus_
+  = DescribeVirtualGatewaysResponse'{_dvgrsVirtualGateways
+                                       = Nothing,
+                                     _dvgrsResponseStatus = pResponseStatus_}
 
-
--- | A list of virtual private gateways.
+-- | The virtual private gateways.
 dvgrsVirtualGateways :: Lens' DescribeVirtualGatewaysResponse [VirtualGateway]
 dvgrsVirtualGateways = lens _dvgrsVirtualGateways (\ s a -> s{_dvgrsVirtualGateways = a}) . _Default . _Coerce
 

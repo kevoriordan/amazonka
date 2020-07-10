@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new web distribution. Send a @POST@ request to the @//CloudFront API version/ /distribution@ /@distribution ID@ resource.
+-- Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a @POST@ request to the @//CloudFront API version/ /distribution@ /@distribution ID@ resource.
 --
+--
+-- /Important:/ When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using <https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html UpdateDistribution> , follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html Required Fields for Create Distribution and Update Distribution> in the /Amazon CloudFront Developer Guide/ .
 --
 module Network.AWS.CloudFront.CreateDistribution
     (
@@ -51,10 +53,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createDistribution' smart constructor.
-newtype CreateDistribution = CreateDistribution'
-  { _cdDistributionConfig :: DistributionConfig
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateDistribution = CreateDistribution'{_cdDistributionConfig
+                                                 :: DistributionConfig}
+                               deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDistribution' with the minimum fields required to make a request.
 --
@@ -64,9 +65,9 @@ newtype CreateDistribution = CreateDistribution'
 createDistribution
     :: DistributionConfig -- ^ 'cdDistributionConfig'
     -> CreateDistribution
-createDistribution pDistributionConfig_ =
-  CreateDistribution' {_cdDistributionConfig = pDistributionConfig_}
-
+createDistribution pDistributionConfig_
+  = CreateDistribution'{_cdDistributionConfig =
+                          pDistributionConfig_}
 
 -- | The distribution's configuration information.
 cdDistributionConfig :: Lens' CreateDistribution DistributionConfig
@@ -91,7 +92,7 @@ instance NFData CreateDistribution where
 instance ToElement CreateDistribution where
         toElement
           = mkElement
-              "{http://cloudfront.amazonaws.com/doc/2017-10-30/}DistributionConfig"
+              "{http://cloudfront.amazonaws.com/doc/2019-03-26/}DistributionConfig"
               .
               _cdDistributionConfig
 
@@ -99,7 +100,7 @@ instance ToHeaders CreateDistribution where
         toHeaders = const mempty
 
 instance ToPath CreateDistribution where
-        toPath = const "/2017-10-30/distribution"
+        toPath = const "/2019-03-26/distribution"
 
 instance ToQuery CreateDistribution where
         toQuery = const mempty
@@ -109,13 +110,17 @@ instance ToQuery CreateDistribution where
 --
 --
 -- /See:/ 'createDistributionResponse' smart constructor.
-data CreateDistributionResponse = CreateDistributionResponse'
-  { _cdrsETag           :: !(Maybe Text)
-  , _cdrsDistribution   :: !(Maybe Distribution)
-  , _cdrsLocation       :: !(Maybe Text)
-  , _cdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDistributionResponse = CreateDistributionResponse'{_cdrsETag
+                                                              :: !(Maybe Text),
+                                                              _cdrsDistribution
+                                                              ::
+                                                              !(Maybe
+                                                                  Distribution),
+                                                              _cdrsLocation ::
+                                                              !(Maybe Text),
+                                                              _cdrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDistributionResponse' with the minimum fields required to make a request.
 --
@@ -131,14 +136,11 @@ data CreateDistributionResponse = CreateDistributionResponse'
 createDistributionResponse
     :: Int -- ^ 'cdrsResponseStatus'
     -> CreateDistributionResponse
-createDistributionResponse pResponseStatus_ =
-  CreateDistributionResponse'
-    { _cdrsETag = Nothing
-    , _cdrsDistribution = Nothing
-    , _cdrsLocation = Nothing
-    , _cdrsResponseStatus = pResponseStatus_
-    }
-
+createDistributionResponse pResponseStatus_
+  = CreateDistributionResponse'{_cdrsETag = Nothing,
+                                _cdrsDistribution = Nothing,
+                                _cdrsLocation = Nothing,
+                                _cdrsResponseStatus = pResponseStatus_}
 
 -- | The current version of the distribution created.
 cdrsETag :: Lens' CreateDistributionResponse (Maybe Text)

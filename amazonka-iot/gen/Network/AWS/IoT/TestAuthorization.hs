@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Test custom authorization.
+-- Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
 --
 --
 module Network.AWS.IoT.TestAuthorization
@@ -50,15 +50,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'testAuthorization' smart constructor.
-data TestAuthorization = TestAuthorization'
-  { _taClientId              :: !(Maybe Text)
-  , _taPolicyNamesToAdd      :: !(Maybe [Text])
-  , _taPrincipal             :: !(Maybe Text)
-  , _taCognitoIdentityPoolId :: !(Maybe Text)
-  , _taPolicyNamesToSkip     :: !(Maybe [Text])
-  , _taAuthInfos             :: !(List1 AuthInfo)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestAuthorization = TestAuthorization'{_taClientId
+                                            :: !(Maybe Text),
+                                            _taPolicyNamesToAdd ::
+                                            !(Maybe [Text]),
+                                            _taPrincipal :: !(Maybe Text),
+                                            _taCognitoIdentityPoolId ::
+                                            !(Maybe Text),
+                                            _taPolicyNamesToSkip ::
+                                            !(Maybe [Text]),
+                                            _taAuthInfos :: !(List1 AuthInfo)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestAuthorization' with the minimum fields required to make a request.
 --
@@ -78,16 +80,13 @@ data TestAuthorization = TestAuthorization'
 testAuthorization
     :: NonEmpty AuthInfo -- ^ 'taAuthInfos'
     -> TestAuthorization
-testAuthorization pAuthInfos_ =
-  TestAuthorization'
-    { _taClientId = Nothing
-    , _taPolicyNamesToAdd = Nothing
-    , _taPrincipal = Nothing
-    , _taCognitoIdentityPoolId = Nothing
-    , _taPolicyNamesToSkip = Nothing
-    , _taAuthInfos = _List1 # pAuthInfos_
-    }
-
+testAuthorization pAuthInfos_
+  = TestAuthorization'{_taClientId = Nothing,
+                       _taPolicyNamesToAdd = Nothing,
+                       _taPrincipal = Nothing,
+                       _taCognitoIdentityPoolId = Nothing,
+                       _taPolicyNamesToSkip = Nothing,
+                       _taAuthInfos = _List1 # pAuthInfos_}
 
 -- | The MQTT client ID.
 taClientId :: Lens' TestAuthorization (Maybe Text)
@@ -149,11 +148,14 @@ instance ToQuery TestAuthorization where
           = mconcat ["clientId" =: _taClientId]
 
 -- | /See:/ 'testAuthorizationResponse' smart constructor.
-data TestAuthorizationResponse = TestAuthorizationResponse'
-  { _tarsAuthResults    :: !(Maybe [AuthResult])
-  , _tarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestAuthorizationResponse = TestAuthorizationResponse'{_tarsAuthResults
+                                                            ::
+                                                            !(Maybe
+                                                                [AuthResult]),
+                                                            _tarsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'TestAuthorizationResponse' with the minimum fields required to make a request.
 --
@@ -165,10 +167,10 @@ data TestAuthorizationResponse = TestAuthorizationResponse'
 testAuthorizationResponse
     :: Int -- ^ 'tarsResponseStatus'
     -> TestAuthorizationResponse
-testAuthorizationResponse pResponseStatus_ =
-  TestAuthorizationResponse'
-    {_tarsAuthResults = Nothing, _tarsResponseStatus = pResponseStatus_}
-
+testAuthorizationResponse pResponseStatus_
+  = TestAuthorizationResponse'{_tarsAuthResults =
+                                 Nothing,
+                               _tarsResponseStatus = pResponseStatus_}
 
 -- | The authentication results.
 tarsAuthResults :: Lens' TestAuthorizationResponse [AuthResult]

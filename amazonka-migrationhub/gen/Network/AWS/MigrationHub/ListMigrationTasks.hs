@@ -29,6 +29,8 @@
 --
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.MigrationHub.ListMigrationTasks
     (
     -- * Creating a Request
@@ -51,17 +53,17 @@ module Network.AWS.MigrationHub.ListMigrationTasks
 import Network.AWS.Lens
 import Network.AWS.MigrationHub.Types
 import Network.AWS.MigrationHub.Types.Product
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listMigrationTasks' smart constructor.
-data ListMigrationTasks = ListMigrationTasks'
-  { _lmtResourceName :: !(Maybe Text)
-  , _lmtNextToken    :: !(Maybe Text)
-  , _lmtMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMigrationTasks = ListMigrationTasks'{_lmtResourceName
+                                              :: !(Maybe Text),
+                                              _lmtNextToken :: !(Maybe Text),
+                                              _lmtMaxResults :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMigrationTasks' with the minimum fields required to make a request.
 --
@@ -74,13 +76,9 @@ data ListMigrationTasks = ListMigrationTasks'
 -- * 'lmtMaxResults' - Value to specify how many results are returned per page.
 listMigrationTasks
     :: ListMigrationTasks
-listMigrationTasks =
-  ListMigrationTasks'
-    { _lmtResourceName = Nothing
-    , _lmtNextToken = Nothing
-    , _lmtMaxResults = Nothing
-    }
-
+listMigrationTasks
+  = ListMigrationTasks'{_lmtResourceName = Nothing,
+                        _lmtNextToken = Nothing, _lmtMaxResults = Nothing}
 
 -- | Filter migration tasks by discovered resource name.
 lmtResourceName :: Lens' ListMigrationTasks (Maybe Text)
@@ -93,6 +91,14 @@ lmtNextToken = lens _lmtNextToken (\ s a -> s{_lmtNextToken = a})
 -- | Value to specify how many results are returned per page.
 lmtMaxResults :: Lens' ListMigrationTasks (Maybe Natural)
 lmtMaxResults = lens _lmtMaxResults (\ s a -> s{_lmtMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListMigrationTasks where
+        page rq rs
+          | stop (rs ^. lmtrsNextToken) = Nothing
+          | stop (rs ^. lmtrsMigrationTaskSummaryList) =
+            Nothing
+          | otherwise =
+            Just $ rq & lmtNextToken .~ rs ^. lmtrsNextToken
 
 instance AWSRequest ListMigrationTasks where
         type Rs ListMigrationTasks =
@@ -134,12 +140,16 @@ instance ToQuery ListMigrationTasks where
         toQuery = const mempty
 
 -- | /See:/ 'listMigrationTasksResponse' smart constructor.
-data ListMigrationTasksResponse = ListMigrationTasksResponse'
-  { _lmtrsMigrationTaskSummaryList :: !(Maybe [MigrationTaskSummary])
-  , _lmtrsNextToken                :: !(Maybe Text)
-  , _lmtrsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMigrationTasksResponse = ListMigrationTasksResponse'{_lmtrsMigrationTaskSummaryList
+                                                              ::
+                                                              !(Maybe
+                                                                  [MigrationTaskSummary]),
+                                                              _lmtrsNextToken ::
+                                                              !(Maybe Text),
+                                                              _lmtrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListMigrationTasksResponse' with the minimum fields required to make a request.
 --
@@ -153,13 +163,11 @@ data ListMigrationTasksResponse = ListMigrationTasksResponse'
 listMigrationTasksResponse
     :: Int -- ^ 'lmtrsResponseStatus'
     -> ListMigrationTasksResponse
-listMigrationTasksResponse pResponseStatus_ =
-  ListMigrationTasksResponse'
-    { _lmtrsMigrationTaskSummaryList = Nothing
-    , _lmtrsNextToken = Nothing
-    , _lmtrsResponseStatus = pResponseStatus_
-    }
-
+listMigrationTasksResponse pResponseStatus_
+  = ListMigrationTasksResponse'{_lmtrsMigrationTaskSummaryList
+                                  = Nothing,
+                                _lmtrsNextToken = Nothing,
+                                _lmtrsResponseStatus = pResponseStatus_}
 
 -- | Lists the migration task's summary which includes: @MigrationTaskName@ , @ProgressPercent@ , @ProgressUpdateStream@ , @Status@ , and the @UpdateDateTime@ for each task.
 lmtrsMigrationTaskSummaryList :: Lens' ListMigrationTasksResponse [MigrationTaskSummary]

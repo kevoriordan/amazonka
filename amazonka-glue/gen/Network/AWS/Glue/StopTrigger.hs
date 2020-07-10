@@ -45,10 +45,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopTrigger' smart constructor.
-newtype StopTrigger = StopTrigger'
-  { _stName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopTrigger = StopTrigger'{_stName :: Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopTrigger' with the minimum fields required to make a request.
 --
@@ -58,8 +56,7 @@ newtype StopTrigger = StopTrigger'
 stopTrigger
     :: Text -- ^ 'stName'
     -> StopTrigger
-stopTrigger pName_ = StopTrigger' {_stName = pName_}
-
+stopTrigger pName_ = StopTrigger'{_stName = pName_}
 
 -- | The name of the trigger to stop.
 stName :: Lens' StopTrigger Text
@@ -98,11 +95,10 @@ instance ToQuery StopTrigger where
         toQuery = const mempty
 
 -- | /See:/ 'stopTriggerResponse' smart constructor.
-data StopTriggerResponse = StopTriggerResponse'
-  { _strsName           :: !(Maybe Text)
-  , _strsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopTriggerResponse = StopTriggerResponse'{_strsName
+                                                :: !(Maybe Text),
+                                                _strsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopTriggerResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +110,9 @@ data StopTriggerResponse = StopTriggerResponse'
 stopTriggerResponse
     :: Int -- ^ 'strsResponseStatus'
     -> StopTriggerResponse
-stopTriggerResponse pResponseStatus_ =
-  StopTriggerResponse'
-    {_strsName = Nothing, _strsResponseStatus = pResponseStatus_}
-
+stopTriggerResponse pResponseStatus_
+  = StopTriggerResponse'{_strsName = Nothing,
+                         _strsResponseStatus = pResponseStatus_}
 
 -- | The name of the trigger that was stopped.
 strsName :: Lens' StopTriggerResponse (Maybe Text)

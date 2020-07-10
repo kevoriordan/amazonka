@@ -42,10 +42,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteChannel' smart constructor.
-newtype DeleteChannel = DeleteChannel'
-  { _dcChannelName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteChannel = DeleteChannel'{_dcChannelName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteChannel' with the minimum fields required to make a request.
 --
@@ -55,8 +54,8 @@ newtype DeleteChannel = DeleteChannel'
 deleteChannel
     :: Text -- ^ 'dcChannelName'
     -> DeleteChannel
-deleteChannel pChannelName_ = DeleteChannel' {_dcChannelName = pChannelName_}
-
+deleteChannel pChannelName_
+  = DeleteChannel'{_dcChannelName = pChannelName_}
 
 -- | The name of the channel to delete.
 dcChannelName :: Lens' DeleteChannel Text
@@ -82,16 +81,14 @@ instance ToQuery DeleteChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteChannelResponse' smart constructor.
-data DeleteChannelResponse =
-  DeleteChannelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteChannelResponse = DeleteChannelResponse'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteChannelResponse' with the minimum fields required to make a request.
 --
 deleteChannelResponse
     :: DeleteChannelResponse
 deleteChannelResponse = DeleteChannelResponse'
-
 
 instance NFData DeleteChannelResponse where

@@ -45,31 +45,30 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'associateIPGroups' smart constructor.
-data AssociateIPGroups = AssociateIPGroups'
-  { _aigDirectoryId :: !Text
-  , _aigGroupIds    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateIPGroups = AssociateIPGroups'{_aigDirectoryId
+                                            :: !Text,
+                                            _aigGroupIds :: ![Text]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssociateIPGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aigDirectoryId' - The ID of the directory.
+-- * 'aigDirectoryId' - The identifier of the directory.
 --
--- * 'aigGroupIds' - The IDs of one or more IP access control groups.
+-- * 'aigGroupIds' - The identifiers of one or more IP access control groups.
 associateIPGroups
     :: Text -- ^ 'aigDirectoryId'
     -> AssociateIPGroups
-associateIPGroups pDirectoryId_ =
-  AssociateIPGroups' {_aigDirectoryId = pDirectoryId_, _aigGroupIds = mempty}
+associateIPGroups pDirectoryId_
+  = AssociateIPGroups'{_aigDirectoryId = pDirectoryId_,
+                       _aigGroupIds = mempty}
 
-
--- | The ID of the directory.
+-- | The identifier of the directory.
 aigDirectoryId :: Lens' AssociateIPGroups Text
 aigDirectoryId = lens _aigDirectoryId (\ s a -> s{_aigDirectoryId = a})
 
--- | The IDs of one or more IP access control groups.
+-- | The identifiers of one or more IP access control groups.
 aigGroupIds :: Lens' AssociateIPGroups [Text]
 aigGroupIds = lens _aigGroupIds (\ s a -> s{_aigGroupIds = a}) . _Coerce
 
@@ -109,10 +108,10 @@ instance ToQuery AssociateIPGroups where
         toQuery = const mempty
 
 -- | /See:/ 'associateIPGroupsResponse' smart constructor.
-newtype AssociateIPGroupsResponse = AssociateIPGroupsResponse'
-  { _aigrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateIPGroupsResponse = AssociateIPGroupsResponse'{_aigrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'AssociateIPGroupsResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +121,9 @@ newtype AssociateIPGroupsResponse = AssociateIPGroupsResponse'
 associateIPGroupsResponse
     :: Int -- ^ 'aigrsResponseStatus'
     -> AssociateIPGroupsResponse
-associateIPGroupsResponse pResponseStatus_ =
-  AssociateIPGroupsResponse' {_aigrsResponseStatus = pResponseStatus_}
-
+associateIPGroupsResponse pResponseStatus_
+  = AssociateIPGroupsResponse'{_aigrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 aigrsResponseStatus :: Lens' AssociateIPGroupsResponse Int

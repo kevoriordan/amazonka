@@ -51,12 +51,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listResourceTags' smart constructor.
-data ListResourceTags = ListResourceTags'
-  { _lrtMarker :: !(Maybe Text)
-  , _lrtLimit  :: !(Maybe Nat)
-  , _lrtKeyId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceTags = ListResourceTags'{_lrtMarker
+                                          :: !(Maybe Text),
+                                          _lrtLimit :: !(Maybe Nat),
+                                          _lrtKeyId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListResourceTags' with the minimum fields required to make a request.
 --
@@ -70,10 +69,9 @@ data ListResourceTags = ListResourceTags'
 listResourceTags
     :: Text -- ^ 'lrtKeyId'
     -> ListResourceTags
-listResourceTags pKeyId_ =
-  ListResourceTags'
-    {_lrtMarker = Nothing, _lrtLimit = Nothing, _lrtKeyId = pKeyId_}
-
+listResourceTags pKeyId_
+  = ListResourceTags'{_lrtMarker = Nothing,
+                      _lrtLimit = Nothing, _lrtKeyId = pKeyId_}
 
 -- | Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of @NextMarker@ from the truncated response you just received. Do not attempt to construct this value. Use only the value of @NextMarker@ from the truncated response you just received.
 lrtMarker :: Lens' ListResourceTags (Maybe Text)
@@ -126,19 +124,22 @@ instance ToQuery ListResourceTags where
         toQuery = const mempty
 
 -- | /See:/ 'listResourceTagsResponse' smart constructor.
-data ListResourceTagsResponse = ListResourceTagsResponse'
-  { _lrtrsTruncated      :: !(Maybe Bool)
-  , _lrtrsNextMarker     :: !(Maybe Text)
-  , _lrtrsTags           :: !(Maybe [Tag])
-  , _lrtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceTagsResponse = ListResourceTagsResponse'{_lrtrsTruncated
+                                                          :: !(Maybe Bool),
+                                                          _lrtrsNextMarker ::
+                                                          !(Maybe Text),
+                                                          _lrtrsTags ::
+                                                          !(Maybe [Tag]),
+                                                          _lrtrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListResourceTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrtrsTruncated' - A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in this response to the @Marker@ parameter in a subsequent request.
+-- * 'lrtrsTruncated' - A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in thisresponse to the @Marker@ parameter in a subsequent request.
 --
 -- * 'lrtrsNextMarker' - When @Truncated@ is true, this element is present and contains the value to use for the @Marker@ parameter in a subsequent request. Do not assume or infer any information from this value.
 --
@@ -148,16 +149,13 @@ data ListResourceTagsResponse = ListResourceTagsResponse'
 listResourceTagsResponse
     :: Int -- ^ 'lrtrsResponseStatus'
     -> ListResourceTagsResponse
-listResourceTagsResponse pResponseStatus_ =
-  ListResourceTagsResponse'
-    { _lrtrsTruncated = Nothing
-    , _lrtrsNextMarker = Nothing
-    , _lrtrsTags = Nothing
-    , _lrtrsResponseStatus = pResponseStatus_
-    }
+listResourceTagsResponse pResponseStatus_
+  = ListResourceTagsResponse'{_lrtrsTruncated =
+                                Nothing,
+                              _lrtrsNextMarker = Nothing, _lrtrsTags = Nothing,
+                              _lrtrsResponseStatus = pResponseStatus_}
 
-
--- | A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in this response to the @Marker@ parameter in a subsequent request.
+-- | A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in thisresponse to the @Marker@ parameter in a subsequent request.
 lrtrsTruncated :: Lens' ListResourceTagsResponse (Maybe Bool)
 lrtrsTruncated = lens _lrtrsTruncated (\ s a -> s{_lrtrsTruncated = a})
 

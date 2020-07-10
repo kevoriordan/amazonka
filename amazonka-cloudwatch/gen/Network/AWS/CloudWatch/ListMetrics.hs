@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the specified metrics. You can use the returned metrics with 'GetMetricStatistics' to obtain statistical data.
+-- List the specified metrics. You can use the returned metrics with <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html GetMetricData> or <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html GetMetricStatistics> to obtain statistical data.
 --
 --
 -- Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.
 --
--- After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using 'GetMetricStatistics' .
+-- After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html GetMetricData> or <https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html GetMetricStatistics> .
 --
 --
 -- This operation returns paginated results.
@@ -56,13 +56,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listMetrics' smart constructor.
-data ListMetrics = ListMetrics'
-  { _lmMetricName :: !(Maybe Text)
-  , _lmNamespace  :: !(Maybe Text)
-  , _lmNextToken  :: !(Maybe Text)
-  , _lmDimensions :: !(Maybe [DimensionFilter])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMetrics = ListMetrics'{_lmMetricName ::
+                                !(Maybe Text),
+                                _lmNamespace :: !(Maybe Text),
+                                _lmNextToken :: !(Maybe Text),
+                                _lmDimensions :: !(Maybe [DimensionFilter])}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMetrics' with the minimum fields required to make a request.
 --
@@ -77,14 +76,10 @@ data ListMetrics = ListMetrics'
 -- * 'lmDimensions' - The dimensions to filter against.
 listMetrics
     :: ListMetrics
-listMetrics =
-  ListMetrics'
-    { _lmMetricName = Nothing
-    , _lmNamespace = Nothing
-    , _lmNextToken = Nothing
-    , _lmDimensions = Nothing
-    }
-
+listMetrics
+  = ListMetrics'{_lmMetricName = Nothing,
+                 _lmNamespace = Nothing, _lmNextToken = Nothing,
+                 _lmDimensions = Nothing}
 
 -- | The name of the metric to filter against.
 lmMetricName :: Lens' ListMetrics (Maybe Text)
@@ -143,12 +138,11 @@ instance ToQuery ListMetrics where
                  toQuery (toQueryList "member" <$> _lmDimensions)]
 
 -- | /See:/ 'listMetricsResponse' smart constructor.
-data ListMetricsResponse = ListMetricsResponse'
-  { _lmrsMetrics        :: !(Maybe [Metric])
-  , _lmrsNextToken      :: !(Maybe Text)
-  , _lmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListMetricsResponse = ListMetricsResponse'{_lmrsMetrics
+                                                :: !(Maybe [Metric]),
+                                                _lmrsNextToken :: !(Maybe Text),
+                                                _lmrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListMetricsResponse' with the minimum fields required to make a request.
 --
@@ -162,13 +156,10 @@ data ListMetricsResponse = ListMetricsResponse'
 listMetricsResponse
     :: Int -- ^ 'lmrsResponseStatus'
     -> ListMetricsResponse
-listMetricsResponse pResponseStatus_ =
-  ListMetricsResponse'
-    { _lmrsMetrics = Nothing
-    , _lmrsNextToken = Nothing
-    , _lmrsResponseStatus = pResponseStatus_
-    }
-
+listMetricsResponse pResponseStatus_
+  = ListMetricsResponse'{_lmrsMetrics = Nothing,
+                         _lmrsNextToken = Nothing,
+                         _lmrsResponseStatus = pResponseStatus_}
 
 -- | The metrics.
 lmrsMetrics :: Lens' ListMetricsResponse [Metric]

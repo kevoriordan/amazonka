@@ -21,6 +21,8 @@
 -- Describes a specific delete inventory operation.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeInventoryDeletions
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.DescribeInventoryDeletions
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,33 +51,33 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeInventoryDeletions' smart constructor.
-data DescribeInventoryDeletions = DescribeInventoryDeletions'
-  { _didNextToken  :: !(Maybe Text)
-  , _didMaxResults :: !(Maybe Nat)
-  , _didDeletionId :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInventoryDeletions = DescribeInventoryDeletions'{_didNextToken
+                                                              :: !(Maybe Text),
+                                                              _didMaxResults ::
+                                                              !(Maybe Nat),
+                                                              _didDeletionId ::
+                                                              !(Maybe Text)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeInventoryDeletions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'didNextToken' - A token to start the list. Use this token to get the next set of results.
+-- * 'didNextToken' - A token to start the list. Use this token to get the next set of results. 
 --
 -- * 'didMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 --
 -- * 'didDeletionId' - Specify the delete inventory ID for which you want information. This ID was returned by the @DeleteInventory@ action.
 describeInventoryDeletions
     :: DescribeInventoryDeletions
-describeInventoryDeletions =
-  DescribeInventoryDeletions'
-    { _didNextToken = Nothing
-    , _didMaxResults = Nothing
-    , _didDeletionId = Nothing
-    }
+describeInventoryDeletions
+  = DescribeInventoryDeletions'{_didNextToken =
+                                  Nothing,
+                                _didMaxResults = Nothing,
+                                _didDeletionId = Nothing}
 
-
--- | A token to start the list. Use this token to get the next set of results.
+-- | A token to start the list. Use this token to get the next set of results. 
 didNextToken :: Lens' DescribeInventoryDeletions (Maybe Text)
 didNextToken = lens _didNextToken (\ s a -> s{_didNextToken = a})
 
@@ -85,6 +88,13 @@ didMaxResults = lens _didMaxResults (\ s a -> s{_didMaxResults = a}) . mapping _
 -- | Specify the delete inventory ID for which you want information. This ID was returned by the @DeleteInventory@ action.
 didDeletionId :: Lens' DescribeInventoryDeletions (Maybe Text)
 didDeletionId = lens _didDeletionId (\ s a -> s{_didDeletionId = a})
+
+instance AWSPager DescribeInventoryDeletions where
+        page rq rs
+          | stop (rs ^. didrsNextToken) = Nothing
+          | stop (rs ^. didrsInventoryDeletions) = Nothing
+          | otherwise =
+            Just $ rq & didNextToken .~ rs ^. didrsNextToken
 
 instance AWSRequest DescribeInventoryDeletions where
         type Rs DescribeInventoryDeletions =
@@ -127,12 +137,19 @@ instance ToQuery DescribeInventoryDeletions where
         toQuery = const mempty
 
 -- | /See:/ 'describeInventoryDeletionsResponse' smart constructor.
-data DescribeInventoryDeletionsResponse = DescribeInventoryDeletionsResponse'
-  { _didrsInventoryDeletions :: !(Maybe [InventoryDeletionStatusItem])
-  , _didrsNextToken          :: !(Maybe Text)
-  , _didrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInventoryDeletionsResponse = DescribeInventoryDeletionsResponse'{_didrsInventoryDeletions
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [InventoryDeletionStatusItem]),
+                                                                              _didrsNextToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _didrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeInventoryDeletionsResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +163,11 @@ data DescribeInventoryDeletionsResponse = DescribeInventoryDeletionsResponse'
 describeInventoryDeletionsResponse
     :: Int -- ^ 'didrsResponseStatus'
     -> DescribeInventoryDeletionsResponse
-describeInventoryDeletionsResponse pResponseStatus_ =
-  DescribeInventoryDeletionsResponse'
-    { _didrsInventoryDeletions = Nothing
-    , _didrsNextToken = Nothing
-    , _didrsResponseStatus = pResponseStatus_
-    }
-
+describeInventoryDeletionsResponse pResponseStatus_
+  = DescribeInventoryDeletionsResponse'{_didrsInventoryDeletions
+                                          = Nothing,
+                                        _didrsNextToken = Nothing,
+                                        _didrsResponseStatus = pResponseStatus_}
 
 -- | A list of status items for deleted inventory.
 didrsInventoryDeletions :: Lens' DescribeInventoryDeletionsResponse [InventoryDeletionStatusItem]

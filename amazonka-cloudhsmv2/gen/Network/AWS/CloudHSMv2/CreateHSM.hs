@@ -47,12 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createHSM' smart constructor.
-data CreateHSM = CreateHSM'
-  { _chIPAddress        :: !(Maybe Text)
-  , _chClusterId        :: !Text
-  , _chAvailabilityZone :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSM = CreateHSM'{_chIPAddress ::
+                            !(Maybe Text),
+                            _chClusterId :: !Text, _chAvailabilityZone :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateHSM' with the minimum fields required to make a request.
 --
@@ -67,13 +65,10 @@ createHSM
     :: Text -- ^ 'chClusterId'
     -> Text -- ^ 'chAvailabilityZone'
     -> CreateHSM
-createHSM pClusterId_ pAvailabilityZone_ =
-  CreateHSM'
-    { _chIPAddress = Nothing
-    , _chClusterId = pClusterId_
-    , _chAvailabilityZone = pAvailabilityZone_
-    }
-
+createHSM pClusterId_ pAvailabilityZone_
+  = CreateHSM'{_chIPAddress = Nothing,
+               _chClusterId = pClusterId_,
+               _chAvailabilityZone = pAvailabilityZone_}
 
 -- | The HSM's IP address. If you specify an IP address, use an available address from the subnet that maps to the Availability Zone where you are creating the HSM. If you don't specify an IP address, one is chosen for you from that subnet.
 chIPAddress :: Lens' CreateHSM (Maybe Text)
@@ -124,11 +119,10 @@ instance ToQuery CreateHSM where
         toQuery = const mempty
 
 -- | /See:/ 'createHSMResponse' smart constructor.
-data CreateHSMResponse = CreateHSMResponse'
-  { _chrsHSM            :: !(Maybe HSM)
-  , _chrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSMResponse = CreateHSMResponse'{_chrsHSM
+                                            :: !(Maybe HSM),
+                                            _chrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateHSMResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +134,9 @@ data CreateHSMResponse = CreateHSMResponse'
 createHSMResponse
     :: Int -- ^ 'chrsResponseStatus'
     -> CreateHSMResponse
-createHSMResponse pResponseStatus_ =
-  CreateHSMResponse'
-    {_chrsHSM = Nothing, _chrsResponseStatus = pResponseStatus_}
-
+createHSMResponse pResponseStatus_
+  = CreateHSMResponse'{_chrsHSM = Nothing,
+                       _chrsResponseStatus = pResponseStatus_}
 
 -- | Information about the HSM that was created.
 chrsHSM :: Lens' CreateHSMResponse (Maybe HSM)

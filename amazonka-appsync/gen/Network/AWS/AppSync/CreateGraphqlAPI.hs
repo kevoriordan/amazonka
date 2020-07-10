@@ -27,9 +27,12 @@ module Network.AWS.AppSync.CreateGraphqlAPI
       createGraphqlAPI
     , CreateGraphqlAPI
     -- * Request Lenses
+    , cgaXrayEnabled
     , cgaOpenIdConnectConfig
+    , cgaAdditionalAuthenticationProviders
     , cgaUserPoolConfig
     , cgaLogConfig
+    , cgaTags
     , cgaName
     , cgaAuthenticationType
 
@@ -49,59 +52,84 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createGraphqlAPI' smart constructor.
-data CreateGraphqlAPI = CreateGraphqlAPI'
-  { _cgaOpenIdConnectConfig :: !(Maybe OpenIdConnectConfig)
-  , _cgaUserPoolConfig      :: !(Maybe UserPoolConfig)
-  , _cgaLogConfig           :: !(Maybe LogConfig)
-  , _cgaName                :: !Text
-  , _cgaAuthenticationType  :: !AuthenticationType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGraphqlAPI = CreateGraphqlAPI'{_cgaXrayEnabled
+                                          :: !(Maybe Bool),
+                                          _cgaOpenIdConnectConfig ::
+                                          !(Maybe OpenIdConnectConfig),
+                                          _cgaAdditionalAuthenticationProviders
+                                          ::
+                                          !(Maybe
+                                              [AdditionalAuthenticationProvider]),
+                                          _cgaUserPoolConfig ::
+                                          !(Maybe UserPoolConfig),
+                                          _cgaLogConfig :: !(Maybe LogConfig),
+                                          _cgaTags :: !(Maybe (Map Text Text)),
+                                          _cgaName :: !Text,
+                                          _cgaAuthenticationType ::
+                                          !AuthenticationType}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateGraphqlAPI' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cgaOpenIdConnectConfig' - The Open Id Connect configuration configuration.
+-- * 'cgaXrayEnabled' - A flag indicating whether to enable X-Ray tracing for the @GraphqlApi@ .
 --
--- * 'cgaUserPoolConfig' - The Amazon Cognito User Pool configuration.
+-- * 'cgaOpenIdConnectConfig' - The OpenID Connect configuration.
 --
--- * 'cgaLogConfig' - The Amazon CloudWatch logs configuration.
+-- * 'cgaAdditionalAuthenticationProviders' - A list of additional authentication providers for the @GraphqlApi@ API.
+--
+-- * 'cgaUserPoolConfig' - The Amazon Cognito user pool configuration.
+--
+-- * 'cgaLogConfig' - The Amazon CloudWatch Logs configuration.
+--
+-- * 'cgaTags' - A @TagMap@ object.
 --
 -- * 'cgaName' - A user-supplied name for the @GraphqlApi@ .
 --
--- * 'cgaAuthenticationType' - The authentication type: API key, IAM, or Amazon Cognito User Pools.
+-- * 'cgaAuthenticationType' - The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
 createGraphqlAPI
     :: Text -- ^ 'cgaName'
     -> AuthenticationType -- ^ 'cgaAuthenticationType'
     -> CreateGraphqlAPI
-createGraphqlAPI pName_ pAuthenticationType_ =
-  CreateGraphqlAPI'
-    { _cgaOpenIdConnectConfig = Nothing
-    , _cgaUserPoolConfig = Nothing
-    , _cgaLogConfig = Nothing
-    , _cgaName = pName_
-    , _cgaAuthenticationType = pAuthenticationType_
-    }
+createGraphqlAPI pName_ pAuthenticationType_
+  = CreateGraphqlAPI'{_cgaXrayEnabled = Nothing,
+                      _cgaOpenIdConnectConfig = Nothing,
+                      _cgaAdditionalAuthenticationProviders = Nothing,
+                      _cgaUserPoolConfig = Nothing,
+                      _cgaLogConfig = Nothing, _cgaTags = Nothing,
+                      _cgaName = pName_,
+                      _cgaAuthenticationType = pAuthenticationType_}
 
+-- | A flag indicating whether to enable X-Ray tracing for the @GraphqlApi@ .
+cgaXrayEnabled :: Lens' CreateGraphqlAPI (Maybe Bool)
+cgaXrayEnabled = lens _cgaXrayEnabled (\ s a -> s{_cgaXrayEnabled = a})
 
--- | The Open Id Connect configuration configuration.
+-- | The OpenID Connect configuration.
 cgaOpenIdConnectConfig :: Lens' CreateGraphqlAPI (Maybe OpenIdConnectConfig)
 cgaOpenIdConnectConfig = lens _cgaOpenIdConnectConfig (\ s a -> s{_cgaOpenIdConnectConfig = a})
 
--- | The Amazon Cognito User Pool configuration.
+-- | A list of additional authentication providers for the @GraphqlApi@ API.
+cgaAdditionalAuthenticationProviders :: Lens' CreateGraphqlAPI [AdditionalAuthenticationProvider]
+cgaAdditionalAuthenticationProviders = lens _cgaAdditionalAuthenticationProviders (\ s a -> s{_cgaAdditionalAuthenticationProviders = a}) . _Default . _Coerce
+
+-- | The Amazon Cognito user pool configuration.
 cgaUserPoolConfig :: Lens' CreateGraphqlAPI (Maybe UserPoolConfig)
 cgaUserPoolConfig = lens _cgaUserPoolConfig (\ s a -> s{_cgaUserPoolConfig = a})
 
--- | The Amazon CloudWatch logs configuration.
+-- | The Amazon CloudWatch Logs configuration.
 cgaLogConfig :: Lens' CreateGraphqlAPI (Maybe LogConfig)
 cgaLogConfig = lens _cgaLogConfig (\ s a -> s{_cgaLogConfig = a})
+
+-- | A @TagMap@ object.
+cgaTags :: Lens' CreateGraphqlAPI (HashMap Text Text)
+cgaTags = lens _cgaTags (\ s a -> s{_cgaTags = a}) . _Default . _Map
 
 -- | A user-supplied name for the @GraphqlApi@ .
 cgaName :: Lens' CreateGraphqlAPI Text
 cgaName = lens _cgaName (\ s a -> s{_cgaName = a})
 
--- | The authentication type: API key, IAM, or Amazon Cognito User Pools.
+-- | The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
 cgaAuthenticationType :: Lens' CreateGraphqlAPI AuthenticationType
 cgaAuthenticationType = lens _cgaAuthenticationType (\ s a -> s{_cgaAuthenticationType = a})
 
@@ -129,11 +157,14 @@ instance ToJSON CreateGraphqlAPI where
         toJSON CreateGraphqlAPI'{..}
           = object
               (catMaybes
-                 [("openIDConnectConfig" .=) <$>
+                 [("xrayEnabled" .=) <$> _cgaXrayEnabled,
+                  ("openIDConnectConfig" .=) <$>
                     _cgaOpenIdConnectConfig,
+                  ("additionalAuthenticationProviders" .=) <$>
+                    _cgaAdditionalAuthenticationProviders,
                   ("userPoolConfig" .=) <$> _cgaUserPoolConfig,
                   ("logConfig" .=) <$> _cgaLogConfig,
-                  Just ("name" .= _cgaName),
+                  ("tags" .=) <$> _cgaTags, Just ("name" .= _cgaName),
                   Just
                     ("authenticationType" .= _cgaAuthenticationType)])
 
@@ -144,11 +175,13 @@ instance ToQuery CreateGraphqlAPI where
         toQuery = const mempty
 
 -- | /See:/ 'createGraphqlAPIResponse' smart constructor.
-data CreateGraphqlAPIResponse = CreateGraphqlAPIResponse'
-  { _cgarsGraphqlAPI     :: !(Maybe GraphqlAPI)
-  , _cgarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGraphqlAPIResponse = CreateGraphqlAPIResponse'{_cgarsGraphqlAPI
+                                                          ::
+                                                          !(Maybe GraphqlAPI),
+                                                          _cgarsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateGraphqlAPIResponse' with the minimum fields required to make a request.
 --
@@ -160,10 +193,10 @@ data CreateGraphqlAPIResponse = CreateGraphqlAPIResponse'
 createGraphqlAPIResponse
     :: Int -- ^ 'cgarsResponseStatus'
     -> CreateGraphqlAPIResponse
-createGraphqlAPIResponse pResponseStatus_ =
-  CreateGraphqlAPIResponse'
-    {_cgarsGraphqlAPI = Nothing, _cgarsResponseStatus = pResponseStatus_}
-
+createGraphqlAPIResponse pResponseStatus_
+  = CreateGraphqlAPIResponse'{_cgarsGraphqlAPI =
+                                Nothing,
+                              _cgarsResponseStatus = pResponseStatus_}
 
 -- | The @GraphqlApi@ .
 cgarsGraphqlAPI :: Lens' CreateGraphqlAPIResponse (Maybe GraphqlAPI)

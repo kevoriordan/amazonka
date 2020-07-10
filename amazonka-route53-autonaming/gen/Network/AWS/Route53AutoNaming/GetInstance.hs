@@ -46,11 +46,10 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'getInstance' smart constructor.
-data GetInstance = GetInstance'
-  { _giServiceId  :: !Text
-  , _giInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstance = GetInstance'{_giServiceId ::
+                                !Text,
+                                _giInstanceId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetInstance' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ getInstance
     :: Text -- ^ 'giServiceId'
     -> Text -- ^ 'giInstanceId'
     -> GetInstance
-getInstance pServiceId_ pInstanceId_ =
-  GetInstance' {_giServiceId = pServiceId_, _giInstanceId = pInstanceId_}
-
+getInstance pServiceId_ pInstanceId_
+  = GetInstance'{_giServiceId = pServiceId_,
+                 _giInstanceId = pInstanceId_}
 
 -- | The ID of the service that the instance is associated with.
 giServiceId :: Lens' GetInstance Text
@@ -112,11 +111,10 @@ instance ToQuery GetInstance where
         toQuery = const mempty
 
 -- | /See:/ 'getInstanceResponse' smart constructor.
-data GetInstanceResponse = GetInstanceResponse'
-  { _girsInstance       :: !(Maybe Instance)
-  , _girsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstanceResponse = GetInstanceResponse'{_girsInstance
+                                                :: !(Maybe Instance),
+                                                _girsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetInstanceResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +126,9 @@ data GetInstanceResponse = GetInstanceResponse'
 getInstanceResponse
     :: Int -- ^ 'girsResponseStatus'
     -> GetInstanceResponse
-getInstanceResponse pResponseStatus_ =
-  GetInstanceResponse'
-    {_girsInstance = Nothing, _girsResponseStatus = pResponseStatus_}
-
+getInstanceResponse pResponseStatus_
+  = GetInstanceResponse'{_girsInstance = Nothing,
+                         _girsResponseStatus = pResponseStatus_}
 
 -- | A complex type that contains information about a specified instance.
 girsInstance :: Lens' GetInstanceResponse (Maybe Instance)

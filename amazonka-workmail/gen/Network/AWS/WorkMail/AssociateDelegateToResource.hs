@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a member to the resource's set of delegates.
+-- Adds a member (user or group) to the resource's set of delegates.
 --
 --
 module Network.AWS.WorkMail.AssociateDelegateToResource
@@ -46,12 +46,14 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'associateDelegateToResource' smart constructor.
-data AssociateDelegateToResource = AssociateDelegateToResource'
-  { _adtrOrganizationId :: !Text
-  , _adtrResourceId     :: !Text
-  , _adtrEntityId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateDelegateToResource = AssociateDelegateToResource'{_adtrOrganizationId
+                                                                :: !Text,
+                                                                _adtrResourceId
+                                                                :: !Text,
+                                                                _adtrEntityId ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AssociateDelegateToResource' with the minimum fields required to make a request.
 --
@@ -59,7 +61,7 @@ data AssociateDelegateToResource = AssociateDelegateToResource'
 --
 -- * 'adtrOrganizationId' - The organization under which the resource exists.
 --
--- * 'adtrResourceId' - The resource for which members are associated.
+-- * 'adtrResourceId' - The resource for which members (users or groups) are associated.
 --
 -- * 'adtrEntityId' - The member (user or group) to associate to the resource.
 associateDelegateToResource
@@ -67,19 +69,18 @@ associateDelegateToResource
     -> Text -- ^ 'adtrResourceId'
     -> Text -- ^ 'adtrEntityId'
     -> AssociateDelegateToResource
-associateDelegateToResource pOrganizationId_ pResourceId_ pEntityId_ =
-  AssociateDelegateToResource'
-    { _adtrOrganizationId = pOrganizationId_
-    , _adtrResourceId = pResourceId_
-    , _adtrEntityId = pEntityId_
-    }
-
+associateDelegateToResource pOrganizationId_
+  pResourceId_ pEntityId_
+  = AssociateDelegateToResource'{_adtrOrganizationId =
+                                   pOrganizationId_,
+                                 _adtrResourceId = pResourceId_,
+                                 _adtrEntityId = pEntityId_}
 
 -- | The organization under which the resource exists.
 adtrOrganizationId :: Lens' AssociateDelegateToResource Text
 adtrOrganizationId = lens _adtrOrganizationId (\ s a -> s{_adtrOrganizationId = a})
 
--- | The resource for which members are associated.
+-- | The resource for which members (users or groups) are associated.
 adtrResourceId :: Lens' AssociateDelegateToResource Text
 adtrResourceId = lens _adtrResourceId (\ s a -> s{_adtrResourceId = a})
 
@@ -126,10 +127,11 @@ instance ToQuery AssociateDelegateToResource where
         toQuery = const mempty
 
 -- | /See:/ 'associateDelegateToResourceResponse' smart constructor.
-newtype AssociateDelegateToResourceResponse = AssociateDelegateToResourceResponse'
-  { _adtrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateDelegateToResourceResponse = AssociateDelegateToResourceResponse'{_adtrrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'AssociateDelegateToResourceResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +141,9 @@ newtype AssociateDelegateToResourceResponse = AssociateDelegateToResourceRespons
 associateDelegateToResourceResponse
     :: Int -- ^ 'adtrrsResponseStatus'
     -> AssociateDelegateToResourceResponse
-associateDelegateToResourceResponse pResponseStatus_ =
-  AssociateDelegateToResourceResponse'
-    {_adtrrsResponseStatus = pResponseStatus_}
-
+associateDelegateToResourceResponse pResponseStatus_
+  = AssociateDelegateToResourceResponse'{_adtrrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 adtrrsResponseStatus :: Lens' AssociateDelegateToResourceResponse Int

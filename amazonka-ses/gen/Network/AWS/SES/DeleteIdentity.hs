@@ -50,10 +50,9 @@ import Network.AWS.SES.Types.Product
 --
 --
 -- /See:/ 'deleteIdentity' smart constructor.
-newtype DeleteIdentity = DeleteIdentity'
-  { _diIdentity :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteIdentity = DeleteIdentity'{_diIdentity
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIdentity' with the minimum fields required to make a request.
 --
@@ -63,8 +62,8 @@ newtype DeleteIdentity = DeleteIdentity'
 deleteIdentity
     :: Text -- ^ 'diIdentity'
     -> DeleteIdentity
-deleteIdentity pIdentity_ = DeleteIdentity' {_diIdentity = pIdentity_}
-
+deleteIdentity pIdentity_
+  = DeleteIdentity'{_diIdentity = pIdentity_}
 
 -- | The identity to be removed from the list of identities for the AWS Account.
 diIdentity :: Lens' DeleteIdentity Text
@@ -100,10 +99,10 @@ instance ToQuery DeleteIdentity where
 --
 --
 -- /See:/ 'deleteIdentityResponse' smart constructor.
-newtype DeleteIdentityResponse = DeleteIdentityResponse'
-  { _dirsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteIdentityResponse = DeleteIdentityResponse'{_dirsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteIdentityResponse' with the minimum fields required to make a request.
 --
@@ -113,9 +112,9 @@ newtype DeleteIdentityResponse = DeleteIdentityResponse'
 deleteIdentityResponse
     :: Int -- ^ 'dirsResponseStatus'
     -> DeleteIdentityResponse
-deleteIdentityResponse pResponseStatus_ =
-  DeleteIdentityResponse' {_dirsResponseStatus = pResponseStatus_}
-
+deleteIdentityResponse pResponseStatus_
+  = DeleteIdentityResponse'{_dirsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 dirsResponseStatus :: Lens' DeleteIdentityResponse Int

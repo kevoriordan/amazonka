@@ -29,8 +29,8 @@ module Network.AWS.ServiceCatalog.DeletePortfolio
       deletePortfolio
     , DeletePortfolio
     -- * Request Lenses
-    , ddAcceptLanguage
-    , ddId
+    , dltprtflAcceptLanguage
+    , dltprtflId
 
     -- * Destructuring the Response
     , deletePortfolioResponse
@@ -47,33 +47,32 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'deletePortfolio' smart constructor.
-data DeletePortfolio = DeletePortfolio'
-  { _ddAcceptLanguage :: !(Maybe Text)
-  , _ddId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePortfolio = DeletePortfolio'{_dltprtflAcceptLanguage
+                                        :: !(Maybe Text),
+                                        _dltprtflId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePortfolio' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
+-- * 'dltprtflAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 --
--- * 'ddId' - The portfolio identifier.
+-- * 'dltprtflId' - The portfolio identifier.
 deletePortfolio
-    :: Text -- ^ 'ddId'
+    :: Text -- ^ 'dltprtflId'
     -> DeletePortfolio
-deletePortfolio pId_ =
-  DeletePortfolio' {_ddAcceptLanguage = Nothing, _ddId = pId_}
-
+deletePortfolio pId_
+  = DeletePortfolio'{_dltprtflAcceptLanguage = Nothing,
+                     _dltprtflId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
-ddAcceptLanguage :: Lens' DeletePortfolio (Maybe Text)
-ddAcceptLanguage = lens _ddAcceptLanguage (\ s a -> s{_ddAcceptLanguage = a})
+dltprtflAcceptLanguage :: Lens' DeletePortfolio (Maybe Text)
+dltprtflAcceptLanguage = lens _dltprtflAcceptLanguage (\ s a -> s{_dltprtflAcceptLanguage = a})
 
 -- | The portfolio identifier.
-ddId :: Lens' DeletePortfolio Text
-ddId = lens _ddId (\ s a -> s{_ddId = a})
+dltprtflId :: Lens' DeletePortfolio Text
+dltprtflId = lens _dltprtflId (\ s a -> s{_dltprtflId = a})
 
 instance AWSRequest DeletePortfolio where
         type Rs DeletePortfolio = DeletePortfolioResponse
@@ -101,8 +100,8 @@ instance ToJSON DeletePortfolio where
         toJSON DeletePortfolio'{..}
           = object
               (catMaybes
-                 [("AcceptLanguage" .=) <$> _ddAcceptLanguage,
-                  Just ("Id" .= _ddId)])
+                 [("AcceptLanguage" .=) <$> _dltprtflAcceptLanguage,
+                  Just ("Id" .= _dltprtflId)])
 
 instance ToPath DeletePortfolio where
         toPath = const "/"
@@ -111,10 +110,10 @@ instance ToQuery DeletePortfolio where
         toQuery = const mempty
 
 -- | /See:/ 'deletePortfolioResponse' smart constructor.
-newtype DeletePortfolioResponse = DeletePortfolioResponse'
-  { _delrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePortfolioResponse = DeletePortfolioResponse'{_delrsResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeletePortfolioResponse' with the minimum fields required to make a request.
 --
@@ -124,9 +123,9 @@ newtype DeletePortfolioResponse = DeletePortfolioResponse'
 deletePortfolioResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeletePortfolioResponse
-deletePortfolioResponse pResponseStatus_ =
-  DeletePortfolioResponse' {_delrsResponseStatus = pResponseStatus_}
-
+deletePortfolioResponse pResponseStatus_
+  = DeletePortfolioResponse'{_delrsResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 delrsResponseStatus :: Lens' DeletePortfolioResponse Int

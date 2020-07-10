@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an APNS VoIPSandbox channel
+-- Retrieves information about the status and settings of the APNs VoIP sandbox channel for an application.
+--
+--
 module Network.AWS.Pinpoint.GetAPNSVoipSandboxChannel
     (
     -- * Creating a Request
@@ -43,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAPNSVoipSandboxChannel' smart constructor.
-newtype GetAPNSVoipSandboxChannel = GetAPNSVoipSandboxChannel'
-  { _gavscApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetAPNSVoipSandboxChannel = GetAPNSVoipSandboxChannel'{_gavscApplicationId
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetAPNSVoipSandboxChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gavscApplicationId' - Undocumented member.
+-- * 'gavscApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getAPNSVoipSandboxChannel
     :: Text -- ^ 'gavscApplicationId'
     -> GetAPNSVoipSandboxChannel
-getAPNSVoipSandboxChannel pApplicationId_ =
-  GetAPNSVoipSandboxChannel' {_gavscApplicationId = pApplicationId_}
+getAPNSVoipSandboxChannel pApplicationId_
+  = GetAPNSVoipSandboxChannel'{_gavscApplicationId =
+                                 pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gavscApplicationId :: Lens' GetAPNSVoipSandboxChannel Text
 gavscApplicationId = lens _gavscApplicationId (\ s a -> s{_gavscApplicationId = a})
 
@@ -95,11 +97,14 @@ instance ToQuery GetAPNSVoipSandboxChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getAPNSVoipSandboxChannelResponse' smart constructor.
-data GetAPNSVoipSandboxChannelResponse = GetAPNSVoipSandboxChannelResponse'
-  { _gavscrsResponseStatus                 :: !Int
-  , _gavscrsAPNSVoipSandboxChannelResponse :: !APNSVoipSandboxChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAPNSVoipSandboxChannelResponse = GetAPNSVoipSandboxChannelResponse'{_gavscrsResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _gavscrsAPNSVoipSandboxChannelResponse
+                                                                            ::
+                                                                            !APNSVoipSandboxChannelResponse}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'GetAPNSVoipSandboxChannelResponse' with the minimum fields required to make a request.
 --
@@ -112,12 +117,12 @@ getAPNSVoipSandboxChannelResponse
     :: Int -- ^ 'gavscrsResponseStatus'
     -> APNSVoipSandboxChannelResponse -- ^ 'gavscrsAPNSVoipSandboxChannelResponse'
     -> GetAPNSVoipSandboxChannelResponse
-getAPNSVoipSandboxChannelResponse pResponseStatus_ pAPNSVoipSandboxChannelResponse_ =
-  GetAPNSVoipSandboxChannelResponse'
-    { _gavscrsResponseStatus = pResponseStatus_
-    , _gavscrsAPNSVoipSandboxChannelResponse = pAPNSVoipSandboxChannelResponse_
-    }
-
+getAPNSVoipSandboxChannelResponse pResponseStatus_
+  pAPNSVoipSandboxChannelResponse_
+  = GetAPNSVoipSandboxChannelResponse'{_gavscrsResponseStatus
+                                         = pResponseStatus_,
+                                       _gavscrsAPNSVoipSandboxChannelResponse =
+                                         pAPNSVoipSandboxChannelResponse_}
 
 -- | -- | The response status code.
 gavscrsResponseStatus :: Lens' GetAPNSVoipSandboxChannelResponse Int

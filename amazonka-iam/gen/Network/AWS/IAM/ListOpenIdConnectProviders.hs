@@ -43,17 +43,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listOpenIdConnectProviders' smart constructor.
-data ListOpenIdConnectProviders =
-  ListOpenIdConnectProviders'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOpenIdConnectProviders = ListOpenIdConnectProviders'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListOpenIdConnectProviders' with the minimum fields required to make a request.
 --
 listOpenIdConnectProviders
     :: ListOpenIdConnectProviders
-listOpenIdConnectProviders = ListOpenIdConnectProviders'
-
+listOpenIdConnectProviders
+  = ListOpenIdConnectProviders'
 
 instance AWSRequest ListOpenIdConnectProviders where
         type Rs ListOpenIdConnectProviders =
@@ -86,16 +85,20 @@ instance ToQuery ListOpenIdConnectProviders where
                     ("ListOpenIDConnectProviders" :: ByteString),
                   "Version" =: ("2010-05-08" :: ByteString)])
 
--- | Contains the response to a successful 'ListOpenIDConnectProviders' request.
+-- | Contains the response to a successful 'ListOpenIDConnectProviders' request. 
 --
 --
 --
 -- /See:/ 'listOpenIdConnectProvidersResponse' smart constructor.
-data ListOpenIdConnectProvidersResponse = ListOpenIdConnectProvidersResponse'
-  { _loicprsOpenIdConnectProviderList :: !(Maybe [OpenIdConnectProviderListEntry])
-  , _loicprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOpenIdConnectProvidersResponse = ListOpenIdConnectProvidersResponse'{_loicprsOpenIdConnectProviderList
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [OpenIdConnectProviderListEntry]),
+                                                                              _loicprsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListOpenIdConnectProvidersResponse' with the minimum fields required to make a request.
 --
@@ -107,12 +110,11 @@ data ListOpenIdConnectProvidersResponse = ListOpenIdConnectProvidersResponse'
 listOpenIdConnectProvidersResponse
     :: Int -- ^ 'loicprsResponseStatus'
     -> ListOpenIdConnectProvidersResponse
-listOpenIdConnectProvidersResponse pResponseStatus_ =
-  ListOpenIdConnectProvidersResponse'
-    { _loicprsOpenIdConnectProviderList = Nothing
-    , _loicprsResponseStatus = pResponseStatus_
-    }
-
+listOpenIdConnectProvidersResponse pResponseStatus_
+  = ListOpenIdConnectProvidersResponse'{_loicprsOpenIdConnectProviderList
+                                          = Nothing,
+                                        _loicprsResponseStatus =
+                                          pResponseStatus_}
 
 -- | The list of IAM OIDC provider resource objects defined in the AWS account.
 loicprsOpenIdConnectProviderList :: Lens' ListOpenIdConnectProvidersResponse [OpenIdConnectProviderListEntry]

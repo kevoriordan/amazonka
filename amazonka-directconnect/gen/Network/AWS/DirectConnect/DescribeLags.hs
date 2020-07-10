@@ -18,10 +18,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the link aggregation groups (LAGs) in your account.
+-- Describes all your link aggregation groups (LAG) or the specified LAG.
 --
---
--- If a LAG ID is provided, only information about the specified LAG is returned.
 --
 module Network.AWS.DirectConnect.DescribeLags
     (
@@ -46,27 +44,21 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the DescribeLags operation.
---
---
---
--- /See:/ 'describeLags' smart constructor.
-newtype DescribeLags = DescribeLags'
-  { _dlLagId :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeLags' smart constructor.
+newtype DescribeLags = DescribeLags'{_dlLagId ::
+                                     Maybe Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeLags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlLagId' - The ID of the LAG. Example: dxlag-abc123 Default: None
+-- * 'dlLagId' - The ID of the LAG.
 describeLags
     :: DescribeLags
-describeLags = DescribeLags' {_dlLagId = Nothing}
+describeLags = DescribeLags'{_dlLagId = Nothing}
 
-
--- | The ID of the LAG. Example: dxlag-abc123 Default: None
+-- | The ID of the LAG.
 dlLagId :: Lens' DescribeLags (Maybe Text)
 dlLagId = lens _dlLagId (\ s a -> s{_dlLagId = a})
 
@@ -102,33 +94,27 @@ instance ToPath DescribeLags where
 instance ToQuery DescribeLags where
         toQuery = const mempty
 
--- | A structure containing a list of LAGs.
---
---
---
--- /See:/ 'describeLagsResponse' smart constructor.
-data DescribeLagsResponse = DescribeLagsResponse'
-  { _desrsLags           :: !(Maybe [Lag])
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeLagsResponse' smart constructor.
+data DescribeLagsResponse = DescribeLagsResponse'{_desrsLags
+                                                  :: !(Maybe [Lag]),
+                                                  _desrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeLagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'desrsLags' - A list of LAGs.
+-- * 'desrsLags' - The LAGs.
 --
 -- * 'desrsResponseStatus' - -- | The response status code.
 describeLagsResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeLagsResponse
-describeLagsResponse pResponseStatus_ =
-  DescribeLagsResponse'
-    {_desrsLags = Nothing, _desrsResponseStatus = pResponseStatus_}
+describeLagsResponse pResponseStatus_
+  = DescribeLagsResponse'{_desrsLags = Nothing,
+                          _desrsResponseStatus = pResponseStatus_}
 
-
--- | A list of LAGs.
+-- | The LAGs.
 desrsLags :: Lens' DescribeLagsResponse [Lag]
 desrsLags = lens _desrsLags (\ s a -> s{_desrsLags = a}) . _Default . _Coerce
 

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates variant weight of one or more variants associated with an existing endpoint, or capacity of one variant associated with an existing endpoint. When it receives the request, Amazon SageMaker sets the endpoint status to @Updating@ . After updating the endpoint, it sets the status to @InService@ . To check the status of an endpoint, use the <http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html DescribeEndpoint> API.
+-- Updates variant weight of one or more variants associated with an existing endpoint, or capacity of one variant associated with an existing endpoint. When it receives the request, Amazon SageMaker sets the endpoint status to @Updating@ . After updating the endpoint, it sets the status to @InService@ . To check the status of an endpoint, use the 'DescribeEndpoint' API. 
 --
 --
 module Network.AWS.SageMaker.UpdateEndpointWeightsAndCapacities
@@ -46,11 +46,15 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'updateEndpointWeightsAndCapacities' smart constructor.
-data UpdateEndpointWeightsAndCapacities = UpdateEndpointWeightsAndCapacities'
-  { _uewacEndpointName                :: !Text
-  , _uewacDesiredWeightsAndCapacities :: !(List1 DesiredWeightAndCapacity)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEndpointWeightsAndCapacities = UpdateEndpointWeightsAndCapacities'{_uewacEndpointName
+                                                                              ::
+                                                                              !Text,
+                                                                              _uewacDesiredWeightsAndCapacities
+                                                                              ::
+                                                                              !(List1
+                                                                                  DesiredWeightAndCapacity)}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'UpdateEndpointWeightsAndCapacities' with the minimum fields required to make a request.
 --
@@ -63,12 +67,13 @@ updateEndpointWeightsAndCapacities
     :: Text -- ^ 'uewacEndpointName'
     -> NonEmpty DesiredWeightAndCapacity -- ^ 'uewacDesiredWeightsAndCapacities'
     -> UpdateEndpointWeightsAndCapacities
-updateEndpointWeightsAndCapacities pEndpointName_ pDesiredWeightsAndCapacities_ =
-  UpdateEndpointWeightsAndCapacities'
-    { _uewacEndpointName = pEndpointName_
-    , _uewacDesiredWeightsAndCapacities = _List1 # pDesiredWeightsAndCapacities_
-    }
-
+updateEndpointWeightsAndCapacities pEndpointName_
+  pDesiredWeightsAndCapacities_
+  = UpdateEndpointWeightsAndCapacities'{_uewacEndpointName
+                                          = pEndpointName_,
+                                        _uewacDesiredWeightsAndCapacities =
+                                          _List1 #
+                                            pDesiredWeightsAndCapacities_}
 
 -- | The name of an existing Amazon SageMaker endpoint.
 uewacEndpointName :: Lens' UpdateEndpointWeightsAndCapacities Text
@@ -126,11 +131,15 @@ instance ToQuery UpdateEndpointWeightsAndCapacities
         toQuery = const mempty
 
 -- | /See:/ 'updateEndpointWeightsAndCapacitiesResponse' smart constructor.
-data UpdateEndpointWeightsAndCapacitiesResponse = UpdateEndpointWeightsAndCapacitiesResponse'
-  { _uewacrsResponseStatus :: !Int
-  , _uewacrsEndpointARN    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEndpointWeightsAndCapacitiesResponse = UpdateEndpointWeightsAndCapacitiesResponse'{_uewacrsResponseStatus
+                                                                                              ::
+                                                                                              !Int,
+                                                                                              _uewacrsEndpointARN
+                                                                                              ::
+                                                                                              !Text}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'UpdateEndpointWeightsAndCapacitiesResponse' with the minimum fields required to make a request.
 --
@@ -143,12 +152,12 @@ updateEndpointWeightsAndCapacitiesResponse
     :: Int -- ^ 'uewacrsResponseStatus'
     -> Text -- ^ 'uewacrsEndpointARN'
     -> UpdateEndpointWeightsAndCapacitiesResponse
-updateEndpointWeightsAndCapacitiesResponse pResponseStatus_ pEndpointARN_ =
-  UpdateEndpointWeightsAndCapacitiesResponse'
-    { _uewacrsResponseStatus = pResponseStatus_
-    , _uewacrsEndpointARN = pEndpointARN_
-    }
-
+updateEndpointWeightsAndCapacitiesResponse
+  pResponseStatus_ pEndpointARN_
+  = UpdateEndpointWeightsAndCapacitiesResponse'{_uewacrsResponseStatus
+                                                  = pResponseStatus_,
+                                                _uewacrsEndpointARN =
+                                                  pEndpointARN_}
 
 -- | -- | The response status code.
 uewacrsResponseStatus :: Lens' UpdateEndpointWeightsAndCapacitiesResponse Int

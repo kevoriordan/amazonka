@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a specific version of a slot type. To delete all versions of a slot type, use the 'DeleteSlotType' operation.
+-- Deletes a specific version of a slot type. To delete all versions of a slot type, use the 'DeleteSlotType' operation. 
 --
 --
 -- This operation requires permissions for the @lex:DeleteSlotTypeVersion@ action.
@@ -45,11 +45,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteSlotTypeVersion' smart constructor.
-data DeleteSlotTypeVersion = DeleteSlotTypeVersion'
-  { _dstvName    :: !Text
-  , _dstvVersion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSlotTypeVersion = DeleteSlotTypeVersion'{_dstvName
+                                                    :: !Text,
+                                                    _dstvVersion :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteSlotTypeVersion' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ deleteSlotTypeVersion
     :: Text -- ^ 'dstvName'
     -> Text -- ^ 'dstvVersion'
     -> DeleteSlotTypeVersion
-deleteSlotTypeVersion pName_ pVersion_ =
-  DeleteSlotTypeVersion' {_dstvName = pName_, _dstvVersion = pVersion_}
-
+deleteSlotTypeVersion pName_ pVersion_
+  = DeleteSlotTypeVersion'{_dstvName = pName_,
+                           _dstvVersion = pVersion_}
 
 -- | The name of the slot type.
 dstvName :: Lens' DeleteSlotTypeVersion Text
@@ -101,16 +101,15 @@ instance ToQuery DeleteSlotTypeVersion where
         toQuery = const mempty
 
 -- | /See:/ 'deleteSlotTypeVersionResponse' smart constructor.
-data DeleteSlotTypeVersionResponse =
-  DeleteSlotTypeVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSlotTypeVersionResponse = DeleteSlotTypeVersionResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteSlotTypeVersionResponse' with the minimum fields required to make a request.
 --
 deleteSlotTypeVersionResponse
     :: DeleteSlotTypeVersionResponse
-deleteSlotTypeVersionResponse = DeleteSlotTypeVersionResponse'
-
+deleteSlotTypeVersionResponse
+  = DeleteSlotTypeVersionResponse'
 
 instance NFData DeleteSlotTypeVersionResponse where

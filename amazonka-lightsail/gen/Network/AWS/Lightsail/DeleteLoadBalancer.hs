@@ -21,6 +21,8 @@
 -- Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.
 --
 --
+-- The @delete load balancer@ operation supports tag-based access control via resource tags applied to the resource identified by @load balancer name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.DeleteLoadBalancer
     (
     -- * Creating a Request
@@ -45,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLoadBalancer' smart constructor.
-newtype DeleteLoadBalancer = DeleteLoadBalancer'
-  { _dlbLoadBalancerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLoadBalancer = DeleteLoadBalancer'{_dlbLoadBalancerName
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteLoadBalancer' with the minimum fields required to make a request.
 --
@@ -58,9 +60,9 @@ newtype DeleteLoadBalancer = DeleteLoadBalancer'
 deleteLoadBalancer
     :: Text -- ^ 'dlbLoadBalancerName'
     -> DeleteLoadBalancer
-deleteLoadBalancer pLoadBalancerName_ =
-  DeleteLoadBalancer' {_dlbLoadBalancerName = pLoadBalancerName_}
-
+deleteLoadBalancer pLoadBalancerName_
+  = DeleteLoadBalancer'{_dlbLoadBalancerName =
+                          pLoadBalancerName_}
 
 -- | The name of the load balancer you want to delete.
 dlbLoadBalancerName :: Lens' DeleteLoadBalancer Text
@@ -104,28 +106,31 @@ instance ToQuery DeleteLoadBalancer where
         toQuery = const mempty
 
 -- | /See:/ 'deleteLoadBalancerResponse' smart constructor.
-data DeleteLoadBalancerResponse = DeleteLoadBalancerResponse'
-  { _dlbrsOperations     :: !(Maybe [Operation])
-  , _dlbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLoadBalancerResponse = DeleteLoadBalancerResponse'{_dlbrsOperations
+                                                              ::
+                                                              !(Maybe
+                                                                  [Operation]),
+                                                              _dlbrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteLoadBalancerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlbrsOperations' - An object describing the API operations.
+-- * 'dlbrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'dlbrsResponseStatus' - -- | The response status code.
 deleteLoadBalancerResponse
     :: Int -- ^ 'dlbrsResponseStatus'
     -> DeleteLoadBalancerResponse
-deleteLoadBalancerResponse pResponseStatus_ =
-  DeleteLoadBalancerResponse'
-    {_dlbrsOperations = Nothing, _dlbrsResponseStatus = pResponseStatus_}
+deleteLoadBalancerResponse pResponseStatus_
+  = DeleteLoadBalancerResponse'{_dlbrsOperations =
+                                  Nothing,
+                                _dlbrsResponseStatus = pResponseStatus_}
 
-
--- | An object describing the API operations.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 dlbrsOperations :: Lens' DeleteLoadBalancerResponse [Operation]
 dlbrsOperations = lens _dlbrsOperations (\ s a -> s{_dlbrsOperations = a}) . _Default . _Coerce
 

@@ -46,11 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'tagProject' smart constructor.
-data TagProject = TagProject'
-  { _tpId   :: !Text
-  , _tpTags :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagProject = TagProject'{_tpId :: !Text,
+                              _tpTags :: !(Map Text Text)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagProject' with the minimum fields required to make a request.
 --
@@ -62,8 +60,8 @@ data TagProject = TagProject'
 tagProject
     :: Text -- ^ 'tpId'
     -> TagProject
-tagProject pId_ = TagProject' {_tpId = pId_, _tpTags = mempty}
-
+tagProject pId_
+  = TagProject'{_tpId = pId_, _tpTags = mempty}
 
 -- | The ID of the project you want to add a tag to.
 tpId :: Lens' TagProject Text
@@ -108,11 +106,10 @@ instance ToQuery TagProject where
         toQuery = const mempty
 
 -- | /See:/ 'tagProjectResponse' smart constructor.
-data TagProjectResponse = TagProjectResponse'
-  { _tprsTags           :: !(Maybe (Map Text Text))
-  , _tprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagProjectResponse = TagProjectResponse'{_tprsTags
+                                              :: !(Maybe (Map Text Text)),
+                                              _tprsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagProjectResponse' with the minimum fields required to make a request.
 --
@@ -124,10 +121,9 @@ data TagProjectResponse = TagProjectResponse'
 tagProjectResponse
     :: Int -- ^ 'tprsResponseStatus'
     -> TagProjectResponse
-tagProjectResponse pResponseStatus_ =
-  TagProjectResponse'
-    {_tprsTags = Nothing, _tprsResponseStatus = pResponseStatus_}
-
+tagProjectResponse pResponseStatus_
+  = TagProjectResponse'{_tprsTags = Nothing,
+                        _tprsResponseStatus = pResponseStatus_}
 
 -- | The tags for the project.
 tprsTags :: Lens' TagProjectResponse (HashMap Text Text)

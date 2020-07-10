@@ -18,18 +18,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The UpdateTimeToLive method will enable or disable TTL for the specified table. A successful @UpdateTimeToLive@ call returns the current @TimeToLiveSpecification@ ; it may take up to one hour for the change to fully process. Any additional @UpdateTimeToLive@ calls for the same table during this one hour duration result in a @ValidationException@ .
+-- The @UpdateTimeToLive@ method enables or disables Time to Live (TTL) for the specified table. A successful @UpdateTimeToLive@ call returns the current @TimeToLiveSpecification@ . It can take up to one hour for the change to fully process. Any additional @UpdateTimeToLive@ calls for the same table during this one hour duration result in a @ValidationException@ . 
 --
 --
 -- TTL compares the current time in epoch time format to the time stored in the TTL attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and subsequently deleted.
 --
--- DynamoDB deletes expired items on a best-effort basis to ensure availability of throughput for other data operations.
+-- DynamoDB deletes expired items on a best-effort basis to ensure availability of throughput for other data operations. 
 --
 -- /Important:/ DynamoDB typically deletes expired items within two days of expiration. The exact duration within which an item gets deleted after expiration is specific to the nature of the workload. Items that have expired and not been deleted will still show up in reads, queries, and scans.
 --
--- As items are deleted, they are removed from any Local Secondary Index and Global Secondary Index immediately in the same eventually consistent way as a standard delete operation.
+-- As items are deleted, they are removed from any local secondary index and global secondary index immediately in the same eventually consistent way as a standard delete operation.
 --
--- For more information, see <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html Time To Live> in the Amazon DynamoDB Developer Guide.
+-- For more information, see <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html Time To Live> in the Amazon DynamoDB Developer Guide. 
 --
 module Network.AWS.DynamoDB.UpdateTimeToLive
     (
@@ -60,11 +60,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateTimeToLive' smart constructor.
-data UpdateTimeToLive = UpdateTimeToLive'
-  { _uttlTableName               :: !Text
-  , _uttlTimeToLiveSpecification :: !TimeToLiveSpecification
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTimeToLive = UpdateTimeToLive'{_uttlTableName
+                                          :: !Text,
+                                          _uttlTimeToLiveSpecification ::
+                                          !TimeToLiveSpecification}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTimeToLive' with the minimum fields required to make a request.
 --
@@ -77,12 +77,11 @@ updateTimeToLive
     :: Text -- ^ 'uttlTableName'
     -> TimeToLiveSpecification -- ^ 'uttlTimeToLiveSpecification'
     -> UpdateTimeToLive
-updateTimeToLive pTableName_ pTimeToLiveSpecification_ =
-  UpdateTimeToLive'
-    { _uttlTableName = pTableName_
-    , _uttlTimeToLiveSpecification = pTimeToLiveSpecification_
-    }
-
+updateTimeToLive pTableName_
+  pTimeToLiveSpecification_
+  = UpdateTimeToLive'{_uttlTableName = pTableName_,
+                      _uttlTimeToLiveSpecification =
+                        pTimeToLiveSpecification_}
 
 -- | The name of the table to be configured.
 uttlTableName :: Lens' UpdateTimeToLive Text
@@ -131,11 +130,14 @@ instance ToQuery UpdateTimeToLive where
         toQuery = const mempty
 
 -- | /See:/ 'updateTimeToLiveResponse' smart constructor.
-data UpdateTimeToLiveResponse = UpdateTimeToLiveResponse'
-  { _uttlrsTimeToLiveSpecification :: !(Maybe TimeToLiveSpecification)
-  , _uttlrsResponseStatus          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTimeToLiveResponse = UpdateTimeToLiveResponse'{_uttlrsTimeToLiveSpecification
+                                                          ::
+                                                          !(Maybe
+                                                              TimeToLiveSpecification),
+                                                          _uttlrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateTimeToLiveResponse' with the minimum fields required to make a request.
 --
@@ -147,12 +149,10 @@ data UpdateTimeToLiveResponse = UpdateTimeToLiveResponse'
 updateTimeToLiveResponse
     :: Int -- ^ 'uttlrsResponseStatus'
     -> UpdateTimeToLiveResponse
-updateTimeToLiveResponse pResponseStatus_ =
-  UpdateTimeToLiveResponse'
-    { _uttlrsTimeToLiveSpecification = Nothing
-    , _uttlrsResponseStatus = pResponseStatus_
-    }
-
+updateTimeToLiveResponse pResponseStatus_
+  = UpdateTimeToLiveResponse'{_uttlrsTimeToLiveSpecification
+                                = Nothing,
+                              _uttlrsResponseStatus = pResponseStatus_}
 
 -- | Represents the output of an @UpdateTimeToLive@ operation.
 uttlrsTimeToLiveSpecification :: Lens' UpdateTimeToLiveResponse (Maybe TimeToLiveSpecification)

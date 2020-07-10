@@ -47,12 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detachFromIndex' smart constructor.
-data DetachFromIndex = DetachFromIndex'
-  { _dfiDirectoryARN    :: !Text
-  , _dfiIndexReference  :: !ObjectReference
-  , _dfiTargetReference :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachFromIndex = DetachFromIndex'{_dfiDirectoryARN
+                                        :: !Text,
+                                        _dfiIndexReference :: !ObjectReference,
+                                        _dfiTargetReference :: !ObjectReference}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DetachFromIndex' with the minimum fields required to make a request.
 --
@@ -68,13 +67,11 @@ detachFromIndex
     -> ObjectReference -- ^ 'dfiIndexReference'
     -> ObjectReference -- ^ 'dfiTargetReference'
     -> DetachFromIndex
-detachFromIndex pDirectoryARN_ pIndexReference_ pTargetReference_ =
-  DetachFromIndex'
-    { _dfiDirectoryARN = pDirectoryARN_
-    , _dfiIndexReference = pIndexReference_
-    , _dfiTargetReference = pTargetReference_
-    }
-
+detachFromIndex pDirectoryARN_ pIndexReference_
+  pTargetReference_
+  = DetachFromIndex'{_dfiDirectoryARN = pDirectoryARN_,
+                     _dfiIndexReference = pIndexReference_,
+                     _dfiTargetReference = pTargetReference_}
 
 -- | The Amazon Resource Name (ARN) of the directory the index and object exist in.
 dfiDirectoryARN :: Lens' DetachFromIndex Text
@@ -123,11 +120,12 @@ instance ToQuery DetachFromIndex where
         toQuery = const mempty
 
 -- | /See:/ 'detachFromIndexResponse' smart constructor.
-data DetachFromIndexResponse = DetachFromIndexResponse'
-  { _dfirsDetachedObjectIdentifier :: !(Maybe Text)
-  , _dfirsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachFromIndexResponse = DetachFromIndexResponse'{_dfirsDetachedObjectIdentifier
+                                                        :: !(Maybe Text),
+                                                        _dfirsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DetachFromIndexResponse' with the minimum fields required to make a request.
 --
@@ -139,12 +137,10 @@ data DetachFromIndexResponse = DetachFromIndexResponse'
 detachFromIndexResponse
     :: Int -- ^ 'dfirsResponseStatus'
     -> DetachFromIndexResponse
-detachFromIndexResponse pResponseStatus_ =
-  DetachFromIndexResponse'
-    { _dfirsDetachedObjectIdentifier = Nothing
-    , _dfirsResponseStatus = pResponseStatus_
-    }
-
+detachFromIndexResponse pResponseStatus_
+  = DetachFromIndexResponse'{_dfirsDetachedObjectIdentifier
+                               = Nothing,
+                             _dfirsResponseStatus = pResponseStatus_}
 
 -- | The @ObjectIdentifier@ of the object that was detached from the index.
 dfirsDetachedObjectIdentifier :: Lens' DetachFromIndexResponse (Maybe Text)

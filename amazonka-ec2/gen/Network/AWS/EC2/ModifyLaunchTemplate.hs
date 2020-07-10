@@ -49,14 +49,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyLaunchTemplate' smart constructor.
-data ModifyLaunchTemplate = ModifyLaunchTemplate'
-  { _mltLaunchTemplateName :: !(Maybe Text)
-  , _mltClientToken        :: !(Maybe Text)
-  , _mltLaunchTemplateId   :: !(Maybe Text)
-  , _mltDefaultVersion     :: !(Maybe Text)
-  , _mltDryRun             :: !(Maybe Bool)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyLaunchTemplate = ModifyLaunchTemplate'{_mltLaunchTemplateName
+                                                  :: !(Maybe Text),
+                                                  _mltClientToken ::
+                                                  !(Maybe Text),
+                                                  _mltLaunchTemplateId ::
+                                                  !(Maybe Text),
+                                                  _mltDefaultVersion ::
+                                                  !(Maybe Text),
+                                                  _mltDryRun :: !(Maybe Bool)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyLaunchTemplate' with the minimum fields required to make a request.
 --
@@ -64,7 +66,7 @@ data ModifyLaunchTemplate = ModifyLaunchTemplate'
 --
 -- * 'mltLaunchTemplateName' - The name of the launch template. You must specify either the launch template ID or launch template name in the request.
 --
--- * 'mltClientToken' - Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- * 'mltClientToken' - Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> . Constraint: Maximum 128 ASCII characters.
 --
 -- * 'mltLaunchTemplateId' - The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
 --
@@ -73,21 +75,18 @@ data ModifyLaunchTemplate = ModifyLaunchTemplate'
 -- * 'mltDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 modifyLaunchTemplate
     :: ModifyLaunchTemplate
-modifyLaunchTemplate =
-  ModifyLaunchTemplate'
-    { _mltLaunchTemplateName = Nothing
-    , _mltClientToken = Nothing
-    , _mltLaunchTemplateId = Nothing
-    , _mltDefaultVersion = Nothing
-    , _mltDryRun = Nothing
-    }
-
+modifyLaunchTemplate
+  = ModifyLaunchTemplate'{_mltLaunchTemplateName =
+                            Nothing,
+                          _mltClientToken = Nothing,
+                          _mltLaunchTemplateId = Nothing,
+                          _mltDefaultVersion = Nothing, _mltDryRun = Nothing}
 
 -- | The name of the launch template. You must specify either the launch template ID or launch template name in the request.
 mltLaunchTemplateName :: Lens' ModifyLaunchTemplate (Maybe Text)
 mltLaunchTemplateName = lens _mltLaunchTemplateName (\ s a -> s{_mltLaunchTemplateName = a})
 
--- | Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- | Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> . Constraint: Maximum 128 ASCII characters.
 mltClientToken :: Lens' ModifyLaunchTemplate (Maybe Text)
 mltClientToken = lens _mltClientToken (\ s a -> s{_mltClientToken = a})
 
@@ -135,11 +134,14 @@ instance ToQuery ModifyLaunchTemplate where
                "DryRun" =: _mltDryRun]
 
 -- | /See:/ 'modifyLaunchTemplateResponse' smart constructor.
-data ModifyLaunchTemplateResponse = ModifyLaunchTemplateResponse'
-  { _mltrsLaunchTemplate :: !(Maybe LaunchTemplate)
-  , _mltrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyLaunchTemplateResponse = ModifyLaunchTemplateResponse'{_mltrsLaunchTemplate
+                                                                  ::
+                                                                  !(Maybe
+                                                                      LaunchTemplate),
+                                                                  _mltrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ModifyLaunchTemplateResponse' with the minimum fields required to make a request.
 --
@@ -151,10 +153,10 @@ data ModifyLaunchTemplateResponse = ModifyLaunchTemplateResponse'
 modifyLaunchTemplateResponse
     :: Int -- ^ 'mltrsResponseStatus'
     -> ModifyLaunchTemplateResponse
-modifyLaunchTemplateResponse pResponseStatus_ =
-  ModifyLaunchTemplateResponse'
-    {_mltrsLaunchTemplate = Nothing, _mltrsResponseStatus = pResponseStatus_}
-
+modifyLaunchTemplateResponse pResponseStatus_
+  = ModifyLaunchTemplateResponse'{_mltrsLaunchTemplate
+                                    = Nothing,
+                                  _mltrsResponseStatus = pResponseStatus_}
 
 -- | Information about the launch template.
 mltrsLaunchTemplate :: Lens' ModifyLaunchTemplateResponse (Maybe LaunchTemplate)

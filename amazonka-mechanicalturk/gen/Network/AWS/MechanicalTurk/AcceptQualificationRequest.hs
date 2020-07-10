@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @AcceptQualificationRequest@ operation approves a Worker's request for a Qualification.
+-- The @AcceptQualificationRequest@ operation approves a Worker's request for a Qualification. 
 --
 --
--- Only the owner of the Qualification type can grant a Qualification request for that type.
+-- Only the owner of the Qualification type can grant a Qualification request for that type. 
 --
--- A successful request for the @AcceptQualificationRequest@ operation returns with no errors and an empty body.
+-- A successful request for the @AcceptQualificationRequest@ operation returns with no errors and an empty body. 
 --
 module Network.AWS.MechanicalTurk.AcceptQualificationRequest
     (
@@ -49,30 +49,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'acceptQualificationRequest' smart constructor.
-data AcceptQualificationRequest = AcceptQualificationRequest'
-  { _aqrIntegerValue           :: !(Maybe Int)
-  , _aqrQualificationRequestId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptQualificationRequest = AcceptQualificationRequest'{_aqrIntegerValue
+                                                              :: !(Maybe Int),
+                                                              _aqrQualificationRequestId
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'AcceptQualificationRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aqrIntegerValue' - The value of the Qualification. You can omit this value if you are using the presence or absence of the Qualification as the basis for a HIT requirement.
+-- * 'aqrIntegerValue' - The value of the Qualification. You can omit this value if you are using the presence or absence of the Qualification as the basis for a HIT requirement. 
 --
 -- * 'aqrQualificationRequestId' - The ID of the Qualification request, as returned by the @GetQualificationRequests@ operation.
 acceptQualificationRequest
     :: Text -- ^ 'aqrQualificationRequestId'
     -> AcceptQualificationRequest
-acceptQualificationRequest pQualificationRequestId_ =
-  AcceptQualificationRequest'
-    { _aqrIntegerValue = Nothing
-    , _aqrQualificationRequestId = pQualificationRequestId_
-    }
+acceptQualificationRequest pQualificationRequestId_
+  = AcceptQualificationRequest'{_aqrIntegerValue =
+                                  Nothing,
+                                _aqrQualificationRequestId =
+                                  pQualificationRequestId_}
 
-
--- | The value of the Qualification. You can omit this value if you are using the presence or absence of the Qualification as the basis for a HIT requirement.
+-- | The value of the Qualification. You can omit this value if you are using the presence or absence of the Qualification as the basis for a HIT requirement. 
 aqrIntegerValue :: Lens' AcceptQualificationRequest (Maybe Int)
 aqrIntegerValue = lens _aqrIntegerValue (\ s a -> s{_aqrIntegerValue = a})
 
@@ -120,10 +120,11 @@ instance ToQuery AcceptQualificationRequest where
         toQuery = const mempty
 
 -- | /See:/ 'acceptQualificationRequestResponse' smart constructor.
-newtype AcceptQualificationRequestResponse = AcceptQualificationRequestResponse'
-  { _aqrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AcceptQualificationRequestResponse = AcceptQualificationRequestResponse'{_aqrrsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'AcceptQualificationRequestResponse' with the minimum fields required to make a request.
 --
@@ -133,9 +134,9 @@ newtype AcceptQualificationRequestResponse = AcceptQualificationRequestResponse'
 acceptQualificationRequestResponse
     :: Int -- ^ 'aqrrsResponseStatus'
     -> AcceptQualificationRequestResponse
-acceptQualificationRequestResponse pResponseStatus_ =
-  AcceptQualificationRequestResponse' {_aqrrsResponseStatus = pResponseStatus_}
-
+acceptQualificationRequestResponse pResponseStatus_
+  = AcceptQualificationRequestResponse'{_aqrrsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 aqrrsResponseStatus :: Lens' AcceptQualificationRequestResponse Int

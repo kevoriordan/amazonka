@@ -38,6 +38,7 @@ module Network.AWS.Greengrass.GetGroup
     , ggrsId
     , ggrsLatestVersion
     , ggrsLastUpdatedTimestamp
+    , ggrsTags
     , ggrsResponseStatus
     ) where
 
@@ -49,23 +50,21 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getGroup' smart constructor.
-newtype GetGroup = GetGroup'
-  { _ggGroupId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetGroup = GetGroup'{_ggGroupId :: Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggGroupId' - The ID of the AWS Greengrass group.
+-- * 'ggGroupId' - The ID of the Greengrass group.
 getGroup
     :: Text -- ^ 'ggGroupId'
     -> GetGroup
-getGroup pGroupId_ = GetGroup' {_ggGroupId = pGroupId_}
+getGroup pGroupId_
+  = GetGroup'{_ggGroupId = pGroupId_}
 
-
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 ggGroupId :: Lens' GetGroup Text
 ggGroupId = lens _ggGroupId (\ s a -> s{_ggGroupId = a})
 
@@ -82,6 +81,7 @@ instance AWSRequest GetGroup where
                      <*> (x .?> "Id")
                      <*> (x .?> "LatestVersion")
                      <*> (x .?> "LastUpdatedTimestamp")
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable GetGroup where
@@ -103,23 +103,25 @@ instance ToQuery GetGroup where
         toQuery = const mempty
 
 -- | /See:/ 'getGroupResponse' smart constructor.
-data GetGroupResponse = GetGroupResponse'
-  { _ggrsLatestVersionARN     :: !(Maybe Text)
-  , _ggrsARN                  :: !(Maybe Text)
-  , _ggrsName                 :: !(Maybe Text)
-  , _ggrsCreationTimestamp    :: !(Maybe Text)
-  , _ggrsId                   :: !(Maybe Text)
-  , _ggrsLatestVersion        :: !(Maybe Text)
-  , _ggrsLastUpdatedTimestamp :: !(Maybe Text)
-  , _ggrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGroupResponse = GetGroupResponse'{_ggrsLatestVersionARN
+                                          :: !(Maybe Text),
+                                          _ggrsARN :: !(Maybe Text),
+                                          _ggrsName :: !(Maybe Text),
+                                          _ggrsCreationTimestamp ::
+                                          !(Maybe Text),
+                                          _ggrsId :: !(Maybe Text),
+                                          _ggrsLatestVersion :: !(Maybe Text),
+                                          _ggrsLastUpdatedTimestamp ::
+                                          !(Maybe Text),
+                                          _ggrsTags :: !(Maybe (Map Text Text)),
+                                          _ggrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetGroupResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggrsLatestVersionARN' - The ARN of the latest version of the definition.
+-- * 'ggrsLatestVersionARN' - The ARN of the latest version associated with the definition.
 --
 -- * 'ggrsARN' - The ARN of the definition.
 --
@@ -129,28 +131,26 @@ data GetGroupResponse = GetGroupResponse'
 --
 -- * 'ggrsId' - The ID of the definition.
 --
--- * 'ggrsLatestVersion' - The latest version of the definition.
+-- * 'ggrsLatestVersion' - The ID of the latest version associated with the definition.
 --
 -- * 'ggrsLastUpdatedTimestamp' - The time, in milliseconds since the epoch, when the definition was last updated.
+--
+-- * 'ggrsTags' - Tag(s) attached to the resource arn.
 --
 -- * 'ggrsResponseStatus' - -- | The response status code.
 getGroupResponse
     :: Int -- ^ 'ggrsResponseStatus'
     -> GetGroupResponse
-getGroupResponse pResponseStatus_ =
-  GetGroupResponse'
-    { _ggrsLatestVersionARN = Nothing
-    , _ggrsARN = Nothing
-    , _ggrsName = Nothing
-    , _ggrsCreationTimestamp = Nothing
-    , _ggrsId = Nothing
-    , _ggrsLatestVersion = Nothing
-    , _ggrsLastUpdatedTimestamp = Nothing
-    , _ggrsResponseStatus = pResponseStatus_
-    }
+getGroupResponse pResponseStatus_
+  = GetGroupResponse'{_ggrsLatestVersionARN = Nothing,
+                      _ggrsARN = Nothing, _ggrsName = Nothing,
+                      _ggrsCreationTimestamp = Nothing, _ggrsId = Nothing,
+                      _ggrsLatestVersion = Nothing,
+                      _ggrsLastUpdatedTimestamp = Nothing,
+                      _ggrsTags = Nothing,
+                      _ggrsResponseStatus = pResponseStatus_}
 
-
--- | The ARN of the latest version of the definition.
+-- | The ARN of the latest version associated with the definition.
 ggrsLatestVersionARN :: Lens' GetGroupResponse (Maybe Text)
 ggrsLatestVersionARN = lens _ggrsLatestVersionARN (\ s a -> s{_ggrsLatestVersionARN = a})
 
@@ -170,13 +170,17 @@ ggrsCreationTimestamp = lens _ggrsCreationTimestamp (\ s a -> s{_ggrsCreationTim
 ggrsId :: Lens' GetGroupResponse (Maybe Text)
 ggrsId = lens _ggrsId (\ s a -> s{_ggrsId = a})
 
--- | The latest version of the definition.
+-- | The ID of the latest version associated with the definition.
 ggrsLatestVersion :: Lens' GetGroupResponse (Maybe Text)
 ggrsLatestVersion = lens _ggrsLatestVersion (\ s a -> s{_ggrsLatestVersion = a})
 
 -- | The time, in milliseconds since the epoch, when the definition was last updated.
 ggrsLastUpdatedTimestamp :: Lens' GetGroupResponse (Maybe Text)
 ggrsLastUpdatedTimestamp = lens _ggrsLastUpdatedTimestamp (\ s a -> s{_ggrsLastUpdatedTimestamp = a})
+
+-- | Tag(s) attached to the resource arn.
+ggrsTags :: Lens' GetGroupResponse (HashMap Text Text)
+ggrsTags = lens _ggrsTags (\ s a -> s{_ggrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 ggrsResponseStatus :: Lens' GetGroupResponse Int

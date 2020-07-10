@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Modifies an existing AWS DMS event notification subscription.
+-- Modifies an existing AWS DMS event notification subscription. 
 --
 --
 module Network.AWS.DMS.ModifyEventSubscription
@@ -48,19 +48,23 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'modifyEventSubscription' smart constructor.
-data ModifyEventSubscription = ModifyEventSubscription'
-  { _mesSNSTopicARN      :: !(Maybe Text)
-  , _mesEnabled          :: !(Maybe Bool)
-  , _mesSourceType       :: !(Maybe Text)
-  , _mesEventCategories  :: !(Maybe [Text])
-  , _mesSubscriptionName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyEventSubscription = ModifyEventSubscription'{_mesSNSTopicARN
+                                                        :: !(Maybe Text),
+                                                        _mesEnabled ::
+                                                        !(Maybe Bool),
+                                                        _mesSourceType ::
+                                                        !(Maybe Text),
+                                                        _mesEventCategories ::
+                                                        !(Maybe [Text]),
+                                                        _mesSubscriptionName ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ModifyEventSubscription' with the minimum fields required to make a request.
 --
@@ -68,39 +72,35 @@ data ModifyEventSubscription = ModifyEventSubscription'
 --
 -- * 'mesSNSTopicARN' - The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
 --
--- * 'mesEnabled' - A Boolean value; set to __true__ to activate the subscription.
+-- * 'mesEnabled' - A Boolean value; set to __true__ to activate the subscription. 
 --
--- * 'mesSourceType' - The type of AWS DMS resource that generates the events you want to subscribe to.  Valid values: replication-instance | migration-task
+-- * 'mesSourceType' - The type of AWS DMS resource that generates the events you want to subscribe to.  Valid values: replication-instance | replication-task
 --
--- * 'mesEventCategories' - A list of event categories for a source type that you want to subscribe to. Use the @DescribeEventCategories@ action to see a list of event categories.
+-- * 'mesEventCategories' - A list of event categories for a source type that you want to subscribe to. Use the @DescribeEventCategories@ action to see a list of event categories. 
 --
 -- * 'mesSubscriptionName' - The name of the AWS DMS event notification subscription to be modified.
 modifyEventSubscription
     :: Text -- ^ 'mesSubscriptionName'
     -> ModifyEventSubscription
-modifyEventSubscription pSubscriptionName_ =
-  ModifyEventSubscription'
-    { _mesSNSTopicARN = Nothing
-    , _mesEnabled = Nothing
-    , _mesSourceType = Nothing
-    , _mesEventCategories = Nothing
-    , _mesSubscriptionName = pSubscriptionName_
-    }
-
+modifyEventSubscription pSubscriptionName_
+  = ModifyEventSubscription'{_mesSNSTopicARN = Nothing,
+                             _mesEnabled = Nothing, _mesSourceType = Nothing,
+                             _mesEventCategories = Nothing,
+                             _mesSubscriptionName = pSubscriptionName_}
 
 -- | The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
 mesSNSTopicARN :: Lens' ModifyEventSubscription (Maybe Text)
 mesSNSTopicARN = lens _mesSNSTopicARN (\ s a -> s{_mesSNSTopicARN = a})
 
--- | A Boolean value; set to __true__ to activate the subscription.
+-- | A Boolean value; set to __true__ to activate the subscription. 
 mesEnabled :: Lens' ModifyEventSubscription (Maybe Bool)
 mesEnabled = lens _mesEnabled (\ s a -> s{_mesEnabled = a})
 
--- | The type of AWS DMS resource that generates the events you want to subscribe to.  Valid values: replication-instance | migration-task
+-- | The type of AWS DMS resource that generates the events you want to subscribe to.  Valid values: replication-instance | replication-task
 mesSourceType :: Lens' ModifyEventSubscription (Maybe Text)
 mesSourceType = lens _mesSourceType (\ s a -> s{_mesSourceType = a})
 
--- | A list of event categories for a source type that you want to subscribe to. Use the @DescribeEventCategories@ action to see a list of event categories.
+-- | A list of event categories for a source type that you want to subscribe to. Use the @DescribeEventCategories@ action to see a list of event categories. 
 mesEventCategories :: Lens' ModifyEventSubscription [Text]
 mesEventCategories = lens _mesEventCategories (\ s a -> s{_mesEventCategories = a}) . _Default . _Coerce
 
@@ -148,16 +148,19 @@ instance ToPath ModifyEventSubscription where
 instance ToQuery ModifyEventSubscription where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'modifyEventSubscriptionResponse' smart constructor.
-data ModifyEventSubscriptionResponse = ModifyEventSubscriptionResponse'
-  { _mesrsEventSubscription :: !(Maybe EventSubscription)
-  , _mesrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyEventSubscriptionResponse = ModifyEventSubscriptionResponse'{_mesrsEventSubscription
+                                                                        ::
+                                                                        !(Maybe
+                                                                            EventSubscription),
+                                                                        _mesrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ModifyEventSubscriptionResponse' with the minimum fields required to make a request.
 --
@@ -169,10 +172,10 @@ data ModifyEventSubscriptionResponse = ModifyEventSubscriptionResponse'
 modifyEventSubscriptionResponse
     :: Int -- ^ 'mesrsResponseStatus'
     -> ModifyEventSubscriptionResponse
-modifyEventSubscriptionResponse pResponseStatus_ =
-  ModifyEventSubscriptionResponse'
-    {_mesrsEventSubscription = Nothing, _mesrsResponseStatus = pResponseStatus_}
-
+modifyEventSubscriptionResponse pResponseStatus_
+  = ModifyEventSubscriptionResponse'{_mesrsEventSubscription
+                                       = Nothing,
+                                     _mesrsResponseStatus = pResponseStatus_}
 
 -- | The modified event subscription.
 mesrsEventSubscription :: Lens' ModifyEventSubscriptionResponse (Maybe EventSubscription)

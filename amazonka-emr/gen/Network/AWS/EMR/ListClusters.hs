@@ -56,13 +56,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listClusters' smart constructor.
-data ListClusters = ListClusters'
-  { _lcCreatedAfter  :: !(Maybe POSIX)
-  , _lcMarker        :: !(Maybe Text)
-  , _lcClusterStates :: !(Maybe [ClusterState])
-  , _lcCreatedBefore :: !(Maybe POSIX)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClusters = ListClusters'{_lcCreatedAfter ::
+                                  !(Maybe POSIX),
+                                  _lcMarker :: !(Maybe Text),
+                                  _lcClusterStates :: !(Maybe [ClusterState]),
+                                  _lcCreatedBefore :: !(Maybe POSIX)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListClusters' with the minimum fields required to make a request.
 --
@@ -77,14 +76,10 @@ data ListClusters = ListClusters'
 -- * 'lcCreatedBefore' - The creation date and time end value filter for listing clusters.
 listClusters
     :: ListClusters
-listClusters =
-  ListClusters'
-    { _lcCreatedAfter = Nothing
-    , _lcMarker = Nothing
-    , _lcClusterStates = Nothing
-    , _lcCreatedBefore = Nothing
-    }
-
+listClusters
+  = ListClusters'{_lcCreatedAfter = Nothing,
+                  _lcMarker = Nothing, _lcClusterStates = Nothing,
+                  _lcCreatedBefore = Nothing}
 
 -- | The creation date and time beginning value filter for listing clusters.
 lcCreatedAfter :: Lens' ListClusters (Maybe UTCTime)
@@ -152,12 +147,12 @@ instance ToQuery ListClusters where
 --
 --
 -- /See:/ 'listClustersResponse' smart constructor.
-data ListClustersResponse = ListClustersResponse'
-  { _lcrsMarker         :: !(Maybe Text)
-  , _lcrsClusters       :: !(Maybe [ClusterSummary])
-  , _lcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClustersResponse = ListClustersResponse'{_lcrsMarker
+                                                  :: !(Maybe Text),
+                                                  _lcrsClusters ::
+                                                  !(Maybe [ClusterSummary]),
+                                                  _lcrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --
@@ -171,13 +166,10 @@ data ListClustersResponse = ListClustersResponse'
 listClustersResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListClustersResponse
-listClustersResponse pResponseStatus_ =
-  ListClustersResponse'
-    { _lcrsMarker = Nothing
-    , _lcrsClusters = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
-
+listClustersResponse pResponseStatus_
+  = ListClustersResponse'{_lcrsMarker = Nothing,
+                          _lcrsClusters = Nothing,
+                          _lcrsResponseStatus = pResponseStatus_}
 
 -- | The pagination token that indicates the next set of results to retrieve.
 lcrsMarker :: Lens' ListClustersResponse (Maybe Text)

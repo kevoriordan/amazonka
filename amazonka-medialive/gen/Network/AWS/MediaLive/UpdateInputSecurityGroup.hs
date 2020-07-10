@@ -26,6 +26,7 @@ module Network.AWS.MediaLive.UpdateInputSecurityGroup
     , UpdateInputSecurityGroup
     -- * Request Lenses
     , uisgWhitelistRules
+    , uisgTags
     , uisgInputSecurityGroupId
 
     -- * Destructuring the Response
@@ -46,11 +47,17 @@ import Network.AWS.Response
 -- | The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.
 --
 -- /See:/ 'updateInputSecurityGroup' smart constructor.
-data UpdateInputSecurityGroup = UpdateInputSecurityGroup'
-  { _uisgWhitelistRules       :: !(Maybe [InputWhitelistRuleCidr])
-  , _uisgInputSecurityGroupId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateInputSecurityGroup = UpdateInputSecurityGroup'{_uisgWhitelistRules
+                                                          ::
+                                                          !(Maybe
+                                                              [InputWhitelistRuleCidr]),
+                                                          _uisgTags ::
+                                                          !(Maybe
+                                                              (Map Text Text)),
+                                                          _uisgInputSecurityGroupId
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateInputSecurityGroup' with the minimum fields required to make a request.
 --
@@ -58,20 +65,26 @@ data UpdateInputSecurityGroup = UpdateInputSecurityGroup'
 --
 -- * 'uisgWhitelistRules' - List of IPv4 CIDR addresses to whitelist
 --
+-- * 'uisgTags' - A collection of key-value pairs.
+--
 -- * 'uisgInputSecurityGroupId' - The id of the Input Security Group to update.
 updateInputSecurityGroup
     :: Text -- ^ 'uisgInputSecurityGroupId'
     -> UpdateInputSecurityGroup
-updateInputSecurityGroup pInputSecurityGroupId_ =
-  UpdateInputSecurityGroup'
-    { _uisgWhitelistRules = Nothing
-    , _uisgInputSecurityGroupId = pInputSecurityGroupId_
-    }
-
+updateInputSecurityGroup pInputSecurityGroupId_
+  = UpdateInputSecurityGroup'{_uisgWhitelistRules =
+                                Nothing,
+                              _uisgTags = Nothing,
+                              _uisgInputSecurityGroupId =
+                                pInputSecurityGroupId_}
 
 -- | List of IPv4 CIDR addresses to whitelist
 uisgWhitelistRules :: Lens' UpdateInputSecurityGroup [InputWhitelistRuleCidr]
 uisgWhitelistRules = lens _uisgWhitelistRules (\ s a -> s{_uisgWhitelistRules = a}) . _Default . _Coerce
+
+-- | A collection of key-value pairs.
+uisgTags :: Lens' UpdateInputSecurityGroup (HashMap Text Text)
+uisgTags = lens _uisgTags (\ s a -> s{_uisgTags = a}) . _Default . _Map
 
 -- | The id of the Input Security Group to update.
 uisgInputSecurityGroupId :: Lens' UpdateInputSecurityGroup Text
@@ -102,7 +115,8 @@ instance ToJSON UpdateInputSecurityGroup where
         toJSON UpdateInputSecurityGroup'{..}
           = object
               (catMaybes
-                 [("whitelistRules" .=) <$> _uisgWhitelistRules])
+                 [("whitelistRules" .=) <$> _uisgWhitelistRules,
+                  ("tags" .=) <$> _uisgTags])
 
 instance ToPath UpdateInputSecurityGroup where
         toPath UpdateInputSecurityGroup'{..}
@@ -116,11 +130,15 @@ instance ToQuery UpdateInputSecurityGroup where
 -- | Placeholder documentation for UpdateInputSecurityGroupResponse
 --
 -- /See:/ 'updateInputSecurityGroupResponse' smart constructor.
-data UpdateInputSecurityGroupResponse = UpdateInputSecurityGroupResponse'
-  { _uisgrsSecurityGroup  :: !(Maybe InputSecurityGroup)
-  , _uisgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateInputSecurityGroupResponse = UpdateInputSecurityGroupResponse'{_uisgrsSecurityGroup
+                                                                          ::
+                                                                          !(Maybe
+                                                                              InputSecurityGroup),
+                                                                          _uisgrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'UpdateInputSecurityGroupResponse' with the minimum fields required to make a request.
 --
@@ -132,10 +150,10 @@ data UpdateInputSecurityGroupResponse = UpdateInputSecurityGroupResponse'
 updateInputSecurityGroupResponse
     :: Int -- ^ 'uisgrsResponseStatus'
     -> UpdateInputSecurityGroupResponse
-updateInputSecurityGroupResponse pResponseStatus_ =
-  UpdateInputSecurityGroupResponse'
-    {_uisgrsSecurityGroup = Nothing, _uisgrsResponseStatus = pResponseStatus_}
-
+updateInputSecurityGroupResponse pResponseStatus_
+  = UpdateInputSecurityGroupResponse'{_uisgrsSecurityGroup
+                                        = Nothing,
+                                      _uisgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 uisgrsSecurityGroup :: Lens' UpdateInputSecurityGroupResponse (Maybe InputSecurityGroup)

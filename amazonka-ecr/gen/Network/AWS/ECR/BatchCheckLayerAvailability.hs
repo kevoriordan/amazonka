@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Check the availability of multiple image layers in a specified registry and repository.
+-- Checks the availability of one or more image layers in a repository.
 --
+--
+-- When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it has been uploaded, then the image layer is skipped.
 --
 module Network.AWS.ECR.BatchCheckLayerAvailability
     (
@@ -48,12 +50,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchCheckLayerAvailability' smart constructor.
-data BatchCheckLayerAvailability = BatchCheckLayerAvailability'
-  { _bclaRegistryId     :: !(Maybe Text)
-  , _bclaRepositoryName :: !Text
-  , _bclaLayerDigests   :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchCheckLayerAvailability = BatchCheckLayerAvailability'{_bclaRegistryId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _bclaRepositoryName
+                                                                :: !Text,
+                                                                _bclaLayerDigests
+                                                                ::
+                                                                !(List1 Text)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'BatchCheckLayerAvailability' with the minimum fields required to make a request.
 --
@@ -68,13 +74,12 @@ batchCheckLayerAvailability
     :: Text -- ^ 'bclaRepositoryName'
     -> NonEmpty Text -- ^ 'bclaLayerDigests'
     -> BatchCheckLayerAvailability
-batchCheckLayerAvailability pRepositoryName_ pLayerDigests_ =
-  BatchCheckLayerAvailability'
-    { _bclaRegistryId = Nothing
-    , _bclaRepositoryName = pRepositoryName_
-    , _bclaLayerDigests = _List1 # pLayerDigests_
-    }
-
+batchCheckLayerAvailability pRepositoryName_
+  pLayerDigests_
+  = BatchCheckLayerAvailability'{_bclaRegistryId =
+                                   Nothing,
+                                 _bclaRepositoryName = pRepositoryName_,
+                                 _bclaLayerDigests = _List1 # pLayerDigests_}
 
 -- | The AWS account ID associated with the registry that contains the image layers to check. If you do not specify a registry, the default registry is assumed.
 bclaRegistryId :: Lens' BatchCheckLayerAvailability (Maybe Text)
@@ -129,12 +134,19 @@ instance ToQuery BatchCheckLayerAvailability where
         toQuery = const mempty
 
 -- | /See:/ 'batchCheckLayerAvailabilityResponse' smart constructor.
-data BatchCheckLayerAvailabilityResponse = BatchCheckLayerAvailabilityResponse'
-  { _bclarsFailures       :: !(Maybe [LayerFailure])
-  , _bclarsLayers         :: !(Maybe [Layer])
-  , _bclarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchCheckLayerAvailabilityResponse = BatchCheckLayerAvailabilityResponse'{_bclarsFailures
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [LayerFailure]),
+                                                                                _bclarsLayers
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Layer]),
+                                                                                _bclarsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'BatchCheckLayerAvailabilityResponse' with the minimum fields required to make a request.
 --
@@ -148,13 +160,12 @@ data BatchCheckLayerAvailabilityResponse = BatchCheckLayerAvailabilityResponse'
 batchCheckLayerAvailabilityResponse
     :: Int -- ^ 'bclarsResponseStatus'
     -> BatchCheckLayerAvailabilityResponse
-batchCheckLayerAvailabilityResponse pResponseStatus_ =
-  BatchCheckLayerAvailabilityResponse'
-    { _bclarsFailures = Nothing
-    , _bclarsLayers = Nothing
-    , _bclarsResponseStatus = pResponseStatus_
-    }
-
+batchCheckLayerAvailabilityResponse pResponseStatus_
+  = BatchCheckLayerAvailabilityResponse'{_bclarsFailures
+                                           = Nothing,
+                                         _bclarsLayers = Nothing,
+                                         _bclarsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Any failures associated with the call.
 bclarsFailures :: Lens' BatchCheckLayerAvailabilityResponse [LayerFailure]

@@ -21,6 +21,8 @@
 -- Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.
 --
 --
+-- The @attach disk@ operation supports tag-based access control via resource tags applied to the resource identified by @disk name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.AttachDisk
     (
     -- * Creating a Request
@@ -47,12 +49,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachDisk' smart constructor.
-data AttachDisk = AttachDisk'
-  { _adDiskName     :: !Text
-  , _adInstanceName :: !Text
-  , _adDiskPath     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachDisk = AttachDisk'{_adDiskName :: !Text,
+                              _adInstanceName :: !Text, _adDiskPath :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachDisk' with the minimum fields required to make a request.
 --
@@ -68,13 +67,10 @@ attachDisk
     -> Text -- ^ 'adInstanceName'
     -> Text -- ^ 'adDiskPath'
     -> AttachDisk
-attachDisk pDiskName_ pInstanceName_ pDiskPath_ =
-  AttachDisk'
-    { _adDiskName = pDiskName_
-    , _adInstanceName = pInstanceName_
-    , _adDiskPath = pDiskPath_
-    }
-
+attachDisk pDiskName_ pInstanceName_ pDiskPath_
+  = AttachDisk'{_adDiskName = pDiskName_,
+                _adInstanceName = pInstanceName_,
+                _adDiskPath = pDiskPath_}
 
 -- | The unique Lightsail disk name (e.g., @my-disk@ ).
 adDiskName :: Lens' AttachDisk Text
@@ -126,28 +122,26 @@ instance ToQuery AttachDisk where
         toQuery = const mempty
 
 -- | /See:/ 'attachDiskResponse' smart constructor.
-data AttachDiskResponse = AttachDiskResponse'
-  { _adrsOperations     :: !(Maybe [Operation])
-  , _adrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachDiskResponse = AttachDiskResponse'{_adrsOperations
+                                              :: !(Maybe [Operation]),
+                                              _adrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachDiskResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adrsOperations' - An object describing the API operations.
+-- * 'adrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'adrsResponseStatus' - -- | The response status code.
 attachDiskResponse
     :: Int -- ^ 'adrsResponseStatus'
     -> AttachDiskResponse
-attachDiskResponse pResponseStatus_ =
-  AttachDiskResponse'
-    {_adrsOperations = Nothing, _adrsResponseStatus = pResponseStatus_}
+attachDiskResponse pResponseStatus_
+  = AttachDiskResponse'{_adrsOperations = Nothing,
+                        _adrsResponseStatus = pResponseStatus_}
 
-
--- | An object describing the API operations.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 adrsOperations :: Lens' AttachDiskResponse [Operation]
 adrsOperations = lens _adrsOperations (\ s a -> s{_adrsOperations = a}) . _Default . _Coerce
 

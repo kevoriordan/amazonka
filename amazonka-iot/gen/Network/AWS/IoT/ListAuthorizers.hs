@@ -21,6 +21,8 @@
 -- Lists the authorizers registered in your account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListAuthorizers
     (
     -- * Creating a Request
@@ -44,18 +46,18 @@ module Network.AWS.IoT.ListAuthorizers
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAuthorizers' smart constructor.
-data ListAuthorizers = ListAuthorizers'
-  { _laStatus         :: !(Maybe AuthorizerStatus)
-  , _laMarker         :: !(Maybe Text)
-  , _laAscendingOrder :: !(Maybe Bool)
-  , _laPageSize       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAuthorizers = ListAuthorizers'{_laStatus ::
+                                        !(Maybe AuthorizerStatus),
+                                        _laMarker :: !(Maybe Text),
+                                        _laAscendingOrder :: !(Maybe Bool),
+                                        _laPageSize :: !(Maybe Nat)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAuthorizers' with the minimum fields required to make a request.
 --
@@ -70,14 +72,10 @@ data ListAuthorizers = ListAuthorizers'
 -- * 'laPageSize' - The maximum number of results to return at one time.
 listAuthorizers
     :: ListAuthorizers
-listAuthorizers =
-  ListAuthorizers'
-    { _laStatus = Nothing
-    , _laMarker = Nothing
-    , _laAscendingOrder = Nothing
-    , _laPageSize = Nothing
-    }
-
+listAuthorizers
+  = ListAuthorizers'{_laStatus = Nothing,
+                     _laMarker = Nothing, _laAscendingOrder = Nothing,
+                     _laPageSize = Nothing}
 
 -- | The status of the list authorizers request.
 laStatus :: Lens' ListAuthorizers (Maybe AuthorizerStatus)
@@ -94,6 +92,13 @@ laAscendingOrder = lens _laAscendingOrder (\ s a -> s{_laAscendingOrder = a})
 -- | The maximum number of results to return at one time.
 laPageSize :: Lens' ListAuthorizers (Maybe Natural)
 laPageSize = lens _laPageSize (\ s a -> s{_laPageSize = a}) . mapping _Nat
+
+instance AWSPager ListAuthorizers where
+        page rq rs
+          | stop (rs ^. larsNextMarker) = Nothing
+          | stop (rs ^. larsAuthorizers) = Nothing
+          | otherwise =
+            Just $ rq & laMarker .~ rs ^. larsNextMarker
 
 instance AWSRequest ListAuthorizers where
         type Rs ListAuthorizers = ListAuthorizersResponse
@@ -124,12 +129,16 @@ instance ToQuery ListAuthorizers where
                "pageSize" =: _laPageSize]
 
 -- | /See:/ 'listAuthorizersResponse' smart constructor.
-data ListAuthorizersResponse = ListAuthorizersResponse'
-  { _larsAuthorizers    :: !(Maybe [AuthorizerSummary])
-  , _larsNextMarker     :: !(Maybe Text)
-  , _larsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAuthorizersResponse = ListAuthorizersResponse'{_larsAuthorizers
+                                                        ::
+                                                        !(Maybe
+                                                            [AuthorizerSummary]),
+                                                        _larsNextMarker ::
+                                                        !(Maybe Text),
+                                                        _larsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListAuthorizersResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +152,11 @@ data ListAuthorizersResponse = ListAuthorizersResponse'
 listAuthorizersResponse
     :: Int -- ^ 'larsResponseStatus'
     -> ListAuthorizersResponse
-listAuthorizersResponse pResponseStatus_ =
-  ListAuthorizersResponse'
-    { _larsAuthorizers = Nothing
-    , _larsNextMarker = Nothing
-    , _larsResponseStatus = pResponseStatus_
-    }
-
+listAuthorizersResponse pResponseStatus_
+  = ListAuthorizersResponse'{_larsAuthorizers =
+                               Nothing,
+                             _larsNextMarker = Nothing,
+                             _larsResponseStatus = pResponseStatus_}
 
 -- | The authorizers.
 larsAuthorizers :: Lens' ListAuthorizersResponse [AuthorizerSummary]

@@ -21,7 +21,7 @@
 -- Gets information about the specified request operation.
 --
 --
--- Use this operation after calling a request operation (for example, 'ProvisionProduct' , 'TerminateProvisionedProduct' , or 'UpdateProvisionedProduct' ).
+-- Use this operation after calling a request operation (for example, 'ProvisionProduct' , 'TerminateProvisionedProduct' , or 'UpdateProvisionedProduct' ). 
 --
 module Network.AWS.ServiceCatalog.DescribeRecord
     (
@@ -52,13 +52,12 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describeRecord' smart constructor.
-data DescribeRecord = DescribeRecord'
-  { _drAcceptLanguage :: !(Maybe Text)
-  , _drPageToken      :: !(Maybe Text)
-  , _drPageSize       :: !(Maybe Nat)
-  , _drId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRecord = DescribeRecord'{_drAcceptLanguage
+                                      :: !(Maybe Text),
+                                      _drPageToken :: !(Maybe Text),
+                                      _drPageSize :: !(Maybe Nat),
+                                      _drId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeRecord' with the minimum fields required to make a request.
 --
@@ -74,14 +73,10 @@ data DescribeRecord = DescribeRecord'
 describeRecord
     :: Text -- ^ 'drId'
     -> DescribeRecord
-describeRecord pId_ =
-  DescribeRecord'
-    { _drAcceptLanguage = Nothing
-    , _drPageToken = Nothing
-    , _drPageSize = Nothing
-    , _drId = pId_
-    }
-
+describeRecord pId_
+  = DescribeRecord'{_drAcceptLanguage = Nothing,
+                    _drPageToken = Nothing, _drPageSize = Nothing,
+                    _drId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 drAcceptLanguage :: Lens' DescribeRecord (Maybe Text)
@@ -140,13 +135,16 @@ instance ToQuery DescribeRecord where
         toQuery = const mempty
 
 -- | /See:/ 'describeRecordResponse' smart constructor.
-data DescribeRecordResponse = DescribeRecordResponse'
-  { _drrsRecordDetail   :: !(Maybe RecordDetail)
-  , _drrsNextPageToken  :: !(Maybe Text)
-  , _drrsRecordOutputs  :: !(Maybe [RecordOutput])
-  , _drrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRecordResponse = DescribeRecordResponse'{_drrsRecordDetail
+                                                      :: !(Maybe RecordDetail),
+                                                      _drrsNextPageToken ::
+                                                      !(Maybe Text),
+                                                      _drrsRecordOutputs ::
+                                                      !(Maybe [RecordOutput]),
+                                                      _drrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeRecordResponse' with the minimum fields required to make a request.
 --
@@ -162,14 +160,12 @@ data DescribeRecordResponse = DescribeRecordResponse'
 describeRecordResponse
     :: Int -- ^ 'drrsResponseStatus'
     -> DescribeRecordResponse
-describeRecordResponse pResponseStatus_ =
-  DescribeRecordResponse'
-    { _drrsRecordDetail = Nothing
-    , _drrsNextPageToken = Nothing
-    , _drrsRecordOutputs = Nothing
-    , _drrsResponseStatus = pResponseStatus_
-    }
-
+describeRecordResponse pResponseStatus_
+  = DescribeRecordResponse'{_drrsRecordDetail =
+                              Nothing,
+                            _drrsNextPageToken = Nothing,
+                            _drrsRecordOutputs = Nothing,
+                            _drrsResponseStatus = pResponseStatus_}
 
 -- | Information about the product.
 drrsRecordDetail :: Lens' DescribeRecordResponse (Maybe RecordDetail)

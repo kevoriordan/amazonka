@@ -14,11 +14,11 @@
 module Test.AWS.Gen.WAF where
 
 import Data.Proxy
-import Network.AWS.WAF
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.WAF.Internal
 import Test.Tasty
+import Network.AWS.WAF
+import Test.AWS.WAF.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -73,17 +73,29 @@ import Test.Tasty
 --         , requestCreateRule $
 --             createRule
 --
+--         , requestDeleteLoggingConfiguration $
+--             deleteLoggingConfiguration
+--
 --         , requestCreateWebACL $
 --             createWebACL
 --
 --         , requestGetGeoMatchSet $
 --             getGeoMatchSet
 --
+--         , requestPutLoggingConfiguration $
+--             putLoggingConfiguration
+--
+--         , requestListTagsForResource $
+--             listTagsForResource
+--
 --         , requestListByteMatchSets $
 --             listByteMatchSets
 --
 --         , requestListGeoMatchSets $
 --             listGeoMatchSets
+--
+--         , requestGetLoggingConfiguration $
+--             getLoggingConfiguration
 --
 --         , requestCreateRuleGroup $
 --             createRuleGroup
@@ -108,6 +120,9 @@ import Test.Tasty
 --
 --         , requestUpdateXSSMatchSet $
 --             updateXSSMatchSet
+--
+--         , requestCreateWebACLMigrationStack $
+--             createWebACLMigrationStack
 --
 --         , requestListXSSMatchSets $
 --             listXSSMatchSets
@@ -148,6 +163,9 @@ import Test.Tasty
 --         , requestPutPermissionPolicy $
 --             putPermissionPolicy
 --
+--         , requestListLoggingConfigurations $
+--             listLoggingConfigurations
+--
 --         , requestGetRateBasedRuleManagedKeys $
 --             getRateBasedRuleManagedKeys
 --
@@ -187,6 +205,9 @@ import Test.Tasty
 --         , requestListRuleGroups $
 --             listRuleGroups
 --
+--         , requestTagResource $
+--             tagResource
+--
 --         , requestDeleteRuleGroup $
 --             deleteRuleGroup
 --
@@ -207,6 +228,9 @@ import Test.Tasty
 --
 --         , requestUpdateSizeConstraintSet $
 --             updateSizeConstraintSet
+--
+--         , requestUntagResource $
+--             untagResource
 --
 --         , requestDeleteRegexPatternSet $
 --             deleteRegexPatternSet
@@ -283,17 +307,29 @@ import Test.Tasty
 --         , responseCreateRule $
 --             createRuleResponse
 --
+--         , responseDeleteLoggingConfiguration $
+--             deleteLoggingConfigurationResponse
+--
 --         , responseCreateWebACL $
 --             createWebACLResponse
 --
 --         , responseGetGeoMatchSet $
 --             getGeoMatchSetResponse
 --
+--         , responsePutLoggingConfiguration $
+--             putLoggingConfigurationResponse
+--
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
+--
 --         , responseListByteMatchSets $
 --             listByteMatchSetsResponse
 --
 --         , responseListGeoMatchSets $
 --             listGeoMatchSetsResponse
+--
+--         , responseGetLoggingConfiguration $
+--             getLoggingConfigurationResponse
 --
 --         , responseCreateRuleGroup $
 --             createRuleGroupResponse
@@ -318,6 +354,9 @@ import Test.Tasty
 --
 --         , responseUpdateXSSMatchSet $
 --             updateXSSMatchSetResponse
+--
+--         , responseCreateWebACLMigrationStack $
+--             createWebACLMigrationStackResponse
 --
 --         , responseListXSSMatchSets $
 --             listXSSMatchSetsResponse
@@ -358,6 +397,9 @@ import Test.Tasty
 --         , responsePutPermissionPolicy $
 --             putPermissionPolicyResponse
 --
+--         , responseListLoggingConfigurations $
+--             listLoggingConfigurationsResponse
+--
 --         , responseGetRateBasedRuleManagedKeys $
 --             getRateBasedRuleManagedKeysResponse
 --
@@ -397,6 +439,9 @@ import Test.Tasty
 --         , responseListRuleGroups $
 --             listRuleGroupsResponse
 --
+--         , responseTagResource $
+--             tagResourceResponse
+--
 --         , responseDeleteRuleGroup $
 --             deleteRuleGroupResponse
 --
@@ -417,6 +462,9 @@ import Test.Tasty
 --
 --         , responseUpdateSizeConstraintSet $
 --             updateSizeConstraintSetResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
 --
 --         , responseDeleteRegexPatternSet $
 --             deleteRegexPatternSetResponse
@@ -525,6 +573,11 @@ requestCreateRule = req
     "CreateRule"
     "fixture/CreateRule.yaml"
 
+requestDeleteLoggingConfiguration :: DeleteLoggingConfiguration -> TestTree
+requestDeleteLoggingConfiguration = req
+    "DeleteLoggingConfiguration"
+    "fixture/DeleteLoggingConfiguration.yaml"
+
 requestCreateWebACL :: CreateWebACL -> TestTree
 requestCreateWebACL = req
     "CreateWebACL"
@@ -535,6 +588,16 @@ requestGetGeoMatchSet = req
     "GetGeoMatchSet"
     "fixture/GetGeoMatchSet.yaml"
 
+requestPutLoggingConfiguration :: PutLoggingConfiguration -> TestTree
+requestPutLoggingConfiguration = req
+    "PutLoggingConfiguration"
+    "fixture/PutLoggingConfiguration.yaml"
+
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
+
 requestListByteMatchSets :: ListByteMatchSets -> TestTree
 requestListByteMatchSets = req
     "ListByteMatchSets"
@@ -544,6 +607,11 @@ requestListGeoMatchSets :: ListGeoMatchSets -> TestTree
 requestListGeoMatchSets = req
     "ListGeoMatchSets"
     "fixture/ListGeoMatchSets.yaml"
+
+requestGetLoggingConfiguration :: GetLoggingConfiguration -> TestTree
+requestGetLoggingConfiguration = req
+    "GetLoggingConfiguration"
+    "fixture/GetLoggingConfiguration.yaml"
 
 requestCreateRuleGroup :: CreateRuleGroup -> TestTree
 requestCreateRuleGroup = req
@@ -584,6 +652,11 @@ requestUpdateXSSMatchSet :: UpdateXSSMatchSet -> TestTree
 requestUpdateXSSMatchSet = req
     "UpdateXSSMatchSet"
     "fixture/UpdateXSSMatchSet.yaml"
+
+requestCreateWebACLMigrationStack :: CreateWebACLMigrationStack -> TestTree
+requestCreateWebACLMigrationStack = req
+    "CreateWebACLMigrationStack"
+    "fixture/CreateWebACLMigrationStack.yaml"
 
 requestListXSSMatchSets :: ListXSSMatchSets -> TestTree
 requestListXSSMatchSets = req
@@ -650,6 +723,11 @@ requestPutPermissionPolicy = req
     "PutPermissionPolicy"
     "fixture/PutPermissionPolicy.yaml"
 
+requestListLoggingConfigurations :: ListLoggingConfigurations -> TestTree
+requestListLoggingConfigurations = req
+    "ListLoggingConfigurations"
+    "fixture/ListLoggingConfigurations.yaml"
+
 requestGetRateBasedRuleManagedKeys :: GetRateBasedRuleManagedKeys -> TestTree
 requestGetRateBasedRuleManagedKeys = req
     "GetRateBasedRuleManagedKeys"
@@ -715,6 +793,11 @@ requestListRuleGroups = req
     "ListRuleGroups"
     "fixture/ListRuleGroups.yaml"
 
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
+
 requestDeleteRuleGroup :: DeleteRuleGroup -> TestTree
 requestDeleteRuleGroup = req
     "DeleteRuleGroup"
@@ -749,6 +832,11 @@ requestUpdateSizeConstraintSet :: UpdateSizeConstraintSet -> TestTree
 requestUpdateSizeConstraintSet = req
     "UpdateSizeConstraintSet"
     "fixture/UpdateSizeConstraintSet.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
 
 requestDeleteRegexPatternSet :: DeleteRegexPatternSet -> TestTree
 requestDeleteRegexPatternSet = req
@@ -902,6 +990,13 @@ responseCreateRule = res
     waf
     (Proxy :: Proxy CreateRule)
 
+responseDeleteLoggingConfiguration :: DeleteLoggingConfigurationResponse -> TestTree
+responseDeleteLoggingConfiguration = res
+    "DeleteLoggingConfigurationResponse"
+    "fixture/DeleteLoggingConfigurationResponse.proto"
+    waf
+    (Proxy :: Proxy DeleteLoggingConfiguration)
+
 responseCreateWebACL :: CreateWebACLResponse -> TestTree
 responseCreateWebACL = res
     "CreateWebACLResponse"
@@ -916,6 +1011,20 @@ responseGetGeoMatchSet = res
     waf
     (Proxy :: Proxy GetGeoMatchSet)
 
+responsePutLoggingConfiguration :: PutLoggingConfigurationResponse -> TestTree
+responsePutLoggingConfiguration = res
+    "PutLoggingConfigurationResponse"
+    "fixture/PutLoggingConfigurationResponse.proto"
+    waf
+    (Proxy :: Proxy PutLoggingConfiguration)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    waf
+    (Proxy :: Proxy ListTagsForResource)
+
 responseListByteMatchSets :: ListByteMatchSetsResponse -> TestTree
 responseListByteMatchSets = res
     "ListByteMatchSetsResponse"
@@ -929,6 +1038,13 @@ responseListGeoMatchSets = res
     "fixture/ListGeoMatchSetsResponse.proto"
     waf
     (Proxy :: Proxy ListGeoMatchSets)
+
+responseGetLoggingConfiguration :: GetLoggingConfigurationResponse -> TestTree
+responseGetLoggingConfiguration = res
+    "GetLoggingConfigurationResponse"
+    "fixture/GetLoggingConfigurationResponse.proto"
+    waf
+    (Proxy :: Proxy GetLoggingConfiguration)
 
 responseCreateRuleGroup :: CreateRuleGroupResponse -> TestTree
 responseCreateRuleGroup = res
@@ -985,6 +1101,13 @@ responseUpdateXSSMatchSet = res
     "fixture/UpdateXSSMatchSetResponse.proto"
     waf
     (Proxy :: Proxy UpdateXSSMatchSet)
+
+responseCreateWebACLMigrationStack :: CreateWebACLMigrationStackResponse -> TestTree
+responseCreateWebACLMigrationStack = res
+    "CreateWebACLMigrationStackResponse"
+    "fixture/CreateWebACLMigrationStackResponse.proto"
+    waf
+    (Proxy :: Proxy CreateWebACLMigrationStack)
 
 responseListXSSMatchSets :: ListXSSMatchSetsResponse -> TestTree
 responseListXSSMatchSets = res
@@ -1077,6 +1200,13 @@ responsePutPermissionPolicy = res
     waf
     (Proxy :: Proxy PutPermissionPolicy)
 
+responseListLoggingConfigurations :: ListLoggingConfigurationsResponse -> TestTree
+responseListLoggingConfigurations = res
+    "ListLoggingConfigurationsResponse"
+    "fixture/ListLoggingConfigurationsResponse.proto"
+    waf
+    (Proxy :: Proxy ListLoggingConfigurations)
+
 responseGetRateBasedRuleManagedKeys :: GetRateBasedRuleManagedKeysResponse -> TestTree
 responseGetRateBasedRuleManagedKeys = res
     "GetRateBasedRuleManagedKeysResponse"
@@ -1168,6 +1298,13 @@ responseListRuleGroups = res
     waf
     (Proxy :: Proxy ListRuleGroups)
 
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    waf
+    (Proxy :: Proxy TagResource)
+
 responseDeleteRuleGroup :: DeleteRuleGroupResponse -> TestTree
 responseDeleteRuleGroup = res
     "DeleteRuleGroupResponse"
@@ -1216,6 +1353,13 @@ responseUpdateSizeConstraintSet = res
     "fixture/UpdateSizeConstraintSetResponse.proto"
     waf
     (Proxy :: Proxy UpdateSizeConstraintSet)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    waf
+    (Proxy :: Proxy UntagResource)
 
 responseDeleteRegexPatternSet :: DeleteRegexPatternSetResponse -> TestTree
 responseDeleteRegexPatternSet = res

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @GetQualificationType@ operation retrieves information about a Qualification type using its ID.
+-- The @GetQualificationType@ operation retrieves information about a Qualification type using its ID. 
 --
 --
 module Network.AWS.MechanicalTurk.GetQualificationType
@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getQualificationType' smart constructor.
-newtype GetQualificationType = GetQualificationType'
-  { _gqtQualificationTypeId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetQualificationType = GetQualificationType'{_gqtQualificationTypeId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetQualificationType' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetQualificationType = GetQualificationType'
 getQualificationType
     :: Text -- ^ 'gqtQualificationTypeId'
     -> GetQualificationType
-getQualificationType pQualificationTypeId_ =
-  GetQualificationType' {_gqtQualificationTypeId = pQualificationTypeId_}
-
+getQualificationType pQualificationTypeId_
+  = GetQualificationType'{_gqtQualificationTypeId =
+                            pQualificationTypeId_}
 
 -- | The ID of the QualificationType.
 gqtQualificationTypeId :: Lens' GetQualificationType Text
@@ -104,11 +104,14 @@ instance ToQuery GetQualificationType where
         toQuery = const mempty
 
 -- | /See:/ 'getQualificationTypeResponse' smart constructor.
-data GetQualificationTypeResponse = GetQualificationTypeResponse'
-  { _gqtrsQualificationType :: !(Maybe QualificationType)
-  , _gqtrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQualificationTypeResponse = GetQualificationTypeResponse'{_gqtrsQualificationType
+                                                                  ::
+                                                                  !(Maybe
+                                                                      QualificationType),
+                                                                  _gqtrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetQualificationTypeResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +123,10 @@ data GetQualificationTypeResponse = GetQualificationTypeResponse'
 getQualificationTypeResponse
     :: Int -- ^ 'gqtrsResponseStatus'
     -> GetQualificationTypeResponse
-getQualificationTypeResponse pResponseStatus_ =
-  GetQualificationTypeResponse'
-    {_gqtrsQualificationType = Nothing, _gqtrsResponseStatus = pResponseStatus_}
-
+getQualificationTypeResponse pResponseStatus_
+  = GetQualificationTypeResponse'{_gqtrsQualificationType
+                                    = Nothing,
+                                  _gqtrsResponseStatus = pResponseStatus_}
 
 -- | The returned Qualification Type
 gqtrsQualificationType :: Lens' GetQualificationTypeResponse (Maybe QualificationType)

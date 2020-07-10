@@ -14,11 +14,11 @@
 module Test.AWS.Gen.ElasticBeanstalk where
 
 import Data.Proxy
-import Network.AWS.ElasticBeanstalk
-import Test.AWS.ElasticBeanstalk.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.ElasticBeanstalk
+import Test.AWS.ElasticBeanstalk.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -45,6 +45,9 @@ import Test.Tasty
 --
 --         , requestCreateApplicationVersion $
 --             createApplicationVersion
+--
+--         , requestListPlatformBranches $
+--             listPlatformBranches
 --
 --         , requestDescribeEvents $
 --             describeEvents
@@ -180,6 +183,9 @@ import Test.Tasty
 --
 --         , responseCreateApplicationVersion $
 --             applicationVersionDescriptionMessage
+--
+--         , responseListPlatformBranches $
+--             listPlatformBranchesResponse
 --
 --         , responseDescribeEvents $
 --             describeEventsResponse
@@ -329,6 +335,11 @@ requestCreateApplicationVersion :: CreateApplicationVersion -> TestTree
 requestCreateApplicationVersion = req
     "CreateApplicationVersion"
     "fixture/CreateApplicationVersion.yaml"
+
+requestListPlatformBranches :: ListPlatformBranches -> TestTree
+requestListPlatformBranches = req
+    "ListPlatformBranches"
+    "fixture/ListPlatformBranches.yaml"
 
 requestDescribeEvents :: DescribeEvents -> TestTree
 requestDescribeEvents = req
@@ -563,6 +574,13 @@ responseCreateApplicationVersion = res
     "fixture/CreateApplicationVersionResponse.proto"
     elasticBeanstalk
     (Proxy :: Proxy CreateApplicationVersion)
+
+responseListPlatformBranches :: ListPlatformBranchesResponse -> TestTree
+responseListPlatformBranches = res
+    "ListPlatformBranchesResponse"
+    "fixture/ListPlatformBranchesResponse.proto"
+    elasticBeanstalk
+    (Proxy :: Proxy ListPlatformBranches)
 
 responseDescribeEvents :: DescribeEventsResponse -> TestTree
 responseDescribeEvents = res

@@ -50,11 +50,10 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'describeAddresses' smart constructor.
-data DescribeAddresses = DescribeAddresses'
-  { _daNextToken  :: !(Maybe Text)
-  , _daMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAddresses = DescribeAddresses'{_daNextToken
+                                            :: !(Maybe Text),
+                                            _daMaxResults :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeAddresses' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data DescribeAddresses = DescribeAddresses'
 -- * 'daMaxResults' - The number of @ADDRESS@ objects to return.
 describeAddresses
     :: DescribeAddresses
-describeAddresses =
-  DescribeAddresses' {_daNextToken = Nothing, _daMaxResults = Nothing}
-
+describeAddresses
+  = DescribeAddresses'{_daNextToken = Nothing,
+                       _daMaxResults = Nothing}
 
 -- | HTTP requests are stateless. To identify what object comes "next" in the list of @ADDRESS@ objects, you have the option of specifying a value for @NextToken@ as the starting point for your list of returned addresses.
 daNextToken :: Lens' DescribeAddresses (Maybe Text)
@@ -123,12 +122,15 @@ instance ToQuery DescribeAddresses where
         toQuery = const mempty
 
 -- | /See:/ 'describeAddressesResponse' smart constructor.
-data DescribeAddressesResponse = DescribeAddressesResponse'
-  { _drsAddresses      :: !(Maybe [Address])
-  , _drsNextToken      :: !(Maybe Text)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAddressesResponse = DescribeAddressesResponse'{_drsAddresses
+                                                            ::
+                                                            !(Maybe [Address]),
+                                                            _drsNextToken ::
+                                                            !(Maybe Text),
+                                                            _drsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeAddressesResponse' with the minimum fields required to make a request.
 --
@@ -142,13 +144,10 @@ data DescribeAddressesResponse = DescribeAddressesResponse'
 describeAddressesResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeAddressesResponse
-describeAddressesResponse pResponseStatus_ =
-  DescribeAddressesResponse'
-    { _drsAddresses = Nothing
-    , _drsNextToken = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeAddressesResponse pResponseStatus_
+  = DescribeAddressesResponse'{_drsAddresses = Nothing,
+                               _drsNextToken = Nothing,
+                               _drsResponseStatus = pResponseStatus_}
 
 -- | The Snowball shipping addresses that were created for this account.
 drsAddresses :: Lens' DescribeAddressesResponse [Address]

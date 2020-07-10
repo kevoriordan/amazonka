@@ -18,10 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the executions of a state machine that meet the filtering criteria.
+-- Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first.
 --
 --
--- If a @nextToken@ is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextToken@ . Keep all other arguments unchanged.
+-- If @nextToken@ is returned, there are more results available. The value of @nextToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an /HTTP 400 InvalidToken/ error.
+--
+-- This API action is not supported by @EXPRESS@ state machines.
 --
 --
 -- This operation returns paginated results.
@@ -54,13 +56,12 @@ import Network.AWS.StepFunctions.Types
 import Network.AWS.StepFunctions.Types.Product
 
 -- | /See:/ 'listExecutions' smart constructor.
-data ListExecutions = ListExecutions'
-  { _leStatusFilter    :: !(Maybe ExecutionStatus)
-  , _leNextToken       :: !(Maybe Text)
-  , _leMaxResults      :: !(Maybe Nat)
-  , _leStateMachineARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListExecutions = ListExecutions'{_leStatusFilter
+                                      :: !(Maybe ExecutionStatus),
+                                      _leNextToken :: !(Maybe Text),
+                                      _leMaxResults :: !(Maybe Nat),
+                                      _leStateMachineARN :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListExecutions' with the minimum fields required to make a request.
 --
@@ -68,32 +69,28 @@ data ListExecutions = ListExecutions'
 --
 -- * 'leStatusFilter' - If specified, only list the executions whose current execution status matches the given filter.
 --
--- * 'leNextToken' - If a @nextToken@ is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextToken@ . Keep all other arguments unchanged. The configured @maxResults@ determines how many results can be returned in a single call.
+-- * 'leNextToken' - If @nextToken@ is returned, there are more results available. The value of @nextToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an /HTTP 400 InvalidToken/ error.
 --
--- * 'leMaxResults' - The maximum number of results that are returned per call. You can use @nextToken@ to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+-- * 'leMaxResults' - The maximum number of results that are returned per call. You can use @nextToken@ to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
 --
 -- * 'leStateMachineARN' - The Amazon Resource Name (ARN) of the state machine whose executions is listed.
 listExecutions
     :: Text -- ^ 'leStateMachineARN'
     -> ListExecutions
-listExecutions pStateMachineARN_ =
-  ListExecutions'
-    { _leStatusFilter = Nothing
-    , _leNextToken = Nothing
-    , _leMaxResults = Nothing
-    , _leStateMachineARN = pStateMachineARN_
-    }
-
+listExecutions pStateMachineARN_
+  = ListExecutions'{_leStatusFilter = Nothing,
+                    _leNextToken = Nothing, _leMaxResults = Nothing,
+                    _leStateMachineARN = pStateMachineARN_}
 
 -- | If specified, only list the executions whose current execution status matches the given filter.
 leStatusFilter :: Lens' ListExecutions (Maybe ExecutionStatus)
 leStatusFilter = lens _leStatusFilter (\ s a -> s{_leStatusFilter = a})
 
--- | If a @nextToken@ is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextToken@ . Keep all other arguments unchanged. The configured @maxResults@ determines how many results can be returned in a single call.
+-- | If @nextToken@ is returned, there are more results available. The value of @nextToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an /HTTP 400 InvalidToken/ error.
 leNextToken :: Lens' ListExecutions (Maybe Text)
 leNextToken = lens _leNextToken (\ s a -> s{_leNextToken = a})
 
--- | The maximum number of results that are returned per call. You can use @nextToken@ to obtain further pages of results. The default is 100 and the maximum allowed page size is 100. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+-- | The maximum number of results that are returned per call. You can use @nextToken@ to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
 leMaxResults :: Lens' ListExecutions (Maybe Natural)
 leMaxResults = lens _leMaxResults (\ s a -> s{_leMaxResults = a}) . mapping _Nat
 
@@ -147,18 +144,20 @@ instance ToQuery ListExecutions where
         toQuery = const mempty
 
 -- | /See:/ 'listExecutionsResponse' smart constructor.
-data ListExecutionsResponse = ListExecutionsResponse'
-  { _lersNextToken      :: !(Maybe Text)
-  , _lersResponseStatus :: !Int
-  , _lersExecutions     :: ![ExecutionListItem]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListExecutionsResponse = ListExecutionsResponse'{_lersNextToken
+                                                      :: !(Maybe Text),
+                                                      _lersResponseStatus ::
+                                                      !Int,
+                                                      _lersExecutions ::
+                                                      ![ExecutionListItem]}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListExecutionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lersNextToken' - If a @nextToken@ is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextToken@ . Keep all other arguments unchanged. The configured @maxResults@ determines how many results can be returned in a single call.
+-- * 'lersNextToken' - If @nextToken@ is returned, there are more results available. The value of @nextToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an /HTTP 400 InvalidToken/ error.
 --
 -- * 'lersResponseStatus' - -- | The response status code.
 --
@@ -166,15 +165,12 @@ data ListExecutionsResponse = ListExecutionsResponse'
 listExecutionsResponse
     :: Int -- ^ 'lersResponseStatus'
     -> ListExecutionsResponse
-listExecutionsResponse pResponseStatus_ =
-  ListExecutionsResponse'
-    { _lersNextToken = Nothing
-    , _lersResponseStatus = pResponseStatus_
-    , _lersExecutions = mempty
-    }
+listExecutionsResponse pResponseStatus_
+  = ListExecutionsResponse'{_lersNextToken = Nothing,
+                            _lersResponseStatus = pResponseStatus_,
+                            _lersExecutions = mempty}
 
-
--- | If a @nextToken@ is returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextToken@ . Keep all other arguments unchanged. The configured @maxResults@ determines how many results can be returned in a single call.
+-- | If @nextToken@ is returned, there are more results available. The value of @nextToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an /HTTP 400 InvalidToken/ error.
 lersNextToken :: Lens' ListExecutionsResponse (Maybe Text)
 lersNextToken = lens _lersNextToken (\ s a -> s{_lersNextToken = a})
 

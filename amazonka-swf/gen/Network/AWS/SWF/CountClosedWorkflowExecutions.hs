@@ -21,7 +21,7 @@
 -- Returns the number of closed workflow executions within the given domain that meet the specified filtering criteria.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -41,7 +41,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.CountClosedWorkflowExecutions
     (
@@ -73,16 +73,34 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'countClosedWorkflowExecutions' smart constructor.
-data CountClosedWorkflowExecutions = CountClosedWorkflowExecutions'
-  { _ccweExecutionFilter   :: !(Maybe WorkflowExecutionFilter)
-  , _ccweCloseStatusFilter :: !(Maybe CloseStatusFilter)
-  , _ccweTypeFilter        :: !(Maybe WorkflowTypeFilter)
-  , _ccweCloseTimeFilter   :: !(Maybe ExecutionTimeFilter)
-  , _ccweTagFilter         :: !(Maybe TagFilter)
-  , _ccweStartTimeFilter   :: !(Maybe ExecutionTimeFilter)
-  , _ccweDomain            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CountClosedWorkflowExecutions = CountClosedWorkflowExecutions'{_ccweExecutionFilter
+                                                                    ::
+                                                                    !(Maybe
+                                                                        WorkflowExecutionFilter),
+                                                                    _ccweCloseStatusFilter
+                                                                    ::
+                                                                    !(Maybe
+                                                                        CloseStatusFilter),
+                                                                    _ccweTypeFilter
+                                                                    ::
+                                                                    !(Maybe
+                                                                        WorkflowTypeFilter),
+                                                                    _ccweCloseTimeFilter
+                                                                    ::
+                                                                    !(Maybe
+                                                                        ExecutionTimeFilter),
+                                                                    _ccweTagFilter
+                                                                    ::
+                                                                    !(Maybe
+                                                                        TagFilter),
+                                                                    _ccweStartTimeFilter
+                                                                    ::
+                                                                    !(Maybe
+                                                                        ExecutionTimeFilter),
+                                                                    _ccweDomain
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CountClosedWorkflowExecutions' with the minimum fields required to make a request.
 --
@@ -104,17 +122,15 @@ data CountClosedWorkflowExecutions = CountClosedWorkflowExecutions'
 countClosedWorkflowExecutions
     :: Text -- ^ 'ccweDomain'
     -> CountClosedWorkflowExecutions
-countClosedWorkflowExecutions pDomain_ =
-  CountClosedWorkflowExecutions'
-    { _ccweExecutionFilter = Nothing
-    , _ccweCloseStatusFilter = Nothing
-    , _ccweTypeFilter = Nothing
-    , _ccweCloseTimeFilter = Nothing
-    , _ccweTagFilter = Nothing
-    , _ccweStartTimeFilter = Nothing
-    , _ccweDomain = pDomain_
-    }
-
+countClosedWorkflowExecutions pDomain_
+  = CountClosedWorkflowExecutions'{_ccweExecutionFilter
+                                     = Nothing,
+                                   _ccweCloseStatusFilter = Nothing,
+                                   _ccweTypeFilter = Nothing,
+                                   _ccweCloseTimeFilter = Nothing,
+                                   _ccweTagFilter = Nothing,
+                                   _ccweStartTimeFilter = Nothing,
+                                   _ccweDomain = pDomain_}
 
 -- | If specified, only workflow executions matching the @WorkflowId@ in the filter are counted.
 ccweExecutionFilter :: Lens' CountClosedWorkflowExecutions (Maybe WorkflowExecutionFilter)

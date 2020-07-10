@@ -47,30 +47,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'discoverPollEndpoint' smart constructor.
-data DiscoverPollEndpoint = DiscoverPollEndpoint'
-  { _dpeCluster           :: !(Maybe Text)
-  , _dpeContainerInstance :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DiscoverPollEndpoint = DiscoverPollEndpoint'{_dpeCluster
+                                                  :: !(Maybe Text),
+                                                  _dpeContainerInstance ::
+                                                  !(Maybe Text)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DiscoverPollEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpeCluster' - The short name or full Amazon Resource Name (ARN) of the cluster that the container instance belongs to.
+-- * 'dpeCluster' - The short name or full Amazon Resource Name (ARN) of the cluster to which the container instance belongs.
 --
--- * 'dpeContainerInstance' - The container instance ID or full ARN of the container instance. The ARN contains the @arn:aws:ecs@ namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the @container-instance@ namespace, and then the container instance ID. For example, @arn:aws:ecs:/region/ :/aws_account_id/ :container-instance//container_instance_ID/ @ .
+-- * 'dpeContainerInstance' - The container instance ID or full ARN of the container instance. The ARN contains the @arn:aws:ecs@ namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the @container-instance@ namespace, and then the container instance ID. For example, @arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID@ .
 discoverPollEndpoint
     :: DiscoverPollEndpoint
-discoverPollEndpoint =
-  DiscoverPollEndpoint' {_dpeCluster = Nothing, _dpeContainerInstance = Nothing}
+discoverPollEndpoint
+  = DiscoverPollEndpoint'{_dpeCluster = Nothing,
+                          _dpeContainerInstance = Nothing}
 
-
--- | The short name or full Amazon Resource Name (ARN) of the cluster that the container instance belongs to.
+-- | The short name or full Amazon Resource Name (ARN) of the cluster to which the container instance belongs.
 dpeCluster :: Lens' DiscoverPollEndpoint (Maybe Text)
 dpeCluster = lens _dpeCluster (\ s a -> s{_dpeCluster = a})
 
--- | The container instance ID or full ARN of the container instance. The ARN contains the @arn:aws:ecs@ namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the @container-instance@ namespace, and then the container instance ID. For example, @arn:aws:ecs:/region/ :/aws_account_id/ :container-instance//container_instance_ID/ @ .
+-- | The container instance ID or full ARN of the container instance. The ARN contains the @arn:aws:ecs@ namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the @container-instance@ namespace, and then the container instance ID. For example, @arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID@ .
 dpeContainerInstance :: Lens' DiscoverPollEndpoint (Maybe Text)
 dpeContainerInstance = lens _dpeContainerInstance (\ s a -> s{_dpeContainerInstance = a})
 
@@ -113,12 +113,16 @@ instance ToQuery DiscoverPollEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'discoverPollEndpointResponse' smart constructor.
-data DiscoverPollEndpointResponse = DiscoverPollEndpointResponse'
-  { _dpersTelemetryEndpoint :: !(Maybe Text)
-  , _dpersEndpoint          :: !(Maybe Text)
-  , _dpersResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DiscoverPollEndpointResponse = DiscoverPollEndpointResponse'{_dpersTelemetryEndpoint
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dpersEndpoint
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dpersResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DiscoverPollEndpointResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +136,11 @@ data DiscoverPollEndpointResponse = DiscoverPollEndpointResponse'
 discoverPollEndpointResponse
     :: Int -- ^ 'dpersResponseStatus'
     -> DiscoverPollEndpointResponse
-discoverPollEndpointResponse pResponseStatus_ =
-  DiscoverPollEndpointResponse'
-    { _dpersTelemetryEndpoint = Nothing
-    , _dpersEndpoint = Nothing
-    , _dpersResponseStatus = pResponseStatus_
-    }
-
+discoverPollEndpointResponse pResponseStatus_
+  = DiscoverPollEndpointResponse'{_dpersTelemetryEndpoint
+                                    = Nothing,
+                                  _dpersEndpoint = Nothing,
+                                  _dpersResponseStatus = pResponseStatus_}
 
 -- | The telemetry endpoint for the Amazon ECS agent.
 dpersTelemetryEndpoint :: Lens' DiscoverPollEndpointResponse (Maybe Text)

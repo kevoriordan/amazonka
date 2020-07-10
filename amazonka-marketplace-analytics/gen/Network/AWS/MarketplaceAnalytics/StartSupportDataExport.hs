@@ -51,16 +51,20 @@ import Network.AWS.Response
 -- | Container for the parameters to the StartSupportDataExport operation.
 --
 -- /See:/ 'startSupportDataExport' smart constructor.
-data StartSupportDataExport = StartSupportDataExport'
-  { _ssdeCustomerDefinedValues   :: !(Maybe (Map Text Text))
-  , _ssdeDestinationS3Prefix     :: !(Maybe Text)
-  , _ssdeDataSetType             :: !SupportDataSetType
-  , _ssdeFromDate                :: !POSIX
-  , _ssdeRoleNameARN             :: !Text
-  , _ssdeDestinationS3BucketName :: !Text
-  , _ssdeSnsTopicARN             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartSupportDataExport = StartSupportDataExport'{_ssdeCustomerDefinedValues
+                                                      ::
+                                                      !(Maybe (Map Text Text)),
+                                                      _ssdeDestinationS3Prefix
+                                                      :: !(Maybe Text),
+                                                      _ssdeDataSetType ::
+                                                      !SupportDataSetType,
+                                                      _ssdeFromDate :: !POSIX,
+                                                      _ssdeRoleNameARN :: !Text,
+                                                      _ssdeDestinationS3BucketName
+                                                      :: !Text,
+                                                      _ssdeSnsTopicARN :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StartSupportDataExport' with the minimum fields required to make a request.
 --
@@ -86,17 +90,17 @@ startSupportDataExport
     -> Text -- ^ 'ssdeDestinationS3BucketName'
     -> Text -- ^ 'ssdeSnsTopicARN'
     -> StartSupportDataExport
-startSupportDataExport pDataSetType_ pFromDate_ pRoleNameARN_ pDestinationS3BucketName_ pSnsTopicARN_ =
-  StartSupportDataExport'
-    { _ssdeCustomerDefinedValues = Nothing
-    , _ssdeDestinationS3Prefix = Nothing
-    , _ssdeDataSetType = pDataSetType_
-    , _ssdeFromDate = _Time # pFromDate_
-    , _ssdeRoleNameARN = pRoleNameARN_
-    , _ssdeDestinationS3BucketName = pDestinationS3BucketName_
-    , _ssdeSnsTopicARN = pSnsTopicARN_
-    }
-
+startSupportDataExport pDataSetType_ pFromDate_
+  pRoleNameARN_ pDestinationS3BucketName_ pSnsTopicARN_
+  = StartSupportDataExport'{_ssdeCustomerDefinedValues
+                              = Nothing,
+                            _ssdeDestinationS3Prefix = Nothing,
+                            _ssdeDataSetType = pDataSetType_,
+                            _ssdeFromDate = _Time # pFromDate_,
+                            _ssdeRoleNameARN = pRoleNameARN_,
+                            _ssdeDestinationS3BucketName =
+                              pDestinationS3BucketName_,
+                            _ssdeSnsTopicARN = pSnsTopicARN_}
 
 -- | (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.
 ssdeCustomerDefinedValues :: Lens' StartSupportDataExport (HashMap Text Text)
@@ -175,11 +179,14 @@ instance ToQuery StartSupportDataExport where
 -- | Container for the result of the StartSupportDataExport operation.
 --
 -- /See:/ 'startSupportDataExportResponse' smart constructor.
-data StartSupportDataExportResponse = StartSupportDataExportResponse'
-  { _ssdersDataSetRequestId :: !(Maybe Text)
-  , _ssdersResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartSupportDataExportResponse = StartSupportDataExportResponse'{_ssdersDataSetRequestId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _ssdersResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'StartSupportDataExportResponse' with the minimum fields required to make a request.
 --
@@ -191,12 +198,10 @@ data StartSupportDataExportResponse = StartSupportDataExportResponse'
 startSupportDataExportResponse
     :: Int -- ^ 'ssdersResponseStatus'
     -> StartSupportDataExportResponse
-startSupportDataExportResponse pResponseStatus_ =
-  StartSupportDataExportResponse'
-    { _ssdersDataSetRequestId = Nothing
-    , _ssdersResponseStatus = pResponseStatus_
-    }
-
+startSupportDataExportResponse pResponseStatus_
+  = StartSupportDataExportResponse'{_ssdersDataSetRequestId
+                                      = Nothing,
+                                    _ssdersResponseStatus = pResponseStatus_}
 
 -- | A unique identifier representing a specific request to the StartSupportDataExport operation. This identifier can be used to correlate a request with notifications from the SNS topic.
 ssdersDataSetRequestId :: Lens' StartSupportDataExportResponse (Maybe Text)

@@ -43,10 +43,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getPreset' smart constructor.
-newtype GetPreset = GetPreset'
-  { _gpName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetPreset = GetPreset'{_gpName :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPreset' with the minimum fields required to make a request.
 --
@@ -56,8 +54,7 @@ newtype GetPreset = GetPreset'
 getPreset
     :: Text -- ^ 'gpName'
     -> GetPreset
-getPreset pName_ = GetPreset' {_gpName = pName_}
-
+getPreset pName_ = GetPreset'{_gpName = pName_}
 
 -- | The name of the preset.
 gpName :: Lens' GetPreset Text
@@ -91,28 +88,26 @@ instance ToQuery GetPreset where
         toQuery = const mempty
 
 -- | /See:/ 'getPresetResponse' smart constructor.
-data GetPresetResponse = GetPresetResponse'
-  { _gprsPreset         :: !(Maybe Preset)
-  , _gprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPresetResponse = GetPresetResponse'{_gprsPreset
+                                            :: !(Maybe Preset),
+                                            _gprsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPresetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gprsPreset' - Undocumented member.
+-- * 'gprsPreset' - A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
 --
 -- * 'gprsResponseStatus' - -- | The response status code.
 getPresetResponse
     :: Int -- ^ 'gprsResponseStatus'
     -> GetPresetResponse
-getPresetResponse pResponseStatus_ =
-  GetPresetResponse'
-    {_gprsPreset = Nothing, _gprsResponseStatus = pResponseStatus_}
+getPresetResponse pResponseStatus_
+  = GetPresetResponse'{_gprsPreset = Nothing,
+                       _gprsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
 gprsPreset :: Lens' GetPresetResponse (Maybe Preset)
 gprsPreset = lens _gprsPreset (\ s a -> s{_gprsPreset = a})
 

@@ -27,6 +27,7 @@ module Network.AWS.AppSync.GetIntrospectionSchema
       getIntrospectionSchema
     , GetIntrospectionSchema
     -- * Request Lenses
+    , gisIncludeDirectives
     , gisApiId
     , gisFormat
 
@@ -46,15 +47,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getIntrospectionSchema' smart constructor.
-data GetIntrospectionSchema = GetIntrospectionSchema'
-  { _gisApiId  :: !Text
-  , _gisFormat :: !OutputType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIntrospectionSchema = GetIntrospectionSchema'{_gisIncludeDirectives
+                                                      :: !(Maybe Bool),
+                                                      _gisApiId :: !Text,
+                                                      _gisFormat :: !OutputType}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetIntrospectionSchema' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gisIncludeDirectives' - A flag that specifies whether the schema introspection should contain directives.
 --
 -- * 'gisApiId' - The API ID.
 --
@@ -63,9 +67,14 @@ getIntrospectionSchema
     :: Text -- ^ 'gisApiId'
     -> OutputType -- ^ 'gisFormat'
     -> GetIntrospectionSchema
-getIntrospectionSchema pApiId_ pFormat_ =
-  GetIntrospectionSchema' {_gisApiId = pApiId_, _gisFormat = pFormat_}
+getIntrospectionSchema pApiId_ pFormat_
+  = GetIntrospectionSchema'{_gisIncludeDirectives =
+                              Nothing,
+                            _gisApiId = pApiId_, _gisFormat = pFormat_}
 
+-- | A flag that specifies whether the schema introspection should contain directives.
+gisIncludeDirectives :: Lens' GetIntrospectionSchema (Maybe Bool)
+gisIncludeDirectives = lens _gisIncludeDirectives (\ s a -> s{_gisIncludeDirectives = a})
 
 -- | The API ID.
 gisApiId :: Lens' GetIntrospectionSchema Text
@@ -102,14 +111,19 @@ instance ToPath GetIntrospectionSchema where
 
 instance ToQuery GetIntrospectionSchema where
         toQuery GetIntrospectionSchema'{..}
-          = mconcat ["format" =: _gisFormat]
+          = mconcat
+              ["includeDirectives" =: _gisIncludeDirectives,
+               "format" =: _gisFormat]
 
 -- | /See:/ 'getIntrospectionSchemaResponse' smart constructor.
-data GetIntrospectionSchemaResponse = GetIntrospectionSchemaResponse'
-  { _gisrsSchema         :: !(Maybe ByteString)
-  , _gisrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIntrospectionSchemaResponse = GetIntrospectionSchemaResponse'{_gisrsSchema
+                                                                      ::
+                                                                      !(Maybe
+                                                                          ByteString),
+                                                                      _gisrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'GetIntrospectionSchemaResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +135,10 @@ data GetIntrospectionSchemaResponse = GetIntrospectionSchemaResponse'
 getIntrospectionSchemaResponse
     :: Int -- ^ 'gisrsResponseStatus'
     -> GetIntrospectionSchemaResponse
-getIntrospectionSchemaResponse pResponseStatus_ =
-  GetIntrospectionSchemaResponse'
-    {_gisrsSchema = Nothing, _gisrsResponseStatus = pResponseStatus_}
-
+getIntrospectionSchemaResponse pResponseStatus_
+  = GetIntrospectionSchemaResponse'{_gisrsSchema =
+                                      Nothing,
+                                    _gisrsResponseStatus = pResponseStatus_}
 
 -- | The schema, in GraphQL Schema Definition Language (SDL) format. For more information, see the <http://graphql.org/learn/schema/ GraphQL SDL documentation> .
 gisrsSchema :: Lens' GetIntrospectionSchemaResponse (Maybe ByteString)

@@ -58,12 +58,18 @@ library
         , Network.AWS.Mobile.Waiters
 
     other-modules:
-          Network.AWS.Mobile.Types.Product
-        , Network.AWS.Mobile.Types.Sum
+          Network.AWS.Mobile.Types.BundleDetails
+        , Network.AWS.Mobile.Types.Platform
+        , Network.AWS.Mobile.Types.Product
+        , Network.AWS.Mobile.Types.ProjectDetails
+        , Network.AWS.Mobile.Types.ProjectState
+        , Network.AWS.Mobile.Types.ProjectSummary
+        , Network.AWS.Mobile.Types.Resource
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-mobile-test
     type:              exitcode-stdio-1.0
@@ -87,6 +93,7 @@ test-suite amazonka-mobile-test
         , amazonka-mobile
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

@@ -49,11 +49,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteConditionalForwarder' smart constructor.
-data DeleteConditionalForwarder = DeleteConditionalForwarder'
-  { _delDirectoryId      :: !Text
-  , _delRemoteDomainName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConditionalForwarder = DeleteConditionalForwarder'{_delDirectoryId
+                                                              :: !Text,
+                                                              _delRemoteDomainName
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteConditionalForwarder' with the minimum fields required to make a request.
 --
@@ -66,10 +67,11 @@ deleteConditionalForwarder
     :: Text -- ^ 'delDirectoryId'
     -> Text -- ^ 'delRemoteDomainName'
     -> DeleteConditionalForwarder
-deleteConditionalForwarder pDirectoryId_ pRemoteDomainName_ =
-  DeleteConditionalForwarder'
-    {_delDirectoryId = pDirectoryId_, _delRemoteDomainName = pRemoteDomainName_}
-
+deleteConditionalForwarder pDirectoryId_
+  pRemoteDomainName_
+  = DeleteConditionalForwarder'{_delDirectoryId =
+                                  pDirectoryId_,
+                                _delRemoteDomainName = pRemoteDomainName_}
 
 -- | The directory ID for which you are deleting the conditional forwarder.
 delDirectoryId :: Lens' DeleteConditionalForwarder Text
@@ -121,10 +123,11 @@ instance ToQuery DeleteConditionalForwarder where
 --
 --
 -- /See:/ 'deleteConditionalForwarderResponse' smart constructor.
-newtype DeleteConditionalForwarderResponse = DeleteConditionalForwarderResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConditionalForwarderResponse = DeleteConditionalForwarderResponse'{_drsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DeleteConditionalForwarderResponse' with the minimum fields required to make a request.
 --
@@ -134,9 +137,9 @@ newtype DeleteConditionalForwarderResponse = DeleteConditionalForwarderResponse'
 deleteConditionalForwarderResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteConditionalForwarderResponse
-deleteConditionalForwarderResponse pResponseStatus_ =
-  DeleteConditionalForwarderResponse' {_drsResponseStatus = pResponseStatus_}
-
+deleteConditionalForwarderResponse pResponseStatus_
+  = DeleteConditionalForwarderResponse'{_drsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeleteConditionalForwarderResponse Int

@@ -21,53 +21,27 @@
 -- Deletes everything related to a fleet. Before deleting a fleet, you must set the fleet's desired capacity to zero. See 'UpdateFleetCapacity' .
 --
 --
--- This action removes the fleet's resources and the fleet record. Once a fleet is deleted, you can no longer use that fleet.
+-- If the fleet being deleted has a VPC peering connection, you first need to get a valid authorization (good for 24 hours) by calling 'CreateVpcPeeringAuthorization' . You do not need to explicitly delete the VPC peering connection--this is done as part of the delete fleet process.
 --
--- Fleet-related operations include:
+-- This action removes the fleet and its resources. Once a fleet is deleted, you can no longer use any of the resource in that fleet.
 --
---     * 'CreateFleet'
+-- __Learn more__ 
 --
---     * 'ListFleets'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html Setting up GameLift Fleets> 
 --
---     * 'DeleteFleet'
+-- __Related operations__ 
 --
---     * Describe fleets:
+--     * 'CreateFleet' 
 --
---     * 'DescribeFleetAttributes'
+--     * 'ListFleets' 
 --
---     * 'DescribeFleetCapacity'
+--     * 'DeleteFleet' 
 --
---     * 'DescribeFleetPortSettings'
+--     * 'DescribeFleetAttributes' 
 --
---     * 'DescribeFleetUtilization'
+--     * 'UpdateFleetAttributes' 
 --
---     * 'DescribeRuntimeConfiguration'
---
---     * 'DescribeEC2InstanceLimits'
---
---     * 'DescribeFleetEvents'
---
---
---
---     * Update fleets:
---
---     * 'UpdateFleetAttributes'
---
---     * 'UpdateFleetCapacity'
---
---     * 'UpdateFleetPortSettings'
---
---     * 'UpdateRuntimeConfiguration'
---
---
---
---     * Manage fleet actions:
---
---     * 'StartFleetActions'
---
---     * 'StopFleetActions'
---
---
+--     * 'StartFleetActions' or 'StopFleetActions' 
 --
 --
 --
@@ -96,23 +70,22 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteFleet' smart constructor.
-newtype DeleteFleet = DeleteFleet'
-  { _dfFleetId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteFleet = DeleteFleet'{_dfFleetId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFleet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfFleetId' - Unique identifier for a fleet to be deleted.
+-- * 'dfFleetId' - A unique identifier for a fleet to be deleted. You can use either the fleet ID or ARN value.
 deleteFleet
     :: Text -- ^ 'dfFleetId'
     -> DeleteFleet
-deleteFleet pFleetId_ = DeleteFleet' {_dfFleetId = pFleetId_}
+deleteFleet pFleetId_
+  = DeleteFleet'{_dfFleetId = pFleetId_}
 
-
--- | Unique identifier for a fleet to be deleted.
+-- | A unique identifier for a fleet to be deleted. You can use either the fleet ID or ARN value.
 dfFleetId :: Lens' DeleteFleet Text
 dfFleetId = lens _dfFleetId (\ s a -> s{_dfFleetId = a})
 
@@ -145,16 +118,13 @@ instance ToQuery DeleteFleet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteFleetResponse' smart constructor.
-data DeleteFleetResponse =
-  DeleteFleetResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFleetResponse = DeleteFleetResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFleetResponse' with the minimum fields required to make a request.
 --
 deleteFleetResponse
     :: DeleteFleetResponse
 deleteFleetResponse = DeleteFleetResponse'
-
 
 instance NFData DeleteFleetResponse where

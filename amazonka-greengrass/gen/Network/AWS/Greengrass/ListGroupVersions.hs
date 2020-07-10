@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the versions of a group.
+--
+-- This operation returns paginated results.
 module Network.AWS.Greengrass.ListGroupVersions
     (
     -- * Creating a Request
@@ -41,17 +43,17 @@ module Network.AWS.Greengrass.ListGroupVersions
 import Network.AWS.Greengrass.Types
 import Network.AWS.Greengrass.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listGroupVersions' smart constructor.
-data ListGroupVersions = ListGroupVersions'
-  { _lgvNextToken  :: !(Maybe Text)
-  , _lgvMaxResults :: !(Maybe Text)
-  , _lgvGroupId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGroupVersions = ListGroupVersions'{_lgvNextToken
+                                            :: !(Maybe Text),
+                                            _lgvMaxResults :: !(Maybe Text),
+                                            _lgvGroupId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGroupVersions' with the minimum fields required to make a request.
 --
@@ -61,14 +63,13 @@ data ListGroupVersions = ListGroupVersions'
 --
 -- * 'lgvMaxResults' - The maximum number of results to be returned per request.
 --
--- * 'lgvGroupId' - The ID of the AWS Greengrass group.
+-- * 'lgvGroupId' - The ID of the Greengrass group.
 listGroupVersions
     :: Text -- ^ 'lgvGroupId'
     -> ListGroupVersions
-listGroupVersions pGroupId_ =
-  ListGroupVersions'
-    {_lgvNextToken = Nothing, _lgvMaxResults = Nothing, _lgvGroupId = pGroupId_}
-
+listGroupVersions pGroupId_
+  = ListGroupVersions'{_lgvNextToken = Nothing,
+                       _lgvMaxResults = Nothing, _lgvGroupId = pGroupId_}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lgvNextToken :: Lens' ListGroupVersions (Maybe Text)
@@ -78,9 +79,16 @@ lgvNextToken = lens _lgvNextToken (\ s a -> s{_lgvNextToken = a})
 lgvMaxResults :: Lens' ListGroupVersions (Maybe Text)
 lgvMaxResults = lens _lgvMaxResults (\ s a -> s{_lgvMaxResults = a})
 
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 lgvGroupId :: Lens' ListGroupVersions Text
 lgvGroupId = lens _lgvGroupId (\ s a -> s{_lgvGroupId = a})
+
+instance AWSPager ListGroupVersions where
+        page rq rs
+          | stop (rs ^. lgvrsNextToken) = Nothing
+          | stop (rs ^. lgvrsVersions) = Nothing
+          | otherwise =
+            Just $ rq & lgvNextToken .~ rs ^. lgvrsNextToken
 
 instance AWSRequest ListGroupVersions where
         type Rs ListGroupVersions = ListGroupVersionsResponse
@@ -116,12 +124,16 @@ instance ToQuery ListGroupVersions where
                "MaxResults" =: _lgvMaxResults]
 
 -- | /See:/ 'listGroupVersionsResponse' smart constructor.
-data ListGroupVersionsResponse = ListGroupVersionsResponse'
-  { _lgvrsVersions       :: !(Maybe [VersionInformation])
-  , _lgvrsNextToken      :: !(Maybe Text)
-  , _lgvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGroupVersionsResponse = ListGroupVersionsResponse'{_lgvrsVersions
+                                                            ::
+                                                            !(Maybe
+                                                                [VersionInformation]),
+                                                            _lgvrsNextToken ::
+                                                            !(Maybe Text),
+                                                            _lgvrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListGroupVersionsResponse' with the minimum fields required to make a request.
 --
@@ -135,13 +147,11 @@ data ListGroupVersionsResponse = ListGroupVersionsResponse'
 listGroupVersionsResponse
     :: Int -- ^ 'lgvrsResponseStatus'
     -> ListGroupVersionsResponse
-listGroupVersionsResponse pResponseStatus_ =
-  ListGroupVersionsResponse'
-    { _lgvrsVersions = Nothing
-    , _lgvrsNextToken = Nothing
-    , _lgvrsResponseStatus = pResponseStatus_
-    }
-
+listGroupVersionsResponse pResponseStatus_
+  = ListGroupVersionsResponse'{_lgvrsVersions =
+                                 Nothing,
+                               _lgvrsNextToken = Nothing,
+                               _lgvrsResponseStatus = pResponseStatus_}
 
 -- | Information about a version.
 lgvrsVersions :: Lens' ListGroupVersionsResponse [VersionInformation]

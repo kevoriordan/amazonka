@@ -55,13 +55,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateFacet' smart constructor.
-data UpdateFacet = UpdateFacet'
-  { _ufObjectType       :: !(Maybe ObjectType)
-  , _ufAttributeUpdates :: !(Maybe [FacetAttributeUpdate])
-  , _ufSchemaARN        :: !Text
-  , _ufName             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateFacet = UpdateFacet'{_ufObjectType ::
+                                !(Maybe ObjectType),
+                                _ufAttributeUpdates ::
+                                !(Maybe [FacetAttributeUpdate]),
+                                _ufSchemaARN :: !Text, _ufName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateFacet' with the minimum fields required to make a request.
 --
@@ -69,7 +68,7 @@ data UpdateFacet = UpdateFacet'
 --
 -- * 'ufObjectType' - The object type that is associated with the facet. See 'CreateFacetRequest$ObjectType' for more details.
 --
--- * 'ufAttributeUpdates' - List of attributes that need to be updated in a given schema 'Facet' . Each attribute is followed by @AttributeAction@ , which specifies the type of update operation to perform.
+-- * 'ufAttributeUpdates' - List of attributes that need to be updated in a given schema 'Facet' . Each attribute is followed by @AttributeAction@ , which specifies the type of update operation to perform. 
 --
 -- * 'ufSchemaARN' - The Amazon Resource Name (ARN) that is associated with the 'Facet' . For more information, see 'arns' .
 --
@@ -78,20 +77,16 @@ updateFacet
     :: Text -- ^ 'ufSchemaARN'
     -> Text -- ^ 'ufName'
     -> UpdateFacet
-updateFacet pSchemaARN_ pName_ =
-  UpdateFacet'
-    { _ufObjectType = Nothing
-    , _ufAttributeUpdates = Nothing
-    , _ufSchemaARN = pSchemaARN_
-    , _ufName = pName_
-    }
-
+updateFacet pSchemaARN_ pName_
+  = UpdateFacet'{_ufObjectType = Nothing,
+                 _ufAttributeUpdates = Nothing,
+                 _ufSchemaARN = pSchemaARN_, _ufName = pName_}
 
 -- | The object type that is associated with the facet. See 'CreateFacetRequest$ObjectType' for more details.
 ufObjectType :: Lens' UpdateFacet (Maybe ObjectType)
 ufObjectType = lens _ufObjectType (\ s a -> s{_ufObjectType = a})
 
--- | List of attributes that need to be updated in a given schema 'Facet' . Each attribute is followed by @AttributeAction@ , which specifies the type of update operation to perform.
+-- | List of attributes that need to be updated in a given schema 'Facet' . Each attribute is followed by @AttributeAction@ , which specifies the type of update operation to perform. 
 ufAttributeUpdates :: Lens' UpdateFacet [FacetAttributeUpdate]
 ufAttributeUpdates = lens _ufAttributeUpdates (\ s a -> s{_ufAttributeUpdates = a}) . _Default . _Coerce
 
@@ -135,10 +130,10 @@ instance ToQuery UpdateFacet where
         toQuery = const mempty
 
 -- | /See:/ 'updateFacetResponse' smart constructor.
-newtype UpdateFacetResponse = UpdateFacetResponse'
-  { _ufrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateFacetResponse = UpdateFacetResponse'{_ufrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateFacetResponse' with the minimum fields required to make a request.
 --
@@ -148,9 +143,9 @@ newtype UpdateFacetResponse = UpdateFacetResponse'
 updateFacetResponse
     :: Int -- ^ 'ufrsResponseStatus'
     -> UpdateFacetResponse
-updateFacetResponse pResponseStatus_ =
-  UpdateFacetResponse' {_ufrsResponseStatus = pResponseStatus_}
-
+updateFacetResponse pResponseStatus_
+  = UpdateFacetResponse'{_ufrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 ufrsResponseStatus :: Lens' UpdateFacetResponse Int

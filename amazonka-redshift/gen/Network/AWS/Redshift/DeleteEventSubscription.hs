@@ -41,15 +41,15 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteEventSubscription' smart constructor.
-newtype DeleteEventSubscription = DeleteEventSubscription'
-  { _desSubscriptionName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEventSubscription = DeleteEventSubscription'{_desSubscriptionName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteEventSubscription' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DeleteEventSubscription = DeleteEventSubscription'
 deleteEventSubscription
     :: Text -- ^ 'desSubscriptionName'
     -> DeleteEventSubscription
-deleteEventSubscription pSubscriptionName_ =
-  DeleteEventSubscription' {_desSubscriptionName = pSubscriptionName_}
-
+deleteEventSubscription pSubscriptionName_
+  = DeleteEventSubscription'{_desSubscriptionName =
+                               pSubscriptionName_}
 
 -- | The name of the Amazon Redshift event notification subscription to be deleted.
 desSubscriptionName :: Lens' DeleteEventSubscription Text
@@ -93,16 +93,15 @@ instance ToQuery DeleteEventSubscription where
                "SubscriptionName" =: _desSubscriptionName]
 
 -- | /See:/ 'deleteEventSubscriptionResponse' smart constructor.
-data DeleteEventSubscriptionResponse =
-  DeleteEventSubscriptionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEventSubscriptionResponse = DeleteEventSubscriptionResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteEventSubscriptionResponse' with the minimum fields required to make a request.
 --
 deleteEventSubscriptionResponse
     :: DeleteEventSubscriptionResponse
-deleteEventSubscriptionResponse = DeleteEventSubscriptionResponse'
-
+deleteEventSubscriptionResponse
+  = DeleteEventSubscriptionResponse'
 
 instance NFData DeleteEventSubscriptionResponse where

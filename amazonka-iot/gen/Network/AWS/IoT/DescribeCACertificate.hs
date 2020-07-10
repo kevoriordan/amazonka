@@ -33,9 +33,9 @@ module Network.AWS.IoT.DescribeCACertificate
     , describeCACertificateResponse
     , DescribeCACertificateResponse
     -- * Response Lenses
-    , dcaccrsCertificateDescription
-    , dcaccrsRegistrationConfig
-    , dcaccrsResponseStatus
+    , dscrbcacrtfctrsCertificateDescription
+    , dscrbcacrtfctrsRegistrationConfig
+    , dscrbcacrtfctrsResponseStatus
     ) where
 
 import Network.AWS.IoT.Types
@@ -50,10 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeCACertificate' smart constructor.
-newtype DescribeCACertificate = DescribeCACertificate'
-  { _dCertificateId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeCACertificate = DescribeCACertificate'{_dCertificateId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeCACertificate' with the minimum fields required to make a request.
 --
@@ -63,9 +63,9 @@ newtype DescribeCACertificate = DescribeCACertificate'
 describeCACertificate
     :: Text -- ^ 'dCertificateId'
     -> DescribeCACertificate
-describeCACertificate pCertificateId_ =
-  DescribeCACertificate' {_dCertificateId = pCertificateId_}
-
+describeCACertificate pCertificateId_
+  = DescribeCACertificate'{_dCertificateId =
+                             pCertificateId_}
 
 -- | The CA certificate identifier.
 dCertificateId :: Lens' DescribeCACertificate Text
@@ -102,43 +102,48 @@ instance ToQuery DescribeCACertificate where
 --
 --
 -- /See:/ 'describeCACertificateResponse' smart constructor.
-data DescribeCACertificateResponse = DescribeCACertificateResponse'
-  { _dcaccrsCertificateDescription :: !(Maybe CACertificateDescription)
-  , _dcaccrsRegistrationConfig     :: !(Maybe RegistrationConfig)
-  , _dcaccrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCACertificateResponse = DescribeCACertificateResponse'{_dscrbcacrtfctrsCertificateDescription
+                                                                    ::
+                                                                    !(Maybe
+                                                                        CACertificateDescription),
+                                                                    _dscrbcacrtfctrsRegistrationConfig
+                                                                    ::
+                                                                    !(Maybe
+                                                                        RegistrationConfig),
+                                                                    _dscrbcacrtfctrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeCACertificateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcaccrsCertificateDescription' - The CA certificate description.
+-- * 'dscrbcacrtfctrsCertificateDescription' - The CA certificate description.
 --
--- * 'dcaccrsRegistrationConfig' - Information about the registration configuration.
+-- * 'dscrbcacrtfctrsRegistrationConfig' - Information about the registration configuration.
 --
--- * 'dcaccrsResponseStatus' - -- | The response status code.
+-- * 'dscrbcacrtfctrsResponseStatus' - -- | The response status code.
 describeCACertificateResponse
-    :: Int -- ^ 'dcaccrsResponseStatus'
+    :: Int -- ^ 'dscrbcacrtfctrsResponseStatus'
     -> DescribeCACertificateResponse
-describeCACertificateResponse pResponseStatus_ =
-  DescribeCACertificateResponse'
-    { _dcaccrsCertificateDescription = Nothing
-    , _dcaccrsRegistrationConfig = Nothing
-    , _dcaccrsResponseStatus = pResponseStatus_
-    }
-
+describeCACertificateResponse pResponseStatus_
+  = DescribeCACertificateResponse'{_dscrbcacrtfctrsCertificateDescription
+                                     = Nothing,
+                                   _dscrbcacrtfctrsRegistrationConfig = Nothing,
+                                   _dscrbcacrtfctrsResponseStatus =
+                                     pResponseStatus_}
 
 -- | The CA certificate description.
-dcaccrsCertificateDescription :: Lens' DescribeCACertificateResponse (Maybe CACertificateDescription)
-dcaccrsCertificateDescription = lens _dcaccrsCertificateDescription (\ s a -> s{_dcaccrsCertificateDescription = a})
+dscrbcacrtfctrsCertificateDescription :: Lens' DescribeCACertificateResponse (Maybe CACertificateDescription)
+dscrbcacrtfctrsCertificateDescription = lens _dscrbcacrtfctrsCertificateDescription (\ s a -> s{_dscrbcacrtfctrsCertificateDescription = a})
 
 -- | Information about the registration configuration.
-dcaccrsRegistrationConfig :: Lens' DescribeCACertificateResponse (Maybe RegistrationConfig)
-dcaccrsRegistrationConfig = lens _dcaccrsRegistrationConfig (\ s a -> s{_dcaccrsRegistrationConfig = a})
+dscrbcacrtfctrsRegistrationConfig :: Lens' DescribeCACertificateResponse (Maybe RegistrationConfig)
+dscrbcacrtfctrsRegistrationConfig = lens _dscrbcacrtfctrsRegistrationConfig (\ s a -> s{_dscrbcacrtfctrsRegistrationConfig = a})
 
 -- | -- | The response status code.
-dcaccrsResponseStatus :: Lens' DescribeCACertificateResponse Int
-dcaccrsResponseStatus = lens _dcaccrsResponseStatus (\ s a -> s{_dcaccrsResponseStatus = a})
+dscrbcacrtfctrsResponseStatus :: Lens' DescribeCACertificateResponse Int
+dscrbcacrtfctrsResponseStatus = lens _dscrbcacrtfctrsResponseStatus (\ s a -> s{_dscrbcacrtfctrsResponseStatus = a})
 
 instance NFData DescribeCACertificateResponse where

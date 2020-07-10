@@ -21,7 +21,7 @@
 -- Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port.
 --
 --
--- For more information about updating your SSL certificate, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html Replace the SSL Certificate for Your Load Balancer> in the /Classic Load Balancer Guide/ .
+-- For more information about updating your SSL certificate, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html Replace the SSL Certificate for Your Load Balancer> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.SetLoadBalancerListenerSSLCertificate
     (
@@ -52,12 +52,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setLoadBalancerListenerSSLCertificate' smart constructor.
-data SetLoadBalancerListenerSSLCertificate = SetLoadBalancerListenerSSLCertificate'
-  { _slblscLoadBalancerName :: !Text
-  , _slblscLoadBalancerPort :: !Int
-  , _slblscSSLCertificateId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetLoadBalancerListenerSSLCertificate = SetLoadBalancerListenerSSLCertificate'{_slblscLoadBalancerName
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _slblscLoadBalancerPort
+                                                                                    ::
+                                                                                    !Int,
+                                                                                    _slblscSSLCertificateId
+                                                                                    ::
+                                                                                    !Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'SetLoadBalancerListenerSSLCertificate' with the minimum fields required to make a request.
 --
@@ -73,13 +78,15 @@ setLoadBalancerListenerSSLCertificate
     -> Int -- ^ 'slblscLoadBalancerPort'
     -> Text -- ^ 'slblscSSLCertificateId'
     -> SetLoadBalancerListenerSSLCertificate
-setLoadBalancerListenerSSLCertificate pLoadBalancerName_ pLoadBalancerPort_ pSSLCertificateId_ =
-  SetLoadBalancerListenerSSLCertificate'
-    { _slblscLoadBalancerName = pLoadBalancerName_
-    , _slblscLoadBalancerPort = pLoadBalancerPort_
-    , _slblscSSLCertificateId = pSSLCertificateId_
-    }
-
+setLoadBalancerListenerSSLCertificate
+  pLoadBalancerName_ pLoadBalancerPort_
+  pSSLCertificateId_
+  = SetLoadBalancerListenerSSLCertificate'{_slblscLoadBalancerName
+                                             = pLoadBalancerName_,
+                                           _slblscLoadBalancerPort =
+                                             pLoadBalancerPort_,
+                                           _slblscSSLCertificateId =
+                                             pSSLCertificateId_}
 
 -- | The name of the load balancer.
 slblscLoadBalancerName :: Lens' SetLoadBalancerListenerSSLCertificate Text
@@ -140,10 +147,13 @@ instance ToQuery
 --
 --
 -- /See:/ 'setLoadBalancerListenerSSLCertificateResponse' smart constructor.
-newtype SetLoadBalancerListenerSSLCertificateResponse = SetLoadBalancerListenerSSLCertificateResponse'
-  { _slblscrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetLoadBalancerListenerSSLCertificateResponse = SetLoadBalancerListenerSSLCertificateResponse'{_slblscrsResponseStatus
+                                                                                                       ::
+                                                                                                       Int}
+                                                          deriving (Eq, Read,
+                                                                    Show, Data,
+                                                                    Typeable,
+                                                                    Generic)
 
 -- | Creates a value of 'SetLoadBalancerListenerSSLCertificateResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +163,10 @@ newtype SetLoadBalancerListenerSSLCertificateResponse = SetLoadBalancerListenerS
 setLoadBalancerListenerSSLCertificateResponse
     :: Int -- ^ 'slblscrsResponseStatus'
     -> SetLoadBalancerListenerSSLCertificateResponse
-setLoadBalancerListenerSSLCertificateResponse pResponseStatus_ =
-  SetLoadBalancerListenerSSLCertificateResponse'
-    {_slblscrsResponseStatus = pResponseStatus_}
-
+setLoadBalancerListenerSSLCertificateResponse
+  pResponseStatus_
+  = SetLoadBalancerListenerSSLCertificateResponse'{_slblscrsResponseStatus
+                                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 slblscrsResponseStatus :: Lens' SetLoadBalancerListenerSSLCertificateResponse Int

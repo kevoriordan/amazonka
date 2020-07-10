@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setV2LoggingLevel' smart constructor.
-data SetV2LoggingLevel = SetV2LoggingLevel'
-  { _svllLogTarget :: !LogTarget
-  , _svllLogLevel  :: !LogLevel
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetV2LoggingLevel = SetV2LoggingLevel'{_svllLogTarget
+                                            :: !LogTarget,
+                                            _svllLogLevel :: !LogLevel}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetV2LoggingLevel' with the minimum fields required to make a request.
 --
@@ -60,9 +59,9 @@ setV2LoggingLevel
     :: LogTarget -- ^ 'svllLogTarget'
     -> LogLevel -- ^ 'svllLogLevel'
     -> SetV2LoggingLevel
-setV2LoggingLevel pLogTarget_ pLogLevel_ =
-  SetV2LoggingLevel' {_svllLogTarget = pLogTarget_, _svllLogLevel = pLogLevel_}
-
+setV2LoggingLevel pLogTarget_ pLogLevel_
+  = SetV2LoggingLevel'{_svllLogTarget = pLogTarget_,
+                       _svllLogLevel = pLogLevel_}
 
 -- | The log target.
 svllLogTarget :: Lens' SetV2LoggingLevel LogTarget
@@ -98,16 +97,15 @@ instance ToQuery SetV2LoggingLevel where
         toQuery = const mempty
 
 -- | /See:/ 'setV2LoggingLevelResponse' smart constructor.
-data SetV2LoggingLevelResponse =
-  SetV2LoggingLevelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetV2LoggingLevelResponse = SetV2LoggingLevelResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'SetV2LoggingLevelResponse' with the minimum fields required to make a request.
 --
 setV2LoggingLevelResponse
     :: SetV2LoggingLevelResponse
-setV2LoggingLevelResponse = SetV2LoggingLevelResponse'
-
+setV2LoggingLevelResponse
+  = SetV2LoggingLevelResponse'
 
 instance NFData SetV2LoggingLevelResponse where

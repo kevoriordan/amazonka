@@ -52,11 +52,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updatePipelineNotifications' smart constructor.
-data UpdatePipelineNotifications = UpdatePipelineNotifications'
-  { _upnId            :: !Text
-  , _upnNotifications :: !Notifications
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePipelineNotifications = UpdatePipelineNotifications'{_upnId
+                                                                :: !Text,
+                                                                _upnNotifications
+                                                                ::
+                                                                !Notifications}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdatePipelineNotifications' with the minimum fields required to make a request.
 --
@@ -64,21 +66,20 @@ data UpdatePipelineNotifications = UpdatePipelineNotifications'
 --
 -- * 'upnId' - The identifier of the pipeline for which you want to change notification settings.
 --
--- * 'upnNotifications' - The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify to report job status. /Important:/ To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.     * __Progressing__ : The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process jobs that are added to this pipeline. This is the ARN that Amazon SNS returned when you created the topic.     * __Completed__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job. This is the ARN that Amazon SNS returned when you created the topic.     * __Warning__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition. This is the ARN that Amazon SNS returned when you created the topic.     * __Error__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition. This is the ARN that Amazon SNS returned when you created the topic.
+-- * 'upnNotifications' - The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify to report job status. /Important:/ To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.     * __Progressing__ : The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process jobs that are added to this pipeline. This is the ARN that Amazon SNS returned when you created the topic.     * __Complete__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job. This is the ARN that Amazon SNS returned when you created the topic.     * __Warning__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition. This is the ARN that Amazon SNS returned when you created the topic.     * __Error__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition. This is the ARN that Amazon SNS returned when you created the topic.
 updatePipelineNotifications
     :: Text -- ^ 'upnId'
     -> Notifications -- ^ 'upnNotifications'
     -> UpdatePipelineNotifications
-updatePipelineNotifications pId_ pNotifications_ =
-  UpdatePipelineNotifications'
-    {_upnId = pId_, _upnNotifications = pNotifications_}
-
+updatePipelineNotifications pId_ pNotifications_
+  = UpdatePipelineNotifications'{_upnId = pId_,
+                                 _upnNotifications = pNotifications_}
 
 -- | The identifier of the pipeline for which you want to change notification settings.
 upnId :: Lens' UpdatePipelineNotifications Text
 upnId = lens _upnId (\ s a -> s{_upnId = a})
 
--- | The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify to report job status. /Important:/ To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.     * __Progressing__ : The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process jobs that are added to this pipeline. This is the ARN that Amazon SNS returned when you created the topic.     * __Completed__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job. This is the ARN that Amazon SNS returned when you created the topic.     * __Warning__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition. This is the ARN that Amazon SNS returned when you created the topic.     * __Error__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition. This is the ARN that Amazon SNS returned when you created the topic.
+-- | The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify to report job status. /Important:/ To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.     * __Progressing__ : The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to process jobs that are added to this pipeline. This is the ARN that Amazon SNS returned when you created the topic.     * __Complete__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has finished processing a job. This is the ARN that Amazon SNS returned when you created the topic.     * __Warning__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters a warning condition. This is the ARN that Amazon SNS returned when you created the topic.     * __Error__ : The topic ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters an error condition. This is the ARN that Amazon SNS returned when you created the topic.
 upnNotifications :: Lens' UpdatePipelineNotifications Notifications
 upnNotifications = lens _upnNotifications (\ s a -> s{_upnNotifications = a})
 
@@ -119,11 +120,15 @@ instance ToQuery UpdatePipelineNotifications where
 --
 --
 -- /See:/ 'updatePipelineNotificationsResponse' smart constructor.
-data UpdatePipelineNotificationsResponse = UpdatePipelineNotificationsResponse'
-  { _upnrsPipeline       :: !(Maybe Pipeline)
-  , _upnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePipelineNotificationsResponse = UpdatePipelineNotificationsResponse'{_upnrsPipeline
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Pipeline),
+                                                                                _upnrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'UpdatePipelineNotificationsResponse' with the minimum fields required to make a request.
 --
@@ -135,10 +140,11 @@ data UpdatePipelineNotificationsResponse = UpdatePipelineNotificationsResponse'
 updatePipelineNotificationsResponse
     :: Int -- ^ 'upnrsResponseStatus'
     -> UpdatePipelineNotificationsResponse
-updatePipelineNotificationsResponse pResponseStatus_ =
-  UpdatePipelineNotificationsResponse'
-    {_upnrsPipeline = Nothing, _upnrsResponseStatus = pResponseStatus_}
-
+updatePipelineNotificationsResponse pResponseStatus_
+  = UpdatePipelineNotificationsResponse'{_upnrsPipeline
+                                           = Nothing,
+                                         _upnrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | A section of the response body that provides information about the pipeline associated with this notification.
 upnrsPipeline :: Lens' UpdatePipelineNotificationsResponse (Maybe Pipeline)

@@ -45,25 +45,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteTags' smart constructor.
-data DeleteTags = DeleteTags'
-  { _dtTags             :: !(Maybe [Tag])
-  , _dtConfigurationIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTags = DeleteTags'{_dtTags ::
+                              !(Maybe [Tag]),
+                              _dtConfigurationIds :: ![Text]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtTags' - Tags that you want to delete from one or more configuration items. Specify the tags that you want to delete in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@
+-- * 'dtTags' - Tags that you want to delete from one or more configuration items. Specify the tags that you want to delete in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@ 
 --
 -- * 'dtConfigurationIds' - A list of configuration items with tags that you want to delete.
 deleteTags
     :: DeleteTags
-deleteTags = DeleteTags' {_dtTags = Nothing, _dtConfigurationIds = mempty}
+deleteTags
+  = DeleteTags'{_dtTags = Nothing,
+                _dtConfigurationIds = mempty}
 
-
--- | Tags that you want to delete from one or more configuration items. Specify the tags that you want to delete in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@
+-- | Tags that you want to delete from one or more configuration items. Specify the tags that you want to delete in a /key/ -/value/ format. For example: @{"key": "serverType", "value": "webServer"}@ 
 dtTags :: Lens' DeleteTags [Tag]
 dtTags = lens _dtTags (\ s a -> s{_dtTags = a}) . _Default . _Coerce
 
@@ -107,10 +107,10 @@ instance ToQuery DeleteTags where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTagsResponse' smart constructor.
-newtype DeleteTagsResponse = DeleteTagsResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTagsResponse = DeleteTagsResponse'{_drsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteTagsResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +120,9 @@ newtype DeleteTagsResponse = DeleteTagsResponse'
 deleteTagsResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteTagsResponse
-deleteTagsResponse pResponseStatus_ =
-  DeleteTagsResponse' {_drsResponseStatus = pResponseStatus_}
-
+deleteTagsResponse pResponseStatus_
+  = DeleteTagsResponse'{_drsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeleteTagsResponse Int

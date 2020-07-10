@@ -21,6 +21,8 @@
 -- Returns a list of the requester's subscriptions. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a @NextToken@ is also returned. Use the @NextToken@ parameter in a new @ListSubscriptions@ call to get further results.
 --
 --
+-- This action is throttled at 30 transactions per second (TPS).
+--
 --
 -- This operation returns paginated results.
 module Network.AWS.SNS.ListSubscriptions
@@ -53,10 +55,9 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'listSubscriptions' smart constructor.
-newtype ListSubscriptions = ListSubscriptions'
-  { _lsNextToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListSubscriptions = ListSubscriptions'{_lsNextToken
+                                               :: Maybe Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSubscriptions' with the minimum fields required to make a request.
 --
@@ -65,8 +66,8 @@ newtype ListSubscriptions = ListSubscriptions'
 -- * 'lsNextToken' - Token returned by the previous @ListSubscriptions@ request.
 listSubscriptions
     :: ListSubscriptions
-listSubscriptions = ListSubscriptions' {_lsNextToken = Nothing}
-
+listSubscriptions
+  = ListSubscriptions'{_lsNextToken = Nothing}
 
 -- | Token returned by the previous @ListSubscriptions@ request.
 lsNextToken :: Lens' ListSubscriptions (Maybe Text)
@@ -113,12 +114,16 @@ instance ToQuery ListSubscriptions where
 --
 --
 -- /See:/ 'listSubscriptionsResponse' smart constructor.
-data ListSubscriptionsResponse = ListSubscriptionsResponse'
-  { _lsrsNextToken      :: !(Maybe Text)
-  , _lsrsSubscriptions  :: !(Maybe [Subscription])
-  , _lsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSubscriptionsResponse = ListSubscriptionsResponse'{_lsrsNextToken
+                                                            :: !(Maybe Text),
+                                                            _lsrsSubscriptions
+                                                            ::
+                                                            !(Maybe
+                                                                [Subscription]),
+                                                            _lsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +137,11 @@ data ListSubscriptionsResponse = ListSubscriptionsResponse'
 listSubscriptionsResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListSubscriptionsResponse
-listSubscriptionsResponse pResponseStatus_ =
-  ListSubscriptionsResponse'
-    { _lsrsNextToken = Nothing
-    , _lsrsSubscriptions = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
-
+listSubscriptionsResponse pResponseStatus_
+  = ListSubscriptionsResponse'{_lsrsNextToken =
+                                 Nothing,
+                               _lsrsSubscriptions = Nothing,
+                               _lsrsResponseStatus = pResponseStatus_}
 
 -- | Token to pass along to the next @ListSubscriptions@ request. This element is returned if there are more subscriptions to retrieve.
 lsrsNextToken :: Lens' ListSubscriptionsResponse (Maybe Text)

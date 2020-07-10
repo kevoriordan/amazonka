@@ -34,9 +34,10 @@ module Network.AWS.ServiceCatalog.DescribeProduct
     , describeProductResponse
     , DescribeProductResponse
     -- * Response Lenses
-    , ddrsProductViewSummary
-    , ddrsProvisioningArtifacts
-    , ddrsResponseStatus
+    , dscrbprdctrsProductViewSummary
+    , dscrbprdctrsProvisioningArtifacts
+    , dscrbprdctrsBudgets
+    , dscrbprdctrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -47,11 +48,10 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describeProduct' smart constructor.
-data DescribeProduct = DescribeProduct'
-  { _dpAcceptLanguage :: !(Maybe Text)
-  , _dpId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProduct = DescribeProduct'{_dpAcceptLanguage
+                                        :: !(Maybe Text),
+                                        _dpId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeProduct' with the minimum fields required to make a request.
 --
@@ -63,9 +63,9 @@ data DescribeProduct = DescribeProduct'
 describeProduct
     :: Text -- ^ 'dpId'
     -> DescribeProduct
-describeProduct pId_ =
-  DescribeProduct' {_dpAcceptLanguage = Nothing, _dpId = pId_}
-
+describeProduct pId_
+  = DescribeProduct'{_dpAcceptLanguage = Nothing,
+                     _dpId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 dpAcceptLanguage :: Lens' DescribeProduct (Maybe Text)
@@ -84,6 +84,7 @@ instance AWSRequest DescribeProduct where
                  DescribeProductResponse' <$>
                    (x .?> "ProductViewSummary") <*>
                      (x .?> "ProvisioningArtifacts" .!@ mempty)
+                     <*> (x .?> "Budgets" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable DescribeProduct where
@@ -114,43 +115,56 @@ instance ToQuery DescribeProduct where
         toQuery = const mempty
 
 -- | /See:/ 'describeProductResponse' smart constructor.
-data DescribeProductResponse = DescribeProductResponse'
-  { _ddrsProductViewSummary    :: !(Maybe ProductViewSummary)
-  , _ddrsProvisioningArtifacts :: !(Maybe [ProvisioningArtifact])
-  , _ddrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProductResponse = DescribeProductResponse'{_dscrbprdctrsProductViewSummary
+                                                        ::
+                                                        !(Maybe
+                                                            ProductViewSummary),
+                                                        _dscrbprdctrsProvisioningArtifacts
+                                                        ::
+                                                        !(Maybe
+                                                            [ProvisioningArtifact]),
+                                                        _dscrbprdctrsBudgets ::
+                                                        !(Maybe [BudgetDetail]),
+                                                        _dscrbprdctrsResponseStatus
+                                                        :: !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeProductResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddrsProductViewSummary' - Summary information about the product view.
+-- * 'dscrbprdctrsProductViewSummary' - Summary information about the product view.
 --
--- * 'ddrsProvisioningArtifacts' - Information about the provisioning artifacts for the specified product.
+-- * 'dscrbprdctrsProvisioningArtifacts' - Information about the provisioning artifacts for the specified product.
 --
--- * 'ddrsResponseStatus' - -- | The response status code.
+-- * 'dscrbprdctrsBudgets' - Information about the associated budgets.
+--
+-- * 'dscrbprdctrsResponseStatus' - -- | The response status code.
 describeProductResponse
-    :: Int -- ^ 'ddrsResponseStatus'
+    :: Int -- ^ 'dscrbprdctrsResponseStatus'
     -> DescribeProductResponse
-describeProductResponse pResponseStatus_ =
-  DescribeProductResponse'
-    { _ddrsProductViewSummary = Nothing
-    , _ddrsProvisioningArtifacts = Nothing
-    , _ddrsResponseStatus = pResponseStatus_
-    }
-
+describeProductResponse pResponseStatus_
+  = DescribeProductResponse'{_dscrbprdctrsProductViewSummary
+                               = Nothing,
+                             _dscrbprdctrsProvisioningArtifacts = Nothing,
+                             _dscrbprdctrsBudgets = Nothing,
+                             _dscrbprdctrsResponseStatus = pResponseStatus_}
 
 -- | Summary information about the product view.
-ddrsProductViewSummary :: Lens' DescribeProductResponse (Maybe ProductViewSummary)
-ddrsProductViewSummary = lens _ddrsProductViewSummary (\ s a -> s{_ddrsProductViewSummary = a})
+dscrbprdctrsProductViewSummary :: Lens' DescribeProductResponse (Maybe ProductViewSummary)
+dscrbprdctrsProductViewSummary = lens _dscrbprdctrsProductViewSummary (\ s a -> s{_dscrbprdctrsProductViewSummary = a})
 
 -- | Information about the provisioning artifacts for the specified product.
-ddrsProvisioningArtifacts :: Lens' DescribeProductResponse [ProvisioningArtifact]
-ddrsProvisioningArtifacts = lens _ddrsProvisioningArtifacts (\ s a -> s{_ddrsProvisioningArtifacts = a}) . _Default . _Coerce
+dscrbprdctrsProvisioningArtifacts :: Lens' DescribeProductResponse [ProvisioningArtifact]
+dscrbprdctrsProvisioningArtifacts = lens _dscrbprdctrsProvisioningArtifacts (\ s a -> s{_dscrbprdctrsProvisioningArtifacts = a}) . _Default . _Coerce
+
+-- | Information about the associated budgets.
+dscrbprdctrsBudgets :: Lens' DescribeProductResponse [BudgetDetail]
+dscrbprdctrsBudgets = lens _dscrbprdctrsBudgets (\ s a -> s{_dscrbprdctrsBudgets = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
-ddrsResponseStatus :: Lens' DescribeProductResponse Int
-ddrsResponseStatus = lens _ddrsResponseStatus (\ s a -> s{_ddrsResponseStatus = a})
+dscrbprdctrsResponseStatus :: Lens' DescribeProductResponse Int
+dscrbprdctrsResponseStatus = lens _dscrbprdctrsResponseStatus (\ s a -> s{_dscrbprdctrsResponseStatus = a})
 
 instance NFData DescribeProductResponse where

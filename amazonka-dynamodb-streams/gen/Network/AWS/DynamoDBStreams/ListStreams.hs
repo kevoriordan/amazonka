@@ -52,33 +52,28 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listStreams' smart constructor.
-data ListStreams = ListStreams'
-  { _lsExclusiveStartStreamARN :: !(Maybe Text)
-  , _lsLimit                   :: !(Maybe Nat)
-  , _lsTableName               :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreams = ListStreams'{_lsExclusiveStartStreamARN
+                                :: !(Maybe Text),
+                                _lsLimit :: !(Maybe Nat),
+                                _lsTableName :: !(Maybe Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreams' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lsExclusiveStartStreamARN' - The ARN (Amazon Resource Name) of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedStreamArn@ in the previous operation.
+-- * 'lsExclusiveStartStreamARN' - The ARN (Amazon Resource Name) of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedStreamArn@ in the previous operation. 
 --
 -- * 'lsLimit' - The maximum number of streams to return. The upper limit is 100.
 --
 -- * 'lsTableName' - If this parameter is provided, then only the streams associated with this table name are returned.
 listStreams
     :: ListStreams
-listStreams =
-  ListStreams'
-    { _lsExclusiveStartStreamARN = Nothing
-    , _lsLimit = Nothing
-    , _lsTableName = Nothing
-    }
+listStreams
+  = ListStreams'{_lsExclusiveStartStreamARN = Nothing,
+                 _lsLimit = Nothing, _lsTableName = Nothing}
 
-
--- | The ARN (Amazon Resource Name) of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedStreamArn@ in the previous operation.
+-- | The ARN (Amazon Resource Name) of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedStreamArn@ in the previous operation. 
 lsExclusiveStartStreamARN :: Lens' ListStreams (Maybe Text)
 lsExclusiveStartStreamARN = lens _lsExclusiveStartStreamARN (\ s a -> s{_lsExclusiveStartStreamARN = a})
 
@@ -135,12 +130,12 @@ instance ToQuery ListStreams where
 --
 --
 -- /See:/ 'listStreamsResponse' smart constructor.
-data ListStreamsResponse = ListStreamsResponse'
-  { _lsrsLastEvaluatedStreamARN :: !(Maybe Text)
-  , _lsrsStreams                :: !(Maybe [Stream])
-  , _lsrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreamsResponse = ListStreamsResponse'{_lsrsLastEvaluatedStreamARN
+                                                :: !(Maybe Text),
+                                                _lsrsStreams ::
+                                                !(Maybe [Stream]),
+                                                _lsrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreamsResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +149,11 @@ data ListStreamsResponse = ListStreamsResponse'
 listStreamsResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListStreamsResponse
-listStreamsResponse pResponseStatus_ =
-  ListStreamsResponse'
-    { _lsrsLastEvaluatedStreamARN = Nothing
-    , _lsrsStreams = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
-
+listStreamsResponse pResponseStatus_
+  = ListStreamsResponse'{_lsrsLastEvaluatedStreamARN =
+                           Nothing,
+                         _lsrsStreams = Nothing,
+                         _lsrsResponseStatus = pResponseStatus_}
 
 -- | The stream ARN of the item where the operation stopped, inclusive of the previous result set. Use this value to start a new operation, excluding this value in the new request. If @LastEvaluatedStreamArn@ is empty, then the "last page" of results has been processed and there is no more data to be retrieved. If @LastEvaluatedStreamArn@ is not empty, it does not necessarily mean that there is more data in the result set. The only way to know when you have reached the end of the result set is when @LastEvaluatedStreamArn@ is empty.
 lsrsLastEvaluatedStreamARN :: Lens' ListStreamsResponse (Maybe Text)

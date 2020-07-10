@@ -21,6 +21,8 @@
 -- Returns an array of 'ActivatedRule' objects.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WAF.ListActivatedRulesInRuleGroup
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.WAF.ListActivatedRulesInRuleGroup
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,20 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'listActivatedRulesInRuleGroup' smart constructor.
-data ListActivatedRulesInRuleGroup = ListActivatedRulesInRuleGroup'
-  { _larirgRuleGroupId :: !(Maybe Text)
-  , _larirgNextMarker  :: !(Maybe Text)
-  , _larirgLimit       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListActivatedRulesInRuleGroup = ListActivatedRulesInRuleGroup'{_larirgRuleGroupId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _larirgNextMarker
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _larirgLimit
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Nat)}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListActivatedRulesInRuleGroup' with the minimum fields required to make a request.
 --
@@ -66,13 +77,11 @@ data ListActivatedRulesInRuleGroup = ListActivatedRulesInRuleGroup'
 -- * 'larirgLimit' - Specifies the number of @ActivatedRules@ that you want AWS WAF to return for this request. If you have more @ActivatedRules@ than the number that you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @ActivatedRules@ .
 listActivatedRulesInRuleGroup
     :: ListActivatedRulesInRuleGroup
-listActivatedRulesInRuleGroup =
-  ListActivatedRulesInRuleGroup'
-    { _larirgRuleGroupId = Nothing
-    , _larirgNextMarker = Nothing
-    , _larirgLimit = Nothing
-    }
-
+listActivatedRulesInRuleGroup
+  = ListActivatedRulesInRuleGroup'{_larirgRuleGroupId =
+                                     Nothing,
+                                   _larirgNextMarker = Nothing,
+                                   _larirgLimit = Nothing}
 
 -- | The @RuleGroupId@ of the 'RuleGroup' for which you want to get a list of 'ActivatedRule' objects.
 larirgRuleGroupId :: Lens' ListActivatedRulesInRuleGroup (Maybe Text)
@@ -85,6 +94,14 @@ larirgNextMarker = lens _larirgNextMarker (\ s a -> s{_larirgNextMarker = a})
 -- | Specifies the number of @ActivatedRules@ that you want AWS WAF to return for this request. If you have more @ActivatedRules@ than the number that you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @ActivatedRules@ .
 larirgLimit :: Lens' ListActivatedRulesInRuleGroup (Maybe Natural)
 larirgLimit = lens _larirgLimit (\ s a -> s{_larirgLimit = a}) . mapping _Nat
+
+instance AWSPager ListActivatedRulesInRuleGroup where
+        page rq rs
+          | stop (rs ^. larirgrsNextMarker) = Nothing
+          | stop (rs ^. larirgrsActivatedRules) = Nothing
+          | otherwise =
+            Just $ rq &
+              larirgNextMarker .~ rs ^. larirgrsNextMarker
 
 instance AWSRequest ListActivatedRulesInRuleGroup
          where
@@ -129,12 +146,19 @@ instance ToQuery ListActivatedRulesInRuleGroup where
         toQuery = const mempty
 
 -- | /See:/ 'listActivatedRulesInRuleGroupResponse' smart constructor.
-data ListActivatedRulesInRuleGroupResponse = ListActivatedRulesInRuleGroupResponse'
-  { _larirgrsNextMarker     :: !(Maybe Text)
-  , _larirgrsActivatedRules :: !(Maybe [ActivatedRule])
-  , _larirgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListActivatedRulesInRuleGroupResponse = ListActivatedRulesInRuleGroupResponse'{_larirgrsNextMarker
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _larirgrsActivatedRules
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [ActivatedRule]),
+                                                                                    _larirgrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'ListActivatedRulesInRuleGroupResponse' with the minimum fields required to make a request.
 --
@@ -148,13 +172,13 @@ data ListActivatedRulesInRuleGroupResponse = ListActivatedRulesInRuleGroupRespon
 listActivatedRulesInRuleGroupResponse
     :: Int -- ^ 'larirgrsResponseStatus'
     -> ListActivatedRulesInRuleGroupResponse
-listActivatedRulesInRuleGroupResponse pResponseStatus_ =
-  ListActivatedRulesInRuleGroupResponse'
-    { _larirgrsNextMarker = Nothing
-    , _larirgrsActivatedRules = Nothing
-    , _larirgrsResponseStatus = pResponseStatus_
-    }
-
+listActivatedRulesInRuleGroupResponse
+  pResponseStatus_
+  = ListActivatedRulesInRuleGroupResponse'{_larirgrsNextMarker
+                                             = Nothing,
+                                           _larirgrsActivatedRules = Nothing,
+                                           _larirgrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | If you have more @ActivatedRules@ than the number that you specified for @Limit@ in the request, the response includes a @NextMarker@ value. To list more @ActivatedRules@ , submit another @ListActivatedRulesInRuleGroup@ request, and specify the @NextMarker@ value from the response in the @NextMarker@ value in the next request.
 larirgrsNextMarker :: Lens' ListActivatedRulesInRuleGroupResponse (Maybe Text)

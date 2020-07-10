@@ -45,18 +45,41 @@ library
 
     exposed-modules:
           Network.AWS.KinesisVideoArchivedMedia
+        , Network.AWS.KinesisVideoArchivedMedia.GetClip
+        , Network.AWS.KinesisVideoArchivedMedia.GetDASHStreamingSessionURL
+        , Network.AWS.KinesisVideoArchivedMedia.GetHLSStreamingSessionURL
         , Network.AWS.KinesisVideoArchivedMedia.GetMediaForFragmentList
         , Network.AWS.KinesisVideoArchivedMedia.ListFragments
         , Network.AWS.KinesisVideoArchivedMedia.Types
         , Network.AWS.KinesisVideoArchivedMedia.Waiters
 
     other-modules:
-          Network.AWS.KinesisVideoArchivedMedia.Types.Product
-        , Network.AWS.KinesisVideoArchivedMedia.Types.Sum
+          Network.AWS.KinesisVideoArchivedMedia.Types.ClipFragmentSelector
+        , Network.AWS.KinesisVideoArchivedMedia.Types.ClipFragmentSelectorType
+        , Network.AWS.KinesisVideoArchivedMedia.Types.ClipTimestampRange
+        , Network.AWS.KinesisVideoArchivedMedia.Types.ContainerFormat
+        , Network.AWS.KinesisVideoArchivedMedia.Types.DASHDisplayFragmentNumber
+        , Network.AWS.KinesisVideoArchivedMedia.Types.DASHDisplayFragmentTimestamp
+        , Network.AWS.KinesisVideoArchivedMedia.Types.DASHFragmentSelector
+        , Network.AWS.KinesisVideoArchivedMedia.Types.DASHFragmentSelectorType
+        , Network.AWS.KinesisVideoArchivedMedia.Types.DASHPlaybackMode
+        , Network.AWS.KinesisVideoArchivedMedia.Types.DASHTimestampRange
+        , Network.AWS.KinesisVideoArchivedMedia.Types.Fragment
+        , Network.AWS.KinesisVideoArchivedMedia.Types.FragmentSelector
+        , Network.AWS.KinesisVideoArchivedMedia.Types.FragmentSelectorType
+        , Network.AWS.KinesisVideoArchivedMedia.Types.HLSDiscontinuityMode
+        , Network.AWS.KinesisVideoArchivedMedia.Types.HLSDisplayFragmentTimestamp
+        , Network.AWS.KinesisVideoArchivedMedia.Types.HLSFragmentSelector
+        , Network.AWS.KinesisVideoArchivedMedia.Types.HLSFragmentSelectorType
+        , Network.AWS.KinesisVideoArchivedMedia.Types.HLSPlaybackMode
+        , Network.AWS.KinesisVideoArchivedMedia.Types.HLSTimestampRange
+        , Network.AWS.KinesisVideoArchivedMedia.Types.Product
+        , Network.AWS.KinesisVideoArchivedMedia.Types.TimestampRange
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-kinesis-video-archived-media-test
     type:              exitcode-stdio-1.0
@@ -80,6 +103,7 @@ test-suite amazonka-kinesis-video-archived-media-test
         , amazonka-kinesis-video-archived-media
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

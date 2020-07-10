@@ -27,6 +27,7 @@ module Network.AWS.CodePipeline.CreatePipeline
       createPipeline
     , CreatePipeline
     -- * Request Lenses
+    , cpTags
     , cpPipeline
 
     -- * Destructuring the Response
@@ -34,6 +35,7 @@ module Network.AWS.CodePipeline.CreatePipeline
     , CreatePipelineResponse
     -- * Response Lenses
     , cprsPipeline
+    , cprsTags
     , cprsResponseStatus
     ) where
 
@@ -44,28 +46,35 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a CreatePipeline action.
+-- | Represents the input of a @CreatePipeline@ action.
 --
 --
 --
 -- /See:/ 'createPipeline' smart constructor.
-newtype CreatePipeline = CreatePipeline'
-  { _cpPipeline :: PipelineDeclaration
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePipeline = CreatePipeline'{_cpTags ::
+                                      !(Maybe [Tag]),
+                                      _cpPipeline :: !PipelineDeclaration}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePipeline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpPipeline' - Represents the structure of actions and stages to be performed in the pipeline.
+-- * 'cpTags' - The tags for the pipeline.
+--
+-- * 'cpPipeline' - Represents the structure of actions and stages to be performed in the pipeline. 
 createPipeline
     :: PipelineDeclaration -- ^ 'cpPipeline'
     -> CreatePipeline
-createPipeline pPipeline_ = CreatePipeline' {_cpPipeline = pPipeline_}
+createPipeline pPipeline_
+  = CreatePipeline'{_cpTags = Nothing,
+                    _cpPipeline = pPipeline_}
 
+-- | The tags for the pipeline.
+cpTags :: Lens' CreatePipeline [Tag]
+cpTags = lens _cpTags (\ s a -> s{_cpTags = a}) . _Default . _Coerce
 
--- | Represents the structure of actions and stages to be performed in the pipeline.
+-- | Represents the structure of actions and stages to be performed in the pipeline. 
 cpPipeline :: Lens' CreatePipeline PipelineDeclaration
 cpPipeline = lens _cpPipeline (\ s a -> s{_cpPipeline = a})
 
@@ -76,7 +85,8 @@ instance AWSRequest CreatePipeline where
           = receiveJSON
               (\ s h x ->
                  CreatePipelineResponse' <$>
-                   (x .?> "pipeline") <*> (pure (fromEnum s)))
+                   (x .?> "pipeline") <*> (x .?> "tags" .!@ mempty) <*>
+                     (pure (fromEnum s)))
 
 instance Hashable CreatePipeline where
 
@@ -95,7 +105,9 @@ instance ToHeaders CreatePipeline where
 instance ToJSON CreatePipeline where
         toJSON CreatePipeline'{..}
           = object
-              (catMaybes [Just ("pipeline" .= _cpPipeline)])
+              (catMaybes
+                 [("tags" .=) <$> _cpTags,
+                  Just ("pipeline" .= _cpPipeline)])
 
 instance ToPath CreatePipeline where
         toPath = const "/"
@@ -103,35 +115,46 @@ instance ToPath CreatePipeline where
 instance ToQuery CreatePipeline where
         toQuery = const mempty
 
--- | Represents the output of a CreatePipeline action.
+-- | Represents the output of a @CreatePipeline@ action.
 --
 --
 --
 -- /See:/ 'createPipelineResponse' smart constructor.
-data CreatePipelineResponse = CreatePipelineResponse'
-  { _cprsPipeline       :: !(Maybe PipelineDeclaration)
-  , _cprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePipelineResponse = CreatePipelineResponse'{_cprsPipeline
+                                                      ::
+                                                      !(Maybe
+                                                          PipelineDeclaration),
+                                                      _cprsTags ::
+                                                      !(Maybe [Tag]),
+                                                      _cprsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreatePipelineResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cprsPipeline' - Represents the structure of actions and stages to be performed in the pipeline.
+-- * 'cprsPipeline' - Represents the structure of actions and stages to be performed in the pipeline. 
+--
+-- * 'cprsTags' - Specifies the tags applied to the pipeline.
 --
 -- * 'cprsResponseStatus' - -- | The response status code.
 createPipelineResponse
     :: Int -- ^ 'cprsResponseStatus'
     -> CreatePipelineResponse
-createPipelineResponse pResponseStatus_ =
-  CreatePipelineResponse'
-    {_cprsPipeline = Nothing, _cprsResponseStatus = pResponseStatus_}
+createPipelineResponse pResponseStatus_
+  = CreatePipelineResponse'{_cprsPipeline = Nothing,
+                            _cprsTags = Nothing,
+                            _cprsResponseStatus = pResponseStatus_}
 
-
--- | Represents the structure of actions and stages to be performed in the pipeline.
+-- | Represents the structure of actions and stages to be performed in the pipeline. 
 cprsPipeline :: Lens' CreatePipelineResponse (Maybe PipelineDeclaration)
 cprsPipeline = lens _cprsPipeline (\ s a -> s{_cprsPipeline = a})
+
+-- | Specifies the tags applied to the pipeline.
+cprsTags :: Lens' CreatePipelineResponse [Tag]
+cprsTags = lens _cprsTags (\ s a -> s{_cprsTags = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
 cprsResponseStatus :: Lens' CreatePipelineResponse Int

@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates one of the following entry records associated with the domain: A record, CNAME record, TXT record, or MX record.
+-- Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).
 --
+--
+-- The @create domain entry@ operation supports tag-based access control via resource tags applied to the resource identified by @domain name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
 --
 module Network.AWS.Lightsail.CreateDomainEntry
     (
@@ -46,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDomainEntry' smart constructor.
-data CreateDomainEntry = CreateDomainEntry'
-  { _cdeDomainName  :: !Text
-  , _cdeDomainEntry :: !DomainEntry
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDomainEntry = CreateDomainEntry'{_cdeDomainName
+                                            :: !Text,
+                                            _cdeDomainEntry :: !DomainEntry}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDomainEntry' with the minimum fields required to make a request.
 --
@@ -63,10 +64,9 @@ createDomainEntry
     :: Text -- ^ 'cdeDomainName'
     -> DomainEntry -- ^ 'cdeDomainEntry'
     -> CreateDomainEntry
-createDomainEntry pDomainName_ pDomainEntry_ =
-  CreateDomainEntry'
-    {_cdeDomainName = pDomainName_, _cdeDomainEntry = pDomainEntry_}
-
+createDomainEntry pDomainName_ pDomainEntry_
+  = CreateDomainEntry'{_cdeDomainName = pDomainName_,
+                       _cdeDomainEntry = pDomainEntry_}
 
 -- | The domain name (e.g., @example.com@ ) for which you want to create the domain entry.
 cdeDomainName :: Lens' CreateDomainEntry Text
@@ -113,28 +113,30 @@ instance ToQuery CreateDomainEntry where
         toQuery = const mempty
 
 -- | /See:/ 'createDomainEntryResponse' smart constructor.
-data CreateDomainEntryResponse = CreateDomainEntryResponse'
-  { _cdersOperation      :: !(Maybe Operation)
-  , _cdersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDomainEntryResponse = CreateDomainEntryResponse'{_cdersOperation
+                                                            ::
+                                                            !(Maybe Operation),
+                                                            _cdersResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateDomainEntryResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdersOperation' - An array of key-value pairs containing information about the operation.
+-- * 'cdersOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'cdersResponseStatus' - -- | The response status code.
 createDomainEntryResponse
     :: Int -- ^ 'cdersResponseStatus'
     -> CreateDomainEntryResponse
-createDomainEntryResponse pResponseStatus_ =
-  CreateDomainEntryResponse'
-    {_cdersOperation = Nothing, _cdersResponseStatus = pResponseStatus_}
+createDomainEntryResponse pResponseStatus_
+  = CreateDomainEntryResponse'{_cdersOperation =
+                                 Nothing,
+                               _cdersResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 cdersOperation :: Lens' CreateDomainEntryResponse (Maybe Operation)
 cdersOperation = lens _cdersOperation (\ s a -> s{_cdersOperation = a})
 

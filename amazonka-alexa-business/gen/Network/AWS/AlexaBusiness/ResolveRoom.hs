@@ -48,11 +48,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'resolveRoom' smart constructor.
-data ResolveRoom = ResolveRoom'
-  { _rrUserId  :: !Text
-  , _rrSkillId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResolveRoom = ResolveRoom'{_rrUserId :: !Text,
+                                _rrSkillId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResolveRoom' with the minimum fields required to make a request.
 --
@@ -65,9 +63,9 @@ resolveRoom
     :: Text -- ^ 'rrUserId'
     -> Text -- ^ 'rrSkillId'
     -> ResolveRoom
-resolveRoom pUserId_ pSkillId_ =
-  ResolveRoom' {_rrUserId = pUserId_, _rrSkillId = pSkillId_}
-
+resolveRoom pUserId_ pSkillId_
+  = ResolveRoom'{_rrUserId = pUserId_,
+                 _rrSkillId = pSkillId_}
 
 -- | The ARN of the user. Required.
 rrUserId :: Lens' ResolveRoom Text
@@ -116,13 +114,13 @@ instance ToQuery ResolveRoom where
         toQuery = const mempty
 
 -- | /See:/ 'resolveRoomResponse' smart constructor.
-data ResolveRoomResponse = ResolveRoomResponse'
-  { _rrrsRoomSkillParameters :: !(Maybe [RoomSkillParameter])
-  , _rrrsRoomARN             :: !(Maybe Text)
-  , _rrrsRoomName            :: !(Maybe Text)
-  , _rrrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResolveRoomResponse = ResolveRoomResponse'{_rrrsRoomSkillParameters
+                                                ::
+                                                !(Maybe [RoomSkillParameter]),
+                                                _rrrsRoomARN :: !(Maybe Text),
+                                                _rrrsRoomName :: !(Maybe Text),
+                                                _rrrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResolveRoomResponse' with the minimum fields required to make a request.
 --
@@ -138,14 +136,11 @@ data ResolveRoomResponse = ResolveRoomResponse'
 resolveRoomResponse
     :: Int -- ^ 'rrrsResponseStatus'
     -> ResolveRoomResponse
-resolveRoomResponse pResponseStatus_ =
-  ResolveRoomResponse'
-    { _rrrsRoomSkillParameters = Nothing
-    , _rrrsRoomARN = Nothing
-    , _rrrsRoomName = Nothing
-    , _rrrsResponseStatus = pResponseStatus_
-    }
-
+resolveRoomResponse pResponseStatus_
+  = ResolveRoomResponse'{_rrrsRoomSkillParameters =
+                           Nothing,
+                         _rrrsRoomARN = Nothing, _rrrsRoomName = Nothing,
+                         _rrrsResponseStatus = pResponseStatus_}
 
 -- | Response to get the room profile request. Required.
 rrrsRoomSkillParameters :: Lens' ResolveRoomResponse [RoomSkillParameter]

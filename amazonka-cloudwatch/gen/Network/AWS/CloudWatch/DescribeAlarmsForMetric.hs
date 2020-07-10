@@ -51,16 +51,21 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeAlarmsForMetric' smart constructor.
-data DescribeAlarmsForMetric = DescribeAlarmsForMetric'
-  { _dafmPeriod            :: !(Maybe Nat)
-  , _dafmDimensions        :: !(Maybe [Dimension])
-  , _dafmUnit              :: !(Maybe StandardUnit)
-  , _dafmStatistic         :: !(Maybe Statistic)
-  , _dafmExtendedStatistic :: !(Maybe Text)
-  , _dafmMetricName        :: !Text
-  , _dafmNamespace         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAlarmsForMetric = DescribeAlarmsForMetric'{_dafmPeriod
+                                                        :: !(Maybe Nat),
+                                                        _dafmDimensions ::
+                                                        !(Maybe [Dimension]),
+                                                        _dafmUnit ::
+                                                        !(Maybe StandardUnit),
+                                                        _dafmStatistic ::
+                                                        !(Maybe Statistic),
+                                                        _dafmExtendedStatistic
+                                                        :: !(Maybe Text),
+                                                        _dafmMetricName ::
+                                                        !Text,
+                                                        _dafmNamespace :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeAlarmsForMetric' with the minimum fields required to make a request.
 --
@@ -83,17 +88,13 @@ describeAlarmsForMetric
     :: Text -- ^ 'dafmMetricName'
     -> Text -- ^ 'dafmNamespace'
     -> DescribeAlarmsForMetric
-describeAlarmsForMetric pMetricName_ pNamespace_ =
-  DescribeAlarmsForMetric'
-    { _dafmPeriod = Nothing
-    , _dafmDimensions = Nothing
-    , _dafmUnit = Nothing
-    , _dafmStatistic = Nothing
-    , _dafmExtendedStatistic = Nothing
-    , _dafmMetricName = pMetricName_
-    , _dafmNamespace = pNamespace_
-    }
-
+describeAlarmsForMetric pMetricName_ pNamespace_
+  = DescribeAlarmsForMetric'{_dafmPeriod = Nothing,
+                             _dafmDimensions = Nothing, _dafmUnit = Nothing,
+                             _dafmStatistic = Nothing,
+                             _dafmExtendedStatistic = Nothing,
+                             _dafmMetricName = pMetricName_,
+                             _dafmNamespace = pNamespace_}
 
 -- | The period, in seconds, over which the statistic is applied.
 dafmPeriod :: Lens' DescribeAlarmsForMetric (Maybe Natural)
@@ -160,11 +161,14 @@ instance ToQuery DescribeAlarmsForMetric where
                "Namespace" =: _dafmNamespace]
 
 -- | /See:/ 'describeAlarmsForMetricResponse' smart constructor.
-data DescribeAlarmsForMetricResponse = DescribeAlarmsForMetricResponse'
-  { _dafmrsMetricAlarms   :: !(Maybe [MetricAlarm])
-  , _dafmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAlarmsForMetricResponse = DescribeAlarmsForMetricResponse'{_dafmrsMetricAlarms
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [MetricAlarm]),
+                                                                        _dafmrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeAlarmsForMetricResponse' with the minimum fields required to make a request.
 --
@@ -176,10 +180,10 @@ data DescribeAlarmsForMetricResponse = DescribeAlarmsForMetricResponse'
 describeAlarmsForMetricResponse
     :: Int -- ^ 'dafmrsResponseStatus'
     -> DescribeAlarmsForMetricResponse
-describeAlarmsForMetricResponse pResponseStatus_ =
-  DescribeAlarmsForMetricResponse'
-    {_dafmrsMetricAlarms = Nothing, _dafmrsResponseStatus = pResponseStatus_}
-
+describeAlarmsForMetricResponse pResponseStatus_
+  = DescribeAlarmsForMetricResponse'{_dafmrsMetricAlarms
+                                       = Nothing,
+                                     _dafmrsResponseStatus = pResponseStatus_}
 
 -- | The information for each alarm with the specified metric.
 dafmrsMetricAlarms :: Lens' DescribeAlarmsForMetricResponse [MetricAlarm]

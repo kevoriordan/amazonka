@@ -45,10 +45,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteJob' smart constructor.
-newtype DeleteJob = DeleteJob'
-  { _djJobName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteJob = DeleteJob'{_djJobName :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteJob' with the minimum fields required to make a request.
 --
@@ -58,8 +56,8 @@ newtype DeleteJob = DeleteJob'
 deleteJob
     :: Text -- ^ 'djJobName'
     -> DeleteJob
-deleteJob pJobName_ = DeleteJob' {_djJobName = pJobName_}
-
+deleteJob pJobName_
+  = DeleteJob'{_djJobName = pJobName_}
 
 -- | The name of the job definition to delete.
 djJobName :: Lens' DeleteJob Text
@@ -98,11 +96,10 @@ instance ToQuery DeleteJob where
         toQuery = const mempty
 
 -- | /See:/ 'deleteJobResponse' smart constructor.
-data DeleteJobResponse = DeleteJobResponse'
-  { _djrsJobName        :: !(Maybe Text)
-  , _djrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteJobResponse = DeleteJobResponse'{_djrsJobName
+                                            :: !(Maybe Text),
+                                            _djrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteJobResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +111,9 @@ data DeleteJobResponse = DeleteJobResponse'
 deleteJobResponse
     :: Int -- ^ 'djrsResponseStatus'
     -> DeleteJobResponse
-deleteJobResponse pResponseStatus_ =
-  DeleteJobResponse'
-    {_djrsJobName = Nothing, _djrsResponseStatus = pResponseStatus_}
-
+deleteJobResponse pResponseStatus_
+  = DeleteJobResponse'{_djrsJobName = Nothing,
+                       _djrsResponseStatus = pResponseStatus_}
 
 -- | The name of the job definition that was deleted.
 djrsJobName :: Lens' DeleteJobResponse (Maybe Text)

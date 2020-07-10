@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a specified stack. You must first delete all instances, layers, and apps or deregister registered instances. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html Shut Down a Stack> .
+-- Deletes a specified stack. You must first delete all instances, layers, and apps or deregister registered instances. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html Shut Down a Stack> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DeleteStack
     (
@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteStack' smart constructor.
-newtype DeleteStack = DeleteStack'
-  { _dsStackId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteStack = DeleteStack'{_dsStackId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteStack' with the minimum fields required to make a request.
 --
@@ -57,8 +56,8 @@ newtype DeleteStack = DeleteStack'
 deleteStack
     :: Text -- ^ 'dsStackId'
     -> DeleteStack
-deleteStack pStackId_ = DeleteStack' {_dsStackId = pStackId_}
-
+deleteStack pStackId_
+  = DeleteStack'{_dsStackId = pStackId_}
 
 -- | The stack ID.
 dsStackId :: Lens' DeleteStack Text
@@ -93,16 +92,13 @@ instance ToQuery DeleteStack where
         toQuery = const mempty
 
 -- | /See:/ 'deleteStackResponse' smart constructor.
-data DeleteStackResponse =
-  DeleteStackResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteStackResponse = DeleteStackResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteStackResponse' with the minimum fields required to make a request.
 --
 deleteStackResponse
     :: DeleteStackResponse
 deleteStackResponse = DeleteStackResponse'
-
 
 instance NFData DeleteStackResponse where

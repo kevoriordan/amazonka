@@ -19,6 +19,30 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.
+--
+--
+-- You can set the versioning state with one of the following values:
+--
+-- __Enabled__ —Enables versioning for the objects in the bucket. All objects added to the bucket receive a unique version ID.
+--
+-- __Suspended__ —Disables versioning for the objects in the bucket. All objects added to the bucket receive the version ID null.
+--
+-- If the versioning state has never been set on a bucket, it has no versioning state; a 'GetBucketVersioning' request does not return a versioning state value.
+--
+-- If the bucket owner enables MFA Delete in the bucket versioning configuration, the bucket owner must include the @x-amz-mfa request@ header and the @Status@ and the @MfaDelete@ request elements in a request to set the versioning state of the bucket.
+--
+-- /Important:/ If you have an object expiration lifecycle policy in your non-versioned bucket and you want to maintain the same permanent delete behavior when you enable versioning, you must add a noncurrent expiration policy. The noncurrent expiration lifecycle policy will manage the deletes of the noncurrent object versions in the version-enabled bucket. (A version-enabled bucket maintains one current and zero or more noncurrent object versions.) For more information, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-and-other-bucket-config Lifecycle and Versioning> .
+--
+-- __Related Resources__ 
+--
+--     * 'CreateBucket' 
+--
+--     * 'DeleteBucket' 
+--
+--     * 'GetBucketVersioning' 
+--
+--
+--
 module Network.AWS.S3.PutBucketVersioning
     (
     -- * Creating a Request
@@ -43,13 +67,13 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'putBucketVersioning' smart constructor.
-data PutBucketVersioning = PutBucketVersioning'
-  { _pbvMFA                     :: !(Maybe Text)
-  , _pbvContentMD5              :: !(Maybe Text)
-  , _pbvBucket                  :: !BucketName
-  , _pbvVersioningConfiguration :: !VersioningConfiguration
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutBucketVersioning = PutBucketVersioning'{_pbvMFA
+                                                :: !(Maybe Text),
+                                                _pbvContentMD5 :: !(Maybe Text),
+                                                _pbvBucket :: !BucketName,
+                                                _pbvVersioningConfiguration ::
+                                                !VersioningConfiguration}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutBucketVersioning' with the minimum fields required to make a request.
 --
@@ -57,37 +81,35 @@ data PutBucketVersioning = PutBucketVersioning'
 --
 -- * 'pbvMFA' - The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
 --
--- * 'pbvContentMD5' - Undocumented member.
+-- * 'pbvContentMD5' - >The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message integrity check to verify that the request body was not corrupted in transit. For more information, see <http://www.ietf.org/rfc/rfc1864.txt RFC 1864> .
 --
--- * 'pbvBucket' - Undocumented member.
+-- * 'pbvBucket' - The bucket name.
 --
--- * 'pbvVersioningConfiguration' - Undocumented member.
+-- * 'pbvVersioningConfiguration' - Container for setting the versioning state.
 putBucketVersioning
     :: BucketName -- ^ 'pbvBucket'
     -> VersioningConfiguration -- ^ 'pbvVersioningConfiguration'
     -> PutBucketVersioning
-putBucketVersioning pBucket_ pVersioningConfiguration_ =
-  PutBucketVersioning'
-    { _pbvMFA = Nothing
-    , _pbvContentMD5 = Nothing
-    , _pbvBucket = pBucket_
-    , _pbvVersioningConfiguration = pVersioningConfiguration_
-    }
-
+putBucketVersioning pBucket_
+  pVersioningConfiguration_
+  = PutBucketVersioning'{_pbvMFA = Nothing,
+                         _pbvContentMD5 = Nothing, _pbvBucket = pBucket_,
+                         _pbvVersioningConfiguration =
+                           pVersioningConfiguration_}
 
 -- | The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
 pbvMFA :: Lens' PutBucketVersioning (Maybe Text)
 pbvMFA = lens _pbvMFA (\ s a -> s{_pbvMFA = a})
 
--- | Undocumented member.
+-- | >The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message integrity check to verify that the request body was not corrupted in transit. For more information, see <http://www.ietf.org/rfc/rfc1864.txt RFC 1864> .
 pbvContentMD5 :: Lens' PutBucketVersioning (Maybe Text)
 pbvContentMD5 = lens _pbvContentMD5 (\ s a -> s{_pbvContentMD5 = a})
 
--- | Undocumented member.
+-- | The bucket name.
 pbvBucket :: Lens' PutBucketVersioning BucketName
 pbvBucket = lens _pbvBucket (\ s a -> s{_pbvBucket = a})
 
--- | Undocumented member.
+-- | Container for setting the versioning state.
 pbvVersioningConfiguration :: Lens' PutBucketVersioning VersioningConfiguration
 pbvVersioningConfiguration = lens _pbvVersioningConfiguration (\ s a -> s{_pbvVersioningConfiguration = a})
 
@@ -122,16 +144,15 @@ instance ToQuery PutBucketVersioning where
         toQuery = const (mconcat ["versioning"])
 
 -- | /See:/ 'putBucketVersioningResponse' smart constructor.
-data PutBucketVersioningResponse =
-  PutBucketVersioningResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutBucketVersioningResponse = PutBucketVersioningResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'PutBucketVersioningResponse' with the minimum fields required to make a request.
 --
 putBucketVersioningResponse
     :: PutBucketVersioningResponse
-putBucketVersioningResponse = PutBucketVersioningResponse'
-
+putBucketVersioningResponse
+  = PutBucketVersioningResponse'
 
 instance NFData PutBucketVersioningResponse where

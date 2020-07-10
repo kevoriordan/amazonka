@@ -27,8 +27,8 @@ module Network.AWS.APIGateway.GetStage
       getStage
     , GetStage
     -- * Request Lenses
-    , gssRestAPIId
-    , gssStageName
+    , gtstgRestAPIId
+    , gtstgStageName
 
     -- * Destructuring the Response
     , stage
@@ -39,11 +39,13 @@ module Network.AWS.APIGateway.GetStage
     , sAccessLogSettings
     , sDocumentationVersion
     , sClientCertificateId
+    , sTracingEnabled
     , sCreatedDate
     , sCacheClusterStatus
     , sMethodSettings
     , sLastUpdatedDate
     , sCacheClusterSize
+    , sWebACLARN
     , sCanarySettings
     , sCacheClusterEnabled
     , sStageName
@@ -63,34 +65,32 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getStage' smart constructor.
-data GetStage = GetStage'
-  { _gssRestAPIId :: !Text
-  , _gssStageName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetStage = GetStage'{_gtstgRestAPIId :: !Text,
+                          _gtstgStageName :: !Text}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetStage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gssRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
+-- * 'gtstgRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
--- * 'gssStageName' - [Required] The name of the 'Stage' resource to get information about.
+-- * 'gtstgStageName' - [Required] The name of the 'Stage' resource to get information about.
 getStage
-    :: Text -- ^ 'gssRestAPIId'
-    -> Text -- ^ 'gssStageName'
+    :: Text -- ^ 'gtstgRestAPIId'
+    -> Text -- ^ 'gtstgStageName'
     -> GetStage
-getStage pRestAPIId_ pStageName_ =
-  GetStage' {_gssRestAPIId = pRestAPIId_, _gssStageName = pStageName_}
-
+getStage pRestAPIId_ pStageName_
+  = GetStage'{_gtstgRestAPIId = pRestAPIId_,
+              _gtstgStageName = pStageName_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
-gssRestAPIId :: Lens' GetStage Text
-gssRestAPIId = lens _gssRestAPIId (\ s a -> s{_gssRestAPIId = a})
+gtstgRestAPIId :: Lens' GetStage Text
+gtstgRestAPIId = lens _gtstgRestAPIId (\ s a -> s{_gtstgRestAPIId = a})
 
 -- | [Required] The name of the 'Stage' resource to get information about.
-gssStageName :: Lens' GetStage Text
-gssStageName = lens _gssStageName (\ s a -> s{_gssStageName = a})
+gtstgStageName :: Lens' GetStage Text
+gtstgStageName = lens _gtstgStageName (\ s a -> s{_gtstgStageName = a})
 
 instance AWSRequest GetStage where
         type Rs GetStage = Stage
@@ -110,8 +110,8 @@ instance ToHeaders GetStage where
 instance ToPath GetStage where
         toPath GetStage'{..}
           = mconcat
-              ["/restapis/", toBS _gssRestAPIId, "/stages/",
-               toBS _gssStageName]
+              ["/restapis/", toBS _gtstgRestAPIId, "/stages/",
+               toBS _gtstgStageName]
 
 instance ToQuery GetStage where
         toQuery = const mempty

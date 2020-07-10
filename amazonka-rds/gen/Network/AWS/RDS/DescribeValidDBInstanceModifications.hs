@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- You can call 'DescribeValidDBInstanceModifications' to learn what modifications you can make to your DB instance. You can use this information when you call 'ModifyDBInstance' .
+-- You can call @DescribeValidDBInstanceModifications@ to learn what modifications you can make to your DB instance. You can use this information when you call @ModifyDBInstance@ . 
 --
 --
 module Network.AWS.RDS.DescribeValidDBInstanceModifications
@@ -44,30 +44,31 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeValidDBInstanceModifications' smart constructor.
-newtype DescribeValidDBInstanceModifications = DescribeValidDBInstanceModifications'
-  { _dvdimDBInstanceIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeValidDBInstanceModifications = DescribeValidDBInstanceModifications'{_dvdimDBInstanceIdentifier
+                                                                                     ::
+                                                                                     Text}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DescribeValidDBInstanceModifications' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvdimDBInstanceIdentifier' - The customer identifier or the ARN of your DB instance.
+-- * 'dvdimDBInstanceIdentifier' - The customer identifier or the ARN of your DB instance. 
 describeValidDBInstanceModifications
     :: Text -- ^ 'dvdimDBInstanceIdentifier'
     -> DescribeValidDBInstanceModifications
-describeValidDBInstanceModifications pDBInstanceIdentifier_ =
-  DescribeValidDBInstanceModifications'
-    {_dvdimDBInstanceIdentifier = pDBInstanceIdentifier_}
+describeValidDBInstanceModifications
+  pDBInstanceIdentifier_
+  = DescribeValidDBInstanceModifications'{_dvdimDBInstanceIdentifier
+                                            = pDBInstanceIdentifier_}
 
-
--- | The customer identifier or the ARN of your DB instance.
+-- | The customer identifier or the ARN of your DB instance. 
 dvdimDBInstanceIdentifier :: Lens' DescribeValidDBInstanceModifications Text
 dvdimDBInstanceIdentifier = lens _dvdimDBInstanceIdentifier (\ s a -> s{_dvdimDBInstanceIdentifier = a})
 
@@ -112,11 +113,16 @@ instance ToQuery DescribeValidDBInstanceModifications
                "DBInstanceIdentifier" =: _dvdimDBInstanceIdentifier]
 
 -- | /See:/ 'describeValidDBInstanceModificationsResponse' smart constructor.
-data DescribeValidDBInstanceModificationsResponse = DescribeValidDBInstanceModificationsResponse'
-  { _dvdimrsValidDBInstanceModificationsMessage :: !(Maybe ValidDBInstanceModificationsMessage)
-  , _dvdimrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeValidDBInstanceModificationsResponse = DescribeValidDBInstanceModificationsResponse'{_dvdimrsValidDBInstanceModificationsMessage
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      ValidDBInstanceModificationsMessage),
+                                                                                                  _dvdimrsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'DescribeValidDBInstanceModificationsResponse' with the minimum fields required to make a request.
 --
@@ -128,12 +134,12 @@ data DescribeValidDBInstanceModificationsResponse = DescribeValidDBInstanceModif
 describeValidDBInstanceModificationsResponse
     :: Int -- ^ 'dvdimrsResponseStatus'
     -> DescribeValidDBInstanceModificationsResponse
-describeValidDBInstanceModificationsResponse pResponseStatus_ =
-  DescribeValidDBInstanceModificationsResponse'
-    { _dvdimrsValidDBInstanceModificationsMessage = Nothing
-    , _dvdimrsResponseStatus = pResponseStatus_
-    }
-
+describeValidDBInstanceModificationsResponse
+  pResponseStatus_
+  = DescribeValidDBInstanceModificationsResponse'{_dvdimrsValidDBInstanceModificationsMessage
+                                                    = Nothing,
+                                                  _dvdimrsResponseStatus =
+                                                    pResponseStatus_}
 
 -- | Undocumented member.
 dvdimrsValidDBInstanceModificationsMessage :: Lens' DescribeValidDBInstanceModificationsResponse (Maybe ValidDBInstanceModificationsMessage)

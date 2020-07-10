@@ -18,8 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the results of a single query execution specified by @QueryExecutionId@ . This request does not execute the query but returns results. Use 'StartQueryExecution' to run a query.
+-- Streams the results of a single query execution specified by @QueryExecutionId@ from the Athena query results location in Amazon S3. For more information, see <https://docs.aws.amazon.com/athena/latest/ug/querying.html Query Results> in the /Amazon Athena User Guide/ . This request does not execute the query but returns results. Use 'StartQueryExecution' to run a query.
 --
+--
+-- To stream query results successfully, the IAM principal with permission to call @GetQueryResults@ also must have permissions to the Amazon S3 @GetObject@ action for the Athena query results location.
+--
+-- /Important:/ IAM principals with permission to the Amazon S3 @GetObject@ action for the query results location are able to retrieve query results from Amazon S3 even if permission to the @GetQueryResults@ action is denied. To restrict user or role access, ensure that Amazon S3 permissions to the Athena query location are denied.
 --
 --
 -- This operation returns paginated results.
@@ -37,6 +41,7 @@ module Network.AWS.Athena.GetQueryResults
     , getQueryResultsResponse
     , GetQueryResultsResponse
     -- * Response Lenses
+    , gqrrsUpdateCount
     , gqrrsNextToken
     , gqrrsResultSet
     , gqrrsResponseStatus
@@ -51,12 +56,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getQueryResults' smart constructor.
-data GetQueryResults = GetQueryResults'
-  { _gqrNextToken        :: !(Maybe Text)
-  , _gqrMaxResults       :: !(Maybe Nat)
-  , _gqrQueryExecutionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQueryResults = GetQueryResults'{_gqrNextToken
+                                        :: !(Maybe Text),
+                                        _gqrMaxResults :: !(Maybe Nat),
+                                        _gqrQueryExecutionId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetQueryResults' with the minimum fields required to make a request.
 --
@@ -70,13 +74,10 @@ data GetQueryResults = GetQueryResults'
 getQueryResults
     :: Text -- ^ 'gqrQueryExecutionId'
     -> GetQueryResults
-getQueryResults pQueryExecutionId_ =
-  GetQueryResults'
-    { _gqrNextToken = Nothing
-    , _gqrMaxResults = Nothing
-    , _gqrQueryExecutionId = pQueryExecutionId_
-    }
-
+getQueryResults pQueryExecutionId_
+  = GetQueryResults'{_gqrNextToken = Nothing,
+                     _gqrMaxResults = Nothing,
+                     _gqrQueryExecutionId = pQueryExecutionId_}
 
 -- | The token that specifies where to start pagination if a previous request was truncated.
 gqrNextToken :: Lens' GetQueryResults (Maybe Text)
@@ -105,8 +106,9 @@ instance AWSRequest GetQueryResults where
           = receiveJSON
               (\ s h x ->
                  GetQueryResultsResponse' <$>
-                   (x .?> "NextToken") <*> (x .?> "ResultSet") <*>
-                     (pure (fromEnum s)))
+                   (x .?> "UpdateCount") <*> (x .?> "NextToken") <*>
+                     (x .?> "ResultSet")
+                     <*> (pure (fromEnum s)))
 
 instance Hashable GetQueryResults where
 
@@ -136,16 +138,22 @@ instance ToQuery GetQueryResults where
         toQuery = const mempty
 
 -- | /See:/ 'getQueryResultsResponse' smart constructor.
-data GetQueryResultsResponse = GetQueryResultsResponse'
-  { _gqrrsNextToken      :: !(Maybe Text)
-  , _gqrrsResultSet      :: !(Maybe ResultSet)
-  , _gqrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQueryResultsResponse = GetQueryResultsResponse'{_gqrrsUpdateCount
+                                                        :: !(Maybe Integer),
+                                                        _gqrrsNextToken ::
+                                                        !(Maybe Text),
+                                                        _gqrrsResultSet ::
+                                                        !(Maybe ResultSet),
+                                                        _gqrrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetQueryResultsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gqrrsUpdateCount' - The number of rows inserted with a CREATE TABLE AS SELECT statement. 
 --
 -- * 'gqrrsNextToken' - A token to be used by the next request if this request is truncated.
 --
@@ -155,13 +163,16 @@ data GetQueryResultsResponse = GetQueryResultsResponse'
 getQueryResultsResponse
     :: Int -- ^ 'gqrrsResponseStatus'
     -> GetQueryResultsResponse
-getQueryResultsResponse pResponseStatus_ =
-  GetQueryResultsResponse'
-    { _gqrrsNextToken = Nothing
-    , _gqrrsResultSet = Nothing
-    , _gqrrsResponseStatus = pResponseStatus_
-    }
+getQueryResultsResponse pResponseStatus_
+  = GetQueryResultsResponse'{_gqrrsUpdateCount =
+                               Nothing,
+                             _gqrrsNextToken = Nothing,
+                             _gqrrsResultSet = Nothing,
+                             _gqrrsResponseStatus = pResponseStatus_}
 
+-- | The number of rows inserted with a CREATE TABLE AS SELECT statement. 
+gqrrsUpdateCount :: Lens' GetQueryResultsResponse (Maybe Integer)
+gqrrsUpdateCount = lens _gqrrsUpdateCount (\ s a -> s{_gqrrsUpdateCount = a})
 
 -- | A token to be used by the next request if this request is truncated.
 gqrrsNextToken :: Lens' GetQueryResultsResponse (Maybe Text)

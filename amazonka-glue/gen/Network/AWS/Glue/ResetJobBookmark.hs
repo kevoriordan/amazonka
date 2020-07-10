@@ -27,6 +27,7 @@ module Network.AWS.Glue.ResetJobBookmark
       resetJobBookmark
     , ResetJobBookmark
     -- * Request Lenses
+    , rjbRunId
     , rjbJobName
 
     -- * Destructuring the Response
@@ -45,21 +46,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'resetJobBookmark' smart constructor.
-newtype ResetJobBookmark = ResetJobBookmark'
-  { _rjbJobName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetJobBookmark = ResetJobBookmark'{_rjbRunId
+                                          :: !(Maybe Text),
+                                          _rjbJobName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResetJobBookmark' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rjbRunId' - The unique run identifier associated with this job run.
+--
 -- * 'rjbJobName' - The name of the job in question.
 resetJobBookmark
     :: Text -- ^ 'rjbJobName'
     -> ResetJobBookmark
-resetJobBookmark pJobName_ = ResetJobBookmark' {_rjbJobName = pJobName_}
+resetJobBookmark pJobName_
+  = ResetJobBookmark'{_rjbRunId = Nothing,
+                      _rjbJobName = pJobName_}
 
+-- | The unique run identifier associated with this job run.
+rjbRunId :: Lens' ResetJobBookmark (Maybe Text)
+rjbRunId = lens _rjbRunId (\ s a -> s{_rjbRunId = a})
 
 -- | The name of the job in question.
 rjbJobName :: Lens' ResetJobBookmark Text
@@ -90,7 +98,9 @@ instance ToHeaders ResetJobBookmark where
 instance ToJSON ResetJobBookmark where
         toJSON ResetJobBookmark'{..}
           = object
-              (catMaybes [Just ("JobName" .= _rjbJobName)])
+              (catMaybes
+                 [("RunId" .=) <$> _rjbRunId,
+                  Just ("JobName" .= _rjbJobName)])
 
 instance ToPath ResetJobBookmark where
         toPath = const "/"
@@ -99,11 +109,14 @@ instance ToQuery ResetJobBookmark where
         toQuery = const mempty
 
 -- | /See:/ 'resetJobBookmarkResponse' smart constructor.
-data ResetJobBookmarkResponse = ResetJobBookmarkResponse'
-  { _rjbrsJobBookmarkEntry :: !(Maybe JobBookmarkEntry)
-  , _rjbrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetJobBookmarkResponse = ResetJobBookmarkResponse'{_rjbrsJobBookmarkEntry
+                                                          ::
+                                                          !(Maybe
+                                                              JobBookmarkEntry),
+                                                          _rjbrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ResetJobBookmarkResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +128,10 @@ data ResetJobBookmarkResponse = ResetJobBookmarkResponse'
 resetJobBookmarkResponse
     :: Int -- ^ 'rjbrsResponseStatus'
     -> ResetJobBookmarkResponse
-resetJobBookmarkResponse pResponseStatus_ =
-  ResetJobBookmarkResponse'
-    {_rjbrsJobBookmarkEntry = Nothing, _rjbrsResponseStatus = pResponseStatus_}
-
+resetJobBookmarkResponse pResponseStatus_
+  = ResetJobBookmarkResponse'{_rjbrsJobBookmarkEntry =
+                                Nothing,
+                              _rjbrsResponseStatus = pResponseStatus_}
 
 -- | The reset bookmark entry.
 rjbrsJobBookmarkEntry :: Lens' ResetJobBookmarkResponse (Maybe JobBookmarkEntry)

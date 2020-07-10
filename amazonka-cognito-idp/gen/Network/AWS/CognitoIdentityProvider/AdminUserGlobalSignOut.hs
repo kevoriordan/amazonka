@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Signs out users from all devices, as an administrator.
+-- Signs out users from all devices, as an administrator. It also invalidates all refresh tokens issued to a user. The user's current access and Id tokens remain valid until their expiry. Access and Id tokens expire one hour after they are issued.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminUserGlobalSignOut
     (
@@ -51,11 +51,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'adminUserGlobalSignOut' smart constructor.
-data AdminUserGlobalSignOut = AdminUserGlobalSignOut'
-  { _augsoUserPoolId :: !Text
-  , _augsoUsername   :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminUserGlobalSignOut = AdminUserGlobalSignOut'{_augsoUserPoolId
+                                                      :: !Text,
+                                                      _augsoUsername ::
+                                                      !(Sensitive Text)}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminUserGlobalSignOut' with the minimum fields required to make a request.
 --
@@ -68,10 +68,10 @@ adminUserGlobalSignOut
     :: Text -- ^ 'augsoUserPoolId'
     -> Text -- ^ 'augsoUsername'
     -> AdminUserGlobalSignOut
-adminUserGlobalSignOut pUserPoolId_ pUsername_ =
-  AdminUserGlobalSignOut'
-    {_augsoUserPoolId = pUserPoolId_, _augsoUsername = _Sensitive # pUsername_}
-
+adminUserGlobalSignOut pUserPoolId_ pUsername_
+  = AdminUserGlobalSignOut'{_augsoUserPoolId =
+                              pUserPoolId_,
+                            _augsoUsername = _Sensitive # pUsername_}
 
 -- | The user pool ID.
 augsoUserPoolId :: Lens' AdminUserGlobalSignOut Text
@@ -123,10 +123,10 @@ instance ToQuery AdminUserGlobalSignOut where
 --
 --
 -- /See:/ 'adminUserGlobalSignOutResponse' smart constructor.
-newtype AdminUserGlobalSignOutResponse = AdminUserGlobalSignOutResponse'
-  { _augsorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AdminUserGlobalSignOutResponse = AdminUserGlobalSignOutResponse'{_augsorsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'AdminUserGlobalSignOutResponse' with the minimum fields required to make a request.
 --
@@ -136,9 +136,9 @@ newtype AdminUserGlobalSignOutResponse = AdminUserGlobalSignOutResponse'
 adminUserGlobalSignOutResponse
     :: Int -- ^ 'augsorsResponseStatus'
     -> AdminUserGlobalSignOutResponse
-adminUserGlobalSignOutResponse pResponseStatus_ =
-  AdminUserGlobalSignOutResponse' {_augsorsResponseStatus = pResponseStatus_}
-
+adminUserGlobalSignOutResponse pResponseStatus_
+  = AdminUserGlobalSignOutResponse'{_augsorsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 augsorsResponseStatus :: Lens' AdminUserGlobalSignOutResponse Int

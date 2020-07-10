@@ -23,7 +23,7 @@
 --
 -- Before you can launch a Scheduled Instance, you must purchase it and obtain an identifier using 'PurchaseScheduledInstances' .
 --
--- You must launch a Scheduled Instance during its scheduled time period. You can't stop or reboot a Scheduled Instance, but you can terminate it as needed. If you terminate a Scheduled Instance before the current scheduled time period ends, you can launch it again after a few minutes. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html Scheduled Instances> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- You must launch a Scheduled Instance during its scheduled time period. You can't stop or reboot a Scheduled Instance, but you can terminate it as needed. If you terminate a Scheduled Instance before the current scheduled time period ends, you can launch it again after a few minutes. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html Scheduled Instances> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.RunScheduledInstances
     (
@@ -57,20 +57,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'runScheduledInstances' smart constructor.
-data RunScheduledInstances = RunScheduledInstances'
-  { _rsiClientToken         :: !(Maybe Text)
-  , _rsiInstanceCount       :: !(Maybe Int)
-  , _rsiDryRun              :: !(Maybe Bool)
-  , _rsiLaunchSpecification :: !ScheduledInstancesLaunchSpecification
-  , _rsiScheduledInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RunScheduledInstances = RunScheduledInstances'{_rsiClientToken
+                                                    :: !(Maybe Text),
+                                                    _rsiInstanceCount ::
+                                                    !(Maybe Int),
+                                                    _rsiDryRun :: !(Maybe Bool),
+                                                    _rsiLaunchSpecification ::
+                                                    !ScheduledInstancesLaunchSpecification,
+                                                    _rsiScheduledInstanceId ::
+                                                    !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RunScheduledInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rsiClientToken' - Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- * 'rsiClientToken' - Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
 --
 -- * 'rsiInstanceCount' - The number of instances. Default: 1
 --
@@ -83,17 +86,14 @@ runScheduledInstances
     :: ScheduledInstancesLaunchSpecification -- ^ 'rsiLaunchSpecification'
     -> Text -- ^ 'rsiScheduledInstanceId'
     -> RunScheduledInstances
-runScheduledInstances pLaunchSpecification_ pScheduledInstanceId_ =
-  RunScheduledInstances'
-    { _rsiClientToken = Nothing
-    , _rsiInstanceCount = Nothing
-    , _rsiDryRun = Nothing
-    , _rsiLaunchSpecification = pLaunchSpecification_
-    , _rsiScheduledInstanceId = pScheduledInstanceId_
-    }
+runScheduledInstances pLaunchSpecification_
+  pScheduledInstanceId_
+  = RunScheduledInstances'{_rsiClientToken = Nothing,
+                           _rsiInstanceCount = Nothing, _rsiDryRun = Nothing,
+                           _rsiLaunchSpecification = pLaunchSpecification_,
+                           _rsiScheduledInstanceId = pScheduledInstanceId_}
 
-
--- | Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- | Unique, case-sensitive identifier that ensures the idempotency of the request. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
 rsiClientToken :: Lens' RunScheduledInstances (Maybe Text)
 rsiClientToken = lens _rsiClientToken (\ s a -> s{_rsiClientToken = a})
 
@@ -151,11 +151,14 @@ instance ToQuery RunScheduledInstances where
 --
 --
 -- /See:/ 'runScheduledInstancesResponse' smart constructor.
-data RunScheduledInstancesResponse = RunScheduledInstancesResponse'
-  { _rrsInstanceIdSet  :: !(Maybe [Text])
-  , _rrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RunScheduledInstancesResponse = RunScheduledInstancesResponse'{_rrsInstanceIdSet
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [Text]),
+                                                                    _rrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'RunScheduledInstancesResponse' with the minimum fields required to make a request.
 --
@@ -167,10 +170,10 @@ data RunScheduledInstancesResponse = RunScheduledInstancesResponse'
 runScheduledInstancesResponse
     :: Int -- ^ 'rrsResponseStatus'
     -> RunScheduledInstancesResponse
-runScheduledInstancesResponse pResponseStatus_ =
-  RunScheduledInstancesResponse'
-    {_rrsInstanceIdSet = Nothing, _rrsResponseStatus = pResponseStatus_}
-
+runScheduledInstancesResponse pResponseStatus_
+  = RunScheduledInstancesResponse'{_rrsInstanceIdSet =
+                                     Nothing,
+                                   _rrsResponseStatus = pResponseStatus_}
 
 -- | The IDs of the newly launched instances.
 rrsInstanceIdSet :: Lens' RunScheduledInstancesResponse [Text]

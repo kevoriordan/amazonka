@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a specific version of an intent. To delete all versions of a intent, use the 'DeleteIntent' operation.
+-- Deletes a specific version of an intent. To delete all versions of a intent, use the 'DeleteIntent' operation. 
 --
 --
 -- This operation requires permissions for the @lex:DeleteIntentVersion@ action.
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteIntentVersion' smart constructor.
-data DeleteIntentVersion = DeleteIntentVersion'
-  { _divName    :: !Text
-  , _divVersion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIntentVersion = DeleteIntentVersion'{_divName
+                                                :: !Text,
+                                                _divVersion :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIntentVersion' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ deleteIntentVersion
     :: Text -- ^ 'divName'
     -> Text -- ^ 'divVersion'
     -> DeleteIntentVersion
-deleteIntentVersion pName_ pVersion_ =
-  DeleteIntentVersion' {_divName = pName_, _divVersion = pVersion_}
-
+deleteIntentVersion pName_ pVersion_
+  = DeleteIntentVersion'{_divName = pName_,
+                         _divVersion = pVersion_}
 
 -- | The name of the intent.
 divName :: Lens' DeleteIntentVersion Text
@@ -101,16 +100,15 @@ instance ToQuery DeleteIntentVersion where
         toQuery = const mempty
 
 -- | /See:/ 'deleteIntentVersionResponse' smart constructor.
-data DeleteIntentVersionResponse =
-  DeleteIntentVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIntentVersionResponse = DeleteIntentVersionResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteIntentVersionResponse' with the minimum fields required to make a request.
 --
 deleteIntentVersionResponse
     :: DeleteIntentVersionResponse
-deleteIntentVersionResponse = DeleteIntentVersionResponse'
-
+deleteIntentVersionResponse
+  = DeleteIntentVersionResponse'
 
 instance NFData DeleteIntentVersionResponse where

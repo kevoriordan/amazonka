@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getTelemetryMetadata' smart constructor.
-newtype GetTelemetryMetadata = GetTelemetryMetadata'
-  { _gtmAssessmentRunARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetTelemetryMetadata = GetTelemetryMetadata'{_gtmAssessmentRunARN
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetTelemetryMetadata' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetTelemetryMetadata = GetTelemetryMetadata'
 getTelemetryMetadata
     :: Text -- ^ 'gtmAssessmentRunARN'
     -> GetTelemetryMetadata
-getTelemetryMetadata pAssessmentRunARN_ =
-  GetTelemetryMetadata' {_gtmAssessmentRunARN = pAssessmentRunARN_}
-
+getTelemetryMetadata pAssessmentRunARN_
+  = GetTelemetryMetadata'{_gtmAssessmentRunARN =
+                            pAssessmentRunARN_}
 
 -- | The ARN that specifies the assessment run that has the telemetry data that you want to obtain.
 gtmAssessmentRunARN :: Lens' GetTelemetryMetadata Text
@@ -104,11 +104,13 @@ instance ToQuery GetTelemetryMetadata where
         toQuery = const mempty
 
 -- | /See:/ 'getTelemetryMetadataResponse' smart constructor.
-data GetTelemetryMetadataResponse = GetTelemetryMetadataResponse'
-  { _gtmrsResponseStatus    :: !Int
-  , _gtmrsTelemetryMetadata :: ![TelemetryMetadata]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTelemetryMetadataResponse = GetTelemetryMetadataResponse'{_gtmrsResponseStatus
+                                                                  :: !Int,
+                                                                  _gtmrsTelemetryMetadata
+                                                                  ::
+                                                                  ![TelemetryMetadata]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetTelemetryMetadataResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +122,10 @@ data GetTelemetryMetadataResponse = GetTelemetryMetadataResponse'
 getTelemetryMetadataResponse
     :: Int -- ^ 'gtmrsResponseStatus'
     -> GetTelemetryMetadataResponse
-getTelemetryMetadataResponse pResponseStatus_ =
-  GetTelemetryMetadataResponse'
-    {_gtmrsResponseStatus = pResponseStatus_, _gtmrsTelemetryMetadata = mempty}
-
+getTelemetryMetadataResponse pResponseStatus_
+  = GetTelemetryMetadataResponse'{_gtmrsResponseStatus
+                                    = pResponseStatus_,
+                                  _gtmrsTelemetryMetadata = mempty}
 
 -- | -- | The response status code.
 gtmrsResponseStatus :: Lens' GetTelemetryMetadataResponse Int

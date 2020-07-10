@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteImageBuilder' smart constructor.
-newtype DeleteImageBuilder = DeleteImageBuilder'
-  { _dibName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteImageBuilder = DeleteImageBuilder'{_dibName
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteImageBuilder' with the minimum fields required to make a request.
 --
@@ -58,8 +58,8 @@ newtype DeleteImageBuilder = DeleteImageBuilder'
 deleteImageBuilder
     :: Text -- ^ 'dibName'
     -> DeleteImageBuilder
-deleteImageBuilder pName_ = DeleteImageBuilder' {_dibName = pName_}
-
+deleteImageBuilder pName_
+  = DeleteImageBuilder'{_dibName = pName_}
 
 -- | The name of the image builder.
 dibName :: Lens' DeleteImageBuilder Text
@@ -100,11 +100,14 @@ instance ToQuery DeleteImageBuilder where
         toQuery = const mempty
 
 -- | /See:/ 'deleteImageBuilderResponse' smart constructor.
-data DeleteImageBuilderResponse = DeleteImageBuilderResponse'
-  { _dibrsImageBuilder   :: !(Maybe ImageBuilder)
-  , _dibrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteImageBuilderResponse = DeleteImageBuilderResponse'{_dibrsImageBuilder
+                                                              ::
+                                                              !(Maybe
+                                                                  ImageBuilder),
+                                                              _dibrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteImageBuilderResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +119,10 @@ data DeleteImageBuilderResponse = DeleteImageBuilderResponse'
 deleteImageBuilderResponse
     :: Int -- ^ 'dibrsResponseStatus'
     -> DeleteImageBuilderResponse
-deleteImageBuilderResponse pResponseStatus_ =
-  DeleteImageBuilderResponse'
-    {_dibrsImageBuilder = Nothing, _dibrsResponseStatus = pResponseStatus_}
-
+deleteImageBuilderResponse pResponseStatus_
+  = DeleteImageBuilderResponse'{_dibrsImageBuilder =
+                                  Nothing,
+                                _dibrsResponseStatus = pResponseStatus_}
 
 -- | Information about the image builder.
 dibrsImageBuilder :: Lens' DeleteImageBuilderResponse (Maybe ImageBuilder)

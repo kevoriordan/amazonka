@@ -43,17 +43,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDomainNames' smart constructor.
-data ListDomainNames =
-  ListDomainNames'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDomainNames = ListDomainNames'
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDomainNames' with the minimum fields required to make a request.
 --
 listDomainNames
     :: ListDomainNames
 listDomainNames = ListDomainNames'
-
 
 instance AWSRequest ListDomainNames where
         type Rs ListDomainNames = ListDomainNamesResponse
@@ -88,11 +85,14 @@ instance ToQuery ListDomainNames where
 --
 --
 -- /See:/ 'listDomainNamesResponse' smart constructor.
-data ListDomainNamesResponse = ListDomainNamesResponse'
-  { _ldnrsDomainNames    :: !(Maybe (Map Text Text))
-  , _ldnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDomainNamesResponse = ListDomainNamesResponse'{_ldnrsDomainNames
+                                                        ::
+                                                        !(Maybe
+                                                            (Map Text Text)),
+                                                        _ldnrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListDomainNamesResponse' with the minimum fields required to make a request.
 --
@@ -104,10 +104,10 @@ data ListDomainNamesResponse = ListDomainNamesResponse'
 listDomainNamesResponse
     :: Int -- ^ 'ldnrsResponseStatus'
     -> ListDomainNamesResponse
-listDomainNamesResponse pResponseStatus_ =
-  ListDomainNamesResponse'
-    {_ldnrsDomainNames = Nothing, _ldnrsResponseStatus = pResponseStatus_}
-
+listDomainNamesResponse pResponseStatus_
+  = ListDomainNamesResponse'{_ldnrsDomainNames =
+                               Nothing,
+                             _ldnrsResponseStatus = pResponseStatus_}
 
 -- | The names of the search domains owned by an account.
 ldnrsDomainNames :: Lens' ListDomainNamesResponse (HashMap Text Text)

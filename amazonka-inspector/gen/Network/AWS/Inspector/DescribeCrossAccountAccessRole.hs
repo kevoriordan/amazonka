@@ -45,17 +45,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeCrossAccountAccessRole' smart constructor.
-data DescribeCrossAccountAccessRole =
-  DescribeCrossAccountAccessRole'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCrossAccountAccessRole = DescribeCrossAccountAccessRole'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeCrossAccountAccessRole' with the minimum fields required to make a request.
 --
 describeCrossAccountAccessRole
     :: DescribeCrossAccountAccessRole
-describeCrossAccountAccessRole = DescribeCrossAccountAccessRole'
-
+describeCrossAccountAccessRole
+  = DescribeCrossAccountAccessRole'
 
 instance AWSRequest DescribeCrossAccountAccessRole
          where
@@ -96,13 +95,20 @@ instance ToQuery DescribeCrossAccountAccessRole where
         toQuery = const mempty
 
 -- | /See:/ 'describeCrossAccountAccessRoleResponse' smart constructor.
-data DescribeCrossAccountAccessRoleResponse = DescribeCrossAccountAccessRoleResponse'
-  { _dcaarrsResponseStatus :: !Int
-  , _dcaarrsRoleARN        :: !Text
-  , _dcaarrsValid          :: !Bool
-  , _dcaarrsRegisteredAt   :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCrossAccountAccessRoleResponse = DescribeCrossAccountAccessRoleResponse'{_dcaarrsResponseStatus
+                                                                                      ::
+                                                                                      !Int,
+                                                                                      _dcaarrsRoleARN
+                                                                                      ::
+                                                                                      !Text,
+                                                                                      _dcaarrsValid
+                                                                                      ::
+                                                                                      !Bool,
+                                                                                      _dcaarrsRegisteredAt
+                                                                                      ::
+                                                                                      !POSIX}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DescribeCrossAccountAccessRoleResponse' with the minimum fields required to make a request.
 --
@@ -121,14 +127,14 @@ describeCrossAccountAccessRoleResponse
     -> Bool -- ^ 'dcaarrsValid'
     -> UTCTime -- ^ 'dcaarrsRegisteredAt'
     -> DescribeCrossAccountAccessRoleResponse
-describeCrossAccountAccessRoleResponse pResponseStatus_ pRoleARN_ pValid_ pRegisteredAt_ =
-  DescribeCrossAccountAccessRoleResponse'
-    { _dcaarrsResponseStatus = pResponseStatus_
-    , _dcaarrsRoleARN = pRoleARN_
-    , _dcaarrsValid = pValid_
-    , _dcaarrsRegisteredAt = _Time # pRegisteredAt_
-    }
-
+describeCrossAccountAccessRoleResponse
+  pResponseStatus_ pRoleARN_ pValid_ pRegisteredAt_
+  = DescribeCrossAccountAccessRoleResponse'{_dcaarrsResponseStatus
+                                              = pResponseStatus_,
+                                            _dcaarrsRoleARN = pRoleARN_,
+                                            _dcaarrsValid = pValid_,
+                                            _dcaarrsRegisteredAt =
+                                              _Time # pRegisteredAt_}
 
 -- | -- | The response status code.
 dcaarrsResponseStatus :: Lens' DescribeCrossAccountAccessRoleResponse Int

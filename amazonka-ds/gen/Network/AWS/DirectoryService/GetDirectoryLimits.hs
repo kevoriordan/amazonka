@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Obtains directory limit information for the current region.
+-- Obtains directory limit information for the current Region.
 --
 --
 module Network.AWS.DirectoryService.GetDirectoryLimits
@@ -47,17 +47,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDirectoryLimits' smart constructor.
-data GetDirectoryLimits =
-  GetDirectoryLimits'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDirectoryLimits = GetDirectoryLimits'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDirectoryLimits' with the minimum fields required to make a request.
 --
 getDirectoryLimits
     :: GetDirectoryLimits
 getDirectoryLimits = GetDirectoryLimits'
-
 
 instance AWSRequest GetDirectoryLimits where
         type Rs GetDirectoryLimits =
@@ -97,28 +94,31 @@ instance ToQuery GetDirectoryLimits where
 --
 --
 -- /See:/ 'getDirectoryLimitsResponse' smart constructor.
-data GetDirectoryLimitsResponse = GetDirectoryLimitsResponse'
-  { _gdlrsDirectoryLimits :: !(Maybe DirectoryLimits)
-  , _gdlrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDirectoryLimitsResponse = GetDirectoryLimitsResponse'{_gdlrsDirectoryLimits
+                                                              ::
+                                                              !(Maybe
+                                                                  DirectoryLimits),
+                                                              _gdlrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetDirectoryLimitsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdlrsDirectoryLimits' - A 'DirectoryLimits' object that contains the directory limits for the current region.
+-- * 'gdlrsDirectoryLimits' - A 'DirectoryLimits' object that contains the directory limits for the current rRegion.
 --
 -- * 'gdlrsResponseStatus' - -- | The response status code.
 getDirectoryLimitsResponse
     :: Int -- ^ 'gdlrsResponseStatus'
     -> GetDirectoryLimitsResponse
-getDirectoryLimitsResponse pResponseStatus_ =
-  GetDirectoryLimitsResponse'
-    {_gdlrsDirectoryLimits = Nothing, _gdlrsResponseStatus = pResponseStatus_}
+getDirectoryLimitsResponse pResponseStatus_
+  = GetDirectoryLimitsResponse'{_gdlrsDirectoryLimits =
+                                  Nothing,
+                                _gdlrsResponseStatus = pResponseStatus_}
 
-
--- | A 'DirectoryLimits' object that contains the directory limits for the current region.
+-- | A 'DirectoryLimits' object that contains the directory limits for the current rRegion.
 gdlrsDirectoryLimits :: Lens' GetDirectoryLimitsResponse (Maybe DirectoryLimits)
 gdlrsDirectoryLimits = lens _gdlrsDirectoryLimits (\ s a -> s{_gdlrsDirectoryLimits = a})
 

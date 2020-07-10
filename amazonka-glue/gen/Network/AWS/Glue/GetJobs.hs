@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getJobs' smart constructor.
-data GetJobs = GetJobs'
-  { _gjNextToken  :: !(Maybe Text)
-  , _gjMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetJobs = GetJobs'{_gjNextToken ::
+                        !(Maybe Text),
+                        _gjMaxResults :: !(Maybe Nat)}
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobs' with the minimum fields required to make a request.
 --
@@ -65,8 +64,9 @@ data GetJobs = GetJobs'
 -- * 'gjMaxResults' - The maximum size of the response.
 getJobs
     :: GetJobs
-getJobs = GetJobs' {_gjNextToken = Nothing, _gjMaxResults = Nothing}
-
+getJobs
+  = GetJobs'{_gjNextToken = Nothing,
+             _gjMaxResults = Nothing}
 
 -- | A continuation token, if this is a continuation call.
 gjNextToken :: Lens' GetJobs (Maybe Text)
@@ -119,12 +119,11 @@ instance ToQuery GetJobs where
         toQuery = const mempty
 
 -- | /See:/ 'getJobsResponse' smart constructor.
-data GetJobsResponse = GetJobsResponse'
-  { _gjsrsNextToken      :: !(Maybe Text)
-  , _gjsrsJobs           :: !(Maybe [Job])
-  , _gjsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetJobsResponse = GetJobsResponse'{_gjsrsNextToken
+                                        :: !(Maybe Text),
+                                        _gjsrsJobs :: !(Maybe [Job]),
+                                        _gjsrsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobsResponse' with the minimum fields required to make a request.
 --
@@ -138,13 +137,10 @@ data GetJobsResponse = GetJobsResponse'
 getJobsResponse
     :: Int -- ^ 'gjsrsResponseStatus'
     -> GetJobsResponse
-getJobsResponse pResponseStatus_ =
-  GetJobsResponse'
-    { _gjsrsNextToken = Nothing
-    , _gjsrsJobs = Nothing
-    , _gjsrsResponseStatus = pResponseStatus_
-    }
-
+getJobsResponse pResponseStatus_
+  = GetJobsResponse'{_gjsrsNextToken = Nothing,
+                     _gjsrsJobs = Nothing,
+                     _gjsrsResponseStatus = pResponseStatus_}
 
 -- | A continuation token, if not all job definitions have yet been returned.
 gjsrsNextToken :: Lens' GetJobsResponse (Maybe Text)

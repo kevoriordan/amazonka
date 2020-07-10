@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Modifies an association between a configuration set and a custom domain for open and click event tracking.
+-- Modifies an association between a configuration set and a custom domain for open and click event tracking. 
 --
 --
--- By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html Configuring Custom Domains to Handle Open and Click Tracking> in the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html Amazon SES Developer Guide> .
+-- By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html Amazon SES Developer Guide> .
 --
 module Network.AWS.SES.UpdateConfigurationSetTrackingOptions
     (
@@ -46,16 +46,19 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to update the tracking options for a configuration set.
+-- | Represents a request to update the tracking options for a configuration set. 
 --
 --
 --
 -- /See:/ 'updateConfigurationSetTrackingOptions' smart constructor.
-data UpdateConfigurationSetTrackingOptions = UpdateConfigurationSetTrackingOptions'
-  { _ucstoConfigurationSetName :: !Text
-  , _ucstoTrackingOptions      :: !TrackingOptions
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConfigurationSetTrackingOptions = UpdateConfigurationSetTrackingOptions'{_ucstoConfigurationSetName
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ucstoTrackingOptions
+                                                                                    ::
+                                                                                    !TrackingOptions}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'UpdateConfigurationSetTrackingOptions' with the minimum fields required to make a request.
 --
@@ -68,12 +71,12 @@ updateConfigurationSetTrackingOptions
     :: Text -- ^ 'ucstoConfigurationSetName'
     -> TrackingOptions -- ^ 'ucstoTrackingOptions'
     -> UpdateConfigurationSetTrackingOptions
-updateConfigurationSetTrackingOptions pConfigurationSetName_ pTrackingOptions_ =
-  UpdateConfigurationSetTrackingOptions'
-    { _ucstoConfigurationSetName = pConfigurationSetName_
-    , _ucstoTrackingOptions = pTrackingOptions_
-    }
-
+updateConfigurationSetTrackingOptions
+  pConfigurationSetName_ pTrackingOptions_
+  = UpdateConfigurationSetTrackingOptions'{_ucstoConfigurationSetName
+                                             = pConfigurationSetName_,
+                                           _ucstoTrackingOptions =
+                                             pTrackingOptions_}
 
 -- | The name of the configuration set for which you want to update the custom tracking domain.
 ucstoConfigurationSetName :: Lens' UpdateConfigurationSetTrackingOptions Text
@@ -129,10 +132,13 @@ instance ToQuery
 --
 --
 -- /See:/ 'updateConfigurationSetTrackingOptionsResponse' smart constructor.
-newtype UpdateConfigurationSetTrackingOptionsResponse = UpdateConfigurationSetTrackingOptionsResponse'
-  { _ucstorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateConfigurationSetTrackingOptionsResponse = UpdateConfigurationSetTrackingOptionsResponse'{_ucstorsResponseStatus
+                                                                                                       ::
+                                                                                                       Int}
+                                                          deriving (Eq, Read,
+                                                                    Show, Data,
+                                                                    Typeable,
+                                                                    Generic)
 
 -- | Creates a value of 'UpdateConfigurationSetTrackingOptionsResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +148,10 @@ newtype UpdateConfigurationSetTrackingOptionsResponse = UpdateConfigurationSetTr
 updateConfigurationSetTrackingOptionsResponse
     :: Int -- ^ 'ucstorsResponseStatus'
     -> UpdateConfigurationSetTrackingOptionsResponse
-updateConfigurationSetTrackingOptionsResponse pResponseStatus_ =
-  UpdateConfigurationSetTrackingOptionsResponse'
-    {_ucstorsResponseStatus = pResponseStatus_}
-
+updateConfigurationSetTrackingOptionsResponse
+  pResponseStatus_
+  = UpdateConfigurationSetTrackingOptionsResponse'{_ucstorsResponseStatus
+                                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 ucstorsResponseStatus :: Lens' UpdateConfigurationSetTrackingOptionsResponse Int

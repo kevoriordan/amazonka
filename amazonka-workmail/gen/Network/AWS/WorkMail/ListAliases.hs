@@ -52,13 +52,12 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'listAliases' smart constructor.
-data ListAliases = ListAliases'
-  { _laNextToken      :: !(Maybe Text)
-  , _laMaxResults     :: !(Maybe Nat)
-  , _laOrganizationId :: !Text
-  , _laEntityId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAliases = ListAliases'{_laNextToken ::
+                                !(Maybe Text),
+                                _laMaxResults :: !(Maybe Nat),
+                                _laOrganizationId :: !Text,
+                                _laEntityId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAliases' with the minimum fields required to make a request.
 --
@@ -75,14 +74,11 @@ listAliases
     :: Text -- ^ 'laOrganizationId'
     -> Text -- ^ 'laEntityId'
     -> ListAliases
-listAliases pOrganizationId_ pEntityId_ =
-  ListAliases'
-    { _laNextToken = Nothing
-    , _laMaxResults = Nothing
-    , _laOrganizationId = pOrganizationId_
-    , _laEntityId = pEntityId_
-    }
-
+listAliases pOrganizationId_ pEntityId_
+  = ListAliases'{_laNextToken = Nothing,
+                 _laMaxResults = Nothing,
+                 _laOrganizationId = pOrganizationId_,
+                 _laEntityId = pEntityId_}
 
 -- | The token to use to retrieve the next page of results. The first call does not contain any tokens.
 laNextToken :: Lens' ListAliases (Maybe Text)
@@ -146,12 +142,11 @@ instance ToQuery ListAliases where
         toQuery = const mempty
 
 -- | /See:/ 'listAliasesResponse' smart constructor.
-data ListAliasesResponse = ListAliasesResponse'
-  { _larsAliases        :: !(Maybe [Text])
-  , _larsNextToken      :: !(Maybe Text)
-  , _larsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAliasesResponse = ListAliasesResponse'{_larsAliases
+                                                :: !(Maybe [Text]),
+                                                _larsNextToken :: !(Maybe Text),
+                                                _larsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAliasesResponse' with the minimum fields required to make a request.
 --
@@ -165,13 +160,10 @@ data ListAliasesResponse = ListAliasesResponse'
 listAliasesResponse
     :: Int -- ^ 'larsResponseStatus'
     -> ListAliasesResponse
-listAliasesResponse pResponseStatus_ =
-  ListAliasesResponse'
-    { _larsAliases = Nothing
-    , _larsNextToken = Nothing
-    , _larsResponseStatus = pResponseStatus_
-    }
-
+listAliasesResponse pResponseStatus_
+  = ListAliasesResponse'{_larsAliases = Nothing,
+                         _larsNextToken = Nothing,
+                         _larsResponseStatus = pResponseStatus_}
 
 -- | The entity's paginated aliases.
 larsAliases :: Lens' ListAliasesResponse [Text]

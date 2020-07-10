@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a platform application object for one of the supported push notification services, such as APNS and GCM. For more information, see <http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html Using Amazon SNS Mobile Push Notifications> .
+-- Deletes a platform application object for one of the supported push notification services, such as APNS and FCM. For more information, see <https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html Using Amazon SNS Mobile Push Notifications> . 
 --
 --
 module Network.AWS.SNS.DeletePlatformApplication
@@ -46,10 +46,10 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'deletePlatformApplication' smart constructor.
-newtype DeletePlatformApplication = DeletePlatformApplication'
-  { _dpaPlatformApplicationARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePlatformApplication = DeletePlatformApplication'{_dpaPlatformApplicationARN
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeletePlatformApplication' with the minimum fields required to make a request.
 --
@@ -59,10 +59,9 @@ newtype DeletePlatformApplication = DeletePlatformApplication'
 deletePlatformApplication
     :: Text -- ^ 'dpaPlatformApplicationARN'
     -> DeletePlatformApplication
-deletePlatformApplication pPlatformApplicationARN_ =
-  DeletePlatformApplication'
-    {_dpaPlatformApplicationARN = pPlatformApplicationARN_}
-
+deletePlatformApplication pPlatformApplicationARN_
+  = DeletePlatformApplication'{_dpaPlatformApplicationARN
+                                 = pPlatformApplicationARN_}
 
 -- | PlatformApplicationArn of platform application object to delete.
 dpaPlatformApplicationARN :: Lens' DeletePlatformApplication Text
@@ -95,17 +94,16 @@ instance ToQuery DeletePlatformApplication where
                  _dpaPlatformApplicationARN]
 
 -- | /See:/ 'deletePlatformApplicationResponse' smart constructor.
-data DeletePlatformApplicationResponse =
-  DeletePlatformApplicationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePlatformApplicationResponse = DeletePlatformApplicationResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeletePlatformApplicationResponse' with the minimum fields required to make a request.
 --
 deletePlatformApplicationResponse
     :: DeletePlatformApplicationResponse
-deletePlatformApplicationResponse = DeletePlatformApplicationResponse'
-
+deletePlatformApplicationResponse
+  = DeletePlatformApplicationResponse'
 
 instance NFData DeletePlatformApplicationResponse
          where

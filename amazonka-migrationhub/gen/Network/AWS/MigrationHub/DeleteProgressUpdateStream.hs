@@ -27,7 +27,7 @@
 --
 --     * If the stream takes time to be deleted, it might still show up on a @ListProgressUpdateStreams@ call.
 --
---     * @CreateProgressUpdateStream@ , @ImportMigrationTask@ , @NotifyMigrationTaskState@ , and all Associate[*] APIs realted to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.
+--     * @CreateProgressUpdateStream@ , @ImportMigrationTask@ , @NotifyMigrationTaskState@ , and all Associate[*] APIs related to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.
 --
 --     * Once the stream and all of its resources are deleted, @CreateProgressUpdateStream@ for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).
 --
@@ -57,11 +57,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteProgressUpdateStream' smart constructor.
-data DeleteProgressUpdateStream = DeleteProgressUpdateStream'
-  { _dpusDryRun                   :: !(Maybe Bool)
-  , _dpusProgressUpdateStreamName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteProgressUpdateStream = DeleteProgressUpdateStream'{_dpusDryRun
+                                                              :: !(Maybe Bool),
+                                                              _dpusProgressUpdateStreamName
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteProgressUpdateStream' with the minimum fields required to make a request.
 --
@@ -69,22 +70,20 @@ data DeleteProgressUpdateStream = DeleteProgressUpdateStream'
 --
 -- * 'dpusDryRun' - Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
 --
--- * 'dpusProgressUpdateStreamName' - The name of the ProgressUpdateStream.
+-- * 'dpusProgressUpdateStreamName' - The name of the ProgressUpdateStream. /Do not store personal data in this field./ 
 deleteProgressUpdateStream
     :: Text -- ^ 'dpusProgressUpdateStreamName'
     -> DeleteProgressUpdateStream
-deleteProgressUpdateStream pProgressUpdateStreamName_ =
-  DeleteProgressUpdateStream'
-    { _dpusDryRun = Nothing
-    , _dpusProgressUpdateStreamName = pProgressUpdateStreamName_
-    }
-
+deleteProgressUpdateStream pProgressUpdateStreamName_
+  = DeleteProgressUpdateStream'{_dpusDryRun = Nothing,
+                                _dpusProgressUpdateStreamName =
+                                  pProgressUpdateStreamName_}
 
 -- | Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
 dpusDryRun :: Lens' DeleteProgressUpdateStream (Maybe Bool)
 dpusDryRun = lens _dpusDryRun (\ s a -> s{_dpusDryRun = a})
 
--- | The name of the ProgressUpdateStream.
+-- | The name of the ProgressUpdateStream. /Do not store personal data in this field./ 
 dpusProgressUpdateStreamName :: Lens' DeleteProgressUpdateStream Text
 dpusProgressUpdateStreamName = lens _dpusProgressUpdateStreamName (\ s a -> s{_dpusProgressUpdateStreamName = a})
 
@@ -128,10 +127,11 @@ instance ToQuery DeleteProgressUpdateStream where
         toQuery = const mempty
 
 -- | /See:/ 'deleteProgressUpdateStreamResponse' smart constructor.
-newtype DeleteProgressUpdateStreamResponse = DeleteProgressUpdateStreamResponse'
-  { _dpusrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteProgressUpdateStreamResponse = DeleteProgressUpdateStreamResponse'{_dpusrsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DeleteProgressUpdateStreamResponse' with the minimum fields required to make a request.
 --
@@ -141,9 +141,9 @@ newtype DeleteProgressUpdateStreamResponse = DeleteProgressUpdateStreamResponse'
 deleteProgressUpdateStreamResponse
     :: Int -- ^ 'dpusrsResponseStatus'
     -> DeleteProgressUpdateStreamResponse
-deleteProgressUpdateStreamResponse pResponseStatus_ =
-  DeleteProgressUpdateStreamResponse' {_dpusrsResponseStatus = pResponseStatus_}
-
+deleteProgressUpdateStreamResponse pResponseStatus_
+  = DeleteProgressUpdateStreamResponse'{_dpusrsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 dpusrsResponseStatus :: Lens' DeleteProgressUpdateStreamResponse Int

@@ -21,6 +21,8 @@
 -- Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DAX.DescribeSubnetGroups
     (
     -- * Creating a Request
@@ -43,17 +45,19 @@ module Network.AWS.DAX.DescribeSubnetGroups
 import Network.AWS.DAX.Types
 import Network.AWS.DAX.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeSubnetGroups' smart constructor.
-data DescribeSubnetGroups = DescribeSubnetGroups'
-  { _dsgSubnetGroupNames :: !(Maybe [Text])
-  , _dsgNextToken        :: !(Maybe Text)
-  , _dsgMaxResults       :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubnetGroups = DescribeSubnetGroups'{_dsgSubnetGroupNames
+                                                  :: !(Maybe [Text]),
+                                                  _dsgNextToken ::
+                                                  !(Maybe Text),
+                                                  _dsgMaxResults ::
+                                                  !(Maybe Int)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeSubnetGroups' with the minimum fields required to make a request.
 --
@@ -66,13 +70,10 @@ data DescribeSubnetGroups = DescribeSubnetGroups'
 -- * 'dsgMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. The value for @MaxResults@ must be between 20 and 100.
 describeSubnetGroups
     :: DescribeSubnetGroups
-describeSubnetGroups =
-  DescribeSubnetGroups'
-    { _dsgSubnetGroupNames = Nothing
-    , _dsgNextToken = Nothing
-    , _dsgMaxResults = Nothing
-    }
-
+describeSubnetGroups
+  = DescribeSubnetGroups'{_dsgSubnetGroupNames =
+                            Nothing,
+                          _dsgNextToken = Nothing, _dsgMaxResults = Nothing}
 
 -- | The name of the subnet group.
 dsgSubnetGroupNames :: Lens' DescribeSubnetGroups [Text]
@@ -85,6 +86,13 @@ dsgNextToken = lens _dsgNextToken (\ s a -> s{_dsgNextToken = a})
 -- | The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. The value for @MaxResults@ must be between 20 and 100.
 dsgMaxResults :: Lens' DescribeSubnetGroups (Maybe Int)
 dsgMaxResults = lens _dsgMaxResults (\ s a -> s{_dsgMaxResults = a})
+
+instance AWSPager DescribeSubnetGroups where
+        page rq rs
+          | stop (rs ^. dsgsrsNextToken) = Nothing
+          | stop (rs ^. dsgsrsSubnetGroups) = Nothing
+          | otherwise =
+            Just $ rq & dsgNextToken .~ rs ^. dsgsrsNextToken
 
 instance AWSRequest DescribeSubnetGroups where
         type Rs DescribeSubnetGroups =
@@ -126,12 +134,17 @@ instance ToQuery DescribeSubnetGroups where
         toQuery = const mempty
 
 -- | /See:/ 'describeSubnetGroupsResponse' smart constructor.
-data DescribeSubnetGroupsResponse = DescribeSubnetGroupsResponse'
-  { _dsgsrsSubnetGroups   :: !(Maybe [SubnetGroup])
-  , _dsgsrsNextToken      :: !(Maybe Text)
-  , _dsgsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubnetGroupsResponse = DescribeSubnetGroupsResponse'{_dsgsrsSubnetGroups
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [SubnetGroup]),
+                                                                  _dsgsrsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dsgsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeSubnetGroupsResponse' with the minimum fields required to make a request.
 --
@@ -145,13 +158,11 @@ data DescribeSubnetGroupsResponse = DescribeSubnetGroupsResponse'
 describeSubnetGroupsResponse
     :: Int -- ^ 'dsgsrsResponseStatus'
     -> DescribeSubnetGroupsResponse
-describeSubnetGroupsResponse pResponseStatus_ =
-  DescribeSubnetGroupsResponse'
-    { _dsgsrsSubnetGroups = Nothing
-    , _dsgsrsNextToken = Nothing
-    , _dsgsrsResponseStatus = pResponseStatus_
-    }
-
+describeSubnetGroupsResponse pResponseStatus_
+  = DescribeSubnetGroupsResponse'{_dsgsrsSubnetGroups =
+                                    Nothing,
+                                  _dsgsrsNextToken = Nothing,
+                                  _dsgsrsResponseStatus = pResponseStatus_}
 
 -- | An array of subnet groups. Each element in the array represents a single subnet group.
 dsgsrsSubnetGroups :: Lens' DescribeSubnetGroupsResponse [SubnetGroup]

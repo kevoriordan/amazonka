@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getLoadBalancer' smart constructor.
-newtype GetLoadBalancer = GetLoadBalancer'
-  { _glbLoadBalancerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetLoadBalancer = GetLoadBalancer'{_glbLoadBalancerName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetLoadBalancer' with the minimum fields required to make a request.
 --
@@ -58,9 +57,9 @@ newtype GetLoadBalancer = GetLoadBalancer'
 getLoadBalancer
     :: Text -- ^ 'glbLoadBalancerName'
     -> GetLoadBalancer
-getLoadBalancer pLoadBalancerName_ =
-  GetLoadBalancer' {_glbLoadBalancerName = pLoadBalancerName_}
-
+getLoadBalancer pLoadBalancerName_
+  = GetLoadBalancer'{_glbLoadBalancerName =
+                       pLoadBalancerName_}
 
 -- | The name of the load balancer.
 glbLoadBalancerName :: Lens' GetLoadBalancer Text
@@ -101,11 +100,13 @@ instance ToQuery GetLoadBalancer where
         toQuery = const mempty
 
 -- | /See:/ 'getLoadBalancerResponse' smart constructor.
-data GetLoadBalancerResponse = GetLoadBalancerResponse'
-  { _glbrsLoadBalancer   :: !(Maybe LoadBalancer)
-  , _glbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetLoadBalancerResponse = GetLoadBalancerResponse'{_glbrsLoadBalancer
+                                                        ::
+                                                        !(Maybe LoadBalancer),
+                                                        _glbrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetLoadBalancerResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +118,10 @@ data GetLoadBalancerResponse = GetLoadBalancerResponse'
 getLoadBalancerResponse
     :: Int -- ^ 'glbrsResponseStatus'
     -> GetLoadBalancerResponse
-getLoadBalancerResponse pResponseStatus_ =
-  GetLoadBalancerResponse'
-    {_glbrsLoadBalancer = Nothing, _glbrsResponseStatus = pResponseStatus_}
-
+getLoadBalancerResponse pResponseStatus_
+  = GetLoadBalancerResponse'{_glbrsLoadBalancer =
+                               Nothing,
+                             _glbrsResponseStatus = pResponseStatus_}
 
 -- | An object containing information about your load balancer.
 glbrsLoadBalancer :: Lens' GetLoadBalancerResponse (Maybe LoadBalancer)

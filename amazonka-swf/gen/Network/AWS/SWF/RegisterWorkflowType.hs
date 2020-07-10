@@ -25,7 +25,7 @@
 --
 -- /Important:/ If the type already exists, then a @TypeAlreadyExists@ fault is returned. You cannot change the configuration settings of a workflow type once it is registered and it must be registered as a new version.
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -45,7 +45,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.RegisterWorkflowType
     (
@@ -77,19 +77,24 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'registerWorkflowType' smart constructor.
-data RegisterWorkflowType = RegisterWorkflowType'
-  { _rwtDefaultLambdaRole                   :: !(Maybe Text)
-  , _rwtDefaultChildPolicy                  :: !(Maybe ChildPolicy)
-  , _rwtDefaultTaskList                     :: !(Maybe TaskList)
-  , _rwtDefaultTaskPriority                 :: !(Maybe Text)
-  , _rwtDefaultExecutionStartToCloseTimeout :: !(Maybe Text)
-  , _rwtDefaultTaskStartToCloseTimeout      :: !(Maybe Text)
-  , _rwtDescription                         :: !(Maybe Text)
-  , _rwtDomain                              :: !Text
-  , _rwtName                                :: !Text
-  , _rwtVersion                             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterWorkflowType = RegisterWorkflowType'{_rwtDefaultLambdaRole
+                                                  :: !(Maybe Text),
+                                                  _rwtDefaultChildPolicy ::
+                                                  !(Maybe ChildPolicy),
+                                                  _rwtDefaultTaskList ::
+                                                  !(Maybe TaskList),
+                                                  _rwtDefaultTaskPriority ::
+                                                  !(Maybe Text),
+                                                  _rwtDefaultExecutionStartToCloseTimeout
+                                                  :: !(Maybe Text),
+                                                  _rwtDefaultTaskStartToCloseTimeout
+                                                  :: !(Maybe Text),
+                                                  _rwtDescription ::
+                                                  !(Maybe Text),
+                                                  _rwtDomain :: !Text,
+                                                  _rwtName :: !Text,
+                                                  _rwtVersion :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterWorkflowType' with the minimum fields required to make a request.
 --
@@ -101,7 +106,7 @@ data RegisterWorkflowType = RegisterWorkflowType'
 --
 -- * 'rwtDefaultTaskList' - If set, specifies the default task list to use for scheduling decision tasks for executions of this workflow type. This default is used only if a task list isn't provided when starting the execution through the 'StartWorkflowExecution' Action or @StartChildWorkflowExecution@ 'Decision' .
 --
--- * 'rwtDefaultTaskPriority' - The default task priority to assign to the workflow type. If not assigned, then @0@ is used. Valid values are integers that range from Java's @Integer.MIN_VALUE@ (-2147483648) to @Integer.MAX_VALUE@ (2147483647). Higher numbers indicate higher priority. For more information about setting task priority, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html Setting Task Priority> in the /Amazon SWF Developer Guide/ .
+-- * 'rwtDefaultTaskPriority' - The default task priority to assign to the workflow type. If not assigned, then @0@ is used. Valid values are integers that range from Java's @Integer.MIN_VALUE@ (-2147483648) to @Integer.MAX_VALUE@ (2147483647). Higher numbers indicate higher priority. For more information about setting task priority, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html Setting Task Priority> in the /Amazon SWF Developer Guide/ .
 --
 -- * 'rwtDefaultExecutionStartToCloseTimeout' - If set, specifies the default maximum duration for executions of this workflow type. You can override this default when starting an execution through the 'StartWorkflowExecution' Action or @StartChildWorkflowExecution@ 'Decision' . The duration is specified in seconds; an integer greater than or equal to 0. Unlike some of the other timeout parameters in Amazon SWF, you cannot specify a value of "NONE" for @defaultExecutionStartToCloseTimeout@ ; there is a one-year max limit on the time that a workflow execution can run. Exceeding this limit always causes the workflow execution to time out.
 --
@@ -111,28 +116,24 @@ data RegisterWorkflowType = RegisterWorkflowType'
 --
 -- * 'rwtDomain' - The name of the domain in which to register the workflow type.
 --
--- * 'rwtName' - The name of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not contain the literal string @arn@ .
+-- * 'rwtName' - The name of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not /be/ the literal string @arn@ .
 --
--- * 'rwtVersion' - The version of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not contain the literal string @arn@ .
+-- * 'rwtVersion' - The version of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not /be/ the literal string @arn@ .
 registerWorkflowType
     :: Text -- ^ 'rwtDomain'
     -> Text -- ^ 'rwtName'
     -> Text -- ^ 'rwtVersion'
     -> RegisterWorkflowType
-registerWorkflowType pDomain_ pName_ pVersion_ =
-  RegisterWorkflowType'
-    { _rwtDefaultLambdaRole = Nothing
-    , _rwtDefaultChildPolicy = Nothing
-    , _rwtDefaultTaskList = Nothing
-    , _rwtDefaultTaskPriority = Nothing
-    , _rwtDefaultExecutionStartToCloseTimeout = Nothing
-    , _rwtDefaultTaskStartToCloseTimeout = Nothing
-    , _rwtDescription = Nothing
-    , _rwtDomain = pDomain_
-    , _rwtName = pName_
-    , _rwtVersion = pVersion_
-    }
-
+registerWorkflowType pDomain_ pName_ pVersion_
+  = RegisterWorkflowType'{_rwtDefaultLambdaRole =
+                            Nothing,
+                          _rwtDefaultChildPolicy = Nothing,
+                          _rwtDefaultTaskList = Nothing,
+                          _rwtDefaultTaskPriority = Nothing,
+                          _rwtDefaultExecutionStartToCloseTimeout = Nothing,
+                          _rwtDefaultTaskStartToCloseTimeout = Nothing,
+                          _rwtDescription = Nothing, _rwtDomain = pDomain_,
+                          _rwtName = pName_, _rwtVersion = pVersion_}
 
 -- | The default IAM role attached to this workflow type.
 rwtDefaultLambdaRole :: Lens' RegisterWorkflowType (Maybe Text)
@@ -146,7 +147,7 @@ rwtDefaultChildPolicy = lens _rwtDefaultChildPolicy (\ s a -> s{_rwtDefaultChild
 rwtDefaultTaskList :: Lens' RegisterWorkflowType (Maybe TaskList)
 rwtDefaultTaskList = lens _rwtDefaultTaskList (\ s a -> s{_rwtDefaultTaskList = a})
 
--- | The default task priority to assign to the workflow type. If not assigned, then @0@ is used. Valid values are integers that range from Java's @Integer.MIN_VALUE@ (-2147483648) to @Integer.MAX_VALUE@ (2147483647). Higher numbers indicate higher priority. For more information about setting task priority, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html Setting Task Priority> in the /Amazon SWF Developer Guide/ .
+-- | The default task priority to assign to the workflow type. If not assigned, then @0@ is used. Valid values are integers that range from Java's @Integer.MIN_VALUE@ (-2147483648) to @Integer.MAX_VALUE@ (2147483647). Higher numbers indicate higher priority. For more information about setting task priority, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html Setting Task Priority> in the /Amazon SWF Developer Guide/ .
 rwtDefaultTaskPriority :: Lens' RegisterWorkflowType (Maybe Text)
 rwtDefaultTaskPriority = lens _rwtDefaultTaskPriority (\ s a -> s{_rwtDefaultTaskPriority = a})
 
@@ -166,11 +167,11 @@ rwtDescription = lens _rwtDescription (\ s a -> s{_rwtDescription = a})
 rwtDomain :: Lens' RegisterWorkflowType Text
 rwtDomain = lens _rwtDomain (\ s a -> s{_rwtDomain = a})
 
--- | The name of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not contain the literal string @arn@ .
+-- | The name of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not /be/ the literal string @arn@ .
 rwtName :: Lens' RegisterWorkflowType Text
 rwtName = lens _rwtName (\ s a -> s{_rwtName = a})
 
--- | The version of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not contain the literal string @arn@ .
+-- | The version of the workflow type. The specified string must not start or end with whitespace. It must not contain a @:@ (colon), @/@ (slash), @|@ (vertical bar), or any control characters (@\u0000-\u001f@ | @\u007f-\u009f@ ). Also, it must not /be/ the literal string @arn@ .
 rwtVersion :: Lens' RegisterWorkflowType Text
 rwtVersion = lens _rwtVersion (\ s a -> s{_rwtVersion = a})
 
@@ -219,16 +220,15 @@ instance ToQuery RegisterWorkflowType where
         toQuery = const mempty
 
 -- | /See:/ 'registerWorkflowTypeResponse' smart constructor.
-data RegisterWorkflowTypeResponse =
-  RegisterWorkflowTypeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterWorkflowTypeResponse = RegisterWorkflowTypeResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'RegisterWorkflowTypeResponse' with the minimum fields required to make a request.
 --
 registerWorkflowTypeResponse
     :: RegisterWorkflowTypeResponse
-registerWorkflowTypeResponse = RegisterWorkflowTypeResponse'
-
+registerWorkflowTypeResponse
+  = RegisterWorkflowTypeResponse'
 
 instance NFData RegisterWorkflowTypeResponse where

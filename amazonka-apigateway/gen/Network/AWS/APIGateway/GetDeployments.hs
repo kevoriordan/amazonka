@@ -55,12 +55,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDeployments' smart constructor.
-data GetDeployments = GetDeployments'
-  { _gdLimit     :: !(Maybe Int)
-  , _gdPosition  :: !(Maybe Text)
-  , _gdRestAPIId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeployments = GetDeployments'{_gdLimit ::
+                                      !(Maybe Int),
+                                      _gdPosition :: !(Maybe Text),
+                                      _gdRestAPIId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDeployments' with the minimum fields required to make a request.
 --
@@ -74,10 +73,9 @@ data GetDeployments = GetDeployments'
 getDeployments
     :: Text -- ^ 'gdRestAPIId'
     -> GetDeployments
-getDeployments pRestAPIId_ =
-  GetDeployments'
-    {_gdLimit = Nothing, _gdPosition = Nothing, _gdRestAPIId = pRestAPIId_}
-
+getDeployments pRestAPIId_
+  = GetDeployments'{_gdLimit = Nothing,
+                    _gdPosition = Nothing, _gdRestAPIId = pRestAPIId_}
 
 -- | The maximum number of returned results per page. The default value is 25 and the maximum value is 500.
 gdLimit :: Lens' GetDeployments (Maybe Int)
@@ -131,15 +129,17 @@ instance ToQuery GetDeployments where
 -- | Represents a collection resource that contains zero or more references to your existing deployments, and links that guide you on how to interact with your collection. The collection offers a paginated view of the contained deployments.
 --
 --
--- To create a new deployment of a 'RestApi' , make a @POST@ request against this resource. To view, update, or delete an existing deployment, make a @GET@ , @PATCH@ , or @DELETE@ request, respectively, on a specified 'Deployment' resource.<http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html Deploying an API> , <http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html AWS CLI> , <https://aws.amazon.com/tools/ AWS SDKs>
+-- To create a new deployment of a 'RestApi' , make a @POST@ request against this resource. To view, update, or delete an existing deployment, make a @GET@ , @PATCH@ , or @DELETE@ request, respectively, on a specified 'Deployment' resource.<https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html Deploying an API> , <https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html AWS CLI> , <https://aws.amazon.com/tools/ AWS SDKs> 
 --
 -- /See:/ 'getDeploymentsResponse' smart constructor.
-data GetDeploymentsResponse = GetDeploymentsResponse'
-  { _gdrsItems          :: !(Maybe [Deployment])
-  , _gdrsPosition       :: !(Maybe Text)
-  , _gdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeploymentsResponse = GetDeploymentsResponse'{_gdrsItems
+                                                      :: !(Maybe [Deployment]),
+                                                      _gdrsPosition ::
+                                                      !(Maybe Text),
+                                                      _gdrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetDeploymentsResponse' with the minimum fields required to make a request.
 --
@@ -153,13 +153,10 @@ data GetDeploymentsResponse = GetDeploymentsResponse'
 getDeploymentsResponse
     :: Int -- ^ 'gdrsResponseStatus'
     -> GetDeploymentsResponse
-getDeploymentsResponse pResponseStatus_ =
-  GetDeploymentsResponse'
-    { _gdrsItems = Nothing
-    , _gdrsPosition = Nothing
-    , _gdrsResponseStatus = pResponseStatus_
-    }
-
+getDeploymentsResponse pResponseStatus_
+  = GetDeploymentsResponse'{_gdrsItems = Nothing,
+                            _gdrsPosition = Nothing,
+                            _gdrsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gdrsItems :: Lens' GetDeploymentsResponse [Deployment]

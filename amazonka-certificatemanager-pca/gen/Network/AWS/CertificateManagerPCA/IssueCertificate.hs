@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Uses your private certificate authority (CA) to issue a client certificate. This function returns the Amazon Resource Name (ARN) of the certificate. You can retrieve the certificate by calling the 'GetCertificate' function and specifying the ARN.
+-- Uses your private certificate authority (CA) to issue a client certificate. This action returns the Amazon Resource Name (ARN) of the certificate. You can retrieve the certificate by calling the 'GetCertificate' action and specifying the ARN. 
 --
 --
 module Network.AWS.CertificateManagerPCA.IssueCertificate
@@ -28,6 +28,7 @@ module Network.AWS.CertificateManagerPCA.IssueCertificate
     , IssueCertificate
     -- * Request Lenses
     , icIdempotencyToken
+    , icTemplateARN
     , icCertificateAuthorityARN
     , icCSR
     , icSigningAlgorithm
@@ -49,22 +50,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'issueCertificate' smart constructor.
-data IssueCertificate = IssueCertificate'
-  { _icIdempotencyToken        :: !(Maybe Text)
-  , _icCertificateAuthorityARN :: !Text
-  , _icCSR                     :: !Base64
-  , _icSigningAlgorithm        :: !SigningAlgorithm
-  , _icValidity                :: !Validity
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data IssueCertificate = IssueCertificate'{_icIdempotencyToken
+                                          :: !(Maybe Text),
+                                          _icTemplateARN :: !(Maybe Text),
+                                          _icCertificateAuthorityARN :: !Text,
+                                          _icCSR :: !Base64,
+                                          _icSigningAlgorithm ::
+                                          !SigningAlgorithm,
+                                          _icValidity :: !Validity}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IssueCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'icIdempotencyToken' - Custom string that can be used to distinguish between calls to the __IssueCertificate__ function. Idempotency tokens time out after one hour. Therefore, if you call __IssueCertificate__ multiple times with the same idempotency token within 5 minutes, ACM PCA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.
+-- * 'icIdempotencyToken' - Custom string that can be used to distinguish between calls to the __IssueCertificate__ action. Idempotency tokens time out after one hour. Therefore, if you call __IssueCertificate__ multiple times with the same idempotency token within 5 minutes, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.
 --
--- * 'icCertificateAuthorityARN' - The Amazon Resource Name (ARN) that was returned when you called 'CreateCertificateAuthority' . This must be of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @
+-- * 'icTemplateARN' - Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the @EndEntityCertificate/V1@ template. The following service-owned @TemplateArn@ values are supported by ACM Private CA:      * arn:aws:acm-pca:::template/EndEntityCertificate/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1     * arn:aws:acm-pca:::template/RootCACertificate/V1 For more information, see <https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html Using Templates> .
+--
+-- * 'icCertificateAuthorityARN' - The Amazon Resource Name (ARN) that was returned when you called 'CreateCertificateAuthority' . This must be of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ 
 --
 -- * 'icCSR' - The certificate signing request (CSR) for the certificate you want to issue. You can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key.  @openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr@  If you have a configuration file, you can use the following OpenSSL command. The @usr_cert@ block in the configuration file contains your X509 version 3 extensions.  @openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr@ -- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 --
@@ -77,21 +81,25 @@ issueCertificate
     -> SigningAlgorithm -- ^ 'icSigningAlgorithm'
     -> Validity -- ^ 'icValidity'
     -> IssueCertificate
-issueCertificate pCertificateAuthorityARN_ pCSR_ pSigningAlgorithm_ pValidity_ =
-  IssueCertificate'
-    { _icIdempotencyToken = Nothing
-    , _icCertificateAuthorityARN = pCertificateAuthorityARN_
-    , _icCSR = _Base64 # pCSR_
-    , _icSigningAlgorithm = pSigningAlgorithm_
-    , _icValidity = pValidity_
-    }
+issueCertificate pCertificateAuthorityARN_ pCSR_
+  pSigningAlgorithm_ pValidity_
+  = IssueCertificate'{_icIdempotencyToken = Nothing,
+                      _icTemplateARN = Nothing,
+                      _icCertificateAuthorityARN =
+                        pCertificateAuthorityARN_,
+                      _icCSR = _Base64 # pCSR_,
+                      _icSigningAlgorithm = pSigningAlgorithm_,
+                      _icValidity = pValidity_}
 
-
--- | Custom string that can be used to distinguish between calls to the __IssueCertificate__ function. Idempotency tokens time out after one hour. Therefore, if you call __IssueCertificate__ multiple times with the same idempotency token within 5 minutes, ACM PCA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.
+-- | Custom string that can be used to distinguish between calls to the __IssueCertificate__ action. Idempotency tokens time out after one hour. Therefore, if you call __IssueCertificate__ multiple times with the same idempotency token within 5 minutes, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.
 icIdempotencyToken :: Lens' IssueCertificate (Maybe Text)
 icIdempotencyToken = lens _icIdempotencyToken (\ s a -> s{_icIdempotencyToken = a})
 
--- | The Amazon Resource Name (ARN) that was returned when you called 'CreateCertificateAuthority' . This must be of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @
+-- | Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the @EndEntityCertificate/V1@ template. The following service-owned @TemplateArn@ values are supported by ACM Private CA:      * arn:aws:acm-pca:::template/EndEntityCertificate/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1     * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1     * arn:aws:acm-pca:::template/RootCACertificate/V1 For more information, see <https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html Using Templates> .
+icTemplateARN :: Lens' IssueCertificate (Maybe Text)
+icTemplateARN = lens _icTemplateARN (\ s a -> s{_icTemplateARN = a})
+
+-- | The Amazon Resource Name (ARN) that was returned when you called 'CreateCertificateAuthority' . This must be of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ 
 icCertificateAuthorityARN :: Lens' IssueCertificate Text
 icCertificateAuthorityARN = lens _icCertificateAuthorityARN (\ s a -> s{_icCertificateAuthorityARN = a})
 
@@ -134,6 +142,7 @@ instance ToJSON IssueCertificate where
           = object
               (catMaybes
                  [("IdempotencyToken" .=) <$> _icIdempotencyToken,
+                  ("TemplateArn" .=) <$> _icTemplateARN,
                   Just
                     ("CertificateAuthorityArn" .=
                        _icCertificateAuthorityARN),
@@ -148,28 +157,29 @@ instance ToQuery IssueCertificate where
         toQuery = const mempty
 
 -- | /See:/ 'issueCertificateResponse' smart constructor.
-data IssueCertificateResponse = IssueCertificateResponse'
-  { _icrsCertificateARN :: !(Maybe Text)
-  , _icrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data IssueCertificateResponse = IssueCertificateResponse'{_icrsCertificateARN
+                                                          :: !(Maybe Text),
+                                                          _icrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'IssueCertificateResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'icrsCertificateARN' - The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ /certificate//286535153982981100925020015808220737245/ @
+-- * 'icrsCertificateARN' - The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ /certificate//286535153982981100925020015808220737245/ @ 
 --
 -- * 'icrsResponseStatus' - -- | The response status code.
 issueCertificateResponse
     :: Int -- ^ 'icrsResponseStatus'
     -> IssueCertificateResponse
-issueCertificateResponse pResponseStatus_ =
-  IssueCertificateResponse'
-    {_icrsCertificateARN = Nothing, _icrsResponseStatus = pResponseStatus_}
+issueCertificateResponse pResponseStatus_
+  = IssueCertificateResponse'{_icrsCertificateARN =
+                                Nothing,
+                              _icrsResponseStatus = pResponseStatus_}
 
-
--- | The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ /certificate//286535153982981100925020015808220737245/ @
+-- | The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ /certificate//286535153982981100925020015808220737245/ @ 
 icrsCertificateARN :: Lens' IssueCertificateResponse (Maybe Text)
 icrsCertificateARN = lens _icrsCertificateARN (\ s a -> s{_icrsCertificateARN = a})
 

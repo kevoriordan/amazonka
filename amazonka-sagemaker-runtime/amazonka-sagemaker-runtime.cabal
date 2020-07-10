@@ -51,11 +51,11 @@ library
 
     other-modules:
           Network.AWS.SageMakerRuntime.Types.Product
-        , Network.AWS.SageMakerRuntime.Types.Sum
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-sagemaker-runtime-test
     type:              exitcode-stdio-1.0
@@ -79,6 +79,7 @@ test-suite amazonka-sagemaker-runtime-test
         , amazonka-sagemaker-runtime
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

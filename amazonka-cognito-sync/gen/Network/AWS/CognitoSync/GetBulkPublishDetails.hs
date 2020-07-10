@@ -53,10 +53,10 @@ import Network.AWS.Response
 -- | The input for the GetBulkPublishDetails operation.
 --
 -- /See:/ 'getBulkPublishDetails' smart constructor.
-newtype GetBulkPublishDetails = GetBulkPublishDetails'
-  { _gbpdIdentityPoolId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBulkPublishDetails = GetBulkPublishDetails'{_gbpdIdentityPoolId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetBulkPublishDetails' with the minimum fields required to make a request.
 --
@@ -66,9 +66,9 @@ newtype GetBulkPublishDetails = GetBulkPublishDetails'
 getBulkPublishDetails
     :: Text -- ^ 'gbpdIdentityPoolId'
     -> GetBulkPublishDetails
-getBulkPublishDetails pIdentityPoolId_ =
-  GetBulkPublishDetails' {_gbpdIdentityPoolId = pIdentityPoolId_}
-
+getBulkPublishDetails pIdentityPoolId_
+  = GetBulkPublishDetails'{_gbpdIdentityPoolId =
+                             pIdentityPoolId_}
 
 -- | A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.
 gbpdIdentityPoolId :: Lens' GetBulkPublishDetails Text
@@ -115,15 +115,30 @@ instance ToQuery GetBulkPublishDetails where
 -- | The output for the GetBulkPublishDetails operation.
 --
 -- /See:/ 'getBulkPublishDetailsResponse' smart constructor.
-data GetBulkPublishDetailsResponse = GetBulkPublishDetailsResponse'
-  { _gbpdrsBulkPublishStartTime    :: !(Maybe POSIX)
-  , _gbpdrsIdentityPoolId          :: !(Maybe Text)
-  , _gbpdrsBulkPublishCompleteTime :: !(Maybe POSIX)
-  , _gbpdrsFailureMessage          :: !(Maybe Text)
-  , _gbpdrsBulkPublishStatus       :: !(Maybe BulkPublishStatus)
-  , _gbpdrsResponseStatus          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBulkPublishDetailsResponse = GetBulkPublishDetailsResponse'{_gbpdrsBulkPublishStartTime
+                                                                    ::
+                                                                    !(Maybe
+                                                                        POSIX),
+                                                                    _gbpdrsIdentityPoolId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _gbpdrsBulkPublishCompleteTime
+                                                                    ::
+                                                                    !(Maybe
+                                                                        POSIX),
+                                                                    _gbpdrsFailureMessage
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _gbpdrsBulkPublishStatus
+                                                                    ::
+                                                                    !(Maybe
+                                                                        BulkPublishStatus),
+                                                                    _gbpdrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetBulkPublishDetailsResponse' with the minimum fields required to make a request.
 --
@@ -143,16 +158,14 @@ data GetBulkPublishDetailsResponse = GetBulkPublishDetailsResponse'
 getBulkPublishDetailsResponse
     :: Int -- ^ 'gbpdrsResponseStatus'
     -> GetBulkPublishDetailsResponse
-getBulkPublishDetailsResponse pResponseStatus_ =
-  GetBulkPublishDetailsResponse'
-    { _gbpdrsBulkPublishStartTime = Nothing
-    , _gbpdrsIdentityPoolId = Nothing
-    , _gbpdrsBulkPublishCompleteTime = Nothing
-    , _gbpdrsFailureMessage = Nothing
-    , _gbpdrsBulkPublishStatus = Nothing
-    , _gbpdrsResponseStatus = pResponseStatus_
-    }
-
+getBulkPublishDetailsResponse pResponseStatus_
+  = GetBulkPublishDetailsResponse'{_gbpdrsBulkPublishStartTime
+                                     = Nothing,
+                                   _gbpdrsIdentityPoolId = Nothing,
+                                   _gbpdrsBulkPublishCompleteTime = Nothing,
+                                   _gbpdrsFailureMessage = Nothing,
+                                   _gbpdrsBulkPublishStatus = Nothing,
+                                   _gbpdrsResponseStatus = pResponseStatus_}
 
 -- | The date/time at which the last bulk publish was initiated.
 gbpdrsBulkPublishStartTime :: Lens' GetBulkPublishDetailsResponse (Maybe UTCTime)

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all the image IDs for a given repository.
+-- Lists all the image IDs for the specified repository.
 --
 --
--- You can filter images based on whether or not they are tagged by setting the @tagStatus@ parameter to @TAGGED@ or @UNTAGGED@ . For example, you can filter your results to return only @UNTAGGED@ images and then pipe that result to a 'BatchDeleteImage' operation to delete them. Or, you can filter your results to return only @TAGGED@ images to list all of the tags in your repository.
+-- You can filter images based on whether or not they are tagged by using the @tagStatus@ filter and specifying either @TAGGED@ , @UNTAGGED@ or @ANY@ . For example, you can filter your results to return only @UNTAGGED@ images and then pipe that result to a 'BatchDeleteImage' operation to delete them. Or, you can filter your results to return only @TAGGED@ images to list all of the tags in your repository.
 --
 --
 -- This operation returns paginated results.
@@ -55,14 +55,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listImages' smart constructor.
-data ListImages = ListImages'
-  { _liRegistryId     :: !(Maybe Text)
-  , _liNextToken      :: !(Maybe Text)
-  , _liFilter         :: !(Maybe ListImagesFilter)
-  , _liMaxResults     :: !(Maybe Nat)
-  , _liRepositoryName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListImages = ListImages'{_liRegistryId ::
+                              !(Maybe Text),
+                              _liNextToken :: !(Maybe Text),
+                              _liFilter :: !(Maybe ListImagesFilter),
+                              _liMaxResults :: !(Maybe Nat),
+                              _liRepositoryName :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListImages' with the minimum fields required to make a request.
 --
@@ -74,21 +73,17 @@ data ListImages = ListImages'
 --
 -- * 'liFilter' - The filter key and value with which to filter your @ListImages@ results.
 --
--- * 'liMaxResults' - The maximum number of image results returned by @ListImages@ in paginated output. When this parameter is used, @ListImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListImages@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListImages@ returns up to 100 results and a @nextToken@ value, if applicable.
+-- * 'liMaxResults' - The maximum number of image results returned by @ListImages@ in paginated output. When this parameter is used, @ListImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListImages@ request with the returned @nextToken@ value. This value can be between 1 and 1000. If this parameter is not used, then @ListImages@ returns up to 100 results and a @nextToken@ value, if applicable.
 --
 -- * 'liRepositoryName' - The repository with image IDs to be listed.
 listImages
     :: Text -- ^ 'liRepositoryName'
     -> ListImages
-listImages pRepositoryName_ =
-  ListImages'
-    { _liRegistryId = Nothing
-    , _liNextToken = Nothing
-    , _liFilter = Nothing
-    , _liMaxResults = Nothing
-    , _liRepositoryName = pRepositoryName_
-    }
-
+listImages pRepositoryName_
+  = ListImages'{_liRegistryId = Nothing,
+                _liNextToken = Nothing, _liFilter = Nothing,
+                _liMaxResults = Nothing,
+                _liRepositoryName = pRepositoryName_}
 
 -- | The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.
 liRegistryId :: Lens' ListImages (Maybe Text)
@@ -102,7 +97,7 @@ liNextToken = lens _liNextToken (\ s a -> s{_liNextToken = a})
 liFilter :: Lens' ListImages (Maybe ListImagesFilter)
 liFilter = lens _liFilter (\ s a -> s{_liFilter = a})
 
--- | The maximum number of image results returned by @ListImages@ in paginated output. When this parameter is used, @ListImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListImages@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListImages@ returns up to 100 results and a @nextToken@ value, if applicable.
+-- | The maximum number of image results returned by @ListImages@ in paginated output. When this parameter is used, @ListImages@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListImages@ request with the returned @nextToken@ value. This value can be between 1 and 1000. If this parameter is not used, then @ListImages@ returns up to 100 results and a @nextToken@ value, if applicable.
 liMaxResults :: Lens' ListImages (Maybe Natural)
 liMaxResults = lens _liMaxResults (\ s a -> s{_liMaxResults = a}) . mapping _Nat
 
@@ -158,12 +153,11 @@ instance ToQuery ListImages where
         toQuery = const mempty
 
 -- | /See:/ 'listImagesResponse' smart constructor.
-data ListImagesResponse = ListImagesResponse'
-  { _lirsImageIds       :: !(Maybe [ImageIdentifier])
-  , _lirsNextToken      :: !(Maybe Text)
-  , _lirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListImagesResponse = ListImagesResponse'{_lirsImageIds
+                                              :: !(Maybe [ImageIdentifier]),
+                                              _lirsNextToken :: !(Maybe Text),
+                                              _lirsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListImagesResponse' with the minimum fields required to make a request.
 --
@@ -177,13 +171,10 @@ data ListImagesResponse = ListImagesResponse'
 listImagesResponse
     :: Int -- ^ 'lirsResponseStatus'
     -> ListImagesResponse
-listImagesResponse pResponseStatus_ =
-  ListImagesResponse'
-    { _lirsImageIds = Nothing
-    , _lirsNextToken = Nothing
-    , _lirsResponseStatus = pResponseStatus_
-    }
-
+listImagesResponse pResponseStatus_
+  = ListImagesResponse'{_lirsImageIds = Nothing,
+                        _lirsNextToken = Nothing,
+                        _lirsResponseStatus = pResponseStatus_}
 
 -- | The list of image IDs for the requested repository.
 lirsImageIds :: Lens' ListImagesResponse [ImageIdentifier]

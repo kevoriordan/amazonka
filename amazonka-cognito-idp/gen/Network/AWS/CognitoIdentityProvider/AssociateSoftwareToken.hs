@@ -47,11 +47,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateSoftwareToken' smart constructor.
-data AssociateSoftwareToken = AssociateSoftwareToken'
-  { _astAccessToken :: !(Maybe (Sensitive Text))
-  , _astSession     :: !(Maybe Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AssociateSoftwareToken = AssociateSoftwareToken'{_astAccessToken
+                                                      ::
+                                                      !(Maybe (Sensitive Text)),
+                                                      _astSession ::
+                                                      !(Maybe Text)}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssociateSoftwareToken' with the minimum fields required to make a request.
 --
@@ -62,9 +63,9 @@ data AssociateSoftwareToken = AssociateSoftwareToken'
 -- * 'astSession' - The session which should be passed both ways in challenge-response calls to the service. This allows authentication of the user as part of the MFA setup process.
 associateSoftwareToken
     :: AssociateSoftwareToken
-associateSoftwareToken =
-  AssociateSoftwareToken' {_astAccessToken = Nothing, _astSession = Nothing}
-
+associateSoftwareToken
+  = AssociateSoftwareToken'{_astAccessToken = Nothing,
+                            _astSession = Nothing}
 
 -- | The access token.
 astAccessToken :: Lens' AssociateSoftwareToken (Maybe Text)
@@ -113,12 +114,19 @@ instance ToQuery AssociateSoftwareToken where
         toQuery = const mempty
 
 -- | /See:/ 'associateSoftwareTokenResponse' smart constructor.
-data AssociateSoftwareTokenResponse = AssociateSoftwareTokenResponse'
-  { _astrsSecretCode     :: !(Maybe (Sensitive Text))
-  , _astrsSession        :: !(Maybe Text)
-  , _astrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AssociateSoftwareTokenResponse = AssociateSoftwareTokenResponse'{_astrsSecretCode
+                                                                      ::
+                                                                      !(Maybe
+                                                                          (Sensitive
+                                                                             Text)),
+                                                                      _astrsSession
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _astrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Show, Data, Typeable,
+                                                  Generic)
 
 -- | Creates a value of 'AssociateSoftwareTokenResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +140,11 @@ data AssociateSoftwareTokenResponse = AssociateSoftwareTokenResponse'
 associateSoftwareTokenResponse
     :: Int -- ^ 'astrsResponseStatus'
     -> AssociateSoftwareTokenResponse
-associateSoftwareTokenResponse pResponseStatus_ =
-  AssociateSoftwareTokenResponse'
-    { _astrsSecretCode = Nothing
-    , _astrsSession = Nothing
-    , _astrsResponseStatus = pResponseStatus_
-    }
-
+associateSoftwareTokenResponse pResponseStatus_
+  = AssociateSoftwareTokenResponse'{_astrsSecretCode =
+                                      Nothing,
+                                    _astrsSession = Nothing,
+                                    _astrsResponseStatus = pResponseStatus_}
 
 -- | A unique generated shared secret code that is used in the TOTP algorithm to generate a one time code.
 astrsSecretCode :: Lens' AssociateSoftwareTokenResponse (Maybe Text)

@@ -57,18 +57,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBotChannelAssociation' smart constructor.
-data GetBotChannelAssociation = GetBotChannelAssociation'
-  { _gName     :: !Text
-  , _gBotName  :: !Text
-  , _gBotAlias :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBotChannelAssociation = GetBotChannelAssociation'{_gName
+                                                          :: !Text,
+                                                          _gBotName :: !Text,
+                                                          _gBotAlias :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetBotChannelAssociation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gName' - The name of the association between the bot and the channel. The name is case sensitive.
+-- * 'gName' - The name of the association between the bot and the channel. The name is case sensitive. 
 --
 -- * 'gBotName' - The name of the Amazon Lex bot.
 --
@@ -78,12 +78,11 @@ getBotChannelAssociation
     -> Text -- ^ 'gBotName'
     -> Text -- ^ 'gBotAlias'
     -> GetBotChannelAssociation
-getBotChannelAssociation pName_ pBotName_ pBotAlias_ =
-  GetBotChannelAssociation'
-    {_gName = pName_, _gBotName = pBotName_, _gBotAlias = pBotAlias_}
+getBotChannelAssociation pName_ pBotName_ pBotAlias_
+  = GetBotChannelAssociation'{_gName = pName_,
+                              _gBotName = pBotName_, _gBotAlias = pBotAlias_}
 
-
--- | The name of the association between the bot and the channel. The name is case sensitive.
+-- | The name of the association between the bot and the channel. The name is case sensitive. 
 gName :: Lens' GetBotChannelAssociation Text
 gName = lens _gName (\ s a -> s{_gName = a})
 
@@ -134,19 +133,50 @@ instance ToQuery GetBotChannelAssociation where
         toQuery = const mempty
 
 -- | /See:/ 'getBotChannelAssociationResponse' smart constructor.
-data GetBotChannelAssociationResponse = GetBotChannelAssociationResponse'
-  { _gbcarsFailureReason    :: !(Maybe Text)
-  , _gbcarsStatus           :: !(Maybe ChannelStatus)
-  , _gbcarsBotAlias         :: !(Maybe Text)
-  , _gbcarsBotName          :: !(Maybe Text)
-  , _gbcarsBotConfiguration :: !(Maybe (Sensitive (Map Text Text)))
-  , _gbcarsCreatedDate      :: !(Maybe POSIX)
-  , _gbcarsName             :: !(Maybe Text)
-  , _gbcarsType             :: !(Maybe ChannelType)
-  , _gbcarsDescription      :: !(Maybe Text)
-  , _gbcarsResponseStatus   :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetBotChannelAssociationResponse = GetBotChannelAssociationResponse'{_gbcarsFailureReason
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gbcarsStatus
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ChannelStatus),
+                                                                          _gbcarsBotAlias
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gbcarsBotName
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gbcarsBotConfiguration
+                                                                          ::
+                                                                          !(Maybe
+                                                                              (Sensitive
+                                                                                 (Map
+                                                                                    Text
+                                                                                    Text))),
+                                                                          _gbcarsCreatedDate
+                                                                          ::
+                                                                          !(Maybe
+                                                                              POSIX),
+                                                                          _gbcarsName
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gbcarsType
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ChannelType),
+                                                                          _gbcarsDescription
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gbcarsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Show, Data, Typeable,
+                                                    Generic)
 
 -- | Creates a value of 'GetBotChannelAssociationResponse' with the minimum fields required to make a request.
 --
@@ -174,20 +204,18 @@ data GetBotChannelAssociationResponse = GetBotChannelAssociationResponse'
 getBotChannelAssociationResponse
     :: Int -- ^ 'gbcarsResponseStatus'
     -> GetBotChannelAssociationResponse
-getBotChannelAssociationResponse pResponseStatus_ =
-  GetBotChannelAssociationResponse'
-    { _gbcarsFailureReason = Nothing
-    , _gbcarsStatus = Nothing
-    , _gbcarsBotAlias = Nothing
-    , _gbcarsBotName = Nothing
-    , _gbcarsBotConfiguration = Nothing
-    , _gbcarsCreatedDate = Nothing
-    , _gbcarsName = Nothing
-    , _gbcarsType = Nothing
-    , _gbcarsDescription = Nothing
-    , _gbcarsResponseStatus = pResponseStatus_
-    }
-
+getBotChannelAssociationResponse pResponseStatus_
+  = GetBotChannelAssociationResponse'{_gbcarsFailureReason
+                                        = Nothing,
+                                      _gbcarsStatus = Nothing,
+                                      _gbcarsBotAlias = Nothing,
+                                      _gbcarsBotName = Nothing,
+                                      _gbcarsBotConfiguration = Nothing,
+                                      _gbcarsCreatedDate = Nothing,
+                                      _gbcarsName = Nothing,
+                                      _gbcarsType = Nothing,
+                                      _gbcarsDescription = Nothing,
+                                      _gbcarsResponseStatus = pResponseStatus_}
 
 -- | If @status@ is @FAILED@ , Amazon Lex provides the reason that it failed to create the association.
 gbcarsFailureReason :: Lens' GetBotChannelAssociationResponse (Maybe Text)

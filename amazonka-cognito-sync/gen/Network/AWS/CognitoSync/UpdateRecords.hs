@@ -59,16 +59,15 @@ import Network.AWS.Response
 -- | A request to post updates to records or add and delete records for a dataset and user.
 --
 -- /See:/ 'updateRecords' smart constructor.
-data UpdateRecords = UpdateRecords'
-  { _urRecordPatches    :: !(Maybe [RecordPatch])
-  , _urDeviceId         :: !(Maybe Text)
-  , _urClientContext    :: !(Maybe Text)
-  , _urIdentityPoolId   :: !Text
-  , _urIdentityId       :: !Text
-  , _urDatasetName      :: !Text
-  , _urSyncSessionToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRecords = UpdateRecords'{_urRecordPatches
+                                    :: !(Maybe [RecordPatch]),
+                                    _urDeviceId :: !(Maybe Text),
+                                    _urClientContext :: !(Maybe Text),
+                                    _urIdentityPoolId :: !Text,
+                                    _urIdentityId :: !Text,
+                                    _urDatasetName :: !Text,
+                                    _urSyncSessionToken :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRecords' with the minimum fields required to make a request.
 --
@@ -93,17 +92,14 @@ updateRecords
     -> Text -- ^ 'urDatasetName'
     -> Text -- ^ 'urSyncSessionToken'
     -> UpdateRecords
-updateRecords pIdentityPoolId_ pIdentityId_ pDatasetName_ pSyncSessionToken_ =
-  UpdateRecords'
-    { _urRecordPatches = Nothing
-    , _urDeviceId = Nothing
-    , _urClientContext = Nothing
-    , _urIdentityPoolId = pIdentityPoolId_
-    , _urIdentityId = pIdentityId_
-    , _urDatasetName = pDatasetName_
-    , _urSyncSessionToken = pSyncSessionToken_
-    }
-
+updateRecords pIdentityPoolId_ pIdentityId_
+  pDatasetName_ pSyncSessionToken_
+  = UpdateRecords'{_urRecordPatches = Nothing,
+                   _urDeviceId = Nothing, _urClientContext = Nothing,
+                   _urIdentityPoolId = pIdentityPoolId_,
+                   _urIdentityId = pIdentityId_,
+                   _urDatasetName = pDatasetName_,
+                   _urSyncSessionToken = pSyncSessionToken_}
 
 -- | A list of patch operations.
 urRecordPatches :: Lens' UpdateRecords [RecordPatch]
@@ -174,11 +170,11 @@ instance ToQuery UpdateRecords where
 -- | Returned for a successful UpdateRecordsRequest.
 --
 -- /See:/ 'updateRecordsResponse' smart constructor.
-data UpdateRecordsResponse = UpdateRecordsResponse'
-  { _urrsRecords        :: !(Maybe [Record])
-  , _urrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRecordsResponse = UpdateRecordsResponse'{_urrsRecords
+                                                    :: !(Maybe [Record]),
+                                                    _urrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateRecordsResponse' with the minimum fields required to make a request.
 --
@@ -190,10 +186,9 @@ data UpdateRecordsResponse = UpdateRecordsResponse'
 updateRecordsResponse
     :: Int -- ^ 'urrsResponseStatus'
     -> UpdateRecordsResponse
-updateRecordsResponse pResponseStatus_ =
-  UpdateRecordsResponse'
-    {_urrsRecords = Nothing, _urrsResponseStatus = pResponseStatus_}
-
+updateRecordsResponse pResponseStatus_
+  = UpdateRecordsResponse'{_urrsRecords = Nothing,
+                           _urrsResponseStatus = pResponseStatus_}
 
 -- | A list of records that have been updated.
 urrsRecords :: Lens' UpdateRecordsResponse [Record]

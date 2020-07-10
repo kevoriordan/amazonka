@@ -54,14 +54,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateMethodResponse' smart constructor.
-data UpdateMethodResponse = UpdateMethodResponse'
-  { _umPatchOperations :: !(Maybe [PatchOperation])
-  , _umRestAPIId       :: !Text
-  , _umResourceId      :: !Text
-  , _umHttpMethod      :: !Text
-  , _umStatusCode      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateMethodResponse = UpdateMethodResponse'{_umPatchOperations
+                                                  :: !(Maybe [PatchOperation]),
+                                                  _umRestAPIId :: !Text,
+                                                  _umResourceId :: !Text,
+                                                  _umHttpMethod :: !Text,
+                                                  _umStatusCode :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateMethodResponse' with the minimum fields required to make a request.
 --
@@ -82,15 +81,13 @@ updateMethodResponse
     -> Text -- ^ 'umHttpMethod'
     -> Text -- ^ 'umStatusCode'
     -> UpdateMethodResponse
-updateMethodResponse pRestAPIId_ pResourceId_ pHttpMethod_ pStatusCode_ =
-  UpdateMethodResponse'
-    { _umPatchOperations = Nothing
-    , _umRestAPIId = pRestAPIId_
-    , _umResourceId = pResourceId_
-    , _umHttpMethod = pHttpMethod_
-    , _umStatusCode = pStatusCode_
-    }
-
+updateMethodResponse pRestAPIId_ pResourceId_
+  pHttpMethod_ pStatusCode_
+  = UpdateMethodResponse'{_umPatchOperations = Nothing,
+                          _umRestAPIId = pRestAPIId_,
+                          _umResourceId = pResourceId_,
+                          _umHttpMethod = pHttpMethod_,
+                          _umStatusCode = pStatusCode_}
 
 -- | A list of update operations to be applied to the specified resource and in the order specified in this list.
 umPatchOperations :: Lens' UpdateMethodResponse [PatchOperation]

@@ -51,10 +51,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describePipelines' smart constructor.
-newtype DescribePipelines = DescribePipelines'
-  { _dpPipelineIds :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribePipelines = DescribePipelines'{_dpPipelineIds
+                                               :: [Text]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribePipelines' with the minimum fields required to make a request.
 --
@@ -63,8 +62,8 @@ newtype DescribePipelines = DescribePipelines'
 -- * 'dpPipelineIds' - The IDs of the pipelines to describe. You can pass as many as 25 identifiers in a single call. To obtain pipeline IDs, call 'ListPipelines' .
 describePipelines
     :: DescribePipelines
-describePipelines = DescribePipelines' {_dpPipelineIds = mempty}
-
+describePipelines
+  = DescribePipelines'{_dpPipelineIds = mempty}
 
 -- | The IDs of the pipelines to describe. You can pass as many as 25 identifiers in a single call. To obtain pipeline IDs, call 'ListPipelines' .
 dpPipelineIds :: Lens' DescribePipelines [Text]
@@ -109,11 +108,13 @@ instance ToQuery DescribePipelines where
 --
 --
 -- /See:/ 'describePipelinesResponse' smart constructor.
-data DescribePipelinesResponse = DescribePipelinesResponse'
-  { _dprsResponseStatus          :: !Int
-  , _dprsPipelineDescriptionList :: ![PipelineDescription]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePipelinesResponse = DescribePipelinesResponse'{_dprsResponseStatus
+                                                            :: !Int,
+                                                            _dprsPipelineDescriptionList
+                                                            ::
+                                                            ![PipelineDescription]}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribePipelinesResponse' with the minimum fields required to make a request.
 --
@@ -125,12 +126,10 @@ data DescribePipelinesResponse = DescribePipelinesResponse'
 describePipelinesResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DescribePipelinesResponse
-describePipelinesResponse pResponseStatus_ =
-  DescribePipelinesResponse'
-    { _dprsResponseStatus = pResponseStatus_
-    , _dprsPipelineDescriptionList = mempty
-    }
-
+describePipelinesResponse pResponseStatus_
+  = DescribePipelinesResponse'{_dprsResponseStatus =
+                                 pResponseStatus_,
+                               _dprsPipelineDescriptionList = mempty}
 
 -- | -- | The response status code.
 dprsResponseStatus :: Lens' DescribePipelinesResponse Int

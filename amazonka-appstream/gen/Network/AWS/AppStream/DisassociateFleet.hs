@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateFleet' smart constructor.
-data DisassociateFleet = DisassociateFleet'
-  { _dfFleetName :: !Text
-  , _dfStackName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateFleet = DisassociateFleet'{_dfFleetName
+                                            :: !Text,
+                                            _dfStackName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisassociateFleet' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ disassociateFleet
     :: Text -- ^ 'dfFleetName'
     -> Text -- ^ 'dfStackName'
     -> DisassociateFleet
-disassociateFleet pFleetName_ pStackName_ =
-  DisassociateFleet' {_dfFleetName = pFleetName_, _dfStackName = pStackName_}
-
+disassociateFleet pFleetName_ pStackName_
+  = DisassociateFleet'{_dfFleetName = pFleetName_,
+                       _dfStackName = pStackName_}
 
 -- | The name of the fleet.
 dfFleetName :: Lens' DisassociateFleet Text
@@ -110,10 +109,10 @@ instance ToQuery DisassociateFleet where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateFleetResponse' smart constructor.
-newtype DisassociateFleetResponse = DisassociateFleetResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateFleetResponse = DisassociateFleetResponse'{_drsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DisassociateFleetResponse' with the minimum fields required to make a request.
 --
@@ -123,9 +122,9 @@ newtype DisassociateFleetResponse = DisassociateFleetResponse'
 disassociateFleetResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DisassociateFleetResponse
-disassociateFleetResponse pResponseStatus_ =
-  DisassociateFleetResponse' {_drsResponseStatus = pResponseStatus_}
-
+disassociateFleetResponse pResponseStatus_
+  = DisassociateFleetResponse'{_drsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DisassociateFleetResponse Int

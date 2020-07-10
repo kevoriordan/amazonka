@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disableAlarmActions' smart constructor.
-newtype DisableAlarmActions = DisableAlarmActions'
-  { _daaAlarmNames :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableAlarmActions = DisableAlarmActions'{_daaAlarmNames
+                                                   :: [Text]}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DisableAlarmActions' with the minimum fields required to make a request.
 --
@@ -54,8 +54,8 @@ newtype DisableAlarmActions = DisableAlarmActions'
 -- * 'daaAlarmNames' - The names of the alarms.
 disableAlarmActions
     :: DisableAlarmActions
-disableAlarmActions = DisableAlarmActions' {_daaAlarmNames = mempty}
-
+disableAlarmActions
+  = DisableAlarmActions'{_daaAlarmNames = mempty}
 
 -- | The names of the alarms.
 daaAlarmNames :: Lens' DisableAlarmActions [Text]
@@ -85,16 +85,15 @@ instance ToQuery DisableAlarmActions where
                "AlarmNames" =: toQueryList "member" _daaAlarmNames]
 
 -- | /See:/ 'disableAlarmActionsResponse' smart constructor.
-data DisableAlarmActionsResponse =
-  DisableAlarmActionsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableAlarmActionsResponse = DisableAlarmActionsResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DisableAlarmActionsResponse' with the minimum fields required to make a request.
 --
 disableAlarmActionsResponse
     :: DisableAlarmActionsResponse
-disableAlarmActionsResponse = DisableAlarmActionsResponse'
-
+disableAlarmActionsResponse
+  = DisableAlarmActionsResponse'
 
 instance NFData DisableAlarmActionsResponse where

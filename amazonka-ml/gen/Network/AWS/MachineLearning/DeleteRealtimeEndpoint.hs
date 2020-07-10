@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteRealtimeEndpoint' smart constructor.
-newtype DeleteRealtimeEndpoint = DeleteRealtimeEndpoint'
-  { _dreMLModelId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRealtimeEndpoint = DeleteRealtimeEndpoint'{_dreMLModelId
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteRealtimeEndpoint' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DeleteRealtimeEndpoint = DeleteRealtimeEndpoint'
 deleteRealtimeEndpoint
     :: Text -- ^ 'dreMLModelId'
     -> DeleteRealtimeEndpoint
-deleteRealtimeEndpoint pMLModelId_ =
-  DeleteRealtimeEndpoint' {_dreMLModelId = pMLModelId_}
-
+deleteRealtimeEndpoint pMLModelId_
+  = DeleteRealtimeEndpoint'{_dreMLModelId =
+                              pMLModelId_}
 
 -- | The ID assigned to the @MLModel@ during creation.
 dreMLModelId :: Lens' DeleteRealtimeEndpoint Text
@@ -107,22 +107,28 @@ instance ToQuery DeleteRealtimeEndpoint where
 -- | Represents the output of an @DeleteRealtimeEndpoint@ operation.
 --
 --
--- The result contains the @MLModelId@ and the endpoint information for the @MLModel@ .
+-- The result contains the @MLModelId@ and the endpoint information for the @MLModel@ . 
 --
 --
 -- /See:/ 'deleteRealtimeEndpointResponse' smart constructor.
-data DeleteRealtimeEndpointResponse = DeleteRealtimeEndpointResponse'
-  { _drersRealtimeEndpointInfo :: !(Maybe RealtimeEndpointInfo)
-  , _drersMLModelId            :: !(Maybe Text)
-  , _drersResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRealtimeEndpointResponse = DeleteRealtimeEndpointResponse'{_drersRealtimeEndpointInfo
+                                                                      ::
+                                                                      !(Maybe
+                                                                          RealtimeEndpointInfo),
+                                                                      _drersMLModelId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _drersResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteRealtimeEndpointResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drersRealtimeEndpointInfo' - The endpoint information of the @MLModel@
+-- * 'drersRealtimeEndpointInfo' - The endpoint information of the @MLModel@ 
 --
 -- * 'drersMLModelId' - A user-supplied ID that uniquely identifies the @MLModel@ . This value should be identical to the value of the @MLModelId@ in the request.
 --
@@ -130,15 +136,13 @@ data DeleteRealtimeEndpointResponse = DeleteRealtimeEndpointResponse'
 deleteRealtimeEndpointResponse
     :: Int -- ^ 'drersResponseStatus'
     -> DeleteRealtimeEndpointResponse
-deleteRealtimeEndpointResponse pResponseStatus_ =
-  DeleteRealtimeEndpointResponse'
-    { _drersRealtimeEndpointInfo = Nothing
-    , _drersMLModelId = Nothing
-    , _drersResponseStatus = pResponseStatus_
-    }
+deleteRealtimeEndpointResponse pResponseStatus_
+  = DeleteRealtimeEndpointResponse'{_drersRealtimeEndpointInfo
+                                      = Nothing,
+                                    _drersMLModelId = Nothing,
+                                    _drersResponseStatus = pResponseStatus_}
 
-
--- | The endpoint information of the @MLModel@
+-- | The endpoint information of the @MLModel@ 
 drersRealtimeEndpointInfo :: Lens' DeleteRealtimeEndpointResponse (Maybe RealtimeEndpointInfo)
 drersRealtimeEndpointInfo = lens _drersRealtimeEndpointInfo (\ s a -> s{_drersRealtimeEndpointInfo = a})
 

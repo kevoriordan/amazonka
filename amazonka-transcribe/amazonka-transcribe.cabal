@@ -45,24 +45,62 @@ library
 
     exposed-modules:
           Network.AWS.Transcribe
+        , Network.AWS.Transcribe.CreateMedicalVocabulary
         , Network.AWS.Transcribe.CreateVocabulary
+        , Network.AWS.Transcribe.CreateVocabularyFilter
+        , Network.AWS.Transcribe.DeleteMedicalTranscriptionJob
+        , Network.AWS.Transcribe.DeleteMedicalVocabulary
+        , Network.AWS.Transcribe.DeleteTranscriptionJob
         , Network.AWS.Transcribe.DeleteVocabulary
+        , Network.AWS.Transcribe.DeleteVocabularyFilter
+        , Network.AWS.Transcribe.GetMedicalTranscriptionJob
+        , Network.AWS.Transcribe.GetMedicalVocabulary
         , Network.AWS.Transcribe.GetTranscriptionJob
         , Network.AWS.Transcribe.GetVocabulary
+        , Network.AWS.Transcribe.GetVocabularyFilter
+        , Network.AWS.Transcribe.ListMedicalTranscriptionJobs
+        , Network.AWS.Transcribe.ListMedicalVocabularies
         , Network.AWS.Transcribe.ListTranscriptionJobs
         , Network.AWS.Transcribe.ListVocabularies
+        , Network.AWS.Transcribe.ListVocabularyFilters
+        , Network.AWS.Transcribe.StartMedicalTranscriptionJob
         , Network.AWS.Transcribe.StartTranscriptionJob
         , Network.AWS.Transcribe.Types
+        , Network.AWS.Transcribe.UpdateMedicalVocabulary
         , Network.AWS.Transcribe.UpdateVocabulary
+        , Network.AWS.Transcribe.UpdateVocabularyFilter
         , Network.AWS.Transcribe.Waiters
 
     other-modules:
-          Network.AWS.Transcribe.Types.Product
-        , Network.AWS.Transcribe.Types.Sum
+          Network.AWS.Transcribe.Types.ContentRedaction
+        , Network.AWS.Transcribe.Types.JobExecutionSettings
+        , Network.AWS.Transcribe.Types.LanguageCode
+        , Network.AWS.Transcribe.Types.Media
+        , Network.AWS.Transcribe.Types.MediaFormat
+        , Network.AWS.Transcribe.Types.MedicalTranscript
+        , Network.AWS.Transcribe.Types.MedicalTranscriptionJob
+        , Network.AWS.Transcribe.Types.MedicalTranscriptionJobSummary
+        , Network.AWS.Transcribe.Types.MedicalTranscriptionSetting
+        , Network.AWS.Transcribe.Types.OutputLocationType
+        , Network.AWS.Transcribe.Types.Product
+        , Network.AWS.Transcribe.Types.RedactionOutput
+        , Network.AWS.Transcribe.Types.RedactionType
+        , Network.AWS.Transcribe.Types.Settings
+        , Network.AWS.Transcribe.Types.Specialty
+        , Network.AWS.Transcribe.Types.Transcript
+        , Network.AWS.Transcribe.Types.TranscriptionJob
+        , Network.AWS.Transcribe.Types.TranscriptionJobStatus
+        , Network.AWS.Transcribe.Types.TranscriptionJobSummary
+        , Network.AWS.Transcribe.Types.Type
+        , Network.AWS.Transcribe.Types.VocabularyFilterInfo
+        , Network.AWS.Transcribe.Types.VocabularyFilterMethod
+        , Network.AWS.Transcribe.Types.VocabularyInfo
+        , Network.AWS.Transcribe.Types.VocabularyState
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-transcribe-test
     type:              exitcode-stdio-1.0
@@ -86,6 +124,7 @@ test-suite amazonka-transcribe-test
         , amazonka-transcribe
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts or deletes 'Predicate' objects in a @Rule@ . Each @Predicate@ object identifies a predicate, such as a 'ByteMatchSet' or an 'IPSet' , that specifies the web requests that you want to allow, block, or count. If you add more than one predicate to a @Rule@ , a request must match all of the specifications to be allowed, blocked, or counted. For example, suppose you add the following to a @Rule@ :
+-- Inserts or deletes 'Predicate' objects in a @Rule@ . Each @Predicate@ object identifies a predicate, such as a 'ByteMatchSet' or an 'IPSet' , that specifies the web requests that you want to allow, block, or count. If you add more than one predicate to a @Rule@ , a request must match all of the specifications to be allowed, blocked, or counted. For example, suppose that you add the following to a @Rule@ : 
 --
 --
 --     * A @ByteMatchSet@ that matches the value @BadBot@ in the @User-Agent@ header
 --
---     * An @IPSet@ that matches the IP address @192.0.2.44@
+--     * An @IPSet@ that matches the IP address @192.0.2.44@ 
 --
 --
 --
@@ -45,7 +45,7 @@
 --
 -- If you want to replace one @ByteMatchSet@ or @IPSet@ with another, you delete the existing one and add the new one.
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAFRegional.UpdateRule
     (
@@ -73,12 +73,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'updateRule' smart constructor.
-data UpdateRule = UpdateRule'
-  { _urRuleId      :: !Text
-  , _urChangeToken :: !Text
-  , _urUpdates     :: ![RuleUpdate]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRule = UpdateRule'{_urRuleId :: !Text,
+                              _urChangeToken :: !Text,
+                              _urUpdates :: ![RuleUpdate]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRule' with the minimum fields required to make a request.
 --
@@ -88,15 +86,14 @@ data UpdateRule = UpdateRule'
 --
 -- * 'urChangeToken' - The value returned by the most recent call to 'GetChangeToken' .
 --
--- * 'urUpdates' - An array of @RuleUpdate@ objects that you want to insert into or delete from a 'Rule' . For more information, see the applicable data types:     * 'RuleUpdate' : Contains @Action@ and @Predicate@      * 'Predicate' : Contains @DataId@ , @Negated@ , and @Type@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- * 'urUpdates' - An array of @RuleUpdate@ objects that you want to insert into or delete from a 'Rule' . For more information, see the applicable data types:     * 'RuleUpdate' : Contains @Action@ and @Predicate@      * 'Predicate' : Contains @DataId@ , @Negated@ , and @Type@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 updateRule
     :: Text -- ^ 'urRuleId'
     -> Text -- ^ 'urChangeToken'
     -> UpdateRule
-updateRule pRuleId_ pChangeToken_ =
-  UpdateRule'
-    {_urRuleId = pRuleId_, _urChangeToken = pChangeToken_, _urUpdates = mempty}
-
+updateRule pRuleId_ pChangeToken_
+  = UpdateRule'{_urRuleId = pRuleId_,
+                _urChangeToken = pChangeToken_, _urUpdates = mempty}
 
 -- | The @RuleId@ of the @Rule@ that you want to update. @RuleId@ is returned by @CreateRule@ and by 'ListRules' .
 urRuleId :: Lens' UpdateRule Text
@@ -106,7 +103,7 @@ urRuleId = lens _urRuleId (\ s a -> s{_urRuleId = a})
 urChangeToken :: Lens' UpdateRule Text
 urChangeToken = lens _urChangeToken (\ s a -> s{_urChangeToken = a})
 
--- | An array of @RuleUpdate@ objects that you want to insert into or delete from a 'Rule' . For more information, see the applicable data types:     * 'RuleUpdate' : Contains @Action@ and @Predicate@      * 'Predicate' : Contains @DataId@ , @Negated@ , and @Type@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- | An array of @RuleUpdate@ objects that you want to insert into or delete from a 'Rule' . For more information, see the applicable data types:     * 'RuleUpdate' : Contains @Action@ and @Predicate@      * 'Predicate' : Contains @DataId@ , @Negated@ , and @Type@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 urUpdates :: Lens' UpdateRule [RuleUpdate]
 urUpdates = lens _urUpdates (\ s a -> s{_urUpdates = a}) . _Coerce
 
@@ -148,11 +145,10 @@ instance ToQuery UpdateRule where
         toQuery = const mempty
 
 -- | /See:/ 'updateRuleResponse' smart constructor.
-data UpdateRuleResponse = UpdateRuleResponse'
-  { _urrsChangeToken    :: !(Maybe Text)
-  , _urrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRuleResponse = UpdateRuleResponse'{_urrsChangeToken
+                                              :: !(Maybe Text),
+                                              _urrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRuleResponse' with the minimum fields required to make a request.
 --
@@ -164,10 +160,9 @@ data UpdateRuleResponse = UpdateRuleResponse'
 updateRuleResponse
     :: Int -- ^ 'urrsResponseStatus'
     -> UpdateRuleResponse
-updateRuleResponse pResponseStatus_ =
-  UpdateRuleResponse'
-    {_urrsChangeToken = Nothing, _urrsResponseStatus = pResponseStatus_}
-
+updateRuleResponse pResponseStatus_
+  = UpdateRuleResponse'{_urrsChangeToken = Nothing,
+                        _urrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @UpdateRule@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 urrsChangeToken :: Lens' UpdateRuleResponse (Maybe Text)

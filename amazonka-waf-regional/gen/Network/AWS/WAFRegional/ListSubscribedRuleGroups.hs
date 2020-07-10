@@ -47,11 +47,12 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'listSubscribedRuleGroups' smart constructor.
-data ListSubscribedRuleGroups = ListSubscribedRuleGroups'
-  { _lsrgNextMarker :: !(Maybe Text)
-  , _lsrgLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSubscribedRuleGroups = ListSubscribedRuleGroups'{_lsrgNextMarker
+                                                          :: !(Maybe Text),
+                                                          _lsrgLimit ::
+                                                          !(Maybe Nat)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListSubscribedRuleGroups' with the minimum fields required to make a request.
 --
@@ -62,9 +63,10 @@ data ListSubscribedRuleGroups = ListSubscribedRuleGroups'
 -- * 'lsrgLimit' - Specifies the number of subscribed rule groups that you want AWS WAF to return for this request. If you have more objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of objects.
 listSubscribedRuleGroups
     :: ListSubscribedRuleGroups
-listSubscribedRuleGroups =
-  ListSubscribedRuleGroups' {_lsrgNextMarker = Nothing, _lsrgLimit = Nothing}
-
+listSubscribedRuleGroups
+  = ListSubscribedRuleGroups'{_lsrgNextMarker =
+                                Nothing,
+                              _lsrgLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @ByteMatchSets@ subscribed rule groups than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of subscribed rule groups. For the second and subsequent @ListSubscribedRuleGroupsRequest@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of subscribed rule groups.
 lsrgNextMarker :: Lens' ListSubscribedRuleGroups (Maybe Text)
@@ -114,12 +116,19 @@ instance ToQuery ListSubscribedRuleGroups where
         toQuery = const mempty
 
 -- | /See:/ 'listSubscribedRuleGroupsResponse' smart constructor.
-data ListSubscribedRuleGroupsResponse = ListSubscribedRuleGroupsResponse'
-  { _lsrgrsRuleGroups     :: !(Maybe [SubscribedRuleGroupSummary])
-  , _lsrgrsNextMarker     :: !(Maybe Text)
-  , _lsrgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSubscribedRuleGroupsResponse = ListSubscribedRuleGroupsResponse'{_lsrgrsRuleGroups
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [SubscribedRuleGroupSummary]),
+                                                                          _lsrgrsNextMarker
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _lsrgrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'ListSubscribedRuleGroupsResponse' with the minimum fields required to make a request.
 --
@@ -133,13 +142,11 @@ data ListSubscribedRuleGroupsResponse = ListSubscribedRuleGroupsResponse'
 listSubscribedRuleGroupsResponse
     :: Int -- ^ 'lsrgrsResponseStatus'
     -> ListSubscribedRuleGroupsResponse
-listSubscribedRuleGroupsResponse pResponseStatus_ =
-  ListSubscribedRuleGroupsResponse'
-    { _lsrgrsRuleGroups = Nothing
-    , _lsrgrsNextMarker = Nothing
-    , _lsrgrsResponseStatus = pResponseStatus_
-    }
-
+listSubscribedRuleGroupsResponse pResponseStatus_
+  = ListSubscribedRuleGroupsResponse'{_lsrgrsRuleGroups
+                                        = Nothing,
+                                      _lsrgrsNextMarker = Nothing,
+                                      _lsrgrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'RuleGroup' objects.
 lsrgrsRuleGroups :: Lens' ListSubscribedRuleGroupsResponse [SubscribedRuleGroupSummary]

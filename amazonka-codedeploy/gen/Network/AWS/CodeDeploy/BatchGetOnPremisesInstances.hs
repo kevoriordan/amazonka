@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about one or more on-premises instances.
+-- Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.
 --
 --
 module Network.AWS.CodeDeploy.BatchGetOnPremisesInstances
@@ -49,23 +49,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'batchGetOnPremisesInstances' smart constructor.
-newtype BatchGetOnPremisesInstances = BatchGetOnPremisesInstances'
-  { _bgopiInstanceNames :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype BatchGetOnPremisesInstances = BatchGetOnPremisesInstances'{_bgopiInstanceNames
+                                                                   :: [Text]}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'BatchGetOnPremisesInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bgopiInstanceNames' - The names of the on-premises instances about which to get information.
+-- * 'bgopiInstanceNames' - The names of the on-premises instances about which to get information. The maximum number of instance names you can specify is 25.
 batchGetOnPremisesInstances
     :: BatchGetOnPremisesInstances
-batchGetOnPremisesInstances =
-  BatchGetOnPremisesInstances' {_bgopiInstanceNames = mempty}
+batchGetOnPremisesInstances
+  = BatchGetOnPremisesInstances'{_bgopiInstanceNames =
+                                   mempty}
 
-
--- | The names of the on-premises instances about which to get information.
+-- | The names of the on-premises instances about which to get information. The maximum number of instance names you can specify is 25.
 bgopiInstanceNames :: Lens' BatchGetOnPremisesInstances [Text]
 bgopiInstanceNames = lens _bgopiInstanceNames (\ s a -> s{_bgopiInstanceNames = a}) . _Coerce
 
@@ -111,11 +111,15 @@ instance ToQuery BatchGetOnPremisesInstances where
 --
 --
 -- /See:/ 'batchGetOnPremisesInstancesResponse' smart constructor.
-data BatchGetOnPremisesInstancesResponse = BatchGetOnPremisesInstancesResponse'
-  { _bgopirsInstanceInfos  :: !(Maybe [InstanceInfo])
-  , _bgopirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetOnPremisesInstancesResponse = BatchGetOnPremisesInstancesResponse'{_bgopirsInstanceInfos
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [InstanceInfo]),
+                                                                                _bgopirsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'BatchGetOnPremisesInstancesResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +131,11 @@ data BatchGetOnPremisesInstancesResponse = BatchGetOnPremisesInstancesResponse'
 batchGetOnPremisesInstancesResponse
     :: Int -- ^ 'bgopirsResponseStatus'
     -> BatchGetOnPremisesInstancesResponse
-batchGetOnPremisesInstancesResponse pResponseStatus_ =
-  BatchGetOnPremisesInstancesResponse'
-    {_bgopirsInstanceInfos = Nothing, _bgopirsResponseStatus = pResponseStatus_}
-
+batchGetOnPremisesInstancesResponse pResponseStatus_
+  = BatchGetOnPremisesInstancesResponse'{_bgopirsInstanceInfos
+                                           = Nothing,
+                                         _bgopirsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Information about the on-premises instances.
 bgopirsInstanceInfos :: Lens' BatchGetOnPremisesInstancesResponse [InstanceInfo]

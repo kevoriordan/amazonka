@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape and file gateway types.
+-- Returns information about the cache of a gateway. This operation is only supported in the cached volume, tape, and file gateway types.
 --
 --
 -- The response includes disk IDs that are configured as cache, and it includes the amount of cache allocated and used.
@@ -53,10 +53,9 @@ import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'describeCache' smart constructor.
-newtype DescribeCache = DescribeCache'
-  { _dcGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeCache = DescribeCache'{_dcGatewayARN
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeCache' with the minimum fields required to make a request.
 --
@@ -66,8 +65,8 @@ newtype DescribeCache = DescribeCache'
 describeCache
     :: Text -- ^ 'dcGatewayARN'
     -> DescribeCache
-describeCache pGatewayARN_ = DescribeCache' {_dcGatewayARN = pGatewayARN_}
-
+describeCache pGatewayARN_
+  = DescribeCache'{_dcGatewayARN = pGatewayARN_}
 
 -- | Undocumented member.
 dcGatewayARN :: Lens' DescribeCache Text
@@ -114,17 +113,23 @@ instance ToQuery DescribeCache where
         toQuery = const mempty
 
 -- | /See:/ 'describeCacheResponse' smart constructor.
-data DescribeCacheResponse = DescribeCacheResponse'
-  { _dcrsGatewayARN            :: !(Maybe Text)
-  , _dcrsDiskIds               :: !(Maybe [Text])
-  , _dcrsCacheUsedPercentage   :: !(Maybe Double)
-  , _dcrsCacheHitPercentage    :: !(Maybe Double)
-  , _dcrsCacheMissPercentage   :: !(Maybe Double)
-  , _dcrsCacheAllocatedInBytes :: !(Maybe Integer)
-  , _dcrsCacheDirtyPercentage  :: !(Maybe Double)
-  , _dcrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCacheResponse = DescribeCacheResponse'{_dcrsGatewayARN
+                                                    :: !(Maybe Text),
+                                                    _dcrsDiskIds ::
+                                                    !(Maybe [Text]),
+                                                    _dcrsCacheUsedPercentage ::
+                                                    !(Maybe Double),
+                                                    _dcrsCacheHitPercentage ::
+                                                    !(Maybe Double),
+                                                    _dcrsCacheMissPercentage ::
+                                                    !(Maybe Double),
+                                                    _dcrsCacheAllocatedInBytes
+                                                    :: !(Maybe Integer),
+                                                    _dcrsCacheDirtyPercentage ::
+                                                    !(Maybe Double),
+                                                    _dcrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeCacheResponse' with the minimum fields required to make a request.
 --
@@ -132,60 +137,57 @@ data DescribeCacheResponse = DescribeCacheResponse'
 --
 -- * 'dcrsGatewayARN' - Undocumented member.
 --
--- * 'dcrsDiskIds' - Undocumented member.
+-- * 'dcrsDiskIds' - An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the 'ListLocalDisks' API.
 --
--- * 'dcrsCacheUsedPercentage' - Undocumented member.
+-- * 'dcrsCacheUsedPercentage' - Percent use of the gateway's cache storage. This metric applies only to the gateway-cached volume setup. The sample is taken at the end of the reporting period.
 --
--- * 'dcrsCacheHitPercentage' - Undocumented member.
+-- * 'dcrsCacheHitPercentage' - Percent of application read operations from the file shares that are served from cache. The sample is taken at the end of the reporting period.
 --
--- * 'dcrsCacheMissPercentage' - Undocumented member.
+-- * 'dcrsCacheMissPercentage' - Percent of application read operations from the file shares that are not served from cache. The sample is taken at the end of the reporting period.
 --
--- * 'dcrsCacheAllocatedInBytes' - Undocumented member.
+-- * 'dcrsCacheAllocatedInBytes' - The amount of cache in bytes allocated to a gateway.
 --
--- * 'dcrsCacheDirtyPercentage' - Undocumented member.
+-- * 'dcrsCacheDirtyPercentage' - The file share's contribution to the overall percentage of the gateway's cache that has not been persisted to AWS. The sample is taken at the end of the reporting period.
 --
 -- * 'dcrsResponseStatus' - -- | The response status code.
 describeCacheResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeCacheResponse
-describeCacheResponse pResponseStatus_ =
-  DescribeCacheResponse'
-    { _dcrsGatewayARN = Nothing
-    , _dcrsDiskIds = Nothing
-    , _dcrsCacheUsedPercentage = Nothing
-    , _dcrsCacheHitPercentage = Nothing
-    , _dcrsCacheMissPercentage = Nothing
-    , _dcrsCacheAllocatedInBytes = Nothing
-    , _dcrsCacheDirtyPercentage = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
-
+describeCacheResponse pResponseStatus_
+  = DescribeCacheResponse'{_dcrsGatewayARN = Nothing,
+                           _dcrsDiskIds = Nothing,
+                           _dcrsCacheUsedPercentage = Nothing,
+                           _dcrsCacheHitPercentage = Nothing,
+                           _dcrsCacheMissPercentage = Nothing,
+                           _dcrsCacheAllocatedInBytes = Nothing,
+                           _dcrsCacheDirtyPercentage = Nothing,
+                           _dcrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 dcrsGatewayARN :: Lens' DescribeCacheResponse (Maybe Text)
 dcrsGatewayARN = lens _dcrsGatewayARN (\ s a -> s{_dcrsGatewayARN = a})
 
--- | Undocumented member.
+-- | An array of strings that identify disks that are to be configured as working storage. Each string has a minimum length of 1 and maximum length of 300. You can get the disk IDs from the 'ListLocalDisks' API.
 dcrsDiskIds :: Lens' DescribeCacheResponse [Text]
 dcrsDiskIds = lens _dcrsDiskIds (\ s a -> s{_dcrsDiskIds = a}) . _Default . _Coerce
 
--- | Undocumented member.
+-- | Percent use of the gateway's cache storage. This metric applies only to the gateway-cached volume setup. The sample is taken at the end of the reporting period.
 dcrsCacheUsedPercentage :: Lens' DescribeCacheResponse (Maybe Double)
 dcrsCacheUsedPercentage = lens _dcrsCacheUsedPercentage (\ s a -> s{_dcrsCacheUsedPercentage = a})
 
--- | Undocumented member.
+-- | Percent of application read operations from the file shares that are served from cache. The sample is taken at the end of the reporting period.
 dcrsCacheHitPercentage :: Lens' DescribeCacheResponse (Maybe Double)
 dcrsCacheHitPercentage = lens _dcrsCacheHitPercentage (\ s a -> s{_dcrsCacheHitPercentage = a})
 
--- | Undocumented member.
+-- | Percent of application read operations from the file shares that are not served from cache. The sample is taken at the end of the reporting period.
 dcrsCacheMissPercentage :: Lens' DescribeCacheResponse (Maybe Double)
 dcrsCacheMissPercentage = lens _dcrsCacheMissPercentage (\ s a -> s{_dcrsCacheMissPercentage = a})
 
--- | Undocumented member.
+-- | The amount of cache in bytes allocated to a gateway.
 dcrsCacheAllocatedInBytes :: Lens' DescribeCacheResponse (Maybe Integer)
 dcrsCacheAllocatedInBytes = lens _dcrsCacheAllocatedInBytes (\ s a -> s{_dcrsCacheAllocatedInBytes = a})
 
--- | Undocumented member.
+-- | The file share's contribution to the overall percentage of the gateway's cache that has not been persisted to AWS. The sample is taken at the end of the reporting period.
 dcrsCacheDirtyPercentage :: Lens' DescribeCacheResponse (Maybe Double)
 dcrsCacheDirtyPercentage = lens _dcrsCacheDirtyPercentage (\ s a -> s{_dcrsCacheDirtyPercentage = a})
 

@@ -53,12 +53,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeClusters' smart constructor.
-data DescribeClusters = DescribeClusters'
-  { _dcFilters    :: !(Maybe (Map Text [Text]))
-  , _dcNextToken  :: !(Maybe Text)
-  , _dcMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusters = DescribeClusters'{_dcFilters
+                                          :: !(Maybe (Map Text [Text])),
+                                          _dcNextToken :: !(Maybe Text),
+                                          _dcMaxResults :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeClusters' with the minimum fields required to make a request.
 --
@@ -71,10 +70,9 @@ data DescribeClusters = DescribeClusters'
 -- * 'dcMaxResults' - The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a @NextToken@ value.
 describeClusters
     :: DescribeClusters
-describeClusters =
-  DescribeClusters'
-    {_dcFilters = Nothing, _dcNextToken = Nothing, _dcMaxResults = Nothing}
-
+describeClusters
+  = DescribeClusters'{_dcFilters = Nothing,
+                      _dcNextToken = Nothing, _dcMaxResults = Nothing}
 
 -- | One or more filters to limit the items returned in the response. Use the @clusterIds@ filter to return only the specified clusters. Specify clusters by their cluster identifier (ID). Use the @vpcIds@ filter to return only the clusters in the specified virtual private clouds (VPCs). Specify VPCs by their VPC identifier (ID). Use the @states@ filter to return only clusters that match the specified state.
 dcFilters :: Lens' DescribeClusters (HashMap Text [Text])
@@ -133,12 +131,14 @@ instance ToQuery DescribeClusters where
         toQuery = const mempty
 
 -- | /See:/ 'describeClustersResponse' smart constructor.
-data DescribeClustersResponse = DescribeClustersResponse'
-  { _dcrsNextToken      :: !(Maybe Text)
-  , _dcrsClusters       :: !(Maybe [Cluster])
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClustersResponse = DescribeClustersResponse'{_dcrsNextToken
+                                                          :: !(Maybe Text),
+                                                          _dcrsClusters ::
+                                                          !(Maybe [Cluster]),
+                                                          _dcrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeClustersResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +152,10 @@ data DescribeClustersResponse = DescribeClustersResponse'
 describeClustersResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeClustersResponse
-describeClustersResponse pResponseStatus_ =
-  DescribeClustersResponse'
-    { _dcrsNextToken = Nothing
-    , _dcrsClusters = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
-
+describeClustersResponse pResponseStatus_
+  = DescribeClustersResponse'{_dcrsNextToken = Nothing,
+                              _dcrsClusters = Nothing,
+                              _dcrsResponseStatus = pResponseStatus_}
 
 -- | An opaque string that indicates that the response contains only a subset of clusters. Use this value in a subsequent @DescribeClusters@ request to get more clusters.
 dcrsNextToken :: Lens' DescribeClustersResponse (Maybe Text)

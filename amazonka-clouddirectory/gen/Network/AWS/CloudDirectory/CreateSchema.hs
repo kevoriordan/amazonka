@@ -25,7 +25,7 @@
 --
 --     * /Published:/ Published schemas are immutable and have a version associated with them.
 --
---     * /Applied:/ Applied schemas are mutable in a way that allows you to add new schema facets. You can also add new, nonrequired attributes to existing schema facets. You can apply only published schemas to directories.
+--     * /Applied:/ Applied schemas are mutable in a way that allows you to add new schema facets. You can also add new, nonrequired attributes to existing schema facets. You can apply only published schemas to directories. 
 --
 --
 --
@@ -53,10 +53,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createSchema' smart constructor.
-newtype CreateSchema = CreateSchema'
-  { _csName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateSchema = CreateSchema'{_csName :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSchema' with the minimum fields required to make a request.
 --
@@ -66,8 +64,7 @@ newtype CreateSchema = CreateSchema'
 createSchema
     :: Text -- ^ 'csName'
     -> CreateSchema
-createSchema pName_ = CreateSchema' {_csName = pName_}
-
+createSchema pName_ = CreateSchema'{_csName = pName_}
 
 -- | The name that is associated with the schema. This is unique to each account and in each region.
 csName :: Lens' CreateSchema Text
@@ -102,11 +99,10 @@ instance ToQuery CreateSchema where
         toQuery = const mempty
 
 -- | /See:/ 'createSchemaResponse' smart constructor.
-data CreateSchemaResponse = CreateSchemaResponse'
-  { _csrsSchemaARN      :: !(Maybe Text)
-  , _csrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSchemaResponse = CreateSchemaResponse'{_csrsSchemaARN
+                                                  :: !(Maybe Text),
+                                                  _csrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSchemaResponse' with the minimum fields required to make a request.
 --
@@ -118,10 +114,9 @@ data CreateSchemaResponse = CreateSchemaResponse'
 createSchemaResponse
     :: Int -- ^ 'csrsResponseStatus'
     -> CreateSchemaResponse
-createSchemaResponse pResponseStatus_ =
-  CreateSchemaResponse'
-    {_csrsSchemaARN = Nothing, _csrsResponseStatus = pResponseStatus_}
-
+createSchemaResponse pResponseStatus_
+  = CreateSchemaResponse'{_csrsSchemaARN = Nothing,
+                          _csrsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) that is associated with the schema. For more information, see 'arns' .
 csrsSchemaARN :: Lens' CreateSchemaResponse (Maybe Text)

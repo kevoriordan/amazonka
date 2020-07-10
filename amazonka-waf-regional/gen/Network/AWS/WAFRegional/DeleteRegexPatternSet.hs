@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently deletes a 'RegexPatternSet' . You can't delete a @RegexPatternSet@ if it's still used in any @RegexMatchSet@ or if the @RegexPatternSet@ is not empty.
+-- Permanently deletes a 'RegexPatternSet' . You can't delete a @RegexPatternSet@ if it's still used in any @RegexMatchSet@ or if the @RegexPatternSet@ is not empty. 
 --
 --
 module Network.AWS.WAFRegional.DeleteRegexPatternSet
@@ -46,11 +46,11 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'deleteRegexPatternSet' smart constructor.
-data DeleteRegexPatternSet = DeleteRegexPatternSet'
-  { _drpsRegexPatternSetId :: !Text
-  , _drpsChangeToken       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRegexPatternSet = DeleteRegexPatternSet'{_drpsRegexPatternSetId
+                                                    :: !Text,
+                                                    _drpsChangeToken :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteRegexPatternSet' with the minimum fields required to make a request.
 --
@@ -63,12 +63,11 @@ deleteRegexPatternSet
     :: Text -- ^ 'drpsRegexPatternSetId'
     -> Text -- ^ 'drpsChangeToken'
     -> DeleteRegexPatternSet
-deleteRegexPatternSet pRegexPatternSetId_ pChangeToken_ =
-  DeleteRegexPatternSet'
-    { _drpsRegexPatternSetId = pRegexPatternSetId_
-    , _drpsChangeToken = pChangeToken_
-    }
-
+deleteRegexPatternSet pRegexPatternSetId_
+  pChangeToken_
+  = DeleteRegexPatternSet'{_drpsRegexPatternSetId =
+                             pRegexPatternSetId_,
+                           _drpsChangeToken = pChangeToken_}
 
 -- | The @RegexPatternSetId@ of the 'RegexPatternSet' that you want to delete. @RegexPatternSetId@ is returned by 'CreateRegexPatternSet' and by 'ListRegexPatternSets' .
 drpsRegexPatternSetId :: Lens' DeleteRegexPatternSet Text
@@ -117,11 +116,14 @@ instance ToQuery DeleteRegexPatternSet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteRegexPatternSetResponse' smart constructor.
-data DeleteRegexPatternSetResponse = DeleteRegexPatternSetResponse'
-  { _drpsrsChangeToken    :: !(Maybe Text)
-  , _drpsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRegexPatternSetResponse = DeleteRegexPatternSetResponse'{_drpsrsChangeToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _drpsrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteRegexPatternSetResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +135,10 @@ data DeleteRegexPatternSetResponse = DeleteRegexPatternSetResponse'
 deleteRegexPatternSetResponse
     :: Int -- ^ 'drpsrsResponseStatus'
     -> DeleteRegexPatternSetResponse
-deleteRegexPatternSetResponse pResponseStatus_ =
-  DeleteRegexPatternSetResponse'
-    {_drpsrsChangeToken = Nothing, _drpsrsResponseStatus = pResponseStatus_}
-
+deleteRegexPatternSetResponse pResponseStatus_
+  = DeleteRegexPatternSetResponse'{_drpsrsChangeToken =
+                                     Nothing,
+                                   _drpsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteRegexPatternSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 drpsrsChangeToken :: Lens' DeleteRegexPatternSetResponse (Maybe Text)

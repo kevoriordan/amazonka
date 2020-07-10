@@ -21,7 +21,7 @@
 -- The DeletePipeline operation removes a pipeline.
 --
 --
--- You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, @DeletePipeline@ returns an error.
+-- You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, @DeletePipeline@ returns an error. 
 --
 module Network.AWS.ElasticTranscoder.DeletePipeline
     (
@@ -50,10 +50,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deletePipeline' smart constructor.
-newtype DeletePipeline = DeletePipeline'
-  { _dId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePipeline = DeletePipeline'{_dId ::
+                                         Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePipeline' with the minimum fields required to make a request.
 --
@@ -63,8 +62,7 @@ newtype DeletePipeline = DeletePipeline'
 deletePipeline
     :: Text -- ^ 'dId'
     -> DeletePipeline
-deletePipeline pId_ = DeletePipeline' {_dId = pId_}
-
+deletePipeline pId_ = DeletePipeline'{_dId = pId_}
 
 -- | The identifier of the pipeline that you want to delete.
 dId :: Lens' DeletePipeline Text
@@ -97,10 +95,10 @@ instance ToQuery DeletePipeline where
 --
 --
 -- /See:/ 'deletePipelineResponse' smart constructor.
-newtype DeletePipelineResponse = DeletePipelineResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePipelineResponse = DeletePipelineResponse'{_drsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeletePipelineResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +108,9 @@ newtype DeletePipelineResponse = DeletePipelineResponse'
 deletePipelineResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeletePipelineResponse
-deletePipelineResponse pResponseStatus_ =
-  DeletePipelineResponse' {_drsResponseStatus = pResponseStatus_}
-
+deletePipelineResponse pResponseStatus_
+  = DeletePipelineResponse'{_drsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeletePipelineResponse Int

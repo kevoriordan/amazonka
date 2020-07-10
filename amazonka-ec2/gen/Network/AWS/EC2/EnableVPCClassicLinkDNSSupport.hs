@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information about ClassicLink, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Enables a VPC to support DNS hostname resolution for ClassicLink. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 --
 module Network.AWS.EC2.EnableVPCClassicLinkDNSSupport
@@ -44,15 +44,13 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for EnableVpcClassicLinkDnsSupport.
---
---
---
--- /See:/ 'enableVPCClassicLinkDNSSupport' smart constructor.
-newtype EnableVPCClassicLinkDNSSupport = EnableVPCClassicLinkDNSSupport'
-  { _evcldsVPCId :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'enableVPCClassicLinkDNSSupport' smart constructor.
+newtype EnableVPCClassicLinkDNSSupport = EnableVPCClassicLinkDNSSupport'{_evcldsVPCId
+                                                                         ::
+                                                                         Maybe
+                                                                           Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'EnableVPCClassicLinkDNSSupport' with the minimum fields required to make a request.
 --
@@ -61,9 +59,9 @@ newtype EnableVPCClassicLinkDNSSupport = EnableVPCClassicLinkDNSSupport'
 -- * 'evcldsVPCId' - The ID of the VPC.
 enableVPCClassicLinkDNSSupport
     :: EnableVPCClassicLinkDNSSupport
-enableVPCClassicLinkDNSSupport =
-  EnableVPCClassicLinkDNSSupport' {_evcldsVPCId = Nothing}
-
+enableVPCClassicLinkDNSSupport
+  = EnableVPCClassicLinkDNSSupport'{_evcldsVPCId =
+                                      Nothing}
 
 -- | The ID of the VPC.
 evcldsVPCId :: Lens' EnableVPCClassicLinkDNSSupport (Maybe Text)
@@ -100,16 +98,16 @@ instance ToQuery EnableVPCClassicLinkDNSSupport where
                "Version" =: ("2016-11-15" :: ByteString),
                "VpcId" =: _evcldsVPCId]
 
--- | Contains the output of EnableVpcClassicLinkDnsSupport.
---
---
---
--- /See:/ 'enableVPCClassicLinkDNSSupportResponse' smart constructor.
-data EnableVPCClassicLinkDNSSupportResponse = EnableVPCClassicLinkDNSSupportResponse'
-  { _evcldsrsReturn         :: !(Maybe Bool)
-  , _evcldsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'enableVPCClassicLinkDNSSupportResponse' smart constructor.
+data EnableVPCClassicLinkDNSSupportResponse = EnableVPCClassicLinkDNSSupportResponse'{_evcldsrsReturn
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Bool),
+                                                                                      _evcldsrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'EnableVPCClassicLinkDNSSupportResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +119,12 @@ data EnableVPCClassicLinkDNSSupportResponse = EnableVPCClassicLinkDNSSupportResp
 enableVPCClassicLinkDNSSupportResponse
     :: Int -- ^ 'evcldsrsResponseStatus'
     -> EnableVPCClassicLinkDNSSupportResponse
-enableVPCClassicLinkDNSSupportResponse pResponseStatus_ =
-  EnableVPCClassicLinkDNSSupportResponse'
-    {_evcldsrsReturn = Nothing, _evcldsrsResponseStatus = pResponseStatus_}
-
+enableVPCClassicLinkDNSSupportResponse
+  pResponseStatus_
+  = EnableVPCClassicLinkDNSSupportResponse'{_evcldsrsReturn
+                                              = Nothing,
+                                            _evcldsrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | Returns @true@ if the request succeeds; otherwise, it returns an error.
 evcldsrsReturn :: Lens' EnableVPCClassicLinkDNSSupportResponse (Maybe Bool)

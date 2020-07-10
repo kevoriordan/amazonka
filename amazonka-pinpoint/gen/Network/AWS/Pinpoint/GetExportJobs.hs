@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about your export jobs.
+-- Retrieves information about the status and settings of all the export jobs for an application.
+--
+--
 module Network.AWS.Pinpoint.GetExportJobs
     (
     -- * Creating a Request
@@ -45,42 +47,38 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getExportJobs' smart constructor.
-data GetExportJobs = GetExportJobs'
-  { _gejsToken         :: !(Maybe Text)
-  , _gejsPageSize      :: !(Maybe Text)
-  , _gejsApplicationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetExportJobs = GetExportJobs'{_gejsToken ::
+                                    !(Maybe Text),
+                                    _gejsPageSize :: !(Maybe Text),
+                                    _gejsApplicationId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetExportJobs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gejsToken' - The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'gejsToken' - The NextToken string that specifies which page of results to return in a paginated response.
 --
--- * 'gejsPageSize' - The number of entries you want on each page in the response.
+-- * 'gejsPageSize' - The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 --
--- * 'gejsApplicationId' - Undocumented member.
+-- * 'gejsApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getExportJobs
     :: Text -- ^ 'gejsApplicationId'
     -> GetExportJobs
-getExportJobs pApplicationId_ =
-  GetExportJobs'
-    { _gejsToken = Nothing
-    , _gejsPageSize = Nothing
-    , _gejsApplicationId = pApplicationId_
-    }
+getExportJobs pApplicationId_
+  = GetExportJobs'{_gejsToken = Nothing,
+                   _gejsPageSize = Nothing,
+                   _gejsApplicationId = pApplicationId_}
 
-
--- | The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The NextToken string that specifies which page of results to return in a paginated response.
 gejsToken :: Lens' GetExportJobs (Maybe Text)
 gejsToken = lens _gejsToken (\ s a -> s{_gejsToken = a})
 
--- | The number of entries you want on each page in the response.
+-- | The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 gejsPageSize :: Lens' GetExportJobs (Maybe Text)
 gejsPageSize = lens _gejsPageSize (\ s a -> s{_gejsPageSize = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gejsApplicationId :: Lens' GetExportJobs Text
 gejsApplicationId = lens _gejsApplicationId (\ s a -> s{_gejsApplicationId = a})
 
@@ -116,11 +114,12 @@ instance ToQuery GetExportJobs where
               ["token" =: _gejsToken, "page-size" =: _gejsPageSize]
 
 -- | /See:/ 'getExportJobsResponse' smart constructor.
-data GetExportJobsResponse = GetExportJobsResponse'
-  { _gejrsResponseStatus     :: !Int
-  , _gejrsExportJobsResponse :: !ExportJobsResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetExportJobsResponse = GetExportJobsResponse'{_gejrsResponseStatus
+                                                    :: !Int,
+                                                    _gejrsExportJobsResponse ::
+                                                    !ExportJobsResponse}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetExportJobsResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +132,11 @@ getExportJobsResponse
     :: Int -- ^ 'gejrsResponseStatus'
     -> ExportJobsResponse -- ^ 'gejrsExportJobsResponse'
     -> GetExportJobsResponse
-getExportJobsResponse pResponseStatus_ pExportJobsResponse_ =
-  GetExportJobsResponse'
-    { _gejrsResponseStatus = pResponseStatus_
-    , _gejrsExportJobsResponse = pExportJobsResponse_
-    }
-
+getExportJobsResponse pResponseStatus_
+  pExportJobsResponse_
+  = GetExportJobsResponse'{_gejrsResponseStatus =
+                             pResponseStatus_,
+                           _gejrsExportJobsResponse = pExportJobsResponse_}
 
 -- | -- | The response status code.
 gejrsResponseStatus :: Lens' GetExportJobsResponse Int

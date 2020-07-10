@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account.
+-- Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. 
 --
 --
 module Network.AWS.Mobile.ExportProject
@@ -46,28 +46,27 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure used in requests to export project configuration details.
+-- | Request structure used in requests to export project configuration details. 
 --
 --
 --
 -- /See:/ 'exportProject' smart constructor.
-newtype ExportProject = ExportProject'
-  { _epProjectId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ExportProject = ExportProject'{_epProjectId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExportProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'epProjectId' - Unique project identifier.
+-- * 'epProjectId' - Unique project identifier. 
 exportProject
     :: Text -- ^ 'epProjectId'
     -> ExportProject
-exportProject pProjectId_ = ExportProject' {_epProjectId = pProjectId_}
+exportProject pProjectId_
+  = ExportProject'{_epProjectId = pProjectId_}
 
-
--- | Unique project identifier.
+-- | Unique project identifier. 
 epProjectId :: Lens' ExportProject Text
 epProjectId = lens _epProjectId (\ s a -> s{_epProjectId = a})
 
@@ -103,51 +102,50 @@ instance ToPath ExportProject where
 instance ToQuery ExportProject where
         toQuery = const mempty
 
--- | Result structure used for requests to export project configuration details.
+-- | Result structure used for requests to export project configuration details. 
 --
 --
 --
 -- /See:/ 'exportProjectResponse' smart constructor.
-data ExportProjectResponse = ExportProjectResponse'
-  { _eprsShareURL       :: !(Maybe Text)
-  , _eprsDownloadURL    :: !(Maybe Text)
-  , _eprsSnapshotId     :: !(Maybe Text)
-  , _eprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ExportProjectResponse = ExportProjectResponse'{_eprsShareURL
+                                                    :: !(Maybe Text),
+                                                    _eprsDownloadURL ::
+                                                    !(Maybe Text),
+                                                    _eprsSnapshotId ::
+                                                    !(Maybe Text),
+                                                    _eprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ExportProjectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eprsShareURL' - URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again.
+-- * 'eprsShareURL' - URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. 
 --
--- * 'eprsDownloadURL' - URL which can be used to download the exported project configuation file(s).
+-- * 'eprsDownloadURL' - URL which can be used to download the exported project configuation file(s). 
 --
--- * 'eprsSnapshotId' - Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL.
+-- * 'eprsSnapshotId' - Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. 
 --
 -- * 'eprsResponseStatus' - -- | The response status code.
 exportProjectResponse
     :: Int -- ^ 'eprsResponseStatus'
     -> ExportProjectResponse
-exportProjectResponse pResponseStatus_ =
-  ExportProjectResponse'
-    { _eprsShareURL = Nothing
-    , _eprsDownloadURL = Nothing
-    , _eprsSnapshotId = Nothing
-    , _eprsResponseStatus = pResponseStatus_
-    }
+exportProjectResponse pResponseStatus_
+  = ExportProjectResponse'{_eprsShareURL = Nothing,
+                           _eprsDownloadURL = Nothing,
+                           _eprsSnapshotId = Nothing,
+                           _eprsResponseStatus = pResponseStatus_}
 
-
--- | URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again.
+-- | URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. 
 eprsShareURL :: Lens' ExportProjectResponse (Maybe Text)
 eprsShareURL = lens _eprsShareURL (\ s a -> s{_eprsShareURL = a})
 
--- | URL which can be used to download the exported project configuation file(s).
+-- | URL which can be used to download the exported project configuation file(s). 
 eprsDownloadURL :: Lens' ExportProjectResponse (Maybe Text)
 eprsDownloadURL = lens _eprsDownloadURL (\ s a -> s{_eprsDownloadURL = a})
 
--- | Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL.
+-- | Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. 
 eprsSnapshotId :: Lens' ExportProjectResponse (Maybe Text)
 eprsSnapshotId = lens _eprsSnapshotId (\ s a -> s{_eprsSnapshotId = a})
 

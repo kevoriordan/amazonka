@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
+-- Starts a preview of a lifecycle policy for the specified repository. This allows you to see the results before associating the lifecycle policy with the repository.
 --
 --
 module Network.AWS.ECR.StartLifecyclePolicyPreview
@@ -50,12 +50,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startLifecyclePolicyPreview' smart constructor.
-data StartLifecyclePolicyPreview = StartLifecyclePolicyPreview'
-  { _slppRegistryId          :: !(Maybe Text)
-  , _slppLifecyclePolicyText :: !(Maybe Text)
-  , _slppRepositoryName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartLifecyclePolicyPreview = StartLifecyclePolicyPreview'{_slppRegistryId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _slppLifecyclePolicyText
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _slppRepositoryName
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'StartLifecyclePolicyPreview' with the minimum fields required to make a request.
 --
@@ -69,13 +73,11 @@ data StartLifecyclePolicyPreview = StartLifecyclePolicyPreview'
 startLifecyclePolicyPreview
     :: Text -- ^ 'slppRepositoryName'
     -> StartLifecyclePolicyPreview
-startLifecyclePolicyPreview pRepositoryName_ =
-  StartLifecyclePolicyPreview'
-    { _slppRegistryId = Nothing
-    , _slppLifecyclePolicyText = Nothing
-    , _slppRepositoryName = pRepositoryName_
-    }
-
+startLifecyclePolicyPreview pRepositoryName_
+  = StartLifecyclePolicyPreview'{_slppRegistryId =
+                                   Nothing,
+                                 _slppLifecyclePolicyText = Nothing,
+                                 _slppRepositoryName = pRepositoryName_}
 
 -- | The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
 slppRegistryId :: Lens' StartLifecyclePolicyPreview (Maybe Text)
@@ -132,14 +134,27 @@ instance ToQuery StartLifecyclePolicyPreview where
         toQuery = const mempty
 
 -- | /See:/ 'startLifecyclePolicyPreviewResponse' smart constructor.
-data StartLifecyclePolicyPreviewResponse = StartLifecyclePolicyPreviewResponse'
-  { _slpprsStatus              :: !(Maybe LifecyclePolicyPreviewStatus)
-  , _slpprsRegistryId          :: !(Maybe Text)
-  , _slpprsLifecyclePolicyText :: !(Maybe Text)
-  , _slpprsRepositoryName      :: !(Maybe Text)
-  , _slpprsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartLifecyclePolicyPreviewResponse = StartLifecyclePolicyPreviewResponse'{_slpprsStatus
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    LifecyclePolicyPreviewStatus),
+                                                                                _slpprsRegistryId
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _slpprsLifecyclePolicyText
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _slpprsRepositoryName
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _slpprsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'StartLifecyclePolicyPreviewResponse' with the minimum fields required to make a request.
 --
@@ -157,15 +172,14 @@ data StartLifecyclePolicyPreviewResponse = StartLifecyclePolicyPreviewResponse'
 startLifecyclePolicyPreviewResponse
     :: Int -- ^ 'slpprsResponseStatus'
     -> StartLifecyclePolicyPreviewResponse
-startLifecyclePolicyPreviewResponse pResponseStatus_ =
-  StartLifecyclePolicyPreviewResponse'
-    { _slpprsStatus = Nothing
-    , _slpprsRegistryId = Nothing
-    , _slpprsLifecyclePolicyText = Nothing
-    , _slpprsRepositoryName = Nothing
-    , _slpprsResponseStatus = pResponseStatus_
-    }
-
+startLifecyclePolicyPreviewResponse pResponseStatus_
+  = StartLifecyclePolicyPreviewResponse'{_slpprsStatus
+                                           = Nothing,
+                                         _slpprsRegistryId = Nothing,
+                                         _slpprsLifecyclePolicyText = Nothing,
+                                         _slpprsRepositoryName = Nothing,
+                                         _slpprsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The status of the lifecycle policy preview request.
 slpprsStatus :: Lens' StartLifecyclePolicyPreviewResponse (Maybe LifecyclePolicyPreviewStatus)

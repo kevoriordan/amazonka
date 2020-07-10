@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- [EC2-VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously.
+-- [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously.
 --
 --
 -- You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
@@ -49,18 +49,25 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for UpdateSecurityGroupRuleDescriptionsEgress.
---
---
---
--- /See:/ 'updateSecurityGroupRuleDescriptionsEgress' smart constructor.
-data UpdateSecurityGroupRuleDescriptionsEgress = UpdateSecurityGroupRuleDescriptionsEgress'
-  { _usgrdeGroupId       :: !(Maybe Text)
-  , _usgrdeGroupName     :: !(Maybe Text)
-  , _usgrdeDryRun        :: !(Maybe Bool)
-  , _usgrdeIPPermissions :: ![IPPermission]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'updateSecurityGroupRuleDescriptionsEgress' smart constructor.
+data UpdateSecurityGroupRuleDescriptionsEgress = UpdateSecurityGroupRuleDescriptionsEgress'{_usgrdeGroupId
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                Text),
+                                                                                            _usgrdeGroupName
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                Text),
+                                                                                            _usgrdeDryRun
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                Bool),
+                                                                                            _usgrdeIPPermissions
+                                                                                            ::
+                                                                                            ![IPPermission]}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'UpdateSecurityGroupRuleDescriptionsEgress' with the minimum fields required to make a request.
 --
@@ -75,14 +82,12 @@ data UpdateSecurityGroupRuleDescriptionsEgress = UpdateSecurityGroupRuleDescript
 -- * 'usgrdeIPPermissions' - The IP permissions for the security group rule.
 updateSecurityGroupRuleDescriptionsEgress
     :: UpdateSecurityGroupRuleDescriptionsEgress
-updateSecurityGroupRuleDescriptionsEgress =
-  UpdateSecurityGroupRuleDescriptionsEgress'
-    { _usgrdeGroupId = Nothing
-    , _usgrdeGroupName = Nothing
-    , _usgrdeDryRun = Nothing
-    , _usgrdeIPPermissions = mempty
-    }
-
+updateSecurityGroupRuleDescriptionsEgress
+  = UpdateSecurityGroupRuleDescriptionsEgress'{_usgrdeGroupId
+                                                 = Nothing,
+                                               _usgrdeGroupName = Nothing,
+                                               _usgrdeDryRun = Nothing,
+                                               _usgrdeIPPermissions = mempty}
 
 -- | The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.
 usgrdeGroupId :: Lens' UpdateSecurityGroupRuleDescriptionsEgress (Maybe Text)
@@ -145,16 +150,18 @@ instance ToQuery
                "DryRun" =: _usgrdeDryRun,
                toQueryList "IpPermissions" _usgrdeIPPermissions]
 
--- | Contains the output of UpdateSecurityGroupRuleDescriptionsEgress.
---
---
---
--- /See:/ 'updateSecurityGroupRuleDescriptionsEgressResponse' smart constructor.
-data UpdateSecurityGroupRuleDescriptionsEgressResponse = UpdateSecurityGroupRuleDescriptionsEgressResponse'
-  { _usgrdersReturn         :: !(Maybe Bool)
-  , _usgrdersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'updateSecurityGroupRuleDescriptionsEgressResponse' smart constructor.
+data UpdateSecurityGroupRuleDescriptionsEgressResponse = UpdateSecurityGroupRuleDescriptionsEgressResponse'{_usgrdersReturn
+                                                                                                            ::
+                                                                                                            !(Maybe
+                                                                                                                Bool),
+                                                                                                            _usgrdersResponseStatus
+                                                                                                            ::
+                                                                                                            !Int}
+                                                           deriving (Eq, Read,
+                                                                     Show, Data,
+                                                                     Typeable,
+                                                                     Generic)
 
 -- | Creates a value of 'UpdateSecurityGroupRuleDescriptionsEgressResponse' with the minimum fields required to make a request.
 --
@@ -166,10 +173,12 @@ data UpdateSecurityGroupRuleDescriptionsEgressResponse = UpdateSecurityGroupRule
 updateSecurityGroupRuleDescriptionsEgressResponse
     :: Int -- ^ 'usgrdersResponseStatus'
     -> UpdateSecurityGroupRuleDescriptionsEgressResponse
-updateSecurityGroupRuleDescriptionsEgressResponse pResponseStatus_ =
-  UpdateSecurityGroupRuleDescriptionsEgressResponse'
-    {_usgrdersReturn = Nothing, _usgrdersResponseStatus = pResponseStatus_}
-
+updateSecurityGroupRuleDescriptionsEgressResponse
+  pResponseStatus_
+  = UpdateSecurityGroupRuleDescriptionsEgressResponse'{_usgrdersReturn
+                                                         = Nothing,
+                                                       _usgrdersResponseStatus =
+                                                         pResponseStatus_}
 
 -- | Returns @true@ if the request succeeds; otherwise, returns an error.
 usgrdersReturn :: Lens' UpdateSecurityGroupRuleDescriptionsEgressResponse (Maybe Bool)

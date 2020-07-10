@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'releaseStaticIP' smart constructor.
-newtype ReleaseStaticIP = ReleaseStaticIP'
-  { _rsiStaticIPName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ReleaseStaticIP = ReleaseStaticIP'{_rsiStaticIPName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ReleaseStaticIP' with the minimum fields required to make a request.
 --
@@ -58,9 +57,8 @@ newtype ReleaseStaticIP = ReleaseStaticIP'
 releaseStaticIP
     :: Text -- ^ 'rsiStaticIPName'
     -> ReleaseStaticIP
-releaseStaticIP pStaticIPName_ =
-  ReleaseStaticIP' {_rsiStaticIPName = pStaticIPName_}
-
+releaseStaticIP pStaticIPName_
+  = ReleaseStaticIP'{_rsiStaticIPName = pStaticIPName_}
 
 -- | The name of the static IP to delete.
 rsiStaticIPName :: Lens' ReleaseStaticIP Text
@@ -102,28 +100,29 @@ instance ToQuery ReleaseStaticIP where
         toQuery = const mempty
 
 -- | /See:/ 'releaseStaticIPResponse' smart constructor.
-data ReleaseStaticIPResponse = ReleaseStaticIPResponse'
-  { _rsirsOperations     :: !(Maybe [Operation])
-  , _rsirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ReleaseStaticIPResponse = ReleaseStaticIPResponse'{_rsirsOperations
+                                                        :: !(Maybe [Operation]),
+                                                        _rsirsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ReleaseStaticIPResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rsirsOperations' - An array of key-value pairs containing information about the request operation.
+-- * 'rsirsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'rsirsResponseStatus' - -- | The response status code.
 releaseStaticIPResponse
     :: Int -- ^ 'rsirsResponseStatus'
     -> ReleaseStaticIPResponse
-releaseStaticIPResponse pResponseStatus_ =
-  ReleaseStaticIPResponse'
-    {_rsirsOperations = Nothing, _rsirsResponseStatus = pResponseStatus_}
+releaseStaticIPResponse pResponseStatus_
+  = ReleaseStaticIPResponse'{_rsirsOperations =
+                               Nothing,
+                             _rsirsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the request operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 rsirsOperations :: Lens' ReleaseStaticIPResponse [Operation]
 rsirsOperations = lens _rsirsOperations (\ s a -> s{_rsirsOperations = a}) . _Default . _Coerce
 

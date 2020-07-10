@@ -51,12 +51,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeNotificationConfigurations' smart constructor.
-data DescribeNotificationConfigurations = DescribeNotificationConfigurations'
-  { _dncAutoScalingGroupNames :: !(Maybe [Text])
-  , _dncNextToken             :: !(Maybe Text)
-  , _dncMaxRecords            :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeNotificationConfigurations = DescribeNotificationConfigurations'{_dncAutoScalingGroupNames
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [Text]),
+                                                                              _dncNextToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _dncMaxRecords
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Int)}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeNotificationConfigurations' with the minimum fields required to make a request.
 --
@@ -66,16 +74,14 @@ data DescribeNotificationConfigurations = DescribeNotificationConfigurations'
 --
 -- * 'dncNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
--- * 'dncMaxRecords' - The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+-- * 'dncMaxRecords' - The maximum number of items to return with this call. The default value is @50@ and the maximum value is @100@ .
 describeNotificationConfigurations
     :: DescribeNotificationConfigurations
-describeNotificationConfigurations =
-  DescribeNotificationConfigurations'
-    { _dncAutoScalingGroupNames = Nothing
-    , _dncNextToken = Nothing
-    , _dncMaxRecords = Nothing
-    }
-
+describeNotificationConfigurations
+  = DescribeNotificationConfigurations'{_dncAutoScalingGroupNames
+                                          = Nothing,
+                                        _dncNextToken = Nothing,
+                                        _dncMaxRecords = Nothing}
 
 -- | The name of the Auto Scaling group.
 dncAutoScalingGroupNames :: Lens' DescribeNotificationConfigurations [Text]
@@ -85,7 +91,7 @@ dncAutoScalingGroupNames = lens _dncAutoScalingGroupNames (\ s a -> s{_dncAutoSc
 dncNextToken :: Lens' DescribeNotificationConfigurations (Maybe Text)
 dncNextToken = lens _dncNextToken (\ s a -> s{_dncNextToken = a})
 
--- | The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+-- | The maximum number of items to return with this call. The default value is @50@ and the maximum value is @100@ .
 dncMaxRecords :: Lens' DescribeNotificationConfigurations (Maybe Int)
 dncMaxRecords = lens _dncMaxRecords (\ s a -> s{_dncMaxRecords = a})
 
@@ -141,18 +147,25 @@ instance ToQuery DescribeNotificationConfigurations
                "MaxRecords" =: _dncMaxRecords]
 
 -- | /See:/ 'describeNotificationConfigurationsResponse' smart constructor.
-data DescribeNotificationConfigurationsResponse = DescribeNotificationConfigurationsResponse'
-  { _dncrsNextToken                  :: !(Maybe Text)
-  , _dncrsResponseStatus             :: !Int
-  , _dncrsNotificationConfigurations :: ![NotificationConfiguration]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeNotificationConfigurationsResponse = DescribeNotificationConfigurationsResponse'{_dncrsNextToken
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _dncrsResponseStatus
+                                                                                              ::
+                                                                                              !Int,
+                                                                                              _dncrsNotificationConfigurations
+                                                                                              ::
+                                                                                              ![NotificationConfiguration]}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'DescribeNotificationConfigurationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dncrsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- * 'dncrsNextToken' - A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 --
 -- * 'dncrsResponseStatus' - -- | The response status code.
 --
@@ -160,15 +173,16 @@ data DescribeNotificationConfigurationsResponse = DescribeNotificationConfigurat
 describeNotificationConfigurationsResponse
     :: Int -- ^ 'dncrsResponseStatus'
     -> DescribeNotificationConfigurationsResponse
-describeNotificationConfigurationsResponse pResponseStatus_ =
-  DescribeNotificationConfigurationsResponse'
-    { _dncrsNextToken = Nothing
-    , _dncrsResponseStatus = pResponseStatus_
-    , _dncrsNotificationConfigurations = mempty
-    }
+describeNotificationConfigurationsResponse
+  pResponseStatus_
+  = DescribeNotificationConfigurationsResponse'{_dncrsNextToken
+                                                  = Nothing,
+                                                _dncrsResponseStatus =
+                                                  pResponseStatus_,
+                                                _dncrsNotificationConfigurations
+                                                  = mempty}
 
-
--- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- | A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 dncrsNextToken :: Lens' DescribeNotificationConfigurationsResponse (Maybe Text)
 dncrsNextToken = lens _dncrsNextToken (\ s a -> s{_dncrsNextToken = a})
 

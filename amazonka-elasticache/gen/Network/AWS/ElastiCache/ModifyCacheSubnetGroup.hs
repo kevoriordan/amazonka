@@ -51,12 +51,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyCacheSubnetGroup' smart constructor.
-data ModifyCacheSubnetGroup = ModifyCacheSubnetGroup'
-  { _mcsgSubnetIds                   :: !(Maybe [Text])
-  , _mcsgCacheSubnetGroupDescription :: !(Maybe Text)
-  , _mcsgCacheSubnetGroupName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyCacheSubnetGroup = ModifyCacheSubnetGroup'{_mcsgSubnetIds
+                                                      :: !(Maybe [Text]),
+                                                      _mcsgCacheSubnetGroupDescription
+                                                      :: !(Maybe Text),
+                                                      _mcsgCacheSubnetGroupName
+                                                      :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ModifyCacheSubnetGroup' with the minimum fields required to make a request.
 --
@@ -66,17 +68,14 @@ data ModifyCacheSubnetGroup = ModifyCacheSubnetGroup'
 --
 -- * 'mcsgCacheSubnetGroupDescription' - A description of the cache subnet group.
 --
--- * 'mcsgCacheSubnetGroupName' - The name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@
+-- * 'mcsgCacheSubnetGroupName' - The name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@ 
 modifyCacheSubnetGroup
     :: Text -- ^ 'mcsgCacheSubnetGroupName'
     -> ModifyCacheSubnetGroup
-modifyCacheSubnetGroup pCacheSubnetGroupName_ =
-  ModifyCacheSubnetGroup'
-    { _mcsgSubnetIds = Nothing
-    , _mcsgCacheSubnetGroupDescription = Nothing
-    , _mcsgCacheSubnetGroupName = pCacheSubnetGroupName_
-    }
-
+modifyCacheSubnetGroup pCacheSubnetGroupName_
+  = ModifyCacheSubnetGroup'{_mcsgSubnetIds = Nothing,
+                            _mcsgCacheSubnetGroupDescription = Nothing,
+                            _mcsgCacheSubnetGroupName = pCacheSubnetGroupName_}
 
 -- | The EC2 subnet IDs for the cache subnet group.
 mcsgSubnetIds :: Lens' ModifyCacheSubnetGroup [Text]
@@ -86,7 +85,7 @@ mcsgSubnetIds = lens _mcsgSubnetIds (\ s a -> s{_mcsgSubnetIds = a}) . _Default 
 mcsgCacheSubnetGroupDescription :: Lens' ModifyCacheSubnetGroup (Maybe Text)
 mcsgCacheSubnetGroupDescription = lens _mcsgCacheSubnetGroupDescription (\ s a -> s{_mcsgCacheSubnetGroupDescription = a})
 
--- | The name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@
+-- | The name for the cache subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters or hyphens. Example: @mysubnetgroup@ 
 mcsgCacheSubnetGroupName :: Lens' ModifyCacheSubnetGroup Text
 mcsgCacheSubnetGroupName = lens _mcsgCacheSubnetGroupName (\ s a -> s{_mcsgCacheSubnetGroupName = a})
 
@@ -124,11 +123,14 @@ instance ToQuery ModifyCacheSubnetGroup where
                "CacheSubnetGroupName" =: _mcsgCacheSubnetGroupName]
 
 -- | /See:/ 'modifyCacheSubnetGroupResponse' smart constructor.
-data ModifyCacheSubnetGroupResponse = ModifyCacheSubnetGroupResponse'
-  { _mcsgrsCacheSubnetGroup :: !(Maybe CacheSubnetGroup)
-  , _mcsgrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyCacheSubnetGroupResponse = ModifyCacheSubnetGroupResponse'{_mcsgrsCacheSubnetGroup
+                                                                      ::
+                                                                      !(Maybe
+                                                                          CacheSubnetGroup),
+                                                                      _mcsgrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ModifyCacheSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -140,12 +142,10 @@ data ModifyCacheSubnetGroupResponse = ModifyCacheSubnetGroupResponse'
 modifyCacheSubnetGroupResponse
     :: Int -- ^ 'mcsgrsResponseStatus'
     -> ModifyCacheSubnetGroupResponse
-modifyCacheSubnetGroupResponse pResponseStatus_ =
-  ModifyCacheSubnetGroupResponse'
-    { _mcsgrsCacheSubnetGroup = Nothing
-    , _mcsgrsResponseStatus = pResponseStatus_
-    }
-
+modifyCacheSubnetGroupResponse pResponseStatus_
+  = ModifyCacheSubnetGroupResponse'{_mcsgrsCacheSubnetGroup
+                                      = Nothing,
+                                    _mcsgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 mcsgrsCacheSubnetGroup :: Lens' ModifyCacheSubnetGroupResponse (Maybe CacheSubnetGroup)

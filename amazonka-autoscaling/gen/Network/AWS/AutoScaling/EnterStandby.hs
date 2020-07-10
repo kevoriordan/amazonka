@@ -21,7 +21,11 @@
 -- Moves the specified instances into the standby state.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html Temporarily Removing Instances from Your Auto Scaling Group> in the /Auto Scaling User Guide/ .
+-- If you choose to decrement the desired capacity of the Auto Scaling group, the instances can enter standby as long as the desired capacity of the Auto Scaling group after the instances are placed into standby is equal to or greater than the minimum capacity of the group.
+--
+-- If you choose not to decrement the desired capacity of the Auto Scaling group, the Auto Scaling group launches new instances to replace the instances on standby.
+--
+-- For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html Temporarily Removing Instances from Your Auto Scaling Group> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.EnterStandby
     (
@@ -49,12 +53,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'enterStandby' smart constructor.
-data EnterStandby = EnterStandby'
-  { _esInstanceIds                    :: !(Maybe [Text])
-  , _esAutoScalingGroupName           :: !Text
-  , _esShouldDecrementDesiredCapacity :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnterStandby = EnterStandby'{_esInstanceIds ::
+                                  !(Maybe [Text]),
+                                  _esAutoScalingGroupName :: !Text,
+                                  _esShouldDecrementDesiredCapacity :: !Bool}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterStandby' with the minimum fields required to make a request.
 --
@@ -69,13 +72,12 @@ enterStandby
     :: Text -- ^ 'esAutoScalingGroupName'
     -> Bool -- ^ 'esShouldDecrementDesiredCapacity'
     -> EnterStandby
-enterStandby pAutoScalingGroupName_ pShouldDecrementDesiredCapacity_ =
-  EnterStandby'
-    { _esInstanceIds = Nothing
-    , _esAutoScalingGroupName = pAutoScalingGroupName_
-    , _esShouldDecrementDesiredCapacity = pShouldDecrementDesiredCapacity_
-    }
-
+enterStandby pAutoScalingGroupName_
+  pShouldDecrementDesiredCapacity_
+  = EnterStandby'{_esInstanceIds = Nothing,
+                  _esAutoScalingGroupName = pAutoScalingGroupName_,
+                  _esShouldDecrementDesiredCapacity =
+                    pShouldDecrementDesiredCapacity_}
 
 -- | The IDs of the instances. You can specify up to 20 instances.
 esInstanceIds :: Lens' EnterStandby [Text]
@@ -122,11 +124,10 @@ instance ToQuery EnterStandby where
                  _esShouldDecrementDesiredCapacity]
 
 -- | /See:/ 'enterStandbyResponse' smart constructor.
-data EnterStandbyResponse = EnterStandbyResponse'
-  { _ersActivities     :: !(Maybe [Activity])
-  , _ersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnterStandbyResponse = EnterStandbyResponse'{_ersActivities
+                                                  :: !(Maybe [Activity]),
+                                                  _ersResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnterStandbyResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +139,9 @@ data EnterStandbyResponse = EnterStandbyResponse'
 enterStandbyResponse
     :: Int -- ^ 'ersResponseStatus'
     -> EnterStandbyResponse
-enterStandbyResponse pResponseStatus_ =
-  EnterStandbyResponse'
-    {_ersActivities = Nothing, _ersResponseStatus = pResponseStatus_}
-
+enterStandbyResponse pResponseStatus_
+  = EnterStandbyResponse'{_ersActivities = Nothing,
+                          _ersResponseStatus = pResponseStatus_}
 
 -- | The activities related to moving instances into @Standby@ mode.
 ersActivities :: Lens' EnterStandbyResponse [Activity]

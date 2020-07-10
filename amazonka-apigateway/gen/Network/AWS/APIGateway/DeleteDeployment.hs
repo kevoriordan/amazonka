@@ -47,11 +47,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteDeployment' smart constructor.
-data DeleteDeployment = DeleteDeployment'
-  { _ddRestAPIId    :: !Text
-  , _ddDeploymentId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDeployment = DeleteDeployment'{_ddRestAPIId
+                                          :: !Text,
+                                          _ddDeploymentId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDeployment' with the minimum fields required to make a request.
 --
@@ -64,10 +63,9 @@ deleteDeployment
     :: Text -- ^ 'ddRestAPIId'
     -> Text -- ^ 'ddDeploymentId'
     -> DeleteDeployment
-deleteDeployment pRestAPIId_ pDeploymentId_ =
-  DeleteDeployment'
-    {_ddRestAPIId = pRestAPIId_, _ddDeploymentId = pDeploymentId_}
-
+deleteDeployment pRestAPIId_ pDeploymentId_
+  = DeleteDeployment'{_ddRestAPIId = pRestAPIId_,
+                      _ddDeploymentId = pDeploymentId_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 ddRestAPIId :: Lens' DeleteDeployment Text
@@ -102,16 +100,14 @@ instance ToQuery DeleteDeployment where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDeploymentResponse' smart constructor.
-data DeleteDeploymentResponse =
-  DeleteDeploymentResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDeploymentResponse = DeleteDeploymentResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteDeploymentResponse' with the minimum fields required to make a request.
 --
 deleteDeploymentResponse
     :: DeleteDeploymentResponse
 deleteDeploymentResponse = DeleteDeploymentResponse'
-
 
 instance NFData DeleteDeploymentResponse where

@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDevice' smart constructor.
-data GetDevice = GetDevice'
-  { _gdAccessToken :: !(Maybe (Sensitive Text))
-  , _gdDeviceKey   :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetDevice = GetDevice'{_gdAccessToken ::
+                            !(Maybe (Sensitive Text)),
+                            _gdDeviceKey :: !Text}
+                   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDevice' with the minimum fields required to make a request.
 --
@@ -66,9 +65,9 @@ data GetDevice = GetDevice'
 getDevice
     :: Text -- ^ 'gdDeviceKey'
     -> GetDevice
-getDevice pDeviceKey_ =
-  GetDevice' {_gdAccessToken = Nothing, _gdDeviceKey = pDeviceKey_}
-
+getDevice pDeviceKey_
+  = GetDevice'{_gdAccessToken = Nothing,
+               _gdDeviceKey = pDeviceKey_}
 
 -- | The access token.
 gdAccessToken :: Lens' GetDevice (Maybe Text)
@@ -119,11 +118,10 @@ instance ToQuery GetDevice where
 --
 --
 -- /See:/ 'getDeviceResponse' smart constructor.
-data GetDeviceResponse = GetDeviceResponse'
-  { _gdrsResponseStatus :: !Int
-  , _gdrsDevice         :: !DeviceType
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetDeviceResponse = GetDeviceResponse'{_gdrsResponseStatus
+                                            :: !Int,
+                                            _gdrsDevice :: !DeviceType}
+                           deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDeviceResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +134,10 @@ getDeviceResponse
     :: Int -- ^ 'gdrsResponseStatus'
     -> DeviceType -- ^ 'gdrsDevice'
     -> GetDeviceResponse
-getDeviceResponse pResponseStatus_ pDevice_ =
-  GetDeviceResponse'
-    {_gdrsResponseStatus = pResponseStatus_, _gdrsDevice = pDevice_}
-
+getDeviceResponse pResponseStatus_ pDevice_
+  = GetDeviceResponse'{_gdrsResponseStatus =
+                         pResponseStatus_,
+                       _gdrsDevice = pDevice_}
 
 -- | -- | The response status code.
 gdrsResponseStatus :: Lens' GetDeviceResponse Int

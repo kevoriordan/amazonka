@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the organization. You can delete an organization only by using credentials from the master account. The organization must be empty of member accounts, OUs, and policies.
+-- Deletes the organization. You can delete an organization only by using credentials from the master account. The organization must be empty of member accounts.
 --
 --
 module Network.AWS.Organizations.DeleteOrganization
@@ -40,17 +40,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteOrganization' smart constructor.
-data DeleteOrganization =
-  DeleteOrganization'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteOrganization = DeleteOrganization'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteOrganization' with the minimum fields required to make a request.
 --
 deleteOrganization
     :: DeleteOrganization
 deleteOrganization = DeleteOrganization'
-
 
 instance AWSRequest DeleteOrganization where
         type Rs DeleteOrganization =
@@ -82,16 +79,15 @@ instance ToQuery DeleteOrganization where
         toQuery = const mempty
 
 -- | /See:/ 'deleteOrganizationResponse' smart constructor.
-data DeleteOrganizationResponse =
-  DeleteOrganizationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteOrganizationResponse = DeleteOrganizationResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteOrganizationResponse' with the minimum fields required to make a request.
 --
 deleteOrganizationResponse
     :: DeleteOrganizationResponse
-deleteOrganizationResponse = DeleteOrganizationResponse'
-
+deleteOrganizationResponse
+  = DeleteOrganizationResponse'
 
 instance NFData DeleteOrganizationResponse where

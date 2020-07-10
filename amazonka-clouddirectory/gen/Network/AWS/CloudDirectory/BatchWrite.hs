@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchWrite' smart constructor.
-data BatchWrite = BatchWrite'
-  { _bwDirectoryARN :: !Text
-  , _bwOperations   :: ![BatchWriteOperation]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchWrite = BatchWrite'{_bwDirectoryARN ::
+                              !Text,
+                              _bwOperations :: ![BatchWriteOperation]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchWrite' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ data BatchWrite = BatchWrite'
 batchWrite
     :: Text -- ^ 'bwDirectoryARN'
     -> BatchWrite
-batchWrite pDirectoryARN_ =
-  BatchWrite' {_bwDirectoryARN = pDirectoryARN_, _bwOperations = mempty}
-
+batchWrite pDirectoryARN_
+  = BatchWrite'{_bwDirectoryARN = pDirectoryARN_,
+                _bwOperations = mempty}
 
 -- | The Amazon Resource Name (ARN) that is associated with the 'Directory' . For more information, see 'arns' .
 bwDirectoryARN :: Lens' BatchWrite Text
@@ -105,11 +104,12 @@ instance ToQuery BatchWrite where
         toQuery = const mempty
 
 -- | /See:/ 'batchWriteResponse' smart constructor.
-data BatchWriteResponse = BatchWriteResponse'
-  { _bwrsResponses      :: !(Maybe [BatchWriteOperationResponse])
-  , _bwrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchWriteResponse = BatchWriteResponse'{_bwrsResponses
+                                              ::
+                                              !(Maybe
+                                                  [BatchWriteOperationResponse]),
+                                              _bwrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchWriteResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +121,9 @@ data BatchWriteResponse = BatchWriteResponse'
 batchWriteResponse
     :: Int -- ^ 'bwrsResponseStatus'
     -> BatchWriteResponse
-batchWriteResponse pResponseStatus_ =
-  BatchWriteResponse'
-    {_bwrsResponses = Nothing, _bwrsResponseStatus = pResponseStatus_}
-
+batchWriteResponse pResponseStatus_
+  = BatchWriteResponse'{_bwrsResponses = Nothing,
+                        _bwrsResponseStatus = pResponseStatus_}
 
 -- | A list of all the responses for each batch write.
 bwrsResponses :: Lens' BatchWriteResponse [BatchWriteOperationResponse]

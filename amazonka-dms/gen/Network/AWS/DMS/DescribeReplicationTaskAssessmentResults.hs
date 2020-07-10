@@ -51,42 +51,49 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeReplicationTaskAssessmentResults' smart constructor.
-data DescribeReplicationTaskAssessmentResults = DescribeReplicationTaskAssessmentResults'
-  { _drtarReplicationTaskARN :: !(Maybe Text)
-  , _drtarMarker             :: !(Maybe Text)
-  , _drtarMaxRecords         :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationTaskAssessmentResults = DescribeReplicationTaskAssessmentResults'{_drtarReplicationTaskARN
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _drtarMarker
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _drtarMaxRecords
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Int)}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DescribeReplicationTaskAssessmentResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drtarReplicationTaskARN' - - The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters.
+-- * 'drtarReplicationTaskARN' - The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified, the API returns only one result and ignore the values of the @MaxRecords@ and @Marker@ parameters. 
 --
--- * 'drtarMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'drtarMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
 -- * 'drtarMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
 describeReplicationTaskAssessmentResults
     :: DescribeReplicationTaskAssessmentResults
-describeReplicationTaskAssessmentResults =
-  DescribeReplicationTaskAssessmentResults'
-    { _drtarReplicationTaskARN = Nothing
-    , _drtarMarker = Nothing
-    , _drtarMaxRecords = Nothing
-    }
+describeReplicationTaskAssessmentResults
+  = DescribeReplicationTaskAssessmentResults'{_drtarReplicationTaskARN
+                                                = Nothing,
+                                              _drtarMarker = Nothing,
+                                              _drtarMaxRecords = Nothing}
 
-
--- | - The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified the API will return only one result and ignore the values of the max-records and marker parameters.
+-- | The Amazon Resource Name (ARN) string that uniquely identifies the task. When this input parameter is specified, the API returns only one result and ignore the values of the @MaxRecords@ and @Marker@ parameters. 
 drtarReplicationTaskARN :: Lens' DescribeReplicationTaskAssessmentResults (Maybe Text)
 drtarReplicationTaskARN = lens _drtarReplicationTaskARN (\ s a -> s{_drtarReplicationTaskARN = a})
 
--- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 drtarMarker :: Lens' DescribeReplicationTaskAssessmentResults (Maybe Text)
 drtarMarker = lens _drtarMarker (\ s a -> s{_drtarMarker = a})
 
@@ -160,51 +167,64 @@ instance ToQuery
          where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeReplicationTaskAssessmentResultsResponse' smart constructor.
-data DescribeReplicationTaskAssessmentResultsResponse = DescribeReplicationTaskAssessmentResultsResponse'
-  { _drtarrsBucketName :: !(Maybe Text)
-  , _drtarrsMarker :: !(Maybe Text)
-  , _drtarrsReplicationTaskAssessmentResults :: !(Maybe [ReplicationTaskAssessmentResult])
-  , _drtarrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReplicationTaskAssessmentResultsResponse = DescribeReplicationTaskAssessmentResultsResponse'{_drtarrsBucketName
+                                                                                                          ::
+                                                                                                          !(Maybe
+                                                                                                              Text),
+                                                                                                          _drtarrsMarker
+                                                                                                          ::
+                                                                                                          !(Maybe
+                                                                                                              Text),
+                                                                                                          _drtarrsReplicationTaskAssessmentResults
+                                                                                                          ::
+                                                                                                          !(Maybe
+                                                                                                              [ReplicationTaskAssessmentResult]),
+                                                                                                          _drtarrsResponseStatus
+                                                                                                          ::
+                                                                                                          !Int}
+                                                          deriving (Eq, Read,
+                                                                    Show, Data,
+                                                                    Typeable,
+                                                                    Generic)
 
 -- | Creates a value of 'DescribeReplicationTaskAssessmentResultsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drtarrsBucketName' - - The Amazon S3 bucket where the task assessment report is located.
+-- * 'drtarrsBucketName' - - The Amazon S3 bucket where the task assessment report is located. 
 --
--- * 'drtarrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'drtarrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
--- * 'drtarrsReplicationTaskAssessmentResults' - The task assessment report.
+-- * 'drtarrsReplicationTaskAssessmentResults' - The task assessment report. 
 --
 -- * 'drtarrsResponseStatus' - -- | The response status code.
 describeReplicationTaskAssessmentResultsResponse
     :: Int -- ^ 'drtarrsResponseStatus'
     -> DescribeReplicationTaskAssessmentResultsResponse
-describeReplicationTaskAssessmentResultsResponse pResponseStatus_ =
-  DescribeReplicationTaskAssessmentResultsResponse'
-    { _drtarrsBucketName = Nothing
-    , _drtarrsMarker = Nothing
-    , _drtarrsReplicationTaskAssessmentResults = Nothing
-    , _drtarrsResponseStatus = pResponseStatus_
-    }
+describeReplicationTaskAssessmentResultsResponse
+  pResponseStatus_
+  = DescribeReplicationTaskAssessmentResultsResponse'{_drtarrsBucketName
+                                                        = Nothing,
+                                                      _drtarrsMarker = Nothing,
+                                                      _drtarrsReplicationTaskAssessmentResults
+                                                        = Nothing,
+                                                      _drtarrsResponseStatus =
+                                                        pResponseStatus_}
 
-
--- | - The Amazon S3 bucket where the task assessment report is located.
+-- | - The Amazon S3 bucket where the task assessment report is located. 
 drtarrsBucketName :: Lens' DescribeReplicationTaskAssessmentResultsResponse (Maybe Text)
 drtarrsBucketName = lens _drtarrsBucketName (\ s a -> s{_drtarrsBucketName = a})
 
--- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 drtarrsMarker :: Lens' DescribeReplicationTaskAssessmentResultsResponse (Maybe Text)
 drtarrsMarker = lens _drtarrsMarker (\ s a -> s{_drtarrsMarker = a})
 
--- | The task assessment report.
+-- | The task assessment report. 
 drtarrsReplicationTaskAssessmentResults :: Lens' DescribeReplicationTaskAssessmentResultsResponse [ReplicationTaskAssessmentResult]
 drtarrsReplicationTaskAssessmentResults = lens _drtarrsReplicationTaskAssessmentResults (\ s a -> s{_drtarrsReplicationTaskAssessmentResults = a}) . _Default . _Coerce
 

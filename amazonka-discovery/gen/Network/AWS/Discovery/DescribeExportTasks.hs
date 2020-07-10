@@ -21,6 +21,8 @@
 -- Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.Discovery.DescribeExportTasks
     (
     -- * Creating a Request
@@ -44,18 +46,19 @@ module Network.AWS.Discovery.DescribeExportTasks
 import Network.AWS.Discovery.Types
 import Network.AWS.Discovery.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeExportTasks' smart constructor.
-data DescribeExportTasks = DescribeExportTasks'
-  { _detFilters    :: !(Maybe [ExportFilter])
-  , _detNextToken  :: !(Maybe Text)
-  , _detExportIds  :: !(Maybe [Text])
-  , _detMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeExportTasks = DescribeExportTasks'{_detFilters
+                                                :: !(Maybe [ExportFilter]),
+                                                _detNextToken :: !(Maybe Text),
+                                                _detExportIds ::
+                                                !(Maybe [Text]),
+                                                _detMaxResults :: !(Maybe Int)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeExportTasks' with the minimum fields required to make a request.
 --
@@ -70,14 +73,10 @@ data DescribeExportTasks = DescribeExportTasks'
 -- * 'detMaxResults' - The maximum number of volume results returned by @DescribeExportTasks@ in paginated output. When this parameter is used, @DescribeExportTasks@ only returns @maxResults@ results in a single page along with a @nextToken@ response element.
 describeExportTasks
     :: DescribeExportTasks
-describeExportTasks =
-  DescribeExportTasks'
-    { _detFilters = Nothing
-    , _detNextToken = Nothing
-    , _detExportIds = Nothing
-    , _detMaxResults = Nothing
-    }
-
+describeExportTasks
+  = DescribeExportTasks'{_detFilters = Nothing,
+                         _detNextToken = Nothing, _detExportIds = Nothing,
+                         _detMaxResults = Nothing}
 
 -- | One or more filters.     * @AgentId@ - ID of the agent whose collected data will be exported
 detFilters :: Lens' DescribeExportTasks [ExportFilter]
@@ -94,6 +93,13 @@ detExportIds = lens _detExportIds (\ s a -> s{_detExportIds = a}) . _Default . _
 -- | The maximum number of volume results returned by @DescribeExportTasks@ in paginated output. When this parameter is used, @DescribeExportTasks@ only returns @maxResults@ results in a single page along with a @nextToken@ response element.
 detMaxResults :: Lens' DescribeExportTasks (Maybe Int)
 detMaxResults = lens _detMaxResults (\ s a -> s{_detMaxResults = a})
+
+instance AWSPager DescribeExportTasks where
+        page rq rs
+          | stop (rs ^. detrsNextToken) = Nothing
+          | stop (rs ^. detrsExportsInfo) = Nothing
+          | otherwise =
+            Just $ rq & detNextToken .~ rs ^. detrsNextToken
 
 instance AWSRequest DescribeExportTasks where
         type Rs DescribeExportTasks =
@@ -137,12 +143,17 @@ instance ToQuery DescribeExportTasks where
         toQuery = const mempty
 
 -- | /See:/ 'describeExportTasksResponse' smart constructor.
-data DescribeExportTasksResponse = DescribeExportTasksResponse'
-  { _detrsNextToken      :: !(Maybe Text)
-  , _detrsExportsInfo    :: !(Maybe [ExportInfo])
-  , _detrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeExportTasksResponse = DescribeExportTasksResponse'{_detrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _detrsExportsInfo
+                                                                ::
+                                                                !(Maybe
+                                                                    [ExportInfo]),
+                                                                _detrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeExportTasksResponse' with the minimum fields required to make a request.
 --
@@ -156,13 +167,11 @@ data DescribeExportTasksResponse = DescribeExportTasksResponse'
 describeExportTasksResponse
     :: Int -- ^ 'detrsResponseStatus'
     -> DescribeExportTasksResponse
-describeExportTasksResponse pResponseStatus_ =
-  DescribeExportTasksResponse'
-    { _detrsNextToken = Nothing
-    , _detrsExportsInfo = Nothing
-    , _detrsResponseStatus = pResponseStatus_
-    }
-
+describeExportTasksResponse pResponseStatus_
+  = DescribeExportTasksResponse'{_detrsNextToken =
+                                   Nothing,
+                                 _detrsExportsInfo = Nothing,
+                                 _detrsResponseStatus = pResponseStatus_}
 
 -- | The @nextToken@ value to include in a future @DescribeExportTasks@ request. When the results of a @DescribeExportTasks@ request exceed @maxResults@ , this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
 detrsNextToken :: Lens' DescribeExportTasksResponse (Maybe Text)

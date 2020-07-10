@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListReviewPolicyResultsForHIT@ operation retrieves the computed results and the actions taken in the course of executing your Review Policies for a given HIT. For information about how to specify Review Policies when you call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can return results for both Assignment-level and HIT-level review results.
+-- The @ListReviewPolicyResultsForHIT@ operation retrieves the computed results and the actions taken in the course of executing your Review Policies for a given HIT. For information about how to specify Review Policies when you call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can return results for both Assignment-level and HIT-level review results. 
 --
 --
 module Network.AWS.MechanicalTurk.ListReviewPolicyResultsForHIT
@@ -55,25 +55,40 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listReviewPolicyResultsForHIT' smart constructor.
-data ListReviewPolicyResultsForHIT = ListReviewPolicyResultsForHIT'
-  { _lrprfhitRetrieveResults :: !(Maybe Bool)
-  , _lrprfhitPolicyLevels    :: !(Maybe [ReviewPolicyLevel])
-  , _lrprfhitRetrieveActions :: !(Maybe Bool)
-  , _lrprfhitNextToken       :: !(Maybe Text)
-  , _lrprfhitMaxResults      :: !(Maybe Nat)
-  , _lrprfhitHITId           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReviewPolicyResultsForHIT = ListReviewPolicyResultsForHIT'{_lrprfhitRetrieveResults
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Bool),
+                                                                    _lrprfhitPolicyLevels
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [ReviewPolicyLevel]),
+                                                                    _lrprfhitRetrieveActions
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Bool),
+                                                                    _lrprfhitNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _lrprfhitMaxResults
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Nat),
+                                                                    _lrprfhitHITId
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListReviewPolicyResultsForHIT' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrprfhitRetrieveResults' - Specify if the operation should retrieve a list of the results computed by the Review Policies.
+-- * 'lrprfhitRetrieveResults' - Specify if the operation should retrieve a list of the results computed by the Review Policies. 
 --
--- * 'lrprfhitPolicyLevels' - The Policy Level(s) to retrieve review results for - HIT or Assignment. If omitted, the default behavior is to retrieve all data for both policy levels. For a list of all the described policies, see Review Policies.
+-- * 'lrprfhitPolicyLevels' - The Policy Level(s) to retrieve review results for - HIT or Assignment. If omitted, the default behavior is to retrieve all data for both policy levels. For a list of all the described policies, see Review Policies. 
 --
--- * 'lrprfhitRetrieveActions' - Specify if the operation should retrieve a list of the actions taken executing the Review Policies and their outcomes.
+-- * 'lrprfhitRetrieveActions' - Specify if the operation should retrieve a list of the actions taken executing the Review Policies and their outcomes. 
 --
 -- * 'lrprfhitNextToken' - Pagination token
 --
@@ -83,26 +98,24 @@ data ListReviewPolicyResultsForHIT = ListReviewPolicyResultsForHIT'
 listReviewPolicyResultsForHIT
     :: Text -- ^ 'lrprfhitHITId'
     -> ListReviewPolicyResultsForHIT
-listReviewPolicyResultsForHIT pHITId_ =
-  ListReviewPolicyResultsForHIT'
-    { _lrprfhitRetrieveResults = Nothing
-    , _lrprfhitPolicyLevels = Nothing
-    , _lrprfhitRetrieveActions = Nothing
-    , _lrprfhitNextToken = Nothing
-    , _lrprfhitMaxResults = Nothing
-    , _lrprfhitHITId = pHITId_
-    }
+listReviewPolicyResultsForHIT pHITId_
+  = ListReviewPolicyResultsForHIT'{_lrprfhitRetrieveResults
+                                     = Nothing,
+                                   _lrprfhitPolicyLevels = Nothing,
+                                   _lrprfhitRetrieveActions = Nothing,
+                                   _lrprfhitNextToken = Nothing,
+                                   _lrprfhitMaxResults = Nothing,
+                                   _lrprfhitHITId = pHITId_}
 
-
--- | Specify if the operation should retrieve a list of the results computed by the Review Policies.
+-- | Specify if the operation should retrieve a list of the results computed by the Review Policies. 
 lrprfhitRetrieveResults :: Lens' ListReviewPolicyResultsForHIT (Maybe Bool)
 lrprfhitRetrieveResults = lens _lrprfhitRetrieveResults (\ s a -> s{_lrprfhitRetrieveResults = a})
 
--- | The Policy Level(s) to retrieve review results for - HIT or Assignment. If omitted, the default behavior is to retrieve all data for both policy levels. For a list of all the described policies, see Review Policies.
+-- | The Policy Level(s) to retrieve review results for - HIT or Assignment. If omitted, the default behavior is to retrieve all data for both policy levels. For a list of all the described policies, see Review Policies. 
 lrprfhitPolicyLevels :: Lens' ListReviewPolicyResultsForHIT [ReviewPolicyLevel]
 lrprfhitPolicyLevels = lens _lrprfhitPolicyLevels (\ s a -> s{_lrprfhitPolicyLevels = a}) . _Default . _Coerce
 
--- | Specify if the operation should retrieve a list of the actions taken executing the Review Policies and their outcomes.
+-- | Specify if the operation should retrieve a list of the actions taken executing the Review Policies and their outcomes. 
 lrprfhitRetrieveActions :: Lens' ListReviewPolicyResultsForHIT (Maybe Bool)
 lrprfhitRetrieveActions = lens _lrprfhitRetrieveActions (\ s a -> s{_lrprfhitRetrieveActions = a})
 
@@ -168,16 +181,35 @@ instance ToQuery ListReviewPolicyResultsForHIT where
         toQuery = const mempty
 
 -- | /See:/ 'listReviewPolicyResultsForHITResponse' smart constructor.
-data ListReviewPolicyResultsForHITResponse = ListReviewPolicyResultsForHITResponse'
-  { _lrprfhitrsHITReviewPolicy        :: !(Maybe ReviewPolicy)
-  , _lrprfhitrsHITReviewReport        :: !(Maybe ReviewReport)
-  , _lrprfhitrsNextToken              :: !(Maybe Text)
-  , _lrprfhitrsAssignmentReviewReport :: !(Maybe ReviewReport)
-  , _lrprfhitrsHITId                  :: !(Maybe Text)
-  , _lrprfhitrsAssignmentReviewPolicy :: !(Maybe ReviewPolicy)
-  , _lrprfhitrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListReviewPolicyResultsForHITResponse = ListReviewPolicyResultsForHITResponse'{_lrprfhitrsHITReviewPolicy
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        ReviewPolicy),
+                                                                                    _lrprfhitrsHITReviewReport
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        ReviewReport),
+                                                                                    _lrprfhitrsNextToken
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _lrprfhitrsAssignmentReviewReport
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        ReviewReport),
+                                                                                    _lrprfhitrsHITId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _lrprfhitrsAssignmentReviewPolicy
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        ReviewPolicy),
+                                                                                    _lrprfhitrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'ListReviewPolicyResultsForHITResponse' with the minimum fields required to make a request.
 --
@@ -185,37 +217,39 @@ data ListReviewPolicyResultsForHITResponse = ListReviewPolicyResultsForHITRespon
 --
 -- * 'lrprfhitrsHITReviewPolicy' - The name of the HIT-level Review Policy. This contains only the PolicyName element.
 --
--- * 'lrprfhitrsHITReviewReport' - Contains both ReviewResult and ReviewAction elements for a particular HIT.
+-- * 'lrprfhitrsHITReviewReport' - Contains both ReviewResult and ReviewAction elements for a particular HIT. 
 --
 -- * 'lrprfhitrsNextToken' - Undocumented member.
 --
--- * 'lrprfhitrsAssignmentReviewReport' - Contains both ReviewResult and ReviewAction elements for an Assignment.
+-- * 'lrprfhitrsAssignmentReviewReport' - Contains both ReviewResult and ReviewAction elements for an Assignment. 
 --
 -- * 'lrprfhitrsHITId' - The HITId of the HIT for which results have been returned.
 --
--- * 'lrprfhitrsAssignmentReviewPolicy' - The name of the Assignment-level Review Policy. This contains only the PolicyName element.
+-- * 'lrprfhitrsAssignmentReviewPolicy' - The name of the Assignment-level Review Policy. This contains only the PolicyName element. 
 --
 -- * 'lrprfhitrsResponseStatus' - -- | The response status code.
 listReviewPolicyResultsForHITResponse
     :: Int -- ^ 'lrprfhitrsResponseStatus'
     -> ListReviewPolicyResultsForHITResponse
-listReviewPolicyResultsForHITResponse pResponseStatus_ =
-  ListReviewPolicyResultsForHITResponse'
-    { _lrprfhitrsHITReviewPolicy = Nothing
-    , _lrprfhitrsHITReviewReport = Nothing
-    , _lrprfhitrsNextToken = Nothing
-    , _lrprfhitrsAssignmentReviewReport = Nothing
-    , _lrprfhitrsHITId = Nothing
-    , _lrprfhitrsAssignmentReviewPolicy = Nothing
-    , _lrprfhitrsResponseStatus = pResponseStatus_
-    }
-
+listReviewPolicyResultsForHITResponse
+  pResponseStatus_
+  = ListReviewPolicyResultsForHITResponse'{_lrprfhitrsHITReviewPolicy
+                                             = Nothing,
+                                           _lrprfhitrsHITReviewReport = Nothing,
+                                           _lrprfhitrsNextToken = Nothing,
+                                           _lrprfhitrsAssignmentReviewReport =
+                                             Nothing,
+                                           _lrprfhitrsHITId = Nothing,
+                                           _lrprfhitrsAssignmentReviewPolicy =
+                                             Nothing,
+                                           _lrprfhitrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The name of the HIT-level Review Policy. This contains only the PolicyName element.
 lrprfhitrsHITReviewPolicy :: Lens' ListReviewPolicyResultsForHITResponse (Maybe ReviewPolicy)
 lrprfhitrsHITReviewPolicy = lens _lrprfhitrsHITReviewPolicy (\ s a -> s{_lrprfhitrsHITReviewPolicy = a})
 
--- | Contains both ReviewResult and ReviewAction elements for a particular HIT.
+-- | Contains both ReviewResult and ReviewAction elements for a particular HIT. 
 lrprfhitrsHITReviewReport :: Lens' ListReviewPolicyResultsForHITResponse (Maybe ReviewReport)
 lrprfhitrsHITReviewReport = lens _lrprfhitrsHITReviewReport (\ s a -> s{_lrprfhitrsHITReviewReport = a})
 
@@ -223,7 +257,7 @@ lrprfhitrsHITReviewReport = lens _lrprfhitrsHITReviewReport (\ s a -> s{_lrprfhi
 lrprfhitrsNextToken :: Lens' ListReviewPolicyResultsForHITResponse (Maybe Text)
 lrprfhitrsNextToken = lens _lrprfhitrsNextToken (\ s a -> s{_lrprfhitrsNextToken = a})
 
--- | Contains both ReviewResult and ReviewAction elements for an Assignment.
+-- | Contains both ReviewResult and ReviewAction elements for an Assignment. 
 lrprfhitrsAssignmentReviewReport :: Lens' ListReviewPolicyResultsForHITResponse (Maybe ReviewReport)
 lrprfhitrsAssignmentReviewReport = lens _lrprfhitrsAssignmentReviewReport (\ s a -> s{_lrprfhitrsAssignmentReviewReport = a})
 
@@ -231,7 +265,7 @@ lrprfhitrsAssignmentReviewReport = lens _lrprfhitrsAssignmentReviewReport (\ s a
 lrprfhitrsHITId :: Lens' ListReviewPolicyResultsForHITResponse (Maybe Text)
 lrprfhitrsHITId = lens _lrprfhitrsHITId (\ s a -> s{_lrprfhitrsHITId = a})
 
--- | The name of the Assignment-level Review Policy. This contains only the PolicyName element.
+-- | The name of the Assignment-level Review Policy. This contains only the PolicyName element. 
 lrprfhitrsAssignmentReviewPolicy :: Lens' ListReviewPolicyResultsForHITResponse (Maybe ReviewPolicy)
 lrprfhitrsAssignmentReviewPolicy = lens _lrprfhitrsAssignmentReviewPolicy (\ s a -> s{_lrprfhitrsAssignmentReviewPolicy = a})
 

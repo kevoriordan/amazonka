@@ -49,10 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteElasticsearchDomain' smart constructor.
-newtype DeleteElasticsearchDomain = DeleteElasticsearchDomain'
-  { _dDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteElasticsearchDomain = DeleteElasticsearchDomain'{_dDomainName
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteElasticsearchDomain' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DeleteElasticsearchDomain = DeleteElasticsearchDomain'
 deleteElasticsearchDomain
     :: Text -- ^ 'dDomainName'
     -> DeleteElasticsearchDomain
-deleteElasticsearchDomain pDomainName_ =
-  DeleteElasticsearchDomain' {_dDomainName = pDomainName_}
-
+deleteElasticsearchDomain pDomainName_
+  = DeleteElasticsearchDomain'{_dDomainName =
+                                 pDomainName_}
 
 -- | The name of the Elasticsearch domain that you want to permanently delete.
 dDomainName :: Lens' DeleteElasticsearchDomain Text
@@ -100,11 +100,15 @@ instance ToQuery DeleteElasticsearchDomain where
 --
 --
 -- /See:/ 'deleteElasticsearchDomainResponse' smart constructor.
-data DeleteElasticsearchDomainResponse = DeleteElasticsearchDomainResponse'
-  { _delrsDomainStatus   :: !(Maybe ElasticsearchDomainStatus)
-  , _delrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteElasticsearchDomainResponse = DeleteElasticsearchDomainResponse'{_delrsDomainStatus
+                                                                            ::
+                                                                            !(Maybe
+                                                                                ElasticsearchDomainStatus),
+                                                                            _delrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteElasticsearchDomainResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +120,10 @@ data DeleteElasticsearchDomainResponse = DeleteElasticsearchDomainResponse'
 deleteElasticsearchDomainResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteElasticsearchDomainResponse
-deleteElasticsearchDomainResponse pResponseStatus_ =
-  DeleteElasticsearchDomainResponse'
-    {_delrsDomainStatus = Nothing, _delrsResponseStatus = pResponseStatus_}
-
+deleteElasticsearchDomainResponse pResponseStatus_
+  = DeleteElasticsearchDomainResponse'{_delrsDomainStatus
+                                         = Nothing,
+                                       _delrsResponseStatus = pResponseStatus_}
 
 -- | The status of the Elasticsearch domain being deleted.
 delrsDomainStatus :: Lens' DeleteElasticsearchDomainResponse (Maybe ElasticsearchDomainStatus)

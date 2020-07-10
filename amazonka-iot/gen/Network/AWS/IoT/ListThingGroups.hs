@@ -21,6 +21,8 @@
 -- List the thing groups in your account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListThingGroups
     (
     -- * Creating a Request
@@ -45,19 +47,19 @@ module Network.AWS.IoT.ListThingGroups
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listThingGroups' smart constructor.
-data ListThingGroups = ListThingGroups'
-  { _ltgNamePrefixFilter :: !(Maybe Text)
-  , _ltgParentGroup      :: !(Maybe Text)
-  , _ltgNextToken        :: !(Maybe Text)
-  , _ltgRecursive        :: !(Maybe Bool)
-  , _ltgMaxResults       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThingGroups = ListThingGroups'{_ltgNamePrefixFilter
+                                        :: !(Maybe Text),
+                                        _ltgParentGroup :: !(Maybe Text),
+                                        _ltgNextToken :: !(Maybe Text),
+                                        _ltgRecursive :: !(Maybe Bool),
+                                        _ltgMaxResults :: !(Maybe Nat)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListThingGroups' with the minimum fields required to make a request.
 --
@@ -67,22 +69,17 @@ data ListThingGroups = ListThingGroups'
 --
 -- * 'ltgParentGroup' - A filter that limits the results to those with the specified parent group.
 --
--- * 'ltgNextToken' - The token used to get the next set of results, or __null__ if there are no additional results.
+-- * 'ltgNextToken' - The token to retrieve the next set of results.
 --
 -- * 'ltgRecursive' - If true, return child groups as well.
 --
 -- * 'ltgMaxResults' - The maximum number of results to return at one time.
 listThingGroups
     :: ListThingGroups
-listThingGroups =
-  ListThingGroups'
-    { _ltgNamePrefixFilter = Nothing
-    , _ltgParentGroup = Nothing
-    , _ltgNextToken = Nothing
-    , _ltgRecursive = Nothing
-    , _ltgMaxResults = Nothing
-    }
-
+listThingGroups
+  = ListThingGroups'{_ltgNamePrefixFilter = Nothing,
+                     _ltgParentGroup = Nothing, _ltgNextToken = Nothing,
+                     _ltgRecursive = Nothing, _ltgMaxResults = Nothing}
 
 -- | A filter that limits the results to those with the specified name prefix.
 ltgNamePrefixFilter :: Lens' ListThingGroups (Maybe Text)
@@ -92,7 +89,7 @@ ltgNamePrefixFilter = lens _ltgNamePrefixFilter (\ s a -> s{_ltgNamePrefixFilter
 ltgParentGroup :: Lens' ListThingGroups (Maybe Text)
 ltgParentGroup = lens _ltgParentGroup (\ s a -> s{_ltgParentGroup = a})
 
--- | The token used to get the next set of results, or __null__ if there are no additional results.
+-- | The token to retrieve the next set of results.
 ltgNextToken :: Lens' ListThingGroups (Maybe Text)
 ltgNextToken = lens _ltgNextToken (\ s a -> s{_ltgNextToken = a})
 
@@ -103,6 +100,13 @@ ltgRecursive = lens _ltgRecursive (\ s a -> s{_ltgRecursive = a})
 -- | The maximum number of results to return at one time.
 ltgMaxResults :: Lens' ListThingGroups (Maybe Natural)
 ltgMaxResults = lens _ltgMaxResults (\ s a -> s{_ltgMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListThingGroups where
+        page rq rs
+          | stop (rs ^. ltgrsNextToken) = Nothing
+          | stop (rs ^. ltgrsThingGroups) = Nothing
+          | otherwise =
+            Just $ rq & ltgNextToken .~ rs ^. ltgrsNextToken
 
 instance AWSRequest ListThingGroups where
         type Rs ListThingGroups = ListThingGroupsResponse
@@ -135,12 +139,16 @@ instance ToQuery ListThingGroups where
                "maxResults" =: _ltgMaxResults]
 
 -- | /See:/ 'listThingGroupsResponse' smart constructor.
-data ListThingGroupsResponse = ListThingGroupsResponse'
-  { _ltgrsThingGroups    :: !(Maybe [GroupNameAndARN])
-  , _ltgrsNextToken      :: !(Maybe Text)
-  , _ltgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThingGroupsResponse = ListThingGroupsResponse'{_ltgrsThingGroups
+                                                        ::
+                                                        !(Maybe
+                                                            [GroupNameAndARN]),
+                                                        _ltgrsNextToken ::
+                                                        !(Maybe Text),
+                                                        _ltgrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListThingGroupsResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +162,11 @@ data ListThingGroupsResponse = ListThingGroupsResponse'
 listThingGroupsResponse
     :: Int -- ^ 'ltgrsResponseStatus'
     -> ListThingGroupsResponse
-listThingGroupsResponse pResponseStatus_ =
-  ListThingGroupsResponse'
-    { _ltgrsThingGroups = Nothing
-    , _ltgrsNextToken = Nothing
-    , _ltgrsResponseStatus = pResponseStatus_
-    }
-
+listThingGroupsResponse pResponseStatus_
+  = ListThingGroupsResponse'{_ltgrsThingGroups =
+                               Nothing,
+                             _ltgrsNextToken = Nothing,
+                             _ltgrsResponseStatus = pResponseStatus_}
 
 -- | The thing groups.
 ltgrsThingGroups :: Lens' ListThingGroupsResponse [GroupNameAndARN]

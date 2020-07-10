@@ -21,6 +21,8 @@
 -- Returns an array of 'GeoMatchSetSummary' objects in the response.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WAF.ListGeoMatchSets
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.WAF.ListGeoMatchSets
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -47,11 +50,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'listGeoMatchSets' smart constructor.
-data ListGeoMatchSets = ListGeoMatchSets'
-  { _lgmsNextMarker :: !(Maybe Text)
-  , _lgmsLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGeoMatchSets = ListGeoMatchSets'{_lgmsNextMarker
+                                          :: !(Maybe Text),
+                                          _lgmsLimit :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGeoMatchSets' with the minimum fields required to make a request.
 --
@@ -62,9 +64,9 @@ data ListGeoMatchSets = ListGeoMatchSets'
 -- * 'lgmsLimit' - Specifies the number of @GeoMatchSet@ objects that you want AWS WAF to return for this request. If you have more @GeoMatchSet@ objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @GeoMatchSet@ objects.
 listGeoMatchSets
     :: ListGeoMatchSets
-listGeoMatchSets =
-  ListGeoMatchSets' {_lgmsNextMarker = Nothing, _lgmsLimit = Nothing}
-
+listGeoMatchSets
+  = ListGeoMatchSets'{_lgmsNextMarker = Nothing,
+                      _lgmsLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @GeoMatchSet@ s than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @GeoMatchSet@ objects. For the second and subsequent @ListGeoMatchSets@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @GeoMatchSet@ objects.
 lgmsNextMarker :: Lens' ListGeoMatchSets (Maybe Text)
@@ -73,6 +75,13 @@ lgmsNextMarker = lens _lgmsNextMarker (\ s a -> s{_lgmsNextMarker = a})
 -- | Specifies the number of @GeoMatchSet@ objects that you want AWS WAF to return for this request. If you have more @GeoMatchSet@ objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @GeoMatchSet@ objects.
 lgmsLimit :: Lens' ListGeoMatchSets (Maybe Natural)
 lgmsLimit = lens _lgmsLimit (\ s a -> s{_lgmsLimit = a}) . mapping _Nat
+
+instance AWSPager ListGeoMatchSets where
+        page rq rs
+          | stop (rs ^. lgmsrsNextMarker) = Nothing
+          | stop (rs ^. lgmsrsGeoMatchSets) = Nothing
+          | otherwise =
+            Just $ rq & lgmsNextMarker .~ rs ^. lgmsrsNextMarker
 
 instance AWSRequest ListGeoMatchSets where
         type Rs ListGeoMatchSets = ListGeoMatchSetsResponse
@@ -112,12 +121,16 @@ instance ToQuery ListGeoMatchSets where
         toQuery = const mempty
 
 -- | /See:/ 'listGeoMatchSetsResponse' smart constructor.
-data ListGeoMatchSetsResponse = ListGeoMatchSetsResponse'
-  { _lgmsrsGeoMatchSets   :: !(Maybe [GeoMatchSetSummary])
-  , _lgmsrsNextMarker     :: !(Maybe Text)
-  , _lgmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGeoMatchSetsResponse = ListGeoMatchSetsResponse'{_lgmsrsGeoMatchSets
+                                                          ::
+                                                          !(Maybe
+                                                              [GeoMatchSetSummary]),
+                                                          _lgmsrsNextMarker ::
+                                                          !(Maybe Text),
+                                                          _lgmsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListGeoMatchSetsResponse' with the minimum fields required to make a request.
 --
@@ -131,13 +144,11 @@ data ListGeoMatchSetsResponse = ListGeoMatchSetsResponse'
 listGeoMatchSetsResponse
     :: Int -- ^ 'lgmsrsResponseStatus'
     -> ListGeoMatchSetsResponse
-listGeoMatchSetsResponse pResponseStatus_ =
-  ListGeoMatchSetsResponse'
-    { _lgmsrsGeoMatchSets = Nothing
-    , _lgmsrsNextMarker = Nothing
-    , _lgmsrsResponseStatus = pResponseStatus_
-    }
-
+listGeoMatchSetsResponse pResponseStatus_
+  = ListGeoMatchSetsResponse'{_lgmsrsGeoMatchSets =
+                                Nothing,
+                              _lgmsrsNextMarker = Nothing,
+                              _lgmsrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'GeoMatchSetSummary' objects.
 lgmsrsGeoMatchSets :: Lens' ListGeoMatchSetsResponse [GeoMatchSetSummary]

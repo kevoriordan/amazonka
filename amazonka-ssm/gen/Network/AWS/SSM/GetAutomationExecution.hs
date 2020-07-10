@@ -45,10 +45,10 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getAutomationExecution' smart constructor.
-newtype GetAutomationExecution = GetAutomationExecution'
-  { _gaeAutomationExecutionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetAutomationExecution = GetAutomationExecution'{_gaeAutomationExecutionId
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetAutomationExecution' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetAutomationExecution = GetAutomationExecution'
 getAutomationExecution
     :: Text -- ^ 'gaeAutomationExecutionId'
     -> GetAutomationExecution
-getAutomationExecution pAutomationExecutionId_ =
-  GetAutomationExecution' {_gaeAutomationExecutionId = pAutomationExecutionId_}
-
+getAutomationExecution pAutomationExecutionId_
+  = GetAutomationExecution'{_gaeAutomationExecutionId =
+                              pAutomationExecutionId_}
 
 -- | The unique identifier for an existing automation execution to examine. The execution ID is returned by StartAutomationExecution when the execution of an Automation document is initiated.
 gaeAutomationExecutionId :: Lens' GetAutomationExecution Text
@@ -105,11 +105,14 @@ instance ToQuery GetAutomationExecution where
         toQuery = const mempty
 
 -- | /See:/ 'getAutomationExecutionResponse' smart constructor.
-data GetAutomationExecutionResponse = GetAutomationExecutionResponse'
-  { _gaersAutomationExecution :: !(Maybe AutomationExecution)
-  , _gaersResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAutomationExecutionResponse = GetAutomationExecutionResponse'{_gaersAutomationExecution
+                                                                      ::
+                                                                      !(Maybe
+                                                                          AutomationExecution),
+                                                                      _gaersResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'GetAutomationExecutionResponse' with the minimum fields required to make a request.
 --
@@ -121,12 +124,10 @@ data GetAutomationExecutionResponse = GetAutomationExecutionResponse'
 getAutomationExecutionResponse
     :: Int -- ^ 'gaersResponseStatus'
     -> GetAutomationExecutionResponse
-getAutomationExecutionResponse pResponseStatus_ =
-  GetAutomationExecutionResponse'
-    { _gaersAutomationExecution = Nothing
-    , _gaersResponseStatus = pResponseStatus_
-    }
-
+getAutomationExecutionResponse pResponseStatus_
+  = GetAutomationExecutionResponse'{_gaersAutomationExecution
+                                      = Nothing,
+                                    _gaersResponseStatus = pResponseStatus_}
 
 -- | Detailed information about the current state of an automation execution.
 gaersAutomationExecution :: Lens' GetAutomationExecutionResponse (Maybe AutomationExecution)

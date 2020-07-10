@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -558,61 +558,116 @@ module Network.AWS.OpsWorks.Types
     ) where
 
 import Network.AWS.Lens
-import Network.AWS.OpsWorks.Types.Product
-import Network.AWS.OpsWorks.Types.Sum
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
+import Network.AWS.OpsWorks.Types.AppAttributesKeys
+import Network.AWS.OpsWorks.Types.AppType
+import Network.AWS.OpsWorks.Types.Architecture
+import Network.AWS.OpsWorks.Types.AutoScalingType
+import Network.AWS.OpsWorks.Types.CloudWatchLogsEncoding
+import Network.AWS.OpsWorks.Types.CloudWatchLogsInitialPosition
+import Network.AWS.OpsWorks.Types.CloudWatchLogsTimeZone
+import Network.AWS.OpsWorks.Types.DeploymentCommandName
+import Network.AWS.OpsWorks.Types.LayerAttributesKeys
+import Network.AWS.OpsWorks.Types.LayerType
+import Network.AWS.OpsWorks.Types.RootDeviceType
+import Network.AWS.OpsWorks.Types.SourceType
+import Network.AWS.OpsWorks.Types.StackAttributesKeys
+import Network.AWS.OpsWorks.Types.VirtualizationType
+import Network.AWS.OpsWorks.Types.VolumeType
+import Network.AWS.OpsWorks.Types.AgentVersion
+import Network.AWS.OpsWorks.Types.App
+import Network.AWS.OpsWorks.Types.AutoScalingThresholds
+import Network.AWS.OpsWorks.Types.BlockDeviceMapping
+import Network.AWS.OpsWorks.Types.ChefConfiguration
+import Network.AWS.OpsWorks.Types.CloudWatchLogsConfiguration
+import Network.AWS.OpsWorks.Types.CloudWatchLogsLogStream
+import Network.AWS.OpsWorks.Types.Command
+import Network.AWS.OpsWorks.Types.DataSource
+import Network.AWS.OpsWorks.Types.Deployment
+import Network.AWS.OpsWorks.Types.DeploymentCommand
+import Network.AWS.OpsWorks.Types.EBSBlockDevice
+import Network.AWS.OpsWorks.Types.EcsCluster
+import Network.AWS.OpsWorks.Types.ElasticIP
+import Network.AWS.OpsWorks.Types.ElasticLoadBalancer
+import Network.AWS.OpsWorks.Types.EnvironmentVariable
+import Network.AWS.OpsWorks.Types.Instance
+import Network.AWS.OpsWorks.Types.InstanceIdentity
+import Network.AWS.OpsWorks.Types.InstancesCount
+import Network.AWS.OpsWorks.Types.Layer
+import Network.AWS.OpsWorks.Types.LifecycleEventConfiguration
+import Network.AWS.OpsWorks.Types.LoadBasedAutoScalingConfiguration
+import Network.AWS.OpsWorks.Types.OperatingSystem
+import Network.AWS.OpsWorks.Types.OperatingSystemConfigurationManager
+import Network.AWS.OpsWorks.Types.Permission
+import Network.AWS.OpsWorks.Types.RAIdArray
+import Network.AWS.OpsWorks.Types.RDSDBInstance
+import Network.AWS.OpsWorks.Types.Recipes
+import Network.AWS.OpsWorks.Types.ReportedOS
+import Network.AWS.OpsWorks.Types.SSLConfiguration
+import Network.AWS.OpsWorks.Types.SelfUserProfile
+import Network.AWS.OpsWorks.Types.ServiceError'
+import Network.AWS.OpsWorks.Types.ShutdownEventConfiguration
+import Network.AWS.OpsWorks.Types.Source
+import Network.AWS.OpsWorks.Types.Stack
+import Network.AWS.OpsWorks.Types.StackConfigurationManager
+import Network.AWS.OpsWorks.Types.StackSummary
+import Network.AWS.OpsWorks.Types.TemporaryCredential
+import Network.AWS.OpsWorks.Types.TimeBasedAutoScalingConfiguration
+import Network.AWS.OpsWorks.Types.UserProfile
+import Network.AWS.OpsWorks.Types.Volume
+import Network.AWS.OpsWorks.Types.VolumeConfiguration
+import Network.AWS.OpsWorks.Types.WeeklyAutoScalingSchedule
 
 -- | API version @2013-02-18@ of the Amazon OpsWorks SDK configuration.
 opsWorks :: Service
-opsWorks =
-  Service
-    { _svcAbbrev = "OpsWorks"
-    , _svcSigner = v4
-    , _svcPrefix = "opsworks"
-    , _svcVersion = "2013-02-18"
-    , _svcEndpoint = defaultEndpoint opsWorks
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "OpsWorks"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
-
+opsWorks
+  = Service{_svcAbbrev = "OpsWorks", _svcSigner = v4,
+            _svcPrefix = "opsworks", _svcVersion = "2013-02-18",
+            _svcEndpoint = defaultEndpoint opsWorks,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "OpsWorks",
+            _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
 -- | Indicates that a request was not valid.
 --
 --
 _ValidationException :: AsError a => Getting (First ServiceError) a ServiceError
-_ValidationException = _MatchServiceError opsWorks "ValidationException"
-
+_ValidationException
+  = _MatchServiceError opsWorks "ValidationException"
 
 -- | Indicates that a resource was not found.
 --
 --
 _ResourceNotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceNotFoundException =
-  _MatchServiceError opsWorks "ResourceNotFoundException"
-
+_ResourceNotFoundException
+  = _MatchServiceError opsWorks
+      "ResourceNotFoundException"

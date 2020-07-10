@@ -23,6 +23,8 @@
 --
 -- This operation waits until the instances are no longer needed before they are detached from the load balancer.
 --
+-- The @detach instances from load balancer@ operation supports tag-based access control via resource tags applied to the resource identified by @load balancer name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.DetachInstancesFromLoadBalancer
     (
     -- * Creating a Request
@@ -48,11 +50,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detachInstancesFromLoadBalancer' smart constructor.
-data DetachInstancesFromLoadBalancer = DetachInstancesFromLoadBalancer'
-  { _diflbLoadBalancerName :: !Text
-  , _diflbInstanceNames    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachInstancesFromLoadBalancer = DetachInstancesFromLoadBalancer'{_diflbLoadBalancerName
+                                                                        ::
+                                                                        !Text,
+                                                                        _diflbInstanceNames
+                                                                        ::
+                                                                        ![Text]}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DetachInstancesFromLoadBalancer' with the minimum fields required to make a request.
 --
@@ -64,10 +69,10 @@ data DetachInstancesFromLoadBalancer = DetachInstancesFromLoadBalancer'
 detachInstancesFromLoadBalancer
     :: Text -- ^ 'diflbLoadBalancerName'
     -> DetachInstancesFromLoadBalancer
-detachInstancesFromLoadBalancer pLoadBalancerName_ =
-  DetachInstancesFromLoadBalancer'
-    {_diflbLoadBalancerName = pLoadBalancerName_, _diflbInstanceNames = mempty}
-
+detachInstancesFromLoadBalancer pLoadBalancerName_
+  = DetachInstancesFromLoadBalancer'{_diflbLoadBalancerName
+                                       = pLoadBalancerName_,
+                                     _diflbInstanceNames = mempty}
 
 -- | The name of the Lightsail load balancer.
 diflbLoadBalancerName :: Lens' DetachInstancesFromLoadBalancer Text
@@ -120,28 +125,34 @@ instance ToQuery DetachInstancesFromLoadBalancer
         toQuery = const mempty
 
 -- | /See:/ 'detachInstancesFromLoadBalancerResponse' smart constructor.
-data DetachInstancesFromLoadBalancerResponse = DetachInstancesFromLoadBalancerResponse'
-  { _diflbrsOperations     :: !(Maybe [Operation])
-  , _diflbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachInstancesFromLoadBalancerResponse = DetachInstancesFromLoadBalancerResponse'{_diflbrsOperations
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            [Operation]),
+                                                                                        _diflbrsResponseStatus
+                                                                                        ::
+                                                                                        !Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DetachInstancesFromLoadBalancerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diflbrsOperations' - An object describing the API operations.
+-- * 'diflbrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'diflbrsResponseStatus' - -- | The response status code.
 detachInstancesFromLoadBalancerResponse
     :: Int -- ^ 'diflbrsResponseStatus'
     -> DetachInstancesFromLoadBalancerResponse
-detachInstancesFromLoadBalancerResponse pResponseStatus_ =
-  DetachInstancesFromLoadBalancerResponse'
-    {_diflbrsOperations = Nothing, _diflbrsResponseStatus = pResponseStatus_}
+detachInstancesFromLoadBalancerResponse
+  pResponseStatus_
+  = DetachInstancesFromLoadBalancerResponse'{_diflbrsOperations
+                                               = Nothing,
+                                             _diflbrsResponseStatus =
+                                               pResponseStatus_}
 
-
--- | An object describing the API operations.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 diflbrsOperations :: Lens' DetachInstancesFromLoadBalancerResponse [Operation]
 diflbrsOperations = lens _diflbrsOperations (\ s a -> s{_diflbrsOperations = a}) . _Default . _Coerce
 

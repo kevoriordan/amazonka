@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Explicitly sets the quantity of devices to renew for an offering, starting from the @effectiveDate@ of the next period. The API returns a @NotEligible@ error if the user is not permitted to invoke the operation. Please contact <mailto:aws-devicefarm-support@amazon.com aws-devicefarm-support@amazon.com> if you believe that you should be able to invoke this operation.
+-- Explicitly sets the quantity of devices to renew for an offering, starting from the @effectiveDate@ of the next period. The API returns a @NotEligible@ error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <mailto:aws-devicefarm-support@amazon.com aws-devicefarm-support@amazon.com> .
 --
 --
 module Network.AWS.DeviceFarm.RenewOffering
@@ -45,16 +45,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | A request representing an offering renewal.
+-- | A request that represents an offering renewal.
 --
 --
 --
 -- /See:/ 'renewOffering' smart constructor.
-data RenewOffering = RenewOffering'
-  { _roQuantity   :: !(Maybe Int)
-  , _roOfferingId :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RenewOffering = RenewOffering'{_roQuantity ::
+                                    !(Maybe Int),
+                                    _roOfferingId :: !(Maybe Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RenewOffering' with the minimum fields required to make a request.
 --
@@ -65,8 +64,9 @@ data RenewOffering = RenewOffering'
 -- * 'roOfferingId' - The ID of a request to renew an offering.
 renewOffering
     :: RenewOffering
-renewOffering = RenewOffering' {_roQuantity = Nothing, _roOfferingId = Nothing}
-
+renewOffering
+  = RenewOffering'{_roQuantity = Nothing,
+                   _roOfferingId = Nothing}
 
 -- | The quantity requested in an offering renewal.
 roQuantity :: Lens' RenewOffering (Maybe Int)
@@ -117,11 +117,13 @@ instance ToQuery RenewOffering where
 --
 --
 -- /See:/ 'renewOfferingResponse' smart constructor.
-data RenewOfferingResponse = RenewOfferingResponse'
-  { _rorsOfferingTransaction :: !(Maybe OfferingTransaction)
-  , _rorsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RenewOfferingResponse = RenewOfferingResponse'{_rorsOfferingTransaction
+                                                    ::
+                                                    !(Maybe
+                                                        OfferingTransaction),
+                                                    _rorsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RenewOfferingResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +135,10 @@ data RenewOfferingResponse = RenewOfferingResponse'
 renewOfferingResponse
     :: Int -- ^ 'rorsResponseStatus'
     -> RenewOfferingResponse
-renewOfferingResponse pResponseStatus_ =
-  RenewOfferingResponse'
-    {_rorsOfferingTransaction = Nothing, _rorsResponseStatus = pResponseStatus_}
-
+renewOfferingResponse pResponseStatus_
+  = RenewOfferingResponse'{_rorsOfferingTransaction =
+                             Nothing,
+                           _rorsResponseStatus = pResponseStatus_}
 
 -- | Represents the status of the offering transaction for the renewal.
 rorsOfferingTransaction :: Lens' RenewOfferingResponse (Maybe OfferingTransaction)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.
+-- Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test sends data from the last commit. If no data is available, sample data is generated.
 --
 --
 module Network.AWS.CodeCommit.TestRepositoryTriggers
@@ -51,11 +51,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'testRepositoryTriggers' smart constructor.
-data TestRepositoryTriggers = TestRepositoryTriggers'
-  { _trtRepositoryName :: !Text
-  , _trtTriggers       :: ![RepositoryTrigger]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestRepositoryTriggers = TestRepositoryTriggers'{_trtRepositoryName
+                                                      :: !Text,
+                                                      _trtTriggers ::
+                                                      ![RepositoryTrigger]}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'TestRepositoryTriggers' with the minimum fields required to make a request.
 --
@@ -67,10 +68,10 @@ data TestRepositoryTriggers = TestRepositoryTriggers'
 testRepositoryTriggers
     :: Text -- ^ 'trtRepositoryName'
     -> TestRepositoryTriggers
-testRepositoryTriggers pRepositoryName_ =
-  TestRepositoryTriggers'
-    {_trtRepositoryName = pRepositoryName_, _trtTriggers = mempty}
-
+testRepositoryTriggers pRepositoryName_
+  = TestRepositoryTriggers'{_trtRepositoryName =
+                              pRepositoryName_,
+                            _trtTriggers = mempty}
 
 -- | The name of the repository in which to test the triggers.
 trtRepositoryName :: Lens' TestRepositoryTriggers Text
@@ -124,18 +125,24 @@ instance ToQuery TestRepositoryTriggers where
 --
 --
 -- /See:/ 'testRepositoryTriggersResponse' smart constructor.
-data TestRepositoryTriggersResponse = TestRepositoryTriggersResponse'
-  { _trtrsFailedExecutions     :: !(Maybe [RepositoryTriggerExecutionFailure])
-  , _trtrsSuccessfulExecutions :: !(Maybe [Text])
-  , _trtrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestRepositoryTriggersResponse = TestRepositoryTriggersResponse'{_trtrsFailedExecutions
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [RepositoryTriggerExecutionFailure]),
+                                                                      _trtrsSuccessfulExecutions
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Text]),
+                                                                      _trtrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'TestRepositoryTriggersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'trtrsFailedExecutions' - The list of triggers that were not able to be tested. This list provides the names of the triggers that could not be tested, separated by commas.
+-- * 'trtrsFailedExecutions' - The list of triggers that were not tested. This list provides the names of the triggers that could not be tested, separated by commas.
 --
 -- * 'trtrsSuccessfulExecutions' - The list of triggers that were successfully tested. This list provides the names of the triggers that were successfully tested, separated by commas.
 --
@@ -143,15 +150,13 @@ data TestRepositoryTriggersResponse = TestRepositoryTriggersResponse'
 testRepositoryTriggersResponse
     :: Int -- ^ 'trtrsResponseStatus'
     -> TestRepositoryTriggersResponse
-testRepositoryTriggersResponse pResponseStatus_ =
-  TestRepositoryTriggersResponse'
-    { _trtrsFailedExecutions = Nothing
-    , _trtrsSuccessfulExecutions = Nothing
-    , _trtrsResponseStatus = pResponseStatus_
-    }
+testRepositoryTriggersResponse pResponseStatus_
+  = TestRepositoryTriggersResponse'{_trtrsFailedExecutions
+                                      = Nothing,
+                                    _trtrsSuccessfulExecutions = Nothing,
+                                    _trtrsResponseStatus = pResponseStatus_}
 
-
--- | The list of triggers that were not able to be tested. This list provides the names of the triggers that could not be tested, separated by commas.
+-- | The list of triggers that were not tested. This list provides the names of the triggers that could not be tested, separated by commas.
 trtrsFailedExecutions :: Lens' TestRepositoryTriggersResponse [RepositoryTriggerExecutionFailure]
 trtrsFailedExecutions = lens _trtrsFailedExecutions (\ s a -> s{_trtrsFailedExecutions = a}) . _Default . _Coerce
 

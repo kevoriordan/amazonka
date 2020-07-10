@@ -21,6 +21,8 @@
 -- Gets a summary of all AWS CodePipeline action types associated with your account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CodePipeline.ListActionTypes
     (
     -- * Creating a Request
@@ -42,20 +44,20 @@ module Network.AWS.CodePipeline.ListActionTypes
 import Network.AWS.CodePipeline.Types
 import Network.AWS.CodePipeline.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a ListActionTypes action.
+-- | Represents the input of a @ListActionTypes@ action.
 --
 --
 --
 -- /See:/ 'listActionTypes' smart constructor.
-data ListActionTypes = ListActionTypes'
-  { _latActionOwnerFilter :: !(Maybe ActionOwner)
-  , _latNextToken         :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListActionTypes = ListActionTypes'{_latActionOwnerFilter
+                                        :: !(Maybe ActionOwner),
+                                        _latNextToken :: !(Maybe Text)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListActionTypes' with the minimum fields required to make a request.
 --
@@ -66,9 +68,9 @@ data ListActionTypes = ListActionTypes'
 -- * 'latNextToken' - An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.
 listActionTypes
     :: ListActionTypes
-listActionTypes =
-  ListActionTypes' {_latActionOwnerFilter = Nothing, _latNextToken = Nothing}
-
+listActionTypes
+  = ListActionTypes'{_latActionOwnerFilter = Nothing,
+                     _latNextToken = Nothing}
 
 -- | Filters the list of action types to those created by a specified entity.
 latActionOwnerFilter :: Lens' ListActionTypes (Maybe ActionOwner)
@@ -77,6 +79,13 @@ latActionOwnerFilter = lens _latActionOwnerFilter (\ s a -> s{_latActionOwnerFil
 -- | An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.
 latNextToken :: Lens' ListActionTypes (Maybe Text)
 latNextToken = lens _latNextToken (\ s a -> s{_latNextToken = a})
+
+instance AWSPager ListActionTypes where
+        page rq rs
+          | stop (rs ^. latrsNextToken) = Nothing
+          | stop (rs ^. latrsActionTypes) = Nothing
+          | otherwise =
+            Just $ rq & latNextToken .~ rs ^. latrsNextToken
 
 instance AWSRequest ListActionTypes where
         type Rs ListActionTypes = ListActionTypesResponse
@@ -115,23 +124,25 @@ instance ToPath ListActionTypes where
 instance ToQuery ListActionTypes where
         toQuery = const mempty
 
--- | Represents the output of a ListActionTypes action.
+-- | Represents the output of a @ListActionTypes@ action.
 --
 --
 --
 -- /See:/ 'listActionTypesResponse' smart constructor.
-data ListActionTypesResponse = ListActionTypesResponse'
-  { _latrsNextToken      :: !(Maybe Text)
-  , _latrsResponseStatus :: !Int
-  , _latrsActionTypes    :: ![ActionType]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListActionTypesResponse = ListActionTypesResponse'{_latrsNextToken
+                                                        :: !(Maybe Text),
+                                                        _latrsResponseStatus ::
+                                                        !Int,
+                                                        _latrsActionTypes ::
+                                                        ![ActionType]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListActionTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'latrsNextToken' - If the amount of returned information is significantly large, an identifier is also returned which can be used in a subsequent list action types call to return the next set of action types in the list.
+-- * 'latrsNextToken' - If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list action types call to return the next set of action types in the list.
 --
 -- * 'latrsResponseStatus' - -- | The response status code.
 --
@@ -139,15 +150,12 @@ data ListActionTypesResponse = ListActionTypesResponse'
 listActionTypesResponse
     :: Int -- ^ 'latrsResponseStatus'
     -> ListActionTypesResponse
-listActionTypesResponse pResponseStatus_ =
-  ListActionTypesResponse'
-    { _latrsNextToken = Nothing
-    , _latrsResponseStatus = pResponseStatus_
-    , _latrsActionTypes = mempty
-    }
+listActionTypesResponse pResponseStatus_
+  = ListActionTypesResponse'{_latrsNextToken = Nothing,
+                             _latrsResponseStatus = pResponseStatus_,
+                             _latrsActionTypes = mempty}
 
-
--- | If the amount of returned information is significantly large, an identifier is also returned which can be used in a subsequent list action types call to return the next set of action types in the list.
+-- | If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list action types call to return the next set of action types in the list.
 latrsNextToken :: Lens' ListActionTypesResponse (Maybe Text)
 latrsNextToken = lens _latrsNextToken (\ s a -> s{_latrsNextToken = a})
 

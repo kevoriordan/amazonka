@@ -21,7 +21,7 @@
 -- Returns a list of your queues that have the @RedrivePolicy@ queue attribute configured with a dead-letter queue.
 --
 --
--- For more information about using dead-letter queues, see <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html Using Amazon SQS Dead-Letter Queues> in the /Amazon Simple Queue Service Developer Guide/ .
+-- For more information about using dead-letter queues, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html Using Amazon SQS Dead-Letter Queues> in the /Amazon Simple Queue Service Developer Guide/ .
 --
 module Network.AWS.SQS.ListDeadLetterSourceQueues
     (
@@ -46,29 +46,29 @@ import Network.AWS.Response
 import Network.AWS.SQS.Types
 import Network.AWS.SQS.Types.Product
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'listDeadLetterSourceQueues' smart constructor.
-newtype ListDeadLetterSourceQueues = ListDeadLetterSourceQueues'
-  { _ldlsqQueueURL :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListDeadLetterSourceQueues = ListDeadLetterSourceQueues'{_ldlsqQueueURL
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListDeadLetterSourceQueues' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldlsqQueueURL' - The URL of a dead-letter queue. Queue URLs are case-sensitive.
+-- * 'ldlsqQueueURL' - The URL of a dead-letter queue. Queue URLs and names are case-sensitive.
 listDeadLetterSourceQueues
     :: Text -- ^ 'ldlsqQueueURL'
     -> ListDeadLetterSourceQueues
-listDeadLetterSourceQueues pQueueURL_ =
-  ListDeadLetterSourceQueues' {_ldlsqQueueURL = pQueueURL_}
+listDeadLetterSourceQueues pQueueURL_
+  = ListDeadLetterSourceQueues'{_ldlsqQueueURL =
+                                  pQueueURL_}
 
-
--- | The URL of a dead-letter queue. Queue URLs are case-sensitive.
+-- | The URL of a dead-letter queue. Queue URLs and names are case-sensitive.
 ldlsqQueueURL :: Lens' ListDeadLetterSourceQueues Text
 ldlsqQueueURL = lens _ldlsqQueueURL (\ s a -> s{_ldlsqQueueURL = a})
 
@@ -106,11 +106,14 @@ instance ToQuery ListDeadLetterSourceQueues where
 --
 --
 -- /See:/ 'listDeadLetterSourceQueuesResponse' smart constructor.
-data ListDeadLetterSourceQueuesResponse = ListDeadLetterSourceQueuesResponse'
-  { _ldlsqrsResponseStatus :: !Int
-  , _ldlsqrsQueueURLs      :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDeadLetterSourceQueuesResponse = ListDeadLetterSourceQueuesResponse'{_ldlsqrsResponseStatus
+                                                                              ::
+                                                                              !Int,
+                                                                              _ldlsqrsQueueURLs
+                                                                              ::
+                                                                              ![Text]}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListDeadLetterSourceQueuesResponse' with the minimum fields required to make a request.
 --
@@ -122,10 +125,10 @@ data ListDeadLetterSourceQueuesResponse = ListDeadLetterSourceQueuesResponse'
 listDeadLetterSourceQueuesResponse
     :: Int -- ^ 'ldlsqrsResponseStatus'
     -> ListDeadLetterSourceQueuesResponse
-listDeadLetterSourceQueuesResponse pResponseStatus_ =
-  ListDeadLetterSourceQueuesResponse'
-    {_ldlsqrsResponseStatus = pResponseStatus_, _ldlsqrsQueueURLs = mempty}
-
+listDeadLetterSourceQueuesResponse pResponseStatus_
+  = ListDeadLetterSourceQueuesResponse'{_ldlsqrsResponseStatus
+                                          = pResponseStatus_,
+                                        _ldlsqrsQueueURLs = mempty}
 
 -- | -- | The response status code.
 ldlsqrsResponseStatus :: Lens' ListDeadLetterSourceQueuesResponse Int

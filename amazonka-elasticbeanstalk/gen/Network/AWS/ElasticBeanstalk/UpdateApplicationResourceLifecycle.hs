@@ -47,11 +47,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateApplicationResourceLifecycle' smart constructor.
-data UpdateApplicationResourceLifecycle = UpdateApplicationResourceLifecycle'
-  { _uarlApplicationName         :: !Text
-  , _uarlResourceLifecycleConfig :: !ApplicationResourceLifecycleConfig
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplicationResourceLifecycle = UpdateApplicationResourceLifecycle'{_uarlApplicationName
+                                                                              ::
+                                                                              !Text,
+                                                                              _uarlResourceLifecycleConfig
+                                                                              ::
+                                                                              !ApplicationResourceLifecycleConfig}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'UpdateApplicationResourceLifecycle' with the minimum fields required to make a request.
 --
@@ -64,12 +67,12 @@ updateApplicationResourceLifecycle
     :: Text -- ^ 'uarlApplicationName'
     -> ApplicationResourceLifecycleConfig -- ^ 'uarlResourceLifecycleConfig'
     -> UpdateApplicationResourceLifecycle
-updateApplicationResourceLifecycle pApplicationName_ pResourceLifecycleConfig_ =
-  UpdateApplicationResourceLifecycle'
-    { _uarlApplicationName = pApplicationName_
-    , _uarlResourceLifecycleConfig = pResourceLifecycleConfig_
-    }
-
+updateApplicationResourceLifecycle pApplicationName_
+  pResourceLifecycleConfig_
+  = UpdateApplicationResourceLifecycle'{_uarlApplicationName
+                                          = pApplicationName_,
+                                        _uarlResourceLifecycleConfig =
+                                          pResourceLifecycleConfig_}
 
 -- | The name of the application.
 uarlApplicationName :: Lens' UpdateApplicationResourceLifecycle Text
@@ -120,12 +123,20 @@ instance ToQuery UpdateApplicationResourceLifecycle
                  _uarlResourceLifecycleConfig]
 
 -- | /See:/ 'updateApplicationResourceLifecycleResponse' smart constructor.
-data UpdateApplicationResourceLifecycleResponse = UpdateApplicationResourceLifecycleResponse'
-  { _uarlrsApplicationName :: !(Maybe Text)
-  , _uarlrsResourceLifecycleConfig :: !(Maybe ApplicationResourceLifecycleConfig)
-  , _uarlrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplicationResourceLifecycleResponse = UpdateApplicationResourceLifecycleResponse'{_uarlrsApplicationName
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _uarlrsResourceLifecycleConfig
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  ApplicationResourceLifecycleConfig),
+                                                                                              _uarlrsResponseStatus
+                                                                                              ::
+                                                                                              !Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'UpdateApplicationResourceLifecycleResponse' with the minimum fields required to make a request.
 --
@@ -139,13 +150,14 @@ data UpdateApplicationResourceLifecycleResponse = UpdateApplicationResourceLifec
 updateApplicationResourceLifecycleResponse
     :: Int -- ^ 'uarlrsResponseStatus'
     -> UpdateApplicationResourceLifecycleResponse
-updateApplicationResourceLifecycleResponse pResponseStatus_ =
-  UpdateApplicationResourceLifecycleResponse'
-    { _uarlrsApplicationName = Nothing
-    , _uarlrsResourceLifecycleConfig = Nothing
-    , _uarlrsResponseStatus = pResponseStatus_
-    }
-
+updateApplicationResourceLifecycleResponse
+  pResponseStatus_
+  = UpdateApplicationResourceLifecycleResponse'{_uarlrsApplicationName
+                                                  = Nothing,
+                                                _uarlrsResourceLifecycleConfig =
+                                                  Nothing,
+                                                _uarlrsResponseStatus =
+                                                  pResponseStatus_}
 
 -- | The name of the application.
 uarlrsApplicationName :: Lens' UpdateApplicationResourceLifecycleResponse (Maybe Text)

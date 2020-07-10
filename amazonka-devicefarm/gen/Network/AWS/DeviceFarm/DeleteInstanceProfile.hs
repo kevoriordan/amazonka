@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteInstanceProfile' smart constructor.
-newtype DeleteInstanceProfile = DeleteInstanceProfile'
-  { _dipArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteInstanceProfile = DeleteInstanceProfile'{_dipArn
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteInstanceProfile' with the minimum fields required to make a request.
 --
@@ -57,8 +57,8 @@ newtype DeleteInstanceProfile = DeleteInstanceProfile'
 deleteInstanceProfile
     :: Text -- ^ 'dipArn'
     -> DeleteInstanceProfile
-deleteInstanceProfile pArn_ = DeleteInstanceProfile' {_dipArn = pArn_}
-
+deleteInstanceProfile pArn_
+  = DeleteInstanceProfile'{_dipArn = pArn_}
 
 -- | The Amazon Resource Name (ARN) of the instance profile you are requesting to delete.
 dipArn :: Lens' DeleteInstanceProfile Text
@@ -99,10 +99,10 @@ instance ToQuery DeleteInstanceProfile where
         toQuery = const mempty
 
 -- | /See:/ 'deleteInstanceProfileResponse' smart constructor.
-newtype DeleteInstanceProfileResponse = DeleteInstanceProfileResponse'
-  { _diprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteInstanceProfileResponse = DeleteInstanceProfileResponse'{_diprsResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteInstanceProfileResponse' with the minimum fields required to make a request.
 --
@@ -112,9 +112,9 @@ newtype DeleteInstanceProfileResponse = DeleteInstanceProfileResponse'
 deleteInstanceProfileResponse
     :: Int -- ^ 'diprsResponseStatus'
     -> DeleteInstanceProfileResponse
-deleteInstanceProfileResponse pResponseStatus_ =
-  DeleteInstanceProfileResponse' {_diprsResponseStatus = pResponseStatus_}
-
+deleteInstanceProfileResponse pResponseStatus_
+  = DeleteInstanceProfileResponse'{_diprsResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 diprsResponseStatus :: Lens' DeleteInstanceProfileResponse Int

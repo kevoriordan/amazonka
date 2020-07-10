@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the stacks associated with the specified fleet.
+-- Retrieves the name of the stack with which the specified fleet is associated.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AppStream.ListAssociatedStacks
     (
     -- * Creating a Request
@@ -42,16 +44,16 @@ module Network.AWS.AppStream.ListAssociatedStacks
 import Network.AWS.AppStream.Types
 import Network.AWS.AppStream.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAssociatedStacks' smart constructor.
-data ListAssociatedStacks = ListAssociatedStacks'
-  { _lasNextToken :: !(Maybe Text)
-  , _lasFleetName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssociatedStacks = ListAssociatedStacks'{_lasNextToken
+                                                  :: !(Maybe Text),
+                                                  _lasFleetName :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAssociatedStacks' with the minimum fields required to make a request.
 --
@@ -63,9 +65,9 @@ data ListAssociatedStacks = ListAssociatedStacks'
 listAssociatedStacks
     :: Text -- ^ 'lasFleetName'
     -> ListAssociatedStacks
-listAssociatedStacks pFleetName_ =
-  ListAssociatedStacks' {_lasNextToken = Nothing, _lasFleetName = pFleetName_}
-
+listAssociatedStacks pFleetName_
+  = ListAssociatedStacks'{_lasNextToken = Nothing,
+                          _lasFleetName = pFleetName_}
 
 -- | The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
 lasNextToken :: Lens' ListAssociatedStacks (Maybe Text)
@@ -74,6 +76,13 @@ lasNextToken = lens _lasNextToken (\ s a -> s{_lasNextToken = a})
 -- | The name of the fleet.
 lasFleetName :: Lens' ListAssociatedStacks Text
 lasFleetName = lens _lasFleetName (\ s a -> s{_lasFleetName = a})
+
+instance AWSPager ListAssociatedStacks where
+        page rq rs
+          | stop (rs ^. lasrsNextToken) = Nothing
+          | stop (rs ^. lasrsNames) = Nothing
+          | otherwise =
+            Just $ rq & lasNextToken .~ rs ^. lasrsNextToken
 
 instance AWSRequest ListAssociatedStacks where
         type Rs ListAssociatedStacks =
@@ -114,12 +123,16 @@ instance ToQuery ListAssociatedStacks where
         toQuery = const mempty
 
 -- | /See:/ 'listAssociatedStacksResponse' smart constructor.
-data ListAssociatedStacksResponse = ListAssociatedStacksResponse'
-  { _lasrsNextToken      :: !(Maybe Text)
-  , _lasrsNames          :: !(Maybe [Text])
-  , _lasrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssociatedStacksResponse = ListAssociatedStacksResponse'{_lasrsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lasrsNames ::
+                                                                  !(Maybe
+                                                                      [Text]),
+                                                                  _lasrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListAssociatedStacksResponse' with the minimum fields required to make a request.
 --
@@ -127,25 +140,23 @@ data ListAssociatedStacksResponse = ListAssociatedStacksResponse'
 --
 -- * 'lasrsNextToken' - The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
 --
--- * 'lasrsNames' - The names of the stacks.
+-- * 'lasrsNames' - The name of the stack.
 --
 -- * 'lasrsResponseStatus' - -- | The response status code.
 listAssociatedStacksResponse
     :: Int -- ^ 'lasrsResponseStatus'
     -> ListAssociatedStacksResponse
-listAssociatedStacksResponse pResponseStatus_ =
-  ListAssociatedStacksResponse'
-    { _lasrsNextToken = Nothing
-    , _lasrsNames = Nothing
-    , _lasrsResponseStatus = pResponseStatus_
-    }
-
+listAssociatedStacksResponse pResponseStatus_
+  = ListAssociatedStacksResponse'{_lasrsNextToken =
+                                    Nothing,
+                                  _lasrsNames = Nothing,
+                                  _lasrsResponseStatus = pResponseStatus_}
 
 -- | The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
 lasrsNextToken :: Lens' ListAssociatedStacksResponse (Maybe Text)
 lasrsNextToken = lens _lasrsNextToken (\ s a -> s{_lasrsNextToken = a})
 
--- | The names of the stacks.
+-- | The name of the stack.
 lasrsNames :: Lens' ListAssociatedStacksResponse [Text]
 lasrsNames = lens _lasrsNames (\ s a -> s{_lasrsNames = a}) . _Default . _Coerce
 

@@ -46,11 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateParameterGroup' smart constructor.
-data UpdateParameterGroup = UpdateParameterGroup'
-  { _upgParameterGroupName  :: !Text
-  , _upgParameterNameValues :: ![ParameterNameValue]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateParameterGroup = UpdateParameterGroup'{_upgParameterGroupName
+                                                  :: !Text,
+                                                  _upgParameterNameValues ::
+                                                  ![ParameterNameValue]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateParameterGroup' with the minimum fields required to make a request.
 --
@@ -62,12 +62,10 @@ data UpdateParameterGroup = UpdateParameterGroup'
 updateParameterGroup
     :: Text -- ^ 'upgParameterGroupName'
     -> UpdateParameterGroup
-updateParameterGroup pParameterGroupName_ =
-  UpdateParameterGroup'
-    { _upgParameterGroupName = pParameterGroupName_
-    , _upgParameterNameValues = mempty
-    }
-
+updateParameterGroup pParameterGroupName_
+  = UpdateParameterGroup'{_upgParameterGroupName =
+                            pParameterGroupName_,
+                          _upgParameterNameValues = mempty}
 
 -- | The name of the parameter group.
 upgParameterGroupName :: Lens' UpdateParameterGroup Text
@@ -116,11 +114,14 @@ instance ToQuery UpdateParameterGroup where
         toQuery = const mempty
 
 -- | /See:/ 'updateParameterGroupResponse' smart constructor.
-data UpdateParameterGroupResponse = UpdateParameterGroupResponse'
-  { _upgrsParameterGroup :: !(Maybe ParameterGroup)
-  , _upgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateParameterGroupResponse = UpdateParameterGroupResponse'{_upgrsParameterGroup
+                                                                  ::
+                                                                  !(Maybe
+                                                                      ParameterGroup),
+                                                                  _upgrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateParameterGroupResponse' with the minimum fields required to make a request.
 --
@@ -132,10 +133,10 @@ data UpdateParameterGroupResponse = UpdateParameterGroupResponse'
 updateParameterGroupResponse
     :: Int -- ^ 'upgrsResponseStatus'
     -> UpdateParameterGroupResponse
-updateParameterGroupResponse pResponseStatus_ =
-  UpdateParameterGroupResponse'
-    {_upgrsParameterGroup = Nothing, _upgrsResponseStatus = pResponseStatus_}
-
+updateParameterGroupResponse pResponseStatus_
+  = UpdateParameterGroupResponse'{_upgrsParameterGroup
+                                    = Nothing,
+                                  _upgrsResponseStatus = pResponseStatus_}
 
 -- | The parameter group that has been modified.
 upgrsParameterGroup :: Lens' UpdateParameterGroupResponse (Maybe ParameterGroup)

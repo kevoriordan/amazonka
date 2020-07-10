@@ -21,6 +21,8 @@
 -- Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeInstancePatches
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.SSM.DescribeInstancePatches
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -49,19 +52,23 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeInstancePatches' smart constructor.
-data DescribeInstancePatches = DescribeInstancePatches'
-  { _dipFilters    :: !(Maybe [PatchOrchestratorFilter])
-  , _dipNextToken  :: !(Maybe Text)
-  , _dipMaxResults :: !(Maybe Nat)
-  , _dipInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstancePatches = DescribeInstancePatches'{_dipFilters
+                                                        ::
+                                                        !(Maybe
+                                                            [PatchOrchestratorFilter]),
+                                                        _dipNextToken ::
+                                                        !(Maybe Text),
+                                                        _dipMaxResults ::
+                                                        !(Maybe Nat),
+                                                        _dipInstanceId :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeInstancePatches' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dipFilters' - Each entry in the array is a structure containing: Key (string, between 1 and 128 characters) Values (array of strings, each string between 1 and 256 characters)
+-- * 'dipFilters' - An array of structures. Each entry in the array is a structure containing a Key, Value combination. Valid values for Key are @Classification@ | @KBId@ | @Severity@ | @State@ .
 --
 -- * 'dipNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
@@ -71,16 +78,12 @@ data DescribeInstancePatches = DescribeInstancePatches'
 describeInstancePatches
     :: Text -- ^ 'dipInstanceId'
     -> DescribeInstancePatches
-describeInstancePatches pInstanceId_ =
-  DescribeInstancePatches'
-    { _dipFilters = Nothing
-    , _dipNextToken = Nothing
-    , _dipMaxResults = Nothing
-    , _dipInstanceId = pInstanceId_
-    }
+describeInstancePatches pInstanceId_
+  = DescribeInstancePatches'{_dipFilters = Nothing,
+                             _dipNextToken = Nothing, _dipMaxResults = Nothing,
+                             _dipInstanceId = pInstanceId_}
 
-
--- | Each entry in the array is a structure containing: Key (string, between 1 and 128 characters) Values (array of strings, each string between 1 and 256 characters)
+-- | An array of structures. Each entry in the array is a structure containing a Key, Value combination. Valid values for Key are @Classification@ | @KBId@ | @Severity@ | @State@ .
 dipFilters :: Lens' DescribeInstancePatches [PatchOrchestratorFilter]
 dipFilters = lens _dipFilters (\ s a -> s{_dipFilters = a}) . _Default . _Coerce
 
@@ -95,6 +98,13 @@ dipMaxResults = lens _dipMaxResults (\ s a -> s{_dipMaxResults = a}) . mapping _
 -- | The ID of the instance whose patch state information should be retrieved.
 dipInstanceId :: Lens' DescribeInstancePatches Text
 dipInstanceId = lens _dipInstanceId (\ s a -> s{_dipInstanceId = a})
+
+instance AWSPager DescribeInstancePatches where
+        page rq rs
+          | stop (rs ^. diprsNextToken) = Nothing
+          | stop (rs ^. diprsPatches) = Nothing
+          | otherwise =
+            Just $ rq & dipNextToken .~ rs ^. diprsNextToken
 
 instance AWSRequest DescribeInstancePatches where
         type Rs DescribeInstancePatches =
@@ -136,18 +146,24 @@ instance ToQuery DescribeInstancePatches where
         toQuery = const mempty
 
 -- | /See:/ 'describeInstancePatchesResponse' smart constructor.
-data DescribeInstancePatchesResponse = DescribeInstancePatchesResponse'
-  { _diprsPatches        :: !(Maybe [PatchComplianceData])
-  , _diprsNextToken      :: !(Maybe Text)
-  , _diprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstancePatchesResponse = DescribeInstancePatchesResponse'{_diprsPatches
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [PatchComplianceData]),
+                                                                        _diprsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _diprsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeInstancePatchesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diprsPatches' - Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string: "INSTALLED", "INSTALLED OTHER", "MISSING", "NOT APPLICABLE", "FAILED") InstalledTime (DateTime) InstalledBy (string)
+-- * 'diprsPatches' - Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string, such as "INSTALLED" or "FAILED") InstalledTime (DateTime) InstalledBy (string)
 --
 -- * 'diprsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 --
@@ -155,15 +171,13 @@ data DescribeInstancePatchesResponse = DescribeInstancePatchesResponse'
 describeInstancePatchesResponse
     :: Int -- ^ 'diprsResponseStatus'
     -> DescribeInstancePatchesResponse
-describeInstancePatchesResponse pResponseStatus_ =
-  DescribeInstancePatchesResponse'
-    { _diprsPatches = Nothing
-    , _diprsNextToken = Nothing
-    , _diprsResponseStatus = pResponseStatus_
-    }
+describeInstancePatchesResponse pResponseStatus_
+  = DescribeInstancePatchesResponse'{_diprsPatches =
+                                       Nothing,
+                                     _diprsNextToken = Nothing,
+                                     _diprsResponseStatus = pResponseStatus_}
 
-
--- | Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string: "INSTALLED", "INSTALLED OTHER", "MISSING", "NOT APPLICABLE", "FAILED") InstalledTime (DateTime) InstalledBy (string)
+-- | Each entry in the array is a structure containing: Title (string) KBId (string) Classification (string) Severity (string) State (string, such as "INSTALLED" or "FAILED") InstalledTime (DateTime) InstalledBy (string)
 diprsPatches :: Lens' DescribeInstancePatchesResponse [PatchComplianceData]
 diprsPatches = lens _diprsPatches (\ s a -> s{_diprsPatches = a}) . _Default . _Coerce
 

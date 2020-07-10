@@ -46,10 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getServiceLinkedRoleDeletionStatus' smart constructor.
-newtype GetServiceLinkedRoleDeletionStatus = GetServiceLinkedRoleDeletionStatus'
-  { _gslrdsDeletionTaskId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetServiceLinkedRoleDeletionStatus = GetServiceLinkedRoleDeletionStatus'{_gslrdsDeletionTaskId
+                                                                                 ::
+                                                                                 Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'GetServiceLinkedRoleDeletionStatus' with the minimum fields required to make a request.
 --
@@ -59,9 +60,9 @@ newtype GetServiceLinkedRoleDeletionStatus = GetServiceLinkedRoleDeletionStatus'
 getServiceLinkedRoleDeletionStatus
     :: Text -- ^ 'gslrdsDeletionTaskId'
     -> GetServiceLinkedRoleDeletionStatus
-getServiceLinkedRoleDeletionStatus pDeletionTaskId_ =
-  GetServiceLinkedRoleDeletionStatus' {_gslrdsDeletionTaskId = pDeletionTaskId_}
-
+getServiceLinkedRoleDeletionStatus pDeletionTaskId_
+  = GetServiceLinkedRoleDeletionStatus'{_gslrdsDeletionTaskId
+                                          = pDeletionTaskId_}
 
 -- | The deletion task identifier. This identifier is returned by the 'DeleteServiceLinkedRole' operation in the format @task/aws-service-role/<service-principal-name>/<role-name>/<task-uuid>@ .
 gslrdsDeletionTaskId :: Lens' GetServiceLinkedRoleDeletionStatus Text
@@ -105,12 +106,19 @@ instance ToQuery GetServiceLinkedRoleDeletionStatus
                "DeletionTaskId" =: _gslrdsDeletionTaskId]
 
 -- | /See:/ 'getServiceLinkedRoleDeletionStatusResponse' smart constructor.
-data GetServiceLinkedRoleDeletionStatusResponse = GetServiceLinkedRoleDeletionStatusResponse'
-  { _gslrdsrsReason         :: !(Maybe DeletionTaskFailureReasonType)
-  , _gslrdsrsResponseStatus :: !Int
-  , _gslrdsrsStatus         :: !DeletionTaskStatusType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetServiceLinkedRoleDeletionStatusResponse = GetServiceLinkedRoleDeletionStatusResponse'{_gslrdsrsReason
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  DeletionTaskFailureReasonType),
+                                                                                              _gslrdsrsResponseStatus
+                                                                                              ::
+                                                                                              !Int,
+                                                                                              _gslrdsrsStatus
+                                                                                              ::
+                                                                                              !DeletionTaskStatusType}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'GetServiceLinkedRoleDeletionStatusResponse' with the minimum fields required to make a request.
 --
@@ -125,13 +133,13 @@ getServiceLinkedRoleDeletionStatusResponse
     :: Int -- ^ 'gslrdsrsResponseStatus'
     -> DeletionTaskStatusType -- ^ 'gslrdsrsStatus'
     -> GetServiceLinkedRoleDeletionStatusResponse
-getServiceLinkedRoleDeletionStatusResponse pResponseStatus_ pStatus_ =
-  GetServiceLinkedRoleDeletionStatusResponse'
-    { _gslrdsrsReason = Nothing
-    , _gslrdsrsResponseStatus = pResponseStatus_
-    , _gslrdsrsStatus = pStatus_
-    }
-
+getServiceLinkedRoleDeletionStatusResponse
+  pResponseStatus_ pStatus_
+  = GetServiceLinkedRoleDeletionStatusResponse'{_gslrdsrsReason
+                                                  = Nothing,
+                                                _gslrdsrsResponseStatus =
+                                                  pResponseStatus_,
+                                                _gslrdsrsStatus = pStatus_}
 
 -- | An object that contains details about the reason the deletion failed.
 gslrdsrsReason :: Lens' GetServiceLinkedRoleDeletionStatusResponse (Maybe DeletionTaskFailureReasonType)

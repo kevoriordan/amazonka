@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides information about a stream processor created by . You can get information about the input and output streams, the input parameters for the face recognition being performed, and the current status of the stream processor.
+-- Provides information about a stream processor created by 'CreateStreamProcessor' . You can get information about the input and output streams, the input parameters for the face recognition being performed, and the current status of the stream processor.
 --
 --
 module Network.AWS.Rekognition.DescribeStreamProcessor
@@ -54,10 +54,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeStreamProcessor' smart constructor.
-newtype DescribeStreamProcessor = DescribeStreamProcessor'
-  { _dspName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeStreamProcessor = DescribeStreamProcessor'{_dspName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeStreamProcessor' with the minimum fields required to make a request.
 --
@@ -67,8 +67,8 @@ newtype DescribeStreamProcessor = DescribeStreamProcessor'
 describeStreamProcessor
     :: Text -- ^ 'dspName'
     -> DescribeStreamProcessor
-describeStreamProcessor pName_ = DescribeStreamProcessor' {_dspName = pName_}
-
+describeStreamProcessor pName_
+  = DescribeStreamProcessor'{_dspName = pName_}
 
 -- | Name of the stream processor for which you want information.
 dspName :: Lens' DescribeStreamProcessor Text
@@ -118,20 +118,50 @@ instance ToQuery DescribeStreamProcessor where
         toQuery = const mempty
 
 -- | /See:/ 'describeStreamProcessorResponse' smart constructor.
-data DescribeStreamProcessorResponse = DescribeStreamProcessorResponse'
-  { _dsprsStatus              :: !(Maybe StreamProcessorStatus)
-  , _dsprsSettings            :: !(Maybe StreamProcessorSettings)
-  , _dsprsInput               :: !(Maybe StreamProcessorInput)
-  , _dsprsOutput              :: !(Maybe StreamProcessorOutput)
-  , _dsprsStreamProcessorARN  :: !(Maybe Text)
-  , _dsprsStatusMessage       :: !(Maybe Text)
-  , _dsprsName                :: !(Maybe Text)
-  , _dsprsCreationTimestamp   :: !(Maybe POSIX)
-  , _dsprsLastUpdateTimestamp :: !(Maybe POSIX)
-  , _dsprsRoleARN             :: !(Maybe Text)
-  , _dsprsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStreamProcessorResponse = DescribeStreamProcessorResponse'{_dsprsStatus
+                                                                        ::
+                                                                        !(Maybe
+                                                                            StreamProcessorStatus),
+                                                                        _dsprsSettings
+                                                                        ::
+                                                                        !(Maybe
+                                                                            StreamProcessorSettings),
+                                                                        _dsprsInput
+                                                                        ::
+                                                                        !(Maybe
+                                                                            StreamProcessorInput),
+                                                                        _dsprsOutput
+                                                                        ::
+                                                                        !(Maybe
+                                                                            StreamProcessorOutput),
+                                                                        _dsprsStreamProcessorARN
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dsprsStatusMessage
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dsprsName
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dsprsCreationTimestamp
+                                                                        ::
+                                                                        !(Maybe
+                                                                            POSIX),
+                                                                        _dsprsLastUpdateTimestamp
+                                                                        ::
+                                                                        !(Maybe
+                                                                            POSIX),
+                                                                        _dsprsRoleARN
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dsprsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeStreamProcessorResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +173,13 @@ data DescribeStreamProcessorResponse = DescribeStreamProcessorResponse'
 --
 -- * 'dsprsInput' - Kinesis video stream that provides the source streaming video.
 --
--- * 'dsprsOutput' - Kinesis data stream to which Rekognition Video puts the analysis results.
+-- * 'dsprsOutput' - Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
 --
 -- * 'dsprsStreamProcessorARN' - ARN of the stream processor.
 --
 -- * 'dsprsStatusMessage' - Detailed status message about the stream processor.
 --
--- * 'dsprsName' - Name of the stream processor.
+-- * 'dsprsName' - Name of the stream processor. 
 --
 -- * 'dsprsCreationTimestamp' - Date and time the stream processor was created
 --
@@ -161,21 +191,19 @@ data DescribeStreamProcessorResponse = DescribeStreamProcessorResponse'
 describeStreamProcessorResponse
     :: Int -- ^ 'dsprsResponseStatus'
     -> DescribeStreamProcessorResponse
-describeStreamProcessorResponse pResponseStatus_ =
-  DescribeStreamProcessorResponse'
-    { _dsprsStatus = Nothing
-    , _dsprsSettings = Nothing
-    , _dsprsInput = Nothing
-    , _dsprsOutput = Nothing
-    , _dsprsStreamProcessorARN = Nothing
-    , _dsprsStatusMessage = Nothing
-    , _dsprsName = Nothing
-    , _dsprsCreationTimestamp = Nothing
-    , _dsprsLastUpdateTimestamp = Nothing
-    , _dsprsRoleARN = Nothing
-    , _dsprsResponseStatus = pResponseStatus_
-    }
-
+describeStreamProcessorResponse pResponseStatus_
+  = DescribeStreamProcessorResponse'{_dsprsStatus =
+                                       Nothing,
+                                     _dsprsSettings = Nothing,
+                                     _dsprsInput = Nothing,
+                                     _dsprsOutput = Nothing,
+                                     _dsprsStreamProcessorARN = Nothing,
+                                     _dsprsStatusMessage = Nothing,
+                                     _dsprsName = Nothing,
+                                     _dsprsCreationTimestamp = Nothing,
+                                     _dsprsLastUpdateTimestamp = Nothing,
+                                     _dsprsRoleARN = Nothing,
+                                     _dsprsResponseStatus = pResponseStatus_}
 
 -- | Current status of the stream processor.
 dsprsStatus :: Lens' DescribeStreamProcessorResponse (Maybe StreamProcessorStatus)
@@ -189,7 +217,7 @@ dsprsSettings = lens _dsprsSettings (\ s a -> s{_dsprsSettings = a})
 dsprsInput :: Lens' DescribeStreamProcessorResponse (Maybe StreamProcessorInput)
 dsprsInput = lens _dsprsInput (\ s a -> s{_dsprsInput = a})
 
--- | Kinesis data stream to which Rekognition Video puts the analysis results.
+-- | Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
 dsprsOutput :: Lens' DescribeStreamProcessorResponse (Maybe StreamProcessorOutput)
 dsprsOutput = lens _dsprsOutput (\ s a -> s{_dsprsOutput = a})
 
@@ -201,7 +229,7 @@ dsprsStreamProcessorARN = lens _dsprsStreamProcessorARN (\ s a -> s{_dsprsStream
 dsprsStatusMessage :: Lens' DescribeStreamProcessorResponse (Maybe Text)
 dsprsStatusMessage = lens _dsprsStatusMessage (\ s a -> s{_dsprsStatusMessage = a})
 
--- | Name of the stream processor.
+-- | Name of the stream processor. 
 dsprsName :: Lens' DescribeStreamProcessorResponse (Maybe Text)
 dsprsName = lens _dsprsName (\ s a -> s{_dsprsName = a})
 

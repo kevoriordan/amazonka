@@ -50,13 +50,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'searchContacts' smart constructor.
-data SearchContacts = SearchContacts'
-  { _scFilters      :: !(Maybe [Filter])
-  , _scSortCriteria :: !(Maybe [Sort])
-  , _scNextToken    :: !(Maybe Text)
-  , _scMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchContacts = SearchContacts'{_scFilters ::
+                                      !(Maybe [Filter]),
+                                      _scSortCriteria :: !(Maybe [Sort]),
+                                      _scNextToken :: !(Maybe Text),
+                                      _scMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchContacts' with the minimum fields required to make a request.
 --
@@ -71,14 +70,10 @@ data SearchContacts = SearchContacts'
 -- * 'scMaxResults' - The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
 searchContacts
     :: SearchContacts
-searchContacts =
-  SearchContacts'
-    { _scFilters = Nothing
-    , _scSortCriteria = Nothing
-    , _scNextToken = Nothing
-    , _scMaxResults = Nothing
-    }
-
+searchContacts
+  = SearchContacts'{_scFilters = Nothing,
+                    _scSortCriteria = Nothing, _scNextToken = Nothing,
+                    _scMaxResults = Nothing}
 
 -- | The filters to use to list a specified set of address books. The supported filter keys are DisplayName, FirstName, LastName, and AddressBookArns.
 scFilters :: Lens' SearchContacts [Filter]
@@ -136,13 +131,15 @@ instance ToQuery SearchContacts where
         toQuery = const mempty
 
 -- | /See:/ 'searchContactsResponse' smart constructor.
-data SearchContactsResponse = SearchContactsResponse'
-  { _scrsNextToken      :: !(Maybe Text)
-  , _scrsContacts       :: !(Maybe [ContactData])
-  , _scrsTotalCount     :: !(Maybe Int)
-  , _scrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchContactsResponse = SearchContactsResponse'{_scrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _scrsContacts ::
+                                                      !(Maybe [ContactData]),
+                                                      _scrsTotalCount ::
+                                                      !(Maybe Int),
+                                                      _scrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchContactsResponse' with the minimum fields required to make a request.
 --
@@ -158,14 +155,10 @@ data SearchContactsResponse = SearchContactsResponse'
 searchContactsResponse
     :: Int -- ^ 'scrsResponseStatus'
     -> SearchContactsResponse
-searchContactsResponse pResponseStatus_ =
-  SearchContactsResponse'
-    { _scrsNextToken = Nothing
-    , _scrsContacts = Nothing
-    , _scrsTotalCount = Nothing
-    , _scrsResponseStatus = pResponseStatus_
-    }
-
+searchContactsResponse pResponseStatus_
+  = SearchContactsResponse'{_scrsNextToken = Nothing,
+                            _scrsContacts = Nothing, _scrsTotalCount = Nothing,
+                            _scrsResponseStatus = pResponseStatus_}
 
 -- | The token returned to indicate that there is more data available.
 scrsNextToken :: Lens' SearchContactsResponse (Maybe Text)

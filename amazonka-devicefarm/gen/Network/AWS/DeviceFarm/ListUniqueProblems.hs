@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about unique problems.
+-- Gets information about unique problems, such as exceptions or crashes.
 --
+--
+-- Unique problems are defined as a single instance of an error across a run, job, or suite. For example, if a call in your application consistently raises an exception (@OutOfBoundsException in MyActivity.java:386@ ), @ListUniqueProblems@ returns a single entry instead of many individual entries for that exception.
 --
 --
 -- This operation returns paginated results.
@@ -54,11 +56,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listUniqueProblems' smart constructor.
-data ListUniqueProblems = ListUniqueProblems'
-  { _lupNextToken :: !(Maybe Text)
-  , _lupArn       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListUniqueProblems = ListUniqueProblems'{_lupNextToken
+                                              :: !(Maybe Text),
+                                              _lupArn :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListUniqueProblems' with the minimum fields required to make a request.
 --
@@ -70,9 +71,9 @@ data ListUniqueProblems = ListUniqueProblems'
 listUniqueProblems
     :: Text -- ^ 'lupArn'
     -> ListUniqueProblems
-listUniqueProblems pArn_ =
-  ListUniqueProblems' {_lupNextToken = Nothing, _lupArn = pArn_}
-
+listUniqueProblems pArn_
+  = ListUniqueProblems'{_lupNextToken = Nothing,
+                        _lupArn = pArn_}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lupNextToken :: Lens' ListUniqueProblems (Maybe Text)
@@ -133,38 +134,42 @@ instance ToQuery ListUniqueProblems where
 --
 --
 -- /See:/ 'listUniqueProblemsResponse' smart constructor.
-data ListUniqueProblemsResponse = ListUniqueProblemsResponse'
-  { _luprsNextToken      :: !(Maybe Text)
-  , _luprsUniqueProblems :: !(Maybe (Map ExecutionResult [UniqueProblem]))
-  , _luprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListUniqueProblemsResponse = ListUniqueProblemsResponse'{_luprsNextToken
+                                                              :: !(Maybe Text),
+                                                              _luprsUniqueProblems
+                                                              ::
+                                                              !(Maybe
+                                                                  (Map
+                                                                     ExecutionResult
+                                                                     [UniqueProblem])),
+                                                              _luprsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListUniqueProblemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'luprsNextToken' - If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+-- * 'luprsNextToken' - If the number of items that are returned is significantly large, this is an identifier that is also returned. It can be used in a subsequent call to this operation to return the next set of items in the list.
 --
--- * 'luprsUniqueProblems' - Information about the unique problems. Allowed values include:     * PENDING: A pending condition.     * PASSED: A passing condition.     * WARNED: A warning condition.     * FAILED: A failed condition.     * SKIPPED: A skipped condition.     * ERRORED: An error condition.     * STOPPED: A stopped condition.
+-- * 'luprsUniqueProblems' - Information about the unique problems. Allowed values include:     * PENDING     * PASSED     * WARNED     * FAILED     * SKIPPED     * ERRORED     * STOPPED
 --
 -- * 'luprsResponseStatus' - -- | The response status code.
 listUniqueProblemsResponse
     :: Int -- ^ 'luprsResponseStatus'
     -> ListUniqueProblemsResponse
-listUniqueProblemsResponse pResponseStatus_ =
-  ListUniqueProblemsResponse'
-    { _luprsNextToken = Nothing
-    , _luprsUniqueProblems = Nothing
-    , _luprsResponseStatus = pResponseStatus_
-    }
+listUniqueProblemsResponse pResponseStatus_
+  = ListUniqueProblemsResponse'{_luprsNextToken =
+                                  Nothing,
+                                _luprsUniqueProblems = Nothing,
+                                _luprsResponseStatus = pResponseStatus_}
 
-
--- | If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+-- | If the number of items that are returned is significantly large, this is an identifier that is also returned. It can be used in a subsequent call to this operation to return the next set of items in the list.
 luprsNextToken :: Lens' ListUniqueProblemsResponse (Maybe Text)
 luprsNextToken = lens _luprsNextToken (\ s a -> s{_luprsNextToken = a})
 
--- | Information about the unique problems. Allowed values include:     * PENDING: A pending condition.     * PASSED: A passing condition.     * WARNED: A warning condition.     * FAILED: A failed condition.     * SKIPPED: A skipped condition.     * ERRORED: An error condition.     * STOPPED: A stopped condition.
+-- | Information about the unique problems. Allowed values include:     * PENDING     * PASSED     * WARNED     * FAILED     * SKIPPED     * ERRORED     * STOPPED
 luprsUniqueProblems :: Lens' ListUniqueProblemsResponse (HashMap ExecutionResult [UniqueProblem])
 luprsUniqueProblems = lens _luprsUniqueProblems (\ s a -> s{_luprsUniqueProblems = a}) . _Default . _Map
 

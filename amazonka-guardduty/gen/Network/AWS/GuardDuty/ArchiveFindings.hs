@@ -18,15 +18,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Archives Amazon GuardDuty findings specified by the list of finding IDs.
+-- Archives GuardDuty findings that are specified by the list of finding IDs.
+--
+--
 module Network.AWS.GuardDuty.ArchiveFindings
     (
     -- * Creating a Request
       archiveFindings
     , ArchiveFindings
     -- * Request Lenses
-    , afFindingIds
     , afDetectorId
+    , afFindingIds
 
     -- * Destructuring the Response
     , archiveFindingsResponse
@@ -42,36 +44,33 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | ArchiveFindings request body.
---
--- /See:/ 'archiveFindings' smart constructor.
-data ArchiveFindings = ArchiveFindings'
-  { _afFindingIds :: !(Maybe [Text])
-  , _afDetectorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'archiveFindings' smart constructor.
+data ArchiveFindings = ArchiveFindings'{_afDetectorId
+                                        :: !Text,
+                                        _afFindingIds :: ![Text]}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ArchiveFindings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'afFindingIds' - IDs of the findings that you want to archive.
---
 -- * 'afDetectorId' - The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
+--
+-- * 'afFindingIds' - The IDs of the findings that you want to archive.
 archiveFindings
     :: Text -- ^ 'afDetectorId'
     -> ArchiveFindings
-archiveFindings pDetectorId_ =
-  ArchiveFindings' {_afFindingIds = Nothing, _afDetectorId = pDetectorId_}
-
-
--- | IDs of the findings that you want to archive.
-afFindingIds :: Lens' ArchiveFindings [Text]
-afFindingIds = lens _afFindingIds (\ s a -> s{_afFindingIds = a}) . _Default . _Coerce
+archiveFindings pDetectorId_
+  = ArchiveFindings'{_afDetectorId = pDetectorId_,
+                     _afFindingIds = mempty}
 
 -- | The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
 afDetectorId :: Lens' ArchiveFindings Text
 afDetectorId = lens _afDetectorId (\ s a -> s{_afDetectorId = a})
+
+-- | The IDs of the findings that you want to archive.
+afFindingIds :: Lens' ArchiveFindings [Text]
+afFindingIds = lens _afFindingIds (\ s a -> s{_afFindingIds = a}) . _Coerce
 
 instance AWSRequest ArchiveFindings where
         type Rs ArchiveFindings = ArchiveFindingsResponse
@@ -95,7 +94,7 @@ instance ToHeaders ArchiveFindings where
 instance ToJSON ArchiveFindings where
         toJSON ArchiveFindings'{..}
           = object
-              (catMaybes [("findingIds" .=) <$> _afFindingIds])
+              (catMaybes [Just ("findingIds" .= _afFindingIds)])
 
 instance ToPath ArchiveFindings where
         toPath ArchiveFindings'{..}
@@ -107,10 +106,10 @@ instance ToQuery ArchiveFindings where
         toQuery = const mempty
 
 -- | /See:/ 'archiveFindingsResponse' smart constructor.
-newtype ArchiveFindingsResponse = ArchiveFindingsResponse'
-  { _afrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ArchiveFindingsResponse = ArchiveFindingsResponse'{_afrsResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ArchiveFindingsResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +119,9 @@ newtype ArchiveFindingsResponse = ArchiveFindingsResponse'
 archiveFindingsResponse
     :: Int -- ^ 'afrsResponseStatus'
     -> ArchiveFindingsResponse
-archiveFindingsResponse pResponseStatus_ =
-  ArchiveFindingsResponse' {_afrsResponseStatus = pResponseStatus_}
-
+archiveFindingsResponse pResponseStatus_
+  = ArchiveFindingsResponse'{_afrsResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 afrsResponseStatus :: Lens' ArchiveFindingsResponse Int

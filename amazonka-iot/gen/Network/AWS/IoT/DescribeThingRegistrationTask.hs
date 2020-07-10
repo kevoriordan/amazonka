@@ -56,10 +56,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeThingRegistrationTask' smart constructor.
-newtype DescribeThingRegistrationTask = DescribeThingRegistrationTask'
-  { _dtrtTaskId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeThingRegistrationTask = DescribeThingRegistrationTask'{_dtrtTaskId
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeThingRegistrationTask' with the minimum fields required to make a request.
 --
@@ -69,9 +69,9 @@ newtype DescribeThingRegistrationTask = DescribeThingRegistrationTask'
 describeThingRegistrationTask
     :: Text -- ^ 'dtrtTaskId'
     -> DescribeThingRegistrationTask
-describeThingRegistrationTask pTaskId_ =
-  DescribeThingRegistrationTask' {_dtrtTaskId = pTaskId_}
-
+describeThingRegistrationTask pTaskId_
+  = DescribeThingRegistrationTask'{_dtrtTaskId =
+                                     pTaskId_}
 
 -- | The task ID.
 dtrtTaskId :: Lens' DescribeThingRegistrationTask Text
@@ -116,22 +116,59 @@ instance ToQuery DescribeThingRegistrationTask where
         toQuery = const mempty
 
 -- | /See:/ 'describeThingRegistrationTaskResponse' smart constructor.
-data DescribeThingRegistrationTaskResponse = DescribeThingRegistrationTaskResponse'
-  { _dtrtrsStatus             :: !(Maybe TaskStatus)
-  , _dtrtrsLastModifiedDate   :: !(Maybe POSIX)
-  , _dtrtrsInputFileKey       :: !(Maybe Text)
-  , _dtrtrsTaskId             :: !(Maybe Text)
-  , _dtrtrsCreationDate       :: !(Maybe POSIX)
-  , _dtrtrsPercentageProgress :: !(Maybe Nat)
-  , _dtrtrsTemplateBody       :: !(Maybe Text)
-  , _dtrtrsSuccessCount       :: !(Maybe Int)
-  , _dtrtrsMessage            :: !(Maybe Text)
-  , _dtrtrsFailureCount       :: !(Maybe Int)
-  , _dtrtrsInputFileBucket    :: !(Maybe Text)
-  , _dtrtrsRoleARN            :: !(Maybe Text)
-  , _dtrtrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeThingRegistrationTaskResponse = DescribeThingRegistrationTaskResponse'{_dtrtrsStatus
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        TaskStatus),
+                                                                                    _dtrtrsLastModifiedDate
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        POSIX),
+                                                                                    _dtrtrsInputFileKey
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dtrtrsTaskId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dtrtrsCreationDate
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        POSIX),
+                                                                                    _dtrtrsPercentageProgress
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Nat),
+                                                                                    _dtrtrsTemplateBody
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dtrtrsSuccessCount
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Int),
+                                                                                    _dtrtrsMessage
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dtrtrsFailureCount
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Int),
+                                                                                    _dtrtrsInputFileBucket
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dtrtrsRoleARN
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dtrtrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeThingRegistrationTaskResponse' with the minimum fields required to make a request.
 --
@@ -165,23 +202,23 @@ data DescribeThingRegistrationTaskResponse = DescribeThingRegistrationTaskRespon
 describeThingRegistrationTaskResponse
     :: Int -- ^ 'dtrtrsResponseStatus'
     -> DescribeThingRegistrationTaskResponse
-describeThingRegistrationTaskResponse pResponseStatus_ =
-  DescribeThingRegistrationTaskResponse'
-    { _dtrtrsStatus = Nothing
-    , _dtrtrsLastModifiedDate = Nothing
-    , _dtrtrsInputFileKey = Nothing
-    , _dtrtrsTaskId = Nothing
-    , _dtrtrsCreationDate = Nothing
-    , _dtrtrsPercentageProgress = Nothing
-    , _dtrtrsTemplateBody = Nothing
-    , _dtrtrsSuccessCount = Nothing
-    , _dtrtrsMessage = Nothing
-    , _dtrtrsFailureCount = Nothing
-    , _dtrtrsInputFileBucket = Nothing
-    , _dtrtrsRoleARN = Nothing
-    , _dtrtrsResponseStatus = pResponseStatus_
-    }
-
+describeThingRegistrationTaskResponse
+  pResponseStatus_
+  = DescribeThingRegistrationTaskResponse'{_dtrtrsStatus
+                                             = Nothing,
+                                           _dtrtrsLastModifiedDate = Nothing,
+                                           _dtrtrsInputFileKey = Nothing,
+                                           _dtrtrsTaskId = Nothing,
+                                           _dtrtrsCreationDate = Nothing,
+                                           _dtrtrsPercentageProgress = Nothing,
+                                           _dtrtrsTemplateBody = Nothing,
+                                           _dtrtrsSuccessCount = Nothing,
+                                           _dtrtrsMessage = Nothing,
+                                           _dtrtrsFailureCount = Nothing,
+                                           _dtrtrsInputFileBucket = Nothing,
+                                           _dtrtrsRoleARN = Nothing,
+                                           _dtrtrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The status of the bulk thing provisioning task.
 dtrtrsStatus :: Lens' DescribeThingRegistrationTaskResponse (Maybe TaskStatus)

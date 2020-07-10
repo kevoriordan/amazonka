@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getPublicKeyConfig' smart constructor.
-newtype GetPublicKeyConfig = GetPublicKeyConfig'
-  { _gpkcId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetPublicKeyConfig = GetPublicKeyConfig'{_gpkcId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetPublicKeyConfig' with the minimum fields required to make a request.
 --
@@ -59,8 +59,8 @@ newtype GetPublicKeyConfig = GetPublicKeyConfig'
 getPublicKeyConfig
     :: Text -- ^ 'gpkcId'
     -> GetPublicKeyConfig
-getPublicKeyConfig pId_ = GetPublicKeyConfig' {_gpkcId = pId_}
-
+getPublicKeyConfig pId_
+  = GetPublicKeyConfig'{_gpkcId = pId_}
 
 -- | Request the ID for the public key configuration.
 gpkcId :: Lens' GetPublicKeyConfig Text
@@ -87,18 +87,22 @@ instance ToHeaders GetPublicKeyConfig where
 instance ToPath GetPublicKeyConfig where
         toPath GetPublicKeyConfig'{..}
           = mconcat
-              ["/2017-10-30/public-key/", toBS _gpkcId, "/config"]
+              ["/2019-03-26/public-key/", toBS _gpkcId, "/config"]
 
 instance ToQuery GetPublicKeyConfig where
         toQuery = const mempty
 
 -- | /See:/ 'getPublicKeyConfigResponse' smart constructor.
-data GetPublicKeyConfigResponse = GetPublicKeyConfigResponse'
-  { _gpkcrsETag            :: !(Maybe Text)
-  , _gpkcrsPublicKeyConfig :: !(Maybe PublicKeyConfig)
-  , _gpkcrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPublicKeyConfigResponse = GetPublicKeyConfigResponse'{_gpkcrsETag
+                                                              :: !(Maybe Text),
+                                                              _gpkcrsPublicKeyConfig
+                                                              ::
+                                                              !(Maybe
+                                                                  PublicKeyConfig),
+                                                              _gpkcrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetPublicKeyConfigResponse' with the minimum fields required to make a request.
 --
@@ -112,13 +116,10 @@ data GetPublicKeyConfigResponse = GetPublicKeyConfigResponse'
 getPublicKeyConfigResponse
     :: Int -- ^ 'gpkcrsResponseStatus'
     -> GetPublicKeyConfigResponse
-getPublicKeyConfigResponse pResponseStatus_ =
-  GetPublicKeyConfigResponse'
-    { _gpkcrsETag = Nothing
-    , _gpkcrsPublicKeyConfig = Nothing
-    , _gpkcrsResponseStatus = pResponseStatus_
-    }
-
+getPublicKeyConfigResponse pResponseStatus_
+  = GetPublicKeyConfigResponse'{_gpkcrsETag = Nothing,
+                                _gpkcrsPublicKeyConfig = Nothing,
+                                _gpkcrsResponseStatus = pResponseStatus_}
 
 -- | The current version of the public key configuration. For example: @E2QWRUHAPOMQZL@ .
 gpkcrsETag :: Lens' GetPublicKeyConfigResponse (Maybe Text)

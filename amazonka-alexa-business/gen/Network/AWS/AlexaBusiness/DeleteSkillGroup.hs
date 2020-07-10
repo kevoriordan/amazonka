@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteSkillGroup' smart constructor.
-newtype DeleteSkillGroup = DeleteSkillGroup'
-  { _dsgSkillGroupARN :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSkillGroup = DeleteSkillGroup'{_dsgSkillGroupARN
+                                             :: Maybe Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSkillGroup' with the minimum fields required to make a request.
 --
@@ -56,8 +55,8 @@ newtype DeleteSkillGroup = DeleteSkillGroup'
 -- * 'dsgSkillGroupARN' - The ARN of the skill group to delete. Required.
 deleteSkillGroup
     :: DeleteSkillGroup
-deleteSkillGroup = DeleteSkillGroup' {_dsgSkillGroupARN = Nothing}
-
+deleteSkillGroup
+  = DeleteSkillGroup'{_dsgSkillGroupARN = Nothing}
 
 -- | The ARN of the skill group to delete. Required.
 dsgSkillGroupARN :: Lens' DeleteSkillGroup (Maybe Text)
@@ -97,10 +96,10 @@ instance ToQuery DeleteSkillGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteSkillGroupResponse' smart constructor.
-newtype DeleteSkillGroupResponse = DeleteSkillGroupResponse'
-  { _dsgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSkillGroupResponse = DeleteSkillGroupResponse'{_dsgrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteSkillGroupResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +109,9 @@ newtype DeleteSkillGroupResponse = DeleteSkillGroupResponse'
 deleteSkillGroupResponse
     :: Int -- ^ 'dsgrsResponseStatus'
     -> DeleteSkillGroupResponse
-deleteSkillGroupResponse pResponseStatus_ =
-  DeleteSkillGroupResponse' {_dsgrsResponseStatus = pResponseStatus_}
-
+deleteSkillGroupResponse pResponseStatus_
+  = DeleteSkillGroupResponse'{_dsgrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 dsgrsResponseStatus :: Lens' DeleteSkillGroupResponse Int

@@ -33,7 +33,7 @@
 --
 -- Sequence numbers increase over time and are specific to a shard within a stream, not across all shards within a stream. To guarantee strictly increasing ordering, write serially to a shard and use the @SequenceNumberForOrdering@ parameter. For more information, see <http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream Adding Data to a Stream> in the /Amazon Kinesis Data Streams Developer Guide/ .
 --
--- If a @PutRecord@ request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, @PutRecord@ throws @ProvisionedThroughputExceededException@ .
+-- If a @PutRecord@ request cannot be processed because of insufficient provisioned throughput on the shard involved in the request, @PutRecord@ throws @ProvisionedThroughputExceededException@ . 
 --
 -- By default, data records are accessible for 24 hours from the time that they are added to a stream. You can use 'IncreaseStreamRetentionPeriod' or 'DecreaseStreamRetentionPeriod' to modify this retention period.
 --
@@ -71,14 +71,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'putRecord' smart constructor.
-data PutRecord = PutRecord'
-  { _prExplicitHashKey           :: !(Maybe Text)
-  , _prSequenceNumberForOrdering :: !(Maybe Text)
-  , _prStreamName                :: !Text
-  , _prData                      :: !Base64
-  , _prPartitionKey              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRecord = PutRecord'{_prExplicitHashKey ::
+                            !(Maybe Text),
+                            _prSequenceNumberForOrdering :: !(Maybe Text),
+                            _prStreamName :: !Text, _prData :: !Base64,
+                            _prPartitionKey :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutRecord' with the minimum fields required to make a request.
 --
@@ -98,15 +96,12 @@ putRecord
     -> ByteString -- ^ 'prData'
     -> Text -- ^ 'prPartitionKey'
     -> PutRecord
-putRecord pStreamName_ pData_ pPartitionKey_ =
-  PutRecord'
-    { _prExplicitHashKey = Nothing
-    , _prSequenceNumberForOrdering = Nothing
-    , _prStreamName = pStreamName_
-    , _prData = _Base64 # pData_
-    , _prPartitionKey = pPartitionKey_
-    }
-
+putRecord pStreamName_ pData_ pPartitionKey_
+  = PutRecord'{_prExplicitHashKey = Nothing,
+               _prSequenceNumberForOrdering = Nothing,
+               _prStreamName = pStreamName_,
+               _prData = _Base64 # pData_,
+               _prPartitionKey = pPartitionKey_}
 
 -- | The hash value used to explicitly determine the shard the data record is assigned to by overriding the partition key hash.
 prExplicitHashKey :: Lens' PutRecord (Maybe Text)
@@ -174,13 +169,12 @@ instance ToQuery PutRecord where
 --
 --
 -- /See:/ 'putRecordResponse' smart constructor.
-data PutRecordResponse = PutRecordResponse'
-  { _prrsEncryptionType :: !(Maybe EncryptionType)
-  , _prrsResponseStatus :: !Int
-  , _prrsShardId        :: !Text
-  , _prrsSequenceNumber :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRecordResponse = PutRecordResponse'{_prrsEncryptionType
+                                            :: !(Maybe EncryptionType),
+                                            _prrsResponseStatus :: !Int,
+                                            _prrsShardId :: !Text,
+                                            _prrsSequenceNumber :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutRecordResponse' with the minimum fields required to make a request.
 --
@@ -198,14 +192,12 @@ putRecordResponse
     -> Text -- ^ 'prrsShardId'
     -> Text -- ^ 'prrsSequenceNumber'
     -> PutRecordResponse
-putRecordResponse pResponseStatus_ pShardId_ pSequenceNumber_ =
-  PutRecordResponse'
-    { _prrsEncryptionType = Nothing
-    , _prrsResponseStatus = pResponseStatus_
-    , _prrsShardId = pShardId_
-    , _prrsSequenceNumber = pSequenceNumber_
-    }
-
+putRecordResponse pResponseStatus_ pShardId_
+  pSequenceNumber_
+  = PutRecordResponse'{_prrsEncryptionType = Nothing,
+                       _prrsResponseStatus = pResponseStatus_,
+                       _prrsShardId = pShardId_,
+                       _prrsSequenceNumber = pSequenceNumber_}
 
 -- | The encryption type to use on the record. This parameter can be one of the following values:     * @NONE@ : Do not encrypt the records in the stream.     * @KMS@ : Use server-side encryption on the records in the stream using a customer-managed AWS KMS key.
 prrsEncryptionType :: Lens' PutRecordResponse (Maybe EncryptionType)

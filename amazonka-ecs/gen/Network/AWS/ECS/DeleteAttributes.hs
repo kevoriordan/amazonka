@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAttributes' smart constructor.
-data DeleteAttributes = DeleteAttributes'
-  { _daCluster    :: !(Maybe Text)
-  , _daAttributes :: ![Attribute]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAttributes = DeleteAttributes'{_daCluster
+                                          :: !(Maybe Text),
+                                          _daAttributes :: ![Attribute]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAttributes' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data DeleteAttributes = DeleteAttributes'
 -- * 'daAttributes' - The attributes to delete from your resource. You can specify up to 10 attributes per request. For custom attributes, specify the attribute name and target ID, but do not specify the value. If you specify the target ID using the short form, you must also specify the target type.
 deleteAttributes
     :: DeleteAttributes
-deleteAttributes =
-  DeleteAttributes' {_daCluster = Nothing, _daAttributes = mempty}
-
+deleteAttributes
+  = DeleteAttributes'{_daCluster = Nothing,
+                      _daAttributes = mempty}
 
 -- | The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to delete attributes. If you do not specify a cluster, the default cluster is assumed.
 daCluster :: Lens' DeleteAttributes (Maybe Text)
@@ -111,11 +110,13 @@ instance ToQuery DeleteAttributes where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAttributesResponse' smart constructor.
-data DeleteAttributesResponse = DeleteAttributesResponse'
-  { _darsAttributes     :: !(Maybe [Attribute])
-  , _darsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAttributesResponse = DeleteAttributesResponse'{_darsAttributes
+                                                          ::
+                                                          !(Maybe [Attribute]),
+                                                          _darsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteAttributesResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +128,10 @@ data DeleteAttributesResponse = DeleteAttributesResponse'
 deleteAttributesResponse
     :: Int -- ^ 'darsResponseStatus'
     -> DeleteAttributesResponse
-deleteAttributesResponse pResponseStatus_ =
-  DeleteAttributesResponse'
-    {_darsAttributes = Nothing, _darsResponseStatus = pResponseStatus_}
-
+deleteAttributesResponse pResponseStatus_
+  = DeleteAttributesResponse'{_darsAttributes =
+                                Nothing,
+                              _darsResponseStatus = pResponseStatus_}
 
 -- | A list of attribute objects that were successfully deleted from your resource.
 darsAttributes :: Lens' DeleteAttributesResponse [Attribute]

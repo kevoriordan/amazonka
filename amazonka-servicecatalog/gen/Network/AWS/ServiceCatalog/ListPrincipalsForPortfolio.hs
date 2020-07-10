@@ -52,13 +52,16 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listPrincipalsForPortfolio' smart constructor.
-data ListPrincipalsForPortfolio = ListPrincipalsForPortfolio'
-  { _lpfpAcceptLanguage :: !(Maybe Text)
-  , _lpfpPageToken      :: !(Maybe Text)
-  , _lpfpPageSize       :: !(Maybe Nat)
-  , _lpfpPortfolioId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPrincipalsForPortfolio = ListPrincipalsForPortfolio'{_lpfpAcceptLanguage
+                                                              :: !(Maybe Text),
+                                                              _lpfpPageToken ::
+                                                              !(Maybe Text),
+                                                              _lpfpPageSize ::
+                                                              !(Maybe Nat),
+                                                              _lpfpPortfolioId
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListPrincipalsForPortfolio' with the minimum fields required to make a request.
 --
@@ -74,14 +77,12 @@ data ListPrincipalsForPortfolio = ListPrincipalsForPortfolio'
 listPrincipalsForPortfolio
     :: Text -- ^ 'lpfpPortfolioId'
     -> ListPrincipalsForPortfolio
-listPrincipalsForPortfolio pPortfolioId_ =
-  ListPrincipalsForPortfolio'
-    { _lpfpAcceptLanguage = Nothing
-    , _lpfpPageToken = Nothing
-    , _lpfpPageSize = Nothing
-    , _lpfpPortfolioId = pPortfolioId_
-    }
-
+listPrincipalsForPortfolio pPortfolioId_
+  = ListPrincipalsForPortfolio'{_lpfpAcceptLanguage =
+                                  Nothing,
+                                _lpfpPageToken = Nothing,
+                                _lpfpPageSize = Nothing,
+                                _lpfpPortfolioId = pPortfolioId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 lpfpAcceptLanguage :: Lens' ListPrincipalsForPortfolio (Maybe Text)
@@ -148,12 +149,19 @@ instance ToQuery ListPrincipalsForPortfolio where
         toQuery = const mempty
 
 -- | /See:/ 'listPrincipalsForPortfolioResponse' smart constructor.
-data ListPrincipalsForPortfolioResponse = ListPrincipalsForPortfolioResponse'
-  { _lisrsNextPageToken  :: !(Maybe Text)
-  , _lisrsPrincipals     :: !(Maybe [Principal])
-  , _lisrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPrincipalsForPortfolioResponse = ListPrincipalsForPortfolioResponse'{_lisrsNextPageToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _lisrsPrincipals
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [Principal]),
+                                                                              _lisrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListPrincipalsForPortfolioResponse' with the minimum fields required to make a request.
 --
@@ -167,13 +175,11 @@ data ListPrincipalsForPortfolioResponse = ListPrincipalsForPortfolioResponse'
 listPrincipalsForPortfolioResponse
     :: Int -- ^ 'lisrsResponseStatus'
     -> ListPrincipalsForPortfolioResponse
-listPrincipalsForPortfolioResponse pResponseStatus_ =
-  ListPrincipalsForPortfolioResponse'
-    { _lisrsNextPageToken = Nothing
-    , _lisrsPrincipals = Nothing
-    , _lisrsResponseStatus = pResponseStatus_
-    }
-
+listPrincipalsForPortfolioResponse pResponseStatus_
+  = ListPrincipalsForPortfolioResponse'{_lisrsNextPageToken
+                                          = Nothing,
+                                        _lisrsPrincipals = Nothing,
+                                        _lisrsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 lisrsNextPageToken :: Lens' ListPrincipalsForPortfolioResponse (Maybe Text)

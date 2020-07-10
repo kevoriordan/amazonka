@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to "engine-default". To reset the entire parameter group specify the /ResetAllParameters/ parameter. For parameter changes to take effect you must reboot any associated clusters.
+-- Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to "engine-default". To reset the entire parameter group specify the /ResetAllParameters/ parameter. For parameter changes to take effect you must reboot any associated clusters. 
 --
 --
 module Network.AWS.Redshift.ResetClusterParameterGroup
@@ -46,23 +46,26 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'resetClusterParameterGroup' smart constructor.
-data ResetClusterParameterGroup = ResetClusterParameterGroup'
-  { _rcpgResetAllParameters :: !(Maybe Bool)
-  , _rcpgParameters         :: !(Maybe [Parameter])
-  , _rcpgParameterGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetClusterParameterGroup = ResetClusterParameterGroup'{_rcpgResetAllParameters
+                                                              :: !(Maybe Bool),
+                                                              _rcpgParameters ::
+                                                              !(Maybe
+                                                                  [Parameter]),
+                                                              _rcpgParameterGroupName
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ResetClusterParameterGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcpgResetAllParameters' - If @true@ , all parameters in the specified parameter group will be reset to their default values.  Default: @true@
+-- * 'rcpgResetAllParameters' - If @true@ , all parameters in the specified parameter group will be reset to their default values.  Default: @true@ 
 --
 -- * 'rcpgParameters' - An array of names of parameters to be reset. If /ResetAllParameters/ option is not used, then at least one parameter name must be supplied.  Constraints: A maximum of 20 parameters can be reset in a single request.
 --
@@ -70,15 +73,13 @@ data ResetClusterParameterGroup = ResetClusterParameterGroup'
 resetClusterParameterGroup
     :: Text -- ^ 'rcpgParameterGroupName'
     -> ResetClusterParameterGroup
-resetClusterParameterGroup pParameterGroupName_ =
-  ResetClusterParameterGroup'
-    { _rcpgResetAllParameters = Nothing
-    , _rcpgParameters = Nothing
-    , _rcpgParameterGroupName = pParameterGroupName_
-    }
+resetClusterParameterGroup pParameterGroupName_
+  = ResetClusterParameterGroup'{_rcpgResetAllParameters
+                                  = Nothing,
+                                _rcpgParameters = Nothing,
+                                _rcpgParameterGroupName = pParameterGroupName_}
 
-
--- | If @true@ , all parameters in the specified parameter group will be reset to their default values.  Default: @true@
+-- | If @true@ , all parameters in the specified parameter group will be reset to their default values.  Default: @true@ 
 rcpgResetAllParameters :: Lens' ResetClusterParameterGroup (Maybe Bool)
 rcpgResetAllParameters = lens _rcpgResetAllParameters (\ s a -> s{_rcpgResetAllParameters = a})
 

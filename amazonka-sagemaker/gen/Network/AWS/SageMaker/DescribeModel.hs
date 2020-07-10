@@ -33,10 +33,12 @@ module Network.AWS.SageMaker.DescribeModel
     , describeModelResponse
     , DescribeModelResponse
     -- * Response Lenses
+    , dmrsPrimaryContainer
+    , dmrsEnableNetworkIsolation
+    , dmrsContainers
     , dmrsVPCConfig
     , dmrsResponseStatus
     , dmrsModelName
-    , dmrsPrimaryContainer
     , dmrsExecutionRoleARN
     , dmrsCreationTime
     , dmrsModelARN
@@ -50,10 +52,9 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'describeModel' smart constructor.
-newtype DescribeModel = DescribeModel'
-  { _dModelName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeModel = DescribeModel'{_dModelName ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeModel' with the minimum fields required to make a request.
 --
@@ -63,8 +64,8 @@ newtype DescribeModel = DescribeModel'
 describeModel
     :: Text -- ^ 'dModelName'
     -> DescribeModel
-describeModel pModelName_ = DescribeModel' {_dModelName = pModelName_}
-
+describeModel pModelName_
+  = DescribeModel'{_dModelName = pModelName_}
 
 -- | The name of the model.
 dModelName :: Lens' DescribeModel Text
@@ -77,9 +78,12 @@ instance AWSRequest DescribeModel where
           = receiveJSON
               (\ s h x ->
                  DescribeModelResponse' <$>
-                   (x .?> "VpcConfig") <*> (pure (fromEnum s)) <*>
-                     (x .:> "ModelName")
-                     <*> (x .:> "PrimaryContainer")
+                   (x .?> "PrimaryContainer") <*>
+                     (x .?> "EnableNetworkIsolation")
+                     <*> (x .?> "Containers" .!@ mempty)
+                     <*> (x .?> "VpcConfig")
+                     <*> (pure (fromEnum s))
+                     <*> (x .:> "ModelName")
                      <*> (x .:> "ExecutionRoleArn")
                      <*> (x .:> "CreationTime")
                      <*> (x .:> "ModelArn"))
@@ -109,28 +113,41 @@ instance ToQuery DescribeModel where
         toQuery = const mempty
 
 -- | /See:/ 'describeModelResponse' smart constructor.
-data DescribeModelResponse = DescribeModelResponse'
-  { _dmrsVPCConfig        :: !(Maybe VPCConfig)
-  , _dmrsResponseStatus   :: !Int
-  , _dmrsModelName        :: !Text
-  , _dmrsPrimaryContainer :: !ContainerDefinition
-  , _dmrsExecutionRoleARN :: !Text
-  , _dmrsCreationTime     :: !POSIX
-  , _dmrsModelARN         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeModelResponse = DescribeModelResponse'{_dmrsPrimaryContainer
+                                                    ::
+                                                    !(Maybe
+                                                        ContainerDefinition),
+                                                    _dmrsEnableNetworkIsolation
+                                                    :: !(Maybe Bool),
+                                                    _dmrsContainers ::
+                                                    !(Maybe
+                                                        [ContainerDefinition]),
+                                                    _dmrsVPCConfig ::
+                                                    !(Maybe VPCConfig),
+                                                    _dmrsResponseStatus :: !Int,
+                                                    _dmrsModelName :: !Text,
+                                                    _dmrsExecutionRoleARN ::
+                                                    !Text,
+                                                    _dmrsCreationTime :: !POSIX,
+                                                    _dmrsModelARN :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeModelResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmrsVPCConfig' - A object that specifies the VPC that this model has access to. For more information, see 'host-vpc'
+-- * 'dmrsPrimaryContainer' - The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production. 
+--
+-- * 'dmrsEnableNetworkIsolation' - If @True@ , no inbound or outbound network calls can be made to or from the model container.
+--
+-- * 'dmrsContainers' - The containers in the inference pipeline.
+--
+-- * 'dmrsVPCConfig' - A 'VpcConfig' object that specifies the VPC that this model has access to. For more information, see <https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html Protect Endpoints by Using an Amazon Virtual Private Cloud> 
 --
 -- * 'dmrsResponseStatus' - -- | The response status code.
 --
 -- * 'dmrsModelName' - Name of the Amazon SageMaker model.
---
--- * 'dmrsPrimaryContainer' - The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production.
 --
 -- * 'dmrsExecutionRoleARN' - The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
 --
@@ -140,24 +157,35 @@ data DescribeModelResponse = DescribeModelResponse'
 describeModelResponse
     :: Int -- ^ 'dmrsResponseStatus'
     -> Text -- ^ 'dmrsModelName'
-    -> ContainerDefinition -- ^ 'dmrsPrimaryContainer'
     -> Text -- ^ 'dmrsExecutionRoleARN'
     -> UTCTime -- ^ 'dmrsCreationTime'
     -> Text -- ^ 'dmrsModelARN'
     -> DescribeModelResponse
-describeModelResponse pResponseStatus_ pModelName_ pPrimaryContainer_ pExecutionRoleARN_ pCreationTime_ pModelARN_ =
-  DescribeModelResponse'
-    { _dmrsVPCConfig = Nothing
-    , _dmrsResponseStatus = pResponseStatus_
-    , _dmrsModelName = pModelName_
-    , _dmrsPrimaryContainer = pPrimaryContainer_
-    , _dmrsExecutionRoleARN = pExecutionRoleARN_
-    , _dmrsCreationTime = _Time # pCreationTime_
-    , _dmrsModelARN = pModelARN_
-    }
+describeModelResponse pResponseStatus_ pModelName_
+  pExecutionRoleARN_ pCreationTime_ pModelARN_
+  = DescribeModelResponse'{_dmrsPrimaryContainer =
+                             Nothing,
+                           _dmrsEnableNetworkIsolation = Nothing,
+                           _dmrsContainers = Nothing, _dmrsVPCConfig = Nothing,
+                           _dmrsResponseStatus = pResponseStatus_,
+                           _dmrsModelName = pModelName_,
+                           _dmrsExecutionRoleARN = pExecutionRoleARN_,
+                           _dmrsCreationTime = _Time # pCreationTime_,
+                           _dmrsModelARN = pModelARN_}
 
+-- | The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production. 
+dmrsPrimaryContainer :: Lens' DescribeModelResponse (Maybe ContainerDefinition)
+dmrsPrimaryContainer = lens _dmrsPrimaryContainer (\ s a -> s{_dmrsPrimaryContainer = a})
 
--- | A object that specifies the VPC that this model has access to. For more information, see 'host-vpc'
+-- | If @True@ , no inbound or outbound network calls can be made to or from the model container.
+dmrsEnableNetworkIsolation :: Lens' DescribeModelResponse (Maybe Bool)
+dmrsEnableNetworkIsolation = lens _dmrsEnableNetworkIsolation (\ s a -> s{_dmrsEnableNetworkIsolation = a})
+
+-- | The containers in the inference pipeline.
+dmrsContainers :: Lens' DescribeModelResponse [ContainerDefinition]
+dmrsContainers = lens _dmrsContainers (\ s a -> s{_dmrsContainers = a}) . _Default . _Coerce
+
+-- | A 'VpcConfig' object that specifies the VPC that this model has access to. For more information, see <https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html Protect Endpoints by Using an Amazon Virtual Private Cloud> 
 dmrsVPCConfig :: Lens' DescribeModelResponse (Maybe VPCConfig)
 dmrsVPCConfig = lens _dmrsVPCConfig (\ s a -> s{_dmrsVPCConfig = a})
 
@@ -168,10 +196,6 @@ dmrsResponseStatus = lens _dmrsResponseStatus (\ s a -> s{_dmrsResponseStatus = 
 -- | Name of the Amazon SageMaker model.
 dmrsModelName :: Lens' DescribeModelResponse Text
 dmrsModelName = lens _dmrsModelName (\ s a -> s{_dmrsModelName = a})
-
--- | The location of the primary inference code, associated artifacts, and custom environment map that the inference code uses when it is deployed in production.
-dmrsPrimaryContainer :: Lens' DescribeModelResponse ContainerDefinition
-dmrsPrimaryContainer = lens _dmrsPrimaryContainer (\ s a -> s{_dmrsPrimaryContainer = a})
 
 -- | The Amazon Resource Name (ARN) of the IAM role that you specified for the model.
 dmrsExecutionRoleARN :: Lens' DescribeModelResponse Text

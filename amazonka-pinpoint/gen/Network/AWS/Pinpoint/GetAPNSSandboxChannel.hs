@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an APNS sandbox channel
+-- Retrieves information about the status and settings of the APNs sandbox channel for an application.
+--
+--
 module Network.AWS.Pinpoint.GetAPNSSandboxChannel
     (
     -- * Creating a Request
@@ -43,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAPNSSandboxChannel' smart constructor.
-newtype GetAPNSSandboxChannel = GetAPNSSandboxChannel'
-  { _gascApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetAPNSSandboxChannel = GetAPNSSandboxChannel'{_gascApplicationId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetAPNSSandboxChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gascApplicationId' - Undocumented member.
+-- * 'gascApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getAPNSSandboxChannel
     :: Text -- ^ 'gascApplicationId'
     -> GetAPNSSandboxChannel
-getAPNSSandboxChannel pApplicationId_ =
-  GetAPNSSandboxChannel' {_gascApplicationId = pApplicationId_}
+getAPNSSandboxChannel pApplicationId_
+  = GetAPNSSandboxChannel'{_gascApplicationId =
+                             pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gascApplicationId :: Lens' GetAPNSSandboxChannel Text
 gascApplicationId = lens _gascApplicationId (\ s a -> s{_gascApplicationId = a})
 
@@ -95,11 +97,13 @@ instance ToQuery GetAPNSSandboxChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getAPNSSandboxChannelResponse' smart constructor.
-data GetAPNSSandboxChannelResponse = GetAPNSSandboxChannelResponse'
-  { _gascrsResponseStatus             :: !Int
-  , _gascrsAPNSSandboxChannelResponse :: !APNSSandboxChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAPNSSandboxChannelResponse = GetAPNSSandboxChannelResponse'{_gascrsResponseStatus
+                                                                    :: !Int,
+                                                                    _gascrsAPNSSandboxChannelResponse
+                                                                    ::
+                                                                    !APNSSandboxChannelResponse}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetAPNSSandboxChannelResponse' with the minimum fields required to make a request.
 --
@@ -112,12 +116,12 @@ getAPNSSandboxChannelResponse
     :: Int -- ^ 'gascrsResponseStatus'
     -> APNSSandboxChannelResponse -- ^ 'gascrsAPNSSandboxChannelResponse'
     -> GetAPNSSandboxChannelResponse
-getAPNSSandboxChannelResponse pResponseStatus_ pAPNSSandboxChannelResponse_ =
-  GetAPNSSandboxChannelResponse'
-    { _gascrsResponseStatus = pResponseStatus_
-    , _gascrsAPNSSandboxChannelResponse = pAPNSSandboxChannelResponse_
-    }
-
+getAPNSSandboxChannelResponse pResponseStatus_
+  pAPNSSandboxChannelResponse_
+  = GetAPNSSandboxChannelResponse'{_gascrsResponseStatus
+                                     = pResponseStatus_,
+                                   _gascrsAPNSSandboxChannelResponse =
+                                     pAPNSSandboxChannelResponse_}
 
 -- | -- | The response status code.
 gascrsResponseStatus :: Lens' GetAPNSSandboxChannelResponse Int

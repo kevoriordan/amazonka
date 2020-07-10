@@ -43,17 +43,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getComplianceSummaryByConfigRule' smart constructor.
-data GetComplianceSummaryByConfigRule =
-  GetComplianceSummaryByConfigRule'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetComplianceSummaryByConfigRule = GetComplianceSummaryByConfigRule'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetComplianceSummaryByConfigRule' with the minimum fields required to make a request.
 --
 getComplianceSummaryByConfigRule
     :: GetComplianceSummaryByConfigRule
-getComplianceSummaryByConfigRule = GetComplianceSummaryByConfigRule'
-
+getComplianceSummaryByConfigRule
+  = GetComplianceSummaryByConfigRule'
 
 instance AWSRequest GetComplianceSummaryByConfigRule
          where
@@ -95,16 +94,21 @@ instance ToQuery GetComplianceSummaryByConfigRule
          where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'getComplianceSummaryByConfigRuleResponse' smart constructor.
-data GetComplianceSummaryByConfigRuleResponse = GetComplianceSummaryByConfigRuleResponse'
-  { _gcsbcrrsComplianceSummary :: !(Maybe ComplianceSummary)
-  , _gcsbcrrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetComplianceSummaryByConfigRuleResponse = GetComplianceSummaryByConfigRuleResponse'{_gcsbcrrsComplianceSummary
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              ComplianceSummary),
+                                                                                          _gcsbcrrsResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'GetComplianceSummaryByConfigRuleResponse' with the minimum fields required to make a request.
 --
@@ -116,12 +120,12 @@ data GetComplianceSummaryByConfigRuleResponse = GetComplianceSummaryByConfigRule
 getComplianceSummaryByConfigRuleResponse
     :: Int -- ^ 'gcsbcrrsResponseStatus'
     -> GetComplianceSummaryByConfigRuleResponse
-getComplianceSummaryByConfigRuleResponse pResponseStatus_ =
-  GetComplianceSummaryByConfigRuleResponse'
-    { _gcsbcrrsComplianceSummary = Nothing
-    , _gcsbcrrsResponseStatus = pResponseStatus_
-    }
-
+getComplianceSummaryByConfigRuleResponse
+  pResponseStatus_
+  = GetComplianceSummaryByConfigRuleResponse'{_gcsbcrrsComplianceSummary
+                                                = Nothing,
+                                              _gcsbcrrsResponseStatus =
+                                                pResponseStatus_}
 
 -- | The number of AWS Config rules that are compliant and the number that are noncompliant, up to a maximum of 25 for each.
 gcsbcrrsComplianceSummary :: Lens' GetComplianceSummaryByConfigRuleResponse (Maybe ComplianceSummary)

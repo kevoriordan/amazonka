@@ -52,15 +52,14 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'searchProducts' smart constructor.
-data SearchProducts = SearchProducts'
-  { _spFilters        :: !(Maybe (Map ProductViewFilterBy [Text]))
-  , _spSortOrder      :: !(Maybe SortOrder)
-  , _spAcceptLanguage :: !(Maybe Text)
-  , _spPageToken      :: !(Maybe Text)
-  , _spPageSize       :: !(Maybe Nat)
-  , _spSortBy         :: !(Maybe ProductViewSortBy)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProducts = SearchProducts'{_spFilters ::
+                                      !(Maybe (Map ProductViewFilterBy [Text])),
+                                      _spSortOrder :: !(Maybe SortOrder),
+                                      _spAcceptLanguage :: !(Maybe Text),
+                                      _spPageToken :: !(Maybe Text),
+                                      _spPageSize :: !(Maybe Nat),
+                                      _spSortBy :: !(Maybe ProductViewSortBy)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchProducts' with the minimum fields required to make a request.
 --
@@ -79,16 +78,11 @@ data SearchProducts = SearchProducts'
 -- * 'spSortBy' - The sort field. If no value is specified, the results are not sorted.
 searchProducts
     :: SearchProducts
-searchProducts =
-  SearchProducts'
-    { _spFilters = Nothing
-    , _spSortOrder = Nothing
-    , _spAcceptLanguage = Nothing
-    , _spPageToken = Nothing
-    , _spPageSize = Nothing
-    , _spSortBy = Nothing
-    }
-
+searchProducts
+  = SearchProducts'{_spFilters = Nothing,
+                    _spSortOrder = Nothing, _spAcceptLanguage = Nothing,
+                    _spPageToken = Nothing, _spPageSize = Nothing,
+                    _spSortBy = Nothing}
 
 -- | The search filters. If no search filters are specified, the output includes all products to which the caller has access.
 spFilters :: Lens' SearchProducts (HashMap ProductViewFilterBy [Text])
@@ -158,13 +152,21 @@ instance ToQuery SearchProducts where
         toQuery = const mempty
 
 -- | /See:/ 'searchProductsResponse' smart constructor.
-data SearchProductsResponse = SearchProductsResponse'
-  { _sprsNextPageToken :: !(Maybe Text)
-  , _sprsProductViewAggregations :: !(Maybe (Map Text [ProductViewAggregationValue]))
-  , _sprsProductViewSummaries :: !(Maybe [ProductViewSummary])
-  , _sprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProductsResponse = SearchProductsResponse'{_sprsNextPageToken
+                                                      :: !(Maybe Text),
+                                                      _sprsProductViewAggregations
+                                                      ::
+                                                      !(Maybe
+                                                          (Map Text
+                                                             [ProductViewAggregationValue])),
+                                                      _sprsProductViewSummaries
+                                                      ::
+                                                      !(Maybe
+                                                          [ProductViewSummary]),
+                                                      _sprsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'SearchProductsResponse' with the minimum fields required to make a request.
 --
@@ -180,14 +182,12 @@ data SearchProductsResponse = SearchProductsResponse'
 searchProductsResponse
     :: Int -- ^ 'sprsResponseStatus'
     -> SearchProductsResponse
-searchProductsResponse pResponseStatus_ =
-  SearchProductsResponse'
-    { _sprsNextPageToken = Nothing
-    , _sprsProductViewAggregations = Nothing
-    , _sprsProductViewSummaries = Nothing
-    , _sprsResponseStatus = pResponseStatus_
-    }
-
+searchProductsResponse pResponseStatus_
+  = SearchProductsResponse'{_sprsNextPageToken =
+                              Nothing,
+                            _sprsProductViewAggregations = Nothing,
+                            _sprsProductViewSummaries = Nothing,
+                            _sprsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 sprsNextPageToken :: Lens' SearchProductsResponse (Maybe Text)

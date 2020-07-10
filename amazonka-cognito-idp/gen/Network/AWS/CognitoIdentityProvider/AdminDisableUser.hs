@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disables the specified user as an administrator. Works on any user.
+-- Disables the specified user.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminDisableUser
     (
@@ -51,11 +51,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'adminDisableUser' smart constructor.
-data AdminDisableUser = AdminDisableUser'
-  { _aduUserPoolId :: !Text
-  , _aduUsername   :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminDisableUser = AdminDisableUser'{_aduUserPoolId
+                                          :: !Text,
+                                          _aduUsername :: !(Sensitive Text)}
+                          deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminDisableUser' with the minimum fields required to make a request.
 --
@@ -68,10 +67,9 @@ adminDisableUser
     :: Text -- ^ 'aduUserPoolId'
     -> Text -- ^ 'aduUsername'
     -> AdminDisableUser
-adminDisableUser pUserPoolId_ pUsername_ =
-  AdminDisableUser'
-    {_aduUserPoolId = pUserPoolId_, _aduUsername = _Sensitive # pUsername_}
-
+adminDisableUser pUserPoolId_ pUsername_
+  = AdminDisableUser'{_aduUserPoolId = pUserPoolId_,
+                      _aduUsername = _Sensitive # pUsername_}
 
 -- | The user pool ID for the user pool where you want to disable the user.
 aduUserPoolId :: Lens' AdminDisableUser Text
@@ -121,10 +119,10 @@ instance ToQuery AdminDisableUser where
 --
 --
 -- /See:/ 'adminDisableUserResponse' smart constructor.
-newtype AdminDisableUserResponse = AdminDisableUserResponse'
-  { _adursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AdminDisableUserResponse = AdminDisableUserResponse'{_adursResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AdminDisableUserResponse' with the minimum fields required to make a request.
 --
@@ -134,9 +132,9 @@ newtype AdminDisableUserResponse = AdminDisableUserResponse'
 adminDisableUserResponse
     :: Int -- ^ 'adursResponseStatus'
     -> AdminDisableUserResponse
-adminDisableUserResponse pResponseStatus_ =
-  AdminDisableUserResponse' {_adursResponseStatus = pResponseStatus_}
-
+adminDisableUserResponse pResponseStatus_
+  = AdminDisableUserResponse'{_adursResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 adursResponseStatus :: Lens' AdminDisableUserResponse Int

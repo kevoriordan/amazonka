@@ -48,12 +48,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createSubscriptionDefinitionVersion' smart constructor.
-data CreateSubscriptionDefinitionVersion = CreateSubscriptionDefinitionVersion'
-  { _csdvAmznClientToken          :: !(Maybe Text)
-  , _csdvSubscriptions            :: !(Maybe [Subscription])
-  , _csdvSubscriptionDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSubscriptionDefinitionVersion = CreateSubscriptionDefinitionVersion'{_csdvAmznClientToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _csdvSubscriptions
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Subscription]),
+                                                                                _csdvSubscriptionDefinitionId
+                                                                                ::
+                                                                                !Text}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'CreateSubscriptionDefinitionVersion' with the minimum fields required to make a request.
 --
@@ -67,13 +74,13 @@ data CreateSubscriptionDefinitionVersion = CreateSubscriptionDefinitionVersion'
 createSubscriptionDefinitionVersion
     :: Text -- ^ 'csdvSubscriptionDefinitionId'
     -> CreateSubscriptionDefinitionVersion
-createSubscriptionDefinitionVersion pSubscriptionDefinitionId_ =
-  CreateSubscriptionDefinitionVersion'
-    { _csdvAmznClientToken = Nothing
-    , _csdvSubscriptions = Nothing
-    , _csdvSubscriptionDefinitionId = pSubscriptionDefinitionId_
-    }
-
+createSubscriptionDefinitionVersion
+  pSubscriptionDefinitionId_
+  = CreateSubscriptionDefinitionVersion'{_csdvAmznClientToken
+                                           = Nothing,
+                                         _csdvSubscriptions = Nothing,
+                                         _csdvSubscriptionDefinitionId =
+                                           pSubscriptionDefinitionId_}
 
 -- | A client token used to correlate requests and responses.
 csdvAmznClientToken :: Lens' CreateSubscriptionDefinitionVersion (Maybe Text)
@@ -136,14 +143,28 @@ instance ToQuery CreateSubscriptionDefinitionVersion
         toQuery = const mempty
 
 -- | /See:/ 'createSubscriptionDefinitionVersionResponse' smart constructor.
-data CreateSubscriptionDefinitionVersionResponse = CreateSubscriptionDefinitionVersionResponse'
-  { _csdvrsARN               :: !(Maybe Text)
-  , _csdvrsCreationTimestamp :: !(Maybe Text)
-  , _csdvrsVersion           :: !(Maybe Text)
-  , _csdvrsId                :: !(Maybe Text)
-  , _csdvrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSubscriptionDefinitionVersionResponse = CreateSubscriptionDefinitionVersionResponse'{_csdvrsARN
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _csdvrsCreationTimestamp
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _csdvrsVersion
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _csdvrsId
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _csdvrsResponseStatus
+                                                                                                ::
+                                                                                                !Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'CreateSubscriptionDefinitionVersionResponse' with the minimum fields required to make a request.
 --
@@ -153,23 +174,24 @@ data CreateSubscriptionDefinitionVersionResponse = CreateSubscriptionDefinitionV
 --
 -- * 'csdvrsCreationTimestamp' - The time, in milliseconds since the epoch, when the version was created.
 --
--- * 'csdvrsVersion' - The unique ID of the version.
+-- * 'csdvrsVersion' - The ID of the version.
 --
--- * 'csdvrsId' - The ID of the version.
+-- * 'csdvrsId' - The ID of the parent definition that the version is associated with.
 --
 -- * 'csdvrsResponseStatus' - -- | The response status code.
 createSubscriptionDefinitionVersionResponse
     :: Int -- ^ 'csdvrsResponseStatus'
     -> CreateSubscriptionDefinitionVersionResponse
-createSubscriptionDefinitionVersionResponse pResponseStatus_ =
-  CreateSubscriptionDefinitionVersionResponse'
-    { _csdvrsARN = Nothing
-    , _csdvrsCreationTimestamp = Nothing
-    , _csdvrsVersion = Nothing
-    , _csdvrsId = Nothing
-    , _csdvrsResponseStatus = pResponseStatus_
-    }
-
+createSubscriptionDefinitionVersionResponse
+  pResponseStatus_
+  = CreateSubscriptionDefinitionVersionResponse'{_csdvrsARN
+                                                   = Nothing,
+                                                 _csdvrsCreationTimestamp =
+                                                   Nothing,
+                                                 _csdvrsVersion = Nothing,
+                                                 _csdvrsId = Nothing,
+                                                 _csdvrsResponseStatus =
+                                                   pResponseStatus_}
 
 -- | The ARN of the version.
 csdvrsARN :: Lens' CreateSubscriptionDefinitionVersionResponse (Maybe Text)
@@ -179,11 +201,11 @@ csdvrsARN = lens _csdvrsARN (\ s a -> s{_csdvrsARN = a})
 csdvrsCreationTimestamp :: Lens' CreateSubscriptionDefinitionVersionResponse (Maybe Text)
 csdvrsCreationTimestamp = lens _csdvrsCreationTimestamp (\ s a -> s{_csdvrsCreationTimestamp = a})
 
--- | The unique ID of the version.
+-- | The ID of the version.
 csdvrsVersion :: Lens' CreateSubscriptionDefinitionVersionResponse (Maybe Text)
 csdvrsVersion = lens _csdvrsVersion (\ s a -> s{_csdvrsVersion = a})
 
--- | The ID of the version.
+-- | The ID of the parent definition that the version is associated with.
 csdvrsId :: Lens' CreateSubscriptionDefinitionVersionResponse (Maybe Text)
 csdvrsId = lens _csdvrsId (\ s a -> s{_csdvrsId = a})
 

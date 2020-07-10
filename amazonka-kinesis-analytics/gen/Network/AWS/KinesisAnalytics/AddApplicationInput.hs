@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a streaming source to your Amazon Kinesis application. For conceptual information, see <http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html Configuring Application Input> .
+-- Adds a streaming source to your Amazon Kinesis application. For conceptual information, see <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html Configuring Application Input> . 
 --
 --
--- You can add a streaming source either when you create an application or you can use this operation to add a streaming source after you create an application. For more information, see 'CreateApplication' .
+-- You can add a streaming source either when you create an application or you can use this operation to add a streaming source after you create an application. For more information, see <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_CreateApplication.html CreateApplication> .
 --
--- Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the 'DescribeApplication' operation to find the current application version.
+-- Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to find the current application version. 
 --
 -- This operation requires permissions to perform the @kinesisanalytics:AddApplicationInput@ action.
 --
@@ -51,17 +51,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'addApplicationInput' smart constructor.
-data AddApplicationInput = AddApplicationInput'
-  { _aaiApplicationName             :: !Text
-  , _aaiCurrentApplicationVersionId :: !Nat
-  , _aaiInput                       :: !Input
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddApplicationInput = AddApplicationInput'{_aaiApplicationName
+                                                :: !Text,
+                                                _aaiCurrentApplicationVersionId
+                                                :: !Nat,
+                                                _aaiInput :: !Input}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddApplicationInput' with the minimum fields required to make a request.
 --
@@ -69,31 +69,31 @@ data AddApplicationInput = AddApplicationInput'
 --
 -- * 'aaiApplicationName' - Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
 --
--- * 'aaiCurrentApplicationVersionId' - Current version of your Amazon Kinesis Analytics application. You can use the 'DescribeApplication' operation to find the current application version.
+-- * 'aaiCurrentApplicationVersionId' - Current version of your Amazon Kinesis Analytics application. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to find the current application version.
 --
--- * 'aaiInput' - The 'Input' to add.
+-- * 'aaiInput' - The <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html Input> to add.
 addApplicationInput
     :: Text -- ^ 'aaiApplicationName'
     -> Natural -- ^ 'aaiCurrentApplicationVersionId'
     -> Input -- ^ 'aaiInput'
     -> AddApplicationInput
-addApplicationInput pApplicationName_ pCurrentApplicationVersionId_ pInput_ =
-  AddApplicationInput'
-    { _aaiApplicationName = pApplicationName_
-    , _aaiCurrentApplicationVersionId = _Nat # pCurrentApplicationVersionId_
-    , _aaiInput = pInput_
-    }
-
+addApplicationInput pApplicationName_
+  pCurrentApplicationVersionId_ pInput_
+  = AddApplicationInput'{_aaiApplicationName =
+                           pApplicationName_,
+                         _aaiCurrentApplicationVersionId =
+                           _Nat # pCurrentApplicationVersionId_,
+                         _aaiInput = pInput_}
 
 -- | Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
 aaiApplicationName :: Lens' AddApplicationInput Text
 aaiApplicationName = lens _aaiApplicationName (\ s a -> s{_aaiApplicationName = a})
 
--- | Current version of your Amazon Kinesis Analytics application. You can use the 'DescribeApplication' operation to find the current application version.
+-- | Current version of your Amazon Kinesis Analytics application. You can use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation to find the current application version.
 aaiCurrentApplicationVersionId :: Lens' AddApplicationInput Natural
 aaiCurrentApplicationVersionId = lens _aaiCurrentApplicationVersionId (\ s a -> s{_aaiCurrentApplicationVersionId = a}) . _Nat
 
--- | The 'Input' to add.
+-- | The <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html Input> to add.
 aaiInput :: Lens' AddApplicationInput Input
 aaiInput = lens _aaiInput (\ s a -> s{_aaiInput = a})
 
@@ -136,15 +136,15 @@ instance ToPath AddApplicationInput where
 instance ToQuery AddApplicationInput where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'addApplicationInputResponse' smart constructor.
-newtype AddApplicationInputResponse = AddApplicationInputResponse'
-  { _aairsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddApplicationInputResponse = AddApplicationInputResponse'{_aairsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'AddApplicationInputResponse' with the minimum fields required to make a request.
 --
@@ -154,9 +154,9 @@ newtype AddApplicationInputResponse = AddApplicationInputResponse'
 addApplicationInputResponse
     :: Int -- ^ 'aairsResponseStatus'
     -> AddApplicationInputResponse
-addApplicationInputResponse pResponseStatus_ =
-  AddApplicationInputResponse' {_aairsResponseStatus = pResponseStatus_}
-
+addApplicationInputResponse pResponseStatus_
+  = AddApplicationInputResponse'{_aairsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 aairsResponseStatus :: Lens' AddApplicationInputResponse Int

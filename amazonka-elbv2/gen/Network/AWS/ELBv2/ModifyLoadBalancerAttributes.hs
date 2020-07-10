@@ -48,11 +48,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyLoadBalancerAttributes' smart constructor.
-data ModifyLoadBalancerAttributes = ModifyLoadBalancerAttributes'
-  { _mlbaLoadBalancerARN :: !Text
-  , _mlbaAttributes      :: ![LoadBalancerAttribute]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyLoadBalancerAttributes = ModifyLoadBalancerAttributes'{_mlbaLoadBalancerARN
+                                                                  :: !Text,
+                                                                  _mlbaAttributes
+                                                                  ::
+                                                                  ![LoadBalancerAttribute]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ModifyLoadBalancerAttributes' with the minimum fields required to make a request.
 --
@@ -64,10 +66,10 @@ data ModifyLoadBalancerAttributes = ModifyLoadBalancerAttributes'
 modifyLoadBalancerAttributes
     :: Text -- ^ 'mlbaLoadBalancerARN'
     -> ModifyLoadBalancerAttributes
-modifyLoadBalancerAttributes pLoadBalancerARN_ =
-  ModifyLoadBalancerAttributes'
-    {_mlbaLoadBalancerARN = pLoadBalancerARN_, _mlbaAttributes = mempty}
-
+modifyLoadBalancerAttributes pLoadBalancerARN_
+  = ModifyLoadBalancerAttributes'{_mlbaLoadBalancerARN
+                                    = pLoadBalancerARN_,
+                                  _mlbaAttributes = mempty}
 
 -- | The Amazon Resource Name (ARN) of the load balancer.
 mlbaLoadBalancerARN :: Lens' ModifyLoadBalancerAttributes Text
@@ -111,11 +113,15 @@ instance ToQuery ModifyLoadBalancerAttributes where
                "Attributes" =: toQueryList "member" _mlbaAttributes]
 
 -- | /See:/ 'modifyLoadBalancerAttributesResponse' smart constructor.
-data ModifyLoadBalancerAttributesResponse = ModifyLoadBalancerAttributesResponse'
-  { _mlbarsAttributes     :: !(Maybe [LoadBalancerAttribute])
-  , _mlbarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyLoadBalancerAttributesResponse = ModifyLoadBalancerAttributesResponse'{_mlbarsAttributes
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [LoadBalancerAttribute]),
+                                                                                  _mlbarsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ModifyLoadBalancerAttributesResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +133,11 @@ data ModifyLoadBalancerAttributesResponse = ModifyLoadBalancerAttributesResponse
 modifyLoadBalancerAttributesResponse
     :: Int -- ^ 'mlbarsResponseStatus'
     -> ModifyLoadBalancerAttributesResponse
-modifyLoadBalancerAttributesResponse pResponseStatus_ =
-  ModifyLoadBalancerAttributesResponse'
-    {_mlbarsAttributes = Nothing, _mlbarsResponseStatus = pResponseStatus_}
-
+modifyLoadBalancerAttributesResponse pResponseStatus_
+  = ModifyLoadBalancerAttributesResponse'{_mlbarsAttributes
+                                            = Nothing,
+                                          _mlbarsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Information about the load balancer attributes.
 mlbarsAttributes :: Lens' ModifyLoadBalancerAttributesResponse [LoadBalancerAttribute]

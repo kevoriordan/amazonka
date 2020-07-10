@@ -46,12 +46,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'removeFacetFromObject' smart constructor.
-data RemoveFacetFromObject = RemoveFacetFromObject'
-  { _rffoDirectoryARN    :: !Text
-  , _rffoSchemaFacet     :: !SchemaFacet
-  , _rffoObjectReference :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveFacetFromObject = RemoveFacetFromObject'{_rffoDirectoryARN
+                                                    :: !Text,
+                                                    _rffoSchemaFacet ::
+                                                    !SchemaFacet,
+                                                    _rffoObjectReference ::
+                                                    !ObjectReference}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RemoveFacetFromObject' with the minimum fields required to make a request.
 --
@@ -67,13 +69,12 @@ removeFacetFromObject
     -> SchemaFacet -- ^ 'rffoSchemaFacet'
     -> ObjectReference -- ^ 'rffoObjectReference'
     -> RemoveFacetFromObject
-removeFacetFromObject pDirectoryARN_ pSchemaFacet_ pObjectReference_ =
-  RemoveFacetFromObject'
-    { _rffoDirectoryARN = pDirectoryARN_
-    , _rffoSchemaFacet = pSchemaFacet_
-    , _rffoObjectReference = pObjectReference_
-    }
-
+removeFacetFromObject pDirectoryARN_ pSchemaFacet_
+  pObjectReference_
+  = RemoveFacetFromObject'{_rffoDirectoryARN =
+                             pDirectoryARN_,
+                           _rffoSchemaFacet = pSchemaFacet_,
+                           _rffoObjectReference = pObjectReference_}
 
 -- | The ARN of the directory in which the object resides.
 rffoDirectoryARN :: Lens' RemoveFacetFromObject Text
@@ -122,10 +123,10 @@ instance ToQuery RemoveFacetFromObject where
         toQuery = const mempty
 
 -- | /See:/ 'removeFacetFromObjectResponse' smart constructor.
-newtype RemoveFacetFromObjectResponse = RemoveFacetFromObjectResponse'
-  { _rfforsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RemoveFacetFromObjectResponse = RemoveFacetFromObjectResponse'{_rfforsResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'RemoveFacetFromObjectResponse' with the minimum fields required to make a request.
 --
@@ -135,9 +136,9 @@ newtype RemoveFacetFromObjectResponse = RemoveFacetFromObjectResponse'
 removeFacetFromObjectResponse
     :: Int -- ^ 'rfforsResponseStatus'
     -> RemoveFacetFromObjectResponse
-removeFacetFromObjectResponse pResponseStatus_ =
-  RemoveFacetFromObjectResponse' {_rfforsResponseStatus = pResponseStatus_}
-
+removeFacetFromObjectResponse pResponseStatus_
+  = RemoveFacetFromObjectResponse'{_rfforsResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 rfforsResponseStatus :: Lens' RemoveFacetFromObjectResponse Int

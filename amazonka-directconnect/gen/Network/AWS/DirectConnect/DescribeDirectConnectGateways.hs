@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of direct connect gateways in your account. Deleted direct connect gateways are not returned. You can provide a direct connect gateway ID in the request to return information about the specific direct connect gateway only. Otherwise, if a direct connect gateway ID is not provided, information about all of your direct connect gateways is returned.
+-- Lists all your Direct Connect gateways or only the specified Direct Connect gateway. Deleted Direct Connect gateways are not returned.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DirectConnect.DescribeDirectConnectGateways
     (
     -- * Creating a Request
@@ -43,52 +45,62 @@ module Network.AWS.DirectConnect.DescribeDirectConnectGateways
 import Network.AWS.DirectConnect.Types
 import Network.AWS.DirectConnect.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the DescribeDirectConnectGateways operation.
---
---
---
--- /See:/ 'describeDirectConnectGateways' smart constructor.
-data DescribeDirectConnectGateways = DescribeDirectConnectGateways'
-  { _ddcgDirectConnectGatewayId :: !(Maybe Text)
-  , _ddcgNextToken              :: !(Maybe Text)
-  , _ddcgMaxResults             :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeDirectConnectGateways' smart constructor.
+data DescribeDirectConnectGateways = DescribeDirectConnectGateways'{_ddcgDirectConnectGatewayId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _ddcgNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _ddcgMaxResults
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Int)}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeDirectConnectGateways' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddcgDirectConnectGatewayId' - The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+-- * 'ddcgDirectConnectGatewayId' - The ID of the Direct Connect gateway.
 --
--- * 'ddcgNextToken' - The token provided in the previous describe result to retrieve the next page of the result. Default: None
+-- * 'ddcgNextToken' - The token provided in the previous call to retrieve the next page.
 --
--- * 'ddcgMaxResults' - The maximum number of direct connect gateways to return per page. Example: 15 Default: None
+-- * 'ddcgMaxResults' - The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned @nextToken@ value. If @MaxResults@ is given a value larger than 100, only 100 results are returned.
 describeDirectConnectGateways
     :: DescribeDirectConnectGateways
-describeDirectConnectGateways =
-  DescribeDirectConnectGateways'
-    { _ddcgDirectConnectGatewayId = Nothing
-    , _ddcgNextToken = Nothing
-    , _ddcgMaxResults = Nothing
-    }
+describeDirectConnectGateways
+  = DescribeDirectConnectGateways'{_ddcgDirectConnectGatewayId
+                                     = Nothing,
+                                   _ddcgNextToken = Nothing,
+                                   _ddcgMaxResults = Nothing}
 
-
--- | The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+-- | The ID of the Direct Connect gateway.
 ddcgDirectConnectGatewayId :: Lens' DescribeDirectConnectGateways (Maybe Text)
 ddcgDirectConnectGatewayId = lens _ddcgDirectConnectGatewayId (\ s a -> s{_ddcgDirectConnectGatewayId = a})
 
--- | The token provided in the previous describe result to retrieve the next page of the result. Default: None
+-- | The token provided in the previous call to retrieve the next page.
 ddcgNextToken :: Lens' DescribeDirectConnectGateways (Maybe Text)
 ddcgNextToken = lens _ddcgNextToken (\ s a -> s{_ddcgNextToken = a})
 
--- | The maximum number of direct connect gateways to return per page. Example: 15 Default: None
+-- | The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned @nextToken@ value. If @MaxResults@ is given a value larger than 100, only 100 results are returned.
 ddcgMaxResults :: Lens' DescribeDirectConnectGateways (Maybe Int)
 ddcgMaxResults = lens _ddcgMaxResults (\ s a -> s{_ddcgMaxResults = a})
+
+instance AWSPager DescribeDirectConnectGateways where
+        page rq rs
+          | stop (rs ^. ddcgrsNextToken) = Nothing
+          | stop (rs ^. ddcgrsDirectConnectGateways) = Nothing
+          | otherwise =
+            Just $ rq & ddcgNextToken .~ rs ^. ddcgrsNextToken
 
 instance AWSRequest DescribeDirectConnectGateways
          where
@@ -133,43 +145,46 @@ instance ToPath DescribeDirectConnectGateways where
 instance ToQuery DescribeDirectConnectGateways where
         toQuery = const mempty
 
--- | Container for the response from the DescribeDirectConnectGateways API call
---
---
---
--- /See:/ 'describeDirectConnectGatewaysResponse' smart constructor.
-data DescribeDirectConnectGatewaysResponse = DescribeDirectConnectGatewaysResponse'
-  { _ddcgrsDirectConnectGateways :: !(Maybe [DirectConnectGateway])
-  , _ddcgrsNextToken             :: !(Maybe Text)
-  , _ddcgrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeDirectConnectGatewaysResponse' smart constructor.
+data DescribeDirectConnectGatewaysResponse = DescribeDirectConnectGatewaysResponse'{_ddcgrsDirectConnectGateways
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [DirectConnectGateway]),
+                                                                                    _ddcgrsNextToken
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _ddcgrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeDirectConnectGatewaysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddcgrsDirectConnectGateways' - Information about the direct connect gateways.
+-- * 'ddcgrsDirectConnectGateways' - The Direct Connect gateways.
 --
--- * 'ddcgrsNextToken' - Undocumented member.
+-- * 'ddcgrsNextToken' - The token to retrieve the next page.
 --
 -- * 'ddcgrsResponseStatus' - -- | The response status code.
 describeDirectConnectGatewaysResponse
     :: Int -- ^ 'ddcgrsResponseStatus'
     -> DescribeDirectConnectGatewaysResponse
-describeDirectConnectGatewaysResponse pResponseStatus_ =
-  DescribeDirectConnectGatewaysResponse'
-    { _ddcgrsDirectConnectGateways = Nothing
-    , _ddcgrsNextToken = Nothing
-    , _ddcgrsResponseStatus = pResponseStatus_
-    }
+describeDirectConnectGatewaysResponse
+  pResponseStatus_
+  = DescribeDirectConnectGatewaysResponse'{_ddcgrsDirectConnectGateways
+                                             = Nothing,
+                                           _ddcgrsNextToken = Nothing,
+                                           _ddcgrsResponseStatus =
+                                             pResponseStatus_}
 
-
--- | Information about the direct connect gateways.
+-- | The Direct Connect gateways.
 ddcgrsDirectConnectGateways :: Lens' DescribeDirectConnectGatewaysResponse [DirectConnectGateway]
 ddcgrsDirectConnectGateways = lens _ddcgrsDirectConnectGateways (\ s a -> s{_ddcgrsDirectConnectGateways = a}) . _Default . _Coerce
 
--- | Undocumented member.
+-- | The token to retrieve the next page.
 ddcgrsNextToken :: Lens' DescribeDirectConnectGatewaysResponse (Maybe Text)
 ddcgrsNextToken = lens _ddcgrsNextToken (\ s a -> s{_ddcgrsNextToken = a})
 

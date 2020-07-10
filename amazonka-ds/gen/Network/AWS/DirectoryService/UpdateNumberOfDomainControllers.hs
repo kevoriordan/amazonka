@@ -45,11 +45,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateNumberOfDomainControllers' smart constructor.
-data UpdateNumberOfDomainControllers = UpdateNumberOfDomainControllers'
-  { _unodcDirectoryId   :: !Text
-  , _unodcDesiredNumber :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateNumberOfDomainControllers = UpdateNumberOfDomainControllers'{_unodcDirectoryId
+                                                                        ::
+                                                                        !Text,
+                                                                        _unodcDesiredNumber
+                                                                        :: !Nat}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateNumberOfDomainControllers' with the minimum fields required to make a request.
 --
@@ -62,12 +64,12 @@ updateNumberOfDomainControllers
     :: Text -- ^ 'unodcDirectoryId'
     -> Natural -- ^ 'unodcDesiredNumber'
     -> UpdateNumberOfDomainControllers
-updateNumberOfDomainControllers pDirectoryId_ pDesiredNumber_ =
-  UpdateNumberOfDomainControllers'
-    { _unodcDirectoryId = pDirectoryId_
-    , _unodcDesiredNumber = _Nat # pDesiredNumber_
-    }
-
+updateNumberOfDomainControllers pDirectoryId_
+  pDesiredNumber_
+  = UpdateNumberOfDomainControllers'{_unodcDirectoryId
+                                       = pDirectoryId_,
+                                     _unodcDesiredNumber =
+                                       _Nat # pDesiredNumber_}
 
 -- | Identifier of the directory to which the domain controllers will be added or removed.
 unodcDirectoryId :: Lens' UpdateNumberOfDomainControllers Text
@@ -119,10 +121,12 @@ instance ToQuery UpdateNumberOfDomainControllers
         toQuery = const mempty
 
 -- | /See:/ 'updateNumberOfDomainControllersResponse' smart constructor.
-newtype UpdateNumberOfDomainControllersResponse = UpdateNumberOfDomainControllersResponse'
-  { _unodcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateNumberOfDomainControllersResponse = UpdateNumberOfDomainControllersResponse'{_unodcrsResponseStatus
+                                                                                           ::
+                                                                                           Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'UpdateNumberOfDomainControllersResponse' with the minimum fields required to make a request.
 --
@@ -132,10 +136,10 @@ newtype UpdateNumberOfDomainControllersResponse = UpdateNumberOfDomainController
 updateNumberOfDomainControllersResponse
     :: Int -- ^ 'unodcrsResponseStatus'
     -> UpdateNumberOfDomainControllersResponse
-updateNumberOfDomainControllersResponse pResponseStatus_ =
-  UpdateNumberOfDomainControllersResponse'
-    {_unodcrsResponseStatus = pResponseStatus_}
-
+updateNumberOfDomainControllersResponse
+  pResponseStatus_
+  = UpdateNumberOfDomainControllersResponse'{_unodcrsResponseStatus
+                                               = pResponseStatus_}
 
 -- | -- | The response status code.
 unodcrsResponseStatus :: Lens' UpdateNumberOfDomainControllersResponse Int

@@ -47,11 +47,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'forgetDevice' smart constructor.
-data ForgetDevice = ForgetDevice'
-  { _fdAccessToken :: !(Maybe (Sensitive Text))
-  , _fdDeviceKey   :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ForgetDevice = ForgetDevice'{_fdAccessToken ::
+                                  !(Maybe (Sensitive Text)),
+                                  _fdDeviceKey :: !Text}
+                      deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForgetDevice' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ data ForgetDevice = ForgetDevice'
 forgetDevice
     :: Text -- ^ 'fdDeviceKey'
     -> ForgetDevice
-forgetDevice pDeviceKey_ =
-  ForgetDevice' {_fdAccessToken = Nothing, _fdDeviceKey = pDeviceKey_}
-
+forgetDevice pDeviceKey_
+  = ForgetDevice'{_fdAccessToken = Nothing,
+                  _fdDeviceKey = pDeviceKey_}
 
 -- | The access token for the forgotten device request.
 fdAccessToken :: Lens' ForgetDevice (Maybe Text)
@@ -108,16 +107,13 @@ instance ToQuery ForgetDevice where
         toQuery = const mempty
 
 -- | /See:/ 'forgetDeviceResponse' smart constructor.
-data ForgetDeviceResponse =
-  ForgetDeviceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ForgetDeviceResponse = ForgetDeviceResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ForgetDeviceResponse' with the minimum fields required to make a request.
 --
 forgetDeviceResponse
     :: ForgetDeviceResponse
 forgetDeviceResponse = ForgetDeviceResponse'
-
 
 instance NFData ForgetDeviceResponse where

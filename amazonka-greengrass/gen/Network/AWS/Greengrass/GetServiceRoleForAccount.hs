@@ -42,17 +42,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getServiceRoleForAccount' smart constructor.
-data GetServiceRoleForAccount =
-  GetServiceRoleForAccount'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetServiceRoleForAccount = GetServiceRoleForAccount'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetServiceRoleForAccount' with the minimum fields required to make a request.
 --
 getServiceRoleForAccount
     :: GetServiceRoleForAccount
 getServiceRoleForAccount = GetServiceRoleForAccount'
-
 
 instance AWSRequest GetServiceRoleForAccount where
         type Rs GetServiceRoleForAccount =
@@ -83,12 +81,19 @@ instance ToQuery GetServiceRoleForAccount where
         toQuery = const mempty
 
 -- | /See:/ 'getServiceRoleForAccountResponse' smart constructor.
-data GetServiceRoleForAccountResponse = GetServiceRoleForAccountResponse'
-  { _gsrfarsAssociatedAt   :: !(Maybe Text)
-  , _gsrfarsRoleARN        :: !(Maybe Text)
-  , _gsrfarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetServiceRoleForAccountResponse = GetServiceRoleForAccountResponse'{_gsrfarsAssociatedAt
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gsrfarsRoleARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gsrfarsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetServiceRoleForAccountResponse' with the minimum fields required to make a request.
 --
@@ -102,13 +107,11 @@ data GetServiceRoleForAccountResponse = GetServiceRoleForAccountResponse'
 getServiceRoleForAccountResponse
     :: Int -- ^ 'gsrfarsResponseStatus'
     -> GetServiceRoleForAccountResponse
-getServiceRoleForAccountResponse pResponseStatus_ =
-  GetServiceRoleForAccountResponse'
-    { _gsrfarsAssociatedAt = Nothing
-    , _gsrfarsRoleARN = Nothing
-    , _gsrfarsResponseStatus = pResponseStatus_
-    }
-
+getServiceRoleForAccountResponse pResponseStatus_
+  = GetServiceRoleForAccountResponse'{_gsrfarsAssociatedAt
+                                        = Nothing,
+                                      _gsrfarsRoleARN = Nothing,
+                                      _gsrfarsResponseStatus = pResponseStatus_}
 
 -- | The time when the service role was associated with the account.
 gsrfarsAssociatedAt :: Lens' GetServiceRoleForAccountResponse (Maybe Text)

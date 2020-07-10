@@ -46,10 +46,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'stopConfigurationRecorder' smart constructor.
-newtype StopConfigurationRecorder = StopConfigurationRecorder'
-  { _scrConfigurationRecorderName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopConfigurationRecorder = StopConfigurationRecorder'{_scrConfigurationRecorderName
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'StopConfigurationRecorder' with the minimum fields required to make a request.
 --
@@ -59,10 +59,9 @@ newtype StopConfigurationRecorder = StopConfigurationRecorder'
 stopConfigurationRecorder
     :: Text -- ^ 'scrConfigurationRecorderName'
     -> StopConfigurationRecorder
-stopConfigurationRecorder pConfigurationRecorderName_ =
-  StopConfigurationRecorder'
-    {_scrConfigurationRecorderName = pConfigurationRecorderName_}
-
+stopConfigurationRecorder pConfigurationRecorderName_
+  = StopConfigurationRecorder'{_scrConfigurationRecorderName
+                                 = pConfigurationRecorderName_}
 
 -- | The name of the recorder object that records each configuration change made to the resources.
 scrConfigurationRecorderName :: Lens' StopConfigurationRecorder Text
@@ -104,17 +103,16 @@ instance ToQuery StopConfigurationRecorder where
         toQuery = const mempty
 
 -- | /See:/ 'stopConfigurationRecorderResponse' smart constructor.
-data StopConfigurationRecorderResponse =
-  StopConfigurationRecorderResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopConfigurationRecorderResponse = StopConfigurationRecorderResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'StopConfigurationRecorderResponse' with the minimum fields required to make a request.
 --
 stopConfigurationRecorderResponse
     :: StopConfigurationRecorderResponse
-stopConfigurationRecorderResponse = StopConfigurationRecorderResponse'
-
+stopConfigurationRecorderResponse
+  = StopConfigurationRecorderResponse'
 
 instance NFData StopConfigurationRecorderResponse
          where

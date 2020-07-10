@@ -26,11 +26,14 @@ module Network.AWS.MediaLive.CreateChannel
     , CreateChannel
     -- * Request Lenses
     , ccRequestId
+    , ccLogLevel
     , ccInputSpecification
     , ccInputAttachments
     , ccReserved
     , ccDestinations
     , ccName
+    , ccChannelClass
+    , ccTags
     , ccEncoderSettings
     , ccRoleARN
 
@@ -52,23 +55,31 @@ import Network.AWS.Response
 -- | Placeholder documentation for CreateChannel
 --
 -- /See:/ 'createChannel' smart constructor.
-data CreateChannel = CreateChannel'
-  { _ccRequestId          :: !(Maybe Text)
-  , _ccInputSpecification :: !(Maybe InputSpecification)
-  , _ccInputAttachments   :: !(Maybe [InputAttachment])
-  , _ccReserved           :: !(Maybe Text)
-  , _ccDestinations       :: !(Maybe [OutputDestination])
-  , _ccName               :: !(Maybe Text)
-  , _ccEncoderSettings    :: !(Maybe EncoderSettings)
-  , _ccRoleARN            :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateChannel = CreateChannel'{_ccRequestId ::
+                                    !(Maybe Text),
+                                    _ccLogLevel :: !(Maybe LogLevel),
+                                    _ccInputSpecification ::
+                                    !(Maybe InputSpecification),
+                                    _ccInputAttachments ::
+                                    !(Maybe [InputAttachment]),
+                                    _ccReserved :: !(Maybe Text),
+                                    _ccDestinations ::
+                                    !(Maybe [OutputDestination]),
+                                    _ccName :: !(Maybe Text),
+                                    _ccChannelClass :: !(Maybe ChannelClass),
+                                    _ccTags :: !(Maybe (Map Text Text)),
+                                    _ccEncoderSettings ::
+                                    !(Maybe EncoderSettings),
+                                    _ccRoleARN :: !(Maybe Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccRequestId' - Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
+--
+-- * 'ccLogLevel' - The log level to write to CloudWatch Logs.
 --
 -- * 'ccInputSpecification' - Specification of input for this channel (max. bitrate, resolution, codec, etc.)
 --
@@ -80,27 +91,31 @@ data CreateChannel = CreateChannel'
 --
 -- * 'ccName' - Name of channel.
 --
+-- * 'ccChannelClass' - The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+--
+-- * 'ccTags' - A collection of key-value pairs.
+--
 -- * 'ccEncoderSettings' - Undocumented member.
 --
 -- * 'ccRoleARN' - An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
 createChannel
     :: CreateChannel
-createChannel =
-  CreateChannel'
-    { _ccRequestId = Nothing
-    , _ccInputSpecification = Nothing
-    , _ccInputAttachments = Nothing
-    , _ccReserved = Nothing
-    , _ccDestinations = Nothing
-    , _ccName = Nothing
-    , _ccEncoderSettings = Nothing
-    , _ccRoleARN = Nothing
-    }
-
+createChannel
+  = CreateChannel'{_ccRequestId = Nothing,
+                   _ccLogLevel = Nothing,
+                   _ccInputSpecification = Nothing,
+                   _ccInputAttachments = Nothing, _ccReserved = Nothing,
+                   _ccDestinations = Nothing, _ccName = Nothing,
+                   _ccChannelClass = Nothing, _ccTags = Nothing,
+                   _ccEncoderSettings = Nothing, _ccRoleARN = Nothing}
 
 -- | Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.
 ccRequestId :: Lens' CreateChannel (Maybe Text)
 ccRequestId = lens _ccRequestId (\ s a -> s{_ccRequestId = a})
+
+-- | The log level to write to CloudWatch Logs.
+ccLogLevel :: Lens' CreateChannel (Maybe LogLevel)
+ccLogLevel = lens _ccLogLevel (\ s a -> s{_ccLogLevel = a})
 
 -- | Specification of input for this channel (max. bitrate, resolution, codec, etc.)
 ccInputSpecification :: Lens' CreateChannel (Maybe InputSpecification)
@@ -121,6 +136,14 @@ ccDestinations = lens _ccDestinations (\ s a -> s{_ccDestinations = a}) . _Defau
 -- | Name of channel.
 ccName :: Lens' CreateChannel (Maybe Text)
 ccName = lens _ccName (\ s a -> s{_ccName = a})
+
+-- | The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+ccChannelClass :: Lens' CreateChannel (Maybe ChannelClass)
+ccChannelClass = lens _ccChannelClass (\ s a -> s{_ccChannelClass = a})
+
+-- | A collection of key-value pairs.
+ccTags :: Lens' CreateChannel (HashMap Text Text)
+ccTags = lens _ccTags (\ s a -> s{_ccTags = a}) . _Default . _Map
 
 -- | Undocumented member.
 ccEncoderSettings :: Lens' CreateChannel (Maybe EncoderSettings)
@@ -155,11 +178,14 @@ instance ToJSON CreateChannel where
           = object
               (catMaybes
                  [("requestId" .=) <$> _ccRequestId,
+                  ("logLevel" .=) <$> _ccLogLevel,
                   ("inputSpecification" .=) <$> _ccInputSpecification,
                   ("inputAttachments" .=) <$> _ccInputAttachments,
                   ("reserved" .=) <$> _ccReserved,
                   ("destinations" .=) <$> _ccDestinations,
                   ("name" .=) <$> _ccName,
+                  ("channelClass" .=) <$> _ccChannelClass,
+                  ("tags" .=) <$> _ccTags,
                   ("encoderSettings" .=) <$> _ccEncoderSettings,
                   ("roleArn" .=) <$> _ccRoleARN])
 
@@ -172,11 +198,11 @@ instance ToQuery CreateChannel where
 -- | Placeholder documentation for CreateChannelResponse
 --
 -- /See:/ 'createChannelResponse' smart constructor.
-data CreateChannelResponse = CreateChannelResponse'
-  { _ccrsChannel        :: !(Maybe Channel)
-  , _ccrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateChannelResponse = CreateChannelResponse'{_ccrsChannel
+                                                    :: !(Maybe Channel),
+                                                    _ccrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateChannelResponse' with the minimum fields required to make a request.
 --
@@ -188,10 +214,9 @@ data CreateChannelResponse = CreateChannelResponse'
 createChannelResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CreateChannelResponse
-createChannelResponse pResponseStatus_ =
-  CreateChannelResponse'
-    {_ccrsChannel = Nothing, _ccrsResponseStatus = pResponseStatus_}
-
+createChannelResponse pResponseStatus_
+  = CreateChannelResponse'{_ccrsChannel = Nothing,
+                           _ccrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ccrsChannel :: Lens' CreateChannelResponse (Maybe Channel)

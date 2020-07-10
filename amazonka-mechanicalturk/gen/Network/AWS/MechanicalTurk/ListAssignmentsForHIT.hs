@@ -18,16 +18,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListAssignmentsForHIT@ operation retrieves completed assignments for a HIT. You can use this operation to retrieve the results for a HIT.
+-- The @ListAssignmentsForHIT@ operation retrieves completed assignments for a HIT. You can use this operation to retrieve the results for a HIT. 
 --
 --
--- You can get assignments for a HIT at any time, even if the HIT is not yet Reviewable. If a HIT requested multiple assignments, and has received some results but has not yet become Reviewable, you can still retrieve the partial results with this operation.
+-- You can get assignments for a HIT at any time, even if the HIT is not yet Reviewable. If a HIT requested multiple assignments, and has received some results but has not yet become Reviewable, you can still retrieve the partial results with this operation. 
 --
--- Use the AssignmentStatus parameter to control which set of assignments for a HIT are returned. The ListAssignmentsForHIT operation can return submitted assignments awaiting approval, or it can return assignments that have already been approved or rejected. You can set AssignmentStatus=Approved,Rejected to get assignments that have already been approved and rejected together in one result set.
+-- Use the AssignmentStatus parameter to control which set of assignments for a HIT are returned. The ListAssignmentsForHIT operation can return submitted assignments awaiting approval, or it can return assignments that have already been approved or rejected. You can set AssignmentStatus=Approved,Rejected to get assignments that have already been approved and rejected together in one result set. 
 --
--- Only the Requester who created the HIT can retrieve the assignments for that HIT.
+-- Only the Requester who created the HIT can retrieve the assignments for that HIT. 
 --
--- Results are sorted and divided into numbered pages and the operation returns a single page of results. You can use the parameters of the operation to control sorting and pagination.
+-- Results are sorted and divided into numbered pages and the operation returns a single page of results. You can use the parameters of the operation to control sorting and pagination. 
 --
 --
 -- This operation returns paginated results.
@@ -61,13 +61,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAssignmentsForHIT' smart constructor.
-data ListAssignmentsForHIT = ListAssignmentsForHIT'
-  { _lafhitAssignmentStatuses :: !(Maybe [AssignmentStatus])
-  , _lafhitNextToken          :: !(Maybe Text)
-  , _lafhitMaxResults         :: !(Maybe Nat)
-  , _lafhitHITId              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssignmentsForHIT = ListAssignmentsForHIT'{_lafhitAssignmentStatuses
+                                                    ::
+                                                    !(Maybe [AssignmentStatus]),
+                                                    _lafhitNextToken ::
+                                                    !(Maybe Text),
+                                                    _lafhitMaxResults ::
+                                                    !(Maybe Nat),
+                                                    _lafhitHITId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListAssignmentsForHIT' with the minimum fields required to make a request.
 --
@@ -83,14 +86,11 @@ data ListAssignmentsForHIT = ListAssignmentsForHIT'
 listAssignmentsForHIT
     :: Text -- ^ 'lafhitHITId'
     -> ListAssignmentsForHIT
-listAssignmentsForHIT pHITId_ =
-  ListAssignmentsForHIT'
-    { _lafhitAssignmentStatuses = Nothing
-    , _lafhitNextToken = Nothing
-    , _lafhitMaxResults = Nothing
-    , _lafhitHITId = pHITId_
-    }
-
+listAssignmentsForHIT pHITId_
+  = ListAssignmentsForHIT'{_lafhitAssignmentStatuses =
+                             Nothing,
+                           _lafhitNextToken = Nothing,
+                           _lafhitMaxResults = Nothing, _lafhitHITId = pHITId_}
 
 -- | The status of the assignments to return: Submitted | Approved | Rejected
 lafhitAssignmentStatuses :: Lens' ListAssignmentsForHIT [AssignmentStatus]
@@ -159,13 +159,22 @@ instance ToQuery ListAssignmentsForHIT where
         toQuery = const mempty
 
 -- | /See:/ 'listAssignmentsForHITResponse' smart constructor.
-data ListAssignmentsForHITResponse = ListAssignmentsForHITResponse'
-  { _lafhitrsNextToken      :: !(Maybe Text)
-  , _lafhitrsNumResults     :: !(Maybe Int)
-  , _lafhitrsAssignments    :: !(Maybe [Assignment])
-  , _lafhitrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssignmentsForHITResponse = ListAssignmentsForHITResponse'{_lafhitrsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _lafhitrsNumResults
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Int),
+                                                                    _lafhitrsAssignments
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [Assignment]),
+                                                                    _lafhitrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListAssignmentsForHITResponse' with the minimum fields required to make a request.
 --
@@ -181,14 +190,12 @@ data ListAssignmentsForHITResponse = ListAssignmentsForHITResponse'
 listAssignmentsForHITResponse
     :: Int -- ^ 'lafhitrsResponseStatus'
     -> ListAssignmentsForHITResponse
-listAssignmentsForHITResponse pResponseStatus_ =
-  ListAssignmentsForHITResponse'
-    { _lafhitrsNextToken = Nothing
-    , _lafhitrsNumResults = Nothing
-    , _lafhitrsAssignments = Nothing
-    , _lafhitrsResponseStatus = pResponseStatus_
-    }
-
+listAssignmentsForHITResponse pResponseStatus_
+  = ListAssignmentsForHITResponse'{_lafhitrsNextToken =
+                                     Nothing,
+                                   _lafhitrsNumResults = Nothing,
+                                   _lafhitrsAssignments = Nothing,
+                                   _lafhitrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 lafhitrsNextToken :: Lens' ListAssignmentsForHITResponse (Maybe Text)

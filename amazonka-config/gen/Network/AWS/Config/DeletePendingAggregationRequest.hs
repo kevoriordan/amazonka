@@ -43,11 +43,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deletePendingAggregationRequest' smart constructor.
-data DeletePendingAggregationRequest = DeletePendingAggregationRequest'
-  { _dparRequesterAccountId :: !Text
-  , _dparRequesterAWSRegion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePendingAggregationRequest = DeletePendingAggregationRequest'{_dparRequesterAccountId
+                                                                        ::
+                                                                        !Text,
+                                                                        _dparRequesterAWSRegion
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeletePendingAggregationRequest' with the minimum fields required to make a request.
 --
@@ -60,12 +63,12 @@ deletePendingAggregationRequest
     :: Text -- ^ 'dparRequesterAccountId'
     -> Text -- ^ 'dparRequesterAWSRegion'
     -> DeletePendingAggregationRequest
-deletePendingAggregationRequest pRequesterAccountId_ pRequesterAWSRegion_ =
-  DeletePendingAggregationRequest'
-    { _dparRequesterAccountId = pRequesterAccountId_
-    , _dparRequesterAWSRegion = pRequesterAWSRegion_
-    }
-
+deletePendingAggregationRequest pRequesterAccountId_
+  pRequesterAWSRegion_
+  = DeletePendingAggregationRequest'{_dparRequesterAccountId
+                                       = pRequesterAccountId_,
+                                     _dparRequesterAWSRegion =
+                                       pRequesterAWSRegion_}
 
 -- | The 12-digit account ID of the account requesting to aggregate data.
 dparRequesterAccountId :: Lens' DeletePendingAggregationRequest Text
@@ -117,18 +120,16 @@ instance ToQuery DeletePendingAggregationRequest
         toQuery = const mempty
 
 -- | /See:/ 'deletePendingAggregationRequestResponse' smart constructor.
-data DeletePendingAggregationRequestResponse =
-  DeletePendingAggregationRequestResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePendingAggregationRequestResponse = DeletePendingAggregationRequestResponse'
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DeletePendingAggregationRequestResponse' with the minimum fields required to make a request.
 --
 deletePendingAggregationRequestResponse
     :: DeletePendingAggregationRequestResponse
-deletePendingAggregationRequestResponse =
-  DeletePendingAggregationRequestResponse'
-
+deletePendingAggregationRequestResponse
+  = DeletePendingAggregationRequestResponse'
 
 instance NFData
            DeletePendingAggregationRequestResponse

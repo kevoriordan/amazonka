@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about a device instance belonging to a private device fleet.
+-- Returns information about a device instance that belongs to a private device fleet.
 --
 --
 module Network.AWS.DeviceFarm.GetDeviceInstance
@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDeviceInstance' smart constructor.
-newtype GetDeviceInstance = GetDeviceInstance'
-  { _gdiArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDeviceInstance = GetDeviceInstance'{_gdiArn
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDeviceInstance' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetDeviceInstance = GetDeviceInstance'
 getDeviceInstance
     :: Text -- ^ 'gdiArn'
     -> GetDeviceInstance
-getDeviceInstance pArn_ = GetDeviceInstance' {_gdiArn = pArn_}
-
+getDeviceInstance pArn_
+  = GetDeviceInstance'{_gdiArn = pArn_}
 
 -- | The Amazon Resource Name (ARN) of the instance you're requesting information about.
 gdiArn :: Lens' GetDeviceInstance Text
@@ -99,28 +98,31 @@ instance ToQuery GetDeviceInstance where
         toQuery = const mempty
 
 -- | /See:/ 'getDeviceInstanceResponse' smart constructor.
-data GetDeviceInstanceResponse = GetDeviceInstanceResponse'
-  { _gdirsDeviceInstance :: !(Maybe DeviceInstance)
-  , _gdirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeviceInstanceResponse = GetDeviceInstanceResponse'{_gdirsDeviceInstance
+                                                            ::
+                                                            !(Maybe
+                                                                DeviceInstance),
+                                                            _gdirsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetDeviceInstanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdirsDeviceInstance' - An object containing information about your device instance.
+-- * 'gdirsDeviceInstance' - An object that contains information about your device instance.
 --
 -- * 'gdirsResponseStatus' - -- | The response status code.
 getDeviceInstanceResponse
     :: Int -- ^ 'gdirsResponseStatus'
     -> GetDeviceInstanceResponse
-getDeviceInstanceResponse pResponseStatus_ =
-  GetDeviceInstanceResponse'
-    {_gdirsDeviceInstance = Nothing, _gdirsResponseStatus = pResponseStatus_}
+getDeviceInstanceResponse pResponseStatus_
+  = GetDeviceInstanceResponse'{_gdirsDeviceInstance =
+                                 Nothing,
+                               _gdirsResponseStatus = pResponseStatus_}
 
-
--- | An object containing information about your device instance.
+-- | An object that contains information about your device instance.
 gdirsDeviceInstance :: Lens' GetDeviceInstanceResponse (Maybe DeviceInstance)
 gdirsDeviceInstance = lens _gdirsDeviceInstance (\ s a -> s{_gdirsDeviceInstance = a})
 

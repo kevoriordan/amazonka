@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteVPCEConfiguration' smart constructor.
-newtype DeleteVPCEConfiguration = DeleteVPCEConfiguration'
-  { _dvecArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteVPCEConfiguration = DeleteVPCEConfiguration'{_dvecArn
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteVPCEConfiguration' with the minimum fields required to make a request.
 --
@@ -57,8 +57,8 @@ newtype DeleteVPCEConfiguration = DeleteVPCEConfiguration'
 deleteVPCEConfiguration
     :: Text -- ^ 'dvecArn'
     -> DeleteVPCEConfiguration
-deleteVPCEConfiguration pArn_ = DeleteVPCEConfiguration' {_dvecArn = pArn_}
-
+deleteVPCEConfiguration pArn_
+  = DeleteVPCEConfiguration'{_dvecArn = pArn_}
 
 -- | The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to delete.
 dvecArn :: Lens' DeleteVPCEConfiguration Text
@@ -99,10 +99,11 @@ instance ToQuery DeleteVPCEConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'deleteVPCEConfigurationResponse' smart constructor.
-newtype DeleteVPCEConfigurationResponse = DeleteVPCEConfigurationResponse'
-  { _dvecrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteVPCEConfigurationResponse = DeleteVPCEConfigurationResponse'{_dvecrsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteVPCEConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -112,9 +113,9 @@ newtype DeleteVPCEConfigurationResponse = DeleteVPCEConfigurationResponse'
 deleteVPCEConfigurationResponse
     :: Int -- ^ 'dvecrsResponseStatus'
     -> DeleteVPCEConfigurationResponse
-deleteVPCEConfigurationResponse pResponseStatus_ =
-  DeleteVPCEConfigurationResponse' {_dvecrsResponseStatus = pResponseStatus_}
-
+deleteVPCEConfigurationResponse pResponseStatus_
+  = DeleteVPCEConfigurationResponse'{_dvecrsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 dvecrsResponseStatus :: Lens' DeleteVPCEConfigurationResponse Int

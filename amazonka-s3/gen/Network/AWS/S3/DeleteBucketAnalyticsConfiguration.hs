@@ -19,6 +19,22 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
+--
+--
+-- To use this operation, you must have permissions to perform the @s3:PutAnalyticsConfiguration@ action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources> .
+--
+-- For information about the Amazon S3 analytics feature, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html Amazon S3 Analytics – Storage Class Analysis> . 
+--
+-- The following operations are related to @DeleteBucketAnalyticsConfiguration@ :
+--
+--     * 
+--
+--     * 
+--
+--     * 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketAnalyticsConfiguration
     (
     -- * Creating a Request
@@ -41,11 +57,14 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketAnalyticsConfiguration' smart constructor.
-data DeleteBucketAnalyticsConfiguration = DeleteBucketAnalyticsConfiguration'
-  { _dbacBucket :: !BucketName
-  , _dbacId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketAnalyticsConfiguration = DeleteBucketAnalyticsConfiguration'{_dbacBucket
+                                                                              ::
+                                                                              !BucketName,
+                                                                              _dbacId
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteBucketAnalyticsConfiguration' with the minimum fields required to make a request.
 --
@@ -53,20 +72,21 @@ data DeleteBucketAnalyticsConfiguration = DeleteBucketAnalyticsConfiguration'
 --
 -- * 'dbacBucket' - The name of the bucket from which an analytics configuration is deleted.
 --
--- * 'dbacId' - The identifier used to represent an analytics configuration.
+-- * 'dbacId' - The ID that identifies the analytics configuration.
 deleteBucketAnalyticsConfiguration
     :: BucketName -- ^ 'dbacBucket'
     -> Text -- ^ 'dbacId'
     -> DeleteBucketAnalyticsConfiguration
-deleteBucketAnalyticsConfiguration pBucket_ pId_ =
-  DeleteBucketAnalyticsConfiguration' {_dbacBucket = pBucket_, _dbacId = pId_}
-
+deleteBucketAnalyticsConfiguration pBucket_ pId_
+  = DeleteBucketAnalyticsConfiguration'{_dbacBucket =
+                                          pBucket_,
+                                        _dbacId = pId_}
 
 -- | The name of the bucket from which an analytics configuration is deleted.
 dbacBucket :: Lens' DeleteBucketAnalyticsConfiguration BucketName
 dbacBucket = lens _dbacBucket (\ s a -> s{_dbacBucket = a})
 
--- | The identifier used to represent an analytics configuration.
+-- | The ID that identifies the analytics configuration.
 dbacId :: Lens' DeleteBucketAnalyticsConfiguration Text
 dbacId = lens _dbacId (\ s a -> s{_dbacId = a})
 
@@ -101,18 +121,17 @@ instance ToQuery DeleteBucketAnalyticsConfiguration
           = mconcat ["id" =: _dbacId, "analytics"]
 
 -- | /See:/ 'deleteBucketAnalyticsConfigurationResponse' smart constructor.
-data DeleteBucketAnalyticsConfigurationResponse =
-  DeleteBucketAnalyticsConfigurationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketAnalyticsConfigurationResponse = DeleteBucketAnalyticsConfigurationResponse'
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'DeleteBucketAnalyticsConfigurationResponse' with the minimum fields required to make a request.
 --
 deleteBucketAnalyticsConfigurationResponse
     :: DeleteBucketAnalyticsConfigurationResponse
-deleteBucketAnalyticsConfigurationResponse =
-  DeleteBucketAnalyticsConfigurationResponse'
-
+deleteBucketAnalyticsConfigurationResponse
+  = DeleteBucketAnalyticsConfigurationResponse'
 
 instance NFData
            DeleteBucketAnalyticsConfigurationResponse

@@ -44,18 +44,19 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a DisableStageTransition action.
+-- | Represents the input of a @DisableStageTransition@ action.
 --
 --
 --
 -- /See:/ 'disableStageTransition' smart constructor.
-data DisableStageTransition = DisableStageTransition'
-  { _dstPipelineName   :: !Text
-  , _dstStageName      :: !Text
-  , _dstTransitionType :: !StageTransitionType
-  , _dstReason         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableStageTransition = DisableStageTransition'{_dstPipelineName
+                                                      :: !Text,
+                                                      _dstStageName :: !Text,
+                                                      _dstTransitionType ::
+                                                      !StageTransitionType,
+                                                      _dstReason :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DisableStageTransition' with the minimum fields required to make a request.
 --
@@ -65,23 +66,22 @@ data DisableStageTransition = DisableStageTransition'
 --
 -- * 'dstStageName' - The name of the stage where you want to disable the inbound or outbound transition of artifacts.
 --
--- * 'dstTransitionType' - Specifies whether artifacts will be prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).
+-- * 'dstTransitionType' - Specifies whether artifacts are prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).
 --
--- * 'dstReason' - The reason given to the user why a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.
+-- * 'dstReason' - The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.
 disableStageTransition
     :: Text -- ^ 'dstPipelineName'
     -> Text -- ^ 'dstStageName'
     -> StageTransitionType -- ^ 'dstTransitionType'
     -> Text -- ^ 'dstReason'
     -> DisableStageTransition
-disableStageTransition pPipelineName_ pStageName_ pTransitionType_ pReason_ =
-  DisableStageTransition'
-    { _dstPipelineName = pPipelineName_
-    , _dstStageName = pStageName_
-    , _dstTransitionType = pTransitionType_
-    , _dstReason = pReason_
-    }
-
+disableStageTransition pPipelineName_ pStageName_
+  pTransitionType_ pReason_
+  = DisableStageTransition'{_dstPipelineName =
+                              pPipelineName_,
+                            _dstStageName = pStageName_,
+                            _dstTransitionType = pTransitionType_,
+                            _dstReason = pReason_}
 
 -- | The name of the pipeline in which you want to disable the flow of artifacts from one stage to another.
 dstPipelineName :: Lens' DisableStageTransition Text
@@ -91,11 +91,11 @@ dstPipelineName = lens _dstPipelineName (\ s a -> s{_dstPipelineName = a})
 dstStageName :: Lens' DisableStageTransition Text
 dstStageName = lens _dstStageName (\ s a -> s{_dstStageName = a})
 
--- | Specifies whether artifacts will be prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).
+-- | Specifies whether artifacts are prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).
 dstTransitionType :: Lens' DisableStageTransition StageTransitionType
 dstTransitionType = lens _dstTransitionType (\ s a -> s{_dstTransitionType = a})
 
--- | The reason given to the user why a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.
+-- | The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.
 dstReason :: Lens' DisableStageTransition Text
 dstReason = lens _dstReason (\ s a -> s{_dstReason = a})
 
@@ -136,16 +136,15 @@ instance ToQuery DisableStageTransition where
         toQuery = const mempty
 
 -- | /See:/ 'disableStageTransitionResponse' smart constructor.
-data DisableStageTransitionResponse =
-  DisableStageTransitionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableStageTransitionResponse = DisableStageTransitionResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DisableStageTransitionResponse' with the minimum fields required to make a request.
 --
 disableStageTransitionResponse
     :: DisableStageTransitionResponse
-disableStageTransitionResponse = DisableStageTransitionResponse'
-
+disableStageTransitionResponse
+  = DisableStageTransitionResponse'
 
 instance NFData DisableStageTransitionResponse where

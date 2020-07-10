@@ -36,6 +36,7 @@ module Network.AWS.ServiceCatalog.DescribePortfolio
     -- * Response Lenses
     , dprsPortfolioDetail
     , dprsTagOptions
+    , dprsBudgets
     , dprsTags
     , dprsResponseStatus
     ) where
@@ -48,11 +49,10 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describePortfolio' smart constructor.
-data DescribePortfolio = DescribePortfolio'
-  { _desAcceptLanguage :: !(Maybe Text)
-  , _desId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePortfolio = DescribePortfolio'{_desAcceptLanguage
+                                            :: !(Maybe Text),
+                                            _desId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribePortfolio' with the minimum fields required to make a request.
 --
@@ -64,9 +64,9 @@ data DescribePortfolio = DescribePortfolio'
 describePortfolio
     :: Text -- ^ 'desId'
     -> DescribePortfolio
-describePortfolio pId_ =
-  DescribePortfolio' {_desAcceptLanguage = Nothing, _desId = pId_}
-
+describePortfolio pId_
+  = DescribePortfolio'{_desAcceptLanguage = Nothing,
+                       _desId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 desAcceptLanguage :: Lens' DescribePortfolio (Maybe Text)
@@ -85,6 +85,7 @@ instance AWSRequest DescribePortfolio where
                  DescribePortfolioResponse' <$>
                    (x .?> "PortfolioDetail") <*>
                      (x .?> "TagOptions" .!@ mempty)
+                     <*> (x .?> "Budgets" .!@ mempty)
                      <*> (x .?> "Tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
@@ -116,13 +117,22 @@ instance ToQuery DescribePortfolio where
         toQuery = const mempty
 
 -- | /See:/ 'describePortfolioResponse' smart constructor.
-data DescribePortfolioResponse = DescribePortfolioResponse'
-  { _dprsPortfolioDetail :: !(Maybe PortfolioDetail)
-  , _dprsTagOptions      :: !(Maybe [TagOptionDetail])
-  , _dprsTags            :: !(Maybe [Tag])
-  , _dprsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePortfolioResponse = DescribePortfolioResponse'{_dprsPortfolioDetail
+                                                            ::
+                                                            !(Maybe
+                                                                PortfolioDetail),
+                                                            _dprsTagOptions ::
+                                                            !(Maybe
+                                                                [TagOptionDetail]),
+                                                            _dprsBudgets ::
+                                                            !(Maybe
+                                                                [BudgetDetail]),
+                                                            _dprsTags ::
+                                                            !(Maybe [Tag]),
+                                                            _dprsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribePortfolioResponse' with the minimum fields required to make a request.
 --
@@ -132,20 +142,20 @@ data DescribePortfolioResponse = DescribePortfolioResponse'
 --
 -- * 'dprsTagOptions' - Information about the TagOptions associated with the portfolio.
 --
+-- * 'dprsBudgets' - Information about the associated budgets.
+--
 -- * 'dprsTags' - Information about the tags associated with the portfolio.
 --
 -- * 'dprsResponseStatus' - -- | The response status code.
 describePortfolioResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DescribePortfolioResponse
-describePortfolioResponse pResponseStatus_ =
-  DescribePortfolioResponse'
-    { _dprsPortfolioDetail = Nothing
-    , _dprsTagOptions = Nothing
-    , _dprsTags = Nothing
-    , _dprsResponseStatus = pResponseStatus_
-    }
-
+describePortfolioResponse pResponseStatus_
+  = DescribePortfolioResponse'{_dprsPortfolioDetail =
+                                 Nothing,
+                               _dprsTagOptions = Nothing,
+                               _dprsBudgets = Nothing, _dprsTags = Nothing,
+                               _dprsResponseStatus = pResponseStatus_}
 
 -- | Information about the portfolio.
 dprsPortfolioDetail :: Lens' DescribePortfolioResponse (Maybe PortfolioDetail)
@@ -154,6 +164,10 @@ dprsPortfolioDetail = lens _dprsPortfolioDetail (\ s a -> s{_dprsPortfolioDetail
 -- | Information about the TagOptions associated with the portfolio.
 dprsTagOptions :: Lens' DescribePortfolioResponse [TagOptionDetail]
 dprsTagOptions = lens _dprsTagOptions (\ s a -> s{_dprsTagOptions = a}) . _Default . _Coerce
+
+-- | Information about the associated budgets.
+dprsBudgets :: Lens' DescribePortfolioResponse [BudgetDetail]
+dprsBudgets = lens _dprsBudgets (\ s a -> s{_dprsBudgets = a}) . _Default . _Coerce
 
 -- | Information about the tags associated with the portfolio.
 dprsTags :: Lens' DescribePortfolioResponse [Tag]

@@ -25,7 +25,7 @@
 --
 -- After you add an entry, you can't modify it; you must either replace it, or create an entry and delete the old one.
 --
--- For more information about network ACLs, see <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html Network ACLs> in the /Amazon Virtual Private Cloud User Guide/ .
+-- For more information about network ACLs, see <https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html Network ACLs> in the /Amazon Virtual Private Cloud User Guide/ .
 --
 module Network.AWS.EC2.CreateNetworkACLEntry
     (
@@ -56,24 +56,25 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CreateNetworkAclEntry.
---
---
---
--- /See:/ 'createNetworkACLEntry' smart constructor.
-data CreateNetworkACLEntry = CreateNetworkACLEntry'
-  { _cnaeIPv6CidrBlock :: !(Maybe Text)
-  , _cnaeICMPTypeCode  :: !(Maybe ICMPTypeCode)
-  , _cnaePortRange     :: !(Maybe PortRange)
-  , _cnaeCidrBlock     :: !(Maybe Text)
-  , _cnaeDryRun        :: !(Maybe Bool)
-  , _cnaeEgress        :: !Bool
-  , _cnaeNetworkACLId  :: !Text
-  , _cnaeProtocol      :: !Text
-  , _cnaeRuleAction    :: !RuleAction
-  , _cnaeRuleNumber    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createNetworkACLEntry' smart constructor.
+data CreateNetworkACLEntry = CreateNetworkACLEntry'{_cnaeIPv6CidrBlock
+                                                    :: !(Maybe Text),
+                                                    _cnaeICMPTypeCode ::
+                                                    !(Maybe ICMPTypeCode),
+                                                    _cnaePortRange ::
+                                                    !(Maybe PortRange),
+                                                    _cnaeCidrBlock ::
+                                                    !(Maybe Text),
+                                                    _cnaeDryRun ::
+                                                    !(Maybe Bool),
+                                                    _cnaeEgress :: !Bool,
+                                                    _cnaeNetworkACLId :: !Text,
+                                                    _cnaeProtocol :: !Text,
+                                                    _cnaeRuleAction ::
+                                                    !RuleAction,
+                                                    _cnaeRuleNumber :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateNetworkACLEntry' with the minimum fields required to make a request.
 --
@@ -81,9 +82,9 @@ data CreateNetworkACLEntry = CreateNetworkACLEntry'
 --
 -- * 'cnaeIPv6CidrBlock' - The IPv6 network range to allow or deny, in CIDR notation (for example @2001:db8:1234:1a00::/64@ ).
 --
--- * 'cnaeICMPTypeCode' - ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.
+-- * 'cnaeICMPTypeCode' - ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.
 --
--- * 'cnaePortRange' - TCP or UDP protocols: The range of ports the rule applies to.
+-- * 'cnaePortRange' - TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).
 --
 -- * 'cnaeCidrBlock' - The IPv4 network range to allow or deny, in CIDR notation (for example @172.16.0.0/24@ ).
 --
@@ -93,7 +94,7 @@ data CreateNetworkACLEntry = CreateNetworkACLEntry'
 --
 -- * 'cnaeNetworkACLId' - The ID of the network ACL.
 --
--- * 'cnaeProtocol' - The protocol. A value of @-1@ or @all@ means all protocols. If you specify @all@ , @-1@ , or a protocol number other than @6@ (tcp), @17@ (udp), or @1@ (icmp), traffic on all ports is allowed, regardless of any ports or ICMP types or codes you specify. If you specify protocol @58@ (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol @58@ (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
+-- * 'cnaeProtocol' - The protocol number. A value of "-1" means all protocols. If you specify "-1" or a protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
 --
 -- * 'cnaeRuleAction' - Indicates whether to allow or deny the traffic that matches the rule.
 --
@@ -105,30 +106,27 @@ createNetworkACLEntry
     -> RuleAction -- ^ 'cnaeRuleAction'
     -> Int -- ^ 'cnaeRuleNumber'
     -> CreateNetworkACLEntry
-createNetworkACLEntry pEgress_ pNetworkACLId_ pProtocol_ pRuleAction_ pRuleNumber_ =
-  CreateNetworkACLEntry'
-    { _cnaeIPv6CidrBlock = Nothing
-    , _cnaeICMPTypeCode = Nothing
-    , _cnaePortRange = Nothing
-    , _cnaeCidrBlock = Nothing
-    , _cnaeDryRun = Nothing
-    , _cnaeEgress = pEgress_
-    , _cnaeNetworkACLId = pNetworkACLId_
-    , _cnaeProtocol = pProtocol_
-    , _cnaeRuleAction = pRuleAction_
-    , _cnaeRuleNumber = pRuleNumber_
-    }
-
+createNetworkACLEntry pEgress_ pNetworkACLId_
+  pProtocol_ pRuleAction_ pRuleNumber_
+  = CreateNetworkACLEntry'{_cnaeIPv6CidrBlock =
+                             Nothing,
+                           _cnaeICMPTypeCode = Nothing,
+                           _cnaePortRange = Nothing, _cnaeCidrBlock = Nothing,
+                           _cnaeDryRun = Nothing, _cnaeEgress = pEgress_,
+                           _cnaeNetworkACLId = pNetworkACLId_,
+                           _cnaeProtocol = pProtocol_,
+                           _cnaeRuleAction = pRuleAction_,
+                           _cnaeRuleNumber = pRuleNumber_}
 
 -- | The IPv6 network range to allow or deny, in CIDR notation (for example @2001:db8:1234:1a00::/64@ ).
 cnaeIPv6CidrBlock :: Lens' CreateNetworkACLEntry (Maybe Text)
 cnaeIPv6CidrBlock = lens _cnaeIPv6CidrBlock (\ s a -> s{_cnaeIPv6CidrBlock = a})
 
--- | ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6 CIDR block.
+-- | ICMP protocol: The ICMP or ICMPv6 type and code. Required if specifying protocol 1 (ICMP) or protocol 58 (ICMPv6) with an IPv6 CIDR block.
 cnaeICMPTypeCode :: Lens' CreateNetworkACLEntry (Maybe ICMPTypeCode)
 cnaeICMPTypeCode = lens _cnaeICMPTypeCode (\ s a -> s{_cnaeICMPTypeCode = a})
 
--- | TCP or UDP protocols: The range of ports the rule applies to.
+-- | TCP or UDP protocols: The range of ports the rule applies to. Required if specifying protocol 6 (TCP) or 17 (UDP).
 cnaePortRange :: Lens' CreateNetworkACLEntry (Maybe PortRange)
 cnaePortRange = lens _cnaePortRange (\ s a -> s{_cnaePortRange = a})
 
@@ -148,7 +146,7 @@ cnaeEgress = lens _cnaeEgress (\ s a -> s{_cnaeEgress = a})
 cnaeNetworkACLId :: Lens' CreateNetworkACLEntry Text
 cnaeNetworkACLId = lens _cnaeNetworkACLId (\ s a -> s{_cnaeNetworkACLId = a})
 
--- | The protocol. A value of @-1@ or @all@ means all protocols. If you specify @all@ , @-1@ , or a protocol number other than @6@ (tcp), @17@ (udp), or @1@ (icmp), traffic on all ports is allowed, regardless of any ports or ICMP types or codes you specify. If you specify protocol @58@ (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol @58@ (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
+-- | The protocol number. A value of "-1" means all protocols. If you specify "-1" or a protocol number other than "6" (TCP), "17" (UDP), or "1" (ICMP), traffic on all ports is allowed, regardless of any ports or ICMP types or codes that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types and codes allowed, regardless of any that you specify. If you specify protocol "58" (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP type and code.
 cnaeProtocol :: Lens' CreateNetworkACLEntry Text
 cnaeProtocol = lens _cnaeProtocol (\ s a -> s{_cnaeProtocol = a})
 
@@ -192,16 +190,15 @@ instance ToQuery CreateNetworkACLEntry where
                "RuleNumber" =: _cnaeRuleNumber]
 
 -- | /See:/ 'createNetworkACLEntryResponse' smart constructor.
-data CreateNetworkACLEntryResponse =
-  CreateNetworkACLEntryResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNetworkACLEntryResponse = CreateNetworkACLEntryResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateNetworkACLEntryResponse' with the minimum fields required to make a request.
 --
 createNetworkACLEntryResponse
     :: CreateNetworkACLEntryResponse
-createNetworkACLEntryResponse = CreateNetworkACLEntryResponse'
-
+createNetworkACLEntryResponse
+  = CreateNetworkACLEntryResponse'
 
 instance NFData CreateNetworkACLEntryResponse where

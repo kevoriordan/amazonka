@@ -27,6 +27,8 @@
 --
 -- This operation supports pagination with the use of the @NextToken@ member. If more results are available, the @NextToken@ member of the response contains a token that you pass in the next call to @ListLunaClients@ to retrieve the next set of items.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CloudHSM.ListLunaClients
     (
     -- * Creating a Request
@@ -47,15 +49,15 @@ module Network.AWS.CloudHSM.ListLunaClients
 import Network.AWS.CloudHSM.Types
 import Network.AWS.CloudHSM.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listLunaClients' smart constructor.
-newtype ListLunaClients = ListLunaClients'
-  { _llcNextToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListLunaClients = ListLunaClients'{_llcNextToken
+                                           :: Maybe Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLunaClients' with the minimum fields required to make a request.
 --
@@ -64,12 +66,19 @@ newtype ListLunaClients = ListLunaClients'
 -- * 'llcNextToken' - The @NextToken@ value from a previous call to @ListLunaClients@ . Pass null if this is the first call.
 listLunaClients
     :: ListLunaClients
-listLunaClients = ListLunaClients' {_llcNextToken = Nothing}
-
+listLunaClients
+  = ListLunaClients'{_llcNextToken = Nothing}
 
 -- | The @NextToken@ value from a previous call to @ListLunaClients@ . Pass null if this is the first call.
 llcNextToken :: Lens' ListLunaClients (Maybe Text)
 llcNextToken = lens _llcNextToken (\ s a -> s{_llcNextToken = a})
+
+instance AWSPager ListLunaClients where
+        page rq rs
+          | stop (rs ^. llcrsNextToken) = Nothing
+          | stop (rs ^. llcrsClientList) = Nothing
+          | otherwise =
+            Just $ rq & llcNextToken .~ rs ^. llcrsNextToken
 
 instance AWSRequest ListLunaClients where
         type Rs ListLunaClients = ListLunaClientsResponse
@@ -107,12 +116,14 @@ instance ToQuery ListLunaClients where
         toQuery = const mempty
 
 -- | /See:/ 'listLunaClientsResponse' smart constructor.
-data ListLunaClientsResponse = ListLunaClientsResponse'
-  { _llcrsNextToken      :: !(Maybe Text)
-  , _llcrsResponseStatus :: !Int
-  , _llcrsClientList     :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListLunaClientsResponse = ListLunaClientsResponse'{_llcrsNextToken
+                                                        :: !(Maybe Text),
+                                                        _llcrsResponseStatus ::
+                                                        !Int,
+                                                        _llcrsClientList ::
+                                                        ![Text]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListLunaClientsResponse' with the minimum fields required to make a request.
 --
@@ -126,13 +137,10 @@ data ListLunaClientsResponse = ListLunaClientsResponse'
 listLunaClientsResponse
     :: Int -- ^ 'llcrsResponseStatus'
     -> ListLunaClientsResponse
-listLunaClientsResponse pResponseStatus_ =
-  ListLunaClientsResponse'
-    { _llcrsNextToken = Nothing
-    , _llcrsResponseStatus = pResponseStatus_
-    , _llcrsClientList = mempty
-    }
-
+listLunaClientsResponse pResponseStatus_
+  = ListLunaClientsResponse'{_llcrsNextToken = Nothing,
+                             _llcrsResponseStatus = pResponseStatus_,
+                             _llcrsClientList = mempty}
 
 -- | If not null, more results are available. Pass this to @ListLunaClients@ to retrieve the next set of items.
 llcrsNextToken :: Lens' ListLunaClientsResponse (Maybe Text)

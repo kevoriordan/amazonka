@@ -50,11 +50,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeServiceAccessPolicies' smart constructor.
-data DescribeServiceAccessPolicies = DescribeServiceAccessPolicies'
-  { _dsapDeployed   :: !(Maybe Bool)
-  , _dsapDomainName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeServiceAccessPolicies = DescribeServiceAccessPolicies'{_dsapDeployed
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Bool),
+                                                                    _dsapDomainName
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeServiceAccessPolicies' with the minimum fields required to make a request.
 --
@@ -66,10 +69,10 @@ data DescribeServiceAccessPolicies = DescribeServiceAccessPolicies'
 describeServiceAccessPolicies
     :: Text -- ^ 'dsapDomainName'
     -> DescribeServiceAccessPolicies
-describeServiceAccessPolicies pDomainName_ =
-  DescribeServiceAccessPolicies'
-    {_dsapDeployed = Nothing, _dsapDomainName = pDomainName_}
-
+describeServiceAccessPolicies pDomainName_
+  = DescribeServiceAccessPolicies'{_dsapDeployed =
+                                     Nothing,
+                                   _dsapDomainName = pDomainName_}
 
 -- | Whether to display the deployed configuration (@true@ ) or include any pending changes (@false@ ). Defaults to @false@ .
 dsapDeployed :: Lens' DescribeServiceAccessPolicies (Maybe Bool)
@@ -116,11 +119,14 @@ instance ToQuery DescribeServiceAccessPolicies where
 --
 --
 -- /See:/ 'describeServiceAccessPoliciesResponse' smart constructor.
-data DescribeServiceAccessPoliciesResponse = DescribeServiceAccessPoliciesResponse'
-  { _dsaprsResponseStatus :: !Int
-  , _dsaprsAccessPolicies :: !AccessPoliciesStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeServiceAccessPoliciesResponse = DescribeServiceAccessPoliciesResponse'{_dsaprsResponseStatus
+                                                                                    ::
+                                                                                    !Int,
+                                                                                    _dsaprsAccessPolicies
+                                                                                    ::
+                                                                                    !AccessPoliciesStatus}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeServiceAccessPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +139,12 @@ describeServiceAccessPoliciesResponse
     :: Int -- ^ 'dsaprsResponseStatus'
     -> AccessPoliciesStatus -- ^ 'dsaprsAccessPolicies'
     -> DescribeServiceAccessPoliciesResponse
-describeServiceAccessPoliciesResponse pResponseStatus_ pAccessPolicies_ =
-  DescribeServiceAccessPoliciesResponse'
-    { _dsaprsResponseStatus = pResponseStatus_
-    , _dsaprsAccessPolicies = pAccessPolicies_
-    }
-
+describeServiceAccessPoliciesResponse
+  pResponseStatus_ pAccessPolicies_
+  = DescribeServiceAccessPoliciesResponse'{_dsaprsResponseStatus
+                                             = pResponseStatus_,
+                                           _dsaprsAccessPolicies =
+                                             pAccessPolicies_}
 
 -- | -- | The response status code.
 dsaprsResponseStatus :: Lens' DescribeServiceAccessPoliciesResponse Int

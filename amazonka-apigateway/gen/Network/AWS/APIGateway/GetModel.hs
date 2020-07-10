@@ -27,9 +27,9 @@ module Network.AWS.APIGateway.GetModel
       getModel
     , GetModel
     -- * Request Lenses
-    , ggFlatten
-    , ggRestAPIId
-    , ggModelName
+    , gtmdlFlatten
+    , gtmdlRestAPIId
+    , gtmdlModelName
 
     -- * Destructuring the Response
     , model
@@ -54,45 +54,40 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getModel' smart constructor.
-data GetModel = GetModel'
-  { _ggFlatten   :: !(Maybe Bool)
-  , _ggRestAPIId :: !Text
-  , _ggModelName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetModel = GetModel'{_gtmdlFlatten ::
+                          !(Maybe Bool),
+                          _gtmdlRestAPIId :: !Text, _gtmdlModelName :: !Text}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetModel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggFlatten' - A query parameter of a Boolean value to resolve (@true@ ) all external model references and returns a flattened model schema or not (@false@ ) The default is @false@ .
+-- * 'gtmdlFlatten' - A query parameter of a Boolean value to resolve (@true@ ) all external model references and returns a flattened model schema or not (@false@ ) The default is @false@ .
 --
--- * 'ggRestAPIId' - [Required] The 'RestApi' identifier under which the 'Model' exists.
+-- * 'gtmdlRestAPIId' - [Required] The 'RestApi' identifier under which the 'Model' exists.
 --
--- * 'ggModelName' - [Required] The name of the model as an identifier.
+-- * 'gtmdlModelName' - [Required] The name of the model as an identifier.
 getModel
-    :: Text -- ^ 'ggRestAPIId'
-    -> Text -- ^ 'ggModelName'
+    :: Text -- ^ 'gtmdlRestAPIId'
+    -> Text -- ^ 'gtmdlModelName'
     -> GetModel
-getModel pRestAPIId_ pModelName_ =
-  GetModel'
-    { _ggFlatten = Nothing
-    , _ggRestAPIId = pRestAPIId_
-    , _ggModelName = pModelName_
-    }
-
+getModel pRestAPIId_ pModelName_
+  = GetModel'{_gtmdlFlatten = Nothing,
+              _gtmdlRestAPIId = pRestAPIId_,
+              _gtmdlModelName = pModelName_}
 
 -- | A query parameter of a Boolean value to resolve (@true@ ) all external model references and returns a flattened model schema or not (@false@ ) The default is @false@ .
-ggFlatten :: Lens' GetModel (Maybe Bool)
-ggFlatten = lens _ggFlatten (\ s a -> s{_ggFlatten = a})
+gtmdlFlatten :: Lens' GetModel (Maybe Bool)
+gtmdlFlatten = lens _gtmdlFlatten (\ s a -> s{_gtmdlFlatten = a})
 
 -- | [Required] The 'RestApi' identifier under which the 'Model' exists.
-ggRestAPIId :: Lens' GetModel Text
-ggRestAPIId = lens _ggRestAPIId (\ s a -> s{_ggRestAPIId = a})
+gtmdlRestAPIId :: Lens' GetModel Text
+gtmdlRestAPIId = lens _gtmdlRestAPIId (\ s a -> s{_gtmdlRestAPIId = a})
 
 -- | [Required] The name of the model as an identifier.
-ggModelName :: Lens' GetModel Text
-ggModelName = lens _ggModelName (\ s a -> s{_ggModelName = a})
+gtmdlModelName :: Lens' GetModel Text
+gtmdlModelName = lens _gtmdlModelName (\ s a -> s{_gtmdlModelName = a})
 
 instance AWSRequest GetModel where
         type Rs GetModel = Model
@@ -112,9 +107,9 @@ instance ToHeaders GetModel where
 instance ToPath GetModel where
         toPath GetModel'{..}
           = mconcat
-              ["/restapis/", toBS _ggRestAPIId, "/models/",
-               toBS _ggModelName]
+              ["/restapis/", toBS _gtmdlRestAPIId, "/models/",
+               toBS _gtmdlModelName]
 
 instance ToQuery GetModel where
         toQuery GetModel'{..}
-          = mconcat ["flatten" =: _ggFlatten]
+          = mconcat ["flatten" =: _gtmdlFlatten]

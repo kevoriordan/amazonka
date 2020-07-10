@@ -11,33 +11,33 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS OpsWorks__
+-- __AWS OpsWorks__ 
 --
--- Welcome to the /AWS OpsWorks Stacks API Reference/ . This guide provides descriptions, syntax, and usage examples for AWS OpsWorks Stacks actions and data types, including common parameters and error codes.
+-- Welcome to the /AWS OpsWorks Stacks API Reference/ . This guide provides descriptions, syntax, and usage examples for AWS OpsWorks Stacks actions and data types, including common parameters and error codes. 
 --
--- AWS OpsWorks Stacks is an application management service that provides an integrated experience for overseeing the complete application lifecycle. For information about this product, go to the <http://aws.amazon.com/opsworks/ AWS OpsWorks> details page.
+-- AWS OpsWorks Stacks is an application management service that provides an integrated experience for overseeing the complete application lifecycle. For information about this product, go to the <http://aws.amazon.com/opsworks/ AWS OpsWorks> details page. 
 --
--- __SDKs and CLI__
+-- __SDKs and CLI__ 
 --
 -- The most common way to use the AWS OpsWorks Stacks API is by using the AWS Command Line Interface (CLI) or by using one of the AWS SDKs to implement applications in your preferred language. For more information, see:
 --
---     * <http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html AWS CLI>
+--     * <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html AWS CLI> 
 --
---     * <http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html AWS SDK for Java>
+--     * <https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/opsworks/AWSOpsWorksClient.html AWS SDK for Java> 
 --
---     * <http://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_OpsWorks.htm AWS SDK for .NET>
+--     * <https://docs.aws.amazon.com/sdkfornet/latest/apidocs/html/N_Amazon_OpsWorks.htm AWS SDK for .NET> 
 --
---     * <http://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.OpsWorks.OpsWorksClient.html AWS SDK for PHP 2>
+--     * <https://docs.aws.amazon.com/aws-sdk-php-2/latest/class-Aws.OpsWorks.OpsWorksClient.html AWS SDK for PHP 2> 
 --
---     * <http://docs.aws.amazon.com/sdkforruby/api/ AWS SDK for Ruby>
+--     * <http://docs.aws.amazon.com/sdkforruby/api/ AWS SDK for Ruby> 
 --
---     * <http://aws.amazon.com/documentation/sdkforjavascript/ AWS SDK for Node.js>
+--     * <http://aws.amazon.com/documentation/sdkforjavascript/ AWS SDK for Node.js> 
 --
---     * <http://docs.pythonboto.org/en/latest/ref/opsworks.html AWS SDK for Python(Boto)>
+--     * <http://docs.pythonboto.org/en/latest/ref/opsworks.html AWS SDK for Python(Boto)> 
 --
 --
 --
--- __Endpoints__
+-- __Endpoints__ 
 --
 -- AWS OpsWorks Stacks supports the following endpoints, all HTTPS. You must connect to one of the following endpoints. Stacks can only be accessed or managed within the endpoint in which they are created.
 --
@@ -73,9 +73,9 @@
 --
 --
 --
--- __Chef Versions__
+-- __Chef Versions__ 
 --
--- When you call 'CreateStack' , 'CloneStack' , or 'UpdateStack' we recommend you use the @ConfigurationManager@ parameter to specify the Chef version. The recommended and default value for Linux stacks is currently 12. Windows stacks use Chef 12.2. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-chef11.html Chef Versions> .
+-- When you call 'CreateStack' , 'CloneStack' , or 'UpdateStack' we recommend you use the @ConfigurationManager@ parameter to specify the Chef version. The recommended and default value for Linux stacks is currently 12. Windows stacks use Chef 12.2. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-chef11.html Chef Versions> .
 --
 module Network.AWS.OpsWorks
     (
@@ -115,226 +115,226 @@ module Network.AWS.OpsWorks
     -- * Operations
     -- $operations
 
-    -- ** DescribeRDSDBInstances
+    -- ** DescribeRDSDBInstances 
     , module Network.AWS.OpsWorks.DescribeRDSDBInstances
 
-    -- ** DeleteStack
+    -- ** DeleteStack 
     , module Network.AWS.OpsWorks.DeleteStack
 
-    -- ** UpdateStack
+    -- ** UpdateStack 
     , module Network.AWS.OpsWorks.UpdateStack
 
-    -- ** CreateLayer
+    -- ** CreateLayer 
     , module Network.AWS.OpsWorks.CreateLayer
 
-    -- ** SetLoadBasedAutoScaling
+    -- ** SetLoadBasedAutoScaling 
     , module Network.AWS.OpsWorks.SetLoadBasedAutoScaling
 
-    -- ** DeregisterRDSDBInstance
+    -- ** DeregisterRDSDBInstance 
     , module Network.AWS.OpsWorks.DeregisterRDSDBInstance
 
-    -- ** UnassignVolume
+    -- ** UnassignVolume 
     , module Network.AWS.OpsWorks.UnassignVolume
 
-    -- ** CreateInstance
+    -- ** CreateInstance 
     , module Network.AWS.OpsWorks.CreateInstance
 
-    -- ** DescribeLayers
+    -- ** DescribeLayers 
     , module Network.AWS.OpsWorks.DescribeLayers
 
-    -- ** RegisterElasticIP
+    -- ** RegisterElasticIP 
     , module Network.AWS.OpsWorks.RegisterElasticIP
 
-    -- ** DescribeAgentVersions
+    -- ** DescribeAgentVersions 
     , module Network.AWS.OpsWorks.DescribeAgentVersions
 
-    -- ** CreateDeployment
+    -- ** CreateDeployment 
     , module Network.AWS.OpsWorks.CreateDeployment
 
-    -- ** AssignInstance
+    -- ** AssignInstance 
     , module Network.AWS.OpsWorks.AssignInstance
 
-    -- ** DescribeStacks
+    -- ** DescribeStacks 
     , module Network.AWS.OpsWorks.DescribeStacks
 
-    -- ** DeleteInstance
+    -- ** DeleteInstance 
     , module Network.AWS.OpsWorks.DeleteInstance
 
-    -- ** UpdateInstance
+    -- ** UpdateInstance 
     , module Network.AWS.OpsWorks.UpdateInstance
 
-    -- ** DeregisterVolume
+    -- ** DeregisterVolume 
     , module Network.AWS.OpsWorks.DeregisterVolume
 
-    -- ** RebootInstance
+    -- ** RebootInstance 
     , module Network.AWS.OpsWorks.RebootInstance
 
-    -- ** DeleteApp
+    -- ** DeleteApp 
     , module Network.AWS.OpsWorks.DeleteApp
 
-    -- ** UpdateApp
+    -- ** UpdateApp 
     , module Network.AWS.OpsWorks.UpdateApp
 
-    -- ** UpdateRDSDBInstance
+    -- ** UpdateRDSDBInstance 
     , module Network.AWS.OpsWorks.UpdateRDSDBInstance
 
-    -- ** DescribeTimeBasedAutoScaling
+    -- ** DescribeTimeBasedAutoScaling 
     , module Network.AWS.OpsWorks.DescribeTimeBasedAutoScaling
 
-    -- ** StopStack
+    -- ** StopStack 
     , module Network.AWS.OpsWorks.StopStack
 
-    -- ** DescribeVolumes
+    -- ** DescribeVolumes 
     , module Network.AWS.OpsWorks.DescribeVolumes
 
-    -- ** DisassociateElasticIP
+    -- ** DisassociateElasticIP 
     , module Network.AWS.OpsWorks.DisassociateElasticIP
 
-    -- ** RegisterEcsCluster
+    -- ** RegisterEcsCluster 
     , module Network.AWS.OpsWorks.RegisterEcsCluster
 
-    -- ** StopInstance
+    -- ** StopInstance 
     , module Network.AWS.OpsWorks.StopInstance
 
-    -- ** RegisterVolume
+    -- ** RegisterVolume 
     , module Network.AWS.OpsWorks.RegisterVolume
 
-    -- ** SetTimeBasedAutoScaling
+    -- ** SetTimeBasedAutoScaling 
     , module Network.AWS.OpsWorks.SetTimeBasedAutoScaling
 
-    -- ** DescribeUserProfiles
+    -- ** DescribeUserProfiles 
     , module Network.AWS.OpsWorks.DescribeUserProfiles
 
-    -- ** AttachElasticLoadBalancer
+    -- ** AttachElasticLoadBalancer 
     , module Network.AWS.OpsWorks.AttachElasticLoadBalancer
 
-    -- ** DeregisterElasticIP
+    -- ** DeregisterElasticIP 
     , module Network.AWS.OpsWorks.DeregisterElasticIP
 
-    -- ** DeregisterEcsCluster
+    -- ** DeregisterEcsCluster 
     , module Network.AWS.OpsWorks.DeregisterEcsCluster
 
-    -- ** DescribeApps
+    -- ** DescribeApps 
     , module Network.AWS.OpsWorks.DescribeApps
 
-    -- ** UpdateMyUserProfile
+    -- ** UpdateMyUserProfile 
     , module Network.AWS.OpsWorks.UpdateMyUserProfile
 
-    -- ** DescribeStackSummary
+    -- ** DescribeStackSummary 
     , module Network.AWS.OpsWorks.DescribeStackSummary
 
-    -- ** DescribeInstances
+    -- ** DescribeInstances 
     , module Network.AWS.OpsWorks.DescribeInstances
 
-    -- ** DescribeDeployments
+    -- ** DescribeDeployments 
     , module Network.AWS.OpsWorks.DescribeDeployments
 
-    -- ** DescribeElasticIPs
+    -- ** DescribeElasticIPs 
     , module Network.AWS.OpsWorks.DescribeElasticIPs
 
-    -- ** GrantAccess
+    -- ** GrantAccess 
     , module Network.AWS.OpsWorks.GrantAccess
 
-    -- ** DeleteLayer
+    -- ** DeleteLayer 
     , module Network.AWS.OpsWorks.DeleteLayer
 
-    -- ** UpdateLayer
+    -- ** UpdateLayer 
     , module Network.AWS.OpsWorks.UpdateLayer
 
-    -- ** CreateStack
+    -- ** CreateStack 
     , module Network.AWS.OpsWorks.CreateStack
 
-    -- ** UpdateElasticIP
+    -- ** UpdateElasticIP 
     , module Network.AWS.OpsWorks.UpdateElasticIP
 
-    -- ** CreateApp
+    -- ** CreateApp 
     , module Network.AWS.OpsWorks.CreateApp
 
-    -- ** GetHostnameSuggestion
+    -- ** GetHostnameSuggestion 
     , module Network.AWS.OpsWorks.GetHostnameSuggestion
 
-    -- ** CloneStack
+    -- ** CloneStack 
     , module Network.AWS.OpsWorks.CloneStack
 
-    -- ** DescribePermissions
+    -- ** DescribePermissions 
     , module Network.AWS.OpsWorks.DescribePermissions
 
-    -- ** DetachElasticLoadBalancer
+    -- ** DetachElasticLoadBalancer 
     , module Network.AWS.OpsWorks.DetachElasticLoadBalancer
 
-    -- ** RegisterInstance
+    -- ** RegisterInstance 
     , module Network.AWS.OpsWorks.RegisterInstance
 
-    -- ** AssociateElasticIP
+    -- ** AssociateElasticIP 
     , module Network.AWS.OpsWorks.AssociateElasticIP
 
-    -- ** DescribeLoadBasedAutoScaling
+    -- ** DescribeLoadBasedAutoScaling 
     , module Network.AWS.OpsWorks.DescribeLoadBasedAutoScaling
 
-    -- ** DescribeStackProvisioningParameters
+    -- ** DescribeStackProvisioningParameters 
     , module Network.AWS.OpsWorks.DescribeStackProvisioningParameters
 
-    -- ** TagResource
+    -- ** TagResource 
     , module Network.AWS.OpsWorks.TagResource
 
-    -- ** ListTags
+    -- ** ListTags 
     , module Network.AWS.OpsWorks.ListTags
 
-    -- ** UnassignInstance
+    -- ** UnassignInstance 
     , module Network.AWS.OpsWorks.UnassignInstance
 
-    -- ** DescribeMyUserProfile
+    -- ** DescribeMyUserProfile 
     , module Network.AWS.OpsWorks.DescribeMyUserProfile
 
-    -- ** DeleteUserProfile
+    -- ** DeleteUserProfile 
     , module Network.AWS.OpsWorks.DeleteUserProfile
 
-    -- ** UpdateUserProfile
+    -- ** UpdateUserProfile 
     , module Network.AWS.OpsWorks.UpdateUserProfile
 
-    -- ** DescribeServiceErrors
+    -- ** DescribeServiceErrors 
     , module Network.AWS.OpsWorks.DescribeServiceErrors
 
-    -- ** RegisterRDSDBInstance
+    -- ** RegisterRDSDBInstance 
     , module Network.AWS.OpsWorks.RegisterRDSDBInstance
 
-    -- ** UntagResource
+    -- ** UntagResource 
     , module Network.AWS.OpsWorks.UntagResource
 
-    -- ** StartStack
+    -- ** StartStack 
     , module Network.AWS.OpsWorks.StartStack
 
-    -- ** CreateUserProfile
+    -- ** CreateUserProfile 
     , module Network.AWS.OpsWorks.CreateUserProfile
 
-    -- ** DescribeOperatingSystems
+    -- ** DescribeOperatingSystems 
     , module Network.AWS.OpsWorks.DescribeOperatingSystems
 
-    -- ** DescribeCommands
+    -- ** DescribeCommands 
     , module Network.AWS.OpsWorks.DescribeCommands
 
-    -- ** AssignVolume
+    -- ** AssignVolume 
     , module Network.AWS.OpsWorks.AssignVolume
 
-    -- ** DescribeElasticLoadBalancers
+    -- ** DescribeElasticLoadBalancers 
     , module Network.AWS.OpsWorks.DescribeElasticLoadBalancers
 
-    -- ** SetPermission
+    -- ** SetPermission 
     , module Network.AWS.OpsWorks.SetPermission
 
-    -- ** DeregisterInstance
+    -- ** DeregisterInstance 
     , module Network.AWS.OpsWorks.DeregisterInstance
 
     -- ** DescribeEcsClusters (Paginated)
     , module Network.AWS.OpsWorks.DescribeEcsClusters
 
-    -- ** DescribeRAIdArrays
+    -- ** DescribeRAIdArrays 
     , module Network.AWS.OpsWorks.DescribeRAIdArrays
 
-    -- ** UpdateVolume
+    -- ** UpdateVolume 
     , module Network.AWS.OpsWorks.UpdateVolume
 
-    -- ** StartInstance
+    -- ** StartInstance 
     , module Network.AWS.OpsWorks.StartInstance
 
     -- * Types
@@ -915,8 +915,8 @@ import Network.AWS.OpsWorks.DescribeRAIdArrays
 import Network.AWS.OpsWorks.DescribeRDSDBInstances
 import Network.AWS.OpsWorks.DescribeServiceErrors
 import Network.AWS.OpsWorks.DescribeStackProvisioningParameters
-import Network.AWS.OpsWorks.DescribeStacks
 import Network.AWS.OpsWorks.DescribeStackSummary
+import Network.AWS.OpsWorks.DescribeStacks
 import Network.AWS.OpsWorks.DescribeTimeBasedAutoScaling
 import Network.AWS.OpsWorks.DescribeUserProfiles
 import Network.AWS.OpsWorks.DescribeVolumes

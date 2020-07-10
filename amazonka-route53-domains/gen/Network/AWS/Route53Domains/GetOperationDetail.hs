@@ -49,29 +49,29 @@ import Network.AWS.Response
 import Network.AWS.Route53Domains.Types
 import Network.AWS.Route53Domains.Types.Product
 
--- | The 'GetOperationDetail' request includes the following element.
+-- | The <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> request includes the following element.
 --
 --
 --
 -- /See:/ 'getOperationDetail' smart constructor.
-newtype GetOperationDetail = GetOperationDetail'
-  { _godOperationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetOperationDetail = GetOperationDetail'{_godOperationId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetOperationDetail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'godOperationId' - The identifier for the operation for which you want to get the status. Amazon Route 53 returned the identifier in the response to the original request.
+-- * 'godOperationId' - The identifier for the operation for which you want to get the status. Route 53 returned the identifier in the response to the original request.
 getOperationDetail
     :: Text -- ^ 'godOperationId'
     -> GetOperationDetail
-getOperationDetail pOperationId_ =
-  GetOperationDetail' {_godOperationId = pOperationId_}
+getOperationDetail pOperationId_
+  = GetOperationDetail'{_godOperationId =
+                          pOperationId_}
 
-
--- | The identifier for the operation for which you want to get the status. Amazon Route 53 returned the identifier in the response to the original request.
+-- | The identifier for the operation for which you want to get the status. Route 53 returned the identifier in the response to the original request.
 godOperationId :: Lens' GetOperationDetail Text
 godOperationId = lens _godOperationId (\ s a -> s{_godOperationId = a})
 
@@ -120,16 +120,25 @@ instance ToQuery GetOperationDetail where
 --
 --
 -- /See:/ 'getOperationDetailResponse' smart constructor.
-data GetOperationDetailResponse = GetOperationDetailResponse'
-  { _godrsStatus         :: !(Maybe OperationStatus)
-  , _godrsSubmittedDate  :: !(Maybe POSIX)
-  , _godrsDomainName     :: !(Maybe Text)
-  , _godrsOperationId    :: !(Maybe Text)
-  , _godrsType           :: !(Maybe OperationType)
-  , _godrsMessage        :: !(Maybe Text)
-  , _godrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetOperationDetailResponse = GetOperationDetailResponse'{_godrsStatus
+                                                              ::
+                                                              !(Maybe
+                                                                  OperationStatus),
+                                                              _godrsSubmittedDate
+                                                              :: !(Maybe POSIX),
+                                                              _godrsDomainName
+                                                              :: !(Maybe Text),
+                                                              _godrsOperationId
+                                                              :: !(Maybe Text),
+                                                              _godrsType ::
+                                                              !(Maybe
+                                                                  OperationType),
+                                                              _godrsMessage ::
+                                                              !(Maybe Text),
+                                                              _godrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetOperationDetailResponse' with the minimum fields required to make a request.
 --
@@ -151,17 +160,13 @@ data GetOperationDetailResponse = GetOperationDetailResponse'
 getOperationDetailResponse
     :: Int -- ^ 'godrsResponseStatus'
     -> GetOperationDetailResponse
-getOperationDetailResponse pResponseStatus_ =
-  GetOperationDetailResponse'
-    { _godrsStatus = Nothing
-    , _godrsSubmittedDate = Nothing
-    , _godrsDomainName = Nothing
-    , _godrsOperationId = Nothing
-    , _godrsType = Nothing
-    , _godrsMessage = Nothing
-    , _godrsResponseStatus = pResponseStatus_
-    }
-
+getOperationDetailResponse pResponseStatus_
+  = GetOperationDetailResponse'{_godrsStatus = Nothing,
+                                _godrsSubmittedDate = Nothing,
+                                _godrsDomainName = Nothing,
+                                _godrsOperationId = Nothing,
+                                _godrsType = Nothing, _godrsMessage = Nothing,
+                                _godrsResponseStatus = pResponseStatus_}
 
 -- | The current status of the requested operation in the system.
 godrsStatus :: Lens' GetOperationDetailResponse (Maybe OperationStatus)

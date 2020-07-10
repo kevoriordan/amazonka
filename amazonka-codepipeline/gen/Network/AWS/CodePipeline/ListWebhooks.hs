@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a listing of all the webhooks in this region for this account. The output lists all webhooks and includes the webhook URL and ARN, as well the configuration for each webhook.
+-- Gets a listing of all the webhooks in this AWS Region for this account. The output lists all webhooks and includes the webhook URL and ARN and the configuration for each webhook.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CodePipeline.ListWebhooks
     (
     -- * Creating a Request
@@ -42,16 +44,16 @@ module Network.AWS.CodePipeline.ListWebhooks
 import Network.AWS.CodePipeline.Types
 import Network.AWS.CodePipeline.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listWebhooks' smart constructor.
-data ListWebhooks = ListWebhooks'
-  { _lwNextToken  :: !(Maybe Text)
-  , _lwMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListWebhooks = ListWebhooks'{_lwNextToken ::
+                                  !(Maybe Text),
+                                  _lwMaxResults :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListWebhooks' with the minimum fields required to make a request.
 --
@@ -62,8 +64,9 @@ data ListWebhooks = ListWebhooks'
 -- * 'lwMaxResults' - The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value.
 listWebhooks
     :: ListWebhooks
-listWebhooks = ListWebhooks' {_lwNextToken = Nothing, _lwMaxResults = Nothing}
-
+listWebhooks
+  = ListWebhooks'{_lwNextToken = Nothing,
+                  _lwMaxResults = Nothing}
 
 -- | The token that was returned from the previous ListWebhooks call, which can be used to return the next set of webhooks in the list.
 lwNextToken :: Lens' ListWebhooks (Maybe Text)
@@ -72,6 +75,13 @@ lwNextToken = lens _lwNextToken (\ s a -> s{_lwNextToken = a})
 -- | The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value.
 lwMaxResults :: Lens' ListWebhooks (Maybe Natural)
 lwMaxResults = lens _lwMaxResults (\ s a -> s{_lwMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListWebhooks where
+        page rq rs
+          | stop (rs ^. lwrsNextToken) = Nothing
+          | stop (rs ^. lwrsWebhooks) = Nothing
+          | otherwise =
+            Just $ rq & lwNextToken .~ rs ^. lwrsNextToken
 
 instance AWSRequest ListWebhooks where
         type Rs ListWebhooks = ListWebhooksResponse
@@ -110,18 +120,18 @@ instance ToQuery ListWebhooks where
         toQuery = const mempty
 
 -- | /See:/ 'listWebhooksResponse' smart constructor.
-data ListWebhooksResponse = ListWebhooksResponse'
-  { _lwrsNextToken      :: !(Maybe Text)
-  , _lwrsWebhooks       :: !(Maybe [ListWebhookItem])
-  , _lwrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListWebhooksResponse = ListWebhooksResponse'{_lwrsNextToken
+                                                  :: !(Maybe Text),
+                                                  _lwrsWebhooks ::
+                                                  !(Maybe [ListWebhookItem]),
+                                                  _lwrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListWebhooksResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lwrsNextToken' - If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListWebhooks call to return the next set of webhooks in the list.
+-- * 'lwrsNextToken' - If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListWebhooks call to return the next set of webhooks in the list. 
 --
 -- * 'lwrsWebhooks' - The JSON detail returned for each webhook in the list output for the ListWebhooks call.
 --
@@ -129,15 +139,12 @@ data ListWebhooksResponse = ListWebhooksResponse'
 listWebhooksResponse
     :: Int -- ^ 'lwrsResponseStatus'
     -> ListWebhooksResponse
-listWebhooksResponse pResponseStatus_ =
-  ListWebhooksResponse'
-    { _lwrsNextToken = Nothing
-    , _lwrsWebhooks = Nothing
-    , _lwrsResponseStatus = pResponseStatus_
-    }
+listWebhooksResponse pResponseStatus_
+  = ListWebhooksResponse'{_lwrsNextToken = Nothing,
+                          _lwrsWebhooks = Nothing,
+                          _lwrsResponseStatus = pResponseStatus_}
 
-
--- | If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListWebhooks call to return the next set of webhooks in the list.
+-- | If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListWebhooks call to return the next set of webhooks in the list. 
 lwrsNextToken :: Lens' ListWebhooksResponse (Maybe Text)
 lwrsNextToken = lens _lwrsNextToken (\ s a -> s{_lwrsNextToken = a})
 

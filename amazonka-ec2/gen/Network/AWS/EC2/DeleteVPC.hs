@@ -42,16 +42,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteVpc.
---
---
---
--- /See:/ 'deleteVPC' smart constructor.
-data DeleteVPC = DeleteVPC'
-  { _delDryRun :: !(Maybe Bool)
-  , _delVPCId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteVPC' smart constructor.
+data DeleteVPC = DeleteVPC'{_delDryRun ::
+                            !(Maybe Bool),
+                            _delVPCId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVPC' with the minimum fields required to make a request.
 --
@@ -63,8 +58,9 @@ data DeleteVPC = DeleteVPC'
 deleteVPC
     :: Text -- ^ 'delVPCId'
     -> DeleteVPC
-deleteVPC pVPCId_ = DeleteVPC' {_delDryRun = Nothing, _delVPCId = pVPCId_}
-
+deleteVPC pVPCId_
+  = DeleteVPC'{_delDryRun = Nothing,
+               _delVPCId = pVPCId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 delDryRun :: Lens' DeleteVPC (Maybe Bool)
@@ -97,16 +93,13 @@ instance ToQuery DeleteVPC where
                "DryRun" =: _delDryRun, "VpcId" =: _delVPCId]
 
 -- | /See:/ 'deleteVPCResponse' smart constructor.
-data DeleteVPCResponse =
-  DeleteVPCResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPCResponse = DeleteVPCResponse'
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVPCResponse' with the minimum fields required to make a request.
 --
 deleteVPCResponse
     :: DeleteVPCResponse
 deleteVPCResponse = DeleteVPCResponse'
-
 
 instance NFData DeleteVPCResponse where

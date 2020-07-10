@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists gateways owned by an AWS account in a region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN).
+-- Lists gateways owned by an AWS account in an AWS Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN).
 --
 --
 -- By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response.
@@ -56,19 +56,18 @@ import Network.AWS.StorageGateway.Types.Product
 -- | A JSON object containing zero or more of the following fields:
 --
 --
---     * 'ListGatewaysInput$Limit'
+--     * 'ListGatewaysInput$Limit' 
 --
---     * 'ListGatewaysInput$Marker'
+--     * 'ListGatewaysInput$Marker' 
 --
 --
 --
 --
 -- /See:/ 'listGateways' smart constructor.
-data ListGateways = ListGateways'
-  { _lgMarker :: !(Maybe Text)
-  , _lgLimit  :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGateways = ListGateways'{_lgMarker ::
+                                  !(Maybe Text),
+                                  _lgLimit :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGateways' with the minimum fields required to make a request.
 --
@@ -79,8 +78,9 @@ data ListGateways = ListGateways'
 -- * 'lgLimit' - Specifies that the list of gateways returned be limited to the specified number of items.
 listGateways
     :: ListGateways
-listGateways = ListGateways' {_lgMarker = Nothing, _lgLimit = Nothing}
-
+listGateways
+  = ListGateways'{_lgMarker = Nothing,
+                  _lgLimit = Nothing}
 
 -- | An opaque string that indicates the position at which to begin the returned list of gateways.
 lgMarker :: Lens' ListGateways (Maybe Text)
@@ -135,38 +135,35 @@ instance ToQuery ListGateways where
         toQuery = const mempty
 
 -- | /See:/ 'listGatewaysResponse' smart constructor.
-data ListGatewaysResponse = ListGatewaysResponse'
-  { _lgrsMarker         :: !(Maybe Text)
-  , _lgrsGateways       :: !(Maybe [GatewayInfo])
-  , _lgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGatewaysResponse = ListGatewaysResponse'{_lgrsMarker
+                                                  :: !(Maybe Text),
+                                                  _lgrsGateways ::
+                                                  !(Maybe [GatewayInfo]),
+                                                  _lgrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListGatewaysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lgrsMarker' - Undocumented member.
+-- * 'lgrsMarker' - Use the marker in your next request to fetch the next set of gateways in the list. If there are no more gateways to list, this field does not appear in the response.
 --
--- * 'lgrsGateways' - Undocumented member.
+-- * 'lgrsGateways' - An array of 'GatewayInfo' objects.
 --
 -- * 'lgrsResponseStatus' - -- | The response status code.
 listGatewaysResponse
     :: Int -- ^ 'lgrsResponseStatus'
     -> ListGatewaysResponse
-listGatewaysResponse pResponseStatus_ =
-  ListGatewaysResponse'
-    { _lgrsMarker = Nothing
-    , _lgrsGateways = Nothing
-    , _lgrsResponseStatus = pResponseStatus_
-    }
+listGatewaysResponse pResponseStatus_
+  = ListGatewaysResponse'{_lgrsMarker = Nothing,
+                          _lgrsGateways = Nothing,
+                          _lgrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Use the marker in your next request to fetch the next set of gateways in the list. If there are no more gateways to list, this field does not appear in the response.
 lgrsMarker :: Lens' ListGatewaysResponse (Maybe Text)
 lgrsMarker = lens _lgrsMarker (\ s a -> s{_lgrsMarker = a})
 
--- | Undocumented member.
+-- | An array of 'GatewayInfo' objects.
 lgrsGateways :: Lens' ListGatewaysResponse [GatewayInfo]
 lgrsGateways = lens _lgrsGateways (\ s a -> s{_lgrsGateways = a}) . _Default . _Coerce
 

@@ -46,11 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getKeyPolicy' smart constructor.
-data GetKeyPolicy = GetKeyPolicy'
-  { _gkpKeyId      :: !Text
-  , _gkpPolicyName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetKeyPolicy = GetKeyPolicy'{_gkpKeyId :: !Text,
+                                  _gkpPolicyName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetKeyPolicy' with the minimum fields required to make a request.
 --
@@ -63,9 +61,9 @@ getKeyPolicy
     :: Text -- ^ 'gkpKeyId'
     -> Text -- ^ 'gkpPolicyName'
     -> GetKeyPolicy
-getKeyPolicy pKeyId_ pPolicyName_ =
-  GetKeyPolicy' {_gkpKeyId = pKeyId_, _gkpPolicyName = pPolicyName_}
-
+getKeyPolicy pKeyId_ pPolicyName_
+  = GetKeyPolicy'{_gkpKeyId = pKeyId_,
+                  _gkpPolicyName = pPolicyName_}
 
 -- | A unique identifier for the customer master key (CMK). Specify the key ID or the Amazon Resource Name (ARN) of the CMK. For example:     * Key ID: @1234abcd-12ab-34cd-56ef-1234567890ab@      * Key ARN: @arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab@  To get the key ID and key ARN for a CMK, use 'ListKeys' or 'DescribeKey' .
 gkpKeyId :: Lens' GetKeyPolicy Text
@@ -111,11 +109,10 @@ instance ToQuery GetKeyPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'getKeyPolicyResponse' smart constructor.
-data GetKeyPolicyResponse = GetKeyPolicyResponse'
-  { _gkprsPolicy         :: !(Maybe Text)
-  , _gkprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetKeyPolicyResponse = GetKeyPolicyResponse'{_gkprsPolicy
+                                                  :: !(Maybe Text),
+                                                  _gkprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetKeyPolicyResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +124,9 @@ data GetKeyPolicyResponse = GetKeyPolicyResponse'
 getKeyPolicyResponse
     :: Int -- ^ 'gkprsResponseStatus'
     -> GetKeyPolicyResponse
-getKeyPolicyResponse pResponseStatus_ =
-  GetKeyPolicyResponse'
-    {_gkprsPolicy = Nothing, _gkprsResponseStatus = pResponseStatus_}
-
+getKeyPolicyResponse pResponseStatus_
+  = GetKeyPolicyResponse'{_gkprsPolicy = Nothing,
+                          _gkprsResponseStatus = pResponseStatus_}
 
 -- | A key policy document in JSON format.
 gkprsPolicy :: Lens' GetKeyPolicyResponse (Maybe Text)

@@ -47,17 +47,14 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'getChangeToken' smart constructor.
-data GetChangeToken =
-  GetChangeToken'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetChangeToken = GetChangeToken'
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetChangeToken' with the minimum fields required to make a request.
 --
 getChangeToken
     :: GetChangeToken
 getChangeToken = GetChangeToken'
-
 
 instance AWSRequest GetChangeToken where
         type Rs GetChangeToken = GetChangeTokenResponse
@@ -92,28 +89,29 @@ instance ToQuery GetChangeToken where
         toQuery = const mempty
 
 -- | /See:/ 'getChangeTokenResponse' smart constructor.
-data GetChangeTokenResponse = GetChangeTokenResponse'
-  { _gctrsChangeToken    :: !(Maybe Text)
-  , _gctrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetChangeTokenResponse = GetChangeTokenResponse'{_gctrsChangeToken
+                                                      :: !(Maybe Text),
+                                                      _gctrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetChangeTokenResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gctrsChangeToken' - The @ChangeToken@ that you used in the request. Use this value in a @GetChangeTokenStatus@ request to get the current status of the request.
+-- * 'gctrsChangeToken' - The @ChangeToken@ that you used in the request. Use this value in a @GetChangeTokenStatus@ request to get the current status of the request. 
 --
 -- * 'gctrsResponseStatus' - -- | The response status code.
 getChangeTokenResponse
     :: Int -- ^ 'gctrsResponseStatus'
     -> GetChangeTokenResponse
-getChangeTokenResponse pResponseStatus_ =
-  GetChangeTokenResponse'
-    {_gctrsChangeToken = Nothing, _gctrsResponseStatus = pResponseStatus_}
+getChangeTokenResponse pResponseStatus_
+  = GetChangeTokenResponse'{_gctrsChangeToken =
+                              Nothing,
+                            _gctrsResponseStatus = pResponseStatus_}
 
-
--- | The @ChangeToken@ that you used in the request. Use this value in a @GetChangeTokenStatus@ request to get the current status of the request.
+-- | The @ChangeToken@ that you used in the request. Use this value in a @GetChangeTokenStatus@ request to get the current status of the request. 
 gctrsChangeToken :: Lens' GetChangeTokenResponse (Maybe Text)
 gctrsChangeToken = lens _gctrsChangeToken (\ s a -> s{_gctrsChangeToken = a})
 

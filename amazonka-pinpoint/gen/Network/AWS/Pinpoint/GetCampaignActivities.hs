@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about the activity performed by a campaign.
+-- Retrieves information about all the activities for a campaign.
+--
+--
 module Network.AWS.Pinpoint.GetCampaignActivities
     (
     -- * Creating a Request
@@ -46,51 +48,49 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getCampaignActivities' smart constructor.
-data GetCampaignActivities = GetCampaignActivities'
-  { _gcaToken         :: !(Maybe Text)
-  , _gcaPageSize      :: !(Maybe Text)
-  , _gcaApplicationId :: !Text
-  , _gcaCampaignId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCampaignActivities = GetCampaignActivities'{_gcaToken
+                                                    :: !(Maybe Text),
+                                                    _gcaPageSize ::
+                                                    !(Maybe Text),
+                                                    _gcaApplicationId :: !Text,
+                                                    _gcaCampaignId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetCampaignActivities' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcaToken' - The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'gcaToken' - The NextToken string that specifies which page of results to return in a paginated response.
 --
--- * 'gcaPageSize' - The number of entries you want on each page in the response.
+-- * 'gcaPageSize' - The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 --
--- * 'gcaApplicationId' - Undocumented member.
+-- * 'gcaApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
--- * 'gcaCampaignId' - Undocumented member.
+-- * 'gcaCampaignId' - The unique identifier for the campaign.
 getCampaignActivities
     :: Text -- ^ 'gcaApplicationId'
     -> Text -- ^ 'gcaCampaignId'
     -> GetCampaignActivities
-getCampaignActivities pApplicationId_ pCampaignId_ =
-  GetCampaignActivities'
-    { _gcaToken = Nothing
-    , _gcaPageSize = Nothing
-    , _gcaApplicationId = pApplicationId_
-    , _gcaCampaignId = pCampaignId_
-    }
+getCampaignActivities pApplicationId_ pCampaignId_
+  = GetCampaignActivities'{_gcaToken = Nothing,
+                           _gcaPageSize = Nothing,
+                           _gcaApplicationId = pApplicationId_,
+                           _gcaCampaignId = pCampaignId_}
 
-
--- | The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The NextToken string that specifies which page of results to return in a paginated response.
 gcaToken :: Lens' GetCampaignActivities (Maybe Text)
 gcaToken = lens _gcaToken (\ s a -> s{_gcaToken = a})
 
--- | The number of entries you want on each page in the response.
+-- | The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 gcaPageSize :: Lens' GetCampaignActivities (Maybe Text)
 gcaPageSize = lens _gcaPageSize (\ s a -> s{_gcaPageSize = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gcaApplicationId :: Lens' GetCampaignActivities Text
 gcaApplicationId = lens _gcaApplicationId (\ s a -> s{_gcaApplicationId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the campaign.
 gcaCampaignId :: Lens' GetCampaignActivities Text
 gcaCampaignId = lens _gcaCampaignId (\ s a -> s{_gcaCampaignId = a})
 
@@ -127,11 +127,13 @@ instance ToQuery GetCampaignActivities where
               ["token" =: _gcaToken, "page-size" =: _gcaPageSize]
 
 -- | /See:/ 'getCampaignActivitiesResponse' smart constructor.
-data GetCampaignActivitiesResponse = GetCampaignActivitiesResponse'
-  { _gcarsResponseStatus     :: !Int
-  , _gcarsActivitiesResponse :: !ActivitiesResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCampaignActivitiesResponse = GetCampaignActivitiesResponse'{_gcarsResponseStatus
+                                                                    :: !Int,
+                                                                    _gcarsActivitiesResponse
+                                                                    ::
+                                                                    !ActivitiesResponse}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetCampaignActivitiesResponse' with the minimum fields required to make a request.
 --
@@ -144,12 +146,12 @@ getCampaignActivitiesResponse
     :: Int -- ^ 'gcarsResponseStatus'
     -> ActivitiesResponse -- ^ 'gcarsActivitiesResponse'
     -> GetCampaignActivitiesResponse
-getCampaignActivitiesResponse pResponseStatus_ pActivitiesResponse_ =
-  GetCampaignActivitiesResponse'
-    { _gcarsResponseStatus = pResponseStatus_
-    , _gcarsActivitiesResponse = pActivitiesResponse_
-    }
-
+getCampaignActivitiesResponse pResponseStatus_
+  pActivitiesResponse_
+  = GetCampaignActivitiesResponse'{_gcarsResponseStatus
+                                     = pResponseStatus_,
+                                   _gcarsActivitiesResponse =
+                                     pActivitiesResponse_}
 
 -- | -- | The response status code.
 gcarsResponseStatus :: Lens' GetCampaignActivitiesResponse Int

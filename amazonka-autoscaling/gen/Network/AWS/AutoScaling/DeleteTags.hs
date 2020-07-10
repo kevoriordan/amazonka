@@ -42,10 +42,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteTags' smart constructor.
-newtype DeleteTags = DeleteTags'
-  { _dtTags :: [Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTags = DeleteTags'{_dtTags :: [Tag]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTags' with the minimum fields required to make a request.
 --
@@ -54,8 +52,7 @@ newtype DeleteTags = DeleteTags'
 -- * 'dtTags' - One or more tags.
 deleteTags
     :: DeleteTags
-deleteTags = DeleteTags' {_dtTags = mempty}
-
+deleteTags = DeleteTags'{_dtTags = mempty}
 
 -- | One or more tags.
 dtTags :: Lens' DeleteTags [Tag]
@@ -84,16 +81,13 @@ instance ToQuery DeleteTags where
                "Tags" =: toQueryList "member" _dtTags]
 
 -- | /See:/ 'deleteTagsResponse' smart constructor.
-data DeleteTagsResponse =
-  DeleteTagsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTagsResponse = DeleteTagsResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTagsResponse' with the minimum fields required to make a request.
 --
 deleteTagsResponse
     :: DeleteTagsResponse
 deleteTagsResponse = DeleteTagsResponse'
-
 
 instance NFData DeleteTagsResponse where

@@ -45,26 +45,39 @@ library
 
     exposed-modules:
           Network.AWS.CloudHSMv2
+        , Network.AWS.CloudHSMv2.CopyBackupToRegion
         , Network.AWS.CloudHSMv2.CreateCluster
         , Network.AWS.CloudHSMv2.CreateHSM
+        , Network.AWS.CloudHSMv2.DeleteBackup
         , Network.AWS.CloudHSMv2.DeleteCluster
         , Network.AWS.CloudHSMv2.DeleteHSM
         , Network.AWS.CloudHSMv2.DescribeBackups
         , Network.AWS.CloudHSMv2.DescribeClusters
         , Network.AWS.CloudHSMv2.InitializeCluster
         , Network.AWS.CloudHSMv2.ListTags
+        , Network.AWS.CloudHSMv2.RestoreBackup
         , Network.AWS.CloudHSMv2.TagResource
         , Network.AWS.CloudHSMv2.Types
         , Network.AWS.CloudHSMv2.UntagResource
         , Network.AWS.CloudHSMv2.Waiters
 
     other-modules:
-          Network.AWS.CloudHSMv2.Types.Product
-        , Network.AWS.CloudHSMv2.Types.Sum
+          Network.AWS.CloudHSMv2.Types.Backup
+        , Network.AWS.CloudHSMv2.Types.BackupPolicy
+        , Network.AWS.CloudHSMv2.Types.BackupState
+        , Network.AWS.CloudHSMv2.Types.Certificates
+        , Network.AWS.CloudHSMv2.Types.Cluster
+        , Network.AWS.CloudHSMv2.Types.ClusterState
+        , Network.AWS.CloudHSMv2.Types.DestinationBackup
+        , Network.AWS.CloudHSMv2.Types.HSM
+        , Network.AWS.CloudHSMv2.Types.HSMState
+        , Network.AWS.CloudHSMv2.Types.Product
+        , Network.AWS.CloudHSMv2.Types.Tag
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cloudhsmv2-test
     type:              exitcode-stdio-1.0
@@ -88,6 +101,7 @@ test-suite amazonka-cloudhsmv2-test
         , amazonka-cloudhsmv2
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

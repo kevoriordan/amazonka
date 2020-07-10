@@ -46,11 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getFacet' smart constructor.
-data GetFacet = GetFacet'
-  { _gfSchemaARN :: !Text
-  , _gfName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetFacet = GetFacet'{_gfSchemaARN :: !Text,
+                          _gfName :: !Text}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetFacet' with the minimum fields required to make a request.
 --
@@ -63,9 +61,9 @@ getFacet
     :: Text -- ^ 'gfSchemaARN'
     -> Text -- ^ 'gfName'
     -> GetFacet
-getFacet pSchemaARN_ pName_ =
-  GetFacet' {_gfSchemaARN = pSchemaARN_, _gfName = pName_}
-
+getFacet pSchemaARN_ pName_
+  = GetFacet'{_gfSchemaARN = pSchemaARN_,
+              _gfName = pName_}
 
 -- | The Amazon Resource Name (ARN) that is associated with the 'Facet' . For more information, see 'arns' .
 gfSchemaARN :: Lens' GetFacet Text
@@ -104,11 +102,10 @@ instance ToQuery GetFacet where
         toQuery = const mempty
 
 -- | /See:/ 'getFacetResponse' smart constructor.
-data GetFacetResponse = GetFacetResponse'
-  { _gfrsFacet          :: !(Maybe Facet)
-  , _gfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetFacetResponse = GetFacetResponse'{_gfrsFacet
+                                          :: !(Maybe Facet),
+                                          _gfrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetFacetResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +117,9 @@ data GetFacetResponse = GetFacetResponse'
 getFacetResponse
     :: Int -- ^ 'gfrsResponseStatus'
     -> GetFacetResponse
-getFacetResponse pResponseStatus_ =
-  GetFacetResponse'
-    {_gfrsFacet = Nothing, _gfrsResponseStatus = pResponseStatus_}
-
+getFacetResponse pResponseStatus_
+  = GetFacetResponse'{_gfrsFacet = Nothing,
+                      _gfrsResponseStatus = pResponseStatus_}
 
 -- | The 'Facet' structure that is associated with the facet.
 gfrsFacet :: Lens' GetFacetResponse (Maybe Facet)

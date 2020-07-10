@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listPresets' smart constructor.
-data ListPresets = ListPresets'
-  { _lAscending :: !(Maybe Text)
-  , _lPageToken :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPresets = ListPresets'{_lAscending ::
+                                !(Maybe Text),
+                                _lPageToken :: !(Maybe Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPresets' with the minimum fields required to make a request.
 --
@@ -66,17 +65,18 @@ data ListPresets = ListPresets'
 --
 -- * 'lAscending' - To list presets in chronological order by the date and time that they were created, enter @true@ . To list presets in reverse chronological order, enter @false@ .
 --
--- * 'lPageToken' - When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results.
+-- * 'lPageToken' - When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results. 
 listPresets
     :: ListPresets
-listPresets = ListPresets' {_lAscending = Nothing, _lPageToken = Nothing}
-
+listPresets
+  = ListPresets'{_lAscending = Nothing,
+                 _lPageToken = Nothing}
 
 -- | To list presets in chronological order by the date and time that they were created, enter @true@ . To list presets in reverse chronological order, enter @false@ .
 lAscending :: Lens' ListPresets (Maybe Text)
 lAscending = lens _lAscending (\ s a -> s{_lAscending = a})
 
--- | When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results.
+-- | When Elastic Transcoder returns more than one page of results, use @pageToken@ in subsequent @GET@ requests to get each successive page of results. 
 lPageToken :: Lens' ListPresets (Maybe Text)
 lPageToken = lens _lPageToken (\ s a -> s{_lPageToken = a})
 
@@ -119,12 +119,12 @@ instance ToQuery ListPresets where
 --
 --
 -- /See:/ 'listPresetsResponse' smart constructor.
-data ListPresetsResponse = ListPresetsResponse'
-  { _lrsNextPageToken  :: !(Maybe Text)
-  , _lrsPresets        :: !(Maybe [Preset])
-  , _lrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPresetsResponse = ListPresetsResponse'{_lrsNextPageToken
+                                                :: !(Maybe Text),
+                                                _lrsPresets ::
+                                                !(Maybe [Preset]),
+                                                _lrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPresetsResponse' with the minimum fields required to make a request.
 --
@@ -138,13 +138,10 @@ data ListPresetsResponse = ListPresetsResponse'
 listPresetsResponse
     :: Int -- ^ 'lrsResponseStatus'
     -> ListPresetsResponse
-listPresetsResponse pResponseStatus_ =
-  ListPresetsResponse'
-    { _lrsNextPageToken = Nothing
-    , _lrsPresets = Nothing
-    , _lrsResponseStatus = pResponseStatus_
-    }
-
+listPresetsResponse pResponseStatus_
+  = ListPresetsResponse'{_lrsNextPageToken = Nothing,
+                         _lrsPresets = Nothing,
+                         _lrsResponseStatus = pResponseStatus_}
 
 -- | A value that you use to access the second and subsequent pages of results, if any. When the presets fit on one page or when you've reached the last page of results, the value of @NextPageToken@ is @null@ .
 lrsNextPageToken :: Lens' ListPresetsResponse (Maybe Text)

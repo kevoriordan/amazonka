@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes concurrent execution limits from this function. For more information, see 'concurrent-executions' .
+-- Removes a concurrent execution limit from a function.
 --
 --
 module Network.AWS.Lambda.DeleteFunctionConcurrency
@@ -42,24 +42,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteFunctionConcurrency' smart constructor.
-newtype DeleteFunctionConcurrency = DeleteFunctionConcurrency'
-  { _dfcFunctionName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteFunctionConcurrency = DeleteFunctionConcurrency'{_dfcFunctionName
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteFunctionConcurrency' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfcFunctionName' - The name of the function you are removing concurrent execution limits from. For more information, see 'concurrent-executions' .
+-- * 'dfcFunctionName' - The name of the Lambda function. __Name formats__      * __Function name__ - @my-function@ .     * __Function ARN__ - @arn:aws:lambda:us-west-2:123456789012:function:my-function@ .     * __Partial ARN__ - @123456789012:function:my-function@ . The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
 deleteFunctionConcurrency
     :: Text -- ^ 'dfcFunctionName'
     -> DeleteFunctionConcurrency
-deleteFunctionConcurrency pFunctionName_ =
-  DeleteFunctionConcurrency' {_dfcFunctionName = pFunctionName_}
+deleteFunctionConcurrency pFunctionName_
+  = DeleteFunctionConcurrency'{_dfcFunctionName =
+                                 pFunctionName_}
 
-
--- | The name of the function you are removing concurrent execution limits from. For more information, see 'concurrent-executions' .
+-- | The name of the Lambda function. __Name formats__      * __Function name__ - @my-function@ .     * __Function ARN__ - @arn:aws:lambda:us-west-2:123456789012:function:my-function@ .     * __Partial ARN__ - @123456789012:function:my-function@ . The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
 dfcFunctionName :: Lens' DeleteFunctionConcurrency Text
 dfcFunctionName = lens _dfcFunctionName (\ s a -> s{_dfcFunctionName = a})
 
@@ -87,17 +87,16 @@ instance ToQuery DeleteFunctionConcurrency where
         toQuery = const mempty
 
 -- | /See:/ 'deleteFunctionConcurrencyResponse' smart constructor.
-data DeleteFunctionConcurrencyResponse =
-  DeleteFunctionConcurrencyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFunctionConcurrencyResponse = DeleteFunctionConcurrencyResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteFunctionConcurrencyResponse' with the minimum fields required to make a request.
 --
 deleteFunctionConcurrencyResponse
     :: DeleteFunctionConcurrencyResponse
-deleteFunctionConcurrencyResponse = DeleteFunctionConcurrencyResponse'
-
+deleteFunctionConcurrencyResponse
+  = DeleteFunctionConcurrencyResponse'
 
 instance NFData DeleteFunctionConcurrencyResponse
          where

@@ -23,7 +23,7 @@
 --
 -- If you specify a tag that doesn't exist, the operation ignores it.
 --
--- This operation has a limit of five transactions per second per account.
+-- This operation has a limit of five transactions per second per account. 
 --
 module Network.AWS.Firehose.UntagDeliveryStream
     (
@@ -49,11 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'untagDeliveryStream' smart constructor.
-data UntagDeliveryStream = UntagDeliveryStream'
-  { _udsDeliveryStreamName :: !Text
-  , _udsTagKeys            :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagDeliveryStream = UntagDeliveryStream'{_udsDeliveryStreamName
+                                                :: !Text,
+                                                _udsTagKeys :: !(List1 Text)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagDeliveryStream' with the minimum fields required to make a request.
 --
@@ -66,12 +65,10 @@ untagDeliveryStream
     :: Text -- ^ 'udsDeliveryStreamName'
     -> NonEmpty Text -- ^ 'udsTagKeys'
     -> UntagDeliveryStream
-untagDeliveryStream pDeliveryStreamName_ pTagKeys_ =
-  UntagDeliveryStream'
-    { _udsDeliveryStreamName = pDeliveryStreamName_
-    , _udsTagKeys = _List1 # pTagKeys_
-    }
-
+untagDeliveryStream pDeliveryStreamName_ pTagKeys_
+  = UntagDeliveryStream'{_udsDeliveryStreamName =
+                           pDeliveryStreamName_,
+                         _udsTagKeys = _List1 # pTagKeys_}
 
 -- | The name of the delivery stream.
 udsDeliveryStreamName :: Lens' UntagDeliveryStream Text
@@ -119,10 +116,10 @@ instance ToQuery UntagDeliveryStream where
         toQuery = const mempty
 
 -- | /See:/ 'untagDeliveryStreamResponse' smart constructor.
-newtype UntagDeliveryStreamResponse = UntagDeliveryStreamResponse'
-  { _udsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UntagDeliveryStreamResponse = UntagDeliveryStreamResponse'{_udsrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UntagDeliveryStreamResponse' with the minimum fields required to make a request.
 --
@@ -132,9 +129,9 @@ newtype UntagDeliveryStreamResponse = UntagDeliveryStreamResponse'
 untagDeliveryStreamResponse
     :: Int -- ^ 'udsrsResponseStatus'
     -> UntagDeliveryStreamResponse
-untagDeliveryStreamResponse pResponseStatus_ =
-  UntagDeliveryStreamResponse' {_udsrsResponseStatus = pResponseStatus_}
-
+untagDeliveryStreamResponse pResponseStatus_
+  = UntagDeliveryStreamResponse'{_udsrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 udsrsResponseStatus :: Lens' UntagDeliveryStreamResponse Int

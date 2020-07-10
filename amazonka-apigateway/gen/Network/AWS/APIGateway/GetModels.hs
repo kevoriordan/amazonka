@@ -55,12 +55,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getModels' smart constructor.
-data GetModels = GetModels'
-  { _gmsLimit     :: !(Maybe Int)
-  , _gmsPosition  :: !(Maybe Text)
-  , _gmsRestAPIId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetModels = GetModels'{_gmsLimit ::
+                            !(Maybe Int),
+                            _gmsPosition :: !(Maybe Text),
+                            _gmsRestAPIId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetModels' with the minimum fields required to make a request.
 --
@@ -74,10 +73,9 @@ data GetModels = GetModels'
 getModels
     :: Text -- ^ 'gmsRestAPIId'
     -> GetModels
-getModels pRestAPIId_ =
-  GetModels'
-    {_gmsLimit = Nothing, _gmsPosition = Nothing, _gmsRestAPIId = pRestAPIId_}
-
+getModels pRestAPIId_
+  = GetModels'{_gmsLimit = Nothing,
+               _gmsPosition = Nothing, _gmsRestAPIId = pRestAPIId_}
 
 -- | The maximum number of returned results per page. The default value is 25 and the maximum value is 500.
 gmsLimit :: Lens' GetModels (Maybe Int)
@@ -131,15 +129,14 @@ instance ToQuery GetModels where
 -- | Represents a collection of 'Model' resources.
 --
 --
--- 'Method' , 'MethodResponse' , <http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html Models and Mappings>
+-- 'Method' , 'MethodResponse' , <https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html Models and Mappings> 
 --
 -- /See:/ 'getModelsResponse' smart constructor.
-data GetModelsResponse = GetModelsResponse'
-  { _gmrsItems          :: !(Maybe [Model])
-  , _gmrsPosition       :: !(Maybe Text)
-  , _gmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetModelsResponse = GetModelsResponse'{_gmrsItems
+                                            :: !(Maybe [Model]),
+                                            _gmrsPosition :: !(Maybe Text),
+                                            _gmrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetModelsResponse' with the minimum fields required to make a request.
 --
@@ -153,13 +150,10 @@ data GetModelsResponse = GetModelsResponse'
 getModelsResponse
     :: Int -- ^ 'gmrsResponseStatus'
     -> GetModelsResponse
-getModelsResponse pResponseStatus_ =
-  GetModelsResponse'
-    { _gmrsItems = Nothing
-    , _gmrsPosition = Nothing
-    , _gmrsResponseStatus = pResponseStatus_
-    }
-
+getModelsResponse pResponseStatus_
+  = GetModelsResponse'{_gmrsItems = Nothing,
+                       _gmrsPosition = Nothing,
+                       _gmrsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gmrsItems :: Lens' GetModelsResponse [Model]

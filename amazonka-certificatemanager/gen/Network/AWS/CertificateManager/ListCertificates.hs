@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of certificate ARNs and domain names. You can request that only certificates that match a specific status be listed. You can also filter by specific attributes of the certificate.
+-- Retrieves a list of certificate ARNs and domain names. You can request that only certificates that match a specific status be listed. You can also filter by specific attributes of the certificate. Default filtering returns only @RSA_2048@ certificates. For more information, see 'Filters' .
 --
 --
 --
@@ -52,13 +52,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listCertificates' smart constructor.
-data ListCertificates = ListCertificates'
-  { _lcCertificateStatuses :: !(Maybe [CertificateStatus])
-  , _lcNextToken           :: !(Maybe Text)
-  , _lcIncludes            :: !(Maybe Filters)
-  , _lcMaxItems            :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCertificates = ListCertificates'{_lcCertificateStatuses
+                                          :: !(Maybe [CertificateStatus]),
+                                          _lcNextToken :: !(Maybe Text),
+                                          _lcIncludes :: !(Maybe Filters),
+                                          _lcMaxItems :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCertificates' with the minimum fields required to make a request.
 --
@@ -73,14 +72,10 @@ data ListCertificates = ListCertificates'
 -- * 'lcMaxItems' - Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the @NextToken@ element is sent in the response. Use this @NextToken@ value in a subsequent request to retrieve additional items.
 listCertificates
     :: ListCertificates
-listCertificates =
-  ListCertificates'
-    { _lcCertificateStatuses = Nothing
-    , _lcNextToken = Nothing
-    , _lcIncludes = Nothing
-    , _lcMaxItems = Nothing
-    }
-
+listCertificates
+  = ListCertificates'{_lcCertificateStatuses = Nothing,
+                      _lcNextToken = Nothing, _lcIncludes = Nothing,
+                      _lcMaxItems = Nothing}
 
 -- | Filter the certificate list by status value.
 lcCertificateStatuses :: Lens' ListCertificates [CertificateStatus]
@@ -147,12 +142,16 @@ instance ToQuery ListCertificates where
         toQuery = const mempty
 
 -- | /See:/ 'listCertificatesResponse' smart constructor.
-data ListCertificatesResponse = ListCertificatesResponse'
-  { _lcrsCertificateSummaryList :: !(Maybe [CertificateSummary])
-  , _lcrsNextToken              :: !(Maybe Text)
-  , _lcrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCertificatesResponse = ListCertificatesResponse'{_lcrsCertificateSummaryList
+                                                          ::
+                                                          !(Maybe
+                                                              [CertificateSummary]),
+                                                          _lcrsNextToken ::
+                                                          !(Maybe Text),
+                                                          _lcrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListCertificatesResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +165,11 @@ data ListCertificatesResponse = ListCertificatesResponse'
 listCertificatesResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListCertificatesResponse
-listCertificatesResponse pResponseStatus_ =
-  ListCertificatesResponse'
-    { _lcrsCertificateSummaryList = Nothing
-    , _lcrsNextToken = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
-
+listCertificatesResponse pResponseStatus_
+  = ListCertificatesResponse'{_lcrsCertificateSummaryList
+                                = Nothing,
+                              _lcrsNextToken = Nothing,
+                              _lcrsResponseStatus = pResponseStatus_}
 
 -- | A list of ACM certificates.
 lcrsCertificateSummaryList :: Lens' ListCertificatesResponse [CertificateSummary]

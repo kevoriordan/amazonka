@@ -31,6 +31,9 @@ module Network.AWS.StorageGateway.CreateStorediSCSIVolume
       createStorediSCSIVolume
     , CreateStorediSCSIVolume
     -- * Request Lenses
+    , csscsivKMSKey
+    , csscsivKMSEncrypted
+    , csscsivTags
     , csscsivSnapshotId
     , csscsivGatewayARN
     , csscsivDiskId
@@ -58,43 +61,59 @@ import Network.AWS.StorageGateway.Types.Product
 -- | A JSON object containing one or more of the following fields:
 --
 --
---     * 'CreateStorediSCSIVolumeInput$DiskId'
+--     * 'CreateStorediSCSIVolumeInput$DiskId' 
 --
---     * 'CreateStorediSCSIVolumeInput$NetworkInterfaceId'
+--     * 'CreateStorediSCSIVolumeInput$NetworkInterfaceId' 
 --
---     * 'CreateStorediSCSIVolumeInput$PreserveExistingData'
+--     * 'CreateStorediSCSIVolumeInput$PreserveExistingData' 
 --
---     * 'CreateStorediSCSIVolumeInput$SnapshotId'
+--     * 'CreateStorediSCSIVolumeInput$SnapshotId' 
 --
---     * 'CreateStorediSCSIVolumeInput$TargetName'
+--     * 'CreateStorediSCSIVolumeInput$TargetName' 
 --
 --
 --
 --
 -- /See:/ 'createStorediSCSIVolume' smart constructor.
-data CreateStorediSCSIVolume = CreateStorediSCSIVolume'
-  { _csscsivSnapshotId           :: !(Maybe Text)
-  , _csscsivGatewayARN           :: !Text
-  , _csscsivDiskId               :: !Text
-  , _csscsivPreserveExistingData :: !Bool
-  , _csscsivTargetName           :: !Text
-  , _csscsivNetworkInterfaceId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStorediSCSIVolume = CreateStorediSCSIVolume'{_csscsivKMSKey
+                                                        :: !(Maybe Text),
+                                                        _csscsivKMSEncrypted ::
+                                                        !(Maybe Bool),
+                                                        _csscsivTags ::
+                                                        !(Maybe [Tag]),
+                                                        _csscsivSnapshotId ::
+                                                        !(Maybe Text),
+                                                        _csscsivGatewayARN ::
+                                                        !Text,
+                                                        _csscsivDiskId :: !Text,
+                                                        _csscsivPreserveExistingData
+                                                        :: !Bool,
+                                                        _csscsivTargetName ::
+                                                        !Text,
+                                                        _csscsivNetworkInterfaceId
+                                                        :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateStorediSCSIVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csscsivSnapshotId' - The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
+-- * 'csscsivKMSKey' - The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
+--
+-- * 'csscsivKMSEncrypted' - True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+--
+-- * 'csscsivTags' - A list of up to 50 tags that can be assigned to a stored volume. Each tag is a key-value pair.
+--
+-- * 'csscsivSnapshotId' - The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
 --
 -- * 'csscsivGatewayARN' - Undocumented member.
 --
--- * 'csscsivDiskId' - The unique identifier for the gateway local disk that is configured as a stored volume. Use <http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html ListLocalDisks> to list disk IDs for a gateway.
+-- * 'csscsivDiskId' - The unique identifier for the gateway local disk that is configured as a stored volume. Use <https://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html ListLocalDisks> to list disk IDs for a gateway.
 --
 -- * 'csscsivPreserveExistingData' - Specify this field as true if you want to preserve the data on the local disk. Otherwise, specifying this field as false creates an empty volume. Valid Values: true, false
 --
--- * 'csscsivTargetName' - The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.
+-- * 'csscsivTargetName' - The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume@ . The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
 --
 -- * 'csscsivNetworkInterfaceId' - The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use 'DescribeGatewayInformation' to get a list of the network interfaces available on a gateway. Valid Values: A valid IP address.
 createStorediSCSIVolume
@@ -104,18 +123,33 @@ createStorediSCSIVolume
     -> Text -- ^ 'csscsivTargetName'
     -> Text -- ^ 'csscsivNetworkInterfaceId'
     -> CreateStorediSCSIVolume
-createStorediSCSIVolume pGatewayARN_ pDiskId_ pPreserveExistingData_ pTargetName_ pNetworkInterfaceId_ =
-  CreateStorediSCSIVolume'
-    { _csscsivSnapshotId = Nothing
-    , _csscsivGatewayARN = pGatewayARN_
-    , _csscsivDiskId = pDiskId_
-    , _csscsivPreserveExistingData = pPreserveExistingData_
-    , _csscsivTargetName = pTargetName_
-    , _csscsivNetworkInterfaceId = pNetworkInterfaceId_
-    }
+createStorediSCSIVolume pGatewayARN_ pDiskId_
+  pPreserveExistingData_ pTargetName_
+  pNetworkInterfaceId_
+  = CreateStorediSCSIVolume'{_csscsivKMSKey = Nothing,
+                             _csscsivKMSEncrypted = Nothing,
+                             _csscsivTags = Nothing,
+                             _csscsivSnapshotId = Nothing,
+                             _csscsivGatewayARN = pGatewayARN_,
+                             _csscsivDiskId = pDiskId_,
+                             _csscsivPreserveExistingData =
+                               pPreserveExistingData_,
+                             _csscsivTargetName = pTargetName_,
+                             _csscsivNetworkInterfaceId = pNetworkInterfaceId_}
 
+-- | The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server-side encryption. This value can only be set when KMSEncrypted is true. Optional.
+csscsivKMSKey :: Lens' CreateStorediSCSIVolume (Maybe Text)
+csscsivKMSKey = lens _csscsivKMSKey (\ s a -> s{_csscsivKMSKey = a})
 
--- | The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
+-- | True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+csscsivKMSEncrypted :: Lens' CreateStorediSCSIVolume (Maybe Bool)
+csscsivKMSEncrypted = lens _csscsivKMSEncrypted (\ s a -> s{_csscsivKMSEncrypted = a})
+
+-- | A list of up to 50 tags that can be assigned to a stored volume. Each tag is a key-value pair.
+csscsivTags :: Lens' CreateStorediSCSIVolume [Tag]
+csscsivTags = lens _csscsivTags (\ s a -> s{_csscsivTags = a}) . _Default . _Coerce
+
+-- | The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
 csscsivSnapshotId :: Lens' CreateStorediSCSIVolume (Maybe Text)
 csscsivSnapshotId = lens _csscsivSnapshotId (\ s a -> s{_csscsivSnapshotId = a})
 
@@ -123,7 +157,7 @@ csscsivSnapshotId = lens _csscsivSnapshotId (\ s a -> s{_csscsivSnapshotId = a})
 csscsivGatewayARN :: Lens' CreateStorediSCSIVolume Text
 csscsivGatewayARN = lens _csscsivGatewayARN (\ s a -> s{_csscsivGatewayARN = a})
 
--- | The unique identifier for the gateway local disk that is configured as a stored volume. Use <http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html ListLocalDisks> to list disk IDs for a gateway.
+-- | The unique identifier for the gateway local disk that is configured as a stored volume. Use <https://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html ListLocalDisks> to list disk IDs for a gateway.
 csscsivDiskId :: Lens' CreateStorediSCSIVolume Text
 csscsivDiskId = lens _csscsivDiskId (\ s a -> s{_csscsivDiskId = a})
 
@@ -131,7 +165,7 @@ csscsivDiskId = lens _csscsivDiskId (\ s a -> s{_csscsivDiskId = a})
 csscsivPreserveExistingData :: Lens' CreateStorediSCSIVolume Bool
 csscsivPreserveExistingData = lens _csscsivPreserveExistingData (\ s a -> s{_csscsivPreserveExistingData = a})
 
--- | The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.
+-- | The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume@ . The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
 csscsivTargetName :: Lens' CreateStorediSCSIVolume Text
 csscsivTargetName = lens _csscsivTargetName (\ s a -> s{_csscsivTargetName = a})
 
@@ -169,7 +203,10 @@ instance ToJSON CreateStorediSCSIVolume where
         toJSON CreateStorediSCSIVolume'{..}
           = object
               (catMaybes
-                 [("SnapshotId" .=) <$> _csscsivSnapshotId,
+                 [("KMSKey" .=) <$> _csscsivKMSKey,
+                  ("KMSEncrypted" .=) <$> _csscsivKMSEncrypted,
+                  ("Tags" .=) <$> _csscsivTags,
+                  ("SnapshotId" .=) <$> _csscsivSnapshotId,
                   Just ("GatewayARN" .= _csscsivGatewayARN),
                   Just ("DiskId" .= _csscsivDiskId),
                   Just
@@ -191,19 +228,28 @@ instance ToQuery CreateStorediSCSIVolume where
 --
 --
 -- /See:/ 'createStorediSCSIVolumeResponse' smart constructor.
-data CreateStorediSCSIVolumeResponse = CreateStorediSCSIVolumeResponse'
-  { _csscsivrsTargetARN         :: !(Maybe Text)
-  , _csscsivrsVolumeARN         :: !(Maybe Text)
-  , _csscsivrsVolumeSizeInBytes :: !(Maybe Integer)
-  , _csscsivrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStorediSCSIVolumeResponse = CreateStorediSCSIVolumeResponse'{_csscsivrsTargetARN
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _csscsivrsVolumeARN
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _csscsivrsVolumeSizeInBytes
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Integer),
+                                                                        _csscsivrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateStorediSCSIVolumeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csscsivrsTargetARN' - he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
+-- * 'csscsivrsTargetARN' - The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
 --
 -- * 'csscsivrsVolumeARN' - The Amazon Resource Name (ARN) of the configured volume.
 --
@@ -213,16 +259,15 @@ data CreateStorediSCSIVolumeResponse = CreateStorediSCSIVolumeResponse'
 createStorediSCSIVolumeResponse
     :: Int -- ^ 'csscsivrsResponseStatus'
     -> CreateStorediSCSIVolumeResponse
-createStorediSCSIVolumeResponse pResponseStatus_ =
-  CreateStorediSCSIVolumeResponse'
-    { _csscsivrsTargetARN = Nothing
-    , _csscsivrsVolumeARN = Nothing
-    , _csscsivrsVolumeSizeInBytes = Nothing
-    , _csscsivrsResponseStatus = pResponseStatus_
-    }
+createStorediSCSIVolumeResponse pResponseStatus_
+  = CreateStorediSCSIVolumeResponse'{_csscsivrsTargetARN
+                                       = Nothing,
+                                     _csscsivrsVolumeARN = Nothing,
+                                     _csscsivrsVolumeSizeInBytes = Nothing,
+                                     _csscsivrsResponseStatus =
+                                       pResponseStatus_}
 
-
--- | he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
+-- | The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
 csscsivrsTargetARN :: Lens' CreateStorediSCSIVolumeResponse (Maybe Text)
 csscsivrsTargetARN = lens _csscsivrsTargetARN (\ s a -> s{_csscsivrsTargetARN = a})
 

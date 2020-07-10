@@ -21,6 +21,8 @@
 -- Returns all the domain-related billing records for the current AWS account for a specified period
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.Route53Domains.ViewBilling
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.Route53Domains.ViewBilling
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -53,41 +56,35 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'viewBilling' smart constructor.
-data ViewBilling = ViewBilling'
-  { _vbStart    :: !(Maybe POSIX)
-  , _vbEnd      :: !(Maybe POSIX)
-  , _vbMarker   :: !(Maybe Text)
-  , _vbMaxItems :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ViewBilling = ViewBilling'{_vbStart ::
+                                !(Maybe POSIX),
+                                _vbEnd :: !(Maybe POSIX),
+                                _vbMarker :: !(Maybe Text),
+                                _vbMaxItems :: !(Maybe Int)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ViewBilling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vbStart' - The beginning date and time for the time period for which you want a list of billing records. Specify the date and time in Coordinated Universal time (UTC).
+-- * 'vbStart' - The beginning date and time for the time period for which you want a list of billing records. Specify the date and time in Unix time format and Coordinated Universal time (UTC).
 --
--- * 'vbEnd' - The end date and time for the time period for which you want a list of billing records. Specify the date and time in Coordinated Universal time (UTC).
+-- * 'vbEnd' - The end date and time for the time period for which you want a list of billing records. Specify the date and time in Unix time format and Coordinated Universal time (UTC).
 --
 -- * 'vbMarker' - For an initial request for a list of billing records, omit this element. If the number of billing records that are associated with the current AWS account during the specified period is greater than the value that you specified for @MaxItems@ , you can use @Marker@ to return additional billing records. Get the value of @NextPageMarker@ from the previous response, and submit another request that includes the value of @NextPageMarker@ in the @Marker@ element.  Constraints: The marker must match the value of @NextPageMarker@ that was returned in the previous response.
 --
 -- * 'vbMaxItems' - The number of billing records to be returned. Default: 20
 viewBilling
     :: ViewBilling
-viewBilling =
-  ViewBilling'
-    { _vbStart = Nothing
-    , _vbEnd = Nothing
-    , _vbMarker = Nothing
-    , _vbMaxItems = Nothing
-    }
+viewBilling
+  = ViewBilling'{_vbStart = Nothing, _vbEnd = Nothing,
+                 _vbMarker = Nothing, _vbMaxItems = Nothing}
 
-
--- | The beginning date and time for the time period for which you want a list of billing records. Specify the date and time in Coordinated Universal time (UTC).
+-- | The beginning date and time for the time period for which you want a list of billing records. Specify the date and time in Unix time format and Coordinated Universal time (UTC).
 vbStart :: Lens' ViewBilling (Maybe UTCTime)
 vbStart = lens _vbStart (\ s a -> s{_vbStart = a}) . mapping _Time
 
--- | The end date and time for the time period for which you want a list of billing records. Specify the date and time in Coordinated Universal time (UTC).
+-- | The end date and time for the time period for which you want a list of billing records. Specify the date and time in Unix time format and Coordinated Universal time (UTC).
 vbEnd :: Lens' ViewBilling (Maybe UTCTime)
 vbEnd = lens _vbEnd (\ s a -> s{_vbEnd = a}) . mapping _Time
 
@@ -98,6 +95,13 @@ vbMarker = lens _vbMarker (\ s a -> s{_vbMarker = a})
 -- | The number of billing records to be returned. Default: 20
 vbMaxItems :: Lens' ViewBilling (Maybe Int)
 vbMaxItems = lens _vbMaxItems (\ s a -> s{_vbMaxItems = a})
+
+instance AWSPager ViewBilling where
+        page rq rs
+          | stop (rs ^. vbrsNextPageMarker) = Nothing
+          | stop (rs ^. vbrsBillingRecords) = Nothing
+          | otherwise =
+            Just $ rq & vbMarker .~ rs ^. vbrsNextPageMarker
 
 instance AWSRequest ViewBilling where
         type Rs ViewBilling = ViewBillingResponse
@@ -143,12 +147,12 @@ instance ToQuery ViewBilling where
 --
 --
 -- /See:/ 'viewBillingResponse' smart constructor.
-data ViewBillingResponse = ViewBillingResponse'
-  { _vbrsNextPageMarker :: !(Maybe Text)
-  , _vbrsBillingRecords :: !(Maybe [BillingRecord])
-  , _vbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ViewBillingResponse = ViewBillingResponse'{_vbrsNextPageMarker
+                                                :: !(Maybe Text),
+                                                _vbrsBillingRecords ::
+                                                !(Maybe [BillingRecord]),
+                                                _vbrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ViewBillingResponse' with the minimum fields required to make a request.
 --
@@ -162,13 +166,10 @@ data ViewBillingResponse = ViewBillingResponse'
 viewBillingResponse
     :: Int -- ^ 'vbrsResponseStatus'
     -> ViewBillingResponse
-viewBillingResponse pResponseStatus_ =
-  ViewBillingResponse'
-    { _vbrsNextPageMarker = Nothing
-    , _vbrsBillingRecords = Nothing
-    , _vbrsResponseStatus = pResponseStatus_
-    }
-
+viewBillingResponse pResponseStatus_
+  = ViewBillingResponse'{_vbrsNextPageMarker = Nothing,
+                         _vbrsBillingRecords = Nothing,
+                         _vbrsResponseStatus = pResponseStatus_}
 
 -- | If there are more billing records than you specified for @MaxItems@ in the request, submit another request and include the value of @NextPageMarker@ in the value of @Marker@ .
 vbrsNextPageMarker :: Lens' ViewBillingResponse (Maybe Text)

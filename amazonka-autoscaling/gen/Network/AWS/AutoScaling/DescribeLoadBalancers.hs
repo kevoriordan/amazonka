@@ -21,8 +21,10 @@
 -- Describes the load balancers for the specified Auto Scaling group.
 --
 --
--- Note that this operation describes only Classic Load Balancers. If you have Application Load Balancers, use 'DescribeLoadBalancerTargetGroups' instead.
+-- This operation describes only Classic Load Balancers. If you have Application Load Balancers or Network Load Balancers, use 'DescribeLoadBalancerTargetGroups' instead.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AutoScaling.DescribeLoadBalancers
     (
     -- * Creating a Request
@@ -45,17 +47,20 @@ module Network.AWS.AutoScaling.DescribeLoadBalancers
 import Network.AWS.AutoScaling.Types
 import Network.AWS.AutoScaling.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLoadBalancers' smart constructor.
-data DescribeLoadBalancers = DescribeLoadBalancers'
-  { _dlbNextToken            :: !(Maybe Text)
-  , _dlbMaxRecords           :: !(Maybe Int)
-  , _dlbAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoadBalancers = DescribeLoadBalancers'{_dlbNextToken
+                                                    :: !(Maybe Text),
+                                                    _dlbMaxRecords ::
+                                                    !(Maybe Int),
+                                                    _dlbAutoScalingGroupName ::
+                                                    !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeLoadBalancers' with the minimum fields required to make a request.
 --
@@ -63,31 +68,35 @@ data DescribeLoadBalancers = DescribeLoadBalancers'
 --
 -- * 'dlbNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
--- * 'dlbMaxRecords' - The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
+-- * 'dlbMaxRecords' - The maximum number of items to return with this call. The default value is @100@ and the maximum value is @100@ .
 --
 -- * 'dlbAutoScalingGroupName' - The name of the Auto Scaling group.
 describeLoadBalancers
     :: Text -- ^ 'dlbAutoScalingGroupName'
     -> DescribeLoadBalancers
-describeLoadBalancers pAutoScalingGroupName_ =
-  DescribeLoadBalancers'
-    { _dlbNextToken = Nothing
-    , _dlbMaxRecords = Nothing
-    , _dlbAutoScalingGroupName = pAutoScalingGroupName_
-    }
-
+describeLoadBalancers pAutoScalingGroupName_
+  = DescribeLoadBalancers'{_dlbNextToken = Nothing,
+                           _dlbMaxRecords = Nothing,
+                           _dlbAutoScalingGroupName = pAutoScalingGroupName_}
 
 -- | The token for the next set of items to return. (You received this token from a previous call.)
 dlbNextToken :: Lens' DescribeLoadBalancers (Maybe Text)
 dlbNextToken = lens _dlbNextToken (\ s a -> s{_dlbNextToken = a})
 
--- | The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
+-- | The maximum number of items to return with this call. The default value is @100@ and the maximum value is @100@ .
 dlbMaxRecords :: Lens' DescribeLoadBalancers (Maybe Int)
 dlbMaxRecords = lens _dlbMaxRecords (\ s a -> s{_dlbMaxRecords = a})
 
 -- | The name of the Auto Scaling group.
 dlbAutoScalingGroupName :: Lens' DescribeLoadBalancers Text
 dlbAutoScalingGroupName = lens _dlbAutoScalingGroupName (\ s a -> s{_dlbAutoScalingGroupName = a})
+
+instance AWSPager DescribeLoadBalancers where
+        page rq rs
+          | stop (rs ^. dlbrsNextToken) = Nothing
+          | stop (rs ^. dlbrsLoadBalancers) = Nothing
+          | otherwise =
+            Just $ rq & dlbNextToken .~ rs ^. dlbrsNextToken
 
 instance AWSRequest DescribeLoadBalancers where
         type Rs DescribeLoadBalancers =
@@ -122,12 +131,18 @@ instance ToQuery DescribeLoadBalancers where
                "AutoScalingGroupName" =: _dlbAutoScalingGroupName]
 
 -- | /See:/ 'describeLoadBalancersResponse' smart constructor.
-data DescribeLoadBalancersResponse = DescribeLoadBalancersResponse'
-  { _dlbrsLoadBalancers  :: !(Maybe [LoadBalancerState])
-  , _dlbrsNextToken      :: !(Maybe Text)
-  , _dlbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoadBalancersResponse = DescribeLoadBalancersResponse'{_dlbrsLoadBalancers
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [LoadBalancerState]),
+                                                                    _dlbrsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dlbrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeLoadBalancersResponse' with the minimum fields required to make a request.
 --
@@ -135,25 +150,23 @@ data DescribeLoadBalancersResponse = DescribeLoadBalancersResponse'
 --
 -- * 'dlbrsLoadBalancers' - The load balancers.
 --
--- * 'dlbrsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- * 'dlbrsNextToken' - A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 --
 -- * 'dlbrsResponseStatus' - -- | The response status code.
 describeLoadBalancersResponse
     :: Int -- ^ 'dlbrsResponseStatus'
     -> DescribeLoadBalancersResponse
-describeLoadBalancersResponse pResponseStatus_ =
-  DescribeLoadBalancersResponse'
-    { _dlbrsLoadBalancers = Nothing
-    , _dlbrsNextToken = Nothing
-    , _dlbrsResponseStatus = pResponseStatus_
-    }
-
+describeLoadBalancersResponse pResponseStatus_
+  = DescribeLoadBalancersResponse'{_dlbrsLoadBalancers
+                                     = Nothing,
+                                   _dlbrsNextToken = Nothing,
+                                   _dlbrsResponseStatus = pResponseStatus_}
 
 -- | The load balancers.
 dlbrsLoadBalancers :: Lens' DescribeLoadBalancersResponse [LoadBalancerState]
 dlbrsLoadBalancers = lens _dlbrsLoadBalancers (\ s a -> s{_dlbrsLoadBalancers = a}) . _Default . _Coerce
 
--- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- | A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 dlbrsNextToken :: Lens' DescribeLoadBalancersResponse (Maybe Text)
 dlbrsNextToken = lens _dlbrsNextToken (\ s a -> s{_dlbrsNextToken = a})
 

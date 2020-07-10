@@ -41,15 +41,15 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteHSMClientCertificate' smart constructor.
-newtype DeleteHSMClientCertificate = DeleteHSMClientCertificate'
-  { _dhsmccHSMClientCertificateIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteHSMClientCertificate = DeleteHSMClientCertificate'{_dhsmccHSMClientCertificateIdentifier
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteHSMClientCertificate' with the minimum fields required to make a request.
 --
@@ -59,10 +59,10 @@ newtype DeleteHSMClientCertificate = DeleteHSMClientCertificate'
 deleteHSMClientCertificate
     :: Text -- ^ 'dhsmccHSMClientCertificateIdentifier'
     -> DeleteHSMClientCertificate
-deleteHSMClientCertificate pHSMClientCertificateIdentifier_ =
-  DeleteHSMClientCertificate'
-    {_dhsmccHSMClientCertificateIdentifier = pHSMClientCertificateIdentifier_}
-
+deleteHSMClientCertificate
+  pHSMClientCertificateIdentifier_
+  = DeleteHSMClientCertificate'{_dhsmccHSMClientCertificateIdentifier
+                                  = pHSMClientCertificateIdentifier_}
 
 -- | The identifier of the HSM client certificate to be deleted.
 dhsmccHSMClientCertificateIdentifier :: Lens' DeleteHSMClientCertificate Text
@@ -95,17 +95,16 @@ instance ToQuery DeleteHSMClientCertificate where
                  _dhsmccHSMClientCertificateIdentifier]
 
 -- | /See:/ 'deleteHSMClientCertificateResponse' smart constructor.
-data DeleteHSMClientCertificateResponse =
-  DeleteHSMClientCertificateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteHSMClientCertificateResponse = DeleteHSMClientCertificateResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteHSMClientCertificateResponse' with the minimum fields required to make a request.
 --
 deleteHSMClientCertificateResponse
     :: DeleteHSMClientCertificateResponse
-deleteHSMClientCertificateResponse = DeleteHSMClientCertificateResponse'
-
+deleteHSMClientCertificateResponse
+  = DeleteHSMClientCertificateResponse'
 
 instance NFData DeleteHSMClientCertificateResponse
          where

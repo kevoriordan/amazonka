@@ -35,8 +35,8 @@ module Network.AWS.Glue.GetUserDefinedFunction
     , getUserDefinedFunctionResponse
     , GetUserDefinedFunctionResponse
     -- * Response Lenses
-    , gudfursUserDefinedFunction
-    , gudfursResponseStatus
+    , gtusrdfndfnctnrsUserDefinedFunction
+    , gtusrdfndfnctnrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -47,18 +47,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getUserDefinedFunction' smart constructor.
-data GetUserDefinedFunction = GetUserDefinedFunction'
-  { _getCatalogId    :: !(Maybe Text)
-  , _getDatabaseName :: !Text
-  , _getFunctionName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUserDefinedFunction = GetUserDefinedFunction'{_getCatalogId
+                                                      :: !(Maybe Text),
+                                                      _getDatabaseName :: !Text,
+                                                      _getFunctionName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetUserDefinedFunction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'getCatalogId' - The ID of the Data Catalog where the function to be retrieved is located. If none is supplied, the AWS account ID is used by default.
+-- * 'getCatalogId' - The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the AWS account ID is used by default.
 --
 -- * 'getDatabaseName' - The name of the catalog database where the function is located.
 --
@@ -67,15 +67,12 @@ getUserDefinedFunction
     :: Text -- ^ 'getDatabaseName'
     -> Text -- ^ 'getFunctionName'
     -> GetUserDefinedFunction
-getUserDefinedFunction pDatabaseName_ pFunctionName_ =
-  GetUserDefinedFunction'
-    { _getCatalogId = Nothing
-    , _getDatabaseName = pDatabaseName_
-    , _getFunctionName = pFunctionName_
-    }
+getUserDefinedFunction pDatabaseName_ pFunctionName_
+  = GetUserDefinedFunction'{_getCatalogId = Nothing,
+                            _getDatabaseName = pDatabaseName_,
+                            _getFunctionName = pFunctionName_}
 
-
--- | The ID of the Data Catalog where the function to be retrieved is located. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the AWS account ID is used by default.
 getCatalogId :: Lens' GetUserDefinedFunction (Maybe Text)
 getCatalogId = lens _getCatalogId (\ s a -> s{_getCatalogId = a})
 
@@ -126,35 +123,37 @@ instance ToQuery GetUserDefinedFunction where
         toQuery = const mempty
 
 -- | /See:/ 'getUserDefinedFunctionResponse' smart constructor.
-data GetUserDefinedFunctionResponse = GetUserDefinedFunctionResponse'
-  { _gudfursUserDefinedFunction :: !(Maybe UserDefinedFunction)
-  , _gudfursResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUserDefinedFunctionResponse = GetUserDefinedFunctionResponse'{_gtusrdfndfnctnrsUserDefinedFunction
+                                                                      ::
+                                                                      !(Maybe
+                                                                          UserDefinedFunction),
+                                                                      _gtusrdfndfnctnrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'GetUserDefinedFunctionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gudfursUserDefinedFunction' - The requested function definition.
+-- * 'gtusrdfndfnctnrsUserDefinedFunction' - The requested function definition.
 --
--- * 'gudfursResponseStatus' - -- | The response status code.
+-- * 'gtusrdfndfnctnrsResponseStatus' - -- | The response status code.
 getUserDefinedFunctionResponse
-    :: Int -- ^ 'gudfursResponseStatus'
+    :: Int -- ^ 'gtusrdfndfnctnrsResponseStatus'
     -> GetUserDefinedFunctionResponse
-getUserDefinedFunctionResponse pResponseStatus_ =
-  GetUserDefinedFunctionResponse'
-    { _gudfursUserDefinedFunction = Nothing
-    , _gudfursResponseStatus = pResponseStatus_
-    }
-
+getUserDefinedFunctionResponse pResponseStatus_
+  = GetUserDefinedFunctionResponse'{_gtusrdfndfnctnrsUserDefinedFunction
+                                      = Nothing,
+                                    _gtusrdfndfnctnrsResponseStatus =
+                                      pResponseStatus_}
 
 -- | The requested function definition.
-gudfursUserDefinedFunction :: Lens' GetUserDefinedFunctionResponse (Maybe UserDefinedFunction)
-gudfursUserDefinedFunction = lens _gudfursUserDefinedFunction (\ s a -> s{_gudfursUserDefinedFunction = a})
+gtusrdfndfnctnrsUserDefinedFunction :: Lens' GetUserDefinedFunctionResponse (Maybe UserDefinedFunction)
+gtusrdfndfnctnrsUserDefinedFunction = lens _gtusrdfndfnctnrsUserDefinedFunction (\ s a -> s{_gtusrdfndfnctnrsUserDefinedFunction = a})
 
 -- | -- | The response status code.
-gudfursResponseStatus :: Lens' GetUserDefinedFunctionResponse Int
-gudfursResponseStatus = lens _gudfursResponseStatus (\ s a -> s{_gudfursResponseStatus = a})
+gtusrdfndfnctnrsResponseStatus :: Lens' GetUserDefinedFunctionResponse Int
+gtusrdfndfnctnrsResponseStatus = lens _gtusrdfndfnctnrsResponseStatus (\ s a -> s{_gtusrdfndfnctnrsResponseStatus = a})
 
 instance NFData GetUserDefinedFunctionResponse where

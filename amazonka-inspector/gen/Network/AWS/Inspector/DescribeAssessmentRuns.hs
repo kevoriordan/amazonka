@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeAssessmentRuns' smart constructor.
-newtype DescribeAssessmentRuns = DescribeAssessmentRuns'
-  { _darAssessmentRunARNs :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeAssessmentRuns = DescribeAssessmentRuns'{_darAssessmentRunARNs
+                                                         :: List1 Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeAssessmentRuns' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DescribeAssessmentRuns = DescribeAssessmentRuns'
 describeAssessmentRuns
     :: NonEmpty Text -- ^ 'darAssessmentRunARNs'
     -> DescribeAssessmentRuns
-describeAssessmentRuns pAssessmentRunARNs_ =
-  DescribeAssessmentRuns' {_darAssessmentRunARNs = _List1 # pAssessmentRunARNs_}
-
+describeAssessmentRuns pAssessmentRunARNs_
+  = DescribeAssessmentRuns'{_darAssessmentRunARNs =
+                              _List1 # pAssessmentRunARNs_}
 
 -- | The ARN that specifies the assessment run that you want to describe.
 darAssessmentRunARNs :: Lens' DescribeAssessmentRuns (NonEmpty Text)
@@ -107,12 +107,17 @@ instance ToQuery DescribeAssessmentRuns where
         toQuery = const mempty
 
 -- | /See:/ 'describeAssessmentRunsResponse' smart constructor.
-data DescribeAssessmentRunsResponse = DescribeAssessmentRunsResponse'
-  { _darrsResponseStatus :: !Int
-  , _darrsAssessmentRuns :: ![AssessmentRun]
-  , _darrsFailedItems    :: !(Map Text FailedItemDetails)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAssessmentRunsResponse = DescribeAssessmentRunsResponse'{_darrsResponseStatus
+                                                                      :: !Int,
+                                                                      _darrsAssessmentRuns
+                                                                      ::
+                                                                      ![AssessmentRun],
+                                                                      _darrsFailedItems
+                                                                      ::
+                                                                      !(Map Text
+                                                                          FailedItemDetails)}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeAssessmentRunsResponse' with the minimum fields required to make a request.
 --
@@ -126,13 +131,11 @@ data DescribeAssessmentRunsResponse = DescribeAssessmentRunsResponse'
 describeAssessmentRunsResponse
     :: Int -- ^ 'darrsResponseStatus'
     -> DescribeAssessmentRunsResponse
-describeAssessmentRunsResponse pResponseStatus_ =
-  DescribeAssessmentRunsResponse'
-    { _darrsResponseStatus = pResponseStatus_
-    , _darrsAssessmentRuns = mempty
-    , _darrsFailedItems = mempty
-    }
-
+describeAssessmentRunsResponse pResponseStatus_
+  = DescribeAssessmentRunsResponse'{_darrsResponseStatus
+                                      = pResponseStatus_,
+                                    _darrsAssessmentRuns = mempty,
+                                    _darrsFailedItems = mempty}
 
 -- | -- | The response status code.
 darrsResponseStatus :: Lens' DescribeAssessmentRunsResponse Int

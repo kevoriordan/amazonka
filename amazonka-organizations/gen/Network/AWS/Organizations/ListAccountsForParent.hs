@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the accounts in an organization that are contained by the specified target root or organizational unit (OU). If you specify the root, you get a list of all the accounts that are not in any OU. If you specify an OU, you get a list of all the accounts in only that OU, and not in any child OUs. To get a list of all accounts in the organization, use the 'ListAccounts' operation.
+-- Lists the accounts in an organization that are contained by the specified target root or organizational unit (OU). If you specify the root, you get a list of all the accounts that aren't in any OU. If you specify an OU, you get a list of all the accounts in only that OU and not in any child OUs. To get a list of all accounts in the organization, use the 'ListAccounts' operation.
 --
 --
--- This operation can be called only from the organization's master account.
+-- This operation can be called only from the organization's master account or by a member account that is a delegated administrator for an AWS service.
 --
 --
 -- This operation returns paginated results.
@@ -53,38 +53,36 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAccountsForParent' smart constructor.
-data ListAccountsForParent = ListAccountsForParent'
-  { _lafpNextToken  :: !(Maybe Text)
-  , _lafpMaxResults :: !(Maybe Nat)
-  , _lafpParentId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAccountsForParent = ListAccountsForParent'{_lafpNextToken
+                                                    :: !(Maybe Text),
+                                                    _lafpMaxResults ::
+                                                    !(Maybe Nat),
+                                                    _lafpParentId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListAccountsForParent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lafpNextToken' - Use this parameter if you receive a @NextToken@ response in a previous request that indicates that there is more output available. Set it to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
+-- * 'lafpNextToken' - The parameter for receiving additional results if you receive a @NextToken@ response in a previous request. A @NextToken@ response indicates that more output is available. Set this parameter to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
 --
--- * 'lafpMaxResults' - (Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
+-- * 'lafpMaxResults' - The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
 --
 -- * 'lafpParentId' - The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.
 listAccountsForParent
     :: Text -- ^ 'lafpParentId'
     -> ListAccountsForParent
-listAccountsForParent pParentId_ =
-  ListAccountsForParent'
-    { _lafpNextToken = Nothing
-    , _lafpMaxResults = Nothing
-    , _lafpParentId = pParentId_
-    }
+listAccountsForParent pParentId_
+  = ListAccountsForParent'{_lafpNextToken = Nothing,
+                           _lafpMaxResults = Nothing,
+                           _lafpParentId = pParentId_}
 
-
--- | Use this parameter if you receive a @NextToken@ response in a previous request that indicates that there is more output available. Set it to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
+-- | The parameter for receiving additional results if you receive a @NextToken@ response in a previous request. A @NextToken@ response indicates that more output is available. Set this parameter to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
 lafpNextToken :: Lens' ListAccountsForParent (Maybe Text)
 lafpNextToken = lens _lafpNextToken (\ s a -> s{_lafpNextToken = a})
 
--- | (Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
+-- | The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
 lafpMaxResults :: Lens' ListAccountsForParent (Maybe Natural)
 lafpMaxResults = lens _lafpMaxResults (\ s a -> s{_lafpMaxResults = a}) . mapping _Nat
 
@@ -139,12 +137,18 @@ instance ToQuery ListAccountsForParent where
         toQuery = const mempty
 
 -- | /See:/ 'listAccountsForParentResponse' smart constructor.
-data ListAccountsForParentResponse = ListAccountsForParentResponse'
-  { _lafprsAccounts       :: !(Maybe [Account])
-  , _lafprsNextToken      :: !(Maybe Text)
-  , _lafprsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ListAccountsForParentResponse = ListAccountsForParentResponse'{_lafprsAccounts
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [Account]),
+                                                                    _lafprsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _lafprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListAccountsForParentResponse' with the minimum fields required to make a request.
 --
@@ -152,25 +156,23 @@ data ListAccountsForParentResponse = ListAccountsForParentResponse'
 --
 -- * 'lafprsAccounts' - A list of the accounts in the specified root or OU.
 --
--- * 'lafprsNextToken' - If present, this value indicates that there is more output available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
+-- * 'lafprsNextToken' - If present, indicates that more output is available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
 --
 -- * 'lafprsResponseStatus' - -- | The response status code.
 listAccountsForParentResponse
     :: Int -- ^ 'lafprsResponseStatus'
     -> ListAccountsForParentResponse
-listAccountsForParentResponse pResponseStatus_ =
-  ListAccountsForParentResponse'
-    { _lafprsAccounts = Nothing
-    , _lafprsNextToken = Nothing
-    , _lafprsResponseStatus = pResponseStatus_
-    }
-
+listAccountsForParentResponse pResponseStatus_
+  = ListAccountsForParentResponse'{_lafprsAccounts =
+                                     Nothing,
+                                   _lafprsNextToken = Nothing,
+                                   _lafprsResponseStatus = pResponseStatus_}
 
 -- | A list of the accounts in the specified root or OU.
 lafprsAccounts :: Lens' ListAccountsForParentResponse [Account]
 lafprsAccounts = lens _lafprsAccounts (\ s a -> s{_lafprsAccounts = a}) . _Default . _Coerce
 
--- | If present, this value indicates that there is more output available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
+-- | If present, indicates that more output is available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
 lafprsNextToken :: Lens' ListAccountsForParentResponse (Maybe Text)
 lafprsNextToken = lens _lafprsNextToken (\ s a -> s{_lafprsNextToken = a})
 

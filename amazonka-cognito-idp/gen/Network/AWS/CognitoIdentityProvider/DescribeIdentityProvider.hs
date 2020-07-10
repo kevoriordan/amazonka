@@ -46,11 +46,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeIdentityProvider' smart constructor.
-data DescribeIdentityProvider = DescribeIdentityProvider'
-  { _dipUserPoolId   :: !Text
-  , _dipProviderName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeIdentityProvider = DescribeIdentityProvider'{_dipUserPoolId
+                                                          :: !Text,
+                                                          _dipProviderName ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeIdentityProvider' with the minimum fields required to make a request.
 --
@@ -63,10 +64,10 @@ describeIdentityProvider
     :: Text -- ^ 'dipUserPoolId'
     -> Text -- ^ 'dipProviderName'
     -> DescribeIdentityProvider
-describeIdentityProvider pUserPoolId_ pProviderName_ =
-  DescribeIdentityProvider'
-    {_dipUserPoolId = pUserPoolId_, _dipProviderName = pProviderName_}
-
+describeIdentityProvider pUserPoolId_ pProviderName_
+  = DescribeIdentityProvider'{_dipUserPoolId =
+                                pUserPoolId_,
+                              _dipProviderName = pProviderName_}
 
 -- | The user pool ID.
 dipUserPoolId :: Lens' DescribeIdentityProvider Text
@@ -114,11 +115,14 @@ instance ToQuery DescribeIdentityProvider where
         toQuery = const mempty
 
 -- | /See:/ 'describeIdentityProviderResponse' smart constructor.
-data DescribeIdentityProviderResponse = DescribeIdentityProviderResponse'
-  { _diprsResponseStatus   :: !Int
-  , _diprsIdentityProvider :: !IdentityProviderType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeIdentityProviderResponse = DescribeIdentityProviderResponse'{_diprsResponseStatus
+                                                                          ::
+                                                                          !Int,
+                                                                          _diprsIdentityProvider
+                                                                          ::
+                                                                          !IdentityProviderType}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeIdentityProviderResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +135,12 @@ describeIdentityProviderResponse
     :: Int -- ^ 'diprsResponseStatus'
     -> IdentityProviderType -- ^ 'diprsIdentityProvider'
     -> DescribeIdentityProviderResponse
-describeIdentityProviderResponse pResponseStatus_ pIdentityProvider_ =
-  DescribeIdentityProviderResponse'
-    { _diprsResponseStatus = pResponseStatus_
-    , _diprsIdentityProvider = pIdentityProvider_
-    }
-
+describeIdentityProviderResponse pResponseStatus_
+  pIdentityProvider_
+  = DescribeIdentityProviderResponse'{_diprsResponseStatus
+                                        = pResponseStatus_,
+                                      _diprsIdentityProvider =
+                                        pIdentityProvider_}
 
 -- | -- | The response status code.
 diprsResponseStatus :: Lens' DescribeIdentityProviderResponse Int

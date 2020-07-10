@@ -48,17 +48,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLimits' smart constructor.
-data DescribeLimits =
-  DescribeLimits'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLimits = DescribeLimits'
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeLimits' with the minimum fields required to make a request.
 --
 describeLimits
     :: DescribeLimits
 describeLimits = DescribeLimits'
-
 
 instance AWSRequest DescribeLimits where
         type Rs DescribeLimits = DescribeLimitsResponse
@@ -93,12 +90,13 @@ instance ToQuery DescribeLimits where
         toQuery = const mempty
 
 -- | /See:/ 'describeLimitsResponse' smart constructor.
-data DescribeLimitsResponse = DescribeLimitsResponse'
-  { _dlrsResponseStatus :: !Int
-  , _dlrsShardLimit     :: !Nat
-  , _dlrsOpenShardCount :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLimitsResponse = DescribeLimitsResponse'{_dlrsResponseStatus
+                                                      :: !Int,
+                                                      _dlrsShardLimit :: !Nat,
+                                                      _dlrsOpenShardCount ::
+                                                      !Nat}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeLimitsResponse' with the minimum fields required to make a request.
 --
@@ -114,13 +112,12 @@ describeLimitsResponse
     -> Natural -- ^ 'dlrsShardLimit'
     -> Natural -- ^ 'dlrsOpenShardCount'
     -> DescribeLimitsResponse
-describeLimitsResponse pResponseStatus_ pShardLimit_ pOpenShardCount_ =
-  DescribeLimitsResponse'
-    { _dlrsResponseStatus = pResponseStatus_
-    , _dlrsShardLimit = _Nat # pShardLimit_
-    , _dlrsOpenShardCount = _Nat # pOpenShardCount_
-    }
-
+describeLimitsResponse pResponseStatus_ pShardLimit_
+  pOpenShardCount_
+  = DescribeLimitsResponse'{_dlrsResponseStatus =
+                              pResponseStatus_,
+                            _dlrsShardLimit = _Nat # pShardLimit_,
+                            _dlrsOpenShardCount = _Nat # pOpenShardCount_}
 
 -- | -- | The response status code.
 dlrsResponseStatus :: Lens' DescribeLimitsResponse Int

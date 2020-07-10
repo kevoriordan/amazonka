@@ -14,11 +14,11 @@
 module Test.AWS.Gen.EMR where
 
 import Data.Proxy
-import Network.AWS.EMR
-import Test.AWS.EMR.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.EMR
+import Test.AWS.EMR.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -73,6 +73,9 @@ import Test.Tasty
 --         , requestAddInstanceFleet $
 --             addInstanceFleet
 --
+--         , requestPutManagedScalingPolicy $
+--             putManagedScalingPolicy
+--
 --         , requestAddInstanceGroups $
 --             addInstanceGroups
 --
@@ -84,6 +87,15 @@ import Test.Tasty
 --
 --         , requestListInstanceGroups $
 --             listInstanceGroups
+--
+--         , requestGetBlockPublicAccessConfiguration $
+--             getBlockPublicAccessConfiguration
+--
+--         , requestModifyCluster $
+--             modifyCluster
+--
+--         , requestPutBlockPublicAccessConfiguration $
+--             putBlockPublicAccessConfiguration
 --
 --         , requestListBootstrapActions $
 --             listBootstrapActions
@@ -103,8 +115,14 @@ import Test.Tasty
 --         , requestDescribeSecurityConfiguration $
 --             describeSecurityConfiguration
 --
+--         , requestGetManagedScalingPolicy $
+--             getManagedScalingPolicy
+--
 --         , requestListInstanceFleets $
 --             listInstanceFleets
+--
+--         , requestRemoveManagedScalingPolicy $
+--             removeManagedScalingPolicy
 --
 --           ]
 
@@ -154,6 +172,9 @@ import Test.Tasty
 --         , responseAddInstanceFleet $
 --             addInstanceFleetResponse
 --
+--         , responsePutManagedScalingPolicy $
+--             putManagedScalingPolicyResponse
+--
 --         , responseAddInstanceGroups $
 --             addInstanceGroupsResponse
 --
@@ -165,6 +186,15 @@ import Test.Tasty
 --
 --         , responseListInstanceGroups $
 --             listInstanceGroupsResponse
+--
+--         , responseGetBlockPublicAccessConfiguration $
+--             getBlockPublicAccessConfigurationResponse
+--
+--         , responseModifyCluster $
+--             modifyClusterResponse
+--
+--         , responsePutBlockPublicAccessConfiguration $
+--             putBlockPublicAccessConfigurationResponse
 --
 --         , responseListBootstrapActions $
 --             listBootstrapActionsResponse
@@ -184,8 +214,14 @@ import Test.Tasty
 --         , responseDescribeSecurityConfiguration $
 --             describeSecurityConfigurationResponse
 --
+--         , responseGetManagedScalingPolicy $
+--             getManagedScalingPolicyResponse
+--
 --         , responseListInstanceFleets $
 --             listInstanceFleetsResponse
+--
+--         , responseRemoveManagedScalingPolicy $
+--             removeManagedScalingPolicyResponse
 --
 --           ]
 --     ]
@@ -267,6 +303,11 @@ requestAddInstanceFleet = req
     "AddInstanceFleet"
     "fixture/AddInstanceFleet.yaml"
 
+requestPutManagedScalingPolicy :: PutManagedScalingPolicy -> TestTree
+requestPutManagedScalingPolicy = req
+    "PutManagedScalingPolicy"
+    "fixture/PutManagedScalingPolicy.yaml"
+
 requestAddInstanceGroups :: AddInstanceGroups -> TestTree
 requestAddInstanceGroups = req
     "AddInstanceGroups"
@@ -286,6 +327,21 @@ requestListInstanceGroups :: ListInstanceGroups -> TestTree
 requestListInstanceGroups = req
     "ListInstanceGroups"
     "fixture/ListInstanceGroups.yaml"
+
+requestGetBlockPublicAccessConfiguration :: GetBlockPublicAccessConfiguration -> TestTree
+requestGetBlockPublicAccessConfiguration = req
+    "GetBlockPublicAccessConfiguration"
+    "fixture/GetBlockPublicAccessConfiguration.yaml"
+
+requestModifyCluster :: ModifyCluster -> TestTree
+requestModifyCluster = req
+    "ModifyCluster"
+    "fixture/ModifyCluster.yaml"
+
+requestPutBlockPublicAccessConfiguration :: PutBlockPublicAccessConfiguration -> TestTree
+requestPutBlockPublicAccessConfiguration = req
+    "PutBlockPublicAccessConfiguration"
+    "fixture/PutBlockPublicAccessConfiguration.yaml"
 
 requestListBootstrapActions :: ListBootstrapActions -> TestTree
 requestListBootstrapActions = req
@@ -317,10 +373,20 @@ requestDescribeSecurityConfiguration = req
     "DescribeSecurityConfiguration"
     "fixture/DescribeSecurityConfiguration.yaml"
 
+requestGetManagedScalingPolicy :: GetManagedScalingPolicy -> TestTree
+requestGetManagedScalingPolicy = req
+    "GetManagedScalingPolicy"
+    "fixture/GetManagedScalingPolicy.yaml"
+
 requestListInstanceFleets :: ListInstanceFleets -> TestTree
 requestListInstanceFleets = req
     "ListInstanceFleets"
     "fixture/ListInstanceFleets.yaml"
+
+requestRemoveManagedScalingPolicy :: RemoveManagedScalingPolicy -> TestTree
+requestRemoveManagedScalingPolicy = req
+    "RemoveManagedScalingPolicy"
+    "fixture/RemoveManagedScalingPolicy.yaml"
 
 -- Responses
 
@@ -429,6 +495,13 @@ responseAddInstanceFleet = res
     emr
     (Proxy :: Proxy AddInstanceFleet)
 
+responsePutManagedScalingPolicy :: PutManagedScalingPolicyResponse -> TestTree
+responsePutManagedScalingPolicy = res
+    "PutManagedScalingPolicyResponse"
+    "fixture/PutManagedScalingPolicyResponse.proto"
+    emr
+    (Proxy :: Proxy PutManagedScalingPolicy)
+
 responseAddInstanceGroups :: AddInstanceGroupsResponse -> TestTree
 responseAddInstanceGroups = res
     "AddInstanceGroupsResponse"
@@ -456,6 +529,27 @@ responseListInstanceGroups = res
     "fixture/ListInstanceGroupsResponse.proto"
     emr
     (Proxy :: Proxy ListInstanceGroups)
+
+responseGetBlockPublicAccessConfiguration :: GetBlockPublicAccessConfigurationResponse -> TestTree
+responseGetBlockPublicAccessConfiguration = res
+    "GetBlockPublicAccessConfigurationResponse"
+    "fixture/GetBlockPublicAccessConfigurationResponse.proto"
+    emr
+    (Proxy :: Proxy GetBlockPublicAccessConfiguration)
+
+responseModifyCluster :: ModifyClusterResponse -> TestTree
+responseModifyCluster = res
+    "ModifyClusterResponse"
+    "fixture/ModifyClusterResponse.proto"
+    emr
+    (Proxy :: Proxy ModifyCluster)
+
+responsePutBlockPublicAccessConfiguration :: PutBlockPublicAccessConfigurationResponse -> TestTree
+responsePutBlockPublicAccessConfiguration = res
+    "PutBlockPublicAccessConfigurationResponse"
+    "fixture/PutBlockPublicAccessConfigurationResponse.proto"
+    emr
+    (Proxy :: Proxy PutBlockPublicAccessConfiguration)
 
 responseListBootstrapActions :: ListBootstrapActionsResponse -> TestTree
 responseListBootstrapActions = res
@@ -499,9 +593,23 @@ responseDescribeSecurityConfiguration = res
     emr
     (Proxy :: Proxy DescribeSecurityConfiguration)
 
+responseGetManagedScalingPolicy :: GetManagedScalingPolicyResponse -> TestTree
+responseGetManagedScalingPolicy = res
+    "GetManagedScalingPolicyResponse"
+    "fixture/GetManagedScalingPolicyResponse.proto"
+    emr
+    (Proxy :: Proxy GetManagedScalingPolicy)
+
 responseListInstanceFleets :: ListInstanceFleetsResponse -> TestTree
 responseListInstanceFleets = res
     "ListInstanceFleetsResponse"
     "fixture/ListInstanceFleetsResponse.proto"
     emr
     (Proxy :: Proxy ListInstanceFleets)
+
+responseRemoveManagedScalingPolicy :: RemoveManagedScalingPolicyResponse -> TestTree
+responseRemoveManagedScalingPolicy = res
+    "RemoveManagedScalingPolicyResponse"
+    "fixture/RemoveManagedScalingPolicyResponse.proto"
+    emr
+    (Proxy :: Proxy RemoveManagedScalingPolicy)

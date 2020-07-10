@@ -46,12 +46,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putRoomSkillParameter' smart constructor.
-data PutRoomSkillParameter = PutRoomSkillParameter'
-  { _prspRoomARN            :: !(Maybe Text)
-  , _prspSkillId            :: !Text
-  , _prspRoomSkillParameter :: !RoomSkillParameter
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRoomSkillParameter = PutRoomSkillParameter'{_prspRoomARN
+                                                    :: !(Maybe Text),
+                                                    _prspSkillId :: !Text,
+                                                    _prspRoomSkillParameter ::
+                                                    !RoomSkillParameter}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'PutRoomSkillParameter' with the minimum fields required to make a request.
 --
@@ -66,13 +67,10 @@ putRoomSkillParameter
     :: Text -- ^ 'prspSkillId'
     -> RoomSkillParameter -- ^ 'prspRoomSkillParameter'
     -> PutRoomSkillParameter
-putRoomSkillParameter pSkillId_ pRoomSkillParameter_ =
-  PutRoomSkillParameter'
-    { _prspRoomARN = Nothing
-    , _prspSkillId = pSkillId_
-    , _prspRoomSkillParameter = pRoomSkillParameter_
-    }
-
+putRoomSkillParameter pSkillId_ pRoomSkillParameter_
+  = PutRoomSkillParameter'{_prspRoomARN = Nothing,
+                           _prspSkillId = pSkillId_,
+                           _prspRoomSkillParameter = pRoomSkillParameter_}
 
 -- | The ARN of the room associated with the room skill parameter. Required.
 prspRoomARN :: Lens' PutRoomSkillParameter (Maybe Text)
@@ -126,10 +124,10 @@ instance ToQuery PutRoomSkillParameter where
         toQuery = const mempty
 
 -- | /See:/ 'putRoomSkillParameterResponse' smart constructor.
-newtype PutRoomSkillParameterResponse = PutRoomSkillParameterResponse'
-  { _prsprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype PutRoomSkillParameterResponse = PutRoomSkillParameterResponse'{_prsprsResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'PutRoomSkillParameterResponse' with the minimum fields required to make a request.
 --
@@ -139,9 +137,9 @@ newtype PutRoomSkillParameterResponse = PutRoomSkillParameterResponse'
 putRoomSkillParameterResponse
     :: Int -- ^ 'prsprsResponseStatus'
     -> PutRoomSkillParameterResponse
-putRoomSkillParameterResponse pResponseStatus_ =
-  PutRoomSkillParameterResponse' {_prsprsResponseStatus = pResponseStatus_}
-
+putRoomSkillParameterResponse pResponseStatus_
+  = PutRoomSkillParameterResponse'{_prsprsResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 prsprsResponseStatus :: Lens' PutRoomSkillParameterResponse Int

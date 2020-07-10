@@ -27,13 +27,13 @@
 --
 --     * Not be attached to any version at all
 --
---     * Attached to the same version as the staging label @AWSCURRENT@
+--     * Attached to the same version as the staging label @AWSCURRENT@ 
 --
 --
 --
 -- If the staging label @AWSPENDING@ is attached to a different version than the version with @AWSCURRENT@ then the attempt to rotate fails.
 --
--- __Minimum permissions__
+-- __Minimum permissions__ 
 --
 -- To run this command, you must have the following permissions:
 --
@@ -41,7 +41,7 @@
 --
 --
 --
--- __Related operations__
+-- __Related operations__ 
 --
 --     * To configure rotation for a secret or to manually trigger a rotation, use 'RotateSecret' .
 --
@@ -79,10 +79,10 @@ import Network.AWS.SecretsManager.Types
 import Network.AWS.SecretsManager.Types.Product
 
 -- | /See:/ 'cancelRotateSecret' smart constructor.
-newtype CancelRotateSecret = CancelRotateSecret'
-  { _crsSecretId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelRotateSecret = CancelRotateSecret'{_crsSecretId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CancelRotateSecret' with the minimum fields required to make a request.
 --
@@ -92,8 +92,8 @@ newtype CancelRotateSecret = CancelRotateSecret'
 cancelRotateSecret
     :: Text -- ^ 'crsSecretId'
     -> CancelRotateSecret
-cancelRotateSecret pSecretId_ = CancelRotateSecret' {_crsSecretId = pSecretId_}
-
+cancelRotateSecret pSecretId_
+  = CancelRotateSecret'{_crsSecretId = pSecretId_}
 
 -- | Specifies the secret for which you want to cancel a rotation request. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
 crsSecretId :: Lens' CancelRotateSecret Text
@@ -136,13 +136,16 @@ instance ToQuery CancelRotateSecret where
         toQuery = const mempty
 
 -- | /See:/ 'cancelRotateSecretResponse' smart constructor.
-data CancelRotateSecretResponse = CancelRotateSecretResponse'
-  { _crsrsVersionId      :: !(Maybe Text)
-  , _crsrsARN            :: !(Maybe Text)
-  , _crsrsName           :: !(Maybe Text)
-  , _crsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelRotateSecretResponse = CancelRotateSecretResponse'{_crsrsVersionId
+                                                              :: !(Maybe Text),
+                                                              _crsrsARN ::
+                                                              !(Maybe Text),
+                                                              _crsrsName ::
+                                                              !(Maybe Text),
+                                                              _crsrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CancelRotateSecretResponse' with the minimum fields required to make a request.
 --
@@ -158,14 +161,11 @@ data CancelRotateSecretResponse = CancelRotateSecretResponse'
 cancelRotateSecretResponse
     :: Int -- ^ 'crsrsResponseStatus'
     -> CancelRotateSecretResponse
-cancelRotateSecretResponse pResponseStatus_ =
-  CancelRotateSecretResponse'
-    { _crsrsVersionId = Nothing
-    , _crsrsARN = Nothing
-    , _crsrsName = Nothing
-    , _crsrsResponseStatus = pResponseStatus_
-    }
-
+cancelRotateSecretResponse pResponseStatus_
+  = CancelRotateSecretResponse'{_crsrsVersionId =
+                                  Nothing,
+                                _crsrsARN = Nothing, _crsrsName = Nothing,
+                                _crsrsResponseStatus = pResponseStatus_}
 
 -- | The unique identifier of the version of the secret that was created during the rotation. This version might not be complete, and should be evaluated for possible deletion. At the very least, you should remove the @VersionStage@ value @AWSPENDING@ to enable this version to be deleted. Failing to clean up a cancelled rotation can block you from successfully starting future rotations.
 crsrsVersionId :: Lens' CancelRotateSecretResponse (Maybe Text)

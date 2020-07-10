@@ -29,9 +29,9 @@ module Network.AWS.SSM.DeleteAssociation
       deleteAssociation
     , DeleteAssociation
     -- * Request Lenses
-    , daaAssociationId
-    , daaInstanceId
-    , daaName
+    , dltassctnAssociationId
+    , dltassctnInstanceId
+    , dltassctnName
 
     -- * Destructuring the Response
     , deleteAssociationResponse
@@ -48,40 +48,41 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'deleteAssociation' smart constructor.
-data DeleteAssociation = DeleteAssociation'
-  { _daaAssociationId :: !(Maybe Text)
-  , _daaInstanceId    :: !(Maybe Text)
-  , _daaName          :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAssociation = DeleteAssociation'{_dltassctnAssociationId
+                                            :: !(Maybe Text),
+                                            _dltassctnInstanceId ::
+                                            !(Maybe Text),
+                                            _dltassctnName :: !(Maybe Text)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAssociation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daaAssociationId' - The association ID that you want to delete.
+-- * 'dltassctnAssociationId' - The association ID that you want to delete.
 --
--- * 'daaInstanceId' - The ID of the instance.
+-- * 'dltassctnInstanceId' - The ID of the instance.
 --
--- * 'daaName' - The name of the Systems Manager document.
+-- * 'dltassctnName' - The name of the Systems Manager document.
 deleteAssociation
     :: DeleteAssociation
-deleteAssociation =
-  DeleteAssociation'
-    {_daaAssociationId = Nothing, _daaInstanceId = Nothing, _daaName = Nothing}
-
+deleteAssociation
+  = DeleteAssociation'{_dltassctnAssociationId =
+                         Nothing,
+                       _dltassctnInstanceId = Nothing,
+                       _dltassctnName = Nothing}
 
 -- | The association ID that you want to delete.
-daaAssociationId :: Lens' DeleteAssociation (Maybe Text)
-daaAssociationId = lens _daaAssociationId (\ s a -> s{_daaAssociationId = a})
+dltassctnAssociationId :: Lens' DeleteAssociation (Maybe Text)
+dltassctnAssociationId = lens _dltassctnAssociationId (\ s a -> s{_dltassctnAssociationId = a})
 
 -- | The ID of the instance.
-daaInstanceId :: Lens' DeleteAssociation (Maybe Text)
-daaInstanceId = lens _daaInstanceId (\ s a -> s{_daaInstanceId = a})
+dltassctnInstanceId :: Lens' DeleteAssociation (Maybe Text)
+dltassctnInstanceId = lens _dltassctnInstanceId (\ s a -> s{_dltassctnInstanceId = a})
 
 -- | The name of the Systems Manager document.
-daaName :: Lens' DeleteAssociation (Maybe Text)
-daaName = lens _daaName (\ s a -> s{_daaName = a})
+dltassctnName :: Lens' DeleteAssociation (Maybe Text)
+dltassctnName = lens _dltassctnName (\ s a -> s{_dltassctnName = a})
 
 instance AWSRequest DeleteAssociation where
         type Rs DeleteAssociation = DeleteAssociationResponse
@@ -108,9 +109,9 @@ instance ToJSON DeleteAssociation where
         toJSON DeleteAssociation'{..}
           = object
               (catMaybes
-                 [("AssociationId" .=) <$> _daaAssociationId,
-                  ("InstanceId" .=) <$> _daaInstanceId,
-                  ("Name" .=) <$> _daaName])
+                 [("AssociationId" .=) <$> _dltassctnAssociationId,
+                  ("InstanceId" .=) <$> _dltassctnInstanceId,
+                  ("Name" .=) <$> _dltassctnName])
 
 instance ToPath DeleteAssociation where
         toPath = const "/"
@@ -119,10 +120,10 @@ instance ToQuery DeleteAssociation where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAssociationResponse' smart constructor.
-newtype DeleteAssociationResponse = DeleteAssociationResponse'
-  { _delrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAssociationResponse = DeleteAssociationResponse'{_delrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteAssociationResponse' with the minimum fields required to make a request.
 --
@@ -132,9 +133,9 @@ newtype DeleteAssociationResponse = DeleteAssociationResponse'
 deleteAssociationResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteAssociationResponse
-deleteAssociationResponse pResponseStatus_ =
-  DeleteAssociationResponse' {_delrsResponseStatus = pResponseStatus_}
-
+deleteAssociationResponse pResponseStatus_
+  = DeleteAssociationResponse'{_delrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 delrsResponseStatus :: Lens' DeleteAssociationResponse Int

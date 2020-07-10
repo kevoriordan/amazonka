@@ -50,20 +50,20 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'getDocumentVersion' smart constructor.
-data GetDocumentVersion = GetDocumentVersion'
-  { _gdvAuthenticationToken   :: !(Maybe (Sensitive Text))
-  , _gdvIncludeCustomMetadata :: !(Maybe Bool)
-  , _gdvFields                :: !(Maybe Text)
-  , _gdvDocumentId            :: !Text
-  , _gdvVersionId             :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetDocumentVersion = GetDocumentVersion'{_gdvAuthenticationToken
+                                              :: !(Maybe (Sensitive Text)),
+                                              _gdvIncludeCustomMetadata ::
+                                              !(Maybe Bool),
+                                              _gdvFields :: !(Maybe Text),
+                                              _gdvDocumentId :: !Text,
+                                              _gdvVersionId :: !Text}
+                            deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDocumentVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdvAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'gdvAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'gdvIncludeCustomMetadata' - Set this to TRUE to include custom metadata in the response.
 --
@@ -76,17 +76,14 @@ getDocumentVersion
     :: Text -- ^ 'gdvDocumentId'
     -> Text -- ^ 'gdvVersionId'
     -> GetDocumentVersion
-getDocumentVersion pDocumentId_ pVersionId_ =
-  GetDocumentVersion'
-    { _gdvAuthenticationToken = Nothing
-    , _gdvIncludeCustomMetadata = Nothing
-    , _gdvFields = Nothing
-    , _gdvDocumentId = pDocumentId_
-    , _gdvVersionId = pVersionId_
-    }
+getDocumentVersion pDocumentId_ pVersionId_
+  = GetDocumentVersion'{_gdvAuthenticationToken =
+                          Nothing,
+                        _gdvIncludeCustomMetadata = Nothing,
+                        _gdvFields = Nothing, _gdvDocumentId = pDocumentId_,
+                        _gdvVersionId = pVersionId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 gdvAuthenticationToken :: Lens' GetDocumentVersion (Maybe Text)
 gdvAuthenticationToken = lens _gdvAuthenticationToken (\ s a -> s{_gdvAuthenticationToken = a}) . mapping _Sensitive
 
@@ -143,12 +140,17 @@ instance ToQuery GetDocumentVersion where
                "fields" =: _gdvFields]
 
 -- | /See:/ 'getDocumentVersionResponse' smart constructor.
-data GetDocumentVersionResponse = GetDocumentVersionResponse'
-  { _gdvrsCustomMetadata :: !(Maybe (Map Text Text))
-  , _gdvrsMetadata       :: !(Maybe DocumentVersionMetadata)
-  , _gdvrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetDocumentVersionResponse = GetDocumentVersionResponse'{_gdvrsCustomMetadata
+                                                              ::
+                                                              !(Maybe
+                                                                  (Map Text
+                                                                     Text)),
+                                                              _gdvrsMetadata ::
+                                                              !(Maybe
+                                                                  DocumentVersionMetadata),
+                                                              _gdvrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDocumentVersionResponse' with the minimum fields required to make a request.
 --
@@ -162,13 +164,11 @@ data GetDocumentVersionResponse = GetDocumentVersionResponse'
 getDocumentVersionResponse
     :: Int -- ^ 'gdvrsResponseStatus'
     -> GetDocumentVersionResponse
-getDocumentVersionResponse pResponseStatus_ =
-  GetDocumentVersionResponse'
-    { _gdvrsCustomMetadata = Nothing
-    , _gdvrsMetadata = Nothing
-    , _gdvrsResponseStatus = pResponseStatus_
-    }
-
+getDocumentVersionResponse pResponseStatus_
+  = GetDocumentVersionResponse'{_gdvrsCustomMetadata =
+                                  Nothing,
+                                _gdvrsMetadata = Nothing,
+                                _gdvrsResponseStatus = pResponseStatus_}
 
 -- | The custom metadata on the document version.
 gdvrsCustomMetadata :: Lens' GetDocumentVersionResponse (HashMap Text Text)

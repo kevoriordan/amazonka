@@ -45,11 +45,10 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'deleteConstraint' smart constructor.
-data DeleteConstraint = DeleteConstraint'
-  { _dcAcceptLanguage :: !(Maybe Text)
-  , _dcId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConstraint = DeleteConstraint'{_dcAcceptLanguage
+                                          :: !(Maybe Text),
+                                          _dcId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteConstraint' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data DeleteConstraint = DeleteConstraint'
 deleteConstraint
     :: Text -- ^ 'dcId'
     -> DeleteConstraint
-deleteConstraint pId_ =
-  DeleteConstraint' {_dcAcceptLanguage = Nothing, _dcId = pId_}
-
+deleteConstraint pId_
+  = DeleteConstraint'{_dcAcceptLanguage = Nothing,
+                      _dcId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 dcAcceptLanguage :: Lens' DeleteConstraint (Maybe Text)
@@ -109,10 +108,10 @@ instance ToQuery DeleteConstraint where
         toQuery = const mempty
 
 -- | /See:/ 'deleteConstraintResponse' smart constructor.
-newtype DeleteConstraintResponse = DeleteConstraintResponse'
-  { _dcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConstraintResponse = DeleteConstraintResponse'{_dcrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteConstraintResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +121,9 @@ newtype DeleteConstraintResponse = DeleteConstraintResponse'
 deleteConstraintResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DeleteConstraintResponse
-deleteConstraintResponse pResponseStatus_ =
-  DeleteConstraintResponse' {_dcrsResponseStatus = pResponseStatus_}
-
+deleteConstraintResponse pResponseStatus_
+  = DeleteConstraintResponse'{_dcrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 dcrsResponseStatus :: Lens' DeleteConstraintResponse Int

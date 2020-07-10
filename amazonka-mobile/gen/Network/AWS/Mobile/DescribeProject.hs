@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets details about a project in AWS Mobile Hub.
+-- Gets details about a project in AWS Mobile Hub. 
 --
 --
 module Network.AWS.Mobile.DescribeProject
@@ -45,36 +45,35 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure used to request details about a project.
+-- | Request structure used to request details about a project. 
 --
 --
 --
 -- /See:/ 'describeProject' smart constructor.
-data DescribeProject = DescribeProject'
-  { _dSyncFromResources :: !(Maybe Bool)
-  , _dProjectId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProject = DescribeProject'{_dSyncFromResources
+                                        :: !(Maybe Bool),
+                                        _dProjectId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dSyncFromResources' - If set to true, causes AWS Mobile Hub to synchronize information from other services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub project.
+-- * 'dSyncFromResources' - If set to true, causes AWS Mobile Hub to synchronize information from other services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub project. 
 --
--- * 'dProjectId' - Unique project identifier.
+-- * 'dProjectId' - Unique project identifier. 
 describeProject
     :: Text -- ^ 'dProjectId'
     -> DescribeProject
-describeProject pProjectId_ =
-  DescribeProject' {_dSyncFromResources = Nothing, _dProjectId = pProjectId_}
+describeProject pProjectId_
+  = DescribeProject'{_dSyncFromResources = Nothing,
+                     _dProjectId = pProjectId_}
 
-
--- | If set to true, causes AWS Mobile Hub to synchronize information from other services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub project.
+-- | If set to true, causes AWS Mobile Hub to synchronize information from other services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub project. 
 dSyncFromResources :: Lens' DescribeProject (Maybe Bool)
 dSyncFromResources = lens _dSyncFromResources (\ s a -> s{_dSyncFromResources = a})
 
--- | Unique project identifier.
+-- | Unique project identifier. 
 dProjectId :: Lens' DescribeProject Text
 dProjectId = lens _dProjectId (\ s a -> s{_dProjectId = a})
 
@@ -107,16 +106,18 @@ instance ToQuery DescribeProject where
               ["syncFromResources" =: _dSyncFromResources,
                "projectId" =: _dProjectId]
 
--- | Result structure used for requests of project details.
+-- | Result structure used for requests of project details. 
 --
 --
 --
 -- /See:/ 'describeProjectResponse' smart constructor.
-data DescribeProjectResponse = DescribeProjectResponse'
-  { _drsDetails        :: !(Maybe ProjectDetails)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProjectResponse = DescribeProjectResponse'{_drsDetails
+                                                        ::
+                                                        !(Maybe ProjectDetails),
+                                                        _drsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeProjectResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +129,9 @@ data DescribeProjectResponse = DescribeProjectResponse'
 describeProjectResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeProjectResponse
-describeProjectResponse pResponseStatus_ =
-  DescribeProjectResponse'
-    {_drsDetails = Nothing, _drsResponseStatus = pResponseStatus_}
-
+describeProjectResponse pResponseStatus_
+  = DescribeProjectResponse'{_drsDetails = Nothing,
+                             _drsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 drsDetails :: Lens' DescribeProjectResponse (Maybe ProjectDetails)

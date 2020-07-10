@@ -44,10 +44,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startFleet' smart constructor.
-newtype StartFleet = StartFleet'
-  { _staName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartFleet = StartFleet'{_staName :: Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartFleet' with the minimum fields required to make a request.
 --
@@ -57,8 +55,7 @@ newtype StartFleet = StartFleet'
 startFleet
     :: Text -- ^ 'staName'
     -> StartFleet
-startFleet pName_ = StartFleet' {_staName = pName_}
-
+startFleet pName_ = StartFleet'{_staName = pName_}
 
 -- | The name of the fleet.
 staName :: Lens' StartFleet Text
@@ -96,10 +93,10 @@ instance ToQuery StartFleet where
         toQuery = const mempty
 
 -- | /See:/ 'startFleetResponse' smart constructor.
-newtype StartFleetResponse = StartFleetResponse'
-  { _sfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartFleetResponse = StartFleetResponse'{_sfrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'StartFleetResponse' with the minimum fields required to make a request.
 --
@@ -109,9 +106,9 @@ newtype StartFleetResponse = StartFleetResponse'
 startFleetResponse
     :: Int -- ^ 'sfrsResponseStatus'
     -> StartFleetResponse
-startFleetResponse pResponseStatus_ =
-  StartFleetResponse' {_sfrsResponseStatus = pResponseStatus_}
-
+startFleetResponse pResponseStatus_
+  = StartFleetResponse'{_sfrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 sfrsResponseStatus :: Lens' StartFleetResponse Int

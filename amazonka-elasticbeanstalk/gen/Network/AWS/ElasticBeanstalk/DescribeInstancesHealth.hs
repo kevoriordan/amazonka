@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html enhanced health reporting> .
+-- Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html enhanced health reporting> .
 --
 --
 module Network.AWS.ElasticBeanstalk.DescribeInstancesHealth
@@ -54,13 +54,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeInstancesHealth' smart constructor.
-data DescribeInstancesHealth = DescribeInstancesHealth'
-  { _dihNextToken       :: !(Maybe Text)
-  , _dihEnvironmentName :: !(Maybe Text)
-  , _dihAttributeNames  :: !(Maybe [InstancesHealthAttribute])
-  , _dihEnvironmentId   :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstancesHealth = DescribeInstancesHealth'{_dihNextToken
+                                                        :: !(Maybe Text),
+                                                        _dihEnvironmentName ::
+                                                        !(Maybe Text),
+                                                        _dihAttributeNames ::
+                                                        !(Maybe
+                                                            [InstancesHealthAttribute]),
+                                                        _dihEnvironmentId ::
+                                                        !(Maybe Text)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeInstancesHealth' with the minimum fields required to make a request.
 --
@@ -75,14 +79,11 @@ data DescribeInstancesHealth = DescribeInstancesHealth'
 -- * 'dihEnvironmentId' - Specify the AWS Elastic Beanstalk environment by ID.
 describeInstancesHealth
     :: DescribeInstancesHealth
-describeInstancesHealth =
-  DescribeInstancesHealth'
-    { _dihNextToken = Nothing
-    , _dihEnvironmentName = Nothing
-    , _dihAttributeNames = Nothing
-    , _dihEnvironmentId = Nothing
-    }
-
+describeInstancesHealth
+  = DescribeInstancesHealth'{_dihNextToken = Nothing,
+                             _dihEnvironmentName = Nothing,
+                             _dihAttributeNames = Nothing,
+                             _dihEnvironmentId = Nothing}
 
 -- | Specify the pagination token returned by a previous call.
 dihNextToken :: Lens' DescribeInstancesHealth (Maybe Text)
@@ -142,19 +143,28 @@ instance ToQuery DescribeInstancesHealth where
 --
 --
 -- /See:/ 'describeInstancesHealthResponse' smart constructor.
-data DescribeInstancesHealthResponse = DescribeInstancesHealthResponse'
-  { _dihrsInstanceHealthList :: !(Maybe [SingleInstanceHealth])
-  , _dihrsNextToken          :: !(Maybe Text)
-  , _dihrsRefreshedAt        :: !(Maybe ISO8601)
-  , _dihrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstancesHealthResponse = DescribeInstancesHealthResponse'{_dihrsInstanceHealthList
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [SingleInstanceHealth]),
+                                                                        _dihrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dihrsRefreshedAt
+                                                                        ::
+                                                                        !(Maybe
+                                                                            ISO8601),
+                                                                        _dihrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeInstancesHealthResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dihrsInstanceHealthList' - Detailed health information about each instance.
+-- * 'dihrsInstanceHealthList' - Detailed health information about each instance. The output differs slightly between Linux and Windows environments. There is a difference in the members that are supported under the @<CPUUtilization>@ type.
 --
 -- * 'dihrsNextToken' - Pagination token for the next page of results, if available.
 --
@@ -164,16 +174,14 @@ data DescribeInstancesHealthResponse = DescribeInstancesHealthResponse'
 describeInstancesHealthResponse
     :: Int -- ^ 'dihrsResponseStatus'
     -> DescribeInstancesHealthResponse
-describeInstancesHealthResponse pResponseStatus_ =
-  DescribeInstancesHealthResponse'
-    { _dihrsInstanceHealthList = Nothing
-    , _dihrsNextToken = Nothing
-    , _dihrsRefreshedAt = Nothing
-    , _dihrsResponseStatus = pResponseStatus_
-    }
+describeInstancesHealthResponse pResponseStatus_
+  = DescribeInstancesHealthResponse'{_dihrsInstanceHealthList
+                                       = Nothing,
+                                     _dihrsNextToken = Nothing,
+                                     _dihrsRefreshedAt = Nothing,
+                                     _dihrsResponseStatus = pResponseStatus_}
 
-
--- | Detailed health information about each instance.
+-- | Detailed health information about each instance. The output differs slightly between Linux and Windows environments. There is a difference in the members that are supported under the @<CPUUtilization>@ type.
 dihrsInstanceHealthList :: Lens' DescribeInstancesHealthResponse [SingleInstanceHealth]
 dihrsInstanceHealthList = lens _dihrsInstanceHealthList (\ s a -> s{_dihrsInstanceHealthList = a}) . _Default . _Coerce
 

@@ -54,11 +54,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLunaClient' smart constructor.
-data DescribeLunaClient = DescribeLunaClient'
-  { _dlcClientARN              :: !(Maybe Text)
-  , _dlcCertificateFingerprint :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLunaClient = DescribeLunaClient'{_dlcClientARN
+                                              :: !(Maybe Text),
+                                              _dlcCertificateFingerprint ::
+                                              !(Maybe Text)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeLunaClient' with the minimum fields required to make a request.
 --
@@ -69,10 +69,9 @@ data DescribeLunaClient = DescribeLunaClient'
 -- * 'dlcCertificateFingerprint' - The certificate fingerprint.
 describeLunaClient
     :: DescribeLunaClient
-describeLunaClient =
-  DescribeLunaClient'
-    {_dlcClientARN = Nothing, _dlcCertificateFingerprint = Nothing}
-
+describeLunaClient
+  = DescribeLunaClient'{_dlcClientARN = Nothing,
+                        _dlcCertificateFingerprint = Nothing}
 
 -- | The ARN of the client.
 dlcClientARN :: Lens' DescribeLunaClient (Maybe Text)
@@ -126,15 +125,20 @@ instance ToQuery DescribeLunaClient where
         toQuery = const mempty
 
 -- | /See:/ 'describeLunaClientResponse' smart constructor.
-data DescribeLunaClientResponse = DescribeLunaClientResponse'
-  { _drsClientARN              :: !(Maybe Text)
-  , _drsLastModifiedTimestamp  :: !(Maybe Text)
-  , _drsCertificateFingerprint :: !(Maybe Text)
-  , _drsCertificate            :: !(Maybe Text)
-  , _drsLabel                  :: !(Maybe Text)
-  , _drsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLunaClientResponse = DescribeLunaClientResponse'{_drsClientARN
+                                                              :: !(Maybe Text),
+                                                              _drsLastModifiedTimestamp
+                                                              :: !(Maybe Text),
+                                                              _drsCertificateFingerprint
+                                                              :: !(Maybe Text),
+                                                              _drsCertificate ::
+                                                              !(Maybe Text),
+                                                              _drsLabel ::
+                                                              !(Maybe Text),
+                                                              _drsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeLunaClientResponse' with the minimum fields required to make a request.
 --
@@ -154,16 +158,13 @@ data DescribeLunaClientResponse = DescribeLunaClientResponse'
 describeLunaClientResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeLunaClientResponse
-describeLunaClientResponse pResponseStatus_ =
-  DescribeLunaClientResponse'
-    { _drsClientARN = Nothing
-    , _drsLastModifiedTimestamp = Nothing
-    , _drsCertificateFingerprint = Nothing
-    , _drsCertificate = Nothing
-    , _drsLabel = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeLunaClientResponse pResponseStatus_
+  = DescribeLunaClientResponse'{_drsClientARN =
+                                  Nothing,
+                                _drsLastModifiedTimestamp = Nothing,
+                                _drsCertificateFingerprint = Nothing,
+                                _drsCertificate = Nothing, _drsLabel = Nothing,
+                                _drsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the client.
 drsClientARN :: Lens' DescribeLunaClientResponse (Maybe Text)

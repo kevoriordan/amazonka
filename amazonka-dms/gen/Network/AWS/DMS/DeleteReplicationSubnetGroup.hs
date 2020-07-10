@@ -43,15 +43,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteReplicationSubnetGroup' smart constructor.
-newtype DeleteReplicationSubnetGroup = DeleteReplicationSubnetGroup'
-  { _drsgReplicationSubnetGroupIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReplicationSubnetGroup = DeleteReplicationSubnetGroup'{_drsgReplicationSubnetGroupIdentifier
+                                                                     :: Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteReplicationSubnetGroup' with the minimum fields required to make a request.
 --
@@ -61,10 +61,10 @@ newtype DeleteReplicationSubnetGroup = DeleteReplicationSubnetGroup'
 deleteReplicationSubnetGroup
     :: Text -- ^ 'drsgReplicationSubnetGroupIdentifier'
     -> DeleteReplicationSubnetGroup
-deleteReplicationSubnetGroup pReplicationSubnetGroupIdentifier_ =
-  DeleteReplicationSubnetGroup'
-    {_drsgReplicationSubnetGroupIdentifier = pReplicationSubnetGroupIdentifier_}
-
+deleteReplicationSubnetGroup
+  pReplicationSubnetGroupIdentifier_
+  = DeleteReplicationSubnetGroup'{_drsgReplicationSubnetGroupIdentifier
+                                    = pReplicationSubnetGroupIdentifier_}
 
 -- | The subnet group name of the replication instance.
 drsgReplicationSubnetGroupIdentifier :: Lens' DeleteReplicationSubnetGroup Text
@@ -109,15 +109,16 @@ instance ToPath DeleteReplicationSubnetGroup where
 instance ToQuery DeleteReplicationSubnetGroup where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteReplicationSubnetGroupResponse' smart constructor.
-newtype DeleteReplicationSubnetGroupResponse = DeleteReplicationSubnetGroupResponse'
-  { _drsgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReplicationSubnetGroupResponse = DeleteReplicationSubnetGroupResponse'{_drsgrsResponseStatus
+                                                                                     ::
+                                                                                     Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DeleteReplicationSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +128,9 @@ newtype DeleteReplicationSubnetGroupResponse = DeleteReplicationSubnetGroupRespo
 deleteReplicationSubnetGroupResponse
     :: Int -- ^ 'drsgrsResponseStatus'
     -> DeleteReplicationSubnetGroupResponse
-deleteReplicationSubnetGroupResponse pResponseStatus_ =
-  DeleteReplicationSubnetGroupResponse'
-    {_drsgrsResponseStatus = pResponseStatus_}
-
+deleteReplicationSubnetGroupResponse pResponseStatus_
+  = DeleteReplicationSubnetGroupResponse'{_drsgrsResponseStatus
+                                            = pResponseStatus_}
 
 -- | -- | The response status code.
 drsgrsResponseStatus :: Lens' DeleteReplicationSubnetGroupResponse Int

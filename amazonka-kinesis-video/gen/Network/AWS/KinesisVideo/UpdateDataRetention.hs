@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the @Operation@ parameter in the request body. In the request, you must specify either the @StreamName@ or the @StreamARN@ .
+-- Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the @Operation@ parameter in the request body. In the request, you must specify either the @StreamName@ or the @StreamARN@ . 
 --
 --
 -- This operation requires permission for the @KinesisVideo:UpdateDataRetention@ action.
@@ -58,14 +58,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDataRetention' smart constructor.
-data UpdateDataRetention = UpdateDataRetention'
-  { _udrStreamARN                  :: !(Maybe Text)
-  , _udrStreamName                 :: !(Maybe Text)
-  , _udrCurrentVersion             :: !Text
-  , _udrOperation                  :: !UpdateDataRetentionOperation
-  , _udrDataRetentionChangeInHours :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDataRetention = UpdateDataRetention'{_udrStreamARN
+                                                :: !(Maybe Text),
+                                                _udrStreamName :: !(Maybe Text),
+                                                _udrCurrentVersion :: !Text,
+                                                _udrOperation ::
+                                                !UpdateDataRetentionOperation,
+                                                _udrDataRetentionChangeInHours
+                                                :: !Nat}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDataRetention' with the minimum fields required to make a request.
 --
@@ -79,21 +80,20 @@ data UpdateDataRetention = UpdateDataRetention'
 --
 -- * 'udrOperation' - Indicates whether you want to increase or decrease the retention period.
 --
--- * 'udrDataRetentionChangeInHours' - The retention period, in hours. The value you specify replaces the current value.
+-- * 'udrDataRetentionChangeInHours' - The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).
 updateDataRetention
     :: Text -- ^ 'udrCurrentVersion'
     -> UpdateDataRetentionOperation -- ^ 'udrOperation'
     -> Natural -- ^ 'udrDataRetentionChangeInHours'
     -> UpdateDataRetention
-updateDataRetention pCurrentVersion_ pOperation_ pDataRetentionChangeInHours_ =
-  UpdateDataRetention'
-    { _udrStreamARN = Nothing
-    , _udrStreamName = Nothing
-    , _udrCurrentVersion = pCurrentVersion_
-    , _udrOperation = pOperation_
-    , _udrDataRetentionChangeInHours = _Nat # pDataRetentionChangeInHours_
-    }
-
+updateDataRetention pCurrentVersion_ pOperation_
+  pDataRetentionChangeInHours_
+  = UpdateDataRetention'{_udrStreamARN = Nothing,
+                         _udrStreamName = Nothing,
+                         _udrCurrentVersion = pCurrentVersion_,
+                         _udrOperation = pOperation_,
+                         _udrDataRetentionChangeInHours =
+                           _Nat # pDataRetentionChangeInHours_}
 
 -- | The Amazon Resource Name (ARN) of the stream whose retention period you want to change.
 udrStreamARN :: Lens' UpdateDataRetention (Maybe Text)
@@ -111,7 +111,7 @@ udrCurrentVersion = lens _udrCurrentVersion (\ s a -> s{_udrCurrentVersion = a})
 udrOperation :: Lens' UpdateDataRetention UpdateDataRetentionOperation
 udrOperation = lens _udrOperation (\ s a -> s{_udrOperation = a})
 
--- | The retention period, in hours. The value you specify replaces the current value.
+-- | The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).
 udrDataRetentionChangeInHours :: Lens' UpdateDataRetention Natural
 udrDataRetentionChangeInHours = lens _udrDataRetentionChangeInHours (\ s a -> s{_udrDataRetentionChangeInHours = a}) . _Nat
 
@@ -150,10 +150,10 @@ instance ToQuery UpdateDataRetention where
         toQuery = const mempty
 
 -- | /See:/ 'updateDataRetentionResponse' smart constructor.
-newtype UpdateDataRetentionResponse = UpdateDataRetentionResponse'
-  { _udrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateDataRetentionResponse = UpdateDataRetentionResponse'{_udrrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpdateDataRetentionResponse' with the minimum fields required to make a request.
 --
@@ -163,9 +163,9 @@ newtype UpdateDataRetentionResponse = UpdateDataRetentionResponse'
 updateDataRetentionResponse
     :: Int -- ^ 'udrrsResponseStatus'
     -> UpdateDataRetentionResponse
-updateDataRetentionResponse pResponseStatus_ =
-  UpdateDataRetentionResponse' {_udrrsResponseStatus = pResponseStatus_}
-
+updateDataRetentionResponse pResponseStatus_
+  = UpdateDataRetentionResponse'{_udrrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 udrrsResponseStatus :: Lens' UpdateDataRetentionResponse Int

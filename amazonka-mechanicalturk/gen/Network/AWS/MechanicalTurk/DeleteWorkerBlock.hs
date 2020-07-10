@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteWorkerBlock' smart constructor.
-data DeleteWorkerBlock = DeleteWorkerBlock'
-  { _dwbReason   :: !(Maybe Text)
-  , _dwbWorkerId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteWorkerBlock = DeleteWorkerBlock'{_dwbReason
+                                            :: !(Maybe Text),
+                                            _dwbWorkerId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteWorkerBlock' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data DeleteWorkerBlock = DeleteWorkerBlock'
 deleteWorkerBlock
     :: Text -- ^ 'dwbWorkerId'
     -> DeleteWorkerBlock
-deleteWorkerBlock pWorkerId_ =
-  DeleteWorkerBlock' {_dwbReason = Nothing, _dwbWorkerId = pWorkerId_}
-
+deleteWorkerBlock pWorkerId_
+  = DeleteWorkerBlock'{_dwbReason = Nothing,
+                       _dwbWorkerId = pWorkerId_}
 
 -- | A message that explains the reason for unblocking the Worker. The Worker does not see this message.
 dwbReason :: Lens' DeleteWorkerBlock (Maybe Text)
@@ -109,10 +108,10 @@ instance ToQuery DeleteWorkerBlock where
         toQuery = const mempty
 
 -- | /See:/ 'deleteWorkerBlockResponse' smart constructor.
-newtype DeleteWorkerBlockResponse = DeleteWorkerBlockResponse'
-  { _dwbrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteWorkerBlockResponse = DeleteWorkerBlockResponse'{_dwbrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteWorkerBlockResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +121,9 @@ newtype DeleteWorkerBlockResponse = DeleteWorkerBlockResponse'
 deleteWorkerBlockResponse
     :: Int -- ^ 'dwbrsResponseStatus'
     -> DeleteWorkerBlockResponse
-deleteWorkerBlockResponse pResponseStatus_ =
-  DeleteWorkerBlockResponse' {_dwbrsResponseStatus = pResponseStatus_}
-
+deleteWorkerBlockResponse pResponseStatus_
+  = DeleteWorkerBlockResponse'{_dwbrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 dwbrsResponseStatus :: Lens' DeleteWorkerBlockResponse Int

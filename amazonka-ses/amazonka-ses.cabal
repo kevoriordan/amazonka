@@ -87,6 +87,7 @@ library
         , Network.AWS.SES.ListReceiptRuleSets
         , Network.AWS.SES.ListTemplates
         , Network.AWS.SES.ListVerifiedEmailAddresses
+        , Network.AWS.SES.PutConfigurationSetDeliveryOptions
         , Network.AWS.SES.PutIdentityPolicy
         , Network.AWS.SES.ReorderReceiptRuleSet
         , Network.AWS.SES.SendBounce
@@ -119,12 +120,69 @@ library
         , Network.AWS.SES.Waiters
 
     other-modules:
-          Network.AWS.SES.Types.Product
-        , Network.AWS.SES.Types.Sum
+          Network.AWS.SES.Types.AddHeaderAction
+        , Network.AWS.SES.Types.BehaviorOnMXFailure
+        , Network.AWS.SES.Types.Body
+        , Network.AWS.SES.Types.BounceAction
+        , Network.AWS.SES.Types.BounceType
+        , Network.AWS.SES.Types.BouncedRecipientInfo
+        , Network.AWS.SES.Types.BulkEmailDestination
+        , Network.AWS.SES.Types.BulkEmailDestinationStatus
+        , Network.AWS.SES.Types.BulkEmailStatus
+        , Network.AWS.SES.Types.CloudWatchDestination
+        , Network.AWS.SES.Types.CloudWatchDimensionConfiguration
+        , Network.AWS.SES.Types.ConfigurationSet
+        , Network.AWS.SES.Types.ConfigurationSetAttribute
+        , Network.AWS.SES.Types.Content
+        , Network.AWS.SES.Types.CustomMailFromStatus
+        , Network.AWS.SES.Types.CustomVerificationEmailTemplate
+        , Network.AWS.SES.Types.DeliveryOptions
+        , Network.AWS.SES.Types.Destination
+        , Network.AWS.SES.Types.DimensionValueSource
+        , Network.AWS.SES.Types.DsnAction
+        , Network.AWS.SES.Types.EventDestination
+        , Network.AWS.SES.Types.EventType
+        , Network.AWS.SES.Types.ExtensionField
+        , Network.AWS.SES.Types.IdentityDkimAttributes
+        , Network.AWS.SES.Types.IdentityMailFromDomainAttributes
+        , Network.AWS.SES.Types.IdentityNotificationAttributes
+        , Network.AWS.SES.Types.IdentityType
+        , Network.AWS.SES.Types.IdentityVerificationAttributes
+        , Network.AWS.SES.Types.InvocationType
+        , Network.AWS.SES.Types.KinesisFirehoseDestination
+        , Network.AWS.SES.Types.LambdaAction
+        , Network.AWS.SES.Types.Message
+        , Network.AWS.SES.Types.MessageDsn
+        , Network.AWS.SES.Types.MessageTag
+        , Network.AWS.SES.Types.NotificationType
+        , Network.AWS.SES.Types.Product
+        , Network.AWS.SES.Types.RawMessage
+        , Network.AWS.SES.Types.ReceiptAction
+        , Network.AWS.SES.Types.ReceiptFilter
+        , Network.AWS.SES.Types.ReceiptFilterPolicy
+        , Network.AWS.SES.Types.ReceiptIPFilter
+        , Network.AWS.SES.Types.ReceiptRule
+        , Network.AWS.SES.Types.ReceiptRuleSetMetadata
+        , Network.AWS.SES.Types.RecipientDsnFields
+        , Network.AWS.SES.Types.ReputationOptions
+        , Network.AWS.SES.Types.S3Action
+        , Network.AWS.SES.Types.SNSAction
+        , Network.AWS.SES.Types.SNSActionEncoding
+        , Network.AWS.SES.Types.SNSDestination
+        , Network.AWS.SES.Types.SendDataPoint
+        , Network.AWS.SES.Types.StopAction
+        , Network.AWS.SES.Types.StopScope
+        , Network.AWS.SES.Types.TLSPolicy
+        , Network.AWS.SES.Types.Template
+        , Network.AWS.SES.Types.TemplateMetadata
+        , Network.AWS.SES.Types.TrackingOptions
+        , Network.AWS.SES.Types.VerificationStatus
+        , Network.AWS.SES.Types.WorkmailAction
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-ses-test
     type:              exitcode-stdio-1.0
@@ -148,6 +206,7 @@ test-suite amazonka-ses-test
         , amazonka-ses
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

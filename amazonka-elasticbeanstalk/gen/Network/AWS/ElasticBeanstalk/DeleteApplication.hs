@@ -47,11 +47,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteApplication' smart constructor.
-data DeleteApplication = DeleteApplication'
-  { _daTerminateEnvByForce :: !(Maybe Bool)
-  , _daApplicationName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplication = DeleteApplication'{_daTerminateEnvByForce
+                                            :: !(Maybe Bool),
+                                            _daApplicationName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteApplication' with the minimum fields required to make a request.
 --
@@ -63,10 +62,10 @@ data DeleteApplication = DeleteApplication'
 deleteApplication
     :: Text -- ^ 'daApplicationName'
     -> DeleteApplication
-deleteApplication pApplicationName_ =
-  DeleteApplication'
-    {_daTerminateEnvByForce = Nothing, _daApplicationName = pApplicationName_}
-
+deleteApplication pApplicationName_
+  = DeleteApplication'{_daTerminateEnvByForce =
+                         Nothing,
+                       _daApplicationName = pApplicationName_}
 
 -- | When set to true, running environments will be terminated before deleting the application.
 daTerminateEnvByForce :: Lens' DeleteApplication (Maybe Bool)
@@ -100,16 +99,15 @@ instance ToQuery DeleteApplication where
                "ApplicationName" =: _daApplicationName]
 
 -- | /See:/ 'deleteApplicationResponse' smart constructor.
-data DeleteApplicationResponse =
-  DeleteApplicationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplicationResponse = DeleteApplicationResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteApplicationResponse' with the minimum fields required to make a request.
 --
 deleteApplicationResponse
     :: DeleteApplicationResponse
-deleteApplicationResponse = DeleteApplicationResponse'
-
+deleteApplicationResponse
+  = DeleteApplicationResponse'
 
 instance NFData DeleteApplicationResponse where

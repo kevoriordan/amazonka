@@ -43,17 +43,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'peerVPC' smart constructor.
-data PeerVPC =
-  PeerVPC'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PeerVPC = PeerVPC'
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PeerVPC' with the minimum fields required to make a request.
 --
 peerVPC
     :: PeerVPC
 peerVPC = PeerVPC'
-
 
 instance AWSRequest PeerVPC where
         type Rs PeerVPC = PeerVPCResponse
@@ -87,28 +84,26 @@ instance ToQuery PeerVPC where
         toQuery = const mempty
 
 -- | /See:/ 'peerVPCResponse' smart constructor.
-data PeerVPCResponse = PeerVPCResponse'
-  { _pvrsOperation      :: !(Maybe Operation)
-  , _pvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PeerVPCResponse = PeerVPCResponse'{_pvrsOperation
+                                        :: !(Maybe Operation),
+                                        _pvrsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PeerVPCResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pvrsOperation' - An array of key-value pairs containing information about the request operation.
+-- * 'pvrsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'pvrsResponseStatus' - -- | The response status code.
 peerVPCResponse
     :: Int -- ^ 'pvrsResponseStatus'
     -> PeerVPCResponse
-peerVPCResponse pResponseStatus_ =
-  PeerVPCResponse'
-    {_pvrsOperation = Nothing, _pvrsResponseStatus = pResponseStatus_}
+peerVPCResponse pResponseStatus_
+  = PeerVPCResponse'{_pvrsOperation = Nothing,
+                     _pvrsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the request operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 pvrsOperation :: Lens' PeerVPCResponse (Maybe Operation)
 pvrsOperation = lens _pvrsOperation (\ s a -> s{_pvrsOperation = a})
 

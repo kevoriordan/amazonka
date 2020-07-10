@@ -44,15 +44,14 @@ import Network.AWS.Response
 import Network.AWS.Route53.Types
 import Network.AWS.Route53.Types.Product
 
--- | A request to get information about a specified health check.
+-- | A request to get information about a specified health check. 
 --
 --
 --
 -- /See:/ 'getHealthCheck' smart constructor.
-newtype GetHealthCheck = GetHealthCheck'
-  { _ghcHealthCheckId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetHealthCheck = GetHealthCheck'{_ghcHealthCheckId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetHealthCheck' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ newtype GetHealthCheck = GetHealthCheck'
 getHealthCheck
     :: Text -- ^ 'ghcHealthCheckId'
     -> GetHealthCheck
-getHealthCheck pHealthCheckId_ =
-  GetHealthCheck' {_ghcHealthCheckId = pHealthCheckId_}
-
+getHealthCheck pHealthCheckId_
+  = GetHealthCheck'{_ghcHealthCheckId =
+                      pHealthCheckId_}
 
 -- | The identifier that Amazon Route 53 assigned to the health check when you created it. When you add or update a resource record set, you use this value to specify which health check to use. The value can be up to 64 characters long.
 ghcHealthCheckId :: Lens' GetHealthCheck Text
@@ -99,11 +98,12 @@ instance ToQuery GetHealthCheck where
 --
 --
 -- /See:/ 'getHealthCheckResponse' smart constructor.
-data GetHealthCheckResponse = GetHealthCheckResponse'
-  { _ghcrsResponseStatus :: !Int
-  , _ghcrsHealthCheck    :: !HealthCheck
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetHealthCheckResponse = GetHealthCheckResponse'{_ghcrsResponseStatus
+                                                      :: !Int,
+                                                      _ghcrsHealthCheck ::
+                                                      !HealthCheck}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetHealthCheckResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +116,10 @@ getHealthCheckResponse
     :: Int -- ^ 'ghcrsResponseStatus'
     -> HealthCheck -- ^ 'ghcrsHealthCheck'
     -> GetHealthCheckResponse
-getHealthCheckResponse pResponseStatus_ pHealthCheck_ =
-  GetHealthCheckResponse'
-    {_ghcrsResponseStatus = pResponseStatus_, _ghcrsHealthCheck = pHealthCheck_}
-
+getHealthCheckResponse pResponseStatus_ pHealthCheck_
+  = GetHealthCheckResponse'{_ghcrsResponseStatus =
+                              pResponseStatus_,
+                            _ghcrsHealthCheck = pHealthCheck_}
 
 -- | -- | The response status code.
 ghcrsResponseStatus :: Lens' GetHealthCheckResponse Int

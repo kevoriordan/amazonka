@@ -18,9 +18,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the specified directory configurations. Note that although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+-- Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. 
 --
 --
+-- Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+--
+--
+-- This operation returns paginated results.
 module Network.AWS.AppStream.DescribeDirectoryConfigs
     (
     -- * Creating a Request
@@ -43,17 +47,20 @@ module Network.AWS.AppStream.DescribeDirectoryConfigs
 import Network.AWS.AppStream.Types
 import Network.AWS.AppStream.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeDirectoryConfigs' smart constructor.
-data DescribeDirectoryConfigs = DescribeDirectoryConfigs'
-  { _ddcNextToken      :: !(Maybe Text)
-  , _ddcDirectoryNames :: !(Maybe [Text])
-  , _ddcMaxResults     :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDirectoryConfigs = DescribeDirectoryConfigs'{_ddcNextToken
+                                                          :: !(Maybe Text),
+                                                          _ddcDirectoryNames ::
+                                                          !(Maybe [Text]),
+                                                          _ddcMaxResults ::
+                                                          !(Maybe Int)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeDirectoryConfigs' with the minimum fields required to make a request.
 --
@@ -66,13 +73,10 @@ data DescribeDirectoryConfigs = DescribeDirectoryConfigs'
 -- * 'ddcMaxResults' - The maximum size of each page of results.
 describeDirectoryConfigs
     :: DescribeDirectoryConfigs
-describeDirectoryConfigs =
-  DescribeDirectoryConfigs'
-    { _ddcNextToken = Nothing
-    , _ddcDirectoryNames = Nothing
-    , _ddcMaxResults = Nothing
-    }
-
+describeDirectoryConfigs
+  = DescribeDirectoryConfigs'{_ddcNextToken = Nothing,
+                              _ddcDirectoryNames = Nothing,
+                              _ddcMaxResults = Nothing}
 
 -- | The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
 ddcNextToken :: Lens' DescribeDirectoryConfigs (Maybe Text)
@@ -85,6 +89,13 @@ ddcDirectoryNames = lens _ddcDirectoryNames (\ s a -> s{_ddcDirectoryNames = a})
 -- | The maximum size of each page of results.
 ddcMaxResults :: Lens' DescribeDirectoryConfigs (Maybe Int)
 ddcMaxResults = lens _ddcMaxResults (\ s a -> s{_ddcMaxResults = a})
+
+instance AWSPager DescribeDirectoryConfigs where
+        page rq rs
+          | stop (rs ^. ddcrsNextToken) = Nothing
+          | stop (rs ^. ddcrsDirectoryConfigs) = Nothing
+          | otherwise =
+            Just $ rq & ddcNextToken .~ rs ^. ddcrsNextToken
 
 instance AWSRequest DescribeDirectoryConfigs where
         type Rs DescribeDirectoryConfigs =
@@ -127,12 +138,19 @@ instance ToQuery DescribeDirectoryConfigs where
         toQuery = const mempty
 
 -- | /See:/ 'describeDirectoryConfigsResponse' smart constructor.
-data DescribeDirectoryConfigsResponse = DescribeDirectoryConfigsResponse'
-  { _ddcrsNextToken        :: !(Maybe Text)
-  , _ddcrsDirectoryConfigs :: !(Maybe [DirectoryConfig])
-  , _ddcrsResponseStatus   :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeDirectoryConfigsResponse = DescribeDirectoryConfigsResponse'{_ddcrsNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ddcrsDirectoryConfigs
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [DirectoryConfig]),
+                                                                          _ddcrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Show, Data, Typeable,
+                                                    Generic)
 
 -- | Creates a value of 'DescribeDirectoryConfigsResponse' with the minimum fields required to make a request.
 --
@@ -140,25 +158,23 @@ data DescribeDirectoryConfigsResponse = DescribeDirectoryConfigsResponse'
 --
 -- * 'ddcrsNextToken' - The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
 --
--- * 'ddcrsDirectoryConfigs' - Information about the directory configurations. Note that although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+-- * 'ddcrsDirectoryConfigs' - Information about the directory configurations. Note that although the response syntax in this topic includes the account password, this password is not returned in the actual response. 
 --
 -- * 'ddcrsResponseStatus' - -- | The response status code.
 describeDirectoryConfigsResponse
     :: Int -- ^ 'ddcrsResponseStatus'
     -> DescribeDirectoryConfigsResponse
-describeDirectoryConfigsResponse pResponseStatus_ =
-  DescribeDirectoryConfigsResponse'
-    { _ddcrsNextToken = Nothing
-    , _ddcrsDirectoryConfigs = Nothing
-    , _ddcrsResponseStatus = pResponseStatus_
-    }
-
+describeDirectoryConfigsResponse pResponseStatus_
+  = DescribeDirectoryConfigsResponse'{_ddcrsNextToken =
+                                        Nothing,
+                                      _ddcrsDirectoryConfigs = Nothing,
+                                      _ddcrsResponseStatus = pResponseStatus_}
 
 -- | The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
 ddcrsNextToken :: Lens' DescribeDirectoryConfigsResponse (Maybe Text)
 ddcrsNextToken = lens _ddcrsNextToken (\ s a -> s{_ddcrsNextToken = a})
 
--- | Information about the directory configurations. Note that although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+-- | Information about the directory configurations. Note that although the response syntax in this topic includes the account password, this password is not returned in the actual response. 
 ddcrsDirectoryConfigs :: Lens' DescribeDirectoryConfigsResponse [DirectoryConfig]
 ddcrsDirectoryConfigs = lens _ddcrsDirectoryConfigs (\ s a -> s{_ddcrsDirectoryConfigs = a}) . _Default . _Coerce
 

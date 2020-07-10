@@ -46,12 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateApplication' smart constructor.
-data UpdateApplication = UpdateApplication'
-  { _uaName            :: !(Maybe Text)
-  , _uaDescription     :: !(Maybe Text)
-  , _uaConfigurationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplication = UpdateApplication'{_uaName
+                                            :: !(Maybe Text),
+                                            _uaDescription :: !(Maybe Text),
+                                            _uaConfigurationId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateApplication' with the minimum fields required to make a request.
 --
@@ -65,13 +64,10 @@ data UpdateApplication = UpdateApplication'
 updateApplication
     :: Text -- ^ 'uaConfigurationId'
     -> UpdateApplication
-updateApplication pConfigurationId_ =
-  UpdateApplication'
-    { _uaName = Nothing
-    , _uaDescription = Nothing
-    , _uaConfigurationId = pConfigurationId_
-    }
-
+updateApplication pConfigurationId_
+  = UpdateApplication'{_uaName = Nothing,
+                       _uaDescription = Nothing,
+                       _uaConfigurationId = pConfigurationId_}
 
 -- | New name of the application to be updated.
 uaName :: Lens' UpdateApplication (Maybe Text)
@@ -122,10 +118,10 @@ instance ToQuery UpdateApplication where
         toQuery = const mempty
 
 -- | /See:/ 'updateApplicationResponse' smart constructor.
-newtype UpdateApplicationResponse = UpdateApplicationResponse'
-  { _uarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateApplicationResponse = UpdateApplicationResponse'{_uarsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateApplicationResponse' with the minimum fields required to make a request.
 --
@@ -135,9 +131,9 @@ newtype UpdateApplicationResponse = UpdateApplicationResponse'
 updateApplicationResponse
     :: Int -- ^ 'uarsResponseStatus'
     -> UpdateApplicationResponse
-updateApplicationResponse pResponseStatus_ =
-  UpdateApplicationResponse' {_uarsResponseStatus = pResponseStatus_}
-
+updateApplicationResponse pResponseStatus_
+  = UpdateApplicationResponse'{_uarsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 uarsResponseStatus :: Lens' UpdateApplicationResponse Int

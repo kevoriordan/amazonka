@@ -21,6 +21,8 @@
 -- Describes the events for the specified EC2 Fleet during the specified time.
 --
 --
+-- EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events are available for 48 hours.
+--
 module Network.AWS.EC2.DescribeFleetHistory
     (
     -- * Creating a Request
@@ -54,15 +56,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeFleetHistory' smart constructor.
-data DescribeFleetHistory = DescribeFleetHistory'
-  { _dfhNextToken  :: !(Maybe Text)
-  , _dfhEventType  :: !(Maybe FleetEventType)
-  , _dfhDryRun     :: !(Maybe Bool)
-  , _dfhMaxResults :: !(Maybe Int)
-  , _dfhFleetId    :: !Text
-  , _dfhStartTime  :: !ISO8601
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleetHistory = DescribeFleetHistory'{_dfhNextToken
+                                                  :: !(Maybe Text),
+                                                  _dfhEventType ::
+                                                  !(Maybe FleetEventType),
+                                                  _dfhDryRun :: !(Maybe Bool),
+                                                  _dfhMaxResults ::
+                                                  !(Maybe Int),
+                                                  _dfhFleetId :: !Text,
+                                                  _dfhStartTime :: !ISO8601}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeFleetHistory' with the minimum fields required to make a request.
 --
@@ -83,16 +86,11 @@ describeFleetHistory
     :: Text -- ^ 'dfhFleetId'
     -> UTCTime -- ^ 'dfhStartTime'
     -> DescribeFleetHistory
-describeFleetHistory pFleetId_ pStartTime_ =
-  DescribeFleetHistory'
-    { _dfhNextToken = Nothing
-    , _dfhEventType = Nothing
-    , _dfhDryRun = Nothing
-    , _dfhMaxResults = Nothing
-    , _dfhFleetId = pFleetId_
-    , _dfhStartTime = _Time # pStartTime_
-    }
-
+describeFleetHistory pFleetId_ pStartTime_
+  = DescribeFleetHistory'{_dfhNextToken = Nothing,
+                          _dfhEventType = Nothing, _dfhDryRun = Nothing,
+                          _dfhMaxResults = Nothing, _dfhFleetId = pFleetId_,
+                          _dfhStartTime = _Time # pStartTime_}
 
 -- | The token for the next set of results.
 dfhNextToken :: Lens' DescribeFleetHistory (Maybe Text)
@@ -156,15 +154,28 @@ instance ToQuery DescribeFleetHistory where
                "StartTime" =: _dfhStartTime]
 
 -- | /See:/ 'describeFleetHistoryResponse' smart constructor.
-data DescribeFleetHistoryResponse = DescribeFleetHistoryResponse'
-  { _dfhrsStartTime         :: !(Maybe ISO8601)
-  , _dfhrsLastEvaluatedTime :: !(Maybe ISO8601)
-  , _dfhrsNextToken         :: !(Maybe Text)
-  , _dfhrsHistoryRecords    :: !(Maybe [HistoryRecordEntry])
-  , _dfhrsFleetId           :: !(Maybe Text)
-  , _dfhrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleetHistoryResponse = DescribeFleetHistoryResponse'{_dfhrsStartTime
+                                                                  ::
+                                                                  !(Maybe
+                                                                      ISO8601),
+                                                                  _dfhrsLastEvaluatedTime
+                                                                  ::
+                                                                  !(Maybe
+                                                                      ISO8601),
+                                                                  _dfhrsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dfhrsHistoryRecords
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [HistoryRecordEntry]),
+                                                                  _dfhrsFleetId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dfhrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeFleetHistoryResponse' with the minimum fields required to make a request.
 --
@@ -184,16 +195,14 @@ data DescribeFleetHistoryResponse = DescribeFleetHistoryResponse'
 describeFleetHistoryResponse
     :: Int -- ^ 'dfhrsResponseStatus'
     -> DescribeFleetHistoryResponse
-describeFleetHistoryResponse pResponseStatus_ =
-  DescribeFleetHistoryResponse'
-    { _dfhrsStartTime = Nothing
-    , _dfhrsLastEvaluatedTime = Nothing
-    , _dfhrsNextToken = Nothing
-    , _dfhrsHistoryRecords = Nothing
-    , _dfhrsFleetId = Nothing
-    , _dfhrsResponseStatus = pResponseStatus_
-    }
-
+describeFleetHistoryResponse pResponseStatus_
+  = DescribeFleetHistoryResponse'{_dfhrsStartTime =
+                                    Nothing,
+                                  _dfhrsLastEvaluatedTime = Nothing,
+                                  _dfhrsNextToken = Nothing,
+                                  _dfhrsHistoryRecords = Nothing,
+                                  _dfhrsFleetId = Nothing,
+                                  _dfhrsResponseStatus = pResponseStatus_}
 
 -- | The start date and time for the events, in UTC format (for example, /YYYY/ -/MM/ -/DD/ T/HH/ :/MM/ :/SS/ Z).
 dfhrsStartTime :: Lens' DescribeFleetHistoryResponse (Maybe UTCTime)

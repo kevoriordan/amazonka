@@ -21,9 +21,9 @@
 -- Returns information about a specific Amazon Kinesis Analytics application.
 --
 --
--- If you want to retrieve a list of all applications in your account, use the 'ListApplications' operation.
+-- If you want to retrieve a list of all applications in your account, use the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_ListApplications.html ListApplications> operation.
 --
--- This operation requires permissions to perform the @kinesisanalytics:DescribeApplication@ action. You can use @DescribeApplication@ to get the current application versionId, which you need to call other operations such as @Update@ .
+-- This operation requires permissions to perform the @kinesisanalytics:DescribeApplication@ action. You can use @DescribeApplication@ to get the current application versionId, which you need to call other operations such as @Update@ . 
 --
 module Network.AWS.KinesisAnalytics.DescribeApplication
     (
@@ -48,15 +48,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeApplication' smart constructor.
-newtype DescribeApplication = DescribeApplication'
-  { _daApplicationName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeApplication = DescribeApplication'{_daApplicationName
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeApplication' with the minimum fields required to make a request.
 --
@@ -66,9 +66,9 @@ newtype DescribeApplication = DescribeApplication'
 describeApplication
     :: Text -- ^ 'daApplicationName'
     -> DescribeApplication
-describeApplication pApplicationName_ =
-  DescribeApplication' {_daApplicationName = pApplicationName_}
-
+describeApplication pApplicationName_
+  = DescribeApplication'{_daApplicationName =
+                           pApplicationName_}
 
 -- | Name of the application.
 daApplicationName :: Lens' DescribeApplication Text
@@ -110,16 +110,18 @@ instance ToPath DescribeApplication where
 instance ToQuery DescribeApplication where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeApplicationResponse' smart constructor.
-data DescribeApplicationResponse = DescribeApplicationResponse'
-  { _darsResponseStatus    :: !Int
-  , _darsApplicationDetail :: !ApplicationDetail
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeApplicationResponse = DescribeApplicationResponse'{_darsResponseStatus
+                                                                :: !Int,
+                                                                _darsApplicationDetail
+                                                                ::
+                                                                !ApplicationDetail}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeApplicationResponse' with the minimum fields required to make a request.
 --
@@ -132,12 +134,11 @@ describeApplicationResponse
     :: Int -- ^ 'darsResponseStatus'
     -> ApplicationDetail -- ^ 'darsApplicationDetail'
     -> DescribeApplicationResponse
-describeApplicationResponse pResponseStatus_ pApplicationDetail_ =
-  DescribeApplicationResponse'
-    { _darsResponseStatus = pResponseStatus_
-    , _darsApplicationDetail = pApplicationDetail_
-    }
-
+describeApplicationResponse pResponseStatus_
+  pApplicationDetail_
+  = DescribeApplicationResponse'{_darsResponseStatus =
+                                   pResponseStatus_,
+                                 _darsApplicationDetail = pApplicationDetail_}
 
 -- | -- | The response status code.
 darsResponseStatus :: Lens' DescribeApplicationResponse Int

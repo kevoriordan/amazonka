@@ -21,7 +21,7 @@
 -- Cancels the specified Reserved Instance listing in the Reserved Instance Marketplace.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html Reserved Instance Marketplace> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html Reserved Instance Marketplace> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.CancelReservedInstancesListing
     (
@@ -51,10 +51,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'cancelReservedInstancesListing' smart constructor.
-newtype CancelReservedInstancesListing = CancelReservedInstancesListing'
-  { _crilReservedInstancesListingId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelReservedInstancesListing = CancelReservedInstancesListing'{_crilReservedInstancesListingId
+                                                                         ::
+                                                                         Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'CancelReservedInstancesListing' with the minimum fields required to make a request.
 --
@@ -64,10 +65,10 @@ newtype CancelReservedInstancesListing = CancelReservedInstancesListing'
 cancelReservedInstancesListing
     :: Text -- ^ 'crilReservedInstancesListingId'
     -> CancelReservedInstancesListing
-cancelReservedInstancesListing pReservedInstancesListingId_ =
-  CancelReservedInstancesListing'
-    {_crilReservedInstancesListingId = pReservedInstancesListingId_}
-
+cancelReservedInstancesListing
+  pReservedInstancesListingId_
+  = CancelReservedInstancesListing'{_crilReservedInstancesListingId
+                                      = pReservedInstancesListingId_}
 
 -- | The ID of the Reserved Instance listing.
 crilReservedInstancesListingId :: Lens' CancelReservedInstancesListing Text
@@ -112,11 +113,15 @@ instance ToQuery CancelReservedInstancesListing where
 --
 --
 -- /See:/ 'cancelReservedInstancesListingResponse' smart constructor.
-data CancelReservedInstancesListingResponse = CancelReservedInstancesListingResponse'
-  { _crilrsReservedInstancesListings :: !(Maybe [ReservedInstancesListing])
-  , _crilrsResponseStatus            :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelReservedInstancesListingResponse = CancelReservedInstancesListingResponse'{_crilrsReservedInstancesListings
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [ReservedInstancesListing]),
+                                                                                      _crilrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'CancelReservedInstancesListingResponse' with the minimum fields required to make a request.
 --
@@ -128,12 +133,12 @@ data CancelReservedInstancesListingResponse = CancelReservedInstancesListingResp
 cancelReservedInstancesListingResponse
     :: Int -- ^ 'crilrsResponseStatus'
     -> CancelReservedInstancesListingResponse
-cancelReservedInstancesListingResponse pResponseStatus_ =
-  CancelReservedInstancesListingResponse'
-    { _crilrsReservedInstancesListings = Nothing
-    , _crilrsResponseStatus = pResponseStatus_
-    }
-
+cancelReservedInstancesListingResponse
+  pResponseStatus_
+  = CancelReservedInstancesListingResponse'{_crilrsReservedInstancesListings
+                                              = Nothing,
+                                            _crilrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | The Reserved Instance listing.
 crilrsReservedInstancesListings :: Lens' CancelReservedInstancesListingResponse [ReservedInstancesListing]

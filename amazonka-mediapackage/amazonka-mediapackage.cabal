@@ -46,26 +46,64 @@ library
     exposed-modules:
           Network.AWS.MediaPackage
         , Network.AWS.MediaPackage.CreateChannel
+        , Network.AWS.MediaPackage.CreateHarvestJob
         , Network.AWS.MediaPackage.CreateOriginEndpoint
         , Network.AWS.MediaPackage.DeleteChannel
         , Network.AWS.MediaPackage.DeleteOriginEndpoint
         , Network.AWS.MediaPackage.DescribeChannel
+        , Network.AWS.MediaPackage.DescribeHarvestJob
         , Network.AWS.MediaPackage.DescribeOriginEndpoint
         , Network.AWS.MediaPackage.ListChannels
+        , Network.AWS.MediaPackage.ListHarvestJobs
         , Network.AWS.MediaPackage.ListOriginEndpoints
-        , Network.AWS.MediaPackage.RotateChannelCredentials
+        , Network.AWS.MediaPackage.ListTagsForResource
+        , Network.AWS.MediaPackage.RotateIngestEndpointCredentials
+        , Network.AWS.MediaPackage.TagResource
         , Network.AWS.MediaPackage.Types
+        , Network.AWS.MediaPackage.UntagResource
         , Network.AWS.MediaPackage.UpdateChannel
         , Network.AWS.MediaPackage.UpdateOriginEndpoint
         , Network.AWS.MediaPackage.Waiters
 
     other-modules:
-          Network.AWS.MediaPackage.Types.Product
-        , Network.AWS.MediaPackage.Types.Sum
+          Network.AWS.MediaPackage.Types.AdMarkers
+        , Network.AWS.MediaPackage.Types.AdTriggersElement
+        , Network.AWS.MediaPackage.Types.AdsOnDeliveryRestrictions
+        , Network.AWS.MediaPackage.Types.Authorization
+        , Network.AWS.MediaPackage.Types.Channel
+        , Network.AWS.MediaPackage.Types.CmafEncryption
+        , Network.AWS.MediaPackage.Types.CmafPackage
+        , Network.AWS.MediaPackage.Types.CmafPackageCreateOrUpdateParameters
+        , Network.AWS.MediaPackage.Types.DashEncryption
+        , Network.AWS.MediaPackage.Types.DashPackage
+        , Network.AWS.MediaPackage.Types.EncryptionMethod
+        , Network.AWS.MediaPackage.Types.HarvestJob
+        , Network.AWS.MediaPackage.Types.HlsEncryption
+        , Network.AWS.MediaPackage.Types.HlsIngest
+        , Network.AWS.MediaPackage.Types.HlsManifest
+        , Network.AWS.MediaPackage.Types.HlsManifestCreateOrUpdateParameters
+        , Network.AWS.MediaPackage.Types.HlsPackage
+        , Network.AWS.MediaPackage.Types.IngestEndpoint
+        , Network.AWS.MediaPackage.Types.ManifestLayout
+        , Network.AWS.MediaPackage.Types.MssEncryption
+        , Network.AWS.MediaPackage.Types.MssPackage
+        , Network.AWS.MediaPackage.Types.OriginEndpoint
+        , Network.AWS.MediaPackage.Types.Origination
+        , Network.AWS.MediaPackage.Types.PeriodTriggersElement
+        , Network.AWS.MediaPackage.Types.PlaylistType
+        , Network.AWS.MediaPackage.Types.Product
+        , Network.AWS.MediaPackage.Types.Profile
+        , Network.AWS.MediaPackage.Types.S3Destination
+        , Network.AWS.MediaPackage.Types.SegmentTemplateFormat
+        , Network.AWS.MediaPackage.Types.SpekeKeyProvider
+        , Network.AWS.MediaPackage.Types.StreamOrder
+        , Network.AWS.MediaPackage.Types.StreamSelection
+        , Network.AWS.MediaPackage.Types.TaskStatus
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-mediapackage-test
     type:              exitcode-stdio-1.0
@@ -89,6 +127,7 @@ test-suite amazonka-mediapackage-test
         , amazonka-mediapackage
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

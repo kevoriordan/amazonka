@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteResourceServer' smart constructor.
-data DeleteResourceServer = DeleteResourceServer'
-  { _drsUserPoolId :: !Text
-  , _drsIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteResourceServer = DeleteResourceServer'{_drsUserPoolId
+                                                  :: !Text,
+                                                  _drsIdentifier :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteResourceServer' with the minimum fields required to make a request.
 --
@@ -60,10 +59,10 @@ deleteResourceServer
     :: Text -- ^ 'drsUserPoolId'
     -> Text -- ^ 'drsIdentifier'
     -> DeleteResourceServer
-deleteResourceServer pUserPoolId_ pIdentifier_ =
-  DeleteResourceServer'
-    {_drsUserPoolId = pUserPoolId_, _drsIdentifier = pIdentifier_}
-
+deleteResourceServer pUserPoolId_ pIdentifier_
+  = DeleteResourceServer'{_drsUserPoolId =
+                            pUserPoolId_,
+                          _drsIdentifier = pIdentifier_}
 
 -- | The user pool ID for the user pool that hosts the resource server.
 drsUserPoolId :: Lens' DeleteResourceServer Text
@@ -107,16 +106,15 @@ instance ToQuery DeleteResourceServer where
         toQuery = const mempty
 
 -- | /See:/ 'deleteResourceServerResponse' smart constructor.
-data DeleteResourceServerResponse =
-  DeleteResourceServerResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteResourceServerResponse = DeleteResourceServerResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteResourceServerResponse' with the minimum fields required to make a request.
 --
 deleteResourceServerResponse
     :: DeleteResourceServerResponse
-deleteResourceServerResponse = DeleteResourceServerResponse'
-
+deleteResourceServerResponse
+  = DeleteResourceServerResponse'
 
 instance NFData DeleteResourceServerResponse where

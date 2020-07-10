@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules.
+-- Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. 
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.Config.DescribeAggregateComplianceByConfigRules
     (
     -- * Creating a Request
@@ -44,26 +46,38 @@ module Network.AWS.Config.DescribeAggregateComplianceByConfigRules
 import Network.AWS.Config.Types
 import Network.AWS.Config.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeAggregateComplianceByConfigRules' smart constructor.
-data DescribeAggregateComplianceByConfigRules = DescribeAggregateComplianceByConfigRules'
-  { _dacbcrFilters                     :: !(Maybe ConfigRuleComplianceFilters)
-  , _dacbcrNextToken                   :: !(Maybe Text)
-  , _dacbcrLimit                       :: !(Maybe Nat)
-  , _dacbcrConfigurationAggregatorName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAggregateComplianceByConfigRules = DescribeAggregateComplianceByConfigRules'{_dacbcrFilters
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              ConfigRuleComplianceFilters),
+                                                                                          _dacbcrNextToken
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _dacbcrLimit
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Nat),
+                                                                                          _dacbcrConfigurationAggregatorName
+                                                                                          ::
+                                                                                          !Text}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DescribeAggregateComplianceByConfigRules' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dacbcrFilters' - Filters the results by ConfigRuleComplianceFilters object.
+-- * 'dacbcrFilters' - Filters the results by ConfigRuleComplianceFilters object. 
 --
--- * 'dacbcrNextToken' - The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'dacbcrNextToken' - The @nextToken@ string returned on a previous page that you use to get the next page of results in a paginated response.
 --
 -- * 'dacbcrLimit' - The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
 --
@@ -71,20 +85,20 @@ data DescribeAggregateComplianceByConfigRules = DescribeAggregateComplianceByCon
 describeAggregateComplianceByConfigRules
     :: Text -- ^ 'dacbcrConfigurationAggregatorName'
     -> DescribeAggregateComplianceByConfigRules
-describeAggregateComplianceByConfigRules pConfigurationAggregatorName_ =
-  DescribeAggregateComplianceByConfigRules'
-    { _dacbcrFilters = Nothing
-    , _dacbcrNextToken = Nothing
-    , _dacbcrLimit = Nothing
-    , _dacbcrConfigurationAggregatorName = pConfigurationAggregatorName_
-    }
+describeAggregateComplianceByConfigRules
+  pConfigurationAggregatorName_
+  = DescribeAggregateComplianceByConfigRules'{_dacbcrFilters
+                                                = Nothing,
+                                              _dacbcrNextToken = Nothing,
+                                              _dacbcrLimit = Nothing,
+                                              _dacbcrConfigurationAggregatorName
+                                                = pConfigurationAggregatorName_}
 
-
--- | Filters the results by ConfigRuleComplianceFilters object.
+-- | Filters the results by ConfigRuleComplianceFilters object. 
 dacbcrFilters :: Lens' DescribeAggregateComplianceByConfigRules (Maybe ConfigRuleComplianceFilters)
 dacbcrFilters = lens _dacbcrFilters (\ s a -> s{_dacbcrFilters = a})
 
--- | The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The @nextToken@ string returned on a previous page that you use to get the next page of results in a paginated response.
 dacbcrNextToken :: Lens' DescribeAggregateComplianceByConfigRules (Maybe Text)
 dacbcrNextToken = lens _dacbcrNextToken (\ s a -> s{_dacbcrNextToken = a})
 
@@ -95,6 +109,18 @@ dacbcrLimit = lens _dacbcrLimit (\ s a -> s{_dacbcrLimit = a}) . mapping _Nat
 -- | The name of the configuration aggregator.
 dacbcrConfigurationAggregatorName :: Lens' DescribeAggregateComplianceByConfigRules Text
 dacbcrConfigurationAggregatorName = lens _dacbcrConfigurationAggregatorName (\ s a -> s{_dacbcrConfigurationAggregatorName = a})
+
+instance AWSPager
+           DescribeAggregateComplianceByConfigRules
+         where
+        page rq rs
+          | stop (rs ^. dacbcrrsNextToken) = Nothing
+          | stop
+              (rs ^. dacbcrrsAggregateComplianceByConfigRules)
+            = Nothing
+          | otherwise =
+            Just $ rq &
+              dacbcrNextToken .~ rs ^. dacbcrrsNextToken
 
 instance AWSRequest
            DescribeAggregateComplianceByConfigRules
@@ -154,18 +180,27 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'describeAggregateComplianceByConfigRulesResponse' smart constructor.
-data DescribeAggregateComplianceByConfigRulesResponse = DescribeAggregateComplianceByConfigRulesResponse'
-  { _dacbcrrsNextToken :: !(Maybe Text)
-  , _dacbcrrsAggregateComplianceByConfigRules :: !(Maybe [AggregateComplianceByConfigRule])
-  , _dacbcrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAggregateComplianceByConfigRulesResponse = DescribeAggregateComplianceByConfigRulesResponse'{_dacbcrrsNextToken
+                                                                                                          ::
+                                                                                                          !(Maybe
+                                                                                                              Text),
+                                                                                                          _dacbcrrsAggregateComplianceByConfigRules
+                                                                                                          ::
+                                                                                                          !(Maybe
+                                                                                                              [AggregateComplianceByConfigRule]),
+                                                                                                          _dacbcrrsResponseStatus
+                                                                                                          ::
+                                                                                                          !Int}
+                                                          deriving (Eq, Read,
+                                                                    Show, Data,
+                                                                    Typeable,
+                                                                    Generic)
 
 -- | Creates a value of 'DescribeAggregateComplianceByConfigRulesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dacbcrrsNextToken' - The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'dacbcrrsNextToken' - The @nextToken@ string returned on a previous page that you use to get the next page of results in a paginated response.
 --
 -- * 'dacbcrrsAggregateComplianceByConfigRules' - Returns a list of AggregateComplianceByConfigRule object.
 --
@@ -173,15 +208,16 @@ data DescribeAggregateComplianceByConfigRulesResponse = DescribeAggregateComplia
 describeAggregateComplianceByConfigRulesResponse
     :: Int -- ^ 'dacbcrrsResponseStatus'
     -> DescribeAggregateComplianceByConfigRulesResponse
-describeAggregateComplianceByConfigRulesResponse pResponseStatus_ =
-  DescribeAggregateComplianceByConfigRulesResponse'
-    { _dacbcrrsNextToken = Nothing
-    , _dacbcrrsAggregateComplianceByConfigRules = Nothing
-    , _dacbcrrsResponseStatus = pResponseStatus_
-    }
+describeAggregateComplianceByConfigRulesResponse
+  pResponseStatus_
+  = DescribeAggregateComplianceByConfigRulesResponse'{_dacbcrrsNextToken
+                                                        = Nothing,
+                                                      _dacbcrrsAggregateComplianceByConfigRules
+                                                        = Nothing,
+                                                      _dacbcrrsResponseStatus =
+                                                        pResponseStatus_}
 
-
--- | The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The @nextToken@ string returned on a previous page that you use to get the next page of results in a paginated response.
 dacbcrrsNextToken :: Lens' DescribeAggregateComplianceByConfigRulesResponse (Maybe Text)
 dacbcrrsNextToken = lens _dacbcrrsNextToken (\ s a -> s{_dacbcrrsNextToken = a})
 

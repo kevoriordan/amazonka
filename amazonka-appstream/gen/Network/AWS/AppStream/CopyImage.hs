@@ -48,13 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'copyImage' smart constructor.
-data CopyImage = CopyImage'
-  { _ciDestinationImageDescription :: !(Maybe Text)
-  , _ciSourceImageName             :: !Text
-  , _ciDestinationImageName        :: !Text
-  , _ciDestinationRegion           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CopyImage = CopyImage'{_ciDestinationImageDescription
+                            :: !(Maybe Text),
+                            _ciSourceImageName :: !Text,
+                            _ciDestinationImageName :: !Text,
+                            _ciDestinationRegion :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CopyImage' with the minimum fields required to make a request.
 --
@@ -72,14 +71,13 @@ copyImage
     -> Text -- ^ 'ciDestinationImageName'
     -> Text -- ^ 'ciDestinationRegion'
     -> CopyImage
-copyImage pSourceImageName_ pDestinationImageName_ pDestinationRegion_ =
-  CopyImage'
-    { _ciDestinationImageDescription = Nothing
-    , _ciSourceImageName = pSourceImageName_
-    , _ciDestinationImageName = pDestinationImageName_
-    , _ciDestinationRegion = pDestinationRegion_
-    }
-
+copyImage pSourceImageName_ pDestinationImageName_
+  pDestinationRegion_
+  = CopyImage'{_ciDestinationImageDescription =
+                 Nothing,
+               _ciSourceImageName = pSourceImageName_,
+               _ciDestinationImageName = pDestinationImageName_,
+               _ciDestinationRegion = pDestinationRegion_}
 
 -- | The description that the image will have when it is copied to the destination.
 ciDestinationImageDescription :: Lens' CopyImage (Maybe Text)
@@ -138,11 +136,10 @@ instance ToQuery CopyImage where
         toQuery = const mempty
 
 -- | /See:/ 'copyImageResponse' smart constructor.
-data CopyImageResponse = CopyImageResponse'
-  { _cirsDestinationImageName :: !(Maybe Text)
-  , _cirsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CopyImageResponse = CopyImageResponse'{_cirsDestinationImageName
+                                            :: !(Maybe Text),
+                                            _cirsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CopyImageResponse' with the minimum fields required to make a request.
 --
@@ -154,12 +151,10 @@ data CopyImageResponse = CopyImageResponse'
 copyImageResponse
     :: Int -- ^ 'cirsResponseStatus'
     -> CopyImageResponse
-copyImageResponse pResponseStatus_ =
-  CopyImageResponse'
-    { _cirsDestinationImageName = Nothing
-    , _cirsResponseStatus = pResponseStatus_
-    }
-
+copyImageResponse pResponseStatus_
+  = CopyImageResponse'{_cirsDestinationImageName =
+                         Nothing,
+                       _cirsResponseStatus = pResponseStatus_}
 
 -- | The name of the destination image.
 cirsDestinationImageName :: Lens' CopyImageResponse (Maybe Text)

@@ -45,13 +45,12 @@ import Network.AWS.SNS.Types
 import Network.AWS.SNS.Types.Product
 
 -- | /See:/ 'addPermission' smart constructor.
-data AddPermission = AddPermission'
-  { _apTopicARN     :: !Text
-  , _apLabel        :: !Text
-  , _apAWSAccountId :: ![Text]
-  , _apActionName   :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddPermission = AddPermission'{_apTopicARN ::
+                                    !Text,
+                                    _apLabel :: !Text,
+                                    _apAWSAccountId :: ![Text],
+                                    _apActionName :: ![Text]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddPermission' with the minimum fields required to make a request.
 --
@@ -63,19 +62,15 @@ data AddPermission = AddPermission'
 --
 -- * 'apAWSAccountId' - The AWS account IDs of the users (principals) who will be given access to the specified actions. The users must have AWS accounts, but do not need to be signed up for this service.
 --
--- * 'apActionName' - The action you want to allow for the specified principal(s). Valid values: any Amazon SNS action name.
+-- * 'apActionName' - The action you want to allow for the specified principal(s). Valid values: Any Amazon SNS action name, for example @Publish@ .
 addPermission
     :: Text -- ^ 'apTopicARN'
     -> Text -- ^ 'apLabel'
     -> AddPermission
-addPermission pTopicARN_ pLabel_ =
-  AddPermission'
-    { _apTopicARN = pTopicARN_
-    , _apLabel = pLabel_
-    , _apAWSAccountId = mempty
-    , _apActionName = mempty
-    }
-
+addPermission pTopicARN_ pLabel_
+  = AddPermission'{_apTopicARN = pTopicARN_,
+                   _apLabel = pLabel_, _apAWSAccountId = mempty,
+                   _apActionName = mempty}
 
 -- | The ARN of the topic whose access control policy you wish to modify.
 apTopicARN :: Lens' AddPermission Text
@@ -89,7 +84,7 @@ apLabel = lens _apLabel (\ s a -> s{_apLabel = a})
 apAWSAccountId :: Lens' AddPermission [Text]
 apAWSAccountId = lens _apAWSAccountId (\ s a -> s{_apAWSAccountId = a}) . _Coerce
 
--- | The action you want to allow for the specified principal(s). Valid values: any Amazon SNS action name.
+-- | The action you want to allow for the specified principal(s). Valid values: Any Amazon SNS action name, for example @Publish@ .
 apActionName :: Lens' AddPermission [Text]
 apActionName = lens _apActionName (\ s a -> s{_apActionName = a}) . _Coerce
 
@@ -119,16 +114,14 @@ instance ToQuery AddPermission where
                "ActionName" =: toQueryList "member" _apActionName]
 
 -- | /See:/ 'addPermissionResponse' smart constructor.
-data AddPermissionResponse =
-  AddPermissionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddPermissionResponse = AddPermissionResponse'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'AddPermissionResponse' with the minimum fields required to make a request.
 --
 addPermissionResponse
     :: AddPermissionResponse
 addPermissionResponse = AddPermissionResponse'
-
 
 instance NFData AddPermissionResponse where

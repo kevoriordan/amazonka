@@ -49,10 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeApplications' smart constructor.
-newtype DescribeApplications = DescribeApplications'
-  { _daApplicationNames :: Maybe [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeApplications = DescribeApplications'{_daApplicationNames
+                                                     :: Maybe [Text]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeApplications' with the minimum fields required to make a request.
 --
@@ -61,8 +61,9 @@ newtype DescribeApplications = DescribeApplications'
 -- * 'daApplicationNames' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
 describeApplications
     :: DescribeApplications
-describeApplications = DescribeApplications' {_daApplicationNames = Nothing}
-
+describeApplications
+  = DescribeApplications'{_daApplicationNames =
+                            Nothing}
 
 -- | If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.
 daApplicationNames :: Lens' DescribeApplications [Text]
@@ -104,11 +105,14 @@ instance ToQuery DescribeApplications where
 --
 --
 -- /See:/ 'describeApplicationsResponse' smart constructor.
-data DescribeApplicationsResponse = DescribeApplicationsResponse'
-  { _darsApplications   :: !(Maybe [ApplicationDescription])
-  , _darsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeApplicationsResponse = DescribeApplicationsResponse'{_darsApplications
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [ApplicationDescription]),
+                                                                  _darsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeApplicationsResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +124,10 @@ data DescribeApplicationsResponse = DescribeApplicationsResponse'
 describeApplicationsResponse
     :: Int -- ^ 'darsResponseStatus'
     -> DescribeApplicationsResponse
-describeApplicationsResponse pResponseStatus_ =
-  DescribeApplicationsResponse'
-    {_darsApplications = Nothing, _darsResponseStatus = pResponseStatus_}
-
+describeApplicationsResponse pResponseStatus_
+  = DescribeApplicationsResponse'{_darsApplications =
+                                    Nothing,
+                                  _darsResponseStatus = pResponseStatus_}
 
 -- | This parameter contains a list of 'ApplicationDescription' .
 darsApplications :: Lens' DescribeApplicationsResponse [ApplicationDescription]

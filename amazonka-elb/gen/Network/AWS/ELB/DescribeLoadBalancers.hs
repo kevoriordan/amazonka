@@ -55,12 +55,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeLoadBalancers' smart constructor.
-data DescribeLoadBalancers = DescribeLoadBalancers'
-  { _dlbMarker            :: !(Maybe Text)
-  , _dlbPageSize          :: !(Maybe Nat)
-  , _dlbLoadBalancerNames :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoadBalancers = DescribeLoadBalancers'{_dlbMarker
+                                                    :: !(Maybe Text),
+                                                    _dlbPageSize ::
+                                                    !(Maybe Nat),
+                                                    _dlbLoadBalancerNames ::
+                                                    !(Maybe [Text])}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeLoadBalancers' with the minimum fields required to make a request.
 --
@@ -73,13 +75,10 @@ data DescribeLoadBalancers = DescribeLoadBalancers'
 -- * 'dlbLoadBalancerNames' - The names of the load balancers.
 describeLoadBalancers
     :: DescribeLoadBalancers
-describeLoadBalancers =
-  DescribeLoadBalancers'
-    { _dlbMarker = Nothing
-    , _dlbPageSize = Nothing
-    , _dlbLoadBalancerNames = Nothing
-    }
-
+describeLoadBalancers
+  = DescribeLoadBalancers'{_dlbMarker = Nothing,
+                           _dlbPageSize = Nothing,
+                           _dlbLoadBalancerNames = Nothing}
 
 -- | The marker for the next set of results. (You received this marker from a previous call.)
 dlbMarker :: Lens' DescribeLoadBalancers (Maybe Text)
@@ -139,12 +138,18 @@ instance ToQuery DescribeLoadBalancers where
 --
 --
 -- /See:/ 'describeLoadBalancersResponse' smart constructor.
-data DescribeLoadBalancersResponse = DescribeLoadBalancersResponse'
-  { _dlbrsLoadBalancerDescriptions :: !(Maybe [LoadBalancerDescription])
-  , _dlbrsNextMarker               :: !(Maybe Text)
-  , _dlbrsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoadBalancersResponse = DescribeLoadBalancersResponse'{_dlbrsLoadBalancerDescriptions
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [LoadBalancerDescription]),
+                                                                    _dlbrsNextMarker
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dlbrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeLoadBalancersResponse' with the minimum fields required to make a request.
 --
@@ -158,13 +163,11 @@ data DescribeLoadBalancersResponse = DescribeLoadBalancersResponse'
 describeLoadBalancersResponse
     :: Int -- ^ 'dlbrsResponseStatus'
     -> DescribeLoadBalancersResponse
-describeLoadBalancersResponse pResponseStatus_ =
-  DescribeLoadBalancersResponse'
-    { _dlbrsLoadBalancerDescriptions = Nothing
-    , _dlbrsNextMarker = Nothing
-    , _dlbrsResponseStatus = pResponseStatus_
-    }
-
+describeLoadBalancersResponse pResponseStatus_
+  = DescribeLoadBalancersResponse'{_dlbrsLoadBalancerDescriptions
+                                     = Nothing,
+                                   _dlbrsNextMarker = Nothing,
+                                   _dlbrsResponseStatus = pResponseStatus_}
 
 -- | Information about the load balancers.
 dlbrsLoadBalancerDescriptions :: Lens' DescribeLoadBalancersResponse [LoadBalancerDescription]

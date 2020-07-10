@@ -18,15 +18,17 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
+-- Unarchives GuardDuty findings specified by the @findingIds@ .
+--
+--
 module Network.AWS.GuardDuty.UnarchiveFindings
     (
     -- * Creating a Request
       unarchiveFindings
     , UnarchiveFindings
     -- * Request Lenses
-    , uFindingIds
     , uDetectorId
+    , uFindingIds
 
     -- * Destructuring the Response
     , unarchiveFindingsResponse
@@ -42,36 +44,33 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | UnarchiveFindings request body.
---
--- /See:/ 'unarchiveFindings' smart constructor.
-data UnarchiveFindings = UnarchiveFindings'
-  { _uFindingIds :: !(Maybe [Text])
-  , _uDetectorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'unarchiveFindings' smart constructor.
+data UnarchiveFindings = UnarchiveFindings'{_uDetectorId
+                                            :: !Text,
+                                            _uFindingIds :: ![Text]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnarchiveFindings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uFindingIds' - IDs of the findings that you want to unarchive.
+-- * 'uDetectorId' - The ID of the detector associated with the findings to unarchive.
 --
--- * 'uDetectorId' - The ID of the detector that specifies the GuardDuty service whose findings you want to unarchive.
+-- * 'uFindingIds' - The IDs of the findings to unarchive.
 unarchiveFindings
     :: Text -- ^ 'uDetectorId'
     -> UnarchiveFindings
-unarchiveFindings pDetectorId_ =
-  UnarchiveFindings' {_uFindingIds = Nothing, _uDetectorId = pDetectorId_}
+unarchiveFindings pDetectorId_
+  = UnarchiveFindings'{_uDetectorId = pDetectorId_,
+                       _uFindingIds = mempty}
 
-
--- | IDs of the findings that you want to unarchive.
-uFindingIds :: Lens' UnarchiveFindings [Text]
-uFindingIds = lens _uFindingIds (\ s a -> s{_uFindingIds = a}) . _Default . _Coerce
-
--- | The ID of the detector that specifies the GuardDuty service whose findings you want to unarchive.
+-- | The ID of the detector associated with the findings to unarchive.
 uDetectorId :: Lens' UnarchiveFindings Text
 uDetectorId = lens _uDetectorId (\ s a -> s{_uDetectorId = a})
+
+-- | The IDs of the findings to unarchive.
+uFindingIds :: Lens' UnarchiveFindings [Text]
+uFindingIds = lens _uFindingIds (\ s a -> s{_uFindingIds = a}) . _Coerce
 
 instance AWSRequest UnarchiveFindings where
         type Rs UnarchiveFindings = UnarchiveFindingsResponse
@@ -95,7 +94,7 @@ instance ToHeaders UnarchiveFindings where
 instance ToJSON UnarchiveFindings where
         toJSON UnarchiveFindings'{..}
           = object
-              (catMaybes [("findingIds" .=) <$> _uFindingIds])
+              (catMaybes [Just ("findingIds" .= _uFindingIds)])
 
 instance ToPath UnarchiveFindings where
         toPath UnarchiveFindings'{..}
@@ -107,10 +106,10 @@ instance ToQuery UnarchiveFindings where
         toQuery = const mempty
 
 -- | /See:/ 'unarchiveFindingsResponse' smart constructor.
-newtype UnarchiveFindingsResponse = UnarchiveFindingsResponse'
-  { _ursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UnarchiveFindingsResponse = UnarchiveFindingsResponse'{_ursResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UnarchiveFindingsResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +119,9 @@ newtype UnarchiveFindingsResponse = UnarchiveFindingsResponse'
 unarchiveFindingsResponse
     :: Int -- ^ 'ursResponseStatus'
     -> UnarchiveFindingsResponse
-unarchiveFindingsResponse pResponseStatus_ =
-  UnarchiveFindingsResponse' {_ursResponseStatus = pResponseStatus_}
-
+unarchiveFindingsResponse pResponseStatus_
+  = UnarchiveFindingsResponse'{_ursResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 ursResponseStatus :: Lens' UnarchiveFindingsResponse Int

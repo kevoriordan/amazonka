@@ -21,7 +21,7 @@
 -- Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as @INACTIVE@ . Existing tasks and services that reference an @INACTIVE@ task definition continue to run without disruption. Existing services that reference an @INACTIVE@ task definition can still scale up or down by modifying the service's desired count.
 --
 --
--- You cannot use an @INACTIVE@ task definition to run new tasks or create new services, and you cannot update an existing service to reference an @INACTIVE@ task definition (although there may be up to a 10-minute window following deregistration where these restrictions have not yet taken effect).
+-- You cannot use an @INACTIVE@ task definition to run new tasks or create new services, and you cannot update an existing service to reference an @INACTIVE@ task definition. However, there may be up to a 10-minute window following deregistration where these restrictions have not yet taken effect.
 --
 module Network.AWS.ECS.DeregisterTaskDefinition
     (
@@ -47,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deregisterTaskDefinition' smart constructor.
-newtype DeregisterTaskDefinition = DeregisterTaskDefinition'
-  { _derTaskDefinition :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeregisterTaskDefinition = DeregisterTaskDefinition'{_derTaskDefinition
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeregisterTaskDefinition' with the minimum fields required to make a request.
 --
@@ -60,9 +60,9 @@ newtype DeregisterTaskDefinition = DeregisterTaskDefinition'
 deregisterTaskDefinition
     :: Text -- ^ 'derTaskDefinition'
     -> DeregisterTaskDefinition
-deregisterTaskDefinition pTaskDefinition_ =
-  DeregisterTaskDefinition' {_derTaskDefinition = pTaskDefinition_}
-
+deregisterTaskDefinition pTaskDefinition_
+  = DeregisterTaskDefinition'{_derTaskDefinition =
+                                pTaskDefinition_}
 
 -- | The @family@ and @revision@ (@family:revision@ ) or full Amazon Resource Name (ARN) of the task definition to deregister. You must specify a @revision@ .
 derTaskDefinition :: Lens' DeregisterTaskDefinition Text
@@ -105,11 +105,15 @@ instance ToQuery DeregisterTaskDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'deregisterTaskDefinitionResponse' smart constructor.
-data DeregisterTaskDefinitionResponse = DeregisterTaskDefinitionResponse'
-  { _dtdrsTaskDefinition :: !(Maybe TaskDefinition)
-  , _dtdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterTaskDefinitionResponse = DeregisterTaskDefinitionResponse'{_dtdrsTaskDefinition
+                                                                          ::
+                                                                          !(Maybe
+                                                                              TaskDefinition),
+                                                                          _dtdrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeregisterTaskDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +125,10 @@ data DeregisterTaskDefinitionResponse = DeregisterTaskDefinitionResponse'
 deregisterTaskDefinitionResponse
     :: Int -- ^ 'dtdrsResponseStatus'
     -> DeregisterTaskDefinitionResponse
-deregisterTaskDefinitionResponse pResponseStatus_ =
-  DeregisterTaskDefinitionResponse'
-    {_dtdrsTaskDefinition = Nothing, _dtdrsResponseStatus = pResponseStatus_}
-
+deregisterTaskDefinitionResponse pResponseStatus_
+  = DeregisterTaskDefinitionResponse'{_dtdrsTaskDefinition
+                                        = Nothing,
+                                      _dtdrsResponseStatus = pResponseStatus_}
 
 -- | The full description of the deregistered task.
 dtdrsTaskDefinition :: Lens' DeregisterTaskDefinitionResponse (Maybe TaskDefinition)

@@ -43,28 +43,26 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteDocument' smart constructor.
-data DeleteDocument = DeleteDocument'
-  { _ddAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _ddDocumentId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteDocument = DeleteDocument'{_ddAuthenticationToken
+                                      :: !(Maybe (Sensitive Text)),
+                                      _ddDocumentId :: !Text}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDocument' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'ddAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'ddDocumentId' - The ID of the document.
 deleteDocument
     :: Text -- ^ 'ddDocumentId'
     -> DeleteDocument
-deleteDocument pDocumentId_ =
-  DeleteDocument'
-    {_ddAuthenticationToken = Nothing, _ddDocumentId = pDocumentId_}
+deleteDocument pDocumentId_
+  = DeleteDocument'{_ddAuthenticationToken = Nothing,
+                    _ddDocumentId = pDocumentId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 ddAuthenticationToken :: Lens' DeleteDocument (Maybe Text)
 ddAuthenticationToken = lens _ddAuthenticationToken (\ s a -> s{_ddAuthenticationToken = a}) . mapping _Sensitive
 
@@ -96,16 +94,14 @@ instance ToQuery DeleteDocument where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDocumentResponse' smart constructor.
-data DeleteDocumentResponse =
-  DeleteDocumentResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDocumentResponse = DeleteDocumentResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteDocumentResponse' with the minimum fields required to make a request.
 --
 deleteDocumentResponse
     :: DeleteDocumentResponse
 deleteDocumentResponse = DeleteDocumentResponse'
-
 
 instance NFData DeleteDocumentResponse where

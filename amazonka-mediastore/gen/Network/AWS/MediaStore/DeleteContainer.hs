@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified container. Before you make a @DeleteContainer@ request, delete any objects in the container or in any folders in the container. You can delete only empty containers.
+-- Deletes the specified container. Before you make a @DeleteContainer@ request, delete any objects in the container or in any folders in the container. You can delete only empty containers. 
 --
 --
 module Network.AWS.MediaStore.DeleteContainer
@@ -44,24 +44,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteContainer' smart constructor.
-newtype DeleteContainer = DeleteContainer'
-  { _dcContainerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteContainer = DeleteContainer'{_dcContainerName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteContainer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcContainerName' - The name of the container to delete.
+-- * 'dcContainerName' - The name of the container to delete. 
 deleteContainer
     :: Text -- ^ 'dcContainerName'
     -> DeleteContainer
-deleteContainer pContainerName_ =
-  DeleteContainer' {_dcContainerName = pContainerName_}
+deleteContainer pContainerName_
+  = DeleteContainer'{_dcContainerName =
+                       pContainerName_}
 
-
--- | The name of the container to delete.
+-- | The name of the container to delete. 
 dcContainerName :: Lens' DeleteContainer Text
 dcContainerName = lens _dcContainerName (\ s a -> s{_dcContainerName = a})
 
@@ -100,10 +99,10 @@ instance ToQuery DeleteContainer where
         toQuery = const mempty
 
 -- | /See:/ 'deleteContainerResponse' smart constructor.
-newtype DeleteContainerResponse = DeleteContainerResponse'
-  { _dcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteContainerResponse = DeleteContainerResponse'{_dcrsResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteContainerResponse' with the minimum fields required to make a request.
 --
@@ -113,9 +112,9 @@ newtype DeleteContainerResponse = DeleteContainerResponse'
 deleteContainerResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DeleteContainerResponse
-deleteContainerResponse pResponseStatus_ =
-  DeleteContainerResponse' {_dcrsResponseStatus = pResponseStatus_}
-
+deleteContainerResponse pResponseStatus_
+  = DeleteContainerResponse'{_dcrsResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 dcrsResponseStatus :: Lens' DeleteContainerResponse Int

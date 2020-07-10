@@ -33,8 +33,8 @@ module Network.AWS.CodeCommit.GetComment
     , getCommentResponse
     , GetCommentResponse
     -- * Response Lenses
-    , getrsComment
-    , getrsResponseStatus
+    , gtcmmntrsComment
+    , gtcmmntrsResponseStatus
     ) where
 
 import Network.AWS.CodeCommit.Types
@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getComment' smart constructor.
-newtype GetComment = GetComment'
-  { _gcCommentId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetComment = GetComment'{_gcCommentId ::
+                                 Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetComment' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetComment = GetComment'
 getComment
     :: Text -- ^ 'gcCommentId'
     -> GetComment
-getComment pCommentId_ = GetComment' {_gcCommentId = pCommentId_}
-
+getComment pCommentId_
+  = GetComment'{_gcCommentId = pCommentId_}
 
 -- | The unique, system-generated ID of the comment. To get this ID, use 'GetCommentsForComparedCommit' or 'GetCommentsForPullRequest' .
 gcCommentId :: Lens' GetComment Text
@@ -99,33 +98,31 @@ instance ToQuery GetComment where
         toQuery = const mempty
 
 -- | /See:/ 'getCommentResponse' smart constructor.
-data GetCommentResponse = GetCommentResponse'
-  { _getrsComment        :: !(Maybe Comment)
-  , _getrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCommentResponse = GetCommentResponse'{_gtcmmntrsComment
+                                              :: !(Maybe Comment),
+                                              _gtcmmntrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCommentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'getrsComment' - The contents of the comment.
+-- * 'gtcmmntrsComment' - The contents of the comment.
 --
--- * 'getrsResponseStatus' - -- | The response status code.
+-- * 'gtcmmntrsResponseStatus' - -- | The response status code.
 getCommentResponse
-    :: Int -- ^ 'getrsResponseStatus'
+    :: Int -- ^ 'gtcmmntrsResponseStatus'
     -> GetCommentResponse
-getCommentResponse pResponseStatus_ =
-  GetCommentResponse'
-    {_getrsComment = Nothing, _getrsResponseStatus = pResponseStatus_}
-
+getCommentResponse pResponseStatus_
+  = GetCommentResponse'{_gtcmmntrsComment = Nothing,
+                        _gtcmmntrsResponseStatus = pResponseStatus_}
 
 -- | The contents of the comment.
-getrsComment :: Lens' GetCommentResponse (Maybe Comment)
-getrsComment = lens _getrsComment (\ s a -> s{_getrsComment = a})
+gtcmmntrsComment :: Lens' GetCommentResponse (Maybe Comment)
+gtcmmntrsComment = lens _gtcmmntrsComment (\ s a -> s{_gtcmmntrsComment = a})
 
 -- | -- | The response status code.
-getrsResponseStatus :: Lens' GetCommentResponse Int
-getrsResponseStatus = lens _getrsResponseStatus (\ s a -> s{_getrsResponseStatus = a})
+gtcmmntrsResponseStatus :: Lens' GetCommentResponse Int
+gtcmmntrsResponseStatus = lens _gtcmmntrsResponseStatus (\ s a -> s{_gtcmmntrsResponseStatus = a})
 
 instance NFData GetCommentResponse where

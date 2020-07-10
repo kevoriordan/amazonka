@@ -33,8 +33,8 @@ module Network.AWS.Config.DescribeConfigurationRecorders
     , describeConfigurationRecordersResponse
     , DescribeConfigurationRecordersResponse
     -- * Response Lenses
-    , drsConfigurationRecorders
-    , drsResponseStatus
+    , dcrsrsConfigurationRecorders
+    , dcrsrsResponseStatus
     ) where
 
 import Network.AWS.Config.Types
@@ -49,10 +49,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeConfigurationRecorders' smart constructor.
-newtype DescribeConfigurationRecorders = DescribeConfigurationRecorders'
-  { _dcrConfigurationRecorderNames :: Maybe [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeConfigurationRecorders = DescribeConfigurationRecorders'{_dcrConfigurationRecorderNames
+                                                                         ::
+                                                                         Maybe
+                                                                           [Text]}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeConfigurationRecorders' with the minimum fields required to make a request.
 --
@@ -61,9 +63,9 @@ newtype DescribeConfigurationRecorders = DescribeConfigurationRecorders'
 -- * 'dcrConfigurationRecorderNames' - A list of configuration recorder names.
 describeConfigurationRecorders
     :: DescribeConfigurationRecorders
-describeConfigurationRecorders =
-  DescribeConfigurationRecorders' {_dcrConfigurationRecorderNames = Nothing}
-
+describeConfigurationRecorders
+  = DescribeConfigurationRecorders'{_dcrConfigurationRecorderNames
+                                      = Nothing}
 
 -- | A list of configuration recorder names.
 dcrConfigurationRecorderNames :: Lens' DescribeConfigurationRecorders [Text]
@@ -115,36 +117,40 @@ instance ToQuery DescribeConfigurationRecorders where
 --
 --
 -- /See:/ 'describeConfigurationRecordersResponse' smart constructor.
-data DescribeConfigurationRecordersResponse = DescribeConfigurationRecordersResponse'
-  { _drsConfigurationRecorders :: !(Maybe [ConfigurationRecorder])
-  , _drsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConfigurationRecordersResponse = DescribeConfigurationRecordersResponse'{_dcrsrsConfigurationRecorders
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [ConfigurationRecorder]),
+                                                                                      _dcrsrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DescribeConfigurationRecordersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drsConfigurationRecorders' - A list that contains the descriptions of the specified configuration recorders.
+-- * 'dcrsrsConfigurationRecorders' - A list that contains the descriptions of the specified configuration recorders.
 --
--- * 'drsResponseStatus' - -- | The response status code.
+-- * 'dcrsrsResponseStatus' - -- | The response status code.
 describeConfigurationRecordersResponse
-    :: Int -- ^ 'drsResponseStatus'
+    :: Int -- ^ 'dcrsrsResponseStatus'
     -> DescribeConfigurationRecordersResponse
-describeConfigurationRecordersResponse pResponseStatus_ =
-  DescribeConfigurationRecordersResponse'
-    { _drsConfigurationRecorders = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeConfigurationRecordersResponse
+  pResponseStatus_
+  = DescribeConfigurationRecordersResponse'{_dcrsrsConfigurationRecorders
+                                              = Nothing,
+                                            _dcrsrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | A list that contains the descriptions of the specified configuration recorders.
-drsConfigurationRecorders :: Lens' DescribeConfigurationRecordersResponse [ConfigurationRecorder]
-drsConfigurationRecorders = lens _drsConfigurationRecorders (\ s a -> s{_drsConfigurationRecorders = a}) . _Default . _Coerce
+dcrsrsConfigurationRecorders :: Lens' DescribeConfigurationRecordersResponse [ConfigurationRecorder]
+dcrsrsConfigurationRecorders = lens _dcrsrsConfigurationRecorders (\ s a -> s{_dcrsrsConfigurationRecorders = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
-drsResponseStatus :: Lens' DescribeConfigurationRecordersResponse Int
-drsResponseStatus = lens _drsResponseStatus (\ s a -> s{_drsResponseStatus = a})
+dcrsrsResponseStatus :: Lens' DescribeConfigurationRecordersResponse Int
+dcrsrsResponseStatus = lens _dcrsrsResponseStatus (\ s a -> s{_dcrsrsResponseStatus = a})
 
 instance NFData
            DescribeConfigurationRecordersResponse

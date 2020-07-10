@@ -44,36 +44,36 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | Associates a set of tags with an AWS DMS resource.
 --
 --
 --
 -- /See:/ 'addTagsToResource' smart constructor.
-data AddTagsToResource = AddTagsToResource'
-  { _attrResourceARN :: !Text
-  , _attrTags        :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToResource = AddTagsToResource'{_attrResourceARN
+                                            :: !Text,
+                                            _attrTags :: ![Tag]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsToResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'attrResourceARN' - The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be added to. AWS DMS resources include a replication instance, endpoint, and a replication task.
+-- * 'attrResourceARN' - Identifies the AWS DMS resource to which tags should be added. The value for this parameter is an Amazon Resource Name (ARN). For AWS DMS, you can tag a replication instance, an endpoint, or a replication task.
 --
--- * 'attrTags' - The tag to be assigned to the DMS resource.
+-- * 'attrTags' - One or more tags to be assigned to the resource.
 addTagsToResource
     :: Text -- ^ 'attrResourceARN'
     -> AddTagsToResource
-addTagsToResource pResourceARN_ =
-  AddTagsToResource' {_attrResourceARN = pResourceARN_, _attrTags = mempty}
+addTagsToResource pResourceARN_
+  = AddTagsToResource'{_attrResourceARN =
+                         pResourceARN_,
+                       _attrTags = mempty}
 
-
--- | The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be added to. AWS DMS resources include a replication instance, endpoint, and a replication task.
+-- | Identifies the AWS DMS resource to which tags should be added. The value for this parameter is an Amazon Resource Name (ARN). For AWS DMS, you can tag a replication instance, an endpoint, or a replication task.
 attrResourceARN :: Lens' AddTagsToResource Text
 attrResourceARN = lens _attrResourceARN (\ s a -> s{_attrResourceARN = a})
 
--- | The tag to be assigned to the DMS resource.
+-- | One or more tags to be assigned to the resource.
 attrTags :: Lens' AddTagsToResource [Tag]
 attrTags = lens _attrTags (\ s a -> s{_attrTags = a}) . _Coerce
 
@@ -112,15 +112,15 @@ instance ToPath AddTagsToResource where
 instance ToQuery AddTagsToResource where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'addTagsToResourceResponse' smart constructor.
-newtype AddTagsToResourceResponse = AddTagsToResourceResponse'
-  { _attrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddTagsToResourceResponse = AddTagsToResourceResponse'{_attrrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'AddTagsToResourceResponse' with the minimum fields required to make a request.
 --
@@ -130,9 +130,9 @@ newtype AddTagsToResourceResponse = AddTagsToResourceResponse'
 addTagsToResourceResponse
     :: Int -- ^ 'attrrsResponseStatus'
     -> AddTagsToResourceResponse
-addTagsToResourceResponse pResponseStatus_ =
-  AddTagsToResourceResponse' {_attrrsResponseStatus = pResponseStatus_}
-
+addTagsToResourceResponse pResponseStatus_
+  = AddTagsToResourceResponse'{_attrrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 attrrsResponseStatus :: Lens' AddTagsToResourceResponse Int

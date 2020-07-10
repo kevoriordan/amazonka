@@ -45,10 +45,9 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'getGeoMatchSet' smart constructor.
-newtype GetGeoMatchSet = GetGeoMatchSet'
-  { _ggmsGeoMatchSetId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetGeoMatchSet = GetGeoMatchSet'{_ggmsGeoMatchSetId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetGeoMatchSet' with the minimum fields required to make a request.
 --
@@ -58,9 +57,9 @@ newtype GetGeoMatchSet = GetGeoMatchSet'
 getGeoMatchSet
     :: Text -- ^ 'ggmsGeoMatchSetId'
     -> GetGeoMatchSet
-getGeoMatchSet pGeoMatchSetId_ =
-  GetGeoMatchSet' {_ggmsGeoMatchSetId = pGeoMatchSetId_}
-
+getGeoMatchSet pGeoMatchSetId_
+  = GetGeoMatchSet'{_ggmsGeoMatchSetId =
+                      pGeoMatchSetId_}
 
 -- | The @GeoMatchSetId@ of the 'GeoMatchSet' that you want to get. @GeoMatchSetId@ is returned by 'CreateGeoMatchSet' and by 'ListGeoMatchSets' .
 ggmsGeoMatchSetId :: Lens' GetGeoMatchSet Text
@@ -102,11 +101,12 @@ instance ToQuery GetGeoMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'getGeoMatchSetResponse' smart constructor.
-data GetGeoMatchSetResponse = GetGeoMatchSetResponse'
-  { _ggmsrsGeoMatchSet    :: !(Maybe GeoMatchSet)
-  , _ggmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGeoMatchSetResponse = GetGeoMatchSetResponse'{_ggmsrsGeoMatchSet
+                                                      :: !(Maybe GeoMatchSet),
+                                                      _ggmsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetGeoMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -118,10 +118,10 @@ data GetGeoMatchSetResponse = GetGeoMatchSetResponse'
 getGeoMatchSetResponse
     :: Int -- ^ 'ggmsrsResponseStatus'
     -> GetGeoMatchSetResponse
-getGeoMatchSetResponse pResponseStatus_ =
-  GetGeoMatchSetResponse'
-    {_ggmsrsGeoMatchSet = Nothing, _ggmsrsResponseStatus = pResponseStatus_}
-
+getGeoMatchSetResponse pResponseStatus_
+  = GetGeoMatchSetResponse'{_ggmsrsGeoMatchSet =
+                              Nothing,
+                            _ggmsrsResponseStatus = pResponseStatus_}
 
 -- | Information about the 'GeoMatchSet' that you specified in the @GetGeoMatchSet@ request. This includes the @Type@ , which for a @GeoMatchContraint@ is always @Country@ , as well as the @Value@ , which is the identifier for a specific country.
 ggmsrsGeoMatchSet :: Lens' GetGeoMatchSetResponse (Maybe GeoMatchSet)

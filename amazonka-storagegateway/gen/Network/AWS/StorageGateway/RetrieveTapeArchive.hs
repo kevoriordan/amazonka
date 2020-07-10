@@ -52,11 +52,10 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'retrieveTapeArchive' smart constructor.
-data RetrieveTapeArchive = RetrieveTapeArchive'
-  { _rtaTapeARN    :: !Text
-  , _rtaGatewayARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetrieveTapeArchive = RetrieveTapeArchive'{_rtaTapeARN
+                                                :: !Text,
+                                                _rtaGatewayARN :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RetrieveTapeArchive' with the minimum fields required to make a request.
 --
@@ -64,20 +63,20 @@ data RetrieveTapeArchive = RetrieveTapeArchive'
 --
 -- * 'rtaTapeARN' - The Amazon Resource Name (ARN) of the virtual tape you want to retrieve from the virtual tape shelf (VTS).
 --
--- * 'rtaGatewayARN' - The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the 'ListGateways' operation to return a list of gateways for your account and region. You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.
+-- * 'rtaGatewayARN' - The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the 'ListGateways' operation to return a list of gateways for your account and AWS Region. You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.
 retrieveTapeArchive
     :: Text -- ^ 'rtaTapeARN'
     -> Text -- ^ 'rtaGatewayARN'
     -> RetrieveTapeArchive
-retrieveTapeArchive pTapeARN_ pGatewayARN_ =
-  RetrieveTapeArchive' {_rtaTapeARN = pTapeARN_, _rtaGatewayARN = pGatewayARN_}
-
+retrieveTapeArchive pTapeARN_ pGatewayARN_
+  = RetrieveTapeArchive'{_rtaTapeARN = pTapeARN_,
+                         _rtaGatewayARN = pGatewayARN_}
 
 -- | The Amazon Resource Name (ARN) of the virtual tape you want to retrieve from the virtual tape shelf (VTS).
 rtaTapeARN :: Lens' RetrieveTapeArchive Text
 rtaTapeARN = lens _rtaTapeARN (\ s a -> s{_rtaTapeARN = a})
 
--- | The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the 'ListGateways' operation to return a list of gateways for your account and region. You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.
+-- | The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to. Use the 'ListGateways' operation to return a list of gateways for your account and AWS Region. You retrieve archived virtual tapes to only one gateway and the gateway must be a tape gateway.
 rtaGatewayARN :: Lens' RetrieveTapeArchive Text
 rtaGatewayARN = lens _rtaGatewayARN (\ s a -> s{_rtaGatewayARN = a})
 
@@ -123,11 +122,13 @@ instance ToQuery RetrieveTapeArchive where
 --
 --
 -- /See:/ 'retrieveTapeArchiveResponse' smart constructor.
-data RetrieveTapeArchiveResponse = RetrieveTapeArchiveResponse'
-  { _rtarsTapeARN        :: !(Maybe Text)
-  , _rtarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetrieveTapeArchiveResponse = RetrieveTapeArchiveResponse'{_rtarsTapeARN
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _rtarsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'RetrieveTapeArchiveResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +140,10 @@ data RetrieveTapeArchiveResponse = RetrieveTapeArchiveResponse'
 retrieveTapeArchiveResponse
     :: Int -- ^ 'rtarsResponseStatus'
     -> RetrieveTapeArchiveResponse
-retrieveTapeArchiveResponse pResponseStatus_ =
-  RetrieveTapeArchiveResponse'
-    {_rtarsTapeARN = Nothing, _rtarsResponseStatus = pResponseStatus_}
-
+retrieveTapeArchiveResponse pResponseStatus_
+  = RetrieveTapeArchiveResponse'{_rtarsTapeARN =
+                                   Nothing,
+                                 _rtarsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the retrieved virtual tape.
 rtarsTapeARN :: Lens' RetrieveTapeArchiveResponse (Maybe Text)

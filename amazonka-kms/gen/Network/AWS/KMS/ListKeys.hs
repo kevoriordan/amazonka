@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a list of all customer master keys (CMKs) in the caller's AWS account and region.
+-- Gets a list of all customer master keys (CMKs) in the caller's AWS account and Region.
 --
 --
 --
@@ -51,11 +51,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listKeys' smart constructor.
-data ListKeys = ListKeys'
-  { _lkMarker :: !(Maybe Text)
-  , _lkLimit  :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListKeys = ListKeys'{_lkMarker :: !(Maybe Text),
+                          _lkLimit :: !(Maybe Nat)}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListKeys' with the minimum fields required to make a request.
 --
@@ -66,8 +64,8 @@ data ListKeys = ListKeys'
 -- * 'lkLimit' - Use this parameter to specify the maximum number of items to return. When this value is present, AWS KMS does not return more than the specified number of items, but it might return fewer. This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.
 listKeys
     :: ListKeys
-listKeys = ListKeys' {_lkMarker = Nothing, _lkLimit = Nothing}
-
+listKeys
+  = ListKeys'{_lkMarker = Nothing, _lkLimit = Nothing}
 
 -- | Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of @NextMarker@ from the truncated response you just received.
 lkMarker :: Lens' ListKeys (Maybe Text)
@@ -122,19 +120,18 @@ instance ToQuery ListKeys where
         toQuery = const mempty
 
 -- | /See:/ 'listKeysResponse' smart constructor.
-data ListKeysResponse = ListKeysResponse'
-  { _lkrsTruncated      :: !(Maybe Bool)
-  , _lkrsKeys           :: !(Maybe [KeyListEntry])
-  , _lkrsNextMarker     :: !(Maybe Text)
-  , _lkrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListKeysResponse = ListKeysResponse'{_lkrsTruncated
+                                          :: !(Maybe Bool),
+                                          _lkrsKeys :: !(Maybe [KeyListEntry]),
+                                          _lkrsNextMarker :: !(Maybe Text),
+                                          _lkrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListKeysResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lkrsTruncated' - A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in this response to the @Marker@ parameter in a subsequent request.
+-- * 'lkrsTruncated' - A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in thisresponse to the @Marker@ parameter in a subsequent request.
 --
 -- * 'lkrsKeys' - A list of customer master keys (CMKs).
 --
@@ -144,16 +141,12 @@ data ListKeysResponse = ListKeysResponse'
 listKeysResponse
     :: Int -- ^ 'lkrsResponseStatus'
     -> ListKeysResponse
-listKeysResponse pResponseStatus_ =
-  ListKeysResponse'
-    { _lkrsTruncated = Nothing
-    , _lkrsKeys = Nothing
-    , _lkrsNextMarker = Nothing
-    , _lkrsResponseStatus = pResponseStatus_
-    }
+listKeysResponse pResponseStatus_
+  = ListKeysResponse'{_lkrsTruncated = Nothing,
+                      _lkrsKeys = Nothing, _lkrsNextMarker = Nothing,
+                      _lkrsResponseStatus = pResponseStatus_}
 
-
--- | A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in this response to the @Marker@ parameter in a subsequent request.
+-- | A flag that indicates whether there are more items in the list. When this value is true, the list in this response is truncated. To get more items, pass the value of the @NextMarker@ element in thisresponse to the @Marker@ parameter in a subsequent request.
 lkrsTruncated :: Lens' ListKeysResponse (Maybe Bool)
 lkrsTruncated = lens _lkrsTruncated (\ s a -> s{_lkrsTruncated = a})
 

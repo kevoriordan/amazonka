@@ -27,14 +27,15 @@ module Network.AWS.EC2.DeleteNatGateway
       deleteNatGateway
     , DeleteNatGateway
     -- * Request Lenses
-    , dngNatGatewayId
+    , dltntgtwyDryRun
+    , dltntgtwyNatGatewayId
 
     -- * Destructuring the Response
     , deleteNatGatewayResponse
     , DeleteNatGatewayResponse
     -- * Response Lenses
-    , dngnrsNatGatewayId
-    , dngnrsResponseStatus
+    , dltntgtwyrsNatGatewayId
+    , dltntgtwyrsResponseStatus
     ) where
 
 import Network.AWS.EC2.Types
@@ -44,31 +45,33 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteNatGateway.
---
---
---
--- /See:/ 'deleteNatGateway' smart constructor.
-newtype DeleteNatGateway = DeleteNatGateway'
-  { _dngNatGatewayId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteNatGateway' smart constructor.
+data DeleteNatGateway = DeleteNatGateway'{_dltntgtwyDryRun
+                                          :: !(Maybe Bool),
+                                          _dltntgtwyNatGatewayId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteNatGateway' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dngNatGatewayId' - The ID of the NAT gateway.
+-- * 'dltntgtwyDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
+--
+-- * 'dltntgtwyNatGatewayId' - The ID of the NAT gateway.
 deleteNatGateway
-    :: Text -- ^ 'dngNatGatewayId'
+    :: Text -- ^ 'dltntgtwyNatGatewayId'
     -> DeleteNatGateway
-deleteNatGateway pNatGatewayId_ =
-  DeleteNatGateway' {_dngNatGatewayId = pNatGatewayId_}
+deleteNatGateway pNatGatewayId_
+  = DeleteNatGateway'{_dltntgtwyDryRun = Nothing,
+                      _dltntgtwyNatGatewayId = pNatGatewayId_}
 
+-- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
+dltntgtwyDryRun :: Lens' DeleteNatGateway (Maybe Bool)
+dltntgtwyDryRun = lens _dltntgtwyDryRun (\ s a -> s{_dltntgtwyDryRun = a})
 
 -- | The ID of the NAT gateway.
-dngNatGatewayId :: Lens' DeleteNatGateway Text
-dngNatGatewayId = lens _dngNatGatewayId (\ s a -> s{_dngNatGatewayId = a})
+dltntgtwyNatGatewayId :: Lens' DeleteNatGateway Text
+dltntgtwyNatGatewayId = lens _dltntgtwyNatGatewayId (\ s a -> s{_dltntgtwyNatGatewayId = a})
 
 instance AWSRequest DeleteNatGateway where
         type Rs DeleteNatGateway = DeleteNatGatewayResponse
@@ -94,40 +97,38 @@ instance ToQuery DeleteNatGateway where
           = mconcat
               ["Action" =: ("DeleteNatGateway" :: ByteString),
                "Version" =: ("2016-11-15" :: ByteString),
-               "NatGatewayId" =: _dngNatGatewayId]
+               "DryRun" =: _dltntgtwyDryRun,
+               "NatGatewayId" =: _dltntgtwyNatGatewayId]
 
--- | Contains the output of DeleteNatGateway.
---
---
---
--- /See:/ 'deleteNatGatewayResponse' smart constructor.
-data DeleteNatGatewayResponse = DeleteNatGatewayResponse'
-  { _dngnrsNatGatewayId   :: !(Maybe Text)
-  , _dngnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteNatGatewayResponse' smart constructor.
+data DeleteNatGatewayResponse = DeleteNatGatewayResponse'{_dltntgtwyrsNatGatewayId
+                                                          :: !(Maybe Text),
+                                                          _dltntgtwyrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteNatGatewayResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dngnrsNatGatewayId' - The ID of the NAT gateway.
+-- * 'dltntgtwyrsNatGatewayId' - The ID of the NAT gateway.
 --
--- * 'dngnrsResponseStatus' - -- | The response status code.
+-- * 'dltntgtwyrsResponseStatus' - -- | The response status code.
 deleteNatGatewayResponse
-    :: Int -- ^ 'dngnrsResponseStatus'
+    :: Int -- ^ 'dltntgtwyrsResponseStatus'
     -> DeleteNatGatewayResponse
-deleteNatGatewayResponse pResponseStatus_ =
-  DeleteNatGatewayResponse'
-    {_dngnrsNatGatewayId = Nothing, _dngnrsResponseStatus = pResponseStatus_}
-
+deleteNatGatewayResponse pResponseStatus_
+  = DeleteNatGatewayResponse'{_dltntgtwyrsNatGatewayId
+                                = Nothing,
+                              _dltntgtwyrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the NAT gateway.
-dngnrsNatGatewayId :: Lens' DeleteNatGatewayResponse (Maybe Text)
-dngnrsNatGatewayId = lens _dngnrsNatGatewayId (\ s a -> s{_dngnrsNatGatewayId = a})
+dltntgtwyrsNatGatewayId :: Lens' DeleteNatGatewayResponse (Maybe Text)
+dltntgtwyrsNatGatewayId = lens _dltntgtwyrsNatGatewayId (\ s a -> s{_dltntgtwyrsNatGatewayId = a})
 
 -- | -- | The response status code.
-dngnrsResponseStatus :: Lens' DeleteNatGatewayResponse Int
-dngnrsResponseStatus = lens _dngnrsResponseStatus (\ s a -> s{_dngnrsResponseStatus = a})
+dltntgtwyrsResponseStatus :: Lens' DeleteNatGatewayResponse Int
+dltntgtwyrsResponseStatus = lens _dltntgtwyrsResponseStatus (\ s a -> s{_dltntgtwyrsResponseStatus = a})
 
 instance NFData DeleteNatGatewayResponse where

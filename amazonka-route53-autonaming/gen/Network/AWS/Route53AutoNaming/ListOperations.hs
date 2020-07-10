@@ -51,12 +51,11 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'listOperations' smart constructor.
-data ListOperations = ListOperations'
-  { _loFilters    :: !(Maybe [OperationFilter])
-  , _loNextToken  :: !(Maybe Text)
-  , _loMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOperations = ListOperations'{_loFilters ::
+                                      !(Maybe [OperationFilter]),
+                                      _loNextToken :: !(Maybe Text),
+                                      _loMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOperations' with the minimum fields required to make a request.
 --
@@ -66,13 +65,12 @@ data ListOperations = ListOperations'
 --
 -- * 'loNextToken' - For the first @ListOperations@ request, omit this value. If the response contains @NextToken@ , submit another @ListOperations@ request to get the next group of results. Specify the value of @NextToken@ from the previous response in the next request.
 --
--- * 'loMaxResults' - The maximum number of items that you want Amazon Route 53 to return in the response to a @ListOperations@ request. If you don't specify a value for @MaxResults@ , Route 53 returns up to 100 operations.
+-- * 'loMaxResults' - The maximum number of items that you want AWS Cloud Map to return in the response to a @ListOperations@ request. If you don't specify a value for @MaxResults@ , AWS Cloud Map returns up to 100 operations.
 listOperations
     :: ListOperations
-listOperations =
-  ListOperations'
-    {_loFilters = Nothing, _loNextToken = Nothing, _loMaxResults = Nothing}
-
+listOperations
+  = ListOperations'{_loFilters = Nothing,
+                    _loNextToken = Nothing, _loMaxResults = Nothing}
 
 -- | A complex type that contains specifications for the operations that you want to list, for example, operations that you started between a specified start date and end date. If you specify more than one filter, an operation must match all filters to be returned by @ListOperations@ .
 loFilters :: Lens' ListOperations [OperationFilter]
@@ -82,7 +80,7 @@ loFilters = lens _loFilters (\ s a -> s{_loFilters = a}) . _Default . _Coerce
 loNextToken :: Lens' ListOperations (Maybe Text)
 loNextToken = lens _loNextToken (\ s a -> s{_loNextToken = a})
 
--- | The maximum number of items that you want Amazon Route 53 to return in the response to a @ListOperations@ request. If you don't specify a value for @MaxResults@ , Route 53 returns up to 100 operations.
+-- | The maximum number of items that you want AWS Cloud Map to return in the response to a @ListOperations@ request. If you don't specify a value for @MaxResults@ , AWS Cloud Map returns up to 100 operations.
 loMaxResults :: Lens' ListOperations (Maybe Natural)
 loMaxResults = lens _loMaxResults (\ s a -> s{_loMaxResults = a}) . mapping _Nat
 
@@ -133,12 +131,15 @@ instance ToQuery ListOperations where
         toQuery = const mempty
 
 -- | /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse'
-  { _lorsNextToken      :: !(Maybe Text)
-  , _lorsOperations     :: !(Maybe [OperationSummary])
-  , _lorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOperationsResponse = ListOperationsResponse'{_lorsNextToken
+                                                      :: !(Maybe Text),
+                                                      _lorsOperations ::
+                                                      !(Maybe
+                                                          [OperationSummary]),
+                                                      _lorsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +153,10 @@ data ListOperationsResponse = ListOperationsResponse'
 listOperationsResponse
     :: Int -- ^ 'lorsResponseStatus'
     -> ListOperationsResponse
-listOperationsResponse pResponseStatus_ =
-  ListOperationsResponse'
-    { _lorsNextToken = Nothing
-    , _lorsOperations = Nothing
-    , _lorsResponseStatus = pResponseStatus_
-    }
-
+listOperationsResponse pResponseStatus_
+  = ListOperationsResponse'{_lorsNextToken = Nothing,
+                            _lorsOperations = Nothing,
+                            _lorsResponseStatus = pResponseStatus_}
 
 -- | If the response contains @NextToken@ , submit another @ListOperations@ request to get the next group of results. Specify the value of @NextToken@ from the previous response in the next request.
 lorsNextToken :: Lens' ListOperationsResponse (Maybe Text)

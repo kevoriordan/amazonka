@@ -23,6 +23,8 @@
 --
 -- You must use AWS Developer credentials to call this API.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CognitoIdentity.ListIdentityPools
     (
     -- * Creating a Request
@@ -44,6 +46,7 @@ module Network.AWS.CognitoIdentity.ListIdentityPools
 import Network.AWS.CognitoIdentity.Types
 import Network.AWS.CognitoIdentity.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -53,11 +56,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listIdentityPools' smart constructor.
-data ListIdentityPools = ListIdentityPools'
-  { _lipNextToken  :: !(Maybe Text)
-  , _lipMaxResults :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListIdentityPools = ListIdentityPools'{_lipNextToken
+                                            :: !(Maybe Text),
+                                            _lipMaxResults :: !Nat}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListIdentityPools' with the minimum fields required to make a request.
 --
@@ -69,10 +71,9 @@ data ListIdentityPools = ListIdentityPools'
 listIdentityPools
     :: Natural -- ^ 'lipMaxResults'
     -> ListIdentityPools
-listIdentityPools pMaxResults_ =
-  ListIdentityPools'
-    {_lipNextToken = Nothing, _lipMaxResults = _Nat # pMaxResults_}
-
+listIdentityPools pMaxResults_
+  = ListIdentityPools'{_lipNextToken = Nothing,
+                       _lipMaxResults = _Nat # pMaxResults_}
 
 -- | A pagination token.
 lipNextToken :: Lens' ListIdentityPools (Maybe Text)
@@ -81,6 +82,13 @@ lipNextToken = lens _lipNextToken (\ s a -> s{_lipNextToken = a})
 -- | The maximum number of identities to return.
 lipMaxResults :: Lens' ListIdentityPools Natural
 lipMaxResults = lens _lipMaxResults (\ s a -> s{_lipMaxResults = a}) . _Nat
+
+instance AWSPager ListIdentityPools where
+        page rq rs
+          | stop (rs ^. liprsNextToken) = Nothing
+          | stop (rs ^. liprsIdentityPools) = Nothing
+          | otherwise =
+            Just $ rq & lipNextToken .~ rs ^. liprsNextToken
 
 instance AWSRequest ListIdentityPools where
         type Rs ListIdentityPools = ListIdentityPoolsResponse
@@ -125,12 +133,16 @@ instance ToQuery ListIdentityPools where
 --
 --
 -- /See:/ 'listIdentityPoolsResponse' smart constructor.
-data ListIdentityPoolsResponse = ListIdentityPoolsResponse'
-  { _liprsIdentityPools  :: !(Maybe [IdentityPoolShortDescription])
-  , _liprsNextToken      :: !(Maybe Text)
-  , _liprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListIdentityPoolsResponse = ListIdentityPoolsResponse'{_liprsIdentityPools
+                                                            ::
+                                                            !(Maybe
+                                                                [IdentityPoolShortDescription]),
+                                                            _liprsNextToken ::
+                                                            !(Maybe Text),
+                                                            _liprsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListIdentityPoolsResponse' with the minimum fields required to make a request.
 --
@@ -144,13 +156,11 @@ data ListIdentityPoolsResponse = ListIdentityPoolsResponse'
 listIdentityPoolsResponse
     :: Int -- ^ 'liprsResponseStatus'
     -> ListIdentityPoolsResponse
-listIdentityPoolsResponse pResponseStatus_ =
-  ListIdentityPoolsResponse'
-    { _liprsIdentityPools = Nothing
-    , _liprsNextToken = Nothing
-    , _liprsResponseStatus = pResponseStatus_
-    }
-
+listIdentityPoolsResponse pResponseStatus_
+  = ListIdentityPoolsResponse'{_liprsIdentityPools =
+                                 Nothing,
+                               _liprsNextToken = Nothing,
+                               _liprsResponseStatus = pResponseStatus_}
 
 -- | The identity pools returned by the ListIdentityPools action.
 liprsIdentityPools :: Lens' ListIdentityPoolsResponse [IdentityPoolShortDescription]

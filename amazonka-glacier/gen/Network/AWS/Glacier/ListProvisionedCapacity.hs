@@ -45,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listProvisionedCapacity' smart constructor.
-newtype ListProvisionedCapacity = ListProvisionedCapacity'
-  { _lpcAccountId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListProvisionedCapacity = ListProvisionedCapacity'{_lpcAccountId
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListProvisionedCapacity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpcAccountId' - The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID.
+-- * 'lpcAccountId' - The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID. 
 listProvisionedCapacity
     :: Text -- ^ 'lpcAccountId'
     -> ListProvisionedCapacity
-listProvisionedCapacity pAccountId_ =
-  ListProvisionedCapacity' {_lpcAccountId = pAccountId_}
+listProvisionedCapacity pAccountId_
+  = ListProvisionedCapacity'{_lpcAccountId =
+                               pAccountId_}
 
-
--- | The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID.
+-- | The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID. 
 lpcAccountId :: Lens' ListProvisionedCapacity Text
 lpcAccountId = lens _lpcAccountId (\ s a -> s{_lpcAccountId = a})
 
@@ -93,11 +93,14 @@ instance ToQuery ListProvisionedCapacity where
         toQuery = const mempty
 
 -- | /See:/ 'listProvisionedCapacityResponse' smart constructor.
-data ListProvisionedCapacityResponse = ListProvisionedCapacityResponse'
-  { _lpcrsProvisionedCapacityList :: !(Maybe [ProvisionedCapacityDescription])
-  , _lpcrsResponseStatus          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListProvisionedCapacityResponse = ListProvisionedCapacityResponse'{_lpcrsProvisionedCapacityList
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [ProvisionedCapacityDescription]),
+                                                                        _lpcrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListProvisionedCapacityResponse' with the minimum fields required to make a request.
 --
@@ -109,12 +112,10 @@ data ListProvisionedCapacityResponse = ListProvisionedCapacityResponse'
 listProvisionedCapacityResponse
     :: Int -- ^ 'lpcrsResponseStatus'
     -> ListProvisionedCapacityResponse
-listProvisionedCapacityResponse pResponseStatus_ =
-  ListProvisionedCapacityResponse'
-    { _lpcrsProvisionedCapacityList = Nothing
-    , _lpcrsResponseStatus = pResponseStatus_
-    }
-
+listProvisionedCapacityResponse pResponseStatus_
+  = ListProvisionedCapacityResponse'{_lpcrsProvisionedCapacityList
+                                       = Nothing,
+                                     _lpcrsResponseStatus = pResponseStatus_}
 
 -- | The response body contains the following JSON fields.
 lpcrsProvisionedCapacityList :: Lens' ListProvisionedCapacityResponse [ProvisionedCapacityDescription]

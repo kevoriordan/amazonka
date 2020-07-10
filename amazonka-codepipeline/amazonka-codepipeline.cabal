@@ -60,9 +60,11 @@ library
         , Network.AWS.CodePipeline.GetPipelineExecution
         , Network.AWS.CodePipeline.GetPipelineState
         , Network.AWS.CodePipeline.GetThirdPartyJobDetails
+        , Network.AWS.CodePipeline.ListActionExecutions
         , Network.AWS.CodePipeline.ListActionTypes
         , Network.AWS.CodePipeline.ListPipelineExecutions
         , Network.AWS.CodePipeline.ListPipelines
+        , Network.AWS.CodePipeline.ListTagsForResource
         , Network.AWS.CodePipeline.ListWebhooks
         , Network.AWS.CodePipeline.PollForJobs
         , Network.AWS.CodePipeline.PollForThirdPartyJobs
@@ -76,17 +78,95 @@ library
         , Network.AWS.CodePipeline.RegisterWebhookWithThirdParty
         , Network.AWS.CodePipeline.RetryStageExecution
         , Network.AWS.CodePipeline.StartPipelineExecution
+        , Network.AWS.CodePipeline.StopPipelineExecution
+        , Network.AWS.CodePipeline.TagResource
         , Network.AWS.CodePipeline.Types
+        , Network.AWS.CodePipeline.UntagResource
         , Network.AWS.CodePipeline.UpdatePipeline
         , Network.AWS.CodePipeline.Waiters
 
     other-modules:
-          Network.AWS.CodePipeline.Types.Product
-        , Network.AWS.CodePipeline.Types.Sum
+          Network.AWS.CodePipeline.Types.AWSSessionCredentials
+        , Network.AWS.CodePipeline.Types.ActionCategory
+        , Network.AWS.CodePipeline.Types.ActionConfiguration
+        , Network.AWS.CodePipeline.Types.ActionConfigurationProperty
+        , Network.AWS.CodePipeline.Types.ActionConfigurationPropertyType
+        , Network.AWS.CodePipeline.Types.ActionContext
+        , Network.AWS.CodePipeline.Types.ActionDeclaration
+        , Network.AWS.CodePipeline.Types.ActionExecution
+        , Network.AWS.CodePipeline.Types.ActionExecutionDetail
+        , Network.AWS.CodePipeline.Types.ActionExecutionFilter
+        , Network.AWS.CodePipeline.Types.ActionExecutionInput
+        , Network.AWS.CodePipeline.Types.ActionExecutionOutput
+        , Network.AWS.CodePipeline.Types.ActionExecutionResult
+        , Network.AWS.CodePipeline.Types.ActionExecutionStatus
+        , Network.AWS.CodePipeline.Types.ActionOwner
+        , Network.AWS.CodePipeline.Types.ActionRevision
+        , Network.AWS.CodePipeline.Types.ActionState
+        , Network.AWS.CodePipeline.Types.ActionType
+        , Network.AWS.CodePipeline.Types.ActionTypeId
+        , Network.AWS.CodePipeline.Types.ActionTypeSettings
+        , Network.AWS.CodePipeline.Types.ApprovalResult
+        , Network.AWS.CodePipeline.Types.ApprovalStatus
+        , Network.AWS.CodePipeline.Types.Artifact
+        , Network.AWS.CodePipeline.Types.ArtifactDetail
+        , Network.AWS.CodePipeline.Types.ArtifactDetails
+        , Network.AWS.CodePipeline.Types.ArtifactLocation
+        , Network.AWS.CodePipeline.Types.ArtifactLocationType
+        , Network.AWS.CodePipeline.Types.ArtifactRevision
+        , Network.AWS.CodePipeline.Types.ArtifactStore
+        , Network.AWS.CodePipeline.Types.ArtifactStoreType
+        , Network.AWS.CodePipeline.Types.BlockerDeclaration
+        , Network.AWS.CodePipeline.Types.BlockerType
+        , Network.AWS.CodePipeline.Types.CurrentRevision
+        , Network.AWS.CodePipeline.Types.EncryptionKey
+        , Network.AWS.CodePipeline.Types.EncryptionKeyType
+        , Network.AWS.CodePipeline.Types.ErrorDetails
+        , Network.AWS.CodePipeline.Types.ExecutionDetails
+        , Network.AWS.CodePipeline.Types.ExecutionTrigger
+        , Network.AWS.CodePipeline.Types.FailureDetails
+        , Network.AWS.CodePipeline.Types.FailureType
+        , Network.AWS.CodePipeline.Types.InputArtifact
+        , Network.AWS.CodePipeline.Types.Job
+        , Network.AWS.CodePipeline.Types.JobData
+        , Network.AWS.CodePipeline.Types.JobDetails
+        , Network.AWS.CodePipeline.Types.JobStatus
+        , Network.AWS.CodePipeline.Types.ListWebhookItem
+        , Network.AWS.CodePipeline.Types.OutputArtifact
+        , Network.AWS.CodePipeline.Types.PipelineContext
+        , Network.AWS.CodePipeline.Types.PipelineDeclaration
+        , Network.AWS.CodePipeline.Types.PipelineExecution
+        , Network.AWS.CodePipeline.Types.PipelineExecutionStatus
+        , Network.AWS.CodePipeline.Types.PipelineExecutionSummary
+        , Network.AWS.CodePipeline.Types.PipelineMetadata
+        , Network.AWS.CodePipeline.Types.PipelineSummary
+        , Network.AWS.CodePipeline.Types.Product
+        , Network.AWS.CodePipeline.Types.S3ArtifactLocation
+        , Network.AWS.CodePipeline.Types.S3Location
+        , Network.AWS.CodePipeline.Types.SourceRevision
+        , Network.AWS.CodePipeline.Types.StageContext
+        , Network.AWS.CodePipeline.Types.StageDeclaration
+        , Network.AWS.CodePipeline.Types.StageExecution
+        , Network.AWS.CodePipeline.Types.StageExecutionStatus
+        , Network.AWS.CodePipeline.Types.StageRetryMode
+        , Network.AWS.CodePipeline.Types.StageState
+        , Network.AWS.CodePipeline.Types.StageTransitionType
+        , Network.AWS.CodePipeline.Types.StopExecutionTrigger
+        , Network.AWS.CodePipeline.Types.Tag
+        , Network.AWS.CodePipeline.Types.ThirdPartyJob
+        , Network.AWS.CodePipeline.Types.ThirdPartyJobData
+        , Network.AWS.CodePipeline.Types.ThirdPartyJobDetails
+        , Network.AWS.CodePipeline.Types.TransitionState
+        , Network.AWS.CodePipeline.Types.TriggerType
+        , Network.AWS.CodePipeline.Types.WebhookAuthConfiguration
+        , Network.AWS.CodePipeline.Types.WebhookAuthenticationType
+        , Network.AWS.CodePipeline.Types.WebhookDefinition
+        , Network.AWS.CodePipeline.Types.WebhookFilterRule
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-codepipeline-test
     type:              exitcode-stdio-1.0
@@ -110,6 +190,7 @@ test-suite amazonka-codepipeline-test
         , amazonka-codepipeline
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

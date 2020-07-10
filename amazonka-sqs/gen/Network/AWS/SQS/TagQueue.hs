@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Add cost allocation tags to the specified Amazon SQS queue. For an overview, see <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-tagging-queues.html Tagging Amazon SQS Queues> in the /Amazon Simple Queue Service Developer Guide/ .
+-- Add cost allocation tags to the specified Amazon SQS queue. For an overview, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html Tagging Your Amazon SQS Queues> in the /Amazon Simple Queue Service Developer Guide/ .
 --
 --
 -- When you use queue tags, keep the following guidelines in mind:
@@ -31,11 +31,9 @@
 --
 --     * A new tag with a key identical to that of an existing tag overwrites the existing tag.
 --
---     * Tagging API actions are limited to 5 TPS per AWS account. If your application requires a higher throughput, file a <https://console.aws.amazon.com/support/home#/case/create?issueType=technical technical support request> .
 --
 --
---
--- For a full list of tag restrictions, see <http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html Limits Related to Queues> in the /Amazon Simple Queue Service Developer Guide/ .
+-- For a full list of tag restrictions, see <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues Limits Related to Queues> in the /Amazon Simple Queue Service Developer Guide/ .
 --
 module Network.AWS.SQS.TagQueue
     (
@@ -59,11 +57,9 @@ import Network.AWS.SQS.Types
 import Network.AWS.SQS.Types.Product
 
 -- | /See:/ 'tagQueue' smart constructor.
-data TagQueue = TagQueue'
-  { _tqQueueURL :: !Text
-  , _tqTags     :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagQueue = TagQueue'{_tqQueueURL :: !Text,
+                          _tqTags :: !(Map Text Text)}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagQueue' with the minimum fields required to make a request.
 --
@@ -75,8 +71,9 @@ data TagQueue = TagQueue'
 tagQueue
     :: Text -- ^ 'tqQueueURL'
     -> TagQueue
-tagQueue pQueueURL_ = TagQueue' {_tqQueueURL = pQueueURL_, _tqTags = mempty}
-
+tagQueue pQueueURL_
+  = TagQueue'{_tqQueueURL = pQueueURL_,
+              _tqTags = mempty}
 
 -- | The URL of the queue.
 tqQueueURL :: Lens' TagQueue Text
@@ -110,16 +107,13 @@ instance ToQuery TagQueue where
                toQueryMap "Tags" "Key" "Value" _tqTags]
 
 -- | /See:/ 'tagQueueResponse' smart constructor.
-data TagQueueResponse =
-  TagQueueResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagQueueResponse = TagQueueResponse'
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagQueueResponse' with the minimum fields required to make a request.
 --
 tagQueueResponse
     :: TagQueueResponse
 tagQueueResponse = TagQueueResponse'
-
 
 instance NFData TagQueueResponse where

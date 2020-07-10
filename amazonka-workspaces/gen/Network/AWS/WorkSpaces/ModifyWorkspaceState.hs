@@ -21,7 +21,7 @@
 -- Sets the state of the specified WorkSpace.
 --
 --
--- To maintain a WorkSpace without being interrupted, set the WorkSpace state to @ADMIN_MAINTENANCE@ . WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the @ADMIN_MAINTENANCE@ state.
+-- To maintain a WorkSpace without being interrupted, set the WorkSpace state to @ADMIN_MAINTENANCE@ . WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the @ADMIN_MAINTENANCE@ state.
 --
 module Network.AWS.WorkSpaces.ModifyWorkspaceState
     (
@@ -47,29 +47,29 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'modifyWorkspaceState' smart constructor.
-data ModifyWorkspaceState = ModifyWorkspaceState'
-  { _mwsWorkspaceId    :: !Text
-  , _mwsWorkspaceState :: !TargetWorkspaceState
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyWorkspaceState = ModifyWorkspaceState'{_mwsWorkspaceId
+                                                  :: !Text,
+                                                  _mwsWorkspaceState ::
+                                                  !TargetWorkspaceState}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyWorkspaceState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mwsWorkspaceId' - The ID of the WorkSpace.
+-- * 'mwsWorkspaceId' - The identifier of the WorkSpace.
 --
 -- * 'mwsWorkspaceState' - The WorkSpace state.
 modifyWorkspaceState
     :: Text -- ^ 'mwsWorkspaceId'
     -> TargetWorkspaceState -- ^ 'mwsWorkspaceState'
     -> ModifyWorkspaceState
-modifyWorkspaceState pWorkspaceId_ pWorkspaceState_ =
-  ModifyWorkspaceState'
-    {_mwsWorkspaceId = pWorkspaceId_, _mwsWorkspaceState = pWorkspaceState_}
+modifyWorkspaceState pWorkspaceId_ pWorkspaceState_
+  = ModifyWorkspaceState'{_mwsWorkspaceId =
+                            pWorkspaceId_,
+                          _mwsWorkspaceState = pWorkspaceState_}
 
-
--- | The ID of the WorkSpace.
+-- | The identifier of the WorkSpace.
 mwsWorkspaceId :: Lens' ModifyWorkspaceState Text
 mwsWorkspaceId = lens _mwsWorkspaceId (\ s a -> s{_mwsWorkspaceId = a})
 
@@ -115,10 +115,10 @@ instance ToQuery ModifyWorkspaceState where
         toQuery = const mempty
 
 -- | /See:/ 'modifyWorkspaceStateResponse' smart constructor.
-newtype ModifyWorkspaceStateResponse = ModifyWorkspaceStateResponse'
-  { _mwsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ModifyWorkspaceStateResponse = ModifyWorkspaceStateResponse'{_mwsrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ModifyWorkspaceStateResponse' with the minimum fields required to make a request.
 --
@@ -128,9 +128,9 @@ newtype ModifyWorkspaceStateResponse = ModifyWorkspaceStateResponse'
 modifyWorkspaceStateResponse
     :: Int -- ^ 'mwsrsResponseStatus'
     -> ModifyWorkspaceStateResponse
-modifyWorkspaceStateResponse pResponseStatus_ =
-  ModifyWorkspaceStateResponse' {_mwsrsResponseStatus = pResponseStatus_}
-
+modifyWorkspaceStateResponse pResponseStatus_
+  = ModifyWorkspaceStateResponse'{_mwsrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 mwsrsResponseStatus :: Lens' ModifyWorkspaceStateResponse Int

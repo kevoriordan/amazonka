@@ -51,12 +51,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTopicsDetectionJobs' smart constructor.
-data ListTopicsDetectionJobs = ListTopicsDetectionJobs'
-  { _ltdjNextToken  :: !(Maybe Text)
-  , _ltdjFilter     :: !(Maybe TopicsDetectionJobFilter)
-  , _ltdjMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTopicsDetectionJobs = ListTopicsDetectionJobs'{_ltdjNextToken
+                                                        :: !(Maybe Text),
+                                                        _ltdjFilter ::
+                                                        !(Maybe
+                                                            TopicsDetectionJobFilter),
+                                                        _ltdjMaxResults ::
+                                                        !(Maybe Nat)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListTopicsDetectionJobs' with the minimum fields required to make a request.
 --
@@ -66,13 +69,12 @@ data ListTopicsDetectionJobs = ListTopicsDetectionJobs'
 --
 -- * 'ltdjFilter' - Filters the jobs that are returned. Jobs can be filtered on their name, status, or the date and time that they were submitted. You can set only one filter at a time.
 --
--- * 'ltdjMaxResults' - The maximum number of results to return in each page.
+-- * 'ltdjMaxResults' - The maximum number of results to return in each page. The default is 100.
 listTopicsDetectionJobs
     :: ListTopicsDetectionJobs
-listTopicsDetectionJobs =
-  ListTopicsDetectionJobs'
-    {_ltdjNextToken = Nothing, _ltdjFilter = Nothing, _ltdjMaxResults = Nothing}
-
+listTopicsDetectionJobs
+  = ListTopicsDetectionJobs'{_ltdjNextToken = Nothing,
+                             _ltdjFilter = Nothing, _ltdjMaxResults = Nothing}
 
 -- | Identifies the next page of results to return.
 ltdjNextToken :: Lens' ListTopicsDetectionJobs (Maybe Text)
@@ -82,7 +84,7 @@ ltdjNextToken = lens _ltdjNextToken (\ s a -> s{_ltdjNextToken = a})
 ltdjFilter :: Lens' ListTopicsDetectionJobs (Maybe TopicsDetectionJobFilter)
 ltdjFilter = lens _ltdjFilter (\ s a -> s{_ltdjFilter = a})
 
--- | The maximum number of results to return in each page.
+-- | The maximum number of results to return in each page. The default is 100.
 ltdjMaxResults :: Lens' ListTopicsDetectionJobs (Maybe Natural)
 ltdjMaxResults = lens _ltdjMaxResults (\ s a -> s{_ltdjMaxResults = a}) . mapping _Nat
 
@@ -135,12 +137,18 @@ instance ToQuery ListTopicsDetectionJobs where
         toQuery = const mempty
 
 -- | /See:/ 'listTopicsDetectionJobsResponse' smart constructor.
-data ListTopicsDetectionJobsResponse = ListTopicsDetectionJobsResponse'
-  { _ltdjrsNextToken :: !(Maybe Text)
-  , _ltdjrsTopicsDetectionJobPropertiesList :: !(Maybe [TopicsDetectionJobProperties])
-  , _ltdjrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTopicsDetectionJobsResponse = ListTopicsDetectionJobsResponse'{_ltdjrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _ltdjrsTopicsDetectionJobPropertiesList
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [TopicsDetectionJobProperties]),
+                                                                        _ltdjrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListTopicsDetectionJobsResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +162,12 @@ data ListTopicsDetectionJobsResponse = ListTopicsDetectionJobsResponse'
 listTopicsDetectionJobsResponse
     :: Int -- ^ 'ltdjrsResponseStatus'
     -> ListTopicsDetectionJobsResponse
-listTopicsDetectionJobsResponse pResponseStatus_ =
-  ListTopicsDetectionJobsResponse'
-    { _ltdjrsNextToken = Nothing
-    , _ltdjrsTopicsDetectionJobPropertiesList = Nothing
-    , _ltdjrsResponseStatus = pResponseStatus_
-    }
-
+listTopicsDetectionJobsResponse pResponseStatus_
+  = ListTopicsDetectionJobsResponse'{_ltdjrsNextToken =
+                                       Nothing,
+                                     _ltdjrsTopicsDetectionJobPropertiesList =
+                                       Nothing,
+                                     _ltdjrsResponseStatus = pResponseStatus_}
 
 -- | Identifies the next page of results to return.
 ltdjrsNextToken :: Lens' ListTopicsDetectionJobsResponse (Maybe Text)

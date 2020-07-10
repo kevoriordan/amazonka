@@ -32,17 +32,38 @@ module Network.AWS.WorkDocs
     -- * Errors
     -- $errors
 
-    -- ** CustomMetadataLimitExceededException
-    , _CustomMetadataLimitExceededException
+    -- ** FailedDependencyException
+    , _FailedDependencyException
 
-    -- ** EntityAlreadyExistsException
-    , _EntityAlreadyExistsException
+    -- ** TooManySubscriptionsException
+    , _TooManySubscriptionsException
 
-    -- ** ResourceAlreadyCheckedOutException
-    , _ResourceAlreadyCheckedOutException
+    -- ** InvalidCommentOperationException
+    , _InvalidCommentOperationException
 
-    -- ** ProhibitedStateException
-    , _ProhibitedStateException
+    -- ** RequestedEntityTooLargeException
+    , _RequestedEntityTooLargeException
+
+    -- ** UnauthorizedResourceAccessException
+    , _UnauthorizedResourceAccessException
+
+    -- ** DocumentLockedForCommentsException
+    , _DocumentLockedForCommentsException
+
+    -- ** DraftUploadOutOfSyncException
+    , _DraftUploadOutOfSyncException
+
+    -- ** EntityNotExistsException
+    , _EntityNotExistsException
+
+    -- ** InvalidOperationException
+    , _InvalidOperationException
+
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
+
+    -- ** StorageLimitExceededException
+    , _StorageLimitExceededException
 
     -- ** TooManyLabelsException
     , _TooManyLabelsException
@@ -50,47 +71,32 @@ module Network.AWS.WorkDocs
     -- ** InvalidArgumentException
     , _InvalidArgumentException
 
-    -- ** UnauthorizedResourceAccessException
-    , _UnauthorizedResourceAccessException
+    -- ** ProhibitedStateException
+    , _ProhibitedStateException
 
-    -- ** TooManySubscriptionsException
-    , _TooManySubscriptionsException
+    -- ** EntityAlreadyExistsException
+    , _EntityAlreadyExistsException
 
-    -- ** FailedDependencyException
-    , _FailedDependencyException
-
-    -- ** DocumentLockedForCommentsException
-    , _DocumentLockedForCommentsException
-
-    -- ** EntityNotExistsException
-    , _EntityNotExistsException
-
-    -- ** DeactivatingLastSystemUserException
-    , _DeactivatingLastSystemUserException
-
-    -- ** IllegalUserStateException
-    , _IllegalUserStateException
-
-    -- ** StorageLimitWillExceedException
-    , _StorageLimitWillExceedException
+    -- ** ResourceAlreadyCheckedOutException
+    , _ResourceAlreadyCheckedOutException
 
     -- ** ConcurrentModificationException
     , _ConcurrentModificationException
 
-    -- ** StorageLimitExceededException
-    , _StorageLimitExceededException
+    -- ** StorageLimitWillExceedException
+    , _StorageLimitWillExceedException
 
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
+    -- ** CustomMetadataLimitExceededException
+    , _CustomMetadataLimitExceededException
 
-    -- ** InvalidOperationException
-    , _InvalidOperationException
+    -- ** IllegalUserStateException
+    , _IllegalUserStateException
 
-    -- ** UnauthorizedOperationException
-    , _UnauthorizedOperationException
+    -- ** DeactivatingLastSystemUserException
+    , _DeactivatingLastSystemUserException
 
-    -- ** DraftUploadOutOfSyncException
-    , _DraftUploadOutOfSyncException
+    -- ** ConflictingOperationException
+    , _ConflictingOperationException
 
     -- ** LimitExceededException
     , _LimitExceededException
@@ -98,130 +104,136 @@ module Network.AWS.WorkDocs
     -- ** InvalidPasswordException
     , _InvalidPasswordException
 
+    -- ** UnauthorizedOperationException
+    , _UnauthorizedOperationException
+
     -- * Waiters
     -- $waiters
 
     -- * Operations
     -- $operations
 
-    -- ** DeleteLabels
+    -- ** DeleteLabels 
     , module Network.AWS.WorkDocs.DeleteLabels
 
-    -- ** AbortDocumentVersionUpload
+    -- ** AbortDocumentVersionUpload 
     , module Network.AWS.WorkDocs.AbortDocumentVersionUpload
 
-    -- ** GetDocumentPath
+    -- ** GetDocumentPath 
     , module Network.AWS.WorkDocs.GetDocumentPath
 
-    -- ** CreateComment
+    -- ** CreateComment 
     , module Network.AWS.WorkDocs.CreateComment
 
     -- ** DescribeUsers (Paginated)
     , module Network.AWS.WorkDocs.DescribeUsers
 
-    -- ** DeleteFolder
+    -- ** DeleteFolder 
     , module Network.AWS.WorkDocs.DeleteFolder
 
-    -- ** UpdateFolder
+    -- ** UpdateFolder 
     , module Network.AWS.WorkDocs.UpdateFolder
 
-    -- ** DeleteCustomMetadata
+    -- ** DeleteCustomMetadata 
     , module Network.AWS.WorkDocs.DeleteCustomMetadata
 
-    -- ** DescribeResourcePermissions
+    -- ** DescribeResourcePermissions (Paginated)
     , module Network.AWS.WorkDocs.DescribeResourcePermissions
 
-    -- ** DeleteNotificationSubscription
+    -- ** DeleteNotificationSubscription 
     , module Network.AWS.WorkDocs.DeleteNotificationSubscription
 
-    -- ** CreateFolder
+    -- ** CreateFolder 
     , module Network.AWS.WorkDocs.CreateFolder
 
-    -- ** CreateNotificationSubscription
+    -- ** CreateNotificationSubscription 
     , module Network.AWS.WorkDocs.CreateNotificationSubscription
 
-    -- ** CreateCustomMetadata
+    -- ** CreateCustomMetadata 
     , module Network.AWS.WorkDocs.CreateCustomMetadata
 
-    -- ** GetFolderPath
+    -- ** GetFolderPath 
     , module Network.AWS.WorkDocs.GetFolderPath
 
-    -- ** DescribeComments
+    -- ** DescribeComments (Paginated)
     , module Network.AWS.WorkDocs.DescribeComments
 
-    -- ** DeleteFolderContents
+    -- ** DeleteFolderContents 
     , module Network.AWS.WorkDocs.DeleteFolderContents
 
-    -- ** RemoveAllResourcePermissions
+    -- ** RemoveAllResourcePermissions 
     , module Network.AWS.WorkDocs.RemoveAllResourcePermissions
 
-    -- ** GetFolder
+    -- ** GetFolder 
     , module Network.AWS.WorkDocs.GetFolder
 
-    -- ** DescribeNotificationSubscriptions
+    -- ** DescribeNotificationSubscriptions (Paginated)
     , module Network.AWS.WorkDocs.DescribeNotificationSubscriptions
 
-    -- ** ActivateUser
+    -- ** ActivateUser 
     , module Network.AWS.WorkDocs.ActivateUser
 
     -- ** DescribeDocumentVersions (Paginated)
     , module Network.AWS.WorkDocs.DescribeDocumentVersions
 
-    -- ** GetDocumentVersion
+    -- ** GetDocumentVersion 
     , module Network.AWS.WorkDocs.GetDocumentVersion
 
-    -- ** DescribeActivities
+    -- ** DescribeActivities (Paginated)
     , module Network.AWS.WorkDocs.DescribeActivities
 
-    -- ** DescribeRootFolders
+    -- ** DescribeRootFolders (Paginated)
     , module Network.AWS.WorkDocs.DescribeRootFolders
 
-    -- ** GetCurrentUser
+    -- ** GetCurrentUser 
     , module Network.AWS.WorkDocs.GetCurrentUser
 
-    -- ** DeactivateUser
+    -- ** DeactivateUser 
     , module Network.AWS.WorkDocs.DeactivateUser
 
-    -- ** GetDocument
+    -- ** GetDocument 
     , module Network.AWS.WorkDocs.GetDocument
 
     -- ** DescribeFolderContents (Paginated)
     , module Network.AWS.WorkDocs.DescribeFolderContents
 
-    -- ** CreateLabels
+    -- ** CreateLabels 
     , module Network.AWS.WorkDocs.CreateLabels
 
-    -- ** UpdateDocumentVersion
+    -- ** UpdateDocumentVersion 
     , module Network.AWS.WorkDocs.UpdateDocumentVersion
 
-    -- ** RemoveResourcePermission
+    -- ** RemoveResourcePermission 
     , module Network.AWS.WorkDocs.RemoveResourcePermission
 
-    -- ** DeleteComment
+    -- ** GetResources 
+    , module Network.AWS.WorkDocs.GetResources
+
+    -- ** DeleteComment 
     , module Network.AWS.WorkDocs.DeleteComment
 
-    -- ** InitiateDocumentVersionUpload
+    -- ** InitiateDocumentVersionUpload 
     , module Network.AWS.WorkDocs.InitiateDocumentVersionUpload
 
-    -- ** CreateUser
+    -- ** CreateUser 
     , module Network.AWS.WorkDocs.CreateUser
 
-    -- ** UpdateUser
+    -- ** UpdateUser 
     , module Network.AWS.WorkDocs.UpdateUser
 
-    -- ** DeleteUser
+    -- ** DeleteUser 
     , module Network.AWS.WorkDocs.DeleteUser
 
-    -- ** AddResourcePermissions
+    -- ** AddResourcePermissions 
     , module Network.AWS.WorkDocs.AddResourcePermissions
 
-    -- ** UpdateDocument
+    -- ** UpdateDocument 
     , module Network.AWS.WorkDocs.UpdateDocument
 
-    -- ** DeleteDocument
+    -- ** DeleteDocument 
     , module Network.AWS.WorkDocs.DeleteDocument
 
-    -- ** DescribeGroups
+    -- ** DescribeGroups (Paginated)
     , module Network.AWS.WorkDocs.DescribeGroups
 
     -- * Types
@@ -261,6 +273,9 @@ module Network.AWS.WorkDocs
 
     -- ** PrincipalType
     , PrincipalType (..)
+
+    -- ** ResourceCollectionType
+    , ResourceCollectionType (..)
 
     -- ** ResourceSortType
     , ResourceSortType (..)
@@ -305,6 +320,7 @@ module Network.AWS.WorkDocs
     , Activity
     , activity
     , aResourceMetadata
+    , aIsIndirectActivity
     , aInitiator
     , aParticipants
     , aOriginalParent
@@ -444,6 +460,7 @@ module Network.AWS.WorkDocs
     , shareResult
     , srStatus
     , srPrincipalId
+    , srInviteePrincipalId
     , srRole
     , srStatusMessage
     , srShareId
@@ -535,6 +552,7 @@ import Network.AWS.WorkDocs.GetDocumentPath
 import Network.AWS.WorkDocs.GetDocumentVersion
 import Network.AWS.WorkDocs.GetFolder
 import Network.AWS.WorkDocs.GetFolderPath
+import Network.AWS.WorkDocs.GetResources
 import Network.AWS.WorkDocs.InitiateDocumentVersionUpload
 import Network.AWS.WorkDocs.RemoveAllResourcePermissions
 import Network.AWS.WorkDocs.RemoveResourcePermission

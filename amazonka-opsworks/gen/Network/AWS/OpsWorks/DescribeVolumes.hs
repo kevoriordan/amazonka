@@ -21,7 +21,7 @@
 -- Describes an instance's Amazon EBS volumes.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeVolumes
     (
@@ -50,13 +50,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeVolumes' smart constructor.
-data DescribeVolumes = DescribeVolumes'
-  { _dvInstanceId  :: !(Maybe Text)
-  , _dvVolumeIds   :: !(Maybe [Text])
-  , _dvRAIdArrayId :: !(Maybe Text)
-  , _dvStackId     :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeVolumes = DescribeVolumes'{_dvInstanceId
+                                        :: !(Maybe Text),
+                                        _dvVolumeIds :: !(Maybe [Text]),
+                                        _dvRAIdArrayId :: !(Maybe Text),
+                                        _dvStackId :: !(Maybe Text)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeVolumes' with the minimum fields required to make a request.
 --
@@ -71,14 +70,10 @@ data DescribeVolumes = DescribeVolumes'
 -- * 'dvStackId' - A stack ID. The action describes the stack's registered Amazon EBS volumes.
 describeVolumes
     :: DescribeVolumes
-describeVolumes =
-  DescribeVolumes'
-    { _dvInstanceId = Nothing
-    , _dvVolumeIds = Nothing
-    , _dvRAIdArrayId = Nothing
-    , _dvStackId = Nothing
-    }
-
+describeVolumes
+  = DescribeVolumes'{_dvInstanceId = Nothing,
+                     _dvVolumeIds = Nothing, _dvRAIdArrayId = Nothing,
+                     _dvStackId = Nothing}
 
 -- | The instance ID. If you use this parameter, @DescribeVolumes@ returns descriptions of the volumes associated with the specified instance.
 dvInstanceId :: Lens' DescribeVolumes (Maybe Text)
@@ -138,11 +133,12 @@ instance ToQuery DescribeVolumes where
 --
 --
 -- /See:/ 'describeVolumesResponse' smart constructor.
-data DescribeVolumesResponse = DescribeVolumesResponse'
-  { _dvrsVolumes        :: !(Maybe [Volume])
-  , _dvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeVolumesResponse = DescribeVolumesResponse'{_dvrsVolumes
+                                                        :: !(Maybe [Volume]),
+                                                        _dvrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeVolumesResponse' with the minimum fields required to make a request.
 --
@@ -154,10 +150,9 @@ data DescribeVolumesResponse = DescribeVolumesResponse'
 describeVolumesResponse
     :: Int -- ^ 'dvrsResponseStatus'
     -> DescribeVolumesResponse
-describeVolumesResponse pResponseStatus_ =
-  DescribeVolumesResponse'
-    {_dvrsVolumes = Nothing, _dvrsResponseStatus = pResponseStatus_}
-
+describeVolumesResponse pResponseStatus_
+  = DescribeVolumesResponse'{_dvrsVolumes = Nothing,
+                             _dvrsResponseStatus = pResponseStatus_}
 
 -- | An array of volume IDs.
 dvrsVolumes :: Lens' DescribeVolumesResponse [Volume]

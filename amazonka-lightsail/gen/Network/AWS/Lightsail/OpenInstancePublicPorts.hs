@@ -21,6 +21,8 @@
 -- Adds public ports to an Amazon Lightsail instance.
 --
 --
+-- The @open instance public ports@ operation supports tag-based access control via resource tags applied to the resource identified by @instance name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.OpenInstancePublicPorts
     (
     -- * Creating a Request
@@ -46,11 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'openInstancePublicPorts' smart constructor.
-data OpenInstancePublicPorts = OpenInstancePublicPorts'
-  { _oippPortInfo     :: !PortInfo
-  , _oippInstanceName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data OpenInstancePublicPorts = OpenInstancePublicPorts'{_oippPortInfo
+                                                        :: !PortInfo,
+                                                        _oippInstanceName ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'OpenInstancePublicPorts' with the minimum fields required to make a request.
 --
@@ -63,10 +66,10 @@ openInstancePublicPorts
     :: PortInfo -- ^ 'oippPortInfo'
     -> Text -- ^ 'oippInstanceName'
     -> OpenInstancePublicPorts
-openInstancePublicPorts pPortInfo_ pInstanceName_ =
-  OpenInstancePublicPorts'
-    {_oippPortInfo = pPortInfo_, _oippInstanceName = pInstanceName_}
-
+openInstancePublicPorts pPortInfo_ pInstanceName_
+  = OpenInstancePublicPorts'{_oippPortInfo =
+                               pPortInfo_,
+                             _oippInstanceName = pInstanceName_}
 
 -- | An array of key-value pairs containing information about the port mappings.
 oippPortInfo :: Lens' OpenInstancePublicPorts PortInfo
@@ -114,28 +117,31 @@ instance ToQuery OpenInstancePublicPorts where
         toQuery = const mempty
 
 -- | /See:/ 'openInstancePublicPortsResponse' smart constructor.
-data OpenInstancePublicPortsResponse = OpenInstancePublicPortsResponse'
-  { _oipprsOperation      :: !(Maybe Operation)
-  , _oipprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data OpenInstancePublicPortsResponse = OpenInstancePublicPortsResponse'{_oipprsOperation
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Operation),
+                                                                        _oipprsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'OpenInstancePublicPortsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oipprsOperation' - An array of key-value pairs containing information about the request operation.
+-- * 'oipprsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'oipprsResponseStatus' - -- | The response status code.
 openInstancePublicPortsResponse
     :: Int -- ^ 'oipprsResponseStatus'
     -> OpenInstancePublicPortsResponse
-openInstancePublicPortsResponse pResponseStatus_ =
-  OpenInstancePublicPortsResponse'
-    {_oipprsOperation = Nothing, _oipprsResponseStatus = pResponseStatus_}
+openInstancePublicPortsResponse pResponseStatus_
+  = OpenInstancePublicPortsResponse'{_oipprsOperation =
+                                       Nothing,
+                                     _oipprsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the request operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 oipprsOperation :: Lens' OpenInstancePublicPortsResponse (Maybe Operation)
 oipprsOperation = lens _oipprsOperation (\ s a -> s{_oipprsOperation = a})
 

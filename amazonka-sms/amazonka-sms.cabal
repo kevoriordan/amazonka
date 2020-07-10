@@ -45,27 +45,75 @@ library
 
     exposed-modules:
           Network.AWS.SMS
+        , Network.AWS.SMS.CreateApp
         , Network.AWS.SMS.CreateReplicationJob
+        , Network.AWS.SMS.DeleteApp
+        , Network.AWS.SMS.DeleteAppLaunchConfiguration
+        , Network.AWS.SMS.DeleteAppReplicationConfiguration
         , Network.AWS.SMS.DeleteReplicationJob
         , Network.AWS.SMS.DeleteServerCatalog
         , Network.AWS.SMS.DisassociateConnector
+        , Network.AWS.SMS.GenerateChangeSet
+        , Network.AWS.SMS.GenerateTemplate
+        , Network.AWS.SMS.GetApp
+        , Network.AWS.SMS.GetAppLaunchConfiguration
+        , Network.AWS.SMS.GetAppReplicationConfiguration
         , Network.AWS.SMS.GetConnectors
         , Network.AWS.SMS.GetReplicationJobs
         , Network.AWS.SMS.GetReplicationRuns
         , Network.AWS.SMS.GetServers
         , Network.AWS.SMS.ImportServerCatalog
+        , Network.AWS.SMS.LaunchApp
+        , Network.AWS.SMS.ListApps
+        , Network.AWS.SMS.PutAppLaunchConfiguration
+        , Network.AWS.SMS.PutAppReplicationConfiguration
+        , Network.AWS.SMS.StartAppReplication
         , Network.AWS.SMS.StartOnDemandReplicationRun
+        , Network.AWS.SMS.StopAppReplication
+        , Network.AWS.SMS.TerminateApp
         , Network.AWS.SMS.Types
+        , Network.AWS.SMS.UpdateApp
         , Network.AWS.SMS.UpdateReplicationJob
         , Network.AWS.SMS.Waiters
 
     other-modules:
-          Network.AWS.SMS.Types.Product
-        , Network.AWS.SMS.Types.Sum
+          Network.AWS.SMS.Types.AppLaunchStatus
+        , Network.AWS.SMS.Types.AppReplicationStatus
+        , Network.AWS.SMS.Types.AppStatus
+        , Network.AWS.SMS.Types.AppSummary
+        , Network.AWS.SMS.Types.Connector
+        , Network.AWS.SMS.Types.ConnectorCapability
+        , Network.AWS.SMS.Types.ConnectorStatus
+        , Network.AWS.SMS.Types.LaunchDetails
+        , Network.AWS.SMS.Types.LicenseType
+        , Network.AWS.SMS.Types.OutputFormat
+        , Network.AWS.SMS.Types.Product
+        , Network.AWS.SMS.Types.ReplicationJob
+        , Network.AWS.SMS.Types.ReplicationJobState
+        , Network.AWS.SMS.Types.ReplicationRun
+        , Network.AWS.SMS.Types.ReplicationRunStageDetails
+        , Network.AWS.SMS.Types.ReplicationRunState
+        , Network.AWS.SMS.Types.ReplicationRunType
+        , Network.AWS.SMS.Types.S3Location
+        , Network.AWS.SMS.Types.Server
+        , Network.AWS.SMS.Types.ServerCatalogStatus
+        , Network.AWS.SMS.Types.ServerGroup
+        , Network.AWS.SMS.Types.ServerGroupLaunchConfiguration
+        , Network.AWS.SMS.Types.ServerGroupReplicationConfiguration
+        , Network.AWS.SMS.Types.ServerLaunchConfiguration
+        , Network.AWS.SMS.Types.ServerReplicationConfiguration
+        , Network.AWS.SMS.Types.ServerReplicationParameters
+        , Network.AWS.SMS.Types.ServerType
+        , Network.AWS.SMS.Types.Tag
+        , Network.AWS.SMS.Types.UserData
+        , Network.AWS.SMS.Types.VMManagerType
+        , Network.AWS.SMS.Types.VMServer
+        , Network.AWS.SMS.Types.VMServerAddress
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-sms-test
     type:              exitcode-stdio-1.0
@@ -89,6 +137,7 @@ test-suite amazonka-sms-test
         , amazonka-sms
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

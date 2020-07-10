@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves an Amazon GuardDuty detector specified by the detectorId.
+--
+--
 module Network.AWS.GuardDuty.GetDetector
     (
     -- * Creating a Request
@@ -31,11 +33,13 @@ module Network.AWS.GuardDuty.GetDetector
     , getDetectorResponse
     , GetDetectorResponse
     -- * Response Lenses
-    , gdrsStatus
     , gdrsCreatedAt
+    , gdrsFindingPublishingFrequency
     , gdrsUpdatedAt
-    , gdrsServiceRole
+    , gdrsTags
     , gdrsResponseStatus
+    , gdrsServiceRole
+    , gdrsStatus
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -46,23 +50,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDetector' smart constructor.
-newtype GetDetector = GetDetector'
-  { _gdDetectorId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDetector = GetDetector'{_gdDetectorId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDetector' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdDetectorId' - The unique ID of the detector that you want to retrieve.
+-- * 'gdDetectorId' - The unique ID of the detector that you want to get.
 getDetector
     :: Text -- ^ 'gdDetectorId'
     -> GetDetector
-getDetector pDetectorId_ = GetDetector' {_gdDetectorId = pDetectorId_}
+getDetector pDetectorId_
+  = GetDetector'{_gdDetectorId = pDetectorId_}
 
-
--- | The unique ID of the detector that you want to retrieve.
+-- | The unique ID of the detector that you want to get.
 gdDetectorId :: Lens' GetDetector Text
 gdDetectorId = lens _gdDetectorId (\ s a -> s{_gdDetectorId = a})
 
@@ -73,10 +76,13 @@ instance AWSRequest GetDetector where
           = receiveJSON
               (\ s h x ->
                  GetDetectorResponse' <$>
-                   (x .?> "status") <*> (x .?> "createdAt") <*>
-                     (x .?> "updatedAt")
-                     <*> (x .?> "serviceRole")
-                     <*> (pure (fromEnum s)))
+                   (x .?> "createdAt") <*>
+                     (x .?> "findingPublishingFrequency")
+                     <*> (x .?> "updatedAt")
+                     <*> (x .?> "tags" .!@ mempty)
+                     <*> (pure (fromEnum s))
+                     <*> (x .:> "serviceRole")
+                     <*> (x .:> "status"))
 
 instance Hashable GetDetector where
 
@@ -97,59 +103,77 @@ instance ToQuery GetDetector where
         toQuery = const mempty
 
 -- | /See:/ 'getDetectorResponse' smart constructor.
-data GetDetectorResponse = GetDetectorResponse'
-  { _gdrsStatus         :: !(Maybe DetectorStatus)
-  , _gdrsCreatedAt      :: !(Maybe Text)
-  , _gdrsUpdatedAt      :: !(Maybe Text)
-  , _gdrsServiceRole    :: !(Maybe Text)
-  , _gdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDetectorResponse = GetDetectorResponse'{_gdrsCreatedAt
+                                                :: !(Maybe Text),
+                                                _gdrsFindingPublishingFrequency
+                                                ::
+                                                !(Maybe
+                                                    FindingPublishingFrequency),
+                                                _gdrsUpdatedAt :: !(Maybe Text),
+                                                _gdrsTags ::
+                                                !(Maybe (Map Text Text)),
+                                                _gdrsResponseStatus :: !Int,
+                                                _gdrsServiceRole :: !Text,
+                                                _gdrsStatus :: !DetectorStatus}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDetectorResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdrsStatus' - Undocumented member.
+-- * 'gdrsCreatedAt' - The timestamp of when the detector was created.
 --
--- * 'gdrsCreatedAt' - Undocumented member.
+-- * 'gdrsFindingPublishingFrequency' - The publishing frequency of the finding.
 --
--- * 'gdrsUpdatedAt' - Undocumented member.
+-- * 'gdrsUpdatedAt' - The last-updated timestamp for the detector.
 --
--- * 'gdrsServiceRole' - Undocumented member.
+-- * 'gdrsTags' - The tags of the detector resource.
 --
 -- * 'gdrsResponseStatus' - -- | The response status code.
+--
+-- * 'gdrsServiceRole' - The GuardDuty service role.
+--
+-- * 'gdrsStatus' - The detector status.
 getDetectorResponse
     :: Int -- ^ 'gdrsResponseStatus'
+    -> Text -- ^ 'gdrsServiceRole'
+    -> DetectorStatus -- ^ 'gdrsStatus'
     -> GetDetectorResponse
-getDetectorResponse pResponseStatus_ =
-  GetDetectorResponse'
-    { _gdrsStatus = Nothing
-    , _gdrsCreatedAt = Nothing
-    , _gdrsUpdatedAt = Nothing
-    , _gdrsServiceRole = Nothing
-    , _gdrsResponseStatus = pResponseStatus_
-    }
+getDetectorResponse pResponseStatus_ pServiceRole_
+  pStatus_
+  = GetDetectorResponse'{_gdrsCreatedAt = Nothing,
+                         _gdrsFindingPublishingFrequency = Nothing,
+                         _gdrsUpdatedAt = Nothing, _gdrsTags = Nothing,
+                         _gdrsResponseStatus = pResponseStatus_,
+                         _gdrsServiceRole = pServiceRole_,
+                         _gdrsStatus = pStatus_}
 
-
--- | Undocumented member.
-gdrsStatus :: Lens' GetDetectorResponse (Maybe DetectorStatus)
-gdrsStatus = lens _gdrsStatus (\ s a -> s{_gdrsStatus = a})
-
--- | Undocumented member.
+-- | The timestamp of when the detector was created.
 gdrsCreatedAt :: Lens' GetDetectorResponse (Maybe Text)
 gdrsCreatedAt = lens _gdrsCreatedAt (\ s a -> s{_gdrsCreatedAt = a})
 
--- | Undocumented member.
+-- | The publishing frequency of the finding.
+gdrsFindingPublishingFrequency :: Lens' GetDetectorResponse (Maybe FindingPublishingFrequency)
+gdrsFindingPublishingFrequency = lens _gdrsFindingPublishingFrequency (\ s a -> s{_gdrsFindingPublishingFrequency = a})
+
+-- | The last-updated timestamp for the detector.
 gdrsUpdatedAt :: Lens' GetDetectorResponse (Maybe Text)
 gdrsUpdatedAt = lens _gdrsUpdatedAt (\ s a -> s{_gdrsUpdatedAt = a})
 
--- | Undocumented member.
-gdrsServiceRole :: Lens' GetDetectorResponse (Maybe Text)
-gdrsServiceRole = lens _gdrsServiceRole (\ s a -> s{_gdrsServiceRole = a})
+-- | The tags of the detector resource.
+gdrsTags :: Lens' GetDetectorResponse (HashMap Text Text)
+gdrsTags = lens _gdrsTags (\ s a -> s{_gdrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 gdrsResponseStatus :: Lens' GetDetectorResponse Int
 gdrsResponseStatus = lens _gdrsResponseStatus (\ s a -> s{_gdrsResponseStatus = a})
+
+-- | The GuardDuty service role.
+gdrsServiceRole :: Lens' GetDetectorResponse Text
+gdrsServiceRole = lens _gdrsServiceRole (\ s a -> s{_gdrsServiceRole = a})
+
+-- | The detector status.
+gdrsStatus :: Lens' GetDetectorResponse DetectorStatus
+gdrsStatus = lens _gdrsStatus (\ s a -> s{_gdrsStatus = a})
 
 instance NFData GetDetectorResponse where

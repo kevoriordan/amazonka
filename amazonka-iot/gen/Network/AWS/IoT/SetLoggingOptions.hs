@@ -21,6 +21,8 @@
 -- Sets the logging options.
 --
 --
+-- NOTE: use of this command is not recommended. Use @SetV2LoggingOptions@ instead.
+--
 module Network.AWS.IoT.SetLoggingOptions
     (
     -- * Creating a Request
@@ -46,10 +48,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setLoggingOptions' smart constructor.
-newtype SetLoggingOptions = SetLoggingOptions'
-  { _sloLoggingOptionsPayload :: LoggingOptionsPayload
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetLoggingOptions = SetLoggingOptions'{_sloLoggingOptionsPayload
+                                               :: LoggingOptionsPayload}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetLoggingOptions' with the minimum fields required to make a request.
 --
@@ -59,9 +60,9 @@ newtype SetLoggingOptions = SetLoggingOptions'
 setLoggingOptions
     :: LoggingOptionsPayload -- ^ 'sloLoggingOptionsPayload'
     -> SetLoggingOptions
-setLoggingOptions pLoggingOptionsPayload_ =
-  SetLoggingOptions' {_sloLoggingOptionsPayload = pLoggingOptionsPayload_}
-
+setLoggingOptions pLoggingOptionsPayload_
+  = SetLoggingOptions'{_sloLoggingOptionsPayload =
+                         pLoggingOptionsPayload_}
 
 -- | The logging options payload.
 sloLoggingOptionsPayload :: Lens' SetLoggingOptions LoggingOptionsPayload
@@ -94,16 +95,15 @@ instance ToQuery SetLoggingOptions where
         toQuery = const mempty
 
 -- | /See:/ 'setLoggingOptionsResponse' smart constructor.
-data SetLoggingOptionsResponse =
-  SetLoggingOptionsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetLoggingOptionsResponse = SetLoggingOptionsResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'SetLoggingOptionsResponse' with the minimum fields required to make a request.
 --
 setLoggingOptionsResponse
     :: SetLoggingOptionsResponse
-setLoggingOptionsResponse = SetLoggingOptionsResponse'
-
+setLoggingOptionsResponse
+  = SetLoggingOptionsResponse'
 
 instance NFData SetLoggingOptionsResponse where

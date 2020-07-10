@@ -49,17 +49,12 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for the request.
---
---
---
--- /See:/ 'getConsoleScreenshot' smart constructor.
-data GetConsoleScreenshot = GetConsoleScreenshot'
-  { _gcsWakeUp     :: !(Maybe Bool)
-  , _gcsDryRun     :: !(Maybe Bool)
-  , _gcsInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'getConsoleScreenshot' smart constructor.
+data GetConsoleScreenshot = GetConsoleScreenshot'{_gcsWakeUp
+                                                  :: !(Maybe Bool),
+                                                  _gcsDryRun :: !(Maybe Bool),
+                                                  _gcsInstanceId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetConsoleScreenshot' with the minimum fields required to make a request.
 --
@@ -73,10 +68,9 @@ data GetConsoleScreenshot = GetConsoleScreenshot'
 getConsoleScreenshot
     :: Text -- ^ 'gcsInstanceId'
     -> GetConsoleScreenshot
-getConsoleScreenshot pInstanceId_ =
-  GetConsoleScreenshot'
-    {_gcsWakeUp = Nothing, _gcsDryRun = Nothing, _gcsInstanceId = pInstanceId_}
-
+getConsoleScreenshot pInstanceId_
+  = GetConsoleScreenshot'{_gcsWakeUp = Nothing,
+                          _gcsDryRun = Nothing, _gcsInstanceId = pInstanceId_}
 
 -- | When set to @true@ , acts as keystroke input and wakes up an instance that's in standby or "sleep" mode.
 gcsWakeUp :: Lens' GetConsoleScreenshot (Maybe Bool)
@@ -119,17 +113,17 @@ instance ToQuery GetConsoleScreenshot where
                "WakeUp" =: _gcsWakeUp, "DryRun" =: _gcsDryRun,
                "InstanceId" =: _gcsInstanceId]
 
--- | Contains the output of the request.
---
---
---
--- /See:/ 'getConsoleScreenshotResponse' smart constructor.
-data GetConsoleScreenshotResponse = GetConsoleScreenshotResponse'
-  { _gcsrsInstanceId     :: !(Maybe Text)
-  , _gcsrsImageData      :: !(Maybe Text)
-  , _gcsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'getConsoleScreenshotResponse' smart constructor.
+data GetConsoleScreenshotResponse = GetConsoleScreenshotResponse'{_gcsrsInstanceId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _gcsrsImageData
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _gcsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetConsoleScreenshotResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +137,11 @@ data GetConsoleScreenshotResponse = GetConsoleScreenshotResponse'
 getConsoleScreenshotResponse
     :: Int -- ^ 'gcsrsResponseStatus'
     -> GetConsoleScreenshotResponse
-getConsoleScreenshotResponse pResponseStatus_ =
-  GetConsoleScreenshotResponse'
-    { _gcsrsInstanceId = Nothing
-    , _gcsrsImageData = Nothing
-    , _gcsrsResponseStatus = pResponseStatus_
-    }
-
+getConsoleScreenshotResponse pResponseStatus_
+  = GetConsoleScreenshotResponse'{_gcsrsInstanceId =
+                                    Nothing,
+                                  _gcsrsImageData = Nothing,
+                                  _gcsrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the instance.
 gcsrsInstanceId :: Lens' GetConsoleScreenshotResponse (Maybe Text)

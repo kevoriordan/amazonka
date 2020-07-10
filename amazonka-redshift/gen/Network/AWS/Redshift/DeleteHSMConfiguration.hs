@@ -41,15 +41,15 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteHSMConfiguration' smart constructor.
-newtype DeleteHSMConfiguration = DeleteHSMConfiguration'
-  { _dhcHSMConfigurationIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteHSMConfiguration = DeleteHSMConfiguration'{_dhcHSMConfigurationIdentifier
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteHSMConfiguration' with the minimum fields required to make a request.
 --
@@ -59,10 +59,9 @@ newtype DeleteHSMConfiguration = DeleteHSMConfiguration'
 deleteHSMConfiguration
     :: Text -- ^ 'dhcHSMConfigurationIdentifier'
     -> DeleteHSMConfiguration
-deleteHSMConfiguration pHSMConfigurationIdentifier_ =
-  DeleteHSMConfiguration'
-    {_dhcHSMConfigurationIdentifier = pHSMConfigurationIdentifier_}
-
+deleteHSMConfiguration pHSMConfigurationIdentifier_
+  = DeleteHSMConfiguration'{_dhcHSMConfigurationIdentifier
+                              = pHSMConfigurationIdentifier_}
 
 -- | The identifier of the Amazon Redshift HSM configuration to be deleted.
 dhcHSMConfigurationIdentifier :: Lens' DeleteHSMConfiguration Text
@@ -95,16 +94,15 @@ instance ToQuery DeleteHSMConfiguration where
                  _dhcHSMConfigurationIdentifier]
 
 -- | /See:/ 'deleteHSMConfigurationResponse' smart constructor.
-data DeleteHSMConfigurationResponse =
-  DeleteHSMConfigurationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteHSMConfigurationResponse = DeleteHSMConfigurationResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteHSMConfigurationResponse' with the minimum fields required to make a request.
 --
 deleteHSMConfigurationResponse
     :: DeleteHSMConfigurationResponse
-deleteHSMConfigurationResponse = DeleteHSMConfigurationResponse'
-
+deleteHSMConfigurationResponse
+  = DeleteHSMConfigurationResponse'
 
 instance NFData DeleteHSMConfigurationResponse where

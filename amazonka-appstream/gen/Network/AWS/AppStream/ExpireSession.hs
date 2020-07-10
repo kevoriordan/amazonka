@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops the specified streaming session.
+-- Immediately stops the specified streaming session.
 --
 --
 module Network.AWS.AppStream.ExpireSession
@@ -44,23 +44,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'expireSession' smart constructor.
-newtype ExpireSession = ExpireSession'
-  { _esSessionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ExpireSession = ExpireSession'{_esSessionId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExpireSession' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'esSessionId' - The ID of the streaming session.
+-- * 'esSessionId' - The identifier of the streaming session.
 expireSession
     :: Text -- ^ 'esSessionId'
     -> ExpireSession
-expireSession pSessionId_ = ExpireSession' {_esSessionId = pSessionId_}
+expireSession pSessionId_
+  = ExpireSession'{_esSessionId = pSessionId_}
 
-
--- | The ID of the streaming session.
+-- | The identifier of the streaming session.
 esSessionId :: Lens' ExpireSession Text
 esSessionId = lens _esSessionId (\ s a -> s{_esSessionId = a})
 
@@ -98,10 +97,10 @@ instance ToQuery ExpireSession where
         toQuery = const mempty
 
 -- | /See:/ 'expireSessionResponse' smart constructor.
-newtype ExpireSessionResponse = ExpireSessionResponse'
-  { _esrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ExpireSessionResponse = ExpireSessionResponse'{_esrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ExpireSessionResponse' with the minimum fields required to make a request.
 --
@@ -111,9 +110,9 @@ newtype ExpireSessionResponse = ExpireSessionResponse'
 expireSessionResponse
     :: Int -- ^ 'esrsResponseStatus'
     -> ExpireSessionResponse
-expireSessionResponse pResponseStatus_ =
-  ExpireSessionResponse' {_esrsResponseStatus = pResponseStatus_}
-
+expireSessionResponse pResponseStatus_
+  = ExpireSessionResponse'{_esrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 esrsResponseStatus :: Lens' ExpireSessionResponse Int

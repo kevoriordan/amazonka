@@ -14,11 +14,11 @@
 module Test.AWS.Gen.SQS where
 
 import Data.Proxy
-import Network.AWS.SQS
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.SQS.Internal
 import Test.Tasty
+import Network.AWS.SQS
+import Test.AWS.SQS.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.

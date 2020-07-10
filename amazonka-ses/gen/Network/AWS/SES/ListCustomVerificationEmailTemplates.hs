@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the existing custom verification email templates for your account.
+-- Lists the existing custom verification email templates for your account in the current AWS Region.
 --
 --
 -- For more information about custom verification email templates, see <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html Using Custom Verification Email Templates> in the /Amazon SES Developer Guide/ .
@@ -60,11 +60,16 @@ import Network.AWS.SES.Types.Product
 --
 --
 -- /See:/ 'listCustomVerificationEmailTemplates' smart constructor.
-data ListCustomVerificationEmailTemplates = ListCustomVerificationEmailTemplates'
-  { _lcvetNextToken  :: !(Maybe Text)
-  , _lcvetMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCustomVerificationEmailTemplates = ListCustomVerificationEmailTemplates'{_lcvetNextToken
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _lcvetMaxResults
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Nat)}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ListCustomVerificationEmailTemplates' with the minimum fields required to make a request.
 --
@@ -75,10 +80,10 @@ data ListCustomVerificationEmailTemplates = ListCustomVerificationEmailTemplates
 -- * 'lcvetMaxResults' - The maximum number of custom verification email templates to return. This value must be at least 1 and less than or equal to 50. If you do not specify a value, or if you specify a value less than 1 or greater than 50, the operation will return up to 50 results.
 listCustomVerificationEmailTemplates
     :: ListCustomVerificationEmailTemplates
-listCustomVerificationEmailTemplates =
-  ListCustomVerificationEmailTemplates'
-    {_lcvetNextToken = Nothing, _lcvetMaxResults = Nothing}
-
+listCustomVerificationEmailTemplates
+  = ListCustomVerificationEmailTemplates'{_lcvetNextToken
+                                            = Nothing,
+                                          _lcvetMaxResults = Nothing}
 
 -- | An array the contains the name and creation time stamp for each template in your Amazon SES account.
 lcvetNextToken :: Lens' ListCustomVerificationEmailTemplates (Maybe Text)
@@ -147,12 +152,20 @@ instance ToQuery ListCustomVerificationEmailTemplates
 --
 --
 -- /See:/ 'listCustomVerificationEmailTemplatesResponse' smart constructor.
-data ListCustomVerificationEmailTemplatesResponse = ListCustomVerificationEmailTemplatesResponse'
-  { _lcvetrsNextToken :: !(Maybe Text)
-  , _lcvetrsCustomVerificationEmailTemplates :: !(Maybe [CustomVerificationEmailTemplate])
-  , _lcvetrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCustomVerificationEmailTemplatesResponse = ListCustomVerificationEmailTemplatesResponse'{_lcvetrsNextToken
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      Text),
+                                                                                                  _lcvetrsCustomVerificationEmailTemplates
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      [CustomVerificationEmailTemplate]),
+                                                                                                  _lcvetrsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'ListCustomVerificationEmailTemplatesResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +179,14 @@ data ListCustomVerificationEmailTemplatesResponse = ListCustomVerificationEmailT
 listCustomVerificationEmailTemplatesResponse
     :: Int -- ^ 'lcvetrsResponseStatus'
     -> ListCustomVerificationEmailTemplatesResponse
-listCustomVerificationEmailTemplatesResponse pResponseStatus_ =
-  ListCustomVerificationEmailTemplatesResponse'
-    { _lcvetrsNextToken = Nothing
-    , _lcvetrsCustomVerificationEmailTemplates = Nothing
-    , _lcvetrsResponseStatus = pResponseStatus_
-    }
-
+listCustomVerificationEmailTemplatesResponse
+  pResponseStatus_
+  = ListCustomVerificationEmailTemplatesResponse'{_lcvetrsNextToken
+                                                    = Nothing,
+                                                  _lcvetrsCustomVerificationEmailTemplates
+                                                    = Nothing,
+                                                  _lcvetrsResponseStatus =
+                                                    pResponseStatus_}
 
 -- | A token indicating that there are additional custom verification email templates available to be listed. Pass this token to a subsequent call to @ListTemplates@ to retrieve the next 50 custom verification email templates.
 lcvetrsNextToken :: Lens' ListCustomVerificationEmailTemplatesResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes one or more ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.
+-- Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.
 --
 --
 -- Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.
@@ -54,24 +54,31 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for RevokeSecurityGroupIngress.
---
---
---
--- /See:/ 'revokeSecurityGroupIngress' smart constructor.
-data RevokeSecurityGroupIngress = RevokeSecurityGroupIngress'
-  { _rsgiFromPort                   :: !(Maybe Int)
-  , _rsgiIPPermissions              :: !(Maybe [IPPermission])
-  , _rsgiIPProtocol                 :: !(Maybe Text)
-  , _rsgiGroupId                    :: !(Maybe Text)
-  , _rsgiToPort                     :: !(Maybe Int)
-  , _rsgiCidrIP                     :: !(Maybe Text)
-  , _rsgiSourceSecurityGroupOwnerId :: !(Maybe Text)
-  , _rsgiGroupName                  :: !(Maybe Text)
-  , _rsgiSourceSecurityGroupName    :: !(Maybe Text)
-  , _rsgiDryRun                     :: !(Maybe Bool)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'revokeSecurityGroupIngress' smart constructor.
+data RevokeSecurityGroupIngress = RevokeSecurityGroupIngress'{_rsgiFromPort
+                                                              :: !(Maybe Int),
+                                                              _rsgiIPPermissions
+                                                              ::
+                                                              !(Maybe
+                                                                  [IPPermission]),
+                                                              _rsgiIPProtocol ::
+                                                              !(Maybe Text),
+                                                              _rsgiGroupId ::
+                                                              !(Maybe Text),
+                                                              _rsgiToPort ::
+                                                              !(Maybe Int),
+                                                              _rsgiCidrIP ::
+                                                              !(Maybe Text),
+                                                              _rsgiSourceSecurityGroupOwnerId
+                                                              :: !(Maybe Text),
+                                                              _rsgiGroupName ::
+                                                              !(Maybe Text),
+                                                              _rsgiSourceSecurityGroupName
+                                                              :: !(Maybe Text),
+                                                              _rsgiDryRun ::
+                                                              !(Maybe Bool)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'RevokeSecurityGroupIngress' with the minimum fields required to make a request.
 --
@@ -79,7 +86,7 @@ data RevokeSecurityGroupIngress = RevokeSecurityGroupIngress'
 --
 -- * 'rsgiFromPort' - The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use @-1@ to specify all ICMP types.
 --
--- * 'rsgiIPPermissions' - One or more sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.
+-- * 'rsgiIPPermissions' - The sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.
 --
 -- * 'rsgiIPProtocol' - The IP protocol name (@tcp@ , @udp@ , @icmp@ ) or number (see <http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml Protocol Numbers> ). Use @-1@ to specify all.
 --
@@ -98,26 +105,23 @@ data RevokeSecurityGroupIngress = RevokeSecurityGroupIngress'
 -- * 'rsgiDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 revokeSecurityGroupIngress
     :: RevokeSecurityGroupIngress
-revokeSecurityGroupIngress =
-  RevokeSecurityGroupIngress'
-    { _rsgiFromPort = Nothing
-    , _rsgiIPPermissions = Nothing
-    , _rsgiIPProtocol = Nothing
-    , _rsgiGroupId = Nothing
-    , _rsgiToPort = Nothing
-    , _rsgiCidrIP = Nothing
-    , _rsgiSourceSecurityGroupOwnerId = Nothing
-    , _rsgiGroupName = Nothing
-    , _rsgiSourceSecurityGroupName = Nothing
-    , _rsgiDryRun = Nothing
-    }
-
+revokeSecurityGroupIngress
+  = RevokeSecurityGroupIngress'{_rsgiFromPort =
+                                  Nothing,
+                                _rsgiIPPermissions = Nothing,
+                                _rsgiIPProtocol = Nothing,
+                                _rsgiGroupId = Nothing, _rsgiToPort = Nothing,
+                                _rsgiCidrIP = Nothing,
+                                _rsgiSourceSecurityGroupOwnerId = Nothing,
+                                _rsgiGroupName = Nothing,
+                                _rsgiSourceSecurityGroupName = Nothing,
+                                _rsgiDryRun = Nothing}
 
 -- | The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use @-1@ to specify all ICMP types.
 rsgiFromPort :: Lens' RevokeSecurityGroupIngress (Maybe Int)
 rsgiFromPort = lens _rsgiFromPort (\ s a -> s{_rsgiFromPort = a})
 
--- | One or more sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.
+-- | The sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.
 rsgiIPPermissions :: Lens' RevokeSecurityGroupIngress [IPPermission]
 rsgiIPPermissions = lens _rsgiIPPermissions (\ s a -> s{_rsgiIPPermissions = a}) . _Default . _Coerce
 
@@ -190,17 +194,16 @@ instance ToQuery RevokeSecurityGroupIngress where
                "DryRun" =: _rsgiDryRun]
 
 -- | /See:/ 'revokeSecurityGroupIngressResponse' smart constructor.
-data RevokeSecurityGroupIngressResponse =
-  RevokeSecurityGroupIngressResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeSecurityGroupIngressResponse = RevokeSecurityGroupIngressResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'RevokeSecurityGroupIngressResponse' with the minimum fields required to make a request.
 --
 revokeSecurityGroupIngressResponse
     :: RevokeSecurityGroupIngressResponse
-revokeSecurityGroupIngressResponse = RevokeSecurityGroupIngressResponse'
-
+revokeSecurityGroupIngressResponse
+  = RevokeSecurityGroupIngressResponse'
 
 instance NFData RevokeSecurityGroupIngressResponse
          where

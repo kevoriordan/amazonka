@@ -59,20 +59,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeBatchPredictions' smart constructor.
-data DescribeBatchPredictions = DescribeBatchPredictions'
-  { _dbpEQ             :: !(Maybe Text)
-  , _dbpGE             :: !(Maybe Text)
-  , _dbpPrefix         :: !(Maybe Text)
-  , _dbpGT             :: !(Maybe Text)
-  , _dbpNE             :: !(Maybe Text)
-  , _dbpNextToken      :: !(Maybe Text)
-  , _dbpSortOrder      :: !(Maybe SortOrder)
-  , _dbpLimit          :: !(Maybe Nat)
-  , _dbpLT             :: !(Maybe Text)
-  , _dbpFilterVariable :: !(Maybe BatchPredictionFilterVariable)
-  , _dbpLE             :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBatchPredictions = DescribeBatchPredictions'{_dbpEQ
+                                                          :: !(Maybe Text),
+                                                          _dbpGE ::
+                                                          !(Maybe Text),
+                                                          _dbpPrefix ::
+                                                          !(Maybe Text),
+                                                          _dbpGT ::
+                                                          !(Maybe Text),
+                                                          _dbpNE ::
+                                                          !(Maybe Text),
+                                                          _dbpNextToken ::
+                                                          !(Maybe Text),
+                                                          _dbpSortOrder ::
+                                                          !(Maybe SortOrder),
+                                                          _dbpLimit ::
+                                                          !(Maybe Nat),
+                                                          _dbpLT ::
+                                                          !(Maybe Text),
+                                                          _dbpFilterVariable ::
+                                                          !(Maybe
+                                                              BatchPredictionFilterVariable),
+                                                          _dbpLE ::
+                                                          !(Maybe Text)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeBatchPredictions' with the minimum fields required to make a request.
 --
@@ -80,7 +91,7 @@ data DescribeBatchPredictions = DescribeBatchPredictions'
 --
 -- * 'dbpEQ' - The equal to operator. The @BatchPrediction@ results will have @FilterVariable@ values that exactly match the value specified with @EQ@ .
 --
--- * 'dbpGE' - The greater than or equal to operator. The @BatchPrediction@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ .
+-- * 'dbpGE' - The greater than or equal to operator. The @BatchPrediction@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ . 
 --
 -- * 'dbpPrefix' - A string that is found at the beginning of a variable, such as @Name@ or @Id@ . For example, a @Batch Prediction@ operation could have the @Name@ @2014-09-09-HolidayGiftMailer@ . To search for this @BatchPrediction@ , select @Name@ for the @FilterVariable@ and any of the following strings for the @Prefix@ :      * 2014-09     * 2014-09-09     * 2014-09-09-Holiday
 --
@@ -101,27 +112,19 @@ data DescribeBatchPredictions = DescribeBatchPredictions'
 -- * 'dbpLE' - The less than or equal to operator. The @BatchPrediction@ results will have @FilterVariable@ values that are less than or equal to the value specified with @LE@ .
 describeBatchPredictions
     :: DescribeBatchPredictions
-describeBatchPredictions =
-  DescribeBatchPredictions'
-    { _dbpEQ = Nothing
-    , _dbpGE = Nothing
-    , _dbpPrefix = Nothing
-    , _dbpGT = Nothing
-    , _dbpNE = Nothing
-    , _dbpNextToken = Nothing
-    , _dbpSortOrder = Nothing
-    , _dbpLimit = Nothing
-    , _dbpLT = Nothing
-    , _dbpFilterVariable = Nothing
-    , _dbpLE = Nothing
-    }
-
+describeBatchPredictions
+  = DescribeBatchPredictions'{_dbpEQ = Nothing,
+                              _dbpGE = Nothing, _dbpPrefix = Nothing,
+                              _dbpGT = Nothing, _dbpNE = Nothing,
+                              _dbpNextToken = Nothing, _dbpSortOrder = Nothing,
+                              _dbpLimit = Nothing, _dbpLT = Nothing,
+                              _dbpFilterVariable = Nothing, _dbpLE = Nothing}
 
 -- | The equal to operator. The @BatchPrediction@ results will have @FilterVariable@ values that exactly match the value specified with @EQ@ .
 dbpEQ :: Lens' DescribeBatchPredictions (Maybe Text)
 dbpEQ = lens _dbpEQ (\ s a -> s{_dbpEQ = a})
 
--- | The greater than or equal to operator. The @BatchPrediction@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ .
+-- | The greater than or equal to operator. The @BatchPrediction@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ . 
 dbpGE :: Lens' DescribeBatchPredictions (Maybe Text)
 dbpGE = lens _dbpGE (\ s a -> s{_dbpGE = a})
 
@@ -217,18 +220,25 @@ instance ToQuery DescribeBatchPredictions where
 --
 --
 -- /See:/ 'describeBatchPredictionsResponse' smart constructor.
-data DescribeBatchPredictionsResponse = DescribeBatchPredictionsResponse'
-  { _dbpsrsResults        :: !(Maybe [BatchPrediction])
-  , _dbpsrsNextToken      :: !(Maybe Text)
-  , _dbpsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBatchPredictionsResponse = DescribeBatchPredictionsResponse'{_dbpsrsResults
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [BatchPrediction]),
+                                                                          _dbpsrsNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dbpsrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeBatchPredictionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbpsrsResults' - A list of @BatchPrediction@ objects that meet the search criteria.
+-- * 'dbpsrsResults' - A list of @BatchPrediction@ objects that meet the search criteria. 
 --
 -- * 'dbpsrsNextToken' - The ID of the next page in the paginated results that indicates at least one more page follows.
 --
@@ -236,15 +246,13 @@ data DescribeBatchPredictionsResponse = DescribeBatchPredictionsResponse'
 describeBatchPredictionsResponse
     :: Int -- ^ 'dbpsrsResponseStatus'
     -> DescribeBatchPredictionsResponse
-describeBatchPredictionsResponse pResponseStatus_ =
-  DescribeBatchPredictionsResponse'
-    { _dbpsrsResults = Nothing
-    , _dbpsrsNextToken = Nothing
-    , _dbpsrsResponseStatus = pResponseStatus_
-    }
+describeBatchPredictionsResponse pResponseStatus_
+  = DescribeBatchPredictionsResponse'{_dbpsrsResults =
+                                        Nothing,
+                                      _dbpsrsNextToken = Nothing,
+                                      _dbpsrsResponseStatus = pResponseStatus_}
 
-
--- | A list of @BatchPrediction@ objects that meet the search criteria.
+-- | A list of @BatchPrediction@ objects that meet the search criteria. 
 dbpsrsResults :: Lens' DescribeBatchPredictionsResponse [BatchPrediction]
 dbpsrsResults = lens _dbpsrsResults (\ s a -> s{_dbpsrsResults = a}) . _Default . _Coerce
 

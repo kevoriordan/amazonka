@@ -50,12 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'publish' smart constructor.
-data Publish = Publish'
-  { _pPayload :: !(Maybe ByteString)
-  , _pQos     :: !(Maybe Nat)
-  , _pTopic   :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data Publish = Publish'{_pPayload ::
+                        !(Maybe ByteString),
+                        _pQos :: !(Maybe Nat), _pTopic :: !Text}
+                 deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Publish' with the minimum fields required to make a request.
 --
@@ -69,9 +67,9 @@ data Publish = Publish'
 publish
     :: Text -- ^ 'pTopic'
     -> Publish
-publish pTopic_ =
-  Publish' {_pPayload = Nothing, _pQos = Nothing, _pTopic = pTopic_}
-
+publish pTopic_
+  = Publish'{_pPayload = Nothing, _pQos = Nothing,
+             _pTopic = pTopic_}
 
 -- | The state information, in JSON format.
 pPayload :: Lens' Publish (Maybe ByteString)
@@ -108,16 +106,13 @@ instance ToQuery Publish where
         toQuery Publish'{..} = mconcat ["qos" =: _pQos]
 
 -- | /See:/ 'publishResponse' smart constructor.
-data PublishResponse =
-  PublishResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PublishResponse = PublishResponse'
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PublishResponse' with the minimum fields required to make a request.
 --
 publishResponse
     :: PublishResponse
 publishResponse = PublishResponse'
-
 
 instance NFData PublishResponse where

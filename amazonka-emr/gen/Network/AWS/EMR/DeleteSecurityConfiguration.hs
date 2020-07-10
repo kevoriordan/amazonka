@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteSecurityConfiguration' smart constructor.
-newtype DeleteSecurityConfiguration = DeleteSecurityConfiguration'
-  { _dscName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSecurityConfiguration = DeleteSecurityConfiguration'{_dscName
+                                                                   :: Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteSecurityConfiguration' with the minimum fields required to make a request.
 --
@@ -57,9 +57,8 @@ newtype DeleteSecurityConfiguration = DeleteSecurityConfiguration'
 deleteSecurityConfiguration
     :: Text -- ^ 'dscName'
     -> DeleteSecurityConfiguration
-deleteSecurityConfiguration pName_ =
-  DeleteSecurityConfiguration' {_dscName = pName_}
-
+deleteSecurityConfiguration pName_
+  = DeleteSecurityConfiguration'{_dscName = pName_}
 
 -- | The name of the security configuration.
 dscName :: Lens' DeleteSecurityConfiguration Text
@@ -100,10 +99,11 @@ instance ToQuery DeleteSecurityConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'deleteSecurityConfigurationResponse' smart constructor.
-newtype DeleteSecurityConfigurationResponse = DeleteSecurityConfigurationResponse'
-  { _dscrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSecurityConfigurationResponse = DeleteSecurityConfigurationResponse'{_dscrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteSecurityConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -113,9 +113,9 @@ newtype DeleteSecurityConfigurationResponse = DeleteSecurityConfigurationRespons
 deleteSecurityConfigurationResponse
     :: Int -- ^ 'dscrsResponseStatus'
     -> DeleteSecurityConfigurationResponse
-deleteSecurityConfigurationResponse pResponseStatus_ =
-  DeleteSecurityConfigurationResponse' {_dscrsResponseStatus = pResponseStatus_}
-
+deleteSecurityConfigurationResponse pResponseStatus_
+  = DeleteSecurityConfigurationResponse'{_dscrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 dscrsResponseStatus :: Lens' DeleteSecurityConfigurationResponse Int

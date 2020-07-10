@@ -47,24 +47,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getSAMLProvider' smart constructor.
-newtype GetSAMLProvider = GetSAMLProvider'
-  { _gsamlpSAMLProviderARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetSAMLProvider = GetSAMLProvider'{_gsamlpSAMLProviderARN
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSAMLProvider' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsamlpSAMLProviderARN' - The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to get information about. For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
+-- * 'gsamlpSAMLProviderARN' - The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to get information about. For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
 getSAMLProvider
     :: Text -- ^ 'gsamlpSAMLProviderARN'
     -> GetSAMLProvider
-getSAMLProvider pSAMLProviderARN_ =
-  GetSAMLProvider' {_gsamlpSAMLProviderARN = pSAMLProviderARN_}
+getSAMLProvider pSAMLProviderARN_
+  = GetSAMLProvider'{_gsamlpSAMLProviderARN =
+                       pSAMLProviderARN_}
 
-
--- | The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to get information about. For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
+-- | The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to get information about. For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
 gsamlpSAMLProviderARN :: Lens' GetSAMLProvider Text
 gsamlpSAMLProviderARN = lens _gsamlpSAMLProviderARN (\ s a -> s{_gsamlpSAMLProviderARN = a})
 
@@ -96,18 +95,21 @@ instance ToQuery GetSAMLProvider where
                "Version" =: ("2010-05-08" :: ByteString),
                "SAMLProviderArn" =: _gsamlpSAMLProviderARN]
 
--- | Contains the response to a successful 'GetSAMLProvider' request.
+-- | Contains the response to a successful 'GetSAMLProvider' request. 
 --
 --
 --
 -- /See:/ 'getSAMLProviderResponse' smart constructor.
-data GetSAMLProviderResponse = GetSAMLProviderResponse'
-  { _gsamlprsCreateDate           :: !(Maybe ISO8601)
-  , _gsamlprsValidUntil           :: !(Maybe ISO8601)
-  , _gsamlprsSAMLMetadataDocument :: !(Maybe Text)
-  , _gsamlprsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSAMLProviderResponse = GetSAMLProviderResponse'{_gsamlprsCreateDate
+                                                        :: !(Maybe ISO8601),
+                                                        _gsamlprsValidUntil ::
+                                                        !(Maybe ISO8601),
+                                                        _gsamlprsSAMLMetadataDocument
+                                                        :: !(Maybe Text),
+                                                        _gsamlprsResponseStatus
+                                                        :: !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetSAMLProviderResponse' with the minimum fields required to make a request.
 --
@@ -123,14 +125,12 @@ data GetSAMLProviderResponse = GetSAMLProviderResponse'
 getSAMLProviderResponse
     :: Int -- ^ 'gsamlprsResponseStatus'
     -> GetSAMLProviderResponse
-getSAMLProviderResponse pResponseStatus_ =
-  GetSAMLProviderResponse'
-    { _gsamlprsCreateDate = Nothing
-    , _gsamlprsValidUntil = Nothing
-    , _gsamlprsSAMLMetadataDocument = Nothing
-    , _gsamlprsResponseStatus = pResponseStatus_
-    }
-
+getSAMLProviderResponse pResponseStatus_
+  = GetSAMLProviderResponse'{_gsamlprsCreateDate =
+                               Nothing,
+                             _gsamlprsValidUntil = Nothing,
+                             _gsamlprsSAMLMetadataDocument = Nothing,
+                             _gsamlprsResponseStatus = pResponseStatus_}
 
 -- | The date and time when the SAML provider was created.
 gsamlprsCreateDate :: Lens' GetSAMLProviderResponse (Maybe UTCTime)

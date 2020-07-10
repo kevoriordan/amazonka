@@ -51,11 +51,10 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'updateTagsForDomain' smart constructor.
-data UpdateTagsForDomain = UpdateTagsForDomain'
-  { _utfdTagsToUpdate :: !(Maybe [Tag])
-  , _utfdDomainName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTagsForDomain = UpdateTagsForDomain'{_utfdTagsToUpdate
+                                                :: !(Maybe [Tag]),
+                                                _utfdDomainName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTagsForDomain' with the minimum fields required to make a request.
 --
@@ -67,10 +66,9 @@ data UpdateTagsForDomain = UpdateTagsForDomain'
 updateTagsForDomain
     :: Text -- ^ 'utfdDomainName'
     -> UpdateTagsForDomain
-updateTagsForDomain pDomainName_ =
-  UpdateTagsForDomain'
-    {_utfdTagsToUpdate = Nothing, _utfdDomainName = pDomainName_}
-
+updateTagsForDomain pDomainName_
+  = UpdateTagsForDomain'{_utfdTagsToUpdate = Nothing,
+                         _utfdDomainName = pDomainName_}
 
 -- | A list of the tag keys and values that you want to add or update. If you specify a key that already exists, the corresponding value will be replaced.
 utfdTagsToUpdate :: Lens' UpdateTagsForDomain [Tag]
@@ -117,10 +115,10 @@ instance ToQuery UpdateTagsForDomain where
         toQuery = const mempty
 
 -- | /See:/ 'updateTagsForDomainResponse' smart constructor.
-newtype UpdateTagsForDomainResponse = UpdateTagsForDomainResponse'
-  { _utfdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateTagsForDomainResponse = UpdateTagsForDomainResponse'{_utfdrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpdateTagsForDomainResponse' with the minimum fields required to make a request.
 --
@@ -130,9 +128,9 @@ newtype UpdateTagsForDomainResponse = UpdateTagsForDomainResponse'
 updateTagsForDomainResponse
     :: Int -- ^ 'utfdrsResponseStatus'
     -> UpdateTagsForDomainResponse
-updateTagsForDomainResponse pResponseStatus_ =
-  UpdateTagsForDomainResponse' {_utfdrsResponseStatus = pResponseStatus_}
-
+updateTagsForDomainResponse pResponseStatus_
+  = UpdateTagsForDomainResponse'{_utfdrsResponseStatus
+                                   = pResponseStatus_}
 
 -- | -- | The response status code.
 utfdrsResponseStatus :: Lens' UpdateTagsForDomainResponse Int

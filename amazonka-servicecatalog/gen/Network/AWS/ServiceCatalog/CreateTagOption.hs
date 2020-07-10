@@ -46,11 +46,10 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'createTagOption' smart constructor.
-data CreateTagOption = CreateTagOption'
-  { _ctoKey   :: !Text
-  , _ctoValue :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTagOption = CreateTagOption'{_ctoKey ::
+                                        !Text,
+                                        _ctoValue :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTagOption' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ createTagOption
     :: Text -- ^ 'ctoKey'
     -> Text -- ^ 'ctoValue'
     -> CreateTagOption
-createTagOption pKey_ pValue_ =
-  CreateTagOption' {_ctoKey = pKey_, _ctoValue = pValue_}
-
+createTagOption pKey_ pValue_
+  = CreateTagOption'{_ctoKey = pKey_,
+                     _ctoValue = pValue_}
 
 -- | The TagOption key.
 ctoKey :: Lens' CreateTagOption Text
@@ -112,11 +111,14 @@ instance ToQuery CreateTagOption where
         toQuery = const mempty
 
 -- | /See:/ 'createTagOptionResponse' smart constructor.
-data CreateTagOptionResponse = CreateTagOptionResponse'
-  { _ctorsTagOptionDetail :: !(Maybe TagOptionDetail)
-  , _ctorsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTagOptionResponse = CreateTagOptionResponse'{_ctorsTagOptionDetail
+                                                        ::
+                                                        !(Maybe
+                                                            TagOptionDetail),
+                                                        _ctorsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateTagOptionResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +130,10 @@ data CreateTagOptionResponse = CreateTagOptionResponse'
 createTagOptionResponse
     :: Int -- ^ 'ctorsResponseStatus'
     -> CreateTagOptionResponse
-createTagOptionResponse pResponseStatus_ =
-  CreateTagOptionResponse'
-    {_ctorsTagOptionDetail = Nothing, _ctorsResponseStatus = pResponseStatus_}
-
+createTagOptionResponse pResponseStatus_
+  = CreateTagOptionResponse'{_ctorsTagOptionDetail =
+                               Nothing,
+                             _ctorsResponseStatus = pResponseStatus_}
 
 -- | Information about the TagOption.
 ctorsTagOptionDetail :: Lens' CreateTagOptionResponse (Maybe TagOptionDetail)

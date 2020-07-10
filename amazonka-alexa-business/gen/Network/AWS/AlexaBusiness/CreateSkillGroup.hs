@@ -47,18 +47,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createSkillGroup' smart constructor.
-data CreateSkillGroup = CreateSkillGroup'
-  { _csgClientRequestToken :: !(Maybe Text)
-  , _csgDescription        :: !(Maybe Text)
-  , _csgSkillGroupName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSkillGroup = CreateSkillGroup'{_csgClientRequestToken
+                                          :: !(Maybe Text),
+                                          _csgDescription :: !(Maybe Text),
+                                          _csgSkillGroupName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSkillGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csgClientRequestToken' - A unique, user-specified identifier for this request that ensures idempotency.
+-- * 'csgClientRequestToken' - A unique, user-specified identifier for this request that ensures idempotency. 
 --
 -- * 'csgDescription' - The description for the skill group.
 --
@@ -66,15 +65,12 @@ data CreateSkillGroup = CreateSkillGroup'
 createSkillGroup
     :: Text -- ^ 'csgSkillGroupName'
     -> CreateSkillGroup
-createSkillGroup pSkillGroupName_ =
-  CreateSkillGroup'
-    { _csgClientRequestToken = Nothing
-    , _csgDescription = Nothing
-    , _csgSkillGroupName = pSkillGroupName_
-    }
+createSkillGroup pSkillGroupName_
+  = CreateSkillGroup'{_csgClientRequestToken = Nothing,
+                      _csgDescription = Nothing,
+                      _csgSkillGroupName = pSkillGroupName_}
 
-
--- | A unique, user-specified identifier for this request that ensures idempotency.
+-- | A unique, user-specified identifier for this request that ensures idempotency. 
 csgClientRequestToken :: Lens' CreateSkillGroup (Maybe Text)
 csgClientRequestToken = lens _csgClientRequestToken (\ s a -> s{_csgClientRequestToken = a})
 
@@ -124,11 +120,12 @@ instance ToQuery CreateSkillGroup where
         toQuery = const mempty
 
 -- | /See:/ 'createSkillGroupResponse' smart constructor.
-data CreateSkillGroupResponse = CreateSkillGroupResponse'
-  { _csgrsSkillGroupARN  :: !(Maybe Text)
-  , _csgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSkillGroupResponse = CreateSkillGroupResponse'{_csgrsSkillGroupARN
+                                                          :: !(Maybe Text),
+                                                          _csgrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateSkillGroupResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +137,10 @@ data CreateSkillGroupResponse = CreateSkillGroupResponse'
 createSkillGroupResponse
     :: Int -- ^ 'csgrsResponseStatus'
     -> CreateSkillGroupResponse
-createSkillGroupResponse pResponseStatus_ =
-  CreateSkillGroupResponse'
-    {_csgrsSkillGroupARN = Nothing, _csgrsResponseStatus = pResponseStatus_}
-
+createSkillGroupResponse pResponseStatus_
+  = CreateSkillGroupResponse'{_csgrsSkillGroupARN =
+                                Nothing,
+                              _csgrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the newly created skill group in the response.
 csgrsSkillGroupARN :: Lens' CreateSkillGroupResponse (Maybe Text)

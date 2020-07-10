@@ -46,11 +46,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getGroupCertificateAuthority' smart constructor.
-data GetGroupCertificateAuthority = GetGroupCertificateAuthority'
-  { _ggcaCertificateAuthorityId :: !Text
-  , _ggcaGroupId                :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGroupCertificateAuthority = GetGroupCertificateAuthority'{_ggcaCertificateAuthorityId
+                                                                  :: !Text,
+                                                                  _ggcaGroupId
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetGroupCertificateAuthority' with the minimum fields required to make a request.
 --
@@ -58,23 +59,22 @@ data GetGroupCertificateAuthority = GetGroupCertificateAuthority'
 --
 -- * 'ggcaCertificateAuthorityId' - The ID of the certificate authority.
 --
--- * 'ggcaGroupId' - The ID of the AWS Greengrass group.
+-- * 'ggcaGroupId' - The ID of the Greengrass group.
 getGroupCertificateAuthority
     :: Text -- ^ 'ggcaCertificateAuthorityId'
     -> Text -- ^ 'ggcaGroupId'
     -> GetGroupCertificateAuthority
-getGroupCertificateAuthority pCertificateAuthorityId_ pGroupId_ =
-  GetGroupCertificateAuthority'
-    { _ggcaCertificateAuthorityId = pCertificateAuthorityId_
-    , _ggcaGroupId = pGroupId_
-    }
-
+getGroupCertificateAuthority pCertificateAuthorityId_
+  pGroupId_
+  = GetGroupCertificateAuthority'{_ggcaCertificateAuthorityId
+                                    = pCertificateAuthorityId_,
+                                  _ggcaGroupId = pGroupId_}
 
 -- | The ID of the certificate authority.
 ggcaCertificateAuthorityId :: Lens' GetGroupCertificateAuthority Text
 ggcaCertificateAuthorityId = lens _ggcaCertificateAuthorityId (\ s a -> s{_ggcaCertificateAuthorityId = a})
 
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 ggcaGroupId :: Lens' GetGroupCertificateAuthority Text
 ggcaGroupId = lens _ggcaGroupId (\ s a -> s{_ggcaGroupId = a})
 
@@ -114,13 +114,23 @@ instance ToQuery GetGroupCertificateAuthority where
         toQuery = const mempty
 
 -- | /See:/ 'getGroupCertificateAuthorityResponse' smart constructor.
-data GetGroupCertificateAuthorityResponse = GetGroupCertificateAuthorityResponse'
-  { _ggcarsPemEncodedCertificate        :: !(Maybe Text)
-  , _ggcarsGroupCertificateAuthorityARN :: !(Maybe Text)
-  , _ggcarsGroupCertificateAuthorityId  :: !(Maybe Text)
-  , _ggcarsResponseStatus               :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGroupCertificateAuthorityResponse = GetGroupCertificateAuthorityResponse'{_ggcarsPemEncodedCertificate
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _ggcarsGroupCertificateAuthorityARN
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _ggcarsGroupCertificateAuthorityId
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _ggcarsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'GetGroupCertificateAuthorityResponse' with the minimum fields required to make a request.
 --
@@ -136,14 +146,15 @@ data GetGroupCertificateAuthorityResponse = GetGroupCertificateAuthorityResponse
 getGroupCertificateAuthorityResponse
     :: Int -- ^ 'ggcarsResponseStatus'
     -> GetGroupCertificateAuthorityResponse
-getGroupCertificateAuthorityResponse pResponseStatus_ =
-  GetGroupCertificateAuthorityResponse'
-    { _ggcarsPemEncodedCertificate = Nothing
-    , _ggcarsGroupCertificateAuthorityARN = Nothing
-    , _ggcarsGroupCertificateAuthorityId = Nothing
-    , _ggcarsResponseStatus = pResponseStatus_
-    }
-
+getGroupCertificateAuthorityResponse pResponseStatus_
+  = GetGroupCertificateAuthorityResponse'{_ggcarsPemEncodedCertificate
+                                            = Nothing,
+                                          _ggcarsGroupCertificateAuthorityARN =
+                                            Nothing,
+                                          _ggcarsGroupCertificateAuthorityId =
+                                            Nothing,
+                                          _ggcarsResponseStatus =
+                                            pResponseStatus_}
 
 -- | The PEM encoded certificate for the group.
 ggcarsPemEncodedCertificate :: Lens' GetGroupCertificateAuthorityResponse (Maybe Text)

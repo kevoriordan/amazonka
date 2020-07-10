@@ -61,6 +61,7 @@ library
         , Network.AWS.SWF.ListClosedWorkflowExecutions
         , Network.AWS.SWF.ListDomains
         , Network.AWS.SWF.ListOpenWorkflowExecutions
+        , Network.AWS.SWF.ListTagsForResource
         , Network.AWS.SWF.ListWorkflowTypes
         , Network.AWS.SWF.PollForActivityTask
         , Network.AWS.SWF.PollForDecisionTask
@@ -75,17 +76,139 @@ library
         , Network.AWS.SWF.RespondDecisionTaskCompleted
         , Network.AWS.SWF.SignalWorkflowExecution
         , Network.AWS.SWF.StartWorkflowExecution
+        , Network.AWS.SWF.TagResource
         , Network.AWS.SWF.TerminateWorkflowExecution
         , Network.AWS.SWF.Types
+        , Network.AWS.SWF.UndeprecateActivityType
+        , Network.AWS.SWF.UndeprecateDomain
+        , Network.AWS.SWF.UndeprecateWorkflowType
+        , Network.AWS.SWF.UntagResource
         , Network.AWS.SWF.Waiters
 
     other-modules:
-          Network.AWS.SWF.Types.Product
-        , Network.AWS.SWF.Types.Sum
+          Network.AWS.SWF.Types.ActivityTaskCancelRequestedEventAttributes
+        , Network.AWS.SWF.Types.ActivityTaskCanceledEventAttributes
+        , Network.AWS.SWF.Types.ActivityTaskCompletedEventAttributes
+        , Network.AWS.SWF.Types.ActivityTaskFailedEventAttributes
+        , Network.AWS.SWF.Types.ActivityTaskScheduledEventAttributes
+        , Network.AWS.SWF.Types.ActivityTaskStartedEventAttributes
+        , Network.AWS.SWF.Types.ActivityTaskTimedOutEventAttributes
+        , Network.AWS.SWF.Types.ActivityTaskTimeoutType
+        , Network.AWS.SWF.Types.ActivityType
+        , Network.AWS.SWF.Types.ActivityTypeConfiguration
+        , Network.AWS.SWF.Types.ActivityTypeInfo
+        , Network.AWS.SWF.Types.CancelTimerDecisionAttributes
+        , Network.AWS.SWF.Types.CancelTimerFailedCause
+        , Network.AWS.SWF.Types.CancelTimerFailedEventAttributes
+        , Network.AWS.SWF.Types.CancelWorkflowExecutionDecisionAttributes
+        , Network.AWS.SWF.Types.CancelWorkflowExecutionFailedCause
+        , Network.AWS.SWF.Types.CancelWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.ChildPolicy
+        , Network.AWS.SWF.Types.ChildWorkflowExecutionCanceledEventAttributes
+        , Network.AWS.SWF.Types.ChildWorkflowExecutionCompletedEventAttributes
+        , Network.AWS.SWF.Types.ChildWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.ChildWorkflowExecutionStartedEventAttributes
+        , Network.AWS.SWF.Types.ChildWorkflowExecutionTerminatedEventAttributes
+        , Network.AWS.SWF.Types.ChildWorkflowExecutionTimedOutEventAttributes
+        , Network.AWS.SWF.Types.CloseStatus
+        , Network.AWS.SWF.Types.CloseStatusFilter
+        , Network.AWS.SWF.Types.CompleteWorkflowExecutionDecisionAttributes
+        , Network.AWS.SWF.Types.CompleteWorkflowExecutionFailedCause
+        , Network.AWS.SWF.Types.CompleteWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.ContinueAsNewWorkflowExecutionDecisionAttributes
+        , Network.AWS.SWF.Types.ContinueAsNewWorkflowExecutionFailedCause
+        , Network.AWS.SWF.Types.ContinueAsNewWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.Decision
+        , Network.AWS.SWF.Types.DecisionTaskCompletedEventAttributes
+        , Network.AWS.SWF.Types.DecisionTaskScheduledEventAttributes
+        , Network.AWS.SWF.Types.DecisionTaskStartedEventAttributes
+        , Network.AWS.SWF.Types.DecisionTaskTimedOutEventAttributes
+        , Network.AWS.SWF.Types.DecisionTaskTimeoutType
+        , Network.AWS.SWF.Types.DecisionType
+        , Network.AWS.SWF.Types.DomainConfiguration
+        , Network.AWS.SWF.Types.DomainInfo
+        , Network.AWS.SWF.Types.EventType
+        , Network.AWS.SWF.Types.ExecutionStatus
+        , Network.AWS.SWF.Types.ExecutionTimeFilter
+        , Network.AWS.SWF.Types.ExternalWorkflowExecutionCancelRequestedEventAttributes
+        , Network.AWS.SWF.Types.ExternalWorkflowExecutionSignaledEventAttributes
+        , Network.AWS.SWF.Types.FailWorkflowExecutionDecisionAttributes
+        , Network.AWS.SWF.Types.FailWorkflowExecutionFailedCause
+        , Network.AWS.SWF.Types.FailWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.HistoryEvent
+        , Network.AWS.SWF.Types.LambdaFunctionCompletedEventAttributes
+        , Network.AWS.SWF.Types.LambdaFunctionFailedEventAttributes
+        , Network.AWS.SWF.Types.LambdaFunctionScheduledEventAttributes
+        , Network.AWS.SWF.Types.LambdaFunctionStartedEventAttributes
+        , Network.AWS.SWF.Types.LambdaFunctionTimedOutEventAttributes
+        , Network.AWS.SWF.Types.LambdaFunctionTimeoutType
+        , Network.AWS.SWF.Types.MarkerRecordedEventAttributes
+        , Network.AWS.SWF.Types.PendingTaskCount
+        , Network.AWS.SWF.Types.Product
+        , Network.AWS.SWF.Types.RecordMarkerDecisionAttributes
+        , Network.AWS.SWF.Types.RecordMarkerFailedCause
+        , Network.AWS.SWF.Types.RecordMarkerFailedEventAttributes
+        , Network.AWS.SWF.Types.RegistrationStatus
+        , Network.AWS.SWF.Types.RequestCancelActivityTaskDecisionAttributes
+        , Network.AWS.SWF.Types.RequestCancelActivityTaskFailedCause
+        , Network.AWS.SWF.Types.RequestCancelActivityTaskFailedEventAttributes
+        , Network.AWS.SWF.Types.RequestCancelExternalWorkflowExecutionDecisionAttributes
+        , Network.AWS.SWF.Types.RequestCancelExternalWorkflowExecutionFailedCause
+        , Network.AWS.SWF.Types.RequestCancelExternalWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes
+        , Network.AWS.SWF.Types.ResourceTag
+        , Network.AWS.SWF.Types.ScheduleActivityTaskDecisionAttributes
+        , Network.AWS.SWF.Types.ScheduleActivityTaskFailedCause
+        , Network.AWS.SWF.Types.ScheduleActivityTaskFailedEventAttributes
+        , Network.AWS.SWF.Types.ScheduleLambdaFunctionDecisionAttributes
+        , Network.AWS.SWF.Types.ScheduleLambdaFunctionFailedCause
+        , Network.AWS.SWF.Types.ScheduleLambdaFunctionFailedEventAttributes
+        , Network.AWS.SWF.Types.SignalExternalWorkflowExecutionDecisionAttributes
+        , Network.AWS.SWF.Types.SignalExternalWorkflowExecutionFailedCause
+        , Network.AWS.SWF.Types.SignalExternalWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.SignalExternalWorkflowExecutionInitiatedEventAttributes
+        , Network.AWS.SWF.Types.StartChildWorkflowExecutionDecisionAttributes
+        , Network.AWS.SWF.Types.StartChildWorkflowExecutionFailedCause
+        , Network.AWS.SWF.Types.StartChildWorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.StartChildWorkflowExecutionInitiatedEventAttributes
+        , Network.AWS.SWF.Types.StartLambdaFunctionFailedCause
+        , Network.AWS.SWF.Types.StartLambdaFunctionFailedEventAttributes
+        , Network.AWS.SWF.Types.StartTimerDecisionAttributes
+        , Network.AWS.SWF.Types.StartTimerFailedCause
+        , Network.AWS.SWF.Types.StartTimerFailedEventAttributes
+        , Network.AWS.SWF.Types.TagFilter
+        , Network.AWS.SWF.Types.TaskList
+        , Network.AWS.SWF.Types.TimerCanceledEventAttributes
+        , Network.AWS.SWF.Types.TimerFiredEventAttributes
+        , Network.AWS.SWF.Types.TimerStartedEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecution
+        , Network.AWS.SWF.Types.WorkflowExecutionCancelRequestedCause
+        , Network.AWS.SWF.Types.WorkflowExecutionCancelRequestedEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionCanceledEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionCompletedEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionConfiguration
+        , Network.AWS.SWF.Types.WorkflowExecutionContinuedAsNewEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionCount
+        , Network.AWS.SWF.Types.WorkflowExecutionFailedEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionFilter
+        , Network.AWS.SWF.Types.WorkflowExecutionInfo
+        , Network.AWS.SWF.Types.WorkflowExecutionInfos
+        , Network.AWS.SWF.Types.WorkflowExecutionOpenCounts
+        , Network.AWS.SWF.Types.WorkflowExecutionSignaledEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionStartedEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionTerminatedCause
+        , Network.AWS.SWF.Types.WorkflowExecutionTerminatedEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionTimedOutEventAttributes
+        , Network.AWS.SWF.Types.WorkflowExecutionTimeoutType
+        , Network.AWS.SWF.Types.WorkflowType
+        , Network.AWS.SWF.Types.WorkflowTypeConfiguration
+        , Network.AWS.SWF.Types.WorkflowTypeFilter
+        , Network.AWS.SWF.Types.WorkflowTypeInfo
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-swf-test
     type:              exitcode-stdio-1.0
@@ -109,6 +232,7 @@ test-suite amazonka-swf-test
         , amazonka-swf
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

@@ -45,10 +45,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'getSizeConstraintSet' smart constructor.
-newtype GetSizeConstraintSet = GetSizeConstraintSet'
-  { _gscsSizeConstraintSetId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetSizeConstraintSet = GetSizeConstraintSet'{_gscsSizeConstraintSetId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetSizeConstraintSet' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetSizeConstraintSet = GetSizeConstraintSet'
 getSizeConstraintSet
     :: Text -- ^ 'gscsSizeConstraintSetId'
     -> GetSizeConstraintSet
-getSizeConstraintSet pSizeConstraintSetId_ =
-  GetSizeConstraintSet' {_gscsSizeConstraintSetId = pSizeConstraintSetId_}
-
+getSizeConstraintSet pSizeConstraintSetId_
+  = GetSizeConstraintSet'{_gscsSizeConstraintSetId =
+                            pSizeConstraintSetId_}
 
 -- | The @SizeConstraintSetId@ of the 'SizeConstraintSet' that you want to get. @SizeConstraintSetId@ is returned by 'CreateSizeConstraintSet' and by 'ListSizeConstraintSets' .
 gscsSizeConstraintSetId :: Lens' GetSizeConstraintSet Text
@@ -104,30 +104,31 @@ instance ToQuery GetSizeConstraintSet where
         toQuery = const mempty
 
 -- | /See:/ 'getSizeConstraintSetResponse' smart constructor.
-data GetSizeConstraintSetResponse = GetSizeConstraintSetResponse'
-  { _gscsrsSizeConstraintSet :: !(Maybe SizeConstraintSet)
-  , _gscsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSizeConstraintSetResponse = GetSizeConstraintSetResponse'{_gscsrsSizeConstraintSet
+                                                                  ::
+                                                                  !(Maybe
+                                                                      SizeConstraintSet),
+                                                                  _gscsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetSizeConstraintSetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gscsrsSizeConstraintSet' - Information about the 'SizeConstraintSet' that you specified in the @GetSizeConstraintSet@ request. For more information, see the following topics:     * 'SizeConstraintSet' : Contains @SizeConstraintSetId@ , @SizeConstraints@ , and @Name@      * @SizeConstraints@ : Contains an array of 'SizeConstraint' objects. Each @SizeConstraint@ object contains 'FieldToMatch' , @TextTransformation@ , @ComparisonOperator@ , and @Size@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- * 'gscsrsSizeConstraintSet' - Information about the 'SizeConstraintSet' that you specified in the @GetSizeConstraintSet@ request. For more information, see the following topics:     * 'SizeConstraintSet' : Contains @SizeConstraintSetId@ , @SizeConstraints@ , and @Name@      * @SizeConstraints@ : Contains an array of 'SizeConstraint' objects. Each @SizeConstraint@ object contains 'FieldToMatch' , @TextTransformation@ , @ComparisonOperator@ , and @Size@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 --
 -- * 'gscsrsResponseStatus' - -- | The response status code.
 getSizeConstraintSetResponse
     :: Int -- ^ 'gscsrsResponseStatus'
     -> GetSizeConstraintSetResponse
-getSizeConstraintSetResponse pResponseStatus_ =
-  GetSizeConstraintSetResponse'
-    { _gscsrsSizeConstraintSet = Nothing
-    , _gscsrsResponseStatus = pResponseStatus_
-    }
+getSizeConstraintSetResponse pResponseStatus_
+  = GetSizeConstraintSetResponse'{_gscsrsSizeConstraintSet
+                                    = Nothing,
+                                  _gscsrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the 'SizeConstraintSet' that you specified in the @GetSizeConstraintSet@ request. For more information, see the following topics:     * 'SizeConstraintSet' : Contains @SizeConstraintSetId@ , @SizeConstraints@ , and @Name@      * @SizeConstraints@ : Contains an array of 'SizeConstraint' objects. Each @SizeConstraint@ object contains 'FieldToMatch' , @TextTransformation@ , @ComparisonOperator@ , and @Size@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- | Information about the 'SizeConstraintSet' that you specified in the @GetSizeConstraintSet@ request. For more information, see the following topics:     * 'SizeConstraintSet' : Contains @SizeConstraintSetId@ , @SizeConstraints@ , and @Name@      * @SizeConstraints@ : Contains an array of 'SizeConstraint' objects. Each @SizeConstraint@ object contains 'FieldToMatch' , @TextTransformation@ , @ComparisonOperator@ , and @Size@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 gscsrsSizeConstraintSet :: Lens' GetSizeConstraintSetResponse (Maybe SizeConstraintSet)
 gscsrsSizeConstraintSet = lens _gscsrsSizeConstraintSet (\ s a -> s{_gscsrsSizeConstraintSet = a})
 

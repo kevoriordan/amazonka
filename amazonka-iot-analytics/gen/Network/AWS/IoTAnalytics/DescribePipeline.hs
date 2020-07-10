@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describePipeline' smart constructor.
-newtype DescribePipeline = DescribePipeline'
-  { _dpPipelineName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribePipeline = DescribePipeline'{_dpPipelineName
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribePipeline' with the minimum fields required to make a request.
 --
@@ -58,9 +57,8 @@ newtype DescribePipeline = DescribePipeline'
 describePipeline
     :: Text -- ^ 'dpPipelineName'
     -> DescribePipeline
-describePipeline pPipelineName_ =
-  DescribePipeline' {_dpPipelineName = pPipelineName_}
-
+describePipeline pPipelineName_
+  = DescribePipeline'{_dpPipelineName = pPipelineName_}
 
 -- | The name of the pipeline whose information is retrieved.
 dpPipelineName :: Lens' DescribePipeline Text
@@ -90,11 +88,12 @@ instance ToQuery DescribePipeline where
         toQuery = const mempty
 
 -- | /See:/ 'describePipelineResponse' smart constructor.
-data DescribePipelineResponse = DescribePipelineResponse'
-  { _dprsPipeline       :: !(Maybe Pipeline)
-  , _dprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePipelineResponse = DescribePipelineResponse'{_dprsPipeline
+                                                          :: !(Maybe Pipeline),
+                                                          _dprsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribePipelineResponse' with the minimum fields required to make a request.
 --
@@ -106,10 +105,9 @@ data DescribePipelineResponse = DescribePipelineResponse'
 describePipelineResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DescribePipelineResponse
-describePipelineResponse pResponseStatus_ =
-  DescribePipelineResponse'
-    {_dprsPipeline = Nothing, _dprsResponseStatus = pResponseStatus_}
-
+describePipelineResponse pResponseStatus_
+  = DescribePipelineResponse'{_dprsPipeline = Nothing,
+                              _dprsResponseStatus = pResponseStatus_}
 
 -- | A "Pipeline" object that contains information about the pipeline.
 dprsPipeline :: Lens' DescribePipelineResponse (Maybe Pipeline)

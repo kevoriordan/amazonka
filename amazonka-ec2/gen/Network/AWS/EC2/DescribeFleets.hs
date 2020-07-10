@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the specified EC2 Fleet.
+-- Describes the specified EC2 Fleets or all of your EC2 Fleets.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribeFleets
     (
     -- * Creating a Request
@@ -45,25 +47,25 @@ module Network.AWS.EC2.DescribeFleets
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeFleets' smart constructor.
-data DescribeFleets = DescribeFleets'
-  { _dfsFilters    :: !(Maybe [Filter])
-  , _dfsNextToken  :: !(Maybe Text)
-  , _dfsFleetIds   :: !(Maybe [Text])
-  , _dfsDryRun     :: !(Maybe Bool)
-  , _dfsMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleets = DescribeFleets'{_dfsFilters ::
+                                      !(Maybe [Filter]),
+                                      _dfsNextToken :: !(Maybe Text),
+                                      _dfsFleetIds :: !(Maybe [Text]),
+                                      _dfsDryRun :: !(Maybe Bool),
+                                      _dfsMaxResults :: !(Maybe Int)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeFleets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfsFilters' - One or more filters.
+-- * 'dfsFilters' - The filters.     * @activity-status@ - The progress of the EC2 Fleet ( @error@ | @pending-fulfillment@ | @pending-termination@ | @fulfilled@ ).     * @excess-capacity-termination-policy@ - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (@true@ | @false@ ).     * @fleet-state@ - The state of the EC2 Fleet (@submitted@ | @active@ | @deleted@ | @failed@ | @deleted-running@ | @deleted-terminating@ | @modifying@ ).     * @replace-unhealthy-instances@ - Indicates whether EC2 Fleet should replace unhealthy instances (@true@ | @false@ ).     * @type@ - The type of request (@instant@ | @request@ | @maintain@ ).
 --
 -- * 'dfsNextToken' - The token for the next set of results.
 --
@@ -74,17 +76,12 @@ data DescribeFleets = DescribeFleets'
 -- * 'dfsMaxResults' - The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned @NextToken@ value.
 describeFleets
     :: DescribeFleets
-describeFleets =
-  DescribeFleets'
-    { _dfsFilters = Nothing
-    , _dfsNextToken = Nothing
-    , _dfsFleetIds = Nothing
-    , _dfsDryRun = Nothing
-    , _dfsMaxResults = Nothing
-    }
+describeFleets
+  = DescribeFleets'{_dfsFilters = Nothing,
+                    _dfsNextToken = Nothing, _dfsFleetIds = Nothing,
+                    _dfsDryRun = Nothing, _dfsMaxResults = Nothing}
 
-
--- | One or more filters.
+-- | The filters.     * @activity-status@ - The progress of the EC2 Fleet ( @error@ | @pending-fulfillment@ | @pending-termination@ | @fulfilled@ ).     * @excess-capacity-termination-policy@ - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (@true@ | @false@ ).     * @fleet-state@ - The state of the EC2 Fleet (@submitted@ | @active@ | @deleted@ | @failed@ | @deleted-running@ | @deleted-terminating@ | @modifying@ ).     * @replace-unhealthy-instances@ - Indicates whether EC2 Fleet should replace unhealthy instances (@true@ | @false@ ).     * @type@ - The type of request (@instant@ | @request@ | @maintain@ ).
 dfsFilters :: Lens' DescribeFleets [Filter]
 dfsFilters = lens _dfsFilters (\ s a -> s{_dfsFilters = a}) . _Default . _Coerce
 
@@ -103,6 +100,13 @@ dfsDryRun = lens _dfsDryRun (\ s a -> s{_dfsDryRun = a})
 -- | The maximum number of results to return in a single call. Specify a value between 1 and 1000. The default value is 1000. To retrieve the remaining results, make another call with the returned @NextToken@ value.
 dfsMaxResults :: Lens' DescribeFleets (Maybe Int)
 dfsMaxResults = lens _dfsMaxResults (\ s a -> s{_dfsMaxResults = a})
+
+instance AWSPager DescribeFleets where
+        page rq rs
+          | stop (rs ^. dfsrsNextToken) = Nothing
+          | stop (rs ^. dfsrsFleets) = Nothing
+          | otherwise =
+            Just $ rq & dfsNextToken .~ rs ^. dfsrsNextToken
 
 instance AWSRequest DescribeFleets where
         type Rs DescribeFleets = DescribeFleetsResponse
@@ -138,12 +142,14 @@ instance ToQuery DescribeFleets where
                "MaxResults" =: _dfsMaxResults]
 
 -- | /See:/ 'describeFleetsResponse' smart constructor.
-data DescribeFleetsResponse = DescribeFleetsResponse'
-  { _dfsrsNextToken      :: !(Maybe Text)
-  , _dfsrsFleets         :: !(Maybe [FleetData])
-  , _dfsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleetsResponse = DescribeFleetsResponse'{_dfsrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _dfsrsFleets ::
+                                                      !(Maybe [FleetData]),
+                                                      _dfsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeFleetsResponse' with the minimum fields required to make a request.
 --
@@ -151,25 +157,22 @@ data DescribeFleetsResponse = DescribeFleetsResponse'
 --
 -- * 'dfsrsNextToken' - The token for the next set of results.
 --
--- * 'dfsrsFleets' - The EC2 Fleets.
+-- * 'dfsrsFleets' - Information about the EC2 Fleets.
 --
 -- * 'dfsrsResponseStatus' - -- | The response status code.
 describeFleetsResponse
     :: Int -- ^ 'dfsrsResponseStatus'
     -> DescribeFleetsResponse
-describeFleetsResponse pResponseStatus_ =
-  DescribeFleetsResponse'
-    { _dfsrsNextToken = Nothing
-    , _dfsrsFleets = Nothing
-    , _dfsrsResponseStatus = pResponseStatus_
-    }
-
+describeFleetsResponse pResponseStatus_
+  = DescribeFleetsResponse'{_dfsrsNextToken = Nothing,
+                            _dfsrsFleets = Nothing,
+                            _dfsrsResponseStatus = pResponseStatus_}
 
 -- | The token for the next set of results.
 dfsrsNextToken :: Lens' DescribeFleetsResponse (Maybe Text)
 dfsrsNextToken = lens _dfsrsNextToken (\ s a -> s{_dfsrsNextToken = a})
 
--- | The EC2 Fleets.
+-- | Information about the EC2 Fleets.
 dfsrsFleets :: Lens' DescribeFleetsResponse [FleetData]
 dfsrsFleets = lens _dfsrsFleets (\ s a -> s{_dfsrsFleets = a}) . _Default . _Coerce
 

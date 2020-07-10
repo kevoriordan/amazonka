@@ -31,7 +31,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAFRegional.CreateRuleGroup
     (
@@ -39,6 +39,7 @@ module Network.AWS.WAFRegional.CreateRuleGroup
       createRuleGroup
     , CreateRuleGroup
     -- * Request Lenses
+    , crgTags
     , crgName
     , crgMetricName
     , crgChangeToken
@@ -60,20 +61,22 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'createRuleGroup' smart constructor.
-data CreateRuleGroup = CreateRuleGroup'
-  { _crgName        :: !Text
-  , _crgMetricName  :: !Text
-  , _crgChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateRuleGroup = CreateRuleGroup'{_crgTags ::
+                                        !(Maybe (List1 Tag)),
+                                        _crgName :: !Text,
+                                        _crgMetricName :: !Text,
+                                        _crgChangeToken :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateRuleGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'crgTags' - 
+--
 -- * 'crgName' - A friendly name or description of the 'RuleGroup' . You can't change @Name@ after you create a @RuleGroup@ .
 --
--- * 'crgMetricName' - A friendly name or description for the metrics for this @RuleGroup@ . The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the @RuleGroup@ .
+-- * 'crgMetricName' - A friendly name or description for the metrics for this @RuleGroup@ . The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can't contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can't change the name of the metric after you create the @RuleGroup@ .
 --
 -- * 'crgChangeToken' - The value returned by the most recent call to 'GetChangeToken' .
 createRuleGroup
@@ -81,19 +84,20 @@ createRuleGroup
     -> Text -- ^ 'crgMetricName'
     -> Text -- ^ 'crgChangeToken'
     -> CreateRuleGroup
-createRuleGroup pName_ pMetricName_ pChangeToken_ =
-  CreateRuleGroup'
-    { _crgName = pName_
-    , _crgMetricName = pMetricName_
-    , _crgChangeToken = pChangeToken_
-    }
+createRuleGroup pName_ pMetricName_ pChangeToken_
+  = CreateRuleGroup'{_crgTags = Nothing,
+                     _crgName = pName_, _crgMetricName = pMetricName_,
+                     _crgChangeToken = pChangeToken_}
 
+-- | 
+crgTags :: Lens' CreateRuleGroup (Maybe (NonEmpty Tag))
+crgTags = lens _crgTags (\ s a -> s{_crgTags = a}) . mapping _List1
 
 -- | A friendly name or description of the 'RuleGroup' . You can't change @Name@ after you create a @RuleGroup@ .
 crgName :: Lens' CreateRuleGroup Text
 crgName = lens _crgName (\ s a -> s{_crgName = a})
 
--- | A friendly name or description for the metrics for this @RuleGroup@ . The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain whitespace. You can't change the name of the metric after you create the @RuleGroup@ .
+-- | A friendly name or description for the metrics for this @RuleGroup@ . The name can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128 and minimum length one. It can't contain whitespace or metric names reserved for AWS WAF, including "All" and "Default_Action." You can't change the name of the metric after you create the @RuleGroup@ .
 crgMetricName :: Lens' CreateRuleGroup Text
 crgMetricName = lens _crgMetricName (\ s a -> s{_crgMetricName = a})
 
@@ -129,7 +133,7 @@ instance ToJSON CreateRuleGroup where
         toJSON CreateRuleGroup'{..}
           = object
               (catMaybes
-                 [Just ("Name" .= _crgName),
+                 [("Tags" .=) <$> _crgTags, Just ("Name" .= _crgName),
                   Just ("MetricName" .= _crgMetricName),
                   Just ("ChangeToken" .= _crgChangeToken)])
 
@@ -140,12 +144,14 @@ instance ToQuery CreateRuleGroup where
         toQuery = const mempty
 
 -- | /See:/ 'createRuleGroupResponse' smart constructor.
-data CreateRuleGroupResponse = CreateRuleGroupResponse'
-  { _crgrsChangeToken    :: !(Maybe Text)
-  , _crgrsRuleGroup      :: !(Maybe RuleGroup)
-  , _crgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateRuleGroupResponse = CreateRuleGroupResponse'{_crgrsChangeToken
+                                                        :: !(Maybe Text),
+                                                        _crgrsRuleGroup ::
+                                                        !(Maybe RuleGroup),
+                                                        _crgrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateRuleGroupResponse' with the minimum fields required to make a request.
 --
@@ -159,13 +165,11 @@ data CreateRuleGroupResponse = CreateRuleGroupResponse'
 createRuleGroupResponse
     :: Int -- ^ 'crgrsResponseStatus'
     -> CreateRuleGroupResponse
-createRuleGroupResponse pResponseStatus_ =
-  CreateRuleGroupResponse'
-    { _crgrsChangeToken = Nothing
-    , _crgrsRuleGroup = Nothing
-    , _crgrsResponseStatus = pResponseStatus_
-    }
-
+createRuleGroupResponse pResponseStatus_
+  = CreateRuleGroupResponse'{_crgrsChangeToken =
+                               Nothing,
+                             _crgrsRuleGroup = Nothing,
+                             _crgrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @CreateRuleGroup@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 crgrsChangeToken :: Lens' CreateRuleGroupResponse (Maybe Text)

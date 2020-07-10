@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing vocabulary with new values.
+-- Updates an existing vocabulary with new values. The @UpdateVocabulary@ operation overwrites all of the existing information with the values that you provide in the request. 
 --
 --
 module Network.AWS.Transcribe.UpdateVocabulary
@@ -27,9 +27,10 @@ module Network.AWS.Transcribe.UpdateVocabulary
       updateVocabulary
     , UpdateVocabulary
     -- * Request Lenses
+    , uvVocabularyFileURI
+    , uvPhrases
     , uvVocabularyName
     , uvLanguageCode
-    , uvPhrases
 
     -- * Destructuring the Response
     , updateVocabularyResponse
@@ -50,45 +51,49 @@ import Network.AWS.Transcribe.Types
 import Network.AWS.Transcribe.Types.Product
 
 -- | /See:/ 'updateVocabulary' smart constructor.
-data UpdateVocabulary = UpdateVocabulary'
-  { _uvVocabularyName :: !Text
-  , _uvLanguageCode   :: !LanguageCode
-  , _uvPhrases        :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateVocabulary = UpdateVocabulary'{_uvVocabularyFileURI
+                                          :: !(Maybe Text),
+                                          _uvPhrases :: !(Maybe [Text]),
+                                          _uvVocabularyName :: !Text,
+                                          _uvLanguageCode :: !LanguageCode}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateVocabulary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uvVocabularyName' - The name of the vocabulary to update. The name is case-sensitive.
---
--- * 'uvLanguageCode' - The language code of the vocabulary entries.
+-- * 'uvVocabularyFileURI' - The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is  @https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey> @  For example: @https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt@  For more information about S3 object names, see <http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys Object Keys> in the /Amazon S3 Developer Guide/ . For more information about custom vocabularies, see <http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary Custom Vocabularies> .
 --
 -- * 'uvPhrases' - An array of strings containing the vocabulary entries.
+--
+-- * 'uvVocabularyName' - The name of the vocabulary to update. The name is case-sensitive. If you try to update a vocabulary with the same name as a previous vocabulary you will receive a @ConflictException@ error.
+--
+-- * 'uvLanguageCode' - The language code of the vocabulary entries.
 updateVocabulary
     :: Text -- ^ 'uvVocabularyName'
     -> LanguageCode -- ^ 'uvLanguageCode'
     -> UpdateVocabulary
-updateVocabulary pVocabularyName_ pLanguageCode_ =
-  UpdateVocabulary'
-    { _uvVocabularyName = pVocabularyName_
-    , _uvLanguageCode = pLanguageCode_
-    , _uvPhrases = mempty
-    }
+updateVocabulary pVocabularyName_ pLanguageCode_
+  = UpdateVocabulary'{_uvVocabularyFileURI = Nothing,
+                      _uvPhrases = Nothing,
+                      _uvVocabularyName = pVocabularyName_,
+                      _uvLanguageCode = pLanguageCode_}
 
+-- | The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is  @https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey> @  For example: @https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt@  For more information about S3 object names, see <http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys Object Keys> in the /Amazon S3 Developer Guide/ . For more information about custom vocabularies, see <http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary Custom Vocabularies> .
+uvVocabularyFileURI :: Lens' UpdateVocabulary (Maybe Text)
+uvVocabularyFileURI = lens _uvVocabularyFileURI (\ s a -> s{_uvVocabularyFileURI = a})
 
--- | The name of the vocabulary to update. The name is case-sensitive.
+-- | An array of strings containing the vocabulary entries.
+uvPhrases :: Lens' UpdateVocabulary [Text]
+uvPhrases = lens _uvPhrases (\ s a -> s{_uvPhrases = a}) . _Default . _Coerce
+
+-- | The name of the vocabulary to update. The name is case-sensitive. If you try to update a vocabulary with the same name as a previous vocabulary you will receive a @ConflictException@ error.
 uvVocabularyName :: Lens' UpdateVocabulary Text
 uvVocabularyName = lens _uvVocabularyName (\ s a -> s{_uvVocabularyName = a})
 
 -- | The language code of the vocabulary entries.
 uvLanguageCode :: Lens' UpdateVocabulary LanguageCode
 uvLanguageCode = lens _uvLanguageCode (\ s a -> s{_uvLanguageCode = a})
-
--- | An array of strings containing the vocabulary entries.
-uvPhrases :: Lens' UpdateVocabulary [Text]
-uvPhrases = lens _uvPhrases (\ s a -> s{_uvPhrases = a}) . _Coerce
 
 instance AWSRequest UpdateVocabulary where
         type Rs UpdateVocabulary = UpdateVocabularyResponse
@@ -119,9 +124,10 @@ instance ToJSON UpdateVocabulary where
         toJSON UpdateVocabulary'{..}
           = object
               (catMaybes
-                 [Just ("VocabularyName" .= _uvVocabularyName),
-                  Just ("LanguageCode" .= _uvLanguageCode),
-                  Just ("Phrases" .= _uvPhrases)])
+                 [("VocabularyFileUri" .=) <$> _uvVocabularyFileURI,
+                  ("Phrases" .=) <$> _uvPhrases,
+                  Just ("VocabularyName" .= _uvVocabularyName),
+                  Just ("LanguageCode" .= _uvLanguageCode)])
 
 instance ToPath UpdateVocabulary where
         toPath = const "/"
@@ -130,14 +136,21 @@ instance ToQuery UpdateVocabulary where
         toQuery = const mempty
 
 -- | /See:/ 'updateVocabularyResponse' smart constructor.
-data UpdateVocabularyResponse = UpdateVocabularyResponse'
-  { _uvrsLanguageCode     :: !(Maybe LanguageCode)
-  , _uvrsVocabularyName   :: !(Maybe Text)
-  , _uvrsLastModifiedTime :: !(Maybe POSIX)
-  , _uvrsVocabularyState  :: !(Maybe VocabularyState)
-  , _uvrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateVocabularyResponse = UpdateVocabularyResponse'{_uvrsLanguageCode
+                                                          ::
+                                                          !(Maybe LanguageCode),
+                                                          _uvrsVocabularyName ::
+                                                          !(Maybe Text),
+                                                          _uvrsLastModifiedTime
+                                                          :: !(Maybe POSIX),
+                                                          _uvrsVocabularyState
+                                                          ::
+                                                          !(Maybe
+                                                              VocabularyState),
+                                                          _uvrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateVocabularyResponse' with the minimum fields required to make a request.
 --
@@ -155,15 +168,13 @@ data UpdateVocabularyResponse = UpdateVocabularyResponse'
 updateVocabularyResponse
     :: Int -- ^ 'uvrsResponseStatus'
     -> UpdateVocabularyResponse
-updateVocabularyResponse pResponseStatus_ =
-  UpdateVocabularyResponse'
-    { _uvrsLanguageCode = Nothing
-    , _uvrsVocabularyName = Nothing
-    , _uvrsLastModifiedTime = Nothing
-    , _uvrsVocabularyState = Nothing
-    , _uvrsResponseStatus = pResponseStatus_
-    }
-
+updateVocabularyResponse pResponseStatus_
+  = UpdateVocabularyResponse'{_uvrsLanguageCode =
+                                Nothing,
+                              _uvrsVocabularyName = Nothing,
+                              _uvrsLastModifiedTime = Nothing,
+                              _uvrsVocabularyState = Nothing,
+                              _uvrsResponseStatus = pResponseStatus_}
 
 -- | The language code of the vocabulary entries.
 uvrsLanguageCode :: Lens' UpdateVocabularyResponse (Maybe LanguageCode)

@@ -47,11 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLifecycleHook' smart constructor.
-data DeleteLifecycleHook = DeleteLifecycleHook'
-  { _delLifecycleHookName    :: !Text
-  , _delAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLifecycleHook = DeleteLifecycleHook'{_delLifecycleHookName
+                                                :: !Text,
+                                                _delAutoScalingGroupName ::
+                                                !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteLifecycleHook' with the minimum fields required to make a request.
 --
@@ -64,12 +64,11 @@ deleteLifecycleHook
     :: Text -- ^ 'delLifecycleHookName'
     -> Text -- ^ 'delAutoScalingGroupName'
     -> DeleteLifecycleHook
-deleteLifecycleHook pLifecycleHookName_ pAutoScalingGroupName_ =
-  DeleteLifecycleHook'
-    { _delLifecycleHookName = pLifecycleHookName_
-    , _delAutoScalingGroupName = pAutoScalingGroupName_
-    }
-
+deleteLifecycleHook pLifecycleHookName_
+  pAutoScalingGroupName_
+  = DeleteLifecycleHook'{_delLifecycleHookName =
+                           pLifecycleHookName_,
+                         _delAutoScalingGroupName = pAutoScalingGroupName_}
 
 -- | The name of the lifecycle hook.
 delLifecycleHookName :: Lens' DeleteLifecycleHook Text
@@ -107,10 +106,10 @@ instance ToQuery DeleteLifecycleHook where
                "AutoScalingGroupName" =: _delAutoScalingGroupName]
 
 -- | /See:/ 'deleteLifecycleHookResponse' smart constructor.
-newtype DeleteLifecycleHookResponse = DeleteLifecycleHookResponse'
-  { _drsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLifecycleHookResponse = DeleteLifecycleHookResponse'{_drsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteLifecycleHookResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +119,9 @@ newtype DeleteLifecycleHookResponse = DeleteLifecycleHookResponse'
 deleteLifecycleHookResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteLifecycleHookResponse
-deleteLifecycleHookResponse pResponseStatus_ =
-  DeleteLifecycleHookResponse' {_drsResponseStatus = pResponseStatus_}
-
+deleteLifecycleHookResponse pResponseStatus_
+  = DeleteLifecycleHookResponse'{_drsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeleteLifecycleHookResponse Int

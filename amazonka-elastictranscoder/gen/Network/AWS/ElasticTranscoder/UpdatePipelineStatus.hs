@@ -21,7 +21,7 @@
 -- The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that the pipeline stops or restarts the processing of jobs.
 --
 --
--- Changing the pipeline status is useful if you want to cancel one or more jobs. You can't cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a 'CancelJob' request.
+-- Changing the pipeline status is useful if you want to cancel one or more jobs. You can't cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a 'CancelJob' request. 
 --
 module Network.AWS.ElasticTranscoder.UpdatePipelineStatus
     (
@@ -52,11 +52,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updatePipelineStatus' smart constructor.
-data UpdatePipelineStatus = UpdatePipelineStatus'
-  { _upsId     :: !Text
-  , _upsStatus :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePipelineStatus = UpdatePipelineStatus'{_upsId
+                                                  :: !Text,
+                                                  _upsStatus :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePipelineStatus' with the minimum fields required to make a request.
 --
@@ -69,9 +68,9 @@ updatePipelineStatus
     :: Text -- ^ 'upsId'
     -> Text -- ^ 'upsStatus'
     -> UpdatePipelineStatus
-updatePipelineStatus pId_ pStatus_ =
-  UpdatePipelineStatus' {_upsId = pId_, _upsStatus = pStatus_}
-
+updatePipelineStatus pId_ pStatus_
+  = UpdatePipelineStatus'{_upsId = pId_,
+                          _upsStatus = pStatus_}
 
 -- | The identifier of the pipeline to update.
 upsId :: Lens' UpdatePipelineStatus Text
@@ -115,11 +114,14 @@ instance ToQuery UpdatePipelineStatus where
 --
 --
 -- /See:/ 'updatePipelineStatusResponse' smart constructor.
-data UpdatePipelineStatusResponse = UpdatePipelineStatusResponse'
-  { _upsrsPipeline       :: !(Maybe Pipeline)
-  , _upsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePipelineStatusResponse = UpdatePipelineStatusResponse'{_upsrsPipeline
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Pipeline),
+                                                                  _upsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdatePipelineStatusResponse' with the minimum fields required to make a request.
 --
@@ -131,10 +133,10 @@ data UpdatePipelineStatusResponse = UpdatePipelineStatusResponse'
 updatePipelineStatusResponse
     :: Int -- ^ 'upsrsResponseStatus'
     -> UpdatePipelineStatusResponse
-updatePipelineStatusResponse pResponseStatus_ =
-  UpdatePipelineStatusResponse'
-    {_upsrsPipeline = Nothing, _upsrsResponseStatus = pResponseStatus_}
-
+updatePipelineStatusResponse pResponseStatus_
+  = UpdatePipelineStatusResponse'{_upsrsPipeline =
+                                    Nothing,
+                                  _upsrsResponseStatus = pResponseStatus_}
 
 -- | A section of the response body that provides information about the pipeline.
 upsrsPipeline :: Lens' UpdatePipelineStatusResponse (Maybe Pipeline)

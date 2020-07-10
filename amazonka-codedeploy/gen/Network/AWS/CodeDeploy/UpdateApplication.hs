@@ -47,11 +47,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateApplication' smart constructor.
-data UpdateApplication = UpdateApplication'
-  { _uaNewApplicationName :: !(Maybe Text)
-  , _uaApplicationName    :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplication = UpdateApplication'{_uaNewApplicationName
+                                            :: !(Maybe Text),
+                                            _uaApplicationName :: !(Maybe Text)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateApplication' with the minimum fields required to make a request.
 --
@@ -62,10 +61,9 @@ data UpdateApplication = UpdateApplication'
 -- * 'uaApplicationName' - The current name of the application you want to change.
 updateApplication
     :: UpdateApplication
-updateApplication =
-  UpdateApplication'
-    {_uaNewApplicationName = Nothing, _uaApplicationName = Nothing}
-
+updateApplication
+  = UpdateApplication'{_uaNewApplicationName = Nothing,
+                       _uaApplicationName = Nothing}
 
 -- | The new name to give the application.
 uaNewApplicationName :: Lens' UpdateApplication (Maybe Text)
@@ -108,16 +106,15 @@ instance ToQuery UpdateApplication where
         toQuery = const mempty
 
 -- | /See:/ 'updateApplicationResponse' smart constructor.
-data UpdateApplicationResponse =
-  UpdateApplicationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplicationResponse = UpdateApplicationResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateApplicationResponse' with the minimum fields required to make a request.
 --
 updateApplicationResponse
     :: UpdateApplicationResponse
-updateApplicationResponse = UpdateApplicationResponse'
-
+updateApplicationResponse
+  = UpdateApplicationResponse'
 
 instance NFData UpdateApplicationResponse where

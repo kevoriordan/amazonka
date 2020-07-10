@@ -56,14 +56,20 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateIntegrationResponse' smart constructor.
-data UpdateIntegrationResponse = UpdateIntegrationResponse'
-  { _uiPatchOperations :: !(Maybe [PatchOperation])
-  , _uiRestAPIId       :: !Text
-  , _uiResourceId      :: !Text
-  , _uiHttpMethod      :: !Text
-  , _uiStatusCode      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateIntegrationResponse = UpdateIntegrationResponse'{_uiPatchOperations
+                                                            ::
+                                                            !(Maybe
+                                                                [PatchOperation]),
+                                                            _uiRestAPIId ::
+                                                            !Text,
+                                                            _uiResourceId ::
+                                                            !Text,
+                                                            _uiHttpMethod ::
+                                                            !Text,
+                                                            _uiStatusCode ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateIntegrationResponse' with the minimum fields required to make a request.
 --
@@ -84,15 +90,14 @@ updateIntegrationResponse
     -> Text -- ^ 'uiHttpMethod'
     -> Text -- ^ 'uiStatusCode'
     -> UpdateIntegrationResponse
-updateIntegrationResponse pRestAPIId_ pResourceId_ pHttpMethod_ pStatusCode_ =
-  UpdateIntegrationResponse'
-    { _uiPatchOperations = Nothing
-    , _uiRestAPIId = pRestAPIId_
-    , _uiResourceId = pResourceId_
-    , _uiHttpMethod = pHttpMethod_
-    , _uiStatusCode = pStatusCode_
-    }
-
+updateIntegrationResponse pRestAPIId_ pResourceId_
+  pHttpMethod_ pStatusCode_
+  = UpdateIntegrationResponse'{_uiPatchOperations =
+                                 Nothing,
+                               _uiRestAPIId = pRestAPIId_,
+                               _uiResourceId = pResourceId_,
+                               _uiHttpMethod = pHttpMethod_,
+                               _uiStatusCode = pStatusCode_}
 
 -- | A list of update operations to be applied to the specified resource and in the order specified in this list.
 uiPatchOperations :: Lens' UpdateIntegrationResponse [PatchOperation]

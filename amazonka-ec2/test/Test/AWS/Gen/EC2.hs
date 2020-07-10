@@ -14,11 +14,11 @@
 module Test.AWS.Gen.EC2 where
 
 import Data.Proxy
-import Network.AWS.EC2
-import Test.AWS.EC2.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.EC2
+import Test.AWS.EC2.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,7 +28,13 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestImportInstance $
+--         [ requestModifyCapacityReservation $
+--             modifyCapacityReservation
+--
+--         , requestGetAssociatedIPv6PoolCidrs $
+--             getAssociatedIPv6PoolCidrs
+--
+--         , requestImportInstance $
 --             importInstance
 --
 --         , requestRevokeSecurityGroupEgress $
@@ -36,6 +42,9 @@ import Test.Tasty
 --
 --         , requestCreateNetworkInterfacePermission $
 --             createNetworkInterfacePermission
+--
+--         , requestSendDiagnosticInterrupt $
+--             sendDiagnosticInterrupt
 --
 --         , requestDeleteLaunchTemplate $
 --             deleteLaunchTemplate
@@ -61,6 +70,12 @@ import Test.Tasty
 --         , requestDescribeTags $
 --             describeTags
 --
+--         , requestCreateTransitGatewayRouteTable $
+--             createTransitGatewayRouteTable
+--
+--         , requestModifyInstanceMetadataOptions $
+--             modifyInstanceMetadataOptions
+--
 --         , requestUpdateSecurityGroupRuleDescriptionsIngress $
 --             updateSecurityGroupRuleDescriptionsIngress
 --
@@ -76,11 +91,17 @@ import Test.Tasty
 --         , requestDeleteVPCEndpoints $
 --             deleteVPCEndpoints
 --
+--         , requestDescribeClientVPNEndpoints $
+--             describeClientVPNEndpoints
+--
 --         , requestDeleteFlowLogs $
 --             deleteFlowLogs
 --
 --         , requestDescribeVPCClassicLink $
 --             describeVPCClassicLink
+--
+--         , requestAssociateTransitGatewayMulticastDomain $
+--             associateTransitGatewayMulticastDomain
 --
 --         , requestModifySubnetAttribute $
 --             modifySubnetAttribute
@@ -94,11 +115,17 @@ import Test.Tasty
 --         , requestCancelBundleTask $
 --             cancelBundleTask
 --
+--         , requestDescribeByoipCidrs $
+--             describeByoipCidrs
+--
 --         , requestAcceptReservedInstancesExchangeQuote $
 --             acceptReservedInstancesExchangeQuote
 --
 --         , requestReleaseAddress $
 --             releaseAddress
+--
+--         , requestDescribeInstanceTypeOfferings $
+--             describeInstanceTypeOfferings
 --
 --         , requestCreateInternetGateway $
 --             createInternetGateway
@@ -112,11 +139,23 @@ import Test.Tasty
 --         , requestAuthorizeSecurityGroupEgress $
 --             authorizeSecurityGroupEgress
 --
+--         , requestEnableTransitGatewayRouteTablePropagation $
+--             enableTransitGatewayRouteTablePropagation
+--
 --         , requestDeregisterImage $
 --             deregisterImage
 --
 --         , requestDeleteVPCEndpointConnectionNotifications $
 --             deleteVPCEndpointConnectionNotifications
+--
+--         , requestDescribeCoipPools $
+--             describeCoipPools
+--
+--         , requestGetTransitGatewayMulticastDomainAssociations $
+--             getTransitGatewayMulticastDomainAssociations
+--
+--         , requestDeleteLocalGatewayRouteTableVPCAssociation $
+--             deleteLocalGatewayRouteTableVPCAssociation
 --
 --         , requestModifyNetworkInterfaceAttribute $
 --             modifyNetworkInterfaceAttribute
@@ -124,11 +163,26 @@ import Test.Tasty
 --         , requestModifyVPCTenancy $
 --             modifyVPCTenancy
 --
+--         , requestDescribeInstanceTypes $
+--             describeInstanceTypes
+--
+--         , requestDescribeClientVPNAuthorizationRules $
+--             describeClientVPNAuthorizationRules
+--
+--         , requestDeleteTransitGatewayVPCAttachment $
+--             deleteTransitGatewayVPCAttachment
+--
+--         , requestDeleteTransitGatewayMulticastDomain $
+--             deleteTransitGatewayMulticastDomain
+--
 --         , requestCancelReservedInstancesListing $
 --             cancelReservedInstancesListing
 --
 --         , requestAttachClassicLinkVPC $
 --             attachClassicLinkVPC
+--
+--         , requestDisableTransitGatewayRouteTablePropagation $
+--             disableTransitGatewayRouteTablePropagation
 --
 --         , requestDescribeVPCClassicLinkDNSSupport $
 --             describeVPCClassicLinkDNSSupport
@@ -138,6 +192,9 @@ import Test.Tasty
 --
 --         , requestRunScheduledInstances $
 --             runScheduledInstances
+--
+--         , requestCreateTransitGatewayRoute $
+--             createTransitGatewayRoute
 --
 --         , requestCancelSpotFleetRequests $
 --             cancelSpotFleetRequests
@@ -151,11 +208,23 @@ import Test.Tasty
 --         , requestImportImage $
 --             importImage
 --
+--         , requestCreateLocalGatewayRouteTableVPCAssociation $
+--             createLocalGatewayRouteTableVPCAssociation
+--
 --         , requestCopyFpgaImage $
 --             copyFpgaImage
 --
+--         , requestImportClientVPNClientCertificateRevocationList $
+--             importClientVPNClientCertificateRevocationList
+--
 --         , requestStopInstances $
 --             stopInstances
+--
+--         , requestEnableEBSEncryptionByDefault $
+--             enableEBSEncryptionByDefault
+--
+--         , requestDeregisterTransitGatewayMulticastGroupSources $
+--             deregisterTransitGatewayMulticastGroupSources
 --
 --         , requestModifyLaunchTemplate $
 --             modifyLaunchTemplate
@@ -199,6 +268,9 @@ import Test.Tasty
 --         , requestDescribeVPCEndpointServices $
 --             describeVPCEndpointServices
 --
+--         , requestDeleteLocalGatewayRoute $
+--             deleteLocalGatewayRoute
+--
 --         , requestAuthorizeSecurityGroupIngress $
 --             authorizeSecurityGroupIngress
 --
@@ -207,6 +279,9 @@ import Test.Tasty
 --
 --         , requestDescribeSubnets $
 --             describeSubnets
+--
+--         , requestGetTransitGatewayAttachmentPropagations $
+--             getTransitGatewayAttachmentPropagations
 --
 --         , requestCreateTags $
 --             createTags
@@ -223,6 +298,9 @@ import Test.Tasty
 --         , requestDescribeVPNConnections $
 --             describeVPNConnections
 --
+--         , requestModifyInstanceEventStartTime $
+--             modifyInstanceEventStartTime
+--
 --         , requestDeleteRoute $
 --             deleteRoute
 --
@@ -232,6 +310,9 @@ import Test.Tasty
 --         , requestDescribeVPCEndpoints $
 --             describeVPCEndpoints
 --
+--         , requestCreateTrafficMirrorFilter $
+--             createTrafficMirrorFilter
+--
 --         , requestResetInstanceAttribute $
 --             resetInstanceAttribute
 --
@@ -240,6 +321,9 @@ import Test.Tasty
 --
 --         , requestAttachNetworkInterface $
 --             attachNetworkInterface
+--
+--         , requestCreateCapacityReservation $
+--             createCapacityReservation
 --
 --         , requestDescribeInstanceStatus $
 --             describeInstanceStatus
@@ -265,8 +349,17 @@ import Test.Tasty
 --         , requestDescribeFleets $
 --             describeFleets
 --
+--         , requestCreateTransitGatewayPeeringAttachment $
+--             createTransitGatewayPeeringAttachment
+--
 --         , requestDeleteSecurityGroup $
 --             deleteSecurityGroup
+--
+--         , requestDescribePublicIPv4Pools $
+--             describePublicIPv4Pools
+--
+--         , requestDescribeClientVPNTargetNetworks $
+--             describeClientVPNTargetNetworks
 --
 --         , requestDeleteVPCPeeringConnection $
 --             deleteVPCPeeringConnection
@@ -280,14 +373,26 @@ import Test.Tasty
 --         , requestDescribeFlowLogs $
 --             describeFlowLogs
 --
+--         , requestDescribeLocalGatewayVirtualInterfaceGroups $
+--             describeLocalGatewayVirtualInterfaceGroups
+--
+--         , requestDescribeLocalGatewayRouteTableVPCAssociations $
+--             describeLocalGatewayRouteTableVPCAssociations
+--
 --         , requestDescribeVPCEndpointConnectionNotifications $
 --             describeVPCEndpointConnectionNotifications
 --
 --         , requestRunInstances $
 --             runInstances
 --
+--         , requestCreateSnapshots $
+--             createSnapshots
+--
 --         , requestAssociateDHCPOptions $
 --             associateDHCPOptions
+--
+--         , requestDeleteTrafficMirrorFilterRule $
+--             deleteTrafficMirrorFilterRule
 --
 --         , requestDescribeReservedInstances $
 --             describeReservedInstances
@@ -307,8 +412,17 @@ import Test.Tasty
 --         , requestDisableVPCClassicLinkDNSSupport $
 --             disableVPCClassicLinkDNSSupport
 --
+--         , requestApplySecurityGroupsToClientVPNTargetNetwork $
+--             applySecurityGroupsToClientVPNTargetNetwork
+--
+--         , requestDescribeTrafficMirrorTargets $
+--             describeTrafficMirrorTargets
+--
 --         , requestDescribeVolumesModifications $
 --             describeVolumesModifications
+--
+--         , requestExportImage $
+--             exportImage
 --
 --         , requestCreateFpgaImage $
 --             createFpgaImage
@@ -316,11 +430,20 @@ import Test.Tasty
 --         , requestAcceptVPCEndpointConnections $
 --             acceptVPCEndpointConnections
 --
+--         , requestDeleteClientVPNEndpoint $
+--             deleteClientVPNEndpoint
+--
+--         , requestSearchTransitGatewayRoutes $
+--             searchTransitGatewayRoutes
+--
 --         , requestGetLaunchTemplateData $
 --             getLaunchTemplateData
 --
 --         , requestAllocateAddress $
 --             allocateAddress
+--
+--         , requestAcceptTransitGatewayVPCAttachment $
+--             acceptTransitGatewayVPCAttachment
 --
 --         , requestCancelConversionTask $
 --             cancelConversionTask
@@ -331,6 +454,9 @@ import Test.Tasty
 --         , requestCreateRouteTable $
 --             createRouteTable
 --
+--         , requestRejectTransitGatewayPeeringAttachment $
+--             rejectTransitGatewayPeeringAttachment
+--
 --         , requestReportInstanceStatus $
 --             reportInstanceStatus
 --
@@ -340,17 +466,35 @@ import Test.Tasty
 --         , requestRequestSpotInstances $
 --             requestSpotInstances
 --
+--         , requestWithdrawByoipCidr $
+--             withdrawByoipCidr
+--
 --         , requestDescribeHostReservationOfferings $
 --             describeHostReservationOfferings
 --
 --         , requestResetFpgaImageAttribute $
 --             resetFpgaImageAttribute
 --
+--         , requestModifyVPNConnection $
+--             modifyVPNConnection
+--
+--         , requestCreateTrafficMirrorFilterRule $
+--             createTrafficMirrorFilterRule
+--
+--         , requestDeleteTransitGateway $
+--             deleteTransitGateway
+--
+--         , requestStartVPCEndpointServicePrivateDNSVerification $
+--             startVPCEndpointServicePrivateDNSVerification
+--
 --         , requestDescribeVolumes $
 --             describeVolumes
 --
 --         , requestRejectVPCPeeringConnection $
 --             rejectVPCPeeringConnection
+--
+--         , requestDescribeClientVPNRoutes $
+--             describeClientVPNRoutes
 --
 --         , requestDeleteVPNConnectionRoute $
 --             deleteVPNConnectionRoute
@@ -364,14 +508,26 @@ import Test.Tasty
 --         , requestAllocateHosts $
 --             allocateHosts
 --
+--         , requestCreateClientVPNEndpoint $
+--             createClientVPNEndpoint
+--
+--         , requestCreateTrafficMirrorSession $
+--             createTrafficMirrorSession
+--
 --         , requestRegisterImage $
 --             registerImage
+--
+--         , requestAdvertiseByoipCidr $
+--             advertiseByoipCidr
 --
 --         , requestModifyFleet $
 --             modifyFleet
 --
 --         , requestRevokeSecurityGroupIngress $
 --             revokeSecurityGroupIngress
+--
+--         , requestGetEBSDefaultKMSKeyId $
+--             getEBSDefaultKMSKeyId
 --
 --         , requestDescribeHostReservations $
 --             describeHostReservations
@@ -391,8 +547,14 @@ import Test.Tasty
 --         , requestDeleteFpgaImage $
 --             deleteFpgaImage
 --
+--         , requestDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations $
+--             describeLocalGatewayRouteTableVirtualInterfaceGroupAssociations
+--
 --         , requestDescribeScheduledInstances $
 --             describeScheduledInstances
+--
+--         , requestSearchTransitGatewayMulticastGroups $
+--             searchTransitGatewayMulticastGroups
 --
 --         , requestCreateFlowLogs $
 --             createFlowLogs
@@ -415,8 +577,17 @@ import Test.Tasty
 --         , requestDescribePrincipalIdFormat $
 --             describePrincipalIdFormat
 --
+--         , requestDescribeTransitGateways $
+--             describeTransitGateways
+--
 --         , requestDeleteNetworkACL $
 --             deleteNetworkACL
+--
+--         , requestDisassociateTransitGatewayMulticastDomain $
+--             disassociateTransitGatewayMulticastDomain
+--
+--         , requestDeleteTransitGatewayRouteTable $
+--             deleteTransitGatewayRouteTable
 --
 --         , requestCreateLaunchTemplate $
 --             createLaunchTemplate
@@ -430,6 +601,9 @@ import Test.Tasty
 --         , requestDeleteVPNGateway $
 --             deleteVPNGateway
 --
+--         , requestCreateTrafficMirrorTarget $
+--             createTrafficMirrorTarget
+--
 --         , requestDescribeImportImageTasks $
 --             describeImportImageTasks
 --
@@ -438,6 +612,9 @@ import Test.Tasty
 --
 --         , requestDescribeMovingAddresses $
 --             describeMovingAddresses
+--
+--         , requestExportTransitGatewayRoutes $
+--             exportTransitGatewayRoutes
 --
 --         , requestGetPasswordData $
 --             getPasswordData
@@ -454,8 +631,14 @@ import Test.Tasty
 --         , requestCopySnapshot $
 --             copySnapshot
 --
+--         , requestAcceptTransitGatewayPeeringAttachment $
+--             acceptTransitGatewayPeeringAttachment
+--
 --         , requestDisassociateAddress $
 --             disassociateAddress
+--
+--         , requestModifyTrafficMirrorFilterNetworkServices $
+--             modifyTrafficMirrorFilterNetworkServices
 --
 --         , requestDescribeEgressOnlyInternetGateways $
 --             describeEgressOnlyInternetGateways
@@ -465,6 +648,15 @@ import Test.Tasty
 --
 --         , requestCreateInstanceExportTask $
 --             createInstanceExportTask
+--
+--         , requestRejectTransitGatewayVPCAttachment $
+--             rejectTransitGatewayVPCAttachment
+--
+--         , requestDescribeTrafficMirrorSessions $
+--             describeTrafficMirrorSessions
+--
+--         , requestGetTransitGatewayRouteTableAssociations $
+--             getTransitGatewayRouteTableAssociations
 --
 --         , requestAssociateVPCCidrBlock $
 --             associateVPCCidrBlock
@@ -481,20 +673,53 @@ import Test.Tasty
 --         , requestDescribeScheduledInstanceAvailability $
 --             describeScheduledInstanceAvailability
 --
+--         , requestDisassociateClientVPNTargetNetwork $
+--             disassociateClientVPNTargetNetwork
+--
+--         , requestCreateClientVPNRoute $
+--             createClientVPNRoute
+--
 --         , requestModifyVolumeAttribute $
 --             modifyVolumeAttribute
+--
+--         , requestExportClientVPNClientConfiguration $
+--             exportClientVPNClientConfiguration
+--
+--         , requestDeleteTrafficMirrorTarget $
+--             deleteTrafficMirrorTarget
 --
 --         , requestDescribeSpotDatafeedSubscription $
 --             describeSpotDatafeedSubscription
 --
+--         , requestDescribeLocalGatewayRouteTables $
+--             describeLocalGatewayRouteTables
+--
 --         , requestDescribePrefixLists $
 --             describePrefixLists
+--
+--         , requestAssociateTransitGatewayRouteTable $
+--             associateTransitGatewayRouteTable
 --
 --         , requestDeletePlacementGroup $
 --             deletePlacementGroup
 --
+--         , requestCreateTransitGatewayMulticastDomain $
+--             createTransitGatewayMulticastDomain
+--
+--         , requestDeregisterInstanceEventNotificationAttributes $
+--             deregisterInstanceEventNotificationAttributes
+--
 --         , requestRequestSpotFleet $
 --             requestSpotFleet
+--
+--         , requestDeleteTransitGatewayRoute $
+--             deleteTransitGatewayRoute
+--
+--         , requestDisableEBSEncryptionByDefault $
+--             disableEBSEncryptionByDefault
+--
+--         , requestDeregisterTransitGatewayMulticastGroupMembers $
+--             deregisterTransitGatewayMulticastGroupMembers
 --
 --         , requestCreateSubnet $
 --             createSubnet
@@ -504,6 +729,12 @@ import Test.Tasty
 --
 --         , requestDescribeSecurityGroups $
 --             describeSecurityGroups
+--
+--         , requestGetCapacityReservationUsage $
+--             getCapacityReservationUsage
+--
+--         , requestCreateTransitGatewayVPCAttachment $
+--             createTransitGatewayVPCAttachment
 --
 --         , requestDescribeExportTasks $
 --             describeExportTasks
@@ -526,6 +757,9 @@ import Test.Tasty
 --         , requestCreateNatGateway $
 --             createNatGateway
 --
+--         , requestDescribeLocalGatewayVirtualInterfaces $
+--             describeLocalGatewayVirtualInterfaces
+--
 --         , requestDescribeVPCPeeringConnections $
 --             describeVPCPeeringConnections
 --
@@ -541,8 +775,20 @@ import Test.Tasty
 --         , requestDisassociateVPCCidrBlock $
 --             disassociateVPCCidrBlock
 --
+--         , requestDescribeTrafficMirrorFilters $
+--             describeTrafficMirrorFilters
+--
+--         , requestDescribeFastSnapshotRestores $
+--             describeFastSnapshotRestores
+--
+--         , requestCancelCapacityReservation $
+--             cancelCapacityReservation
+--
 --         , requestDeleteNetworkInterface $
 --             deleteNetworkInterface
+--
+--         , requestDisassociateTransitGatewayRouteTable $
+--             disassociateTransitGatewayRouteTable
 --
 --         , requestReplaceRouteTableAssociation $
 --             replaceRouteTableAssociation
@@ -553,6 +799,18 @@ import Test.Tasty
 --         , requestCreatePlacementGroup $
 --             createPlacementGroup
 --
+--         , requestDescribeInstanceEventNotificationAttributes $
+--             describeInstanceEventNotificationAttributes
+--
+--         , requestDescribeCapacityReservations $
+--             describeCapacityReservations
+--
+--         , requestModifyClientVPNEndpoint $
+--             modifyClientVPNEndpoint
+--
+--         , requestModifyInstanceCapacityReservationAttributes $
+--             modifyInstanceCapacityReservationAttributes
+--
 --         , requestDescribeAggregateIdFormat $
 --             describeAggregateIdFormat
 --
@@ -562,11 +820,17 @@ import Test.Tasty
 --         , requestAssociateAddress $
 --             associateAddress
 --
+--         , requestModifyTrafficMirrorFilterRule $
+--             modifyTrafficMirrorFilterRule
+--
 --         , requestDescribeNetworkInterfaceAttribute $
 --             describeNetworkInterfaceAttribute
 --
 --         , requestReplaceIAMInstanceProfileAssociation $
 --             replaceIAMInstanceProfileAssociation
+--
+--         , requestAssociateClientVPNTargetNetwork $
+--             associateClientVPNTargetNetwork
 --
 --         , requestReleaseHosts $
 --             releaseHosts
@@ -583,6 +847,9 @@ import Test.Tasty
 --         , requestCreateVPNConnection $
 --             createVPNConnection
 --
+--         , requestReplaceTransitGatewayRoute $
+--             replaceTransitGatewayRoute
+--
 --         , requestCreateFleet $
 --             createFleet
 --
@@ -591,6 +858,9 @@ import Test.Tasty
 --
 --         , requestDescribeImportSnapshotTasks $
 --             describeImportSnapshotTasks
+--
+--         , requestGetCoipPoolUsage $
+--             getCoipPoolUsage
 --
 --         , requestDescribeCustomerGateways $
 --             describeCustomerGateways
@@ -604,17 +874,44 @@ import Test.Tasty
 --         , requestCreateVPCEndpoint $
 --             createVPCEndpoint
 --
+--         , requestModifyTrafficMirrorSession $
+--             modifyTrafficMirrorSession
+--
+--         , requestDescribeTransitGatewayPeeringAttachments $
+--             describeTransitGatewayPeeringAttachments
+--
+--         , requestDeleteQueuedReservedInstances $
+--             deleteQueuedReservedInstances
+--
+--         , requestDescribeTransitGatewayMulticastDomains $
+--             describeTransitGatewayMulticastDomains
+--
+--         , requestGetDefaultCreditSpecification $
+--             getDefaultCreditSpecification
+--
 --         , requestUnmonitorInstances $
 --             unmonitorInstances
 --
+--         , requestDescribeTransitGatewayVPCAttachments $
+--             describeTransitGatewayVPCAttachments
+--
 --         , requestCreateSecurityGroup $
 --             createSecurityGroup
+--
+--         , requestGetEBSEncryptionByDefault $
+--             getEBSEncryptionByDefault
 --
 --         , requestImportVolume $
 --             importVolume
 --
 --         , requestDisableVGWRoutePropagation $
 --             disableVGWRoutePropagation
+--
+--         , requestDeleteTrafficMirrorFilter $
+--             deleteTrafficMirrorFilter
+--
+--         , requestModifyVPNTunnelCertificate $
+--             modifyVPNTunnelCertificate
 --
 --         , requestCreateSpotDatafeedSubscription $
 --             createSpotDatafeedSubscription
@@ -634,6 +931,12 @@ import Test.Tasty
 --         , requestAssignPrivateIPAddresses $
 --             assignPrivateIPAddresses
 --
+--         , requestAuthorizeClientVPNIngress $
+--             authorizeClientVPNIngress
+--
+--         , requestDeleteTransitGatewayPeeringAttachment $
+--             deleteTransitGatewayPeeringAttachment
+--
 --         , requestModifyInstanceAttribute $
 --             modifyInstanceAttribute
 --
@@ -643,14 +946,26 @@ import Test.Tasty
 --         , requestDisassociateIAMInstanceProfile $
 --             disassociateIAMInstanceProfile
 --
+--         , requestTerminateClientVPNConnections $
+--             terminateClientVPNConnections
+--
 --         , requestDisassociateRouteTable $
 --             disassociateRouteTable
 --
 --         , requestGetConsoleScreenshot $
 --             getConsoleScreenshot
 --
+--         , requestResetEBSDefaultKMSKeyId $
+--             resetEBSDefaultKMSKeyId
+--
 --         , requestAssignIPv6Addresses $
 --             assignIPv6Addresses
+--
+--         , requestModifyVPNTunnelOptions $
+--             modifyVPNTunnelOptions
+--
+--         , requestModifyEBSDefaultKMSKeyId $
+--             modifyEBSDefaultKMSKeyId
 --
 --         , requestDeleteSpotDatafeedSubscription $
 --             deleteSpotDatafeedSubscription
@@ -664,8 +979,17 @@ import Test.Tasty
 --         , requestDescribePlacementGroups $
 --             describePlacementGroups
 --
+--         , requestProvisionByoipCidr $
+--             provisionByoipCidr
+--
+--         , requestModifyAvailabilityZoneGroup $
+--             modifyAvailabilityZoneGroup
+--
 --         , requestDescribeStaleSecurityGroups $
 --             describeStaleSecurityGroups
+--
+--         , requestDescribeExportImageTasks $
+--             describeExportImageTasks
 --
 --         , requestPurchaseScheduledInstances $
 --             purchaseScheduledInstances
@@ -685,23 +1009,44 @@ import Test.Tasty
 --         , requestCreateSnapshot $
 --             createSnapshot
 --
+--         , requestCreateLocalGatewayRoute $
+--             createLocalGatewayRoute
+--
 --         , requestCreateNetworkACLEntry $
 --             createNetworkACLEntry
+--
+--         , requestDescribeTransitGatewayAttachments $
+--             describeTransitGatewayAttachments
 --
 --         , requestCreateReservedInstancesListing $
 --             createReservedInstancesListing
 --
+--         , requestDescribeIPv6Pools $
+--             describeIPv6Pools
+--
 --         , requestAttachVPNGateway $
 --             attachVPNGateway
+--
+--         , requestDescribeLocalGateways $
+--             describeLocalGateways
 --
 --         , requestModifyVPCEndpointServicePermissions $
 --             modifyVPCEndpointServicePermissions
 --
+--         , requestExportClientVPNClientCertificateRevocationList $
+--             exportClientVPNClientCertificateRevocationList
+--
 --         , requestCreateDHCPOptions $
 --             createDHCPOptions
 --
+--         , requestRegisterTransitGatewayMulticastGroupSources $
+--             registerTransitGatewayMulticastGroupSources
+--
 --         , requestDescribeAccountAttributes $
 --             describeAccountAttributes
+--
+--         , requestGetTransitGatewayRouteTablePropagations $
+--             getTransitGatewayRouteTablePropagations
 --
 --         , requestModifyFpgaImageAttribute $
 --             modifyFpgaImageAttribute
@@ -715,17 +1060,29 @@ import Test.Tasty
 --         , requestModifyVPCEndpointServiceConfiguration $
 --             modifyVPCEndpointServiceConfiguration
 --
+--         , requestCreateTransitGateway $
+--             createTransitGateway
+--
 --         , requestUnassignIPv6Addresses $
 --             unassignIPv6Addresses
 --
+--         , requestDeleteTrafficMirrorSession $
+--             deleteTrafficMirrorSession
+--
 --         , requestAssociateIAMInstanceProfile $
 --             associateIAMInstanceProfile
+--
+--         , requestModifyDefaultCreditSpecification $
+--             modifyDefaultCreditSpecification
 --
 --         , requestDeleteEgressOnlyInternetGateway $
 --             deleteEgressOnlyInternetGateway
 --
 --         , requestPurchaseHostReservation $
 --             purchaseHostReservation
+--
+--         , requestModifyTransitGatewayVPCAttachment $
+--             modifyTransitGatewayVPCAttachment
 --
 --         , requestCreateImage $
 --             createImage
@@ -738,6 +1095,9 @@ import Test.Tasty
 --
 --         , requestDescribeKeyPairs $
 --             describeKeyPairs
+--
+--         , requestDisableFastSnapshotRestores $
+--             disableFastSnapshotRestores
 --
 --         , requestDescribeLaunchTemplates $
 --             describeLaunchTemplates
@@ -763,11 +1123,17 @@ import Test.Tasty
 --         , requestModifyIdFormat $
 --             modifyIdFormat
 --
+--         , requestRegisterTransitGatewayMulticastGroupMembers $
+--             registerTransitGatewayMulticastGroupMembers
+--
 --         , requestDeleteRouteTable $
 --             deleteRouteTable
 --
 --         , requestResetImageAttribute $
 --             resetImageAttribute
+--
+--         , requestDescribeTransitGatewayRouteTables $
+--             describeTransitGatewayRouteTables
 --
 --         , requestCreateEgressOnlyInternetGateway $
 --             createEgressOnlyInternetGateway
@@ -778,17 +1144,26 @@ import Test.Tasty
 --         , requestDescribeSpotInstanceRequests $
 --             describeSpotInstanceRequests
 --
+--         , requestRevokeClientVPNIngress $
+--             revokeClientVPNIngress
+--
 --         , requestUnassignPrivateIPAddresses $
 --             unassignPrivateIPAddresses
 --
 --         , requestDescribeNetworkInterfacePermissions $
 --             describeNetworkInterfacePermissions
 --
+--         , requestEnableFastSnapshotRestores $
+--             enableFastSnapshotRestores
+--
 --         , requestDescribeVPCEndpointServicePermissions $
 --             describeVPCEndpointServicePermissions
 --
 --         , requestDeleteDHCPOptions $
 --             deleteDHCPOptions
+--
+--         , requestRegisterInstanceEventNotificationAttributes $
+--             registerInstanceEventNotificationAttributes
 --
 --         , requestDescribeNetworkACLs $
 --             describeNetworkACLs
@@ -804,6 +1179,12 @@ import Test.Tasty
 --
 --         , requestMonitorInstances $
 --             monitorInstances
+--
+--         , requestSearchLocalGatewayRoutes $
+--             searchLocalGatewayRoutes
+--
+--         , requestDeleteClientVPNRoute $
+--             deleteClientVPNRoute
 --
 --         , requestAcceptVPCPeeringConnection $
 --             acceptVPCPeeringConnection
@@ -822,6 +1203,9 @@ import Test.Tasty
 --
 --         , requestModifyVPCAttribute $
 --             modifyVPCAttribute
+--
+--         , requestDescribeClientVPNConnections $
+--             describeClientVPNConnections
 --
 --         , requestDescribeFleetHistory $
 --             describeFleetHistory
@@ -844,6 +1228,9 @@ import Test.Tasty
 --         , requestDeleteVolume $
 --             deleteVolume
 --
+--         , requestDeprovisionByoipCidr $
+--             deprovisionByoipCidr
+--
 --         , requestDeleteVPCEndpointServiceConfigurations $
 --             deleteVPCEndpointServiceConfigurations
 --
@@ -853,7 +1240,13 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseImportInstance $
+--         [ responseModifyCapacityReservation $
+--             modifyCapacityReservationResponse
+--
+--         , responseGetAssociatedIPv6PoolCidrs $
+--             getAssociatedIPv6PoolCidrsResponse
+--
+--         , responseImportInstance $
 --             importInstanceResponse
 --
 --         , responseRevokeSecurityGroupEgress $
@@ -861,6 +1254,9 @@ import Test.Tasty
 --
 --         , responseCreateNetworkInterfacePermission $
 --             createNetworkInterfacePermissionResponse
+--
+--         , responseSendDiagnosticInterrupt $
+--             sendDiagnosticInterruptResponse
 --
 --         , responseDeleteLaunchTemplate $
 --             deleteLaunchTemplateResponse
@@ -886,6 +1282,12 @@ import Test.Tasty
 --         , responseDescribeTags $
 --             describeTagsResponse
 --
+--         , responseCreateTransitGatewayRouteTable $
+--             createTransitGatewayRouteTableResponse
+--
+--         , responseModifyInstanceMetadataOptions $
+--             modifyInstanceMetadataOptionsResponse
+--
 --         , responseUpdateSecurityGroupRuleDescriptionsIngress $
 --             updateSecurityGroupRuleDescriptionsIngressResponse
 --
@@ -901,11 +1303,17 @@ import Test.Tasty
 --         , responseDeleteVPCEndpoints $
 --             deleteVPCEndpointsResponse
 --
+--         , responseDescribeClientVPNEndpoints $
+--             describeClientVPNEndpointsResponse
+--
 --         , responseDeleteFlowLogs $
 --             deleteFlowLogsResponse
 --
 --         , responseDescribeVPCClassicLink $
 --             describeVPCClassicLinkResponse
+--
+--         , responseAssociateTransitGatewayMulticastDomain $
+--             associateTransitGatewayMulticastDomainResponse
 --
 --         , responseModifySubnetAttribute $
 --             modifySubnetAttributeResponse
@@ -919,11 +1327,17 @@ import Test.Tasty
 --         , responseCancelBundleTask $
 --             cancelBundleTaskResponse
 --
+--         , responseDescribeByoipCidrs $
+--             describeByoipCidrsResponse
+--
 --         , responseAcceptReservedInstancesExchangeQuote $
 --             acceptReservedInstancesExchangeQuoteResponse
 --
 --         , responseReleaseAddress $
 --             releaseAddressResponse
+--
+--         , responseDescribeInstanceTypeOfferings $
+--             describeInstanceTypeOfferingsResponse
 --
 --         , responseCreateInternetGateway $
 --             createInternetGatewayResponse
@@ -937,11 +1351,23 @@ import Test.Tasty
 --         , responseAuthorizeSecurityGroupEgress $
 --             authorizeSecurityGroupEgressResponse
 --
+--         , responseEnableTransitGatewayRouteTablePropagation $
+--             enableTransitGatewayRouteTablePropagationResponse
+--
 --         , responseDeregisterImage $
 --             deregisterImageResponse
 --
 --         , responseDeleteVPCEndpointConnectionNotifications $
 --             deleteVPCEndpointConnectionNotificationsResponse
+--
+--         , responseDescribeCoipPools $
+--             describeCoipPoolsResponse
+--
+--         , responseGetTransitGatewayMulticastDomainAssociations $
+--             getTransitGatewayMulticastDomainAssociationsResponse
+--
+--         , responseDeleteLocalGatewayRouteTableVPCAssociation $
+--             deleteLocalGatewayRouteTableVPCAssociationResponse
 --
 --         , responseModifyNetworkInterfaceAttribute $
 --             modifyNetworkInterfaceAttributeResponse
@@ -949,11 +1375,26 @@ import Test.Tasty
 --         , responseModifyVPCTenancy $
 --             modifyVPCTenancyResponse
 --
+--         , responseDescribeInstanceTypes $
+--             describeInstanceTypesResponse
+--
+--         , responseDescribeClientVPNAuthorizationRules $
+--             describeClientVPNAuthorizationRulesResponse
+--
+--         , responseDeleteTransitGatewayVPCAttachment $
+--             deleteTransitGatewayVPCAttachmentResponse
+--
+--         , responseDeleteTransitGatewayMulticastDomain $
+--             deleteTransitGatewayMulticastDomainResponse
+--
 --         , responseCancelReservedInstancesListing $
 --             cancelReservedInstancesListingResponse
 --
 --         , responseAttachClassicLinkVPC $
 --             attachClassicLinkVPCResponse
+--
+--         , responseDisableTransitGatewayRouteTablePropagation $
+--             disableTransitGatewayRouteTablePropagationResponse
 --
 --         , responseDescribeVPCClassicLinkDNSSupport $
 --             describeVPCClassicLinkDNSSupportResponse
@@ -963,6 +1404,9 @@ import Test.Tasty
 --
 --         , responseRunScheduledInstances $
 --             runScheduledInstancesResponse
+--
+--         , responseCreateTransitGatewayRoute $
+--             createTransitGatewayRouteResponse
 --
 --         , responseCancelSpotFleetRequests $
 --             cancelSpotFleetRequestsResponse
@@ -976,11 +1420,23 @@ import Test.Tasty
 --         , responseImportImage $
 --             importImageResponse
 --
+--         , responseCreateLocalGatewayRouteTableVPCAssociation $
+--             createLocalGatewayRouteTableVPCAssociationResponse
+--
 --         , responseCopyFpgaImage $
 --             copyFpgaImageResponse
 --
+--         , responseImportClientVPNClientCertificateRevocationList $
+--             importClientVPNClientCertificateRevocationListResponse
+--
 --         , responseStopInstances $
 --             stopInstancesResponse
+--
+--         , responseEnableEBSEncryptionByDefault $
+--             enableEBSEncryptionByDefaultResponse
+--
+--         , responseDeregisterTransitGatewayMulticastGroupSources $
+--             deregisterTransitGatewayMulticastGroupSourcesResponse
 --
 --         , responseModifyLaunchTemplate $
 --             modifyLaunchTemplateResponse
@@ -1024,6 +1480,9 @@ import Test.Tasty
 --         , responseDescribeVPCEndpointServices $
 --             describeVPCEndpointServicesResponse
 --
+--         , responseDeleteLocalGatewayRoute $
+--             deleteLocalGatewayRouteResponse
+--
 --         , responseAuthorizeSecurityGroupIngress $
 --             authorizeSecurityGroupIngressResponse
 --
@@ -1032,6 +1491,9 @@ import Test.Tasty
 --
 --         , responseDescribeSubnets $
 --             describeSubnetsResponse
+--
+--         , responseGetTransitGatewayAttachmentPropagations $
+--             getTransitGatewayAttachmentPropagationsResponse
 --
 --         , responseCreateTags $
 --             createTagsResponse
@@ -1048,6 +1510,9 @@ import Test.Tasty
 --         , responseDescribeVPNConnections $
 --             describeVPNConnectionsResponse
 --
+--         , responseModifyInstanceEventStartTime $
+--             modifyInstanceEventStartTimeResponse
+--
 --         , responseDeleteRoute $
 --             deleteRouteResponse
 --
@@ -1057,6 +1522,9 @@ import Test.Tasty
 --         , responseDescribeVPCEndpoints $
 --             describeVPCEndpointsResponse
 --
+--         , responseCreateTrafficMirrorFilter $
+--             createTrafficMirrorFilterResponse
+--
 --         , responseResetInstanceAttribute $
 --             resetInstanceAttributeResponse
 --
@@ -1065,6 +1533,9 @@ import Test.Tasty
 --
 --         , responseAttachNetworkInterface $
 --             attachNetworkInterfaceResponse
+--
+--         , responseCreateCapacityReservation $
+--             createCapacityReservationResponse
 --
 --         , responseDescribeInstanceStatus $
 --             describeInstanceStatusResponse
@@ -1090,8 +1561,17 @@ import Test.Tasty
 --         , responseDescribeFleets $
 --             describeFleetsResponse
 --
+--         , responseCreateTransitGatewayPeeringAttachment $
+--             createTransitGatewayPeeringAttachmentResponse
+--
 --         , responseDeleteSecurityGroup $
 --             deleteSecurityGroupResponse
+--
+--         , responseDescribePublicIPv4Pools $
+--             describePublicIPv4PoolsResponse
+--
+--         , responseDescribeClientVPNTargetNetworks $
+--             describeClientVPNTargetNetworksResponse
 --
 --         , responseDeleteVPCPeeringConnection $
 --             deleteVPCPeeringConnectionResponse
@@ -1105,14 +1585,26 @@ import Test.Tasty
 --         , responseDescribeFlowLogs $
 --             describeFlowLogsResponse
 --
+--         , responseDescribeLocalGatewayVirtualInterfaceGroups $
+--             describeLocalGatewayVirtualInterfaceGroupsResponse
+--
+--         , responseDescribeLocalGatewayRouteTableVPCAssociations $
+--             describeLocalGatewayRouteTableVPCAssociationsResponse
+--
 --         , responseDescribeVPCEndpointConnectionNotifications $
 --             describeVPCEndpointConnectionNotificationsResponse
 --
 --         , responseRunInstances $
 --             reservation
 --
+--         , responseCreateSnapshots $
+--             createSnapshotsResponse
+--
 --         , responseAssociateDHCPOptions $
 --             associateDHCPOptionsResponse
+--
+--         , responseDeleteTrafficMirrorFilterRule $
+--             deleteTrafficMirrorFilterRuleResponse
 --
 --         , responseDescribeReservedInstances $
 --             describeReservedInstancesResponse
@@ -1132,8 +1624,17 @@ import Test.Tasty
 --         , responseDisableVPCClassicLinkDNSSupport $
 --             disableVPCClassicLinkDNSSupportResponse
 --
+--         , responseApplySecurityGroupsToClientVPNTargetNetwork $
+--             applySecurityGroupsToClientVPNTargetNetworkResponse
+--
+--         , responseDescribeTrafficMirrorTargets $
+--             describeTrafficMirrorTargetsResponse
+--
 --         , responseDescribeVolumesModifications $
 --             describeVolumesModificationsResponse
+--
+--         , responseExportImage $
+--             exportImageResponse
 --
 --         , responseCreateFpgaImage $
 --             createFpgaImageResponse
@@ -1141,11 +1642,20 @@ import Test.Tasty
 --         , responseAcceptVPCEndpointConnections $
 --             acceptVPCEndpointConnectionsResponse
 --
+--         , responseDeleteClientVPNEndpoint $
+--             deleteClientVPNEndpointResponse
+--
+--         , responseSearchTransitGatewayRoutes $
+--             searchTransitGatewayRoutesResponse
+--
 --         , responseGetLaunchTemplateData $
 --             getLaunchTemplateDataResponse
 --
 --         , responseAllocateAddress $
 --             allocateAddressResponse
+--
+--         , responseAcceptTransitGatewayVPCAttachment $
+--             acceptTransitGatewayVPCAttachmentResponse
 --
 --         , responseCancelConversionTask $
 --             cancelConversionTaskResponse
@@ -1156,6 +1666,9 @@ import Test.Tasty
 --         , responseCreateRouteTable $
 --             createRouteTableResponse
 --
+--         , responseRejectTransitGatewayPeeringAttachment $
+--             rejectTransitGatewayPeeringAttachmentResponse
+--
 --         , responseReportInstanceStatus $
 --             reportInstanceStatusResponse
 --
@@ -1165,17 +1678,35 @@ import Test.Tasty
 --         , responseRequestSpotInstances $
 --             requestSpotInstancesResponse
 --
+--         , responseWithdrawByoipCidr $
+--             withdrawByoipCidrResponse
+--
 --         , responseDescribeHostReservationOfferings $
 --             describeHostReservationOfferingsResponse
 --
 --         , responseResetFpgaImageAttribute $
 --             resetFpgaImageAttributeResponse
 --
+--         , responseModifyVPNConnection $
+--             modifyVPNConnectionResponse
+--
+--         , responseCreateTrafficMirrorFilterRule $
+--             createTrafficMirrorFilterRuleResponse
+--
+--         , responseDeleteTransitGateway $
+--             deleteTransitGatewayResponse
+--
+--         , responseStartVPCEndpointServicePrivateDNSVerification $
+--             startVPCEndpointServicePrivateDNSVerificationResponse
+--
 --         , responseDescribeVolumes $
 --             describeVolumesResponse
 --
 --         , responseRejectVPCPeeringConnection $
 --             rejectVPCPeeringConnectionResponse
+--
+--         , responseDescribeClientVPNRoutes $
+--             describeClientVPNRoutesResponse
 --
 --         , responseDeleteVPNConnectionRoute $
 --             deleteVPNConnectionRouteResponse
@@ -1189,14 +1720,26 @@ import Test.Tasty
 --         , responseAllocateHosts $
 --             allocateHostsResponse
 --
+--         , responseCreateClientVPNEndpoint $
+--             createClientVPNEndpointResponse
+--
+--         , responseCreateTrafficMirrorSession $
+--             createTrafficMirrorSessionResponse
+--
 --         , responseRegisterImage $
 --             registerImageResponse
+--
+--         , responseAdvertiseByoipCidr $
+--             advertiseByoipCidrResponse
 --
 --         , responseModifyFleet $
 --             modifyFleetResponse
 --
 --         , responseRevokeSecurityGroupIngress $
 --             revokeSecurityGroupIngressResponse
+--
+--         , responseGetEBSDefaultKMSKeyId $
+--             getEBSDefaultKMSKeyIdResponse
 --
 --         , responseDescribeHostReservations $
 --             describeHostReservationsResponse
@@ -1216,8 +1759,14 @@ import Test.Tasty
 --         , responseDeleteFpgaImage $
 --             deleteFpgaImageResponse
 --
+--         , responseDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations $
+--             describeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResponse
+--
 --         , responseDescribeScheduledInstances $
 --             describeScheduledInstancesResponse
+--
+--         , responseSearchTransitGatewayMulticastGroups $
+--             searchTransitGatewayMulticastGroupsResponse
 --
 --         , responseCreateFlowLogs $
 --             createFlowLogsResponse
@@ -1240,8 +1789,17 @@ import Test.Tasty
 --         , responseDescribePrincipalIdFormat $
 --             describePrincipalIdFormatResponse
 --
+--         , responseDescribeTransitGateways $
+--             describeTransitGatewaysResponse
+--
 --         , responseDeleteNetworkACL $
 --             deleteNetworkACLResponse
+--
+--         , responseDisassociateTransitGatewayMulticastDomain $
+--             disassociateTransitGatewayMulticastDomainResponse
+--
+--         , responseDeleteTransitGatewayRouteTable $
+--             deleteTransitGatewayRouteTableResponse
 --
 --         , responseCreateLaunchTemplate $
 --             createLaunchTemplateResponse
@@ -1255,6 +1813,9 @@ import Test.Tasty
 --         , responseDeleteVPNGateway $
 --             deleteVPNGatewayResponse
 --
+--         , responseCreateTrafficMirrorTarget $
+--             createTrafficMirrorTargetResponse
+--
 --         , responseDescribeImportImageTasks $
 --             describeImportImageTasksResponse
 --
@@ -1263,6 +1824,9 @@ import Test.Tasty
 --
 --         , responseDescribeMovingAddresses $
 --             describeMovingAddressesResponse
+--
+--         , responseExportTransitGatewayRoutes $
+--             exportTransitGatewayRoutesResponse
 --
 --         , responseGetPasswordData $
 --             getPasswordDataResponse
@@ -1279,8 +1843,14 @@ import Test.Tasty
 --         , responseCopySnapshot $
 --             copySnapshotResponse
 --
+--         , responseAcceptTransitGatewayPeeringAttachment $
+--             acceptTransitGatewayPeeringAttachmentResponse
+--
 --         , responseDisassociateAddress $
 --             disassociateAddressResponse
+--
+--         , responseModifyTrafficMirrorFilterNetworkServices $
+--             modifyTrafficMirrorFilterNetworkServicesResponse
 --
 --         , responseDescribeEgressOnlyInternetGateways $
 --             describeEgressOnlyInternetGatewaysResponse
@@ -1290,6 +1860,15 @@ import Test.Tasty
 --
 --         , responseCreateInstanceExportTask $
 --             createInstanceExportTaskResponse
+--
+--         , responseRejectTransitGatewayVPCAttachment $
+--             rejectTransitGatewayVPCAttachmentResponse
+--
+--         , responseDescribeTrafficMirrorSessions $
+--             describeTrafficMirrorSessionsResponse
+--
+--         , responseGetTransitGatewayRouteTableAssociations $
+--             getTransitGatewayRouteTableAssociationsResponse
 --
 --         , responseAssociateVPCCidrBlock $
 --             associateVPCCidrBlockResponse
@@ -1306,20 +1885,53 @@ import Test.Tasty
 --         , responseDescribeScheduledInstanceAvailability $
 --             describeScheduledInstanceAvailabilityResponse
 --
+--         , responseDisassociateClientVPNTargetNetwork $
+--             disassociateClientVPNTargetNetworkResponse
+--
+--         , responseCreateClientVPNRoute $
+--             createClientVPNRouteResponse
+--
 --         , responseModifyVolumeAttribute $
 --             modifyVolumeAttributeResponse
+--
+--         , responseExportClientVPNClientConfiguration $
+--             exportClientVPNClientConfigurationResponse
+--
+--         , responseDeleteTrafficMirrorTarget $
+--             deleteTrafficMirrorTargetResponse
 --
 --         , responseDescribeSpotDatafeedSubscription $
 --             describeSpotDatafeedSubscriptionResponse
 --
+--         , responseDescribeLocalGatewayRouteTables $
+--             describeLocalGatewayRouteTablesResponse
+--
 --         , responseDescribePrefixLists $
 --             describePrefixListsResponse
+--
+--         , responseAssociateTransitGatewayRouteTable $
+--             associateTransitGatewayRouteTableResponse
 --
 --         , responseDeletePlacementGroup $
 --             deletePlacementGroupResponse
 --
+--         , responseCreateTransitGatewayMulticastDomain $
+--             createTransitGatewayMulticastDomainResponse
+--
+--         , responseDeregisterInstanceEventNotificationAttributes $
+--             deregisterInstanceEventNotificationAttributesResponse
+--
 --         , responseRequestSpotFleet $
 --             requestSpotFleetResponse
+--
+--         , responseDeleteTransitGatewayRoute $
+--             deleteTransitGatewayRouteResponse
+--
+--         , responseDisableEBSEncryptionByDefault $
+--             disableEBSEncryptionByDefaultResponse
+--
+--         , responseDeregisterTransitGatewayMulticastGroupMembers $
+--             deregisterTransitGatewayMulticastGroupMembersResponse
 --
 --         , responseCreateSubnet $
 --             createSubnetResponse
@@ -1329,6 +1941,12 @@ import Test.Tasty
 --
 --         , responseDescribeSecurityGroups $
 --             describeSecurityGroupsResponse
+--
+--         , responseGetCapacityReservationUsage $
+--             getCapacityReservationUsageResponse
+--
+--         , responseCreateTransitGatewayVPCAttachment $
+--             createTransitGatewayVPCAttachmentResponse
 --
 --         , responseDescribeExportTasks $
 --             describeExportTasksResponse
@@ -1351,6 +1969,9 @@ import Test.Tasty
 --         , responseCreateNatGateway $
 --             createNatGatewayResponse
 --
+--         , responseDescribeLocalGatewayVirtualInterfaces $
+--             describeLocalGatewayVirtualInterfacesResponse
+--
 --         , responseDescribeVPCPeeringConnections $
 --             describeVPCPeeringConnectionsResponse
 --
@@ -1366,8 +1987,20 @@ import Test.Tasty
 --         , responseDisassociateVPCCidrBlock $
 --             disassociateVPCCidrBlockResponse
 --
+--         , responseDescribeTrafficMirrorFilters $
+--             describeTrafficMirrorFiltersResponse
+--
+--         , responseDescribeFastSnapshotRestores $
+--             describeFastSnapshotRestoresResponse
+--
+--         , responseCancelCapacityReservation $
+--             cancelCapacityReservationResponse
+--
 --         , responseDeleteNetworkInterface $
 --             deleteNetworkInterfaceResponse
+--
+--         , responseDisassociateTransitGatewayRouteTable $
+--             disassociateTransitGatewayRouteTableResponse
 --
 --         , responseReplaceRouteTableAssociation $
 --             replaceRouteTableAssociationResponse
@@ -1378,6 +2011,18 @@ import Test.Tasty
 --         , responseCreatePlacementGroup $
 --             createPlacementGroupResponse
 --
+--         , responseDescribeInstanceEventNotificationAttributes $
+--             describeInstanceEventNotificationAttributesResponse
+--
+--         , responseDescribeCapacityReservations $
+--             describeCapacityReservationsResponse
+--
+--         , responseModifyClientVPNEndpoint $
+--             modifyClientVPNEndpointResponse
+--
+--         , responseModifyInstanceCapacityReservationAttributes $
+--             modifyInstanceCapacityReservationAttributesResponse
+--
 --         , responseDescribeAggregateIdFormat $
 --             describeAggregateIdFormatResponse
 --
@@ -1387,11 +2032,17 @@ import Test.Tasty
 --         , responseAssociateAddress $
 --             associateAddressResponse
 --
+--         , responseModifyTrafficMirrorFilterRule $
+--             modifyTrafficMirrorFilterRuleResponse
+--
 --         , responseDescribeNetworkInterfaceAttribute $
 --             describeNetworkInterfaceAttributeResponse
 --
 --         , responseReplaceIAMInstanceProfileAssociation $
 --             replaceIAMInstanceProfileAssociationResponse
+--
+--         , responseAssociateClientVPNTargetNetwork $
+--             associateClientVPNTargetNetworkResponse
 --
 --         , responseReleaseHosts $
 --             releaseHostsResponse
@@ -1408,6 +2059,9 @@ import Test.Tasty
 --         , responseCreateVPNConnection $
 --             createVPNConnectionResponse
 --
+--         , responseReplaceTransitGatewayRoute $
+--             replaceTransitGatewayRouteResponse
+--
 --         , responseCreateFleet $
 --             createFleetResponse
 --
@@ -1416,6 +2070,9 @@ import Test.Tasty
 --
 --         , responseDescribeImportSnapshotTasks $
 --             describeImportSnapshotTasksResponse
+--
+--         , responseGetCoipPoolUsage $
+--             getCoipPoolUsageResponse
 --
 --         , responseDescribeCustomerGateways $
 --             describeCustomerGatewaysResponse
@@ -1429,17 +2086,44 @@ import Test.Tasty
 --         , responseCreateVPCEndpoint $
 --             createVPCEndpointResponse
 --
+--         , responseModifyTrafficMirrorSession $
+--             modifyTrafficMirrorSessionResponse
+--
+--         , responseDescribeTransitGatewayPeeringAttachments $
+--             describeTransitGatewayPeeringAttachmentsResponse
+--
+--         , responseDeleteQueuedReservedInstances $
+--             deleteQueuedReservedInstancesResponse
+--
+--         , responseDescribeTransitGatewayMulticastDomains $
+--             describeTransitGatewayMulticastDomainsResponse
+--
+--         , responseGetDefaultCreditSpecification $
+--             getDefaultCreditSpecificationResponse
+--
 --         , responseUnmonitorInstances $
 --             unmonitorInstancesResponse
 --
+--         , responseDescribeTransitGatewayVPCAttachments $
+--             describeTransitGatewayVPCAttachmentsResponse
+--
 --         , responseCreateSecurityGroup $
 --             createSecurityGroupResponse
+--
+--         , responseGetEBSEncryptionByDefault $
+--             getEBSEncryptionByDefaultResponse
 --
 --         , responseImportVolume $
 --             importVolumeResponse
 --
 --         , responseDisableVGWRoutePropagation $
 --             disableVGWRoutePropagationResponse
+--
+--         , responseDeleteTrafficMirrorFilter $
+--             deleteTrafficMirrorFilterResponse
+--
+--         , responseModifyVPNTunnelCertificate $
+--             modifyVPNTunnelCertificateResponse
 --
 --         , responseCreateSpotDatafeedSubscription $
 --             createSpotDatafeedSubscriptionResponse
@@ -1459,6 +2143,12 @@ import Test.Tasty
 --         , responseAssignPrivateIPAddresses $
 --             assignPrivateIPAddressesResponse
 --
+--         , responseAuthorizeClientVPNIngress $
+--             authorizeClientVPNIngressResponse
+--
+--         , responseDeleteTransitGatewayPeeringAttachment $
+--             deleteTransitGatewayPeeringAttachmentResponse
+--
 --         , responseModifyInstanceAttribute $
 --             modifyInstanceAttributeResponse
 --
@@ -1468,14 +2158,26 @@ import Test.Tasty
 --         , responseDisassociateIAMInstanceProfile $
 --             disassociateIAMInstanceProfileResponse
 --
+--         , responseTerminateClientVPNConnections $
+--             terminateClientVPNConnectionsResponse
+--
 --         , responseDisassociateRouteTable $
 --             disassociateRouteTableResponse
 --
 --         , responseGetConsoleScreenshot $
 --             getConsoleScreenshotResponse
 --
+--         , responseResetEBSDefaultKMSKeyId $
+--             resetEBSDefaultKMSKeyIdResponse
+--
 --         , responseAssignIPv6Addresses $
 --             assignIPv6AddressesResponse
+--
+--         , responseModifyVPNTunnelOptions $
+--             modifyVPNTunnelOptionsResponse
+--
+--         , responseModifyEBSDefaultKMSKeyId $
+--             modifyEBSDefaultKMSKeyIdResponse
 --
 --         , responseDeleteSpotDatafeedSubscription $
 --             deleteSpotDatafeedSubscriptionResponse
@@ -1489,8 +2191,17 @@ import Test.Tasty
 --         , responseDescribePlacementGroups $
 --             describePlacementGroupsResponse
 --
+--         , responseProvisionByoipCidr $
+--             provisionByoipCidrResponse
+--
+--         , responseModifyAvailabilityZoneGroup $
+--             modifyAvailabilityZoneGroupResponse
+--
 --         , responseDescribeStaleSecurityGroups $
 --             describeStaleSecurityGroupsResponse
+--
+--         , responseDescribeExportImageTasks $
+--             describeExportImageTasksResponse
 --
 --         , responsePurchaseScheduledInstances $
 --             purchaseScheduledInstancesResponse
@@ -1510,23 +2221,44 @@ import Test.Tasty
 --         , responseCreateSnapshot $
 --             snapshot
 --
+--         , responseCreateLocalGatewayRoute $
+--             createLocalGatewayRouteResponse
+--
 --         , responseCreateNetworkACLEntry $
 --             createNetworkACLEntryResponse
+--
+--         , responseDescribeTransitGatewayAttachments $
+--             describeTransitGatewayAttachmentsResponse
 --
 --         , responseCreateReservedInstancesListing $
 --             createReservedInstancesListingResponse
 --
+--         , responseDescribeIPv6Pools $
+--             describeIPv6PoolsResponse
+--
 --         , responseAttachVPNGateway $
 --             attachVPNGatewayResponse
+--
+--         , responseDescribeLocalGateways $
+--             describeLocalGatewaysResponse
 --
 --         , responseModifyVPCEndpointServicePermissions $
 --             modifyVPCEndpointServicePermissionsResponse
 --
+--         , responseExportClientVPNClientCertificateRevocationList $
+--             exportClientVPNClientCertificateRevocationListResponse
+--
 --         , responseCreateDHCPOptions $
 --             createDHCPOptionsResponse
 --
+--         , responseRegisterTransitGatewayMulticastGroupSources $
+--             registerTransitGatewayMulticastGroupSourcesResponse
+--
 --         , responseDescribeAccountAttributes $
 --             describeAccountAttributesResponse
+--
+--         , responseGetTransitGatewayRouteTablePropagations $
+--             getTransitGatewayRouteTablePropagationsResponse
 --
 --         , responseModifyFpgaImageAttribute $
 --             modifyFpgaImageAttributeResponse
@@ -1540,17 +2272,29 @@ import Test.Tasty
 --         , responseModifyVPCEndpointServiceConfiguration $
 --             modifyVPCEndpointServiceConfigurationResponse
 --
+--         , responseCreateTransitGateway $
+--             createTransitGatewayResponse
+--
 --         , responseUnassignIPv6Addresses $
 --             unassignIPv6AddressesResponse
 --
+--         , responseDeleteTrafficMirrorSession $
+--             deleteTrafficMirrorSessionResponse
+--
 --         , responseAssociateIAMInstanceProfile $
 --             associateIAMInstanceProfileResponse
+--
+--         , responseModifyDefaultCreditSpecification $
+--             modifyDefaultCreditSpecificationResponse
 --
 --         , responseDeleteEgressOnlyInternetGateway $
 --             deleteEgressOnlyInternetGatewayResponse
 --
 --         , responsePurchaseHostReservation $
 --             purchaseHostReservationResponse
+--
+--         , responseModifyTransitGatewayVPCAttachment $
+--             modifyTransitGatewayVPCAttachmentResponse
 --
 --         , responseCreateImage $
 --             createImageResponse
@@ -1563,6 +2307,9 @@ import Test.Tasty
 --
 --         , responseDescribeKeyPairs $
 --             describeKeyPairsResponse
+--
+--         , responseDisableFastSnapshotRestores $
+--             disableFastSnapshotRestoresResponse
 --
 --         , responseDescribeLaunchTemplates $
 --             describeLaunchTemplatesResponse
@@ -1588,11 +2335,17 @@ import Test.Tasty
 --         , responseModifyIdFormat $
 --             modifyIdFormatResponse
 --
+--         , responseRegisterTransitGatewayMulticastGroupMembers $
+--             registerTransitGatewayMulticastGroupMembersResponse
+--
 --         , responseDeleteRouteTable $
 --             deleteRouteTableResponse
 --
 --         , responseResetImageAttribute $
 --             resetImageAttributeResponse
+--
+--         , responseDescribeTransitGatewayRouteTables $
+--             describeTransitGatewayRouteTablesResponse
 --
 --         , responseCreateEgressOnlyInternetGateway $
 --             createEgressOnlyInternetGatewayResponse
@@ -1603,17 +2356,26 @@ import Test.Tasty
 --         , responseDescribeSpotInstanceRequests $
 --             describeSpotInstanceRequestsResponse
 --
+--         , responseRevokeClientVPNIngress $
+--             revokeClientVPNIngressResponse
+--
 --         , responseUnassignPrivateIPAddresses $
 --             unassignPrivateIPAddressesResponse
 --
 --         , responseDescribeNetworkInterfacePermissions $
 --             describeNetworkInterfacePermissionsResponse
 --
+--         , responseEnableFastSnapshotRestores $
+--             enableFastSnapshotRestoresResponse
+--
 --         , responseDescribeVPCEndpointServicePermissions $
 --             describeVPCEndpointServicePermissionsResponse
 --
 --         , responseDeleteDHCPOptions $
 --             deleteDHCPOptionsResponse
+--
+--         , responseRegisterInstanceEventNotificationAttributes $
+--             registerInstanceEventNotificationAttributesResponse
 --
 --         , responseDescribeNetworkACLs $
 --             describeNetworkACLsResponse
@@ -1629,6 +2391,12 @@ import Test.Tasty
 --
 --         , responseMonitorInstances $
 --             monitorInstancesResponse
+--
+--         , responseSearchLocalGatewayRoutes $
+--             searchLocalGatewayRoutesResponse
+--
+--         , responseDeleteClientVPNRoute $
+--             deleteClientVPNRouteResponse
 --
 --         , responseAcceptVPCPeeringConnection $
 --             acceptVPCPeeringConnectionResponse
@@ -1647,6 +2415,9 @@ import Test.Tasty
 --
 --         , responseModifyVPCAttribute $
 --             modifyVPCAttributeResponse
+--
+--         , responseDescribeClientVPNConnections $
+--             describeClientVPNConnectionsResponse
 --
 --         , responseDescribeFleetHistory $
 --             describeFleetHistoryResponse
@@ -1669,6 +2440,9 @@ import Test.Tasty
 --         , responseDeleteVolume $
 --             deleteVolumeResponse
 --
+--         , responseDeprovisionByoipCidr $
+--             deprovisionByoipCidrResponse
+--
 --         , responseDeleteVPCEndpointServiceConfigurations $
 --             deleteVPCEndpointServiceConfigurationsResponse
 --
@@ -1679,6 +2453,16 @@ import Test.Tasty
 --     ]
 
 -- Requests
+
+requestModifyCapacityReservation :: ModifyCapacityReservation -> TestTree
+requestModifyCapacityReservation = req
+    "ModifyCapacityReservation"
+    "fixture/ModifyCapacityReservation.yaml"
+
+requestGetAssociatedIPv6PoolCidrs :: GetAssociatedIPv6PoolCidrs -> TestTree
+requestGetAssociatedIPv6PoolCidrs = req
+    "GetAssociatedIPv6PoolCidrs"
+    "fixture/GetAssociatedIPv6PoolCidrs.yaml"
 
 requestImportInstance :: ImportInstance -> TestTree
 requestImportInstance = req
@@ -1694,6 +2478,11 @@ requestCreateNetworkInterfacePermission :: CreateNetworkInterfacePermission -> T
 requestCreateNetworkInterfacePermission = req
     "CreateNetworkInterfacePermission"
     "fixture/CreateNetworkInterfacePermission.yaml"
+
+requestSendDiagnosticInterrupt :: SendDiagnosticInterrupt -> TestTree
+requestSendDiagnosticInterrupt = req
+    "SendDiagnosticInterrupt"
+    "fixture/SendDiagnosticInterrupt.yaml"
 
 requestDeleteLaunchTemplate :: DeleteLaunchTemplate -> TestTree
 requestDeleteLaunchTemplate = req
@@ -1735,6 +2524,16 @@ requestDescribeTags = req
     "DescribeTags"
     "fixture/DescribeTags.yaml"
 
+requestCreateTransitGatewayRouteTable :: CreateTransitGatewayRouteTable -> TestTree
+requestCreateTransitGatewayRouteTable = req
+    "CreateTransitGatewayRouteTable"
+    "fixture/CreateTransitGatewayRouteTable.yaml"
+
+requestModifyInstanceMetadataOptions :: ModifyInstanceMetadataOptions -> TestTree
+requestModifyInstanceMetadataOptions = req
+    "ModifyInstanceMetadataOptions"
+    "fixture/ModifyInstanceMetadataOptions.yaml"
+
 requestUpdateSecurityGroupRuleDescriptionsIngress :: UpdateSecurityGroupRuleDescriptionsIngress -> TestTree
 requestUpdateSecurityGroupRuleDescriptionsIngress = req
     "UpdateSecurityGroupRuleDescriptionsIngress"
@@ -1760,6 +2559,11 @@ requestDeleteVPCEndpoints = req
     "DeleteVPCEndpoints"
     "fixture/DeleteVPCEndpoints.yaml"
 
+requestDescribeClientVPNEndpoints :: DescribeClientVPNEndpoints -> TestTree
+requestDescribeClientVPNEndpoints = req
+    "DescribeClientVPNEndpoints"
+    "fixture/DescribeClientVPNEndpoints.yaml"
+
 requestDeleteFlowLogs :: DeleteFlowLogs -> TestTree
 requestDeleteFlowLogs = req
     "DeleteFlowLogs"
@@ -1769,6 +2573,11 @@ requestDescribeVPCClassicLink :: DescribeVPCClassicLink -> TestTree
 requestDescribeVPCClassicLink = req
     "DescribeVPCClassicLink"
     "fixture/DescribeVPCClassicLink.yaml"
+
+requestAssociateTransitGatewayMulticastDomain :: AssociateTransitGatewayMulticastDomain -> TestTree
+requestAssociateTransitGatewayMulticastDomain = req
+    "AssociateTransitGatewayMulticastDomain"
+    "fixture/AssociateTransitGatewayMulticastDomain.yaml"
 
 requestModifySubnetAttribute :: ModifySubnetAttribute -> TestTree
 requestModifySubnetAttribute = req
@@ -1790,6 +2599,11 @@ requestCancelBundleTask = req
     "CancelBundleTask"
     "fixture/CancelBundleTask.yaml"
 
+requestDescribeByoipCidrs :: DescribeByoipCidrs -> TestTree
+requestDescribeByoipCidrs = req
+    "DescribeByoipCidrs"
+    "fixture/DescribeByoipCidrs.yaml"
+
 requestAcceptReservedInstancesExchangeQuote :: AcceptReservedInstancesExchangeQuote -> TestTree
 requestAcceptReservedInstancesExchangeQuote = req
     "AcceptReservedInstancesExchangeQuote"
@@ -1799,6 +2613,11 @@ requestReleaseAddress :: ReleaseAddress -> TestTree
 requestReleaseAddress = req
     "ReleaseAddress"
     "fixture/ReleaseAddress.yaml"
+
+requestDescribeInstanceTypeOfferings :: DescribeInstanceTypeOfferings -> TestTree
+requestDescribeInstanceTypeOfferings = req
+    "DescribeInstanceTypeOfferings"
+    "fixture/DescribeInstanceTypeOfferings.yaml"
 
 requestCreateInternetGateway :: CreateInternetGateway -> TestTree
 requestCreateInternetGateway = req
@@ -1820,6 +2639,11 @@ requestAuthorizeSecurityGroupEgress = req
     "AuthorizeSecurityGroupEgress"
     "fixture/AuthorizeSecurityGroupEgress.yaml"
 
+requestEnableTransitGatewayRouteTablePropagation :: EnableTransitGatewayRouteTablePropagation -> TestTree
+requestEnableTransitGatewayRouteTablePropagation = req
+    "EnableTransitGatewayRouteTablePropagation"
+    "fixture/EnableTransitGatewayRouteTablePropagation.yaml"
+
 requestDeregisterImage :: DeregisterImage -> TestTree
 requestDeregisterImage = req
     "DeregisterImage"
@@ -1829,6 +2653,21 @@ requestDeleteVPCEndpointConnectionNotifications :: DeleteVPCEndpointConnectionNo
 requestDeleteVPCEndpointConnectionNotifications = req
     "DeleteVPCEndpointConnectionNotifications"
     "fixture/DeleteVPCEndpointConnectionNotifications.yaml"
+
+requestDescribeCoipPools :: DescribeCoipPools -> TestTree
+requestDescribeCoipPools = req
+    "DescribeCoipPools"
+    "fixture/DescribeCoipPools.yaml"
+
+requestGetTransitGatewayMulticastDomainAssociations :: GetTransitGatewayMulticastDomainAssociations -> TestTree
+requestGetTransitGatewayMulticastDomainAssociations = req
+    "GetTransitGatewayMulticastDomainAssociations"
+    "fixture/GetTransitGatewayMulticastDomainAssociations.yaml"
+
+requestDeleteLocalGatewayRouteTableVPCAssociation :: DeleteLocalGatewayRouteTableVPCAssociation -> TestTree
+requestDeleteLocalGatewayRouteTableVPCAssociation = req
+    "DeleteLocalGatewayRouteTableVPCAssociation"
+    "fixture/DeleteLocalGatewayRouteTableVPCAssociation.yaml"
 
 requestModifyNetworkInterfaceAttribute :: ModifyNetworkInterfaceAttribute -> TestTree
 requestModifyNetworkInterfaceAttribute = req
@@ -1840,6 +2679,26 @@ requestModifyVPCTenancy = req
     "ModifyVPCTenancy"
     "fixture/ModifyVPCTenancy.yaml"
 
+requestDescribeInstanceTypes :: DescribeInstanceTypes -> TestTree
+requestDescribeInstanceTypes = req
+    "DescribeInstanceTypes"
+    "fixture/DescribeInstanceTypes.yaml"
+
+requestDescribeClientVPNAuthorizationRules :: DescribeClientVPNAuthorizationRules -> TestTree
+requestDescribeClientVPNAuthorizationRules = req
+    "DescribeClientVPNAuthorizationRules"
+    "fixture/DescribeClientVPNAuthorizationRules.yaml"
+
+requestDeleteTransitGatewayVPCAttachment :: DeleteTransitGatewayVPCAttachment -> TestTree
+requestDeleteTransitGatewayVPCAttachment = req
+    "DeleteTransitGatewayVPCAttachment"
+    "fixture/DeleteTransitGatewayVPCAttachment.yaml"
+
+requestDeleteTransitGatewayMulticastDomain :: DeleteTransitGatewayMulticastDomain -> TestTree
+requestDeleteTransitGatewayMulticastDomain = req
+    "DeleteTransitGatewayMulticastDomain"
+    "fixture/DeleteTransitGatewayMulticastDomain.yaml"
+
 requestCancelReservedInstancesListing :: CancelReservedInstancesListing -> TestTree
 requestCancelReservedInstancesListing = req
     "CancelReservedInstancesListing"
@@ -1849,6 +2708,11 @@ requestAttachClassicLinkVPC :: AttachClassicLinkVPC -> TestTree
 requestAttachClassicLinkVPC = req
     "AttachClassicLinkVPC"
     "fixture/AttachClassicLinkVPC.yaml"
+
+requestDisableTransitGatewayRouteTablePropagation :: DisableTransitGatewayRouteTablePropagation -> TestTree
+requestDisableTransitGatewayRouteTablePropagation = req
+    "DisableTransitGatewayRouteTablePropagation"
+    "fixture/DisableTransitGatewayRouteTablePropagation.yaml"
 
 requestDescribeVPCClassicLinkDNSSupport :: DescribeVPCClassicLinkDNSSupport -> TestTree
 requestDescribeVPCClassicLinkDNSSupport = req
@@ -1864,6 +2728,11 @@ requestRunScheduledInstances :: RunScheduledInstances -> TestTree
 requestRunScheduledInstances = req
     "RunScheduledInstances"
     "fixture/RunScheduledInstances.yaml"
+
+requestCreateTransitGatewayRoute :: CreateTransitGatewayRoute -> TestTree
+requestCreateTransitGatewayRoute = req
+    "CreateTransitGatewayRoute"
+    "fixture/CreateTransitGatewayRoute.yaml"
 
 requestCancelSpotFleetRequests :: CancelSpotFleetRequests -> TestTree
 requestCancelSpotFleetRequests = req
@@ -1885,15 +2754,35 @@ requestImportImage = req
     "ImportImage"
     "fixture/ImportImage.yaml"
 
+requestCreateLocalGatewayRouteTableVPCAssociation :: CreateLocalGatewayRouteTableVPCAssociation -> TestTree
+requestCreateLocalGatewayRouteTableVPCAssociation = req
+    "CreateLocalGatewayRouteTableVPCAssociation"
+    "fixture/CreateLocalGatewayRouteTableVPCAssociation.yaml"
+
 requestCopyFpgaImage :: CopyFpgaImage -> TestTree
 requestCopyFpgaImage = req
     "CopyFpgaImage"
     "fixture/CopyFpgaImage.yaml"
 
+requestImportClientVPNClientCertificateRevocationList :: ImportClientVPNClientCertificateRevocationList -> TestTree
+requestImportClientVPNClientCertificateRevocationList = req
+    "ImportClientVPNClientCertificateRevocationList"
+    "fixture/ImportClientVPNClientCertificateRevocationList.yaml"
+
 requestStopInstances :: StopInstances -> TestTree
 requestStopInstances = req
     "StopInstances"
     "fixture/StopInstances.yaml"
+
+requestEnableEBSEncryptionByDefault :: EnableEBSEncryptionByDefault -> TestTree
+requestEnableEBSEncryptionByDefault = req
+    "EnableEBSEncryptionByDefault"
+    "fixture/EnableEBSEncryptionByDefault.yaml"
+
+requestDeregisterTransitGatewayMulticastGroupSources :: DeregisterTransitGatewayMulticastGroupSources -> TestTree
+requestDeregisterTransitGatewayMulticastGroupSources = req
+    "DeregisterTransitGatewayMulticastGroupSources"
+    "fixture/DeregisterTransitGatewayMulticastGroupSources.yaml"
 
 requestModifyLaunchTemplate :: ModifyLaunchTemplate -> TestTree
 requestModifyLaunchTemplate = req
@@ -1965,6 +2854,11 @@ requestDescribeVPCEndpointServices = req
     "DescribeVPCEndpointServices"
     "fixture/DescribeVPCEndpointServices.yaml"
 
+requestDeleteLocalGatewayRoute :: DeleteLocalGatewayRoute -> TestTree
+requestDeleteLocalGatewayRoute = req
+    "DeleteLocalGatewayRoute"
+    "fixture/DeleteLocalGatewayRoute.yaml"
+
 requestAuthorizeSecurityGroupIngress :: AuthorizeSecurityGroupIngress -> TestTree
 requestAuthorizeSecurityGroupIngress = req
     "AuthorizeSecurityGroupIngress"
@@ -1979,6 +2873,11 @@ requestDescribeSubnets :: DescribeSubnets -> TestTree
 requestDescribeSubnets = req
     "DescribeSubnets"
     "fixture/DescribeSubnets.yaml"
+
+requestGetTransitGatewayAttachmentPropagations :: GetTransitGatewayAttachmentPropagations -> TestTree
+requestGetTransitGatewayAttachmentPropagations = req
+    "GetTransitGatewayAttachmentPropagations"
+    "fixture/GetTransitGatewayAttachmentPropagations.yaml"
 
 requestCreateTags :: CreateTags -> TestTree
 requestCreateTags = req
@@ -2005,6 +2904,11 @@ requestDescribeVPNConnections = req
     "DescribeVPNConnections"
     "fixture/DescribeVPNConnections.yaml"
 
+requestModifyInstanceEventStartTime :: ModifyInstanceEventStartTime -> TestTree
+requestModifyInstanceEventStartTime = req
+    "ModifyInstanceEventStartTime"
+    "fixture/ModifyInstanceEventStartTime.yaml"
+
 requestDeleteRoute :: DeleteRoute -> TestTree
 requestDeleteRoute = req
     "DeleteRoute"
@@ -2020,6 +2924,11 @@ requestDescribeVPCEndpoints = req
     "DescribeVPCEndpoints"
     "fixture/DescribeVPCEndpoints.yaml"
 
+requestCreateTrafficMirrorFilter :: CreateTrafficMirrorFilter -> TestTree
+requestCreateTrafficMirrorFilter = req
+    "CreateTrafficMirrorFilter"
+    "fixture/CreateTrafficMirrorFilter.yaml"
+
 requestResetInstanceAttribute :: ResetInstanceAttribute -> TestTree
 requestResetInstanceAttribute = req
     "ResetInstanceAttribute"
@@ -2034,6 +2943,11 @@ requestAttachNetworkInterface :: AttachNetworkInterface -> TestTree
 requestAttachNetworkInterface = req
     "AttachNetworkInterface"
     "fixture/AttachNetworkInterface.yaml"
+
+requestCreateCapacityReservation :: CreateCapacityReservation -> TestTree
+requestCreateCapacityReservation = req
+    "CreateCapacityReservation"
+    "fixture/CreateCapacityReservation.yaml"
 
 requestDescribeInstanceStatus :: DescribeInstanceStatus -> TestTree
 requestDescribeInstanceStatus = req
@@ -2075,10 +2989,25 @@ requestDescribeFleets = req
     "DescribeFleets"
     "fixture/DescribeFleets.yaml"
 
+requestCreateTransitGatewayPeeringAttachment :: CreateTransitGatewayPeeringAttachment -> TestTree
+requestCreateTransitGatewayPeeringAttachment = req
+    "CreateTransitGatewayPeeringAttachment"
+    "fixture/CreateTransitGatewayPeeringAttachment.yaml"
+
 requestDeleteSecurityGroup :: DeleteSecurityGroup -> TestTree
 requestDeleteSecurityGroup = req
     "DeleteSecurityGroup"
     "fixture/DeleteSecurityGroup.yaml"
+
+requestDescribePublicIPv4Pools :: DescribePublicIPv4Pools -> TestTree
+requestDescribePublicIPv4Pools = req
+    "DescribePublicIPv4Pools"
+    "fixture/DescribePublicIPv4Pools.yaml"
+
+requestDescribeClientVPNTargetNetworks :: DescribeClientVPNTargetNetworks -> TestTree
+requestDescribeClientVPNTargetNetworks = req
+    "DescribeClientVPNTargetNetworks"
+    "fixture/DescribeClientVPNTargetNetworks.yaml"
 
 requestDeleteVPCPeeringConnection :: DeleteVPCPeeringConnection -> TestTree
 requestDeleteVPCPeeringConnection = req
@@ -2100,6 +3029,16 @@ requestDescribeFlowLogs = req
     "DescribeFlowLogs"
     "fixture/DescribeFlowLogs.yaml"
 
+requestDescribeLocalGatewayVirtualInterfaceGroups :: DescribeLocalGatewayVirtualInterfaceGroups -> TestTree
+requestDescribeLocalGatewayVirtualInterfaceGroups = req
+    "DescribeLocalGatewayVirtualInterfaceGroups"
+    "fixture/DescribeLocalGatewayVirtualInterfaceGroups.yaml"
+
+requestDescribeLocalGatewayRouteTableVPCAssociations :: DescribeLocalGatewayRouteTableVPCAssociations -> TestTree
+requestDescribeLocalGatewayRouteTableVPCAssociations = req
+    "DescribeLocalGatewayRouteTableVPCAssociations"
+    "fixture/DescribeLocalGatewayRouteTableVPCAssociations.yaml"
+
 requestDescribeVPCEndpointConnectionNotifications :: DescribeVPCEndpointConnectionNotifications -> TestTree
 requestDescribeVPCEndpointConnectionNotifications = req
     "DescribeVPCEndpointConnectionNotifications"
@@ -2110,10 +3049,20 @@ requestRunInstances = req
     "RunInstances"
     "fixture/RunInstances.yaml"
 
+requestCreateSnapshots :: CreateSnapshots -> TestTree
+requestCreateSnapshots = req
+    "CreateSnapshots"
+    "fixture/CreateSnapshots.yaml"
+
 requestAssociateDHCPOptions :: AssociateDHCPOptions -> TestTree
 requestAssociateDHCPOptions = req
     "AssociateDHCPOptions"
     "fixture/AssociateDHCPOptions.yaml"
+
+requestDeleteTrafficMirrorFilterRule :: DeleteTrafficMirrorFilterRule -> TestTree
+requestDeleteTrafficMirrorFilterRule = req
+    "DeleteTrafficMirrorFilterRule"
+    "fixture/DeleteTrafficMirrorFilterRule.yaml"
 
 requestDescribeReservedInstances :: DescribeReservedInstances -> TestTree
 requestDescribeReservedInstances = req
@@ -2145,10 +3094,25 @@ requestDisableVPCClassicLinkDNSSupport = req
     "DisableVPCClassicLinkDNSSupport"
     "fixture/DisableVPCClassicLinkDNSSupport.yaml"
 
+requestApplySecurityGroupsToClientVPNTargetNetwork :: ApplySecurityGroupsToClientVPNTargetNetwork -> TestTree
+requestApplySecurityGroupsToClientVPNTargetNetwork = req
+    "ApplySecurityGroupsToClientVPNTargetNetwork"
+    "fixture/ApplySecurityGroupsToClientVPNTargetNetwork.yaml"
+
+requestDescribeTrafficMirrorTargets :: DescribeTrafficMirrorTargets -> TestTree
+requestDescribeTrafficMirrorTargets = req
+    "DescribeTrafficMirrorTargets"
+    "fixture/DescribeTrafficMirrorTargets.yaml"
+
 requestDescribeVolumesModifications :: DescribeVolumesModifications -> TestTree
 requestDescribeVolumesModifications = req
     "DescribeVolumesModifications"
     "fixture/DescribeVolumesModifications.yaml"
+
+requestExportImage :: ExportImage -> TestTree
+requestExportImage = req
+    "ExportImage"
+    "fixture/ExportImage.yaml"
 
 requestCreateFpgaImage :: CreateFpgaImage -> TestTree
 requestCreateFpgaImage = req
@@ -2160,6 +3124,16 @@ requestAcceptVPCEndpointConnections = req
     "AcceptVPCEndpointConnections"
     "fixture/AcceptVPCEndpointConnections.yaml"
 
+requestDeleteClientVPNEndpoint :: DeleteClientVPNEndpoint -> TestTree
+requestDeleteClientVPNEndpoint = req
+    "DeleteClientVPNEndpoint"
+    "fixture/DeleteClientVPNEndpoint.yaml"
+
+requestSearchTransitGatewayRoutes :: SearchTransitGatewayRoutes -> TestTree
+requestSearchTransitGatewayRoutes = req
+    "SearchTransitGatewayRoutes"
+    "fixture/SearchTransitGatewayRoutes.yaml"
+
 requestGetLaunchTemplateData :: GetLaunchTemplateData -> TestTree
 requestGetLaunchTemplateData = req
     "GetLaunchTemplateData"
@@ -2169,6 +3143,11 @@ requestAllocateAddress :: AllocateAddress -> TestTree
 requestAllocateAddress = req
     "AllocateAddress"
     "fixture/AllocateAddress.yaml"
+
+requestAcceptTransitGatewayVPCAttachment :: AcceptTransitGatewayVPCAttachment -> TestTree
+requestAcceptTransitGatewayVPCAttachment = req
+    "AcceptTransitGatewayVPCAttachment"
+    "fixture/AcceptTransitGatewayVPCAttachment.yaml"
 
 requestCancelConversionTask :: CancelConversionTask -> TestTree
 requestCancelConversionTask = req
@@ -2185,6 +3164,11 @@ requestCreateRouteTable = req
     "CreateRouteTable"
     "fixture/CreateRouteTable.yaml"
 
+requestRejectTransitGatewayPeeringAttachment :: RejectTransitGatewayPeeringAttachment -> TestTree
+requestRejectTransitGatewayPeeringAttachment = req
+    "RejectTransitGatewayPeeringAttachment"
+    "fixture/RejectTransitGatewayPeeringAttachment.yaml"
+
 requestReportInstanceStatus :: ReportInstanceStatus -> TestTree
 requestReportInstanceStatus = req
     "ReportInstanceStatus"
@@ -2200,6 +3184,11 @@ requestRequestSpotInstances = req
     "RequestSpotInstances"
     "fixture/RequestSpotInstances.yaml"
 
+requestWithdrawByoipCidr :: WithdrawByoipCidr -> TestTree
+requestWithdrawByoipCidr = req
+    "WithdrawByoipCidr"
+    "fixture/WithdrawByoipCidr.yaml"
+
 requestDescribeHostReservationOfferings :: DescribeHostReservationOfferings -> TestTree
 requestDescribeHostReservationOfferings = req
     "DescribeHostReservationOfferings"
@@ -2210,6 +3199,26 @@ requestResetFpgaImageAttribute = req
     "ResetFpgaImageAttribute"
     "fixture/ResetFpgaImageAttribute.yaml"
 
+requestModifyVPNConnection :: ModifyVPNConnection -> TestTree
+requestModifyVPNConnection = req
+    "ModifyVPNConnection"
+    "fixture/ModifyVPNConnection.yaml"
+
+requestCreateTrafficMirrorFilterRule :: CreateTrafficMirrorFilterRule -> TestTree
+requestCreateTrafficMirrorFilterRule = req
+    "CreateTrafficMirrorFilterRule"
+    "fixture/CreateTrafficMirrorFilterRule.yaml"
+
+requestDeleteTransitGateway :: DeleteTransitGateway -> TestTree
+requestDeleteTransitGateway = req
+    "DeleteTransitGateway"
+    "fixture/DeleteTransitGateway.yaml"
+
+requestStartVPCEndpointServicePrivateDNSVerification :: StartVPCEndpointServicePrivateDNSVerification -> TestTree
+requestStartVPCEndpointServicePrivateDNSVerification = req
+    "StartVPCEndpointServicePrivateDNSVerification"
+    "fixture/StartVPCEndpointServicePrivateDNSVerification.yaml"
+
 requestDescribeVolumes :: DescribeVolumes -> TestTree
 requestDescribeVolumes = req
     "DescribeVolumes"
@@ -2219,6 +3228,11 @@ requestRejectVPCPeeringConnection :: RejectVPCPeeringConnection -> TestTree
 requestRejectVPCPeeringConnection = req
     "RejectVPCPeeringConnection"
     "fixture/RejectVPCPeeringConnection.yaml"
+
+requestDescribeClientVPNRoutes :: DescribeClientVPNRoutes -> TestTree
+requestDescribeClientVPNRoutes = req
+    "DescribeClientVPNRoutes"
+    "fixture/DescribeClientVPNRoutes.yaml"
 
 requestDeleteVPNConnectionRoute :: DeleteVPNConnectionRoute -> TestTree
 requestDeleteVPNConnectionRoute = req
@@ -2240,10 +3254,25 @@ requestAllocateHosts = req
     "AllocateHosts"
     "fixture/AllocateHosts.yaml"
 
+requestCreateClientVPNEndpoint :: CreateClientVPNEndpoint -> TestTree
+requestCreateClientVPNEndpoint = req
+    "CreateClientVPNEndpoint"
+    "fixture/CreateClientVPNEndpoint.yaml"
+
+requestCreateTrafficMirrorSession :: CreateTrafficMirrorSession -> TestTree
+requestCreateTrafficMirrorSession = req
+    "CreateTrafficMirrorSession"
+    "fixture/CreateTrafficMirrorSession.yaml"
+
 requestRegisterImage :: RegisterImage -> TestTree
 requestRegisterImage = req
     "RegisterImage"
     "fixture/RegisterImage.yaml"
+
+requestAdvertiseByoipCidr :: AdvertiseByoipCidr -> TestTree
+requestAdvertiseByoipCidr = req
+    "AdvertiseByoipCidr"
+    "fixture/AdvertiseByoipCidr.yaml"
 
 requestModifyFleet :: ModifyFleet -> TestTree
 requestModifyFleet = req
@@ -2254,6 +3283,11 @@ requestRevokeSecurityGroupIngress :: RevokeSecurityGroupIngress -> TestTree
 requestRevokeSecurityGroupIngress = req
     "RevokeSecurityGroupIngress"
     "fixture/RevokeSecurityGroupIngress.yaml"
+
+requestGetEBSDefaultKMSKeyId :: GetEBSDefaultKMSKeyId -> TestTree
+requestGetEBSDefaultKMSKeyId = req
+    "GetEBSDefaultKMSKeyId"
+    "fixture/GetEBSDefaultKMSKeyId.yaml"
 
 requestDescribeHostReservations :: DescribeHostReservations -> TestTree
 requestDescribeHostReservations = req
@@ -2285,10 +3319,20 @@ requestDeleteFpgaImage = req
     "DeleteFpgaImage"
     "fixture/DeleteFpgaImage.yaml"
 
+requestDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations :: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations -> TestTree
+requestDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations = req
+    "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations"
+    "fixture/DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations.yaml"
+
 requestDescribeScheduledInstances :: DescribeScheduledInstances -> TestTree
 requestDescribeScheduledInstances = req
     "DescribeScheduledInstances"
     "fixture/DescribeScheduledInstances.yaml"
+
+requestSearchTransitGatewayMulticastGroups :: SearchTransitGatewayMulticastGroups -> TestTree
+requestSearchTransitGatewayMulticastGroups = req
+    "SearchTransitGatewayMulticastGroups"
+    "fixture/SearchTransitGatewayMulticastGroups.yaml"
 
 requestCreateFlowLogs :: CreateFlowLogs -> TestTree
 requestCreateFlowLogs = req
@@ -2325,10 +3369,25 @@ requestDescribePrincipalIdFormat = req
     "DescribePrincipalIdFormat"
     "fixture/DescribePrincipalIdFormat.yaml"
 
+requestDescribeTransitGateways :: DescribeTransitGateways -> TestTree
+requestDescribeTransitGateways = req
+    "DescribeTransitGateways"
+    "fixture/DescribeTransitGateways.yaml"
+
 requestDeleteNetworkACL :: DeleteNetworkACL -> TestTree
 requestDeleteNetworkACL = req
     "DeleteNetworkACL"
     "fixture/DeleteNetworkACL.yaml"
+
+requestDisassociateTransitGatewayMulticastDomain :: DisassociateTransitGatewayMulticastDomain -> TestTree
+requestDisassociateTransitGatewayMulticastDomain = req
+    "DisassociateTransitGatewayMulticastDomain"
+    "fixture/DisassociateTransitGatewayMulticastDomain.yaml"
+
+requestDeleteTransitGatewayRouteTable :: DeleteTransitGatewayRouteTable -> TestTree
+requestDeleteTransitGatewayRouteTable = req
+    "DeleteTransitGatewayRouteTable"
+    "fixture/DeleteTransitGatewayRouteTable.yaml"
 
 requestCreateLaunchTemplate :: CreateLaunchTemplate -> TestTree
 requestCreateLaunchTemplate = req
@@ -2350,6 +3409,11 @@ requestDeleteVPNGateway = req
     "DeleteVPNGateway"
     "fixture/DeleteVPNGateway.yaml"
 
+requestCreateTrafficMirrorTarget :: CreateTrafficMirrorTarget -> TestTree
+requestCreateTrafficMirrorTarget = req
+    "CreateTrafficMirrorTarget"
+    "fixture/CreateTrafficMirrorTarget.yaml"
+
 requestDescribeImportImageTasks :: DescribeImportImageTasks -> TestTree
 requestDescribeImportImageTasks = req
     "DescribeImportImageTasks"
@@ -2364,6 +3428,11 @@ requestDescribeMovingAddresses :: DescribeMovingAddresses -> TestTree
 requestDescribeMovingAddresses = req
     "DescribeMovingAddresses"
     "fixture/DescribeMovingAddresses.yaml"
+
+requestExportTransitGatewayRoutes :: ExportTransitGatewayRoutes -> TestTree
+requestExportTransitGatewayRoutes = req
+    "ExportTransitGatewayRoutes"
+    "fixture/ExportTransitGatewayRoutes.yaml"
 
 requestGetPasswordData :: GetPasswordData -> TestTree
 requestGetPasswordData = req
@@ -2390,10 +3459,20 @@ requestCopySnapshot = req
     "CopySnapshot"
     "fixture/CopySnapshot.yaml"
 
+requestAcceptTransitGatewayPeeringAttachment :: AcceptTransitGatewayPeeringAttachment -> TestTree
+requestAcceptTransitGatewayPeeringAttachment = req
+    "AcceptTransitGatewayPeeringAttachment"
+    "fixture/AcceptTransitGatewayPeeringAttachment.yaml"
+
 requestDisassociateAddress :: DisassociateAddress -> TestTree
 requestDisassociateAddress = req
     "DisassociateAddress"
     "fixture/DisassociateAddress.yaml"
+
+requestModifyTrafficMirrorFilterNetworkServices :: ModifyTrafficMirrorFilterNetworkServices -> TestTree
+requestModifyTrafficMirrorFilterNetworkServices = req
+    "ModifyTrafficMirrorFilterNetworkServices"
+    "fixture/ModifyTrafficMirrorFilterNetworkServices.yaml"
 
 requestDescribeEgressOnlyInternetGateways :: DescribeEgressOnlyInternetGateways -> TestTree
 requestDescribeEgressOnlyInternetGateways = req
@@ -2409,6 +3488,21 @@ requestCreateInstanceExportTask :: CreateInstanceExportTask -> TestTree
 requestCreateInstanceExportTask = req
     "CreateInstanceExportTask"
     "fixture/CreateInstanceExportTask.yaml"
+
+requestRejectTransitGatewayVPCAttachment :: RejectTransitGatewayVPCAttachment -> TestTree
+requestRejectTransitGatewayVPCAttachment = req
+    "RejectTransitGatewayVPCAttachment"
+    "fixture/RejectTransitGatewayVPCAttachment.yaml"
+
+requestDescribeTrafficMirrorSessions :: DescribeTrafficMirrorSessions -> TestTree
+requestDescribeTrafficMirrorSessions = req
+    "DescribeTrafficMirrorSessions"
+    "fixture/DescribeTrafficMirrorSessions.yaml"
+
+requestGetTransitGatewayRouteTableAssociations :: GetTransitGatewayRouteTableAssociations -> TestTree
+requestGetTransitGatewayRouteTableAssociations = req
+    "GetTransitGatewayRouteTableAssociations"
+    "fixture/GetTransitGatewayRouteTableAssociations.yaml"
 
 requestAssociateVPCCidrBlock :: AssociateVPCCidrBlock -> TestTree
 requestAssociateVPCCidrBlock = req
@@ -2435,30 +3529,85 @@ requestDescribeScheduledInstanceAvailability = req
     "DescribeScheduledInstanceAvailability"
     "fixture/DescribeScheduledInstanceAvailability.yaml"
 
+requestDisassociateClientVPNTargetNetwork :: DisassociateClientVPNTargetNetwork -> TestTree
+requestDisassociateClientVPNTargetNetwork = req
+    "DisassociateClientVPNTargetNetwork"
+    "fixture/DisassociateClientVPNTargetNetwork.yaml"
+
+requestCreateClientVPNRoute :: CreateClientVPNRoute -> TestTree
+requestCreateClientVPNRoute = req
+    "CreateClientVPNRoute"
+    "fixture/CreateClientVPNRoute.yaml"
+
 requestModifyVolumeAttribute :: ModifyVolumeAttribute -> TestTree
 requestModifyVolumeAttribute = req
     "ModifyVolumeAttribute"
     "fixture/ModifyVolumeAttribute.yaml"
+
+requestExportClientVPNClientConfiguration :: ExportClientVPNClientConfiguration -> TestTree
+requestExportClientVPNClientConfiguration = req
+    "ExportClientVPNClientConfiguration"
+    "fixture/ExportClientVPNClientConfiguration.yaml"
+
+requestDeleteTrafficMirrorTarget :: DeleteTrafficMirrorTarget -> TestTree
+requestDeleteTrafficMirrorTarget = req
+    "DeleteTrafficMirrorTarget"
+    "fixture/DeleteTrafficMirrorTarget.yaml"
 
 requestDescribeSpotDatafeedSubscription :: DescribeSpotDatafeedSubscription -> TestTree
 requestDescribeSpotDatafeedSubscription = req
     "DescribeSpotDatafeedSubscription"
     "fixture/DescribeSpotDatafeedSubscription.yaml"
 
+requestDescribeLocalGatewayRouteTables :: DescribeLocalGatewayRouteTables -> TestTree
+requestDescribeLocalGatewayRouteTables = req
+    "DescribeLocalGatewayRouteTables"
+    "fixture/DescribeLocalGatewayRouteTables.yaml"
+
 requestDescribePrefixLists :: DescribePrefixLists -> TestTree
 requestDescribePrefixLists = req
     "DescribePrefixLists"
     "fixture/DescribePrefixLists.yaml"
+
+requestAssociateTransitGatewayRouteTable :: AssociateTransitGatewayRouteTable -> TestTree
+requestAssociateTransitGatewayRouteTable = req
+    "AssociateTransitGatewayRouteTable"
+    "fixture/AssociateTransitGatewayRouteTable.yaml"
 
 requestDeletePlacementGroup :: DeletePlacementGroup -> TestTree
 requestDeletePlacementGroup = req
     "DeletePlacementGroup"
     "fixture/DeletePlacementGroup.yaml"
 
+requestCreateTransitGatewayMulticastDomain :: CreateTransitGatewayMulticastDomain -> TestTree
+requestCreateTransitGatewayMulticastDomain = req
+    "CreateTransitGatewayMulticastDomain"
+    "fixture/CreateTransitGatewayMulticastDomain.yaml"
+
+requestDeregisterInstanceEventNotificationAttributes :: DeregisterInstanceEventNotificationAttributes -> TestTree
+requestDeregisterInstanceEventNotificationAttributes = req
+    "DeregisterInstanceEventNotificationAttributes"
+    "fixture/DeregisterInstanceEventNotificationAttributes.yaml"
+
 requestRequestSpotFleet :: RequestSpotFleet -> TestTree
 requestRequestSpotFleet = req
     "RequestSpotFleet"
     "fixture/RequestSpotFleet.yaml"
+
+requestDeleteTransitGatewayRoute :: DeleteTransitGatewayRoute -> TestTree
+requestDeleteTransitGatewayRoute = req
+    "DeleteTransitGatewayRoute"
+    "fixture/DeleteTransitGatewayRoute.yaml"
+
+requestDisableEBSEncryptionByDefault :: DisableEBSEncryptionByDefault -> TestTree
+requestDisableEBSEncryptionByDefault = req
+    "DisableEBSEncryptionByDefault"
+    "fixture/DisableEBSEncryptionByDefault.yaml"
+
+requestDeregisterTransitGatewayMulticastGroupMembers :: DeregisterTransitGatewayMulticastGroupMembers -> TestTree
+requestDeregisterTransitGatewayMulticastGroupMembers = req
+    "DeregisterTransitGatewayMulticastGroupMembers"
+    "fixture/DeregisterTransitGatewayMulticastGroupMembers.yaml"
 
 requestCreateSubnet :: CreateSubnet -> TestTree
 requestCreateSubnet = req
@@ -2474,6 +3623,16 @@ requestDescribeSecurityGroups :: DescribeSecurityGroups -> TestTree
 requestDescribeSecurityGroups = req
     "DescribeSecurityGroups"
     "fixture/DescribeSecurityGroups.yaml"
+
+requestGetCapacityReservationUsage :: GetCapacityReservationUsage -> TestTree
+requestGetCapacityReservationUsage = req
+    "GetCapacityReservationUsage"
+    "fixture/GetCapacityReservationUsage.yaml"
+
+requestCreateTransitGatewayVPCAttachment :: CreateTransitGatewayVPCAttachment -> TestTree
+requestCreateTransitGatewayVPCAttachment = req
+    "CreateTransitGatewayVPCAttachment"
+    "fixture/CreateTransitGatewayVPCAttachment.yaml"
 
 requestDescribeExportTasks :: DescribeExportTasks -> TestTree
 requestDescribeExportTasks = req
@@ -2510,6 +3669,11 @@ requestCreateNatGateway = req
     "CreateNatGateway"
     "fixture/CreateNatGateway.yaml"
 
+requestDescribeLocalGatewayVirtualInterfaces :: DescribeLocalGatewayVirtualInterfaces -> TestTree
+requestDescribeLocalGatewayVirtualInterfaces = req
+    "DescribeLocalGatewayVirtualInterfaces"
+    "fixture/DescribeLocalGatewayVirtualInterfaces.yaml"
+
 requestDescribeVPCPeeringConnections :: DescribeVPCPeeringConnections -> TestTree
 requestDescribeVPCPeeringConnections = req
     "DescribeVPCPeeringConnections"
@@ -2535,10 +3699,30 @@ requestDisassociateVPCCidrBlock = req
     "DisassociateVPCCidrBlock"
     "fixture/DisassociateVPCCidrBlock.yaml"
 
+requestDescribeTrafficMirrorFilters :: DescribeTrafficMirrorFilters -> TestTree
+requestDescribeTrafficMirrorFilters = req
+    "DescribeTrafficMirrorFilters"
+    "fixture/DescribeTrafficMirrorFilters.yaml"
+
+requestDescribeFastSnapshotRestores :: DescribeFastSnapshotRestores -> TestTree
+requestDescribeFastSnapshotRestores = req
+    "DescribeFastSnapshotRestores"
+    "fixture/DescribeFastSnapshotRestores.yaml"
+
+requestCancelCapacityReservation :: CancelCapacityReservation -> TestTree
+requestCancelCapacityReservation = req
+    "CancelCapacityReservation"
+    "fixture/CancelCapacityReservation.yaml"
+
 requestDeleteNetworkInterface :: DeleteNetworkInterface -> TestTree
 requestDeleteNetworkInterface = req
     "DeleteNetworkInterface"
     "fixture/DeleteNetworkInterface.yaml"
+
+requestDisassociateTransitGatewayRouteTable :: DisassociateTransitGatewayRouteTable -> TestTree
+requestDisassociateTransitGatewayRouteTable = req
+    "DisassociateTransitGatewayRouteTable"
+    "fixture/DisassociateTransitGatewayRouteTable.yaml"
 
 requestReplaceRouteTableAssociation :: ReplaceRouteTableAssociation -> TestTree
 requestReplaceRouteTableAssociation = req
@@ -2555,6 +3739,26 @@ requestCreatePlacementGroup = req
     "CreatePlacementGroup"
     "fixture/CreatePlacementGroup.yaml"
 
+requestDescribeInstanceEventNotificationAttributes :: DescribeInstanceEventNotificationAttributes -> TestTree
+requestDescribeInstanceEventNotificationAttributes = req
+    "DescribeInstanceEventNotificationAttributes"
+    "fixture/DescribeInstanceEventNotificationAttributes.yaml"
+
+requestDescribeCapacityReservations :: DescribeCapacityReservations -> TestTree
+requestDescribeCapacityReservations = req
+    "DescribeCapacityReservations"
+    "fixture/DescribeCapacityReservations.yaml"
+
+requestModifyClientVPNEndpoint :: ModifyClientVPNEndpoint -> TestTree
+requestModifyClientVPNEndpoint = req
+    "ModifyClientVPNEndpoint"
+    "fixture/ModifyClientVPNEndpoint.yaml"
+
+requestModifyInstanceCapacityReservationAttributes :: ModifyInstanceCapacityReservationAttributes -> TestTree
+requestModifyInstanceCapacityReservationAttributes = req
+    "ModifyInstanceCapacityReservationAttributes"
+    "fixture/ModifyInstanceCapacityReservationAttributes.yaml"
+
 requestDescribeAggregateIdFormat :: DescribeAggregateIdFormat -> TestTree
 requestDescribeAggregateIdFormat = req
     "DescribeAggregateIdFormat"
@@ -2570,6 +3774,11 @@ requestAssociateAddress = req
     "AssociateAddress"
     "fixture/AssociateAddress.yaml"
 
+requestModifyTrafficMirrorFilterRule :: ModifyTrafficMirrorFilterRule -> TestTree
+requestModifyTrafficMirrorFilterRule = req
+    "ModifyTrafficMirrorFilterRule"
+    "fixture/ModifyTrafficMirrorFilterRule.yaml"
+
 requestDescribeNetworkInterfaceAttribute :: DescribeNetworkInterfaceAttribute -> TestTree
 requestDescribeNetworkInterfaceAttribute = req
     "DescribeNetworkInterfaceAttribute"
@@ -2579,6 +3788,11 @@ requestReplaceIAMInstanceProfileAssociation :: ReplaceIAMInstanceProfileAssociat
 requestReplaceIAMInstanceProfileAssociation = req
     "ReplaceIAMInstanceProfileAssociation"
     "fixture/ReplaceIAMInstanceProfileAssociation.yaml"
+
+requestAssociateClientVPNTargetNetwork :: AssociateClientVPNTargetNetwork -> TestTree
+requestAssociateClientVPNTargetNetwork = req
+    "AssociateClientVPNTargetNetwork"
+    "fixture/AssociateClientVPNTargetNetwork.yaml"
 
 requestReleaseHosts :: ReleaseHosts -> TestTree
 requestReleaseHosts = req
@@ -2605,6 +3819,11 @@ requestCreateVPNConnection = req
     "CreateVPNConnection"
     "fixture/CreateVPNConnection.yaml"
 
+requestReplaceTransitGatewayRoute :: ReplaceTransitGatewayRoute -> TestTree
+requestReplaceTransitGatewayRoute = req
+    "ReplaceTransitGatewayRoute"
+    "fixture/ReplaceTransitGatewayRoute.yaml"
+
 requestCreateFleet :: CreateFleet -> TestTree
 requestCreateFleet = req
     "CreateFleet"
@@ -2619,6 +3838,11 @@ requestDescribeImportSnapshotTasks :: DescribeImportSnapshotTasks -> TestTree
 requestDescribeImportSnapshotTasks = req
     "DescribeImportSnapshotTasks"
     "fixture/DescribeImportSnapshotTasks.yaml"
+
+requestGetCoipPoolUsage :: GetCoipPoolUsage -> TestTree
+requestGetCoipPoolUsage = req
+    "GetCoipPoolUsage"
+    "fixture/GetCoipPoolUsage.yaml"
 
 requestDescribeCustomerGateways :: DescribeCustomerGateways -> TestTree
 requestDescribeCustomerGateways = req
@@ -2640,15 +3864,50 @@ requestCreateVPCEndpoint = req
     "CreateVPCEndpoint"
     "fixture/CreateVPCEndpoint.yaml"
 
+requestModifyTrafficMirrorSession :: ModifyTrafficMirrorSession -> TestTree
+requestModifyTrafficMirrorSession = req
+    "ModifyTrafficMirrorSession"
+    "fixture/ModifyTrafficMirrorSession.yaml"
+
+requestDescribeTransitGatewayPeeringAttachments :: DescribeTransitGatewayPeeringAttachments -> TestTree
+requestDescribeTransitGatewayPeeringAttachments = req
+    "DescribeTransitGatewayPeeringAttachments"
+    "fixture/DescribeTransitGatewayPeeringAttachments.yaml"
+
+requestDeleteQueuedReservedInstances :: DeleteQueuedReservedInstances -> TestTree
+requestDeleteQueuedReservedInstances = req
+    "DeleteQueuedReservedInstances"
+    "fixture/DeleteQueuedReservedInstances.yaml"
+
+requestDescribeTransitGatewayMulticastDomains :: DescribeTransitGatewayMulticastDomains -> TestTree
+requestDescribeTransitGatewayMulticastDomains = req
+    "DescribeTransitGatewayMulticastDomains"
+    "fixture/DescribeTransitGatewayMulticastDomains.yaml"
+
+requestGetDefaultCreditSpecification :: GetDefaultCreditSpecification -> TestTree
+requestGetDefaultCreditSpecification = req
+    "GetDefaultCreditSpecification"
+    "fixture/GetDefaultCreditSpecification.yaml"
+
 requestUnmonitorInstances :: UnmonitorInstances -> TestTree
 requestUnmonitorInstances = req
     "UnmonitorInstances"
     "fixture/UnmonitorInstances.yaml"
 
+requestDescribeTransitGatewayVPCAttachments :: DescribeTransitGatewayVPCAttachments -> TestTree
+requestDescribeTransitGatewayVPCAttachments = req
+    "DescribeTransitGatewayVPCAttachments"
+    "fixture/DescribeTransitGatewayVPCAttachments.yaml"
+
 requestCreateSecurityGroup :: CreateSecurityGroup -> TestTree
 requestCreateSecurityGroup = req
     "CreateSecurityGroup"
     "fixture/CreateSecurityGroup.yaml"
+
+requestGetEBSEncryptionByDefault :: GetEBSEncryptionByDefault -> TestTree
+requestGetEBSEncryptionByDefault = req
+    "GetEBSEncryptionByDefault"
+    "fixture/GetEBSEncryptionByDefault.yaml"
 
 requestImportVolume :: ImportVolume -> TestTree
 requestImportVolume = req
@@ -2659,6 +3918,16 @@ requestDisableVGWRoutePropagation :: DisableVGWRoutePropagation -> TestTree
 requestDisableVGWRoutePropagation = req
     "DisableVGWRoutePropagation"
     "fixture/DisableVGWRoutePropagation.yaml"
+
+requestDeleteTrafficMirrorFilter :: DeleteTrafficMirrorFilter -> TestTree
+requestDeleteTrafficMirrorFilter = req
+    "DeleteTrafficMirrorFilter"
+    "fixture/DeleteTrafficMirrorFilter.yaml"
+
+requestModifyVPNTunnelCertificate :: ModifyVPNTunnelCertificate -> TestTree
+requestModifyVPNTunnelCertificate = req
+    "ModifyVPNTunnelCertificate"
+    "fixture/ModifyVPNTunnelCertificate.yaml"
 
 requestCreateSpotDatafeedSubscription :: CreateSpotDatafeedSubscription -> TestTree
 requestCreateSpotDatafeedSubscription = req
@@ -2690,6 +3959,16 @@ requestAssignPrivateIPAddresses = req
     "AssignPrivateIPAddresses"
     "fixture/AssignPrivateIPAddresses.yaml"
 
+requestAuthorizeClientVPNIngress :: AuthorizeClientVPNIngress -> TestTree
+requestAuthorizeClientVPNIngress = req
+    "AuthorizeClientVPNIngress"
+    "fixture/AuthorizeClientVPNIngress.yaml"
+
+requestDeleteTransitGatewayPeeringAttachment :: DeleteTransitGatewayPeeringAttachment -> TestTree
+requestDeleteTransitGatewayPeeringAttachment = req
+    "DeleteTransitGatewayPeeringAttachment"
+    "fixture/DeleteTransitGatewayPeeringAttachment.yaml"
+
 requestModifyInstanceAttribute :: ModifyInstanceAttribute -> TestTree
 requestModifyInstanceAttribute = req
     "ModifyInstanceAttribute"
@@ -2705,6 +3984,11 @@ requestDisassociateIAMInstanceProfile = req
     "DisassociateIAMInstanceProfile"
     "fixture/DisassociateIAMInstanceProfile.yaml"
 
+requestTerminateClientVPNConnections :: TerminateClientVPNConnections -> TestTree
+requestTerminateClientVPNConnections = req
+    "TerminateClientVPNConnections"
+    "fixture/TerminateClientVPNConnections.yaml"
+
 requestDisassociateRouteTable :: DisassociateRouteTable -> TestTree
 requestDisassociateRouteTable = req
     "DisassociateRouteTable"
@@ -2715,10 +3999,25 @@ requestGetConsoleScreenshot = req
     "GetConsoleScreenshot"
     "fixture/GetConsoleScreenshot.yaml"
 
+requestResetEBSDefaultKMSKeyId :: ResetEBSDefaultKMSKeyId -> TestTree
+requestResetEBSDefaultKMSKeyId = req
+    "ResetEBSDefaultKMSKeyId"
+    "fixture/ResetEBSDefaultKMSKeyId.yaml"
+
 requestAssignIPv6Addresses :: AssignIPv6Addresses -> TestTree
 requestAssignIPv6Addresses = req
     "AssignIPv6Addresses"
     "fixture/AssignIPv6Addresses.yaml"
+
+requestModifyVPNTunnelOptions :: ModifyVPNTunnelOptions -> TestTree
+requestModifyVPNTunnelOptions = req
+    "ModifyVPNTunnelOptions"
+    "fixture/ModifyVPNTunnelOptions.yaml"
+
+requestModifyEBSDefaultKMSKeyId :: ModifyEBSDefaultKMSKeyId -> TestTree
+requestModifyEBSDefaultKMSKeyId = req
+    "ModifyEBSDefaultKMSKeyId"
+    "fixture/ModifyEBSDefaultKMSKeyId.yaml"
 
 requestDeleteSpotDatafeedSubscription :: DeleteSpotDatafeedSubscription -> TestTree
 requestDeleteSpotDatafeedSubscription = req
@@ -2740,10 +4039,25 @@ requestDescribePlacementGroups = req
     "DescribePlacementGroups"
     "fixture/DescribePlacementGroups.yaml"
 
+requestProvisionByoipCidr :: ProvisionByoipCidr -> TestTree
+requestProvisionByoipCidr = req
+    "ProvisionByoipCidr"
+    "fixture/ProvisionByoipCidr.yaml"
+
+requestModifyAvailabilityZoneGroup :: ModifyAvailabilityZoneGroup -> TestTree
+requestModifyAvailabilityZoneGroup = req
+    "ModifyAvailabilityZoneGroup"
+    "fixture/ModifyAvailabilityZoneGroup.yaml"
+
 requestDescribeStaleSecurityGroups :: DescribeStaleSecurityGroups -> TestTree
 requestDescribeStaleSecurityGroups = req
     "DescribeStaleSecurityGroups"
     "fixture/DescribeStaleSecurityGroups.yaml"
+
+requestDescribeExportImageTasks :: DescribeExportImageTasks -> TestTree
+requestDescribeExportImageTasks = req
+    "DescribeExportImageTasks"
+    "fixture/DescribeExportImageTasks.yaml"
 
 requestPurchaseScheduledInstances :: PurchaseScheduledInstances -> TestTree
 requestPurchaseScheduledInstances = req
@@ -2775,35 +4089,70 @@ requestCreateSnapshot = req
     "CreateSnapshot"
     "fixture/CreateSnapshot.yaml"
 
+requestCreateLocalGatewayRoute :: CreateLocalGatewayRoute -> TestTree
+requestCreateLocalGatewayRoute = req
+    "CreateLocalGatewayRoute"
+    "fixture/CreateLocalGatewayRoute.yaml"
+
 requestCreateNetworkACLEntry :: CreateNetworkACLEntry -> TestTree
 requestCreateNetworkACLEntry = req
     "CreateNetworkACLEntry"
     "fixture/CreateNetworkACLEntry.yaml"
+
+requestDescribeTransitGatewayAttachments :: DescribeTransitGatewayAttachments -> TestTree
+requestDescribeTransitGatewayAttachments = req
+    "DescribeTransitGatewayAttachments"
+    "fixture/DescribeTransitGatewayAttachments.yaml"
 
 requestCreateReservedInstancesListing :: CreateReservedInstancesListing -> TestTree
 requestCreateReservedInstancesListing = req
     "CreateReservedInstancesListing"
     "fixture/CreateReservedInstancesListing.yaml"
 
+requestDescribeIPv6Pools :: DescribeIPv6Pools -> TestTree
+requestDescribeIPv6Pools = req
+    "DescribeIPv6Pools"
+    "fixture/DescribeIPv6Pools.yaml"
+
 requestAttachVPNGateway :: AttachVPNGateway -> TestTree
 requestAttachVPNGateway = req
     "AttachVPNGateway"
     "fixture/AttachVPNGateway.yaml"
+
+requestDescribeLocalGateways :: DescribeLocalGateways -> TestTree
+requestDescribeLocalGateways = req
+    "DescribeLocalGateways"
+    "fixture/DescribeLocalGateways.yaml"
 
 requestModifyVPCEndpointServicePermissions :: ModifyVPCEndpointServicePermissions -> TestTree
 requestModifyVPCEndpointServicePermissions = req
     "ModifyVPCEndpointServicePermissions"
     "fixture/ModifyVPCEndpointServicePermissions.yaml"
 
+requestExportClientVPNClientCertificateRevocationList :: ExportClientVPNClientCertificateRevocationList -> TestTree
+requestExportClientVPNClientCertificateRevocationList = req
+    "ExportClientVPNClientCertificateRevocationList"
+    "fixture/ExportClientVPNClientCertificateRevocationList.yaml"
+
 requestCreateDHCPOptions :: CreateDHCPOptions -> TestTree
 requestCreateDHCPOptions = req
     "CreateDHCPOptions"
     "fixture/CreateDHCPOptions.yaml"
 
+requestRegisterTransitGatewayMulticastGroupSources :: RegisterTransitGatewayMulticastGroupSources -> TestTree
+requestRegisterTransitGatewayMulticastGroupSources = req
+    "RegisterTransitGatewayMulticastGroupSources"
+    "fixture/RegisterTransitGatewayMulticastGroupSources.yaml"
+
 requestDescribeAccountAttributes :: DescribeAccountAttributes -> TestTree
 requestDescribeAccountAttributes = req
     "DescribeAccountAttributes"
     "fixture/DescribeAccountAttributes.yaml"
+
+requestGetTransitGatewayRouteTablePropagations :: GetTransitGatewayRouteTablePropagations -> TestTree
+requestGetTransitGatewayRouteTablePropagations = req
+    "GetTransitGatewayRouteTablePropagations"
+    "fixture/GetTransitGatewayRouteTablePropagations.yaml"
 
 requestModifyFpgaImageAttribute :: ModifyFpgaImageAttribute -> TestTree
 requestModifyFpgaImageAttribute = req
@@ -2825,15 +4174,30 @@ requestModifyVPCEndpointServiceConfiguration = req
     "ModifyVPCEndpointServiceConfiguration"
     "fixture/ModifyVPCEndpointServiceConfiguration.yaml"
 
+requestCreateTransitGateway :: CreateTransitGateway -> TestTree
+requestCreateTransitGateway = req
+    "CreateTransitGateway"
+    "fixture/CreateTransitGateway.yaml"
+
 requestUnassignIPv6Addresses :: UnassignIPv6Addresses -> TestTree
 requestUnassignIPv6Addresses = req
     "UnassignIPv6Addresses"
     "fixture/UnassignIPv6Addresses.yaml"
 
+requestDeleteTrafficMirrorSession :: DeleteTrafficMirrorSession -> TestTree
+requestDeleteTrafficMirrorSession = req
+    "DeleteTrafficMirrorSession"
+    "fixture/DeleteTrafficMirrorSession.yaml"
+
 requestAssociateIAMInstanceProfile :: AssociateIAMInstanceProfile -> TestTree
 requestAssociateIAMInstanceProfile = req
     "AssociateIAMInstanceProfile"
     "fixture/AssociateIAMInstanceProfile.yaml"
+
+requestModifyDefaultCreditSpecification :: ModifyDefaultCreditSpecification -> TestTree
+requestModifyDefaultCreditSpecification = req
+    "ModifyDefaultCreditSpecification"
+    "fixture/ModifyDefaultCreditSpecification.yaml"
 
 requestDeleteEgressOnlyInternetGateway :: DeleteEgressOnlyInternetGateway -> TestTree
 requestDeleteEgressOnlyInternetGateway = req
@@ -2844,6 +4208,11 @@ requestPurchaseHostReservation :: PurchaseHostReservation -> TestTree
 requestPurchaseHostReservation = req
     "PurchaseHostReservation"
     "fixture/PurchaseHostReservation.yaml"
+
+requestModifyTransitGatewayVPCAttachment :: ModifyTransitGatewayVPCAttachment -> TestTree
+requestModifyTransitGatewayVPCAttachment = req
+    "ModifyTransitGatewayVPCAttachment"
+    "fixture/ModifyTransitGatewayVPCAttachment.yaml"
 
 requestCreateImage :: CreateImage -> TestTree
 requestCreateImage = req
@@ -2864,6 +4233,11 @@ requestDescribeKeyPairs :: DescribeKeyPairs -> TestTree
 requestDescribeKeyPairs = req
     "DescribeKeyPairs"
     "fixture/DescribeKeyPairs.yaml"
+
+requestDisableFastSnapshotRestores :: DisableFastSnapshotRestores -> TestTree
+requestDisableFastSnapshotRestores = req
+    "DisableFastSnapshotRestores"
+    "fixture/DisableFastSnapshotRestores.yaml"
 
 requestDescribeLaunchTemplates :: DescribeLaunchTemplates -> TestTree
 requestDescribeLaunchTemplates = req
@@ -2905,6 +4279,11 @@ requestModifyIdFormat = req
     "ModifyIdFormat"
     "fixture/ModifyIdFormat.yaml"
 
+requestRegisterTransitGatewayMulticastGroupMembers :: RegisterTransitGatewayMulticastGroupMembers -> TestTree
+requestRegisterTransitGatewayMulticastGroupMembers = req
+    "RegisterTransitGatewayMulticastGroupMembers"
+    "fixture/RegisterTransitGatewayMulticastGroupMembers.yaml"
+
 requestDeleteRouteTable :: DeleteRouteTable -> TestTree
 requestDeleteRouteTable = req
     "DeleteRouteTable"
@@ -2914,6 +4293,11 @@ requestResetImageAttribute :: ResetImageAttribute -> TestTree
 requestResetImageAttribute = req
     "ResetImageAttribute"
     "fixture/ResetImageAttribute.yaml"
+
+requestDescribeTransitGatewayRouteTables :: DescribeTransitGatewayRouteTables -> TestTree
+requestDescribeTransitGatewayRouteTables = req
+    "DescribeTransitGatewayRouteTables"
+    "fixture/DescribeTransitGatewayRouteTables.yaml"
 
 requestCreateEgressOnlyInternetGateway :: CreateEgressOnlyInternetGateway -> TestTree
 requestCreateEgressOnlyInternetGateway = req
@@ -2930,6 +4314,11 @@ requestDescribeSpotInstanceRequests = req
     "DescribeSpotInstanceRequests"
     "fixture/DescribeSpotInstanceRequests.yaml"
 
+requestRevokeClientVPNIngress :: RevokeClientVPNIngress -> TestTree
+requestRevokeClientVPNIngress = req
+    "RevokeClientVPNIngress"
+    "fixture/RevokeClientVPNIngress.yaml"
+
 requestUnassignPrivateIPAddresses :: UnassignPrivateIPAddresses -> TestTree
 requestUnassignPrivateIPAddresses = req
     "UnassignPrivateIPAddresses"
@@ -2940,6 +4329,11 @@ requestDescribeNetworkInterfacePermissions = req
     "DescribeNetworkInterfacePermissions"
     "fixture/DescribeNetworkInterfacePermissions.yaml"
 
+requestEnableFastSnapshotRestores :: EnableFastSnapshotRestores -> TestTree
+requestEnableFastSnapshotRestores = req
+    "EnableFastSnapshotRestores"
+    "fixture/EnableFastSnapshotRestores.yaml"
+
 requestDescribeVPCEndpointServicePermissions :: DescribeVPCEndpointServicePermissions -> TestTree
 requestDescribeVPCEndpointServicePermissions = req
     "DescribeVPCEndpointServicePermissions"
@@ -2949,6 +4343,11 @@ requestDeleteDHCPOptions :: DeleteDHCPOptions -> TestTree
 requestDeleteDHCPOptions = req
     "DeleteDHCPOptions"
     "fixture/DeleteDHCPOptions.yaml"
+
+requestRegisterInstanceEventNotificationAttributes :: RegisterInstanceEventNotificationAttributes -> TestTree
+requestRegisterInstanceEventNotificationAttributes = req
+    "RegisterInstanceEventNotificationAttributes"
+    "fixture/RegisterInstanceEventNotificationAttributes.yaml"
 
 requestDescribeNetworkACLs :: DescribeNetworkACLs -> TestTree
 requestDescribeNetworkACLs = req
@@ -2974,6 +4373,16 @@ requestMonitorInstances :: MonitorInstances -> TestTree
 requestMonitorInstances = req
     "MonitorInstances"
     "fixture/MonitorInstances.yaml"
+
+requestSearchLocalGatewayRoutes :: SearchLocalGatewayRoutes -> TestTree
+requestSearchLocalGatewayRoutes = req
+    "SearchLocalGatewayRoutes"
+    "fixture/SearchLocalGatewayRoutes.yaml"
+
+requestDeleteClientVPNRoute :: DeleteClientVPNRoute -> TestTree
+requestDeleteClientVPNRoute = req
+    "DeleteClientVPNRoute"
+    "fixture/DeleteClientVPNRoute.yaml"
 
 requestAcceptVPCPeeringConnection :: AcceptVPCPeeringConnection -> TestTree
 requestAcceptVPCPeeringConnection = req
@@ -3004,6 +4413,11 @@ requestModifyVPCAttribute :: ModifyVPCAttribute -> TestTree
 requestModifyVPCAttribute = req
     "ModifyVPCAttribute"
     "fixture/ModifyVPCAttribute.yaml"
+
+requestDescribeClientVPNConnections :: DescribeClientVPNConnections -> TestTree
+requestDescribeClientVPNConnections = req
+    "DescribeClientVPNConnections"
+    "fixture/DescribeClientVPNConnections.yaml"
 
 requestDescribeFleetHistory :: DescribeFleetHistory -> TestTree
 requestDescribeFleetHistory = req
@@ -3040,6 +4454,11 @@ requestDeleteVolume = req
     "DeleteVolume"
     "fixture/DeleteVolume.yaml"
 
+requestDeprovisionByoipCidr :: DeprovisionByoipCidr -> TestTree
+requestDeprovisionByoipCidr = req
+    "DeprovisionByoipCidr"
+    "fixture/DeprovisionByoipCidr.yaml"
+
 requestDeleteVPCEndpointServiceConfigurations :: DeleteVPCEndpointServiceConfigurations -> TestTree
 requestDeleteVPCEndpointServiceConfigurations = req
     "DeleteVPCEndpointServiceConfigurations"
@@ -3051,6 +4470,20 @@ requestDescribeSpotFleetInstances = req
     "fixture/DescribeSpotFleetInstances.yaml"
 
 -- Responses
+
+responseModifyCapacityReservation :: ModifyCapacityReservationResponse -> TestTree
+responseModifyCapacityReservation = res
+    "ModifyCapacityReservationResponse"
+    "fixture/ModifyCapacityReservationResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyCapacityReservation)
+
+responseGetAssociatedIPv6PoolCidrs :: GetAssociatedIPv6PoolCidrsResponse -> TestTree
+responseGetAssociatedIPv6PoolCidrs = res
+    "GetAssociatedIPv6PoolCidrsResponse"
+    "fixture/GetAssociatedIPv6PoolCidrsResponse.proto"
+    ec2
+    (Proxy :: Proxy GetAssociatedIPv6PoolCidrs)
 
 responseImportInstance :: ImportInstanceResponse -> TestTree
 responseImportInstance = res
@@ -3072,6 +4505,13 @@ responseCreateNetworkInterfacePermission = res
     "fixture/CreateNetworkInterfacePermissionResponse.proto"
     ec2
     (Proxy :: Proxy CreateNetworkInterfacePermission)
+
+responseSendDiagnosticInterrupt :: SendDiagnosticInterruptResponse -> TestTree
+responseSendDiagnosticInterrupt = res
+    "SendDiagnosticInterruptResponse"
+    "fixture/SendDiagnosticInterruptResponse.proto"
+    ec2
+    (Proxy :: Proxy SendDiagnosticInterrupt)
 
 responseDeleteLaunchTemplate :: DeleteLaunchTemplateResponse -> TestTree
 responseDeleteLaunchTemplate = res
@@ -3129,6 +4569,20 @@ responseDescribeTags = res
     ec2
     (Proxy :: Proxy DescribeTags)
 
+responseCreateTransitGatewayRouteTable :: CreateTransitGatewayRouteTableResponse -> TestTree
+responseCreateTransitGatewayRouteTable = res
+    "CreateTransitGatewayRouteTableResponse"
+    "fixture/CreateTransitGatewayRouteTableResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTransitGatewayRouteTable)
+
+responseModifyInstanceMetadataOptions :: ModifyInstanceMetadataOptionsResponse -> TestTree
+responseModifyInstanceMetadataOptions = res
+    "ModifyInstanceMetadataOptionsResponse"
+    "fixture/ModifyInstanceMetadataOptionsResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyInstanceMetadataOptions)
+
 responseUpdateSecurityGroupRuleDescriptionsIngress :: UpdateSecurityGroupRuleDescriptionsIngressResponse -> TestTree
 responseUpdateSecurityGroupRuleDescriptionsIngress = res
     "UpdateSecurityGroupRuleDescriptionsIngressResponse"
@@ -3164,6 +4618,13 @@ responseDeleteVPCEndpoints = res
     ec2
     (Proxy :: Proxy DeleteVPCEndpoints)
 
+responseDescribeClientVPNEndpoints :: DescribeClientVPNEndpointsResponse -> TestTree
+responseDescribeClientVPNEndpoints = res
+    "DescribeClientVPNEndpointsResponse"
+    "fixture/DescribeClientVPNEndpointsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeClientVPNEndpoints)
+
 responseDeleteFlowLogs :: DeleteFlowLogsResponse -> TestTree
 responseDeleteFlowLogs = res
     "DeleteFlowLogsResponse"
@@ -3177,6 +4638,13 @@ responseDescribeVPCClassicLink = res
     "fixture/DescribeVPCClassicLinkResponse.proto"
     ec2
     (Proxy :: Proxy DescribeVPCClassicLink)
+
+responseAssociateTransitGatewayMulticastDomain :: AssociateTransitGatewayMulticastDomainResponse -> TestTree
+responseAssociateTransitGatewayMulticastDomain = res
+    "AssociateTransitGatewayMulticastDomainResponse"
+    "fixture/AssociateTransitGatewayMulticastDomainResponse.proto"
+    ec2
+    (Proxy :: Proxy AssociateTransitGatewayMulticastDomain)
 
 responseModifySubnetAttribute :: ModifySubnetAttributeResponse -> TestTree
 responseModifySubnetAttribute = res
@@ -3206,6 +4674,13 @@ responseCancelBundleTask = res
     ec2
     (Proxy :: Proxy CancelBundleTask)
 
+responseDescribeByoipCidrs :: DescribeByoipCidrsResponse -> TestTree
+responseDescribeByoipCidrs = res
+    "DescribeByoipCidrsResponse"
+    "fixture/DescribeByoipCidrsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeByoipCidrs)
+
 responseAcceptReservedInstancesExchangeQuote :: AcceptReservedInstancesExchangeQuoteResponse -> TestTree
 responseAcceptReservedInstancesExchangeQuote = res
     "AcceptReservedInstancesExchangeQuoteResponse"
@@ -3219,6 +4694,13 @@ responseReleaseAddress = res
     "fixture/ReleaseAddressResponse.proto"
     ec2
     (Proxy :: Proxy ReleaseAddress)
+
+responseDescribeInstanceTypeOfferings :: DescribeInstanceTypeOfferingsResponse -> TestTree
+responseDescribeInstanceTypeOfferings = res
+    "DescribeInstanceTypeOfferingsResponse"
+    "fixture/DescribeInstanceTypeOfferingsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeInstanceTypeOfferings)
 
 responseCreateInternetGateway :: CreateInternetGatewayResponse -> TestTree
 responseCreateInternetGateway = res
@@ -3248,6 +4730,13 @@ responseAuthorizeSecurityGroupEgress = res
     ec2
     (Proxy :: Proxy AuthorizeSecurityGroupEgress)
 
+responseEnableTransitGatewayRouteTablePropagation :: EnableTransitGatewayRouteTablePropagationResponse -> TestTree
+responseEnableTransitGatewayRouteTablePropagation = res
+    "EnableTransitGatewayRouteTablePropagationResponse"
+    "fixture/EnableTransitGatewayRouteTablePropagationResponse.proto"
+    ec2
+    (Proxy :: Proxy EnableTransitGatewayRouteTablePropagation)
+
 responseDeregisterImage :: DeregisterImageResponse -> TestTree
 responseDeregisterImage = res
     "DeregisterImageResponse"
@@ -3261,6 +4750,27 @@ responseDeleteVPCEndpointConnectionNotifications = res
     "fixture/DeleteVPCEndpointConnectionNotificationsResponse.proto"
     ec2
     (Proxy :: Proxy DeleteVPCEndpointConnectionNotifications)
+
+responseDescribeCoipPools :: DescribeCoipPoolsResponse -> TestTree
+responseDescribeCoipPools = res
+    "DescribeCoipPoolsResponse"
+    "fixture/DescribeCoipPoolsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeCoipPools)
+
+responseGetTransitGatewayMulticastDomainAssociations :: GetTransitGatewayMulticastDomainAssociationsResponse -> TestTree
+responseGetTransitGatewayMulticastDomainAssociations = res
+    "GetTransitGatewayMulticastDomainAssociationsResponse"
+    "fixture/GetTransitGatewayMulticastDomainAssociationsResponse.proto"
+    ec2
+    (Proxy :: Proxy GetTransitGatewayMulticastDomainAssociations)
+
+responseDeleteLocalGatewayRouteTableVPCAssociation :: DeleteLocalGatewayRouteTableVPCAssociationResponse -> TestTree
+responseDeleteLocalGatewayRouteTableVPCAssociation = res
+    "DeleteLocalGatewayRouteTableVPCAssociationResponse"
+    "fixture/DeleteLocalGatewayRouteTableVPCAssociationResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteLocalGatewayRouteTableVPCAssociation)
 
 responseModifyNetworkInterfaceAttribute :: ModifyNetworkInterfaceAttributeResponse -> TestTree
 responseModifyNetworkInterfaceAttribute = res
@@ -3276,6 +4786,34 @@ responseModifyVPCTenancy = res
     ec2
     (Proxy :: Proxy ModifyVPCTenancy)
 
+responseDescribeInstanceTypes :: DescribeInstanceTypesResponse -> TestTree
+responseDescribeInstanceTypes = res
+    "DescribeInstanceTypesResponse"
+    "fixture/DescribeInstanceTypesResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeInstanceTypes)
+
+responseDescribeClientVPNAuthorizationRules :: DescribeClientVPNAuthorizationRulesResponse -> TestTree
+responseDescribeClientVPNAuthorizationRules = res
+    "DescribeClientVPNAuthorizationRulesResponse"
+    "fixture/DescribeClientVPNAuthorizationRulesResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeClientVPNAuthorizationRules)
+
+responseDeleteTransitGatewayVPCAttachment :: DeleteTransitGatewayVPCAttachmentResponse -> TestTree
+responseDeleteTransitGatewayVPCAttachment = res
+    "DeleteTransitGatewayVPCAttachmentResponse"
+    "fixture/DeleteTransitGatewayVPCAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTransitGatewayVPCAttachment)
+
+responseDeleteTransitGatewayMulticastDomain :: DeleteTransitGatewayMulticastDomainResponse -> TestTree
+responseDeleteTransitGatewayMulticastDomain = res
+    "DeleteTransitGatewayMulticastDomainResponse"
+    "fixture/DeleteTransitGatewayMulticastDomainResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTransitGatewayMulticastDomain)
+
 responseCancelReservedInstancesListing :: CancelReservedInstancesListingResponse -> TestTree
 responseCancelReservedInstancesListing = res
     "CancelReservedInstancesListingResponse"
@@ -3289,6 +4827,13 @@ responseAttachClassicLinkVPC = res
     "fixture/AttachClassicLinkVPCResponse.proto"
     ec2
     (Proxy :: Proxy AttachClassicLinkVPC)
+
+responseDisableTransitGatewayRouteTablePropagation :: DisableTransitGatewayRouteTablePropagationResponse -> TestTree
+responseDisableTransitGatewayRouteTablePropagation = res
+    "DisableTransitGatewayRouteTablePropagationResponse"
+    "fixture/DisableTransitGatewayRouteTablePropagationResponse.proto"
+    ec2
+    (Proxy :: Proxy DisableTransitGatewayRouteTablePropagation)
 
 responseDescribeVPCClassicLinkDNSSupport :: DescribeVPCClassicLinkDNSSupportResponse -> TestTree
 responseDescribeVPCClassicLinkDNSSupport = res
@@ -3310,6 +4855,13 @@ responseRunScheduledInstances = res
     "fixture/RunScheduledInstancesResponse.proto"
     ec2
     (Proxy :: Proxy RunScheduledInstances)
+
+responseCreateTransitGatewayRoute :: CreateTransitGatewayRouteResponse -> TestTree
+responseCreateTransitGatewayRoute = res
+    "CreateTransitGatewayRouteResponse"
+    "fixture/CreateTransitGatewayRouteResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTransitGatewayRoute)
 
 responseCancelSpotFleetRequests :: CancelSpotFleetRequestsResponse -> TestTree
 responseCancelSpotFleetRequests = res
@@ -3339,6 +4891,13 @@ responseImportImage = res
     ec2
     (Proxy :: Proxy ImportImage)
 
+responseCreateLocalGatewayRouteTableVPCAssociation :: CreateLocalGatewayRouteTableVPCAssociationResponse -> TestTree
+responseCreateLocalGatewayRouteTableVPCAssociation = res
+    "CreateLocalGatewayRouteTableVPCAssociationResponse"
+    "fixture/CreateLocalGatewayRouteTableVPCAssociationResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateLocalGatewayRouteTableVPCAssociation)
+
 responseCopyFpgaImage :: CopyFpgaImageResponse -> TestTree
 responseCopyFpgaImage = res
     "CopyFpgaImageResponse"
@@ -3346,12 +4905,33 @@ responseCopyFpgaImage = res
     ec2
     (Proxy :: Proxy CopyFpgaImage)
 
+responseImportClientVPNClientCertificateRevocationList :: ImportClientVPNClientCertificateRevocationListResponse -> TestTree
+responseImportClientVPNClientCertificateRevocationList = res
+    "ImportClientVPNClientCertificateRevocationListResponse"
+    "fixture/ImportClientVPNClientCertificateRevocationListResponse.proto"
+    ec2
+    (Proxy :: Proxy ImportClientVPNClientCertificateRevocationList)
+
 responseStopInstances :: StopInstancesResponse -> TestTree
 responseStopInstances = res
     "StopInstancesResponse"
     "fixture/StopInstancesResponse.proto"
     ec2
     (Proxy :: Proxy StopInstances)
+
+responseEnableEBSEncryptionByDefault :: EnableEBSEncryptionByDefaultResponse -> TestTree
+responseEnableEBSEncryptionByDefault = res
+    "EnableEBSEncryptionByDefaultResponse"
+    "fixture/EnableEBSEncryptionByDefaultResponse.proto"
+    ec2
+    (Proxy :: Proxy EnableEBSEncryptionByDefault)
+
+responseDeregisterTransitGatewayMulticastGroupSources :: DeregisterTransitGatewayMulticastGroupSourcesResponse -> TestTree
+responseDeregisterTransitGatewayMulticastGroupSources = res
+    "DeregisterTransitGatewayMulticastGroupSourcesResponse"
+    "fixture/DeregisterTransitGatewayMulticastGroupSourcesResponse.proto"
+    ec2
+    (Proxy :: Proxy DeregisterTransitGatewayMulticastGroupSources)
 
 responseModifyLaunchTemplate :: ModifyLaunchTemplateResponse -> TestTree
 responseModifyLaunchTemplate = res
@@ -3451,6 +5031,13 @@ responseDescribeVPCEndpointServices = res
     ec2
     (Proxy :: Proxy DescribeVPCEndpointServices)
 
+responseDeleteLocalGatewayRoute :: DeleteLocalGatewayRouteResponse -> TestTree
+responseDeleteLocalGatewayRoute = res
+    "DeleteLocalGatewayRouteResponse"
+    "fixture/DeleteLocalGatewayRouteResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteLocalGatewayRoute)
+
 responseAuthorizeSecurityGroupIngress :: AuthorizeSecurityGroupIngressResponse -> TestTree
 responseAuthorizeSecurityGroupIngress = res
     "AuthorizeSecurityGroupIngressResponse"
@@ -3471,6 +5058,13 @@ responseDescribeSubnets = res
     "fixture/DescribeSubnetsResponse.proto"
     ec2
     (Proxy :: Proxy DescribeSubnets)
+
+responseGetTransitGatewayAttachmentPropagations :: GetTransitGatewayAttachmentPropagationsResponse -> TestTree
+responseGetTransitGatewayAttachmentPropagations = res
+    "GetTransitGatewayAttachmentPropagationsResponse"
+    "fixture/GetTransitGatewayAttachmentPropagationsResponse.proto"
+    ec2
+    (Proxy :: Proxy GetTransitGatewayAttachmentPropagations)
 
 responseCreateTags :: CreateTagsResponse -> TestTree
 responseCreateTags = res
@@ -3507,6 +5101,13 @@ responseDescribeVPNConnections = res
     ec2
     (Proxy :: Proxy DescribeVPNConnections)
 
+responseModifyInstanceEventStartTime :: ModifyInstanceEventStartTimeResponse -> TestTree
+responseModifyInstanceEventStartTime = res
+    "ModifyInstanceEventStartTimeResponse"
+    "fixture/ModifyInstanceEventStartTimeResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyInstanceEventStartTime)
+
 responseDeleteRoute :: DeleteRouteResponse -> TestTree
 responseDeleteRoute = res
     "DeleteRouteResponse"
@@ -3528,6 +5129,13 @@ responseDescribeVPCEndpoints = res
     ec2
     (Proxy :: Proxy DescribeVPCEndpoints)
 
+responseCreateTrafficMirrorFilter :: CreateTrafficMirrorFilterResponse -> TestTree
+responseCreateTrafficMirrorFilter = res
+    "CreateTrafficMirrorFilterResponse"
+    "fixture/CreateTrafficMirrorFilterResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTrafficMirrorFilter)
+
 responseResetInstanceAttribute :: ResetInstanceAttributeResponse -> TestTree
 responseResetInstanceAttribute = res
     "ResetInstanceAttributeResponse"
@@ -3548,6 +5156,13 @@ responseAttachNetworkInterface = res
     "fixture/AttachNetworkInterfaceResponse.proto"
     ec2
     (Proxy :: Proxy AttachNetworkInterface)
+
+responseCreateCapacityReservation :: CreateCapacityReservationResponse -> TestTree
+responseCreateCapacityReservation = res
+    "CreateCapacityReservationResponse"
+    "fixture/CreateCapacityReservationResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateCapacityReservation)
 
 responseDescribeInstanceStatus :: DescribeInstanceStatusResponse -> TestTree
 responseDescribeInstanceStatus = res
@@ -3605,12 +5220,33 @@ responseDescribeFleets = res
     ec2
     (Proxy :: Proxy DescribeFleets)
 
+responseCreateTransitGatewayPeeringAttachment :: CreateTransitGatewayPeeringAttachmentResponse -> TestTree
+responseCreateTransitGatewayPeeringAttachment = res
+    "CreateTransitGatewayPeeringAttachmentResponse"
+    "fixture/CreateTransitGatewayPeeringAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTransitGatewayPeeringAttachment)
+
 responseDeleteSecurityGroup :: DeleteSecurityGroupResponse -> TestTree
 responseDeleteSecurityGroup = res
     "DeleteSecurityGroupResponse"
     "fixture/DeleteSecurityGroupResponse.proto"
     ec2
     (Proxy :: Proxy DeleteSecurityGroup)
+
+responseDescribePublicIPv4Pools :: DescribePublicIPv4PoolsResponse -> TestTree
+responseDescribePublicIPv4Pools = res
+    "DescribePublicIPv4PoolsResponse"
+    "fixture/DescribePublicIPv4PoolsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribePublicIPv4Pools)
+
+responseDescribeClientVPNTargetNetworks :: DescribeClientVPNTargetNetworksResponse -> TestTree
+responseDescribeClientVPNTargetNetworks = res
+    "DescribeClientVPNTargetNetworksResponse"
+    "fixture/DescribeClientVPNTargetNetworksResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeClientVPNTargetNetworks)
 
 responseDeleteVPCPeeringConnection :: DeleteVPCPeeringConnectionResponse -> TestTree
 responseDeleteVPCPeeringConnection = res
@@ -3640,6 +5276,20 @@ responseDescribeFlowLogs = res
     ec2
     (Proxy :: Proxy DescribeFlowLogs)
 
+responseDescribeLocalGatewayVirtualInterfaceGroups :: DescribeLocalGatewayVirtualInterfaceGroupsResponse -> TestTree
+responseDescribeLocalGatewayVirtualInterfaceGroups = res
+    "DescribeLocalGatewayVirtualInterfaceGroupsResponse"
+    "fixture/DescribeLocalGatewayVirtualInterfaceGroupsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeLocalGatewayVirtualInterfaceGroups)
+
+responseDescribeLocalGatewayRouteTableVPCAssociations :: DescribeLocalGatewayRouteTableVPCAssociationsResponse -> TestTree
+responseDescribeLocalGatewayRouteTableVPCAssociations = res
+    "DescribeLocalGatewayRouteTableVPCAssociationsResponse"
+    "fixture/DescribeLocalGatewayRouteTableVPCAssociationsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeLocalGatewayRouteTableVPCAssociations)
+
 responseDescribeVPCEndpointConnectionNotifications :: DescribeVPCEndpointConnectionNotificationsResponse -> TestTree
 responseDescribeVPCEndpointConnectionNotifications = res
     "DescribeVPCEndpointConnectionNotificationsResponse"
@@ -3654,12 +5304,26 @@ responseRunInstances = res
     ec2
     (Proxy :: Proxy RunInstances)
 
+responseCreateSnapshots :: CreateSnapshotsResponse -> TestTree
+responseCreateSnapshots = res
+    "CreateSnapshotsResponse"
+    "fixture/CreateSnapshotsResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateSnapshots)
+
 responseAssociateDHCPOptions :: AssociateDHCPOptionsResponse -> TestTree
 responseAssociateDHCPOptions = res
     "AssociateDHCPOptionsResponse"
     "fixture/AssociateDHCPOptionsResponse.proto"
     ec2
     (Proxy :: Proxy AssociateDHCPOptions)
+
+responseDeleteTrafficMirrorFilterRule :: DeleteTrafficMirrorFilterRuleResponse -> TestTree
+responseDeleteTrafficMirrorFilterRule = res
+    "DeleteTrafficMirrorFilterRuleResponse"
+    "fixture/DeleteTrafficMirrorFilterRuleResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTrafficMirrorFilterRule)
 
 responseDescribeReservedInstances :: DescribeReservedInstancesResponse -> TestTree
 responseDescribeReservedInstances = res
@@ -3703,12 +5367,33 @@ responseDisableVPCClassicLinkDNSSupport = res
     ec2
     (Proxy :: Proxy DisableVPCClassicLinkDNSSupport)
 
+responseApplySecurityGroupsToClientVPNTargetNetwork :: ApplySecurityGroupsToClientVPNTargetNetworkResponse -> TestTree
+responseApplySecurityGroupsToClientVPNTargetNetwork = res
+    "ApplySecurityGroupsToClientVPNTargetNetworkResponse"
+    "fixture/ApplySecurityGroupsToClientVPNTargetNetworkResponse.proto"
+    ec2
+    (Proxy :: Proxy ApplySecurityGroupsToClientVPNTargetNetwork)
+
+responseDescribeTrafficMirrorTargets :: DescribeTrafficMirrorTargetsResponse -> TestTree
+responseDescribeTrafficMirrorTargets = res
+    "DescribeTrafficMirrorTargetsResponse"
+    "fixture/DescribeTrafficMirrorTargetsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTrafficMirrorTargets)
+
 responseDescribeVolumesModifications :: DescribeVolumesModificationsResponse -> TestTree
 responseDescribeVolumesModifications = res
     "DescribeVolumesModificationsResponse"
     "fixture/DescribeVolumesModificationsResponse.proto"
     ec2
     (Proxy :: Proxy DescribeVolumesModifications)
+
+responseExportImage :: ExportImageResponse -> TestTree
+responseExportImage = res
+    "ExportImageResponse"
+    "fixture/ExportImageResponse.proto"
+    ec2
+    (Proxy :: Proxy ExportImage)
 
 responseCreateFpgaImage :: CreateFpgaImageResponse -> TestTree
 responseCreateFpgaImage = res
@@ -3724,6 +5409,20 @@ responseAcceptVPCEndpointConnections = res
     ec2
     (Proxy :: Proxy AcceptVPCEndpointConnections)
 
+responseDeleteClientVPNEndpoint :: DeleteClientVPNEndpointResponse -> TestTree
+responseDeleteClientVPNEndpoint = res
+    "DeleteClientVPNEndpointResponse"
+    "fixture/DeleteClientVPNEndpointResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteClientVPNEndpoint)
+
+responseSearchTransitGatewayRoutes :: SearchTransitGatewayRoutesResponse -> TestTree
+responseSearchTransitGatewayRoutes = res
+    "SearchTransitGatewayRoutesResponse"
+    "fixture/SearchTransitGatewayRoutesResponse.proto"
+    ec2
+    (Proxy :: Proxy SearchTransitGatewayRoutes)
+
 responseGetLaunchTemplateData :: GetLaunchTemplateDataResponse -> TestTree
 responseGetLaunchTemplateData = res
     "GetLaunchTemplateDataResponse"
@@ -3737,6 +5436,13 @@ responseAllocateAddress = res
     "fixture/AllocateAddressResponse.proto"
     ec2
     (Proxy :: Proxy AllocateAddress)
+
+responseAcceptTransitGatewayVPCAttachment :: AcceptTransitGatewayVPCAttachmentResponse -> TestTree
+responseAcceptTransitGatewayVPCAttachment = res
+    "AcceptTransitGatewayVPCAttachmentResponse"
+    "fixture/AcceptTransitGatewayVPCAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy AcceptTransitGatewayVPCAttachment)
 
 responseCancelConversionTask :: CancelConversionTaskResponse -> TestTree
 responseCancelConversionTask = res
@@ -3759,6 +5465,13 @@ responseCreateRouteTable = res
     ec2
     (Proxy :: Proxy CreateRouteTable)
 
+responseRejectTransitGatewayPeeringAttachment :: RejectTransitGatewayPeeringAttachmentResponse -> TestTree
+responseRejectTransitGatewayPeeringAttachment = res
+    "RejectTransitGatewayPeeringAttachmentResponse"
+    "fixture/RejectTransitGatewayPeeringAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy RejectTransitGatewayPeeringAttachment)
+
 responseReportInstanceStatus :: ReportInstanceStatusResponse -> TestTree
 responseReportInstanceStatus = res
     "ReportInstanceStatusResponse"
@@ -3780,6 +5493,13 @@ responseRequestSpotInstances = res
     ec2
     (Proxy :: Proxy RequestSpotInstances)
 
+responseWithdrawByoipCidr :: WithdrawByoipCidrResponse -> TestTree
+responseWithdrawByoipCidr = res
+    "WithdrawByoipCidrResponse"
+    "fixture/WithdrawByoipCidrResponse.proto"
+    ec2
+    (Proxy :: Proxy WithdrawByoipCidr)
+
 responseDescribeHostReservationOfferings :: DescribeHostReservationOfferingsResponse -> TestTree
 responseDescribeHostReservationOfferings = res
     "DescribeHostReservationOfferingsResponse"
@@ -3794,6 +5514,34 @@ responseResetFpgaImageAttribute = res
     ec2
     (Proxy :: Proxy ResetFpgaImageAttribute)
 
+responseModifyVPNConnection :: ModifyVPNConnectionResponse -> TestTree
+responseModifyVPNConnection = res
+    "ModifyVPNConnectionResponse"
+    "fixture/ModifyVPNConnectionResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyVPNConnection)
+
+responseCreateTrafficMirrorFilterRule :: CreateTrafficMirrorFilterRuleResponse -> TestTree
+responseCreateTrafficMirrorFilterRule = res
+    "CreateTrafficMirrorFilterRuleResponse"
+    "fixture/CreateTrafficMirrorFilterRuleResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTrafficMirrorFilterRule)
+
+responseDeleteTransitGateway :: DeleteTransitGatewayResponse -> TestTree
+responseDeleteTransitGateway = res
+    "DeleteTransitGatewayResponse"
+    "fixture/DeleteTransitGatewayResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTransitGateway)
+
+responseStartVPCEndpointServicePrivateDNSVerification :: StartVPCEndpointServicePrivateDNSVerificationResponse -> TestTree
+responseStartVPCEndpointServicePrivateDNSVerification = res
+    "StartVPCEndpointServicePrivateDNSVerificationResponse"
+    "fixture/StartVPCEndpointServicePrivateDNSVerificationResponse.proto"
+    ec2
+    (Proxy :: Proxy StartVPCEndpointServicePrivateDNSVerification)
+
 responseDescribeVolumes :: DescribeVolumesResponse -> TestTree
 responseDescribeVolumes = res
     "DescribeVolumesResponse"
@@ -3807,6 +5555,13 @@ responseRejectVPCPeeringConnection = res
     "fixture/RejectVPCPeeringConnectionResponse.proto"
     ec2
     (Proxy :: Proxy RejectVPCPeeringConnection)
+
+responseDescribeClientVPNRoutes :: DescribeClientVPNRoutesResponse -> TestTree
+responseDescribeClientVPNRoutes = res
+    "DescribeClientVPNRoutesResponse"
+    "fixture/DescribeClientVPNRoutesResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeClientVPNRoutes)
 
 responseDeleteVPNConnectionRoute :: DeleteVPNConnectionRouteResponse -> TestTree
 responseDeleteVPNConnectionRoute = res
@@ -3836,12 +5591,33 @@ responseAllocateHosts = res
     ec2
     (Proxy :: Proxy AllocateHosts)
 
+responseCreateClientVPNEndpoint :: CreateClientVPNEndpointResponse -> TestTree
+responseCreateClientVPNEndpoint = res
+    "CreateClientVPNEndpointResponse"
+    "fixture/CreateClientVPNEndpointResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateClientVPNEndpoint)
+
+responseCreateTrafficMirrorSession :: CreateTrafficMirrorSessionResponse -> TestTree
+responseCreateTrafficMirrorSession = res
+    "CreateTrafficMirrorSessionResponse"
+    "fixture/CreateTrafficMirrorSessionResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTrafficMirrorSession)
+
 responseRegisterImage :: RegisterImageResponse -> TestTree
 responseRegisterImage = res
     "RegisterImageResponse"
     "fixture/RegisterImageResponse.proto"
     ec2
     (Proxy :: Proxy RegisterImage)
+
+responseAdvertiseByoipCidr :: AdvertiseByoipCidrResponse -> TestTree
+responseAdvertiseByoipCidr = res
+    "AdvertiseByoipCidrResponse"
+    "fixture/AdvertiseByoipCidrResponse.proto"
+    ec2
+    (Proxy :: Proxy AdvertiseByoipCidr)
 
 responseModifyFleet :: ModifyFleetResponse -> TestTree
 responseModifyFleet = res
@@ -3856,6 +5632,13 @@ responseRevokeSecurityGroupIngress = res
     "fixture/RevokeSecurityGroupIngressResponse.proto"
     ec2
     (Proxy :: Proxy RevokeSecurityGroupIngress)
+
+responseGetEBSDefaultKMSKeyId :: GetEBSDefaultKMSKeyIdResponse -> TestTree
+responseGetEBSDefaultKMSKeyId = res
+    "GetEBSDefaultKMSKeyIdResponse"
+    "fixture/GetEBSDefaultKMSKeyIdResponse.proto"
+    ec2
+    (Proxy :: Proxy GetEBSDefaultKMSKeyId)
 
 responseDescribeHostReservations :: DescribeHostReservationsResponse -> TestTree
 responseDescribeHostReservations = res
@@ -3899,12 +5682,26 @@ responseDeleteFpgaImage = res
     ec2
     (Proxy :: Proxy DeleteFpgaImage)
 
+responseDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations :: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResponse -> TestTree
+responseDescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations = res
+    "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResponse"
+    "fixture/DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations)
+
 responseDescribeScheduledInstances :: DescribeScheduledInstancesResponse -> TestTree
 responseDescribeScheduledInstances = res
     "DescribeScheduledInstancesResponse"
     "fixture/DescribeScheduledInstancesResponse.proto"
     ec2
     (Proxy :: Proxy DescribeScheduledInstances)
+
+responseSearchTransitGatewayMulticastGroups :: SearchTransitGatewayMulticastGroupsResponse -> TestTree
+responseSearchTransitGatewayMulticastGroups = res
+    "SearchTransitGatewayMulticastGroupsResponse"
+    "fixture/SearchTransitGatewayMulticastGroupsResponse.proto"
+    ec2
+    (Proxy :: Proxy SearchTransitGatewayMulticastGroups)
 
 responseCreateFlowLogs :: CreateFlowLogsResponse -> TestTree
 responseCreateFlowLogs = res
@@ -3955,12 +5752,33 @@ responseDescribePrincipalIdFormat = res
     ec2
     (Proxy :: Proxy DescribePrincipalIdFormat)
 
+responseDescribeTransitGateways :: DescribeTransitGatewaysResponse -> TestTree
+responseDescribeTransitGateways = res
+    "DescribeTransitGatewaysResponse"
+    "fixture/DescribeTransitGatewaysResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTransitGateways)
+
 responseDeleteNetworkACL :: DeleteNetworkACLResponse -> TestTree
 responseDeleteNetworkACL = res
     "DeleteNetworkACLResponse"
     "fixture/DeleteNetworkACLResponse.proto"
     ec2
     (Proxy :: Proxy DeleteNetworkACL)
+
+responseDisassociateTransitGatewayMulticastDomain :: DisassociateTransitGatewayMulticastDomainResponse -> TestTree
+responseDisassociateTransitGatewayMulticastDomain = res
+    "DisassociateTransitGatewayMulticastDomainResponse"
+    "fixture/DisassociateTransitGatewayMulticastDomainResponse.proto"
+    ec2
+    (Proxy :: Proxy DisassociateTransitGatewayMulticastDomain)
+
+responseDeleteTransitGatewayRouteTable :: DeleteTransitGatewayRouteTableResponse -> TestTree
+responseDeleteTransitGatewayRouteTable = res
+    "DeleteTransitGatewayRouteTableResponse"
+    "fixture/DeleteTransitGatewayRouteTableResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTransitGatewayRouteTable)
 
 responseCreateLaunchTemplate :: CreateLaunchTemplateResponse -> TestTree
 responseCreateLaunchTemplate = res
@@ -3990,6 +5808,13 @@ responseDeleteVPNGateway = res
     ec2
     (Proxy :: Proxy DeleteVPNGateway)
 
+responseCreateTrafficMirrorTarget :: CreateTrafficMirrorTargetResponse -> TestTree
+responseCreateTrafficMirrorTarget = res
+    "CreateTrafficMirrorTargetResponse"
+    "fixture/CreateTrafficMirrorTargetResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTrafficMirrorTarget)
+
 responseDescribeImportImageTasks :: DescribeImportImageTasksResponse -> TestTree
 responseDescribeImportImageTasks = res
     "DescribeImportImageTasksResponse"
@@ -4010,6 +5835,13 @@ responseDescribeMovingAddresses = res
     "fixture/DescribeMovingAddressesResponse.proto"
     ec2
     (Proxy :: Proxy DescribeMovingAddresses)
+
+responseExportTransitGatewayRoutes :: ExportTransitGatewayRoutesResponse -> TestTree
+responseExportTransitGatewayRoutes = res
+    "ExportTransitGatewayRoutesResponse"
+    "fixture/ExportTransitGatewayRoutesResponse.proto"
+    ec2
+    (Proxy :: Proxy ExportTransitGatewayRoutes)
 
 responseGetPasswordData :: GetPasswordDataResponse -> TestTree
 responseGetPasswordData = res
@@ -4046,12 +5878,26 @@ responseCopySnapshot = res
     ec2
     (Proxy :: Proxy CopySnapshot)
 
+responseAcceptTransitGatewayPeeringAttachment :: AcceptTransitGatewayPeeringAttachmentResponse -> TestTree
+responseAcceptTransitGatewayPeeringAttachment = res
+    "AcceptTransitGatewayPeeringAttachmentResponse"
+    "fixture/AcceptTransitGatewayPeeringAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy AcceptTransitGatewayPeeringAttachment)
+
 responseDisassociateAddress :: DisassociateAddressResponse -> TestTree
 responseDisassociateAddress = res
     "DisassociateAddressResponse"
     "fixture/DisassociateAddressResponse.proto"
     ec2
     (Proxy :: Proxy DisassociateAddress)
+
+responseModifyTrafficMirrorFilterNetworkServices :: ModifyTrafficMirrorFilterNetworkServicesResponse -> TestTree
+responseModifyTrafficMirrorFilterNetworkServices = res
+    "ModifyTrafficMirrorFilterNetworkServicesResponse"
+    "fixture/ModifyTrafficMirrorFilterNetworkServicesResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyTrafficMirrorFilterNetworkServices)
 
 responseDescribeEgressOnlyInternetGateways :: DescribeEgressOnlyInternetGatewaysResponse -> TestTree
 responseDescribeEgressOnlyInternetGateways = res
@@ -4073,6 +5919,27 @@ responseCreateInstanceExportTask = res
     "fixture/CreateInstanceExportTaskResponse.proto"
     ec2
     (Proxy :: Proxy CreateInstanceExportTask)
+
+responseRejectTransitGatewayVPCAttachment :: RejectTransitGatewayVPCAttachmentResponse -> TestTree
+responseRejectTransitGatewayVPCAttachment = res
+    "RejectTransitGatewayVPCAttachmentResponse"
+    "fixture/RejectTransitGatewayVPCAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy RejectTransitGatewayVPCAttachment)
+
+responseDescribeTrafficMirrorSessions :: DescribeTrafficMirrorSessionsResponse -> TestTree
+responseDescribeTrafficMirrorSessions = res
+    "DescribeTrafficMirrorSessionsResponse"
+    "fixture/DescribeTrafficMirrorSessionsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTrafficMirrorSessions)
+
+responseGetTransitGatewayRouteTableAssociations :: GetTransitGatewayRouteTableAssociationsResponse -> TestTree
+responseGetTransitGatewayRouteTableAssociations = res
+    "GetTransitGatewayRouteTableAssociationsResponse"
+    "fixture/GetTransitGatewayRouteTableAssociationsResponse.proto"
+    ec2
+    (Proxy :: Proxy GetTransitGatewayRouteTableAssociations)
 
 responseAssociateVPCCidrBlock :: AssociateVPCCidrBlockResponse -> TestTree
 responseAssociateVPCCidrBlock = res
@@ -4109,12 +5976,40 @@ responseDescribeScheduledInstanceAvailability = res
     ec2
     (Proxy :: Proxy DescribeScheduledInstanceAvailability)
 
+responseDisassociateClientVPNTargetNetwork :: DisassociateClientVPNTargetNetworkResponse -> TestTree
+responseDisassociateClientVPNTargetNetwork = res
+    "DisassociateClientVPNTargetNetworkResponse"
+    "fixture/DisassociateClientVPNTargetNetworkResponse.proto"
+    ec2
+    (Proxy :: Proxy DisassociateClientVPNTargetNetwork)
+
+responseCreateClientVPNRoute :: CreateClientVPNRouteResponse -> TestTree
+responseCreateClientVPNRoute = res
+    "CreateClientVPNRouteResponse"
+    "fixture/CreateClientVPNRouteResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateClientVPNRoute)
+
 responseModifyVolumeAttribute :: ModifyVolumeAttributeResponse -> TestTree
 responseModifyVolumeAttribute = res
     "ModifyVolumeAttributeResponse"
     "fixture/ModifyVolumeAttributeResponse.proto"
     ec2
     (Proxy :: Proxy ModifyVolumeAttribute)
+
+responseExportClientVPNClientConfiguration :: ExportClientVPNClientConfigurationResponse -> TestTree
+responseExportClientVPNClientConfiguration = res
+    "ExportClientVPNClientConfigurationResponse"
+    "fixture/ExportClientVPNClientConfigurationResponse.proto"
+    ec2
+    (Proxy :: Proxy ExportClientVPNClientConfiguration)
+
+responseDeleteTrafficMirrorTarget :: DeleteTrafficMirrorTargetResponse -> TestTree
+responseDeleteTrafficMirrorTarget = res
+    "DeleteTrafficMirrorTargetResponse"
+    "fixture/DeleteTrafficMirrorTargetResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTrafficMirrorTarget)
 
 responseDescribeSpotDatafeedSubscription :: DescribeSpotDatafeedSubscriptionResponse -> TestTree
 responseDescribeSpotDatafeedSubscription = res
@@ -4123,12 +6018,26 @@ responseDescribeSpotDatafeedSubscription = res
     ec2
     (Proxy :: Proxy DescribeSpotDatafeedSubscription)
 
+responseDescribeLocalGatewayRouteTables :: DescribeLocalGatewayRouteTablesResponse -> TestTree
+responseDescribeLocalGatewayRouteTables = res
+    "DescribeLocalGatewayRouteTablesResponse"
+    "fixture/DescribeLocalGatewayRouteTablesResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeLocalGatewayRouteTables)
+
 responseDescribePrefixLists :: DescribePrefixListsResponse -> TestTree
 responseDescribePrefixLists = res
     "DescribePrefixListsResponse"
     "fixture/DescribePrefixListsResponse.proto"
     ec2
     (Proxy :: Proxy DescribePrefixLists)
+
+responseAssociateTransitGatewayRouteTable :: AssociateTransitGatewayRouteTableResponse -> TestTree
+responseAssociateTransitGatewayRouteTable = res
+    "AssociateTransitGatewayRouteTableResponse"
+    "fixture/AssociateTransitGatewayRouteTableResponse.proto"
+    ec2
+    (Proxy :: Proxy AssociateTransitGatewayRouteTable)
 
 responseDeletePlacementGroup :: DeletePlacementGroupResponse -> TestTree
 responseDeletePlacementGroup = res
@@ -4137,12 +6046,47 @@ responseDeletePlacementGroup = res
     ec2
     (Proxy :: Proxy DeletePlacementGroup)
 
+responseCreateTransitGatewayMulticastDomain :: CreateTransitGatewayMulticastDomainResponse -> TestTree
+responseCreateTransitGatewayMulticastDomain = res
+    "CreateTransitGatewayMulticastDomainResponse"
+    "fixture/CreateTransitGatewayMulticastDomainResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTransitGatewayMulticastDomain)
+
+responseDeregisterInstanceEventNotificationAttributes :: DeregisterInstanceEventNotificationAttributesResponse -> TestTree
+responseDeregisterInstanceEventNotificationAttributes = res
+    "DeregisterInstanceEventNotificationAttributesResponse"
+    "fixture/DeregisterInstanceEventNotificationAttributesResponse.proto"
+    ec2
+    (Proxy :: Proxy DeregisterInstanceEventNotificationAttributes)
+
 responseRequestSpotFleet :: RequestSpotFleetResponse -> TestTree
 responseRequestSpotFleet = res
     "RequestSpotFleetResponse"
     "fixture/RequestSpotFleetResponse.proto"
     ec2
     (Proxy :: Proxy RequestSpotFleet)
+
+responseDeleteTransitGatewayRoute :: DeleteTransitGatewayRouteResponse -> TestTree
+responseDeleteTransitGatewayRoute = res
+    "DeleteTransitGatewayRouteResponse"
+    "fixture/DeleteTransitGatewayRouteResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTransitGatewayRoute)
+
+responseDisableEBSEncryptionByDefault :: DisableEBSEncryptionByDefaultResponse -> TestTree
+responseDisableEBSEncryptionByDefault = res
+    "DisableEBSEncryptionByDefaultResponse"
+    "fixture/DisableEBSEncryptionByDefaultResponse.proto"
+    ec2
+    (Proxy :: Proxy DisableEBSEncryptionByDefault)
+
+responseDeregisterTransitGatewayMulticastGroupMembers :: DeregisterTransitGatewayMulticastGroupMembersResponse -> TestTree
+responseDeregisterTransitGatewayMulticastGroupMembers = res
+    "DeregisterTransitGatewayMulticastGroupMembersResponse"
+    "fixture/DeregisterTransitGatewayMulticastGroupMembersResponse.proto"
+    ec2
+    (Proxy :: Proxy DeregisterTransitGatewayMulticastGroupMembers)
 
 responseCreateSubnet :: CreateSubnetResponse -> TestTree
 responseCreateSubnet = res
@@ -4164,6 +6108,20 @@ responseDescribeSecurityGroups = res
     "fixture/DescribeSecurityGroupsResponse.proto"
     ec2
     (Proxy :: Proxy DescribeSecurityGroups)
+
+responseGetCapacityReservationUsage :: GetCapacityReservationUsageResponse -> TestTree
+responseGetCapacityReservationUsage = res
+    "GetCapacityReservationUsageResponse"
+    "fixture/GetCapacityReservationUsageResponse.proto"
+    ec2
+    (Proxy :: Proxy GetCapacityReservationUsage)
+
+responseCreateTransitGatewayVPCAttachment :: CreateTransitGatewayVPCAttachmentResponse -> TestTree
+responseCreateTransitGatewayVPCAttachment = res
+    "CreateTransitGatewayVPCAttachmentResponse"
+    "fixture/CreateTransitGatewayVPCAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTransitGatewayVPCAttachment)
 
 responseDescribeExportTasks :: DescribeExportTasksResponse -> TestTree
 responseDescribeExportTasks = res
@@ -4214,6 +6172,13 @@ responseCreateNatGateway = res
     ec2
     (Proxy :: Proxy CreateNatGateway)
 
+responseDescribeLocalGatewayVirtualInterfaces :: DescribeLocalGatewayVirtualInterfacesResponse -> TestTree
+responseDescribeLocalGatewayVirtualInterfaces = res
+    "DescribeLocalGatewayVirtualInterfacesResponse"
+    "fixture/DescribeLocalGatewayVirtualInterfacesResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeLocalGatewayVirtualInterfaces)
+
 responseDescribeVPCPeeringConnections :: DescribeVPCPeeringConnectionsResponse -> TestTree
 responseDescribeVPCPeeringConnections = res
     "DescribeVPCPeeringConnectionsResponse"
@@ -4249,12 +6214,40 @@ responseDisassociateVPCCidrBlock = res
     ec2
     (Proxy :: Proxy DisassociateVPCCidrBlock)
 
+responseDescribeTrafficMirrorFilters :: DescribeTrafficMirrorFiltersResponse -> TestTree
+responseDescribeTrafficMirrorFilters = res
+    "DescribeTrafficMirrorFiltersResponse"
+    "fixture/DescribeTrafficMirrorFiltersResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTrafficMirrorFilters)
+
+responseDescribeFastSnapshotRestores :: DescribeFastSnapshotRestoresResponse -> TestTree
+responseDescribeFastSnapshotRestores = res
+    "DescribeFastSnapshotRestoresResponse"
+    "fixture/DescribeFastSnapshotRestoresResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeFastSnapshotRestores)
+
+responseCancelCapacityReservation :: CancelCapacityReservationResponse -> TestTree
+responseCancelCapacityReservation = res
+    "CancelCapacityReservationResponse"
+    "fixture/CancelCapacityReservationResponse.proto"
+    ec2
+    (Proxy :: Proxy CancelCapacityReservation)
+
 responseDeleteNetworkInterface :: DeleteNetworkInterfaceResponse -> TestTree
 responseDeleteNetworkInterface = res
     "DeleteNetworkInterfaceResponse"
     "fixture/DeleteNetworkInterfaceResponse.proto"
     ec2
     (Proxy :: Proxy DeleteNetworkInterface)
+
+responseDisassociateTransitGatewayRouteTable :: DisassociateTransitGatewayRouteTableResponse -> TestTree
+responseDisassociateTransitGatewayRouteTable = res
+    "DisassociateTransitGatewayRouteTableResponse"
+    "fixture/DisassociateTransitGatewayRouteTableResponse.proto"
+    ec2
+    (Proxy :: Proxy DisassociateTransitGatewayRouteTable)
 
 responseReplaceRouteTableAssociation :: ReplaceRouteTableAssociationResponse -> TestTree
 responseReplaceRouteTableAssociation = res
@@ -4277,6 +6270,34 @@ responseCreatePlacementGroup = res
     ec2
     (Proxy :: Proxy CreatePlacementGroup)
 
+responseDescribeInstanceEventNotificationAttributes :: DescribeInstanceEventNotificationAttributesResponse -> TestTree
+responseDescribeInstanceEventNotificationAttributes = res
+    "DescribeInstanceEventNotificationAttributesResponse"
+    "fixture/DescribeInstanceEventNotificationAttributesResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeInstanceEventNotificationAttributes)
+
+responseDescribeCapacityReservations :: DescribeCapacityReservationsResponse -> TestTree
+responseDescribeCapacityReservations = res
+    "DescribeCapacityReservationsResponse"
+    "fixture/DescribeCapacityReservationsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeCapacityReservations)
+
+responseModifyClientVPNEndpoint :: ModifyClientVPNEndpointResponse -> TestTree
+responseModifyClientVPNEndpoint = res
+    "ModifyClientVPNEndpointResponse"
+    "fixture/ModifyClientVPNEndpointResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyClientVPNEndpoint)
+
+responseModifyInstanceCapacityReservationAttributes :: ModifyInstanceCapacityReservationAttributesResponse -> TestTree
+responseModifyInstanceCapacityReservationAttributes = res
+    "ModifyInstanceCapacityReservationAttributesResponse"
+    "fixture/ModifyInstanceCapacityReservationAttributesResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyInstanceCapacityReservationAttributes)
+
 responseDescribeAggregateIdFormat :: DescribeAggregateIdFormatResponse -> TestTree
 responseDescribeAggregateIdFormat = res
     "DescribeAggregateIdFormatResponse"
@@ -4298,6 +6319,13 @@ responseAssociateAddress = res
     ec2
     (Proxy :: Proxy AssociateAddress)
 
+responseModifyTrafficMirrorFilterRule :: ModifyTrafficMirrorFilterRuleResponse -> TestTree
+responseModifyTrafficMirrorFilterRule = res
+    "ModifyTrafficMirrorFilterRuleResponse"
+    "fixture/ModifyTrafficMirrorFilterRuleResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyTrafficMirrorFilterRule)
+
 responseDescribeNetworkInterfaceAttribute :: DescribeNetworkInterfaceAttributeResponse -> TestTree
 responseDescribeNetworkInterfaceAttribute = res
     "DescribeNetworkInterfaceAttributeResponse"
@@ -4311,6 +6339,13 @@ responseReplaceIAMInstanceProfileAssociation = res
     "fixture/ReplaceIAMInstanceProfileAssociationResponse.proto"
     ec2
     (Proxy :: Proxy ReplaceIAMInstanceProfileAssociation)
+
+responseAssociateClientVPNTargetNetwork :: AssociateClientVPNTargetNetworkResponse -> TestTree
+responseAssociateClientVPNTargetNetwork = res
+    "AssociateClientVPNTargetNetworkResponse"
+    "fixture/AssociateClientVPNTargetNetworkResponse.proto"
+    ec2
+    (Proxy :: Proxy AssociateClientVPNTargetNetwork)
 
 responseReleaseHosts :: ReleaseHostsResponse -> TestTree
 responseReleaseHosts = res
@@ -4347,6 +6382,13 @@ responseCreateVPNConnection = res
     ec2
     (Proxy :: Proxy CreateVPNConnection)
 
+responseReplaceTransitGatewayRoute :: ReplaceTransitGatewayRouteResponse -> TestTree
+responseReplaceTransitGatewayRoute = res
+    "ReplaceTransitGatewayRouteResponse"
+    "fixture/ReplaceTransitGatewayRouteResponse.proto"
+    ec2
+    (Proxy :: Proxy ReplaceTransitGatewayRoute)
+
 responseCreateFleet :: CreateFleetResponse -> TestTree
 responseCreateFleet = res
     "CreateFleetResponse"
@@ -4367,6 +6409,13 @@ responseDescribeImportSnapshotTasks = res
     "fixture/DescribeImportSnapshotTasksResponse.proto"
     ec2
     (Proxy :: Proxy DescribeImportSnapshotTasks)
+
+responseGetCoipPoolUsage :: GetCoipPoolUsageResponse -> TestTree
+responseGetCoipPoolUsage = res
+    "GetCoipPoolUsageResponse"
+    "fixture/GetCoipPoolUsageResponse.proto"
+    ec2
+    (Proxy :: Proxy GetCoipPoolUsage)
 
 responseDescribeCustomerGateways :: DescribeCustomerGatewaysResponse -> TestTree
 responseDescribeCustomerGateways = res
@@ -4396,6 +6445,41 @@ responseCreateVPCEndpoint = res
     ec2
     (Proxy :: Proxy CreateVPCEndpoint)
 
+responseModifyTrafficMirrorSession :: ModifyTrafficMirrorSessionResponse -> TestTree
+responseModifyTrafficMirrorSession = res
+    "ModifyTrafficMirrorSessionResponse"
+    "fixture/ModifyTrafficMirrorSessionResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyTrafficMirrorSession)
+
+responseDescribeTransitGatewayPeeringAttachments :: DescribeTransitGatewayPeeringAttachmentsResponse -> TestTree
+responseDescribeTransitGatewayPeeringAttachments = res
+    "DescribeTransitGatewayPeeringAttachmentsResponse"
+    "fixture/DescribeTransitGatewayPeeringAttachmentsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTransitGatewayPeeringAttachments)
+
+responseDeleteQueuedReservedInstances :: DeleteQueuedReservedInstancesResponse -> TestTree
+responseDeleteQueuedReservedInstances = res
+    "DeleteQueuedReservedInstancesResponse"
+    "fixture/DeleteQueuedReservedInstancesResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteQueuedReservedInstances)
+
+responseDescribeTransitGatewayMulticastDomains :: DescribeTransitGatewayMulticastDomainsResponse -> TestTree
+responseDescribeTransitGatewayMulticastDomains = res
+    "DescribeTransitGatewayMulticastDomainsResponse"
+    "fixture/DescribeTransitGatewayMulticastDomainsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTransitGatewayMulticastDomains)
+
+responseGetDefaultCreditSpecification :: GetDefaultCreditSpecificationResponse -> TestTree
+responseGetDefaultCreditSpecification = res
+    "GetDefaultCreditSpecificationResponse"
+    "fixture/GetDefaultCreditSpecificationResponse.proto"
+    ec2
+    (Proxy :: Proxy GetDefaultCreditSpecification)
+
 responseUnmonitorInstances :: UnmonitorInstancesResponse -> TestTree
 responseUnmonitorInstances = res
     "UnmonitorInstancesResponse"
@@ -4403,12 +6487,26 @@ responseUnmonitorInstances = res
     ec2
     (Proxy :: Proxy UnmonitorInstances)
 
+responseDescribeTransitGatewayVPCAttachments :: DescribeTransitGatewayVPCAttachmentsResponse -> TestTree
+responseDescribeTransitGatewayVPCAttachments = res
+    "DescribeTransitGatewayVPCAttachmentsResponse"
+    "fixture/DescribeTransitGatewayVPCAttachmentsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTransitGatewayVPCAttachments)
+
 responseCreateSecurityGroup :: CreateSecurityGroupResponse -> TestTree
 responseCreateSecurityGroup = res
     "CreateSecurityGroupResponse"
     "fixture/CreateSecurityGroupResponse.proto"
     ec2
     (Proxy :: Proxy CreateSecurityGroup)
+
+responseGetEBSEncryptionByDefault :: GetEBSEncryptionByDefaultResponse -> TestTree
+responseGetEBSEncryptionByDefault = res
+    "GetEBSEncryptionByDefaultResponse"
+    "fixture/GetEBSEncryptionByDefaultResponse.proto"
+    ec2
+    (Proxy :: Proxy GetEBSEncryptionByDefault)
 
 responseImportVolume :: ImportVolumeResponse -> TestTree
 responseImportVolume = res
@@ -4423,6 +6521,20 @@ responseDisableVGWRoutePropagation = res
     "fixture/DisableVGWRoutePropagationResponse.proto"
     ec2
     (Proxy :: Proxy DisableVGWRoutePropagation)
+
+responseDeleteTrafficMirrorFilter :: DeleteTrafficMirrorFilterResponse -> TestTree
+responseDeleteTrafficMirrorFilter = res
+    "DeleteTrafficMirrorFilterResponse"
+    "fixture/DeleteTrafficMirrorFilterResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTrafficMirrorFilter)
+
+responseModifyVPNTunnelCertificate :: ModifyVPNTunnelCertificateResponse -> TestTree
+responseModifyVPNTunnelCertificate = res
+    "ModifyVPNTunnelCertificateResponse"
+    "fixture/ModifyVPNTunnelCertificateResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyVPNTunnelCertificate)
 
 responseCreateSpotDatafeedSubscription :: CreateSpotDatafeedSubscriptionResponse -> TestTree
 responseCreateSpotDatafeedSubscription = res
@@ -4466,6 +6578,20 @@ responseAssignPrivateIPAddresses = res
     ec2
     (Proxy :: Proxy AssignPrivateIPAddresses)
 
+responseAuthorizeClientVPNIngress :: AuthorizeClientVPNIngressResponse -> TestTree
+responseAuthorizeClientVPNIngress = res
+    "AuthorizeClientVPNIngressResponse"
+    "fixture/AuthorizeClientVPNIngressResponse.proto"
+    ec2
+    (Proxy :: Proxy AuthorizeClientVPNIngress)
+
+responseDeleteTransitGatewayPeeringAttachment :: DeleteTransitGatewayPeeringAttachmentResponse -> TestTree
+responseDeleteTransitGatewayPeeringAttachment = res
+    "DeleteTransitGatewayPeeringAttachmentResponse"
+    "fixture/DeleteTransitGatewayPeeringAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTransitGatewayPeeringAttachment)
+
 responseModifyInstanceAttribute :: ModifyInstanceAttributeResponse -> TestTree
 responseModifyInstanceAttribute = res
     "ModifyInstanceAttributeResponse"
@@ -4487,6 +6613,13 @@ responseDisassociateIAMInstanceProfile = res
     ec2
     (Proxy :: Proxy DisassociateIAMInstanceProfile)
 
+responseTerminateClientVPNConnections :: TerminateClientVPNConnectionsResponse -> TestTree
+responseTerminateClientVPNConnections = res
+    "TerminateClientVPNConnectionsResponse"
+    "fixture/TerminateClientVPNConnectionsResponse.proto"
+    ec2
+    (Proxy :: Proxy TerminateClientVPNConnections)
+
 responseDisassociateRouteTable :: DisassociateRouteTableResponse -> TestTree
 responseDisassociateRouteTable = res
     "DisassociateRouteTableResponse"
@@ -4501,12 +6634,33 @@ responseGetConsoleScreenshot = res
     ec2
     (Proxy :: Proxy GetConsoleScreenshot)
 
+responseResetEBSDefaultKMSKeyId :: ResetEBSDefaultKMSKeyIdResponse -> TestTree
+responseResetEBSDefaultKMSKeyId = res
+    "ResetEBSDefaultKMSKeyIdResponse"
+    "fixture/ResetEBSDefaultKMSKeyIdResponse.proto"
+    ec2
+    (Proxy :: Proxy ResetEBSDefaultKMSKeyId)
+
 responseAssignIPv6Addresses :: AssignIPv6AddressesResponse -> TestTree
 responseAssignIPv6Addresses = res
     "AssignIPv6AddressesResponse"
     "fixture/AssignIPv6AddressesResponse.proto"
     ec2
     (Proxy :: Proxy AssignIPv6Addresses)
+
+responseModifyVPNTunnelOptions :: ModifyVPNTunnelOptionsResponse -> TestTree
+responseModifyVPNTunnelOptions = res
+    "ModifyVPNTunnelOptionsResponse"
+    "fixture/ModifyVPNTunnelOptionsResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyVPNTunnelOptions)
+
+responseModifyEBSDefaultKMSKeyId :: ModifyEBSDefaultKMSKeyIdResponse -> TestTree
+responseModifyEBSDefaultKMSKeyId = res
+    "ModifyEBSDefaultKMSKeyIdResponse"
+    "fixture/ModifyEBSDefaultKMSKeyIdResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyEBSDefaultKMSKeyId)
 
 responseDeleteSpotDatafeedSubscription :: DeleteSpotDatafeedSubscriptionResponse -> TestTree
 responseDeleteSpotDatafeedSubscription = res
@@ -4536,12 +6690,33 @@ responseDescribePlacementGroups = res
     ec2
     (Proxy :: Proxy DescribePlacementGroups)
 
+responseProvisionByoipCidr :: ProvisionByoipCidrResponse -> TestTree
+responseProvisionByoipCidr = res
+    "ProvisionByoipCidrResponse"
+    "fixture/ProvisionByoipCidrResponse.proto"
+    ec2
+    (Proxy :: Proxy ProvisionByoipCidr)
+
+responseModifyAvailabilityZoneGroup :: ModifyAvailabilityZoneGroupResponse -> TestTree
+responseModifyAvailabilityZoneGroup = res
+    "ModifyAvailabilityZoneGroupResponse"
+    "fixture/ModifyAvailabilityZoneGroupResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyAvailabilityZoneGroup)
+
 responseDescribeStaleSecurityGroups :: DescribeStaleSecurityGroupsResponse -> TestTree
 responseDescribeStaleSecurityGroups = res
     "DescribeStaleSecurityGroupsResponse"
     "fixture/DescribeStaleSecurityGroupsResponse.proto"
     ec2
     (Proxy :: Proxy DescribeStaleSecurityGroups)
+
+responseDescribeExportImageTasks :: DescribeExportImageTasksResponse -> TestTree
+responseDescribeExportImageTasks = res
+    "DescribeExportImageTasksResponse"
+    "fixture/DescribeExportImageTasksResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeExportImageTasks)
 
 responsePurchaseScheduledInstances :: PurchaseScheduledInstancesResponse -> TestTree
 responsePurchaseScheduledInstances = res
@@ -4585,12 +6760,26 @@ responseCreateSnapshot = res
     ec2
     (Proxy :: Proxy CreateSnapshot)
 
+responseCreateLocalGatewayRoute :: CreateLocalGatewayRouteResponse -> TestTree
+responseCreateLocalGatewayRoute = res
+    "CreateLocalGatewayRouteResponse"
+    "fixture/CreateLocalGatewayRouteResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateLocalGatewayRoute)
+
 responseCreateNetworkACLEntry :: CreateNetworkACLEntryResponse -> TestTree
 responseCreateNetworkACLEntry = res
     "CreateNetworkACLEntryResponse"
     "fixture/CreateNetworkACLEntryResponse.proto"
     ec2
     (Proxy :: Proxy CreateNetworkACLEntry)
+
+responseDescribeTransitGatewayAttachments :: DescribeTransitGatewayAttachmentsResponse -> TestTree
+responseDescribeTransitGatewayAttachments = res
+    "DescribeTransitGatewayAttachmentsResponse"
+    "fixture/DescribeTransitGatewayAttachmentsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTransitGatewayAttachments)
 
 responseCreateReservedInstancesListing :: CreateReservedInstancesListingResponse -> TestTree
 responseCreateReservedInstancesListing = res
@@ -4599,12 +6788,26 @@ responseCreateReservedInstancesListing = res
     ec2
     (Proxy :: Proxy CreateReservedInstancesListing)
 
+responseDescribeIPv6Pools :: DescribeIPv6PoolsResponse -> TestTree
+responseDescribeIPv6Pools = res
+    "DescribeIPv6PoolsResponse"
+    "fixture/DescribeIPv6PoolsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeIPv6Pools)
+
 responseAttachVPNGateway :: AttachVPNGatewayResponse -> TestTree
 responseAttachVPNGateway = res
     "AttachVPNGatewayResponse"
     "fixture/AttachVPNGatewayResponse.proto"
     ec2
     (Proxy :: Proxy AttachVPNGateway)
+
+responseDescribeLocalGateways :: DescribeLocalGatewaysResponse -> TestTree
+responseDescribeLocalGateways = res
+    "DescribeLocalGatewaysResponse"
+    "fixture/DescribeLocalGatewaysResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeLocalGateways)
 
 responseModifyVPCEndpointServicePermissions :: ModifyVPCEndpointServicePermissionsResponse -> TestTree
 responseModifyVPCEndpointServicePermissions = res
@@ -4613,6 +6816,13 @@ responseModifyVPCEndpointServicePermissions = res
     ec2
     (Proxy :: Proxy ModifyVPCEndpointServicePermissions)
 
+responseExportClientVPNClientCertificateRevocationList :: ExportClientVPNClientCertificateRevocationListResponse -> TestTree
+responseExportClientVPNClientCertificateRevocationList = res
+    "ExportClientVPNClientCertificateRevocationListResponse"
+    "fixture/ExportClientVPNClientCertificateRevocationListResponse.proto"
+    ec2
+    (Proxy :: Proxy ExportClientVPNClientCertificateRevocationList)
+
 responseCreateDHCPOptions :: CreateDHCPOptionsResponse -> TestTree
 responseCreateDHCPOptions = res
     "CreateDHCPOptionsResponse"
@@ -4620,12 +6830,26 @@ responseCreateDHCPOptions = res
     ec2
     (Proxy :: Proxy CreateDHCPOptions)
 
+responseRegisterTransitGatewayMulticastGroupSources :: RegisterTransitGatewayMulticastGroupSourcesResponse -> TestTree
+responseRegisterTransitGatewayMulticastGroupSources = res
+    "RegisterTransitGatewayMulticastGroupSourcesResponse"
+    "fixture/RegisterTransitGatewayMulticastGroupSourcesResponse.proto"
+    ec2
+    (Proxy :: Proxy RegisterTransitGatewayMulticastGroupSources)
+
 responseDescribeAccountAttributes :: DescribeAccountAttributesResponse -> TestTree
 responseDescribeAccountAttributes = res
     "DescribeAccountAttributesResponse"
     "fixture/DescribeAccountAttributesResponse.proto"
     ec2
     (Proxy :: Proxy DescribeAccountAttributes)
+
+responseGetTransitGatewayRouteTablePropagations :: GetTransitGatewayRouteTablePropagationsResponse -> TestTree
+responseGetTransitGatewayRouteTablePropagations = res
+    "GetTransitGatewayRouteTablePropagationsResponse"
+    "fixture/GetTransitGatewayRouteTablePropagationsResponse.proto"
+    ec2
+    (Proxy :: Proxy GetTransitGatewayRouteTablePropagations)
 
 responseModifyFpgaImageAttribute :: ModifyFpgaImageAttributeResponse -> TestTree
 responseModifyFpgaImageAttribute = res
@@ -4655,6 +6879,13 @@ responseModifyVPCEndpointServiceConfiguration = res
     ec2
     (Proxy :: Proxy ModifyVPCEndpointServiceConfiguration)
 
+responseCreateTransitGateway :: CreateTransitGatewayResponse -> TestTree
+responseCreateTransitGateway = res
+    "CreateTransitGatewayResponse"
+    "fixture/CreateTransitGatewayResponse.proto"
+    ec2
+    (Proxy :: Proxy CreateTransitGateway)
+
 responseUnassignIPv6Addresses :: UnassignIPv6AddressesResponse -> TestTree
 responseUnassignIPv6Addresses = res
     "UnassignIPv6AddressesResponse"
@@ -4662,12 +6893,26 @@ responseUnassignIPv6Addresses = res
     ec2
     (Proxy :: Proxy UnassignIPv6Addresses)
 
+responseDeleteTrafficMirrorSession :: DeleteTrafficMirrorSessionResponse -> TestTree
+responseDeleteTrafficMirrorSession = res
+    "DeleteTrafficMirrorSessionResponse"
+    "fixture/DeleteTrafficMirrorSessionResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteTrafficMirrorSession)
+
 responseAssociateIAMInstanceProfile :: AssociateIAMInstanceProfileResponse -> TestTree
 responseAssociateIAMInstanceProfile = res
     "AssociateIAMInstanceProfileResponse"
     "fixture/AssociateIAMInstanceProfileResponse.proto"
     ec2
     (Proxy :: Proxy AssociateIAMInstanceProfile)
+
+responseModifyDefaultCreditSpecification :: ModifyDefaultCreditSpecificationResponse -> TestTree
+responseModifyDefaultCreditSpecification = res
+    "ModifyDefaultCreditSpecificationResponse"
+    "fixture/ModifyDefaultCreditSpecificationResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyDefaultCreditSpecification)
 
 responseDeleteEgressOnlyInternetGateway :: DeleteEgressOnlyInternetGatewayResponse -> TestTree
 responseDeleteEgressOnlyInternetGateway = res
@@ -4682,6 +6927,13 @@ responsePurchaseHostReservation = res
     "fixture/PurchaseHostReservationResponse.proto"
     ec2
     (Proxy :: Proxy PurchaseHostReservation)
+
+responseModifyTransitGatewayVPCAttachment :: ModifyTransitGatewayVPCAttachmentResponse -> TestTree
+responseModifyTransitGatewayVPCAttachment = res
+    "ModifyTransitGatewayVPCAttachmentResponse"
+    "fixture/ModifyTransitGatewayVPCAttachmentResponse.proto"
+    ec2
+    (Proxy :: Proxy ModifyTransitGatewayVPCAttachment)
 
 responseCreateImage :: CreateImageResponse -> TestTree
 responseCreateImage = res
@@ -4710,6 +6962,13 @@ responseDescribeKeyPairs = res
     "fixture/DescribeKeyPairsResponse.proto"
     ec2
     (Proxy :: Proxy DescribeKeyPairs)
+
+responseDisableFastSnapshotRestores :: DisableFastSnapshotRestoresResponse -> TestTree
+responseDisableFastSnapshotRestores = res
+    "DisableFastSnapshotRestoresResponse"
+    "fixture/DisableFastSnapshotRestoresResponse.proto"
+    ec2
+    (Proxy :: Proxy DisableFastSnapshotRestores)
 
 responseDescribeLaunchTemplates :: DescribeLaunchTemplatesResponse -> TestTree
 responseDescribeLaunchTemplates = res
@@ -4767,6 +7026,13 @@ responseModifyIdFormat = res
     ec2
     (Proxy :: Proxy ModifyIdFormat)
 
+responseRegisterTransitGatewayMulticastGroupMembers :: RegisterTransitGatewayMulticastGroupMembersResponse -> TestTree
+responseRegisterTransitGatewayMulticastGroupMembers = res
+    "RegisterTransitGatewayMulticastGroupMembersResponse"
+    "fixture/RegisterTransitGatewayMulticastGroupMembersResponse.proto"
+    ec2
+    (Proxy :: Proxy RegisterTransitGatewayMulticastGroupMembers)
+
 responseDeleteRouteTable :: DeleteRouteTableResponse -> TestTree
 responseDeleteRouteTable = res
     "DeleteRouteTableResponse"
@@ -4780,6 +7046,13 @@ responseResetImageAttribute = res
     "fixture/ResetImageAttributeResponse.proto"
     ec2
     (Proxy :: Proxy ResetImageAttribute)
+
+responseDescribeTransitGatewayRouteTables :: DescribeTransitGatewayRouteTablesResponse -> TestTree
+responseDescribeTransitGatewayRouteTables = res
+    "DescribeTransitGatewayRouteTablesResponse"
+    "fixture/DescribeTransitGatewayRouteTablesResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeTransitGatewayRouteTables)
 
 responseCreateEgressOnlyInternetGateway :: CreateEgressOnlyInternetGatewayResponse -> TestTree
 responseCreateEgressOnlyInternetGateway = res
@@ -4802,6 +7075,13 @@ responseDescribeSpotInstanceRequests = res
     ec2
     (Proxy :: Proxy DescribeSpotInstanceRequests)
 
+responseRevokeClientVPNIngress :: RevokeClientVPNIngressResponse -> TestTree
+responseRevokeClientVPNIngress = res
+    "RevokeClientVPNIngressResponse"
+    "fixture/RevokeClientVPNIngressResponse.proto"
+    ec2
+    (Proxy :: Proxy RevokeClientVPNIngress)
+
 responseUnassignPrivateIPAddresses :: UnassignPrivateIPAddressesResponse -> TestTree
 responseUnassignPrivateIPAddresses = res
     "UnassignPrivateIPAddressesResponse"
@@ -4816,6 +7096,13 @@ responseDescribeNetworkInterfacePermissions = res
     ec2
     (Proxy :: Proxy DescribeNetworkInterfacePermissions)
 
+responseEnableFastSnapshotRestores :: EnableFastSnapshotRestoresResponse -> TestTree
+responseEnableFastSnapshotRestores = res
+    "EnableFastSnapshotRestoresResponse"
+    "fixture/EnableFastSnapshotRestoresResponse.proto"
+    ec2
+    (Proxy :: Proxy EnableFastSnapshotRestores)
+
 responseDescribeVPCEndpointServicePermissions :: DescribeVPCEndpointServicePermissionsResponse -> TestTree
 responseDescribeVPCEndpointServicePermissions = res
     "DescribeVPCEndpointServicePermissionsResponse"
@@ -4829,6 +7116,13 @@ responseDeleteDHCPOptions = res
     "fixture/DeleteDHCPOptionsResponse.proto"
     ec2
     (Proxy :: Proxy DeleteDHCPOptions)
+
+responseRegisterInstanceEventNotificationAttributes :: RegisterInstanceEventNotificationAttributesResponse -> TestTree
+responseRegisterInstanceEventNotificationAttributes = res
+    "RegisterInstanceEventNotificationAttributesResponse"
+    "fixture/RegisterInstanceEventNotificationAttributesResponse.proto"
+    ec2
+    (Proxy :: Proxy RegisterInstanceEventNotificationAttributes)
 
 responseDescribeNetworkACLs :: DescribeNetworkACLsResponse -> TestTree
 responseDescribeNetworkACLs = res
@@ -4864,6 +7158,20 @@ responseMonitorInstances = res
     "fixture/MonitorInstancesResponse.proto"
     ec2
     (Proxy :: Proxy MonitorInstances)
+
+responseSearchLocalGatewayRoutes :: SearchLocalGatewayRoutesResponse -> TestTree
+responseSearchLocalGatewayRoutes = res
+    "SearchLocalGatewayRoutesResponse"
+    "fixture/SearchLocalGatewayRoutesResponse.proto"
+    ec2
+    (Proxy :: Proxy SearchLocalGatewayRoutes)
+
+responseDeleteClientVPNRoute :: DeleteClientVPNRouteResponse -> TestTree
+responseDeleteClientVPNRoute = res
+    "DeleteClientVPNRouteResponse"
+    "fixture/DeleteClientVPNRouteResponse.proto"
+    ec2
+    (Proxy :: Proxy DeleteClientVPNRoute)
 
 responseAcceptVPCPeeringConnection :: AcceptVPCPeeringConnectionResponse -> TestTree
 responseAcceptVPCPeeringConnection = res
@@ -4906,6 +7214,13 @@ responseModifyVPCAttribute = res
     "fixture/ModifyVPCAttributeResponse.proto"
     ec2
     (Proxy :: Proxy ModifyVPCAttribute)
+
+responseDescribeClientVPNConnections :: DescribeClientVPNConnectionsResponse -> TestTree
+responseDescribeClientVPNConnections = res
+    "DescribeClientVPNConnectionsResponse"
+    "fixture/DescribeClientVPNConnectionsResponse.proto"
+    ec2
+    (Proxy :: Proxy DescribeClientVPNConnections)
 
 responseDescribeFleetHistory :: DescribeFleetHistoryResponse -> TestTree
 responseDescribeFleetHistory = res
@@ -4955,6 +7270,13 @@ responseDeleteVolume = res
     "fixture/DeleteVolumeResponse.proto"
     ec2
     (Proxy :: Proxy DeleteVolume)
+
+responseDeprovisionByoipCidr :: DeprovisionByoipCidrResponse -> TestTree
+responseDeprovisionByoipCidr = res
+    "DeprovisionByoipCidrResponse"
+    "fixture/DeprovisionByoipCidrResponse.proto"
+    ec2
+    (Proxy :: Proxy DeprovisionByoipCidr)
 
 responseDeleteVPCEndpointServiceConfigurations :: DeleteVPCEndpointServiceConfigurationsResponse -> TestTree
 responseDeleteVPCEndpointServiceConfigurations = res

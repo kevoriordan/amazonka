@@ -30,6 +30,7 @@ module Network.AWS.IoT.RegisterCACertificate
     , rcacSetAsActive
     , rcacAllowAutoRegistration
     , rcacRegistrationConfig
+    , rcacTags
     , rcacCaCertificate
     , rcacVerificationCertificate
 
@@ -54,14 +55,18 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'registerCACertificate' smart constructor.
-data RegisterCACertificate = RegisterCACertificate'
-  { _rcacSetAsActive             :: !(Maybe Bool)
-  , _rcacAllowAutoRegistration   :: !(Maybe Bool)
-  , _rcacRegistrationConfig      :: !(Maybe RegistrationConfig)
-  , _rcacCaCertificate           :: !Text
-  , _rcacVerificationCertificate :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterCACertificate = RegisterCACertificate'{_rcacSetAsActive
+                                                    :: !(Maybe Bool),
+                                                    _rcacAllowAutoRegistration
+                                                    :: !(Maybe Bool),
+                                                    _rcacRegistrationConfig ::
+                                                    !(Maybe RegistrationConfig),
+                                                    _rcacTags :: !(Maybe [Tag]),
+                                                    _rcacCaCertificate :: !Text,
+                                                    _rcacVerificationCertificate
+                                                    :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RegisterCACertificate' with the minimum fields required to make a request.
 --
@@ -73,6 +78,8 @@ data RegisterCACertificate = RegisterCACertificate'
 --
 -- * 'rcacRegistrationConfig' - Information about the registration configuration.
 --
+-- * 'rcacTags' - Metadata which can be used to manage the CA certificate.
+--
 -- * 'rcacCaCertificate' - The CA certificate.
 --
 -- * 'rcacVerificationCertificate' - The private key verification certificate.
@@ -80,15 +87,15 @@ registerCACertificate
     :: Text -- ^ 'rcacCaCertificate'
     -> Text -- ^ 'rcacVerificationCertificate'
     -> RegisterCACertificate
-registerCACertificate pCaCertificate_ pVerificationCertificate_ =
-  RegisterCACertificate'
-    { _rcacSetAsActive = Nothing
-    , _rcacAllowAutoRegistration = Nothing
-    , _rcacRegistrationConfig = Nothing
-    , _rcacCaCertificate = pCaCertificate_
-    , _rcacVerificationCertificate = pVerificationCertificate_
-    }
-
+registerCACertificate pCaCertificate_
+  pVerificationCertificate_
+  = RegisterCACertificate'{_rcacSetAsActive = Nothing,
+                           _rcacAllowAutoRegistration = Nothing,
+                           _rcacRegistrationConfig = Nothing,
+                           _rcacTags = Nothing,
+                           _rcacCaCertificate = pCaCertificate_,
+                           _rcacVerificationCertificate =
+                             pVerificationCertificate_}
 
 -- | A boolean value that specifies if the CA certificate is set to active.
 rcacSetAsActive :: Lens' RegisterCACertificate (Maybe Bool)
@@ -101,6 +108,10 @@ rcacAllowAutoRegistration = lens _rcacAllowAutoRegistration (\ s a -> s{_rcacAll
 -- | Information about the registration configuration.
 rcacRegistrationConfig :: Lens' RegisterCACertificate (Maybe RegistrationConfig)
 rcacRegistrationConfig = lens _rcacRegistrationConfig (\ s a -> s{_rcacRegistrationConfig = a})
+
+-- | Metadata which can be used to manage the CA certificate.
+rcacTags :: Lens' RegisterCACertificate [Tag]
+rcacTags = lens _rcacTags (\ s a -> s{_rcacTags = a}) . _Default . _Coerce
 
 -- | The CA certificate.
 rcacCaCertificate :: Lens' RegisterCACertificate Text
@@ -134,6 +145,7 @@ instance ToJSON RegisterCACertificate where
               (catMaybes
                  [("registrationConfig" .=) <$>
                     _rcacRegistrationConfig,
+                  ("tags" .=) <$> _rcacTags,
                   Just ("caCertificate" .= _rcacCaCertificate),
                   Just
                     ("verificationCertificate" .=
@@ -154,12 +166,18 @@ instance ToQuery RegisterCACertificate where
 --
 --
 -- /See:/ 'registerCACertificateResponse' smart constructor.
-data RegisterCACertificateResponse = RegisterCACertificateResponse'
-  { _rcacrsCertificateARN :: !(Maybe Text)
-  , _rcacrsCertificateId  :: !(Maybe Text)
-  , _rcacrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterCACertificateResponse = RegisterCACertificateResponse'{_rcacrsCertificateARN
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _rcacrsCertificateId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _rcacrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'RegisterCACertificateResponse' with the minimum fields required to make a request.
 --
@@ -173,13 +191,11 @@ data RegisterCACertificateResponse = RegisterCACertificateResponse'
 registerCACertificateResponse
     :: Int -- ^ 'rcacrsResponseStatus'
     -> RegisterCACertificateResponse
-registerCACertificateResponse pResponseStatus_ =
-  RegisterCACertificateResponse'
-    { _rcacrsCertificateARN = Nothing
-    , _rcacrsCertificateId = Nothing
-    , _rcacrsResponseStatus = pResponseStatus_
-    }
-
+registerCACertificateResponse pResponseStatus_
+  = RegisterCACertificateResponse'{_rcacrsCertificateARN
+                                     = Nothing,
+                                   _rcacrsCertificateId = Nothing,
+                                   _rcacrsResponseStatus = pResponseStatus_}
 
 -- | The CA certificate ARN.
 rcacrsCertificateARN :: Lens' RegisterCACertificateResponse (Maybe Text)

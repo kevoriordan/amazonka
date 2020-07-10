@@ -56,13 +56,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBuiltinSlotTypes' smart constructor.
-data GetBuiltinSlotTypes = GetBuiltinSlotTypes'
-  { _gbstLocale            :: !(Maybe Locale)
-  , _gbstNextToken         :: !(Maybe Text)
-  , _gbstSignatureContains :: !(Maybe Text)
-  , _gbstMaxResults        :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBuiltinSlotTypes = GetBuiltinSlotTypes'{_gbstLocale
+                                                :: !(Maybe Locale),
+                                                _gbstNextToken :: !(Maybe Text),
+                                                _gbstSignatureContains ::
+                                                !(Maybe Text),
+                                                _gbstMaxResults :: !(Maybe Nat)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBuiltinSlotTypes' with the minimum fields required to make a request.
 --
@@ -77,14 +77,11 @@ data GetBuiltinSlotTypes = GetBuiltinSlotTypes'
 -- * 'gbstMaxResults' - The maximum number of slot types to return in the response. The default is 10.
 getBuiltinSlotTypes
     :: GetBuiltinSlotTypes
-getBuiltinSlotTypes =
-  GetBuiltinSlotTypes'
-    { _gbstLocale = Nothing
-    , _gbstNextToken = Nothing
-    , _gbstSignatureContains = Nothing
-    , _gbstMaxResults = Nothing
-    }
-
+getBuiltinSlotTypes
+  = GetBuiltinSlotTypes'{_gbstLocale = Nothing,
+                         _gbstNextToken = Nothing,
+                         _gbstSignatureContains = Nothing,
+                         _gbstMaxResults = Nothing}
 
 -- | A list of locales that the slot type supports.
 gbstLocale :: Lens' GetBuiltinSlotTypes (Maybe Locale)
@@ -144,12 +141,17 @@ instance ToQuery GetBuiltinSlotTypes where
                "maxResults" =: _gbstMaxResults]
 
 -- | /See:/ 'getBuiltinSlotTypesResponse' smart constructor.
-data GetBuiltinSlotTypesResponse = GetBuiltinSlotTypesResponse'
-  { _gbstrsNextToken      :: !(Maybe Text)
-  , _gbstrsSlotTypes      :: !(Maybe [BuiltinSlotTypeMetadata])
-  , _gbstrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBuiltinSlotTypesResponse = GetBuiltinSlotTypesResponse'{_gbstrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gbstrsSlotTypes
+                                                                ::
+                                                                !(Maybe
+                                                                    [BuiltinSlotTypeMetadata]),
+                                                                _gbstrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetBuiltinSlotTypesResponse' with the minimum fields required to make a request.
 --
@@ -163,13 +165,11 @@ data GetBuiltinSlotTypesResponse = GetBuiltinSlotTypesResponse'
 getBuiltinSlotTypesResponse
     :: Int -- ^ 'gbstrsResponseStatus'
     -> GetBuiltinSlotTypesResponse
-getBuiltinSlotTypesResponse pResponseStatus_ =
-  GetBuiltinSlotTypesResponse'
-    { _gbstrsNextToken = Nothing
-    , _gbstrsSlotTypes = Nothing
-    , _gbstrsResponseStatus = pResponseStatus_
-    }
-
+getBuiltinSlotTypesResponse pResponseStatus_
+  = GetBuiltinSlotTypesResponse'{_gbstrsNextToken =
+                                   Nothing,
+                                 _gbstrsSlotTypes = Nothing,
+                                 _gbstrsResponseStatus = pResponseStatus_}
 
 -- | If the response is truncated, the response includes a pagination token that you can use in your next request to fetch the next page of slot types.
 gbstrsNextToken :: Lens' GetBuiltinSlotTypesResponse (Maybe Text)

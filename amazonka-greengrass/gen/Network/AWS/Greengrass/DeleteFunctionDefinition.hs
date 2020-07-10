@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteFunctionDefinition' smart constructor.
-newtype DeleteFunctionDefinition = DeleteFunctionDefinition'
-  { _dfdFunctionDefinitionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteFunctionDefinition = DeleteFunctionDefinition'{_dfdFunctionDefinitionId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteFunctionDefinition' with the minimum fields required to make a request.
 --
@@ -55,9 +55,9 @@ newtype DeleteFunctionDefinition = DeleteFunctionDefinition'
 deleteFunctionDefinition
     :: Text -- ^ 'dfdFunctionDefinitionId'
     -> DeleteFunctionDefinition
-deleteFunctionDefinition pFunctionDefinitionId_ =
-  DeleteFunctionDefinition' {_dfdFunctionDefinitionId = pFunctionDefinitionId_}
-
+deleteFunctionDefinition pFunctionDefinitionId_
+  = DeleteFunctionDefinition'{_dfdFunctionDefinitionId
+                                = pFunctionDefinitionId_}
 
 -- | The ID of the Lambda function definition.
 dfdFunctionDefinitionId :: Lens' DeleteFunctionDefinition Text
@@ -94,10 +94,11 @@ instance ToQuery DeleteFunctionDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'deleteFunctionDefinitionResponse' smart constructor.
-newtype DeleteFunctionDefinitionResponse = DeleteFunctionDefinitionResponse'
-  { _dfdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteFunctionDefinitionResponse = DeleteFunctionDefinitionResponse'{_dfdrsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteFunctionDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -107,9 +108,9 @@ newtype DeleteFunctionDefinitionResponse = DeleteFunctionDefinitionResponse'
 deleteFunctionDefinitionResponse
     :: Int -- ^ 'dfdrsResponseStatus'
     -> DeleteFunctionDefinitionResponse
-deleteFunctionDefinitionResponse pResponseStatus_ =
-  DeleteFunctionDefinitionResponse' {_dfdrsResponseStatus = pResponseStatus_}
-
+deleteFunctionDefinitionResponse pResponseStatus_
+  = DeleteFunctionDefinitionResponse'{_dfdrsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 dfdrsResponseStatus :: Lens' DeleteFunctionDefinitionResponse Int

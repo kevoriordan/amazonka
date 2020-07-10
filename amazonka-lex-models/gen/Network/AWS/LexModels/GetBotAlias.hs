@@ -41,6 +41,7 @@ module Network.AWS.LexModels.GetBotAlias
     , gbasrsBotName
     , gbasrsCreatedDate
     , gbasrsName
+    , gbasrsConversationLogs
     , gbasrsLastUpdatedDate
     , gbasrsDescription
     , gbasrsResponseStatus
@@ -54,11 +55,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBotAlias' smart constructor.
-data GetBotAlias = GetBotAlias'
-  { _gbasName    :: !Text
-  , _gbasBotName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBotAlias = GetBotAlias'{_gbasName :: !Text,
+                                _gbasBotName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBotAlias' with the minimum fields required to make a request.
 --
@@ -71,9 +70,9 @@ getBotAlias
     :: Text -- ^ 'gbasName'
     -> Text -- ^ 'gbasBotName'
     -> GetBotAlias
-getBotAlias pName_ pBotName_ =
-  GetBotAlias' {_gbasName = pName_, _gbasBotName = pBotName_}
-
+getBotAlias pName_ pBotName_
+  = GetBotAlias'{_gbasName = pName_,
+                 _gbasBotName = pBotName_}
 
 -- | The name of the bot alias. The name is case sensitive.
 gbasName :: Lens' GetBotAlias Text
@@ -94,6 +93,7 @@ instance AWSRequest GetBotAlias where
                      (x .?> "botName")
                      <*> (x .?> "createdDate")
                      <*> (x .?> "name")
+                     <*> (x .?> "conversationLogs")
                      <*> (x .?> "lastUpdatedDate")
                      <*> (x .?> "description")
                      <*> (pure (fromEnum s)))
@@ -119,17 +119,23 @@ instance ToQuery GetBotAlias where
         toQuery = const mempty
 
 -- | /See:/ 'getBotAliasResponse' smart constructor.
-data GetBotAliasResponse = GetBotAliasResponse'
-  { _gbasrsChecksum        :: !(Maybe Text)
-  , _gbasrsBotVersion      :: !(Maybe Text)
-  , _gbasrsBotName         :: !(Maybe Text)
-  , _gbasrsCreatedDate     :: !(Maybe POSIX)
-  , _gbasrsName            :: !(Maybe Text)
-  , _gbasrsLastUpdatedDate :: !(Maybe POSIX)
-  , _gbasrsDescription     :: !(Maybe Text)
-  , _gbasrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBotAliasResponse = GetBotAliasResponse'{_gbasrsChecksum
+                                                :: !(Maybe Text),
+                                                _gbasrsBotVersion ::
+                                                !(Maybe Text),
+                                                _gbasrsBotName :: !(Maybe Text),
+                                                _gbasrsCreatedDate ::
+                                                !(Maybe POSIX),
+                                                _gbasrsName :: !(Maybe Text),
+                                                _gbasrsConversationLogs ::
+                                                !(Maybe
+                                                    ConversationLogsResponse),
+                                                _gbasrsLastUpdatedDate ::
+                                                !(Maybe POSIX),
+                                                _gbasrsDescription ::
+                                                !(Maybe Text),
+                                                _gbasrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBotAliasResponse' with the minimum fields required to make a request.
 --
@@ -145,6 +151,8 @@ data GetBotAliasResponse = GetBotAliasResponse'
 --
 -- * 'gbasrsName' - The name of the bot alias.
 --
+-- * 'gbasrsConversationLogs' - The settings that determine how Amazon Lex uses conversation logs for the alias.
+--
 -- * 'gbasrsLastUpdatedDate' - The date that the bot alias was updated. When you create a resource, the creation date and the last updated date are the same.
 --
 -- * 'gbasrsDescription' - A description of the bot alias.
@@ -153,18 +161,15 @@ data GetBotAliasResponse = GetBotAliasResponse'
 getBotAliasResponse
     :: Int -- ^ 'gbasrsResponseStatus'
     -> GetBotAliasResponse
-getBotAliasResponse pResponseStatus_ =
-  GetBotAliasResponse'
-    { _gbasrsChecksum = Nothing
-    , _gbasrsBotVersion = Nothing
-    , _gbasrsBotName = Nothing
-    , _gbasrsCreatedDate = Nothing
-    , _gbasrsName = Nothing
-    , _gbasrsLastUpdatedDate = Nothing
-    , _gbasrsDescription = Nothing
-    , _gbasrsResponseStatus = pResponseStatus_
-    }
-
+getBotAliasResponse pResponseStatus_
+  = GetBotAliasResponse'{_gbasrsChecksum = Nothing,
+                         _gbasrsBotVersion = Nothing,
+                         _gbasrsBotName = Nothing,
+                         _gbasrsCreatedDate = Nothing, _gbasrsName = Nothing,
+                         _gbasrsConversationLogs = Nothing,
+                         _gbasrsLastUpdatedDate = Nothing,
+                         _gbasrsDescription = Nothing,
+                         _gbasrsResponseStatus = pResponseStatus_}
 
 -- | Checksum of the bot alias.
 gbasrsChecksum :: Lens' GetBotAliasResponse (Maybe Text)
@@ -185,6 +190,10 @@ gbasrsCreatedDate = lens _gbasrsCreatedDate (\ s a -> s{_gbasrsCreatedDate = a})
 -- | The name of the bot alias.
 gbasrsName :: Lens' GetBotAliasResponse (Maybe Text)
 gbasrsName = lens _gbasrsName (\ s a -> s{_gbasrsName = a})
+
+-- | The settings that determine how Amazon Lex uses conversation logs for the alias.
+gbasrsConversationLogs :: Lens' GetBotAliasResponse (Maybe ConversationLogsResponse)
+gbasrsConversationLogs = lens _gbasrsConversationLogs (\ s a -> s{_gbasrsConversationLogs = a})
 
 -- | The date that the bot alias was updated. When you create a resource, the creation date and the last updated date are the same.
 gbasrsLastUpdatedDate :: Lens' GetBotAliasResponse (Maybe UTCTime)

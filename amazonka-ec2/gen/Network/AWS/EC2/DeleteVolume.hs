@@ -21,7 +21,9 @@
 -- Deletes the specified EBS volume. The volume must be in the @available@ state (not attached to an instance).
 --
 --
--- For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html Deleting an Amazon EBS Volume> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- The volume can remain in the @deleting@ state for several minutes.
+--
+-- For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-volume.html Deleting an Amazon EBS Volume> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.DeleteVolume
     (
@@ -29,8 +31,8 @@ module Network.AWS.EC2.DeleteVolume
       deleteVolume
     , DeleteVolume
     -- * Request Lenses
-    , dvvDryRun
-    , dvvVolumeId
+    , dltvlmDryRun
+    , dltvlmVolumeId
 
     -- * Destructuring the Response
     , deleteVolumeResponse
@@ -44,38 +46,33 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteVolume.
---
---
---
--- /See:/ 'deleteVolume' smart constructor.
-data DeleteVolume = DeleteVolume'
-  { _dvvDryRun   :: !(Maybe Bool)
-  , _dvvVolumeId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteVolume' smart constructor.
+data DeleteVolume = DeleteVolume'{_dltvlmDryRun ::
+                                  !(Maybe Bool),
+                                  _dltvlmVolumeId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvvDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
+-- * 'dltvlmDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'dvvVolumeId' - The ID of the volume.
+-- * 'dltvlmVolumeId' - The ID of the volume.
 deleteVolume
-    :: Text -- ^ 'dvvVolumeId'
+    :: Text -- ^ 'dltvlmVolumeId'
     -> DeleteVolume
-deleteVolume pVolumeId_ =
-  DeleteVolume' {_dvvDryRun = Nothing, _dvvVolumeId = pVolumeId_}
-
+deleteVolume pVolumeId_
+  = DeleteVolume'{_dltvlmDryRun = Nothing,
+                  _dltvlmVolumeId = pVolumeId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
-dvvDryRun :: Lens' DeleteVolume (Maybe Bool)
-dvvDryRun = lens _dvvDryRun (\ s a -> s{_dvvDryRun = a})
+dltvlmDryRun :: Lens' DeleteVolume (Maybe Bool)
+dltvlmDryRun = lens _dltvlmDryRun (\ s a -> s{_dltvlmDryRun = a})
 
 -- | The ID of the volume.
-dvvVolumeId :: Lens' DeleteVolume Text
-dvvVolumeId = lens _dvvVolumeId (\ s a -> s{_dvvVolumeId = a})
+dltvlmVolumeId :: Lens' DeleteVolume Text
+dltvlmVolumeId = lens _dltvlmVolumeId (\ s a -> s{_dltvlmVolumeId = a})
 
 instance AWSRequest DeleteVolume where
         type Rs DeleteVolume = DeleteVolumeResponse
@@ -97,19 +94,17 @@ instance ToQuery DeleteVolume where
           = mconcat
               ["Action" =: ("DeleteVolume" :: ByteString),
                "Version" =: ("2016-11-15" :: ByteString),
-               "DryRun" =: _dvvDryRun, "VolumeId" =: _dvvVolumeId]
+               "DryRun" =: _dltvlmDryRun,
+               "VolumeId" =: _dltvlmVolumeId]
 
 -- | /See:/ 'deleteVolumeResponse' smart constructor.
-data DeleteVolumeResponse =
-  DeleteVolumeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVolumeResponse = DeleteVolumeResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVolumeResponse' with the minimum fields required to make a request.
 --
 deleteVolumeResponse
     :: DeleteVolumeResponse
 deleteVolumeResponse = DeleteVolumeResponse'
-
 
 instance NFData DeleteVolumeResponse where

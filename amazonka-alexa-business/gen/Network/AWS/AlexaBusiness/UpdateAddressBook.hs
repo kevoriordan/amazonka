@@ -46,12 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateAddressBook' smart constructor.
-data UpdateAddressBook = UpdateAddressBook'
-  { _uabName           :: !(Maybe Text)
-  , _uabDescription    :: !(Maybe Text)
-  , _uabAddressBookARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAddressBook = UpdateAddressBook'{_uabName
+                                            :: !(Maybe Text),
+                                            _uabDescription :: !(Maybe Text),
+                                            _uabAddressBookARN :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateAddressBook' with the minimum fields required to make a request.
 --
@@ -65,13 +64,10 @@ data UpdateAddressBook = UpdateAddressBook'
 updateAddressBook
     :: Text -- ^ 'uabAddressBookARN'
     -> UpdateAddressBook
-updateAddressBook pAddressBookARN_ =
-  UpdateAddressBook'
-    { _uabName = Nothing
-    , _uabDescription = Nothing
-    , _uabAddressBookARN = pAddressBookARN_
-    }
-
+updateAddressBook pAddressBookARN_
+  = UpdateAddressBook'{_uabName = Nothing,
+                       _uabDescription = Nothing,
+                       _uabAddressBookARN = pAddressBookARN_}
 
 -- | The updated name of the room.
 uabName :: Lens' UpdateAddressBook (Maybe Text)
@@ -121,10 +117,10 @@ instance ToQuery UpdateAddressBook where
         toQuery = const mempty
 
 -- | /See:/ 'updateAddressBookResponse' smart constructor.
-newtype UpdateAddressBookResponse = UpdateAddressBookResponse'
-  { _uabrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateAddressBookResponse = UpdateAddressBookResponse'{_uabrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateAddressBookResponse' with the minimum fields required to make a request.
 --
@@ -134,9 +130,9 @@ newtype UpdateAddressBookResponse = UpdateAddressBookResponse'
 updateAddressBookResponse
     :: Int -- ^ 'uabrsResponseStatus'
     -> UpdateAddressBookResponse
-updateAddressBookResponse pResponseStatus_ =
-  UpdateAddressBookResponse' {_uabrsResponseStatus = pResponseStatus_}
-
+updateAddressBookResponse pResponseStatus_
+  = UpdateAddressBookResponse'{_uabrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 uabrsResponseStatus :: Lens' UpdateAddressBookResponse Int

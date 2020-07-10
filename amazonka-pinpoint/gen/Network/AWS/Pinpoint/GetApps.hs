@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about your apps.
+-- Retrieves information about all the applications that are associated with your Amazon Pinpoint account.
+--
+--
 module Network.AWS.Pinpoint.GetApps
     (
     -- * Creating a Request
@@ -44,29 +46,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getApps' smart constructor.
-data GetApps = GetApps'
-  { _gaToken    :: !(Maybe Text)
-  , _gaPageSize :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetApps = GetApps'{_gaToken :: !(Maybe Text),
+                        _gaPageSize :: !(Maybe Text)}
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetApps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gaToken' - Undocumented member.
+-- * 'gaToken' - The NextToken string that specifies which page of results to return in a paginated response.
 --
--- * 'gaPageSize' - Undocumented member.
+-- * 'gaPageSize' - The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 getApps
     :: GetApps
-getApps = GetApps' {_gaToken = Nothing, _gaPageSize = Nothing}
+getApps
+  = GetApps'{_gaToken = Nothing, _gaPageSize = Nothing}
 
-
--- | Undocumented member.
+-- | The NextToken string that specifies which page of results to return in a paginated response.
 gaToken :: Lens' GetApps (Maybe Text)
 gaToken = lens _gaToken (\ s a -> s{_gaToken = a})
 
--- | Undocumented member.
+-- | The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 gaPageSize :: Lens' GetApps (Maybe Text)
 gaPageSize = lens _gaPageSize (\ s a -> s{_gaPageSize = a})
 
@@ -99,11 +99,11 @@ instance ToQuery GetApps where
               ["token" =: _gaToken, "page-size" =: _gaPageSize]
 
 -- | /See:/ 'getAppsResponse' smart constructor.
-data GetAppsResponse = GetAppsResponse'
-  { _gasrsResponseStatus       :: !Int
-  , _gasrsApplicationsResponse :: !ApplicationsResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAppsResponse = GetAppsResponse'{_gasrsResponseStatus
+                                        :: !Int,
+                                        _gasrsApplicationsResponse ::
+                                        !ApplicationsResponse}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAppsResponse' with the minimum fields required to make a request.
 --
@@ -116,12 +116,11 @@ getAppsResponse
     :: Int -- ^ 'gasrsResponseStatus'
     -> ApplicationsResponse -- ^ 'gasrsApplicationsResponse'
     -> GetAppsResponse
-getAppsResponse pResponseStatus_ pApplicationsResponse_ =
-  GetAppsResponse'
-    { _gasrsResponseStatus = pResponseStatus_
-    , _gasrsApplicationsResponse = pApplicationsResponse_
-    }
-
+getAppsResponse pResponseStatus_
+  pApplicationsResponse_
+  = GetAppsResponse'{_gasrsResponseStatus =
+                       pResponseStatus_,
+                     _gasrsApplicationsResponse = pApplicationsResponse_}
 
 -- | -- | The response status code.
 gasrsResponseStatus :: Lens' GetAppsResponse Int

@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getConnectivityInfo' smart constructor.
-newtype GetConnectivityInfo = GetConnectivityInfo'
-  { _gciThingName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetConnectivityInfo = GetConnectivityInfo'{_gciThingName
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetConnectivityInfo' with the minimum fields required to make a request.
 --
@@ -57,9 +57,8 @@ newtype GetConnectivityInfo = GetConnectivityInfo'
 getConnectivityInfo
     :: Text -- ^ 'gciThingName'
     -> GetConnectivityInfo
-getConnectivityInfo pThingName_ =
-  GetConnectivityInfo' {_gciThingName = pThingName_}
-
+getConnectivityInfo pThingName_
+  = GetConnectivityInfo'{_gciThingName = pThingName_}
 
 -- | The thing name.
 gciThingName :: Lens' GetConnectivityInfo Text
@@ -98,12 +97,17 @@ instance ToQuery GetConnectivityInfo where
         toQuery = const mempty
 
 -- | /See:/ 'getConnectivityInfoResponse' smart constructor.
-data GetConnectivityInfoResponse = GetConnectivityInfoResponse'
-  { _gcirsMessage          :: !(Maybe Text)
-  , _gcirsConnectivityInfo :: !(Maybe [ConnectivityInfo])
-  , _gcirsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetConnectivityInfoResponse = GetConnectivityInfoResponse'{_gcirsMessage
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gcirsConnectivityInfo
+                                                                ::
+                                                                !(Maybe
+                                                                    [ConnectivityInfo]),
+                                                                _gcirsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetConnectivityInfoResponse' with the minimum fields required to make a request.
 --
@@ -117,13 +121,11 @@ data GetConnectivityInfoResponse = GetConnectivityInfoResponse'
 getConnectivityInfoResponse
     :: Int -- ^ 'gcirsResponseStatus'
     -> GetConnectivityInfoResponse
-getConnectivityInfoResponse pResponseStatus_ =
-  GetConnectivityInfoResponse'
-    { _gcirsMessage = Nothing
-    , _gcirsConnectivityInfo = Nothing
-    , _gcirsResponseStatus = pResponseStatus_
-    }
-
+getConnectivityInfoResponse pResponseStatus_
+  = GetConnectivityInfoResponse'{_gcirsMessage =
+                                   Nothing,
+                                 _gcirsConnectivityInfo = Nothing,
+                                 _gcirsResponseStatus = pResponseStatus_}
 
 -- | A message about the connectivity info request.
 gcirsMessage :: Lens' GetConnectivityInfoResponse (Maybe Text)

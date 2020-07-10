@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns all stack related events for a specified stack in reverse chronological order. For more information about a stack's event history, go to <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html Stacks> in the AWS CloudFormation User Guide.
+-- Returns all stack related events for a specified stack in reverse chronological order. For more information about a stack's event history, go to <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html Stacks> in the AWS CloudFormation User Guide.
 --
 --
 --
@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeStackEvents' smart constructor.
-data DescribeStackEvents = DescribeStackEvents'
-  { _dseNextToken :: !(Maybe Text)
-  , _dseStackName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackEvents = DescribeStackEvents'{_dseNextToken
+                                                :: !(Maybe Text),
+                                                _dseStackName :: !(Maybe Text)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeStackEvents' with the minimum fields required to make a request.
 --
@@ -69,9 +68,9 @@ data DescribeStackEvents = DescribeStackEvents'
 -- * 'dseStackName' - The name or the unique stack ID that is associated with the stack, which are not always interchangeable:     * Running stacks: You can specify either the stack's name or its unique stack ID.     * Deleted stacks: You must specify the unique stack ID. Default: There is no default value.
 describeStackEvents
     :: DescribeStackEvents
-describeStackEvents =
-  DescribeStackEvents' {_dseNextToken = Nothing, _dseStackName = Nothing}
-
+describeStackEvents
+  = DescribeStackEvents'{_dseNextToken = Nothing,
+                         _dseStackName = Nothing}
 
 -- | A string that identifies the next page of events that you want to retrieve.
 dseNextToken :: Lens' DescribeStackEvents (Maybe Text)
@@ -124,12 +123,17 @@ instance ToQuery DescribeStackEvents where
 --
 --
 -- /See:/ 'describeStackEventsResponse' smart constructor.
-data DescribeStackEventsResponse = DescribeStackEventsResponse'
-  { _dsersNextToken      :: !(Maybe Text)
-  , _dsersStackEvents    :: !(Maybe [StackEvent])
-  , _dsersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackEventsResponse = DescribeStackEventsResponse'{_dsersNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dsersStackEvents
+                                                                ::
+                                                                !(Maybe
+                                                                    [StackEvent]),
+                                                                _dsersResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeStackEventsResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +147,11 @@ data DescribeStackEventsResponse = DescribeStackEventsResponse'
 describeStackEventsResponse
     :: Int -- ^ 'dsersResponseStatus'
     -> DescribeStackEventsResponse
-describeStackEventsResponse pResponseStatus_ =
-  DescribeStackEventsResponse'
-    { _dsersNextToken = Nothing
-    , _dsersStackEvents = Nothing
-    , _dsersResponseStatus = pResponseStatus_
-    }
-
+describeStackEventsResponse pResponseStatus_
+  = DescribeStackEventsResponse'{_dsersNextToken =
+                                   Nothing,
+                                 _dsersStackEvents = Nothing,
+                                 _dsersResponseStatus = pResponseStatus_}
 
 -- | If the output exceeds 1 MB in size, a string that identifies the next page of events. If no additional page exists, this value is null.
 dsersNextToken :: Lens' DescribeStackEventsResponse (Maybe Text)

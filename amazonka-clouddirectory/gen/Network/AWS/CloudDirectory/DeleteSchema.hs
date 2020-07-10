@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a given schema. Schemas in a development and published state can only be deleted.
+-- Deletes a given schema. Schemas in a development and published state can only be deleted. 
 --
 --
 module Network.AWS.CloudDirectory.DeleteSchema
@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteSchema' smart constructor.
-newtype DeleteSchema = DeleteSchema'
-  { _dsSchemaARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSchema = DeleteSchema'{_dsSchemaARN ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSchema' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype DeleteSchema = DeleteSchema'
 deleteSchema
     :: Text -- ^ 'dsSchemaARN'
     -> DeleteSchema
-deleteSchema pSchemaARN_ = DeleteSchema' {_dsSchemaARN = pSchemaARN_}
-
+deleteSchema pSchemaARN_
+  = DeleteSchema'{_dsSchemaARN = pSchemaARN_}
 
 -- | The Amazon Resource Name (ARN) of the development schema. For more information, see 'arns' .
 dsSchemaARN :: Lens' DeleteSchema Text
@@ -93,11 +92,10 @@ instance ToQuery DeleteSchema where
         toQuery = const mempty
 
 -- | /See:/ 'deleteSchemaResponse' smart constructor.
-data DeleteSchemaResponse = DeleteSchemaResponse'
-  { _dsrsSchemaARN      :: !(Maybe Text)
-  , _dsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSchemaResponse = DeleteSchemaResponse'{_dsrsSchemaARN
+                                                  :: !(Maybe Text),
+                                                  _dsrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSchemaResponse' with the minimum fields required to make a request.
 --
@@ -109,10 +107,9 @@ data DeleteSchemaResponse = DeleteSchemaResponse'
 deleteSchemaResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DeleteSchemaResponse
-deleteSchemaResponse pResponseStatus_ =
-  DeleteSchemaResponse'
-    {_dsrsSchemaARN = Nothing, _dsrsResponseStatus = pResponseStatus_}
-
+deleteSchemaResponse pResponseStatus_
+  = DeleteSchemaResponse'{_dsrsSchemaARN = Nothing,
+                          _dsrsResponseStatus = pResponseStatus_}
 
 -- | The input ARN that is returned as part of the response. For more information, see 'arns' .
 dsrsSchemaARN :: Lens' DeleteSchemaResponse (Maybe Text)

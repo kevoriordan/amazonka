@@ -18,12 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts asynchronous detection of explicit or suggestive adult content in a stored video.
+-- Starts asynchronous detection of unsafe content in a stored video.
 --
 --
--- Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use 'Video' to specify the bucket name and the filename of the video. @StartContentModeration@ returns a job identifier (@JobId@ ) which you use to get the results of the analysis. When content moderation analysis is finished, Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in @NotificationChannel@ .
+-- Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use 'Video' to specify the bucket name and the filename of the video. @StartContentModeration@ returns a job identifier (@JobId@ ) which you use to get the results of the analysis. When unsafe content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in @NotificationChannel@ .
 --
--- To get the results of the content moderation analysis, first check that the status value published to the Amazon SNS topic is @SUCCEEDED@ . If so, call and pass the job identifier (@JobId@ ) from the initial call to @StartContentModeration@ . For more information, see 'moderation' .
+-- To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is @SUCCEEDED@ . If so, call 'GetContentModeration' and pass the job identifier (@JobId@ ) from the initial call to @StartContentModeration@ . 
+--
+-- For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.
 --
 module Network.AWS.Rekognition.StartContentModeration
     (
@@ -53,58 +55,58 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startContentModeration' smart constructor.
-data StartContentModeration = StartContentModeration'
-  { _scmJobTag              :: !(Maybe Text)
-  , _scmNotificationChannel :: !(Maybe NotificationChannel)
-  , _scmClientRequestToken  :: !(Maybe Text)
-  , _scmMinConfidence       :: !(Maybe Double)
-  , _scmVideo               :: !Video
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartContentModeration = StartContentModeration'{_scmJobTag
+                                                      :: !(Maybe Text),
+                                                      _scmNotificationChannel ::
+                                                      !(Maybe
+                                                          NotificationChannel),
+                                                      _scmClientRequestToken ::
+                                                      !(Maybe Text),
+                                                      _scmMinConfidence ::
+                                                      !(Maybe Double),
+                                                      _scmVideo :: !Video}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StartContentModeration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scmJobTag' - Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic.
+-- * 'scmJobTag' - An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic. For example, you can use @JobTag@ to group related jobs and identify them in the completion notification.
 --
--- * 'scmNotificationChannel' - The Amazon SNS topic ARN that you want Rekognition Video to publish the completion status of the content moderation analysis to.
+-- * 'scmNotificationChannel' - The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the unsafe content analysis to.
 --
--- * 'scmClientRequestToken' - Idempotent token used to identify the start request. If you use the same token with multiple @StartContentModeration@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once.
+-- * 'scmClientRequestToken' - Idempotent token used to identify the start request. If you use the same token with multiple @StartContentModeration@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once. 
 --
--- * 'scmMinConfidence' - Specifies the minimum confidence that Amazon Rekognition must have in order to return a moderated content label. Confidence represents how certain Amazon Rekognition is that the moderated content is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition doesn't return any moderated content labels with a confidence level lower than this specified value.
+-- * 'scmMinConfidence' - Specifies the minimum confidence that Amazon Rekognition must have in order to return a moderated content label. Confidence represents how certain Amazon Rekognition is that the moderated content is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition doesn't return any moderated content labels with a confidence level lower than this specified value. If you don't specify @MinConfidence@ , @GetContentModeration@ returns labels with confidence values greater than or equal to 50 percent.
 --
--- * 'scmVideo' - The video in which you want to moderate content. The video must be stored in an Amazon S3 bucket.
+-- * 'scmVideo' - The video in which you want to detect unsafe content. The video must be stored in an Amazon S3 bucket.
 startContentModeration
     :: Video -- ^ 'scmVideo'
     -> StartContentModeration
-startContentModeration pVideo_ =
-  StartContentModeration'
-    { _scmJobTag = Nothing
-    , _scmNotificationChannel = Nothing
-    , _scmClientRequestToken = Nothing
-    , _scmMinConfidence = Nothing
-    , _scmVideo = pVideo_
-    }
+startContentModeration pVideo_
+  = StartContentModeration'{_scmJobTag = Nothing,
+                            _scmNotificationChannel = Nothing,
+                            _scmClientRequestToken = Nothing,
+                            _scmMinConfidence = Nothing, _scmVideo = pVideo_}
 
-
--- | Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic.
+-- | An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic. For example, you can use @JobTag@ to group related jobs and identify them in the completion notification.
 scmJobTag :: Lens' StartContentModeration (Maybe Text)
 scmJobTag = lens _scmJobTag (\ s a -> s{_scmJobTag = a})
 
--- | The Amazon SNS topic ARN that you want Rekognition Video to publish the completion status of the content moderation analysis to.
+-- | The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the unsafe content analysis to.
 scmNotificationChannel :: Lens' StartContentModeration (Maybe NotificationChannel)
 scmNotificationChannel = lens _scmNotificationChannel (\ s a -> s{_scmNotificationChannel = a})
 
--- | Idempotent token used to identify the start request. If you use the same token with multiple @StartContentModeration@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once.
+-- | Idempotent token used to identify the start request. If you use the same token with multiple @StartContentModeration@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once. 
 scmClientRequestToken :: Lens' StartContentModeration (Maybe Text)
 scmClientRequestToken = lens _scmClientRequestToken (\ s a -> s{_scmClientRequestToken = a})
 
--- | Specifies the minimum confidence that Amazon Rekognition must have in order to return a moderated content label. Confidence represents how certain Amazon Rekognition is that the moderated content is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition doesn't return any moderated content labels with a confidence level lower than this specified value.
+-- | Specifies the minimum confidence that Amazon Rekognition must have in order to return a moderated content label. Confidence represents how certain Amazon Rekognition is that the moderated content is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition doesn't return any moderated content labels with a confidence level lower than this specified value. If you don't specify @MinConfidence@ , @GetContentModeration@ returns labels with confidence values greater than or equal to 50 percent.
 scmMinConfidence :: Lens' StartContentModeration (Maybe Double)
 scmMinConfidence = lens _scmMinConfidence (\ s a -> s{_scmMinConfidence = a})
 
--- | The video in which you want to moderate content. The video must be stored in an Amazon S3 bucket.
+-- | The video in which you want to detect unsafe content. The video must be stored in an Amazon S3 bucket.
 scmVideo :: Lens' StartContentModeration Video
 scmVideo = lens _scmVideo (\ s a -> s{_scmVideo = a})
 
@@ -150,28 +152,31 @@ instance ToQuery StartContentModeration where
         toQuery = const mempty
 
 -- | /See:/ 'startContentModerationResponse' smart constructor.
-data StartContentModerationResponse = StartContentModerationResponse'
-  { _scmrsJobId          :: !(Maybe Text)
-  , _scmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartContentModerationResponse = StartContentModerationResponse'{_scmrsJobId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _scmrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'StartContentModerationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scmrsJobId' - The identifier for the content moderation analysis job. Use @JobId@ to identify the job in a subsequent call to @GetContentModeration@ .
+-- * 'scmrsJobId' - The identifier for the unsafe content analysis job. Use @JobId@ to identify the job in a subsequent call to @GetContentModeration@ .
 --
 -- * 'scmrsResponseStatus' - -- | The response status code.
 startContentModerationResponse
     :: Int -- ^ 'scmrsResponseStatus'
     -> StartContentModerationResponse
-startContentModerationResponse pResponseStatus_ =
-  StartContentModerationResponse'
-    {_scmrsJobId = Nothing, _scmrsResponseStatus = pResponseStatus_}
+startContentModerationResponse pResponseStatus_
+  = StartContentModerationResponse'{_scmrsJobId =
+                                      Nothing,
+                                    _scmrsResponseStatus = pResponseStatus_}
 
-
--- | The identifier for the content moderation analysis job. Use @JobId@ to identify the job in a subsequent call to @GetContentModeration@ .
+-- | The identifier for the unsafe content analysis job. Use @JobId@ to identify the job in a subsequent call to @GetContentModeration@ .
 scmrsJobId :: Lens' StartContentModerationResponse (Maybe Text)
 scmrsJobId = lens _scmrsJobId (\ s a -> s{_scmrsJobId = a})
 

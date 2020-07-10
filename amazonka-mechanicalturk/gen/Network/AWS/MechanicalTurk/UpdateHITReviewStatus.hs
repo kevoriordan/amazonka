@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @UpdateHITReviewStatus@ operation updates the status of a HIT. If the status is Reviewable, this operation can update the status to Reviewing, or it can revert a Reviewing HIT back to the Reviewable status.
+-- The @UpdateHITReviewStatus@ operation updates the status of a HIT. If the status is Reviewable, this operation can update the status to Reviewing, or it can revert a Reviewing HIT back to the Reviewable status. 
 --
 --
 module Network.AWS.MechanicalTurk.UpdateHITReviewStatus
@@ -45,31 +45,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateHITReviewStatus' smart constructor.
-data UpdateHITReviewStatus = UpdateHITReviewStatus'
-  { _uhitrsRevert :: !(Maybe Bool)
-  , _uhitrsHITId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateHITReviewStatus = UpdateHITReviewStatus'{_uhitrsRevert
+                                                    :: !(Maybe Bool),
+                                                    _uhitrsHITId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateHITReviewStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uhitrsRevert' - Specifies how to update the HIT status. Default is @False@ .      * Setting this to false will only transition a HIT from @Reviewable@ to @Reviewing@      * Setting this to true will only transition a HIT from @Reviewing@ to @Reviewable@
+-- * 'uhitrsRevert' - Specifies how to update the HIT status. Default is @False@ .      * Setting this to false will only transition a HIT from @Reviewable@ to @Reviewing@      * Setting this to true will only transition a HIT from @Reviewing@ to @Reviewable@ 
 --
--- * 'uhitrsHITId' - The ID of the HIT to update.
+-- * 'uhitrsHITId' - The ID of the HIT to update. 
 updateHITReviewStatus
     :: Text -- ^ 'uhitrsHITId'
     -> UpdateHITReviewStatus
-updateHITReviewStatus pHITId_ =
-  UpdateHITReviewStatus' {_uhitrsRevert = Nothing, _uhitrsHITId = pHITId_}
+updateHITReviewStatus pHITId_
+  = UpdateHITReviewStatus'{_uhitrsRevert = Nothing,
+                           _uhitrsHITId = pHITId_}
 
-
--- | Specifies how to update the HIT status. Default is @False@ .      * Setting this to false will only transition a HIT from @Reviewable@ to @Reviewing@      * Setting this to true will only transition a HIT from @Reviewing@ to @Reviewable@
+-- | Specifies how to update the HIT status. Default is @False@ .      * Setting this to false will only transition a HIT from @Reviewable@ to @Reviewing@      * Setting this to true will only transition a HIT from @Reviewing@ to @Reviewable@ 
 uhitrsRevert :: Lens' UpdateHITReviewStatus (Maybe Bool)
 uhitrsRevert = lens _uhitrsRevert (\ s a -> s{_uhitrsRevert = a})
 
--- | The ID of the HIT to update.
+-- | The ID of the HIT to update. 
 uhitrsHITId :: Lens' UpdateHITReviewStatus Text
 uhitrsHITId = lens _uhitrsHITId (\ s a -> s{_uhitrsHITId = a})
 
@@ -111,10 +111,10 @@ instance ToQuery UpdateHITReviewStatus where
         toQuery = const mempty
 
 -- | /See:/ 'updateHITReviewStatusResponse' smart constructor.
-newtype UpdateHITReviewStatusResponse = UpdateHITReviewStatusResponse'
-  { _uhitrsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateHITReviewStatusResponse = UpdateHITReviewStatusResponse'{_uhitrsrsResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'UpdateHITReviewStatusResponse' with the minimum fields required to make a request.
 --
@@ -124,9 +124,9 @@ newtype UpdateHITReviewStatusResponse = UpdateHITReviewStatusResponse'
 updateHITReviewStatusResponse
     :: Int -- ^ 'uhitrsrsResponseStatus'
     -> UpdateHITReviewStatusResponse
-updateHITReviewStatusResponse pResponseStatus_ =
-  UpdateHITReviewStatusResponse' {_uhitrsrsResponseStatus = pResponseStatus_}
-
+updateHITReviewStatusResponse pResponseStatus_
+  = UpdateHITReviewStatusResponse'{_uhitrsrsResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 uhitrsrsResponseStatus :: Lens' UpdateHITReviewStatusResponse Int

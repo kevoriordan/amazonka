@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Configures scaling parameters for a domain. A domain's scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html Configuring Scaling Options> in the /Amazon CloudSearch Developer Guide/ .
+-- Configures scaling parameters for a domain. A domain's scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html Configuring Scaling Options> in the /Amazon CloudSearch Developer Guide/ . 
 --
 --
 module Network.AWS.CloudSearch.UpdateScalingParameters
@@ -50,11 +50,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateScalingParameters' smart constructor.
-data UpdateScalingParameters = UpdateScalingParameters'
-  { _uspDomainName        :: !Text
-  , _uspScalingParameters :: !ScalingParameters
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateScalingParameters = UpdateScalingParameters'{_uspDomainName
+                                                        :: !Text,
+                                                        _uspScalingParameters ::
+                                                        !ScalingParameters}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateScalingParameters' with the minimum fields required to make a request.
 --
@@ -67,10 +68,11 @@ updateScalingParameters
     :: Text -- ^ 'uspDomainName'
     -> ScalingParameters -- ^ 'uspScalingParameters'
     -> UpdateScalingParameters
-updateScalingParameters pDomainName_ pScalingParameters_ =
-  UpdateScalingParameters'
-    {_uspDomainName = pDomainName_, _uspScalingParameters = pScalingParameters_}
-
+updateScalingParameters pDomainName_
+  pScalingParameters_
+  = UpdateScalingParameters'{_uspDomainName =
+                               pDomainName_,
+                             _uspScalingParameters = pScalingParameters_}
 
 -- | Undocumented member.
 uspDomainName :: Lens' UpdateScalingParameters Text
@@ -114,11 +116,13 @@ instance ToQuery UpdateScalingParameters where
 --
 --
 -- /See:/ 'updateScalingParametersResponse' smart constructor.
-data UpdateScalingParametersResponse = UpdateScalingParametersResponse'
-  { _usprsResponseStatus    :: !Int
-  , _usprsScalingParameters :: !ScalingParametersStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateScalingParametersResponse = UpdateScalingParametersResponse'{_usprsResponseStatus
+                                                                        :: !Int,
+                                                                        _usprsScalingParameters
+                                                                        ::
+                                                                        !ScalingParametersStatus}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateScalingParametersResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +135,12 @@ updateScalingParametersResponse
     :: Int -- ^ 'usprsResponseStatus'
     -> ScalingParametersStatus -- ^ 'usprsScalingParameters'
     -> UpdateScalingParametersResponse
-updateScalingParametersResponse pResponseStatus_ pScalingParameters_ =
-  UpdateScalingParametersResponse'
-    { _usprsResponseStatus = pResponseStatus_
-    , _usprsScalingParameters = pScalingParameters_
-    }
-
+updateScalingParametersResponse pResponseStatus_
+  pScalingParameters_
+  = UpdateScalingParametersResponse'{_usprsResponseStatus
+                                       = pResponseStatus_,
+                                     _usprsScalingParameters =
+                                       pScalingParameters_}
 
 -- | -- | The response status code.
 usprsResponseStatus :: Lens' UpdateScalingParametersResponse Int

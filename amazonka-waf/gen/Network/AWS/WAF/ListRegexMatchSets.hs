@@ -21,6 +21,8 @@
 -- Returns an array of 'RegexMatchSetSummary' objects.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WAF.ListRegexMatchSets
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.WAF.ListRegexMatchSets
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -47,11 +50,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'listRegexMatchSets' smart constructor.
-data ListRegexMatchSets = ListRegexMatchSets'
-  { _lrmsNextMarker :: !(Maybe Text)
-  , _lrmsLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRegexMatchSets = ListRegexMatchSets'{_lrmsNextMarker
+                                              :: !(Maybe Text),
+                                              _lrmsLimit :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRegexMatchSets' with the minimum fields required to make a request.
 --
@@ -62,9 +64,9 @@ data ListRegexMatchSets = ListRegexMatchSets'
 -- * 'lrmsLimit' - Specifies the number of @RegexMatchSet@ objects that you want AWS WAF to return for this request. If you have more @RegexMatchSet@ objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @RegexMatchSet@ objects.
 listRegexMatchSets
     :: ListRegexMatchSets
-listRegexMatchSets =
-  ListRegexMatchSets' {_lrmsNextMarker = Nothing, _lrmsLimit = Nothing}
-
+listRegexMatchSets
+  = ListRegexMatchSets'{_lrmsNextMarker = Nothing,
+                        _lrmsLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @RegexMatchSet@ objects than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @ByteMatchSets@ . For the second and subsequent @ListRegexMatchSets@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @RegexMatchSet@ objects.
 lrmsNextMarker :: Lens' ListRegexMatchSets (Maybe Text)
@@ -73,6 +75,13 @@ lrmsNextMarker = lens _lrmsNextMarker (\ s a -> s{_lrmsNextMarker = a})
 -- | Specifies the number of @RegexMatchSet@ objects that you want AWS WAF to return for this request. If you have more @RegexMatchSet@ objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @RegexMatchSet@ objects.
 lrmsLimit :: Lens' ListRegexMatchSets (Maybe Natural)
 lrmsLimit = lens _lrmsLimit (\ s a -> s{_lrmsLimit = a}) . mapping _Nat
+
+instance AWSPager ListRegexMatchSets where
+        page rq rs
+          | stop (rs ^. lrmsrsNextMarker) = Nothing
+          | stop (rs ^. lrmsrsRegexMatchSets) = Nothing
+          | otherwise =
+            Just $ rq & lrmsNextMarker .~ rs ^. lrmsrsNextMarker
 
 instance AWSRequest ListRegexMatchSets where
         type Rs ListRegexMatchSets =
@@ -113,12 +122,16 @@ instance ToQuery ListRegexMatchSets where
         toQuery = const mempty
 
 -- | /See:/ 'listRegexMatchSetsResponse' smart constructor.
-data ListRegexMatchSetsResponse = ListRegexMatchSetsResponse'
-  { _lrmsrsRegexMatchSets :: !(Maybe [RegexMatchSetSummary])
-  , _lrmsrsNextMarker     :: !(Maybe Text)
-  , _lrmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRegexMatchSetsResponse = ListRegexMatchSetsResponse'{_lrmsrsRegexMatchSets
+                                                              ::
+                                                              !(Maybe
+                                                                  [RegexMatchSetSummary]),
+                                                              _lrmsrsNextMarker
+                                                              :: !(Maybe Text),
+                                                              _lrmsrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListRegexMatchSetsResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +145,11 @@ data ListRegexMatchSetsResponse = ListRegexMatchSetsResponse'
 listRegexMatchSetsResponse
     :: Int -- ^ 'lrmsrsResponseStatus'
     -> ListRegexMatchSetsResponse
-listRegexMatchSetsResponse pResponseStatus_ =
-  ListRegexMatchSetsResponse'
-    { _lrmsrsRegexMatchSets = Nothing
-    , _lrmsrsNextMarker = Nothing
-    , _lrmsrsResponseStatus = pResponseStatus_
-    }
-
+listRegexMatchSetsResponse pResponseStatus_
+  = ListRegexMatchSetsResponse'{_lrmsrsRegexMatchSets =
+                                  Nothing,
+                                _lrmsrsNextMarker = Nothing,
+                                _lrmsrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'RegexMatchSetSummary' objects.
 lrmsrsRegexMatchSets :: Lens' ListRegexMatchSetsResponse [RegexMatchSetSummary]

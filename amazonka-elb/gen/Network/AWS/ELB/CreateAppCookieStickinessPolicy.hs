@@ -25,7 +25,7 @@
 --
 -- If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application Application-Controlled Session Stickiness> in the /Classic Load Balancer Guide/ .
+-- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application Application-Controlled Session Stickiness> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.CreateAppCookieStickinessPolicy
     (
@@ -56,12 +56,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createAppCookieStickinessPolicy' smart constructor.
-data CreateAppCookieStickinessPolicy = CreateAppCookieStickinessPolicy'
-  { _cacspLoadBalancerName :: !Text
-  , _cacspPolicyName       :: !Text
-  , _cacspCookieName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAppCookieStickinessPolicy = CreateAppCookieStickinessPolicy'{_cacspLoadBalancerName
+                                                                        ::
+                                                                        !Text,
+                                                                        _cacspPolicyName
+                                                                        ::
+                                                                        !Text,
+                                                                        _cacspCookieName
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateAppCookieStickinessPolicy' with the minimum fields required to make a request.
 --
@@ -77,13 +82,12 @@ createAppCookieStickinessPolicy
     -> Text -- ^ 'cacspPolicyName'
     -> Text -- ^ 'cacspCookieName'
     -> CreateAppCookieStickinessPolicy
-createAppCookieStickinessPolicy pLoadBalancerName_ pPolicyName_ pCookieName_ =
-  CreateAppCookieStickinessPolicy'
-    { _cacspLoadBalancerName = pLoadBalancerName_
-    , _cacspPolicyName = pPolicyName_
-    , _cacspCookieName = pCookieName_
-    }
-
+createAppCookieStickinessPolicy pLoadBalancerName_
+  pPolicyName_ pCookieName_
+  = CreateAppCookieStickinessPolicy'{_cacspLoadBalancerName
+                                       = pLoadBalancerName_,
+                                     _cacspPolicyName = pPolicyName_,
+                                     _cacspCookieName = pCookieName_}
 
 -- | The name of the load balancer.
 cacspLoadBalancerName :: Lens' CreateAppCookieStickinessPolicy Text
@@ -137,10 +141,12 @@ instance ToQuery CreateAppCookieStickinessPolicy
 --
 --
 -- /See:/ 'createAppCookieStickinessPolicyResponse' smart constructor.
-newtype CreateAppCookieStickinessPolicyResponse = CreateAppCookieStickinessPolicyResponse'
-  { _cacsprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateAppCookieStickinessPolicyResponse = CreateAppCookieStickinessPolicyResponse'{_cacsprsResponseStatus
+                                                                                           ::
+                                                                                           Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'CreateAppCookieStickinessPolicyResponse' with the minimum fields required to make a request.
 --
@@ -150,10 +156,10 @@ newtype CreateAppCookieStickinessPolicyResponse = CreateAppCookieStickinessPolic
 createAppCookieStickinessPolicyResponse
     :: Int -- ^ 'cacsprsResponseStatus'
     -> CreateAppCookieStickinessPolicyResponse
-createAppCookieStickinessPolicyResponse pResponseStatus_ =
-  CreateAppCookieStickinessPolicyResponse'
-    {_cacsprsResponseStatus = pResponseStatus_}
-
+createAppCookieStickinessPolicyResponse
+  pResponseStatus_
+  = CreateAppCookieStickinessPolicyResponse'{_cacsprsResponseStatus
+                                               = pResponseStatus_}
 
 -- | -- | The response status code.
 cacsprsResponseStatus :: Lens' CreateAppCookieStickinessPolicyResponse Int

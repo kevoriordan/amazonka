@@ -49,22 +49,21 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getActiveNames' smart constructor.
-newtype GetActiveNames = GetActiveNames'
-  { _ganPageToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetActiveNames = GetActiveNames'{_ganPageToken
+                                         :: Maybe Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetActiveNames' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ganPageToken' - A token used for paginating results from your get active names request.
+-- * 'ganPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetActiveNames@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getActiveNames
     :: GetActiveNames
-getActiveNames = GetActiveNames' {_ganPageToken = Nothing}
+getActiveNames
+  = GetActiveNames'{_ganPageToken = Nothing}
 
-
--- | A token used for paginating results from your get active names request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetActiveNames@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 ganPageToken :: Lens' GetActiveNames (Maybe Text)
 ganPageToken = lens _ganPageToken (\ s a -> s{_ganPageToken = a})
 
@@ -111,18 +110,20 @@ instance ToQuery GetActiveNames where
         toQuery = const mempty
 
 -- | /See:/ 'getActiveNamesResponse' smart constructor.
-data GetActiveNamesResponse = GetActiveNamesResponse'
-  { _ganrsNextPageToken  :: !(Maybe Text)
-  , _ganrsActiveNames    :: !(Maybe [Text])
-  , _ganrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetActiveNamesResponse = GetActiveNamesResponse'{_ganrsNextPageToken
+                                                      :: !(Maybe Text),
+                                                      _ganrsActiveNames ::
+                                                      !(Maybe [Text]),
+                                                      _ganrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetActiveNamesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ganrsNextPageToken' - A token used for advancing to the next page of results from your get active names request.
+-- * 'ganrsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetActiveNames@ request and specify the next page token using the @pageToken@ parameter.
 --
 -- * 'ganrsActiveNames' - The list of active names returned by the get active names request.
 --
@@ -130,15 +131,13 @@ data GetActiveNamesResponse = GetActiveNamesResponse'
 getActiveNamesResponse
     :: Int -- ^ 'ganrsResponseStatus'
     -> GetActiveNamesResponse
-getActiveNamesResponse pResponseStatus_ =
-  GetActiveNamesResponse'
-    { _ganrsNextPageToken = Nothing
-    , _ganrsActiveNames = Nothing
-    , _ganrsResponseStatus = pResponseStatus_
-    }
+getActiveNamesResponse pResponseStatus_
+  = GetActiveNamesResponse'{_ganrsNextPageToken =
+                              Nothing,
+                            _ganrsActiveNames = Nothing,
+                            _ganrsResponseStatus = pResponseStatus_}
 
-
--- | A token used for advancing to the next page of results from your get active names request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetActiveNames@ request and specify the next page token using the @pageToken@ parameter.
 ganrsNextPageToken :: Lens' GetActiveNamesResponse (Maybe Text)
 ganrsNextPageToken = lens _ganrsNextPageToken (\ s a -> s{_ganrsNextPageToken = a})
 

@@ -53,6 +53,7 @@ library
         , Network.AWS.ECR.DeleteLifecyclePolicy
         , Network.AWS.ECR.DeleteRepository
         , Network.AWS.ECR.DeleteRepositoryPolicy
+        , Network.AWS.ECR.DescribeImageScanFindings
         , Network.AWS.ECR.DescribeImages
         , Network.AWS.ECR.DescribeRepositories
         , Network.AWS.ECR.GetAuthorizationToken
@@ -62,21 +63,57 @@ library
         , Network.AWS.ECR.GetRepositoryPolicy
         , Network.AWS.ECR.InitiateLayerUpload
         , Network.AWS.ECR.ListImages
+        , Network.AWS.ECR.ListTagsForResource
         , Network.AWS.ECR.PutImage
+        , Network.AWS.ECR.PutImageScanningConfiguration
+        , Network.AWS.ECR.PutImageTagMutability
         , Network.AWS.ECR.PutLifecyclePolicy
         , Network.AWS.ECR.SetRepositoryPolicy
+        , Network.AWS.ECR.StartImageScan
         , Network.AWS.ECR.StartLifecyclePolicyPreview
+        , Network.AWS.ECR.TagResource
         , Network.AWS.ECR.Types
+        , Network.AWS.ECR.UntagResource
         , Network.AWS.ECR.UploadLayerPart
         , Network.AWS.ECR.Waiters
 
     other-modules:
-          Network.AWS.ECR.Types.Product
-        , Network.AWS.ECR.Types.Sum
+          Network.AWS.ECR.Types.Attribute
+        , Network.AWS.ECR.Types.AuthorizationData
+        , Network.AWS.ECR.Types.DescribeImagesFilter
+        , Network.AWS.ECR.Types.FindingSeverity
+        , Network.AWS.ECR.Types.Image
+        , Network.AWS.ECR.Types.ImageActionType
+        , Network.AWS.ECR.Types.ImageDetail
+        , Network.AWS.ECR.Types.ImageFailure
+        , Network.AWS.ECR.Types.ImageFailureCode
+        , Network.AWS.ECR.Types.ImageIdentifier
+        , Network.AWS.ECR.Types.ImageScanFinding
+        , Network.AWS.ECR.Types.ImageScanFindings
+        , Network.AWS.ECR.Types.ImageScanFindingsSummary
+        , Network.AWS.ECR.Types.ImageScanStatus
+        , Network.AWS.ECR.Types.ImageScanningConfiguration
+        , Network.AWS.ECR.Types.ImageTagMutability
+        , Network.AWS.ECR.Types.Layer
+        , Network.AWS.ECR.Types.LayerAvailability
+        , Network.AWS.ECR.Types.LayerFailure
+        , Network.AWS.ECR.Types.LayerFailureCode
+        , Network.AWS.ECR.Types.LifecyclePolicyPreviewFilter
+        , Network.AWS.ECR.Types.LifecyclePolicyPreviewResult
+        , Network.AWS.ECR.Types.LifecyclePolicyPreviewStatus
+        , Network.AWS.ECR.Types.LifecyclePolicyPreviewSummary
+        , Network.AWS.ECR.Types.LifecyclePolicyRuleAction
+        , Network.AWS.ECR.Types.ListImagesFilter
+        , Network.AWS.ECR.Types.Product
+        , Network.AWS.ECR.Types.Repository
+        , Network.AWS.ECR.Types.ScanStatus
+        , Network.AWS.ECR.Types.Tag
+        , Network.AWS.ECR.Types.TagStatus
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-ecr-test
     type:              exitcode-stdio-1.0
@@ -100,6 +137,7 @@ test-suite amazonka-ecr-test
         , amazonka-ecr
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

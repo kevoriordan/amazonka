@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Signs out users from all devices.
+-- Signs out users from all devices. It also invalidates all refresh tokens issued to a user. The user's current access and Id tokens remain valid until their expiry. Access and Id tokens expire one hour after they are issued.
 --
 --
 module Network.AWS.CognitoIdentityProvider.GlobalSignOut
@@ -48,10 +48,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'globalSignOut' smart constructor.
-newtype GlobalSignOut = GlobalSignOut'
-  { _gsoAccessToken :: Sensitive Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+newtype GlobalSignOut = GlobalSignOut'{_gsoAccessToken
+                                       :: Sensitive Text}
+                          deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GlobalSignOut' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ newtype GlobalSignOut = GlobalSignOut'
 globalSignOut
     :: Text -- ^ 'gsoAccessToken'
     -> GlobalSignOut
-globalSignOut pAccessToken_ =
-  GlobalSignOut' {_gsoAccessToken = _Sensitive # pAccessToken_}
-
+globalSignOut pAccessToken_
+  = GlobalSignOut'{_gsoAccessToken =
+                     _Sensitive # pAccessToken_}
 
 -- | The access token.
 gsoAccessToken :: Lens' GlobalSignOut Text
@@ -107,10 +106,10 @@ instance ToQuery GlobalSignOut where
 --
 --
 -- /See:/ 'globalSignOutResponse' smart constructor.
-newtype GlobalSignOutResponse = GlobalSignOutResponse'
-  { _gsorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GlobalSignOutResponse = GlobalSignOutResponse'{_gsorsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GlobalSignOutResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +119,9 @@ newtype GlobalSignOutResponse = GlobalSignOutResponse'
 globalSignOutResponse
     :: Int -- ^ 'gsorsResponseStatus'
     -> GlobalSignOutResponse
-globalSignOutResponse pResponseStatus_ =
-  GlobalSignOutResponse' {_gsorsResponseStatus = pResponseStatus_}
-
+globalSignOutResponse pResponseStatus_
+  = GlobalSignOutResponse'{_gsorsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 gsorsResponseStatus :: Lens' GlobalSignOutResponse Int

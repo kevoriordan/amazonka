@@ -34,6 +34,7 @@ module Network.AWS.SageMaker.DescribeEndpointConfig
     , DescribeEndpointConfigResponse
     -- * Response Lenses
     , decrsKMSKeyId
+    , decrsDataCaptureConfig
     , decrsResponseStatus
     , decrsEndpointConfigName
     , decrsEndpointConfigARN
@@ -49,10 +50,10 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'describeEndpointConfig' smart constructor.
-newtype DescribeEndpointConfig = DescribeEndpointConfig'
-  { _decEndpointConfigName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeEndpointConfig = DescribeEndpointConfig'{_decEndpointConfigName
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeEndpointConfig' with the minimum fields required to make a request.
 --
@@ -62,9 +63,9 @@ newtype DescribeEndpointConfig = DescribeEndpointConfig'
 describeEndpointConfig
     :: Text -- ^ 'decEndpointConfigName'
     -> DescribeEndpointConfig
-describeEndpointConfig pEndpointConfigName_ =
-  DescribeEndpointConfig' {_decEndpointConfigName = pEndpointConfigName_}
-
+describeEndpointConfig pEndpointConfigName_
+  = DescribeEndpointConfig'{_decEndpointConfigName =
+                              pEndpointConfigName_}
 
 -- | The name of the endpoint configuration.
 decEndpointConfigName :: Lens' DescribeEndpointConfig Text
@@ -78,8 +79,9 @@ instance AWSRequest DescribeEndpointConfig where
           = receiveJSON
               (\ s h x ->
                  DescribeEndpointConfigResponse' <$>
-                   (x .?> "KmsKeyId") <*> (pure (fromEnum s)) <*>
-                     (x .:> "EndpointConfigName")
+                   (x .?> "KmsKeyId") <*> (x .?> "DataCaptureConfig")
+                     <*> (pure (fromEnum s))
+                     <*> (x .:> "EndpointConfigName")
                      <*> (x .:> "EndpointConfigArn")
                      <*> (x .:> "ProductionVariants")
                      <*> (x .:> "CreationTime"))
@@ -111,21 +113,36 @@ instance ToQuery DescribeEndpointConfig where
         toQuery = const mempty
 
 -- | /See:/ 'describeEndpointConfigResponse' smart constructor.
-data DescribeEndpointConfigResponse = DescribeEndpointConfigResponse'
-  { _decrsKMSKeyId           :: !(Maybe Text)
-  , _decrsResponseStatus     :: !Int
-  , _decrsEndpointConfigName :: !Text
-  , _decrsEndpointConfigARN  :: !Text
-  , _decrsProductionVariants :: !(List1 ProductionVariant)
-  , _decrsCreationTime       :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEndpointConfigResponse = DescribeEndpointConfigResponse'{_decrsKMSKeyId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _decrsDataCaptureConfig
+                                                                      ::
+                                                                      !(Maybe
+                                                                          DataCaptureConfig),
+                                                                      _decrsResponseStatus
+                                                                      :: !Int,
+                                                                      _decrsEndpointConfigName
+                                                                      :: !Text,
+                                                                      _decrsEndpointConfigARN
+                                                                      :: !Text,
+                                                                      _decrsProductionVariants
+                                                                      ::
+                                                                      !(List1
+                                                                          ProductionVariant),
+                                                                      _decrsCreationTime
+                                                                      :: !POSIX}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeEndpointConfigResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'decrsKMSKeyId' - AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance.
+--
+-- * 'decrsDataCaptureConfig' - Undocumented member.
 --
 -- * 'decrsResponseStatus' - -- | The response status code.
 --
@@ -143,20 +160,28 @@ describeEndpointConfigResponse
     -> NonEmpty ProductionVariant -- ^ 'decrsProductionVariants'
     -> UTCTime -- ^ 'decrsCreationTime'
     -> DescribeEndpointConfigResponse
-describeEndpointConfigResponse pResponseStatus_ pEndpointConfigName_ pEndpointConfigARN_ pProductionVariants_ pCreationTime_ =
-  DescribeEndpointConfigResponse'
-    { _decrsKMSKeyId = Nothing
-    , _decrsResponseStatus = pResponseStatus_
-    , _decrsEndpointConfigName = pEndpointConfigName_
-    , _decrsEndpointConfigARN = pEndpointConfigARN_
-    , _decrsProductionVariants = _List1 # pProductionVariants_
-    , _decrsCreationTime = _Time # pCreationTime_
-    }
-
+describeEndpointConfigResponse pResponseStatus_
+  pEndpointConfigName_ pEndpointConfigARN_
+  pProductionVariants_ pCreationTime_
+  = DescribeEndpointConfigResponse'{_decrsKMSKeyId =
+                                      Nothing,
+                                    _decrsDataCaptureConfig = Nothing,
+                                    _decrsResponseStatus = pResponseStatus_,
+                                    _decrsEndpointConfigName =
+                                      pEndpointConfigName_,
+                                    _decrsEndpointConfigARN =
+                                      pEndpointConfigARN_,
+                                    _decrsProductionVariants =
+                                      _List1 # pProductionVariants_,
+                                    _decrsCreationTime = _Time # pCreationTime_}
 
 -- | AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage volume attached to the instance.
 decrsKMSKeyId :: Lens' DescribeEndpointConfigResponse (Maybe Text)
 decrsKMSKeyId = lens _decrsKMSKeyId (\ s a -> s{_decrsKMSKeyId = a})
+
+-- | Undocumented member.
+decrsDataCaptureConfig :: Lens' DescribeEndpointConfigResponse (Maybe DataCaptureConfig)
+decrsDataCaptureConfig = lens _decrsDataCaptureConfig (\ s a -> s{_decrsDataCaptureConfig = a})
 
 -- | -- | The response status code.
 decrsResponseStatus :: Lens' DescribeEndpointConfigResponse Int

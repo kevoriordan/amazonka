@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a member to the group's set.
+-- Adds a member (user or group) to the group's set.
 --
 --
 module Network.AWS.WorkMail.AssociateMemberToGroup
@@ -46,12 +46,12 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'associateMemberToGroup' smart constructor.
-data AssociateMemberToGroup = AssociateMemberToGroup'
-  { _amtgOrganizationId :: !Text
-  , _amtgGroupId        :: !Text
-  , _amtgMemberId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateMemberToGroup = AssociateMemberToGroup'{_amtgOrganizationId
+                                                      :: !Text,
+                                                      _amtgGroupId :: !Text,
+                                                      _amtgMemberId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AssociateMemberToGroup' with the minimum fields required to make a request.
 --
@@ -59,31 +59,30 @@ data AssociateMemberToGroup = AssociateMemberToGroup'
 --
 -- * 'amtgOrganizationId' - The organization under which the group exists.
 --
--- * 'amtgGroupId' - The group for which the member is associated.
+-- * 'amtgGroupId' - The group to which the member (user or group) is associated.
 --
--- * 'amtgMemberId' - The member to associate to the group.
+-- * 'amtgMemberId' - The member (user or group) to associate to the group.
 associateMemberToGroup
     :: Text -- ^ 'amtgOrganizationId'
     -> Text -- ^ 'amtgGroupId'
     -> Text -- ^ 'amtgMemberId'
     -> AssociateMemberToGroup
-associateMemberToGroup pOrganizationId_ pGroupId_ pMemberId_ =
-  AssociateMemberToGroup'
-    { _amtgOrganizationId = pOrganizationId_
-    , _amtgGroupId = pGroupId_
-    , _amtgMemberId = pMemberId_
-    }
-
+associateMemberToGroup pOrganizationId_ pGroupId_
+  pMemberId_
+  = AssociateMemberToGroup'{_amtgOrganizationId =
+                              pOrganizationId_,
+                            _amtgGroupId = pGroupId_,
+                            _amtgMemberId = pMemberId_}
 
 -- | The organization under which the group exists.
 amtgOrganizationId :: Lens' AssociateMemberToGroup Text
 amtgOrganizationId = lens _amtgOrganizationId (\ s a -> s{_amtgOrganizationId = a})
 
--- | The group for which the member is associated.
+-- | The group to which the member (user or group) is associated.
 amtgGroupId :: Lens' AssociateMemberToGroup Text
 amtgGroupId = lens _amtgGroupId (\ s a -> s{_amtgGroupId = a})
 
--- | The member to associate to the group.
+-- | The member (user or group) to associate to the group.
 amtgMemberId :: Lens' AssociateMemberToGroup Text
 amtgMemberId = lens _amtgMemberId (\ s a -> s{_amtgMemberId = a})
 
@@ -126,10 +125,10 @@ instance ToQuery AssociateMemberToGroup where
         toQuery = const mempty
 
 -- | /See:/ 'associateMemberToGroupResponse' smart constructor.
-newtype AssociateMemberToGroupResponse = AssociateMemberToGroupResponse'
-  { _amtgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateMemberToGroupResponse = AssociateMemberToGroupResponse'{_amtgrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'AssociateMemberToGroupResponse' with the minimum fields required to make a request.
 --
@@ -139,9 +138,9 @@ newtype AssociateMemberToGroupResponse = AssociateMemberToGroupResponse'
 associateMemberToGroupResponse
     :: Int -- ^ 'amtgrsResponseStatus'
     -> AssociateMemberToGroupResponse
-associateMemberToGroupResponse pResponseStatus_ =
-  AssociateMemberToGroupResponse' {_amtgrsResponseStatus = pResponseStatus_}
-
+associateMemberToGroupResponse pResponseStatus_
+  = AssociateMemberToGroupResponse'{_amtgrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 amtgrsResponseStatus :: Lens' AssociateMemberToGroupResponse Int

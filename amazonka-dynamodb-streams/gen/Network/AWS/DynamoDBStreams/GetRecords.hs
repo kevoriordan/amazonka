@@ -53,11 +53,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getRecords' smart constructor.
-data GetRecords = GetRecords'
-  { _grLimit         :: !(Maybe Nat)
-  , _grShardIterator :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRecords = GetRecords'{_grLimit ::
+                              !(Maybe Nat),
+                              _grShardIterator :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRecords' with the minimum fields required to make a request.
 --
@@ -69,9 +68,9 @@ data GetRecords = GetRecords'
 getRecords
     :: Text -- ^ 'grShardIterator'
     -> GetRecords
-getRecords pShardIterator_ =
-  GetRecords' {_grLimit = Nothing, _grShardIterator = pShardIterator_}
-
+getRecords pShardIterator_
+  = GetRecords'{_grLimit = Nothing,
+                _grShardIterator = pShardIterator_}
 
 -- | The maximum number of records to return from the shard. The upper limit is 1000.
 grLimit :: Lens' GetRecords (Maybe Natural)
@@ -124,12 +123,12 @@ instance ToQuery GetRecords where
 --
 --
 -- /See:/ 'getRecordsResponse' smart constructor.
-data GetRecordsResponse = GetRecordsResponse'
-  { _grrsRecords           :: !(Maybe [Record])
-  , _grrsNextShardIterator :: !(Maybe Text)
-  , _grrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRecordsResponse = GetRecordsResponse'{_grrsRecords
+                                              :: !(Maybe [Record]),
+                                              _grrsNextShardIterator ::
+                                              !(Maybe Text),
+                                              _grrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRecordsResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +142,10 @@ data GetRecordsResponse = GetRecordsResponse'
 getRecordsResponse
     :: Int -- ^ 'grrsResponseStatus'
     -> GetRecordsResponse
-getRecordsResponse pResponseStatus_ =
-  GetRecordsResponse'
-    { _grrsRecords = Nothing
-    , _grrsNextShardIterator = Nothing
-    , _grrsResponseStatus = pResponseStatus_
-    }
-
+getRecordsResponse pResponseStatus_
+  = GetRecordsResponse'{_grrsRecords = Nothing,
+                        _grrsNextShardIterator = Nothing,
+                        _grrsResponseStatus = pResponseStatus_}
 
 -- | The stream records from the shard, which were retrieved using the shard iterator.
 grrsRecords :: Lens' GetRecordsResponse [Record]

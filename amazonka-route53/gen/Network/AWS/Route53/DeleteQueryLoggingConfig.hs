@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a configuration for DNS query logging. If you delete a configuration, Amazon Route 53 stops sending query logs to CloudWatch Logs. Amazon Route 53 doesn't delete any logs that are already in CloudWatch Logs.
+-- Deletes a configuration for DNS query logging. If you delete a configuration, Amazon Route 53 stops sending query logs to CloudWatch Logs. Route 53 doesn't delete any logs that are already in CloudWatch Logs.
 --
 --
--- For more information about DNS query logs, see 'CreateQueryLoggingConfig' .
+-- For more information about DNS query logs, see <https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html CreateQueryLoggingConfig> .
 --
 module Network.AWS.Route53.DeleteQueryLoggingConfig
     (
@@ -46,23 +46,23 @@ import Network.AWS.Route53.Types
 import Network.AWS.Route53.Types.Product
 
 -- | /See:/ 'deleteQueryLoggingConfig' smart constructor.
-newtype DeleteQueryLoggingConfig = DeleteQueryLoggingConfig'
-  { _dqlcId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteQueryLoggingConfig = DeleteQueryLoggingConfig'{_dqlcId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteQueryLoggingConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dqlcId' - The ID of the configuration that you want to delete.
+-- * 'dqlcId' - The ID of the configuration that you want to delete. 
 deleteQueryLoggingConfig
     :: Text -- ^ 'dqlcId'
     -> DeleteQueryLoggingConfig
-deleteQueryLoggingConfig pId_ = DeleteQueryLoggingConfig' {_dqlcId = pId_}
+deleteQueryLoggingConfig pId_
+  = DeleteQueryLoggingConfig'{_dqlcId = pId_}
 
-
--- | The ID of the configuration that you want to delete.
+-- | The ID of the configuration that you want to delete. 
 dqlcId :: Lens' DeleteQueryLoggingConfig Text
 dqlcId = lens _dqlcId (\ s a -> s{_dqlcId = a})
 
@@ -92,10 +92,11 @@ instance ToQuery DeleteQueryLoggingConfig where
         toQuery = const mempty
 
 -- | /See:/ 'deleteQueryLoggingConfigResponse' smart constructor.
-newtype DeleteQueryLoggingConfigResponse = DeleteQueryLoggingConfigResponse'
-  { _dqlcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteQueryLoggingConfigResponse = DeleteQueryLoggingConfigResponse'{_dqlcrsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteQueryLoggingConfigResponse' with the minimum fields required to make a request.
 --
@@ -105,9 +106,9 @@ newtype DeleteQueryLoggingConfigResponse = DeleteQueryLoggingConfigResponse'
 deleteQueryLoggingConfigResponse
     :: Int -- ^ 'dqlcrsResponseStatus'
     -> DeleteQueryLoggingConfigResponse
-deleteQueryLoggingConfigResponse pResponseStatus_ =
-  DeleteQueryLoggingConfigResponse' {_dqlcrsResponseStatus = pResponseStatus_}
-
+deleteQueryLoggingConfigResponse pResponseStatus_
+  = DeleteQueryLoggingConfigResponse'{_dqlcrsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 dqlcrsResponseStatus :: Lens' DeleteQueryLoggingConfigResponse Int

@@ -44,17 +44,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'downloadDefaultKeyPair' smart constructor.
-data DownloadDefaultKeyPair =
-  DownloadDefaultKeyPair'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DownloadDefaultKeyPair = DownloadDefaultKeyPair'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DownloadDefaultKeyPair' with the minimum fields required to make a request.
 --
 downloadDefaultKeyPair
     :: DownloadDefaultKeyPair
 downloadDefaultKeyPair = DownloadDefaultKeyPair'
-
 
 instance AWSRequest DownloadDefaultKeyPair where
         type Rs DownloadDefaultKeyPair =
@@ -92,12 +90,18 @@ instance ToQuery DownloadDefaultKeyPair where
         toQuery = const mempty
 
 -- | /See:/ 'downloadDefaultKeyPairResponse' smart constructor.
-data DownloadDefaultKeyPairResponse = DownloadDefaultKeyPairResponse'
-  { _ddkprsPublicKeyBase64  :: !(Maybe Text)
-  , _ddkprsPrivateKeyBase64 :: !(Maybe Text)
-  , _ddkprsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DownloadDefaultKeyPairResponse = DownloadDefaultKeyPairResponse'{_ddkprsPublicKeyBase64
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _ddkprsPrivateKeyBase64
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _ddkprsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DownloadDefaultKeyPairResponse' with the minimum fields required to make a request.
 --
@@ -111,13 +115,11 @@ data DownloadDefaultKeyPairResponse = DownloadDefaultKeyPairResponse'
 downloadDefaultKeyPairResponse
     :: Int -- ^ 'ddkprsResponseStatus'
     -> DownloadDefaultKeyPairResponse
-downloadDefaultKeyPairResponse pResponseStatus_ =
-  DownloadDefaultKeyPairResponse'
-    { _ddkprsPublicKeyBase64 = Nothing
-    , _ddkprsPrivateKeyBase64 = Nothing
-    , _ddkprsResponseStatus = pResponseStatus_
-    }
-
+downloadDefaultKeyPairResponse pResponseStatus_
+  = DownloadDefaultKeyPairResponse'{_ddkprsPublicKeyBase64
+                                      = Nothing,
+                                    _ddkprsPrivateKeyBase64 = Nothing,
+                                    _ddkprsResponseStatus = pResponseStatus_}
 
 -- | A base64-encoded public key of the @ssh-rsa@ type.
 ddkprsPublicKeyBase64 :: Lens' DownloadDefaultKeyPairResponse (Maybe Text)

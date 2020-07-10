@@ -21,7 +21,7 @@
 -- Gets information about the traffic policy instances that you created in a specified hosted zone.
 --
 --
--- Amazon Route 53 returns a maximum of 100 items in each response. If you have a lot of traffic policy instances, you can use the @MaxItems@ parameter to list them in groups of up to 100.
+-- Route 53 returns a maximum of 100 items in each response. If you have a lot of traffic policy instances, you can use the @MaxItems@ parameter to list them in groups of up to 100.
 --
 module Network.AWS.Route53.ListTrafficPolicyInstancesByHostedZone
     (
@@ -58,13 +58,23 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'listTrafficPolicyInstancesByHostedZone' smart constructor.
-data ListTrafficPolicyInstancesByHostedZone = ListTrafficPolicyInstancesByHostedZone'
-  { _ltpibhzTrafficPolicyInstanceTypeMarker :: !(Maybe RecordType)
-  , _ltpibhzMaxItems                        :: !(Maybe Text)
-  , _ltpibhzTrafficPolicyInstanceNameMarker :: !(Maybe Text)
-  , _ltpibhzHostedZoneId                    :: !ResourceId
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTrafficPolicyInstancesByHostedZone = ListTrafficPolicyInstancesByHostedZone'{_ltpibhzTrafficPolicyInstanceTypeMarker
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          RecordType),
+                                                                                      _ltpibhzMaxItems
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _ltpibhzTrafficPolicyInstanceNameMarker
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _ltpibhzHostedZoneId
+                                                                                      ::
+                                                                                      !ResourceId}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'ListTrafficPolicyInstancesByHostedZone' with the minimum fields required to make a request.
 --
@@ -80,14 +90,14 @@ data ListTrafficPolicyInstancesByHostedZone = ListTrafficPolicyInstancesByHosted
 listTrafficPolicyInstancesByHostedZone
     :: ResourceId -- ^ 'ltpibhzHostedZoneId'
     -> ListTrafficPolicyInstancesByHostedZone
-listTrafficPolicyInstancesByHostedZone pHostedZoneId_ =
-  ListTrafficPolicyInstancesByHostedZone'
-    { _ltpibhzTrafficPolicyInstanceTypeMarker = Nothing
-    , _ltpibhzMaxItems = Nothing
-    , _ltpibhzTrafficPolicyInstanceNameMarker = Nothing
-    , _ltpibhzHostedZoneId = pHostedZoneId_
-    }
-
+listTrafficPolicyInstancesByHostedZone pHostedZoneId_
+  = ListTrafficPolicyInstancesByHostedZone'{_ltpibhzTrafficPolicyInstanceTypeMarker
+                                              = Nothing,
+                                            _ltpibhzMaxItems = Nothing,
+                                            _ltpibhzTrafficPolicyInstanceNameMarker
+                                              = Nothing,
+                                            _ltpibhzHostedZoneId =
+                                              pHostedZoneId_}
 
 -- | If the value of @IsTruncated@ in the previous response is true, you have more traffic policy instances. To get more traffic policy instances, submit another @ListTrafficPolicyInstances@ request. For the value of @trafficpolicyinstancetype@ , specify the value of @TrafficPolicyInstanceTypeMarker@ from the previous response, which is the type of the first traffic policy instance in the next group of traffic policy instances. If the value of @IsTruncated@ in the previous response was @false@ , there are no more traffic policy instances to get.
 ltpibhzTrafficPolicyInstanceTypeMarker :: Lens' ListTrafficPolicyInstancesByHostedZone (Maybe RecordType)
@@ -161,15 +171,30 @@ instance ToQuery
 --
 --
 -- /See:/ 'listTrafficPolicyInstancesByHostedZoneResponse' smart constructor.
-data ListTrafficPolicyInstancesByHostedZoneResponse = ListTrafficPolicyInstancesByHostedZoneResponse'
-  { _ltpibhzrsTrafficPolicyInstanceTypeMarker :: !(Maybe RecordType)
-  , _ltpibhzrsTrafficPolicyInstanceNameMarker :: !(Maybe Text)
-  , _ltpibhzrsResponseStatus                  :: !Int
-  , _ltpibhzrsTrafficPolicyInstances          :: ![TrafficPolicyInstance]
-  , _ltpibhzrsIsTruncated                     :: !Bool
-  , _ltpibhzrsMaxItems                        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTrafficPolicyInstancesByHostedZoneResponse = ListTrafficPolicyInstancesByHostedZoneResponse'{_ltpibhzrsTrafficPolicyInstanceTypeMarker
+                                                                                                      ::
+                                                                                                      !(Maybe
+                                                                                                          RecordType),
+                                                                                                      _ltpibhzrsTrafficPolicyInstanceNameMarker
+                                                                                                      ::
+                                                                                                      !(Maybe
+                                                                                                          Text),
+                                                                                                      _ltpibhzrsResponseStatus
+                                                                                                      ::
+                                                                                                      !Int,
+                                                                                                      _ltpibhzrsTrafficPolicyInstances
+                                                                                                      ::
+                                                                                                      ![TrafficPolicyInstance],
+                                                                                                      _ltpibhzrsIsTruncated
+                                                                                                      ::
+                                                                                                      !Bool,
+                                                                                                      _ltpibhzrsMaxItems
+                                                                                                      ::
+                                                                                                      !Text}
+                                                        deriving (Eq, Read,
+                                                                  Show, Data,
+                                                                  Typeable,
+                                                                  Generic)
 
 -- | Creates a value of 'ListTrafficPolicyInstancesByHostedZoneResponse' with the minimum fields required to make a request.
 --
@@ -181,7 +206,7 @@ data ListTrafficPolicyInstancesByHostedZoneResponse = ListTrafficPolicyInstances
 --
 -- * 'ltpibhzrsResponseStatus' - -- | The response status code.
 --
--- * 'ltpibhzrsTrafficPolicyInstances' - A list that contains one @TrafficPolicyInstance@ element for each traffic policy instance that matches the elements in the request.
+-- * 'ltpibhzrsTrafficPolicyInstances' - A list that contains one @TrafficPolicyInstance@ element for each traffic policy instance that matches the elements in the request. 
 --
 -- * 'ltpibhzrsIsTruncated' - A flag that indicates whether there are more traffic policy instances to be listed. If the response was truncated, you can get the next group of traffic policy instances by submitting another @ListTrafficPolicyInstancesByHostedZone@ request and specifying the values of @HostedZoneIdMarker@ , @TrafficPolicyInstanceNameMarker@ , and @TrafficPolicyInstanceTypeMarker@ in the corresponding request parameters.
 --
@@ -191,16 +216,20 @@ listTrafficPolicyInstancesByHostedZoneResponse
     -> Bool -- ^ 'ltpibhzrsIsTruncated'
     -> Text -- ^ 'ltpibhzrsMaxItems'
     -> ListTrafficPolicyInstancesByHostedZoneResponse
-listTrafficPolicyInstancesByHostedZoneResponse pResponseStatus_ pIsTruncated_ pMaxItems_ =
-  ListTrafficPolicyInstancesByHostedZoneResponse'
-    { _ltpibhzrsTrafficPolicyInstanceTypeMarker = Nothing
-    , _ltpibhzrsTrafficPolicyInstanceNameMarker = Nothing
-    , _ltpibhzrsResponseStatus = pResponseStatus_
-    , _ltpibhzrsTrafficPolicyInstances = mempty
-    , _ltpibhzrsIsTruncated = pIsTruncated_
-    , _ltpibhzrsMaxItems = pMaxItems_
-    }
-
+listTrafficPolicyInstancesByHostedZoneResponse
+  pResponseStatus_ pIsTruncated_ pMaxItems_
+  = ListTrafficPolicyInstancesByHostedZoneResponse'{_ltpibhzrsTrafficPolicyInstanceTypeMarker
+                                                      = Nothing,
+                                                    _ltpibhzrsTrafficPolicyInstanceNameMarker
+                                                      = Nothing,
+                                                    _ltpibhzrsResponseStatus =
+                                                      pResponseStatus_,
+                                                    _ltpibhzrsTrafficPolicyInstances
+                                                      = mempty,
+                                                    _ltpibhzrsIsTruncated =
+                                                      pIsTruncated_,
+                                                    _ltpibhzrsMaxItems =
+                                                      pMaxItems_}
 
 -- | If @IsTruncated@ is true, @TrafficPolicyInstanceTypeMarker@ is the DNS type of the resource record sets that are associated with the first traffic policy instance in the next group of traffic policy instances.
 ltpibhzrsTrafficPolicyInstanceTypeMarker :: Lens' ListTrafficPolicyInstancesByHostedZoneResponse (Maybe RecordType)
@@ -214,7 +243,7 @@ ltpibhzrsTrafficPolicyInstanceNameMarker = lens _ltpibhzrsTrafficPolicyInstanceN
 ltpibhzrsResponseStatus :: Lens' ListTrafficPolicyInstancesByHostedZoneResponse Int
 ltpibhzrsResponseStatus = lens _ltpibhzrsResponseStatus (\ s a -> s{_ltpibhzrsResponseStatus = a})
 
--- | A list that contains one @TrafficPolicyInstance@ element for each traffic policy instance that matches the elements in the request.
+-- | A list that contains one @TrafficPolicyInstance@ element for each traffic policy instance that matches the elements in the request. 
 ltpibhzrsTrafficPolicyInstances :: Lens' ListTrafficPolicyInstancesByHostedZoneResponse [TrafficPolicyInstance]
 ltpibhzrsTrafficPolicyInstances = lens _ltpibhzrsTrafficPolicyInstances (\ s a -> s{_ltpibhzrsTrafficPolicyInstances = a}) . _Coerce
 

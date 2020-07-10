@@ -21,7 +21,7 @@
 -- Authorizes the specified AWS customer account to restore the specified snapshot.
 --
 --
--- For more information about working with snapshots, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html Amazon Redshift Snapshots> in the /Amazon Redshift Cluster Management Guide/ .
+-- For more information about working with snapshots, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html Amazon Redshift Snapshots> in the /Amazon Redshift Cluster Management Guide/ .
 --
 module Network.AWS.Redshift.AuthorizeSnapshotAccess
     (
@@ -48,17 +48,19 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'authorizeSnapshotAccess' smart constructor.
-data AuthorizeSnapshotAccess = AuthorizeSnapshotAccess'
-  { _asaSnapshotClusterIdentifier :: !(Maybe Text)
-  , _asaSnapshotIdentifier        :: !Text
-  , _asaAccountWithRestoreAccess  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AuthorizeSnapshotAccess = AuthorizeSnapshotAccess'{_asaSnapshotClusterIdentifier
+                                                        :: !(Maybe Text),
+                                                        _asaSnapshotIdentifier
+                                                        :: !Text,
+                                                        _asaAccountWithRestoreAccess
+                                                        :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AuthorizeSnapshotAccess' with the minimum fields required to make a request.
 --
@@ -73,13 +75,13 @@ authorizeSnapshotAccess
     :: Text -- ^ 'asaSnapshotIdentifier'
     -> Text -- ^ 'asaAccountWithRestoreAccess'
     -> AuthorizeSnapshotAccess
-authorizeSnapshotAccess pSnapshotIdentifier_ pAccountWithRestoreAccess_ =
-  AuthorizeSnapshotAccess'
-    { _asaSnapshotClusterIdentifier = Nothing
-    , _asaSnapshotIdentifier = pSnapshotIdentifier_
-    , _asaAccountWithRestoreAccess = pAccountWithRestoreAccess_
-    }
-
+authorizeSnapshotAccess pSnapshotIdentifier_
+  pAccountWithRestoreAccess_
+  = AuthorizeSnapshotAccess'{_asaSnapshotClusterIdentifier
+                               = Nothing,
+                             _asaSnapshotIdentifier = pSnapshotIdentifier_,
+                             _asaAccountWithRestoreAccess =
+                               pAccountWithRestoreAccess_}
 
 -- | The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
 asaSnapshotClusterIdentifier :: Lens' AuthorizeSnapshotAccess (Maybe Text)
@@ -126,11 +128,14 @@ instance ToQuery AuthorizeSnapshotAccess where
                  _asaAccountWithRestoreAccess]
 
 -- | /See:/ 'authorizeSnapshotAccessResponse' smart constructor.
-data AuthorizeSnapshotAccessResponse = AuthorizeSnapshotAccessResponse'
-  { _asarsSnapshot       :: !(Maybe Snapshot)
-  , _asarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AuthorizeSnapshotAccessResponse = AuthorizeSnapshotAccessResponse'{_asarsSnapshot
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Snapshot),
+                                                                        _asarsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'AuthorizeSnapshotAccessResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +147,10 @@ data AuthorizeSnapshotAccessResponse = AuthorizeSnapshotAccessResponse'
 authorizeSnapshotAccessResponse
     :: Int -- ^ 'asarsResponseStatus'
     -> AuthorizeSnapshotAccessResponse
-authorizeSnapshotAccessResponse pResponseStatus_ =
-  AuthorizeSnapshotAccessResponse'
-    {_asarsSnapshot = Nothing, _asarsResponseStatus = pResponseStatus_}
-
+authorizeSnapshotAccessResponse pResponseStatus_
+  = AuthorizeSnapshotAccessResponse'{_asarsSnapshot =
+                                       Nothing,
+                                     _asarsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 asarsSnapshot :: Lens' AuthorizeSnapshotAccessResponse (Maybe Snapshot)

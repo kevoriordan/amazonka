@@ -27,6 +27,7 @@ module Network.AWS.CodePipeline.StartPipelineExecution
       startPipelineExecution
     , StartPipelineExecution
     -- * Request Lenses
+    , speClientRequestToken
     , speName
 
     -- * Destructuring the Response
@@ -44,26 +45,35 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a StartPipelineExecution action.
+-- | Represents the input of a @StartPipelineExecution@ action.
 --
 --
 --
 -- /See:/ 'startPipelineExecution' smart constructor.
-newtype StartPipelineExecution = StartPipelineExecution'
-  { _speName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartPipelineExecution = StartPipelineExecution'{_speClientRequestToken
+                                                      :: !(Maybe Text),
+                                                      _speName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StartPipelineExecution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'speClientRequestToken' - The system-generated unique ID used to identify a unique execution request.
+--
 -- * 'speName' - The name of the pipeline to start.
 startPipelineExecution
     :: Text -- ^ 'speName'
     -> StartPipelineExecution
-startPipelineExecution pName_ = StartPipelineExecution' {_speName = pName_}
+startPipelineExecution pName_
+  = StartPipelineExecution'{_speClientRequestToken =
+                              Nothing,
+                            _speName = pName_}
 
+-- | The system-generated unique ID used to identify a unique execution request.
+speClientRequestToken :: Lens' StartPipelineExecution (Maybe Text)
+speClientRequestToken = lens _speClientRequestToken (\ s a -> s{_speClientRequestToken = a})
 
 -- | The name of the pipeline to start.
 speName :: Lens' StartPipelineExecution Text
@@ -96,7 +106,11 @@ instance ToHeaders StartPipelineExecution where
 
 instance ToJSON StartPipelineExecution where
         toJSON StartPipelineExecution'{..}
-          = object (catMaybes [Just ("name" .= _speName)])
+          = object
+              (catMaybes
+                 [("clientRequestToken" .=) <$>
+                    _speClientRequestToken,
+                  Just ("name" .= _speName)])
 
 instance ToPath StartPipelineExecution where
         toPath = const "/"
@@ -104,16 +118,19 @@ instance ToPath StartPipelineExecution where
 instance ToQuery StartPipelineExecution where
         toQuery = const mempty
 
--- | Represents the output of a StartPipelineExecution action.
+-- | Represents the output of a @StartPipelineExecution@ action.
 --
 --
 --
 -- /See:/ 'startPipelineExecutionResponse' smart constructor.
-data StartPipelineExecutionResponse = StartPipelineExecutionResponse'
-  { _spersPipelineExecutionId :: !(Maybe Text)
-  , _spersResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartPipelineExecutionResponse = StartPipelineExecutionResponse'{_spersPipelineExecutionId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _spersResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'StartPipelineExecutionResponse' with the minimum fields required to make a request.
 --
@@ -125,12 +142,10 @@ data StartPipelineExecutionResponse = StartPipelineExecutionResponse'
 startPipelineExecutionResponse
     :: Int -- ^ 'spersResponseStatus'
     -> StartPipelineExecutionResponse
-startPipelineExecutionResponse pResponseStatus_ =
-  StartPipelineExecutionResponse'
-    { _spersPipelineExecutionId = Nothing
-    , _spersResponseStatus = pResponseStatus_
-    }
-
+startPipelineExecutionResponse pResponseStatus_
+  = StartPipelineExecutionResponse'{_spersPipelineExecutionId
+                                      = Nothing,
+                                    _spersResponseStatus = pResponseStatus_}
 
 -- | The unique system-generated ID of the pipeline execution that was started.
 spersPipelineExecutionId :: Lens' StartPipelineExecutionResponse (Maybe Text)

@@ -54,13 +54,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'registerDevice' smart constructor.
-data RegisterDevice = RegisterDevice'
-  { _rdIdentityPoolId :: !Text
-  , _rdIdentityId     :: !Text
-  , _rdPlatform       :: !Platform
-  , _rdToken          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterDevice = RegisterDevice'{_rdIdentityPoolId
+                                      :: !Text,
+                                      _rdIdentityId :: !Text,
+                                      _rdPlatform :: !Platform,
+                                      _rdToken :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterDevice' with the minimum fields required to make a request.
 --
@@ -79,14 +78,12 @@ registerDevice
     -> Platform -- ^ 'rdPlatform'
     -> Text -- ^ 'rdToken'
     -> RegisterDevice
-registerDevice pIdentityPoolId_ pIdentityId_ pPlatform_ pToken_ =
-  RegisterDevice'
-    { _rdIdentityPoolId = pIdentityPoolId_
-    , _rdIdentityId = pIdentityId_
-    , _rdPlatform = pPlatform_
-    , _rdToken = pToken_
-    }
-
+registerDevice pIdentityPoolId_ pIdentityId_
+  pPlatform_ pToken_
+  = RegisterDevice'{_rdIdentityPoolId =
+                      pIdentityPoolId_,
+                    _rdIdentityId = pIdentityId_,
+                    _rdPlatform = pPlatform_, _rdToken = pToken_}
 
 -- | A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. Here, the ID of the pool that the identity belongs to.
 rdIdentityPoolId :: Lens' RegisterDevice Text
@@ -145,11 +142,12 @@ instance ToQuery RegisterDevice where
 --
 --
 -- /See:/ 'registerDeviceResponse' smart constructor.
-data RegisterDeviceResponse = RegisterDeviceResponse'
-  { _rdrsDeviceId       :: !(Maybe Text)
-  , _rdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterDeviceResponse = RegisterDeviceResponse'{_rdrsDeviceId
+                                                      :: !(Maybe Text),
+                                                      _rdrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'RegisterDeviceResponse' with the minimum fields required to make a request.
 --
@@ -161,10 +159,9 @@ data RegisterDeviceResponse = RegisterDeviceResponse'
 registerDeviceResponse
     :: Int -- ^ 'rdrsResponseStatus'
     -> RegisterDeviceResponse
-registerDeviceResponse pResponseStatus_ =
-  RegisterDeviceResponse'
-    {_rdrsDeviceId = Nothing, _rdrsResponseStatus = pResponseStatus_}
-
+registerDeviceResponse pResponseStatus_
+  = RegisterDeviceResponse'{_rdrsDeviceId = Nothing,
+                            _rdrsResponseStatus = pResponseStatus_}
 
 -- | The unique ID generated for this device by Cognito.
 rdrsDeviceId :: Lens' RegisterDeviceResponse (Maybe Text)

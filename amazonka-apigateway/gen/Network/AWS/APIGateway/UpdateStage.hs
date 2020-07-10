@@ -40,11 +40,13 @@ module Network.AWS.APIGateway.UpdateStage
     , sAccessLogSettings
     , sDocumentationVersion
     , sClientCertificateId
+    , sTracingEnabled
     , sCreatedDate
     , sCacheClusterStatus
     , sMethodSettings
     , sLastUpdatedDate
     , sCacheClusterSize
+    , sWebACLARN
     , sCanarySettings
     , sCacheClusterEnabled
     , sStageName
@@ -64,12 +66,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateStage' smart constructor.
-data UpdateStage = UpdateStage'
-  { _usPatchOperations :: !(Maybe [PatchOperation])
-  , _usRestAPIId       :: !Text
-  , _usStageName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateStage = UpdateStage'{_usPatchOperations ::
+                                !(Maybe [PatchOperation]),
+                                _usRestAPIId :: !Text, _usStageName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateStage' with the minimum fields required to make a request.
 --
@@ -84,13 +84,10 @@ updateStage
     :: Text -- ^ 'usRestAPIId'
     -> Text -- ^ 'usStageName'
     -> UpdateStage
-updateStage pRestAPIId_ pStageName_ =
-  UpdateStage'
-    { _usPatchOperations = Nothing
-    , _usRestAPIId = pRestAPIId_
-    , _usStageName = pStageName_
-    }
-
+updateStage pRestAPIId_ pStageName_
+  = UpdateStage'{_usPatchOperations = Nothing,
+                 _usRestAPIId = pRestAPIId_,
+                 _usStageName = pStageName_}
 
 -- | A list of update operations to be applied to the specified resource and in the order specified in this list.
 usPatchOperations :: Lens' UpdateStage [PatchOperation]

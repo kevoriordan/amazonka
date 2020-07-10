@@ -54,13 +54,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBotAliases' smart constructor.
-data GetBotAliases = GetBotAliases'
-  { _gbaNameContains :: !(Maybe Text)
-  , _gbaNextToken    :: !(Maybe Text)
-  , _gbaMaxResults   :: !(Maybe Nat)
-  , _gbaBotName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBotAliases = GetBotAliases'{_gbaNameContains
+                                    :: !(Maybe Text),
+                                    _gbaNextToken :: !(Maybe Text),
+                                    _gbaMaxResults :: !(Maybe Nat),
+                                    _gbaBotName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBotAliases' with the minimum fields required to make a request.
 --
@@ -68,32 +67,28 @@ data GetBotAliases = GetBotAliases'
 --
 -- * 'gbaNameContains' - Substring to match in bot alias names. An alias will be returned if any part of its name matches the substring. For example, "xyz" matches both "xyzabc" and "abcxyz."
 --
--- * 'gbaNextToken' - A pagination token for fetching the next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request.
+-- * 'gbaNextToken' - A pagination token for fetching the next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request. 
 --
--- * 'gbaMaxResults' - The maximum number of aliases to return in the response. The default is 50. .
+-- * 'gbaMaxResults' - The maximum number of aliases to return in the response. The default is 50. . 
 --
 -- * 'gbaBotName' - The name of the bot.
 getBotAliases
     :: Text -- ^ 'gbaBotName'
     -> GetBotAliases
-getBotAliases pBotName_ =
-  GetBotAliases'
-    { _gbaNameContains = Nothing
-    , _gbaNextToken = Nothing
-    , _gbaMaxResults = Nothing
-    , _gbaBotName = pBotName_
-    }
-
+getBotAliases pBotName_
+  = GetBotAliases'{_gbaNameContains = Nothing,
+                   _gbaNextToken = Nothing, _gbaMaxResults = Nothing,
+                   _gbaBotName = pBotName_}
 
 -- | Substring to match in bot alias names. An alias will be returned if any part of its name matches the substring. For example, "xyz" matches both "xyzabc" and "abcxyz."
 gbaNameContains :: Lens' GetBotAliases (Maybe Text)
 gbaNameContains = lens _gbaNameContains (\ s a -> s{_gbaNameContains = a})
 
--- | A pagination token for fetching the next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request.
+-- | A pagination token for fetching the next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request. 
 gbaNextToken :: Lens' GetBotAliases (Maybe Text)
 gbaNextToken = lens _gbaNextToken (\ s a -> s{_gbaNextToken = a})
 
--- | The maximum number of aliases to return in the response. The default is 50. .
+-- | The maximum number of aliases to return in the response. The default is 50. . 
 gbaMaxResults :: Lens' GetBotAliases (Maybe Natural)
 gbaMaxResults = lens _gbaMaxResults (\ s a -> s{_gbaMaxResults = a}) . mapping _Nat
 
@@ -142,18 +137,20 @@ instance ToQuery GetBotAliases where
                "maxResults" =: _gbaMaxResults]
 
 -- | /See:/ 'getBotAliasesResponse' smart constructor.
-data GetBotAliasesResponse = GetBotAliasesResponse'
-  { _gbarsNextToken      :: !(Maybe Text)
-  , _gbarsBotAliases     :: !(Maybe [BotAliasMetadata])
-  , _gbarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBotAliasesResponse = GetBotAliasesResponse'{_gbarsNextToken
+                                                    :: !(Maybe Text),
+                                                    _gbarsBotAliases ::
+                                                    !(Maybe [BotAliasMetadata]),
+                                                    _gbarsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetBotAliasesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbarsNextToken' - A pagination token for fetching next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request.
+-- * 'gbarsNextToken' - A pagination token for fetching next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request. 
 --
 -- * 'gbarsBotAliases' - An array of @BotAliasMetadata@ objects, each describing a bot alias.
 --
@@ -161,15 +158,12 @@ data GetBotAliasesResponse = GetBotAliasesResponse'
 getBotAliasesResponse
     :: Int -- ^ 'gbarsResponseStatus'
     -> GetBotAliasesResponse
-getBotAliasesResponse pResponseStatus_ =
-  GetBotAliasesResponse'
-    { _gbarsNextToken = Nothing
-    , _gbarsBotAliases = Nothing
-    , _gbarsResponseStatus = pResponseStatus_
-    }
+getBotAliasesResponse pResponseStatus_
+  = GetBotAliasesResponse'{_gbarsNextToken = Nothing,
+                           _gbarsBotAliases = Nothing,
+                           _gbarsResponseStatus = pResponseStatus_}
 
-
--- | A pagination token for fetching next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request.
+-- | A pagination token for fetching next page of aliases. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of aliases, specify the pagination token in the next request. 
 gbarsNextToken :: Lens' GetBotAliasesResponse (Maybe Text)
 gbarsNextToken = lens _gbarsNextToken (\ s a -> s{_gbarsNextToken = a})
 

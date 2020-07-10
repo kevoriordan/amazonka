@@ -18,10 +18,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type (server, application, process, or connection). Output fields are specific to the asset type selected. For example, the output for a /server/ configuration item includes a list of attributes about the server, such as host name, operating system, and number of network cards.
+-- Retrieves attributes for a list of configuration item IDs.
 --
---
--- For a complete list of outputs for each asset type, see <http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations Using the DescribeConfigurations Action> .
 --
 module Network.AWS.Discovery.DescribeConfigurations
     (
@@ -47,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeConfigurations' smart constructor.
-newtype DescribeConfigurations = DescribeConfigurations'
-  { _dcConfigurationIds :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeConfigurations = DescribeConfigurations'{_dcConfigurationIds
+                                                         :: [Text]}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeConfigurations' with the minimum fields required to make a request.
 --
@@ -59,8 +57,9 @@ newtype DescribeConfigurations = DescribeConfigurations'
 -- * 'dcConfigurationIds' - One or more configuration IDs.
 describeConfigurations
     :: DescribeConfigurations
-describeConfigurations = DescribeConfigurations' {_dcConfigurationIds = mempty}
-
+describeConfigurations
+  = DescribeConfigurations'{_dcConfigurationIds =
+                              mempty}
 
 -- | One or more configuration IDs.
 dcConfigurationIds :: Lens' DescribeConfigurations [Text]
@@ -104,11 +103,16 @@ instance ToQuery DescribeConfigurations where
         toQuery = const mempty
 
 -- | /See:/ 'describeConfigurationsResponse' smart constructor.
-data DescribeConfigurationsResponse = DescribeConfigurationsResponse'
-  { _dcrsConfigurations :: !(Maybe [Map Text Text])
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConfigurationsResponse = DescribeConfigurationsResponse'{_dcrsConfigurations
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Map
+                                                                             Text
+                                                                             Text]),
+                                                                      _dcrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeConfigurationsResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +124,10 @@ data DescribeConfigurationsResponse = DescribeConfigurationsResponse'
 describeConfigurationsResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeConfigurationsResponse
-describeConfigurationsResponse pResponseStatus_ =
-  DescribeConfigurationsResponse'
-    {_dcrsConfigurations = Nothing, _dcrsResponseStatus = pResponseStatus_}
-
+describeConfigurationsResponse pResponseStatus_
+  = DescribeConfigurationsResponse'{_dcrsConfigurations
+                                      = Nothing,
+                                    _dcrsResponseStatus = pResponseStatus_}
 
 -- | A key in the response map. The value is an array of data.
 dcrsConfigurations :: Lens' DescribeConfigurationsResponse [HashMap Text Text]

@@ -21,7 +21,7 @@
 -- Deletes the queue specified by the @QueueUrl@ , regardless of the queue's contents. If the specified queue doesn't exist, Amazon SQS returns a successful response.
 --
 --
--- /Important:/ Be careful with the @DeleteQueue@ action: When you delete a queue, any messages in the queue are no longer available.
+-- /Important:/ Be careful with the @DeleteQueue@ action: When you delete a queue, any messages in the queue are no longer available. 
 --
 -- When you delete a queue, the deletion process takes up to 60 seconds. Requests you send involving that queue during the 60 seconds might succeed. For example, a @'SendMessage' @ request might succeed, but after 60 seconds the queue and the message you sent no longer exist.
 --
@@ -47,28 +47,27 @@ import Network.AWS.Response
 import Network.AWS.SQS.Types
 import Network.AWS.SQS.Types.Product
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteQueue' smart constructor.
-newtype DeleteQueue = DeleteQueue'
-  { _dqQueueURL :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteQueue = DeleteQueue'{_dqQueueURL ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteQueue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dqQueueURL' - The URL of the Amazon SQS queue to delete. Queue URLs are case-sensitive.
+-- * 'dqQueueURL' - The URL of the Amazon SQS queue to delete. Queue URLs and names are case-sensitive.
 deleteQueue
     :: Text -- ^ 'dqQueueURL'
     -> DeleteQueue
-deleteQueue pQueueURL_ = DeleteQueue' {_dqQueueURL = pQueueURL_}
+deleteQueue pQueueURL_
+  = DeleteQueue'{_dqQueueURL = pQueueURL_}
 
-
--- | The URL of the Amazon SQS queue to delete. Queue URLs are case-sensitive.
+-- | The URL of the Amazon SQS queue to delete. Queue URLs and names are case-sensitive.
 dqQueueURL :: Lens' DeleteQueue Text
 dqQueueURL = lens _dqQueueURL (\ s a -> s{_dqQueueURL = a})
 
@@ -95,16 +94,13 @@ instance ToQuery DeleteQueue where
                "QueueUrl" =: _dqQueueURL]
 
 -- | /See:/ 'deleteQueueResponse' smart constructor.
-data DeleteQueueResponse =
-  DeleteQueueResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteQueueResponse = DeleteQueueResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteQueueResponse' with the minimum fields required to make a request.
 --
 deleteQueueResponse
     :: DeleteQueueResponse
 deleteQueueResponse = DeleteQueueResponse'
-
 
 instance NFData DeleteQueueResponse where

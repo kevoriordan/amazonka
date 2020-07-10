@@ -50,10 +50,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'resolveCustomer' smart constructor.
-newtype ResolveCustomer = ResolveCustomer'
-  { _rcRegistrationToken :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ResolveCustomer = ResolveCustomer'{_rcRegistrationToken
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResolveCustomer' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ newtype ResolveCustomer = ResolveCustomer'
 resolveCustomer
     :: Text -- ^ 'rcRegistrationToken'
     -> ResolveCustomer
-resolveCustomer pRegistrationToken_ =
-  ResolveCustomer' {_rcRegistrationToken = pRegistrationToken_}
-
+resolveCustomer pRegistrationToken_
+  = ResolveCustomer'{_rcRegistrationToken =
+                       pRegistrationToken_}
 
 -- | When a buyer visits your website during the registration process, the buyer submits a registration token through the browser. The registration token is resolved to obtain a CustomerIdentifier and product code.
 rcRegistrationToken :: Lens' ResolveCustomer Text
@@ -113,12 +112,14 @@ instance ToQuery ResolveCustomer where
 --
 --
 -- /See:/ 'resolveCustomerResponse' smart constructor.
-data ResolveCustomerResponse = ResolveCustomerResponse'
-  { _rcrsCustomerIdentifier :: !(Maybe Text)
-  , _rcrsProductCode        :: !(Maybe Text)
-  , _rcrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResolveCustomerResponse = ResolveCustomerResponse'{_rcrsCustomerIdentifier
+                                                        :: !(Maybe Text),
+                                                        _rcrsProductCode ::
+                                                        !(Maybe Text),
+                                                        _rcrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ResolveCustomerResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +133,11 @@ data ResolveCustomerResponse = ResolveCustomerResponse'
 resolveCustomerResponse
     :: Int -- ^ 'rcrsResponseStatus'
     -> ResolveCustomerResponse
-resolveCustomerResponse pResponseStatus_ =
-  ResolveCustomerResponse'
-    { _rcrsCustomerIdentifier = Nothing
-    , _rcrsProductCode = Nothing
-    , _rcrsResponseStatus = pResponseStatus_
-    }
-
+resolveCustomerResponse pResponseStatus_
+  = ResolveCustomerResponse'{_rcrsCustomerIdentifier =
+                               Nothing,
+                             _rcrsProductCode = Nothing,
+                             _rcrsResponseStatus = pResponseStatus_}
 
 -- | The CustomerIdentifier is used to identify an individual customer in your application. Calls to BatchMeterUsage require CustomerIdentifiers for each UsageRecord.
 rcrsCustomerIdentifier :: Lens' ResolveCustomerResponse (Maybe Text)

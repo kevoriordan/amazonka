@@ -11,19 +11,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS CodePipeline__
+-- __AWS CodePipeline__ 
 --
--- __Overview__
+-- __Overview__ 
 --
--- This is the AWS CodePipeline API Reference. This guide provides descriptions of the actions and data types for AWS CodePipeline. Some functionality for your pipeline is only configurable through the API. For additional information, see the <http://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html AWS CodePipeline User Guide> .
+-- This is the AWS CodePipeline API Reference. This guide provides descriptions of the actions and data types for AWS CodePipeline. Some functionality for your pipeline can only be configured through the API. For more information, see the <https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html AWS CodePipeline User Guide> .
 --
--- You can use the AWS CodePipeline API to work with pipelines, stages, actions, and transitions, as described below.
+-- You can use the AWS CodePipeline API to work with pipelines, stages, actions, and transitions.
 --
--- /Pipelines/ are models of automated release processes. Each pipeline is uniquely named, and consists of stages, actions, and transitions.
+-- /Pipelines/ are models of automated release processes. Each pipeline is uniquely named, and consists of stages, actions, and transitions. 
 --
 -- You can work with pipelines by calling:
 --
---     * 'CreatePipeline' , which creates a uniquely-named pipeline.
+--     * 'CreatePipeline' , which creates a uniquely named pipeline.
 --
 --     * 'DeletePipeline' , which deletes the specified pipeline.
 --
@@ -33,19 +33,23 @@
 --
 --     * 'GetPipelineState' , which returns information about the current state of the stages and actions of a pipeline.
 --
+--     * 'ListActionExecutions' , which returns action-level details for past executions. The details include full stage and action-level details, including individual action duration, status, any errors that occurred during the execution, and input and output artifact location details.
+--
 --     * 'ListPipelines' , which gets a summary of all of the pipelines associated with your account.
 --
 --     * 'ListPipelineExecutions' , which gets a summary of the most recent executions for a pipeline.
 --
---     * 'StartPipelineExecution' , which runs the the most recent revision of an artifact through the pipeline.
+--     * 'StartPipelineExecution' , which runs the most recent revision of an artifact through the pipeline.
+--
+--     * 'StopPipelineExecution' , which stops the specified pipeline execution from continuing through the pipeline.
 --
 --     * 'UpdatePipeline' , which updates a pipeline with edits or changes to the structure of the pipeline.
 --
 --
 --
--- Pipelines include /stages/ . Each stage contains one or more actions that must complete before the next stage begins. A stage will result in success or failure. If a stage fails, then the pipeline stops at that stage and will remain stopped until either a new version of an artifact appears in the source location, or a user takes action to re-run the most recent artifact through the pipeline. You can call 'GetPipelineState' , which displays the status of a pipeline, including the status of stages in the pipeline, or 'GetPipeline' , which returns the entire structure of the pipeline, including the stages of that pipeline. For more information about the structure of stages and actions, also refer to the <http://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html AWS CodePipeline Pipeline Structure Reference> .
+-- Pipelines include /stages/ . Each stage contains one or more actions that must complete before the next stage begins. A stage results in success or failure. If a stage fails, the pipeline stops at that stage and remains stopped until either a new version of an artifact appears in the source location, or a user takes action to rerun the most recent artifact through the pipeline. You can call 'GetPipelineState' , which displays the status of a pipeline, including the status of stages in the pipeline, or 'GetPipeline' , which returns the entire structure of the pipeline, including the stages of that pipeline. For more information about the structure of stages and actions, see <https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html AWS CodePipeline Pipeline Structure Reference> .
 --
--- Pipeline stages include /actions/ , which are categorized into categories such as source or build actions performed within a stage of a pipeline. For example, you can use a source action to import artifacts into a pipeline from a source such as Amazon S3. Like stages, you do not work with actions directly in most cases, but you do define and interact with actions when working with pipeline operations such as 'CreatePipeline' and 'GetPipelineState' . Valid action categories are:
+-- Pipeline stages include /actions/ that are categorized into categories such as source or build actions performed in a stage of a pipeline. For example, you can use a source action to import artifacts into a pipeline from a source such as Amazon S3. Like stages, you do not work with actions directly in most cases, but you do define and interact with actions when working with pipeline operations such as 'CreatePipeline' and 'GetPipelineState' . Valid action categories are:
 --
 --     * Source
 --
@@ -67,25 +71,25 @@
 --
 --     * 'DisableStageTransition' , which prevents artifacts from transitioning to the next stage in a pipeline.
 --
---     * 'EnableStageTransition' , which enables transition of artifacts between stages in a pipeline.
+--     * 'EnableStageTransition' , which enables transition of artifacts between stages in a pipeline. 
 --
 --
 --
--- __Using the API to integrate with AWS CodePipeline__
+-- __Using the API to integrate with AWS CodePipeline__ 
 --
--- For third-party integrators or developers who want to create their own integrations with AWS CodePipeline, the expected sequence varies from the standard API user. In order to integrate with AWS CodePipeline, developers will need to work with the following items:
+-- For third-party integrators or developers who want to create their own integrations with AWS CodePipeline, the expected sequence varies from the standard API user. To integrate with AWS CodePipeline, developers need to work with the following items:
 --
--- __Jobs__ , which are instances of an action. For example, a job for a source action might import a revision of an artifact from a source.
+-- __Jobs__ , which are instances of an action. For example, a job for a source action might import a revision of an artifact from a source. 
 --
 -- You can work with jobs by calling:
 --
---     * 'AcknowledgeJob' , which confirms whether a job worker has received the specified job,
+--     * 'AcknowledgeJob' , which confirms whether a job worker has received the specified job.
 --
---     * 'GetJobDetails' , which returns the details of a job,
+--     * 'GetJobDetails' , which returns the details of a job.
 --
---     * 'PollForJobs' , which determines whether there are any jobs to act upon,
+--     * 'PollForJobs' , which determines whether there are any jobs to act on.
 --
---     * 'PutJobFailureResult' , which provides details of a job failure, and
+--     * 'PutJobFailureResult' , which provides details of a job failure. 
 --
 --     * 'PutJobSuccessResult' , which provides details of a job success.
 --
@@ -95,13 +99,13 @@
 --
 -- You can work with third party jobs by calling:
 --
---     * 'AcknowledgeThirdPartyJob' , which confirms whether a job worker has received the specified job,
+--     * 'AcknowledgeThirdPartyJob' , which confirms whether a job worker has received the specified job.
 --
---     * 'GetThirdPartyJobDetails' , which requests the details of a job for a partner action,
+--     * 'GetThirdPartyJobDetails' , which requests the details of a job for a partner action.
 --
---     * 'PollForThirdPartyJobs' , which determines whether there are any jobs to act upon,
+--     * 'PollForThirdPartyJobs' , which determines whether there are any jobs to act on. 
 --
---     * 'PutThirdPartyJobFailureResult' , which provides details of a job failure, and
+--     * 'PutThirdPartyJobFailureResult' , which provides details of a job failure.
 --
 --     * 'PutThirdPartyJobSuccessResult' , which provides details of a job success.
 --
@@ -115,44 +119,86 @@ module Network.AWS.CodePipeline
     -- * Errors
     -- $errors
 
-    -- ** InvalidClientTokenException
-    , _InvalidClientTokenException
+    -- ** JobNotFoundException
+    , _JobNotFoundException
 
-    -- ** ValidationException
-    , _ValidationException
+    -- ** StageNotFoundException
+    , _StageNotFoundException
 
-    -- ** InvalidNonceException
-    , _InvalidNonceException
+    -- ** DuplicatedStopRequestException
+    , _DuplicatedStopRequestException
+
+    -- ** InvalidWebhookFilterPatternException
+    , _InvalidWebhookFilterPatternException
 
     -- ** ActionNotFoundException
     , _ActionNotFoundException
 
+    -- ** InvalidStageDeclarationException
+    , _InvalidStageDeclarationException
+
     -- ** InvalidApprovalTokenException
     , _InvalidApprovalTokenException
 
-    -- ** InvalidBlockerDeclarationException
-    , _InvalidBlockerDeclarationException
+    -- ** InvalidTagsException
+    , _InvalidTagsException
 
-    -- ** InvalidJobStateException
-    , _InvalidJobStateException
+    -- ** InvalidNonceException
+    , _InvalidNonceException
 
-    -- ** InvalidJobException
-    , _InvalidJobException
-
-    -- ** PipelineVersionNotFoundException
-    , _PipelineVersionNotFoundException
+    -- ** WebhookNotFoundException
+    , _WebhookNotFoundException
 
     -- ** StageNotRetryableException
     , _StageNotRetryableException
 
+    -- ** PipelineVersionNotFoundException
+    , _PipelineVersionNotFoundException
+
+    -- ** InvalidClientTokenException
+    , _InvalidClientTokenException
+
     -- ** PipelineExecutionNotFoundException
     , _PipelineExecutionNotFoundException
 
-    -- ** InvalidWebhookAuthenticationParametersException
-    , _InvalidWebhookAuthenticationParametersException
+    -- ** ValidationException
+    , _ValidationException
 
-    -- ** WebhookNotFoundException
-    , _WebhookNotFoundException
+    -- ** TooManyTagsException
+    , _TooManyTagsException
+
+    -- ** NotLatestPipelineExecutionException
+    , _NotLatestPipelineExecutionException
+
+    -- ** PipelineNotFoundException
+    , _PipelineNotFoundException
+
+    -- ** InvalidJobStateException
+    , _InvalidJobStateException
+
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
+
+    -- ** ApprovalAlreadyCompletedException
+    , _ApprovalAlreadyCompletedException
+
+    -- ** InvalidStructureException
+    , _InvalidStructureException
+
+    -- ** OutputVariablesSizeExceededException
+    , _OutputVariablesSizeExceededException
+
+    -- ** InvalidARNException
+    , _InvalidARNException
+
+    -- ** InvalidBlockerDeclarationException
+    , _InvalidBlockerDeclarationException
+
+    -- ** PipelineExecutionNotStoppableException
+    , _PipelineExecutionNotStoppableException
+
+    -- ** InvalidActionDeclarationException
+    , _InvalidActionDeclarationException
 
     -- ** ActionTypeNotFoundException
     , _ActionTypeNotFoundException
@@ -160,38 +206,20 @@ module Network.AWS.CodePipeline
     -- ** InvalidNextTokenException
     , _InvalidNextTokenException
 
-    -- ** InvalidStageDeclarationException
-    , _InvalidStageDeclarationException
+    -- ** ConcurrentModificationException
+    , _ConcurrentModificationException
 
-    -- ** InvalidWebhookFilterPatternException
-    , _InvalidWebhookFilterPatternException
-
-    -- ** InvalidActionDeclarationException
-    , _InvalidActionDeclarationException
-
-    -- ** StageNotFoundException
-    , _StageNotFoundException
-
-    -- ** InvalidStructureException
-    , _InvalidStructureException
-
-    -- ** JobNotFoundException
-    , _JobNotFoundException
-
-    -- ** ApprovalAlreadyCompletedException
-    , _ApprovalAlreadyCompletedException
-
-    -- ** PipelineNameInUseException
-    , _PipelineNameInUseException
-
-    -- ** PipelineNotFoundException
-    , _PipelineNotFoundException
+    -- ** InvalidWebhookAuthenticationParametersException
+    , _InvalidWebhookAuthenticationParametersException
 
     -- ** LimitExceededException
     , _LimitExceededException
 
-    -- ** NotLatestPipelineExecutionException
-    , _NotLatestPipelineExecutionException
+    -- ** InvalidJobException
+    , _InvalidJobException
+
+    -- ** PipelineNameInUseException
+    , _PipelineNameInUseException
 
     -- * Waiters
     -- $waiters
@@ -199,100 +227,115 @@ module Network.AWS.CodePipeline
     -- * Operations
     -- $operations
 
-    -- ** GetPipeline
+    -- ** GetPipeline 
     , module Network.AWS.CodePipeline.GetPipeline
 
-    -- ** PutJobFailureResult
+    -- ** PutJobFailureResult 
     , module Network.AWS.CodePipeline.PutJobFailureResult
 
-    -- ** PutApprovalResult
+    -- ** PutApprovalResult 
     , module Network.AWS.CodePipeline.PutApprovalResult
 
-    -- ** AcknowledgeThirdPartyJob
+    -- ** AcknowledgeThirdPartyJob 
     , module Network.AWS.CodePipeline.AcknowledgeThirdPartyJob
 
-    -- ** PutThirdPartyJobFailureResult
+    -- ** PutThirdPartyJobFailureResult 
     , module Network.AWS.CodePipeline.PutThirdPartyJobFailureResult
 
-    -- ** RegisterWebhookWithThirdParty
+    -- ** ListTagsForResource (Paginated)
+    , module Network.AWS.CodePipeline.ListTagsForResource
+
+    -- ** RegisterWebhookWithThirdParty 
     , module Network.AWS.CodePipeline.RegisterWebhookWithThirdParty
 
-    -- ** PollForThirdPartyJobs
+    -- ** PollForThirdPartyJobs 
     , module Network.AWS.CodePipeline.PollForThirdPartyJobs
 
-    -- ** PollForJobs
+    -- ** PollForJobs 
     , module Network.AWS.CodePipeline.PollForJobs
 
-    -- ** StartPipelineExecution
+    -- ** StartPipelineExecution 
     , module Network.AWS.CodePipeline.StartPipelineExecution
 
-    -- ** UpdatePipeline
+    -- ** UpdatePipeline 
     , module Network.AWS.CodePipeline.UpdatePipeline
 
-    -- ** DeletePipeline
+    -- ** DeletePipeline 
     , module Network.AWS.CodePipeline.DeletePipeline
 
-    -- ** GetPipelineState
+    -- ** GetPipelineState 
     , module Network.AWS.CodePipeline.GetPipelineState
 
-    -- ** GetJobDetails
+    -- ** GetJobDetails 
     , module Network.AWS.CodePipeline.GetJobDetails
 
-    -- ** ListPipelines
+    -- ** ListPipelines (Paginated)
     , module Network.AWS.CodePipeline.ListPipelines
 
-    -- ** RetryStageExecution
+    -- ** RetryStageExecution 
     , module Network.AWS.CodePipeline.RetryStageExecution
 
-    -- ** GetPipelineExecution
+    -- ** GetPipelineExecution 
     , module Network.AWS.CodePipeline.GetPipelineExecution
 
-    -- ** PutJobSuccessResult
+    -- ** PutJobSuccessResult 
     , module Network.AWS.CodePipeline.PutJobSuccessResult
 
-    -- ** DeregisterWebhookWithThirdParty
+    -- ** DeregisterWebhookWithThirdParty 
     , module Network.AWS.CodePipeline.DeregisterWebhookWithThirdParty
 
-    -- ** DeleteCustomActionType
+    -- ** DeleteCustomActionType 
     , module Network.AWS.CodePipeline.DeleteCustomActionType
 
-    -- ** PutActionRevision
+    -- ** PutActionRevision 
     , module Network.AWS.CodePipeline.PutActionRevision
 
-    -- ** DisableStageTransition
+    -- ** DisableStageTransition 
     , module Network.AWS.CodePipeline.DisableStageTransition
 
-    -- ** ListActionTypes
+    -- ** ListActionTypes (Paginated)
     , module Network.AWS.CodePipeline.ListActionTypes
 
-    -- ** AcknowledgeJob
+    -- ** AcknowledgeJob 
     , module Network.AWS.CodePipeline.AcknowledgeJob
 
-    -- ** EnableStageTransition
+    -- ** EnableStageTransition 
     , module Network.AWS.CodePipeline.EnableStageTransition
 
-    -- ** DeleteWebhook
+    -- ** DeleteWebhook 
     , module Network.AWS.CodePipeline.DeleteWebhook
 
-    -- ** PutWebhook
+    -- ** PutWebhook 
     , module Network.AWS.CodePipeline.PutWebhook
 
-    -- ** ListWebhooks
+    -- ** ListWebhooks (Paginated)
     , module Network.AWS.CodePipeline.ListWebhooks
 
-    -- ** CreatePipeline
+    -- ** ListActionExecutions (Paginated)
+    , module Network.AWS.CodePipeline.ListActionExecutions
+
+    -- ** StopPipelineExecution 
+    , module Network.AWS.CodePipeline.StopPipelineExecution
+
+    -- ** TagResource 
+    , module Network.AWS.CodePipeline.TagResource
+
+    -- ** UntagResource 
+    , module Network.AWS.CodePipeline.UntagResource
+
+    -- ** CreatePipeline 
     , module Network.AWS.CodePipeline.CreatePipeline
 
-    -- ** GetThirdPartyJobDetails
+    -- ** GetThirdPartyJobDetails 
     , module Network.AWS.CodePipeline.GetThirdPartyJobDetails
 
-    -- ** PutThirdPartyJobSuccessResult
+    -- ** PutThirdPartyJobSuccessResult 
     , module Network.AWS.CodePipeline.PutThirdPartyJobSuccessResult
 
-    -- ** CreateCustomActionType
+    -- ** CreateCustomActionType 
     , module Network.AWS.CodePipeline.CreateCustomActionType
 
-    -- ** ListPipelineExecutions
+    -- ** ListPipelineExecutions (Paginated)
     , module Network.AWS.CodePipeline.ListPipelineExecutions
 
     -- * Types
@@ -342,6 +385,9 @@ module Network.AWS.CodePipeline
     -- ** StageTransitionType
     , StageTransitionType (..)
 
+    -- ** TriggerType
+    , TriggerType (..)
+
     -- ** WebhookAuthenticationType
     , WebhookAuthenticationType (..)
 
@@ -372,12 +418,15 @@ module Network.AWS.CodePipeline
     , ActionContext
     , actionContext
     , acName
+    , acActionExecutionId
 
     -- ** ActionDeclaration
     , ActionDeclaration
     , actionDeclaration
     , adOutputArtifacts
+    , adNamespace
     , adRunOrder
+    , adRegion
     , adConfiguration
     , adInputArtifacts
     , adRoleARN
@@ -396,6 +445,50 @@ module Network.AWS.CodePipeline
     , aeExternalExecutionId
     , aeErrorDetails
     , aePercentComplete
+
+    -- ** ActionExecutionDetail
+    , ActionExecutionDetail
+    , actionExecutionDetail
+    , aedStatus
+    , aedStartTime
+    , aedPipelineVersion
+    , aedInput
+    , aedActionName
+    , aedOutput
+    , aedPipelineExecutionId
+    , aedStageName
+    , aedLastUpdateTime
+    , aedActionExecutionId
+
+    -- ** ActionExecutionFilter
+    , ActionExecutionFilter
+    , actionExecutionFilter
+    , aefPipelineExecutionId
+
+    -- ** ActionExecutionInput
+    , ActionExecutionInput
+    , actionExecutionInput
+    , aeiNamespace
+    , aeiResolvedConfiguration
+    , aeiRegion
+    , aeiConfiguration
+    , aeiActionTypeId
+    , aeiInputArtifacts
+    , aeiRoleARN
+
+    -- ** ActionExecutionOutput
+    , ActionExecutionOutput
+    , actionExecutionOutput
+    , aeoOutputVariables
+    , aeoOutputArtifacts
+    , aeoExecutionResult
+
+    -- ** ActionExecutionResult
+    , ActionExecutionResult
+    , actionExecutionResult
+    , aerExternalExecutionURL
+    , aerExternalExecutionId
+    , aerExternalExecutionSummary
 
     -- ** ActionRevision
     , ActionRevision
@@ -447,9 +540,15 @@ module Network.AWS.CodePipeline
     -- ** Artifact
     , Artifact
     , artifact
-    , aLocation
+    , artLocation
+    , artName
+    , artRevision
+
+    -- ** ArtifactDetail
+    , ArtifactDetail
+    , artifactDetail
     , aName
-    , aRevision
+    , aS3location
 
     -- ** ArtifactDetails
     , ArtifactDetails
@@ -513,6 +612,12 @@ module Network.AWS.CodePipeline
     , edExternalExecutionId
     , edPercentComplete
 
+    -- ** ExecutionTrigger
+    , ExecutionTrigger
+    , executionTrigger
+    , etTriggerType
+    , etTriggerDetail
+
     -- ** FailureDetails
     , FailureDetails
     , failureDetails
@@ -559,6 +664,7 @@ module Network.AWS.CodePipeline
     , lwiErrorCode
     , lwiLastTriggered
     , lwiErrorMessage
+    , lwiTags
     , lwiDefinition
     , lwiUrl
 
@@ -573,14 +679,17 @@ module Network.AWS.CodePipeline
     , pcStage
     , pcPipelineName
     , pcAction
+    , pcPipelineARN
+    , pcPipelineExecutionId
 
     -- ** PipelineDeclaration
     , PipelineDeclaration
     , pipelineDeclaration
+    , pdArtifactStores
+    , pdArtifactStore
     , pdVersion
     , pdName
     , pdRoleARN
-    , pdArtifactStore
     , pdStages
 
     -- ** PipelineExecution
@@ -597,8 +706,10 @@ module Network.AWS.CodePipeline
     , pipelineExecutionSummary
     , pesStatus
     , pesStartTime
+    , pesStopTrigger
     , pesPipelineExecutionId
     , pesSourceRevisions
+    , pesTrigger
     , pesLastUpdateTime
 
     -- ** PipelineMetadata
@@ -621,6 +732,12 @@ module Network.AWS.CodePipeline
     , s3ArtifactLocation
     , salBucketName
     , salObjectKey
+
+    -- ** S3Location
+    , S3Location
+    , s3Location
+    , slBucket
+    , slKey
 
     -- ** SourceRevision
     , SourceRevision
@@ -655,6 +772,17 @@ module Network.AWS.CodePipeline
     , ssActionStates
     , ssStageName
     , ssLatestExecution
+
+    -- ** StopExecutionTrigger
+    , StopExecutionTrigger
+    , stopExecutionTrigger
+    , setReason
+
+    -- ** Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
 
     -- ** ThirdPartyJob
     , ThirdPartyJob
@@ -727,9 +855,11 @@ import Network.AWS.CodePipeline.GetPipeline
 import Network.AWS.CodePipeline.GetPipelineExecution
 import Network.AWS.CodePipeline.GetPipelineState
 import Network.AWS.CodePipeline.GetThirdPartyJobDetails
+import Network.AWS.CodePipeline.ListActionExecutions
 import Network.AWS.CodePipeline.ListActionTypes
 import Network.AWS.CodePipeline.ListPipelineExecutions
 import Network.AWS.CodePipeline.ListPipelines
+import Network.AWS.CodePipeline.ListTagsForResource
 import Network.AWS.CodePipeline.ListWebhooks
 import Network.AWS.CodePipeline.PollForJobs
 import Network.AWS.CodePipeline.PollForThirdPartyJobs
@@ -743,7 +873,10 @@ import Network.AWS.CodePipeline.PutWebhook
 import Network.AWS.CodePipeline.RegisterWebhookWithThirdParty
 import Network.AWS.CodePipeline.RetryStageExecution
 import Network.AWS.CodePipeline.StartPipelineExecution
+import Network.AWS.CodePipeline.StopPipelineExecution
+import Network.AWS.CodePipeline.TagResource
 import Network.AWS.CodePipeline.Types
+import Network.AWS.CodePipeline.UntagResource
 import Network.AWS.CodePipeline.UpdatePipeline
 import Network.AWS.CodePipeline.Waiters
 

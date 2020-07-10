@@ -51,14 +51,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listServerNeighbors' smart constructor.
-data ListServerNeighbors = ListServerNeighbors'
-  { _lsnPortInformationNeeded    :: !(Maybe Bool)
-  , _lsnNeighborConfigurationIds :: !(Maybe [Text])
-  , _lsnNextToken                :: !(Maybe Text)
-  , _lsnMaxResults               :: !(Maybe Int)
-  , _lsnConfigurationId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListServerNeighbors = ListServerNeighbors'{_lsnPortInformationNeeded
+                                                :: !(Maybe Bool),
+                                                _lsnNeighborConfigurationIds ::
+                                                !(Maybe [Text]),
+                                                _lsnNextToken :: !(Maybe Text),
+                                                _lsnMaxResults :: !(Maybe Int),
+                                                _lsnConfigurationId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServerNeighbors' with the minimum fields required to make a request.
 --
@@ -76,15 +76,12 @@ data ListServerNeighbors = ListServerNeighbors'
 listServerNeighbors
     :: Text -- ^ 'lsnConfigurationId'
     -> ListServerNeighbors
-listServerNeighbors pConfigurationId_ =
-  ListServerNeighbors'
-    { _lsnPortInformationNeeded = Nothing
-    , _lsnNeighborConfigurationIds = Nothing
-    , _lsnNextToken = Nothing
-    , _lsnMaxResults = Nothing
-    , _lsnConfigurationId = pConfigurationId_
-    }
-
+listServerNeighbors pConfigurationId_
+  = ListServerNeighbors'{_lsnPortInformationNeeded =
+                           Nothing,
+                         _lsnNeighborConfigurationIds = Nothing,
+                         _lsnNextToken = Nothing, _lsnMaxResults = Nothing,
+                         _lsnConfigurationId = pConfigurationId_}
 
 -- | Flag to indicate if port and protocol information is needed as part of the response.
 lsnPortInformationNeeded :: Lens' ListServerNeighbors (Maybe Bool)
@@ -152,13 +149,20 @@ instance ToQuery ListServerNeighbors where
         toQuery = const mempty
 
 -- | /See:/ 'listServerNeighborsResponse' smart constructor.
-data ListServerNeighborsResponse = ListServerNeighborsResponse'
-  { _lsnrsNextToken            :: !(Maybe Text)
-  , _lsnrsKnownDependencyCount :: !(Maybe Integer)
-  , _lsnrsResponseStatus       :: !Int
-  , _lsnrsNeighbors            :: ![NeighborConnectionDetail]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListServerNeighborsResponse = ListServerNeighborsResponse'{_lsnrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lsnrsKnownDependencyCount
+                                                                ::
+                                                                !(Maybe
+                                                                    Integer),
+                                                                _lsnrsResponseStatus
+                                                                :: !Int,
+                                                                _lsnrsNeighbors
+                                                                ::
+                                                                ![NeighborConnectionDetail]}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListServerNeighborsResponse' with the minimum fields required to make a request.
 --
@@ -174,14 +178,12 @@ data ListServerNeighborsResponse = ListServerNeighborsResponse'
 listServerNeighborsResponse
     :: Int -- ^ 'lsnrsResponseStatus'
     -> ListServerNeighborsResponse
-listServerNeighborsResponse pResponseStatus_ =
-  ListServerNeighborsResponse'
-    { _lsnrsNextToken = Nothing
-    , _lsnrsKnownDependencyCount = Nothing
-    , _lsnrsResponseStatus = pResponseStatus_
-    , _lsnrsNeighbors = mempty
-    }
-
+listServerNeighborsResponse pResponseStatus_
+  = ListServerNeighborsResponse'{_lsnrsNextToken =
+                                   Nothing,
+                                 _lsnrsKnownDependencyCount = Nothing,
+                                 _lsnrsResponseStatus = pResponseStatus_,
+                                 _lsnrsNeighbors = mempty}
 
 -- | Token to retrieve the next set of results. For example, if you specified 100 IDs for @ListServerNeighborsRequest$neighborConfigurationIds@ but set @ListServerNeighborsRequest$maxResults@ to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.
 lsnrsNextToken :: Lens' ListServerNeighborsResponse (Maybe Text)

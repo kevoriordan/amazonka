@@ -49,10 +49,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeObject' smart constructor.
-newtype DescribeObject = DescribeObject'
-  { _dPath :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeObject = DescribeObject'{_dPath ::
+                                         Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeObject' with the minimum fields required to make a request.
 --
@@ -62,8 +61,8 @@ newtype DescribeObject = DescribeObject'
 describeObject
     :: Text -- ^ 'dPath'
     -> DescribeObject
-describeObject pPath_ = DescribeObject' {_dPath = pPath_}
-
+describeObject pPath_
+  = DescribeObject'{_dPath = pPath_}
 
 -- | The path (including the file name) where the object is stored in the container. Format: <folder name>/<folder name>/<file name>
 dPath :: Lens' DescribeObject Text
@@ -97,15 +96,20 @@ instance ToQuery DescribeObject where
         toQuery = const mempty
 
 -- | /See:/ 'describeObjectResponse' smart constructor.
-data DescribeObjectResponse = DescribeObjectResponse'
-  { _drsETag           :: !(Maybe Text)
-  , _drsContentLength  :: !(Maybe Nat)
-  , _drsCacheControl   :: !(Maybe Text)
-  , _drsLastModified   :: !(Maybe POSIX)
-  , _drsContentType    :: !(Maybe Text)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeObjectResponse = DescribeObjectResponse'{_drsETag
+                                                      :: !(Maybe Text),
+                                                      _drsContentLength ::
+                                                      !(Maybe Nat),
+                                                      _drsCacheControl ::
+                                                      !(Maybe Text),
+                                                      _drsLastModified ::
+                                                      !(Maybe POSIX),
+                                                      _drsContentType ::
+                                                      !(Maybe Text),
+                                                      _drsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeObjectResponse' with the minimum fields required to make a request.
 --
@@ -125,16 +129,13 @@ data DescribeObjectResponse = DescribeObjectResponse'
 describeObjectResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeObjectResponse
-describeObjectResponse pResponseStatus_ =
-  DescribeObjectResponse'
-    { _drsETag = Nothing
-    , _drsContentLength = Nothing
-    , _drsCacheControl = Nothing
-    , _drsLastModified = Nothing
-    , _drsContentType = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeObjectResponse pResponseStatus_
+  = DescribeObjectResponse'{_drsETag = Nothing,
+                            _drsContentLength = Nothing,
+                            _drsCacheControl = Nothing,
+                            _drsLastModified = Nothing,
+                            _drsContentType = Nothing,
+                            _drsResponseStatus = pResponseStatus_}
 
 -- | The ETag that represents a unique instance of the object.
 drsETag :: Lens' DescribeObjectResponse (Maybe Text)

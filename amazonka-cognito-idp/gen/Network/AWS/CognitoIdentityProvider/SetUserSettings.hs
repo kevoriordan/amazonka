@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.
+-- /This action is no longer supported./ You can use it to configure only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either type of MFA, use the 'SetUserMFAPreference' action instead.
 --
 --
 module Network.AWS.CognitoIdentityProvider.SetUserSettings
@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setUserSettings' smart constructor.
-data SetUserSettings = SetUserSettings'
-  { _susAccessToken :: !(Sensitive Text)
-  , _susMFAOptions  :: ![MFAOptionType]
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data SetUserSettings = SetUserSettings'{_susAccessToken
+                                        :: !(Sensitive Text),
+                                        _susMFAOptions :: ![MFAOptionType]}
+                         deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetUserSettings' with the minimum fields required to make a request.
 --
@@ -61,20 +60,20 @@ data SetUserSettings = SetUserSettings'
 --
 -- * 'susAccessToken' - The access token for the set user settings request.
 --
--- * 'susMFAOptions' - Specifies the options for MFA (e.g., email or phone number).
+-- * 'susMFAOptions' - You can use this parameter only to set an SMS configuration that uses SMS for delivery.
 setUserSettings
     :: Text -- ^ 'susAccessToken'
     -> SetUserSettings
-setUserSettings pAccessToken_ =
-  SetUserSettings'
-    {_susAccessToken = _Sensitive # pAccessToken_, _susMFAOptions = mempty}
-
+setUserSettings pAccessToken_
+  = SetUserSettings'{_susAccessToken =
+                       _Sensitive # pAccessToken_,
+                     _susMFAOptions = mempty}
 
 -- | The access token for the set user settings request.
 susAccessToken :: Lens' SetUserSettings Text
 susAccessToken = lens _susAccessToken (\ s a -> s{_susAccessToken = a}) . _Sensitive
 
--- | Specifies the options for MFA (e.g., email or phone number).
+-- | You can use this parameter only to set an SMS configuration that uses SMS for delivery.
 susMFAOptions :: Lens' SetUserSettings [MFAOptionType]
 susMFAOptions = lens _susMFAOptions (\ s a -> s{_susMFAOptions = a}) . _Coerce
 
@@ -118,10 +117,10 @@ instance ToQuery SetUserSettings where
 --
 --
 -- /See:/ 'setUserSettingsResponse' smart constructor.
-newtype SetUserSettingsResponse = SetUserSettingsResponse'
-  { _susrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetUserSettingsResponse = SetUserSettingsResponse'{_susrsResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'SetUserSettingsResponse' with the minimum fields required to make a request.
 --
@@ -131,9 +130,9 @@ newtype SetUserSettingsResponse = SetUserSettingsResponse'
 setUserSettingsResponse
     :: Int -- ^ 'susrsResponseStatus'
     -> SetUserSettingsResponse
-setUserSettingsResponse pResponseStatus_ =
-  SetUserSettingsResponse' {_susrsResponseStatus = pResponseStatus_}
-
+setUserSettingsResponse pResponseStatus_
+  = SetUserSettingsResponse'{_susrsResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 susrsResponseStatus :: Lens' SetUserSettingsResponse Int

@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts or deletes @RegexPatternString@ objects in a 'RegexPatternSet' . For each @RegexPatternString@ object, you specify the following values:
+-- Inserts or deletes @RegexPatternString@ objects in a 'RegexPatternSet' . For each @RegexPatternString@ object, you specify the following values: 
 --
 --
 --     * Whether to insert or delete the @RegexPatternString@ .
 --
---     * The regular expression pattern that you want to insert or delete. For more information, see 'RegexPatternSet' .
+--     * The regular expression pattern that you want to insert or delete. For more information, see 'RegexPatternSet' . 
 --
 --
 --
@@ -49,7 +49,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAFRegional.UpdateRegexPatternSet
     (
@@ -77,12 +77,14 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'updateRegexPatternSet' smart constructor.
-data UpdateRegexPatternSet = UpdateRegexPatternSet'
-  { _urpsRegexPatternSetId :: !Text
-  , _urpsUpdates           :: !(List1 RegexPatternSetUpdate)
-  , _urpsChangeToken       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRegexPatternSet = UpdateRegexPatternSet'{_urpsRegexPatternSetId
+                                                    :: !Text,
+                                                    _urpsUpdates ::
+                                                    !(List1
+                                                        RegexPatternSetUpdate),
+                                                    _urpsChangeToken :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateRegexPatternSet' with the minimum fields required to make a request.
 --
@@ -98,13 +100,12 @@ updateRegexPatternSet
     -> NonEmpty RegexPatternSetUpdate -- ^ 'urpsUpdates'
     -> Text -- ^ 'urpsChangeToken'
     -> UpdateRegexPatternSet
-updateRegexPatternSet pRegexPatternSetId_ pUpdates_ pChangeToken_ =
-  UpdateRegexPatternSet'
-    { _urpsRegexPatternSetId = pRegexPatternSetId_
-    , _urpsUpdates = _List1 # pUpdates_
-    , _urpsChangeToken = pChangeToken_
-    }
-
+updateRegexPatternSet pRegexPatternSetId_ pUpdates_
+  pChangeToken_
+  = UpdateRegexPatternSet'{_urpsRegexPatternSetId =
+                             pRegexPatternSetId_,
+                           _urpsUpdates = _List1 # pUpdates_,
+                           _urpsChangeToken = pChangeToken_}
 
 -- | The @RegexPatternSetId@ of the 'RegexPatternSet' that you want to update. @RegexPatternSetId@ is returned by 'CreateRegexPatternSet' and by 'ListRegexPatternSets' .
 urpsRegexPatternSetId :: Lens' UpdateRegexPatternSet Text
@@ -158,11 +159,14 @@ instance ToQuery UpdateRegexPatternSet where
         toQuery = const mempty
 
 -- | /See:/ 'updateRegexPatternSetResponse' smart constructor.
-data UpdateRegexPatternSetResponse = UpdateRegexPatternSetResponse'
-  { _urpsrsChangeToken    :: !(Maybe Text)
-  , _urpsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRegexPatternSetResponse = UpdateRegexPatternSetResponse'{_urpsrsChangeToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _urpsrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'UpdateRegexPatternSetResponse' with the minimum fields required to make a request.
 --
@@ -174,10 +178,10 @@ data UpdateRegexPatternSetResponse = UpdateRegexPatternSetResponse'
 updateRegexPatternSetResponse
     :: Int -- ^ 'urpsrsResponseStatus'
     -> UpdateRegexPatternSetResponse
-updateRegexPatternSetResponse pResponseStatus_ =
-  UpdateRegexPatternSetResponse'
-    {_urpsrsChangeToken = Nothing, _urpsrsResponseStatus = pResponseStatus_}
-
+updateRegexPatternSetResponse pResponseStatus_
+  = UpdateRegexPatternSetResponse'{_urpsrsChangeToken =
+                                     Nothing,
+                                   _urpsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @UpdateRegexPatternSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 urpsrsChangeToken :: Lens' UpdateRegexPatternSetResponse (Maybe Text)

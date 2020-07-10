@@ -51,12 +51,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeDestinations' smart constructor.
-data DescribeDestinations = DescribeDestinations'
-  { _ddNextToken             :: !(Maybe Text)
-  , _ddLimit                 :: !(Maybe Nat)
-  , _ddDestinationNamePrefix :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDestinations = DescribeDestinations'{_ddNextToken
+                                                  :: !(Maybe Text),
+                                                  _ddLimit :: !(Maybe Nat),
+                                                  _ddDestinationNamePrefix ::
+                                                  !(Maybe Text)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeDestinations' with the minimum fields required to make a request.
 --
@@ -69,13 +69,10 @@ data DescribeDestinations = DescribeDestinations'
 -- * 'ddDestinationNamePrefix' - The prefix to match. If you don't specify a value, no prefix filter is applied.
 describeDestinations
     :: DescribeDestinations
-describeDestinations =
-  DescribeDestinations'
-    { _ddNextToken = Nothing
-    , _ddLimit = Nothing
-    , _ddDestinationNamePrefix = Nothing
-    }
-
+describeDestinations
+  = DescribeDestinations'{_ddNextToken = Nothing,
+                          _ddLimit = Nothing,
+                          _ddDestinationNamePrefix = Nothing}
 
 -- | The token for the next set of items to return. (You received this token from a previous call.)
 ddNextToken :: Lens' DescribeDestinations (Maybe Text)
@@ -137,12 +134,17 @@ instance ToQuery DescribeDestinations where
         toQuery = const mempty
 
 -- | /See:/ 'describeDestinationsResponse' smart constructor.
-data DescribeDestinationsResponse = DescribeDestinationsResponse'
-  { _ddrsNextToken      :: !(Maybe Text)
-  , _ddrsDestinations   :: !(Maybe [Destination])
-  , _ddrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDestinationsResponse = DescribeDestinationsResponse'{_ddrsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _ddrsDestinations
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Destination]),
+                                                                  _ddrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeDestinationsResponse' with the minimum fields required to make a request.
 --
@@ -156,13 +158,11 @@ data DescribeDestinationsResponse = DescribeDestinationsResponse'
 describeDestinationsResponse
     :: Int -- ^ 'ddrsResponseStatus'
     -> DescribeDestinationsResponse
-describeDestinationsResponse pResponseStatus_ =
-  DescribeDestinationsResponse'
-    { _ddrsNextToken = Nothing
-    , _ddrsDestinations = Nothing
-    , _ddrsResponseStatus = pResponseStatus_
-    }
-
+describeDestinationsResponse pResponseStatus_
+  = DescribeDestinationsResponse'{_ddrsNextToken =
+                                    Nothing,
+                                  _ddrsDestinations = Nothing,
+                                  _ddrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ddrsNextToken :: Lens' DescribeDestinationsResponse (Maybe Text)

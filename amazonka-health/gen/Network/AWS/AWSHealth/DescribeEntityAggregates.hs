@@ -45,22 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEntityAggregates' smart constructor.
-newtype DescribeEntityAggregates = DescribeEntityAggregates'
-  { _deaEventARNs :: Maybe (List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeEntityAggregates = DescribeEntityAggregates'{_deaEventARNs
+                                                             ::
+                                                             Maybe (List1 Text)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeEntityAggregates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'deaEventARNs' - A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"@
+-- * 'deaEventARNs' - A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"@ 
 describeEntityAggregates
     :: DescribeEntityAggregates
-describeEntityAggregates = DescribeEntityAggregates' {_deaEventARNs = Nothing}
+describeEntityAggregates
+  = DescribeEntityAggregates'{_deaEventARNs = Nothing}
 
-
--- | A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"@
+-- | A list of event ARNs (unique identifiers). For example: @"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"@ 
 deaEventARNs :: Lens' DescribeEntityAggregates (Maybe (NonEmpty Text))
 deaEventARNs = lens _deaEventARNs (\ s a -> s{_deaEventARNs = a}) . mapping _List1
 
@@ -101,11 +102,15 @@ instance ToQuery DescribeEntityAggregates where
         toQuery = const mempty
 
 -- | /See:/ 'describeEntityAggregatesResponse' smart constructor.
-data DescribeEntityAggregatesResponse = DescribeEntityAggregatesResponse'
-  { _dearsEntityAggregates :: !(Maybe [EntityAggregate])
-  , _dearsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEntityAggregatesResponse = DescribeEntityAggregatesResponse'{_dearsEntityAggregates
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [EntityAggregate]),
+                                                                          _dearsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeEntityAggregatesResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +122,10 @@ data DescribeEntityAggregatesResponse = DescribeEntityAggregatesResponse'
 describeEntityAggregatesResponse
     :: Int -- ^ 'dearsResponseStatus'
     -> DescribeEntityAggregatesResponse
-describeEntityAggregatesResponse pResponseStatus_ =
-  DescribeEntityAggregatesResponse'
-    {_dearsEntityAggregates = Nothing, _dearsResponseStatus = pResponseStatus_}
-
+describeEntityAggregatesResponse pResponseStatus_
+  = DescribeEntityAggregatesResponse'{_dearsEntityAggregates
+                                        = Nothing,
+                                      _dearsResponseStatus = pResponseStatus_}
 
 -- | The number of entities that are affected by each of the specified events.
 dearsEntityAggregates :: Lens' DescribeEntityAggregatesResponse [EntityAggregate]

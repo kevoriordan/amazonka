@@ -44,17 +44,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAccountBalance' smart constructor.
-data GetAccountBalance =
-  GetAccountBalance'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountBalance = GetAccountBalance'
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAccountBalance' with the minimum fields required to make a request.
 --
 getAccountBalance
     :: GetAccountBalance
 getAccountBalance = GetAccountBalance'
-
 
 instance AWSRequest GetAccountBalance where
         type Rs GetAccountBalance = GetAccountBalanceResponse
@@ -91,12 +88,14 @@ instance ToQuery GetAccountBalance where
         toQuery = const mempty
 
 -- | /See:/ 'getAccountBalanceResponse' smart constructor.
-data GetAccountBalanceResponse = GetAccountBalanceResponse'
-  { _gabrsAvailableBalance :: !(Maybe Text)
-  , _gabrsOnHoldBalance    :: !(Maybe Text)
-  , _gabrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountBalanceResponse = GetAccountBalanceResponse'{_gabrsAvailableBalance
+                                                            :: !(Maybe Text),
+                                                            _gabrsOnHoldBalance
+                                                            :: !(Maybe Text),
+                                                            _gabrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetAccountBalanceResponse' with the minimum fields required to make a request.
 --
@@ -110,13 +109,11 @@ data GetAccountBalanceResponse = GetAccountBalanceResponse'
 getAccountBalanceResponse
     :: Int -- ^ 'gabrsResponseStatus'
     -> GetAccountBalanceResponse
-getAccountBalanceResponse pResponseStatus_ =
-  GetAccountBalanceResponse'
-    { _gabrsAvailableBalance = Nothing
-    , _gabrsOnHoldBalance = Nothing
-    , _gabrsResponseStatus = pResponseStatus_
-    }
-
+getAccountBalanceResponse pResponseStatus_
+  = GetAccountBalanceResponse'{_gabrsAvailableBalance =
+                                 Nothing,
+                               _gabrsOnHoldBalance = Nothing,
+                               _gabrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 gabrsAvailableBalance :: Lens' GetAccountBalanceResponse (Maybe Text)

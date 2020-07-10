@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves autocomplete suggestions for a partial query string. You can use suggestions enable you to display likely matches before users finish typing. In Amazon CloudSearch, suggestions are based on the contents of a particular text field. When you request suggestions, Amazon CloudSearch finds all of the documents whose values in the suggester field start with the specified query string. The beginning of the field must match the query string to be considered a match.
+-- Retrieves autocomplete suggestions for a partial query string. You can use suggestions enable you to display likely matches before users finish typing. In Amazon CloudSearch, suggestions are based on the contents of a particular text field. When you request suggestions, Amazon CloudSearch finds all of the documents whose values in the suggester field start with the specified query string. The beginning of the field must match the query string to be considered a match. 
 --
 --
--- For more information about configuring suggesters and retrieving suggestions, see <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html Getting Suggestions> in the /Amazon CloudSearch Developer Guide/ .
+-- For more information about configuring suggesters and retrieving suggestions, see <http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html Getting Suggestions> in the /Amazon CloudSearch Developer Guide/ . 
 --
--- The endpoint for submitting @Suggest@ requests is domain-specific. You submit suggest requests to a domain's search endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch configuration service @DescribeDomains@ action. A domain's endpoints are also displayed on the domain dashboard in the Amazon CloudSearch console.
+-- The endpoint for submitting @Suggest@ requests is domain-specific. You submit suggest requests to a domain's search endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch configuration service @DescribeDomains@ action. A domain's endpoints are also displayed on the domain dashboard in the Amazon CloudSearch console. 
 --
 module Network.AWS.CloudSearchDomains.Suggest
     (
@@ -56,18 +56,15 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'suggest' smart constructor.
-data Suggest = Suggest'
-  { _sSize      :: !(Maybe Integer)
-  , _sQuery     :: !Text
-  , _sSuggester :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data Suggest = Suggest'{_sSize :: !(Maybe Integer),
+                        _sQuery :: !Text, _sSuggester :: !Text}
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Suggest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sSize' - Specifies the maximum number of suggestions to return.
+-- * 'sSize' - Specifies the maximum number of suggestions to return. 
 --
 -- * 'sQuery' - Specifies the string for which you want to get suggestions.
 --
@@ -76,11 +73,11 @@ suggest
     :: Text -- ^ 'sQuery'
     -> Text -- ^ 'sSuggester'
     -> Suggest
-suggest pQuery_ pSuggester_ =
-  Suggest' {_sSize = Nothing, _sQuery = pQuery_, _sSuggester = pSuggester_}
+suggest pQuery_ pSuggester_
+  = Suggest'{_sSize = Nothing, _sQuery = pQuery_,
+             _sSuggester = pSuggester_}
 
-
--- | Specifies the maximum number of suggestions to return.
+-- | Specifies the maximum number of suggestions to return. 
 sSize :: Lens' Suggest (Maybe Integer)
 sSize = lens _sSize (\ s a -> s{_sSize = a})
 
@@ -127,12 +124,11 @@ instance ToQuery Suggest where
 --
 --
 -- /See:/ 'suggestResponse' smart constructor.
-data SuggestResponse = SuggestResponse'
-  { _srsSuggest        :: !(Maybe SuggestModel)
-  , _srsStatus         :: !(Maybe SuggestStatus)
-  , _srsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SuggestResponse = SuggestResponse'{_srsSuggest
+                                        :: !(Maybe SuggestModel),
+                                        _srsStatus :: !(Maybe SuggestStatus),
+                                        _srsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SuggestResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +142,10 @@ data SuggestResponse = SuggestResponse'
 suggestResponse
     :: Int -- ^ 'srsResponseStatus'
     -> SuggestResponse
-suggestResponse pResponseStatus_ =
-  SuggestResponse'
-    { _srsSuggest = Nothing
-    , _srsStatus = Nothing
-    , _srsResponseStatus = pResponseStatus_
-    }
-
+suggestResponse pResponseStatus_
+  = SuggestResponse'{_srsSuggest = Nothing,
+                     _srsStatus = Nothing,
+                     _srsResponseStatus = pResponseStatus_}
 
 -- | Container for the matching search suggestion information.
 srsSuggest :: Lens' SuggestResponse (Maybe SuggestModel)

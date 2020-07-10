@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listBranches' smart constructor.
-data ListBranches = ListBranches'
-  { _lbNextToken      :: !(Maybe Text)
-  , _lbRepositoryName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBranches = ListBranches'{_lbNextToken ::
+                                  !(Maybe Text),
+                                  _lbRepositoryName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBranches' with the minimum fields required to make a request.
 --
@@ -70,9 +69,9 @@ data ListBranches = ListBranches'
 listBranches
     :: Text -- ^ 'lbRepositoryName'
     -> ListBranches
-listBranches pRepositoryName_ =
-  ListBranches' {_lbNextToken = Nothing, _lbRepositoryName = pRepositoryName_}
-
+listBranches pRepositoryName_
+  = ListBranches'{_lbNextToken = Nothing,
+                  _lbRepositoryName = pRepositoryName_}
 
 -- | An enumeration token that allows the operation to batch the results.
 lbNextToken :: Lens' ListBranches (Maybe Text)
@@ -130,12 +129,12 @@ instance ToQuery ListBranches where
 --
 --
 -- /See:/ 'listBranchesResponse' smart constructor.
-data ListBranchesResponse = ListBranchesResponse'
-  { _lbrsBranches       :: !(Maybe [Text])
-  , _lbrsNextToken      :: !(Maybe Text)
-  , _lbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBranchesResponse = ListBranchesResponse'{_lbrsBranches
+                                                  :: !(Maybe [Text]),
+                                                  _lbrsNextToken ::
+                                                  !(Maybe Text),
+                                                  _lbrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBranchesResponse' with the minimum fields required to make a request.
 --
@@ -149,13 +148,10 @@ data ListBranchesResponse = ListBranchesResponse'
 listBranchesResponse
     :: Int -- ^ 'lbrsResponseStatus'
     -> ListBranchesResponse
-listBranchesResponse pResponseStatus_ =
-  ListBranchesResponse'
-    { _lbrsBranches = Nothing
-    , _lbrsNextToken = Nothing
-    , _lbrsResponseStatus = pResponseStatus_
-    }
-
+listBranchesResponse pResponseStatus_
+  = ListBranchesResponse'{_lbrsBranches = Nothing,
+                          _lbrsNextToken = Nothing,
+                          _lbrsResponseStatus = pResponseStatus_}
 
 -- | The list of branch names.
 lbrsBranches :: Lens' ListBranchesResponse [Text]

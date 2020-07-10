@@ -45,10 +45,9 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'getOperation' smart constructor.
-newtype GetOperation = GetOperation'
-  { _goOperationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetOperation = GetOperation'{_goOperationId
+                                     :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOperation' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetOperation = GetOperation'
 getOperation
     :: Text -- ^ 'goOperationId'
     -> GetOperation
-getOperation pOperationId_ = GetOperation' {_goOperationId = pOperationId_}
-
+getOperation pOperationId_
+  = GetOperation'{_goOperationId = pOperationId_}
 
 -- | The ID of the operation that you want to get more information about.
 goOperationId :: Lens' GetOperation Text
@@ -100,11 +99,10 @@ instance ToQuery GetOperation where
         toQuery = const mempty
 
 -- | /See:/ 'getOperationResponse' smart constructor.
-data GetOperationResponse = GetOperationResponse'
-  { _gorsOperation      :: !(Maybe Operation)
-  , _gorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetOperationResponse = GetOperationResponse'{_gorsOperation
+                                                  :: !(Maybe Operation),
+                                                  _gorsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetOperationResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +114,9 @@ data GetOperationResponse = GetOperationResponse'
 getOperationResponse
     :: Int -- ^ 'gorsResponseStatus'
     -> GetOperationResponse
-getOperationResponse pResponseStatus_ =
-  GetOperationResponse'
-    {_gorsOperation = Nothing, _gorsResponseStatus = pResponseStatus_}
-
+getOperationResponse pResponseStatus_
+  = GetOperationResponse'{_gorsOperation = Nothing,
+                          _gorsResponseStatus = pResponseStatus_}
 
 -- | A complex type that contains information about the operation.
 gorsOperation :: Lens' GetOperationResponse (Maybe Operation)

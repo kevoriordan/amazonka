@@ -56,15 +56,26 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeConfigurationOptions' smart constructor.
-data DescribeConfigurationOptions = DescribeConfigurationOptions'
-  { _dcoTemplateName      :: !(Maybe Text)
-  , _dcoPlatformARN       :: !(Maybe Text)
-  , _dcoEnvironmentName   :: !(Maybe Text)
-  , _dcoApplicationName   :: !(Maybe Text)
-  , _dcoSolutionStackName :: !(Maybe Text)
-  , _dcoOptions           :: !(Maybe [OptionSpecification])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConfigurationOptions = DescribeConfigurationOptions'{_dcoTemplateName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dcoPlatformARN
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dcoEnvironmentName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dcoApplicationName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dcoSolutionStackName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dcoOptions ::
+                                                                  !(Maybe
+                                                                      [OptionSpecification])}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeConfigurationOptions' with the minimum fields required to make a request.
 --
@@ -83,16 +94,14 @@ data DescribeConfigurationOptions = DescribeConfigurationOptions'
 -- * 'dcoOptions' - If specified, restricts the descriptions to only the specified options.
 describeConfigurationOptions
     :: DescribeConfigurationOptions
-describeConfigurationOptions =
-  DescribeConfigurationOptions'
-    { _dcoTemplateName = Nothing
-    , _dcoPlatformARN = Nothing
-    , _dcoEnvironmentName = Nothing
-    , _dcoApplicationName = Nothing
-    , _dcoSolutionStackName = Nothing
-    , _dcoOptions = Nothing
-    }
-
+describeConfigurationOptions
+  = DescribeConfigurationOptions'{_dcoTemplateName =
+                                    Nothing,
+                                  _dcoPlatformARN = Nothing,
+                                  _dcoEnvironmentName = Nothing,
+                                  _dcoApplicationName = Nothing,
+                                  _dcoSolutionStackName = Nothing,
+                                  _dcoOptions = Nothing}
 
 -- | The name of the configuration template whose configuration options you want to describe.
 dcoTemplateName :: Lens' DescribeConfigurationOptions (Maybe Text)
@@ -163,38 +172,47 @@ instance ToQuery DescribeConfigurationOptions where
 --
 --
 -- /See:/ 'describeConfigurationOptionsResponse' smart constructor.
-data DescribeConfigurationOptionsResponse = DescribeConfigurationOptionsResponse'
-  { _dcorsPlatformARN       :: !(Maybe Text)
-  , _dcorsSolutionStackName :: !(Maybe Text)
-  , _dcorsOptions           :: !(Maybe [ConfigurationOptionDescription])
-  , _dcorsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConfigurationOptionsResponse = DescribeConfigurationOptionsResponse'{_dcorsPlatformARN
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _dcorsSolutionStackName
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _dcorsOptions
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [ConfigurationOptionDescription]),
+                                                                                  _dcorsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeConfigurationOptionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcorsPlatformARN' - The ARN of the platform.
+-- * 'dcorsPlatformARN' - The ARN of the platform version.
 --
 -- * 'dcorsSolutionStackName' - The name of the solution stack these configuration options belong to.
 --
--- * 'dcorsOptions' - A list of 'ConfigurationOptionDescription' .
+-- * 'dcorsOptions' - A list of 'ConfigurationOptionDescription' . 
 --
 -- * 'dcorsResponseStatus' - -- | The response status code.
 describeConfigurationOptionsResponse
     :: Int -- ^ 'dcorsResponseStatus'
     -> DescribeConfigurationOptionsResponse
-describeConfigurationOptionsResponse pResponseStatus_ =
-  DescribeConfigurationOptionsResponse'
-    { _dcorsPlatformARN = Nothing
-    , _dcorsSolutionStackName = Nothing
-    , _dcorsOptions = Nothing
-    , _dcorsResponseStatus = pResponseStatus_
-    }
+describeConfigurationOptionsResponse pResponseStatus_
+  = DescribeConfigurationOptionsResponse'{_dcorsPlatformARN
+                                            = Nothing,
+                                          _dcorsSolutionStackName = Nothing,
+                                          _dcorsOptions = Nothing,
+                                          _dcorsResponseStatus =
+                                            pResponseStatus_}
 
-
--- | The ARN of the platform.
+-- | The ARN of the platform version.
 dcorsPlatformARN :: Lens' DescribeConfigurationOptionsResponse (Maybe Text)
 dcorsPlatformARN = lens _dcorsPlatformARN (\ s a -> s{_dcorsPlatformARN = a})
 
@@ -202,7 +220,7 @@ dcorsPlatformARN = lens _dcorsPlatformARN (\ s a -> s{_dcorsPlatformARN = a})
 dcorsSolutionStackName :: Lens' DescribeConfigurationOptionsResponse (Maybe Text)
 dcorsSolutionStackName = lens _dcorsSolutionStackName (\ s a -> s{_dcorsSolutionStackName = a})
 
--- | A list of 'ConfigurationOptionDescription' .
+-- | A list of 'ConfigurationOptionDescription' . 
 dcorsOptions :: Lens' DescribeConfigurationOptionsResponse [ConfigurationOptionDescription]
 dcorsOptions = lens _dcorsOptions (\ s a -> s{_dcorsOptions = a}) . _Default . _Coerce
 

@@ -18,10 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disables an organizational control policy type in a root. A policy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any OU or account in that root. You can undo this by using the 'EnablePolicyType' operation.
+-- Disables an organizational control policy type in a root. A policy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any organizational unit (OU) or account in that root. You can undo this by using the 'EnablePolicyType' operation.
 --
+--
+-- This is an asynchronous request that AWS performs in the background. If you disable a policy for a root, it still appears enabled for the organization if <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html all features> are enabled for the organization. AWS recommends that you first use 'ListRoots' to see the status of policy types for a specified root, and then use this operation. 
 --
 -- This operation can be called only from the organization's master account.
+--
+-- To view the status of available policy types in the organization, use 'DescribeOrganization' .
 --
 module Network.AWS.Organizations.DisablePolicyType
     (
@@ -48,28 +52,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disablePolicyType' smart constructor.
-data DisablePolicyType = DisablePolicyType'
-  { _dptRootId     :: !Text
-  , _dptPolicyType :: !PolicyType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisablePolicyType = DisablePolicyType'{_dptRootId
+                                            :: !Text,
+                                            _dptPolicyType :: !PolicyType}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisablePolicyType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dptRootId' - The unique identifier (ID) of the root in which you want to disable a policy type. You can get the ID from the 'ListRoots' operation. The <http://wikipedia.org/wiki/regex regex pattern> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.
+-- * 'dptRootId' - The unique identifier (ID) of the root in which you want to disable a policy type. You can get the ID from the 'ListRoots' operation. The <http://wikipedia.org/wiki/regex regex pattern> for a root ID string requires "r-" followed by from 4 to 32 lowercase letters or digits.
 --
 -- * 'dptPolicyType' - The policy type that you want to disable in this root.
 disablePolicyType
     :: Text -- ^ 'dptRootId'
     -> PolicyType -- ^ 'dptPolicyType'
     -> DisablePolicyType
-disablePolicyType pRootId_ pPolicyType_ =
-  DisablePolicyType' {_dptRootId = pRootId_, _dptPolicyType = pPolicyType_}
+disablePolicyType pRootId_ pPolicyType_
+  = DisablePolicyType'{_dptRootId = pRootId_,
+                       _dptPolicyType = pPolicyType_}
 
-
--- | The unique identifier (ID) of the root in which you want to disable a policy type. You can get the ID from the 'ListRoots' operation. The <http://wikipedia.org/wiki/regex regex pattern> for a root ID string requires "r-" followed by from 4 to 32 lower-case letters or digits.
+-- | The unique identifier (ID) of the root in which you want to disable a policy type. You can get the ID from the 'ListRoots' operation. The <http://wikipedia.org/wiki/regex regex pattern> for a root ID string requires "r-" followed by from 4 to 32 lowercase letters or digits.
 dptRootId :: Lens' DisablePolicyType Text
 dptRootId = lens _dptRootId (\ s a -> s{_dptRootId = a})
 
@@ -114,11 +117,12 @@ instance ToQuery DisablePolicyType where
         toQuery = const mempty
 
 -- | /See:/ 'disablePolicyTypeResponse' smart constructor.
-data DisablePolicyTypeResponse = DisablePolicyTypeResponse'
-  { _dptrsRoot           :: !(Maybe Root)
-  , _dptrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisablePolicyTypeResponse = DisablePolicyTypeResponse'{_dptrsRoot
+                                                            :: !(Maybe Root),
+                                                            _dptrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DisablePolicyTypeResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +134,9 @@ data DisablePolicyTypeResponse = DisablePolicyTypeResponse'
 disablePolicyTypeResponse
     :: Int -- ^ 'dptrsResponseStatus'
     -> DisablePolicyTypeResponse
-disablePolicyTypeResponse pResponseStatus_ =
-  DisablePolicyTypeResponse'
-    {_dptrsRoot = Nothing, _dptrsResponseStatus = pResponseStatus_}
-
+disablePolicyTypeResponse pResponseStatus_
+  = DisablePolicyTypeResponse'{_dptrsRoot = Nothing,
+                               _dptrsResponseStatus = pResponseStatus_}
 
 -- | A structure that shows the root with the updated list of enabled policy types.
 dptrsRoot :: Lens' DisablePolicyTypeResponse (Maybe Root)

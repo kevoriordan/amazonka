@@ -53,14 +53,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listPolicyAttachments' smart constructor.
-data ListPolicyAttachments = ListPolicyAttachments'
-  { _lpaConsistencyLevel :: !(Maybe ConsistencyLevel)
-  , _lpaNextToken        :: !(Maybe Text)
-  , _lpaMaxResults       :: !(Maybe Nat)
-  , _lpaDirectoryARN     :: !Text
-  , _lpaPolicyReference  :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPolicyAttachments = ListPolicyAttachments'{_lpaConsistencyLevel
+                                                    ::
+                                                    !(Maybe ConsistencyLevel),
+                                                    _lpaNextToken ::
+                                                    !(Maybe Text),
+                                                    _lpaMaxResults ::
+                                                    !(Maybe Nat),
+                                                    _lpaDirectoryARN :: !Text,
+                                                    _lpaPolicyReference ::
+                                                    !ObjectReference}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListPolicyAttachments' with the minimum fields required to make a request.
 --
@@ -79,15 +83,13 @@ listPolicyAttachments
     :: Text -- ^ 'lpaDirectoryARN'
     -> ObjectReference -- ^ 'lpaPolicyReference'
     -> ListPolicyAttachments
-listPolicyAttachments pDirectoryARN_ pPolicyReference_ =
-  ListPolicyAttachments'
-    { _lpaConsistencyLevel = Nothing
-    , _lpaNextToken = Nothing
-    , _lpaMaxResults = Nothing
-    , _lpaDirectoryARN = pDirectoryARN_
-    , _lpaPolicyReference = pPolicyReference_
-    }
-
+listPolicyAttachments pDirectoryARN_
+  pPolicyReference_
+  = ListPolicyAttachments'{_lpaConsistencyLevel =
+                             Nothing,
+                           _lpaNextToken = Nothing, _lpaMaxResults = Nothing,
+                           _lpaDirectoryARN = pDirectoryARN_,
+                           _lpaPolicyReference = pPolicyReference_}
 
 -- | Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
 lpaConsistencyLevel :: Lens' ListPolicyAttachments (Maybe ConsistencyLevel)
@@ -155,12 +157,18 @@ instance ToQuery ListPolicyAttachments where
         toQuery = const mempty
 
 -- | /See:/ 'listPolicyAttachmentsResponse' smart constructor.
-data ListPolicyAttachmentsResponse = ListPolicyAttachmentsResponse'
-  { _lparsObjectIdentifiers :: !(Maybe [Text])
-  , _lparsNextToken         :: !(Maybe Text)
-  , _lparsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPolicyAttachmentsResponse = ListPolicyAttachmentsResponse'{_lparsObjectIdentifiers
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [Text]),
+                                                                    _lparsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _lparsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListPolicyAttachmentsResponse' with the minimum fields required to make a request.
 --
@@ -174,13 +182,11 @@ data ListPolicyAttachmentsResponse = ListPolicyAttachmentsResponse'
 listPolicyAttachmentsResponse
     :: Int -- ^ 'lparsResponseStatus'
     -> ListPolicyAttachmentsResponse
-listPolicyAttachmentsResponse pResponseStatus_ =
-  ListPolicyAttachmentsResponse'
-    { _lparsObjectIdentifiers = Nothing
-    , _lparsNextToken = Nothing
-    , _lparsResponseStatus = pResponseStatus_
-    }
-
+listPolicyAttachmentsResponse pResponseStatus_
+  = ListPolicyAttachmentsResponse'{_lparsObjectIdentifiers
+                                     = Nothing,
+                                   _lparsNextToken = Nothing,
+                                   _lparsResponseStatus = pResponseStatus_}
 
 -- | A list of @ObjectIdentifiers@ to which the policy is attached.
 lparsObjectIdentifiers :: Lens' ListPolicyAttachmentsResponse [Text]

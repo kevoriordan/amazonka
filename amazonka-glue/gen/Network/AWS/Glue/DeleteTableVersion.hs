@@ -47,40 +47,37 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteTableVersion' smart constructor.
-data DeleteTableVersion = DeleteTableVersion'
-  { _dtvCatalogId    :: !(Maybe Text)
-  , _dtvDatabaseName :: !Text
-  , _dtvTableName    :: !Text
-  , _dtvVersionId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTableVersion = DeleteTableVersion'{_dtvCatalogId
+                                              :: !(Maybe Text),
+                                              _dtvDatabaseName :: !Text,
+                                              _dtvTableName :: !Text,
+                                              _dtvVersionId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTableVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtvCatalogId' - The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+-- * 'dtvCatalogId' - The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
 --
 -- * 'dtvDatabaseName' - The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
 --
 -- * 'dtvTableName' - The name of the table. For Hive compatibility, this name is entirely lowercase.
 --
--- * 'dtvVersionId' - The ID of the table version to be deleted.
+-- * 'dtvVersionId' - The ID of the table version to be deleted. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 deleteTableVersion
     :: Text -- ^ 'dtvDatabaseName'
     -> Text -- ^ 'dtvTableName'
     -> Text -- ^ 'dtvVersionId'
     -> DeleteTableVersion
-deleteTableVersion pDatabaseName_ pTableName_ pVersionId_ =
-  DeleteTableVersion'
-    { _dtvCatalogId = Nothing
-    , _dtvDatabaseName = pDatabaseName_
-    , _dtvTableName = pTableName_
-    , _dtvVersionId = pVersionId_
-    }
+deleteTableVersion pDatabaseName_ pTableName_
+  pVersionId_
+  = DeleteTableVersion'{_dtvCatalogId = Nothing,
+                        _dtvDatabaseName = pDatabaseName_,
+                        _dtvTableName = pTableName_,
+                        _dtvVersionId = pVersionId_}
 
-
--- | The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
 dtvCatalogId :: Lens' DeleteTableVersion (Maybe Text)
 dtvCatalogId = lens _dtvCatalogId (\ s a -> s{_dtvCatalogId = a})
 
@@ -92,7 +89,7 @@ dtvDatabaseName = lens _dtvDatabaseName (\ s a -> s{_dtvDatabaseName = a})
 dtvTableName :: Lens' DeleteTableVersion Text
 dtvTableName = lens _dtvTableName (\ s a -> s{_dtvTableName = a})
 
--- | The ID of the table version to be deleted.
+-- | The ID of the table version to be deleted. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 dtvVersionId :: Lens' DeleteTableVersion Text
 dtvVersionId = lens _dtvVersionId (\ s a -> s{_dtvVersionId = a})
 
@@ -134,10 +131,10 @@ instance ToQuery DeleteTableVersion where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTableVersionResponse' smart constructor.
-newtype DeleteTableVersionResponse = DeleteTableVersionResponse'
-  { _dtvrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTableVersionResponse = DeleteTableVersionResponse'{_dtvrsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteTableVersionResponse' with the minimum fields required to make a request.
 --
@@ -147,9 +144,9 @@ newtype DeleteTableVersionResponse = DeleteTableVersionResponse'
 deleteTableVersionResponse
     :: Int -- ^ 'dtvrsResponseStatus'
     -> DeleteTableVersionResponse
-deleteTableVersionResponse pResponseStatus_ =
-  DeleteTableVersionResponse' {_dtvrsResponseStatus = pResponseStatus_}
-
+deleteTableVersionResponse pResponseStatus_
+  = DeleteTableVersionResponse'{_dtvrsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 dtvrsResponseStatus :: Lens' DeleteTableVersionResponse Int

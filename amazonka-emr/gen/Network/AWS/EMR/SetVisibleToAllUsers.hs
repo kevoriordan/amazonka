@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the @VisibleToAllUsers@ parameter of 'RunJobFlow' . The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+-- Sets the 'Cluster$VisibleToAllUsers' value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, @true@ , indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to @false@ , only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default @true@ setting when you create a cluster by using the @VisibleToAllUsers@ parameter with @RunJobFlow@ .
 --
 --
 module Network.AWS.EMR.SetVisibleToAllUsers
@@ -47,32 +47,31 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setVisibleToAllUsers' smart constructor.
-data SetVisibleToAllUsers = SetVisibleToAllUsers'
-  { _svtauJobFlowIds        :: ![Text]
-  , _svtauVisibleToAllUsers :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetVisibleToAllUsers = SetVisibleToAllUsers'{_svtauJobFlowIds
+                                                  :: ![Text],
+                                                  _svtauVisibleToAllUsers ::
+                                                  !Bool}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetVisibleToAllUsers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'svtauJobFlowIds' - Identifiers of the job flows to receive the new visibility setting.
+-- * 'svtauJobFlowIds' - The unique identifier of the job flow (cluster).
 --
--- * 'svtauVisibleToAllUsers' - Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.
+-- * 'svtauVisibleToAllUsers' - A value of @true@ indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of @false@ indicates that only the IAM user who created the cluster can perform actions.
 setVisibleToAllUsers
     :: Bool -- ^ 'svtauVisibleToAllUsers'
     -> SetVisibleToAllUsers
-setVisibleToAllUsers pVisibleToAllUsers_ =
-  SetVisibleToAllUsers'
-    {_svtauJobFlowIds = mempty, _svtauVisibleToAllUsers = pVisibleToAllUsers_}
+setVisibleToAllUsers pVisibleToAllUsers_
+  = SetVisibleToAllUsers'{_svtauJobFlowIds = mempty,
+                          _svtauVisibleToAllUsers = pVisibleToAllUsers_}
 
-
--- | Identifiers of the job flows to receive the new visibility setting.
+-- | The unique identifier of the job flow (cluster).
 svtauJobFlowIds :: Lens' SetVisibleToAllUsers [Text]
 svtauJobFlowIds = lens _svtauJobFlowIds (\ s a -> s{_svtauJobFlowIds = a}) . _Coerce
 
--- | Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.
+-- | A value of @true@ indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of @false@ indicates that only the IAM user who created the cluster can perform actions.
 svtauVisibleToAllUsers :: Lens' SetVisibleToAllUsers Bool
 svtauVisibleToAllUsers = lens _svtauVisibleToAllUsers (\ s a -> s{_svtauVisibleToAllUsers = a})
 
@@ -111,16 +110,15 @@ instance ToQuery SetVisibleToAllUsers where
         toQuery = const mempty
 
 -- | /See:/ 'setVisibleToAllUsersResponse' smart constructor.
-data SetVisibleToAllUsersResponse =
-  SetVisibleToAllUsersResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetVisibleToAllUsersResponse = SetVisibleToAllUsersResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'SetVisibleToAllUsersResponse' with the minimum fields required to make a request.
 --
 setVisibleToAllUsersResponse
     :: SetVisibleToAllUsersResponse
-setVisibleToAllUsersResponse = SetVisibleToAllUsersResponse'
-
+setVisibleToAllUsersResponse
+  = SetVisibleToAllUsersResponse'
 
 instance NFData SetVisibleToAllUsersResponse where

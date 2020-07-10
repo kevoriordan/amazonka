@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getCrawlers' smart constructor.
-data GetCrawlers = GetCrawlers'
-  { _gNextToken  :: !(Maybe Text)
-  , _gMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCrawlers = GetCrawlers'{_gNextToken ::
+                                !(Maybe Text),
+                                _gMaxResults :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCrawlers' with the minimum fields required to make a request.
 --
@@ -65,8 +64,9 @@ data GetCrawlers = GetCrawlers'
 -- * 'gMaxResults' - The number of crawlers to return on each call.
 getCrawlers
     :: GetCrawlers
-getCrawlers = GetCrawlers' {_gNextToken = Nothing, _gMaxResults = Nothing}
-
+getCrawlers
+  = GetCrawlers'{_gNextToken = Nothing,
+                 _gMaxResults = Nothing}
 
 -- | A continuation token, if this is a continuation request.
 gNextToken :: Lens' GetCrawlers (Maybe Text)
@@ -120,12 +120,12 @@ instance ToQuery GetCrawlers where
         toQuery = const mempty
 
 -- | /See:/ 'getCrawlersResponse' smart constructor.
-data GetCrawlersResponse = GetCrawlersResponse'
-  { _grsNextToken      :: !(Maybe Text)
-  , _grsCrawlers       :: !(Maybe [Crawler])
-  , _grsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCrawlersResponse = GetCrawlersResponse'{_grsNextToken
+                                                :: !(Maybe Text),
+                                                _grsCrawlers ::
+                                                !(Maybe [Crawler]),
+                                                _grsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCrawlersResponse' with the minimum fields required to make a request.
 --
@@ -139,13 +139,10 @@ data GetCrawlersResponse = GetCrawlersResponse'
 getCrawlersResponse
     :: Int -- ^ 'grsResponseStatus'
     -> GetCrawlersResponse
-getCrawlersResponse pResponseStatus_ =
-  GetCrawlersResponse'
-    { _grsNextToken = Nothing
-    , _grsCrawlers = Nothing
-    , _grsResponseStatus = pResponseStatus_
-    }
-
+getCrawlersResponse pResponseStatus_
+  = GetCrawlersResponse'{_grsNextToken = Nothing,
+                         _grsCrawlers = Nothing,
+                         _grsResponseStatus = pResponseStatus_}
 
 -- | A continuation token, if the returned list has not reached the end of those defined in this customer account.
 grsNextToken :: Lens' GetCrawlersResponse (Maybe Text)

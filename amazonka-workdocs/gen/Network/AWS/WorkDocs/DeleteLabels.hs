@@ -47,13 +47,13 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteLabels' smart constructor.
-data DeleteLabels = DeleteLabels'
-  { _dlDeleteAll           :: !(Maybe Bool)
-  , _dlAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _dlLabels              :: !(Maybe [Text])
-  , _dlResourceId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteLabels = DeleteLabels'{_dlDeleteAll ::
+                                  !(Maybe Bool),
+                                  _dlAuthenticationToken ::
+                                  !(Maybe (Sensitive Text)),
+                                  _dlLabels :: !(Maybe [Text]),
+                                  _dlResourceId :: !Text}
+                      deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteLabels' with the minimum fields required to make a request.
 --
@@ -61,7 +61,7 @@ data DeleteLabels = DeleteLabels'
 --
 -- * 'dlDeleteAll' - Flag to request removal of all labels from the specified resource.
 --
--- * 'dlAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'dlAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'dlLabels' - List of labels to delete from the resource.
 --
@@ -69,20 +69,16 @@ data DeleteLabels = DeleteLabels'
 deleteLabels
     :: Text -- ^ 'dlResourceId'
     -> DeleteLabels
-deleteLabels pResourceId_ =
-  DeleteLabels'
-    { _dlDeleteAll = Nothing
-    , _dlAuthenticationToken = Nothing
-    , _dlLabels = Nothing
-    , _dlResourceId = pResourceId_
-    }
-
+deleteLabels pResourceId_
+  = DeleteLabels'{_dlDeleteAll = Nothing,
+                  _dlAuthenticationToken = Nothing,
+                  _dlLabels = Nothing, _dlResourceId = pResourceId_}
 
 -- | Flag to request removal of all labels from the specified resource.
 dlDeleteAll :: Lens' DeleteLabels (Maybe Bool)
 dlDeleteAll = lens _dlDeleteAll (\ s a -> s{_dlDeleteAll = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 dlAuthenticationToken :: Lens' DeleteLabels (Maybe Text)
 dlAuthenticationToken = lens _dlAuthenticationToken (\ s a -> s{_dlAuthenticationToken = a}) . mapping _Sensitive
 
@@ -126,10 +122,10 @@ instance ToQuery DeleteLabels where
                  toQuery (toQueryList "member" <$> _dlLabels)]
 
 -- | /See:/ 'deleteLabelsResponse' smart constructor.
-newtype DeleteLabelsResponse = DeleteLabelsResponse'
-  { _dlrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLabelsResponse = DeleteLabelsResponse'{_dlrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteLabelsResponse' with the minimum fields required to make a request.
 --
@@ -139,9 +135,9 @@ newtype DeleteLabelsResponse = DeleteLabelsResponse'
 deleteLabelsResponse
     :: Int -- ^ 'dlrsResponseStatus'
     -> DeleteLabelsResponse
-deleteLabelsResponse pResponseStatus_ =
-  DeleteLabelsResponse' {_dlrsResponseStatus = pResponseStatus_}
-
+deleteLabelsResponse pResponseStatus_
+  = DeleteLabelsResponse'{_dlrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dlrsResponseStatus :: Lens' DeleteLabelsResponse Int

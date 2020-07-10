@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -17,8 +17,8 @@ module Network.AWS.EMR.Types
 
     -- * Errors
     , _InvalidRequestException
-    , _InternalServerError
     , _InternalServerException
+    , _InternalServerError
 
     -- * ActionOnFailure
     , ActionOnFailure (..)
@@ -43,6 +43,9 @@ module Network.AWS.EMR.Types
 
     -- * ComparisonOperator
     , ComparisonOperator (..)
+
+    -- * ComputeLimitsUnitType
+    , ComputeLimitsUnitType (..)
 
     -- * InstanceCollectionType
     , InstanceCollectionType (..)
@@ -89,6 +92,9 @@ module Network.AWS.EMR.Types
     -- * Statistic
     , Statistic (..)
 
+    -- * StepCancellationOption
+    , StepCancellationOption (..)
+
     -- * StepState
     , StepState (..)
 
@@ -131,6 +137,18 @@ module Network.AWS.EMR.Types
     , aspsState
     , aspsStateChangeReason
 
+    -- * BlockPublicAccessConfiguration
+    , BlockPublicAccessConfiguration
+    , blockPublicAccessConfiguration
+    , bpacPermittedPublicSecurityGroupRuleRanges
+    , bpacBlockPublicSecurityGroupRules
+
+    -- * BlockPublicAccessConfigurationMetadata
+    , BlockPublicAccessConfigurationMetadata
+    , blockPublicAccessConfigurationMetadata
+    , bpacmCreationDateTime
+    , bpacmCreatedByARN
+
     -- * BootstrapActionConfig
     , BootstrapActionConfig
     , bootstrapActionConfig
@@ -160,9 +178,11 @@ module Network.AWS.EMR.Types
     -- * Cluster
     , Cluster
     , cluster
+    , cluClusterARN
     , cluRequestedAMIVersion
     , cluEBSRootVolumeSize
     , cluEC2InstanceAttributes
+    , cluOutpostARN
     , cluNormalizedInstanceHours
     , cluConfigurations
     , cluCustomAMIId
@@ -179,6 +199,7 @@ module Network.AWS.EMR.Types
     , cluTerminationProtected
     , cluVisibleToAllUsers
     , cluAutoTerminate
+    , cluStepConcurrencyLevel
     , cluApplications
     , cluTags
     , cluServiceRole
@@ -203,6 +224,8 @@ module Network.AWS.EMR.Types
     , ClusterSummary
     , clusterSummary
     , csStatus
+    , csClusterARN
+    , csOutpostARN
     , csNormalizedInstanceHours
     , csName
     , csId
@@ -220,6 +243,14 @@ module Network.AWS.EMR.Types
     , cArgs
     , cScriptPath
     , cName
+
+    -- * ComputeLimits
+    , ComputeLimits
+    , computeLimits
+    , clMaximumOnDemandCapacityUnits
+    , clUnitType
+    , clMinimumCapacityUnits
+    , clMaximumCapacityUnits
 
     -- * Configuration
     , Configuration
@@ -366,13 +397,16 @@ module Network.AWS.EMR.Types
     , InstanceGroup
     , instanceGroup
     , igStatus
+    , igLastSuccessfullyAppliedConfigurationsVersion
     , igBidPrice
     , igRequestedInstanceCount
     , igRunningInstanceCount
+    , igLastSuccessfullyAppliedConfigurations
     , igConfigurations
     , igInstanceGroupType
     , igEBSBlockDevices
     , igInstanceType
+    , igConfigurationsVersion
     , igEBSOptimized
     , igMarket
     , igName
@@ -397,6 +431,7 @@ module Network.AWS.EMR.Types
     , InstanceGroupModifyConfig
     , instanceGroupModifyConfig
     , igmcInstanceCount
+    , igmcConfigurations
     , igmcEC2InstanceIdsToTerminate
     , igmcShrinkPolicy
     , igmcInstanceGroupId
@@ -493,17 +528,22 @@ module Network.AWS.EMR.Types
     -- * KerberosAttributes
     , KerberosAttributes
     , kerberosAttributes
+    , kaKdcAdminPassword
+    , kaRealm
     , kaADDomainJoinPassword
     , kaCrossRealmTrustPrincipalPassword
     , kaADDomainJoinUser
-    , kaRealm
-    , kaKdcAdminPassword
 
     -- * KeyValue
     , KeyValue
     , keyValue
     , kvValue
     , kvKey
+
+    -- * ManagedScalingPolicy
+    , ManagedScalingPolicy
+    , managedScalingPolicy
+    , mspComputeLimits
 
     -- * MetricDimension
     , MetricDimension
@@ -516,6 +556,12 @@ module Network.AWS.EMR.Types
     , placementType
     , ptAvailabilityZones
     , ptAvailabilityZone
+
+    -- * PortRange
+    , PortRange
+    , portRange
+    , prMaxRange
+    , prMinRange
 
     -- * ScalingAction
     , ScalingAction
@@ -640,68 +686,164 @@ module Network.AWS.EMR.Types
     , vsSizeInGB
     ) where
 
-import Network.AWS.EMR.Types.Product
-import Network.AWS.EMR.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
+import Network.AWS.EMR.Types.ActionOnFailure
+import Network.AWS.EMR.Types.AdjustmentType
+import Network.AWS.EMR.Types.AutoScalingPolicyState
+import Network.AWS.EMR.Types.AutoScalingPolicyStateChangeReasonCode
+import Network.AWS.EMR.Types.CancelStepsRequestStatus
+import Network.AWS.EMR.Types.ClusterState
+import Network.AWS.EMR.Types.ClusterStateChangeReasonCode
+import Network.AWS.EMR.Types.ComparisonOperator
+import Network.AWS.EMR.Types.ComputeLimitsUnitType
+import Network.AWS.EMR.Types.InstanceCollectionType
+import Network.AWS.EMR.Types.InstanceFleetState
+import Network.AWS.EMR.Types.InstanceFleetStateChangeReasonCode
+import Network.AWS.EMR.Types.InstanceFleetType
+import Network.AWS.EMR.Types.InstanceGroupState
+import Network.AWS.EMR.Types.InstanceGroupStateChangeReasonCode
+import Network.AWS.EMR.Types.InstanceGroupType
+import Network.AWS.EMR.Types.InstanceRoleType
+import Network.AWS.EMR.Types.InstanceState
+import Network.AWS.EMR.Types.InstanceStateChangeReasonCode
+import Network.AWS.EMR.Types.MarketType
+import Network.AWS.EMR.Types.RepoUpgradeOnBoot
+import Network.AWS.EMR.Types.ScaleDownBehavior
+import Network.AWS.EMR.Types.SpotProvisioningTimeoutAction
+import Network.AWS.EMR.Types.Statistic
+import Network.AWS.EMR.Types.StepCancellationOption
+import Network.AWS.EMR.Types.StepState
+import Network.AWS.EMR.Types.StepStateChangeReasonCode
+import Network.AWS.EMR.Types.Unit
+import Network.AWS.EMR.Types.Application
+import Network.AWS.EMR.Types.AutoScalingPolicy
+import Network.AWS.EMR.Types.AutoScalingPolicyDescription
+import Network.AWS.EMR.Types.AutoScalingPolicyStateChangeReason
+import Network.AWS.EMR.Types.AutoScalingPolicyStatus
+import Network.AWS.EMR.Types.BlockPublicAccessConfiguration
+import Network.AWS.EMR.Types.BlockPublicAccessConfigurationMetadata
+import Network.AWS.EMR.Types.BootstrapActionConfig
+import Network.AWS.EMR.Types.CancelStepsInfo
+import Network.AWS.EMR.Types.CloudWatchAlarmDefinition
+import Network.AWS.EMR.Types.Cluster
+import Network.AWS.EMR.Types.ClusterStateChangeReason
+import Network.AWS.EMR.Types.ClusterStatus
+import Network.AWS.EMR.Types.ClusterSummary
+import Network.AWS.EMR.Types.ClusterTimeline
+import Network.AWS.EMR.Types.Command
+import Network.AWS.EMR.Types.ComputeLimits
+import Network.AWS.EMR.Types.Configuration
+import Network.AWS.EMR.Types.EBSBlockDevice
+import Network.AWS.EMR.Types.EBSBlockDeviceConfig
+import Network.AWS.EMR.Types.EBSConfiguration
+import Network.AWS.EMR.Types.EBSVolume
+import Network.AWS.EMR.Types.EC2InstanceAttributes
+import Network.AWS.EMR.Types.FailureDetails
+import Network.AWS.EMR.Types.HadoopJARStepConfig
+import Network.AWS.EMR.Types.HadoopStepConfig
+import Network.AWS.EMR.Types.Instance
+import Network.AWS.EMR.Types.InstanceFleet
+import Network.AWS.EMR.Types.InstanceFleetConfig
+import Network.AWS.EMR.Types.InstanceFleetModifyConfig
+import Network.AWS.EMR.Types.InstanceFleetProvisioningSpecifications
+import Network.AWS.EMR.Types.InstanceFleetStateChangeReason
+import Network.AWS.EMR.Types.InstanceFleetStatus
+import Network.AWS.EMR.Types.InstanceFleetTimeline
+import Network.AWS.EMR.Types.InstanceGroup
+import Network.AWS.EMR.Types.InstanceGroupConfig
+import Network.AWS.EMR.Types.InstanceGroupModifyConfig
+import Network.AWS.EMR.Types.InstanceGroupStateChangeReason
+import Network.AWS.EMR.Types.InstanceGroupStatus
+import Network.AWS.EMR.Types.InstanceGroupTimeline
+import Network.AWS.EMR.Types.InstanceResizePolicy
+import Network.AWS.EMR.Types.InstanceStateChangeReason
+import Network.AWS.EMR.Types.InstanceStatus
+import Network.AWS.EMR.Types.InstanceTimeline
+import Network.AWS.EMR.Types.InstanceTypeConfig
+import Network.AWS.EMR.Types.InstanceTypeSpecification
+import Network.AWS.EMR.Types.JobFlowInstancesConfig
+import Network.AWS.EMR.Types.KerberosAttributes
+import Network.AWS.EMR.Types.KeyValue
+import Network.AWS.EMR.Types.ManagedScalingPolicy
+import Network.AWS.EMR.Types.MetricDimension
+import Network.AWS.EMR.Types.PlacementType
+import Network.AWS.EMR.Types.PortRange
+import Network.AWS.EMR.Types.ScalingAction
+import Network.AWS.EMR.Types.ScalingConstraints
+import Network.AWS.EMR.Types.ScalingRule
+import Network.AWS.EMR.Types.ScalingTrigger
+import Network.AWS.EMR.Types.ScriptBootstrapActionConfig
+import Network.AWS.EMR.Types.SecurityConfigurationSummary
+import Network.AWS.EMR.Types.ShrinkPolicy
+import Network.AWS.EMR.Types.SimpleScalingPolicyConfiguration
+import Network.AWS.EMR.Types.SpotProvisioningSpecification
+import Network.AWS.EMR.Types.Step
+import Network.AWS.EMR.Types.StepConfig
+import Network.AWS.EMR.Types.StepStateChangeReason
+import Network.AWS.EMR.Types.StepStatus
+import Network.AWS.EMR.Types.StepSummary
+import Network.AWS.EMR.Types.StepTimeline
+import Network.AWS.EMR.Types.SupportedProductConfig
+import Network.AWS.EMR.Types.Tag
+import Network.AWS.EMR.Types.VolumeSpecification
 
 -- | API version @2009-03-31@ of the Amazon Elastic MapReduce SDK configuration.
 emr :: Service
-emr =
-  Service
-    { _svcAbbrev = "EMR"
-    , _svcSigner = v4
-    , _svcPrefix = "elasticmapreduce"
-    , _svcVersion = "2009-03-31"
-    , _svcEndpoint = defaultEndpoint emr
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "EMR"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
-
+emr
+  = Service{_svcAbbrev = "EMR", _svcSigner = v4,
+            _svcPrefix = "elasticmapreduce",
+            _svcVersion = "2009-03-31",
+            _svcEndpoint = defaultEndpoint emr,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "EMR", _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
 -- | This exception occurs when there is something wrong with user input.
 --
 --
 _InvalidRequestException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidRequestException = _MatchServiceError emr "InvalidRequestException"
-
-
--- | Indicates that an error occurred while processing the request and that the request was not completed.
---
---
-_InternalServerError :: AsError a => Getting (First ServiceError) a ServiceError
-_InternalServerError = _MatchServiceError emr "InternalServerError"
-
+_InvalidRequestException
+  = _MatchServiceError emr "InvalidRequestException"
 
 -- | This exception occurs when there is an internal failure in the EMR service.
 --
 --
 _InternalServerException :: AsError a => Getting (First ServiceError) a ServiceError
-_InternalServerException = _MatchServiceError emr "InternalServerException"
+_InternalServerException
+  = _MatchServiceError emr "InternalServerException"
 
+-- | Indicates that an error occurred while processing the request and that the request was not completed.
+--
+--
+_InternalServerError :: AsError a => Getting (First ServiceError) a ServiceError
+_InternalServerError
+  = _MatchServiceError emr "InternalServerError"

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @UpdateNotificationSettings@ operation creates, updates, disables or re-enables notifications for a HIT type. If you call the UpdateNotificationSettings operation for a HIT type that already has a notification specification, the operation replaces the old specification with a new one. You can call the UpdateNotificationSettings operation to enable or disable notifications for the HIT type, without having to modify the notification specification itself by providing updates to the Active status without specifying a new notification specification. To change the Active status of a HIT type's notifications, the HIT type must already have a notification specification, or one must be provided in the same call to @UpdateNotificationSettings@ .
+-- The @UpdateNotificationSettings@ operation creates, updates, disables or re-enables notifications for a HIT type. If you call the UpdateNotificationSettings operation for a HIT type that already has a notification specification, the operation replaces the old specification with a new one. You can call the UpdateNotificationSettings operation to enable or disable notifications for the HIT type, without having to modify the notification specification itself by providing updates to the Active status without specifying a new notification specification. To change the Active status of a HIT type's notifications, the HIT type must already have a notification specification, or one must be provided in the same call to @UpdateNotificationSettings@ . 
 --
 --
 module Network.AWS.MechanicalTurk.UpdateNotificationSettings
@@ -46,42 +46,44 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateNotificationSettings' smart constructor.
-data UpdateNotificationSettings = UpdateNotificationSettings'
-  { _unsNotification :: !(Maybe NotificationSpecification)
-  , _unsActive       :: !(Maybe Bool)
-  , _unsHITTypeId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateNotificationSettings = UpdateNotificationSettings'{_unsNotification
+                                                              ::
+                                                              !(Maybe
+                                                                  NotificationSpecification),
+                                                              _unsActive ::
+                                                              !(Maybe Bool),
+                                                              _unsHITTypeId ::
+                                                              !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UpdateNotificationSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'unsNotification' - The notification specification for the HIT type.
+-- * 'unsNotification' - The notification specification for the HIT type. 
 --
--- * 'unsActive' - Specifies whether notifications are sent for HITs of this HIT type, according to the notification specification. You must specify either the Notification parameter or the Active parameter for the call to UpdateNotificationSettings to succeed.
+-- * 'unsActive' - Specifies whether notifications are sent for HITs of this HIT type, according to the notification specification. You must specify either the Notification parameter or the Active parameter for the call to UpdateNotificationSettings to succeed. 
 --
--- * 'unsHITTypeId' - The ID of the HIT type whose notification specification is being updated.
+-- * 'unsHITTypeId' - The ID of the HIT type whose notification specification is being updated. 
 updateNotificationSettings
     :: Text -- ^ 'unsHITTypeId'
     -> UpdateNotificationSettings
-updateNotificationSettings pHITTypeId_ =
-  UpdateNotificationSettings'
-    { _unsNotification = Nothing
-    , _unsActive = Nothing
-    , _unsHITTypeId = pHITTypeId_
-    }
+updateNotificationSettings pHITTypeId_
+  = UpdateNotificationSettings'{_unsNotification =
+                                  Nothing,
+                                _unsActive = Nothing,
+                                _unsHITTypeId = pHITTypeId_}
 
-
--- | The notification specification for the HIT type.
+-- | The notification specification for the HIT type. 
 unsNotification :: Lens' UpdateNotificationSettings (Maybe NotificationSpecification)
 unsNotification = lens _unsNotification (\ s a -> s{_unsNotification = a})
 
--- | Specifies whether notifications are sent for HITs of this HIT type, according to the notification specification. You must specify either the Notification parameter or the Active parameter for the call to UpdateNotificationSettings to succeed.
+-- | Specifies whether notifications are sent for HITs of this HIT type, according to the notification specification. You must specify either the Notification parameter or the Active parameter for the call to UpdateNotificationSettings to succeed. 
 unsActive :: Lens' UpdateNotificationSettings (Maybe Bool)
 unsActive = lens _unsActive (\ s a -> s{_unsActive = a})
 
--- | The ID of the HIT type whose notification specification is being updated.
+-- | The ID of the HIT type whose notification specification is being updated. 
 unsHITTypeId :: Lens' UpdateNotificationSettings Text
 unsHITTypeId = lens _unsHITTypeId (\ s a -> s{_unsHITTypeId = a})
 
@@ -124,10 +126,11 @@ instance ToQuery UpdateNotificationSettings where
         toQuery = const mempty
 
 -- | /See:/ 'updateNotificationSettingsResponse' smart constructor.
-newtype UpdateNotificationSettingsResponse = UpdateNotificationSettingsResponse'
-  { _unsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateNotificationSettingsResponse = UpdateNotificationSettingsResponse'{_unsrsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'UpdateNotificationSettingsResponse' with the minimum fields required to make a request.
 --
@@ -137,9 +140,9 @@ newtype UpdateNotificationSettingsResponse = UpdateNotificationSettingsResponse'
 updateNotificationSettingsResponse
     :: Int -- ^ 'unsrsResponseStatus'
     -> UpdateNotificationSettingsResponse
-updateNotificationSettingsResponse pResponseStatus_ =
-  UpdateNotificationSettingsResponse' {_unsrsResponseStatus = pResponseStatus_}
-
+updateNotificationSettingsResponse pResponseStatus_
+  = UpdateNotificationSettingsResponse'{_unsrsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 unsrsResponseStatus :: Lens' UpdateNotificationSettingsResponse Int

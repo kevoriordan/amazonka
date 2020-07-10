@@ -50,11 +50,10 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'cancelArchival' smart constructor.
-data CancelArchival = CancelArchival'
-  { _caGatewayARN :: !Text
-  , _caTapeARN    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelArchival = CancelArchival'{_caGatewayARN
+                                      :: !Text,
+                                      _caTapeARN :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelArchival' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ cancelArchival
     :: Text -- ^ 'caGatewayARN'
     -> Text -- ^ 'caTapeARN'
     -> CancelArchival
-cancelArchival pGatewayARN_ pTapeARN_ =
-  CancelArchival' {_caGatewayARN = pGatewayARN_, _caTapeARN = pTapeARN_}
-
+cancelArchival pGatewayARN_ pTapeARN_
+  = CancelArchival'{_caGatewayARN = pGatewayARN_,
+                    _caTapeARN = pTapeARN_}
 
 -- | Undocumented member.
 caGatewayARN :: Lens' CancelArchival Text
@@ -120,11 +119,12 @@ instance ToQuery CancelArchival where
 --
 --
 -- /See:/ 'cancelArchivalResponse' smart constructor.
-data CancelArchivalResponse = CancelArchivalResponse'
-  { _carsTapeARN        :: !(Maybe Text)
-  , _carsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelArchivalResponse = CancelArchivalResponse'{_carsTapeARN
+                                                      :: !(Maybe Text),
+                                                      _carsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CancelArchivalResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +136,9 @@ data CancelArchivalResponse = CancelArchivalResponse'
 cancelArchivalResponse
     :: Int -- ^ 'carsResponseStatus'
     -> CancelArchivalResponse
-cancelArchivalResponse pResponseStatus_ =
-  CancelArchivalResponse'
-    {_carsTapeARN = Nothing, _carsResponseStatus = pResponseStatus_}
-
+cancelArchivalResponse pResponseStatus_
+  = CancelArchivalResponse'{_carsTapeARN = Nothing,
+                            _carsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the virtual tape for which archiving was canceled.
 carsTapeARN :: Lens' CancelArchivalResponse (Maybe Text)

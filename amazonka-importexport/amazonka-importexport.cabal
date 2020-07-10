@@ -55,12 +55,15 @@ library
         , Network.AWS.ImportExport.Waiters
 
     other-modules:
-          Network.AWS.ImportExport.Types.Product
-        , Network.AWS.ImportExport.Types.Sum
+          Network.AWS.ImportExport.Types.Artifact
+        , Network.AWS.ImportExport.Types.Job
+        , Network.AWS.ImportExport.Types.JobType
+        , Network.AWS.ImportExport.Types.Product
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-importexport-test
     type:              exitcode-stdio-1.0
@@ -84,6 +87,7 @@ test-suite amazonka-importexport-test
         , amazonka-importexport
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

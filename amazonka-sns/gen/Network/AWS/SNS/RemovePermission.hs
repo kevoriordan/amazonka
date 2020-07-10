@@ -47,11 +47,10 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'removePermission' smart constructor.
-data RemovePermission = RemovePermission'
-  { _rpTopicARN :: !Text
-  , _rpLabel    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemovePermission = RemovePermission'{_rpTopicARN
+                                          :: !Text,
+                                          _rpLabel :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RemovePermission' with the minimum fields required to make a request.
 --
@@ -64,9 +63,9 @@ removePermission
     :: Text -- ^ 'rpTopicARN'
     -> Text -- ^ 'rpLabel'
     -> RemovePermission
-removePermission pTopicARN_ pLabel_ =
-  RemovePermission' {_rpTopicARN = pTopicARN_, _rpLabel = pLabel_}
-
+removePermission pTopicARN_ pLabel_
+  = RemovePermission'{_rpTopicARN = pTopicARN_,
+                      _rpLabel = pLabel_}
 
 -- | The ARN of the topic whose access control policy you wish to modify.
 rpTopicARN :: Lens' RemovePermission Text
@@ -99,16 +98,14 @@ instance ToQuery RemovePermission where
                "TopicArn" =: _rpTopicARN, "Label" =: _rpLabel]
 
 -- | /See:/ 'removePermissionResponse' smart constructor.
-data RemovePermissionResponse =
-  RemovePermissionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemovePermissionResponse = RemovePermissionResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'RemovePermissionResponse' with the minimum fields required to make a request.
 --
 removePermissionResponse
     :: RemovePermissionResponse
 removePermissionResponse = RemovePermissionResponse'
-
 
 instance NFData RemovePermissionResponse where

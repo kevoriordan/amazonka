@@ -21,8 +21,8 @@
 -- Returns information about all load balancers in an account.
 --
 --
--- If you are describing a long list of load balancers, you can paginate the output to make the list more manageable. You can use the pageToken and nextPageToken values to retrieve the next items in the list.
 --
+-- This operation returns paginated results.
 module Network.AWS.Lightsail.GetLoadBalancers
     (
     -- * Creating a Request
@@ -43,29 +43,36 @@ module Network.AWS.Lightsail.GetLoadBalancers
 import Network.AWS.Lens
 import Network.AWS.Lightsail.Types
 import Network.AWS.Lightsail.Types.Product
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getLoadBalancers' smart constructor.
-newtype GetLoadBalancers = GetLoadBalancers'
-  { _glbPageToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetLoadBalancers = GetLoadBalancers'{_glbPageToken
+                                             :: Maybe Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetLoadBalancers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'glbPageToken' - A token used for paginating the results from your GetLoadBalancers request.
+-- * 'glbPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetLoadBalancers@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getLoadBalancers
     :: GetLoadBalancers
-getLoadBalancers = GetLoadBalancers' {_glbPageToken = Nothing}
+getLoadBalancers
+  = GetLoadBalancers'{_glbPageToken = Nothing}
 
-
--- | A token used for paginating the results from your GetLoadBalancers request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetLoadBalancers@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 glbPageToken :: Lens' GetLoadBalancers (Maybe Text)
 glbPageToken = lens _glbPageToken (\ s a -> s{_glbPageToken = a})
+
+instance AWSPager GetLoadBalancers where
+        page rq rs
+          | stop (rs ^. glbsrsNextPageToken) = Nothing
+          | stop (rs ^. glbsrsLoadBalancers) = Nothing
+          | otherwise =
+            Just $ rq & glbPageToken .~ rs ^. glbsrsNextPageToken
 
 instance AWSRequest GetLoadBalancers where
         type Rs GetLoadBalancers = GetLoadBalancersResponse
@@ -104,18 +111,22 @@ instance ToQuery GetLoadBalancers where
         toQuery = const mempty
 
 -- | /See:/ 'getLoadBalancersResponse' smart constructor.
-data GetLoadBalancersResponse = GetLoadBalancersResponse'
-  { _glbsrsNextPageToken  :: !(Maybe Text)
-  , _glbsrsLoadBalancers  :: !(Maybe [LoadBalancer])
-  , _glbsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetLoadBalancersResponse = GetLoadBalancersResponse'{_glbsrsNextPageToken
+                                                          :: !(Maybe Text),
+                                                          _glbsrsLoadBalancers
+                                                          ::
+                                                          !(Maybe
+                                                              [LoadBalancer]),
+                                                          _glbsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetLoadBalancersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'glbsrsNextPageToken' - A token used for advancing to the next page of results from your GetLoadBalancers request.
+-- * 'glbsrsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetLoadBalancers@ request and specify the next page token using the @pageToken@ parameter.
 --
 -- * 'glbsrsLoadBalancers' - An array of LoadBalancer objects describing your load balancers.
 --
@@ -123,15 +134,13 @@ data GetLoadBalancersResponse = GetLoadBalancersResponse'
 getLoadBalancersResponse
     :: Int -- ^ 'glbsrsResponseStatus'
     -> GetLoadBalancersResponse
-getLoadBalancersResponse pResponseStatus_ =
-  GetLoadBalancersResponse'
-    { _glbsrsNextPageToken = Nothing
-    , _glbsrsLoadBalancers = Nothing
-    , _glbsrsResponseStatus = pResponseStatus_
-    }
+getLoadBalancersResponse pResponseStatus_
+  = GetLoadBalancersResponse'{_glbsrsNextPageToken =
+                                Nothing,
+                              _glbsrsLoadBalancers = Nothing,
+                              _glbsrsResponseStatus = pResponseStatus_}
 
-
--- | A token used for advancing to the next page of results from your GetLoadBalancers request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetLoadBalancers@ request and specify the next page token using the @pageToken@ parameter.
 glbsrsNextPageToken :: Lens' GetLoadBalancersResponse (Maybe Text)
 glbsrsNextPageToken = lens _glbsrsNextPageToken (\ s a -> s{_glbsrsNextPageToken = a})
 

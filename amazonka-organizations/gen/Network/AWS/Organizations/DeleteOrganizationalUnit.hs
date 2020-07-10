@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an organizational unit from a root or another OU. You must first remove all accounts and child OUs from the OU that you want to delete.
+-- Deletes an organizational unit (OU) from a root or another OU. You must first remove all accounts and child OUs from the OU that you want to delete.
 --
 --
 -- This operation can be called only from the organization's master account.
@@ -44,24 +44,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteOrganizationalUnit' smart constructor.
-newtype DeleteOrganizationalUnit = DeleteOrganizationalUnit'
-  { _dOrganizationalUnitId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteOrganizationalUnit = DeleteOrganizationalUnit'{_dOrganizationalUnitId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteOrganizationalUnit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dOrganizationalUnitId' - The unique identifier (ID) of the organizational unit that you want to delete. You can get the ID from the 'ListOrganizationalUnitsForParent' operation. The <http://wikipedia.org/wiki/regex regex pattern> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.
+-- * 'dOrganizationalUnitId' - The unique identifier (ID) of the organizational unit that you want to delete. You can get the ID from the 'ListOrganizationalUnitsForParent' operation. The <http://wikipedia.org/wiki/regex regex pattern> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
 deleteOrganizationalUnit
     :: Text -- ^ 'dOrganizationalUnitId'
     -> DeleteOrganizationalUnit
-deleteOrganizationalUnit pOrganizationalUnitId_ =
-  DeleteOrganizationalUnit' {_dOrganizationalUnitId = pOrganizationalUnitId_}
+deleteOrganizationalUnit pOrganizationalUnitId_
+  = DeleteOrganizationalUnit'{_dOrganizationalUnitId =
+                                pOrganizationalUnitId_}
 
-
--- | The unique identifier (ID) of the organizational unit that you want to delete. You can get the ID from the 'ListOrganizationalUnitsForParent' operation. The <http://wikipedia.org/wiki/regex regex pattern> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root that contains the OU) followed by a second "-" dash and from 8 to 32 additional lower-case letters or digits.
+-- | The unique identifier (ID) of the organizational unit that you want to delete. You can get the ID from the 'ListOrganizationalUnitsForParent' operation. The <http://wikipedia.org/wiki/regex regex pattern> for an organizational unit ID string requires "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the OU). This string is followed by a second "-" dash and from 8 to 32 additional lowercase letters or digits.
 dOrganizationalUnitId :: Lens' DeleteOrganizationalUnit Text
 dOrganizationalUnitId = lens _dOrganizationalUnitId (\ s a -> s{_dOrganizationalUnitId = a})
 
@@ -100,17 +100,16 @@ instance ToQuery DeleteOrganizationalUnit where
         toQuery = const mempty
 
 -- | /See:/ 'deleteOrganizationalUnitResponse' smart constructor.
-data DeleteOrganizationalUnitResponse =
-  DeleteOrganizationalUnitResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteOrganizationalUnitResponse = DeleteOrganizationalUnitResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteOrganizationalUnitResponse' with the minimum fields required to make a request.
 --
 deleteOrganizationalUnitResponse
     :: DeleteOrganizationalUnitResponse
-deleteOrganizationalUnitResponse = DeleteOrganizationalUnitResponse'
-
+deleteOrganizationalUnitResponse
+  = DeleteOrganizationalUnitResponse'
 
 instance NFData DeleteOrganizationalUnitResponse
          where

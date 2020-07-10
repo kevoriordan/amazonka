@@ -58,6 +58,7 @@ library
         , Network.AWS.CloudSearch.DeleteSuggester
         , Network.AWS.CloudSearch.DescribeAnalysisSchemes
         , Network.AWS.CloudSearch.DescribeAvailabilityOptions
+        , Network.AWS.CloudSearch.DescribeDomainEndpointOptions
         , Network.AWS.CloudSearch.DescribeDomains
         , Network.AWS.CloudSearch.DescribeExpressions
         , Network.AWS.CloudSearch.DescribeIndexFields
@@ -68,17 +69,56 @@ library
         , Network.AWS.CloudSearch.ListDomainNames
         , Network.AWS.CloudSearch.Types
         , Network.AWS.CloudSearch.UpdateAvailabilityOptions
+        , Network.AWS.CloudSearch.UpdateDomainEndpointOptions
         , Network.AWS.CloudSearch.UpdateScalingParameters
         , Network.AWS.CloudSearch.UpdateServiceAccessPolicies
         , Network.AWS.CloudSearch.Waiters
 
     other-modules:
-          Network.AWS.CloudSearch.Types.Product
-        , Network.AWS.CloudSearch.Types.Sum
+          Network.AWS.CloudSearch.Types.AccessPoliciesStatus
+        , Network.AWS.CloudSearch.Types.AlgorithmicStemming
+        , Network.AWS.CloudSearch.Types.AnalysisOptions
+        , Network.AWS.CloudSearch.Types.AnalysisScheme
+        , Network.AWS.CloudSearch.Types.AnalysisSchemeLanguage
+        , Network.AWS.CloudSearch.Types.AnalysisSchemeStatus
+        , Network.AWS.CloudSearch.Types.AvailabilityOptionsStatus
+        , Network.AWS.CloudSearch.Types.DateArrayOptions
+        , Network.AWS.CloudSearch.Types.DateOptions
+        , Network.AWS.CloudSearch.Types.DocumentSuggesterOptions
+        , Network.AWS.CloudSearch.Types.DomainEndpointOptions
+        , Network.AWS.CloudSearch.Types.DomainEndpointOptionsStatus
+        , Network.AWS.CloudSearch.Types.DomainStatus
+        , Network.AWS.CloudSearch.Types.DoubleArrayOptions
+        , Network.AWS.CloudSearch.Types.DoubleOptions
+        , Network.AWS.CloudSearch.Types.Expression
+        , Network.AWS.CloudSearch.Types.ExpressionStatus
+        , Network.AWS.CloudSearch.Types.IndexField
+        , Network.AWS.CloudSearch.Types.IndexFieldStatus
+        , Network.AWS.CloudSearch.Types.IndexFieldType
+        , Network.AWS.CloudSearch.Types.IntArrayOptions
+        , Network.AWS.CloudSearch.Types.IntOptions
+        , Network.AWS.CloudSearch.Types.LatLonOptions
+        , Network.AWS.CloudSearch.Types.Limits
+        , Network.AWS.CloudSearch.Types.LiteralArrayOptions
+        , Network.AWS.CloudSearch.Types.LiteralOptions
+        , Network.AWS.CloudSearch.Types.OptionState
+        , Network.AWS.CloudSearch.Types.OptionStatus
+        , Network.AWS.CloudSearch.Types.PartitionInstanceType
+        , Network.AWS.CloudSearch.Types.Product
+        , Network.AWS.CloudSearch.Types.ScalingParameters
+        , Network.AWS.CloudSearch.Types.ScalingParametersStatus
+        , Network.AWS.CloudSearch.Types.ServiceEndpoint
+        , Network.AWS.CloudSearch.Types.Suggester
+        , Network.AWS.CloudSearch.Types.SuggesterFuzzyMatching
+        , Network.AWS.CloudSearch.Types.SuggesterStatus
+        , Network.AWS.CloudSearch.Types.TLSSecurityPolicy
+        , Network.AWS.CloudSearch.Types.TextArrayOptions
+        , Network.AWS.CloudSearch.Types.TextOptions
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cloudsearch-test
     type:              exitcode-stdio-1.0
@@ -102,6 +142,7 @@ test-suite amazonka-cloudsearch-test
         , amazonka-cloudsearch
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

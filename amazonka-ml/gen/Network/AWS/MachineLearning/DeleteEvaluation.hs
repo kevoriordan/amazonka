@@ -23,10 +23,10 @@
 --
 -- After invoking the @DeleteEvaluation@ operation, you can use the @GetEvaluation@ operation to verify that the status of the @Evaluation@ changed to @DELETED@ .
 --
--- ____Caution__
+-- ____Caution__ 
 -- The results of the @DeleteEvaluation@ operation are irreversible.
 --
--- __
+-- __ 
 module Network.AWS.MachineLearning.DeleteEvaluation
     (
     -- * Creating a Request
@@ -51,10 +51,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteEvaluation' smart constructor.
-newtype DeleteEvaluation = DeleteEvaluation'
-  { _deEvaluationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEvaluation = DeleteEvaluation'{_deEvaluationId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteEvaluation' with the minimum fields required to make a request.
 --
@@ -64,9 +63,8 @@ newtype DeleteEvaluation = DeleteEvaluation'
 deleteEvaluation
     :: Text -- ^ 'deEvaluationId'
     -> DeleteEvaluation
-deleteEvaluation pEvaluationId_ =
-  DeleteEvaluation' {_deEvaluationId = pEvaluationId_}
-
+deleteEvaluation pEvaluationId_
+  = DeleteEvaluation'{_deEvaluationId = pEvaluationId_}
 
 -- | A user-supplied ID that uniquely identifies the @Evaluation@ to delete.
 deEvaluationId :: Lens' DeleteEvaluation Text
@@ -113,11 +111,12 @@ instance ToQuery DeleteEvaluation where
 --
 --
 -- /See:/ 'deleteEvaluationResponse' smart constructor.
-data DeleteEvaluationResponse = DeleteEvaluationResponse'
-  { _dersEvaluationId   :: !(Maybe Text)
-  , _dersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEvaluationResponse = DeleteEvaluationResponse'{_dersEvaluationId
+                                                          :: !(Maybe Text),
+                                                          _dersResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteEvaluationResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +128,10 @@ data DeleteEvaluationResponse = DeleteEvaluationResponse'
 deleteEvaluationResponse
     :: Int -- ^ 'dersResponseStatus'
     -> DeleteEvaluationResponse
-deleteEvaluationResponse pResponseStatus_ =
-  DeleteEvaluationResponse'
-    {_dersEvaluationId = Nothing, _dersResponseStatus = pResponseStatus_}
-
+deleteEvaluationResponse pResponseStatus_
+  = DeleteEvaluationResponse'{_dersEvaluationId =
+                                Nothing,
+                              _dersResponseStatus = pResponseStatus_}
 
 -- | A user-supplied ID that uniquely identifies the @Evaluation@ . This value should be identical to the value of the @EvaluationId@ in the request.
 dersEvaluationId :: Lens' DeleteEvaluationResponse (Maybe Text)

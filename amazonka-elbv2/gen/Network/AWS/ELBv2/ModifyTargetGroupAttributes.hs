@@ -46,11 +46,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyTargetGroupAttributes' smart constructor.
-data ModifyTargetGroupAttributes = ModifyTargetGroupAttributes'
-  { _mtgaTargetGroupARN :: !Text
-  , _mtgaAttributes     :: ![TargetGroupAttribute]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyTargetGroupAttributes = ModifyTargetGroupAttributes'{_mtgaTargetGroupARN
+                                                                :: !Text,
+                                                                _mtgaAttributes
+                                                                ::
+                                                                ![TargetGroupAttribute]}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ModifyTargetGroupAttributes' with the minimum fields required to make a request.
 --
@@ -62,10 +64,10 @@ data ModifyTargetGroupAttributes = ModifyTargetGroupAttributes'
 modifyTargetGroupAttributes
     :: Text -- ^ 'mtgaTargetGroupARN'
     -> ModifyTargetGroupAttributes
-modifyTargetGroupAttributes pTargetGroupARN_ =
-  ModifyTargetGroupAttributes'
-    {_mtgaTargetGroupARN = pTargetGroupARN_, _mtgaAttributes = mempty}
-
+modifyTargetGroupAttributes pTargetGroupARN_
+  = ModifyTargetGroupAttributes'{_mtgaTargetGroupARN =
+                                   pTargetGroupARN_,
+                                 _mtgaAttributes = mempty}
 
 -- | The Amazon Resource Name (ARN) of the target group.
 mtgaTargetGroupARN :: Lens' ModifyTargetGroupAttributes Text
@@ -108,11 +110,15 @@ instance ToQuery ModifyTargetGroupAttributes where
                "Attributes" =: toQueryList "member" _mtgaAttributes]
 
 -- | /See:/ 'modifyTargetGroupAttributesResponse' smart constructor.
-data ModifyTargetGroupAttributesResponse = ModifyTargetGroupAttributesResponse'
-  { _mtgarsAttributes     :: !(Maybe [TargetGroupAttribute])
-  , _mtgarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyTargetGroupAttributesResponse = ModifyTargetGroupAttributesResponse'{_mtgarsAttributes
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [TargetGroupAttribute]),
+                                                                                _mtgarsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'ModifyTargetGroupAttributesResponse' with the minimum fields required to make a request.
 --
@@ -124,10 +130,11 @@ data ModifyTargetGroupAttributesResponse = ModifyTargetGroupAttributesResponse'
 modifyTargetGroupAttributesResponse
     :: Int -- ^ 'mtgarsResponseStatus'
     -> ModifyTargetGroupAttributesResponse
-modifyTargetGroupAttributesResponse pResponseStatus_ =
-  ModifyTargetGroupAttributesResponse'
-    {_mtgarsAttributes = Nothing, _mtgarsResponseStatus = pResponseStatus_}
-
+modifyTargetGroupAttributesResponse pResponseStatus_
+  = ModifyTargetGroupAttributesResponse'{_mtgarsAttributes
+                                           = Nothing,
+                                         _mtgarsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Information about the attributes.
 mtgarsAttributes :: Lens' ModifyTargetGroupAttributesResponse [TargetGroupAttribute]

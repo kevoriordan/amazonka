@@ -44,33 +44,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setV2LoggingOptions' smart constructor.
-data SetV2LoggingOptions = SetV2LoggingOptions'
-  { _svloDisableAllLogs  :: !(Maybe Bool)
-  , _svloDefaultLogLevel :: !(Maybe LogLevel)
-  , _svloRoleARN         :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetV2LoggingOptions = SetV2LoggingOptions'{_svloDisableAllLogs
+                                                :: !(Maybe Bool),
+                                                _svloDefaultLogLevel ::
+                                                !(Maybe LogLevel),
+                                                _svloRoleARN :: !(Maybe Text)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetV2LoggingOptions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'svloDisableAllLogs' - Set to true to disable all logs, otherwise set to false.
+-- * 'svloDisableAllLogs' - If true all logs are disabled. The default is false.
 --
 -- * 'svloDefaultLogLevel' - The default logging level.
 --
--- * 'svloRoleARN' - The role ARN that allows IoT to write to Cloudwatch logs.
+-- * 'svloRoleARN' - The ARN of the role that allows IoT to write to Cloudwatch logs.
 setV2LoggingOptions
     :: SetV2LoggingOptions
-setV2LoggingOptions =
-  SetV2LoggingOptions'
-    { _svloDisableAllLogs = Nothing
-    , _svloDefaultLogLevel = Nothing
-    , _svloRoleARN = Nothing
-    }
+setV2LoggingOptions
+  = SetV2LoggingOptions'{_svloDisableAllLogs = Nothing,
+                         _svloDefaultLogLevel = Nothing,
+                         _svloRoleARN = Nothing}
 
-
--- | Set to true to disable all logs, otherwise set to false.
+-- | If true all logs are disabled. The default is false.
 svloDisableAllLogs :: Lens' SetV2LoggingOptions (Maybe Bool)
 svloDisableAllLogs = lens _svloDisableAllLogs (\ s a -> s{_svloDisableAllLogs = a})
 
@@ -78,7 +75,7 @@ svloDisableAllLogs = lens _svloDisableAllLogs (\ s a -> s{_svloDisableAllLogs = 
 svloDefaultLogLevel :: Lens' SetV2LoggingOptions (Maybe LogLevel)
 svloDefaultLogLevel = lens _svloDefaultLogLevel (\ s a -> s{_svloDefaultLogLevel = a})
 
--- | The role ARN that allows IoT to write to Cloudwatch logs.
+-- | The ARN of the role that allows IoT to write to Cloudwatch logs.
 svloRoleARN :: Lens' SetV2LoggingOptions (Maybe Text)
 svloRoleARN = lens _svloRoleARN (\ s a -> s{_svloRoleARN = a})
 
@@ -110,16 +107,15 @@ instance ToQuery SetV2LoggingOptions where
         toQuery = const mempty
 
 -- | /See:/ 'setV2LoggingOptionsResponse' smart constructor.
-data SetV2LoggingOptionsResponse =
-  SetV2LoggingOptionsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetV2LoggingOptionsResponse = SetV2LoggingOptionsResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'SetV2LoggingOptionsResponse' with the minimum fields required to make a request.
 --
 setV2LoggingOptionsResponse
     :: SetV2LoggingOptionsResponse
-setV2LoggingOptionsResponse = SetV2LoggingOptionsResponse'
-
+setV2LoggingOptionsResponse
+  = SetV2LoggingOptionsResponse'
 
 instance NFData SetV2LoggingOptionsResponse where

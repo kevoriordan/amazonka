@@ -47,12 +47,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'acceptVPCEndpointConnections' smart constructor.
-data AcceptVPCEndpointConnections = AcceptVPCEndpointConnections'
-  { _avecDryRun         :: !(Maybe Bool)
-  , _avecServiceId      :: !Text
-  , _avecVPCEndpointIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptVPCEndpointConnections = AcceptVPCEndpointConnections'{_avecDryRun
+                                                                  ::
+                                                                  !(Maybe Bool),
+                                                                  _avecServiceId
+                                                                  :: !Text,
+                                                                  _avecVPCEndpointIds
+                                                                  :: ![Text]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'AcceptVPCEndpointConnections' with the minimum fields required to make a request.
 --
@@ -60,25 +63,23 @@ data AcceptVPCEndpointConnections = AcceptVPCEndpointConnections'
 --
 -- * 'avecDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'avecServiceId' - The ID of the endpoint service.
+-- * 'avecServiceId' - The ID of the VPC endpoint service.
 --
 -- * 'avecVPCEndpointIds' - The IDs of one or more interface VPC endpoints.
 acceptVPCEndpointConnections
     :: Text -- ^ 'avecServiceId'
     -> AcceptVPCEndpointConnections
-acceptVPCEndpointConnections pServiceId_ =
-  AcceptVPCEndpointConnections'
-    { _avecDryRun = Nothing
-    , _avecServiceId = pServiceId_
-    , _avecVPCEndpointIds = mempty
-    }
-
+acceptVPCEndpointConnections pServiceId_
+  = AcceptVPCEndpointConnections'{_avecDryRun =
+                                    Nothing,
+                                  _avecServiceId = pServiceId_,
+                                  _avecVPCEndpointIds = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 avecDryRun :: Lens' AcceptVPCEndpointConnections (Maybe Bool)
 avecDryRun = lens _avecDryRun (\ s a -> s{_avecDryRun = a})
 
--- | The ID of the endpoint service.
+-- | The ID of the VPC endpoint service.
 avecServiceId :: Lens' AcceptVPCEndpointConnections Text
 avecServiceId = lens _avecServiceId (\ s a -> s{_avecServiceId = a})
 
@@ -120,11 +121,15 @@ instance ToQuery AcceptVPCEndpointConnections where
                toQueryList "VpcEndpointId" _avecVPCEndpointIds]
 
 -- | /See:/ 'acceptVPCEndpointConnectionsResponse' smart constructor.
-data AcceptVPCEndpointConnectionsResponse = AcceptVPCEndpointConnectionsResponse'
-  { _avecrsUnsuccessful   :: !(Maybe [UnsuccessfulItem])
-  , _avecrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptVPCEndpointConnectionsResponse = AcceptVPCEndpointConnectionsResponse'{_avecrsUnsuccessful
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [UnsuccessfulItem]),
+                                                                                  _avecrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'AcceptVPCEndpointConnectionsResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +141,11 @@ data AcceptVPCEndpointConnectionsResponse = AcceptVPCEndpointConnectionsResponse
 acceptVPCEndpointConnectionsResponse
     :: Int -- ^ 'avecrsResponseStatus'
     -> AcceptVPCEndpointConnectionsResponse
-acceptVPCEndpointConnectionsResponse pResponseStatus_ =
-  AcceptVPCEndpointConnectionsResponse'
-    {_avecrsUnsuccessful = Nothing, _avecrsResponseStatus = pResponseStatus_}
-
+acceptVPCEndpointConnectionsResponse pResponseStatus_
+  = AcceptVPCEndpointConnectionsResponse'{_avecrsUnsuccessful
+                                            = Nothing,
+                                          _avecrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Information about the interface endpoints that were not accepted, if applicable.
 avecrsUnsuccessful :: Lens' AcceptVPCEndpointConnectionsResponse [UnsuccessfulItem]

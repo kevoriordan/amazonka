@@ -19,6 +19,18 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the tags from the bucket.
+--
+--
+-- To use this operation, you must have permission to perform the @s3:PutBucketTagging@ action. By default, the bucket owner has this permission and can grant this permission to others. 
+--
+-- The following operations are related to @DeleteBucketTagging@ :
+--
+--     * 'GetBucketTagging' 
+--
+--     * 'PutBucketTagging' 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketTagging
     (
     -- * Creating a Request
@@ -40,23 +52,23 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketTagging' smart constructor.
-newtype DeleteBucketTagging = DeleteBucketTagging'
-  { _dbtBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBucketTagging = DeleteBucketTagging'{_dbtBucket
+                                                   :: BucketName}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteBucketTagging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbtBucket' - Undocumented member.
+-- * 'dbtBucket' - The bucket that has the tag set to be removed.
 deleteBucketTagging
     :: BucketName -- ^ 'dbtBucket'
     -> DeleteBucketTagging
-deleteBucketTagging pBucket_ = DeleteBucketTagging' {_dbtBucket = pBucket_}
+deleteBucketTagging pBucket_
+  = DeleteBucketTagging'{_dbtBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket that has the tag set to be removed.
 dbtBucket :: Lens' DeleteBucketTagging BucketName
 dbtBucket = lens _dbtBucket (\ s a -> s{_dbtBucket = a})
 
@@ -81,16 +93,15 @@ instance ToQuery DeleteBucketTagging where
         toQuery = const (mconcat ["tagging"])
 
 -- | /See:/ 'deleteBucketTaggingResponse' smart constructor.
-data DeleteBucketTaggingResponse =
-  DeleteBucketTaggingResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketTaggingResponse = DeleteBucketTaggingResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteBucketTaggingResponse' with the minimum fields required to make a request.
 --
 deleteBucketTaggingResponse
     :: DeleteBucketTaggingResponse
-deleteBucketTaggingResponse = DeleteBucketTaggingResponse'
-
+deleteBucketTaggingResponse
+  = DeleteBucketTaggingResponse'
 
 instance NFData DeleteBucketTaggingResponse where

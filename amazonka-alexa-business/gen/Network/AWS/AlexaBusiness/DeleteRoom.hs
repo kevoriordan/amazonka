@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteRoom' smart constructor.
-newtype DeleteRoom = DeleteRoom'
-  { _drRoomARN :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRoom = DeleteRoom'{_drRoomARN ::
+                                 Maybe Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRoom' with the minimum fields required to make a request.
 --
@@ -56,8 +55,7 @@ newtype DeleteRoom = DeleteRoom'
 -- * 'drRoomARN' - The ARN of the room to delete. Required.
 deleteRoom
     :: DeleteRoom
-deleteRoom = DeleteRoom' {_drRoomARN = Nothing}
-
+deleteRoom = DeleteRoom'{_drRoomARN = Nothing}
 
 -- | The ARN of the room to delete. Required.
 drRoomARN :: Lens' DeleteRoom (Maybe Text)
@@ -95,10 +93,10 @@ instance ToQuery DeleteRoom where
         toQuery = const mempty
 
 -- | /See:/ 'deleteRoomResponse' smart constructor.
-newtype DeleteRoomResponse = DeleteRoomResponse'
-  { _drrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRoomResponse = DeleteRoomResponse'{_drrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteRoomResponse' with the minimum fields required to make a request.
 --
@@ -108,9 +106,9 @@ newtype DeleteRoomResponse = DeleteRoomResponse'
 deleteRoomResponse
     :: Int -- ^ 'drrsResponseStatus'
     -> DeleteRoomResponse
-deleteRoomResponse pResponseStatus_ =
-  DeleteRoomResponse' {_drrsResponseStatus = pResponseStatus_}
-
+deleteRoomResponse pResponseStatus_
+  = DeleteRoomResponse'{_drrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 drrsResponseStatus :: Lens' DeleteRoomResponse Int

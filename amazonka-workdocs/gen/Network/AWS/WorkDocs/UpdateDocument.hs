@@ -46,14 +46,15 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'updateDocument' smart constructor.
-data UpdateDocument = UpdateDocument'
-  { _udParentFolderId      :: !(Maybe Text)
-  , _udAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _udName                :: !(Maybe Text)
-  , _udResourceState       :: !(Maybe ResourceStateType)
-  , _udDocumentId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateDocument = UpdateDocument'{_udParentFolderId
+                                      :: !(Maybe Text),
+                                      _udAuthenticationToken ::
+                                      !(Maybe (Sensitive Text)),
+                                      _udName :: !(Maybe Text),
+                                      _udResourceState ::
+                                      !(Maybe ResourceStateType),
+                                      _udDocumentId :: !Text}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDocument' with the minimum fields required to make a request.
 --
@@ -61,7 +62,7 @@ data UpdateDocument = UpdateDocument'
 --
 -- * 'udParentFolderId' - The ID of the parent folder.
 --
--- * 'udAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'udAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'udName' - The name of the document.
 --
@@ -71,21 +72,17 @@ data UpdateDocument = UpdateDocument'
 updateDocument
     :: Text -- ^ 'udDocumentId'
     -> UpdateDocument
-updateDocument pDocumentId_ =
-  UpdateDocument'
-    { _udParentFolderId = Nothing
-    , _udAuthenticationToken = Nothing
-    , _udName = Nothing
-    , _udResourceState = Nothing
-    , _udDocumentId = pDocumentId_
-    }
-
+updateDocument pDocumentId_
+  = UpdateDocument'{_udParentFolderId = Nothing,
+                    _udAuthenticationToken = Nothing, _udName = Nothing,
+                    _udResourceState = Nothing,
+                    _udDocumentId = pDocumentId_}
 
 -- | The ID of the parent folder.
 udParentFolderId :: Lens' UpdateDocument (Maybe Text)
 udParentFolderId = lens _udParentFolderId (\ s a -> s{_udParentFolderId = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 udAuthenticationToken :: Lens' UpdateDocument (Maybe Text)
 udAuthenticationToken = lens _udAuthenticationToken (\ s a -> s{_udAuthenticationToken = a}) . mapping _Sensitive
 
@@ -133,16 +130,14 @@ instance ToQuery UpdateDocument where
         toQuery = const mempty
 
 -- | /See:/ 'updateDocumentResponse' smart constructor.
-data UpdateDocumentResponse =
-  UpdateDocumentResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDocumentResponse = UpdateDocumentResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateDocumentResponse' with the minimum fields required to make a request.
 --
 updateDocumentResponse
     :: UpdateDocumentResponse
 updateDocumentResponse = UpdateDocumentResponse'
-
 
 instance NFData UpdateDocumentResponse where

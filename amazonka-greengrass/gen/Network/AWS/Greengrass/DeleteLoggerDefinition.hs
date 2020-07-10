@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLoggerDefinition' smart constructor.
-newtype DeleteLoggerDefinition = DeleteLoggerDefinition'
-  { _dldLoggerDefinitionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLoggerDefinition = DeleteLoggerDefinition'{_dldLoggerDefinitionId
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteLoggerDefinition' with the minimum fields required to make a request.
 --
@@ -55,9 +55,9 @@ newtype DeleteLoggerDefinition = DeleteLoggerDefinition'
 deleteLoggerDefinition
     :: Text -- ^ 'dldLoggerDefinitionId'
     -> DeleteLoggerDefinition
-deleteLoggerDefinition pLoggerDefinitionId_ =
-  DeleteLoggerDefinition' {_dldLoggerDefinitionId = pLoggerDefinitionId_}
-
+deleteLoggerDefinition pLoggerDefinitionId_
+  = DeleteLoggerDefinition'{_dldLoggerDefinitionId =
+                              pLoggerDefinitionId_}
 
 -- | The ID of the logger definition.
 dldLoggerDefinitionId :: Lens' DeleteLoggerDefinition Text
@@ -94,10 +94,10 @@ instance ToQuery DeleteLoggerDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'deleteLoggerDefinitionResponse' smart constructor.
-newtype DeleteLoggerDefinitionResponse = DeleteLoggerDefinitionResponse'
-  { _dldrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLoggerDefinitionResponse = DeleteLoggerDefinitionResponse'{_dldrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteLoggerDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -107,9 +107,9 @@ newtype DeleteLoggerDefinitionResponse = DeleteLoggerDefinitionResponse'
 deleteLoggerDefinitionResponse
     :: Int -- ^ 'dldrsResponseStatus'
     -> DeleteLoggerDefinitionResponse
-deleteLoggerDefinitionResponse pResponseStatus_ =
-  DeleteLoggerDefinitionResponse' {_dldrsResponseStatus = pResponseStatus_}
-
+deleteLoggerDefinitionResponse pResponseStatus_
+  = DeleteLoggerDefinitionResponse'{_dldrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 dldrsResponseStatus :: Lens' DeleteLoggerDefinitionResponse Int

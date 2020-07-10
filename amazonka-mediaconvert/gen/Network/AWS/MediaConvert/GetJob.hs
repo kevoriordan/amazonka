@@ -43,10 +43,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getJob' smart constructor.
-newtype GetJob = GetJob'
-  { _gjId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetJob = GetJob'{_gjId :: Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJob' with the minimum fields required to make a request.
 --
@@ -56,8 +54,7 @@ newtype GetJob = GetJob'
 getJob
     :: Text -- ^ 'gjId'
     -> GetJob
-getJob pId_ = GetJob' {_gjId = pId_}
-
+getJob pId_ = GetJob'{_gjId = pId_}
 
 -- | the job ID of the job.
 gjId :: Lens' GetJob Text
@@ -91,27 +88,26 @@ instance ToQuery GetJob where
         toQuery = const mempty
 
 -- | /See:/ 'getJobResponse' smart constructor.
-data GetJobResponse = GetJobResponse'
-  { _gjrsJob            :: !(Maybe Job)
-  , _gjrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetJobResponse = GetJobResponse'{_gjrsJob ::
+                                      !(Maybe Job),
+                                      _gjrsResponseStatus :: !Int}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gjrsJob' - Undocumented member.
+-- * 'gjrsJob' - Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
 --
 -- * 'gjrsResponseStatus' - -- | The response status code.
 getJobResponse
     :: Int -- ^ 'gjrsResponseStatus'
     -> GetJobResponse
-getJobResponse pResponseStatus_ =
-  GetJobResponse' {_gjrsJob = Nothing, _gjrsResponseStatus = pResponseStatus_}
+getJobResponse pResponseStatus_
+  = GetJobResponse'{_gjrsJob = Nothing,
+                    _gjrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
 gjrsJob :: Lens' GetJobResponse (Maybe Job)
 gjrsJob = lens _gjrsJob (\ s a -> s{_gjrsJob = a})
 

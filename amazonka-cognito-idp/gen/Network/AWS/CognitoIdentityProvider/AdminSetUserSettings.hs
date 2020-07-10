@@ -18,10 +18,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets all the user settings for a specified user name. Works on any user.
+-- /This action is no longer supported./ You can use it to configure only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either type of MFA, use the 'AdminSetUserMFAPreference' action instead.
 --
---
--- Requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminSetUserSettings
     (
@@ -47,48 +45,47 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the request to set user settings as an administrator.
+-- | You can use this parameter to set an MFA configuration that uses the SMS delivery medium.
 --
 --
 --
 -- /See:/ 'adminSetUserSettings' smart constructor.
-data AdminSetUserSettings = AdminSetUserSettings'
-  { _asusUserPoolId :: !Text
-  , _asusUsername   :: !(Sensitive Text)
-  , _asusMFAOptions :: ![MFAOptionType]
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminSetUserSettings = AdminSetUserSettings'{_asusUserPoolId
+                                                  :: !Text,
+                                                  _asusUsername ::
+                                                  !(Sensitive Text),
+                                                  _asusMFAOptions ::
+                                                  ![MFAOptionType]}
+                              deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminSetUserSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asusUserPoolId' - The user pool ID for the user pool where you want to set the user's settings, such as MFA options.
+-- * 'asusUserPoolId' - The ID of the user pool that contains the user that you are setting options for.
 --
--- * 'asusUsername' - The user name of the user for whom you wish to set user settings.
+-- * 'asusUsername' - The user name of the user that you are setting options for.
 --
--- * 'asusMFAOptions' - Specifies the options for MFA (e.g., email or phone number).
+-- * 'asusMFAOptions' - You can use this parameter only to set an SMS configuration that uses SMS for delivery.
 adminSetUserSettings
     :: Text -- ^ 'asusUserPoolId'
     -> Text -- ^ 'asusUsername'
     -> AdminSetUserSettings
-adminSetUserSettings pUserPoolId_ pUsername_ =
-  AdminSetUserSettings'
-    { _asusUserPoolId = pUserPoolId_
-    , _asusUsername = _Sensitive # pUsername_
-    , _asusMFAOptions = mempty
-    }
+adminSetUserSettings pUserPoolId_ pUsername_
+  = AdminSetUserSettings'{_asusUserPoolId =
+                            pUserPoolId_,
+                          _asusUsername = _Sensitive # pUsername_,
+                          _asusMFAOptions = mempty}
 
-
--- | The user pool ID for the user pool where you want to set the user's settings, such as MFA options.
+-- | The ID of the user pool that contains the user that you are setting options for.
 asusUserPoolId :: Lens' AdminSetUserSettings Text
 asusUserPoolId = lens _asusUserPoolId (\ s a -> s{_asusUserPoolId = a})
 
--- | The user name of the user for whom you wish to set user settings.
+-- | The user name of the user that you are setting options for.
 asusUsername :: Lens' AdminSetUserSettings Text
 asusUsername = lens _asusUsername (\ s a -> s{_asusUsername = a}) . _Sensitive
 
--- | Specifies the options for MFA (e.g., email or phone number).
+-- | You can use this parameter only to set an SMS configuration that uses SMS for delivery.
 asusMFAOptions :: Lens' AdminSetUserSettings [MFAOptionType]
 asusMFAOptions = lens _asusMFAOptions (\ s a -> s{_asusMFAOptions = a}) . _Coerce
 
@@ -135,10 +132,10 @@ instance ToQuery AdminSetUserSettings where
 --
 --
 -- /See:/ 'adminSetUserSettingsResponse' smart constructor.
-newtype AdminSetUserSettingsResponse = AdminSetUserSettingsResponse'
-  { _asusrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AdminSetUserSettingsResponse = AdminSetUserSettingsResponse'{_asusrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'AdminSetUserSettingsResponse' with the minimum fields required to make a request.
 --
@@ -148,9 +145,9 @@ newtype AdminSetUserSettingsResponse = AdminSetUserSettingsResponse'
 adminSetUserSettingsResponse
     :: Int -- ^ 'asusrsResponseStatus'
     -> AdminSetUserSettingsResponse
-adminSetUserSettingsResponse pResponseStatus_ =
-  AdminSetUserSettingsResponse' {_asusrsResponseStatus = pResponseStatus_}
-
+adminSetUserSettingsResponse pResponseStatus_
+  = AdminSetUserSettingsResponse'{_asusrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 asusrsResponseStatus :: Lens' AdminSetUserSettingsResponse Int

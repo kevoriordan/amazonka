@@ -21,7 +21,7 @@
 -- Creates a new cache security group. Use a cache security group to control access to one or more clusters.
 --
 --
--- Cache security groups are only used when you are creating a cluster outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating a cluster inside of a VPC, use a cache subnet group instead. For more information, see <http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html CreateCacheSubnetGroup> .
+-- Cache security groups are only used when you are creating a cluster outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating a cluster inside of a VPC, use a cache subnet group instead. For more information, see <https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html CreateCacheSubnetGroup> .
 --
 module Network.AWS.ElastiCache.CreateCacheSecurityGroup
     (
@@ -52,31 +52,31 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createCacheSecurityGroup' smart constructor.
-data CreateCacheSecurityGroup = CreateCacheSecurityGroup'
-  { _ccsgCacheSecurityGroupName :: !Text
-  , _ccsgDescription            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCacheSecurityGroup = CreateCacheSecurityGroup'{_ccsgCacheSecurityGroupName
+                                                          :: !Text,
+                                                          _ccsgDescription ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateCacheSecurityGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccsgCacheSecurityGroupName' - A name for the cache security group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters. Cannot be the word "Default". Example: @mysecuritygroup@
+-- * 'ccsgCacheSecurityGroupName' - A name for the cache security group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters. Cannot be the word "Default". Example: @mysecuritygroup@ 
 --
 -- * 'ccsgDescription' - A description for the cache security group.
 createCacheSecurityGroup
     :: Text -- ^ 'ccsgCacheSecurityGroupName'
     -> Text -- ^ 'ccsgDescription'
     -> CreateCacheSecurityGroup
-createCacheSecurityGroup pCacheSecurityGroupName_ pDescription_ =
-  CreateCacheSecurityGroup'
-    { _ccsgCacheSecurityGroupName = pCacheSecurityGroupName_
-    , _ccsgDescription = pDescription_
-    }
+createCacheSecurityGroup pCacheSecurityGroupName_
+  pDescription_
+  = CreateCacheSecurityGroup'{_ccsgCacheSecurityGroupName
+                                = pCacheSecurityGroupName_,
+                              _ccsgDescription = pDescription_}
 
-
--- | A name for the cache security group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters. Cannot be the word "Default". Example: @mysecuritygroup@
+-- | A name for the cache security group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters. Cannot be the word "Default". Example: @mysecuritygroup@ 
 ccsgCacheSecurityGroupName :: Lens' CreateCacheSecurityGroup Text
 ccsgCacheSecurityGroupName = lens _ccsgCacheSecurityGroupName (\ s a -> s{_ccsgCacheSecurityGroupName = a})
 
@@ -115,11 +115,15 @@ instance ToQuery CreateCacheSecurityGroup where
                "Description" =: _ccsgDescription]
 
 -- | /See:/ 'createCacheSecurityGroupResponse' smart constructor.
-data CreateCacheSecurityGroupResponse = CreateCacheSecurityGroupResponse'
-  { _ccsgrsCacheSecurityGroup :: !(Maybe CacheSecurityGroup)
-  , _ccsgrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCacheSecurityGroupResponse = CreateCacheSecurityGroupResponse'{_ccsgrsCacheSecurityGroup
+                                                                          ::
+                                                                          !(Maybe
+                                                                              CacheSecurityGroup),
+                                                                          _ccsgrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'CreateCacheSecurityGroupResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +135,10 @@ data CreateCacheSecurityGroupResponse = CreateCacheSecurityGroupResponse'
 createCacheSecurityGroupResponse
     :: Int -- ^ 'ccsgrsResponseStatus'
     -> CreateCacheSecurityGroupResponse
-createCacheSecurityGroupResponse pResponseStatus_ =
-  CreateCacheSecurityGroupResponse'
-    { _ccsgrsCacheSecurityGroup = Nothing
-    , _ccsgrsResponseStatus = pResponseStatus_
-    }
-
+createCacheSecurityGroupResponse pResponseStatus_
+  = CreateCacheSecurityGroupResponse'{_ccsgrsCacheSecurityGroup
+                                        = Nothing,
+                                      _ccsgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ccsgrsCacheSecurityGroup :: Lens' CreateCacheSecurityGroupResponse (Maybe CacheSecurityGroup)

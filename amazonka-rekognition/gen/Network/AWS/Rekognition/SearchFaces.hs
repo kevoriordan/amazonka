@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- For a given input face ID, searches for matching faces in the collection the face belongs to. You get a face ID when you add a face to the collection using the 'IndexFaces' operation. The operation compares the features of the input face with faces in the specified collection.
+-- For a given input face ID, searches for matching faces in the collection the face belongs to. You get a face ID when you add a face to the collection using the 'IndexFaces' operation. The operation compares the features of the input face with faces in the specified collection. 
 --
 --
--- The operation response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match that is found. Along with the metadata, the response also includes a @confidence@ value for each face match, indicating the confidence that the specific face matches the input face.
+-- The operation response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match that is found. Along with the metadata, the response also includes a @confidence@ value for each face match, indicating the confidence that the specific face matches the input face. 
 --
--- For an example, see 'search-face-with-id-procedure' .
+-- For an example, see Searching for a Face Using Its Face ID in the Amazon Rekognition Developer Guide.
 --
 -- This operation requires permissions to perform the @rekognition:SearchFaces@ action.
 --
@@ -56,19 +56,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'searchFaces' smart constructor.
-data SearchFaces = SearchFaces'
-  { _sfFaceMatchThreshold :: !(Maybe Double)
-  , _sfMaxFaces           :: !(Maybe Nat)
-  , _sfCollectionId       :: !Text
-  , _sfFaceId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchFaces = SearchFaces'{_sfFaceMatchThreshold
+                                :: !(Maybe Double),
+                                _sfMaxFaces :: !(Maybe Nat),
+                                _sfCollectionId :: !Text, _sfFaceId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchFaces' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sfFaceMatchThreshold' - Optional value specifying the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.
+-- * 'sfFaceMatchThreshold' - Optional value specifying the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%. The default value is 80%. 
 --
 -- * 'sfMaxFaces' - Maximum number of faces to return. The operation returns the maximum number of faces with the highest confidence in the match.
 --
@@ -79,16 +77,13 @@ searchFaces
     :: Text -- ^ 'sfCollectionId'
     -> Text -- ^ 'sfFaceId'
     -> SearchFaces
-searchFaces pCollectionId_ pFaceId_ =
-  SearchFaces'
-    { _sfFaceMatchThreshold = Nothing
-    , _sfMaxFaces = Nothing
-    , _sfCollectionId = pCollectionId_
-    , _sfFaceId = pFaceId_
-    }
+searchFaces pCollectionId_ pFaceId_
+  = SearchFaces'{_sfFaceMatchThreshold = Nothing,
+                 _sfMaxFaces = Nothing,
+                 _sfCollectionId = pCollectionId_,
+                 _sfFaceId = pFaceId_}
 
-
--- | Optional value specifying the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%.
+-- | Optional value specifying the minimum confidence in the face match to return. For example, don't return any matches where confidence in matches is less than 70%. The default value is 80%. 
 sfFaceMatchThreshold :: Lens' SearchFaces (Maybe Double)
 sfFaceMatchThreshold = lens _sfFaceMatchThreshold (\ s a -> s{_sfFaceMatchThreshold = a})
 
@@ -145,13 +140,14 @@ instance ToQuery SearchFaces where
         toQuery = const mempty
 
 -- | /See:/ 'searchFacesResponse' smart constructor.
-data SearchFacesResponse = SearchFacesResponse'
-  { _sfrsFaceMatches      :: !(Maybe [FaceMatch])
-  , _sfrsFaceModelVersion :: !(Maybe Text)
-  , _sfrsSearchedFaceId   :: !(Maybe Text)
-  , _sfrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchFacesResponse = SearchFacesResponse'{_sfrsFaceMatches
+                                                :: !(Maybe [FaceMatch]),
+                                                _sfrsFaceModelVersion ::
+                                                !(Maybe Text),
+                                                _sfrsSearchedFaceId ::
+                                                !(Maybe Text),
+                                                _sfrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchFacesResponse' with the minimum fields required to make a request.
 --
@@ -167,14 +163,11 @@ data SearchFacesResponse = SearchFacesResponse'
 searchFacesResponse
     :: Int -- ^ 'sfrsResponseStatus'
     -> SearchFacesResponse
-searchFacesResponse pResponseStatus_ =
-  SearchFacesResponse'
-    { _sfrsFaceMatches = Nothing
-    , _sfrsFaceModelVersion = Nothing
-    , _sfrsSearchedFaceId = Nothing
-    , _sfrsResponseStatus = pResponseStatus_
-    }
-
+searchFacesResponse pResponseStatus_
+  = SearchFacesResponse'{_sfrsFaceMatches = Nothing,
+                         _sfrsFaceModelVersion = Nothing,
+                         _sfrsSearchedFaceId = Nothing,
+                         _sfrsResponseStatus = pResponseStatus_}
 
 -- | An array of faces that matched the input face, along with the confidence in the match.
 sfrsFaceMatches :: Lens' SearchFacesResponse [FaceMatch]

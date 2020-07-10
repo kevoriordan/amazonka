@@ -20,6 +20,8 @@
 --
 -- Lists detectorIds of all the existing Amazon GuardDuty detector resources.
 --
+--
+--
 -- This operation returns paginated results.
 module Network.AWS.GuardDuty.ListDetectors
     (
@@ -35,8 +37,8 @@ module Network.AWS.GuardDuty.ListDetectors
     , ListDetectorsResponse
     -- * Response Lenses
     , ldrsNextToken
-    , ldrsDetectorIds
     , ldrsResponseStatus
+    , ldrsDetectorIds
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -48,29 +50,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDetectors' smart constructor.
-data ListDetectors = ListDetectors'
-  { _ldNextToken  :: !(Maybe Text)
-  , _ldMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDetectors = ListDetectors'{_ldNextToken ::
+                                    !(Maybe Text),
+                                    _ldMaxResults :: !(Maybe Nat)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDetectors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldNextToken' - You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListDetectors action. For subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+-- * 'ldNextToken' - You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
 --
--- * 'ldMaxResults' - You can use this parameter to indicate the maximum number of detectors that you want in the response.
+-- * 'ldMaxResults' - You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
 listDetectors
     :: ListDetectors
-listDetectors = ListDetectors' {_ldNextToken = Nothing, _ldMaxResults = Nothing}
+listDetectors
+  = ListDetectors'{_ldNextToken = Nothing,
+                   _ldMaxResults = Nothing}
 
-
--- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListDetectors action. For subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+-- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
 ldNextToken :: Lens' ListDetectors (Maybe Text)
 ldNextToken = lens _ldNextToken (\ s a -> s{_ldNextToken = a})
 
--- | You can use this parameter to indicate the maximum number of detectors that you want in the response.
+-- | You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
 ldMaxResults :: Lens' ListDetectors (Maybe Natural)
 ldMaxResults = lens _ldMaxResults (\ s a -> s{_ldMaxResults = a}) . mapping _Nat
 
@@ -88,9 +90,8 @@ instance AWSRequest ListDetectors where
           = receiveJSON
               (\ s h x ->
                  ListDetectorsResponse' <$>
-                   (x .?> "nextToken") <*>
-                     (x .?> "detectorIds" .!@ mempty)
-                     <*> (pure (fromEnum s)))
+                   (x .?> "nextToken") <*> (pure (fromEnum s)) <*>
+                     (x .?> "detectorIds" .!@ mempty))
 
 instance Hashable ListDetectors where
 
@@ -113,43 +114,40 @@ instance ToQuery ListDetectors where
                "maxResults" =: _ldMaxResults]
 
 -- | /See:/ 'listDetectorsResponse' smart constructor.
-data ListDetectorsResponse = ListDetectorsResponse'
-  { _ldrsNextToken      :: !(Maybe Text)
-  , _ldrsDetectorIds    :: !(Maybe [Text])
-  , _ldrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDetectorsResponse = ListDetectorsResponse'{_ldrsNextToken
+                                                    :: !(Maybe Text),
+                                                    _ldrsResponseStatus :: !Int,
+                                                    _ldrsDetectorIds :: ![Text]}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListDetectorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldrsNextToken' - Undocumented member.
---
--- * 'ldrsDetectorIds' - Undocumented member.
+-- * 'ldrsNextToken' - The pagination parameter to be used on the next list operation to retrieve more items.
 --
 -- * 'ldrsResponseStatus' - -- | The response status code.
+--
+-- * 'ldrsDetectorIds' - A list of detector IDs.
 listDetectorsResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDetectorsResponse
-listDetectorsResponse pResponseStatus_ =
-  ListDetectorsResponse'
-    { _ldrsNextToken = Nothing
-    , _ldrsDetectorIds = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    }
+listDetectorsResponse pResponseStatus_
+  = ListDetectorsResponse'{_ldrsNextToken = Nothing,
+                           _ldrsResponseStatus = pResponseStatus_,
+                           _ldrsDetectorIds = mempty}
 
-
--- | Undocumented member.
+-- | The pagination parameter to be used on the next list operation to retrieve more items.
 ldrsNextToken :: Lens' ListDetectorsResponse (Maybe Text)
 ldrsNextToken = lens _ldrsNextToken (\ s a -> s{_ldrsNextToken = a})
-
--- | Undocumented member.
-ldrsDetectorIds :: Lens' ListDetectorsResponse [Text]
-ldrsDetectorIds = lens _ldrsDetectorIds (\ s a -> s{_ldrsDetectorIds = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
 ldrsResponseStatus :: Lens' ListDetectorsResponse Int
 ldrsResponseStatus = lens _ldrsResponseStatus (\ s a -> s{_ldrsResponseStatus = a})
+
+-- | A list of detector IDs.
+ldrsDetectorIds :: Lens' ListDetectorsResponse [Text]
+ldrsDetectorIds = lens _ldrsDetectorIds (\ s a -> s{_ldrsDetectorIds = a}) . _Coerce
 
 instance NFData ListDetectorsResponse where

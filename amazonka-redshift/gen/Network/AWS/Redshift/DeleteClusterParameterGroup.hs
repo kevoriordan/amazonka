@@ -41,15 +41,15 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteClusterParameterGroup' smart constructor.
-newtype DeleteClusterParameterGroup = DeleteClusterParameterGroup'
-  { _dParameterGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteClusterParameterGroup = DeleteClusterParameterGroup'{_dParameterGroupName
+                                                                   :: Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteClusterParameterGroup' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DeleteClusterParameterGroup = DeleteClusterParameterGroup'
 deleteClusterParameterGroup
     :: Text -- ^ 'dParameterGroupName'
     -> DeleteClusterParameterGroup
-deleteClusterParameterGroup pParameterGroupName_ =
-  DeleteClusterParameterGroup' {_dParameterGroupName = pParameterGroupName_}
-
+deleteClusterParameterGroup pParameterGroupName_
+  = DeleteClusterParameterGroup'{_dParameterGroupName =
+                                   pParameterGroupName_}
 
 -- | The name of the parameter group to be deleted. Constraints:     * Must be the name of an existing cluster parameter group.     * Cannot delete a default cluster parameter group.
 dParameterGroupName :: Lens' DeleteClusterParameterGroup Text
@@ -93,17 +93,16 @@ instance ToQuery DeleteClusterParameterGroup where
                "ParameterGroupName" =: _dParameterGroupName]
 
 -- | /See:/ 'deleteClusterParameterGroupResponse' smart constructor.
-data DeleteClusterParameterGroupResponse =
-  DeleteClusterParameterGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteClusterParameterGroupResponse = DeleteClusterParameterGroupResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteClusterParameterGroupResponse' with the minimum fields required to make a request.
 --
 deleteClusterParameterGroupResponse
     :: DeleteClusterParameterGroupResponse
-deleteClusterParameterGroupResponse = DeleteClusterParameterGroupResponse'
-
+deleteClusterParameterGroupResponse
+  = DeleteClusterParameterGroupResponse'
 
 instance NFData DeleteClusterParameterGroupResponse
          where

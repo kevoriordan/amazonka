@@ -55,13 +55,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateCreatedArtifact' smart constructor.
-data AssociateCreatedArtifact = AssociateCreatedArtifact'
-  { _acaDryRun               :: !(Maybe Bool)
-  , _acaProgressUpdateStream :: !Text
-  , _acaMigrationTaskName    :: !Text
-  , _acaCreatedArtifact      :: !CreatedArtifact
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateCreatedArtifact = AssociateCreatedArtifact'{_acaDryRun
+                                                          :: !(Maybe Bool),
+                                                          _acaProgressUpdateStream
+                                                          :: !Text,
+                                                          _acaMigrationTaskName
+                                                          :: !Text,
+                                                          _acaCreatedArtifact ::
+                                                          !CreatedArtifact}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'AssociateCreatedArtifact' with the minimum fields required to make a request.
 --
@@ -69,38 +72,36 @@ data AssociateCreatedArtifact = AssociateCreatedArtifact'
 --
 -- * 'acaDryRun' - Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
 --
--- * 'acaProgressUpdateStream' - The name of the ProgressUpdateStream.
+-- * 'acaProgressUpdateStream' - The name of the ProgressUpdateStream. 
 --
--- * 'acaMigrationTaskName' - Unique identifier that references the migration task.
+-- * 'acaMigrationTaskName' - Unique identifier that references the migration task. /Do not store personal data in this field./ 
 --
--- * 'acaCreatedArtifact' - An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.)
+-- * 'acaCreatedArtifact' - An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.) 
 associateCreatedArtifact
     :: Text -- ^ 'acaProgressUpdateStream'
     -> Text -- ^ 'acaMigrationTaskName'
     -> CreatedArtifact -- ^ 'acaCreatedArtifact'
     -> AssociateCreatedArtifact
-associateCreatedArtifact pProgressUpdateStream_ pMigrationTaskName_ pCreatedArtifact_ =
-  AssociateCreatedArtifact'
-    { _acaDryRun = Nothing
-    , _acaProgressUpdateStream = pProgressUpdateStream_
-    , _acaMigrationTaskName = pMigrationTaskName_
-    , _acaCreatedArtifact = pCreatedArtifact_
-    }
-
+associateCreatedArtifact pProgressUpdateStream_
+  pMigrationTaskName_ pCreatedArtifact_
+  = AssociateCreatedArtifact'{_acaDryRun = Nothing,
+                              _acaProgressUpdateStream = pProgressUpdateStream_,
+                              _acaMigrationTaskName = pMigrationTaskName_,
+                              _acaCreatedArtifact = pCreatedArtifact_}
 
 -- | Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
 acaDryRun :: Lens' AssociateCreatedArtifact (Maybe Bool)
 acaDryRun = lens _acaDryRun (\ s a -> s{_acaDryRun = a})
 
--- | The name of the ProgressUpdateStream.
+-- | The name of the ProgressUpdateStream. 
 acaProgressUpdateStream :: Lens' AssociateCreatedArtifact Text
 acaProgressUpdateStream = lens _acaProgressUpdateStream (\ s a -> s{_acaProgressUpdateStream = a})
 
--- | Unique identifier that references the migration task.
+-- | Unique identifier that references the migration task. /Do not store personal data in this field./ 
 acaMigrationTaskName :: Lens' AssociateCreatedArtifact Text
 acaMigrationTaskName = lens _acaMigrationTaskName (\ s a -> s{_acaMigrationTaskName = a})
 
--- | An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.)
+-- | An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.) 
 acaCreatedArtifact :: Lens' AssociateCreatedArtifact CreatedArtifact
 acaCreatedArtifact = lens _acaCreatedArtifact (\ s a -> s{_acaCreatedArtifact = a})
 
@@ -145,10 +146,11 @@ instance ToQuery AssociateCreatedArtifact where
         toQuery = const mempty
 
 -- | /See:/ 'associateCreatedArtifactResponse' smart constructor.
-newtype AssociateCreatedArtifactResponse = AssociateCreatedArtifactResponse'
-  { _acarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateCreatedArtifactResponse = AssociateCreatedArtifactResponse'{_acarsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'AssociateCreatedArtifactResponse' with the minimum fields required to make a request.
 --
@@ -158,9 +160,9 @@ newtype AssociateCreatedArtifactResponse = AssociateCreatedArtifactResponse'
 associateCreatedArtifactResponse
     :: Int -- ^ 'acarsResponseStatus'
     -> AssociateCreatedArtifactResponse
-associateCreatedArtifactResponse pResponseStatus_ =
-  AssociateCreatedArtifactResponse' {_acarsResponseStatus = pResponseStatus_}
-
+associateCreatedArtifactResponse pResponseStatus_
+  = AssociateCreatedArtifactResponse'{_acarsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 acarsResponseStatus :: Lens' AssociateCreatedArtifactResponse Int

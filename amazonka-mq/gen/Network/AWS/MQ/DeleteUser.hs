@@ -43,11 +43,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteUser' smart constructor.
-data DeleteUser = DeleteUser'
-  { _dUsername :: !Text
-  , _dBrokerId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUser = DeleteUser'{_dUsername :: !Text,
+                              _dBrokerId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUser' with the minimum fields required to make a request.
 --
@@ -60,9 +58,9 @@ deleteUser
     :: Text -- ^ 'dUsername'
     -> Text -- ^ 'dBrokerId'
     -> DeleteUser
-deleteUser pUsername_ pBrokerId_ =
-  DeleteUser' {_dUsername = pUsername_, _dBrokerId = pBrokerId_}
-
+deleteUser pUsername_ pBrokerId_
+  = DeleteUser'{_dUsername = pUsername_,
+                _dBrokerId = pBrokerId_}
 
 -- | The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
 dUsername :: Lens' DeleteUser Text
@@ -101,10 +99,10 @@ instance ToQuery DeleteUser where
         toQuery = const mempty
 
 -- | /See:/ 'deleteUserResponse' smart constructor.
-newtype DeleteUserResponse = DeleteUserResponse'
-  { _delrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteUserResponse = DeleteUserResponse'{_delrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteUserResponse' with the minimum fields required to make a request.
 --
@@ -114,9 +112,9 @@ newtype DeleteUserResponse = DeleteUserResponse'
 deleteUserResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteUserResponse
-deleteUserResponse pResponseStatus_ =
-  DeleteUserResponse' {_delrsResponseStatus = pResponseStatus_}
-
+deleteUserResponse pResponseStatus_
+  = DeleteUserResponse'{_delrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 delrsResponseStatus :: Lens' DeleteUserResponse Int

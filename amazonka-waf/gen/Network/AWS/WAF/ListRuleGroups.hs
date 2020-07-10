@@ -21,6 +21,8 @@
 -- Returns an array of 'RuleGroup' objects.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WAF.ListRuleGroups
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.WAF.ListRuleGroups
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -47,11 +50,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'listRuleGroups' smart constructor.
-data ListRuleGroups = ListRuleGroups'
-  { _lrgNextMarker :: !(Maybe Text)
-  , _lrgLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRuleGroups = ListRuleGroups'{_lrgNextMarker
+                                      :: !(Maybe Text),
+                                      _lrgLimit :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRuleGroups' with the minimum fields required to make a request.
 --
@@ -62,8 +64,9 @@ data ListRuleGroups = ListRuleGroups'
 -- * 'lrgLimit' - Specifies the number of @RuleGroups@ that you want AWS WAF to return for this request. If you have more @RuleGroups@ than the number that you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @RuleGroups@ .
 listRuleGroups
     :: ListRuleGroups
-listRuleGroups = ListRuleGroups' {_lrgNextMarker = Nothing, _lrgLimit = Nothing}
-
+listRuleGroups
+  = ListRuleGroups'{_lrgNextMarker = Nothing,
+                    _lrgLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @RuleGroups@ than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @RuleGroups@ . For the second and subsequent @ListRuleGroups@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @RuleGroups@ .
 lrgNextMarker :: Lens' ListRuleGroups (Maybe Text)
@@ -72,6 +75,13 @@ lrgNextMarker = lens _lrgNextMarker (\ s a -> s{_lrgNextMarker = a})
 -- | Specifies the number of @RuleGroups@ that you want AWS WAF to return for this request. If you have more @RuleGroups@ than the number that you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @RuleGroups@ .
 lrgLimit :: Lens' ListRuleGroups (Maybe Natural)
 lrgLimit = lens _lrgLimit (\ s a -> s{_lrgLimit = a}) . mapping _Nat
+
+instance AWSPager ListRuleGroups where
+        page rq rs
+          | stop (rs ^. lrgrsNextMarker) = Nothing
+          | stop (rs ^. lrgrsRuleGroups) = Nothing
+          | otherwise =
+            Just $ rq & lrgNextMarker .~ rs ^. lrgrsNextMarker
 
 instance AWSRequest ListRuleGroups where
         type Rs ListRuleGroups = ListRuleGroupsResponse
@@ -111,12 +121,16 @@ instance ToQuery ListRuleGroups where
         toQuery = const mempty
 
 -- | /See:/ 'listRuleGroupsResponse' smart constructor.
-data ListRuleGroupsResponse = ListRuleGroupsResponse'
-  { _lrgrsRuleGroups     :: !(Maybe [RuleGroupSummary])
-  , _lrgrsNextMarker     :: !(Maybe Text)
-  , _lrgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRuleGroupsResponse = ListRuleGroupsResponse'{_lrgrsRuleGroups
+                                                      ::
+                                                      !(Maybe
+                                                          [RuleGroupSummary]),
+                                                      _lrgrsNextMarker ::
+                                                      !(Maybe Text),
+                                                      _lrgrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListRuleGroupsResponse' with the minimum fields required to make a request.
 --
@@ -130,13 +144,10 @@ data ListRuleGroupsResponse = ListRuleGroupsResponse'
 listRuleGroupsResponse
     :: Int -- ^ 'lrgrsResponseStatus'
     -> ListRuleGroupsResponse
-listRuleGroupsResponse pResponseStatus_ =
-  ListRuleGroupsResponse'
-    { _lrgrsRuleGroups = Nothing
-    , _lrgrsNextMarker = Nothing
-    , _lrgrsResponseStatus = pResponseStatus_
-    }
-
+listRuleGroupsResponse pResponseStatus_
+  = ListRuleGroupsResponse'{_lrgrsRuleGroups = Nothing,
+                            _lrgrsNextMarker = Nothing,
+                            _lrgrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'RuleGroup' objects.
 lrgrsRuleGroups :: Lens' ListRuleGroupsResponse [RuleGroupSummary]

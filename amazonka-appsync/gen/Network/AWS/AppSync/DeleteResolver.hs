@@ -46,12 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteResolver' smart constructor.
-data DeleteResolver = DeleteResolver'
-  { _drApiId     :: !Text
-  , _drTypeName  :: !Text
-  , _drFieldName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteResolver = DeleteResolver'{_drApiId ::
+                                      !Text,
+                                      _drTypeName :: !Text,
+                                      _drFieldName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteResolver' with the minimum fields required to make a request.
 --
@@ -67,10 +66,9 @@ deleteResolver
     -> Text -- ^ 'drTypeName'
     -> Text -- ^ 'drFieldName'
     -> DeleteResolver
-deleteResolver pApiId_ pTypeName_ pFieldName_ =
-  DeleteResolver'
-    {_drApiId = pApiId_, _drTypeName = pTypeName_, _drFieldName = pFieldName_}
-
+deleteResolver pApiId_ pTypeName_ pFieldName_
+  = DeleteResolver'{_drApiId = pApiId_,
+                    _drTypeName = pTypeName_, _drFieldName = pFieldName_}
 
 -- | The API ID.
 drApiId :: Lens' DeleteResolver Text
@@ -113,10 +111,10 @@ instance ToQuery DeleteResolver where
         toQuery = const mempty
 
 -- | /See:/ 'deleteResolverResponse' smart constructor.
-newtype DeleteResolverResponse = DeleteResolverResponse'
-  { _drrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteResolverResponse = DeleteResolverResponse'{_drrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteResolverResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +124,9 @@ newtype DeleteResolverResponse = DeleteResolverResponse'
 deleteResolverResponse
     :: Int -- ^ 'drrsResponseStatus'
     -> DeleteResolverResponse
-deleteResolverResponse pResponseStatus_ =
-  DeleteResolverResponse' {_drrsResponseStatus = pResponseStatus_}
-
+deleteResolverResponse pResponseStatus_
+  = DeleteResolverResponse'{_drrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 drrsResponseStatus :: Lens' DeleteResolverResponse Int

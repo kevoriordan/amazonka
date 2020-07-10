@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops a DB instance. When you stop a DB instance, Amazon RDS retains the DB instance's metadata, including its endpoint, DB parameter group, and option group membership. Amazon RDS also retains the transaction logs so you can do a point-in-time restore if necessary. For more information, see Stopping and Starting a DB instance in the AWS RDS user guide.
+-- Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon RDS retains the DB instance's metadata, including its endpoint, DB parameter group, and option group membership. Amazon RDS also retains the transaction logs so you can do a point-in-time restore if necessary. 
 --
+--
+-- For more information, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html Stopping an Amazon RDS DB Instance Temporarily> in the /Amazon RDS User Guide./ 
 --
 module Network.AWS.RDS.StopDBInstance
     (
@@ -46,34 +48,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopDBInstance' smart constructor.
-data StopDBInstance = StopDBInstance'
-  { _sdiDBSnapshotIdentifier :: !(Maybe Text)
-  , _sdiDBInstanceIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopDBInstance = StopDBInstance'{_sdiDBSnapshotIdentifier
+                                      :: !(Maybe Text),
+                                      _sdiDBInstanceIdentifier :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopDBInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdiDBSnapshotIdentifier' - The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped.
+-- * 'sdiDBSnapshotIdentifier' - The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped. 
 --
--- * 'sdiDBInstanceIdentifier' - The user-supplied instance identifier.
+-- * 'sdiDBInstanceIdentifier' - The user-supplied instance identifier. 
 stopDBInstance
     :: Text -- ^ 'sdiDBInstanceIdentifier'
     -> StopDBInstance
-stopDBInstance pDBInstanceIdentifier_ =
-  StopDBInstance'
-    { _sdiDBSnapshotIdentifier = Nothing
-    , _sdiDBInstanceIdentifier = pDBInstanceIdentifier_
-    }
+stopDBInstance pDBInstanceIdentifier_
+  = StopDBInstance'{_sdiDBSnapshotIdentifier = Nothing,
+                    _sdiDBInstanceIdentifier = pDBInstanceIdentifier_}
 
-
--- | The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped.
+-- | The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped. 
 sdiDBSnapshotIdentifier :: Lens' StopDBInstance (Maybe Text)
 sdiDBSnapshotIdentifier = lens _sdiDBSnapshotIdentifier (\ s a -> s{_sdiDBSnapshotIdentifier = a})
 
--- | The user-supplied instance identifier.
+-- | The user-supplied instance identifier. 
 sdiDBInstanceIdentifier :: Lens' StopDBInstance Text
 sdiDBInstanceIdentifier = lens _sdiDBInstanceIdentifier (\ s a -> s{_sdiDBInstanceIdentifier = a})
 
@@ -105,11 +103,12 @@ instance ToQuery StopDBInstance where
                "DBInstanceIdentifier" =: _sdiDBInstanceIdentifier]
 
 -- | /See:/ 'stopDBInstanceResponse' smart constructor.
-data StopDBInstanceResponse = StopDBInstanceResponse'
-  { _sdirsDBInstance     :: !(Maybe DBInstance)
-  , _sdirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopDBInstanceResponse = StopDBInstanceResponse'{_sdirsDBInstance
+                                                      :: !(Maybe DBInstance),
+                                                      _sdirsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StopDBInstanceResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +120,9 @@ data StopDBInstanceResponse = StopDBInstanceResponse'
 stopDBInstanceResponse
     :: Int -- ^ 'sdirsResponseStatus'
     -> StopDBInstanceResponse
-stopDBInstanceResponse pResponseStatus_ =
-  StopDBInstanceResponse'
-    {_sdirsDBInstance = Nothing, _sdirsResponseStatus = pResponseStatus_}
-
+stopDBInstanceResponse pResponseStatus_
+  = StopDBInstanceResponse'{_sdirsDBInstance = Nothing,
+                            _sdirsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 sdirsDBInstance :: Lens' StopDBInstanceResponse (Maybe DBInstance)

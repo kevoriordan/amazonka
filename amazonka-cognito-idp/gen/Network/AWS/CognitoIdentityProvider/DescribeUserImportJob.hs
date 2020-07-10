@@ -50,11 +50,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeUserImportJob' smart constructor.
-data DescribeUserImportJob = DescribeUserImportJob'
-  { _duijUserPoolId :: !Text
-  , _duijJobId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUserImportJob = DescribeUserImportJob'{_duijUserPoolId
+                                                    :: !Text,
+                                                    _duijJobId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeUserImportJob' with the minimum fields required to make a request.
 --
@@ -67,9 +67,10 @@ describeUserImportJob
     :: Text -- ^ 'duijUserPoolId'
     -> Text -- ^ 'duijJobId'
     -> DescribeUserImportJob
-describeUserImportJob pUserPoolId_ pJobId_ =
-  DescribeUserImportJob' {_duijUserPoolId = pUserPoolId_, _duijJobId = pJobId_}
-
+describeUserImportJob pUserPoolId_ pJobId_
+  = DescribeUserImportJob'{_duijUserPoolId =
+                             pUserPoolId_,
+                           _duijJobId = pJobId_}
 
 -- | The user pool ID for the user pool that the users are being imported into.
 duijUserPoolId :: Lens' DescribeUserImportJob Text
@@ -121,11 +122,14 @@ instance ToQuery DescribeUserImportJob where
 --
 --
 -- /See:/ 'describeUserImportJobResponse' smart constructor.
-data DescribeUserImportJobResponse = DescribeUserImportJobResponse'
-  { _duijrsUserImportJob  :: !(Maybe UserImportJobType)
-  , _duijrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUserImportJobResponse = DescribeUserImportJobResponse'{_duijrsUserImportJob
+                                                                    ::
+                                                                    !(Maybe
+                                                                        UserImportJobType),
+                                                                    _duijrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeUserImportJobResponse' with the minimum fields required to make a request.
 --
@@ -137,10 +141,10 @@ data DescribeUserImportJobResponse = DescribeUserImportJobResponse'
 describeUserImportJobResponse
     :: Int -- ^ 'duijrsResponseStatus'
     -> DescribeUserImportJobResponse
-describeUserImportJobResponse pResponseStatus_ =
-  DescribeUserImportJobResponse'
-    {_duijrsUserImportJob = Nothing, _duijrsResponseStatus = pResponseStatus_}
-
+describeUserImportJobResponse pResponseStatus_
+  = DescribeUserImportJobResponse'{_duijrsUserImportJob
+                                     = Nothing,
+                                   _duijrsResponseStatus = pResponseStatus_}
 
 -- | The job object that represents the user import job.
 duijrsUserImportJob :: Lens' DescribeUserImportJobResponse (Maybe UserImportJobType)

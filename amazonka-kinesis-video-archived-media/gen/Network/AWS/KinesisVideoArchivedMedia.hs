@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
---
+-- 
 --
 --
 module Network.AWS.KinesisVideoArchivedMedia
@@ -22,17 +22,32 @@ module Network.AWS.KinesisVideoArchivedMedia
     -- * Errors
     -- $errors
 
+    -- ** MissingCodecPrivateDataException
+    , _MissingCodecPrivateDataException
+
+    -- ** InvalidCodecPrivateDataException
+    , _InvalidCodecPrivateDataException
+
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
+
+    -- ** ClientLimitExceededException
+    , _ClientLimitExceededException
+
     -- ** InvalidArgumentException
     , _InvalidArgumentException
 
     -- ** NotAuthorizedException
     , _NotAuthorizedException
 
-    -- ** ClientLimitExceededException
-    , _ClientLimitExceededException
+    -- ** NoDataRetentionException
+    , _NoDataRetentionException
 
-    -- ** ResourceNotFoundException
-    , _ResourceNotFoundException
+    -- ** UnsupportedStreamMediaTypeException
+    , _UnsupportedStreamMediaTypeException
+
+    -- ** InvalidMediaFrameException
+    , _InvalidMediaFrameException
 
     -- * Waiters
     -- $waiters
@@ -40,16 +55,79 @@ module Network.AWS.KinesisVideoArchivedMedia
     -- * Operations
     -- $operations
 
-    -- ** GetMediaForFragmentList
+    -- ** GetHLSStreamingSessionURL 
+    , module Network.AWS.KinesisVideoArchivedMedia.GetHLSStreamingSessionURL
+
+    -- ** GetClip 
+    , module Network.AWS.KinesisVideoArchivedMedia.GetClip
+
+    -- ** GetMediaForFragmentList 
     , module Network.AWS.KinesisVideoArchivedMedia.GetMediaForFragmentList
 
-    -- ** ListFragments
+    -- ** ListFragments (Paginated)
     , module Network.AWS.KinesisVideoArchivedMedia.ListFragments
+
+    -- ** GetDASHStreamingSessionURL 
+    , module Network.AWS.KinesisVideoArchivedMedia.GetDASHStreamingSessionURL
 
     -- * Types
 
+    -- ** ClipFragmentSelectorType
+    , ClipFragmentSelectorType (..)
+
+    -- ** ContainerFormat
+    , ContainerFormat (..)
+
+    -- ** DASHDisplayFragmentNumber
+    , DASHDisplayFragmentNumber (..)
+
+    -- ** DASHDisplayFragmentTimestamp
+    , DASHDisplayFragmentTimestamp (..)
+
+    -- ** DASHFragmentSelectorType
+    , DASHFragmentSelectorType (..)
+
+    -- ** DASHPlaybackMode
+    , DASHPlaybackMode (..)
+
     -- ** FragmentSelectorType
     , FragmentSelectorType (..)
+
+    -- ** HLSDiscontinuityMode
+    , HLSDiscontinuityMode (..)
+
+    -- ** HLSDisplayFragmentTimestamp
+    , HLSDisplayFragmentTimestamp (..)
+
+    -- ** HLSFragmentSelectorType
+    , HLSFragmentSelectorType (..)
+
+    -- ** HLSPlaybackMode
+    , HLSPlaybackMode (..)
+
+    -- ** ClipFragmentSelector
+    , ClipFragmentSelector
+    , clipFragmentSelector
+    , cfsFragmentSelectorType
+    , cfsTimestampRange
+
+    -- ** ClipTimestampRange
+    , ClipTimestampRange
+    , clipTimestampRange
+    , ctrStartTimestamp
+    , ctrEndTimestamp
+
+    -- ** DASHFragmentSelector
+    , DASHFragmentSelector
+    , dASHFragmentSelector
+    , dashfsFragmentSelectorType
+    , dashfsTimestampRange
+
+    -- ** DASHTimestampRange
+    , DASHTimestampRange
+    , dASHTimestampRange
+    , dashtrEndTimestamp
+    , dashtrStartTimestamp
 
     -- ** Fragment
     , Fragment
@@ -66,6 +144,18 @@ module Network.AWS.KinesisVideoArchivedMedia
     , fsFragmentSelectorType
     , fsTimestampRange
 
+    -- ** HLSFragmentSelector
+    , HLSFragmentSelector
+    , hLSFragmentSelector
+    , hlsfsFragmentSelectorType
+    , hlsfsTimestampRange
+
+    -- ** HLSTimestampRange
+    , HLSTimestampRange
+    , hLSTimestampRange
+    , hlstrEndTimestamp
+    , hlstrStartTimestamp
+
     -- ** TimestampRange
     , TimestampRange
     , timestampRange
@@ -73,6 +163,9 @@ module Network.AWS.KinesisVideoArchivedMedia
     , trEndTimestamp
     ) where
 
+import Network.AWS.KinesisVideoArchivedMedia.GetClip
+import Network.AWS.KinesisVideoArchivedMedia.GetDASHStreamingSessionURL
+import Network.AWS.KinesisVideoArchivedMedia.GetHLSStreamingSessionURL
 import Network.AWS.KinesisVideoArchivedMedia.GetMediaForFragmentList
 import Network.AWS.KinesisVideoArchivedMedia.ListFragments
 import Network.AWS.KinesisVideoArchivedMedia.Types

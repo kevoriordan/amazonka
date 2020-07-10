@@ -21,7 +21,7 @@
 -- Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup.
 --
 --
--- For an overview of CIDR ranges, go to the <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing Wikipedia Tutorial> .
+-- For an overview of CIDR ranges, go to the <http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing Wikipedia Tutorial> . 
 --
 --
 -- This operation returns paginated results.
@@ -53,18 +53,21 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeDBSubnetGroups' smart constructor.
-data DescribeDBSubnetGroups = DescribeDBSubnetGroups'
-  { _ddsgDBSubnetGroupName :: !(Maybe Text)
-  , _ddsgFilters           :: !(Maybe [Filter])
-  , _ddsgMarker            :: !(Maybe Text)
-  , _ddsgMaxRecords        :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDBSubnetGroups = DescribeDBSubnetGroups'{_ddsgDBSubnetGroupName
+                                                      :: !(Maybe Text),
+                                                      _ddsgFilters ::
+                                                      !(Maybe [Filter]),
+                                                      _ddsgMarker ::
+                                                      !(Maybe Text),
+                                                      _ddsgMaxRecords ::
+                                                      !(Maybe Int)}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeDBSubnetGroups' with the minimum fields required to make a request.
 --
@@ -72,35 +75,32 @@ data DescribeDBSubnetGroups = DescribeDBSubnetGroups'
 --
 -- * 'ddsgDBSubnetGroupName' - The name of the DB subnet group to return details for.
 --
--- * 'ddsgFilters' - This parameter is not currently supported.
+-- * 'ddsgFilters' - This parameter isn't currently supported.
 --
--- * 'ddsgMarker' - An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'ddsgMarker' - An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
--- * 'ddsgMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+-- * 'ddsgMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
 describeDBSubnetGroups
     :: DescribeDBSubnetGroups
-describeDBSubnetGroups =
-  DescribeDBSubnetGroups'
-    { _ddsgDBSubnetGroupName = Nothing
-    , _ddsgFilters = Nothing
-    , _ddsgMarker = Nothing
-    , _ddsgMaxRecords = Nothing
-    }
-
+describeDBSubnetGroups
+  = DescribeDBSubnetGroups'{_ddsgDBSubnetGroupName =
+                              Nothing,
+                            _ddsgFilters = Nothing, _ddsgMarker = Nothing,
+                            _ddsgMaxRecords = Nothing}
 
 -- | The name of the DB subnet group to return details for.
 ddsgDBSubnetGroupName :: Lens' DescribeDBSubnetGroups (Maybe Text)
 ddsgDBSubnetGroupName = lens _ddsgDBSubnetGroupName (\ s a -> s{_ddsgDBSubnetGroupName = a})
 
--- | This parameter is not currently supported.
+-- | This parameter isn't currently supported.
 ddsgFilters :: Lens' DescribeDBSubnetGroups [Filter]
 ddsgFilters = lens _ddsgFilters (\ s a -> s{_ddsgFilters = a}) . _Default . _Coerce
 
--- | An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 ddsgMarker :: Lens' DescribeDBSubnetGroups (Maybe Text)
 ddsgMarker = lens _ddsgMarker (\ s a -> s{_ddsgMarker = a})
 
--- | The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+-- | The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.  Default: 100 Constraints: Minimum 20, maximum 100.
 ddsgMaxRecords :: Lens' DescribeDBSubnetGroups (Maybe Int)
 ddsgMaxRecords = lens _ddsgMaxRecords (\ s a -> s{_ddsgMaxRecords = a})
 
@@ -146,43 +146,47 @@ instance ToQuery DescribeDBSubnetGroups where
                "Marker" =: _ddsgMarker,
                "MaxRecords" =: _ddsgMaxRecords]
 
--- | Contains the result of a successful invocation of the 'DescribeDBSubnetGroups' action.
+-- | Contains the result of a successful invocation of the @DescribeDBSubnetGroups@ action. 
 --
 --
 --
 -- /See:/ 'describeDBSubnetGroupsResponse' smart constructor.
-data DescribeDBSubnetGroupsResponse = DescribeDBSubnetGroupsResponse'
-  { _ddsgrsDBSubnetGroups :: !(Maybe [DBSubnetGroup])
-  , _ddsgrsMarker         :: !(Maybe Text)
-  , _ddsgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDBSubnetGroupsResponse = DescribeDBSubnetGroupsResponse'{_ddsgrsDBSubnetGroups
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [DBSubnetGroup]),
+                                                                      _ddsgrsMarker
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _ddsgrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeDBSubnetGroupsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddsgrsDBSubnetGroups' - A list of 'DBSubnetGroup' instances.
+-- * 'ddsgrsDBSubnetGroups' - A list of @DBSubnetGroup@ instances. 
 --
--- * 'ddsgrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- * 'ddsgrsMarker' - An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 --
 -- * 'ddsgrsResponseStatus' - -- | The response status code.
 describeDBSubnetGroupsResponse
     :: Int -- ^ 'ddsgrsResponseStatus'
     -> DescribeDBSubnetGroupsResponse
-describeDBSubnetGroupsResponse pResponseStatus_ =
-  DescribeDBSubnetGroupsResponse'
-    { _ddsgrsDBSubnetGroups = Nothing
-    , _ddsgrsMarker = Nothing
-    , _ddsgrsResponseStatus = pResponseStatus_
-    }
+describeDBSubnetGroupsResponse pResponseStatus_
+  = DescribeDBSubnetGroupsResponse'{_ddsgrsDBSubnetGroups
+                                      = Nothing,
+                                    _ddsgrsMarker = Nothing,
+                                    _ddsgrsResponseStatus = pResponseStatus_}
 
-
--- | A list of 'DBSubnetGroup' instances.
+-- | A list of @DBSubnetGroup@ instances. 
 ddsgrsDBSubnetGroups :: Lens' DescribeDBSubnetGroupsResponse [DBSubnetGroup]
 ddsgrsDBSubnetGroups = lens _ddsgrsDBSubnetGroups (\ s a -> s{_ddsgrsDBSubnetGroups = a}) . _Default . _Coerce
 
--- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ .
+-- | An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by @MaxRecords@ . 
 ddsgrsMarker :: Lens' DescribeDBSubnetGroupsResponse (Maybe Text)
 ddsgrsMarker = lens _ddsgrsMarker (\ s a -> s{_ddsgrsMarker = a})
 

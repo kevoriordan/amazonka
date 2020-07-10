@@ -21,7 +21,7 @@
 -- Returns a description of the gateway volumes specified in the request. This operation is only supported in the cached volume gateway types.
 --
 --
--- The list of gateway volumes in the request must be from one gateway. In the response Amazon Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).
+-- The list of gateway volumes in the request must be from one gateway. In the response, AWS Storage Gateway returns volume information sorted by volume Amazon Resource Name (ARN).
 --
 module Network.AWS.StorageGateway.DescribeCachediSCSIVolumes
     (
@@ -47,23 +47,23 @@ import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'describeCachediSCSIVolumes' smart constructor.
-newtype DescribeCachediSCSIVolumes = DescribeCachediSCSIVolumes'
-  { _dcscsivVolumeARNs :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeCachediSCSIVolumes = DescribeCachediSCSIVolumes'{_dcscsivVolumeARNs
+                                                                 :: [Text]}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeCachediSCSIVolumes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcscsivVolumeARNs' - Undocumented member.
+-- * 'dcscsivVolumeARNs' - An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume. All of the specified cached volumes must be from the same gateway. Use 'ListVolumes' to get volume ARNs for a gateway.
 describeCachediSCSIVolumes
     :: DescribeCachediSCSIVolumes
-describeCachediSCSIVolumes =
-  DescribeCachediSCSIVolumes' {_dcscsivVolumeARNs = mempty}
+describeCachediSCSIVolumes
+  = DescribeCachediSCSIVolumes'{_dcscsivVolumeARNs =
+                                  mempty}
 
-
--- | Undocumented member.
+-- | An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume. All of the specified cached volumes must be from the same gateway. Use 'ListVolumes' to get volume ARNs for a gateway.
 dcscsivVolumeARNs :: Lens' DescribeCachediSCSIVolumes [Text]
 dcscsivVolumeARNs = lens _dcscsivVolumeARNs (\ s a -> s{_dcscsivVolumeARNs = a}) . _Coerce
 
@@ -109,11 +109,15 @@ instance ToQuery DescribeCachediSCSIVolumes where
 --
 --
 -- /See:/ 'describeCachediSCSIVolumesResponse' smart constructor.
-data DescribeCachediSCSIVolumesResponse = DescribeCachediSCSIVolumesResponse'
-  { _dcscsivrsCachediSCSIVolumes :: !(Maybe [CachediSCSIVolume])
-  , _dcscsivrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCachediSCSIVolumesResponse = DescribeCachediSCSIVolumesResponse'{_dcscsivrsCachediSCSIVolumes
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [CachediSCSIVolume]),
+                                                                              _dcscsivrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeCachediSCSIVolumesResponse' with the minimum fields required to make a request.
 --
@@ -125,12 +129,11 @@ data DescribeCachediSCSIVolumesResponse = DescribeCachediSCSIVolumesResponse'
 describeCachediSCSIVolumesResponse
     :: Int -- ^ 'dcscsivrsResponseStatus'
     -> DescribeCachediSCSIVolumesResponse
-describeCachediSCSIVolumesResponse pResponseStatus_ =
-  DescribeCachediSCSIVolumesResponse'
-    { _dcscsivrsCachediSCSIVolumes = Nothing
-    , _dcscsivrsResponseStatus = pResponseStatus_
-    }
-
+describeCachediSCSIVolumesResponse pResponseStatus_
+  = DescribeCachediSCSIVolumesResponse'{_dcscsivrsCachediSCSIVolumes
+                                          = Nothing,
+                                        _dcscsivrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | An array of objects where each object contains metadata about one cached volume.
 dcscsivrsCachediSCSIVolumes :: Lens' DescribeCachediSCSIVolumesResponse [CachediSCSIVolume]

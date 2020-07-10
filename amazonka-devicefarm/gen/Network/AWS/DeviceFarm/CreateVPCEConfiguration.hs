@@ -48,23 +48,26 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createVPCEConfiguration' smart constructor.
-data CreateVPCEConfiguration = CreateVPCEConfiguration'
-  { _cvecVpceConfigurationDescription :: !(Maybe Text)
-  , _cvecVpceConfigurationName        :: !Text
-  , _cvecVpceServiceName              :: !Text
-  , _cvecServiceDNSName               :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateVPCEConfiguration = CreateVPCEConfiguration'{_cvecVpceConfigurationDescription
+                                                        :: !(Maybe Text),
+                                                        _cvecVpceConfigurationName
+                                                        :: !Text,
+                                                        _cvecVpceServiceName ::
+                                                        !Text,
+                                                        _cvecServiceDNSName ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateVPCEConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cvecVpceConfigurationDescription' - An optional description, providing more details about your VPC endpoint configuration.
+-- * 'cvecVpceConfigurationDescription' - An optional description that provides details about your VPC endpoint configuration.
 --
 -- * 'cvecVpceConfigurationName' - The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.
 --
--- * 'cvecVpceServiceName' - The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+-- * 'cvecVpceServiceName' - The name of the VPC endpoint service running in your AWS account that you want Device Farm to test.
 --
 -- * 'cvecServiceDNSName' - The DNS name of the service running in your VPC that you want Device Farm to test.
 createVPCEConfiguration
@@ -72,16 +75,16 @@ createVPCEConfiguration
     -> Text -- ^ 'cvecVpceServiceName'
     -> Text -- ^ 'cvecServiceDNSName'
     -> CreateVPCEConfiguration
-createVPCEConfiguration pVpceConfigurationName_ pVpceServiceName_ pServiceDNSName_ =
-  CreateVPCEConfiguration'
-    { _cvecVpceConfigurationDescription = Nothing
-    , _cvecVpceConfigurationName = pVpceConfigurationName_
-    , _cvecVpceServiceName = pVpceServiceName_
-    , _cvecServiceDNSName = pServiceDNSName_
-    }
+createVPCEConfiguration pVpceConfigurationName_
+  pVpceServiceName_ pServiceDNSName_
+  = CreateVPCEConfiguration'{_cvecVpceConfigurationDescription
+                               = Nothing,
+                             _cvecVpceConfigurationName =
+                               pVpceConfigurationName_,
+                             _cvecVpceServiceName = pVpceServiceName_,
+                             _cvecServiceDNSName = pServiceDNSName_}
 
-
--- | An optional description, providing more details about your VPC endpoint configuration.
+-- | An optional description that provides details about your VPC endpoint configuration.
 cvecVpceConfigurationDescription :: Lens' CreateVPCEConfiguration (Maybe Text)
 cvecVpceConfigurationDescription = lens _cvecVpceConfigurationDescription (\ s a -> s{_cvecVpceConfigurationDescription = a})
 
@@ -89,7 +92,7 @@ cvecVpceConfigurationDescription = lens _cvecVpceConfigurationDescription (\ s a
 cvecVpceConfigurationName :: Lens' CreateVPCEConfiguration Text
 cvecVpceConfigurationName = lens _cvecVpceConfigurationName (\ s a -> s{_cvecVpceConfigurationName = a})
 
--- | The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+-- | The name of the VPC endpoint service running in your AWS account that you want Device Farm to test.
 cvecVpceServiceName :: Lens' CreateVPCEConfiguration Text
 cvecVpceServiceName = lens _cvecVpceServiceName (\ s a -> s{_cvecVpceServiceName = a})
 
@@ -140,30 +143,31 @@ instance ToQuery CreateVPCEConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'createVPCEConfigurationResponse' smart constructor.
-data CreateVPCEConfigurationResponse = CreateVPCEConfigurationResponse'
-  { _cvecrsVpceConfiguration :: !(Maybe VPCEConfiguration)
-  , _cvecrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateVPCEConfigurationResponse = CreateVPCEConfigurationResponse'{_cvecrsVpceConfiguration
+                                                                        ::
+                                                                        !(Maybe
+                                                                            VPCEConfiguration),
+                                                                        _cvecrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateVPCEConfigurationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cvecrsVpceConfiguration' - An object containing information about your VPC endpoint configuration.
+-- * 'cvecrsVpceConfiguration' - An object that contains information about your VPC endpoint configuration.
 --
 -- * 'cvecrsResponseStatus' - -- | The response status code.
 createVPCEConfigurationResponse
     :: Int -- ^ 'cvecrsResponseStatus'
     -> CreateVPCEConfigurationResponse
-createVPCEConfigurationResponse pResponseStatus_ =
-  CreateVPCEConfigurationResponse'
-    { _cvecrsVpceConfiguration = Nothing
-    , _cvecrsResponseStatus = pResponseStatus_
-    }
+createVPCEConfigurationResponse pResponseStatus_
+  = CreateVPCEConfigurationResponse'{_cvecrsVpceConfiguration
+                                       = Nothing,
+                                     _cvecrsResponseStatus = pResponseStatus_}
 
-
--- | An object containing information about your VPC endpoint configuration.
+-- | An object that contains information about your VPC endpoint configuration.
 cvecrsVpceConfiguration :: Lens' CreateVPCEConfigurationResponse (Maybe VPCEConfiguration)
 cvecrsVpceConfiguration = lens _cvecrsVpceConfiguration (\ s a -> s{_cvecrsVpceConfiguration = a})
 

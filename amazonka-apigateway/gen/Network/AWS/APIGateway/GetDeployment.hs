@@ -53,12 +53,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDeployment' smart constructor.
-data GetDeployment = GetDeployment'
-  { _gEmbed        :: !(Maybe [Text])
-  , _gRestAPIId    :: !Text
-  , _gDeploymentId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeployment = GetDeployment'{_gEmbed ::
+                                    !(Maybe [Text]),
+                                    _gRestAPIId :: !Text,
+                                    _gDeploymentId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDeployment' with the minimum fields required to make a request.
 --
@@ -73,13 +72,10 @@ getDeployment
     :: Text -- ^ 'gRestAPIId'
     -> Text -- ^ 'gDeploymentId'
     -> GetDeployment
-getDeployment pRestAPIId_ pDeploymentId_ =
-  GetDeployment'
-    { _gEmbed = Nothing
-    , _gRestAPIId = pRestAPIId_
-    , _gDeploymentId = pDeploymentId_
-    }
-
+getDeployment pRestAPIId_ pDeploymentId_
+  = GetDeployment'{_gEmbed = Nothing,
+                   _gRestAPIId = pRestAPIId_,
+                   _gDeploymentId = pDeploymentId_}
 
 -- | A query parameter to retrieve the specified embedded resources of the returned 'Deployment' resource in the response. In a REST API call, this @embed@ parameter value is a list of comma-separated strings, as in @GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=var1,var2@ . The SDK and other platform-dependent libraries might use a different format for the list. Currently, this request supports only retrieval of the embedded API summary this way. Hence, the parameter value must be a single-valued list containing only the @"apisummary"@ string. For example, @GET /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary@ .
 gEmbed :: Lens' GetDeployment [Text]

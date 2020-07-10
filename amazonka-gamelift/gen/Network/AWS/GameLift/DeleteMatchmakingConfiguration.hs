@@ -21,21 +21,23 @@
 -- Permanently removes a FlexMatch matchmaking configuration. To delete, specify the configuration name. A matchmaking configuration cannot be deleted if it is being used in any active matchmaking tickets.
 --
 --
--- Operations related to match configurations and rule sets include:
+-- __Related operations__ 
 --
---     * 'CreateMatchmakingConfiguration'
+--     * 'CreateMatchmakingConfiguration' 
 --
---     * 'DescribeMatchmakingConfigurations'
+--     * 'DescribeMatchmakingConfigurations' 
 --
---     * 'UpdateMatchmakingConfiguration'
+--     * 'UpdateMatchmakingConfiguration' 
 --
---     * 'DeleteMatchmakingConfiguration'
+--     * 'DeleteMatchmakingConfiguration' 
 --
---     * 'CreateMatchmakingRuleSet'
+--     * 'CreateMatchmakingRuleSet' 
 --
---     * 'DescribeMatchmakingRuleSets'
+--     * 'DescribeMatchmakingRuleSets' 
 --
---     * 'ValidateMatchmakingRuleSet'
+--     * 'ValidateMatchmakingRuleSet' 
+--
+--     * 'DeleteMatchmakingRuleSet' 
 --
 --
 --
@@ -66,24 +68,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteMatchmakingConfiguration' smart constructor.
-newtype DeleteMatchmakingConfiguration = DeleteMatchmakingConfiguration'
-  { _dmcName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteMatchmakingConfiguration = DeleteMatchmakingConfiguration'{_dmcName
+                                                                         ::
+                                                                         Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteMatchmakingConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmcName' - Unique identifier for a matchmaking configuration
+-- * 'dmcName' - A unique identifier for a matchmaking configuration. You can use either the configuration name or ARN value.
 deleteMatchmakingConfiguration
     :: Text -- ^ 'dmcName'
     -> DeleteMatchmakingConfiguration
-deleteMatchmakingConfiguration pName_ =
-  DeleteMatchmakingConfiguration' {_dmcName = pName_}
+deleteMatchmakingConfiguration pName_
+  = DeleteMatchmakingConfiguration'{_dmcName = pName_}
 
-
--- | Unique identifier for a matchmaking configuration
+-- | A unique identifier for a matchmaking configuration. You can use either the configuration name or ARN value.
 dmcName :: Lens' DeleteMatchmakingConfiguration Text
 dmcName = lens _dmcName (\ s a -> s{_dmcName = a})
 
@@ -125,10 +127,12 @@ instance ToQuery DeleteMatchmakingConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'deleteMatchmakingConfigurationResponse' smart constructor.
-newtype DeleteMatchmakingConfigurationResponse = DeleteMatchmakingConfigurationResponse'
-  { _dmcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteMatchmakingConfigurationResponse = DeleteMatchmakingConfigurationResponse'{_dmcrsResponseStatus
+                                                                                         ::
+                                                                                         Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'DeleteMatchmakingConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +142,10 @@ newtype DeleteMatchmakingConfigurationResponse = DeleteMatchmakingConfigurationR
 deleteMatchmakingConfigurationResponse
     :: Int -- ^ 'dmcrsResponseStatus'
     -> DeleteMatchmakingConfigurationResponse
-deleteMatchmakingConfigurationResponse pResponseStatus_ =
-  DeleteMatchmakingConfigurationResponse'
-    {_dmcrsResponseStatus = pResponseStatus_}
-
+deleteMatchmakingConfigurationResponse
+  pResponseStatus_
+  = DeleteMatchmakingConfigurationResponse'{_dmcrsResponseStatus
+                                              = pResponseStatus_}
 
 -- | -- | The response status code.
 dmcrsResponseStatus :: Lens' DeleteMatchmakingConfigurationResponse Int

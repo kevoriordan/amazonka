@@ -50,15 +50,19 @@ library
         , Network.AWS.StorageGateway.AddTagsToResource
         , Network.AWS.StorageGateway.AddUploadBuffer
         , Network.AWS.StorageGateway.AddWorkingStorage
+        , Network.AWS.StorageGateway.AssignTapePool
+        , Network.AWS.StorageGateway.AttachVolume
         , Network.AWS.StorageGateway.CancelArchival
         , Network.AWS.StorageGateway.CancelRetrieval
         , Network.AWS.StorageGateway.CreateCachediSCSIVolume
         , Network.AWS.StorageGateway.CreateNFSFileShare
+        , Network.AWS.StorageGateway.CreateSMBFileShare
         , Network.AWS.StorageGateway.CreateSnapshot
         , Network.AWS.StorageGateway.CreateSnapshotFromVolumeRecoveryPoint
         , Network.AWS.StorageGateway.CreateStorediSCSIVolume
         , Network.AWS.StorageGateway.CreateTapeWithBarcode
         , Network.AWS.StorageGateway.CreateTapes
+        , Network.AWS.StorageGateway.DeleteAutomaticTapeCreationPolicy
         , Network.AWS.StorageGateway.DeleteBandwidthRateLimit
         , Network.AWS.StorageGateway.DeleteChapCredentials
         , Network.AWS.StorageGateway.DeleteFileShare
@@ -67,6 +71,7 @@ library
         , Network.AWS.StorageGateway.DeleteTape
         , Network.AWS.StorageGateway.DeleteTapeArchive
         , Network.AWS.StorageGateway.DeleteVolume
+        , Network.AWS.StorageGateway.DescribeAvailabilityMonitorTest
         , Network.AWS.StorageGateway.DescribeBandwidthRateLimit
         , Network.AWS.StorageGateway.DescribeCache
         , Network.AWS.StorageGateway.DescribeCachediSCSIVolumes
@@ -74,6 +79,8 @@ library
         , Network.AWS.StorageGateway.DescribeGatewayInformation
         , Network.AWS.StorageGateway.DescribeMaintenanceStartTime
         , Network.AWS.StorageGateway.DescribeNFSFileShares
+        , Network.AWS.StorageGateway.DescribeSMBFileShares
+        , Network.AWS.StorageGateway.DescribeSMBSettings
         , Network.AWS.StorageGateway.DescribeSnapshotSchedule
         , Network.AWS.StorageGateway.DescribeStorediSCSIVolumes
         , Network.AWS.StorageGateway.DescribeTapeArchives
@@ -82,7 +89,10 @@ library
         , Network.AWS.StorageGateway.DescribeUploadBuffer
         , Network.AWS.StorageGateway.DescribeVTLDevices
         , Network.AWS.StorageGateway.DescribeWorkingStorage
+        , Network.AWS.StorageGateway.DetachVolume
         , Network.AWS.StorageGateway.DisableGateway
+        , Network.AWS.StorageGateway.JoinDomain
+        , Network.AWS.StorageGateway.ListAutomaticTapeCreationPolicies
         , Network.AWS.StorageGateway.ListFileShares
         , Network.AWS.StorageGateway.ListGateways
         , Network.AWS.StorageGateway.ListLocalDisks
@@ -98,26 +108,59 @@ library
         , Network.AWS.StorageGateway.RetrieveTapeArchive
         , Network.AWS.StorageGateway.RetrieveTapeRecoveryPoint
         , Network.AWS.StorageGateway.SetLocalConsolePassword
+        , Network.AWS.StorageGateway.SetSMBGuestPassword
         , Network.AWS.StorageGateway.ShutdownGateway
+        , Network.AWS.StorageGateway.StartAvailabilityMonitorTest
         , Network.AWS.StorageGateway.StartGateway
         , Network.AWS.StorageGateway.Types
+        , Network.AWS.StorageGateway.UpdateAutomaticTapeCreationPolicy
         , Network.AWS.StorageGateway.UpdateBandwidthRateLimit
         , Network.AWS.StorageGateway.UpdateChapCredentials
         , Network.AWS.StorageGateway.UpdateGatewayInformation
         , Network.AWS.StorageGateway.UpdateGatewaySoftwareNow
         , Network.AWS.StorageGateway.UpdateMaintenanceStartTime
         , Network.AWS.StorageGateway.UpdateNFSFileShare
+        , Network.AWS.StorageGateway.UpdateSMBFileShare
+        , Network.AWS.StorageGateway.UpdateSMBSecurityStrategy
         , Network.AWS.StorageGateway.UpdateSnapshotSchedule
         , Network.AWS.StorageGateway.UpdateVTLDeviceType
         , Network.AWS.StorageGateway.Waiters
 
     other-modules:
-          Network.AWS.StorageGateway.Types.Product
-        , Network.AWS.StorageGateway.Types.Sum
+          Network.AWS.StorageGateway.Types.ActiveDirectoryStatus
+        , Network.AWS.StorageGateway.Types.AutomaticTapeCreationPolicyInfo
+        , Network.AWS.StorageGateway.Types.AutomaticTapeCreationRule
+        , Network.AWS.StorageGateway.Types.AvailabilityMonitorTestStatus
+        , Network.AWS.StorageGateway.Types.CachediSCSIVolume
+        , Network.AWS.StorageGateway.Types.ChapInfo
+        , Network.AWS.StorageGateway.Types.DeviceiSCSIAttributes
+        , Network.AWS.StorageGateway.Types.Disk
+        , Network.AWS.StorageGateway.Types.FileShareInfo
+        , Network.AWS.StorageGateway.Types.FileShareType
+        , Network.AWS.StorageGateway.Types.GatewayInfo
+        , Network.AWS.StorageGateway.Types.HostEnvironment
+        , Network.AWS.StorageGateway.Types.NFSFileShareDefaults
+        , Network.AWS.StorageGateway.Types.NFSFileShareInfo
+        , Network.AWS.StorageGateway.Types.NetworkInterface
+        , Network.AWS.StorageGateway.Types.ObjectACL
+        , Network.AWS.StorageGateway.Types.Product
+        , Network.AWS.StorageGateway.Types.SMBFileShareInfo
+        , Network.AWS.StorageGateway.Types.SMBSecurityStrategy
+        , Network.AWS.StorageGateway.Types.StorediSCSIVolume
+        , Network.AWS.StorageGateway.Types.Tag
+        , Network.AWS.StorageGateway.Types.Tape
+        , Network.AWS.StorageGateway.Types.TapeArchive
+        , Network.AWS.StorageGateway.Types.TapeInfo
+        , Network.AWS.StorageGateway.Types.TapeRecoveryPointInfo
+        , Network.AWS.StorageGateway.Types.VTLDevice
+        , Network.AWS.StorageGateway.Types.VolumeInfo
+        , Network.AWS.StorageGateway.Types.VolumeRecoveryPointInfo
+        , Network.AWS.StorageGateway.Types.VolumeiSCSIAttributes
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-storagegateway-test
     type:              exitcode-stdio-1.0
@@ -141,6 +184,7 @@ test-suite amazonka-storagegateway-test
         , amazonka-storagegateway
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

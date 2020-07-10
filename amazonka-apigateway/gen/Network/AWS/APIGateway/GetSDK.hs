@@ -54,19 +54,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getSDK' smart constructor.
-data GetSDK = GetSDK'
-  { _gsdkParameters :: !(Maybe (Map Text Text))
-  , _gsdkRestAPIId  :: !Text
-  , _gsdkStageName  :: !Text
-  , _gsdkSdkType    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSDK = GetSDK'{_gsdkParameters ::
+                      !(Maybe (Map Text Text)),
+                      _gsdkRestAPIId :: !Text, _gsdkStageName :: !Text,
+                      _gsdkSdkType :: !Text}
+                deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSDK' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsdkParameters' - A string-to-string key-value map of query parameters @sdkType@ -dependent properties of the SDK. For @sdkType@ of @objectivec@ or @swift@ , a parameter named @classPrefix@ is required. For @sdkType@ of @android@ , parameters named @groupId@ , @artifactId@ , @artifactVersion@ , and @invokerPackage@ are required. For @sdkType@ of @java@ , parameters named @serviceName@ and @javaPackageName@ are required.
+-- * 'gsdkParameters' - A string-to-string key-value map of query parameters @sdkType@ -dependent properties of the SDK. For @sdkType@ of @objectivec@ or @swift@ , a parameter named @classPrefix@ is required. For @sdkType@ of @android@ , parameters named @groupId@ , @artifactId@ , @artifactVersion@ , and @invokerPackage@ are required. For @sdkType@ of @java@ , parameters named @serviceName@ and @javaPackageName@ are required. 
 --
 -- * 'gsdkRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
@@ -78,16 +76,13 @@ getSDK
     -> Text -- ^ 'gsdkStageName'
     -> Text -- ^ 'gsdkSdkType'
     -> GetSDK
-getSDK pRestAPIId_ pStageName_ pSdkType_ =
-  GetSDK'
-    { _gsdkParameters = Nothing
-    , _gsdkRestAPIId = pRestAPIId_
-    , _gsdkStageName = pStageName_
-    , _gsdkSdkType = pSdkType_
-    }
+getSDK pRestAPIId_ pStageName_ pSdkType_
+  = GetSDK'{_gsdkParameters = Nothing,
+            _gsdkRestAPIId = pRestAPIId_,
+            _gsdkStageName = pStageName_,
+            _gsdkSdkType = pSdkType_}
 
-
--- | A string-to-string key-value map of query parameters @sdkType@ -dependent properties of the SDK. For @sdkType@ of @objectivec@ or @swift@ , a parameter named @classPrefix@ is required. For @sdkType@ of @android@ , parameters named @groupId@ , @artifactId@ , @artifactVersion@ , and @invokerPackage@ are required. For @sdkType@ of @java@ , parameters named @serviceName@ and @javaPackageName@ are required.
+-- | A string-to-string key-value map of query parameters @sdkType@ -dependent properties of the SDK. For @sdkType@ of @objectivec@ or @swift@ , a parameter named @classPrefix@ is required. For @sdkType@ of @android@ , parameters named @groupId@ , @artifactId@ , @artifactVersion@ , and @invokerPackage@ are required. For @sdkType@ of @java@ , parameters named @serviceName@ and @javaPackageName@ are required. 
 gsdkParameters :: Lens' GetSDK (HashMap Text Text)
 gsdkParameters = lens _gsdkParameters (\ s a -> s{_gsdkParameters = a}) . _Default . _Map
 
@@ -143,13 +138,13 @@ instance ToQuery GetSDK where
 --
 --
 -- /See:/ 'getSDKResponse' smart constructor.
-data GetSDKResponse = GetSDKResponse'
-  { _gsdkrsBody               :: !(Maybe ByteString)
-  , _gsdkrsContentDisposition :: !(Maybe Text)
-  , _gsdkrsContentType        :: !(Maybe Text)
-  , _gsdkrsResponseStatus     :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetSDKResponse = GetSDKResponse'{_gsdkrsBody ::
+                                      !(Maybe ByteString),
+                                      _gsdkrsContentDisposition ::
+                                      !(Maybe Text),
+                                      _gsdkrsContentType :: !(Maybe Text),
+                                      _gsdkrsResponseStatus :: !Int}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSDKResponse' with the minimum fields required to make a request.
 --
@@ -165,14 +160,11 @@ data GetSDKResponse = GetSDKResponse'
 getSDKResponse
     :: Int -- ^ 'gsdkrsResponseStatus'
     -> GetSDKResponse
-getSDKResponse pResponseStatus_ =
-  GetSDKResponse'
-    { _gsdkrsBody = Nothing
-    , _gsdkrsContentDisposition = Nothing
-    , _gsdkrsContentType = Nothing
-    , _gsdkrsResponseStatus = pResponseStatus_
-    }
-
+getSDKResponse pResponseStatus_
+  = GetSDKResponse'{_gsdkrsBody = Nothing,
+                    _gsdkrsContentDisposition = Nothing,
+                    _gsdkrsContentType = Nothing,
+                    _gsdkrsResponseStatus = pResponseStatus_}
 
 -- | The binary blob response to 'GetSdk' , which contains the generated SDK.
 gsdkrsBody :: Lens' GetSDKResponse (Maybe ByteString)

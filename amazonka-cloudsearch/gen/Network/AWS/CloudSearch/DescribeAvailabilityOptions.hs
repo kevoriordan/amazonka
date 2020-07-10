@@ -50,11 +50,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeAvailabilityOptions' smart constructor.
-data DescribeAvailabilityOptions = DescribeAvailabilityOptions'
-  { _daoDeployed   :: !(Maybe Bool)
-  , _daoDomainName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAvailabilityOptions = DescribeAvailabilityOptions'{_daoDeployed
+                                                                ::
+                                                                !(Maybe Bool),
+                                                                _daoDomainName
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeAvailabilityOptions' with the minimum fields required to make a request.
 --
@@ -66,10 +68,10 @@ data DescribeAvailabilityOptions = DescribeAvailabilityOptions'
 describeAvailabilityOptions
     :: Text -- ^ 'daoDomainName'
     -> DescribeAvailabilityOptions
-describeAvailabilityOptions pDomainName_ =
-  DescribeAvailabilityOptions'
-    {_daoDeployed = Nothing, _daoDomainName = pDomainName_}
-
+describeAvailabilityOptions pDomainName_
+  = DescribeAvailabilityOptions'{_daoDeployed =
+                                   Nothing,
+                                 _daoDomainName = pDomainName_}
 
 -- | Whether to display the deployed configuration (@true@ ) or include any pending changes (@false@ ). Defaults to @false@ .
 daoDeployed :: Lens' DescribeAvailabilityOptions (Maybe Bool)
@@ -110,35 +112,38 @@ instance ToQuery DescribeAvailabilityOptions where
                "Deployed" =: _daoDeployed,
                "DomainName" =: _daoDomainName]
 
--- | The result of a @DescribeAvailabilityOptions@ request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request.
+-- | The result of a @DescribeAvailabilityOptions@ request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request. 
 --
 --
 --
 -- /See:/ 'describeAvailabilityOptionsResponse' smart constructor.
-data DescribeAvailabilityOptionsResponse = DescribeAvailabilityOptionsResponse'
-  { _daorsAvailabilityOptions :: !(Maybe AvailabilityOptionsStatus)
-  , _daorsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAvailabilityOptionsResponse = DescribeAvailabilityOptionsResponse'{_daorsAvailabilityOptions
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    AvailabilityOptionsStatus),
+                                                                                _daorsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DescribeAvailabilityOptionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daorsAvailabilityOptions' - The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain.
+-- * 'daorsAvailabilityOptions' - The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. 
 --
 -- * 'daorsResponseStatus' - -- | The response status code.
 describeAvailabilityOptionsResponse
     :: Int -- ^ 'daorsResponseStatus'
     -> DescribeAvailabilityOptionsResponse
-describeAvailabilityOptionsResponse pResponseStatus_ =
-  DescribeAvailabilityOptionsResponse'
-    { _daorsAvailabilityOptions = Nothing
-    , _daorsResponseStatus = pResponseStatus_
-    }
+describeAvailabilityOptionsResponse pResponseStatus_
+  = DescribeAvailabilityOptionsResponse'{_daorsAvailabilityOptions
+                                           = Nothing,
+                                         _daorsResponseStatus =
+                                           pResponseStatus_}
 
-
--- | The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain.
+-- | The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. 
 daorsAvailabilityOptions :: Lens' DescribeAvailabilityOptionsResponse (Maybe AvailabilityOptionsStatus)
 daorsAvailabilityOptions = lens _daorsAvailabilityOptions (\ s a -> s{_daorsAvailabilityOptions = a})
 

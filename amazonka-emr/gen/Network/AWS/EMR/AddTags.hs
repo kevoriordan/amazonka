@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html Tag Clusters> .
+-- Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html Tag Clusters> . 
 --
 --
 module Network.AWS.EMR.AddTags
@@ -49,11 +49,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'addTags' smart constructor.
-data AddTags = AddTags'
-  { _atResourceId :: !Text
-  , _atTags       :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTags = AddTags'{_atResourceId :: !Text,
+                        _atTags :: ![Tag]}
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTags' with the minimum fields required to make a request.
 --
@@ -65,8 +63,9 @@ data AddTags = AddTags'
 addTags
     :: Text -- ^ 'atResourceId'
     -> AddTags
-addTags pResourceId_ = AddTags' {_atResourceId = pResourceId_, _atTags = mempty}
-
+addTags pResourceId_
+  = AddTags'{_atResourceId = pResourceId_,
+             _atTags = mempty}
 
 -- | The Amazon EMR resource identifier to which tags will be added. This value must be a cluster identifier.
 atResourceId :: Lens' AddTags Text
@@ -114,10 +113,9 @@ instance ToQuery AddTags where
 --
 --
 -- /See:/ 'addTagsResponse' smart constructor.
-newtype AddTagsResponse = AddTagsResponse'
-  { _atrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddTagsResponse = AddTagsResponse'{_atrsResponseStatus
+                                           :: Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsResponse' with the minimum fields required to make a request.
 --
@@ -127,9 +125,9 @@ newtype AddTagsResponse = AddTagsResponse'
 addTagsResponse
     :: Int -- ^ 'atrsResponseStatus'
     -> AddTagsResponse
-addTagsResponse pResponseStatus_ =
-  AddTagsResponse' {_atrsResponseStatus = pResponseStatus_}
-
+addTagsResponse pResponseStatus_
+  = AddTagsResponse'{_atrsResponseStatus =
+                       pResponseStatus_}
 
 -- | -- | The response status code.
 atrsResponseStatus :: Lens' AddTagsResponse Int

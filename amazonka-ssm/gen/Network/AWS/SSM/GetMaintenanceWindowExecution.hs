@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves details about a specific task executed as part of a Maintenance Window execution.
+-- Retrieves details about a specific a maintenance window execution.
 --
 --
 module Network.AWS.SSM.GetMaintenanceWindowExecution
@@ -50,24 +50,24 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getMaintenanceWindowExecution' smart constructor.
-newtype GetMaintenanceWindowExecution = GetMaintenanceWindowExecution'
-  { _gmweWindowExecutionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetMaintenanceWindowExecution = GetMaintenanceWindowExecution'{_gmweWindowExecutionId
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetMaintenanceWindowExecution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gmweWindowExecutionId' - The ID of the Maintenance Window execution that includes the task.
+-- * 'gmweWindowExecutionId' - The ID of the maintenance window execution that includes the task.
 getMaintenanceWindowExecution
     :: Text -- ^ 'gmweWindowExecutionId'
     -> GetMaintenanceWindowExecution
-getMaintenanceWindowExecution pWindowExecutionId_ =
-  GetMaintenanceWindowExecution' {_gmweWindowExecutionId = pWindowExecutionId_}
+getMaintenanceWindowExecution pWindowExecutionId_
+  = GetMaintenanceWindowExecution'{_gmweWindowExecutionId
+                                     = pWindowExecutionId_}
 
-
--- | The ID of the Maintenance Window execution that includes the task.
+-- | The ID of the maintenance window execution that includes the task.
 gmweWindowExecutionId :: Lens' GetMaintenanceWindowExecution Text
 gmweWindowExecutionId = lens _gmweWindowExecutionId (\ s a -> s{_gmweWindowExecutionId = a})
 
@@ -116,58 +116,77 @@ instance ToQuery GetMaintenanceWindowExecution where
         toQuery = const mempty
 
 -- | /See:/ 'getMaintenanceWindowExecutionResponse' smart constructor.
-data GetMaintenanceWindowExecutionResponse = GetMaintenanceWindowExecutionResponse'
-  { _gmwersStatus            :: !(Maybe MaintenanceWindowExecutionStatus)
-  , _gmwersStartTime         :: !(Maybe POSIX)
-  , _gmwersWindowExecutionId :: !(Maybe Text)
-  , _gmwersStatusDetails     :: !(Maybe Text)
-  , _gmwersEndTime           :: !(Maybe POSIX)
-  , _gmwersTaskIds           :: !(Maybe [Text])
-  , _gmwersResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetMaintenanceWindowExecutionResponse = GetMaintenanceWindowExecutionResponse'{_gmwersStatus
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        MaintenanceWindowExecutionStatus),
+                                                                                    _gmwersStartTime
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        POSIX),
+                                                                                    _gmwersWindowExecutionId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _gmwersStatusDetails
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _gmwersEndTime
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        POSIX),
+                                                                                    _gmwersTaskIds
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [Text]),
+                                                                                    _gmwersResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'GetMaintenanceWindowExecutionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gmwersStatus' - The status of the Maintenance Window execution.
+-- * 'gmwersStatus' - The status of the maintenance window execution.
 --
--- * 'gmwersStartTime' - The time the Maintenance Window started executing.
+-- * 'gmwersStartTime' - The time the maintenance window started running.
 --
--- * 'gmwersWindowExecutionId' - The ID of the Maintenance Window execution.
+-- * 'gmwersWindowExecutionId' - The ID of the maintenance window execution.
 --
 -- * 'gmwersStatusDetails' - The details explaining the Status. Only available for certain status values.
 --
--- * 'gmwersEndTime' - The time the Maintenance Window finished executing.
+-- * 'gmwersEndTime' - The time the maintenance window finished running.
 --
--- * 'gmwersTaskIds' - The ID of the task executions from the Maintenance Window execution.
+-- * 'gmwersTaskIds' - The ID of the task executions from the maintenance window execution.
 --
 -- * 'gmwersResponseStatus' - -- | The response status code.
 getMaintenanceWindowExecutionResponse
     :: Int -- ^ 'gmwersResponseStatus'
     -> GetMaintenanceWindowExecutionResponse
-getMaintenanceWindowExecutionResponse pResponseStatus_ =
-  GetMaintenanceWindowExecutionResponse'
-    { _gmwersStatus = Nothing
-    , _gmwersStartTime = Nothing
-    , _gmwersWindowExecutionId = Nothing
-    , _gmwersStatusDetails = Nothing
-    , _gmwersEndTime = Nothing
-    , _gmwersTaskIds = Nothing
-    , _gmwersResponseStatus = pResponseStatus_
-    }
+getMaintenanceWindowExecutionResponse
+  pResponseStatus_
+  = GetMaintenanceWindowExecutionResponse'{_gmwersStatus
+                                             = Nothing,
+                                           _gmwersStartTime = Nothing,
+                                           _gmwersWindowExecutionId = Nothing,
+                                           _gmwersStatusDetails = Nothing,
+                                           _gmwersEndTime = Nothing,
+                                           _gmwersTaskIds = Nothing,
+                                           _gmwersResponseStatus =
+                                             pResponseStatus_}
 
-
--- | The status of the Maintenance Window execution.
+-- | The status of the maintenance window execution.
 gmwersStatus :: Lens' GetMaintenanceWindowExecutionResponse (Maybe MaintenanceWindowExecutionStatus)
 gmwersStatus = lens _gmwersStatus (\ s a -> s{_gmwersStatus = a})
 
--- | The time the Maintenance Window started executing.
+-- | The time the maintenance window started running.
 gmwersStartTime :: Lens' GetMaintenanceWindowExecutionResponse (Maybe UTCTime)
 gmwersStartTime = lens _gmwersStartTime (\ s a -> s{_gmwersStartTime = a}) . mapping _Time
 
--- | The ID of the Maintenance Window execution.
+-- | The ID of the maintenance window execution.
 gmwersWindowExecutionId :: Lens' GetMaintenanceWindowExecutionResponse (Maybe Text)
 gmwersWindowExecutionId = lens _gmwersWindowExecutionId (\ s a -> s{_gmwersWindowExecutionId = a})
 
@@ -175,11 +194,11 @@ gmwersWindowExecutionId = lens _gmwersWindowExecutionId (\ s a -> s{_gmwersWindo
 gmwersStatusDetails :: Lens' GetMaintenanceWindowExecutionResponse (Maybe Text)
 gmwersStatusDetails = lens _gmwersStatusDetails (\ s a -> s{_gmwersStatusDetails = a})
 
--- | The time the Maintenance Window finished executing.
+-- | The time the maintenance window finished running.
 gmwersEndTime :: Lens' GetMaintenanceWindowExecutionResponse (Maybe UTCTime)
 gmwersEndTime = lens _gmwersEndTime (\ s a -> s{_gmwersEndTime = a}) . mapping _Time
 
--- | The ID of the task executions from the Maintenance Window execution.
+-- | The ID of the task executions from the maintenance window execution.
 gmwersTaskIds :: Lens' GetMaintenanceWindowExecutionResponse [Text]
 gmwersTaskIds = lens _gmwersTaskIds (\ s a -> s{_gmwersTaskIds = a}) . _Default . _Coerce
 

@@ -21,7 +21,7 @@
 -- Starts a stack's instances.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.StartStack
     (
@@ -44,10 +44,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startStack' smart constructor.
-newtype StartStack = StartStack'
-  { _staStackId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartStack = StartStack'{_staStackId :: Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartStack' with the minimum fields required to make a request.
 --
@@ -57,8 +55,8 @@ newtype StartStack = StartStack'
 startStack
     :: Text -- ^ 'staStackId'
     -> StartStack
-startStack pStackId_ = StartStack' {_staStackId = pStackId_}
-
+startStack pStackId_
+  = StartStack'{_staStackId = pStackId_}
 
 -- | The stack ID.
 staStackId :: Lens' StartStack Text
@@ -94,16 +92,13 @@ instance ToQuery StartStack where
         toQuery = const mempty
 
 -- | /See:/ 'startStackResponse' smart constructor.
-data StartStackResponse =
-  StartStackResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartStackResponse = StartStackResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartStackResponse' with the minimum fields required to make a request.
 --
 startStackResponse
     :: StartStackResponse
 startStackResponse = StartStackResponse'
-
 
 instance NFData StartStackResponse where

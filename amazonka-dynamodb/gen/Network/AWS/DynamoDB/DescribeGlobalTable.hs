@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeGlobalTable' smart constructor.
-newtype DescribeGlobalTable = DescribeGlobalTable'
-  { _dgtGlobalTableName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeGlobalTable = DescribeGlobalTable'{_dgtGlobalTableName
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeGlobalTable' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype DescribeGlobalTable = DescribeGlobalTable'
 describeGlobalTable
     :: Text -- ^ 'dgtGlobalTableName'
     -> DescribeGlobalTable
-describeGlobalTable pGlobalTableName_ =
-  DescribeGlobalTable' {_dgtGlobalTableName = pGlobalTableName_}
-
+describeGlobalTable pGlobalTableName_
+  = DescribeGlobalTable'{_dgtGlobalTableName =
+                           pGlobalTableName_}
 
 -- | The name of the global table.
 dgtGlobalTableName :: Lens' DescribeGlobalTable Text
@@ -104,11 +104,14 @@ instance ToQuery DescribeGlobalTable where
         toQuery = const mempty
 
 -- | /See:/ 'describeGlobalTableResponse' smart constructor.
-data DescribeGlobalTableResponse = DescribeGlobalTableResponse'
-  { _dgtrsGlobalTableDescription :: !(Maybe GlobalTableDescription)
-  , _dgtrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeGlobalTableResponse = DescribeGlobalTableResponse'{_dgtrsGlobalTableDescription
+                                                                ::
+                                                                !(Maybe
+                                                                    GlobalTableDescription),
+                                                                _dgtrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeGlobalTableResponse' with the minimum fields required to make a request.
 --
@@ -120,12 +123,10 @@ data DescribeGlobalTableResponse = DescribeGlobalTableResponse'
 describeGlobalTableResponse
     :: Int -- ^ 'dgtrsResponseStatus'
     -> DescribeGlobalTableResponse
-describeGlobalTableResponse pResponseStatus_ =
-  DescribeGlobalTableResponse'
-    { _dgtrsGlobalTableDescription = Nothing
-    , _dgtrsResponseStatus = pResponseStatus_
-    }
-
+describeGlobalTableResponse pResponseStatus_
+  = DescribeGlobalTableResponse'{_dgtrsGlobalTableDescription
+                                   = Nothing,
+                                 _dgtrsResponseStatus = pResponseStatus_}
 
 -- | Contains the details of the global table.
 dgtrsGlobalTableDescription :: Lens' DescribeGlobalTableResponse (Maybe GlobalTableDescription)

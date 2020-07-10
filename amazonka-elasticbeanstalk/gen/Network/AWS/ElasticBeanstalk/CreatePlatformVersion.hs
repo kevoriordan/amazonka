@@ -29,6 +29,7 @@ module Network.AWS.ElasticBeanstalk.CreatePlatformVersion
     -- * Request Lenses
     , cpvOptionSettings
     , cpvEnvironmentName
+    , cpvTags
     , cpvPlatformName
     , cpvPlatformVersion
     , cpvPlatformDefinitionBundle
@@ -54,14 +55,20 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createPlatformVersion' smart constructor.
-data CreatePlatformVersion = CreatePlatformVersion'
-  { _cpvOptionSettings           :: !(Maybe [ConfigurationOptionSetting])
-  , _cpvEnvironmentName          :: !(Maybe Text)
-  , _cpvPlatformName             :: !Text
-  , _cpvPlatformVersion          :: !Text
-  , _cpvPlatformDefinitionBundle :: !S3Location
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePlatformVersion = CreatePlatformVersion'{_cpvOptionSettings
+                                                    ::
+                                                    !(Maybe
+                                                        [ConfigurationOptionSetting]),
+                                                    _cpvEnvironmentName ::
+                                                    !(Maybe Text),
+                                                    _cpvTags :: !(Maybe [Tag]),
+                                                    _cpvPlatformName :: !Text,
+                                                    _cpvPlatformVersion ::
+                                                    !Text,
+                                                    _cpvPlatformDefinitionBundle
+                                                    :: !S3Location}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreatePlatformVersion' with the minimum fields required to make a request.
 --
@@ -70,6 +77,8 @@ data CreatePlatformVersion = CreatePlatformVersion'
 -- * 'cpvOptionSettings' - The configuration option settings to apply to the builder environment.
 --
 -- * 'cpvEnvironmentName' - The name of the builder environment.
+--
+-- * 'cpvTags' - Specifies the tags applied to the new platform version. Elastic Beanstalk applies these tags only to the platform version. Environments that you create using the platform version don't inherit the tags.
 --
 -- * 'cpvPlatformName' - The name of your custom platform.
 --
@@ -81,15 +90,15 @@ createPlatformVersion
     -> Text -- ^ 'cpvPlatformVersion'
     -> S3Location -- ^ 'cpvPlatformDefinitionBundle'
     -> CreatePlatformVersion
-createPlatformVersion pPlatformName_ pPlatformVersion_ pPlatformDefinitionBundle_ =
-  CreatePlatformVersion'
-    { _cpvOptionSettings = Nothing
-    , _cpvEnvironmentName = Nothing
-    , _cpvPlatformName = pPlatformName_
-    , _cpvPlatformVersion = pPlatformVersion_
-    , _cpvPlatformDefinitionBundle = pPlatformDefinitionBundle_
-    }
-
+createPlatformVersion pPlatformName_
+  pPlatformVersion_ pPlatformDefinitionBundle_
+  = CreatePlatformVersion'{_cpvOptionSettings =
+                             Nothing,
+                           _cpvEnvironmentName = Nothing, _cpvTags = Nothing,
+                           _cpvPlatformName = pPlatformName_,
+                           _cpvPlatformVersion = pPlatformVersion_,
+                           _cpvPlatformDefinitionBundle =
+                             pPlatformDefinitionBundle_}
 
 -- | The configuration option settings to apply to the builder environment.
 cpvOptionSettings :: Lens' CreatePlatformVersion [ConfigurationOptionSetting]
@@ -98,6 +107,10 @@ cpvOptionSettings = lens _cpvOptionSettings (\ s a -> s{_cpvOptionSettings = a})
 -- | The name of the builder environment.
 cpvEnvironmentName :: Lens' CreatePlatformVersion (Maybe Text)
 cpvEnvironmentName = lens _cpvEnvironmentName (\ s a -> s{_cpvEnvironmentName = a})
+
+-- | Specifies the tags applied to the new platform version. Elastic Beanstalk applies these tags only to the platform version. Environments that you create using the platform version don't inherit the tags.
+cpvTags :: Lens' CreatePlatformVersion [Tag]
+cpvTags = lens _cpvTags (\ s a -> s{_cpvTags = a}) . _Default . _Coerce
 
 -- | The name of your custom platform.
 cpvPlatformName :: Lens' CreatePlatformVersion Text
@@ -141,18 +154,26 @@ instance ToQuery CreatePlatformVersion where
                  toQuery
                    (toQueryList "member" <$> _cpvOptionSettings),
                "EnvironmentName" =: _cpvEnvironmentName,
+               "Tags" =:
+                 toQuery (toQueryList "member" <$> _cpvTags),
                "PlatformName" =: _cpvPlatformName,
                "PlatformVersion" =: _cpvPlatformVersion,
                "PlatformDefinitionBundle" =:
                  _cpvPlatformDefinitionBundle]
 
 -- | /See:/ 'createPlatformVersionResponse' smart constructor.
-data CreatePlatformVersionResponse = CreatePlatformVersionResponse'
-  { _cpvrsBuilder         :: !(Maybe Builder)
-  , _cpvrsPlatformSummary :: !(Maybe PlatformSummary)
-  , _cpvrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePlatformVersionResponse = CreatePlatformVersionResponse'{_cpvrsBuilder
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Builder),
+                                                                    _cpvrsPlatformSummary
+                                                                    ::
+                                                                    !(Maybe
+                                                                        PlatformSummary),
+                                                                    _cpvrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreatePlatformVersionResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +187,11 @@ data CreatePlatformVersionResponse = CreatePlatformVersionResponse'
 createPlatformVersionResponse
     :: Int -- ^ 'cpvrsResponseStatus'
     -> CreatePlatformVersionResponse
-createPlatformVersionResponse pResponseStatus_ =
-  CreatePlatformVersionResponse'
-    { _cpvrsBuilder = Nothing
-    , _cpvrsPlatformSummary = Nothing
-    , _cpvrsResponseStatus = pResponseStatus_
-    }
-
+createPlatformVersionResponse pResponseStatus_
+  = CreatePlatformVersionResponse'{_cpvrsBuilder =
+                                     Nothing,
+                                   _cpvrsPlatformSummary = Nothing,
+                                   _cpvrsResponseStatus = pResponseStatus_}
 
 -- | The builder used to create the custom platform.
 cpvrsBuilder :: Lens' CreatePlatformVersionResponse (Maybe Builder)

@@ -47,12 +47,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'resetFpgaImageAttribute' smart constructor.
-data ResetFpgaImageAttribute = ResetFpgaImageAttribute'
-  { _rfiaAttribute   :: !(Maybe ResetFpgaImageAttributeName)
-  , _rfiaDryRun      :: !(Maybe Bool)
-  , _rfiaFpgaImageId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetFpgaImageAttribute = ResetFpgaImageAttribute'{_rfiaAttribute
+                                                        ::
+                                                        !(Maybe
+                                                            ResetFpgaImageAttributeName),
+                                                        _rfiaDryRun ::
+                                                        !(Maybe Bool),
+                                                        _rfiaFpgaImageId ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ResetFpgaImageAttribute' with the minimum fields required to make a request.
 --
@@ -66,13 +70,10 @@ data ResetFpgaImageAttribute = ResetFpgaImageAttribute'
 resetFpgaImageAttribute
     :: Text -- ^ 'rfiaFpgaImageId'
     -> ResetFpgaImageAttribute
-resetFpgaImageAttribute pFpgaImageId_ =
-  ResetFpgaImageAttribute'
-    { _rfiaAttribute = Nothing
-    , _rfiaDryRun = Nothing
-    , _rfiaFpgaImageId = pFpgaImageId_
-    }
-
+resetFpgaImageAttribute pFpgaImageId_
+  = ResetFpgaImageAttribute'{_rfiaAttribute = Nothing,
+                             _rfiaDryRun = Nothing,
+                             _rfiaFpgaImageId = pFpgaImageId_}
 
 -- | The attribute.
 rfiaAttribute :: Lens' ResetFpgaImageAttribute (Maybe ResetFpgaImageAttributeName)
@@ -117,11 +118,14 @@ instance ToQuery ResetFpgaImageAttribute where
                "FpgaImageId" =: _rfiaFpgaImageId]
 
 -- | /See:/ 'resetFpgaImageAttributeResponse' smart constructor.
-data ResetFpgaImageAttributeResponse = ResetFpgaImageAttributeResponse'
-  { _rfiarsReturn         :: !(Maybe Bool)
-  , _rfiarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResetFpgaImageAttributeResponse = ResetFpgaImageAttributeResponse'{_rfiarsReturn
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Bool),
+                                                                        _rfiarsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ResetFpgaImageAttributeResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +137,10 @@ data ResetFpgaImageAttributeResponse = ResetFpgaImageAttributeResponse'
 resetFpgaImageAttributeResponse
     :: Int -- ^ 'rfiarsResponseStatus'
     -> ResetFpgaImageAttributeResponse
-resetFpgaImageAttributeResponse pResponseStatus_ =
-  ResetFpgaImageAttributeResponse'
-    {_rfiarsReturn = Nothing, _rfiarsResponseStatus = pResponseStatus_}
-
+resetFpgaImageAttributeResponse pResponseStatus_
+  = ResetFpgaImageAttributeResponse'{_rfiarsReturn =
+                                       Nothing,
+                                     _rfiarsResponseStatus = pResponseStatus_}
 
 -- | Is @true@ if the request succeeds, and an error otherwise.
 rfiarsReturn :: Lens' ResetFpgaImageAttributeResponse (Maybe Bool)

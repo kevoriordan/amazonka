@@ -46,17 +46,16 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'putEvaluations' smart constructor.
-data PutEvaluations = PutEvaluations'
-  { _peEvaluations :: !(Maybe [Evaluation])
-  , _peTestMode    :: !(Maybe Bool)
-  , _peResultToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutEvaluations = PutEvaluations'{_peEvaluations
+                                      :: !(Maybe [Evaluation]),
+                                      _peTestMode :: !(Maybe Bool),
+                                      _peResultToken :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutEvaluations' with the minimum fields required to make a request.
 --
@@ -70,13 +69,10 @@ data PutEvaluations = PutEvaluations'
 putEvaluations
     :: Text -- ^ 'peResultToken'
     -> PutEvaluations
-putEvaluations pResultToken_ =
-  PutEvaluations'
-    { _peEvaluations = Nothing
-    , _peTestMode = Nothing
-    , _peResultToken = pResultToken_
-    }
-
+putEvaluations pResultToken_
+  = PutEvaluations'{_peEvaluations = Nothing,
+                    _peTestMode = Nothing,
+                    _peResultToken = pResultToken_}
 
 -- | The assessments that the AWS Lambda function performs. Each evaluation identifies an AWS resource and indicates whether it complies with the AWS Config rule that invokes the AWS Lambda function.
 peEvaluations :: Lens' PutEvaluations [Evaluation]
@@ -127,16 +123,17 @@ instance ToPath PutEvaluations where
 instance ToQuery PutEvaluations where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'putEvaluationsResponse' smart constructor.
-data PutEvaluationsResponse = PutEvaluationsResponse'
-  { _persFailedEvaluations :: !(Maybe [Evaluation])
-  , _persResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutEvaluationsResponse = PutEvaluationsResponse'{_persFailedEvaluations
+                                                      :: !(Maybe [Evaluation]),
+                                                      _persResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'PutEvaluationsResponse' with the minimum fields required to make a request.
 --
@@ -148,10 +145,10 @@ data PutEvaluationsResponse = PutEvaluationsResponse'
 putEvaluationsResponse
     :: Int -- ^ 'persResponseStatus'
     -> PutEvaluationsResponse
-putEvaluationsResponse pResponseStatus_ =
-  PutEvaluationsResponse'
-    {_persFailedEvaluations = Nothing, _persResponseStatus = pResponseStatus_}
-
+putEvaluationsResponse pResponseStatus_
+  = PutEvaluationsResponse'{_persFailedEvaluations =
+                              Nothing,
+                            _persResponseStatus = pResponseStatus_}
 
 -- | Requests that failed because of a client or server error.
 persFailedEvaluations :: Lens' PutEvaluationsResponse [Evaluation]

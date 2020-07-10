@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This operation lists all the tags attached to a vault. The operation returns an empty map if there are no tags. For more information about tags, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html Tagging Amazon Glacier Resources> .
+-- This operation lists all the tags attached to a vault. The operation returns an empty map if there are no tags. For more information about tags, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html Tagging Amazon S3 Glacier Resources> .
 --
 --
 module Network.AWS.Glacier.ListTagsForVault
@@ -50,28 +50,27 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listTagsForVault' smart constructor.
-data ListTagsForVault = ListTagsForVault'
-  { _ltfvAccountId :: !Text
-  , _ltfvVaultName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForVault = ListTagsForVault'{_ltfvAccountId
+                                          :: !Text,
+                                          _ltfvVaultName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsForVault' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltfvAccountId' - The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
+-- * 'ltfvAccountId' - The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
 --
 -- * 'ltfvVaultName' - The name of the vault.
 listTagsForVault
     :: Text -- ^ 'ltfvAccountId'
     -> Text -- ^ 'ltfvVaultName'
     -> ListTagsForVault
-listTagsForVault pAccountId_ pVaultName_ =
-  ListTagsForVault' {_ltfvAccountId = pAccountId_, _ltfvVaultName = pVaultName_}
+listTagsForVault pAccountId_ pVaultName_
+  = ListTagsForVault'{_ltfvAccountId = pAccountId_,
+                      _ltfvVaultName = pVaultName_}
 
-
--- | The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
+-- | The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
 ltfvAccountId :: Lens' ListTagsForVault Text
 ltfvAccountId = lens _ltfvAccountId (\ s a -> s{_ltfvAccountId = a})
 
@@ -104,16 +103,19 @@ instance ToPath ListTagsForVault where
 instance ToQuery ListTagsForVault where
         toQuery = const mempty
 
--- | Contains the Amazon Glacier response to your request.
+-- | Contains the Amazon S3 Glacier response to your request.
 --
 --
 --
 -- /See:/ 'listTagsForVaultResponse' smart constructor.
-data ListTagsForVaultResponse = ListTagsForVaultResponse'
-  { _ltfvrsTags           :: !(Maybe (Map Text Text))
-  , _ltfvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForVaultResponse = ListTagsForVaultResponse'{_ltfvrsTags
+                                                          ::
+                                                          !(Maybe
+                                                              (Map Text Text)),
+                                                          _ltfvrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListTagsForVaultResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +127,9 @@ data ListTagsForVaultResponse = ListTagsForVaultResponse'
 listTagsForVaultResponse
     :: Int -- ^ 'ltfvrsResponseStatus'
     -> ListTagsForVaultResponse
-listTagsForVaultResponse pResponseStatus_ =
-  ListTagsForVaultResponse'
-    {_ltfvrsTags = Nothing, _ltfvrsResponseStatus = pResponseStatus_}
-
+listTagsForVaultResponse pResponseStatus_
+  = ListTagsForVaultResponse'{_ltfvrsTags = Nothing,
+                              _ltfvrsResponseStatus = pResponseStatus_}
 
 -- | The tags attached to the vault. Each tag is composed of a key and a value.
 ltfvrsTags :: Lens' ListTagsForVaultResponse (HashMap Text Text)

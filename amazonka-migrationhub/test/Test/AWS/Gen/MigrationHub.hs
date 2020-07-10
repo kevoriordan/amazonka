@@ -14,11 +14,11 @@
 module Test.AWS.Gen.MigrationHub where
 
 import Data.Proxy
-import Network.AWS.MigrationHub
 import Test.AWS.Fixture
-import Test.AWS.MigrationHub.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.MigrationHub
+import Test.AWS.MigrationHub.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -33,6 +33,9 @@ import Test.Tasty
 --
 --         , requestCreateProgressUpdateStream $
 --             createProgressUpdateStream
+--
+--         , requestListApplicationStates $
+--             listApplicationStates
 --
 --         , requestListCreatedArtifacts $
 --             listCreatedArtifacts
@@ -84,6 +87,9 @@ import Test.Tasty
 --
 --         , responseCreateProgressUpdateStream $
 --             createProgressUpdateStreamResponse
+--
+--         , responseListApplicationStates $
+--             listApplicationStatesResponse
 --
 --         , responseListCreatedArtifacts $
 --             listCreatedArtifactsResponse
@@ -141,6 +147,11 @@ requestCreateProgressUpdateStream :: CreateProgressUpdateStream -> TestTree
 requestCreateProgressUpdateStream = req
     "CreateProgressUpdateStream"
     "fixture/CreateProgressUpdateStream.yaml"
+
+requestListApplicationStates :: ListApplicationStates -> TestTree
+requestListApplicationStates = req
+    "ListApplicationStates"
+    "fixture/ListApplicationStates.yaml"
 
 requestListCreatedArtifacts :: ListCreatedArtifacts -> TestTree
 requestListCreatedArtifacts = req
@@ -227,6 +238,13 @@ responseCreateProgressUpdateStream = res
     "fixture/CreateProgressUpdateStreamResponse.proto"
     migrationHub
     (Proxy :: Proxy CreateProgressUpdateStream)
+
+responseListApplicationStates :: ListApplicationStatesResponse -> TestTree
+responseListApplicationStates = res
+    "ListApplicationStatesResponse"
+    "fixture/ListApplicationStatesResponse.proto"
+    migrationHub
+    (Proxy :: Proxy ListApplicationStates)
 
 responseListCreatedArtifacts :: ListCreatedArtifactsResponse -> TestTree
 responseListCreatedArtifacts = res

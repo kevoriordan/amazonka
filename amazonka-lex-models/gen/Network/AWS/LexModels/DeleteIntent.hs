@@ -21,9 +21,9 @@
 -- Deletes all versions of the intent, including the @> LATEST@ version. To delete a specific version of the intent, use the 'DeleteIntentVersion' operation.
 --
 --
--- You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see 'how-it-works' ), you must remove those references first.
+-- You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see 'how-it-works' ), you must remove those references first. 
 --
--- This operation requires permission for the @lex:DeleteIntent@ action.
+-- This operation requires permission for the @lex:DeleteIntent@ action. 
 --
 module Network.AWS.LexModels.DeleteIntent
     (
@@ -46,23 +46,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteIntent' smart constructor.
-newtype DeleteIntent = DeleteIntent'
-  { _diName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteIntent = DeleteIntent'{_diName :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIntent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diName' - The name of the intent. The name is case sensitive.
+-- * 'diName' - The name of the intent. The name is case sensitive. 
 deleteIntent
     :: Text -- ^ 'diName'
     -> DeleteIntent
-deleteIntent pName_ = DeleteIntent' {_diName = pName_}
+deleteIntent pName_ = DeleteIntent'{_diName = pName_}
 
-
--- | The name of the intent. The name is case sensitive.
+-- | The name of the intent. The name is case sensitive. 
 diName :: Lens' DeleteIntent Text
 diName = lens _diName (\ s a -> s{_diName = a})
 
@@ -90,16 +87,13 @@ instance ToQuery DeleteIntent where
         toQuery = const mempty
 
 -- | /See:/ 'deleteIntentResponse' smart constructor.
-data DeleteIntentResponse =
-  DeleteIntentResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIntentResponse = DeleteIntentResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIntentResponse' with the minimum fields required to make a request.
 --
 deleteIntentResponse
     :: DeleteIntentResponse
 deleteIntentResponse = DeleteIntentResponse'
-
 
 instance NFData DeleteIntentResponse where

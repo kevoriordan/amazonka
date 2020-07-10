@@ -21,7 +21,7 @@
 -- Requests a description of a stack's provisioning parameters.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeStackProvisioningParameters
     (
@@ -48,24 +48,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeStackProvisioningParameters' smart constructor.
-newtype DescribeStackProvisioningParameters = DescribeStackProvisioningParameters'
-  { _dsppStackId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeStackProvisioningParameters = DescribeStackProvisioningParameters'{_dsppStackId
+                                                                                   ::
+                                                                                   Text}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DescribeStackProvisioningParameters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsppStackId' - The stack ID
+-- * 'dsppStackId' - The stack ID.
 describeStackProvisioningParameters
     :: Text -- ^ 'dsppStackId'
     -> DescribeStackProvisioningParameters
-describeStackProvisioningParameters pStackId_ =
-  DescribeStackProvisioningParameters' {_dsppStackId = pStackId_}
+describeStackProvisioningParameters pStackId_
+  = DescribeStackProvisioningParameters'{_dsppStackId =
+                                           pStackId_}
 
-
--- | The stack ID
+-- | The stack ID.
 dsppStackId :: Lens' DescribeStackProvisioningParameters Text
 dsppStackId = lens _dsppStackId (\ s a -> s{_dsppStackId = a})
 
@@ -120,12 +121,22 @@ instance ToQuery DescribeStackProvisioningParameters
 --
 --
 -- /See:/ 'describeStackProvisioningParametersResponse' smart constructor.
-data DescribeStackProvisioningParametersResponse = DescribeStackProvisioningParametersResponse'
-  { _dspprsAgentInstallerURL :: !(Maybe Text)
-  , _dspprsParameters        :: !(Maybe (Map Text Text))
-  , _dspprsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackProvisioningParametersResponse = DescribeStackProvisioningParametersResponse'{_dspprsAgentInstallerURL
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    Text),
+                                                                                                _dspprsParameters
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    (Map
+                                                                                                       Text
+                                                                                                       Text)),
+                                                                                                _dspprsResponseStatus
+                                                                                                ::
+                                                                                                !Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DescribeStackProvisioningParametersResponse' with the minimum fields required to make a request.
 --
@@ -139,13 +150,13 @@ data DescribeStackProvisioningParametersResponse = DescribeStackProvisioningPara
 describeStackProvisioningParametersResponse
     :: Int -- ^ 'dspprsResponseStatus'
     -> DescribeStackProvisioningParametersResponse
-describeStackProvisioningParametersResponse pResponseStatus_ =
-  DescribeStackProvisioningParametersResponse'
-    { _dspprsAgentInstallerURL = Nothing
-    , _dspprsParameters = Nothing
-    , _dspprsResponseStatus = pResponseStatus_
-    }
-
+describeStackProvisioningParametersResponse
+  pResponseStatus_
+  = DescribeStackProvisioningParametersResponse'{_dspprsAgentInstallerURL
+                                                   = Nothing,
+                                                 _dspprsParameters = Nothing,
+                                                 _dspprsResponseStatus =
+                                                   pResponseStatus_}
 
 -- | The AWS OpsWorks Stacks agent installer's URL.
 dspprsAgentInstallerURL :: Lens' DescribeStackProvisioningParametersResponse (Maybe Text)

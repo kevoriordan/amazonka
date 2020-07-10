@@ -21,6 +21,8 @@
 -- Describes the target groups for the specified Auto Scaling group.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AutoScaling.DescribeLoadBalancerTargetGroups
     (
     -- * Creating a Request
@@ -43,17 +45,25 @@ module Network.AWS.AutoScaling.DescribeLoadBalancerTargetGroups
 import Network.AWS.AutoScaling.Types
 import Network.AWS.AutoScaling.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLoadBalancerTargetGroups' smart constructor.
-data DescribeLoadBalancerTargetGroups = DescribeLoadBalancerTargetGroups'
-  { _dlbtgsNextToken            :: !(Maybe Text)
-  , _dlbtgsMaxRecords           :: !(Maybe Int)
-  , _dlbtgsAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoadBalancerTargetGroups = DescribeLoadBalancerTargetGroups'{_dlbtgsNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dlbtgsMaxRecords
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Int),
+                                                                          _dlbtgsAutoScalingGroupName
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeLoadBalancerTargetGroups' with the minimum fields required to make a request.
 --
@@ -61,31 +71,41 @@ data DescribeLoadBalancerTargetGroups = DescribeLoadBalancerTargetGroups'
 --
 -- * 'dlbtgsNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
--- * 'dlbtgsMaxRecords' - The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
+-- * 'dlbtgsMaxRecords' - The maximum number of items to return with this call. The default value is @100@ and the maximum value is @100@ .
 --
 -- * 'dlbtgsAutoScalingGroupName' - The name of the Auto Scaling group.
 describeLoadBalancerTargetGroups
     :: Text -- ^ 'dlbtgsAutoScalingGroupName'
     -> DescribeLoadBalancerTargetGroups
-describeLoadBalancerTargetGroups pAutoScalingGroupName_ =
-  DescribeLoadBalancerTargetGroups'
-    { _dlbtgsNextToken = Nothing
-    , _dlbtgsMaxRecords = Nothing
-    , _dlbtgsAutoScalingGroupName = pAutoScalingGroupName_
-    }
-
+describeLoadBalancerTargetGroups
+  pAutoScalingGroupName_
+  = DescribeLoadBalancerTargetGroups'{_dlbtgsNextToken
+                                        = Nothing,
+                                      _dlbtgsMaxRecords = Nothing,
+                                      _dlbtgsAutoScalingGroupName =
+                                        pAutoScalingGroupName_}
 
 -- | The token for the next set of items to return. (You received this token from a previous call.)
 dlbtgsNextToken :: Lens' DescribeLoadBalancerTargetGroups (Maybe Text)
 dlbtgsNextToken = lens _dlbtgsNextToken (\ s a -> s{_dlbtgsNextToken = a})
 
--- | The maximum number of items to return with this call. The default value is 100 and the maximum value is 100.
+-- | The maximum number of items to return with this call. The default value is @100@ and the maximum value is @100@ .
 dlbtgsMaxRecords :: Lens' DescribeLoadBalancerTargetGroups (Maybe Int)
 dlbtgsMaxRecords = lens _dlbtgsMaxRecords (\ s a -> s{_dlbtgsMaxRecords = a})
 
 -- | The name of the Auto Scaling group.
 dlbtgsAutoScalingGroupName :: Lens' DescribeLoadBalancerTargetGroups Text
 dlbtgsAutoScalingGroupName = lens _dlbtgsAutoScalingGroupName (\ s a -> s{_dlbtgsAutoScalingGroupName = a})
+
+instance AWSPager DescribeLoadBalancerTargetGroups
+         where
+        page rq rs
+          | stop (rs ^. dlbtgsrsNextToken) = Nothing
+          | stop (rs ^. dlbtgsrsLoadBalancerTargetGroups) =
+            Nothing
+          | otherwise =
+            Just $ rq &
+              dlbtgsNextToken .~ rs ^. dlbtgsrsNextToken
 
 instance AWSRequest DescribeLoadBalancerTargetGroups
          where
@@ -129,12 +149,20 @@ instance ToQuery DescribeLoadBalancerTargetGroups
                  _dlbtgsAutoScalingGroupName]
 
 -- | /See:/ 'describeLoadBalancerTargetGroupsResponse' smart constructor.
-data DescribeLoadBalancerTargetGroupsResponse = DescribeLoadBalancerTargetGroupsResponse'
-  { _dlbtgsrsLoadBalancerTargetGroups :: !(Maybe [LoadBalancerTargetGroupState])
-  , _dlbtgsrsNextToken                :: !(Maybe Text)
-  , _dlbtgsrsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoadBalancerTargetGroupsResponse = DescribeLoadBalancerTargetGroupsResponse'{_dlbtgsrsLoadBalancerTargetGroups
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              [LoadBalancerTargetGroupState]),
+                                                                                          _dlbtgsrsNextToken
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _dlbtgsrsResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DescribeLoadBalancerTargetGroupsResponse' with the minimum fields required to make a request.
 --
@@ -142,25 +170,25 @@ data DescribeLoadBalancerTargetGroupsResponse = DescribeLoadBalancerTargetGroups
 --
 -- * 'dlbtgsrsLoadBalancerTargetGroups' - Information about the target groups.
 --
--- * 'dlbtgsrsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- * 'dlbtgsrsNextToken' - A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 --
 -- * 'dlbtgsrsResponseStatus' - -- | The response status code.
 describeLoadBalancerTargetGroupsResponse
     :: Int -- ^ 'dlbtgsrsResponseStatus'
     -> DescribeLoadBalancerTargetGroupsResponse
-describeLoadBalancerTargetGroupsResponse pResponseStatus_ =
-  DescribeLoadBalancerTargetGroupsResponse'
-    { _dlbtgsrsLoadBalancerTargetGroups = Nothing
-    , _dlbtgsrsNextToken = Nothing
-    , _dlbtgsrsResponseStatus = pResponseStatus_
-    }
-
+describeLoadBalancerTargetGroupsResponse
+  pResponseStatus_
+  = DescribeLoadBalancerTargetGroupsResponse'{_dlbtgsrsLoadBalancerTargetGroups
+                                                = Nothing,
+                                              _dlbtgsrsNextToken = Nothing,
+                                              _dlbtgsrsResponseStatus =
+                                                pResponseStatus_}
 
 -- | Information about the target groups.
 dlbtgsrsLoadBalancerTargetGroups :: Lens' DescribeLoadBalancerTargetGroupsResponse [LoadBalancerTargetGroupState]
 dlbtgsrsLoadBalancerTargetGroups = lens _dlbtgsrsLoadBalancerTargetGroups (\ s a -> s{_dlbtgsrsLoadBalancerTargetGroups = a}) . _Default . _Coerce
 
--- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- | A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 dlbtgsrsNextToken :: Lens' DescribeLoadBalancerTargetGroupsResponse (Maybe Text)
 dlbtgsrsNextToken = lens _dlbtgsrsNextToken (\ s a -> s{_dlbtgsrsNextToken = a})
 

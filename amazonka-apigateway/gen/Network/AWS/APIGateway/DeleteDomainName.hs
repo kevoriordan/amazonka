@@ -46,10 +46,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteDomainName' smart constructor.
-newtype DeleteDomainName = DeleteDomainName'
-  { _ddnDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDomainName = DeleteDomainName'{_ddnDomainName
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDomainName' with the minimum fields required to make a request.
 --
@@ -59,9 +58,8 @@ newtype DeleteDomainName = DeleteDomainName'
 deleteDomainName
     :: Text -- ^ 'ddnDomainName'
     -> DeleteDomainName
-deleteDomainName pDomainName_ =
-  DeleteDomainName' {_ddnDomainName = pDomainName_}
-
+deleteDomainName pDomainName_
+  = DeleteDomainName'{_ddnDomainName = pDomainName_}
 
 -- | [Required] The name of the 'DomainName' resource to be deleted.
 ddnDomainName :: Lens' DeleteDomainName Text
@@ -90,16 +88,14 @@ instance ToQuery DeleteDomainName where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDomainNameResponse' smart constructor.
-data DeleteDomainNameResponse =
-  DeleteDomainNameResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDomainNameResponse = DeleteDomainNameResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteDomainNameResponse' with the minimum fields required to make a request.
 --
 deleteDomainNameResponse
     :: DeleteDomainNameResponse
 deleteDomainNameResponse = DeleteDomainNameResponse'
-
 
 instance NFData DeleteDomainNameResponse where

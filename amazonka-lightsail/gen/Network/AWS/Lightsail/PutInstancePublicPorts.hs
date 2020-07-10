@@ -21,6 +21,8 @@
 -- Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.
 --
 --
+-- The @put instance public ports@ operation supports tag-based access control via resource tags applied to the resource identified by @instance name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.PutInstancePublicPorts
     (
     -- * Creating a Request
@@ -46,11 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putInstancePublicPorts' smart constructor.
-data PutInstancePublicPorts = PutInstancePublicPorts'
-  { _pippPortInfos    :: ![PortInfo]
-  , _pippInstanceName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutInstancePublicPorts = PutInstancePublicPorts'{_pippPortInfos
+                                                      :: ![PortInfo],
+                                                      _pippInstanceName ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'PutInstancePublicPorts' with the minimum fields required to make a request.
 --
@@ -62,10 +65,9 @@ data PutInstancePublicPorts = PutInstancePublicPorts'
 putInstancePublicPorts
     :: Text -- ^ 'pippInstanceName'
     -> PutInstancePublicPorts
-putInstancePublicPorts pInstanceName_ =
-  PutInstancePublicPorts'
-    {_pippPortInfos = mempty, _pippInstanceName = pInstanceName_}
-
+putInstancePublicPorts pInstanceName_
+  = PutInstancePublicPorts'{_pippPortInfos = mempty,
+                            _pippInstanceName = pInstanceName_}
 
 -- | Specifies information about the public port(s).
 pippPortInfos :: Lens' PutInstancePublicPorts [PortInfo]
@@ -113,28 +115,31 @@ instance ToQuery PutInstancePublicPorts where
         toQuery = const mempty
 
 -- | /See:/ 'putInstancePublicPortsResponse' smart constructor.
-data PutInstancePublicPortsResponse = PutInstancePublicPortsResponse'
-  { _pipprsOperation      :: !(Maybe Operation)
-  , _pipprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutInstancePublicPortsResponse = PutInstancePublicPortsResponse'{_pipprsOperation
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Operation),
+                                                                      _pipprsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'PutInstancePublicPortsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pipprsOperation' - Describes metadata about the operation you just executed.
+-- * 'pipprsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'pipprsResponseStatus' - -- | The response status code.
 putInstancePublicPortsResponse
     :: Int -- ^ 'pipprsResponseStatus'
     -> PutInstancePublicPortsResponse
-putInstancePublicPortsResponse pResponseStatus_ =
-  PutInstancePublicPortsResponse'
-    {_pipprsOperation = Nothing, _pipprsResponseStatus = pResponseStatus_}
+putInstancePublicPortsResponse pResponseStatus_
+  = PutInstancePublicPortsResponse'{_pipprsOperation =
+                                      Nothing,
+                                    _pipprsResponseStatus = pResponseStatus_}
 
-
--- | Describes metadata about the operation you just executed.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 pipprsOperation :: Lens' PutInstancePublicPortsResponse (Maybe Operation)
 pipprsOperation = lens _pipprsOperation (\ s a -> s{_pipprsOperation = a})
 

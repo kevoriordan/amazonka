@@ -57,11 +57,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getPolicyVersion' smart constructor.
-data GetPolicyVersion = GetPolicyVersion'
-  { _gpvPolicyName      :: !Text
-  , _gpvPolicyVersionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPolicyVersion = GetPolicyVersion'{_gpvPolicyName
+                                          :: !Text,
+                                          _gpvPolicyVersionId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPolicyVersion' with the minimum fields required to make a request.
 --
@@ -74,10 +73,9 @@ getPolicyVersion
     :: Text -- ^ 'gpvPolicyName'
     -> Text -- ^ 'gpvPolicyVersionId'
     -> GetPolicyVersion
-getPolicyVersion pPolicyName_ pPolicyVersionId_ =
-  GetPolicyVersion'
-    {_gpvPolicyName = pPolicyName_, _gpvPolicyVersionId = pPolicyVersionId_}
-
+getPolicyVersion pPolicyName_ pPolicyVersionId_
+  = GetPolicyVersion'{_gpvPolicyName = pPolicyName_,
+                      _gpvPolicyVersionId = pPolicyVersionId_}
 
 -- | The name of the policy.
 gpvPolicyName :: Lens' GetPolicyVersion Text
@@ -124,24 +122,32 @@ instance ToQuery GetPolicyVersion where
 --
 --
 -- /See:/ 'getPolicyVersionResponse' smart constructor.
-data GetPolicyVersionResponse = GetPolicyVersionResponse'
-  { _gpvrsLastModifiedDate :: !(Maybe POSIX)
-  , _gpvrsPolicyName       :: !(Maybe Text)
-  , _gpvrsPolicyDocument   :: !(Maybe Text)
-  , _gpvrsPolicyVersionId  :: !(Maybe Text)
-  , _gpvrsPolicyARN        :: !(Maybe Text)
-  , _gpvrsCreationDate     :: !(Maybe POSIX)
-  , _gpvrsGenerationId     :: !(Maybe Text)
-  , _gpvrsIsDefaultVersion :: !(Maybe Bool)
-  , _gpvrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPolicyVersionResponse = GetPolicyVersionResponse'{_gpvrsLastModifiedDate
+                                                          :: !(Maybe POSIX),
+                                                          _gpvrsPolicyName ::
+                                                          !(Maybe Text),
+                                                          _gpvrsPolicyDocument
+                                                          :: !(Maybe Text),
+                                                          _gpvrsPolicyVersionId
+                                                          :: !(Maybe Text),
+                                                          _gpvrsPolicyARN ::
+                                                          !(Maybe Text),
+                                                          _gpvrsCreationDate ::
+                                                          !(Maybe POSIX),
+                                                          _gpvrsGenerationId ::
+                                                          !(Maybe Text),
+                                                          _gpvrsIsDefaultVersion
+                                                          :: !(Maybe Bool),
+                                                          _gpvrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetPolicyVersionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gpvrsLastModifiedDate' - The date the policy version was last modified.
+-- * 'gpvrsLastModifiedDate' - The date the policy was last modified.
 --
 -- * 'gpvrsPolicyName' - The policy name.
 --
@@ -151,7 +157,7 @@ data GetPolicyVersionResponse = GetPolicyVersionResponse'
 --
 -- * 'gpvrsPolicyARN' - The policy ARN.
 --
--- * 'gpvrsCreationDate' - The date the policy version was created.
+-- * 'gpvrsCreationDate' - The date the policy was created.
 --
 -- * 'gpvrsGenerationId' - The generation ID of the policy version.
 --
@@ -161,21 +167,19 @@ data GetPolicyVersionResponse = GetPolicyVersionResponse'
 getPolicyVersionResponse
     :: Int -- ^ 'gpvrsResponseStatus'
     -> GetPolicyVersionResponse
-getPolicyVersionResponse pResponseStatus_ =
-  GetPolicyVersionResponse'
-    { _gpvrsLastModifiedDate = Nothing
-    , _gpvrsPolicyName = Nothing
-    , _gpvrsPolicyDocument = Nothing
-    , _gpvrsPolicyVersionId = Nothing
-    , _gpvrsPolicyARN = Nothing
-    , _gpvrsCreationDate = Nothing
-    , _gpvrsGenerationId = Nothing
-    , _gpvrsIsDefaultVersion = Nothing
-    , _gpvrsResponseStatus = pResponseStatus_
-    }
+getPolicyVersionResponse pResponseStatus_
+  = GetPolicyVersionResponse'{_gpvrsLastModifiedDate =
+                                Nothing,
+                              _gpvrsPolicyName = Nothing,
+                              _gpvrsPolicyDocument = Nothing,
+                              _gpvrsPolicyVersionId = Nothing,
+                              _gpvrsPolicyARN = Nothing,
+                              _gpvrsCreationDate = Nothing,
+                              _gpvrsGenerationId = Nothing,
+                              _gpvrsIsDefaultVersion = Nothing,
+                              _gpvrsResponseStatus = pResponseStatus_}
 
-
--- | The date the policy version was last modified.
+-- | The date the policy was last modified.
 gpvrsLastModifiedDate :: Lens' GetPolicyVersionResponse (Maybe UTCTime)
 gpvrsLastModifiedDate = lens _gpvrsLastModifiedDate (\ s a -> s{_gpvrsLastModifiedDate = a}) . mapping _Time
 
@@ -195,7 +199,7 @@ gpvrsPolicyVersionId = lens _gpvrsPolicyVersionId (\ s a -> s{_gpvrsPolicyVersio
 gpvrsPolicyARN :: Lens' GetPolicyVersionResponse (Maybe Text)
 gpvrsPolicyARN = lens _gpvrsPolicyARN (\ s a -> s{_gpvrsPolicyARN = a})
 
--- | The date the policy version was created.
+-- | The date the policy was created.
 gpvrsCreationDate :: Lens' GetPolicyVersionResponse (Maybe UTCTime)
 gpvrsCreationDate = lens _gpvrsCreationDate (\ s a -> s{_gpvrsCreationDate = a}) . mapping _Time
 

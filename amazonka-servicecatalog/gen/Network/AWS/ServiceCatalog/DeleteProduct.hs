@@ -29,14 +29,14 @@ module Network.AWS.ServiceCatalog.DeleteProduct
       deleteProduct
     , DeleteProduct
     -- * Request Lenses
-    , dppAcceptLanguage
-    , dppId
+    , dltprdctAcceptLanguage
+    , dltprdctId
 
     -- * Destructuring the Response
     , deleteProductResponse
     , DeleteProductResponse
     -- * Response Lenses
-    , delersResponseStatus
+    , dltprdctrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -47,33 +47,32 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'deleteProduct' smart constructor.
-data DeleteProduct = DeleteProduct'
-  { _dppAcceptLanguage :: !(Maybe Text)
-  , _dppId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteProduct = DeleteProduct'{_dltprdctAcceptLanguage
+                                    :: !(Maybe Text),
+                                    _dltprdctId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dppAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
+-- * 'dltprdctAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 --
--- * 'dppId' - The product identifier.
+-- * 'dltprdctId' - The product identifier.
 deleteProduct
-    :: Text -- ^ 'dppId'
+    :: Text -- ^ 'dltprdctId'
     -> DeleteProduct
-deleteProduct pId_ =
-  DeleteProduct' {_dppAcceptLanguage = Nothing, _dppId = pId_}
-
+deleteProduct pId_
+  = DeleteProduct'{_dltprdctAcceptLanguage = Nothing,
+                   _dltprdctId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
-dppAcceptLanguage :: Lens' DeleteProduct (Maybe Text)
-dppAcceptLanguage = lens _dppAcceptLanguage (\ s a -> s{_dppAcceptLanguage = a})
+dltprdctAcceptLanguage :: Lens' DeleteProduct (Maybe Text)
+dltprdctAcceptLanguage = lens _dltprdctAcceptLanguage (\ s a -> s{_dltprdctAcceptLanguage = a})
 
 -- | The product identifier.
-dppId :: Lens' DeleteProduct Text
-dppId = lens _dppId (\ s a -> s{_dppId = a})
+dltprdctId :: Lens' DeleteProduct Text
+dltprdctId = lens _dltprdctId (\ s a -> s{_dltprdctId = a})
 
 instance AWSRequest DeleteProduct where
         type Rs DeleteProduct = DeleteProductResponse
@@ -101,8 +100,8 @@ instance ToJSON DeleteProduct where
         toJSON DeleteProduct'{..}
           = object
               (catMaybes
-                 [("AcceptLanguage" .=) <$> _dppAcceptLanguage,
-                  Just ("Id" .= _dppId)])
+                 [("AcceptLanguage" .=) <$> _dltprdctAcceptLanguage,
+                  Just ("Id" .= _dltprdctId)])
 
 instance ToPath DeleteProduct where
         toPath = const "/"
@@ -111,25 +110,25 @@ instance ToQuery DeleteProduct where
         toQuery = const mempty
 
 -- | /See:/ 'deleteProductResponse' smart constructor.
-newtype DeleteProductResponse = DeleteProductResponse'
-  { _delersResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteProductResponse = DeleteProductResponse'{_dltprdctrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteProductResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'delersResponseStatus' - -- | The response status code.
+-- * 'dltprdctrsResponseStatus' - -- | The response status code.
 deleteProductResponse
-    :: Int -- ^ 'delersResponseStatus'
+    :: Int -- ^ 'dltprdctrsResponseStatus'
     -> DeleteProductResponse
-deleteProductResponse pResponseStatus_ =
-  DeleteProductResponse' {_delersResponseStatus = pResponseStatus_}
-
+deleteProductResponse pResponseStatus_
+  = DeleteProductResponse'{_dltprdctrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
-delersResponseStatus :: Lens' DeleteProductResponse Int
-delersResponseStatus = lens _delersResponseStatus (\ s a -> s{_delersResponseStatus = a})
+dltprdctrsResponseStatus :: Lens' DeleteProductResponse Int
+dltprdctrsResponseStatus = lens _dltprdctrsResponseStatus (\ s a -> s{_dltprdctrsResponseStatus = a})
 
 instance NFData DeleteProductResponse where

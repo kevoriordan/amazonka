@@ -18,7 +18,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the website configuration for a bucket.
+-- Returns the website configuration for a bucket. To host website on Amazon S3, you can configure a bucket as website by adding a website configuration. For more information about hosting websites, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html Hosting Websites on Amazon S3> . 
+--
+--
+-- This GET operation requires the @S3:GetBucketWebsite@ permission. By default, only the bucket owner can read the bucket website configuration. However, bucket owners can allow other users to read the website configuration by writing a bucket policy granting them the @S3:GetBucketWebsite@ permission.
+--
+-- The following operations are related to @DeleteBucketWebsite@ :
+--
+--     * 'DeleteBucketWebsite' 
+--
+--     * 'PutBucketWebsite' 
+--
+--
+--
 module Network.AWS.S3.GetBucketWebsite
     (
     -- * Creating a Request
@@ -46,23 +58,22 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'getBucketWebsite' smart constructor.
-newtype GetBucketWebsite = GetBucketWebsite'
-  { _gbwBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBucketWebsite = GetBucketWebsite'{_gbwBucket
+                                             :: BucketName}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBucketWebsite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbwBucket' - Undocumented member.
+-- * 'gbwBucket' - The bucket name for which to get the website configuration.
 getBucketWebsite
     :: BucketName -- ^ 'gbwBucket'
     -> GetBucketWebsite
-getBucketWebsite pBucket_ = GetBucketWebsite' {_gbwBucket = pBucket_}
+getBucketWebsite pBucket_
+  = GetBucketWebsite'{_gbwBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name for which to get the website configuration.
 gbwBucket :: Lens' GetBucketWebsite BucketName
 gbwBucket = lens _gbwBucket (\ s a -> s{_gbwBucket = a})
 
@@ -96,54 +107,61 @@ instance ToQuery GetBucketWebsite where
         toQuery = const (mconcat ["website"])
 
 -- | /See:/ 'getBucketWebsiteResponse' smart constructor.
-data GetBucketWebsiteResponse = GetBucketWebsiteResponse'
-  { _gbwrsRedirectAllRequestsTo :: !(Maybe RedirectAllRequestsTo)
-  , _gbwrsErrorDocument         :: !(Maybe ErrorDocument)
-  , _gbwrsIndexDocument         :: !(Maybe IndexDocument)
-  , _gbwrsRoutingRules          :: !(Maybe [RoutingRule])
-  , _gbwrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBucketWebsiteResponse = GetBucketWebsiteResponse'{_gbwrsRedirectAllRequestsTo
+                                                          ::
+                                                          !(Maybe
+                                                              RedirectAllRequestsTo),
+                                                          _gbwrsErrorDocument ::
+                                                          !(Maybe
+                                                              ErrorDocument),
+                                                          _gbwrsIndexDocument ::
+                                                          !(Maybe
+                                                              IndexDocument),
+                                                          _gbwrsRoutingRules ::
+                                                          !(Maybe
+                                                              [RoutingRule]),
+                                                          _gbwrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetBucketWebsiteResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbwrsRedirectAllRequestsTo' - Undocumented member.
+-- * 'gbwrsRedirectAllRequestsTo' - Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.
 --
--- * 'gbwrsErrorDocument' - Undocumented member.
+-- * 'gbwrsErrorDocument' - The name of the error document for the website.
 --
--- * 'gbwrsIndexDocument' - Undocumented member.
+-- * 'gbwrsIndexDocument' - The name of the index document for the website.
 --
--- * 'gbwrsRoutingRules' - Undocumented member.
+-- * 'gbwrsRoutingRules' - Rules that define when a redirect is applied and the redirect behavior.
 --
 -- * 'gbwrsResponseStatus' - -- | The response status code.
 getBucketWebsiteResponse
     :: Int -- ^ 'gbwrsResponseStatus'
     -> GetBucketWebsiteResponse
-getBucketWebsiteResponse pResponseStatus_ =
-  GetBucketWebsiteResponse'
-    { _gbwrsRedirectAllRequestsTo = Nothing
-    , _gbwrsErrorDocument = Nothing
-    , _gbwrsIndexDocument = Nothing
-    , _gbwrsRoutingRules = Nothing
-    , _gbwrsResponseStatus = pResponseStatus_
-    }
+getBucketWebsiteResponse pResponseStatus_
+  = GetBucketWebsiteResponse'{_gbwrsRedirectAllRequestsTo
+                                = Nothing,
+                              _gbwrsErrorDocument = Nothing,
+                              _gbwrsIndexDocument = Nothing,
+                              _gbwrsRoutingRules = Nothing,
+                              _gbwrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.
 gbwrsRedirectAllRequestsTo :: Lens' GetBucketWebsiteResponse (Maybe RedirectAllRequestsTo)
 gbwrsRedirectAllRequestsTo = lens _gbwrsRedirectAllRequestsTo (\ s a -> s{_gbwrsRedirectAllRequestsTo = a})
 
--- | Undocumented member.
+-- | The name of the error document for the website.
 gbwrsErrorDocument :: Lens' GetBucketWebsiteResponse (Maybe ErrorDocument)
 gbwrsErrorDocument = lens _gbwrsErrorDocument (\ s a -> s{_gbwrsErrorDocument = a})
 
--- | Undocumented member.
+-- | The name of the index document for the website.
 gbwrsIndexDocument :: Lens' GetBucketWebsiteResponse (Maybe IndexDocument)
 gbwrsIndexDocument = lens _gbwrsIndexDocument (\ s a -> s{_gbwrsIndexDocument = a})
 
--- | Undocumented member.
+-- | Rules that define when a redirect is applied and the redirect behavior.
 gbwrsRoutingRules :: Lens' GetBucketWebsiteResponse [RoutingRule]
 gbwrsRoutingRules = lens _gbwrsRoutingRules (\ s a -> s{_gbwrsRoutingRules = a}) . _Default . _Coerce
 

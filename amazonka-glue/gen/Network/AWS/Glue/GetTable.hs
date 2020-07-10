@@ -27,16 +27,16 @@ module Network.AWS.Glue.GetTable
       getTable
     , GetTable
     -- * Request Lenses
-    , gttCatalogId
-    , gttDatabaseName
-    , gttName
+    , gttblCatalogId
+    , gttblDatabaseName
+    , gttblName
 
     -- * Destructuring the Response
     , getTableResponse
     , GetTableResponse
     -- * Response Lenses
-    , ggrsTable
-    , ggrsResponseStatus
+    , gttblrsTable
+    , gttblrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -47,45 +47,40 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getTable' smart constructor.
-data GetTable = GetTable'
-  { _gttCatalogId    :: !(Maybe Text)
-  , _gttDatabaseName :: !Text
-  , _gttName         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTable = GetTable'{_gttblCatalogId ::
+                          !(Maybe Text),
+                          _gttblDatabaseName :: !Text, _gttblName :: !Text}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gttCatalogId' - The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+-- * 'gttblCatalogId' - The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
 --
--- * 'gttDatabaseName' - The name of the database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
+-- * 'gttblDatabaseName' - The name of the database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
 --
--- * 'gttName' - The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.
+-- * 'gttblName' - The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.
 getTable
-    :: Text -- ^ 'gttDatabaseName'
-    -> Text -- ^ 'gttName'
+    :: Text -- ^ 'gttblDatabaseName'
+    -> Text -- ^ 'gttblName'
     -> GetTable
-getTable pDatabaseName_ pName_ =
-  GetTable'
-    { _gttCatalogId = Nothing
-    , _gttDatabaseName = pDatabaseName_
-    , _gttName = pName_
-    }
+getTable pDatabaseName_ pName_
+  = GetTable'{_gttblCatalogId = Nothing,
+              _gttblDatabaseName = pDatabaseName_,
+              _gttblName = pName_}
 
-
--- | The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
-gttCatalogId :: Lens' GetTable (Maybe Text)
-gttCatalogId = lens _gttCatalogId (\ s a -> s{_gttCatalogId = a})
+-- | The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
+gttblCatalogId :: Lens' GetTable (Maybe Text)
+gttblCatalogId = lens _gttblCatalogId (\ s a -> s{_gttblCatalogId = a})
 
 -- | The name of the database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
-gttDatabaseName :: Lens' GetTable Text
-gttDatabaseName = lens _gttDatabaseName (\ s a -> s{_gttDatabaseName = a})
+gttblDatabaseName :: Lens' GetTable Text
+gttblDatabaseName = lens _gttblDatabaseName (\ s a -> s{_gttblDatabaseName = a})
 
 -- | The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.
-gttName :: Lens' GetTable Text
-gttName = lens _gttName (\ s a -> s{_gttName = a})
+gttblName :: Lens' GetTable Text
+gttblName = lens _gttblName (\ s a -> s{_gttblName = a})
 
 instance AWSRequest GetTable where
         type Rs GetTable = GetTableResponse
@@ -113,9 +108,9 @@ instance ToJSON GetTable where
         toJSON GetTable'{..}
           = object
               (catMaybes
-                 [("CatalogId" .=) <$> _gttCatalogId,
-                  Just ("DatabaseName" .= _gttDatabaseName),
-                  Just ("Name" .= _gttName)])
+                 [("CatalogId" .=) <$> _gttblCatalogId,
+                  Just ("DatabaseName" .= _gttblDatabaseName),
+                  Just ("Name" .= _gttblName)])
 
 instance ToPath GetTable where
         toPath = const "/"
@@ -124,33 +119,31 @@ instance ToQuery GetTable where
         toQuery = const mempty
 
 -- | /See:/ 'getTableResponse' smart constructor.
-data GetTableResponse = GetTableResponse'
-  { _ggrsTable          :: !(Maybe Table)
-  , _ggrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTableResponse = GetTableResponse'{_gttblrsTable
+                                          :: !(Maybe Table),
+                                          _gttblrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTableResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggrsTable' - The @Table@ object that defines the specified table.
+-- * 'gttblrsTable' - The @Table@ object that defines the specified table.
 --
--- * 'ggrsResponseStatus' - -- | The response status code.
+-- * 'gttblrsResponseStatus' - -- | The response status code.
 getTableResponse
-    :: Int -- ^ 'ggrsResponseStatus'
+    :: Int -- ^ 'gttblrsResponseStatus'
     -> GetTableResponse
-getTableResponse pResponseStatus_ =
-  GetTableResponse'
-    {_ggrsTable = Nothing, _ggrsResponseStatus = pResponseStatus_}
-
+getTableResponse pResponseStatus_
+  = GetTableResponse'{_gttblrsTable = Nothing,
+                      _gttblrsResponseStatus = pResponseStatus_}
 
 -- | The @Table@ object that defines the specified table.
-ggrsTable :: Lens' GetTableResponse (Maybe Table)
-ggrsTable = lens _ggrsTable (\ s a -> s{_ggrsTable = a})
+gttblrsTable :: Lens' GetTableResponse (Maybe Table)
+gttblrsTable = lens _gttblrsTable (\ s a -> s{_gttblrsTable = a})
 
 -- | -- | The response status code.
-ggrsResponseStatus :: Lens' GetTableResponse Int
-ggrsResponseStatus = lens _ggrsResponseStatus (\ s a -> s{_ggrsResponseStatus = a})
+gttblrsResponseStatus :: Lens' GetTableResponse Int
+gttblrsResponseStatus = lens _gttblrsResponseStatus (\ s a -> s{_gttblrsResponseStatus = a})
 
 instance NFData GetTableResponse where

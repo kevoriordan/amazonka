@@ -21,7 +21,7 @@
 -- This operation sets and then enacts a data retrieval policy in the region specified in the PUT request. You can set one policy per region for an AWS account. The policy is enacted within a few minutes of a successful PUT operation.
 --
 --
--- The set policy operation does not affect retrieval jobs that were in progress before the policy was enacted. For more information about data retrieval policies, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html Amazon Glacier Data Retrieval Policies> .
+-- The set policy operation does not affect retrieval jobs that were in progress before the policy was enacted. For more information about data retrieval policies, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html Amazon Glacier Data Retrieval Policies> . 
 --
 module Network.AWS.Glacier.SetDataRetrievalPolicy
     (
@@ -49,11 +49,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setDataRetrievalPolicy' smart constructor.
-data SetDataRetrievalPolicy = SetDataRetrievalPolicy'
-  { _sdrpPolicy    :: !(Maybe DataRetrievalPolicy)
-  , _sdrpAccountId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetDataRetrievalPolicy = SetDataRetrievalPolicy'{_sdrpPolicy
+                                                      ::
+                                                      !(Maybe
+                                                          DataRetrievalPolicy),
+                                                      _sdrpAccountId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'SetDataRetrievalPolicy' with the minimum fields required to make a request.
 --
@@ -65,9 +67,9 @@ data SetDataRetrievalPolicy = SetDataRetrievalPolicy'
 setDataRetrievalPolicy
     :: Text -- ^ 'sdrpAccountId'
     -> SetDataRetrievalPolicy
-setDataRetrievalPolicy pAccountId_ =
-  SetDataRetrievalPolicy' {_sdrpPolicy = Nothing, _sdrpAccountId = pAccountId_}
-
+setDataRetrievalPolicy pAccountId_
+  = SetDataRetrievalPolicy'{_sdrpPolicy = Nothing,
+                            _sdrpAccountId = pAccountId_}
 
 -- | The data retrieval policy in JSON format.
 sdrpPolicy :: Lens' SetDataRetrievalPolicy (Maybe DataRetrievalPolicy)
@@ -105,16 +107,15 @@ instance ToQuery SetDataRetrievalPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'setDataRetrievalPolicyResponse' smart constructor.
-data SetDataRetrievalPolicyResponse =
-  SetDataRetrievalPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetDataRetrievalPolicyResponse = SetDataRetrievalPolicyResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'SetDataRetrievalPolicyResponse' with the minimum fields required to make a request.
 --
 setDataRetrievalPolicyResponse
     :: SetDataRetrievalPolicyResponse
-setDataRetrievalPolicyResponse = SetDataRetrievalPolicyResponse'
-
+setDataRetrievalPolicyResponse
+  = SetDataRetrievalPolicyResponse'
 
 instance NFData SetDataRetrievalPolicyResponse where

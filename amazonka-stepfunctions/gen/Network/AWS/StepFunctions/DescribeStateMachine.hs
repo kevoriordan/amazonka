@@ -34,11 +34,13 @@ module Network.AWS.StepFunctions.DescribeStateMachine
     , DescribeStateMachineResponse
     -- * Response Lenses
     , dsmrsStatus
+    , dsmrsLoggingConfiguration
     , dsmrsResponseStatus
     , dsmrsStateMachineARN
     , dsmrsName
     , dsmrsDefinition
     , dsmrsRoleARN
+    , dsmrsType
     , dsmrsCreationDate
     ) where
 
@@ -50,10 +52,10 @@ import Network.AWS.StepFunctions.Types
 import Network.AWS.StepFunctions.Types.Product
 
 -- | /See:/ 'describeStateMachine' smart constructor.
-newtype DescribeStateMachine = DescribeStateMachine'
-  { _dsmStateMachineARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeStateMachine = DescribeStateMachine'{_dsmStateMachineARN
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeStateMachine' with the minimum fields required to make a request.
 --
@@ -63,9 +65,9 @@ newtype DescribeStateMachine = DescribeStateMachine'
 describeStateMachine
     :: Text -- ^ 'dsmStateMachineARN'
     -> DescribeStateMachine
-describeStateMachine pStateMachineARN_ =
-  DescribeStateMachine' {_dsmStateMachineARN = pStateMachineARN_}
-
+describeStateMachine pStateMachineARN_
+  = DescribeStateMachine'{_dsmStateMachineARN =
+                            pStateMachineARN_}
 
 -- | The Amazon Resource Name (ARN) of the state machine to describe.
 dsmStateMachineARN :: Lens' DescribeStateMachine Text
@@ -79,11 +81,13 @@ instance AWSRequest DescribeStateMachine where
           = receiveJSON
               (\ s h x ->
                  DescribeStateMachineResponse' <$>
-                   (x .?> "status") <*> (pure (fromEnum s)) <*>
-                     (x .:> "stateMachineArn")
+                   (x .?> "status") <*> (x .?> "loggingConfiguration")
+                     <*> (pure (fromEnum s))
+                     <*> (x .:> "stateMachineArn")
                      <*> (x .:> "name")
                      <*> (x .:> "definition")
                      <*> (x .:> "roleArn")
+                     <*> (x .:> "type")
                      <*> (x .:> "creationDate"))
 
 instance Hashable DescribeStateMachine where
@@ -113,16 +117,32 @@ instance ToQuery DescribeStateMachine where
         toQuery = const mempty
 
 -- | /See:/ 'describeStateMachineResponse' smart constructor.
-data DescribeStateMachineResponse = DescribeStateMachineResponse'
-  { _dsmrsStatus          :: !(Maybe StateMachineStatus)
-  , _dsmrsResponseStatus  :: !Int
-  , _dsmrsStateMachineARN :: !Text
-  , _dsmrsName            :: !Text
-  , _dsmrsDefinition      :: !Text
-  , _dsmrsRoleARN         :: !Text
-  , _dsmrsCreationDate    :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStateMachineResponse = DescribeStateMachineResponse'{_dsmrsStatus
+                                                                  ::
+                                                                  !(Maybe
+                                                                      StateMachineStatus),
+                                                                  _dsmrsLoggingConfiguration
+                                                                  ::
+                                                                  !(Maybe
+                                                                      LoggingConfiguration),
+                                                                  _dsmrsResponseStatus
+                                                                  :: !Int,
+                                                                  _dsmrsStateMachineARN
+                                                                  :: !Text,
+                                                                  _dsmrsName ::
+                                                                  !Text,
+                                                                  _dsmrsDefinition
+                                                                  ::
+                                                                  !(Sensitive
+                                                                      Text),
+                                                                  _dsmrsRoleARN
+                                                                  :: !Text,
+                                                                  _dsmrsType ::
+                                                                  !StateMachineType,
+                                                                  _dsmrsCreationDate
+                                                                  :: !POSIX}
+                                      deriving (Eq, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeStateMachineResponse' with the minimum fields required to make a request.
 --
@@ -130,15 +150,19 @@ data DescribeStateMachineResponse = DescribeStateMachineResponse'
 --
 -- * 'dsmrsStatus' - The current status of the state machine.
 --
+-- * 'dsmrsLoggingConfiguration' - Undocumented member.
+--
 -- * 'dsmrsResponseStatus' - -- | The response status code.
 --
 -- * 'dsmrsStateMachineARN' - The Amazon Resource Name (ARN) that identifies the state machine.
 --
--- * 'dsmrsName' - The name of the state machine. A name must /not/ contain:     * whitespace     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ )
+-- * 'dsmrsName' - The name of the state machine. A name must /not/ contain:     * white space     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ ) To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 --
--- * 'dsmrsDefinition' - The Amazon States Language definition of the state machine.
+-- * 'dsmrsDefinition' - The Amazon States Language definition of the state machine. See <https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html Amazon States Language> .
 --
 -- * 'dsmrsRoleARN' - The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
+--
+-- * 'dsmrsType' - The @type@ of the state machine (@STANDARD@ or @EXPRESS@ ).
 --
 -- * 'dsmrsCreationDate' - The date the state machine is created.
 describeStateMachineResponse
@@ -147,23 +171,30 @@ describeStateMachineResponse
     -> Text -- ^ 'dsmrsName'
     -> Text -- ^ 'dsmrsDefinition'
     -> Text -- ^ 'dsmrsRoleARN'
+    -> StateMachineType -- ^ 'dsmrsType'
     -> UTCTime -- ^ 'dsmrsCreationDate'
     -> DescribeStateMachineResponse
-describeStateMachineResponse pResponseStatus_ pStateMachineARN_ pName_ pDefinition_ pRoleARN_ pCreationDate_ =
-  DescribeStateMachineResponse'
-    { _dsmrsStatus = Nothing
-    , _dsmrsResponseStatus = pResponseStatus_
-    , _dsmrsStateMachineARN = pStateMachineARN_
-    , _dsmrsName = pName_
-    , _dsmrsDefinition = pDefinition_
-    , _dsmrsRoleARN = pRoleARN_
-    , _dsmrsCreationDate = _Time # pCreationDate_
-    }
-
+describeStateMachineResponse pResponseStatus_
+  pStateMachineARN_ pName_ pDefinition_ pRoleARN_
+  pType_ pCreationDate_
+  = DescribeStateMachineResponse'{_dsmrsStatus =
+                                    Nothing,
+                                  _dsmrsLoggingConfiguration = Nothing,
+                                  _dsmrsResponseStatus = pResponseStatus_,
+                                  _dsmrsStateMachineARN = pStateMachineARN_,
+                                  _dsmrsName = pName_,
+                                  _dsmrsDefinition = _Sensitive # pDefinition_,
+                                  _dsmrsRoleARN = pRoleARN_,
+                                  _dsmrsType = pType_,
+                                  _dsmrsCreationDate = _Time # pCreationDate_}
 
 -- | The current status of the state machine.
 dsmrsStatus :: Lens' DescribeStateMachineResponse (Maybe StateMachineStatus)
 dsmrsStatus = lens _dsmrsStatus (\ s a -> s{_dsmrsStatus = a})
+
+-- | Undocumented member.
+dsmrsLoggingConfiguration :: Lens' DescribeStateMachineResponse (Maybe LoggingConfiguration)
+dsmrsLoggingConfiguration = lens _dsmrsLoggingConfiguration (\ s a -> s{_dsmrsLoggingConfiguration = a})
 
 -- | -- | The response status code.
 dsmrsResponseStatus :: Lens' DescribeStateMachineResponse Int
@@ -173,17 +204,21 @@ dsmrsResponseStatus = lens _dsmrsResponseStatus (\ s a -> s{_dsmrsResponseStatus
 dsmrsStateMachineARN :: Lens' DescribeStateMachineResponse Text
 dsmrsStateMachineARN = lens _dsmrsStateMachineARN (\ s a -> s{_dsmrsStateMachineARN = a})
 
--- | The name of the state machine. A name must /not/ contain:     * whitespace     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ )
+-- | The name of the state machine. A name must /not/ contain:     * white space     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ ) To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 dsmrsName :: Lens' DescribeStateMachineResponse Text
 dsmrsName = lens _dsmrsName (\ s a -> s{_dsmrsName = a})
 
--- | The Amazon States Language definition of the state machine.
+-- | The Amazon States Language definition of the state machine. See <https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html Amazon States Language> .
 dsmrsDefinition :: Lens' DescribeStateMachineResponse Text
-dsmrsDefinition = lens _dsmrsDefinition (\ s a -> s{_dsmrsDefinition = a})
+dsmrsDefinition = lens _dsmrsDefinition (\ s a -> s{_dsmrsDefinition = a}) . _Sensitive
 
 -- | The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
 dsmrsRoleARN :: Lens' DescribeStateMachineResponse Text
 dsmrsRoleARN = lens _dsmrsRoleARN (\ s a -> s{_dsmrsRoleARN = a})
+
+-- | The @type@ of the state machine (@STANDARD@ or @EXPRESS@ ).
+dsmrsType :: Lens' DescribeStateMachineResponse StateMachineType
+dsmrsType = lens _dsmrsType (\ s a -> s{_dsmrsType = a})
 
 -- | The date the state machine is created.
 dsmrsCreationDate :: Lens' DescribeStateMachineResponse UTCTime

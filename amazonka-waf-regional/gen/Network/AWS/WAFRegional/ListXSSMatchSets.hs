@@ -51,11 +51,10 @@ import Network.AWS.WAFRegional.Types.Product
 --
 --
 -- /See:/ 'listXSSMatchSets' smart constructor.
-data ListXSSMatchSets = ListXSSMatchSets'
-  { _lxmsNextMarker :: !(Maybe Text)
-  , _lxmsLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListXSSMatchSets = ListXSSMatchSets'{_lxmsNextMarker
+                                          :: !(Maybe Text),
+                                          _lxmsLimit :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListXSSMatchSets' with the minimum fields required to make a request.
 --
@@ -66,9 +65,9 @@ data ListXSSMatchSets = ListXSSMatchSets'
 -- * 'lxmsLimit' - Specifies the number of 'XssMatchSet' objects that you want AWS WAF to return for this request. If you have more @XssMatchSet@ objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @Rules@ .
 listXSSMatchSets
     :: ListXSSMatchSets
-listXSSMatchSets =
-  ListXSSMatchSets' {_lxmsNextMarker = Nothing, _lxmsLimit = Nothing}
-
+listXSSMatchSets
+  = ListXSSMatchSets'{_lxmsNextMarker = Nothing,
+                      _lxmsLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more 'XssMatchSet' objects than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @XssMatchSets@ . For the second and subsequent @ListXssMatchSets@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @XssMatchSets@ .
 lxmsNextMarker :: Lens' ListXSSMatchSets (Maybe Text)
@@ -121,12 +120,16 @@ instance ToQuery ListXSSMatchSets where
 --
 --
 -- /See:/ 'listXSSMatchSetsResponse' smart constructor.
-data ListXSSMatchSetsResponse = ListXSSMatchSetsResponse'
-  { _lxmsrsXSSMatchSets   :: !(Maybe [XSSMatchSetSummary])
-  , _lxmsrsNextMarker     :: !(Maybe Text)
-  , _lxmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListXSSMatchSetsResponse = ListXSSMatchSetsResponse'{_lxmsrsXSSMatchSets
+                                                          ::
+                                                          !(Maybe
+                                                              [XSSMatchSetSummary]),
+                                                          _lxmsrsNextMarker ::
+                                                          !(Maybe Text),
+                                                          _lxmsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListXSSMatchSetsResponse' with the minimum fields required to make a request.
 --
@@ -140,13 +143,11 @@ data ListXSSMatchSetsResponse = ListXSSMatchSetsResponse'
 listXSSMatchSetsResponse
     :: Int -- ^ 'lxmsrsResponseStatus'
     -> ListXSSMatchSetsResponse
-listXSSMatchSetsResponse pResponseStatus_ =
-  ListXSSMatchSetsResponse'
-    { _lxmsrsXSSMatchSets = Nothing
-    , _lxmsrsNextMarker = Nothing
-    , _lxmsrsResponseStatus = pResponseStatus_
-    }
-
+listXSSMatchSetsResponse pResponseStatus_
+  = ListXSSMatchSetsResponse'{_lxmsrsXSSMatchSets =
+                                Nothing,
+                              _lxmsrsNextMarker = Nothing,
+                              _lxmsrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'XssMatchSetSummary' objects.
 lxmsrsXSSMatchSets :: Lens' ListXSSMatchSetsResponse [XSSMatchSetSummary]

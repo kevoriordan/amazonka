@@ -21,6 +21,8 @@
 -- Lists the names of stored connections to GitHub accounts.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CodeDeploy.ListGitHubAccountTokenNames
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.CodeDeploy.ListGitHubAccountTokenNames
 import Network.AWS.CodeDeploy.Types
 import Network.AWS.CodeDeploy.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -50,25 +53,34 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listGitHubAccountTokenNames' smart constructor.
-newtype ListGitHubAccountTokenNames = ListGitHubAccountTokenNames'
-  { _lghatnNextToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListGitHubAccountTokenNames = ListGitHubAccountTokenNames'{_lghatnNextToken
+                                                                   ::
+                                                                   Maybe Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ListGitHubAccountTokenNames' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lghatnNextToken' - An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list.
+-- * 'lghatnNextToken' - An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. 
 listGitHubAccountTokenNames
     :: ListGitHubAccountTokenNames
-listGitHubAccountTokenNames =
-  ListGitHubAccountTokenNames' {_lghatnNextToken = Nothing}
+listGitHubAccountTokenNames
+  = ListGitHubAccountTokenNames'{_lghatnNextToken =
+                                   Nothing}
 
-
--- | An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list.
+-- | An identifier returned from the previous ListGitHubAccountTokenNames call. It can be used to return the next set of names in the list. 
 lghatnNextToken :: Lens' ListGitHubAccountTokenNames (Maybe Text)
 lghatnNextToken = lens _lghatnNextToken (\ s a -> s{_lghatnNextToken = a})
+
+instance AWSPager ListGitHubAccountTokenNames where
+        page rq rs
+          | stop (rs ^. lghatnrsNextToken) = Nothing
+          | stop (rs ^. lghatnrsTokenNameList) = Nothing
+          | otherwise =
+            Just $ rq &
+              lghatnNextToken .~ rs ^. lghatnrsNextToken
 
 instance AWSRequest ListGitHubAccountTokenNames where
         type Rs ListGitHubAccountTokenNames =
@@ -112,12 +124,19 @@ instance ToQuery ListGitHubAccountTokenNames where
 --
 --
 -- /See:/ 'listGitHubAccountTokenNamesResponse' smart constructor.
-data ListGitHubAccountTokenNamesResponse = ListGitHubAccountTokenNamesResponse'
-  { _lghatnrsTokenNameList  :: !(Maybe [Text])
-  , _lghatnrsNextToken      :: !(Maybe Text)
-  , _lghatnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListGitHubAccountTokenNamesResponse = ListGitHubAccountTokenNamesResponse'{_lghatnrsTokenNameList
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Text]),
+                                                                                _lghatnrsNextToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _lghatnrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'ListGitHubAccountTokenNamesResponse' with the minimum fields required to make a request.
 --
@@ -125,25 +144,24 @@ data ListGitHubAccountTokenNamesResponse = ListGitHubAccountTokenNamesResponse'
 --
 -- * 'lghatnrsTokenNameList' - A list of names of connections to GitHub accounts.
 --
--- * 'lghatnrsNextToken' - If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list.
+-- * 'lghatnrsNextToken' - If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list. 
 --
 -- * 'lghatnrsResponseStatus' - -- | The response status code.
 listGitHubAccountTokenNamesResponse
     :: Int -- ^ 'lghatnrsResponseStatus'
     -> ListGitHubAccountTokenNamesResponse
-listGitHubAccountTokenNamesResponse pResponseStatus_ =
-  ListGitHubAccountTokenNamesResponse'
-    { _lghatnrsTokenNameList = Nothing
-    , _lghatnrsNextToken = Nothing
-    , _lghatnrsResponseStatus = pResponseStatus_
-    }
-
+listGitHubAccountTokenNamesResponse pResponseStatus_
+  = ListGitHubAccountTokenNamesResponse'{_lghatnrsTokenNameList
+                                           = Nothing,
+                                         _lghatnrsNextToken = Nothing,
+                                         _lghatnrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | A list of names of connections to GitHub accounts.
 lghatnrsTokenNameList :: Lens' ListGitHubAccountTokenNamesResponse [Text]
 lghatnrsTokenNameList = lens _lghatnrsTokenNameList (\ s a -> s{_lghatnrsTokenNameList = a}) . _Default . _Coerce
 
--- | If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list.
+-- | If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent ListGitHubAccountTokenNames call to return the next set of names in the list. 
 lghatnrsNextToken :: Lens' ListGitHubAccountTokenNamesResponse (Maybe Text)
 lghatnrsNextToken = lens _lghatnrsNextToken (\ s a -> s{_lghatnrsNextToken = a})
 

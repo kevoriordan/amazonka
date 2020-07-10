@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the specified limit for a specified hosted zone, for example, the maximum number of records that you can create in the hosted zone.
+-- Gets the specified limit for a specified hosted zone, for example, the maximum number of records that you can create in the hosted zone. 
 --
 --
--- For the default limit, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html Limits> in the /Amazon Route 53 Developer Guide/ . To request a higher limit, <https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53 open a case> .
+-- For the default limit, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html Limits> in the /Amazon Route 53 Developer Guide/ . To request a higher limit, <https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53 open a case> .
 --
 module Network.AWS.Route53.GetHostedZoneLimit
     (
@@ -53,11 +53,10 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'getHostedZoneLimit' smart constructor.
-data GetHostedZoneLimit = GetHostedZoneLimit'
-  { _ghzlType         :: !HostedZoneLimitType
-  , _ghzlHostedZoneId :: !ResourceId
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetHostedZoneLimit = GetHostedZoneLimit'{_ghzlType
+                                              :: !HostedZoneLimitType,
+                                              _ghzlHostedZoneId :: !ResourceId}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetHostedZoneLimit' with the minimum fields required to make a request.
 --
@@ -70,9 +69,9 @@ getHostedZoneLimit
     :: HostedZoneLimitType -- ^ 'ghzlType'
     -> ResourceId -- ^ 'ghzlHostedZoneId'
     -> GetHostedZoneLimit
-getHostedZoneLimit pType_ pHostedZoneId_ =
-  GetHostedZoneLimit' {_ghzlType = pType_, _ghzlHostedZoneId = pHostedZoneId_}
-
+getHostedZoneLimit pType_ pHostedZoneId_
+  = GetHostedZoneLimit'{_ghzlType = pType_,
+                        _ghzlHostedZoneId = pHostedZoneId_}
 
 -- | The limit that you want to get. Valid values include the following:     * __MAX_RRSETS_BY_ZONE__ : The maximum number of records that you can create in the specified hosted zone.     * __MAX_VPCS_ASSOCIATED_BY_ZONE__ : The maximum number of Amazon VPCs that you can associate with the specified private hosted zone.
 ghzlType :: Lens' GetHostedZoneLimit HostedZoneLimitType
@@ -109,17 +108,19 @@ instance ToPath GetHostedZoneLimit where
 instance ToQuery GetHostedZoneLimit where
         toQuery = const mempty
 
--- | A complex type that contains the requested limit.
+-- | A complex type that contains the requested limit. 
 --
 --
 --
 -- /See:/ 'getHostedZoneLimitResponse' smart constructor.
-data GetHostedZoneLimitResponse = GetHostedZoneLimitResponse'
-  { _ghzlrsResponseStatus :: !Int
-  , _ghzlrsLimit          :: !HostedZoneLimit
-  , _ghzlrsCount          :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetHostedZoneLimitResponse = GetHostedZoneLimitResponse'{_ghzlrsResponseStatus
+                                                              :: !Int,
+                                                              _ghzlrsLimit ::
+                                                              !HostedZoneLimit,
+                                                              _ghzlrsCount ::
+                                                              !Nat}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetHostedZoneLimitResponse' with the minimum fields required to make a request.
 --
@@ -135,13 +136,12 @@ getHostedZoneLimitResponse
     -> HostedZoneLimit -- ^ 'ghzlrsLimit'
     -> Natural -- ^ 'ghzlrsCount'
     -> GetHostedZoneLimitResponse
-getHostedZoneLimitResponse pResponseStatus_ pLimit_ pCount_ =
-  GetHostedZoneLimitResponse'
-    { _ghzlrsResponseStatus = pResponseStatus_
-    , _ghzlrsLimit = pLimit_
-    , _ghzlrsCount = _Nat # pCount_
-    }
-
+getHostedZoneLimitResponse pResponseStatus_ pLimit_
+  pCount_
+  = GetHostedZoneLimitResponse'{_ghzlrsResponseStatus =
+                                  pResponseStatus_,
+                                _ghzlrsLimit = pLimit_,
+                                _ghzlrsCount = _Nat # pCount_}
 
 -- | -- | The response status code.
 ghzlrsResponseStatus :: Lens' GetHostedZoneLimitResponse Int

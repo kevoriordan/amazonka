@@ -11,25 +11,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS Storage Gateway Service__
+-- __AWS Storage Gateway Service__ 
 --
--- AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.
+-- AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and the AWS storage infrastructure. The service enables you to securely upload data to the AWS Cloud for cost effective backup and rapid disaster recovery.
 --
 -- Use the following links to get started using the /AWS Storage Gateway Service API Reference/ :
 --
---     * <http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders AWS Storage Gateway Required Request Headers> : Describes the required headers that you must send with every POST request to AWS Storage Gateway.
+--     * <https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders AWS Storage Gateway Required Request Headers> : Describes the required headers that you must send with every POST request to AWS Storage Gateway.
 --
---     * <http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests Signing Requests> : AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.
+--     * <https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests Signing Requests> : AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.
 --
---     * <http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses Error Responses> : Provides reference information about AWS Storage Gateway errors.
+--     * <https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses Error Responses> : Provides reference information about AWS Storage Gateway errors.
 --
---     * <http://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html Operations in AWS Storage Gateway> : Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.
+--     * <https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html Operations in AWS Storage Gateway> : Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.
 --
---     * <http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region AWS Storage Gateway Regions and Endpoints:> Provides a list of each region and endpoints available for use with AWS Storage Gateway.
+--     * <http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region AWS Storage Gateway Regions and Endpoints:> Provides a list of each AWS Region and the endpoints available for use with AWS Storage Gateway. 
 --
 --
 --
--- /Important:/ IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <https://aws.amazon.com/ec2/faqs/#longer-ids Longer EC2 and EBS Resource IDs> .
+-- /Important:/ IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <https://aws.amazon.com/ec2/faqs/#longer-ids Longer EC2 and EBS Resource IDs> . 
 --
 -- For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:
 --
@@ -50,11 +50,11 @@ module Network.AWS.StorageGateway
     -- ** InvalidGatewayRequestException
     , _InvalidGatewayRequestException
 
-    -- ** ServiceUnavailableError
-    , _ServiceUnavailableError
-
     -- ** InternalServerError
     , _InternalServerError
+
+    -- ** ServiceUnavailableError
+    , _ServiceUnavailableError
 
     -- * Waiters
     -- $waiters
@@ -62,199 +62,273 @@ module Network.AWS.StorageGateway
     -- * Operations
     -- $operations
 
-    -- ** CancelArchival
+    -- ** CancelArchival 
     , module Network.AWS.StorageGateway.CancelArchival
 
-    -- ** CreateStorediSCSIVolume
+    -- ** CreateStorediSCSIVolume 
     , module Network.AWS.StorageGateway.CreateStorediSCSIVolume
 
-    -- ** CreateNFSFileShare
+    -- ** CreateNFSFileShare 
     , module Network.AWS.StorageGateway.CreateNFSFileShare
 
-    -- ** DescribeChapCredentials
+    -- ** DetachVolume 
+    , module Network.AWS.StorageGateway.DetachVolume
+
+    -- ** DescribeChapCredentials 
     , module Network.AWS.StorageGateway.DescribeChapCredentials
 
-    -- ** SetLocalConsolePassword
+    -- ** SetLocalConsolePassword 
     , module Network.AWS.StorageGateway.SetLocalConsolePassword
 
-    -- ** CreateTapes
+    -- ** CreateTapes 
     , module Network.AWS.StorageGateway.CreateTapes
 
-    -- ** UpdateVTLDeviceType
+    -- ** UpdateVTLDeviceType 
     , module Network.AWS.StorageGateway.UpdateVTLDeviceType
 
-    -- ** CreateCachediSCSIVolume
+    -- ** CreateCachediSCSIVolume 
     , module Network.AWS.StorageGateway.CreateCachediSCSIVolume
 
-    -- ** ListFileShares
+    -- ** ListFileShares (Paginated)
     , module Network.AWS.StorageGateway.ListFileShares
 
-    -- ** DeleteFileShare
+    -- ** JoinDomain 
+    , module Network.AWS.StorageGateway.JoinDomain
+
+    -- ** DeleteFileShare 
     , module Network.AWS.StorageGateway.DeleteFileShare
 
-    -- ** ListVolumeInitiators
+    -- ** ListVolumeInitiators 
     , module Network.AWS.StorageGateway.ListVolumeInitiators
 
-    -- ** AddUploadBuffer
+    -- ** AddUploadBuffer 
     , module Network.AWS.StorageGateway.AddUploadBuffer
 
-    -- ** ListTagsForResource
+    -- ** ListTagsForResource (Paginated)
     , module Network.AWS.StorageGateway.ListTagsForResource
 
-    -- ** NotifyWhenUploaded
+    -- ** NotifyWhenUploaded 
     , module Network.AWS.StorageGateway.NotifyWhenUploaded
 
-    -- ** UpdateGatewayInformation
+    -- ** UpdateGatewayInformation 
     , module Network.AWS.StorageGateway.UpdateGatewayInformation
 
-    -- ** DescribeMaintenanceStartTime
+    -- ** DescribeMaintenanceStartTime 
     , module Network.AWS.StorageGateway.DescribeMaintenanceStartTime
 
-    -- ** DescribeWorkingStorage
+    -- ** AssignTapePool 
+    , module Network.AWS.StorageGateway.AssignTapePool
+
+    -- ** DescribeWorkingStorage 
     , module Network.AWS.StorageGateway.DescribeWorkingStorage
 
-    -- ** DescribeCachediSCSIVolumes
+    -- ** DescribeCachediSCSIVolumes 
     , module Network.AWS.StorageGateway.DescribeCachediSCSIVolumes
 
-    -- ** AddCache
+    -- ** AddCache 
     , module Network.AWS.StorageGateway.AddCache
 
-    -- ** StartGateway
+    -- ** StartGateway 
     , module Network.AWS.StorageGateway.StartGateway
 
-    -- ** ShutdownGateway
+    -- ** ShutdownGateway 
     , module Network.AWS.StorageGateway.ShutdownGateway
 
-    -- ** UpdateGatewaySoftwareNow
+    -- ** ListAutomaticTapeCreationPolicies 
+    , module Network.AWS.StorageGateway.ListAutomaticTapeCreationPolicies
+
+    -- ** UpdateGatewaySoftwareNow 
     , module Network.AWS.StorageGateway.UpdateGatewaySoftwareNow
 
-    -- ** RemoveTagsFromResource
+    -- ** RemoveTagsFromResource 
     , module Network.AWS.StorageGateway.RemoveTagsFromResource
 
-    -- ** DeleteChapCredentials
+    -- ** CreateSMBFileShare 
+    , module Network.AWS.StorageGateway.CreateSMBFileShare
+
+    -- ** DeleteChapCredentials 
     , module Network.AWS.StorageGateway.DeleteChapCredentials
 
-    -- ** UpdateChapCredentials
+    -- ** UpdateChapCredentials 
     , module Network.AWS.StorageGateway.UpdateChapCredentials
 
-    -- ** DescribeUploadBuffer
+    -- ** AttachVolume 
+    , module Network.AWS.StorageGateway.AttachVolume
+
+    -- ** DescribeAvailabilityMonitorTest 
+    , module Network.AWS.StorageGateway.DescribeAvailabilityMonitorTest
+
+    -- ** DescribeUploadBuffer 
     , module Network.AWS.StorageGateway.DescribeUploadBuffer
 
     -- ** DescribeTapes (Paginated)
     , module Network.AWS.StorageGateway.DescribeTapes
 
-    -- ** DescribeStorediSCSIVolumes
+    -- ** DescribeStorediSCSIVolumes 
     , module Network.AWS.StorageGateway.DescribeStorediSCSIVolumes
 
-    -- ** CreateSnapshotFromVolumeRecoveryPoint
+    -- ** SetSMBGuestPassword 
+    , module Network.AWS.StorageGateway.SetSMBGuestPassword
+
+    -- ** CreateSnapshotFromVolumeRecoveryPoint 
     , module Network.AWS.StorageGateway.CreateSnapshotFromVolumeRecoveryPoint
 
-    -- ** RetrieveTapeRecoveryPoint
+    -- ** RetrieveTapeRecoveryPoint 
     , module Network.AWS.StorageGateway.RetrieveTapeRecoveryPoint
 
-    -- ** AddTagsToResource
+    -- ** AddTagsToResource 
     , module Network.AWS.StorageGateway.AddTagsToResource
 
-    -- ** DeleteGateway
+    -- ** DeleteGateway 
     , module Network.AWS.StorageGateway.DeleteGateway
 
-    -- ** UpdateMaintenanceStartTime
+    -- ** UpdateMaintenanceStartTime 
     , module Network.AWS.StorageGateway.UpdateMaintenanceStartTime
 
-    -- ** DescribeGatewayInformation
+    -- ** DescribeGatewayInformation 
     , module Network.AWS.StorageGateway.DescribeGatewayInformation
 
-    -- ** RefreshCache
+    -- ** RefreshCache 
     , module Network.AWS.StorageGateway.RefreshCache
 
-    -- ** UpdateNFSFileShare
+    -- ** UpdateNFSFileShare 
     , module Network.AWS.StorageGateway.UpdateNFSFileShare
 
-    -- ** RetrieveTapeArchive
+    -- ** RetrieveTapeArchive 
     , module Network.AWS.StorageGateway.RetrieveTapeArchive
 
     -- ** DescribeTapeArchives (Paginated)
     , module Network.AWS.StorageGateway.DescribeTapeArchives
 
-    -- ** DisableGateway
+    -- ** DisableGateway 
     , module Network.AWS.StorageGateway.DisableGateway
 
-    -- ** DescribeSnapshotSchedule
+    -- ** DescribeSMBSettings 
+    , module Network.AWS.StorageGateway.DescribeSMBSettings
+
+    -- ** DescribeSnapshotSchedule 
     , module Network.AWS.StorageGateway.DescribeSnapshotSchedule
 
-    -- ** CreateTapeWithBarcode
+    -- ** CreateTapeWithBarcode 
     , module Network.AWS.StorageGateway.CreateTapeWithBarcode
 
-    -- ** DescribeBandwidthRateLimit
+    -- ** DescribeBandwidthRateLimit 
     , module Network.AWS.StorageGateway.DescribeBandwidthRateLimit
 
-    -- ** DeleteSnapshotSchedule
+    -- ** DeleteAutomaticTapeCreationPolicy 
+    , module Network.AWS.StorageGateway.DeleteAutomaticTapeCreationPolicy
+
+    -- ** UpdateAutomaticTapeCreationPolicy 
+    , module Network.AWS.StorageGateway.UpdateAutomaticTapeCreationPolicy
+
+    -- ** DeleteSnapshotSchedule 
     , module Network.AWS.StorageGateway.DeleteSnapshotSchedule
 
-    -- ** UpdateSnapshotSchedule
+    -- ** UpdateSnapshotSchedule 
     , module Network.AWS.StorageGateway.UpdateSnapshotSchedule
 
-    -- ** CreateSnapshot
+    -- ** CreateSnapshot 
     , module Network.AWS.StorageGateway.CreateSnapshot
 
-    -- ** CancelRetrieval
+    -- ** UpdateSMBSecurityStrategy 
+    , module Network.AWS.StorageGateway.UpdateSMBSecurityStrategy
+
+    -- ** CancelRetrieval 
     , module Network.AWS.StorageGateway.CancelRetrieval
 
     -- ** DescribeVTLDevices (Paginated)
     , module Network.AWS.StorageGateway.DescribeVTLDevices
 
-    -- ** DeleteTapeArchive
+    -- ** StartAvailabilityMonitorTest 
+    , module Network.AWS.StorageGateway.StartAvailabilityMonitorTest
+
+    -- ** DeleteTapeArchive 
     , module Network.AWS.StorageGateway.DeleteTapeArchive
 
-    -- ** DescribeNFSFileShares
+    -- ** UpdateSMBFileShare 
+    , module Network.AWS.StorageGateway.UpdateSMBFileShare
+
+    -- ** DescribeNFSFileShares 
     , module Network.AWS.StorageGateway.DescribeNFSFileShares
 
-    -- ** ListVolumeRecoveryPoints
+    -- ** ListVolumeRecoveryPoints 
     , module Network.AWS.StorageGateway.ListVolumeRecoveryPoints
 
-    -- ** ListTapes
+    -- ** ListTapes (Paginated)
     , module Network.AWS.StorageGateway.ListTapes
 
-    -- ** ResetCache
+    -- ** ResetCache 
     , module Network.AWS.StorageGateway.ResetCache
+
+    -- ** DescribeSMBFileShares 
+    , module Network.AWS.StorageGateway.DescribeSMBFileShares
 
     -- ** ListGateways (Paginated)
     , module Network.AWS.StorageGateway.ListGateways
 
-    -- ** DeleteTape
+    -- ** DeleteTape 
     , module Network.AWS.StorageGateway.DeleteTape
 
-    -- ** ListLocalDisks
+    -- ** ListLocalDisks 
     , module Network.AWS.StorageGateway.ListLocalDisks
 
     -- ** ListVolumes (Paginated)
     , module Network.AWS.StorageGateway.ListVolumes
 
-    -- ** UpdateBandwidthRateLimit
+    -- ** UpdateBandwidthRateLimit 
     , module Network.AWS.StorageGateway.UpdateBandwidthRateLimit
 
-    -- ** AddWorkingStorage
+    -- ** AddWorkingStorage 
     , module Network.AWS.StorageGateway.AddWorkingStorage
 
     -- ** DescribeTapeRecoveryPoints (Paginated)
     , module Network.AWS.StorageGateway.DescribeTapeRecoveryPoints
 
-    -- ** DeleteBandwidthRateLimit
+    -- ** DeleteBandwidthRateLimit 
     , module Network.AWS.StorageGateway.DeleteBandwidthRateLimit
 
-    -- ** ActivateGateway
+    -- ** ActivateGateway 
     , module Network.AWS.StorageGateway.ActivateGateway
 
-    -- ** DescribeCache
+    -- ** DescribeCache 
     , module Network.AWS.StorageGateway.DescribeCache
 
-    -- ** DeleteVolume
+    -- ** DeleteVolume 
     , module Network.AWS.StorageGateway.DeleteVolume
 
     -- * Types
 
+    -- ** ActiveDirectoryStatus
+    , ActiveDirectoryStatus (..)
+
+    -- ** AvailabilityMonitorTestStatus
+    , AvailabilityMonitorTestStatus (..)
+
+    -- ** FileShareType
+    , FileShareType (..)
+
+    -- ** HostEnvironment
+    , HostEnvironment (..)
+
     -- ** ObjectACL
     , ObjectACL (..)
+
+    -- ** SMBSecurityStrategy
+    , SMBSecurityStrategy (..)
+
+    -- ** AutomaticTapeCreationPolicyInfo
+    , AutomaticTapeCreationPolicyInfo
+    , automaticTapeCreationPolicyInfo
+    , atcpiGatewayARN
+    , atcpiAutomaticTapeCreationRules
+
+    -- ** AutomaticTapeCreationRule
+    , AutomaticTapeCreationRule
+    , automaticTapeCreationRule
+    , atcrTapeBarcodePrefix
+    , atcrPoolId
+    , atcrTapeSizeInBytes
+    , atcrMinimumNumTapes
 
     -- ** CachediSCSIVolume
     , CachediSCSIVolume
@@ -262,6 +336,8 @@ module Network.AWS.StorageGateway
     , cscsivVolumeiSCSIAttributes
     , cscsivVolumeStatus
     , cscsivSourceSnapshotId
+    , cscsivKMSKey
+    , cscsivVolumeAttachmentStatus
     , cscsivVolumeARN
     , cscsivVolumeProgress
     , cscsivVolumeSizeInBytes
@@ -269,6 +345,7 @@ module Network.AWS.StorageGateway
     , cscsivCreatedDate
     , cscsivVolumeId
     , cscsivVolumeType
+    , cscsivTargetName
 
     -- ** ChapInfo
     , ChapInfo
@@ -296,6 +373,7 @@ module Network.AWS.StorageGateway
     , dDiskSizeInBytes
     , dDiskStatus
     , dDiskId
+    , dDiskAttributeList
 
     -- ** FileShareInfo
     , FileShareInfo
@@ -304,11 +382,14 @@ module Network.AWS.StorageGateway
     , fsiGatewayARN
     , fsiFileShareId
     , fsiFileShareARN
+    , fsiFileShareType
 
     -- ** GatewayInfo
     , GatewayInfo
     , gatewayInfo
+    , giEC2InstanceRegion
     , giGatewayARN
+    , giEC2InstanceId
     , giGatewayOperationalState
     , giGatewayName
     , giGatewayId
@@ -342,6 +423,7 @@ module Network.AWS.StorageGateway
     , nfsfsiClientList
     , nfsfsiGuessMIMETypeEnabled
     , nfsfsiReadOnly
+    , nfsfsiTags
 
     -- ** NetworkInterface
     , NetworkInterface
@@ -350,6 +432,31 @@ module Network.AWS.StorageGateway
     , niMACAddress
     , niIPv4Address
 
+    -- ** SMBFileShareInfo
+    , SMBFileShareInfo
+    , sMBFileShareInfo
+    , smbfsiAdminUserList
+    , smbfsiAuditDestinationARN
+    , smbfsiFileShareStatus
+    , smbfsiInvalidUserList
+    , smbfsiKMSKey
+    , smbfsiValidUserList
+    , smbfsiGatewayARN
+    , smbfsiPath
+    , smbfsiAuthentication
+    , smbfsiObjectACL
+    , smbfsiKMSEncrypted
+    , smbfsiFileShareId
+    , smbfsiFileShareARN
+    , smbfsiDefaultStorageClass
+    , smbfsiRole
+    , smbfsiSMBACLEnabled
+    , smbfsiRequesterPays
+    , smbfsiLocationARN
+    , smbfsiGuessMIMETypeEnabled
+    , smbfsiReadOnly
+    , smbfsiTags
+
     -- ** StorediSCSIVolume
     , StorediSCSIVolume
     , storediSCSIVolume
@@ -357,6 +464,8 @@ module Network.AWS.StorageGateway
     , sscsivVolumeStatus
     , sscsivSourceSnapshotId
     , sscsivPreservedExistingData
+    , sscsivKMSKey
+    , sscsivVolumeAttachmentStatus
     , sscsivVolumeARN
     , sscsivVolumeProgress
     , sscsivVolumeSizeInBytes
@@ -365,6 +474,7 @@ module Network.AWS.StorageGateway
     , sscsivVolumeId
     , sscsivVolumeDiskId
     , sscsivVolumeType
+    , sscsivTargetName
 
     -- ** Tag
     , Tag
@@ -377,10 +487,12 @@ module Network.AWS.StorageGateway
     , tape
     , tTapeBarcode
     , tTapeStatus
+    , tKMSKey
     , tTapeARN
     , tProgress
     , tTapeSizeInBytes
     , tVTLDevice
+    , tPoolId
     , tTapeUsedInBytes
     , tTapeCreatedDate
 
@@ -389,9 +501,11 @@ module Network.AWS.StorageGateway
     , tapeArchive
     , taTapeBarcode
     , taTapeStatus
+    , taKMSKey
     , taTapeARN
     , taTapeSizeInBytes
     , taCompletionTime
+    , taPoolId
     , taTapeUsedInBytes
     , taTapeCreatedDate
     , taRetrievedTo
@@ -404,6 +518,7 @@ module Network.AWS.StorageGateway
     , tiTapeARN
     , tiGatewayARN
     , tiTapeSizeInBytes
+    , tiPoolId
 
     -- ** TapeRecoveryPointInfo
     , TapeRecoveryPointInfo
@@ -426,6 +541,7 @@ module Network.AWS.StorageGateway
     , VolumeInfo
     , volumeInfo
     , viGatewayARN
+    , viVolumeAttachmentStatus
     , viVolumeARN
     , viVolumeSizeInBytes
     , viVolumeId
@@ -455,15 +571,19 @@ import Network.AWS.StorageGateway.AddCache
 import Network.AWS.StorageGateway.AddTagsToResource
 import Network.AWS.StorageGateway.AddUploadBuffer
 import Network.AWS.StorageGateway.AddWorkingStorage
+import Network.AWS.StorageGateway.AssignTapePool
+import Network.AWS.StorageGateway.AttachVolume
 import Network.AWS.StorageGateway.CancelArchival
 import Network.AWS.StorageGateway.CancelRetrieval
 import Network.AWS.StorageGateway.CreateCachediSCSIVolume
 import Network.AWS.StorageGateway.CreateNFSFileShare
+import Network.AWS.StorageGateway.CreateSMBFileShare
 import Network.AWS.StorageGateway.CreateSnapshot
 import Network.AWS.StorageGateway.CreateSnapshotFromVolumeRecoveryPoint
 import Network.AWS.StorageGateway.CreateStorediSCSIVolume
-import Network.AWS.StorageGateway.CreateTapes
 import Network.AWS.StorageGateway.CreateTapeWithBarcode
+import Network.AWS.StorageGateway.CreateTapes
+import Network.AWS.StorageGateway.DeleteAutomaticTapeCreationPolicy
 import Network.AWS.StorageGateway.DeleteBandwidthRateLimit
 import Network.AWS.StorageGateway.DeleteChapCredentials
 import Network.AWS.StorageGateway.DeleteFileShare
@@ -472,6 +592,7 @@ import Network.AWS.StorageGateway.DeleteSnapshotSchedule
 import Network.AWS.StorageGateway.DeleteTape
 import Network.AWS.StorageGateway.DeleteTapeArchive
 import Network.AWS.StorageGateway.DeleteVolume
+import Network.AWS.StorageGateway.DescribeAvailabilityMonitorTest
 import Network.AWS.StorageGateway.DescribeBandwidthRateLimit
 import Network.AWS.StorageGateway.DescribeCache
 import Network.AWS.StorageGateway.DescribeCachediSCSIVolumes
@@ -479,6 +600,8 @@ import Network.AWS.StorageGateway.DescribeChapCredentials
 import Network.AWS.StorageGateway.DescribeGatewayInformation
 import Network.AWS.StorageGateway.DescribeMaintenanceStartTime
 import Network.AWS.StorageGateway.DescribeNFSFileShares
+import Network.AWS.StorageGateway.DescribeSMBFileShares
+import Network.AWS.StorageGateway.DescribeSMBSettings
 import Network.AWS.StorageGateway.DescribeSnapshotSchedule
 import Network.AWS.StorageGateway.DescribeStorediSCSIVolumes
 import Network.AWS.StorageGateway.DescribeTapeArchives
@@ -487,7 +610,10 @@ import Network.AWS.StorageGateway.DescribeTapes
 import Network.AWS.StorageGateway.DescribeUploadBuffer
 import Network.AWS.StorageGateway.DescribeVTLDevices
 import Network.AWS.StorageGateway.DescribeWorkingStorage
+import Network.AWS.StorageGateway.DetachVolume
 import Network.AWS.StorageGateway.DisableGateway
+import Network.AWS.StorageGateway.JoinDomain
+import Network.AWS.StorageGateway.ListAutomaticTapeCreationPolicies
 import Network.AWS.StorageGateway.ListFileShares
 import Network.AWS.StorageGateway.ListGateways
 import Network.AWS.StorageGateway.ListLocalDisks
@@ -503,15 +629,20 @@ import Network.AWS.StorageGateway.ResetCache
 import Network.AWS.StorageGateway.RetrieveTapeArchive
 import Network.AWS.StorageGateway.RetrieveTapeRecoveryPoint
 import Network.AWS.StorageGateway.SetLocalConsolePassword
+import Network.AWS.StorageGateway.SetSMBGuestPassword
 import Network.AWS.StorageGateway.ShutdownGateway
+import Network.AWS.StorageGateway.StartAvailabilityMonitorTest
 import Network.AWS.StorageGateway.StartGateway
 import Network.AWS.StorageGateway.Types
+import Network.AWS.StorageGateway.UpdateAutomaticTapeCreationPolicy
 import Network.AWS.StorageGateway.UpdateBandwidthRateLimit
 import Network.AWS.StorageGateway.UpdateChapCredentials
 import Network.AWS.StorageGateway.UpdateGatewayInformation
 import Network.AWS.StorageGateway.UpdateGatewaySoftwareNow
 import Network.AWS.StorageGateway.UpdateMaintenanceStartTime
 import Network.AWS.StorageGateway.UpdateNFSFileShare
+import Network.AWS.StorageGateway.UpdateSMBFileShare
+import Network.AWS.StorageGateway.UpdateSMBSecurityStrategy
 import Network.AWS.StorageGateway.UpdateSnapshotSchedule
 import Network.AWS.StorageGateway.UpdateVTLDeviceType
 import Network.AWS.StorageGateway.Waiters

@@ -46,11 +46,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteVPCEndpointServiceConfigurations' smart constructor.
-data DeleteVPCEndpointServiceConfigurations = DeleteVPCEndpointServiceConfigurations'
-  { _dvpcescDryRun     :: !(Maybe Bool)
-  , _dvpcescServiceIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPCEndpointServiceConfigurations = DeleteVPCEndpointServiceConfigurations'{_dvpcescDryRun
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Bool),
+                                                                                      _dvpcescServiceIds
+                                                                                      ::
+                                                                                      ![Text]}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteVPCEndpointServiceConfigurations' with the minimum fields required to make a request.
 --
@@ -61,10 +65,10 @@ data DeleteVPCEndpointServiceConfigurations = DeleteVPCEndpointServiceConfigurat
 -- * 'dvpcescServiceIds' - The IDs of one or more services.
 deleteVPCEndpointServiceConfigurations
     :: DeleteVPCEndpointServiceConfigurations
-deleteVPCEndpointServiceConfigurations =
-  DeleteVPCEndpointServiceConfigurations'
-    {_dvpcescDryRun = Nothing, _dvpcescServiceIds = mempty}
-
+deleteVPCEndpointServiceConfigurations
+  = DeleteVPCEndpointServiceConfigurations'{_dvpcescDryRun
+                                              = Nothing,
+                                            _dvpcescServiceIds = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 dvpcescDryRun :: Lens' DeleteVPCEndpointServiceConfigurations (Maybe Bool)
@@ -119,11 +123,17 @@ instance ToQuery
                toQueryList "ServiceId" _dvpcescServiceIds]
 
 -- | /See:/ 'deleteVPCEndpointServiceConfigurationsResponse' smart constructor.
-data DeleteVPCEndpointServiceConfigurationsResponse = DeleteVPCEndpointServiceConfigurationsResponse'
-  { _dvpcescrsUnsuccessful   :: !(Maybe [UnsuccessfulItem])
-  , _dvpcescrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPCEndpointServiceConfigurationsResponse = DeleteVPCEndpointServiceConfigurationsResponse'{_dvpcescrsUnsuccessful
+                                                                                                      ::
+                                                                                                      !(Maybe
+                                                                                                          [UnsuccessfulItem]),
+                                                                                                      _dvpcescrsResponseStatus
+                                                                                                      ::
+                                                                                                      !Int}
+                                                        deriving (Eq, Read,
+                                                                  Show, Data,
+                                                                  Typeable,
+                                                                  Generic)
 
 -- | Creates a value of 'DeleteVPCEndpointServiceConfigurationsResponse' with the minimum fields required to make a request.
 --
@@ -135,12 +145,12 @@ data DeleteVPCEndpointServiceConfigurationsResponse = DeleteVPCEndpointServiceCo
 deleteVPCEndpointServiceConfigurationsResponse
     :: Int -- ^ 'dvpcescrsResponseStatus'
     -> DeleteVPCEndpointServiceConfigurationsResponse
-deleteVPCEndpointServiceConfigurationsResponse pResponseStatus_ =
-  DeleteVPCEndpointServiceConfigurationsResponse'
-    { _dvpcescrsUnsuccessful = Nothing
-    , _dvpcescrsResponseStatus = pResponseStatus_
-    }
-
+deleteVPCEndpointServiceConfigurationsResponse
+  pResponseStatus_
+  = DeleteVPCEndpointServiceConfigurationsResponse'{_dvpcescrsUnsuccessful
+                                                      = Nothing,
+                                                    _dvpcescrsResponseStatus =
+                                                      pResponseStatus_}
 
 -- | Information about the service configurations that were not deleted, if applicable.
 dvpcescrsUnsuccessful :: Lens' DeleteVPCEndpointServiceConfigurationsResponse [UnsuccessfulItem]

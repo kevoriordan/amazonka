@@ -48,33 +48,32 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getGroupVersion' smart constructor.
-data GetGroupVersion = GetGroupVersion'
-  { _ggvGroupVersionId :: !Text
-  , _ggvGroupId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGroupVersion = GetGroupVersion'{_ggvGroupVersionId
+                                        :: !Text,
+                                        _ggvGroupId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetGroupVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggvGroupVersionId' - The ID of the group version.
+-- * 'ggvGroupVersionId' - The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object.
 --
--- * 'ggvGroupId' - The ID of the AWS Greengrass group.
+-- * 'ggvGroupId' - The ID of the Greengrass group.
 getGroupVersion
     :: Text -- ^ 'ggvGroupVersionId'
     -> Text -- ^ 'ggvGroupId'
     -> GetGroupVersion
-getGroupVersion pGroupVersionId_ pGroupId_ =
-  GetGroupVersion'
-    {_ggvGroupVersionId = pGroupVersionId_, _ggvGroupId = pGroupId_}
+getGroupVersion pGroupVersionId_ pGroupId_
+  = GetGroupVersion'{_ggvGroupVersionId =
+                       pGroupVersionId_,
+                     _ggvGroupId = pGroupId_}
 
-
--- | The ID of the group version.
+-- | The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object.
 ggvGroupVersionId :: Lens' GetGroupVersion Text
 ggvGroupVersionId = lens _ggvGroupVersionId (\ s a -> s{_ggvGroupVersionId = a})
 
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 ggvGroupId :: Lens' GetGroupVersion Text
 ggvGroupId = lens _ggvGroupId (\ s a -> s{_ggvGroupId = a})
 
@@ -112,15 +111,21 @@ instance ToQuery GetGroupVersion where
         toQuery = const mempty
 
 -- | /See:/ 'getGroupVersionResponse' smart constructor.
-data GetGroupVersionResponse = GetGroupVersionResponse'
-  { _ggvrsDefinition        :: !(Maybe GroupVersion)
-  , _ggvrsARN               :: !(Maybe Text)
-  , _ggvrsCreationTimestamp :: !(Maybe Text)
-  , _ggvrsVersion           :: !(Maybe Text)
-  , _ggvrsId                :: !(Maybe Text)
-  , _ggvrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGroupVersionResponse = GetGroupVersionResponse'{_ggvrsDefinition
+                                                        ::
+                                                        !(Maybe GroupVersion),
+                                                        _ggvrsARN ::
+                                                        !(Maybe Text),
+                                                        _ggvrsCreationTimestamp
+                                                        :: !(Maybe Text),
+                                                        _ggvrsVersion ::
+                                                        !(Maybe Text),
+                                                        _ggvrsId ::
+                                                        !(Maybe Text),
+                                                        _ggvrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetGroupVersionResponse' with the minimum fields required to make a request.
 --
@@ -132,24 +137,21 @@ data GetGroupVersionResponse = GetGroupVersionResponse'
 --
 -- * 'ggvrsCreationTimestamp' - The time, in milliseconds since the epoch, when the group version was created.
 --
--- * 'ggvrsVersion' - The unique ID for the version of the group.
+-- * 'ggvrsVersion' - The ID of the group version.
 --
--- * 'ggvrsId' - The ID of the group version.
+-- * 'ggvrsId' - The ID of the group that the version is associated with.
 --
 -- * 'ggvrsResponseStatus' - -- | The response status code.
 getGroupVersionResponse
     :: Int -- ^ 'ggvrsResponseStatus'
     -> GetGroupVersionResponse
-getGroupVersionResponse pResponseStatus_ =
-  GetGroupVersionResponse'
-    { _ggvrsDefinition = Nothing
-    , _ggvrsARN = Nothing
-    , _ggvrsCreationTimestamp = Nothing
-    , _ggvrsVersion = Nothing
-    , _ggvrsId = Nothing
-    , _ggvrsResponseStatus = pResponseStatus_
-    }
-
+getGroupVersionResponse pResponseStatus_
+  = GetGroupVersionResponse'{_ggvrsDefinition =
+                               Nothing,
+                             _ggvrsARN = Nothing,
+                             _ggvrsCreationTimestamp = Nothing,
+                             _ggvrsVersion = Nothing, _ggvrsId = Nothing,
+                             _ggvrsResponseStatus = pResponseStatus_}
 
 -- | Information about the group version definition.
 ggvrsDefinition :: Lens' GetGroupVersionResponse (Maybe GroupVersion)
@@ -163,11 +165,11 @@ ggvrsARN = lens _ggvrsARN (\ s a -> s{_ggvrsARN = a})
 ggvrsCreationTimestamp :: Lens' GetGroupVersionResponse (Maybe Text)
 ggvrsCreationTimestamp = lens _ggvrsCreationTimestamp (\ s a -> s{_ggvrsCreationTimestamp = a})
 
--- | The unique ID for the version of the group.
+-- | The ID of the group version.
 ggvrsVersion :: Lens' GetGroupVersionResponse (Maybe Text)
 ggvrsVersion = lens _ggvrsVersion (\ s a -> s{_ggvrsVersion = a})
 
--- | The ID of the group version.
+-- | The ID of the group that the version is associated with.
 ggvrsId :: Lens' GetGroupVersionResponse (Maybe Text)
 ggvrsId = lens _ggvrsId (\ s a -> s{_ggvrsId = a})
 

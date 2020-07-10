@@ -48,6 +48,8 @@ library
         , Network.AWS.AutoScaling.AttachInstances
         , Network.AWS.AutoScaling.AttachLoadBalancerTargetGroups
         , Network.AWS.AutoScaling.AttachLoadBalancers
+        , Network.AWS.AutoScaling.BatchDeleteScheduledAction
+        , Network.AWS.AutoScaling.BatchPutScheduledUpdateGroupAction
         , Network.AWS.AutoScaling.CompleteLifecycleAction
         , Network.AWS.AutoScaling.CreateAutoScalingGroup
         , Network.AWS.AutoScaling.CreateLaunchConfiguration
@@ -101,12 +103,54 @@ library
         , Network.AWS.AutoScaling.Waiters
 
     other-modules:
-          Network.AWS.AutoScaling.Types.Product
-        , Network.AWS.AutoScaling.Types.Sum
+          Network.AWS.AutoScaling.Types.Activity
+        , Network.AWS.AutoScaling.Types.AdjustmentType
+        , Network.AWS.AutoScaling.Types.Alarm
+        , Network.AWS.AutoScaling.Types.AutoScalingGroup
+        , Network.AWS.AutoScaling.Types.AutoScalingInstanceDetails
+        , Network.AWS.AutoScaling.Types.BlockDeviceMapping
+        , Network.AWS.AutoScaling.Types.CustomizedMetricSpecification
+        , Network.AWS.AutoScaling.Types.EBS
+        , Network.AWS.AutoScaling.Types.EnabledMetric
+        , Network.AWS.AutoScaling.Types.FailedScheduledUpdateGroupActionRequest
+        , Network.AWS.AutoScaling.Types.Filter
+        , Network.AWS.AutoScaling.Types.Instance
+        , Network.AWS.AutoScaling.Types.InstanceMonitoring
+        , Network.AWS.AutoScaling.Types.InstancesDistribution
+        , Network.AWS.AutoScaling.Types.LaunchConfiguration
+        , Network.AWS.AutoScaling.Types.LaunchTemplate
+        , Network.AWS.AutoScaling.Types.LaunchTemplateOverrides
+        , Network.AWS.AutoScaling.Types.LaunchTemplateSpecification
+        , Network.AWS.AutoScaling.Types.LifecycleHook
+        , Network.AWS.AutoScaling.Types.LifecycleHookSpecification
+        , Network.AWS.AutoScaling.Types.LifecycleState
+        , Network.AWS.AutoScaling.Types.LoadBalancerState
+        , Network.AWS.AutoScaling.Types.LoadBalancerTargetGroupState
+        , Network.AWS.AutoScaling.Types.MetricCollectionType
+        , Network.AWS.AutoScaling.Types.MetricDimension
+        , Network.AWS.AutoScaling.Types.MetricGranularityType
+        , Network.AWS.AutoScaling.Types.MetricStatistic
+        , Network.AWS.AutoScaling.Types.MetricType
+        , Network.AWS.AutoScaling.Types.MixedInstancesPolicy
+        , Network.AWS.AutoScaling.Types.NotificationConfiguration
+        , Network.AWS.AutoScaling.Types.PredefinedMetricSpecification
+        , Network.AWS.AutoScaling.Types.ProcessType
+        , Network.AWS.AutoScaling.Types.Product
+        , Network.AWS.AutoScaling.Types.ScalingActivityStatusCode
+        , Network.AWS.AutoScaling.Types.ScalingPolicy
+        , Network.AWS.AutoScaling.Types.ScalingProcessQuery
+        , Network.AWS.AutoScaling.Types.ScheduledUpdateGroupAction
+        , Network.AWS.AutoScaling.Types.ScheduledUpdateGroupActionRequest
+        , Network.AWS.AutoScaling.Types.StepAdjustment
+        , Network.AWS.AutoScaling.Types.SuspendedProcess
+        , Network.AWS.AutoScaling.Types.Tag
+        , Network.AWS.AutoScaling.Types.TagDescription
+        , Network.AWS.AutoScaling.Types.TargetTrackingConfiguration
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-autoscaling-test
     type:              exitcode-stdio-1.0
@@ -130,6 +174,7 @@ test-suite amazonka-autoscaling-test
         , amazonka-autoscaling
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

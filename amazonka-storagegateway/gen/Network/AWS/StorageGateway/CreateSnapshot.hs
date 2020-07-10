@@ -21,11 +21,11 @@
 -- Initiates a snapshot of a volume.
 --
 --
--- AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see <http://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot Editing a Snapshot Schedule> .
+-- AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage Service (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot Editing a Snapshot Schedule> .
 --
 -- In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.
 --
--- /Important:/ Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <http://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html Welcome> page.
+-- /Important:/ Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html Welcome> page.
 --
 module Network.AWS.StorageGateway.CreateSnapshot
     (
@@ -33,6 +33,7 @@ module Network.AWS.StorageGateway.CreateSnapshot
       createSnapshot
     , CreateSnapshot
     -- * Request Lenses
+    , csTags
     , csVolumeARN
     , csSnapshotDescription
 
@@ -55,23 +56,25 @@ import Network.AWS.StorageGateway.Types.Product
 -- | A JSON object containing one or more of the following fields:
 --
 --
---     * 'CreateSnapshotInput$SnapshotDescription'
+--     * 'CreateSnapshotInput$SnapshotDescription' 
 --
---     * 'CreateSnapshotInput$VolumeARN'
+--     * 'CreateSnapshotInput$VolumeARN' 
 --
 --
 --
 --
 -- /See:/ 'createSnapshot' smart constructor.
-data CreateSnapshot = CreateSnapshot'
-  { _csVolumeARN           :: !Text
-  , _csSnapshotDescription :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshot = CreateSnapshot'{_csTags ::
+                                      !(Maybe [Tag]),
+                                      _csVolumeARN :: !Text,
+                                      _csSnapshotDescription :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csTags' - A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.
 --
 -- * 'csVolumeARN' - The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 --
@@ -80,10 +83,14 @@ createSnapshot
     :: Text -- ^ 'csVolumeARN'
     -> Text -- ^ 'csSnapshotDescription'
     -> CreateSnapshot
-createSnapshot pVolumeARN_ pSnapshotDescription_ =
-  CreateSnapshot'
-    {_csVolumeARN = pVolumeARN_, _csSnapshotDescription = pSnapshotDescription_}
+createSnapshot pVolumeARN_ pSnapshotDescription_
+  = CreateSnapshot'{_csTags = Nothing,
+                    _csVolumeARN = pVolumeARN_,
+                    _csSnapshotDescription = pSnapshotDescription_}
 
+-- | A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.
+csTags :: Lens' CreateSnapshot [Tag]
+csTags = lens _csTags (\ s a -> s{_csTags = a}) . _Default . _Coerce
 
 -- | The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 csVolumeARN :: Lens' CreateSnapshot Text
@@ -121,7 +128,8 @@ instance ToJSON CreateSnapshot where
         toJSON CreateSnapshot'{..}
           = object
               (catMaybes
-                 [Just ("VolumeARN" .= _csVolumeARN),
+                 [("Tags" .=) <$> _csTags,
+                  Just ("VolumeARN" .= _csVolumeARN),
                   Just
                     ("SnapshotDescription" .= _csSnapshotDescription)])
 
@@ -136,12 +144,14 @@ instance ToQuery CreateSnapshot where
 --
 --
 -- /See:/ 'createSnapshotResponse' smart constructor.
-data CreateSnapshotResponse = CreateSnapshotResponse'
-  { _csrsVolumeARN      :: !(Maybe Text)
-  , _csrsSnapshotId     :: !(Maybe Text)
-  , _csrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSnapshotResponse = CreateSnapshotResponse'{_csrsVolumeARN
+                                                      :: !(Maybe Text),
+                                                      _csrsSnapshotId ::
+                                                      !(Maybe Text),
+                                                      _csrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +165,10 @@ data CreateSnapshotResponse = CreateSnapshotResponse'
 createSnapshotResponse
     :: Int -- ^ 'csrsResponseStatus'
     -> CreateSnapshotResponse
-createSnapshotResponse pResponseStatus_ =
-  CreateSnapshotResponse'
-    { _csrsVolumeARN = Nothing
-    , _csrsSnapshotId = Nothing
-    , _csrsResponseStatus = pResponseStatus_
-    }
-
+createSnapshotResponse pResponseStatus_
+  = CreateSnapshotResponse'{_csrsVolumeARN = Nothing,
+                            _csrsSnapshotId = Nothing,
+                            _csrsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the volume of which the snapshot was taken.
 csrsVolumeARN :: Lens' CreateSnapshotResponse (Maybe Text)

@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateApplication' smart constructor.
-data UpdateApplication = UpdateApplication'
-  { _uaDescription     :: !(Maybe Text)
-  , _uaApplicationName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateApplication = UpdateApplication'{_uaDescription
+                                            :: !(Maybe Text),
+                                            _uaApplicationName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateApplication' with the minimum fields required to make a request.
 --
@@ -61,20 +60,19 @@ data UpdateApplication = UpdateApplication'
 --
 -- * 'uaDescription' - A new description for the application. Default: If not specified, AWS Elastic Beanstalk does not update the description.
 --
--- * 'uaApplicationName' - The name of the application to update. If no such application is found, @UpdateApplication@ returns an @InvalidParameterValue@ error.
+-- * 'uaApplicationName' - The name of the application to update. If no such application is found, @UpdateApplication@ returns an @InvalidParameterValue@ error. 
 updateApplication
     :: Text -- ^ 'uaApplicationName'
     -> UpdateApplication
-updateApplication pApplicationName_ =
-  UpdateApplication'
-    {_uaDescription = Nothing, _uaApplicationName = pApplicationName_}
-
+updateApplication pApplicationName_
+  = UpdateApplication'{_uaDescription = Nothing,
+                       _uaApplicationName = pApplicationName_}
 
 -- | A new description for the application. Default: If not specified, AWS Elastic Beanstalk does not update the description.
 uaDescription :: Lens' UpdateApplication (Maybe Text)
 uaDescription = lens _uaDescription (\ s a -> s{_uaDescription = a})
 
--- | The name of the application to update. If no such application is found, @UpdateApplication@ returns an @InvalidParameterValue@ error.
+-- | The name of the application to update. If no such application is found, @UpdateApplication@ returns an @InvalidParameterValue@ error. 
 uaApplicationName :: Lens' UpdateApplication Text
 uaApplicationName = lens _uaApplicationName (\ s a -> s{_uaApplicationName = a})
 

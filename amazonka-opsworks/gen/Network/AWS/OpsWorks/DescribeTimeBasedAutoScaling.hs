@@ -21,7 +21,7 @@
 -- Describes time-based auto scaling configurations for specified instances.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeTimeBasedAutoScaling
     (
@@ -47,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeTimeBasedAutoScaling' smart constructor.
-newtype DescribeTimeBasedAutoScaling = DescribeTimeBasedAutoScaling'
-  { _dtbasInstanceIds :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeTimeBasedAutoScaling = DescribeTimeBasedAutoScaling'{_dtbasInstanceIds
+                                                                     :: [Text]}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeTimeBasedAutoScaling' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DescribeTimeBasedAutoScaling = DescribeTimeBasedAutoScaling'
 -- * 'dtbasInstanceIds' - An array of instance IDs.
 describeTimeBasedAutoScaling
     :: DescribeTimeBasedAutoScaling
-describeTimeBasedAutoScaling =
-  DescribeTimeBasedAutoScaling' {_dtbasInstanceIds = mempty}
-
+describeTimeBasedAutoScaling
+  = DescribeTimeBasedAutoScaling'{_dtbasInstanceIds =
+                                    mempty}
 
 -- | An array of instance IDs.
 dtbasInstanceIds :: Lens' DescribeTimeBasedAutoScaling [Text]
@@ -111,11 +111,15 @@ instance ToQuery DescribeTimeBasedAutoScaling where
 --
 --
 -- /See:/ 'describeTimeBasedAutoScalingResponse' smart constructor.
-data DescribeTimeBasedAutoScalingResponse = DescribeTimeBasedAutoScalingResponse'
-  { _dtbasrsTimeBasedAutoScalingConfigurations :: !(Maybe [TimeBasedAutoScalingConfiguration])
-  , _dtbasrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTimeBasedAutoScalingResponse = DescribeTimeBasedAutoScalingResponse'{_dtbasrsTimeBasedAutoScalingConfigurations
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [TimeBasedAutoScalingConfiguration]),
+                                                                                  _dtbasrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeTimeBasedAutoScalingResponse' with the minimum fields required to make a request.
 --
@@ -127,12 +131,11 @@ data DescribeTimeBasedAutoScalingResponse = DescribeTimeBasedAutoScalingResponse
 describeTimeBasedAutoScalingResponse
     :: Int -- ^ 'dtbasrsResponseStatus'
     -> DescribeTimeBasedAutoScalingResponse
-describeTimeBasedAutoScalingResponse pResponseStatus_ =
-  DescribeTimeBasedAutoScalingResponse'
-    { _dtbasrsTimeBasedAutoScalingConfigurations = Nothing
-    , _dtbasrsResponseStatus = pResponseStatus_
-    }
-
+describeTimeBasedAutoScalingResponse pResponseStatus_
+  = DescribeTimeBasedAutoScalingResponse'{_dtbasrsTimeBasedAutoScalingConfigurations
+                                            = Nothing,
+                                          _dtbasrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | An array of @TimeBasedAutoScalingConfiguration@ objects that describe the configuration for the specified instances.
 dtbasrsTimeBasedAutoScalingConfigurations :: Lens' DescribeTimeBasedAutoScalingResponse [TimeBasedAutoScalingConfiguration]

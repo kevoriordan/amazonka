@@ -49,24 +49,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDeploymentConfig' smart constructor.
-newtype GetDeploymentConfig = GetDeploymentConfig'
-  { _gdcDeploymentConfigName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDeploymentConfig = GetDeploymentConfig'{_gdcDeploymentConfigName
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetDeploymentConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdcDeploymentConfigName' - The name of a deployment configuration associated with the applicable IAM user or AWS account.
+-- * 'gdcDeploymentConfigName' - The name of a deployment configuration associated with the IAM user or AWS account.
 getDeploymentConfig
     :: Text -- ^ 'gdcDeploymentConfigName'
     -> GetDeploymentConfig
-getDeploymentConfig pDeploymentConfigName_ =
-  GetDeploymentConfig' {_gdcDeploymentConfigName = pDeploymentConfigName_}
+getDeploymentConfig pDeploymentConfigName_
+  = GetDeploymentConfig'{_gdcDeploymentConfigName =
+                           pDeploymentConfigName_}
 
-
--- | The name of a deployment configuration associated with the applicable IAM user or AWS account.
+-- | The name of a deployment configuration associated with the IAM user or AWS account.
 gdcDeploymentConfigName :: Lens' GetDeploymentConfig Text
 gdcDeploymentConfigName = lens _gdcDeploymentConfigName (\ s a -> s{_gdcDeploymentConfigName = a})
 
@@ -114,11 +114,14 @@ instance ToQuery GetDeploymentConfig where
 --
 --
 -- /See:/ 'getDeploymentConfigResponse' smart constructor.
-data GetDeploymentConfigResponse = GetDeploymentConfigResponse'
-  { _gdcrsDeploymentConfigInfo :: !(Maybe DeploymentConfigInfo)
-  , _gdcrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeploymentConfigResponse = GetDeploymentConfigResponse'{_gdcrsDeploymentConfigInfo
+                                                                ::
+                                                                !(Maybe
+                                                                    DeploymentConfigInfo),
+                                                                _gdcrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetDeploymentConfigResponse' with the minimum fields required to make a request.
 --
@@ -130,12 +133,10 @@ data GetDeploymentConfigResponse = GetDeploymentConfigResponse'
 getDeploymentConfigResponse
     :: Int -- ^ 'gdcrsResponseStatus'
     -> GetDeploymentConfigResponse
-getDeploymentConfigResponse pResponseStatus_ =
-  GetDeploymentConfigResponse'
-    { _gdcrsDeploymentConfigInfo = Nothing
-    , _gdcrsResponseStatus = pResponseStatus_
-    }
-
+getDeploymentConfigResponse pResponseStatus_
+  = GetDeploymentConfigResponse'{_gdcrsDeploymentConfigInfo
+                                   = Nothing,
+                                 _gdcrsResponseStatus = pResponseStatus_}
 
 -- | Information about the deployment configuration.
 gdcrsDeploymentConfigInfo :: Lens' GetDeploymentConfigResponse (Maybe DeploymentConfigInfo)

@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about an endpoint.
+-- Retrieves information about the settings and attributes of a specific endpoint for an application.
+--
+--
 module Network.AWS.Pinpoint.GetEndpoint
     (
     -- * Creating a Request
@@ -44,33 +46,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getEndpoint' smart constructor.
-data GetEndpoint = GetEndpoint'
-  { _geApplicationId :: !Text
-  , _geEndpointId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetEndpoint = GetEndpoint'{_geApplicationId ::
+                                !Text,
+                                _geEndpointId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'geApplicationId' - Undocumented member.
+-- * 'geApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
--- * 'geEndpointId' - Undocumented member.
+-- * 'geEndpointId' - The unique identifier for the endpoint.
 getEndpoint
     :: Text -- ^ 'geApplicationId'
     -> Text -- ^ 'geEndpointId'
     -> GetEndpoint
-getEndpoint pApplicationId_ pEndpointId_ =
-  GetEndpoint'
-    {_geApplicationId = pApplicationId_, _geEndpointId = pEndpointId_}
+getEndpoint pApplicationId_ pEndpointId_
+  = GetEndpoint'{_geApplicationId = pApplicationId_,
+                 _geEndpointId = pEndpointId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 geApplicationId :: Lens' GetEndpoint Text
 geApplicationId = lens _geApplicationId (\ s a -> s{_geApplicationId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the endpoint.
 geEndpointId :: Lens' GetEndpoint Text
 geEndpointId = lens _geEndpointId (\ s a -> s{_geEndpointId = a})
 
@@ -104,11 +104,11 @@ instance ToQuery GetEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'getEndpointResponse' smart constructor.
-data GetEndpointResponse = GetEndpointResponse'
-  { _gersResponseStatus   :: !Int
-  , _gersEndpointResponse :: !EndpointResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetEndpointResponse = GetEndpointResponse'{_gersResponseStatus
+                                                :: !Int,
+                                                _gersEndpointResponse ::
+                                                !EndpointResponse}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetEndpointResponse' with the minimum fields required to make a request.
 --
@@ -121,12 +121,11 @@ getEndpointResponse
     :: Int -- ^ 'gersResponseStatus'
     -> EndpointResponse -- ^ 'gersEndpointResponse'
     -> GetEndpointResponse
-getEndpointResponse pResponseStatus_ pEndpointResponse_ =
-  GetEndpointResponse'
-    { _gersResponseStatus = pResponseStatus_
-    , _gersEndpointResponse = pEndpointResponse_
-    }
-
+getEndpointResponse pResponseStatus_
+  pEndpointResponse_
+  = GetEndpointResponse'{_gersResponseStatus =
+                           pResponseStatus_,
+                         _gersEndpointResponse = pEndpointResponse_}
 
 -- | -- | The response status code.
 gersResponseStatus :: Lens' GetEndpointResponse Int

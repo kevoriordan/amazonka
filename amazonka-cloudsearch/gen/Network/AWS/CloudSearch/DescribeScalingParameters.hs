@@ -44,15 +44,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the @'DescribeScalingParameters' @ operation. Specifies the name of the domain you want to describe.
+-- | Container for the parameters to the @'DescribeScalingParameters' @ operation. Specifies the name of the domain you want to describe. 
 --
 --
 --
 -- /See:/ 'describeScalingParameters' smart constructor.
-newtype DescribeScalingParameters = DescribeScalingParameters'
-  { _dspDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeScalingParameters = DescribeScalingParameters'{_dspDomainName
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeScalingParameters' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DescribeScalingParameters = DescribeScalingParameters'
 describeScalingParameters
     :: Text -- ^ 'dspDomainName'
     -> DescribeScalingParameters
-describeScalingParameters pDomainName_ =
-  DescribeScalingParameters' {_dspDomainName = pDomainName_}
-
+describeScalingParameters pDomainName_
+  = DescribeScalingParameters'{_dspDomainName =
+                                 pDomainName_}
 
 -- | Undocumented member.
 dspDomainName :: Lens' DescribeScalingParameters Text
@@ -103,11 +103,14 @@ instance ToQuery DescribeScalingParameters where
 --
 --
 -- /See:/ 'describeScalingParametersResponse' smart constructor.
-data DescribeScalingParametersResponse = DescribeScalingParametersResponse'
-  { _dsprsResponseStatus    :: !Int
-  , _dsprsScalingParameters :: !ScalingParametersStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeScalingParametersResponse = DescribeScalingParametersResponse'{_dsprsResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _dsprsScalingParameters
+                                                                            ::
+                                                                            !ScalingParametersStatus}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeScalingParametersResponse' with the minimum fields required to make a request.
 --
@@ -120,12 +123,12 @@ describeScalingParametersResponse
     :: Int -- ^ 'dsprsResponseStatus'
     -> ScalingParametersStatus -- ^ 'dsprsScalingParameters'
     -> DescribeScalingParametersResponse
-describeScalingParametersResponse pResponseStatus_ pScalingParameters_ =
-  DescribeScalingParametersResponse'
-    { _dsprsResponseStatus = pResponseStatus_
-    , _dsprsScalingParameters = pScalingParameters_
-    }
-
+describeScalingParametersResponse pResponseStatus_
+  pScalingParameters_
+  = DescribeScalingParametersResponse'{_dsprsResponseStatus
+                                         = pResponseStatus_,
+                                       _dsprsScalingParameters =
+                                         pScalingParameters_}
 
 -- | -- | The response status code.
 dsprsResponseStatus :: Lens' DescribeScalingParametersResponse Int

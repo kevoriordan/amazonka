@@ -46,32 +46,65 @@ library
     exposed-modules:
           Network.AWS.Discovery
         , Network.AWS.Discovery.AssociateConfigurationItemsToApplication
+        , Network.AWS.Discovery.BatchDeleteImportData
         , Network.AWS.Discovery.CreateApplication
         , Network.AWS.Discovery.CreateTags
         , Network.AWS.Discovery.DeleteApplications
         , Network.AWS.Discovery.DeleteTags
         , Network.AWS.Discovery.DescribeAgents
         , Network.AWS.Discovery.DescribeConfigurations
+        , Network.AWS.Discovery.DescribeContinuousExports
         , Network.AWS.Discovery.DescribeExportTasks
+        , Network.AWS.Discovery.DescribeImportTasks
         , Network.AWS.Discovery.DescribeTags
         , Network.AWS.Discovery.DisassociateConfigurationItemsFromApplication
         , Network.AWS.Discovery.GetDiscoverySummary
         , Network.AWS.Discovery.ListConfigurations
         , Network.AWS.Discovery.ListServerNeighbors
+        , Network.AWS.Discovery.StartContinuousExport
         , Network.AWS.Discovery.StartDataCollectionByAgentIds
         , Network.AWS.Discovery.StartExportTask
+        , Network.AWS.Discovery.StartImportTask
+        , Network.AWS.Discovery.StopContinuousExport
         , Network.AWS.Discovery.StopDataCollectionByAgentIds
         , Network.AWS.Discovery.Types
         , Network.AWS.Discovery.UpdateApplication
         , Network.AWS.Discovery.Waiters
 
     other-modules:
-          Network.AWS.Discovery.Types.Product
-        , Network.AWS.Discovery.Types.Sum
+          Network.AWS.Discovery.Types.AgentConfigurationStatus
+        , Network.AWS.Discovery.Types.AgentInfo
+        , Network.AWS.Discovery.Types.AgentNetworkInfo
+        , Network.AWS.Discovery.Types.AgentStatus
+        , Network.AWS.Discovery.Types.BatchDeleteImportDataError
+        , Network.AWS.Discovery.Types.BatchDeleteImportDataErrorCode
+        , Network.AWS.Discovery.Types.ConfigurationItemType
+        , Network.AWS.Discovery.Types.ConfigurationTag
+        , Network.AWS.Discovery.Types.ContinuousExportDescription
+        , Network.AWS.Discovery.Types.ContinuousExportStatus
+        , Network.AWS.Discovery.Types.CustomerAgentInfo
+        , Network.AWS.Discovery.Types.CustomerConnectorInfo
+        , Network.AWS.Discovery.Types.DataSource
+        , Network.AWS.Discovery.Types.ExportDataFormat
+        , Network.AWS.Discovery.Types.ExportFilter
+        , Network.AWS.Discovery.Types.ExportInfo
+        , Network.AWS.Discovery.Types.ExportStatus
+        , Network.AWS.Discovery.Types.Filter
+        , Network.AWS.Discovery.Types.ImportStatus
+        , Network.AWS.Discovery.Types.ImportTask
+        , Network.AWS.Discovery.Types.ImportTaskFilter
+        , Network.AWS.Discovery.Types.ImportTaskFilterName
+        , Network.AWS.Discovery.Types.NeighborConnectionDetail
+        , Network.AWS.Discovery.Types.OrderByElement
+        , Network.AWS.Discovery.Types.OrderString
+        , Network.AWS.Discovery.Types.Product
+        , Network.AWS.Discovery.Types.Tag
+        , Network.AWS.Discovery.Types.TagFilter
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-discovery-test
     type:              exitcode-stdio-1.0
@@ -95,6 +128,7 @@ test-suite amazonka-discovery-test
         , amazonka-discovery
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

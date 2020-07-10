@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a deployment group to which application revisions will be deployed.
+-- Creates a deployment group to which application revisions are deployed.
 --
 --
 module Network.AWS.CodeDeploy.CreateDeploymentGroup
@@ -31,6 +31,7 @@ module Network.AWS.CodeDeploy.CreateDeploymentGroup
     , cdgDeploymentConfigName
     , cdgOnPremisesTagSet
     , cdgEc2TagFilters
+    , cdgEcsServices
     , cdgBlueGreenDeploymentConfiguration
     , cdgLoadBalancerInfo
     , cdgOnPremisesInstanceTagFilters
@@ -39,6 +40,7 @@ module Network.AWS.CodeDeploy.CreateDeploymentGroup
     , cdgAutoScalingGroups
     , cdgDeploymentStyle
     , cdgAutoRollbackConfiguration
+    , cdgTags
     , cdgApplicationName
     , cdgDeploymentGroupName
     , cdgServiceRoleARN
@@ -63,54 +65,78 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createDeploymentGroup' smart constructor.
-data CreateDeploymentGroup = CreateDeploymentGroup'
-  { _cdgEc2TagSet :: !(Maybe EC2TagSet)
-  , _cdgDeploymentConfigName :: !(Maybe Text)
-  , _cdgOnPremisesTagSet :: !(Maybe OnPremisesTagSet)
-  , _cdgEc2TagFilters :: !(Maybe [EC2TagFilter])
-  , _cdgBlueGreenDeploymentConfiguration :: !(Maybe BlueGreenDeploymentConfiguration)
-  , _cdgLoadBalancerInfo :: !(Maybe LoadBalancerInfo)
-  , _cdgOnPremisesInstanceTagFilters :: !(Maybe [TagFilter])
-  , _cdgAlarmConfiguration :: !(Maybe AlarmConfiguration)
-  , _cdgTriggerConfigurations :: !(Maybe [TriggerConfig])
-  , _cdgAutoScalingGroups :: !(Maybe [Text])
-  , _cdgDeploymentStyle :: !(Maybe DeploymentStyle)
-  , _cdgAutoRollbackConfiguration :: !(Maybe AutoRollbackConfiguration)
-  , _cdgApplicationName :: !Text
-  , _cdgDeploymentGroupName :: !Text
-  , _cdgServiceRoleARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeploymentGroup = CreateDeploymentGroup'{_cdgEc2TagSet
+                                                    :: !(Maybe EC2TagSet),
+                                                    _cdgDeploymentConfigName ::
+                                                    !(Maybe Text),
+                                                    _cdgOnPremisesTagSet ::
+                                                    !(Maybe OnPremisesTagSet),
+                                                    _cdgEc2TagFilters ::
+                                                    !(Maybe [EC2TagFilter]),
+                                                    _cdgEcsServices ::
+                                                    !(Maybe [ECSService]),
+                                                    _cdgBlueGreenDeploymentConfiguration
+                                                    ::
+                                                    !(Maybe
+                                                        BlueGreenDeploymentConfiguration),
+                                                    _cdgLoadBalancerInfo ::
+                                                    !(Maybe LoadBalancerInfo),
+                                                    _cdgOnPremisesInstanceTagFilters
+                                                    :: !(Maybe [TagFilter]),
+                                                    _cdgAlarmConfiguration ::
+                                                    !(Maybe AlarmConfiguration),
+                                                    _cdgTriggerConfigurations ::
+                                                    !(Maybe [TriggerConfig]),
+                                                    _cdgAutoScalingGroups ::
+                                                    !(Maybe [Text]),
+                                                    _cdgDeploymentStyle ::
+                                                    !(Maybe DeploymentStyle),
+                                                    _cdgAutoRollbackConfiguration
+                                                    ::
+                                                    !(Maybe
+                                                        AutoRollbackConfiguration),
+                                                    _cdgTags :: !(Maybe [Tag]),
+                                                    _cdgApplicationName ::
+                                                    !Text,
+                                                    _cdgDeploymentGroupName ::
+                                                    !Text,
+                                                    _cdgServiceRoleARN :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateDeploymentGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdgEc2TagSet' - Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
+-- * 'cdgEc2TagSet' - Information about groups of tags applied to EC2 instances. The deployment group includes only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
 --
--- * 'cdgDeploymentConfigName' - If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation. CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or the deployment group. For more information about the predefined deployment configurations in AWS CodeDeploy, see <http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html Working with Deployment Groups in AWS CodeDeploy> in the AWS CodeDeploy User Guide.
+-- * 'cdgDeploymentConfigName' - If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation. CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or deployment group. For more information about the predefined deployment configurations in AWS CodeDeploy, see <https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html Working with Deployment Groups in AWS CodeDeploy> in the AWS CodeDeploy User Guide.
 --
--- * 'cdgOnPremisesTagSet' - Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
+-- * 'cdgOnPremisesTagSet' - Information about groups of tags applied to on-premises instances. The deployment group includes only on-premises instances identified by all of the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 --
--- * 'cdgEc2TagFilters' - The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.
+-- * 'cdgEc2TagFilters' - The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.
+--
+-- * 'cdgEcsServices' - The target Amazon ECS services in the deployment group. This applies only to deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service is specified as an Amazon ECS cluster and service name pair using the format @<clustername>:<servicename>@ . 
 --
 -- * 'cdgBlueGreenDeploymentConfiguration' - Information about blue/green deployment options for a deployment group.
 --
 -- * 'cdgLoadBalancerInfo' - Information about the load balancer used in a deployment.
 --
--- * 'cdgOnPremisesInstanceTagFilters' - The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.
+-- * 'cdgOnPremisesInstanceTagFilters' - The on-premises instance tags on which to filter. The deployment group includes on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.
 --
 -- * 'cdgAlarmConfiguration' - Information to add about Amazon CloudWatch alarms when the deployment group is created.
 --
--- * 'cdgTriggerConfigurations' - Information about triggers to create when the deployment group is created. For examples, see <http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html Create a Trigger for an AWS CodeDeploy Event> in the AWS CodeDeploy User Guide.
+-- * 'cdgTriggerConfigurations' - Information about triggers to create when the deployment group is created. For examples, see <https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html Create a Trigger for an AWS CodeDeploy Event> in the AWS CodeDeploy User Guide.
 --
--- * 'cdgAutoScalingGroups' - A list of associated Auto Scaling groups.
+-- * 'cdgAutoScalingGroups' - A list of associated Amazon EC2 Auto Scaling groups.
 --
 -- * 'cdgDeploymentStyle' - Information about the type of deployment, in-place or blue/green, that you want to run and whether to route deployment traffic behind a load balancer.
 --
 -- * 'cdgAutoRollbackConfiguration' - Configuration information for an automatic rollback that is added when a deployment group is created.
 --
--- * 'cdgApplicationName' - The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+-- * 'cdgTags' - The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. 
+--
+-- * 'cdgApplicationName' - The name of an AWS CodeDeploy application associated with the IAM user or AWS account.
 --
 -- * 'cdgDeploymentGroupName' - The name of a new deployment group for the specified application.
 --
@@ -120,41 +146,45 @@ createDeploymentGroup
     -> Text -- ^ 'cdgDeploymentGroupName'
     -> Text -- ^ 'cdgServiceRoleARN'
     -> CreateDeploymentGroup
-createDeploymentGroup pApplicationName_ pDeploymentGroupName_ pServiceRoleARN_ =
-  CreateDeploymentGroup'
-    { _cdgEc2TagSet = Nothing
-    , _cdgDeploymentConfigName = Nothing
-    , _cdgOnPremisesTagSet = Nothing
-    , _cdgEc2TagFilters = Nothing
-    , _cdgBlueGreenDeploymentConfiguration = Nothing
-    , _cdgLoadBalancerInfo = Nothing
-    , _cdgOnPremisesInstanceTagFilters = Nothing
-    , _cdgAlarmConfiguration = Nothing
-    , _cdgTriggerConfigurations = Nothing
-    , _cdgAutoScalingGroups = Nothing
-    , _cdgDeploymentStyle = Nothing
-    , _cdgAutoRollbackConfiguration = Nothing
-    , _cdgApplicationName = pApplicationName_
-    , _cdgDeploymentGroupName = pDeploymentGroupName_
-    , _cdgServiceRoleARN = pServiceRoleARN_
-    }
+createDeploymentGroup pApplicationName_
+  pDeploymentGroupName_ pServiceRoleARN_
+  = CreateDeploymentGroup'{_cdgEc2TagSet = Nothing,
+                           _cdgDeploymentConfigName = Nothing,
+                           _cdgOnPremisesTagSet = Nothing,
+                           _cdgEc2TagFilters = Nothing,
+                           _cdgEcsServices = Nothing,
+                           _cdgBlueGreenDeploymentConfiguration = Nothing,
+                           _cdgLoadBalancerInfo = Nothing,
+                           _cdgOnPremisesInstanceTagFilters = Nothing,
+                           _cdgAlarmConfiguration = Nothing,
+                           _cdgTriggerConfigurations = Nothing,
+                           _cdgAutoScalingGroups = Nothing,
+                           _cdgDeploymentStyle = Nothing,
+                           _cdgAutoRollbackConfiguration = Nothing,
+                           _cdgTags = Nothing,
+                           _cdgApplicationName = pApplicationName_,
+                           _cdgDeploymentGroupName = pDeploymentGroupName_,
+                           _cdgServiceRoleARN = pServiceRoleARN_}
 
-
--- | Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
+-- | Information about groups of tags applied to EC2 instances. The deployment group includes only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
 cdgEc2TagSet :: Lens' CreateDeploymentGroup (Maybe EC2TagSet)
 cdgEc2TagSet = lens _cdgEc2TagSet (\ s a -> s{_cdgEc2TagSet = a})
 
--- | If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation. CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or the deployment group. For more information about the predefined deployment configurations in AWS CodeDeploy, see <http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html Working with Deployment Groups in AWS CodeDeploy> in the AWS CodeDeploy User Guide.
+-- | If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation. CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or deployment group. For more information about the predefined deployment configurations in AWS CodeDeploy, see <https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html Working with Deployment Groups in AWS CodeDeploy> in the AWS CodeDeploy User Guide.
 cdgDeploymentConfigName :: Lens' CreateDeploymentGroup (Maybe Text)
 cdgDeploymentConfigName = lens _cdgDeploymentConfigName (\ s a -> s{_cdgDeploymentConfigName = a})
 
--- | Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
+-- | Information about groups of tags applied to on-premises instances. The deployment group includes only on-premises instances identified by all of the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 cdgOnPremisesTagSet :: Lens' CreateDeploymentGroup (Maybe OnPremisesTagSet)
 cdgOnPremisesTagSet = lens _cdgOnPremisesTagSet (\ s a -> s{_cdgOnPremisesTagSet = a})
 
--- | The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.
+-- | The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.
 cdgEc2TagFilters :: Lens' CreateDeploymentGroup [EC2TagFilter]
 cdgEc2TagFilters = lens _cdgEc2TagFilters (\ s a -> s{_cdgEc2TagFilters = a}) . _Default . _Coerce
+
+-- | The target Amazon ECS services in the deployment group. This applies only to deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service is specified as an Amazon ECS cluster and service name pair using the format @<clustername>:<servicename>@ . 
+cdgEcsServices :: Lens' CreateDeploymentGroup [ECSService]
+cdgEcsServices = lens _cdgEcsServices (\ s a -> s{_cdgEcsServices = a}) . _Default . _Coerce
 
 -- | Information about blue/green deployment options for a deployment group.
 cdgBlueGreenDeploymentConfiguration :: Lens' CreateDeploymentGroup (Maybe BlueGreenDeploymentConfiguration)
@@ -164,7 +194,7 @@ cdgBlueGreenDeploymentConfiguration = lens _cdgBlueGreenDeploymentConfiguration 
 cdgLoadBalancerInfo :: Lens' CreateDeploymentGroup (Maybe LoadBalancerInfo)
 cdgLoadBalancerInfo = lens _cdgLoadBalancerInfo (\ s a -> s{_cdgLoadBalancerInfo = a})
 
--- | The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.
+-- | The on-premises instance tags on which to filter. The deployment group includes on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.
 cdgOnPremisesInstanceTagFilters :: Lens' CreateDeploymentGroup [TagFilter]
 cdgOnPremisesInstanceTagFilters = lens _cdgOnPremisesInstanceTagFilters (\ s a -> s{_cdgOnPremisesInstanceTagFilters = a}) . _Default . _Coerce
 
@@ -172,11 +202,11 @@ cdgOnPremisesInstanceTagFilters = lens _cdgOnPremisesInstanceTagFilters (\ s a -
 cdgAlarmConfiguration :: Lens' CreateDeploymentGroup (Maybe AlarmConfiguration)
 cdgAlarmConfiguration = lens _cdgAlarmConfiguration (\ s a -> s{_cdgAlarmConfiguration = a})
 
--- | Information about triggers to create when the deployment group is created. For examples, see <http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html Create a Trigger for an AWS CodeDeploy Event> in the AWS CodeDeploy User Guide.
+-- | Information about triggers to create when the deployment group is created. For examples, see <https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html Create a Trigger for an AWS CodeDeploy Event> in the AWS CodeDeploy User Guide.
 cdgTriggerConfigurations :: Lens' CreateDeploymentGroup [TriggerConfig]
 cdgTriggerConfigurations = lens _cdgTriggerConfigurations (\ s a -> s{_cdgTriggerConfigurations = a}) . _Default . _Coerce
 
--- | A list of associated Auto Scaling groups.
+-- | A list of associated Amazon EC2 Auto Scaling groups.
 cdgAutoScalingGroups :: Lens' CreateDeploymentGroup [Text]
 cdgAutoScalingGroups = lens _cdgAutoScalingGroups (\ s a -> s{_cdgAutoScalingGroups = a}) . _Default . _Coerce
 
@@ -188,7 +218,11 @@ cdgDeploymentStyle = lens _cdgDeploymentStyle (\ s a -> s{_cdgDeploymentStyle = 
 cdgAutoRollbackConfiguration :: Lens' CreateDeploymentGroup (Maybe AutoRollbackConfiguration)
 cdgAutoRollbackConfiguration = lens _cdgAutoRollbackConfiguration (\ s a -> s{_cdgAutoRollbackConfiguration = a})
 
--- | The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+-- | The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. 
+cdgTags :: Lens' CreateDeploymentGroup [Tag]
+cdgTags = lens _cdgTags (\ s a -> s{_cdgTags = a}) . _Default . _Coerce
+
+-- | The name of an AWS CodeDeploy application associated with the IAM user or AWS account.
 cdgApplicationName :: Lens' CreateDeploymentGroup Text
 cdgApplicationName = lens _cdgApplicationName (\ s a -> s{_cdgApplicationName = a})
 
@@ -233,6 +267,7 @@ instance ToJSON CreateDeploymentGroup where
                     _cdgDeploymentConfigName,
                   ("onPremisesTagSet" .=) <$> _cdgOnPremisesTagSet,
                   ("ec2TagFilters" .=) <$> _cdgEc2TagFilters,
+                  ("ecsServices" .=) <$> _cdgEcsServices,
                   ("blueGreenDeploymentConfiguration" .=) <$>
                     _cdgBlueGreenDeploymentConfiguration,
                   ("loadBalancerInfo" .=) <$> _cdgLoadBalancerInfo,
@@ -245,6 +280,7 @@ instance ToJSON CreateDeploymentGroup where
                   ("deploymentStyle" .=) <$> _cdgDeploymentStyle,
                   ("autoRollbackConfiguration" .=) <$>
                     _cdgAutoRollbackConfiguration,
+                  ("tags" .=) <$> _cdgTags,
                   Just ("applicationName" .= _cdgApplicationName),
                   Just
                     ("deploymentGroupName" .= _cdgDeploymentGroupName),
@@ -261,11 +297,14 @@ instance ToQuery CreateDeploymentGroup where
 --
 --
 -- /See:/ 'createDeploymentGroupResponse' smart constructor.
-data CreateDeploymentGroupResponse = CreateDeploymentGroupResponse'
-  { _cdgrsDeploymentGroupId :: !(Maybe Text)
-  , _cdgrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeploymentGroupResponse = CreateDeploymentGroupResponse'{_cdgrsDeploymentGroupId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _cdgrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateDeploymentGroupResponse' with the minimum fields required to make a request.
 --
@@ -277,10 +316,10 @@ data CreateDeploymentGroupResponse = CreateDeploymentGroupResponse'
 createDeploymentGroupResponse
     :: Int -- ^ 'cdgrsResponseStatus'
     -> CreateDeploymentGroupResponse
-createDeploymentGroupResponse pResponseStatus_ =
-  CreateDeploymentGroupResponse'
-    {_cdgrsDeploymentGroupId = Nothing, _cdgrsResponseStatus = pResponseStatus_}
-
+createDeploymentGroupResponse pResponseStatus_
+  = CreateDeploymentGroupResponse'{_cdgrsDeploymentGroupId
+                                     = Nothing,
+                                   _cdgrsResponseStatus = pResponseStatus_}
 
 -- | A unique deployment group ID.
 cdgrsDeploymentGroupId :: Lens' CreateDeploymentGroupResponse (Maybe Text)

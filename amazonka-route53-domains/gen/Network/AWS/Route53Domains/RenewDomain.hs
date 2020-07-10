@@ -21,7 +21,7 @@
 -- This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your AWS account.
 --
 --
--- We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven't renewed far enough in advance. For more information about renewing domain registration, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html Renewing Registration for a Domain> in the Amazon Route 53 Developer Guide.
+-- We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven't renewed far enough in advance. For more information about renewing domain registration, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html Renewing Registration for a Domain> in the /Amazon Route 53 Developer Guide/ .
 --
 module Network.AWS.Route53Domains.RenewDomain
     (
@@ -53,18 +53,17 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'renewDomain' smart constructor.
-data RenewDomain = RenewDomain'
-  { _rdDurationInYears   :: !(Maybe Nat)
-  , _rdDomainName        :: !Text
-  , _rdCurrentExpiryYear :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RenewDomain = RenewDomain'{_rdDurationInYears ::
+                                !(Maybe Nat),
+                                _rdDomainName :: !Text,
+                                _rdCurrentExpiryYear :: !Int}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RenewDomain' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdDurationInYears' - The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. For the range of valid values for your domain, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html Domains that You Can Register with Amazon Route 53> in the /Amazon Route 53 Developer Guide/ . Default: 1
+-- * 'rdDurationInYears' - The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. For the range of valid values for your domain, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html Domains that You Can Register with Amazon Route 53> in the /Amazon Route 53 Developer Guide/ . Default: 1
 --
 -- * 'rdDomainName' - The name of the domain that you want to renew.
 --
@@ -73,15 +72,12 @@ renewDomain
     :: Text -- ^ 'rdDomainName'
     -> Int -- ^ 'rdCurrentExpiryYear'
     -> RenewDomain
-renewDomain pDomainName_ pCurrentExpiryYear_ =
-  RenewDomain'
-    { _rdDurationInYears = Nothing
-    , _rdDomainName = pDomainName_
-    , _rdCurrentExpiryYear = pCurrentExpiryYear_
-    }
+renewDomain pDomainName_ pCurrentExpiryYear_
+  = RenewDomain'{_rdDurationInYears = Nothing,
+                 _rdDomainName = pDomainName_,
+                 _rdCurrentExpiryYear = pCurrentExpiryYear_}
 
-
--- | The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. For the range of valid values for your domain, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html Domains that You Can Register with Amazon Route 53> in the /Amazon Route 53 Developer Guide/ . Default: 1
+-- | The number of years that you want to renew the domain for. The maximum number of years depends on the top-level domain. For the range of valid values for your domain, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html Domains that You Can Register with Amazon Route 53> in the /Amazon Route 53 Developer Guide/ . Default: 1
 rdDurationInYears :: Lens' RenewDomain (Maybe Natural)
 rdDurationInYears = lens _rdDurationInYears (\ s a -> s{_rdDurationInYears = a}) . mapping _Nat
 
@@ -131,11 +127,10 @@ instance ToQuery RenewDomain where
         toQuery = const mempty
 
 -- | /See:/ 'renewDomainResponse' smart constructor.
-data RenewDomainResponse = RenewDomainResponse'
-  { _rrsResponseStatus :: !Int
-  , _rrsOperationId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RenewDomainResponse = RenewDomainResponse'{_rrsResponseStatus
+                                                :: !Int,
+                                                _rrsOperationId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RenewDomainResponse' with the minimum fields required to make a request.
 --
@@ -143,21 +138,21 @@ data RenewDomainResponse = RenewDomainResponse'
 --
 -- * 'rrsResponseStatus' - -- | The response status code.
 --
--- * 'rrsOperationId' - The identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- * 'rrsOperationId' - Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 renewDomainResponse
     :: Int -- ^ 'rrsResponseStatus'
     -> Text -- ^ 'rrsOperationId'
     -> RenewDomainResponse
-renewDomainResponse pResponseStatus_ pOperationId_ =
-  RenewDomainResponse'
-    {_rrsResponseStatus = pResponseStatus_, _rrsOperationId = pOperationId_}
-
+renewDomainResponse pResponseStatus_ pOperationId_
+  = RenewDomainResponse'{_rrsResponseStatus =
+                           pResponseStatus_,
+                         _rrsOperationId = pOperationId_}
 
 -- | -- | The response status code.
 rrsResponseStatus :: Lens' RenewDomainResponse Int
 rrsResponseStatus = lens _rrsResponseStatus (\ s a -> s{_rrsResponseStatus = a})
 
--- | The identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- | Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 rrsOperationId :: Lens' RenewDomainResponse Text
 rrsOperationId = lens _rrsOperationId (\ s a -> s{_rrsOperationId = a})
 

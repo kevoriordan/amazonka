@@ -49,10 +49,10 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'getTopicAttributes' smart constructor.
-newtype GetTopicAttributes = GetTopicAttributes'
-  { _gtaTopicARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetTopicAttributes = GetTopicAttributes'{_gtaTopicARN
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetTopicAttributes' with the minimum fields required to make a request.
 --
@@ -62,8 +62,8 @@ newtype GetTopicAttributes = GetTopicAttributes'
 getTopicAttributes
     :: Text -- ^ 'gtaTopicARN'
     -> GetTopicAttributes
-getTopicAttributes pTopicARN_ = GetTopicAttributes' {_gtaTopicARN = pTopicARN_}
-
+getTopicAttributes pTopicARN_
+  = GetTopicAttributes'{_gtaTopicARN = pTopicARN_}
 
 -- | The ARN of the topic whose properties you want to get.
 gtaTopicARN :: Lens' GetTopicAttributes Text
@@ -103,28 +103,32 @@ instance ToQuery GetTopicAttributes where
 --
 --
 -- /See:/ 'getTopicAttributesResponse' smart constructor.
-data GetTopicAttributesResponse = GetTopicAttributesResponse'
-  { _gtarsAttributes     :: !(Maybe (Map Text Text))
-  , _gtarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTopicAttributesResponse = GetTopicAttributesResponse'{_gtarsAttributes
+                                                              ::
+                                                              !(Maybe
+                                                                  (Map Text
+                                                                     Text)),
+                                                              _gtarsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetTopicAttributesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtarsAttributes' - A map of the topic's attributes. Attributes in this map include the following:     * @TopicArn@ -- the topic's ARN     * @Owner@ -- the AWS account ID of the topic's owner     * @Policy@ -- the JSON serialization of the topic's access control policy     * @DisplayName@ -- the human-readable name used in the "From" field for notifications to email and email-json endpoints     * @SubscriptionsPending@ -- the number of subscriptions pending confirmation on this topic     * @SubscriptionsConfirmed@ -- the number of confirmed subscriptions on this topic     * @SubscriptionsDeleted@ -- the number of deleted subscriptions on this topic     * @DeliveryPolicy@ -- the JSON serialization of the topic's delivery policy     * @EffectiveDeliveryPolicy@ -- the JSON serialization of the effective delivery policy that takes into account system defaults
+-- * 'gtarsAttributes' - A map of the topic's attributes. Attributes in this map include the following:     * @DeliveryPolicy@ – The JSON serialization of the topic's delivery policy.     * @DisplayName@ – The human-readable name used in the @From@ field for notifications to @email@ and @email-json@ endpoints.     * @Owner@ – The AWS account ID of the topic's owner.     * @Policy@ – The JSON serialization of the topic's access control policy.     * @SubscriptionsConfirmed@ – The number of confirmed subscriptions for the topic.     * @SubscriptionsDeleted@ – The number of deleted subscriptions for the topic.     * @SubscriptionsPending@ – The number of subscriptions pending confirmation for the topic.     * @TopicArn@ – The topic's ARN.     * @EffectiveDeliveryPolicy@ – Yhe JSON serialization of the effective delivery policy, taking system defaults into account. The following attribute applies only to <https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html server-side-encryption> :     * @KmsMasterKeyId@ - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms Key Terms> . For more examples, see <https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters KeyId> in the /AWS Key Management Service API Reference/ .
 --
 -- * 'gtarsResponseStatus' - -- | The response status code.
 getTopicAttributesResponse
     :: Int -- ^ 'gtarsResponseStatus'
     -> GetTopicAttributesResponse
-getTopicAttributesResponse pResponseStatus_ =
-  GetTopicAttributesResponse'
-    {_gtarsAttributes = Nothing, _gtarsResponseStatus = pResponseStatus_}
+getTopicAttributesResponse pResponseStatus_
+  = GetTopicAttributesResponse'{_gtarsAttributes =
+                                  Nothing,
+                                _gtarsResponseStatus = pResponseStatus_}
 
-
--- | A map of the topic's attributes. Attributes in this map include the following:     * @TopicArn@ -- the topic's ARN     * @Owner@ -- the AWS account ID of the topic's owner     * @Policy@ -- the JSON serialization of the topic's access control policy     * @DisplayName@ -- the human-readable name used in the "From" field for notifications to email and email-json endpoints     * @SubscriptionsPending@ -- the number of subscriptions pending confirmation on this topic     * @SubscriptionsConfirmed@ -- the number of confirmed subscriptions on this topic     * @SubscriptionsDeleted@ -- the number of deleted subscriptions on this topic     * @DeliveryPolicy@ -- the JSON serialization of the topic's delivery policy     * @EffectiveDeliveryPolicy@ -- the JSON serialization of the effective delivery policy that takes into account system defaults
+-- | A map of the topic's attributes. Attributes in this map include the following:     * @DeliveryPolicy@ – The JSON serialization of the topic's delivery policy.     * @DisplayName@ – The human-readable name used in the @From@ field for notifications to @email@ and @email-json@ endpoints.     * @Owner@ – The AWS account ID of the topic's owner.     * @Policy@ – The JSON serialization of the topic's access control policy.     * @SubscriptionsConfirmed@ – The number of confirmed subscriptions for the topic.     * @SubscriptionsDeleted@ – The number of deleted subscriptions for the topic.     * @SubscriptionsPending@ – The number of subscriptions pending confirmation for the topic.     * @TopicArn@ – The topic's ARN.     * @EffectiveDeliveryPolicy@ – Yhe JSON serialization of the effective delivery policy, taking system defaults into account. The following attribute applies only to <https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html server-side-encryption> :     * @KmsMasterKeyId@ - The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see <https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms Key Terms> . For more examples, see <https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters KeyId> in the /AWS Key Management Service API Reference/ .
 gtarsAttributes :: Lens' GetTopicAttributesResponse (HashMap Text Text)
 gtarsAttributes = lens _gtarsAttributes (\ s a -> s{_gtarsAttributes = a}) . _Default . _Map
 

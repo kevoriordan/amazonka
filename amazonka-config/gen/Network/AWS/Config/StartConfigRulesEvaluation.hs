@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs an on-demand evaluation for the specified AWS Config rules against the last known configuration state of the resources. Use @StartConfigRulesEvaluation@ when you want to test that a rule you updated is working as expected. @StartConfigRulesEvaluation@ does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources.
+-- Runs an on-demand evaluation for the specified AWS Config rules against the last known configuration state of the resources. Use @StartConfigRulesEvaluation@ when you want to test that a rule you updated is working as expected. @StartConfigRulesEvaluation@ does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources. 
 --
 --
--- You can specify up to 25 AWS Config rules per request.
+-- You can specify up to 25 AWS Config rules per request. 
 --
 -- An existing @StartConfigRulesEvaluation@ call for the specified rules must complete before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a @ConfigRuleEvaluationStarted@ notification when the evaluation starts.
 --
@@ -61,15 +61,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'startConfigRulesEvaluation' smart constructor.
-newtype StartConfigRulesEvaluation = StartConfigRulesEvaluation'
-  { _screConfigRuleNames :: Maybe (List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartConfigRulesEvaluation = StartConfigRulesEvaluation'{_screConfigRuleNames
+                                                                 ::
+                                                                 Maybe
+                                                                   (List1 Text)}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'StartConfigRulesEvaluation' with the minimum fields required to make a request.
 --
@@ -78,9 +80,9 @@ newtype StartConfigRulesEvaluation = StartConfigRulesEvaluation'
 -- * 'screConfigRuleNames' - The list of names of AWS Config rules that you want to run evaluations for.
 startConfigRulesEvaluation
     :: StartConfigRulesEvaluation
-startConfigRulesEvaluation =
-  StartConfigRulesEvaluation' {_screConfigRuleNames = Nothing}
-
+startConfigRulesEvaluation
+  = StartConfigRulesEvaluation'{_screConfigRuleNames =
+                                  Nothing}
 
 -- | The list of names of AWS Config rules that you want to run evaluations for.
 screConfigRuleNames :: Lens' StartConfigRulesEvaluation (Maybe (NonEmpty Text))
@@ -127,10 +129,11 @@ instance ToQuery StartConfigRulesEvaluation where
 --
 --
 -- /See:/ 'startConfigRulesEvaluationResponse' smart constructor.
-newtype StartConfigRulesEvaluationResponse = StartConfigRulesEvaluationResponse'
-  { _scrersResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartConfigRulesEvaluationResponse = StartConfigRulesEvaluationResponse'{_scrersResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'StartConfigRulesEvaluationResponse' with the minimum fields required to make a request.
 --
@@ -140,9 +143,9 @@ newtype StartConfigRulesEvaluationResponse = StartConfigRulesEvaluationResponse'
 startConfigRulesEvaluationResponse
     :: Int -- ^ 'scrersResponseStatus'
     -> StartConfigRulesEvaluationResponse
-startConfigRulesEvaluationResponse pResponseStatus_ =
-  StartConfigRulesEvaluationResponse' {_scrersResponseStatus = pResponseStatus_}
-
+startConfigRulesEvaluationResponse pResponseStatus_
+  = StartConfigRulesEvaluationResponse'{_scrersResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 scrersResponseStatus :: Lens' StartConfigRulesEvaluationResponse Int

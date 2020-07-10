@@ -45,28 +45,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createConnection' smart constructor.
-data CreateConnection = CreateConnection'
-  { _ccCatalogId       :: !(Maybe Text)
-  , _ccConnectionInput :: !ConnectionInput
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateConnection = CreateConnection'{_ccCatalogId
+                                          :: !(Maybe Text),
+                                          _ccConnectionInput ::
+                                          !ConnectionInput}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateConnection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccCatalogId' - The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+-- * 'ccCatalogId' - The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.
 --
 -- * 'ccConnectionInput' - A @ConnectionInput@ object defining the connection to create.
 createConnection
     :: ConnectionInput -- ^ 'ccConnectionInput'
     -> CreateConnection
-createConnection pConnectionInput_ =
-  CreateConnection'
-    {_ccCatalogId = Nothing, _ccConnectionInput = pConnectionInput_}
+createConnection pConnectionInput_
+  = CreateConnection'{_ccCatalogId = Nothing,
+                      _ccConnectionInput = pConnectionInput_}
 
-
--- | The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.
 ccCatalogId :: Lens' CreateConnection (Maybe Text)
 ccCatalogId = lens _ccCatalogId (\ s a -> s{_ccCatalogId = a})
 
@@ -109,10 +108,10 @@ instance ToQuery CreateConnection where
         toQuery = const mempty
 
 -- | /See:/ 'createConnectionResponse' smart constructor.
-newtype CreateConnectionResponse = CreateConnectionResponse'
-  { _crsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateConnectionResponse = CreateConnectionResponse'{_crsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateConnectionResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +121,9 @@ newtype CreateConnectionResponse = CreateConnectionResponse'
 createConnectionResponse
     :: Int -- ^ 'crsResponseStatus'
     -> CreateConnectionResponse
-createConnectionResponse pResponseStatus_ =
-  CreateConnectionResponse' {_crsResponseStatus = pResponseStatus_}
-
+createConnectionResponse pResponseStatus_
+  = CreateConnectionResponse'{_crsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 crsResponseStatus :: Lens' CreateConnectionResponse Int

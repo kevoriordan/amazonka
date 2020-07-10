@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates an access policy associated with an existing destination. An access policy is an <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html IAM policy document> that is used to authorize claims to register a subscription filter against a given destination.
+-- Creates or updates an access policy associated with an existing destination. An access policy is an <https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html IAM policy document> that is used to authorize claims to register a subscription filter against a given destination.
 --
 --
 module Network.AWS.CloudWatchLogs.PutDestinationPolicy
@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putDestinationPolicy' smart constructor.
-data PutDestinationPolicy = PutDestinationPolicy'
-  { _pdpDestinationName :: !Text
-  , _pdpAccessPolicy    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutDestinationPolicy = PutDestinationPolicy'{_pdpDestinationName
+                                                  :: !Text,
+                                                  _pdpAccessPolicy :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutDestinationPolicy' with the minimum fields required to make a request.
 --
@@ -60,10 +59,10 @@ putDestinationPolicy
     :: Text -- ^ 'pdpDestinationName'
     -> Text -- ^ 'pdpAccessPolicy'
     -> PutDestinationPolicy
-putDestinationPolicy pDestinationName_ pAccessPolicy_ =
-  PutDestinationPolicy'
-    {_pdpDestinationName = pDestinationName_, _pdpAccessPolicy = pAccessPolicy_}
-
+putDestinationPolicy pDestinationName_ pAccessPolicy_
+  = PutDestinationPolicy'{_pdpDestinationName =
+                            pDestinationName_,
+                          _pdpAccessPolicy = pAccessPolicy_}
 
 -- | A name for an existing destination.
 pdpDestinationName :: Lens' PutDestinationPolicy Text
@@ -106,16 +105,15 @@ instance ToQuery PutDestinationPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'putDestinationPolicyResponse' smart constructor.
-data PutDestinationPolicyResponse =
-  PutDestinationPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutDestinationPolicyResponse = PutDestinationPolicyResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'PutDestinationPolicyResponse' with the minimum fields required to make a request.
 --
 putDestinationPolicyResponse
     :: PutDestinationPolicyResponse
-putDestinationPolicyResponse = PutDestinationPolicyResponse'
-
+putDestinationPolicyResponse
+  = PutDestinationPolicyResponse'
 
 instance NFData PutDestinationPolicyResponse where

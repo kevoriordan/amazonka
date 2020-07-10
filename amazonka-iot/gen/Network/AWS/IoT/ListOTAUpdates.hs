@@ -21,6 +21,8 @@
 -- Lists OTA updates.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListOTAUpdates
     (
     -- * Creating a Request
@@ -43,17 +45,18 @@ module Network.AWS.IoT.ListOTAUpdates
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listOTAUpdates' smart constructor.
-data ListOTAUpdates = ListOTAUpdates'
-  { _lotauNextToken       :: !(Maybe Text)
-  , _lotauOtaUpdateStatus :: !(Maybe OTAUpdateStatus)
-  , _lotauMaxResults      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOTAUpdates = ListOTAUpdates'{_lotauNextToken
+                                      :: !(Maybe Text),
+                                      _lotauOtaUpdateStatus ::
+                                      !(Maybe OTAUpdateStatus),
+                                      _lotauMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOTAUpdates' with the minimum fields required to make a request.
 --
@@ -66,13 +69,10 @@ data ListOTAUpdates = ListOTAUpdates'
 -- * 'lotauMaxResults' - The maximum number of results to return at one time.
 listOTAUpdates
     :: ListOTAUpdates
-listOTAUpdates =
-  ListOTAUpdates'
-    { _lotauNextToken = Nothing
-    , _lotauOtaUpdateStatus = Nothing
-    , _lotauMaxResults = Nothing
-    }
-
+listOTAUpdates
+  = ListOTAUpdates'{_lotauNextToken = Nothing,
+                    _lotauOtaUpdateStatus = Nothing,
+                    _lotauMaxResults = Nothing}
 
 -- | A token used to retrieve the next set of results.
 lotauNextToken :: Lens' ListOTAUpdates (Maybe Text)
@@ -85,6 +85,13 @@ lotauOtaUpdateStatus = lens _lotauOtaUpdateStatus (\ s a -> s{_lotauOtaUpdateSta
 -- | The maximum number of results to return at one time.
 lotauMaxResults :: Lens' ListOTAUpdates (Maybe Natural)
 lotauMaxResults = lens _lotauMaxResults (\ s a -> s{_lotauMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListOTAUpdates where
+        page rq rs
+          | stop (rs ^. lotaursNextToken) = Nothing
+          | stop (rs ^. lotaursOtaUpdates) = Nothing
+          | otherwise =
+            Just $ rq & lotauNextToken .~ rs ^. lotaursNextToken
 
 instance AWSRequest ListOTAUpdates where
         type Rs ListOTAUpdates = ListOTAUpdatesResponse
@@ -115,12 +122,15 @@ instance ToQuery ListOTAUpdates where
                "maxResults" =: _lotauMaxResults]
 
 -- | /See:/ 'listOTAUpdatesResponse' smart constructor.
-data ListOTAUpdatesResponse = ListOTAUpdatesResponse'
-  { _lotaursNextToken      :: !(Maybe Text)
-  , _lotaursOtaUpdates     :: !(Maybe [OTAUpdateSummary])
-  , _lotaursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOTAUpdatesResponse = ListOTAUpdatesResponse'{_lotaursNextToken
+                                                      :: !(Maybe Text),
+                                                      _lotaursOtaUpdates ::
+                                                      !(Maybe
+                                                          [OTAUpdateSummary]),
+                                                      _lotaursResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListOTAUpdatesResponse' with the minimum fields required to make a request.
 --
@@ -134,13 +144,11 @@ data ListOTAUpdatesResponse = ListOTAUpdatesResponse'
 listOTAUpdatesResponse
     :: Int -- ^ 'lotaursResponseStatus'
     -> ListOTAUpdatesResponse
-listOTAUpdatesResponse pResponseStatus_ =
-  ListOTAUpdatesResponse'
-    { _lotaursNextToken = Nothing
-    , _lotaursOtaUpdates = Nothing
-    , _lotaursResponseStatus = pResponseStatus_
-    }
-
+listOTAUpdatesResponse pResponseStatus_
+  = ListOTAUpdatesResponse'{_lotaursNextToken =
+                              Nothing,
+                            _lotaursOtaUpdates = Nothing,
+                            _lotaursResponseStatus = pResponseStatus_}
 
 -- | A token to use to get the next set of results.
 lotaursNextToken :: Lens' ListOTAUpdatesResponse (Maybe Text)

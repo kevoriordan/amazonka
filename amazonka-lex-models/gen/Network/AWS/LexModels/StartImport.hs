@@ -27,6 +27,7 @@ module Network.AWS.LexModels.StartImport
       startImport
     , StartImport
     -- * Request Lenses
+    , siTags
     , siPayload
     , siResourceType
     , siMergeStrategy
@@ -41,6 +42,7 @@ module Network.AWS.LexModels.StartImport
     , sirsName
     , sirsMergeStrategy
     , sirsImportStatus
+    , sirsTags
     , sirsResponseStatus
     ) where
 
@@ -52,16 +54,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startImport' smart constructor.
-data StartImport = StartImport'
-  { _siPayload       :: !Base64
-  , _siResourceType  :: !ResourceType
-  , _siMergeStrategy :: !MergeStrategy
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartImport = StartImport'{_siTags ::
+                                !(Maybe [Tag]),
+                                _siPayload :: !Base64,
+                                _siResourceType :: !ResourceType,
+                                _siMergeStrategy :: !MergeStrategy}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'siTags' - A list of tags to add to the imported bot. You can only add tags when you import a bot, you can't add tags to an intent or slot type.
 --
 -- * 'siPayload' - A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the @resourceType@ field.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 --
@@ -73,13 +77,15 @@ startImport
     -> ResourceType -- ^ 'siResourceType'
     -> MergeStrategy -- ^ 'siMergeStrategy'
     -> StartImport
-startImport pPayload_ pResourceType_ pMergeStrategy_ =
-  StartImport'
-    { _siPayload = _Base64 # pPayload_
-    , _siResourceType = pResourceType_
-    , _siMergeStrategy = pMergeStrategy_
-    }
+startImport pPayload_ pResourceType_ pMergeStrategy_
+  = StartImport'{_siTags = Nothing,
+                 _siPayload = _Base64 # pPayload_,
+                 _siResourceType = pResourceType_,
+                 _siMergeStrategy = pMergeStrategy_}
 
+-- | A list of tags to add to the imported bot. You can only add tags when you import a bot, you can't add tags to an intent or slot type.
+siTags :: Lens' StartImport [Tag]
+siTags = lens _siTags (\ s a -> s{_siTags = a}) . _Default . _Coerce
 
 -- | A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the @resourceType@ field.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 siPayload :: Lens' StartImport ByteString
@@ -105,6 +111,7 @@ instance AWSRequest StartImport where
                      <*> (x .?> "name")
                      <*> (x .?> "mergeStrategy")
                      <*> (x .?> "importStatus")
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable StartImport where
@@ -122,7 +129,8 @@ instance ToJSON StartImport where
         toJSON StartImport'{..}
           = object
               (catMaybes
-                 [Just ("payload" .= _siPayload),
+                 [("tags" .=) <$> _siTags,
+                  Just ("payload" .= _siPayload),
                   Just ("resourceType" .= _siResourceType),
                   Just ("mergeStrategy" .= _siMergeStrategy)])
 
@@ -133,16 +141,19 @@ instance ToQuery StartImport where
         toQuery = const mempty
 
 -- | /See:/ 'startImportResponse' smart constructor.
-data StartImportResponse = StartImportResponse'
-  { _sirsResourceType   :: !(Maybe ResourceType)
-  , _sirsImportId       :: !(Maybe Text)
-  , _sirsCreatedDate    :: !(Maybe POSIX)
-  , _sirsName           :: !(Maybe Text)
-  , _sirsMergeStrategy  :: !(Maybe MergeStrategy)
-  , _sirsImportStatus   :: !(Maybe ImportStatus)
-  , _sirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartImportResponse = StartImportResponse'{_sirsResourceType
+                                                :: !(Maybe ResourceType),
+                                                _sirsImportId :: !(Maybe Text),
+                                                _sirsCreatedDate ::
+                                                !(Maybe POSIX),
+                                                _sirsName :: !(Maybe Text),
+                                                _sirsMergeStrategy ::
+                                                !(Maybe MergeStrategy),
+                                                _sirsImportStatus ::
+                                                !(Maybe ImportStatus),
+                                                _sirsTags :: !(Maybe [Tag]),
+                                                _sirsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartImportResponse' with the minimum fields required to make a request.
 --
@@ -160,21 +171,18 @@ data StartImportResponse = StartImportResponse'
 --
 -- * 'sirsImportStatus' - The status of the import job. If the status is @FAILED@ , you can get the reason for the failure using the @GetImport@ operation.
 --
+-- * 'sirsTags' - A list of tags added to the imported bot.
+--
 -- * 'sirsResponseStatus' - -- | The response status code.
 startImportResponse
     :: Int -- ^ 'sirsResponseStatus'
     -> StartImportResponse
-startImportResponse pResponseStatus_ =
-  StartImportResponse'
-    { _sirsResourceType = Nothing
-    , _sirsImportId = Nothing
-    , _sirsCreatedDate = Nothing
-    , _sirsName = Nothing
-    , _sirsMergeStrategy = Nothing
-    , _sirsImportStatus = Nothing
-    , _sirsResponseStatus = pResponseStatus_
-    }
-
+startImportResponse pResponseStatus_
+  = StartImportResponse'{_sirsResourceType = Nothing,
+                         _sirsImportId = Nothing, _sirsCreatedDate = Nothing,
+                         _sirsName = Nothing, _sirsMergeStrategy = Nothing,
+                         _sirsImportStatus = Nothing, _sirsTags = Nothing,
+                         _sirsResponseStatus = pResponseStatus_}
 
 -- | The type of resource to import.
 sirsResourceType :: Lens' StartImportResponse (Maybe ResourceType)
@@ -199,6 +207,10 @@ sirsMergeStrategy = lens _sirsMergeStrategy (\ s a -> s{_sirsMergeStrategy = a})
 -- | The status of the import job. If the status is @FAILED@ , you can get the reason for the failure using the @GetImport@ operation.
 sirsImportStatus :: Lens' StartImportResponse (Maybe ImportStatus)
 sirsImportStatus = lens _sirsImportStatus (\ s a -> s{_sirsImportStatus = a})
+
+-- | A list of tags added to the imported bot.
+sirsTags :: Lens' StartImportResponse [Tag]
+sirsTags = lens _sirsTags (\ s a -> s{_sirsTags = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
 sirsResponseStatus :: Lens' StartImportResponse Int

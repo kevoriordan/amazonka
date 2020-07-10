@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a BGP peer on the specified virtual interface that matches the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
+-- Deletes the specified BGP peer on the specified virtual interface with the specified customer address and ASN.
 --
+--
+-- You cannot delete the last BGP peer from a virtual interface.
 --
 module Network.AWS.DirectConnect.DeleteBGPPeer
     (
@@ -29,6 +31,7 @@ module Network.AWS.DirectConnect.DeleteBGPPeer
     -- * Request Lenses
     , dbpCustomerAddress
     , dbpAsn
+    , dbpBgpPeerId
     , dbpVirtualInterfaceId
 
     -- * Destructuring the Response
@@ -46,46 +49,45 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the DeleteBGPPeer operation.
---
---
---
--- /See:/ 'deleteBGPPeer' smart constructor.
-data DeleteBGPPeer = DeleteBGPPeer'
-  { _dbpCustomerAddress    :: !(Maybe Text)
-  , _dbpAsn                :: !(Maybe Int)
-  , _dbpVirtualInterfaceId :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteBGPPeer' smart constructor.
+data DeleteBGPPeer = DeleteBGPPeer'{_dbpCustomerAddress
+                                    :: !(Maybe Text),
+                                    _dbpAsn :: !(Maybe Int),
+                                    _dbpBgpPeerId :: !(Maybe Text),
+                                    _dbpVirtualInterfaceId :: !(Maybe Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBGPPeer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbpCustomerAddress' - Undocumented member.
+-- * 'dbpCustomerAddress' - The IP address assigned to the customer interface.
 --
--- * 'dbpAsn' - Undocumented member.
+-- * 'dbpAsn' - The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 --
--- * 'dbpVirtualInterfaceId' - The ID of the virtual interface from which the BGP peer will be deleted. Example: dxvif-456abc78 Default: None
+-- * 'dbpBgpPeerId' - The ID of the BGP peer.
+--
+-- * 'dbpVirtualInterfaceId' - The ID of the virtual interface.
 deleteBGPPeer
     :: DeleteBGPPeer
-deleteBGPPeer =
-  DeleteBGPPeer'
-    { _dbpCustomerAddress = Nothing
-    , _dbpAsn = Nothing
-    , _dbpVirtualInterfaceId = Nothing
-    }
+deleteBGPPeer
+  = DeleteBGPPeer'{_dbpCustomerAddress = Nothing,
+                   _dbpAsn = Nothing, _dbpBgpPeerId = Nothing,
+                   _dbpVirtualInterfaceId = Nothing}
 
-
--- | Undocumented member.
+-- | The IP address assigned to the customer interface.
 dbpCustomerAddress :: Lens' DeleteBGPPeer (Maybe Text)
 dbpCustomerAddress = lens _dbpCustomerAddress (\ s a -> s{_dbpCustomerAddress = a})
 
--- | Undocumented member.
+-- | The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 dbpAsn :: Lens' DeleteBGPPeer (Maybe Int)
 dbpAsn = lens _dbpAsn (\ s a -> s{_dbpAsn = a})
 
--- | The ID of the virtual interface from which the BGP peer will be deleted. Example: dxvif-456abc78 Default: None
+-- | The ID of the BGP peer.
+dbpBgpPeerId :: Lens' DeleteBGPPeer (Maybe Text)
+dbpBgpPeerId = lens _dbpBgpPeerId (\ s a -> s{_dbpBgpPeerId = a})
+
+-- | The ID of the virtual interface.
 dbpVirtualInterfaceId :: Lens' DeleteBGPPeer (Maybe Text)
 dbpVirtualInterfaceId = lens _dbpVirtualInterfaceId (\ s a -> s{_dbpVirtualInterfaceId = a})
 
@@ -117,6 +119,7 @@ instance ToJSON DeleteBGPPeer where
               (catMaybes
                  [("customerAddress" .=) <$> _dbpCustomerAddress,
                   ("asn" .=) <$> _dbpAsn,
+                  ("bgpPeerId" .=) <$> _dbpBgpPeerId,
                   ("virtualInterfaceId" .=) <$>
                     _dbpVirtualInterfaceId])
 
@@ -126,33 +129,31 @@ instance ToPath DeleteBGPPeer where
 instance ToQuery DeleteBGPPeer where
         toQuery = const mempty
 
--- | The response received when DeleteBGPPeer is called.
---
---
---
--- /See:/ 'deleteBGPPeerResponse' smart constructor.
-data DeleteBGPPeerResponse = DeleteBGPPeerResponse'
-  { _dbprsVirtualInterface :: !(Maybe VirtualInterface)
-  , _dbprsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteBGPPeerResponse' smart constructor.
+data DeleteBGPPeerResponse = DeleteBGPPeerResponse'{_dbprsVirtualInterface
+                                                    ::
+                                                    !(Maybe VirtualInterface),
+                                                    _dbprsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteBGPPeerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbprsVirtualInterface' - Undocumented member.
+-- * 'dbprsVirtualInterface' - The virtual interface.
 --
 -- * 'dbprsResponseStatus' - -- | The response status code.
 deleteBGPPeerResponse
     :: Int -- ^ 'dbprsResponseStatus'
     -> DeleteBGPPeerResponse
-deleteBGPPeerResponse pResponseStatus_ =
-  DeleteBGPPeerResponse'
-    {_dbprsVirtualInterface = Nothing, _dbprsResponseStatus = pResponseStatus_}
+deleteBGPPeerResponse pResponseStatus_
+  = DeleteBGPPeerResponse'{_dbprsVirtualInterface =
+                             Nothing,
+                           _dbprsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | The virtual interface.
 dbprsVirtualInterface :: Lens' DeleteBGPPeerResponse (Maybe VirtualInterface)
 dbprsVirtualInterface = lens _dbprsVirtualInterface (\ s a -> s{_dbprsVirtualInterface = a})
 

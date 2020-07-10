@@ -52,13 +52,16 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listPortfoliosForProduct' smart constructor.
-data ListPortfoliosForProduct = ListPortfoliosForProduct'
-  { _lisAcceptLanguage :: !(Maybe Text)
-  , _lisPageToken      :: !(Maybe Text)
-  , _lisPageSize       :: !(Maybe Nat)
-  , _lisProductId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPortfoliosForProduct = ListPortfoliosForProduct'{_lisAcceptLanguage
+                                                          :: !(Maybe Text),
+                                                          _lisPageToken ::
+                                                          !(Maybe Text),
+                                                          _lisPageSize ::
+                                                          !(Maybe Nat),
+                                                          _lisProductId ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListPortfoliosForProduct' with the minimum fields required to make a request.
 --
@@ -74,14 +77,11 @@ data ListPortfoliosForProduct = ListPortfoliosForProduct'
 listPortfoliosForProduct
     :: Text -- ^ 'lisProductId'
     -> ListPortfoliosForProduct
-listPortfoliosForProduct pProductId_ =
-  ListPortfoliosForProduct'
-    { _lisAcceptLanguage = Nothing
-    , _lisPageToken = Nothing
-    , _lisPageSize = Nothing
-    , _lisProductId = pProductId_
-    }
-
+listPortfoliosForProduct pProductId_
+  = ListPortfoliosForProduct'{_lisAcceptLanguage =
+                                Nothing,
+                              _lisPageToken = Nothing, _lisPageSize = Nothing,
+                              _lisProductId = pProductId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 lisAcceptLanguage :: Lens' ListPortfoliosForProduct (Maybe Text)
@@ -148,12 +148,19 @@ instance ToQuery ListPortfoliosForProduct where
         toQuery = const mempty
 
 -- | /See:/ 'listPortfoliosForProductResponse' smart constructor.
-data ListPortfoliosForProductResponse = ListPortfoliosForProductResponse'
-  { _lpfprsNextPageToken    :: !(Maybe Text)
-  , _lpfprsPortfolioDetails :: !(Maybe [PortfolioDetail])
-  , _lpfprsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPortfoliosForProductResponse = ListPortfoliosForProductResponse'{_lpfprsNextPageToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _lpfprsPortfolioDetails
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [PortfolioDetail]),
+                                                                          _lpfprsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'ListPortfoliosForProductResponse' with the minimum fields required to make a request.
 --
@@ -167,13 +174,11 @@ data ListPortfoliosForProductResponse = ListPortfoliosForProductResponse'
 listPortfoliosForProductResponse
     :: Int -- ^ 'lpfprsResponseStatus'
     -> ListPortfoliosForProductResponse
-listPortfoliosForProductResponse pResponseStatus_ =
-  ListPortfoliosForProductResponse'
-    { _lpfprsNextPageToken = Nothing
-    , _lpfprsPortfolioDetails = Nothing
-    , _lpfprsResponseStatus = pResponseStatus_
-    }
-
+listPortfoliosForProductResponse pResponseStatus_
+  = ListPortfoliosForProductResponse'{_lpfprsNextPageToken
+                                        = Nothing,
+                                      _lpfprsPortfolioDetails = Nothing,
+                                      _lpfprsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 lpfprsNextPageToken :: Lens' ListPortfoliosForProductResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an association between a direct connect gateway and a virtual private gateway (VGW). The VGW must be attached to a VPC and must not be associated with another direct connect gateway.
+-- Creates an association between a Direct Connect gateway and a virtual private gateway. The virtual private gateway must be attached to a VPC and must not be associated with another Direct Connect gateway.
 --
 --
 module Network.AWS.DirectConnect.CreateDirectConnectGatewayAssociation
@@ -27,8 +27,10 @@ module Network.AWS.DirectConnect.CreateDirectConnectGatewayAssociation
       createDirectConnectGatewayAssociation
     , CreateDirectConnectGatewayAssociation
     -- * Request Lenses
-    , cdcgaDirectConnectGatewayId
     , cdcgaVirtualGatewayId
+    , cdcgaAddAllowedPrefixesToDirectConnectGateway
+    , cdcgaGatewayId
+    , cdcgaDirectConnectGatewayId
 
     -- * Destructuring the Response
     , createDirectConnectGatewayAssociationResponse
@@ -45,42 +47,64 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the CreateDirectConnectGatewayAssociation operation.
---
---
---
--- /See:/ 'createDirectConnectGatewayAssociation' smart constructor.
-data CreateDirectConnectGatewayAssociation = CreateDirectConnectGatewayAssociation'
-  { _cdcgaDirectConnectGatewayId :: !Text
-  , _cdcgaVirtualGatewayId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createDirectConnectGatewayAssociation' smart constructor.
+data CreateDirectConnectGatewayAssociation = CreateDirectConnectGatewayAssociation'{_cdcgaVirtualGatewayId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cdcgaAddAllowedPrefixesToDirectConnectGateway
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [RouteFilterPrefix]),
+                                                                                    _cdcgaGatewayId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cdcgaDirectConnectGatewayId
+                                                                                    ::
+                                                                                    !Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'CreateDirectConnectGatewayAssociation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdcgaDirectConnectGatewayId' - The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+-- * 'cdcgaVirtualGatewayId' - The ID of the virtual private gateway.
 --
--- * 'cdcgaVirtualGatewayId' - The ID of the virtual private gateway. Example: "vgw-abc123ef" Default: None
+-- * 'cdcgaAddAllowedPrefixesToDirectConnectGateway' - The Amazon VPC prefixes to advertise to the Direct Connect gateway This parameter is required when you create an association to a transit gateway. For information about how to set the prefixes, see <https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes Allowed Prefixes> in the /AWS Direct Connect User Guide/ .
+--
+-- * 'cdcgaGatewayId' - The ID of the virtual private gateway or transit gateway.
+--
+-- * 'cdcgaDirectConnectGatewayId' - The ID of the Direct Connect gateway.
 createDirectConnectGatewayAssociation
     :: Text -- ^ 'cdcgaDirectConnectGatewayId'
-    -> Text -- ^ 'cdcgaVirtualGatewayId'
     -> CreateDirectConnectGatewayAssociation
-createDirectConnectGatewayAssociation pDirectConnectGatewayId_ pVirtualGatewayId_ =
-  CreateDirectConnectGatewayAssociation'
-    { _cdcgaDirectConnectGatewayId = pDirectConnectGatewayId_
-    , _cdcgaVirtualGatewayId = pVirtualGatewayId_
-    }
+createDirectConnectGatewayAssociation
+  pDirectConnectGatewayId_
+  = CreateDirectConnectGatewayAssociation'{_cdcgaVirtualGatewayId
+                                             = Nothing,
+                                           _cdcgaAddAllowedPrefixesToDirectConnectGateway
+                                             = Nothing,
+                                           _cdcgaGatewayId = Nothing,
+                                           _cdcgaDirectConnectGatewayId =
+                                             pDirectConnectGatewayId_}
 
+-- | The ID of the virtual private gateway.
+cdcgaVirtualGatewayId :: Lens' CreateDirectConnectGatewayAssociation (Maybe Text)
+cdcgaVirtualGatewayId = lens _cdcgaVirtualGatewayId (\ s a -> s{_cdcgaVirtualGatewayId = a})
 
--- | The ID of the direct connect gateway. Example: "abcd1234-dcba-5678-be23-cdef9876ab45" Default: None
+-- | The Amazon VPC prefixes to advertise to the Direct Connect gateway This parameter is required when you create an association to a transit gateway. For information about how to set the prefixes, see <https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes Allowed Prefixes> in the /AWS Direct Connect User Guide/ .
+cdcgaAddAllowedPrefixesToDirectConnectGateway :: Lens' CreateDirectConnectGatewayAssociation [RouteFilterPrefix]
+cdcgaAddAllowedPrefixesToDirectConnectGateway = lens _cdcgaAddAllowedPrefixesToDirectConnectGateway (\ s a -> s{_cdcgaAddAllowedPrefixesToDirectConnectGateway = a}) . _Default . _Coerce
+
+-- | The ID of the virtual private gateway or transit gateway.
+cdcgaGatewayId :: Lens' CreateDirectConnectGatewayAssociation (Maybe Text)
+cdcgaGatewayId = lens _cdcgaGatewayId (\ s a -> s{_cdcgaGatewayId = a})
+
+-- | The ID of the Direct Connect gateway.
 cdcgaDirectConnectGatewayId :: Lens' CreateDirectConnectGatewayAssociation Text
 cdcgaDirectConnectGatewayId = lens _cdcgaDirectConnectGatewayId (\ s a -> s{_cdcgaDirectConnectGatewayId = a})
-
--- | The ID of the virtual private gateway. Example: "vgw-abc123ef" Default: None
-cdcgaVirtualGatewayId :: Lens' CreateDirectConnectGatewayAssociation Text
-cdcgaVirtualGatewayId = lens _cdcgaVirtualGatewayId (\ s a -> s{_cdcgaVirtualGatewayId = a})
 
 instance AWSRequest
            CreateDirectConnectGatewayAssociation
@@ -119,10 +143,13 @@ instance ToJSON CreateDirectConnectGatewayAssociation
         toJSON CreateDirectConnectGatewayAssociation'{..}
           = object
               (catMaybes
-                 [Just
+                 [("virtualGatewayId" .=) <$> _cdcgaVirtualGatewayId,
+                  ("addAllowedPrefixesToDirectConnectGateway" .=) <$>
+                    _cdcgaAddAllowedPrefixesToDirectConnectGateway,
+                  ("gatewayId" .=) <$> _cdcgaGatewayId,
+                  Just
                     ("directConnectGatewayId" .=
-                       _cdcgaDirectConnectGatewayId),
-                  Just ("virtualGatewayId" .= _cdcgaVirtualGatewayId)])
+                       _cdcgaDirectConnectGatewayId)])
 
 instance ToPath CreateDirectConnectGatewayAssociation
          where
@@ -133,35 +160,36 @@ instance ToQuery
          where
         toQuery = const mempty
 
--- | Container for the response from the CreateDirectConnectGatewayAssociation API call
---
---
---
--- /See:/ 'createDirectConnectGatewayAssociationResponse' smart constructor.
-data CreateDirectConnectGatewayAssociationResponse = CreateDirectConnectGatewayAssociationResponse'
-  { _cdcgarsDirectConnectGatewayAssociation :: !(Maybe DirectConnectGatewayAssociation)
-  , _cdcgarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createDirectConnectGatewayAssociationResponse' smart constructor.
+data CreateDirectConnectGatewayAssociationResponse = CreateDirectConnectGatewayAssociationResponse'{_cdcgarsDirectConnectGatewayAssociation
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        DirectConnectGatewayAssociation),
+                                                                                                    _cdcgarsResponseStatus
+                                                                                                    ::
+                                                                                                    !Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'CreateDirectConnectGatewayAssociationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdcgarsDirectConnectGatewayAssociation' - The direct connect gateway association to be created.
+-- * 'cdcgarsDirectConnectGatewayAssociation' - The association to be created.
 --
 -- * 'cdcgarsResponseStatus' - -- | The response status code.
 createDirectConnectGatewayAssociationResponse
     :: Int -- ^ 'cdcgarsResponseStatus'
     -> CreateDirectConnectGatewayAssociationResponse
-createDirectConnectGatewayAssociationResponse pResponseStatus_ =
-  CreateDirectConnectGatewayAssociationResponse'
-    { _cdcgarsDirectConnectGatewayAssociation = Nothing
-    , _cdcgarsResponseStatus = pResponseStatus_
-    }
+createDirectConnectGatewayAssociationResponse
+  pResponseStatus_
+  = CreateDirectConnectGatewayAssociationResponse'{_cdcgarsDirectConnectGatewayAssociation
+                                                     = Nothing,
+                                                   _cdcgarsResponseStatus =
+                                                     pResponseStatus_}
 
-
--- | The direct connect gateway association to be created.
+-- | The association to be created.
 cdcgarsDirectConnectGatewayAssociation :: Lens' CreateDirectConnectGatewayAssociationResponse (Maybe DirectConnectGatewayAssociation)
 cdcgarsDirectConnectGatewayAssociation = lens _cdcgarsDirectConnectGatewayAssociation (\ s a -> s{_cdcgarsDirectConnectGatewayAssociation = a})
 

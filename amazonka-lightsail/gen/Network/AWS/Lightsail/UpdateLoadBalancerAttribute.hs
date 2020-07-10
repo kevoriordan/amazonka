@@ -21,6 +21,8 @@
 -- Updates the specified attribute for a load balancer. You can only update one attribute at a time.
 --
 --
+-- The @update load balancer attribute@ operation supports tag-based access control via resource tags applied to the resource identified by @load balancer name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.UpdateLoadBalancerAttribute
     (
     -- * Creating a Request
@@ -47,12 +49,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateLoadBalancerAttribute' smart constructor.
-data UpdateLoadBalancerAttribute = UpdateLoadBalancerAttribute'
-  { _ulbaLoadBalancerName :: !Text
-  , _ulbaAttributeName    :: !LoadBalancerAttributeName
-  , _ulbaAttributeValue   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateLoadBalancerAttribute = UpdateLoadBalancerAttribute'{_ulbaLoadBalancerName
+                                                                :: !Text,
+                                                                _ulbaAttributeName
+                                                                ::
+                                                                !LoadBalancerAttributeName,
+                                                                _ulbaAttributeValue
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateLoadBalancerAttribute' with the minimum fields required to make a request.
 --
@@ -68,13 +73,12 @@ updateLoadBalancerAttribute
     -> LoadBalancerAttributeName -- ^ 'ulbaAttributeName'
     -> Text -- ^ 'ulbaAttributeValue'
     -> UpdateLoadBalancerAttribute
-updateLoadBalancerAttribute pLoadBalancerName_ pAttributeName_ pAttributeValue_ =
-  UpdateLoadBalancerAttribute'
-    { _ulbaLoadBalancerName = pLoadBalancerName_
-    , _ulbaAttributeName = pAttributeName_
-    , _ulbaAttributeValue = pAttributeValue_
-    }
-
+updateLoadBalancerAttribute pLoadBalancerName_
+  pAttributeName_ pAttributeValue_
+  = UpdateLoadBalancerAttribute'{_ulbaLoadBalancerName
+                                   = pLoadBalancerName_,
+                                 _ulbaAttributeName = pAttributeName_,
+                                 _ulbaAttributeValue = pAttributeValue_}
 
 -- | The name of the load balancer that you want to modify (e.g., @my-load-balancer@ .
 ulbaLoadBalancerName :: Lens' UpdateLoadBalancerAttribute Text
@@ -128,28 +132,33 @@ instance ToQuery UpdateLoadBalancerAttribute where
         toQuery = const mempty
 
 -- | /See:/ 'updateLoadBalancerAttributeResponse' smart constructor.
-data UpdateLoadBalancerAttributeResponse = UpdateLoadBalancerAttributeResponse'
-  { _ulbarsOperations     :: !(Maybe [Operation])
-  , _ulbarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateLoadBalancerAttributeResponse = UpdateLoadBalancerAttributeResponse'{_ulbarsOperations
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Operation]),
+                                                                                _ulbarsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'UpdateLoadBalancerAttributeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ulbarsOperations' - An object describing the API operations.
+-- * 'ulbarsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'ulbarsResponseStatus' - -- | The response status code.
 updateLoadBalancerAttributeResponse
     :: Int -- ^ 'ulbarsResponseStatus'
     -> UpdateLoadBalancerAttributeResponse
-updateLoadBalancerAttributeResponse pResponseStatus_ =
-  UpdateLoadBalancerAttributeResponse'
-    {_ulbarsOperations = Nothing, _ulbarsResponseStatus = pResponseStatus_}
+updateLoadBalancerAttributeResponse pResponseStatus_
+  = UpdateLoadBalancerAttributeResponse'{_ulbarsOperations
+                                           = Nothing,
+                                         _ulbarsResponseStatus =
+                                           pResponseStatus_}
 
-
--- | An object describing the API operations.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 ulbarsOperations :: Lens' UpdateLoadBalancerAttributeResponse [Operation]
 ulbarsOperations = lens _ulbarsOperations (\ s a -> s{_ulbarsOperations = a}) . _Default . _Coerce
 

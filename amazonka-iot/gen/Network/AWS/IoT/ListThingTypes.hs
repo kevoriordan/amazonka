@@ -55,12 +55,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listThingTypes' smart constructor.
-data ListThingTypes = ListThingTypes'
-  { _lttThingTypeName :: !(Maybe Text)
-  , _lttNextToken     :: !(Maybe Text)
-  , _lttMaxResults    :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThingTypes = ListThingTypes'{_lttThingTypeName
+                                      :: !(Maybe Text),
+                                      _lttNextToken :: !(Maybe Text),
+                                      _lttMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListThingTypes' with the minimum fields required to make a request.
 --
@@ -68,24 +67,20 @@ data ListThingTypes = ListThingTypes'
 --
 -- * 'lttThingTypeName' - The name of the thing type.
 --
--- * 'lttNextToken' - The token for the next set of results, or __null__ if there are no additional results.
+-- * 'lttNextToken' - The token to retrieve the next set of results.
 --
 -- * 'lttMaxResults' - The maximum number of results to return in this operation.
 listThingTypes
     :: ListThingTypes
-listThingTypes =
-  ListThingTypes'
-    { _lttThingTypeName = Nothing
-    , _lttNextToken = Nothing
-    , _lttMaxResults = Nothing
-    }
-
+listThingTypes
+  = ListThingTypes'{_lttThingTypeName = Nothing,
+                    _lttNextToken = Nothing, _lttMaxResults = Nothing}
 
 -- | The name of the thing type.
 lttThingTypeName :: Lens' ListThingTypes (Maybe Text)
 lttThingTypeName = lens _lttThingTypeName (\ s a -> s{_lttThingTypeName = a})
 
--- | The token for the next set of results, or __null__ if there are no additional results.
+-- | The token to retrieve the next set of results.
 lttNextToken :: Lens' ListThingTypes (Maybe Text)
 lttNextToken = lens _lttNextToken (\ s a -> s{_lttNextToken = a})
 
@@ -133,12 +128,16 @@ instance ToQuery ListThingTypes where
 --
 --
 -- /See:/ 'listThingTypesResponse' smart constructor.
-data ListThingTypesResponse = ListThingTypesResponse'
-  { _lttrsThingTypes     :: !(Maybe [ThingTypeDefinition])
-  , _lttrsNextToken      :: !(Maybe Text)
-  , _lttrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListThingTypesResponse = ListThingTypesResponse'{_lttrsThingTypes
+                                                      ::
+                                                      !(Maybe
+                                                          [ThingTypeDefinition]),
+                                                      _lttrsNextToken ::
+                                                      !(Maybe Text),
+                                                      _lttrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListThingTypesResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +151,10 @@ data ListThingTypesResponse = ListThingTypesResponse'
 listThingTypesResponse
     :: Int -- ^ 'lttrsResponseStatus'
     -> ListThingTypesResponse
-listThingTypesResponse pResponseStatus_ =
-  ListThingTypesResponse'
-    { _lttrsThingTypes = Nothing
-    , _lttrsNextToken = Nothing
-    , _lttrsResponseStatus = pResponseStatus_
-    }
-
+listThingTypesResponse pResponseStatus_
+  = ListThingTypesResponse'{_lttrsThingTypes = Nothing,
+                            _lttrsNextToken = Nothing,
+                            _lttrsResponseStatus = pResponseStatus_}
 
 -- | The thing types.
 lttrsThingTypes :: Lens' ListThingTypesResponse [ThingTypeDefinition]

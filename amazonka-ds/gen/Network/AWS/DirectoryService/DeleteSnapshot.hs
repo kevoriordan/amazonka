@@ -49,10 +49,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteSnapshot' smart constructor.
-newtype DeleteSnapshot = DeleteSnapshot'
-  { _dsSnapshotId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSnapshot = DeleteSnapshot'{_dsSnapshotId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSnapshot' with the minimum fields required to make a request.
 --
@@ -62,8 +61,8 @@ newtype DeleteSnapshot = DeleteSnapshot'
 deleteSnapshot
     :: Text -- ^ 'dsSnapshotId'
     -> DeleteSnapshot
-deleteSnapshot pSnapshotId_ = DeleteSnapshot' {_dsSnapshotId = pSnapshotId_}
-
+deleteSnapshot pSnapshotId_
+  = DeleteSnapshot'{_dsSnapshotId = pSnapshotId_}
 
 -- | The identifier of the directory snapshot to be deleted.
 dsSnapshotId :: Lens' DeleteSnapshot Text
@@ -108,11 +107,12 @@ instance ToQuery DeleteSnapshot where
 --
 --
 -- /See:/ 'deleteSnapshotResponse' smart constructor.
-data DeleteSnapshotResponse = DeleteSnapshotResponse'
-  { _dsrsSnapshotId     :: !(Maybe Text)
-  , _dsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSnapshotResponse = DeleteSnapshotResponse'{_dsrsSnapshotId
+                                                      :: !(Maybe Text),
+                                                      _dsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -124,10 +124,9 @@ data DeleteSnapshotResponse = DeleteSnapshotResponse'
 deleteSnapshotResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DeleteSnapshotResponse
-deleteSnapshotResponse pResponseStatus_ =
-  DeleteSnapshotResponse'
-    {_dsrsSnapshotId = Nothing, _dsrsResponseStatus = pResponseStatus_}
-
+deleteSnapshotResponse pResponseStatus_
+  = DeleteSnapshotResponse'{_dsrsSnapshotId = Nothing,
+                            _dsrsResponseStatus = pResponseStatus_}
 
 -- | The identifier of the directory snapshot that was deleted.
 dsrsSnapshotId :: Lens' DeleteSnapshotResponse (Maybe Text)

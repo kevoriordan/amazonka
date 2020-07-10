@@ -23,7 +23,7 @@
 --
 -- The number of streams may be too large to return from a single call to @ListStreams@ . You can limit the number of returned streams using the @Limit@ parameter. If you do not specify a value for the @Limit@ parameter, Kinesis Data Streams uses the default limit, which is currently 10.
 --
--- You can detect if there are more streams available to list by using the @HasMoreStreams@ flag from the returned output. If there are more streams available, you can request more streams by using the name of the last stream returned by the @ListStreams@ request in the @ExclusiveStartStreamName@ parameter in a subsequent request to @ListStreams@ . The group of stream names returned by the subsequent request is then added to the list. You can continue this process until all the stream names have been collected in the list.
+-- You can detect if there are more streams available to list by using the @HasMoreStreams@ flag from the returned output. If there are more streams available, you can request more streams by using the name of the last stream returned by the @ListStreams@ request in the @ExclusiveStartStreamName@ parameter in a subsequent request to @ListStreams@ . The group of stream names returned by the subsequent request is then added to the list. You can continue this process until all the stream names have been collected in the list. 
 --
 -- 'ListStreams' has a limit of five transactions per second per account.
 --
@@ -60,11 +60,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listStreams' smart constructor.
-data ListStreams = ListStreams'
-  { _lsLimit                    :: !(Maybe Nat)
-  , _lsExclusiveStartStreamName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreams = ListStreams'{_lsLimit ::
+                                !(Maybe Nat),
+                                _lsExclusiveStartStreamName :: !(Maybe Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreams' with the minimum fields required to make a request.
 --
@@ -75,9 +74,9 @@ data ListStreams = ListStreams'
 -- * 'lsExclusiveStartStreamName' - The name of the stream to start the list with.
 listStreams
     :: ListStreams
-listStreams =
-  ListStreams' {_lsLimit = Nothing, _lsExclusiveStartStreamName = Nothing}
-
+listStreams
+  = ListStreams'{_lsLimit = Nothing,
+                 _lsExclusiveStartStreamName = Nothing}
 
 -- | The maximum number of streams to list.
 lsLimit :: Lens' ListStreams (Maybe Natural)
@@ -139,12 +138,11 @@ instance ToQuery ListStreams where
 --
 --
 -- /See:/ 'listStreamsResponse' smart constructor.
-data ListStreamsResponse = ListStreamsResponse'
-  { _lsrsResponseStatus :: !Int
-  , _lsrsStreamNames    :: ![Text]
-  , _lsrsHasMoreStreams :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreamsResponse = ListStreamsResponse'{_lsrsResponseStatus
+                                                :: !Int,
+                                                _lsrsStreamNames :: ![Text],
+                                                _lsrsHasMoreStreams :: !Bool}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreamsResponse' with the minimum fields required to make a request.
 --
@@ -159,13 +157,11 @@ listStreamsResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> Bool -- ^ 'lsrsHasMoreStreams'
     -> ListStreamsResponse
-listStreamsResponse pResponseStatus_ pHasMoreStreams_ =
-  ListStreamsResponse'
-    { _lsrsResponseStatus = pResponseStatus_
-    , _lsrsStreamNames = mempty
-    , _lsrsHasMoreStreams = pHasMoreStreams_
-    }
-
+listStreamsResponse pResponseStatus_ pHasMoreStreams_
+  = ListStreamsResponse'{_lsrsResponseStatus =
+                           pResponseStatus_,
+                         _lsrsStreamNames = mempty,
+                         _lsrsHasMoreStreams = pHasMoreStreams_}
 
 -- | -- | The response status code.
 lsrsResponseStatus :: Lens' ListStreamsResponse Int

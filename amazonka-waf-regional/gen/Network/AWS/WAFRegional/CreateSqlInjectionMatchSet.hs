@@ -33,7 +33,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAFRegional.CreateSqlInjectionMatchSet
     (
@@ -65,11 +65,12 @@ import Network.AWS.WAFRegional.Types.Product
 --
 --
 -- /See:/ 'createSqlInjectionMatchSet' smart constructor.
-data CreateSqlInjectionMatchSet = CreateSqlInjectionMatchSet'
-  { _csimsName        :: !Text
-  , _csimsChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSqlInjectionMatchSet = CreateSqlInjectionMatchSet'{_csimsName
+                                                              :: !Text,
+                                                              _csimsChangeToken
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateSqlInjectionMatchSet' with the minimum fields required to make a request.
 --
@@ -82,10 +83,9 @@ createSqlInjectionMatchSet
     :: Text -- ^ 'csimsName'
     -> Text -- ^ 'csimsChangeToken'
     -> CreateSqlInjectionMatchSet
-createSqlInjectionMatchSet pName_ pChangeToken_ =
-  CreateSqlInjectionMatchSet'
-    {_csimsName = pName_, _csimsChangeToken = pChangeToken_}
-
+createSqlInjectionMatchSet pName_ pChangeToken_
+  = CreateSqlInjectionMatchSet'{_csimsName = pName_,
+                                _csimsChangeToken = pChangeToken_}
 
 -- | A friendly name or description for the 'SqlInjectionMatchSet' that you're creating. You can't change @Name@ after you create the @SqlInjectionMatchSet@ .
 csimsName :: Lens' CreateSqlInjectionMatchSet Text
@@ -139,12 +139,19 @@ instance ToQuery CreateSqlInjectionMatchSet where
 --
 --
 -- /See:/ 'createSqlInjectionMatchSetResponse' smart constructor.
-data CreateSqlInjectionMatchSetResponse = CreateSqlInjectionMatchSetResponse'
-  { _csimsrsSqlInjectionMatchSet :: !(Maybe SqlInjectionMatchSet)
-  , _csimsrsChangeToken          :: !(Maybe Text)
-  , _csimsrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSqlInjectionMatchSetResponse = CreateSqlInjectionMatchSetResponse'{_csimsrsSqlInjectionMatchSet
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  SqlInjectionMatchSet),
+                                                                              _csimsrsChangeToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _csimsrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'CreateSqlInjectionMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -158,13 +165,12 @@ data CreateSqlInjectionMatchSetResponse = CreateSqlInjectionMatchSetResponse'
 createSqlInjectionMatchSetResponse
     :: Int -- ^ 'csimsrsResponseStatus'
     -> CreateSqlInjectionMatchSetResponse
-createSqlInjectionMatchSetResponse pResponseStatus_ =
-  CreateSqlInjectionMatchSetResponse'
-    { _csimsrsSqlInjectionMatchSet = Nothing
-    , _csimsrsChangeToken = Nothing
-    , _csimsrsResponseStatus = pResponseStatus_
-    }
-
+createSqlInjectionMatchSetResponse pResponseStatus_
+  = CreateSqlInjectionMatchSetResponse'{_csimsrsSqlInjectionMatchSet
+                                          = Nothing,
+                                        _csimsrsChangeToken = Nothing,
+                                        _csimsrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | A 'SqlInjectionMatchSet' .
 csimsrsSqlInjectionMatchSet :: Lens' CreateSqlInjectionMatchSetResponse (Maybe SqlInjectionMatchSet)

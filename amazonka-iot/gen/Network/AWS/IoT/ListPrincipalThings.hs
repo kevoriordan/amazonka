@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the things associated with the specified principal.
+-- Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
 --
 --
 --
@@ -55,18 +55,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listPrincipalThings' smart constructor.
-data ListPrincipalThings = ListPrincipalThings'
-  { _lptNextToken  :: !(Maybe Text)
-  , _lptMaxResults :: !(Maybe Nat)
-  , _lptPrincipal  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPrincipalThings = ListPrincipalThings'{_lptNextToken
+                                                :: !(Maybe Text),
+                                                _lptMaxResults :: !(Maybe Nat),
+                                                _lptPrincipal :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPrincipalThings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lptNextToken' - The token used to get the next set of results, or __null__ if there are no additional results.
+-- * 'lptNextToken' - The token to retrieve the next set of results.
 --
 -- * 'lptMaxResults' - The maximum number of results to return in this operation.
 --
@@ -74,15 +73,12 @@ data ListPrincipalThings = ListPrincipalThings'
 listPrincipalThings
     :: Text -- ^ 'lptPrincipal'
     -> ListPrincipalThings
-listPrincipalThings pPrincipal_ =
-  ListPrincipalThings'
-    { _lptNextToken = Nothing
-    , _lptMaxResults = Nothing
-    , _lptPrincipal = pPrincipal_
-    }
+listPrincipalThings pPrincipal_
+  = ListPrincipalThings'{_lptNextToken = Nothing,
+                         _lptMaxResults = Nothing,
+                         _lptPrincipal = pPrincipal_}
 
-
--- | The token used to get the next set of results, or __null__ if there are no additional results.
+-- | The token to retrieve the next set of results.
 lptNextToken :: Lens' ListPrincipalThings (Maybe Text)
 lptNextToken = lens _lptNextToken (\ s a -> s{_lptNextToken = a})
 
@@ -134,12 +130,15 @@ instance ToQuery ListPrincipalThings where
 --
 --
 -- /See:/ 'listPrincipalThingsResponse' smart constructor.
-data ListPrincipalThingsResponse = ListPrincipalThingsResponse'
-  { _lptrsNextToken      :: !(Maybe Text)
-  , _lptrsThings         :: !(Maybe [Text])
-  , _lptrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPrincipalThingsResponse = ListPrincipalThingsResponse'{_lptrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lptrsThings ::
+                                                                !(Maybe [Text]),
+                                                                _lptrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListPrincipalThingsResponse' with the minimum fields required to make a request.
 --
@@ -153,13 +152,11 @@ data ListPrincipalThingsResponse = ListPrincipalThingsResponse'
 listPrincipalThingsResponse
     :: Int -- ^ 'lptrsResponseStatus'
     -> ListPrincipalThingsResponse
-listPrincipalThingsResponse pResponseStatus_ =
-  ListPrincipalThingsResponse'
-    { _lptrsNextToken = Nothing
-    , _lptrsThings = Nothing
-    , _lptrsResponseStatus = pResponseStatus_
-    }
-
+listPrincipalThingsResponse pResponseStatus_
+  = ListPrincipalThingsResponse'{_lptrsNextToken =
+                                   Nothing,
+                                 _lptrsThings = Nothing,
+                                 _lptrsResponseStatus = pResponseStatus_}
 
 -- | The token used to get the next set of results, or __null__ if there are no additional results.
 lptrsNextToken :: Lens' ListPrincipalThingsResponse (Maybe Text)

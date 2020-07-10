@@ -54,13 +54,12 @@ import Network.AWS.Response
 -- | Request for a list of datasets for an identity.
 --
 -- /See:/ 'listDatasets' smart constructor.
-data ListDatasets = ListDatasets'
-  { _ldNextToken      :: !(Maybe Text)
-  , _ldMaxResults     :: !(Maybe Int)
-  , _ldIdentityId     :: !Text
-  , _ldIdentityPoolId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDatasets = ListDatasets'{_ldNextToken ::
+                                  !(Maybe Text),
+                                  _ldMaxResults :: !(Maybe Int),
+                                  _ldIdentityId :: !Text,
+                                  _ldIdentityPoolId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDatasets' with the minimum fields required to make a request.
 --
@@ -77,14 +76,11 @@ listDatasets
     :: Text -- ^ 'ldIdentityId'
     -> Text -- ^ 'ldIdentityPoolId'
     -> ListDatasets
-listDatasets pIdentityId_ pIdentityPoolId_ =
-  ListDatasets'
-    { _ldNextToken = Nothing
-    , _ldMaxResults = Nothing
-    , _ldIdentityId = pIdentityId_
-    , _ldIdentityPoolId = pIdentityPoolId_
-    }
-
+listDatasets pIdentityId_ pIdentityPoolId_
+  = ListDatasets'{_ldNextToken = Nothing,
+                  _ldMaxResults = Nothing,
+                  _ldIdentityId = pIdentityId_,
+                  _ldIdentityPoolId = pIdentityPoolId_}
 
 -- | A pagination token for obtaining the next page of results.
 ldNextToken :: Lens' ListDatasets (Maybe Text)
@@ -139,13 +135,14 @@ instance ToQuery ListDatasets where
 -- | Returned for a successful ListDatasets request.
 --
 -- /See:/ 'listDatasetsResponse' smart constructor.
-data ListDatasetsResponse = ListDatasetsResponse'
-  { _ldrsCount          :: !(Maybe Int)
-  , _ldrsNextToken      :: !(Maybe Text)
-  , _ldrsDatasets       :: !(Maybe [Dataset])
-  , _ldrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDatasetsResponse = ListDatasetsResponse'{_ldrsCount
+                                                  :: !(Maybe Int),
+                                                  _ldrsNextToken ::
+                                                  !(Maybe Text),
+                                                  _ldrsDatasets ::
+                                                  !(Maybe [Dataset]),
+                                                  _ldrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDatasetsResponse' with the minimum fields required to make a request.
 --
@@ -161,14 +158,10 @@ data ListDatasetsResponse = ListDatasetsResponse'
 listDatasetsResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDatasetsResponse
-listDatasetsResponse pResponseStatus_ =
-  ListDatasetsResponse'
-    { _ldrsCount = Nothing
-    , _ldrsNextToken = Nothing
-    , _ldrsDatasets = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    }
-
+listDatasetsResponse pResponseStatus_
+  = ListDatasetsResponse'{_ldrsCount = Nothing,
+                          _ldrsNextToken = Nothing, _ldrsDatasets = Nothing,
+                          _ldrsResponseStatus = pResponseStatus_}
 
 -- | Number of datasets returned.
 ldrsCount :: Lens' ListDatasetsResponse (Maybe Int)

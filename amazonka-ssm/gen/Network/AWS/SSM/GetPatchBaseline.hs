@@ -37,6 +37,7 @@ module Network.AWS.SSM.GetPatchBaseline
     , gpbrsOperatingSystem
     , gpbrsGlobalFilters
     , gpbrsApprovedPatchesComplianceLevel
+    , gpbrsRejectedPatchesAction
     , gpbrsApprovedPatches
     , gpbrsApprovedPatchesEnableNonSecurity
     , gpbrsRejectedPatches
@@ -58,10 +59,9 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getPatchBaseline' smart constructor.
-newtype GetPatchBaseline = GetPatchBaseline'
-  { _gpbBaselineId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetPatchBaseline = GetPatchBaseline'{_gpbBaselineId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPatchBaseline' with the minimum fields required to make a request.
 --
@@ -71,9 +71,8 @@ newtype GetPatchBaseline = GetPatchBaseline'
 getPatchBaseline
     :: Text -- ^ 'gpbBaselineId'
     -> GetPatchBaseline
-getPatchBaseline pBaselineId_ =
-  GetPatchBaseline' {_gpbBaselineId = pBaselineId_}
-
+getPatchBaseline pBaselineId_
+  = GetPatchBaseline'{_gpbBaselineId = pBaselineId_}
 
 -- | The ID of the patch baseline to retrieve.
 gpbBaselineId :: Lens' GetPatchBaseline Text
@@ -89,6 +88,7 @@ instance AWSRequest GetPatchBaseline where
                    (x .?> "ApprovalRules") <*> (x .?> "OperatingSystem")
                      <*> (x .?> "GlobalFilters")
                      <*> (x .?> "ApprovedPatchesComplianceLevel")
+                     <*> (x .?> "RejectedPatchesAction")
                      <*> (x .?> "ApprovedPatches" .!@ mempty)
                      <*> (x .?> "ApprovedPatchesEnableNonSecurity")
                      <*> (x .?> "RejectedPatches" .!@ mempty)
@@ -126,24 +126,48 @@ instance ToQuery GetPatchBaseline where
         toQuery = const mempty
 
 -- | /See:/ 'getPatchBaselineResponse' smart constructor.
-data GetPatchBaselineResponse = GetPatchBaselineResponse'
-  { _gpbrsApprovalRules                    :: !(Maybe PatchRuleGroup)
-  , _gpbrsOperatingSystem                  :: !(Maybe OperatingSystem)
-  , _gpbrsGlobalFilters                    :: !(Maybe PatchFilterGroup)
-  , _gpbrsApprovedPatchesComplianceLevel   :: !(Maybe PatchComplianceLevel)
-  , _gpbrsApprovedPatches                  :: !(Maybe [Text])
-  , _gpbrsApprovedPatchesEnableNonSecurity :: !(Maybe Bool)
-  , _gpbrsRejectedPatches                  :: !(Maybe [Text])
-  , _gpbrsSources                          :: !(Maybe [PatchSource])
-  , _gpbrsCreatedDate                      :: !(Maybe POSIX)
-  , _gpbrsName                             :: !(Maybe Text)
-  , _gpbrsPatchGroups                      :: !(Maybe [Text])
-  , _gpbrsModifiedDate                     :: !(Maybe POSIX)
-  , _gpbrsDescription                      :: !(Maybe Text)
-  , _gpbrsBaselineId                       :: !(Maybe Text)
-  , _gpbrsResponseStatus                   :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetPatchBaselineResponse = GetPatchBaselineResponse'{_gpbrsApprovalRules
+                                                          ::
+                                                          !(Maybe
+                                                              PatchRuleGroup),
+                                                          _gpbrsOperatingSystem
+                                                          ::
+                                                          !(Maybe
+                                                              OperatingSystem),
+                                                          _gpbrsGlobalFilters ::
+                                                          !(Maybe
+                                                              PatchFilterGroup),
+                                                          _gpbrsApprovedPatchesComplianceLevel
+                                                          ::
+                                                          !(Maybe
+                                                              PatchComplianceLevel),
+                                                          _gpbrsRejectedPatchesAction
+                                                          ::
+                                                          !(Maybe PatchAction),
+                                                          _gpbrsApprovedPatches
+                                                          :: !(Maybe [Text]),
+                                                          _gpbrsApprovedPatchesEnableNonSecurity
+                                                          :: !(Maybe Bool),
+                                                          _gpbrsRejectedPatches
+                                                          :: !(Maybe [Text]),
+                                                          _gpbrsSources ::
+                                                          !(Maybe
+                                                              [PatchSource]),
+                                                          _gpbrsCreatedDate ::
+                                                          !(Maybe POSIX),
+                                                          _gpbrsName ::
+                                                          !(Maybe Text),
+                                                          _gpbrsPatchGroups ::
+                                                          !(Maybe [Text]),
+                                                          _gpbrsModifiedDate ::
+                                                          !(Maybe POSIX),
+                                                          _gpbrsDescription ::
+                                                          !(Maybe Text),
+                                                          _gpbrsBaselineId ::
+                                                          !(Maybe Text),
+                                                          _gpbrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPatchBaselineResponse' with the minimum fields required to make a request.
 --
@@ -156,6 +180,8 @@ data GetPatchBaselineResponse = GetPatchBaselineResponse'
 -- * 'gpbrsGlobalFilters' - A set of global filters used to exclude patches from the baseline.
 --
 -- * 'gpbrsApprovedPatchesComplianceLevel' - Returns the specified compliance severity level for approved patches in the patch baseline.
+--
+-- * 'gpbrsRejectedPatchesAction' - The action specified to take on patches included in the RejectedPatches list. A patch can be allowed only if it is a dependency of another package, or blocked entirely along with packages that include it as a dependency.
 --
 -- * 'gpbrsApprovedPatches' - A list of explicitly approved patches for the baseline.
 --
@@ -181,25 +207,23 @@ data GetPatchBaselineResponse = GetPatchBaselineResponse'
 getPatchBaselineResponse
     :: Int -- ^ 'gpbrsResponseStatus'
     -> GetPatchBaselineResponse
-getPatchBaselineResponse pResponseStatus_ =
-  GetPatchBaselineResponse'
-    { _gpbrsApprovalRules = Nothing
-    , _gpbrsOperatingSystem = Nothing
-    , _gpbrsGlobalFilters = Nothing
-    , _gpbrsApprovedPatchesComplianceLevel = Nothing
-    , _gpbrsApprovedPatches = Nothing
-    , _gpbrsApprovedPatchesEnableNonSecurity = Nothing
-    , _gpbrsRejectedPatches = Nothing
-    , _gpbrsSources = Nothing
-    , _gpbrsCreatedDate = Nothing
-    , _gpbrsName = Nothing
-    , _gpbrsPatchGroups = Nothing
-    , _gpbrsModifiedDate = Nothing
-    , _gpbrsDescription = Nothing
-    , _gpbrsBaselineId = Nothing
-    , _gpbrsResponseStatus = pResponseStatus_
-    }
-
+getPatchBaselineResponse pResponseStatus_
+  = GetPatchBaselineResponse'{_gpbrsApprovalRules =
+                                Nothing,
+                              _gpbrsOperatingSystem = Nothing,
+                              _gpbrsGlobalFilters = Nothing,
+                              _gpbrsApprovedPatchesComplianceLevel = Nothing,
+                              _gpbrsRejectedPatchesAction = Nothing,
+                              _gpbrsApprovedPatches = Nothing,
+                              _gpbrsApprovedPatchesEnableNonSecurity = Nothing,
+                              _gpbrsRejectedPatches = Nothing,
+                              _gpbrsSources = Nothing,
+                              _gpbrsCreatedDate = Nothing, _gpbrsName = Nothing,
+                              _gpbrsPatchGroups = Nothing,
+                              _gpbrsModifiedDate = Nothing,
+                              _gpbrsDescription = Nothing,
+                              _gpbrsBaselineId = Nothing,
+                              _gpbrsResponseStatus = pResponseStatus_}
 
 -- | A set of rules used to include patches in the baseline.
 gpbrsApprovalRules :: Lens' GetPatchBaselineResponse (Maybe PatchRuleGroup)
@@ -216,6 +240,10 @@ gpbrsGlobalFilters = lens _gpbrsGlobalFilters (\ s a -> s{_gpbrsGlobalFilters = 
 -- | Returns the specified compliance severity level for approved patches in the patch baseline.
 gpbrsApprovedPatchesComplianceLevel :: Lens' GetPatchBaselineResponse (Maybe PatchComplianceLevel)
 gpbrsApprovedPatchesComplianceLevel = lens _gpbrsApprovedPatchesComplianceLevel (\ s a -> s{_gpbrsApprovedPatchesComplianceLevel = a})
+
+-- | The action specified to take on patches included in the RejectedPatches list. A patch can be allowed only if it is a dependency of another package, or blocked entirely along with packages that include it as a dependency.
+gpbrsRejectedPatchesAction :: Lens' GetPatchBaselineResponse (Maybe PatchAction)
+gpbrsRejectedPatchesAction = lens _gpbrsRejectedPatchesAction (\ s a -> s{_gpbrsRejectedPatchesAction = a})
 
 -- | A list of explicitly approved patches for the baseline.
 gpbrsApprovedPatches :: Lens' GetPatchBaselineResponse [Text]

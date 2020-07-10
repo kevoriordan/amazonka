@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes invitations sent to the current member account by AWS accounts specified by their account IDs.
+--
+--
 module Network.AWS.GuardDuty.DeleteInvitations
     (
     -- * Creating a Request
@@ -31,8 +33,8 @@ module Network.AWS.GuardDuty.DeleteInvitations
     , deleteInvitationsResponse
     , DeleteInvitationsResponse
     -- * Response Lenses
-    , dirsUnprocessedAccounts
     , dirsResponseStatus
+    , dirsUnprocessedAccounts
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -42,13 +44,10 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | DeleteInvitations request body.
---
--- /See:/ 'deleteInvitations' smart constructor.
-newtype DeleteInvitations = DeleteInvitations'
-  { _diAccountIds :: Maybe [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteInvitations' smart constructor.
+newtype DeleteInvitations = DeleteInvitations'{_diAccountIds
+                                               :: List1 Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteInvitations' with the minimum fields required to make a request.
 --
@@ -56,13 +55,15 @@ newtype DeleteInvitations = DeleteInvitations'
 --
 -- * 'diAccountIds' - A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to delete invitations from.
 deleteInvitations
-    :: DeleteInvitations
-deleteInvitations = DeleteInvitations' {_diAccountIds = Nothing}
-
+    :: NonEmpty Text -- ^ 'diAccountIds'
+    -> DeleteInvitations
+deleteInvitations pAccountIds_
+  = DeleteInvitations'{_diAccountIds =
+                         _List1 # pAccountIds_}
 
 -- | A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to delete invitations from.
-diAccountIds :: Lens' DeleteInvitations [Text]
-diAccountIds = lens _diAccountIds (\ s a -> s{_diAccountIds = a}) . _Default . _Coerce
+diAccountIds :: Lens' DeleteInvitations (NonEmpty Text)
+diAccountIds = lens _diAccountIds (\ s a -> s{_diAccountIds = a}) . _List1
 
 instance AWSRequest DeleteInvitations where
         type Rs DeleteInvitations = DeleteInvitationsResponse
@@ -71,8 +72,8 @@ instance AWSRequest DeleteInvitations where
           = receiveJSON
               (\ s h x ->
                  DeleteInvitationsResponse' <$>
-                   (x .?> "unprocessedAccounts" .!@ mempty) <*>
-                     (pure (fromEnum s)))
+                   (pure (fromEnum s)) <*>
+                     (x .?> "unprocessedAccounts" .!@ mempty))
 
 instance Hashable DeleteInvitations where
 
@@ -88,7 +89,7 @@ instance ToHeaders DeleteInvitations where
 instance ToJSON DeleteInvitations where
         toJSON DeleteInvitations'{..}
           = object
-              (catMaybes [("accountIds" .=) <$> _diAccountIds])
+              (catMaybes [Just ("accountIds" .= _diAccountIds)])
 
 instance ToPath DeleteInvitations where
         toPath = const "/invitation/delete"
@@ -97,33 +98,35 @@ instance ToQuery DeleteInvitations where
         toQuery = const mempty
 
 -- | /See:/ 'deleteInvitationsResponse' smart constructor.
-data DeleteInvitationsResponse = DeleteInvitationsResponse'
-  { _dirsUnprocessedAccounts :: !(Maybe [UnprocessedAccount])
-  , _dirsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteInvitationsResponse = DeleteInvitationsResponse'{_dirsResponseStatus
+                                                            :: !Int,
+                                                            _dirsUnprocessedAccounts
+                                                            ::
+                                                            ![UnprocessedAccount]}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteInvitationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dirsUnprocessedAccounts' - A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
---
 -- * 'dirsResponseStatus' - -- | The response status code.
+--
+-- * 'dirsUnprocessedAccounts' - A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
 deleteInvitationsResponse
     :: Int -- ^ 'dirsResponseStatus'
     -> DeleteInvitationsResponse
-deleteInvitationsResponse pResponseStatus_ =
-  DeleteInvitationsResponse'
-    {_dirsUnprocessedAccounts = Nothing, _dirsResponseStatus = pResponseStatus_}
-
-
--- | A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
-dirsUnprocessedAccounts :: Lens' DeleteInvitationsResponse [UnprocessedAccount]
-dirsUnprocessedAccounts = lens _dirsUnprocessedAccounts (\ s a -> s{_dirsUnprocessedAccounts = a}) . _Default . _Coerce
+deleteInvitationsResponse pResponseStatus_
+  = DeleteInvitationsResponse'{_dirsResponseStatus =
+                                 pResponseStatus_,
+                               _dirsUnprocessedAccounts = mempty}
 
 -- | -- | The response status code.
 dirsResponseStatus :: Lens' DeleteInvitationsResponse Int
 dirsResponseStatus = lens _dirsResponseStatus (\ s a -> s{_dirsResponseStatus = a})
+
+-- | A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
+dirsUnprocessedAccounts :: Lens' DeleteInvitationsResponse [UnprocessedAccount]
+dirsUnprocessedAccounts = lens _dirsUnprocessedAccounts (\ s a -> s{_dirsUnprocessedAccounts = a}) . _Coerce
 
 instance NFData DeleteInvitationsResponse where

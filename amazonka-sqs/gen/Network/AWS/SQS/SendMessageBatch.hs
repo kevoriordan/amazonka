@@ -27,11 +27,17 @@
 --
 -- /Important:/ A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:
 --
--- @#x9@ | @#xA@ | @#xD@ | @#x20@ to @#xD7FF@ | @#xE000@ to @#xFFFD@ | @#x10000@ to @#x10FFFF@
+-- @#x9@ | @#xA@ | @#xD@ | @#x20@ to @#xD7FF@ | @#xE000@ to @#xFFFD@ | @#x10000@ to @#x10FFFF@ 
 --
 -- Any characters not included in this list will be rejected. For more information, see the <http://www.w3.org/TR/REC-xml/#charsets W3C specification for characters> .
 --
 -- If you don't specify the @DelaySeconds@ parameter for an entry, Amazon SQS uses the default value for the queue.
+--
+-- Some actions take lists of parameters. These lists are specified using the @param.n@ notation. Values of @n@ are integers starting from 1. For example, a parameter list with two elements looks like this:
+--
+-- @&Attribute.1=first@ 
+--
+-- @&Attribute.2=second@ 
 --
 module Network.AWS.SQS.SendMessageBatch
     (
@@ -58,32 +64,32 @@ import Network.AWS.Response
 import Network.AWS.SQS.Types
 import Network.AWS.SQS.Types.Product
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'sendMessageBatch' smart constructor.
-data SendMessageBatch = SendMessageBatch'
-  { _smbQueueURL :: !Text
-  , _smbEntries  :: ![SendMessageBatchRequestEntry]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SendMessageBatch = SendMessageBatch'{_smbQueueURL
+                                          :: !Text,
+                                          _smbEntries ::
+                                          ![SendMessageBatchRequestEntry]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SendMessageBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'smbQueueURL' - The URL of the Amazon SQS queue to which batched messages are sent. Queue URLs are case-sensitive.
+-- * 'smbQueueURL' - The URL of the Amazon SQS queue to which batched messages are sent. Queue URLs and names are case-sensitive.
 --
 -- * 'smbEntries' - A list of @'SendMessageBatchRequestEntry' @ items.
 sendMessageBatch
     :: Text -- ^ 'smbQueueURL'
     -> SendMessageBatch
-sendMessageBatch pQueueURL_ =
-  SendMessageBatch' {_smbQueueURL = pQueueURL_, _smbEntries = mempty}
+sendMessageBatch pQueueURL_
+  = SendMessageBatch'{_smbQueueURL = pQueueURL_,
+                      _smbEntries = mempty}
 
-
--- | The URL of the Amazon SQS queue to which batched messages are sent. Queue URLs are case-sensitive.
+-- | The URL of the Amazon SQS queue to which batched messages are sent. Queue URLs and names are case-sensitive.
 smbQueueURL :: Lens' SendMessageBatch Text
 smbQueueURL = lens _smbQueueURL (\ s a -> s{_smbQueueURL = a})
 
@@ -126,12 +132,14 @@ instance ToQuery SendMessageBatch where
 --
 --
 -- /See:/ 'sendMessageBatchResponse' smart constructor.
-data SendMessageBatchResponse = SendMessageBatchResponse'
-  { _smbrsResponseStatus :: !Int
-  , _smbrsSuccessful     :: ![SendMessageBatchResultEntry]
-  , _smbrsFailed         :: ![BatchResultErrorEntry]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SendMessageBatchResponse = SendMessageBatchResponse'{_smbrsResponseStatus
+                                                          :: !Int,
+                                                          _smbrsSuccessful ::
+                                                          ![SendMessageBatchResultEntry],
+                                                          _smbrsFailed ::
+                                                          ![BatchResultErrorEntry]}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'SendMessageBatchResponse' with the minimum fields required to make a request.
 --
@@ -145,13 +153,10 @@ data SendMessageBatchResponse = SendMessageBatchResponse'
 sendMessageBatchResponse
     :: Int -- ^ 'smbrsResponseStatus'
     -> SendMessageBatchResponse
-sendMessageBatchResponse pResponseStatus_ =
-  SendMessageBatchResponse'
-    { _smbrsResponseStatus = pResponseStatus_
-    , _smbrsSuccessful = mempty
-    , _smbrsFailed = mempty
-    }
-
+sendMessageBatchResponse pResponseStatus_
+  = SendMessageBatchResponse'{_smbrsResponseStatus =
+                                pResponseStatus_,
+                              _smbrsSuccessful = mempty, _smbrsFailed = mempty}
 
 -- | -- | The response status code.
 smbrsResponseStatus :: Lens' SendMessageBatchResponse Int

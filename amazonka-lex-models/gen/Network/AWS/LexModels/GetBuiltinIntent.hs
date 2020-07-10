@@ -49,10 +49,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBuiltinIntent' smart constructor.
-newtype GetBuiltinIntent = GetBuiltinIntent'
-  { _gbiSignature :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBuiltinIntent = GetBuiltinIntent'{_gbiSignature
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBuiltinIntent' with the minimum fields required to make a request.
 --
@@ -62,8 +61,8 @@ newtype GetBuiltinIntent = GetBuiltinIntent'
 getBuiltinIntent
     :: Text -- ^ 'gbiSignature'
     -> GetBuiltinIntent
-getBuiltinIntent pSignature_ = GetBuiltinIntent' {_gbiSignature = pSignature_}
-
+getBuiltinIntent pSignature_
+  = GetBuiltinIntent'{_gbiSignature = pSignature_}
 
 -- | The unique identifier for a built-in intent. To find the signature for an intent, see <https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents Standard Built-in Intents> in the /Alexa Skills Kit/ .
 gbiSignature :: Lens' GetBuiltinIntent Text
@@ -99,13 +98,17 @@ instance ToQuery GetBuiltinIntent where
         toQuery = const mempty
 
 -- | /See:/ 'getBuiltinIntentResponse' smart constructor.
-data GetBuiltinIntentResponse = GetBuiltinIntentResponse'
-  { _gbirsSignature        :: !(Maybe Text)
-  , _gbirsSlots            :: !(Maybe [BuiltinIntentSlot])
-  , _gbirsSupportedLocales :: !(Maybe [Locale])
-  , _gbirsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBuiltinIntentResponse = GetBuiltinIntentResponse'{_gbirsSignature
+                                                          :: !(Maybe Text),
+                                                          _gbirsSlots ::
+                                                          !(Maybe
+                                                              [BuiltinIntentSlot]),
+                                                          _gbirsSupportedLocales
+                                                          :: !(Maybe [Locale]),
+                                                          _gbirsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetBuiltinIntentResponse' with the minimum fields required to make a request.
 --
@@ -121,14 +124,12 @@ data GetBuiltinIntentResponse = GetBuiltinIntentResponse'
 getBuiltinIntentResponse
     :: Int -- ^ 'gbirsResponseStatus'
     -> GetBuiltinIntentResponse
-getBuiltinIntentResponse pResponseStatus_ =
-  GetBuiltinIntentResponse'
-    { _gbirsSignature = Nothing
-    , _gbirsSlots = Nothing
-    , _gbirsSupportedLocales = Nothing
-    , _gbirsResponseStatus = pResponseStatus_
-    }
-
+getBuiltinIntentResponse pResponseStatus_
+  = GetBuiltinIntentResponse'{_gbirsSignature =
+                                Nothing,
+                              _gbirsSlots = Nothing,
+                              _gbirsSupportedLocales = Nothing,
+                              _gbirsResponseStatus = pResponseStatus_}
 
 -- | The unique identifier for a built-in intent.
 gbirsSignature :: Lens' GetBuiltinIntentResponse (Maybe Text)

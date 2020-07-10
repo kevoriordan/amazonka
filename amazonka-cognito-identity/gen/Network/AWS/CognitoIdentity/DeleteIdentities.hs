@@ -51,10 +51,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteIdentities' smart constructor.
-newtype DeleteIdentities = DeleteIdentities'
-  { _diIdentityIdsToDelete :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteIdentities = DeleteIdentities'{_diIdentityIdsToDelete
+                                             :: List1 Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIdentities' with the minimum fields required to make a request.
 --
@@ -64,9 +63,9 @@ newtype DeleteIdentities = DeleteIdentities'
 deleteIdentities
     :: NonEmpty Text -- ^ 'diIdentityIdsToDelete'
     -> DeleteIdentities
-deleteIdentities pIdentityIdsToDelete_ =
-  DeleteIdentities' {_diIdentityIdsToDelete = _List1 # pIdentityIdsToDelete_}
-
+deleteIdentities pIdentityIdsToDelete_
+  = DeleteIdentities'{_diIdentityIdsToDelete =
+                        _List1 # pIdentityIdsToDelete_}
 
 -- | A list of 1-60 identities that you want to delete.
 diIdentityIdsToDelete :: Lens' DeleteIdentities (NonEmpty Text)
@@ -114,11 +113,14 @@ instance ToQuery DeleteIdentities where
 --
 --
 -- /See:/ 'deleteIdentitiesResponse' smart constructor.
-data DeleteIdentitiesResponse = DeleteIdentitiesResponse'
-  { _dirsUnprocessedIdentityIds :: !(Maybe [UnprocessedIdentityId])
-  , _dirsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIdentitiesResponse = DeleteIdentitiesResponse'{_dirsUnprocessedIdentityIds
+                                                          ::
+                                                          !(Maybe
+                                                              [UnprocessedIdentityId]),
+                                                          _dirsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteIdentitiesResponse' with the minimum fields required to make a request.
 --
@@ -130,12 +132,10 @@ data DeleteIdentitiesResponse = DeleteIdentitiesResponse'
 deleteIdentitiesResponse
     :: Int -- ^ 'dirsResponseStatus'
     -> DeleteIdentitiesResponse
-deleteIdentitiesResponse pResponseStatus_ =
-  DeleteIdentitiesResponse'
-    { _dirsUnprocessedIdentityIds = Nothing
-    , _dirsResponseStatus = pResponseStatus_
-    }
-
+deleteIdentitiesResponse pResponseStatus_
+  = DeleteIdentitiesResponse'{_dirsUnprocessedIdentityIds
+                                = Nothing,
+                              _dirsResponseStatus = pResponseStatus_}
 
 -- | An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and IdentityId.
 dirsUnprocessedIdentityIds :: Lens' DeleteIdentitiesResponse [UnprocessedIdentityId]

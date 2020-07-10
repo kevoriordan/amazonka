@@ -21,6 +21,8 @@
 -- Lists all of the streams in your AWS account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListStreams
     (
     -- * Creating a Request
@@ -43,17 +45,17 @@ module Network.AWS.IoT.ListStreams
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listStreams' smart constructor.
-data ListStreams = ListStreams'
-  { _lsNextToken      :: !(Maybe Text)
-  , _lsAscendingOrder :: !(Maybe Bool)
-  , _lsMaxResults     :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreams = ListStreams'{_lsNextToken ::
+                                !(Maybe Text),
+                                _lsAscendingOrder :: !(Maybe Bool),
+                                _lsMaxResults :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreams' with the minimum fields required to make a request.
 --
@@ -66,13 +68,9 @@ data ListStreams = ListStreams'
 -- * 'lsMaxResults' - The maximum number of results to return at a time.
 listStreams
     :: ListStreams
-listStreams =
-  ListStreams'
-    { _lsNextToken = Nothing
-    , _lsAscendingOrder = Nothing
-    , _lsMaxResults = Nothing
-    }
-
+listStreams
+  = ListStreams'{_lsNextToken = Nothing,
+                 _lsAscendingOrder = Nothing, _lsMaxResults = Nothing}
 
 -- | A token used to get the next set of results.
 lsNextToken :: Lens' ListStreams (Maybe Text)
@@ -85,6 +83,13 @@ lsAscendingOrder = lens _lsAscendingOrder (\ s a -> s{_lsAscendingOrder = a})
 -- | The maximum number of results to return at a time.
 lsMaxResults :: Lens' ListStreams (Maybe Natural)
 lsMaxResults = lens _lsMaxResults (\ s a -> s{_lsMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListStreams where
+        page rq rs
+          | stop (rs ^. lsrsNextToken) = Nothing
+          | stop (rs ^. lsrsStreams) = Nothing
+          | otherwise =
+            Just $ rq & lsNextToken .~ rs ^. lsrsNextToken
 
 instance AWSRequest ListStreams where
         type Rs ListStreams = ListStreamsResponse
@@ -114,12 +119,12 @@ instance ToQuery ListStreams where
                "maxResults" =: _lsMaxResults]
 
 -- | /See:/ 'listStreamsResponse' smart constructor.
-data ListStreamsResponse = ListStreamsResponse'
-  { _lsrsNextToken      :: !(Maybe Text)
-  , _lsrsStreams        :: !(Maybe [StreamSummary])
-  , _lsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreamsResponse = ListStreamsResponse'{_lsrsNextToken
+                                                :: !(Maybe Text),
+                                                _lsrsStreams ::
+                                                !(Maybe [StreamSummary]),
+                                                _lsrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStreamsResponse' with the minimum fields required to make a request.
 --
@@ -133,13 +138,10 @@ data ListStreamsResponse = ListStreamsResponse'
 listStreamsResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListStreamsResponse
-listStreamsResponse pResponseStatus_ =
-  ListStreamsResponse'
-    { _lsrsNextToken = Nothing
-    , _lsrsStreams = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
-
+listStreamsResponse pResponseStatus_
+  = ListStreamsResponse'{_lsrsNextToken = Nothing,
+                         _lsrsStreams = Nothing,
+                         _lsrsResponseStatus = pResponseStatus_}
 
 -- | A token used to get the next set of results.
 lsrsNextToken :: Lens' ListStreamsResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListHITsForQualificationType@ operation returns the HITs that use the given Qualification type for a Qualification requirement. The operation returns HITs of any status, except for HITs that have been deleted with the @DeleteHIT@ operation or that have been auto-deleted.
+-- The @ListHITsForQualificationType@ operation returns the HITs that use the given Qualification type for a Qualification requirement. The operation returns HITs of any status, except for HITs that have been deleted with the @DeleteHIT@ operation or that have been auto-deleted. 
 --
 --
 --
@@ -52,12 +52,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listHITsForQualificationType' smart constructor.
-data ListHITsForQualificationType = ListHITsForQualificationType'
-  { _lhitfqtNextToken           :: !(Maybe Text)
-  , _lhitfqtMaxResults          :: !(Maybe Nat)
-  , _lhitfqtQualificationTypeId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListHITsForQualificationType = ListHITsForQualificationType'{_lhitfqtNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lhitfqtMaxResults
+                                                                  ::
+                                                                  !(Maybe Nat),
+                                                                  _lhitfqtQualificationTypeId
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListHITsForQualificationType' with the minimum fields required to make a request.
 --
@@ -65,29 +69,28 @@ data ListHITsForQualificationType = ListHITsForQualificationType'
 --
 -- * 'lhitfqtNextToken' - Pagination Token
 --
--- * 'lhitfqtMaxResults' - Limit the number of results returned.
+-- * 'lhitfqtMaxResults' - Limit the number of results returned. 
 --
--- * 'lhitfqtQualificationTypeId' - The ID of the Qualification type to use when querying HITs.
+-- * 'lhitfqtQualificationTypeId' - The ID of the Qualification type to use when querying HITs. 
 listHITsForQualificationType
     :: Text -- ^ 'lhitfqtQualificationTypeId'
     -> ListHITsForQualificationType
-listHITsForQualificationType pQualificationTypeId_ =
-  ListHITsForQualificationType'
-    { _lhitfqtNextToken = Nothing
-    , _lhitfqtMaxResults = Nothing
-    , _lhitfqtQualificationTypeId = pQualificationTypeId_
-    }
-
+listHITsForQualificationType pQualificationTypeId_
+  = ListHITsForQualificationType'{_lhitfqtNextToken =
+                                    Nothing,
+                                  _lhitfqtMaxResults = Nothing,
+                                  _lhitfqtQualificationTypeId =
+                                    pQualificationTypeId_}
 
 -- | Pagination Token
 lhitfqtNextToken :: Lens' ListHITsForQualificationType (Maybe Text)
 lhitfqtNextToken = lens _lhitfqtNextToken (\ s a -> s{_lhitfqtNextToken = a})
 
--- | Limit the number of results returned.
+-- | Limit the number of results returned. 
 lhitfqtMaxResults :: Lens' ListHITsForQualificationType (Maybe Natural)
 lhitfqtMaxResults = lens _lhitfqtMaxResults (\ s a -> s{_lhitfqtMaxResults = a}) . mapping _Nat
 
--- | The ID of the Qualification type to use when querying HITs.
+-- | The ID of the Qualification type to use when querying HITs. 
 lhitfqtQualificationTypeId :: Lens' ListHITsForQualificationType Text
 lhitfqtQualificationTypeId = lens _lhitfqtQualificationTypeId (\ s a -> s{_lhitfqtQualificationTypeId = a})
 
@@ -143,13 +146,23 @@ instance ToQuery ListHITsForQualificationType where
         toQuery = const mempty
 
 -- | /See:/ 'listHITsForQualificationTypeResponse' smart constructor.
-data ListHITsForQualificationTypeResponse = ListHITsForQualificationTypeResponse'
-  { _lhitfqtrsNextToken      :: !(Maybe Text)
-  , _lhitfqtrsNumResults     :: !(Maybe Int)
-  , _lhitfqtrsHITs           :: !(Maybe [HIT])
-  , _lhitfqtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListHITsForQualificationTypeResponse = ListHITsForQualificationTypeResponse'{_lhitfqtrsNextToken
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _lhitfqtrsNumResults
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Int),
+                                                                                  _lhitfqtrsHITs
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [HIT]),
+                                                                                  _lhitfqtrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ListHITsForQualificationTypeResponse' with the minimum fields required to make a request.
 --
@@ -157,7 +170,7 @@ data ListHITsForQualificationTypeResponse = ListHITsForQualificationTypeResponse
 --
 -- * 'lhitfqtrsNextToken' - Undocumented member.
 --
--- * 'lhitfqtrsNumResults' - The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call.
+-- * 'lhitfqtrsNumResults' - The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call. 
 --
 -- * 'lhitfqtrsHITs' - The list of HIT elements returned by the query.
 --
@@ -165,20 +178,19 @@ data ListHITsForQualificationTypeResponse = ListHITsForQualificationTypeResponse
 listHITsForQualificationTypeResponse
     :: Int -- ^ 'lhitfqtrsResponseStatus'
     -> ListHITsForQualificationTypeResponse
-listHITsForQualificationTypeResponse pResponseStatus_ =
-  ListHITsForQualificationTypeResponse'
-    { _lhitfqtrsNextToken = Nothing
-    , _lhitfqtrsNumResults = Nothing
-    , _lhitfqtrsHITs = Nothing
-    , _lhitfqtrsResponseStatus = pResponseStatus_
-    }
-
+listHITsForQualificationTypeResponse pResponseStatus_
+  = ListHITsForQualificationTypeResponse'{_lhitfqtrsNextToken
+                                            = Nothing,
+                                          _lhitfqtrsNumResults = Nothing,
+                                          _lhitfqtrsHITs = Nothing,
+                                          _lhitfqtrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Undocumented member.
 lhitfqtrsNextToken :: Lens' ListHITsForQualificationTypeResponse (Maybe Text)
 lhitfqtrsNextToken = lens _lhitfqtrsNextToken (\ s a -> s{_lhitfqtrsNextToken = a})
 
--- | The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call.
+-- | The number of HITs on this page in the filtered results list, equivalent to the number of HITs being returned by this call. 
 lhitfqtrsNumResults :: Lens' ListHITsForQualificationTypeResponse (Maybe Int)
 lhitfqtrsNumResults = lens _lhitfqtrsNumResults (\ s a -> s{_lhitfqtrsNumResults = a})
 

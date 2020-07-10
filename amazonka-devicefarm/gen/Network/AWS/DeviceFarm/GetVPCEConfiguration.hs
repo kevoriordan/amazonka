@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getVPCEConfiguration' smart constructor.
-newtype GetVPCEConfiguration = GetVPCEConfiguration'
-  { _gvecArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetVPCEConfiguration = GetVPCEConfiguration'{_gvecArn
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetVPCEConfiguration' with the minimum fields required to make a request.
 --
@@ -58,8 +58,8 @@ newtype GetVPCEConfiguration = GetVPCEConfiguration'
 getVPCEConfiguration
     :: Text -- ^ 'gvecArn'
     -> GetVPCEConfiguration
-getVPCEConfiguration pArn_ = GetVPCEConfiguration' {_gvecArn = pArn_}
-
+getVPCEConfiguration pArn_
+  = GetVPCEConfiguration'{_gvecArn = pArn_}
 
 -- | The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to describe.
 gvecArn :: Lens' GetVPCEConfiguration Text
@@ -100,30 +100,31 @@ instance ToQuery GetVPCEConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'getVPCEConfigurationResponse' smart constructor.
-data GetVPCEConfigurationResponse = GetVPCEConfigurationResponse'
-  { _gvecrsVpceConfiguration :: !(Maybe VPCEConfiguration)
-  , _gvecrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetVPCEConfigurationResponse = GetVPCEConfigurationResponse'{_gvecrsVpceConfiguration
+                                                                  ::
+                                                                  !(Maybe
+                                                                      VPCEConfiguration),
+                                                                  _gvecrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetVPCEConfigurationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gvecrsVpceConfiguration' - An object containing information about your VPC endpoint configuration.
+-- * 'gvecrsVpceConfiguration' - An object that contains information about your VPC endpoint configuration.
 --
 -- * 'gvecrsResponseStatus' - -- | The response status code.
 getVPCEConfigurationResponse
     :: Int -- ^ 'gvecrsResponseStatus'
     -> GetVPCEConfigurationResponse
-getVPCEConfigurationResponse pResponseStatus_ =
-  GetVPCEConfigurationResponse'
-    { _gvecrsVpceConfiguration = Nothing
-    , _gvecrsResponseStatus = pResponseStatus_
-    }
+getVPCEConfigurationResponse pResponseStatus_
+  = GetVPCEConfigurationResponse'{_gvecrsVpceConfiguration
+                                    = Nothing,
+                                  _gvecrsResponseStatus = pResponseStatus_}
 
-
--- | An object containing information about your VPC endpoint configuration.
+-- | An object that contains information about your VPC endpoint configuration.
 gvecrsVpceConfiguration :: Lens' GetVPCEConfigurationResponse (Maybe VPCEConfiguration)
 gvecrsVpceConfiguration = lens _gvecrsVpceConfiguration (\ s a -> s{_gvecrsVpceConfiguration = a})
 

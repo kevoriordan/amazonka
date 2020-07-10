@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a branch from a repository, unless that branch is the default branch for the repository.
+-- Deletes a branch from a repository, unless that branch is the default branch for the repository. 
 --
 --
 module Network.AWS.CodeCommit.DeleteBranch
@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteBranch' smart constructor.
-data DeleteBranch = DeleteBranch'
-  { _dbRepositoryName :: !Text
-  , _dbBranchName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBranch = DeleteBranch'{_dbRepositoryName
+                                  :: !Text,
+                                  _dbBranchName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBranch' with the minimum fields required to make a request.
 --
@@ -67,10 +66,9 @@ deleteBranch
     :: Text -- ^ 'dbRepositoryName'
     -> Text -- ^ 'dbBranchName'
     -> DeleteBranch
-deleteBranch pRepositoryName_ pBranchName_ =
-  DeleteBranch'
-    {_dbRepositoryName = pRepositoryName_, _dbBranchName = pBranchName_}
-
+deleteBranch pRepositoryName_ pBranchName_
+  = DeleteBranch'{_dbRepositoryName = pRepositoryName_,
+                  _dbBranchName = pBranchName_}
 
 -- | The name of the repository that contains the branch to be deleted.
 dbRepositoryName :: Lens' DeleteBranch Text
@@ -120,11 +118,10 @@ instance ToQuery DeleteBranch where
 --
 --
 -- /See:/ 'deleteBranchResponse' smart constructor.
-data DeleteBranchResponse = DeleteBranchResponse'
-  { _dbrsDeletedBranch  :: !(Maybe BranchInfo)
-  , _dbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBranchResponse = DeleteBranchResponse'{_dbrsDeletedBranch
+                                                  :: !(Maybe BranchInfo),
+                                                  _dbrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBranchResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +133,9 @@ data DeleteBranchResponse = DeleteBranchResponse'
 deleteBranchResponse
     :: Int -- ^ 'dbrsResponseStatus'
     -> DeleteBranchResponse
-deleteBranchResponse pResponseStatus_ =
-  DeleteBranchResponse'
-    {_dbrsDeletedBranch = Nothing, _dbrsResponseStatus = pResponseStatus_}
-
+deleteBranchResponse pResponseStatus_
+  = DeleteBranchResponse'{_dbrsDeletedBranch = Nothing,
+                          _dbrsResponseStatus = pResponseStatus_}
 
 -- | Information about the branch deleted by the operation, including the branch name and the commit ID that was the tip of the branch.
 dbrsDeletedBranch :: Lens' DeleteBranchResponse (Maybe BranchInfo)

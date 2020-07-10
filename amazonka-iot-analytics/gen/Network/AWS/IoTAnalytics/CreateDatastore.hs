@@ -28,6 +28,8 @@ module Network.AWS.IoTAnalytics.CreateDatastore
     , CreateDatastore
     -- * Request Lenses
     , cdRetentionPeriod
+    , cdDatastoreStorage
+    , cdTags
     , cdDatastoreName
 
     -- * Destructuring the Response
@@ -48,30 +50,44 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDatastore' smart constructor.
-data CreateDatastore = CreateDatastore'
-  { _cdRetentionPeriod :: !(Maybe RetentionPeriod)
-  , _cdDatastoreName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDatastore = CreateDatastore'{_cdRetentionPeriod
+                                        :: !(Maybe RetentionPeriod),
+                                        _cdDatastoreStorage ::
+                                        !(Maybe DatastoreStorage),
+                                        _cdTags :: !(Maybe (List1 Tag)),
+                                        _cdDatastoreName :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDatastore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdRetentionPeriod' - How long, in days, message data is kept for the data store.
+-- * 'cdRetentionPeriod' - How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.
+--
+-- * 'cdDatastoreStorage' - Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.
+--
+-- * 'cdTags' - Metadata which can be used to manage the data store.
 --
 -- * 'cdDatastoreName' - The name of the data store.
 createDatastore
     :: Text -- ^ 'cdDatastoreName'
     -> CreateDatastore
-createDatastore pDatastoreName_ =
-  CreateDatastore'
-    {_cdRetentionPeriod = Nothing, _cdDatastoreName = pDatastoreName_}
+createDatastore pDatastoreName_
+  = CreateDatastore'{_cdRetentionPeriod = Nothing,
+                     _cdDatastoreStorage = Nothing, _cdTags = Nothing,
+                     _cdDatastoreName = pDatastoreName_}
 
-
--- | How long, in days, message data is kept for the data store.
+-- | How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.
 cdRetentionPeriod :: Lens' CreateDatastore (Maybe RetentionPeriod)
 cdRetentionPeriod = lens _cdRetentionPeriod (\ s a -> s{_cdRetentionPeriod = a})
+
+-- | Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.
+cdDatastoreStorage :: Lens' CreateDatastore (Maybe DatastoreStorage)
+cdDatastoreStorage = lens _cdDatastoreStorage (\ s a -> s{_cdDatastoreStorage = a})
+
+-- | Metadata which can be used to manage the data store.
+cdTags :: Lens' CreateDatastore (Maybe (NonEmpty Tag))
+cdTags = lens _cdTags (\ s a -> s{_cdTags = a}) . mapping _List1
 
 -- | The name of the data store.
 cdDatastoreName :: Lens' CreateDatastore Text
@@ -100,6 +116,8 @@ instance ToJSON CreateDatastore where
           = object
               (catMaybes
                  [("retentionPeriod" .=) <$> _cdRetentionPeriod,
+                  ("datastoreStorage" .=) <$> _cdDatastoreStorage,
+                  ("tags" .=) <$> _cdTags,
                   Just ("datastoreName" .= _cdDatastoreName)])
 
 instance ToPath CreateDatastore where
@@ -109,13 +127,17 @@ instance ToQuery CreateDatastore where
         toQuery = const mempty
 
 -- | /See:/ 'createDatastoreResponse' smart constructor.
-data CreateDatastoreResponse = CreateDatastoreResponse'
-  { _cdrsDatastoreARN    :: !(Maybe Text)
-  , _cdrsDatastoreName   :: !(Maybe Text)
-  , _cdrsRetentionPeriod :: !(Maybe RetentionPeriod)
-  , _cdrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDatastoreResponse = CreateDatastoreResponse'{_cdrsDatastoreARN
+                                                        :: !(Maybe Text),
+                                                        _cdrsDatastoreName ::
+                                                        !(Maybe Text),
+                                                        _cdrsRetentionPeriod ::
+                                                        !(Maybe
+                                                            RetentionPeriod),
+                                                        _cdrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateDatastoreResponse' with the minimum fields required to make a request.
 --
@@ -131,14 +153,12 @@ data CreateDatastoreResponse = CreateDatastoreResponse'
 createDatastoreResponse
     :: Int -- ^ 'cdrsResponseStatus'
     -> CreateDatastoreResponse
-createDatastoreResponse pResponseStatus_ =
-  CreateDatastoreResponse'
-    { _cdrsDatastoreARN = Nothing
-    , _cdrsDatastoreName = Nothing
-    , _cdrsRetentionPeriod = Nothing
-    , _cdrsResponseStatus = pResponseStatus_
-    }
-
+createDatastoreResponse pResponseStatus_
+  = CreateDatastoreResponse'{_cdrsDatastoreARN =
+                               Nothing,
+                             _cdrsDatastoreName = Nothing,
+                             _cdrsRetentionPeriod = Nothing,
+                             _cdrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the data store.
 cdrsDatastoreARN :: Lens' CreateDatastoreResponse (Maybe Text)

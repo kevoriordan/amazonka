@@ -25,7 +25,7 @@
 --
 -- The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by AWS Region. That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different Regions, can have the same name.
 --
--- @CreateStream@ is an asynchronous operation. Upon receiving a @CreateStream@ request, Kinesis Data Streams immediately returns and sets the stream status to @CREATING@ . After the stream is created, Kinesis Data Streams sets the stream status to @ACTIVE@ . You should perform read and write operations only on an @ACTIVE@ stream.
+-- @CreateStream@ is an asynchronous operation. Upon receiving a @CreateStream@ request, Kinesis Data Streams immediately returns and sets the stream status to @CREATING@ . After the stream is created, Kinesis Data Streams sets the stream status to @ACTIVE@ . You should perform read and write operations only on an @ACTIVE@ stream. 
 --
 -- You receive a @LimitExceededException@ when making a @CreateStream@ request when you try to do one of the following:
 --
@@ -67,11 +67,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createStream' smart constructor.
-data CreateStream = CreateStream'
-  { _csStreamName :: !Text
-  , _csShardCount :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStream = CreateStream'{_csStreamName ::
+                                  !Text,
+                                  _csShardCount :: !Nat}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateStream' with the minimum fields required to make a request.
 --
@@ -84,10 +83,9 @@ createStream
     :: Text -- ^ 'csStreamName'
     -> Natural -- ^ 'csShardCount'
     -> CreateStream
-createStream pStreamName_ pShardCount_ =
-  CreateStream'
-    {_csStreamName = pStreamName_, _csShardCount = _Nat # pShardCount_}
-
+createStream pStreamName_ pShardCount_
+  = CreateStream'{_csStreamName = pStreamName_,
+                  _csShardCount = _Nat # pShardCount_}
 
 -- | A name to identify the stream. The stream name is scoped to the AWS account used by the application that creates the stream. It is also scoped by AWS Region. That is, two streams in two different AWS accounts can have the same name. Two streams in the same AWS account but in two different Regions can also have the same name.
 csStreamName :: Lens' CreateStream Text
@@ -129,16 +127,13 @@ instance ToQuery CreateStream where
         toQuery = const mempty
 
 -- | /See:/ 'createStreamResponse' smart constructor.
-data CreateStreamResponse =
-  CreateStreamResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStreamResponse = CreateStreamResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateStreamResponse' with the minimum fields required to make a request.
 --
 createStreamResponse
     :: CreateStreamResponse
 createStreamResponse = CreateStreamResponse'
-
 
 instance NFData CreateStreamResponse where

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates predictions for a group of observations. The observations to process exist in one or more data files referenced by a @DataSource@ . This operation creates a new @BatchPrediction@ , and uses an @MLModel@ and the data files referenced by the @DataSource@ as information sources.
+-- Generates predictions for a group of observations. The observations to process exist in one or more data files referenced by a @DataSource@ . This operation creates a new @BatchPrediction@ , and uses an @MLModel@ and the data files referenced by the @DataSource@ as information sources. 
 --
 --
--- @CreateBatchPrediction@ is an asynchronous operation. In response to @CreateBatchPrediction@ , Amazon Machine Learning (Amazon ML) immediately returns and sets the @BatchPrediction@ status to @PENDING@ . After the @BatchPrediction@ completes, Amazon ML sets the status to @COMPLETED@ .
+-- @CreateBatchPrediction@ is an asynchronous operation. In response to @CreateBatchPrediction@ , Amazon Machine Learning (Amazon ML) immediately returns and sets the @BatchPrediction@ status to @PENDING@ . After the @BatchPrediction@ completes, Amazon ML sets the status to @COMPLETED@ . 
 --
 -- You can poll for status updates by using the 'GetBatchPrediction' operation and checking the @Status@ parameter of the result. After the @COMPLETED@ status appears, the results are available in the location specified by the @OutputUri@ parameter.
 --
@@ -53,14 +53,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createBatchPrediction' smart constructor.
-data CreateBatchPrediction = CreateBatchPrediction'
-  { _cbpBatchPredictionName         :: !(Maybe Text)
-  , _cbpBatchPredictionId           :: !Text
-  , _cbpMLModelId                   :: !Text
-  , _cbpBatchPredictionDataSourceId :: !Text
-  , _cbpOutputURI                   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBatchPrediction = CreateBatchPrediction'{_cbpBatchPredictionName
+                                                    :: !(Maybe Text),
+                                                    _cbpBatchPredictionId ::
+                                                    !Text,
+                                                    _cbpMLModelId :: !Text,
+                                                    _cbpBatchPredictionDataSourceId
+                                                    :: !Text,
+                                                    _cbpOutputURI :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateBatchPrediction' with the minimum fields required to make a request.
 --
@@ -70,7 +72,7 @@ data CreateBatchPrediction = CreateBatchPrediction'
 --
 -- * 'cbpBatchPredictionId' - A user-supplied ID that uniquely identifies the @BatchPrediction@ .
 --
--- * 'cbpMLModelId' - The ID of the @MLModel@ that will generate predictions for the group of observations.
+-- * 'cbpMLModelId' - The ID of the @MLModel@ that will generate predictions for the group of observations. 
 --
 -- * 'cbpBatchPredictionDataSourceId' - The ID of the @DataSource@ that points to the group of observations to predict.
 --
@@ -81,15 +83,15 @@ createBatchPrediction
     -> Text -- ^ 'cbpBatchPredictionDataSourceId'
     -> Text -- ^ 'cbpOutputURI'
     -> CreateBatchPrediction
-createBatchPrediction pBatchPredictionId_ pMLModelId_ pBatchPredictionDataSourceId_ pOutputURI_ =
-  CreateBatchPrediction'
-    { _cbpBatchPredictionName = Nothing
-    , _cbpBatchPredictionId = pBatchPredictionId_
-    , _cbpMLModelId = pMLModelId_
-    , _cbpBatchPredictionDataSourceId = pBatchPredictionDataSourceId_
-    , _cbpOutputURI = pOutputURI_
-    }
-
+createBatchPrediction pBatchPredictionId_ pMLModelId_
+  pBatchPredictionDataSourceId_ pOutputURI_
+  = CreateBatchPrediction'{_cbpBatchPredictionName =
+                             Nothing,
+                           _cbpBatchPredictionId = pBatchPredictionId_,
+                           _cbpMLModelId = pMLModelId_,
+                           _cbpBatchPredictionDataSourceId =
+                             pBatchPredictionDataSourceId_,
+                           _cbpOutputURI = pOutputURI_}
 
 -- | A user-supplied name or description of the @BatchPrediction@ . @BatchPredictionName@ can only use the UTF-8 character set.
 cbpBatchPredictionName :: Lens' CreateBatchPrediction (Maybe Text)
@@ -99,7 +101,7 @@ cbpBatchPredictionName = lens _cbpBatchPredictionName (\ s a -> s{_cbpBatchPredi
 cbpBatchPredictionId :: Lens' CreateBatchPrediction Text
 cbpBatchPredictionId = lens _cbpBatchPredictionId (\ s a -> s{_cbpBatchPredictionId = a})
 
--- | The ID of the @MLModel@ that will generate predictions for the group of observations.
+-- | The ID of the @MLModel@ that will generate predictions for the group of observations. 
 cbpMLModelId :: Lens' CreateBatchPrediction Text
 cbpMLModelId = lens _cbpMLModelId (\ s a -> s{_cbpMLModelId = a})
 
@@ -157,15 +159,18 @@ instance ToQuery CreateBatchPrediction where
 -- | Represents the output of a @CreateBatchPrediction@ operation, and is an acknowledgement that Amazon ML received the request.
 --
 --
--- The @CreateBatchPrediction@ operation is asynchronous. You can poll for status updates by using the @>GetBatchPrediction@ operation and checking the @Status@ parameter of the result.
+-- The @CreateBatchPrediction@ operation is asynchronous. You can poll for status updates by using the @>GetBatchPrediction@ operation and checking the @Status@ parameter of the result. 
 --
 --
 -- /See:/ 'createBatchPredictionResponse' smart constructor.
-data CreateBatchPredictionResponse = CreateBatchPredictionResponse'
-  { _cbprsBatchPredictionId :: !(Maybe Text)
-  , _cbprsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBatchPredictionResponse = CreateBatchPredictionResponse'{_cbprsBatchPredictionId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _cbprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateBatchPredictionResponse' with the minimum fields required to make a request.
 --
@@ -177,10 +182,10 @@ data CreateBatchPredictionResponse = CreateBatchPredictionResponse'
 createBatchPredictionResponse
     :: Int -- ^ 'cbprsResponseStatus'
     -> CreateBatchPredictionResponse
-createBatchPredictionResponse pResponseStatus_ =
-  CreateBatchPredictionResponse'
-    {_cbprsBatchPredictionId = Nothing, _cbprsResponseStatus = pResponseStatus_}
-
+createBatchPredictionResponse pResponseStatus_
+  = CreateBatchPredictionResponse'{_cbprsBatchPredictionId
+                                     = Nothing,
+                                   _cbprsResponseStatus = pResponseStatus_}
 
 -- | A user-supplied ID that uniquely identifies the @BatchPrediction@ . This value is identical to the value of the @BatchPredictionId@ in the request.
 cbprsBatchPredictionId :: Lens' CreateBatchPredictionResponse (Maybe Text)

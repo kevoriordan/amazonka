@@ -27,7 +27,7 @@
 --
 -- Rebooting a cluster is currently supported on Memcached and Redis (cluster mode disabled) clusters. Rebooting is not supported on Redis (cluster mode enabled) clusters.
 --
--- If you make changes to parameters that require a Redis (cluster mode enabled) cluster reboot for the changes to be applied, see <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.htm Rebooting a Cluster> for an alternate process.
+-- If you make changes to parameters that require a Redis (cluster mode enabled) cluster reboot for the changes to be applied, see <http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html Rebooting a Cluster> for an alternate process.
 --
 module Network.AWS.ElastiCache.RebootCacheCluster
     (
@@ -58,11 +58,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'rebootCacheCluster' smart constructor.
-data RebootCacheCluster = RebootCacheCluster'
-  { _rccCacheClusterId       :: !Text
-  , _rccCacheNodeIdsToReboot :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootCacheCluster = RebootCacheCluster'{_rccCacheClusterId
+                                              :: !Text,
+                                              _rccCacheNodeIdsToReboot ::
+                                              ![Text]}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RebootCacheCluster' with the minimum fields required to make a request.
 --
@@ -74,10 +74,10 @@ data RebootCacheCluster = RebootCacheCluster'
 rebootCacheCluster
     :: Text -- ^ 'rccCacheClusterId'
     -> RebootCacheCluster
-rebootCacheCluster pCacheClusterId_ =
-  RebootCacheCluster'
-    {_rccCacheClusterId = pCacheClusterId_, _rccCacheNodeIdsToReboot = mempty}
-
+rebootCacheCluster pCacheClusterId_
+  = RebootCacheCluster'{_rccCacheClusterId =
+                          pCacheClusterId_,
+                        _rccCacheNodeIdsToReboot = mempty}
 
 -- | The cluster identifier. This parameter is stored as a lowercase string.
 rccCacheClusterId :: Lens' RebootCacheCluster Text
@@ -117,11 +117,14 @@ instance ToQuery RebootCacheCluster where
                  toQueryList "CacheNodeId" _rccCacheNodeIdsToReboot]
 
 -- | /See:/ 'rebootCacheClusterResponse' smart constructor.
-data RebootCacheClusterResponse = RebootCacheClusterResponse'
-  { _rccrsCacheCluster   :: !(Maybe CacheCluster)
-  , _rccrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootCacheClusterResponse = RebootCacheClusterResponse'{_rccrsCacheCluster
+                                                              ::
+                                                              !(Maybe
+                                                                  CacheCluster),
+                                                              _rccrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'RebootCacheClusterResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +136,10 @@ data RebootCacheClusterResponse = RebootCacheClusterResponse'
 rebootCacheClusterResponse
     :: Int -- ^ 'rccrsResponseStatus'
     -> RebootCacheClusterResponse
-rebootCacheClusterResponse pResponseStatus_ =
-  RebootCacheClusterResponse'
-    {_rccrsCacheCluster = Nothing, _rccrsResponseStatus = pResponseStatus_}
-
+rebootCacheClusterResponse pResponseStatus_
+  = RebootCacheClusterResponse'{_rccrsCacheCluster =
+                                  Nothing,
+                                _rccrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 rccrsCacheCluster :: Lens' RebootCacheClusterResponse (Maybe CacheCluster)

@@ -25,7 +25,7 @@
 --
 -- Note that it can take up to 5 minutes for this operation to take effect.
 --
--- If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an @InvalidParameterException@ error.
+-- If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an @InvalidParameterException@ error. 
 --
 module Network.AWS.CloudWatchLogs.AssociateKMSKey
     (
@@ -49,11 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateKMSKey' smart constructor.
-data AssociateKMSKey = AssociateKMSKey'
-  { _akkLogGroupName :: !Text
-  , _akkKmsKeyId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateKMSKey = AssociateKMSKey'{_akkLogGroupName
+                                        :: !Text,
+                                        _akkKmsKeyId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssociateKMSKey' with the minimum fields required to make a request.
 --
@@ -61,21 +60,20 @@ data AssociateKMSKey = AssociateKMSKey'
 --
 -- * 'akkLogGroupName' - The name of the log group.
 --
--- * 'akkKmsKeyId' - The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms Amazon Resource Names - AWS Key Management Service (AWS KMS)> .
+-- * 'akkKmsKeyId' - The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. This must be a symmetric CMK. For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms Amazon Resource Names - AWS Key Management Service (AWS KMS)> and <https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html Using Symmetric and Asymmetric Keys> .
 associateKMSKey
     :: Text -- ^ 'akkLogGroupName'
     -> Text -- ^ 'akkKmsKeyId'
     -> AssociateKMSKey
-associateKMSKey pLogGroupName_ pKmsKeyId_ =
-  AssociateKMSKey'
-    {_akkLogGroupName = pLogGroupName_, _akkKmsKeyId = pKmsKeyId_}
-
+associateKMSKey pLogGroupName_ pKmsKeyId_
+  = AssociateKMSKey'{_akkLogGroupName = pLogGroupName_,
+                     _akkKmsKeyId = pKmsKeyId_}
 
 -- | The name of the log group.
 akkLogGroupName :: Lens' AssociateKMSKey Text
 akkLogGroupName = lens _akkLogGroupName (\ s a -> s{_akkLogGroupName = a})
 
--- | The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms Amazon Resource Names - AWS Key Management Service (AWS KMS)> .
+-- | The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. This must be a symmetric CMK. For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms Amazon Resource Names - AWS Key Management Service (AWS KMS)> and <https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html Using Symmetric and Asymmetric Keys> .
 akkKmsKeyId :: Lens' AssociateKMSKey Text
 akkKmsKeyId = lens _akkKmsKeyId (\ s a -> s{_akkKmsKeyId = a})
 
@@ -111,16 +109,14 @@ instance ToQuery AssociateKMSKey where
         toQuery = const mempty
 
 -- | /See:/ 'associateKMSKeyResponse' smart constructor.
-data AssociateKMSKeyResponse =
-  AssociateKMSKeyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateKMSKeyResponse = AssociateKMSKeyResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AssociateKMSKeyResponse' with the minimum fields required to make a request.
 --
 associateKMSKeyResponse
     :: AssociateKMSKeyResponse
 associateKMSKeyResponse = AssociateKMSKeyResponse'
-
 
 instance NFData AssociateKMSKeyResponse where

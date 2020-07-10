@@ -48,31 +48,32 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getResourceDefinitionVersion' smart constructor.
-data GetResourceDefinitionVersion = GetResourceDefinitionVersion'
-  { _grdvResourceDefinitionVersionId :: !Text
-  , _grdvResourceDefinitionId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetResourceDefinitionVersion = GetResourceDefinitionVersion'{_grdvResourceDefinitionVersionId
+                                                                  :: !Text,
+                                                                  _grdvResourceDefinitionId
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetResourceDefinitionVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grdvResourceDefinitionVersionId' - The ID of the resource definition version.
+-- * 'grdvResourceDefinitionVersionId' - The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
 --
 -- * 'grdvResourceDefinitionId' - The ID of the resource definition.
 getResourceDefinitionVersion
     :: Text -- ^ 'grdvResourceDefinitionVersionId'
     -> Text -- ^ 'grdvResourceDefinitionId'
     -> GetResourceDefinitionVersion
-getResourceDefinitionVersion pResourceDefinitionVersionId_ pResourceDefinitionId_ =
-  GetResourceDefinitionVersion'
-    { _grdvResourceDefinitionVersionId = pResourceDefinitionVersionId_
-    , _grdvResourceDefinitionId = pResourceDefinitionId_
-    }
+getResourceDefinitionVersion
+  pResourceDefinitionVersionId_ pResourceDefinitionId_
+  = GetResourceDefinitionVersion'{_grdvResourceDefinitionVersionId
+                                    = pResourceDefinitionVersionId_,
+                                  _grdvResourceDefinitionId =
+                                    pResourceDefinitionId_}
 
-
--- | The ID of the resource definition version.
+-- | The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
 grdvResourceDefinitionVersionId :: Lens' GetResourceDefinitionVersion Text
 grdvResourceDefinitionVersionId = lens _grdvResourceDefinitionVersionId (\ s a -> s{_grdvResourceDefinitionVersionId = a})
 
@@ -117,15 +118,31 @@ instance ToQuery GetResourceDefinitionVersion where
         toQuery = const mempty
 
 -- | /See:/ 'getResourceDefinitionVersionResponse' smart constructor.
-data GetResourceDefinitionVersionResponse = GetResourceDefinitionVersionResponse'
-  { _grdvrsDefinition        :: !(Maybe ResourceDefinitionVersion)
-  , _grdvrsARN               :: !(Maybe Text)
-  , _grdvrsCreationTimestamp :: !(Maybe Text)
-  , _grdvrsVersion           :: !(Maybe Text)
-  , _grdvrsId                :: !(Maybe Text)
-  , _grdvrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetResourceDefinitionVersionResponse = GetResourceDefinitionVersionResponse'{_grdvrsDefinition
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      ResourceDefinitionVersion),
+                                                                                  _grdvrsARN
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _grdvrsCreationTimestamp
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _grdvrsVersion
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _grdvrsId
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _grdvrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'GetResourceDefinitionVersionResponse' with the minimum fields required to make a request.
 --
@@ -145,16 +162,15 @@ data GetResourceDefinitionVersionResponse = GetResourceDefinitionVersionResponse
 getResourceDefinitionVersionResponse
     :: Int -- ^ 'grdvrsResponseStatus'
     -> GetResourceDefinitionVersionResponse
-getResourceDefinitionVersionResponse pResponseStatus_ =
-  GetResourceDefinitionVersionResponse'
-    { _grdvrsDefinition = Nothing
-    , _grdvrsARN = Nothing
-    , _grdvrsCreationTimestamp = Nothing
-    , _grdvrsVersion = Nothing
-    , _grdvrsId = Nothing
-    , _grdvrsResponseStatus = pResponseStatus_
-    }
-
+getResourceDefinitionVersionResponse pResponseStatus_
+  = GetResourceDefinitionVersionResponse'{_grdvrsDefinition
+                                            = Nothing,
+                                          _grdvrsARN = Nothing,
+                                          _grdvrsCreationTimestamp = Nothing,
+                                          _grdvrsVersion = Nothing,
+                                          _grdvrsId = Nothing,
+                                          _grdvrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Information about the definition.
 grdvrsDefinition :: Lens' GetResourceDefinitionVersionResponse (Maybe ResourceDefinitionVersion)

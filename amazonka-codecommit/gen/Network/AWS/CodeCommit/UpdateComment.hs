@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateComment' smart constructor.
-data UpdateComment = UpdateComment'
-  { _ucCommentId :: !Text
-  , _ucContent   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateComment = UpdateComment'{_ucCommentId ::
+                                    !Text,
+                                    _ucContent :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateComment' with the minimum fields required to make a request.
 --
@@ -58,20 +57,20 @@ data UpdateComment = UpdateComment'
 --
 -- * 'ucCommentId' - The system-generated ID of the comment you want to update. To get this ID, use 'GetCommentsForComparedCommit' or 'GetCommentsForPullRequest' .
 --
--- * 'ucContent' - The updated content with which you want to replace the existing content of the comment.
+-- * 'ucContent' - The updated content to replace the existing content of the comment.
 updateComment
     :: Text -- ^ 'ucCommentId'
     -> Text -- ^ 'ucContent'
     -> UpdateComment
-updateComment pCommentId_ pContent_ =
-  UpdateComment' {_ucCommentId = pCommentId_, _ucContent = pContent_}
-
+updateComment pCommentId_ pContent_
+  = UpdateComment'{_ucCommentId = pCommentId_,
+                   _ucContent = pContent_}
 
 -- | The system-generated ID of the comment you want to update. To get this ID, use 'GetCommentsForComparedCommit' or 'GetCommentsForPullRequest' .
 ucCommentId :: Lens' UpdateComment Text
 ucCommentId = lens _ucCommentId (\ s a -> s{_ucCommentId = a})
 
--- | The updated content with which you want to replace the existing content of the comment.
+-- | The updated content to replace the existing content of the comment.
 ucContent :: Lens' UpdateComment Text
 ucContent = lens _ucContent (\ s a -> s{_ucContent = a})
 
@@ -111,11 +110,11 @@ instance ToQuery UpdateComment where
         toQuery = const mempty
 
 -- | /See:/ 'updateCommentResponse' smart constructor.
-data UpdateCommentResponse = UpdateCommentResponse'
-  { _ucrsComment        :: !(Maybe Comment)
-  , _ucrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCommentResponse = UpdateCommentResponse'{_ucrsComment
+                                                    :: !(Maybe Comment),
+                                                    _ucrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateCommentResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +126,9 @@ data UpdateCommentResponse = UpdateCommentResponse'
 updateCommentResponse
     :: Int -- ^ 'ucrsResponseStatus'
     -> UpdateCommentResponse
-updateCommentResponse pResponseStatus_ =
-  UpdateCommentResponse'
-    {_ucrsComment = Nothing, _ucrsResponseStatus = pResponseStatus_}
-
+updateCommentResponse pResponseStatus_
+  = UpdateCommentResponse'{_ucrsComment = Nothing,
+                           _ucrsResponseStatus = pResponseStatus_}
 
 -- | Information about the updated comment.
 ucrsComment :: Lens' UpdateCommentResponse (Maybe Comment)

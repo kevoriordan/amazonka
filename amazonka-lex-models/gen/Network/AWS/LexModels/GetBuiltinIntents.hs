@@ -54,13 +54,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBuiltinIntents' smart constructor.
-data GetBuiltinIntents = GetBuiltinIntents'
-  { _gbiLocale            :: !(Maybe Locale)
-  , _gbiNextToken         :: !(Maybe Text)
-  , _gbiSignatureContains :: !(Maybe Text)
-  , _gbiMaxResults        :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBuiltinIntents = GetBuiltinIntents'{_gbiLocale
+                                            :: !(Maybe Locale),
+                                            _gbiNextToken :: !(Maybe Text),
+                                            _gbiSignatureContains ::
+                                            !(Maybe Text),
+                                            _gbiMaxResults :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBuiltinIntents' with the minimum fields required to make a request.
 --
@@ -75,14 +75,11 @@ data GetBuiltinIntents = GetBuiltinIntents'
 -- * 'gbiMaxResults' - The maximum number of intents to return in the response. The default is 10.
 getBuiltinIntents
     :: GetBuiltinIntents
-getBuiltinIntents =
-  GetBuiltinIntents'
-    { _gbiLocale = Nothing
-    , _gbiNextToken = Nothing
-    , _gbiSignatureContains = Nothing
-    , _gbiMaxResults = Nothing
-    }
-
+getBuiltinIntents
+  = GetBuiltinIntents'{_gbiLocale = Nothing,
+                       _gbiNextToken = Nothing,
+                       _gbiSignatureContains = Nothing,
+                       _gbiMaxResults = Nothing}
 
 -- | A list of locales that the intent supports.
 gbiLocale :: Lens' GetBuiltinIntents (Maybe Locale)
@@ -140,12 +137,16 @@ instance ToQuery GetBuiltinIntents where
                "maxResults" =: _gbiMaxResults]
 
 -- | /See:/ 'getBuiltinIntentsResponse' smart constructor.
-data GetBuiltinIntentsResponse = GetBuiltinIntentsResponse'
-  { _grsIntents        :: !(Maybe [BuiltinIntentMetadata])
-  , _grsNextToken      :: !(Maybe Text)
-  , _grsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBuiltinIntentsResponse = GetBuiltinIntentsResponse'{_grsIntents
+                                                            ::
+                                                            !(Maybe
+                                                                [BuiltinIntentMetadata]),
+                                                            _grsNextToken ::
+                                                            !(Maybe Text),
+                                                            _grsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetBuiltinIntentsResponse' with the minimum fields required to make a request.
 --
@@ -159,13 +160,10 @@ data GetBuiltinIntentsResponse = GetBuiltinIntentsResponse'
 getBuiltinIntentsResponse
     :: Int -- ^ 'grsResponseStatus'
     -> GetBuiltinIntentsResponse
-getBuiltinIntentsResponse pResponseStatus_ =
-  GetBuiltinIntentsResponse'
-    { _grsIntents = Nothing
-    , _grsNextToken = Nothing
-    , _grsResponseStatus = pResponseStatus_
-    }
-
+getBuiltinIntentsResponse pResponseStatus_
+  = GetBuiltinIntentsResponse'{_grsIntents = Nothing,
+                               _grsNextToken = Nothing,
+                               _grsResponseStatus = pResponseStatus_}
 
 -- | An array of @builtinIntentMetadata@ objects, one for each intent in the response.
 grsIntents :: Lens' GetBuiltinIntentsResponse [BuiltinIntentMetadata]

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables group metrics for the specified Auto Scaling group. For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html Monitoring Your Auto Scaling Groups and Instances> in the /Auto Scaling User Guide/ .
+-- Enables group metrics for the specified Auto Scaling group. For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html Monitoring Your Auto Scaling Groups and Instances> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 --
 module Network.AWS.AutoScaling.EnableMetricsCollection
@@ -44,18 +44,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'enableMetricsCollection' smart constructor.
-data EnableMetricsCollection = EnableMetricsCollection'
-  { _emcMetrics              :: !(Maybe [Text])
-  , _emcAutoScalingGroupName :: !Text
-  , _emcGranularity          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableMetricsCollection = EnableMetricsCollection'{_emcMetrics
+                                                        :: !(Maybe [Text]),
+                                                        _emcAutoScalingGroupName
+                                                        :: !Text,
+                                                        _emcGranularity ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'EnableMetricsCollection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'emcMetrics' - One or more of the following metrics. If you omit this parameter, all metrics are enabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@
+-- * 'emcMetrics' - One or more of the following metrics. If you omit this parameter, all metrics are enabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@ 
 --
 -- * 'emcAutoScalingGroupName' - The name of the Auto Scaling group.
 --
@@ -64,15 +66,13 @@ enableMetricsCollection
     :: Text -- ^ 'emcAutoScalingGroupName'
     -> Text -- ^ 'emcGranularity'
     -> EnableMetricsCollection
-enableMetricsCollection pAutoScalingGroupName_ pGranularity_ =
-  EnableMetricsCollection'
-    { _emcMetrics = Nothing
-    , _emcAutoScalingGroupName = pAutoScalingGroupName_
-    , _emcGranularity = pGranularity_
-    }
+enableMetricsCollection pAutoScalingGroupName_
+  pGranularity_
+  = EnableMetricsCollection'{_emcMetrics = Nothing,
+                             _emcAutoScalingGroupName = pAutoScalingGroupName_,
+                             _emcGranularity = pGranularity_}
 
-
--- | One or more of the following metrics. If you omit this parameter, all metrics are enabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@
+-- | One or more of the following metrics. If you omit this parameter, all metrics are enabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@ 
 emcMetrics :: Lens' EnableMetricsCollection [Text]
 emcMetrics = lens _emcMetrics (\ s a -> s{_emcMetrics = a}) . _Default . _Coerce
 
@@ -113,16 +113,15 @@ instance ToQuery EnableMetricsCollection where
                "Granularity" =: _emcGranularity]
 
 -- | /See:/ 'enableMetricsCollectionResponse' smart constructor.
-data EnableMetricsCollectionResponse =
-  EnableMetricsCollectionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableMetricsCollectionResponse = EnableMetricsCollectionResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'EnableMetricsCollectionResponse' with the minimum fields required to make a request.
 --
 enableMetricsCollectionResponse
     :: EnableMetricsCollectionResponse
-enableMetricsCollectionResponse = EnableMetricsCollectionResponse'
-
+enableMetricsCollectionResponse
+  = EnableMetricsCollectionResponse'
 
 instance NFData EnableMetricsCollectionResponse where

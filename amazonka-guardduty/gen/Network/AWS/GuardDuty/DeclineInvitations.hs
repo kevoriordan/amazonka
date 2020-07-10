@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Declines invitations sent to the current member account by AWS account specified by their account IDs.
+-- Declines invitations sent to the current member account by AWS accounts specified by their account IDs.
+--
+--
 module Network.AWS.GuardDuty.DeclineInvitations
     (
     -- * Creating a Request
@@ -31,8 +33,8 @@ module Network.AWS.GuardDuty.DeclineInvitations
     , declineInvitationsResponse
     , DeclineInvitationsResponse
     -- * Response Lenses
-    , disrsUnprocessedAccounts
     , disrsResponseStatus
+    , disrsUnprocessedAccounts
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -42,13 +44,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | DeclineInvitations request body.
---
--- /See:/ 'declineInvitations' smart constructor.
-newtype DeclineInvitations = DeclineInvitations'
-  { _dAccountIds :: Maybe [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'declineInvitations' smart constructor.
+newtype DeclineInvitations = DeclineInvitations'{_dAccountIds
+                                                 :: List1 Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeclineInvitations' with the minimum fields required to make a request.
 --
@@ -56,13 +56,15 @@ newtype DeclineInvitations = DeclineInvitations'
 --
 -- * 'dAccountIds' - A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
 declineInvitations
-    :: DeclineInvitations
-declineInvitations = DeclineInvitations' {_dAccountIds = Nothing}
-
+    :: NonEmpty Text -- ^ 'dAccountIds'
+    -> DeclineInvitations
+declineInvitations pAccountIds_
+  = DeclineInvitations'{_dAccountIds =
+                          _List1 # pAccountIds_}
 
 -- | A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
-dAccountIds :: Lens' DeclineInvitations [Text]
-dAccountIds = lens _dAccountIds (\ s a -> s{_dAccountIds = a}) . _Default . _Coerce
+dAccountIds :: Lens' DeclineInvitations (NonEmpty Text)
+dAccountIds = lens _dAccountIds (\ s a -> s{_dAccountIds = a}) . _List1
 
 instance AWSRequest DeclineInvitations where
         type Rs DeclineInvitations =
@@ -72,8 +74,8 @@ instance AWSRequest DeclineInvitations where
           = receiveJSON
               (\ s h x ->
                  DeclineInvitationsResponse' <$>
-                   (x .?> "unprocessedAccounts" .!@ mempty) <*>
-                     (pure (fromEnum s)))
+                   (pure (fromEnum s)) <*>
+                     (x .?> "unprocessedAccounts" .!@ mempty))
 
 instance Hashable DeclineInvitations where
 
@@ -89,7 +91,7 @@ instance ToHeaders DeclineInvitations where
 instance ToJSON DeclineInvitations where
         toJSON DeclineInvitations'{..}
           = object
-              (catMaybes [("accountIds" .=) <$> _dAccountIds])
+              (catMaybes [Just ("accountIds" .= _dAccountIds)])
 
 instance ToPath DeclineInvitations where
         toPath = const "/invitation/decline"
@@ -98,35 +100,35 @@ instance ToQuery DeclineInvitations where
         toQuery = const mempty
 
 -- | /See:/ 'declineInvitationsResponse' smart constructor.
-data DeclineInvitationsResponse = DeclineInvitationsResponse'
-  { _disrsUnprocessedAccounts :: !(Maybe [UnprocessedAccount])
-  , _disrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeclineInvitationsResponse = DeclineInvitationsResponse'{_disrsResponseStatus
+                                                              :: !Int,
+                                                              _disrsUnprocessedAccounts
+                                                              ::
+                                                              ![UnprocessedAccount]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeclineInvitationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'disrsUnprocessedAccounts' - A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
---
 -- * 'disrsResponseStatus' - -- | The response status code.
+--
+-- * 'disrsUnprocessedAccounts' - A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
 declineInvitationsResponse
     :: Int -- ^ 'disrsResponseStatus'
     -> DeclineInvitationsResponse
-declineInvitationsResponse pResponseStatus_ =
-  DeclineInvitationsResponse'
-    { _disrsUnprocessedAccounts = Nothing
-    , _disrsResponseStatus = pResponseStatus_
-    }
-
-
--- | A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
-disrsUnprocessedAccounts :: Lens' DeclineInvitationsResponse [UnprocessedAccount]
-disrsUnprocessedAccounts = lens _disrsUnprocessedAccounts (\ s a -> s{_disrsUnprocessedAccounts = a}) . _Default . _Coerce
+declineInvitationsResponse pResponseStatus_
+  = DeclineInvitationsResponse'{_disrsResponseStatus =
+                                  pResponseStatus_,
+                                _disrsUnprocessedAccounts = mempty}
 
 -- | -- | The response status code.
 disrsResponseStatus :: Lens' DeclineInvitationsResponse Int
 disrsResponseStatus = lens _disrsResponseStatus (\ s a -> s{_disrsResponseStatus = a})
+
+-- | A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
+disrsUnprocessedAccounts :: Lens' DeclineInvitationsResponse [UnprocessedAccount]
+disrsUnprocessedAccounts = lens _disrsUnprocessedAccounts (\ s a -> s{_disrsUnprocessedAccounts = a}) . _Coerce
 
 instance NFData DeclineInvitationsResponse where

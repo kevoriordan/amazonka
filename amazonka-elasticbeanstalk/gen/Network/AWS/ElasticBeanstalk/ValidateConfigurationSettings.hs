@@ -54,13 +54,21 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'validateConfigurationSettings' smart constructor.
-data ValidateConfigurationSettings = ValidateConfigurationSettings'
-  { _vcsTemplateName    :: !(Maybe Text)
-  , _vcsEnvironmentName :: !(Maybe Text)
-  , _vcsApplicationName :: !Text
-  , _vcsOptionSettings  :: ![ConfigurationOptionSetting]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ValidateConfigurationSettings = ValidateConfigurationSettings'{_vcsTemplateName
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _vcsEnvironmentName
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _vcsApplicationName
+                                                                    :: !Text,
+                                                                    _vcsOptionSettings
+                                                                    ::
+                                                                    ![ConfigurationOptionSetting]}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ValidateConfigurationSettings' with the minimum fields required to make a request.
 --
@@ -76,14 +84,12 @@ data ValidateConfigurationSettings = ValidateConfigurationSettings'
 validateConfigurationSettings
     :: Text -- ^ 'vcsApplicationName'
     -> ValidateConfigurationSettings
-validateConfigurationSettings pApplicationName_ =
-  ValidateConfigurationSettings'
-    { _vcsTemplateName = Nothing
-    , _vcsEnvironmentName = Nothing
-    , _vcsApplicationName = pApplicationName_
-    , _vcsOptionSettings = mempty
-    }
-
+validateConfigurationSettings pApplicationName_
+  = ValidateConfigurationSettings'{_vcsTemplateName =
+                                     Nothing,
+                                   _vcsEnvironmentName = Nothing,
+                                   _vcsApplicationName = pApplicationName_,
+                                   _vcsOptionSettings = mempty}
 
 -- | The name of the configuration template to validate the settings against. Condition: You cannot specify both this and an environment name.
 vcsTemplateName :: Lens' ValidateConfigurationSettings (Maybe Text)
@@ -143,28 +149,34 @@ instance ToQuery ValidateConfigurationSettings where
 --
 --
 -- /See:/ 'validateConfigurationSettingsResponse' smart constructor.
-data ValidateConfigurationSettingsResponse = ValidateConfigurationSettingsResponse'
-  { _vcsrsMessages       :: !(Maybe [ValidationMessage])
-  , _vcsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ValidateConfigurationSettingsResponse = ValidateConfigurationSettingsResponse'{_vcsrsMessages
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [ValidationMessage]),
+                                                                                    _vcsrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'ValidateConfigurationSettingsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vcsrsMessages' - A list of 'ValidationMessage' .
+-- * 'vcsrsMessages' - A list of 'ValidationMessage' . 
 --
 -- * 'vcsrsResponseStatus' - -- | The response status code.
 validateConfigurationSettingsResponse
     :: Int -- ^ 'vcsrsResponseStatus'
     -> ValidateConfigurationSettingsResponse
-validateConfigurationSettingsResponse pResponseStatus_ =
-  ValidateConfigurationSettingsResponse'
-    {_vcsrsMessages = Nothing, _vcsrsResponseStatus = pResponseStatus_}
+validateConfigurationSettingsResponse
+  pResponseStatus_
+  = ValidateConfigurationSettingsResponse'{_vcsrsMessages
+                                             = Nothing,
+                                           _vcsrsResponseStatus =
+                                             pResponseStatus_}
 
-
--- | A list of 'ValidationMessage' .
+-- | A list of 'ValidationMessage' . 
 vcsrsMessages :: Lens' ValidateConfigurationSettingsResponse [ValidationMessage]
 vcsrsMessages = lens _vcsrsMessages (\ s a -> s{_vcsrsMessages = a}) . _Default . _Coerce
 

@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates one or more Amazon Lightsail virtual private servers, or /instances/ .
+-- Creates one or more Amazon Lightsail instances.
 --
+--
+-- The @create instances@ operation supports tag-based access control via request tags. For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
 --
 module Network.AWS.Lightsail.CreateInstances
     (
@@ -28,8 +30,10 @@ module Network.AWS.Lightsail.CreateInstances
     , CreateInstances
     -- * Request Lenses
     , ciCustomImageName
+    , ciAddOns
     , ciUserData
     , ciKeyPairName
+    , ciTags
     , ciInstanceNames
     , ciAvailabilityZone
     , ciBlueprintId
@@ -51,16 +55,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createInstances' smart constructor.
-data CreateInstances = CreateInstances'
-  { _ciCustomImageName  :: !(Maybe Text)
-  , _ciUserData         :: !(Maybe Text)
-  , _ciKeyPairName      :: !(Maybe Text)
-  , _ciInstanceNames    :: ![Text]
-  , _ciAvailabilityZone :: !Text
-  , _ciBlueprintId      :: !Text
-  , _ciBundleId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateInstances = CreateInstances'{_ciCustomImageName
+                                        :: !(Maybe Text),
+                                        _ciAddOns :: !(Maybe [AddOnRequest]),
+                                        _ciUserData :: !(Maybe Text),
+                                        _ciKeyPairName :: !(Maybe Text),
+                                        _ciTags :: !(Maybe [Tag]),
+                                        _ciInstanceNames :: ![Text],
+                                        _ciAvailabilityZone :: !Text,
+                                        _ciBlueprintId :: !Text,
+                                        _ciBundleId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateInstances' with the minimum fields required to make a request.
 --
@@ -68,15 +73,19 @@ data CreateInstances = CreateInstances'
 --
 -- * 'ciCustomImageName' - (Deprecated) The name for your custom image.
 --
+-- * 'ciAddOns' - An array of objects representing the add-ons to enable for the new instance.
+--
 -- * 'ciUserData' - A launch script you can create that configures a server with additional user data. For example, you might want to run @apt-get -y update@ .
 --
 -- * 'ciKeyPairName' - The name of your key pair.
 --
--- * 'ciInstanceNames' - The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: @["MyFirstInstance","MySecondInstance"]@
+-- * 'ciTags' - The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the @tag resource@ operation.
 --
--- * 'ciAvailabilityZone' - The Availability Zone in which to create your instance. Use the following format: @us-east-2a@ (case sensitive). You can get a list of availability zones by using the <http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html get regions> operation. Be sure to add the @include availability zones@ parameter to your request.
+-- * 'ciInstanceNames' - The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: @["MyFirstInstance","MySecondInstance"]@ 
 --
--- * 'ciBlueprintId' - The ID for a virtual private server image (e.g., @app_wordpress_4_4@ or @app_lamp_7_0@ ). Use the get blueprints operation to return a list of available images (or /blueprints/ ).
+-- * 'ciAvailabilityZone' - The Availability Zone in which to create your instance. Use the following format: @us-east-2a@ (case sensitive). You can get a list of Availability Zones by using the <http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html get regions> operation. Be sure to add the @include Availability Zones@ parameter to your request.
+--
+-- * 'ciBlueprintId' - The ID for a virtual private server image (e.g., @app_wordpress_4_4@ or @app_lamp_7_0@ ). Use the @get blueprints@ operation to return a list of available images (or /blueprints/ ).
 --
 -- * 'ciBundleId' - The bundle of specification information for your virtual private server (or /instance/ ), including the pricing plan (e.g., @micro_1_0@ ).
 createInstances
@@ -84,21 +93,23 @@ createInstances
     -> Text -- ^ 'ciBlueprintId'
     -> Text -- ^ 'ciBundleId'
     -> CreateInstances
-createInstances pAvailabilityZone_ pBlueprintId_ pBundleId_ =
-  CreateInstances'
-    { _ciCustomImageName = Nothing
-    , _ciUserData = Nothing
-    , _ciKeyPairName = Nothing
-    , _ciInstanceNames = mempty
-    , _ciAvailabilityZone = pAvailabilityZone_
-    , _ciBlueprintId = pBlueprintId_
-    , _ciBundleId = pBundleId_
-    }
-
+createInstances pAvailabilityZone_ pBlueprintId_
+  pBundleId_
+  = CreateInstances'{_ciCustomImageName = Nothing,
+                     _ciAddOns = Nothing, _ciUserData = Nothing,
+                     _ciKeyPairName = Nothing, _ciTags = Nothing,
+                     _ciInstanceNames = mempty,
+                     _ciAvailabilityZone = pAvailabilityZone_,
+                     _ciBlueprintId = pBlueprintId_,
+                     _ciBundleId = pBundleId_}
 
 -- | (Deprecated) The name for your custom image.
 ciCustomImageName :: Lens' CreateInstances (Maybe Text)
 ciCustomImageName = lens _ciCustomImageName (\ s a -> s{_ciCustomImageName = a})
+
+-- | An array of objects representing the add-ons to enable for the new instance.
+ciAddOns :: Lens' CreateInstances [AddOnRequest]
+ciAddOns = lens _ciAddOns (\ s a -> s{_ciAddOns = a}) . _Default . _Coerce
 
 -- | A launch script you can create that configures a server with additional user data. For example, you might want to run @apt-get -y update@ .
 ciUserData :: Lens' CreateInstances (Maybe Text)
@@ -108,15 +119,19 @@ ciUserData = lens _ciUserData (\ s a -> s{_ciUserData = a})
 ciKeyPairName :: Lens' CreateInstances (Maybe Text)
 ciKeyPairName = lens _ciKeyPairName (\ s a -> s{_ciKeyPairName = a})
 
--- | The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: @["MyFirstInstance","MySecondInstance"]@
+-- | The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the @tag resource@ operation.
+ciTags :: Lens' CreateInstances [Tag]
+ciTags = lens _ciTags (\ s a -> s{_ciTags = a}) . _Default . _Coerce
+
+-- | The names to use for your new Lightsail instances. Separate multiple values using quotation marks and commas, for example: @["MyFirstInstance","MySecondInstance"]@ 
 ciInstanceNames :: Lens' CreateInstances [Text]
 ciInstanceNames = lens _ciInstanceNames (\ s a -> s{_ciInstanceNames = a}) . _Coerce
 
--- | The Availability Zone in which to create your instance. Use the following format: @us-east-2a@ (case sensitive). You can get a list of availability zones by using the <http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html get regions> operation. Be sure to add the @include availability zones@ parameter to your request.
+-- | The Availability Zone in which to create your instance. Use the following format: @us-east-2a@ (case sensitive). You can get a list of Availability Zones by using the <http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html get regions> operation. Be sure to add the @include Availability Zones@ parameter to your request.
 ciAvailabilityZone :: Lens' CreateInstances Text
 ciAvailabilityZone = lens _ciAvailabilityZone (\ s a -> s{_ciAvailabilityZone = a})
 
--- | The ID for a virtual private server image (e.g., @app_wordpress_4_4@ or @app_lamp_7_0@ ). Use the get blueprints operation to return a list of available images (or /blueprints/ ).
+-- | The ID for a virtual private server image (e.g., @app_wordpress_4_4@ or @app_lamp_7_0@ ). Use the @get blueprints@ operation to return a list of available images (or /blueprints/ ).
 ciBlueprintId :: Lens' CreateInstances Text
 ciBlueprintId = lens _ciBlueprintId (\ s a -> s{_ciBlueprintId = a})
 
@@ -152,8 +167,10 @@ instance ToJSON CreateInstances where
           = object
               (catMaybes
                  [("customImageName" .=) <$> _ciCustomImageName,
+                  ("addOns" .=) <$> _ciAddOns,
                   ("userData" .=) <$> _ciUserData,
                   ("keyPairName" .=) <$> _ciKeyPairName,
+                  ("tags" .=) <$> _ciTags,
                   Just ("instanceNames" .= _ciInstanceNames),
                   Just ("availabilityZone" .= _ciAvailabilityZone),
                   Just ("blueprintId" .= _ciBlueprintId),
@@ -166,28 +183,28 @@ instance ToQuery CreateInstances where
         toQuery = const mempty
 
 -- | /See:/ 'createInstancesResponse' smart constructor.
-data CreateInstancesResponse = CreateInstancesResponse'
-  { _cirsOperations     :: !(Maybe [Operation])
-  , _cirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateInstancesResponse = CreateInstancesResponse'{_cirsOperations
+                                                        :: !(Maybe [Operation]),
+                                                        _cirsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cirsOperations' - An array of key-value pairs containing information about the results of your create instances request.
+-- * 'cirsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'cirsResponseStatus' - -- | The response status code.
 createInstancesResponse
     :: Int -- ^ 'cirsResponseStatus'
     -> CreateInstancesResponse
-createInstancesResponse pResponseStatus_ =
-  CreateInstancesResponse'
-    {_cirsOperations = Nothing, _cirsResponseStatus = pResponseStatus_}
+createInstancesResponse pResponseStatus_
+  = CreateInstancesResponse'{_cirsOperations = Nothing,
+                             _cirsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your create instances request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 cirsOperations :: Lens' CreateInstancesResponse [Operation]
 cirsOperations = lens _cirsOperations (\ s a -> s{_cirsOperations = a}) . _Default . _Coerce
 

@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopDataCollectionByAgentIds' smart constructor.
-newtype StopDataCollectionByAgentIds = StopDataCollectionByAgentIds'
-  { _sdcbaiAgentIds :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopDataCollectionByAgentIds = StopDataCollectionByAgentIds'{_sdcbaiAgentIds
+                                                                     :: [Text]}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'StopDataCollectionByAgentIds' with the minimum fields required to make a request.
 --
@@ -57,9 +57,9 @@ newtype StopDataCollectionByAgentIds = StopDataCollectionByAgentIds'
 -- * 'sdcbaiAgentIds' - The IDs of the agents or connectors from which to stop collecting data.
 stopDataCollectionByAgentIds
     :: StopDataCollectionByAgentIds
-stopDataCollectionByAgentIds =
-  StopDataCollectionByAgentIds' {_sdcbaiAgentIds = mempty}
-
+stopDataCollectionByAgentIds
+  = StopDataCollectionByAgentIds'{_sdcbaiAgentIds =
+                                    mempty}
 
 -- | The IDs of the agents or connectors from which to stop collecting data.
 sdcbaiAgentIds :: Lens' StopDataCollectionByAgentIds [Text]
@@ -103,11 +103,15 @@ instance ToQuery StopDataCollectionByAgentIds where
         toQuery = const mempty
 
 -- | /See:/ 'stopDataCollectionByAgentIdsResponse' smart constructor.
-data StopDataCollectionByAgentIdsResponse = StopDataCollectionByAgentIdsResponse'
-  { _sdcbairsAgentsConfigurationStatus :: !(Maybe [AgentConfigurationStatus])
-  , _sdcbairsResponseStatus            :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopDataCollectionByAgentIdsResponse = StopDataCollectionByAgentIdsResponse'{_sdcbairsAgentsConfigurationStatus
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [AgentConfigurationStatus]),
+                                                                                  _sdcbairsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'StopDataCollectionByAgentIdsResponse' with the minimum fields required to make a request.
 --
@@ -119,12 +123,11 @@ data StopDataCollectionByAgentIdsResponse = StopDataCollectionByAgentIdsResponse
 stopDataCollectionByAgentIdsResponse
     :: Int -- ^ 'sdcbairsResponseStatus'
     -> StopDataCollectionByAgentIdsResponse
-stopDataCollectionByAgentIdsResponse pResponseStatus_ =
-  StopDataCollectionByAgentIdsResponse'
-    { _sdcbairsAgentsConfigurationStatus = Nothing
-    , _sdcbairsResponseStatus = pResponseStatus_
-    }
-
+stopDataCollectionByAgentIdsResponse pResponseStatus_
+  = StopDataCollectionByAgentIdsResponse'{_sdcbairsAgentsConfigurationStatus
+                                            = Nothing,
+                                          _sdcbairsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Information about the agents or connector that were instructed to stop collecting data. Information includes the agent/connector ID, a description of the operation performed, and whether the agent/connector configuration was updated.
 sdcbairsAgentsConfigurationStatus :: Lens' StopDataCollectionByAgentIdsResponse [AgentConfigurationStatus]

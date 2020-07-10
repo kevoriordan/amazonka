@@ -55,12 +55,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getBasePathMappings' smart constructor.
-data GetBasePathMappings = GetBasePathMappings'
-  { _gLimit      :: !(Maybe Int)
-  , _gPosition   :: !(Maybe Text)
-  , _gDomainName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBasePathMappings = GetBasePathMappings'{_gLimit
+                                                :: !(Maybe Int),
+                                                _gPosition :: !(Maybe Text),
+                                                _gDomainName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBasePathMappings' with the minimum fields required to make a request.
 --
@@ -74,10 +73,9 @@ data GetBasePathMappings = GetBasePathMappings'
 getBasePathMappings
     :: Text -- ^ 'gDomainName'
     -> GetBasePathMappings
-getBasePathMappings pDomainName_ =
-  GetBasePathMappings'
-    {_gLimit = Nothing, _gPosition = Nothing, _gDomainName = pDomainName_}
-
+getBasePathMappings pDomainName_
+  = GetBasePathMappings'{_gLimit = Nothing,
+                         _gPosition = Nothing, _gDomainName = pDomainName_}
 
 -- | The maximum number of returned results per page. The default value is 25 and the maximum value is 500.
 gLimit :: Lens' GetBasePathMappings (Maybe Int)
@@ -133,15 +131,20 @@ instance ToQuery GetBasePathMappings where
 -- | Represents a collection of 'BasePathMapping' resources.
 --
 --
--- <http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html Use Custom Domain Names>
+-- <https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html Use Custom Domain Names> 
 --
 -- /See:/ 'getBasePathMappingsResponse' smart constructor.
-data GetBasePathMappingsResponse = GetBasePathMappingsResponse'
-  { _gbpmrsItems          :: !(Maybe [BasePathMapping])
-  , _gbpmrsPosition       :: !(Maybe Text)
-  , _gbpmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBasePathMappingsResponse = GetBasePathMappingsResponse'{_gbpmrsItems
+                                                                ::
+                                                                !(Maybe
+                                                                    [BasePathMapping]),
+                                                                _gbpmrsPosition
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gbpmrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetBasePathMappingsResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +158,11 @@ data GetBasePathMappingsResponse = GetBasePathMappingsResponse'
 getBasePathMappingsResponse
     :: Int -- ^ 'gbpmrsResponseStatus'
     -> GetBasePathMappingsResponse
-getBasePathMappingsResponse pResponseStatus_ =
-  GetBasePathMappingsResponse'
-    { _gbpmrsItems = Nothing
-    , _gbpmrsPosition = Nothing
-    , _gbpmrsResponseStatus = pResponseStatus_
-    }
-
+getBasePathMappingsResponse pResponseStatus_
+  = GetBasePathMappingsResponse'{_gbpmrsItems =
+                                   Nothing,
+                                 _gbpmrsPosition = Nothing,
+                                 _gbpmrsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gbpmrsItems :: Lens' GetBasePathMappingsResponse [BasePathMapping]

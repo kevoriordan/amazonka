@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disables detailed monitoring for a running instance. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html Monitoring Your Instances and Volumes> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Disables detailed monitoring for a running instance. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html Monitoring Your Instances and Volumes> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 --
 module Network.AWS.EC2.UnmonitorInstances
@@ -45,16 +45,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for UnmonitorInstances.
---
---
---
--- /See:/ 'unmonitorInstances' smart constructor.
-data UnmonitorInstances = UnmonitorInstances'
-  { _uiDryRun      :: !(Maybe Bool)
-  , _uiInstanceIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'unmonitorInstances' smart constructor.
+data UnmonitorInstances = UnmonitorInstances'{_uiDryRun
+                                              :: !(Maybe Bool),
+                                              _uiInstanceIds :: ![Text]}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnmonitorInstances' with the minimum fields required to make a request.
 --
@@ -62,18 +57,18 @@ data UnmonitorInstances = UnmonitorInstances'
 --
 -- * 'uiDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'uiInstanceIds' - One or more instance IDs.
+-- * 'uiInstanceIds' - The IDs of the instances.
 unmonitorInstances
     :: UnmonitorInstances
-unmonitorInstances =
-  UnmonitorInstances' {_uiDryRun = Nothing, _uiInstanceIds = mempty}
-
+unmonitorInstances
+  = UnmonitorInstances'{_uiDryRun = Nothing,
+                        _uiInstanceIds = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 uiDryRun :: Lens' UnmonitorInstances (Maybe Bool)
 uiDryRun = lens _uiDryRun (\ s a -> s{_uiDryRun = a})
 
--- | One or more instance IDs.
+-- | The IDs of the instances.
 uiInstanceIds :: Lens' UnmonitorInstances [Text]
 uiInstanceIds = lens _uiInstanceIds (\ s a -> s{_uiInstanceIds = a}) . _Coerce
 
@@ -107,16 +102,15 @@ instance ToQuery UnmonitorInstances where
                "DryRun" =: _uiDryRun,
                toQueryList "InstanceId" _uiInstanceIds]
 
--- | Contains the output of UnmonitorInstances.
---
---
---
--- /See:/ 'unmonitorInstancesResponse' smart constructor.
-data UnmonitorInstancesResponse = UnmonitorInstancesResponse'
-  { _uirsInstanceMonitorings :: !(Maybe [InstanceMonitoring])
-  , _uirsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'unmonitorInstancesResponse' smart constructor.
+data UnmonitorInstancesResponse = UnmonitorInstancesResponse'{_uirsInstanceMonitorings
+                                                              ::
+                                                              !(Maybe
+                                                                  [InstanceMonitoring]),
+                                                              _uirsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UnmonitorInstancesResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +122,10 @@ data UnmonitorInstancesResponse = UnmonitorInstancesResponse'
 unmonitorInstancesResponse
     :: Int -- ^ 'uirsResponseStatus'
     -> UnmonitorInstancesResponse
-unmonitorInstancesResponse pResponseStatus_ =
-  UnmonitorInstancesResponse'
-    {_uirsInstanceMonitorings = Nothing, _uirsResponseStatus = pResponseStatus_}
-
+unmonitorInstancesResponse pResponseStatus_
+  = UnmonitorInstancesResponse'{_uirsInstanceMonitorings
+                                  = Nothing,
+                                _uirsResponseStatus = pResponseStatus_}
 
 -- | The monitoring information.
 uirsInstanceMonitorings :: Lens' UnmonitorInstancesResponse [InstanceMonitoring]

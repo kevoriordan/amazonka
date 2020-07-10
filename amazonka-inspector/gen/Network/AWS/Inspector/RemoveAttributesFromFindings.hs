@@ -46,11 +46,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'removeAttributesFromFindings' smart constructor.
-data RemoveAttributesFromFindings = RemoveAttributesFromFindings'
-  { _raffFindingARNs   :: !(List1 Text)
-  , _raffAttributeKeys :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveAttributesFromFindings = RemoveAttributesFromFindings'{_raffFindingARNs
+                                                                  ::
+                                                                  !(List1 Text),
+                                                                  _raffAttributeKeys
+                                                                  :: ![Text]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'RemoveAttributesFromFindings' with the minimum fields required to make a request.
 --
@@ -62,10 +64,10 @@ data RemoveAttributesFromFindings = RemoveAttributesFromFindings'
 removeAttributesFromFindings
     :: NonEmpty Text -- ^ 'raffFindingARNs'
     -> RemoveAttributesFromFindings
-removeAttributesFromFindings pFindingARNs_ =
-  RemoveAttributesFromFindings'
-    {_raffFindingARNs = _List1 # pFindingARNs_, _raffAttributeKeys = mempty}
-
+removeAttributesFromFindings pFindingARNs_
+  = RemoveAttributesFromFindings'{_raffFindingARNs =
+                                    _List1 # pFindingARNs_,
+                                  _raffAttributeKeys = mempty}
 
 -- | The ARNs that specify the findings that you want to remove attributes from.
 raffFindingARNs :: Lens' RemoveAttributesFromFindings (NonEmpty Text)
@@ -115,11 +117,16 @@ instance ToQuery RemoveAttributesFromFindings where
         toQuery = const mempty
 
 -- | /See:/ 'removeAttributesFromFindingsResponse' smart constructor.
-data RemoveAttributesFromFindingsResponse = RemoveAttributesFromFindingsResponse'
-  { _raffrsResponseStatus :: !Int
-  , _raffrsFailedItems    :: !(Map Text FailedItemDetails)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveAttributesFromFindingsResponse = RemoveAttributesFromFindingsResponse'{_raffrsResponseStatus
+                                                                                  ::
+                                                                                  !Int,
+                                                                                  _raffrsFailedItems
+                                                                                  ::
+                                                                                  !(Map
+                                                                                      Text
+                                                                                      FailedItemDetails)}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'RemoveAttributesFromFindingsResponse' with the minimum fields required to make a request.
 --
@@ -131,10 +138,10 @@ data RemoveAttributesFromFindingsResponse = RemoveAttributesFromFindingsResponse
 removeAttributesFromFindingsResponse
     :: Int -- ^ 'raffrsResponseStatus'
     -> RemoveAttributesFromFindingsResponse
-removeAttributesFromFindingsResponse pResponseStatus_ =
-  RemoveAttributesFromFindingsResponse'
-    {_raffrsResponseStatus = pResponseStatus_, _raffrsFailedItems = mempty}
-
+removeAttributesFromFindingsResponse pResponseStatus_
+  = RemoveAttributesFromFindingsResponse'{_raffrsResponseStatus
+                                            = pResponseStatus_,
+                                          _raffrsFailedItems = mempty}
 
 -- | -- | The response status code.
 raffrsResponseStatus :: Lens' RemoveAttributesFromFindingsResponse Int

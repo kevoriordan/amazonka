@@ -19,6 +19,24 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the replication configuration of a bucket.
+--
+--
+-- For information about replication configuration, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html Replication> in the /Amazon Simple Storage Service Developer Guide/ .
+--
+-- This operation requires permissions for the @s3:GetReplicationConfiguration@ action. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html Using Bucket Policies and User Policies> .
+--
+-- If you include the @Filter@ element in a replication configuration, you must also include the @DeleteMarkerReplication@ and @Priority@ elements. The response also returns those elements.
+--
+-- For information about @GetBucketReplication@ errors, see 'ReplicationErrorCodeList' 
+--
+-- The following operations are related to @GetBucketReplication@ :
+--
+--     * 'PutBucketReplication' 
+--
+--     * 'DeleteBucketReplication' 
+--
+--
+--
 module Network.AWS.S3.GetBucketReplication
     (
     -- * Creating a Request
@@ -43,23 +61,23 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'getBucketReplication' smart constructor.
-newtype GetBucketReplication = GetBucketReplication'
-  { _gbrBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBucketReplication = GetBucketReplication'{_gbrBucket
+                                                     :: BucketName}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetBucketReplication' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbrBucket' - Undocumented member.
+-- * 'gbrBucket' - The bucket name for which to get the replication information.
 getBucketReplication
     :: BucketName -- ^ 'gbrBucket'
     -> GetBucketReplication
-getBucketReplication pBucket_ = GetBucketReplication' {_gbrBucket = pBucket_}
+getBucketReplication pBucket_
+  = GetBucketReplication'{_gbrBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name for which to get the replication information.
 gbrBucket :: Lens' GetBucketReplication BucketName
 gbrBucket = lens _gbrBucket (\ s a -> s{_gbrBucket = a})
 
@@ -88,11 +106,14 @@ instance ToQuery GetBucketReplication where
         toQuery = const (mconcat ["replication"])
 
 -- | /See:/ 'getBucketReplicationResponse' smart constructor.
-data GetBucketReplicationResponse = GetBucketReplicationResponse'
-  { _gbrrsReplicationConfiguration :: !(Maybe ReplicationConfiguration)
-  , _gbrrsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBucketReplicationResponse = GetBucketReplicationResponse'{_gbrrsReplicationConfiguration
+                                                                  ::
+                                                                  !(Maybe
+                                                                      ReplicationConfiguration),
+                                                                  _gbrrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetBucketReplicationResponse' with the minimum fields required to make a request.
 --
@@ -104,12 +125,10 @@ data GetBucketReplicationResponse = GetBucketReplicationResponse'
 getBucketReplicationResponse
     :: Int -- ^ 'gbrrsResponseStatus'
     -> GetBucketReplicationResponse
-getBucketReplicationResponse pResponseStatus_ =
-  GetBucketReplicationResponse'
-    { _gbrrsReplicationConfiguration = Nothing
-    , _gbrrsResponseStatus = pResponseStatus_
-    }
-
+getBucketReplicationResponse pResponseStatus_
+  = GetBucketReplicationResponse'{_gbrrsReplicationConfiguration
+                                    = Nothing,
+                                  _gbrrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 gbrrsReplicationConfiguration :: Lens' GetBucketReplicationResponse (Maybe ReplicationConfiguration)

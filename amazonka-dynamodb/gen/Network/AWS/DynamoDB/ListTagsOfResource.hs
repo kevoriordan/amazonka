@@ -21,8 +21,10 @@
 -- List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account.
 --
 --
--- For an overview on tagging DynamoDB resources, see <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html Tagging for DynamoDB> in the /Amazon DynamoDB Developer Guide/ .
+-- For an overview on tagging DynamoDB resources, see <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html Tagging for DynamoDB> in the /Amazon DynamoDB Developer Guide/ .
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DynamoDB.ListTagsOfResource
     (
     -- * Creating a Request
@@ -44,16 +46,16 @@ module Network.AWS.DynamoDB.ListTagsOfResource
 import Network.AWS.DynamoDB.Types
 import Network.AWS.DynamoDB.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTagsOfResource' smart constructor.
-data ListTagsOfResource = ListTagsOfResource'
-  { _ltorNextToken   :: !(Maybe Text)
-  , _ltorResourceARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsOfResource = ListTagsOfResource'{_ltorNextToken
+                                              :: !(Maybe Text),
+                                              _ltorResourceARN :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsOfResource' with the minimum fields required to make a request.
 --
@@ -65,10 +67,9 @@ data ListTagsOfResource = ListTagsOfResource'
 listTagsOfResource
     :: Text -- ^ 'ltorResourceARN'
     -> ListTagsOfResource
-listTagsOfResource pResourceARN_ =
-  ListTagsOfResource'
-    {_ltorNextToken = Nothing, _ltorResourceARN = pResourceARN_}
-
+listTagsOfResource pResourceARN_
+  = ListTagsOfResource'{_ltorNextToken = Nothing,
+                        _ltorResourceARN = pResourceARN_}
 
 -- | An optional string that, if supplied, must be copied from the output of a previous call to ListTagOfResource. When provided in this manner, this API fetches the next page of results.
 ltorNextToken :: Lens' ListTagsOfResource (Maybe Text)
@@ -77,6 +78,13 @@ ltorNextToken = lens _ltorNextToken (\ s a -> s{_ltorNextToken = a})
 -- | The Amazon DynamoDB resource with tags to be listed. This value is an Amazon Resource Name (ARN).
 ltorResourceARN :: Lens' ListTagsOfResource Text
 ltorResourceARN = lens _ltorResourceARN (\ s a -> s{_ltorResourceARN = a})
+
+instance AWSPager ListTagsOfResource where
+        page rq rs
+          | stop (rs ^. ltorrsNextToken) = Nothing
+          | stop (rs ^. ltorrsTags) = Nothing
+          | otherwise =
+            Just $ rq & ltorNextToken .~ rs ^. ltorrsNextToken
 
 instance AWSRequest ListTagsOfResource where
         type Rs ListTagsOfResource =
@@ -117,12 +125,14 @@ instance ToQuery ListTagsOfResource where
         toQuery = const mempty
 
 -- | /See:/ 'listTagsOfResourceResponse' smart constructor.
-data ListTagsOfResourceResponse = ListTagsOfResourceResponse'
-  { _ltorrsNextToken      :: !(Maybe Text)
-  , _ltorrsTags           :: !(Maybe [Tag])
-  , _ltorrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsOfResourceResponse = ListTagsOfResourceResponse'{_ltorrsNextToken
+                                                              :: !(Maybe Text),
+                                                              _ltorrsTags ::
+                                                              !(Maybe [Tag]),
+                                                              _ltorrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListTagsOfResourceResponse' with the minimum fields required to make a request.
 --
@@ -136,13 +146,11 @@ data ListTagsOfResourceResponse = ListTagsOfResourceResponse'
 listTagsOfResourceResponse
     :: Int -- ^ 'ltorrsResponseStatus'
     -> ListTagsOfResourceResponse
-listTagsOfResourceResponse pResponseStatus_ =
-  ListTagsOfResourceResponse'
-    { _ltorrsNextToken = Nothing
-    , _ltorrsTags = Nothing
-    , _ltorrsResponseStatus = pResponseStatus_
-    }
-
+listTagsOfResourceResponse pResponseStatus_
+  = ListTagsOfResourceResponse'{_ltorrsNextToken =
+                                  Nothing,
+                                _ltorrsTags = Nothing,
+                                _ltorrsResponseStatus = pResponseStatus_}
 
 -- | If this value is returned, there are additional results to be displayed. To retrieve them, call ListTagsOfResource again, with NextToken set to this value.
 ltorrsNextToken :: Lens' ListTagsOfResourceResponse (Maybe Text)

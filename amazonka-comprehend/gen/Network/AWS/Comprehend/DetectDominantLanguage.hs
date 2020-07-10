@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Determines the dominant language of the input text. For a list of languages that Amazon Comprehend can detect, see <http://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html Amazon Comprehend Supported Languages> .
+-- Determines the dominant language of the input text. For a list of languages that Amazon Comprehend can detect, see <https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html Amazon Comprehend Supported Languages> . 
 --
 --
 module Network.AWS.Comprehend.DetectDominantLanguage
@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detectDominantLanguage' smart constructor.
-newtype DetectDominantLanguage = DetectDominantLanguage'
-  { _ddlText :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DetectDominantLanguage = DetectDominantLanguage'{_ddlText
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DetectDominantLanguage' with the minimum fields required to make a request.
 --
@@ -58,8 +58,8 @@ newtype DetectDominantLanguage = DetectDominantLanguage'
 detectDominantLanguage
     :: Text -- ^ 'ddlText'
     -> DetectDominantLanguage
-detectDominantLanguage pText_ = DetectDominantLanguage' {_ddlText = pText_}
-
+detectDominantLanguage pText_
+  = DetectDominantLanguage'{_ddlText = pText_}
 
 -- | A UTF-8 text string. Each string should contain at least 20 characters and must contain fewer that 5,000 bytes of UTF-8 encoded characters.
 ddlText :: Lens' DetectDominantLanguage Text
@@ -101,11 +101,14 @@ instance ToQuery DetectDominantLanguage where
         toQuery = const mempty
 
 -- | /See:/ 'detectDominantLanguageResponse' smart constructor.
-data DetectDominantLanguageResponse = DetectDominantLanguageResponse'
-  { _ddlrsLanguages      :: !(Maybe [DominantLanguage])
-  , _ddlrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetectDominantLanguageResponse = DetectDominantLanguageResponse'{_ddlrsLanguages
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [DominantLanguage]),
+                                                                      _ddlrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DetectDominantLanguageResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +120,10 @@ data DetectDominantLanguageResponse = DetectDominantLanguageResponse'
 detectDominantLanguageResponse
     :: Int -- ^ 'ddlrsResponseStatus'
     -> DetectDominantLanguageResponse
-detectDominantLanguageResponse pResponseStatus_ =
-  DetectDominantLanguageResponse'
-    {_ddlrsLanguages = Nothing, _ddlrsResponseStatus = pResponseStatus_}
-
+detectDominantLanguageResponse pResponseStatus_
+  = DetectDominantLanguageResponse'{_ddlrsLanguages =
+                                      Nothing,
+                                    _ddlrsResponseStatus = pResponseStatus_}
 
 -- | The languages that Amazon Comprehend detected in the input text. For each language, the response returns the RFC 5646 language code and the level of confidence that Amazon Comprehend has in the accuracy of its inference. For more information about RFC 5646, see <https://tools.ietf.org/html/rfc5646 Tags for Identifying Languages> on the /IETF Tools/ web site.
 ddlrsLanguages :: Lens' DetectDominantLanguageResponse [DominantLanguage]

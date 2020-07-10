@@ -21,7 +21,7 @@
 -- Deletes the user attributes in a user pool as an administrator. Works on any user.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminDeleteUserAttributes
     (
@@ -52,12 +52,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'adminDeleteUserAttributes' smart constructor.
-data AdminDeleteUserAttributes = AdminDeleteUserAttributes'
-  { _aduaUserPoolId         :: !Text
-  , _aduaUsername           :: !(Sensitive Text)
-  , _aduaUserAttributeNames :: ![Text]
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminDeleteUserAttributes = AdminDeleteUserAttributes'{_aduaUserPoolId
+                                                            :: !Text,
+                                                            _aduaUsername ::
+                                                            !(Sensitive Text),
+                                                            _aduaUserAttributeNames
+                                                            :: ![Text]}
+                                   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminDeleteUserAttributes' with the minimum fields required to make a request.
 --
@@ -72,13 +73,11 @@ adminDeleteUserAttributes
     :: Text -- ^ 'aduaUserPoolId'
     -> Text -- ^ 'aduaUsername'
     -> AdminDeleteUserAttributes
-adminDeleteUserAttributes pUserPoolId_ pUsername_ =
-  AdminDeleteUserAttributes'
-    { _aduaUserPoolId = pUserPoolId_
-    , _aduaUsername = _Sensitive # pUsername_
-    , _aduaUserAttributeNames = mempty
-    }
-
+adminDeleteUserAttributes pUserPoolId_ pUsername_
+  = AdminDeleteUserAttributes'{_aduaUserPoolId =
+                                 pUserPoolId_,
+                               _aduaUsername = _Sensitive # pUsername_,
+                               _aduaUserAttributeNames = mempty}
 
 -- | The user pool ID for the user pool where you want to delete user attributes.
 aduaUserPoolId :: Lens' AdminDeleteUserAttributes Text
@@ -136,10 +135,11 @@ instance ToQuery AdminDeleteUserAttributes where
 --
 --
 -- /See:/ 'adminDeleteUserAttributesResponse' smart constructor.
-newtype AdminDeleteUserAttributesResponse = AdminDeleteUserAttributesResponse'
-  { _aduarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AdminDeleteUserAttributesResponse = AdminDeleteUserAttributesResponse'{_aduarsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'AdminDeleteUserAttributesResponse' with the minimum fields required to make a request.
 --
@@ -149,9 +149,9 @@ newtype AdminDeleteUserAttributesResponse = AdminDeleteUserAttributesResponse'
 adminDeleteUserAttributesResponse
     :: Int -- ^ 'aduarsResponseStatus'
     -> AdminDeleteUserAttributesResponse
-adminDeleteUserAttributesResponse pResponseStatus_ =
-  AdminDeleteUserAttributesResponse' {_aduarsResponseStatus = pResponseStatus_}
-
+adminDeleteUserAttributesResponse pResponseStatus_
+  = AdminDeleteUserAttributesResponse'{_aduarsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 aduarsResponseStatus :: Lens' AdminDeleteUserAttributesResponse Int

@@ -48,10 +48,9 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'createWorkspaces' smart constructor.
-newtype CreateWorkspaces = CreateWorkspaces'
-  { _cwWorkspaces :: List1 WorkspaceRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateWorkspaces = CreateWorkspaces'{_cwWorkspaces
+                                             :: List1 WorkspaceRequest}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateWorkspaces' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ newtype CreateWorkspaces = CreateWorkspaces'
 createWorkspaces
     :: NonEmpty WorkspaceRequest -- ^ 'cwWorkspaces'
     -> CreateWorkspaces
-createWorkspaces pWorkspaces_ =
-  CreateWorkspaces' {_cwWorkspaces = _List1 # pWorkspaces_}
-
+createWorkspaces pWorkspaces_
+  = CreateWorkspaces'{_cwWorkspaces =
+                        _List1 # pWorkspaces_}
 
 -- | The WorkSpaces to create. You can specify up to 25 WorkSpaces.
 cwWorkspaces :: Lens' CreateWorkspaces (NonEmpty WorkspaceRequest)
@@ -105,12 +104,17 @@ instance ToQuery CreateWorkspaces where
         toQuery = const mempty
 
 -- | /See:/ 'createWorkspacesResponse' smart constructor.
-data CreateWorkspacesResponse = CreateWorkspacesResponse'
-  { _cwrsFailedRequests  :: !(Maybe [FailedCreateWorkspaceRequest])
-  , _cwrsPendingRequests :: !(Maybe [Workspace])
-  , _cwrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateWorkspacesResponse = CreateWorkspacesResponse'{_cwrsFailedRequests
+                                                          ::
+                                                          !(Maybe
+                                                              [FailedCreateWorkspaceRequest]),
+                                                          _cwrsPendingRequests
+                                                          ::
+                                                          !(Maybe [Workspace]),
+                                                          _cwrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateWorkspacesResponse' with the minimum fields required to make a request.
 --
@@ -124,13 +128,11 @@ data CreateWorkspacesResponse = CreateWorkspacesResponse'
 createWorkspacesResponse
     :: Int -- ^ 'cwrsResponseStatus'
     -> CreateWorkspacesResponse
-createWorkspacesResponse pResponseStatus_ =
-  CreateWorkspacesResponse'
-    { _cwrsFailedRequests = Nothing
-    , _cwrsPendingRequests = Nothing
-    , _cwrsResponseStatus = pResponseStatus_
-    }
-
+createWorkspacesResponse pResponseStatus_
+  = CreateWorkspacesResponse'{_cwrsFailedRequests =
+                                Nothing,
+                              _cwrsPendingRequests = Nothing,
+                              _cwrsResponseStatus = pResponseStatus_}
 
 -- | Information about the WorkSpaces that could not be created.
 cwrsFailedRequests :: Lens' CreateWorkspacesResponse [FailedCreateWorkspaceRequest]

@@ -21,6 +21,8 @@
 -- Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a @sha256@ digest of the image layer for data validation purposes.
 --
 --
+-- When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.
+--
 module Network.AWS.ECR.CompleteLayerUpload
     (
     -- * Creating a Request
@@ -51,13 +53,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'completeLayerUpload' smart constructor.
-data CompleteLayerUpload = CompleteLayerUpload'
-  { _cluRegistryId     :: !(Maybe Text)
-  , _cluRepositoryName :: !Text
-  , _cluUploadId       :: !Text
-  , _cluLayerDigests   :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CompleteLayerUpload = CompleteLayerUpload'{_cluRegistryId
+                                                :: !(Maybe Text),
+                                                _cluRepositoryName :: !Text,
+                                                _cluUploadId :: !Text,
+                                                _cluLayerDigests ::
+                                                !(List1 Text)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompleteLayerUpload' with the minimum fields required to make a request.
 --
@@ -75,14 +77,12 @@ completeLayerUpload
     -> Text -- ^ 'cluUploadId'
     -> NonEmpty Text -- ^ 'cluLayerDigests'
     -> CompleteLayerUpload
-completeLayerUpload pRepositoryName_ pUploadId_ pLayerDigests_ =
-  CompleteLayerUpload'
-    { _cluRegistryId = Nothing
-    , _cluRepositoryName = pRepositoryName_
-    , _cluUploadId = pUploadId_
-    , _cluLayerDigests = _List1 # pLayerDigests_
-    }
-
+completeLayerUpload pRepositoryName_ pUploadId_
+  pLayerDigests_
+  = CompleteLayerUpload'{_cluRegistryId = Nothing,
+                         _cluRepositoryName = pRepositoryName_,
+                         _cluUploadId = pUploadId_,
+                         _cluLayerDigests = _List1 # pLayerDigests_}
 
 -- | The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default registry is assumed.
 cluRegistryId :: Lens' CompleteLayerUpload (Maybe Text)
@@ -143,14 +143,22 @@ instance ToQuery CompleteLayerUpload where
         toQuery = const mempty
 
 -- | /See:/ 'completeLayerUploadResponse' smart constructor.
-data CompleteLayerUploadResponse = CompleteLayerUploadResponse'
-  { _clursRegistryId     :: !(Maybe Text)
-  , _clursLayerDigest    :: !(Maybe Text)
-  , _clursRepositoryName :: !(Maybe Text)
-  , _clursUploadId       :: !(Maybe Text)
-  , _clursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CompleteLayerUploadResponse = CompleteLayerUploadResponse'{_clursRegistryId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _clursLayerDigest
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _clursRepositoryName
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _clursUploadId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _clursResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CompleteLayerUploadResponse' with the minimum fields required to make a request.
 --
@@ -168,15 +176,13 @@ data CompleteLayerUploadResponse = CompleteLayerUploadResponse'
 completeLayerUploadResponse
     :: Int -- ^ 'clursResponseStatus'
     -> CompleteLayerUploadResponse
-completeLayerUploadResponse pResponseStatus_ =
-  CompleteLayerUploadResponse'
-    { _clursRegistryId = Nothing
-    , _clursLayerDigest = Nothing
-    , _clursRepositoryName = Nothing
-    , _clursUploadId = Nothing
-    , _clursResponseStatus = pResponseStatus_
-    }
-
+completeLayerUploadResponse pResponseStatus_
+  = CompleteLayerUploadResponse'{_clursRegistryId =
+                                   Nothing,
+                                 _clursLayerDigest = Nothing,
+                                 _clursRepositoryName = Nothing,
+                                 _clursUploadId = Nothing,
+                                 _clursResponseStatus = pResponseStatus_}
 
 -- | The registry ID associated with the request.
 clursRegistryId :: Lens' CompleteLayerUploadResponse (Maybe Text)

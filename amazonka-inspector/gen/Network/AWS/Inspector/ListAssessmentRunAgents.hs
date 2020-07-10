@@ -52,13 +52,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAssessmentRunAgents' smart constructor.
-data ListAssessmentRunAgents = ListAssessmentRunAgents'
-  { _laraNextToken        :: !(Maybe Text)
-  , _laraFilter           :: !(Maybe AgentFilter)
-  , _laraMaxResults       :: !(Maybe Int)
-  , _laraAssessmentRunARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssessmentRunAgents = ListAssessmentRunAgents'{_laraNextToken
+                                                        :: !(Maybe Text),
+                                                        _laraFilter ::
+                                                        !(Maybe AgentFilter),
+                                                        _laraMaxResults ::
+                                                        !(Maybe Int),
+                                                        _laraAssessmentRunARN ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListAssessmentRunAgents' with the minimum fields required to make a request.
 --
@@ -74,14 +77,10 @@ data ListAssessmentRunAgents = ListAssessmentRunAgents'
 listAssessmentRunAgents
     :: Text -- ^ 'laraAssessmentRunARN'
     -> ListAssessmentRunAgents
-listAssessmentRunAgents pAssessmentRunARN_ =
-  ListAssessmentRunAgents'
-    { _laraNextToken = Nothing
-    , _laraFilter = Nothing
-    , _laraMaxResults = Nothing
-    , _laraAssessmentRunARN = pAssessmentRunARN_
-    }
-
+listAssessmentRunAgents pAssessmentRunARN_
+  = ListAssessmentRunAgents'{_laraNextToken = Nothing,
+                             _laraFilter = Nothing, _laraMaxResults = Nothing,
+                             _laraAssessmentRunARN = pAssessmentRunARN_}
 
 -- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the __ListAssessmentRunAgents__ action. Subsequent calls to the action fill __nextToken__ in the request with the value of __NextToken__ from the previous response to continue listing data.
 laraNextToken :: Lens' ListAssessmentRunAgents (Maybe Text)
@@ -147,12 +146,17 @@ instance ToQuery ListAssessmentRunAgents where
         toQuery = const mempty
 
 -- | /See:/ 'listAssessmentRunAgentsResponse' smart constructor.
-data ListAssessmentRunAgentsResponse = ListAssessmentRunAgentsResponse'
-  { _lararsNextToken           :: !(Maybe Text)
-  , _lararsResponseStatus      :: !Int
-  , _lararsAssessmentRunAgents :: ![AssessmentRunAgent]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssessmentRunAgentsResponse = ListAssessmentRunAgentsResponse'{_lararsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lararsResponseStatus
+                                                                        :: !Int,
+                                                                        _lararsAssessmentRunAgents
+                                                                        ::
+                                                                        ![AssessmentRunAgent]}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListAssessmentRunAgentsResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +170,11 @@ data ListAssessmentRunAgentsResponse = ListAssessmentRunAgentsResponse'
 listAssessmentRunAgentsResponse
     :: Int -- ^ 'lararsResponseStatus'
     -> ListAssessmentRunAgentsResponse
-listAssessmentRunAgentsResponse pResponseStatus_ =
-  ListAssessmentRunAgentsResponse'
-    { _lararsNextToken = Nothing
-    , _lararsResponseStatus = pResponseStatus_
-    , _lararsAssessmentRunAgents = mempty
-    }
-
+listAssessmentRunAgentsResponse pResponseStatus_
+  = ListAssessmentRunAgentsResponse'{_lararsNextToken =
+                                       Nothing,
+                                     _lararsResponseStatus = pResponseStatus_,
+                                     _lararsAssessmentRunAgents = mempty}
 
 -- | When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the __nextToken__ parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.
 lararsNextToken :: Lens' ListAssessmentRunAgentsResponse (Maybe Text)

@@ -47,11 +47,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'listRegexPatternSets' smart constructor.
-data ListRegexPatternSets = ListRegexPatternSets'
-  { _lrpsNextMarker :: !(Maybe Text)
-  , _lrpsLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRegexPatternSets = ListRegexPatternSets'{_lrpsNextMarker
+                                                  :: !(Maybe Text),
+                                                  _lrpsLimit :: !(Maybe Nat)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRegexPatternSets' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ data ListRegexPatternSets = ListRegexPatternSets'
 -- * 'lrpsLimit' - Specifies the number of @RegexPatternSet@ objects that you want AWS WAF to return for this request. If you have more @RegexPatternSet@ objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @RegexPatternSet@ objects.
 listRegexPatternSets
     :: ListRegexPatternSets
-listRegexPatternSets =
-  ListRegexPatternSets' {_lrpsNextMarker = Nothing, _lrpsLimit = Nothing}
-
+listRegexPatternSets
+  = ListRegexPatternSets'{_lrpsNextMarker = Nothing,
+                          _lrpsLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @RegexPatternSet@ objects than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @RegexPatternSet@ objects. For the second and subsequent @ListRegexPatternSets@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @RegexPatternSet@ objects.
 lrpsNextMarker :: Lens' ListRegexPatternSets (Maybe Text)
@@ -114,12 +113,17 @@ instance ToQuery ListRegexPatternSets where
         toQuery = const mempty
 
 -- | /See:/ 'listRegexPatternSetsResponse' smart constructor.
-data ListRegexPatternSetsResponse = ListRegexPatternSetsResponse'
-  { _lrpsrsRegexPatternSets :: !(Maybe [RegexPatternSetSummary])
-  , _lrpsrsNextMarker       :: !(Maybe Text)
-  , _lrpsrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRegexPatternSetsResponse = ListRegexPatternSetsResponse'{_lrpsrsRegexPatternSets
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [RegexPatternSetSummary]),
+                                                                  _lrpsrsNextMarker
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lrpsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListRegexPatternSetsResponse' with the minimum fields required to make a request.
 --
@@ -133,13 +137,11 @@ data ListRegexPatternSetsResponse = ListRegexPatternSetsResponse'
 listRegexPatternSetsResponse
     :: Int -- ^ 'lrpsrsResponseStatus'
     -> ListRegexPatternSetsResponse
-listRegexPatternSetsResponse pResponseStatus_ =
-  ListRegexPatternSetsResponse'
-    { _lrpsrsRegexPatternSets = Nothing
-    , _lrpsrsNextMarker = Nothing
-    , _lrpsrsResponseStatus = pResponseStatus_
-    }
-
+listRegexPatternSetsResponse pResponseStatus_
+  = ListRegexPatternSetsResponse'{_lrpsrsRegexPatternSets
+                                    = Nothing,
+                                  _lrpsrsNextMarker = Nothing,
+                                  _lrpsrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'RegexPatternSetSummary' objects.
 lrpsrsRegexPatternSets :: Lens' ListRegexPatternSetsResponse [RegexPatternSetSummary]

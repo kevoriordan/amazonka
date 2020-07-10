@@ -52,11 +52,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getApplicationRevision' smart constructor.
-data GetApplicationRevision = GetApplicationRevision'
-  { _garApplicationName :: !Text
-  , _garRevision        :: !RevisionLocation
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetApplicationRevision = GetApplicationRevision'{_garApplicationName
+                                                      :: !Text,
+                                                      _garRevision ::
+                                                      !RevisionLocation}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetApplicationRevision' with the minimum fields required to make a request.
 --
@@ -69,10 +70,10 @@ getApplicationRevision
     :: Text -- ^ 'garApplicationName'
     -> RevisionLocation -- ^ 'garRevision'
     -> GetApplicationRevision
-getApplicationRevision pApplicationName_ pRevision_ =
-  GetApplicationRevision'
-    {_garApplicationName = pApplicationName_, _garRevision = pRevision_}
-
+getApplicationRevision pApplicationName_ pRevision_
+  = GetApplicationRevision'{_garApplicationName =
+                              pApplicationName_,
+                            _garRevision = pRevision_}
 
 -- | The name of the application that corresponds to the revision.
 garApplicationName :: Lens' GetApplicationRevision Text
@@ -126,13 +127,22 @@ instance ToQuery GetApplicationRevision where
 --
 --
 -- /See:/ 'getApplicationRevisionResponse' smart constructor.
-data GetApplicationRevisionResponse = GetApplicationRevisionResponse'
-  { _garrsApplicationName :: !(Maybe Text)
-  , _garrsRevisionInfo    :: !(Maybe GenericRevisionInfo)
-  , _garrsRevision        :: !(Maybe RevisionLocation)
-  , _garrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetApplicationRevisionResponse = GetApplicationRevisionResponse'{_garrsApplicationName
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _garrsRevisionInfo
+                                                                      ::
+                                                                      !(Maybe
+                                                                          GenericRevisionInfo),
+                                                                      _garrsRevision
+                                                                      ::
+                                                                      !(Maybe
+                                                                          RevisionLocation),
+                                                                      _garrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'GetApplicationRevisionResponse' with the minimum fields required to make a request.
 --
@@ -148,14 +158,12 @@ data GetApplicationRevisionResponse = GetApplicationRevisionResponse'
 getApplicationRevisionResponse
     :: Int -- ^ 'garrsResponseStatus'
     -> GetApplicationRevisionResponse
-getApplicationRevisionResponse pResponseStatus_ =
-  GetApplicationRevisionResponse'
-    { _garrsApplicationName = Nothing
-    , _garrsRevisionInfo = Nothing
-    , _garrsRevision = Nothing
-    , _garrsResponseStatus = pResponseStatus_
-    }
-
+getApplicationRevisionResponse pResponseStatus_
+  = GetApplicationRevisionResponse'{_garrsApplicationName
+                                      = Nothing,
+                                    _garrsRevisionInfo = Nothing,
+                                    _garrsRevision = Nothing,
+                                    _garrsResponseStatus = pResponseStatus_}
 
 -- | The name of the application that corresponds to the revision.
 garrsApplicationName :: Lens' GetApplicationRevisionResponse (Maybe Text)

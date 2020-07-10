@@ -21,7 +21,7 @@
 -- Records a @WorkflowExecutionSignaled@ event in the workflow execution history and creates a decision task for the workflow execution identified by the given domain, workflowId and runId. The event is recorded with the specified user defined signalName and input (if provided).
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -33,7 +33,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.SignalWorkflowExecution
     (
@@ -60,14 +60,15 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'signalWorkflowExecution' smart constructor.
-data SignalWorkflowExecution = SignalWorkflowExecution'
-  { _sweInput      :: !(Maybe Text)
-  , _sweRunId      :: !(Maybe Text)
-  , _sweDomain     :: !Text
-  , _sweWorkflowId :: !Text
-  , _sweSignalName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SignalWorkflowExecution = SignalWorkflowExecution'{_sweInput
+                                                        :: !(Maybe Text),
+                                                        _sweRunId ::
+                                                        !(Maybe Text),
+                                                        _sweDomain :: !Text,
+                                                        _sweWorkflowId :: !Text,
+                                                        _sweSignalName :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'SignalWorkflowExecution' with the minimum fields required to make a request.
 --
@@ -87,15 +88,12 @@ signalWorkflowExecution
     -> Text -- ^ 'sweWorkflowId'
     -> Text -- ^ 'sweSignalName'
     -> SignalWorkflowExecution
-signalWorkflowExecution pDomain_ pWorkflowId_ pSignalName_ =
-  SignalWorkflowExecution'
-    { _sweInput = Nothing
-    , _sweRunId = Nothing
-    , _sweDomain = pDomain_
-    , _sweWorkflowId = pWorkflowId_
-    , _sweSignalName = pSignalName_
-    }
-
+signalWorkflowExecution pDomain_ pWorkflowId_
+  pSignalName_
+  = SignalWorkflowExecution'{_sweInput = Nothing,
+                             _sweRunId = Nothing, _sweDomain = pDomain_,
+                             _sweWorkflowId = pWorkflowId_,
+                             _sweSignalName = pSignalName_}
 
 -- | Data to attach to the @WorkflowExecutionSignaled@ event in the target workflow execution's history.
 sweInput :: Lens' SignalWorkflowExecution (Maybe Text)
@@ -155,16 +153,15 @@ instance ToQuery SignalWorkflowExecution where
         toQuery = const mempty
 
 -- | /See:/ 'signalWorkflowExecutionResponse' smart constructor.
-data SignalWorkflowExecutionResponse =
-  SignalWorkflowExecutionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SignalWorkflowExecutionResponse = SignalWorkflowExecutionResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'SignalWorkflowExecutionResponse' with the minimum fields required to make a request.
 --
 signalWorkflowExecutionResponse
     :: SignalWorkflowExecutionResponse
-signalWorkflowExecutionResponse = SignalWorkflowExecutionResponse'
-
+signalWorkflowExecutionResponse
+  = SignalWorkflowExecutionResponse'
 
 instance NFData SignalWorkflowExecutionResponse where

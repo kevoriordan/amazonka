@@ -47,18 +47,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getRoomSkillParameter' smart constructor.
-data GetRoomSkillParameter = GetRoomSkillParameter'
-  { _grspRoomARN      :: !(Maybe Text)
-  , _grspSkillId      :: !Text
-  , _grspParameterKey :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRoomSkillParameter = GetRoomSkillParameter'{_grspRoomARN
+                                                    :: !(Maybe Text),
+                                                    _grspSkillId :: !Text,
+                                                    _grspParameterKey :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetRoomSkillParameter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grspRoomARN' - The ARN of the room from which to get the room skill parameter details.
+-- * 'grspRoomARN' - The ARN of the room from which to get the room skill parameter details. 
 --
 -- * 'grspSkillId' - The ARN of the skill from which to get the room skill parameter details. Required.
 --
@@ -67,15 +67,12 @@ getRoomSkillParameter
     :: Text -- ^ 'grspSkillId'
     -> Text -- ^ 'grspParameterKey'
     -> GetRoomSkillParameter
-getRoomSkillParameter pSkillId_ pParameterKey_ =
-  GetRoomSkillParameter'
-    { _grspRoomARN = Nothing
-    , _grspSkillId = pSkillId_
-    , _grspParameterKey = pParameterKey_
-    }
+getRoomSkillParameter pSkillId_ pParameterKey_
+  = GetRoomSkillParameter'{_grspRoomARN = Nothing,
+                           _grspSkillId = pSkillId_,
+                           _grspParameterKey = pParameterKey_}
 
-
--- | The ARN of the room from which to get the room skill parameter details.
+-- | The ARN of the room from which to get the room skill parameter details. 
 grspRoomARN :: Lens' GetRoomSkillParameter (Maybe Text)
 grspRoomARN = lens _grspRoomARN (\ s a -> s{_grspRoomARN = a})
 
@@ -126,11 +123,14 @@ instance ToQuery GetRoomSkillParameter where
         toQuery = const mempty
 
 -- | /See:/ 'getRoomSkillParameterResponse' smart constructor.
-data GetRoomSkillParameterResponse = GetRoomSkillParameterResponse'
-  { _grsprsRoomSkillParameter :: !(Maybe RoomSkillParameter)
-  , _grsprsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRoomSkillParameterResponse = GetRoomSkillParameterResponse'{_grsprsRoomSkillParameter
+                                                                    ::
+                                                                    !(Maybe
+                                                                        RoomSkillParameter),
+                                                                    _grsprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetRoomSkillParameterResponse' with the minimum fields required to make a request.
 --
@@ -142,12 +142,10 @@ data GetRoomSkillParameterResponse = GetRoomSkillParameterResponse'
 getRoomSkillParameterResponse
     :: Int -- ^ 'grsprsResponseStatus'
     -> GetRoomSkillParameterResponse
-getRoomSkillParameterResponse pResponseStatus_ =
-  GetRoomSkillParameterResponse'
-    { _grsprsRoomSkillParameter = Nothing
-    , _grsprsResponseStatus = pResponseStatus_
-    }
-
+getRoomSkillParameterResponse pResponseStatus_
+  = GetRoomSkillParameterResponse'{_grsprsRoomSkillParameter
+                                     = Nothing,
+                                   _grsprsResponseStatus = pResponseStatus_}
 
 -- | The details of the room skill parameter requested. Required.
 grsprsRoomSkillParameter :: Lens' GetRoomSkillParameterResponse (Maybe RoomSkillParameter)

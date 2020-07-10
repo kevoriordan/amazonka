@@ -50,14 +50,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listObjectChildren' smart constructor.
-data ListObjectChildren = ListObjectChildren'
-  { _locConsistencyLevel :: !(Maybe ConsistencyLevel)
-  , _locNextToken        :: !(Maybe Text)
-  , _locMaxResults       :: !(Maybe Nat)
-  , _locDirectoryARN     :: !Text
-  , _locObjectReference  :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectChildren = ListObjectChildren'{_locConsistencyLevel
+                                              :: !(Maybe ConsistencyLevel),
+                                              _locNextToken :: !(Maybe Text),
+                                              _locMaxResults :: !(Maybe Nat),
+                                              _locDirectoryARN :: !Text,
+                                              _locObjectReference ::
+                                              !ObjectReference}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListObjectChildren' with the minimum fields required to make a request.
 --
@@ -76,15 +76,11 @@ listObjectChildren
     :: Text -- ^ 'locDirectoryARN'
     -> ObjectReference -- ^ 'locObjectReference'
     -> ListObjectChildren
-listObjectChildren pDirectoryARN_ pObjectReference_ =
-  ListObjectChildren'
-    { _locConsistencyLevel = Nothing
-    , _locNextToken = Nothing
-    , _locMaxResults = Nothing
-    , _locDirectoryARN = pDirectoryARN_
-    , _locObjectReference = pObjectReference_
-    }
-
+listObjectChildren pDirectoryARN_ pObjectReference_
+  = ListObjectChildren'{_locConsistencyLevel = Nothing,
+                        _locNextToken = Nothing, _locMaxResults = Nothing,
+                        _locDirectoryARN = pDirectoryARN_,
+                        _locObjectReference = pObjectReference_}
 
 -- | Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.
 locConsistencyLevel :: Lens' ListObjectChildren (Maybe ConsistencyLevel)
@@ -144,12 +140,17 @@ instance ToQuery ListObjectChildren where
         toQuery = const mempty
 
 -- | /See:/ 'listObjectChildrenResponse' smart constructor.
-data ListObjectChildrenResponse = ListObjectChildrenResponse'
-  { _locrsChildren       :: !(Maybe (Map Text Text))
-  , _locrsNextToken      :: !(Maybe Text)
-  , _locrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectChildrenResponse = ListObjectChildrenResponse'{_locrsChildren
+                                                              ::
+                                                              !(Maybe
+                                                                  (Map Text
+                                                                     Text)),
+                                                              _locrsNextToken ::
+                                                              !(Maybe Text),
+                                                              _locrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListObjectChildrenResponse' with the minimum fields required to make a request.
 --
@@ -163,13 +164,11 @@ data ListObjectChildrenResponse = ListObjectChildrenResponse'
 listObjectChildrenResponse
     :: Int -- ^ 'locrsResponseStatus'
     -> ListObjectChildrenResponse
-listObjectChildrenResponse pResponseStatus_ =
-  ListObjectChildrenResponse'
-    { _locrsChildren = Nothing
-    , _locrsNextToken = Nothing
-    , _locrsResponseStatus = pResponseStatus_
-    }
-
+listObjectChildrenResponse pResponseStatus_
+  = ListObjectChildrenResponse'{_locrsChildren =
+                                  Nothing,
+                                _locrsNextToken = Nothing,
+                                _locrsResponseStatus = pResponseStatus_}
 
 -- | Children structure, which is a map with key as the @LinkName@ and @ObjectIdentifier@ as the value.
 locrsChildren :: Lens' ListObjectChildrenResponse (HashMap Text Text)

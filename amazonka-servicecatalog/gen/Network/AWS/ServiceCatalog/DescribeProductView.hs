@@ -47,11 +47,10 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describeProductView' smart constructor.
-data DescribeProductView = DescribeProductView'
-  { _dpvAcceptLanguage :: !(Maybe Text)
-  , _dpvId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProductView = DescribeProductView'{_dpvAcceptLanguage
+                                                :: !(Maybe Text),
+                                                _dpvId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeProductView' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ data DescribeProductView = DescribeProductView'
 describeProductView
     :: Text -- ^ 'dpvId'
     -> DescribeProductView
-describeProductView pId_ =
-  DescribeProductView' {_dpvAcceptLanguage = Nothing, _dpvId = pId_}
-
+describeProductView pId_
+  = DescribeProductView'{_dpvAcceptLanguage = Nothing,
+                         _dpvId = pId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 dpvAcceptLanguage :: Lens' DescribeProductView (Maybe Text)
@@ -115,12 +114,18 @@ instance ToQuery DescribeProductView where
         toQuery = const mempty
 
 -- | /See:/ 'describeProductViewResponse' smart constructor.
-data DescribeProductViewResponse = DescribeProductViewResponse'
-  { _dpvrsProductViewSummary    :: !(Maybe ProductViewSummary)
-  , _dpvrsProvisioningArtifacts :: !(Maybe [ProvisioningArtifact])
-  , _dpvrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProductViewResponse = DescribeProductViewResponse'{_dpvrsProductViewSummary
+                                                                ::
+                                                                !(Maybe
+                                                                    ProductViewSummary),
+                                                                _dpvrsProvisioningArtifacts
+                                                                ::
+                                                                !(Maybe
+                                                                    [ProvisioningArtifact]),
+                                                                _dpvrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeProductViewResponse' with the minimum fields required to make a request.
 --
@@ -134,13 +139,11 @@ data DescribeProductViewResponse = DescribeProductViewResponse'
 describeProductViewResponse
     :: Int -- ^ 'dpvrsResponseStatus'
     -> DescribeProductViewResponse
-describeProductViewResponse pResponseStatus_ =
-  DescribeProductViewResponse'
-    { _dpvrsProductViewSummary = Nothing
-    , _dpvrsProvisioningArtifacts = Nothing
-    , _dpvrsResponseStatus = pResponseStatus_
-    }
-
+describeProductViewResponse pResponseStatus_
+  = DescribeProductViewResponse'{_dpvrsProductViewSummary
+                                   = Nothing,
+                                 _dpvrsProvisioningArtifacts = Nothing,
+                                 _dpvrsResponseStatus = pResponseStatus_}
 
 -- | Summary information about the product.
 dpvrsProductViewSummary :: Lens' DescribeProductViewResponse (Maybe ProductViewSummary)

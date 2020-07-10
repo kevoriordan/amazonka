@@ -28,7 +28,9 @@ module Network.AWS.DeviceFarm.UpdateDevicePool
     , UpdateDevicePool
     -- * Request Lenses
     , udpRules
+    , udpClearMaxDevices
     , udpName
+    , udpMaxDevices
     , udpDescription
     , udpArn
 
@@ -52,50 +54,60 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateDevicePool' smart constructor.
-data UpdateDevicePool = UpdateDevicePool'
-  { _udpRules       :: !(Maybe [Rule])
-  , _udpName        :: !(Maybe Text)
-  , _udpDescription :: !(Maybe Text)
-  , _udpArn         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDevicePool = UpdateDevicePool'{_udpRules
+                                          :: !(Maybe [Rule]),
+                                          _udpClearMaxDevices :: !(Maybe Bool),
+                                          _udpName :: !(Maybe Text),
+                                          _udpMaxDevices :: !(Maybe Int),
+                                          _udpDescription :: !(Maybe Text),
+                                          _udpArn :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDevicePool' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udpRules' - Represents the rules you wish to modify for the device pool. Updating rules is optional; however, if you choose to update rules for your request, the update will replace the existing rules.
+-- * 'udpRules' - Represents the rules to modify for the device pool. Updating rules is optional. If you update rules for your request, the update replaces the existing rules.
 --
--- * 'udpName' - A string representing the name of the device pool you wish to update.
+-- * 'udpClearMaxDevices' - Sets whether the @maxDevices@ parameter applies to your device pool. If you set this parameter to @true@ , the @maxDevices@ parameter does not apply, and Device Farm does not limit the number of devices that it adds to your device pool. In this case, Device Farm adds all available devices that meet the criteria specified in the @rules@ parameter. If you use this parameter in your request, you cannot use the @maxDevices@ parameter in the same request.
 --
--- * 'udpDescription' - A description of the device pool you wish to update.
+-- * 'udpName' - A string that represents the name of the device pool to update.
 --
--- * 'udpArn' - The Amazon Resourc Name (ARN) of the Device Farm device pool you wish to update.
+-- * 'udpMaxDevices' - The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the @rules@ parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests. If you use this parameter in your request, you cannot use the @clearMaxDevices@ parameter in the same request.
+--
+-- * 'udpDescription' - A description of the device pool to update.
+--
+-- * 'udpArn' - The Amazon Resource Name (ARN) of the Device Farm device pool to update.
 updateDevicePool
     :: Text -- ^ 'udpArn'
     -> UpdateDevicePool
-updateDevicePool pArn_ =
-  UpdateDevicePool'
-    { _udpRules = Nothing
-    , _udpName = Nothing
-    , _udpDescription = Nothing
-    , _udpArn = pArn_
-    }
+updateDevicePool pArn_
+  = UpdateDevicePool'{_udpRules = Nothing,
+                      _udpClearMaxDevices = Nothing, _udpName = Nothing,
+                      _udpMaxDevices = Nothing, _udpDescription = Nothing,
+                      _udpArn = pArn_}
 
-
--- | Represents the rules you wish to modify for the device pool. Updating rules is optional; however, if you choose to update rules for your request, the update will replace the existing rules.
+-- | Represents the rules to modify for the device pool. Updating rules is optional. If you update rules for your request, the update replaces the existing rules.
 udpRules :: Lens' UpdateDevicePool [Rule]
 udpRules = lens _udpRules (\ s a -> s{_udpRules = a}) . _Default . _Coerce
 
--- | A string representing the name of the device pool you wish to update.
+-- | Sets whether the @maxDevices@ parameter applies to your device pool. If you set this parameter to @true@ , the @maxDevices@ parameter does not apply, and Device Farm does not limit the number of devices that it adds to your device pool. In this case, Device Farm adds all available devices that meet the criteria specified in the @rules@ parameter. If you use this parameter in your request, you cannot use the @maxDevices@ parameter in the same request.
+udpClearMaxDevices :: Lens' UpdateDevicePool (Maybe Bool)
+udpClearMaxDevices = lens _udpClearMaxDevices (\ s a -> s{_udpClearMaxDevices = a})
+
+-- | A string that represents the name of the device pool to update.
 udpName :: Lens' UpdateDevicePool (Maybe Text)
 udpName = lens _udpName (\ s a -> s{_udpName = a})
 
--- | A description of the device pool you wish to update.
+-- | The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the @rules@ parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests. If you use this parameter in your request, you cannot use the @clearMaxDevices@ parameter in the same request.
+udpMaxDevices :: Lens' UpdateDevicePool (Maybe Int)
+udpMaxDevices = lens _udpMaxDevices (\ s a -> s{_udpMaxDevices = a})
+
+-- | A description of the device pool to update.
 udpDescription :: Lens' UpdateDevicePool (Maybe Text)
 udpDescription = lens _udpDescription (\ s a -> s{_udpDescription = a})
 
--- | The Amazon Resourc Name (ARN) of the Device Farm device pool you wish to update.
+-- | The Amazon Resource Name (ARN) of the Device Farm device pool to update.
 udpArn :: Lens' UpdateDevicePool Text
 udpArn = lens _udpArn (\ s a -> s{_udpArn = a})
 
@@ -127,7 +139,9 @@ instance ToJSON UpdateDevicePool where
           = object
               (catMaybes
                  [("rules" .=) <$> _udpRules,
+                  ("clearMaxDevices" .=) <$> _udpClearMaxDevices,
                   ("name" .=) <$> _udpName,
+                  ("maxDevices" .=) <$> _udpMaxDevices,
                   ("description" .=) <$> _udpDescription,
                   Just ("arn" .= _udpArn)])
 
@@ -142,11 +156,13 @@ instance ToQuery UpdateDevicePool where
 --
 --
 -- /See:/ 'updateDevicePoolResponse' smart constructor.
-data UpdateDevicePoolResponse = UpdateDevicePoolResponse'
-  { _udprsDevicePool     :: !(Maybe DevicePool)
-  , _udprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDevicePoolResponse = UpdateDevicePoolResponse'{_udprsDevicePool
+                                                          ::
+                                                          !(Maybe DevicePool),
+                                                          _udprsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateDevicePoolResponse' with the minimum fields required to make a request.
 --
@@ -158,10 +174,10 @@ data UpdateDevicePoolResponse = UpdateDevicePoolResponse'
 updateDevicePoolResponse
     :: Int -- ^ 'udprsResponseStatus'
     -> UpdateDevicePoolResponse
-updateDevicePoolResponse pResponseStatus_ =
-  UpdateDevicePoolResponse'
-    {_udprsDevicePool = Nothing, _udprsResponseStatus = pResponseStatus_}
-
+updateDevicePoolResponse pResponseStatus_
+  = UpdateDevicePoolResponse'{_udprsDevicePool =
+                                Nothing,
+                              _udprsResponseStatus = pResponseStatus_}
 
 -- | The device pool you just updated.
 udprsDevicePool :: Lens' UpdateDevicePoolResponse (Maybe DevicePool)

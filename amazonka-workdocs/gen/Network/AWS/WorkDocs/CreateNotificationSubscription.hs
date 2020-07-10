@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Configure WorkDocs to use Amazon SNS notifications.
+-- Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription.
 --
 --
--- The endpoint receives a confirmation message, and must confirm the subscription. For more information, see <http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html#SendMessageToHttp.confirm Confirm the Subscription> in the /Amazon Simple Notification Service Developer Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html Subscribe to Notifications> in the /Amazon WorkDocs Developer Guide/ .
 --
 module Network.AWS.WorkDocs.CreateNotificationSubscription
     (
@@ -50,13 +50,18 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'createNotificationSubscription' smart constructor.
-data CreateNotificationSubscription = CreateNotificationSubscription'
-  { _cnsOrganizationId   :: !Text
-  , _cnsEndpoint         :: !Text
-  , _cnsProtocol         :: !SubscriptionProtocolType
-  , _cnsSubscriptionType :: !SubscriptionType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNotificationSubscription = CreateNotificationSubscription'{_cnsOrganizationId
+                                                                      :: !Text,
+                                                                      _cnsEndpoint
+                                                                      :: !Text,
+                                                                      _cnsProtocol
+                                                                      ::
+                                                                      !SubscriptionProtocolType,
+                                                                      _cnsSubscriptionType
+                                                                      ::
+                                                                      !SubscriptionType}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateNotificationSubscription' with the minimum fields required to make a request.
 --
@@ -64,7 +69,7 @@ data CreateNotificationSubscription = CreateNotificationSubscription'
 --
 -- * 'cnsOrganizationId' - The ID of the organization.
 --
--- * 'cnsEndpoint' - The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with "https://".
+-- * 'cnsEndpoint' - The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with @https@ .
 --
 -- * 'cnsProtocol' - The protocol to use. The supported value is https, which delivers JSON-encoded messages using HTTPS POST.
 --
@@ -75,20 +80,19 @@ createNotificationSubscription
     -> SubscriptionProtocolType -- ^ 'cnsProtocol'
     -> SubscriptionType -- ^ 'cnsSubscriptionType'
     -> CreateNotificationSubscription
-createNotificationSubscription pOrganizationId_ pEndpoint_ pProtocol_ pSubscriptionType_ =
-  CreateNotificationSubscription'
-    { _cnsOrganizationId = pOrganizationId_
-    , _cnsEndpoint = pEndpoint_
-    , _cnsProtocol = pProtocol_
-    , _cnsSubscriptionType = pSubscriptionType_
-    }
-
+createNotificationSubscription pOrganizationId_
+  pEndpoint_ pProtocol_ pSubscriptionType_
+  = CreateNotificationSubscription'{_cnsOrganizationId
+                                      = pOrganizationId_,
+                                    _cnsEndpoint = pEndpoint_,
+                                    _cnsProtocol = pProtocol_,
+                                    _cnsSubscriptionType = pSubscriptionType_}
 
 -- | The ID of the organization.
 cnsOrganizationId :: Lens' CreateNotificationSubscription Text
 cnsOrganizationId = lens _cnsOrganizationId (\ s a -> s{_cnsOrganizationId = a})
 
--- | The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with "https://".
+-- | The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with @https@ .
 cnsEndpoint :: Lens' CreateNotificationSubscription Text
 cnsEndpoint = lens _cnsEndpoint (\ s a -> s{_cnsEndpoint = a})
 
@@ -142,11 +146,15 @@ instance ToQuery CreateNotificationSubscription where
         toQuery = const mempty
 
 -- | /See:/ 'createNotificationSubscriptionResponse' smart constructor.
-data CreateNotificationSubscriptionResponse = CreateNotificationSubscriptionResponse'
-  { _cnsrsSubscription   :: !(Maybe Subscription)
-  , _cnsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNotificationSubscriptionResponse = CreateNotificationSubscriptionResponse'{_cnsrsSubscription
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Subscription),
+                                                                                      _cnsrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'CreateNotificationSubscriptionResponse' with the minimum fields required to make a request.
 --
@@ -158,10 +166,12 @@ data CreateNotificationSubscriptionResponse = CreateNotificationSubscriptionResp
 createNotificationSubscriptionResponse
     :: Int -- ^ 'cnsrsResponseStatus'
     -> CreateNotificationSubscriptionResponse
-createNotificationSubscriptionResponse pResponseStatus_ =
-  CreateNotificationSubscriptionResponse'
-    {_cnsrsSubscription = Nothing, _cnsrsResponseStatus = pResponseStatus_}
-
+createNotificationSubscriptionResponse
+  pResponseStatus_
+  = CreateNotificationSubscriptionResponse'{_cnsrsSubscription
+                                              = Nothing,
+                                            _cnsrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | The subscription.
 cnsrsSubscription :: Lens' CreateNotificationSubscriptionResponse (Maybe Subscription)

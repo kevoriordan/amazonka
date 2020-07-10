@@ -49,10 +49,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeUserPool' smart constructor.
-newtype DescribeUserPool = DescribeUserPool'
-  { _dUserPoolId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeUserPool = DescribeUserPool'{_dUserPoolId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeUserPool' with the minimum fields required to make a request.
 --
@@ -62,8 +61,8 @@ newtype DescribeUserPool = DescribeUserPool'
 describeUserPool
     :: Text -- ^ 'dUserPoolId'
     -> DescribeUserPool
-describeUserPool pUserPoolId_ = DescribeUserPool' {_dUserPoolId = pUserPoolId_}
-
+describeUserPool pUserPoolId_
+  = DescribeUserPool'{_dUserPoolId = pUserPoolId_}
 
 -- | The user pool ID for the user pool you want to describe.
 dUserPoolId :: Lens' DescribeUserPool Text
@@ -108,11 +107,13 @@ instance ToQuery DescribeUserPool where
 --
 --
 -- /See:/ 'describeUserPoolResponse' smart constructor.
-data DescribeUserPoolResponse = DescribeUserPoolResponse'
-  { _duprsUserPool       :: !(Maybe UserPoolType)
-  , _duprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUserPoolResponse = DescribeUserPoolResponse'{_duprsUserPool
+                                                          ::
+                                                          !(Maybe UserPoolType),
+                                                          _duprsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeUserPoolResponse' with the minimum fields required to make a request.
 --
@@ -124,10 +125,9 @@ data DescribeUserPoolResponse = DescribeUserPoolResponse'
 describeUserPoolResponse
     :: Int -- ^ 'duprsResponseStatus'
     -> DescribeUserPoolResponse
-describeUserPoolResponse pResponseStatus_ =
-  DescribeUserPoolResponse'
-    {_duprsUserPool = Nothing, _duprsResponseStatus = pResponseStatus_}
-
+describeUserPoolResponse pResponseStatus_
+  = DescribeUserPoolResponse'{_duprsUserPool = Nothing,
+                              _duprsResponseStatus = pResponseStatus_}
 
 -- | The container of metadata returned by the server to describe the pool.
 duprsUserPool :: Lens' DescribeUserPoolResponse (Maybe UserPoolType)

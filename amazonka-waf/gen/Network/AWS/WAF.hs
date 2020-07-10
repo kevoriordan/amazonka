@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This is the /AWS WAF API Reference/ for using AWS WAF with Amazon CloudFront. The AWS WAF actions and data types listed in the reference are available for protecting Amazon CloudFront distributions. You can use these actions and data types via the endpoint /waf.amazonaws.com/ . This guide is for developers who need detailed information about the AWS WAF API actions, data types, and errors. For detailed information about AWS WAF features and an overview of how to use the AWS WAF API, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- This is the /AWS WAF Classic API Reference/ for using AWS WAF Classic with Amazon CloudFront. The AWS WAF Classic actions and data types listed in the reference are available for protecting Amazon CloudFront distributions. You can use these actions and data types via the endpoint /waf.amazonaws.com/ . This guide is for developers who need detailed information about the AWS WAF Classic API actions, data types, and errors. For detailed information about AWS WAF Classic features and an overview of how to use the AWS WAF Classic API, see the <https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html AWS WAF Classic> in the developer guide.
 --
 --
 module Network.AWS.WAF
@@ -22,32 +22,29 @@ module Network.AWS.WAF
     -- * Errors
     -- $errors
 
-    -- ** WAFInvalidAccountException
-    , _WAFInvalidAccountException
-
-    -- ** WAFSubscriptionNotFoundException
-    , _WAFSubscriptionNotFoundException
-
-    -- ** WAFReferencedItemException
-    , _WAFReferencedItemException
+    -- ** WAFNonexistentContainerException
+    , _WAFNonexistentContainerException
 
     -- ** WAFInvalidRegexPatternException
     , _WAFInvalidRegexPatternException
 
-    -- ** WAFInvalidOperationException
-    , _WAFInvalidOperationException
-
-    -- ** WAFNonexistentItemException
-    , _WAFNonexistentItemException
-
-    -- ** WAFInvalidParameterException
-    , _WAFInvalidParameterException
+    -- ** WAFEntityMigrationException
+    , _WAFEntityMigrationException
 
     -- ** WAFLimitsExceededException
     , _WAFLimitsExceededException
 
-    -- ** WAFInvalidPermissionPolicyException
-    , _WAFInvalidPermissionPolicyException
+    -- ** WAFInvalidParameterException
+    , _WAFInvalidParameterException
+
+    -- ** WAFServiceLinkedRoleErrorException
+    , _WAFServiceLinkedRoleErrorException
+
+    -- ** WAFBadRequestException
+    , _WAFBadRequestException
+
+    -- ** WAFInvalidOperationException
+    , _WAFInvalidOperationException
 
     -- ** WAFStaleDataException
     , _WAFStaleDataException
@@ -55,14 +52,32 @@ module Network.AWS.WAF
     -- ** WAFInternalErrorException
     , _WAFInternalErrorException
 
-    -- ** WAFNonexistentContainerException
-    , _WAFNonexistentContainerException
+    -- ** WAFTagOperationException
+    , _WAFTagOperationException
 
-    -- ** WAFDisallowedNameException
-    , _WAFDisallowedNameException
+    -- ** WAFInvalidPermissionPolicyException
+    , _WAFInvalidPermissionPolicyException
+
+    -- ** WAFReferencedItemException
+    , _WAFReferencedItemException
+
+    -- ** WAFSubscriptionNotFoundException
+    , _WAFSubscriptionNotFoundException
+
+    -- ** WAFTagOperationInternalErrorException
+    , _WAFTagOperationInternalErrorException
+
+    -- ** WAFInvalidAccountException
+    , _WAFInvalidAccountException
+
+    -- ** WAFNonexistentItemException
+    , _WAFNonexistentItemException
 
     -- ** WAFNonEmptyEntityException
     , _WAFNonEmptyEntityException
+
+    -- ** WAFDisallowedNameException
+    , _WAFDisallowedNameException
 
     -- * Waiters
     -- $waiters
@@ -70,40 +85,40 @@ module Network.AWS.WAF
     -- * Operations
     -- $operations
 
-    -- ** ListActivatedRulesInRuleGroup
+    -- ** ListActivatedRulesInRuleGroup (Paginated)
     , module Network.AWS.WAF.ListActivatedRulesInRuleGroup
 
-    -- ** ListRateBasedRules
+    -- ** ListRateBasedRules (Paginated)
     , module Network.AWS.WAF.ListRateBasedRules
 
-    -- ** GetSizeConstraintSet
+    -- ** GetSizeConstraintSet 
     , module Network.AWS.WAF.GetSizeConstraintSet
 
-    -- ** DeleteRateBasedRule
+    -- ** DeleteRateBasedRule 
     , module Network.AWS.WAF.DeleteRateBasedRule
 
-    -- ** UpdateRateBasedRule
+    -- ** UpdateRateBasedRule 
     , module Network.AWS.WAF.UpdateRateBasedRule
 
-    -- ** UpdateRule
+    -- ** UpdateRule 
     , module Network.AWS.WAF.UpdateRule
 
-    -- ** DeleteRule
+    -- ** DeleteRule 
     , module Network.AWS.WAF.DeleteRule
 
-    -- ** CreateIPSet
+    -- ** CreateIPSet 
     , module Network.AWS.WAF.CreateIPSet
 
-    -- ** GetRuleGroup
+    -- ** GetRuleGroup 
     , module Network.AWS.WAF.GetRuleGroup
 
-    -- ** GetChangeTokenStatus
+    -- ** GetChangeTokenStatus 
     , module Network.AWS.WAF.GetChangeTokenStatus
 
-    -- ** DeleteWebACL
+    -- ** DeleteWebACL 
     , module Network.AWS.WAF.DeleteWebACL
 
-    -- ** UpdateWebACL
+    -- ** UpdateWebACL 
     , module Network.AWS.WAF.UpdateWebACL
 
     -- ** ListWebACLs (Paginated)
@@ -112,169 +127,193 @@ module Network.AWS.WAF
     -- ** ListRules (Paginated)
     , module Network.AWS.WAF.ListRules
 
-    -- ** CreateRule
+    -- ** CreateRule 
     , module Network.AWS.WAF.CreateRule
 
-    -- ** CreateWebACL
+    -- ** DeleteLoggingConfiguration 
+    , module Network.AWS.WAF.DeleteLoggingConfiguration
+
+    -- ** CreateWebACL 
     , module Network.AWS.WAF.CreateWebACL
 
-    -- ** GetGeoMatchSet
+    -- ** GetGeoMatchSet 
     , module Network.AWS.WAF.GetGeoMatchSet
+
+    -- ** PutLoggingConfiguration 
+    , module Network.AWS.WAF.PutLoggingConfiguration
+
+    -- ** ListTagsForResource 
+    , module Network.AWS.WAF.ListTagsForResource
 
     -- ** ListByteMatchSets (Paginated)
     , module Network.AWS.WAF.ListByteMatchSets
 
-    -- ** ListGeoMatchSets
+    -- ** ListGeoMatchSets (Paginated)
     , module Network.AWS.WAF.ListGeoMatchSets
 
-    -- ** CreateRuleGroup
+    -- ** GetLoggingConfiguration 
+    , module Network.AWS.WAF.GetLoggingConfiguration
+
+    -- ** CreateRuleGroup 
     , module Network.AWS.WAF.CreateRuleGroup
 
-    -- ** DeleteRegexMatchSet
+    -- ** DeleteRegexMatchSet 
     , module Network.AWS.WAF.DeleteRegexMatchSet
 
-    -- ** UpdateRegexMatchSet
+    -- ** UpdateRegexMatchSet 
     , module Network.AWS.WAF.UpdateRegexMatchSet
 
-    -- ** GetIPSet
+    -- ** GetIPSet 
     , module Network.AWS.WAF.GetIPSet
 
-    -- ** GetWebACL
+    -- ** GetWebACL 
     , module Network.AWS.WAF.GetWebACL
 
-    -- ** GetRule
+    -- ** GetRule 
     , module Network.AWS.WAF.GetRule
 
-    -- ** DeleteXSSMatchSet
+    -- ** DeleteXSSMatchSet 
     , module Network.AWS.WAF.DeleteXSSMatchSet
 
-    -- ** UpdateXSSMatchSet
+    -- ** UpdateXSSMatchSet 
     , module Network.AWS.WAF.UpdateXSSMatchSet
+
+    -- ** CreateWebACLMigrationStack 
+    , module Network.AWS.WAF.CreateWebACLMigrationStack
 
     -- ** ListXSSMatchSets (Paginated)
     , module Network.AWS.WAF.ListXSSMatchSets
 
-    -- ** CreateGeoMatchSet
+    -- ** CreateGeoMatchSet 
     , module Network.AWS.WAF.CreateGeoMatchSet
 
-    -- ** GetChangeToken
+    -- ** GetChangeToken 
     , module Network.AWS.WAF.GetChangeToken
 
     -- ** ListSizeConstraintSets (Paginated)
     , module Network.AWS.WAF.ListSizeConstraintSets
 
-    -- ** GetSampledRequests
+    -- ** GetSampledRequests 
     , module Network.AWS.WAF.GetSampledRequests
 
-    -- ** GetSqlInjectionMatchSet
+    -- ** GetSqlInjectionMatchSet 
     , module Network.AWS.WAF.GetSqlInjectionMatchSet
 
-    -- ** ListSubscribedRuleGroups
+    -- ** ListSubscribedRuleGroups (Paginated)
     , module Network.AWS.WAF.ListSubscribedRuleGroups
 
-    -- ** CreateSqlInjectionMatchSet
+    -- ** CreateSqlInjectionMatchSet 
     , module Network.AWS.WAF.CreateSqlInjectionMatchSet
 
-    -- ** GetXSSMatchSet
+    -- ** GetXSSMatchSet 
     , module Network.AWS.WAF.GetXSSMatchSet
 
-    -- ** CreateByteMatchSet
+    -- ** CreateByteMatchSet 
     , module Network.AWS.WAF.CreateByteMatchSet
 
-    -- ** UpdateByteMatchSet
+    -- ** UpdateByteMatchSet 
     , module Network.AWS.WAF.UpdateByteMatchSet
 
-    -- ** DeleteByteMatchSet
+    -- ** DeleteByteMatchSet 
     , module Network.AWS.WAF.DeleteByteMatchSet
 
-    -- ** PutPermissionPolicy
+    -- ** PutPermissionPolicy 
     , module Network.AWS.WAF.PutPermissionPolicy
 
-    -- ** GetRateBasedRuleManagedKeys
+    -- ** ListLoggingConfigurations (Paginated)
+    , module Network.AWS.WAF.ListLoggingConfigurations
+
+    -- ** GetRateBasedRuleManagedKeys (Paginated)
     , module Network.AWS.WAF.GetRateBasedRuleManagedKeys
 
-    -- ** DeletePermissionPolicy
+    -- ** DeletePermissionPolicy 
     , module Network.AWS.WAF.DeletePermissionPolicy
 
-    -- ** GetRegexMatchSet
+    -- ** GetRegexMatchSet 
     , module Network.AWS.WAF.GetRegexMatchSet
 
-    -- ** DeleteIPSet
+    -- ** DeleteIPSet 
     , module Network.AWS.WAF.DeleteIPSet
 
-    -- ** UpdateIPSet
+    -- ** UpdateIPSet 
     , module Network.AWS.WAF.UpdateIPSet
 
     -- ** ListIPSets (Paginated)
     , module Network.AWS.WAF.ListIPSets
 
-    -- ** ListRegexMatchSets
+    -- ** ListRegexMatchSets (Paginated)
     , module Network.AWS.WAF.ListRegexMatchSets
 
-    -- ** CreateXSSMatchSet
+    -- ** CreateXSSMatchSet 
     , module Network.AWS.WAF.CreateXSSMatchSet
 
-    -- ** DeleteGeoMatchSet
+    -- ** DeleteGeoMatchSet 
     , module Network.AWS.WAF.DeleteGeoMatchSet
 
-    -- ** UpdateGeoMatchSet
+    -- ** UpdateGeoMatchSet 
     , module Network.AWS.WAF.UpdateGeoMatchSet
 
-    -- ** GetByteMatchSet
+    -- ** GetByteMatchSet 
     , module Network.AWS.WAF.GetByteMatchSet
 
-    -- ** GetPermissionPolicy
+    -- ** GetPermissionPolicy 
     , module Network.AWS.WAF.GetPermissionPolicy
 
-    -- ** ListRuleGroups
+    -- ** ListRuleGroups (Paginated)
     , module Network.AWS.WAF.ListRuleGroups
 
-    -- ** DeleteRuleGroup
+    -- ** TagResource 
+    , module Network.AWS.WAF.TagResource
+
+    -- ** DeleteRuleGroup 
     , module Network.AWS.WAF.DeleteRuleGroup
 
-    -- ** UpdateRuleGroup
+    -- ** UpdateRuleGroup 
     , module Network.AWS.WAF.UpdateRuleGroup
 
-    -- ** CreateRegexMatchSet
+    -- ** CreateRegexMatchSet 
     , module Network.AWS.WAF.CreateRegexMatchSet
 
-    -- ** GetRateBasedRule
+    -- ** GetRateBasedRule 
     , module Network.AWS.WAF.GetRateBasedRule
 
-    -- ** CreateRegexPatternSet
+    -- ** CreateRegexPatternSet 
     , module Network.AWS.WAF.CreateRegexPatternSet
 
-    -- ** DeleteSizeConstraintSet
+    -- ** DeleteSizeConstraintSet 
     , module Network.AWS.WAF.DeleteSizeConstraintSet
 
-    -- ** UpdateSizeConstraintSet
+    -- ** UpdateSizeConstraintSet 
     , module Network.AWS.WAF.UpdateSizeConstraintSet
 
-    -- ** DeleteRegexPatternSet
+    -- ** UntagResource 
+    , module Network.AWS.WAF.UntagResource
+
+    -- ** DeleteRegexPatternSet 
     , module Network.AWS.WAF.DeleteRegexPatternSet
 
-    -- ** UpdateRegexPatternSet
+    -- ** UpdateRegexPatternSet 
     , module Network.AWS.WAF.UpdateRegexPatternSet
 
-    -- ** CreateSizeConstraintSet
+    -- ** CreateSizeConstraintSet 
     , module Network.AWS.WAF.CreateSizeConstraintSet
 
-    -- ** ListRegexPatternSets
+    -- ** ListRegexPatternSets (Paginated)
     , module Network.AWS.WAF.ListRegexPatternSets
 
     -- ** ListSqlInjectionMatchSets (Paginated)
     , module Network.AWS.WAF.ListSqlInjectionMatchSets
 
-    -- ** GetRegexPatternSet
+    -- ** GetRegexPatternSet 
     , module Network.AWS.WAF.GetRegexPatternSet
 
-    -- ** CreateRateBasedRule
+    -- ** CreateRateBasedRule 
     , module Network.AWS.WAF.CreateRateBasedRule
 
-    -- ** DeleteSqlInjectionMatchSet
+    -- ** DeleteSqlInjectionMatchSet 
     , module Network.AWS.WAF.DeleteSqlInjectionMatchSet
 
-    -- ** UpdateSqlInjectionMatchSet
+    -- ** UpdateSqlInjectionMatchSet 
     , module Network.AWS.WAF.UpdateSqlInjectionMatchSet
 
     -- * Types
@@ -326,6 +365,7 @@ module Network.AWS.WAF
     , activatedRule
     , arOverrideAction
     , arAction
+    , arExcludedRules
     , arType
     , arPriority
     , arRuleId
@@ -356,6 +396,11 @@ module Network.AWS.WAF
     , bmtTargetString
     , bmtTextTransformation
     , bmtPositionalConstraint
+
+    -- ** ExcludedRule
+    , ExcludedRule
+    , excludedRule
+    , erRuleId
 
     -- ** FieldToMatch
     , FieldToMatch
@@ -428,6 +473,13 @@ module Network.AWS.WAF
     , ipSetUpdate
     , isuAction
     , isuIPSetDescriptor
+
+    -- ** LoggingConfiguration
+    , LoggingConfiguration
+    , loggingConfiguration
+    , lcRedactedFields
+    , lcResourceARN
+    , lcLogDestinationConfigs
 
     -- ** Predicate
     , Predicate
@@ -598,6 +650,18 @@ module Network.AWS.WAF
     , srgsName
     , srgsMetricName
 
+    -- ** Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
+
+    -- ** TagInfoForResource
+    , TagInfoForResource
+    , tagInfoForResource
+    , tifrTagList
+    , tifrResourceARN
+
     -- ** TimeWindow
     , TimeWindow
     , timeWindow
@@ -619,6 +683,7 @@ module Network.AWS.WAF
     , webACL
     , waMetricName
     , waName
+    , waWebACLARN
     , waWebACLId
     , waDefaultAction
     , waRules
@@ -672,10 +737,12 @@ import Network.AWS.WAF.CreateRuleGroup
 import Network.AWS.WAF.CreateSizeConstraintSet
 import Network.AWS.WAF.CreateSqlInjectionMatchSet
 import Network.AWS.WAF.CreateWebACL
+import Network.AWS.WAF.CreateWebACLMigrationStack
 import Network.AWS.WAF.CreateXSSMatchSet
 import Network.AWS.WAF.DeleteByteMatchSet
 import Network.AWS.WAF.DeleteGeoMatchSet
 import Network.AWS.WAF.DeleteIPSet
+import Network.AWS.WAF.DeleteLoggingConfiguration
 import Network.AWS.WAF.DeletePermissionPolicy
 import Network.AWS.WAF.DeleteRateBasedRule
 import Network.AWS.WAF.DeleteRegexMatchSet
@@ -691,6 +758,7 @@ import Network.AWS.WAF.GetChangeToken
 import Network.AWS.WAF.GetChangeTokenStatus
 import Network.AWS.WAF.GetGeoMatchSet
 import Network.AWS.WAF.GetIPSet
+import Network.AWS.WAF.GetLoggingConfiguration
 import Network.AWS.WAF.GetPermissionPolicy
 import Network.AWS.WAF.GetRateBasedRule
 import Network.AWS.WAF.GetRateBasedRuleManagedKeys
@@ -707,6 +775,7 @@ import Network.AWS.WAF.ListActivatedRulesInRuleGroup
 import Network.AWS.WAF.ListByteMatchSets
 import Network.AWS.WAF.ListGeoMatchSets
 import Network.AWS.WAF.ListIPSets
+import Network.AWS.WAF.ListLoggingConfigurations
 import Network.AWS.WAF.ListRateBasedRules
 import Network.AWS.WAF.ListRegexMatchSets
 import Network.AWS.WAF.ListRegexPatternSets
@@ -715,10 +784,14 @@ import Network.AWS.WAF.ListRules
 import Network.AWS.WAF.ListSizeConstraintSets
 import Network.AWS.WAF.ListSqlInjectionMatchSets
 import Network.AWS.WAF.ListSubscribedRuleGroups
+import Network.AWS.WAF.ListTagsForResource
 import Network.AWS.WAF.ListWebACLs
 import Network.AWS.WAF.ListXSSMatchSets
+import Network.AWS.WAF.PutLoggingConfiguration
 import Network.AWS.WAF.PutPermissionPolicy
+import Network.AWS.WAF.TagResource
 import Network.AWS.WAF.Types
+import Network.AWS.WAF.UntagResource
 import Network.AWS.WAF.UpdateByteMatchSet
 import Network.AWS.WAF.UpdateGeoMatchSet
 import Network.AWS.WAF.UpdateIPSet

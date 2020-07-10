@@ -29,6 +29,8 @@ module Network.AWS.MediaLive.UpdateInput
     , uiInputSecurityGroups
     , uiDestinations
     , uiName
+    , uiMediaConnectFlows
+    , uiRoleARN
     , uiInputId
 
     -- * Destructuring the Response
@@ -49,14 +51,17 @@ import Network.AWS.Response
 -- | A request to update an input.
 --
 -- /See:/ 'updateInput' smart constructor.
-data UpdateInput = UpdateInput'
-  { _uiSources             :: !(Maybe [InputSourceRequest])
-  , _uiInputSecurityGroups :: !(Maybe [Text])
-  , _uiDestinations        :: !(Maybe [InputDestinationRequest])
-  , _uiName                :: !(Maybe Text)
-  , _uiInputId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateInput = UpdateInput'{_uiSources ::
+                                !(Maybe [InputSourceRequest]),
+                                _uiInputSecurityGroups :: !(Maybe [Text]),
+                                _uiDestinations ::
+                                !(Maybe [InputDestinationRequest]),
+                                _uiName :: !(Maybe Text),
+                                _uiMediaConnectFlows ::
+                                !(Maybe [MediaConnectFlowRequest]),
+                                _uiRoleARN :: !(Maybe Text),
+                                _uiInputId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateInput' with the minimum fields required to make a request.
 --
@@ -70,19 +75,20 @@ data UpdateInput = UpdateInput'
 --
 -- * 'uiName' - Name of the input.
 --
+-- * 'uiMediaConnectFlows' - A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a separate Availability Zone as this ensures your EML input is redundant to AZ issues.
+--
+-- * 'uiRoleARN' - The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+--
 -- * 'uiInputId' - Unique ID of the input.
 updateInput
     :: Text -- ^ 'uiInputId'
     -> UpdateInput
-updateInput pInputId_ =
-  UpdateInput'
-    { _uiSources = Nothing
-    , _uiInputSecurityGroups = Nothing
-    , _uiDestinations = Nothing
-    , _uiName = Nothing
-    , _uiInputId = pInputId_
-    }
-
+updateInput pInputId_
+  = UpdateInput'{_uiSources = Nothing,
+                 _uiInputSecurityGroups = Nothing,
+                 _uiDestinations = Nothing, _uiName = Nothing,
+                 _uiMediaConnectFlows = Nothing, _uiRoleARN = Nothing,
+                 _uiInputId = pInputId_}
 
 -- | The source URLs for a PULL-type input. Every PULL type input needs exactly two source URLs for redundancy. Only specify sources for PULL type Inputs. Leave Destinations empty.
 uiSources :: Lens' UpdateInput [InputSourceRequest]
@@ -99,6 +105,14 @@ uiDestinations = lens _uiDestinations (\ s a -> s{_uiDestinations = a}) . _Defau
 -- | Name of the input.
 uiName :: Lens' UpdateInput (Maybe Text)
 uiName = lens _uiName (\ s a -> s{_uiName = a})
+
+-- | A list of the MediaConnect Flow ARNs that you want to use as the source of the input. You can specify as few as one Flow and presently, as many as two. The only requirement is when you have more than one is that each Flow is in a separate Availability Zone as this ensures your EML input is redundant to AZ issues.
+uiMediaConnectFlows :: Lens' UpdateInput [MediaConnectFlowRequest]
+uiMediaConnectFlows = lens _uiMediaConnectFlows (\ s a -> s{_uiMediaConnectFlows = a}) . _Default . _Coerce
+
+-- | The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
+uiRoleARN :: Lens' UpdateInput (Maybe Text)
+uiRoleARN = lens _uiRoleARN (\ s a -> s{_uiRoleARN = a})
 
 -- | Unique ID of the input.
 uiInputId :: Lens' UpdateInput Text
@@ -132,7 +146,9 @@ instance ToJSON UpdateInput where
                   ("inputSecurityGroups" .=) <$>
                     _uiInputSecurityGroups,
                   ("destinations" .=) <$> _uiDestinations,
-                  ("name" .=) <$> _uiName])
+                  ("name" .=) <$> _uiName,
+                  ("mediaConnectFlows" .=) <$> _uiMediaConnectFlows,
+                  ("roleArn" .=) <$> _uiRoleARN])
 
 instance ToPath UpdateInput where
         toPath UpdateInput'{..}
@@ -144,11 +160,10 @@ instance ToQuery UpdateInput where
 -- | Placeholder documentation for UpdateInputResponse
 --
 -- /See:/ 'updateInputResponse' smart constructor.
-data UpdateInputResponse = UpdateInputResponse'
-  { _uirsInput          :: !(Maybe Input)
-  , _uirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateInputResponse = UpdateInputResponse'{_uirsInput
+                                                :: !(Maybe Input),
+                                                _uirsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateInputResponse' with the minimum fields required to make a request.
 --
@@ -160,10 +175,9 @@ data UpdateInputResponse = UpdateInputResponse'
 updateInputResponse
     :: Int -- ^ 'uirsResponseStatus'
     -> UpdateInputResponse
-updateInputResponse pResponseStatus_ =
-  UpdateInputResponse'
-    {_uirsInput = Nothing, _uirsResponseStatus = pResponseStatus_}
-
+updateInputResponse pResponseStatus_
+  = UpdateInputResponse'{_uirsInput = Nothing,
+                         _uirsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 uirsInput :: Lens' UpdateInputResponse (Maybe Input)

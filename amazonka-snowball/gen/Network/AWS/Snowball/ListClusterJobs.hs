@@ -21,6 +21,8 @@
 -- Returns an array of @JobListEntry@ objects of the specified length. Each @JobListEntry@ object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.Snowball.ListClusterJobs
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.Snowball.ListClusterJobs
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,11 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'listClusterJobs' smart constructor.
-data ListClusterJobs = ListClusterJobs'
-  { _lcjNextToken  :: !(Maybe Text)
-  , _lcjMaxResults :: !(Maybe Nat)
-  , _lcjClusterId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClusterJobs = ListClusterJobs'{_lcjNextToken
+                                        :: !(Maybe Text),
+                                        _lcjMaxResults :: !(Maybe Nat),
+                                        _lcjClusterId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListClusterJobs' with the minimum fields required to make a request.
 --
@@ -67,13 +69,10 @@ data ListClusterJobs = ListClusterJobs'
 listClusterJobs
     :: Text -- ^ 'lcjClusterId'
     -> ListClusterJobs
-listClusterJobs pClusterId_ =
-  ListClusterJobs'
-    { _lcjNextToken = Nothing
-    , _lcjMaxResults = Nothing
-    , _lcjClusterId = pClusterId_
-    }
-
+listClusterJobs pClusterId_
+  = ListClusterJobs'{_lcjNextToken = Nothing,
+                     _lcjMaxResults = Nothing,
+                     _lcjClusterId = pClusterId_}
 
 -- | HTTP requests are stateless. To identify what object comes "next" in the list of @JobListEntry@ objects, you have the option of specifying @NextToken@ as the starting point for your returned list.
 lcjNextToken :: Lens' ListClusterJobs (Maybe Text)
@@ -86,6 +85,13 @@ lcjMaxResults = lens _lcjMaxResults (\ s a -> s{_lcjMaxResults = a}) . mapping _
 -- | The 39-character ID for the cluster that you want to list, for example @CID123e4567-e89b-12d3-a456-426655440000@ .
 lcjClusterId :: Lens' ListClusterJobs Text
 lcjClusterId = lens _lcjClusterId (\ s a -> s{_lcjClusterId = a})
+
+instance AWSPager ListClusterJobs where
+        page rq rs
+          | stop (rs ^. lcjrsNextToken) = Nothing
+          | stop (rs ^. lcjrsJobListEntries) = Nothing
+          | otherwise =
+            Just $ rq & lcjNextToken .~ rs ^. lcjrsNextToken
 
 instance AWSRequest ListClusterJobs where
         type Rs ListClusterJobs = ListClusterJobsResponse
@@ -127,18 +133,21 @@ instance ToQuery ListClusterJobs where
         toQuery = const mempty
 
 -- | /See:/ 'listClusterJobsResponse' smart constructor.
-data ListClusterJobsResponse = ListClusterJobsResponse'
-  { _lcjrsJobListEntries :: !(Maybe [JobListEntry])
-  , _lcjrsNextToken      :: !(Maybe Text)
-  , _lcjrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClusterJobsResponse = ListClusterJobsResponse'{_lcjrsJobListEntries
+                                                        ::
+                                                        !(Maybe [JobListEntry]),
+                                                        _lcjrsNextToken ::
+                                                        !(Maybe Text),
+                                                        _lcjrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListClusterJobsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lcjrsJobListEntries' - Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs.
+-- * 'lcjrsJobListEntries' - Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. 
 --
 -- * 'lcjrsNextToken' - HTTP requests are stateless. If you use the automatically generated @NextToken@ value in your next @ListClusterJobsResult@ call, your list of returned jobs will start from this point in the array.
 --
@@ -146,15 +155,13 @@ data ListClusterJobsResponse = ListClusterJobsResponse'
 listClusterJobsResponse
     :: Int -- ^ 'lcjrsResponseStatus'
     -> ListClusterJobsResponse
-listClusterJobsResponse pResponseStatus_ =
-  ListClusterJobsResponse'
-    { _lcjrsJobListEntries = Nothing
-    , _lcjrsNextToken = Nothing
-    , _lcjrsResponseStatus = pResponseStatus_
-    }
+listClusterJobsResponse pResponseStatus_
+  = ListClusterJobsResponse'{_lcjrsJobListEntries =
+                               Nothing,
+                             _lcjrsNextToken = Nothing,
+                             _lcjrsResponseStatus = pResponseStatus_}
 
-
--- | Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs.
+-- | Each @JobListEntry@ object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. 
 lcjrsJobListEntries :: Lens' ListClusterJobsResponse [JobListEntry]
 lcjrsJobListEntries = lens _lcjrsJobListEntries (\ s a -> s{_lcjrsJobListEntries = a}) . _Default . _Coerce
 

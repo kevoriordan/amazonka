@@ -27,10 +27,10 @@ module Network.AWS.APIGateway.GetIntegrationResponse
       getIntegrationResponse
     , GetIntegrationResponse
     -- * Request Lenses
-    , giiRestAPIId
-    , giiResourceId
-    , giiHttpMethod
-    , giiStatusCode
+    , gtintgrtnRestAPIId
+    , gtintgrtnResourceId
+    , gtintgrtnHttpMethod
+    , gtintgrtnStatusCode
 
     -- * Destructuring the Response
     , integrationResponse
@@ -55,55 +55,57 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getIntegrationResponse' smart constructor.
-data GetIntegrationResponse = GetIntegrationResponse'
-  { _giiRestAPIId  :: !Text
-  , _giiResourceId :: !Text
-  , _giiHttpMethod :: !Text
-  , _giiStatusCode :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIntegrationResponse = GetIntegrationResponse'{_gtintgrtnRestAPIId
+                                                      :: !Text,
+                                                      _gtintgrtnResourceId ::
+                                                      !Text,
+                                                      _gtintgrtnHttpMethod ::
+                                                      !Text,
+                                                      _gtintgrtnStatusCode ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetIntegrationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'giiRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
+-- * 'gtintgrtnRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
--- * 'giiResourceId' - [Required] Specifies a get integration response request's resource identifier.
+-- * 'gtintgrtnResourceId' - [Required] Specifies a get integration response request's resource identifier.
 --
--- * 'giiHttpMethod' - [Required] Specifies a get integration response request's HTTP method.
+-- * 'gtintgrtnHttpMethod' - [Required] Specifies a get integration response request's HTTP method.
 --
--- * 'giiStatusCode' - [Required] Specifies a get integration response request's status code.
+-- * 'gtintgrtnStatusCode' - [Required] Specifies a get integration response request's status code.
 getIntegrationResponse
-    :: Text -- ^ 'giiRestAPIId'
-    -> Text -- ^ 'giiResourceId'
-    -> Text -- ^ 'giiHttpMethod'
-    -> Text -- ^ 'giiStatusCode'
+    :: Text -- ^ 'gtintgrtnRestAPIId'
+    -> Text -- ^ 'gtintgrtnResourceId'
+    -> Text -- ^ 'gtintgrtnHttpMethod'
+    -> Text -- ^ 'gtintgrtnStatusCode'
     -> GetIntegrationResponse
-getIntegrationResponse pRestAPIId_ pResourceId_ pHttpMethod_ pStatusCode_ =
-  GetIntegrationResponse'
-    { _giiRestAPIId = pRestAPIId_
-    , _giiResourceId = pResourceId_
-    , _giiHttpMethod = pHttpMethod_
-    , _giiStatusCode = pStatusCode_
-    }
-
+getIntegrationResponse pRestAPIId_ pResourceId_
+  pHttpMethod_ pStatusCode_
+  = GetIntegrationResponse'{_gtintgrtnRestAPIId =
+                              pRestAPIId_,
+                            _gtintgrtnResourceId = pResourceId_,
+                            _gtintgrtnHttpMethod = pHttpMethod_,
+                            _gtintgrtnStatusCode = pStatusCode_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
-giiRestAPIId :: Lens' GetIntegrationResponse Text
-giiRestAPIId = lens _giiRestAPIId (\ s a -> s{_giiRestAPIId = a})
+gtintgrtnRestAPIId :: Lens' GetIntegrationResponse Text
+gtintgrtnRestAPIId = lens _gtintgrtnRestAPIId (\ s a -> s{_gtintgrtnRestAPIId = a})
 
 -- | [Required] Specifies a get integration response request's resource identifier.
-giiResourceId :: Lens' GetIntegrationResponse Text
-giiResourceId = lens _giiResourceId (\ s a -> s{_giiResourceId = a})
+gtintgrtnResourceId :: Lens' GetIntegrationResponse Text
+gtintgrtnResourceId = lens _gtintgrtnResourceId (\ s a -> s{_gtintgrtnResourceId = a})
 
 -- | [Required] Specifies a get integration response request's HTTP method.
-giiHttpMethod :: Lens' GetIntegrationResponse Text
-giiHttpMethod = lens _giiHttpMethod (\ s a -> s{_giiHttpMethod = a})
+gtintgrtnHttpMethod :: Lens' GetIntegrationResponse Text
+gtintgrtnHttpMethod = lens _gtintgrtnHttpMethod (\ s a -> s{_gtintgrtnHttpMethod = a})
 
 -- | [Required] Specifies a get integration response request's status code.
-giiStatusCode :: Lens' GetIntegrationResponse Text
-giiStatusCode = lens _giiStatusCode (\ s a -> s{_giiStatusCode = a})
+gtintgrtnStatusCode :: Lens' GetIntegrationResponse Text
+gtintgrtnStatusCode = lens _gtintgrtnStatusCode (\ s a -> s{_gtintgrtnStatusCode = a})
 
 instance AWSRequest GetIntegrationResponse where
         type Rs GetIntegrationResponse = IntegrationResponse
@@ -123,10 +125,10 @@ instance ToHeaders GetIntegrationResponse where
 instance ToPath GetIntegrationResponse where
         toPath GetIntegrationResponse'{..}
           = mconcat
-              ["/restapis/", toBS _giiRestAPIId, "/resources/",
-               toBS _giiResourceId, "/methods/",
-               toBS _giiHttpMethod, "/integration/responses/",
-               toBS _giiStatusCode]
+              ["/restapis/", toBS _gtintgrtnRestAPIId,
+               "/resources/", toBS _gtintgrtnResourceId,
+               "/methods/", toBS _gtintgrtnHttpMethod,
+               "/integration/responses/", toBS _gtintgrtnStatusCode]
 
 instance ToQuery GetIntegrationResponse where
         toQuery = const mempty

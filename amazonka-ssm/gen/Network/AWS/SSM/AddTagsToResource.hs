@@ -18,14 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.
+-- Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.
 --
 --
--- Each resource can have a maximum of 50 tags.
+-- Each resource can have a maximum of 50 tags. 
 --
--- We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters.
+-- We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. 
 --
--- For more information about tags, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html Tagging Your Amazon EC2 Resources> in the /Amazon EC2 User Guide/ .
+-- For more information about tags, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html Tagging your Amazon EC2 resources> in the /Amazon EC2 User Guide/ .
 --
 module Network.AWS.SSM.AddTagsToResource
     (
@@ -52,12 +52,11 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'addTagsToResource' smart constructor.
-data AddTagsToResource = AddTagsToResource'
-  { _attrResourceType :: !ResourceTypeForTagging
-  , _attrResourceId   :: !Text
-  , _attrTags         :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToResource = AddTagsToResource'{_attrResourceType
+                                            :: !ResourceTypeForTagging,
+                                            _attrResourceId :: !Text,
+                                            _attrTags :: ![Tag]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsToResource' with the minimum fields required to make a request.
 --
@@ -72,13 +71,10 @@ addTagsToResource
     :: ResourceTypeForTagging -- ^ 'attrResourceType'
     -> Text -- ^ 'attrResourceId'
     -> AddTagsToResource
-addTagsToResource pResourceType_ pResourceId_ =
-  AddTagsToResource'
-    { _attrResourceType = pResourceType_
-    , _attrResourceId = pResourceId_
-    , _attrTags = mempty
-    }
-
+addTagsToResource pResourceType_ pResourceId_
+  = AddTagsToResource'{_attrResourceType =
+                         pResourceType_,
+                       _attrResourceId = pResourceId_, _attrTags = mempty}
 
 -- | Specifies the type of resource you are tagging.
 attrResourceType :: Lens' AddTagsToResource ResourceTypeForTagging
@@ -128,10 +124,10 @@ instance ToQuery AddTagsToResource where
         toQuery = const mempty
 
 -- | /See:/ 'addTagsToResourceResponse' smart constructor.
-newtype AddTagsToResourceResponse = AddTagsToResourceResponse'
-  { _attrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddTagsToResourceResponse = AddTagsToResourceResponse'{_attrrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'AddTagsToResourceResponse' with the minimum fields required to make a request.
 --
@@ -141,9 +137,9 @@ newtype AddTagsToResourceResponse = AddTagsToResourceResponse'
 addTagsToResourceResponse
     :: Int -- ^ 'attrrsResponseStatus'
     -> AddTagsToResourceResponse
-addTagsToResourceResponse pResponseStatus_ =
-  AddTagsToResourceResponse' {_attrrsResponseStatus = pResponseStatus_}
-
+addTagsToResourceResponse pResponseStatus_
+  = AddTagsToResourceResponse'{_attrrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 attrrsResponseStatus :: Lens' AddTagsToResourceResponse Int

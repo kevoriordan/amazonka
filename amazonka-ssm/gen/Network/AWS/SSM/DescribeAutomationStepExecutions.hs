@@ -21,6 +21,8 @@
 -- Information about all active and terminated step executions in an Automation workflow.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeAutomationStepExecutions
     (
     -- * Creating a Request
@@ -43,6 +45,7 @@ module Network.AWS.SSM.DescribeAutomationStepExecutions
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -50,14 +53,28 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeAutomationStepExecutions' smart constructor.
-data DescribeAutomationStepExecutions = DescribeAutomationStepExecutions'
-  { _daseFilters               :: !(Maybe (List1 StepExecutionFilter))
-  , _daseReverseOrder          :: !(Maybe Bool)
-  , _daseNextToken             :: !(Maybe Text)
-  , _daseMaxResults            :: !(Maybe Nat)
-  , _daseAutomationExecutionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAutomationStepExecutions = DescribeAutomationStepExecutions'{_daseFilters
+                                                                          ::
+                                                                          !(Maybe
+                                                                              (List1
+                                                                                 StepExecutionFilter)),
+                                                                          _daseReverseOrder
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Bool),
+                                                                          _daseNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _daseMaxResults
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Nat),
+                                                                          _daseAutomationExecutionId
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeAutomationStepExecutions' with the minimum fields required to make a request.
 --
@@ -75,15 +92,15 @@ data DescribeAutomationStepExecutions = DescribeAutomationStepExecutions'
 describeAutomationStepExecutions
     :: Text -- ^ 'daseAutomationExecutionId'
     -> DescribeAutomationStepExecutions
-describeAutomationStepExecutions pAutomationExecutionId_ =
-  DescribeAutomationStepExecutions'
-    { _daseFilters = Nothing
-    , _daseReverseOrder = Nothing
-    , _daseNextToken = Nothing
-    , _daseMaxResults = Nothing
-    , _daseAutomationExecutionId = pAutomationExecutionId_
-    }
-
+describeAutomationStepExecutions
+  pAutomationExecutionId_
+  = DescribeAutomationStepExecutions'{_daseFilters =
+                                        Nothing,
+                                      _daseReverseOrder = Nothing,
+                                      _daseNextToken = Nothing,
+                                      _daseMaxResults = Nothing,
+                                      _daseAutomationExecutionId =
+                                        pAutomationExecutionId_}
 
 -- | One or more filters to limit the number of step executions returned by the request.
 daseFilters :: Lens' DescribeAutomationStepExecutions (Maybe (NonEmpty StepExecutionFilter))
@@ -104,6 +121,14 @@ daseMaxResults = lens _daseMaxResults (\ s a -> s{_daseMaxResults = a}) . mappin
 -- | The Automation execution ID for which you want step execution descriptions.
 daseAutomationExecutionId :: Lens' DescribeAutomationStepExecutions Text
 daseAutomationExecutionId = lens _daseAutomationExecutionId (\ s a -> s{_daseAutomationExecutionId = a})
+
+instance AWSPager DescribeAutomationStepExecutions
+         where
+        page rq rs
+          | stop (rs ^. dasersNextToken) = Nothing
+          | stop (rs ^. dasersStepExecutions) = Nothing
+          | otherwise =
+            Just $ rq & daseNextToken .~ rs ^. dasersNextToken
 
 instance AWSRequest DescribeAutomationStepExecutions
          where
@@ -157,12 +182,20 @@ instance ToQuery DescribeAutomationStepExecutions
         toQuery = const mempty
 
 -- | /See:/ 'describeAutomationStepExecutionsResponse' smart constructor.
-data DescribeAutomationStepExecutionsResponse = DescribeAutomationStepExecutionsResponse'
-  { _dasersNextToken      :: !(Maybe Text)
-  , _dasersStepExecutions :: !(Maybe [StepExecution])
-  , _dasersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAutomationStepExecutionsResponse = DescribeAutomationStepExecutionsResponse'{_dasersNextToken
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _dasersStepExecutions
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              [StepExecution]),
+                                                                                          _dasersResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DescribeAutomationStepExecutionsResponse' with the minimum fields required to make a request.
 --
@@ -176,13 +209,13 @@ data DescribeAutomationStepExecutionsResponse = DescribeAutomationStepExecutions
 describeAutomationStepExecutionsResponse
     :: Int -- ^ 'dasersResponseStatus'
     -> DescribeAutomationStepExecutionsResponse
-describeAutomationStepExecutionsResponse pResponseStatus_ =
-  DescribeAutomationStepExecutionsResponse'
-    { _dasersNextToken = Nothing
-    , _dasersStepExecutions = Nothing
-    , _dasersResponseStatus = pResponseStatus_
-    }
-
+describeAutomationStepExecutionsResponse
+  pResponseStatus_
+  = DescribeAutomationStepExecutionsResponse'{_dasersNextToken
+                                                = Nothing,
+                                              _dasersStepExecutions = Nothing,
+                                              _dasersResponseStatus =
+                                                pResponseStatus_}
 
 -- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 dasersNextToken :: Lens' DescribeAutomationStepExecutionsResponse (Maybe Text)

@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Use to update a segment.
+-- Creates a new segment for an application or updates the configuration, dimension, and other settings for an existing segment that's associated with an application.
+--
+--
 module Network.AWS.Pinpoint.UpdateSegment
     (
     -- * Creating a Request
@@ -45,20 +47,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateSegment' smart constructor.
-data UpdateSegment = UpdateSegment'
-  { _usSegmentId           :: !Text
-  , _usApplicationId       :: !Text
-  , _usWriteSegmentRequest :: !WriteSegmentRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSegment = UpdateSegment'{_usSegmentId ::
+                                    !Text,
+                                    _usApplicationId :: !Text,
+                                    _usWriteSegmentRequest ::
+                                    !WriteSegmentRequest}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSegment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'usSegmentId' - Undocumented member.
+-- * 'usSegmentId' - The unique identifier for the segment.
 --
--- * 'usApplicationId' - Undocumented member.
+-- * 'usApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'usWriteSegmentRequest' - Undocumented member.
 updateSegment
@@ -66,19 +68,17 @@ updateSegment
     -> Text -- ^ 'usApplicationId'
     -> WriteSegmentRequest -- ^ 'usWriteSegmentRequest'
     -> UpdateSegment
-updateSegment pSegmentId_ pApplicationId_ pWriteSegmentRequest_ =
-  UpdateSegment'
-    { _usSegmentId = pSegmentId_
-    , _usApplicationId = pApplicationId_
-    , _usWriteSegmentRequest = pWriteSegmentRequest_
-    }
+updateSegment pSegmentId_ pApplicationId_
+  pWriteSegmentRequest_
+  = UpdateSegment'{_usSegmentId = pSegmentId_,
+                   _usApplicationId = pApplicationId_,
+                   _usWriteSegmentRequest = pWriteSegmentRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the segment.
 usSegmentId :: Lens' UpdateSegment Text
 usSegmentId = lens _usSegmentId (\ s a -> s{_usSegmentId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 usApplicationId :: Lens' UpdateSegment Text
 usApplicationId = lens _usApplicationId (\ s a -> s{_usApplicationId = a})
 
@@ -123,11 +123,12 @@ instance ToQuery UpdateSegment where
         toQuery = const mempty
 
 -- | /See:/ 'updateSegmentResponse' smart constructor.
-data UpdateSegmentResponse = UpdateSegmentResponse'
-  { _usrsResponseStatus  :: !Int
-  , _usrsSegmentResponse :: !SegmentResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSegmentResponse = UpdateSegmentResponse'{_usrsResponseStatus
+                                                    :: !Int,
+                                                    _usrsSegmentResponse ::
+                                                    !SegmentResponse}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateSegmentResponse' with the minimum fields required to make a request.
 --
@@ -140,12 +141,11 @@ updateSegmentResponse
     :: Int -- ^ 'usrsResponseStatus'
     -> SegmentResponse -- ^ 'usrsSegmentResponse'
     -> UpdateSegmentResponse
-updateSegmentResponse pResponseStatus_ pSegmentResponse_ =
-  UpdateSegmentResponse'
-    { _usrsResponseStatus = pResponseStatus_
-    , _usrsSegmentResponse = pSegmentResponse_
-    }
-
+updateSegmentResponse pResponseStatus_
+  pSegmentResponse_
+  = UpdateSegmentResponse'{_usrsResponseStatus =
+                             pResponseStatus_,
+                           _usrsSegmentResponse = pSegmentResponse_}
 
 -- | -- | The response status code.
 usrsResponseStatus :: Lens' UpdateSegmentResponse Int

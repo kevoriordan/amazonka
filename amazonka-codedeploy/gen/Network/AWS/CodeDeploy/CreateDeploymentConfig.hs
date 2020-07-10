@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a deployment configuration.
+-- Creates a deployment configuration. 
 --
 --
 module Network.AWS.CodeDeploy.CreateDeploymentConfig
@@ -52,38 +52,43 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createDeploymentConfig' smart constructor.
-data CreateDeploymentConfig = CreateDeploymentConfig'
-  { _cdcComputePlatform      :: !(Maybe ComputePlatform)
-  , _cdcMinimumHealthyHosts  :: !(Maybe MinimumHealthyHosts)
-  , _cdcTrafficRoutingConfig :: !(Maybe TrafficRoutingConfig)
-  , _cdcDeploymentConfigName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeploymentConfig = CreateDeploymentConfig'{_cdcComputePlatform
+                                                      ::
+                                                      !(Maybe ComputePlatform),
+                                                      _cdcMinimumHealthyHosts ::
+                                                      !(Maybe
+                                                          MinimumHealthyHosts),
+                                                      _cdcTrafficRoutingConfig
+                                                      ::
+                                                      !(Maybe
+                                                          TrafficRoutingConfig),
+                                                      _cdcDeploymentConfigName
+                                                      :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateDeploymentConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdcComputePlatform' - The destination platform type for the deployment (@Lambda@ or @Server@ >).
+-- * 'cdcComputePlatform' - The destination platform type for the deployment (@Lambda@ , @Server@ , or @ECS@ ).
 --
 -- * 'cdcMinimumHealthyHosts' - The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. The type parameter takes either of the following values:     * HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.     * FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances. The value parameter takes an integer. For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.
 --
--- * 'cdcTrafficRoutingConfig' - The configuration that specifies how the deployment traffic will be routed.
+-- * 'cdcTrafficRoutingConfig' - The configuration that specifies how the deployment traffic is routed.
 --
 -- * 'cdcDeploymentConfigName' - The name of the deployment configuration to create.
 createDeploymentConfig
     :: Text -- ^ 'cdcDeploymentConfigName'
     -> CreateDeploymentConfig
-createDeploymentConfig pDeploymentConfigName_ =
-  CreateDeploymentConfig'
-    { _cdcComputePlatform = Nothing
-    , _cdcMinimumHealthyHosts = Nothing
-    , _cdcTrafficRoutingConfig = Nothing
-    , _cdcDeploymentConfigName = pDeploymentConfigName_
-    }
+createDeploymentConfig pDeploymentConfigName_
+  = CreateDeploymentConfig'{_cdcComputePlatform =
+                              Nothing,
+                            _cdcMinimumHealthyHosts = Nothing,
+                            _cdcTrafficRoutingConfig = Nothing,
+                            _cdcDeploymentConfigName = pDeploymentConfigName_}
 
-
--- | The destination platform type for the deployment (@Lambda@ or @Server@ >).
+-- | The destination platform type for the deployment (@Lambda@ , @Server@ , or @ECS@ ).
 cdcComputePlatform :: Lens' CreateDeploymentConfig (Maybe ComputePlatform)
 cdcComputePlatform = lens _cdcComputePlatform (\ s a -> s{_cdcComputePlatform = a})
 
@@ -91,7 +96,7 @@ cdcComputePlatform = lens _cdcComputePlatform (\ s a -> s{_cdcComputePlatform = 
 cdcMinimumHealthyHosts :: Lens' CreateDeploymentConfig (Maybe MinimumHealthyHosts)
 cdcMinimumHealthyHosts = lens _cdcMinimumHealthyHosts (\ s a -> s{_cdcMinimumHealthyHosts = a})
 
--- | The configuration that specifies how the deployment traffic will be routed.
+-- | The configuration that specifies how the deployment traffic is routed.
 cdcTrafficRoutingConfig :: Lens' CreateDeploymentConfig (Maybe TrafficRoutingConfig)
 cdcTrafficRoutingConfig = lens _cdcTrafficRoutingConfig (\ s a -> s{_cdcTrafficRoutingConfig = a})
 
@@ -147,11 +152,14 @@ instance ToQuery CreateDeploymentConfig where
 --
 --
 -- /See:/ 'createDeploymentConfigResponse' smart constructor.
-data CreateDeploymentConfigResponse = CreateDeploymentConfigResponse'
-  { _cdcrsDeploymentConfigId :: !(Maybe Text)
-  , _cdcrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeploymentConfigResponse = CreateDeploymentConfigResponse'{_cdcrsDeploymentConfigId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cdcrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateDeploymentConfigResponse' with the minimum fields required to make a request.
 --
@@ -163,12 +171,10 @@ data CreateDeploymentConfigResponse = CreateDeploymentConfigResponse'
 createDeploymentConfigResponse
     :: Int -- ^ 'cdcrsResponseStatus'
     -> CreateDeploymentConfigResponse
-createDeploymentConfigResponse pResponseStatus_ =
-  CreateDeploymentConfigResponse'
-    { _cdcrsDeploymentConfigId = Nothing
-    , _cdcrsResponseStatus = pResponseStatus_
-    }
-
+createDeploymentConfigResponse pResponseStatus_
+  = CreateDeploymentConfigResponse'{_cdcrsDeploymentConfigId
+                                      = Nothing,
+                                    _cdcrsResponseStatus = pResponseStatus_}
 
 -- | A unique deployment configuration ID.
 cdcrsDeploymentConfigId :: Lens' CreateDeploymentConfigResponse (Maybe Text)

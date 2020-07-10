@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'registerEventTopic' smart constructor.
-data RegisterEventTopic = RegisterEventTopic'
-  { _retDirectoryId :: !Text
-  , _retTopicName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterEventTopic = RegisterEventTopic'{_retDirectoryId
+                                              :: !Text,
+                                              _retTopicName :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterEventTopic' with the minimum fields required to make a request.
 --
@@ -66,10 +65,10 @@ registerEventTopic
     :: Text -- ^ 'retDirectoryId'
     -> Text -- ^ 'retTopicName'
     -> RegisterEventTopic
-registerEventTopic pDirectoryId_ pTopicName_ =
-  RegisterEventTopic'
-    {_retDirectoryId = pDirectoryId_, _retTopicName = pTopicName_}
-
+registerEventTopic pDirectoryId_ pTopicName_
+  = RegisterEventTopic'{_retDirectoryId =
+                          pDirectoryId_,
+                        _retTopicName = pTopicName_}
 
 -- | The Directory ID that will publish status messages to the SNS topic.
 retDirectoryId :: Lens' RegisterEventTopic Text
@@ -120,10 +119,10 @@ instance ToQuery RegisterEventTopic where
 --
 --
 -- /See:/ 'registerEventTopicResponse' smart constructor.
-newtype RegisterEventTopicResponse = RegisterEventTopicResponse'
-  { _retrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RegisterEventTopicResponse = RegisterEventTopicResponse'{_retrsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'RegisterEventTopicResponse' with the minimum fields required to make a request.
 --
@@ -133,9 +132,9 @@ newtype RegisterEventTopicResponse = RegisterEventTopicResponse'
 registerEventTopicResponse
     :: Int -- ^ 'retrsResponseStatus'
     -> RegisterEventTopicResponse
-registerEventTopicResponse pResponseStatus_ =
-  RegisterEventTopicResponse' {_retrsResponseStatus = pResponseStatus_}
-
+registerEventTopicResponse pResponseStatus_
+  = RegisterEventTopicResponse'{_retrsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 retrsResponseStatus :: Lens' RegisterEventTopicResponse Int

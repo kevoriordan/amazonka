@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @UpdateHITTypeOfHIT@ operation allows you to change the HITType properties of a HIT. This operation disassociates the HIT from its old HITType properties and associates it with the new HITType properties. The HIT takes on the properties of the new HITType in place of the old ones.
+-- The @UpdateHITTypeOfHIT@ operation allows you to change the HITType properties of a HIT. This operation disassociates the HIT from its old HITType properties and associates it with the new HITType properties. The HIT takes on the properties of the new HITType in place of the old ones. 
 --
 --
 module Network.AWS.MechanicalTurk.UpdateHITTypeOfHIT
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateHITTypeOfHIT' smart constructor.
-data UpdateHITTypeOfHIT = UpdateHITTypeOfHIT'
-  { _uhittohitHITId     :: !Text
-  , _uhittohitHITTypeId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateHITTypeOfHIT = UpdateHITTypeOfHIT'{_uhittohitHITId
+                                              :: !Text,
+                                              _uhittohitHITTypeId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateHITTypeOfHIT' with the minimum fields required to make a request.
 --
@@ -62,10 +61,9 @@ updateHITTypeOfHIT
     :: Text -- ^ 'uhittohitHITId'
     -> Text -- ^ 'uhittohitHITTypeId'
     -> UpdateHITTypeOfHIT
-updateHITTypeOfHIT pHITId_ pHITTypeId_ =
-  UpdateHITTypeOfHIT'
-    {_uhittohitHITId = pHITId_, _uhittohitHITTypeId = pHITTypeId_}
-
+updateHITTypeOfHIT pHITId_ pHITTypeId_
+  = UpdateHITTypeOfHIT'{_uhittohitHITId = pHITId_,
+                        _uhittohitHITTypeId = pHITTypeId_}
 
 -- | The HIT to update.
 uhittohitHITId :: Lens' UpdateHITTypeOfHIT Text
@@ -112,10 +110,10 @@ instance ToQuery UpdateHITTypeOfHIT where
         toQuery = const mempty
 
 -- | /See:/ 'updateHITTypeOfHITResponse' smart constructor.
-newtype UpdateHITTypeOfHITResponse = UpdateHITTypeOfHITResponse'
-  { _uhittohitrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateHITTypeOfHITResponse = UpdateHITTypeOfHITResponse'{_uhittohitrsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'UpdateHITTypeOfHITResponse' with the minimum fields required to make a request.
 --
@@ -125,9 +123,9 @@ newtype UpdateHITTypeOfHITResponse = UpdateHITTypeOfHITResponse'
 updateHITTypeOfHITResponse
     :: Int -- ^ 'uhittohitrsResponseStatus'
     -> UpdateHITTypeOfHITResponse
-updateHITTypeOfHITResponse pResponseStatus_ =
-  UpdateHITTypeOfHITResponse' {_uhittohitrsResponseStatus = pResponseStatus_}
-
+updateHITTypeOfHITResponse pResponseStatus_
+  = UpdateHITTypeOfHITResponse'{_uhittohitrsResponseStatus
+                                  = pResponseStatus_}
 
 -- | -- | The response status code.
 uhittohitrsResponseStatus :: Lens' UpdateHITTypeOfHITResponse Int

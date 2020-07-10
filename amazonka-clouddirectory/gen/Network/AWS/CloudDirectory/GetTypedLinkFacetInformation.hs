@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the identity attribute order for a specific 'TypedLinkFacet' . For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- Returns the identity attribute order for a specific 'TypedLinkFacet' . For more information, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 --
 --
 module Network.AWS.CloudDirectory.GetTypedLinkFacetInformation
@@ -46,11 +46,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getTypedLinkFacetInformation' smart constructor.
-data GetTypedLinkFacetInformation = GetTypedLinkFacetInformation'
-  { _gtlfiSchemaARN :: !Text
-  , _gtlfiName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTypedLinkFacetInformation = GetTypedLinkFacetInformation'{_gtlfiSchemaARN
+                                                                  :: !Text,
+                                                                  _gtlfiName ::
+                                                                  !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetTypedLinkFacetInformation' with the minimum fields required to make a request.
 --
@@ -63,10 +64,10 @@ getTypedLinkFacetInformation
     :: Text -- ^ 'gtlfiSchemaARN'
     -> Text -- ^ 'gtlfiName'
     -> GetTypedLinkFacetInformation
-getTypedLinkFacetInformation pSchemaARN_ pName_ =
-  GetTypedLinkFacetInformation'
-    {_gtlfiSchemaARN = pSchemaARN_, _gtlfiName = pName_}
-
+getTypedLinkFacetInformation pSchemaARN_ pName_
+  = GetTypedLinkFacetInformation'{_gtlfiSchemaARN =
+                                    pSchemaARN_,
+                                  _gtlfiName = pName_}
 
 -- | The Amazon Resource Name (ARN) that is associated with the schema. For more information, see 'arns' .
 gtlfiSchemaARN :: Lens' GetTypedLinkFacetInformation Text
@@ -109,30 +110,33 @@ instance ToQuery GetTypedLinkFacetInformation where
         toQuery = const mempty
 
 -- | /See:/ 'getTypedLinkFacetInformationResponse' smart constructor.
-data GetTypedLinkFacetInformationResponse = GetTypedLinkFacetInformationResponse'
-  { _gtlfirsIdentityAttributeOrder :: !(Maybe [Text])
-  , _gtlfirsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTypedLinkFacetInformationResponse = GetTypedLinkFacetInformationResponse'{_gtlfirsIdentityAttributeOrder
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [Text]),
+                                                                                  _gtlfirsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'GetTypedLinkFacetInformationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtlfirsIdentityAttributeOrder' - The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- * 'gtlfirsIdentityAttributeOrder' - The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 --
 -- * 'gtlfirsResponseStatus' - -- | The response status code.
 getTypedLinkFacetInformationResponse
     :: Int -- ^ 'gtlfirsResponseStatus'
     -> GetTypedLinkFacetInformationResponse
-getTypedLinkFacetInformationResponse pResponseStatus_ =
-  GetTypedLinkFacetInformationResponse'
-    { _gtlfirsIdentityAttributeOrder = Nothing
-    , _gtlfirsResponseStatus = pResponseStatus_
-    }
+getTypedLinkFacetInformationResponse pResponseStatus_
+  = GetTypedLinkFacetInformationResponse'{_gtlfirsIdentityAttributeOrder
+                                            = Nothing,
+                                          _gtlfirsResponseStatus =
+                                            pResponseStatus_}
 
-
--- | The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- | The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 gtlfirsIdentityAttributeOrder :: Lens' GetTypedLinkFacetInformationResponse [Text]
 gtlfirsIdentityAttributeOrder = lens _gtlfirsIdentityAttributeOrder (\ s a -> s{_gtlfirsIdentityAttributeOrder = a}) . _Default . _Coerce
 

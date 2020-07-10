@@ -51,12 +51,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLaunchConfigurations' smart constructor.
-data DescribeLaunchConfigurations = DescribeLaunchConfigurations'
-  { _dlcLaunchConfigurationNames :: !(Maybe [Text])
-  , _dlcNextToken                :: !(Maybe Text)
-  , _dlcMaxRecords               :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLaunchConfigurations = DescribeLaunchConfigurations'{_dlcLaunchConfigurationNames
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Text]),
+                                                                  _dlcNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dlcMaxRecords
+                                                                  ::
+                                                                  !(Maybe Int)}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeLaunchConfigurations' with the minimum fields required to make a request.
 --
@@ -66,16 +72,14 @@ data DescribeLaunchConfigurations = DescribeLaunchConfigurations'
 --
 -- * 'dlcNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
--- * 'dlcMaxRecords' - The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+-- * 'dlcMaxRecords' - The maximum number of items to return with this call. The default value is @50@ and the maximum value is @100@ .
 describeLaunchConfigurations
     :: DescribeLaunchConfigurations
-describeLaunchConfigurations =
-  DescribeLaunchConfigurations'
-    { _dlcLaunchConfigurationNames = Nothing
-    , _dlcNextToken = Nothing
-    , _dlcMaxRecords = Nothing
-    }
-
+describeLaunchConfigurations
+  = DescribeLaunchConfigurations'{_dlcLaunchConfigurationNames
+                                    = Nothing,
+                                  _dlcNextToken = Nothing,
+                                  _dlcMaxRecords = Nothing}
 
 -- | The launch configuration names. If you omit this parameter, all launch configurations are described.
 dlcLaunchConfigurationNames :: Lens' DescribeLaunchConfigurations [Text]
@@ -85,7 +89,7 @@ dlcLaunchConfigurationNames = lens _dlcLaunchConfigurationNames (\ s a -> s{_dlc
 dlcNextToken :: Lens' DescribeLaunchConfigurations (Maybe Text)
 dlcNextToken = lens _dlcNextToken (\ s a -> s{_dlcNextToken = a})
 
--- | The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+-- | The maximum number of items to return with this call. The default value is @50@ and the maximum value is @100@ .
 dlcMaxRecords :: Lens' DescribeLaunchConfigurations (Maybe Int)
 dlcMaxRecords = lens _dlcMaxRecords (\ s a -> s{_dlcMaxRecords = a})
 
@@ -134,18 +138,24 @@ instance ToQuery DescribeLaunchConfigurations where
                "MaxRecords" =: _dlcMaxRecords]
 
 -- | /See:/ 'describeLaunchConfigurationsResponse' smart constructor.
-data DescribeLaunchConfigurationsResponse = DescribeLaunchConfigurationsResponse'
-  { _dlcrsNextToken            :: !(Maybe Text)
-  , _dlcrsResponseStatus       :: !Int
-  , _dlcrsLaunchConfigurations :: ![LaunchConfiguration]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLaunchConfigurationsResponse = DescribeLaunchConfigurationsResponse'{_dlcrsNextToken
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _dlcrsResponseStatus
+                                                                                  ::
+                                                                                  !Int,
+                                                                                  _dlcrsLaunchConfigurations
+                                                                                  ::
+                                                                                  ![LaunchConfiguration]}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeLaunchConfigurationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlcrsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- * 'dlcrsNextToken' - A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 --
 -- * 'dlcrsResponseStatus' - -- | The response status code.
 --
@@ -153,15 +163,14 @@ data DescribeLaunchConfigurationsResponse = DescribeLaunchConfigurationsResponse
 describeLaunchConfigurationsResponse
     :: Int -- ^ 'dlcrsResponseStatus'
     -> DescribeLaunchConfigurationsResponse
-describeLaunchConfigurationsResponse pResponseStatus_ =
-  DescribeLaunchConfigurationsResponse'
-    { _dlcrsNextToken = Nothing
-    , _dlcrsResponseStatus = pResponseStatus_
-    , _dlcrsLaunchConfigurations = mempty
-    }
+describeLaunchConfigurationsResponse pResponseStatus_
+  = DescribeLaunchConfigurationsResponse'{_dlcrsNextToken
+                                            = Nothing,
+                                          _dlcrsResponseStatus =
+                                            pResponseStatus_,
+                                          _dlcrsLaunchConfigurations = mempty}
 
-
--- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- | A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the @NextToken@ value when requesting the next set of items. This value is null when there are no more items to return.
 dlcrsNextToken :: Lens' DescribeLaunchConfigurationsResponse (Maybe Text)
 dlcrsNextToken = lens _dlcrsNextToken (\ s a -> s{_dlcrsNextToken = a})
 

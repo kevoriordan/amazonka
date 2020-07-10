@@ -27,6 +27,7 @@ module Network.AWS.CognitoIdentityProvider.ResendConfirmationCode
       resendConfirmationCode
     , ResendConfirmationCode
     -- * Request Lenses
+    , rccClientMetadata
     , rccAnalyticsMetadata
     , rccUserContextData
     , rccSecretHash
@@ -53,18 +54,28 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'resendConfirmationCode' smart constructor.
-data ResendConfirmationCode = ResendConfirmationCode'
-  { _rccAnalyticsMetadata :: !(Maybe AnalyticsMetadataType)
-  , _rccUserContextData   :: !(Maybe UserContextDataType)
-  , _rccSecretHash        :: !(Maybe (Sensitive Text))
-  , _rccClientId          :: !(Sensitive Text)
-  , _rccUsername          :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ResendConfirmationCode = ResendConfirmationCode'{_rccClientMetadata
+                                                      ::
+                                                      !(Maybe (Map Text Text)),
+                                                      _rccAnalyticsMetadata ::
+                                                      !(Maybe
+                                                          AnalyticsMetadataType),
+                                                      _rccUserContextData ::
+                                                      !(Maybe
+                                                          UserContextDataType),
+                                                      _rccSecretHash ::
+                                                      !(Maybe (Sensitive Text)),
+                                                      _rccClientId ::
+                                                      !(Sensitive Text),
+                                                      _rccUsername ::
+                                                      !(Sensitive Text)}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ResendConfirmationCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rccClientMetadata' - A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ResendConfirmationCode API action, Amazon Cognito invokes the function that is assigned to the /custom message/ trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a @clientMetadata@ attribute, which provides the data that you assigned to the ClientMetadata parameter in your ResendConfirmationCode request. In your function code in AWS Lambda, you can process the @clientMetadata@ value to enhance your workflow for your specific needs. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html Customizing User Pool Workflows with Lambda Triggers> in the /Amazon Cognito Developer Guide/ .
 --
 -- * 'rccAnalyticsMetadata' - The Amazon Pinpoint analytics metadata for collecting metrics for @ResendConfirmationCode@ calls.
 --
@@ -79,15 +90,18 @@ resendConfirmationCode
     :: Text -- ^ 'rccClientId'
     -> Text -- ^ 'rccUsername'
     -> ResendConfirmationCode
-resendConfirmationCode pClientId_ pUsername_ =
-  ResendConfirmationCode'
-    { _rccAnalyticsMetadata = Nothing
-    , _rccUserContextData = Nothing
-    , _rccSecretHash = Nothing
-    , _rccClientId = _Sensitive # pClientId_
-    , _rccUsername = _Sensitive # pUsername_
-    }
+resendConfirmationCode pClientId_ pUsername_
+  = ResendConfirmationCode'{_rccClientMetadata =
+                              Nothing,
+                            _rccAnalyticsMetadata = Nothing,
+                            _rccUserContextData = Nothing,
+                            _rccSecretHash = Nothing,
+                            _rccClientId = _Sensitive # pClientId_,
+                            _rccUsername = _Sensitive # pUsername_}
 
+-- | A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the ResendConfirmationCode API action, Amazon Cognito invokes the function that is assigned to the /custom message/ trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a @clientMetadata@ attribute, which provides the data that you assigned to the ClientMetadata parameter in your ResendConfirmationCode request. In your function code in AWS Lambda, you can process the @clientMetadata@ value to enhance your workflow for your specific needs. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html Customizing User Pool Workflows with Lambda Triggers> in the /Amazon Cognito Developer Guide/ .
+rccClientMetadata :: Lens' ResendConfirmationCode (HashMap Text Text)
+rccClientMetadata = lens _rccClientMetadata (\ s a -> s{_rccClientMetadata = a}) . _Default . _Map
 
 -- | The Amazon Pinpoint analytics metadata for collecting metrics for @ResendConfirmationCode@ calls.
 rccAnalyticsMetadata :: Lens' ResendConfirmationCode (Maybe AnalyticsMetadataType)
@@ -138,7 +152,8 @@ instance ToJSON ResendConfirmationCode where
         toJSON ResendConfirmationCode'{..}
           = object
               (catMaybes
-                 [("AnalyticsMetadata" .=) <$> _rccAnalyticsMetadata,
+                 [("ClientMetadata" .=) <$> _rccClientMetadata,
+                  ("AnalyticsMetadata" .=) <$> _rccAnalyticsMetadata,
                   ("UserContextData" .=) <$> _rccUserContextData,
                   ("SecretHash" .=) <$> _rccSecretHash,
                   Just ("ClientId" .= _rccClientId),
@@ -155,11 +170,14 @@ instance ToQuery ResendConfirmationCode where
 --
 --
 -- /See:/ 'resendConfirmationCodeResponse' smart constructor.
-data ResendConfirmationCodeResponse = ResendConfirmationCodeResponse'
-  { _rccrsCodeDeliveryDetails :: !(Maybe CodeDeliveryDetailsType)
-  , _rccrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResendConfirmationCodeResponse = ResendConfirmationCodeResponse'{_rccrsCodeDeliveryDetails
+                                                                      ::
+                                                                      !(Maybe
+                                                                          CodeDeliveryDetailsType),
+                                                                      _rccrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ResendConfirmationCodeResponse' with the minimum fields required to make a request.
 --
@@ -171,12 +189,10 @@ data ResendConfirmationCodeResponse = ResendConfirmationCodeResponse'
 resendConfirmationCodeResponse
     :: Int -- ^ 'rccrsResponseStatus'
     -> ResendConfirmationCodeResponse
-resendConfirmationCodeResponse pResponseStatus_ =
-  ResendConfirmationCodeResponse'
-    { _rccrsCodeDeliveryDetails = Nothing
-    , _rccrsResponseStatus = pResponseStatus_
-    }
-
+resendConfirmationCodeResponse pResponseStatus_
+  = ResendConfirmationCodeResponse'{_rccrsCodeDeliveryDetails
+                                      = Nothing,
+                                    _rccrsResponseStatus = pResponseStatus_}
 
 -- | The code delivery details returned by the server in response to the request to resend the confirmation code.
 rccrsCodeDeliveryDetails :: Lens' ResendConfirmationCodeResponse (Maybe CodeDeliveryDetailsType)

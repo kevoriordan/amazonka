@@ -49,20 +49,21 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the @'ListElasticsearchVersions' @ operation. Use @'MaxResults' @ to control the maximum number of results to retrieve in a single call.
+-- | Container for the parameters to the @'ListElasticsearchVersions' @ operation. Use @'MaxResults' @ to control the maximum number of results to retrieve in a single call. 
 --
 --
--- Use @'NextToken' @ in response to retrieve more results. If the received response does not contain a NextToken, then there are no more results to retrieve.
+-- Use @'NextToken' @ in response to retrieve more results. If the received response does not contain a NextToken, then there are no more results to retrieve. 
 --
 --
 --
 --
 -- /See:/ 'listElasticsearchVersions' smart constructor.
-data ListElasticsearchVersions = ListElasticsearchVersions'
-  { _levNextToken  :: !(Maybe Text)
-  , _levMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListElasticsearchVersions = ListElasticsearchVersions'{_levNextToken
+                                                            :: !(Maybe Text),
+                                                            _levMaxResults ::
+                                                            !(Maybe Int)}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListElasticsearchVersions' with the minimum fields required to make a request.
 --
@@ -70,18 +71,18 @@ data ListElasticsearchVersions = ListElasticsearchVersions'
 --
 -- * 'levNextToken' - Undocumented member.
 --
--- * 'levMaxResults' - Set this value to limit the number of results returned. Value provided must be greater than 10 else it wont be honored.
+-- * 'levMaxResults' - Set this value to limit the number of results returned. Value provided must be greater than 10 else it wont be honored. 
 listElasticsearchVersions
     :: ListElasticsearchVersions
-listElasticsearchVersions =
-  ListElasticsearchVersions' {_levNextToken = Nothing, _levMaxResults = Nothing}
-
+listElasticsearchVersions
+  = ListElasticsearchVersions'{_levNextToken = Nothing,
+                               _levMaxResults = Nothing}
 
 -- | Undocumented member.
 levNextToken :: Lens' ListElasticsearchVersions (Maybe Text)
 levNextToken = lens _levNextToken (\ s a -> s{_levNextToken = a})
 
--- | Set this value to limit the number of results returned. Value provided must be greater than 10 else it wont be honored.
+-- | Set this value to limit the number of results returned. Value provided must be greater than 10 else it wont be honored. 
 levMaxResults :: Lens' ListElasticsearchVersions (Maybe Int)
 levMaxResults = lens _levMaxResults (\ s a -> s{_levMaxResults = a})
 
@@ -120,17 +121,24 @@ instance ToQuery ListElasticsearchVersions where
               ["nextToken" =: _levNextToken,
                "maxResults" =: _levMaxResults]
 
--- | Container for the parameters for response received from @'ListElasticsearchVersions' @ operation.
+-- | Container for the parameters for response received from @'ListElasticsearchVersions' @ operation. 
 --
 --
 --
 -- /See:/ 'listElasticsearchVersionsResponse' smart constructor.
-data ListElasticsearchVersionsResponse = ListElasticsearchVersionsResponse'
-  { _levrsNextToken             :: !(Maybe Text)
-  , _levrsElasticsearchVersions :: !(Maybe [Text])
-  , _levrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListElasticsearchVersionsResponse = ListElasticsearchVersionsResponse'{_levrsNextToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _levrsElasticsearchVersions
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [Text]),
+                                                                            _levrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'ListElasticsearchVersionsResponse' with the minimum fields required to make a request.
 --
@@ -144,13 +152,11 @@ data ListElasticsearchVersionsResponse = ListElasticsearchVersionsResponse'
 listElasticsearchVersionsResponse
     :: Int -- ^ 'levrsResponseStatus'
     -> ListElasticsearchVersionsResponse
-listElasticsearchVersionsResponse pResponseStatus_ =
-  ListElasticsearchVersionsResponse'
-    { _levrsNextToken = Nothing
-    , _levrsElasticsearchVersions = Nothing
-    , _levrsResponseStatus = pResponseStatus_
-    }
-
+listElasticsearchVersionsResponse pResponseStatus_
+  = ListElasticsearchVersionsResponse'{_levrsNextToken
+                                         = Nothing,
+                                       _levrsElasticsearchVersions = Nothing,
+                                       _levrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 levrsNextToken :: Lens' ListElasticsearchVersionsResponse (Maybe Text)

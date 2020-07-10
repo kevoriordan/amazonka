@@ -47,17 +47,24 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for parameters to @PurchaseReservedElasticsearchInstanceOffering@
+-- | Container for parameters to @PurchaseReservedElasticsearchInstanceOffering@ 
 --
 --
 --
 -- /See:/ 'purchaseReservedElasticsearchInstanceOffering' smart constructor.
-data PurchaseReservedElasticsearchInstanceOffering = PurchaseReservedElasticsearchInstanceOffering'
-  { _preioInstanceCount                           :: !(Maybe Nat)
-  , _preioReservedElasticsearchInstanceOfferingId :: !Text
-  , _preioReservationName                         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PurchaseReservedElasticsearchInstanceOffering = PurchaseReservedElasticsearchInstanceOffering'{_preioInstanceCount
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Nat),
+                                                                                                    _preioReservedElasticsearchInstanceOfferingId
+                                                                                                    ::
+                                                                                                    !Text,
+                                                                                                    _preioReservationName
+                                                                                                    ::
+                                                                                                    !Text}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'PurchaseReservedElasticsearchInstanceOffering' with the minimum fields required to make a request.
 --
@@ -72,14 +79,16 @@ purchaseReservedElasticsearchInstanceOffering
     :: Text -- ^ 'preioReservedElasticsearchInstanceOfferingId'
     -> Text -- ^ 'preioReservationName'
     -> PurchaseReservedElasticsearchInstanceOffering
-purchaseReservedElasticsearchInstanceOffering pReservedElasticsearchInstanceOfferingId_ pReservationName_ =
-  PurchaseReservedElasticsearchInstanceOffering'
-    { _preioInstanceCount = Nothing
-    , _preioReservedElasticsearchInstanceOfferingId =
-        pReservedElasticsearchInstanceOfferingId_
-    , _preioReservationName = pReservationName_
-    }
-
+purchaseReservedElasticsearchInstanceOffering
+  pReservedElasticsearchInstanceOfferingId_
+  pReservationName_
+  = PurchaseReservedElasticsearchInstanceOffering'{_preioInstanceCount
+                                                     = Nothing,
+                                                   _preioReservedElasticsearchInstanceOfferingId
+                                                     =
+                                                     pReservedElasticsearchInstanceOfferingId_,
+                                                   _preioReservationName =
+                                                     pReservationName_}
 
 -- | The number of Elasticsearch instances to reserve.
 preioInstanceCount :: Lens' PurchaseReservedElasticsearchInstanceOffering (Maybe Natural)
@@ -152,12 +161,23 @@ instance ToQuery
 --
 --
 -- /See:/ 'purchaseReservedElasticsearchInstanceOfferingResponse' smart constructor.
-data PurchaseReservedElasticsearchInstanceOfferingResponse = PurchaseReservedElasticsearchInstanceOfferingResponse'
-  { _preiorsReservedElasticsearchInstanceId :: !(Maybe Text)
-  , _preiorsReservationName                 :: !(Maybe Text)
-  , _preiorsResponseStatus                  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PurchaseReservedElasticsearchInstanceOfferingResponse = PurchaseReservedElasticsearchInstanceOfferingResponse'{_preiorsReservedElasticsearchInstanceId
+                                                                                                                    ::
+                                                                                                                    !(Maybe
+                                                                                                                        Text),
+                                                                                                                    _preiorsReservationName
+                                                                                                                    ::
+                                                                                                                    !(Maybe
+                                                                                                                        Text),
+                                                                                                                    _preiorsResponseStatus
+                                                                                                                    ::
+                                                                                                                    !Int}
+                                                               deriving (Eq,
+                                                                         Read,
+                                                                         Show,
+                                                                         Data,
+                                                                         Typeable,
+                                                                         Generic)
 
 -- | Creates a value of 'PurchaseReservedElasticsearchInstanceOfferingResponse' with the minimum fields required to make a request.
 --
@@ -171,13 +191,14 @@ data PurchaseReservedElasticsearchInstanceOfferingResponse = PurchaseReservedEla
 purchaseReservedElasticsearchInstanceOfferingResponse
     :: Int -- ^ 'preiorsResponseStatus'
     -> PurchaseReservedElasticsearchInstanceOfferingResponse
-purchaseReservedElasticsearchInstanceOfferingResponse pResponseStatus_ =
-  PurchaseReservedElasticsearchInstanceOfferingResponse'
-    { _preiorsReservedElasticsearchInstanceId = Nothing
-    , _preiorsReservationName = Nothing
-    , _preiorsResponseStatus = pResponseStatus_
-    }
-
+purchaseReservedElasticsearchInstanceOfferingResponse
+  pResponseStatus_
+  = PurchaseReservedElasticsearchInstanceOfferingResponse'{_preiorsReservedElasticsearchInstanceId
+                                                             = Nothing,
+                                                           _preiorsReservationName
+                                                             = Nothing,
+                                                           _preiorsResponseStatus
+                                                             = pResponseStatus_}
 
 -- | Details of the reserved Elasticsearch instance which was purchased.
 preiorsReservedElasticsearchInstanceId :: Lens' PurchaseReservedElasticsearchInstanceOfferingResponse (Maybe Text)

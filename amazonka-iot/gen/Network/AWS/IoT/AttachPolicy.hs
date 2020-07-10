@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachPolicy' smart constructor.
-data AttachPolicy = AttachPolicy'
-  { _apPolicyName :: !Text
-  , _apTarget     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachPolicy = AttachPolicy'{_apPolicyName ::
+                                  !Text,
+                                  _apTarget :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachPolicy' with the minimum fields required to make a request.
 --
@@ -55,20 +54,20 @@ data AttachPolicy = AttachPolicy'
 --
 -- * 'apPolicyName' - The name of the policy to attach.
 --
--- * 'apTarget' - The identity to which the policy is attached.
+-- * 'apTarget' - The <https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html identity> to which the policy is attached.
 attachPolicy
     :: Text -- ^ 'apPolicyName'
     -> Text -- ^ 'apTarget'
     -> AttachPolicy
-attachPolicy pPolicyName_ pTarget_ =
-  AttachPolicy' {_apPolicyName = pPolicyName_, _apTarget = pTarget_}
-
+attachPolicy pPolicyName_ pTarget_
+  = AttachPolicy'{_apPolicyName = pPolicyName_,
+                  _apTarget = pTarget_}
 
 -- | The name of the policy to attach.
 apPolicyName :: Lens' AttachPolicy Text
 apPolicyName = lens _apPolicyName (\ s a -> s{_apPolicyName = a})
 
--- | The identity to which the policy is attached.
+-- | The <https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html identity> to which the policy is attached.
 apTarget :: Lens' AttachPolicy Text
 apTarget = lens _apTarget (\ s a -> s{_apTarget = a})
 
@@ -96,16 +95,13 @@ instance ToQuery AttachPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'attachPolicyResponse' smart constructor.
-data AttachPolicyResponse =
-  AttachPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachPolicyResponse = AttachPolicyResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachPolicyResponse' with the minimum fields required to make a request.
 --
 attachPolicyResponse
     :: AttachPolicyResponse
 attachPolicyResponse = AttachPolicyResponse'
-
 
 instance NFData AttachPolicyResponse where

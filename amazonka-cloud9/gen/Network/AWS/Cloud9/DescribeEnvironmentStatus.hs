@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEnvironmentStatus' smart constructor.
-newtype DescribeEnvironmentStatus = DescribeEnvironmentStatus'
-  { _desEnvironmentId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeEnvironmentStatus = DescribeEnvironmentStatus'{_desEnvironmentId
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeEnvironmentStatus' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DescribeEnvironmentStatus = DescribeEnvironmentStatus'
 describeEnvironmentStatus
     :: Text -- ^ 'desEnvironmentId'
     -> DescribeEnvironmentStatus
-describeEnvironmentStatus pEnvironmentId_ =
-  DescribeEnvironmentStatus' {_desEnvironmentId = pEnvironmentId_}
-
+describeEnvironmentStatus pEnvironmentId_
+  = DescribeEnvironmentStatus'{_desEnvironmentId =
+                                 pEnvironmentId_}
 
 -- | The ID of the environment to get status information about.
 desEnvironmentId :: Lens' DescribeEnvironmentStatus Text
@@ -105,12 +105,19 @@ instance ToQuery DescribeEnvironmentStatus where
         toQuery = const mempty
 
 -- | /See:/ 'describeEnvironmentStatusResponse' smart constructor.
-data DescribeEnvironmentStatusResponse = DescribeEnvironmentStatusResponse'
-  { _desrsStatus         :: !(Maybe EnvironmentStatus)
-  , _desrsMessage        :: !(Maybe Text)
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEnvironmentStatusResponse = DescribeEnvironmentStatusResponse'{_desrsStatus
+                                                                            ::
+                                                                            !(Maybe
+                                                                                EnvironmentStatus),
+                                                                            _desrsMessage
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _desrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeEnvironmentStatusResponse' with the minimum fields required to make a request.
 --
@@ -124,13 +131,11 @@ data DescribeEnvironmentStatusResponse = DescribeEnvironmentStatusResponse'
 describeEnvironmentStatusResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeEnvironmentStatusResponse
-describeEnvironmentStatusResponse pResponseStatus_ =
-  DescribeEnvironmentStatusResponse'
-    { _desrsStatus = Nothing
-    , _desrsMessage = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
-
+describeEnvironmentStatusResponse pResponseStatus_
+  = DescribeEnvironmentStatusResponse'{_desrsStatus =
+                                         Nothing,
+                                       _desrsMessage = Nothing,
+                                       _desrsResponseStatus = pResponseStatus_}
 
 -- | The status of the environment. Available values include:     * @connecting@ : The environment is connecting.     * @creating@ : The environment is being created.     * @deleting@ : The environment is being deleted.     * @error@ : The environment is in an error state.     * @ready@ : The environment is ready.     * @stopped@ : The environment is stopped.     * @stopping@ : The environment is stopping.
 desrsStatus :: Lens' DescribeEnvironmentStatusResponse (Maybe EnvironmentStatus)

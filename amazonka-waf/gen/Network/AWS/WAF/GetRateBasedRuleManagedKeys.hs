@@ -21,6 +21,8 @@
 -- Returns an array of IP addresses currently being blocked by the 'RateBasedRule' that is specified by the @RuleId@ . The maximum number of managed keys that will be blocked is 10,000. If more than 10,000 addresses exceed the rate limit, the 10,000 addresses with the highest rates will be blocked.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WAF.GetRateBasedRuleManagedKeys
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.WAF.GetRateBasedRuleManagedKeys
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -47,11 +50,13 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'getRateBasedRuleManagedKeys' smart constructor.
-data GetRateBasedRuleManagedKeys = GetRateBasedRuleManagedKeys'
-  { _grbrmkNextMarker :: !(Maybe Text)
-  , _grbrmkRuleId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRateBasedRuleManagedKeys = GetRateBasedRuleManagedKeys'{_grbrmkNextMarker
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _grbrmkRuleId ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetRateBasedRuleManagedKeys' with the minimum fields required to make a request.
 --
@@ -63,10 +68,10 @@ data GetRateBasedRuleManagedKeys = GetRateBasedRuleManagedKeys'
 getRateBasedRuleManagedKeys
     :: Text -- ^ 'grbrmkRuleId'
     -> GetRateBasedRuleManagedKeys
-getRateBasedRuleManagedKeys pRuleId_ =
-  GetRateBasedRuleManagedKeys'
-    {_grbrmkNextMarker = Nothing, _grbrmkRuleId = pRuleId_}
-
+getRateBasedRuleManagedKeys pRuleId_
+  = GetRateBasedRuleManagedKeys'{_grbrmkNextMarker =
+                                   Nothing,
+                                 _grbrmkRuleId = pRuleId_}
 
 -- | A null value and not currently used. Do not include this in your request.
 grbrmkNextMarker :: Lens' GetRateBasedRuleManagedKeys (Maybe Text)
@@ -75,6 +80,14 @@ grbrmkNextMarker = lens _grbrmkNextMarker (\ s a -> s{_grbrmkNextMarker = a})
 -- | The @RuleId@ of the 'RateBasedRule' for which you want to get a list of @ManagedKeys@ . @RuleId@ is returned by 'CreateRateBasedRule' and by 'ListRateBasedRules' .
 grbrmkRuleId :: Lens' GetRateBasedRuleManagedKeys Text
 grbrmkRuleId = lens _grbrmkRuleId (\ s a -> s{_grbrmkRuleId = a})
+
+instance AWSPager GetRateBasedRuleManagedKeys where
+        page rq rs
+          | stop (rs ^. grbrmkrsNextMarker) = Nothing
+          | stop (rs ^. grbrmkrsManagedKeys) = Nothing
+          | otherwise =
+            Just $ rq &
+              grbrmkNextMarker .~ rs ^. grbrmkrsNextMarker
 
 instance AWSRequest GetRateBasedRuleManagedKeys where
         type Rs GetRateBasedRuleManagedKeys =
@@ -116,12 +129,19 @@ instance ToQuery GetRateBasedRuleManagedKeys where
         toQuery = const mempty
 
 -- | /See:/ 'getRateBasedRuleManagedKeysResponse' smart constructor.
-data GetRateBasedRuleManagedKeysResponse = GetRateBasedRuleManagedKeysResponse'
-  { _grbrmkrsNextMarker     :: !(Maybe Text)
-  , _grbrmkrsManagedKeys    :: !(Maybe [Text])
-  , _grbrmkrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRateBasedRuleManagedKeysResponse = GetRateBasedRuleManagedKeysResponse'{_grbrmkrsNextMarker
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _grbrmkrsManagedKeys
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Text]),
+                                                                                _grbrmkrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'GetRateBasedRuleManagedKeysResponse' with the minimum fields required to make a request.
 --
@@ -129,25 +149,24 @@ data GetRateBasedRuleManagedKeysResponse = GetRateBasedRuleManagedKeysResponse'
 --
 -- * 'grbrmkrsNextMarker' - A null value and not currently used.
 --
--- * 'grbrmkrsManagedKeys' - An array of IP addresses that currently are blocked by the specified 'RateBasedRule' .
+-- * 'grbrmkrsManagedKeys' - An array of IP addresses that currently are blocked by the specified 'RateBasedRule' . 
 --
 -- * 'grbrmkrsResponseStatus' - -- | The response status code.
 getRateBasedRuleManagedKeysResponse
     :: Int -- ^ 'grbrmkrsResponseStatus'
     -> GetRateBasedRuleManagedKeysResponse
-getRateBasedRuleManagedKeysResponse pResponseStatus_ =
-  GetRateBasedRuleManagedKeysResponse'
-    { _grbrmkrsNextMarker = Nothing
-    , _grbrmkrsManagedKeys = Nothing
-    , _grbrmkrsResponseStatus = pResponseStatus_
-    }
-
+getRateBasedRuleManagedKeysResponse pResponseStatus_
+  = GetRateBasedRuleManagedKeysResponse'{_grbrmkrsNextMarker
+                                           = Nothing,
+                                         _grbrmkrsManagedKeys = Nothing,
+                                         _grbrmkrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | A null value and not currently used.
 grbrmkrsNextMarker :: Lens' GetRateBasedRuleManagedKeysResponse (Maybe Text)
 grbrmkrsNextMarker = lens _grbrmkrsNextMarker (\ s a -> s{_grbrmkrsNextMarker = a})
 
--- | An array of IP addresses that currently are blocked by the specified 'RateBasedRule' .
+-- | An array of IP addresses that currently are blocked by the specified 'RateBasedRule' . 
 grbrmkrsManagedKeys :: Lens' GetRateBasedRuleManagedKeysResponse [Text]
 grbrmkrsManagedKeys = lens _grbrmkrsManagedKeys (\ s a -> s{_grbrmkrsManagedKeys = a}) . _Default . _Coerce
 

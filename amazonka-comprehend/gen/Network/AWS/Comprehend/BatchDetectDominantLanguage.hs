@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Determines the dominant language of the input text for a batch of documents. For a list of languages that Amazon Comprehend can detect, see <http://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html Amazon Comprehend Supported Languages> .
+-- Determines the dominant language of the input text for a batch of documents. For a list of languages that Amazon Comprehend can detect, see <https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html Amazon Comprehend Supported Languages> . 
 --
 --
 module Network.AWS.Comprehend.BatchDetectDominantLanguage
@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchDetectDominantLanguage' smart constructor.
-newtype BatchDetectDominantLanguage = BatchDetectDominantLanguage'
-  { _bddlTextList :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype BatchDetectDominantLanguage = BatchDetectDominantLanguage'{_bddlTextList
+                                                                   :: [Text]}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'BatchDetectDominantLanguage' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype BatchDetectDominantLanguage = BatchDetectDominantLanguage'
 -- * 'bddlTextList' - A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document should contain at least 20 characters and must contain fewer than 5,000 bytes of UTF-8 encoded characters.
 batchDetectDominantLanguage
     :: BatchDetectDominantLanguage
-batchDetectDominantLanguage =
-  BatchDetectDominantLanguage' {_bddlTextList = mempty}
-
+batchDetectDominantLanguage
+  = BatchDetectDominantLanguage'{_bddlTextList =
+                                   mempty}
 
 -- | A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document should contain at least 20 characters and must contain fewer than 5,000 bytes of UTF-8 encoded characters.
 bddlTextList :: Lens' BatchDetectDominantLanguage [Text]
@@ -104,12 +104,17 @@ instance ToQuery BatchDetectDominantLanguage where
         toQuery = const mempty
 
 -- | /See:/ 'batchDetectDominantLanguageResponse' smart constructor.
-data BatchDetectDominantLanguageResponse = BatchDetectDominantLanguageResponse'
-  { _bddlrsResponseStatus :: !Int
-  , _bddlrsResultList     :: ![BatchDetectDominantLanguageItemResult]
-  , _bddlrsErrorList      :: ![BatchItemError]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDetectDominantLanguageResponse = BatchDetectDominantLanguageResponse'{_bddlrsResponseStatus
+                                                                                ::
+                                                                                !Int,
+                                                                                _bddlrsResultList
+                                                                                ::
+                                                                                ![BatchDetectDominantLanguageItemResult],
+                                                                                _bddlrsErrorList
+                                                                                ::
+                                                                                ![BatchItemError]}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'BatchDetectDominantLanguageResponse' with the minimum fields required to make a request.
 --
@@ -123,13 +128,11 @@ data BatchDetectDominantLanguageResponse = BatchDetectDominantLanguageResponse'
 batchDetectDominantLanguageResponse
     :: Int -- ^ 'bddlrsResponseStatus'
     -> BatchDetectDominantLanguageResponse
-batchDetectDominantLanguageResponse pResponseStatus_ =
-  BatchDetectDominantLanguageResponse'
-    { _bddlrsResponseStatus = pResponseStatus_
-    , _bddlrsResultList = mempty
-    , _bddlrsErrorList = mempty
-    }
-
+batchDetectDominantLanguageResponse pResponseStatus_
+  = BatchDetectDominantLanguageResponse'{_bddlrsResponseStatus
+                                           = pResponseStatus_,
+                                         _bddlrsResultList = mempty,
+                                         _bddlrsErrorList = mempty}
 
 -- | -- | The response status code.
 bddlrsResponseStatus :: Lens' BatchDetectDominantLanguageResponse Int

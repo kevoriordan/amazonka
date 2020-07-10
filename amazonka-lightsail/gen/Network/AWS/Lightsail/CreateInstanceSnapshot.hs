@@ -21,12 +21,15 @@
 -- Creates a snapshot of a specific virtual private server, or /instance/ . You can use a snapshot to create a new instance that is based on that snapshot.
 --
 --
+-- The @create instance snapshot@ operation supports tag-based access control via request tags. For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.CreateInstanceSnapshot
     (
     -- * Creating a Request
       createInstanceSnapshot
     , CreateInstanceSnapshot
     -- * Request Lenses
+    , cisTags
     , cisInstanceSnapshotName
     , cisInstanceName
 
@@ -46,15 +49,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createInstanceSnapshot' smart constructor.
-data CreateInstanceSnapshot = CreateInstanceSnapshot'
-  { _cisInstanceSnapshotName :: !Text
-  , _cisInstanceName         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateInstanceSnapshot = CreateInstanceSnapshot'{_cisTags
+                                                      :: !(Maybe [Tag]),
+                                                      _cisInstanceSnapshotName
+                                                      :: !Text,
+                                                      _cisInstanceName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateInstanceSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cisTags' - The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the @tag resource@ operation.
 --
 -- * 'cisInstanceSnapshotName' - The name for your new snapshot.
 --
@@ -63,12 +70,15 @@ createInstanceSnapshot
     :: Text -- ^ 'cisInstanceSnapshotName'
     -> Text -- ^ 'cisInstanceName'
     -> CreateInstanceSnapshot
-createInstanceSnapshot pInstanceSnapshotName_ pInstanceName_ =
-  CreateInstanceSnapshot'
-    { _cisInstanceSnapshotName = pInstanceSnapshotName_
-    , _cisInstanceName = pInstanceName_
-    }
+createInstanceSnapshot pInstanceSnapshotName_
+  pInstanceName_
+  = CreateInstanceSnapshot'{_cisTags = Nothing,
+                            _cisInstanceSnapshotName = pInstanceSnapshotName_,
+                            _cisInstanceName = pInstanceName_}
 
+-- | The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the @tag resource@ operation.
+cisTags :: Lens' CreateInstanceSnapshot [Tag]
+cisTags = lens _cisTags (\ s a -> s{_cisTags = a}) . _Default . _Coerce
 
 -- | The name for your new snapshot.
 cisInstanceSnapshotName :: Lens' CreateInstanceSnapshot Text
@@ -107,7 +117,8 @@ instance ToJSON CreateInstanceSnapshot where
         toJSON CreateInstanceSnapshot'{..}
           = object
               (catMaybes
-                 [Just
+                 [("tags" .=) <$> _cisTags,
+                  Just
                     ("instanceSnapshotName" .= _cisInstanceSnapshotName),
                   Just ("instanceName" .= _cisInstanceName)])
 
@@ -118,28 +129,31 @@ instance ToQuery CreateInstanceSnapshot where
         toQuery = const mempty
 
 -- | /See:/ 'createInstanceSnapshotResponse' smart constructor.
-data CreateInstanceSnapshotResponse = CreateInstanceSnapshotResponse'
-  { _cisrsOperations     :: !(Maybe [Operation])
-  , _cisrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateInstanceSnapshotResponse = CreateInstanceSnapshotResponse'{_cisrsOperations
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Operation]),
+                                                                      _cisrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateInstanceSnapshotResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cisrsOperations' - An array of key-value pairs containing information about the results of your create instances snapshot request.
+-- * 'cisrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'cisrsResponseStatus' - -- | The response status code.
 createInstanceSnapshotResponse
     :: Int -- ^ 'cisrsResponseStatus'
     -> CreateInstanceSnapshotResponse
-createInstanceSnapshotResponse pResponseStatus_ =
-  CreateInstanceSnapshotResponse'
-    {_cisrsOperations = Nothing, _cisrsResponseStatus = pResponseStatus_}
+createInstanceSnapshotResponse pResponseStatus_
+  = CreateInstanceSnapshotResponse'{_cisrsOperations =
+                                      Nothing,
+                                    _cisrsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your create instances snapshot request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 cisrsOperations :: Lens' CreateInstanceSnapshotResponse [Operation]
 cisrsOperations = lens _cisrsOperations (\ s a -> s{_cisrsOperations = a}) . _Default . _Coerce
 

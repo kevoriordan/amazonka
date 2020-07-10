@@ -21,15 +21,19 @@
 -- Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.
 --
 --
+-- If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html VPC Endpoint Service Private DNS Name Verification> in the /Amazon Virtual Private Cloud User Guide/ .
+--
 module Network.AWS.EC2.ModifyVPCEndpointServiceConfiguration
     (
     -- * Creating a Request
       modifyVPCEndpointServiceConfiguration
     , ModifyVPCEndpointServiceConfiguration
     -- * Request Lenses
+    , mvescRemovePrivateDNSName
     , mvescRemoveNetworkLoadBalancerARNs
     , mvescAcceptanceRequired
     , mvescAddNetworkLoadBalancerARNs
+    , mvescPrivateDNSName
     , mvescDryRun
     , mvescServiceId
 
@@ -49,24 +53,49 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyVPCEndpointServiceConfiguration' smart constructor.
-data ModifyVPCEndpointServiceConfiguration = ModifyVPCEndpointServiceConfiguration'
-  { _mvescRemoveNetworkLoadBalancerARNs :: !(Maybe [Text])
-  , _mvescAcceptanceRequired            :: !(Maybe Bool)
-  , _mvescAddNetworkLoadBalancerARNs    :: !(Maybe [Text])
-  , _mvescDryRun                        :: !(Maybe Bool)
-  , _mvescServiceId                     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyVPCEndpointServiceConfiguration = ModifyVPCEndpointServiceConfiguration'{_mvescRemovePrivateDNSName
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Bool),
+                                                                                    _mvescRemoveNetworkLoadBalancerARNs
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [Text]),
+                                                                                    _mvescAcceptanceRequired
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Bool),
+                                                                                    _mvescAddNetworkLoadBalancerARNs
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [Text]),
+                                                                                    _mvescPrivateDNSName
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _mvescDryRun
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Bool),
+                                                                                    _mvescServiceId
+                                                                                    ::
+                                                                                    !Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'ModifyVPCEndpointServiceConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mvescRemovePrivateDNSName' - Removes the private DNS name of the endpoint service.
+--
 -- * 'mvescRemoveNetworkLoadBalancerARNs' - The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your service configuration.
 --
--- * 'mvescAcceptanceRequired' - Indicate whether requests to create an endpoint to your service must be accepted.
+-- * 'mvescAcceptanceRequired' - Indicates whether requests to create an endpoint to your service must be accepted.
 --
 -- * 'mvescAddNetworkLoadBalancerARNs' - The Amazon Resource Names (ARNs) of Network Load Balancers to add to your service configuration.
+--
+-- * 'mvescPrivateDNSName' - The private DNS name to assign to the endpoint service.
 --
 -- * 'mvescDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
@@ -74,27 +103,37 @@ data ModifyVPCEndpointServiceConfiguration = ModifyVPCEndpointServiceConfigurati
 modifyVPCEndpointServiceConfiguration
     :: Text -- ^ 'mvescServiceId'
     -> ModifyVPCEndpointServiceConfiguration
-modifyVPCEndpointServiceConfiguration pServiceId_ =
-  ModifyVPCEndpointServiceConfiguration'
-    { _mvescRemoveNetworkLoadBalancerARNs = Nothing
-    , _mvescAcceptanceRequired = Nothing
-    , _mvescAddNetworkLoadBalancerARNs = Nothing
-    , _mvescDryRun = Nothing
-    , _mvescServiceId = pServiceId_
-    }
+modifyVPCEndpointServiceConfiguration pServiceId_
+  = ModifyVPCEndpointServiceConfiguration'{_mvescRemovePrivateDNSName
+                                             = Nothing,
+                                           _mvescRemoveNetworkLoadBalancerARNs =
+                                             Nothing,
+                                           _mvescAcceptanceRequired = Nothing,
+                                           _mvescAddNetworkLoadBalancerARNs =
+                                             Nothing,
+                                           _mvescPrivateDNSName = Nothing,
+                                           _mvescDryRun = Nothing,
+                                           _mvescServiceId = pServiceId_}
 
+-- | Removes the private DNS name of the endpoint service.
+mvescRemovePrivateDNSName :: Lens' ModifyVPCEndpointServiceConfiguration (Maybe Bool)
+mvescRemovePrivateDNSName = lens _mvescRemovePrivateDNSName (\ s a -> s{_mvescRemovePrivateDNSName = a})
 
 -- | The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your service configuration.
 mvescRemoveNetworkLoadBalancerARNs :: Lens' ModifyVPCEndpointServiceConfiguration [Text]
 mvescRemoveNetworkLoadBalancerARNs = lens _mvescRemoveNetworkLoadBalancerARNs (\ s a -> s{_mvescRemoveNetworkLoadBalancerARNs = a}) . _Default . _Coerce
 
--- | Indicate whether requests to create an endpoint to your service must be accepted.
+-- | Indicates whether requests to create an endpoint to your service must be accepted.
 mvescAcceptanceRequired :: Lens' ModifyVPCEndpointServiceConfiguration (Maybe Bool)
 mvescAcceptanceRequired = lens _mvescAcceptanceRequired (\ s a -> s{_mvescAcceptanceRequired = a})
 
 -- | The Amazon Resource Names (ARNs) of Network Load Balancers to add to your service configuration.
 mvescAddNetworkLoadBalancerARNs :: Lens' ModifyVPCEndpointServiceConfiguration [Text]
 mvescAddNetworkLoadBalancerARNs = lens _mvescAddNetworkLoadBalancerARNs (\ s a -> s{_mvescAddNetworkLoadBalancerARNs = a}) . _Default . _Coerce
+
+-- | The private DNS name to assign to the endpoint service.
+mvescPrivateDNSName :: Lens' ModifyVPCEndpointServiceConfiguration (Maybe Text)
+mvescPrivateDNSName = lens _mvescPrivateDNSName (\ s a -> s{_mvescPrivateDNSName = a})
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 mvescDryRun :: Lens' ModifyVPCEndpointServiceConfiguration (Maybe Bool)
@@ -141,6 +180,7 @@ instance ToQuery
                  ("ModifyVpcEndpointServiceConfiguration" ::
                     ByteString),
                "Version" =: ("2016-11-15" :: ByteString),
+               "RemovePrivateDnsName" =: _mvescRemovePrivateDNSName,
                toQuery
                  (toQueryList "RemoveNetworkLoadBalancerArn" <$>
                     _mvescRemoveNetworkLoadBalancerARNs),
@@ -148,15 +188,21 @@ instance ToQuery
                toQuery
                  (toQueryList "AddNetworkLoadBalancerArn" <$>
                     _mvescAddNetworkLoadBalancerARNs),
+               "PrivateDnsName" =: _mvescPrivateDNSName,
                "DryRun" =: _mvescDryRun,
                "ServiceId" =: _mvescServiceId]
 
 -- | /See:/ 'modifyVPCEndpointServiceConfigurationResponse' smart constructor.
-data ModifyVPCEndpointServiceConfigurationResponse = ModifyVPCEndpointServiceConfigurationResponse'
-  { _mvescrsReturn         :: !(Maybe Bool)
-  , _mvescrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyVPCEndpointServiceConfigurationResponse = ModifyVPCEndpointServiceConfigurationResponse'{_mvescrsReturn
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Bool),
+                                                                                                    _mvescrsResponseStatus
+                                                                                                    ::
+                                                                                                    !Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'ModifyVPCEndpointServiceConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -168,10 +214,12 @@ data ModifyVPCEndpointServiceConfigurationResponse = ModifyVPCEndpointServiceCon
 modifyVPCEndpointServiceConfigurationResponse
     :: Int -- ^ 'mvescrsResponseStatus'
     -> ModifyVPCEndpointServiceConfigurationResponse
-modifyVPCEndpointServiceConfigurationResponse pResponseStatus_ =
-  ModifyVPCEndpointServiceConfigurationResponse'
-    {_mvescrsReturn = Nothing, _mvescrsResponseStatus = pResponseStatus_}
-
+modifyVPCEndpointServiceConfigurationResponse
+  pResponseStatus_
+  = ModifyVPCEndpointServiceConfigurationResponse'{_mvescrsReturn
+                                                     = Nothing,
+                                                   _mvescrsResponseStatus =
+                                                     pResponseStatus_}
 
 -- | Returns @true@ if the request succeeds; otherwise, it returns an error.
 mvescrsReturn :: Lens' ModifyVPCEndpointServiceConfigurationResponse (Maybe Bool)

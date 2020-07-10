@@ -63,12 +63,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getIntegration' smart constructor.
-data GetIntegration = GetIntegration'
-  { _giRestAPIId  :: !Text
-  , _giResourceId :: !Text
-  , _giHttpMethod :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIntegration = GetIntegration'{_giRestAPIId ::
+                                      !Text,
+                                      _giResourceId :: !Text,
+                                      _giHttpMethod :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetIntegration' with the minimum fields required to make a request.
 --
@@ -84,13 +83,10 @@ getIntegration
     -> Text -- ^ 'giResourceId'
     -> Text -- ^ 'giHttpMethod'
     -> GetIntegration
-getIntegration pRestAPIId_ pResourceId_ pHttpMethod_ =
-  GetIntegration'
-    { _giRestAPIId = pRestAPIId_
-    , _giResourceId = pResourceId_
-    , _giHttpMethod = pHttpMethod_
-    }
-
+getIntegration pRestAPIId_ pResourceId_ pHttpMethod_
+  = GetIntegration'{_giRestAPIId = pRestAPIId_,
+                    _giResourceId = pResourceId_,
+                    _giHttpMethod = pHttpMethod_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 giRestAPIId :: Lens' GetIntegration Text

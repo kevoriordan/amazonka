@@ -46,24 +46,32 @@ library
     exposed-modules:
           Network.AWS.KMS
         , Network.AWS.KMS.CancelKeyDeletion
+        , Network.AWS.KMS.ConnectCustomKeyStore
         , Network.AWS.KMS.CreateAlias
+        , Network.AWS.KMS.CreateCustomKeyStore
         , Network.AWS.KMS.CreateGrant
         , Network.AWS.KMS.CreateKey
         , Network.AWS.KMS.Decrypt
         , Network.AWS.KMS.DeleteAlias
+        , Network.AWS.KMS.DeleteCustomKeyStore
         , Network.AWS.KMS.DeleteImportedKeyMaterial
+        , Network.AWS.KMS.DescribeCustomKeyStores
         , Network.AWS.KMS.DescribeKey
         , Network.AWS.KMS.DisableKey
         , Network.AWS.KMS.DisableKeyRotation
+        , Network.AWS.KMS.DisconnectCustomKeyStore
         , Network.AWS.KMS.EnableKey
         , Network.AWS.KMS.EnableKeyRotation
         , Network.AWS.KMS.Encrypt
         , Network.AWS.KMS.GenerateDataKey
+        , Network.AWS.KMS.GenerateDataKeyPair
+        , Network.AWS.KMS.GenerateDataKeyPairWithoutPlaintext
         , Network.AWS.KMS.GenerateDataKeyWithoutPlaintext
         , Network.AWS.KMS.GenerateRandom
         , Network.AWS.KMS.GetKeyPolicy
         , Network.AWS.KMS.GetKeyRotationStatus
         , Network.AWS.KMS.GetParametersForImport
+        , Network.AWS.KMS.GetPublicKey
         , Network.AWS.KMS.ImportKeyMaterial
         , Network.AWS.KMS.ListAliases
         , Network.AWS.KMS.ListGrants
@@ -76,20 +84,47 @@ library
         , Network.AWS.KMS.RetireGrant
         , Network.AWS.KMS.RevokeGrant
         , Network.AWS.KMS.ScheduleKeyDeletion
+        , Network.AWS.KMS.Sign
         , Network.AWS.KMS.TagResource
         , Network.AWS.KMS.Types
         , Network.AWS.KMS.UntagResource
         , Network.AWS.KMS.UpdateAlias
+        , Network.AWS.KMS.UpdateCustomKeyStore
         , Network.AWS.KMS.UpdateKeyDescription
+        , Network.AWS.KMS.Verify
         , Network.AWS.KMS.Waiters
 
     other-modules:
-          Network.AWS.KMS.Types.Product
-        , Network.AWS.KMS.Types.Sum
+          Network.AWS.KMS.Types.AlgorithmSpec
+        , Network.AWS.KMS.Types.AliasListEntry
+        , Network.AWS.KMS.Types.ConnectionErrorCodeType
+        , Network.AWS.KMS.Types.ConnectionStateType
+        , Network.AWS.KMS.Types.CustomKeyStoresListEntry
+        , Network.AWS.KMS.Types.CustomerMasterKeySpec
+        , Network.AWS.KMS.Types.DataKeyPairSpec
+        , Network.AWS.KMS.Types.DataKeySpec
+        , Network.AWS.KMS.Types.EncryptionAlgorithmSpec
+        , Network.AWS.KMS.Types.ExpirationModelType
+        , Network.AWS.KMS.Types.GrantConstraints
+        , Network.AWS.KMS.Types.GrantListEntry
+        , Network.AWS.KMS.Types.GrantOperation
+        , Network.AWS.KMS.Types.KeyListEntry
+        , Network.AWS.KMS.Types.KeyManagerType
+        , Network.AWS.KMS.Types.KeyMetadata
+        , Network.AWS.KMS.Types.KeyState
+        , Network.AWS.KMS.Types.KeyUsageType
+        , Network.AWS.KMS.Types.ListGrantsResponse
+        , Network.AWS.KMS.Types.MessageType
+        , Network.AWS.KMS.Types.OriginType
+        , Network.AWS.KMS.Types.Product
+        , Network.AWS.KMS.Types.SigningAlgorithmSpec
+        , Network.AWS.KMS.Types.Tag
+        , Network.AWS.KMS.Types.WrappingKeySpec
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-kms-test
     type:              exitcode-stdio-1.0
@@ -113,6 +148,7 @@ test-suite amazonka-kms-test
         , amazonka-kms
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

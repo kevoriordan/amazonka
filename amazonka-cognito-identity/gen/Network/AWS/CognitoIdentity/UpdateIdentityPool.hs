@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a user pool.
+-- Updates an identity pool.
 --
 --
 -- You must use AWS Developer credentials to call this API.
@@ -31,7 +31,9 @@ module Network.AWS.CognitoIdentity.UpdateIdentityPool
     -- * Request Lenses
     , uipSamlProviderARNs
     , uipSupportedLoginProviders
+    , uipAllowClassicFlow
     , uipDeveloperProviderName
+    , uipIdentityPoolTags
     , uipOpenIdConnectProviderARNs
     , uipCognitoIdentityProviders
     , uipIdentityPoolId
@@ -44,7 +46,9 @@ module Network.AWS.CognitoIdentity.UpdateIdentityPool
     -- * Response Lenses
     , ipSamlProviderARNs
     , ipSupportedLoginProviders
+    , ipAllowClassicFlow
     , ipDeveloperProviderName
+    , ipIdentityPoolTags
     , ipOpenIdConnectProviderARNs
     , ipCognitoIdentityProviders
     , ipIdentityPoolId
@@ -64,17 +68,26 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateIdentityPool' smart constructor.
-data UpdateIdentityPool = UpdateIdentityPool'
-  { _uipSamlProviderARNs               :: !(Maybe [Text])
-  , _uipSupportedLoginProviders        :: !(Maybe (Map Text Text))
-  , _uipDeveloperProviderName          :: !(Maybe Text)
-  , _uipOpenIdConnectProviderARNs      :: !(Maybe [Text])
-  , _uipCognitoIdentityProviders       :: !(Maybe [CognitoIdentityProvider])
-  , _uipIdentityPoolId                 :: !Text
-  , _uipIdentityPoolName               :: !Text
-  , _uipAllowUnauthenticatedIdentities :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateIdentityPool = UpdateIdentityPool'{_uipSamlProviderARNs
+                                              :: !(Maybe [Text]),
+                                              _uipSupportedLoginProviders ::
+                                              !(Maybe (Map Text Text)),
+                                              _uipAllowClassicFlow ::
+                                              !(Maybe Bool),
+                                              _uipDeveloperProviderName ::
+                                              !(Maybe Text),
+                                              _uipIdentityPoolTags ::
+                                              !(Maybe (Map Text Text)),
+                                              _uipOpenIdConnectProviderARNs ::
+                                              !(Maybe [Text]),
+                                              _uipCognitoIdentityProviders ::
+                                              !(Maybe
+                                                  [CognitoIdentityProvider]),
+                                              _uipIdentityPoolId :: !Text,
+                                              _uipIdentityPoolName :: !Text,
+                                              _uipAllowUnauthenticatedIdentities
+                                              :: !Bool}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateIdentityPool' with the minimum fields required to make a request.
 --
@@ -84,11 +97,15 @@ data UpdateIdentityPool = UpdateIdentityPool'
 --
 -- * 'uipSupportedLoginProviders' - Optional key:value pairs mapping provider names to provider app IDs.
 --
+-- * 'uipAllowClassicFlow' - Enables or disables the Basic (Classic) authentication flow. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html Identity Pools (Federated Identities) Authentication Flow> in the /Amazon Cognito Developer Guide/ .
+--
 -- * 'uipDeveloperProviderName' - The "domain" by which Cognito will refer to your users.
+--
+-- * 'uipIdentityPoolTags' - The tags that are assigned to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.
 --
 -- * 'uipOpenIdConnectProviderARNs' - A list of OpendID Connect provider ARNs.
 --
--- * 'uipCognitoIdentityProviders' - A list representing an Amazon Cognito Identity User Pool and its client ID.
+-- * 'uipCognitoIdentityProviders' - A list representing an Amazon Cognito user pool and its client ID.
 --
 -- * 'uipIdentityPoolId' - An identity pool ID in the format REGION:GUID.
 --
@@ -100,18 +117,19 @@ updateIdentityPool
     -> Text -- ^ 'uipIdentityPoolName'
     -> Bool -- ^ 'uipAllowUnauthenticatedIdentities'
     -> UpdateIdentityPool
-updateIdentityPool pIdentityPoolId_ pIdentityPoolName_ pAllowUnauthenticatedIdentities_ =
-  UpdateIdentityPool'
-    { _uipSamlProviderARNs = Nothing
-    , _uipSupportedLoginProviders = Nothing
-    , _uipDeveloperProviderName = Nothing
-    , _uipOpenIdConnectProviderARNs = Nothing
-    , _uipCognitoIdentityProviders = Nothing
-    , _uipIdentityPoolId = pIdentityPoolId_
-    , _uipIdentityPoolName = pIdentityPoolName_
-    , _uipAllowUnauthenticatedIdentities = pAllowUnauthenticatedIdentities_
-    }
-
+updateIdentityPool pIdentityPoolId_
+  pIdentityPoolName_ pAllowUnauthenticatedIdentities_
+  = UpdateIdentityPool'{_uipSamlProviderARNs = Nothing,
+                        _uipSupportedLoginProviders = Nothing,
+                        _uipAllowClassicFlow = Nothing,
+                        _uipDeveloperProviderName = Nothing,
+                        _uipIdentityPoolTags = Nothing,
+                        _uipOpenIdConnectProviderARNs = Nothing,
+                        _uipCognitoIdentityProviders = Nothing,
+                        _uipIdentityPoolId = pIdentityPoolId_,
+                        _uipIdentityPoolName = pIdentityPoolName_,
+                        _uipAllowUnauthenticatedIdentities =
+                          pAllowUnauthenticatedIdentities_}
 
 -- | An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
 uipSamlProviderARNs :: Lens' UpdateIdentityPool [Text]
@@ -121,15 +139,23 @@ uipSamlProviderARNs = lens _uipSamlProviderARNs (\ s a -> s{_uipSamlProviderARNs
 uipSupportedLoginProviders :: Lens' UpdateIdentityPool (HashMap Text Text)
 uipSupportedLoginProviders = lens _uipSupportedLoginProviders (\ s a -> s{_uipSupportedLoginProviders = a}) . _Default . _Map
 
+-- | Enables or disables the Basic (Classic) authentication flow. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html Identity Pools (Federated Identities) Authentication Flow> in the /Amazon Cognito Developer Guide/ .
+uipAllowClassicFlow :: Lens' UpdateIdentityPool (Maybe Bool)
+uipAllowClassicFlow = lens _uipAllowClassicFlow (\ s a -> s{_uipAllowClassicFlow = a})
+
 -- | The "domain" by which Cognito will refer to your users.
 uipDeveloperProviderName :: Lens' UpdateIdentityPool (Maybe Text)
 uipDeveloperProviderName = lens _uipDeveloperProviderName (\ s a -> s{_uipDeveloperProviderName = a})
+
+-- | The tags that are assigned to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.
+uipIdentityPoolTags :: Lens' UpdateIdentityPool (HashMap Text Text)
+uipIdentityPoolTags = lens _uipIdentityPoolTags (\ s a -> s{_uipIdentityPoolTags = a}) . _Default . _Map
 
 -- | A list of OpendID Connect provider ARNs.
 uipOpenIdConnectProviderARNs :: Lens' UpdateIdentityPool [Text]
 uipOpenIdConnectProviderARNs = lens _uipOpenIdConnectProviderARNs (\ s a -> s{_uipOpenIdConnectProviderARNs = a}) . _Default . _Coerce
 
--- | A list representing an Amazon Cognito Identity User Pool and its client ID.
+-- | A list representing an Amazon Cognito user pool and its client ID.
 uipCognitoIdentityProviders :: Lens' UpdateIdentityPool [CognitoIdentityProvider]
 uipCognitoIdentityProviders = lens _uipCognitoIdentityProviders (\ s a -> s{_uipCognitoIdentityProviders = a}) . _Default . _Coerce
 
@@ -171,8 +197,10 @@ instance ToJSON UpdateIdentityPool where
                  [("SamlProviderARNs" .=) <$> _uipSamlProviderARNs,
                   ("SupportedLoginProviders" .=) <$>
                     _uipSupportedLoginProviders,
+                  ("AllowClassicFlow" .=) <$> _uipAllowClassicFlow,
                   ("DeveloperProviderName" .=) <$>
                     _uipDeveloperProviderName,
+                  ("IdentityPoolTags" .=) <$> _uipIdentityPoolTags,
                   ("OpenIdConnectProviderARNs" .=) <$>
                     _uipOpenIdConnectProviderARNs,
                   ("CognitoIdentityProviders" .=) <$>

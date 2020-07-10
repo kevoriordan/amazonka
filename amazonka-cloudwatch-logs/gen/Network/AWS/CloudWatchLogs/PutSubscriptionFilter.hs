@@ -59,21 +59,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putSubscriptionFilter' smart constructor.
-data PutSubscriptionFilter = PutSubscriptionFilter'
-  { _psfDistribution   :: !(Maybe Distribution)
-  , _psfRoleARN        :: !(Maybe Text)
-  , _psfLogGroupName   :: !Text
-  , _psfFilterName     :: !Text
-  , _psfFilterPattern  :: !Text
-  , _psfDestinationARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutSubscriptionFilter = PutSubscriptionFilter'{_psfDistribution
+                                                    :: !(Maybe Distribution),
+                                                    _psfRoleARN ::
+                                                    !(Maybe Text),
+                                                    _psfLogGroupName :: !Text,
+                                                    _psfFilterName :: !Text,
+                                                    _psfFilterPattern :: !Text,
+                                                    _psfDestinationARN :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'PutSubscriptionFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psfDistribution' - The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream.
+-- * 'psfDistribution' - The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. 
 --
 -- * 'psfRoleARN' - The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.
 --
@@ -90,18 +91,16 @@ putSubscriptionFilter
     -> Text -- ^ 'psfFilterPattern'
     -> Text -- ^ 'psfDestinationARN'
     -> PutSubscriptionFilter
-putSubscriptionFilter pLogGroupName_ pFilterName_ pFilterPattern_ pDestinationARN_ =
-  PutSubscriptionFilter'
-    { _psfDistribution = Nothing
-    , _psfRoleARN = Nothing
-    , _psfLogGroupName = pLogGroupName_
-    , _psfFilterName = pFilterName_
-    , _psfFilterPattern = pFilterPattern_
-    , _psfDestinationARN = pDestinationARN_
-    }
+putSubscriptionFilter pLogGroupName_ pFilterName_
+  pFilterPattern_ pDestinationARN_
+  = PutSubscriptionFilter'{_psfDistribution = Nothing,
+                           _psfRoleARN = Nothing,
+                           _psfLogGroupName = pLogGroupName_,
+                           _psfFilterName = pFilterName_,
+                           _psfFilterPattern = pFilterPattern_,
+                           _psfDestinationARN = pDestinationARN_}
 
-
--- | The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream.
+-- | The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. 
 psfDistribution :: Lens' PutSubscriptionFilter (Maybe Distribution)
 psfDistribution = lens _psfDistribution (\ s a -> s{_psfDistribution = a})
 
@@ -163,16 +162,15 @@ instance ToQuery PutSubscriptionFilter where
         toQuery = const mempty
 
 -- | /See:/ 'putSubscriptionFilterResponse' smart constructor.
-data PutSubscriptionFilterResponse =
-  PutSubscriptionFilterResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutSubscriptionFilterResponse = PutSubscriptionFilterResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'PutSubscriptionFilterResponse' with the minimum fields required to make a request.
 --
 putSubscriptionFilterResponse
     :: PutSubscriptionFilterResponse
-putSubscriptionFilterResponse = PutSubscriptionFilterResponse'
-
+putSubscriptionFilterResponse
+  = PutSubscriptionFilterResponse'
 
 instance NFData PutSubscriptionFilterResponse where

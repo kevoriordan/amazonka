@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the filter specified by the filter name.
+--
+--
 module Network.AWS.GuardDuty.DeleteFilter
     (
     -- * Creating a Request
@@ -43,32 +45,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteFilter' smart constructor.
-data DeleteFilter = DeleteFilter'
-  { _dfDetectorId :: !Text
-  , _dfFilterName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFilter = DeleteFilter'{_dfDetectorId ::
+                                  !Text,
+                                  _dfFilterName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFilter' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfDetectorId' - The unique ID that specifies the detector where you want to delete a filter.
+-- * 'dfDetectorId' - The unique ID of the detector that the filter is associated with.
 --
--- * 'dfFilterName' - The name of the filter.
+-- * 'dfFilterName' - The name of the filter that you want to delete.
 deleteFilter
     :: Text -- ^ 'dfDetectorId'
     -> Text -- ^ 'dfFilterName'
     -> DeleteFilter
-deleteFilter pDetectorId_ pFilterName_ =
-  DeleteFilter' {_dfDetectorId = pDetectorId_, _dfFilterName = pFilterName_}
+deleteFilter pDetectorId_ pFilterName_
+  = DeleteFilter'{_dfDetectorId = pDetectorId_,
+                  _dfFilterName = pFilterName_}
 
-
--- | The unique ID that specifies the detector where you want to delete a filter.
+-- | The unique ID of the detector that the filter is associated with.
 dfDetectorId :: Lens' DeleteFilter Text
 dfDetectorId = lens _dfDetectorId (\ s a -> s{_dfDetectorId = a})
 
--- | The name of the filter.
+-- | The name of the filter that you want to delete.
 dfFilterName :: Lens' DeleteFilter Text
 dfFilterName = lens _dfFilterName (\ s a -> s{_dfFilterName = a})
 
@@ -101,10 +102,10 @@ instance ToQuery DeleteFilter where
         toQuery = const mempty
 
 -- | /See:/ 'deleteFilterResponse' smart constructor.
-newtype DeleteFilterResponse = DeleteFilterResponse'
-  { _dfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteFilterResponse = DeleteFilterResponse'{_dfrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteFilterResponse' with the minimum fields required to make a request.
 --
@@ -114,9 +115,9 @@ newtype DeleteFilterResponse = DeleteFilterResponse'
 deleteFilterResponse
     :: Int -- ^ 'dfrsResponseStatus'
     -> DeleteFilterResponse
-deleteFilterResponse pResponseStatus_ =
-  DeleteFilterResponse' {_dfrsResponseStatus = pResponseStatus_}
-
+deleteFilterResponse pResponseStatus_
+  = DeleteFilterResponse'{_dfrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dfrsResponseStatus :: Lens' DeleteFilterResponse Int

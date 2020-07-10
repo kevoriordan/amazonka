@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Detaches an Internet gateway from a VPC, disabling connectivity between the Internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
+-- Detaches an internet gateway from a VPC, disabling connectivity between the internet and the VPC. The VPC must not contain any running instances with Elastic IP addresses or public IPv4 addresses.
 --
 --
 module Network.AWS.EC2.DetachInternetGateway
@@ -43,17 +43,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DetachInternetGateway.
---
---
---
--- /See:/ 'detachInternetGateway' smart constructor.
-data DetachInternetGateway = DetachInternetGateway'
-  { _digDryRun            :: !(Maybe Bool)
-  , _digInternetGatewayId :: !Text
-  , _digVPCId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'detachInternetGateway' smart constructor.
+data DetachInternetGateway = DetachInternetGateway'{_digDryRun
+                                                    :: !(Maybe Bool),
+                                                    _digInternetGatewayId ::
+                                                    !Text,
+                                                    _digVPCId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DetachInternetGateway' with the minimum fields required to make a request.
 --
@@ -61,26 +58,23 @@ data DetachInternetGateway = DetachInternetGateway'
 --
 -- * 'digDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'digInternetGatewayId' - The ID of the Internet gateway.
+-- * 'digInternetGatewayId' - The ID of the internet gateway.
 --
 -- * 'digVPCId' - The ID of the VPC.
 detachInternetGateway
     :: Text -- ^ 'digInternetGatewayId'
     -> Text -- ^ 'digVPCId'
     -> DetachInternetGateway
-detachInternetGateway pInternetGatewayId_ pVPCId_ =
-  DetachInternetGateway'
-    { _digDryRun = Nothing
-    , _digInternetGatewayId = pInternetGatewayId_
-    , _digVPCId = pVPCId_
-    }
-
+detachInternetGateway pInternetGatewayId_ pVPCId_
+  = DetachInternetGateway'{_digDryRun = Nothing,
+                           _digInternetGatewayId = pInternetGatewayId_,
+                           _digVPCId = pVPCId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 digDryRun :: Lens' DetachInternetGateway (Maybe Bool)
 digDryRun = lens _digDryRun (\ s a -> s{_digDryRun = a})
 
--- | The ID of the Internet gateway.
+-- | The ID of the internet gateway.
 digInternetGatewayId :: Lens' DetachInternetGateway Text
 digInternetGatewayId = lens _digInternetGatewayId (\ s a -> s{_digInternetGatewayId = a})
 
@@ -114,16 +108,15 @@ instance ToQuery DetachInternetGateway where
                "VpcId" =: _digVPCId]
 
 -- | /See:/ 'detachInternetGatewayResponse' smart constructor.
-data DetachInternetGatewayResponse =
-  DetachInternetGatewayResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachInternetGatewayResponse = DetachInternetGatewayResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DetachInternetGatewayResponse' with the minimum fields required to make a request.
 --
 detachInternetGatewayResponse
     :: DetachInternetGatewayResponse
-detachInternetGatewayResponse = DetachInternetGatewayResponse'
-
+detachInternetGatewayResponse
+  = DetachInternetGatewayResponse'
 
 instance NFData DetachInternetGatewayResponse where

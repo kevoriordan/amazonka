@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getInstancePortStates' smart constructor.
-newtype GetInstancePortStates = GetInstancePortStates'
-  { _gipsInstanceName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetInstancePortStates = GetInstancePortStates'{_gipsInstanceName
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetInstancePortStates' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetInstancePortStates = GetInstancePortStates'
 getInstancePortStates
     :: Text -- ^ 'gipsInstanceName'
     -> GetInstancePortStates
-getInstancePortStates pInstanceName_ =
-  GetInstancePortStates' {_gipsInstanceName = pInstanceName_}
-
+getInstancePortStates pInstanceName_
+  = GetInstancePortStates'{_gipsInstanceName =
+                             pInstanceName_}
 
 -- | The name of the instance.
 gipsInstanceName :: Lens' GetInstancePortStates Text
@@ -104,11 +104,14 @@ instance ToQuery GetInstancePortStates where
         toQuery = const mempty
 
 -- | /See:/ 'getInstancePortStatesResponse' smart constructor.
-data GetInstancePortStatesResponse = GetInstancePortStatesResponse'
-  { _gipsrsPortStates     :: !(Maybe [InstancePortState])
-  , _gipsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstancePortStatesResponse = GetInstancePortStatesResponse'{_gipsrsPortStates
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [InstancePortState]),
+                                                                    _gipsrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetInstancePortStatesResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +123,10 @@ data GetInstancePortStatesResponse = GetInstancePortStatesResponse'
 getInstancePortStatesResponse
     :: Int -- ^ 'gipsrsResponseStatus'
     -> GetInstancePortStatesResponse
-getInstancePortStatesResponse pResponseStatus_ =
-  GetInstancePortStatesResponse'
-    {_gipsrsPortStates = Nothing, _gipsrsResponseStatus = pResponseStatus_}
-
+getInstancePortStatesResponse pResponseStatus_
+  = GetInstancePortStatesResponse'{_gipsrsPortStates =
+                                     Nothing,
+                                   _gipsrsResponseStatus = pResponseStatus_}
 
 -- | Information about the port states resulting from your request.
 gipsrsPortStates :: Lens' GetInstancePortStatesResponse [InstancePortState]

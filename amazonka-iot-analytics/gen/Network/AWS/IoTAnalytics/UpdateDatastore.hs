@@ -27,8 +27,9 @@ module Network.AWS.IoTAnalytics.UpdateDatastore
       updateDatastore
     , UpdateDatastore
     -- * Request Lenses
-    , udRetentionPeriod
-    , udDatastoreName
+    , uRetentionPeriod
+    , uDatastoreStorage
+    , uDatastoreName
 
     -- * Destructuring the Response
     , updateDatastoreResponse
@@ -43,34 +44,41 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDatastore' smart constructor.
-data UpdateDatastore = UpdateDatastore'
-  { _udRetentionPeriod :: !(Maybe RetentionPeriod)
-  , _udDatastoreName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDatastore = UpdateDatastore'{_uRetentionPeriod
+                                        :: !(Maybe RetentionPeriod),
+                                        _uDatastoreStorage ::
+                                        !(Maybe DatastoreStorage),
+                                        _uDatastoreName :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDatastore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udRetentionPeriod' - How long, in days, message data is kept for the data store.
+-- * 'uRetentionPeriod' - How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store's S3 storage is customer-managed.
 --
--- * 'udDatastoreName' - The name of the data store to be updated.
+-- * 'uDatastoreStorage' - Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.
+--
+-- * 'uDatastoreName' - The name of the data store to be updated.
 updateDatastore
-    :: Text -- ^ 'udDatastoreName'
+    :: Text -- ^ 'uDatastoreName'
     -> UpdateDatastore
-updateDatastore pDatastoreName_ =
-  UpdateDatastore'
-    {_udRetentionPeriod = Nothing, _udDatastoreName = pDatastoreName_}
+updateDatastore pDatastoreName_
+  = UpdateDatastore'{_uRetentionPeriod = Nothing,
+                     _uDatastoreStorage = Nothing,
+                     _uDatastoreName = pDatastoreName_}
 
+-- | How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store's S3 storage is customer-managed.
+uRetentionPeriod :: Lens' UpdateDatastore (Maybe RetentionPeriod)
+uRetentionPeriod = lens _uRetentionPeriod (\ s a -> s{_uRetentionPeriod = a})
 
--- | How long, in days, message data is kept for the data store.
-udRetentionPeriod :: Lens' UpdateDatastore (Maybe RetentionPeriod)
-udRetentionPeriod = lens _udRetentionPeriod (\ s a -> s{_udRetentionPeriod = a})
+-- | Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.
+uDatastoreStorage :: Lens' UpdateDatastore (Maybe DatastoreStorage)
+uDatastoreStorage = lens _uDatastoreStorage (\ s a -> s{_uDatastoreStorage = a})
 
 -- | The name of the data store to be updated.
-udDatastoreName :: Lens' UpdateDatastore Text
-udDatastoreName = lens _udDatastoreName (\ s a -> s{_udDatastoreName = a})
+uDatastoreName :: Lens' UpdateDatastore Text
+uDatastoreName = lens _uDatastoreName (\ s a -> s{_uDatastoreName = a})
 
 instance AWSRequest UpdateDatastore where
         type Rs UpdateDatastore = UpdateDatastoreResponse
@@ -88,26 +96,25 @@ instance ToJSON UpdateDatastore where
         toJSON UpdateDatastore'{..}
           = object
               (catMaybes
-                 [("retentionPeriod" .=) <$> _udRetentionPeriod])
+                 [("retentionPeriod" .=) <$> _uRetentionPeriod,
+                  ("datastoreStorage" .=) <$> _uDatastoreStorage])
 
 instance ToPath UpdateDatastore where
         toPath UpdateDatastore'{..}
-          = mconcat ["/datastores/", toBS _udDatastoreName]
+          = mconcat ["/datastores/", toBS _uDatastoreName]
 
 instance ToQuery UpdateDatastore where
         toQuery = const mempty
 
 -- | /See:/ 'updateDatastoreResponse' smart constructor.
-data UpdateDatastoreResponse =
-  UpdateDatastoreResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDatastoreResponse = UpdateDatastoreResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateDatastoreResponse' with the minimum fields required to make a request.
 --
 updateDatastoreResponse
     :: UpdateDatastoreResponse
 updateDatastoreResponse = UpdateDatastoreResponse'
-
 
 instance NFData UpdateDatastoreResponse where

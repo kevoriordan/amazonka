@@ -45,26 +45,50 @@ library
 
     exposed-modules:
           Network.AWS.KinesisVideo
+        , Network.AWS.KinesisVideo.CreateSignalingChannel
         , Network.AWS.KinesisVideo.CreateStream
+        , Network.AWS.KinesisVideo.DeleteSignalingChannel
         , Network.AWS.KinesisVideo.DeleteStream
+        , Network.AWS.KinesisVideo.DescribeSignalingChannel
         , Network.AWS.KinesisVideo.DescribeStream
         , Network.AWS.KinesisVideo.GetDataEndpoint
+        , Network.AWS.KinesisVideo.GetSignalingChannelEndpoint
+        , Network.AWS.KinesisVideo.ListSignalingChannels
         , Network.AWS.KinesisVideo.ListStreams
+        , Network.AWS.KinesisVideo.ListTagsForResource
         , Network.AWS.KinesisVideo.ListTagsForStream
+        , Network.AWS.KinesisVideo.TagResource
         , Network.AWS.KinesisVideo.TagStream
         , Network.AWS.KinesisVideo.Types
+        , Network.AWS.KinesisVideo.UntagResource
         , Network.AWS.KinesisVideo.UntagStream
         , Network.AWS.KinesisVideo.UpdateDataRetention
+        , Network.AWS.KinesisVideo.UpdateSignalingChannel
         , Network.AWS.KinesisVideo.UpdateStream
         , Network.AWS.KinesisVideo.Waiters
 
     other-modules:
-          Network.AWS.KinesisVideo.Types.Product
-        , Network.AWS.KinesisVideo.Types.Sum
+          Network.AWS.KinesisVideo.Types.APIName
+        , Network.AWS.KinesisVideo.Types.ChannelInfo
+        , Network.AWS.KinesisVideo.Types.ChannelNameCondition
+        , Network.AWS.KinesisVideo.Types.ChannelProtocol
+        , Network.AWS.KinesisVideo.Types.ChannelRole
+        , Network.AWS.KinesisVideo.Types.ChannelType
+        , Network.AWS.KinesisVideo.Types.ComparisonOperator
+        , Network.AWS.KinesisVideo.Types.Product
+        , Network.AWS.KinesisVideo.Types.ResourceEndpointListItem
+        , Network.AWS.KinesisVideo.Types.SingleMasterChannelEndpointConfiguration
+        , Network.AWS.KinesisVideo.Types.SingleMasterConfiguration
+        , Network.AWS.KinesisVideo.Types.StreamInfo
+        , Network.AWS.KinesisVideo.Types.StreamNameCondition
+        , Network.AWS.KinesisVideo.Types.StreamStatus
+        , Network.AWS.KinesisVideo.Types.Tag
+        , Network.AWS.KinesisVideo.Types.UpdateDataRetentionOperation
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-kinesis-video-test
     type:              exitcode-stdio-1.0
@@ -88,6 +112,7 @@ test-suite amazonka-kinesis-video-test
         , amazonka-kinesis-video
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

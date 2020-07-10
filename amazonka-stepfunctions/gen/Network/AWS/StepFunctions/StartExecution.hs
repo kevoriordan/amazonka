@@ -48,38 +48,34 @@ import Network.AWS.StepFunctions.Types
 import Network.AWS.StepFunctions.Types.Product
 
 -- | /See:/ 'startExecution' smart constructor.
-data StartExecution = StartExecution'
-  { _seInput           :: !(Maybe Text)
-  , _seName            :: !(Maybe Text)
-  , _seStateMachineARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartExecution = StartExecution'{_seInput ::
+                                      !(Maybe (Sensitive Text)),
+                                      _seName :: !(Maybe Text),
+                                      _seStateMachineARN :: !Text}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartExecution' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'seInput' - The string that contains the JSON input data for the execution, for example: @"input": "{\"first_name\" : \"test\"}"@
+-- * 'seInput' - The string that contains the JSON input data for the execution, for example: @"input": "{\"first_name\" : \"test\"}"@ 
 --
--- * 'seName' - The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions Limits Related to State Machine Executions> in the /AWS Step Functions Developer Guide/ . /Important:/ An execution can't use the name of another execution for 90 days. When you make multiple @StartExecution@ calls with the same name, the new execution doesn't run and the following rules apply:     * When the original execution is open and the execution input from the new call is /different/ , the @ExecutionAlreadyExists@ message is returned.     * When the original execution is open and the execution input from the new call is /identical/ , the @Success@ message is returned.     * When the original execution is closed, the @ExecutionAlreadyExists@ message is returned regardless of input. A name must /not/ contain:     * whitespace     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ )
+-- * 'seName' - The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions Limits Related to State Machine Executions> in the /AWS Step Functions Developer Guide/ . A name must /not/ contain:     * white space     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ ) To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 --
 -- * 'seStateMachineARN' - The Amazon Resource Name (ARN) of the state machine to execute.
 startExecution
     :: Text -- ^ 'seStateMachineARN'
     -> StartExecution
-startExecution pStateMachineARN_ =
-  StartExecution'
-    { _seInput = Nothing
-    , _seName = Nothing
-    , _seStateMachineARN = pStateMachineARN_
-    }
+startExecution pStateMachineARN_
+  = StartExecution'{_seInput = Nothing,
+                    _seName = Nothing,
+                    _seStateMachineARN = pStateMachineARN_}
 
-
--- | The string that contains the JSON input data for the execution, for example: @"input": "{\"first_name\" : \"test\"}"@
+-- | The string that contains the JSON input data for the execution, for example: @"input": "{\"first_name\" : \"test\"}"@ 
 seInput :: Lens' StartExecution (Maybe Text)
-seInput = lens _seInput (\ s a -> s{_seInput = a})
+seInput = lens _seInput (\ s a -> s{_seInput = a}) . mapping _Sensitive
 
--- | The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see <http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions Limits Related to State Machine Executions> in the /AWS Step Functions Developer Guide/ . /Important:/ An execution can't use the name of another execution for 90 days. When you make multiple @StartExecution@ calls with the same name, the new execution doesn't run and the following rules apply:     * When the original execution is open and the execution input from the new call is /different/ , the @ExecutionAlreadyExists@ message is returned.     * When the original execution is open and the execution input from the new call is /identical/ , the @Success@ message is returned.     * When the original execution is closed, the @ExecutionAlreadyExists@ message is returned regardless of input. A name must /not/ contain:     * whitespace     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ )
+-- | The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions Limits Related to State Machine Executions> in the /AWS Step Functions Developer Guide/ . A name must /not/ contain:     * white space     * brackets @< > { } [ ]@      * wildcard characters @? *@      * special characters @" # % \ ^ | ~ ` $ & , ; : /@      * control characters (@U+0000-001F@ , @U+007F-009F@ ) To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 seName :: Lens' StartExecution (Maybe Text)
 seName = lens _seName (\ s a -> s{_seName = a})
 
@@ -124,12 +120,12 @@ instance ToQuery StartExecution where
         toQuery = const mempty
 
 -- | /See:/ 'startExecutionResponse' smart constructor.
-data StartExecutionResponse = StartExecutionResponse'
-  { _srsResponseStatus :: !Int
-  , _srsExecutionARN   :: !Text
-  , _srsStartDate      :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartExecutionResponse = StartExecutionResponse'{_srsResponseStatus
+                                                      :: !Int,
+                                                      _srsExecutionARN :: !Text,
+                                                      _srsStartDate :: !POSIX}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StartExecutionResponse' with the minimum fields required to make a request.
 --
@@ -137,7 +133,7 @@ data StartExecutionResponse = StartExecutionResponse'
 --
 -- * 'srsResponseStatus' - -- | The response status code.
 --
--- * 'srsExecutionARN' - The Amazon Resource Name (ARN) that identifies the execution.
+-- * 'srsExecutionARN' - The Amazon Resource Name (ARN) that id entifies the execution.
 --
 -- * 'srsStartDate' - The date the execution is started.
 startExecutionResponse
@@ -145,19 +141,18 @@ startExecutionResponse
     -> Text -- ^ 'srsExecutionARN'
     -> UTCTime -- ^ 'srsStartDate'
     -> StartExecutionResponse
-startExecutionResponse pResponseStatus_ pExecutionARN_ pStartDate_ =
-  StartExecutionResponse'
-    { _srsResponseStatus = pResponseStatus_
-    , _srsExecutionARN = pExecutionARN_
-    , _srsStartDate = _Time # pStartDate_
-    }
-
+startExecutionResponse pResponseStatus_
+  pExecutionARN_ pStartDate_
+  = StartExecutionResponse'{_srsResponseStatus =
+                              pResponseStatus_,
+                            _srsExecutionARN = pExecutionARN_,
+                            _srsStartDate = _Time # pStartDate_}
 
 -- | -- | The response status code.
 srsResponseStatus :: Lens' StartExecutionResponse Int
 srsResponseStatus = lens _srsResponseStatus (\ s a -> s{_srsResponseStatus = a})
 
--- | The Amazon Resource Name (ARN) that identifies the execution.
+-- | The Amazon Resource Name (ARN) that id entifies the execution.
 srsExecutionARN :: Lens' StartExecutionResponse Text
 srsExecutionARN = lens _srsExecutionARN (\ s a -> s{_srsExecutionARN = a})
 

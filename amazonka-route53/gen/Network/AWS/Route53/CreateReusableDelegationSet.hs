@@ -18,10 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones. If a hosted zoned ID is specified, @CreateReusableDelegationSet@ marks the delegation set associated with that zone as reusable.
+-- Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones that were created by the same AWS account. 
 --
 --
--- For information about using a reusable delegation set to configure white label name servers, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/white-label-name-servers.html Configuring White Label Name Servers> .
+-- You can also create a reusable delegation set that uses the four name servers that are associated with an existing hosted zone. Specify the hosted zone ID in the @CreateReusableDelegationSet@ request.
+--
+-- For information about using a reusable delegation set to configure white label name servers, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/white-label-name-servers.html Configuring White Label Name Servers> .
 --
 -- The process for migrating existing hosted zones to use a reusable delegation set is comparable to the process for configuring white label name servers. You need to perform the following steps:
 --
@@ -75,11 +77,14 @@ import Network.AWS.Route53.Types
 import Network.AWS.Route53.Types.Product
 
 -- | /See:/ 'createReusableDelegationSet' smart constructor.
-data CreateReusableDelegationSet = CreateReusableDelegationSet'
-  { _crdsHostedZoneId    :: !(Maybe ResourceId)
-  , _crdsCallerReference :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateReusableDelegationSet = CreateReusableDelegationSet'{_crdsHostedZoneId
+                                                                ::
+                                                                !(Maybe
+                                                                    ResourceId),
+                                                                _crdsCallerReference
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateReusableDelegationSet' with the minimum fields required to make a request.
 --
@@ -91,10 +96,10 @@ data CreateReusableDelegationSet = CreateReusableDelegationSet'
 createReusableDelegationSet
     :: Text -- ^ 'crdsCallerReference'
     -> CreateReusableDelegationSet
-createReusableDelegationSet pCallerReference_ =
-  CreateReusableDelegationSet'
-    {_crdsHostedZoneId = Nothing, _crdsCallerReference = pCallerReference_}
-
+createReusableDelegationSet pCallerReference_
+  = CreateReusableDelegationSet'{_crdsHostedZoneId =
+                                   Nothing,
+                                 _crdsCallerReference = pCallerReference_}
 
 -- | If you want to mark the delegation set for an existing hosted zone as reusable, the ID for that hosted zone.
 crdsHostedZoneId :: Lens' CreateReusableDelegationSet (Maybe ResourceId)
@@ -140,12 +145,17 @@ instance ToXML CreateReusableDelegationSet where
                "CallerReference" @= _crdsCallerReference]
 
 -- | /See:/ 'createReusableDelegationSetResponse' smart constructor.
-data CreateReusableDelegationSetResponse = CreateReusableDelegationSetResponse'
-  { _crdsrsResponseStatus :: !Int
-  , _crdsrsDelegationSet  :: !DelegationSet
-  , _crdsrsLocation       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateReusableDelegationSetResponse = CreateReusableDelegationSetResponse'{_crdsrsResponseStatus
+                                                                                ::
+                                                                                !Int,
+                                                                                _crdsrsDelegationSet
+                                                                                ::
+                                                                                !DelegationSet,
+                                                                                _crdsrsLocation
+                                                                                ::
+                                                                                !Text}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'CreateReusableDelegationSetResponse' with the minimum fields required to make a request.
 --
@@ -161,13 +171,12 @@ createReusableDelegationSetResponse
     -> DelegationSet -- ^ 'crdsrsDelegationSet'
     -> Text -- ^ 'crdsrsLocation'
     -> CreateReusableDelegationSetResponse
-createReusableDelegationSetResponse pResponseStatus_ pDelegationSet_ pLocation_ =
-  CreateReusableDelegationSetResponse'
-    { _crdsrsResponseStatus = pResponseStatus_
-    , _crdsrsDelegationSet = pDelegationSet_
-    , _crdsrsLocation = pLocation_
-    }
-
+createReusableDelegationSetResponse pResponseStatus_
+  pDelegationSet_ pLocation_
+  = CreateReusableDelegationSetResponse'{_crdsrsResponseStatus
+                                           = pResponseStatus_,
+                                         _crdsrsDelegationSet = pDelegationSet_,
+                                         _crdsrsLocation = pLocation_}
 
 -- | -- | The response status code.
 crdsrsResponseStatus :: Lens' CreateReusableDelegationSetResponse Int

@@ -25,9 +25,9 @@
 --
 -- /Important:/ Only use this operation if the @canceled@ flag of a 'RecordActivityTaskHeartbeat' request returns @true@ and if the activity can be safely undone or abandoned.
 --
--- A task is considered open from the time that it is scheduled until it is closed. Therefore a task is reported as open while a worker is processing it. A task is closed after it has been specified in a call to 'RespondActivityTaskCompleted' , RespondActivityTaskCanceled, 'RespondActivityTaskFailed' , or the task has <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types timed out> .
+-- A task is considered open from the time that it is scheduled until it is closed. Therefore a task is reported as open while a worker is processing it. A task is closed after it has been specified in a call to 'RespondActivityTaskCompleted' , RespondActivityTaskCanceled, 'RespondActivityTaskFailed' , or the task has <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types timed out> .
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -39,7 +39,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.RespondActivityTaskCanceled
     (
@@ -63,11 +63,13 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'respondActivityTaskCanceled' smart constructor.
-data RespondActivityTaskCanceled = RespondActivityTaskCanceled'
-  { _rDetails   :: !(Maybe Text)
-  , _rTaskToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RespondActivityTaskCanceled = RespondActivityTaskCanceled'{_rDetails
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _rTaskToken ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'RespondActivityTaskCanceled' with the minimum fields required to make a request.
 --
@@ -79,9 +81,9 @@ data RespondActivityTaskCanceled = RespondActivityTaskCanceled'
 respondActivityTaskCanceled
     :: Text -- ^ 'rTaskToken'
     -> RespondActivityTaskCanceled
-respondActivityTaskCanceled pTaskToken_ =
-  RespondActivityTaskCanceled' {_rDetails = Nothing, _rTaskToken = pTaskToken_}
-
+respondActivityTaskCanceled pTaskToken_
+  = RespondActivityTaskCanceled'{_rDetails = Nothing,
+                                 _rTaskToken = pTaskToken_}
 
 -- | Information about the cancellation.
 rDetails :: Lens' RespondActivityTaskCanceled (Maybe Text)
@@ -126,17 +128,16 @@ instance ToQuery RespondActivityTaskCanceled where
         toQuery = const mempty
 
 -- | /See:/ 'respondActivityTaskCanceledResponse' smart constructor.
-data RespondActivityTaskCanceledResponse =
-  RespondActivityTaskCanceledResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RespondActivityTaskCanceledResponse = RespondActivityTaskCanceledResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'RespondActivityTaskCanceledResponse' with the minimum fields required to make a request.
 --
 respondActivityTaskCanceledResponse
     :: RespondActivityTaskCanceledResponse
-respondActivityTaskCanceledResponse = RespondActivityTaskCanceledResponse'
-
+respondActivityTaskCanceledResponse
+  = RespondActivityTaskCanceledResponse'
 
 instance NFData RespondActivityTaskCanceledResponse
          where

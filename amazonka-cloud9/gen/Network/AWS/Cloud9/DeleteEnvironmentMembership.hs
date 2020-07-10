@@ -45,11 +45,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteEnvironmentMembership' smart constructor.
-data DeleteEnvironmentMembership = DeleteEnvironmentMembership'
-  { _demEnvironmentId :: !Text
-  , _demUserARN       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEnvironmentMembership = DeleteEnvironmentMembership'{_demEnvironmentId
+                                                                :: !Text,
+                                                                _demUserARN ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteEnvironmentMembership' with the minimum fields required to make a request.
 --
@@ -62,10 +63,10 @@ deleteEnvironmentMembership
     :: Text -- ^ 'demEnvironmentId'
     -> Text -- ^ 'demUserARN'
     -> DeleteEnvironmentMembership
-deleteEnvironmentMembership pEnvironmentId_ pUserARN_ =
-  DeleteEnvironmentMembership'
-    {_demEnvironmentId = pEnvironmentId_, _demUserARN = pUserARN_}
-
+deleteEnvironmentMembership pEnvironmentId_ pUserARN_
+  = DeleteEnvironmentMembership'{_demEnvironmentId =
+                                   pEnvironmentId_,
+                                 _demUserARN = pUserARN_}
 
 -- | The ID of the environment to delete the environment member from.
 demEnvironmentId :: Lens' DeleteEnvironmentMembership Text
@@ -113,10 +114,11 @@ instance ToQuery DeleteEnvironmentMembership where
         toQuery = const mempty
 
 -- | /See:/ 'deleteEnvironmentMembershipResponse' smart constructor.
-newtype DeleteEnvironmentMembershipResponse = DeleteEnvironmentMembershipResponse'
-  { _demrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEnvironmentMembershipResponse = DeleteEnvironmentMembershipResponse'{_demrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteEnvironmentMembershipResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +128,9 @@ newtype DeleteEnvironmentMembershipResponse = DeleteEnvironmentMembershipRespons
 deleteEnvironmentMembershipResponse
     :: Int -- ^ 'demrsResponseStatus'
     -> DeleteEnvironmentMembershipResponse
-deleteEnvironmentMembershipResponse pResponseStatus_ =
-  DeleteEnvironmentMembershipResponse' {_demrsResponseStatus = pResponseStatus_}
-
+deleteEnvironmentMembershipResponse pResponseStatus_
+  = DeleteEnvironmentMembershipResponse'{_demrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 demrsResponseStatus :: Lens' DeleteEnvironmentMembershipResponse Int

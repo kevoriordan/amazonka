@@ -34,6 +34,7 @@ module Network.AWS.ECS.SubmitContainerStateChange
     , scscReason
     , scscExitCode
     , scscTask
+    , scscRuntimeId
 
     -- * Destructuring the Response
     , submitContainerStateChangeResponse
@@ -51,16 +52,26 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'submitContainerStateChange' smart constructor.
-data SubmitContainerStateChange = SubmitContainerStateChange'
-  { _scscNetworkBindings :: !(Maybe [NetworkBinding])
-  , _scscStatus          :: !(Maybe Text)
-  , _scscCluster         :: !(Maybe Text)
-  , _scscContainerName   :: !(Maybe Text)
-  , _scscReason          :: !(Maybe Text)
-  , _scscExitCode        :: !(Maybe Int)
-  , _scscTask            :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SubmitContainerStateChange = SubmitContainerStateChange'{_scscNetworkBindings
+                                                              ::
+                                                              !(Maybe
+                                                                  [NetworkBinding]),
+                                                              _scscStatus ::
+                                                              !(Maybe Text),
+                                                              _scscCluster ::
+                                                              !(Maybe Text),
+                                                              _scscContainerName
+                                                              :: !(Maybe Text),
+                                                              _scscReason ::
+                                                              !(Maybe Text),
+                                                              _scscExitCode ::
+                                                              !(Maybe Int),
+                                                              _scscTask ::
+                                                              !(Maybe Text),
+                                                              _scscRuntimeId ::
+                                                              !(Maybe Text)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'SubmitContainerStateChange' with the minimum fields required to make a request.
 --
@@ -79,19 +90,17 @@ data SubmitContainerStateChange = SubmitContainerStateChange'
 -- * 'scscExitCode' - The exit code returned for the state change request.
 --
 -- * 'scscTask' - The task ID or full Amazon Resource Name (ARN) of the task that hosts the container.
+--
+-- * 'scscRuntimeId' - The ID of the Docker container.
 submitContainerStateChange
     :: SubmitContainerStateChange
-submitContainerStateChange =
-  SubmitContainerStateChange'
-    { _scscNetworkBindings = Nothing
-    , _scscStatus = Nothing
-    , _scscCluster = Nothing
-    , _scscContainerName = Nothing
-    , _scscReason = Nothing
-    , _scscExitCode = Nothing
-    , _scscTask = Nothing
-    }
-
+submitContainerStateChange
+  = SubmitContainerStateChange'{_scscNetworkBindings =
+                                  Nothing,
+                                _scscStatus = Nothing, _scscCluster = Nothing,
+                                _scscContainerName = Nothing,
+                                _scscReason = Nothing, _scscExitCode = Nothing,
+                                _scscTask = Nothing, _scscRuntimeId = Nothing}
 
 -- | The network bindings of the container.
 scscNetworkBindings :: Lens' SubmitContainerStateChange [NetworkBinding]
@@ -120,6 +129,10 @@ scscExitCode = lens _scscExitCode (\ s a -> s{_scscExitCode = a})
 -- | The task ID or full Amazon Resource Name (ARN) of the task that hosts the container.
 scscTask :: Lens' SubmitContainerStateChange (Maybe Text)
 scscTask = lens _scscTask (\ s a -> s{_scscTask = a})
+
+-- | The ID of the Docker container.
+scscRuntimeId :: Lens' SubmitContainerStateChange (Maybe Text)
+scscRuntimeId = lens _scscRuntimeId (\ s a -> s{_scscRuntimeId = a})
 
 instance AWSRequest SubmitContainerStateChange where
         type Rs SubmitContainerStateChange =
@@ -155,7 +168,8 @@ instance ToJSON SubmitContainerStateChange where
                   ("containerName" .=) <$> _scscContainerName,
                   ("reason" .=) <$> _scscReason,
                   ("exitCode" .=) <$> _scscExitCode,
-                  ("task" .=) <$> _scscTask])
+                  ("task" .=) <$> _scscTask,
+                  ("runtimeId" .=) <$> _scscRuntimeId])
 
 instance ToPath SubmitContainerStateChange where
         toPath = const "/"
@@ -164,11 +178,15 @@ instance ToQuery SubmitContainerStateChange where
         toQuery = const mempty
 
 -- | /See:/ 'submitContainerStateChangeResponse' smart constructor.
-data SubmitContainerStateChangeResponse = SubmitContainerStateChangeResponse'
-  { _scscrsAcknowledgment :: !(Maybe Text)
-  , _scscrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SubmitContainerStateChangeResponse = SubmitContainerStateChangeResponse'{_scscrsAcknowledgment
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _scscrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'SubmitContainerStateChangeResponse' with the minimum fields required to make a request.
 --
@@ -180,10 +198,11 @@ data SubmitContainerStateChangeResponse = SubmitContainerStateChangeResponse'
 submitContainerStateChangeResponse
     :: Int -- ^ 'scscrsResponseStatus'
     -> SubmitContainerStateChangeResponse
-submitContainerStateChangeResponse pResponseStatus_ =
-  SubmitContainerStateChangeResponse'
-    {_scscrsAcknowledgment = Nothing, _scscrsResponseStatus = pResponseStatus_}
-
+submitContainerStateChangeResponse pResponseStatus_
+  = SubmitContainerStateChangeResponse'{_scscrsAcknowledgment
+                                          = Nothing,
+                                        _scscrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | Acknowledgement of the state change.
 scscrsAcknowledgment :: Lens' SubmitContainerStateChangeResponse (Maybe Text)

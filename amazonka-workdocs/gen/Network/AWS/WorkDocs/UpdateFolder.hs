@@ -46,14 +46,15 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'updateFolder' smart constructor.
-data UpdateFolder = UpdateFolder'
-  { _ufParentFolderId      :: !(Maybe Text)
-  , _ufAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _ufName                :: !(Maybe Text)
-  , _ufResourceState       :: !(Maybe ResourceStateType)
-  , _ufFolderId            :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateFolder = UpdateFolder'{_ufParentFolderId
+                                  :: !(Maybe Text),
+                                  _ufAuthenticationToken ::
+                                  !(Maybe (Sensitive Text)),
+                                  _ufName :: !(Maybe Text),
+                                  _ufResourceState ::
+                                  !(Maybe ResourceStateType),
+                                  _ufFolderId :: !Text}
+                      deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateFolder' with the minimum fields required to make a request.
 --
@@ -61,7 +62,7 @@ data UpdateFolder = UpdateFolder'
 --
 -- * 'ufParentFolderId' - The ID of the parent folder.
 --
--- * 'ufAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'ufAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'ufName' - The name of the folder.
 --
@@ -71,21 +72,16 @@ data UpdateFolder = UpdateFolder'
 updateFolder
     :: Text -- ^ 'ufFolderId'
     -> UpdateFolder
-updateFolder pFolderId_ =
-  UpdateFolder'
-    { _ufParentFolderId = Nothing
-    , _ufAuthenticationToken = Nothing
-    , _ufName = Nothing
-    , _ufResourceState = Nothing
-    , _ufFolderId = pFolderId_
-    }
-
+updateFolder pFolderId_
+  = UpdateFolder'{_ufParentFolderId = Nothing,
+                  _ufAuthenticationToken = Nothing, _ufName = Nothing,
+                  _ufResourceState = Nothing, _ufFolderId = pFolderId_}
 
 -- | The ID of the parent folder.
 ufParentFolderId :: Lens' UpdateFolder (Maybe Text)
 ufParentFolderId = lens _ufParentFolderId (\ s a -> s{_ufParentFolderId = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 ufAuthenticationToken :: Lens' UpdateFolder (Maybe Text)
 ufAuthenticationToken = lens _ufAuthenticationToken (\ s a -> s{_ufAuthenticationToken = a}) . mapping _Sensitive
 
@@ -133,16 +129,13 @@ instance ToQuery UpdateFolder where
         toQuery = const mempty
 
 -- | /See:/ 'updateFolderResponse' smart constructor.
-data UpdateFolderResponse =
-  UpdateFolderResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateFolderResponse = UpdateFolderResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateFolderResponse' with the minimum fields required to make a request.
 --
 updateFolderResponse
     :: UpdateFolderResponse
 updateFolderResponse = UpdateFolderResponse'
-
 
 instance NFData UpdateFolderResponse where

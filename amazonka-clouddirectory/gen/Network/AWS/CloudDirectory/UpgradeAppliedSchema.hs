@@ -48,12 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'upgradeAppliedSchema' smart constructor.
-data UpgradeAppliedSchema = UpgradeAppliedSchema'
-  { _uasDryRun             :: !(Maybe Bool)
-  , _uasPublishedSchemaARN :: !Text
-  , _uasDirectoryARN       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpgradeAppliedSchema = UpgradeAppliedSchema'{_uasDryRun
+                                                  :: !(Maybe Bool),
+                                                  _uasPublishedSchemaARN ::
+                                                  !Text,
+                                                  _uasDirectoryARN :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpgradeAppliedSchema' with the minimum fields required to make a request.
 --
@@ -68,13 +68,11 @@ upgradeAppliedSchema
     :: Text -- ^ 'uasPublishedSchemaARN'
     -> Text -- ^ 'uasDirectoryARN'
     -> UpgradeAppliedSchema
-upgradeAppliedSchema pPublishedSchemaARN_ pDirectoryARN_ =
-  UpgradeAppliedSchema'
-    { _uasDryRun = Nothing
-    , _uasPublishedSchemaARN = pPublishedSchemaARN_
-    , _uasDirectoryARN = pDirectoryARN_
-    }
-
+upgradeAppliedSchema pPublishedSchemaARN_
+  pDirectoryARN_
+  = UpgradeAppliedSchema'{_uasDryRun = Nothing,
+                          _uasPublishedSchemaARN = pPublishedSchemaARN_,
+                          _uasDirectoryARN = pDirectoryARN_}
 
 -- | Used for testing whether the major version schemas are backward compatible or not. If schema compatibility fails, an exception would be thrown else the call would succeed but no changes will be saved. This parameter is optional.
 uasDryRun :: Lens' UpgradeAppliedSchema (Maybe Bool)
@@ -125,12 +123,16 @@ instance ToQuery UpgradeAppliedSchema where
         toQuery = const mempty
 
 -- | /See:/ 'upgradeAppliedSchemaResponse' smart constructor.
-data UpgradeAppliedSchemaResponse = UpgradeAppliedSchemaResponse'
-  { _uasrsDirectoryARN      :: !(Maybe Text)
-  , _uasrsUpgradedSchemaARN :: !(Maybe Text)
-  , _uasrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpgradeAppliedSchemaResponse = UpgradeAppliedSchemaResponse'{_uasrsDirectoryARN
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _uasrsUpgradedSchemaARN
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _uasrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpgradeAppliedSchemaResponse' with the minimum fields required to make a request.
 --
@@ -144,13 +146,11 @@ data UpgradeAppliedSchemaResponse = UpgradeAppliedSchemaResponse'
 upgradeAppliedSchemaResponse
     :: Int -- ^ 'uasrsResponseStatus'
     -> UpgradeAppliedSchemaResponse
-upgradeAppliedSchemaResponse pResponseStatus_ =
-  UpgradeAppliedSchemaResponse'
-    { _uasrsDirectoryARN = Nothing
-    , _uasrsUpgradedSchemaARN = Nothing
-    , _uasrsResponseStatus = pResponseStatus_
-    }
-
+upgradeAppliedSchemaResponse pResponseStatus_
+  = UpgradeAppliedSchemaResponse'{_uasrsDirectoryARN =
+                                    Nothing,
+                                  _uasrsUpgradedSchemaARN = Nothing,
+                                  _uasrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the directory that is returned as part of the response.
 uasrsDirectoryARN :: Lens' UpgradeAppliedSchemaResponse (Maybe Text)

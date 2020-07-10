@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Set the user pool MFA configuration.
+-- Set the user pool multi-factor authentication (MFA) configuration.
 --
 --
 module Network.AWS.CognitoIdentityProvider.SetUserPoolMFAConfig
@@ -50,13 +50,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setUserPoolMFAConfig' smart constructor.
-data SetUserPoolMFAConfig = SetUserPoolMFAConfig'
-  { _supmcSmsMFAConfiguration           :: !(Maybe SmsMFAConfigType)
-  , _supmcSoftwareTokenMFAConfiguration :: !(Maybe SoftwareTokenMFAConfigType)
-  , _supmcMFAConfiguration              :: !(Maybe UserPoolMFAType)
-  , _supmcUserPoolId                    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetUserPoolMFAConfig = SetUserPoolMFAConfig'{_supmcSmsMFAConfiguration
+                                                  :: !(Maybe SmsMFAConfigType),
+                                                  _supmcSoftwareTokenMFAConfiguration
+                                                  ::
+                                                  !(Maybe
+                                                      SoftwareTokenMFAConfigType),
+                                                  _supmcMFAConfiguration ::
+                                                  !(Maybe UserPoolMFAType),
+                                                  _supmcUserPoolId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetUserPoolMFAConfig' with the minimum fields required to make a request.
 --
@@ -66,20 +69,18 @@ data SetUserPoolMFAConfig = SetUserPoolMFAConfig'
 --
 -- * 'supmcSoftwareTokenMFAConfiguration' - The software token MFA configuration.
 --
--- * 'supmcMFAConfiguration' - The MFA configuration.
+-- * 'supmcMFAConfiguration' - The MFA configuration. Valid values include:     * @OFF@ MFA will not be used for any users.     * @ON@ MFA is required for all users to sign in.     * @OPTIONAL@ MFA will be required only for individual users who have an MFA factor enabled.
 --
 -- * 'supmcUserPoolId' - The user pool ID.
 setUserPoolMFAConfig
     :: Text -- ^ 'supmcUserPoolId'
     -> SetUserPoolMFAConfig
-setUserPoolMFAConfig pUserPoolId_ =
-  SetUserPoolMFAConfig'
-    { _supmcSmsMFAConfiguration = Nothing
-    , _supmcSoftwareTokenMFAConfiguration = Nothing
-    , _supmcMFAConfiguration = Nothing
-    , _supmcUserPoolId = pUserPoolId_
-    }
-
+setUserPoolMFAConfig pUserPoolId_
+  = SetUserPoolMFAConfig'{_supmcSmsMFAConfiguration =
+                            Nothing,
+                          _supmcSoftwareTokenMFAConfiguration = Nothing,
+                          _supmcMFAConfiguration = Nothing,
+                          _supmcUserPoolId = pUserPoolId_}
 
 -- | The SMS text message MFA configuration.
 supmcSmsMFAConfiguration :: Lens' SetUserPoolMFAConfig (Maybe SmsMFAConfigType)
@@ -89,7 +90,7 @@ supmcSmsMFAConfiguration = lens _supmcSmsMFAConfiguration (\ s a -> s{_supmcSmsM
 supmcSoftwareTokenMFAConfiguration :: Lens' SetUserPoolMFAConfig (Maybe SoftwareTokenMFAConfigType)
 supmcSoftwareTokenMFAConfiguration = lens _supmcSoftwareTokenMFAConfiguration (\ s a -> s{_supmcSoftwareTokenMFAConfiguration = a})
 
--- | The MFA configuration.
+-- | The MFA configuration. Valid values include:     * @OFF@ MFA will not be used for any users.     * @ON@ MFA is required for all users to sign in.     * @OPTIONAL@ MFA will be required only for individual users who have an MFA factor enabled.
 supmcMFAConfiguration :: Lens' SetUserPoolMFAConfig (Maybe UserPoolMFAType)
 supmcMFAConfiguration = lens _supmcMFAConfiguration (\ s a -> s{_supmcMFAConfiguration = a})
 
@@ -142,13 +143,22 @@ instance ToQuery SetUserPoolMFAConfig where
         toQuery = const mempty
 
 -- | /See:/ 'setUserPoolMFAConfigResponse' smart constructor.
-data SetUserPoolMFAConfigResponse = SetUserPoolMFAConfigResponse'
-  { _supmcrsSmsMFAConfiguration           :: !(Maybe SmsMFAConfigType)
-  , _supmcrsSoftwareTokenMFAConfiguration :: !(Maybe SoftwareTokenMFAConfigType)
-  , _supmcrsMFAConfiguration              :: !(Maybe UserPoolMFAType)
-  , _supmcrsResponseStatus                :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetUserPoolMFAConfigResponse = SetUserPoolMFAConfigResponse'{_supmcrsSmsMFAConfiguration
+                                                                  ::
+                                                                  !(Maybe
+                                                                      SmsMFAConfigType),
+                                                                  _supmcrsSoftwareTokenMFAConfiguration
+                                                                  ::
+                                                                  !(Maybe
+                                                                      SoftwareTokenMFAConfigType),
+                                                                  _supmcrsMFAConfiguration
+                                                                  ::
+                                                                  !(Maybe
+                                                                      UserPoolMFAType),
+                                                                  _supmcrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'SetUserPoolMFAConfigResponse' with the minimum fields required to make a request.
 --
@@ -158,20 +168,19 @@ data SetUserPoolMFAConfigResponse = SetUserPoolMFAConfigResponse'
 --
 -- * 'supmcrsSoftwareTokenMFAConfiguration' - The software token MFA configuration.
 --
--- * 'supmcrsMFAConfiguration' - The MFA configuration.
+-- * 'supmcrsMFAConfiguration' - The MFA configuration. Valid values include:     * @OFF@ MFA will not be used for any users.     * @ON@ MFA is required for all users to sign in.     * @OPTIONAL@ MFA will be required only for individual users who have an MFA factor enabled.
 --
 -- * 'supmcrsResponseStatus' - -- | The response status code.
 setUserPoolMFAConfigResponse
     :: Int -- ^ 'supmcrsResponseStatus'
     -> SetUserPoolMFAConfigResponse
-setUserPoolMFAConfigResponse pResponseStatus_ =
-  SetUserPoolMFAConfigResponse'
-    { _supmcrsSmsMFAConfiguration = Nothing
-    , _supmcrsSoftwareTokenMFAConfiguration = Nothing
-    , _supmcrsMFAConfiguration = Nothing
-    , _supmcrsResponseStatus = pResponseStatus_
-    }
-
+setUserPoolMFAConfigResponse pResponseStatus_
+  = SetUserPoolMFAConfigResponse'{_supmcrsSmsMFAConfiguration
+                                    = Nothing,
+                                  _supmcrsSoftwareTokenMFAConfiguration =
+                                    Nothing,
+                                  _supmcrsMFAConfiguration = Nothing,
+                                  _supmcrsResponseStatus = pResponseStatus_}
 
 -- | The SMS text message MFA configuration.
 supmcrsSmsMFAConfiguration :: Lens' SetUserPoolMFAConfigResponse (Maybe SmsMFAConfigType)
@@ -181,7 +190,7 @@ supmcrsSmsMFAConfiguration = lens _supmcrsSmsMFAConfiguration (\ s a -> s{_supmc
 supmcrsSoftwareTokenMFAConfiguration :: Lens' SetUserPoolMFAConfigResponse (Maybe SoftwareTokenMFAConfigType)
 supmcrsSoftwareTokenMFAConfiguration = lens _supmcrsSoftwareTokenMFAConfiguration (\ s a -> s{_supmcrsSoftwareTokenMFAConfiguration = a})
 
--- | The MFA configuration.
+-- | The MFA configuration. Valid values include:     * @OFF@ MFA will not be used for any users.     * @ON@ MFA is required for all users to sign in.     * @OPTIONAL@ MFA will be required only for individual users who have an MFA factor enabled.
 supmcrsMFAConfiguration :: Lens' SetUserPoolMFAConfigResponse (Maybe UserPoolMFAType)
 supmcrsMFAConfiguration = lens _supmcrsMFAConfiguration (\ s a -> s{_supmcrsMFAConfiguration = a})
 

@@ -53,41 +53,36 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'searchSkillGroups' smart constructor.
-data SearchSkillGroups = SearchSkillGroups'
-  { _ssgFilters      :: !(Maybe [Filter])
-  , _ssgSortCriteria :: !(Maybe [Sort])
-  , _ssgNextToken    :: !(Maybe Text)
-  , _ssgMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchSkillGroups = SearchSkillGroups'{_ssgFilters
+                                            :: !(Maybe [Filter]),
+                                            _ssgSortCriteria :: !(Maybe [Sort]),
+                                            _ssgNextToken :: !(Maybe Text),
+                                            _ssgMaxResults :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchSkillGroups' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssgFilters' - The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName.
+-- * 'ssgFilters' - The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName. 
 --
--- * 'ssgSortCriteria' - The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName.
+-- * 'ssgSortCriteria' - The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName. 
 --
 -- * 'ssgNextToken' - An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by @MaxResults@ . Required.
 --
--- * 'ssgMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved.
+-- * 'ssgMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. 
 searchSkillGroups
     :: SearchSkillGroups
-searchSkillGroups =
-  SearchSkillGroups'
-    { _ssgFilters = Nothing
-    , _ssgSortCriteria = Nothing
-    , _ssgNextToken = Nothing
-    , _ssgMaxResults = Nothing
-    }
+searchSkillGroups
+  = SearchSkillGroups'{_ssgFilters = Nothing,
+                       _ssgSortCriteria = Nothing, _ssgNextToken = Nothing,
+                       _ssgMaxResults = Nothing}
 
-
--- | The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName.
+-- | The filters to use to list a specified set of skill groups. The supported filter key is SkillGroupName. 
 ssgFilters :: Lens' SearchSkillGroups [Filter]
 ssgFilters = lens _ssgFilters (\ s a -> s{_ssgFilters = a}) . _Default . _Coerce
 
--- | The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName.
+-- | The sort order to use in listing the specified set of skill groups. The supported sort key is SkillGroupName. 
 ssgSortCriteria :: Lens' SearchSkillGroups [Sort]
 ssgSortCriteria = lens _ssgSortCriteria (\ s a -> s{_ssgSortCriteria = a}) . _Default . _Coerce
 
@@ -95,7 +90,7 @@ ssgSortCriteria = lens _ssgSortCriteria (\ s a -> s{_ssgSortCriteria = a}) . _De
 ssgNextToken :: Lens' SearchSkillGroups (Maybe Text)
 ssgNextToken = lens _ssgNextToken (\ s a -> s{_ssgNextToken = a})
 
--- | The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved.
+-- | The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. 
 ssgMaxResults :: Lens' SearchSkillGroups (Maybe Natural)
 ssgMaxResults = lens _ssgMaxResults (\ s a -> s{_ssgMaxResults = a}) . mapping _Nat
 
@@ -147,13 +142,17 @@ instance ToQuery SearchSkillGroups where
         toQuery = const mempty
 
 -- | /See:/ 'searchSkillGroupsResponse' smart constructor.
-data SearchSkillGroupsResponse = SearchSkillGroupsResponse'
-  { _ssgrsNextToken      :: !(Maybe Text)
-  , _ssgrsSkillGroups    :: !(Maybe [SkillGroupData])
-  , _ssgrsTotalCount     :: !(Maybe Int)
-  , _ssgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchSkillGroupsResponse = SearchSkillGroupsResponse'{_ssgrsNextToken
+                                                            :: !(Maybe Text),
+                                                            _ssgrsSkillGroups ::
+                                                            !(Maybe
+                                                                [SkillGroupData]),
+                                                            _ssgrsTotalCount ::
+                                                            !(Maybe Int),
+                                                            _ssgrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'SearchSkillGroupsResponse' with the minimum fields required to make a request.
 --
@@ -169,14 +168,12 @@ data SearchSkillGroupsResponse = SearchSkillGroupsResponse'
 searchSkillGroupsResponse
     :: Int -- ^ 'ssgrsResponseStatus'
     -> SearchSkillGroupsResponse
-searchSkillGroupsResponse pResponseStatus_ =
-  SearchSkillGroupsResponse'
-    { _ssgrsNextToken = Nothing
-    , _ssgrsSkillGroups = Nothing
-    , _ssgrsTotalCount = Nothing
-    , _ssgrsResponseStatus = pResponseStatus_
-    }
-
+searchSkillGroupsResponse pResponseStatus_
+  = SearchSkillGroupsResponse'{_ssgrsNextToken =
+                                 Nothing,
+                               _ssgrsSkillGroups = Nothing,
+                               _ssgrsTotalCount = Nothing,
+                               _ssgrsResponseStatus = pResponseStatus_}
 
 -- | The token returned to indicate that there is more data available.
 ssgrsNextToken :: Lens' SearchSkillGroupsResponse (Maybe Text)

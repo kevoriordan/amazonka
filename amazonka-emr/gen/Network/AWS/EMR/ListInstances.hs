@@ -59,16 +59,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listInstances' smart constructor.
-data ListInstances = ListInstances'
-  { _liInstanceGroupTypes :: !(Maybe [InstanceGroupType])
-  , _liInstanceFleetType  :: !(Maybe InstanceFleetType)
-  , _liMarker             :: !(Maybe Text)
-  , _liInstanceFleetId    :: !(Maybe Text)
-  , _liInstanceStates     :: !(Maybe [InstanceState])
-  , _liInstanceGroupId    :: !(Maybe Text)
-  , _liClusterId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInstances = ListInstances'{_liInstanceGroupTypes
+                                    :: !(Maybe [InstanceGroupType]),
+                                    _liInstanceFleetType ::
+                                    !(Maybe InstanceFleetType),
+                                    _liMarker :: !(Maybe Text),
+                                    _liInstanceFleetId :: !(Maybe Text),
+                                    _liInstanceStates ::
+                                    !(Maybe [InstanceState]),
+                                    _liInstanceGroupId :: !(Maybe Text),
+                                    _liClusterId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInstances' with the minimum fields required to make a request.
 --
@@ -90,17 +91,13 @@ data ListInstances = ListInstances'
 listInstances
     :: Text -- ^ 'liClusterId'
     -> ListInstances
-listInstances pClusterId_ =
-  ListInstances'
-    { _liInstanceGroupTypes = Nothing
-    , _liInstanceFleetType = Nothing
-    , _liMarker = Nothing
-    , _liInstanceFleetId = Nothing
-    , _liInstanceStates = Nothing
-    , _liInstanceGroupId = Nothing
-    , _liClusterId = pClusterId_
-    }
-
+listInstances pClusterId_
+  = ListInstances'{_liInstanceGroupTypes = Nothing,
+                   _liInstanceFleetType = Nothing, _liMarker = Nothing,
+                   _liInstanceFleetId = Nothing,
+                   _liInstanceStates = Nothing,
+                   _liInstanceGroupId = Nothing,
+                   _liClusterId = pClusterId_}
 
 -- | The type of instance group for which to list the instances.
 liInstanceGroupTypes :: Lens' ListInstances [InstanceGroupType]
@@ -183,12 +180,13 @@ instance ToQuery ListInstances where
 --
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
-data ListInstancesResponse = ListInstancesResponse'
-  { _lirsMarker         :: !(Maybe Text)
-  , _lirsInstances      :: !(Maybe [Instance])
-  , _lirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInstancesResponse = ListInstancesResponse'{_lirsMarker
+                                                    :: !(Maybe Text),
+                                                    _lirsInstances ::
+                                                    !(Maybe [Instance]),
+                                                    _lirsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -202,13 +200,10 @@ data ListInstancesResponse = ListInstancesResponse'
 listInstancesResponse
     :: Int -- ^ 'lirsResponseStatus'
     -> ListInstancesResponse
-listInstancesResponse pResponseStatus_ =
-  ListInstancesResponse'
-    { _lirsMarker = Nothing
-    , _lirsInstances = Nothing
-    , _lirsResponseStatus = pResponseStatus_
-    }
-
+listInstancesResponse pResponseStatus_
+  = ListInstancesResponse'{_lirsMarker = Nothing,
+                           _lirsInstances = Nothing,
+                           _lirsResponseStatus = pResponseStatus_}
 
 -- | The pagination token that indicates the next set of results to retrieve.
 lirsMarker :: Lens' ListInstancesResponse (Maybe Text)

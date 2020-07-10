@@ -54,12 +54,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'executeChangeSet' smart constructor.
-data ExecuteChangeSet = ExecuteChangeSet'
-  { _ecsClientRequestToken :: !(Maybe Text)
-  , _ecsStackName          :: !(Maybe Text)
-  , _ecsChangeSetName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ExecuteChangeSet = ExecuteChangeSet'{_ecsClientRequestToken
+                                          :: !(Maybe Text),
+                                          _ecsStackName :: !(Maybe Text),
+                                          _ecsChangeSetName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExecuteChangeSet' with the minimum fields required to make a request.
 --
@@ -73,13 +72,10 @@ data ExecuteChangeSet = ExecuteChangeSet'
 executeChangeSet
     :: Text -- ^ 'ecsChangeSetName'
     -> ExecuteChangeSet
-executeChangeSet pChangeSetName_ =
-  ExecuteChangeSet'
-    { _ecsClientRequestToken = Nothing
-    , _ecsStackName = Nothing
-    , _ecsChangeSetName = pChangeSetName_
-    }
-
+executeChangeSet pChangeSetName_
+  = ExecuteChangeSet'{_ecsClientRequestToken = Nothing,
+                      _ecsStackName = Nothing,
+                      _ecsChangeSetName = pChangeSetName_}
 
 -- | A unique identifier for this @ExecuteChangeSet@ request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to execute a change set to update a stack with the same name. You might retry @ExecuteChangeSet@ requests to ensure that AWS CloudFormation successfully received them.
 ecsClientRequestToken :: Lens' ExecuteChangeSet (Maybe Text)
@@ -125,10 +121,10 @@ instance ToQuery ExecuteChangeSet where
 --
 --
 -- /See:/ 'executeChangeSetResponse' smart constructor.
-newtype ExecuteChangeSetResponse = ExecuteChangeSetResponse'
-  { _ecsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ExecuteChangeSetResponse = ExecuteChangeSetResponse'{_ecsrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ExecuteChangeSetResponse' with the minimum fields required to make a request.
 --
@@ -138,9 +134,9 @@ newtype ExecuteChangeSetResponse = ExecuteChangeSetResponse'
 executeChangeSetResponse
     :: Int -- ^ 'ecsrsResponseStatus'
     -> ExecuteChangeSetResponse
-executeChangeSetResponse pResponseStatus_ =
-  ExecuteChangeSetResponse' {_ecsrsResponseStatus = pResponseStatus_}
-
+executeChangeSetResponse pResponseStatus_
+  = ExecuteChangeSetResponse'{_ecsrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 ecsrsResponseStatus :: Lens' ExecuteChangeSetResponse Int

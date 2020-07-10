@@ -23,17 +23,21 @@
 --
 -- By default, you can create up to 50 delivery streams per AWS Region.
 --
--- This is an asynchronous operation that immediately returns. The initial status of the delivery stream is @CREATING@ . After the delivery stream is created, its status is @ACTIVE@ and it now accepts data. Attempts to send data to a delivery stream that is not in the @ACTIVE@ state cause an exception. To check the state of a delivery stream, use 'DescribeDeliveryStream' .
+-- This is an asynchronous operation that immediately returns. The initial status of the delivery stream is @CREATING@ . After the delivery stream is created, its status is @ACTIVE@ and it now accepts data. If the delivery stream creation fails, the status transitions to @CREATING_FAILED@ . Attempts to send data to a delivery stream that is not in the @ACTIVE@ state cause an exception. To check the state of a delivery stream, use 'DescribeDeliveryStream' .
+--
+-- If the status of a delivery stream is @CREATING_FAILED@ , this status doesn't change, and you can't invoke @CreateDeliveryStream@ again on it. However, you can invoke the 'DeleteDeliveryStream' operation to delete it.
 --
 -- A Kinesis Data Firehose delivery stream can be configured to receive records directly from providers using 'PutRecord' or 'PutRecordBatch' , or it can be configured to use an existing Kinesis stream as its source. To specify a Kinesis data stream as input, set the @DeliveryStreamType@ parameter to @KinesisStreamAsSource@ , and provide the Kinesis stream Amazon Resource Name (ARN) and role ARN in the @KinesisStreamSourceConfiguration@ parameter.
 --
--- A delivery stream is configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or Splunk. You must specify only one of the following destination configuration parameters: __ExtendedS3DestinationConfiguration__ , __S3DestinationConfiguration__ , __ElasticsearchDestinationConfiguration__ , __RedshiftDestinationConfiguration__ , or __SplunkDestinationConfiguration__ .
+-- To create a delivery stream with server-side encryption (SSE) enabled, include 'DeliveryStreamEncryptionConfigurationInput' in your request. This is optional. You can also invoke 'StartDeliveryStreamEncryption' to turn on SSE for an existing delivery stream that doesn't have SSE enabled.
 --
--- When you specify __S3DestinationConfiguration__ , you can also provide the following optional values: __BufferingHints__ , __EncryptionConfiguration__ , and __CompressionFormat__ . By default, if no __BufferingHints__ value is provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. __BufferingHints__ is a hint, so there are some cases where the service cannot adhere to these conditions strictly. For example, record boundaries might be such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3.
+-- A delivery stream is configured with a single destination: Amazon S3, Amazon ES, Amazon Redshift, or Splunk. You must specify only one of the following destination configuration parameters: @ExtendedS3DestinationConfiguration@ , @S3DestinationConfiguration@ , @ElasticsearchDestinationConfiguration@ , @RedshiftDestinationConfiguration@ , or @SplunkDestinationConfiguration@ .
+--
+-- When you specify @S3DestinationConfiguration@ , you can also provide the following optional values: BufferingHints, @EncryptionConfiguration@ , and @CompressionFormat@ . By default, if no @BufferingHints@ value is provided, Kinesis Data Firehose buffers data up to 5 MB or for 5 minutes, whichever condition is satisfied first. @BufferingHints@ is a hint, so there are some cases where the service cannot adhere to these conditions strictly. For example, record boundaries might be such that the size is a little over or under the configured buffering size. By default, no encryption is performed. We strongly recommend that you enable encryption to ensure secure data storage in Amazon S3.
 --
 -- A few notes about Amazon Redshift as a destination:
 --
---     * An Amazon Redshift destination requires an S3 bucket as intermediate location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses @COPY@ syntax to load data into an Amazon Redshift table. This is specified in the __RedshiftDestinationConfiguration.S3Configuration__ parameter.
+--     * An Amazon Redshift destination requires an S3 bucket as intermediate location. Kinesis Data Firehose first delivers data to Amazon S3 and then uses @COPY@ syntax to load data into an Amazon Redshift table. This is specified in the @RedshiftDestinationConfiguration.S3Configuration@ parameter.
 --
 --     * The compression formats @SNAPPY@ or @ZIP@ cannot be specified in @RedshiftDestinationConfiguration.S3Configuration@ because the Amazon Redshift @COPY@ operation that reads from the S3 bucket doesn't support these compression formats.
 --
@@ -41,7 +45,7 @@
 --
 --
 --
--- Kinesis Data Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Data Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3 Grant Kinesis Data Firehose Access to an Amazon S3 Destination> in the /Amazon Kinesis Data Firehose Developer Guide/ .
+-- Kinesis Data Firehose assumes the IAM role that is configured as part of the destination. The role should allow the Kinesis Data Firehose principal to assume the role, and the role should have permissions that allow the service to deliver the data. For more information, see <https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3 Grant Kinesis Data Firehose Access to an Amazon S3 Destination> in the /Amazon Kinesis Data Firehose Developer Guide/ .
 --
 module Network.AWS.Firehose.CreateDeliveryStream
     (
@@ -56,6 +60,8 @@ module Network.AWS.Firehose.CreateDeliveryStream
     , cdsKinesisStreamSourceConfiguration
     , cdsDeliveryStreamType
     , cdsSplunkDestinationConfiguration
+    , cdsTags
+    , cdsDeliveryStreamEncryptionConfigurationInput
     , cdsDeliveryStreamName
 
     -- * Destructuring the Response
@@ -74,17 +80,41 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDeliveryStream' smart constructor.
-data CreateDeliveryStream = CreateDeliveryStream'
-  { _cdsS3DestinationConfiguration :: !(Maybe S3DestinationConfiguration)
-  , _cdsRedshiftDestinationConfiguration :: !(Maybe RedshiftDestinationConfiguration)
-  , _cdsElasticsearchDestinationConfiguration :: !(Maybe ElasticsearchDestinationConfiguration)
-  , _cdsExtendedS3DestinationConfiguration :: !(Maybe ExtendedS3DestinationConfiguration)
-  , _cdsKinesisStreamSourceConfiguration :: !(Maybe KinesisStreamSourceConfiguration)
-  , _cdsDeliveryStreamType :: !(Maybe DeliveryStreamType)
-  , _cdsSplunkDestinationConfiguration :: !(Maybe SplunkDestinationConfiguration)
-  , _cdsDeliveryStreamName :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateDeliveryStream = CreateDeliveryStream'{_cdsS3DestinationConfiguration
+                                                  ::
+                                                  !(Maybe
+                                                      S3DestinationConfiguration),
+                                                  _cdsRedshiftDestinationConfiguration
+                                                  ::
+                                                  !(Maybe
+                                                      RedshiftDestinationConfiguration),
+                                                  _cdsElasticsearchDestinationConfiguration
+                                                  ::
+                                                  !(Maybe
+                                                      ElasticsearchDestinationConfiguration),
+                                                  _cdsExtendedS3DestinationConfiguration
+                                                  ::
+                                                  !(Maybe
+                                                      ExtendedS3DestinationConfiguration),
+                                                  _cdsKinesisStreamSourceConfiguration
+                                                  ::
+                                                  !(Maybe
+                                                      KinesisStreamSourceConfiguration),
+                                                  _cdsDeliveryStreamType ::
+                                                  !(Maybe DeliveryStreamType),
+                                                  _cdsSplunkDestinationConfiguration
+                                                  ::
+                                                  !(Maybe
+                                                      SplunkDestinationConfiguration),
+                                                  _cdsTags ::
+                                                  !(Maybe (List1 Tag)),
+                                                  _cdsDeliveryStreamEncryptionConfigurationInput
+                                                  ::
+                                                  !(Maybe
+                                                      DeliveryStreamEncryptionConfigurationInput),
+                                                  _cdsDeliveryStreamName ::
+                                                  !Text}
+                              deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDeliveryStream' with the minimum fields required to make a request.
 --
@@ -104,22 +134,27 @@ data CreateDeliveryStream = CreateDeliveryStream'
 --
 -- * 'cdsSplunkDestinationConfiguration' - The destination in Splunk. You can specify only one destination.
 --
+-- * 'cdsTags' - A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the AWS Billing and Cost Management User Guide. You can specify up to 50 tags when creating a delivery stream.
+--
+-- * 'cdsDeliveryStreamEncryptionConfigurationInput' - Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for Server-Side Encryption (SSE).
+--
 -- * 'cdsDeliveryStreamName' - The name of the delivery stream. This name must be unique per AWS account in the same AWS Region. If the delivery streams are in different accounts or different Regions, you can have multiple delivery streams with the same name.
 createDeliveryStream
     :: Text -- ^ 'cdsDeliveryStreamName'
     -> CreateDeliveryStream
-createDeliveryStream pDeliveryStreamName_ =
-  CreateDeliveryStream'
-    { _cdsS3DestinationConfiguration = Nothing
-    , _cdsRedshiftDestinationConfiguration = Nothing
-    , _cdsElasticsearchDestinationConfiguration = Nothing
-    , _cdsExtendedS3DestinationConfiguration = Nothing
-    , _cdsKinesisStreamSourceConfiguration = Nothing
-    , _cdsDeliveryStreamType = Nothing
-    , _cdsSplunkDestinationConfiguration = Nothing
-    , _cdsDeliveryStreamName = pDeliveryStreamName_
-    }
-
+createDeliveryStream pDeliveryStreamName_
+  = CreateDeliveryStream'{_cdsS3DestinationConfiguration
+                            = Nothing,
+                          _cdsRedshiftDestinationConfiguration = Nothing,
+                          _cdsElasticsearchDestinationConfiguration = Nothing,
+                          _cdsExtendedS3DestinationConfiguration = Nothing,
+                          _cdsKinesisStreamSourceConfiguration = Nothing,
+                          _cdsDeliveryStreamType = Nothing,
+                          _cdsSplunkDestinationConfiguration = Nothing,
+                          _cdsTags = Nothing,
+                          _cdsDeliveryStreamEncryptionConfigurationInput =
+                            Nothing,
+                          _cdsDeliveryStreamName = pDeliveryStreamName_}
 
 -- | [Deprecated] The destination in Amazon S3. You can specify only one destination.
 cdsS3DestinationConfiguration :: Lens' CreateDeliveryStream (Maybe S3DestinationConfiguration)
@@ -148,6 +183,14 @@ cdsDeliveryStreamType = lens _cdsDeliveryStreamType (\ s a -> s{_cdsDeliveryStre
 -- | The destination in Splunk. You can specify only one destination.
 cdsSplunkDestinationConfiguration :: Lens' CreateDeliveryStream (Maybe SplunkDestinationConfiguration)
 cdsSplunkDestinationConfiguration = lens _cdsSplunkDestinationConfiguration (\ s a -> s{_cdsSplunkDestinationConfiguration = a})
+
+-- | A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the AWS Billing and Cost Management User Guide. You can specify up to 50 tags when creating a delivery stream.
+cdsTags :: Lens' CreateDeliveryStream (Maybe (NonEmpty Tag))
+cdsTags = lens _cdsTags (\ s a -> s{_cdsTags = a}) . mapping _List1
+
+-- | Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for Server-Side Encryption (SSE).
+cdsDeliveryStreamEncryptionConfigurationInput :: Lens' CreateDeliveryStream (Maybe DeliveryStreamEncryptionConfigurationInput)
+cdsDeliveryStreamEncryptionConfigurationInput = lens _cdsDeliveryStreamEncryptionConfigurationInput (\ s a -> s{_cdsDeliveryStreamEncryptionConfigurationInput = a})
 
 -- | The name of the delivery stream. This name must be unique per AWS account in the same AWS Region. If the delivery streams are in different accounts or different Regions, you can have multiple delivery streams with the same name.
 cdsDeliveryStreamName :: Lens' CreateDeliveryStream Text
@@ -194,6 +237,9 @@ instance ToJSON CreateDeliveryStream where
                   ("DeliveryStreamType" .=) <$> _cdsDeliveryStreamType,
                   ("SplunkDestinationConfiguration" .=) <$>
                     _cdsSplunkDestinationConfiguration,
+                  ("Tags" .=) <$> _cdsTags,
+                  ("DeliveryStreamEncryptionConfigurationInput" .=) <$>
+                    _cdsDeliveryStreamEncryptionConfigurationInput,
                   Just
                     ("DeliveryStreamName" .= _cdsDeliveryStreamName)])
 
@@ -204,11 +250,13 @@ instance ToQuery CreateDeliveryStream where
         toQuery = const mempty
 
 -- | /See:/ 'createDeliveryStreamResponse' smart constructor.
-data CreateDeliveryStreamResponse = CreateDeliveryStreamResponse'
-  { _cdsrsDeliveryStreamARN :: !(Maybe Text)
-  , _cdsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeliveryStreamResponse = CreateDeliveryStreamResponse'{_cdsrsDeliveryStreamARN
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _cdsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'CreateDeliveryStreamResponse' with the minimum fields required to make a request.
 --
@@ -220,10 +268,10 @@ data CreateDeliveryStreamResponse = CreateDeliveryStreamResponse'
 createDeliveryStreamResponse
     :: Int -- ^ 'cdsrsResponseStatus'
     -> CreateDeliveryStreamResponse
-createDeliveryStreamResponse pResponseStatus_ =
-  CreateDeliveryStreamResponse'
-    {_cdsrsDeliveryStreamARN = Nothing, _cdsrsResponseStatus = pResponseStatus_}
-
+createDeliveryStreamResponse pResponseStatus_
+  = CreateDeliveryStreamResponse'{_cdsrsDeliveryStreamARN
+                                    = Nothing,
+                                  _cdsrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the delivery stream.
 cdsrsDeliveryStreamARN :: Lens' CreateDeliveryStreamResponse (Maybe Text)

@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detachStaticIP' smart constructor.
-newtype DetachStaticIP = DetachStaticIP'
-  { _dsiStaticIPName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DetachStaticIP = DetachStaticIP'{_dsiStaticIPName
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DetachStaticIP' with the minimum fields required to make a request.
 --
@@ -58,9 +57,8 @@ newtype DetachStaticIP = DetachStaticIP'
 detachStaticIP
     :: Text -- ^ 'dsiStaticIPName'
     -> DetachStaticIP
-detachStaticIP pStaticIPName_ =
-  DetachStaticIP' {_dsiStaticIPName = pStaticIPName_}
-
+detachStaticIP pStaticIPName_
+  = DetachStaticIP'{_dsiStaticIPName = pStaticIPName_}
 
 -- | The name of the static IP to detach from the instance.
 dsiStaticIPName :: Lens' DetachStaticIP Text
@@ -102,28 +100,28 @@ instance ToQuery DetachStaticIP where
         toQuery = const mempty
 
 -- | /See:/ 'detachStaticIPResponse' smart constructor.
-data DetachStaticIPResponse = DetachStaticIPResponse'
-  { _dsirsOperations     :: !(Maybe [Operation])
-  , _dsirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachStaticIPResponse = DetachStaticIPResponse'{_dsirsOperations
+                                                      :: !(Maybe [Operation]),
+                                                      _dsirsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DetachStaticIPResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsirsOperations' - An array of key-value pairs containing information about the results of your detach static IP request.
+-- * 'dsirsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'dsirsResponseStatus' - -- | The response status code.
 detachStaticIPResponse
     :: Int -- ^ 'dsirsResponseStatus'
     -> DetachStaticIPResponse
-detachStaticIPResponse pResponseStatus_ =
-  DetachStaticIPResponse'
-    {_dsirsOperations = Nothing, _dsirsResponseStatus = pResponseStatus_}
+detachStaticIPResponse pResponseStatus_
+  = DetachStaticIPResponse'{_dsirsOperations = Nothing,
+                            _dsirsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your detach static IP request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 dsirsOperations :: Lens' DetachStaticIPResponse [Operation]
 dsirsOperations = lens _dsirsOperations (\ s a -> s{_dsirsOperations = a}) . _Default . _Coerce
 

@@ -14,11 +14,11 @@
 module Test.AWS.Gen.KinesisVideoArchivedMedia where
 
 import Data.Proxy
-import Network.AWS.KinesisVideoArchivedMedia
 import Test.AWS.Fixture
-import Test.AWS.KinesisVideoArchivedMedia.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.KinesisVideoArchivedMedia
+import Test.AWS.KinesisVideoArchivedMedia.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,25 +28,53 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestGetMediaForFragmentList $
+--         [ requestGetHLSStreamingSessionURL $
+--             getHLSStreamingSessionURL
+--
+--         , requestGetClip $
+--             getClip
+--
+--         , requestGetMediaForFragmentList $
 --             getMediaForFragmentList
 --
 --         , requestListFragments $
 --             listFragments
 --
+--         , requestGetDASHStreamingSessionURL $
+--             getDASHStreamingSessionURL
+--
 --           ]
 
 --     , testGroup "response"
---         [ responseGetMediaForFragmentList $
+--         [ responseGetHLSStreamingSessionURL $
+--             getHLSStreamingSessionURLResponse
+--
+--         , responseGetClip $
+--             getClipResponse
+--
+--         , responseGetMediaForFragmentList $
 --             getMediaForFragmentListResponse
 --
 --         , responseListFragments $
 --             listFragmentsResponse
 --
+--         , responseGetDASHStreamingSessionURL $
+--             getDASHStreamingSessionURLResponse
+--
 --           ]
 --     ]
 
 -- Requests
+
+requestGetHLSStreamingSessionURL :: GetHLSStreamingSessionURL -> TestTree
+requestGetHLSStreamingSessionURL = req
+    "GetHLSStreamingSessionURL"
+    "fixture/GetHLSStreamingSessionURL.yaml"
+
+requestGetClip :: GetClip -> TestTree
+requestGetClip = req
+    "GetClip"
+    "fixture/GetClip.yaml"
 
 requestGetMediaForFragmentList :: GetMediaForFragmentList -> TestTree
 requestGetMediaForFragmentList = req
@@ -58,7 +86,19 @@ requestListFragments = req
     "ListFragments"
     "fixture/ListFragments.yaml"
 
+requestGetDASHStreamingSessionURL :: GetDASHStreamingSessionURL -> TestTree
+requestGetDASHStreamingSessionURL = req
+    "GetDASHStreamingSessionURL"
+    "fixture/GetDASHStreamingSessionURL.yaml"
+
 -- Responses
+
+responseGetHLSStreamingSessionURL :: GetHLSStreamingSessionURLResponse -> TestTree
+responseGetHLSStreamingSessionURL = res
+    "GetHLSStreamingSessionURLResponse"
+    "fixture/GetHLSStreamingSessionURLResponse.proto"
+    kinesisVideoArchivedMedia
+    (Proxy :: Proxy GetHLSStreamingSessionURL)
 
 responseListFragments :: ListFragmentsResponse -> TestTree
 responseListFragments = res
@@ -66,3 +106,10 @@ responseListFragments = res
     "fixture/ListFragmentsResponse.proto"
     kinesisVideoArchivedMedia
     (Proxy :: Proxy ListFragments)
+
+responseGetDASHStreamingSessionURL :: GetDASHStreamingSessionURLResponse -> TestTree
+responseGetDASHStreamingSessionURL = res
+    "GetDASHStreamingSessionURLResponse"
+    "fixture/GetDASHStreamingSessionURLResponse.proto"
+    kinesisVideoArchivedMedia
+    (Proxy :: Proxy GetDASHStreamingSessionURL)

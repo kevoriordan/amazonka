@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Shuts down one or more instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds.
+-- Shuts down the specified instances. This operation is idempotent; if you terminate an instance more than once, each call succeeds. 
 --
 --
 -- If you specify multiple instances and the request fails (for example, because of a single incorrect instance ID), none of the instances are terminated.
@@ -27,9 +27,9 @@
 --
 -- By default, Amazon EC2 deletes all EBS volumes that were attached when the instance launched. Volumes attached after instance launch continue running.
 --
--- You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, any attached EBS volumes with the @DeleteOnTermination@ block device mapping parameter set to @true@ are automatically deleted. For more information about the differences between stopping and terminating instances, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html Instance Lifecycle> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- You can stop, start, and terminate EBS-backed instances. You can only terminate instance store-backed instances. What happens to an instance differs if you stop it or terminate it. For example, when you stop an instance, the root device and any other devices attached to the instance persist. When you terminate an instance, any attached EBS volumes with the @DeleteOnTermination@ block device mapping parameter set to @true@ are automatically deleted. For more information about the differences between stopping and terminating instances, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html Instance Lifecycle> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
--- For more information about troubleshooting, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html Troubleshooting Terminating Your Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- For more information about troubleshooting, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesShuttingDown.html Troubleshooting Terminating Your Instance> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.TerminateInstances
     (
@@ -55,16 +55,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for TerminateInstances.
---
---
---
--- /See:/ 'terminateInstances' smart constructor.
-data TerminateInstances = TerminateInstances'
-  { _tiDryRun      :: !(Maybe Bool)
-  , _tiInstanceIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'terminateInstances' smart constructor.
+data TerminateInstances = TerminateInstances'{_tiDryRun
+                                              :: !(Maybe Bool),
+                                              _tiInstanceIds :: ![Text]}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TerminateInstances' with the minimum fields required to make a request.
 --
@@ -72,18 +67,18 @@ data TerminateInstances = TerminateInstances'
 --
 -- * 'tiDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'tiInstanceIds' - One or more instance IDs. Constraints: Up to 1000 instance IDs. We recommend breaking up this request into smaller batches.
+-- * 'tiInstanceIds' - The IDs of the instances. Constraints: Up to 1000 instance IDs. We recommend breaking up this request into smaller batches.
 terminateInstances
     :: TerminateInstances
-terminateInstances =
-  TerminateInstances' {_tiDryRun = Nothing, _tiInstanceIds = mempty}
-
+terminateInstances
+  = TerminateInstances'{_tiDryRun = Nothing,
+                        _tiInstanceIds = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 tiDryRun :: Lens' TerminateInstances (Maybe Bool)
 tiDryRun = lens _tiDryRun (\ s a -> s{_tiDryRun = a})
 
--- | One or more instance IDs. Constraints: Up to 1000 instance IDs. We recommend breaking up this request into smaller batches.
+-- | The IDs of the instances. Constraints: Up to 1000 instance IDs. We recommend breaking up this request into smaller batches.
 tiInstanceIds :: Lens' TerminateInstances [Text]
 tiInstanceIds = lens _tiInstanceIds (\ s a -> s{_tiInstanceIds = a}) . _Coerce
 
@@ -117,35 +112,32 @@ instance ToQuery TerminateInstances where
                "DryRun" =: _tiDryRun,
                toQueryList "InstanceId" _tiInstanceIds]
 
--- | Contains the output of TerminateInstances.
---
---
---
--- /See:/ 'terminateInstancesResponse' smart constructor.
-data TerminateInstancesResponse = TerminateInstancesResponse'
-  { _tirsTerminatingInstances :: !(Maybe [InstanceStateChange])
-  , _tirsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'terminateInstancesResponse' smart constructor.
+data TerminateInstancesResponse = TerminateInstancesResponse'{_tirsTerminatingInstances
+                                                              ::
+                                                              !(Maybe
+                                                                  [InstanceStateChange]),
+                                                              _tirsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'TerminateInstancesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tirsTerminatingInstances' - Information about one or more terminated instances.
+-- * 'tirsTerminatingInstances' - Information about the terminated instances.
 --
 -- * 'tirsResponseStatus' - -- | The response status code.
 terminateInstancesResponse
     :: Int -- ^ 'tirsResponseStatus'
     -> TerminateInstancesResponse
-terminateInstancesResponse pResponseStatus_ =
-  TerminateInstancesResponse'
-    { _tirsTerminatingInstances = Nothing
-    , _tirsResponseStatus = pResponseStatus_
-    }
+terminateInstancesResponse pResponseStatus_
+  = TerminateInstancesResponse'{_tirsTerminatingInstances
+                                  = Nothing,
+                                _tirsResponseStatus = pResponseStatus_}
 
-
--- | Information about one or more terminated instances.
+-- | Information about the terminated instances.
 tirsTerminatingInstances :: Lens' TerminateInstancesResponse [InstanceStateChange]
 tirsTerminatingInstances = lens _tirsTerminatingInstances (\ s a -> s{_tirsTerminatingInstances = a}) . _Default . _Coerce
 

@@ -52,12 +52,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listDevices' smart constructor.
-data ListDevices = ListDevices'
-  { _ldPaginationToken :: !(Maybe Text)
-  , _ldLimit           :: !(Maybe Nat)
-  , _ldAccessToken     :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ListDevices = ListDevices'{_ldPaginationToken ::
+                                !(Maybe Text),
+                                _ldLimit :: !(Maybe Nat),
+                                _ldAccessToken :: !(Sensitive Text)}
+                     deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDevices' with the minimum fields required to make a request.
 --
@@ -71,13 +70,10 @@ data ListDevices = ListDevices'
 listDevices
     :: Text -- ^ 'ldAccessToken'
     -> ListDevices
-listDevices pAccessToken_ =
-  ListDevices'
-    { _ldPaginationToken = Nothing
-    , _ldLimit = Nothing
-    , _ldAccessToken = _Sensitive # pAccessToken_
-    }
-
+listDevices pAccessToken_
+  = ListDevices'{_ldPaginationToken = Nothing,
+                 _ldLimit = Nothing,
+                 _ldAccessToken = _Sensitive # pAccessToken_}
 
 -- | The pagination token for the list request.
 ldPaginationToken :: Lens' ListDevices (Maybe Text)
@@ -135,12 +131,12 @@ instance ToQuery ListDevices where
 --
 --
 -- /See:/ 'listDevicesResponse' smart constructor.
-data ListDevicesResponse = ListDevicesResponse'
-  { _ldrsPaginationToken :: !(Maybe Text)
-  , _ldrsDevices         :: !(Maybe [DeviceType])
-  , _ldrsResponseStatus  :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ListDevicesResponse = ListDevicesResponse'{_ldrsPaginationToken
+                                                :: !(Maybe Text),
+                                                _ldrsDevices ::
+                                                !(Maybe [DeviceType]),
+                                                _ldrsResponseStatus :: !Int}
+                             deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDevicesResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +150,11 @@ data ListDevicesResponse = ListDevicesResponse'
 listDevicesResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDevicesResponse
-listDevicesResponse pResponseStatus_ =
-  ListDevicesResponse'
-    { _ldrsPaginationToken = Nothing
-    , _ldrsDevices = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    }
-
+listDevicesResponse pResponseStatus_
+  = ListDevicesResponse'{_ldrsPaginationToken =
+                           Nothing,
+                         _ldrsDevices = Nothing,
+                         _ldrsResponseStatus = pResponseStatus_}
 
 -- | The pagination token for the list device response.
 ldrsPaginationToken :: Lens' ListDevicesResponse (Maybe Text)

@@ -23,7 +23,7 @@
 --
 -- You can use 'DescribeLoadBalancers' to verify that the instance is deregistered from the load balancer.
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html Register or De-Register EC2 Instances> in the /Classic Load Balancer Guide/ .
+-- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html Register or De-Register EC2 Instances> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.DeregisterInstancesFromLoadBalancer
     (
@@ -54,11 +54,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deregisterInstancesFromLoadBalancer' smart constructor.
-data DeregisterInstancesFromLoadBalancer = DeregisterInstancesFromLoadBalancer'
-  { _diflbLoadBalancerName :: !Text
-  , _diflbInstances        :: ![Instance]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterInstancesFromLoadBalancer = DeregisterInstancesFromLoadBalancer'{_diflbLoadBalancerName
+                                                                                ::
+                                                                                !Text,
+                                                                                _diflbInstances
+                                                                                ::
+                                                                                ![Instance]}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeregisterInstancesFromLoadBalancer' with the minimum fields required to make a request.
 --
@@ -70,10 +73,11 @@ data DeregisterInstancesFromLoadBalancer = DeregisterInstancesFromLoadBalancer'
 deregisterInstancesFromLoadBalancer
     :: Text -- ^ 'diflbLoadBalancerName'
     -> DeregisterInstancesFromLoadBalancer
-deregisterInstancesFromLoadBalancer pLoadBalancerName_ =
-  DeregisterInstancesFromLoadBalancer'
-    {_diflbLoadBalancerName = pLoadBalancerName_, _diflbInstances = mempty}
-
+deregisterInstancesFromLoadBalancer
+  pLoadBalancerName_
+  = DeregisterInstancesFromLoadBalancer'{_diflbLoadBalancerName
+                                           = pLoadBalancerName_,
+                                         _diflbInstances = mempty}
 
 -- | The name of the load balancer.
 diflbLoadBalancerName :: Lens' DeregisterInstancesFromLoadBalancer Text
@@ -129,11 +133,16 @@ instance ToQuery DeregisterInstancesFromLoadBalancer
 --
 --
 -- /See:/ 'deregisterInstancesFromLoadBalancerResponse' smart constructor.
-data DeregisterInstancesFromLoadBalancerResponse = DeregisterInstancesFromLoadBalancerResponse'
-  { _diflbrsInstances      :: !(Maybe [Instance])
-  , _diflbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterInstancesFromLoadBalancerResponse = DeregisterInstancesFromLoadBalancerResponse'{_diflbrsInstances
+                                                                                                ::
+                                                                                                !(Maybe
+                                                                                                    [Instance]),
+                                                                                                _diflbrsResponseStatus
+                                                                                                ::
+                                                                                                !Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DeregisterInstancesFromLoadBalancerResponse' with the minimum fields required to make a request.
 --
@@ -145,10 +154,12 @@ data DeregisterInstancesFromLoadBalancerResponse = DeregisterInstancesFromLoadBa
 deregisterInstancesFromLoadBalancerResponse
     :: Int -- ^ 'diflbrsResponseStatus'
     -> DeregisterInstancesFromLoadBalancerResponse
-deregisterInstancesFromLoadBalancerResponse pResponseStatus_ =
-  DeregisterInstancesFromLoadBalancerResponse'
-    {_diflbrsInstances = Nothing, _diflbrsResponseStatus = pResponseStatus_}
-
+deregisterInstancesFromLoadBalancerResponse
+  pResponseStatus_
+  = DeregisterInstancesFromLoadBalancerResponse'{_diflbrsInstances
+                                                   = Nothing,
+                                                 _diflbrsResponseStatus =
+                                                   pResponseStatus_}
 
 -- | The remaining instances registered with the load balancer.
 diflbrsInstances :: Lens' DeregisterInstancesFromLoadBalancerResponse [Instance]

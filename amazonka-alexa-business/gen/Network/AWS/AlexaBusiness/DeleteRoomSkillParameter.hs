@@ -46,12 +46,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteRoomSkillParameter' smart constructor.
-data DeleteRoomSkillParameter = DeleteRoomSkillParameter'
-  { _drspRoomARN      :: !(Maybe Text)
-  , _drspSkillId      :: !Text
-  , _drspParameterKey :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRoomSkillParameter = DeleteRoomSkillParameter'{_drspRoomARN
+                                                          :: !(Maybe Text),
+                                                          _drspSkillId :: !Text,
+                                                          _drspParameterKey ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteRoomSkillParameter' with the minimum fields required to make a request.
 --
@@ -66,13 +67,10 @@ deleteRoomSkillParameter
     :: Text -- ^ 'drspSkillId'
     -> Text -- ^ 'drspParameterKey'
     -> DeleteRoomSkillParameter
-deleteRoomSkillParameter pSkillId_ pParameterKey_ =
-  DeleteRoomSkillParameter'
-    { _drspRoomARN = Nothing
-    , _drspSkillId = pSkillId_
-    , _drspParameterKey = pParameterKey_
-    }
-
+deleteRoomSkillParameter pSkillId_ pParameterKey_
+  = DeleteRoomSkillParameter'{_drspRoomARN = Nothing,
+                              _drspSkillId = pSkillId_,
+                              _drspParameterKey = pParameterKey_}
 
 -- | The ARN of the room from which to remove the room skill parameter details.
 drspRoomARN :: Lens' DeleteRoomSkillParameter (Maybe Text)
@@ -125,10 +123,11 @@ instance ToQuery DeleteRoomSkillParameter where
         toQuery = const mempty
 
 -- | /See:/ 'deleteRoomSkillParameterResponse' smart constructor.
-newtype DeleteRoomSkillParameterResponse = DeleteRoomSkillParameterResponse'
-  { _drsprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRoomSkillParameterResponse = DeleteRoomSkillParameterResponse'{_drsprsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteRoomSkillParameterResponse' with the minimum fields required to make a request.
 --
@@ -138,9 +137,9 @@ newtype DeleteRoomSkillParameterResponse = DeleteRoomSkillParameterResponse'
 deleteRoomSkillParameterResponse
     :: Int -- ^ 'drsprsResponseStatus'
     -> DeleteRoomSkillParameterResponse
-deleteRoomSkillParameterResponse pResponseStatus_ =
-  DeleteRoomSkillParameterResponse' {_drsprsResponseStatus = pResponseStatus_}
-
+deleteRoomSkillParameterResponse pResponseStatus_
+  = DeleteRoomSkillParameterResponse'{_drsprsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 drsprsResponseStatus :: Lens' DeleteRoomSkillParameterResponse Int

@@ -21,6 +21,8 @@
 -- GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.MarketplaceEntitlement.GetEntitlements
     (
     -- * Creating a Request
@@ -44,6 +46,7 @@ module Network.AWS.MarketplaceEntitlement.GetEntitlements
 import Network.AWS.Lens
 import Network.AWS.MarketplaceEntitlement.Types
 import Network.AWS.MarketplaceEntitlement.Types.Product
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -53,13 +56,15 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getEntitlements' smart constructor.
-data GetEntitlements = GetEntitlements'
-  { _geNextToken   :: !(Maybe Text)
-  , _geFilter      :: !(Maybe (Map GetEntitlementFilterName (List1 Text)))
-  , _geMaxResults  :: !(Maybe Int)
-  , _geProductCode :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetEntitlements = GetEntitlements'{_geNextToken
+                                        :: !(Maybe Text),
+                                        _geFilter ::
+                                        !(Maybe
+                                            (Map GetEntitlementFilterName
+                                               (List1 Text))),
+                                        _geMaxResults :: !(Maybe Int),
+                                        _geProductCode :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetEntitlements' with the minimum fields required to make a request.
 --
@@ -75,14 +80,10 @@ data GetEntitlements = GetEntitlements'
 getEntitlements
     :: Text -- ^ 'geProductCode'
     -> GetEntitlements
-getEntitlements pProductCode_ =
-  GetEntitlements'
-    { _geNextToken = Nothing
-    , _geFilter = Nothing
-    , _geMaxResults = Nothing
-    , _geProductCode = pProductCode_
-    }
-
+getEntitlements pProductCode_
+  = GetEntitlements'{_geNextToken = Nothing,
+                     _geFilter = Nothing, _geMaxResults = Nothing,
+                     _geProductCode = pProductCode_}
 
 -- | For paginated calls to GetEntitlements, pass the NextToken from the previous GetEntitlementsResult.
 geNextToken :: Lens' GetEntitlements (Maybe Text)
@@ -99,6 +100,13 @@ geMaxResults = lens _geMaxResults (\ s a -> s{_geMaxResults = a})
 -- | Product code is used to uniquely identify a product in AWS Marketplace. The product code will be provided by AWS Marketplace when the product listing is created.
 geProductCode :: Lens' GetEntitlements Text
 geProductCode = lens _geProductCode (\ s a -> s{_geProductCode = a})
+
+instance AWSPager GetEntitlements where
+        page rq rs
+          | stop (rs ^. gersNextToken) = Nothing
+          | stop (rs ^. gersEntitlements) = Nothing
+          | otherwise =
+            Just $ rq & geNextToken .~ rs ^. gersNextToken
 
 instance AWSRequest GetEntitlements where
         type Rs GetEntitlements = GetEntitlementsResponse
@@ -145,12 +153,14 @@ instance ToQuery GetEntitlements where
 --
 --
 -- /See:/ 'getEntitlementsResponse' smart constructor.
-data GetEntitlementsResponse = GetEntitlementsResponse'
-  { _gersNextToken      :: !(Maybe Text)
-  , _gersEntitlements   :: !(Maybe [Entitlement])
-  , _gersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetEntitlementsResponse = GetEntitlementsResponse'{_gersNextToken
+                                                        :: !(Maybe Text),
+                                                        _gersEntitlements ::
+                                                        !(Maybe [Entitlement]),
+                                                        _gersResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetEntitlementsResponse' with the minimum fields required to make a request.
 --
@@ -164,13 +174,10 @@ data GetEntitlementsResponse = GetEntitlementsResponse'
 getEntitlementsResponse
     :: Int -- ^ 'gersResponseStatus'
     -> GetEntitlementsResponse
-getEntitlementsResponse pResponseStatus_ =
-  GetEntitlementsResponse'
-    { _gersNextToken = Nothing
-    , _gersEntitlements = Nothing
-    , _gersResponseStatus = pResponseStatus_
-    }
-
+getEntitlementsResponse pResponseStatus_
+  = GetEntitlementsResponse'{_gersNextToken = Nothing,
+                             _gersEntitlements = Nothing,
+                             _gersResponseStatus = pResponseStatus_}
 
 -- | For paginated results, use NextToken in subsequent calls to GetEntitlements. If the result contains an empty set of entitlements, NextToken might still be present and should be used.
 gersNextToken :: Lens' GetEntitlementsResponse (Maybe Text)

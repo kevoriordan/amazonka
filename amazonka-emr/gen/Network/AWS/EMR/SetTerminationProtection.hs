@@ -23,9 +23,9 @@
 --
 -- @SetTerminationProtection@ is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.
 --
--- To terminate a cluster that has been locked by setting @SetTerminationProtection@ to @true@ , you must first unlock the job flow by a subsequent call to @SetTerminationProtection@ in which you set the value to @false@ .
+-- To terminate a cluster that has been locked by setting @SetTerminationProtection@ to @true@ , you must first unlock the job flow by a subsequent call to @SetTerminationProtection@ in which you set the value to @false@ . 
 --
--- For more information, see<http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html Managing Cluster Termination> in the /Amazon EMR Management Guide/ .
+-- For more information, see<https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html Managing Cluster Termination> in the /Amazon EMR Management Guide/ . 
 --
 module Network.AWS.EMR.SetTerminationProtection
     (
@@ -48,33 +48,33 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | The input argument to the 'TerminationProtection' operation.
+-- | The input argument to the 'TerminationProtection' operation. 
 --
 --
 --
 -- /See:/ 'setTerminationProtection' smart constructor.
-data SetTerminationProtection = SetTerminationProtection'
-  { _stpJobFlowIds           :: ![Text]
-  , _stpTerminationProtected :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetTerminationProtection = SetTerminationProtection'{_stpJobFlowIds
+                                                          :: ![Text],
+                                                          _stpTerminationProtected
+                                                          :: !Bool}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'SetTerminationProtection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'stpJobFlowIds' - A list of strings that uniquely identify the clusters to protect. This identifier is returned by 'RunJobFlow' and can also be obtained from 'DescribeJobFlows' .
+-- * 'stpJobFlowIds' - A list of strings that uniquely identify the clusters to protect. This identifier is returned by 'RunJobFlow' and can also be obtained from 'DescribeJobFlows' . 
 --
 -- * 'stpTerminationProtected' - A Boolean that indicates whether to protect the cluster and prevent the Amazon EC2 instances in the cluster from shutting down due to API calls, user intervention, or job-flow error.
 setTerminationProtection
     :: Bool -- ^ 'stpTerminationProtected'
     -> SetTerminationProtection
-setTerminationProtection pTerminationProtected_ =
-  SetTerminationProtection'
-    {_stpJobFlowIds = mempty, _stpTerminationProtected = pTerminationProtected_}
+setTerminationProtection pTerminationProtected_
+  = SetTerminationProtection'{_stpJobFlowIds = mempty,
+                              _stpTerminationProtected = pTerminationProtected_}
 
-
--- | A list of strings that uniquely identify the clusters to protect. This identifier is returned by 'RunJobFlow' and can also be obtained from 'DescribeJobFlows' .
+-- | A list of strings that uniquely identify the clusters to protect. This identifier is returned by 'RunJobFlow' and can also be obtained from 'DescribeJobFlows' . 
 stpJobFlowIds :: Lens' SetTerminationProtection [Text]
 stpJobFlowIds = lens _stpJobFlowIds (\ s a -> s{_stpJobFlowIds = a}) . _Coerce
 
@@ -119,17 +119,16 @@ instance ToQuery SetTerminationProtection where
         toQuery = const mempty
 
 -- | /See:/ 'setTerminationProtectionResponse' smart constructor.
-data SetTerminationProtectionResponse =
-  SetTerminationProtectionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetTerminationProtectionResponse = SetTerminationProtectionResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'SetTerminationProtectionResponse' with the minimum fields required to make a request.
 --
 setTerminationProtectionResponse
     :: SetTerminationProtectionResponse
-setTerminationProtectionResponse = SetTerminationProtectionResponse'
-
+setTerminationProtectionResponse
+  = SetTerminationProtectionResponse'
 
 instance NFData SetTerminationProtectionResponse
          where

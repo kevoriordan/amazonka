@@ -53,12 +53,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateRequestValidator' smart constructor.
-data UpdateRequestValidator = UpdateRequestValidator'
-  { _urvPatchOperations    :: !(Maybe [PatchOperation])
-  , _urvRestAPIId          :: !Text
-  , _urvRequestValidatorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRequestValidator = UpdateRequestValidator'{_urvPatchOperations
+                                                      ::
+                                                      !(Maybe [PatchOperation]),
+                                                      _urvRestAPIId :: !Text,
+                                                      _urvRequestValidatorId ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateRequestValidator' with the minimum fields required to make a request.
 --
@@ -73,13 +75,12 @@ updateRequestValidator
     :: Text -- ^ 'urvRestAPIId'
     -> Text -- ^ 'urvRequestValidatorId'
     -> UpdateRequestValidator
-updateRequestValidator pRestAPIId_ pRequestValidatorId_ =
-  UpdateRequestValidator'
-    { _urvPatchOperations = Nothing
-    , _urvRestAPIId = pRestAPIId_
-    , _urvRequestValidatorId = pRequestValidatorId_
-    }
-
+updateRequestValidator pRestAPIId_
+  pRequestValidatorId_
+  = UpdateRequestValidator'{_urvPatchOperations =
+                              Nothing,
+                            _urvRestAPIId = pRestAPIId_,
+                            _urvRequestValidatorId = pRequestValidatorId_}
 
 -- | A list of update operations to be applied to the specified resource and in the order specified in this list.
 urvPatchOperations :: Lens' UpdateRequestValidator [PatchOperation]

@@ -50,11 +50,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'listByteMatchSets' smart constructor.
-data ListByteMatchSets = ListByteMatchSets'
-  { _lbmsNextMarker :: !(Maybe Text)
-  , _lbmsLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListByteMatchSets = ListByteMatchSets'{_lbmsNextMarker
+                                            :: !(Maybe Text),
+                                            _lbmsLimit :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListByteMatchSets' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data ListByteMatchSets = ListByteMatchSets'
 -- * 'lbmsLimit' - Specifies the number of @ByteMatchSet@ objects that you want AWS WAF to return for this request. If you have more @ByteMatchSets@ objects than the number you specify for @Limit@ , the response includes a @NextMarker@ value that you can use to get another batch of @ByteMatchSet@ objects.
 listByteMatchSets
     :: ListByteMatchSets
-listByteMatchSets =
-  ListByteMatchSets' {_lbmsNextMarker = Nothing, _lbmsLimit = Nothing}
-
+listByteMatchSets
+  = ListByteMatchSets'{_lbmsNextMarker = Nothing,
+                       _lbmsLimit = Nothing}
 
 -- | If you specify a value for @Limit@ and you have more @ByteMatchSets@ than the value of @Limit@ , AWS WAF returns a @NextMarker@ value in the response that allows you to list another group of @ByteMatchSets@ . For the second and subsequent @ListByteMatchSets@ requests, specify the value of @NextMarker@ from the previous response to get information about another batch of @ByteMatchSets@ .
 lbmsNextMarker :: Lens' ListByteMatchSets (Maybe Text)
@@ -122,12 +121,16 @@ instance ToQuery ListByteMatchSets where
         toQuery = const mempty
 
 -- | /See:/ 'listByteMatchSetsResponse' smart constructor.
-data ListByteMatchSetsResponse = ListByteMatchSetsResponse'
-  { _lbmsrsByteMatchSets  :: !(Maybe [ByteMatchSetSummary])
-  , _lbmsrsNextMarker     :: !(Maybe Text)
-  , _lbmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListByteMatchSetsResponse = ListByteMatchSetsResponse'{_lbmsrsByteMatchSets
+                                                            ::
+                                                            !(Maybe
+                                                                [ByteMatchSetSummary]),
+                                                            _lbmsrsNextMarker ::
+                                                            !(Maybe Text),
+                                                            _lbmsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListByteMatchSetsResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +144,11 @@ data ListByteMatchSetsResponse = ListByteMatchSetsResponse'
 listByteMatchSetsResponse
     :: Int -- ^ 'lbmsrsResponseStatus'
     -> ListByteMatchSetsResponse
-listByteMatchSetsResponse pResponseStatus_ =
-  ListByteMatchSetsResponse'
-    { _lbmsrsByteMatchSets = Nothing
-    , _lbmsrsNextMarker = Nothing
-    , _lbmsrsResponseStatus = pResponseStatus_
-    }
-
+listByteMatchSetsResponse pResponseStatus_
+  = ListByteMatchSetsResponse'{_lbmsrsByteMatchSets =
+                                 Nothing,
+                               _lbmsrsNextMarker = Nothing,
+                               _lbmsrsResponseStatus = pResponseStatus_}
 
 -- | An array of 'ByteMatchSetSummary' objects.
 lbmsrsByteMatchSets :: Lens' ListByteMatchSetsResponse [ByteMatchSetSummary]

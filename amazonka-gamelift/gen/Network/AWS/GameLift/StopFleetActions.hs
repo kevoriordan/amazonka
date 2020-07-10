@@ -18,10 +18,30 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Suspends activity on a fleet. Currently, this operation is used to stop a fleet's auto-scaling activity. It is used to temporarily stop scaling events triggered by the fleet's scaling policies. The policies can be retained and auto-scaling activity can be restarted using 'StartFleetActions' . You can view a fleet's stopped actions using 'DescribeFleetAttributes' .
+-- Suspends activity on a fleet. Currently, this operation is used to stop a fleet's auto-scaling activity. It is used to temporarily stop triggering scaling events. The policies can be retained and auto-scaling activity can be restarted using 'StartFleetActions' . You can view a fleet's stopped actions using 'DescribeFleetAttributes' .
 --
 --
--- To stop fleet actions, specify the fleet ID and the type of actions to suspend. When auto-scaling fleet actions are stopped, Amazon GameLift no longer initiates scaling events except to maintain the fleet's desired instances setting ('FleetCapacity' . Changes to the fleet's capacity must be done manually using 'UpdateFleetCapacity' .
+-- To stop fleet actions, specify the fleet ID and the type of actions to suspend. When auto-scaling fleet actions are stopped, Amazon GameLift no longer initiates scaling events except in response to manual changes using 'UpdateFleetCapacity' . 
+--
+-- __Learn more__ 
+--
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html Setting up GameLift Fleets> 
+--
+-- __Related operations__ 
+--
+--     * 'CreateFleet' 
+--
+--     * 'ListFleets' 
+--
+--     * 'DeleteFleet' 
+--
+--     * 'DescribeFleetAttributes' 
+--
+--     * 'UpdateFleetAttributes' 
+--
+--     * 'StartFleetActions' or 'StopFleetActions' 
+--
+--
 --
 module Network.AWS.GameLift.StopFleetActions
     (
@@ -47,32 +67,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopFleetActions' smart constructor.
-data StopFleetActions = StopFleetActions'
-  { _sFleetId :: !Text
-  , _sActions :: !(List1 FleetAction)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopFleetActions = StopFleetActions'{_sFleetId
+                                          :: !Text,
+                                          _sActions :: !(List1 FleetAction)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopFleetActions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sFleetId' - Unique identifier for a fleet
+-- * 'sFleetId' - A unique identifier for a fleet to stop actions on. You can use either the fleet ID or ARN value.
 --
--- * 'sActions' - List of actions to suspend on the fleet.
+-- * 'sActions' - List of actions to suspend on the fleet. 
 stopFleetActions
     :: Text -- ^ 'sFleetId'
     -> NonEmpty FleetAction -- ^ 'sActions'
     -> StopFleetActions
-stopFleetActions pFleetId_ pActions_ =
-  StopFleetActions' {_sFleetId = pFleetId_, _sActions = _List1 # pActions_}
+stopFleetActions pFleetId_ pActions_
+  = StopFleetActions'{_sFleetId = pFleetId_,
+                      _sActions = _List1 # pActions_}
 
-
--- | Unique identifier for a fleet
+-- | A unique identifier for a fleet to stop actions on. You can use either the fleet ID or ARN value.
 sFleetId :: Lens' StopFleetActions Text
 sFleetId = lens _sFleetId (\ s a -> s{_sFleetId = a})
 
--- | List of actions to suspend on the fleet.
+-- | List of actions to suspend on the fleet. 
 sActions :: Lens' StopFleetActions (NonEmpty FleetAction)
 sActions = lens _sActions (\ s a -> s{_sActions = a}) . _List1
 
@@ -111,10 +130,10 @@ instance ToQuery StopFleetActions where
         toQuery = const mempty
 
 -- | /See:/ 'stopFleetActionsResponse' smart constructor.
-newtype StopFleetActionsResponse = StopFleetActionsResponse'
-  { _sfasrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopFleetActionsResponse = StopFleetActionsResponse'{_sfasrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'StopFleetActionsResponse' with the minimum fields required to make a request.
 --
@@ -124,9 +143,9 @@ newtype StopFleetActionsResponse = StopFleetActionsResponse'
 stopFleetActionsResponse
     :: Int -- ^ 'sfasrsResponseStatus'
     -> StopFleetActionsResponse
-stopFleetActionsResponse pResponseStatus_ =
-  StopFleetActionsResponse' {_sfasrsResponseStatus = pResponseStatus_}
-
+stopFleetActionsResponse pResponseStatus_
+  = StopFleetActionsResponse'{_sfasrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 sfasrsResponseStatus :: Lens' StopFleetActionsResponse Int

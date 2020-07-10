@@ -23,6 +23,12 @@
 --
 -- /Important:/ Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of @200@ .
 --
+-- Some actions take lists of parameters. These lists are specified using the @param.n@ notation. Values of @n@ are integers starting from 1. For example, a parameter list with two elements looks like this:
+--
+-- @&Attribute.1=first@ 
+--
+-- @&Attribute.2=second@ 
+--
 module Network.AWS.SQS.ChangeMessageVisibilityBatch
     (
     -- * Creating a Request
@@ -48,33 +54,35 @@ import Network.AWS.Response
 import Network.AWS.SQS.Types
 import Network.AWS.SQS.Types.Product
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'changeMessageVisibilityBatch' smart constructor.
-data ChangeMessageVisibilityBatch = ChangeMessageVisibilityBatch'
-  { _cmvbQueueURL :: !Text
-  , _cmvbEntries  :: ![ChangeMessageVisibilityBatchRequestEntry]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ChangeMessageVisibilityBatch = ChangeMessageVisibilityBatch'{_cmvbQueueURL
+                                                                  :: !Text,
+                                                                  _cmvbEntries
+                                                                  ::
+                                                                  ![ChangeMessageVisibilityBatchRequestEntry]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ChangeMessageVisibilityBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cmvbQueueURL' - The URL of the Amazon SQS queue whose messages' visibility is changed. Queue URLs are case-sensitive.
+-- * 'cmvbQueueURL' - The URL of the Amazon SQS queue whose messages' visibility is changed. Queue URLs and names are case-sensitive.
 --
 -- * 'cmvbEntries' - A list of receipt handles of the messages for which the visibility timeout must be changed.
 changeMessageVisibilityBatch
     :: Text -- ^ 'cmvbQueueURL'
     -> ChangeMessageVisibilityBatch
-changeMessageVisibilityBatch pQueueURL_ =
-  ChangeMessageVisibilityBatch'
-    {_cmvbQueueURL = pQueueURL_, _cmvbEntries = mempty}
+changeMessageVisibilityBatch pQueueURL_
+  = ChangeMessageVisibilityBatch'{_cmvbQueueURL =
+                                    pQueueURL_,
+                                  _cmvbEntries = mempty}
 
-
--- | The URL of the Amazon SQS queue whose messages' visibility is changed. Queue URLs are case-sensitive.
+-- | The URL of the Amazon SQS queue whose messages' visibility is changed. Queue URLs and names are case-sensitive.
 cmvbQueueURL :: Lens' ChangeMessageVisibilityBatch Text
 cmvbQueueURL = lens _cmvbQueueURL (\ s a -> s{_cmvbQueueURL = a})
 
@@ -124,12 +132,17 @@ instance ToQuery ChangeMessageVisibilityBatch where
 --
 --
 -- /See:/ 'changeMessageVisibilityBatchResponse' smart constructor.
-data ChangeMessageVisibilityBatchResponse = ChangeMessageVisibilityBatchResponse'
-  { _cmvbrsResponseStatus :: !Int
-  , _cmvbrsSuccessful     :: ![ChangeMessageVisibilityBatchResultEntry]
-  , _cmvbrsFailed         :: ![BatchResultErrorEntry]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ChangeMessageVisibilityBatchResponse = ChangeMessageVisibilityBatchResponse'{_cmvbrsResponseStatus
+                                                                                  ::
+                                                                                  !Int,
+                                                                                  _cmvbrsSuccessful
+                                                                                  ::
+                                                                                  ![ChangeMessageVisibilityBatchResultEntry],
+                                                                                  _cmvbrsFailed
+                                                                                  ::
+                                                                                  ![BatchResultErrorEntry]}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'ChangeMessageVisibilityBatchResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +156,11 @@ data ChangeMessageVisibilityBatchResponse = ChangeMessageVisibilityBatchResponse
 changeMessageVisibilityBatchResponse
     :: Int -- ^ 'cmvbrsResponseStatus'
     -> ChangeMessageVisibilityBatchResponse
-changeMessageVisibilityBatchResponse pResponseStatus_ =
-  ChangeMessageVisibilityBatchResponse'
-    { _cmvbrsResponseStatus = pResponseStatus_
-    , _cmvbrsSuccessful = mempty
-    , _cmvbrsFailed = mempty
-    }
-
+changeMessageVisibilityBatchResponse pResponseStatus_
+  = ChangeMessageVisibilityBatchResponse'{_cmvbrsResponseStatus
+                                            = pResponseStatus_,
+                                          _cmvbrsSuccessful = mempty,
+                                          _cmvbrsFailed = mempty}
 
 -- | -- | The response status code.
 cmvbrsResponseStatus :: Lens' ChangeMessageVisibilityBatchResponse Int

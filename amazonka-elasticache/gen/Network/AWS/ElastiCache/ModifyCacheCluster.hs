@@ -34,12 +34,14 @@ module Network.AWS.ElastiCache.ModifyCacheCluster
     , mccCacheParameterGroupName
     , mccSnapshotWindow
     , mccNewAvailabilityZones
+    , mccAuthToken
     , mccPreferredMaintenanceWindow
     , mccCacheNodeIdsToRemove
     , mccSnapshotRetentionLimit
     , mccNotificationTopicStatus
     , mccAZMode
     , mccApplyImmediately
+    , mccAuthTokenUpdateStrategy
     , mccNotificationTopicARN
     , mccNumCacheNodes
     , mccCacheSecurityGroupNames
@@ -65,32 +67,48 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyCacheCluster' smart constructor.
-data ModifyCacheCluster = ModifyCacheCluster'
-  { _mccEngineVersion              :: !(Maybe Text)
-  , _mccCacheNodeType              :: !(Maybe Text)
-  , _mccSecurityGroupIds           :: !(Maybe [Text])
-  , _mccAutoMinorVersionUpgrade    :: !(Maybe Bool)
-  , _mccCacheParameterGroupName    :: !(Maybe Text)
-  , _mccSnapshotWindow             :: !(Maybe Text)
-  , _mccNewAvailabilityZones       :: !(Maybe [Text])
-  , _mccPreferredMaintenanceWindow :: !(Maybe Text)
-  , _mccCacheNodeIdsToRemove       :: !(Maybe [Text])
-  , _mccSnapshotRetentionLimit     :: !(Maybe Int)
-  , _mccNotificationTopicStatus    :: !(Maybe Text)
-  , _mccAZMode                     :: !(Maybe AZMode)
-  , _mccApplyImmediately           :: !(Maybe Bool)
-  , _mccNotificationTopicARN       :: !(Maybe Text)
-  , _mccNumCacheNodes              :: !(Maybe Int)
-  , _mccCacheSecurityGroupNames    :: !(Maybe [Text])
-  , _mccCacheClusterId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyCacheCluster = ModifyCacheCluster'{_mccEngineVersion
+                                              :: !(Maybe Text),
+                                              _mccCacheNodeType ::
+                                              !(Maybe Text),
+                                              _mccSecurityGroupIds ::
+                                              !(Maybe [Text]),
+                                              _mccAutoMinorVersionUpgrade ::
+                                              !(Maybe Bool),
+                                              _mccCacheParameterGroupName ::
+                                              !(Maybe Text),
+                                              _mccSnapshotWindow ::
+                                              !(Maybe Text),
+                                              _mccNewAvailabilityZones ::
+                                              !(Maybe [Text]),
+                                              _mccAuthToken :: !(Maybe Text),
+                                              _mccPreferredMaintenanceWindow ::
+                                              !(Maybe Text),
+                                              _mccCacheNodeIdsToRemove ::
+                                              !(Maybe [Text]),
+                                              _mccSnapshotRetentionLimit ::
+                                              !(Maybe Int),
+                                              _mccNotificationTopicStatus ::
+                                              !(Maybe Text),
+                                              _mccAZMode :: !(Maybe AZMode),
+                                              _mccApplyImmediately ::
+                                              !(Maybe Bool),
+                                              _mccAuthTokenUpdateStrategy ::
+                                              !(Maybe
+                                                  AuthTokenUpdateStrategyType),
+                                              _mccNotificationTopicARN ::
+                                              !(Maybe Text),
+                                              _mccNumCacheNodes :: !(Maybe Int),
+                                              _mccCacheSecurityGroupNames ::
+                                              !(Maybe [Text]),
+                                              _mccCacheClusterId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyCacheCluster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mccEngineVersion' - The upgraded version of the cache engine to be run on the cache nodes. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cluster and create it anew with the earlier engine version.
+-- * 'mccEngineVersion' - The upgraded version of the cache engine to be run on the cache nodes. __Important:__ You can upgrade to a newer engine version (see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cluster and create it anew with the earlier engine version. 
 --
 -- * 'mccCacheNodeType' - A valid cache node type that you want to scale this cluster up to.
 --
@@ -100,21 +118,25 @@ data ModifyCacheCluster = ModifyCacheCluster'
 --
 -- * 'mccCacheParameterGroupName' - The name of the cache parameter group to apply to this cluster. This change is asynchronously applied as soon as possible for parameters when the @ApplyImmediately@ parameter is specified as @true@ for this request.
 --
--- * 'mccSnapshotWindow' - The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your cluster.
+-- * 'mccSnapshotWindow' - The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your cluster. 
 --
--- * 'mccNewAvailabilityZones' - The list of Availability Zones where the new Memcached cache nodes are created. This parameter is only valid when @NumCacheNodes@ in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request. This option is only supported on Memcached clusters. Scenarios:     * __Scenario 1:__ You have 3 active nodes and wish to add 2 nodes. Specify @NumCacheNodes=5@ (3 + 2) and optionally specify two Availability Zones for the two new nodes.     * __Scenario 2:__ You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify @NumCacheNodes=6@ ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.     * __Scenario 3:__ You want to cancel all pending operations. Specify @NumCacheNodes=3@ to cancel all pending operations. The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting @NumCacheNodes@ to the number of current nodes. If @cross-az@ is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the __Availability Zone Considerations__ section of <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html Cache Node Considerations for Memcached> . __Impact of new add/remove requests upon pending requests__      * Scenario-1     * Pending Action: Delete     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending delete.     * Scenario-2     * Pending Action: Delete     * New Request: Create     * Result: The new create, pending or immediate, replaces the pending delete.     * Scenario-3     * Pending Action: Create     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending create.     * Scenario-4     * Pending Action: Create     * New Request: Create     * Result: The new create is added to the pending create. /Important:/ __Important:__ If the new create request is __Apply Immediately - Yes__ , all creates are performed immediately. If the new create request is __Apply Immediately - No__ , all creates are pending.
+-- * 'mccNewAvailabilityZones' - The list of Availability Zones where the new Memcached cache nodes are created. This parameter is only valid when @NumCacheNodes@ in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request. This option is only supported on Memcached clusters. Scenarios:     * __Scenario 1:__ You have 3 active nodes and wish to add 2 nodes. Specify @NumCacheNodes=5@ (3 + 2) and optionally specify two Availability Zones for the two new nodes.     * __Scenario 2:__ You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify @NumCacheNodes=6@ ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.     * __Scenario 3:__ You want to cancel all pending operations. Specify @NumCacheNodes=3@ to cancel all pending operations. The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting @NumCacheNodes@ to the number of current nodes. If @cross-az@ is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the __Availability Zone Considerations__ section of <https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html Cache Node Considerations for Memcached> . __Impact of new add/remove requests upon pending requests__      * Scenario-1     * Pending Action: Delete     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending delete.     * Scenario-2     * Pending Action: Delete     * New Request: Create     * Result: The new create, pending or immediate, replaces the pending delete.     * Scenario-3     * Pending Action: Create     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending create.     * Scenario-4     * Pending Action: Create     * New Request: Create     * Result: The new create is added to the pending create. /Important:/ __Important:__ If the new create request is __Apply Immediately - Yes__ , all creates are performed immediately. If the new create request is __Apply Immediately - No__ , all creates are pending.
 --
--- * 'mccPreferredMaintenanceWindow' - Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@
+-- * 'mccAuthToken' - Reserved parameter. The password used to access a password protected server. This parameter must be specified with the @auth-token-update@ parameter. Password constraints:     * Must be only printable ASCII characters     * Must be at least 16 characters and no more than 128 characters in length     * Cannot contain any of the following characters: '/', '"', or '@', '%' For more information, see AUTH password at <http://redis.io/commands/AUTH AUTH> .
+--
+-- * 'mccPreferredMaintenanceWindow' - Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@ 
 --
 -- * 'mccCacheNodeIdsToRemove' - A list of cache node IDs to be removed. A node ID is a numeric identifier (0001, 0002, etc.). This parameter is only valid when @NumCacheNodes@ is less than the existing number of cache nodes. The number of cache node IDs supplied in this parameter must match the difference between the existing number of cache nodes in the cluster or pending cache nodes, whichever is greater, and the value of @NumCacheNodes@ in the request. For example: If you have 3 active cache nodes, 7 pending cache nodes, and the number of cache nodes in this @ModifyCacheCluster@ call is 5, you must list 2 (7 - 5) cache node IDs to remove.
 --
 -- * 'mccSnapshotRetentionLimit' - The number of days for which ElastiCache retains automatic cluster snapshots before deleting them. For example, if you set @SnapshotRetentionLimit@ to 5, a snapshot that was taken today is retained for 5 days before being deleted.
 --
--- * 'mccNotificationTopicStatus' - The status of the Amazon SNS notification topic. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@
+-- * 'mccNotificationTopicStatus' - The status of the Amazon SNS notification topic. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@ 
 --
 -- * 'mccAZMode' - Specifies whether the new nodes in this Memcached cluster are all created in a single Availability Zone or created across multiple Availability Zones. Valid values: @single-az@ | @cross-az@ . This option is only supported for Memcached clusters.
 --
--- * 'mccApplyImmediately' - If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the cluster. If @false@ , changes to the cluster are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. /Important:/ If you perform a @ModifyCacheCluster@ before a pending modification is applied, the pending modification is replaced by the newer modification. Valid values: @true@ | @false@  Default: @false@
+-- * 'mccApplyImmediately' - If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the cluster. If @false@ , changes to the cluster are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. /Important:/ If you perform a @ModifyCacheCluster@ before a pending modification is applied, the pending modification is replaced by the newer modification. Valid values: @true@ | @false@  Default: @false@ 
+--
+-- * 'mccAuthTokenUpdateStrategy' - Specifies the strategy to use to update the AUTH token. This parameter must be specified with the @auth-token@ parameter. Possible values:     * Rotate     * Set For more information, see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html Authenticating Users with Redis AUTH> 
 --
 -- * 'mccNotificationTopicARN' - The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications are sent.
 --
@@ -126,29 +148,27 @@ data ModifyCacheCluster = ModifyCacheCluster'
 modifyCacheCluster
     :: Text -- ^ 'mccCacheClusterId'
     -> ModifyCacheCluster
-modifyCacheCluster pCacheClusterId_ =
-  ModifyCacheCluster'
-    { _mccEngineVersion = Nothing
-    , _mccCacheNodeType = Nothing
-    , _mccSecurityGroupIds = Nothing
-    , _mccAutoMinorVersionUpgrade = Nothing
-    , _mccCacheParameterGroupName = Nothing
-    , _mccSnapshotWindow = Nothing
-    , _mccNewAvailabilityZones = Nothing
-    , _mccPreferredMaintenanceWindow = Nothing
-    , _mccCacheNodeIdsToRemove = Nothing
-    , _mccSnapshotRetentionLimit = Nothing
-    , _mccNotificationTopicStatus = Nothing
-    , _mccAZMode = Nothing
-    , _mccApplyImmediately = Nothing
-    , _mccNotificationTopicARN = Nothing
-    , _mccNumCacheNodes = Nothing
-    , _mccCacheSecurityGroupNames = Nothing
-    , _mccCacheClusterId = pCacheClusterId_
-    }
+modifyCacheCluster pCacheClusterId_
+  = ModifyCacheCluster'{_mccEngineVersion = Nothing,
+                        _mccCacheNodeType = Nothing,
+                        _mccSecurityGroupIds = Nothing,
+                        _mccAutoMinorVersionUpgrade = Nothing,
+                        _mccCacheParameterGroupName = Nothing,
+                        _mccSnapshotWindow = Nothing,
+                        _mccNewAvailabilityZones = Nothing,
+                        _mccAuthToken = Nothing,
+                        _mccPreferredMaintenanceWindow = Nothing,
+                        _mccCacheNodeIdsToRemove = Nothing,
+                        _mccSnapshotRetentionLimit = Nothing,
+                        _mccNotificationTopicStatus = Nothing,
+                        _mccAZMode = Nothing, _mccApplyImmediately = Nothing,
+                        _mccAuthTokenUpdateStrategy = Nothing,
+                        _mccNotificationTopicARN = Nothing,
+                        _mccNumCacheNodes = Nothing,
+                        _mccCacheSecurityGroupNames = Nothing,
+                        _mccCacheClusterId = pCacheClusterId_}
 
-
--- | The upgraded version of the cache engine to be run on the cache nodes. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cluster and create it anew with the earlier engine version.
+-- | The upgraded version of the cache engine to be run on the cache nodes. __Important:__ You can upgrade to a newer engine version (see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing cluster and create it anew with the earlier engine version. 
 mccEngineVersion :: Lens' ModifyCacheCluster (Maybe Text)
 mccEngineVersion = lens _mccEngineVersion (\ s a -> s{_mccEngineVersion = a})
 
@@ -168,15 +188,19 @@ mccAutoMinorVersionUpgrade = lens _mccAutoMinorVersionUpgrade (\ s a -> s{_mccAu
 mccCacheParameterGroupName :: Lens' ModifyCacheCluster (Maybe Text)
 mccCacheParameterGroupName = lens _mccCacheParameterGroupName (\ s a -> s{_mccCacheParameterGroupName = a})
 
--- | The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your cluster.
+-- | The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your cluster. 
 mccSnapshotWindow :: Lens' ModifyCacheCluster (Maybe Text)
 mccSnapshotWindow = lens _mccSnapshotWindow (\ s a -> s{_mccSnapshotWindow = a})
 
--- | The list of Availability Zones where the new Memcached cache nodes are created. This parameter is only valid when @NumCacheNodes@ in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request. This option is only supported on Memcached clusters. Scenarios:     * __Scenario 1:__ You have 3 active nodes and wish to add 2 nodes. Specify @NumCacheNodes=5@ (3 + 2) and optionally specify two Availability Zones for the two new nodes.     * __Scenario 2:__ You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify @NumCacheNodes=6@ ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.     * __Scenario 3:__ You want to cancel all pending operations. Specify @NumCacheNodes=3@ to cancel all pending operations. The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting @NumCacheNodes@ to the number of current nodes. If @cross-az@ is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the __Availability Zone Considerations__ section of <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html Cache Node Considerations for Memcached> . __Impact of new add/remove requests upon pending requests__      * Scenario-1     * Pending Action: Delete     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending delete.     * Scenario-2     * Pending Action: Delete     * New Request: Create     * Result: The new create, pending or immediate, replaces the pending delete.     * Scenario-3     * Pending Action: Create     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending create.     * Scenario-4     * Pending Action: Create     * New Request: Create     * Result: The new create is added to the pending create. /Important:/ __Important:__ If the new create request is __Apply Immediately - Yes__ , all creates are performed immediately. If the new create request is __Apply Immediately - No__ , all creates are pending.
+-- | The list of Availability Zones where the new Memcached cache nodes are created. This parameter is only valid when @NumCacheNodes@ in the request is greater than the sum of the number of active cache nodes and the number of cache nodes pending creation (which may be zero). The number of Availability Zones supplied in this list must match the cache nodes being added in this request. This option is only supported on Memcached clusters. Scenarios:     * __Scenario 1:__ You have 3 active nodes and wish to add 2 nodes. Specify @NumCacheNodes=5@ (3 + 2) and optionally specify two Availability Zones for the two new nodes.     * __Scenario 2:__ You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call) and want to add 1 more node. Specify @NumCacheNodes=6@ ((3 + 2) + 1) and optionally specify an Availability Zone for the new node.     * __Scenario 3:__ You want to cancel all pending operations. Specify @NumCacheNodes=3@ to cancel all pending operations. The Availability Zone placement of nodes pending creation cannot be modified. If you wish to cancel any nodes pending creation, add 0 nodes by setting @NumCacheNodes@ to the number of current nodes. If @cross-az@ is specified, existing Memcached nodes remain in their current Availability Zone. Only newly created nodes can be located in different Availability Zones. For guidance on how to move existing Memcached nodes to different Availability Zones, see the __Availability Zone Considerations__ section of <https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html Cache Node Considerations for Memcached> . __Impact of new add/remove requests upon pending requests__      * Scenario-1     * Pending Action: Delete     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending delete.     * Scenario-2     * Pending Action: Delete     * New Request: Create     * Result: The new create, pending or immediate, replaces the pending delete.     * Scenario-3     * Pending Action: Create     * New Request: Delete     * Result: The new delete, pending or immediate, replaces the pending create.     * Scenario-4     * Pending Action: Create     * New Request: Create     * Result: The new create is added to the pending create. /Important:/ __Important:__ If the new create request is __Apply Immediately - Yes__ , all creates are performed immediately. If the new create request is __Apply Immediately - No__ , all creates are pending.
 mccNewAvailabilityZones :: Lens' ModifyCacheCluster [Text]
 mccNewAvailabilityZones = lens _mccNewAvailabilityZones (\ s a -> s{_mccNewAvailabilityZones = a}) . _Default . _Coerce
 
--- | Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@
+-- | Reserved parameter. The password used to access a password protected server. This parameter must be specified with the @auth-token-update@ parameter. Password constraints:     * Must be only printable ASCII characters     * Must be at least 16 characters and no more than 128 characters in length     * Cannot contain any of the following characters: '/', '"', or '@', '%' For more information, see AUTH password at <http://redis.io/commands/AUTH AUTH> .
+mccAuthToken :: Lens' ModifyCacheCluster (Maybe Text)
+mccAuthToken = lens _mccAuthToken (\ s a -> s{_mccAuthToken = a})
+
+-- | Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@ 
 mccPreferredMaintenanceWindow :: Lens' ModifyCacheCluster (Maybe Text)
 mccPreferredMaintenanceWindow = lens _mccPreferredMaintenanceWindow (\ s a -> s{_mccPreferredMaintenanceWindow = a})
 
@@ -188,7 +212,7 @@ mccCacheNodeIdsToRemove = lens _mccCacheNodeIdsToRemove (\ s a -> s{_mccCacheNod
 mccSnapshotRetentionLimit :: Lens' ModifyCacheCluster (Maybe Int)
 mccSnapshotRetentionLimit = lens _mccSnapshotRetentionLimit (\ s a -> s{_mccSnapshotRetentionLimit = a})
 
--- | The status of the Amazon SNS notification topic. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@
+-- | The status of the Amazon SNS notification topic. Notifications are sent only if the status is @active@ . Valid values: @active@ | @inactive@ 
 mccNotificationTopicStatus :: Lens' ModifyCacheCluster (Maybe Text)
 mccNotificationTopicStatus = lens _mccNotificationTopicStatus (\ s a -> s{_mccNotificationTopicStatus = a})
 
@@ -196,9 +220,13 @@ mccNotificationTopicStatus = lens _mccNotificationTopicStatus (\ s a -> s{_mccNo
 mccAZMode :: Lens' ModifyCacheCluster (Maybe AZMode)
 mccAZMode = lens _mccAZMode (\ s a -> s{_mccAZMode = a})
 
--- | If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the cluster. If @false@ , changes to the cluster are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. /Important:/ If you perform a @ModifyCacheCluster@ before a pending modification is applied, the pending modification is replaced by the newer modification. Valid values: @true@ | @false@  Default: @false@
+-- | If @true@ , this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the @PreferredMaintenanceWindow@ setting for the cluster. If @false@ , changes to the cluster are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. /Important:/ If you perform a @ModifyCacheCluster@ before a pending modification is applied, the pending modification is replaced by the newer modification. Valid values: @true@ | @false@  Default: @false@ 
 mccApplyImmediately :: Lens' ModifyCacheCluster (Maybe Bool)
 mccApplyImmediately = lens _mccApplyImmediately (\ s a -> s{_mccApplyImmediately = a})
+
+-- | Specifies the strategy to use to update the AUTH token. This parameter must be specified with the @auth-token@ parameter. Possible values:     * Rotate     * Set For more information, see <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html Authenticating Users with Redis AUTH> 
+mccAuthTokenUpdateStrategy :: Lens' ModifyCacheCluster (Maybe AuthTokenUpdateStrategyType)
+mccAuthTokenUpdateStrategy = lens _mccAuthTokenUpdateStrategy (\ s a -> s{_mccAuthTokenUpdateStrategy = a})
 
 -- | The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications are sent.
 mccNotificationTopicARN :: Lens' ModifyCacheCluster (Maybe Text)
@@ -256,6 +284,7 @@ instance ToQuery ModifyCacheCluster where
                  toQuery
                    (toQueryList "PreferredAvailabilityZone" <$>
                       _mccNewAvailabilityZones),
+               "AuthToken" =: _mccAuthToken,
                "PreferredMaintenanceWindow" =:
                  _mccPreferredMaintenanceWindow,
                "CacheNodeIdsToRemove" =:
@@ -268,6 +297,8 @@ instance ToQuery ModifyCacheCluster where
                  _mccNotificationTopicStatus,
                "AZMode" =: _mccAZMode,
                "ApplyImmediately" =: _mccApplyImmediately,
+               "AuthTokenUpdateStrategy" =:
+                 _mccAuthTokenUpdateStrategy,
                "NotificationTopicArn" =: _mccNotificationTopicARN,
                "NumCacheNodes" =: _mccNumCacheNodes,
                "CacheSecurityGroupNames" =:
@@ -277,11 +308,14 @@ instance ToQuery ModifyCacheCluster where
                "CacheClusterId" =: _mccCacheClusterId]
 
 -- | /See:/ 'modifyCacheClusterResponse' smart constructor.
-data ModifyCacheClusterResponse = ModifyCacheClusterResponse'
-  { _mccrsCacheCluster   :: !(Maybe CacheCluster)
-  , _mccrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyCacheClusterResponse = ModifyCacheClusterResponse'{_mccrsCacheCluster
+                                                              ::
+                                                              !(Maybe
+                                                                  CacheCluster),
+                                                              _mccrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ModifyCacheClusterResponse' with the minimum fields required to make a request.
 --
@@ -293,10 +327,10 @@ data ModifyCacheClusterResponse = ModifyCacheClusterResponse'
 modifyCacheClusterResponse
     :: Int -- ^ 'mccrsResponseStatus'
     -> ModifyCacheClusterResponse
-modifyCacheClusterResponse pResponseStatus_ =
-  ModifyCacheClusterResponse'
-    {_mccrsCacheCluster = Nothing, _mccrsResponseStatus = pResponseStatus_}
-
+modifyCacheClusterResponse pResponseStatus_
+  = ModifyCacheClusterResponse'{_mccrsCacheCluster =
+                                  Nothing,
+                                _mccrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 mccrsCacheCluster :: Lens' ModifyCacheClusterResponse (Maybe CacheCluster)

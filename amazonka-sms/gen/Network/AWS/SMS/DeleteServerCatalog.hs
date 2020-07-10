@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The DeleteServerCatalog API clears all servers from your server catalog. This means that these servers will no longer be accessible to the Server Migration Service.
+-- Deletes all servers from your server catalog.
+--
+--
 module Network.AWS.SMS.DeleteServerCatalog
     (
     -- * Creating a Request
@@ -40,17 +42,14 @@ import Network.AWS.SMS.Types
 import Network.AWS.SMS.Types.Product
 
 -- | /See:/ 'deleteServerCatalog' smart constructor.
-data DeleteServerCatalog =
-  DeleteServerCatalog'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteServerCatalog = DeleteServerCatalog'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteServerCatalog' with the minimum fields required to make a request.
 --
 deleteServerCatalog
     :: DeleteServerCatalog
 deleteServerCatalog = DeleteServerCatalog'
-
 
 instance AWSRequest DeleteServerCatalog where
         type Rs DeleteServerCatalog =
@@ -85,10 +84,10 @@ instance ToQuery DeleteServerCatalog where
         toQuery = const mempty
 
 -- | /See:/ 'deleteServerCatalogResponse' smart constructor.
-newtype DeleteServerCatalogResponse = DeleteServerCatalogResponse'
-  { _dscrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteServerCatalogResponse = DeleteServerCatalogResponse'{_dscrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteServerCatalogResponse' with the minimum fields required to make a request.
 --
@@ -98,9 +97,9 @@ newtype DeleteServerCatalogResponse = DeleteServerCatalogResponse'
 deleteServerCatalogResponse
     :: Int -- ^ 'dscrsResponseStatus'
     -> DeleteServerCatalogResponse
-deleteServerCatalogResponse pResponseStatus_ =
-  DeleteServerCatalogResponse' {_dscrsResponseStatus = pResponseStatus_}
-
+deleteServerCatalogResponse pResponseStatus_
+  = DeleteServerCatalogResponse'{_dscrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 dscrsResponseStatus :: Lens' DeleteServerCatalogResponse Int

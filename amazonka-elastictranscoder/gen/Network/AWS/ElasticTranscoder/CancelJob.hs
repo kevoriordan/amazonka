@@ -48,10 +48,8 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'cancelJob' smart constructor.
-newtype CancelJob = CancelJob'
-  { _cjId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelJob = CancelJob'{_cjId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJob' with the minimum fields required to make a request.
 --
@@ -61,8 +59,7 @@ newtype CancelJob = CancelJob'
 cancelJob
     :: Text -- ^ 'cjId'
     -> CancelJob
-cancelJob pId_ = CancelJob' {_cjId = pId_}
-
+cancelJob pId_ = CancelJob'{_cjId = pId_}
 
 -- | The identifier of the job that you want to cancel. To get a list of the jobs (including their @jobId@ ) that have a status of @Submitted@ , use the 'ListJobsByStatus' API action.
 cjId :: Lens' CancelJob Text
@@ -95,10 +92,9 @@ instance ToQuery CancelJob where
 --
 --
 -- /See:/ 'cancelJobResponse' smart constructor.
-newtype CancelJobResponse = CancelJobResponse'
-  { _canrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelJobResponse = CancelJobResponse'{_canrsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJobResponse' with the minimum fields required to make a request.
 --
@@ -108,9 +104,9 @@ newtype CancelJobResponse = CancelJobResponse'
 cancelJobResponse
     :: Int -- ^ 'canrsResponseStatus'
     -> CancelJobResponse
-cancelJobResponse pResponseStatus_ =
-  CancelJobResponse' {_canrsResponseStatus = pResponseStatus_}
-
+cancelJobResponse pResponseStatus_
+  = CancelJobResponse'{_canrsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 canrsResponseStatus :: Lens' CancelJobResponse Int

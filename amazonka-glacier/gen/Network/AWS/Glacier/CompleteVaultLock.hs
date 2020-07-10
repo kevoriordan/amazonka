@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This operation completes the vault locking process by transitioning the vault lock from the @InProgress@ state to the @Locked@ state, which causes the vault lock policy to become unchangeable. A vault lock is put into the @InProgress@ state by calling 'InitiateVaultLock' . You can obtain the state of the vault lock by calling 'GetVaultLock' . For more information about the vault locking process, <http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html Amazon Glacier Vault Lock> .
+-- This operation completes the vault locking process by transitioning the vault lock from the @InProgress@ state to the @Locked@ state, which causes the vault lock policy to become unchangeable. A vault lock is put into the @InProgress@ state by calling 'InitiateVaultLock' . You can obtain the state of the vault lock by calling 'GetVaultLock' . For more information about the vault locking process, <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html Amazon Glacier Vault Lock> . 
 --
 --
 -- This operation is idempotent. This request is always successful if the vault lock is in the @Locked@ state and the provided lock ID matches the lock ID originally used to lock the vault.
@@ -52,12 +52,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'completeVaultLock' smart constructor.
-data CompleteVaultLock = CompleteVaultLock'
-  { _cvlAccountId :: !Text
-  , _cvlVaultName :: !Text
-  , _cvlLockId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CompleteVaultLock = CompleteVaultLock'{_cvlAccountId
+                                            :: !Text,
+                                            _cvlVaultName :: !Text,
+                                            _cvlLockId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CompleteVaultLock' with the minimum fields required to make a request.
 --
@@ -73,13 +72,9 @@ completeVaultLock
     -> Text -- ^ 'cvlVaultName'
     -> Text -- ^ 'cvlLockId'
     -> CompleteVaultLock
-completeVaultLock pAccountId_ pVaultName_ pLockId_ =
-  CompleteVaultLock'
-    { _cvlAccountId = pAccountId_
-    , _cvlVaultName = pVaultName_
-    , _cvlLockId = pLockId_
-    }
-
+completeVaultLock pAccountId_ pVaultName_ pLockId_
+  = CompleteVaultLock'{_cvlAccountId = pAccountId_,
+                       _cvlVaultName = pVaultName_, _cvlLockId = pLockId_}
 
 -- | The @AccountId@ value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID.
 cvlAccountId :: Lens' CompleteVaultLock Text
@@ -118,16 +113,15 @@ instance ToQuery CompleteVaultLock where
         toQuery = const mempty
 
 -- | /See:/ 'completeVaultLockResponse' smart constructor.
-data CompleteVaultLockResponse =
-  CompleteVaultLockResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CompleteVaultLockResponse = CompleteVaultLockResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CompleteVaultLockResponse' with the minimum fields required to make a request.
 --
 completeVaultLockResponse
     :: CompleteVaultLockResponse
-completeVaultLockResponse = CompleteVaultLockResponse'
-
+completeVaultLockResponse
+  = CompleteVaultLockResponse'
 
 instance NFData CompleteVaultLockResponse where

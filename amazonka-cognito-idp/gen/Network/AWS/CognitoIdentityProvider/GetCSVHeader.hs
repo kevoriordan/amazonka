@@ -50,10 +50,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getCSVHeader' smart constructor.
-newtype GetCSVHeader = GetCSVHeader'
-  { _gchUserPoolId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetCSVHeader = GetCSVHeader'{_gchUserPoolId
+                                     :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCSVHeader' with the minimum fields required to make a request.
 --
@@ -63,8 +62,8 @@ newtype GetCSVHeader = GetCSVHeader'
 getCSVHeader
     :: Text -- ^ 'gchUserPoolId'
     -> GetCSVHeader
-getCSVHeader pUserPoolId_ = GetCSVHeader' {_gchUserPoolId = pUserPoolId_}
-
+getCSVHeader pUserPoolId_
+  = GetCSVHeader'{_gchUserPoolId = pUserPoolId_}
 
 -- | The user pool ID for the user pool that the users are to be imported into.
 gchUserPoolId :: Lens' GetCSVHeader Text
@@ -111,12 +110,12 @@ instance ToQuery GetCSVHeader where
 --
 --
 -- /See:/ 'getCSVHeaderResponse' smart constructor.
-data GetCSVHeaderResponse = GetCSVHeaderResponse'
-  { _gchrsUserPoolId     :: !(Maybe Text)
-  , _gchrsCSVHeader      :: !(Maybe [Text])
-  , _gchrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCSVHeaderResponse = GetCSVHeaderResponse'{_gchrsUserPoolId
+                                                  :: !(Maybe Text),
+                                                  _gchrsCSVHeader ::
+                                                  !(Maybe [Text]),
+                                                  _gchrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCSVHeaderResponse' with the minimum fields required to make a request.
 --
@@ -130,13 +129,10 @@ data GetCSVHeaderResponse = GetCSVHeaderResponse'
 getCSVHeaderResponse
     :: Int -- ^ 'gchrsResponseStatus'
     -> GetCSVHeaderResponse
-getCSVHeaderResponse pResponseStatus_ =
-  GetCSVHeaderResponse'
-    { _gchrsUserPoolId = Nothing
-    , _gchrsCSVHeader = Nothing
-    , _gchrsResponseStatus = pResponseStatus_
-    }
-
+getCSVHeaderResponse pResponseStatus_
+  = GetCSVHeaderResponse'{_gchrsUserPoolId = Nothing,
+                          _gchrsCSVHeader = Nothing,
+                          _gchrsResponseStatus = pResponseStatus_}
 
 -- | The user pool ID for the user pool that the users are to be imported into.
 gchrsUserPoolId :: Lens' GetCSVHeaderResponse (Maybe Text)

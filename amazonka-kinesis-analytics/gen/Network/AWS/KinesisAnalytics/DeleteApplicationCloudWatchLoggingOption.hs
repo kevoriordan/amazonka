@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html Working with Amazon CloudWatch Logs> .
+-- Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html Working with Amazon CloudWatch Logs> .
 --
 --
 module Network.AWS.KinesisAnalytics.DeleteApplicationCloudWatchLoggingOption
@@ -46,12 +46,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteApplicationCloudWatchLoggingOption' smart constructor.
-data DeleteApplicationCloudWatchLoggingOption = DeleteApplicationCloudWatchLoggingOption'
-  { _dacwloApplicationName             :: !Text
-  , _dacwloCurrentApplicationVersionId :: !Nat
-  , _dacwloCloudWatchLoggingOptionId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplicationCloudWatchLoggingOption = DeleteApplicationCloudWatchLoggingOption'{_dacwloApplicationName
+                                                                                          ::
+                                                                                          !Text,
+                                                                                          _dacwloCurrentApplicationVersionId
+                                                                                          ::
+                                                                                          !Nat,
+                                                                                          _dacwloCloudWatchLoggingOptionId
+                                                                                          ::
+                                                                                          !Text}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DeleteApplicationCloudWatchLoggingOption' with the minimum fields required to make a request.
 --
@@ -61,19 +67,23 @@ data DeleteApplicationCloudWatchLoggingOption = DeleteApplicationCloudWatchLoggi
 --
 -- * 'dacwloCurrentApplicationVersionId' - The version ID of the Kinesis Analytics application.
 --
--- * 'dacwloCloudWatchLoggingOptionId' - The @CloudWatchLoggingOptionId@ of the CloudWatch logging option to delete. You can get the @CloudWatchLoggingOptionId@ by using the 'DescribeApplication' operation.
+-- * 'dacwloCloudWatchLoggingOptionId' - The @CloudWatchLoggingOptionId@ of the CloudWatch logging option to delete. You can get the @CloudWatchLoggingOptionId@ by using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation. 
 deleteApplicationCloudWatchLoggingOption
     :: Text -- ^ 'dacwloApplicationName'
     -> Natural -- ^ 'dacwloCurrentApplicationVersionId'
     -> Text -- ^ 'dacwloCloudWatchLoggingOptionId'
     -> DeleteApplicationCloudWatchLoggingOption
-deleteApplicationCloudWatchLoggingOption pApplicationName_ pCurrentApplicationVersionId_ pCloudWatchLoggingOptionId_ =
-  DeleteApplicationCloudWatchLoggingOption'
-    { _dacwloApplicationName = pApplicationName_
-    , _dacwloCurrentApplicationVersionId = _Nat # pCurrentApplicationVersionId_
-    , _dacwloCloudWatchLoggingOptionId = pCloudWatchLoggingOptionId_
-    }
-
+deleteApplicationCloudWatchLoggingOption
+  pApplicationName_ pCurrentApplicationVersionId_
+  pCloudWatchLoggingOptionId_
+  = DeleteApplicationCloudWatchLoggingOption'{_dacwloApplicationName
+                                                = pApplicationName_,
+                                              _dacwloCurrentApplicationVersionId
+                                                =
+                                                _Nat #
+                                                  pCurrentApplicationVersionId_,
+                                              _dacwloCloudWatchLoggingOptionId =
+                                                pCloudWatchLoggingOptionId_}
 
 -- | The Kinesis Analytics application name.
 dacwloApplicationName :: Lens' DeleteApplicationCloudWatchLoggingOption Text
@@ -83,7 +93,7 @@ dacwloApplicationName = lens _dacwloApplicationName (\ s a -> s{_dacwloApplicati
 dacwloCurrentApplicationVersionId :: Lens' DeleteApplicationCloudWatchLoggingOption Natural
 dacwloCurrentApplicationVersionId = lens _dacwloCurrentApplicationVersionId (\ s a -> s{_dacwloCurrentApplicationVersionId = a}) . _Nat
 
--- | The @CloudWatchLoggingOptionId@ of the CloudWatch logging option to delete. You can get the @CloudWatchLoggingOptionId@ by using the 'DescribeApplication' operation.
+-- | The @CloudWatchLoggingOptionId@ of the CloudWatch logging option to delete. You can get the @CloudWatchLoggingOptionId@ by using the <https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html DescribeApplication> operation. 
 dacwloCloudWatchLoggingOptionId :: Lens' DeleteApplicationCloudWatchLoggingOption Text
 dacwloCloudWatchLoggingOptionId = lens _dacwloCloudWatchLoggingOptionId (\ s a -> s{_dacwloCloudWatchLoggingOptionId = a})
 
@@ -144,10 +154,14 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'deleteApplicationCloudWatchLoggingOptionResponse' smart constructor.
-newtype DeleteApplicationCloudWatchLoggingOptionResponse = DeleteApplicationCloudWatchLoggingOptionResponse'
-  { _dacwlorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteApplicationCloudWatchLoggingOptionResponse = DeleteApplicationCloudWatchLoggingOptionResponse'{_dacwlorsResponseStatus
+                                                                                                             ::
+                                                                                                             Int}
+                                                             deriving (Eq, Read,
+                                                                       Show,
+                                                                       Data,
+                                                                       Typeable,
+                                                                       Generic)
 
 -- | Creates a value of 'DeleteApplicationCloudWatchLoggingOptionResponse' with the minimum fields required to make a request.
 --
@@ -157,10 +171,10 @@ newtype DeleteApplicationCloudWatchLoggingOptionResponse = DeleteApplicationClou
 deleteApplicationCloudWatchLoggingOptionResponse
     :: Int -- ^ 'dacwlorsResponseStatus'
     -> DeleteApplicationCloudWatchLoggingOptionResponse
-deleteApplicationCloudWatchLoggingOptionResponse pResponseStatus_ =
-  DeleteApplicationCloudWatchLoggingOptionResponse'
-    {_dacwlorsResponseStatus = pResponseStatus_}
-
+deleteApplicationCloudWatchLoggingOptionResponse
+  pResponseStatus_
+  = DeleteApplicationCloudWatchLoggingOptionResponse'{_dacwlorsResponseStatus
+                                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 dacwlorsResponseStatus :: Lens' DeleteApplicationCloudWatchLoggingOptionResponse Int

@@ -56,19 +56,23 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeHSMConfigurations' smart constructor.
-data DescribeHSMConfigurations = DescribeHSMConfigurations'
-  { _dhsmcTagValues                  :: !(Maybe [Text])
-  , _dhsmcHSMConfigurationIdentifier :: !(Maybe Text)
-  , _dhsmcTagKeys                    :: !(Maybe [Text])
-  , _dhsmcMarker                     :: !(Maybe Text)
-  , _dhsmcMaxRecords                 :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeHSMConfigurations = DescribeHSMConfigurations'{_dhsmcTagValues
+                                                            :: !(Maybe [Text]),
+                                                            _dhsmcHSMConfigurationIdentifier
+                                                            :: !(Maybe Text),
+                                                            _dhsmcTagKeys ::
+                                                            !(Maybe [Text]),
+                                                            _dhsmcMarker ::
+                                                            !(Maybe Text),
+                                                            _dhsmcMaxRecords ::
+                                                            !(Maybe Int)}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeHSMConfigurations' with the minimum fields required to make a request.
 --
@@ -80,20 +84,17 @@ data DescribeHSMConfigurations = DescribeHSMConfigurations'
 --
 -- * 'dhsmcTagKeys' - A tag key or keys for which you want to return all matching HSM configurations that are associated with the specified key or keys. For example, suppose that you have HSM configurations that are tagged with keys called @owner@ and @environment@ . If you specify both of these tag keys in the request, Amazon Redshift returns a response with the HSM configurations that have either or both of these tag keys associated with them.
 --
--- * 'dhsmcMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeHsmConfigurations' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- * 'dhsmcMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeHsmConfigurations' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 --
 -- * 'dhsmcMaxRecords' - The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified @MaxRecords@ value, a value is returned in a @marker@ field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: @100@  Constraints: minimum 20, maximum 100.
 describeHSMConfigurations
     :: DescribeHSMConfigurations
-describeHSMConfigurations =
-  DescribeHSMConfigurations'
-    { _dhsmcTagValues = Nothing
-    , _dhsmcHSMConfigurationIdentifier = Nothing
-    , _dhsmcTagKeys = Nothing
-    , _dhsmcMarker = Nothing
-    , _dhsmcMaxRecords = Nothing
-    }
-
+describeHSMConfigurations
+  = DescribeHSMConfigurations'{_dhsmcTagValues =
+                                 Nothing,
+                               _dhsmcHSMConfigurationIdentifier = Nothing,
+                               _dhsmcTagKeys = Nothing, _dhsmcMarker = Nothing,
+                               _dhsmcMaxRecords = Nothing}
 
 -- | A tag value or values for which you want to return all matching HSM configurations that are associated with the specified tag value or values. For example, suppose that you have HSM configurations that are tagged with values called @admin@ and @test@ . If you specify both of these tag values in the request, Amazon Redshift returns a response with the HSM configurations that have either or both of these tag values associated with them.
 dhsmcTagValues :: Lens' DescribeHSMConfigurations [Text]
@@ -107,7 +108,7 @@ dhsmcHSMConfigurationIdentifier = lens _dhsmcHSMConfigurationIdentifier (\ s a -
 dhsmcTagKeys :: Lens' DescribeHSMConfigurations [Text]
 dhsmcTagKeys = lens _dhsmcTagKeys (\ s a -> s{_dhsmcTagKeys = a}) . _Default . _Coerce
 
--- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeHsmConfigurations' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeHsmConfigurations' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 dhsmcMarker :: Lens' DescribeHSMConfigurations (Maybe Text)
 dhsmcMarker = lens _dhsmcMarker (\ s a -> s{_dhsmcMarker = a})
 
@@ -160,23 +161,30 @@ instance ToQuery DescribeHSMConfigurations where
                "Marker" =: _dhsmcMarker,
                "MaxRecords" =: _dhsmcMaxRecords]
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeHSMConfigurationsResponse' smart constructor.
-data DescribeHSMConfigurationsResponse = DescribeHSMConfigurationsResponse'
-  { _dhcrsMarker            :: !(Maybe Text)
-  , _dhcrsHSMConfigurations :: !(Maybe [HSMConfiguration])
-  , _dhcrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeHSMConfigurationsResponse = DescribeHSMConfigurationsResponse'{_dhcrsMarker
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _dhcrsHSMConfigurations
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [HSMConfiguration]),
+                                                                            _dhcrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeHSMConfigurationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dhcrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- * 'dhcrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 --
 -- * 'dhcrsHSMConfigurations' - A list of @HsmConfiguration@ objects.
 --
@@ -184,15 +192,13 @@ data DescribeHSMConfigurationsResponse = DescribeHSMConfigurationsResponse'
 describeHSMConfigurationsResponse
     :: Int -- ^ 'dhcrsResponseStatus'
     -> DescribeHSMConfigurationsResponse
-describeHSMConfigurationsResponse pResponseStatus_ =
-  DescribeHSMConfigurationsResponse'
-    { _dhcrsMarker = Nothing
-    , _dhcrsHSMConfigurations = Nothing
-    , _dhcrsResponseStatus = pResponseStatus_
-    }
+describeHSMConfigurationsResponse pResponseStatus_
+  = DescribeHSMConfigurationsResponse'{_dhcrsMarker =
+                                         Nothing,
+                                       _dhcrsHSMConfigurations = Nothing,
+                                       _dhcrsResponseStatus = pResponseStatus_}
 
-
--- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 dhcrsMarker :: Lens' DescribeHSMConfigurationsResponse (Maybe Text)
 dhcrsMarker = lens _dhcrsMarker (\ s a -> s{_dhcrsMarker = a})
 

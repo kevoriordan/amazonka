@@ -18,20 +18,24 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves properties for a build. To request a build record, specify a build ID. If successful, an object containing the build properties is returned.
+-- Retrieves properties for a custom game build. To request a build resource, specify a build ID. If successful, an object containing the build properties is returned.
 --
 --
--- Build-related operations include:
+-- __Learn more__ 
 --
---     * 'CreateBuild'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html Upload a Custom Server Build> 
 --
---     * 'ListBuilds'
+-- __Related operations__ 
 --
---     * 'DescribeBuild'
+--     * 'CreateBuild' 
 --
---     * 'UpdateBuild'
+--     * 'ListBuilds' 
 --
---     * 'DeleteBuild'
+--     * 'DescribeBuild' 
+--
+--     * 'UpdateBuild' 
+--
+--     * 'DeleteBuild' 
 --
 --
 --
@@ -63,23 +67,22 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeBuild' smart constructor.
-newtype DescribeBuild = DescribeBuild'
-  { _dBuildId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeBuild = DescribeBuild'{_dBuildId ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeBuild' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dBuildId' - Unique identifier for a build to retrieve properties for.
+-- * 'dBuildId' - A unique identifier for a build to retrieve properties for. You can use either the build ID or ARN value. 
 describeBuild
     :: Text -- ^ 'dBuildId'
     -> DescribeBuild
-describeBuild pBuildId_ = DescribeBuild' {_dBuildId = pBuildId_}
+describeBuild pBuildId_
+  = DescribeBuild'{_dBuildId = pBuildId_}
 
-
--- | Unique identifier for a build to retrieve properties for.
+-- | A unique identifier for a build to retrieve properties for. You can use either the build ID or ARN value. 
 dBuildId :: Lens' DescribeBuild Text
 dBuildId = lens _dBuildId (\ s a -> s{_dBuildId = a})
 
@@ -120,11 +123,11 @@ instance ToQuery DescribeBuild where
 --
 --
 -- /See:/ 'describeBuildResponse' smart constructor.
-data DescribeBuildResponse = DescribeBuildResponse'
-  { _dbrsBuild          :: !(Maybe Build)
-  , _dbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeBuildResponse = DescribeBuildResponse'{_dbrsBuild
+                                                    :: !(Maybe Build),
+                                                    _dbrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeBuildResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +139,9 @@ data DescribeBuildResponse = DescribeBuildResponse'
 describeBuildResponse
     :: Int -- ^ 'dbrsResponseStatus'
     -> DescribeBuildResponse
-describeBuildResponse pResponseStatus_ =
-  DescribeBuildResponse'
-    {_dbrsBuild = Nothing, _dbrsResponseStatus = pResponseStatus_}
-
+describeBuildResponse pResponseStatus_
+  = DescribeBuildResponse'{_dbrsBuild = Nothing,
+                           _dbrsResponseStatus = pResponseStatus_}
 
 -- | Set of properties describing the requested build.
 dbrsBuild :: Lens' DescribeBuildResponse (Maybe Build)

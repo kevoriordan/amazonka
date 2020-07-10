@@ -18,7 +18,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.
+-- Returns some or all (up to 1,000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. A 200 OK response can contain valid or invalid XML. Be sure to design your application to parse the contents of the response and handle it appropriately.
+--
+--
+-- /Important:/ This API has been revised. We recommend that you use the newer version, 'ListObjectsV2' , when developing applications. For backward compatibility, Amazon S3 continues to support @ListObjects@ .
+--
+-- The following operations are related to @ListObjects@ :
+--
+--     * 'ListObjectsV2' 
+--
+--     * 'GetObject' 
+--
+--     * 'PutObject' 
+--
+--     * 'CreateBucket' 
+--
+--     * 'ListBuckets' 
+--
+--
+--
 --
 -- This operation returns paginated results.
 module Network.AWS.S3.ListObjects
@@ -61,16 +79,15 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'listObjects' smart constructor.
-data ListObjects = ListObjects'
-  { _loPrefix       :: !(Maybe Text)
-  , _loEncodingType :: !(Maybe EncodingType)
-  , _loRequestPayer :: !(Maybe RequestPayer)
-  , _loMarker       :: !(Maybe Text)
-  , _loMaxKeys      :: !(Maybe Int)
-  , _loDelimiter    :: !(Maybe Delimiter)
-  , _loBucket       :: !BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjects = ListObjects'{_loPrefix ::
+                                !(Maybe Text),
+                                _loEncodingType :: !(Maybe EncodingType),
+                                _loRequestPayer :: !(Maybe RequestPayer),
+                                _loMarker :: !(Maybe Text),
+                                _loMaxKeys :: !(Maybe Int),
+                                _loDelimiter :: !(Maybe Delimiter),
+                                _loBucket :: !BucketName}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListObjects' with the minimum fields required to make a request.
 --
@@ -88,21 +105,15 @@ data ListObjects = ListObjects'
 --
 -- * 'loDelimiter' - A delimiter is a character you use to group keys.
 --
--- * 'loBucket' - Undocumented member.
+-- * 'loBucket' - The name of the bucket containing the objects.
 listObjects
     :: BucketName -- ^ 'loBucket'
     -> ListObjects
-listObjects pBucket_ =
-  ListObjects'
-    { _loPrefix = Nothing
-    , _loEncodingType = Nothing
-    , _loRequestPayer = Nothing
-    , _loMarker = Nothing
-    , _loMaxKeys = Nothing
-    , _loDelimiter = Nothing
-    , _loBucket = pBucket_
-    }
-
+listObjects pBucket_
+  = ListObjects'{_loPrefix = Nothing,
+                 _loEncodingType = Nothing, _loRequestPayer = Nothing,
+                 _loMarker = Nothing, _loMaxKeys = Nothing,
+                 _loDelimiter = Nothing, _loBucket = pBucket_}
 
 -- | Limits the response to keys that begin with the specified prefix.
 loPrefix :: Lens' ListObjects (Maybe Text)
@@ -128,7 +139,7 @@ loMaxKeys = lens _loMaxKeys (\ s a -> s{_loMaxKeys = a})
 loDelimiter :: Lens' ListObjects (Maybe Delimiter)
 loDelimiter = lens _loDelimiter (\ s a -> s{_loDelimiter = a})
 
--- | Undocumented member.
+-- | The name of the bucket containing the objects.
 loBucket :: Lens' ListObjects BucketName
 loBucket = lens _loBucket (\ s a -> s{_loBucket = a})
 
@@ -187,74 +198,72 @@ instance ToQuery ListObjects where
                "delimiter" =: _loDelimiter]
 
 -- | /See:/ 'listObjectsResponse' smart constructor.
-data ListObjectsResponse = ListObjectsResponse'
-  { _lorsContents       :: !(Maybe [Object])
-  , _lorsPrefix         :: !(Maybe Text)
-  , _lorsCommonPrefixes :: !(Maybe [CommonPrefix])
-  , _lorsEncodingType   :: !(Maybe EncodingType)
-  , _lorsName           :: !(Maybe BucketName)
-  , _lorsMarker         :: !(Maybe Text)
-  , _lorsNextMarker     :: !(Maybe Text)
-  , _lorsMaxKeys        :: !(Maybe Int)
-  , _lorsIsTruncated    :: !(Maybe Bool)
-  , _lorsDelimiter      :: !(Maybe Delimiter)
-  , _lorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectsResponse = ListObjectsResponse'{_lorsContents
+                                                :: !(Maybe [Object]),
+                                                _lorsPrefix :: !(Maybe Text),
+                                                _lorsCommonPrefixes ::
+                                                !(Maybe [CommonPrefix]),
+                                                _lorsEncodingType ::
+                                                !(Maybe EncodingType),
+                                                _lorsName ::
+                                                !(Maybe BucketName),
+                                                _lorsMarker :: !(Maybe Text),
+                                                _lorsNextMarker ::
+                                                !(Maybe Text),
+                                                _lorsMaxKeys :: !(Maybe Int),
+                                                _lorsIsTruncated ::
+                                                !(Maybe Bool),
+                                                _lorsDelimiter ::
+                                                !(Maybe Delimiter),
+                                                _lorsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListObjectsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lorsContents' - Undocumented member.
+-- * 'lorsContents' - Metadata about each object returned.
 --
--- * 'lorsPrefix' - Undocumented member.
+-- * 'lorsPrefix' - Keys that begin with the indicated prefix.
 --
--- * 'lorsCommonPrefixes' - Undocumented member.
+-- * 'lorsCommonPrefixes' - All of the keys rolled up in a common prefix count as a single return when calculating the number of returns.  A response can contain CommonPrefixes only if you specify a delimiter. CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by the delimiter. CommonPrefixes lists keys that act like subdirectories in the directory specified by Prefix. For example, if the prefix is notes/ and the delimiter is a slash (/) as in notes/summer/july, the common prefix is notes/summer/. All of the keys that roll up into a common prefix count as a single return when calculating the number of returns.
 --
 -- * 'lorsEncodingType' - Encoding type used by Amazon S3 to encode object keys in the response.
 --
--- * 'lorsName' - Undocumented member.
+-- * 'lorsName' - Bucket name.
 --
--- * 'lorsMarker' - Undocumented member.
+-- * 'lorsMarker' - Indicates where in the bucket listing begins. Marker is included in the response if it was sent with the request.
 --
 -- * 'lorsNextMarker' - When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.
 --
--- * 'lorsMaxKeys' - Undocumented member.
+-- * 'lorsMaxKeys' - The maximum number of keys returned in the response body.
 --
--- * 'lorsIsTruncated' - A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+-- * 'lorsIsTruncated' - A flag that indicates whether Amazon S3 returned all of the results that satisfied the search criteria.
 --
--- * 'lorsDelimiter' - Undocumented member.
+-- * 'lorsDelimiter' - Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the @CommonPrefixes@ collection. These rolled-up keys are not returned elsewhere in the response. Each rolled-up result counts as only one return against the @MaxKeys@ value.
 --
 -- * 'lorsResponseStatus' - -- | The response status code.
 listObjectsResponse
     :: Int -- ^ 'lorsResponseStatus'
     -> ListObjectsResponse
-listObjectsResponse pResponseStatus_ =
-  ListObjectsResponse'
-    { _lorsContents = Nothing
-    , _lorsPrefix = Nothing
-    , _lorsCommonPrefixes = Nothing
-    , _lorsEncodingType = Nothing
-    , _lorsName = Nothing
-    , _lorsMarker = Nothing
-    , _lorsNextMarker = Nothing
-    , _lorsMaxKeys = Nothing
-    , _lorsIsTruncated = Nothing
-    , _lorsDelimiter = Nothing
-    , _lorsResponseStatus = pResponseStatus_
-    }
+listObjectsResponse pResponseStatus_
+  = ListObjectsResponse'{_lorsContents = Nothing,
+                         _lorsPrefix = Nothing, _lorsCommonPrefixes = Nothing,
+                         _lorsEncodingType = Nothing, _lorsName = Nothing,
+                         _lorsMarker = Nothing, _lorsNextMarker = Nothing,
+                         _lorsMaxKeys = Nothing, _lorsIsTruncated = Nothing,
+                         _lorsDelimiter = Nothing,
+                         _lorsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Metadata about each object returned.
 lorsContents :: Lens' ListObjectsResponse [Object]
 lorsContents = lens _lorsContents (\ s a -> s{_lorsContents = a}) . _Default . _Coerce
 
--- | Undocumented member.
+-- | Keys that begin with the indicated prefix.
 lorsPrefix :: Lens' ListObjectsResponse (Maybe Text)
 lorsPrefix = lens _lorsPrefix (\ s a -> s{_lorsPrefix = a})
 
--- | Undocumented member.
+-- | All of the keys rolled up in a common prefix count as a single return when calculating the number of returns.  A response can contain CommonPrefixes only if you specify a delimiter. CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by the delimiter. CommonPrefixes lists keys that act like subdirectories in the directory specified by Prefix. For example, if the prefix is notes/ and the delimiter is a slash (/) as in notes/summer/july, the common prefix is notes/summer/. All of the keys that roll up into a common prefix count as a single return when calculating the number of returns.
 lorsCommonPrefixes :: Lens' ListObjectsResponse [CommonPrefix]
 lorsCommonPrefixes = lens _lorsCommonPrefixes (\ s a -> s{_lorsCommonPrefixes = a}) . _Default . _Coerce
 
@@ -262,11 +271,11 @@ lorsCommonPrefixes = lens _lorsCommonPrefixes (\ s a -> s{_lorsCommonPrefixes = 
 lorsEncodingType :: Lens' ListObjectsResponse (Maybe EncodingType)
 lorsEncodingType = lens _lorsEncodingType (\ s a -> s{_lorsEncodingType = a})
 
--- | Undocumented member.
+-- | Bucket name.
 lorsName :: Lens' ListObjectsResponse (Maybe BucketName)
 lorsName = lens _lorsName (\ s a -> s{_lorsName = a})
 
--- | Undocumented member.
+-- | Indicates where in the bucket listing begins. Marker is included in the response if it was sent with the request.
 lorsMarker :: Lens' ListObjectsResponse (Maybe Text)
 lorsMarker = lens _lorsMarker (\ s a -> s{_lorsMarker = a})
 
@@ -274,15 +283,15 @@ lorsMarker = lens _lorsMarker (\ s a -> s{_lorsMarker = a})
 lorsNextMarker :: Lens' ListObjectsResponse (Maybe Text)
 lorsNextMarker = lens _lorsNextMarker (\ s a -> s{_lorsNextMarker = a})
 
--- | Undocumented member.
+-- | The maximum number of keys returned in the response body.
 lorsMaxKeys :: Lens' ListObjectsResponse (Maybe Int)
 lorsMaxKeys = lens _lorsMaxKeys (\ s a -> s{_lorsMaxKeys = a})
 
--- | A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+-- | A flag that indicates whether Amazon S3 returned all of the results that satisfied the search criteria.
 lorsIsTruncated :: Lens' ListObjectsResponse (Maybe Bool)
 lorsIsTruncated = lens _lorsIsTruncated (\ s a -> s{_lorsIsTruncated = a})
 
--- | Undocumented member.
+-- | Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the @CommonPrefixes@ collection. These rolled-up keys are not returned elsewhere in the response. Each rolled-up result counts as only one return against the @MaxKeys@ value.
 lorsDelimiter :: Lens' ListObjectsResponse (Maybe Delimiter)
 lorsDelimiter = lens _lorsDelimiter (\ s a -> s{_lorsDelimiter = a})
 

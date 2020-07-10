@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDomainNames' smart constructor.
-data GetDomainNames = GetDomainNames'
-  { _gdnLimit    :: !(Maybe Int)
-  , _gdnPosition :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDomainNames = GetDomainNames'{_gdnLimit ::
+                                      !(Maybe Int),
+                                      _gdnPosition :: !(Maybe Text)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDomainNames' with the minimum fields required to make a request.
 --
@@ -69,8 +68,9 @@ data GetDomainNames = GetDomainNames'
 -- * 'gdnPosition' - The current pagination position in the paged result set.
 getDomainNames
     :: GetDomainNames
-getDomainNames = GetDomainNames' {_gdnLimit = Nothing, _gdnPosition = Nothing}
-
+getDomainNames
+  = GetDomainNames'{_gdnLimit = Nothing,
+                    _gdnPosition = Nothing}
 
 -- | The maximum number of returned results per page. The default value is 25 and the maximum value is 500.
 gdnLimit :: Lens' GetDomainNames (Maybe Int)
@@ -118,15 +118,17 @@ instance ToQuery GetDomainNames where
 -- | Represents a collection of 'DomainName' resources.
 --
 --
--- <http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html Use Client-Side Certificate>
+-- <https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html Use Client-Side Certificate> 
 --
 -- /See:/ 'getDomainNamesResponse' smart constructor.
-data GetDomainNamesResponse = GetDomainNamesResponse'
-  { _gdnrsItems          :: !(Maybe [DomainName])
-  , _gdnrsPosition       :: !(Maybe Text)
-  , _gdnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDomainNamesResponse = GetDomainNamesResponse'{_gdnrsItems
+                                                      :: !(Maybe [DomainName]),
+                                                      _gdnrsPosition ::
+                                                      !(Maybe Text),
+                                                      _gdnrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetDomainNamesResponse' with the minimum fields required to make a request.
 --
@@ -140,13 +142,10 @@ data GetDomainNamesResponse = GetDomainNamesResponse'
 getDomainNamesResponse
     :: Int -- ^ 'gdnrsResponseStatus'
     -> GetDomainNamesResponse
-getDomainNamesResponse pResponseStatus_ =
-  GetDomainNamesResponse'
-    { _gdnrsItems = Nothing
-    , _gdnrsPosition = Nothing
-    , _gdnrsResponseStatus = pResponseStatus_
-    }
-
+getDomainNamesResponse pResponseStatus_
+  = GetDomainNamesResponse'{_gdnrsItems = Nothing,
+                            _gdnrsPosition = Nothing,
+                            _gdnrsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gdnrsItems :: Lens' GetDomainNamesResponse [DomainName]

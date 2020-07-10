@@ -43,28 +43,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disableMetricsCollection' smart constructor.
-data DisableMetricsCollection = DisableMetricsCollection'
-  { _dmcMetrics              :: !(Maybe [Text])
-  , _dmcAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableMetricsCollection = DisableMetricsCollection'{_dmcMetrics
+                                                          :: !(Maybe [Text]),
+                                                          _dmcAutoScalingGroupName
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DisableMetricsCollection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmcMetrics' - One or more of the following metrics. If you omit this parameter, all metrics are disabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@
+-- * 'dmcMetrics' - One or more of the following metrics. If you omit this parameter, all metrics are disabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@ 
 --
 -- * 'dmcAutoScalingGroupName' - The name of the Auto Scaling group.
 disableMetricsCollection
     :: Text -- ^ 'dmcAutoScalingGroupName'
     -> DisableMetricsCollection
-disableMetricsCollection pAutoScalingGroupName_ =
-  DisableMetricsCollection'
-    {_dmcMetrics = Nothing, _dmcAutoScalingGroupName = pAutoScalingGroupName_}
+disableMetricsCollection pAutoScalingGroupName_
+  = DisableMetricsCollection'{_dmcMetrics = Nothing,
+                              _dmcAutoScalingGroupName = pAutoScalingGroupName_}
 
-
--- | One or more of the following metrics. If you omit this parameter, all metrics are disabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@
+-- | One or more of the following metrics. If you omit this parameter, all metrics are disabled.     * @GroupMinSize@      * @GroupMaxSize@      * @GroupDesiredCapacity@      * @GroupInServiceInstances@      * @GroupPendingInstances@      * @GroupStandbyInstances@      * @GroupTerminatingInstances@      * @GroupTotalInstances@ 
 dmcMetrics :: Lens' DisableMetricsCollection [Text]
 dmcMetrics = lens _dmcMetrics (\ s a -> s{_dmcMetrics = a}) . _Default . _Coerce
 
@@ -100,17 +100,16 @@ instance ToQuery DisableMetricsCollection where
                "AutoScalingGroupName" =: _dmcAutoScalingGroupName]
 
 -- | /See:/ 'disableMetricsCollectionResponse' smart constructor.
-data DisableMetricsCollectionResponse =
-  DisableMetricsCollectionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableMetricsCollectionResponse = DisableMetricsCollectionResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DisableMetricsCollectionResponse' with the minimum fields required to make a request.
 --
 disableMetricsCollectionResponse
     :: DisableMetricsCollectionResponse
-disableMetricsCollectionResponse = DisableMetricsCollectionResponse'
-
+disableMetricsCollectionResponse
+  = DisableMetricsCollectionResponse'
 
 instance NFData DisableMetricsCollectionResponse
          where

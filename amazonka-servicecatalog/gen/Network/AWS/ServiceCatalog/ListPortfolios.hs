@@ -51,12 +51,11 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listPortfolios' smart constructor.
-data ListPortfolios = ListPortfolios'
-  { _lpAcceptLanguage :: !(Maybe Text)
-  , _lpPageToken      :: !(Maybe Text)
-  , _lpPageSize       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPortfolios = ListPortfolios'{_lpAcceptLanguage
+                                      :: !(Maybe Text),
+                                      _lpPageToken :: !(Maybe Text),
+                                      _lpPageSize :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPortfolios' with the minimum fields required to make a request.
 --
@@ -69,10 +68,9 @@ data ListPortfolios = ListPortfolios'
 -- * 'lpPageSize' - The maximum number of items to return with this call.
 listPortfolios
     :: ListPortfolios
-listPortfolios =
-  ListPortfolios'
-    {_lpAcceptLanguage = Nothing, _lpPageToken = Nothing, _lpPageSize = Nothing}
-
+listPortfolios
+  = ListPortfolios'{_lpAcceptLanguage = Nothing,
+                    _lpPageToken = Nothing, _lpPageSize = Nothing}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 lpAcceptLanguage :: Lens' ListPortfolios (Maybe Text)
@@ -133,12 +131,15 @@ instance ToQuery ListPortfolios where
         toQuery = const mempty
 
 -- | /See:/ 'listPortfoliosResponse' smart constructor.
-data ListPortfoliosResponse = ListPortfoliosResponse'
-  { _lprsNextPageToken    :: !(Maybe Text)
-  , _lprsPortfolioDetails :: !(Maybe [PortfolioDetail])
-  , _lprsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPortfoliosResponse = ListPortfoliosResponse'{_lprsNextPageToken
+                                                      :: !(Maybe Text),
+                                                      _lprsPortfolioDetails ::
+                                                      !(Maybe
+                                                          [PortfolioDetail]),
+                                                      _lprsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListPortfoliosResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +153,11 @@ data ListPortfoliosResponse = ListPortfoliosResponse'
 listPortfoliosResponse
     :: Int -- ^ 'lprsResponseStatus'
     -> ListPortfoliosResponse
-listPortfoliosResponse pResponseStatus_ =
-  ListPortfoliosResponse'
-    { _lprsNextPageToken = Nothing
-    , _lprsPortfolioDetails = Nothing
-    , _lprsResponseStatus = pResponseStatus_
-    }
-
+listPortfoliosResponse pResponseStatus_
+  = ListPortfoliosResponse'{_lprsNextPageToken =
+                              Nothing,
+                            _lprsPortfolioDetails = Nothing,
+                            _lprsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 lprsNextPageToken :: Lens' ListPortfoliosResponse (Maybe Text)

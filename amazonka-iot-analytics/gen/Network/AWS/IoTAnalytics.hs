@@ -11,12 +11,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- AWS IoT Analytics provides advanced data analysis for AWS IoT. It allows you to collect large amounts of device data, process messages, store them, and then query the data and run sophisticated analytics to make accurate decisions in your IoT applications and machine learning use cases. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.
+-- AWS IoT Analytics allows you to collect large amounts of device data, process messages, and store them. You can then query the data and run sophisticated analytics on it. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.
 --
 --
--- Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result, the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources.
+-- Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. 
 --
--- AWS IoT Analytics automates each of the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.
+-- AWS IoT Analytics automates the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes pre-built models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.
 --
 module Network.AWS.IoTAnalytics
     (
@@ -26,23 +26,23 @@ module Network.AWS.IoTAnalytics
     -- * Errors
     -- $errors
 
+    -- ** InternalFailureException
+    , _InternalFailureException
+
     -- ** InvalidRequestException
     , _InvalidRequestException
+
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
 
     -- ** ResourceAlreadyExistsException
     , _ResourceAlreadyExistsException
 
-    -- ** ThrottlingException
-    , _ThrottlingException
-
-    -- ** InternalFailureException
-    , _InternalFailureException
-
     -- ** ServiceUnavailableException
     , _ServiceUnavailableException
 
-    -- ** ResourceNotFoundException
-    , _ResourceNotFoundException
+    -- ** ThrottlingException
+    , _ThrottlingException
 
     -- ** LimitExceededException
     , _LimitExceededException
@@ -53,100 +53,118 @@ module Network.AWS.IoTAnalytics
     -- * Operations
     -- $operations
 
-    -- ** DescribePipeline
+    -- ** DescribePipeline 
     , module Network.AWS.IoTAnalytics.DescribePipeline
 
-    -- ** DescribeDataset
+    -- ** DescribeDataset 
     , module Network.AWS.IoTAnalytics.DescribeDataset
 
-    -- ** ListChannels
+    -- ** ListChannels (Paginated)
     , module Network.AWS.IoTAnalytics.ListChannels
 
-    -- ** PutLoggingOptions
+    -- ** ListDatasetContents (Paginated)
+    , module Network.AWS.IoTAnalytics.ListDatasetContents
+
+    -- ** PutLoggingOptions 
     , module Network.AWS.IoTAnalytics.PutLoggingOptions
 
-    -- ** DeleteChannel
+    -- ** ListTagsForResource 
+    , module Network.AWS.IoTAnalytics.ListTagsForResource
+
+    -- ** DeleteChannel 
     , module Network.AWS.IoTAnalytics.DeleteChannel
 
-    -- ** UpdateChannel
+    -- ** UpdateChannel 
     , module Network.AWS.IoTAnalytics.UpdateChannel
 
-    -- ** SampleChannelData
+    -- ** SampleChannelData 
     , module Network.AWS.IoTAnalytics.SampleChannelData
 
-    -- ** CancelPipelineReprocessing
+    -- ** CancelPipelineReprocessing 
     , module Network.AWS.IoTAnalytics.CancelPipelineReprocessing
 
-    -- ** CreateDatastore
+    -- ** CreateDatastore 
     , module Network.AWS.IoTAnalytics.CreateDatastore
 
-    -- ** UpdatePipeline
+    -- ** UpdatePipeline 
     , module Network.AWS.IoTAnalytics.UpdatePipeline
 
-    -- ** DeletePipeline
+    -- ** DeletePipeline 
     , module Network.AWS.IoTAnalytics.DeletePipeline
 
-    -- ** DeleteDataset
+    -- ** DeleteDataset 
     , module Network.AWS.IoTAnalytics.DeleteDataset
 
-    -- ** UpdateDataset
+    -- ** UpdateDataset 
     , module Network.AWS.IoTAnalytics.UpdateDataset
 
-    -- ** ListPipelines
+    -- ** ListPipelines (Paginated)
     , module Network.AWS.IoTAnalytics.ListPipelines
 
-    -- ** DeleteDatastore
+    -- ** DeleteDatastore 
     , module Network.AWS.IoTAnalytics.DeleteDatastore
 
-    -- ** UpdateDatastore
+    -- ** UpdateDatastore 
     , module Network.AWS.IoTAnalytics.UpdateDatastore
 
-    -- ** CreateDataset
+    -- ** CreateDataset 
     , module Network.AWS.IoTAnalytics.CreateDataset
 
-    -- ** BatchPutMessage
+    -- ** BatchPutMessage 
     , module Network.AWS.IoTAnalytics.BatchPutMessage
 
-    -- ** ListDatastores
+    -- ** ListDatastores (Paginated)
     , module Network.AWS.IoTAnalytics.ListDatastores
 
-    -- ** CreateDatasetContent
+    -- ** CreateDatasetContent 
     , module Network.AWS.IoTAnalytics.CreateDatasetContent
 
-    -- ** CreateChannel
+    -- ** CreateChannel 
     , module Network.AWS.IoTAnalytics.CreateChannel
 
-    -- ** DeleteDatasetContent
+    -- ** DeleteDatasetContent 
     , module Network.AWS.IoTAnalytics.DeleteDatasetContent
 
-    -- ** DescribeDatastore
+    -- ** DescribeDatastore 
     , module Network.AWS.IoTAnalytics.DescribeDatastore
 
-    -- ** GetDatasetContent
+    -- ** GetDatasetContent 
     , module Network.AWS.IoTAnalytics.GetDatasetContent
 
-    -- ** ListDatasets
+    -- ** TagResource 
+    , module Network.AWS.IoTAnalytics.TagResource
+
+    -- ** ListDatasets (Paginated)
     , module Network.AWS.IoTAnalytics.ListDatasets
 
-    -- ** RunPipelineActivity
+    -- ** UntagResource 
+    , module Network.AWS.IoTAnalytics.UntagResource
+
+    -- ** RunPipelineActivity 
     , module Network.AWS.IoTAnalytics.RunPipelineActivity
 
-    -- ** DescribeChannel
+    -- ** DescribeChannel 
     , module Network.AWS.IoTAnalytics.DescribeChannel
 
-    -- ** CreatePipeline
+    -- ** CreatePipeline 
     , module Network.AWS.IoTAnalytics.CreatePipeline
 
-    -- ** StartPipelineReprocessing
+    -- ** StartPipelineReprocessing 
     , module Network.AWS.IoTAnalytics.StartPipelineReprocessing
 
-    -- ** DescribeLoggingOptions
+    -- ** DescribeLoggingOptions 
     , module Network.AWS.IoTAnalytics.DescribeLoggingOptions
 
     -- * Types
 
     -- ** ChannelStatus
     , ChannelStatus (..)
+
+    -- ** ComputeType
+    , ComputeType (..)
+
+    -- ** DatasetActionType
+    , DatasetActionType (..)
 
     -- ** DatasetContentState
     , DatasetContentState (..)
@@ -183,6 +201,7 @@ module Network.AWS.IoTAnalytics
     , cCreationTime
     , cStatus
     , cArn
+    , cStorage
     , cRetentionPeriod
     , cName
     , cLastUpdateTime
@@ -194,23 +213,80 @@ module Network.AWS.IoTAnalytics
     , caName
     , caChannelName
 
+    -- ** ChannelStatistics
+    , ChannelStatistics
+    , channelStatistics
+    , csSize
+
+    -- ** ChannelStorage
+    , ChannelStorage
+    , channelStorage
+    , csServiceManagedS3
+    , csCustomerManagedS3
+
+    -- ** ChannelStorageSummary
+    , ChannelStorageSummary
+    , channelStorageSummary
+    , cssServiceManagedS3
+    , cssCustomerManagedS3
+
     -- ** ChannelSummary
     , ChannelSummary
     , channelSummary
     , csCreationTime
     , csStatus
     , csChannelName
+    , csChannelStorage
     , csLastUpdateTime
+
+    -- ** ContainerDatasetAction
+    , ContainerDatasetAction
+    , containerDatasetAction
+    , cdaVariables
+    , cdaImage
+    , cdaExecutionRoleARN
+    , cdaResourceConfiguration
+
+    -- ** CustomerManagedChannelS3Storage
+    , CustomerManagedChannelS3Storage
+    , customerManagedChannelS3Storage
+    , cmcssKeyPrefix
+    , cmcssBucket
+    , cmcssRoleARN
+
+    -- ** CustomerManagedChannelS3StorageSummary
+    , CustomerManagedChannelS3StorageSummary
+    , customerManagedChannelS3StorageSummary
+    , cmcsssBucket
+    , cmcsssKeyPrefix
+    , cmcsssRoleARN
+
+    -- ** CustomerManagedDatastoreS3Storage
+    , CustomerManagedDatastoreS3Storage
+    , customerManagedDatastoreS3Storage
+    , cmdssKeyPrefix
+    , cmdssBucket
+    , cmdssRoleARN
+
+    -- ** CustomerManagedDatastoreS3StorageSummary
+    , CustomerManagedDatastoreS3StorageSummary
+    , customerManagedDatastoreS3StorageSummary
+    , cmdsssBucket
+    , cmdsssKeyPrefix
+    , cmdsssRoleARN
 
     -- ** Dataset
     , Dataset
     , dataset
     , dCreationTime
     , dStatus
+    , dVersioningConfiguration
     , dArn
     , dActions
     , dTriggers
+    , dRetentionPeriod
     , dName
+    , dContentDeliveryRules
     , dLastUpdateTime
 
     -- ** DatasetAction
@@ -218,12 +294,45 @@ module Network.AWS.IoTAnalytics
     , datasetAction
     , daQueryAction
     , daActionName
+    , daContainerAction
+
+    -- ** DatasetActionSummary
+    , DatasetActionSummary
+    , datasetActionSummary
+    , dasActionName
+    , dasActionType
+
+    -- ** DatasetContentDeliveryDestination
+    , DatasetContentDeliveryDestination
+    , datasetContentDeliveryDestination
+    , dcddS3DestinationConfiguration
+    , dcddIotEventsDestinationConfiguration
+
+    -- ** DatasetContentDeliveryRule
+    , DatasetContentDeliveryRule
+    , datasetContentDeliveryRule
+    , dcdrEntryName
+    , dcdrDestination
 
     -- ** DatasetContentStatus
     , DatasetContentStatus
     , datasetContentStatus
     , dcsState
     , dcsReason
+
+    -- ** DatasetContentSummary
+    , DatasetContentSummary
+    , datasetContentSummary
+    , dcsCreationTime
+    , dcsStatus
+    , dcsScheduleTime
+    , dcsCompletionTime
+    , dcsVersion
+
+    -- ** DatasetContentVersionValue
+    , DatasetContentVersionValue
+    , datasetContentVersionValue
+    , dcvvDatasetName
 
     -- ** DatasetEntry
     , DatasetEntry
@@ -234,14 +343,17 @@ module Network.AWS.IoTAnalytics
     -- ** DatasetSummary
     , DatasetSummary
     , datasetSummary
-    , dssCreationTime
-    , dssStatus
-    , dssDatasetName
-    , dssLastUpdateTime
+    , dtstsmmryCreationTime
+    , dtstsmmryStatus
+    , dtstsmmryActions
+    , dtstsmmryTriggers
+    , dtstsmmryDatasetName
+    , dtstsmmryLastUpdateTime
 
     -- ** DatasetTrigger
     , DatasetTrigger
     , datasetTrigger
+    , dtDataset
     , dtSchedule
 
     -- ** Datastore
@@ -250,6 +362,7 @@ module Network.AWS.IoTAnalytics
     , datCreationTime
     , datStatus
     , datArn
+    , datStorage
     , datRetentionPeriod
     , datName
     , datLastUpdateTime
@@ -260,6 +373,23 @@ module Network.AWS.IoTAnalytics
     , daName
     , daDatastoreName
 
+    -- ** DatastoreStatistics
+    , DatastoreStatistics
+    , datastoreStatistics
+    , dsSize
+
+    -- ** DatastoreStorage
+    , DatastoreStorage
+    , datastoreStorage
+    , dsServiceManagedS3
+    , dsCustomerManagedS3
+
+    -- ** DatastoreStorageSummary
+    , DatastoreStorageSummary
+    , datastoreStorageSummary
+    , dssServiceManagedS3
+    , dssCustomerManagedS3
+
     -- ** DatastoreSummary
     , DatastoreSummary
     , datastoreSummary
@@ -267,6 +397,13 @@ module Network.AWS.IoTAnalytics
     , dsStatus
     , dsDatastoreName
     , dsLastUpdateTime
+    , dsDatastoreStorage
+
+    -- ** DeltaTime
+    , DeltaTime
+    , deltaTime
+    , dtOffsetSeconds
+    , dtTimeExpression
 
     -- ** DeviceRegistryEnrichActivity
     , DeviceRegistryEnrichActivity
@@ -286,12 +423,30 @@ module Network.AWS.IoTAnalytics
     , dseaThingName
     , dseaRoleARN
 
+    -- ** EstimatedResourceSize
+    , EstimatedResourceSize
+    , estimatedResourceSize
+    , ersEstimatedOn
+    , ersEstimatedSizeInBytes
+
     -- ** FilterActivity
     , FilterActivity
     , filterActivity
     , faNext
     , faName
     , faFilter
+
+    -- ** GlueConfiguration
+    , GlueConfiguration
+    , glueConfiguration
+    , gcTableName
+    , gcDatabaseName
+
+    -- ** IotEventsDestinationConfiguration
+    , IotEventsDestinationConfiguration
+    , iotEventsDestinationConfiguration
+    , iedcInputName
+    , iedcRoleARN
 
     -- ** LambdaActivity
     , LambdaActivity
@@ -321,6 +476,11 @@ module Network.AWS.IoTAnalytics
     , message
     , mMessageId
     , mPayload
+
+    -- ** OutputFileURIValue
+    , OutputFileURIValue
+    , outputFileURIValue
+    , ofuvFileName
 
     -- ** Pipeline
     , Pipeline
@@ -354,6 +514,11 @@ module Network.AWS.IoTAnalytics
     , psReprocessingSummaries
     , psLastUpdateTime
 
+    -- ** QueryFilter
+    , QueryFilter
+    , queryFilter
+    , qfDeltaTime
+
     -- ** RemoveAttributesActivity
     , RemoveAttributesActivity
     , removeAttributesActivity
@@ -368,11 +533,25 @@ module Network.AWS.IoTAnalytics
     , rsStatus
     , rsId
 
+    -- ** ResourceConfiguration
+    , ResourceConfiguration
+    , resourceConfiguration
+    , rcComputeType
+    , rcVolumeSizeInGB
+
     -- ** RetentionPeriod
     , RetentionPeriod
     , retentionPeriod
     , rpUnlimited
     , rpNumberOfDays
+
+    -- ** S3DestinationConfiguration
+    , S3DestinationConfiguration
+    , s3DestinationConfiguration
+    , sdcGlueConfiguration
+    , sdcBucket
+    , sdcKey
+    , sdcRoleARN
 
     -- ** Schedule
     , Schedule
@@ -386,10 +565,53 @@ module Network.AWS.IoTAnalytics
     , saaName
     , saaAttributes
 
+    -- ** ServiceManagedChannelS3Storage
+    , ServiceManagedChannelS3Storage
+    , serviceManagedChannelS3Storage
+
+    -- ** ServiceManagedChannelS3StorageSummary
+    , ServiceManagedChannelS3StorageSummary
+    , serviceManagedChannelS3StorageSummary
+
+    -- ** ServiceManagedDatastoreS3Storage
+    , ServiceManagedDatastoreS3Storage
+    , serviceManagedDatastoreS3Storage
+
+    -- ** ServiceManagedDatastoreS3StorageSummary
+    , ServiceManagedDatastoreS3StorageSummary
+    , serviceManagedDatastoreS3StorageSummary
+
     -- ** SqlQueryDatasetAction
     , SqlQueryDatasetAction
     , sqlQueryDatasetAction
+    , sqdaFilters
     , sqdaSqlQuery
+
+    -- ** Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
+
+    -- ** TriggeringDataset
+    , TriggeringDataset
+    , triggeringDataset
+    , tdName
+
+    -- ** Variable
+    , Variable
+    , variable
+    , vOutputFileURIValue
+    , vDoubleValue
+    , vStringValue
+    , vDatasetContentVersionValue
+    , vName
+
+    -- ** VersioningConfiguration
+    , VersioningConfiguration
+    , versioningConfiguration
+    , vcUnlimited
+    , vcMaxVersions
     ) where
 
 import Network.AWS.IoTAnalytics.BatchPutMessage
@@ -411,14 +633,18 @@ import Network.AWS.IoTAnalytics.DescribeLoggingOptions
 import Network.AWS.IoTAnalytics.DescribePipeline
 import Network.AWS.IoTAnalytics.GetDatasetContent
 import Network.AWS.IoTAnalytics.ListChannels
+import Network.AWS.IoTAnalytics.ListDatasetContents
 import Network.AWS.IoTAnalytics.ListDatasets
 import Network.AWS.IoTAnalytics.ListDatastores
 import Network.AWS.IoTAnalytics.ListPipelines
+import Network.AWS.IoTAnalytics.ListTagsForResource
 import Network.AWS.IoTAnalytics.PutLoggingOptions
 import Network.AWS.IoTAnalytics.RunPipelineActivity
 import Network.AWS.IoTAnalytics.SampleChannelData
 import Network.AWS.IoTAnalytics.StartPipelineReprocessing
+import Network.AWS.IoTAnalytics.TagResource
 import Network.AWS.IoTAnalytics.Types
+import Network.AWS.IoTAnalytics.UntagResource
 import Network.AWS.IoTAnalytics.UpdateChannel
 import Network.AWS.IoTAnalytics.UpdateDataset
 import Network.AWS.IoTAnalytics.UpdateDatastore

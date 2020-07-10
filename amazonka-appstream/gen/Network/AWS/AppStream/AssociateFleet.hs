@@ -45,28 +45,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateFleet' smart constructor.
-data AssociateFleet = AssociateFleet'
-  { _afFleetName :: !Text
-  , _afStackName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateFleet = AssociateFleet'{_afFleetName ::
+                                      !Text,
+                                      _afStackName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssociateFleet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'afFleetName' - The name of the fleet.
+-- * 'afFleetName' - The name of the fleet. 
 --
 -- * 'afStackName' - The name of the stack.
 associateFleet
     :: Text -- ^ 'afFleetName'
     -> Text -- ^ 'afStackName'
     -> AssociateFleet
-associateFleet pFleetName_ pStackName_ =
-  AssociateFleet' {_afFleetName = pFleetName_, _afStackName = pStackName_}
+associateFleet pFleetName_ pStackName_
+  = AssociateFleet'{_afFleetName = pFleetName_,
+                    _afStackName = pStackName_}
 
-
--- | The name of the fleet.
+-- | The name of the fleet. 
 afFleetName :: Lens' AssociateFleet Text
 afFleetName = lens _afFleetName (\ s a -> s{_afFleetName = a})
 
@@ -110,10 +109,10 @@ instance ToQuery AssociateFleet where
         toQuery = const mempty
 
 -- | /See:/ 'associateFleetResponse' smart constructor.
-newtype AssociateFleetResponse = AssociateFleetResponse'
-  { _afrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateFleetResponse = AssociateFleetResponse'{_afrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'AssociateFleetResponse' with the minimum fields required to make a request.
 --
@@ -123,9 +122,9 @@ newtype AssociateFleetResponse = AssociateFleetResponse'
 associateFleetResponse
     :: Int -- ^ 'afrsResponseStatus'
     -> AssociateFleetResponse
-associateFleetResponse pResponseStatus_ =
-  AssociateFleetResponse' {_afrsResponseStatus = pResponseStatus_}
-
+associateFleetResponse pResponseStatus_
+  = AssociateFleetResponse'{_afrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 afrsResponseStatus :: Lens' AssociateFleetResponse Int

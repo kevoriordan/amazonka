@@ -43,17 +43,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeOperatingSystems' smart constructor.
-data DescribeOperatingSystems =
-  DescribeOperatingSystems'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeOperatingSystems = DescribeOperatingSystems'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeOperatingSystems' with the minimum fields required to make a request.
 --
 describeOperatingSystems
     :: DescribeOperatingSystems
 describeOperatingSystems = DescribeOperatingSystems'
-
 
 instance AWSRequest DescribeOperatingSystems where
         type Rs DescribeOperatingSystems =
@@ -94,28 +92,32 @@ instance ToQuery DescribeOperatingSystems where
 --
 --
 -- /See:/ 'describeOperatingSystemsResponse' smart constructor.
-data DescribeOperatingSystemsResponse = DescribeOperatingSystemsResponse'
-  { _dosrsOperatingSystems :: !(Maybe [OperatingSystem])
-  , _dosrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeOperatingSystemsResponse = DescribeOperatingSystemsResponse'{_dosrsOperatingSystems
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [OperatingSystem]),
+                                                                          _dosrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeOperatingSystemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dosrsOperatingSystems' - Undocumented member.
+-- * 'dosrsOperatingSystems' - Contains information in response to a @DescribeOperatingSystems@ request.
 --
 -- * 'dosrsResponseStatus' - -- | The response status code.
 describeOperatingSystemsResponse
     :: Int -- ^ 'dosrsResponseStatus'
     -> DescribeOperatingSystemsResponse
-describeOperatingSystemsResponse pResponseStatus_ =
-  DescribeOperatingSystemsResponse'
-    {_dosrsOperatingSystems = Nothing, _dosrsResponseStatus = pResponseStatus_}
+describeOperatingSystemsResponse pResponseStatus_
+  = DescribeOperatingSystemsResponse'{_dosrsOperatingSystems
+                                        = Nothing,
+                                      _dosrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Contains information in response to a @DescribeOperatingSystems@ request.
 dosrsOperatingSystems :: Lens' DescribeOperatingSystemsResponse [OperatingSystem]
 dosrsOperatingSystems = lens _dosrsOperatingSystems (\ s a -> s{_dosrsOperatingSystems = a}) . _Default . _Coerce
 

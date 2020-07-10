@@ -44,22 +44,21 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeAccountAttributes' smart constructor.
-data DescribeAccountAttributes =
-  DescribeAccountAttributes'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAccountAttributes = DescribeAccountAttributes'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeAccountAttributes' with the minimum fields required to make a request.
 --
 describeAccountAttributes
     :: DescribeAccountAttributes
-describeAccountAttributes = DescribeAccountAttributes'
-
+describeAccountAttributes
+  = DescribeAccountAttributes'
 
 instance AWSRequest DescribeAccountAttributes where
         type Rs DescribeAccountAttributes =
@@ -96,28 +95,32 @@ instance ToQuery DescribeAccountAttributes where
 --
 --
 -- /See:/ 'describeAccountAttributesResponse' smart constructor.
-data DescribeAccountAttributesResponse = DescribeAccountAttributesResponse'
-  { _daarsAccountQuotas  :: !(Maybe [AccountQuota])
-  , _daarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAccountAttributesResponse = DescribeAccountAttributesResponse'{_daarsAccountQuotas
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [AccountQuota]),
+                                                                            _daarsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeAccountAttributesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daarsAccountQuotas' - A list of 'AccountQuota' objects. Within this list, each quota has a name, a count of usage toward the quota maximum, and a maximum value for the quota.
+-- * 'daarsAccountQuotas' - A list of @AccountQuota@ objects. Within this list, each quota has a name, a count of usage toward the quota maximum, and a maximum value for the quota.
 --
 -- * 'daarsResponseStatus' - -- | The response status code.
 describeAccountAttributesResponse
     :: Int -- ^ 'daarsResponseStatus'
     -> DescribeAccountAttributesResponse
-describeAccountAttributesResponse pResponseStatus_ =
-  DescribeAccountAttributesResponse'
-    {_daarsAccountQuotas = Nothing, _daarsResponseStatus = pResponseStatus_}
+describeAccountAttributesResponse pResponseStatus_
+  = DescribeAccountAttributesResponse'{_daarsAccountQuotas
+                                         = Nothing,
+                                       _daarsResponseStatus = pResponseStatus_}
 
-
--- | A list of 'AccountQuota' objects. Within this list, each quota has a name, a count of usage toward the quota maximum, and a maximum value for the quota.
+-- | A list of @AccountQuota@ objects. Within this list, each quota has a name, a count of usage toward the quota maximum, and a maximum value for the quota.
 daarsAccountQuotas :: Lens' DescribeAccountAttributesResponse [AccountQuota]
 daarsAccountQuotas = lens _daarsAccountQuotas (\ s a -> s{_daarsAccountQuotas = a}) . _Default . _Coerce
 

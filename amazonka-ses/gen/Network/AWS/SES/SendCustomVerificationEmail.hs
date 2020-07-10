@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address.
+-- Adds an email address to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address.
 --
 --
 -- To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html Using Custom Verification Email Templates> in the /Amazon SES Developer Guide/ .
@@ -55,12 +55,15 @@ import Network.AWS.SES.Types.Product
 --
 --
 -- /See:/ 'sendCustomVerificationEmail' smart constructor.
-data SendCustomVerificationEmail = SendCustomVerificationEmail'
-  { _scveConfigurationSetName :: !(Maybe Text)
-  , _scveEmailAddress         :: !Text
-  , _scveTemplateName         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SendCustomVerificationEmail = SendCustomVerificationEmail'{_scveConfigurationSetName
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _scveEmailAddress
+                                                                :: !Text,
+                                                                _scveTemplateName
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'SendCustomVerificationEmail' with the minimum fields required to make a request.
 --
@@ -75,13 +78,12 @@ sendCustomVerificationEmail
     :: Text -- ^ 'scveEmailAddress'
     -> Text -- ^ 'scveTemplateName'
     -> SendCustomVerificationEmail
-sendCustomVerificationEmail pEmailAddress_ pTemplateName_ =
-  SendCustomVerificationEmail'
-    { _scveConfigurationSetName = Nothing
-    , _scveEmailAddress = pEmailAddress_
-    , _scveTemplateName = pTemplateName_
-    }
-
+sendCustomVerificationEmail pEmailAddress_
+  pTemplateName_
+  = SendCustomVerificationEmail'{_scveConfigurationSetName
+                                   = Nothing,
+                                 _scveEmailAddress = pEmailAddress_,
+                                 _scveTemplateName = pTemplateName_}
 
 -- | Name of a configuration set to use when sending the verification email.
 scveConfigurationSetName :: Lens' SendCustomVerificationEmail (Maybe Text)
@@ -131,11 +133,15 @@ instance ToQuery SendCustomVerificationEmail where
 --
 --
 -- /See:/ 'sendCustomVerificationEmailResponse' smart constructor.
-data SendCustomVerificationEmailResponse = SendCustomVerificationEmailResponse'
-  { _scversMessageId      :: !(Maybe Text)
-  , _scversResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SendCustomVerificationEmailResponse = SendCustomVerificationEmailResponse'{_scversMessageId
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _scversResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'SendCustomVerificationEmailResponse' with the minimum fields required to make a request.
 --
@@ -147,10 +153,11 @@ data SendCustomVerificationEmailResponse = SendCustomVerificationEmailResponse'
 sendCustomVerificationEmailResponse
     :: Int -- ^ 'scversResponseStatus'
     -> SendCustomVerificationEmailResponse
-sendCustomVerificationEmailResponse pResponseStatus_ =
-  SendCustomVerificationEmailResponse'
-    {_scversMessageId = Nothing, _scversResponseStatus = pResponseStatus_}
-
+sendCustomVerificationEmailResponse pResponseStatus_
+  = SendCustomVerificationEmailResponse'{_scversMessageId
+                                           = Nothing,
+                                         _scversResponseStatus =
+                                           pResponseStatus_}
 
 -- | The unique message identifier returned from the @SendCustomVerificationEmail@ operation.
 scversMessageId :: Lens' SendCustomVerificationEmailResponse (Maybe Text)

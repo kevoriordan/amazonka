@@ -14,11 +14,11 @@
 module Test.AWS.Gen.WorkDocs where
 
 import Data.Proxy
-import Network.AWS.WorkDocs
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.WorkDocs.Internal
 import Test.Tasty
+import Network.AWS.WorkDocs
+import Test.AWS.WorkDocs.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -120,6 +120,9 @@ import Test.Tasty
 --
 --         , requestRemoveResourcePermission $
 --             removeResourcePermission
+--
+--         , requestGetResources $
+--             getResources
 --
 --         , requestDeleteComment $
 --             deleteComment
@@ -243,6 +246,9 @@ import Test.Tasty
 --
 --         , responseRemoveResourcePermission $
 --             removeResourcePermissionResponse
+--
+--         , responseGetResources $
+--             getResourcesResponse
 --
 --         , responseDeleteComment $
 --             deleteCommentResponse
@@ -430,6 +436,11 @@ requestRemoveResourcePermission :: RemoveResourcePermission -> TestTree
 requestRemoveResourcePermission = req
     "RemoveResourcePermission"
     "fixture/RemoveResourcePermission.yaml"
+
+requestGetResources :: GetResources -> TestTree
+requestGetResources = req
+    "GetResources"
+    "fixture/GetResources.yaml"
 
 requestDeleteComment :: DeleteComment -> TestTree
 requestDeleteComment = req
@@ -694,6 +705,13 @@ responseRemoveResourcePermission = res
     "fixture/RemoveResourcePermissionResponse.proto"
     workDocs
     (Proxy :: Proxy RemoveResourcePermission)
+
+responseGetResources :: GetResourcesResponse -> TestTree
+responseGetResources = res
+    "GetResourcesResponse"
+    "fixture/GetResourcesResponse.proto"
+    workDocs
+    (Proxy :: Proxy GetResources)
 
 responseDeleteComment :: DeleteCommentResponse -> TestTree
 responseDeleteComment = res

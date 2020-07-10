@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @DeleteHIT@ operation is used to delete HIT that is no longer needed. Only the Requester who created the HIT can delete it.
+-- The @DeleteHIT@ operation is used to delete HIT that is no longer needed. Only the Requester who created the HIT can delete it. 
 --
 --
--- You can only dispose of HITs that are in the @Reviewable@ state, with all of their submitted assignments already either approved or rejected. If you call the DeleteHIT operation on a HIT that is not in the @Reviewable@ state (for example, that has not expired, or still has active assignments), or on a HIT that is Reviewable but without all of its submitted assignments already approved or rejected, the service will return an error.
+-- You can only dispose of HITs that are in the @Reviewable@ state, with all of their submitted assignments already either approved or rejected. If you call the DeleteHIT operation on a HIT that is not in the @Reviewable@ state (for example, that has not expired, or still has active assignments), or on a HIT that is Reviewable but without all of its submitted assignments already approved or rejected, the service will return an error. 
 --
 module Network.AWS.MechanicalTurk.DeleteHIT
     (
@@ -46,10 +46,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteHIT' smart constructor.
-newtype DeleteHIT = DeleteHIT'
-  { _dhitHITId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteHIT = DeleteHIT'{_dhitHITId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteHIT' with the minimum fields required to make a request.
 --
@@ -59,8 +57,7 @@ newtype DeleteHIT = DeleteHIT'
 deleteHIT
     :: Text -- ^ 'dhitHITId'
     -> DeleteHIT
-deleteHIT pHITId_ = DeleteHIT' {_dhitHITId = pHITId_}
-
+deleteHIT pHITId_ = DeleteHIT'{_dhitHITId = pHITId_}
 
 -- | The ID of the HIT to be deleted.
 dhitHITId :: Lens' DeleteHIT Text
@@ -99,10 +96,9 @@ instance ToQuery DeleteHIT where
         toQuery = const mempty
 
 -- | /See:/ 'deleteHITResponse' smart constructor.
-newtype DeleteHITResponse = DeleteHITResponse'
-  { _dhitrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteHITResponse = DeleteHITResponse'{_dhitrsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteHITResponse' with the minimum fields required to make a request.
 --
@@ -112,9 +108,9 @@ newtype DeleteHITResponse = DeleteHITResponse'
 deleteHITResponse
     :: Int -- ^ 'dhitrsResponseStatus'
     -> DeleteHITResponse
-deleteHITResponse pResponseStatus_ =
-  DeleteHITResponse' {_dhitrsResponseStatus = pResponseStatus_}
-
+deleteHITResponse pResponseStatus_
+  = DeleteHITResponse'{_dhitrsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 dhitrsResponseStatus :: Lens' DeleteHITResponse Int

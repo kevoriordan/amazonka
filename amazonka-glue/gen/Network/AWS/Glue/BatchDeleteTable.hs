@@ -47,38 +47,34 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchDeleteTable' smart constructor.
-data BatchDeleteTable = BatchDeleteTable'
-  { _bdtCatalogId      :: !(Maybe Text)
-  , _bdtDatabaseName   :: !Text
-  , _bdtTablesToDelete :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeleteTable = BatchDeleteTable'{_bdtCatalogId
+                                          :: !(Maybe Text),
+                                          _bdtDatabaseName :: !Text,
+                                          _bdtTablesToDelete :: ![Text]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchDeleteTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bdtCatalogId' - The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+-- * 'bdtCatalogId' - The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
 --
--- * 'bdtDatabaseName' - The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.
+-- * 'bdtDatabaseName' - The name of the catalog database in which the tables to delete reside. For Hive compatibility, this name is entirely lowercase.
 --
 -- * 'bdtTablesToDelete' - A list of the table to delete.
 batchDeleteTable
     :: Text -- ^ 'bdtDatabaseName'
     -> BatchDeleteTable
-batchDeleteTable pDatabaseName_ =
-  BatchDeleteTable'
-    { _bdtCatalogId = Nothing
-    , _bdtDatabaseName = pDatabaseName_
-    , _bdtTablesToDelete = mempty
-    }
+batchDeleteTable pDatabaseName_
+  = BatchDeleteTable'{_bdtCatalogId = Nothing,
+                      _bdtDatabaseName = pDatabaseName_,
+                      _bdtTablesToDelete = mempty}
 
-
--- | The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
 bdtCatalogId :: Lens' BatchDeleteTable (Maybe Text)
 bdtCatalogId = lens _bdtCatalogId (\ s a -> s{_bdtCatalogId = a})
 
--- | The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.
+-- | The name of the catalog database in which the tables to delete reside. For Hive compatibility, this name is entirely lowercase.
 bdtDatabaseName :: Lens' BatchDeleteTable Text
 bdtDatabaseName = lens _bdtDatabaseName (\ s a -> s{_bdtDatabaseName = a})
 
@@ -123,11 +119,13 @@ instance ToQuery BatchDeleteTable where
         toQuery = const mempty
 
 -- | /See:/ 'batchDeleteTableResponse' smart constructor.
-data BatchDeleteTableResponse = BatchDeleteTableResponse'
-  { _bdtrsErrors         :: !(Maybe [TableError])
-  , _bdtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeleteTableResponse = BatchDeleteTableResponse'{_bdtrsErrors
+                                                          ::
+                                                          !(Maybe [TableError]),
+                                                          _bdtrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'BatchDeleteTableResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +137,9 @@ data BatchDeleteTableResponse = BatchDeleteTableResponse'
 batchDeleteTableResponse
     :: Int -- ^ 'bdtrsResponseStatus'
     -> BatchDeleteTableResponse
-batchDeleteTableResponse pResponseStatus_ =
-  BatchDeleteTableResponse'
-    {_bdtrsErrors = Nothing, _bdtrsResponseStatus = pResponseStatus_}
-
+batchDeleteTableResponse pResponseStatus_
+  = BatchDeleteTableResponse'{_bdtrsErrors = Nothing,
+                              _bdtrsResponseStatus = pResponseStatus_}
 
 -- | A list of errors encountered in attempting to delete the specified tables.
 bdtrsErrors :: Lens' BatchDeleteTableResponse [TableError]

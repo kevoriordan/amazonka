@@ -21,6 +21,8 @@
 -- Deletes a specified service within a cluster. You can delete a service if you have no running tasks in it and the desired task count is zero. If the service is actively maintaining tasks, you cannot delete it, and you must update the service to a desired task count of zero. For more information, see 'UpdateService' .
 --
 --
+-- /Important:/ If you attempt to create a new service with the same name as an existing service in either @ACTIVE@ or @DRAINING@ status, you receive an error.
+--
 module Network.AWS.ECS.DeleteService
     (
     -- * Creating a Request
@@ -28,6 +30,7 @@ module Network.AWS.ECS.DeleteService
     , DeleteService
     -- * Request Lenses
     , dsCluster
+    , dsForce
     , dsService
 
     -- * Destructuring the Response
@@ -46,11 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteService' smart constructor.
-data DeleteService = DeleteService'
-  { _dsCluster :: !(Maybe Text)
-  , _dsService :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteService = DeleteService'{_dsCluster ::
+                                    !(Maybe Text),
+                                    _dsForce :: !(Maybe Bool),
+                                    _dsService :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteService' with the minimum fields required to make a request.
 --
@@ -58,17 +61,23 @@ data DeleteService = DeleteService'
 --
 -- * 'dsCluster' - The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to delete. If you do not specify a cluster, the default cluster is assumed.
 --
+-- * 'dsForce' - If @true@ , allows you to delete a service even if it has not been scaled down to zero tasks. It is only necessary to use this if the service is using the @REPLICA@ scheduling strategy.
+--
 -- * 'dsService' - The name of the service to delete.
 deleteService
     :: Text -- ^ 'dsService'
     -> DeleteService
-deleteService pService_ =
-  DeleteService' {_dsCluster = Nothing, _dsService = pService_}
-
+deleteService pService_
+  = DeleteService'{_dsCluster = Nothing,
+                   _dsForce = Nothing, _dsService = pService_}
 
 -- | The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to delete. If you do not specify a cluster, the default cluster is assumed.
 dsCluster :: Lens' DeleteService (Maybe Text)
 dsCluster = lens _dsCluster (\ s a -> s{_dsCluster = a})
+
+-- | If @true@ , allows you to delete a service even if it has not been scaled down to zero tasks. It is only necessary to use this if the service is using the @REPLICA@ scheduling strategy.
+dsForce :: Lens' DeleteService (Maybe Bool)
+dsForce = lens _dsForce (\ s a -> s{_dsForce = a})
 
 -- | The name of the service to delete.
 dsService :: Lens' DeleteService Text
@@ -102,6 +111,7 @@ instance ToJSON DeleteService where
           = object
               (catMaybes
                  [("cluster" .=) <$> _dsCluster,
+                  ("force" .=) <$> _dsForce,
                   Just ("service" .= _dsService)])
 
 instance ToPath DeleteService where
@@ -111,11 +121,12 @@ instance ToQuery DeleteService where
         toQuery = const mempty
 
 -- | /See:/ 'deleteServiceResponse' smart constructor.
-data DeleteServiceResponse = DeleteServiceResponse'
-  { _dsrsService        :: !(Maybe ContainerService)
-  , _dsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteServiceResponse = DeleteServiceResponse'{_dsrsService
+                                                    ::
+                                                    !(Maybe ContainerService),
+                                                    _dsrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteServiceResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +138,9 @@ data DeleteServiceResponse = DeleteServiceResponse'
 deleteServiceResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DeleteServiceResponse
-deleteServiceResponse pResponseStatus_ =
-  DeleteServiceResponse'
-    {_dsrsService = Nothing, _dsrsResponseStatus = pResponseStatus_}
-
+deleteServiceResponse pResponseStatus_
+  = DeleteServiceResponse'{_dsrsService = Nothing,
+                           _dsrsResponseStatus = pResponseStatus_}
 
 -- | The full description of the deleted service.
 dsrsService :: Lens' DeleteServiceResponse (Maybe ContainerService)

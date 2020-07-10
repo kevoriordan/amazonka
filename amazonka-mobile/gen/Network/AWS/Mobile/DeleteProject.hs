@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delets a project in AWS Mobile Hub.
+-- Delets a project in AWS Mobile Hub. 
 --
 --
 module Network.AWS.Mobile.DeleteProject
@@ -45,28 +45,27 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure used to request a project be deleted.
+-- | Request structure used to request a project be deleted. 
 --
 --
 --
 -- /See:/ 'deleteProject' smart constructor.
-newtype DeleteProject = DeleteProject'
-  { _dpProjectId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteProject = DeleteProject'{_dpProjectId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpProjectId' - Unique project identifier.
+-- * 'dpProjectId' - Unique project identifier. 
 deleteProject
     :: Text -- ^ 'dpProjectId'
     -> DeleteProject
-deleteProject pProjectId_ = DeleteProject' {_dpProjectId = pProjectId_}
+deleteProject pProjectId_
+  = DeleteProject'{_dpProjectId = pProjectId_}
 
-
--- | Unique project identifier.
+-- | Unique project identifier. 
 dpProjectId :: Lens' DeleteProject Text
 dpProjectId = lens _dpProjectId (\ s a -> s{_dpProjectId = a})
 
@@ -99,43 +98,42 @@ instance ToPath DeleteProject where
 instance ToQuery DeleteProject where
         toQuery = const mempty
 
--- | Result structure used in response to request to delete a project.
+-- | Result structure used in response to request to delete a project. 
 --
 --
 --
 -- /See:/ 'deleteProjectResponse' smart constructor.
-data DeleteProjectResponse = DeleteProjectResponse'
-  { _dprsDeletedResources  :: !(Maybe [Resource])
-  , _dprsOrphanedResources :: !(Maybe [Resource])
-  , _dprsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteProjectResponse = DeleteProjectResponse'{_dprsDeletedResources
+                                                    :: !(Maybe [Resource]),
+                                                    _dprsOrphanedResources ::
+                                                    !(Maybe [Resource]),
+                                                    _dprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteProjectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dprsDeletedResources' - Resources which were deleted.
+-- * 'dprsDeletedResources' - Resources which were deleted. 
 --
--- * 'dprsOrphanedResources' - Resources which were not deleted, due to a risk of losing potentially important data or files.
+-- * 'dprsOrphanedResources' - Resources which were not deleted, due to a risk of losing potentially important data or files. 
 --
 -- * 'dprsResponseStatus' - -- | The response status code.
 deleteProjectResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DeleteProjectResponse
-deleteProjectResponse pResponseStatus_ =
-  DeleteProjectResponse'
-    { _dprsDeletedResources = Nothing
-    , _dprsOrphanedResources = Nothing
-    , _dprsResponseStatus = pResponseStatus_
-    }
+deleteProjectResponse pResponseStatus_
+  = DeleteProjectResponse'{_dprsDeletedResources =
+                             Nothing,
+                           _dprsOrphanedResources = Nothing,
+                           _dprsResponseStatus = pResponseStatus_}
 
-
--- | Resources which were deleted.
+-- | Resources which were deleted. 
 dprsDeletedResources :: Lens' DeleteProjectResponse [Resource]
 dprsDeletedResources = lens _dprsDeletedResources (\ s a -> s{_dprsDeletedResources = a}) . _Default . _Coerce
 
--- | Resources which were not deleted, due to a risk of losing potentially important data or files.
+-- | Resources which were not deleted, due to a risk of losing potentially important data or files. 
 dprsOrphanedResources :: Lens' DeleteProjectResponse [Resource]
 dprsOrphanedResources = lens _dprsOrphanedResources (\ s a -> s{_dprsOrphanedResources = a}) . _Default . _Coerce
 

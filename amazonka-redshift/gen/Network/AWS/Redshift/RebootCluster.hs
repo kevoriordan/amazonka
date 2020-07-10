@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to @rebooting@ . A cluster event is created when the reboot is completed. Any pending cluster modifications (see 'ModifyCluster' ) are applied at this reboot. For more information about managing clusters, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html Amazon Redshift Clusters> in the /Amazon Redshift Cluster Management Guide/ .
+-- Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to @rebooting@ . A cluster event is created when the reboot is completed. Any pending cluster modifications (see 'ModifyCluster' ) are applied at this reboot. For more information about managing clusters, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html Amazon Redshift Clusters> in the /Amazon Redshift Cluster Management Guide/ . 
 --
 --
 module Network.AWS.Redshift.RebootCluster
@@ -27,14 +27,14 @@ module Network.AWS.Redshift.RebootCluster
       rebootCluster
     , RebootCluster
     -- * Request Lenses
-    , rcClusterIdentifier
+    , rebClusterIdentifier
 
     -- * Destructuring the Response
     , rebootClusterResponse
     , RebootClusterResponse
     -- * Response Lenses
-    , rcrsCluster
-    , rcrsResponseStatus
+    , rrsCluster
+    , rrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -44,31 +44,30 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'rebootCluster' smart constructor.
-newtype RebootCluster = RebootCluster'
-  { _rcClusterIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RebootCluster = RebootCluster'{_rebClusterIdentifier
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RebootCluster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcClusterIdentifier' - The cluster identifier.
+-- * 'rebClusterIdentifier' - The cluster identifier.
 rebootCluster
-    :: Text -- ^ 'rcClusterIdentifier'
+    :: Text -- ^ 'rebClusterIdentifier'
     -> RebootCluster
-rebootCluster pClusterIdentifier_ =
-  RebootCluster' {_rcClusterIdentifier = pClusterIdentifier_}
-
+rebootCluster pClusterIdentifier_
+  = RebootCluster'{_rebClusterIdentifier =
+                     pClusterIdentifier_}
 
 -- | The cluster identifier.
-rcClusterIdentifier :: Lens' RebootCluster Text
-rcClusterIdentifier = lens _rcClusterIdentifier (\ s a -> s{_rcClusterIdentifier = a})
+rebClusterIdentifier :: Lens' RebootCluster Text
+rebClusterIdentifier = lens _rebClusterIdentifier (\ s a -> s{_rebClusterIdentifier = a})
 
 instance AWSRequest RebootCluster where
         type Rs RebootCluster = RebootClusterResponse
@@ -94,36 +93,35 @@ instance ToQuery RebootCluster where
           = mconcat
               ["Action" =: ("RebootCluster" :: ByteString),
                "Version" =: ("2012-12-01" :: ByteString),
-               "ClusterIdentifier" =: _rcClusterIdentifier]
+               "ClusterIdentifier" =: _rebClusterIdentifier]
 
 -- | /See:/ 'rebootClusterResponse' smart constructor.
-data RebootClusterResponse = RebootClusterResponse'
-  { _rcrsCluster        :: !(Maybe Cluster)
-  , _rcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootClusterResponse = RebootClusterResponse'{_rrsCluster
+                                                    :: !(Maybe Cluster),
+                                                    _rrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RebootClusterResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcrsCluster' - Undocumented member.
+-- * 'rrsCluster' - Undocumented member.
 --
--- * 'rcrsResponseStatus' - -- | The response status code.
+-- * 'rrsResponseStatus' - -- | The response status code.
 rebootClusterResponse
-    :: Int -- ^ 'rcrsResponseStatus'
+    :: Int -- ^ 'rrsResponseStatus'
     -> RebootClusterResponse
-rebootClusterResponse pResponseStatus_ =
-  RebootClusterResponse'
-    {_rcrsCluster = Nothing, _rcrsResponseStatus = pResponseStatus_}
-
+rebootClusterResponse pResponseStatus_
+  = RebootClusterResponse'{_rrsCluster = Nothing,
+                           _rrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
-rcrsCluster :: Lens' RebootClusterResponse (Maybe Cluster)
-rcrsCluster = lens _rcrsCluster (\ s a -> s{_rcrsCluster = a})
+rrsCluster :: Lens' RebootClusterResponse (Maybe Cluster)
+rrsCluster = lens _rrsCluster (\ s a -> s{_rrsCluster = a})
 
 -- | -- | The response status code.
-rcrsResponseStatus :: Lens' RebootClusterResponse Int
-rcrsResponseStatus = lens _rcrsResponseStatus (\ s a -> s{_rcrsResponseStatus = a})
+rrsResponseStatus :: Lens' RebootClusterResponse Int
+rrsResponseStatus = lens _rrsResponseStatus (\ s a -> s{_rrsResponseStatus = a})
 
 instance NFData RebootClusterResponse where

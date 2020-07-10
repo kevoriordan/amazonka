@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteConfigurationAggregator' smart constructor.
-newtype DeleteConfigurationAggregator = DeleteConfigurationAggregator'
-  { _dcaConfigurationAggregatorName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConfigurationAggregator = DeleteConfigurationAggregator'{_dcaConfigurationAggregatorName
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteConfigurationAggregator' with the minimum fields required to make a request.
 --
@@ -55,10 +55,10 @@ newtype DeleteConfigurationAggregator = DeleteConfigurationAggregator'
 deleteConfigurationAggregator
     :: Text -- ^ 'dcaConfigurationAggregatorName'
     -> DeleteConfigurationAggregator
-deleteConfigurationAggregator pConfigurationAggregatorName_ =
-  DeleteConfigurationAggregator'
-    {_dcaConfigurationAggregatorName = pConfigurationAggregatorName_}
-
+deleteConfigurationAggregator
+  pConfigurationAggregatorName_
+  = DeleteConfigurationAggregator'{_dcaConfigurationAggregatorName
+                                     = pConfigurationAggregatorName_}
 
 -- | The name of the configuration aggregator.
 dcaConfigurationAggregatorName :: Lens' DeleteConfigurationAggregator Text
@@ -102,17 +102,16 @@ instance ToQuery DeleteConfigurationAggregator where
         toQuery = const mempty
 
 -- | /See:/ 'deleteConfigurationAggregatorResponse' smart constructor.
-data DeleteConfigurationAggregatorResponse =
-  DeleteConfigurationAggregatorResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConfigurationAggregatorResponse = DeleteConfigurationAggregatorResponse'
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DeleteConfigurationAggregatorResponse' with the minimum fields required to make a request.
 --
 deleteConfigurationAggregatorResponse
     :: DeleteConfigurationAggregatorResponse
-deleteConfigurationAggregatorResponse = DeleteConfigurationAggregatorResponse'
-
+deleteConfigurationAggregatorResponse
+  = DeleteConfigurationAggregatorResponse'
 
 instance NFData DeleteConfigurationAggregatorResponse
          where

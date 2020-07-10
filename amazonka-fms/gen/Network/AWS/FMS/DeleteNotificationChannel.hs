@@ -40,17 +40,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteNotificationChannel' smart constructor.
-data DeleteNotificationChannel =
-  DeleteNotificationChannel'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNotificationChannel = DeleteNotificationChannel'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteNotificationChannel' with the minimum fields required to make a request.
 --
 deleteNotificationChannel
     :: DeleteNotificationChannel
-deleteNotificationChannel = DeleteNotificationChannel'
-
+deleteNotificationChannel
+  = DeleteNotificationChannel'
 
 instance AWSRequest DeleteNotificationChannel where
         type Rs DeleteNotificationChannel =
@@ -83,17 +82,16 @@ instance ToQuery DeleteNotificationChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteNotificationChannelResponse' smart constructor.
-data DeleteNotificationChannelResponse =
-  DeleteNotificationChannelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNotificationChannelResponse = DeleteNotificationChannelResponse'
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteNotificationChannelResponse' with the minimum fields required to make a request.
 --
 deleteNotificationChannelResponse
     :: DeleteNotificationChannelResponse
-deleteNotificationChannelResponse = DeleteNotificationChannelResponse'
-
+deleteNotificationChannelResponse
+  = DeleteNotificationChannelResponse'
 
 instance NFData DeleteNotificationChannelResponse
          where

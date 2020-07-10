@@ -51,11 +51,10 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'describeGroup' smart constructor.
-data DescribeGroup = DescribeGroup'
-  { _dgOrganizationId :: !Text
-  , _dgGroupId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeGroup = DescribeGroup'{_dgOrganizationId
+                                    :: !Text,
+                                    _dgGroupId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeGroup' with the minimum fields required to make a request.
 --
@@ -68,9 +67,10 @@ describeGroup
     :: Text -- ^ 'dgOrganizationId'
     -> Text -- ^ 'dgGroupId'
     -> DescribeGroup
-describeGroup pOrganizationId_ pGroupId_ =
-  DescribeGroup' {_dgOrganizationId = pOrganizationId_, _dgGroupId = pGroupId_}
-
+describeGroup pOrganizationId_ pGroupId_
+  = DescribeGroup'{_dgOrganizationId =
+                     pOrganizationId_,
+                   _dgGroupId = pGroupId_}
 
 -- | The identifier for the organization under which the group exists.
 dgOrganizationId :: Lens' DescribeGroup Text
@@ -121,16 +121,21 @@ instance ToQuery DescribeGroup where
         toQuery = const mempty
 
 -- | /See:/ 'describeGroupResponse' smart constructor.
-data DescribeGroupResponse = DescribeGroupResponse'
-  { _desrsEmail          :: !(Maybe Text)
-  , _desrsState          :: !(Maybe EntityState)
-  , _desrsDisabledDate   :: !(Maybe POSIX)
-  , _desrsName           :: !(Maybe Text)
-  , _desrsGroupId        :: !(Maybe Text)
-  , _desrsEnabledDate    :: !(Maybe POSIX)
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeGroupResponse = DescribeGroupResponse'{_desrsEmail
+                                                    :: !(Maybe Text),
+                                                    _desrsState ::
+                                                    !(Maybe EntityState),
+                                                    _desrsDisabledDate ::
+                                                    !(Maybe POSIX),
+                                                    _desrsName :: !(Maybe Text),
+                                                    _desrsGroupId ::
+                                                    !(Maybe Text),
+                                                    _desrsEnabledDate ::
+                                                    !(Maybe POSIX),
+                                                    _desrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeGroupResponse' with the minimum fields required to make a request.
 --
@@ -138,41 +143,36 @@ data DescribeGroupResponse = DescribeGroupResponse'
 --
 -- * 'desrsEmail' - The email of the described group.
 --
--- * 'desrsState' - The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).
+-- * 'desrsState' - The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).
 --
--- * 'desrsDisabledDate' - The date and time when a user was deregistered from Amazon WorkMail, in UNIX epoch time format.
+-- * 'desrsDisabledDate' - The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.
 --
 -- * 'desrsName' - The name of the described group.
 --
 -- * 'desrsGroupId' - The identifier of the described group.
 --
--- * 'desrsEnabledDate' - The date and time when a user was registered to Amazon WorkMail, in UNIX epoch time format.
+-- * 'desrsEnabledDate' - The date and time when a user was registered to WorkMail, in UNIX epoch time format.
 --
 -- * 'desrsResponseStatus' - -- | The response status code.
 describeGroupResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeGroupResponse
-describeGroupResponse pResponseStatus_ =
-  DescribeGroupResponse'
-    { _desrsEmail = Nothing
-    , _desrsState = Nothing
-    , _desrsDisabledDate = Nothing
-    , _desrsName = Nothing
-    , _desrsGroupId = Nothing
-    , _desrsEnabledDate = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
-
+describeGroupResponse pResponseStatus_
+  = DescribeGroupResponse'{_desrsEmail = Nothing,
+                           _desrsState = Nothing, _desrsDisabledDate = Nothing,
+                           _desrsName = Nothing, _desrsGroupId = Nothing,
+                           _desrsEnabledDate = Nothing,
+                           _desrsResponseStatus = pResponseStatus_}
 
 -- | The email of the described group.
 desrsEmail :: Lens' DescribeGroupResponse (Maybe Text)
 desrsEmail = lens _desrsEmail (\ s a -> s{_desrsEmail = a})
 
--- | The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).
+-- | The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).
 desrsState :: Lens' DescribeGroupResponse (Maybe EntityState)
 desrsState = lens _desrsState (\ s a -> s{_desrsState = a})
 
--- | The date and time when a user was deregistered from Amazon WorkMail, in UNIX epoch time format.
+-- | The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.
 desrsDisabledDate :: Lens' DescribeGroupResponse (Maybe UTCTime)
 desrsDisabledDate = lens _desrsDisabledDate (\ s a -> s{_desrsDisabledDate = a}) . mapping _Time
 
@@ -184,7 +184,7 @@ desrsName = lens _desrsName (\ s a -> s{_desrsName = a})
 desrsGroupId :: Lens' DescribeGroupResponse (Maybe Text)
 desrsGroupId = lens _desrsGroupId (\ s a -> s{_desrsGroupId = a})
 
--- | The date and time when a user was registered to Amazon WorkMail, in UNIX epoch time format.
+-- | The date and time when a user was registered to WorkMail, in UNIX epoch time format.
 desrsEnabledDate :: Lens' DescribeGroupResponse (Maybe UTCTime)
 desrsEnabledDate = lens _desrsEnabledDate (\ s a -> s{_desrsEnabledDate = a}) . mapping _Time
 

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+-- Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
 module Network.AWS.Greengrass.CreateGroup
     (
     -- * Creating a Request
@@ -28,6 +28,7 @@ module Network.AWS.Greengrass.CreateGroup
     , cgAmznClientToken
     , cgInitialVersion
     , cgName
+    , cgTags
 
     -- * Destructuring the Response
     , createGroupResponse
@@ -51,12 +52,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createGroup' smart constructor.
-data CreateGroup = CreateGroup'
-  { _cgAmznClientToken :: !(Maybe Text)
-  , _cgInitialVersion  :: !(Maybe GroupVersion)
-  , _cgName            :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGroup = CreateGroup'{_cgAmznClientToken ::
+                                !(Maybe Text),
+                                _cgInitialVersion :: !(Maybe GroupVersion),
+                                _cgName :: !(Maybe Text),
+                                _cgTags :: !(Maybe (Map Text Text))}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateGroup' with the minimum fields required to make a request.
 --
@@ -67,15 +68,14 @@ data CreateGroup = CreateGroup'
 -- * 'cgInitialVersion' - Information about the initial version of the group.
 --
 -- * 'cgName' - The name of the group.
+--
+-- * 'cgTags' - Tag(s) to add to the new resource.
 createGroup
     :: CreateGroup
-createGroup =
-  CreateGroup'
-    { _cgAmznClientToken = Nothing
-    , _cgInitialVersion = Nothing
-    , _cgName = Nothing
-    }
-
+createGroup
+  = CreateGroup'{_cgAmznClientToken = Nothing,
+                 _cgInitialVersion = Nothing, _cgName = Nothing,
+                 _cgTags = Nothing}
 
 -- | A client token used to correlate requests and responses.
 cgAmznClientToken :: Lens' CreateGroup (Maybe Text)
@@ -88,6 +88,10 @@ cgInitialVersion = lens _cgInitialVersion (\ s a -> s{_cgInitialVersion = a})
 -- | The name of the group.
 cgName :: Lens' CreateGroup (Maybe Text)
 cgName = lens _cgName (\ s a -> s{_cgName = a})
+
+-- | Tag(s) to add to the new resource.
+cgTags :: Lens' CreateGroup (HashMap Text Text)
+cgTags = lens _cgTags (\ s a -> s{_cgTags = a}) . _Default . _Map
 
 instance AWSRequest CreateGroup where
         type Rs CreateGroup = CreateGroupResponse
@@ -120,7 +124,7 @@ instance ToJSON CreateGroup where
           = object
               (catMaybes
                  [("InitialVersion" .=) <$> _cgInitialVersion,
-                  ("Name" .=) <$> _cgName])
+                  ("Name" .=) <$> _cgName, ("tags" .=) <$> _cgTags])
 
 instance ToPath CreateGroup where
         toPath = const "/greengrass/groups"
@@ -129,23 +133,25 @@ instance ToQuery CreateGroup where
         toQuery = const mempty
 
 -- | /See:/ 'createGroupResponse' smart constructor.
-data CreateGroupResponse = CreateGroupResponse'
-  { _cgrsLatestVersionARN     :: !(Maybe Text)
-  , _cgrsARN                  :: !(Maybe Text)
-  , _cgrsName                 :: !(Maybe Text)
-  , _cgrsCreationTimestamp    :: !(Maybe Text)
-  , _cgrsId                   :: !(Maybe Text)
-  , _cgrsLatestVersion        :: !(Maybe Text)
-  , _cgrsLastUpdatedTimestamp :: !(Maybe Text)
-  , _cgrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGroupResponse = CreateGroupResponse'{_cgrsLatestVersionARN
+                                                :: !(Maybe Text),
+                                                _cgrsARN :: !(Maybe Text),
+                                                _cgrsName :: !(Maybe Text),
+                                                _cgrsCreationTimestamp ::
+                                                !(Maybe Text),
+                                                _cgrsId :: !(Maybe Text),
+                                                _cgrsLatestVersion ::
+                                                !(Maybe Text),
+                                                _cgrsLastUpdatedTimestamp ::
+                                                !(Maybe Text),
+                                                _cgrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateGroupResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cgrsLatestVersionARN' - The ARN of the latest version of the definition.
+-- * 'cgrsLatestVersionARN' - The ARN of the latest version associated with the definition.
 --
 -- * 'cgrsARN' - The ARN of the definition.
 --
@@ -155,7 +161,7 @@ data CreateGroupResponse = CreateGroupResponse'
 --
 -- * 'cgrsId' - The ID of the definition.
 --
--- * 'cgrsLatestVersion' - The latest version of the definition.
+-- * 'cgrsLatestVersion' - The ID of the latest version associated with the definition.
 --
 -- * 'cgrsLastUpdatedTimestamp' - The time, in milliseconds since the epoch, when the definition was last updated.
 --
@@ -163,20 +169,16 @@ data CreateGroupResponse = CreateGroupResponse'
 createGroupResponse
     :: Int -- ^ 'cgrsResponseStatus'
     -> CreateGroupResponse
-createGroupResponse pResponseStatus_ =
-  CreateGroupResponse'
-    { _cgrsLatestVersionARN = Nothing
-    , _cgrsARN = Nothing
-    , _cgrsName = Nothing
-    , _cgrsCreationTimestamp = Nothing
-    , _cgrsId = Nothing
-    , _cgrsLatestVersion = Nothing
-    , _cgrsLastUpdatedTimestamp = Nothing
-    , _cgrsResponseStatus = pResponseStatus_
-    }
+createGroupResponse pResponseStatus_
+  = CreateGroupResponse'{_cgrsLatestVersionARN =
+                           Nothing,
+                         _cgrsARN = Nothing, _cgrsName = Nothing,
+                         _cgrsCreationTimestamp = Nothing, _cgrsId = Nothing,
+                         _cgrsLatestVersion = Nothing,
+                         _cgrsLastUpdatedTimestamp = Nothing,
+                         _cgrsResponseStatus = pResponseStatus_}
 
-
--- | The ARN of the latest version of the definition.
+-- | The ARN of the latest version associated with the definition.
 cgrsLatestVersionARN :: Lens' CreateGroupResponse (Maybe Text)
 cgrsLatestVersionARN = lens _cgrsLatestVersionARN (\ s a -> s{_cgrsLatestVersionARN = a})
 
@@ -196,7 +198,7 @@ cgrsCreationTimestamp = lens _cgrsCreationTimestamp (\ s a -> s{_cgrsCreationTim
 cgrsId :: Lens' CreateGroupResponse (Maybe Text)
 cgrsId = lens _cgrsId (\ s a -> s{_cgrsId = a})
 
--- | The latest version of the definition.
+-- | The ID of the latest version associated with the definition.
 cgrsLatestVersion :: Lens' CreateGroupResponse (Maybe Text)
 cgrsLatestVersion = lens _cgrsLatestVersion (\ s a -> s{_cgrsLatestVersion = a})
 

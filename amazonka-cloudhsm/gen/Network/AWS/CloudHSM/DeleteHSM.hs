@@ -53,10 +53,8 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteHSM' smart constructor.
-newtype DeleteHSM = DeleteHSM'
-  { _dhHSMARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteHSM = DeleteHSM'{_dhHSMARN :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteHSM' with the minimum fields required to make a request.
 --
@@ -66,8 +64,7 @@ newtype DeleteHSM = DeleteHSM'
 deleteHSM
     :: Text -- ^ 'dhHSMARN'
     -> DeleteHSM
-deleteHSM pHSMARN_ = DeleteHSM' {_dhHSMARN = pHSMARN_}
-
+deleteHSM pHSMARN_ = DeleteHSM'{_dhHSMARN = pHSMARN_}
 
 -- | The ARN of the HSM to delete.
 dhHSMARN :: Lens' DeleteHSM Text
@@ -110,11 +107,10 @@ instance ToQuery DeleteHSM where
 --
 --
 -- /See:/ 'deleteHSMResponse' smart constructor.
-data DeleteHSMResponse = DeleteHSMResponse'
-  { _dhsmrsResponseStatus :: !Int
-  , _dhsmrsStatus         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteHSMResponse = DeleteHSMResponse'{_dhsmrsResponseStatus
+                                            :: !Int,
+                                            _dhsmrsStatus :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteHSMResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +123,10 @@ deleteHSMResponse
     :: Int -- ^ 'dhsmrsResponseStatus'
     -> Text -- ^ 'dhsmrsStatus'
     -> DeleteHSMResponse
-deleteHSMResponse pResponseStatus_ pStatus_ =
-  DeleteHSMResponse'
-    {_dhsmrsResponseStatus = pResponseStatus_, _dhsmrsStatus = pStatus_}
-
+deleteHSMResponse pResponseStatus_ pStatus_
+  = DeleteHSMResponse'{_dhsmrsResponseStatus =
+                         pResponseStatus_,
+                       _dhsmrsStatus = pStatus_}
 
 -- | -- | The response status code.
 dhsmrsResponseStatus :: Lens' DeleteHSMResponse Int

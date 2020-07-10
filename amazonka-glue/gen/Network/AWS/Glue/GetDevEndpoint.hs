@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves information about a specified DevEndpoint.
+-- Retrieves information about a specified development endpoint.
 --
 --
 module Network.AWS.Glue.GetDevEndpoint
@@ -33,8 +33,8 @@ module Network.AWS.Glue.GetDevEndpoint
     , getDevEndpointResponse
     , GetDevEndpointResponse
     -- * Response Lenses
-    , gdedrsDevEndpoint
-    , gdedrsResponseStatus
+    , gtdvendpntrsDevEndpoint
+    , gtdvendpntrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -45,24 +45,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDevEndpoint' smart constructor.
-newtype GetDevEndpoint = GetDevEndpoint'
-  { _gdeEndpointName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDevEndpoint = GetDevEndpoint'{_gdeEndpointName
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDevEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdeEndpointName' - Name of the DevEndpoint for which to retrieve information.
+-- * 'gdeEndpointName' - Name of the @DevEndpoint@ to retrieve information for.
 getDevEndpoint
     :: Text -- ^ 'gdeEndpointName'
     -> GetDevEndpoint
-getDevEndpoint pEndpointName_ =
-  GetDevEndpoint' {_gdeEndpointName = pEndpointName_}
+getDevEndpoint pEndpointName_
+  = GetDevEndpoint'{_gdeEndpointName = pEndpointName_}
 
-
--- | Name of the DevEndpoint for which to retrieve information.
+-- | Name of the @DevEndpoint@ to retrieve information for.
 gdeEndpointName :: Lens' GetDevEndpoint Text
 gdeEndpointName = lens _gdeEndpointName (\ s a -> s{_gdeEndpointName = a})
 
@@ -101,33 +99,34 @@ instance ToQuery GetDevEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'getDevEndpointResponse' smart constructor.
-data GetDevEndpointResponse = GetDevEndpointResponse'
-  { _gdedrsDevEndpoint    :: !(Maybe DevEndpoint)
-  , _gdedrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDevEndpointResponse = GetDevEndpointResponse'{_gtdvendpntrsDevEndpoint
+                                                      :: !(Maybe DevEndpoint),
+                                                      _gtdvendpntrsResponseStatus
+                                                      :: !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetDevEndpointResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdedrsDevEndpoint' - A DevEndpoint definition.
+-- * 'gtdvendpntrsDevEndpoint' - A @DevEndpoint@ definition.
 --
--- * 'gdedrsResponseStatus' - -- | The response status code.
+-- * 'gtdvendpntrsResponseStatus' - -- | The response status code.
 getDevEndpointResponse
-    :: Int -- ^ 'gdedrsResponseStatus'
+    :: Int -- ^ 'gtdvendpntrsResponseStatus'
     -> GetDevEndpointResponse
-getDevEndpointResponse pResponseStatus_ =
-  GetDevEndpointResponse'
-    {_gdedrsDevEndpoint = Nothing, _gdedrsResponseStatus = pResponseStatus_}
+getDevEndpointResponse pResponseStatus_
+  = GetDevEndpointResponse'{_gtdvendpntrsDevEndpoint =
+                              Nothing,
+                            _gtdvendpntrsResponseStatus = pResponseStatus_}
 
-
--- | A DevEndpoint definition.
-gdedrsDevEndpoint :: Lens' GetDevEndpointResponse (Maybe DevEndpoint)
-gdedrsDevEndpoint = lens _gdedrsDevEndpoint (\ s a -> s{_gdedrsDevEndpoint = a})
+-- | A @DevEndpoint@ definition.
+gtdvendpntrsDevEndpoint :: Lens' GetDevEndpointResponse (Maybe DevEndpoint)
+gtdvendpntrsDevEndpoint = lens _gtdvendpntrsDevEndpoint (\ s a -> s{_gtdvendpntrsDevEndpoint = a})
 
 -- | -- | The response status code.
-gdedrsResponseStatus :: Lens' GetDevEndpointResponse Int
-gdedrsResponseStatus = lens _gdedrsResponseStatus (\ s a -> s{_gdedrsResponseStatus = a})
+gtdvendpntrsResponseStatus :: Lens' GetDevEndpointResponse Int
+gtdvendpntrsResponseStatus = lens _gtdvendpntrsResponseStatus (\ s a -> s{_gtdvendpntrsResponseStatus = a})
 
 instance NFData GetDevEndpointResponse where

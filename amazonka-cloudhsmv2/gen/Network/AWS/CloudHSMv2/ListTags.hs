@@ -53,12 +53,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTags' smart constructor.
-data ListTags = ListTags'
-  { _ltNextToken  :: !(Maybe Text)
-  , _ltMaxResults :: !(Maybe Nat)
-  , _ltResourceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTags = ListTags'{_ltNextToken ::
+                          !(Maybe Text),
+                          _ltMaxResults :: !(Maybe Nat),
+                          _ltResourceId :: !Text}
+                  deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTags' with the minimum fields required to make a request.
 --
@@ -72,13 +71,10 @@ data ListTags = ListTags'
 listTags
     :: Text -- ^ 'ltResourceId'
     -> ListTags
-listTags pResourceId_ =
-  ListTags'
-    { _ltNextToken = Nothing
-    , _ltMaxResults = Nothing
-    , _ltResourceId = pResourceId_
-    }
-
+listTags pResourceId_
+  = ListTags'{_ltNextToken = Nothing,
+              _ltMaxResults = Nothing,
+              _ltResourceId = pResourceId_}
 
 -- | The @NextToken@ value that you received in the previous response. Use this value to get more tags.
 ltNextToken :: Lens' ListTags (Maybe Text)
@@ -137,12 +133,11 @@ instance ToQuery ListTags where
         toQuery = const mempty
 
 -- | /See:/ 'listTagsResponse' smart constructor.
-data ListTagsResponse = ListTagsResponse'
-  { _ltrsNextToken      :: !(Maybe Text)
-  , _ltrsResponseStatus :: !Int
-  , _ltrsTagList        :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsResponse = ListTagsResponse'{_ltrsNextToken
+                                          :: !(Maybe Text),
+                                          _ltrsResponseStatus :: !Int,
+                                          _ltrsTagList :: ![Tag]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
 --
@@ -156,13 +151,10 @@ data ListTagsResponse = ListTagsResponse'
 listTagsResponse
     :: Int -- ^ 'ltrsResponseStatus'
     -> ListTagsResponse
-listTagsResponse pResponseStatus_ =
-  ListTagsResponse'
-    { _ltrsNextToken = Nothing
-    , _ltrsResponseStatus = pResponseStatus_
-    , _ltrsTagList = mempty
-    }
-
+listTagsResponse pResponseStatus_
+  = ListTagsResponse'{_ltrsNextToken = Nothing,
+                      _ltrsResponseStatus = pResponseStatus_,
+                      _ltrsTagList = mempty}
 
 -- | An opaque string that indicates that the response contains only a subset of tags. Use this value in a subsequent @ListTags@ request to get more tags.
 ltrsNextToken :: Lens' ListTagsResponse (Maybe Text)

@@ -50,10 +50,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getTopicRule' smart constructor.
-newtype GetTopicRule = GetTopicRule'
-  { _gtrRuleName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetTopicRule = GetTopicRule'{_gtrRuleName ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTopicRule' with the minimum fields required to make a request.
 --
@@ -63,8 +62,8 @@ newtype GetTopicRule = GetTopicRule'
 getTopicRule
     :: Text -- ^ 'gtrRuleName'
     -> GetTopicRule
-getTopicRule pRuleName_ = GetTopicRule' {_gtrRuleName = pRuleName_}
-
+getTopicRule pRuleName_
+  = GetTopicRule'{_gtrRuleName = pRuleName_}
 
 -- | The name of the rule.
 gtrRuleName :: Lens' GetTopicRule Text
@@ -99,12 +98,12 @@ instance ToQuery GetTopicRule where
 --
 --
 -- /See:/ 'getTopicRuleResponse' smart constructor.
-data GetTopicRuleResponse = GetTopicRuleResponse'
-  { _gtrrsRule           :: !(Maybe TopicRule)
-  , _gtrrsRuleARN        :: !(Maybe Text)
-  , _gtrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTopicRuleResponse = GetTopicRuleResponse'{_gtrrsRule
+                                                  :: !(Maybe TopicRule),
+                                                  _gtrrsRuleARN ::
+                                                  !(Maybe Text),
+                                                  _gtrrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTopicRuleResponse' with the minimum fields required to make a request.
 --
@@ -118,13 +117,10 @@ data GetTopicRuleResponse = GetTopicRuleResponse'
 getTopicRuleResponse
     :: Int -- ^ 'gtrrsResponseStatus'
     -> GetTopicRuleResponse
-getTopicRuleResponse pResponseStatus_ =
-  GetTopicRuleResponse'
-    { _gtrrsRule = Nothing
-    , _gtrrsRuleARN = Nothing
-    , _gtrrsResponseStatus = pResponseStatus_
-    }
-
+getTopicRuleResponse pResponseStatus_
+  = GetTopicRuleResponse'{_gtrrsRule = Nothing,
+                          _gtrrsRuleARN = Nothing,
+                          _gtrrsResponseStatus = pResponseStatus_}
 
 -- | The rule.
 gtrrsRule :: Lens' GetTopicRuleResponse (Maybe TopicRule)

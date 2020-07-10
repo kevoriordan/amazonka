@@ -54,13 +54,21 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'validatePipelineDefinition' smart constructor.
-data ValidatePipelineDefinition = ValidatePipelineDefinition'
-  { _vpdParameterObjects :: !(Maybe [ParameterObject])
-  , _vpdParameterValues  :: !(Maybe [ParameterValue])
-  , _vpdPipelineId       :: !Text
-  , _vpdPipelineObjects  :: ![PipelineObject]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ValidatePipelineDefinition = ValidatePipelineDefinition'{_vpdParameterObjects
+                                                              ::
+                                                              !(Maybe
+                                                                  [ParameterObject]),
+                                                              _vpdParameterValues
+                                                              ::
+                                                              !(Maybe
+                                                                  [ParameterValue]),
+                                                              _vpdPipelineId ::
+                                                              !Text,
+                                                              _vpdPipelineObjects
+                                                              ::
+                                                              ![PipelineObject]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ValidatePipelineDefinition' with the minimum fields required to make a request.
 --
@@ -76,14 +84,12 @@ data ValidatePipelineDefinition = ValidatePipelineDefinition'
 validatePipelineDefinition
     :: Text -- ^ 'vpdPipelineId'
     -> ValidatePipelineDefinition
-validatePipelineDefinition pPipelineId_ =
-  ValidatePipelineDefinition'
-    { _vpdParameterObjects = Nothing
-    , _vpdParameterValues = Nothing
-    , _vpdPipelineId = pPipelineId_
-    , _vpdPipelineObjects = mempty
-    }
-
+validatePipelineDefinition pPipelineId_
+  = ValidatePipelineDefinition'{_vpdParameterObjects =
+                                  Nothing,
+                                _vpdParameterValues = Nothing,
+                                _vpdPipelineId = pPipelineId_,
+                                _vpdPipelineObjects = mempty}
 
 -- | The parameter objects used with the pipeline.
 vpdParameterObjects :: Lens' ValidatePipelineDefinition [ParameterObject]
@@ -148,13 +154,22 @@ instance ToQuery ValidatePipelineDefinition where
 --
 --
 -- /See:/ 'validatePipelineDefinitionResponse' smart constructor.
-data ValidatePipelineDefinitionResponse = ValidatePipelineDefinitionResponse'
-  { _vpdrsValidationErrors   :: !(Maybe [ValidationError])
-  , _vpdrsValidationWarnings :: !(Maybe [ValidationWarning])
-  , _vpdrsResponseStatus     :: !Int
-  , _vpdrsErrored            :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ValidatePipelineDefinitionResponse = ValidatePipelineDefinitionResponse'{_vpdrsValidationErrors
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [ValidationError]),
+                                                                              _vpdrsValidationWarnings
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [ValidationWarning]),
+                                                                              _vpdrsResponseStatus
+                                                                              ::
+                                                                              !Int,
+                                                                              _vpdrsErrored
+                                                                              ::
+                                                                              !Bool}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ValidatePipelineDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -171,14 +186,13 @@ validatePipelineDefinitionResponse
     :: Int -- ^ 'vpdrsResponseStatus'
     -> Bool -- ^ 'vpdrsErrored'
     -> ValidatePipelineDefinitionResponse
-validatePipelineDefinitionResponse pResponseStatus_ pErrored_ =
-  ValidatePipelineDefinitionResponse'
-    { _vpdrsValidationErrors = Nothing
-    , _vpdrsValidationWarnings = Nothing
-    , _vpdrsResponseStatus = pResponseStatus_
-    , _vpdrsErrored = pErrored_
-    }
-
+validatePipelineDefinitionResponse pResponseStatus_
+  pErrored_
+  = ValidatePipelineDefinitionResponse'{_vpdrsValidationErrors
+                                          = Nothing,
+                                        _vpdrsValidationWarnings = Nothing,
+                                        _vpdrsResponseStatus = pResponseStatus_,
+                                        _vpdrsErrored = pErrored_}
 
 -- | Any validation errors that were found.
 vpdrsValidationErrors :: Lens' ValidatePipelineDefinitionResponse [ValidationError]

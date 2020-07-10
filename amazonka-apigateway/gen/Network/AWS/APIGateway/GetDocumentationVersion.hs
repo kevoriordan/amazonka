@@ -25,8 +25,8 @@ module Network.AWS.APIGateway.GetDocumentationVersion
       getDocumentationVersion
     , GetDocumentationVersion
     -- * Request Lenses
-    , gdvdRestAPIId
-    , gdvdDocumentationVersion
+    , gtdcmnttnvrsnRestAPIId
+    , gtdcmnttnvrsnDocumentationVersion
 
     -- * Destructuring the Response
     , documentationVersion
@@ -49,37 +49,38 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getDocumentationVersion' smart constructor.
-data GetDocumentationVersion = GetDocumentationVersion'
-  { _gdvdRestAPIId            :: !Text
-  , _gdvdDocumentationVersion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDocumentationVersion = GetDocumentationVersion'{_gtdcmnttnvrsnRestAPIId
+                                                        :: !Text,
+                                                        _gtdcmnttnvrsnDocumentationVersion
+                                                        :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetDocumentationVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdvdRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
+-- * 'gtdcmnttnvrsnRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
--- * 'gdvdDocumentationVersion' - [Required] The version identifier of the to-be-retrieved documentation snapshot.
+-- * 'gtdcmnttnvrsnDocumentationVersion' - [Required] The version identifier of the to-be-retrieved documentation snapshot.
 getDocumentationVersion
-    :: Text -- ^ 'gdvdRestAPIId'
-    -> Text -- ^ 'gdvdDocumentationVersion'
+    :: Text -- ^ 'gtdcmnttnvrsnRestAPIId'
+    -> Text -- ^ 'gtdcmnttnvrsnDocumentationVersion'
     -> GetDocumentationVersion
-getDocumentationVersion pRestAPIId_ pDocumentationVersion_ =
-  GetDocumentationVersion'
-    { _gdvdRestAPIId = pRestAPIId_
-    , _gdvdDocumentationVersion = pDocumentationVersion_
-    }
-
+getDocumentationVersion pRestAPIId_
+  pDocumentationVersion_
+  = GetDocumentationVersion'{_gtdcmnttnvrsnRestAPIId =
+                               pRestAPIId_,
+                             _gtdcmnttnvrsnDocumentationVersion =
+                               pDocumentationVersion_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
-gdvdRestAPIId :: Lens' GetDocumentationVersion Text
-gdvdRestAPIId = lens _gdvdRestAPIId (\ s a -> s{_gdvdRestAPIId = a})
+gtdcmnttnvrsnRestAPIId :: Lens' GetDocumentationVersion Text
+gtdcmnttnvrsnRestAPIId = lens _gtdcmnttnvrsnRestAPIId (\ s a -> s{_gtdcmnttnvrsnRestAPIId = a})
 
 -- | [Required] The version identifier of the to-be-retrieved documentation snapshot.
-gdvdDocumentationVersion :: Lens' GetDocumentationVersion Text
-gdvdDocumentationVersion = lens _gdvdDocumentationVersion (\ s a -> s{_gdvdDocumentationVersion = a})
+gtdcmnttnvrsnDocumentationVersion :: Lens' GetDocumentationVersion Text
+gtdcmnttnvrsnDocumentationVersion = lens _gtdcmnttnvrsnDocumentationVersion (\ s a -> s{_gtdcmnttnvrsnDocumentationVersion = a})
 
 instance AWSRequest GetDocumentationVersion where
         type Rs GetDocumentationVersion =
@@ -100,9 +101,9 @@ instance ToHeaders GetDocumentationVersion where
 instance ToPath GetDocumentationVersion where
         toPath GetDocumentationVersion'{..}
           = mconcat
-              ["/restapis/", toBS _gdvdRestAPIId,
+              ["/restapis/", toBS _gtdcmnttnvrsnRestAPIId,
                "/documentation/versions/",
-               toBS _gdvdDocumentationVersion]
+               toBS _gtdcmnttnvrsnDocumentationVersion]
 
 instance ToQuery GetDocumentationVersion where
         toQuery = const mempty

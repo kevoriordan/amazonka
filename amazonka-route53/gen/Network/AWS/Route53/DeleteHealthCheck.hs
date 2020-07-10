@@ -21,7 +21,9 @@
 -- Deletes a health check.
 --
 --
--- /Important:/ Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check can't be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html Replacing and Deleting Health Checks> in the /Amazon Route 53 Developer Guide/ .
+-- /Important:/ Amazon Route 53 does not prevent you from deleting a health check even if the health check is associated with one or more resource record sets. If you delete a health check and you don't update the associated resource record sets, the future status of the health check can't be predicted and may change. This will affect the routing of DNS queries for your DNS failover configuration. For more information, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html Replacing and Deleting Health Checks> in the /Amazon Route 53 Developer Guide/ .
+--
+-- If you're using AWS Cloud Map and you configured Cloud Map to create a Route 53 health check when you register an instance, you can't use the Route 53 @DeleteHealthCheck@ command to delete the health check. The health check is deleted automatically when you deregister the instance; there can be a delay of several hours before the health check is deleted from Route 53. 
 --
 module Network.AWS.Route53.DeleteHealthCheck
     (
@@ -50,10 +52,9 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'deleteHealthCheck' smart constructor.
-newtype DeleteHealthCheck = DeleteHealthCheck'
-  { _dhcHealthCheckId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteHealthCheck = DeleteHealthCheck'{_dhcHealthCheckId
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteHealthCheck' with the minimum fields required to make a request.
 --
@@ -63,9 +64,9 @@ newtype DeleteHealthCheck = DeleteHealthCheck'
 deleteHealthCheck
     :: Text -- ^ 'dhcHealthCheckId'
     -> DeleteHealthCheck
-deleteHealthCheck pHealthCheckId_ =
-  DeleteHealthCheck' {_dhcHealthCheckId = pHealthCheckId_}
-
+deleteHealthCheck pHealthCheckId_
+  = DeleteHealthCheck'{_dhcHealthCheckId =
+                         pHealthCheckId_}
 
 -- | The ID of the health check that you want to delete.
 dhcHealthCheckId :: Lens' DeleteHealthCheck Text
@@ -99,10 +100,10 @@ instance ToQuery DeleteHealthCheck where
 --
 --
 -- /See:/ 'deleteHealthCheckResponse' smart constructor.
-newtype DeleteHealthCheckResponse = DeleteHealthCheckResponse'
-  { _dhcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteHealthCheckResponse = DeleteHealthCheckResponse'{_dhcrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteHealthCheckResponse' with the minimum fields required to make a request.
 --
@@ -112,9 +113,9 @@ newtype DeleteHealthCheckResponse = DeleteHealthCheckResponse'
 deleteHealthCheckResponse
     :: Int -- ^ 'dhcrsResponseStatus'
     -> DeleteHealthCheckResponse
-deleteHealthCheckResponse pResponseStatus_ =
-  DeleteHealthCheckResponse' {_dhcrsResponseStatus = pResponseStatus_}
-
+deleteHealthCheckResponse pResponseStatus_
+  = DeleteHealthCheckResponse'{_dhcrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 dhcrsResponseStatus :: Lens' DeleteHealthCheckResponse Int

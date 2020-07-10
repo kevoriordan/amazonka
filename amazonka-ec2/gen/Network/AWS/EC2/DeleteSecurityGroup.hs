@@ -45,17 +45,12 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteSecurityGroup.
---
---
---
--- /See:/ 'deleteSecurityGroup' smart constructor.
-data DeleteSecurityGroup = DeleteSecurityGroup'
-  { _dsgGroupId   :: !(Maybe Text)
-  , _dsgGroupName :: !(Maybe Text)
-  , _dsgDryRun    :: !(Maybe Bool)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteSecurityGroup' smart constructor.
+data DeleteSecurityGroup = DeleteSecurityGroup'{_dsgGroupId
+                                                :: !(Maybe Text),
+                                                _dsgGroupName :: !(Maybe Text),
+                                                _dsgDryRun :: !(Maybe Bool)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSecurityGroup' with the minimum fields required to make a request.
 --
@@ -68,10 +63,9 @@ data DeleteSecurityGroup = DeleteSecurityGroup'
 -- * 'dsgDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 deleteSecurityGroup
     :: DeleteSecurityGroup
-deleteSecurityGroup =
-  DeleteSecurityGroup'
-    {_dsgGroupId = Nothing, _dsgGroupName = Nothing, _dsgDryRun = Nothing}
-
+deleteSecurityGroup
+  = DeleteSecurityGroup'{_dsgGroupId = Nothing,
+                         _dsgGroupName = Nothing, _dsgDryRun = Nothing}
 
 -- | The ID of the security group. Required for a nondefault VPC.
 dsgGroupId :: Lens' DeleteSecurityGroup (Maybe Text)
@@ -110,16 +104,15 @@ instance ToQuery DeleteSecurityGroup where
                "GroupName" =: _dsgGroupName, "DryRun" =: _dsgDryRun]
 
 -- | /See:/ 'deleteSecurityGroupResponse' smart constructor.
-data DeleteSecurityGroupResponse =
-  DeleteSecurityGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSecurityGroupResponse = DeleteSecurityGroupResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteSecurityGroupResponse' with the minimum fields required to make a request.
 --
 deleteSecurityGroupResponse
     :: DeleteSecurityGroupResponse
-deleteSecurityGroupResponse = DeleteSecurityGroupResponse'
-
+deleteSecurityGroupResponse
+  = DeleteSecurityGroupResponse'
 
 instance NFData DeleteSecurityGroupResponse where

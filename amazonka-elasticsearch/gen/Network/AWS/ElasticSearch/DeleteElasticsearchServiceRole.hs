@@ -40,17 +40,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteElasticsearchServiceRole' smart constructor.
-data DeleteElasticsearchServiceRole =
-  DeleteElasticsearchServiceRole'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteElasticsearchServiceRole = DeleteElasticsearchServiceRole'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteElasticsearchServiceRole' with the minimum fields required to make a request.
 --
 deleteElasticsearchServiceRole
     :: DeleteElasticsearchServiceRole
-deleteElasticsearchServiceRole = DeleteElasticsearchServiceRole'
-
+deleteElasticsearchServiceRole
+  = DeleteElasticsearchServiceRole'
 
 instance AWSRequest DeleteElasticsearchServiceRole
          where
@@ -76,17 +75,16 @@ instance ToQuery DeleteElasticsearchServiceRole where
         toQuery = const mempty
 
 -- | /See:/ 'deleteElasticsearchServiceRoleResponse' smart constructor.
-data DeleteElasticsearchServiceRoleResponse =
-  DeleteElasticsearchServiceRoleResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteElasticsearchServiceRoleResponse = DeleteElasticsearchServiceRoleResponse'
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteElasticsearchServiceRoleResponse' with the minimum fields required to make a request.
 --
 deleteElasticsearchServiceRoleResponse
     :: DeleteElasticsearchServiceRoleResponse
-deleteElasticsearchServiceRoleResponse = DeleteElasticsearchServiceRoleResponse'
-
+deleteElasticsearchServiceRoleResponse
+  = DeleteElasticsearchServiceRoleResponse'
 
 instance NFData
            DeleteElasticsearchServiceRoleResponse

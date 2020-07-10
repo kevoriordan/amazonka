@@ -46,15 +46,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteReplicationInstance' smart constructor.
-newtype DeleteReplicationInstance = DeleteReplicationInstance'
-  { _driReplicationInstanceARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReplicationInstance = DeleteReplicationInstance'{_driReplicationInstanceARN
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteReplicationInstance' with the minimum fields required to make a request.
 --
@@ -64,10 +64,9 @@ newtype DeleteReplicationInstance = DeleteReplicationInstance'
 deleteReplicationInstance
     :: Text -- ^ 'driReplicationInstanceARN'
     -> DeleteReplicationInstance
-deleteReplicationInstance pReplicationInstanceARN_ =
-  DeleteReplicationInstance'
-    {_driReplicationInstanceARN = pReplicationInstanceARN_}
-
+deleteReplicationInstance pReplicationInstanceARN_
+  = DeleteReplicationInstance'{_driReplicationInstanceARN
+                                 = pReplicationInstanceARN_}
 
 -- | The Amazon Resource Name (ARN) of the replication instance to be deleted.
 driReplicationInstanceARN :: Lens' DeleteReplicationInstance Text
@@ -112,16 +111,20 @@ instance ToPath DeleteReplicationInstance where
 instance ToQuery DeleteReplicationInstance where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteReplicationInstanceResponse' smart constructor.
-data DeleteReplicationInstanceResponse = DeleteReplicationInstanceResponse'
-  { _drirsReplicationInstance :: !(Maybe ReplicationInstance)
-  , _drirsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteReplicationInstanceResponse = DeleteReplicationInstanceResponse'{_drirsReplicationInstance
+                                                                            ::
+                                                                            !(Maybe
+                                                                                ReplicationInstance),
+                                                                            _drirsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteReplicationInstanceResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +136,10 @@ data DeleteReplicationInstanceResponse = DeleteReplicationInstanceResponse'
 deleteReplicationInstanceResponse
     :: Int -- ^ 'drirsResponseStatus'
     -> DeleteReplicationInstanceResponse
-deleteReplicationInstanceResponse pResponseStatus_ =
-  DeleteReplicationInstanceResponse'
-    { _drirsReplicationInstance = Nothing
-    , _drirsResponseStatus = pResponseStatus_
-    }
-
+deleteReplicationInstanceResponse pResponseStatus_
+  = DeleteReplicationInstanceResponse'{_drirsReplicationInstance
+                                         = Nothing,
+                                       _drirsResponseStatus = pResponseStatus_}
 
 -- | The replication instance that was deleted.
 drirsReplicationInstance :: Lens' DeleteReplicationInstanceResponse (Maybe ReplicationInstance)

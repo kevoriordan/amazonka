@@ -49,11 +49,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'decreaseStreamRetentionPeriod' smart constructor.
-data DecreaseStreamRetentionPeriod = DecreaseStreamRetentionPeriod'
-  { _dsrpStreamName           :: !Text
-  , _dsrpRetentionPeriodHours :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DecreaseStreamRetentionPeriod = DecreaseStreamRetentionPeriod'{_dsrpStreamName
+                                                                    :: !Text,
+                                                                    _dsrpRetentionPeriodHours
+                                                                    :: !Nat}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DecreaseStreamRetentionPeriod' with the minimum fields required to make a request.
 --
@@ -66,12 +67,12 @@ decreaseStreamRetentionPeriod
     :: Text -- ^ 'dsrpStreamName'
     -> Natural -- ^ 'dsrpRetentionPeriodHours'
     -> DecreaseStreamRetentionPeriod
-decreaseStreamRetentionPeriod pStreamName_ pRetentionPeriodHours_ =
-  DecreaseStreamRetentionPeriod'
-    { _dsrpStreamName = pStreamName_
-    , _dsrpRetentionPeriodHours = _Nat # pRetentionPeriodHours_
-    }
-
+decreaseStreamRetentionPeriod pStreamName_
+  pRetentionPeriodHours_
+  = DecreaseStreamRetentionPeriod'{_dsrpStreamName =
+                                     pStreamName_,
+                                   _dsrpRetentionPeriodHours =
+                                     _Nat # pRetentionPeriodHours_}
 
 -- | The name of the stream to modify.
 dsrpStreamName :: Lens' DecreaseStreamRetentionPeriod Text
@@ -120,17 +121,16 @@ instance ToQuery DecreaseStreamRetentionPeriod where
         toQuery = const mempty
 
 -- | /See:/ 'decreaseStreamRetentionPeriodResponse' smart constructor.
-data DecreaseStreamRetentionPeriodResponse =
-  DecreaseStreamRetentionPeriodResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DecreaseStreamRetentionPeriodResponse = DecreaseStreamRetentionPeriodResponse'
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DecreaseStreamRetentionPeriodResponse' with the minimum fields required to make a request.
 --
 decreaseStreamRetentionPeriodResponse
     :: DecreaseStreamRetentionPeriodResponse
-decreaseStreamRetentionPeriodResponse = DecreaseStreamRetentionPeriodResponse'
-
+decreaseStreamRetentionPeriodResponse
+  = DecreaseStreamRetentionPeriodResponse'
 
 instance NFData DecreaseStreamRetentionPeriodResponse
          where

@@ -49,10 +49,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'indexDocuments' smart constructor.
-newtype IndexDocuments = IndexDocuments'
-  { _idDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype IndexDocuments = IndexDocuments'{_idDomainName
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'IndexDocuments' with the minimum fields required to make a request.
 --
@@ -62,8 +61,8 @@ newtype IndexDocuments = IndexDocuments'
 indexDocuments
     :: Text -- ^ 'idDomainName'
     -> IndexDocuments
-indexDocuments pDomainName_ = IndexDocuments' {_idDomainName = pDomainName_}
-
+indexDocuments pDomainName_
+  = IndexDocuments'{_idDomainName = pDomainName_}
 
 -- | Undocumented member.
 idDomainName :: Lens' IndexDocuments Text
@@ -102,11 +101,12 @@ instance ToQuery IndexDocuments where
 --
 --
 -- /See:/ 'indexDocumentsResponse' smart constructor.
-data IndexDocumentsResponse = IndexDocumentsResponse'
-  { _idrsFieldNames     :: !(Maybe [Text])
-  , _idrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data IndexDocumentsResponse = IndexDocumentsResponse'{_idrsFieldNames
+                                                      :: !(Maybe [Text]),
+                                                      _idrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'IndexDocumentsResponse' with the minimum fields required to make a request.
 --
@@ -118,10 +118,9 @@ data IndexDocumentsResponse = IndexDocumentsResponse'
 indexDocumentsResponse
     :: Int -- ^ 'idrsResponseStatus'
     -> IndexDocumentsResponse
-indexDocumentsResponse pResponseStatus_ =
-  IndexDocumentsResponse'
-    {_idrsFieldNames = Nothing, _idrsResponseStatus = pResponseStatus_}
-
+indexDocumentsResponse pResponseStatus_
+  = IndexDocumentsResponse'{_idrsFieldNames = Nothing,
+                            _idrsResponseStatus = pResponseStatus_}
 
 -- | The names of the fields that are currently being indexed.
 idrsFieldNames :: Lens' IndexDocumentsResponse [Text]

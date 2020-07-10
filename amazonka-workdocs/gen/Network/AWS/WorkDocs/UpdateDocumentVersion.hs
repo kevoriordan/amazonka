@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Changes the status of the document version to ACTIVE.
+-- Changes the status of the document version to ACTIVE. 
 --
 --
--- Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by 'InitiateDocumentVersionUpload' .
+-- Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by 'InitiateDocumentVersionUpload' . 
 --
 module Network.AWS.WorkDocs.UpdateDocumentVersion
     (
@@ -47,19 +47,21 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'updateDocumentVersion' smart constructor.
-data UpdateDocumentVersion = UpdateDocumentVersion'
-  { _udvAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _udvVersionStatus       :: !(Maybe DocumentVersionStatus)
-  , _udvDocumentId          :: !Text
-  , _udvVersionId           :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateDocumentVersion = UpdateDocumentVersion'{_udvAuthenticationToken
+                                                    ::
+                                                    !(Maybe (Sensitive Text)),
+                                                    _udvVersionStatus ::
+                                                    !(Maybe
+                                                        DocumentVersionStatus),
+                                                    _udvDocumentId :: !Text,
+                                                    _udvVersionId :: !Text}
+                               deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDocumentVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udvAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'udvAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'udvVersionStatus' - The status of the version.
 --
@@ -70,16 +72,14 @@ updateDocumentVersion
     :: Text -- ^ 'udvDocumentId'
     -> Text -- ^ 'udvVersionId'
     -> UpdateDocumentVersion
-updateDocumentVersion pDocumentId_ pVersionId_ =
-  UpdateDocumentVersion'
-    { _udvAuthenticationToken = Nothing
-    , _udvVersionStatus = Nothing
-    , _udvDocumentId = pDocumentId_
-    , _udvVersionId = pVersionId_
-    }
+updateDocumentVersion pDocumentId_ pVersionId_
+  = UpdateDocumentVersion'{_udvAuthenticationToken =
+                             Nothing,
+                           _udvVersionStatus = Nothing,
+                           _udvDocumentId = pDocumentId_,
+                           _udvVersionId = pVersionId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 udvAuthenticationToken :: Lens' UpdateDocumentVersion (Maybe Text)
 udvAuthenticationToken = lens _udvAuthenticationToken (\ s a -> s{_udvAuthenticationToken = a}) . mapping _Sensitive
 
@@ -128,16 +128,15 @@ instance ToQuery UpdateDocumentVersion where
         toQuery = const mempty
 
 -- | /See:/ 'updateDocumentVersionResponse' smart constructor.
-data UpdateDocumentVersionResponse =
-  UpdateDocumentVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDocumentVersionResponse = UpdateDocumentVersionResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'UpdateDocumentVersionResponse' with the minimum fields required to make a request.
 --
 updateDocumentVersionResponse
     :: UpdateDocumentVersionResponse
-updateDocumentVersionResponse = UpdateDocumentVersionResponse'
-
+updateDocumentVersionResponse
+  = UpdateDocumentVersionResponse'
 
 instance NFData UpdateDocumentVersionResponse where

@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a BAIDU GCM channel
+-- Enables the Baidu channel for an application or updates the status and settings of the Baidu channel for an application.
+--
+--
 module Network.AWS.Pinpoint.UpdateBaiduChannel
     (
     -- * Creating a Request
@@ -44,31 +46,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateBaiduChannel' smart constructor.
-data UpdateBaiduChannel = UpdateBaiduChannel'
-  { _ubcApplicationId       :: !Text
-  , _ubcBaiduChannelRequest :: !BaiduChannelRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateBaiduChannel = UpdateBaiduChannel'{_ubcApplicationId
+                                              :: !Text,
+                                              _ubcBaiduChannelRequest ::
+                                              !BaiduChannelRequest}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateBaiduChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ubcApplicationId' - Undocumented member.
+-- * 'ubcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'ubcBaiduChannelRequest' - Undocumented member.
 updateBaiduChannel
     :: Text -- ^ 'ubcApplicationId'
     -> BaiduChannelRequest -- ^ 'ubcBaiduChannelRequest'
     -> UpdateBaiduChannel
-updateBaiduChannel pApplicationId_ pBaiduChannelRequest_ =
-  UpdateBaiduChannel'
-    { _ubcApplicationId = pApplicationId_
-    , _ubcBaiduChannelRequest = pBaiduChannelRequest_
-    }
+updateBaiduChannel pApplicationId_
+  pBaiduChannelRequest_
+  = UpdateBaiduChannel'{_ubcApplicationId =
+                          pApplicationId_,
+                        _ubcBaiduChannelRequest = pBaiduChannelRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 ubcApplicationId :: Lens' UpdateBaiduChannel Text
 ubcApplicationId = lens _ubcApplicationId (\ s a -> s{_ubcApplicationId = a})
 
@@ -114,11 +115,13 @@ instance ToQuery UpdateBaiduChannel where
         toQuery = const mempty
 
 -- | /See:/ 'updateBaiduChannelResponse' smart constructor.
-data UpdateBaiduChannelResponse = UpdateBaiduChannelResponse'
-  { _ubcrsResponseStatus       :: !Int
-  , _ubcrsBaiduChannelResponse :: !BaiduChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateBaiduChannelResponse = UpdateBaiduChannelResponse'{_ubcrsResponseStatus
+                                                              :: !Int,
+                                                              _ubcrsBaiduChannelResponse
+                                                              ::
+                                                              !BaiduChannelResponse}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UpdateBaiduChannelResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +134,12 @@ updateBaiduChannelResponse
     :: Int -- ^ 'ubcrsResponseStatus'
     -> BaiduChannelResponse -- ^ 'ubcrsBaiduChannelResponse'
     -> UpdateBaiduChannelResponse
-updateBaiduChannelResponse pResponseStatus_ pBaiduChannelResponse_ =
-  UpdateBaiduChannelResponse'
-    { _ubcrsResponseStatus = pResponseStatus_
-    , _ubcrsBaiduChannelResponse = pBaiduChannelResponse_
-    }
-
+updateBaiduChannelResponse pResponseStatus_
+  pBaiduChannelResponse_
+  = UpdateBaiduChannelResponse'{_ubcrsResponseStatus =
+                                  pResponseStatus_,
+                                _ubcrsBaiduChannelResponse =
+                                  pBaiduChannelResponse_}
 
 -- | -- | The response status code.
 ubcrsResponseStatus :: Lens' UpdateBaiduChannelResponse Int

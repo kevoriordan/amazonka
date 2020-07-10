@@ -43,17 +43,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'unpeerVPC' smart constructor.
-data UnpeerVPC =
-  UnpeerVPC'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UnpeerVPC = UnpeerVPC'
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnpeerVPC' with the minimum fields required to make a request.
 --
 unpeerVPC
     :: UnpeerVPC
 unpeerVPC = UnpeerVPC'
-
 
 instance AWSRequest UnpeerVPC where
         type Rs UnpeerVPC = UnpeerVPCResponse
@@ -87,28 +84,26 @@ instance ToQuery UnpeerVPC where
         toQuery = const mempty
 
 -- | /See:/ 'unpeerVPCResponse' smart constructor.
-data UnpeerVPCResponse = UnpeerVPCResponse'
-  { _uvrsOperation      :: !(Maybe Operation)
-  , _uvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UnpeerVPCResponse = UnpeerVPCResponse'{_uvrsOperation
+                                            :: !(Maybe Operation),
+                                            _uvrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnpeerVPCResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uvrsOperation' - An array of key-value pairs containing information about the request operation.
+-- * 'uvrsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'uvrsResponseStatus' - -- | The response status code.
 unpeerVPCResponse
     :: Int -- ^ 'uvrsResponseStatus'
     -> UnpeerVPCResponse
-unpeerVPCResponse pResponseStatus_ =
-  UnpeerVPCResponse'
-    {_uvrsOperation = Nothing, _uvrsResponseStatus = pResponseStatus_}
+unpeerVPCResponse pResponseStatus_
+  = UnpeerVPCResponse'{_uvrsOperation = Nothing,
+                       _uvrsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the request operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 uvrsOperation :: Lens' UnpeerVPCResponse (Maybe Operation)
 uvrsOperation = lens _uvrsOperation (\ s a -> s{_uvrsOperation = a})
 

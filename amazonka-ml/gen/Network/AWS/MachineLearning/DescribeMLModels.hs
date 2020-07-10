@@ -59,20 +59,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeMLModels' smart constructor.
-data DescribeMLModels = DescribeMLModels'
-  { _dmlmEQ             :: !(Maybe Text)
-  , _dmlmGE             :: !(Maybe Text)
-  , _dmlmPrefix         :: !(Maybe Text)
-  , _dmlmGT             :: !(Maybe Text)
-  , _dmlmNE             :: !(Maybe Text)
-  , _dmlmNextToken      :: !(Maybe Text)
-  , _dmlmSortOrder      :: !(Maybe SortOrder)
-  , _dmlmLimit          :: !(Maybe Nat)
-  , _dmlmLT             :: !(Maybe Text)
-  , _dmlmFilterVariable :: !(Maybe MLModelFilterVariable)
-  , _dmlmLE             :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMLModels = DescribeMLModels'{_dmlmEQ ::
+                                          !(Maybe Text),
+                                          _dmlmGE :: !(Maybe Text),
+                                          _dmlmPrefix :: !(Maybe Text),
+                                          _dmlmGT :: !(Maybe Text),
+                                          _dmlmNE :: !(Maybe Text),
+                                          _dmlmNextToken :: !(Maybe Text),
+                                          _dmlmSortOrder :: !(Maybe SortOrder),
+                                          _dmlmLimit :: !(Maybe Nat),
+                                          _dmlmLT :: !(Maybe Text),
+                                          _dmlmFilterVariable ::
+                                          !(Maybe MLModelFilterVariable),
+                                          _dmlmLE :: !(Maybe Text)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeMLModels' with the minimum fields required to make a request.
 --
@@ -80,7 +80,7 @@ data DescribeMLModels = DescribeMLModels'
 --
 -- * 'dmlmEQ' - The equal to operator. The @MLModel@ results will have @FilterVariable@ values that exactly match the value specified with @EQ@ .
 --
--- * 'dmlmGE' - The greater than or equal to operator. The @MLModel@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ .
+-- * 'dmlmGE' - The greater than or equal to operator. The @MLModel@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ . 
 --
 -- * 'dmlmPrefix' - A string that is found at the beginning of a variable, such as @Name@ or @Id@ . For example, an @MLModel@ could have the @Name@ @2014-09-09-HolidayGiftMailer@ . To search for this @MLModel@ , select @Name@ for the @FilterVariable@ and any of the following strings for the @Prefix@ :      * 2014-09     * 2014-09-09     * 2014-09-09-Holiday
 --
@@ -101,27 +101,19 @@ data DescribeMLModels = DescribeMLModels'
 -- * 'dmlmLE' - The less than or equal to operator. The @MLModel@ results will have @FilterVariable@ values that are less than or equal to the value specified with @LE@ .
 describeMLModels
     :: DescribeMLModels
-describeMLModels =
-  DescribeMLModels'
-    { _dmlmEQ = Nothing
-    , _dmlmGE = Nothing
-    , _dmlmPrefix = Nothing
-    , _dmlmGT = Nothing
-    , _dmlmNE = Nothing
-    , _dmlmNextToken = Nothing
-    , _dmlmSortOrder = Nothing
-    , _dmlmLimit = Nothing
-    , _dmlmLT = Nothing
-    , _dmlmFilterVariable = Nothing
-    , _dmlmLE = Nothing
-    }
-
+describeMLModels
+  = DescribeMLModels'{_dmlmEQ = Nothing,
+                      _dmlmGE = Nothing, _dmlmPrefix = Nothing,
+                      _dmlmGT = Nothing, _dmlmNE = Nothing,
+                      _dmlmNextToken = Nothing, _dmlmSortOrder = Nothing,
+                      _dmlmLimit = Nothing, _dmlmLT = Nothing,
+                      _dmlmFilterVariable = Nothing, _dmlmLE = Nothing}
 
 -- | The equal to operator. The @MLModel@ results will have @FilterVariable@ values that exactly match the value specified with @EQ@ .
 dmlmEQ :: Lens' DescribeMLModels (Maybe Text)
 dmlmEQ = lens _dmlmEQ (\ s a -> s{_dmlmEQ = a})
 
--- | The greater than or equal to operator. The @MLModel@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ .
+-- | The greater than or equal to operator. The @MLModel@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ . 
 dmlmGE :: Lens' DescribeMLModels (Maybe Text)
 dmlmGE = lens _dmlmGE (\ s a -> s{_dmlmGE = a})
 
@@ -215,12 +207,14 @@ instance ToQuery DescribeMLModels where
 --
 --
 -- /See:/ 'describeMLModelsResponse' smart constructor.
-data DescribeMLModelsResponse = DescribeMLModelsResponse'
-  { _dmlmsrsResults        :: !(Maybe [MLModel])
-  , _dmlmsrsNextToken      :: !(Maybe Text)
-  , _dmlmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMLModelsResponse = DescribeMLModelsResponse'{_dmlmsrsResults
+                                                          :: !(Maybe [MLModel]),
+                                                          _dmlmsrsNextToken ::
+                                                          !(Maybe Text),
+                                                          _dmlmsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeMLModelsResponse' with the minimum fields required to make a request.
 --
@@ -234,13 +228,11 @@ data DescribeMLModelsResponse = DescribeMLModelsResponse'
 describeMLModelsResponse
     :: Int -- ^ 'dmlmsrsResponseStatus'
     -> DescribeMLModelsResponse
-describeMLModelsResponse pResponseStatus_ =
-  DescribeMLModelsResponse'
-    { _dmlmsrsResults = Nothing
-    , _dmlmsrsNextToken = Nothing
-    , _dmlmsrsResponseStatus = pResponseStatus_
-    }
-
+describeMLModelsResponse pResponseStatus_
+  = DescribeMLModelsResponse'{_dmlmsrsResults =
+                                Nothing,
+                              _dmlmsrsNextToken = Nothing,
+                              _dmlmsrsResponseStatus = pResponseStatus_}
 
 -- | A list of @MLModel@ that meet the search criteria.
 dmlmsrsResults :: Lens' DescribeMLModelsResponse [MLModel]

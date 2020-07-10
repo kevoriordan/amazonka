@@ -64,14 +64,18 @@ library
         , Network.AWS.IoTAnalytics.DescribePipeline
         , Network.AWS.IoTAnalytics.GetDatasetContent
         , Network.AWS.IoTAnalytics.ListChannels
+        , Network.AWS.IoTAnalytics.ListDatasetContents
         , Network.AWS.IoTAnalytics.ListDatasets
         , Network.AWS.IoTAnalytics.ListDatastores
         , Network.AWS.IoTAnalytics.ListPipelines
+        , Network.AWS.IoTAnalytics.ListTagsForResource
         , Network.AWS.IoTAnalytics.PutLoggingOptions
         , Network.AWS.IoTAnalytics.RunPipelineActivity
         , Network.AWS.IoTAnalytics.SampleChannelData
         , Network.AWS.IoTAnalytics.StartPipelineReprocessing
+        , Network.AWS.IoTAnalytics.TagResource
         , Network.AWS.IoTAnalytics.Types
+        , Network.AWS.IoTAnalytics.UntagResource
         , Network.AWS.IoTAnalytics.UpdateChannel
         , Network.AWS.IoTAnalytics.UpdateDataset
         , Network.AWS.IoTAnalytics.UpdateDatastore
@@ -79,12 +83,82 @@ library
         , Network.AWS.IoTAnalytics.Waiters
 
     other-modules:
-          Network.AWS.IoTAnalytics.Types.Product
-        , Network.AWS.IoTAnalytics.Types.Sum
+          Network.AWS.IoTAnalytics.Types.AddAttributesActivity
+        , Network.AWS.IoTAnalytics.Types.BatchPutMessageErrorEntry
+        , Network.AWS.IoTAnalytics.Types.Channel
+        , Network.AWS.IoTAnalytics.Types.ChannelActivity
+        , Network.AWS.IoTAnalytics.Types.ChannelStatistics
+        , Network.AWS.IoTAnalytics.Types.ChannelStatus
+        , Network.AWS.IoTAnalytics.Types.ChannelStorage
+        , Network.AWS.IoTAnalytics.Types.ChannelStorageSummary
+        , Network.AWS.IoTAnalytics.Types.ChannelSummary
+        , Network.AWS.IoTAnalytics.Types.ComputeType
+        , Network.AWS.IoTAnalytics.Types.ContainerDatasetAction
+        , Network.AWS.IoTAnalytics.Types.CustomerManagedChannelS3Storage
+        , Network.AWS.IoTAnalytics.Types.CustomerManagedChannelS3StorageSummary
+        , Network.AWS.IoTAnalytics.Types.CustomerManagedDatastoreS3Storage
+        , Network.AWS.IoTAnalytics.Types.CustomerManagedDatastoreS3StorageSummary
+        , Network.AWS.IoTAnalytics.Types.Dataset
+        , Network.AWS.IoTAnalytics.Types.DatasetAction
+        , Network.AWS.IoTAnalytics.Types.DatasetActionSummary
+        , Network.AWS.IoTAnalytics.Types.DatasetActionType
+        , Network.AWS.IoTAnalytics.Types.DatasetContentDeliveryDestination
+        , Network.AWS.IoTAnalytics.Types.DatasetContentDeliveryRule
+        , Network.AWS.IoTAnalytics.Types.DatasetContentState
+        , Network.AWS.IoTAnalytics.Types.DatasetContentStatus
+        , Network.AWS.IoTAnalytics.Types.DatasetContentSummary
+        , Network.AWS.IoTAnalytics.Types.DatasetContentVersionValue
+        , Network.AWS.IoTAnalytics.Types.DatasetEntry
+        , Network.AWS.IoTAnalytics.Types.DatasetStatus
+        , Network.AWS.IoTAnalytics.Types.DatasetSummary
+        , Network.AWS.IoTAnalytics.Types.DatasetTrigger
+        , Network.AWS.IoTAnalytics.Types.Datastore
+        , Network.AWS.IoTAnalytics.Types.DatastoreActivity
+        , Network.AWS.IoTAnalytics.Types.DatastoreStatistics
+        , Network.AWS.IoTAnalytics.Types.DatastoreStatus
+        , Network.AWS.IoTAnalytics.Types.DatastoreStorage
+        , Network.AWS.IoTAnalytics.Types.DatastoreStorageSummary
+        , Network.AWS.IoTAnalytics.Types.DatastoreSummary
+        , Network.AWS.IoTAnalytics.Types.DeltaTime
+        , Network.AWS.IoTAnalytics.Types.DeviceRegistryEnrichActivity
+        , Network.AWS.IoTAnalytics.Types.DeviceShadowEnrichActivity
+        , Network.AWS.IoTAnalytics.Types.EstimatedResourceSize
+        , Network.AWS.IoTAnalytics.Types.FilterActivity
+        , Network.AWS.IoTAnalytics.Types.GlueConfiguration
+        , Network.AWS.IoTAnalytics.Types.IotEventsDestinationConfiguration
+        , Network.AWS.IoTAnalytics.Types.LambdaActivity
+        , Network.AWS.IoTAnalytics.Types.LoggingLevel
+        , Network.AWS.IoTAnalytics.Types.LoggingOptions
+        , Network.AWS.IoTAnalytics.Types.MathActivity
+        , Network.AWS.IoTAnalytics.Types.Message
+        , Network.AWS.IoTAnalytics.Types.OutputFileURIValue
+        , Network.AWS.IoTAnalytics.Types.Pipeline
+        , Network.AWS.IoTAnalytics.Types.PipelineActivity
+        , Network.AWS.IoTAnalytics.Types.PipelineSummary
+        , Network.AWS.IoTAnalytics.Types.Product
+        , Network.AWS.IoTAnalytics.Types.QueryFilter
+        , Network.AWS.IoTAnalytics.Types.RemoveAttributesActivity
+        , Network.AWS.IoTAnalytics.Types.ReprocessingStatus
+        , Network.AWS.IoTAnalytics.Types.ReprocessingSummary
+        , Network.AWS.IoTAnalytics.Types.ResourceConfiguration
+        , Network.AWS.IoTAnalytics.Types.RetentionPeriod
+        , Network.AWS.IoTAnalytics.Types.S3DestinationConfiguration
+        , Network.AWS.IoTAnalytics.Types.Schedule
+        , Network.AWS.IoTAnalytics.Types.SelectAttributesActivity
+        , Network.AWS.IoTAnalytics.Types.ServiceManagedChannelS3Storage
+        , Network.AWS.IoTAnalytics.Types.ServiceManagedChannelS3StorageSummary
+        , Network.AWS.IoTAnalytics.Types.ServiceManagedDatastoreS3Storage
+        , Network.AWS.IoTAnalytics.Types.ServiceManagedDatastoreS3StorageSummary
+        , Network.AWS.IoTAnalytics.Types.SqlQueryDatasetAction
+        , Network.AWS.IoTAnalytics.Types.Tag
+        , Network.AWS.IoTAnalytics.Types.TriggeringDataset
+        , Network.AWS.IoTAnalytics.Types.Variable
+        , Network.AWS.IoTAnalytics.Types.VersioningConfiguration
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-iot-analytics-test
     type:              exitcode-stdio-1.0
@@ -108,6 +182,7 @@ test-suite amazonka-iot-analytics-test
         , amazonka-iot-analytics
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

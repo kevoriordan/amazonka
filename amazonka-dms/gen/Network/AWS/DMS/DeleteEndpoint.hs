@@ -46,15 +46,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteEndpoint' smart constructor.
-newtype DeleteEndpoint = DeleteEndpoint'
-  { _deEndpointARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEndpoint = DeleteEndpoint'{_deEndpointARN
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteEndpoint' with the minimum fields required to make a request.
 --
@@ -64,8 +63,8 @@ newtype DeleteEndpoint = DeleteEndpoint'
 deleteEndpoint
     :: Text -- ^ 'deEndpointARN'
     -> DeleteEndpoint
-deleteEndpoint pEndpointARN_ = DeleteEndpoint' {_deEndpointARN = pEndpointARN_}
-
+deleteEndpoint pEndpointARN_
+  = DeleteEndpoint'{_deEndpointARN = pEndpointARN_}
 
 -- | The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
 deEndpointARN :: Lens' DeleteEndpoint Text
@@ -104,16 +103,16 @@ instance ToPath DeleteEndpoint where
 instance ToQuery DeleteEndpoint where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteEndpointResponse' smart constructor.
-data DeleteEndpointResponse = DeleteEndpointResponse'
-  { _delrsEndpoint       :: !(Maybe Endpoint)
-  , _delrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteEndpointResponse = DeleteEndpointResponse'{_delrsEndpoint
+                                                      :: !(Maybe Endpoint),
+                                                      _delrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteEndpointResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +124,9 @@ data DeleteEndpointResponse = DeleteEndpointResponse'
 deleteEndpointResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteEndpointResponse
-deleteEndpointResponse pResponseStatus_ =
-  DeleteEndpointResponse'
-    {_delrsEndpoint = Nothing, _delrsResponseStatus = pResponseStatus_}
-
+deleteEndpointResponse pResponseStatus_
+  = DeleteEndpointResponse'{_delrsEndpoint = Nothing,
+                            _delrsResponseStatus = pResponseStatus_}
 
 -- | The endpoint that was deleted.
 delrsEndpoint :: Lens' DeleteEndpointResponse (Maybe Endpoint)

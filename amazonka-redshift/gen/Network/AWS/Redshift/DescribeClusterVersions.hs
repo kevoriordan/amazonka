@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html Amazon Redshift Clusters> in the /Amazon Redshift Cluster Management Guide/ .
+-- Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html Amazon Redshift Clusters> in the /Amazon Redshift Cluster Management Guide/ .
 --
 --
 --
@@ -51,18 +51,21 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeClusterVersions' smart constructor.
-data DescribeClusterVersions = DescribeClusterVersions'
-  { _dcvClusterParameterGroupFamily :: !(Maybe Text)
-  , _dcvMarker                      :: !(Maybe Text)
-  , _dcvMaxRecords                  :: !(Maybe Int)
-  , _dcvClusterVersion              :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusterVersions = DescribeClusterVersions'{_dcvClusterParameterGroupFamily
+                                                        :: !(Maybe Text),
+                                                        _dcvMarker ::
+                                                        !(Maybe Text),
+                                                        _dcvMaxRecords ::
+                                                        !(Maybe Int),
+                                                        _dcvClusterVersion ::
+                                                        !(Maybe Text)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeClusterVersions' with the minimum fields required to make a request.
 --
@@ -70,27 +73,24 @@ data DescribeClusterVersions = DescribeClusterVersions'
 --
 -- * 'dcvClusterParameterGroupFamily' - The name of a specific cluster parameter group family to return details for. Constraints:     * Must be 1 to 255 alphanumeric characters     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens
 --
--- * 'dcvMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterVersions' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- * 'dcvMarker' - An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterVersions' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 --
 -- * 'dcvMaxRecords' - The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified @MaxRecords@ value, a value is returned in a @marker@ field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: @100@  Constraints: minimum 20, maximum 100.
 --
--- * 'dcvClusterVersion' - The specific cluster version to return. Example: @1.0@
+-- * 'dcvClusterVersion' - The specific cluster version to return. Example: @1.0@ 
 describeClusterVersions
     :: DescribeClusterVersions
-describeClusterVersions =
-  DescribeClusterVersions'
-    { _dcvClusterParameterGroupFamily = Nothing
-    , _dcvMarker = Nothing
-    , _dcvMaxRecords = Nothing
-    , _dcvClusterVersion = Nothing
-    }
-
+describeClusterVersions
+  = DescribeClusterVersions'{_dcvClusterParameterGroupFamily
+                               = Nothing,
+                             _dcvMarker = Nothing, _dcvMaxRecords = Nothing,
+                             _dcvClusterVersion = Nothing}
 
 -- | The name of a specific cluster parameter group family to return details for. Constraints:     * Must be 1 to 255 alphanumeric characters     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens
 dcvClusterParameterGroupFamily :: Lens' DescribeClusterVersions (Maybe Text)
 dcvClusterParameterGroupFamily = lens _dcvClusterParameterGroupFamily (\ s a -> s{_dcvClusterParameterGroupFamily = a})
 
--- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterVersions' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request.
+-- | An optional parameter that specifies the starting point to return a set of response records. When the results of a 'DescribeClusterVersions' request exceed the value specified in @MaxRecords@ , AWS returns a value in the @Marker@ field of the response. You can retrieve the next set of response records by providing the returned marker value in the @Marker@ parameter and retrying the request. 
 dcvMarker :: Lens' DescribeClusterVersions (Maybe Text)
 dcvMarker = lens _dcvMarker (\ s a -> s{_dcvMarker = a})
 
@@ -98,7 +98,7 @@ dcvMarker = lens _dcvMarker (\ s a -> s{_dcvMarker = a})
 dcvMaxRecords :: Lens' DescribeClusterVersions (Maybe Int)
 dcvMaxRecords = lens _dcvMaxRecords (\ s a -> s{_dcvMaxRecords = a})
 
--- | The specific cluster version to return. Example: @1.0@
+-- | The specific cluster version to return. Example: @1.0@ 
 dcvClusterVersion :: Lens' DescribeClusterVersions (Maybe Text)
 dcvClusterVersion = lens _dcvClusterVersion (\ s a -> s{_dcvClusterVersion = a})
 
@@ -144,43 +144,47 @@ instance ToQuery DescribeClusterVersions where
                "MaxRecords" =: _dcvMaxRecords,
                "ClusterVersion" =: _dcvClusterVersion]
 
--- | Contains the output from the 'DescribeClusterVersions' action.
+-- | Contains the output from the 'DescribeClusterVersions' action. 
 --
 --
 --
 -- /See:/ 'describeClusterVersionsResponse' smart constructor.
-data DescribeClusterVersionsResponse = DescribeClusterVersionsResponse'
-  { _dcvrsClusterVersions :: !(Maybe [ClusterVersion])
-  , _dcvrsMarker          :: !(Maybe Text)
-  , _dcvrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusterVersionsResponse = DescribeClusterVersionsResponse'{_dcvrsClusterVersions
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [ClusterVersion]),
+                                                                        _dcvrsMarker
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dcvrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeClusterVersionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcvrsClusterVersions' - A list of @Version@ elements.
+-- * 'dcvrsClusterVersions' - A list of @Version@ elements. 
 --
--- * 'dcvrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- * 'dcvrsMarker' - A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 --
 -- * 'dcvrsResponseStatus' - -- | The response status code.
 describeClusterVersionsResponse
     :: Int -- ^ 'dcvrsResponseStatus'
     -> DescribeClusterVersionsResponse
-describeClusterVersionsResponse pResponseStatus_ =
-  DescribeClusterVersionsResponse'
-    { _dcvrsClusterVersions = Nothing
-    , _dcvrsMarker = Nothing
-    , _dcvrsResponseStatus = pResponseStatus_
-    }
+describeClusterVersionsResponse pResponseStatus_
+  = DescribeClusterVersionsResponse'{_dcvrsClusterVersions
+                                       = Nothing,
+                                     _dcvrsMarker = Nothing,
+                                     _dcvrsResponseStatus = pResponseStatus_}
 
-
--- | A list of @Version@ elements.
+-- | A list of @Version@ elements. 
 dcvrsClusterVersions :: Lens' DescribeClusterVersionsResponse [ClusterVersion]
 dcvrsClusterVersions = lens _dcvrsClusterVersions (\ s a -> s{_dcvrsClusterVersions = a}) . _Default . _Coerce
 
--- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request.
+-- | A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the @Marker@ parameter and retrying the command. If the @Marker@ field is empty, all response records have been retrieved for the request. 
 dcvrsMarker :: Lens' DescribeClusterVersionsResponse (Maybe Text)
 dcvrsMarker = lens _dcvrsMarker (\ s a -> s{_dcvrsMarker = a})
 

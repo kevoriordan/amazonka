@@ -21,7 +21,7 @@
 -- Removes the specified managed policy from the specified user.
 --
 --
--- A user can also have inline policies embedded with it. To delete an inline policy, use the 'DeleteUserPolicy' API. For information about policies, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html Managed Policies and Inline Policies> in the /IAM User Guide/ .
+-- A user can also have inline policies embedded with it. To delete an inline policy, use the 'DeleteUserPolicy' API. For information about policies, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html Managed Policies and Inline Policies> in the /IAM User Guide/ .
 --
 module Network.AWS.IAM.DetachUserPolicy
     (
@@ -45,32 +45,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detachUserPolicy' smart constructor.
-data DetachUserPolicy = DetachUserPolicy'
-  { _dUserName  :: !Text
-  , _dPolicyARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachUserPolicy = DetachUserPolicy'{_dUserName
+                                          :: !Text,
+                                          _dPolicyARN :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DetachUserPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dUserName' - The name (friendly name, not ARN) of the IAM user to detach the policy from. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'dUserName' - The name (friendly name, not ARN) of the IAM user to detach the policy from. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 --
--- * 'dPolicyARN' - The Amazon Resource Name (ARN) of the IAM policy you want to detach. For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
+-- * 'dPolicyARN' - The Amazon Resource Name (ARN) of the IAM policy you want to detach. For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
 detachUserPolicy
     :: Text -- ^ 'dUserName'
     -> Text -- ^ 'dPolicyARN'
     -> DetachUserPolicy
-detachUserPolicy pUserName_ pPolicyARN_ =
-  DetachUserPolicy' {_dUserName = pUserName_, _dPolicyARN = pPolicyARN_}
+detachUserPolicy pUserName_ pPolicyARN_
+  = DetachUserPolicy'{_dUserName = pUserName_,
+                      _dPolicyARN = pPolicyARN_}
 
-
--- | The name (friendly name, not ARN) of the IAM user to detach the policy from. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name (friendly name, not ARN) of the IAM user to detach the policy from. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 dUserName :: Lens' DetachUserPolicy Text
 dUserName = lens _dUserName (\ s a -> s{_dUserName = a})
 
--- | The Amazon Resource Name (ARN) of the IAM policy you want to detach. For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
+-- | The Amazon Resource Name (ARN) of the IAM policy you want to detach. For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> in the /AWS General Reference/ .
 dPolicyARN :: Lens' DetachUserPolicy Text
 dPolicyARN = lens _dPolicyARN (\ s a -> s{_dPolicyARN = a})
 
@@ -97,16 +96,14 @@ instance ToQuery DetachUserPolicy where
                "UserName" =: _dUserName, "PolicyArn" =: _dPolicyARN]
 
 -- | /See:/ 'detachUserPolicyResponse' smart constructor.
-data DetachUserPolicyResponse =
-  DetachUserPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachUserPolicyResponse = DetachUserPolicyResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DetachUserPolicyResponse' with the minimum fields required to make a request.
 --
 detachUserPolicyResponse
     :: DetachUserPolicyResponse
 detachUserPolicyResponse = DetachUserPolicyResponse'
-
 
 instance NFData DetachUserPolicyResponse where

@@ -1,6 +1,6 @@
 name:                  amazonka-cloudwatch-events
 version:               1.6.1
-synopsis:              Amazon CloudWatch Events SDK.
+synopsis:              Amazon EventBridge SDK.
 homepage:              https://github.com/brendanhay/amazonka
 bug-reports:           https://github.com/brendanhay/amazonka/issues
 license:               MPL-2.0
@@ -45,31 +45,76 @@ library
 
     exposed-modules:
           Network.AWS.CloudWatchEvents
+        , Network.AWS.CloudWatchEvents.ActivateEventSource
+        , Network.AWS.CloudWatchEvents.CreateEventBus
+        , Network.AWS.CloudWatchEvents.CreatePartnerEventSource
+        , Network.AWS.CloudWatchEvents.DeactivateEventSource
+        , Network.AWS.CloudWatchEvents.DeleteEventBus
+        , Network.AWS.CloudWatchEvents.DeletePartnerEventSource
         , Network.AWS.CloudWatchEvents.DeleteRule
         , Network.AWS.CloudWatchEvents.DescribeEventBus
+        , Network.AWS.CloudWatchEvents.DescribeEventSource
+        , Network.AWS.CloudWatchEvents.DescribePartnerEventSource
         , Network.AWS.CloudWatchEvents.DescribeRule
         , Network.AWS.CloudWatchEvents.DisableRule
         , Network.AWS.CloudWatchEvents.EnableRule
+        , Network.AWS.CloudWatchEvents.ListEventBuses
+        , Network.AWS.CloudWatchEvents.ListEventSources
+        , Network.AWS.CloudWatchEvents.ListPartnerEventSourceAccounts
+        , Network.AWS.CloudWatchEvents.ListPartnerEventSources
         , Network.AWS.CloudWatchEvents.ListRuleNamesByTarget
         , Network.AWS.CloudWatchEvents.ListRules
+        , Network.AWS.CloudWatchEvents.ListTagsForResource
         , Network.AWS.CloudWatchEvents.ListTargetsByRule
         , Network.AWS.CloudWatchEvents.PutEvents
+        , Network.AWS.CloudWatchEvents.PutPartnerEvents
         , Network.AWS.CloudWatchEvents.PutPermission
         , Network.AWS.CloudWatchEvents.PutRule
         , Network.AWS.CloudWatchEvents.PutTargets
         , Network.AWS.CloudWatchEvents.RemovePermission
         , Network.AWS.CloudWatchEvents.RemoveTargets
+        , Network.AWS.CloudWatchEvents.TagResource
         , Network.AWS.CloudWatchEvents.TestEventPattern
         , Network.AWS.CloudWatchEvents.Types
+        , Network.AWS.CloudWatchEvents.UntagResource
         , Network.AWS.CloudWatchEvents.Waiters
 
     other-modules:
-          Network.AWS.CloudWatchEvents.Types.Product
-        , Network.AWS.CloudWatchEvents.Types.Sum
+          Network.AWS.CloudWatchEvents.Types.AWSVPCConfiguration
+        , Network.AWS.CloudWatchEvents.Types.AssignPublicIP
+        , Network.AWS.CloudWatchEvents.Types.BatchArrayProperties
+        , Network.AWS.CloudWatchEvents.Types.BatchParameters
+        , Network.AWS.CloudWatchEvents.Types.BatchRetryStrategy
+        , Network.AWS.CloudWatchEvents.Types.Condition
+        , Network.AWS.CloudWatchEvents.Types.EcsParameters
+        , Network.AWS.CloudWatchEvents.Types.EventBus
+        , Network.AWS.CloudWatchEvents.Types.EventSource
+        , Network.AWS.CloudWatchEvents.Types.EventSourceState
+        , Network.AWS.CloudWatchEvents.Types.InputTransformer
+        , Network.AWS.CloudWatchEvents.Types.KinesisParameters
+        , Network.AWS.CloudWatchEvents.Types.LaunchType
+        , Network.AWS.CloudWatchEvents.Types.NetworkConfiguration
+        , Network.AWS.CloudWatchEvents.Types.PartnerEventSource
+        , Network.AWS.CloudWatchEvents.Types.PartnerEventSourceAccount
+        , Network.AWS.CloudWatchEvents.Types.Product
+        , Network.AWS.CloudWatchEvents.Types.PutEventsRequestEntry
+        , Network.AWS.CloudWatchEvents.Types.PutEventsResultEntry
+        , Network.AWS.CloudWatchEvents.Types.PutPartnerEventsRequestEntry
+        , Network.AWS.CloudWatchEvents.Types.PutPartnerEventsResultEntry
+        , Network.AWS.CloudWatchEvents.Types.PutTargetsResultEntry
+        , Network.AWS.CloudWatchEvents.Types.RemoveTargetsResultEntry
+        , Network.AWS.CloudWatchEvents.Types.Rule
+        , Network.AWS.CloudWatchEvents.Types.RuleState
+        , Network.AWS.CloudWatchEvents.Types.RunCommandParameters
+        , Network.AWS.CloudWatchEvents.Types.RunCommandTarget
+        , Network.AWS.CloudWatchEvents.Types.SqsParameters
+        , Network.AWS.CloudWatchEvents.Types.Tag
+        , Network.AWS.CloudWatchEvents.Types.Target
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cloudwatch-events-test
     type:              exitcode-stdio-1.0
@@ -93,6 +138,7 @@ test-suite amazonka-cloudwatch-events-test
         , amazonka-cloudwatch-events
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

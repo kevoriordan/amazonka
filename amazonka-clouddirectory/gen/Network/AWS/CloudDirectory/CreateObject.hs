@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an object in a 'Directory' . Additionally attaches the object to a parent, if a parent reference and @LinkName@ is specified. An object is simply a collection of 'Facet' attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet.
+-- Creates an object in a 'Directory' . Additionally attaches the object to a parent, if a parent reference and @LinkName@ is specified. An object is simply a collection of 'Facet' attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet. 
 --
 --
 module Network.AWS.CloudDirectory.CreateObject
@@ -49,14 +49,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createObject' smart constructor.
-data CreateObject = CreateObject'
-  { _coParentReference     :: !(Maybe ObjectReference)
-  , _coObjectAttributeList :: !(Maybe [AttributeKeyAndValue])
-  , _coLinkName            :: !(Maybe Text)
-  , _coDirectoryARN        :: !Text
-  , _coSchemaFacets        :: ![SchemaFacet]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateObject = CreateObject'{_coParentReference
+                                  :: !(Maybe ObjectReference),
+                                  _coObjectAttributeList ::
+                                  !(Maybe [AttributeKeyAndValue]),
+                                  _coLinkName :: !(Maybe Text),
+                                  _coDirectoryARN :: !Text,
+                                  _coSchemaFacets :: ![SchemaFacet]}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateObject' with the minimum fields required to make a request.
 --
@@ -74,15 +74,12 @@ data CreateObject = CreateObject'
 createObject
     :: Text -- ^ 'coDirectoryARN'
     -> CreateObject
-createObject pDirectoryARN_ =
-  CreateObject'
-    { _coParentReference = Nothing
-    , _coObjectAttributeList = Nothing
-    , _coLinkName = Nothing
-    , _coDirectoryARN = pDirectoryARN_
-    , _coSchemaFacets = mempty
-    }
-
+createObject pDirectoryARN_
+  = CreateObject'{_coParentReference = Nothing,
+                  _coObjectAttributeList = Nothing,
+                  _coLinkName = Nothing,
+                  _coDirectoryARN = pDirectoryARN_,
+                  _coSchemaFacets = mempty}
 
 -- | If specified, the parent reference to which this object will be attached.
 coParentReference :: Lens' CreateObject (Maybe ObjectReference)
@@ -139,11 +136,10 @@ instance ToQuery CreateObject where
         toQuery = const mempty
 
 -- | /See:/ 'createObjectResponse' smart constructor.
-data CreateObjectResponse = CreateObjectResponse'
-  { _corsObjectIdentifier :: !(Maybe Text)
-  , _corsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateObjectResponse = CreateObjectResponse'{_corsObjectIdentifier
+                                                  :: !(Maybe Text),
+                                                  _corsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateObjectResponse' with the minimum fields required to make a request.
 --
@@ -155,10 +151,10 @@ data CreateObjectResponse = CreateObjectResponse'
 createObjectResponse
     :: Int -- ^ 'corsResponseStatus'
     -> CreateObjectResponse
-createObjectResponse pResponseStatus_ =
-  CreateObjectResponse'
-    {_corsObjectIdentifier = Nothing, _corsResponseStatus = pResponseStatus_}
-
+createObjectResponse pResponseStatus_
+  = CreateObjectResponse'{_corsObjectIdentifier =
+                            Nothing,
+                          _corsResponseStatus = pResponseStatus_}
 
 -- | The identifier that is associated with the object.
 corsObjectIdentifier :: Lens' CreateObjectResponse (Maybe Text)

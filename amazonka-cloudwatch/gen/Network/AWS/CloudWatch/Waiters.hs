@@ -16,19 +16,27 @@
 module Network.AWS.CloudWatch.Waiters where
 
 import Network.AWS.CloudWatch.DescribeAlarms
+import Network.AWS.CloudWatch.DescribeAlarms
 import Network.AWS.CloudWatch.Types
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Waiter
 
 -- | Polls 'Network.AWS.CloudWatch.DescribeAlarms' every 5 seconds until a successful state is reached. An error is returned after 40 failed checks.
-alarmExists :: Wait DescribeAlarms
-alarmExists =
-  Wait
-    { _waitName = "AlarmExists"
-    , _waitAttempts = 40
-    , _waitDelay = 5
-    , _waitAcceptors =
-        [matchNonEmpty True AcceptSuccess (folding (concatOf darsMetricAlarms))]
-    }
+compositeAlarmExists :: Wait DescribeAlarms
+compositeAlarmExists
+  = Wait{_waitName = "CompositeAlarmExists",
+         _waitAttempts = 40, _waitDelay = 5,
+         _waitAcceptors =
+           [matchNonEmpty True AcceptSuccess
+              (folding
+                 (concatOf (darsCompositeAlarms . to toList)))]}
 
+-- | Polls 'Network.AWS.CloudWatch.DescribeAlarms' every 5 seconds until a successful state is reached. An error is returned after 40 failed checks.
+alarmExists :: Wait DescribeAlarms
+alarmExists
+  = Wait{_waitName = "AlarmExists", _waitAttempts = 40,
+         _waitDelay = 5,
+         _waitAcceptors =
+           [matchNonEmpty True AcceptSuccess
+              (folding (concatOf (darsMetricAlarms . to toList)))]}

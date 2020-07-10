@@ -62,11 +62,10 @@ import Network.AWS.WAF.Types.Product
 --
 --
 -- /See:/ 'deleteXSSMatchSet' smart constructor.
-data DeleteXSSMatchSet = DeleteXSSMatchSet'
-  { _dxmsXSSMatchSetId :: !Text
-  , _dxmsChangeToken   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteXSSMatchSet = DeleteXSSMatchSet'{_dxmsXSSMatchSetId
+                                            :: !Text,
+                                            _dxmsChangeToken :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteXSSMatchSet' with the minimum fields required to make a request.
 --
@@ -79,10 +78,10 @@ deleteXSSMatchSet
     :: Text -- ^ 'dxmsXSSMatchSetId'
     -> Text -- ^ 'dxmsChangeToken'
     -> DeleteXSSMatchSet
-deleteXSSMatchSet pXSSMatchSetId_ pChangeToken_ =
-  DeleteXSSMatchSet'
-    {_dxmsXSSMatchSetId = pXSSMatchSetId_, _dxmsChangeToken = pChangeToken_}
-
+deleteXSSMatchSet pXSSMatchSetId_ pChangeToken_
+  = DeleteXSSMatchSet'{_dxmsXSSMatchSetId =
+                         pXSSMatchSetId_,
+                       _dxmsChangeToken = pChangeToken_}
 
 -- | The @XssMatchSetId@ of the 'XssMatchSet' that you want to delete. @XssMatchSetId@ is returned by 'CreateXssMatchSet' and by 'ListXssMatchSets' .
 dxmsXSSMatchSetId :: Lens' DeleteXSSMatchSet Text
@@ -132,11 +131,12 @@ instance ToQuery DeleteXSSMatchSet where
 --
 --
 -- /See:/ 'deleteXSSMatchSetResponse' smart constructor.
-data DeleteXSSMatchSetResponse = DeleteXSSMatchSetResponse'
-  { _dxmsrsChangeToken    :: !(Maybe Text)
-  , _dxmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteXSSMatchSetResponse = DeleteXSSMatchSetResponse'{_dxmsrsChangeToken
+                                                            :: !(Maybe Text),
+                                                            _dxmsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteXSSMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -148,10 +148,10 @@ data DeleteXSSMatchSetResponse = DeleteXSSMatchSetResponse'
 deleteXSSMatchSetResponse
     :: Int -- ^ 'dxmsrsResponseStatus'
     -> DeleteXSSMatchSetResponse
-deleteXSSMatchSetResponse pResponseStatus_ =
-  DeleteXSSMatchSetResponse'
-    {_dxmsrsChangeToken = Nothing, _dxmsrsResponseStatus = pResponseStatus_}
-
+deleteXSSMatchSetResponse pResponseStatus_
+  = DeleteXSSMatchSetResponse'{_dxmsrsChangeToken =
+                                 Nothing,
+                               _dxmsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteXssMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 dxmsrsChangeToken :: Lens' DeleteXSSMatchSetResponse (Maybe Text)

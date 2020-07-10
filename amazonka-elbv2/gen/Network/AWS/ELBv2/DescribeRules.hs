@@ -21,6 +21,8 @@
 -- Describes the specified rules or the rules for the specified listener. You must specify either a listener or one or more rules.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.ELBv2.DescribeRules
     (
     -- * Creating a Request
@@ -44,18 +46,18 @@ module Network.AWS.ELBv2.DescribeRules
 import Network.AWS.ELBv2.Types
 import Network.AWS.ELBv2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeRules' smart constructor.
-data DescribeRules = DescribeRules'
-  { _drListenerARN :: !(Maybe Text)
-  , _drMarker      :: !(Maybe Text)
-  , _drRuleARNs    :: !(Maybe [Text])
-  , _drPageSize    :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRules = DescribeRules'{_drListenerARN ::
+                                    !(Maybe Text),
+                                    _drMarker :: !(Maybe Text),
+                                    _drRuleARNs :: !(Maybe [Text]),
+                                    _drPageSize :: !(Maybe Nat)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeRules' with the minimum fields required to make a request.
 --
@@ -70,14 +72,10 @@ data DescribeRules = DescribeRules'
 -- * 'drPageSize' - The maximum number of results to return with this call.
 describeRules
     :: DescribeRules
-describeRules =
-  DescribeRules'
-    { _drListenerARN = Nothing
-    , _drMarker = Nothing
-    , _drRuleARNs = Nothing
-    , _drPageSize = Nothing
-    }
-
+describeRules
+  = DescribeRules'{_drListenerARN = Nothing,
+                   _drMarker = Nothing, _drRuleARNs = Nothing,
+                   _drPageSize = Nothing}
 
 -- | The Amazon Resource Name (ARN) of the listener.
 drListenerARN :: Lens' DescribeRules (Maybe Text)
@@ -94,6 +92,13 @@ drRuleARNs = lens _drRuleARNs (\ s a -> s{_drRuleARNs = a}) . _Default . _Coerce
 -- | The maximum number of results to return with this call.
 drPageSize :: Lens' DescribeRules (Maybe Natural)
 drPageSize = lens _drPageSize (\ s a -> s{_drPageSize = a}) . mapping _Nat
+
+instance AWSPager DescribeRules where
+        page rq rs
+          | stop (rs ^. drsrsNextMarker) = Nothing
+          | stop (rs ^. drsrsRules) = Nothing
+          | otherwise =
+            Just $ rq & drMarker .~ rs ^. drsrsNextMarker
 
 instance AWSRequest DescribeRules where
         type Rs DescribeRules = DescribeRulesResponse
@@ -129,12 +134,14 @@ instance ToQuery DescribeRules where
                "PageSize" =: _drPageSize]
 
 -- | /See:/ 'describeRulesResponse' smart constructor.
-data DescribeRulesResponse = DescribeRulesResponse'
-  { _drsrsRules          :: !(Maybe [Rule])
-  , _drsrsNextMarker     :: !(Maybe Text)
-  , _drsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRulesResponse = DescribeRulesResponse'{_drsrsRules
+                                                    :: !(Maybe [Rule]),
+                                                    _drsrsNextMarker ::
+                                                    !(Maybe Text),
+                                                    _drsrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeRulesResponse' with the minimum fields required to make a request.
 --
@@ -142,25 +149,22 @@ data DescribeRulesResponse = DescribeRulesResponse'
 --
 -- * 'drsrsRules' - Information about the rules.
 --
--- * 'drsrsNextMarker' - The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+-- * 'drsrsNextMarker' - If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
 --
 -- * 'drsrsResponseStatus' - -- | The response status code.
 describeRulesResponse
     :: Int -- ^ 'drsrsResponseStatus'
     -> DescribeRulesResponse
-describeRulesResponse pResponseStatus_ =
-  DescribeRulesResponse'
-    { _drsrsRules = Nothing
-    , _drsrsNextMarker = Nothing
-    , _drsrsResponseStatus = pResponseStatus_
-    }
-
+describeRulesResponse pResponseStatus_
+  = DescribeRulesResponse'{_drsrsRules = Nothing,
+                           _drsrsNextMarker = Nothing,
+                           _drsrsResponseStatus = pResponseStatus_}
 
 -- | Information about the rules.
 drsrsRules :: Lens' DescribeRulesResponse [Rule]
 drsrsRules = lens _drsrsRules (\ s a -> s{_drsrsRules = a}) . _Default . _Coerce
 
--- | The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+-- | If there are additional results, this is the marker for the next set of results. Otherwise, this is null.
 drsrsNextMarker :: Lens' DescribeRulesResponse (Maybe Text)
 drsrsNextMarker = lens _drsrsNextMarker (\ s a -> s{_drsrsNextMarker = a})
 

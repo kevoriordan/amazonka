@@ -48,12 +48,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDeviceDefinitionVersion' smart constructor.
-data CreateDeviceDefinitionVersion = CreateDeviceDefinitionVersion'
-  { _cddvAmznClientToken    :: !(Maybe Text)
-  , _cddvDevices            :: !(Maybe [Device])
-  , _cddvDeviceDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeviceDefinitionVersion = CreateDeviceDefinitionVersion'{_cddvAmznClientToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _cddvDevices
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [Device]),
+                                                                    _cddvDeviceDefinitionId
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateDeviceDefinitionVersion' with the minimum fields required to make a request.
 --
@@ -67,13 +73,12 @@ data CreateDeviceDefinitionVersion = CreateDeviceDefinitionVersion'
 createDeviceDefinitionVersion
     :: Text -- ^ 'cddvDeviceDefinitionId'
     -> CreateDeviceDefinitionVersion
-createDeviceDefinitionVersion pDeviceDefinitionId_ =
-  CreateDeviceDefinitionVersion'
-    { _cddvAmznClientToken = Nothing
-    , _cddvDevices = Nothing
-    , _cddvDeviceDefinitionId = pDeviceDefinitionId_
-    }
-
+createDeviceDefinitionVersion pDeviceDefinitionId_
+  = CreateDeviceDefinitionVersion'{_cddvAmznClientToken
+                                     = Nothing,
+                                   _cddvDevices = Nothing,
+                                   _cddvDeviceDefinitionId =
+                                     pDeviceDefinitionId_}
 
 -- | A client token used to correlate requests and responses.
 cddvAmznClientToken :: Lens' CreateDeviceDefinitionVersion (Maybe Text)
@@ -128,14 +133,27 @@ instance ToQuery CreateDeviceDefinitionVersion where
         toQuery = const mempty
 
 -- | /See:/ 'createDeviceDefinitionVersionResponse' smart constructor.
-data CreateDeviceDefinitionVersionResponse = CreateDeviceDefinitionVersionResponse'
-  { _cddvrsARN               :: !(Maybe Text)
-  , _cddvrsCreationTimestamp :: !(Maybe Text)
-  , _cddvrsVersion           :: !(Maybe Text)
-  , _cddvrsId                :: !(Maybe Text)
-  , _cddvrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeviceDefinitionVersionResponse = CreateDeviceDefinitionVersionResponse'{_cddvrsARN
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cddvrsCreationTimestamp
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cddvrsVersion
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cddvrsId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _cddvrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'CreateDeviceDefinitionVersionResponse' with the minimum fields required to make a request.
 --
@@ -145,23 +163,23 @@ data CreateDeviceDefinitionVersionResponse = CreateDeviceDefinitionVersionRespon
 --
 -- * 'cddvrsCreationTimestamp' - The time, in milliseconds since the epoch, when the version was created.
 --
--- * 'cddvrsVersion' - The unique ID of the version.
+-- * 'cddvrsVersion' - The ID of the version.
 --
--- * 'cddvrsId' - The ID of the version.
+-- * 'cddvrsId' - The ID of the parent definition that the version is associated with.
 --
 -- * 'cddvrsResponseStatus' - -- | The response status code.
 createDeviceDefinitionVersionResponse
     :: Int -- ^ 'cddvrsResponseStatus'
     -> CreateDeviceDefinitionVersionResponse
-createDeviceDefinitionVersionResponse pResponseStatus_ =
-  CreateDeviceDefinitionVersionResponse'
-    { _cddvrsARN = Nothing
-    , _cddvrsCreationTimestamp = Nothing
-    , _cddvrsVersion = Nothing
-    , _cddvrsId = Nothing
-    , _cddvrsResponseStatus = pResponseStatus_
-    }
-
+createDeviceDefinitionVersionResponse
+  pResponseStatus_
+  = CreateDeviceDefinitionVersionResponse'{_cddvrsARN =
+                                             Nothing,
+                                           _cddvrsCreationTimestamp = Nothing,
+                                           _cddvrsVersion = Nothing,
+                                           _cddvrsId = Nothing,
+                                           _cddvrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The ARN of the version.
 cddvrsARN :: Lens' CreateDeviceDefinitionVersionResponse (Maybe Text)
@@ -171,11 +189,11 @@ cddvrsARN = lens _cddvrsARN (\ s a -> s{_cddvrsARN = a})
 cddvrsCreationTimestamp :: Lens' CreateDeviceDefinitionVersionResponse (Maybe Text)
 cddvrsCreationTimestamp = lens _cddvrsCreationTimestamp (\ s a -> s{_cddvrsCreationTimestamp = a})
 
--- | The unique ID of the version.
+-- | The ID of the version.
 cddvrsVersion :: Lens' CreateDeviceDefinitionVersionResponse (Maybe Text)
 cddvrsVersion = lens _cddvrsVersion (\ s a -> s{_cddvrsVersion = a})
 
--- | The ID of the version.
+-- | The ID of the parent definition that the version is associated with.
 cddvrsId :: Lens' CreateDeviceDefinitionVersionResponse (Maybe Text)
 cddvrsId = lens _cddvrsId (\ s a -> s{_cddvrsId = a})
 

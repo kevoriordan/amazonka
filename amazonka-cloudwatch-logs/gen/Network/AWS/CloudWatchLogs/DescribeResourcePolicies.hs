@@ -21,6 +21,8 @@
 -- Lists the resource policies in this account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CloudWatchLogs.DescribeResourcePolicies
     (
     -- * Creating a Request
@@ -42,16 +44,18 @@ module Network.AWS.CloudWatchLogs.DescribeResourcePolicies
 import Network.AWS.CloudWatchLogs.Types
 import Network.AWS.CloudWatchLogs.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeResourcePolicies' smart constructor.
-data DescribeResourcePolicies = DescribeResourcePolicies'
-  { _drpNextToken :: !(Maybe Text)
-  , _drpLimit     :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeResourcePolicies = DescribeResourcePolicies'{_drpNextToken
+                                                          :: !(Maybe Text),
+                                                          _drpLimit ::
+                                                          !(Maybe Nat)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeResourcePolicies' with the minimum fields required to make a request.
 --
@@ -62,9 +66,9 @@ data DescribeResourcePolicies = DescribeResourcePolicies'
 -- * 'drpLimit' - The maximum number of resource policies to be displayed with one call of this API.
 describeResourcePolicies
     :: DescribeResourcePolicies
-describeResourcePolicies =
-  DescribeResourcePolicies' {_drpNextToken = Nothing, _drpLimit = Nothing}
-
+describeResourcePolicies
+  = DescribeResourcePolicies'{_drpNextToken = Nothing,
+                              _drpLimit = Nothing}
 
 -- | Undocumented member.
 drpNextToken :: Lens' DescribeResourcePolicies (Maybe Text)
@@ -73,6 +77,13 @@ drpNextToken = lens _drpNextToken (\ s a -> s{_drpNextToken = a})
 -- | The maximum number of resource policies to be displayed with one call of this API.
 drpLimit :: Lens' DescribeResourcePolicies (Maybe Natural)
 drpLimit = lens _drpLimit (\ s a -> s{_drpLimit = a}) . mapping _Nat
+
+instance AWSPager DescribeResourcePolicies where
+        page rq rs
+          | stop (rs ^. drprsNextToken) = Nothing
+          | stop (rs ^. drprsResourcePolicies) = Nothing
+          | otherwise =
+            Just $ rq & drpNextToken .~ rs ^. drprsNextToken
 
 instance AWSRequest DescribeResourcePolicies where
         type Rs DescribeResourcePolicies =
@@ -114,12 +125,19 @@ instance ToQuery DescribeResourcePolicies where
         toQuery = const mempty
 
 -- | /See:/ 'describeResourcePoliciesResponse' smart constructor.
-data DescribeResourcePoliciesResponse = DescribeResourcePoliciesResponse'
-  { _drprsResourcePolicies :: !(Maybe [ResourcePolicy])
-  , _drprsNextToken        :: !(Maybe Text)
-  , _drprsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeResourcePoliciesResponse = DescribeResourcePoliciesResponse'{_drprsResourcePolicies
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [ResourcePolicy]),
+                                                                          _drprsNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _drprsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeResourcePoliciesResponse' with the minimum fields required to make a request.
 --
@@ -133,13 +151,11 @@ data DescribeResourcePoliciesResponse = DescribeResourcePoliciesResponse'
 describeResourcePoliciesResponse
     :: Int -- ^ 'drprsResponseStatus'
     -> DescribeResourcePoliciesResponse
-describeResourcePoliciesResponse pResponseStatus_ =
-  DescribeResourcePoliciesResponse'
-    { _drprsResourcePolicies = Nothing
-    , _drprsNextToken = Nothing
-    , _drprsResponseStatus = pResponseStatus_
-    }
-
+describeResourcePoliciesResponse pResponseStatus_
+  = DescribeResourcePoliciesResponse'{_drprsResourcePolicies
+                                        = Nothing,
+                                      _drprsNextToken = Nothing,
+                                      _drprsResponseStatus = pResponseStatus_}
 
 -- | The resource policies that exist in this account.
 drprsResourcePolicies :: Lens' DescribeResourcePoliciesResponse [ResourcePolicy]

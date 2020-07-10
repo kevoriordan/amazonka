@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete an email channel
+-- Disables the email channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteEmailChannel
     (
     -- * Creating a Request
@@ -43,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteEmailChannel' smart constructor.
-newtype DeleteEmailChannel = DeleteEmailChannel'
-  { _decApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEmailChannel = DeleteEmailChannel'{_decApplicationId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteEmailChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'decApplicationId' - Undocumented member.
+-- * 'decApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteEmailChannel
     :: Text -- ^ 'decApplicationId'
     -> DeleteEmailChannel
-deleteEmailChannel pApplicationId_ =
-  DeleteEmailChannel' {_decApplicationId = pApplicationId_}
+deleteEmailChannel pApplicationId_
+  = DeleteEmailChannel'{_decApplicationId =
+                          pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 decApplicationId :: Lens' DeleteEmailChannel Text
 decApplicationId = lens _decApplicationId (\ s a -> s{_decApplicationId = a})
 
@@ -95,11 +97,13 @@ instance ToQuery DeleteEmailChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteEmailChannelResponse' smart constructor.
-data DeleteEmailChannelResponse = DeleteEmailChannelResponse'
-  { _decrsResponseStatus       :: !Int
-  , _decrsEmailChannelResponse :: !EmailChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEmailChannelResponse = DeleteEmailChannelResponse'{_decrsResponseStatus
+                                                              :: !Int,
+                                                              _decrsEmailChannelResponse
+                                                              ::
+                                                              !EmailChannelResponse}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteEmailChannelResponse' with the minimum fields required to make a request.
 --
@@ -112,12 +116,12 @@ deleteEmailChannelResponse
     :: Int -- ^ 'decrsResponseStatus'
     -> EmailChannelResponse -- ^ 'decrsEmailChannelResponse'
     -> DeleteEmailChannelResponse
-deleteEmailChannelResponse pResponseStatus_ pEmailChannelResponse_ =
-  DeleteEmailChannelResponse'
-    { _decrsResponseStatus = pResponseStatus_
-    , _decrsEmailChannelResponse = pEmailChannelResponse_
-    }
-
+deleteEmailChannelResponse pResponseStatus_
+  pEmailChannelResponse_
+  = DeleteEmailChannelResponse'{_decrsResponseStatus =
+                                  pResponseStatus_,
+                                _decrsEmailChannelResponse =
+                                  pEmailChannelResponse_}
 
 -- | -- | The response status code.
 decrsResponseStatus :: Lens' DeleteEmailChannelResponse Int

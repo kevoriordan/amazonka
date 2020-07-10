@@ -18,7 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The DeleteReplicationJob API is used to delete a ReplicationJob, resulting in no further ReplicationRuns. This will delete the contents of the S3 bucket used to store SMS artifacts, but will not delete any AMIs created by the SMS service.
+-- Deletes the specified replication job.
+--
+--
+-- After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
+--
 module Network.AWS.SMS.DeleteReplicationJob
     (
     -- * Creating a Request
@@ -42,24 +46,24 @@ import Network.AWS.SMS.Types
 import Network.AWS.SMS.Types.Product
 
 -- | /See:/ 'deleteReplicationJob' smart constructor.
-newtype DeleteReplicationJob = DeleteReplicationJob'
-  { _drjReplicationJobId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReplicationJob = DeleteReplicationJob'{_drjReplicationJobId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteReplicationJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drjReplicationJobId' - Undocumented member.
+-- * 'drjReplicationJobId' - The identifier of the replication job.
 deleteReplicationJob
     :: Text -- ^ 'drjReplicationJobId'
     -> DeleteReplicationJob
-deleteReplicationJob pReplicationJobId_ =
-  DeleteReplicationJob' {_drjReplicationJobId = pReplicationJobId_}
+deleteReplicationJob pReplicationJobId_
+  = DeleteReplicationJob'{_drjReplicationJobId =
+                            pReplicationJobId_}
 
-
--- | Undocumented member.
+-- | The identifier of the replication job.
 drjReplicationJobId :: Lens' DeleteReplicationJob Text
 drjReplicationJobId = lens _drjReplicationJobId (\ s a -> s{_drjReplicationJobId = a})
 
@@ -100,10 +104,10 @@ instance ToQuery DeleteReplicationJob where
         toQuery = const mempty
 
 -- | /See:/ 'deleteReplicationJobResponse' smart constructor.
-newtype DeleteReplicationJobResponse = DeleteReplicationJobResponse'
-  { _drjrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReplicationJobResponse = DeleteReplicationJobResponse'{_drjrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteReplicationJobResponse' with the minimum fields required to make a request.
 --
@@ -113,9 +117,9 @@ newtype DeleteReplicationJobResponse = DeleteReplicationJobResponse'
 deleteReplicationJobResponse
     :: Int -- ^ 'drjrsResponseStatus'
     -> DeleteReplicationJobResponse
-deleteReplicationJobResponse pResponseStatus_ =
-  DeleteReplicationJobResponse' {_drjrsResponseStatus = pResponseStatus_}
-
+deleteReplicationJobResponse pResponseStatus_
+  = DeleteReplicationJobResponse'{_drjrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 drjrsResponseStatus :: Lens' DeleteReplicationJobResponse Int

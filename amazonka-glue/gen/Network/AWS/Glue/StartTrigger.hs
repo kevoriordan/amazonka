@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts an existing trigger. See <http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html Triggering Jobs> for information about how different types of trigger are started.
+-- Starts an existing trigger. See <https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html Triggering Jobs> for information about how different types of trigger are started.
 --
 --
 module Network.AWS.Glue.StartTrigger
@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startTrigger' smart constructor.
-newtype StartTrigger = StartTrigger'
-  { _staName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartTrigger = StartTrigger'{_staName ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartTrigger' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype StartTrigger = StartTrigger'
 startTrigger
     :: Text -- ^ 'staName'
     -> StartTrigger
-startTrigger pName_ = StartTrigger' {_staName = pName_}
-
+startTrigger pName_
+  = StartTrigger'{_staName = pName_}
 
 -- | The name of the trigger to start.
 staName :: Lens' StartTrigger Text
@@ -98,11 +97,10 @@ instance ToQuery StartTrigger where
         toQuery = const mempty
 
 -- | /See:/ 'startTriggerResponse' smart constructor.
-data StartTriggerResponse = StartTriggerResponse'
-  { _starsName           :: !(Maybe Text)
-  , _starsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartTriggerResponse = StartTriggerResponse'{_starsName
+                                                  :: !(Maybe Text),
+                                                  _starsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartTriggerResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +112,9 @@ data StartTriggerResponse = StartTriggerResponse'
 startTriggerResponse
     :: Int -- ^ 'starsResponseStatus'
     -> StartTriggerResponse
-startTriggerResponse pResponseStatus_ =
-  StartTriggerResponse'
-    {_starsName = Nothing, _starsResponseStatus = pResponseStatus_}
-
+startTriggerResponse pResponseStatus_
+  = StartTriggerResponse'{_starsName = Nothing,
+                          _starsResponseStatus = pResponseStatus_}
 
 -- | The name of the trigger that was started.
 starsName :: Lens' StartTriggerResponse (Maybe Text)

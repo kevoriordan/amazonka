@@ -45,6 +45,8 @@ library
 
     exposed-modules:
           Network.AWS.Route53Domains
+        , Network.AWS.Route53Domains.AcceptDomainTransferFromAnotherAWSAccount
+        , Network.AWS.Route53Domains.CancelDomainTransferToAnotherAWSAccount
         , Network.AWS.Route53Domains.CheckDomainAvailability
         , Network.AWS.Route53Domains.CheckDomainTransferability
         , Network.AWS.Route53Domains.DeleteTagsForDomain
@@ -60,10 +62,12 @@ library
         , Network.AWS.Route53Domains.ListOperations
         , Network.AWS.Route53Domains.ListTagsForDomain
         , Network.AWS.Route53Domains.RegisterDomain
+        , Network.AWS.Route53Domains.RejectDomainTransferFromAnotherAWSAccount
         , Network.AWS.Route53Domains.RenewDomain
         , Network.AWS.Route53Domains.ResendContactReachabilityEmail
         , Network.AWS.Route53Domains.RetrieveDomainAuthCode
         , Network.AWS.Route53Domains.TransferDomain
+        , Network.AWS.Route53Domains.TransferDomainToAnotherAWSAccount
         , Network.AWS.Route53Domains.Types
         , Network.AWS.Route53Domains.UpdateDomainContact
         , Network.AWS.Route53Domains.UpdateDomainContactPrivacy
@@ -73,12 +77,29 @@ library
         , Network.AWS.Route53Domains.Waiters
 
     other-modules:
-          Network.AWS.Route53Domains.Types.Product
-        , Network.AWS.Route53Domains.Types.Sum
+          Network.AWS.Route53Domains.Types.BillingRecord
+        , Network.AWS.Route53Domains.Types.ContactDetail
+        , Network.AWS.Route53Domains.Types.ContactType
+        , Network.AWS.Route53Domains.Types.CountryCode
+        , Network.AWS.Route53Domains.Types.DomainAvailability
+        , Network.AWS.Route53Domains.Types.DomainSuggestion
+        , Network.AWS.Route53Domains.Types.DomainSummary
+        , Network.AWS.Route53Domains.Types.DomainTransferability
+        , Network.AWS.Route53Domains.Types.ExtraParam
+        , Network.AWS.Route53Domains.Types.ExtraParamName
+        , Network.AWS.Route53Domains.Types.Nameserver
+        , Network.AWS.Route53Domains.Types.OperationStatus
+        , Network.AWS.Route53Domains.Types.OperationSummary
+        , Network.AWS.Route53Domains.Types.OperationType
+        , Network.AWS.Route53Domains.Types.Product
+        , Network.AWS.Route53Domains.Types.ReachabilityStatus
+        , Network.AWS.Route53Domains.Types.Tag
+        , Network.AWS.Route53Domains.Types.Transferable
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-route53-domains-test
     type:              exitcode-stdio-1.0
@@ -102,6 +123,7 @@ test-suite amazonka-route53-domains-test
         , amazonka-route53-domains
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

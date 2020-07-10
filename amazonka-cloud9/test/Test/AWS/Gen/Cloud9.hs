@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Cloud9 where
 
 import Data.Proxy
-import Network.AWS.Cloud9
-import Test.AWS.Cloud9.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.Cloud9
+import Test.AWS.Cloud9.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -40,14 +40,23 @@ import Test.Tasty
 --         , requestDescribeEnvironmentStatus $
 --             describeEnvironmentStatus
 --
+--         , requestListTagsForResource $
+--             listTagsForResource
+--
 --         , requestCreateEnvironmentEC $
 --             createEnvironmentEC
+--
+--         , requestTagResource $
+--             tagResource
 --
 --         , requestCreateEnvironmentMembership $
 --             createEnvironmentMembership
 --
 --         , requestDescribeEnvironments $
 --             describeEnvironments
+--
+--         , requestUntagResource $
+--             untagResource
 --
 --         , requestDeleteEnvironmentMembership $
 --             deleteEnvironmentMembership
@@ -73,14 +82,23 @@ import Test.Tasty
 --         , responseDescribeEnvironmentStatus $
 --             describeEnvironmentStatusResponse
 --
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
+--
 --         , responseCreateEnvironmentEC $
 --             createEnvironmentECResponse
+--
+--         , responseTagResource $
+--             tagResourceResponse
 --
 --         , responseCreateEnvironmentMembership $
 --             createEnvironmentMembershipResponse
 --
 --         , responseDescribeEnvironments $
 --             describeEnvironmentsResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
 --
 --         , responseDeleteEnvironmentMembership $
 --             deleteEnvironmentMembershipResponse
@@ -116,10 +134,20 @@ requestDescribeEnvironmentStatus = req
     "DescribeEnvironmentStatus"
     "fixture/DescribeEnvironmentStatus.yaml"
 
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
+
 requestCreateEnvironmentEC :: CreateEnvironmentEC -> TestTree
 requestCreateEnvironmentEC = req
     "CreateEnvironmentEC"
     "fixture/CreateEnvironmentEC.yaml"
+
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
 
 requestCreateEnvironmentMembership :: CreateEnvironmentMembership -> TestTree
 requestCreateEnvironmentMembership = req
@@ -130,6 +158,11 @@ requestDescribeEnvironments :: DescribeEnvironments -> TestTree
 requestDescribeEnvironments = req
     "DescribeEnvironments"
     "fixture/DescribeEnvironments.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
 
 requestDeleteEnvironmentMembership :: DeleteEnvironmentMembership -> TestTree
 requestDeleteEnvironmentMembership = req
@@ -176,12 +209,26 @@ responseDescribeEnvironmentStatus = res
     cloud9
     (Proxy :: Proxy DescribeEnvironmentStatus)
 
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    cloud9
+    (Proxy :: Proxy ListTagsForResource)
+
 responseCreateEnvironmentEC :: CreateEnvironmentECResponse -> TestTree
 responseCreateEnvironmentEC = res
     "CreateEnvironmentECResponse"
     "fixture/CreateEnvironmentECResponse.proto"
     cloud9
     (Proxy :: Proxy CreateEnvironmentEC)
+
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    cloud9
+    (Proxy :: Proxy TagResource)
 
 responseCreateEnvironmentMembership :: CreateEnvironmentMembershipResponse -> TestTree
 responseCreateEnvironmentMembership = res
@@ -196,6 +243,13 @@ responseDescribeEnvironments = res
     "fixture/DescribeEnvironmentsResponse.proto"
     cloud9
     (Proxy :: Proxy DescribeEnvironments)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    cloud9
+    (Proxy :: Proxy UntagResource)
 
 responseDeleteEnvironmentMembership :: DeleteEnvironmentMembershipResponse -> TestTree
 responseDeleteEnvironmentMembership = res

@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of resource definitions.
+--
+-- This operation returns paginated results.
 module Network.AWS.Greengrass.ListResourceDefinitions
     (
     -- * Creating a Request
@@ -40,16 +42,18 @@ module Network.AWS.Greengrass.ListResourceDefinitions
 import Network.AWS.Greengrass.Types
 import Network.AWS.Greengrass.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listResourceDefinitions' smart constructor.
-data ListResourceDefinitions = ListResourceDefinitions'
-  { _lrdNextToken  :: !(Maybe Text)
-  , _lrdMaxResults :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceDefinitions = ListResourceDefinitions'{_lrdNextToken
+                                                        :: !(Maybe Text),
+                                                        _lrdMaxResults ::
+                                                        !(Maybe Text)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListResourceDefinitions' with the minimum fields required to make a request.
 --
@@ -60,9 +64,9 @@ data ListResourceDefinitions = ListResourceDefinitions'
 -- * 'lrdMaxResults' - The maximum number of results to be returned per request.
 listResourceDefinitions
     :: ListResourceDefinitions
-listResourceDefinitions =
-  ListResourceDefinitions' {_lrdNextToken = Nothing, _lrdMaxResults = Nothing}
-
+listResourceDefinitions
+  = ListResourceDefinitions'{_lrdNextToken = Nothing,
+                             _lrdMaxResults = Nothing}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lrdNextToken :: Lens' ListResourceDefinitions (Maybe Text)
@@ -71,6 +75,13 @@ lrdNextToken = lens _lrdNextToken (\ s a -> s{_lrdNextToken = a})
 -- | The maximum number of results to be returned per request.
 lrdMaxResults :: Lens' ListResourceDefinitions (Maybe Text)
 lrdMaxResults = lens _lrdMaxResults (\ s a -> s{_lrdMaxResults = a})
+
+instance AWSPager ListResourceDefinitions where
+        page rq rs
+          | stop (rs ^. lrdrsNextToken) = Nothing
+          | stop (rs ^. lrdrsDefinitions) = Nothing
+          | otherwise =
+            Just $ rq & lrdNextToken .~ rs ^. lrdrsNextToken
 
 instance AWSRequest ListResourceDefinitions where
         type Rs ListResourceDefinitions =
@@ -105,12 +116,18 @@ instance ToQuery ListResourceDefinitions where
                "MaxResults" =: _lrdMaxResults]
 
 -- | /See:/ 'listResourceDefinitionsResponse' smart constructor.
-data ListResourceDefinitionsResponse = ListResourceDefinitionsResponse'
-  { _lrdrsNextToken      :: !(Maybe Text)
-  , _lrdrsDefinitions    :: !(Maybe [DefinitionInformation])
-  , _lrdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourceDefinitionsResponse = ListResourceDefinitionsResponse'{_lrdrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lrdrsDefinitions
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [DefinitionInformation]),
+                                                                        _lrdrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListResourceDefinitionsResponse' with the minimum fields required to make a request.
 --
@@ -124,13 +141,11 @@ data ListResourceDefinitionsResponse = ListResourceDefinitionsResponse'
 listResourceDefinitionsResponse
     :: Int -- ^ 'lrdrsResponseStatus'
     -> ListResourceDefinitionsResponse
-listResourceDefinitionsResponse pResponseStatus_ =
-  ListResourceDefinitionsResponse'
-    { _lrdrsNextToken = Nothing
-    , _lrdrsDefinitions = Nothing
-    , _lrdrsResponseStatus = pResponseStatus_
-    }
-
+listResourceDefinitionsResponse pResponseStatus_
+  = ListResourceDefinitionsResponse'{_lrdrsNextToken =
+                                       Nothing,
+                                     _lrdrsDefinitions = Nothing,
+                                     _lrdrsResponseStatus = pResponseStatus_}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lrdrsNextToken :: Lens' ListResourceDefinitionsResponse (Maybe Text)

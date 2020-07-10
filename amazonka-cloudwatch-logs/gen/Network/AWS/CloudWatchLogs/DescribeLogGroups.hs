@@ -51,12 +51,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLogGroups' smart constructor.
-data DescribeLogGroups = DescribeLogGroups'
-  { _dlgLogGroupNamePrefix :: !(Maybe Text)
-  , _dlgNextToken          :: !(Maybe Text)
-  , _dlgLimit              :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLogGroups = DescribeLogGroups'{_dlgLogGroupNamePrefix
+                                            :: !(Maybe Text),
+                                            _dlgNextToken :: !(Maybe Text),
+                                            _dlgLimit :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeLogGroups' with the minimum fields required to make a request.
 --
@@ -69,13 +68,10 @@ data DescribeLogGroups = DescribeLogGroups'
 -- * 'dlgLimit' - The maximum number of items returned. If you don't specify a value, the default is up to 50 items.
 describeLogGroups
     :: DescribeLogGroups
-describeLogGroups =
-  DescribeLogGroups'
-    { _dlgLogGroupNamePrefix = Nothing
-    , _dlgNextToken = Nothing
-    , _dlgLimit = Nothing
-    }
-
+describeLogGroups
+  = DescribeLogGroups'{_dlgLogGroupNamePrefix =
+                         Nothing,
+                       _dlgNextToken = Nothing, _dlgLimit = Nothing}
 
 -- | The prefix to match.
 dlgLogGroupNamePrefix :: Lens' DescribeLogGroups (Maybe Text)
@@ -136,12 +132,15 @@ instance ToQuery DescribeLogGroups where
         toQuery = const mempty
 
 -- | /See:/ 'describeLogGroupsResponse' smart constructor.
-data DescribeLogGroupsResponse = DescribeLogGroupsResponse'
-  { _dlgrsLogGroups      :: !(Maybe [LogGroup])
-  , _dlgrsNextToken      :: !(Maybe Text)
-  , _dlgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLogGroupsResponse = DescribeLogGroupsResponse'{_dlgrsLogGroups
+                                                            ::
+                                                            !(Maybe [LogGroup]),
+                                                            _dlgrsNextToken ::
+                                                            !(Maybe Text),
+                                                            _dlgrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeLogGroupsResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +154,11 @@ data DescribeLogGroupsResponse = DescribeLogGroupsResponse'
 describeLogGroupsResponse
     :: Int -- ^ 'dlgrsResponseStatus'
     -> DescribeLogGroupsResponse
-describeLogGroupsResponse pResponseStatus_ =
-  DescribeLogGroupsResponse'
-    { _dlgrsLogGroups = Nothing
-    , _dlgrsNextToken = Nothing
-    , _dlgrsResponseStatus = pResponseStatus_
-    }
-
+describeLogGroupsResponse pResponseStatus_
+  = DescribeLogGroupsResponse'{_dlgrsLogGroups =
+                                 Nothing,
+                               _dlgrsNextToken = Nothing,
+                               _dlgrsResponseStatus = pResponseStatus_}
 
 -- | The log groups.
 dlgrsLogGroups :: Lens' DescribeLogGroupsResponse [LogGroup]

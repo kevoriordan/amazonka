@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns an array of @PolicyComplianceStatus@ objects in the response. Use @PolicyComplianceStatus@ to get a summary of which member accounts are protected by the specified policy.
+-- Returns an array of @PolicyComplianceStatus@ objects in the response. Use @PolicyComplianceStatus@ to get a summary of which member accounts are protected by the specified policy. 
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.FMS.ListComplianceStatus
     (
     -- * Creating a Request
@@ -43,17 +45,18 @@ module Network.AWS.FMS.ListComplianceStatus
 import Network.AWS.FMS.Types
 import Network.AWS.FMS.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listComplianceStatus' smart constructor.
-data ListComplianceStatus = ListComplianceStatus'
-  { _lcsNextToken  :: !(Maybe Text)
-  , _lcsMaxResults :: !(Maybe Nat)
-  , _lcsPolicyId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListComplianceStatus = ListComplianceStatus'{_lcsNextToken
+                                                  :: !(Maybe Text),
+                                                  _lcsMaxResults ::
+                                                  !(Maybe Nat),
+                                                  _lcsPolicyId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListComplianceStatus' with the minimum fields required to make a request.
 --
@@ -67,13 +70,9 @@ data ListComplianceStatus = ListComplianceStatus'
 listComplianceStatus
     :: Text -- ^ 'lcsPolicyId'
     -> ListComplianceStatus
-listComplianceStatus pPolicyId_ =
-  ListComplianceStatus'
-    { _lcsNextToken = Nothing
-    , _lcsMaxResults = Nothing
-    , _lcsPolicyId = pPolicyId_
-    }
-
+listComplianceStatus pPolicyId_
+  = ListComplianceStatus'{_lcsNextToken = Nothing,
+                          _lcsMaxResults = Nothing, _lcsPolicyId = pPolicyId_}
 
 -- | If you specify a value for @MaxResults@ and you have more @PolicyComplianceStatus@ objects than the number that you specify for @MaxResults@ , AWS Firewall Manager returns a @NextToken@ value in the response that allows you to list another group of @PolicyComplianceStatus@ objects. For the second and subsequent @ListComplianceStatus@ requests, specify the value of @NextToken@ from the previous response to get information about another batch of @PolicyComplianceStatus@ objects.
 lcsNextToken :: Lens' ListComplianceStatus (Maybe Text)
@@ -86,6 +85,14 @@ lcsMaxResults = lens _lcsMaxResults (\ s a -> s{_lcsMaxResults = a}) . mapping _
 -- | The ID of the AWS Firewall Manager policy that you want the details for.
 lcsPolicyId :: Lens' ListComplianceStatus Text
 lcsPolicyId = lens _lcsPolicyId (\ s a -> s{_lcsPolicyId = a})
+
+instance AWSPager ListComplianceStatus where
+        page rq rs
+          | stop (rs ^. lcsrsNextToken) = Nothing
+          | stop (rs ^. lcsrsPolicyComplianceStatusList) =
+            Nothing
+          | otherwise =
+            Just $ rq & lcsNextToken .~ rs ^. lcsrsNextToken
 
 instance AWSRequest ListComplianceStatus where
         type Rs ListComplianceStatus =
@@ -128,12 +135,17 @@ instance ToQuery ListComplianceStatus where
         toQuery = const mempty
 
 -- | /See:/ 'listComplianceStatusResponse' smart constructor.
-data ListComplianceStatusResponse = ListComplianceStatusResponse'
-  { _lcsrsNextToken                  :: !(Maybe Text)
-  , _lcsrsPolicyComplianceStatusList :: !(Maybe [PolicyComplianceStatus])
-  , _lcsrsResponseStatus             :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListComplianceStatusResponse = ListComplianceStatusResponse'{_lcsrsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lcsrsPolicyComplianceStatusList
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [PolicyComplianceStatus]),
+                                                                  _lcsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListComplianceStatusResponse' with the minimum fields required to make a request.
 --
@@ -147,13 +159,11 @@ data ListComplianceStatusResponse = ListComplianceStatusResponse'
 listComplianceStatusResponse
     :: Int -- ^ 'lcsrsResponseStatus'
     -> ListComplianceStatusResponse
-listComplianceStatusResponse pResponseStatus_ =
-  ListComplianceStatusResponse'
-    { _lcsrsNextToken = Nothing
-    , _lcsrsPolicyComplianceStatusList = Nothing
-    , _lcsrsResponseStatus = pResponseStatus_
-    }
-
+listComplianceStatusResponse pResponseStatus_
+  = ListComplianceStatusResponse'{_lcsrsNextToken =
+                                    Nothing,
+                                  _lcsrsPolicyComplianceStatusList = Nothing,
+                                  _lcsrsResponseStatus = pResponseStatus_}
 
 -- | If you have more @PolicyComplianceStatus@ objects than the number that you specified for @MaxResults@ in the request, the response includes a @NextToken@ value. To list more @PolicyComplianceStatus@ objects, submit another @ListComplianceStatus@ request, and specify the @NextToken@ value from the response in the @NextToken@ value in the next request.
 lcsrsNextToken :: Lens' ListComplianceStatusResponse (Maybe Text)

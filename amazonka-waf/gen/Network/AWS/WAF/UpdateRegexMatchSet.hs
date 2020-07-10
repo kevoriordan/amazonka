@@ -18,14 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts or deletes 'RegexMatchTuple' objects (filters) in a 'RegexMatchSet' . For each @RegexMatchSetUpdate@ object, you specify the following values:
+-- Inserts or deletes 'RegexMatchTuple' objects (filters) in a 'RegexMatchSet' . For each @RegexMatchSetUpdate@ object, you specify the following values: 
 --
 --
 --     * Whether to insert or delete the object from the array. If you want to change a @RegexMatchSetUpdate@ object, you delete the existing object and add a new one.
 --
---     * The part of a web request that you want AWS WAF to inspectupdate, such as a query string or the value of the @User-Agent@ header.
+--     * The part of a web request that you want AWS WAF to inspectupdate, such as a query string or the value of the @User-Agent@ header. 
 --
---     * The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see 'RegexPatternSet' .
+--     * The identifier of the pattern (a regular expression) that you want AWS WAF to look for. For more information, see 'RegexPatternSet' . 
 --
 --     * Whether to perform any conversions on the request, such as converting it to lowercase, before inspecting it for the specified string.
 --
@@ -43,7 +43,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAF.UpdateRegexMatchSet
     (
@@ -71,12 +71,12 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'updateRegexMatchSet' smart constructor.
-data UpdateRegexMatchSet = UpdateRegexMatchSet'
-  { _urmsRegexMatchSetId :: !Text
-  , _urmsUpdates         :: !(List1 RegexMatchSetUpdate)
-  , _urmsChangeToken     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRegexMatchSet = UpdateRegexMatchSet'{_urmsRegexMatchSetId
+                                                :: !Text,
+                                                _urmsUpdates ::
+                                                !(List1 RegexMatchSetUpdate),
+                                                _urmsChangeToken :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRegexMatchSet' with the minimum fields required to make a request.
 --
@@ -92,13 +92,12 @@ updateRegexMatchSet
     -> NonEmpty RegexMatchSetUpdate -- ^ 'urmsUpdates'
     -> Text -- ^ 'urmsChangeToken'
     -> UpdateRegexMatchSet
-updateRegexMatchSet pRegexMatchSetId_ pUpdates_ pChangeToken_ =
-  UpdateRegexMatchSet'
-    { _urmsRegexMatchSetId = pRegexMatchSetId_
-    , _urmsUpdates = _List1 # pUpdates_
-    , _urmsChangeToken = pChangeToken_
-    }
-
+updateRegexMatchSet pRegexMatchSetId_ pUpdates_
+  pChangeToken_
+  = UpdateRegexMatchSet'{_urmsRegexMatchSetId =
+                           pRegexMatchSetId_,
+                         _urmsUpdates = _List1 # pUpdates_,
+                         _urmsChangeToken = pChangeToken_}
 
 -- | The @RegexMatchSetId@ of the 'RegexMatchSet' that you want to update. @RegexMatchSetId@ is returned by 'CreateRegexMatchSet' and by 'ListRegexMatchSets' .
 urmsRegexMatchSetId :: Lens' UpdateRegexMatchSet Text
@@ -151,11 +150,13 @@ instance ToQuery UpdateRegexMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'updateRegexMatchSetResponse' smart constructor.
-data UpdateRegexMatchSetResponse = UpdateRegexMatchSetResponse'
-  { _urmsrsChangeToken    :: !(Maybe Text)
-  , _urmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRegexMatchSetResponse = UpdateRegexMatchSetResponse'{_urmsrsChangeToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _urmsrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateRegexMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -167,10 +168,10 @@ data UpdateRegexMatchSetResponse = UpdateRegexMatchSetResponse'
 updateRegexMatchSetResponse
     :: Int -- ^ 'urmsrsResponseStatus'
     -> UpdateRegexMatchSetResponse
-updateRegexMatchSetResponse pResponseStatus_ =
-  UpdateRegexMatchSetResponse'
-    {_urmsrsChangeToken = Nothing, _urmsrsResponseStatus = pResponseStatus_}
-
+updateRegexMatchSetResponse pResponseStatus_
+  = UpdateRegexMatchSetResponse'{_urmsrsChangeToken =
+                                   Nothing,
+                                 _urmsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @UpdateRegexMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 urmsrsChangeToken :: Lens' UpdateRegexMatchSetResponse (Maybe Text)

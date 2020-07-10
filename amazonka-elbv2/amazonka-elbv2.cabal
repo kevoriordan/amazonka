@@ -83,12 +83,61 @@ library
         , Network.AWS.ELBv2.Waiters
 
     other-modules:
-          Network.AWS.ELBv2.Types.Product
-        , Network.AWS.ELBv2.Types.Sum
+          Network.AWS.ELBv2.Types.Action
+        , Network.AWS.ELBv2.Types.ActionTypeEnum
+        , Network.AWS.ELBv2.Types.AuthenticateCognitoActionConditionalBehaviorEnum
+        , Network.AWS.ELBv2.Types.AuthenticateCognitoActionConfig
+        , Network.AWS.ELBv2.Types.AuthenticateOidcActionConditionalBehaviorEnum
+        , Network.AWS.ELBv2.Types.AuthenticateOidcActionConfig
+        , Network.AWS.ELBv2.Types.AvailabilityZone
+        , Network.AWS.ELBv2.Types.Certificate
+        , Network.AWS.ELBv2.Types.Cipher
+        , Network.AWS.ELBv2.Types.FixedResponseActionConfig
+        , Network.AWS.ELBv2.Types.ForwardActionConfig
+        , Network.AWS.ELBv2.Types.HTTPHeaderConditionConfig
+        , Network.AWS.ELBv2.Types.HTTPRequestMethodConditionConfig
+        , Network.AWS.ELBv2.Types.HostHeaderConditionConfig
+        , Network.AWS.ELBv2.Types.IPAddressType
+        , Network.AWS.ELBv2.Types.Limit
+        , Network.AWS.ELBv2.Types.Listener
+        , Network.AWS.ELBv2.Types.LoadBalancer
+        , Network.AWS.ELBv2.Types.LoadBalancerAddress
+        , Network.AWS.ELBv2.Types.LoadBalancerAttribute
+        , Network.AWS.ELBv2.Types.LoadBalancerSchemeEnum
+        , Network.AWS.ELBv2.Types.LoadBalancerState
+        , Network.AWS.ELBv2.Types.LoadBalancerStateEnum
+        , Network.AWS.ELBv2.Types.LoadBalancerTypeEnum
+        , Network.AWS.ELBv2.Types.Matcher
+        , Network.AWS.ELBv2.Types.PathPatternConditionConfig
+        , Network.AWS.ELBv2.Types.Product
+        , Network.AWS.ELBv2.Types.ProtocolEnum
+        , Network.AWS.ELBv2.Types.QueryStringConditionConfig
+        , Network.AWS.ELBv2.Types.QueryStringKeyValuePair
+        , Network.AWS.ELBv2.Types.RedirectActionConfig
+        , Network.AWS.ELBv2.Types.RedirectActionStatusCodeEnum
+        , Network.AWS.ELBv2.Types.Rule
+        , Network.AWS.ELBv2.Types.RuleCondition
+        , Network.AWS.ELBv2.Types.RulePriorityPair
+        , Network.AWS.ELBv2.Types.SSLPolicy
+        , Network.AWS.ELBv2.Types.SourceIPConditionConfig
+        , Network.AWS.ELBv2.Types.SubnetMapping
+        , Network.AWS.ELBv2.Types.Tag
+        , Network.AWS.ELBv2.Types.TagDescription
+        , Network.AWS.ELBv2.Types.TargetDescription
+        , Network.AWS.ELBv2.Types.TargetGroup
+        , Network.AWS.ELBv2.Types.TargetGroupAttribute
+        , Network.AWS.ELBv2.Types.TargetGroupStickinessConfig
+        , Network.AWS.ELBv2.Types.TargetGroupTuple
+        , Network.AWS.ELBv2.Types.TargetHealth
+        , Network.AWS.ELBv2.Types.TargetHealthDescription
+        , Network.AWS.ELBv2.Types.TargetHealthReasonEnum
+        , Network.AWS.ELBv2.Types.TargetHealthStateEnum
+        , Network.AWS.ELBv2.Types.TargetTypeEnum
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-elbv2-test
     type:              exitcode-stdio-1.0
@@ -112,6 +161,7 @@ test-suite amazonka-elbv2-test
         , amazonka-elbv2
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

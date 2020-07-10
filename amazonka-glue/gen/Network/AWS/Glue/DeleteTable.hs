@@ -46,18 +46,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteTable' smart constructor.
-data DeleteTable = DeleteTable'
-  { _dtCatalogId    :: !(Maybe Text)
-  , _dtDatabaseName :: !Text
-  , _dtName         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTable = DeleteTable'{_dtCatalogId ::
+                                !(Maybe Text),
+                                _dtDatabaseName :: !Text, _dtName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtCatalogId' - The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+-- * 'dtCatalogId' - The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
 --
 -- * 'dtDatabaseName' - The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.
 --
@@ -66,12 +64,11 @@ deleteTable
     :: Text -- ^ 'dtDatabaseName'
     -> Text -- ^ 'dtName'
     -> DeleteTable
-deleteTable pDatabaseName_ pName_ =
-  DeleteTable'
-    {_dtCatalogId = Nothing, _dtDatabaseName = pDatabaseName_, _dtName = pName_}
+deleteTable pDatabaseName_ pName_
+  = DeleteTable'{_dtCatalogId = Nothing,
+                 _dtDatabaseName = pDatabaseName_, _dtName = pName_}
 
-
--- | The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
 dtCatalogId :: Lens' DeleteTable (Maybe Text)
 dtCatalogId = lens _dtCatalogId (\ s a -> s{_dtCatalogId = a})
 
@@ -119,10 +116,10 @@ instance ToQuery DeleteTable where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTableResponse' smart constructor.
-newtype DeleteTableResponse = DeleteTableResponse'
-  { _dtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTableResponse = DeleteTableResponse'{_dtrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteTableResponse' with the minimum fields required to make a request.
 --
@@ -132,9 +129,9 @@ newtype DeleteTableResponse = DeleteTableResponse'
 deleteTableResponse
     :: Int -- ^ 'dtrsResponseStatus'
     -> DeleteTableResponse
-deleteTableResponse pResponseStatus_ =
-  DeleteTableResponse' {_dtrsResponseStatus = pResponseStatus_}
-
+deleteTableResponse pResponseStatus_
+  = DeleteTableResponse'{_dtrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 dtrsResponseStatus :: Lens' DeleteTableResponse Int

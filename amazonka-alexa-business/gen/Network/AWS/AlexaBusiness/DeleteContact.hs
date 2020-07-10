@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteContact' smart constructor.
-newtype DeleteContact = DeleteContact'
-  { _dcContactARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteContact = DeleteContact'{_dcContactARN
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteContact' with the minimum fields required to make a request.
 --
@@ -57,8 +56,8 @@ newtype DeleteContact = DeleteContact'
 deleteContact
     :: Text -- ^ 'dcContactARN'
     -> DeleteContact
-deleteContact pContactARN_ = DeleteContact' {_dcContactARN = pContactARN_}
-
+deleteContact pContactARN_
+  = DeleteContact'{_dcContactARN = pContactARN_}
 
 -- | The ARN of the contact to delete.
 dcContactARN :: Lens' DeleteContact Text
@@ -97,10 +96,10 @@ instance ToQuery DeleteContact where
         toQuery = const mempty
 
 -- | /See:/ 'deleteContactResponse' smart constructor.
-newtype DeleteContactResponse = DeleteContactResponse'
-  { _dcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteContactResponse = DeleteContactResponse'{_dcrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteContactResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +109,9 @@ newtype DeleteContactResponse = DeleteContactResponse'
 deleteContactResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DeleteContactResponse
-deleteContactResponse pResponseStatus_ =
-  DeleteContactResponse' {_dcrsResponseStatus = pResponseStatus_}
-
+deleteContactResponse pResponseStatus_
+  = DeleteContactResponse'{_dcrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 dcrsResponseStatus :: Lens' DeleteContactResponse Int

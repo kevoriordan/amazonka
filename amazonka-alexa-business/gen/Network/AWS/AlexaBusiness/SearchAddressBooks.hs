@@ -50,13 +50,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'searchAddressBooks' smart constructor.
-data SearchAddressBooks = SearchAddressBooks'
-  { _sabFilters      :: !(Maybe [Filter])
-  , _sabSortCriteria :: !(Maybe [Sort])
-  , _sabNextToken    :: !(Maybe Text)
-  , _sabMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchAddressBooks = SearchAddressBooks'{_sabFilters
+                                              :: !(Maybe [Filter]),
+                                              _sabSortCriteria ::
+                                              !(Maybe [Sort]),
+                                              _sabNextToken :: !(Maybe Text),
+                                              _sabMaxResults :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchAddressBooks' with the minimum fields required to make a request.
 --
@@ -71,14 +71,10 @@ data SearchAddressBooks = SearchAddressBooks'
 -- * 'sabMaxResults' - The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
 searchAddressBooks
     :: SearchAddressBooks
-searchAddressBooks =
-  SearchAddressBooks'
-    { _sabFilters = Nothing
-    , _sabSortCriteria = Nothing
-    , _sabNextToken = Nothing
-    , _sabMaxResults = Nothing
-    }
-
+searchAddressBooks
+  = SearchAddressBooks'{_sabFilters = Nothing,
+                        _sabSortCriteria = Nothing, _sabNextToken = Nothing,
+                        _sabMaxResults = Nothing}
 
 -- | The filters to use to list a specified set of address books. The supported filter key is AddressBookName.
 sabFilters :: Lens' SearchAddressBooks [Filter]
@@ -139,13 +135,18 @@ instance ToQuery SearchAddressBooks where
         toQuery = const mempty
 
 -- | /See:/ 'searchAddressBooksResponse' smart constructor.
-data SearchAddressBooksResponse = SearchAddressBooksResponse'
-  { _sabrsNextToken      :: !(Maybe Text)
-  , _sabrsAddressBooks   :: !(Maybe [AddressBookData])
-  , _sabrsTotalCount     :: !(Maybe Int)
-  , _sabrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchAddressBooksResponse = SearchAddressBooksResponse'{_sabrsNextToken
+                                                              :: !(Maybe Text),
+                                                              _sabrsAddressBooks
+                                                              ::
+                                                              !(Maybe
+                                                                  [AddressBookData]),
+                                                              _sabrsTotalCount
+                                                              :: !(Maybe Int),
+                                                              _sabrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'SearchAddressBooksResponse' with the minimum fields required to make a request.
 --
@@ -161,14 +162,12 @@ data SearchAddressBooksResponse = SearchAddressBooksResponse'
 searchAddressBooksResponse
     :: Int -- ^ 'sabrsResponseStatus'
     -> SearchAddressBooksResponse
-searchAddressBooksResponse pResponseStatus_ =
-  SearchAddressBooksResponse'
-    { _sabrsNextToken = Nothing
-    , _sabrsAddressBooks = Nothing
-    , _sabrsTotalCount = Nothing
-    , _sabrsResponseStatus = pResponseStatus_
-    }
-
+searchAddressBooksResponse pResponseStatus_
+  = SearchAddressBooksResponse'{_sabrsNextToken =
+                                  Nothing,
+                                _sabrsAddressBooks = Nothing,
+                                _sabrsTotalCount = Nothing,
+                                _sabrsResponseStatus = pResponseStatus_}
 
 -- | The token returned to indicate that there is more data available.
 sabrsNextToken :: Lens' SearchAddressBooksResponse (Maybe Text)

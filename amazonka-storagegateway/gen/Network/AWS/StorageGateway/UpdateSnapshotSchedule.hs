@@ -32,6 +32,7 @@ module Network.AWS.StorageGateway.UpdateSnapshotSchedule
     , UpdateSnapshotSchedule
     -- * Request Lenses
     , ussDescription
+    , ussTags
     , ussVolumeARN
     , ussStartAt
     , ussRecurrenceInHours
@@ -54,31 +55,36 @@ import Network.AWS.StorageGateway.Types.Product
 -- | A JSON object containing one or more of the following fields:
 --
 --
---     * 'UpdateSnapshotScheduleInput$Description'
+--     * 'UpdateSnapshotScheduleInput$Description' 
 --
---     * 'UpdateSnapshotScheduleInput$RecurrenceInHours'
+--     * 'UpdateSnapshotScheduleInput$RecurrenceInHours' 
 --
---     * 'UpdateSnapshotScheduleInput$StartAt'
+--     * 'UpdateSnapshotScheduleInput$StartAt' 
 --
---     * 'UpdateSnapshotScheduleInput$VolumeARN'
+--     * 'UpdateSnapshotScheduleInput$VolumeARN' 
 --
 --
 --
 --
 -- /See:/ 'updateSnapshotSchedule' smart constructor.
-data UpdateSnapshotSchedule = UpdateSnapshotSchedule'
-  { _ussDescription       :: !(Maybe Text)
-  , _ussVolumeARN         :: !Text
-  , _ussStartAt           :: !Nat
-  , _ussRecurrenceInHours :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSnapshotSchedule = UpdateSnapshotSchedule'{_ussDescription
+                                                      :: !(Maybe Text),
+                                                      _ussTags ::
+                                                      !(Maybe [Tag]),
+                                                      _ussVolumeARN :: !Text,
+                                                      _ussStartAt :: !Nat,
+                                                      _ussRecurrenceInHours ::
+                                                      !Nat}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateSnapshotSchedule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ussDescription' - Optional description of the snapshot that overwrites the existing description.
+--
+-- * 'ussTags' - A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.
 --
 -- * 'ussVolumeARN' - The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 --
@@ -90,18 +96,20 @@ updateSnapshotSchedule
     -> Natural -- ^ 'ussStartAt'
     -> Natural -- ^ 'ussRecurrenceInHours'
     -> UpdateSnapshotSchedule
-updateSnapshotSchedule pVolumeARN_ pStartAt_ pRecurrenceInHours_ =
-  UpdateSnapshotSchedule'
-    { _ussDescription = Nothing
-    , _ussVolumeARN = pVolumeARN_
-    , _ussStartAt = _Nat # pStartAt_
-    , _ussRecurrenceInHours = _Nat # pRecurrenceInHours_
-    }
-
+updateSnapshotSchedule pVolumeARN_ pStartAt_
+  pRecurrenceInHours_
+  = UpdateSnapshotSchedule'{_ussDescription = Nothing,
+                            _ussTags = Nothing, _ussVolumeARN = pVolumeARN_,
+                            _ussStartAt = _Nat # pStartAt_,
+                            _ussRecurrenceInHours = _Nat # pRecurrenceInHours_}
 
 -- | Optional description of the snapshot that overwrites the existing description.
 ussDescription :: Lens' UpdateSnapshotSchedule (Maybe Text)
 ussDescription = lens _ussDescription (\ s a -> s{_ussDescription = a})
+
+-- | A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.
+ussTags :: Lens' UpdateSnapshotSchedule [Tag]
+ussTags = lens _ussTags (\ s a -> s{_ussTags = a}) . _Default . _Coerce
 
 -- | The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 ussVolumeARN :: Lens' UpdateSnapshotSchedule Text
@@ -144,6 +152,7 @@ instance ToJSON UpdateSnapshotSchedule where
           = object
               (catMaybes
                  [("Description" .=) <$> _ussDescription,
+                  ("Tags" .=) <$> _ussTags,
                   Just ("VolumeARN" .= _ussVolumeARN),
                   Just ("StartAt" .= _ussStartAt),
                   Just ("RecurrenceInHours" .= _ussRecurrenceInHours)])
@@ -154,33 +163,36 @@ instance ToPath UpdateSnapshotSchedule where
 instance ToQuery UpdateSnapshotSchedule where
         toQuery = const mempty
 
--- | A JSON object containing the of the updated storage volume.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the updated storage volume.
 --
 --
 --
 -- /See:/ 'updateSnapshotScheduleResponse' smart constructor.
-data UpdateSnapshotScheduleResponse = UpdateSnapshotScheduleResponse'
-  { _ussrsVolumeARN      :: !(Maybe Text)
-  , _ussrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSnapshotScheduleResponse = UpdateSnapshotScheduleResponse'{_ussrsVolumeARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _ussrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpdateSnapshotScheduleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ussrsVolumeARN' -
+-- * 'ussrsVolumeARN' - The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 --
 -- * 'ussrsResponseStatus' - -- | The response status code.
 updateSnapshotScheduleResponse
     :: Int -- ^ 'ussrsResponseStatus'
     -> UpdateSnapshotScheduleResponse
-updateSnapshotScheduleResponse pResponseStatus_ =
-  UpdateSnapshotScheduleResponse'
-    {_ussrsVolumeARN = Nothing, _ussrsResponseStatus = pResponseStatus_}
+updateSnapshotScheduleResponse pResponseStatus_
+  = UpdateSnapshotScheduleResponse'{_ussrsVolumeARN =
+                                      Nothing,
+                                    _ussrsResponseStatus = pResponseStatus_}
 
-
--- |
+-- | The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 ussrsVolumeARN :: Lens' UpdateSnapshotScheduleResponse (Maybe Text)
 ussrsVolumeARN = lens _ussrsVolumeARN (\ s a -> s{_ussrsVolumeARN = a})
 

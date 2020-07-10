@@ -56,15 +56,21 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'describeDocumentVersions' smart constructor.
-data DescribeDocumentVersions = DescribeDocumentVersions'
-  { _ddvInclude             :: !(Maybe Text)
-  , _ddvAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _ddvMarker              :: !(Maybe Text)
-  , _ddvLimit               :: !(Maybe Nat)
-  , _ddvFields              :: !(Maybe Text)
-  , _ddvDocumentId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeDocumentVersions = DescribeDocumentVersions'{_ddvInclude
+                                                          :: !(Maybe Text),
+                                                          _ddvAuthenticationToken
+                                                          ::
+                                                          !(Maybe
+                                                              (Sensitive Text)),
+                                                          _ddvMarker ::
+                                                          !(Maybe Text),
+                                                          _ddvLimit ::
+                                                          !(Maybe Nat),
+                                                          _ddvFields ::
+                                                          !(Maybe Text),
+                                                          _ddvDocumentId ::
+                                                          !Text}
+                                  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeDocumentVersions' with the minimum fields required to make a request.
 --
@@ -72,7 +78,7 @@ data DescribeDocumentVersions = DescribeDocumentVersions'
 --
 -- * 'ddvInclude' - A comma-separated list of values. Specify "INITIALIZED" to include incomplete versions.
 --
--- * 'ddvAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'ddvAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'ddvMarker' - The marker for the next set of results. (You received this marker from a previous call.)
 --
@@ -84,22 +90,18 @@ data DescribeDocumentVersions = DescribeDocumentVersions'
 describeDocumentVersions
     :: Text -- ^ 'ddvDocumentId'
     -> DescribeDocumentVersions
-describeDocumentVersions pDocumentId_ =
-  DescribeDocumentVersions'
-    { _ddvInclude = Nothing
-    , _ddvAuthenticationToken = Nothing
-    , _ddvMarker = Nothing
-    , _ddvLimit = Nothing
-    , _ddvFields = Nothing
-    , _ddvDocumentId = pDocumentId_
-    }
-
+describeDocumentVersions pDocumentId_
+  = DescribeDocumentVersions'{_ddvInclude = Nothing,
+                              _ddvAuthenticationToken = Nothing,
+                              _ddvMarker = Nothing, _ddvLimit = Nothing,
+                              _ddvFields = Nothing,
+                              _ddvDocumentId = pDocumentId_}
 
 -- | A comma-separated list of values. Specify "INITIALIZED" to include incomplete versions.
 ddvInclude :: Lens' DescribeDocumentVersions (Maybe Text)
 ddvInclude = lens _ddvInclude (\ s a -> s{_ddvInclude = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 ddvAuthenticationToken :: Lens' DescribeDocumentVersions (Maybe Text)
 ddvAuthenticationToken = lens _ddvAuthenticationToken (\ s a -> s{_ddvAuthenticationToken = a}) . mapping _Sensitive
 
@@ -162,12 +164,19 @@ instance ToQuery DescribeDocumentVersions where
                "limit" =: _ddvLimit, "fields" =: _ddvFields]
 
 -- | /See:/ 'describeDocumentVersionsResponse' smart constructor.
-data DescribeDocumentVersionsResponse = DescribeDocumentVersionsResponse'
-  { _ddvrsDocumentVersions :: !(Maybe [DocumentVersionMetadata])
-  , _ddvrsMarker           :: !(Maybe Text)
-  , _ddvrsResponseStatus   :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeDocumentVersionsResponse = DescribeDocumentVersionsResponse'{_ddvrsDocumentVersions
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [DocumentVersionMetadata]),
+                                                                          _ddvrsMarker
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ddvrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Show, Data, Typeable,
+                                                    Generic)
 
 -- | Creates a value of 'DescribeDocumentVersionsResponse' with the minimum fields required to make a request.
 --
@@ -181,13 +190,11 @@ data DescribeDocumentVersionsResponse = DescribeDocumentVersionsResponse'
 describeDocumentVersionsResponse
     :: Int -- ^ 'ddvrsResponseStatus'
     -> DescribeDocumentVersionsResponse
-describeDocumentVersionsResponse pResponseStatus_ =
-  DescribeDocumentVersionsResponse'
-    { _ddvrsDocumentVersions = Nothing
-    , _ddvrsMarker = Nothing
-    , _ddvrsResponseStatus = pResponseStatus_
-    }
-
+describeDocumentVersionsResponse pResponseStatus_
+  = DescribeDocumentVersionsResponse'{_ddvrsDocumentVersions
+                                        = Nothing,
+                                      _ddvrsMarker = Nothing,
+                                      _ddvrsResponseStatus = pResponseStatus_}
 
 -- | The document versions.
 ddvrsDocumentVersions :: Lens' DescribeDocumentVersionsResponse [DocumentVersionMetadata]

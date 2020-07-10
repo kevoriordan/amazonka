@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'rebootNode' smart constructor.
-data RebootNode = RebootNode'
-  { _rnClusterName :: !Text
-  , _rnNodeId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootNode = RebootNode'{_rnClusterName ::
+                              !Text,
+                              _rnNodeId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RebootNode' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ rebootNode
     :: Text -- ^ 'rnClusterName'
     -> Text -- ^ 'rnNodeId'
     -> RebootNode
-rebootNode pClusterName_ pNodeId_ =
-  RebootNode' {_rnClusterName = pClusterName_, _rnNodeId = pNodeId_}
-
+rebootNode pClusterName_ pNodeId_
+  = RebootNode'{_rnClusterName = pClusterName_,
+                _rnNodeId = pNodeId_}
 
 -- | The name of the DAX cluster containing the node to be rebooted.
 rnClusterName :: Lens' RebootNode Text
@@ -111,11 +110,10 @@ instance ToQuery RebootNode where
         toQuery = const mempty
 
 -- | /See:/ 'rebootNodeResponse' smart constructor.
-data RebootNodeResponse = RebootNodeResponse'
-  { _rnrsCluster        :: !(Maybe Cluster)
-  , _rnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootNodeResponse = RebootNodeResponse'{_rnrsCluster
+                                              :: !(Maybe Cluster),
+                                              _rnrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RebootNodeResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +125,9 @@ data RebootNodeResponse = RebootNodeResponse'
 rebootNodeResponse
     :: Int -- ^ 'rnrsResponseStatus'
     -> RebootNodeResponse
-rebootNodeResponse pResponseStatus_ =
-  RebootNodeResponse'
-    {_rnrsCluster = Nothing, _rnrsResponseStatus = pResponseStatus_}
-
+rebootNodeResponse pResponseStatus_
+  = RebootNodeResponse'{_rnrsCluster = Nothing,
+                        _rnrsResponseStatus = pResponseStatus_}
 
 -- | A description of the DAX cluster after a node has been rebooted.
 rnrsCluster :: Lens' RebootNodeResponse (Maybe Cluster)

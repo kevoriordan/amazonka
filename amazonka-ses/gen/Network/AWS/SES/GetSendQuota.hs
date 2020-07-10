@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides the sending limits for the Amazon SES account.
+-- Provides the sending limits for the Amazon SES account. 
 --
 --
 -- You can execute this operation no more than once per second.
@@ -47,17 +47,14 @@ import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
 -- | /See:/ 'getSendQuota' smart constructor.
-data GetSendQuota =
-  GetSendQuota'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSendQuota = GetSendQuota'
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSendQuota' with the minimum fields required to make a request.
 --
 getSendQuota
     :: GetSendQuota
 getSendQuota = GetSendQuota'
-
 
 instance AWSRequest GetSendQuota where
         type Rs GetSendQuota = GetSendQuotaResponse
@@ -92,13 +89,14 @@ instance ToQuery GetSendQuota where
 --
 --
 -- /See:/ 'getSendQuotaResponse' smart constructor.
-data GetSendQuotaResponse = GetSendQuotaResponse'
-  { _gsqrsMaxSendRate     :: !(Maybe Double)
-  , _gsqrsSentLast24Hours :: !(Maybe Double)
-  , _gsqrsMax24HourSend   :: !(Maybe Double)
-  , _gsqrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSendQuotaResponse = GetSendQuotaResponse'{_gsqrsMaxSendRate
+                                                  :: !(Maybe Double),
+                                                  _gsqrsSentLast24Hours ::
+                                                  !(Maybe Double),
+                                                  _gsqrsMax24HourSend ::
+                                                  !(Maybe Double),
+                                                  _gsqrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSendQuotaResponse' with the minimum fields required to make a request.
 --
@@ -114,14 +112,11 @@ data GetSendQuotaResponse = GetSendQuotaResponse'
 getSendQuotaResponse
     :: Int -- ^ 'gsqrsResponseStatus'
     -> GetSendQuotaResponse
-getSendQuotaResponse pResponseStatus_ =
-  GetSendQuotaResponse'
-    { _gsqrsMaxSendRate = Nothing
-    , _gsqrsSentLast24Hours = Nothing
-    , _gsqrsMax24HourSend = Nothing
-    , _gsqrsResponseStatus = pResponseStatus_
-    }
-
+getSendQuotaResponse pResponseStatus_
+  = GetSendQuotaResponse'{_gsqrsMaxSendRate = Nothing,
+                          _gsqrsSentLast24Hours = Nothing,
+                          _gsqrsMax24HourSend = Nothing,
+                          _gsqrsResponseStatus = pResponseStatus_}
 
 -- | The maximum number of emails that Amazon SES can accept from the user's account per second.
 gsqrsMaxSendRate :: Lens' GetSendQuotaResponse (Maybe Double)

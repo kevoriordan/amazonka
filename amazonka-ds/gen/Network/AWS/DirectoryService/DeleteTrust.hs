@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an existing trust relationship between your Microsoft AD in the AWS cloud and an external domain.
+-- Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
 --
 --
 module Network.AWS.DirectoryService.DeleteTrust
@@ -34,8 +34,8 @@ module Network.AWS.DirectoryService.DeleteTrust
     , deleteTrustResponse
     , DeleteTrustResponse
     -- * Response Lenses
-    , dttrsTrustId
-    , dttrsResponseStatus
+    , dlttrstrsTrustId
+    , dlttrstrsResponseStatus
     ) where
 
 import Network.AWS.DirectoryService.Types
@@ -45,16 +45,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Deletes the local side of an existing trust relationship between the Microsoft AD in the AWS cloud and the external domain.
+-- | Deletes the local side of an existing trust relationship between the AWS Managed Microsoft AD directory and the external domain.
 --
 --
 --
 -- /See:/ 'deleteTrust' smart constructor.
-data DeleteTrust = DeleteTrust'
-  { _dtDeleteAssociatedConditionalForwarder :: !(Maybe Bool)
-  , _dtTrustId                              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTrust = DeleteTrust'{_dtDeleteAssociatedConditionalForwarder
+                                :: !(Maybe Bool),
+                                _dtTrustId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTrust' with the minimum fields required to make a request.
 --
@@ -66,10 +65,10 @@ data DeleteTrust = DeleteTrust'
 deleteTrust
     :: Text -- ^ 'dtTrustId'
     -> DeleteTrust
-deleteTrust pTrustId_ =
-  DeleteTrust'
-    {_dtDeleteAssociatedConditionalForwarder = Nothing, _dtTrustId = pTrustId_}
-
+deleteTrust pTrustId_
+  = DeleteTrust'{_dtDeleteAssociatedConditionalForwarder
+                   = Nothing,
+                 _dtTrustId = pTrustId_}
 
 -- | Delete a conditional forwarder as part of a DeleteTrustRequest.
 dtDeleteAssociatedConditionalForwarder :: Lens' DeleteTrust (Maybe Bool)
@@ -121,33 +120,32 @@ instance ToQuery DeleteTrust where
 --
 --
 -- /See:/ 'deleteTrustResponse' smart constructor.
-data DeleteTrustResponse = DeleteTrustResponse'
-  { _dttrsTrustId        :: !(Maybe Text)
-  , _dttrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTrustResponse = DeleteTrustResponse'{_dlttrstrsTrustId
+                                                :: !(Maybe Text),
+                                                _dlttrstrsResponseStatus ::
+                                                !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTrustResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dttrsTrustId' - The Trust ID of the trust relationship that was deleted.
+-- * 'dlttrstrsTrustId' - The Trust ID of the trust relationship that was deleted.
 --
--- * 'dttrsResponseStatus' - -- | The response status code.
+-- * 'dlttrstrsResponseStatus' - -- | The response status code.
 deleteTrustResponse
-    :: Int -- ^ 'dttrsResponseStatus'
+    :: Int -- ^ 'dlttrstrsResponseStatus'
     -> DeleteTrustResponse
-deleteTrustResponse pResponseStatus_ =
-  DeleteTrustResponse'
-    {_dttrsTrustId = Nothing, _dttrsResponseStatus = pResponseStatus_}
-
+deleteTrustResponse pResponseStatus_
+  = DeleteTrustResponse'{_dlttrstrsTrustId = Nothing,
+                         _dlttrstrsResponseStatus = pResponseStatus_}
 
 -- | The Trust ID of the trust relationship that was deleted.
-dttrsTrustId :: Lens' DeleteTrustResponse (Maybe Text)
-dttrsTrustId = lens _dttrsTrustId (\ s a -> s{_dttrsTrustId = a})
+dlttrstrsTrustId :: Lens' DeleteTrustResponse (Maybe Text)
+dlttrstrsTrustId = lens _dlttrstrsTrustId (\ s a -> s{_dlttrstrsTrustId = a})
 
 -- | -- | The response status code.
-dttrsResponseStatus :: Lens' DeleteTrustResponse Int
-dttrsResponseStatus = lens _dttrsResponseStatus (\ s a -> s{_dttrsResponseStatus = a})
+dlttrstrsResponseStatus :: Lens' DeleteTrustResponse Int
+dlttrstrsResponseStatus = lens _dlttrstrsResponseStatus (\ s a -> s{_dlttrstrsResponseStatus = a})
 
 instance NFData DeleteTrustResponse where

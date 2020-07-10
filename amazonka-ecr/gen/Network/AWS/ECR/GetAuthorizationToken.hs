@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a token that is valid for a specified registry for 12 hours. This command allows you to use the @docker@ CLI to push and pull images with Amazon ECR. If you do not specify a registry, the default registry is assumed.
+-- Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours.
 --
 --
--- The @authorizationToken@ returned for each registry specified is a base64 encoded string that can be decoded and used in a @docker login@ command to authenticate to a registry. The AWS CLI offers an @aws ecr get-login@ command that simplifies the login process.
+-- The @authorizationToken@ returned is a base64 encoded string that can be decoded and used in a @docker login@ command to authenticate to a registry. The AWS CLI offers an @get-login-password@ command that simplifies the login process. For more information, see <https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth Registry Authentication> in the /Amazon Elastic Container Registry User Guide/ .
 --
 module Network.AWS.ECR.GetAuthorizationToken
     (
@@ -47,22 +47,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAuthorizationToken' smart constructor.
-newtype GetAuthorizationToken = GetAuthorizationToken'
-  { _gatRegistryIds :: Maybe (List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetAuthorizationToken = GetAuthorizationToken'{_gatRegistryIds
+                                                       :: Maybe (List1 Text)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetAuthorizationToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gatRegistryIds' - A list of AWS account IDs that are associated with the registries for which to get authorization tokens. If you do not specify a registry, the default registry is assumed.
+-- * 'gatRegistryIds' - A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.
 getAuthorizationToken
     :: GetAuthorizationToken
-getAuthorizationToken = GetAuthorizationToken' {_gatRegistryIds = Nothing}
+getAuthorizationToken
+  = GetAuthorizationToken'{_gatRegistryIds = Nothing}
 
-
--- | A list of AWS account IDs that are associated with the registries for which to get authorization tokens. If you do not specify a registry, the default registry is assumed.
+-- | A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.
 gatRegistryIds :: Lens' GetAuthorizationToken (Maybe (NonEmpty Text))
 gatRegistryIds = lens _gatRegistryIds (\ s a -> s{_gatRegistryIds = a}) . mapping _List1
 
@@ -103,11 +103,14 @@ instance ToQuery GetAuthorizationToken where
         toQuery = const mempty
 
 -- | /See:/ 'getAuthorizationTokenResponse' smart constructor.
-data GetAuthorizationTokenResponse = GetAuthorizationTokenResponse'
-  { _gatrsAuthorizationData :: !(Maybe [AuthorizationData])
-  , _gatrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAuthorizationTokenResponse = GetAuthorizationTokenResponse'{_gatrsAuthorizationData
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [AuthorizationData]),
+                                                                    _gatrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetAuthorizationTokenResponse' with the minimum fields required to make a request.
 --
@@ -119,10 +122,10 @@ data GetAuthorizationTokenResponse = GetAuthorizationTokenResponse'
 getAuthorizationTokenResponse
     :: Int -- ^ 'gatrsResponseStatus'
     -> GetAuthorizationTokenResponse
-getAuthorizationTokenResponse pResponseStatus_ =
-  GetAuthorizationTokenResponse'
-    {_gatrsAuthorizationData = Nothing, _gatrsResponseStatus = pResponseStatus_}
-
+getAuthorizationTokenResponse pResponseStatus_
+  = GetAuthorizationTokenResponse'{_gatrsAuthorizationData
+                                     = Nothing,
+                                   _gatrsResponseStatus = pResponseStatus_}
 
 -- | A list of authorization token data objects that correspond to the @registryIds@ values in the request.
 gatrsAuthorizationData :: Lens' GetAuthorizationTokenResponse [AuthorizationData]

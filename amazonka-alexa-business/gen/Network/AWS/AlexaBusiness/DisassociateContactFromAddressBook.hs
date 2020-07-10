@@ -45,11 +45,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateContactFromAddressBook' smart constructor.
-data DisassociateContactFromAddressBook = DisassociateContactFromAddressBook'
-  { _dcfabContactARN     :: !Text
-  , _dcfabAddressBookARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateContactFromAddressBook = DisassociateContactFromAddressBook'{_dcfabContactARN
+                                                                              ::
+                                                                              !Text,
+                                                                              _dcfabAddressBookARN
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DisassociateContactFromAddressBook' with the minimum fields required to make a request.
 --
@@ -62,10 +65,11 @@ disassociateContactFromAddressBook
     :: Text -- ^ 'dcfabContactARN'
     -> Text -- ^ 'dcfabAddressBookARN'
     -> DisassociateContactFromAddressBook
-disassociateContactFromAddressBook pContactARN_ pAddressBookARN_ =
-  DisassociateContactFromAddressBook'
-    {_dcfabContactARN = pContactARN_, _dcfabAddressBookARN = pAddressBookARN_}
-
+disassociateContactFromAddressBook pContactARN_
+  pAddressBookARN_
+  = DisassociateContactFromAddressBook'{_dcfabContactARN
+                                          = pContactARN_,
+                                        _dcfabAddressBookARN = pAddressBookARN_}
 
 -- | The ARN of the contact to disassociate from an address book.
 dcfabContactARN :: Lens' DisassociateContactFromAddressBook Text
@@ -121,10 +125,12 @@ instance ToQuery DisassociateContactFromAddressBook
         toQuery = const mempty
 
 -- | /See:/ 'disassociateContactFromAddressBookResponse' smart constructor.
-newtype DisassociateContactFromAddressBookResponse = DisassociateContactFromAddressBookResponse'
-  { _dcfabrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateContactFromAddressBookResponse = DisassociateContactFromAddressBookResponse'{_dcfabrsResponseStatus
+                                                                                                 ::
+                                                                                                 Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'DisassociateContactFromAddressBookResponse' with the minimum fields required to make a request.
 --
@@ -134,10 +140,10 @@ newtype DisassociateContactFromAddressBookResponse = DisassociateContactFromAddr
 disassociateContactFromAddressBookResponse
     :: Int -- ^ 'dcfabrsResponseStatus'
     -> DisassociateContactFromAddressBookResponse
-disassociateContactFromAddressBookResponse pResponseStatus_ =
-  DisassociateContactFromAddressBookResponse'
-    {_dcfabrsResponseStatus = pResponseStatus_}
-
+disassociateContactFromAddressBookResponse
+  pResponseStatus_
+  = DisassociateContactFromAddressBookResponse'{_dcfabrsResponseStatus
+                                                  = pResponseStatus_}
 
 -- | -- | The response status code.
 dcfabrsResponseStatus :: Lens' DisassociateContactFromAddressBookResponse Int

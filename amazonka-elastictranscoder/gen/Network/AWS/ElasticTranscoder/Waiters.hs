@@ -23,24 +23,13 @@ import Network.AWS.Waiter
 
 -- | Polls 'Network.AWS.ElasticTranscoder.ReadJob' every 30 seconds until a successful state is reached. An error is returned after 120 failed checks.
 jobComplete :: Wait ReadJob
-jobComplete =
-  Wait
-    { _waitName = "JobComplete"
-    , _waitAttempts = 120
-    , _waitDelay = 30
-    , _waitAcceptors =
-        [ matchAll
-            "Complete"
-            AcceptSuccess
-            (rjrsJob . jStatus . _Just . to toTextCI)
-        , matchAll
-            "Canceled"
-            AcceptFailure
-            (rjrsJob . jStatus . _Just . to toTextCI)
-        , matchAll
-            "Error"
-            AcceptFailure
-            (rjrsJob . jStatus . _Just . to toTextCI)
-        ]
-    }
-
+jobComplete
+  = Wait{_waitName = "JobComplete",
+         _waitAttempts = 120, _waitDelay = 30,
+         _waitAcceptors =
+           [matchAll "Complete" AcceptSuccess
+              (rjrsJob . jStatus . _Just . to toTextCI),
+            matchAll "Canceled" AcceptFailure
+              (rjrsJob . jStatus . _Just . to toTextCI),
+            matchAll "Error" AcceptFailure
+              (rjrsJob . jStatus . _Just . to toTextCI)]}

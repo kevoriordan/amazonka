@@ -18,13 +18,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a single Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector must be created in order for GuardDuty to become operational.
+-- Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region.
+--
+--
 module Network.AWS.GuardDuty.CreateDetector
     (
     -- * Creating a Request
       createDetector
     , CreateDetector
     -- * Request Lenses
+    , cdClientToken
+    , cdFindingPublishingFrequency
+    , cdTags
     , cdEnable
 
     -- * Destructuring the Response
@@ -42,26 +47,48 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | CreateDetector request body.
---
--- /See:/ 'createDetector' smart constructor.
-newtype CreateDetector = CreateDetector'
-  { _cdEnable :: Maybe Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createDetector' smart constructor.
+data CreateDetector = CreateDetector'{_cdClientToken
+                                      :: !(Maybe Text),
+                                      _cdFindingPublishingFrequency ::
+                                      !(Maybe FindingPublishingFrequency),
+                                      _cdTags :: !(Maybe (Map Text Text)),
+                                      _cdEnable :: !Bool}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDetector' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdEnable' - A boolean value that specifies whether the detector is to be enabled.
+-- * 'cdClientToken' - The idempotency token for the create request.
+--
+-- * 'cdFindingPublishingFrequency' - An enum value that specifies how frequently updated findings are exported.
+--
+-- * 'cdTags' - The tags to be added to a new detector resource.
+--
+-- * 'cdEnable' - A Boolean value that specifies whether the detector is to be enabled.
 createDetector
-    :: CreateDetector
-createDetector = CreateDetector' {_cdEnable = Nothing}
+    :: Bool -- ^ 'cdEnable'
+    -> CreateDetector
+createDetector pEnable_
+  = CreateDetector'{_cdClientToken = Nothing,
+                    _cdFindingPublishingFrequency = Nothing,
+                    _cdTags = Nothing, _cdEnable = pEnable_}
 
+-- | The idempotency token for the create request.
+cdClientToken :: Lens' CreateDetector (Maybe Text)
+cdClientToken = lens _cdClientToken (\ s a -> s{_cdClientToken = a})
 
--- | A boolean value that specifies whether the detector is to be enabled.
-cdEnable :: Lens' CreateDetector (Maybe Bool)
+-- | An enum value that specifies how frequently updated findings are exported.
+cdFindingPublishingFrequency :: Lens' CreateDetector (Maybe FindingPublishingFrequency)
+cdFindingPublishingFrequency = lens _cdFindingPublishingFrequency (\ s a -> s{_cdFindingPublishingFrequency = a})
+
+-- | The tags to be added to a new detector resource.
+cdTags :: Lens' CreateDetector (HashMap Text Text)
+cdTags = lens _cdTags (\ s a -> s{_cdTags = a}) . _Default . _Map
+
+-- | A Boolean value that specifies whether the detector is to be enabled.
+cdEnable :: Lens' CreateDetector Bool
 cdEnable = lens _cdEnable (\ s a -> s{_cdEnable = a})
 
 instance AWSRequest CreateDetector where
@@ -86,7 +113,13 @@ instance ToHeaders CreateDetector where
 
 instance ToJSON CreateDetector where
         toJSON CreateDetector'{..}
-          = object (catMaybes [("enable" .=) <$> _cdEnable])
+          = object
+              (catMaybes
+                 [("clientToken" .=) <$> _cdClientToken,
+                  ("findingPublishingFrequency" .=) <$>
+                    _cdFindingPublishingFrequency,
+                  ("tags" .=) <$> _cdTags,
+                  Just ("enable" .= _cdEnable)])
 
 instance ToPath CreateDetector where
         toPath = const "/detector"
@@ -95,11 +128,12 @@ instance ToQuery CreateDetector where
         toQuery = const mempty
 
 -- | /See:/ 'createDetectorResponse' smart constructor.
-data CreateDetectorResponse = CreateDetectorResponse'
-  { _cdrsDetectorId     :: !(Maybe Text)
-  , _cdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDetectorResponse = CreateDetectorResponse'{_cdrsDetectorId
+                                                      :: !(Maybe Text),
+                                                      _cdrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateDetectorResponse' with the minimum fields required to make a request.
 --
@@ -111,10 +145,9 @@ data CreateDetectorResponse = CreateDetectorResponse'
 createDetectorResponse
     :: Int -- ^ 'cdrsResponseStatus'
     -> CreateDetectorResponse
-createDetectorResponse pResponseStatus_ =
-  CreateDetectorResponse'
-    {_cdrsDetectorId = Nothing, _cdrsResponseStatus = pResponseStatus_}
-
+createDetectorResponse pResponseStatus_
+  = CreateDetectorResponse'{_cdrsDetectorId = Nothing,
+                            _cdrsResponseStatus = pResponseStatus_}
 
 -- | The unique ID of the created detector.
 cdrsDetectorId :: Lens' CreateDetectorResponse (Maybe Text)

@@ -54,13 +54,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeAffectedEntities' smart constructor.
-data DescribeAffectedEntities = DescribeAffectedEntities'
-  { _daeLocale     :: !(Maybe Text)
-  , _daeNextToken  :: !(Maybe Text)
-  , _daeMaxResults :: !(Maybe Nat)
-  , _daeFilter     :: !EntityFilter
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAffectedEntities = DescribeAffectedEntities'{_daeLocale
+                                                          :: !(Maybe Text),
+                                                          _daeNextToken ::
+                                                          !(Maybe Text),
+                                                          _daeMaxResults ::
+                                                          !(Maybe Nat),
+                                                          _daeFilter ::
+                                                          !EntityFilter}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeAffectedEntities' with the minimum fields required to make a request.
 --
@@ -76,14 +79,10 @@ data DescribeAffectedEntities = DescribeAffectedEntities'
 describeAffectedEntities
     :: EntityFilter -- ^ 'daeFilter'
     -> DescribeAffectedEntities
-describeAffectedEntities pFilter_ =
-  DescribeAffectedEntities'
-    { _daeLocale = Nothing
-    , _daeNextToken = Nothing
-    , _daeMaxResults = Nothing
-    , _daeFilter = pFilter_
-    }
-
+describeAffectedEntities pFilter_
+  = DescribeAffectedEntities'{_daeLocale = Nothing,
+                              _daeNextToken = Nothing, _daeMaxResults = Nothing,
+                              _daeFilter = pFilter_}
 
 -- | The locale (language) to return information in. English (en) is the default and the only supported value at this time.
 daeLocale :: Lens' DescribeAffectedEntities (Maybe Text)
@@ -149,12 +148,19 @@ instance ToQuery DescribeAffectedEntities where
         toQuery = const mempty
 
 -- | /See:/ 'describeAffectedEntitiesResponse' smart constructor.
-data DescribeAffectedEntitiesResponse = DescribeAffectedEntitiesResponse'
-  { _daersEntities       :: !(Maybe [AffectedEntity])
-  , _daersNextToken      :: !(Maybe Text)
-  , _daersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAffectedEntitiesResponse = DescribeAffectedEntitiesResponse'{_daersEntities
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [AffectedEntity]),
+                                                                          _daersNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _daersResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeAffectedEntitiesResponse' with the minimum fields required to make a request.
 --
@@ -168,13 +174,11 @@ data DescribeAffectedEntitiesResponse = DescribeAffectedEntitiesResponse'
 describeAffectedEntitiesResponse
     :: Int -- ^ 'daersResponseStatus'
     -> DescribeAffectedEntitiesResponse
-describeAffectedEntitiesResponse pResponseStatus_ =
-  DescribeAffectedEntitiesResponse'
-    { _daersEntities = Nothing
-    , _daersNextToken = Nothing
-    , _daersResponseStatus = pResponseStatus_
-    }
-
+describeAffectedEntitiesResponse pResponseStatus_
+  = DescribeAffectedEntitiesResponse'{_daersEntities =
+                                        Nothing,
+                                      _daersNextToken = Nothing,
+                                      _daersResponseStatus = pResponseStatus_}
 
 -- | The entities that match the filter criteria.
 daersEntities :: Lens' DescribeAffectedEntitiesResponse [AffectedEntity]

@@ -45,17 +45,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeOrganization' smart constructor.
-data DescribeOrganization =
-  DescribeOrganization'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeOrganization = DescribeOrganization'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeOrganization' with the minimum fields required to make a request.
 --
 describeOrganization
     :: DescribeOrganization
 describeOrganization = DescribeOrganization'
-
 
 instance AWSRequest DescribeOrganization where
         type Rs DescribeOrganization =
@@ -91,11 +88,14 @@ instance ToQuery DescribeOrganization where
         toQuery = const mempty
 
 -- | /See:/ 'describeOrganizationResponse' smart constructor.
-data DescribeOrganizationResponse = DescribeOrganizationResponse'
-  { _dorsOrganization   :: !(Maybe Organization)
-  , _dorsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeOrganizationResponse = DescribeOrganizationResponse'{_dorsOrganization
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Organization),
+                                                                  _dorsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeOrganizationResponse' with the minimum fields required to make a request.
 --
@@ -107,10 +107,10 @@ data DescribeOrganizationResponse = DescribeOrganizationResponse'
 describeOrganizationResponse
     :: Int -- ^ 'dorsResponseStatus'
     -> DescribeOrganizationResponse
-describeOrganizationResponse pResponseStatus_ =
-  DescribeOrganizationResponse'
-    {_dorsOrganization = Nothing, _dorsResponseStatus = pResponseStatus_}
-
+describeOrganizationResponse pResponseStatus_
+  = DescribeOrganizationResponse'{_dorsOrganization =
+                                    Nothing,
+                                  _dorsResponseStatus = pResponseStatus_}
 
 -- | A structure that contains information about the organization.
 dorsOrganization :: Lens' DescribeOrganizationResponse (Maybe Organization)

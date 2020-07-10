@@ -25,7 +25,7 @@
 --
 -- To list the current tags for your resources, use 'ListTagsForResource' . To disassociate tags from your resources, use 'UntagResource' .
 --
--- For more information about tags, see <http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html Tagging Your Resources> in the /Amazon AppStream 2.0 Developer Guide/ .
+-- For more information about tags, see <https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html Tagging Your Resources> in the /Amazon AppStream 2.0 Administration Guide/ .
 --
 module Network.AWS.AppStream.TagResource
     (
@@ -51,11 +51,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'tagResource' smart constructor.
-data TagResource = TagResource'
-  { _trResourceARN :: !Text
-  , _trTags        :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TagResource = TagResource'{_trResourceARN ::
+                                !Text,
+                                _trTags :: !(Map Text Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TagResource' with the minimum fields required to make a request.
 --
@@ -63,19 +62,19 @@ data TagResource = TagResource'
 --
 -- * 'trResourceARN' - The Amazon Resource Name (ARN) of the resource.
 --
--- * 'trTags' - The tags to associate. A tag is a key-value pair (the value is optional). For example, @Environment=Test@ , or, if you do not specify a value, @Environment=@ .  If you do not specify a value, we set the value to an empty string.
+-- * 'trTags' - The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @
 tagResource
     :: Text -- ^ 'trResourceARN'
     -> TagResource
-tagResource pResourceARN_ =
-  TagResource' {_trResourceARN = pResourceARN_, _trTags = mempty}
-
+tagResource pResourceARN_
+  = TagResource'{_trResourceARN = pResourceARN_,
+                 _trTags = mempty}
 
 -- | The Amazon Resource Name (ARN) of the resource.
 trResourceARN :: Lens' TagResource Text
 trResourceARN = lens _trResourceARN (\ s a -> s{_trResourceARN = a})
 
--- | The tags to associate. A tag is a key-value pair (the value is optional). For example, @Environment=Test@ , or, if you do not specify a value, @Environment=@ .  If you do not specify a value, we set the value to an empty string.
+-- | The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @
 trTags :: Lens' TagResource (HashMap Text Text)
 trTags = lens _trTags (\ s a -> s{_trTags = a}) . _Map
 
@@ -115,10 +114,10 @@ instance ToQuery TagResource where
         toQuery = const mempty
 
 -- | /See:/ 'tagResourceResponse' smart constructor.
-newtype TagResourceResponse = TagResourceResponse'
-  { _trrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype TagResourceResponse = TagResourceResponse'{_trrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'TagResourceResponse' with the minimum fields required to make a request.
 --
@@ -128,9 +127,9 @@ newtype TagResourceResponse = TagResourceResponse'
 tagResourceResponse
     :: Int -- ^ 'trrsResponseStatus'
     -> TagResourceResponse
-tagResourceResponse pResponseStatus_ =
-  TagResourceResponse' {_trrsResponseStatus = pResponseStatus_}
-
+tagResourceResponse pResponseStatus_
+  = TagResourceResponse'{_trrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 trrsResponseStatus :: Lens' TagResourceResponse Int

@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getClassifiers' smart constructor.
-data GetClassifiers = GetClassifiers'
-  { _gcNextToken  :: !(Maybe Text)
-  , _gcMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetClassifiers = GetClassifiers'{_gcNextToken ::
+                                      !(Maybe Text),
+                                      _gcMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetClassifiers' with the minimum fields required to make a request.
 --
@@ -62,18 +61,18 @@ data GetClassifiers = GetClassifiers'
 --
 -- * 'gcNextToken' - An optional continuation token.
 --
--- * 'gcMaxResults' - Size of the list to return (optional).
+-- * 'gcMaxResults' - The size of the list to return (optional).
 getClassifiers
     :: GetClassifiers
-getClassifiers =
-  GetClassifiers' {_gcNextToken = Nothing, _gcMaxResults = Nothing}
-
+getClassifiers
+  = GetClassifiers'{_gcNextToken = Nothing,
+                    _gcMaxResults = Nothing}
 
 -- | An optional continuation token.
 gcNextToken :: Lens' GetClassifiers (Maybe Text)
 gcNextToken = lens _gcNextToken (\ s a -> s{_gcNextToken = a})
 
--- | Size of the list to return (optional).
+-- | The size of the list to return (optional).
 gcMaxResults :: Lens' GetClassifiers (Maybe Natural)
 gcMaxResults = lens _gcMaxResults (\ s a -> s{_gcMaxResults = a}) . mapping _Nat
 
@@ -122,12 +121,14 @@ instance ToQuery GetClassifiers where
         toQuery = const mempty
 
 -- | /See:/ 'getClassifiersResponse' smart constructor.
-data GetClassifiersResponse = GetClassifiersResponse'
-  { _gcsrsNextToken      :: !(Maybe Text)
-  , _gcsrsClassifiers    :: !(Maybe [Classifier])
-  , _gcsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetClassifiersResponse = GetClassifiersResponse'{_gcsrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _gcsrsClassifiers ::
+                                                      !(Maybe [Classifier]),
+                                                      _gcsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetClassifiersResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +142,10 @@ data GetClassifiersResponse = GetClassifiersResponse'
 getClassifiersResponse
     :: Int -- ^ 'gcsrsResponseStatus'
     -> GetClassifiersResponse
-getClassifiersResponse pResponseStatus_ =
-  GetClassifiersResponse'
-    { _gcsrsNextToken = Nothing
-    , _gcsrsClassifiers = Nothing
-    , _gcsrsResponseStatus = pResponseStatus_
-    }
-
+getClassifiersResponse pResponseStatus_
+  = GetClassifiersResponse'{_gcsrsNextToken = Nothing,
+                            _gcsrsClassifiers = Nothing,
+                            _gcsrsResponseStatus = pResponseStatus_}
 
 -- | A continuation token.
 gcsrsNextToken :: Lens' GetClassifiersResponse (Maybe Text)

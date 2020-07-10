@@ -21,7 +21,7 @@
 -- Represents the input of a @TestFailover@ operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).
 --
 --
--- __Note the following__
+-- __Note the following__ 
 --
 --     * A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) in any rolling 24-hour period.
 --
@@ -33,29 +33,29 @@
 --
 --     * To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache API. Look for the following automatic failover related events, listed here in order of occurrance:
 --
---     * Replication group message: @Test Failover API called for node group <node-group-id>@
+--     * Replication group message: @Test Failover API called for node group <node-group-id>@ 
 --
---     * Cache cluster message: @Failover from master node <primary-node-id> to replica node <node-id> completed@
+--     * Cache cluster message: @Failover from master node <primary-node-id> to replica node <node-id> completed@ 
 --
---     * Replication group message: @Failover from master node <primary-node-id> to replica node <node-id> completed@
+--     * Replication group message: @Failover from master node <primary-node-id> to replica node <node-id> completed@ 
 --
---     * Cache cluster message: @Recovering cache nodes <node-id>@
+--     * Cache cluster message: @Recovering cache nodes <node-id>@ 
 --
---     * Cache cluster message: @Finished recovery for cache nodes <node-id>@
+--     * Cache cluster message: @Finished recovery for cache nodes <node-id>@ 
 --
 --
 --
 -- For more information see:
 --
---     * <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ECEvents.Viewing.html Viewing ElastiCache Events> in the /ElastiCache User Guide/
+--     * <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html Viewing ElastiCache Events> in the /ElastiCache User Guide/ 
 --
---     * <http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html DescribeEvents> in the ElastiCache API Reference
---
---
+--     * <https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html DescribeEvents> in the ElastiCache API Reference
 --
 --
 --
--- Also see, <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/AutoFailover.html#auto-failover-test Testing Multi-AZ with Automatic Failover> in the /ElastiCache User Guide/ .
+--
+--
+-- Also see, <https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test Testing Multi-AZ with Automatic Failover> in the /ElastiCache User Guide/ .
 --
 module Network.AWS.ElastiCache.TestFailover
     (
@@ -82,11 +82,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'testFailover' smart constructor.
-data TestFailover = TestFailover'
-  { _tfReplicationGroupId :: !Text
-  , _tfNodeGroupId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestFailover = TestFailover'{_tfReplicationGroupId
+                                  :: !Text,
+                                  _tfNodeGroupId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestFailover' with the minimum fields required to make a request.
 --
@@ -99,12 +98,10 @@ testFailover
     :: Text -- ^ 'tfReplicationGroupId'
     -> Text -- ^ 'tfNodeGroupId'
     -> TestFailover
-testFailover pReplicationGroupId_ pNodeGroupId_ =
-  TestFailover'
-    { _tfReplicationGroupId = pReplicationGroupId_
-    , _tfNodeGroupId = pNodeGroupId_
-    }
-
+testFailover pReplicationGroupId_ pNodeGroupId_
+  = TestFailover'{_tfReplicationGroupId =
+                    pReplicationGroupId_,
+                  _tfNodeGroupId = pNodeGroupId_}
 
 -- | The name of the replication group (console: cluster) whose automatic failover is being tested by this operation.
 tfReplicationGroupId :: Lens' TestFailover Text
@@ -142,11 +139,10 @@ instance ToQuery TestFailover where
                "NodeGroupId" =: _tfNodeGroupId]
 
 -- | /See:/ 'testFailoverResponse' smart constructor.
-data TestFailoverResponse = TestFailoverResponse'
-  { _tfrsReplicationGroup :: !(Maybe ReplicationGroup)
-  , _tfrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestFailoverResponse = TestFailoverResponse'{_tfrsReplicationGroup
+                                                  :: !(Maybe ReplicationGroup),
+                                                  _tfrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestFailoverResponse' with the minimum fields required to make a request.
 --
@@ -158,10 +154,10 @@ data TestFailoverResponse = TestFailoverResponse'
 testFailoverResponse
     :: Int -- ^ 'tfrsResponseStatus'
     -> TestFailoverResponse
-testFailoverResponse pResponseStatus_ =
-  TestFailoverResponse'
-    {_tfrsReplicationGroup = Nothing, _tfrsResponseStatus = pResponseStatus_}
-
+testFailoverResponse pResponseStatus_
+  = TestFailoverResponse'{_tfrsReplicationGroup =
+                            Nothing,
+                          _tfrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 tfrsReplicationGroup :: Lens' TestFailoverResponse (Maybe ReplicationGroup)

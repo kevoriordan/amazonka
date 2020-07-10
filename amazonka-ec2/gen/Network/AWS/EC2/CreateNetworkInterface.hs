@@ -21,7 +21,7 @@
 -- Creates a network interface in the specified subnet.
 --
 --
--- For more information about network interfaces, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html Elastic Network Interfaces> in the /Amazon Virtual Private Cloud User Guide/ .
+-- For more information about network interfaces, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html Elastic Network Interfaces> in the /Amazon Virtual Private Cloud User Guide/ .
 --
 module Network.AWS.EC2.CreateNetworkInterface
     (
@@ -31,6 +31,7 @@ module Network.AWS.EC2.CreateNetworkInterface
     -- * Request Lenses
     , cniGroups
     , cniPrivateIPAddresses
+    , cniInterfaceType
     , cniIPv6AddressCount
     , cniPrivateIPAddress
     , cniSecondaryPrivateIPAddressCount
@@ -59,18 +60,30 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createNetworkInterface' smart constructor.
-data CreateNetworkInterface = CreateNetworkInterface'
-  { _cniGroups :: !(Maybe [Text])
-  , _cniPrivateIPAddresses :: !(Maybe [PrivateIPAddressSpecification])
-  , _cniIPv6AddressCount :: !(Maybe Int)
-  , _cniPrivateIPAddress :: !(Maybe Text)
-  , _cniSecondaryPrivateIPAddressCount :: !(Maybe Int)
-  , _cniDescription :: !(Maybe Text)
-  , _cniDryRun :: !(Maybe Bool)
-  , _cniIPv6Addresses :: !(Maybe [InstanceIPv6Address])
-  , _cniSubnetId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNetworkInterface = CreateNetworkInterface'{_cniGroups
+                                                      :: !(Maybe [Text]),
+                                                      _cniPrivateIPAddresses ::
+                                                      !(Maybe
+                                                          [PrivateIPAddressSpecification]),
+                                                      _cniInterfaceType ::
+                                                      !(Maybe
+                                                          NetworkInterfaceCreationType),
+                                                      _cniIPv6AddressCount ::
+                                                      !(Maybe Int),
+                                                      _cniPrivateIPAddress ::
+                                                      !(Maybe Text),
+                                                      _cniSecondaryPrivateIPAddressCount
+                                                      :: !(Maybe Int),
+                                                      _cniDescription ::
+                                                      !(Maybe Text),
+                                                      _cniDryRun ::
+                                                      !(Maybe Bool),
+                                                      _cniIPv6Addresses ::
+                                                      !(Maybe
+                                                          [InstanceIPv6Address]),
+                                                      _cniSubnetId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateNetworkInterface' with the minimum fields required to make a request.
 --
@@ -80,11 +93,13 @@ data CreateNetworkInterface = CreateNetworkInterface'
 --
 -- * 'cniPrivateIPAddresses' - One or more private IPv4 addresses.
 --
+-- * 'cniInterfaceType' - Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify @efa@ . For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html Elastic Fabric Adapter> in the /Amazon Elastic Compute Cloud User Guide/ .
+--
 -- * 'cniIPv6AddressCount' - The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses. If your subnet has the @AssignIpv6AddressOnCreation@ attribute set to @true@ , you can specify @0@ to override this setting.
 --
 -- * 'cniPrivateIPAddress' - The primary private IPv4 address of the network interface. If you don't specify an IPv4 address, Amazon EC2 selects one for you from the subnet's IPv4 CIDR range. If you specify an IP address, you cannot indicate any IP addresses specified in @privateIpAddresses@ as primary (only one IP address can be designated as primary).
 --
--- * 'cniSecondaryPrivateIPAddressCount' - The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using @privateIpAddresses@ . The number of IP addresses you can assign to a network interface varies by instance type. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI IP Addresses Per ENI Per Instance Type> in the /Amazon Virtual Private Cloud User Guide/ .
+-- * 'cniSecondaryPrivateIPAddressCount' - The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using @privateIpAddresses@ . The number of IP addresses you can assign to a network interface varies by instance type. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI IP Addresses Per ENI Per Instance Type> in the /Amazon Virtual Private Cloud User Guide/ .
 --
 -- * 'cniDescription' - A description for the network interface.
 --
@@ -96,19 +111,16 @@ data CreateNetworkInterface = CreateNetworkInterface'
 createNetworkInterface
     :: Text -- ^ 'cniSubnetId'
     -> CreateNetworkInterface
-createNetworkInterface pSubnetId_ =
-  CreateNetworkInterface'
-    { _cniGroups = Nothing
-    , _cniPrivateIPAddresses = Nothing
-    , _cniIPv6AddressCount = Nothing
-    , _cniPrivateIPAddress = Nothing
-    , _cniSecondaryPrivateIPAddressCount = Nothing
-    , _cniDescription = Nothing
-    , _cniDryRun = Nothing
-    , _cniIPv6Addresses = Nothing
-    , _cniSubnetId = pSubnetId_
-    }
-
+createNetworkInterface pSubnetId_
+  = CreateNetworkInterface'{_cniGroups = Nothing,
+                            _cniPrivateIPAddresses = Nothing,
+                            _cniInterfaceType = Nothing,
+                            _cniIPv6AddressCount = Nothing,
+                            _cniPrivateIPAddress = Nothing,
+                            _cniSecondaryPrivateIPAddressCount = Nothing,
+                            _cniDescription = Nothing, _cniDryRun = Nothing,
+                            _cniIPv6Addresses = Nothing,
+                            _cniSubnetId = pSubnetId_}
 
 -- | The IDs of one or more security groups.
 cniGroups :: Lens' CreateNetworkInterface [Text]
@@ -118,6 +130,10 @@ cniGroups = lens _cniGroups (\ s a -> s{_cniGroups = a}) . _Default . _Coerce
 cniPrivateIPAddresses :: Lens' CreateNetworkInterface [PrivateIPAddressSpecification]
 cniPrivateIPAddresses = lens _cniPrivateIPAddresses (\ s a -> s{_cniPrivateIPAddresses = a}) . _Default . _Coerce
 
+-- | Indicates the type of network interface. To create an Elastic Fabric Adapter (EFA), specify @efa@ . For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html Elastic Fabric Adapter> in the /Amazon Elastic Compute Cloud User Guide/ .
+cniInterfaceType :: Lens' CreateNetworkInterface (Maybe NetworkInterfaceCreationType)
+cniInterfaceType = lens _cniInterfaceType (\ s a -> s{_cniInterfaceType = a})
+
 -- | The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses. If your subnet has the @AssignIpv6AddressOnCreation@ attribute set to @true@ , you can specify @0@ to override this setting.
 cniIPv6AddressCount :: Lens' CreateNetworkInterface (Maybe Int)
 cniIPv6AddressCount = lens _cniIPv6AddressCount (\ s a -> s{_cniIPv6AddressCount = a})
@@ -126,7 +142,7 @@ cniIPv6AddressCount = lens _cniIPv6AddressCount (\ s a -> s{_cniIPv6AddressCount
 cniPrivateIPAddress :: Lens' CreateNetworkInterface (Maybe Text)
 cniPrivateIPAddress = lens _cniPrivateIPAddress (\ s a -> s{_cniPrivateIPAddress = a})
 
--- | The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using @privateIpAddresses@ . The number of IP addresses you can assign to a network interface varies by instance type. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI IP Addresses Per ENI Per Instance Type> in the /Amazon Virtual Private Cloud User Guide/ .
+-- | The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using @privateIpAddresses@ . The number of IP addresses you can assign to a network interface varies by instance type. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI IP Addresses Per ENI Per Instance Type> in the /Amazon Virtual Private Cloud User Guide/ .
 cniSecondaryPrivateIPAddressCount :: Lens' CreateNetworkInterface (Maybe Int)
 cniSecondaryPrivateIPAddressCount = lens _cniSecondaryPrivateIPAddressCount (\ s a -> s{_cniSecondaryPrivateIPAddressCount = a})
 
@@ -177,6 +193,7 @@ instance ToQuery CreateNetworkInterface where
                toQuery
                  (toQueryList "PrivateIpAddresses" <$>
                     _cniPrivateIPAddresses),
+               "InterfaceType" =: _cniInterfaceType,
                "Ipv6AddressCount" =: _cniIPv6AddressCount,
                "PrivateIpAddress" =: _cniPrivateIPAddress,
                "SecondaryPrivateIpAddressCount" =:
@@ -192,11 +209,14 @@ instance ToQuery CreateNetworkInterface where
 --
 --
 -- /See:/ 'createNetworkInterfaceResponse' smart constructor.
-data CreateNetworkInterfaceResponse = CreateNetworkInterfaceResponse'
-  { _cnirsNetworkInterface :: !(Maybe NetworkInterface)
-  , _cnirsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNetworkInterfaceResponse = CreateNetworkInterfaceResponse'{_cnirsNetworkInterface
+                                                                      ::
+                                                                      !(Maybe
+                                                                          NetworkInterface),
+                                                                      _cnirsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateNetworkInterfaceResponse' with the minimum fields required to make a request.
 --
@@ -208,10 +228,10 @@ data CreateNetworkInterfaceResponse = CreateNetworkInterfaceResponse'
 createNetworkInterfaceResponse
     :: Int -- ^ 'cnirsResponseStatus'
     -> CreateNetworkInterfaceResponse
-createNetworkInterfaceResponse pResponseStatus_ =
-  CreateNetworkInterfaceResponse'
-    {_cnirsNetworkInterface = Nothing, _cnirsResponseStatus = pResponseStatus_}
-
+createNetworkInterfaceResponse pResponseStatus_
+  = CreateNetworkInterfaceResponse'{_cnirsNetworkInterface
+                                      = Nothing,
+                                    _cnirsResponseStatus = pResponseStatus_}
 
 -- | Information about the network interface.
 cnirsNetworkInterface :: Lens' CreateNetworkInterfaceResponse (Maybe NetworkInterface)

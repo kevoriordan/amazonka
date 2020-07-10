@@ -53,18 +53,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'submitTaskStateChange' smart constructor.
-data SubmitTaskStateChange = SubmitTaskStateChange'
-  { _stscStatus             :: !(Maybe Text)
-  , _stscCluster            :: !(Maybe Text)
-  , _stscAttachments        :: !(Maybe [AttachmentStateChange])
-  , _stscExecutionStoppedAt :: !(Maybe POSIX)
-  , _stscPullStoppedAt      :: !(Maybe POSIX)
-  , _stscContainers         :: !(Maybe [ContainerStateChange])
-  , _stscReason             :: !(Maybe Text)
-  , _stscTask               :: !(Maybe Text)
-  , _stscPullStartedAt      :: !(Maybe POSIX)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SubmitTaskStateChange = SubmitTaskStateChange'{_stscStatus
+                                                    :: !(Maybe Text),
+                                                    _stscCluster ::
+                                                    !(Maybe Text),
+                                                    _stscAttachments ::
+                                                    !(Maybe
+                                                        [AttachmentStateChange]),
+                                                    _stscExecutionStoppedAt ::
+                                                    !(Maybe POSIX),
+                                                    _stscPullStoppedAt ::
+                                                    !(Maybe POSIX),
+                                                    _stscContainers ::
+                                                    !(Maybe
+                                                        [ContainerStateChange]),
+                                                    _stscReason ::
+                                                    !(Maybe Text),
+                                                    _stscTask :: !(Maybe Text),
+                                                    _stscPullStartedAt ::
+                                                    !(Maybe POSIX)}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'SubmitTaskStateChange' with the minimum fields required to make a request.
 --
@@ -76,9 +85,9 @@ data SubmitTaskStateChange = SubmitTaskStateChange'
 --
 -- * 'stscAttachments' - Any attachments associated with the state change request.
 --
--- * 'stscExecutionStoppedAt' - The Unix time stamp for when the task execution stopped.
+-- * 'stscExecutionStoppedAt' - The Unix timestamp for when the task execution stopped.
 --
--- * 'stscPullStoppedAt' - The Unix time stamp for when the container image pull completed.
+-- * 'stscPullStoppedAt' - The Unix timestamp for when the container image pull completed.
 --
 -- * 'stscContainers' - Any containers associated with the state change request.
 --
@@ -86,22 +95,16 @@ data SubmitTaskStateChange = SubmitTaskStateChange'
 --
 -- * 'stscTask' - The task ID or full ARN of the task in the state change request.
 --
--- * 'stscPullStartedAt' - The Unix time stamp for when the container image pull began.
+-- * 'stscPullStartedAt' - The Unix timestamp for when the container image pull began.
 submitTaskStateChange
     :: SubmitTaskStateChange
-submitTaskStateChange =
-  SubmitTaskStateChange'
-    { _stscStatus = Nothing
-    , _stscCluster = Nothing
-    , _stscAttachments = Nothing
-    , _stscExecutionStoppedAt = Nothing
-    , _stscPullStoppedAt = Nothing
-    , _stscContainers = Nothing
-    , _stscReason = Nothing
-    , _stscTask = Nothing
-    , _stscPullStartedAt = Nothing
-    }
-
+submitTaskStateChange
+  = SubmitTaskStateChange'{_stscStatus = Nothing,
+                           _stscCluster = Nothing, _stscAttachments = Nothing,
+                           _stscExecutionStoppedAt = Nothing,
+                           _stscPullStoppedAt = Nothing,
+                           _stscContainers = Nothing, _stscReason = Nothing,
+                           _stscTask = Nothing, _stscPullStartedAt = Nothing}
 
 -- | The status of the state change request.
 stscStatus :: Lens' SubmitTaskStateChange (Maybe Text)
@@ -115,11 +118,11 @@ stscCluster = lens _stscCluster (\ s a -> s{_stscCluster = a})
 stscAttachments :: Lens' SubmitTaskStateChange [AttachmentStateChange]
 stscAttachments = lens _stscAttachments (\ s a -> s{_stscAttachments = a}) . _Default . _Coerce
 
--- | The Unix time stamp for when the task execution stopped.
+-- | The Unix timestamp for when the task execution stopped.
 stscExecutionStoppedAt :: Lens' SubmitTaskStateChange (Maybe UTCTime)
 stscExecutionStoppedAt = lens _stscExecutionStoppedAt (\ s a -> s{_stscExecutionStoppedAt = a}) . mapping _Time
 
--- | The Unix time stamp for when the container image pull completed.
+-- | The Unix timestamp for when the container image pull completed.
 stscPullStoppedAt :: Lens' SubmitTaskStateChange (Maybe UTCTime)
 stscPullStoppedAt = lens _stscPullStoppedAt (\ s a -> s{_stscPullStoppedAt = a}) . mapping _Time
 
@@ -135,7 +138,7 @@ stscReason = lens _stscReason (\ s a -> s{_stscReason = a})
 stscTask :: Lens' SubmitTaskStateChange (Maybe Text)
 stscTask = lens _stscTask (\ s a -> s{_stscTask = a})
 
--- | The Unix time stamp for when the container image pull began.
+-- | The Unix timestamp for when the container image pull began.
 stscPullStartedAt :: Lens' SubmitTaskStateChange (Maybe UTCTime)
 stscPullStartedAt = lens _stscPullStartedAt (\ s a -> s{_stscPullStartedAt = a}) . mapping _Time
 
@@ -185,11 +188,14 @@ instance ToQuery SubmitTaskStateChange where
         toQuery = const mempty
 
 -- | /See:/ 'submitTaskStateChangeResponse' smart constructor.
-data SubmitTaskStateChangeResponse = SubmitTaskStateChangeResponse'
-  { _stscrsAcknowledgment :: !(Maybe Text)
-  , _stscrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SubmitTaskStateChangeResponse = SubmitTaskStateChangeResponse'{_stscrsAcknowledgment
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _stscrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'SubmitTaskStateChangeResponse' with the minimum fields required to make a request.
 --
@@ -201,10 +207,10 @@ data SubmitTaskStateChangeResponse = SubmitTaskStateChangeResponse'
 submitTaskStateChangeResponse
     :: Int -- ^ 'stscrsResponseStatus'
     -> SubmitTaskStateChangeResponse
-submitTaskStateChangeResponse pResponseStatus_ =
-  SubmitTaskStateChangeResponse'
-    {_stscrsAcknowledgment = Nothing, _stscrsResponseStatus = pResponseStatus_}
-
+submitTaskStateChangeResponse pResponseStatus_
+  = SubmitTaskStateChangeResponse'{_stscrsAcknowledgment
+                                     = Nothing,
+                                   _stscrsResponseStatus = pResponseStatus_}
 
 -- | Acknowledgement of the state change.
 stscrsAcknowledgment :: Lens' SubmitTaskStateChangeResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @UpdateExpirationForHIT@ operation allows you update the expiration time of a HIT. If you update it to a time in the past, the HIT will be immediately expired.
+-- The @UpdateExpirationForHIT@ operation allows you update the expiration time of a HIT. If you update it to a time in the past, the HIT will be immediately expired. 
 --
 --
 module Network.AWS.MechanicalTurk.UpdateExpirationForHIT
@@ -45,33 +45,32 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateExpirationForHIT' smart constructor.
-data UpdateExpirationForHIT = UpdateExpirationForHIT'
-  { _uefhitHITId    :: !Text
-  , _uefhitExpireAt :: !POSIX
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateExpirationForHIT = UpdateExpirationForHIT'{_uefhitHITId
+                                                      :: !Text,
+                                                      _uefhitExpireAt :: !POSIX}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateExpirationForHIT' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uefhitHITId' - The HIT to update.
+-- * 'uefhitHITId' - The HIT to update. 
 --
--- * 'uefhitExpireAt' - The date and time at which you want the HIT to expire
+-- * 'uefhitExpireAt' - The date and time at which you want the HIT to expire 
 updateExpirationForHIT
     :: Text -- ^ 'uefhitHITId'
     -> UTCTime -- ^ 'uefhitExpireAt'
     -> UpdateExpirationForHIT
-updateExpirationForHIT pHITId_ pExpireAt_ =
-  UpdateExpirationForHIT'
-    {_uefhitHITId = pHITId_, _uefhitExpireAt = _Time # pExpireAt_}
+updateExpirationForHIT pHITId_ pExpireAt_
+  = UpdateExpirationForHIT'{_uefhitHITId = pHITId_,
+                            _uefhitExpireAt = _Time # pExpireAt_}
 
-
--- | The HIT to update.
+-- | The HIT to update. 
 uefhitHITId :: Lens' UpdateExpirationForHIT Text
 uefhitHITId = lens _uefhitHITId (\ s a -> s{_uefhitHITId = a})
 
--- | The date and time at which you want the HIT to expire
+-- | The date and time at which you want the HIT to expire 
 uefhitExpireAt :: Lens' UpdateExpirationForHIT UTCTime
 uefhitExpireAt = lens _uefhitExpireAt (\ s a -> s{_uefhitExpireAt = a}) . _Time
 
@@ -113,10 +112,10 @@ instance ToQuery UpdateExpirationForHIT where
         toQuery = const mempty
 
 -- | /See:/ 'updateExpirationForHITResponse' smart constructor.
-newtype UpdateExpirationForHITResponse = UpdateExpirationForHITResponse'
-  { _uefhitrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateExpirationForHITResponse = UpdateExpirationForHITResponse'{_uefhitrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UpdateExpirationForHITResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +125,9 @@ newtype UpdateExpirationForHITResponse = UpdateExpirationForHITResponse'
 updateExpirationForHITResponse
     :: Int -- ^ 'uefhitrsResponseStatus'
     -> UpdateExpirationForHITResponse
-updateExpirationForHITResponse pResponseStatus_ =
-  UpdateExpirationForHITResponse' {_uefhitrsResponseStatus = pResponseStatus_}
-
+updateExpirationForHITResponse pResponseStatus_
+  = UpdateExpirationForHITResponse'{_uefhitrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 uefhitrsResponseStatus :: Lens' UpdateExpirationForHITResponse Int

@@ -52,13 +52,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAssessmentTemplates' smart constructor.
-data ListAssessmentTemplates = ListAssessmentTemplates'
-  { _latNextToken            :: !(Maybe Text)
-  , _latFilter               :: !(Maybe AssessmentTemplateFilter)
-  , _latMaxResults           :: !(Maybe Int)
-  , _latAssessmentTargetARNs :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssessmentTemplates = ListAssessmentTemplates'{_latNextToken
+                                                        :: !(Maybe Text),
+                                                        _latFilter ::
+                                                        !(Maybe
+                                                            AssessmentTemplateFilter),
+                                                        _latMaxResults ::
+                                                        !(Maybe Int),
+                                                        _latAssessmentTargetARNs
+                                                        :: !(Maybe [Text])}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListAssessmentTemplates' with the minimum fields required to make a request.
 --
@@ -73,14 +77,10 @@ data ListAssessmentTemplates = ListAssessmentTemplates'
 -- * 'latAssessmentTargetARNs' - A list of ARNs that specifies the assessment targets whose assessment templates you want to list.
 listAssessmentTemplates
     :: ListAssessmentTemplates
-listAssessmentTemplates =
-  ListAssessmentTemplates'
-    { _latNextToken = Nothing
-    , _latFilter = Nothing
-    , _latMaxResults = Nothing
-    , _latAssessmentTargetARNs = Nothing
-    }
-
+listAssessmentTemplates
+  = ListAssessmentTemplates'{_latNextToken = Nothing,
+                             _latFilter = Nothing, _latMaxResults = Nothing,
+                             _latAssessmentTargetARNs = Nothing}
 
 -- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the __ListAssessmentTemplates__ action. Subsequent calls to the action fill __nextToken__ in the request with the value of __NextToken__ from the previous response to continue listing data.
 latNextToken :: Lens' ListAssessmentTemplates (Maybe Text)
@@ -147,12 +147,17 @@ instance ToQuery ListAssessmentTemplates where
         toQuery = const mempty
 
 -- | /See:/ 'listAssessmentTemplatesResponse' smart constructor.
-data ListAssessmentTemplatesResponse = ListAssessmentTemplatesResponse'
-  { _latrsNextToken              :: !(Maybe Text)
-  , _latrsResponseStatus         :: !Int
-  , _latrsAssessmentTemplateARNs :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssessmentTemplatesResponse = ListAssessmentTemplatesResponse'{_latrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _latrsResponseStatus
+                                                                        :: !Int,
+                                                                        _latrsAssessmentTemplateARNs
+                                                                        ::
+                                                                        ![Text]}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListAssessmentTemplatesResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +171,11 @@ data ListAssessmentTemplatesResponse = ListAssessmentTemplatesResponse'
 listAssessmentTemplatesResponse
     :: Int -- ^ 'latrsResponseStatus'
     -> ListAssessmentTemplatesResponse
-listAssessmentTemplatesResponse pResponseStatus_ =
-  ListAssessmentTemplatesResponse'
-    { _latrsNextToken = Nothing
-    , _latrsResponseStatus = pResponseStatus_
-    , _latrsAssessmentTemplateARNs = mempty
-    }
-
+listAssessmentTemplatesResponse pResponseStatus_
+  = ListAssessmentTemplatesResponse'{_latrsNextToken =
+                                       Nothing,
+                                     _latrsResponseStatus = pResponseStatus_,
+                                     _latrsAssessmentTemplateARNs = mempty}
 
 -- | When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the __nextToken__ parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.
 latrsNextToken :: Lens' ListAssessmentTemplatesResponse (Maybe Text)

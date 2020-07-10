@@ -42,10 +42,12 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'deleteNotebookInstanceLifecycleConfig' smart constructor.
-newtype DeleteNotebookInstanceLifecycleConfig = DeleteNotebookInstanceLifecycleConfig'
-  { _dnilcNotebookInstanceLifecycleConfigName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteNotebookInstanceLifecycleConfig = DeleteNotebookInstanceLifecycleConfig'{_dnilcNotebookInstanceLifecycleConfigName
+                                                                                       ::
+                                                                                       Text}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DeleteNotebookInstanceLifecycleConfig' with the minimum fields required to make a request.
 --
@@ -55,12 +57,11 @@ newtype DeleteNotebookInstanceLifecycleConfig = DeleteNotebookInstanceLifecycleC
 deleteNotebookInstanceLifecycleConfig
     :: Text -- ^ 'dnilcNotebookInstanceLifecycleConfigName'
     -> DeleteNotebookInstanceLifecycleConfig
-deleteNotebookInstanceLifecycleConfig pNotebookInstanceLifecycleConfigName_ =
-  DeleteNotebookInstanceLifecycleConfig'
-    { _dnilcNotebookInstanceLifecycleConfigName =
-        pNotebookInstanceLifecycleConfigName_
-    }
-
+deleteNotebookInstanceLifecycleConfig
+  pNotebookInstanceLifecycleConfigName_
+  = DeleteNotebookInstanceLifecycleConfig'{_dnilcNotebookInstanceLifecycleConfigName
+                                             =
+                                             pNotebookInstanceLifecycleConfigName_}
 
 -- | The name of the lifecycle configuration to delete.
 dnilcNotebookInstanceLifecycleConfigName :: Lens' DeleteNotebookInstanceLifecycleConfig Text
@@ -114,18 +115,17 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'deleteNotebookInstanceLifecycleConfigResponse' smart constructor.
-data DeleteNotebookInstanceLifecycleConfigResponse =
-  DeleteNotebookInstanceLifecycleConfigResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNotebookInstanceLifecycleConfigResponse = DeleteNotebookInstanceLifecycleConfigResponse'
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'DeleteNotebookInstanceLifecycleConfigResponse' with the minimum fields required to make a request.
 --
 deleteNotebookInstanceLifecycleConfigResponse
     :: DeleteNotebookInstanceLifecycleConfigResponse
-deleteNotebookInstanceLifecycleConfigResponse =
-  DeleteNotebookInstanceLifecycleConfigResponse'
-
+deleteNotebookInstanceLifecycleConfigResponse
+  = DeleteNotebookInstanceLifecycleConfigResponse'
 
 instance NFData
            DeleteNotebookInstanceLifecycleConfigResponse

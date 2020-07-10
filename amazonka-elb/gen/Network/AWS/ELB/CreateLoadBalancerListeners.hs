@@ -21,7 +21,7 @@
 -- Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html Listeners for Your Classic Load Balancer> in the /Classic Load Balancer Guide/ .
+-- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html Listeners for Your Classic Load Balancer> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.CreateLoadBalancerListeners
     (
@@ -51,11 +51,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createLoadBalancerListeners' smart constructor.
-data CreateLoadBalancerListeners = CreateLoadBalancerListeners'
-  { _clblLoadBalancerName :: !Text
-  , _clblListeners        :: ![Listener]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateLoadBalancerListeners = CreateLoadBalancerListeners'{_clblLoadBalancerName
+                                                                :: !Text,
+                                                                _clblListeners
+                                                                :: ![Listener]}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateLoadBalancerListeners' with the minimum fields required to make a request.
 --
@@ -67,10 +68,10 @@ data CreateLoadBalancerListeners = CreateLoadBalancerListeners'
 createLoadBalancerListeners
     :: Text -- ^ 'clblLoadBalancerName'
     -> CreateLoadBalancerListeners
-createLoadBalancerListeners pLoadBalancerName_ =
-  CreateLoadBalancerListeners'
-    {_clblLoadBalancerName = pLoadBalancerName_, _clblListeners = mempty}
-
+createLoadBalancerListeners pLoadBalancerName_
+  = CreateLoadBalancerListeners'{_clblLoadBalancerName
+                                   = pLoadBalancerName_,
+                                 _clblListeners = mempty}
 
 -- | The name of the load balancer.
 clblLoadBalancerName :: Lens' CreateLoadBalancerListeners Text
@@ -115,10 +116,11 @@ instance ToQuery CreateLoadBalancerListeners where
 --
 --
 -- /See:/ 'createLoadBalancerListenersResponse' smart constructor.
-newtype CreateLoadBalancerListenersResponse = CreateLoadBalancerListenersResponse'
-  { _clblrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateLoadBalancerListenersResponse = CreateLoadBalancerListenersResponse'{_clblrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'CreateLoadBalancerListenersResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +130,9 @@ newtype CreateLoadBalancerListenersResponse = CreateLoadBalancerListenersRespons
 createLoadBalancerListenersResponse
     :: Int -- ^ 'clblrsResponseStatus'
     -> CreateLoadBalancerListenersResponse
-createLoadBalancerListenersResponse pResponseStatus_ =
-  CreateLoadBalancerListenersResponse'
-    {_clblrsResponseStatus = pResponseStatus_}
-
+createLoadBalancerListenersResponse pResponseStatus_
+  = CreateLoadBalancerListenersResponse'{_clblrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 clblrsResponseStatus :: Lens' CreateLoadBalancerListenersResponse Int

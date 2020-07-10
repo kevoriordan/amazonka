@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers an Elastic IP address with a specified stack. An address can be registered with only one stack at a time. If the address is already registered, you must first deregister it by calling 'DeregisterElasticIp' . For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html Resource Management> .
+-- Registers an Elastic IP address with a specified stack. An address can be registered with only one stack at a time. If the address is already registered, you must first deregister it by calling 'DeregisterElasticIp' . For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html Resource Management> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.RegisterElasticIP
     (
@@ -48,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'registerElasticIP' smart constructor.
-data RegisterElasticIP = RegisterElasticIP'
-  { _reiElasticIP :: !Text
-  , _reiStackId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterElasticIP = RegisterElasticIP'{_reiElasticIP
+                                            :: !Text,
+                                            _reiStackId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterElasticIP' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ registerElasticIP
     :: Text -- ^ 'reiElasticIP'
     -> Text -- ^ 'reiStackId'
     -> RegisterElasticIP
-registerElasticIP pElasticIP_ pStackId_ =
-  RegisterElasticIP' {_reiElasticIP = pElasticIP_, _reiStackId = pStackId_}
-
+registerElasticIP pElasticIP_ pStackId_
+  = RegisterElasticIP'{_reiElasticIP = pElasticIP_,
+                       _reiStackId = pStackId_}
 
 -- | The Elastic IP address.
 reiElasticIP :: Lens' RegisterElasticIP Text
@@ -118,11 +117,12 @@ instance ToQuery RegisterElasticIP where
 --
 --
 -- /See:/ 'registerElasticIPResponse' smart constructor.
-data RegisterElasticIPResponse = RegisterElasticIPResponse'
-  { _reirsElasticIP      :: !(Maybe Text)
-  , _reirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterElasticIPResponse = RegisterElasticIPResponse'{_reirsElasticIP
+                                                            :: !(Maybe Text),
+                                                            _reirsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'RegisterElasticIPResponse' with the minimum fields required to make a request.
 --
@@ -134,10 +134,10 @@ data RegisterElasticIPResponse = RegisterElasticIPResponse'
 registerElasticIPResponse
     :: Int -- ^ 'reirsResponseStatus'
     -> RegisterElasticIPResponse
-registerElasticIPResponse pResponseStatus_ =
-  RegisterElasticIPResponse'
-    {_reirsElasticIP = Nothing, _reirsResponseStatus = pResponseStatus_}
-
+registerElasticIPResponse pResponseStatus_
+  = RegisterElasticIPResponse'{_reirsElasticIP =
+                                 Nothing,
+                               _reirsResponseStatus = pResponseStatus_}
 
 -- | The Elastic IP address.
 reirsElasticIP :: Lens' RegisterElasticIPResponse (Maybe Text)

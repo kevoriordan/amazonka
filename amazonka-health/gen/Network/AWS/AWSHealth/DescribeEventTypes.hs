@@ -52,13 +52,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEventTypes' smart constructor.
-data DescribeEventTypes = DescribeEventTypes'
-  { _detLocale     :: !(Maybe Text)
-  , _detNextToken  :: !(Maybe Text)
-  , _detFilter     :: !(Maybe EventTypeFilter)
-  , _detMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventTypes = DescribeEventTypes'{_detLocale
+                                              :: !(Maybe Text),
+                                              _detNextToken :: !(Maybe Text),
+                                              _detFilter ::
+                                              !(Maybe EventTypeFilter),
+                                              _detMaxResults :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEventTypes' with the minimum fields required to make a request.
 --
@@ -73,14 +73,10 @@ data DescribeEventTypes = DescribeEventTypes'
 -- * 'detMaxResults' - The maximum number of items to return in one batch, between 10 and 100, inclusive.
 describeEventTypes
     :: DescribeEventTypes
-describeEventTypes =
-  DescribeEventTypes'
-    { _detLocale = Nothing
-    , _detNextToken = Nothing
-    , _detFilter = Nothing
-    , _detMaxResults = Nothing
-    }
-
+describeEventTypes
+  = DescribeEventTypes'{_detLocale = Nothing,
+                        _detNextToken = Nothing, _detFilter = Nothing,
+                        _detMaxResults = Nothing}
 
 -- | The locale (language) to return information in. English (en) is the default and the only supported value at this time.
 detLocale :: Lens' DescribeEventTypes (Maybe Text)
@@ -147,12 +143,16 @@ instance ToQuery DescribeEventTypes where
         toQuery = const mempty
 
 -- | /See:/ 'describeEventTypesResponse' smart constructor.
-data DescribeEventTypesResponse = DescribeEventTypesResponse'
-  { _detrsEventTypes     :: !(Maybe [EventType])
-  , _detrsNextToken      :: !(Maybe Text)
-  , _detrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventTypesResponse = DescribeEventTypesResponse'{_detrsEventTypes
+                                                              ::
+                                                              !(Maybe
+                                                                  [EventType]),
+                                                              _detrsNextToken ::
+                                                              !(Maybe Text),
+                                                              _detrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeEventTypesResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +166,11 @@ data DescribeEventTypesResponse = DescribeEventTypesResponse'
 describeEventTypesResponse
     :: Int -- ^ 'detrsResponseStatus'
     -> DescribeEventTypesResponse
-describeEventTypesResponse pResponseStatus_ =
-  DescribeEventTypesResponse'
-    { _detrsEventTypes = Nothing
-    , _detrsNextToken = Nothing
-    , _detrsResponseStatus = pResponseStatus_
-    }
-
+describeEventTypesResponse pResponseStatus_
+  = DescribeEventTypesResponse'{_detrsEventTypes =
+                                  Nothing,
+                                _detrsNextToken = Nothing,
+                                _detrsResponseStatus = pResponseStatus_}
 
 -- | A list of event types that match the filter criteria. Event types have a category (@issue@ , @accountNotification@ , or @scheduledChange@ ), a service (for example, @EC2@ , @RDS@ , @DATAPIPELINE@ , @BILLING@ ), and a code (in the format @AWS_/SERVICE/ _/DESCRIPTION/ @ ; for example, @AWS_EC2_SYSTEM_MAINTENANCE_EVENT@ ).
 detrsEventTypes :: Lens' DescribeEventTypesResponse [EventType]

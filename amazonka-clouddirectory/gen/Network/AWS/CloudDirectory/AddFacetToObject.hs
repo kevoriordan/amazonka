@@ -47,13 +47,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'addFacetToObject' smart constructor.
-data AddFacetToObject = AddFacetToObject'
-  { _aftoObjectAttributeList :: !(Maybe [AttributeKeyAndValue])
-  , _aftoDirectoryARN        :: !Text
-  , _aftoSchemaFacet         :: !SchemaFacet
-  , _aftoObjectReference     :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddFacetToObject = AddFacetToObject'{_aftoObjectAttributeList
+                                          :: !(Maybe [AttributeKeyAndValue]),
+                                          _aftoDirectoryARN :: !Text,
+                                          _aftoSchemaFacet :: !SchemaFacet,
+                                          _aftoObjectReference ::
+                                          !ObjectReference}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddFacetToObject' with the minimum fields required to make a request.
 --
@@ -71,14 +71,13 @@ addFacetToObject
     -> SchemaFacet -- ^ 'aftoSchemaFacet'
     -> ObjectReference -- ^ 'aftoObjectReference'
     -> AddFacetToObject
-addFacetToObject pDirectoryARN_ pSchemaFacet_ pObjectReference_ =
-  AddFacetToObject'
-    { _aftoObjectAttributeList = Nothing
-    , _aftoDirectoryARN = pDirectoryARN_
-    , _aftoSchemaFacet = pSchemaFacet_
-    , _aftoObjectReference = pObjectReference_
-    }
-
+addFacetToObject pDirectoryARN_ pSchemaFacet_
+  pObjectReference_
+  = AddFacetToObject'{_aftoObjectAttributeList =
+                        Nothing,
+                      _aftoDirectoryARN = pDirectoryARN_,
+                      _aftoSchemaFacet = pSchemaFacet_,
+                      _aftoObjectReference = pObjectReference_}
 
 -- | Attributes on the facet that you are adding to the object.
 aftoObjectAttributeList :: Lens' AddFacetToObject [AttributeKeyAndValue]
@@ -131,10 +130,10 @@ instance ToQuery AddFacetToObject where
         toQuery = const mempty
 
 -- | /See:/ 'addFacetToObjectResponse' smart constructor.
-newtype AddFacetToObjectResponse = AddFacetToObjectResponse'
-  { _aftorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddFacetToObjectResponse = AddFacetToObjectResponse'{_aftorsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AddFacetToObjectResponse' with the minimum fields required to make a request.
 --
@@ -144,9 +143,9 @@ newtype AddFacetToObjectResponse = AddFacetToObjectResponse'
 addFacetToObjectResponse
     :: Int -- ^ 'aftorsResponseStatus'
     -> AddFacetToObjectResponse
-addFacetToObjectResponse pResponseStatus_ =
-  AddFacetToObjectResponse' {_aftorsResponseStatus = pResponseStatus_}
-
+addFacetToObjectResponse pResponseStatus_
+  = AddFacetToObjectResponse'{_aftorsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 aftorsResponseStatus :: Lens' AddFacetToObjectResponse Int

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the current status of an existing association or disassociation request.
+-- Returns the current status of an existing association or disassociation request. 
 --
 --
--- A @ResourceNotFoundException@ is thrown when no recent association or disassociation request with the specified token is found, or when the server does not exist. A @ValidationException@ is raised when parameters of the request are not valid.
+-- A @ResourceNotFoundException@ is thrown when no recent association or disassociation request with the specified token is found, or when the server does not exist. A @ValidationException@ is raised when parameters of the request are not valid. 
 --
 module Network.AWS.OpsWorksCM.DescribeNodeAssociationStatus
     (
@@ -49,35 +49,35 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeNodeAssociationStatus' smart constructor.
-data DescribeNodeAssociationStatus = DescribeNodeAssociationStatus'
-  { _dnasNodeAssociationStatusToken :: !Text
-  , _dnasServerName                 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeNodeAssociationStatus = DescribeNodeAssociationStatus'{_dnasNodeAssociationStatusToken
+                                                                    :: !Text,
+                                                                    _dnasServerName
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeNodeAssociationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dnasNodeAssociationStatusToken' - The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse.
+-- * 'dnasNodeAssociationStatusToken' - The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse. 
 --
--- * 'dnasServerName' - The name of the server from which to disassociate the node.
+-- * 'dnasServerName' - The name of the server from which to disassociate the node. 
 describeNodeAssociationStatus
     :: Text -- ^ 'dnasNodeAssociationStatusToken'
     -> Text -- ^ 'dnasServerName'
     -> DescribeNodeAssociationStatus
-describeNodeAssociationStatus pNodeAssociationStatusToken_ pServerName_ =
-  DescribeNodeAssociationStatus'
-    { _dnasNodeAssociationStatusToken = pNodeAssociationStatusToken_
-    , _dnasServerName = pServerName_
-    }
+describeNodeAssociationStatus
+  pNodeAssociationStatusToken_ pServerName_
+  = DescribeNodeAssociationStatus'{_dnasNodeAssociationStatusToken
+                                     = pNodeAssociationStatusToken_,
+                                   _dnasServerName = pServerName_}
 
-
--- | The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse.
+-- | The token returned in either the AssociateNodeResponse or the DisassociateNodeResponse. 
 dnasNodeAssociationStatusToken :: Lens' DescribeNodeAssociationStatus Text
 dnasNodeAssociationStatusToken = lens _dnasNodeAssociationStatusToken (\ s a -> s{_dnasNodeAssociationStatusToken = a})
 
--- | The name of the server from which to disassociate the node.
+-- | The name of the server from which to disassociate the node. 
 dnasServerName :: Lens' DescribeNodeAssociationStatus Text
 dnasServerName = lens _dnasServerName (\ s a -> s{_dnasServerName = a})
 
@@ -125,35 +125,42 @@ instance ToQuery DescribeNodeAssociationStatus where
         toQuery = const mempty
 
 -- | /See:/ 'describeNodeAssociationStatusResponse' smart constructor.
-data DescribeNodeAssociationStatusResponse = DescribeNodeAssociationStatusResponse'
-  { _dnasrsEngineAttributes      :: !(Maybe [EngineAttribute])
-  , _dnasrsResponseStatus        :: !Int
-  , _dnasrsNodeAssociationStatus :: !NodeAssociationStatus
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeNodeAssociationStatusResponse = DescribeNodeAssociationStatusResponse'{_dnasrsEngineAttributes
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [EngineAttribute]),
+                                                                                    _dnasrsResponseStatus
+                                                                                    ::
+                                                                                    !Int,
+                                                                                    _dnasrsNodeAssociationStatus
+                                                                                    ::
+                                                                                    !NodeAssociationStatus}
+                                               deriving (Eq, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeNodeAssociationStatusResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dnasrsEngineAttributes' - Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).
+-- * 'dnasrsEngineAttributes' - Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR). 
 --
 -- * 'dnasrsResponseStatus' - -- | The response status code.
 --
--- * 'dnasrsNodeAssociationStatus' - The status of the association or disassociation request.  __Possible values:__      * @SUCCESS@ : The association or disassociation succeeded.      * @FAILED@ : The association or disassociation failed.      * @IN_PROGRESS@ : The association or disassociation is still in progress.
+-- * 'dnasrsNodeAssociationStatus' - The status of the association or disassociation request.  __Possible values:__      * @SUCCESS@ : The association or disassociation succeeded.      * @FAILED@ : The association or disassociation failed.      * @IN_PROGRESS@ : The association or disassociation is still in progress. 
 describeNodeAssociationStatusResponse
     :: Int -- ^ 'dnasrsResponseStatus'
     -> NodeAssociationStatus -- ^ 'dnasrsNodeAssociationStatus'
     -> DescribeNodeAssociationStatusResponse
-describeNodeAssociationStatusResponse pResponseStatus_ pNodeAssociationStatus_ =
-  DescribeNodeAssociationStatusResponse'
-    { _dnasrsEngineAttributes = Nothing
-    , _dnasrsResponseStatus = pResponseStatus_
-    , _dnasrsNodeAssociationStatus = pNodeAssociationStatus_
-    }
+describeNodeAssociationStatusResponse
+  pResponseStatus_ pNodeAssociationStatus_
+  = DescribeNodeAssociationStatusResponse'{_dnasrsEngineAttributes
+                                             = Nothing,
+                                           _dnasrsResponseStatus =
+                                             pResponseStatus_,
+                                           _dnasrsNodeAssociationStatus =
+                                             pNodeAssociationStatus_}
 
-
--- | Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).
+-- | Attributes specific to the node association. In Puppet, the attibute PUPPET_NODE_CERT contains the signed certificate (the result of the CSR). 
 dnasrsEngineAttributes :: Lens' DescribeNodeAssociationStatusResponse [EngineAttribute]
 dnasrsEngineAttributes = lens _dnasrsEngineAttributes (\ s a -> s{_dnasrsEngineAttributes = a}) . _Default . _Coerce
 
@@ -161,7 +168,7 @@ dnasrsEngineAttributes = lens _dnasrsEngineAttributes (\ s a -> s{_dnasrsEngineA
 dnasrsResponseStatus :: Lens' DescribeNodeAssociationStatusResponse Int
 dnasrsResponseStatus = lens _dnasrsResponseStatus (\ s a -> s{_dnasrsResponseStatus = a})
 
--- | The status of the association or disassociation request.  __Possible values:__      * @SUCCESS@ : The association or disassociation succeeded.      * @FAILED@ : The association or disassociation failed.      * @IN_PROGRESS@ : The association or disassociation is still in progress.
+-- | The status of the association or disassociation request.  __Possible values:__      * @SUCCESS@ : The association or disassociation succeeded.      * @FAILED@ : The association or disassociation failed.      * @IN_PROGRESS@ : The association or disassociation is still in progress. 
 dnasrsNodeAssociationStatus :: Lens' DescribeNodeAssociationStatusResponse NodeAssociationStatus
 dnasrsNodeAssociationStatus = lens _dnasrsNodeAssociationStatus (\ s a -> s{_dnasrsNodeAssociationStatus = a})
 

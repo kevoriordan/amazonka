@@ -51,16 +51,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateCluster' smart constructor.
-data UpdateCluster = UpdateCluster'
-  { _ucSecurityGroupIds           :: !(Maybe [Text])
-  , _ucPreferredMaintenanceWindow :: !(Maybe Text)
-  , _ucNotificationTopicStatus    :: !(Maybe Text)
-  , _ucDescription                :: !(Maybe Text)
-  , _ucNotificationTopicARN       :: !(Maybe Text)
-  , _ucParameterGroupName         :: !(Maybe Text)
-  , _ucClusterName                :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCluster = UpdateCluster'{_ucSecurityGroupIds
+                                    :: !(Maybe [Text]),
+                                    _ucPreferredMaintenanceWindow ::
+                                    !(Maybe Text),
+                                    _ucNotificationTopicStatus :: !(Maybe Text),
+                                    _ucDescription :: !(Maybe Text),
+                                    _ucNotificationTopicARN :: !(Maybe Text),
+                                    _ucParameterGroupName :: !(Maybe Text),
+                                    _ucClusterName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateCluster' with the minimum fields required to make a request.
 --
@@ -82,17 +82,14 @@ data UpdateCluster = UpdateCluster'
 updateCluster
     :: Text -- ^ 'ucClusterName'
     -> UpdateCluster
-updateCluster pClusterName_ =
-  UpdateCluster'
-    { _ucSecurityGroupIds = Nothing
-    , _ucPreferredMaintenanceWindow = Nothing
-    , _ucNotificationTopicStatus = Nothing
-    , _ucDescription = Nothing
-    , _ucNotificationTopicARN = Nothing
-    , _ucParameterGroupName = Nothing
-    , _ucClusterName = pClusterName_
-    }
-
+updateCluster pClusterName_
+  = UpdateCluster'{_ucSecurityGroupIds = Nothing,
+                   _ucPreferredMaintenanceWindow = Nothing,
+                   _ucNotificationTopicStatus = Nothing,
+                   _ucDescription = Nothing,
+                   _ucNotificationTopicARN = Nothing,
+                   _ucParameterGroupName = Nothing,
+                   _ucClusterName = pClusterName_}
 
 -- | A list of user-specified security group IDs to be assigned to each node in the DAX cluster. If this parameter is not specified, DAX assigns the default VPC security group to each node.
 ucSecurityGroupIds :: Lens' UpdateCluster [Text]
@@ -166,11 +163,11 @@ instance ToQuery UpdateCluster where
         toQuery = const mempty
 
 -- | /See:/ 'updateClusterResponse' smart constructor.
-data UpdateClusterResponse = UpdateClusterResponse'
-  { _ucrsCluster        :: !(Maybe Cluster)
-  , _ucrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateClusterResponse = UpdateClusterResponse'{_ucrsCluster
+                                                    :: !(Maybe Cluster),
+                                                    _ucrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateClusterResponse' with the minimum fields required to make a request.
 --
@@ -182,10 +179,9 @@ data UpdateClusterResponse = UpdateClusterResponse'
 updateClusterResponse
     :: Int -- ^ 'ucrsResponseStatus'
     -> UpdateClusterResponse
-updateClusterResponse pResponseStatus_ =
-  UpdateClusterResponse'
-    {_ucrsCluster = Nothing, _ucrsResponseStatus = pResponseStatus_}
-
+updateClusterResponse pResponseStatus_
+  = UpdateClusterResponse'{_ucrsCluster = Nothing,
+                           _ucrsResponseStatus = pResponseStatus_}
 
 -- | A description of the DAX cluster, after it has been modified.
 ucrsCluster :: Lens' UpdateClusterResponse (Maybe Cluster)

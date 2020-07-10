@@ -48,10 +48,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteCACertificate' smart constructor.
-newtype DeleteCACertificate = DeleteCACertificate'
-  { _dcacCertificateId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCACertificate = DeleteCACertificate'{_dcacCertificateId
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteCACertificate' with the minimum fields required to make a request.
 --
@@ -61,9 +61,9 @@ newtype DeleteCACertificate = DeleteCACertificate'
 deleteCACertificate
     :: Text -- ^ 'dcacCertificateId'
     -> DeleteCACertificate
-deleteCACertificate pCertificateId_ =
-  DeleteCACertificate' {_dcacCertificateId = pCertificateId_}
-
+deleteCACertificate pCertificateId_
+  = DeleteCACertificate'{_dcacCertificateId =
+                           pCertificateId_}
 
 -- | The ID of the certificate to delete. (The last part of the certificate ARN contains the certificate ID.)
 dcacCertificateId :: Lens' DeleteCACertificate Text
@@ -98,10 +98,10 @@ instance ToQuery DeleteCACertificate where
 --
 --
 -- /See:/ 'deleteCACertificateResponse' smart constructor.
-newtype DeleteCACertificateResponse = DeleteCACertificateResponse'
-  { _dcacrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCACertificateResponse = DeleteCACertificateResponse'{_dcacrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteCACertificateResponse' with the minimum fields required to make a request.
 --
@@ -111,9 +111,9 @@ newtype DeleteCACertificateResponse = DeleteCACertificateResponse'
 deleteCACertificateResponse
     :: Int -- ^ 'dcacrsResponseStatus'
     -> DeleteCACertificateResponse
-deleteCACertificateResponse pResponseStatus_ =
-  DeleteCACertificateResponse' {_dcacrsResponseStatus = pResponseStatus_}
-
+deleteCACertificateResponse pResponseStatus_
+  = DeleteCACertificateResponse'{_dcacrsResponseStatus
+                                   = pResponseStatus_}
 
 -- | -- | The response status code.
 dcacrsResponseStatus :: Lens' DeleteCACertificateResponse Int

@@ -50,12 +50,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'detachVPNGateway' smart constructor.
-data DetachVPNGateway = DetachVPNGateway'
-  { _dvpngDryRun       :: !(Maybe Bool)
-  , _dvpngVPCId        :: !Text
-  , _dvpngVPNGatewayId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachVPNGateway = DetachVPNGateway'{_dvpngDryRun
+                                          :: !(Maybe Bool),
+                                          _dvpngVPCId :: !Text,
+                                          _dvpngVPNGatewayId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DetachVPNGateway' with the minimum fields required to make a request.
 --
@@ -70,13 +69,10 @@ detachVPNGateway
     :: Text -- ^ 'dvpngVPCId'
     -> Text -- ^ 'dvpngVPNGatewayId'
     -> DetachVPNGateway
-detachVPNGateway pVPCId_ pVPNGatewayId_ =
-  DetachVPNGateway'
-    { _dvpngDryRun = Nothing
-    , _dvpngVPCId = pVPCId_
-    , _dvpngVPNGatewayId = pVPNGatewayId_
-    }
-
+detachVPNGateway pVPCId_ pVPNGatewayId_
+  = DetachVPNGateway'{_dvpngDryRun = Nothing,
+                      _dvpngVPCId = pVPCId_,
+                      _dvpngVPNGatewayId = pVPNGatewayId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 dvpngDryRun :: Lens' DetachVPNGateway (Maybe Bool)
@@ -114,16 +110,14 @@ instance ToQuery DetachVPNGateway where
                "VpnGatewayId" =: _dvpngVPNGatewayId]
 
 -- | /See:/ 'detachVPNGatewayResponse' smart constructor.
-data DetachVPNGatewayResponse =
-  DetachVPNGatewayResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachVPNGatewayResponse = DetachVPNGatewayResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DetachVPNGatewayResponse' with the minimum fields required to make a request.
 --
 detachVPNGatewayResponse
     :: DetachVPNGatewayResponse
 detachVPNGatewayResponse = DetachVPNGatewayResponse'
-
 
 instance NFData DetachVPNGatewayResponse where

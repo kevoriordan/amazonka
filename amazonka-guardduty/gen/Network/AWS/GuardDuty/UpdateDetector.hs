@@ -18,13 +18,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an Amazon GuardDuty detector specified by the detectorId.
+-- Updates the Amazon GuardDuty detector specified by the detectorId.
+--
+--
 module Network.AWS.GuardDuty.UpdateDetector
     (
     -- * Creating a Request
       updateDetector
     , UpdateDetector
     -- * Request Lenses
+    , udFindingPublishingFrequency
     , udEnable
     , udDetectorId
 
@@ -42,34 +45,39 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | UpdateDetector request body.
---
--- /See:/ 'updateDetector' smart constructor.
-data UpdateDetector = UpdateDetector'
-  { _udEnable     :: !(Maybe Bool)
-  , _udDetectorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'updateDetector' smart constructor.
+data UpdateDetector = UpdateDetector'{_udFindingPublishingFrequency
+                                      :: !(Maybe FindingPublishingFrequency),
+                                      _udEnable :: !(Maybe Bool),
+                                      _udDetectorId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDetector' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udEnable' - Updated boolean value for the detector that specifies whether the detector is enabled.
+-- * 'udFindingPublishingFrequency' - An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.
 --
--- * 'udDetectorId' - The unique ID of the detector that you want to update.
+-- * 'udEnable' - Specifies whether the detector is enabled or not enabled.
+--
+-- * 'udDetectorId' - The unique ID of the detector to update.
 updateDetector
     :: Text -- ^ 'udDetectorId'
     -> UpdateDetector
-updateDetector pDetectorId_ =
-  UpdateDetector' {_udEnable = Nothing, _udDetectorId = pDetectorId_}
+updateDetector pDetectorId_
+  = UpdateDetector'{_udFindingPublishingFrequency =
+                      Nothing,
+                    _udEnable = Nothing, _udDetectorId = pDetectorId_}
 
+-- | An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.
+udFindingPublishingFrequency :: Lens' UpdateDetector (Maybe FindingPublishingFrequency)
+udFindingPublishingFrequency = lens _udFindingPublishingFrequency (\ s a -> s{_udFindingPublishingFrequency = a})
 
--- | Updated boolean value for the detector that specifies whether the detector is enabled.
+-- | Specifies whether the detector is enabled or not enabled.
 udEnable :: Lens' UpdateDetector (Maybe Bool)
 udEnable = lens _udEnable (\ s a -> s{_udEnable = a})
 
--- | The unique ID of the detector that you want to update.
+-- | The unique ID of the detector to update.
 udDetectorId :: Lens' UpdateDetector Text
 udDetectorId = lens _udDetectorId (\ s a -> s{_udDetectorId = a})
 
@@ -94,7 +102,11 @@ instance ToHeaders UpdateDetector where
 
 instance ToJSON UpdateDetector where
         toJSON UpdateDetector'{..}
-          = object (catMaybes [("enable" .=) <$> _udEnable])
+          = object
+              (catMaybes
+                 [("findingPublishingFrequency" .=) <$>
+                    _udFindingPublishingFrequency,
+                  ("enable" .=) <$> _udEnable])
 
 instance ToPath UpdateDetector where
         toPath UpdateDetector'{..}
@@ -104,10 +116,10 @@ instance ToQuery UpdateDetector where
         toQuery = const mempty
 
 -- | /See:/ 'updateDetectorResponse' smart constructor.
-newtype UpdateDetectorResponse = UpdateDetectorResponse'
-  { _udrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateDetectorResponse = UpdateDetectorResponse'{_udrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateDetectorResponse' with the minimum fields required to make a request.
 --
@@ -117,9 +129,9 @@ newtype UpdateDetectorResponse = UpdateDetectorResponse'
 updateDetectorResponse
     :: Int -- ^ 'udrsResponseStatus'
     -> UpdateDetectorResponse
-updateDetectorResponse pResponseStatus_ =
-  UpdateDetectorResponse' {_udrsResponseStatus = pResponseStatus_}
-
+updateDetectorResponse pResponseStatus_
+  = UpdateDetectorResponse'{_udrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 udrsResponseStatus :: Lens' UpdateDetectorResponse Int

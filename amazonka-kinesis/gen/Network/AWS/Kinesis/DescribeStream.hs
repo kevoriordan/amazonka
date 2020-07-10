@@ -62,12 +62,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeStream' smart constructor.
-data DescribeStream = DescribeStream'
-  { _dExclusiveStartShardId :: !(Maybe Text)
-  , _dLimit                 :: !(Maybe Nat)
-  , _dStreamName            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStream = DescribeStream'{_dExclusiveStartShardId
+                                      :: !(Maybe Text),
+                                      _dLimit :: !(Maybe Nat),
+                                      _dStreamName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeStream' with the minimum fields required to make a request.
 --
@@ -81,13 +80,9 @@ data DescribeStream = DescribeStream'
 describeStream
     :: Text -- ^ 'dStreamName'
     -> DescribeStream
-describeStream pStreamName_ =
-  DescribeStream'
-    { _dExclusiveStartShardId = Nothing
-    , _dLimit = Nothing
-    , _dStreamName = pStreamName_
-    }
-
+describeStream pStreamName_
+  = DescribeStream'{_dExclusiveStartShardId = Nothing,
+                    _dLimit = Nothing, _dStreamName = pStreamName_}
 
 -- | The shard ID of the shard to start with.
 dExclusiveStartShardId :: Lens' DescribeStream (Maybe Text)
@@ -158,11 +153,12 @@ instance ToQuery DescribeStream where
 --
 --
 -- /See:/ 'describeStreamResponse' smart constructor.
-data DescribeStreamResponse = DescribeStreamResponse'
-  { _dsrsResponseStatus    :: !Int
-  , _dsrsStreamDescription :: !StreamDescription
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStreamResponse = DescribeStreamResponse'{_dsrsResponseStatus
+                                                      :: !Int,
+                                                      _dsrsStreamDescription ::
+                                                      !StreamDescription}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeStreamResponse' with the minimum fields required to make a request.
 --
@@ -175,12 +171,11 @@ describeStreamResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> StreamDescription -- ^ 'dsrsStreamDescription'
     -> DescribeStreamResponse
-describeStreamResponse pResponseStatus_ pStreamDescription_ =
-  DescribeStreamResponse'
-    { _dsrsResponseStatus = pResponseStatus_
-    , _dsrsStreamDescription = pStreamDescription_
-    }
-
+describeStreamResponse pResponseStatus_
+  pStreamDescription_
+  = DescribeStreamResponse'{_dsrsResponseStatus =
+                              pResponseStatus_,
+                            _dsrsStreamDescription = pStreamDescription_}
 
 -- | -- | The response status code.
 dsrsResponseStatus :: Lens' DescribeStreamResponse Int

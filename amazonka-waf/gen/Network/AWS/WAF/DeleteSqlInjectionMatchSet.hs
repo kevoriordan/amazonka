@@ -62,11 +62,12 @@ import Network.AWS.WAF.Types.Product
 --
 --
 -- /See:/ 'deleteSqlInjectionMatchSet' smart constructor.
-data DeleteSqlInjectionMatchSet = DeleteSqlInjectionMatchSet'
-  { _dsimsSqlInjectionMatchSetId :: !Text
-  , _dsimsChangeToken            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSqlInjectionMatchSet = DeleteSqlInjectionMatchSet'{_dsimsSqlInjectionMatchSetId
+                                                              :: !Text,
+                                                              _dsimsChangeToken
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteSqlInjectionMatchSet' with the minimum fields required to make a request.
 --
@@ -79,12 +80,11 @@ deleteSqlInjectionMatchSet
     :: Text -- ^ 'dsimsSqlInjectionMatchSetId'
     -> Text -- ^ 'dsimsChangeToken'
     -> DeleteSqlInjectionMatchSet
-deleteSqlInjectionMatchSet pSqlInjectionMatchSetId_ pChangeToken_ =
-  DeleteSqlInjectionMatchSet'
-    { _dsimsSqlInjectionMatchSetId = pSqlInjectionMatchSetId_
-    , _dsimsChangeToken = pChangeToken_
-    }
-
+deleteSqlInjectionMatchSet pSqlInjectionMatchSetId_
+  pChangeToken_
+  = DeleteSqlInjectionMatchSet'{_dsimsSqlInjectionMatchSetId
+                                  = pSqlInjectionMatchSetId_,
+                                _dsimsChangeToken = pChangeToken_}
 
 -- | The @SqlInjectionMatchSetId@ of the 'SqlInjectionMatchSet' that you want to delete. @SqlInjectionMatchSetId@ is returned by 'CreateSqlInjectionMatchSet' and by 'ListSqlInjectionMatchSets' .
 dsimsSqlInjectionMatchSetId :: Lens' DeleteSqlInjectionMatchSet Text
@@ -138,11 +138,15 @@ instance ToQuery DeleteSqlInjectionMatchSet where
 --
 --
 -- /See:/ 'deleteSqlInjectionMatchSetResponse' smart constructor.
-data DeleteSqlInjectionMatchSetResponse = DeleteSqlInjectionMatchSetResponse'
-  { _dsimsrsChangeToken    :: !(Maybe Text)
-  , _dsimsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSqlInjectionMatchSetResponse = DeleteSqlInjectionMatchSetResponse'{_dsimsrsChangeToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _dsimsrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteSqlInjectionMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -154,10 +158,11 @@ data DeleteSqlInjectionMatchSetResponse = DeleteSqlInjectionMatchSetResponse'
 deleteSqlInjectionMatchSetResponse
     :: Int -- ^ 'dsimsrsResponseStatus'
     -> DeleteSqlInjectionMatchSetResponse
-deleteSqlInjectionMatchSetResponse pResponseStatus_ =
-  DeleteSqlInjectionMatchSetResponse'
-    {_dsimsrsChangeToken = Nothing, _dsimsrsResponseStatus = pResponseStatus_}
-
+deleteSqlInjectionMatchSetResponse pResponseStatus_
+  = DeleteSqlInjectionMatchSetResponse'{_dsimsrsChangeToken
+                                          = Nothing,
+                                        _dsimsrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteSqlInjectionMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 dsimsrsChangeToken :: Lens' DeleteSqlInjectionMatchSetResponse (Maybe Text)

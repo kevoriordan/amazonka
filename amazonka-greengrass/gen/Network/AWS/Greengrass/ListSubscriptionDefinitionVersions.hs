@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the versions of a subscription definition.
+--
+-- This operation returns paginated results.
 module Network.AWS.Greengrass.ListSubscriptionDefinitionVersions
     (
     -- * Creating a Request
@@ -41,17 +43,25 @@ module Network.AWS.Greengrass.ListSubscriptionDefinitionVersions
 import Network.AWS.Greengrass.Types
 import Network.AWS.Greengrass.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listSubscriptionDefinitionVersions' smart constructor.
-data ListSubscriptionDefinitionVersions = ListSubscriptionDefinitionVersions'
-  { _lsdvNextToken                :: !(Maybe Text)
-  , _lsdvMaxResults               :: !(Maybe Text)
-  , _lsdvSubscriptionDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSubscriptionDefinitionVersions = ListSubscriptionDefinitionVersions'{_lsdvNextToken
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _lsdvMaxResults
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _lsdvSubscriptionDefinitionId
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListSubscriptionDefinitionVersions' with the minimum fields required to make a request.
 --
@@ -65,13 +75,13 @@ data ListSubscriptionDefinitionVersions = ListSubscriptionDefinitionVersions'
 listSubscriptionDefinitionVersions
     :: Text -- ^ 'lsdvSubscriptionDefinitionId'
     -> ListSubscriptionDefinitionVersions
-listSubscriptionDefinitionVersions pSubscriptionDefinitionId_ =
-  ListSubscriptionDefinitionVersions'
-    { _lsdvNextToken = Nothing
-    , _lsdvMaxResults = Nothing
-    , _lsdvSubscriptionDefinitionId = pSubscriptionDefinitionId_
-    }
-
+listSubscriptionDefinitionVersions
+  pSubscriptionDefinitionId_
+  = ListSubscriptionDefinitionVersions'{_lsdvNextToken
+                                          = Nothing,
+                                        _lsdvMaxResults = Nothing,
+                                        _lsdvSubscriptionDefinitionId =
+                                          pSubscriptionDefinitionId_}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lsdvNextToken :: Lens' ListSubscriptionDefinitionVersions (Maybe Text)
@@ -84,6 +94,14 @@ lsdvMaxResults = lens _lsdvMaxResults (\ s a -> s{_lsdvMaxResults = a})
 -- | The ID of the subscription definition.
 lsdvSubscriptionDefinitionId :: Lens' ListSubscriptionDefinitionVersions Text
 lsdvSubscriptionDefinitionId = lens _lsdvSubscriptionDefinitionId (\ s a -> s{_lsdvSubscriptionDefinitionId = a})
+
+instance AWSPager ListSubscriptionDefinitionVersions
+         where
+        page rq rs
+          | stop (rs ^. lsdvrsNextToken) = Nothing
+          | stop (rs ^. lsdvrsVersions) = Nothing
+          | otherwise =
+            Just $ rq & lsdvNextToken .~ rs ^. lsdvrsNextToken
 
 instance AWSRequest
            ListSubscriptionDefinitionVersions
@@ -127,12 +145,20 @@ instance ToQuery ListSubscriptionDefinitionVersions
                "MaxResults" =: _lsdvMaxResults]
 
 -- | /See:/ 'listSubscriptionDefinitionVersionsResponse' smart constructor.
-data ListSubscriptionDefinitionVersionsResponse = ListSubscriptionDefinitionVersionsResponse'
-  { _lsdvrsVersions       :: !(Maybe [VersionInformation])
-  , _lsdvrsNextToken      :: !(Maybe Text)
-  , _lsdvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSubscriptionDefinitionVersionsResponse = ListSubscriptionDefinitionVersionsResponse'{_lsdvrsVersions
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  [VersionInformation]),
+                                                                                              _lsdvrsNextToken
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _lsdvrsResponseStatus
+                                                                                              ::
+                                                                                              !Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'ListSubscriptionDefinitionVersionsResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +172,13 @@ data ListSubscriptionDefinitionVersionsResponse = ListSubscriptionDefinitionVers
 listSubscriptionDefinitionVersionsResponse
     :: Int -- ^ 'lsdvrsResponseStatus'
     -> ListSubscriptionDefinitionVersionsResponse
-listSubscriptionDefinitionVersionsResponse pResponseStatus_ =
-  ListSubscriptionDefinitionVersionsResponse'
-    { _lsdvrsVersions = Nothing
-    , _lsdvrsNextToken = Nothing
-    , _lsdvrsResponseStatus = pResponseStatus_
-    }
-
+listSubscriptionDefinitionVersionsResponse
+  pResponseStatus_
+  = ListSubscriptionDefinitionVersionsResponse'{_lsdvrsVersions
+                                                  = Nothing,
+                                                _lsdvrsNextToken = Nothing,
+                                                _lsdvrsResponseStatus =
+                                                  pResponseStatus_}
 
 -- | Information about a version.
 lsdvrsVersions :: Lens' ListSubscriptionDefinitionVersionsResponse [VersionInformation]

@@ -82,12 +82,46 @@ library
         , Network.AWS.Glacier.Waiters
 
     other-modules:
-          Network.AWS.Glacier.Types.Product
-        , Network.AWS.Glacier.Types.Sum
+          Network.AWS.Glacier.Types.ActionCode
+        , Network.AWS.Glacier.Types.ArchiveCreationOutput
+        , Network.AWS.Glacier.Types.CSVInput
+        , Network.AWS.Glacier.Types.CSVOutput
+        , Network.AWS.Glacier.Types.CannedACL
+        , Network.AWS.Glacier.Types.DataRetrievalPolicy
+        , Network.AWS.Glacier.Types.DataRetrievalRule
+        , Network.AWS.Glacier.Types.DescribeVaultOutput
+        , Network.AWS.Glacier.Types.Encryption
+        , Network.AWS.Glacier.Types.EncryptionType
+        , Network.AWS.Glacier.Types.ExpressionType
+        , Network.AWS.Glacier.Types.FileHeaderInfo
+        , Network.AWS.Glacier.Types.GlacierJobDescription
+        , Network.AWS.Glacier.Types.Grant
+        , Network.AWS.Glacier.Types.Grantee
+        , Network.AWS.Glacier.Types.InputSerialization
+        , Network.AWS.Glacier.Types.InventoryRetrievalJobDescription
+        , Network.AWS.Glacier.Types.InventoryRetrievalJobInput
+        , Network.AWS.Glacier.Types.JobParameters
+        , Network.AWS.Glacier.Types.OutputLocation
+        , Network.AWS.Glacier.Types.OutputSerialization
+        , Network.AWS.Glacier.Types.PartListElement
+        , Network.AWS.Glacier.Types.Permission
+        , Network.AWS.Glacier.Types.Product
+        , Network.AWS.Glacier.Types.ProvisionedCapacityDescription
+        , Network.AWS.Glacier.Types.QuoteFields
+        , Network.AWS.Glacier.Types.S3Location
+        , Network.AWS.Glacier.Types.SelectParameters
+        , Network.AWS.Glacier.Types.StatusCode
+        , Network.AWS.Glacier.Types.StorageClass
+        , Network.AWS.Glacier.Types.Type
+        , Network.AWS.Glacier.Types.UploadListElement
+        , Network.AWS.Glacier.Types.VaultAccessPolicy
+        , Network.AWS.Glacier.Types.VaultLockPolicy
+        , Network.AWS.Glacier.Types.VaultNotificationConfig
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-glacier-test
     type:              exitcode-stdio-1.0
@@ -111,6 +145,7 @@ test-suite amazonka-glacier-test
         , amazonka-glacier
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

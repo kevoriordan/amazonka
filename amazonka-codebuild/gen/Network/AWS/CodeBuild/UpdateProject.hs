@@ -27,12 +27,19 @@ module Network.AWS.CodeBuild.UpdateProject
       updateProject
     , UpdateProject
     -- * Request Lenses
+    , upSecondaryArtifacts
     , upArtifacts
     , upEnvironment
     , upBadgeEnabled
+    , upSecondarySourceVersions
+    , upQueuedTimeoutInMinutes
     , upCache
+    , upSecondarySources
+    , upSourceVersion
     , upVpcConfig
     , upSource
+    , upLogsConfig
+    , upFileSystemLocations
     , upEncryptionKey
     , upDescription
     , upServiceRole
@@ -56,39 +63,63 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateProject' smart constructor.
-data UpdateProject = UpdateProject'
-  { _upArtifacts        :: !(Maybe ProjectArtifacts)
-  , _upEnvironment      :: !(Maybe ProjectEnvironment)
-  , _upBadgeEnabled     :: !(Maybe Bool)
-  , _upCache            :: !(Maybe ProjectCache)
-  , _upVpcConfig        :: !(Maybe VPCConfig)
-  , _upSource           :: !(Maybe ProjectSource)
-  , _upEncryptionKey    :: !(Maybe Text)
-  , _upDescription      :: !(Maybe Text)
-  , _upServiceRole      :: !(Maybe Text)
-  , _upTags             :: !(Maybe [Tag])
-  , _upTimeoutInMinutes :: !(Maybe Nat)
-  , _upName             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProject = UpdateProject'{_upSecondaryArtifacts
+                                    :: !(Maybe [ProjectArtifacts]),
+                                    _upArtifacts :: !(Maybe ProjectArtifacts),
+                                    _upEnvironment ::
+                                    !(Maybe ProjectEnvironment),
+                                    _upBadgeEnabled :: !(Maybe Bool),
+                                    _upSecondarySourceVersions ::
+                                    !(Maybe [ProjectSourceVersion]),
+                                    _upQueuedTimeoutInMinutes :: !(Maybe Nat),
+                                    _upCache :: !(Maybe ProjectCache),
+                                    _upSecondarySources ::
+                                    !(Maybe [ProjectSource]),
+                                    _upSourceVersion :: !(Maybe Text),
+                                    _upVpcConfig :: !(Maybe VPCConfig),
+                                    _upSource :: !(Maybe ProjectSource),
+                                    _upLogsConfig :: !(Maybe LogsConfig),
+                                    _upFileSystemLocations ::
+                                    !(Maybe [ProjectFileSystemLocation]),
+                                    _upEncryptionKey :: !(Maybe Text),
+                                    _upDescription :: !(Maybe Text),
+                                    _upServiceRole :: !(Maybe Text),
+                                    _upTags :: !(Maybe [Tag]),
+                                    _upTimeoutInMinutes :: !(Maybe Nat),
+                                    _upName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'upSecondaryArtifacts' - An array of @ProjectSource@ objects. 
+--
 -- * 'upArtifacts' - Information to be changed about the build output artifacts for the build project.
 --
 -- * 'upEnvironment' - Information to be changed about the build environment for the build project.
 --
--- * 'upBadgeEnabled' - Set this to true to generate a publicly-accessible URL for your project's build badge.
+-- * 'upBadgeEnabled' - Set this to true to generate a publicly accessible URL for your project's build badge.
+--
+-- * 'upSecondarySourceVersions' - An array of @ProjectSourceVersion@ objects. If @secondarySourceVersions@ is specified at the build level, then they take over these @secondarySourceVersions@ (at the project level). 
+--
+-- * 'upQueuedTimeoutInMinutes' - The number of minutes a build is allowed to be queued before it times out. 
 --
 -- * 'upCache' - Stores recently used information so that it can be quickly accessed at a later time.
+--
+-- * 'upSecondarySources' - An array of @ProjectSource@ objects. 
+--
+-- * 'upSourceVersion' - A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:      * For AWS CodeCommit: the commit ID, branch, or Git tag to use.     * For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format @pr/pull-request-ID@ (for example @pr/25@ ). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.     * For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.     * For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use. If @sourceVersion@ is specified at the build level, then that version takes precedence over this @sourceVersion@ (at the project level).  For more information, see <https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html Source Version Sample with CodeBuild> in the /AWS CodeBuild User Guide/ . 
 --
 -- * 'upVpcConfig' - VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
 --
 -- * 'upSource' - Information to be changed about the build input source code for the build project.
 --
--- * 'upEncryptionKey' - The replacement AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. You can specify either the CMK's Amazon Resource Name (ARN) or, if available, the CMK's alias (using the format @alias//alias-name/ @ ).
+-- * 'upLogsConfig' - Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both. 
+--
+-- * 'upFileSystemLocations' - An array of @ProjectFileSystemLocation@ objects for a CodeBuild build project. A @ProjectFileSystemLocation@ object specifies the @identifier@ , @location@ , @mountOptions@ , @mountPoint@ , and @type@ of a file system created using Amazon Elastic File System. 
+--
+-- * 'upEncryptionKey' - The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format @alias//alias-name/ @ ).
 --
 -- * 'upDescription' - A new or replacement description of the build project.
 --
@@ -102,22 +133,23 @@ data UpdateProject = UpdateProject'
 updateProject
     :: Text -- ^ 'upName'
     -> UpdateProject
-updateProject pName_ =
-  UpdateProject'
-    { _upArtifacts = Nothing
-    , _upEnvironment = Nothing
-    , _upBadgeEnabled = Nothing
-    , _upCache = Nothing
-    , _upVpcConfig = Nothing
-    , _upSource = Nothing
-    , _upEncryptionKey = Nothing
-    , _upDescription = Nothing
-    , _upServiceRole = Nothing
-    , _upTags = Nothing
-    , _upTimeoutInMinutes = Nothing
-    , _upName = pName_
-    }
+updateProject pName_
+  = UpdateProject'{_upSecondaryArtifacts = Nothing,
+                   _upArtifacts = Nothing, _upEnvironment = Nothing,
+                   _upBadgeEnabled = Nothing,
+                   _upSecondarySourceVersions = Nothing,
+                   _upQueuedTimeoutInMinutes = Nothing,
+                   _upCache = Nothing, _upSecondarySources = Nothing,
+                   _upSourceVersion = Nothing, _upVpcConfig = Nothing,
+                   _upSource = Nothing, _upLogsConfig = Nothing,
+                   _upFileSystemLocations = Nothing,
+                   _upEncryptionKey = Nothing, _upDescription = Nothing,
+                   _upServiceRole = Nothing, _upTags = Nothing,
+                   _upTimeoutInMinutes = Nothing, _upName = pName_}
 
+-- | An array of @ProjectSource@ objects. 
+upSecondaryArtifacts :: Lens' UpdateProject [ProjectArtifacts]
+upSecondaryArtifacts = lens _upSecondaryArtifacts (\ s a -> s{_upSecondaryArtifacts = a}) . _Default . _Coerce
 
 -- | Information to be changed about the build output artifacts for the build project.
 upArtifacts :: Lens' UpdateProject (Maybe ProjectArtifacts)
@@ -127,13 +159,29 @@ upArtifacts = lens _upArtifacts (\ s a -> s{_upArtifacts = a})
 upEnvironment :: Lens' UpdateProject (Maybe ProjectEnvironment)
 upEnvironment = lens _upEnvironment (\ s a -> s{_upEnvironment = a})
 
--- | Set this to true to generate a publicly-accessible URL for your project's build badge.
+-- | Set this to true to generate a publicly accessible URL for your project's build badge.
 upBadgeEnabled :: Lens' UpdateProject (Maybe Bool)
 upBadgeEnabled = lens _upBadgeEnabled (\ s a -> s{_upBadgeEnabled = a})
+
+-- | An array of @ProjectSourceVersion@ objects. If @secondarySourceVersions@ is specified at the build level, then they take over these @secondarySourceVersions@ (at the project level). 
+upSecondarySourceVersions :: Lens' UpdateProject [ProjectSourceVersion]
+upSecondarySourceVersions = lens _upSecondarySourceVersions (\ s a -> s{_upSecondarySourceVersions = a}) . _Default . _Coerce
+
+-- | The number of minutes a build is allowed to be queued before it times out. 
+upQueuedTimeoutInMinutes :: Lens' UpdateProject (Maybe Natural)
+upQueuedTimeoutInMinutes = lens _upQueuedTimeoutInMinutes (\ s a -> s{_upQueuedTimeoutInMinutes = a}) . mapping _Nat
 
 -- | Stores recently used information so that it can be quickly accessed at a later time.
 upCache :: Lens' UpdateProject (Maybe ProjectCache)
 upCache = lens _upCache (\ s a -> s{_upCache = a})
+
+-- | An array of @ProjectSource@ objects. 
+upSecondarySources :: Lens' UpdateProject [ProjectSource]
+upSecondarySources = lens _upSecondarySources (\ s a -> s{_upSecondarySources = a}) . _Default . _Coerce
+
+-- | A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:      * For AWS CodeCommit: the commit ID, branch, or Git tag to use.     * For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format @pr/pull-request-ID@ (for example @pr/25@ ). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.     * For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.     * For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use. If @sourceVersion@ is specified at the build level, then that version takes precedence over this @sourceVersion@ (at the project level).  For more information, see <https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html Source Version Sample with CodeBuild> in the /AWS CodeBuild User Guide/ . 
+upSourceVersion :: Lens' UpdateProject (Maybe Text)
+upSourceVersion = lens _upSourceVersion (\ s a -> s{_upSourceVersion = a})
 
 -- | VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
 upVpcConfig :: Lens' UpdateProject (Maybe VPCConfig)
@@ -143,7 +191,15 @@ upVpcConfig = lens _upVpcConfig (\ s a -> s{_upVpcConfig = a})
 upSource :: Lens' UpdateProject (Maybe ProjectSource)
 upSource = lens _upSource (\ s a -> s{_upSource = a})
 
--- | The replacement AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. You can specify either the CMK's Amazon Resource Name (ARN) or, if available, the CMK's alias (using the format @alias//alias-name/ @ ).
+-- | Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both. 
+upLogsConfig :: Lens' UpdateProject (Maybe LogsConfig)
+upLogsConfig = lens _upLogsConfig (\ s a -> s{_upLogsConfig = a})
+
+-- | An array of @ProjectFileSystemLocation@ objects for a CodeBuild build project. A @ProjectFileSystemLocation@ object specifies the @identifier@ , @location@ , @mountOptions@ , @mountPoint@ , and @type@ of a file system created using Amazon Elastic File System. 
+upFileSystemLocations :: Lens' UpdateProject [ProjectFileSystemLocation]
+upFileSystemLocations = lens _upFileSystemLocations (\ s a -> s{_upFileSystemLocations = a}) . _Default . _Coerce
+
+-- | The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format @alias//alias-name/ @ ).
 upEncryptionKey :: Lens' UpdateProject (Maybe Text)
 upEncryptionKey = lens _upEncryptionKey (\ s a -> s{_upEncryptionKey = a})
 
@@ -193,12 +249,22 @@ instance ToJSON UpdateProject where
         toJSON UpdateProject'{..}
           = object
               (catMaybes
-                 [("artifacts" .=) <$> _upArtifacts,
+                 [("secondaryArtifacts" .=) <$> _upSecondaryArtifacts,
+                  ("artifacts" .=) <$> _upArtifacts,
                   ("environment" .=) <$> _upEnvironment,
                   ("badgeEnabled" .=) <$> _upBadgeEnabled,
+                  ("secondarySourceVersions" .=) <$>
+                    _upSecondarySourceVersions,
+                  ("queuedTimeoutInMinutes" .=) <$>
+                    _upQueuedTimeoutInMinutes,
                   ("cache" .=) <$> _upCache,
+                  ("secondarySources" .=) <$> _upSecondarySources,
+                  ("sourceVersion" .=) <$> _upSourceVersion,
                   ("vpcConfig" .=) <$> _upVpcConfig,
                   ("source" .=) <$> _upSource,
+                  ("logsConfig" .=) <$> _upLogsConfig,
+                  ("fileSystemLocations" .=) <$>
+                    _upFileSystemLocations,
                   ("encryptionKey" .=) <$> _upEncryptionKey,
                   ("description" .=) <$> _upDescription,
                   ("serviceRole" .=) <$> _upServiceRole,
@@ -213,11 +279,11 @@ instance ToQuery UpdateProject where
         toQuery = const mempty
 
 -- | /See:/ 'updateProjectResponse' smart constructor.
-data UpdateProjectResponse = UpdateProjectResponse'
-  { _uprsProject        :: !(Maybe Project)
-  , _uprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProjectResponse = UpdateProjectResponse'{_uprsProject
+                                                    :: !(Maybe Project),
+                                                    _uprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateProjectResponse' with the minimum fields required to make a request.
 --
@@ -229,10 +295,9 @@ data UpdateProjectResponse = UpdateProjectResponse'
 updateProjectResponse
     :: Int -- ^ 'uprsResponseStatus'
     -> UpdateProjectResponse
-updateProjectResponse pResponseStatus_ =
-  UpdateProjectResponse'
-    {_uprsProject = Nothing, _uprsResponseStatus = pResponseStatus_}
-
+updateProjectResponse pResponseStatus_
+  = UpdateProjectResponse'{_uprsProject = Nothing,
+                           _uprsResponseStatus = pResponseStatus_}
 
 -- | Information about the build project that was changed.
 uprsProject :: Lens' UpdateProjectResponse (Maybe Project)

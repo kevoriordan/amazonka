@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createApplication' smart constructor.
-data CreateApplication = CreateApplication'
-  { _caDescription :: !(Maybe Text)
-  , _caName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateApplication = CreateApplication'{_caDescription
+                                            :: !(Maybe Text),
+                                            _caName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateApplication' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ data CreateApplication = CreateApplication'
 createApplication
     :: Text -- ^ 'caName'
     -> CreateApplication
-createApplication pName_ =
-  CreateApplication' {_caDescription = Nothing, _caName = pName_}
-
+createApplication pName_
+  = CreateApplication'{_caDescription = Nothing,
+                       _caName = pName_}
 
 -- | Description of the application to be created.
 caDescription :: Lens' CreateApplication (Maybe Text)
@@ -111,11 +110,12 @@ instance ToQuery CreateApplication where
         toQuery = const mempty
 
 -- | /See:/ 'createApplicationResponse' smart constructor.
-data CreateApplicationResponse = CreateApplicationResponse'
-  { _carsConfigurationId :: !(Maybe Text)
-  , _carsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateApplicationResponse = CreateApplicationResponse'{_carsConfigurationId
+                                                            :: !(Maybe Text),
+                                                            _carsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateApplicationResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +127,10 @@ data CreateApplicationResponse = CreateApplicationResponse'
 createApplicationResponse
     :: Int -- ^ 'carsResponseStatus'
     -> CreateApplicationResponse
-createApplicationResponse pResponseStatus_ =
-  CreateApplicationResponse'
-    {_carsConfigurationId = Nothing, _carsResponseStatus = pResponseStatus_}
-
+createApplicationResponse pResponseStatus_
+  = CreateApplicationResponse'{_carsConfigurationId =
+                                 Nothing,
+                               _carsResponseStatus = pResponseStatus_}
 
 -- | Configuration ID of an application to be created.
 carsConfigurationId :: Lens' CreateApplicationResponse (Maybe Text)

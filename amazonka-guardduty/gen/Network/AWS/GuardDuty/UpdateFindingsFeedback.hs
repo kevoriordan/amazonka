@@ -18,17 +18,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks specified Amazon GuardDuty findings as useful or not useful.
+-- Marks the specified GuardDuty findings as useful or not useful.
+--
+--
 module Network.AWS.GuardDuty.UpdateFindingsFeedback
     (
     -- * Creating a Request
       updateFindingsFeedback
     , UpdateFindingsFeedback
     -- * Request Lenses
-    , uffFindingIds
     , uffComments
-    , uffFeedback
     , uffDetectorId
+    , uffFindingIds
+    , uffFeedback
 
     -- * Destructuring the Response
     , updateFindingsFeedbackResponse
@@ -44,55 +46,50 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | UpdateFindingsFeedback request body.
---
--- /See:/ 'updateFindingsFeedback' smart constructor.
-data UpdateFindingsFeedback = UpdateFindingsFeedback'
-  { _uffFindingIds :: !(Maybe [Text])
-  , _uffComments   :: !(Maybe Text)
-  , _uffFeedback   :: !(Maybe Feedback)
-  , _uffDetectorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'updateFindingsFeedback' smart constructor.
+data UpdateFindingsFeedback = UpdateFindingsFeedback'{_uffComments
+                                                      :: !(Maybe Text),
+                                                      _uffDetectorId :: !Text,
+                                                      _uffFindingIds :: ![Text],
+                                                      _uffFeedback :: !Feedback}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateFindingsFeedback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uffFindingIds' - IDs of the findings that you want to mark as useful or not useful.
---
 -- * 'uffComments' - Additional feedback about the GuardDuty findings.
 --
--- * 'uffFeedback' - Valid values: USEFUL | NOT_USEFUL
+-- * 'uffDetectorId' - The ID of the detector associated with the findings to update feedback for.
 --
--- * 'uffDetectorId' - The ID of the detector that specifies the GuardDuty service whose findings you want to mark as useful or not useful.
+-- * 'uffFindingIds' - The IDs of the findings that you want to mark as useful or not useful.
+--
+-- * 'uffFeedback' - The feedback for the finding.
 updateFindingsFeedback
     :: Text -- ^ 'uffDetectorId'
+    -> Feedback -- ^ 'uffFeedback'
     -> UpdateFindingsFeedback
-updateFindingsFeedback pDetectorId_ =
-  UpdateFindingsFeedback'
-    { _uffFindingIds = Nothing
-    , _uffComments = Nothing
-    , _uffFeedback = Nothing
-    , _uffDetectorId = pDetectorId_
-    }
-
-
--- | IDs of the findings that you want to mark as useful or not useful.
-uffFindingIds :: Lens' UpdateFindingsFeedback [Text]
-uffFindingIds = lens _uffFindingIds (\ s a -> s{_uffFindingIds = a}) . _Default . _Coerce
+updateFindingsFeedback pDetectorId_ pFeedback_
+  = UpdateFindingsFeedback'{_uffComments = Nothing,
+                            _uffDetectorId = pDetectorId_,
+                            _uffFindingIds = mempty, _uffFeedback = pFeedback_}
 
 -- | Additional feedback about the GuardDuty findings.
 uffComments :: Lens' UpdateFindingsFeedback (Maybe Text)
 uffComments = lens _uffComments (\ s a -> s{_uffComments = a})
 
--- | Valid values: USEFUL | NOT_USEFUL
-uffFeedback :: Lens' UpdateFindingsFeedback (Maybe Feedback)
-uffFeedback = lens _uffFeedback (\ s a -> s{_uffFeedback = a})
-
--- | The ID of the detector that specifies the GuardDuty service whose findings you want to mark as useful or not useful.
+-- | The ID of the detector associated with the findings to update feedback for.
 uffDetectorId :: Lens' UpdateFindingsFeedback Text
 uffDetectorId = lens _uffDetectorId (\ s a -> s{_uffDetectorId = a})
+
+-- | The IDs of the findings that you want to mark as useful or not useful.
+uffFindingIds :: Lens' UpdateFindingsFeedback [Text]
+uffFindingIds = lens _uffFindingIds (\ s a -> s{_uffFindingIds = a}) . _Coerce
+
+-- | The feedback for the finding.
+uffFeedback :: Lens' UpdateFindingsFeedback Feedback
+uffFeedback = lens _uffFeedback (\ s a -> s{_uffFeedback = a})
 
 instance AWSRequest UpdateFindingsFeedback where
         type Rs UpdateFindingsFeedback =
@@ -119,9 +116,9 @@ instance ToJSON UpdateFindingsFeedback where
         toJSON UpdateFindingsFeedback'{..}
           = object
               (catMaybes
-                 [("findingIds" .=) <$> _uffFindingIds,
-                  ("comments" .=) <$> _uffComments,
-                  ("feedback" .=) <$> _uffFeedback])
+                 [("comments" .=) <$> _uffComments,
+                  Just ("findingIds" .= _uffFindingIds),
+                  Just ("feedback" .= _uffFeedback)])
 
 instance ToPath UpdateFindingsFeedback where
         toPath UpdateFindingsFeedback'{..}
@@ -133,10 +130,10 @@ instance ToQuery UpdateFindingsFeedback where
         toQuery = const mempty
 
 -- | /See:/ 'updateFindingsFeedbackResponse' smart constructor.
-newtype UpdateFindingsFeedbackResponse = UpdateFindingsFeedbackResponse'
-  { _uffrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateFindingsFeedbackResponse = UpdateFindingsFeedbackResponse'{_uffrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UpdateFindingsFeedbackResponse' with the minimum fields required to make a request.
 --
@@ -146,9 +143,9 @@ newtype UpdateFindingsFeedbackResponse = UpdateFindingsFeedbackResponse'
 updateFindingsFeedbackResponse
     :: Int -- ^ 'uffrsResponseStatus'
     -> UpdateFindingsFeedbackResponse
-updateFindingsFeedbackResponse pResponseStatus_ =
-  UpdateFindingsFeedbackResponse' {_uffrsResponseStatus = pResponseStatus_}
-
+updateFindingsFeedbackResponse pResponseStatus_
+  = UpdateFindingsFeedbackResponse'{_uffrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 uffrsResponseStatus :: Lens' UpdateFindingsFeedbackResponse Int

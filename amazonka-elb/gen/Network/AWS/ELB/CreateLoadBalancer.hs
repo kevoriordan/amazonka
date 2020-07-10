@@ -25,7 +25,7 @@
 --
 -- To describe your current load balancers, see 'DescribeLoadBalancers' . When you are finished with a load balancer, you can delete it using 'DeleteLoadBalancer' .
 --
--- You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html Limits for Your Classic Load Balancer> in the /Classic Load Balancer Guide/ .
+-- You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html Limits for Your Classic Load Balancer> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.CreateLoadBalancer
     (
@@ -61,16 +61,16 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createLoadBalancer' smart constructor.
-data CreateLoadBalancer = CreateLoadBalancer'
-  { _clbSecurityGroups    :: !(Maybe [Text])
-  , _clbSubnets           :: !(Maybe [Text])
-  , _clbAvailabilityZones :: !(Maybe [Text])
-  , _clbScheme            :: !(Maybe Text)
-  , _clbTags              :: !(Maybe (List1 Tag))
-  , _clbLoadBalancerName  :: !Text
-  , _clbListeners         :: ![Listener]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateLoadBalancer = CreateLoadBalancer'{_clbSecurityGroups
+                                              :: !(Maybe [Text]),
+                                              _clbSubnets :: !(Maybe [Text]),
+                                              _clbAvailabilityZones ::
+                                              !(Maybe [Text]),
+                                              _clbScheme :: !(Maybe Text),
+                                              _clbTags :: !(Maybe (List1 Tag)),
+                                              _clbLoadBalancerName :: !Text,
+                                              _clbListeners :: ![Listener]}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateLoadBalancer' with the minimum fields required to make a request.
 --
@@ -84,25 +84,21 @@ data CreateLoadBalancer = CreateLoadBalancer'
 --
 -- * 'clbScheme' - The type of a load balancer. Valid only for load balancers in a VPC. By default, Elastic Load Balancing creates an Internet-facing load balancer with a DNS name that resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme Load Balancer Scheme> in the /Elastic Load Balancing User Guide/ . Specify @internal@ to create a load balancer with a DNS name that resolves to private IP addresses.
 --
--- * 'clbTags' - A list of tags to assign to the load balancer. For more information about tagging your load balancer, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html Tag Your Classic Load Balancer> in the /Classic Load Balancer Guide/ .
+-- * 'clbTags' - A list of tags to assign to the load balancer. For more information about tagging your load balancer, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html Tag Your Classic Load Balancer> in the /Classic Load Balancers Guide/ .
 --
 -- * 'clbLoadBalancerName' - The name of the load balancer. This name must be unique within your set of load balancers for the region, must have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and cannot begin or end with a hyphen.
 --
--- * 'clbListeners' - The listeners. For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html Listeners for Your Classic Load Balancer> in the /Classic Load Balancer Guide/ .
+-- * 'clbListeners' - The listeners. For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html Listeners for Your Classic Load Balancer> in the /Classic Load Balancers Guide/ .
 createLoadBalancer
     :: Text -- ^ 'clbLoadBalancerName'
     -> CreateLoadBalancer
-createLoadBalancer pLoadBalancerName_ =
-  CreateLoadBalancer'
-    { _clbSecurityGroups = Nothing
-    , _clbSubnets = Nothing
-    , _clbAvailabilityZones = Nothing
-    , _clbScheme = Nothing
-    , _clbTags = Nothing
-    , _clbLoadBalancerName = pLoadBalancerName_
-    , _clbListeners = mempty
-    }
-
+createLoadBalancer pLoadBalancerName_
+  = CreateLoadBalancer'{_clbSecurityGroups = Nothing,
+                        _clbSubnets = Nothing,
+                        _clbAvailabilityZones = Nothing,
+                        _clbScheme = Nothing, _clbTags = Nothing,
+                        _clbLoadBalancerName = pLoadBalancerName_,
+                        _clbListeners = mempty}
 
 -- | The IDs of the security groups to assign to the load balancer.
 clbSecurityGroups :: Lens' CreateLoadBalancer [Text]
@@ -120,7 +116,7 @@ clbAvailabilityZones = lens _clbAvailabilityZones (\ s a -> s{_clbAvailabilityZo
 clbScheme :: Lens' CreateLoadBalancer (Maybe Text)
 clbScheme = lens _clbScheme (\ s a -> s{_clbScheme = a})
 
--- | A list of tags to assign to the load balancer. For more information about tagging your load balancer, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html Tag Your Classic Load Balancer> in the /Classic Load Balancer Guide/ .
+-- | A list of tags to assign to the load balancer. For more information about tagging your load balancer, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html Tag Your Classic Load Balancer> in the /Classic Load Balancers Guide/ .
 clbTags :: Lens' CreateLoadBalancer (Maybe (NonEmpty Tag))
 clbTags = lens _clbTags (\ s a -> s{_clbTags = a}) . mapping _List1
 
@@ -128,7 +124,7 @@ clbTags = lens _clbTags (\ s a -> s{_clbTags = a}) . mapping _List1
 clbLoadBalancerName :: Lens' CreateLoadBalancer Text
 clbLoadBalancerName = lens _clbLoadBalancerName (\ s a -> s{_clbLoadBalancerName = a})
 
--- | The listeners. For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html Listeners for Your Classic Load Balancer> in the /Classic Load Balancer Guide/ .
+-- | The listeners. For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html Listeners for Your Classic Load Balancer> in the /Classic Load Balancers Guide/ .
 clbListeners :: Lens' CreateLoadBalancer [Listener]
 clbListeners = lens _clbListeners (\ s a -> s{_clbListeners = a}) . _Coerce
 
@@ -176,11 +172,12 @@ instance ToQuery CreateLoadBalancer where
 --
 --
 -- /See:/ 'createLoadBalancerResponse' smart constructor.
-data CreateLoadBalancerResponse = CreateLoadBalancerResponse'
-  { _clbrsDNSName        :: !(Maybe Text)
-  , _clbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateLoadBalancerResponse = CreateLoadBalancerResponse'{_clbrsDNSName
+                                                              :: !(Maybe Text),
+                                                              _clbrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateLoadBalancerResponse' with the minimum fields required to make a request.
 --
@@ -192,10 +189,10 @@ data CreateLoadBalancerResponse = CreateLoadBalancerResponse'
 createLoadBalancerResponse
     :: Int -- ^ 'clbrsResponseStatus'
     -> CreateLoadBalancerResponse
-createLoadBalancerResponse pResponseStatus_ =
-  CreateLoadBalancerResponse'
-    {_clbrsDNSName = Nothing, _clbrsResponseStatus = pResponseStatus_}
-
+createLoadBalancerResponse pResponseStatus_
+  = CreateLoadBalancerResponse'{_clbrsDNSName =
+                                  Nothing,
+                                _clbrsResponseStatus = pResponseStatus_}
 
 -- | The DNS name of the load balancer.
 clbrsDNSName :: Lens' CreateLoadBalancerResponse (Maybe Text)

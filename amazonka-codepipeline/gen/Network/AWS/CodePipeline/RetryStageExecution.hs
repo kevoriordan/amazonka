@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resumes the pipeline execution by retrying the last failed actions in a stage.
+-- Resumes the pipeline execution by retrying the last failed actions in a stage. You can retry a stage immediately if any of the actions in the stage fail. When you retry, all actions that are still in progress continue working, and failed actions are triggered again.
 --
 --
 module Network.AWS.CodePipeline.RetryStageExecution
@@ -47,18 +47,19 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a RetryStageExecution action.
+-- | Represents the input of a @RetryStageExecution@ action.
 --
 --
 --
 -- /See:/ 'retryStageExecution' smart constructor.
-data RetryStageExecution = RetryStageExecution'
-  { _rsePipelineName        :: !Text
-  , _rseStageName           :: !Text
-  , _rsePipelineExecutionId :: !Text
-  , _rseRetryMode           :: !StageRetryMode
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetryStageExecution = RetryStageExecution'{_rsePipelineName
+                                                :: !Text,
+                                                _rseStageName :: !Text,
+                                                _rsePipelineExecutionId ::
+                                                !Text,
+                                                _rseRetryMode ::
+                                                !StageRetryMode}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RetryStageExecution' with the minimum fields required to make a request.
 --
@@ -77,14 +78,13 @@ retryStageExecution
     -> Text -- ^ 'rsePipelineExecutionId'
     -> StageRetryMode -- ^ 'rseRetryMode'
     -> RetryStageExecution
-retryStageExecution pPipelineName_ pStageName_ pPipelineExecutionId_ pRetryMode_ =
-  RetryStageExecution'
-    { _rsePipelineName = pPipelineName_
-    , _rseStageName = pStageName_
-    , _rsePipelineExecutionId = pPipelineExecutionId_
-    , _rseRetryMode = pRetryMode_
-    }
-
+retryStageExecution pPipelineName_ pStageName_
+  pPipelineExecutionId_ pRetryMode_
+  = RetryStageExecution'{_rsePipelineName =
+                           pPipelineName_,
+                         _rseStageName = pStageName_,
+                         _rsePipelineExecutionId = pPipelineExecutionId_,
+                         _rseRetryMode = pRetryMode_}
 
 -- | The name of the pipeline that contains the failed stage.
 rsePipelineName :: Lens' RetryStageExecution Text
@@ -143,16 +143,18 @@ instance ToPath RetryStageExecution where
 instance ToQuery RetryStageExecution where
         toQuery = const mempty
 
--- | Represents the output of a RetryStageExecution action.
+-- | Represents the output of a @RetryStageExecution@ action.
 --
 --
 --
 -- /See:/ 'retryStageExecutionResponse' smart constructor.
-data RetryStageExecutionResponse = RetryStageExecutionResponse'
-  { _rsersPipelineExecutionId :: !(Maybe Text)
-  , _rsersResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetryStageExecutionResponse = RetryStageExecutionResponse'{_rsersPipelineExecutionId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _rsersResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'RetryStageExecutionResponse' with the minimum fields required to make a request.
 --
@@ -164,12 +166,10 @@ data RetryStageExecutionResponse = RetryStageExecutionResponse'
 retryStageExecutionResponse
     :: Int -- ^ 'rsersResponseStatus'
     -> RetryStageExecutionResponse
-retryStageExecutionResponse pResponseStatus_ =
-  RetryStageExecutionResponse'
-    { _rsersPipelineExecutionId = Nothing
-    , _rsersResponseStatus = pResponseStatus_
-    }
-
+retryStageExecutionResponse pResponseStatus_
+  = RetryStageExecutionResponse'{_rsersPipelineExecutionId
+                                   = Nothing,
+                                 _rsersResponseStatus = pResponseStatus_}
 
 -- | The ID of the current workflow execution in the failed stage.
 rsersPipelineExecutionId :: Lens' RetryStageExecutionResponse (Maybe Text)

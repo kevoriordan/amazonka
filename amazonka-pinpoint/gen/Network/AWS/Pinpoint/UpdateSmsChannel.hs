@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update an SMS channel
+-- Enables the SMS channel for an application or updates the status and settings of the SMS channel for an application.
+--
+--
 module Network.AWS.Pinpoint.UpdateSmsChannel
     (
     -- * Creating a Request
@@ -44,31 +46,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateSmsChannel' smart constructor.
-data UpdateSmsChannel = UpdateSmsChannel'
-  { _uscApplicationId     :: !Text
-  , _uscSMSChannelRequest :: !SMSChannelRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSmsChannel = UpdateSmsChannel'{_uscApplicationId
+                                          :: !Text,
+                                          _uscSMSChannelRequest ::
+                                          !SMSChannelRequest}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSmsChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uscApplicationId' - Undocumented member.
+-- * 'uscApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'uscSMSChannelRequest' - Undocumented member.
 updateSmsChannel
     :: Text -- ^ 'uscApplicationId'
     -> SMSChannelRequest -- ^ 'uscSMSChannelRequest'
     -> UpdateSmsChannel
-updateSmsChannel pApplicationId_ pSMSChannelRequest_ =
-  UpdateSmsChannel'
-    { _uscApplicationId = pApplicationId_
-    , _uscSMSChannelRequest = pSMSChannelRequest_
-    }
+updateSmsChannel pApplicationId_ pSMSChannelRequest_
+  = UpdateSmsChannel'{_uscApplicationId =
+                        pApplicationId_,
+                      _uscSMSChannelRequest = pSMSChannelRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 uscApplicationId :: Lens' UpdateSmsChannel Text
 uscApplicationId = lens _uscApplicationId (\ s a -> s{_uscApplicationId = a})
 
@@ -113,11 +113,13 @@ instance ToQuery UpdateSmsChannel where
         toQuery = const mempty
 
 -- | /See:/ 'updateSmsChannelResponse' smart constructor.
-data UpdateSmsChannelResponse = UpdateSmsChannelResponse'
-  { _uscrsResponseStatus     :: !Int
-  , _uscrsSMSChannelResponse :: !SMSChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSmsChannelResponse = UpdateSmsChannelResponse'{_uscrsResponseStatus
+                                                          :: !Int,
+                                                          _uscrsSMSChannelResponse
+                                                          ::
+                                                          !SMSChannelResponse}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateSmsChannelResponse' with the minimum fields required to make a request.
 --
@@ -130,12 +132,11 @@ updateSmsChannelResponse
     :: Int -- ^ 'uscrsResponseStatus'
     -> SMSChannelResponse -- ^ 'uscrsSMSChannelResponse'
     -> UpdateSmsChannelResponse
-updateSmsChannelResponse pResponseStatus_ pSMSChannelResponse_ =
-  UpdateSmsChannelResponse'
-    { _uscrsResponseStatus = pResponseStatus_
-    , _uscrsSMSChannelResponse = pSMSChannelResponse_
-    }
-
+updateSmsChannelResponse pResponseStatus_
+  pSMSChannelResponse_
+  = UpdateSmsChannelResponse'{_uscrsResponseStatus =
+                                pResponseStatus_,
+                              _uscrsSMSChannelResponse = pSMSChannelResponse_}
 
 -- | -- | The response status code.
 uscrsResponseStatus :: Lens' UpdateSmsChannelResponse Int

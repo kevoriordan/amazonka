@@ -48,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listChannels' smart constructor.
-data ListChannels = ListChannels'
-  { _lcNextToken  :: !(Maybe Text)
-  , _lcMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListChannels = ListChannels'{_lcNextToken ::
+                                  !(Maybe Text),
+                                  _lcMaxResults :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListChannels' with the minimum fields required to make a request.
 --
@@ -63,8 +62,9 @@ data ListChannels = ListChannels'
 -- * 'lcMaxResults' - Upper bound on number of records to return.
 listChannels
     :: ListChannels
-listChannels = ListChannels' {_lcNextToken = Nothing, _lcMaxResults = Nothing}
-
+listChannels
+  = ListChannels'{_lcNextToken = Nothing,
+                  _lcMaxResults = Nothing}
 
 -- | A token used to resume pagination from the end of a previous request.
 lcNextToken :: Lens' ListChannels (Maybe Text)
@@ -112,12 +112,12 @@ instance ToQuery ListChannels where
                "maxResults" =: _lcMaxResults]
 
 -- | /See:/ 'listChannelsResponse' smart constructor.
-data ListChannelsResponse = ListChannelsResponse'
-  { _lcrsChannels       :: !(Maybe [Channel])
-  , _lcrsNextToken      :: !(Maybe Text)
-  , _lcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListChannelsResponse = ListChannelsResponse'{_lcrsChannels
+                                                  :: !(Maybe [Channel]),
+                                                  _lcrsNextToken ::
+                                                  !(Maybe Text),
+                                                  _lcrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListChannelsResponse' with the minimum fields required to make a request.
 --
@@ -131,13 +131,10 @@ data ListChannelsResponse = ListChannelsResponse'
 listChannelsResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListChannelsResponse
-listChannelsResponse pResponseStatus_ =
-  ListChannelsResponse'
-    { _lcrsChannels = Nothing
-    , _lcrsNextToken = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
-
+listChannelsResponse pResponseStatus_
+  = ListChannelsResponse'{_lcrsChannels = Nothing,
+                          _lcrsNextToken = Nothing,
+                          _lcrsResponseStatus = pResponseStatus_}
 
 -- | A list of Channel records.
 lcrsChannels :: Lens' ListChannelsResponse [Channel]

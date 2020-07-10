@@ -47,22 +47,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getUser' smart constructor.
-newtype GetUser = GetUser'
-  { _guUserName :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetUser = GetUser'{_guUserName :: Maybe Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'guUserName' - The name of the user to get information about. This parameter is optional. If it is not included, it defaults to the user making the request. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'guUserName' - The name of the user to get information about. This parameter is optional. If it is not included, it defaults to the user making the request. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 getUser
     :: GetUser
-getUser = GetUser' {_guUserName = Nothing}
+getUser = GetUser'{_guUserName = Nothing}
 
-
--- | The name of the user to get information about. This parameter is optional. If it is not included, it defaults to the user making the request. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name of the user to get information about. This parameter is optional. If it is not included, it defaults to the user making the request. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 guUserName :: Lens' GetUser (Maybe Text)
 guUserName = lens _guUserName (\ s a -> s{_guUserName = a})
 
@@ -92,16 +89,15 @@ instance ToQuery GetUser where
                "Version" =: ("2010-05-08" :: ByteString),
                "UserName" =: _guUserName]
 
--- | Contains the response to a successful 'GetUser' request.
+-- | Contains the response to a successful 'GetUser' request. 
 --
 --
 --
 -- /See:/ 'getUserResponse' smart constructor.
-data GetUserResponse = GetUserResponse'
-  { _gursResponseStatus :: !Int
-  , _gursUser           :: !User
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUserResponse = GetUserResponse'{_gursResponseStatus
+                                        :: !Int,
+                                        _gursUser :: !User}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetUserResponse' with the minimum fields required to make a request.
 --
@@ -109,20 +105,21 @@ data GetUserResponse = GetUserResponse'
 --
 -- * 'gursResponseStatus' - -- | The response status code.
 --
--- * 'gursUser' - A structure containing details about the IAM user.
+-- * 'gursUser' - A structure containing details about the IAM user. /Important:/ Due to a service issue, password last used data does not include password use from May 3, 2018 22:50 PDT to May 23, 2018 14:08 PDT. This affects <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html last sign-in> dates shown in the IAM console and password last used dates in the <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html IAM credential report> , and returned by this GetUser API. If users signed in during the affected time, the password last used date that is returned is the date the user last signed in before May 3, 2018. For users that signed in after May 23, 2018 14:08 PDT, the returned password last used date is accurate. You can use password last used information to identify unused credentials for deletion. For example, you might delete users who did not sign in to AWS in the last 90 days. In cases like this, we recommend that you adjust your evaluation window to include dates after May 23, 2018. Alternatively, if your users use access keys to access AWS programmatically you can refer to access key last used information because it is accurate for all dates. 
 getUserResponse
     :: Int -- ^ 'gursResponseStatus'
     -> User -- ^ 'gursUser'
     -> GetUserResponse
-getUserResponse pResponseStatus_ pUser_ =
-  GetUserResponse' {_gursResponseStatus = pResponseStatus_, _gursUser = pUser_}
-
+getUserResponse pResponseStatus_ pUser_
+  = GetUserResponse'{_gursResponseStatus =
+                       pResponseStatus_,
+                     _gursUser = pUser_}
 
 -- | -- | The response status code.
 gursResponseStatus :: Lens' GetUserResponse Int
 gursResponseStatus = lens _gursResponseStatus (\ s a -> s{_gursResponseStatus = a})
 
--- | A structure containing details about the IAM user.
+-- | A structure containing details about the IAM user. /Important:/ Due to a service issue, password last used data does not include password use from May 3, 2018 22:50 PDT to May 23, 2018 14:08 PDT. This affects <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html last sign-in> dates shown in the IAM console and password last used dates in the <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html IAM credential report> , and returned by this GetUser API. If users signed in during the affected time, the password last used date that is returned is the date the user last signed in before May 3, 2018. For users that signed in after May 23, 2018 14:08 PDT, the returned password last used date is accurate. You can use password last used information to identify unused credentials for deletion. For example, you might delete users who did not sign in to AWS in the last 90 days. In cases like this, we recommend that you adjust your evaluation window to include dates after May 23, 2018. Alternatively, if your users use access keys to access AWS programmatically you can refer to access key last used information because it is accurate for all dates. 
 gursUser :: Lens' GetUserResponse User
 gursUser = lens _gursUser (\ s a -> s{_gursUser = a})
 

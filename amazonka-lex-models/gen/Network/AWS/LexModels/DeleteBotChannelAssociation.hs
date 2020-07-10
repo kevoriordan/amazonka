@@ -46,18 +46,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteBotChannelAssociation' smart constructor.
-data DeleteBotChannelAssociation = DeleteBotChannelAssociation'
-  { _dbcaName     :: !Text
-  , _dbcaBotName  :: !Text
-  , _dbcaBotAlias :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBotChannelAssociation = DeleteBotChannelAssociation'{_dbcaName
+                                                                :: !Text,
+                                                                _dbcaBotName ::
+                                                                !Text,
+                                                                _dbcaBotAlias ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteBotChannelAssociation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbcaName' - The name of the association. The name is case sensitive.
+-- * 'dbcaName' - The name of the association. The name is case sensitive. 
 --
 -- * 'dbcaBotName' - The name of the Amazon Lex bot.
 --
@@ -67,12 +69,13 @@ deleteBotChannelAssociation
     -> Text -- ^ 'dbcaBotName'
     -> Text -- ^ 'dbcaBotAlias'
     -> DeleteBotChannelAssociation
-deleteBotChannelAssociation pName_ pBotName_ pBotAlias_ =
-  DeleteBotChannelAssociation'
-    {_dbcaName = pName_, _dbcaBotName = pBotName_, _dbcaBotAlias = pBotAlias_}
+deleteBotChannelAssociation pName_ pBotName_
+  pBotAlias_
+  = DeleteBotChannelAssociation'{_dbcaName = pName_,
+                                 _dbcaBotName = pBotName_,
+                                 _dbcaBotAlias = pBotAlias_}
 
-
--- | The name of the association. The name is case sensitive.
+-- | The name of the association. The name is case sensitive. 
 dbcaName :: Lens' DeleteBotChannelAssociation Text
 dbcaName = lens _dbcaName (\ s a -> s{_dbcaName = a})
 
@@ -112,17 +115,16 @@ instance ToQuery DeleteBotChannelAssociation where
         toQuery = const mempty
 
 -- | /See:/ 'deleteBotChannelAssociationResponse' smart constructor.
-data DeleteBotChannelAssociationResponse =
-  DeleteBotChannelAssociationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBotChannelAssociationResponse = DeleteBotChannelAssociationResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteBotChannelAssociationResponse' with the minimum fields required to make a request.
 --
 deleteBotChannelAssociationResponse
     :: DeleteBotChannelAssociationResponse
-deleteBotChannelAssociationResponse = DeleteBotChannelAssociationResponse'
-
+deleteBotChannelAssociationResponse
+  = DeleteBotChannelAssociationResponse'
 
 instance NFData DeleteBotChannelAssociationResponse
          where

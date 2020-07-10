@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Terminates the ML compute instance. Before terminating the instance, Amazon SageMaker disconnects the ML storage volume from it. Amazon SageMaker preserves the ML storage volume.
+-- Terminates the ML compute instance. Before terminating the instance, Amazon SageMaker disconnects the ML storage volume from it. Amazon SageMaker preserves the ML storage volume. Amazon SageMaker stops charging you for the ML compute instance when you call @StopNotebookInstance@ .
 --
 --
--- To access data on the ML storage volume for a notebook instance that has been terminated, call the @StartNotebookInstance@ API. @StartNotebookInstance@ launches another ML compute instance, configures it, and attaches the preserved ML storage volume so you can continue your work.
+-- To access data on the ML storage volume for a notebook instance that has been terminated, call the @StartNotebookInstance@ API. @StartNotebookInstance@ launches another ML compute instance, configures it, and attaches the preserved ML storage volume so you can continue your work. 
 --
 module Network.AWS.SageMaker.StopNotebookInstance
     (
@@ -44,10 +44,10 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'stopNotebookInstance' smart constructor.
-newtype StopNotebookInstance = StopNotebookInstance'
-  { _sniNotebookInstanceName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopNotebookInstance = StopNotebookInstance'{_sniNotebookInstanceName
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'StopNotebookInstance' with the minimum fields required to make a request.
 --
@@ -57,9 +57,9 @@ newtype StopNotebookInstance = StopNotebookInstance'
 stopNotebookInstance
     :: Text -- ^ 'sniNotebookInstanceName'
     -> StopNotebookInstance
-stopNotebookInstance pNotebookInstanceName_ =
-  StopNotebookInstance' {_sniNotebookInstanceName = pNotebookInstanceName_}
-
+stopNotebookInstance pNotebookInstanceName_
+  = StopNotebookInstance'{_sniNotebookInstanceName =
+                            pNotebookInstanceName_}
 
 -- | The name of the notebook instance to terminate.
 sniNotebookInstanceName :: Lens' StopNotebookInstance Text
@@ -99,16 +99,15 @@ instance ToQuery StopNotebookInstance where
         toQuery = const mempty
 
 -- | /See:/ 'stopNotebookInstanceResponse' smart constructor.
-data StopNotebookInstanceResponse =
-  StopNotebookInstanceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopNotebookInstanceResponse = StopNotebookInstanceResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'StopNotebookInstanceResponse' with the minimum fields required to make a request.
 --
 stopNotebookInstanceResponse
     :: StopNotebookInstanceResponse
-stopNotebookInstanceResponse = StopNotebookInstanceResponse'
-
+stopNotebookInstanceResponse
+  = StopNotebookInstanceResponse'
 
 instance NFData StopNotebookInstanceResponse where

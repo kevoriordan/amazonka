@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @ListBonusPayments@ operation retrieves the amounts of bonuses you have paid to Workers for a given HIT or assignment.
+-- The @ListBonusPayments@ operation retrieves the amounts of bonuses you have paid to Workers for a given HIT or assignment. 
 --
 --
 --
@@ -53,13 +53,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listBonusPayments' smart constructor.
-data ListBonusPayments = ListBonusPayments'
-  { _lbpNextToken    :: !(Maybe Text)
-  , _lbpHITId        :: !(Maybe Text)
-  , _lbpAssignmentId :: !(Maybe Text)
-  , _lbpMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBonusPayments = ListBonusPayments'{_lbpNextToken
+                                            :: !(Maybe Text),
+                                            _lbpHITId :: !(Maybe Text),
+                                            _lbpAssignmentId :: !(Maybe Text),
+                                            _lbpMaxResults :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBonusPayments' with the minimum fields required to make a request.
 --
@@ -74,14 +73,10 @@ data ListBonusPayments = ListBonusPayments'
 -- * 'lbpMaxResults' - Undocumented member.
 listBonusPayments
     :: ListBonusPayments
-listBonusPayments =
-  ListBonusPayments'
-    { _lbpNextToken = Nothing
-    , _lbpHITId = Nothing
-    , _lbpAssignmentId = Nothing
-    , _lbpMaxResults = Nothing
-    }
-
+listBonusPayments
+  = ListBonusPayments'{_lbpNextToken = Nothing,
+                       _lbpHITId = Nothing, _lbpAssignmentId = Nothing,
+                       _lbpMaxResults = Nothing}
 
 -- | Pagination token
 lbpNextToken :: Lens' ListBonusPayments (Maybe Text)
@@ -148,38 +143,41 @@ instance ToQuery ListBonusPayments where
         toQuery = const mempty
 
 -- | /See:/ 'listBonusPaymentsResponse' smart constructor.
-data ListBonusPaymentsResponse = ListBonusPaymentsResponse'
-  { _lbprsBonusPayments  :: !(Maybe [BonusPayment])
-  , _lbprsNextToken      :: !(Maybe Text)
-  , _lbprsNumResults     :: !(Maybe Int)
-  , _lbprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBonusPaymentsResponse = ListBonusPaymentsResponse'{_lbprsBonusPayments
+                                                            ::
+                                                            !(Maybe
+                                                                [BonusPayment]),
+                                                            _lbprsNextToken ::
+                                                            !(Maybe Text),
+                                                            _lbprsNumResults ::
+                                                            !(Maybe Int),
+                                                            _lbprsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListBonusPaymentsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lbprsBonusPayments' - A successful request to the ListBonusPayments operation returns a list of BonusPayment objects.
+-- * 'lbprsBonusPayments' - A successful request to the ListBonusPayments operation returns a list of BonusPayment objects. 
 --
 -- * 'lbprsNextToken' - Undocumented member.
 --
--- * 'lbprsNumResults' - The number of bonus payments on this page in the filtered results list, equivalent to the number of bonus payments being returned by this call.
+-- * 'lbprsNumResults' - The number of bonus payments on this page in the filtered results list, equivalent to the number of bonus payments being returned by this call. 
 --
 -- * 'lbprsResponseStatus' - -- | The response status code.
 listBonusPaymentsResponse
     :: Int -- ^ 'lbprsResponseStatus'
     -> ListBonusPaymentsResponse
-listBonusPaymentsResponse pResponseStatus_ =
-  ListBonusPaymentsResponse'
-    { _lbprsBonusPayments = Nothing
-    , _lbprsNextToken = Nothing
-    , _lbprsNumResults = Nothing
-    , _lbprsResponseStatus = pResponseStatus_
-    }
+listBonusPaymentsResponse pResponseStatus_
+  = ListBonusPaymentsResponse'{_lbprsBonusPayments =
+                                 Nothing,
+                               _lbprsNextToken = Nothing,
+                               _lbprsNumResults = Nothing,
+                               _lbprsResponseStatus = pResponseStatus_}
 
-
--- | A successful request to the ListBonusPayments operation returns a list of BonusPayment objects.
+-- | A successful request to the ListBonusPayments operation returns a list of BonusPayment objects. 
 lbprsBonusPayments :: Lens' ListBonusPaymentsResponse [BonusPayment]
 lbprsBonusPayments = lens _lbprsBonusPayments (\ s a -> s{_lbprsBonusPayments = a}) . _Default . _Coerce
 
@@ -187,7 +185,7 @@ lbprsBonusPayments = lens _lbprsBonusPayments (\ s a -> s{_lbprsBonusPayments = 
 lbprsNextToken :: Lens' ListBonusPaymentsResponse (Maybe Text)
 lbprsNextToken = lens _lbprsNextToken (\ s a -> s{_lbprsNextToken = a})
 
--- | The number of bonus payments on this page in the filtered results list, equivalent to the number of bonus payments being returned by this call.
+-- | The number of bonus payments on this page in the filtered results list, equivalent to the number of bonus payments being returned by this call. 
 lbprsNumResults :: Lens' ListBonusPaymentsResponse (Maybe Int)
 lbprsNumResults = lens _lbprsNumResults (\ s a -> s{_lbprsNumResults = a})
 

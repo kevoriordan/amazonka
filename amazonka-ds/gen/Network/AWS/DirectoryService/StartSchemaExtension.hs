@@ -48,13 +48,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startSchemaExtension' smart constructor.
-data StartSchemaExtension = StartSchemaExtension'
-  { _sseDirectoryId                         :: !Text
-  , _sseCreateSnapshotBeforeSchemaExtension :: !Bool
-  , _sseLdifContent                         :: !Text
-  , _sseDescription                         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartSchemaExtension = StartSchemaExtension'{_sseDirectoryId
+                                                  :: !Text,
+                                                  _sseCreateSnapshotBeforeSchemaExtension
+                                                  :: !Bool,
+                                                  _sseLdifContent :: !Text,
+                                                  _sseDescription :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartSchemaExtension' with the minimum fields required to make a request.
 --
@@ -73,15 +73,15 @@ startSchemaExtension
     -> Text -- ^ 'sseLdifContent'
     -> Text -- ^ 'sseDescription'
     -> StartSchemaExtension
-startSchemaExtension pDirectoryId_ pCreateSnapshotBeforeSchemaExtension_ pLdifContent_ pDescription_ =
-  StartSchemaExtension'
-    { _sseDirectoryId = pDirectoryId_
-    , _sseCreateSnapshotBeforeSchemaExtension =
-        pCreateSnapshotBeforeSchemaExtension_
-    , _sseLdifContent = pLdifContent_
-    , _sseDescription = pDescription_
-    }
-
+startSchemaExtension pDirectoryId_
+  pCreateSnapshotBeforeSchemaExtension_ pLdifContent_
+  pDescription_
+  = StartSchemaExtension'{_sseDirectoryId =
+                            pDirectoryId_,
+                          _sseCreateSnapshotBeforeSchemaExtension =
+                            pCreateSnapshotBeforeSchemaExtension_,
+                          _sseLdifContent = pLdifContent_,
+                          _sseDescription = pDescription_}
 
 -- | The identifier of the directory for which the schema extension will be applied to.
 sseDirectoryId :: Lens' StartSchemaExtension Text
@@ -141,11 +141,13 @@ instance ToQuery StartSchemaExtension where
         toQuery = const mempty
 
 -- | /See:/ 'startSchemaExtensionResponse' smart constructor.
-data StartSchemaExtensionResponse = StartSchemaExtensionResponse'
-  { _ssersSchemaExtensionId :: !(Maybe Text)
-  , _ssersResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartSchemaExtensionResponse = StartSchemaExtensionResponse'{_ssersSchemaExtensionId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _ssersResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'StartSchemaExtensionResponse' with the minimum fields required to make a request.
 --
@@ -157,10 +159,10 @@ data StartSchemaExtensionResponse = StartSchemaExtensionResponse'
 startSchemaExtensionResponse
     :: Int -- ^ 'ssersResponseStatus'
     -> StartSchemaExtensionResponse
-startSchemaExtensionResponse pResponseStatus_ =
-  StartSchemaExtensionResponse'
-    {_ssersSchemaExtensionId = Nothing, _ssersResponseStatus = pResponseStatus_}
-
+startSchemaExtensionResponse pResponseStatus_
+  = StartSchemaExtensionResponse'{_ssersSchemaExtensionId
+                                    = Nothing,
+                                  _ssersResponseStatus = pResponseStatus_}
 
 -- | The identifier of the schema extension that will be applied.
 ssersSchemaExtensionId :: Lens' StartSchemaExtensionResponse (Maybe Text)

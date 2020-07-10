@@ -51,11 +51,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateCertificate' smart constructor.
-data UpdateCertificate = UpdateCertificate'
-  { _ucCertificateId :: !Text
-  , _ucNewStatus     :: !CertificateStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCertificate = UpdateCertificate'{_ucCertificateId
+                                            :: !Text,
+                                            _ucNewStatus :: !CertificateStatus}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateCertificate' with the minimum fields required to make a request.
 --
@@ -63,21 +62,21 @@ data UpdateCertificate = UpdateCertificate'
 --
 -- * 'ucCertificateId' - The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
 --
--- * 'ucNewStatus' - The new status. __Note:__ Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use. __Note:__ The status value REGISTER_INACTIVE is deprecated and should not be used.
+-- * 'ucNewStatus' - The new status. __Note:__ Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by AWS IoT. They are not intended for developer use. __Note:__ The status value REGISTER_INACTIVE is deprecated and should not be used.
 updateCertificate
     :: Text -- ^ 'ucCertificateId'
     -> CertificateStatus -- ^ 'ucNewStatus'
     -> UpdateCertificate
-updateCertificate pCertificateId_ pNewStatus_ =
-  UpdateCertificate'
-    {_ucCertificateId = pCertificateId_, _ucNewStatus = pNewStatus_}
-
+updateCertificate pCertificateId_ pNewStatus_
+  = UpdateCertificate'{_ucCertificateId =
+                         pCertificateId_,
+                       _ucNewStatus = pNewStatus_}
 
 -- | The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
 ucCertificateId :: Lens' UpdateCertificate Text
 ucCertificateId = lens _ucCertificateId (\ s a -> s{_ucCertificateId = a})
 
--- | The new status. __Note:__ Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use. __Note:__ The status value REGISTER_INACTIVE is deprecated and should not be used.
+-- | The new status. __Note:__ Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by AWS IoT. They are not intended for developer use. __Note:__ The status value REGISTER_INACTIVE is deprecated and should not be used.
 ucNewStatus :: Lens' UpdateCertificate CertificateStatus
 ucNewStatus = lens _ucNewStatus (\ s a -> s{_ucNewStatus = a})
 
@@ -105,16 +104,15 @@ instance ToQuery UpdateCertificate where
           = mconcat ["newStatus" =: _ucNewStatus]
 
 -- | /See:/ 'updateCertificateResponse' smart constructor.
-data UpdateCertificateResponse =
-  UpdateCertificateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCertificateResponse = UpdateCertificateResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateCertificateResponse' with the minimum fields required to make a request.
 --
 updateCertificateResponse
     :: UpdateCertificateResponse
-updateCertificateResponse = UpdateCertificateResponse'
-
+updateCertificateResponse
+  = UpdateCertificateResponse'
 
 instance NFData UpdateCertificateResponse where

@@ -32,6 +32,7 @@ module Network.AWS.ECS.ListServices
     , lsCluster
     , lsNextToken
     , lsLaunchType
+    , lsSchedulingStrategy
     , lsMaxResults
 
     -- * Destructuring the Response
@@ -52,13 +53,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listServices' smart constructor.
-data ListServices = ListServices'
-  { _lsCluster    :: !(Maybe Text)
-  , _lsNextToken  :: !(Maybe Text)
-  , _lsLaunchType :: !(Maybe LaunchType)
-  , _lsMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListServices = ListServices'{_lsCluster ::
+                                  !(Maybe Text),
+                                  _lsNextToken :: !(Maybe Text),
+                                  _lsLaunchType :: !(Maybe LaunchType),
+                                  _lsSchedulingStrategy ::
+                                  !(Maybe SchedulingStrategy),
+                                  _lsMaxResults :: !(Maybe Int)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServices' with the minimum fields required to make a request.
 --
@@ -66,35 +68,38 @@ data ListServices = ListServices'
 --
 -- * 'lsCluster' - The short name or full Amazon Resource Name (ARN) of the cluster that hosts the services to list. If you do not specify a cluster, the default cluster is assumed.
 --
--- * 'lsNextToken' - The @nextToken@ value returned from a previous paginated @ListServices@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- * 'lsNextToken' - The @nextToken@ value returned from a @ListServices@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 --
--- * 'lsLaunchType' - The launch type for services you want to list.
+-- * 'lsLaunchType' - The launch type for the services to list.
 --
--- * 'lsMaxResults' - The maximum number of service results returned by @ListServices@ in paginated output. When this parameter is used, @ListServices@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListServices@ request with the returned @nextToken@ value. This value can be between 1 and 10. If this parameter is not used, then @ListServices@ returns up to 10 results and a @nextToken@ value if applicable.
+-- * 'lsSchedulingStrategy' - The scheduling strategy for services to list.
+--
+-- * 'lsMaxResults' - The maximum number of service results returned by @ListServices@ in paginated output. When this parameter is used, @ListServices@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListServices@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListServices@ returns up to 10 results and a @nextToken@ value if applicable.
 listServices
     :: ListServices
-listServices =
-  ListServices'
-    { _lsCluster = Nothing
-    , _lsNextToken = Nothing
-    , _lsLaunchType = Nothing
-    , _lsMaxResults = Nothing
-    }
-
+listServices
+  = ListServices'{_lsCluster = Nothing,
+                  _lsNextToken = Nothing, _lsLaunchType = Nothing,
+                  _lsSchedulingStrategy = Nothing,
+                  _lsMaxResults = Nothing}
 
 -- | The short name or full Amazon Resource Name (ARN) of the cluster that hosts the services to list. If you do not specify a cluster, the default cluster is assumed.
 lsCluster :: Lens' ListServices (Maybe Text)
 lsCluster = lens _lsCluster (\ s a -> s{_lsCluster = a})
 
--- | The @nextToken@ value returned from a previous paginated @ListServices@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- | The @nextToken@ value returned from a @ListServices@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 lsNextToken :: Lens' ListServices (Maybe Text)
 lsNextToken = lens _lsNextToken (\ s a -> s{_lsNextToken = a})
 
--- | The launch type for services you want to list.
+-- | The launch type for the services to list.
 lsLaunchType :: Lens' ListServices (Maybe LaunchType)
 lsLaunchType = lens _lsLaunchType (\ s a -> s{_lsLaunchType = a})
 
--- | The maximum number of service results returned by @ListServices@ in paginated output. When this parameter is used, @ListServices@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListServices@ request with the returned @nextToken@ value. This value can be between 1 and 10. If this parameter is not used, then @ListServices@ returns up to 10 results and a @nextToken@ value if applicable.
+-- | The scheduling strategy for services to list.
+lsSchedulingStrategy :: Lens' ListServices (Maybe SchedulingStrategy)
+lsSchedulingStrategy = lens _lsSchedulingStrategy (\ s a -> s{_lsSchedulingStrategy = a})
+
+-- | The maximum number of service results returned by @ListServices@ in paginated output. When this parameter is used, @ListServices@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListServices@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListServices@ returns up to 10 results and a @nextToken@ value if applicable.
 lsMaxResults :: Lens' ListServices (Maybe Int)
 lsMaxResults = lens _lsMaxResults (\ s a -> s{_lsMaxResults = a})
 
@@ -137,6 +142,7 @@ instance ToJSON ListServices where
                  [("cluster" .=) <$> _lsCluster,
                   ("nextToken" .=) <$> _lsNextToken,
                   ("launchType" .=) <$> _lsLaunchType,
+                  ("schedulingStrategy" .=) <$> _lsSchedulingStrategy,
                   ("maxResults" .=) <$> _lsMaxResults])
 
 instance ToPath ListServices where
@@ -146,12 +152,12 @@ instance ToQuery ListServices where
         toQuery = const mempty
 
 -- | /See:/ 'listServicesResponse' smart constructor.
-data ListServicesResponse = ListServicesResponse'
-  { _lsrsServiceARNs    :: !(Maybe [Text])
-  , _lsrsNextToken      :: !(Maybe Text)
-  , _lsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListServicesResponse = ListServicesResponse'{_lsrsServiceARNs
+                                                  :: !(Maybe [Text]),
+                                                  _lsrsNextToken ::
+                                                  !(Maybe Text),
+                                                  _lsrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListServicesResponse' with the minimum fields required to make a request.
 --
@@ -165,13 +171,10 @@ data ListServicesResponse = ListServicesResponse'
 listServicesResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListServicesResponse
-listServicesResponse pResponseStatus_ =
-  ListServicesResponse'
-    { _lsrsServiceARNs = Nothing
-    , _lsrsNextToken = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
-
+listServicesResponse pResponseStatus_
+  = ListServicesResponse'{_lsrsServiceARNs = Nothing,
+                          _lsrsNextToken = Nothing,
+                          _lsrsResponseStatus = pResponseStatus_}
 
 -- | The list of full ARN entries for each service associated with the specified cluster.
 lsrsServiceARNs :: Lens' ListServicesResponse [Text]

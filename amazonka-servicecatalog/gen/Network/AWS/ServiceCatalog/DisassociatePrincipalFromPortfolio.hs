@@ -46,12 +46,18 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'disassociatePrincipalFromPortfolio' smart constructor.
-data DisassociatePrincipalFromPortfolio = DisassociatePrincipalFromPortfolio'
-  { _disAcceptLanguage :: !(Maybe Text)
-  , _disPortfolioId    :: !Text
-  , _disPrincipalARN   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociatePrincipalFromPortfolio = DisassociatePrincipalFromPortfolio'{_disAcceptLanguage
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _disPortfolioId
+                                                                              ::
+                                                                              !Text,
+                                                                              _disPrincipalARN
+                                                                              ::
+                                                                              !Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DisassociatePrincipalFromPortfolio' with the minimum fields required to make a request.
 --
@@ -66,13 +72,12 @@ disassociatePrincipalFromPortfolio
     :: Text -- ^ 'disPortfolioId'
     -> Text -- ^ 'disPrincipalARN'
     -> DisassociatePrincipalFromPortfolio
-disassociatePrincipalFromPortfolio pPortfolioId_ pPrincipalARN_ =
-  DisassociatePrincipalFromPortfolio'
-    { _disAcceptLanguage = Nothing
-    , _disPortfolioId = pPortfolioId_
-    , _disPrincipalARN = pPrincipalARN_
-    }
-
+disassociatePrincipalFromPortfolio pPortfolioId_
+  pPrincipalARN_
+  = DisassociatePrincipalFromPortfolio'{_disAcceptLanguage
+                                          = Nothing,
+                                        _disPortfolioId = pPortfolioId_,
+                                        _disPrincipalARN = pPrincipalARN_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 disAcceptLanguage :: Lens' DisassociatePrincipalFromPortfolio (Maybe Text)
@@ -133,10 +138,12 @@ instance ToQuery DisassociatePrincipalFromPortfolio
         toQuery = const mempty
 
 -- | /See:/ 'disassociatePrincipalFromPortfolioResponse' smart constructor.
-newtype DisassociatePrincipalFromPortfolioResponse = DisassociatePrincipalFromPortfolioResponse'
-  { _dpfprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociatePrincipalFromPortfolioResponse = DisassociatePrincipalFromPortfolioResponse'{_dpfprsResponseStatus
+                                                                                                 ::
+                                                                                                 Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'DisassociatePrincipalFromPortfolioResponse' with the minimum fields required to make a request.
 --
@@ -146,10 +153,10 @@ newtype DisassociatePrincipalFromPortfolioResponse = DisassociatePrincipalFromPo
 disassociatePrincipalFromPortfolioResponse
     :: Int -- ^ 'dpfprsResponseStatus'
     -> DisassociatePrincipalFromPortfolioResponse
-disassociatePrincipalFromPortfolioResponse pResponseStatus_ =
-  DisassociatePrincipalFromPortfolioResponse'
-    {_dpfprsResponseStatus = pResponseStatus_}
-
+disassociatePrincipalFromPortfolioResponse
+  pResponseStatus_
+  = DisassociatePrincipalFromPortfolioResponse'{_dpfprsResponseStatus
+                                                  = pResponseStatus_}
 
 -- | -- | The response status code.
 dpfprsResponseStatus :: Lens' DisassociatePrincipalFromPortfolioResponse Int

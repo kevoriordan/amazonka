@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the server and the underlying AWS CloudFormation stacks (including the server's EC2 instance). When you run this command, the server state is updated to @DELETING@ . After the server is deleted, it is no longer returned by @DescribeServer@ requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted.
+-- Deletes the server and the underlying AWS CloudFormation stacks (including the server's EC2 instance). When you run this command, the server state is updated to @DELETING@ . After the server is deleted, it is no longer returned by @DescribeServer@ requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted. 
 --
 --
--- This operation is asynchronous.
+-- This operation is asynchronous. 
 --
--- An @InvalidStateException@ is thrown when a server deletion is already in progress. A @ResourceNotFoundException@ is thrown when the server does not exist. A @ValidationException@ is raised when parameters of the request are not valid.
+-- An @InvalidStateException@ is thrown when a server deletion is already in progress. A @ResourceNotFoundException@ is thrown when the server does not exist. A @ValidationException@ is raised when parameters of the request are not valid. 
 --
 --
 --
@@ -50,10 +50,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteServer' smart constructor.
-newtype DeleteServer = DeleteServer'
-  { _dsServerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteServer = DeleteServer'{_dsServerName ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteServer' with the minimum fields required to make a request.
 --
@@ -63,8 +62,8 @@ newtype DeleteServer = DeleteServer'
 deleteServer
     :: Text -- ^ 'dsServerName'
     -> DeleteServer
-deleteServer pServerName_ = DeleteServer' {_dsServerName = pServerName_}
-
+deleteServer pServerName_
+  = DeleteServer'{_dsServerName = pServerName_}
 
 -- | The ID of the server to delete.
 dsServerName :: Lens' DeleteServer Text
@@ -104,10 +103,10 @@ instance ToQuery DeleteServer where
         toQuery = const mempty
 
 -- | /See:/ 'deleteServerResponse' smart constructor.
-newtype DeleteServerResponse = DeleteServerResponse'
-  { _dsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteServerResponse = DeleteServerResponse'{_dsrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteServerResponse' with the minimum fields required to make a request.
 --
@@ -117,9 +116,9 @@ newtype DeleteServerResponse = DeleteServerResponse'
 deleteServerResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DeleteServerResponse
-deleteServerResponse pResponseStatus_ =
-  DeleteServerResponse' {_dsrsResponseStatus = pResponseStatus_}
-
+deleteServerResponse pResponseStatus_
+  = DeleteServerResponse'{_dsrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dsrsResponseStatus :: Lens' DeleteServerResponse Int

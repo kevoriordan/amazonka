@@ -23,7 +23,7 @@
 --
 -- Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, @AddTags@ updates its value.
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html Tag Your Classic Load Balancer> in the /Classic Load Balancer Guide/ .
+-- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html Tag Your Classic Load Balancer> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.AddTags
     (
@@ -53,11 +53,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'addTags' smart constructor.
-data AddTags = AddTags'
-  { _atLoadBalancerNames :: ![Text]
-  , _atTags              :: !(List1 Tag)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTags = AddTags'{_atLoadBalancerNames ::
+                        ![Text],
+                        _atTags :: !(List1 Tag)}
+                 deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTags' with the minimum fields required to make a request.
 --
@@ -69,9 +68,9 @@ data AddTags = AddTags'
 addTags
     :: NonEmpty Tag -- ^ 'atTags'
     -> AddTags
-addTags pTags_ =
-  AddTags' {_atLoadBalancerNames = mempty, _atTags = _List1 # pTags_}
-
+addTags pTags_
+  = AddTags'{_atLoadBalancerNames = mempty,
+             _atTags = _List1 # pTags_}
 
 -- | The name of the load balancer. You can specify one load balancer only.
 atLoadBalancerNames :: Lens' AddTags [Text]
@@ -112,10 +111,9 @@ instance ToQuery AddTags where
 --
 --
 -- /See:/ 'addTagsResponse' smart constructor.
-newtype AddTagsResponse = AddTagsResponse'
-  { _atrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddTagsResponse = AddTagsResponse'{_atrsResponseStatus
+                                           :: Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsResponse' with the minimum fields required to make a request.
 --
@@ -125,9 +123,9 @@ newtype AddTagsResponse = AddTagsResponse'
 addTagsResponse
     :: Int -- ^ 'atrsResponseStatus'
     -> AddTagsResponse
-addTagsResponse pResponseStatus_ =
-  AddTagsResponse' {_atrsResponseStatus = pResponseStatus_}
-
+addTagsResponse pResponseStatus_
+  = AddTagsResponse'{_atrsResponseStatus =
+                       pResponseStatus_}
 
 -- | -- | The response status code.
 atrsResponseStatus :: Lens' AddTagsResponse Int

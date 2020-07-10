@@ -43,17 +43,14 @@ import Network.AWS.Shield.Types
 import Network.AWS.Shield.Types.Product
 
 -- | /See:/ 'describeSubscription' smart constructor.
-data DescribeSubscription =
-  DescribeSubscription'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubscription = DescribeSubscription'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeSubscription' with the minimum fields required to make a request.
 --
 describeSubscription
     :: DescribeSubscription
 describeSubscription = DescribeSubscription'
-
 
 instance AWSRequest DescribeSubscription where
         type Rs DescribeSubscription =
@@ -89,11 +86,14 @@ instance ToQuery DescribeSubscription where
         toQuery = const mempty
 
 -- | /See:/ 'describeSubscriptionResponse' smart constructor.
-data DescribeSubscriptionResponse = DescribeSubscriptionResponse'
-  { _dsrsSubscription   :: !(Maybe Subscription)
-  , _dsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSubscriptionResponse = DescribeSubscriptionResponse'{_dsrsSubscription
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Subscription),
+                                                                  _dsrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeSubscriptionResponse' with the minimum fields required to make a request.
 --
@@ -105,10 +105,10 @@ data DescribeSubscriptionResponse = DescribeSubscriptionResponse'
 describeSubscriptionResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DescribeSubscriptionResponse
-describeSubscriptionResponse pResponseStatus_ =
-  DescribeSubscriptionResponse'
-    {_dsrsSubscription = Nothing, _dsrsResponseStatus = pResponseStatus_}
-
+describeSubscriptionResponse pResponseStatus_
+  = DescribeSubscriptionResponse'{_dsrsSubscription =
+                                    Nothing,
+                                  _dsrsResponseStatus = pResponseStatus_}
 
 -- | The AWS Shield Advanced subscription details for an account.
 dsrsSubscription :: Lens' DescribeSubscriptionResponse (Maybe Subscription)

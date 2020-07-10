@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the reboot instance operation.
+-- Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the @reboot instance@ operation.
 --
+--
+-- The @start instance@ operation supports tag-based access control via resource tags applied to the resource identified by @instance name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
 --
 module Network.AWS.Lightsail.StartInstance
     (
@@ -45,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startInstance' smart constructor.
-newtype StartInstance = StartInstance'
-  { _sInstanceName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartInstance = StartInstance'{_sInstanceName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartInstance' with the minimum fields required to make a request.
 --
@@ -58,8 +59,8 @@ newtype StartInstance = StartInstance'
 startInstance
     :: Text -- ^ 'sInstanceName'
     -> StartInstance
-startInstance pInstanceName_ = StartInstance' {_sInstanceName = pInstanceName_}
-
+startInstance pInstanceName_
+  = StartInstance'{_sInstanceName = pInstanceName_}
 
 -- | The name of the instance (a virtual private server) to start.
 sInstanceName :: Lens' StartInstance Text
@@ -100,28 +101,27 @@ instance ToQuery StartInstance where
         toQuery = const mempty
 
 -- | /See:/ 'startInstanceResponse' smart constructor.
-data StartInstanceResponse = StartInstanceResponse'
-  { _srsOperations     :: !(Maybe [Operation])
-  , _srsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartInstanceResponse = StartInstanceResponse'{_srsOperations
+                                                    :: !(Maybe [Operation]),
+                                                    _srsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'StartInstanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srsOperations' - An array of key-value pairs containing information about the request operation.
+-- * 'srsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'srsResponseStatus' - -- | The response status code.
 startInstanceResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StartInstanceResponse
-startInstanceResponse pResponseStatus_ =
-  StartInstanceResponse'
-    {_srsOperations = Nothing, _srsResponseStatus = pResponseStatus_}
+startInstanceResponse pResponseStatus_
+  = StartInstanceResponse'{_srsOperations = Nothing,
+                           _srsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the request operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 srsOperations :: Lens' StartInstanceResponse [Operation]
 srsOperations = lens _srsOperations (\ s a -> s{_srsOperations = a}) . _Default . _Coerce
 

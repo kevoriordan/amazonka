@@ -14,11 +14,11 @@
 module Test.AWS.Gen.MQ where
 
 import Data.Proxy
-import Network.AWS.MQ
 import Test.AWS.Fixture
-import Test.AWS.MQ.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.MQ
+import Test.AWS.MQ.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -46,14 +46,23 @@ import Test.Tasty
 --         , requestListConfigurationRevisions $
 --             listConfigurationRevisions
 --
+--         , requestCreateTags $
+--             createTags
+--
 --         , requestListUsers $
 --             listUsers
+--
+--         , requestDeleteTags $
+--             deleteTags
 --
 --         , requestListConfigurations $
 --             listConfigurations
 --
 --         , requestDescribeUser $
 --             describeUser
+--
+--         , requestDescribeBrokerInstanceOptions $
+--             describeBrokerInstanceOptions
 --
 --         , requestListBrokers $
 --             listBrokers
@@ -69,6 +78,12 @@ import Test.Tasty
 --
 --         , requestDeleteUser $
 --             deleteUser
+--
+--         , requestListTags $
+--             listTags
+--
+--         , requestDescribeBrokerEngineTypes $
+--             describeBrokerEngineTypes
 --
 --         , requestDescribeConfigurationRevision $
 --             describeConfigurationRevision
@@ -100,14 +115,23 @@ import Test.Tasty
 --         , responseListConfigurationRevisions $
 --             listConfigurationRevisionsResponse
 --
+--         , responseCreateTags $
+--             createTagsResponse
+--
 --         , responseListUsers $
 --             listUsersResponse
+--
+--         , responseDeleteTags $
+--             deleteTagsResponse
 --
 --         , responseListConfigurations $
 --             listConfigurationsResponse
 --
 --         , responseDescribeUser $
 --             describeUserResponse
+--
+--         , responseDescribeBrokerInstanceOptions $
+--             describeBrokerInstanceOptionsResponse
 --
 --         , responseListBrokers $
 --             listBrokersResponse
@@ -123,6 +147,12 @@ import Test.Tasty
 --
 --         , responseDeleteUser $
 --             deleteUserResponse
+--
+--         , responseListTags $
+--             listTagsResponse
+--
+--         , responseDescribeBrokerEngineTypes $
+--             describeBrokerEngineTypesResponse
 --
 --         , responseDescribeConfigurationRevision $
 --             describeConfigurationRevisionResponse
@@ -168,10 +198,20 @@ requestListConfigurationRevisions = req
     "ListConfigurationRevisions"
     "fixture/ListConfigurationRevisions.yaml"
 
+requestCreateTags :: CreateTags -> TestTree
+requestCreateTags = req
+    "CreateTags"
+    "fixture/CreateTags.yaml"
+
 requestListUsers :: ListUsers -> TestTree
 requestListUsers = req
     "ListUsers"
     "fixture/ListUsers.yaml"
+
+requestDeleteTags :: DeleteTags -> TestTree
+requestDeleteTags = req
+    "DeleteTags"
+    "fixture/DeleteTags.yaml"
 
 requestListConfigurations :: ListConfigurations -> TestTree
 requestListConfigurations = req
@@ -182,6 +222,11 @@ requestDescribeUser :: DescribeUser -> TestTree
 requestDescribeUser = req
     "DescribeUser"
     "fixture/DescribeUser.yaml"
+
+requestDescribeBrokerInstanceOptions :: DescribeBrokerInstanceOptions -> TestTree
+requestDescribeBrokerInstanceOptions = req
+    "DescribeBrokerInstanceOptions"
+    "fixture/DescribeBrokerInstanceOptions.yaml"
 
 requestListBrokers :: ListBrokers -> TestTree
 requestListBrokers = req
@@ -207,6 +252,16 @@ requestDeleteUser :: DeleteUser -> TestTree
 requestDeleteUser = req
     "DeleteUser"
     "fixture/DeleteUser.yaml"
+
+requestListTags :: ListTags -> TestTree
+requestListTags = req
+    "ListTags"
+    "fixture/ListTags.yaml"
+
+requestDescribeBrokerEngineTypes :: DescribeBrokerEngineTypes -> TestTree
+requestDescribeBrokerEngineTypes = req
+    "DescribeBrokerEngineTypes"
+    "fixture/DescribeBrokerEngineTypes.yaml"
 
 requestDescribeConfigurationRevision :: DescribeConfigurationRevision -> TestTree
 requestDescribeConfigurationRevision = req
@@ -267,12 +322,26 @@ responseListConfigurationRevisions = res
     mq
     (Proxy :: Proxy ListConfigurationRevisions)
 
+responseCreateTags :: CreateTagsResponse -> TestTree
+responseCreateTags = res
+    "CreateTagsResponse"
+    "fixture/CreateTagsResponse.proto"
+    mq
+    (Proxy :: Proxy CreateTags)
+
 responseListUsers :: ListUsersResponse -> TestTree
 responseListUsers = res
     "ListUsersResponse"
     "fixture/ListUsersResponse.proto"
     mq
     (Proxy :: Proxy ListUsers)
+
+responseDeleteTags :: DeleteTagsResponse -> TestTree
+responseDeleteTags = res
+    "DeleteTagsResponse"
+    "fixture/DeleteTagsResponse.proto"
+    mq
+    (Proxy :: Proxy DeleteTags)
 
 responseListConfigurations :: ListConfigurationsResponse -> TestTree
 responseListConfigurations = res
@@ -287,6 +356,13 @@ responseDescribeUser = res
     "fixture/DescribeUserResponse.proto"
     mq
     (Proxy :: Proxy DescribeUser)
+
+responseDescribeBrokerInstanceOptions :: DescribeBrokerInstanceOptionsResponse -> TestTree
+responseDescribeBrokerInstanceOptions = res
+    "DescribeBrokerInstanceOptionsResponse"
+    "fixture/DescribeBrokerInstanceOptionsResponse.proto"
+    mq
+    (Proxy :: Proxy DescribeBrokerInstanceOptions)
 
 responseListBrokers :: ListBrokersResponse -> TestTree
 responseListBrokers = res
@@ -322,6 +398,20 @@ responseDeleteUser = res
     "fixture/DeleteUserResponse.proto"
     mq
     (Proxy :: Proxy DeleteUser)
+
+responseListTags :: ListTagsResponse -> TestTree
+responseListTags = res
+    "ListTagsResponse"
+    "fixture/ListTagsResponse.proto"
+    mq
+    (Proxy :: Proxy ListTags)
+
+responseDescribeBrokerEngineTypes :: DescribeBrokerEngineTypesResponse -> TestTree
+responseDescribeBrokerEngineTypes = res
+    "DescribeBrokerEngineTypesResponse"
+    "fixture/DescribeBrokerEngineTypesResponse.proto"
+    mq
+    (Proxy :: Proxy DescribeBrokerEngineTypes)
 
 responseDescribeConfigurationRevision :: DescribeConfigurationRevisionResponse -> TestTree
 responseDescribeConfigurationRevision = res

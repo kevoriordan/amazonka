@@ -50,11 +50,12 @@ import Network.AWS.Response
 -- | Placeholder documentation for ListInputSecurityGroupsRequest
 --
 -- /See:/ 'listInputSecurityGroups' smart constructor.
-data ListInputSecurityGroups = ListInputSecurityGroups'
-  { _lisgNextToken  :: !(Maybe Text)
-  , _lisgMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInputSecurityGroups = ListInputSecurityGroups'{_lisgNextToken
+                                                        :: !(Maybe Text),
+                                                        _lisgMaxResults ::
+                                                        !(Maybe Nat)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListInputSecurityGroups' with the minimum fields required to make a request.
 --
@@ -65,9 +66,9 @@ data ListInputSecurityGroups = ListInputSecurityGroups'
 -- * 'lisgMaxResults' - Undocumented member.
 listInputSecurityGroups
     :: ListInputSecurityGroups
-listInputSecurityGroups =
-  ListInputSecurityGroups' {_lisgNextToken = Nothing, _lisgMaxResults = Nothing}
-
+listInputSecurityGroups
+  = ListInputSecurityGroups'{_lisgNextToken = Nothing,
+                             _lisgMaxResults = Nothing}
 
 -- | Undocumented member.
 lisgNextToken :: Lens' ListInputSecurityGroups (Maybe Text)
@@ -119,12 +120,18 @@ instance ToQuery ListInputSecurityGroups where
 -- | Placeholder documentation for ListInputSecurityGroupsResponse
 --
 -- /See:/ 'listInputSecurityGroupsResponse' smart constructor.
-data ListInputSecurityGroupsResponse = ListInputSecurityGroupsResponse'
-  { _lisgrsNextToken           :: !(Maybe Text)
-  , _lisgrsInputSecurityGroups :: !(Maybe [InputSecurityGroup])
-  , _lisgrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInputSecurityGroupsResponse = ListInputSecurityGroupsResponse'{_lisgrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lisgrsInputSecurityGroups
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [InputSecurityGroup]),
+                                                                        _lisgrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListInputSecurityGroupsResponse' with the minimum fields required to make a request.
 --
@@ -138,13 +145,11 @@ data ListInputSecurityGroupsResponse = ListInputSecurityGroupsResponse'
 listInputSecurityGroupsResponse
     :: Int -- ^ 'lisgrsResponseStatus'
     -> ListInputSecurityGroupsResponse
-listInputSecurityGroupsResponse pResponseStatus_ =
-  ListInputSecurityGroupsResponse'
-    { _lisgrsNextToken = Nothing
-    , _lisgrsInputSecurityGroups = Nothing
-    , _lisgrsResponseStatus = pResponseStatus_
-    }
-
+listInputSecurityGroupsResponse pResponseStatus_
+  = ListInputSecurityGroupsResponse'{_lisgrsNextToken =
+                                       Nothing,
+                                     _lisgrsInputSecurityGroups = Nothing,
+                                     _lisgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 lisgrsNextToken :: Lens' ListInputSecurityGroupsResponse (Maybe Text)

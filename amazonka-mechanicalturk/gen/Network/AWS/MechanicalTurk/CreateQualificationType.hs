@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @CreateQualificationType@ operation creates a new Qualification type, which is represented by a @QualificationType@ data structure.
+-- The @CreateQualificationType@ operation creates a new Qualification type, which is represented by a @QualificationType@ data structure. 
 --
 --
 module Network.AWS.MechanicalTurk.CreateQualificationType
@@ -54,19 +54,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createQualificationType' smart constructor.
-data CreateQualificationType = CreateQualificationType'
-  { _cqtTestDurationInSeconds   :: !(Maybe Integer)
-  , _cqtAnswerKey               :: !(Maybe Text)
-  , _cqtTest                    :: !(Maybe Text)
-  , _cqtKeywords                :: !(Maybe Text)
-  , _cqtAutoGranted             :: !(Maybe Bool)
-  , _cqtAutoGrantedValue        :: !(Maybe Int)
-  , _cqtRetryDelayInSeconds     :: !(Maybe Integer)
-  , _cqtName                    :: !Text
-  , _cqtDescription             :: !Text
-  , _cqtQualificationTypeStatus :: !QualificationTypeStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateQualificationType = CreateQualificationType'{_cqtTestDurationInSeconds
+                                                        :: !(Maybe Integer),
+                                                        _cqtAnswerKey ::
+                                                        !(Maybe Text),
+                                                        _cqtTest ::
+                                                        !(Maybe Text),
+                                                        _cqtKeywords ::
+                                                        !(Maybe Text),
+                                                        _cqtAutoGranted ::
+                                                        !(Maybe Bool),
+                                                        _cqtAutoGrantedValue ::
+                                                        !(Maybe Int),
+                                                        _cqtRetryDelayInSeconds
+                                                        :: !(Maybe Integer),
+                                                        _cqtName :: !Text,
+                                                        _cqtDescription ::
+                                                        !Text,
+                                                        _cqtQualificationTypeStatus
+                                                        ::
+                                                        !QualificationTypeStatus}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateQualificationType' with the minimum fields required to make a request.
 --
@@ -96,20 +105,17 @@ createQualificationType
     -> Text -- ^ 'cqtDescription'
     -> QualificationTypeStatus -- ^ 'cqtQualificationTypeStatus'
     -> CreateQualificationType
-createQualificationType pName_ pDescription_ pQualificationTypeStatus_ =
-  CreateQualificationType'
-    { _cqtTestDurationInSeconds = Nothing
-    , _cqtAnswerKey = Nothing
-    , _cqtTest = Nothing
-    , _cqtKeywords = Nothing
-    , _cqtAutoGranted = Nothing
-    , _cqtAutoGrantedValue = Nothing
-    , _cqtRetryDelayInSeconds = Nothing
-    , _cqtName = pName_
-    , _cqtDescription = pDescription_
-    , _cqtQualificationTypeStatus = pQualificationTypeStatus_
-    }
-
+createQualificationType pName_ pDescription_
+  pQualificationTypeStatus_
+  = CreateQualificationType'{_cqtTestDurationInSeconds
+                               = Nothing,
+                             _cqtAnswerKey = Nothing, _cqtTest = Nothing,
+                             _cqtKeywords = Nothing, _cqtAutoGranted = Nothing,
+                             _cqtAutoGrantedValue = Nothing,
+                             _cqtRetryDelayInSeconds = Nothing,
+                             _cqtName = pName_, _cqtDescription = pDescription_,
+                             _cqtQualificationTypeStatus =
+                               pQualificationTypeStatus_}
 
 -- | The number of seconds the Worker has to complete the Qualification test, starting from the time the Worker requests the Qualification.
 cqtTestDurationInSeconds :: Lens' CreateQualificationType (Maybe Integer)
@@ -201,11 +207,14 @@ instance ToQuery CreateQualificationType where
         toQuery = const mempty
 
 -- | /See:/ 'createQualificationTypeResponse' smart constructor.
-data CreateQualificationTypeResponse = CreateQualificationTypeResponse'
-  { _cqtrsQualificationType :: !(Maybe QualificationType)
-  , _cqtrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateQualificationTypeResponse = CreateQualificationTypeResponse'{_cqtrsQualificationType
+                                                                        ::
+                                                                        !(Maybe
+                                                                            QualificationType),
+                                                                        _cqtrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateQualificationTypeResponse' with the minimum fields required to make a request.
 --
@@ -217,10 +226,10 @@ data CreateQualificationTypeResponse = CreateQualificationTypeResponse'
 createQualificationTypeResponse
     :: Int -- ^ 'cqtrsResponseStatus'
     -> CreateQualificationTypeResponse
-createQualificationTypeResponse pResponseStatus_ =
-  CreateQualificationTypeResponse'
-    {_cqtrsQualificationType = Nothing, _cqtrsResponseStatus = pResponseStatus_}
-
+createQualificationTypeResponse pResponseStatus_
+  = CreateQualificationTypeResponse'{_cqtrsQualificationType
+                                       = Nothing,
+                                     _cqtrsResponseStatus = pResponseStatus_}
 
 -- | The created Qualification type, returned as a QualificationType data structure.
 cqtrsQualificationType :: Lens' CreateQualificationTypeResponse (Maybe QualificationType)

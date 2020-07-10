@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of export jobs for a specific segment.
+-- Retrieves information about the status and settings of the export jobs for a segment.
+--
+--
 module Network.AWS.Pinpoint.GetSegmentExportJobs
     (
     -- * Creating a Request
@@ -46,51 +48,48 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getSegmentExportJobs' smart constructor.
-data GetSegmentExportJobs = GetSegmentExportJobs'
-  { _gsejToken         :: !(Maybe Text)
-  , _gsejPageSize      :: !(Maybe Text)
-  , _gsejSegmentId     :: !Text
-  , _gsejApplicationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSegmentExportJobs = GetSegmentExportJobs'{_gsejToken
+                                                  :: !(Maybe Text),
+                                                  _gsejPageSize ::
+                                                  !(Maybe Text),
+                                                  _gsejSegmentId :: !Text,
+                                                  _gsejApplicationId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSegmentExportJobs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsejToken' - The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'gsejToken' - The NextToken string that specifies which page of results to return in a paginated response.
 --
--- * 'gsejPageSize' - The number of entries you want on each page in the response.
+-- * 'gsejPageSize' - The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 --
--- * 'gsejSegmentId' - Undocumented member.
+-- * 'gsejSegmentId' - The unique identifier for the segment.
 --
--- * 'gsejApplicationId' - Undocumented member.
+-- * 'gsejApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getSegmentExportJobs
     :: Text -- ^ 'gsejSegmentId'
     -> Text -- ^ 'gsejApplicationId'
     -> GetSegmentExportJobs
-getSegmentExportJobs pSegmentId_ pApplicationId_ =
-  GetSegmentExportJobs'
-    { _gsejToken = Nothing
-    , _gsejPageSize = Nothing
-    , _gsejSegmentId = pSegmentId_
-    , _gsejApplicationId = pApplicationId_
-    }
+getSegmentExportJobs pSegmentId_ pApplicationId_
+  = GetSegmentExportJobs'{_gsejToken = Nothing,
+                          _gsejPageSize = Nothing,
+                          _gsejSegmentId = pSegmentId_,
+                          _gsejApplicationId = pApplicationId_}
 
-
--- | The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The NextToken string that specifies which page of results to return in a paginated response.
 gsejToken :: Lens' GetSegmentExportJobs (Maybe Text)
 gsejToken = lens _gsejToken (\ s a -> s{_gsejToken = a})
 
--- | The number of entries you want on each page in the response.
+-- | The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 gsejPageSize :: Lens' GetSegmentExportJobs (Maybe Text)
 gsejPageSize = lens _gsejPageSize (\ s a -> s{_gsejPageSize = a})
 
--- | Undocumented member.
+-- | The unique identifier for the segment.
 gsejSegmentId :: Lens' GetSegmentExportJobs Text
 gsejSegmentId = lens _gsejSegmentId (\ s a -> s{_gsejSegmentId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gsejApplicationId :: Lens' GetSegmentExportJobs Text
 gsejApplicationId = lens _gsejApplicationId (\ s a -> s{_gsejApplicationId = a})
 
@@ -127,11 +126,13 @@ instance ToQuery GetSegmentExportJobs where
               ["token" =: _gsejToken, "page-size" =: _gsejPageSize]
 
 -- | /See:/ 'getSegmentExportJobsResponse' smart constructor.
-data GetSegmentExportJobsResponse = GetSegmentExportJobsResponse'
-  { _gsejrsResponseStatus     :: !Int
-  , _gsejrsExportJobsResponse :: !ExportJobsResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSegmentExportJobsResponse = GetSegmentExportJobsResponse'{_gsejrsResponseStatus
+                                                                  :: !Int,
+                                                                  _gsejrsExportJobsResponse
+                                                                  ::
+                                                                  !ExportJobsResponse}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetSegmentExportJobsResponse' with the minimum fields required to make a request.
 --
@@ -144,12 +145,12 @@ getSegmentExportJobsResponse
     :: Int -- ^ 'gsejrsResponseStatus'
     -> ExportJobsResponse -- ^ 'gsejrsExportJobsResponse'
     -> GetSegmentExportJobsResponse
-getSegmentExportJobsResponse pResponseStatus_ pExportJobsResponse_ =
-  GetSegmentExportJobsResponse'
-    { _gsejrsResponseStatus = pResponseStatus_
-    , _gsejrsExportJobsResponse = pExportJobsResponse_
-    }
-
+getSegmentExportJobsResponse pResponseStatus_
+  pExportJobsResponse_
+  = GetSegmentExportJobsResponse'{_gsejrsResponseStatus
+                                    = pResponseStatus_,
+                                  _gsejrsExportJobsResponse =
+                                    pExportJobsResponse_}
 
 -- | -- | The response status code.
 gsejrsResponseStatus :: Lens' GetSegmentExportJobsResponse Int

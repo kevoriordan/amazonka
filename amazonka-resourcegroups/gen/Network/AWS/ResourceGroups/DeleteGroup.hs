@@ -45,10 +45,9 @@ import Network.AWS.ResourceGroups.Types.Product
 import Network.AWS.Response
 
 -- | /See:/ 'deleteGroup' smart constructor.
-newtype DeleteGroup = DeleteGroup'
-  { _dgGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteGroup = DeleteGroup'{_dgGroupName ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGroup' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype DeleteGroup = DeleteGroup'
 deleteGroup
     :: Text -- ^ 'dgGroupName'
     -> DeleteGroup
-deleteGroup pGroupName_ = DeleteGroup' {_dgGroupName = pGroupName_}
-
+deleteGroup pGroupName_
+  = DeleteGroup'{_dgGroupName = pGroupName_}
 
 -- | The name of the resource group to delete.
 dgGroupName :: Lens' DeleteGroup Text
@@ -89,11 +88,10 @@ instance ToQuery DeleteGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteGroupResponse' smart constructor.
-data DeleteGroupResponse = DeleteGroupResponse'
-  { _dgrsGroup          :: !(Maybe Group)
-  , _dgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteGroupResponse = DeleteGroupResponse'{_dgrsGroup
+                                                :: !(Maybe Group),
+                                                _dgrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteGroupResponse' with the minimum fields required to make a request.
 --
@@ -105,10 +103,9 @@ data DeleteGroupResponse = DeleteGroupResponse'
 deleteGroupResponse
     :: Int -- ^ 'dgrsResponseStatus'
     -> DeleteGroupResponse
-deleteGroupResponse pResponseStatus_ =
-  DeleteGroupResponse'
-    {_dgrsGroup = Nothing, _dgrsResponseStatus = pResponseStatus_}
-
+deleteGroupResponse pResponseStatus_
+  = DeleteGroupResponse'{_dgrsGroup = Nothing,
+                         _dgrsResponseStatus = pResponseStatus_}
 
 -- | A full description of the deleted resource group.
 dgrsGroup :: Lens' DeleteGroupResponse (Maybe Group)

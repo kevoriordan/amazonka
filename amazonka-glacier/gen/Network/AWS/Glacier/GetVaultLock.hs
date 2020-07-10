@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This operation retrieves the following attributes from the @lock-policy@ subresource set on the specified vault:
+-- This operation retrieves the following attributes from the @lock-policy@ subresource set on the specified vault: 
 --
 --
 --     * The vault lock policy set on the vault.
@@ -31,9 +31,9 @@
 --
 --
 --
--- A vault lock is put into the @InProgress@ state by calling 'InitiateVaultLock' . A vault lock is put into the @Locked@ state by calling 'CompleteVaultLock' . You can abort the vault locking process by calling 'AbortVaultLock' . For more information about the vault locking process, <http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html Amazon Glacier Vault Lock> .
+-- A vault lock is put into the @InProgress@ state by calling 'InitiateVaultLock' . A vault lock is put into the @Locked@ state by calling 'CompleteVaultLock' . You can abort the vault locking process by calling 'AbortVaultLock' . For more information about the vault locking process, <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html Amazon Glacier Vault Lock> . 
 --
--- If there is no vault lock policy set on the vault, the operation returns a @404 Not found@ error. For more information about vault lock policies, <http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html Amazon Glacier Access Control with Vault Lock Policies> .
+-- If there is no vault lock policy set on the vault, the operation returns a @404 Not found@ error. For more information about vault lock policies, <https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html Amazon Glacier Access Control with Vault Lock Policies> . 
 --
 module Network.AWS.Glacier.GetVaultLock
     (
@@ -67,28 +67,27 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getVaultLock' smart constructor.
-data GetVaultLock = GetVaultLock'
-  { _gvlAccountId :: !Text
-  , _gvlVaultName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetVaultLock = GetVaultLock'{_gvlAccountId ::
+                                  !Text,
+                                  _gvlVaultName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetVaultLock' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gvlAccountId' - The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
+-- * 'gvlAccountId' - The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
 --
 -- * 'gvlVaultName' - The name of the vault.
 getVaultLock
     :: Text -- ^ 'gvlAccountId'
     -> Text -- ^ 'gvlVaultName'
     -> GetVaultLock
-getVaultLock pAccountId_ pVaultName_ =
-  GetVaultLock' {_gvlAccountId = pAccountId_, _gvlVaultName = pVaultName_}
+getVaultLock pAccountId_ pVaultName_
+  = GetVaultLock'{_gvlAccountId = pAccountId_,
+                  _gvlVaultName = pVaultName_}
 
-
--- | The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
+-- | The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
 gvlAccountId :: Lens' GetVaultLock Text
 gvlAccountId = lens _gvlAccountId (\ s a -> s{_gvlAccountId = a})
 
@@ -124,19 +123,20 @@ instance ToPath GetVaultLock where
 instance ToQuery GetVaultLock where
         toQuery = const mempty
 
--- | Contains the Amazon Glacier response to your request.
+-- | Contains the Amazon S3 Glacier response to your request.
 --
 --
 --
 -- /See:/ 'getVaultLockResponse' smart constructor.
-data GetVaultLockResponse = GetVaultLockResponse'
-  { _gvlrsState          :: !(Maybe Text)
-  , _gvlrsExpirationDate :: !(Maybe Text)
-  , _gvlrsCreationDate   :: !(Maybe Text)
-  , _gvlrsPolicy         :: !(Maybe Text)
-  , _gvlrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetVaultLockResponse = GetVaultLockResponse'{_gvlrsState
+                                                  :: !(Maybe Text),
+                                                  _gvlrsExpirationDate ::
+                                                  !(Maybe Text),
+                                                  _gvlrsCreationDate ::
+                                                  !(Maybe Text),
+                                                  _gvlrsPolicy :: !(Maybe Text),
+                                                  _gvlrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetVaultLockResponse' with the minimum fields required to make a request.
 --
@@ -154,15 +154,11 @@ data GetVaultLockResponse = GetVaultLockResponse'
 getVaultLockResponse
     :: Int -- ^ 'gvlrsResponseStatus'
     -> GetVaultLockResponse
-getVaultLockResponse pResponseStatus_ =
-  GetVaultLockResponse'
-    { _gvlrsState = Nothing
-    , _gvlrsExpirationDate = Nothing
-    , _gvlrsCreationDate = Nothing
-    , _gvlrsPolicy = Nothing
-    , _gvlrsResponseStatus = pResponseStatus_
-    }
-
+getVaultLockResponse pResponseStatus_
+  = GetVaultLockResponse'{_gvlrsState = Nothing,
+                          _gvlrsExpirationDate = Nothing,
+                          _gvlrsCreationDate = Nothing, _gvlrsPolicy = Nothing,
+                          _gvlrsResponseStatus = pResponseStatus_}
 
 -- | The state of the vault lock. @InProgress@ or @Locked@ .
 gvlrsState :: Lens' GetVaultLockResponse (Maybe Text)

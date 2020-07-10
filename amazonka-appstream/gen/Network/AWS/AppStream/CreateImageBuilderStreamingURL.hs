@@ -47,11 +47,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createImageBuilderStreamingURL' smart constructor.
-data CreateImageBuilderStreamingURL = CreateImageBuilderStreamingURL'
-  { _cibsuValidity :: !(Maybe Integer)
-  , _cibsuName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateImageBuilderStreamingURL = CreateImageBuilderStreamingURL'{_cibsuValidity
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Integer),
+                                                                      _cibsuName
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateImageBuilderStreamingURL' with the minimum fields required to make a request.
 --
@@ -63,10 +66,10 @@ data CreateImageBuilderStreamingURL = CreateImageBuilderStreamingURL'
 createImageBuilderStreamingURL
     :: Text -- ^ 'cibsuName'
     -> CreateImageBuilderStreamingURL
-createImageBuilderStreamingURL pName_ =
-  CreateImageBuilderStreamingURL'
-    {_cibsuValidity = Nothing, _cibsuName = pName_}
-
+createImageBuilderStreamingURL pName_
+  = CreateImageBuilderStreamingURL'{_cibsuValidity =
+                                      Nothing,
+                                    _cibsuName = pName_}
 
 -- | The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds. The default is 3600 seconds.
 cibsuValidity :: Lens' CreateImageBuilderStreamingURL (Maybe Integer)
@@ -118,12 +121,19 @@ instance ToQuery CreateImageBuilderStreamingURL where
         toQuery = const mempty
 
 -- | /See:/ 'createImageBuilderStreamingURLResponse' smart constructor.
-data CreateImageBuilderStreamingURLResponse = CreateImageBuilderStreamingURLResponse'
-  { _cibsursStreamingURL   :: !(Maybe Text)
-  , _cibsursExpires        :: !(Maybe POSIX)
-  , _cibsursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateImageBuilderStreamingURLResponse = CreateImageBuilderStreamingURLResponse'{_cibsursStreamingURL
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _cibsursExpires
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          POSIX),
+                                                                                      _cibsursResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'CreateImageBuilderStreamingURLResponse' with the minimum fields required to make a request.
 --
@@ -137,13 +147,13 @@ data CreateImageBuilderStreamingURLResponse = CreateImageBuilderStreamingURLResp
 createImageBuilderStreamingURLResponse
     :: Int -- ^ 'cibsursResponseStatus'
     -> CreateImageBuilderStreamingURLResponse
-createImageBuilderStreamingURLResponse pResponseStatus_ =
-  CreateImageBuilderStreamingURLResponse'
-    { _cibsursStreamingURL = Nothing
-    , _cibsursExpires = Nothing
-    , _cibsursResponseStatus = pResponseStatus_
-    }
-
+createImageBuilderStreamingURLResponse
+  pResponseStatus_
+  = CreateImageBuilderStreamingURLResponse'{_cibsursStreamingURL
+                                              = Nothing,
+                                            _cibsursExpires = Nothing,
+                                            _cibsursResponseStatus =
+                                              pResponseStatus_}
 
 -- | The URL to start the AppStream 2.0 streaming session.
 cibsursStreamingURL :: Lens' CreateImageBuilderStreamingURLResponse (Maybe Text)

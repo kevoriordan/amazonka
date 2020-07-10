@@ -21,7 +21,7 @@
 -- Describes a stack's Elastic Load Balancing instances.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeElasticLoadBalancers
     (
@@ -48,11 +48,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeElasticLoadBalancers' smart constructor.
-data DescribeElasticLoadBalancers = DescribeElasticLoadBalancers'
-  { _delbLayerIds :: !(Maybe [Text])
-  , _delbStackId  :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticLoadBalancers = DescribeElasticLoadBalancers'{_delbLayerIds
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Text]),
+                                                                  _delbStackId
+                                                                  ::
+                                                                  !(Maybe Text)}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeElasticLoadBalancers' with the minimum fields required to make a request.
 --
@@ -63,10 +67,10 @@ data DescribeElasticLoadBalancers = DescribeElasticLoadBalancers'
 -- * 'delbStackId' - A stack ID. The action describes the stack's Elastic Load Balancing instances.
 describeElasticLoadBalancers
     :: DescribeElasticLoadBalancers
-describeElasticLoadBalancers =
-  DescribeElasticLoadBalancers'
-    {_delbLayerIds = Nothing, _delbStackId = Nothing}
-
+describeElasticLoadBalancers
+  = DescribeElasticLoadBalancers'{_delbLayerIds =
+                                    Nothing,
+                                  _delbStackId = Nothing}
 
 -- | A list of layer IDs. The action describes the Elastic Load Balancing instances for the specified layers.
 delbLayerIds :: Lens' DescribeElasticLoadBalancers [Text]
@@ -120,11 +124,15 @@ instance ToQuery DescribeElasticLoadBalancers where
 --
 --
 -- /See:/ 'describeElasticLoadBalancersResponse' smart constructor.
-data DescribeElasticLoadBalancersResponse = DescribeElasticLoadBalancersResponse'
-  { _delbrsElasticLoadBalancers :: !(Maybe [ElasticLoadBalancer])
-  , _delbrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticLoadBalancersResponse = DescribeElasticLoadBalancersResponse'{_delbrsElasticLoadBalancers
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [ElasticLoadBalancer]),
+                                                                                  _delbrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeElasticLoadBalancersResponse' with the minimum fields required to make a request.
 --
@@ -136,12 +144,11 @@ data DescribeElasticLoadBalancersResponse = DescribeElasticLoadBalancersResponse
 describeElasticLoadBalancersResponse
     :: Int -- ^ 'delbrsResponseStatus'
     -> DescribeElasticLoadBalancersResponse
-describeElasticLoadBalancersResponse pResponseStatus_ =
-  DescribeElasticLoadBalancersResponse'
-    { _delbrsElasticLoadBalancers = Nothing
-    , _delbrsResponseStatus = pResponseStatus_
-    }
-
+describeElasticLoadBalancersResponse pResponseStatus_
+  = DescribeElasticLoadBalancersResponse'{_delbrsElasticLoadBalancers
+                                            = Nothing,
+                                          _delbrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | A list of @ElasticLoadBalancer@ objects that describe the specified Elastic Load Balancing instances.
 delbrsElasticLoadBalancers :: Lens' DescribeElasticLoadBalancersResponse [ElasticLoadBalancer]

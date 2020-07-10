@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update a field-level encryption profile.
+-- Update a field-level encryption profile. 
 --
 --
 module Network.AWS.CloudFront.UpdateFieldLevelEncryptionProfile
@@ -48,12 +48,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateFieldLevelEncryptionProfile' smart constructor.
-data UpdateFieldLevelEncryptionProfile = UpdateFieldLevelEncryptionProfile'
-  { _uflepIfMatch :: !(Maybe Text)
-  , _uflepFieldLevelEncryptionProfileConfig :: !FieldLevelEncryptionProfileConfig
-  , _uflepId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateFieldLevelEncryptionProfile = UpdateFieldLevelEncryptionProfile'{_uflepIfMatch
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _uflepFieldLevelEncryptionProfileConfig
+                                                                            ::
+                                                                            !FieldLevelEncryptionProfileConfig,
+                                                                            _uflepId
+                                                                            ::
+                                                                            !Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UpdateFieldLevelEncryptionProfile' with the minimum fields required to make a request.
 --
@@ -61,31 +67,30 @@ data UpdateFieldLevelEncryptionProfile = UpdateFieldLevelEncryptionProfile'
 --
 -- * 'uflepIfMatch' - The value of the @ETag@ header that you received when retrieving the profile identity to update. For example: @E2QWRUHAPOMQZL@ .
 --
--- * 'uflepFieldLevelEncryptionProfileConfig' - Request to update a field-level encryption profile.
+-- * 'uflepFieldLevelEncryptionProfileConfig' - Request to update a field-level encryption profile. 
 --
--- * 'uflepId' - The ID of the field-level encryption profile request.
+-- * 'uflepId' - The ID of the field-level encryption profile request. 
 updateFieldLevelEncryptionProfile
     :: FieldLevelEncryptionProfileConfig -- ^ 'uflepFieldLevelEncryptionProfileConfig'
     -> Text -- ^ 'uflepId'
     -> UpdateFieldLevelEncryptionProfile
-updateFieldLevelEncryptionProfile pFieldLevelEncryptionProfileConfig_ pId_ =
-  UpdateFieldLevelEncryptionProfile'
-    { _uflepIfMatch = Nothing
-    , _uflepFieldLevelEncryptionProfileConfig =
-        pFieldLevelEncryptionProfileConfig_
-    , _uflepId = pId_
-    }
-
+updateFieldLevelEncryptionProfile
+  pFieldLevelEncryptionProfileConfig_ pId_
+  = UpdateFieldLevelEncryptionProfile'{_uflepIfMatch =
+                                         Nothing,
+                                       _uflepFieldLevelEncryptionProfileConfig =
+                                         pFieldLevelEncryptionProfileConfig_,
+                                       _uflepId = pId_}
 
 -- | The value of the @ETag@ header that you received when retrieving the profile identity to update. For example: @E2QWRUHAPOMQZL@ .
 uflepIfMatch :: Lens' UpdateFieldLevelEncryptionProfile (Maybe Text)
 uflepIfMatch = lens _uflepIfMatch (\ s a -> s{_uflepIfMatch = a})
 
--- | Request to update a field-level encryption profile.
+-- | Request to update a field-level encryption profile. 
 uflepFieldLevelEncryptionProfileConfig :: Lens' UpdateFieldLevelEncryptionProfile FieldLevelEncryptionProfileConfig
 uflepFieldLevelEncryptionProfileConfig = lens _uflepFieldLevelEncryptionProfileConfig (\ s a -> s{_uflepFieldLevelEncryptionProfileConfig = a})
 
--- | The ID of the field-level encryption profile request.
+-- | The ID of the field-level encryption profile request. 
 uflepId :: Lens' UpdateFieldLevelEncryptionProfile Text
 uflepId = lens _uflepId (\ s a -> s{_uflepId = a})
 
@@ -111,7 +116,7 @@ instance ToElement UpdateFieldLevelEncryptionProfile
          where
         toElement
           = mkElement
-              "{http://cloudfront.amazonaws.com/doc/2017-10-30/}FieldLevelEncryptionProfileConfig"
+              "{http://cloudfront.amazonaws.com/doc/2019-03-26/}FieldLevelEncryptionProfileConfig"
               .
               _uflepFieldLevelEncryptionProfileConfig
 
@@ -124,7 +129,7 @@ instance ToPath UpdateFieldLevelEncryptionProfile
          where
         toPath UpdateFieldLevelEncryptionProfile'{..}
           = mconcat
-              ["/2017-10-30/field-level-encryption-profile/",
+              ["/2019-03-26/field-level-encryption-profile/",
                toBS _uflepId, "/config"]
 
 instance ToQuery UpdateFieldLevelEncryptionProfile
@@ -132,18 +137,26 @@ instance ToQuery UpdateFieldLevelEncryptionProfile
         toQuery = const mempty
 
 -- | /See:/ 'updateFieldLevelEncryptionProfileResponse' smart constructor.
-data UpdateFieldLevelEncryptionProfileResponse = UpdateFieldLevelEncryptionProfileResponse'
-  { _ufleprsETag                        :: !(Maybe Text)
-  , _ufleprsFieldLevelEncryptionProfile :: !(Maybe FieldLevelEncryptionProfile)
-  , _ufleprsResponseStatus              :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateFieldLevelEncryptionProfileResponse = UpdateFieldLevelEncryptionProfileResponse'{_ufleprsETag
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                Text),
+                                                                                            _ufleprsFieldLevelEncryptionProfile
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                FieldLevelEncryptionProfile),
+                                                                                            _ufleprsResponseStatus
+                                                                                            ::
+                                                                                            !Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'UpdateFieldLevelEncryptionProfileResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ufleprsETag' - The result of the field-level encryption profile request.
+-- * 'ufleprsETag' - The result of the field-level encryption profile request. 
 --
 -- * 'ufleprsFieldLevelEncryptionProfile' - Return the results of updating the profile.
 --
@@ -151,15 +164,16 @@ data UpdateFieldLevelEncryptionProfileResponse = UpdateFieldLevelEncryptionProfi
 updateFieldLevelEncryptionProfileResponse
     :: Int -- ^ 'ufleprsResponseStatus'
     -> UpdateFieldLevelEncryptionProfileResponse
-updateFieldLevelEncryptionProfileResponse pResponseStatus_ =
-  UpdateFieldLevelEncryptionProfileResponse'
-    { _ufleprsETag = Nothing
-    , _ufleprsFieldLevelEncryptionProfile = Nothing
-    , _ufleprsResponseStatus = pResponseStatus_
-    }
+updateFieldLevelEncryptionProfileResponse
+  pResponseStatus_
+  = UpdateFieldLevelEncryptionProfileResponse'{_ufleprsETag
+                                                 = Nothing,
+                                               _ufleprsFieldLevelEncryptionProfile
+                                                 = Nothing,
+                                               _ufleprsResponseStatus =
+                                                 pResponseStatus_}
 
-
--- | The result of the field-level encryption profile request.
+-- | The result of the field-level encryption profile request. 
 ufleprsETag :: Lens' UpdateFieldLevelEncryptionProfileResponse (Maybe Text)
 ufleprsETag = lens _ufleprsETag (\ s a -> s{_ufleprsETag = a})
 

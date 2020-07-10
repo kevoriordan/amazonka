@@ -44,17 +44,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAvailableSolutionStacks' smart constructor.
-data ListAvailableSolutionStacks =
-  ListAvailableSolutionStacks'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAvailableSolutionStacks = ListAvailableSolutionStacks'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListAvailableSolutionStacks' with the minimum fields required to make a request.
 --
 listAvailableSolutionStacks
     :: ListAvailableSolutionStacks
-listAvailableSolutionStacks = ListAvailableSolutionStacks'
-
+listAvailableSolutionStacks
+  = ListAvailableSolutionStacks'
 
 instance AWSRequest ListAvailableSolutionStacks where
         type Rs ListAvailableSolutionStacks =
@@ -95,12 +94,19 @@ instance ToQuery ListAvailableSolutionStacks where
 --
 --
 -- /See:/ 'listAvailableSolutionStacksResponse' smart constructor.
-data ListAvailableSolutionStacksResponse = ListAvailableSolutionStacksResponse'
-  { _lassrsSolutionStacks       :: !(Maybe [Text])
-  , _lassrsSolutionStackDetails :: !(Maybe [SolutionStackDescription])
-  , _lassrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAvailableSolutionStacksResponse = ListAvailableSolutionStacksResponse'{_lassrsSolutionStacks
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Text]),
+                                                                                _lassrsSolutionStackDetails
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [SolutionStackDescription]),
+                                                                                _lassrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'ListAvailableSolutionStacksResponse' with the minimum fields required to make a request.
 --
@@ -108,25 +114,24 @@ data ListAvailableSolutionStacksResponse = ListAvailableSolutionStacksResponse'
 --
 -- * 'lassrsSolutionStacks' - A list of available solution stacks.
 --
--- * 'lassrsSolutionStackDetails' - A list of available solution stacks and their 'SolutionStackDescription' .
+-- * 'lassrsSolutionStackDetails' - A list of available solution stacks and their 'SolutionStackDescription' . 
 --
 -- * 'lassrsResponseStatus' - -- | The response status code.
 listAvailableSolutionStacksResponse
     :: Int -- ^ 'lassrsResponseStatus'
     -> ListAvailableSolutionStacksResponse
-listAvailableSolutionStacksResponse pResponseStatus_ =
-  ListAvailableSolutionStacksResponse'
-    { _lassrsSolutionStacks = Nothing
-    , _lassrsSolutionStackDetails = Nothing
-    , _lassrsResponseStatus = pResponseStatus_
-    }
-
+listAvailableSolutionStacksResponse pResponseStatus_
+  = ListAvailableSolutionStacksResponse'{_lassrsSolutionStacks
+                                           = Nothing,
+                                         _lassrsSolutionStackDetails = Nothing,
+                                         _lassrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | A list of available solution stacks.
 lassrsSolutionStacks :: Lens' ListAvailableSolutionStacksResponse [Text]
 lassrsSolutionStacks = lens _lassrsSolutionStacks (\ s a -> s{_lassrsSolutionStacks = a}) . _Default . _Coerce
 
--- | A list of available solution stacks and their 'SolutionStackDescription' .
+-- | A list of available solution stacks and their 'SolutionStackDescription' . 
 lassrsSolutionStackDetails :: Lens' ListAvailableSolutionStacksResponse [SolutionStackDescription]
 lassrsSolutionStackDetails = lens _lassrsSolutionStackDetails (\ s a -> s{_lassrsSolutionStackDetails = a}) . _Default . _Coerce
 

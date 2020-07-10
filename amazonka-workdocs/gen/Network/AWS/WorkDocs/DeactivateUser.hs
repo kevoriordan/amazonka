@@ -43,27 +43,26 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deactivateUser' smart constructor.
-data DeactivateUser = DeactivateUser'
-  { _dAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _dUserId              :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeactivateUser = DeactivateUser'{_dAuthenticationToken
+                                      :: !(Maybe (Sensitive Text)),
+                                      _dUserId :: !Text}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeactivateUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'dAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'dUserId' - The ID of the user.
 deactivateUser
     :: Text -- ^ 'dUserId'
     -> DeactivateUser
-deactivateUser pUserId_ =
-  DeactivateUser' {_dAuthenticationToken = Nothing, _dUserId = pUserId_}
+deactivateUser pUserId_
+  = DeactivateUser'{_dAuthenticationToken = Nothing,
+                    _dUserId = pUserId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 dAuthenticationToken :: Lens' DeactivateUser (Maybe Text)
 dAuthenticationToken = lens _dAuthenticationToken (\ s a -> s{_dAuthenticationToken = a}) . mapping _Sensitive
 
@@ -96,16 +95,14 @@ instance ToQuery DeactivateUser where
         toQuery = const mempty
 
 -- | /See:/ 'deactivateUserResponse' smart constructor.
-data DeactivateUserResponse =
-  DeactivateUserResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeactivateUserResponse = DeactivateUserResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeactivateUserResponse' with the minimum fields required to make a request.
 --
 deactivateUserResponse
     :: DeactivateUserResponse
 deactivateUserResponse = DeactivateUserResponse'
-
 
 instance NFData DeactivateUserResponse where

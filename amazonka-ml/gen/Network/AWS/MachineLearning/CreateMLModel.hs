@@ -18,16 +18,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new @MLModel@ using the @DataSource@ and the recipe as information sources.
+-- Creates a new @MLModel@ using the @DataSource@ and the recipe as information sources. 
 --
 --
--- An @MLModel@ is nearly immutable. Users can update only the @MLModelName@ and the @ScoreThreshold@ in an @MLModel@ without creating a new @MLModel@ .
+-- An @MLModel@ is nearly immutable. Users can update only the @MLModelName@ and the @ScoreThreshold@ in an @MLModel@ without creating a new @MLModel@ . 
 --
--- @CreateMLModel@ is an asynchronous operation. In response to @CreateMLModel@ , Amazon Machine Learning (Amazon ML) immediately returns and sets the @MLModel@ status to @PENDING@ . After the @MLModel@ has been created and ready is for use, Amazon ML sets the status to @COMPLETED@ .
+-- @CreateMLModel@ is an asynchronous operation. In response to @CreateMLModel@ , Amazon Machine Learning (Amazon ML) immediately returns and sets the @MLModel@ status to @PENDING@ . After the @MLModel@ has been created and ready is for use, Amazon ML sets the status to @COMPLETED@ . 
 --
 -- You can use the @GetMLModel@ operation to check the progress of the @MLModel@ during the creation operation.
 --
--- @CreateMLModel@ requires a @DataSource@ with computed statistics, which can be created by setting @ComputeStatistics@ to @true@ in @CreateDataSourceFromRDS@ , @CreateDataSourceFromS3@ , or @CreateDataSourceFromRedshift@ operations.
+-- @CreateMLModel@ requires a @DataSource@ with computed statistics, which can be created by setting @ComputeStatistics@ to @true@ in @CreateDataSourceFromRDS@ , @CreateDataSourceFromS3@ , or @CreateDataSourceFromRedshift@ operations. 
 --
 module Network.AWS.MachineLearning.CreateMLModel
     (
@@ -59,16 +59,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createMLModel' smart constructor.
-data CreateMLModel = CreateMLModel'
-  { _cmlmRecipe               :: !(Maybe Text)
-  , _cmlmRecipeURI            :: !(Maybe Text)
-  , _cmlmMLModelName          :: !(Maybe Text)
-  , _cmlmParameters           :: !(Maybe (Map Text Text))
-  , _cmlmMLModelId            :: !Text
-  , _cmlmMLModelType          :: !MLModelType
-  , _cmlmTrainingDataSourceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateMLModel = CreateMLModel'{_cmlmRecipe ::
+                                    !(Maybe Text),
+                                    _cmlmRecipeURI :: !(Maybe Text),
+                                    _cmlmMLModelName :: !(Maybe Text),
+                                    _cmlmParameters :: !(Maybe (Map Text Text)),
+                                    _cmlmMLModelId :: !Text,
+                                    _cmlmMLModelType :: !MLModelType,
+                                    _cmlmTrainingDataSourceId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateMLModel' with the minimum fields required to make a request.
 --
@@ -92,17 +91,14 @@ createMLModel
     -> MLModelType -- ^ 'cmlmMLModelType'
     -> Text -- ^ 'cmlmTrainingDataSourceId'
     -> CreateMLModel
-createMLModel pMLModelId_ pMLModelType_ pTrainingDataSourceId_ =
-  CreateMLModel'
-    { _cmlmRecipe = Nothing
-    , _cmlmRecipeURI = Nothing
-    , _cmlmMLModelName = Nothing
-    , _cmlmParameters = Nothing
-    , _cmlmMLModelId = pMLModelId_
-    , _cmlmMLModelType = pMLModelType_
-    , _cmlmTrainingDataSourceId = pTrainingDataSourceId_
-    }
-
+createMLModel pMLModelId_ pMLModelType_
+  pTrainingDataSourceId_
+  = CreateMLModel'{_cmlmRecipe = Nothing,
+                   _cmlmRecipeURI = Nothing, _cmlmMLModelName = Nothing,
+                   _cmlmParameters = Nothing,
+                   _cmlmMLModelId = pMLModelId_,
+                   _cmlmMLModelType = pMLModelType_,
+                   _cmlmTrainingDataSourceId = pTrainingDataSourceId_}
 
 -- | The data recipe for creating the @MLModel@ . You must specify either the recipe or its URI. If you don't specify a recipe or its URI, Amazon ML creates a default.
 cmlmRecipe :: Lens' CreateMLModel (Maybe Text)
@@ -177,32 +173,32 @@ instance ToQuery CreateMLModel where
 -- | Represents the output of a @CreateMLModel@ operation, and is an acknowledgement that Amazon ML received the request.
 --
 --
--- The @CreateMLModel@ operation is asynchronous. You can poll for status updates by using the @GetMLModel@ operation and checking the @Status@ parameter.
+-- The @CreateMLModel@ operation is asynchronous. You can poll for status updates by using the @GetMLModel@ operation and checking the @Status@ parameter. 
 --
 --
 -- /See:/ 'createMLModelResponse' smart constructor.
-data CreateMLModelResponse = CreateMLModelResponse'
-  { _cmlmrsMLModelId      :: !(Maybe Text)
-  , _cmlmrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateMLModelResponse = CreateMLModelResponse'{_cmlmrsMLModelId
+                                                    :: !(Maybe Text),
+                                                    _cmlmrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateMLModelResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cmlmrsMLModelId' - A user-supplied ID that uniquely identifies the @MLModel@ . This value should be identical to the value of the @MLModelId@ in the request.
+-- * 'cmlmrsMLModelId' - A user-supplied ID that uniquely identifies the @MLModel@ . This value should be identical to the value of the @MLModelId@ in the request. 
 --
 -- * 'cmlmrsResponseStatus' - -- | The response status code.
 createMLModelResponse
     :: Int -- ^ 'cmlmrsResponseStatus'
     -> CreateMLModelResponse
-createMLModelResponse pResponseStatus_ =
-  CreateMLModelResponse'
-    {_cmlmrsMLModelId = Nothing, _cmlmrsResponseStatus = pResponseStatus_}
+createMLModelResponse pResponseStatus_
+  = CreateMLModelResponse'{_cmlmrsMLModelId = Nothing,
+                           _cmlmrsResponseStatus = pResponseStatus_}
 
-
--- | A user-supplied ID that uniquely identifies the @MLModel@ . This value should be identical to the value of the @MLModelId@ in the request.
+-- | A user-supplied ID that uniquely identifies the @MLModel@ . This value should be identical to the value of the @MLModelId@ in the request. 
 cmlmrsMLModelId :: Lens' CreateMLModelResponse (Maybe Text)
 cmlmrsMLModelId = lens _cmlmrsMLModelId (\ s a -> s{_cmlmrsMLModelId = a})
 

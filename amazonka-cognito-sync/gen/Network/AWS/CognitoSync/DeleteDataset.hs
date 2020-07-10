@@ -51,12 +51,11 @@ import Network.AWS.Response
 -- | A request to delete the specific dataset.
 --
 -- /See:/ 'deleteDataset' smart constructor.
-data DeleteDataset = DeleteDataset'
-  { _delIdentityPoolId :: !Text
-  , _delIdentityId     :: !Text
-  , _delDatasetName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDataset = DeleteDataset'{_delIdentityPoolId
+                                    :: !Text,
+                                    _delIdentityId :: !Text,
+                                    _delDatasetName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDataset' with the minimum fields required to make a request.
 --
@@ -72,13 +71,12 @@ deleteDataset
     -> Text -- ^ 'delIdentityId'
     -> Text -- ^ 'delDatasetName'
     -> DeleteDataset
-deleteDataset pIdentityPoolId_ pIdentityId_ pDatasetName_ =
-  DeleteDataset'
-    { _delIdentityPoolId = pIdentityPoolId_
-    , _delIdentityId = pIdentityId_
-    , _delDatasetName = pDatasetName_
-    }
-
+deleteDataset pIdentityPoolId_ pIdentityId_
+  pDatasetName_
+  = DeleteDataset'{_delIdentityPoolId =
+                     pIdentityPoolId_,
+                   _delIdentityId = pIdentityId_,
+                   _delDatasetName = pDatasetName_}
 
 -- | A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.
 delIdentityPoolId :: Lens' DeleteDataset Text
@@ -125,11 +123,11 @@ instance ToQuery DeleteDataset where
 -- | Response to a successful DeleteDataset request.
 --
 -- /See:/ 'deleteDatasetResponse' smart constructor.
-data DeleteDatasetResponse = DeleteDatasetResponse'
-  { _drsDataset        :: !(Maybe Dataset)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDatasetResponse = DeleteDatasetResponse'{_drsDataset
+                                                    :: !(Maybe Dataset),
+                                                    _drsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteDatasetResponse' with the minimum fields required to make a request.
 --
@@ -141,10 +139,9 @@ data DeleteDatasetResponse = DeleteDatasetResponse'
 deleteDatasetResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteDatasetResponse
-deleteDatasetResponse pResponseStatus_ =
-  DeleteDatasetResponse'
-    {_drsDataset = Nothing, _drsResponseStatus = pResponseStatus_}
-
+deleteDatasetResponse pResponseStatus_
+  = DeleteDatasetResponse'{_drsDataset = Nothing,
+                           _drsResponseStatus = pResponseStatus_}
 
 -- | A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.
 drsDataset :: Lens' DeleteDatasetResponse (Maybe Dataset)

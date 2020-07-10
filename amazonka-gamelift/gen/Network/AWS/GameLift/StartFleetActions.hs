@@ -18,36 +18,28 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Resumes activity on a fleet that was suspended with 'StopFleetActions' . Currently, this operation is used to restart a fleet's auto-scaling activity.
+-- Resumes activity on a fleet that was suspended with 'StopFleetActions' . Currently, this operation is used to restart a fleet's auto-scaling activity. 
 --
 --
 -- To start fleet actions, specify the fleet ID and the type of actions to restart. When auto-scaling fleet actions are restarted, Amazon GameLift once again initiates scaling events as triggered by the fleet's scaling policies. If actions on the fleet were never stopped, this operation will have no effect. You can view a fleet's stopped actions using 'DescribeFleetAttributes' .
 --
--- Operations related to fleet capacity scaling include:
+-- __Learn more__ 
 --
---     * 'DescribeFleetCapacity'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html Setting up GameLift Fleets> 
 --
---     * 'UpdateFleetCapacity'
+-- __Related operations__ 
 --
---     * 'DescribeEC2InstanceLimits'
+--     * 'CreateFleet' 
 --
---     * Manage scaling policies:
+--     * 'ListFleets' 
 --
---     * 'PutScalingPolicy' (auto-scaling)
+--     * 'DeleteFleet' 
 --
---     * 'DescribeScalingPolicies' (auto-scaling)
+--     * 'DescribeFleetAttributes' 
 --
---     * 'DeleteScalingPolicy' (auto-scaling)
+--     * 'UpdateFleetAttributes' 
 --
---
---
---     * Manage fleet actions:
---
---     * 'StartFleetActions'
---
---     * 'StopFleetActions'
---
---
+--     * 'StartFleetActions' or 'StopFleetActions' 
 --
 --
 --
@@ -75,28 +67,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startFleetActions' smart constructor.
-data StartFleetActions = StartFleetActions'
-  { _sfaFleetId :: !Text
-  , _sfaActions :: !(List1 FleetAction)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartFleetActions = StartFleetActions'{_sfaFleetId
+                                            :: !Text,
+                                            _sfaActions :: !(List1 FleetAction)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartFleetActions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sfaFleetId' - Unique identifier for a fleet
+-- * 'sfaFleetId' - A unique identifier for a fleet to start actions on. You can use either the fleet ID or ARN value.
 --
 -- * 'sfaActions' - List of actions to restart on the fleet.
 startFleetActions
     :: Text -- ^ 'sfaFleetId'
     -> NonEmpty FleetAction -- ^ 'sfaActions'
     -> StartFleetActions
-startFleetActions pFleetId_ pActions_ =
-  StartFleetActions' {_sfaFleetId = pFleetId_, _sfaActions = _List1 # pActions_}
+startFleetActions pFleetId_ pActions_
+  = StartFleetActions'{_sfaFleetId = pFleetId_,
+                       _sfaActions = _List1 # pActions_}
 
-
--- | Unique identifier for a fleet
+-- | A unique identifier for a fleet to start actions on. You can use either the fleet ID or ARN value.
 sfaFleetId :: Lens' StartFleetActions Text
 sfaFleetId = lens _sfaFleetId (\ s a -> s{_sfaFleetId = a})
 
@@ -139,10 +130,10 @@ instance ToQuery StartFleetActions where
         toQuery = const mempty
 
 -- | /See:/ 'startFleetActionsResponse' smart constructor.
-newtype StartFleetActionsResponse = StartFleetActionsResponse'
-  { _sfarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartFleetActionsResponse = StartFleetActionsResponse'{_sfarsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'StartFleetActionsResponse' with the minimum fields required to make a request.
 --
@@ -152,9 +143,9 @@ newtype StartFleetActionsResponse = StartFleetActionsResponse'
 startFleetActionsResponse
     :: Int -- ^ 'sfarsResponseStatus'
     -> StartFleetActionsResponse
-startFleetActionsResponse pResponseStatus_ =
-  StartFleetActionsResponse' {_sfarsResponseStatus = pResponseStatus_}
-
+startFleetActionsResponse pResponseStatus_
+  = StartFleetActionsResponse'{_sfarsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 sfarsResponseStatus :: Lens' StartFleetActionsResponse Int

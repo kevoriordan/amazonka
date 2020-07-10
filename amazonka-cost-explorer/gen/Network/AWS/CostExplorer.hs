@@ -11,18 +11,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Cost Explorer API allows you to programmatically query your cost and usage data. You can query for aggregated data such as total monthly costs or total daily usage. You can also query for granular data, such as the number of daily write operations for Amazon DynamoDB database tables in your production environment.
+-- The Cost Explorer API enables you to programmatically query your cost and usage data. You can query for aggregated data such as total monthly costs or total daily usage. You can also query for granular data, such as the number of daily write operations for Amazon DynamoDB database tables in your production environment. 
 --
 --
 -- Service Endpoint
 --
 -- The Cost Explorer API provides the following endpoint:
 --
---     * https://ce.us-east-1.amazonaws.com
+--     * @https://ce.us-east-1.amazonaws.com@ 
 --
 --
 --
--- For information about costs associated with the Cost Explorer API, see <https://aws.amazon.com/aws-cost-management/pricing/ AWS Cost Management Pricing> .
+-- For information about costs associated with the Cost Explorer API, see <http://aws.amazon.com/aws-cost-management/pricing/ AWS Cost Management Pricing> .
 --
 module Network.AWS.CostExplorer
     (
@@ -32,17 +32,26 @@ module Network.AWS.CostExplorer
     -- * Errors
     -- $errors
 
+    -- ** DataUnavailableException
+    , _DataUnavailableException
+
     -- ** BillExpirationException
     , _BillExpirationException
 
-    -- ** RequestChangedException
-    , _RequestChangedException
+    -- ** UnresolvableUsageUnitException
+    , _UnresolvableUsageUnitException
+
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
 
     -- ** InvalidNextTokenException
     , _InvalidNextTokenException
 
-    -- ** DataUnavailableException
-    , _DataUnavailableException
+    -- ** ServiceQuotaExceededException
+    , _ServiceQuotaExceededException
+
+    -- ** RequestChangedException
+    , _RequestChangedException
 
     -- ** LimitExceededException
     , _LimitExceededException
@@ -53,23 +62,62 @@ module Network.AWS.CostExplorer
     -- * Operations
     -- $operations
 
-    -- ** GetReservationUtilization
+    -- ** GetReservationUtilization 
     , module Network.AWS.CostExplorer.GetReservationUtilization
 
-    -- ** GetTags
+    -- ** GetSavingsPlansCoverage 
+    , module Network.AWS.CostExplorer.GetSavingsPlansCoverage
+
+    -- ** GetTags 
     , module Network.AWS.CostExplorer.GetTags
 
-    -- ** GetReservationCoverage
+    -- ** GetRightsizingRecommendation 
+    , module Network.AWS.CostExplorer.GetRightsizingRecommendation
+
+    -- ** GetCostAndUsageWithResources 
+    , module Network.AWS.CostExplorer.GetCostAndUsageWithResources
+
+    -- ** GetUsageForecast 
+    , module Network.AWS.CostExplorer.GetUsageForecast
+
+    -- ** GetReservationCoverage 
     , module Network.AWS.CostExplorer.GetReservationCoverage
 
-    -- ** GetDimensionValues
+    -- ** GetCostForecast 
+    , module Network.AWS.CostExplorer.GetCostForecast
+
+    -- ** GetDimensionValues 
     , module Network.AWS.CostExplorer.GetDimensionValues
 
-    -- ** GetReservationPurchaseRecommendation
+    -- ** GetReservationPurchaseRecommendation 
     , module Network.AWS.CostExplorer.GetReservationPurchaseRecommendation
 
-    -- ** GetCostAndUsage
+    -- ** ListCostCategoryDefinitions 
+    , module Network.AWS.CostExplorer.ListCostCategoryDefinitions
+
+    -- ** UpdateCostCategoryDefinition 
+    , module Network.AWS.CostExplorer.UpdateCostCategoryDefinition
+
+    -- ** DeleteCostCategoryDefinition 
+    , module Network.AWS.CostExplorer.DeleteCostCategoryDefinition
+
+    -- ** CreateCostCategoryDefinition 
+    , module Network.AWS.CostExplorer.CreateCostCategoryDefinition
+
+    -- ** GetCostAndUsage 
     , module Network.AWS.CostExplorer.GetCostAndUsage
+
+    -- ** GetSavingsPlansPurchaseRecommendation 
+    , module Network.AWS.CostExplorer.GetSavingsPlansPurchaseRecommendation
+
+    -- ** GetSavingsPlansUtilization 
+    , module Network.AWS.CostExplorer.GetSavingsPlansUtilization
+
+    -- ** DescribeCostCategoryDefinition 
+    , module Network.AWS.CostExplorer.DescribeCostCategoryDefinition
+
+    -- ** GetSavingsPlansUtilizationDetails 
+    , module Network.AWS.CostExplorer.GetSavingsPlansUtilizationDetails
 
     -- * Types
 
@@ -78,6 +126,9 @@ module Network.AWS.CostExplorer
 
     -- ** Context
     , Context (..)
+
+    -- ** CostCategoryRuleVersion
+    , CostCategoryRuleVersion (..)
 
     -- ** Dimension
     , Dimension (..)
@@ -91,19 +142,67 @@ module Network.AWS.CostExplorer
     -- ** LookbackPeriodInDays
     , LookbackPeriodInDays (..)
 
+    -- ** MatchOption
+    , MatchOption (..)
+
+    -- ** Metric
+    , Metric (..)
+
     -- ** OfferingClass
     , OfferingClass (..)
 
     -- ** PaymentOption
     , PaymentOption (..)
 
+    -- ** RecommendationTarget
+    , RecommendationTarget (..)
+
+    -- ** RightsizingType
+    , RightsizingType (..)
+
+    -- ** SupportedSavingsPlansType
+    , SupportedSavingsPlansType (..)
+
     -- ** TermInYears
     , TermInYears (..)
+
+    -- ** CostCategory
+    , CostCategory
+    , costCategory
+    , ccEffectiveEnd
+    , ccCostCategoryARN
+    , ccEffectiveStart
+    , ccName
+    , ccRuleVersion
+    , ccRules
+
+    -- ** CostCategoryReference
+    , CostCategoryReference
+    , costCategoryReference
+    , ccrEffectiveStart
+    , ccrCostCategoryARN
+    , ccrNumberOfRules
+    , ccrName
+    , ccrEffectiveEnd
+
+    -- ** CostCategoryRule
+    , CostCategoryRule
+    , costCategoryRule
+    , ccrValue
+    , ccrRule
+
+    -- ** CostCategoryValues
+    , CostCategoryValues
+    , costCategoryValues
+    , ccvValues
+    , ccvKey
 
     -- ** Coverage
     , Coverage
     , coverage
+    , cCoverageNormalizedUnits
     , cCoverageHours
+    , cCoverageCost
 
     -- ** CoverageByTime
     , CoverageByTime
@@ -112,6 +211,11 @@ module Network.AWS.CostExplorer
     , cbtTimePeriod
     , cbtTotal
 
+    -- ** CoverageCost
+    , CoverageCost
+    , coverageCost
+    , ccOnDemandCost
+
     -- ** CoverageHours
     , CoverageHours
     , coverageHours
@@ -119,6 +223,28 @@ module Network.AWS.CostExplorer
     , chOnDemandHours
     , chTotalRunningHours
     , chReservedHours
+
+    -- ** CoverageNormalizedUnits
+    , CoverageNormalizedUnits
+    , coverageNormalizedUnits
+    , cnuReservedNormalizedUnits
+    , cnuTotalRunningNormalizedUnits
+    , cnuCoverageNormalizedUnitsPercentage
+    , cnuOnDemandNormalizedUnits
+
+    -- ** CurrentInstance
+    , CurrentInstance
+    , currentInstance
+    , ciResourceId
+    , ciCurrencyCode
+    , ciResourceUtilization
+    , ciResourceDetails
+    , ciTotalRunningHoursInLookbackPeriod
+    , ciReservationCoveredHoursInLookbackPeriod
+    , ciOnDemandHoursInLookbackPeriod
+    , ciMonthlyCost
+    , ciSavingsPlansCoveredHoursInLookbackPeriod
+    , ciTags
 
     -- ** DateInterval
     , DateInterval
@@ -131,6 +257,7 @@ module Network.AWS.CostExplorer
     , dimensionValues
     , dvValues
     , dvKey
+    , dvMatchOptions
 
     -- ** DimensionValuesWithAttributes
     , DimensionValuesWithAttributes
@@ -150,10 +277,49 @@ module Network.AWS.CostExplorer
     , eidTenancy
     , eidRegion
 
+    -- ** EC2ResourceDetails
+    , EC2ResourceDetails
+    , ec2ResourceDetails
+    , erdPlatform
+    , erdVcpu
+    , erdNetworkPerformance
+    , erdMemory
+    , erdInstanceType
+    , erdStorage
+    , erdSku
+    , erdRegion
+    , erdHourlyOnDemandRate
+
+    -- ** EC2ResourceUtilization
+    , EC2ResourceUtilization
+    , ec2ResourceUtilization
+    , eruMaxCPUUtilizationPercentage
+    , eruMaxStorageUtilizationPercentage
+    , eruMaxMemoryUtilizationPercentage
+
     -- ** EC2Specification
     , EC2Specification
     , ec2Specification
     , esOfferingClass
+
+    -- ** ESInstanceDetails
+    , ESInstanceDetails
+    , eSInstanceDetails
+    , esidCurrentGeneration
+    , esidInstanceClass
+    , esidInstanceSize
+    , esidSizeFlexEligible
+    , esidRegion
+
+    -- ** ElastiCacheInstanceDetails
+    , ElastiCacheInstanceDetails
+    , elastiCacheInstanceDetails
+    , ecidCurrentGeneration
+    , ecidProductDescription
+    , ecidFamily
+    , ecidSizeFlexEligible
+    , ecidRegion
+    , ecidNodeType
 
     -- ** Expression
     , Expression
@@ -161,8 +327,17 @@ module Network.AWS.CostExplorer
     , eNot
     , eAnd
     , eOr
+    , eCostCategories
     , eDimensions
     , eTags
+
+    -- ** ForecastResult
+    , ForecastResult
+    , forecastResult
+    , frTimePeriod
+    , frMeanValue
+    , frPredictionIntervalUpperBound
+    , frPredictionIntervalLowerBound
 
     -- ** Group
     , Group
@@ -179,14 +354,22 @@ module Network.AWS.CostExplorer
     -- ** InstanceDetails
     , InstanceDetails
     , instanceDetails
+    , idESInstanceDetails
     , idRDSInstanceDetails
+    , idElastiCacheInstanceDetails
     , idEC2InstanceDetails
+    , idRedshiftInstanceDetails
 
     -- ** MetricValue
     , MetricValue
     , metricValue
     , mvAmount
     , mvUnit
+
+    -- ** ModifyRecommendationDetail
+    , ModifyRecommendationDetail
+    , modifyRecommendationDetail
+    , mrdTargetInstances
 
     -- ** RDSInstanceDetails
     , RDSInstanceDetails
@@ -199,6 +382,16 @@ module Network.AWS.CostExplorer
     , ridSizeFlexEligible
     , ridRegion
     , ridDatabaseEngine
+    , ridDatabaseEdition
+
+    -- ** RedshiftInstanceDetails
+    , RedshiftInstanceDetails
+    , redshiftInstanceDetails
+    , rCurrentGeneration
+    , rFamily
+    , rSizeFlexEligible
+    , rRegion
+    , rNodeType
 
     -- ** ReservationAggregates
     , ReservationAggregates
@@ -206,7 +399,17 @@ module Network.AWS.CostExplorer
     , raPurchasedHours
     , raTotalActualHours
     , raUtilizationPercentage
+    , raTotalAmortizedFee
+    , raUnusedUnits
     , raUnusedHours
+    , raPurchasedUnits
+    , raAmortizedUpfrontFee
+    , raAmortizedRecurringFee
+    , raUtilizationPercentageInUnits
+    , raNetRISavings
+    , raOnDemandCostOfRIHoursUsed
+    , raTotalPotentialRISavings
+    , raTotalActualUnits
 
     -- ** ReservationCoverageGroup
     , ReservationCoverageGroup
@@ -235,6 +438,7 @@ module Network.AWS.CostExplorer
     , rprdEstimatedMonthlySavingsPercentage
     , rprdRecommendedNormalizedUnitsToPurchase
     , rprdAverageUtilization
+    , rprdAccountId
     , rprdEstimatedMonthlySavingsAmount
     , rprdUpfrontCost
     , rprdMinimumNormalizedUnitsUsedPerHour
@@ -268,6 +472,16 @@ module Network.AWS.CostExplorer
     , rugAttributes
     , rugUtilization
 
+    -- ** ResourceDetails
+    , ResourceDetails
+    , resourceDetails
+    , rdEC2ResourceDetails
+
+    -- ** ResourceUtilization
+    , ResourceUtilization
+    , resourceUtilization
+    , ruEC2ResourceUtilization
+
     -- ** ResultByTime
     , ResultByTime
     , resultByTime
@@ -275,6 +489,155 @@ module Network.AWS.CostExplorer
     , rbtTimePeriod
     , rbtTotal
     , rbtEstimated
+
+    -- ** RightsizingRecommendation
+    , RightsizingRecommendation
+    , rightsizingRecommendation
+    , rrAccountId
+    , rrModifyRecommendationDetail
+    , rrCurrentInstance
+    , rrRightsizingType
+    , rrTerminateRecommendationDetail
+
+    -- ** RightsizingRecommendationConfiguration
+    , RightsizingRecommendationConfiguration
+    , rightsizingRecommendationConfiguration
+    , rrcRecommendationTarget
+    , rrcBenefitsConsidered
+
+    -- ** RightsizingRecommendationMetadata
+    , RightsizingRecommendationMetadata
+    , rightsizingRecommendationMetadata
+    , rrmRecommendationId
+    , rrmGenerationTimestamp
+    , rrmLookbackPeriodInDays
+
+    -- ** RightsizingRecommendationSummary
+    , RightsizingRecommendationSummary
+    , rightsizingRecommendationSummary
+    , rrsSavingsPercentage
+    , rrsSavingsCurrencyCode
+    , rrsTotalRecommendationCount
+    , rrsEstimatedTotalMonthlySavingsAmount
+
+    -- ** SavingsPlansAmortizedCommitment
+    , SavingsPlansAmortizedCommitment
+    , savingsPlansAmortizedCommitment
+    , spacAmortizedUpfrontCommitment
+    , spacTotalAmortizedCommitment
+    , spacAmortizedRecurringCommitment
+
+    -- ** SavingsPlansCoverage
+    , SavingsPlansCoverage
+    , savingsPlansCoverage
+    , spcTimePeriod
+    , spcCoverage
+    , spcAttributes
+
+    -- ** SavingsPlansCoverageData
+    , SavingsPlansCoverageData
+    , savingsPlansCoverageData
+    , spcdOnDemandCost
+    , spcdSpendCoveredBySavingsPlans
+    , spcdCoveragePercentage
+    , spcdTotalCost
+
+    -- ** SavingsPlansDetails
+    , SavingsPlansDetails
+    , savingsPlansDetails
+    , spdInstanceFamily
+    , spdOfferingId
+    , spdRegion
+
+    -- ** SavingsPlansPurchaseRecommendation
+    , SavingsPlansPurchaseRecommendation
+    , savingsPlansPurchaseRecommendation
+    , spprSavingsPlansPurchaseRecommendationDetails
+    , spprTermInYears
+    , spprAccountScope
+    , spprSavingsPlansType
+    , spprLookbackPeriodInDays
+    , spprPaymentOption
+    , spprSavingsPlansPurchaseRecommendationSummary
+
+    -- ** SavingsPlansPurchaseRecommendationDetail
+    , SavingsPlansPurchaseRecommendationDetail
+    , savingsPlansPurchaseRecommendationDetail
+    , spprdCurrencyCode
+    , spprdCurrentAverageHourlyOnDemandSpend
+    , spprdSavingsPlansDetails
+    , spprdCurrentMinimumHourlyOnDemandSpend
+    , spprdEstimatedROI
+    , spprdCurrentMaximumHourlyOnDemandSpend
+    , spprdEstimatedSavingsAmount
+    , spprdAccountId
+    , spprdEstimatedMonthlySavingsAmount
+    , spprdEstimatedOnDemandCost
+    , spprdEstimatedOnDemandCostWithCurrentCommitment
+    , spprdUpfrontCost
+    , spprdEstimatedSPCost
+    , spprdEstimatedSavingsPercentage
+    , spprdEstimatedAverageUtilization
+    , spprdHourlyCommitmentToPurchase
+
+    -- ** SavingsPlansPurchaseRecommendationMetadata
+    , SavingsPlansPurchaseRecommendationMetadata
+    , savingsPlansPurchaseRecommendationMetadata
+    , spprmRecommendationId
+    , spprmGenerationTimestamp
+
+    -- ** SavingsPlansPurchaseRecommendationSummary
+    , SavingsPlansPurchaseRecommendationSummary
+    , savingsPlansPurchaseRecommendationSummary
+    , spprsCurrencyCode
+    , spprsDailyCommitmentToPurchase
+    , spprsEstimatedTotalCost
+    , spprsEstimatedROI
+    , spprsEstimatedSavingsAmount
+    , spprsEstimatedMonthlySavingsAmount
+    , spprsEstimatedOnDemandCostWithCurrentCommitment
+    , spprsEstimatedSavingsPercentage
+    , spprsTotalRecommendationCount
+    , spprsCurrentOnDemandSpend
+    , spprsHourlyCommitmentToPurchase
+
+    -- ** SavingsPlansSavings
+    , SavingsPlansSavings
+    , savingsPlansSavings
+    , spsNetSavings
+    , spsOnDemandCostEquivalent
+
+    -- ** SavingsPlansUtilization
+    , SavingsPlansUtilization
+    , savingsPlansUtilization
+    , spuUnusedCommitment
+    , spuUtilizationPercentage
+    , spuTotalCommitment
+    , spuUsedCommitment
+
+    -- ** SavingsPlansUtilizationAggregates
+    , SavingsPlansUtilizationAggregates
+    , savingsPlansUtilizationAggregates
+    , spuaAmortizedCommitment
+    , spuaSavings
+    , spuaUtilization
+
+    -- ** SavingsPlansUtilizationByTime
+    , SavingsPlansUtilizationByTime
+    , savingsPlansUtilizationByTime
+    , spubtAmortizedCommitment
+    , spubtSavings
+    , spubtTimePeriod
+    , spubtUtilization
+
+    -- ** SavingsPlansUtilizationDetail
+    , SavingsPlansUtilizationDetail
+    , savingsPlansUtilizationDetail
+    , spudAmortizedCommitment
+    , spudSavings
+    , spudAttributes
+    , spudUtilization
+    , spudSavingsPlanARN
 
     -- ** ServiceSpecification
     , ServiceSpecification
@@ -286,6 +649,23 @@ module Network.AWS.CostExplorer
     , tagValues
     , tvValues
     , tvKey
+    , tvMatchOptions
+
+    -- ** TargetInstance
+    , TargetInstance
+    , targetInstance
+    , tiCurrencyCode
+    , tiResourceDetails
+    , tiDefaultTargetInstance
+    , tiEstimatedMonthlyCost
+    , tiEstimatedMonthlySavings
+    , tiExpectedResourceUtilization
+
+    -- ** TerminateRecommendationDetail
+    , TerminateRecommendationDetail
+    , terminateRecommendationDetail
+    , trdCurrencyCode
+    , trdEstimatedMonthlySavings
 
     -- ** UtilizationByTime
     , UtilizationByTime
@@ -295,13 +675,26 @@ module Network.AWS.CostExplorer
     , ubtTotal
     ) where
 
+import Network.AWS.CostExplorer.CreateCostCategoryDefinition
+import Network.AWS.CostExplorer.DeleteCostCategoryDefinition
+import Network.AWS.CostExplorer.DescribeCostCategoryDefinition
 import Network.AWS.CostExplorer.GetCostAndUsage
+import Network.AWS.CostExplorer.GetCostAndUsageWithResources
+import Network.AWS.CostExplorer.GetCostForecast
 import Network.AWS.CostExplorer.GetDimensionValues
 import Network.AWS.CostExplorer.GetReservationCoverage
 import Network.AWS.CostExplorer.GetReservationPurchaseRecommendation
 import Network.AWS.CostExplorer.GetReservationUtilization
+import Network.AWS.CostExplorer.GetRightsizingRecommendation
+import Network.AWS.CostExplorer.GetSavingsPlansCoverage
+import Network.AWS.CostExplorer.GetSavingsPlansPurchaseRecommendation
+import Network.AWS.CostExplorer.GetSavingsPlansUtilization
+import Network.AWS.CostExplorer.GetSavingsPlansUtilizationDetails
 import Network.AWS.CostExplorer.GetTags
+import Network.AWS.CostExplorer.GetUsageForecast
+import Network.AWS.CostExplorer.ListCostCategoryDefinitions
 import Network.AWS.CostExplorer.Types
+import Network.AWS.CostExplorer.UpdateCostCategoryDefinition
 import Network.AWS.CostExplorer.Waiters
 
 {- $errors

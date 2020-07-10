@@ -46,23 +46,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getContextKeysForCustomPolicy' smart constructor.
-newtype GetContextKeysForCustomPolicy = GetContextKeysForCustomPolicy'
-  { _gckfcpPolicyInputList :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetContextKeysForCustomPolicy = GetContextKeysForCustomPolicy'{_gckfcpPolicyInputList
+                                                                       ::
+                                                                       [Text]}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetContextKeysForCustomPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gckfcpPolicyInputList' - A list of policies for which you want the list of context keys referenced in those policies. Each document is specified as a string containing the complete, valid JSON text of an IAM policy. The <http://wikipedia.org/wiki/regex regex pattern> used to validate this parameter is a string of characters consisting of the following:     * Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range     * The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)     * The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+-- * 'gckfcpPolicyInputList' - A list of policies for which you want the list of context keys referenced in those policies. Each document is specified as a string containing the complete, valid JSON text of an IAM policy. The <http://wikipedia.org/wiki/regex regex pattern> used to validate this parameter is a string of characters consisting of the following:     * Any printable ASCII character ranging from the space character (@\u0020@ ) through the end of the ASCII character range     * The printable characters in the Basic Latin and Latin-1 Supplement character set (through @\u00FF@ )     * The special characters tab (@\u0009@ ), line feed (@\u000A@ ), and carriage return (@\u000D@ )
 getContextKeysForCustomPolicy
     :: GetContextKeysForCustomPolicy
-getContextKeysForCustomPolicy =
-  GetContextKeysForCustomPolicy' {_gckfcpPolicyInputList = mempty}
+getContextKeysForCustomPolicy
+  = GetContextKeysForCustomPolicy'{_gckfcpPolicyInputList
+                                     = mempty}
 
-
--- | A list of policies for which you want the list of context keys referenced in those policies. Each document is specified as a string containing the complete, valid JSON text of an IAM policy. The <http://wikipedia.org/wiki/regex regex pattern> used to validate this parameter is a string of characters consisting of the following:     * Any printable ASCII character ranging from the space character (\u0020) through the end of the ASCII character range     * The printable characters in the Basic Latin and Latin-1 Supplement character set (through \u00FF)     * The special characters tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+-- | A list of policies for which you want the list of context keys referenced in those policies. Each document is specified as a string containing the complete, valid JSON text of an IAM policy. The <http://wikipedia.org/wiki/regex regex pattern> used to validate this parameter is a string of characters consisting of the following:     * Any printable ASCII character ranging from the space character (@\u0020@ ) through the end of the ASCII character range     * The printable characters in the Basic Latin and Latin-1 Supplement character set (through @\u00FF@ )     * The special characters tab (@\u0009@ ), line feed (@\u000A@ ), and carriage return (@\u000D@ )
 gckfcpPolicyInputList :: Lens' GetContextKeysForCustomPolicy [Text]
 gckfcpPolicyInputList = lens _gckfcpPolicyInputList (\ s a -> s{_gckfcpPolicyInputList = a}) . _Coerce
 

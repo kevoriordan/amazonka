@@ -54,12 +54,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateResource' smart constructor.
-data UpdateResource = UpdateResource'
-  { _urPatchOperations :: !(Maybe [PatchOperation])
-  , _urRestAPIId       :: !Text
-  , _urResourceId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateResource = UpdateResource'{_urPatchOperations
+                                      :: !(Maybe [PatchOperation]),
+                                      _urRestAPIId :: !Text,
+                                      _urResourceId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateResource' with the minimum fields required to make a request.
 --
@@ -74,13 +73,10 @@ updateResource
     :: Text -- ^ 'urRestAPIId'
     -> Text -- ^ 'urResourceId'
     -> UpdateResource
-updateResource pRestAPIId_ pResourceId_ =
-  UpdateResource'
-    { _urPatchOperations = Nothing
-    , _urRestAPIId = pRestAPIId_
-    , _urResourceId = pResourceId_
-    }
-
+updateResource pRestAPIId_ pResourceId_
+  = UpdateResource'{_urPatchOperations = Nothing,
+                    _urRestAPIId = pRestAPIId_,
+                    _urResourceId = pResourceId_}
 
 -- | A list of update operations to be applied to the specified resource and in the order specified in this list.
 urPatchOperations :: Lens' UpdateResource [PatchOperation]

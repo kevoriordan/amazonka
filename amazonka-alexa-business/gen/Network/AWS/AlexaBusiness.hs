@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Alexa for Business makes it easy for you to use Alexa in your organization. Alexa for Business gives you the tools you need for managing Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can make also these available as private skills for your organization. Alexa for Business makes it easy to voice-enable your products and services, providing context-aware voice experiences for your customers.
+-- Alexa for Business helps you use Alexa in your organization. Alexa for Business provides you with the tools to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can also make these available as private skills for your organization. Alexa for Business makes it efficient to voice-enable your products and services, thus providing context-aware voice experiences for your customers. Device makers building with the Alexa Voice Service (AVS) can create fully integrated solutions, register their products with Alexa for Business, and manage them as shared devices in their organization. 
 --
 --
 module Network.AWS.AlexaBusiness
@@ -22,20 +22,47 @@ module Network.AWS.AlexaBusiness
     -- * Errors
     -- $errors
 
-    -- ** InvalidUserStatusException
-    , _InvalidUserStatusException
+    -- ** ResourceAssociatedException
+    , _ResourceAssociatedException
 
-    -- ** NotFoundException
-    , _NotFoundException
+    -- ** SkillNotLinkedException
+    , _SkillNotLinkedException
+
+    -- ** InvalidSecretsManagerResourceException
+    , _InvalidSecretsManagerResourceException
 
     -- ** NameInUseException
     , _NameInUseException
 
-    -- ** AlreadyExistsException
-    , _AlreadyExistsException
+    -- ** InvalidServiceLinkedRoleStateException
+    , _InvalidServiceLinkedRoleStateException
+
+    -- ** InvalidDeviceException
+    , _InvalidDeviceException
+
+    -- ** UnauthorizedException
+    , _UnauthorizedException
+
+    -- ** InvalidUserStatusException
+    , _InvalidUserStatusException
+
+    -- ** InvalidCertificateAuthorityException
+    , _InvalidCertificateAuthorityException
+
+    -- ** DeviceNotRegisteredException
+    , _DeviceNotRegisteredException
+
+    -- ** ConcurrentModificationException
+    , _ConcurrentModificationException
+
+    -- ** NotFoundException
+    , _NotFoundException
 
     -- ** LimitExceededException
     , _LimitExceededException
+
+    -- ** AlreadyExistsException
+    , _AlreadyExistsException
 
     -- ** ResourceInUseException
     , _ResourceInUseException
@@ -49,151 +76,301 @@ module Network.AWS.AlexaBusiness
     -- ** SearchUsers (Paginated)
     , module Network.AWS.AlexaBusiness.SearchUsers
 
-    -- ** AssociateSkillGroupWithRoom
+    -- ** PutConferencePreference 
+    , module Network.AWS.AlexaBusiness.PutConferencePreference
+
+    -- ** UpdateNetworkProfile 
+    , module Network.AWS.AlexaBusiness.UpdateNetworkProfile
+
+    -- ** DeleteNetworkProfile 
+    , module Network.AWS.AlexaBusiness.DeleteNetworkProfile
+
+    -- ** UpdateBusinessReportSchedule 
+    , module Network.AWS.AlexaBusiness.UpdateBusinessReportSchedule
+
+    -- ** DeleteBusinessReportSchedule 
+    , module Network.AWS.AlexaBusiness.DeleteBusinessReportSchedule
+
+    -- ** AssociateSkillGroupWithRoom 
     , module Network.AWS.AlexaBusiness.AssociateSkillGroupWithRoom
 
-    -- ** DeleteProfile
+    -- ** ListSmartHomeAppliances (Paginated)
+    , module Network.AWS.AlexaBusiness.ListSmartHomeAppliances
+
+    -- ** DeleteProfile 
     , module Network.AWS.AlexaBusiness.DeleteProfile
 
-    -- ** UpdateProfile
+    -- ** UpdateProfile 
     , module Network.AWS.AlexaBusiness.UpdateProfile
 
     -- ** SearchRooms (Paginated)
     , module Network.AWS.AlexaBusiness.SearchRooms
 
-    -- ** DisassociateContactFromAddressBook
+    -- ** AssociateSkillWithUsers 
+    , module Network.AWS.AlexaBusiness.AssociateSkillWithUsers
+
+    -- ** RegisterAVSDevice 
+    , module Network.AWS.AlexaBusiness.RegisterAVSDevice
+
+    -- ** ForgetSmartHomeAppliances 
+    , module Network.AWS.AlexaBusiness.ForgetSmartHomeAppliances
+
+    -- ** PutInvitationConfiguration 
+    , module Network.AWS.AlexaBusiness.PutInvitationConfiguration
+
+    -- ** DisassociateContactFromAddressBook 
     , module Network.AWS.AlexaBusiness.DisassociateContactFromAddressBook
 
-    -- ** CreateAddressBook
+    -- ** GetNetworkProfile 
+    , module Network.AWS.AlexaBusiness.GetNetworkProfile
+
+    -- ** GetConferencePreference 
+    , module Network.AWS.AlexaBusiness.GetConferencePreference
+
+    -- ** DisassociateSkillFromSkillGroup 
+    , module Network.AWS.AlexaBusiness.DisassociateSkillFromSkillGroup
+
+    -- ** CreateAddressBook 
     , module Network.AWS.AlexaBusiness.CreateAddressBook
 
-    -- ** DeleteAddressBook
+    -- ** DeleteAddressBook 
     , module Network.AWS.AlexaBusiness.DeleteAddressBook
 
-    -- ** UpdateAddressBook
+    -- ** UpdateAddressBook 
     , module Network.AWS.AlexaBusiness.UpdateAddressBook
 
-    -- ** UpdateRoom
+    -- ** DeleteGatewayGroup 
+    , module Network.AWS.AlexaBusiness.DeleteGatewayGroup
+
+    -- ** UpdateGatewayGroup 
+    , module Network.AWS.AlexaBusiness.UpdateGatewayGroup
+
+    -- ** UpdateRoom 
     , module Network.AWS.AlexaBusiness.UpdateRoom
 
-    -- ** DeleteRoom
+    -- ** DeleteRoom 
     , module Network.AWS.AlexaBusiness.DeleteRoom
 
-    -- ** GetDevice
+    -- ** GetDevice 
     , module Network.AWS.AlexaBusiness.GetDevice
 
-    -- ** GetContact
+    -- ** GetGateway 
+    , module Network.AWS.AlexaBusiness.GetGateway
+
+    -- ** ListSkillsStoreSkillsByCategory (Paginated)
+    , module Network.AWS.AlexaBusiness.ListSkillsStoreSkillsByCategory
+
+    -- ** DeleteConferenceProvider 
+    , module Network.AWS.AlexaBusiness.DeleteConferenceProvider
+
+    -- ** UpdateConferenceProvider 
+    , module Network.AWS.AlexaBusiness.UpdateConferenceProvider
+
+    -- ** GetContact 
     , module Network.AWS.AlexaBusiness.GetContact
 
-    -- ** AssociateDeviceWithRoom
+    -- ** ApproveSkill 
+    , module Network.AWS.AlexaBusiness.ApproveSkill
+
+    -- ** CreateNetworkProfile 
+    , module Network.AWS.AlexaBusiness.CreateNetworkProfile
+
+    -- ** AssociateDeviceWithRoom 
     , module Network.AWS.AlexaBusiness.AssociateDeviceWithRoom
 
-    -- ** GetRoomSkillParameter
+    -- ** GetRoomSkillParameter 
     , module Network.AWS.AlexaBusiness.GetRoomSkillParameter
 
-    -- ** DeleteContact
+    -- ** UpdateGateway 
+    , module Network.AWS.AlexaBusiness.UpdateGateway
+
+    -- ** CreateBusinessReportSchedule 
+    , module Network.AWS.AlexaBusiness.CreateBusinessReportSchedule
+
+    -- ** DeleteContact 
     , module Network.AWS.AlexaBusiness.DeleteContact
 
-    -- ** UpdateContact
+    -- ** UpdateContact 
     , module Network.AWS.AlexaBusiness.UpdateContact
 
-    -- ** GetAddressBook
+    -- ** GetAddressBook 
     , module Network.AWS.AlexaBusiness.GetAddressBook
 
-    -- ** CreateContact
+    -- ** ListBusinessReportSchedules (Paginated)
+    , module Network.AWS.AlexaBusiness.ListBusinessReportSchedules
+
+    -- ** DeleteDeviceUsageData 
+    , module Network.AWS.AlexaBusiness.DeleteDeviceUsageData
+
+    -- ** CreateContact 
     , module Network.AWS.AlexaBusiness.CreateContact
 
-    -- ** CreateProfile
+    -- ** CreateProfile 
     , module Network.AWS.AlexaBusiness.CreateProfile
 
-    -- ** DeleteSkillGroup
+    -- ** DeleteSkillGroup 
     , module Network.AWS.AlexaBusiness.DeleteSkillGroup
 
-    -- ** UpdateSkillGroup
+    -- ** UpdateSkillGroup 
     , module Network.AWS.AlexaBusiness.UpdateSkillGroup
 
-    -- ** StartDeviceSync
+    -- ** StartDeviceSync 
     , module Network.AWS.AlexaBusiness.StartDeviceSync
 
-    -- ** SearchAddressBooks
+    -- ** GetInvitationConfiguration 
+    , module Network.AWS.AlexaBusiness.GetInvitationConfiguration
+
+    -- ** DisassociateSkillFromUsers 
+    , module Network.AWS.AlexaBusiness.DisassociateSkillFromUsers
+
+    -- ** SearchAddressBooks 
     , module Network.AWS.AlexaBusiness.SearchAddressBooks
 
-    -- ** CreateSkillGroup
+    -- ** CreateSkillGroup 
     , module Network.AWS.AlexaBusiness.CreateSkillGroup
 
-    -- ** GetProfile
+    -- ** GetProfile 
     , module Network.AWS.AlexaBusiness.GetProfile
 
-    -- ** DisassociateSkillGroupFromRoom
+    -- ** DisassociateSkillGroupFromRoom 
     , module Network.AWS.AlexaBusiness.DisassociateSkillGroupFromRoom
 
-    -- ** SendInvitation
+    -- ** SendInvitation 
     , module Network.AWS.AlexaBusiness.SendInvitation
 
-    -- ** ListDeviceEvents
+    -- ** ListDeviceEvents (Paginated)
     , module Network.AWS.AlexaBusiness.ListDeviceEvents
 
-    -- ** CreateUser
+    -- ** CreateUser 
     , module Network.AWS.AlexaBusiness.CreateUser
 
     -- ** SearchDevices (Paginated)
     , module Network.AWS.AlexaBusiness.SearchDevices
 
-    -- ** SearchContacts
+    -- ** SearchContacts 
     , module Network.AWS.AlexaBusiness.SearchContacts
 
-    -- ** DeleteUser
+    -- ** SendAnnouncement 
+    , module Network.AWS.AlexaBusiness.SendAnnouncement
+
+    -- ** DeleteUser 
     , module Network.AWS.AlexaBusiness.DeleteUser
 
-    -- ** GetSkillGroup
+    -- ** SearchNetworkProfiles 
+    , module Network.AWS.AlexaBusiness.SearchNetworkProfiles
+
+    -- ** GetSkillGroup 
     , module Network.AWS.AlexaBusiness.GetSkillGroup
 
     -- ** ListSkills (Paginated)
     , module Network.AWS.AlexaBusiness.ListSkills
 
-    -- ** TagResource
+    -- ** TagResource 
     , module Network.AWS.AlexaBusiness.TagResource
 
-    -- ** DisassociateDeviceFromRoom
+    -- ** DisassociateDeviceFromRoom 
     , module Network.AWS.AlexaBusiness.DisassociateDeviceFromRoom
 
     -- ** SearchSkillGroups (Paginated)
     , module Network.AWS.AlexaBusiness.SearchSkillGroups
 
+    -- ** PutSkillAuthorization 
+    , module Network.AWS.AlexaBusiness.PutSkillAuthorization
+
     -- ** ListTags (Paginated)
     , module Network.AWS.AlexaBusiness.ListTags
 
-    -- ** UntagResource
+    -- ** DeleteSkillAuthorization 
+    , module Network.AWS.AlexaBusiness.DeleteSkillAuthorization
+
+    -- ** AssociateDeviceWithNetworkProfile 
+    , module Network.AWS.AlexaBusiness.AssociateDeviceWithNetworkProfile
+
+    -- ** UntagResource 
     , module Network.AWS.AlexaBusiness.UntagResource
 
-    -- ** ResolveRoom
+    -- ** CreateConferenceProvider 
+    , module Network.AWS.AlexaBusiness.CreateConferenceProvider
+
+    -- ** ResolveRoom 
     , module Network.AWS.AlexaBusiness.ResolveRoom
 
-    -- ** CreateRoom
+    -- ** CreateGatewayGroup 
+    , module Network.AWS.AlexaBusiness.CreateGatewayGroup
+
+    -- ** CreateRoom 
     , module Network.AWS.AlexaBusiness.CreateRoom
 
-    -- ** DeleteRoomSkillParameter
+    -- ** DeleteRoomSkillParameter 
     , module Network.AWS.AlexaBusiness.DeleteRoomSkillParameter
 
-    -- ** PutRoomSkillParameter
+    -- ** ListGatewayGroups 
+    , module Network.AWS.AlexaBusiness.ListGatewayGroups
+
+    -- ** PutRoomSkillParameter 
     , module Network.AWS.AlexaBusiness.PutRoomSkillParameter
 
     -- ** SearchProfiles (Paginated)
     , module Network.AWS.AlexaBusiness.SearchProfiles
 
-    -- ** RevokeInvitation
+    -- ** RejectSkill 
+    , module Network.AWS.AlexaBusiness.RejectSkill
+
+    -- ** ListConferenceProviders (Paginated)
+    , module Network.AWS.AlexaBusiness.ListConferenceProviders
+
+    -- ** RevokeInvitation 
     , module Network.AWS.AlexaBusiness.RevokeInvitation
 
-    -- ** UpdateDevice
+    -- ** ListGateways 
+    , module Network.AWS.AlexaBusiness.ListGateways
+
+    -- ** DeleteDevice 
+    , module Network.AWS.AlexaBusiness.DeleteDevice
+
+    -- ** UpdateDevice 
     , module Network.AWS.AlexaBusiness.UpdateDevice
 
-    -- ** GetRoom
+    -- ** AssociateSkillWithSkillGroup 
+    , module Network.AWS.AlexaBusiness.AssociateSkillWithSkillGroup
+
+    -- ** GetConferenceProvider 
+    , module Network.AWS.AlexaBusiness.GetConferenceProvider
+
+    -- ** GetRoom 
     , module Network.AWS.AlexaBusiness.GetRoom
 
-    -- ** AssociateContactWithAddressBook
+    -- ** GetGatewayGroup 
+    , module Network.AWS.AlexaBusiness.GetGatewayGroup
+
+    -- ** ListSkillsStoreCategories (Paginated)
+    , module Network.AWS.AlexaBusiness.ListSkillsStoreCategories
+
+    -- ** StartSmartHomeApplianceDiscovery 
+    , module Network.AWS.AlexaBusiness.StartSmartHomeApplianceDiscovery
+
+    -- ** AssociateContactWithAddressBook 
     , module Network.AWS.AlexaBusiness.AssociateContactWithAddressBook
 
     -- * Types
+
+    -- ** BusinessReportFailureCode
+    , BusinessReportFailureCode (..)
+
+    -- ** BusinessReportFormat
+    , BusinessReportFormat (..)
+
+    -- ** BusinessReportInterval
+    , BusinessReportInterval (..)
+
+    -- ** BusinessReportStatus
+    , BusinessReportStatus (..)
+
+    -- ** CommsProtocol
+    , CommsProtocol (..)
+
+    -- ** ConferenceProviderType
+    , ConferenceProviderType (..)
 
     -- ** ConnectionStatus
     , ConnectionStatus (..)
@@ -207,14 +384,50 @@ module Network.AWS.AlexaBusiness
     -- ** DeviceStatusDetailCode
     , DeviceStatusDetailCode (..)
 
+    -- ** DeviceUsageType
+    , DeviceUsageType (..)
+
     -- ** DistanceUnit
     , DistanceUnit (..)
+
+    -- ** EnablementType
+    , EnablementType (..)
+
+    -- ** EnablementTypeFilter
+    , EnablementTypeFilter (..)
+
+    -- ** EndOfMeetingReminderType
+    , EndOfMeetingReminderType (..)
 
     -- ** EnrollmentStatus
     , EnrollmentStatus (..)
 
     -- ** Feature
     , Feature (..)
+
+    -- ** Locale
+    , Locale (..)
+
+    -- ** NetworkEapMethod
+    , NetworkEapMethod (..)
+
+    -- ** NetworkSecurityType
+    , NetworkSecurityType (..)
+
+    -- ** PhoneNumberType
+    , PhoneNumberType (..)
+
+    -- ** RequirePin
+    , RequirePin (..)
+
+    -- ** SipType
+    , SipType (..)
+
+    -- ** SkillType
+    , SkillType (..)
+
+    -- ** SkillTypeFilter
+    , SkillTypeFilter (..)
 
     -- ** SortValue
     , SortValue (..)
@@ -239,12 +452,78 @@ module Network.AWS.AlexaBusiness
     , abdName
     , abdDescription
 
+    -- ** Audio
+    , Audio
+    , audio
+    , aLocale
+    , aLocation
+
+    -- ** BusinessReport
+    , BusinessReport
+    , businessReport
+    , brStatus
+    , brFailureCode
+    , brDeliveryTime
+    , brDownloadURL
+    , brS3Location
+
+    -- ** BusinessReportContentRange
+    , BusinessReportContentRange
+    , businessReportContentRange
+    , brcrInterval
+
+    -- ** BusinessReportRecurrence
+    , BusinessReportRecurrence
+    , businessReportRecurrence
+    , brrStartDate
+
+    -- ** BusinessReportS3Location
+    , BusinessReportS3Location
+    , businessReportS3Location
+    , brslPath
+    , brslBucketName
+
+    -- ** BusinessReportSchedule
+    , BusinessReportSchedule
+    , businessReportSchedule
+    , brsS3KeyPrefix
+    , brsLastBusinessReport
+    , brsFormat
+    , brsRecurrence
+    , brsScheduleName
+    , brsScheduleARN
+    , brsContentRange
+    , brsS3BucketName
+
+    -- ** Category
+    , Category
+    , category
+    , cCategoryName
+    , cCategoryId
+
+    -- ** ConferencePreference
+    , ConferencePreference
+    , conferencePreference
+    , cpDefaultConferenceProviderARN
+
+    -- ** ConferenceProvider
+    , ConferenceProvider
+    , conferenceProvider
+    , cpMeetingSetting
+    , cpARN
+    , cpPSTNDialIn
+    , cpName
+    , cpType
+    , cpIPDialIn
+
     -- ** Contact
     , Contact
     , contact
     , cLastName
     , cContactARN
+    , cPhoneNumbers
     , cPhoneNumber
+    , cSipAddresses
     , cFirstName
     , cDisplayName
 
@@ -253,9 +532,53 @@ module Network.AWS.AlexaBusiness
     , contactData
     , cdLastName
     , cdContactARN
+    , cdPhoneNumbers
     , cdPhoneNumber
+    , cdSipAddresses
     , cdFirstName
     , cdDisplayName
+
+    -- ** Content
+    , Content
+    , content
+    , cAudioList
+    , cTextList
+    , cSsmlList
+
+    -- ** CreateEndOfMeetingReminder
+    , CreateEndOfMeetingReminder
+    , createEndOfMeetingReminder
+    , ceomrReminderAtMinutes
+    , ceomrReminderType
+    , ceomrEnabled
+
+    -- ** CreateInstantBooking
+    , CreateInstantBooking
+    , createInstantBooking
+    , cibDurationInMinutes
+    , cibEnabled
+
+    -- ** CreateMeetingRoomConfiguration
+    , CreateMeetingRoomConfiguration
+    , createMeetingRoomConfiguration
+    , cmrcInstantBooking
+    , cmrcEndOfMeetingReminder
+    , cmrcRequireCheckIn
+    , cmrcRoomUtilizationMetricsEnabled
+
+    -- ** CreateRequireCheckIn
+    , CreateRequireCheckIn
+    , createRequireCheckIn
+    , crciReleaseAfterMinutes
+    , crciEnabled
+
+    -- ** DeveloperInfo
+    , DeveloperInfo
+    , developerInfo
+    , diEmail
+    , diURL
+    , diPrivacyPolicy
+    , diDeveloperName
 
     -- ** Device
     , Device
@@ -268,14 +591,18 @@ module Network.AWS.AlexaBusiness
     , dRoomARN
     , dSoftwareVersion
     , dDeviceType
+    , dNetworkProfileInfo
     , dDeviceSerialNumber
 
     -- ** DeviceData
     , DeviceData
     , deviceData
     , ddDeviceStatus
+    , ddNetworkProfileName
     , ddDeviceStatusInfo
+    , ddCreatedTime
     , ddDeviceARN
+    , ddNetworkProfileARN
     , ddMACAddress
     , ddDeviceName
     , ddRoomARN
@@ -291,16 +618,32 @@ module Network.AWS.AlexaBusiness
     , deType
     , deTimestamp
 
+    -- ** DeviceNetworkProfileInfo
+    , DeviceNetworkProfileInfo
+    , deviceNetworkProfileInfo
+    , dnpiCertificateARN
+    , dnpiNetworkProfileARN
+    , dnpiCertificateExpirationTime
+
     -- ** DeviceStatusDetail
     , DeviceStatusDetail
     , deviceStatusDetail
+    , dsdFeature
     , dsdCode
 
     -- ** DeviceStatusInfo
     , DeviceStatusInfo
     , deviceStatusInfo
+    , dsiConnectionStatusUpdatedTime
     , dsiDeviceStatusDetails
     , dsiConnectionStatus
+
+    -- ** EndOfMeetingReminder
+    , EndOfMeetingReminder
+    , endOfMeetingReminder
+    , eomrEnabled
+    , eomrReminderAtMinutes
+    , eomrReminderType
 
     -- ** Filter
     , Filter
@@ -308,30 +651,138 @@ module Network.AWS.AlexaBusiness
     , fKey
     , fValues
 
+    -- ** Gateway
+    , Gateway
+    , gateway
+    , gARN
+    , gName
+    , gGatewayGroupARN
+    , gSoftwareVersion
+    , gDescription
+
+    -- ** GatewayGroup
+    , GatewayGroup
+    , gatewayGroup
+    , ggARN
+    , ggName
+    , ggDescription
+
+    -- ** GatewayGroupSummary
+    , GatewayGroupSummary
+    , gatewayGroupSummary
+    , ggsARN
+    , ggsName
+    , ggsDescription
+
+    -- ** GatewaySummary
+    , GatewaySummary
+    , gatewaySummary
+    , gsARN
+    , gsName
+    , gsGatewayGroupARN
+    , gsSoftwareVersion
+    , gsDescription
+
+    -- ** IPDialIn
+    , IPDialIn
+    , ipDialIn
+    , idiEndpoint
+    , idiCommsProtocol
+
+    -- ** InstantBooking
+    , InstantBooking
+    , instantBooking
+    , ibEnabled
+    , ibDurationInMinutes
+
+    -- ** MeetingRoomConfiguration
+    , MeetingRoomConfiguration
+    , meetingRoomConfiguration
+    , mrcInstantBooking
+    , mrcEndOfMeetingReminder
+    , mrcRequireCheckIn
+    , mrcRoomUtilizationMetricsEnabled
+
+    -- ** MeetingSetting
+    , MeetingSetting
+    , meetingSetting
+    , msRequirePin
+
+    -- ** NetworkProfile
+    , NetworkProfile
+    , networkProfile
+    , npNetworkProfileName
+    , npSsid
+    , npNetworkProfileARN
+    , npSecurityType
+    , npCurrentPassword
+    , npNextPassword
+    , npEapMethod
+    , npDescription
+    , npTrustAnchors
+    , npCertificateAuthorityARN
+
+    -- ** NetworkProfileData
+    , NetworkProfileData
+    , networkProfileData
+    , npdNetworkProfileName
+    , npdSsid
+    , npdNetworkProfileARN
+    , npdSecurityType
+    , npdEapMethod
+    , npdDescription
+    , npdCertificateAuthorityARN
+
+    -- ** PSTNDialIn
+    , PSTNDialIn
+    , pSTNDialIn
+    , pstndiCountryCode
+    , pstndiPhoneNumber
+    , pstndiOneClickIdDelay
+    , pstndiOneClickPinDelay
+
+    -- ** PhoneNumber
+    , PhoneNumber
+    , phoneNumber
+    , pnNumber
+    , pnType
+
     -- ** Profile
     , Profile
     , profile
     , pSetupModeDisabled
     , pPSTNEnabled
+    , pAddressBookARN
     , pDistanceUnit
+    , pLocale
     , pAddress
     , pProfileARN
     , pWakeWord
+    , pMeetingRoomConfiguration
     , pProfileName
     , pTemperatureUnit
     , pTimezone
     , pMaxVolumeLimit
+    , pIsDefault
 
     -- ** ProfileData
     , ProfileData
     , profileData
     , pdDistanceUnit
+    , pdLocale
     , pdAddress
     , pdProfileARN
     , pdWakeWord
     , pdProfileName
     , pdTemperatureUnit
     , pdTimezone
+    , pdIsDefault
+
+    -- ** RequireCheckIn
+    , RequireCheckIn
+    , requireCheckIn
+    , rciEnabled
+    , rciReleaseAfterMinutes
 
     -- ** Room
     , Room
@@ -358,6 +809,26 @@ module Network.AWS.AlexaBusiness
     , rspParameterKey
     , rspParameterValue
 
+    -- ** SipAddress
+    , SipAddress
+    , sipAddress
+    , saURI
+    , saType
+
+    -- ** SkillDetails
+    , SkillDetails
+    , skillDetails
+    , sdSkillTypes
+    , sdProductDescription
+    , sdInvocationPhrase
+    , sdDeveloperInfo
+    , sdEndUserLicenseAgreement
+    , sdGenericKeywords
+    , sdReviews
+    , sdReleaseDate
+    , sdNewInThisVersionBulletPoints
+    , sdBulletPoints
+
     -- ** SkillGroup
     , SkillGroup
     , skillGroup
@@ -377,7 +848,27 @@ module Network.AWS.AlexaBusiness
     , skillSummary
     , ssSkillId
     , ssSupportsLinking
+    , ssSkillType
+    , ssEnablementType
     , ssSkillName
+
+    -- ** SkillsStoreSkill
+    , SkillsStoreSkill
+    , skillsStoreSkill
+    , sssSkillId
+    , sssSupportsLinking
+    , sssSampleUtterances
+    , sssShortDescription
+    , sssIconURL
+    , sssSkillDetails
+    , sssSkillName
+
+    -- ** SmartHomeAppliance
+    , SmartHomeAppliance
+    , smartHomeAppliance
+    , shaFriendlyName
+    , shaManufacturerName
+    , shaDescription
 
     -- ** Sort
     , Sort
@@ -385,11 +876,50 @@ module Network.AWS.AlexaBusiness
     , sKey
     , sValue
 
+    -- ** Ssml
+    , Ssml
+    , ssml
+    , ssmLocale
+    , ssmValue
+
     -- ** Tag
     , Tag
     , tag
-    , tagValue
     , tagKey
+    , tagValue
+
+    -- ** TextMessage
+    , TextMessage
+    , textMessage
+    , tmLocale
+    , tmValue
+
+    -- ** UpdateEndOfMeetingReminder
+    , UpdateEndOfMeetingReminder
+    , updateEndOfMeetingReminder
+    , ueomrEnabled
+    , ueomrReminderAtMinutes
+    , ueomrReminderType
+
+    -- ** UpdateInstantBooking
+    , UpdateInstantBooking
+    , updateInstantBooking
+    , uibEnabled
+    , uibDurationInMinutes
+
+    -- ** UpdateMeetingRoomConfiguration
+    , UpdateMeetingRoomConfiguration
+    , updateMeetingRoomConfiguration
+    , umrcInstantBooking
+    , umrcEndOfMeetingReminder
+    , umrcRequireCheckIn
+    , umrcRoomUtilizationMetricsEnabled
+
+    -- ** UpdateRequireCheckIn
+    , UpdateRequireCheckIn
+    , updateRequireCheckIn
+    , urciEnabled
+    , urciReleaseAfterMinutes
 
     -- ** UserData
     , UserData
@@ -402,53 +932,97 @@ module Network.AWS.AlexaBusiness
     , udEnrollmentStatus
     ) where
 
+import Network.AWS.AlexaBusiness.ApproveSkill
 import Network.AWS.AlexaBusiness.AssociateContactWithAddressBook
+import Network.AWS.AlexaBusiness.AssociateDeviceWithNetworkProfile
 import Network.AWS.AlexaBusiness.AssociateDeviceWithRoom
 import Network.AWS.AlexaBusiness.AssociateSkillGroupWithRoom
+import Network.AWS.AlexaBusiness.AssociateSkillWithSkillGroup
+import Network.AWS.AlexaBusiness.AssociateSkillWithUsers
 import Network.AWS.AlexaBusiness.CreateAddressBook
+import Network.AWS.AlexaBusiness.CreateBusinessReportSchedule
+import Network.AWS.AlexaBusiness.CreateConferenceProvider
 import Network.AWS.AlexaBusiness.CreateContact
+import Network.AWS.AlexaBusiness.CreateGatewayGroup
+import Network.AWS.AlexaBusiness.CreateNetworkProfile
 import Network.AWS.AlexaBusiness.CreateProfile
 import Network.AWS.AlexaBusiness.CreateRoom
 import Network.AWS.AlexaBusiness.CreateSkillGroup
 import Network.AWS.AlexaBusiness.CreateUser
 import Network.AWS.AlexaBusiness.DeleteAddressBook
+import Network.AWS.AlexaBusiness.DeleteBusinessReportSchedule
+import Network.AWS.AlexaBusiness.DeleteConferenceProvider
 import Network.AWS.AlexaBusiness.DeleteContact
+import Network.AWS.AlexaBusiness.DeleteDevice
+import Network.AWS.AlexaBusiness.DeleteDeviceUsageData
+import Network.AWS.AlexaBusiness.DeleteGatewayGroup
+import Network.AWS.AlexaBusiness.DeleteNetworkProfile
 import Network.AWS.AlexaBusiness.DeleteProfile
 import Network.AWS.AlexaBusiness.DeleteRoom
 import Network.AWS.AlexaBusiness.DeleteRoomSkillParameter
+import Network.AWS.AlexaBusiness.DeleteSkillAuthorization
 import Network.AWS.AlexaBusiness.DeleteSkillGroup
 import Network.AWS.AlexaBusiness.DeleteUser
 import Network.AWS.AlexaBusiness.DisassociateContactFromAddressBook
 import Network.AWS.AlexaBusiness.DisassociateDeviceFromRoom
+import Network.AWS.AlexaBusiness.DisassociateSkillFromSkillGroup
+import Network.AWS.AlexaBusiness.DisassociateSkillFromUsers
 import Network.AWS.AlexaBusiness.DisassociateSkillGroupFromRoom
+import Network.AWS.AlexaBusiness.ForgetSmartHomeAppliances
 import Network.AWS.AlexaBusiness.GetAddressBook
+import Network.AWS.AlexaBusiness.GetConferencePreference
+import Network.AWS.AlexaBusiness.GetConferenceProvider
 import Network.AWS.AlexaBusiness.GetContact
 import Network.AWS.AlexaBusiness.GetDevice
+import Network.AWS.AlexaBusiness.GetGateway
+import Network.AWS.AlexaBusiness.GetGatewayGroup
+import Network.AWS.AlexaBusiness.GetInvitationConfiguration
+import Network.AWS.AlexaBusiness.GetNetworkProfile
 import Network.AWS.AlexaBusiness.GetProfile
 import Network.AWS.AlexaBusiness.GetRoom
 import Network.AWS.AlexaBusiness.GetRoomSkillParameter
 import Network.AWS.AlexaBusiness.GetSkillGroup
+import Network.AWS.AlexaBusiness.ListBusinessReportSchedules
+import Network.AWS.AlexaBusiness.ListConferenceProviders
 import Network.AWS.AlexaBusiness.ListDeviceEvents
+import Network.AWS.AlexaBusiness.ListGatewayGroups
+import Network.AWS.AlexaBusiness.ListGateways
 import Network.AWS.AlexaBusiness.ListSkills
+import Network.AWS.AlexaBusiness.ListSkillsStoreCategories
+import Network.AWS.AlexaBusiness.ListSkillsStoreSkillsByCategory
+import Network.AWS.AlexaBusiness.ListSmartHomeAppliances
 import Network.AWS.AlexaBusiness.ListTags
+import Network.AWS.AlexaBusiness.PutConferencePreference
+import Network.AWS.AlexaBusiness.PutInvitationConfiguration
 import Network.AWS.AlexaBusiness.PutRoomSkillParameter
+import Network.AWS.AlexaBusiness.PutSkillAuthorization
+import Network.AWS.AlexaBusiness.RegisterAVSDevice
+import Network.AWS.AlexaBusiness.RejectSkill
 import Network.AWS.AlexaBusiness.ResolveRoom
 import Network.AWS.AlexaBusiness.RevokeInvitation
 import Network.AWS.AlexaBusiness.SearchAddressBooks
 import Network.AWS.AlexaBusiness.SearchContacts
 import Network.AWS.AlexaBusiness.SearchDevices
+import Network.AWS.AlexaBusiness.SearchNetworkProfiles
 import Network.AWS.AlexaBusiness.SearchProfiles
 import Network.AWS.AlexaBusiness.SearchRooms
 import Network.AWS.AlexaBusiness.SearchSkillGroups
 import Network.AWS.AlexaBusiness.SearchUsers
+import Network.AWS.AlexaBusiness.SendAnnouncement
 import Network.AWS.AlexaBusiness.SendInvitation
 import Network.AWS.AlexaBusiness.StartDeviceSync
+import Network.AWS.AlexaBusiness.StartSmartHomeApplianceDiscovery
 import Network.AWS.AlexaBusiness.TagResource
 import Network.AWS.AlexaBusiness.Types
 import Network.AWS.AlexaBusiness.UntagResource
 import Network.AWS.AlexaBusiness.UpdateAddressBook
+import Network.AWS.AlexaBusiness.UpdateBusinessReportSchedule
+import Network.AWS.AlexaBusiness.UpdateConferenceProvider
 import Network.AWS.AlexaBusiness.UpdateContact
 import Network.AWS.AlexaBusiness.UpdateDevice
+import Network.AWS.AlexaBusiness.UpdateGateway
+import Network.AWS.AlexaBusiness.UpdateGatewayGroup
+import Network.AWS.AlexaBusiness.UpdateNetworkProfile
 import Network.AWS.AlexaBusiness.UpdateProfile
 import Network.AWS.AlexaBusiness.UpdateRoom
 import Network.AWS.AlexaBusiness.UpdateSkillGroup

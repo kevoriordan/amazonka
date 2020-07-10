@@ -48,13 +48,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'upgradePublishedSchema' smart constructor.
-data UpgradePublishedSchema = UpgradePublishedSchema'
-  { _upsDryRun               :: !(Maybe Bool)
-  , _upsDevelopmentSchemaARN :: !Text
-  , _upsPublishedSchemaARN   :: !Text
-  , _upsMinorVersion         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpgradePublishedSchema = UpgradePublishedSchema'{_upsDryRun
+                                                      :: !(Maybe Bool),
+                                                      _upsDevelopmentSchemaARN
+                                                      :: !Text,
+                                                      _upsPublishedSchemaARN ::
+                                                      !Text,
+                                                      _upsMinorVersion :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpgradePublishedSchema' with the minimum fields required to make a request.
 --
@@ -72,14 +74,12 @@ upgradePublishedSchema
     -> Text -- ^ 'upsPublishedSchemaARN'
     -> Text -- ^ 'upsMinorVersion'
     -> UpgradePublishedSchema
-upgradePublishedSchema pDevelopmentSchemaARN_ pPublishedSchemaARN_ pMinorVersion_ =
-  UpgradePublishedSchema'
-    { _upsDryRun = Nothing
-    , _upsDevelopmentSchemaARN = pDevelopmentSchemaARN_
-    , _upsPublishedSchemaARN = pPublishedSchemaARN_
-    , _upsMinorVersion = pMinorVersion_
-    }
-
+upgradePublishedSchema pDevelopmentSchemaARN_
+  pPublishedSchemaARN_ pMinorVersion_
+  = UpgradePublishedSchema'{_upsDryRun = Nothing,
+                            _upsDevelopmentSchemaARN = pDevelopmentSchemaARN_,
+                            _upsPublishedSchemaARN = pPublishedSchemaARN_,
+                            _upsMinorVersion = pMinorVersion_}
 
 -- | Used for testing whether the Development schema provided is backwards compatible, or not, with the publish schema provided by the user to be upgraded. If schema compatibility fails, an exception would be thrown else the call would succeed. This parameter is optional and defaults to false.
 upsDryRun :: Lens' UpgradePublishedSchema (Maybe Bool)
@@ -134,11 +134,14 @@ instance ToQuery UpgradePublishedSchema where
         toQuery = const mempty
 
 -- | /See:/ 'upgradePublishedSchemaResponse' smart constructor.
-data UpgradePublishedSchemaResponse = UpgradePublishedSchemaResponse'
-  { _upsrsUpgradedSchemaARN :: !(Maybe Text)
-  , _upsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpgradePublishedSchemaResponse = UpgradePublishedSchemaResponse'{_upsrsUpgradedSchemaARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _upsrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpgradePublishedSchemaResponse' with the minimum fields required to make a request.
 --
@@ -150,10 +153,10 @@ data UpgradePublishedSchemaResponse = UpgradePublishedSchemaResponse'
 upgradePublishedSchemaResponse
     :: Int -- ^ 'upsrsResponseStatus'
     -> UpgradePublishedSchemaResponse
-upgradePublishedSchemaResponse pResponseStatus_ =
-  UpgradePublishedSchemaResponse'
-    {_upsrsUpgradedSchemaARN = Nothing, _upsrsResponseStatus = pResponseStatus_}
-
+upgradePublishedSchemaResponse pResponseStatus_
+  = UpgradePublishedSchemaResponse'{_upsrsUpgradedSchemaARN
+                                      = Nothing,
+                                    _upsrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the upgraded schema that is returned as part of the response.
 upsrsUpgradedSchemaARN :: Lens' UpgradePublishedSchemaResponse (Maybe Text)

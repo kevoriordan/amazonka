@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An AWS Elemental MediaStore container is a namespace that holds folders and objects. You use a container endpoint to create, read, and delete objects.
+-- An AWS Elemental MediaStore container is a namespace that holds folders and objects. You use a container endpoint to create, read, and delete objects. 
 --
 --
 module Network.AWS.MediaStore
@@ -22,23 +22,23 @@ module Network.AWS.MediaStore
     -- * Errors
     -- $errors
 
+    -- ** ContainerNotFoundException
+    , _ContainerNotFoundException
+
     -- ** PolicyNotFoundException
     , _PolicyNotFoundException
-
-    -- ** CORSPolicyNotFoundException
-    , _CORSPolicyNotFoundException
-
-    -- ** ContainerInUseException
-    , _ContainerInUseException
 
     -- ** InternalServerError
     , _InternalServerError
 
-    -- ** ContainerNotFoundException
-    , _ContainerNotFoundException
+    -- ** ContainerInUseException
+    , _ContainerInUseException
 
     -- ** LimitExceededException
     , _LimitExceededException
+
+    -- ** CORSPolicyNotFoundException
+    , _CORSPolicyNotFoundException
 
     -- * Waiters
     -- $waiters
@@ -46,37 +46,73 @@ module Network.AWS.MediaStore
     -- * Operations
     -- $operations
 
-    -- ** CreateContainer
+    -- ** StopAccessLogging 
+    , module Network.AWS.MediaStore.StopAccessLogging
+
+    -- ** PutLifecyclePolicy 
+    , module Network.AWS.MediaStore.PutLifecyclePolicy
+
+    -- ** DeleteLifecyclePolicy 
+    , module Network.AWS.MediaStore.DeleteLifecyclePolicy
+
+    -- ** ListTagsForResource 
+    , module Network.AWS.MediaStore.ListTagsForResource
+
+    -- ** CreateContainer 
     , module Network.AWS.MediaStore.CreateContainer
 
-    -- ** ListContainers
+    -- ** ListContainers (Paginated)
     , module Network.AWS.MediaStore.ListContainers
 
-    -- ** DeleteContainer
+    -- ** DeleteContainer 
     , module Network.AWS.MediaStore.DeleteContainer
 
-    -- ** PutCORSPolicy
+    -- ** PutCORSPolicy 
     , module Network.AWS.MediaStore.PutCORSPolicy
 
-    -- ** DeleteCORSPolicy
+    -- ** DeleteCORSPolicy 
     , module Network.AWS.MediaStore.DeleteCORSPolicy
 
-    -- ** DescribeContainer
+    -- ** StartAccessLogging 
+    , module Network.AWS.MediaStore.StartAccessLogging
+
+    -- ** DescribeContainer 
     , module Network.AWS.MediaStore.DescribeContainer
 
-    -- ** GetCORSPolicy
+    -- ** GetMetricPolicy 
+    , module Network.AWS.MediaStore.GetMetricPolicy
+
+    -- ** DeleteMetricPolicy 
+    , module Network.AWS.MediaStore.DeleteMetricPolicy
+
+    -- ** PutMetricPolicy 
+    , module Network.AWS.MediaStore.PutMetricPolicy
+
+    -- ** GetLifecyclePolicy 
+    , module Network.AWS.MediaStore.GetLifecyclePolicy
+
+    -- ** TagResource 
+    , module Network.AWS.MediaStore.TagResource
+
+    -- ** GetCORSPolicy 
     , module Network.AWS.MediaStore.GetCORSPolicy
 
-    -- ** DeleteContainerPolicy
+    -- ** UntagResource 
+    , module Network.AWS.MediaStore.UntagResource
+
+    -- ** DeleteContainerPolicy 
     , module Network.AWS.MediaStore.DeleteContainerPolicy
 
-    -- ** PutContainerPolicy
+    -- ** PutContainerPolicy 
     , module Network.AWS.MediaStore.PutContainerPolicy
 
-    -- ** GetContainerPolicy
+    -- ** GetContainerPolicy 
     , module Network.AWS.MediaStore.GetContainerPolicy
 
     -- * Types
+
+    -- ** ContainerLevelMetrics
+    , ContainerLevelMetrics (..)
 
     -- ** ContainerStatus
     , ContainerStatus (..)
@@ -89,31 +125,61 @@ module Network.AWS.MediaStore
     , corsRule
     , crAllowedMethods
     , crMaxAgeSeconds
-    , crAllowedHeaders
-    , crAllowedOrigins
     , crExposeHeaders
+    , crAllowedOrigins
+    , crAllowedHeaders
 
     -- ** Container
     , Container
     , container
     , cCreationTime
     , cStatus
+    , cAccessLoggingEnabled
     , cARN
     , cName
     , cEndpoint
+
+    -- ** MetricPolicy
+    , MetricPolicy
+    , metricPolicy
+    , mpMetricPolicyRules
+    , mpContainerLevelMetrics
+
+    -- ** MetricPolicyRule
+    , MetricPolicyRule
+    , metricPolicyRule
+    , mprObjectGroup
+    , mprObjectGroupName
+
+    -- ** Tag
+    , Tag
+    , tag
+    , tagValue
+    , tagKey
     ) where
 
 import Network.AWS.MediaStore.CreateContainer
+import Network.AWS.MediaStore.DeleteCORSPolicy
 import Network.AWS.MediaStore.DeleteContainer
 import Network.AWS.MediaStore.DeleteContainerPolicy
-import Network.AWS.MediaStore.DeleteCORSPolicy
+import Network.AWS.MediaStore.DeleteLifecyclePolicy
+import Network.AWS.MediaStore.DeleteMetricPolicy
 import Network.AWS.MediaStore.DescribeContainer
-import Network.AWS.MediaStore.GetContainerPolicy
 import Network.AWS.MediaStore.GetCORSPolicy
+import Network.AWS.MediaStore.GetContainerPolicy
+import Network.AWS.MediaStore.GetLifecyclePolicy
+import Network.AWS.MediaStore.GetMetricPolicy
 import Network.AWS.MediaStore.ListContainers
-import Network.AWS.MediaStore.PutContainerPolicy
+import Network.AWS.MediaStore.ListTagsForResource
 import Network.AWS.MediaStore.PutCORSPolicy
+import Network.AWS.MediaStore.PutContainerPolicy
+import Network.AWS.MediaStore.PutLifecyclePolicy
+import Network.AWS.MediaStore.PutMetricPolicy
+import Network.AWS.MediaStore.StartAccessLogging
+import Network.AWS.MediaStore.StopAccessLogging
+import Network.AWS.MediaStore.TagResource
 import Network.AWS.MediaStore.Types
+import Network.AWS.MediaStore.UntagResource
 import Network.AWS.MediaStore.Waiters
 
 {- $errors

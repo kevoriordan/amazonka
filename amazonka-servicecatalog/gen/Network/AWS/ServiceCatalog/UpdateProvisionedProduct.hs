@@ -38,6 +38,8 @@ module Network.AWS.ServiceCatalog.UpdateProvisionedProduct
     , uppProvisioningParameters
     , uppProvisionedProductId
     , uppProductId
+    , uppTags
+    , uppProvisioningPreferences
     , uppUpdateToken
 
     -- * Destructuring the Response
@@ -56,23 +58,38 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'updateProvisionedProduct' smart constructor.
-data UpdateProvisionedProduct = UpdateProvisionedProduct'
-  { _uppProvisionedProductName :: !(Maybe Text)
-  , _uppProvisioningArtifactId :: !(Maybe Text)
-  , _uppAcceptLanguage         :: !(Maybe Text)
-  , _uppPathId                 :: !(Maybe Text)
-  , _uppProvisioningParameters :: !(Maybe [UpdateProvisioningParameter])
-  , _uppProvisionedProductId   :: !(Maybe Text)
-  , _uppProductId              :: !(Maybe Text)
-  , _uppUpdateToken            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProvisionedProduct = UpdateProvisionedProduct'{_uppProvisionedProductName
+                                                          :: !(Maybe Text),
+                                                          _uppProvisioningArtifactId
+                                                          :: !(Maybe Text),
+                                                          _uppAcceptLanguage ::
+                                                          !(Maybe Text),
+                                                          _uppPathId ::
+                                                          !(Maybe Text),
+                                                          _uppProvisioningParameters
+                                                          ::
+                                                          !(Maybe
+                                                              [UpdateProvisioningParameter]),
+                                                          _uppProvisionedProductId
+                                                          :: !(Maybe Text),
+                                                          _uppProductId ::
+                                                          !(Maybe Text),
+                                                          _uppTags ::
+                                                          !(Maybe [Tag]),
+                                                          _uppProvisioningPreferences
+                                                          ::
+                                                          !(Maybe
+                                                              UpdateProvisioningPreferences),
+                                                          _uppUpdateToken ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateProvisionedProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uppProvisionedProductName' - The updated name of the provisioned product. You cannot specify both @ProvisionedProductName@ and @ProvisionedProductId@ .
+-- * 'uppProvisionedProductName' - The name of the provisioned product. You cannot specify both @ProvisionedProductName@ and @ProvisionedProductId@ .
 --
 -- * 'uppProvisioningArtifactId' - The identifier of the provisioning artifact.
 --
@@ -84,26 +101,29 @@ data UpdateProvisionedProduct = UpdateProvisionedProduct'
 --
 -- * 'uppProvisionedProductId' - The identifier of the provisioned product. You cannot specify both @ProvisionedProductName@ and @ProvisionedProductId@ .
 --
--- * 'uppProductId' - The identifier of the provisioned product.
+-- * 'uppProductId' - The identifier of the product.
+--
+-- * 'uppTags' - One or more tags. Requires the product to have @RESOURCE_UPDATE@ constraint with @TagUpdatesOnProvisionedProduct@ set to @ALLOWED@ to allow tag updates.
+--
+-- * 'uppProvisioningPreferences' - An object that contains information about the provisioning preferences for a stack set.
 --
 -- * 'uppUpdateToken' - The idempotency token that uniquely identifies the provisioning update request.
 updateProvisionedProduct
     :: Text -- ^ 'uppUpdateToken'
     -> UpdateProvisionedProduct
-updateProvisionedProduct pUpdateToken_ =
-  UpdateProvisionedProduct'
-    { _uppProvisionedProductName = Nothing
-    , _uppProvisioningArtifactId = Nothing
-    , _uppAcceptLanguage = Nothing
-    , _uppPathId = Nothing
-    , _uppProvisioningParameters = Nothing
-    , _uppProvisionedProductId = Nothing
-    , _uppProductId = Nothing
-    , _uppUpdateToken = pUpdateToken_
-    }
+updateProvisionedProduct pUpdateToken_
+  = UpdateProvisionedProduct'{_uppProvisionedProductName
+                                = Nothing,
+                              _uppProvisioningArtifactId = Nothing,
+                              _uppAcceptLanguage = Nothing,
+                              _uppPathId = Nothing,
+                              _uppProvisioningParameters = Nothing,
+                              _uppProvisionedProductId = Nothing,
+                              _uppProductId = Nothing, _uppTags = Nothing,
+                              _uppProvisioningPreferences = Nothing,
+                              _uppUpdateToken = pUpdateToken_}
 
-
--- | The updated name of the provisioned product. You cannot specify both @ProvisionedProductName@ and @ProvisionedProductId@ .
+-- | The name of the provisioned product. You cannot specify both @ProvisionedProductName@ and @ProvisionedProductId@ .
 uppProvisionedProductName :: Lens' UpdateProvisionedProduct (Maybe Text)
 uppProvisionedProductName = lens _uppProvisionedProductName (\ s a -> s{_uppProvisionedProductName = a})
 
@@ -127,9 +147,17 @@ uppProvisioningParameters = lens _uppProvisioningParameters (\ s a -> s{_uppProv
 uppProvisionedProductId :: Lens' UpdateProvisionedProduct (Maybe Text)
 uppProvisionedProductId = lens _uppProvisionedProductId (\ s a -> s{_uppProvisionedProductId = a})
 
--- | The identifier of the provisioned product.
+-- | The identifier of the product.
 uppProductId :: Lens' UpdateProvisionedProduct (Maybe Text)
 uppProductId = lens _uppProductId (\ s a -> s{_uppProductId = a})
+
+-- | One or more tags. Requires the product to have @RESOURCE_UPDATE@ constraint with @TagUpdatesOnProvisionedProduct@ set to @ALLOWED@ to allow tag updates.
+uppTags :: Lens' UpdateProvisionedProduct [Tag]
+uppTags = lens _uppTags (\ s a -> s{_uppTags = a}) . _Default . _Coerce
+
+-- | An object that contains information about the provisioning preferences for a stack set.
+uppProvisioningPreferences :: Lens' UpdateProvisionedProduct (Maybe UpdateProvisioningPreferences)
+uppProvisioningPreferences = lens _uppProvisioningPreferences (\ s a -> s{_uppProvisioningPreferences = a})
 
 -- | The idempotency token that uniquely identifies the provisioning update request.
 uppUpdateToken :: Lens' UpdateProvisionedProduct Text
@@ -174,6 +202,9 @@ instance ToJSON UpdateProvisionedProduct where
                   ("ProvisionedProductId" .=) <$>
                     _uppProvisionedProductId,
                   ("ProductId" .=) <$> _uppProductId,
+                  ("Tags" .=) <$> _uppTags,
+                  ("ProvisioningPreferences" .=) <$>
+                    _uppProvisioningPreferences,
                   Just ("UpdateToken" .= _uppUpdateToken)])
 
 instance ToPath UpdateProvisionedProduct where
@@ -183,11 +214,15 @@ instance ToQuery UpdateProvisionedProduct where
         toQuery = const mempty
 
 -- | /See:/ 'updateProvisionedProductResponse' smart constructor.
-data UpdateProvisionedProductResponse = UpdateProvisionedProductResponse'
-  { _upprsRecordDetail   :: !(Maybe RecordDetail)
-  , _upprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateProvisionedProductResponse = UpdateProvisionedProductResponse'{_upprsRecordDetail
+                                                                          ::
+                                                                          !(Maybe
+                                                                              RecordDetail),
+                                                                          _upprsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'UpdateProvisionedProductResponse' with the minimum fields required to make a request.
 --
@@ -199,10 +234,10 @@ data UpdateProvisionedProductResponse = UpdateProvisionedProductResponse'
 updateProvisionedProductResponse
     :: Int -- ^ 'upprsResponseStatus'
     -> UpdateProvisionedProductResponse
-updateProvisionedProductResponse pResponseStatus_ =
-  UpdateProvisionedProductResponse'
-    {_upprsRecordDetail = Nothing, _upprsResponseStatus = pResponseStatus_}
-
+updateProvisionedProductResponse pResponseStatus_
+  = UpdateProvisionedProductResponse'{_upprsRecordDetail
+                                        = Nothing,
+                                      _upprsResponseStatus = pResponseStatus_}
 
 -- | Information about the result of the request.
 upprsRecordDetail :: Lens' UpdateProvisionedProductResponse (Maybe RecordDetail)

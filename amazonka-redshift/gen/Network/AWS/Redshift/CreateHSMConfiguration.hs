@@ -21,7 +21,7 @@
 -- Creates an HSM configuration that contains the information required by an Amazon Redshift cluster to store and use database encryption keys in a Hardware Security Module (HSM). After creating the HSM configuration, you can specify it as a parameter when creating a cluster. The cluster will then store its encryption keys in the HSM.
 --
 --
--- In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html Hardware Security Modules> in the Amazon Redshift Cluster Management Guide.
+-- In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html Hardware Security Modules> in the Amazon Redshift Cluster Management Guide.
 --
 module Network.AWS.Redshift.CreateHSMConfiguration
     (
@@ -52,21 +52,25 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'createHSMConfiguration' smart constructor.
-data CreateHSMConfiguration = CreateHSMConfiguration'
-  { _chcTags                       :: !(Maybe [Tag])
-  , _chcHSMConfigurationIdentifier :: !Text
-  , _chcDescription                :: !Text
-  , _chcHSMIPAddress               :: !Text
-  , _chcHSMPartitionName           :: !Text
-  , _chcHSMPartitionPassword       :: !Text
-  , _chcHSMServerPublicCertificate :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSMConfiguration = CreateHSMConfiguration'{_chcTags
+                                                      :: !(Maybe [Tag]),
+                                                      _chcHSMConfigurationIdentifier
+                                                      :: !Text,
+                                                      _chcDescription :: !Text,
+                                                      _chcHSMIPAddress :: !Text,
+                                                      _chcHSMPartitionName ::
+                                                      !Text,
+                                                      _chcHSMPartitionPassword
+                                                      :: !Text,
+                                                      _chcHSMServerPublicCertificate
+                                                      :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateHSMConfiguration' with the minimum fields required to make a request.
 --
@@ -93,17 +97,18 @@ createHSMConfiguration
     -> Text -- ^ 'chcHSMPartitionPassword'
     -> Text -- ^ 'chcHSMServerPublicCertificate'
     -> CreateHSMConfiguration
-createHSMConfiguration pHSMConfigurationIdentifier_ pDescription_ pHSMIPAddress_ pHSMPartitionName_ pHSMPartitionPassword_ pHSMServerPublicCertificate_ =
-  CreateHSMConfiguration'
-    { _chcTags = Nothing
-    , _chcHSMConfigurationIdentifier = pHSMConfigurationIdentifier_
-    , _chcDescription = pDescription_
-    , _chcHSMIPAddress = pHSMIPAddress_
-    , _chcHSMPartitionName = pHSMPartitionName_
-    , _chcHSMPartitionPassword = pHSMPartitionPassword_
-    , _chcHSMServerPublicCertificate = pHSMServerPublicCertificate_
-    }
-
+createHSMConfiguration pHSMConfigurationIdentifier_
+  pDescription_ pHSMIPAddress_ pHSMPartitionName_
+  pHSMPartitionPassword_ pHSMServerPublicCertificate_
+  = CreateHSMConfiguration'{_chcTags = Nothing,
+                            _chcHSMConfigurationIdentifier =
+                              pHSMConfigurationIdentifier_,
+                            _chcDescription = pDescription_,
+                            _chcHSMIPAddress = pHSMIPAddress_,
+                            _chcHSMPartitionName = pHSMPartitionName_,
+                            _chcHSMPartitionPassword = pHSMPartitionPassword_,
+                            _chcHSMServerPublicCertificate =
+                              pHSMServerPublicCertificate_}
 
 -- | A list of tag instances.
 chcTags :: Lens' CreateHSMConfiguration [Tag]
@@ -170,11 +175,14 @@ instance ToQuery CreateHSMConfiguration where
                  _chcHSMServerPublicCertificate]
 
 -- | /See:/ 'createHSMConfigurationResponse' smart constructor.
-data CreateHSMConfigurationResponse = CreateHSMConfigurationResponse'
-  { _chcrsHSMConfiguration :: !(Maybe HSMConfiguration)
-  , _chcrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSMConfigurationResponse = CreateHSMConfigurationResponse'{_chcrsHSMConfiguration
+                                                                      ::
+                                                                      !(Maybe
+                                                                          HSMConfiguration),
+                                                                      _chcrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateHSMConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -186,10 +194,10 @@ data CreateHSMConfigurationResponse = CreateHSMConfigurationResponse'
 createHSMConfigurationResponse
     :: Int -- ^ 'chcrsResponseStatus'
     -> CreateHSMConfigurationResponse
-createHSMConfigurationResponse pResponseStatus_ =
-  CreateHSMConfigurationResponse'
-    {_chcrsHSMConfiguration = Nothing, _chcrsResponseStatus = pResponseStatus_}
-
+createHSMConfigurationResponse pResponseStatus_
+  = CreateHSMConfigurationResponse'{_chcrsHSMConfiguration
+                                      = Nothing,
+                                    _chcrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 chcrsHSMConfiguration :: Lens' CreateHSMConfigurationResponse (Maybe HSMConfiguration)

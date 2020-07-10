@@ -27,19 +27,25 @@ module Network.AWS.DMS.ModifyEndpoint
       modifyEndpoint
     , ModifyEndpoint
     -- * Request Lenses
+    , meDmsTransferSettings
     , meServerName
     , meCertificateARN
     , meServiceAccessRoleARN
     , meExtraConnectionAttributes
+    , meKafkaSettings
     , meEndpointType
+    , meRedshiftSettings
+    , meElasticsearchSettings
     , meUsername
     , meExternalTableDefinition
     , meEngineName
+    , meNeptuneSettings
     , meMongoDBSettings
     , meSSLMode
     , mePassword
     , meDatabaseName
     , meS3Settings
+    , meKinesisSettings
     , meEndpointIdentifier
     , meDynamoDBSettings
     , mePort
@@ -60,65 +66,92 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'modifyEndpoint' smart constructor.
-data ModifyEndpoint = ModifyEndpoint'
-  { _meServerName                :: !(Maybe Text)
-  , _meCertificateARN            :: !(Maybe Text)
-  , _meServiceAccessRoleARN      :: !(Maybe Text)
-  , _meExtraConnectionAttributes :: !(Maybe Text)
-  , _meEndpointType              :: !(Maybe ReplicationEndpointTypeValue)
-  , _meUsername                  :: !(Maybe Text)
-  , _meExternalTableDefinition   :: !(Maybe Text)
-  , _meEngineName                :: !(Maybe Text)
-  , _meMongoDBSettings           :: !(Maybe MongoDBSettings)
-  , _meSSLMode                   :: !(Maybe DmsSSLModeValue)
-  , _mePassword                  :: !(Maybe (Sensitive Text))
-  , _meDatabaseName              :: !(Maybe Text)
-  , _meS3Settings                :: !(Maybe S3Settings)
-  , _meEndpointIdentifier        :: !(Maybe Text)
-  , _meDynamoDBSettings          :: !(Maybe DynamoDBSettings)
-  , _mePort                      :: !(Maybe Int)
-  , _meEndpointARN               :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ModifyEndpoint = ModifyEndpoint'{_meDmsTransferSettings
+                                      :: !(Maybe DmsTransferSettings),
+                                      _meServerName :: !(Maybe Text),
+                                      _meCertificateARN :: !(Maybe Text),
+                                      _meServiceAccessRoleARN :: !(Maybe Text),
+                                      _meExtraConnectionAttributes ::
+                                      !(Maybe Text),
+                                      _meKafkaSettings ::
+                                      !(Maybe KafkaSettings),
+                                      _meEndpointType ::
+                                      !(Maybe ReplicationEndpointTypeValue),
+                                      _meRedshiftSettings ::
+                                      !(Maybe RedshiftSettings),
+                                      _meElasticsearchSettings ::
+                                      !(Maybe ElasticsearchSettings),
+                                      _meUsername :: !(Maybe Text),
+                                      _meExternalTableDefinition ::
+                                      !(Maybe Text),
+                                      _meEngineName :: !(Maybe Text),
+                                      _meNeptuneSettings ::
+                                      !(Maybe NeptuneSettings),
+                                      _meMongoDBSettings ::
+                                      !(Maybe MongoDBSettings),
+                                      _meSSLMode :: !(Maybe DmsSSLModeValue),
+                                      _mePassword :: !(Maybe (Sensitive Text)),
+                                      _meDatabaseName :: !(Maybe Text),
+                                      _meS3Settings :: !(Maybe S3Settings),
+                                      _meKinesisSettings ::
+                                      !(Maybe KinesisSettings),
+                                      _meEndpointIdentifier :: !(Maybe Text),
+                                      _meDynamoDBSettings ::
+                                      !(Maybe DynamoDBSettings),
+                                      _mePort :: !(Maybe Int),
+                                      _meEndpointARN :: !Text}
+                        deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'meDmsTransferSettings' - The settings in JSON format for the DMS transfer type of source endpoint.  Attributes include the following:     * serviceAccessRoleArn - The AWS Identity and Access Management (IAM) role that has permission to access the Amazon S3 bucket.     * BucketName - The name of the S3 bucket to use.     * compressionType - An optional parameter to use GZIP to compress the target files. Either set this parameter to NONE (the default) or don't use it to leave the files uncompressed. Shorthand syntax for these settings is as follows: @ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string@  JSON syntax for these settings is as follows: @{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } @ 
+--
 -- * 'meServerName' - The name of the server where the endpoint database resides.
 --
 -- * 'meCertificateARN' - The Amazon Resource Name (ARN) of the certificate used for SSL connection.
 --
--- * 'meServiceAccessRoleARN' - The Amazon Resource Name (ARN) for the service access role you want to use to modify the endpoint.
+-- * 'meServiceAccessRoleARN' - The Amazon Resource Name (ARN) for the service access role you want to use to modify the endpoint. 
 --
 -- * 'meExtraConnectionAttributes' - Additional attributes associated with the connection. To reset this parameter, pass the empty string ("") as an argument.
 --
--- * 'meEndpointType' - The type of endpoint.
+-- * 'meKafkaSettings' - Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html Using Apache Kafka as a Target for AWS Database Migration Service> in the /AWS Database Migration User Guide./ 
+--
+-- * 'meEndpointType' - The type of endpoint. Valid values are @source@ and @target@ .
+--
+-- * 'meRedshiftSettings' - Undocumented member.
+--
+-- * 'meElasticsearchSettings' - Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS> in the /AWS Database Migration User Guide./ 
 --
 -- * 'meUsername' - The user name to be used to login to the endpoint database.
 --
 -- * 'meExternalTableDefinition' - The external table definition.
 --
--- * 'meEngineName' - The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+-- * 'meEngineName' - The type of engine for the endpoint. Valid values, depending on the EndpointType, include @"mysql"@ , @"oracle"@ , @"postgres"@ , @"mariadb"@ , @"aurora"@ , @"aurora-postgresql"@ , @"redshift"@ , @"s3"@ , @"db2"@ , @"azuredb"@ , @"sybase"@ , @"dynamodb"@ , @"mongodb"@ , @"kinesis"@ , @"kafka"@ , @"elasticsearch"@ , @"documentdb"@ , and @"sqlserver"@ .
 --
--- * 'meMongoDBSettings' - Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the __Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service__ section at <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html Using Amazon S3 as a Target for AWS Database Migration Service> .
+-- * 'meNeptuneSettings' - Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings> in the /AWS Database Migration Service User Guide./ 
 --
--- * 'meSSLMode' - The SSL mode to be used. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
+-- * 'meMongoDBSettings' - Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html Using MongoDB as a Target for AWS Database Migration Service> in the /AWS Database Migration Service User Guide./ 
+--
+-- * 'meSSLMode' - The SSL mode used to connect to the endpoint. The default value is @none@ .
 --
 -- * 'mePassword' - The password to be used to login to the endpoint database.
 --
 -- * 'meDatabaseName' - The name of the endpoint database.
 --
--- * 'meS3Settings' - Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the __Extra Connection Attributes__ section at <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html Using Amazon S3 as a Target for AWS Database Migration Service> .
+-- * 'meS3Settings' - Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS> in the /AWS Database Migration Service User Guide./ 
 --
--- * 'meEndpointIdentifier' - The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+-- * 'meKinesisSettings' - Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service> in the /AWS Database Migration User Guide./ 
 --
--- * 'meDynamoDBSettings' - Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the __Using Object Mapping to Migrate Data to DynamoDB__ section at <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service> .
+-- * 'meEndpointIdentifier' - The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
+--
+-- * 'meDynamoDBSettings' - Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html Using Object Mapping to Migrate Data to DynamoDB> in the /AWS Database Migration Service User Guide./ 
 --
 -- * 'mePort' - The port used by the endpoint database.
 --
@@ -126,27 +159,30 @@ data ModifyEndpoint = ModifyEndpoint'
 modifyEndpoint
     :: Text -- ^ 'meEndpointARN'
     -> ModifyEndpoint
-modifyEndpoint pEndpointARN_ =
-  ModifyEndpoint'
-    { _meServerName = Nothing
-    , _meCertificateARN = Nothing
-    , _meServiceAccessRoleARN = Nothing
-    , _meExtraConnectionAttributes = Nothing
-    , _meEndpointType = Nothing
-    , _meUsername = Nothing
-    , _meExternalTableDefinition = Nothing
-    , _meEngineName = Nothing
-    , _meMongoDBSettings = Nothing
-    , _meSSLMode = Nothing
-    , _mePassword = Nothing
-    , _meDatabaseName = Nothing
-    , _meS3Settings = Nothing
-    , _meEndpointIdentifier = Nothing
-    , _meDynamoDBSettings = Nothing
-    , _mePort = Nothing
-    , _meEndpointARN = pEndpointARN_
-    }
+modifyEndpoint pEndpointARN_
+  = ModifyEndpoint'{_meDmsTransferSettings = Nothing,
+                    _meServerName = Nothing, _meCertificateARN = Nothing,
+                    _meServiceAccessRoleARN = Nothing,
+                    _meExtraConnectionAttributes = Nothing,
+                    _meKafkaSettings = Nothing,
+                    _meEndpointType = Nothing,
+                    _meRedshiftSettings = Nothing,
+                    _meElasticsearchSettings = Nothing,
+                    _meUsername = Nothing,
+                    _meExternalTableDefinition = Nothing,
+                    _meEngineName = Nothing,
+                    _meNeptuneSettings = Nothing,
+                    _meMongoDBSettings = Nothing, _meSSLMode = Nothing,
+                    _mePassword = Nothing, _meDatabaseName = Nothing,
+                    _meS3Settings = Nothing,
+                    _meKinesisSettings = Nothing,
+                    _meEndpointIdentifier = Nothing,
+                    _meDynamoDBSettings = Nothing, _mePort = Nothing,
+                    _meEndpointARN = pEndpointARN_}
 
+-- | The settings in JSON format for the DMS transfer type of source endpoint.  Attributes include the following:     * serviceAccessRoleArn - The AWS Identity and Access Management (IAM) role that has permission to access the Amazon S3 bucket.     * BucketName - The name of the S3 bucket to use.     * compressionType - An optional parameter to use GZIP to compress the target files. Either set this parameter to NONE (the default) or don't use it to leave the files uncompressed. Shorthand syntax for these settings is as follows: @ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string@  JSON syntax for these settings is as follows: @{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } @ 
+meDmsTransferSettings :: Lens' ModifyEndpoint (Maybe DmsTransferSettings)
+meDmsTransferSettings = lens _meDmsTransferSettings (\ s a -> s{_meDmsTransferSettings = a})
 
 -- | The name of the server where the endpoint database resides.
 meServerName :: Lens' ModifyEndpoint (Maybe Text)
@@ -156,7 +192,7 @@ meServerName = lens _meServerName (\ s a -> s{_meServerName = a})
 meCertificateARN :: Lens' ModifyEndpoint (Maybe Text)
 meCertificateARN = lens _meCertificateARN (\ s a -> s{_meCertificateARN = a})
 
--- | The Amazon Resource Name (ARN) for the service access role you want to use to modify the endpoint.
+-- | The Amazon Resource Name (ARN) for the service access role you want to use to modify the endpoint. 
 meServiceAccessRoleARN :: Lens' ModifyEndpoint (Maybe Text)
 meServiceAccessRoleARN = lens _meServiceAccessRoleARN (\ s a -> s{_meServiceAccessRoleARN = a})
 
@@ -164,9 +200,21 @@ meServiceAccessRoleARN = lens _meServiceAccessRoleARN (\ s a -> s{_meServiceAcce
 meExtraConnectionAttributes :: Lens' ModifyEndpoint (Maybe Text)
 meExtraConnectionAttributes = lens _meExtraConnectionAttributes (\ s a -> s{_meExtraConnectionAttributes = a})
 
--- | The type of endpoint.
+-- | Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html Using Apache Kafka as a Target for AWS Database Migration Service> in the /AWS Database Migration User Guide./ 
+meKafkaSettings :: Lens' ModifyEndpoint (Maybe KafkaSettings)
+meKafkaSettings = lens _meKafkaSettings (\ s a -> s{_meKafkaSettings = a})
+
+-- | The type of endpoint. Valid values are @source@ and @target@ .
 meEndpointType :: Lens' ModifyEndpoint (Maybe ReplicationEndpointTypeValue)
 meEndpointType = lens _meEndpointType (\ s a -> s{_meEndpointType = a})
+
+-- | Undocumented member.
+meRedshiftSettings :: Lens' ModifyEndpoint (Maybe RedshiftSettings)
+meRedshiftSettings = lens _meRedshiftSettings (\ s a -> s{_meRedshiftSettings = a})
+
+-- | Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS> in the /AWS Database Migration User Guide./ 
+meElasticsearchSettings :: Lens' ModifyEndpoint (Maybe ElasticsearchSettings)
+meElasticsearchSettings = lens _meElasticsearchSettings (\ s a -> s{_meElasticsearchSettings = a})
 
 -- | The user name to be used to login to the endpoint database.
 meUsername :: Lens' ModifyEndpoint (Maybe Text)
@@ -176,15 +224,19 @@ meUsername = lens _meUsername (\ s a -> s{_meUsername = a})
 meExternalTableDefinition :: Lens' ModifyEndpoint (Maybe Text)
 meExternalTableDefinition = lens _meExternalTableDefinition (\ s a -> s{_meExternalTableDefinition = a})
 
--- | The type of engine for the endpoint. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+-- | The type of engine for the endpoint. Valid values, depending on the EndpointType, include @"mysql"@ , @"oracle"@ , @"postgres"@ , @"mariadb"@ , @"aurora"@ , @"aurora-postgresql"@ , @"redshift"@ , @"s3"@ , @"db2"@ , @"azuredb"@ , @"sybase"@ , @"dynamodb"@ , @"mongodb"@ , @"kinesis"@ , @"kafka"@ , @"elasticsearch"@ , @"documentdb"@ , and @"sqlserver"@ .
 meEngineName :: Lens' ModifyEndpoint (Maybe Text)
 meEngineName = lens _meEngineName (\ s a -> s{_meEngineName = a})
 
--- | Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the __Configuration Properties When Using MongoDB as a Source for AWS Database Migration Service__ section at <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html Using Amazon S3 as a Target for AWS Database Migration Service> .
+-- | Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings> in the /AWS Database Migration Service User Guide./ 
+meNeptuneSettings :: Lens' ModifyEndpoint (Maybe NeptuneSettings)
+meNeptuneSettings = lens _meNeptuneSettings (\ s a -> s{_meNeptuneSettings = a})
+
+-- | Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html Using MongoDB as a Target for AWS Database Migration Service> in the /AWS Database Migration Service User Guide./ 
 meMongoDBSettings :: Lens' ModifyEndpoint (Maybe MongoDBSettings)
 meMongoDBSettings = lens _meMongoDBSettings (\ s a -> s{_meMongoDBSettings = a})
 
--- | The SSL mode to be used. SSL mode can be one of four values: none, require, verify-ca, verify-full.  The default value is none.
+-- | The SSL mode used to connect to the endpoint. The default value is @none@ .
 meSSLMode :: Lens' ModifyEndpoint (Maybe DmsSSLModeValue)
 meSSLMode = lens _meSSLMode (\ s a -> s{_meSSLMode = a})
 
@@ -196,15 +248,19 @@ mePassword = lens _mePassword (\ s a -> s{_mePassword = a}) . mapping _Sensitive
 meDatabaseName :: Lens' ModifyEndpoint (Maybe Text)
 meDatabaseName = lens _meDatabaseName (\ s a -> s{_meDatabaseName = a})
 
--- | Settings in JSON format for the target S3 endpoint. For more information about the available settings, see the __Extra Connection Attributes__ section at <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html Using Amazon S3 as a Target for AWS Database Migration Service> .
+-- | Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS> in the /AWS Database Migration Service User Guide./ 
 meS3Settings :: Lens' ModifyEndpoint (Maybe S3Settings)
 meS3Settings = lens _meS3Settings (\ s a -> s{_meS3Settings = a})
 
--- | The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
+-- | Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service> in the /AWS Database Migration User Guide./ 
+meKinesisSettings :: Lens' ModifyEndpoint (Maybe KinesisSettings)
+meKinesisSettings = lens _meKinesisSettings (\ s a -> s{_meKinesisSettings = a})
+
+-- | The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
 meEndpointIdentifier :: Lens' ModifyEndpoint (Maybe Text)
 meEndpointIdentifier = lens _meEndpointIdentifier (\ s a -> s{_meEndpointIdentifier = a})
 
--- | Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see the __Using Object Mapping to Migrate Data to DynamoDB__ section at <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html Using an Amazon DynamoDB Database as a Target for AWS Database Migration Service> .
+-- | Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other available settings, see <https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html Using Object Mapping to Migrate Data to DynamoDB> in the /AWS Database Migration Service User Guide./ 
 meDynamoDBSettings :: Lens' ModifyEndpoint (Maybe DynamoDBSettings)
 meDynamoDBSettings = lens _meDynamoDBSettings (\ s a -> s{_meDynamoDBSettings = a})
 
@@ -242,22 +298,30 @@ instance ToJSON ModifyEndpoint where
         toJSON ModifyEndpoint'{..}
           = object
               (catMaybes
-                 [("ServerName" .=) <$> _meServerName,
+                 [("DmsTransferSettings" .=) <$>
+                    _meDmsTransferSettings,
+                  ("ServerName" .=) <$> _meServerName,
                   ("CertificateArn" .=) <$> _meCertificateARN,
                   ("ServiceAccessRoleArn" .=) <$>
                     _meServiceAccessRoleARN,
                   ("ExtraConnectionAttributes" .=) <$>
                     _meExtraConnectionAttributes,
+                  ("KafkaSettings" .=) <$> _meKafkaSettings,
                   ("EndpointType" .=) <$> _meEndpointType,
+                  ("RedshiftSettings" .=) <$> _meRedshiftSettings,
+                  ("ElasticsearchSettings" .=) <$>
+                    _meElasticsearchSettings,
                   ("Username" .=) <$> _meUsername,
                   ("ExternalTableDefinition" .=) <$>
                     _meExternalTableDefinition,
                   ("EngineName" .=) <$> _meEngineName,
+                  ("NeptuneSettings" .=) <$> _meNeptuneSettings,
                   ("MongoDbSettings" .=) <$> _meMongoDBSettings,
                   ("SslMode" .=) <$> _meSSLMode,
                   ("Password" .=) <$> _mePassword,
                   ("DatabaseName" .=) <$> _meDatabaseName,
                   ("S3Settings" .=) <$> _meS3Settings,
+                  ("KinesisSettings" .=) <$> _meKinesisSettings,
                   ("EndpointIdentifier" .=) <$> _meEndpointIdentifier,
                   ("DynamoDbSettings" .=) <$> _meDynamoDBSettings,
                   ("Port" .=) <$> _mePort,
@@ -269,16 +333,16 @@ instance ToPath ModifyEndpoint where
 instance ToQuery ModifyEndpoint where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'modifyEndpointResponse' smart constructor.
-data ModifyEndpointResponse = ModifyEndpointResponse'
-  { _mersEndpoint       :: !(Maybe Endpoint)
-  , _mersResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data ModifyEndpointResponse = ModifyEndpointResponse'{_mersEndpoint
+                                                      :: !(Maybe Endpoint),
+                                                      _mersResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyEndpointResponse' with the minimum fields required to make a request.
 --
@@ -290,10 +354,9 @@ data ModifyEndpointResponse = ModifyEndpointResponse'
 modifyEndpointResponse
     :: Int -- ^ 'mersResponseStatus'
     -> ModifyEndpointResponse
-modifyEndpointResponse pResponseStatus_ =
-  ModifyEndpointResponse'
-    {_mersEndpoint = Nothing, _mersResponseStatus = pResponseStatus_}
-
+modifyEndpointResponse pResponseStatus_
+  = ModifyEndpointResponse'{_mersEndpoint = Nothing,
+                            _mersResponseStatus = pResponseStatus_}
 
 -- | The modified endpoint.
 mersEndpoint :: Lens' ModifyEndpointResponse (Maybe Endpoint)

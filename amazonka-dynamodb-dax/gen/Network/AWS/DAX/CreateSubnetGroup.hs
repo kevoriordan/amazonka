@@ -47,12 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createSubnetGroup' smart constructor.
-data CreateSubnetGroup = CreateSubnetGroup'
-  { _csgDescription     :: !(Maybe Text)
-  , _csgSubnetGroupName :: !Text
-  , _csgSubnetIds       :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSubnetGroup = CreateSubnetGroup'{_csgDescription
+                                            :: !(Maybe Text),
+                                            _csgSubnetGroupName :: !Text,
+                                            _csgSubnetIds :: ![Text]}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSubnetGroup' with the minimum fields required to make a request.
 --
@@ -60,25 +59,22 @@ data CreateSubnetGroup = CreateSubnetGroup'
 --
 -- * 'csgDescription' - A description for the subnet group
 --
--- * 'csgSubnetGroupName' - A name for the subnet group. This value is stored as a lowercase string.
+-- * 'csgSubnetGroupName' - A name for the subnet group. This value is stored as a lowercase string. 
 --
 -- * 'csgSubnetIds' - A list of VPC subnet IDs for the subnet group.
 createSubnetGroup
     :: Text -- ^ 'csgSubnetGroupName'
     -> CreateSubnetGroup
-createSubnetGroup pSubnetGroupName_ =
-  CreateSubnetGroup'
-    { _csgDescription = Nothing
-    , _csgSubnetGroupName = pSubnetGroupName_
-    , _csgSubnetIds = mempty
-    }
-
+createSubnetGroup pSubnetGroupName_
+  = CreateSubnetGroup'{_csgDescription = Nothing,
+                       _csgSubnetGroupName = pSubnetGroupName_,
+                       _csgSubnetIds = mempty}
 
 -- | A description for the subnet group
 csgDescription :: Lens' CreateSubnetGroup (Maybe Text)
 csgDescription = lens _csgDescription (\ s a -> s{_csgDescription = a})
 
--- | A name for the subnet group. This value is stored as a lowercase string.
+-- | A name for the subnet group. This value is stored as a lowercase string. 
 csgSubnetGroupName :: Lens' CreateSubnetGroup Text
 csgSubnetGroupName = lens _csgSubnetGroupName (\ s a -> s{_csgSubnetGroupName = a})
 
@@ -123,11 +119,14 @@ instance ToQuery CreateSubnetGroup where
         toQuery = const mempty
 
 -- | /See:/ 'createSubnetGroupResponse' smart constructor.
-data CreateSubnetGroupResponse = CreateSubnetGroupResponse'
-  { _csgrsSubnetGroup    :: !(Maybe SubnetGroup)
-  , _csgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSubnetGroupResponse = CreateSubnetGroupResponse'{_csgrsSubnetGroup
+                                                            ::
+                                                            !(Maybe
+                                                                SubnetGroup),
+                                                            _csgrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +138,10 @@ data CreateSubnetGroupResponse = CreateSubnetGroupResponse'
 createSubnetGroupResponse
     :: Int -- ^ 'csgrsResponseStatus'
     -> CreateSubnetGroupResponse
-createSubnetGroupResponse pResponseStatus_ =
-  CreateSubnetGroupResponse'
-    {_csgrsSubnetGroup = Nothing, _csgrsResponseStatus = pResponseStatus_}
-
+createSubnetGroupResponse pResponseStatus_
+  = CreateSubnetGroupResponse'{_csgrsSubnetGroup =
+                                 Nothing,
+                               _csgrsResponseStatus = pResponseStatus_}
 
 -- | Represents the output of a /CreateSubnetGroup/ operation.
 csgrsSubnetGroup :: Lens' CreateSubnetGroupResponse (Maybe SubnetGroup)

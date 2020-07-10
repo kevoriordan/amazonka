@@ -48,10 +48,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'startConfigurationRecorder' smart constructor.
-newtype StartConfigurationRecorder = StartConfigurationRecorder'
-  { _sConfigurationRecorderName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartConfigurationRecorder = StartConfigurationRecorder'{_sConfigurationRecorderName
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'StartConfigurationRecorder' with the minimum fields required to make a request.
 --
@@ -61,10 +61,10 @@ newtype StartConfigurationRecorder = StartConfigurationRecorder'
 startConfigurationRecorder
     :: Text -- ^ 'sConfigurationRecorderName'
     -> StartConfigurationRecorder
-startConfigurationRecorder pConfigurationRecorderName_ =
-  StartConfigurationRecorder'
-    {_sConfigurationRecorderName = pConfigurationRecorderName_}
-
+startConfigurationRecorder
+  pConfigurationRecorderName_
+  = StartConfigurationRecorder'{_sConfigurationRecorderName
+                                  = pConfigurationRecorderName_}
 
 -- | The name of the recorder object that records each configuration change made to the resources.
 sConfigurationRecorderName :: Lens' StartConfigurationRecorder Text
@@ -106,17 +106,16 @@ instance ToQuery StartConfigurationRecorder where
         toQuery = const mempty
 
 -- | /See:/ 'startConfigurationRecorderResponse' smart constructor.
-data StartConfigurationRecorderResponse =
-  StartConfigurationRecorderResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartConfigurationRecorderResponse = StartConfigurationRecorderResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'StartConfigurationRecorderResponse' with the minimum fields required to make a request.
 --
 startConfigurationRecorderResponse
     :: StartConfigurationRecorderResponse
-startConfigurationRecorderResponse = StartConfigurationRecorderResponse'
-
+startConfigurationRecorderResponse
+  = StartConfigurationRecorderResponse'
 
 instance NFData StartConfigurationRecorderResponse
          where

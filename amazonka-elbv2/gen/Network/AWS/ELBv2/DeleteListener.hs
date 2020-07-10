@@ -21,7 +21,7 @@
 -- Deletes the specified listener.
 --
 --
--- Alternatively, your listener is deleted when you delete the load balancer it is attached to using 'DeleteLoadBalancer' .
+-- Alternatively, your listener is deleted when you delete the load balancer to which it is attached, using 'DeleteLoadBalancer' .
 --
 module Network.AWS.ELBv2.DeleteListener
     (
@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteListener' smart constructor.
-newtype DeleteListener = DeleteListener'
-  { _dlListenerARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteListener = DeleteListener'{_dlListenerARN
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteListener' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype DeleteListener = DeleteListener'
 deleteListener
     :: Text -- ^ 'dlListenerARN'
     -> DeleteListener
-deleteListener pListenerARN_ = DeleteListener' {_dlListenerARN = pListenerARN_}
-
+deleteListener pListenerARN_
+  = DeleteListener'{_dlListenerARN = pListenerARN_}
 
 -- | The Amazon Resource Name (ARN) of the listener.
 dlListenerARN :: Lens' DeleteListener Text
@@ -92,10 +91,10 @@ instance ToQuery DeleteListener where
                "ListenerArn" =: _dlListenerARN]
 
 -- | /See:/ 'deleteListenerResponse' smart constructor.
-newtype DeleteListenerResponse = DeleteListenerResponse'
-  { _dlrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteListenerResponse = DeleteListenerResponse'{_dlrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteListenerResponse' with the minimum fields required to make a request.
 --
@@ -105,9 +104,9 @@ newtype DeleteListenerResponse = DeleteListenerResponse'
 deleteListenerResponse
     :: Int -- ^ 'dlrsResponseStatus'
     -> DeleteListenerResponse
-deleteListenerResponse pResponseStatus_ =
-  DeleteListenerResponse' {_dlrsResponseStatus = pResponseStatus_}
-
+deleteListenerResponse pResponseStatus_
+  = DeleteListenerResponse'{_dlrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 dlrsResponseStatus :: Lens' DeleteListenerResponse Int

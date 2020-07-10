@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteSubnetGroup' smart constructor.
-newtype DeleteSubnetGroup = DeleteSubnetGroup'
-  { _dsgSubnetGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSubnetGroup = DeleteSubnetGroup'{_dsgSubnetGroupName
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSubnetGroup' with the minimum fields required to make a request.
 --
@@ -58,9 +57,9 @@ newtype DeleteSubnetGroup = DeleteSubnetGroup'
 deleteSubnetGroup
     :: Text -- ^ 'dsgSubnetGroupName'
     -> DeleteSubnetGroup
-deleteSubnetGroup pSubnetGroupName_ =
-  DeleteSubnetGroup' {_dsgSubnetGroupName = pSubnetGroupName_}
-
+deleteSubnetGroup pSubnetGroupName_
+  = DeleteSubnetGroup'{_dsgSubnetGroupName =
+                         pSubnetGroupName_}
 
 -- | The name of the subnet group to delete.
 dsgSubnetGroupName :: Lens' DeleteSubnetGroup Text
@@ -101,11 +100,12 @@ instance ToQuery DeleteSubnetGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteSubnetGroupResponse' smart constructor.
-data DeleteSubnetGroupResponse = DeleteSubnetGroupResponse'
-  { _dsgrsDeletionMessage :: !(Maybe Text)
-  , _dsgrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSubnetGroupResponse = DeleteSubnetGroupResponse'{_dsgrsDeletionMessage
+                                                            :: !(Maybe Text),
+                                                            _dsgrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +117,10 @@ data DeleteSubnetGroupResponse = DeleteSubnetGroupResponse'
 deleteSubnetGroupResponse
     :: Int -- ^ 'dsgrsResponseStatus'
     -> DeleteSubnetGroupResponse
-deleteSubnetGroupResponse pResponseStatus_ =
-  DeleteSubnetGroupResponse'
-    {_dsgrsDeletionMessage = Nothing, _dsgrsResponseStatus = pResponseStatus_}
-
+deleteSubnetGroupResponse pResponseStatus_
+  = DeleteSubnetGroupResponse'{_dsgrsDeletionMessage =
+                                 Nothing,
+                               _dsgrsResponseStatus = pResponseStatus_}
 
 -- | A user-specified message for this action (i.e., a reason for deleting the subnet group).
 dsgrsDeletionMessage :: Lens' DeleteSubnetGroupResponse (Maybe Text)

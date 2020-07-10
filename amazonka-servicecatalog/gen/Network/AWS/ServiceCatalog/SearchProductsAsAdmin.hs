@@ -56,17 +56,26 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'searchProductsAsAdmin' smart constructor.
-data SearchProductsAsAdmin = SearchProductsAsAdmin'
-  { _spaaPortfolioId    :: !(Maybe Text)
-  , _spaaFilters        :: !(Maybe (Map ProductViewFilterBy [Text]))
-  , _spaaSortOrder      :: !(Maybe SortOrder)
-  , _spaaAcceptLanguage :: !(Maybe Text)
-  , _spaaPageToken      :: !(Maybe Text)
-  , _spaaPageSize       :: !(Maybe Nat)
-  , _spaaProductSource  :: !(Maybe ProductSource)
-  , _spaaSortBy         :: !(Maybe ProductViewSortBy)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProductsAsAdmin = SearchProductsAsAdmin'{_spaaPortfolioId
+                                                    :: !(Maybe Text),
+                                                    _spaaFilters ::
+                                                    !(Maybe
+                                                        (Map ProductViewFilterBy
+                                                           [Text])),
+                                                    _spaaSortOrder ::
+                                                    !(Maybe SortOrder),
+                                                    _spaaAcceptLanguage ::
+                                                    !(Maybe Text),
+                                                    _spaaPageToken ::
+                                                    !(Maybe Text),
+                                                    _spaaPageSize ::
+                                                    !(Maybe Nat),
+                                                    _spaaProductSource ::
+                                                    !(Maybe ProductSource),
+                                                    _spaaSortBy ::
+                                                    !(Maybe ProductViewSortBy)}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'SearchProductsAsAdmin' with the minimum fields required to make a request.
 --
@@ -89,18 +98,12 @@ data SearchProductsAsAdmin = SearchProductsAsAdmin'
 -- * 'spaaSortBy' - The sort field. If no value is specified, the results are not sorted.
 searchProductsAsAdmin
     :: SearchProductsAsAdmin
-searchProductsAsAdmin =
-  SearchProductsAsAdmin'
-    { _spaaPortfolioId = Nothing
-    , _spaaFilters = Nothing
-    , _spaaSortOrder = Nothing
-    , _spaaAcceptLanguage = Nothing
-    , _spaaPageToken = Nothing
-    , _spaaPageSize = Nothing
-    , _spaaProductSource = Nothing
-    , _spaaSortBy = Nothing
-    }
-
+searchProductsAsAdmin
+  = SearchProductsAsAdmin'{_spaaPortfolioId = Nothing,
+                           _spaaFilters = Nothing, _spaaSortOrder = Nothing,
+                           _spaaAcceptLanguage = Nothing,
+                           _spaaPageToken = Nothing, _spaaPageSize = Nothing,
+                           _spaaProductSource = Nothing, _spaaSortBy = Nothing}
 
 -- | The portfolio identifier.
 spaaPortfolioId :: Lens' SearchProductsAsAdmin (Maybe Text)
@@ -188,12 +191,18 @@ instance ToQuery SearchProductsAsAdmin where
         toQuery = const mempty
 
 -- | /See:/ 'searchProductsAsAdminResponse' smart constructor.
-data SearchProductsAsAdminResponse = SearchProductsAsAdminResponse'
-  { _spaarsNextPageToken      :: !(Maybe Text)
-  , _spaarsProductViewDetails :: !(Maybe [ProductViewDetail])
-  , _spaarsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProductsAsAdminResponse = SearchProductsAsAdminResponse'{_spaarsNextPageToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _spaarsProductViewDetails
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [ProductViewDetail]),
+                                                                    _spaarsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'SearchProductsAsAdminResponse' with the minimum fields required to make a request.
 --
@@ -207,13 +216,11 @@ data SearchProductsAsAdminResponse = SearchProductsAsAdminResponse'
 searchProductsAsAdminResponse
     :: Int -- ^ 'spaarsResponseStatus'
     -> SearchProductsAsAdminResponse
-searchProductsAsAdminResponse pResponseStatus_ =
-  SearchProductsAsAdminResponse'
-    { _spaarsNextPageToken = Nothing
-    , _spaarsProductViewDetails = Nothing
-    , _spaarsResponseStatus = pResponseStatus_
-    }
-
+searchProductsAsAdminResponse pResponseStatus_
+  = SearchProductsAsAdminResponse'{_spaarsNextPageToken
+                                     = Nothing,
+                                   _spaarsProductViewDetails = Nothing,
+                                   _spaarsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 spaarsNextPageToken :: Lens' SearchProductsAsAdminResponse (Maybe Text)

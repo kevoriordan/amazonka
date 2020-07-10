@@ -46,18 +46,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDatabase' smart constructor.
-data UpdateDatabase = UpdateDatabase'
-  { _udCatalogId     :: !(Maybe Text)
-  , _udName          :: !Text
-  , _udDatabaseInput :: !DatabaseInput
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDatabase = UpdateDatabase'{_udCatalogId ::
+                                      !(Maybe Text),
+                                      _udName :: !Text,
+                                      _udDatabaseInput :: !DatabaseInput}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDatabase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udCatalogId' - The ID of the Data Catalog in which the metadata database resides. If none is supplied, the AWS account ID is used by default.
+-- * 'udCatalogId' - The ID of the Data Catalog in which the metadata database resides. If none is provided, the AWS account ID is used by default.
 --
 -- * 'udName' - The name of the database to update in the catalog. For Hive compatibility, this is folded to lowercase.
 --
@@ -66,15 +65,11 @@ updateDatabase
     :: Text -- ^ 'udName'
     -> DatabaseInput -- ^ 'udDatabaseInput'
     -> UpdateDatabase
-updateDatabase pName_ pDatabaseInput_ =
-  UpdateDatabase'
-    { _udCatalogId = Nothing
-    , _udName = pName_
-    , _udDatabaseInput = pDatabaseInput_
-    }
+updateDatabase pName_ pDatabaseInput_
+  = UpdateDatabase'{_udCatalogId = Nothing,
+                    _udName = pName_, _udDatabaseInput = pDatabaseInput_}
 
-
--- | The ID of the Data Catalog in which the metadata database resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog in which the metadata database resides. If none is provided, the AWS account ID is used by default.
 udCatalogId :: Lens' UpdateDatabase (Maybe Text)
 udCatalogId = lens _udCatalogId (\ s a -> s{_udCatalogId = a})
 
@@ -122,10 +117,10 @@ instance ToQuery UpdateDatabase where
         toQuery = const mempty
 
 -- | /See:/ 'updateDatabaseResponse' smart constructor.
-newtype UpdateDatabaseResponse = UpdateDatabaseResponse'
-  { _udrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateDatabaseResponse = UpdateDatabaseResponse'{_udrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateDatabaseResponse' with the minimum fields required to make a request.
 --
@@ -135,9 +130,9 @@ newtype UpdateDatabaseResponse = UpdateDatabaseResponse'
 updateDatabaseResponse
     :: Int -- ^ 'udrsResponseStatus'
     -> UpdateDatabaseResponse
-updateDatabaseResponse pResponseStatus_ =
-  UpdateDatabaseResponse' {_udrsResponseStatus = pResponseStatus_}
-
+updateDatabaseResponse pResponseStatus_
+  = UpdateDatabaseResponse'{_udrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 udrsResponseStatus :: Lens' UpdateDatabaseResponse Int

@@ -29,6 +29,8 @@ module Network.AWS.AlexaBusiness.CreateProfile
     -- * Request Lenses
     , cpSetupModeDisabled
     , cpPSTNEnabled
+    , cpLocale
+    , cpMeetingRoomConfiguration
     , cpClientRequestToken
     , cpMaxVolumeLimit
     , cpProfileName
@@ -54,19 +56,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createProfile' smart constructor.
-data CreateProfile = CreateProfile'
-  { _cpSetupModeDisabled  :: !(Maybe Bool)
-  , _cpPSTNEnabled        :: !(Maybe Bool)
-  , _cpClientRequestToken :: !(Maybe Text)
-  , _cpMaxVolumeLimit     :: !(Maybe Int)
-  , _cpProfileName        :: !Text
-  , _cpTimezone           :: !Text
-  , _cpAddress            :: !Text
-  , _cpDistanceUnit       :: !DistanceUnit
-  , _cpTemperatureUnit    :: !TemperatureUnit
-  , _cpWakeWord           :: !WakeWord
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateProfile = CreateProfile'{_cpSetupModeDisabled
+                                    :: !(Maybe Bool),
+                                    _cpPSTNEnabled :: !(Maybe Bool),
+                                    _cpLocale :: !(Maybe Text),
+                                    _cpMeetingRoomConfiguration ::
+                                    !(Maybe CreateMeetingRoomConfiguration),
+                                    _cpClientRequestToken :: !(Maybe Text),
+                                    _cpMaxVolumeLimit :: !(Maybe Int),
+                                    _cpProfileName :: !Text,
+                                    _cpTimezone :: !Text, _cpAddress :: !Text,
+                                    _cpDistanceUnit :: !DistanceUnit,
+                                    _cpTemperatureUnit :: !TemperatureUnit,
+                                    _cpWakeWord :: !WakeWord}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateProfile' with the minimum fields required to make a request.
 --
@@ -75,6 +78,10 @@ data CreateProfile = CreateProfile'
 -- * 'cpSetupModeDisabled' - Whether room profile setup is enabled.
 --
 -- * 'cpPSTNEnabled' - Whether PSTN calling is enabled.
+--
+-- * 'cpLocale' - The locale of the room profile. (This is currently only available to a limited preview audience.)
+--
+-- * 'cpMeetingRoomConfiguration' - The meeting room settings of a room profile.
 --
 -- * 'cpClientRequestToken' - The user-specified token that is used during the creation of a profile.
 --
@@ -99,20 +106,18 @@ createProfile
     -> TemperatureUnit -- ^ 'cpTemperatureUnit'
     -> WakeWord -- ^ 'cpWakeWord'
     -> CreateProfile
-createProfile pProfileName_ pTimezone_ pAddress_ pDistanceUnit_ pTemperatureUnit_ pWakeWord_ =
-  CreateProfile'
-    { _cpSetupModeDisabled = Nothing
-    , _cpPSTNEnabled = Nothing
-    , _cpClientRequestToken = Nothing
-    , _cpMaxVolumeLimit = Nothing
-    , _cpProfileName = pProfileName_
-    , _cpTimezone = pTimezone_
-    , _cpAddress = pAddress_
-    , _cpDistanceUnit = pDistanceUnit_
-    , _cpTemperatureUnit = pTemperatureUnit_
-    , _cpWakeWord = pWakeWord_
-    }
-
+createProfile pProfileName_ pTimezone_ pAddress_
+  pDistanceUnit_ pTemperatureUnit_ pWakeWord_
+  = CreateProfile'{_cpSetupModeDisabled = Nothing,
+                   _cpPSTNEnabled = Nothing, _cpLocale = Nothing,
+                   _cpMeetingRoomConfiguration = Nothing,
+                   _cpClientRequestToken = Nothing,
+                   _cpMaxVolumeLimit = Nothing,
+                   _cpProfileName = pProfileName_,
+                   _cpTimezone = pTimezone_, _cpAddress = pAddress_,
+                   _cpDistanceUnit = pDistanceUnit_,
+                   _cpTemperatureUnit = pTemperatureUnit_,
+                   _cpWakeWord = pWakeWord_}
 
 -- | Whether room profile setup is enabled.
 cpSetupModeDisabled :: Lens' CreateProfile (Maybe Bool)
@@ -121,6 +126,14 @@ cpSetupModeDisabled = lens _cpSetupModeDisabled (\ s a -> s{_cpSetupModeDisabled
 -- | Whether PSTN calling is enabled.
 cpPSTNEnabled :: Lens' CreateProfile (Maybe Bool)
 cpPSTNEnabled = lens _cpPSTNEnabled (\ s a -> s{_cpPSTNEnabled = a})
+
+-- | The locale of the room profile. (This is currently only available to a limited preview audience.)
+cpLocale :: Lens' CreateProfile (Maybe Text)
+cpLocale = lens _cpLocale (\ s a -> s{_cpLocale = a})
+
+-- | The meeting room settings of a room profile.
+cpMeetingRoomConfiguration :: Lens' CreateProfile (Maybe CreateMeetingRoomConfiguration)
+cpMeetingRoomConfiguration = lens _cpMeetingRoomConfiguration (\ s a -> s{_cpMeetingRoomConfiguration = a})
 
 -- | The user-specified token that is used during the creation of a profile.
 cpClientRequestToken :: Lens' CreateProfile (Maybe Text)
@@ -182,6 +195,9 @@ instance ToJSON CreateProfile where
               (catMaybes
                  [("SetupModeDisabled" .=) <$> _cpSetupModeDisabled,
                   ("PSTNEnabled" .=) <$> _cpPSTNEnabled,
+                  ("Locale" .=) <$> _cpLocale,
+                  ("MeetingRoomConfiguration" .=) <$>
+                    _cpMeetingRoomConfiguration,
                   ("ClientRequestToken" .=) <$> _cpClientRequestToken,
                   ("MaxVolumeLimit" .=) <$> _cpMaxVolumeLimit,
                   Just ("ProfileName" .= _cpProfileName),
@@ -198,11 +214,11 @@ instance ToQuery CreateProfile where
         toQuery = const mempty
 
 -- | /See:/ 'createProfileResponse' smart constructor.
-data CreateProfileResponse = CreateProfileResponse'
-  { _cprsProfileARN     :: !(Maybe Text)
-  , _cprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateProfileResponse = CreateProfileResponse'{_cprsProfileARN
+                                                    :: !(Maybe Text),
+                                                    _cprsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateProfileResponse' with the minimum fields required to make a request.
 --
@@ -214,10 +230,9 @@ data CreateProfileResponse = CreateProfileResponse'
 createProfileResponse
     :: Int -- ^ 'cprsResponseStatus'
     -> CreateProfileResponse
-createProfileResponse pResponseStatus_ =
-  CreateProfileResponse'
-    {_cprsProfileARN = Nothing, _cprsResponseStatus = pResponseStatus_}
-
+createProfileResponse pResponseStatus_
+  = CreateProfileResponse'{_cprsProfileARN = Nothing,
+                           _cprsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the newly created room profile in the response.
 cprsProfileARN :: Lens' CreateProfileResponse (Maybe Text)

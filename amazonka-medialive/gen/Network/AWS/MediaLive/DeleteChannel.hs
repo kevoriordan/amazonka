@@ -32,14 +32,18 @@ module Network.AWS.MediaLive.DeleteChannel
     , DeleteChannelResponse
     -- * Response Lenses
     , drsState
+    , drsLogLevel
     , drsARN
     , drsPipelinesRunningCount
+    , drsPipelineDetails
     , drsInputSpecification
     , drsInputAttachments
     , drsDestinations
     , drsName
     , drsId
+    , drsChannelClass
     , drsEgressEndpoints
+    , drsTags
     , drsEncoderSettings
     , drsRoleARN
     , drsResponseStatus
@@ -55,10 +59,9 @@ import Network.AWS.Response
 -- | Placeholder documentation for DeleteChannelRequest
 --
 -- /See:/ 'deleteChannel' smart constructor.
-newtype DeleteChannel = DeleteChannel'
-  { _dcChannelId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteChannel = DeleteChannel'{_dcChannelId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteChannel' with the minimum fields required to make a request.
 --
@@ -68,8 +71,8 @@ newtype DeleteChannel = DeleteChannel'
 deleteChannel
     :: Text -- ^ 'dcChannelId'
     -> DeleteChannel
-deleteChannel pChannelId_ = DeleteChannel' {_dcChannelId = pChannelId_}
-
+deleteChannel pChannelId_
+  = DeleteChannel'{_dcChannelId = pChannelId_}
 
 -- | Unique ID of the channel.
 dcChannelId :: Lens' DeleteChannel Text
@@ -82,14 +85,18 @@ instance AWSRequest DeleteChannel where
           = receiveJSON
               (\ s h x ->
                  DeleteChannelResponse' <$>
-                   (x .?> "state") <*> (x .?> "arn") <*>
-                     (x .?> "pipelinesRunningCount")
+                   (x .?> "state") <*> (x .?> "logLevel") <*>
+                     (x .?> "arn")
+                     <*> (x .?> "pipelinesRunningCount")
+                     <*> (x .?> "pipelineDetails" .!@ mempty)
                      <*> (x .?> "inputSpecification")
                      <*> (x .?> "inputAttachments" .!@ mempty)
                      <*> (x .?> "destinations" .!@ mempty)
                      <*> (x .?> "name")
                      <*> (x .?> "id")
+                     <*> (x .?> "channelClass")
                      <*> (x .?> "egressEndpoints" .!@ mempty)
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (x .?> "encoderSettings")
                      <*> (x .?> "roleArn")
                      <*> (pure (fromEnum s)))
@@ -115,21 +122,38 @@ instance ToQuery DeleteChannel where
 -- | Placeholder documentation for DeleteChannelResponse
 --
 -- /See:/ 'deleteChannelResponse' smart constructor.
-data DeleteChannelResponse = DeleteChannelResponse'
-  { _drsState                 :: !(Maybe ChannelState)
-  , _drsARN                   :: !(Maybe Text)
-  , _drsPipelinesRunningCount :: !(Maybe Int)
-  , _drsInputSpecification    :: !(Maybe InputSpecification)
-  , _drsInputAttachments      :: !(Maybe [InputAttachment])
-  , _drsDestinations          :: !(Maybe [OutputDestination])
-  , _drsName                  :: !(Maybe Text)
-  , _drsId                    :: !(Maybe Text)
-  , _drsEgressEndpoints       :: !(Maybe [ChannelEgressEndpoint])
-  , _drsEncoderSettings       :: !(Maybe EncoderSettings)
-  , _drsRoleARN               :: !(Maybe Text)
-  , _drsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteChannelResponse = DeleteChannelResponse'{_drsState
+                                                    :: !(Maybe ChannelState),
+                                                    _drsLogLevel ::
+                                                    !(Maybe LogLevel),
+                                                    _drsARN :: !(Maybe Text),
+                                                    _drsPipelinesRunningCount ::
+                                                    !(Maybe Int),
+                                                    _drsPipelineDetails ::
+                                                    !(Maybe [PipelineDetail]),
+                                                    _drsInputSpecification ::
+                                                    !(Maybe InputSpecification),
+                                                    _drsInputAttachments ::
+                                                    !(Maybe [InputAttachment]),
+                                                    _drsDestinations ::
+                                                    !(Maybe
+                                                        [OutputDestination]),
+                                                    _drsName :: !(Maybe Text),
+                                                    _drsId :: !(Maybe Text),
+                                                    _drsChannelClass ::
+                                                    !(Maybe ChannelClass),
+                                                    _drsEgressEndpoints ::
+                                                    !(Maybe
+                                                        [ChannelEgressEndpoint]),
+                                                    _drsTags ::
+                                                    !(Maybe (Map Text Text)),
+                                                    _drsEncoderSettings ::
+                                                    !(Maybe EncoderSettings),
+                                                    _drsRoleARN ::
+                                                    !(Maybe Text),
+                                                    _drsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteChannelResponse' with the minimum fields required to make a request.
 --
@@ -137,9 +161,13 @@ data DeleteChannelResponse = DeleteChannelResponse'
 --
 -- * 'drsState' - Undocumented member.
 --
+-- * 'drsLogLevel' - The log level being written to CloudWatch Logs.
+--
 -- * 'drsARN' - The unique arn of the channel.
 --
 -- * 'drsPipelinesRunningCount' - The number of currently healthy pipelines.
+--
+-- * 'drsPipelineDetails' - Runtime details for the pipelines of a running channel.
 --
 -- * 'drsInputSpecification' - Undocumented member.
 --
@@ -151,7 +179,11 @@ data DeleteChannelResponse = DeleteChannelResponse'
 --
 -- * 'drsId' - The unique id of the channel.
 --
+-- * 'drsChannelClass' - The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+--
 -- * 'drsEgressEndpoints' - The endpoints where outgoing connections initiate from
+--
+-- * 'drsTags' - A collection of key-value pairs.
 --
 -- * 'drsEncoderSettings' - Undocumented member.
 --
@@ -161,26 +193,26 @@ data DeleteChannelResponse = DeleteChannelResponse'
 deleteChannelResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteChannelResponse
-deleteChannelResponse pResponseStatus_ =
-  DeleteChannelResponse'
-    { _drsState = Nothing
-    , _drsARN = Nothing
-    , _drsPipelinesRunningCount = Nothing
-    , _drsInputSpecification = Nothing
-    , _drsInputAttachments = Nothing
-    , _drsDestinations = Nothing
-    , _drsName = Nothing
-    , _drsId = Nothing
-    , _drsEgressEndpoints = Nothing
-    , _drsEncoderSettings = Nothing
-    , _drsRoleARN = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+deleteChannelResponse pResponseStatus_
+  = DeleteChannelResponse'{_drsState = Nothing,
+                           _drsLogLevel = Nothing, _drsARN = Nothing,
+                           _drsPipelinesRunningCount = Nothing,
+                           _drsPipelineDetails = Nothing,
+                           _drsInputSpecification = Nothing,
+                           _drsInputAttachments = Nothing,
+                           _drsDestinations = Nothing, _drsName = Nothing,
+                           _drsId = Nothing, _drsChannelClass = Nothing,
+                           _drsEgressEndpoints = Nothing, _drsTags = Nothing,
+                           _drsEncoderSettings = Nothing, _drsRoleARN = Nothing,
+                           _drsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 drsState :: Lens' DeleteChannelResponse (Maybe ChannelState)
 drsState = lens _drsState (\ s a -> s{_drsState = a})
+
+-- | The log level being written to CloudWatch Logs.
+drsLogLevel :: Lens' DeleteChannelResponse (Maybe LogLevel)
+drsLogLevel = lens _drsLogLevel (\ s a -> s{_drsLogLevel = a})
 
 -- | The unique arn of the channel.
 drsARN :: Lens' DeleteChannelResponse (Maybe Text)
@@ -189,6 +221,10 @@ drsARN = lens _drsARN (\ s a -> s{_drsARN = a})
 -- | The number of currently healthy pipelines.
 drsPipelinesRunningCount :: Lens' DeleteChannelResponse (Maybe Int)
 drsPipelinesRunningCount = lens _drsPipelinesRunningCount (\ s a -> s{_drsPipelinesRunningCount = a})
+
+-- | Runtime details for the pipelines of a running channel.
+drsPipelineDetails :: Lens' DeleteChannelResponse [PipelineDetail]
+drsPipelineDetails = lens _drsPipelineDetails (\ s a -> s{_drsPipelineDetails = a}) . _Default . _Coerce
 
 -- | Undocumented member.
 drsInputSpecification :: Lens' DeleteChannelResponse (Maybe InputSpecification)
@@ -210,9 +246,17 @@ drsName = lens _drsName (\ s a -> s{_drsName = a})
 drsId :: Lens' DeleteChannelResponse (Maybe Text)
 drsId = lens _drsId (\ s a -> s{_drsId = a})
 
+-- | The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+drsChannelClass :: Lens' DeleteChannelResponse (Maybe ChannelClass)
+drsChannelClass = lens _drsChannelClass (\ s a -> s{_drsChannelClass = a})
+
 -- | The endpoints where outgoing connections initiate from
 drsEgressEndpoints :: Lens' DeleteChannelResponse [ChannelEgressEndpoint]
 drsEgressEndpoints = lens _drsEgressEndpoints (\ s a -> s{_drsEgressEndpoints = a}) . _Default . _Coerce
+
+-- | A collection of key-value pairs.
+drsTags :: Lens' DeleteChannelResponse (HashMap Text Text)
+drsTags = lens _drsTags (\ s a -> s{_drsTags = a}) . _Default . _Map
 
 -- | Undocumented member.
 drsEncoderSettings :: Lens' DeleteChannelResponse (Maybe EncoderSettings)

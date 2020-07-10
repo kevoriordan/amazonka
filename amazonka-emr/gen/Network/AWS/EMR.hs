@@ -25,11 +25,11 @@ module Network.AWS.EMR
     -- ** InvalidRequestException
     , _InvalidRequestException
 
-    -- ** InternalServerError
-    , _InternalServerError
-
     -- ** InternalServerException
     , _InternalServerException
+
+    -- ** InternalServerError
+    , _InternalServerError
 
     -- * Waiters
     -- $waiters
@@ -46,83 +46,101 @@ module Network.AWS.EMR
     -- * Operations
     -- $operations
 
-    -- ** RunJobFlow
+    -- ** RunJobFlow 
     , module Network.AWS.EMR.RunJobFlow
 
-    -- ** RemoveAutoScalingPolicy
+    -- ** RemoveAutoScalingPolicy 
     , module Network.AWS.EMR.RemoveAutoScalingPolicy
 
-    -- ** SetVisibleToAllUsers
+    -- ** SetVisibleToAllUsers 
     , module Network.AWS.EMR.SetVisibleToAllUsers
 
-    -- ** TerminateJobFlows
+    -- ** TerminateJobFlows 
     , module Network.AWS.EMR.TerminateJobFlows
 
-    -- ** DescribeStep
+    -- ** DescribeStep 
     , module Network.AWS.EMR.DescribeStep
 
-    -- ** RemoveTags
+    -- ** RemoveTags 
     , module Network.AWS.EMR.RemoveTags
 
-    -- ** DescribeCluster
+    -- ** DescribeCluster 
     , module Network.AWS.EMR.DescribeCluster
 
-    -- ** ListSecurityConfigurations
+    -- ** ListSecurityConfigurations (Paginated)
     , module Network.AWS.EMR.ListSecurityConfigurations
 
-    -- ** CancelSteps
+    -- ** CancelSteps 
     , module Network.AWS.EMR.CancelSteps
 
-    -- ** CreateSecurityConfiguration
+    -- ** CreateSecurityConfiguration 
     , module Network.AWS.EMR.CreateSecurityConfiguration
 
-    -- ** SetTerminationProtection
+    -- ** SetTerminationProtection 
     , module Network.AWS.EMR.SetTerminationProtection
 
-    -- ** AddJobFlowSteps
+    -- ** AddJobFlowSteps 
     , module Network.AWS.EMR.AddJobFlowSteps
 
-    -- ** ModifyInstanceGroups
+    -- ** ModifyInstanceGroups 
     , module Network.AWS.EMR.ModifyInstanceGroups
 
     -- ** ListSteps (Paginated)
     , module Network.AWS.EMR.ListSteps
 
-    -- ** AddInstanceFleet
+    -- ** AddInstanceFleet 
     , module Network.AWS.EMR.AddInstanceFleet
 
-    -- ** AddInstanceGroups
+    -- ** PutManagedScalingPolicy 
+    , module Network.AWS.EMR.PutManagedScalingPolicy
+
+    -- ** AddInstanceGroups 
     , module Network.AWS.EMR.AddInstanceGroups
 
-    -- ** DeleteSecurityConfiguration
+    -- ** DeleteSecurityConfiguration 
     , module Network.AWS.EMR.DeleteSecurityConfiguration
 
-    -- ** ModifyInstanceFleet
+    -- ** ModifyInstanceFleet 
     , module Network.AWS.EMR.ModifyInstanceFleet
 
     -- ** ListInstanceGroups (Paginated)
     , module Network.AWS.EMR.ListInstanceGroups
 
+    -- ** GetBlockPublicAccessConfiguration 
+    , module Network.AWS.EMR.GetBlockPublicAccessConfiguration
+
+    -- ** ModifyCluster 
+    , module Network.AWS.EMR.ModifyCluster
+
+    -- ** PutBlockPublicAccessConfiguration 
+    , module Network.AWS.EMR.PutBlockPublicAccessConfiguration
+
     -- ** ListBootstrapActions (Paginated)
     , module Network.AWS.EMR.ListBootstrapActions
 
-    -- ** AddTags
+    -- ** AddTags 
     , module Network.AWS.EMR.AddTags
 
     -- ** ListInstances (Paginated)
     , module Network.AWS.EMR.ListInstances
 
-    -- ** PutAutoScalingPolicy
+    -- ** PutAutoScalingPolicy 
     , module Network.AWS.EMR.PutAutoScalingPolicy
 
     -- ** ListClusters (Paginated)
     , module Network.AWS.EMR.ListClusters
 
-    -- ** DescribeSecurityConfiguration
+    -- ** DescribeSecurityConfiguration 
     , module Network.AWS.EMR.DescribeSecurityConfiguration
+
+    -- ** GetManagedScalingPolicy 
+    , module Network.AWS.EMR.GetManagedScalingPolicy
 
     -- ** ListInstanceFleets (Paginated)
     , module Network.AWS.EMR.ListInstanceFleets
+
+    -- ** RemoveManagedScalingPolicy 
+    , module Network.AWS.EMR.RemoveManagedScalingPolicy
 
     -- * Types
 
@@ -149,6 +167,9 @@ module Network.AWS.EMR
 
     -- ** ComparisonOperator
     , ComparisonOperator (..)
+
+    -- ** ComputeLimitsUnitType
+    , ComputeLimitsUnitType (..)
 
     -- ** InstanceCollectionType
     , InstanceCollectionType (..)
@@ -195,6 +216,9 @@ module Network.AWS.EMR
     -- ** Statistic
     , Statistic (..)
 
+    -- ** StepCancellationOption
+    , StepCancellationOption (..)
+
     -- ** StepState
     , StepState (..)
 
@@ -237,6 +261,18 @@ module Network.AWS.EMR
     , aspsState
     , aspsStateChangeReason
 
+    -- ** BlockPublicAccessConfiguration
+    , BlockPublicAccessConfiguration
+    , blockPublicAccessConfiguration
+    , bpacPermittedPublicSecurityGroupRuleRanges
+    , bpacBlockPublicSecurityGroupRules
+
+    -- ** BlockPublicAccessConfigurationMetadata
+    , BlockPublicAccessConfigurationMetadata
+    , blockPublicAccessConfigurationMetadata
+    , bpacmCreationDateTime
+    , bpacmCreatedByARN
+
     -- ** BootstrapActionConfig
     , BootstrapActionConfig
     , bootstrapActionConfig
@@ -266,9 +302,11 @@ module Network.AWS.EMR
     -- ** Cluster
     , Cluster
     , cluster
+    , cluClusterARN
     , cluRequestedAMIVersion
     , cluEBSRootVolumeSize
     , cluEC2InstanceAttributes
+    , cluOutpostARN
     , cluNormalizedInstanceHours
     , cluConfigurations
     , cluCustomAMIId
@@ -285,6 +323,7 @@ module Network.AWS.EMR
     , cluTerminationProtected
     , cluVisibleToAllUsers
     , cluAutoTerminate
+    , cluStepConcurrencyLevel
     , cluApplications
     , cluTags
     , cluServiceRole
@@ -309,6 +348,8 @@ module Network.AWS.EMR
     , ClusterSummary
     , clusterSummary
     , csStatus
+    , csClusterARN
+    , csOutpostARN
     , csNormalizedInstanceHours
     , csName
     , csId
@@ -326,6 +367,14 @@ module Network.AWS.EMR
     , cArgs
     , cScriptPath
     , cName
+
+    -- ** ComputeLimits
+    , ComputeLimits
+    , computeLimits
+    , clMaximumOnDemandCapacityUnits
+    , clUnitType
+    , clMinimumCapacityUnits
+    , clMaximumCapacityUnits
 
     -- ** Configuration
     , Configuration
@@ -472,13 +521,16 @@ module Network.AWS.EMR
     , InstanceGroup
     , instanceGroup
     , igStatus
+    , igLastSuccessfullyAppliedConfigurationsVersion
     , igBidPrice
     , igRequestedInstanceCount
     , igRunningInstanceCount
+    , igLastSuccessfullyAppliedConfigurations
     , igConfigurations
     , igInstanceGroupType
     , igEBSBlockDevices
     , igInstanceType
+    , igConfigurationsVersion
     , igEBSOptimized
     , igMarket
     , igName
@@ -503,6 +555,7 @@ module Network.AWS.EMR
     , InstanceGroupModifyConfig
     , instanceGroupModifyConfig
     , igmcInstanceCount
+    , igmcConfigurations
     , igmcEC2InstanceIdsToTerminate
     , igmcShrinkPolicy
     , igmcInstanceGroupId
@@ -599,17 +652,22 @@ module Network.AWS.EMR
     -- ** KerberosAttributes
     , KerberosAttributes
     , kerberosAttributes
+    , kaKdcAdminPassword
+    , kaRealm
     , kaADDomainJoinPassword
     , kaCrossRealmTrustPrincipalPassword
     , kaADDomainJoinUser
-    , kaRealm
-    , kaKdcAdminPassword
 
     -- ** KeyValue
     , KeyValue
     , keyValue
     , kvValue
     , kvKey
+
+    -- ** ManagedScalingPolicy
+    , ManagedScalingPolicy
+    , managedScalingPolicy
+    , mspComputeLimits
 
     -- ** MetricDimension
     , MetricDimension
@@ -622,6 +680,12 @@ module Network.AWS.EMR
     , placementType
     , ptAvailabilityZones
     , ptAvailabilityZone
+
+    -- ** PortRange
+    , PortRange
+    , portRange
+    , prMaxRange
+    , prMinRange
 
     -- ** ScalingAction
     , ScalingAction
@@ -756,6 +820,8 @@ import Network.AWS.EMR.DeleteSecurityConfiguration
 import Network.AWS.EMR.DescribeCluster
 import Network.AWS.EMR.DescribeSecurityConfiguration
 import Network.AWS.EMR.DescribeStep
+import Network.AWS.EMR.GetBlockPublicAccessConfiguration
+import Network.AWS.EMR.GetManagedScalingPolicy
 import Network.AWS.EMR.ListBootstrapActions
 import Network.AWS.EMR.ListClusters
 import Network.AWS.EMR.ListInstanceFleets
@@ -763,10 +829,14 @@ import Network.AWS.EMR.ListInstanceGroups
 import Network.AWS.EMR.ListInstances
 import Network.AWS.EMR.ListSecurityConfigurations
 import Network.AWS.EMR.ListSteps
+import Network.AWS.EMR.ModifyCluster
 import Network.AWS.EMR.ModifyInstanceFleet
 import Network.AWS.EMR.ModifyInstanceGroups
 import Network.AWS.EMR.PutAutoScalingPolicy
+import Network.AWS.EMR.PutBlockPublicAccessConfiguration
+import Network.AWS.EMR.PutManagedScalingPolicy
 import Network.AWS.EMR.RemoveAutoScalingPolicy
+import Network.AWS.EMR.RemoveManagedScalingPolicy
 import Network.AWS.EMR.RemoveTags
 import Network.AWS.EMR.RunJobFlow
 import Network.AWS.EMR.SetTerminationProtection

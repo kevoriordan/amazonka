@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the specified fleets or all fleets in the account.
+-- Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AppStream.DescribeFleets
     (
     -- * Creating a Request
@@ -42,16 +44,16 @@ module Network.AWS.AppStream.DescribeFleets
 import Network.AWS.AppStream.Types
 import Network.AWS.AppStream.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeFleets' smart constructor.
-data DescribeFleets = DescribeFleets'
-  { _dfNextToken :: !(Maybe Text)
-  , _dfNames     :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleets = DescribeFleets'{_dfNextToken ::
+                                      !(Maybe Text),
+                                      _dfNames :: !(Maybe [Text])}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeFleets' with the minimum fields required to make a request.
 --
@@ -62,8 +64,9 @@ data DescribeFleets = DescribeFleets'
 -- * 'dfNames' - The names of the fleets to describe.
 describeFleets
     :: DescribeFleets
-describeFleets = DescribeFleets' {_dfNextToken = Nothing, _dfNames = Nothing}
-
+describeFleets
+  = DescribeFleets'{_dfNextToken = Nothing,
+                    _dfNames = Nothing}
 
 -- | The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
 dfNextToken :: Lens' DescribeFleets (Maybe Text)
@@ -72,6 +75,13 @@ dfNextToken = lens _dfNextToken (\ s a -> s{_dfNextToken = a})
 -- | The names of the fleets to describe.
 dfNames :: Lens' DescribeFleets [Text]
 dfNames = lens _dfNames (\ s a -> s{_dfNames = a}) . _Default . _Coerce
+
+instance AWSPager DescribeFleets where
+        page rq rs
+          | stop (rs ^. dfsrsNextToken) = Nothing
+          | stop (rs ^. dfsrsFleets) = Nothing
+          | otherwise =
+            Just $ rq & dfNextToken .~ rs ^. dfsrsNextToken
 
 instance AWSRequest DescribeFleets where
         type Rs DescribeFleets = DescribeFleetsResponse
@@ -111,12 +121,14 @@ instance ToQuery DescribeFleets where
         toQuery = const mempty
 
 -- | /See:/ 'describeFleetsResponse' smart constructor.
-data DescribeFleetsResponse = DescribeFleetsResponse'
-  { _dfsrsNextToken      :: !(Maybe Text)
-  , _dfsrsFleets         :: !(Maybe [Fleet])
-  , _dfsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeFleetsResponse = DescribeFleetsResponse'{_dfsrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _dfsrsFleets ::
+                                                      !(Maybe [Fleet]),
+                                                      _dfsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeFleetsResponse' with the minimum fields required to make a request.
 --
@@ -130,13 +142,10 @@ data DescribeFleetsResponse = DescribeFleetsResponse'
 describeFleetsResponse
     :: Int -- ^ 'dfsrsResponseStatus'
     -> DescribeFleetsResponse
-describeFleetsResponse pResponseStatus_ =
-  DescribeFleetsResponse'
-    { _dfsrsNextToken = Nothing
-    , _dfsrsFleets = Nothing
-    , _dfsrsResponseStatus = pResponseStatus_
-    }
-
+describeFleetsResponse pResponseStatus_
+  = DescribeFleetsResponse'{_dfsrsNextToken = Nothing,
+                            _dfsrsFleets = Nothing,
+                            _dfsrsResponseStatus = pResponseStatus_}
 
 -- | The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
 dfsrsNextToken :: Lens' DescribeFleetsResponse (Maybe Text)

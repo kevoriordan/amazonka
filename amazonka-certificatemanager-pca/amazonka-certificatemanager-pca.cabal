@@ -47,7 +47,9 @@ library
           Network.AWS.CertificateManagerPCA
         , Network.AWS.CertificateManagerPCA.CreateCertificateAuthority
         , Network.AWS.CertificateManagerPCA.CreateCertificateAuthorityAuditReport
+        , Network.AWS.CertificateManagerPCA.CreatePermission
         , Network.AWS.CertificateManagerPCA.DeleteCertificateAuthority
+        , Network.AWS.CertificateManagerPCA.DeletePermission
         , Network.AWS.CertificateManagerPCA.DescribeCertificateAuthority
         , Network.AWS.CertificateManagerPCA.DescribeCertificateAuthorityAuditReport
         , Network.AWS.CertificateManagerPCA.GetCertificate
@@ -56,7 +58,9 @@ library
         , Network.AWS.CertificateManagerPCA.ImportCertificateAuthorityCertificate
         , Network.AWS.CertificateManagerPCA.IssueCertificate
         , Network.AWS.CertificateManagerPCA.ListCertificateAuthorities
+        , Network.AWS.CertificateManagerPCA.ListPermissions
         , Network.AWS.CertificateManagerPCA.ListTags
+        , Network.AWS.CertificateManagerPCA.RestoreCertificateAuthority
         , Network.AWS.CertificateManagerPCA.RevokeCertificate
         , Network.AWS.CertificateManagerPCA.TagCertificateAuthority
         , Network.AWS.CertificateManagerPCA.Types
@@ -65,12 +69,30 @@ library
         , Network.AWS.CertificateManagerPCA.Waiters
 
     other-modules:
-          Network.AWS.CertificateManagerPCA.Types.Product
-        , Network.AWS.CertificateManagerPCA.Types.Sum
+          Network.AWS.CertificateManagerPCA.Types.ASN1Subject
+        , Network.AWS.CertificateManagerPCA.Types.ActionType
+        , Network.AWS.CertificateManagerPCA.Types.AuditReportResponseFormat
+        , Network.AWS.CertificateManagerPCA.Types.AuditReportStatus
+        , Network.AWS.CertificateManagerPCA.Types.CertificateAuthority
+        , Network.AWS.CertificateManagerPCA.Types.CertificateAuthorityConfiguration
+        , Network.AWS.CertificateManagerPCA.Types.CertificateAuthorityStatus
+        , Network.AWS.CertificateManagerPCA.Types.CertificateAuthorityType
+        , Network.AWS.CertificateManagerPCA.Types.CrlConfiguration
+        , Network.AWS.CertificateManagerPCA.Types.FailureReason
+        , Network.AWS.CertificateManagerPCA.Types.KeyAlgorithm
+        , Network.AWS.CertificateManagerPCA.Types.Permission
+        , Network.AWS.CertificateManagerPCA.Types.Product
+        , Network.AWS.CertificateManagerPCA.Types.RevocationConfiguration
+        , Network.AWS.CertificateManagerPCA.Types.RevocationReason
+        , Network.AWS.CertificateManagerPCA.Types.SigningAlgorithm
+        , Network.AWS.CertificateManagerPCA.Types.Tag
+        , Network.AWS.CertificateManagerPCA.Types.Validity
+        , Network.AWS.CertificateManagerPCA.Types.ValidityPeriodType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-certificatemanager-pca-test
     type:              exitcode-stdio-1.0
@@ -94,6 +116,7 @@ test-suite amazonka-certificatemanager-pca-test
         , amazonka-certificatemanager-pca
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

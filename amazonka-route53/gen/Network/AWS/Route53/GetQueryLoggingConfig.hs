@@ -21,7 +21,7 @@
 -- Gets information about a specified configuration for DNS query logging.
 --
 --
--- For more information about DNS query logs, see 'CreateQueryLoggingConfig' and <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html Logging DNS Queries> .
+-- For more information about DNS query logs, see <https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateQueryLoggingConfig.html CreateQueryLoggingConfig> and <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html Logging DNS Queries> .
 --
 module Network.AWS.Route53.GetQueryLoggingConfig
     (
@@ -47,10 +47,10 @@ import Network.AWS.Route53.Types
 import Network.AWS.Route53.Types.Product
 
 -- | /See:/ 'getQueryLoggingConfig' smart constructor.
-newtype GetQueryLoggingConfig = GetQueryLoggingConfig'
-  { _gqlcId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetQueryLoggingConfig = GetQueryLoggingConfig'{_gqlcId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetQueryLoggingConfig' with the minimum fields required to make a request.
 --
@@ -60,8 +60,8 @@ newtype GetQueryLoggingConfig = GetQueryLoggingConfig'
 getQueryLoggingConfig
     :: Text -- ^ 'gqlcId'
     -> GetQueryLoggingConfig
-getQueryLoggingConfig pId_ = GetQueryLoggingConfig' {_gqlcId = pId_}
-
+getQueryLoggingConfig pId_
+  = GetQueryLoggingConfig'{_gqlcId = pId_}
 
 -- | The ID of the configuration for DNS query logging that you want to get information about.
 gqlcId :: Lens' GetQueryLoggingConfig Text
@@ -93,11 +93,13 @@ instance ToQuery GetQueryLoggingConfig where
         toQuery = const mempty
 
 -- | /See:/ 'getQueryLoggingConfigResponse' smart constructor.
-data GetQueryLoggingConfigResponse = GetQueryLoggingConfigResponse'
-  { _gqlcrsResponseStatus     :: !Int
-  , _gqlcrsQueryLoggingConfig :: !QueryLoggingConfig
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQueryLoggingConfigResponse = GetQueryLoggingConfigResponse'{_gqlcrsResponseStatus
+                                                                    :: !Int,
+                                                                    _gqlcrsQueryLoggingConfig
+                                                                    ::
+                                                                    !QueryLoggingConfig}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetQueryLoggingConfigResponse' with the minimum fields required to make a request.
 --
@@ -105,23 +107,23 @@ data GetQueryLoggingConfigResponse = GetQueryLoggingConfigResponse'
 --
 -- * 'gqlcrsResponseStatus' - -- | The response status code.
 --
--- * 'gqlcrsQueryLoggingConfig' - A complex type that contains information about the query logging configuration that you specified in a 'GetQueryLoggingConfig' request.
+-- * 'gqlcrsQueryLoggingConfig' - A complex type that contains information about the query logging configuration that you specified in a <https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html GetQueryLoggingConfig> request.
 getQueryLoggingConfigResponse
     :: Int -- ^ 'gqlcrsResponseStatus'
     -> QueryLoggingConfig -- ^ 'gqlcrsQueryLoggingConfig'
     -> GetQueryLoggingConfigResponse
-getQueryLoggingConfigResponse pResponseStatus_ pQueryLoggingConfig_ =
-  GetQueryLoggingConfigResponse'
-    { _gqlcrsResponseStatus = pResponseStatus_
-    , _gqlcrsQueryLoggingConfig = pQueryLoggingConfig_
-    }
-
+getQueryLoggingConfigResponse pResponseStatus_
+  pQueryLoggingConfig_
+  = GetQueryLoggingConfigResponse'{_gqlcrsResponseStatus
+                                     = pResponseStatus_,
+                                   _gqlcrsQueryLoggingConfig =
+                                     pQueryLoggingConfig_}
 
 -- | -- | The response status code.
 gqlcrsResponseStatus :: Lens' GetQueryLoggingConfigResponse Int
 gqlcrsResponseStatus = lens _gqlcrsResponseStatus (\ s a -> s{_gqlcrsResponseStatus = a})
 
--- | A complex type that contains information about the query logging configuration that you specified in a 'GetQueryLoggingConfig' request.
+-- | A complex type that contains information about the query logging configuration that you specified in a <https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetQueryLoggingConfig.html GetQueryLoggingConfig> request.
 gqlcrsQueryLoggingConfig :: Lens' GetQueryLoggingConfigResponse QueryLoggingConfig
 gqlcrsQueryLoggingConfig = lens _gqlcrsQueryLoggingConfig (\ s a -> s{_gqlcrsQueryLoggingConfig = a})
 

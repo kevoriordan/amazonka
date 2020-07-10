@@ -50,25 +50,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listClusters' smart constructor.
-data ListClusters = ListClusters'
-  { _lcNextToken  :: !(Maybe Text)
-  , _lcMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClusters = ListClusters'{_lcNextToken ::
+                                  !(Maybe Text),
+                                  _lcMaxResults :: !(Maybe Int)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListClusters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lcNextToken' - The @nextToken@ value returned from a previous paginated @ListClusters@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- * 'lcNextToken' - The @nextToken@ value returned from a @ListClusters@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 --
 -- * 'lcMaxResults' - The maximum number of cluster results returned by @ListClusters@ in paginated output. When this parameter is used, @ListClusters@ only returns @maxResults@ results in a single page along with a @nextToken@ response element. The remaining results of the initial request can be seen by sending another @ListClusters@ request with the returned @nextToken@ value. This value can be between 1 and 100. If this parameter is not used, then @ListClusters@ returns up to 100 results and a @nextToken@ value if applicable.
 listClusters
     :: ListClusters
-listClusters = ListClusters' {_lcNextToken = Nothing, _lcMaxResults = Nothing}
+listClusters
+  = ListClusters'{_lcNextToken = Nothing,
+                  _lcMaxResults = Nothing}
 
-
--- | The @nextToken@ value returned from a previous paginated @ListClusters@ request where @maxResults@ was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the @nextToken@ value.
+-- | The @nextToken@ value returned from a @ListClusters@ request indicating that more results are available to fulfill the request and further calls will be needed. If @maxResults@ was provided, it is possible the number of results to be fewer than @maxResults@ .
 lcNextToken :: Lens' ListClusters (Maybe Text)
 lcNextToken = lens _lcNextToken (\ s a -> s{_lcNextToken = a})
 
@@ -122,12 +122,12 @@ instance ToQuery ListClusters where
         toQuery = const mempty
 
 -- | /See:/ 'listClustersResponse' smart constructor.
-data ListClustersResponse = ListClustersResponse'
-  { _lcrsClusterARNs    :: !(Maybe [Text])
-  , _lcrsNextToken      :: !(Maybe Text)
-  , _lcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClustersResponse = ListClustersResponse'{_lcrsClusterARNs
+                                                  :: !(Maybe [Text]),
+                                                  _lcrsNextToken ::
+                                                  !(Maybe Text),
+                                                  _lcrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +141,10 @@ data ListClustersResponse = ListClustersResponse'
 listClustersResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListClustersResponse
-listClustersResponse pResponseStatus_ =
-  ListClustersResponse'
-    { _lcrsClusterARNs = Nothing
-    , _lcrsNextToken = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
-
+listClustersResponse pResponseStatus_
+  = ListClustersResponse'{_lcrsClusterARNs = Nothing,
+                          _lcrsNextToken = Nothing,
+                          _lcrsResponseStatus = pResponseStatus_}
 
 -- | The list of full Amazon Resource Name (ARN) entries for each cluster associated with your account.
 lcrsClusterARNs :: Lens' ListClustersResponse [Text]

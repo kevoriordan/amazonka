@@ -51,18 +51,25 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'getComplianceDetailsByResource' smart constructor.
-data GetComplianceDetailsByResource = GetComplianceDetailsByResource'
-  { _gcdbrComplianceTypes :: !(Maybe [ComplianceType])
-  , _gcdbrNextToken       :: !(Maybe Text)
-  , _gcdbrResourceType    :: !Text
-  , _gcdbrResourceId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetComplianceDetailsByResource = GetComplianceDetailsByResource'{_gcdbrComplianceTypes
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [ComplianceType]),
+                                                                      _gcdbrNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _gcdbrResourceType
+                                                                      :: !Text,
+                                                                      _gcdbrResourceId
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'GetComplianceDetailsByResource' with the minimum fields required to make a request.
 --
@@ -79,14 +86,13 @@ getComplianceDetailsByResource
     :: Text -- ^ 'gcdbrResourceType'
     -> Text -- ^ 'gcdbrResourceId'
     -> GetComplianceDetailsByResource
-getComplianceDetailsByResource pResourceType_ pResourceId_ =
-  GetComplianceDetailsByResource'
-    { _gcdbrComplianceTypes = Nothing
-    , _gcdbrNextToken = Nothing
-    , _gcdbrResourceType = pResourceType_
-    , _gcdbrResourceId = pResourceId_
-    }
-
+getComplianceDetailsByResource pResourceType_
+  pResourceId_
+  = GetComplianceDetailsByResource'{_gcdbrComplianceTypes
+                                      = Nothing,
+                                    _gcdbrNextToken = Nothing,
+                                    _gcdbrResourceType = pResourceType_,
+                                    _gcdbrResourceId = pResourceId_}
 
 -- | Filters the results by compliance. The allowed values are @COMPLIANT@ , @NON_COMPLIANT@ , and @NOT_APPLICABLE@ .
 gcdbrComplianceTypes :: Lens' GetComplianceDetailsByResource [ComplianceType]
@@ -156,17 +162,24 @@ instance ToPath GetComplianceDetailsByResource where
 instance ToQuery GetComplianceDetailsByResource where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'getComplianceDetailsByResourceResponse' smart constructor.
-data GetComplianceDetailsByResourceResponse = GetComplianceDetailsByResourceResponse'
-  { _gcdbrrsEvaluationResults :: !(Maybe [EvaluationResult])
-  , _gcdbrrsNextToken         :: !(Maybe Text)
-  , _gcdbrrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetComplianceDetailsByResourceResponse = GetComplianceDetailsByResourceResponse'{_gcdbrrsEvaluationResults
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [EvaluationResult]),
+                                                                                      _gcdbrrsNextToken
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _gcdbrrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'GetComplianceDetailsByResourceResponse' with the minimum fields required to make a request.
 --
@@ -180,13 +193,13 @@ data GetComplianceDetailsByResourceResponse = GetComplianceDetailsByResourceResp
 getComplianceDetailsByResourceResponse
     :: Int -- ^ 'gcdbrrsResponseStatus'
     -> GetComplianceDetailsByResourceResponse
-getComplianceDetailsByResourceResponse pResponseStatus_ =
-  GetComplianceDetailsByResourceResponse'
-    { _gcdbrrsEvaluationResults = Nothing
-    , _gcdbrrsNextToken = Nothing
-    , _gcdbrrsResponseStatus = pResponseStatus_
-    }
-
+getComplianceDetailsByResourceResponse
+  pResponseStatus_
+  = GetComplianceDetailsByResourceResponse'{_gcdbrrsEvaluationResults
+                                              = Nothing,
+                                            _gcdbrrsNextToken = Nothing,
+                                            _gcdbrrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | Indicates whether the specified AWS resource complies each AWS Config rule.
 gcdbrrsEvaluationResults :: Lens' GetComplianceDetailsByResourceResponse [EvaluationResult]

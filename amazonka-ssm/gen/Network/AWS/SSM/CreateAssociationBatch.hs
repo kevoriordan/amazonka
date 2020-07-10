@@ -21,9 +21,9 @@
 -- Associates the specified Systems Manager document with the specified instances or targets.
 --
 --
--- When you associate a document with one or more instances using instance IDs or tags, the SSM Agent running on the instance processes the document and configures the instance as specified.
+-- When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.
 --
--- If you associate a document with an instance that already has an associated document, the system throws the AssociationAlreadyExists exception.
+-- If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
 --
 module Network.AWS.SSM.CreateAssociationBatch
     (
@@ -50,10 +50,12 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'createAssociationBatch' smart constructor.
-newtype CreateAssociationBatch = CreateAssociationBatch'
-  { _cabEntries :: List1 CreateAssociationBatchRequestEntry
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateAssociationBatch = CreateAssociationBatch'{_cabEntries
+                                                         ::
+                                                         List1
+                                                           CreateAssociationBatchRequestEntry}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateAssociationBatch' with the minimum fields required to make a request.
 --
@@ -63,9 +65,9 @@ newtype CreateAssociationBatch = CreateAssociationBatch'
 createAssociationBatch
     :: NonEmpty CreateAssociationBatchRequestEntry -- ^ 'cabEntries'
     -> CreateAssociationBatch
-createAssociationBatch pEntries_ =
-  CreateAssociationBatch' {_cabEntries = _List1 # pEntries_}
-
+createAssociationBatch pEntries_
+  = CreateAssociationBatch'{_cabEntries =
+                              _List1 # pEntries_}
 
 -- | One or more associations.
 cabEntries :: Lens' CreateAssociationBatch (NonEmpty CreateAssociationBatchRequestEntry)
@@ -108,12 +110,18 @@ instance ToQuery CreateAssociationBatch where
         toQuery = const mempty
 
 -- | /See:/ 'createAssociationBatchResponse' smart constructor.
-data CreateAssociationBatchResponse = CreateAssociationBatchResponse'
-  { _cabrsSuccessful     :: !(Maybe [AssociationDescription])
-  , _cabrsFailed         :: !(Maybe [FailedCreateAssociation])
-  , _cabrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAssociationBatchResponse = CreateAssociationBatchResponse'{_cabrsSuccessful
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [AssociationDescription]),
+                                                                      _cabrsFailed
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [FailedCreateAssociation]),
+                                                                      _cabrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateAssociationBatchResponse' with the minimum fields required to make a request.
 --
@@ -127,13 +135,11 @@ data CreateAssociationBatchResponse = CreateAssociationBatchResponse'
 createAssociationBatchResponse
     :: Int -- ^ 'cabrsResponseStatus'
     -> CreateAssociationBatchResponse
-createAssociationBatchResponse pResponseStatus_ =
-  CreateAssociationBatchResponse'
-    { _cabrsSuccessful = Nothing
-    , _cabrsFailed = Nothing
-    , _cabrsResponseStatus = pResponseStatus_
-    }
-
+createAssociationBatchResponse pResponseStatus_
+  = CreateAssociationBatchResponse'{_cabrsSuccessful =
+                                      Nothing,
+                                    _cabrsFailed = Nothing,
+                                    _cabrsResponseStatus = pResponseStatus_}
 
 -- | Information about the associations that succeeded.
 cabrsSuccessful :: Lens' CreateAssociationBatchResponse [AssociationDescription]

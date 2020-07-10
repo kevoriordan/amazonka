@@ -21,6 +21,8 @@
 -- Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria that you specify.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.ListComplianceSummaries
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.SSM.ListComplianceSummaries
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,16 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listComplianceSummaries' smart constructor.
-data ListComplianceSummaries = ListComplianceSummaries'
-  { _lcsFilters    :: !(Maybe [ComplianceStringFilter])
-  , _lcsNextToken  :: !(Maybe Text)
-  , _lcsMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListComplianceSummaries = ListComplianceSummaries'{_lcsFilters
+                                                        ::
+                                                        !(Maybe
+                                                            [ComplianceStringFilter]),
+                                                        _lcsNextToken ::
+                                                        !(Maybe Text),
+                                                        _lcsMaxResults ::
+                                                        !(Maybe Nat)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListComplianceSummaries' with the minimum fields required to make a request.
 --
@@ -61,27 +68,33 @@ data ListComplianceSummaries = ListComplianceSummaries'
 --
 -- * 'lcsFilters' - One or more compliance or inventory filters. Use a filter to return a more specific list of results.
 --
--- * 'lcsNextToken' - A token to start the list. Use this token to get the next set of results.
+-- * 'lcsNextToken' - A token to start the list. Use this token to get the next set of results. 
 --
 -- * 'lcsMaxResults' - The maximum number of items to return for this call. Currently, you can specify null or 50. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 listComplianceSummaries
     :: ListComplianceSummaries
-listComplianceSummaries =
-  ListComplianceSummaries'
-    {_lcsFilters = Nothing, _lcsNextToken = Nothing, _lcsMaxResults = Nothing}
-
+listComplianceSummaries
+  = ListComplianceSummaries'{_lcsFilters = Nothing,
+                             _lcsNextToken = Nothing, _lcsMaxResults = Nothing}
 
 -- | One or more compliance or inventory filters. Use a filter to return a more specific list of results.
 lcsFilters :: Lens' ListComplianceSummaries [ComplianceStringFilter]
 lcsFilters = lens _lcsFilters (\ s a -> s{_lcsFilters = a}) . _Default . _Coerce
 
--- | A token to start the list. Use this token to get the next set of results.
+-- | A token to start the list. Use this token to get the next set of results. 
 lcsNextToken :: Lens' ListComplianceSummaries (Maybe Text)
 lcsNextToken = lens _lcsNextToken (\ s a -> s{_lcsNextToken = a})
 
 -- | The maximum number of items to return for this call. Currently, you can specify null or 50. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 lcsMaxResults :: Lens' ListComplianceSummaries (Maybe Natural)
 lcsMaxResults = lens _lcsMaxResults (\ s a -> s{_lcsMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListComplianceSummaries where
+        page rq rs
+          | stop (rs ^. lcsrsNextToken) = Nothing
+          | stop (rs ^. lcsrsComplianceSummaryItems) = Nothing
+          | otherwise =
+            Just $ rq & lcsNextToken .~ rs ^. lcsrsNextToken
 
 instance AWSRequest ListComplianceSummaries where
         type Rs ListComplianceSummaries =
@@ -123,12 +136,18 @@ instance ToQuery ListComplianceSummaries where
         toQuery = const mempty
 
 -- | /See:/ 'listComplianceSummariesResponse' smart constructor.
-data ListComplianceSummariesResponse = ListComplianceSummariesResponse'
-  { _lcsrsNextToken              :: !(Maybe Text)
-  , _lcsrsComplianceSummaryItems :: !(Maybe [ComplianceSummaryItem])
-  , _lcsrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListComplianceSummariesResponse = ListComplianceSummariesResponse'{_lcsrsNextToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _lcsrsComplianceSummaryItems
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [ComplianceSummaryItem]),
+                                                                        _lcsrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ListComplianceSummariesResponse' with the minimum fields required to make a request.
 --
@@ -142,13 +161,11 @@ data ListComplianceSummariesResponse = ListComplianceSummariesResponse'
 listComplianceSummariesResponse
     :: Int -- ^ 'lcsrsResponseStatus'
     -> ListComplianceSummariesResponse
-listComplianceSummariesResponse pResponseStatus_ =
-  ListComplianceSummariesResponse'
-    { _lcsrsNextToken = Nothing
-    , _lcsrsComplianceSummaryItems = Nothing
-    , _lcsrsResponseStatus = pResponseStatus_
-    }
-
+listComplianceSummariesResponse pResponseStatus_
+  = ListComplianceSummariesResponse'{_lcsrsNextToken =
+                                       Nothing,
+                                     _lcsrsComplianceSummaryItems = Nothing,
+                                     _lcsrsResponseStatus = pResponseStatus_}
 
 -- | The token for the next set of items to return. Use this token to get the next set of results.
 lcsrsNextToken :: Lens' ListComplianceSummariesResponse (Maybe Text)

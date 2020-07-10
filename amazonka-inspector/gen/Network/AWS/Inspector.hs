@@ -11,9 +11,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Amazon Inspector__
+-- __Amazon Inspector__ 
 --
--- Amazon Inspector enables you to analyze the behavior of your AWS resources and to identify potential security issues. For more information, see <http://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html Amazon Inspector User Guide> .
+-- Amazon Inspector enables you to analyze the behavior of your AWS resources and to identify potential security issues. For more information, see <https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html Amazon Inspector User Guide> .
 --
 module Network.AWS.Inspector
     (
@@ -23,23 +23,17 @@ module Network.AWS.Inspector
     -- * Errors
     -- $errors
 
-    -- ** AccessDeniedException
-    , _AccessDeniedException
-
-    -- ** AssessmentRunInProgressException
-    , _AssessmentRunInProgressException
-
     -- ** NoSuchEntityException
     , _NoSuchEntityException
 
-    -- ** UnsupportedFeatureException
-    , _UnsupportedFeatureException
-
-    -- ** AgentsAlreadyRunningAssessmentException
-    , _AgentsAlreadyRunningAssessmentException
-
     -- ** InvalidCrossAccountRoleException
     , _InvalidCrossAccountRoleException
+
+    -- ** AccessDeniedException
+    , _AccessDeniedException
+
+    -- ** PreviewGenerationInProgressException
+    , _PreviewGenerationInProgressException
 
     -- ** InvalidInputException
     , _InvalidInputException
@@ -47,8 +41,20 @@ module Network.AWS.Inspector
     -- ** InternalException
     , _InternalException
 
+    -- ** AssessmentRunInProgressException
+    , _AssessmentRunInProgressException
+
+    -- ** AgentsAlreadyRunningAssessmentException
+    , _AgentsAlreadyRunningAssessmentException
+
     -- ** LimitExceededException
     , _LimitExceededException
+
+    -- ** ServiceTemporarilyUnavailableException
+    , _ServiceTemporarilyUnavailableException
+
+    -- ** UnsupportedFeatureException
+    , _UnsupportedFeatureException
 
     -- * Waiters
     -- $waiters
@@ -56,7 +62,7 @@ module Network.AWS.Inspector
     -- * Operations
     -- $operations
 
-    -- ** GetTelemetryMetadata
+    -- ** GetTelemetryMetadata 
     , module Network.AWS.Inspector.GetTelemetryMetadata
 
     -- ** ListFindings (Paginated)
@@ -65,94 +71,106 @@ module Network.AWS.Inspector
     -- ** ListAssessmentTemplates (Paginated)
     , module Network.AWS.Inspector.ListAssessmentTemplates
 
-    -- ** SubscribeToEvent
+    -- ** SubscribeToEvent 
     , module Network.AWS.Inspector.SubscribeToEvent
 
     -- ** ListAssessmentRunAgents (Paginated)
     , module Network.AWS.Inspector.ListAssessmentRunAgents
 
-    -- ** StartAssessmentRun
+    -- ** StartAssessmentRun 
     , module Network.AWS.Inspector.StartAssessmentRun
 
-    -- ** DeleteAssessmentTemplate
+    -- ** DeleteAssessmentTemplate 
     , module Network.AWS.Inspector.DeleteAssessmentTemplate
 
-    -- ** CreateAssessmentTemplate
+    -- ** CreateAssessmentTemplate 
     , module Network.AWS.Inspector.CreateAssessmentTemplate
 
-    -- ** ListTagsForResource
+    -- ** DescribeExclusions 
+    , module Network.AWS.Inspector.DescribeExclusions
+
+    -- ** ListTagsForResource 
     , module Network.AWS.Inspector.ListTagsForResource
 
-    -- ** SetTagsForResource
+    -- ** SetTagsForResource 
     , module Network.AWS.Inspector.SetTagsForResource
 
-    -- ** DescribeCrossAccountAccessRole
+    -- ** DescribeCrossAccountAccessRole 
     , module Network.AWS.Inspector.DescribeCrossAccountAccessRole
 
-    -- ** DescribeAssessmentTemplates
+    -- ** DescribeAssessmentTemplates 
     , module Network.AWS.Inspector.DescribeAssessmentTemplates
 
-    -- ** DescribeResourceGroups
+    -- ** DescribeResourceGroups 
     , module Network.AWS.Inspector.DescribeResourceGroups
 
-    -- ** CreateAssessmentTarget
+    -- ** CreateAssessmentTarget 
     , module Network.AWS.Inspector.CreateAssessmentTarget
+
+    -- ** GetExclusionsPreview 
+    , module Network.AWS.Inspector.GetExclusionsPreview
 
     -- ** ListEventSubscriptions (Paginated)
     , module Network.AWS.Inspector.ListEventSubscriptions
 
-    -- ** RegisterCrossAccountAccessRole
+    -- ** RegisterCrossAccountAccessRole 
     , module Network.AWS.Inspector.RegisterCrossAccountAccessRole
 
     -- ** ListAssessmentTargets (Paginated)
     , module Network.AWS.Inspector.ListAssessmentTargets
 
-    -- ** CreateResourceGroup
+    -- ** CreateExclusionsPreview 
+    , module Network.AWS.Inspector.CreateExclusionsPreview
+
+    -- ** CreateResourceGroup 
     , module Network.AWS.Inspector.CreateResourceGroup
 
-    -- ** DescribeRulesPackages
+    -- ** DescribeRulesPackages 
     , module Network.AWS.Inspector.DescribeRulesPackages
 
-    -- ** StopAssessmentRun
+    -- ** StopAssessmentRun 
     , module Network.AWS.Inspector.StopAssessmentRun
+
+    -- ** ListExclusions (Paginated)
+    , module Network.AWS.Inspector.ListExclusions
 
     -- ** PreviewAgents (Paginated)
     , module Network.AWS.Inspector.PreviewAgents
 
-    -- ** DescribeFindings
+    -- ** DescribeFindings 
     , module Network.AWS.Inspector.DescribeFindings
 
-    -- ** AddAttributesToFindings
+    -- ** AddAttributesToFindings 
     , module Network.AWS.Inspector.AddAttributesToFindings
 
-    -- ** UpdateAssessmentTarget
+    -- ** UpdateAssessmentTarget 
     , module Network.AWS.Inspector.UpdateAssessmentTarget
 
-    -- ** DeleteAssessmentTarget
+    -- ** DeleteAssessmentTarget 
     , module Network.AWS.Inspector.DeleteAssessmentTarget
 
-    -- ** DeleteAssessmentRun
+    -- ** DeleteAssessmentRun 
     , module Network.AWS.Inspector.DeleteAssessmentRun
 
     -- ** ListAssessmentRuns (Paginated)
     , module Network.AWS.Inspector.ListAssessmentRuns
 
-    -- ** GetAssessmentReport
+    -- ** GetAssessmentReport 
     , module Network.AWS.Inspector.GetAssessmentReport
 
     -- ** ListRulesPackages (Paginated)
     , module Network.AWS.Inspector.ListRulesPackages
 
-    -- ** DescribeAssessmentRuns
+    -- ** DescribeAssessmentRuns 
     , module Network.AWS.Inspector.DescribeAssessmentRuns
 
-    -- ** UnsubscribeFromEvent
+    -- ** UnsubscribeFromEvent 
     , module Network.AWS.Inspector.UnsubscribeFromEvent
 
-    -- ** RemoveAttributesFromFindings
+    -- ** RemoveAttributesFromFindings 
     , module Network.AWS.Inspector.RemoveAttributesFromFindings
 
-    -- ** DescribeAssessmentTargets
+    -- ** DescribeAssessmentTargets 
     , module Network.AWS.Inspector.DescribeAssessmentTargets
 
     -- * Types
@@ -181,6 +199,9 @@ module Network.AWS.Inspector
     -- ** Locale
     , Locale (..)
 
+    -- ** PreviewStatus
+    , PreviewStatus (..)
+
     -- ** ReportFileFormat
     , ReportFileFormat (..)
 
@@ -189,6 +210,9 @@ module Network.AWS.Inspector
 
     -- ** ReportType
     , ReportType (..)
+
+    -- ** ScopeType
+    , ScopeType (..)
 
     -- ** Severity
     , Severity (..)
@@ -274,9 +298,9 @@ module Network.AWS.Inspector
     -- ** AssessmentTarget
     , AssessmentTarget
     , assessmentTarget
+    , aResourceGroupARN
     , aArn
     , aName
-    , aResourceGroupARN
     , aCreatedAt
     , aUpdatedAt
 
@@ -310,9 +334,11 @@ module Network.AWS.Inspector
     , assetAttributes
     , aaHostname
     , aaAutoScalingGroup
+    , aaNetworkInterfaces
     , aaIpv4Addresses
     , aaAgentId
     , aaAmiId
+    , aaTags
     , aaSchemaVersion
 
     -- ** Attribute
@@ -332,6 +358,25 @@ module Network.AWS.Inspector
     , eventSubscription
     , esEvent
     , esSubscribedAt
+
+    -- ** Exclusion
+    , Exclusion
+    , exclusion
+    , eAttributes
+    , eArn
+    , eTitle
+    , eDescription
+    , eRecommendation
+    , eScopes
+
+    -- ** ExclusionPreview
+    , ExclusionPreview
+    , exclusionPreview
+    , epAttributes
+    , epTitle
+    , epDescription
+    , epRecommendation
+    , epScopes
 
     -- ** FailedItemDetails
     , FailedItemDetails
@@ -380,6 +425,26 @@ module Network.AWS.Inspector
     , isaAssessmentRunARN
     , isaSchemaVersion
 
+    -- ** NetworkInterface
+    , NetworkInterface
+    , networkInterface
+    , niPrivateIPAddresses
+    , niPublicDNSName
+    , niSecurityGroups
+    , niVpcId
+    , niSubnetId
+    , niNetworkInterfaceId
+    , niPrivateIPAddress
+    , niPublicIP
+    , niPrivateDNSName
+    , niIpv6Addresses
+
+    -- ** PrivateIP
+    , PrivateIP
+    , privateIP
+    , piPrivateIPAddress
+    , piPrivateDNSName
+
     -- ** ResourceGroup
     , ResourceGroup
     , resourceGroup
@@ -401,6 +466,18 @@ module Network.AWS.Inspector
     , rpName
     , rpVersion
     , rpProvider
+
+    -- ** Scope
+    , Scope
+    , scope
+    , sValue
+    , sKey
+
+    -- ** SecurityGroup
+    , SecurityGroup
+    , securityGroup
+    , sgGroupId
+    , sgGroupName
 
     -- ** Subscription
     , Subscription
@@ -432,6 +509,7 @@ module Network.AWS.Inspector
 import Network.AWS.Inspector.AddAttributesToFindings
 import Network.AWS.Inspector.CreateAssessmentTarget
 import Network.AWS.Inspector.CreateAssessmentTemplate
+import Network.AWS.Inspector.CreateExclusionsPreview
 import Network.AWS.Inspector.CreateResourceGroup
 import Network.AWS.Inspector.DeleteAssessmentRun
 import Network.AWS.Inspector.DeleteAssessmentTarget
@@ -440,16 +518,19 @@ import Network.AWS.Inspector.DescribeAssessmentRuns
 import Network.AWS.Inspector.DescribeAssessmentTargets
 import Network.AWS.Inspector.DescribeAssessmentTemplates
 import Network.AWS.Inspector.DescribeCrossAccountAccessRole
+import Network.AWS.Inspector.DescribeExclusions
 import Network.AWS.Inspector.DescribeFindings
 import Network.AWS.Inspector.DescribeResourceGroups
 import Network.AWS.Inspector.DescribeRulesPackages
 import Network.AWS.Inspector.GetAssessmentReport
+import Network.AWS.Inspector.GetExclusionsPreview
 import Network.AWS.Inspector.GetTelemetryMetadata
 import Network.AWS.Inspector.ListAssessmentRunAgents
 import Network.AWS.Inspector.ListAssessmentRuns
 import Network.AWS.Inspector.ListAssessmentTargets
 import Network.AWS.Inspector.ListAssessmentTemplates
 import Network.AWS.Inspector.ListEventSubscriptions
+import Network.AWS.Inspector.ListExclusions
 import Network.AWS.Inspector.ListFindings
 import Network.AWS.Inspector.ListRulesPackages
 import Network.AWS.Inspector.ListTagsForResource

@@ -50,31 +50,34 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeEnvironmentResources' smart constructor.
-data DescribeEnvironmentResources = DescribeEnvironmentResources'
-  { _derEnvironmentName :: !(Maybe Text)
-  , _derEnvironmentId   :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEnvironmentResources = DescribeEnvironmentResources'{_derEnvironmentName
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _derEnvironmentId
+                                                                  ::
+                                                                  !(Maybe Text)}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeEnvironmentResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'derEnvironmentName' - The name of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- * 'derEnvironmentName' - The name of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 --
--- * 'derEnvironmentId' - The ID of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- * 'derEnvironmentId' - The ID of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 describeEnvironmentResources
     :: DescribeEnvironmentResources
-describeEnvironmentResources =
-  DescribeEnvironmentResources'
-    {_derEnvironmentName = Nothing, _derEnvironmentId = Nothing}
+describeEnvironmentResources
+  = DescribeEnvironmentResources'{_derEnvironmentName =
+                                    Nothing,
+                                  _derEnvironmentId = Nothing}
 
-
--- | The name of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- | The name of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 derEnvironmentName :: Lens' DescribeEnvironmentResources (Maybe Text)
 derEnvironmentName = lens _derEnvironmentName (\ s a -> s{_derEnvironmentName = a})
 
--- | The ID of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error.
+-- | The ID of the environment to retrieve AWS resource usage data. Condition: You must specify either this or an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk returns @MissingRequiredParameter@ error. 
 derEnvironmentId :: Lens' DescribeEnvironmentResources (Maybe Text)
 derEnvironmentId = lens _derEnvironmentId (\ s a -> s{_derEnvironmentId = a})
 
@@ -115,30 +118,33 @@ instance ToQuery DescribeEnvironmentResources where
 --
 --
 -- /See:/ 'describeEnvironmentResourcesResponse' smart constructor.
-data DescribeEnvironmentResourcesResponse = DescribeEnvironmentResourcesResponse'
-  { _derrsEnvironmentResources :: !(Maybe EnvironmentResourceDescription)
-  , _derrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEnvironmentResourcesResponse = DescribeEnvironmentResourcesResponse'{_derrsEnvironmentResources
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      EnvironmentResourceDescription),
+                                                                                  _derrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeEnvironmentResourcesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'derrsEnvironmentResources' - A list of 'EnvironmentResourceDescription' .
+-- * 'derrsEnvironmentResources' - A list of 'EnvironmentResourceDescription' . 
 --
 -- * 'derrsResponseStatus' - -- | The response status code.
 describeEnvironmentResourcesResponse
     :: Int -- ^ 'derrsResponseStatus'
     -> DescribeEnvironmentResourcesResponse
-describeEnvironmentResourcesResponse pResponseStatus_ =
-  DescribeEnvironmentResourcesResponse'
-    { _derrsEnvironmentResources = Nothing
-    , _derrsResponseStatus = pResponseStatus_
-    }
+describeEnvironmentResourcesResponse pResponseStatus_
+  = DescribeEnvironmentResourcesResponse'{_derrsEnvironmentResources
+                                            = Nothing,
+                                          _derrsResponseStatus =
+                                            pResponseStatus_}
 
-
--- | A list of 'EnvironmentResourceDescription' .
+-- | A list of 'EnvironmentResourceDescription' . 
 derrsEnvironmentResources :: Lens' DescribeEnvironmentResourcesResponse (Maybe EnvironmentResourceDescription)
 derrsEnvironmentResources = lens _derrsEnvironmentResources (\ s a -> s{_derrsEnvironmentResources = a})
 

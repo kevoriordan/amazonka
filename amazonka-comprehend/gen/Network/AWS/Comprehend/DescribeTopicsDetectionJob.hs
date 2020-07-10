@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeTopicsDetectionJob' smart constructor.
-newtype DescribeTopicsDetectionJob = DescribeTopicsDetectionJob'
-  { _dtdjJobId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeTopicsDetectionJob = DescribeTopicsDetectionJob'{_dtdjJobId
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeTopicsDetectionJob' with the minimum fields required to make a request.
 --
@@ -58,9 +58,8 @@ newtype DescribeTopicsDetectionJob = DescribeTopicsDetectionJob'
 describeTopicsDetectionJob
     :: Text -- ^ 'dtdjJobId'
     -> DescribeTopicsDetectionJob
-describeTopicsDetectionJob pJobId_ =
-  DescribeTopicsDetectionJob' {_dtdjJobId = pJobId_}
-
+describeTopicsDetectionJob pJobId_
+  = DescribeTopicsDetectionJob'{_dtdjJobId = pJobId_}
 
 -- | The identifier assigned by the user to the detection job.
 dtdjJobId :: Lens' DescribeTopicsDetectionJob Text
@@ -102,11 +101,15 @@ instance ToQuery DescribeTopicsDetectionJob where
         toQuery = const mempty
 
 -- | /See:/ 'describeTopicsDetectionJobResponse' smart constructor.
-data DescribeTopicsDetectionJobResponse = DescribeTopicsDetectionJobResponse'
-  { _dtdjrsTopicsDetectionJobProperties :: !(Maybe TopicsDetectionJobProperties)
-  , _dtdjrsResponseStatus               :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTopicsDetectionJobResponse = DescribeTopicsDetectionJobResponse'{_dtdjrsTopicsDetectionJobProperties
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  TopicsDetectionJobProperties),
+                                                                              _dtdjrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeTopicsDetectionJobResponse' with the minimum fields required to make a request.
 --
@@ -118,12 +121,11 @@ data DescribeTopicsDetectionJobResponse = DescribeTopicsDetectionJobResponse'
 describeTopicsDetectionJobResponse
     :: Int -- ^ 'dtdjrsResponseStatus'
     -> DescribeTopicsDetectionJobResponse
-describeTopicsDetectionJobResponse pResponseStatus_ =
-  DescribeTopicsDetectionJobResponse'
-    { _dtdjrsTopicsDetectionJobProperties = Nothing
-    , _dtdjrsResponseStatus = pResponseStatus_
-    }
-
+describeTopicsDetectionJobResponse pResponseStatus_
+  = DescribeTopicsDetectionJobResponse'{_dtdjrsTopicsDetectionJobProperties
+                                          = Nothing,
+                                        _dtdjrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | The list of properties for the requested job.
 dtdjrsTopicsDetectionJobProperties :: Lens' DescribeTopicsDetectionJobResponse (Maybe TopicsDetectionJobProperties)

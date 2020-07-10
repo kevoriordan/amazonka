@@ -50,10 +50,10 @@ import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'describeUploadBuffer' smart constructor.
-newtype DescribeUploadBuffer = DescribeUploadBuffer'
-  { _dubGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeUploadBuffer = DescribeUploadBuffer'{_dubGatewayARN
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeUploadBuffer' with the minimum fields required to make a request.
 --
@@ -63,9 +63,9 @@ newtype DescribeUploadBuffer = DescribeUploadBuffer'
 describeUploadBuffer
     :: Text -- ^ 'dubGatewayARN'
     -> DescribeUploadBuffer
-describeUploadBuffer pGatewayARN_ =
-  DescribeUploadBuffer' {_dubGatewayARN = pGatewayARN_}
-
+describeUploadBuffer pGatewayARN_
+  = DescribeUploadBuffer'{_dubGatewayARN =
+                            pGatewayARN_}
 
 -- | Undocumented member.
 dubGatewayARN :: Lens' DescribeUploadBuffer Text
@@ -111,42 +111,51 @@ instance ToQuery DescribeUploadBuffer where
         toQuery = const mempty
 
 -- | /See:/ 'describeUploadBufferResponse' smart constructor.
-data DescribeUploadBufferResponse = DescribeUploadBufferResponse'
-  { _dubrsUploadBufferAllocatedInBytes :: !(Maybe Integer)
-  , _dubrsGatewayARN                   :: !(Maybe Text)
-  , _dubrsDiskIds                      :: !(Maybe [Text])
-  , _dubrsUploadBufferUsedInBytes      :: !(Maybe Integer)
-  , _dubrsResponseStatus               :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUploadBufferResponse = DescribeUploadBufferResponse'{_dubrsUploadBufferAllocatedInBytes
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Integer),
+                                                                  _dubrsGatewayARN
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dubrsDiskIds
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Text]),
+                                                                  _dubrsUploadBufferUsedInBytes
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Integer),
+                                                                  _dubrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeUploadBufferResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dubrsUploadBufferAllocatedInBytes' - Undocumented member.
+-- * 'dubrsUploadBufferAllocatedInBytes' - The total number of bytes allocated in the gateway's as upload buffer.
 --
 -- * 'dubrsGatewayARN' - Undocumented member.
 --
--- * 'dubrsDiskIds' - Undocumented member.
+-- * 'dubrsDiskIds' - An array of the gateway's local disk IDs that are configured as working storage. Each local disk ID is specified as a string (minimum length of 1 and maximum length of 300). If no local disks are configured as working storage, then the DiskIds array is empty.
 --
--- * 'dubrsUploadBufferUsedInBytes' - Undocumented member.
+-- * 'dubrsUploadBufferUsedInBytes' - The total number of bytes being used in the gateway's upload buffer.
 --
 -- * 'dubrsResponseStatus' - -- | The response status code.
 describeUploadBufferResponse
     :: Int -- ^ 'dubrsResponseStatus'
     -> DescribeUploadBufferResponse
-describeUploadBufferResponse pResponseStatus_ =
-  DescribeUploadBufferResponse'
-    { _dubrsUploadBufferAllocatedInBytes = Nothing
-    , _dubrsGatewayARN = Nothing
-    , _dubrsDiskIds = Nothing
-    , _dubrsUploadBufferUsedInBytes = Nothing
-    , _dubrsResponseStatus = pResponseStatus_
-    }
+describeUploadBufferResponse pResponseStatus_
+  = DescribeUploadBufferResponse'{_dubrsUploadBufferAllocatedInBytes
+                                    = Nothing,
+                                  _dubrsGatewayARN = Nothing,
+                                  _dubrsDiskIds = Nothing,
+                                  _dubrsUploadBufferUsedInBytes = Nothing,
+                                  _dubrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | The total number of bytes allocated in the gateway's as upload buffer.
 dubrsUploadBufferAllocatedInBytes :: Lens' DescribeUploadBufferResponse (Maybe Integer)
 dubrsUploadBufferAllocatedInBytes = lens _dubrsUploadBufferAllocatedInBytes (\ s a -> s{_dubrsUploadBufferAllocatedInBytes = a})
 
@@ -154,11 +163,11 @@ dubrsUploadBufferAllocatedInBytes = lens _dubrsUploadBufferAllocatedInBytes (\ s
 dubrsGatewayARN :: Lens' DescribeUploadBufferResponse (Maybe Text)
 dubrsGatewayARN = lens _dubrsGatewayARN (\ s a -> s{_dubrsGatewayARN = a})
 
--- | Undocumented member.
+-- | An array of the gateway's local disk IDs that are configured as working storage. Each local disk ID is specified as a string (minimum length of 1 and maximum length of 300). If no local disks are configured as working storage, then the DiskIds array is empty.
 dubrsDiskIds :: Lens' DescribeUploadBufferResponse [Text]
 dubrsDiskIds = lens _dubrsDiskIds (\ s a -> s{_dubrsDiskIds = a}) . _Default . _Coerce
 
--- | Undocumented member.
+-- | The total number of bytes being used in the gateway's upload buffer.
 dubrsUploadBufferUsedInBytes :: Lens' DescribeUploadBufferResponse (Maybe Integer)
 dubrsUploadBufferUsedInBytes = lens _dubrsUploadBufferUsedInBytes (\ s a -> s{_dubrsUploadBufferUsedInBytes = a})
 

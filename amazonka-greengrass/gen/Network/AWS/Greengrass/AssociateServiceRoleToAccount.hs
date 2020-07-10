@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
+-- Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
 module Network.AWS.Greengrass.AssociateServiceRoleToAccount
     (
     -- * Creating a Request
@@ -43,10 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateServiceRoleToAccount' smart constructor.
-newtype AssociateServiceRoleToAccount = AssociateServiceRoleToAccount'
-  { _asrtaRoleARN :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateServiceRoleToAccount = AssociateServiceRoleToAccount'{_asrtaRoleARN
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'AssociateServiceRoleToAccount' with the minimum fields required to make a request.
 --
@@ -54,13 +54,14 @@ newtype AssociateServiceRoleToAccount = AssociateServiceRoleToAccount'
 --
 -- * 'asrtaRoleARN' - The ARN of the service role you wish to associate with your account.
 associateServiceRoleToAccount
-    :: AssociateServiceRoleToAccount
-associateServiceRoleToAccount =
-  AssociateServiceRoleToAccount' {_asrtaRoleARN = Nothing}
-
+    :: Text -- ^ 'asrtaRoleARN'
+    -> AssociateServiceRoleToAccount
+associateServiceRoleToAccount pRoleARN_
+  = AssociateServiceRoleToAccount'{_asrtaRoleARN =
+                                     pRoleARN_}
 
 -- | The ARN of the service role you wish to associate with your account.
-asrtaRoleARN :: Lens' AssociateServiceRoleToAccount (Maybe Text)
+asrtaRoleARN :: Lens' AssociateServiceRoleToAccount Text
 asrtaRoleARN = lens _asrtaRoleARN (\ s a -> s{_asrtaRoleARN = a})
 
 instance AWSRequest AssociateServiceRoleToAccount
@@ -89,7 +90,7 @@ instance ToHeaders AssociateServiceRoleToAccount
 instance ToJSON AssociateServiceRoleToAccount where
         toJSON AssociateServiceRoleToAccount'{..}
           = object
-              (catMaybes [("RoleArn" .=) <$> _asrtaRoleARN])
+              (catMaybes [Just ("RoleArn" .= _asrtaRoleARN)])
 
 instance ToPath AssociateServiceRoleToAccount where
         toPath = const "/greengrass/servicerole"
@@ -98,11 +99,15 @@ instance ToQuery AssociateServiceRoleToAccount where
         toQuery = const mempty
 
 -- | /See:/ 'associateServiceRoleToAccountResponse' smart constructor.
-data AssociateServiceRoleToAccountResponse = AssociateServiceRoleToAccountResponse'
-  { _asrtarsAssociatedAt   :: !(Maybe Text)
-  , _asrtarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateServiceRoleToAccountResponse = AssociateServiceRoleToAccountResponse'{_asrtarsAssociatedAt
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _asrtarsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'AssociateServiceRoleToAccountResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +119,12 @@ data AssociateServiceRoleToAccountResponse = AssociateServiceRoleToAccountRespon
 associateServiceRoleToAccountResponse
     :: Int -- ^ 'asrtarsResponseStatus'
     -> AssociateServiceRoleToAccountResponse
-associateServiceRoleToAccountResponse pResponseStatus_ =
-  AssociateServiceRoleToAccountResponse'
-    {_asrtarsAssociatedAt = Nothing, _asrtarsResponseStatus = pResponseStatus_}
-
+associateServiceRoleToAccountResponse
+  pResponseStatus_
+  = AssociateServiceRoleToAccountResponse'{_asrtarsAssociatedAt
+                                             = Nothing,
+                                           _asrtarsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The time when the service role was associated with the account.
 asrtarsAssociatedAt :: Lens' AssociateServiceRoleToAccountResponse (Maybe Text)

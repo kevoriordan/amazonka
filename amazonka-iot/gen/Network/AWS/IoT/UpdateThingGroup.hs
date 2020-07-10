@@ -47,12 +47,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateThingGroup' smart constructor.
-data UpdateThingGroup = UpdateThingGroup'
-  { _utgExpectedVersion      :: !(Maybe Integer)
-  , _utgThingGroupName       :: !Text
-  , _utgThingGroupProperties :: !ThingGroupProperties
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateThingGroup = UpdateThingGroup'{_utgExpectedVersion
+                                          :: !(Maybe Integer),
+                                          _utgThingGroupName :: !Text,
+                                          _utgThingGroupProperties ::
+                                          !ThingGroupProperties}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateThingGroup' with the minimum fields required to make a request.
 --
@@ -67,13 +67,11 @@ updateThingGroup
     :: Text -- ^ 'utgThingGroupName'
     -> ThingGroupProperties -- ^ 'utgThingGroupProperties'
     -> UpdateThingGroup
-updateThingGroup pThingGroupName_ pThingGroupProperties_ =
-  UpdateThingGroup'
-    { _utgExpectedVersion = Nothing
-    , _utgThingGroupName = pThingGroupName_
-    , _utgThingGroupProperties = pThingGroupProperties_
-    }
-
+updateThingGroup pThingGroupName_
+  pThingGroupProperties_
+  = UpdateThingGroup'{_utgExpectedVersion = Nothing,
+                      _utgThingGroupName = pThingGroupName_,
+                      _utgThingGroupProperties = pThingGroupProperties_}
 
 -- | The expected version of the thing group. If this does not match the version of the thing group being updated, the update will fail.
 utgExpectedVersion :: Lens' UpdateThingGroup (Maybe Integer)
@@ -120,11 +118,12 @@ instance ToQuery UpdateThingGroup where
         toQuery = const mempty
 
 -- | /See:/ 'updateThingGroupResponse' smart constructor.
-data UpdateThingGroupResponse = UpdateThingGroupResponse'
-  { _utgrsVersion        :: !(Maybe Integer)
-  , _utgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateThingGroupResponse = UpdateThingGroupResponse'{_utgrsVersion
+                                                          :: !(Maybe Integer),
+                                                          _utgrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateThingGroupResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +135,9 @@ data UpdateThingGroupResponse = UpdateThingGroupResponse'
 updateThingGroupResponse
     :: Int -- ^ 'utgrsResponseStatus'
     -> UpdateThingGroupResponse
-updateThingGroupResponse pResponseStatus_ =
-  UpdateThingGroupResponse'
-    {_utgrsVersion = Nothing, _utgrsResponseStatus = pResponseStatus_}
-
+updateThingGroupResponse pResponseStatus_
+  = UpdateThingGroupResponse'{_utgrsVersion = Nothing,
+                              _utgrsResponseStatus = pResponseStatus_}
 
 -- | The version of the updated thing group.
 utgrsVersion :: Lens' UpdateThingGroupResponse (Maybe Integer)

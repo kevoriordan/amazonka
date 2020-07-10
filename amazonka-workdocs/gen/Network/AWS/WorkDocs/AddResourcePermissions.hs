@@ -48,13 +48,16 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'addResourcePermissions' smart constructor.
-data AddResourcePermissions = AddResourcePermissions'
-  { _arpNotificationOptions :: !(Maybe NotificationOptions)
-  , _arpAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _arpResourceId          :: !Text
-  , _arpPrincipals          :: ![SharePrincipal]
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AddResourcePermissions = AddResourcePermissions'{_arpNotificationOptions
+                                                      ::
+                                                      !(Maybe
+                                                          NotificationOptions),
+                                                      _arpAuthenticationToken ::
+                                                      !(Maybe (Sensitive Text)),
+                                                      _arpResourceId :: !Text,
+                                                      _arpPrincipals ::
+                                                      ![SharePrincipal]}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddResourcePermissions' with the minimum fields required to make a request.
 --
@@ -62,7 +65,7 @@ data AddResourcePermissions = AddResourcePermissions'
 --
 -- * 'arpNotificationOptions' - The notification options.
 --
--- * 'arpAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'arpAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'arpResourceId' - The ID of the resource.
 --
@@ -70,20 +73,18 @@ data AddResourcePermissions = AddResourcePermissions'
 addResourcePermissions
     :: Text -- ^ 'arpResourceId'
     -> AddResourcePermissions
-addResourcePermissions pResourceId_ =
-  AddResourcePermissions'
-    { _arpNotificationOptions = Nothing
-    , _arpAuthenticationToken = Nothing
-    , _arpResourceId = pResourceId_
-    , _arpPrincipals = mempty
-    }
-
+addResourcePermissions pResourceId_
+  = AddResourcePermissions'{_arpNotificationOptions =
+                              Nothing,
+                            _arpAuthenticationToken = Nothing,
+                            _arpResourceId = pResourceId_,
+                            _arpPrincipals = mempty}
 
 -- | The notification options.
 arpNotificationOptions :: Lens' AddResourcePermissions (Maybe NotificationOptions)
 arpNotificationOptions = lens _arpNotificationOptions (\ s a -> s{_arpNotificationOptions = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 arpAuthenticationToken :: Lens' AddResourcePermissions (Maybe Text)
 arpAuthenticationToken = lens _arpAuthenticationToken (\ s a -> s{_arpAuthenticationToken = a}) . mapping _Sensitive
 
@@ -135,11 +136,14 @@ instance ToQuery AddResourcePermissions where
         toQuery = const mempty
 
 -- | /See:/ 'addResourcePermissionsResponse' smart constructor.
-data AddResourcePermissionsResponse = AddResourcePermissionsResponse'
-  { _arprsShareResults   :: !(Maybe [ShareResult])
-  , _arprsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AddResourcePermissionsResponse = AddResourcePermissionsResponse'{_arprsShareResults
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [ShareResult]),
+                                                                      _arprsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Show, Data, Typeable,
+                                                  Generic)
 
 -- | Creates a value of 'AddResourcePermissionsResponse' with the minimum fields required to make a request.
 --
@@ -151,10 +155,10 @@ data AddResourcePermissionsResponse = AddResourcePermissionsResponse'
 addResourcePermissionsResponse
     :: Int -- ^ 'arprsResponseStatus'
     -> AddResourcePermissionsResponse
-addResourcePermissionsResponse pResponseStatus_ =
-  AddResourcePermissionsResponse'
-    {_arprsShareResults = Nothing, _arprsResponseStatus = pResponseStatus_}
-
+addResourcePermissionsResponse pResponseStatus_
+  = AddResourcePermissionsResponse'{_arprsShareResults
+                                      = Nothing,
+                                    _arprsResponseStatus = pResponseStatus_}
 
 -- | The share results.
 arprsShareResults :: Lens' AddResourcePermissionsResponse [ShareResult]

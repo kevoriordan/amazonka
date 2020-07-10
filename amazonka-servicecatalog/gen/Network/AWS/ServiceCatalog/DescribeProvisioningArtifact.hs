@@ -36,10 +36,10 @@ module Network.AWS.ServiceCatalog.DescribeProvisioningArtifact
     , describeProvisioningArtifactResponse
     , DescribeProvisioningArtifactResponse
     -- * Response Lenses
-    , dpaprsStatus
-    , dpaprsInfo
-    , dpaprsProvisioningArtifactDetail
-    , dpaprsResponseStatus
+    , dscrbprvsnngartfctrsStatus
+    , dscrbprvsnngartfctrsInfo
+    , dscrbprvsnngartfctrsProvisioningArtifactDetail
+    , dscrbprvsnngartfctrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -50,13 +50,18 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describeProvisioningArtifact' smart constructor.
-data DescribeProvisioningArtifact = DescribeProvisioningArtifact'
-  { _dpaVerbose                :: !(Maybe Bool)
-  , _dpaAcceptLanguage         :: !(Maybe Text)
-  , _dpaProvisioningArtifactId :: !Text
-  , _dpaProductId              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProvisioningArtifact = DescribeProvisioningArtifact'{_dpaVerbose
+                                                                  ::
+                                                                  !(Maybe Bool),
+                                                                  _dpaAcceptLanguage
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dpaProvisioningArtifactId
+                                                                  :: !Text,
+                                                                  _dpaProductId
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeProvisioningArtifact' with the minimum fields required to make a request.
 --
@@ -73,14 +78,14 @@ describeProvisioningArtifact
     :: Text -- ^ 'dpaProvisioningArtifactId'
     -> Text -- ^ 'dpaProductId'
     -> DescribeProvisioningArtifact
-describeProvisioningArtifact pProvisioningArtifactId_ pProductId_ =
-  DescribeProvisioningArtifact'
-    { _dpaVerbose = Nothing
-    , _dpaAcceptLanguage = Nothing
-    , _dpaProvisioningArtifactId = pProvisioningArtifactId_
-    , _dpaProductId = pProductId_
-    }
-
+describeProvisioningArtifact pProvisioningArtifactId_
+  pProductId_
+  = DescribeProvisioningArtifact'{_dpaVerbose =
+                                    Nothing,
+                                  _dpaAcceptLanguage = Nothing,
+                                  _dpaProvisioningArtifactId =
+                                    pProvisioningArtifactId_,
+                                  _dpaProductId = pProductId_}
 
 -- | Indicates whether a verbose level of detail is enabled.
 dpaVerbose :: Lens' DescribeProvisioningArtifact (Maybe Bool)
@@ -143,52 +148,64 @@ instance ToQuery DescribeProvisioningArtifact where
         toQuery = const mempty
 
 -- | /See:/ 'describeProvisioningArtifactResponse' smart constructor.
-data DescribeProvisioningArtifactResponse = DescribeProvisioningArtifactResponse'
-  { _dpaprsStatus                     :: !(Maybe RequestStatus)
-  , _dpaprsInfo                       :: !(Maybe (Map Text Text))
-  , _dpaprsProvisioningArtifactDetail :: !(Maybe ProvisioningArtifactDetail)
-  , _dpaprsResponseStatus             :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeProvisioningArtifactResponse = DescribeProvisioningArtifactResponse'{_dscrbprvsnngartfctrsStatus
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      RequestStatus),
+                                                                                  _dscrbprvsnngartfctrsInfo
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      (Map
+                                                                                         Text
+                                                                                         Text)),
+                                                                                  _dscrbprvsnngartfctrsProvisioningArtifactDetail
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      ProvisioningArtifactDetail),
+                                                                                  _dscrbprvsnngartfctrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DescribeProvisioningArtifactResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpaprsStatus' - The status of the current request.
+-- * 'dscrbprvsnngartfctrsStatus' - The status of the current request.
 --
--- * 'dpaprsInfo' - The URL of the CloudFormation template in Amazon S3.
+-- * 'dscrbprvsnngartfctrsInfo' - The URL of the CloudFormation template in Amazon S3.
 --
--- * 'dpaprsProvisioningArtifactDetail' - Information about the provisioning artifact.
+-- * 'dscrbprvsnngartfctrsProvisioningArtifactDetail' - Information about the provisioning artifact.
 --
--- * 'dpaprsResponseStatus' - -- | The response status code.
+-- * 'dscrbprvsnngartfctrsResponseStatus' - -- | The response status code.
 describeProvisioningArtifactResponse
-    :: Int -- ^ 'dpaprsResponseStatus'
+    :: Int -- ^ 'dscrbprvsnngartfctrsResponseStatus'
     -> DescribeProvisioningArtifactResponse
-describeProvisioningArtifactResponse pResponseStatus_ =
-  DescribeProvisioningArtifactResponse'
-    { _dpaprsStatus = Nothing
-    , _dpaprsInfo = Nothing
-    , _dpaprsProvisioningArtifactDetail = Nothing
-    , _dpaprsResponseStatus = pResponseStatus_
-    }
-
+describeProvisioningArtifactResponse pResponseStatus_
+  = DescribeProvisioningArtifactResponse'{_dscrbprvsnngartfctrsStatus
+                                            = Nothing,
+                                          _dscrbprvsnngartfctrsInfo = Nothing,
+                                          _dscrbprvsnngartfctrsProvisioningArtifactDetail
+                                            = Nothing,
+                                          _dscrbprvsnngartfctrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | The status of the current request.
-dpaprsStatus :: Lens' DescribeProvisioningArtifactResponse (Maybe RequestStatus)
-dpaprsStatus = lens _dpaprsStatus (\ s a -> s{_dpaprsStatus = a})
+dscrbprvsnngartfctrsStatus :: Lens' DescribeProvisioningArtifactResponse (Maybe RequestStatus)
+dscrbprvsnngartfctrsStatus = lens _dscrbprvsnngartfctrsStatus (\ s a -> s{_dscrbprvsnngartfctrsStatus = a})
 
 -- | The URL of the CloudFormation template in Amazon S3.
-dpaprsInfo :: Lens' DescribeProvisioningArtifactResponse (HashMap Text Text)
-dpaprsInfo = lens _dpaprsInfo (\ s a -> s{_dpaprsInfo = a}) . _Default . _Map
+dscrbprvsnngartfctrsInfo :: Lens' DescribeProvisioningArtifactResponse (HashMap Text Text)
+dscrbprvsnngartfctrsInfo = lens _dscrbprvsnngartfctrsInfo (\ s a -> s{_dscrbprvsnngartfctrsInfo = a}) . _Default . _Map
 
 -- | Information about the provisioning artifact.
-dpaprsProvisioningArtifactDetail :: Lens' DescribeProvisioningArtifactResponse (Maybe ProvisioningArtifactDetail)
-dpaprsProvisioningArtifactDetail = lens _dpaprsProvisioningArtifactDetail (\ s a -> s{_dpaprsProvisioningArtifactDetail = a})
+dscrbprvsnngartfctrsProvisioningArtifactDetail :: Lens' DescribeProvisioningArtifactResponse (Maybe ProvisioningArtifactDetail)
+dscrbprvsnngartfctrsProvisioningArtifactDetail = lens _dscrbprvsnngartfctrsProvisioningArtifactDetail (\ s a -> s{_dscrbprvsnngartfctrsProvisioningArtifactDetail = a})
 
 -- | -- | The response status code.
-dpaprsResponseStatus :: Lens' DescribeProvisioningArtifactResponse Int
-dpaprsResponseStatus = lens _dpaprsResponseStatus (\ s a -> s{_dpaprsResponseStatus = a})
+dscrbprvsnngartfctrsResponseStatus :: Lens' DescribeProvisioningArtifactResponse Int
+dscrbprvsnngartfctrsResponseStatus = lens _dscrbprvsnngartfctrsResponseStatus (\ s a -> s{_dscrbprvsnngartfctrsResponseStatus = a})
 
 instance NFData DescribeProvisioningArtifactResponse
          where

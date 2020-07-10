@@ -33,8 +33,8 @@ module Network.AWS.RDS.DeleteEventSubscription
     , deleteEventSubscriptionResponse
     , DeleteEventSubscriptionResponse
     -- * Response Lenses
-    , drsEventSubscription
-    , drsResponseStatus
+    , delrsEventSubscription
+    , delrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -44,15 +44,15 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'deleteEventSubscription' smart constructor.
-newtype DeleteEventSubscription = DeleteEventSubscription'
-  { _desSubscriptionName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEventSubscription = DeleteEventSubscription'{_desSubscriptionName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteEventSubscription' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DeleteEventSubscription = DeleteEventSubscription'
 deleteEventSubscription
     :: Text -- ^ 'desSubscriptionName'
     -> DeleteEventSubscription
-deleteEventSubscription pSubscriptionName_ =
-  DeleteEventSubscription' {_desSubscriptionName = pSubscriptionName_}
-
+deleteEventSubscription pSubscriptionName_
+  = DeleteEventSubscription'{_desSubscriptionName =
+                               pSubscriptionName_}
 
 -- | The name of the RDS event notification subscription you want to delete.
 desSubscriptionName :: Lens' DeleteEventSubscription Text
@@ -99,33 +99,36 @@ instance ToQuery DeleteEventSubscription where
                "SubscriptionName" =: _desSubscriptionName]
 
 -- | /See:/ 'deleteEventSubscriptionResponse' smart constructor.
-data DeleteEventSubscriptionResponse = DeleteEventSubscriptionResponse'
-  { _drsEventSubscription :: !(Maybe EventSubscription)
-  , _drsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEventSubscriptionResponse = DeleteEventSubscriptionResponse'{_delrsEventSubscription
+                                                                        ::
+                                                                        !(Maybe
+                                                                            EventSubscription),
+                                                                        _delrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteEventSubscriptionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drsEventSubscription' - Undocumented member.
+-- * 'delrsEventSubscription' - Undocumented member.
 --
--- * 'drsResponseStatus' - -- | The response status code.
+-- * 'delrsResponseStatus' - -- | The response status code.
 deleteEventSubscriptionResponse
-    :: Int -- ^ 'drsResponseStatus'
+    :: Int -- ^ 'delrsResponseStatus'
     -> DeleteEventSubscriptionResponse
-deleteEventSubscriptionResponse pResponseStatus_ =
-  DeleteEventSubscriptionResponse'
-    {_drsEventSubscription = Nothing, _drsResponseStatus = pResponseStatus_}
-
+deleteEventSubscriptionResponse pResponseStatus_
+  = DeleteEventSubscriptionResponse'{_delrsEventSubscription
+                                       = Nothing,
+                                     _delrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
-drsEventSubscription :: Lens' DeleteEventSubscriptionResponse (Maybe EventSubscription)
-drsEventSubscription = lens _drsEventSubscription (\ s a -> s{_drsEventSubscription = a})
+delrsEventSubscription :: Lens' DeleteEventSubscriptionResponse (Maybe EventSubscription)
+delrsEventSubscription = lens _delrsEventSubscription (\ s a -> s{_delrsEventSubscription = a})
 
 -- | -- | The response status code.
-drsResponseStatus :: Lens' DeleteEventSubscriptionResponse Int
-drsResponseStatus = lens _drsResponseStatus (\ s a -> s{_drsResponseStatus = a})
+delrsResponseStatus :: Lens' DeleteEventSubscriptionResponse Int
+delrsResponseStatus = lens _delrsResponseStatus (\ s a -> s{_delrsResponseStatus = a})
 
 instance NFData DeleteEventSubscriptionResponse where

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new @Evaluation@ of an @MLModel@ . An @MLModel@ is evaluated on a set of observations associated to a @DataSource@ . Like a @DataSource@ for an @MLModel@ , the @DataSource@ for an @Evaluation@ contains values for the @Target Variable@ . The @Evaluation@ compares the predicted result for each observation to the actual outcome and provides a summary so that you know how effective the @MLModel@ functions on the test data. Evaluation generates a relevant performance metric, such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the corresponding @MLModelType@ : @BINARY@ , @REGRESSION@ or @MULTICLASS@ .
+-- Creates a new @Evaluation@ of an @MLModel@ . An @MLModel@ is evaluated on a set of observations associated to a @DataSource@ . Like a @DataSource@ for an @MLModel@ , the @DataSource@ for an @Evaluation@ contains values for the @Target Variable@ . The @Evaluation@ compares the predicted result for each observation to the actual outcome and provides a summary so that you know how effective the @MLModel@ functions on the test data. Evaluation generates a relevant performance metric, such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the corresponding @MLModelType@ : @BINARY@ , @REGRESSION@ or @MULTICLASS@ . 
 --
 --
--- @CreateEvaluation@ is an asynchronous operation. In response to @CreateEvaluation@ , Amazon Machine Learning (Amazon ML) immediately returns and sets the evaluation status to @PENDING@ . After the @Evaluation@ is created and ready for use, Amazon ML sets the status to @COMPLETED@ .
+-- @CreateEvaluation@ is an asynchronous operation. In response to @CreateEvaluation@ , Amazon Machine Learning (Amazon ML) immediately returns and sets the evaluation status to @PENDING@ . After the @Evaluation@ is created and ready for use, Amazon ML sets the status to @COMPLETED@ . 
 --
 -- You can use the @GetEvaluation@ operation to check progress of the evaluation during the creation operation.
 --
@@ -52,13 +52,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createEvaluation' smart constructor.
-data CreateEvaluation = CreateEvaluation'
-  { _ceEvaluationName         :: !(Maybe Text)
-  , _ceEvaluationId           :: !Text
-  , _ceMLModelId              :: !Text
-  , _ceEvaluationDataSourceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateEvaluation = CreateEvaluation'{_ceEvaluationName
+                                          :: !(Maybe Text),
+                                          _ceEvaluationId :: !Text,
+                                          _ceMLModelId :: !Text,
+                                          _ceEvaluationDataSourceId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateEvaluation' with the minimum fields required to make a request.
 --
@@ -76,14 +75,12 @@ createEvaluation
     -> Text -- ^ 'ceMLModelId'
     -> Text -- ^ 'ceEvaluationDataSourceId'
     -> CreateEvaluation
-createEvaluation pEvaluationId_ pMLModelId_ pEvaluationDataSourceId_ =
-  CreateEvaluation'
-    { _ceEvaluationName = Nothing
-    , _ceEvaluationId = pEvaluationId_
-    , _ceMLModelId = pMLModelId_
-    , _ceEvaluationDataSourceId = pEvaluationDataSourceId_
-    }
-
+createEvaluation pEvaluationId_ pMLModelId_
+  pEvaluationDataSourceId_
+  = CreateEvaluation'{_ceEvaluationName = Nothing,
+                      _ceEvaluationId = pEvaluationId_,
+                      _ceMLModelId = pMLModelId_,
+                      _ceEvaluationDataSourceId = pEvaluationDataSourceId_}
 
 -- | A user-supplied name or description of the @Evaluation@ .
 ceEvaluationName :: Lens' CreateEvaluation (Maybe Text)
@@ -143,15 +140,16 @@ instance ToQuery CreateEvaluation where
 -- | Represents the output of a @CreateEvaluation@ operation, and is an acknowledgement that Amazon ML received the request.
 --
 --
--- @CreateEvaluation@ operation is asynchronous. You can poll for status updates by using the @GetEvcaluation@ operation and checking the @Status@ parameter.
+-- @CreateEvaluation@ operation is asynchronous. You can poll for status updates by using the @GetEvcaluation@ operation and checking the @Status@ parameter. 
 --
 --
 -- /See:/ 'createEvaluationResponse' smart constructor.
-data CreateEvaluationResponse = CreateEvaluationResponse'
-  { _cersEvaluationId   :: !(Maybe Text)
-  , _cersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateEvaluationResponse = CreateEvaluationResponse'{_cersEvaluationId
+                                                          :: !(Maybe Text),
+                                                          _cersResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateEvaluationResponse' with the minimum fields required to make a request.
 --
@@ -163,10 +161,10 @@ data CreateEvaluationResponse = CreateEvaluationResponse'
 createEvaluationResponse
     :: Int -- ^ 'cersResponseStatus'
     -> CreateEvaluationResponse
-createEvaluationResponse pResponseStatus_ =
-  CreateEvaluationResponse'
-    {_cersEvaluationId = Nothing, _cersResponseStatus = pResponseStatus_}
-
+createEvaluationResponse pResponseStatus_
+  = CreateEvaluationResponse'{_cersEvaluationId =
+                                Nothing,
+                              _cersResponseStatus = pResponseStatus_}
 
 -- | The user-supplied ID that uniquely identifies the @Evaluation@ . This value should be identical to the value of the @EvaluationId@ in the request.
 cersEvaluationId :: Lens' CreateEvaluationResponse (Maybe Text)

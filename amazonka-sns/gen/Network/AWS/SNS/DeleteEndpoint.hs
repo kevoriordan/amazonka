@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the endpoint for a device and mobile app from Amazon SNS. This action is idempotent. For more information, see <http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html Using Amazon SNS Mobile Push Notifications> .
+-- Deletes the endpoint for a device and mobile app from Amazon SNS. This action is idempotent. For more information, see <https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html Using Amazon SNS Mobile Push Notifications> . 
 --
 --
 -- When you delete an endpoint that is also subscribed to a topic, then you must also unsubscribe the endpoint from the topic.
@@ -48,10 +48,9 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'deleteEndpoint' smart constructor.
-newtype DeleteEndpoint = DeleteEndpoint'
-  { _deEndpointARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEndpoint = DeleteEndpoint'{_deEndpointARN
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteEndpoint' with the minimum fields required to make a request.
 --
@@ -61,8 +60,8 @@ newtype DeleteEndpoint = DeleteEndpoint'
 deleteEndpoint
     :: Text -- ^ 'deEndpointARN'
     -> DeleteEndpoint
-deleteEndpoint pEndpointARN_ = DeleteEndpoint' {_deEndpointARN = pEndpointARN_}
-
+deleteEndpoint pEndpointARN_
+  = DeleteEndpoint'{_deEndpointARN = pEndpointARN_}
 
 -- | EndpointArn of endpoint to delete.
 deEndpointARN :: Lens' DeleteEndpoint Text
@@ -91,16 +90,14 @@ instance ToQuery DeleteEndpoint where
                "EndpointArn" =: _deEndpointARN]
 
 -- | /See:/ 'deleteEndpointResponse' smart constructor.
-data DeleteEndpointResponse =
-  DeleteEndpointResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEndpointResponse = DeleteEndpointResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteEndpointResponse' with the minimum fields required to make a request.
 --
 deleteEndpointResponse
     :: DeleteEndpointResponse
 deleteEndpointResponse = DeleteEndpointResponse'
-
 
 instance NFData DeleteEndpointResponse where

@@ -35,6 +35,7 @@ module Network.AWS.WorkMail.DescribeOrganization
     -- * Response Lenses
     , dorsDirectoryId
     , dorsState
+    , dorsARN
     , dorsAlias
     , dorsCompletedDate
     , dorsDirectoryType
@@ -52,10 +53,10 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'describeOrganization' smart constructor.
-newtype DescribeOrganization = DescribeOrganization'
-  { _doOrganizationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeOrganization = DescribeOrganization'{_doOrganizationId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeOrganization' with the minimum fields required to make a request.
 --
@@ -65,9 +66,9 @@ newtype DescribeOrganization = DescribeOrganization'
 describeOrganization
     :: Text -- ^ 'doOrganizationId'
     -> DescribeOrganization
-describeOrganization pOrganizationId_ =
-  DescribeOrganization' {_doOrganizationId = pOrganizationId_}
-
+describeOrganization pOrganizationId_
+  = DescribeOrganization'{_doOrganizationId =
+                            pOrganizationId_}
 
 -- | The identifier for the organization to be described.
 doOrganizationId :: Lens' DescribeOrganization Text
@@ -82,7 +83,8 @@ instance AWSRequest DescribeOrganization where
               (\ s h x ->
                  DescribeOrganizationResponse' <$>
                    (x .?> "DirectoryId") <*> (x .?> "State") <*>
-                     (x .?> "Alias")
+                     (x .?> "ARN")
+                     <*> (x .?> "Alias")
                      <*> (x .?> "CompletedDate")
                      <*> (x .?> "DirectoryType")
                      <*> (x .?> "DefaultMailDomain")
@@ -117,18 +119,35 @@ instance ToQuery DescribeOrganization where
         toQuery = const mempty
 
 -- | /See:/ 'describeOrganizationResponse' smart constructor.
-data DescribeOrganizationResponse = DescribeOrganizationResponse'
-  { _dorsDirectoryId       :: !(Maybe Text)
-  , _dorsState             :: !(Maybe Text)
-  , _dorsAlias             :: !(Maybe Text)
-  , _dorsCompletedDate     :: !(Maybe POSIX)
-  , _dorsDirectoryType     :: !(Maybe Text)
-  , _dorsDefaultMailDomain :: !(Maybe Text)
-  , _dorsErrorMessage      :: !(Maybe Text)
-  , _dorsOrganizationId    :: !(Maybe Text)
-  , _dorsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeOrganizationResponse = DescribeOrganizationResponse'{_dorsDirectoryId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dorsState ::
+                                                                  !(Maybe Text),
+                                                                  _dorsARN ::
+                                                                  !(Maybe Text),
+                                                                  _dorsAlias ::
+                                                                  !(Maybe Text),
+                                                                  _dorsCompletedDate
+                                                                  ::
+                                                                  !(Maybe
+                                                                      POSIX),
+                                                                  _dorsDirectoryType
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dorsDefaultMailDomain
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dorsErrorMessage
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dorsOrganizationId
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dorsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeOrganizationResponse' with the minimum fields required to make a request.
 --
@@ -138,15 +157,17 @@ data DescribeOrganizationResponse = DescribeOrganizationResponse'
 --
 -- * 'dorsState' - The state of an organization.
 --
+-- * 'dorsARN' - The Amazon Resource Name (ARN) of the organization.
+--
 -- * 'dorsAlias' - The alias for an organization.
 --
--- * 'dorsCompletedDate' - The date at which the organization became usable in the Amazon WorkMail context, in UNIX epoch time format.
+-- * 'dorsCompletedDate' - The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.
 --
--- * 'dorsDirectoryType' - The type of directory associated with the Amazon WorkMail organization.
+-- * 'dorsDirectoryType' - The type of directory associated with the WorkMail organization.
 --
 -- * 'dorsDefaultMailDomain' - The default mail domain associated with the organization.
 --
--- * 'dorsErrorMessage' - The (optional) error message indicating if unexpected behavior was encountered with regards to the organization.
+-- * 'dorsErrorMessage' - (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
 --
 -- * 'dorsOrganizationId' - The identifier of an organization.
 --
@@ -154,19 +175,17 @@ data DescribeOrganizationResponse = DescribeOrganizationResponse'
 describeOrganizationResponse
     :: Int -- ^ 'dorsResponseStatus'
     -> DescribeOrganizationResponse
-describeOrganizationResponse pResponseStatus_ =
-  DescribeOrganizationResponse'
-    { _dorsDirectoryId = Nothing
-    , _dorsState = Nothing
-    , _dorsAlias = Nothing
-    , _dorsCompletedDate = Nothing
-    , _dorsDirectoryType = Nothing
-    , _dorsDefaultMailDomain = Nothing
-    , _dorsErrorMessage = Nothing
-    , _dorsOrganizationId = Nothing
-    , _dorsResponseStatus = pResponseStatus_
-    }
-
+describeOrganizationResponse pResponseStatus_
+  = DescribeOrganizationResponse'{_dorsDirectoryId =
+                                    Nothing,
+                                  _dorsState = Nothing, _dorsARN = Nothing,
+                                  _dorsAlias = Nothing,
+                                  _dorsCompletedDate = Nothing,
+                                  _dorsDirectoryType = Nothing,
+                                  _dorsDefaultMailDomain = Nothing,
+                                  _dorsErrorMessage = Nothing,
+                                  _dorsOrganizationId = Nothing,
+                                  _dorsResponseStatus = pResponseStatus_}
 
 -- | The identifier for the directory associated with an Amazon WorkMail organization.
 dorsDirectoryId :: Lens' DescribeOrganizationResponse (Maybe Text)
@@ -176,15 +195,19 @@ dorsDirectoryId = lens _dorsDirectoryId (\ s a -> s{_dorsDirectoryId = a})
 dorsState :: Lens' DescribeOrganizationResponse (Maybe Text)
 dorsState = lens _dorsState (\ s a -> s{_dorsState = a})
 
+-- | The Amazon Resource Name (ARN) of the organization.
+dorsARN :: Lens' DescribeOrganizationResponse (Maybe Text)
+dorsARN = lens _dorsARN (\ s a -> s{_dorsARN = a})
+
 -- | The alias for an organization.
 dorsAlias :: Lens' DescribeOrganizationResponse (Maybe Text)
 dorsAlias = lens _dorsAlias (\ s a -> s{_dorsAlias = a})
 
--- | The date at which the organization became usable in the Amazon WorkMail context, in UNIX epoch time format.
+-- | The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.
 dorsCompletedDate :: Lens' DescribeOrganizationResponse (Maybe UTCTime)
 dorsCompletedDate = lens _dorsCompletedDate (\ s a -> s{_dorsCompletedDate = a}) . mapping _Time
 
--- | The type of directory associated with the Amazon WorkMail organization.
+-- | The type of directory associated with the WorkMail organization.
 dorsDirectoryType :: Lens' DescribeOrganizationResponse (Maybe Text)
 dorsDirectoryType = lens _dorsDirectoryType (\ s a -> s{_dorsDirectoryType = a})
 
@@ -192,7 +215,7 @@ dorsDirectoryType = lens _dorsDirectoryType (\ s a -> s{_dorsDirectoryType = a})
 dorsDefaultMailDomain :: Lens' DescribeOrganizationResponse (Maybe Text)
 dorsDefaultMailDomain = lens _dorsDefaultMailDomain (\ s a -> s{_dorsDefaultMailDomain = a})
 
--- | The (optional) error message indicating if unexpected behavior was encountered with regards to the organization.
+-- | (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
 dorsErrorMessage :: Lens' DescribeOrganizationResponse (Maybe Text)
 dorsErrorMessage = lens _dorsErrorMessage (\ s a -> s{_dorsErrorMessage = a})
 

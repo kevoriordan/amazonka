@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteCommentContent' smart constructor.
-newtype DeleteCommentContent = DeleteCommentContent'
-  { _dccCommentId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCommentContent = DeleteCommentContent'{_dccCommentId
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteCommentContent' with the minimum fields required to make a request.
 --
@@ -58,9 +58,8 @@ newtype DeleteCommentContent = DeleteCommentContent'
 deleteCommentContent
     :: Text -- ^ 'dccCommentId'
     -> DeleteCommentContent
-deleteCommentContent pCommentId_ =
-  DeleteCommentContent' {_dccCommentId = pCommentId_}
-
+deleteCommentContent pCommentId_
+  = DeleteCommentContent'{_dccCommentId = pCommentId_}
 
 -- | The unique, system-generated ID of the comment. To get this ID, use 'GetCommentsForComparedCommit' or 'GetCommentsForPullRequest' .
 dccCommentId :: Lens' DeleteCommentContent Text
@@ -102,11 +101,14 @@ instance ToQuery DeleteCommentContent where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCommentContentResponse' smart constructor.
-data DeleteCommentContentResponse = DeleteCommentContentResponse'
-  { _dccrsComment        :: !(Maybe Comment)
-  , _dccrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCommentContentResponse = DeleteCommentContentResponse'{_dccrsComment
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Comment),
+                                                                  _dccrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteCommentContentResponse' with the minimum fields required to make a request.
 --
@@ -118,10 +120,10 @@ data DeleteCommentContentResponse = DeleteCommentContentResponse'
 deleteCommentContentResponse
     :: Int -- ^ 'dccrsResponseStatus'
     -> DeleteCommentContentResponse
-deleteCommentContentResponse pResponseStatus_ =
-  DeleteCommentContentResponse'
-    {_dccrsComment = Nothing, _dccrsResponseStatus = pResponseStatus_}
-
+deleteCommentContentResponse pResponseStatus_
+  = DeleteCommentContentResponse'{_dccrsComment =
+                                    Nothing,
+                                  _dccrsResponseStatus = pResponseStatus_}
 
 -- | Information about the comment you just deleted.
 dccrsComment :: Lens' DeleteCommentContentResponse (Maybe Comment)

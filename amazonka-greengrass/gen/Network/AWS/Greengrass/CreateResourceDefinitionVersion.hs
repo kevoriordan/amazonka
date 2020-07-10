@@ -48,12 +48,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createResourceDefinitionVersion' smart constructor.
-data CreateResourceDefinitionVersion = CreateResourceDefinitionVersion'
-  { _crdvAmznClientToken      :: !(Maybe Text)
-  , _crdvResources            :: !(Maybe [Resource])
-  , _crdvResourceDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateResourceDefinitionVersion = CreateResourceDefinitionVersion'{_crdvAmznClientToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _crdvResources
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [Resource]),
+                                                                        _crdvResourceDefinitionId
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateResourceDefinitionVersion' with the minimum fields required to make a request.
 --
@@ -67,13 +74,13 @@ data CreateResourceDefinitionVersion = CreateResourceDefinitionVersion'
 createResourceDefinitionVersion
     :: Text -- ^ 'crdvResourceDefinitionId'
     -> CreateResourceDefinitionVersion
-createResourceDefinitionVersion pResourceDefinitionId_ =
-  CreateResourceDefinitionVersion'
-    { _crdvAmznClientToken = Nothing
-    , _crdvResources = Nothing
-    , _crdvResourceDefinitionId = pResourceDefinitionId_
-    }
-
+createResourceDefinitionVersion
+  pResourceDefinitionId_
+  = CreateResourceDefinitionVersion'{_crdvAmznClientToken
+                                       = Nothing,
+                                     _crdvResources = Nothing,
+                                     _crdvResourceDefinitionId =
+                                       pResourceDefinitionId_}
 
 -- | A client token used to correlate requests and responses.
 crdvAmznClientToken :: Lens' CreateResourceDefinitionVersion (Maybe Text)
@@ -130,14 +137,27 @@ instance ToQuery CreateResourceDefinitionVersion
         toQuery = const mempty
 
 -- | /See:/ 'createResourceDefinitionVersionResponse' smart constructor.
-data CreateResourceDefinitionVersionResponse = CreateResourceDefinitionVersionResponse'
-  { _crdvrsARN               :: !(Maybe Text)
-  , _crdvrsCreationTimestamp :: !(Maybe Text)
-  , _crdvrsVersion           :: !(Maybe Text)
-  , _crdvrsId                :: !(Maybe Text)
-  , _crdvrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateResourceDefinitionVersionResponse = CreateResourceDefinitionVersionResponse'{_crdvrsARN
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Text),
+                                                                                        _crdvrsCreationTimestamp
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Text),
+                                                                                        _crdvrsVersion
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Text),
+                                                                                        _crdvrsId
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Text),
+                                                                                        _crdvrsResponseStatus
+                                                                                        ::
+                                                                                        !Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'CreateResourceDefinitionVersionResponse' with the minimum fields required to make a request.
 --
@@ -147,23 +167,23 @@ data CreateResourceDefinitionVersionResponse = CreateResourceDefinitionVersionRe
 --
 -- * 'crdvrsCreationTimestamp' - The time, in milliseconds since the epoch, when the version was created.
 --
--- * 'crdvrsVersion' - The unique ID of the version.
+-- * 'crdvrsVersion' - The ID of the version.
 --
--- * 'crdvrsId' - The ID of the version.
+-- * 'crdvrsId' - The ID of the parent definition that the version is associated with.
 --
 -- * 'crdvrsResponseStatus' - -- | The response status code.
 createResourceDefinitionVersionResponse
     :: Int -- ^ 'crdvrsResponseStatus'
     -> CreateResourceDefinitionVersionResponse
-createResourceDefinitionVersionResponse pResponseStatus_ =
-  CreateResourceDefinitionVersionResponse'
-    { _crdvrsARN = Nothing
-    , _crdvrsCreationTimestamp = Nothing
-    , _crdvrsVersion = Nothing
-    , _crdvrsId = Nothing
-    , _crdvrsResponseStatus = pResponseStatus_
-    }
-
+createResourceDefinitionVersionResponse
+  pResponseStatus_
+  = CreateResourceDefinitionVersionResponse'{_crdvrsARN
+                                               = Nothing,
+                                             _crdvrsCreationTimestamp = Nothing,
+                                             _crdvrsVersion = Nothing,
+                                             _crdvrsId = Nothing,
+                                             _crdvrsResponseStatus =
+                                               pResponseStatus_}
 
 -- | The ARN of the version.
 crdvrsARN :: Lens' CreateResourceDefinitionVersionResponse (Maybe Text)
@@ -173,11 +193,11 @@ crdvrsARN = lens _crdvrsARN (\ s a -> s{_crdvrsARN = a})
 crdvrsCreationTimestamp :: Lens' CreateResourceDefinitionVersionResponse (Maybe Text)
 crdvrsCreationTimestamp = lens _crdvrsCreationTimestamp (\ s a -> s{_crdvrsCreationTimestamp = a})
 
--- | The unique ID of the version.
+-- | The ID of the version.
 crdvrsVersion :: Lens' CreateResourceDefinitionVersionResponse (Maybe Text)
 crdvrsVersion = lens _crdvrsVersion (\ s a -> s{_crdvrsVersion = a})
 
--- | The ID of the version.
+-- | The ID of the parent definition that the version is associated with.
 crdvrsId :: Lens' CreateResourceDefinitionVersionResponse (Maybe Text)
 crdvrsId = lens _crdvrsId (\ s a -> s{_crdvrsId = a})
 

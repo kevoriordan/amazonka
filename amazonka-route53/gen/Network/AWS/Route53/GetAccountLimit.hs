@@ -21,7 +21,7 @@
 -- Gets the specified limit for the current account, for example, the maximum number of health checks that you can create using the account.
 --
 --
--- For the default limit, see <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html Limits> in the /Amazon Route 53 Developer Guide/ . To request a higher limit, <https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-route53 open a case> .
+-- For the default limit, see <https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html Limits> in the /Amazon Route 53 Developer Guide/ . To request a higher limit, <https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53 open a case> .
 --
 module Network.AWS.Route53.GetAccountLimit
     (
@@ -52,10 +52,9 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'getAccountLimit' smart constructor.
-newtype GetAccountLimit = GetAccountLimit'
-  { _galType :: AccountLimitType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetAccountLimit = GetAccountLimit'{_galType
+                                           :: AccountLimitType}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAccountLimit' with the minimum fields required to make a request.
 --
@@ -65,8 +64,8 @@ newtype GetAccountLimit = GetAccountLimit'
 getAccountLimit
     :: AccountLimitType -- ^ 'galType'
     -> GetAccountLimit
-getAccountLimit pType_ = GetAccountLimit' {_galType = pType_}
-
+getAccountLimit pType_
+  = GetAccountLimit'{_galType = pType_}
 
 -- | The limit that you want to get. Valid values include the following:     * __MAX_HEALTH_CHECKS_BY_OWNER__ : The maximum number of health checks that you can create using the current account.     * __MAX_HOSTED_ZONES_BY_OWNER__ : The maximum number of hosted zones that you can create using the current account.     * __MAX_REUSABLE_DELEGATION_SETS_BY_OWNER__ : The maximum number of reusable delegation sets that you can create using the current account.     * __MAX_TRAFFIC_POLICIES_BY_OWNER__ : The maximum number of traffic policies that you can create using the current account.     * __MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER__ : The maximum number of traffic policy instances that you can create using the current account. (Traffic policy instances are referred to as traffic flow policy records in the Amazon Route 53 console.)
 galType :: Lens' GetAccountLimit AccountLimitType
@@ -97,17 +96,18 @@ instance ToPath GetAccountLimit where
 instance ToQuery GetAccountLimit where
         toQuery = const mempty
 
--- | A complex type that contains the requested limit.
+-- | A complex type that contains the requested limit. 
 --
 --
 --
 -- /See:/ 'getAccountLimitResponse' smart constructor.
-data GetAccountLimitResponse = GetAccountLimitResponse'
-  { _galrsResponseStatus :: !Int
-  , _galrsLimit          :: !AccountLimit
-  , _galrsCount          :: !Nat
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountLimitResponse = GetAccountLimitResponse'{_galrsResponseStatus
+                                                        :: !Int,
+                                                        _galrsLimit ::
+                                                        !AccountLimit,
+                                                        _galrsCount :: !Nat}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetAccountLimitResponse' with the minimum fields required to make a request.
 --
@@ -123,13 +123,12 @@ getAccountLimitResponse
     -> AccountLimit -- ^ 'galrsLimit'
     -> Natural -- ^ 'galrsCount'
     -> GetAccountLimitResponse
-getAccountLimitResponse pResponseStatus_ pLimit_ pCount_ =
-  GetAccountLimitResponse'
-    { _galrsResponseStatus = pResponseStatus_
-    , _galrsLimit = pLimit_
-    , _galrsCount = _Nat # pCount_
-    }
-
+getAccountLimitResponse pResponseStatus_ pLimit_
+  pCount_
+  = GetAccountLimitResponse'{_galrsResponseStatus =
+                               pResponseStatus_,
+                             _galrsLimit = pLimit_,
+                             _galrsCount = _Nat # pCount_}
 
 -- | -- | The response status code.
 galrsResponseStatus :: Lens' GetAccountLimitResponse Int

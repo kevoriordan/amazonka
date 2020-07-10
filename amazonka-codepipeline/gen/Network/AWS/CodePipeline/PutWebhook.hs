@@ -27,6 +27,7 @@ module Network.AWS.CodePipeline.PutWebhook
       putWebhook
     , PutWebhook
     -- * Request Lenses
+    , pwTags
     , pwWebhook
 
     -- * Destructuring the Response
@@ -45,23 +46,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putWebhook' smart constructor.
-newtype PutWebhook = PutWebhook'
-  { _pwWebhook :: WebhookDefinition
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutWebhook = PutWebhook'{_pwTags ::
+                              !(Maybe [Tag]),
+                              _pwWebhook :: !WebhookDefinition}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutWebhook' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pwWebhook' - The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name which identifies the webhook being defined. You may choose to name the webhook after the pipeline and action it targets so that you can easily recognize what it's used for later.
+-- * 'pwTags' - The tags for the webhook.
+--
+-- * 'pwWebhook' - The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name that helps you identify it. You might name the webhook after the pipeline and action it targets so that you can easily recognize what it's used for later.
 putWebhook
     :: WebhookDefinition -- ^ 'pwWebhook'
     -> PutWebhook
-putWebhook pWebhook_ = PutWebhook' {_pwWebhook = pWebhook_}
+putWebhook pWebhook_
+  = PutWebhook'{_pwTags = Nothing,
+                _pwWebhook = pWebhook_}
 
+-- | The tags for the webhook.
+pwTags :: Lens' PutWebhook [Tag]
+pwTags = lens _pwTags (\ s a -> s{_pwTags = a}) . _Default . _Coerce
 
--- | The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name which identifies the webhook being defined. You may choose to name the webhook after the pipeline and action it targets so that you can easily recognize what it's used for later.
+-- | The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name that helps you identify it. You might name the webhook after the pipeline and action it targets so that you can easily recognize what it's used for later.
 pwWebhook :: Lens' PutWebhook WebhookDefinition
 pwWebhook = lens _pwWebhook (\ s a -> s{_pwWebhook = a})
 
@@ -89,7 +97,10 @@ instance ToHeaders PutWebhook where
 
 instance ToJSON PutWebhook where
         toJSON PutWebhook'{..}
-          = object (catMaybes [Just ("webhook" .= _pwWebhook)])
+          = object
+              (catMaybes
+                 [("tags" .=) <$> _pwTags,
+                  Just ("webhook" .= _pwWebhook)])
 
 instance ToPath PutWebhook where
         toPath = const "/"
@@ -98,11 +109,10 @@ instance ToQuery PutWebhook where
         toQuery = const mempty
 
 -- | /See:/ 'putWebhookResponse' smart constructor.
-data PutWebhookResponse = PutWebhookResponse'
-  { _pwrsWebhook        :: !(Maybe ListWebhookItem)
-  , _pwrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutWebhookResponse = PutWebhookResponse'{_pwrsWebhook
+                                              :: !(Maybe ListWebhookItem),
+                                              _pwrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutWebhookResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +124,9 @@ data PutWebhookResponse = PutWebhookResponse'
 putWebhookResponse
     :: Int -- ^ 'pwrsResponseStatus'
     -> PutWebhookResponse
-putWebhookResponse pResponseStatus_ =
-  PutWebhookResponse'
-    {_pwrsWebhook = Nothing, _pwrsResponseStatus = pResponseStatus_}
-
+putWebhookResponse pResponseStatus_
+  = PutWebhookResponse'{_pwrsWebhook = Nothing,
+                        _pwrsResponseStatus = pResponseStatus_}
 
 -- | The detail returned from creating the webhook, such as the webhook name, webhook URL, and webhook ARN.
 pwrsWebhook :: Lens' PutWebhookResponse (Maybe ListWebhookItem)

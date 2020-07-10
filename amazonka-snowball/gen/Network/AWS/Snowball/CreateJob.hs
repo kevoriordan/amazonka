@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the @clusterId@ value; the other job attributes are inherited from the cluster.
+-- Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the @clusterId@ value; the other job attributes are inherited from the cluster. 
 --
 --
 module Network.AWS.Snowball.CreateJob
@@ -37,6 +37,7 @@ module Network.AWS.Snowball.CreateJob
     , cjResources
     , cjClusterId
     , cjDescription
+    , cjTaxDocuments
     , cjRoleARN
     , cjSnowballCapacityPreference
 
@@ -56,29 +57,30 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'createJob' smart constructor.
-data CreateJob = CreateJob'
-  { _cjJobType                    :: !(Maybe JobType)
-  , _cjKMSKeyARN                  :: !(Maybe Text)
-  , _cjNotification               :: !(Maybe Notification)
-  , _cjForwardingAddressId        :: !(Maybe Text)
-  , _cjAddressId                  :: !(Maybe Text)
-  , _cjSnowballType               :: !(Maybe SnowballType)
-  , _cjShippingOption             :: !(Maybe ShippingOption)
-  , _cjResources                  :: !(Maybe JobResource)
-  , _cjClusterId                  :: !(Maybe Text)
-  , _cjDescription                :: !(Maybe Text)
-  , _cjRoleARN                    :: !(Maybe Text)
-  , _cjSnowballCapacityPreference :: !(Maybe SnowballCapacity)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJob = CreateJob'{_cjJobType ::
+                            !(Maybe JobType),
+                            _cjKMSKeyARN :: !(Maybe Text),
+                            _cjNotification :: !(Maybe Notification),
+                            _cjForwardingAddressId :: !(Maybe Text),
+                            _cjAddressId :: !(Maybe Text),
+                            _cjSnowballType :: !(Maybe SnowballType),
+                            _cjShippingOption :: !(Maybe ShippingOption),
+                            _cjResources :: !(Maybe JobResource),
+                            _cjClusterId :: !(Maybe Text),
+                            _cjDescription :: !(Maybe Text),
+                            _cjTaxDocuments :: !(Maybe TaxDocuments),
+                            _cjRoleARN :: !(Maybe Text),
+                            _cjSnowballCapacityPreference ::
+                            !(Maybe SnowballCapacity)}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cjJobType' - Defines the type of job that you're creating.
+-- * 'cjJobType' - Defines the type of job that you're creating. 
 --
--- * 'cjKMSKeyARN' - The @KmsKeyARN@ that you want to associate with this job. @KmsKeyARN@ s are created using the <http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html CreateKey> AWS Key Management Service (KMS) API action.
+-- * 'cjKMSKeyARN' - The @KmsKeyARN@ that you want to associate with this job. @KmsKeyARN@ s are created using the <https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html CreateKey> AWS Key Management Service (KMS) API action.
 --
 -- * 'cjNotification' - Defines the Amazon Simple Notification Service (Amazon SNS) notification settings for this job.
 --
@@ -86,7 +88,7 @@ data CreateJob = CreateJob'
 --
 -- * 'cjAddressId' - The ID for the address that you want the Snowball shipped to.
 --
--- * 'cjSnowballType' - The type of AWS Snowball appliance to use for this job. Currently, the only supported appliance type for cluster jobs is @EDGE@ .
+-- * 'cjSnowballType' - The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is @EDGE@ . For more information, see <https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html Snowball Edge Device Options> in the Snowball Edge Developer Guide.
 --
 -- * 'cjShippingOption' - The shipping speed for this job. This speed doesn't dictate how soon you'll get the Snowball, rather it represents how quickly the Snowball moves to its destination while in transit. Regional shipping speeds are as follows:     * In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.     * In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.     * In India, Snowballs are delivered in one to seven days.     * In the US, you have access to one-day shipping and two-day shipping.
 --
@@ -96,33 +98,28 @@ data CreateJob = CreateJob'
 --
 -- * 'cjDescription' - Defines an optional description of this specific job, for example @Important Photos 2016-08-11@ .
 --
--- * 'cjRoleARN' - The @RoleARN@ that you want to associate with this job. @RoleArn@ s are created using the <http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
+-- * 'cjTaxDocuments' - The tax documents required in your AWS Region.
+--
+-- * 'cjRoleARN' - The @RoleARN@ that you want to associate with this job. @RoleArn@ s are created using the <https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
 --
 -- * 'cjSnowballCapacityPreference' - If your job is being created in one of the US regions, you have the option of specifying what size Snowball you'd like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.
 createJob
     :: CreateJob
-createJob =
-  CreateJob'
-    { _cjJobType = Nothing
-    , _cjKMSKeyARN = Nothing
-    , _cjNotification = Nothing
-    , _cjForwardingAddressId = Nothing
-    , _cjAddressId = Nothing
-    , _cjSnowballType = Nothing
-    , _cjShippingOption = Nothing
-    , _cjResources = Nothing
-    , _cjClusterId = Nothing
-    , _cjDescription = Nothing
-    , _cjRoleARN = Nothing
-    , _cjSnowballCapacityPreference = Nothing
-    }
+createJob
+  = CreateJob'{_cjJobType = Nothing,
+               _cjKMSKeyARN = Nothing, _cjNotification = Nothing,
+               _cjForwardingAddressId = Nothing,
+               _cjAddressId = Nothing, _cjSnowballType = Nothing,
+               _cjShippingOption = Nothing, _cjResources = Nothing,
+               _cjClusterId = Nothing, _cjDescription = Nothing,
+               _cjTaxDocuments = Nothing, _cjRoleARN = Nothing,
+               _cjSnowballCapacityPreference = Nothing}
 
-
--- | Defines the type of job that you're creating.
+-- | Defines the type of job that you're creating. 
 cjJobType :: Lens' CreateJob (Maybe JobType)
 cjJobType = lens _cjJobType (\ s a -> s{_cjJobType = a})
 
--- | The @KmsKeyARN@ that you want to associate with this job. @KmsKeyARN@ s are created using the <http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html CreateKey> AWS Key Management Service (KMS) API action.
+-- | The @KmsKeyARN@ that you want to associate with this job. @KmsKeyARN@ s are created using the <https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html CreateKey> AWS Key Management Service (KMS) API action.
 cjKMSKeyARN :: Lens' CreateJob (Maybe Text)
 cjKMSKeyARN = lens _cjKMSKeyARN (\ s a -> s{_cjKMSKeyARN = a})
 
@@ -138,7 +135,7 @@ cjForwardingAddressId = lens _cjForwardingAddressId (\ s a -> s{_cjForwardingAdd
 cjAddressId :: Lens' CreateJob (Maybe Text)
 cjAddressId = lens _cjAddressId (\ s a -> s{_cjAddressId = a})
 
--- | The type of AWS Snowball appliance to use for this job. Currently, the only supported appliance type for cluster jobs is @EDGE@ .
+-- | The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is @EDGE@ . For more information, see <https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html Snowball Edge Device Options> in the Snowball Edge Developer Guide.
 cjSnowballType :: Lens' CreateJob (Maybe SnowballType)
 cjSnowballType = lens _cjSnowballType (\ s a -> s{_cjSnowballType = a})
 
@@ -158,7 +155,11 @@ cjClusterId = lens _cjClusterId (\ s a -> s{_cjClusterId = a})
 cjDescription :: Lens' CreateJob (Maybe Text)
 cjDescription = lens _cjDescription (\ s a -> s{_cjDescription = a})
 
--- | The @RoleARN@ that you want to associate with this job. @RoleArn@ s are created using the <http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
+-- | The tax documents required in your AWS Region.
+cjTaxDocuments :: Lens' CreateJob (Maybe TaxDocuments)
+cjTaxDocuments = lens _cjTaxDocuments (\ s a -> s{_cjTaxDocuments = a})
+
+-- | The @RoleARN@ that you want to associate with this job. @RoleArn@ s are created using the <https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html CreateRole> AWS Identity and Access Management (IAM) API action.
 cjRoleARN :: Lens' CreateJob (Maybe Text)
 cjRoleARN = lens _cjRoleARN (\ s a -> s{_cjRoleARN = a})
 
@@ -204,6 +205,7 @@ instance ToJSON CreateJob where
                   ("Resources" .=) <$> _cjResources,
                   ("ClusterId" .=) <$> _cjClusterId,
                   ("Description" .=) <$> _cjDescription,
+                  ("TaxDocuments" .=) <$> _cjTaxDocuments,
                   ("RoleARN" .=) <$> _cjRoleARN,
                   ("SnowballCapacityPreference" .=) <$>
                     _cjSnowballCapacityPreference])
@@ -215,11 +217,10 @@ instance ToQuery CreateJob where
         toQuery = const mempty
 
 -- | /See:/ 'createJobResponse' smart constructor.
-data CreateJobResponse = CreateJobResponse'
-  { _cjrsJobId          :: !(Maybe Text)
-  , _cjrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJobResponse = CreateJobResponse'{_cjrsJobId
+                                            :: !(Maybe Text),
+                                            _cjrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJobResponse' with the minimum fields required to make a request.
 --
@@ -231,10 +232,9 @@ data CreateJobResponse = CreateJobResponse'
 createJobResponse
     :: Int -- ^ 'cjrsResponseStatus'
     -> CreateJobResponse
-createJobResponse pResponseStatus_ =
-  CreateJobResponse'
-    {_cjrsJobId = Nothing, _cjrsResponseStatus = pResponseStatus_}
-
+createJobResponse pResponseStatus_
+  = CreateJobResponse'{_cjrsJobId = Nothing,
+                       _cjrsResponseStatus = pResponseStatus_}
 
 -- | The automatically generated ID for a job, for example @JID123e4567-e89b-12d3-a456-426655440000@ .
 cjrsJobId :: Lens' CreateJobResponse (Maybe Text)

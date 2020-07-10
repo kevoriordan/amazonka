@@ -46,11 +46,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'rebootReplicationInstance' smart constructor.
-data RebootReplicationInstance = RebootReplicationInstance'
-  { _rriForceFailover          :: !(Maybe Bool)
-  , _rriReplicationInstanceARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootReplicationInstance = RebootReplicationInstance'{_rriForceFailover
+                                                            :: !(Maybe Bool),
+                                                            _rriReplicationInstanceARN
+                                                            :: !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'RebootReplicationInstance' with the minimum fields required to make a request.
 --
@@ -62,12 +63,11 @@ data RebootReplicationInstance = RebootReplicationInstance'
 rebootReplicationInstance
     :: Text -- ^ 'rriReplicationInstanceARN'
     -> RebootReplicationInstance
-rebootReplicationInstance pReplicationInstanceARN_ =
-  RebootReplicationInstance'
-    { _rriForceFailover = Nothing
-    , _rriReplicationInstanceARN = pReplicationInstanceARN_
-    }
-
+rebootReplicationInstance pReplicationInstanceARN_
+  = RebootReplicationInstance'{_rriForceFailover =
+                                 Nothing,
+                               _rriReplicationInstanceARN =
+                                 pReplicationInstanceARN_}
 
 -- | If this parameter is @true@ , the reboot is conducted through a Multi-AZ failover. (If the instance isn't configured for Multi-AZ, then you can't specify @true@ .)
 rriForceFailover :: Lens' RebootReplicationInstance (Maybe Bool)
@@ -118,30 +118,32 @@ instance ToQuery RebootReplicationInstance where
         toQuery = const mempty
 
 -- | /See:/ 'rebootReplicationInstanceResponse' smart constructor.
-data RebootReplicationInstanceResponse = RebootReplicationInstanceResponse'
-  { _rrirsReplicationInstance :: !(Maybe ReplicationInstance)
-  , _rrirsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebootReplicationInstanceResponse = RebootReplicationInstanceResponse'{_rrirsReplicationInstance
+                                                                            ::
+                                                                            !(Maybe
+                                                                                ReplicationInstance),
+                                                                            _rrirsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RebootReplicationInstanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rrirsReplicationInstance' - The replication instance that is being rebooted.
+-- * 'rrirsReplicationInstance' - The replication instance that is being rebooted. 
 --
 -- * 'rrirsResponseStatus' - -- | The response status code.
 rebootReplicationInstanceResponse
     :: Int -- ^ 'rrirsResponseStatus'
     -> RebootReplicationInstanceResponse
-rebootReplicationInstanceResponse pResponseStatus_ =
-  RebootReplicationInstanceResponse'
-    { _rrirsReplicationInstance = Nothing
-    , _rrirsResponseStatus = pResponseStatus_
-    }
+rebootReplicationInstanceResponse pResponseStatus_
+  = RebootReplicationInstanceResponse'{_rrirsReplicationInstance
+                                         = Nothing,
+                                       _rrirsResponseStatus = pResponseStatus_}
 
-
--- | The replication instance that is being rebooted.
+-- | The replication instance that is being rebooted. 
 rrirsReplicationInstance :: Lens' RebootReplicationInstanceResponse (Maybe ReplicationInstance)
 rrirsReplicationInstance = lens _rrirsReplicationInstance (\ s a -> s{_rrirsReplicationInstance = a})
 

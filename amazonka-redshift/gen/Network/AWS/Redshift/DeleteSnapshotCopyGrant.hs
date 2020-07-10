@@ -46,10 +46,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteSnapshotCopyGrant' smart constructor.
-newtype DeleteSnapshotCopyGrant = DeleteSnapshotCopyGrant'
-  { _dscgSnapshotCopyGrantName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSnapshotCopyGrant = DeleteSnapshotCopyGrant'{_dscgSnapshotCopyGrantName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteSnapshotCopyGrant' with the minimum fields required to make a request.
 --
@@ -59,10 +59,9 @@ newtype DeleteSnapshotCopyGrant = DeleteSnapshotCopyGrant'
 deleteSnapshotCopyGrant
     :: Text -- ^ 'dscgSnapshotCopyGrantName'
     -> DeleteSnapshotCopyGrant
-deleteSnapshotCopyGrant pSnapshotCopyGrantName_ =
-  DeleteSnapshotCopyGrant'
-    {_dscgSnapshotCopyGrantName = pSnapshotCopyGrantName_}
-
+deleteSnapshotCopyGrant pSnapshotCopyGrantName_
+  = DeleteSnapshotCopyGrant'{_dscgSnapshotCopyGrantName
+                               = pSnapshotCopyGrantName_}
 
 -- | The name of the snapshot copy grant to delete.
 dscgSnapshotCopyGrantName :: Lens' DeleteSnapshotCopyGrant Text
@@ -95,16 +94,15 @@ instance ToQuery DeleteSnapshotCopyGrant where
                  _dscgSnapshotCopyGrantName]
 
 -- | /See:/ 'deleteSnapshotCopyGrantResponse' smart constructor.
-data DeleteSnapshotCopyGrantResponse =
-  DeleteSnapshotCopyGrantResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSnapshotCopyGrantResponse = DeleteSnapshotCopyGrantResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteSnapshotCopyGrantResponse' with the minimum fields required to make a request.
 --
 deleteSnapshotCopyGrantResponse
     :: DeleteSnapshotCopyGrantResponse
-deleteSnapshotCopyGrantResponse = DeleteSnapshotCopyGrantResponse'
-
+deleteSnapshotCopyGrantResponse
+  = DeleteSnapshotCopyGrantResponse'
 
 instance NFData DeleteSnapshotCopyGrantResponse where

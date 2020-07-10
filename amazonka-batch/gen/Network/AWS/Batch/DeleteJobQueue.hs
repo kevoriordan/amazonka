@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteJobQueue' smart constructor.
-newtype DeleteJobQueue = DeleteJobQueue'
-  { _djqJobQueue :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteJobQueue = DeleteJobQueue'{_djqJobQueue
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteJobQueue' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype DeleteJobQueue = DeleteJobQueue'
 deleteJobQueue
     :: Text -- ^ 'djqJobQueue'
     -> DeleteJobQueue
-deleteJobQueue pJobQueue_ = DeleteJobQueue' {_djqJobQueue = pJobQueue_}
-
+deleteJobQueue pJobQueue_
+  = DeleteJobQueue'{_djqJobQueue = pJobQueue_}
 
 -- | The short name or full Amazon Resource Name (ARN) of the queue to delete.
 djqJobQueue :: Lens' DeleteJobQueue Text
@@ -97,10 +96,10 @@ instance ToQuery DeleteJobQueue where
         toQuery = const mempty
 
 -- | /See:/ 'deleteJobQueueResponse' smart constructor.
-newtype DeleteJobQueueResponse = DeleteJobQueueResponse'
-  { _djqrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteJobQueueResponse = DeleteJobQueueResponse'{_djqrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteJobQueueResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +109,9 @@ newtype DeleteJobQueueResponse = DeleteJobQueueResponse'
 deleteJobQueueResponse
     :: Int -- ^ 'djqrsResponseStatus'
     -> DeleteJobQueueResponse
-deleteJobQueueResponse pResponseStatus_ =
-  DeleteJobQueueResponse' {_djqrsResponseStatus = pResponseStatus_}
-
+deleteJobQueueResponse pResponseStatus_
+  = DeleteJobQueueResponse'{_djqrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 djqrsResponseStatus :: Lens' DeleteJobQueueResponse Int

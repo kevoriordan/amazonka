@@ -47,11 +47,19 @@ library
           Network.AWS.Rekognition
         , Network.AWS.Rekognition.CompareFaces
         , Network.AWS.Rekognition.CreateCollection
+        , Network.AWS.Rekognition.CreateProject
+        , Network.AWS.Rekognition.CreateProjectVersion
         , Network.AWS.Rekognition.CreateStreamProcessor
         , Network.AWS.Rekognition.DeleteCollection
         , Network.AWS.Rekognition.DeleteFaces
+        , Network.AWS.Rekognition.DeleteProject
+        , Network.AWS.Rekognition.DeleteProjectVersion
         , Network.AWS.Rekognition.DeleteStreamProcessor
+        , Network.AWS.Rekognition.DescribeCollection
+        , Network.AWS.Rekognition.DescribeProjectVersions
+        , Network.AWS.Rekognition.DescribeProjects
         , Network.AWS.Rekognition.DescribeStreamProcessor
+        , Network.AWS.Rekognition.DetectCustomLabels
         , Network.AWS.Rekognition.DetectFaces
         , Network.AWS.Rekognition.DetectLabels
         , Network.AWS.Rekognition.DetectModerationLabels
@@ -63,6 +71,7 @@ library
         , Network.AWS.Rekognition.GetFaceSearch
         , Network.AWS.Rekognition.GetLabelDetection
         , Network.AWS.Rekognition.GetPersonTracking
+        , Network.AWS.Rekognition.GetTextDetection
         , Network.AWS.Rekognition.IndexFaces
         , Network.AWS.Rekognition.ListCollections
         , Network.AWS.Rekognition.ListFaces
@@ -76,18 +85,110 @@ library
         , Network.AWS.Rekognition.StartFaceSearch
         , Network.AWS.Rekognition.StartLabelDetection
         , Network.AWS.Rekognition.StartPersonTracking
+        , Network.AWS.Rekognition.StartProjectVersion
         , Network.AWS.Rekognition.StartStreamProcessor
+        , Network.AWS.Rekognition.StartTextDetection
+        , Network.AWS.Rekognition.StopProjectVersion
         , Network.AWS.Rekognition.StopStreamProcessor
         , Network.AWS.Rekognition.Types
         , Network.AWS.Rekognition.Waiters
 
     other-modules:
-          Network.AWS.Rekognition.Types.Product
-        , Network.AWS.Rekognition.Types.Sum
+          Network.AWS.Rekognition.Types.AgeRange
+        , Network.AWS.Rekognition.Types.Asset
+        , Network.AWS.Rekognition.Types.Attribute
+        , Network.AWS.Rekognition.Types.Beard
+        , Network.AWS.Rekognition.Types.BoundingBox
+        , Network.AWS.Rekognition.Types.Celebrity
+        , Network.AWS.Rekognition.Types.CelebrityDetail
+        , Network.AWS.Rekognition.Types.CelebrityRecognition
+        , Network.AWS.Rekognition.Types.CelebrityRecognitionSortBy
+        , Network.AWS.Rekognition.Types.CompareFacesMatch
+        , Network.AWS.Rekognition.Types.ComparedFace
+        , Network.AWS.Rekognition.Types.ComparedSourceImageFace
+        , Network.AWS.Rekognition.Types.ContentClassifier
+        , Network.AWS.Rekognition.Types.ContentModerationDetection
+        , Network.AWS.Rekognition.Types.ContentModerationSortBy
+        , Network.AWS.Rekognition.Types.CustomLabel
+        , Network.AWS.Rekognition.Types.DetectTextFilters
+        , Network.AWS.Rekognition.Types.DetectionFilter
+        , Network.AWS.Rekognition.Types.Emotion
+        , Network.AWS.Rekognition.Types.EmotionName
+        , Network.AWS.Rekognition.Types.EvaluationResult
+        , Network.AWS.Rekognition.Types.EyeOpen
+        , Network.AWS.Rekognition.Types.Eyeglasses
+        , Network.AWS.Rekognition.Types.Face
+        , Network.AWS.Rekognition.Types.FaceAttributes
+        , Network.AWS.Rekognition.Types.FaceDetail
+        , Network.AWS.Rekognition.Types.FaceDetection
+        , Network.AWS.Rekognition.Types.FaceMatch
+        , Network.AWS.Rekognition.Types.FaceRecord
+        , Network.AWS.Rekognition.Types.FaceSearchSettings
+        , Network.AWS.Rekognition.Types.FaceSearchSortBy
+        , Network.AWS.Rekognition.Types.Gender
+        , Network.AWS.Rekognition.Types.GenderType
+        , Network.AWS.Rekognition.Types.Geometry
+        , Network.AWS.Rekognition.Types.GroundTruthManifest
+        , Network.AWS.Rekognition.Types.HumanLoopActivationOutput
+        , Network.AWS.Rekognition.Types.HumanLoopConfig
+        , Network.AWS.Rekognition.Types.HumanLoopDataAttributes
+        , Network.AWS.Rekognition.Types.Image
+        , Network.AWS.Rekognition.Types.ImageQuality
+        , Network.AWS.Rekognition.Types.Instance
+        , Network.AWS.Rekognition.Types.KinesisDataStream
+        , Network.AWS.Rekognition.Types.KinesisVideoStream
+        , Network.AWS.Rekognition.Types.Label
+        , Network.AWS.Rekognition.Types.LabelDetection
+        , Network.AWS.Rekognition.Types.LabelDetectionSortBy
+        , Network.AWS.Rekognition.Types.Landmark
+        , Network.AWS.Rekognition.Types.LandmarkType
+        , Network.AWS.Rekognition.Types.ModerationLabel
+        , Network.AWS.Rekognition.Types.MouthOpen
+        , Network.AWS.Rekognition.Types.Mustache
+        , Network.AWS.Rekognition.Types.NotificationChannel
+        , Network.AWS.Rekognition.Types.OrientationCorrection
+        , Network.AWS.Rekognition.Types.OutputConfig
+        , Network.AWS.Rekognition.Types.Parent
+        , Network.AWS.Rekognition.Types.PersonDetail
+        , Network.AWS.Rekognition.Types.PersonDetection
+        , Network.AWS.Rekognition.Types.PersonMatch
+        , Network.AWS.Rekognition.Types.PersonTrackingSortBy
+        , Network.AWS.Rekognition.Types.Point
+        , Network.AWS.Rekognition.Types.Pose
+        , Network.AWS.Rekognition.Types.Product
+        , Network.AWS.Rekognition.Types.ProjectDescription
+        , Network.AWS.Rekognition.Types.ProjectStatus
+        , Network.AWS.Rekognition.Types.ProjectVersionDescription
+        , Network.AWS.Rekognition.Types.ProjectVersionStatus
+        , Network.AWS.Rekognition.Types.QualityFilter
+        , Network.AWS.Rekognition.Types.Reason
+        , Network.AWS.Rekognition.Types.RegionOfInterest
+        , Network.AWS.Rekognition.Types.S3Object
+        , Network.AWS.Rekognition.Types.Smile
+        , Network.AWS.Rekognition.Types.StartTextDetectionFilters
+        , Network.AWS.Rekognition.Types.StreamProcessor
+        , Network.AWS.Rekognition.Types.StreamProcessorInput
+        , Network.AWS.Rekognition.Types.StreamProcessorOutput
+        , Network.AWS.Rekognition.Types.StreamProcessorSettings
+        , Network.AWS.Rekognition.Types.StreamProcessorStatus
+        , Network.AWS.Rekognition.Types.Summary
+        , Network.AWS.Rekognition.Types.Sunglasses
+        , Network.AWS.Rekognition.Types.TestingData
+        , Network.AWS.Rekognition.Types.TestingDataResult
+        , Network.AWS.Rekognition.Types.TextDetection
+        , Network.AWS.Rekognition.Types.TextDetectionResult
+        , Network.AWS.Rekognition.Types.TextTypes
+        , Network.AWS.Rekognition.Types.TrainingData
+        , Network.AWS.Rekognition.Types.TrainingDataResult
+        , Network.AWS.Rekognition.Types.UnindexedFace
+        , Network.AWS.Rekognition.Types.Video
+        , Network.AWS.Rekognition.Types.VideoJobStatus
+        , Network.AWS.Rekognition.Types.VideoMetadata
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-rekognition-test
     type:              exitcode-stdio-1.0
@@ -111,6 +212,7 @@ test-suite amazonka-rekognition-test
         , amazonka-rekognition
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

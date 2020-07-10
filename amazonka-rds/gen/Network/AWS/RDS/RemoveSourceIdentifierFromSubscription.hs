@@ -45,16 +45,19 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'removeSourceIdentifierFromSubscription' smart constructor.
-data RemoveSourceIdentifierFromSubscription = RemoveSourceIdentifierFromSubscription'
-  { _rsifsSubscriptionName :: !Text
-  , _rsifsSourceIdentifier :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveSourceIdentifierFromSubscription = RemoveSourceIdentifierFromSubscription'{_rsifsSubscriptionName
+                                                                                      ::
+                                                                                      !Text,
+                                                                                      _rsifsSourceIdentifier
+                                                                                      ::
+                                                                                      !Text}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'RemoveSourceIdentifierFromSubscription' with the minimum fields required to make a request.
 --
@@ -62,23 +65,23 @@ data RemoveSourceIdentifierFromSubscription = RemoveSourceIdentifierFromSubscrip
 --
 -- * 'rsifsSubscriptionName' - The name of the RDS event notification subscription you want to remove a source identifier from.
 --
--- * 'rsifsSourceIdentifier' - The source identifier to be removed from the subscription, such as the __DB instance identifier__ for a DB instance or the name of a security group.
+-- * 'rsifsSourceIdentifier' - The source identifier to be removed from the subscription, such as the __DB instance identifier__ for a DB instance or the name of a security group. 
 removeSourceIdentifierFromSubscription
     :: Text -- ^ 'rsifsSubscriptionName'
     -> Text -- ^ 'rsifsSourceIdentifier'
     -> RemoveSourceIdentifierFromSubscription
-removeSourceIdentifierFromSubscription pSubscriptionName_ pSourceIdentifier_ =
-  RemoveSourceIdentifierFromSubscription'
-    { _rsifsSubscriptionName = pSubscriptionName_
-    , _rsifsSourceIdentifier = pSourceIdentifier_
-    }
-
+removeSourceIdentifierFromSubscription
+  pSubscriptionName_ pSourceIdentifier_
+  = RemoveSourceIdentifierFromSubscription'{_rsifsSubscriptionName
+                                              = pSubscriptionName_,
+                                            _rsifsSourceIdentifier =
+                                              pSourceIdentifier_}
 
 -- | The name of the RDS event notification subscription you want to remove a source identifier from.
 rsifsSubscriptionName :: Lens' RemoveSourceIdentifierFromSubscription Text
 rsifsSubscriptionName = lens _rsifsSubscriptionName (\ s a -> s{_rsifsSubscriptionName = a})
 
--- | The source identifier to be removed from the subscription, such as the __DB instance identifier__ for a DB instance or the name of a security group.
+-- | The source identifier to be removed from the subscription, such as the __DB instance identifier__ for a DB instance or the name of a security group. 
 rsifsSourceIdentifier :: Lens' RemoveSourceIdentifierFromSubscription Text
 rsifsSourceIdentifier = lens _rsifsSourceIdentifier (\ s a -> s{_rsifsSourceIdentifier = a})
 
@@ -126,11 +129,17 @@ instance ToQuery
                "SourceIdentifier" =: _rsifsSourceIdentifier]
 
 -- | /See:/ 'removeSourceIdentifierFromSubscriptionResponse' smart constructor.
-data RemoveSourceIdentifierFromSubscriptionResponse = RemoveSourceIdentifierFromSubscriptionResponse'
-  { _rsifsrsEventSubscription :: !(Maybe EventSubscription)
-  , _rsifsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveSourceIdentifierFromSubscriptionResponse = RemoveSourceIdentifierFromSubscriptionResponse'{_rsifsrsEventSubscription
+                                                                                                      ::
+                                                                                                      !(Maybe
+                                                                                                          EventSubscription),
+                                                                                                      _rsifsrsResponseStatus
+                                                                                                      ::
+                                                                                                      !Int}
+                                                        deriving (Eq, Read,
+                                                                  Show, Data,
+                                                                  Typeable,
+                                                                  Generic)
 
 -- | Creates a value of 'RemoveSourceIdentifierFromSubscriptionResponse' with the minimum fields required to make a request.
 --
@@ -142,12 +151,12 @@ data RemoveSourceIdentifierFromSubscriptionResponse = RemoveSourceIdentifierFrom
 removeSourceIdentifierFromSubscriptionResponse
     :: Int -- ^ 'rsifsrsResponseStatus'
     -> RemoveSourceIdentifierFromSubscriptionResponse
-removeSourceIdentifierFromSubscriptionResponse pResponseStatus_ =
-  RemoveSourceIdentifierFromSubscriptionResponse'
-    { _rsifsrsEventSubscription = Nothing
-    , _rsifsrsResponseStatus = pResponseStatus_
-    }
-
+removeSourceIdentifierFromSubscriptionResponse
+  pResponseStatus_
+  = RemoveSourceIdentifierFromSubscriptionResponse'{_rsifsrsEventSubscription
+                                                      = Nothing,
+                                                    _rsifsrsResponseStatus =
+                                                      pResponseStatus_}
 
 -- | Undocumented member.
 rsifsrsEventSubscription :: Lens' RemoveSourceIdentifierFromSubscriptionResponse (Maybe EventSubscription)

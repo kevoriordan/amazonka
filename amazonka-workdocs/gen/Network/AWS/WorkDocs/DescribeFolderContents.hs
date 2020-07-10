@@ -59,17 +59,24 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'describeFolderContents' smart constructor.
-data DescribeFolderContents = DescribeFolderContents'
-  { _dfcsInclude             :: !(Maybe Text)
-  , _dfcsAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _dfcsSort                :: !(Maybe ResourceSortType)
-  , _dfcsMarker              :: !(Maybe Text)
-  , _dfcsLimit               :: !(Maybe Nat)
-  , _dfcsType                :: !(Maybe FolderContentType)
-  , _dfcsOrder               :: !(Maybe OrderType)
-  , _dfcsFolderId            :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeFolderContents = DescribeFolderContents'{_dfcsInclude
+                                                      :: !(Maybe Text),
+                                                      _dfcsAuthenticationToken
+                                                      ::
+                                                      !(Maybe (Sensitive Text)),
+                                                      _dfcsSort ::
+                                                      !(Maybe ResourceSortType),
+                                                      _dfcsMarker ::
+                                                      !(Maybe Text),
+                                                      _dfcsLimit ::
+                                                      !(Maybe Nat),
+                                                      _dfcsType ::
+                                                      !(Maybe
+                                                          FolderContentType),
+                                                      _dfcsOrder ::
+                                                      !(Maybe OrderType),
+                                                      _dfcsFolderId :: !Text}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeFolderContents' with the minimum fields required to make a request.
 --
@@ -77,7 +84,7 @@ data DescribeFolderContents = DescribeFolderContents'
 --
 -- * 'dfcsInclude' - The contents to include. Specify "INITIALIZED" to include initialized documents.
 --
--- * 'dfcsAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'dfcsAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'dfcsSort' - The sorting criteria.
 --
@@ -93,24 +100,18 @@ data DescribeFolderContents = DescribeFolderContents'
 describeFolderContents
     :: Text -- ^ 'dfcsFolderId'
     -> DescribeFolderContents
-describeFolderContents pFolderId_ =
-  DescribeFolderContents'
-    { _dfcsInclude = Nothing
-    , _dfcsAuthenticationToken = Nothing
-    , _dfcsSort = Nothing
-    , _dfcsMarker = Nothing
-    , _dfcsLimit = Nothing
-    , _dfcsType = Nothing
-    , _dfcsOrder = Nothing
-    , _dfcsFolderId = pFolderId_
-    }
-
+describeFolderContents pFolderId_
+  = DescribeFolderContents'{_dfcsInclude = Nothing,
+                            _dfcsAuthenticationToken = Nothing,
+                            _dfcsSort = Nothing, _dfcsMarker = Nothing,
+                            _dfcsLimit = Nothing, _dfcsType = Nothing,
+                            _dfcsOrder = Nothing, _dfcsFolderId = pFolderId_}
 
 -- | The contents to include. Specify "INITIALIZED" to include initialized documents.
 dfcsInclude :: Lens' DescribeFolderContents (Maybe Text)
 dfcsInclude = lens _dfcsInclude (\ s a -> s{_dfcsInclude = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 dfcsAuthenticationToken :: Lens' DescribeFolderContents (Maybe Text)
 dfcsAuthenticationToken = lens _dfcsAuthenticationToken (\ s a -> s{_dfcsAuthenticationToken = a}) . mapping _Sensitive
 
@@ -183,13 +184,22 @@ instance ToQuery DescribeFolderContents where
                "type" =: _dfcsType, "order" =: _dfcsOrder]
 
 -- | /See:/ 'describeFolderContentsResponse' smart constructor.
-data DescribeFolderContentsResponse = DescribeFolderContentsResponse'
-  { _dfcrsFolders        :: !(Maybe [FolderMetadata])
-  , _dfcrsDocuments      :: !(Maybe [DocumentMetadata])
-  , _dfcrsMarker         :: !(Maybe Text)
-  , _dfcrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeFolderContentsResponse = DescribeFolderContentsResponse'{_dfcrsFolders
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [FolderMetadata]),
+                                                                      _dfcrsDocuments
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [DocumentMetadata]),
+                                                                      _dfcrsMarker
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dfcrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Show, Data, Typeable,
+                                                  Generic)
 
 -- | Creates a value of 'DescribeFolderContentsResponse' with the minimum fields required to make a request.
 --
@@ -205,14 +215,12 @@ data DescribeFolderContentsResponse = DescribeFolderContentsResponse'
 describeFolderContentsResponse
     :: Int -- ^ 'dfcrsResponseStatus'
     -> DescribeFolderContentsResponse
-describeFolderContentsResponse pResponseStatus_ =
-  DescribeFolderContentsResponse'
-    { _dfcrsFolders = Nothing
-    , _dfcrsDocuments = Nothing
-    , _dfcrsMarker = Nothing
-    , _dfcrsResponseStatus = pResponseStatus_
-    }
-
+describeFolderContentsResponse pResponseStatus_
+  = DescribeFolderContentsResponse'{_dfcrsFolders =
+                                      Nothing,
+                                    _dfcrsDocuments = Nothing,
+                                    _dfcrsMarker = Nothing,
+                                    _dfcrsResponseStatus = pResponseStatus_}
 
 -- | The subfolders in the specified folder.
 dfcrsFolders :: Lens' DescribeFolderContentsResponse [FolderMetadata]

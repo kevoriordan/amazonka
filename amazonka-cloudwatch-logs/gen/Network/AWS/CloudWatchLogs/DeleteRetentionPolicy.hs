@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteRetentionPolicy' smart constructor.
-newtype DeleteRetentionPolicy = DeleteRetentionPolicy'
-  { _drpLogGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRetentionPolicy = DeleteRetentionPolicy'{_drpLogGroupName
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteRetentionPolicy' with the minimum fields required to make a request.
 --
@@ -57,9 +57,9 @@ newtype DeleteRetentionPolicy = DeleteRetentionPolicy'
 deleteRetentionPolicy
     :: Text -- ^ 'drpLogGroupName'
     -> DeleteRetentionPolicy
-deleteRetentionPolicy pLogGroupName_ =
-  DeleteRetentionPolicy' {_drpLogGroupName = pLogGroupName_}
-
+deleteRetentionPolicy pLogGroupName_
+  = DeleteRetentionPolicy'{_drpLogGroupName =
+                             pLogGroupName_}
 
 -- | The name of the log group.
 drpLogGroupName :: Lens' DeleteRetentionPolicy Text
@@ -98,16 +98,15 @@ instance ToQuery DeleteRetentionPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deleteRetentionPolicyResponse' smart constructor.
-data DeleteRetentionPolicyResponse =
-  DeleteRetentionPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRetentionPolicyResponse = DeleteRetentionPolicyResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteRetentionPolicyResponse' with the minimum fields required to make a request.
 --
 deleteRetentionPolicyResponse
     :: DeleteRetentionPolicyResponse
-deleteRetentionPolicyResponse = DeleteRetentionPolicyResponse'
-
+deleteRetentionPolicyResponse
+  = DeleteRetentionPolicyResponse'
 
 instance NFData DeleteRetentionPolicyResponse where

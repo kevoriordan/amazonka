@@ -21,11 +21,11 @@
 -- This operation retrieves the @notification-configuration@ subresource of the specified vault.
 --
 --
--- For information about setting a notification configuration on a vault, see 'SetVaultNotifications' . If a notification configuration for a vault is not set, the operation returns a @404 Not Found@ error. For more information about vault notifications, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html Configuring Vault Notifications in Amazon Glacier> .
+-- For information about setting a notification configuration on a vault, see 'SetVaultNotifications' . If a notification configuration for a vault is not set, the operation returns a @404 Not Found@ error. For more information about vault notifications, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html Configuring Vault Notifications in Amazon S3 Glacier> . 
 --
--- An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html Access Control Using AWS Identity and Access Management (IAM)> .
+-- An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html Access Control Using AWS Identity and Access Management (IAM)> .
 --
--- For conceptual information and underlying REST API, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html Configuring Vault Notifications in Amazon Glacier> and <http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html Get Vault Notification Configuration > in the /Amazon Glacier Developer Guide/ .
+-- For conceptual information and underlying REST API, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html Configuring Vault Notifications in Amazon S3 Glacier> and <https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html Get Vault Notification Configuration > in the /Amazon Glacier Developer Guide/ . 
 --
 module Network.AWS.Glacier.GetVaultNotifications
     (
@@ -56,29 +56,28 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getVaultNotifications' smart constructor.
-data GetVaultNotifications = GetVaultNotifications'
-  { _gvnAccountId :: !Text
-  , _gvnVaultName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetVaultNotifications = GetVaultNotifications'{_gvnAccountId
+                                                    :: !Text,
+                                                    _gvnVaultName :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetVaultNotifications' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gvnAccountId' - The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
+-- * 'gvnAccountId' - The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
 --
 -- * 'gvnVaultName' - The name of the vault.
 getVaultNotifications
     :: Text -- ^ 'gvnAccountId'
     -> Text -- ^ 'gvnVaultName'
     -> GetVaultNotifications
-getVaultNotifications pAccountId_ pVaultName_ =
-  GetVaultNotifications'
-    {_gvnAccountId = pAccountId_, _gvnVaultName = pVaultName_}
+getVaultNotifications pAccountId_ pVaultName_
+  = GetVaultNotifications'{_gvnAccountId = pAccountId_,
+                           _gvnVaultName = pVaultName_}
 
-
--- | The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
+-- | The @AccountId@ value is the AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, do not include any hyphens ('-') in the ID.
 gvnAccountId :: Lens' GetVaultNotifications Text
 gvnAccountId = lens _gvnAccountId (\ s a -> s{_gvnAccountId = a})
 
@@ -112,16 +111,19 @@ instance ToPath GetVaultNotifications where
 instance ToQuery GetVaultNotifications where
         toQuery = const mempty
 
--- | Contains the Amazon Glacier response to your request.
+-- | Contains the Amazon S3 Glacier response to your request.
 --
 --
 --
 -- /See:/ 'getVaultNotificationsResponse' smart constructor.
-data GetVaultNotificationsResponse = GetVaultNotificationsResponse'
-  { _gvnrsVaultNotificationConfig :: !(Maybe VaultNotificationConfig)
-  , _gvnrsResponseStatus          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetVaultNotificationsResponse = GetVaultNotificationsResponse'{_gvnrsVaultNotificationConfig
+                                                                    ::
+                                                                    !(Maybe
+                                                                        VaultNotificationConfig),
+                                                                    _gvnrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetVaultNotificationsResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +135,10 @@ data GetVaultNotificationsResponse = GetVaultNotificationsResponse'
 getVaultNotificationsResponse
     :: Int -- ^ 'gvnrsResponseStatus'
     -> GetVaultNotificationsResponse
-getVaultNotificationsResponse pResponseStatus_ =
-  GetVaultNotificationsResponse'
-    { _gvnrsVaultNotificationConfig = Nothing
-    , _gvnrsResponseStatus = pResponseStatus_
-    }
-
+getVaultNotificationsResponse pResponseStatus_
+  = GetVaultNotificationsResponse'{_gvnrsVaultNotificationConfig
+                                     = Nothing,
+                                   _gvnrsResponseStatus = pResponseStatus_}
 
 -- | Returns the notification configuration set on the vault.
 gvnrsVaultNotificationConfig :: Lens' GetVaultNotificationsResponse (Maybe VaultNotificationConfig)

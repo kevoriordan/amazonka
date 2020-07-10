@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists projects in AWS Mobile Hub.
+-- Lists projects in AWS Mobile Hub. 
 --
 --
 --
@@ -49,34 +49,34 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure used to request projects list in AWS Mobile Hub.
+-- | Request structure used to request projects list in AWS Mobile Hub. 
 --
 --
 --
 -- /See:/ 'listProjects' smart constructor.
-data ListProjects = ListProjects'
-  { _lpNextToken  :: !(Maybe Text)
-  , _lpMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListProjects = ListProjects'{_lpNextToken ::
+                                  !(Maybe Text),
+                                  _lpMaxResults :: !(Maybe Int)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListProjects' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpNextToken' - Pagination token. Set to null to start listing projects from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more projects.
+-- * 'lpNextToken' - Pagination token. Set to null to start listing projects from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more projects. 
 --
--- * 'lpMaxResults' - Maximum number of records to list in a single response.
+-- * 'lpMaxResults' - Maximum number of records to list in a single response. 
 listProjects
     :: ListProjects
-listProjects = ListProjects' {_lpNextToken = Nothing, _lpMaxResults = Nothing}
+listProjects
+  = ListProjects'{_lpNextToken = Nothing,
+                  _lpMaxResults = Nothing}
 
-
--- | Pagination token. Set to null to start listing projects from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more projects.
+-- | Pagination token. Set to null to start listing projects from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more projects. 
 lpNextToken :: Lens' ListProjects (Maybe Text)
 lpNextToken = lens _lpNextToken (\ s a -> s{_lpNextToken = a})
 
--- | Maximum number of records to list in a single response.
+-- | Maximum number of records to list in a single response. 
 lpMaxResults :: Lens' ListProjects (Maybe Int)
 lpMaxResults = lens _lpMaxResults (\ s a -> s{_lpMaxResults = a})
 
@@ -117,17 +117,17 @@ instance ToQuery ListProjects where
               ["nextToken" =: _lpNextToken,
                "maxResults" =: _lpMaxResults]
 
--- | Result structure used for requests to list projects in AWS Mobile Hub.
+-- | Result structure used for requests to list projects in AWS Mobile Hub. 
 --
 --
 --
 -- /See:/ 'listProjectsResponse' smart constructor.
-data ListProjectsResponse = ListProjectsResponse'
-  { _lprsNextToken      :: !(Maybe Text)
-  , _lprsProjects       :: !(Maybe [ProjectSummary])
-  , _lprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListProjectsResponse = ListProjectsResponse'{_lprsNextToken
+                                                  :: !(Maybe Text),
+                                                  _lprsProjects ::
+                                                  !(Maybe [ProjectSummary]),
+                                                  _lprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListProjectsResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +141,10 @@ data ListProjectsResponse = ListProjectsResponse'
 listProjectsResponse
     :: Int -- ^ 'lprsResponseStatus'
     -> ListProjectsResponse
-listProjectsResponse pResponseStatus_ =
-  ListProjectsResponse'
-    { _lprsNextToken = Nothing
-    , _lprsProjects = Nothing
-    , _lprsResponseStatus = pResponseStatus_
-    }
-
+listProjectsResponse pResponseStatus_
+  = ListProjectsResponse'{_lprsNextToken = Nothing,
+                          _lprsProjects = Nothing,
+                          _lprsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 lprsNextToken :: Lens' ListProjectsResponse (Maybe Text)

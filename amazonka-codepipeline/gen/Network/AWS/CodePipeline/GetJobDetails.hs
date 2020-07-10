@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about a job. Only used for custom actions.
+-- Returns information about a job. Used for custom actions only.
 --
 --
--- /Important:/ When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.
+-- /Important:/ When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.
 --
 module Network.AWS.CodePipeline.GetJobDetails
     (
@@ -46,15 +46,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a GetJobDetails action.
+-- | Represents the input of a @GetJobDetails@ action.
 --
 --
 --
 -- /See:/ 'getJobDetails' smart constructor.
-newtype GetJobDetails = GetJobDetails'
-  { _gjdJobId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetJobDetails = GetJobDetails'{_gjdJobId ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobDetails' with the minimum fields required to make a request.
 --
@@ -64,8 +63,8 @@ newtype GetJobDetails = GetJobDetails'
 getJobDetails
     :: Text -- ^ 'gjdJobId'
     -> GetJobDetails
-getJobDetails pJobId_ = GetJobDetails' {_gjdJobId = pJobId_}
-
+getJobDetails pJobId_
+  = GetJobDetails'{_gjdJobId = pJobId_}
 
 -- | The unique system-generated ID for the job.
 gjdJobId :: Lens' GetJobDetails Text
@@ -104,16 +103,16 @@ instance ToPath GetJobDetails where
 instance ToQuery GetJobDetails where
         toQuery = const mempty
 
--- | Represents the output of a GetJobDetails action.
+-- | Represents the output of a @GetJobDetails@ action.
 --
 --
 --
 -- /See:/ 'getJobDetailsResponse' smart constructor.
-data GetJobDetailsResponse = GetJobDetailsResponse'
-  { _gjdrsJobDetails     :: !(Maybe JobDetails)
-  , _gjdrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetJobDetailsResponse = GetJobDetailsResponse'{_gjdrsJobDetails
+                                                    :: !(Maybe JobDetails),
+                                                    _gjdrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobDetailsResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +124,9 @@ data GetJobDetailsResponse = GetJobDetailsResponse'
 getJobDetailsResponse
     :: Int -- ^ 'gjdrsResponseStatus'
     -> GetJobDetailsResponse
-getJobDetailsResponse pResponseStatus_ =
-  GetJobDetailsResponse'
-    {_gjdrsJobDetails = Nothing, _gjdrsResponseStatus = pResponseStatus_}
-
+getJobDetailsResponse pResponseStatus_
+  = GetJobDetailsResponse'{_gjdrsJobDetails = Nothing,
+                           _gjdrsResponseStatus = pResponseStatus_}
 
 -- | The details of the job.
 gjdrsJobDetails :: Lens' GetJobDetailsResponse (Maybe JobDetails)

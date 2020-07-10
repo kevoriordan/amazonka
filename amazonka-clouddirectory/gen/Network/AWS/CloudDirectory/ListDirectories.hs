@@ -51,12 +51,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDirectories' smart constructor.
-data ListDirectories = ListDirectories'
-  { _ldState      :: !(Maybe DirectoryState)
-  , _ldNextToken  :: !(Maybe Text)
-  , _ldMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDirectories = ListDirectories'{_ldState ::
+                                        !(Maybe DirectoryState),
+                                        _ldNextToken :: !(Maybe Text),
+                                        _ldMaxResults :: !(Maybe Nat)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDirectories' with the minimum fields required to make a request.
 --
@@ -69,10 +68,9 @@ data ListDirectories = ListDirectories'
 -- * 'ldMaxResults' - The maximum number of results to retrieve.
 listDirectories
     :: ListDirectories
-listDirectories =
-  ListDirectories'
-    {_ldState = Nothing, _ldNextToken = Nothing, _ldMaxResults = Nothing}
-
+listDirectories
+  = ListDirectories'{_ldState = Nothing,
+                     _ldNextToken = Nothing, _ldMaxResults = Nothing}
 
 -- | The state of the directories in the list. Can be either Enabled, Disabled, or Deleted.
 ldState :: Lens' ListDirectories (Maybe DirectoryState)
@@ -127,12 +125,14 @@ instance ToQuery ListDirectories where
         toQuery = const mempty
 
 -- | /See:/ 'listDirectoriesResponse' smart constructor.
-data ListDirectoriesResponse = ListDirectoriesResponse'
-  { _ldrsNextToken      :: !(Maybe Text)
-  , _ldrsResponseStatus :: !Int
-  , _ldrsDirectories    :: ![Directory]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDirectoriesResponse = ListDirectoriesResponse'{_ldrsNextToken
+                                                        :: !(Maybe Text),
+                                                        _ldrsResponseStatus ::
+                                                        !Int,
+                                                        _ldrsDirectories ::
+                                                        ![Directory]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListDirectoriesResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +146,10 @@ data ListDirectoriesResponse = ListDirectoriesResponse'
 listDirectoriesResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDirectoriesResponse
-listDirectoriesResponse pResponseStatus_ =
-  ListDirectoriesResponse'
-    { _ldrsNextToken = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    , _ldrsDirectories = mempty
-    }
-
+listDirectoriesResponse pResponseStatus_
+  = ListDirectoriesResponse'{_ldrsNextToken = Nothing,
+                             _ldrsResponseStatus = pResponseStatus_,
+                             _ldrsDirectories = mempty}
 
 -- | The pagination token.
 ldrsNextToken :: Lens' ListDirectoriesResponse (Maybe Text)

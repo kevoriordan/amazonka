@@ -43,28 +43,32 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'removeAllResourcePermissions' smart constructor.
-data RemoveAllResourcePermissions = RemoveAllResourcePermissions'
-  { _rarpAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _rarpResourceId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data RemoveAllResourcePermissions = RemoveAllResourcePermissions'{_rarpAuthenticationToken
+                                                                  ::
+                                                                  !(Maybe
+                                                                      (Sensitive
+                                                                         Text)),
+                                                                  _rarpResourceId
+                                                                  :: !Text}
+                                      deriving (Eq, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'RemoveAllResourcePermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rarpAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'rarpAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'rarpResourceId' - The ID of the resource.
 removeAllResourcePermissions
     :: Text -- ^ 'rarpResourceId'
     -> RemoveAllResourcePermissions
-removeAllResourcePermissions pResourceId_ =
-  RemoveAllResourcePermissions'
-    {_rarpAuthenticationToken = Nothing, _rarpResourceId = pResourceId_}
+removeAllResourcePermissions pResourceId_
+  = RemoveAllResourcePermissions'{_rarpAuthenticationToken
+                                    = Nothing,
+                                  _rarpResourceId = pResourceId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 rarpAuthenticationToken :: Lens' RemoveAllResourcePermissions (Maybe Text)
 rarpAuthenticationToken = lens _rarpAuthenticationToken (\ s a -> s{_rarpAuthenticationToken = a}) . mapping _Sensitive
 
@@ -101,17 +105,16 @@ instance ToQuery RemoveAllResourcePermissions where
         toQuery = const mempty
 
 -- | /See:/ 'removeAllResourcePermissionsResponse' smart constructor.
-data RemoveAllResourcePermissionsResponse =
-  RemoveAllResourcePermissionsResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveAllResourcePermissionsResponse = RemoveAllResourcePermissionsResponse'
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'RemoveAllResourcePermissionsResponse' with the minimum fields required to make a request.
 --
 removeAllResourcePermissionsResponse
     :: RemoveAllResourcePermissionsResponse
-removeAllResourcePermissionsResponse = RemoveAllResourcePermissionsResponse'
-
+removeAllResourcePermissionsResponse
+  = RemoveAllResourcePermissionsResponse'
 
 instance NFData RemoveAllResourcePermissionsResponse
          where

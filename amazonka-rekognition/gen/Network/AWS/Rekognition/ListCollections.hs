@@ -21,7 +21,7 @@
 -- Returns list of collection IDs in your account. If the result is truncated, the response also provides a @NextToken@ that you can use in the subsequent request to fetch the next set of collection IDs.
 --
 --
--- For an example, see 'list-collection-procedure' .
+-- For an example, see Listing Collections in the Amazon Rekognition Developer Guide.
 --
 -- This operation requires permissions to perform the @rekognition:ListCollections@ action.
 --
@@ -55,11 +55,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listCollections' smart constructor.
-data ListCollections = ListCollections'
-  { _lcNextToken  :: !(Maybe Text)
-  , _lcMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCollections = ListCollections'{_lcNextToken
+                                        :: !(Maybe Text),
+                                        _lcMaxResults :: !(Maybe Nat)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCollections' with the minimum fields required to make a request.
 --
@@ -67,18 +66,18 @@ data ListCollections = ListCollections'
 --
 -- * 'lcNextToken' - Pagination token from the previous response.
 --
--- * 'lcMaxResults' - Maximum number of collection IDs to return.
+-- * 'lcMaxResults' - Maximum number of collection IDs to return. 
 listCollections
     :: ListCollections
-listCollections =
-  ListCollections' {_lcNextToken = Nothing, _lcMaxResults = Nothing}
-
+listCollections
+  = ListCollections'{_lcNextToken = Nothing,
+                     _lcMaxResults = Nothing}
 
 -- | Pagination token from the previous response.
 lcNextToken :: Lens' ListCollections (Maybe Text)
 lcNextToken = lens _lcNextToken (\ s a -> s{_lcNextToken = a})
 
--- | Maximum number of collection IDs to return.
+-- | Maximum number of collection IDs to return. 
 lcMaxResults :: Lens' ListCollections (Maybe Natural)
 lcMaxResults = lens _lcMaxResults (\ s a -> s{_lcMaxResults = a}) . mapping _Nat
 
@@ -129,13 +128,16 @@ instance ToQuery ListCollections where
         toQuery = const mempty
 
 -- | /See:/ 'listCollectionsResponse' smart constructor.
-data ListCollectionsResponse = ListCollectionsResponse'
-  { _lcrsCollectionIds     :: !(Maybe [Text])
-  , _lcrsNextToken         :: !(Maybe Text)
-  , _lcrsFaceModelVersions :: !(Maybe [Text])
-  , _lcrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCollectionsResponse = ListCollectionsResponse'{_lcrsCollectionIds
+                                                        :: !(Maybe [Text]),
+                                                        _lcrsNextToken ::
+                                                        !(Maybe Text),
+                                                        _lcrsFaceModelVersions
+                                                        :: !(Maybe [Text]),
+                                                        _lcrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListCollectionsResponse' with the minimum fields required to make a request.
 --
@@ -151,14 +153,12 @@ data ListCollectionsResponse = ListCollectionsResponse'
 listCollectionsResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListCollectionsResponse
-listCollectionsResponse pResponseStatus_ =
-  ListCollectionsResponse'
-    { _lcrsCollectionIds = Nothing
-    , _lcrsNextToken = Nothing
-    , _lcrsFaceModelVersions = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
-
+listCollectionsResponse pResponseStatus_
+  = ListCollectionsResponse'{_lcrsCollectionIds =
+                               Nothing,
+                             _lcrsNextToken = Nothing,
+                             _lcrsFaceModelVersions = Nothing,
+                             _lcrsResponseStatus = pResponseStatus_}
 
 -- | An array of collection IDs.
 lcrsCollectionIds :: Lens' ListCollectionsResponse [Text]

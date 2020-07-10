@@ -43,17 +43,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createStorageLocation' smart constructor.
-data CreateStorageLocation =
-  CreateStorageLocation'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStorageLocation = CreateStorageLocation'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateStorageLocation' with the minimum fields required to make a request.
 --
 createStorageLocation
     :: CreateStorageLocation
 createStorageLocation = CreateStorageLocation'
-
 
 instance AWSRequest CreateStorageLocation where
         type Rs CreateStorageLocation =
@@ -87,11 +85,14 @@ instance ToQuery CreateStorageLocation where
 --
 --
 -- /See:/ 'createStorageLocationResponse' smart constructor.
-data CreateStorageLocationResponse = CreateStorageLocationResponse'
-  { _cslrsS3Bucket       :: !(Maybe Text)
-  , _cslrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStorageLocationResponse = CreateStorageLocationResponse'{_cslrsS3Bucket
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _cslrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateStorageLocationResponse' with the minimum fields required to make a request.
 --
@@ -103,10 +104,10 @@ data CreateStorageLocationResponse = CreateStorageLocationResponse'
 createStorageLocationResponse
     :: Int -- ^ 'cslrsResponseStatus'
     -> CreateStorageLocationResponse
-createStorageLocationResponse pResponseStatus_ =
-  CreateStorageLocationResponse'
-    {_cslrsS3Bucket = Nothing, _cslrsResponseStatus = pResponseStatus_}
-
+createStorageLocationResponse pResponseStatus_
+  = CreateStorageLocationResponse'{_cslrsS3Bucket =
+                                     Nothing,
+                                   _cslrsResponseStatus = pResponseStatus_}
 
 -- | The name of the Amazon S3 bucket created.
 cslrsS3Bucket :: Lens' CreateStorageLocationResponse (Maybe Text)

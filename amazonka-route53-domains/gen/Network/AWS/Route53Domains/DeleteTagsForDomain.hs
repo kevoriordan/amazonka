@@ -51,11 +51,10 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'deleteTagsForDomain' smart constructor.
-data DeleteTagsForDomain = DeleteTagsForDomain'
-  { _dtfdDomainName   :: !Text
-  , _dtfdTagsToDelete :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTagsForDomain = DeleteTagsForDomain'{_dtfdDomainName
+                                                :: !Text,
+                                                _dtfdTagsToDelete :: ![Text]}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTagsForDomain' with the minimum fields required to make a request.
 --
@@ -67,10 +66,10 @@ data DeleteTagsForDomain = DeleteTagsForDomain'
 deleteTagsForDomain
     :: Text -- ^ 'dtfdDomainName'
     -> DeleteTagsForDomain
-deleteTagsForDomain pDomainName_ =
-  DeleteTagsForDomain'
-    {_dtfdDomainName = pDomainName_, _dtfdTagsToDelete = mempty}
-
+deleteTagsForDomain pDomainName_
+  = DeleteTagsForDomain'{_dtfdDomainName =
+                           pDomainName_,
+                         _dtfdTagsToDelete = mempty}
 
 -- | The domain for which you want to delete one or more tags.
 dtfdDomainName :: Lens' DeleteTagsForDomain Text
@@ -117,10 +116,10 @@ instance ToQuery DeleteTagsForDomain where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTagsForDomainResponse' smart constructor.
-newtype DeleteTagsForDomainResponse = DeleteTagsForDomainResponse'
-  { _dtfdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTagsForDomainResponse = DeleteTagsForDomainResponse'{_dtfdrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteTagsForDomainResponse' with the minimum fields required to make a request.
 --
@@ -130,9 +129,9 @@ newtype DeleteTagsForDomainResponse = DeleteTagsForDomainResponse'
 deleteTagsForDomainResponse
     :: Int -- ^ 'dtfdrsResponseStatus'
     -> DeleteTagsForDomainResponse
-deleteTagsForDomainResponse pResponseStatus_ =
-  DeleteTagsForDomainResponse' {_dtfdrsResponseStatus = pResponseStatus_}
-
+deleteTagsForDomainResponse pResponseStatus_
+  = DeleteTagsForDomainResponse'{_dtfdrsResponseStatus
+                                   = pResponseStatus_}
 
 -- | -- | The response status code.
 dtfdrsResponseStatus :: Lens' DeleteTagsForDomainResponse Int

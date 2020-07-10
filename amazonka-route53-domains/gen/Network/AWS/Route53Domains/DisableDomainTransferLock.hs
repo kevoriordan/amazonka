@@ -49,10 +49,10 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'disableDomainTransferLock' smart constructor.
-newtype DisableDomainTransferLock = DisableDomainTransferLock'
-  { _ddtlDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableDomainTransferLock = DisableDomainTransferLock'{_ddtlDomainName
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DisableDomainTransferLock' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DisableDomainTransferLock = DisableDomainTransferLock'
 disableDomainTransferLock
     :: Text -- ^ 'ddtlDomainName'
     -> DisableDomainTransferLock
-disableDomainTransferLock pDomainName_ =
-  DisableDomainTransferLock' {_ddtlDomainName = pDomainName_}
-
+disableDomainTransferLock pDomainName_
+  = DisableDomainTransferLock'{_ddtlDomainName =
+                                 pDomainName_}
 
 -- | The name of the domain that you want to remove the transfer lock for.
 ddtlDomainName :: Lens' DisableDomainTransferLock Text
@@ -110,11 +110,14 @@ instance ToQuery DisableDomainTransferLock where
 --
 --
 -- /See:/ 'disableDomainTransferLockResponse' smart constructor.
-data DisableDomainTransferLockResponse = DisableDomainTransferLockResponse'
-  { _ddtlrsResponseStatus :: !Int
-  , _ddtlrsOperationId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableDomainTransferLockResponse = DisableDomainTransferLockResponse'{_ddtlrsResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _ddtlrsOperationId
+                                                                            ::
+                                                                            !Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DisableDomainTransferLockResponse' with the minimum fields required to make a request.
 --
@@ -122,23 +125,22 @@ data DisableDomainTransferLockResponse = DisableDomainTransferLockResponse'
 --
 -- * 'ddtlrsResponseStatus' - -- | The response status code.
 --
--- * 'ddtlrsOperationId' - Identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- * 'ddtlrsOperationId' - Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 disableDomainTransferLockResponse
     :: Int -- ^ 'ddtlrsResponseStatus'
     -> Text -- ^ 'ddtlrsOperationId'
     -> DisableDomainTransferLockResponse
-disableDomainTransferLockResponse pResponseStatus_ pOperationId_ =
-  DisableDomainTransferLockResponse'
-    { _ddtlrsResponseStatus = pResponseStatus_
-    , _ddtlrsOperationId = pOperationId_
-    }
-
+disableDomainTransferLockResponse pResponseStatus_
+  pOperationId_
+  = DisableDomainTransferLockResponse'{_ddtlrsResponseStatus
+                                         = pResponseStatus_,
+                                       _ddtlrsOperationId = pOperationId_}
 
 -- | -- | The response status code.
 ddtlrsResponseStatus :: Lens' DisableDomainTransferLockResponse Int
 ddtlrsResponseStatus = lens _ddtlrsResponseStatus (\ s a -> s{_ddtlrsResponseStatus = a})
 
--- | Identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- | Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 ddtlrsOperationId :: Lens' DisableDomainTransferLockResponse Text
 ddtlrsOperationId = lens _ddtlrsOperationId (\ s a -> s{_ddtlrsOperationId = a})
 

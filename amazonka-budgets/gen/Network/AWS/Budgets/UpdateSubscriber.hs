@@ -47,19 +47,18 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request of UpdateSubscriber
+-- | Request of UpdateSubscriber 
 --
 --
 --
 -- /See:/ 'updateSubscriber' smart constructor.
-data UpdateSubscriber = UpdateSubscriber'
-  { _usAccountId     :: !Text
-  , _usBudgetName    :: !Text
-  , _usNotification  :: !Notification
-  , _usOldSubscriber :: !Subscriber
-  , _usNewSubscriber :: !Subscriber
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSubscriber = UpdateSubscriber'{_usAccountId
+                                          :: !Text,
+                                          _usBudgetName :: !Text,
+                                          _usNotification :: !Notification,
+                                          _usOldSubscriber :: !Subscriber,
+                                          _usNewSubscriber :: !Subscriber}
+                          deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSubscriber' with the minimum fields required to make a request.
 --
@@ -71,9 +70,9 @@ data UpdateSubscriber = UpdateSubscriber'
 --
 -- * 'usNotification' - The notification whose subscriber you want to update.
 --
--- * 'usOldSubscriber' - The previous subscriber associated with a budget notification.
+-- * 'usOldSubscriber' - The previous subscriber that is associated with a budget notification.
 --
--- * 'usNewSubscriber' - The updated subscriber associated with a budget notification.
+-- * 'usNewSubscriber' - The updated subscriber that is associated with a budget notification.
 updateSubscriber
     :: Text -- ^ 'usAccountId'
     -> Text -- ^ 'usBudgetName'
@@ -81,15 +80,13 @@ updateSubscriber
     -> Subscriber -- ^ 'usOldSubscriber'
     -> Subscriber -- ^ 'usNewSubscriber'
     -> UpdateSubscriber
-updateSubscriber pAccountId_ pBudgetName_ pNotification_ pOldSubscriber_ pNewSubscriber_ =
-  UpdateSubscriber'
-    { _usAccountId = pAccountId_
-    , _usBudgetName = pBudgetName_
-    , _usNotification = pNotification_
-    , _usOldSubscriber = pOldSubscriber_
-    , _usNewSubscriber = pNewSubscriber_
-    }
-
+updateSubscriber pAccountId_ pBudgetName_
+  pNotification_ pOldSubscriber_ pNewSubscriber_
+  = UpdateSubscriber'{_usAccountId = pAccountId_,
+                      _usBudgetName = pBudgetName_,
+                      _usNotification = pNotification_,
+                      _usOldSubscriber = pOldSubscriber_,
+                      _usNewSubscriber = pNewSubscriber_}
 
 -- | The @accountId@ that is associated with the budget whose subscriber you want to update.
 usAccountId :: Lens' UpdateSubscriber Text
@@ -103,11 +100,11 @@ usBudgetName = lens _usBudgetName (\ s a -> s{_usBudgetName = a})
 usNotification :: Lens' UpdateSubscriber Notification
 usNotification = lens _usNotification (\ s a -> s{_usNotification = a})
 
--- | The previous subscriber associated with a budget notification.
+-- | The previous subscriber that is associated with a budget notification.
 usOldSubscriber :: Lens' UpdateSubscriber Subscriber
 usOldSubscriber = lens _usOldSubscriber (\ s a -> s{_usOldSubscriber = a})
 
--- | The updated subscriber associated with a budget notification.
+-- | The updated subscriber that is associated with a budget notification.
 usNewSubscriber :: Lens' UpdateSubscriber Subscriber
 usNewSubscriber = lens _usNewSubscriber (\ s a -> s{_usNewSubscriber = a})
 
@@ -149,15 +146,15 @@ instance ToPath UpdateSubscriber where
 instance ToQuery UpdateSubscriber where
         toQuery = const mempty
 
--- | Response of UpdateSubscriber
+-- | Response of UpdateSubscriber 
 --
 --
 --
 -- /See:/ 'updateSubscriberResponse' smart constructor.
-newtype UpdateSubscriberResponse = UpdateSubscriberResponse'
-  { _usrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateSubscriberResponse = UpdateSubscriberResponse'{_usrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateSubscriberResponse' with the minimum fields required to make a request.
 --
@@ -167,9 +164,9 @@ newtype UpdateSubscriberResponse = UpdateSubscriberResponse'
 updateSubscriberResponse
     :: Int -- ^ 'usrsResponseStatus'
     -> UpdateSubscriberResponse
-updateSubscriberResponse pResponseStatus_ =
-  UpdateSubscriberResponse' {_usrsResponseStatus = pResponseStatus_}
-
+updateSubscriberResponse pResponseStatus_
+  = UpdateSubscriberResponse'{_usrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 usrsResponseStatus :: Lens' UpdateSubscriberResponse Int

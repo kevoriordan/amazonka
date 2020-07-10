@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the search configuration.
+-- Gets the indexing configuration.
 --
 --
 module Network.AWS.IoT.GetIndexingConfiguration
@@ -31,6 +31,7 @@ module Network.AWS.IoT.GetIndexingConfiguration
     , getIndexingConfigurationResponse
     , GetIndexingConfigurationResponse
     -- * Response Lenses
+    , gicrsThingGroupIndexingConfiguration
     , gicrsThingIndexingConfiguration
     , gicrsResponseStatus
     ) where
@@ -43,17 +44,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getIndexingConfiguration' smart constructor.
-data GetIndexingConfiguration =
-  GetIndexingConfiguration'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIndexingConfiguration = GetIndexingConfiguration'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetIndexingConfiguration' with the minimum fields required to make a request.
 --
 getIndexingConfiguration
     :: GetIndexingConfiguration
 getIndexingConfiguration = GetIndexingConfiguration'
-
 
 instance AWSRequest GetIndexingConfiguration where
         type Rs GetIndexingConfiguration =
@@ -63,8 +62,9 @@ instance AWSRequest GetIndexingConfiguration where
           = receiveJSON
               (\ s h x ->
                  GetIndexingConfigurationResponse' <$>
-                   (x .?> "thingIndexingConfiguration") <*>
-                     (pure (fromEnum s)))
+                   (x .?> "thingGroupIndexingConfiguration") <*>
+                     (x .?> "thingIndexingConfiguration")
+                     <*> (pure (fromEnum s)))
 
 instance Hashable GetIndexingConfiguration where
 
@@ -80,15 +80,25 @@ instance ToQuery GetIndexingConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'getIndexingConfigurationResponse' smart constructor.
-data GetIndexingConfigurationResponse = GetIndexingConfigurationResponse'
-  { _gicrsThingIndexingConfiguration :: !(Maybe ThingIndexingConfiguration)
-  , _gicrsResponseStatus             :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIndexingConfigurationResponse = GetIndexingConfigurationResponse'{_gicrsThingGroupIndexingConfiguration
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ThingGroupIndexingConfiguration),
+                                                                          _gicrsThingIndexingConfiguration
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ThingIndexingConfiguration),
+                                                                          _gicrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetIndexingConfigurationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gicrsThingGroupIndexingConfiguration' - The index configuration.
 --
 -- * 'gicrsThingIndexingConfiguration' - Thing indexing configuration.
 --
@@ -96,12 +106,16 @@ data GetIndexingConfigurationResponse = GetIndexingConfigurationResponse'
 getIndexingConfigurationResponse
     :: Int -- ^ 'gicrsResponseStatus'
     -> GetIndexingConfigurationResponse
-getIndexingConfigurationResponse pResponseStatus_ =
-  GetIndexingConfigurationResponse'
-    { _gicrsThingIndexingConfiguration = Nothing
-    , _gicrsResponseStatus = pResponseStatus_
-    }
+getIndexingConfigurationResponse pResponseStatus_
+  = GetIndexingConfigurationResponse'{_gicrsThingGroupIndexingConfiguration
+                                        = Nothing,
+                                      _gicrsThingIndexingConfiguration =
+                                        Nothing,
+                                      _gicrsResponseStatus = pResponseStatus_}
 
+-- | The index configuration.
+gicrsThingGroupIndexingConfiguration :: Lens' GetIndexingConfigurationResponse (Maybe ThingGroupIndexingConfiguration)
+gicrsThingGroupIndexingConfiguration = lens _gicrsThingGroupIndexingConfiguration (\ s a -> s{_gicrsThingGroupIndexingConfiguration = a})
 
 -- | Thing indexing configuration.
 gicrsThingIndexingConfiguration :: Lens' GetIndexingConfigurationResponse (Maybe ThingIndexingConfiguration)

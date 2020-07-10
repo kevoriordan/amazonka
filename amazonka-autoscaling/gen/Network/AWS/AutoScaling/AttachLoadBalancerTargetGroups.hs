@@ -23,7 +23,7 @@
 --
 -- To describe the target groups for an Auto Scaling group, use 'DescribeLoadBalancerTargetGroups' . To detach the target group from the Auto Scaling group, use 'DetachLoadBalancerTargetGroups' .
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html Attach a Load Balancer to Your Auto Scaling Group> in the /Auto Scaling User Guide/ .
+-- With Application Load Balancers and Network Load Balancers, instances are registered as targets with a target group. With Classic Load Balancers, instances are registered with the load balancer. For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html Attaching a Load Balancer to Your Auto Scaling Group> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.AttachLoadBalancerTargetGroups
     (
@@ -49,11 +49,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachLoadBalancerTargetGroups' smart constructor.
-data AttachLoadBalancerTargetGroups = AttachLoadBalancerTargetGroups'
-  { _albtgAutoScalingGroupName :: !Text
-  , _albtgTargetGroupARNs      :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachLoadBalancerTargetGroups = AttachLoadBalancerTargetGroups'{_albtgAutoScalingGroupName
+                                                                      :: !Text,
+                                                                      _albtgTargetGroupARNs
+                                                                      ::
+                                                                      ![Text]}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'AttachLoadBalancerTargetGroups' with the minimum fields required to make a request.
 --
@@ -65,12 +67,10 @@ data AttachLoadBalancerTargetGroups = AttachLoadBalancerTargetGroups'
 attachLoadBalancerTargetGroups
     :: Text -- ^ 'albtgAutoScalingGroupName'
     -> AttachLoadBalancerTargetGroups
-attachLoadBalancerTargetGroups pAutoScalingGroupName_ =
-  AttachLoadBalancerTargetGroups'
-    { _albtgAutoScalingGroupName = pAutoScalingGroupName_
-    , _albtgTargetGroupARNs = mempty
-    }
-
+attachLoadBalancerTargetGroups pAutoScalingGroupName_
+  = AttachLoadBalancerTargetGroups'{_albtgAutoScalingGroupName
+                                      = pAutoScalingGroupName_,
+                                    _albtgTargetGroupARNs = mempty}
 
 -- | The name of the Auto Scaling group.
 albtgAutoScalingGroupName :: Lens' AttachLoadBalancerTargetGroups Text
@@ -115,10 +115,12 @@ instance ToQuery AttachLoadBalancerTargetGroups where
                  toQueryList "member" _albtgTargetGroupARNs]
 
 -- | /See:/ 'attachLoadBalancerTargetGroupsResponse' smart constructor.
-newtype AttachLoadBalancerTargetGroupsResponse = AttachLoadBalancerTargetGroupsResponse'
-  { _albtgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AttachLoadBalancerTargetGroupsResponse = AttachLoadBalancerTargetGroupsResponse'{_albtgrsResponseStatus
+                                                                                         ::
+                                                                                         Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'AttachLoadBalancerTargetGroupsResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +130,10 @@ newtype AttachLoadBalancerTargetGroupsResponse = AttachLoadBalancerTargetGroupsR
 attachLoadBalancerTargetGroupsResponse
     :: Int -- ^ 'albtgrsResponseStatus'
     -> AttachLoadBalancerTargetGroupsResponse
-attachLoadBalancerTargetGroupsResponse pResponseStatus_ =
-  AttachLoadBalancerTargetGroupsResponse'
-    {_albtgrsResponseStatus = pResponseStatus_}
-
+attachLoadBalancerTargetGroupsResponse
+  pResponseStatus_
+  = AttachLoadBalancerTargetGroupsResponse'{_albtgrsResponseStatus
+                                              = pResponseStatus_}
 
 -- | -- | The response status code.
 albtgrsResponseStatus :: Lens' AttachLoadBalancerTargetGroupsResponse Int

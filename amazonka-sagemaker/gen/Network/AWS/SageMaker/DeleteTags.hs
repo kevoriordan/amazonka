@@ -21,7 +21,7 @@
 -- Deletes the specified tags from an Amazon SageMaker resource.
 --
 --
--- To list a resource's tags, use the @ListTags@ API.
+-- To list a resource's tags, use the @ListTags@ API. 
 --
 module Network.AWS.SageMaker.DeleteTags
     (
@@ -36,7 +36,7 @@ module Network.AWS.SageMaker.DeleteTags
     , deleteTagsResponse
     , DeleteTagsResponse
     -- * Response Lenses
-    , dtrsResponseStatus
+    , dtsrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -47,11 +47,10 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'deleteTags' smart constructor.
-data DeleteTags = DeleteTags'
-  { _dtResourceARN :: !Text
-  , _dtTagKeys     :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTags = DeleteTags'{_dtResourceARN ::
+                              !Text,
+                              _dtTagKeys :: !(List1 Text)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTags' with the minimum fields required to make a request.
 --
@@ -64,9 +63,9 @@ deleteTags
     :: Text -- ^ 'dtResourceARN'
     -> NonEmpty Text -- ^ 'dtTagKeys'
     -> DeleteTags
-deleteTags pResourceARN_ pTagKeys_ =
-  DeleteTags' {_dtResourceARN = pResourceARN_, _dtTagKeys = _List1 # pTagKeys_}
-
+deleteTags pResourceARN_ pTagKeys_
+  = DeleteTags'{_dtResourceARN = pResourceARN_,
+                _dtTagKeys = _List1 # pTagKeys_}
 
 -- | The Amazon Resource Name (ARN) of the resource whose tags you want to delete.
 dtResourceARN :: Lens' DeleteTags Text
@@ -111,25 +110,25 @@ instance ToQuery DeleteTags where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTagsResponse' smart constructor.
-newtype DeleteTagsResponse = DeleteTagsResponse'
-  { _dtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTagsResponse = DeleteTagsResponse'{_dtsrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtrsResponseStatus' - -- | The response status code.
+-- * 'dtsrsResponseStatus' - -- | The response status code.
 deleteTagsResponse
-    :: Int -- ^ 'dtrsResponseStatus'
+    :: Int -- ^ 'dtsrsResponseStatus'
     -> DeleteTagsResponse
-deleteTagsResponse pResponseStatus_ =
-  DeleteTagsResponse' {_dtrsResponseStatus = pResponseStatus_}
-
+deleteTagsResponse pResponseStatus_
+  = DeleteTagsResponse'{_dtsrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
-dtrsResponseStatus :: Lens' DeleteTagsResponse Int
-dtrsResponseStatus = lens _dtrsResponseStatus (\ s a -> s{_dtrsResponseStatus = a})
+dtsrsResponseStatus :: Lens' DeleteTagsResponse Int
+dtsrsResponseStatus = lens _dtsrsResponseStatus (\ s a -> s{_dtsrsResponseStatus = a})
 
 instance NFData DeleteTagsResponse where

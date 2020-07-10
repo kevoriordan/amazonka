@@ -14,11 +14,11 @@
 module Test.AWS.Gen.CloudSearch where
 
 import Data.Proxy
-import Network.AWS.CloudSearch
-import Test.AWS.CloudSearch.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.CloudSearch
+import Test.AWS.CloudSearch.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -64,11 +64,17 @@ import Test.Tasty
 --         , requestDeleteAnalysisScheme $
 --             deleteAnalysisScheme
 --
+--         , requestDescribeDomainEndpointOptions $
+--             describeDomainEndpointOptions
+--
 --         , requestDescribeAnalysisSchemes $
 --             describeAnalysisSchemes
 --
 --         , requestCreateDomain $
 --             createDomain
+--
+--         , requestUpdateDomainEndpointOptions $
+--             updateDomainEndpointOptions
 --
 --         , requestDescribeIndexFields $
 --             describeIndexFields
@@ -139,11 +145,17 @@ import Test.Tasty
 --         , responseDeleteAnalysisScheme $
 --             deleteAnalysisSchemeResponse
 --
+--         , responseDescribeDomainEndpointOptions $
+--             describeDomainEndpointOptionsResponse
+--
 --         , responseDescribeAnalysisSchemes $
 --             describeAnalysisSchemesResponse
 --
 --         , responseCreateDomain $
 --             createDomainResponse
+--
+--         , responseUpdateDomainEndpointOptions $
+--             updateDomainEndpointOptionsResponse
 --
 --         , responseDescribeIndexFields $
 --             describeIndexFieldsResponse
@@ -240,6 +252,11 @@ requestDeleteAnalysisScheme = req
     "DeleteAnalysisScheme"
     "fixture/DeleteAnalysisScheme.yaml"
 
+requestDescribeDomainEndpointOptions :: DescribeDomainEndpointOptions -> TestTree
+requestDescribeDomainEndpointOptions = req
+    "DescribeDomainEndpointOptions"
+    "fixture/DescribeDomainEndpointOptions.yaml"
+
 requestDescribeAnalysisSchemes :: DescribeAnalysisSchemes -> TestTree
 requestDescribeAnalysisSchemes = req
     "DescribeAnalysisSchemes"
@@ -249,6 +266,11 @@ requestCreateDomain :: CreateDomain -> TestTree
 requestCreateDomain = req
     "CreateDomain"
     "fixture/CreateDomain.yaml"
+
+requestUpdateDomainEndpointOptions :: UpdateDomainEndpointOptions -> TestTree
+requestUpdateDomainEndpointOptions = req
+    "UpdateDomainEndpointOptions"
+    "fixture/UpdateDomainEndpointOptions.yaml"
 
 requestDescribeIndexFields :: DescribeIndexFields -> TestTree
 requestDescribeIndexFields = req
@@ -386,6 +408,13 @@ responseDeleteAnalysisScheme = res
     cloudSearch
     (Proxy :: Proxy DeleteAnalysisScheme)
 
+responseDescribeDomainEndpointOptions :: DescribeDomainEndpointOptionsResponse -> TestTree
+responseDescribeDomainEndpointOptions = res
+    "DescribeDomainEndpointOptionsResponse"
+    "fixture/DescribeDomainEndpointOptionsResponse.proto"
+    cloudSearch
+    (Proxy :: Proxy DescribeDomainEndpointOptions)
+
 responseDescribeAnalysisSchemes :: DescribeAnalysisSchemesResponse -> TestTree
 responseDescribeAnalysisSchemes = res
     "DescribeAnalysisSchemesResponse"
@@ -399,6 +428,13 @@ responseCreateDomain = res
     "fixture/CreateDomainResponse.proto"
     cloudSearch
     (Proxy :: Proxy CreateDomain)
+
+responseUpdateDomainEndpointOptions :: UpdateDomainEndpointOptionsResponse -> TestTree
+responseUpdateDomainEndpointOptions = res
+    "UpdateDomainEndpointOptionsResponse"
+    "fixture/UpdateDomainEndpointOptionsResponse.proto"
+    cloudSearch
+    (Proxy :: Proxy UpdateDomainEndpointOptions)
 
 responseDescribeIndexFields :: DescribeIndexFieldsResponse -> TestTree
 responseDescribeIndexFields = res

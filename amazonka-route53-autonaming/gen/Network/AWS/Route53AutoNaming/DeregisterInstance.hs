@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the records and the health check, if any, that Amazon Route 53 created for the specified instance.
+-- Deletes the Amazon Route 53 DNS records and health check, if any, that AWS Cloud Map created for the specified instance.
 --
 --
 module Network.AWS.Route53AutoNaming.DeregisterInstance
@@ -34,8 +34,8 @@ module Network.AWS.Route53AutoNaming.DeregisterInstance
     , deregisterInstanceResponse
     , DeregisterInstanceResponse
     -- * Response Lenses
-    , dirsOperationId
-    , dirsResponseStatus
+    , drsOperationId
+    , drsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -46,11 +46,10 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'deregisterInstance' smart constructor.
-data DeregisterInstance = DeregisterInstance'
-  { _diServiceId  :: !Text
-  , _diInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterInstance = DeregisterInstance'{_diServiceId
+                                              :: !Text,
+                                              _diInstanceId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeregisterInstance' with the minimum fields required to make a request.
 --
@@ -58,20 +57,20 @@ data DeregisterInstance = DeregisterInstance'
 --
 -- * 'diServiceId' - The ID of the service that the instance is associated with.
 --
--- * 'diInstanceId' - The value that you specified for @Id@ in the 'RegisterInstance' request.
+-- * 'diInstanceId' - The value that you specified for @Id@ in the <https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html RegisterInstance> request.
 deregisterInstance
     :: Text -- ^ 'diServiceId'
     -> Text -- ^ 'diInstanceId'
     -> DeregisterInstance
-deregisterInstance pServiceId_ pInstanceId_ =
-  DeregisterInstance' {_diServiceId = pServiceId_, _diInstanceId = pInstanceId_}
-
+deregisterInstance pServiceId_ pInstanceId_
+  = DeregisterInstance'{_diServiceId = pServiceId_,
+                        _diInstanceId = pInstanceId_}
 
 -- | The ID of the service that the instance is associated with.
 diServiceId :: Lens' DeregisterInstance Text
 diServiceId = lens _diServiceId (\ s a -> s{_diServiceId = a})
 
--- | The value that you specified for @Id@ in the 'RegisterInstance' request.
+-- | The value that you specified for @Id@ in the <https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html RegisterInstance> request.
 diInstanceId :: Lens' DeregisterInstance Text
 diInstanceId = lens _diInstanceId (\ s a -> s{_diInstanceId = a})
 
@@ -113,33 +112,34 @@ instance ToQuery DeregisterInstance where
         toQuery = const mempty
 
 -- | /See:/ 'deregisterInstanceResponse' smart constructor.
-data DeregisterInstanceResponse = DeregisterInstanceResponse'
-  { _dirsOperationId    :: !(Maybe Text)
-  , _dirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeregisterInstanceResponse = DeregisterInstanceResponse'{_drsOperationId
+                                                              :: !(Maybe Text),
+                                                              _drsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeregisterInstanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dirsOperationId' - A value that you can use to determine whether the request completed successfully. For more information, see 'GetOperation' .
+-- * 'drsOperationId' - A value that you can use to determine whether the request completed successfully. For more information, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
 --
--- * 'dirsResponseStatus' - -- | The response status code.
+-- * 'drsResponseStatus' - -- | The response status code.
 deregisterInstanceResponse
-    :: Int -- ^ 'dirsResponseStatus'
+    :: Int -- ^ 'drsResponseStatus'
     -> DeregisterInstanceResponse
-deregisterInstanceResponse pResponseStatus_ =
-  DeregisterInstanceResponse'
-    {_dirsOperationId = Nothing, _dirsResponseStatus = pResponseStatus_}
+deregisterInstanceResponse pResponseStatus_
+  = DeregisterInstanceResponse'{_drsOperationId =
+                                  Nothing,
+                                _drsResponseStatus = pResponseStatus_}
 
-
--- | A value that you can use to determine whether the request completed successfully. For more information, see 'GetOperation' .
-dirsOperationId :: Lens' DeregisterInstanceResponse (Maybe Text)
-dirsOperationId = lens _dirsOperationId (\ s a -> s{_dirsOperationId = a})
+-- | A value that you can use to determine whether the request completed successfully. For more information, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
+drsOperationId :: Lens' DeregisterInstanceResponse (Maybe Text)
+drsOperationId = lens _drsOperationId (\ s a -> s{_drsOperationId = a})
 
 -- | -- | The response status code.
-dirsResponseStatus :: Lens' DeregisterInstanceResponse Int
-dirsResponseStatus = lens _dirsResponseStatus (\ s a -> s{_dirsResponseStatus = a})
+drsResponseStatus :: Lens' DeregisterInstanceResponse Int
+drsResponseStatus = lens _drsResponseStatus (\ s a -> s{_drsResponseStatus = a})
 
 instance NFData DeregisterInstanceResponse where

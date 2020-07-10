@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -18,12 +18,19 @@ module Network.AWS.XRay.Types
     -- * Errors
     , _InvalidRequestException
     , _ThrottledException
+    , _RuleLimitExceededException
 
     -- * EncryptionStatus
     , EncryptionStatus (..)
 
     -- * EncryptionType
     , EncryptionType (..)
+
+    -- * SamplingStrategyName
+    , SamplingStrategyName (..)
+
+    -- * TimeRangeType
+    , TimeRangeType (..)
 
     -- * Alias
     , Alias
@@ -38,6 +45,11 @@ module Network.AWS.XRay.Types
     , avNumberValue
     , avStringValue
     , avBooleanValue
+
+    -- * AvailabilityZoneDetail
+    , AvailabilityZoneDetail
+    , availabilityZoneDetail
+    , azdName
 
     -- * BackendConnectionErrors
     , BackendConnectionErrors
@@ -75,6 +87,29 @@ module Network.AWS.XRay.Types
     , ecKeyId
     , ecType
 
+    -- * ErrorRootCause
+    , ErrorRootCause
+    , errorRootCause
+    , ercClientImpacting
+    , ercServices
+
+    -- * ErrorRootCauseEntity
+    , ErrorRootCauseEntity
+    , errorRootCauseEntity
+    , erceExceptions
+    , erceRemote
+    , erceName
+
+    -- * ErrorRootCauseService
+    , ErrorRootCauseService
+    , errorRootCauseService
+    , ercsEntityPath
+    , ercsAccountId
+    , ercsNames
+    , ercsName
+    , ercsInferred
+    , ercsType
+
     -- * ErrorStatistics
     , ErrorStatistics
     , errorStatistics
@@ -82,11 +117,48 @@ module Network.AWS.XRay.Types
     , eThrottleCount
     , eTotalCount
 
+    -- * FaultRootCause
+    , FaultRootCause
+    , faultRootCause
+    , frcClientImpacting
+    , frcServices
+
+    -- * FaultRootCauseEntity
+    , FaultRootCauseEntity
+    , faultRootCauseEntity
+    , frceExceptions
+    , frceRemote
+    , frceName
+
+    -- * FaultRootCauseService
+    , FaultRootCauseService
+    , faultRootCauseService
+    , frcsEntityPath
+    , frcsAccountId
+    , frcsNames
+    , frcsName
+    , frcsInferred
+    , frcsType
+
     -- * FaultStatistics
     , FaultStatistics
     , faultStatistics
     , fsOtherCount
     , fsTotalCount
+
+    -- * Group
+    , Group
+    , group'
+    , gFilterExpression
+    , gGroupARN
+    , gGroupName
+
+    -- * GroupSummary
+    , GroupSummary
+    , groupSummary
+    , gsFilterExpression
+    , gsGroupARN
+    , gsGroupName
 
     -- * HTTP
     , HTTP
@@ -102,6 +174,119 @@ module Network.AWS.XRay.Types
     , histogramEntry
     , heCount
     , heValue
+
+    -- * InstanceIdDetail
+    , InstanceIdDetail
+    , instanceIdDetail
+    , iidId
+
+    -- * ResourceARNDetail
+    , ResourceARNDetail
+    , resourceARNDetail
+    , radARN
+
+    -- * ResponseTimeRootCause
+    , ResponseTimeRootCause
+    , responseTimeRootCause
+    , rtrcClientImpacting
+    , rtrcServices
+
+    -- * ResponseTimeRootCauseEntity
+    , ResponseTimeRootCauseEntity
+    , responseTimeRootCauseEntity
+    , rtrceRemote
+    , rtrceCoverage
+    , rtrceName
+
+    -- * ResponseTimeRootCauseService
+    , ResponseTimeRootCauseService
+    , responseTimeRootCauseService
+    , rtrcsEntityPath
+    , rtrcsAccountId
+    , rtrcsNames
+    , rtrcsName
+    , rtrcsInferred
+    , rtrcsType
+
+    -- * RootCauseException
+    , RootCauseException
+    , rootCauseException
+    , rceName
+    , rceMessage
+
+    -- * SamplingRule
+    , SamplingRule
+    , samplingRule
+    , srRuleName
+    , srAttributes
+    , srRuleARN
+    , srResourceARN
+    , srPriority
+    , srFixedRate
+    , srReservoirSize
+    , srServiceName
+    , srServiceType
+    , srHost
+    , srHTTPMethod
+    , srURLPath
+    , srVersion
+
+    -- * SamplingRuleRecord
+    , SamplingRuleRecord
+    , samplingRuleRecord
+    , srrModifiedAt
+    , srrSamplingRule
+    , srrCreatedAt
+
+    -- * SamplingRuleUpdate
+    , SamplingRuleUpdate
+    , samplingRuleUpdate
+    , sruHTTPMethod
+    , sruPriority
+    , sruRuleName
+    , sruReservoirSize
+    , sruFixedRate
+    , sruResourceARN
+    , sruAttributes
+    , sruServiceName
+    , sruServiceType
+    , sruHost
+    , sruRuleARN
+    , sruURLPath
+
+    -- * SamplingStatisticSummary
+    , SamplingStatisticSummary
+    , samplingStatisticSummary
+    , sssRequestCount
+    , sssBorrowCount
+    , sssRuleName
+    , sssTimestamp
+    , sssSampledCount
+
+    -- * SamplingStatisticsDocument
+    , SamplingStatisticsDocument
+    , samplingStatisticsDocument
+    , ssdBorrowCount
+    , ssdRuleName
+    , ssdClientId
+    , ssdTimestamp
+    , ssdRequestCount
+    , ssdSampledCount
+
+    -- * SamplingStrategy
+    , SamplingStrategy
+    , samplingStrategy
+    , ssValue
+    , ssName
+
+    -- * SamplingTargetDocument
+    , SamplingTargetDocument
+    , samplingTargetDocument
+    , stdReservoirQuota
+    , stdRuleName
+    , stdFixedRate
+    , stdInterval
+    , stdReservoirQuotaTTL
 
     -- * Segment
     , Segment
@@ -153,6 +338,14 @@ module Network.AWS.XRay.Types
     , trBackendConnectionErrors
     , trTimestamp
 
+    -- * TimeSeriesServiceStatistics
+    , TimeSeriesServiceStatistics
+    , timeSeriesServiceStatistics
+    , tsssServiceSummaryStatistics
+    , tsssResponseTimeHistogram
+    , tsssEdgeSummaryStatistics
+    , tsssTimestamp
+
     -- * Trace
     , Trace
     , trace
@@ -166,13 +359,22 @@ module Network.AWS.XRay.Types
     , tsAnnotations
     , tsHasThrottle
     , tsUsers
+    , tsEntryPoint
     , tsHasFault
     , tsServiceIds
+    , tsMatchedEventTime
     , tsIsPartial
+    , tsErrorRootCauses
+    , tsResourceARNs
+    , tsAvailabilityZones
+    , tsInstanceIds
+    , tsResponseTimeRootCauses
     , tsHasError
     , tsId
     , tsHTTP
+    , tsRevision
     , tsDuration
+    , tsFaultRootCauses
     , tsResponseTime
 
     -- * TraceUser
@@ -180,6 +382,13 @@ module Network.AWS.XRay.Types
     , traceUser
     , tuServiceIds
     , tuUserName
+
+    -- * UnprocessedStatistics
+    , UnprocessedStatistics
+    , unprocessedStatistics
+    , usRuleName
+    , usErrorCode
+    , usMessage
 
     -- * UnprocessedTraceSegment
     , UnprocessedTraceSegment
@@ -198,59 +407,111 @@ module Network.AWS.XRay.Types
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
-import Network.AWS.XRay.Types.Product
-import Network.AWS.XRay.Types.Sum
+import Network.AWS.XRay.Types.EncryptionStatus
+import Network.AWS.XRay.Types.EncryptionType
+import Network.AWS.XRay.Types.SamplingStrategyName
+import Network.AWS.XRay.Types.TimeRangeType
+import Network.AWS.XRay.Types.Alias
+import Network.AWS.XRay.Types.AnnotationValue
+import Network.AWS.XRay.Types.AvailabilityZoneDetail
+import Network.AWS.XRay.Types.BackendConnectionErrors
+import Network.AWS.XRay.Types.Edge
+import Network.AWS.XRay.Types.EdgeStatistics
+import Network.AWS.XRay.Types.EncryptionConfig
+import Network.AWS.XRay.Types.ErrorRootCause
+import Network.AWS.XRay.Types.ErrorRootCauseEntity
+import Network.AWS.XRay.Types.ErrorRootCauseService
+import Network.AWS.XRay.Types.ErrorStatistics
+import Network.AWS.XRay.Types.FaultRootCause
+import Network.AWS.XRay.Types.FaultRootCauseEntity
+import Network.AWS.XRay.Types.FaultRootCauseService
+import Network.AWS.XRay.Types.FaultStatistics
+import Network.AWS.XRay.Types.Group
+import Network.AWS.XRay.Types.GroupSummary
+import Network.AWS.XRay.Types.HTTP
+import Network.AWS.XRay.Types.HistogramEntry
+import Network.AWS.XRay.Types.InstanceIdDetail
+import Network.AWS.XRay.Types.ResourceARNDetail
+import Network.AWS.XRay.Types.ResponseTimeRootCause
+import Network.AWS.XRay.Types.ResponseTimeRootCauseEntity
+import Network.AWS.XRay.Types.ResponseTimeRootCauseService
+import Network.AWS.XRay.Types.RootCauseException
+import Network.AWS.XRay.Types.SamplingRule
+import Network.AWS.XRay.Types.SamplingRuleRecord
+import Network.AWS.XRay.Types.SamplingRuleUpdate
+import Network.AWS.XRay.Types.SamplingStatisticSummary
+import Network.AWS.XRay.Types.SamplingStatisticsDocument
+import Network.AWS.XRay.Types.SamplingStrategy
+import Network.AWS.XRay.Types.SamplingTargetDocument
+import Network.AWS.XRay.Types.Segment
+import Network.AWS.XRay.Types.ServiceId
+import Network.AWS.XRay.Types.ServiceInfo
+import Network.AWS.XRay.Types.ServiceStatistics
+import Network.AWS.XRay.Types.TelemetryRecord
+import Network.AWS.XRay.Types.TimeSeriesServiceStatistics
+import Network.AWS.XRay.Types.Trace
+import Network.AWS.XRay.Types.TraceSummary
+import Network.AWS.XRay.Types.TraceUser
+import Network.AWS.XRay.Types.UnprocessedStatistics
+import Network.AWS.XRay.Types.UnprocessedTraceSegment
+import Network.AWS.XRay.Types.ValueWithServiceIds
 
 -- | API version @2016-04-12@ of the Amazon X-Ray SDK configuration.
 xRay :: Service
-xRay =
-  Service
-    { _svcAbbrev = "XRay"
-    , _svcSigner = v4
-    , _svcPrefix = "xray"
-    , _svcVersion = "2016-04-12"
-    , _svcEndpoint = defaultEndpoint xRay
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "XRay"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
-
+xRay
+  = Service{_svcAbbrev = "XRay", _svcSigner = v4,
+            _svcPrefix = "xray", _svcVersion = "2016-04-12",
+            _svcEndpoint = defaultEndpoint xRay,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "XRay", _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
 -- | The request is missing required parameters or has invalid parameters.
 --
 --
 _InvalidRequestException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidRequestException = _MatchServiceError xRay "InvalidRequestException"
-
+_InvalidRequestException
+  = _MatchServiceError xRay "InvalidRequestException"
 
 -- | The request exceeds the maximum number of requests per second.
 --
 --
 _ThrottledException :: AsError a => Getting (First ServiceError) a ServiceError
-_ThrottledException =
-  _MatchServiceError xRay "ThrottledException" . hasStatus 429
+_ThrottledException
+  = _MatchServiceError xRay "ThrottledException" .
+      hasStatus 429
 
+-- | You have reached the maximum number of sampling rules.
+--
+--
+_RuleLimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
+_RuleLimitExceededException
+  = _MatchServiceError xRay
+      "RuleLimitExceededException"

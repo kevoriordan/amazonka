@@ -46,18 +46,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateRole' smart constructor.
-data UpdateRole = UpdateRole'
-  { _urMaxSessionDuration :: !(Maybe Nat)
-  , _urDescription        :: !(Maybe Text)
-  , _urRoleName           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRole = UpdateRole'{_urMaxSessionDuration
+                              :: !(Maybe Nat),
+                              _urDescription :: !(Maybe Text),
+                              _urRoleName :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRole' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urMaxSessionDuration' - The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone who assumes the role from the AWS CLI or API can use the @DurationSeconds@ API parameter or the @duration-seconds@ CLI parameter to request a longer session. The @MaxSessionDuration@ setting determines the maximum duration that can be requested using the @DurationSeconds@ parameter. If users don't specify a value for the @DurationSeconds@ parameter, their security credentials are valid for one hour by default. This applies when you use the @AssumeRole*@ API operations or the @assume-role*@ CLI operations but does not apply when you use those operations to create a console URL. For more information, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html Using IAM Roles> in the /IAM User Guide/ .
+-- * 'urMaxSessionDuration' - The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone who assumes the role from the AWS CLI or API can use the @DurationSeconds@ API parameter or the @duration-seconds@ CLI parameter to request a longer session. The @MaxSessionDuration@ setting determines the maximum duration that can be requested using the @DurationSeconds@ parameter. If users don't specify a value for the @DurationSeconds@ parameter, their security credentials are valid for one hour by default. This applies when you use the @AssumeRole*@ API operations or the @assume-role*@ CLI operations but does not apply when you use those operations to create a console URL. For more information, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html Using IAM Roles> in the /IAM User Guide/ .
 --
 -- * 'urDescription' - The new description that you want to apply to the specified role.
 --
@@ -65,15 +64,11 @@ data UpdateRole = UpdateRole'
 updateRole
     :: Text -- ^ 'urRoleName'
     -> UpdateRole
-updateRole pRoleName_ =
-  UpdateRole'
-    { _urMaxSessionDuration = Nothing
-    , _urDescription = Nothing
-    , _urRoleName = pRoleName_
-    }
+updateRole pRoleName_
+  = UpdateRole'{_urMaxSessionDuration = Nothing,
+                _urDescription = Nothing, _urRoleName = pRoleName_}
 
-
--- | The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone who assumes the role from the AWS CLI or API can use the @DurationSeconds@ API parameter or the @duration-seconds@ CLI parameter to request a longer session. The @MaxSessionDuration@ setting determines the maximum duration that can be requested using the @DurationSeconds@ parameter. If users don't specify a value for the @DurationSeconds@ parameter, their security credentials are valid for one hour by default. This applies when you use the @AssumeRole*@ API operations or the @assume-role*@ CLI operations but does not apply when you use those operations to create a console URL. For more information, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html Using IAM Roles> in the /IAM User Guide/ .
+-- | The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone who assumes the role from the AWS CLI or API can use the @DurationSeconds@ API parameter or the @duration-seconds@ CLI parameter to request a longer session. The @MaxSessionDuration@ setting determines the maximum duration that can be requested using the @DurationSeconds@ parameter. If users don't specify a value for the @DurationSeconds@ parameter, their security credentials are valid for one hour by default. This applies when you use the @AssumeRole*@ API operations or the @assume-role*@ CLI operations but does not apply when you use those operations to create a console URL. For more information, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html Using IAM Roles> in the /IAM User Guide/ .
 urMaxSessionDuration :: Lens' UpdateRole (Maybe Natural)
 urMaxSessionDuration = lens _urMaxSessionDuration (\ s a -> s{_urMaxSessionDuration = a}) . mapping _Nat
 
@@ -113,10 +108,10 @@ instance ToQuery UpdateRole where
                "RoleName" =: _urRoleName]
 
 -- | /See:/ 'updateRoleResponse' smart constructor.
-newtype UpdateRoleResponse = UpdateRoleResponse'
-  { _urrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateRoleResponse = UpdateRoleResponse'{_urrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateRoleResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +121,9 @@ newtype UpdateRoleResponse = UpdateRoleResponse'
 updateRoleResponse
     :: Int -- ^ 'urrsResponseStatus'
     -> UpdateRoleResponse
-updateRoleResponse pResponseStatus_ =
-  UpdateRoleResponse' {_urrsResponseStatus = pResponseStatus_}
-
+updateRoleResponse pResponseStatus_
+  = UpdateRoleResponse'{_urrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 urrsResponseStatus :: Lens' UpdateRoleResponse Int

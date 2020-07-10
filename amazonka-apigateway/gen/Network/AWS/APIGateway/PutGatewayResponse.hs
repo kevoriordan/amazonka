@@ -56,14 +56,15 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'putGatewayResponse' smart constructor.
-data PutGatewayResponse = PutGatewayResponse'
-  { _pgResponseTemplates  :: !(Maybe (Map Text Text))
-  , _pgStatusCode         :: !(Maybe Text)
-  , _pgResponseParameters :: !(Maybe (Map Text Text))
-  , _pgRestAPIId          :: !Text
-  , _pgResponseType       :: !GatewayResponseType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutGatewayResponse = PutGatewayResponse'{_pgResponseTemplates
+                                              :: !(Maybe (Map Text Text)),
+                                              _pgStatusCode :: !(Maybe Text),
+                                              _pgResponseParameters ::
+                                              !(Maybe (Map Text Text)),
+                                              _pgRestAPIId :: !Text,
+                                              _pgResponseType ::
+                                              !GatewayResponseType}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutGatewayResponse' with the minimum fields required to make a request.
 --
@@ -71,7 +72,7 @@ data PutGatewayResponse = PutGatewayResponse'
 --
 -- * 'pgResponseTemplates' - Response templates of the 'GatewayResponse' as a string-to-string map of key-value pairs.
 --
--- * 'pgStatusCode' - 'GatewayResponse'
+-- * 'pgStatusCode' - 'GatewayResponse' 
 --
 -- * 'pgResponseParameters' - Response parameters (paths, query strings and headers) of the 'GatewayResponse' as a string-to-string map of key-value pairs.
 --
@@ -82,21 +83,18 @@ putGatewayResponse
     :: Text -- ^ 'pgRestAPIId'
     -> GatewayResponseType -- ^ 'pgResponseType'
     -> PutGatewayResponse
-putGatewayResponse pRestAPIId_ pResponseType_ =
-  PutGatewayResponse'
-    { _pgResponseTemplates = Nothing
-    , _pgStatusCode = Nothing
-    , _pgResponseParameters = Nothing
-    , _pgRestAPIId = pRestAPIId_
-    , _pgResponseType = pResponseType_
-    }
-
+putGatewayResponse pRestAPIId_ pResponseType_
+  = PutGatewayResponse'{_pgResponseTemplates = Nothing,
+                        _pgStatusCode = Nothing,
+                        _pgResponseParameters = Nothing,
+                        _pgRestAPIId = pRestAPIId_,
+                        _pgResponseType = pResponseType_}
 
 -- | Response templates of the 'GatewayResponse' as a string-to-string map of key-value pairs.
 pgResponseTemplates :: Lens' PutGatewayResponse (HashMap Text Text)
 pgResponseTemplates = lens _pgResponseTemplates (\ s a -> s{_pgResponseTemplates = a}) . _Default . _Map
 
--- | 'GatewayResponse'
+-- | 'GatewayResponse' 
 pgStatusCode :: Lens' PutGatewayResponse (Maybe Text)
 pgStatusCode = lens _pgStatusCode (\ s a -> s{_pgStatusCode = a})
 

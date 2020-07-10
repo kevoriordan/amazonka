@@ -53,10 +53,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeIdentity' smart constructor.
-newtype DescribeIdentity = DescribeIdentity'
-  { _diIdentityId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeIdentity = DescribeIdentity'{_diIdentityId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeIdentity' with the minimum fields required to make a request.
 --
@@ -66,8 +65,8 @@ newtype DescribeIdentity = DescribeIdentity'
 describeIdentity
     :: Text -- ^ 'diIdentityId'
     -> DescribeIdentity
-describeIdentity pIdentityId_ = DescribeIdentity' {_diIdentityId = pIdentityId_}
-
+describeIdentity pIdentityId_
+  = DescribeIdentity'{_diIdentityId = pIdentityId_}
 
 -- | A unique identifier in the format REGION:GUID.
 diIdentityId :: Lens' DescribeIdentity Text

@@ -47,17 +47,16 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'getTrafficPolicyInstanceCount' smart constructor.
-data GetTrafficPolicyInstanceCount =
-  GetTrafficPolicyInstanceCount'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTrafficPolicyInstanceCount = GetTrafficPolicyInstanceCount'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetTrafficPolicyInstanceCount' with the minimum fields required to make a request.
 --
 getTrafficPolicyInstanceCount
     :: GetTrafficPolicyInstanceCount
-getTrafficPolicyInstanceCount = GetTrafficPolicyInstanceCount'
-
+getTrafficPolicyInstanceCount
+  = GetTrafficPolicyInstanceCount'
 
 instance AWSRequest GetTrafficPolicyInstanceCount
          where
@@ -91,11 +90,14 @@ instance ToQuery GetTrafficPolicyInstanceCount where
 --
 --
 -- /See:/ 'getTrafficPolicyInstanceCountResponse' smart constructor.
-data GetTrafficPolicyInstanceCountResponse = GetTrafficPolicyInstanceCountResponse'
-  { _gtpicrsResponseStatus             :: !Int
-  , _gtpicrsTrafficPolicyInstanceCount :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTrafficPolicyInstanceCountResponse = GetTrafficPolicyInstanceCountResponse'{_gtpicrsResponseStatus
+                                                                                    ::
+                                                                                    !Int,
+                                                                                    _gtpicrsTrafficPolicyInstanceCount
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'GetTrafficPolicyInstanceCountResponse' with the minimum fields required to make a request.
 --
@@ -108,12 +110,12 @@ getTrafficPolicyInstanceCountResponse
     :: Int -- ^ 'gtpicrsResponseStatus'
     -> Int -- ^ 'gtpicrsTrafficPolicyInstanceCount'
     -> GetTrafficPolicyInstanceCountResponse
-getTrafficPolicyInstanceCountResponse pResponseStatus_ pTrafficPolicyInstanceCount_ =
-  GetTrafficPolicyInstanceCountResponse'
-    { _gtpicrsResponseStatus = pResponseStatus_
-    , _gtpicrsTrafficPolicyInstanceCount = pTrafficPolicyInstanceCount_
-    }
-
+getTrafficPolicyInstanceCountResponse
+  pResponseStatus_ pTrafficPolicyInstanceCount_
+  = GetTrafficPolicyInstanceCountResponse'{_gtpicrsResponseStatus
+                                             = pResponseStatus_,
+                                           _gtpicrsTrafficPolicyInstanceCount =
+                                             pTrafficPolicyInstanceCount_}
 
 -- | -- | The response status code.
 gtpicrsResponseStatus :: Lens' GetTrafficPolicyInstanceCountResponse Int

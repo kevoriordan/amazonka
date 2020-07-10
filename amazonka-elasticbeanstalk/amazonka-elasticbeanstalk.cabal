@@ -74,6 +74,7 @@ library
         , Network.AWS.ElasticBeanstalk.DescribeInstancesHealth
         , Network.AWS.ElasticBeanstalk.DescribePlatformVersion
         , Network.AWS.ElasticBeanstalk.ListAvailableSolutionStacks
+        , Network.AWS.ElasticBeanstalk.ListPlatformBranches
         , Network.AWS.ElasticBeanstalk.ListPlatformVersions
         , Network.AWS.ElasticBeanstalk.ListTagsForResource
         , Network.AWS.ElasticBeanstalk.RebuildEnvironment
@@ -93,12 +94,89 @@ library
         , Network.AWS.ElasticBeanstalk.Waiters
 
     other-modules:
-          Network.AWS.ElasticBeanstalk.Types.Product
-        , Network.AWS.ElasticBeanstalk.Types.Sum
+          Network.AWS.ElasticBeanstalk.Types.ActionHistoryStatus
+        , Network.AWS.ElasticBeanstalk.Types.ActionStatus
+        , Network.AWS.ElasticBeanstalk.Types.ActionType
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationDescription
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationDescriptionMessage
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationMetrics
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationResourceLifecycleConfig
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationVersionDescription
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationVersionLifecycleConfig
+        , Network.AWS.ElasticBeanstalk.Types.ApplicationVersionStatus
+        , Network.AWS.ElasticBeanstalk.Types.AutoScalingGroup
+        , Network.AWS.ElasticBeanstalk.Types.BuildConfiguration
+        , Network.AWS.ElasticBeanstalk.Types.Builder
+        , Network.AWS.ElasticBeanstalk.Types.CPUUtilization
+        , Network.AWS.ElasticBeanstalk.Types.ComputeType
+        , Network.AWS.ElasticBeanstalk.Types.ConfigurationDeploymentStatus
+        , Network.AWS.ElasticBeanstalk.Types.ConfigurationOptionDescription
+        , Network.AWS.ElasticBeanstalk.Types.ConfigurationOptionSetting
+        , Network.AWS.ElasticBeanstalk.Types.ConfigurationOptionValueType
+        , Network.AWS.ElasticBeanstalk.Types.ConfigurationSettingsDescription
+        , Network.AWS.ElasticBeanstalk.Types.CustomAMI
+        , Network.AWS.ElasticBeanstalk.Types.Deployment
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentDescription
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentDescriptionsMessage
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentHealth
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentHealthAttribute
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentHealthStatus
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentInfoDescription
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentInfoType
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentLink
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentResourceDescription
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentResourcesDescription
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentStatus
+        , Network.AWS.ElasticBeanstalk.Types.EnvironmentTier
+        , Network.AWS.ElasticBeanstalk.Types.EventDescription
+        , Network.AWS.ElasticBeanstalk.Types.EventSeverity
+        , Network.AWS.ElasticBeanstalk.Types.FailureType
+        , Network.AWS.ElasticBeanstalk.Types.Instance
+        , Network.AWS.ElasticBeanstalk.Types.InstanceHealthSummary
+        , Network.AWS.ElasticBeanstalk.Types.InstancesHealthAttribute
+        , Network.AWS.ElasticBeanstalk.Types.Latency
+        , Network.AWS.ElasticBeanstalk.Types.LaunchConfiguration
+        , Network.AWS.ElasticBeanstalk.Types.LaunchTemplate
+        , Network.AWS.ElasticBeanstalk.Types.Listener
+        , Network.AWS.ElasticBeanstalk.Types.LoadBalancer
+        , Network.AWS.ElasticBeanstalk.Types.LoadBalancerDescription
+        , Network.AWS.ElasticBeanstalk.Types.ManagedAction
+        , Network.AWS.ElasticBeanstalk.Types.ManagedActionHistoryItem
+        , Network.AWS.ElasticBeanstalk.Types.MaxAgeRule
+        , Network.AWS.ElasticBeanstalk.Types.MaxCountRule
+        , Network.AWS.ElasticBeanstalk.Types.OptionRestrictionRegex
+        , Network.AWS.ElasticBeanstalk.Types.OptionSpecification
+        , Network.AWS.ElasticBeanstalk.Types.PlatformBranchSummary
+        , Network.AWS.ElasticBeanstalk.Types.PlatformDescription
+        , Network.AWS.ElasticBeanstalk.Types.PlatformFilter
+        , Network.AWS.ElasticBeanstalk.Types.PlatformFramework
+        , Network.AWS.ElasticBeanstalk.Types.PlatformProgrammingLanguage
+        , Network.AWS.ElasticBeanstalk.Types.PlatformStatus
+        , Network.AWS.ElasticBeanstalk.Types.PlatformSummary
+        , Network.AWS.ElasticBeanstalk.Types.Product
+        , Network.AWS.ElasticBeanstalk.Types.Queue
+        , Network.AWS.ElasticBeanstalk.Types.ResourceQuota
+        , Network.AWS.ElasticBeanstalk.Types.ResourceQuotas
+        , Network.AWS.ElasticBeanstalk.Types.S3Location
+        , Network.AWS.ElasticBeanstalk.Types.SearchFilter
+        , Network.AWS.ElasticBeanstalk.Types.SingleInstanceHealth
+        , Network.AWS.ElasticBeanstalk.Types.SolutionStackDescription
+        , Network.AWS.ElasticBeanstalk.Types.SourceBuildInformation
+        , Network.AWS.ElasticBeanstalk.Types.SourceConfiguration
+        , Network.AWS.ElasticBeanstalk.Types.SourceRepository
+        , Network.AWS.ElasticBeanstalk.Types.SourceType
+        , Network.AWS.ElasticBeanstalk.Types.StatusCodes
+        , Network.AWS.ElasticBeanstalk.Types.SystemStatus
+        , Network.AWS.ElasticBeanstalk.Types.Tag
+        , Network.AWS.ElasticBeanstalk.Types.Trigger
+        , Network.AWS.ElasticBeanstalk.Types.ValidationMessage
+        , Network.AWS.ElasticBeanstalk.Types.ValidationSeverity
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-elasticbeanstalk-test
     type:              exitcode-stdio-1.0
@@ -122,6 +200,7 @@ test-suite amazonka-elasticbeanstalk-test
         , amazonka-elasticbeanstalk
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

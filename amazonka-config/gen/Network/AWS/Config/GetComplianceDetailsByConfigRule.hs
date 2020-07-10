@@ -51,18 +51,28 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'getComplianceDetailsByConfigRule' smart constructor.
-data GetComplianceDetailsByConfigRule = GetComplianceDetailsByConfigRule'
-  { _gcdbcrComplianceTypes :: !(Maybe [ComplianceType])
-  , _gcdbcrNextToken       :: !(Maybe Text)
-  , _gcdbcrLimit           :: !(Maybe Nat)
-  , _gcdbcrConfigRuleName  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetComplianceDetailsByConfigRule = GetComplianceDetailsByConfigRule'{_gcdbcrComplianceTypes
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [ComplianceType]),
+                                                                          _gcdbcrNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gcdbcrLimit
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Nat),
+                                                                          _gcdbcrConfigRuleName
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GetComplianceDetailsByConfigRule' with the minimum fields required to make a request.
 --
@@ -78,14 +88,12 @@ data GetComplianceDetailsByConfigRule = GetComplianceDetailsByConfigRule'
 getComplianceDetailsByConfigRule
     :: Text -- ^ 'gcdbcrConfigRuleName'
     -> GetComplianceDetailsByConfigRule
-getComplianceDetailsByConfigRule pConfigRuleName_ =
-  GetComplianceDetailsByConfigRule'
-    { _gcdbcrComplianceTypes = Nothing
-    , _gcdbcrNextToken = Nothing
-    , _gcdbcrLimit = Nothing
-    , _gcdbcrConfigRuleName = pConfigRuleName_
-    }
-
+getComplianceDetailsByConfigRule pConfigRuleName_
+  = GetComplianceDetailsByConfigRule'{_gcdbcrComplianceTypes
+                                        = Nothing,
+                                      _gcdbcrNextToken = Nothing,
+                                      _gcdbcrLimit = Nothing,
+                                      _gcdbcrConfigRuleName = pConfigRuleName_}
 
 -- | Filters the results by compliance. The allowed values are @COMPLIANT@ , @NON_COMPLIANT@ , and @NOT_APPLICABLE@ .
 gcdbcrComplianceTypes :: Lens' GetComplianceDetailsByConfigRule [ComplianceType]
@@ -160,17 +168,25 @@ instance ToQuery GetComplianceDetailsByConfigRule
          where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'getComplianceDetailsByConfigRuleResponse' smart constructor.
-data GetComplianceDetailsByConfigRuleResponse = GetComplianceDetailsByConfigRuleResponse'
-  { _gcdbcrrsEvaluationResults :: !(Maybe [EvaluationResult])
-  , _gcdbcrrsNextToken         :: !(Maybe Text)
-  , _gcdbcrrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetComplianceDetailsByConfigRuleResponse = GetComplianceDetailsByConfigRuleResponse'{_gcdbcrrsEvaluationResults
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              [EvaluationResult]),
+                                                                                          _gcdbcrrsNextToken
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _gcdbcrrsResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'GetComplianceDetailsByConfigRuleResponse' with the minimum fields required to make a request.
 --
@@ -184,13 +200,13 @@ data GetComplianceDetailsByConfigRuleResponse = GetComplianceDetailsByConfigRule
 getComplianceDetailsByConfigRuleResponse
     :: Int -- ^ 'gcdbcrrsResponseStatus'
     -> GetComplianceDetailsByConfigRuleResponse
-getComplianceDetailsByConfigRuleResponse pResponseStatus_ =
-  GetComplianceDetailsByConfigRuleResponse'
-    { _gcdbcrrsEvaluationResults = Nothing
-    , _gcdbcrrsNextToken = Nothing
-    , _gcdbcrrsResponseStatus = pResponseStatus_
-    }
-
+getComplianceDetailsByConfigRuleResponse
+  pResponseStatus_
+  = GetComplianceDetailsByConfigRuleResponse'{_gcdbcrrsEvaluationResults
+                                                = Nothing,
+                                              _gcdbcrrsNextToken = Nothing,
+                                              _gcdbcrrsResponseStatus =
+                                                pResponseStatus_}
 
 -- | Indicates whether the AWS resource complies with the specified AWS Config rule.
 gcdbcrrsEvaluationResults :: Lens' GetComplianceDetailsByConfigRuleResponse [EvaluationResult]

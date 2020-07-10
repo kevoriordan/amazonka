@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a specific Amazon Lightsail virtual private server, or /instance/ .
+-- Deletes an Amazon Lightsail instance.
 --
+--
+-- The @delete instance@ operation supports tag-based access control via resource tags applied to the resource identified by @instance name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
 --
 module Network.AWS.Lightsail.DeleteInstance
     (
@@ -27,6 +29,7 @@ module Network.AWS.Lightsail.DeleteInstance
       deleteInstance
     , DeleteInstance
     -- * Request Lenses
+    , diForceDeleteAddOns
     , diInstanceName
 
     -- * Destructuring the Response
@@ -45,22 +48,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteInstance' smart constructor.
-newtype DeleteInstance = DeleteInstance'
-  { _diInstanceName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteInstance = DeleteInstance'{_diForceDeleteAddOns
+                                      :: !(Maybe Bool),
+                                      _diInstanceName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'diForceDeleteAddOns' - A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+--
 -- * 'diInstanceName' - The name of the instance to delete.
 deleteInstance
     :: Text -- ^ 'diInstanceName'
     -> DeleteInstance
-deleteInstance pInstanceName_ =
-  DeleteInstance' {_diInstanceName = pInstanceName_}
+deleteInstance pInstanceName_
+  = DeleteInstance'{_diForceDeleteAddOns = Nothing,
+                    _diInstanceName = pInstanceName_}
 
+-- | A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+diForceDeleteAddOns :: Lens' DeleteInstance (Maybe Bool)
+diForceDeleteAddOns = lens _diForceDeleteAddOns (\ s a -> s{_diForceDeleteAddOns = a})
 
 -- | The name of the instance to delete.
 diInstanceName :: Lens' DeleteInstance Text
@@ -93,7 +102,8 @@ instance ToJSON DeleteInstance where
         toJSON DeleteInstance'{..}
           = object
               (catMaybes
-                 [Just ("instanceName" .= _diInstanceName)])
+                 [("forceDeleteAddOns" .=) <$> _diForceDeleteAddOns,
+                  Just ("instanceName" .= _diInstanceName)])
 
 instance ToPath DeleteInstance where
         toPath = const "/"
@@ -102,28 +112,28 @@ instance ToQuery DeleteInstance where
         toQuery = const mempty
 
 -- | /See:/ 'deleteInstanceResponse' smart constructor.
-data DeleteInstanceResponse = DeleteInstanceResponse'
-  { _dirsOperations     :: !(Maybe [Operation])
-  , _dirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteInstanceResponse = DeleteInstanceResponse'{_dirsOperations
+                                                      :: !(Maybe [Operation]),
+                                                      _dirsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteInstanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dirsOperations' - An array of key-value pairs containing information about the results of your delete instance request.
+-- * 'dirsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'dirsResponseStatus' - -- | The response status code.
 deleteInstanceResponse
     :: Int -- ^ 'dirsResponseStatus'
     -> DeleteInstanceResponse
-deleteInstanceResponse pResponseStatus_ =
-  DeleteInstanceResponse'
-    {_dirsOperations = Nothing, _dirsResponseStatus = pResponseStatus_}
+deleteInstanceResponse pResponseStatus_
+  = DeleteInstanceResponse'{_dirsOperations = Nothing,
+                            _dirsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your delete instance request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 dirsOperations :: Lens' DeleteInstanceResponse [Operation]
 dirsOperations = lens _dirsOperations (\ s a -> s{_dirsOperations = a}) . _Default . _Coerce
 

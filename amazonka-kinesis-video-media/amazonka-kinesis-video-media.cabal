@@ -51,11 +51,13 @@ library
 
     other-modules:
           Network.AWS.KinesisVideoMedia.Types.Product
-        , Network.AWS.KinesisVideoMedia.Types.Sum
+        , Network.AWS.KinesisVideoMedia.Types.StartSelector
+        , Network.AWS.KinesisVideoMedia.Types.StartSelectorType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-kinesis-video-media-test
     type:              exitcode-stdio-1.0
@@ -79,6 +81,7 @@ test-suite amazonka-kinesis-video-media-test
         , amazonka-kinesis-video-media
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

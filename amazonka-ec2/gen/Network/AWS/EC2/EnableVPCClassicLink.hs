@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC's route tables have existing routes for address ranges within the @10.0.0.0/8@ IP address range, excluding local routes for VPCs in the @10.0.0.0/16@ and @10.1.0.0/16@ IP address ranges. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Enables a VPC for ClassicLink. You can then link EC2-Classic instances to your ClassicLink-enabled VPC to allow communication over private IP addresses. You cannot enable your VPC for ClassicLink if any of your VPC route tables have existing routes for address ranges within the @10.0.0.0/8@ IP address range, excluding local routes for VPCs in the @10.0.0.0/16@ and @10.1.0.0/16@ IP address ranges. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 --
 module Network.AWS.EC2.EnableVPCClassicLink
@@ -45,16 +45,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for EnableVpcClassicLink.
---
---
---
--- /See:/ 'enableVPCClassicLink' smart constructor.
-data EnableVPCClassicLink = EnableVPCClassicLink'
-  { _evclDryRun :: !(Maybe Bool)
-  , _evclVPCId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'enableVPCClassicLink' smart constructor.
+data EnableVPCClassicLink = EnableVPCClassicLink'{_evclDryRun
+                                                  :: !(Maybe Bool),
+                                                  _evclVPCId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableVPCClassicLink' with the minimum fields required to make a request.
 --
@@ -66,9 +61,9 @@ data EnableVPCClassicLink = EnableVPCClassicLink'
 enableVPCClassicLink
     :: Text -- ^ 'evclVPCId'
     -> EnableVPCClassicLink
-enableVPCClassicLink pVPCId_ =
-  EnableVPCClassicLink' {_evclDryRun = Nothing, _evclVPCId = pVPCId_}
-
+enableVPCClassicLink pVPCId_
+  = EnableVPCClassicLink'{_evclDryRun = Nothing,
+                          _evclVPCId = pVPCId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 evclDryRun :: Lens' EnableVPCClassicLink (Maybe Bool)
@@ -105,16 +100,14 @@ instance ToQuery EnableVPCClassicLink where
                "Version" =: ("2016-11-15" :: ByteString),
                "DryRun" =: _evclDryRun, "VpcId" =: _evclVPCId]
 
--- | Contains the output of EnableVpcClassicLink.
---
---
---
--- /See:/ 'enableVPCClassicLinkResponse' smart constructor.
-data EnableVPCClassicLinkResponse = EnableVPCClassicLinkResponse'
-  { _evclrsReturn         :: !(Maybe Bool)
-  , _evclrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'enableVPCClassicLinkResponse' smart constructor.
+data EnableVPCClassicLinkResponse = EnableVPCClassicLinkResponse'{_evclrsReturn
+                                                                  ::
+                                                                  !(Maybe Bool),
+                                                                  _evclrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'EnableVPCClassicLinkResponse' with the minimum fields required to make a request.
 --
@@ -126,10 +119,10 @@ data EnableVPCClassicLinkResponse = EnableVPCClassicLinkResponse'
 enableVPCClassicLinkResponse
     :: Int -- ^ 'evclrsResponseStatus'
     -> EnableVPCClassicLinkResponse
-enableVPCClassicLinkResponse pResponseStatus_ =
-  EnableVPCClassicLinkResponse'
-    {_evclrsReturn = Nothing, _evclrsResponseStatus = pResponseStatus_}
-
+enableVPCClassicLinkResponse pResponseStatus_
+  = EnableVPCClassicLinkResponse'{_evclrsReturn =
+                                    Nothing,
+                                  _evclrsResponseStatus = pResponseStatus_}
 
 -- | Returns @true@ if the request succeeds; otherwise, it returns an error.
 evclrsReturn :: Lens' EnableVPCClassicLinkResponse (Maybe Bool)

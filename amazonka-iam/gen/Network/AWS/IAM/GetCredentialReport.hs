@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a credential report for the AWS account. For more information about the credential report, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html Getting Credential Reports> in the /IAM User Guide/ .
+-- Retrieves a credential report for the AWS account. For more information about the credential report, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html Getting Credential Reports> in the /IAM User Guide/ .
 --
 --
 module Network.AWS.IAM.GetCredentialReport
@@ -45,17 +45,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getCredentialReport' smart constructor.
-data GetCredentialReport =
-  GetCredentialReport'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCredentialReport = GetCredentialReport'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCredentialReport' with the minimum fields required to make a request.
 --
 getCredentialReport
     :: GetCredentialReport
 getCredentialReport = GetCredentialReport'
-
 
 instance AWSRequest GetCredentialReport where
         type Rs GetCredentialReport =
@@ -86,18 +83,26 @@ instance ToQuery GetCredentialReport where
                  ["Action" =: ("GetCredentialReport" :: ByteString),
                   "Version" =: ("2010-05-08" :: ByteString)])
 
--- | Contains the response to a successful 'GetCredentialReport' request.
+-- | Contains the response to a successful 'GetCredentialReport' request. 
 --
 --
 --
 -- /See:/ 'getCredentialReportResponse' smart constructor.
-data GetCredentialReportResponse = GetCredentialReportResponse'
-  { _grsContent        :: !(Maybe Base64)
-  , _grsGeneratedTime  :: !(Maybe ISO8601)
-  , _grsReportFormat   :: !(Maybe ReportFormatType)
-  , _grsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCredentialReportResponse = GetCredentialReportResponse'{_grsContent
+                                                                ::
+                                                                !(Maybe Base64),
+                                                                _grsGeneratedTime
+                                                                ::
+                                                                !(Maybe
+                                                                    ISO8601),
+                                                                _grsReportFormat
+                                                                ::
+                                                                !(Maybe
+                                                                    ReportFormatType),
+                                                                _grsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetCredentialReportResponse' with the minimum fields required to make a request.
 --
@@ -113,14 +118,11 @@ data GetCredentialReportResponse = GetCredentialReportResponse'
 getCredentialReportResponse
     :: Int -- ^ 'grsResponseStatus'
     -> GetCredentialReportResponse
-getCredentialReportResponse pResponseStatus_ =
-  GetCredentialReportResponse'
-    { _grsContent = Nothing
-    , _grsGeneratedTime = Nothing
-    , _grsReportFormat = Nothing
-    , _grsResponseStatus = pResponseStatus_
-    }
-
+getCredentialReportResponse pResponseStatus_
+  = GetCredentialReportResponse'{_grsContent = Nothing,
+                                 _grsGeneratedTime = Nothing,
+                                 _grsReportFormat = Nothing,
+                                 _grsResponseStatus = pResponseStatus_}
 
 -- | Contains the credential report. The report is Base64-encoded.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 grsContent :: Lens' GetCredentialReportResponse (Maybe ByteString)

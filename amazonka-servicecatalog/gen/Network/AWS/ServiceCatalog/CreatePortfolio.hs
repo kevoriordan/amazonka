@@ -51,15 +51,14 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'createPortfolio' smart constructor.
-data CreatePortfolio = CreatePortfolio'
-  { _creAcceptLanguage   :: !(Maybe Text)
-  , _creDescription      :: !(Maybe Text)
-  , _creTags             :: !(Maybe [Tag])
-  , _creDisplayName      :: !Text
-  , _creProviderName     :: !Text
-  , _creIdempotencyToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePortfolio = CreatePortfolio'{_creAcceptLanguage
+                                        :: !(Maybe Text),
+                                        _creDescription :: !(Maybe Text),
+                                        _creTags :: !(Maybe [Tag]),
+                                        _creDisplayName :: !Text,
+                                        _creProviderName :: !Text,
+                                        _creIdempotencyToken :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePortfolio' with the minimum fields required to make a request.
 --
@@ -81,16 +80,13 @@ createPortfolio
     -> Text -- ^ 'creProviderName'
     -> Text -- ^ 'creIdempotencyToken'
     -> CreatePortfolio
-createPortfolio pDisplayName_ pProviderName_ pIdempotencyToken_ =
-  CreatePortfolio'
-    { _creAcceptLanguage = Nothing
-    , _creDescription = Nothing
-    , _creTags = Nothing
-    , _creDisplayName = pDisplayName_
-    , _creProviderName = pProviderName_
-    , _creIdempotencyToken = pIdempotencyToken_
-    }
-
+createPortfolio pDisplayName_ pProviderName_
+  pIdempotencyToken_
+  = CreatePortfolio'{_creAcceptLanguage = Nothing,
+                     _creDescription = Nothing, _creTags = Nothing,
+                     _creDisplayName = pDisplayName_,
+                     _creProviderName = pProviderName_,
+                     _creIdempotencyToken = pIdempotencyToken_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 creAcceptLanguage :: Lens' CreatePortfolio (Maybe Text)
@@ -159,12 +155,16 @@ instance ToQuery CreatePortfolio where
         toQuery = const mempty
 
 -- | /See:/ 'createPortfolioResponse' smart constructor.
-data CreatePortfolioResponse = CreatePortfolioResponse'
-  { _crsPortfolioDetail :: !(Maybe PortfolioDetail)
-  , _crsTags            :: !(Maybe [Tag])
-  , _crsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePortfolioResponse = CreatePortfolioResponse'{_crsPortfolioDetail
+                                                        ::
+                                                        !(Maybe
+                                                            PortfolioDetail),
+                                                        _crsTags ::
+                                                        !(Maybe [Tag]),
+                                                        _crsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreatePortfolioResponse' with the minimum fields required to make a request.
 --
@@ -178,13 +178,11 @@ data CreatePortfolioResponse = CreatePortfolioResponse'
 createPortfolioResponse
     :: Int -- ^ 'crsResponseStatus'
     -> CreatePortfolioResponse
-createPortfolioResponse pResponseStatus_ =
-  CreatePortfolioResponse'
-    { _crsPortfolioDetail = Nothing
-    , _crsTags = Nothing
-    , _crsResponseStatus = pResponseStatus_
-    }
-
+createPortfolioResponse pResponseStatus_
+  = CreatePortfolioResponse'{_crsPortfolioDetail =
+                               Nothing,
+                             _crsTags = Nothing,
+                             _crsResponseStatus = pResponseStatus_}
 
 -- | Information about the portfolio.
 crsPortfolioDetail :: Lens' CreatePortfolioResponse (Maybe PortfolioDetail)

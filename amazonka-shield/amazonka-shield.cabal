@@ -45,26 +45,55 @@ library
 
     exposed-modules:
           Network.AWS.Shield
+        , Network.AWS.Shield.AssociateDRTLogBucket
+        , Network.AWS.Shield.AssociateDRTRole
+        , Network.AWS.Shield.AssociateHealthCheck
         , Network.AWS.Shield.CreateProtection
         , Network.AWS.Shield.CreateSubscription
         , Network.AWS.Shield.DeleteProtection
-        , Network.AWS.Shield.DeleteSubscription
         , Network.AWS.Shield.DescribeAttack
+        , Network.AWS.Shield.DescribeDRTAccess
+        , Network.AWS.Shield.DescribeEmergencyContactSettings
         , Network.AWS.Shield.DescribeProtection
         , Network.AWS.Shield.DescribeSubscription
+        , Network.AWS.Shield.DisassociateDRTLogBucket
+        , Network.AWS.Shield.DisassociateDRTRole
+        , Network.AWS.Shield.DisassociateHealthCheck
         , Network.AWS.Shield.GetSubscriptionState
         , Network.AWS.Shield.ListAttacks
         , Network.AWS.Shield.ListProtections
         , Network.AWS.Shield.Types
+        , Network.AWS.Shield.UpdateEmergencyContactSettings
+        , Network.AWS.Shield.UpdateSubscription
         , Network.AWS.Shield.Waiters
 
     other-modules:
-          Network.AWS.Shield.Types.Product
-        , Network.AWS.Shield.Types.Sum
+          Network.AWS.Shield.Types.AttackDetail
+        , Network.AWS.Shield.Types.AttackLayer
+        , Network.AWS.Shield.Types.AttackProperty
+        , Network.AWS.Shield.Types.AttackPropertyIdentifier
+        , Network.AWS.Shield.Types.AttackSummary
+        , Network.AWS.Shield.Types.AttackVectorDescription
+        , Network.AWS.Shield.Types.AutoRenew
+        , Network.AWS.Shield.Types.Contributor
+        , Network.AWS.Shield.Types.EmergencyContact
+        , Network.AWS.Shield.Types.Limit
+        , Network.AWS.Shield.Types.Mitigation
+        , Network.AWS.Shield.Types.Product
+        , Network.AWS.Shield.Types.Protection
+        , Network.AWS.Shield.Types.SubResourceSummary
+        , Network.AWS.Shield.Types.SubResourceType
+        , Network.AWS.Shield.Types.Subscription
+        , Network.AWS.Shield.Types.SubscriptionState
+        , Network.AWS.Shield.Types.SummarizedAttackVector
+        , Network.AWS.Shield.Types.SummarizedCounter
+        , Network.AWS.Shield.Types.TimeRange
+        , Network.AWS.Shield.Types.Unit
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-shield-test
     type:              exitcode-stdio-1.0
@@ -88,6 +117,7 @@ test-suite amazonka-shield-test
         , amazonka-shield
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

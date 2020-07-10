@@ -18,10 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates a destination. A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using 'PutLogEvents' . Currently, the only supported physical resource is a Kinesis stream belonging to the same account as the destination.
+-- Creates or updates a destination. This operation is used only to create destinations for cross-account subscriptions.
 --
 --
--- Through an access policy, a destination controls what is written to its Kinesis stream. By default, @PutDestination@ does not set any access policy with the destination, which means a cross-account user cannot call 'PutSubscriptionFilter' against this destination. To enable this, the destination owner must call 'PutDestinationPolicy' after @PutDestination@ .
+-- A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using 'PutLogEvents' .
+--
+-- Through an access policy, a destination controls what is written to it. By default, @PutDestination@ does not set any access policy with the destination, which means a cross-account user cannot call 'PutSubscriptionFilter' against this destination. To enable this, the destination owner must call 'PutDestinationPolicy' after @PutDestination@ .
 --
 module Network.AWS.CloudWatchLogs.PutDestination
     (
@@ -49,12 +51,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putDestination' smart constructor.
-data PutDestination = PutDestination'
-  { _pdDestinationName :: !Text
-  , _pdTargetARN       :: !Text
-  , _pdRoleARN         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutDestination = PutDestination'{_pdDestinationName
+                                      :: !Text,
+                                      _pdTargetARN :: !Text,
+                                      _pdRoleARN :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutDestination' with the minimum fields required to make a request.
 --
@@ -70,13 +71,11 @@ putDestination
     -> Text -- ^ 'pdTargetARN'
     -> Text -- ^ 'pdRoleARN'
     -> PutDestination
-putDestination pDestinationName_ pTargetARN_ pRoleARN_ =
-  PutDestination'
-    { _pdDestinationName = pDestinationName_
-    , _pdTargetARN = pTargetARN_
-    , _pdRoleARN = pRoleARN_
-    }
-
+putDestination pDestinationName_ pTargetARN_
+  pRoleARN_
+  = PutDestination'{_pdDestinationName =
+                      pDestinationName_,
+                    _pdTargetARN = pTargetARN_, _pdRoleARN = pRoleARN_}
 
 -- | A name for the destination.
 pdDestinationName :: Lens' PutDestination Text
@@ -127,11 +126,12 @@ instance ToQuery PutDestination where
         toQuery = const mempty
 
 -- | /See:/ 'putDestinationResponse' smart constructor.
-data PutDestinationResponse = PutDestinationResponse'
-  { _pdrsDestination    :: !(Maybe Destination)
-  , _pdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutDestinationResponse = PutDestinationResponse'{_pdrsDestination
+                                                      :: !(Maybe Destination),
+                                                      _pdrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'PutDestinationResponse' with the minimum fields required to make a request.
 --
@@ -143,10 +143,9 @@ data PutDestinationResponse = PutDestinationResponse'
 putDestinationResponse
     :: Int -- ^ 'pdrsResponseStatus'
     -> PutDestinationResponse
-putDestinationResponse pResponseStatus_ =
-  PutDestinationResponse'
-    {_pdrsDestination = Nothing, _pdrsResponseStatus = pResponseStatus_}
-
+putDestinationResponse pResponseStatus_
+  = PutDestinationResponse'{_pdrsDestination = Nothing,
+                            _pdrsResponseStatus = pResponseStatus_}
 
 -- | The destination.
 pdrsDestination :: Lens' PutDestinationResponse (Maybe Destination)

@@ -21,6 +21,8 @@
 -- Deletes a subscription. If the subscription requires authentication for deletion, only the owner of the subscription or the topic's owner can unsubscribe, and an AWS signature is required. If the @Unsubscribe@ call does not require authentication and the requester is not the subscription owner, a final cancellation message is delivered to the endpoint, so that the endpoint owner can easily resubscribe to the topic if the @Unsubscribe@ request was unintended.
 --
 --
+-- This action is throttled at 100 transactions per second (TPS).
+--
 module Network.AWS.SNS.Unsubscribe
     (
     -- * Creating a Request
@@ -46,10 +48,9 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'unsubscribe' smart constructor.
-newtype Unsubscribe = Unsubscribe'
-  { _uSubscriptionARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype Unsubscribe = Unsubscribe'{_uSubscriptionARN
+                                   :: Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'Unsubscribe' with the minimum fields required to make a request.
 --
@@ -59,9 +60,8 @@ newtype Unsubscribe = Unsubscribe'
 unsubscribe
     :: Text -- ^ 'uSubscriptionARN'
     -> Unsubscribe
-unsubscribe pSubscriptionARN_ =
-  Unsubscribe' {_uSubscriptionARN = pSubscriptionARN_}
-
+unsubscribe pSubscriptionARN_
+  = Unsubscribe'{_uSubscriptionARN = pSubscriptionARN_}
 
 -- | The ARN of the subscription to be deleted.
 uSubscriptionARN :: Lens' Unsubscribe Text
@@ -90,16 +90,13 @@ instance ToQuery Unsubscribe where
                "SubscriptionArn" =: _uSubscriptionARN]
 
 -- | /See:/ 'unsubscribeResponse' smart constructor.
-data UnsubscribeResponse =
-  UnsubscribeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UnsubscribeResponse = UnsubscribeResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnsubscribeResponse' with the minimum fields required to make a request.
 --
 unsubscribeResponse
     :: UnsubscribeResponse
 unsubscribeResponse = UnsubscribeResponse'
-
 
 instance NFData UnsubscribeResponse where

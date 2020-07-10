@@ -18,14 +18,22 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- You can update an event source mapping. This is useful if you want to change the parameters of the existing mapping without losing your position in the stream. You can change which function will receive the stream records, but to change the stream itself, you must create a new mapping.
+-- Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.
 --
 --
--- If you are using the versioning feature, you can update the event source mapping to map to a specific Lambda function version or alias as described in the @FunctionName@ parameter. For information about the versioning feature, see <http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html AWS Lambda Function Versioning and Aliases> .
+-- The following error handling options are only available for stream sources (DynamoDB and Kinesis):
 --
--- If you disable the event source mapping, AWS Lambda stops polling. If you enable again, it will resume polling from the time it had stopped polling, so you don't lose processing of any records. However, if you delete event source mapping and create it again, it will reset.
+--     * @BisectBatchOnFunctionError@ - If the function returns an error, split the batch in two and retry.
 --
--- This operation requires permission for the @lambda:UpdateEventSourceMapping@ action.
+--     * @DestinationConfig@ - Send discarded records to an Amazon SQS queue or Amazon SNS topic.
+--
+--     * @MaximumRecordAgeInSeconds@ - Discard records older than the specified age.
+--
+--     * @MaximumRetryAttempts@ - Discard records after the specified number of retries.
+--
+--     * @ParallelizationFactor@ - Process multiple batches from each shard concurrently.
+--
+--
 --
 module Network.AWS.Lambda.UpdateEventSourceMapping
     (
@@ -34,8 +42,14 @@ module Network.AWS.Lambda.UpdateEventSourceMapping
     , UpdateEventSourceMapping
     -- * Request Lenses
     , uesmEnabled
+    , uesmBisectBatchOnFunctionError
+    , uesmParallelizationFactor
+    , uesmMaximumRetryAttempts
     , uesmBatchSize
+    , uesmMaximumBatchingWindowInSeconds
+    , uesmMaximumRecordAgeInSeconds
     , uesmFunctionName
+    , uesmDestinationConfig
     , uesmUUId
 
     -- * Destructuring the Response
@@ -45,11 +59,17 @@ module Network.AWS.Lambda.UpdateEventSourceMapping
     , esmcEventSourceARN
     , esmcState
     , esmcFunctionARN
+    , esmcBisectBatchOnFunctionError
     , esmcUUId
+    , esmcParallelizationFactor
     , esmcLastProcessingResult
+    , esmcMaximumRetryAttempts
     , esmcBatchSize
     , esmcStateTransitionReason
+    , esmcMaximumBatchingWindowInSeconds
+    , esmcMaximumRecordAgeInSeconds
     , esmcLastModified
+    , esmcDestinationConfig
     ) where
 
 import Network.AWS.Lambda.Types
@@ -59,55 +79,106 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
---
---
---
--- /See:/ 'updateEventSourceMapping' smart constructor.
-data UpdateEventSourceMapping = UpdateEventSourceMapping'
-  { _uesmEnabled      :: !(Maybe Bool)
-  , _uesmBatchSize    :: !(Maybe Nat)
-  , _uesmFunctionName :: !(Maybe Text)
-  , _uesmUUId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'updateEventSourceMapping' smart constructor.
+data UpdateEventSourceMapping = UpdateEventSourceMapping'{_uesmEnabled
+                                                          :: !(Maybe Bool),
+                                                          _uesmBisectBatchOnFunctionError
+                                                          :: !(Maybe Bool),
+                                                          _uesmParallelizationFactor
+                                                          :: !(Maybe Nat),
+                                                          _uesmMaximumRetryAttempts
+                                                          :: !(Maybe Nat),
+                                                          _uesmBatchSize ::
+                                                          !(Maybe Nat),
+                                                          _uesmMaximumBatchingWindowInSeconds
+                                                          :: !(Maybe Nat),
+                                                          _uesmMaximumRecordAgeInSeconds
+                                                          :: !(Maybe Nat),
+                                                          _uesmFunctionName ::
+                                                          !(Maybe Text),
+                                                          _uesmDestinationConfig
+                                                          ::
+                                                          !(Maybe
+                                                              DestinationConfig),
+                                                          _uesmUUId :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateEventSourceMapping' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uesmEnabled' - Specifies whether AWS Lambda should actively poll the stream or not. If disabled, AWS Lambda will not poll the stream.
+-- * 'uesmEnabled' - Disables the event source mapping to pause polling and invocation.
 --
--- * 'uesmBatchSize' - The maximum number of stream records that can be sent to your Lambda function for a single invocation.
+-- * 'uesmBisectBatchOnFunctionError' - (Streams) If the function returns an error, split the batch in two and retry.
 --
--- * 'uesmFunctionName' - The Lambda function to which you want the stream records sent. You can specify a function name (for example, @Thumbnail@ ) or you can specify Amazon Resource Name (ARN) of the function (for example, @arn:aws:lambda:us-west-2:account-id:function:ThumbNail@ ). AWS Lambda also allows you to specify a partial ARN (for example, @account-id:Thumbnail@ ). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.  If you are using versioning, you can also provide a qualified function ARN (ARN that is qualified with function version or alias name as suffix). For more information about versioning, see <http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html AWS Lambda Function Versioning and Aliases>  Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length.
+-- * 'uesmParallelizationFactor' - (Streams) The number of batches to process from each shard concurrently.
 --
--- * 'uesmUUId' - The event source mapping identifier.
+-- * 'uesmMaximumRetryAttempts' - (Streams) The maximum number of times to retry when the function returns an error.
+--
+-- * 'uesmBatchSize' - The maximum number of items to retrieve in a single batch.     * __Amazon Kinesis__ - Default 100. Max 10,000.     * __Amazon DynamoDB Streams__ - Default 100. Max 1,000.     * __Amazon Simple Queue Service__ - Default 10. Max 10.
+--
+-- * 'uesmMaximumBatchingWindowInSeconds' - (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
+--
+-- * 'uesmMaximumRecordAgeInSeconds' - (Streams) The maximum age of a record that Lambda sends to a function for processing.
+--
+-- * 'uesmFunctionName' - The name of the Lambda function. __Name formats__      * __Function name__ - @MyFunction@ .     * __Function ARN__ - @arn:aws:lambda:us-west-2:123456789012:function:MyFunction@ .     * __Version or Alias ARN__ - @arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD@ .     * __Partial ARN__ - @123456789012:function:MyFunction@ . The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
+--
+-- * 'uesmDestinationConfig' - (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+--
+-- * 'uesmUUId' - The identifier of the event source mapping.
 updateEventSourceMapping
     :: Text -- ^ 'uesmUUId'
     -> UpdateEventSourceMapping
-updateEventSourceMapping pUUId_ =
-  UpdateEventSourceMapping'
-    { _uesmEnabled = Nothing
-    , _uesmBatchSize = Nothing
-    , _uesmFunctionName = Nothing
-    , _uesmUUId = pUUId_
-    }
+updateEventSourceMapping pUUId_
+  = UpdateEventSourceMapping'{_uesmEnabled = Nothing,
+                              _uesmBisectBatchOnFunctionError = Nothing,
+                              _uesmParallelizationFactor = Nothing,
+                              _uesmMaximumRetryAttempts = Nothing,
+                              _uesmBatchSize = Nothing,
+                              _uesmMaximumBatchingWindowInSeconds = Nothing,
+                              _uesmMaximumRecordAgeInSeconds = Nothing,
+                              _uesmFunctionName = Nothing,
+                              _uesmDestinationConfig = Nothing,
+                              _uesmUUId = pUUId_}
 
-
--- | Specifies whether AWS Lambda should actively poll the stream or not. If disabled, AWS Lambda will not poll the stream.
+-- | Disables the event source mapping to pause polling and invocation.
 uesmEnabled :: Lens' UpdateEventSourceMapping (Maybe Bool)
 uesmEnabled = lens _uesmEnabled (\ s a -> s{_uesmEnabled = a})
 
--- | The maximum number of stream records that can be sent to your Lambda function for a single invocation.
+-- | (Streams) If the function returns an error, split the batch in two and retry.
+uesmBisectBatchOnFunctionError :: Lens' UpdateEventSourceMapping (Maybe Bool)
+uesmBisectBatchOnFunctionError = lens _uesmBisectBatchOnFunctionError (\ s a -> s{_uesmBisectBatchOnFunctionError = a})
+
+-- | (Streams) The number of batches to process from each shard concurrently.
+uesmParallelizationFactor :: Lens' UpdateEventSourceMapping (Maybe Natural)
+uesmParallelizationFactor = lens _uesmParallelizationFactor (\ s a -> s{_uesmParallelizationFactor = a}) . mapping _Nat
+
+-- | (Streams) The maximum number of times to retry when the function returns an error.
+uesmMaximumRetryAttempts :: Lens' UpdateEventSourceMapping (Maybe Natural)
+uesmMaximumRetryAttempts = lens _uesmMaximumRetryAttempts (\ s a -> s{_uesmMaximumRetryAttempts = a}) . mapping _Nat
+
+-- | The maximum number of items to retrieve in a single batch.     * __Amazon Kinesis__ - Default 100. Max 10,000.     * __Amazon DynamoDB Streams__ - Default 100. Max 1,000.     * __Amazon Simple Queue Service__ - Default 10. Max 10.
 uesmBatchSize :: Lens' UpdateEventSourceMapping (Maybe Natural)
 uesmBatchSize = lens _uesmBatchSize (\ s a -> s{_uesmBatchSize = a}) . mapping _Nat
 
--- | The Lambda function to which you want the stream records sent. You can specify a function name (for example, @Thumbnail@ ) or you can specify Amazon Resource Name (ARN) of the function (for example, @arn:aws:lambda:us-west-2:account-id:function:ThumbNail@ ). AWS Lambda also allows you to specify a partial ARN (for example, @account-id:Thumbnail@ ). Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length.  If you are using versioning, you can also provide a qualified function ARN (ARN that is qualified with function version or alias name as suffix). For more information about versioning, see <http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html AWS Lambda Function Versioning and Aliases>  Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 character in length.
+-- | (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
+uesmMaximumBatchingWindowInSeconds :: Lens' UpdateEventSourceMapping (Maybe Natural)
+uesmMaximumBatchingWindowInSeconds = lens _uesmMaximumBatchingWindowInSeconds (\ s a -> s{_uesmMaximumBatchingWindowInSeconds = a}) . mapping _Nat
+
+-- | (Streams) The maximum age of a record that Lambda sends to a function for processing.
+uesmMaximumRecordAgeInSeconds :: Lens' UpdateEventSourceMapping (Maybe Natural)
+uesmMaximumRecordAgeInSeconds = lens _uesmMaximumRecordAgeInSeconds (\ s a -> s{_uesmMaximumRecordAgeInSeconds = a}) . mapping _Nat
+
+-- | The name of the Lambda function. __Name formats__      * __Function name__ - @MyFunction@ .     * __Function ARN__ - @arn:aws:lambda:us-west-2:123456789012:function:MyFunction@ .     * __Version or Alias ARN__ - @arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD@ .     * __Partial ARN__ - @123456789012:function:MyFunction@ . The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
 uesmFunctionName :: Lens' UpdateEventSourceMapping (Maybe Text)
 uesmFunctionName = lens _uesmFunctionName (\ s a -> s{_uesmFunctionName = a})
 
--- | The event source mapping identifier.
+-- | (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+uesmDestinationConfig :: Lens' UpdateEventSourceMapping (Maybe DestinationConfig)
+uesmDestinationConfig = lens _uesmDestinationConfig (\ s a -> s{_uesmDestinationConfig = a})
+
+-- | The identifier of the event source mapping.
 uesmUUId :: Lens' UpdateEventSourceMapping Text
 uesmUUId = lens _uesmUUId (\ s a -> s{_uesmUUId = a})
 
@@ -129,8 +200,19 @@ instance ToJSON UpdateEventSourceMapping where
           = object
               (catMaybes
                  [("Enabled" .=) <$> _uesmEnabled,
+                  ("BisectBatchOnFunctionError" .=) <$>
+                    _uesmBisectBatchOnFunctionError,
+                  ("ParallelizationFactor" .=) <$>
+                    _uesmParallelizationFactor,
+                  ("MaximumRetryAttempts" .=) <$>
+                    _uesmMaximumRetryAttempts,
                   ("BatchSize" .=) <$> _uesmBatchSize,
-                  ("FunctionName" .=) <$> _uesmFunctionName])
+                  ("MaximumBatchingWindowInSeconds" .=) <$>
+                    _uesmMaximumBatchingWindowInSeconds,
+                  ("MaximumRecordAgeInSeconds" .=) <$>
+                    _uesmMaximumRecordAgeInSeconds,
+                  ("FunctionName" .=) <$> _uesmFunctionName,
+                  ("DestinationConfig" .=) <$> _uesmDestinationConfig])
 
 instance ToPath UpdateEventSourceMapping where
         toPath UpdateEventSourceMapping'{..}

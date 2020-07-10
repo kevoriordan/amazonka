@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getInstanceSnapshot' smart constructor.
-newtype GetInstanceSnapshot = GetInstanceSnapshot'
-  { _gisInstanceSnapshotName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetInstanceSnapshot = GetInstanceSnapshot'{_gisInstanceSnapshotName
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetInstanceSnapshot' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetInstanceSnapshot = GetInstanceSnapshot'
 getInstanceSnapshot
     :: Text -- ^ 'gisInstanceSnapshotName'
     -> GetInstanceSnapshot
-getInstanceSnapshot pInstanceSnapshotName_ =
-  GetInstanceSnapshot' {_gisInstanceSnapshotName = pInstanceSnapshotName_}
-
+getInstanceSnapshot pInstanceSnapshotName_
+  = GetInstanceSnapshot'{_gisInstanceSnapshotName =
+                           pInstanceSnapshotName_}
 
 -- | The name of the snapshot for which you are requesting information.
 gisInstanceSnapshotName :: Lens' GetInstanceSnapshot Text
@@ -105,11 +105,14 @@ instance ToQuery GetInstanceSnapshot where
         toQuery = const mempty
 
 -- | /See:/ 'getInstanceSnapshotResponse' smart constructor.
-data GetInstanceSnapshotResponse = GetInstanceSnapshotResponse'
-  { _gisrsInstanceSnapshot :: !(Maybe InstanceSnapshot)
-  , _gisrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInstanceSnapshotResponse = GetInstanceSnapshotResponse'{_gisrsInstanceSnapshot
+                                                                ::
+                                                                !(Maybe
+                                                                    InstanceSnapshot),
+                                                                _gisrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetInstanceSnapshotResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +124,10 @@ data GetInstanceSnapshotResponse = GetInstanceSnapshotResponse'
 getInstanceSnapshotResponse
     :: Int -- ^ 'gisrsResponseStatus'
     -> GetInstanceSnapshotResponse
-getInstanceSnapshotResponse pResponseStatus_ =
-  GetInstanceSnapshotResponse'
-    {_gisrsInstanceSnapshot = Nothing, _gisrsResponseStatus = pResponseStatus_}
-
+getInstanceSnapshotResponse pResponseStatus_
+  = GetInstanceSnapshotResponse'{_gisrsInstanceSnapshot
+                                   = Nothing,
+                                 _gisrsResponseStatus = pResponseStatus_}
 
 -- | An array of key-value pairs containing information about the results of your get instance snapshot request.
 gisrsInstanceSnapshot :: Lens' GetInstanceSnapshotResponse (Maybe InstanceSnapshot)

@@ -45,10 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deletePlatformVersion' smart constructor.
-newtype DeletePlatformVersion = DeletePlatformVersion'
-  { _dpvPlatformARN :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePlatformVersion = DeletePlatformVersion'{_dpvPlatformARN
+                                                       :: Maybe Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeletePlatformVersion' with the minimum fields required to make a request.
 --
@@ -57,8 +57,8 @@ newtype DeletePlatformVersion = DeletePlatformVersion'
 -- * 'dpvPlatformARN' - The ARN of the version of the custom platform.
 deletePlatformVersion
     :: DeletePlatformVersion
-deletePlatformVersion = DeletePlatformVersion' {_dpvPlatformARN = Nothing}
-
+deletePlatformVersion
+  = DeletePlatformVersion'{_dpvPlatformARN = Nothing}
 
 -- | The ARN of the version of the custom platform.
 dpvPlatformARN :: Lens' DeletePlatformVersion (Maybe Text)
@@ -92,11 +92,14 @@ instance ToQuery DeletePlatformVersion where
                "PlatformArn" =: _dpvPlatformARN]
 
 -- | /See:/ 'deletePlatformVersionResponse' smart constructor.
-data DeletePlatformVersionResponse = DeletePlatformVersionResponse'
-  { _dpvrsPlatformSummary :: !(Maybe PlatformSummary)
-  , _dpvrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePlatformVersionResponse = DeletePlatformVersionResponse'{_dpvrsPlatformSummary
+                                                                    ::
+                                                                    !(Maybe
+                                                                        PlatformSummary),
+                                                                    _dpvrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeletePlatformVersionResponse' with the minimum fields required to make a request.
 --
@@ -108,10 +111,10 @@ data DeletePlatformVersionResponse = DeletePlatformVersionResponse'
 deletePlatformVersionResponse
     :: Int -- ^ 'dpvrsResponseStatus'
     -> DeletePlatformVersionResponse
-deletePlatformVersionResponse pResponseStatus_ =
-  DeletePlatformVersionResponse'
-    {_dpvrsPlatformSummary = Nothing, _dpvrsResponseStatus = pResponseStatus_}
-
+deletePlatformVersionResponse pResponseStatus_
+  = DeletePlatformVersionResponse'{_dpvrsPlatformSummary
+                                     = Nothing,
+                                   _dpvrsResponseStatus = pResponseStatus_}
 
 -- | Detailed information about the version of the custom platform.
 dpvrsPlatformSummary :: Lens' DeletePlatformVersionResponse (Maybe PlatformSummary)

@@ -78,6 +78,7 @@ library
         , Network.AWS.IAM.DeletePolicy
         , Network.AWS.IAM.DeletePolicyVersion
         , Network.AWS.IAM.DeleteRole
+        , Network.AWS.IAM.DeleteRolePermissionsBoundary
         , Network.AWS.IAM.DeleteRolePolicy
         , Network.AWS.IAM.DeleteSAMLProvider
         , Network.AWS.IAM.DeleteSSHPublicKey
@@ -86,6 +87,7 @@ library
         , Network.AWS.IAM.DeleteServiceSpecificCredential
         , Network.AWS.IAM.DeleteSigningCertificate
         , Network.AWS.IAM.DeleteUser
+        , Network.AWS.IAM.DeleteUserPermissionsBoundary
         , Network.AWS.IAM.DeleteUserPolicy
         , Network.AWS.IAM.DeleteVirtualMFADevice
         , Network.AWS.IAM.DetachGroupPolicy
@@ -93,6 +95,8 @@ library
         , Network.AWS.IAM.DetachUserPolicy
         , Network.AWS.IAM.EnableMFADevice
         , Network.AWS.IAM.GenerateCredentialReport
+        , Network.AWS.IAM.GenerateOrganizationsAccessReport
+        , Network.AWS.IAM.GenerateServiceLastAccessedDetails
         , Network.AWS.IAM.GetAccessKeyLastUsed
         , Network.AWS.IAM.GetAccountAuthorizationDetails
         , Network.AWS.IAM.GetAccountPasswordPolicy
@@ -105,6 +109,7 @@ library
         , Network.AWS.IAM.GetInstanceProfile
         , Network.AWS.IAM.GetLoginProfile
         , Network.AWS.IAM.GetOpenIdConnectProvider
+        , Network.AWS.IAM.GetOrganizationsAccessReport
         , Network.AWS.IAM.GetPolicy
         , Network.AWS.IAM.GetPolicyVersion
         , Network.AWS.IAM.GetRole
@@ -112,6 +117,8 @@ library
         , Network.AWS.IAM.GetSAMLProvider
         , Network.AWS.IAM.GetSSHPublicKey
         , Network.AWS.IAM.GetServerCertificate
+        , Network.AWS.IAM.GetServiceLastAccessedDetails
+        , Network.AWS.IAM.GetServiceLastAccessedDetailsWithEntities
         , Network.AWS.IAM.GetServiceLinkedRoleDeletionStatus
         , Network.AWS.IAM.GetUser
         , Network.AWS.IAM.GetUserPolicy
@@ -129,8 +136,10 @@ library
         , Network.AWS.IAM.ListMFADevices
         , Network.AWS.IAM.ListOpenIdConnectProviders
         , Network.AWS.IAM.ListPolicies
+        , Network.AWS.IAM.ListPoliciesGrantingServiceAccess
         , Network.AWS.IAM.ListPolicyVersions
         , Network.AWS.IAM.ListRolePolicies
+        , Network.AWS.IAM.ListRoleTags
         , Network.AWS.IAM.ListRoles
         , Network.AWS.IAM.ListSAMLProviders
         , Network.AWS.IAM.ListSSHPublicKeys
@@ -138,10 +147,13 @@ library
         , Network.AWS.IAM.ListServiceSpecificCredentials
         , Network.AWS.IAM.ListSigningCertificates
         , Network.AWS.IAM.ListUserPolicies
+        , Network.AWS.IAM.ListUserTags
         , Network.AWS.IAM.ListUsers
         , Network.AWS.IAM.ListVirtualMFADevices
         , Network.AWS.IAM.PutGroupPolicy
+        , Network.AWS.IAM.PutRolePermissionsBoundary
         , Network.AWS.IAM.PutRolePolicy
+        , Network.AWS.IAM.PutUserPermissionsBoundary
         , Network.AWS.IAM.PutUserPolicy
         , Network.AWS.IAM.RemoveClientIdFromOpenIdConnectProvider
         , Network.AWS.IAM.RemoveRoleFromInstanceProfile
@@ -149,9 +161,14 @@ library
         , Network.AWS.IAM.ResetServiceSpecificCredential
         , Network.AWS.IAM.ResyncMFADevice
         , Network.AWS.IAM.SetDefaultPolicyVersion
+        , Network.AWS.IAM.SetSecurityTokenServicePreferences
         , Network.AWS.IAM.SimulateCustomPolicy
         , Network.AWS.IAM.SimulatePrincipalPolicy
+        , Network.AWS.IAM.TagRole
+        , Network.AWS.IAM.TagUser
         , Network.AWS.IAM.Types
+        , Network.AWS.IAM.UntagRole
+        , Network.AWS.IAM.UntagUser
         , Network.AWS.IAM.UpdateAccessKey
         , Network.AWS.IAM.UpdateAccountPasswordPolicy
         , Network.AWS.IAM.UpdateAssumeRolePolicy
@@ -172,12 +189,83 @@ library
         , Network.AWS.IAM.Waiters
 
     other-modules:
-          Network.AWS.IAM.Types.Product
-        , Network.AWS.IAM.Types.Sum
+          Network.AWS.IAM.Types.AccessDetail
+        , Network.AWS.IAM.Types.AccessKeyInfo
+        , Network.AWS.IAM.Types.AccessKeyLastUsed
+        , Network.AWS.IAM.Types.AccessKeyMetadata
+        , Network.AWS.IAM.Types.AssignmentStatusType
+        , Network.AWS.IAM.Types.AttachedPermissionsBoundary
+        , Network.AWS.IAM.Types.AttachedPolicy
+        , Network.AWS.IAM.Types.ContextEntry
+        , Network.AWS.IAM.Types.ContextKeyTypeEnum
+        , Network.AWS.IAM.Types.DeletionTaskFailureReasonType
+        , Network.AWS.IAM.Types.DeletionTaskStatusType
+        , Network.AWS.IAM.Types.EncodingType
+        , Network.AWS.IAM.Types.EntityDetails
+        , Network.AWS.IAM.Types.EntityInfo
+        , Network.AWS.IAM.Types.EntityType
+        , Network.AWS.IAM.Types.ErrorDetails
+        , Network.AWS.IAM.Types.EvaluationResult
+        , Network.AWS.IAM.Types.GetContextKeysForPolicyResponse
+        , Network.AWS.IAM.Types.GlobalEndpointTokenVersion
+        , Network.AWS.IAM.Types.Group
+        , Network.AWS.IAM.Types.GroupDetail
+        , Network.AWS.IAM.Types.InstanceProfile
+        , Network.AWS.IAM.Types.JobStatusType
+        , Network.AWS.IAM.Types.ListPoliciesGrantingServiceAccessEntry
+        , Network.AWS.IAM.Types.LoginProfile
+        , Network.AWS.IAM.Types.MFADevice
+        , Network.AWS.IAM.Types.ManagedPolicyDetail
+        , Network.AWS.IAM.Types.OpenIdConnectProviderListEntry
+        , Network.AWS.IAM.Types.OrganizationsDecisionDetail
+        , Network.AWS.IAM.Types.PasswordPolicy
+        , Network.AWS.IAM.Types.PermissionsBoundaryAttachmentType
+        , Network.AWS.IAM.Types.PermissionsBoundaryDecisionDetail
+        , Network.AWS.IAM.Types.Policy
+        , Network.AWS.IAM.Types.PolicyDetail
+        , Network.AWS.IAM.Types.PolicyEvaluationDecisionType
+        , Network.AWS.IAM.Types.PolicyGrantingServiceAccess
+        , Network.AWS.IAM.Types.PolicyGroup
+        , Network.AWS.IAM.Types.PolicyOwnerEntityType
+        , Network.AWS.IAM.Types.PolicyRole
+        , Network.AWS.IAM.Types.PolicyScopeType
+        , Network.AWS.IAM.Types.PolicySourceType
+        , Network.AWS.IAM.Types.PolicyType
+        , Network.AWS.IAM.Types.PolicyUsageType
+        , Network.AWS.IAM.Types.PolicyUser
+        , Network.AWS.IAM.Types.PolicyVersion
+        , Network.AWS.IAM.Types.Position
+        , Network.AWS.IAM.Types.Product
+        , Network.AWS.IAM.Types.ReportFormatType
+        , Network.AWS.IAM.Types.ReportStateType
+        , Network.AWS.IAM.Types.ResourceSpecificResult
+        , Network.AWS.IAM.Types.Role
+        , Network.AWS.IAM.Types.RoleDetail
+        , Network.AWS.IAM.Types.RoleLastUsed
+        , Network.AWS.IAM.Types.RoleUsageType
+        , Network.AWS.IAM.Types.SAMLProviderListEntry
+        , Network.AWS.IAM.Types.SSHPublicKey
+        , Network.AWS.IAM.Types.SSHPublicKeyMetadata
+        , Network.AWS.IAM.Types.ServerCertificate
+        , Network.AWS.IAM.Types.ServerCertificateMetadata
+        , Network.AWS.IAM.Types.ServiceLastAccessed
+        , Network.AWS.IAM.Types.ServiceSpecificCredential
+        , Network.AWS.IAM.Types.ServiceSpecificCredentialMetadata
+        , Network.AWS.IAM.Types.SigningCertificate
+        , Network.AWS.IAM.Types.SimulatePolicyResponse
+        , Network.AWS.IAM.Types.SortKeyType
+        , Network.AWS.IAM.Types.Statement
+        , Network.AWS.IAM.Types.StatusType
+        , Network.AWS.IAM.Types.SummaryKeyType
+        , Network.AWS.IAM.Types.Tag
+        , Network.AWS.IAM.Types.User
+        , Network.AWS.IAM.Types.UserDetail
+        , Network.AWS.IAM.Types.VirtualMFADevice
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-iam-test
     type:              exitcode-stdio-1.0
@@ -201,6 +289,7 @@ test-suite amazonka-iam-test
         , amazonka-iam
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

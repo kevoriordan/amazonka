@@ -50,11 +50,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'installToRemoteAccessSession' smart constructor.
-data InstallToRemoteAccessSession = InstallToRemoteAccessSession'
-  { _itrasRemoteAccessSessionARN :: !Text
-  , _itrasAppARN                 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data InstallToRemoteAccessSession = InstallToRemoteAccessSession'{_itrasRemoteAccessSessionARN
+                                                                  :: !Text,
+                                                                  _itrasAppARN
+                                                                  :: !Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'InstallToRemoteAccessSession' with the minimum fields required to make a request.
 --
@@ -62,23 +63,22 @@ data InstallToRemoteAccessSession = InstallToRemoteAccessSession'
 --
 -- * 'itrasRemoteAccessSessionARN' - The Amazon Resource Name (ARN) of the remote access session about which you are requesting information.
 --
--- * 'itrasAppARN' - The Amazon Resource Name (ARN) of the app about which you are requesting information.
+-- * 'itrasAppARN' - The ARN of the app about which you are requesting information.
 installToRemoteAccessSession
     :: Text -- ^ 'itrasRemoteAccessSessionARN'
     -> Text -- ^ 'itrasAppARN'
     -> InstallToRemoteAccessSession
-installToRemoteAccessSession pRemoteAccessSessionARN_ pAppARN_ =
-  InstallToRemoteAccessSession'
-    { _itrasRemoteAccessSessionARN = pRemoteAccessSessionARN_
-    , _itrasAppARN = pAppARN_
-    }
-
+installToRemoteAccessSession pRemoteAccessSessionARN_
+  pAppARN_
+  = InstallToRemoteAccessSession'{_itrasRemoteAccessSessionARN
+                                    = pRemoteAccessSessionARN_,
+                                  _itrasAppARN = pAppARN_}
 
 -- | The Amazon Resource Name (ARN) of the remote access session about which you are requesting information.
 itrasRemoteAccessSessionARN :: Lens' InstallToRemoteAccessSession Text
 itrasRemoteAccessSessionARN = lens _itrasRemoteAccessSessionARN (\ s a -> s{_itrasRemoteAccessSessionARN = a})
 
--- | The Amazon Resource Name (ARN) of the app about which you are requesting information.
+-- | The ARN of the app about which you are requesting information.
 itrasAppARN :: Lens' InstallToRemoteAccessSession Text
 itrasAppARN = lens _itrasAppARN (\ s a -> s{_itrasAppARN = a})
 
@@ -127,11 +127,15 @@ instance ToQuery InstallToRemoteAccessSession where
 --
 --
 -- /See:/ 'installToRemoteAccessSessionResponse' smart constructor.
-data InstallToRemoteAccessSessionResponse = InstallToRemoteAccessSessionResponse'
-  { _itrasrsAppUpload      :: !(Maybe Upload)
-  , _itrasrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data InstallToRemoteAccessSessionResponse = InstallToRemoteAccessSessionResponse'{_itrasrsAppUpload
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Upload),
+                                                                                  _itrasrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'InstallToRemoteAccessSessionResponse' with the minimum fields required to make a request.
 --
@@ -143,10 +147,11 @@ data InstallToRemoteAccessSessionResponse = InstallToRemoteAccessSessionResponse
 installToRemoteAccessSessionResponse
     :: Int -- ^ 'itrasrsResponseStatus'
     -> InstallToRemoteAccessSessionResponse
-installToRemoteAccessSessionResponse pResponseStatus_ =
-  InstallToRemoteAccessSessionResponse'
-    {_itrasrsAppUpload = Nothing, _itrasrsResponseStatus = pResponseStatus_}
-
+installToRemoteAccessSessionResponse pResponseStatus_
+  = InstallToRemoteAccessSessionResponse'{_itrasrsAppUpload
+                                            = Nothing,
+                                          _itrasrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | An app to upload or that has been uploaded.
 itrasrsAppUpload :: Lens' InstallToRemoteAccessSessionResponse (Maybe Upload)

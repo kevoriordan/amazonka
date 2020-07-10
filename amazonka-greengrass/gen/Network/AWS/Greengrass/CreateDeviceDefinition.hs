@@ -28,6 +28,7 @@ module Network.AWS.Greengrass.CreateDeviceDefinition
     , cddAmznClientToken
     , cddInitialVersion
     , cddName
+    , cddTags
 
     -- * Destructuring the Response
     , createDeviceDefinitionResponse
@@ -51,12 +52,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDeviceDefinition' smart constructor.
-data CreateDeviceDefinition = CreateDeviceDefinition'
-  { _cddAmznClientToken :: !(Maybe Text)
-  , _cddInitialVersion  :: !(Maybe DeviceDefinitionVersion)
-  , _cddName            :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeviceDefinition = CreateDeviceDefinition'{_cddAmznClientToken
+                                                      :: !(Maybe Text),
+                                                      _cddInitialVersion ::
+                                                      !(Maybe
+                                                          DeviceDefinitionVersion),
+                                                      _cddName :: !(Maybe Text),
+                                                      _cddTags ::
+                                                      !(Maybe (Map Text Text))}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateDeviceDefinition' with the minimum fields required to make a request.
 --
@@ -67,15 +72,15 @@ data CreateDeviceDefinition = CreateDeviceDefinition'
 -- * 'cddInitialVersion' - Information about the initial version of the device definition.
 --
 -- * 'cddName' - The name of the device definition.
+--
+-- * 'cddTags' - Tag(s) to add to the new resource.
 createDeviceDefinition
     :: CreateDeviceDefinition
-createDeviceDefinition =
-  CreateDeviceDefinition'
-    { _cddAmznClientToken = Nothing
-    , _cddInitialVersion = Nothing
-    , _cddName = Nothing
-    }
-
+createDeviceDefinition
+  = CreateDeviceDefinition'{_cddAmznClientToken =
+                              Nothing,
+                            _cddInitialVersion = Nothing, _cddName = Nothing,
+                            _cddTags = Nothing}
 
 -- | A client token used to correlate requests and responses.
 cddAmznClientToken :: Lens' CreateDeviceDefinition (Maybe Text)
@@ -88,6 +93,10 @@ cddInitialVersion = lens _cddInitialVersion (\ s a -> s{_cddInitialVersion = a})
 -- | The name of the device definition.
 cddName :: Lens' CreateDeviceDefinition (Maybe Text)
 cddName = lens _cddName (\ s a -> s{_cddName = a})
+
+-- | Tag(s) to add to the new resource.
+cddTags :: Lens' CreateDeviceDefinition (HashMap Text Text)
+cddTags = lens _cddTags (\ s a -> s{_cddTags = a}) . _Default . _Map
 
 instance AWSRequest CreateDeviceDefinition where
         type Rs CreateDeviceDefinition =
@@ -121,7 +130,7 @@ instance ToJSON CreateDeviceDefinition where
           = object
               (catMaybes
                  [("InitialVersion" .=) <$> _cddInitialVersion,
-                  ("Name" .=) <$> _cddName])
+                  ("Name" .=) <$> _cddName, ("tags" .=) <$> _cddTags])
 
 instance ToPath CreateDeviceDefinition where
         toPath = const "/greengrass/definition/devices"
@@ -130,23 +139,44 @@ instance ToQuery CreateDeviceDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'createDeviceDefinitionResponse' smart constructor.
-data CreateDeviceDefinitionResponse = CreateDeviceDefinitionResponse'
-  { _cddrsLatestVersionARN     :: !(Maybe Text)
-  , _cddrsARN                  :: !(Maybe Text)
-  , _cddrsName                 :: !(Maybe Text)
-  , _cddrsCreationTimestamp    :: !(Maybe Text)
-  , _cddrsId                   :: !(Maybe Text)
-  , _cddrsLatestVersion        :: !(Maybe Text)
-  , _cddrsLastUpdatedTimestamp :: !(Maybe Text)
-  , _cddrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeviceDefinitionResponse = CreateDeviceDefinitionResponse'{_cddrsLatestVersionARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cddrsARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cddrsName
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cddrsCreationTimestamp
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cddrsId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cddrsLatestVersion
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cddrsLastUpdatedTimestamp
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _cddrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateDeviceDefinitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cddrsLatestVersionARN' - The ARN of the latest version of the definition.
+-- * 'cddrsLatestVersionARN' - The ARN of the latest version associated with the definition.
 --
 -- * 'cddrsARN' - The ARN of the definition.
 --
@@ -156,7 +186,7 @@ data CreateDeviceDefinitionResponse = CreateDeviceDefinitionResponse'
 --
 -- * 'cddrsId' - The ID of the definition.
 --
--- * 'cddrsLatestVersion' - The latest version of the definition.
+-- * 'cddrsLatestVersion' - The ID of the latest version associated with the definition.
 --
 -- * 'cddrsLastUpdatedTimestamp' - The time, in milliseconds since the epoch, when the definition was last updated.
 --
@@ -164,20 +194,17 @@ data CreateDeviceDefinitionResponse = CreateDeviceDefinitionResponse'
 createDeviceDefinitionResponse
     :: Int -- ^ 'cddrsResponseStatus'
     -> CreateDeviceDefinitionResponse
-createDeviceDefinitionResponse pResponseStatus_ =
-  CreateDeviceDefinitionResponse'
-    { _cddrsLatestVersionARN = Nothing
-    , _cddrsARN = Nothing
-    , _cddrsName = Nothing
-    , _cddrsCreationTimestamp = Nothing
-    , _cddrsId = Nothing
-    , _cddrsLatestVersion = Nothing
-    , _cddrsLastUpdatedTimestamp = Nothing
-    , _cddrsResponseStatus = pResponseStatus_
-    }
+createDeviceDefinitionResponse pResponseStatus_
+  = CreateDeviceDefinitionResponse'{_cddrsLatestVersionARN
+                                      = Nothing,
+                                    _cddrsARN = Nothing, _cddrsName = Nothing,
+                                    _cddrsCreationTimestamp = Nothing,
+                                    _cddrsId = Nothing,
+                                    _cddrsLatestVersion = Nothing,
+                                    _cddrsLastUpdatedTimestamp = Nothing,
+                                    _cddrsResponseStatus = pResponseStatus_}
 
-
--- | The ARN of the latest version of the definition.
+-- | The ARN of the latest version associated with the definition.
 cddrsLatestVersionARN :: Lens' CreateDeviceDefinitionResponse (Maybe Text)
 cddrsLatestVersionARN = lens _cddrsLatestVersionARN (\ s a -> s{_cddrsLatestVersionARN = a})
 
@@ -197,7 +224,7 @@ cddrsCreationTimestamp = lens _cddrsCreationTimestamp (\ s a -> s{_cddrsCreation
 cddrsId :: Lens' CreateDeviceDefinitionResponse (Maybe Text)
 cddrsId = lens _cddrsId (\ s a -> s{_cddrsId = a})
 
--- | The latest version of the definition.
+-- | The ID of the latest version associated with the definition.
 cddrsLatestVersion :: Lens' CreateDeviceDefinitionResponse (Maybe Text)
 cddrsLatestVersion = lens _cddrsLatestVersion (\ s a -> s{_cddrsLatestVersion = a})
 

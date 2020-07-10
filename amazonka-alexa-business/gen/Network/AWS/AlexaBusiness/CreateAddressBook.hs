@@ -47,12 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createAddressBook' smart constructor.
-data CreateAddressBook = CreateAddressBook'
-  { _cabClientRequestToken :: !(Maybe Text)
-  , _cabDescription        :: !(Maybe Text)
-  , _cabName               :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAddressBook = CreateAddressBook'{_cabClientRequestToken
+                                            :: !(Maybe Text),
+                                            _cabDescription :: !(Maybe Text),
+                                            _cabName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateAddressBook' with the minimum fields required to make a request.
 --
@@ -66,13 +65,10 @@ data CreateAddressBook = CreateAddressBook'
 createAddressBook
     :: Text -- ^ 'cabName'
     -> CreateAddressBook
-createAddressBook pName_ =
-  CreateAddressBook'
-    { _cabClientRequestToken = Nothing
-    , _cabDescription = Nothing
-    , _cabName = pName_
-    }
-
+createAddressBook pName_
+  = CreateAddressBook'{_cabClientRequestToken =
+                         Nothing,
+                       _cabDescription = Nothing, _cabName = pName_}
 
 -- | A unique, user-specified identifier for the request that ensures idempotency.
 cabClientRequestToken :: Lens' CreateAddressBook (Maybe Text)
@@ -124,11 +120,12 @@ instance ToQuery CreateAddressBook where
         toQuery = const mempty
 
 -- | /See:/ 'createAddressBookResponse' smart constructor.
-data CreateAddressBookResponse = CreateAddressBookResponse'
-  { _cabrsAddressBookARN :: !(Maybe Text)
-  , _cabrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAddressBookResponse = CreateAddressBookResponse'{_cabrsAddressBookARN
+                                                            :: !(Maybe Text),
+                                                            _cabrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateAddressBookResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +137,10 @@ data CreateAddressBookResponse = CreateAddressBookResponse'
 createAddressBookResponse
     :: Int -- ^ 'cabrsResponseStatus'
     -> CreateAddressBookResponse
-createAddressBookResponse pResponseStatus_ =
-  CreateAddressBookResponse'
-    {_cabrsAddressBookARN = Nothing, _cabrsResponseStatus = pResponseStatus_}
-
+createAddressBookResponse pResponseStatus_
+  = CreateAddressBookResponse'{_cabrsAddressBookARN =
+                                 Nothing,
+                               _cabrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the newly created address book.
 cabrsAddressBookARN :: Lens' CreateAddressBookResponse (Maybe Text)

@@ -51,12 +51,11 @@ import Network.AWS.Response
 -- | A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.
 --
 -- /See:/ 'describeDataset' smart constructor.
-data DescribeDataset = DescribeDataset'
-  { _ddIdentityPoolId :: !Text
-  , _ddIdentityId     :: !Text
-  , _ddDatasetName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDataset = DescribeDataset'{_ddIdentityPoolId
+                                        :: !Text,
+                                        _ddIdentityId :: !Text,
+                                        _ddDatasetName :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeDataset' with the minimum fields required to make a request.
 --
@@ -72,13 +71,12 @@ describeDataset
     -> Text -- ^ 'ddIdentityId'
     -> Text -- ^ 'ddDatasetName'
     -> DescribeDataset
-describeDataset pIdentityPoolId_ pIdentityId_ pDatasetName_ =
-  DescribeDataset'
-    { _ddIdentityPoolId = pIdentityPoolId_
-    , _ddIdentityId = pIdentityId_
-    , _ddDatasetName = pDatasetName_
-    }
-
+describeDataset pIdentityPoolId_ pIdentityId_
+  pDatasetName_
+  = DescribeDataset'{_ddIdentityPoolId =
+                       pIdentityPoolId_,
+                     _ddIdentityId = pIdentityId_,
+                     _ddDatasetName = pDatasetName_}
 
 -- | A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.
 ddIdentityPoolId :: Lens' DescribeDataset Text
@@ -125,11 +123,12 @@ instance ToQuery DescribeDataset where
 -- | Response to a successful DescribeDataset request.
 --
 -- /See:/ 'describeDatasetResponse' smart constructor.
-data DescribeDatasetResponse = DescribeDatasetResponse'
-  { _ddrsDataset        :: !(Maybe Dataset)
-  , _ddrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDatasetResponse = DescribeDatasetResponse'{_ddrsDataset
+                                                        :: !(Maybe Dataset),
+                                                        _ddrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeDatasetResponse' with the minimum fields required to make a request.
 --
@@ -141,10 +140,9 @@ data DescribeDatasetResponse = DescribeDatasetResponse'
 describeDatasetResponse
     :: Int -- ^ 'ddrsResponseStatus'
     -> DescribeDatasetResponse
-describeDatasetResponse pResponseStatus_ =
-  DescribeDatasetResponse'
-    {_ddrsDataset = Nothing, _ddrsResponseStatus = pResponseStatus_}
-
+describeDatasetResponse pResponseStatus_
+  = DescribeDatasetResponse'{_ddrsDataset = Nothing,
+                             _ddrsResponseStatus = pResponseStatus_}
 
 -- | Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don't exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.
 ddrsDataset :: Lens' DescribeDatasetResponse (Maybe Dataset)

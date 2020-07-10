@@ -50,13 +50,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateTeamMember' smart constructor.
-data UpdateTeamMember = UpdateTeamMember'
-  { _utmRemoteAccessAllowed :: !(Maybe Bool)
-  , _utmProjectRole         :: !(Maybe Text)
-  , _utmProjectId           :: !Text
-  , _utmUserARN             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTeamMember = UpdateTeamMember'{_utmRemoteAccessAllowed
+                                          :: !(Maybe Bool),
+                                          _utmProjectRole :: !(Maybe Text),
+                                          _utmProjectId :: !Text,
+                                          _utmUserARN :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTeamMember' with the minimum fields required to make a request.
 --
@@ -73,14 +72,11 @@ updateTeamMember
     :: Text -- ^ 'utmProjectId'
     -> Text -- ^ 'utmUserARN'
     -> UpdateTeamMember
-updateTeamMember pProjectId_ pUserARN_ =
-  UpdateTeamMember'
-    { _utmRemoteAccessAllowed = Nothing
-    , _utmProjectRole = Nothing
-    , _utmProjectId = pProjectId_
-    , _utmUserARN = pUserARN_
-    }
-
+updateTeamMember pProjectId_ pUserARN_
+  = UpdateTeamMember'{_utmRemoteAccessAllowed =
+                        Nothing,
+                      _utmProjectRole = Nothing,
+                      _utmProjectId = pProjectId_, _utmUserARN = pUserARN_}
 
 -- | Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user's profile. Even if this is set to True, the user must associate a public key with their profile before the user can access resources.
 utmRemoteAccessAllowed :: Lens' UpdateTeamMember (Maybe Bool)
@@ -139,13 +135,16 @@ instance ToQuery UpdateTeamMember where
         toQuery = const mempty
 
 -- | /See:/ 'updateTeamMemberResponse' smart constructor.
-data UpdateTeamMemberResponse = UpdateTeamMemberResponse'
-  { _utmrsUserARN             :: !(Maybe Text)
-  , _utmrsRemoteAccessAllowed :: !(Maybe Bool)
-  , _utmrsProjectRole         :: !(Maybe Text)
-  , _utmrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTeamMemberResponse = UpdateTeamMemberResponse'{_utmrsUserARN
+                                                          :: !(Maybe Text),
+                                                          _utmrsRemoteAccessAllowed
+                                                          :: !(Maybe Bool),
+                                                          _utmrsProjectRole ::
+                                                          !(Maybe Text),
+                                                          _utmrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateTeamMemberResponse' with the minimum fields required to make a request.
 --
@@ -161,14 +160,11 @@ data UpdateTeamMemberResponse = UpdateTeamMemberResponse'
 updateTeamMemberResponse
     :: Int -- ^ 'utmrsResponseStatus'
     -> UpdateTeamMemberResponse
-updateTeamMemberResponse pResponseStatus_ =
-  UpdateTeamMemberResponse'
-    { _utmrsUserARN = Nothing
-    , _utmrsRemoteAccessAllowed = Nothing
-    , _utmrsProjectRole = Nothing
-    , _utmrsResponseStatus = pResponseStatus_
-    }
-
+updateTeamMemberResponse pResponseStatus_
+  = UpdateTeamMemberResponse'{_utmrsUserARN = Nothing,
+                              _utmrsRemoteAccessAllowed = Nothing,
+                              _utmrsProjectRole = Nothing,
+                              _utmrsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the user whose team membership attributes were updated.
 utmrsUserARN :: Lens' UpdateTeamMemberResponse (Maybe Text)

@@ -43,11 +43,12 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteNotificationSubscription' smart constructor.
-data DeleteNotificationSubscription = DeleteNotificationSubscription'
-  { _dnsSubscriptionId :: !Text
-  , _dnsOrganizationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNotificationSubscription = DeleteNotificationSubscription'{_dnsSubscriptionId
+                                                                      :: !Text,
+                                                                      _dnsOrganizationId
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteNotificationSubscription' with the minimum fields required to make a request.
 --
@@ -60,12 +61,11 @@ deleteNotificationSubscription
     :: Text -- ^ 'dnsSubscriptionId'
     -> Text -- ^ 'dnsOrganizationId'
     -> DeleteNotificationSubscription
-deleteNotificationSubscription pSubscriptionId_ pOrganizationId_ =
-  DeleteNotificationSubscription'
-    { _dnsSubscriptionId = pSubscriptionId_
-    , _dnsOrganizationId = pOrganizationId_
-    }
-
+deleteNotificationSubscription pSubscriptionId_
+  pOrganizationId_
+  = DeleteNotificationSubscription'{_dnsSubscriptionId
+                                      = pSubscriptionId_,
+                                    _dnsOrganizationId = pOrganizationId_}
 
 -- | The ID of the subscription.
 dnsSubscriptionId :: Lens' DeleteNotificationSubscription Text
@@ -106,17 +106,16 @@ instance ToQuery DeleteNotificationSubscription where
         toQuery = const mempty
 
 -- | /See:/ 'deleteNotificationSubscriptionResponse' smart constructor.
-data DeleteNotificationSubscriptionResponse =
-  DeleteNotificationSubscriptionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteNotificationSubscriptionResponse = DeleteNotificationSubscriptionResponse'
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteNotificationSubscriptionResponse' with the minimum fields required to make a request.
 --
 deleteNotificationSubscriptionResponse
     :: DeleteNotificationSubscriptionResponse
-deleteNotificationSubscriptionResponse = DeleteNotificationSubscriptionResponse'
-
+deleteNotificationSubscriptionResponse
+  = DeleteNotificationSubscriptionResponse'
 
 instance NFData
            DeleteNotificationSubscriptionResponse

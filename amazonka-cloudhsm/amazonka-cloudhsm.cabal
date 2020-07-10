@@ -69,12 +69,17 @@ library
         , Network.AWS.CloudHSM.Waiters
 
     other-modules:
-          Network.AWS.CloudHSM.Types.Product
-        , Network.AWS.CloudHSM.Types.Sum
+          Network.AWS.CloudHSM.Types.ClientVersion
+        , Network.AWS.CloudHSM.Types.CloudHSMObjectState
+        , Network.AWS.CloudHSM.Types.HSMStatus
+        , Network.AWS.CloudHSM.Types.Product
+        , Network.AWS.CloudHSM.Types.SubscriptionType
+        , Network.AWS.CloudHSM.Types.Tag
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cloudhsm-test
     type:              exitcode-stdio-1.0
@@ -98,6 +103,7 @@ test-suite amazonka-cloudhsm-test
         , amazonka-cloudhsm
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

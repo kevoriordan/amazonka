@@ -49,10 +49,11 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'getHealthCheckLastFailureReason' smart constructor.
-newtype GetHealthCheckLastFailureReason = GetHealthCheckLastFailureReason'
-  { _ghclfrHealthCheckId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetHealthCheckLastFailureReason = GetHealthCheckLastFailureReason'{_ghclfrHealthCheckId
+                                                                           ::
+                                                                           Text}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'GetHealthCheckLastFailureReason' with the minimum fields required to make a request.
 --
@@ -62,9 +63,9 @@ newtype GetHealthCheckLastFailureReason = GetHealthCheckLastFailureReason'
 getHealthCheckLastFailureReason
     :: Text -- ^ 'ghclfrHealthCheckId'
     -> GetHealthCheckLastFailureReason
-getHealthCheckLastFailureReason pHealthCheckId_ =
-  GetHealthCheckLastFailureReason' {_ghclfrHealthCheckId = pHealthCheckId_}
-
+getHealthCheckLastFailureReason pHealthCheckId_
+  = GetHealthCheckLastFailureReason'{_ghclfrHealthCheckId
+                                       = pHealthCheckId_}
 
 -- | The ID for the health check for which you want the last failure reason. When you created the health check, @CreateHealthCheck@ returned the ID in the response, in the @HealthCheckId@ element.
 ghclfrHealthCheckId :: Lens' GetHealthCheckLastFailureReason Text
@@ -107,11 +108,14 @@ instance ToQuery GetHealthCheckLastFailureReason
 --
 --
 -- /See:/ 'getHealthCheckLastFailureReasonResponse' smart constructor.
-data GetHealthCheckLastFailureReasonResponse = GetHealthCheckLastFailureReasonResponse'
-  { _ghclfrrsResponseStatus          :: !Int
-  , _ghclfrrsHealthCheckObservations :: ![HealthCheckObservation]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetHealthCheckLastFailureReasonResponse = GetHealthCheckLastFailureReasonResponse'{_ghclfrrsResponseStatus
+                                                                                        ::
+                                                                                        !Int,
+                                                                                        _ghclfrrsHealthCheckObservations
+                                                                                        ::
+                                                                                        ![HealthCheckObservation]}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'GetHealthCheckLastFailureReasonResponse' with the minimum fields required to make a request.
 --
@@ -119,22 +123,22 @@ data GetHealthCheckLastFailureReasonResponse = GetHealthCheckLastFailureReasonRe
 --
 -- * 'ghclfrrsResponseStatus' - -- | The response status code.
 --
--- * 'ghclfrrsHealthCheckObservations' - A list that contains one @Observation@ element for each Amazon Route 53 health checker that is reporting a last failure reason.
+-- * 'ghclfrrsHealthCheckObservations' - A list that contains one @Observation@ element for each Amazon Route 53 health checker that is reporting a last failure reason. 
 getHealthCheckLastFailureReasonResponse
     :: Int -- ^ 'ghclfrrsResponseStatus'
     -> GetHealthCheckLastFailureReasonResponse
-getHealthCheckLastFailureReasonResponse pResponseStatus_ =
-  GetHealthCheckLastFailureReasonResponse'
-    { _ghclfrrsResponseStatus = pResponseStatus_
-    , _ghclfrrsHealthCheckObservations = mempty
-    }
-
+getHealthCheckLastFailureReasonResponse
+  pResponseStatus_
+  = GetHealthCheckLastFailureReasonResponse'{_ghclfrrsResponseStatus
+                                               = pResponseStatus_,
+                                             _ghclfrrsHealthCheckObservations =
+                                               mempty}
 
 -- | -- | The response status code.
 ghclfrrsResponseStatus :: Lens' GetHealthCheckLastFailureReasonResponse Int
 ghclfrrsResponseStatus = lens _ghclfrrsResponseStatus (\ s a -> s{_ghclfrrsResponseStatus = a})
 
--- | A list that contains one @Observation@ element for each Amazon Route 53 health checker that is reporting a last failure reason.
+-- | A list that contains one @Observation@ element for each Amazon Route 53 health checker that is reporting a last failure reason. 
 ghclfrrsHealthCheckObservations :: Lens' GetHealthCheckLastFailureReasonResponse [HealthCheckObservation]
 ghclfrrsHealthCheckObservations = lens _ghclfrrsHealthCheckObservations (\ s a -> s{_ghclfrrsHealthCheckObservations = a}) . _Coerce
 

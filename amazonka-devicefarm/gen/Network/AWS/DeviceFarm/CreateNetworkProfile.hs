@@ -56,21 +56,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createNetworkProfile' smart constructor.
-data CreateNetworkProfile = CreateNetworkProfile'
-  { _cnpUplinkJitterMs        :: !(Maybe Integer)
-  , _cnpUplinkLossPercent     :: !(Maybe Nat)
-  , _cnpDownlinkJitterMs      :: !(Maybe Integer)
-  , _cnpDownlinkLossPercent   :: !(Maybe Nat)
-  , _cnpType                  :: !(Maybe NetworkProfileType)
-  , _cnpUplinkDelayMs         :: !(Maybe Integer)
-  , _cnpUplinkBandwidthBits   :: !(Maybe Integer)
-  , _cnpDescription           :: !(Maybe Text)
-  , _cnpDownlinkDelayMs       :: !(Maybe Integer)
-  , _cnpDownlinkBandwidthBits :: !(Maybe Integer)
-  , _cnpProjectARN            :: !Text
-  , _cnpName                  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNetworkProfile = CreateNetworkProfile'{_cnpUplinkJitterMs
+                                                  :: !(Maybe Integer),
+                                                  _cnpUplinkLossPercent ::
+                                                  !(Maybe Nat),
+                                                  _cnpDownlinkJitterMs ::
+                                                  !(Maybe Integer),
+                                                  _cnpDownlinkLossPercent ::
+                                                  !(Maybe Nat),
+                                                  _cnpType ::
+                                                  !(Maybe NetworkProfileType),
+                                                  _cnpUplinkDelayMs ::
+                                                  !(Maybe Integer),
+                                                  _cnpUplinkBandwidthBits ::
+                                                  !(Maybe Integer),
+                                                  _cnpDescription ::
+                                                  !(Maybe Text),
+                                                  _cnpDownlinkDelayMs ::
+                                                  !(Maybe Integer),
+                                                  _cnpDownlinkBandwidthBits ::
+                                                  !(Maybe Integer),
+                                                  _cnpProjectARN :: !Text,
+                                                  _cnpName :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateNetworkProfile' with the minimum fields required to make a request.
 --
@@ -84,7 +92,7 @@ data CreateNetworkProfile = CreateNetworkProfile'
 --
 -- * 'cnpDownlinkLossPercent' - Proportion of received packets that fail to arrive from 0 to 100 percent.
 --
--- * 'cnpType' - The type of network profile you wish to create. Valid values are listed below.
+-- * 'cnpType' - The type of network profile to create. Valid values are listed here.
 --
 -- * 'cnpUplinkDelayMs' - Delay time for all packets to destination in milliseconds as an integer from 0 to 2000.
 --
@@ -98,27 +106,22 @@ data CreateNetworkProfile = CreateNetworkProfile'
 --
 -- * 'cnpProjectARN' - The Amazon Resource Name (ARN) of the project for which you want to create a network profile.
 --
--- * 'cnpName' - The name you wish to specify for the new network profile.
+-- * 'cnpName' - The name for the new network profile.
 createNetworkProfile
     :: Text -- ^ 'cnpProjectARN'
     -> Text -- ^ 'cnpName'
     -> CreateNetworkProfile
-createNetworkProfile pProjectARN_ pName_ =
-  CreateNetworkProfile'
-    { _cnpUplinkJitterMs = Nothing
-    , _cnpUplinkLossPercent = Nothing
-    , _cnpDownlinkJitterMs = Nothing
-    , _cnpDownlinkLossPercent = Nothing
-    , _cnpType = Nothing
-    , _cnpUplinkDelayMs = Nothing
-    , _cnpUplinkBandwidthBits = Nothing
-    , _cnpDescription = Nothing
-    , _cnpDownlinkDelayMs = Nothing
-    , _cnpDownlinkBandwidthBits = Nothing
-    , _cnpProjectARN = pProjectARN_
-    , _cnpName = pName_
-    }
-
+createNetworkProfile pProjectARN_ pName_
+  = CreateNetworkProfile'{_cnpUplinkJitterMs = Nothing,
+                          _cnpUplinkLossPercent = Nothing,
+                          _cnpDownlinkJitterMs = Nothing,
+                          _cnpDownlinkLossPercent = Nothing,
+                          _cnpType = Nothing, _cnpUplinkDelayMs = Nothing,
+                          _cnpUplinkBandwidthBits = Nothing,
+                          _cnpDescription = Nothing,
+                          _cnpDownlinkDelayMs = Nothing,
+                          _cnpDownlinkBandwidthBits = Nothing,
+                          _cnpProjectARN = pProjectARN_, _cnpName = pName_}
 
 -- | Time variation in the delay of received packets in milliseconds as an integer from 0 to 2000.
 cnpUplinkJitterMs :: Lens' CreateNetworkProfile (Maybe Integer)
@@ -136,7 +139,7 @@ cnpDownlinkJitterMs = lens _cnpDownlinkJitterMs (\ s a -> s{_cnpDownlinkJitterMs
 cnpDownlinkLossPercent :: Lens' CreateNetworkProfile (Maybe Natural)
 cnpDownlinkLossPercent = lens _cnpDownlinkLossPercent (\ s a -> s{_cnpDownlinkLossPercent = a}) . mapping _Nat
 
--- | The type of network profile you wish to create. Valid values are listed below.
+-- | The type of network profile to create. Valid values are listed here.
 cnpType :: Lens' CreateNetworkProfile (Maybe NetworkProfileType)
 cnpType = lens _cnpType (\ s a -> s{_cnpType = a})
 
@@ -164,7 +167,7 @@ cnpDownlinkBandwidthBits = lens _cnpDownlinkBandwidthBits (\ s a -> s{_cnpDownli
 cnpProjectARN :: Lens' CreateNetworkProfile Text
 cnpProjectARN = lens _cnpProjectARN (\ s a -> s{_cnpProjectARN = a})
 
--- | The name you wish to specify for the new network profile.
+-- | The name for the new network profile.
 cnpName :: Lens' CreateNetworkProfile Text
 cnpName = lens _cnpName (\ s a -> s{_cnpName = a})
 
@@ -219,11 +222,14 @@ instance ToQuery CreateNetworkProfile where
         toQuery = const mempty
 
 -- | /See:/ 'createNetworkProfileResponse' smart constructor.
-data CreateNetworkProfileResponse = CreateNetworkProfileResponse'
-  { _cnprsNetworkProfile :: !(Maybe NetworkProfile)
-  , _cnprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateNetworkProfileResponse = CreateNetworkProfileResponse'{_cnprsNetworkProfile
+                                                                  ::
+                                                                  !(Maybe
+                                                                      NetworkProfile),
+                                                                  _cnprsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'CreateNetworkProfileResponse' with the minimum fields required to make a request.
 --
@@ -235,10 +241,10 @@ data CreateNetworkProfileResponse = CreateNetworkProfileResponse'
 createNetworkProfileResponse
     :: Int -- ^ 'cnprsResponseStatus'
     -> CreateNetworkProfileResponse
-createNetworkProfileResponse pResponseStatus_ =
-  CreateNetworkProfileResponse'
-    {_cnprsNetworkProfile = Nothing, _cnprsResponseStatus = pResponseStatus_}
-
+createNetworkProfileResponse pResponseStatus_
+  = CreateNetworkProfileResponse'{_cnprsNetworkProfile
+                                    = Nothing,
+                                  _cnprsResponseStatus = pResponseStatus_}
 
 -- | The network profile that is returned by the create network profile request.
 cnprsNetworkProfile :: Lens' CreateNetworkProfileResponse (Maybe NetworkProfile)

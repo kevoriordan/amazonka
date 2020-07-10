@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Represents the failure of a job as returned to the pipeline by a job worker. Only used for custom actions.
+-- Represents the failure of a job as returned to the pipeline by a job worker. Used for custom actions only.
 --
 --
 module Network.AWS.CodePipeline.PutJobFailureResult
@@ -42,34 +42,33 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a PutJobFailureResult action.
+-- | Represents the input of a @PutJobFailureResult@ action.
 --
 --
 --
 -- /See:/ 'putJobFailureResult' smart constructor.
-data PutJobFailureResult = PutJobFailureResult'
-  { _pjfrJobId          :: !Text
-  , _pjfrFailureDetails :: !FailureDetails
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutJobFailureResult = PutJobFailureResult'{_pjfrJobId
+                                                :: !Text,
+                                                _pjfrFailureDetails ::
+                                                !FailureDetails}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutJobFailureResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pjfrJobId' - The unique system-generated ID of the job that failed. This is the same ID returned from PollForJobs.
+-- * 'pjfrJobId' - The unique system-generated ID of the job that failed. This is the same ID returned from @PollForJobs@ .
 --
 -- * 'pjfrFailureDetails' - The details about the failure of a job.
 putJobFailureResult
     :: Text -- ^ 'pjfrJobId'
     -> FailureDetails -- ^ 'pjfrFailureDetails'
     -> PutJobFailureResult
-putJobFailureResult pJobId_ pFailureDetails_ =
-  PutJobFailureResult'
-    {_pjfrJobId = pJobId_, _pjfrFailureDetails = pFailureDetails_}
+putJobFailureResult pJobId_ pFailureDetails_
+  = PutJobFailureResult'{_pjfrJobId = pJobId_,
+                         _pjfrFailureDetails = pFailureDetails_}
 
-
--- | The unique system-generated ID of the job that failed. This is the same ID returned from PollForJobs.
+-- | The unique system-generated ID of the job that failed. This is the same ID returned from @PollForJobs@ .
 pjfrJobId :: Lens' PutJobFailureResult Text
 pjfrJobId = lens _pjfrJobId (\ s a -> s{_pjfrJobId = a})
 
@@ -111,16 +110,15 @@ instance ToQuery PutJobFailureResult where
         toQuery = const mempty
 
 -- | /See:/ 'putJobFailureResultResponse' smart constructor.
-data PutJobFailureResultResponse =
-  PutJobFailureResultResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutJobFailureResultResponse = PutJobFailureResultResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'PutJobFailureResultResponse' with the minimum fields required to make a request.
 --
 putJobFailureResultResponse
     :: PutJobFailureResultResponse
-putJobFailureResultResponse = PutJobFailureResultResponse'
-
+putJobFailureResultResponse
+  = PutJobFailureResultResponse'
 
 instance NFData PutJobFailureResultResponse where

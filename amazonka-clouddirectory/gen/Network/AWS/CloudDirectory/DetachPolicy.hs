@@ -46,12 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detachPolicy' smart constructor.
-data DetachPolicy = DetachPolicy'
-  { _dpDirectoryARN    :: !Text
-  , _dpPolicyReference :: !ObjectReference
-  , _dpObjectReference :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetachPolicy = DetachPolicy'{_dpDirectoryARN ::
+                                  !Text,
+                                  _dpPolicyReference :: !ObjectReference,
+                                  _dpObjectReference :: !ObjectReference}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DetachPolicy' with the minimum fields required to make a request.
 --
@@ -67,13 +66,11 @@ detachPolicy
     -> ObjectReference -- ^ 'dpPolicyReference'
     -> ObjectReference -- ^ 'dpObjectReference'
     -> DetachPolicy
-detachPolicy pDirectoryARN_ pPolicyReference_ pObjectReference_ =
-  DetachPolicy'
-    { _dpDirectoryARN = pDirectoryARN_
-    , _dpPolicyReference = pPolicyReference_
-    , _dpObjectReference = pObjectReference_
-    }
-
+detachPolicy pDirectoryARN_ pPolicyReference_
+  pObjectReference_
+  = DetachPolicy'{_dpDirectoryARN = pDirectoryARN_,
+                  _dpPolicyReference = pPolicyReference_,
+                  _dpObjectReference = pObjectReference_}
 
 -- | The Amazon Resource Name (ARN) that is associated with the 'Directory' where both objects reside. For more information, see 'arns' .
 dpDirectoryARN :: Lens' DetachPolicy Text
@@ -119,10 +116,10 @@ instance ToQuery DetachPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'detachPolicyResponse' smart constructor.
-newtype DetachPolicyResponse = DetachPolicyResponse'
-  { _dprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DetachPolicyResponse = DetachPolicyResponse'{_dprsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DetachPolicyResponse' with the minimum fields required to make a request.
 --
@@ -132,9 +129,9 @@ newtype DetachPolicyResponse = DetachPolicyResponse'
 detachPolicyResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DetachPolicyResponse
-detachPolicyResponse pResponseStatus_ =
-  DetachPolicyResponse' {_dprsResponseStatus = pResponseStatus_}
-
+detachPolicyResponse pResponseStatus_
+  = DetachPolicyResponse'{_dprsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dprsResponseStatus :: Lens' DetachPolicyResponse Int

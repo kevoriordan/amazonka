@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface supports sending traffic to a single virtual private cloud (VPC).
+-- Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.
 --
 --
 module Network.AWS.DirectConnect.CreatePrivateVirtualInterface
@@ -36,6 +36,7 @@ module Network.AWS.DirectConnect.CreatePrivateVirtualInterface
     -- * Response Lenses
     , viBgpPeers
     , viVirtualGatewayId
+    , viMtu
     , viRouteFilterPrefixes
     , viCustomerAddress
     , viVlan
@@ -49,10 +50,14 @@ module Network.AWS.DirectConnect.CreatePrivateVirtualInterface
     , viVirtualInterfaceType
     , viAsn
     , viAuthKey
+    , viJumboFrameCapable
     , viCustomerRouterConfig
     , viOwnerAccount
+    , viRegion
     , viVirtualInterfaceName
+    , viAwsDeviceV2
     , viVirtualInterfaceId
+    , viTags
     ) where
 
 import Network.AWS.DirectConnect.Types
@@ -62,40 +67,38 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the CreatePrivateVirtualInterface operation.
---
---
---
--- /See:/ 'createPrivateVirtualInterface' smart constructor.
-data CreatePrivateVirtualInterface = CreatePrivateVirtualInterface'
-  { _creConnectionId               :: !Text
-  , _creNewPrivateVirtualInterface :: !NewPrivateVirtualInterface
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createPrivateVirtualInterface' smart constructor.
+data CreatePrivateVirtualInterface = CreatePrivateVirtualInterface'{_creConnectionId
+                                                                    :: !Text,
+                                                                    _creNewPrivateVirtualInterface
+                                                                    ::
+                                                                    !NewPrivateVirtualInterface}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreatePrivateVirtualInterface' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'creConnectionId' - Undocumented member.
+-- * 'creConnectionId' - The ID of the connection.
 --
--- * 'creNewPrivateVirtualInterface' - Detailed information for the private virtual interface to be created. Default: None
+-- * 'creNewPrivateVirtualInterface' - Information about the private virtual interface.
 createPrivateVirtualInterface
     :: Text -- ^ 'creConnectionId'
     -> NewPrivateVirtualInterface -- ^ 'creNewPrivateVirtualInterface'
     -> CreatePrivateVirtualInterface
-createPrivateVirtualInterface pConnectionId_ pNewPrivateVirtualInterface_ =
-  CreatePrivateVirtualInterface'
-    { _creConnectionId = pConnectionId_
-    , _creNewPrivateVirtualInterface = pNewPrivateVirtualInterface_
-    }
+createPrivateVirtualInterface pConnectionId_
+  pNewPrivateVirtualInterface_
+  = CreatePrivateVirtualInterface'{_creConnectionId =
+                                     pConnectionId_,
+                                   _creNewPrivateVirtualInterface =
+                                     pNewPrivateVirtualInterface_}
 
-
--- | Undocumented member.
+-- | The ID of the connection.
 creConnectionId :: Lens' CreatePrivateVirtualInterface Text
 creConnectionId = lens _creConnectionId (\ s a -> s{_creConnectionId = a})
 
--- | Detailed information for the private virtual interface to be created. Default: None
+-- | Information about the private virtual interface.
 creNewPrivateVirtualInterface :: Lens' CreatePrivateVirtualInterface NewPrivateVirtualInterface
 creNewPrivateVirtualInterface = lens _creNewPrivateVirtualInterface (\ s a -> s{_creNewPrivateVirtualInterface = a})
 

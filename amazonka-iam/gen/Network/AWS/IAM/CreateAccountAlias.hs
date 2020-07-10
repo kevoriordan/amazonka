@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an alias for your AWS account. For information about using an AWS account alias, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html Using an Alias for Your AWS Account ID> in the /IAM User Guide/ .
+-- Creates an alias for your AWS account. For information about using an AWS account alias, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html Using an Alias for Your AWS Account ID> in the /IAM User Guide/ .
 --
 --
 module Network.AWS.IAM.CreateAccountAlias
@@ -42,24 +42,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createAccountAlias' smart constructor.
-newtype CreateAccountAlias = CreateAccountAlias'
-  { _caaAccountAlias :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateAccountAlias = CreateAccountAlias'{_caaAccountAlias
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateAccountAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'caaAccountAlias' - The account alias to create. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
+-- * 'caaAccountAlias' - The account alias to create. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
 createAccountAlias
     :: Text -- ^ 'caaAccountAlias'
     -> CreateAccountAlias
-createAccountAlias pAccountAlias_ =
-  CreateAccountAlias' {_caaAccountAlias = pAccountAlias_}
+createAccountAlias pAccountAlias_
+  = CreateAccountAlias'{_caaAccountAlias =
+                          pAccountAlias_}
 
-
--- | The account alias to create. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
+-- | The account alias to create. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.
 caaAccountAlias :: Lens' CreateAccountAlias Text
 caaAccountAlias = lens _caaAccountAlias (\ s a -> s{_caaAccountAlias = a})
 
@@ -87,16 +87,15 @@ instance ToQuery CreateAccountAlias where
                "AccountAlias" =: _caaAccountAlias]
 
 -- | /See:/ 'createAccountAliasResponse' smart constructor.
-data CreateAccountAliasResponse =
-  CreateAccountAliasResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAccountAliasResponse = CreateAccountAliasResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CreateAccountAliasResponse' with the minimum fields required to make a request.
 --
 createAccountAliasResponse
     :: CreateAccountAliasResponse
-createAccountAliasResponse = CreateAccountAliasResponse'
-
+createAccountAliasResponse
+  = CreateAccountAliasResponse'
 
 instance NFData CreateAccountAliasResponse where

@@ -29,8 +29,8 @@ module Network.AWS.DeviceFarm.ListSuites
       listSuites
     , ListSuites
     -- * Request Lenses
-    , lNextToken
-    , lArn
+    , lssNextToken
+    , lssArn
 
     -- * Destructuring the Response
     , listSuitesResponse
@@ -54,39 +54,39 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listSuites' smart constructor.
-data ListSuites = ListSuites'
-  { _lNextToken :: !(Maybe Text)
-  , _lArn       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSuites = ListSuites'{_lssNextToken ::
+                              !(Maybe Text),
+                              _lssArn :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSuites' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+-- * 'lssNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 --
--- * 'lArn' - The job's Amazon Resource Name (ARN).
+-- * 'lssArn' - The job's Amazon Resource Name (ARN).
 listSuites
-    :: Text -- ^ 'lArn'
+    :: Text -- ^ 'lssArn'
     -> ListSuites
-listSuites pArn_ = ListSuites' {_lNextToken = Nothing, _lArn = pArn_}
-
+listSuites pArn_
+  = ListSuites'{_lssNextToken = Nothing,
+                _lssArn = pArn_}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
-lNextToken :: Lens' ListSuites (Maybe Text)
-lNextToken = lens _lNextToken (\ s a -> s{_lNextToken = a})
+lssNextToken :: Lens' ListSuites (Maybe Text)
+lssNextToken = lens _lssNextToken (\ s a -> s{_lssNextToken = a})
 
 -- | The job's Amazon Resource Name (ARN).
-lArn :: Lens' ListSuites Text
-lArn = lens _lArn (\ s a -> s{_lArn = a})
+lssArn :: Lens' ListSuites Text
+lssArn = lens _lssArn (\ s a -> s{_lssArn = a})
 
 instance AWSPager ListSuites where
         page rq rs
           | stop (rs ^. lsrsNextToken) = Nothing
           | stop (rs ^. lsrsSuites) = Nothing
           | otherwise =
-            Just $ rq & lNextToken .~ rs ^. lsrsNextToken
+            Just $ rq & lssNextToken .~ rs ^. lsrsNextToken
 
 instance AWSRequest ListSuites where
         type Rs ListSuites = ListSuitesResponse
@@ -115,8 +115,8 @@ instance ToJSON ListSuites where
         toJSON ListSuites'{..}
           = object
               (catMaybes
-                 [("nextToken" .=) <$> _lNextToken,
-                  Just ("arn" .= _lArn)])
+                 [("nextToken" .=) <$> _lssNextToken,
+                  Just ("arn" .= _lssArn)])
 
 instance ToPath ListSuites where
         toPath = const "/"
@@ -129,18 +129,17 @@ instance ToQuery ListSuites where
 --
 --
 -- /See:/ 'listSuitesResponse' smart constructor.
-data ListSuitesResponse = ListSuitesResponse'
-  { _lsrsNextToken      :: !(Maybe Text)
-  , _lsrsSuites         :: !(Maybe [Suite])
-  , _lsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSuitesResponse = ListSuitesResponse'{_lsrsNextToken
+                                              :: !(Maybe Text),
+                                              _lsrsSuites :: !(Maybe [Suite]),
+                                              _lsrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSuitesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lsrsNextToken' - If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+-- * 'lsrsNextToken' - If the number of items that are returned is significantly large, this is an identifier that is also returned. It can be used in a subsequent call to this operation to return the next set of items in the list.
 --
 -- * 'lsrsSuites' - Information about the suites.
 --
@@ -148,15 +147,12 @@ data ListSuitesResponse = ListSuitesResponse'
 listSuitesResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListSuitesResponse
-listSuitesResponse pResponseStatus_ =
-  ListSuitesResponse'
-    { _lsrsNextToken = Nothing
-    , _lsrsSuites = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
+listSuitesResponse pResponseStatus_
+  = ListSuitesResponse'{_lsrsNextToken = Nothing,
+                        _lsrsSuites = Nothing,
+                        _lsrsResponseStatus = pResponseStatus_}
 
-
--- | If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+-- | If the number of items that are returned is significantly large, this is an identifier that is also returned. It can be used in a subsequent call to this operation to return the next set of items in the list.
 lsrsNextToken :: Lens' ListSuitesResponse (Maybe Text)
 lsrsNextToken = lens _lsrsNextToken (\ s a -> s{_lsrsNextToken = a})
 

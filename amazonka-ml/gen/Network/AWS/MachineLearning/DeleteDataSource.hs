@@ -49,10 +49,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteDataSource' smart constructor.
-newtype DeleteDataSource = DeleteDataSource'
-  { _ddsDataSourceId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDataSource = DeleteDataSource'{_ddsDataSourceId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDataSource' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ newtype DeleteDataSource = DeleteDataSource'
 deleteDataSource
     :: Text -- ^ 'ddsDataSourceId'
     -> DeleteDataSource
-deleteDataSource pDataSourceId_ =
-  DeleteDataSource' {_ddsDataSourceId = pDataSourceId_}
-
+deleteDataSource pDataSourceId_
+  = DeleteDataSource'{_ddsDataSourceId =
+                        pDataSourceId_}
 
 -- | A user-supplied ID that uniquely identifies the @DataSource@ .
 ddsDataSourceId :: Lens' DeleteDataSource Text
@@ -109,11 +108,12 @@ instance ToQuery DeleteDataSource where
 --
 --
 -- /See:/ 'deleteDataSourceResponse' smart constructor.
-data DeleteDataSourceResponse = DeleteDataSourceResponse'
-  { _ddsrsDataSourceId   :: !(Maybe Text)
-  , _ddsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDataSourceResponse = DeleteDataSourceResponse'{_ddsrsDataSourceId
+                                                          :: !(Maybe Text),
+                                                          _ddsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +125,10 @@ data DeleteDataSourceResponse = DeleteDataSourceResponse'
 deleteDataSourceResponse
     :: Int -- ^ 'ddsrsResponseStatus'
     -> DeleteDataSourceResponse
-deleteDataSourceResponse pResponseStatus_ =
-  DeleteDataSourceResponse'
-    {_ddsrsDataSourceId = Nothing, _ddsrsResponseStatus = pResponseStatus_}
-
+deleteDataSourceResponse pResponseStatus_
+  = DeleteDataSourceResponse'{_ddsrsDataSourceId =
+                                Nothing,
+                              _ddsrsResponseStatus = pResponseStatus_}
 
 -- | A user-supplied ID that uniquely identifies the @DataSource@ . This value should be identical to the value of the @DataSourceID@ in the request.
 ddsrsDataSourceId :: Lens' DeleteDataSourceResponse (Maybe Text)

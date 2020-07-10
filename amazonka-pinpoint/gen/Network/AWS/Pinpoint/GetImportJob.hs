@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about an import job.
+-- Retrieves information about the status and settings of a specific import job for an application.
+--
+--
 module Network.AWS.Pinpoint.GetImportJob
     (
     -- * Creating a Request
@@ -44,32 +46,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getImportJob' smart constructor.
-data GetImportJob = GetImportJob'
-  { _gijApplicationId :: !Text
-  , _gijJobId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetImportJob = GetImportJob'{_gijApplicationId
+                                  :: !Text,
+                                  _gijJobId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetImportJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gijApplicationId' - Undocumented member.
+-- * 'gijApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
--- * 'gijJobId' - Undocumented member.
+-- * 'gijJobId' - The unique identifier for the job.
 getImportJob
     :: Text -- ^ 'gijApplicationId'
     -> Text -- ^ 'gijJobId'
     -> GetImportJob
-getImportJob pApplicationId_ pJobId_ =
-  GetImportJob' {_gijApplicationId = pApplicationId_, _gijJobId = pJobId_}
+getImportJob pApplicationId_ pJobId_
+  = GetImportJob'{_gijApplicationId = pApplicationId_,
+                  _gijJobId = pJobId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gijApplicationId :: Lens' GetImportJob Text
 gijApplicationId = lens _gijApplicationId (\ s a -> s{_gijApplicationId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the job.
 gijJobId :: Lens' GetImportJob Text
 gijJobId = lens _gijJobId (\ s a -> s{_gijJobId = a})
 
@@ -103,11 +104,11 @@ instance ToQuery GetImportJob where
         toQuery = const mempty
 
 -- | /See:/ 'getImportJobResponse' smart constructor.
-data GetImportJobResponse = GetImportJobResponse'
-  { _gijrsResponseStatus    :: !Int
-  , _gijrsImportJobResponse :: !ImportJobResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetImportJobResponse = GetImportJobResponse'{_gijrsResponseStatus
+                                                  :: !Int,
+                                                  _gijrsImportJobResponse ::
+                                                  !ImportJobResponse}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetImportJobResponse' with the minimum fields required to make a request.
 --
@@ -120,12 +121,11 @@ getImportJobResponse
     :: Int -- ^ 'gijrsResponseStatus'
     -> ImportJobResponse -- ^ 'gijrsImportJobResponse'
     -> GetImportJobResponse
-getImportJobResponse pResponseStatus_ pImportJobResponse_ =
-  GetImportJobResponse'
-    { _gijrsResponseStatus = pResponseStatus_
-    , _gijrsImportJobResponse = pImportJobResponse_
-    }
-
+getImportJobResponse pResponseStatus_
+  pImportJobResponse_
+  = GetImportJobResponse'{_gijrsResponseStatus =
+                            pResponseStatus_,
+                          _gijrsImportJobResponse = pImportJobResponse_}
 
 -- | -- | The response status code.
 gijrsResponseStatus :: Lens' GetImportJobResponse Int

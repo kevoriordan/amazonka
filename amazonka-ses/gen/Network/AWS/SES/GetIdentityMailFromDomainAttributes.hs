@@ -46,15 +46,16 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to return the Amazon SES custom MAIL FROM attributes for a list of identities. For information about using a custom MAIL FROM domain, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html Amazon SES Developer Guide> .
+-- | Represents a request to return the Amazon SES custom MAIL FROM attributes for a list of identities. For information about using a custom MAIL FROM domain, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'getIdentityMailFromDomainAttributes' smart constructor.
-newtype GetIdentityMailFromDomainAttributes = GetIdentityMailFromDomainAttributes'
-  { _gimfdaIdentities :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetIdentityMailFromDomainAttributes = GetIdentityMailFromDomainAttributes'{_gimfdaIdentities
+                                                                                   ::
+                                                                                   [Text]}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'GetIdentityMailFromDomainAttributes' with the minimum fields required to make a request.
 --
@@ -63,9 +64,9 @@ newtype GetIdentityMailFromDomainAttributes = GetIdentityMailFromDomainAttribute
 -- * 'gimfdaIdentities' - A list of one or more identities.
 getIdentityMailFromDomainAttributes
     :: GetIdentityMailFromDomainAttributes
-getIdentityMailFromDomainAttributes =
-  GetIdentityMailFromDomainAttributes' {_gimfdaIdentities = mempty}
-
+getIdentityMailFromDomainAttributes
+  = GetIdentityMailFromDomainAttributes'{_gimfdaIdentities
+                                           = mempty}
 
 -- | A list of one or more identities.
 gimfdaIdentities :: Lens' GetIdentityMailFromDomainAttributes [Text]
@@ -117,11 +118,17 @@ instance ToQuery GetIdentityMailFromDomainAttributes
 --
 --
 -- /See:/ 'getIdentityMailFromDomainAttributesResponse' smart constructor.
-data GetIdentityMailFromDomainAttributesResponse = GetIdentityMailFromDomainAttributesResponse'
-  { _gimfdarsResponseStatus :: !Int
-  , _gimfdarsMailFromDomainAttributes :: !(Map Text IdentityMailFromDomainAttributes)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIdentityMailFromDomainAttributesResponse = GetIdentityMailFromDomainAttributesResponse'{_gimfdarsResponseStatus
+                                                                                                ::
+                                                                                                !Int,
+                                                                                                _gimfdarsMailFromDomainAttributes
+                                                                                                ::
+                                                                                                !(Map
+                                                                                                    Text
+                                                                                                    IdentityMailFromDomainAttributes)}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'GetIdentityMailFromDomainAttributesResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +140,12 @@ data GetIdentityMailFromDomainAttributesResponse = GetIdentityMailFromDomainAttr
 getIdentityMailFromDomainAttributesResponse
     :: Int -- ^ 'gimfdarsResponseStatus'
     -> GetIdentityMailFromDomainAttributesResponse
-getIdentityMailFromDomainAttributesResponse pResponseStatus_ =
-  GetIdentityMailFromDomainAttributesResponse'
-    { _gimfdarsResponseStatus = pResponseStatus_
-    , _gimfdarsMailFromDomainAttributes = mempty
-    }
-
+getIdentityMailFromDomainAttributesResponse
+  pResponseStatus_
+  = GetIdentityMailFromDomainAttributesResponse'{_gimfdarsResponseStatus
+                                                   = pResponseStatus_,
+                                                 _gimfdarsMailFromDomainAttributes
+                                                   = mempty}
 
 -- | -- | The response status code.
 gimfdarsResponseStatus :: Lens' GetIdentityMailFromDomainAttributesResponse Int

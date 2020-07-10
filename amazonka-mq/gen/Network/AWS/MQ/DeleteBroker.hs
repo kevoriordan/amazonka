@@ -43,10 +43,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteBroker' smart constructor.
-newtype DeleteBroker = DeleteBroker'
-  { _dbBrokerId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBroker = DeleteBroker'{_dbBrokerId ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBroker' with the minimum fields required to make a request.
 --
@@ -56,8 +55,8 @@ newtype DeleteBroker = DeleteBroker'
 deleteBroker
     :: Text -- ^ 'dbBrokerId'
     -> DeleteBroker
-deleteBroker pBrokerId_ = DeleteBroker' {_dbBrokerId = pBrokerId_}
-
+deleteBroker pBrokerId_
+  = DeleteBroker'{_dbBrokerId = pBrokerId_}
 
 -- | The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
 dbBrokerId :: Lens' DeleteBroker Text
@@ -91,11 +90,10 @@ instance ToQuery DeleteBroker where
         toQuery = const mempty
 
 -- | /See:/ 'deleteBrokerResponse' smart constructor.
-data DeleteBrokerResponse = DeleteBrokerResponse'
-  { _drsBrokerId       :: !(Maybe Text)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBrokerResponse = DeleteBrokerResponse'{_drsBrokerId
+                                                  :: !(Maybe Text),
+                                                  _drsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBrokerResponse' with the minimum fields required to make a request.
 --
@@ -107,10 +105,9 @@ data DeleteBrokerResponse = DeleteBrokerResponse'
 deleteBrokerResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteBrokerResponse
-deleteBrokerResponse pResponseStatus_ =
-  DeleteBrokerResponse'
-    {_drsBrokerId = Nothing, _drsResponseStatus = pResponseStatus_}
-
+deleteBrokerResponse pResponseStatus_
+  = DeleteBrokerResponse'{_drsBrokerId = Nothing,
+                          _drsResponseStatus = pResponseStatus_}
 
 -- | The unique ID that Amazon MQ generates for the broker.
 drsBrokerId :: Lens' DeleteBrokerResponse (Maybe Text)

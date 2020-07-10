@@ -23,6 +23,8 @@
 --
 -- /Important:/ Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).
 --
+-- Polling with @GetActivityTask@ can cause latency in some implementations. See <https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html Avoid Latency When Polling for Activity Tasks> in the Step Functions Developer Guide.
+--
 module Network.AWS.StepFunctions.GetActivityTask
     (
     -- * Creating a Request
@@ -49,11 +51,10 @@ import Network.AWS.StepFunctions.Types
 import Network.AWS.StepFunctions.Types.Product
 
 -- | /See:/ 'getActivityTask' smart constructor.
-data GetActivityTask = GetActivityTask'
-  { _gatWorkerName  :: !(Maybe Text)
-  , _gatActivityARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetActivityTask = GetActivityTask'{_gatWorkerName
+                                        :: !(Maybe Text),
+                                        _gatActivityARN :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetActivityTask' with the minimum fields required to make a request.
 --
@@ -65,9 +66,9 @@ data GetActivityTask = GetActivityTask'
 getActivityTask
     :: Text -- ^ 'gatActivityARN'
     -> GetActivityTask
-getActivityTask pActivityARN_ =
-  GetActivityTask' {_gatWorkerName = Nothing, _gatActivityARN = pActivityARN_}
-
+getActivityTask pActivityARN_
+  = GetActivityTask'{_gatWorkerName = Nothing,
+                     _gatActivityARN = pActivityARN_}
 
 -- | You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
 gatWorkerName :: Lens' GetActivityTask (Maybe Text)
@@ -114,12 +115,15 @@ instance ToQuery GetActivityTask where
         toQuery = const mempty
 
 -- | /See:/ 'getActivityTaskResponse' smart constructor.
-data GetActivityTaskResponse = GetActivityTaskResponse'
-  { _gatrsInput          :: !(Maybe Text)
-  , _gatrsTaskToken      :: !(Maybe Text)
-  , _gatrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetActivityTaskResponse = GetActivityTaskResponse'{_gatrsInput
+                                                        ::
+                                                        !(Maybe
+                                                            (Sensitive Text)),
+                                                        _gatrsTaskToken ::
+                                                        !(Maybe Text),
+                                                        _gatrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetActivityTaskResponse' with the minimum fields required to make a request.
 --
@@ -133,17 +137,14 @@ data GetActivityTaskResponse = GetActivityTaskResponse'
 getActivityTaskResponse
     :: Int -- ^ 'gatrsResponseStatus'
     -> GetActivityTaskResponse
-getActivityTaskResponse pResponseStatus_ =
-  GetActivityTaskResponse'
-    { _gatrsInput = Nothing
-    , _gatrsTaskToken = Nothing
-    , _gatrsResponseStatus = pResponseStatus_
-    }
-
+getActivityTaskResponse pResponseStatus_
+  = GetActivityTaskResponse'{_gatrsInput = Nothing,
+                             _gatrsTaskToken = Nothing,
+                             _gatrsResponseStatus = pResponseStatus_}
 
 -- | The string that contains the JSON input data for the task.
 gatrsInput :: Lens' GetActivityTaskResponse (Maybe Text)
-gatrsInput = lens _gatrsInput (\ s a -> s{_gatrsInput = a})
+gatrsInput = lens _gatrsInput (\ s a -> s{_gatrsInput = a}) . mapping _Sensitive
 
 -- | A token that identifies the scheduled task. This token must be copied and included in subsequent calls to 'SendTaskHeartbeat' , 'SendTaskSuccess' or 'SendTaskFailure' in order to report the progress or completion of the task.
 gatrsTaskToken :: Lens' GetActivityTaskResponse (Maybe Text)

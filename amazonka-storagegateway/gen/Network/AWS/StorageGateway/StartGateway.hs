@@ -46,15 +46,14 @@ import Network.AWS.Response
 import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
--- | A JSON object containing the of the gateway to start.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway to start.
 --
 --
 --
 -- /See:/ 'startGateway' smart constructor.
-newtype StartGateway = StartGateway'
-  { _sgGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartGateway = StartGateway'{_sgGatewayARN ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartGateway' with the minimum fields required to make a request.
 --
@@ -64,8 +63,8 @@ newtype StartGateway = StartGateway'
 startGateway
     :: Text -- ^ 'sgGatewayARN'
     -> StartGateway
-startGateway pGatewayARN_ = StartGateway' {_sgGatewayARN = pGatewayARN_}
-
+startGateway pGatewayARN_
+  = StartGateway'{_sgGatewayARN = pGatewayARN_}
 
 -- | Undocumented member.
 sgGatewayARN :: Lens' StartGateway Text
@@ -105,16 +104,15 @@ instance ToPath StartGateway where
 instance ToQuery StartGateway where
         toQuery = const mempty
 
--- | A JSON object containing the of the gateway that was restarted.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway that was restarted.
 --
 --
 --
 -- /See:/ 'startGatewayResponse' smart constructor.
-data StartGatewayResponse = StartGatewayResponse'
-  { _sgrsGatewayARN     :: !(Maybe Text)
-  , _sgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartGatewayResponse = StartGatewayResponse'{_sgrsGatewayARN
+                                                  :: !(Maybe Text),
+                                                  _sgrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartGatewayResponse' with the minimum fields required to make a request.
 --
@@ -126,10 +124,9 @@ data StartGatewayResponse = StartGatewayResponse'
 startGatewayResponse
     :: Int -- ^ 'sgrsResponseStatus'
     -> StartGatewayResponse
-startGatewayResponse pResponseStatus_ =
-  StartGatewayResponse'
-    {_sgrsGatewayARN = Nothing, _sgrsResponseStatus = pResponseStatus_}
-
+startGatewayResponse pResponseStatus_
+  = StartGatewayResponse'{_sgrsGatewayARN = Nothing,
+                          _sgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 sgrsGatewayARN :: Lens' StartGatewayResponse (Maybe Text)

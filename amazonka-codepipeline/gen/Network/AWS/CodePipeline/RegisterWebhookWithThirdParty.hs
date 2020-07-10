@@ -44,23 +44,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'registerWebhookWithThirdParty' smart constructor.
-newtype RegisterWebhookWithThirdParty = RegisterWebhookWithThirdParty'
-  { _rwwtpWebhookName :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RegisterWebhookWithThirdParty = RegisterWebhookWithThirdParty'{_rwwtpWebhookName
+                                                                       ::
+                                                                       Maybe
+                                                                         Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'RegisterWebhookWithThirdParty' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rwwtpWebhookName' - The name of an existing webhook created with PutWebhook to register with a supported third party.
+-- * 'rwwtpWebhookName' - The name of an existing webhook created with PutWebhook to register with a supported third party. 
 registerWebhookWithThirdParty
     :: RegisterWebhookWithThirdParty
-registerWebhookWithThirdParty =
-  RegisterWebhookWithThirdParty' {_rwwtpWebhookName = Nothing}
+registerWebhookWithThirdParty
+  = RegisterWebhookWithThirdParty'{_rwwtpWebhookName =
+                                     Nothing}
 
-
--- | The name of an existing webhook created with PutWebhook to register with a supported third party.
+-- | The name of an existing webhook created with PutWebhook to register with a supported third party. 
 rwwtpWebhookName :: Lens' RegisterWebhookWithThirdParty (Maybe Text)
 rwwtpWebhookName = lens _rwwtpWebhookName (\ s a -> s{_rwwtpWebhookName = a})
 
@@ -103,10 +105,12 @@ instance ToQuery RegisterWebhookWithThirdParty where
         toQuery = const mempty
 
 -- | /See:/ 'registerWebhookWithThirdPartyResponse' smart constructor.
-newtype RegisterWebhookWithThirdPartyResponse = RegisterWebhookWithThirdPartyResponse'
-  { _rwwtprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RegisterWebhookWithThirdPartyResponse = RegisterWebhookWithThirdPartyResponse'{_rwwtprsResponseStatus
+                                                                                       ::
+                                                                                       Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'RegisterWebhookWithThirdPartyResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +120,10 @@ newtype RegisterWebhookWithThirdPartyResponse = RegisterWebhookWithThirdPartyRes
 registerWebhookWithThirdPartyResponse
     :: Int -- ^ 'rwwtprsResponseStatus'
     -> RegisterWebhookWithThirdPartyResponse
-registerWebhookWithThirdPartyResponse pResponseStatus_ =
-  RegisterWebhookWithThirdPartyResponse'
-    {_rwwtprsResponseStatus = pResponseStatus_}
-
+registerWebhookWithThirdPartyResponse
+  pResponseStatus_
+  = RegisterWebhookWithThirdPartyResponse'{_rwwtprsResponseStatus
+                                             = pResponseStatus_}
 
 -- | -- | The response status code.
 rwwtprsResponseStatus :: Lens' RegisterWebhookWithThirdPartyResponse Int

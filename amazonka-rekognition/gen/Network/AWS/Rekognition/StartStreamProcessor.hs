@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts processing a stream processor. You create a stream processor by calling . To tell @StartStreamProcessor@ which stream processor to start, use the value of the @Name@ field specified in the call to @CreateStreamProcessor@ .
+-- Starts processing a stream processor. You create a stream processor by calling 'CreateStreamProcessor' . To tell @StartStreamProcessor@ which stream processor to start, use the value of the @Name@ field specified in the call to @CreateStreamProcessor@ .
 --
 --
 module Network.AWS.Rekognition.StartStreamProcessor
@@ -33,7 +33,7 @@ module Network.AWS.Rekognition.StartStreamProcessor
     , startStreamProcessorResponse
     , StartStreamProcessorResponse
     -- * Response Lenses
-    , srsResponseStatus
+    , starsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startStreamProcessor' smart constructor.
-newtype StartStreamProcessor = StartStreamProcessor'
-  { _sName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartStreamProcessor = StartStreamProcessor'{_sName
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'StartStreamProcessor' with the minimum fields required to make a request.
 --
@@ -57,8 +57,8 @@ newtype StartStreamProcessor = StartStreamProcessor'
 startStreamProcessor
     :: Text -- ^ 'sName'
     -> StartStreamProcessor
-startStreamProcessor pName_ = StartStreamProcessor' {_sName = pName_}
-
+startStreamProcessor pName_
+  = StartStreamProcessor'{_sName = pName_}
 
 -- | The name of the stream processor to start processing.
 sName :: Lens' StartStreamProcessor Text
@@ -99,25 +99,25 @@ instance ToQuery StartStreamProcessor where
         toQuery = const mempty
 
 -- | /See:/ 'startStreamProcessorResponse' smart constructor.
-newtype StartStreamProcessorResponse = StartStreamProcessorResponse'
-  { _srsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartStreamProcessorResponse = StartStreamProcessorResponse'{_starsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'StartStreamProcessorResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srsResponseStatus' - -- | The response status code.
+-- * 'starsResponseStatus' - -- | The response status code.
 startStreamProcessorResponse
-    :: Int -- ^ 'srsResponseStatus'
+    :: Int -- ^ 'starsResponseStatus'
     -> StartStreamProcessorResponse
-startStreamProcessorResponse pResponseStatus_ =
-  StartStreamProcessorResponse' {_srsResponseStatus = pResponseStatus_}
-
+startStreamProcessorResponse pResponseStatus_
+  = StartStreamProcessorResponse'{_starsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
-srsResponseStatus :: Lens' StartStreamProcessorResponse Int
-srsResponseStatus = lens _srsResponseStatus (\ s a -> s{_srsResponseStatus = a})
+starsResponseStatus :: Lens' StartStreamProcessorResponse Int
+starsResponseStatus = lens _starsResponseStatus (\ s a -> s{_starsResponseStatus = a})
 
 instance NFData StartStreamProcessorResponse where

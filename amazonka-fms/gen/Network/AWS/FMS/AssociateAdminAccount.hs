@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with a master account in AWS Organizations or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account.
+-- Sets the AWS Firewall Manager administrator account. AWS Firewall Manager must be associated with the master account of your AWS organization or associated with a member account that has the appropriate permissions. If the account ID that you submit is not an AWS Organizations master account, AWS Firewall Manager will set the appropriate permissions for the given member account.
 --
 --
--- The account that you associate with AWS Firewall Manager is called the AWS Firewall manager administrator account.
+-- The account that you associate with AWS Firewall Manager is called the AWS Firewall Manager administrator account. 
 --
 module Network.AWS.FMS.AssociateAdminAccount
     (
@@ -44,24 +44,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateAdminAccount' smart constructor.
-newtype AssociateAdminAccount = AssociateAdminAccount'
-  { _aaaAdminAccount :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateAdminAccount = AssociateAdminAccount'{_aaaAdminAccount
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'AssociateAdminAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaaAdminAccount' - The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html Managing the AWS Accounts in Your Organization> .
+-- * 'aaaAdminAccount' - The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html Managing the AWS Accounts in Your Organization> . 
 associateAdminAccount
     :: Text -- ^ 'aaaAdminAccount'
     -> AssociateAdminAccount
-associateAdminAccount pAdminAccount_ =
-  AssociateAdminAccount' {_aaaAdminAccount = pAdminAccount_}
+associateAdminAccount pAdminAccount_
+  = AssociateAdminAccount'{_aaaAdminAccount =
+                             pAdminAccount_}
 
-
--- | The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html Managing the AWS Accounts in Your Organization> .
+-- | The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html Managing the AWS Accounts in Your Organization> . 
 aaaAdminAccount :: Lens' AssociateAdminAccount Text
 aaaAdminAccount = lens _aaaAdminAccount (\ s a -> s{_aaaAdminAccount = a})
 
@@ -98,16 +98,15 @@ instance ToQuery AssociateAdminAccount where
         toQuery = const mempty
 
 -- | /See:/ 'associateAdminAccountResponse' smart constructor.
-data AssociateAdminAccountResponse =
-  AssociateAdminAccountResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateAdminAccountResponse = AssociateAdminAccountResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'AssociateAdminAccountResponse' with the minimum fields required to make a request.
 --
 associateAdminAccountResponse
     :: AssociateAdminAccountResponse
-associateAdminAccountResponse = AssociateAdminAccountResponse'
-
+associateAdminAccountResponse
+  = AssociateAdminAccountResponse'
 
 instance NFData AssociateAdminAccountResponse where

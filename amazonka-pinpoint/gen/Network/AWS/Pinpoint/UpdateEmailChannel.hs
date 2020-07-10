@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update an email channel
+-- Enables the email channel for an application or updates the status and settings of the email channel for an application.
+--
+--
 module Network.AWS.Pinpoint.UpdateEmailChannel
     (
     -- * Creating a Request
@@ -44,31 +46,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateEmailChannel' smart constructor.
-data UpdateEmailChannel = UpdateEmailChannel'
-  { _uecApplicationId       :: !Text
-  , _uecEmailChannelRequest :: !EmailChannelRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEmailChannel = UpdateEmailChannel'{_uecApplicationId
+                                              :: !Text,
+                                              _uecEmailChannelRequest ::
+                                              !EmailChannelRequest}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateEmailChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uecApplicationId' - Undocumented member.
+-- * 'uecApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'uecEmailChannelRequest' - Undocumented member.
 updateEmailChannel
     :: Text -- ^ 'uecApplicationId'
     -> EmailChannelRequest -- ^ 'uecEmailChannelRequest'
     -> UpdateEmailChannel
-updateEmailChannel pApplicationId_ pEmailChannelRequest_ =
-  UpdateEmailChannel'
-    { _uecApplicationId = pApplicationId_
-    , _uecEmailChannelRequest = pEmailChannelRequest_
-    }
+updateEmailChannel pApplicationId_
+  pEmailChannelRequest_
+  = UpdateEmailChannel'{_uecApplicationId =
+                          pApplicationId_,
+                        _uecEmailChannelRequest = pEmailChannelRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 uecApplicationId :: Lens' UpdateEmailChannel Text
 uecApplicationId = lens _uecApplicationId (\ s a -> s{_uecApplicationId = a})
 
@@ -114,11 +115,13 @@ instance ToQuery UpdateEmailChannel where
         toQuery = const mempty
 
 -- | /See:/ 'updateEmailChannelResponse' smart constructor.
-data UpdateEmailChannelResponse = UpdateEmailChannelResponse'
-  { _uecrsResponseStatus       :: !Int
-  , _uecrsEmailChannelResponse :: !EmailChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEmailChannelResponse = UpdateEmailChannelResponse'{_uecrsResponseStatus
+                                                              :: !Int,
+                                                              _uecrsEmailChannelResponse
+                                                              ::
+                                                              !EmailChannelResponse}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UpdateEmailChannelResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +134,12 @@ updateEmailChannelResponse
     :: Int -- ^ 'uecrsResponseStatus'
     -> EmailChannelResponse -- ^ 'uecrsEmailChannelResponse'
     -> UpdateEmailChannelResponse
-updateEmailChannelResponse pResponseStatus_ pEmailChannelResponse_ =
-  UpdateEmailChannelResponse'
-    { _uecrsResponseStatus = pResponseStatus_
-    , _uecrsEmailChannelResponse = pEmailChannelResponse_
-    }
-
+updateEmailChannelResponse pResponseStatus_
+  pEmailChannelResponse_
+  = UpdateEmailChannelResponse'{_uecrsResponseStatus =
+                                  pResponseStatus_,
+                                _uecrsEmailChannelResponse =
+                                  pEmailChannelResponse_}
 
 -- | -- | The response status code.
 uecrsResponseStatus :: Lens' UpdateEmailChannelResponse Int

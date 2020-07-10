@@ -21,7 +21,7 @@
 -- Creates a new group in the specified user pool.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.CreateGroup
     (
@@ -51,14 +51,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createGroup' smart constructor.
-data CreateGroup = CreateGroup'
-  { _cgPrecedence  :: !(Maybe Nat)
-  , _cgDescription :: !(Maybe Text)
-  , _cgRoleARN     :: !(Maybe Text)
-  , _cgGroupName   :: !Text
-  , _cgUserPoolId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGroup = CreateGroup'{_cgPrecedence ::
+                                !(Maybe Nat),
+                                _cgDescription :: !(Maybe Text),
+                                _cgRoleARN :: !(Maybe Text),
+                                _cgGroupName :: !Text, _cgUserPoolId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateGroup' with the minimum fields required to make a request.
 --
@@ -77,15 +75,11 @@ createGroup
     :: Text -- ^ 'cgGroupName'
     -> Text -- ^ 'cgUserPoolId'
     -> CreateGroup
-createGroup pGroupName_ pUserPoolId_ =
-  CreateGroup'
-    { _cgPrecedence = Nothing
-    , _cgDescription = Nothing
-    , _cgRoleARN = Nothing
-    , _cgGroupName = pGroupName_
-    , _cgUserPoolId = pUserPoolId_
-    }
-
+createGroup pGroupName_ pUserPoolId_
+  = CreateGroup'{_cgPrecedence = Nothing,
+                 _cgDescription = Nothing, _cgRoleARN = Nothing,
+                 _cgGroupName = pGroupName_,
+                 _cgUserPoolId = pUserPoolId_}
 
 -- | A nonnegative integer value that specifies the precedence of this group relative to the other groups that a user can belong to in the user pool. Zero is the highest precedence value. Groups with lower @Precedence@ values take precedence over groups with higher or null @Precedence@ values. If a user belongs to two or more groups, it is the group with the lowest precedence value whose role ARN will be used in the @cognito:roles@ and @cognito:preferred_role@ claims in the user's tokens. Two groups can have the same @Precedence@ value. If this happens, neither group takes precedence over the other. If two groups with the same @Precedence@ have the same role ARN, that role is used in the @cognito:preferred_role@ claim in tokens for users in each group. If the two groups have different role ARNs, the @cognito:preferred_role@ claim is not set in users' tokens. The default @Precedence@ value is null.
 cgPrecedence :: Lens' CreateGroup (Maybe Natural)
@@ -147,11 +141,10 @@ instance ToQuery CreateGroup where
         toQuery = const mempty
 
 -- | /See:/ 'createGroupResponse' smart constructor.
-data CreateGroupResponse = CreateGroupResponse'
-  { _cgrsGroup          :: !(Maybe GroupType)
-  , _cgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGroupResponse = CreateGroupResponse'{_cgrsGroup
+                                                :: !(Maybe GroupType),
+                                                _cgrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateGroupResponse' with the minimum fields required to make a request.
 --
@@ -163,10 +156,9 @@ data CreateGroupResponse = CreateGroupResponse'
 createGroupResponse
     :: Int -- ^ 'cgrsResponseStatus'
     -> CreateGroupResponse
-createGroupResponse pResponseStatus_ =
-  CreateGroupResponse'
-    {_cgrsGroup = Nothing, _cgrsResponseStatus = pResponseStatus_}
-
+createGroupResponse pResponseStatus_
+  = CreateGroupResponse'{_cgrsGroup = Nothing,
+                         _cgrsResponseStatus = pResponseStatus_}
 
 -- | The group object for the group.
 cgrsGroup :: Lens' CreateGroupResponse (Maybe GroupType)

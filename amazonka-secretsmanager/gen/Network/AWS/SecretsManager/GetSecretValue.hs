@@ -21,17 +21,17 @@
 -- Retrieves the contents of the encrypted fields @SecretString@ or @SecretBinary@ from the specified version of a secret, whichever contains content.
 --
 --
--- __Minimum permissions__
+-- __Minimum permissions__ 
 --
 -- To run this command, you must have the following permissions:
 --
 --     * secretsmanager:GetSecretValue
 --
---     * kms:Decrypt - required only if you use a customer-created KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.
+--     * kms:Decrypt - required only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account's default AWS managed CMK for Secrets Manager.
 --
 --
 --
--- __Related operations__
+-- __Related operations__ 
 --
 --     * To create a new version of the secret with different encrypted information, use 'PutSecretValue' .
 --
@@ -71,38 +71,34 @@ import Network.AWS.SecretsManager.Types
 import Network.AWS.SecretsManager.Types.Product
 
 -- | /See:/ 'getSecretValue' smart constructor.
-data GetSecretValue = GetSecretValue'
-  { _gsvVersionId    :: !(Maybe Text)
-  , _gsvVersionStage :: !(Maybe Text)
-  , _gsvSecretId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSecretValue = GetSecretValue'{_gsvVersionId
+                                      :: !(Maybe Text),
+                                      _gsvVersionStage :: !(Maybe Text),
+                                      _gsvSecretId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSecretValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsvVersionId' - Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify this parameter then don't specify @VersionStage@ . If you don't specify either a @VersionStage@ or @SecretVersionId@ then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ . This value is typically a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value with 32 hexadecimal digits.
+-- * 'gsvVersionId' - Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify this parameter then don't specify @VersionStage@ . If you don't specify either a @VersionStage@ or @VersionId@ then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ . This value is typically a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value with 32 hexadecimal digits.
 --
--- * 'gsvVersionStage' - Specifies the secret version that you want to retrieve by the staging label attached to the version. Staging labels are used to keep track of different versions during the rotation process. If you use this parameter then don't specify @SecretVersionId@ . If you don't specify either a @VersionStage@ or @SecretVersionId@ , then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ .
+-- * 'gsvVersionStage' - Specifies the secret version that you want to retrieve by the staging label attached to the version. Staging labels are used to keep track of different versions during the rotation process. If you use this parameter then don't specify @VersionId@ . If you don't specify either a @VersionStage@ or @VersionId@ , then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ .
 --
 -- * 'gsvSecretId' - Specifies the secret containing the version that you want to retrieve. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
 getSecretValue
     :: Text -- ^ 'gsvSecretId'
     -> GetSecretValue
-getSecretValue pSecretId_ =
-  GetSecretValue'
-    { _gsvVersionId = Nothing
-    , _gsvVersionStage = Nothing
-    , _gsvSecretId = pSecretId_
-    }
+getSecretValue pSecretId_
+  = GetSecretValue'{_gsvVersionId = Nothing,
+                    _gsvVersionStage = Nothing,
+                    _gsvSecretId = pSecretId_}
 
-
--- | Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify this parameter then don't specify @VersionStage@ . If you don't specify either a @VersionStage@ or @SecretVersionId@ then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ . This value is typically a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value with 32 hexadecimal digits.
+-- | Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify this parameter then don't specify @VersionStage@ . If you don't specify either a @VersionStage@ or @VersionId@ then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ . This value is typically a <https://wikipedia.org/wiki/Universally_unique_identifier UUID-type> value with 32 hexadecimal digits.
 gsvVersionId :: Lens' GetSecretValue (Maybe Text)
 gsvVersionId = lens _gsvVersionId (\ s a -> s{_gsvVersionId = a})
 
--- | Specifies the secret version that you want to retrieve by the staging label attached to the version. Staging labels are used to keep track of different versions during the rotation process. If you use this parameter then don't specify @SecretVersionId@ . If you don't specify either a @VersionStage@ or @SecretVersionId@ , then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ .
+-- | Specifies the secret version that you want to retrieve by the staging label attached to the version. Staging labels are used to keep track of different versions during the rotation process. If you use this parameter then don't specify @VersionId@ . If you don't specify either a @VersionStage@ or @VersionId@ , then the default is to perform the operation on the version with the @VersionStage@ value of @AWSCURRENT@ .
 gsvVersionStage :: Lens' GetSecretValue (Maybe Text)
 gsvVersionStage = lens _gsvVersionStage (\ s a -> s{_gsvVersionStage = a})
 
@@ -153,17 +149,24 @@ instance ToQuery GetSecretValue where
         toQuery = const mempty
 
 -- | /See:/ 'getSecretValueResponse' smart constructor.
-data GetSecretValueResponse = GetSecretValueResponse'
-  { _gsvrsVersionId      :: !(Maybe Text)
-  , _gsvrsARN            :: !(Maybe Text)
-  , _gsvrsVersionStages  :: !(Maybe (List1 Text))
-  , _gsvrsSecretBinary   :: !(Maybe (Sensitive Base64))
-  , _gsvrsCreatedDate    :: !(Maybe POSIX)
-  , _gsvrsName           :: !(Maybe Text)
-  , _gsvrsSecretString   :: !(Maybe (Sensitive Text))
-  , _gsvrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetSecretValueResponse = GetSecretValueResponse'{_gsvrsVersionId
+                                                      :: !(Maybe Text),
+                                                      _gsvrsARN ::
+                                                      !(Maybe Text),
+                                                      _gsvrsVersionStages ::
+                                                      !(Maybe (List1 Text)),
+                                                      _gsvrsSecretBinary ::
+                                                      !(Maybe
+                                                          (Sensitive Base64)),
+                                                      _gsvrsCreatedDate ::
+                                                      !(Maybe POSIX),
+                                                      _gsvrsName ::
+                                                      !(Maybe Text),
+                                                      _gsvrsSecretString ::
+                                                      !(Maybe (Sensitive Text)),
+                                                      _gsvrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSecretValueResponse' with the minimum fields required to make a request.
 --
@@ -187,18 +190,13 @@ data GetSecretValueResponse = GetSecretValueResponse'
 getSecretValueResponse
     :: Int -- ^ 'gsvrsResponseStatus'
     -> GetSecretValueResponse
-getSecretValueResponse pResponseStatus_ =
-  GetSecretValueResponse'
-    { _gsvrsVersionId = Nothing
-    , _gsvrsARN = Nothing
-    , _gsvrsVersionStages = Nothing
-    , _gsvrsSecretBinary = Nothing
-    , _gsvrsCreatedDate = Nothing
-    , _gsvrsName = Nothing
-    , _gsvrsSecretString = Nothing
-    , _gsvrsResponseStatus = pResponseStatus_
-    }
-
+getSecretValueResponse pResponseStatus_
+  = GetSecretValueResponse'{_gsvrsVersionId = Nothing,
+                            _gsvrsARN = Nothing, _gsvrsVersionStages = Nothing,
+                            _gsvrsSecretBinary = Nothing,
+                            _gsvrsCreatedDate = Nothing, _gsvrsName = Nothing,
+                            _gsvrsSecretString = Nothing,
+                            _gsvrsResponseStatus = pResponseStatus_}
 
 -- | The unique identifier of this version of the secret.
 gsvrsVersionId :: Lens' GetSecretValueResponse (Maybe Text)

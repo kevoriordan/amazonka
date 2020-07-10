@@ -47,17 +47,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for ModifyVolumeAttribute.
---
---
---
--- /See:/ 'modifyVolumeAttribute' smart constructor.
-data ModifyVolumeAttribute = ModifyVolumeAttribute'
-  { _mvaAutoEnableIO :: !(Maybe AttributeBooleanValue)
-  , _mvaDryRun       :: !(Maybe Bool)
-  , _mvaVolumeId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'modifyVolumeAttribute' smart constructor.
+data ModifyVolumeAttribute = ModifyVolumeAttribute'{_mvaAutoEnableIO
+                                                    ::
+                                                    !(Maybe
+                                                        AttributeBooleanValue),
+                                                    _mvaDryRun :: !(Maybe Bool),
+                                                    _mvaVolumeId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ModifyVolumeAttribute' with the minimum fields required to make a request.
 --
@@ -71,13 +69,9 @@ data ModifyVolumeAttribute = ModifyVolumeAttribute'
 modifyVolumeAttribute
     :: Text -- ^ 'mvaVolumeId'
     -> ModifyVolumeAttribute
-modifyVolumeAttribute pVolumeId_ =
-  ModifyVolumeAttribute'
-    { _mvaAutoEnableIO = Nothing
-    , _mvaDryRun = Nothing
-    , _mvaVolumeId = pVolumeId_
-    }
-
+modifyVolumeAttribute pVolumeId_
+  = ModifyVolumeAttribute'{_mvaAutoEnableIO = Nothing,
+                           _mvaDryRun = Nothing, _mvaVolumeId = pVolumeId_}
 
 -- | Indicates whether the volume should be auto-enabled for I/O operations.
 mvaAutoEnableIO :: Lens' ModifyVolumeAttribute (Maybe AttributeBooleanValue)
@@ -116,16 +110,15 @@ instance ToQuery ModifyVolumeAttribute where
                "DryRun" =: _mvaDryRun, "VolumeId" =: _mvaVolumeId]
 
 -- | /See:/ 'modifyVolumeAttributeResponse' smart constructor.
-data ModifyVolumeAttributeResponse =
-  ModifyVolumeAttributeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyVolumeAttributeResponse = ModifyVolumeAttributeResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ModifyVolumeAttributeResponse' with the minimum fields required to make a request.
 --
 modifyVolumeAttributeResponse
     :: ModifyVolumeAttributeResponse
-modifyVolumeAttributeResponse = ModifyVolumeAttributeResponse'
-
+modifyVolumeAttributeResponse
+  = ModifyVolumeAttributeResponse'
 
 instance NFData ModifyVolumeAttributeResponse where

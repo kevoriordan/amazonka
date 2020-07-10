@@ -27,6 +27,7 @@ module Network.AWS.DeviceFarm.CreateDevicePool
       createDevicePool
     , CreateDevicePool
     -- * Request Lenses
+    , cdpMaxDevices
     , cdpDescription
     , cdpProjectARN
     , cdpName
@@ -52,17 +53,19 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createDevicePool' smart constructor.
-data CreateDevicePool = CreateDevicePool'
-  { _cdpDescription :: !(Maybe Text)
-  , _cdpProjectARN  :: !Text
-  , _cdpName        :: !Text
-  , _cdpRules       :: ![Rule]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDevicePool = CreateDevicePool'{_cdpMaxDevices
+                                          :: !(Maybe Int),
+                                          _cdpDescription :: !(Maybe Text),
+                                          _cdpProjectARN :: !Text,
+                                          _cdpName :: !Text,
+                                          _cdpRules :: ![Rule]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDevicePool' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdpMaxDevices' - The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and meet the criteria that you assign for the @rules@ parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests.
 --
 -- * 'cdpDescription' - The device pool's description.
 --
@@ -75,14 +78,15 @@ createDevicePool
     :: Text -- ^ 'cdpProjectARN'
     -> Text -- ^ 'cdpName'
     -> CreateDevicePool
-createDevicePool pProjectARN_ pName_ =
-  CreateDevicePool'
-    { _cdpDescription = Nothing
-    , _cdpProjectARN = pProjectARN_
-    , _cdpName = pName_
-    , _cdpRules = mempty
-    }
+createDevicePool pProjectARN_ pName_
+  = CreateDevicePool'{_cdpMaxDevices = Nothing,
+                      _cdpDescription = Nothing,
+                      _cdpProjectARN = pProjectARN_, _cdpName = pName_,
+                      _cdpRules = mempty}
 
+-- | The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and meet the criteria that you assign for the @rules@ parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests.
+cdpMaxDevices :: Lens' CreateDevicePool (Maybe Int)
+cdpMaxDevices = lens _cdpMaxDevices (\ s a -> s{_cdpMaxDevices = a})
 
 -- | The device pool's description.
 cdpDescription :: Lens' CreateDevicePool (Maybe Text)
@@ -127,7 +131,8 @@ instance ToJSON CreateDevicePool where
         toJSON CreateDevicePool'{..}
           = object
               (catMaybes
-                 [("description" .=) <$> _cdpDescription,
+                 [("maxDevices" .=) <$> _cdpMaxDevices,
+                  ("description" .=) <$> _cdpDescription,
                   Just ("projectArn" .= _cdpProjectARN),
                   Just ("name" .= _cdpName),
                   Just ("rules" .= _cdpRules)])
@@ -143,11 +148,13 @@ instance ToQuery CreateDevicePool where
 --
 --
 -- /See:/ 'createDevicePoolResponse' smart constructor.
-data CreateDevicePoolResponse = CreateDevicePoolResponse'
-  { _cdprsDevicePool     :: !(Maybe DevicePool)
-  , _cdprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDevicePoolResponse = CreateDevicePoolResponse'{_cdprsDevicePool
+                                                          ::
+                                                          !(Maybe DevicePool),
+                                                          _cdprsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateDevicePoolResponse' with the minimum fields required to make a request.
 --
@@ -159,10 +166,10 @@ data CreateDevicePoolResponse = CreateDevicePoolResponse'
 createDevicePoolResponse
     :: Int -- ^ 'cdprsResponseStatus'
     -> CreateDevicePoolResponse
-createDevicePoolResponse pResponseStatus_ =
-  CreateDevicePoolResponse'
-    {_cdprsDevicePool = Nothing, _cdprsResponseStatus = pResponseStatus_}
-
+createDevicePoolResponse pResponseStatus_
+  = CreateDevicePoolResponse'{_cdprsDevicePool =
+                                Nothing,
+                              _cdprsResponseStatus = pResponseStatus_}
 
 -- | The newly created device pool.
 cdprsDevicePool :: Lens' CreateDevicePoolResponse (Maybe DevicePool)

@@ -46,23 +46,22 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'deleteIPGroup' smart constructor.
-newtype DeleteIPGroup = DeleteIPGroup'
-  { _digGroupId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteIPGroup = DeleteIPGroup'{_digGroupId ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIPGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'digGroupId' - The ID of the IP access control group.
+-- * 'digGroupId' - The identifier of the IP access control group.
 deleteIPGroup
     :: Text -- ^ 'digGroupId'
     -> DeleteIPGroup
-deleteIPGroup pGroupId_ = DeleteIPGroup' {_digGroupId = pGroupId_}
+deleteIPGroup pGroupId_
+  = DeleteIPGroup'{_digGroupId = pGroupId_}
 
-
--- | The ID of the IP access control group.
+-- | The identifier of the IP access control group.
 digGroupId :: Lens' DeleteIPGroup Text
 digGroupId = lens _digGroupId (\ s a -> s{_digGroupId = a})
 
@@ -99,10 +98,10 @@ instance ToQuery DeleteIPGroup where
         toQuery = const mempty
 
 -- | /See:/ 'deleteIPGroupResponse' smart constructor.
-newtype DeleteIPGroupResponse = DeleteIPGroupResponse'
-  { _dipgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteIPGroupResponse = DeleteIPGroupResponse'{_dipgrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteIPGroupResponse' with the minimum fields required to make a request.
 --
@@ -112,9 +111,9 @@ newtype DeleteIPGroupResponse = DeleteIPGroupResponse'
 deleteIPGroupResponse
     :: Int -- ^ 'dipgrsResponseStatus'
     -> DeleteIPGroupResponse
-deleteIPGroupResponse pResponseStatus_ =
-  DeleteIPGroupResponse' {_dipgrsResponseStatus = pResponseStatus_}
-
+deleteIPGroupResponse pResponseStatus_
+  = DeleteIPGroupResponse'{_dipgrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 dipgrsResponseStatus :: Lens' DeleteIPGroupResponse Int

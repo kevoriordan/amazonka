@@ -45,19 +45,18 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteComment' smart constructor.
-data DeleteComment = DeleteComment'
-  { _delAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _delDocumentId          :: !Text
-  , _delVersionId           :: !Text
-  , _delCommentId           :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteComment = DeleteComment'{_delAuthenticationToken
+                                    :: !(Maybe (Sensitive Text)),
+                                    _delDocumentId :: !Text,
+                                    _delVersionId :: !Text,
+                                    _delCommentId :: !Text}
+                       deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteComment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'delAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'delAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'delDocumentId' - The ID of the document.
 --
@@ -69,16 +68,13 @@ deleteComment
     -> Text -- ^ 'delVersionId'
     -> Text -- ^ 'delCommentId'
     -> DeleteComment
-deleteComment pDocumentId_ pVersionId_ pCommentId_ =
-  DeleteComment'
-    { _delAuthenticationToken = Nothing
-    , _delDocumentId = pDocumentId_
-    , _delVersionId = pVersionId_
-    , _delCommentId = pCommentId_
-    }
+deleteComment pDocumentId_ pVersionId_ pCommentId_
+  = DeleteComment'{_delAuthenticationToken = Nothing,
+                   _delDocumentId = pDocumentId_,
+                   _delVersionId = pVersionId_,
+                   _delCommentId = pCommentId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 delAuthenticationToken :: Lens' DeleteComment (Maybe Text)
 delAuthenticationToken = lens _delAuthenticationToken (\ s a -> s{_delAuthenticationToken = a}) . mapping _Sensitive
 
@@ -121,16 +117,14 @@ instance ToQuery DeleteComment where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCommentResponse' smart constructor.
-data DeleteCommentResponse =
-  DeleteCommentResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCommentResponse = DeleteCommentResponse'
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteCommentResponse' with the minimum fields required to make a request.
 --
 deleteCommentResponse
     :: DeleteCommentResponse
 deleteCommentResponse = DeleteCommentResponse'
-
 
 instance NFData DeleteCommentResponse where

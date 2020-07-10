@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the targets registered with the Maintenance Window.
+-- Lists the targets registered with the maintenance window.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.DescribeMaintenanceWindowTargets
     (
     -- * Creating a Request
@@ -42,6 +44,7 @@ module Network.AWS.SSM.DescribeMaintenanceWindowTargets
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -49,13 +52,23 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeMaintenanceWindowTargets' smart constructor.
-data DescribeMaintenanceWindowTargets = DescribeMaintenanceWindowTargets'
-  { _dmwtFilters    :: !(Maybe [MaintenanceWindowFilter])
-  , _dmwtNextToken  :: !(Maybe Text)
-  , _dmwtMaxResults :: !(Maybe Nat)
-  , _dmwtWindowId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMaintenanceWindowTargets = DescribeMaintenanceWindowTargets'{_dmwtFilters
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [MaintenanceWindowFilter]),
+                                                                          _dmwtNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dmwtMaxResults
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Nat),
+                                                                          _dmwtWindowId
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeMaintenanceWindowTargets' with the minimum fields required to make a request.
 --
@@ -67,18 +80,16 @@ data DescribeMaintenanceWindowTargets = DescribeMaintenanceWindowTargets'
 --
 -- * 'dmwtMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 --
--- * 'dmwtWindowId' - The ID of the Maintenance Window whose targets should be retrieved.
+-- * 'dmwtWindowId' - The ID of the maintenance window whose targets should be retrieved.
 describeMaintenanceWindowTargets
     :: Text -- ^ 'dmwtWindowId'
     -> DescribeMaintenanceWindowTargets
-describeMaintenanceWindowTargets pWindowId_ =
-  DescribeMaintenanceWindowTargets'
-    { _dmwtFilters = Nothing
-    , _dmwtNextToken = Nothing
-    , _dmwtMaxResults = Nothing
-    , _dmwtWindowId = pWindowId_
-    }
-
+describeMaintenanceWindowTargets pWindowId_
+  = DescribeMaintenanceWindowTargets'{_dmwtFilters =
+                                        Nothing,
+                                      _dmwtNextToken = Nothing,
+                                      _dmwtMaxResults = Nothing,
+                                      _dmwtWindowId = pWindowId_}
 
 -- | Optional filters that can be used to narrow down the scope of the returned window targets. The supported filter keys are Type, WindowTargetId and OwnerInformation.
 dmwtFilters :: Lens' DescribeMaintenanceWindowTargets [MaintenanceWindowFilter]
@@ -92,9 +103,17 @@ dmwtNextToken = lens _dmwtNextToken (\ s a -> s{_dmwtNextToken = a})
 dmwtMaxResults :: Lens' DescribeMaintenanceWindowTargets (Maybe Natural)
 dmwtMaxResults = lens _dmwtMaxResults (\ s a -> s{_dmwtMaxResults = a}) . mapping _Nat
 
--- | The ID of the Maintenance Window whose targets should be retrieved.
+-- | The ID of the maintenance window whose targets should be retrieved.
 dmwtWindowId :: Lens' DescribeMaintenanceWindowTargets Text
 dmwtWindowId = lens _dmwtWindowId (\ s a -> s{_dmwtWindowId = a})
+
+instance AWSPager DescribeMaintenanceWindowTargets
+         where
+        page rq rs
+          | stop (rs ^. dmwtrsNextToken) = Nothing
+          | stop (rs ^. dmwtrsTargets) = Nothing
+          | otherwise =
+            Just $ rq & dmwtNextToken .~ rs ^. dmwtrsNextToken
 
 instance AWSRequest DescribeMaintenanceWindowTargets
          where
@@ -144,12 +163,19 @@ instance ToQuery DescribeMaintenanceWindowTargets
         toQuery = const mempty
 
 -- | /See:/ 'describeMaintenanceWindowTargetsResponse' smart constructor.
-data DescribeMaintenanceWindowTargetsResponse = DescribeMaintenanceWindowTargetsResponse'
-  { _dmwtrsNextToken      :: !(Maybe Text)
-  , _dmwtrsTargets        :: !(Maybe [MaintenanceWindowTarget])
-  , _dmwtrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeMaintenanceWindowTargetsResponse = DescribeMaintenanceWindowTargetsResponse'{_dmwtrsNextToken
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              Text),
+                                                                                          _dmwtrsTargets
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              [MaintenanceWindowTarget]),
+                                                                                          _dmwtrsResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Show, Data,
+                                                            Typeable, Generic)
 
 -- | Creates a value of 'DescribeMaintenanceWindowTargetsResponse' with the minimum fields required to make a request.
 --
@@ -157,25 +183,25 @@ data DescribeMaintenanceWindowTargetsResponse = DescribeMaintenanceWindowTargets
 --
 -- * 'dmwtrsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 --
--- * 'dmwtrsTargets' - Information about the targets in the Maintenance Window.
+-- * 'dmwtrsTargets' - Information about the targets in the maintenance window.
 --
 -- * 'dmwtrsResponseStatus' - -- | The response status code.
 describeMaintenanceWindowTargetsResponse
     :: Int -- ^ 'dmwtrsResponseStatus'
     -> DescribeMaintenanceWindowTargetsResponse
-describeMaintenanceWindowTargetsResponse pResponseStatus_ =
-  DescribeMaintenanceWindowTargetsResponse'
-    { _dmwtrsNextToken = Nothing
-    , _dmwtrsTargets = Nothing
-    , _dmwtrsResponseStatus = pResponseStatus_
-    }
-
+describeMaintenanceWindowTargetsResponse
+  pResponseStatus_
+  = DescribeMaintenanceWindowTargetsResponse'{_dmwtrsNextToken
+                                                = Nothing,
+                                              _dmwtrsTargets = Nothing,
+                                              _dmwtrsResponseStatus =
+                                                pResponseStatus_}
 
 -- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
 dmwtrsNextToken :: Lens' DescribeMaintenanceWindowTargetsResponse (Maybe Text)
 dmwtrsNextToken = lens _dmwtrsNextToken (\ s a -> s{_dmwtrsNextToken = a})
 
--- | Information about the targets in the Maintenance Window.
+-- | Information about the targets in the maintenance window.
 dmwtrsTargets :: Lens' DescribeMaintenanceWindowTargetsResponse [MaintenanceWindowTarget]
 dmwtrsTargets = lens _dmwtrsTargets (\ s a -> s{_dmwtrsTargets = a}) . _Default . _Coerce
 

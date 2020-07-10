@@ -47,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeSecurityConfiguration' smart constructor.
-newtype DescribeSecurityConfiguration = DescribeSecurityConfiguration'
-  { _dName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeSecurityConfiguration = DescribeSecurityConfiguration'{_dName
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeSecurityConfiguration' with the minimum fields required to make a request.
 --
@@ -60,9 +60,8 @@ newtype DescribeSecurityConfiguration = DescribeSecurityConfiguration'
 describeSecurityConfiguration
     :: Text -- ^ 'dName'
     -> DescribeSecurityConfiguration
-describeSecurityConfiguration pName_ =
-  DescribeSecurityConfiguration' {_dName = pName_}
-
+describeSecurityConfiguration pName_
+  = DescribeSecurityConfiguration'{_dName = pName_}
 
 -- | The name of the security configuration.
 dName :: Lens' DescribeSecurityConfiguration Text
@@ -107,13 +106,23 @@ instance ToQuery DescribeSecurityConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'describeSecurityConfigurationResponse' smart constructor.
-data DescribeSecurityConfigurationResponse = DescribeSecurityConfigurationResponse'
-  { _drsSecurityConfiguration :: !(Maybe Text)
-  , _drsName                  :: !(Maybe Text)
-  , _drsCreationDateTime      :: !(Maybe POSIX)
-  , _drsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSecurityConfigurationResponse = DescribeSecurityConfigurationResponse'{_drsSecurityConfiguration
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _drsName
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _drsCreationDateTime
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        POSIX),
+                                                                                    _drsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeSecurityConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -129,14 +138,14 @@ data DescribeSecurityConfigurationResponse = DescribeSecurityConfigurationRespon
 describeSecurityConfigurationResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeSecurityConfigurationResponse
-describeSecurityConfigurationResponse pResponseStatus_ =
-  DescribeSecurityConfigurationResponse'
-    { _drsSecurityConfiguration = Nothing
-    , _drsName = Nothing
-    , _drsCreationDateTime = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeSecurityConfigurationResponse
+  pResponseStatus_
+  = DescribeSecurityConfigurationResponse'{_drsSecurityConfiguration
+                                             = Nothing,
+                                           _drsName = Nothing,
+                                           _drsCreationDateTime = Nothing,
+                                           _drsResponseStatus =
+                                             pResponseStatus_}
 
 -- | The security configuration details in JSON format.
 drsSecurityConfiguration :: Lens' DescribeSecurityConfigurationResponse (Maybe Text)

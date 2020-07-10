@@ -46,19 +46,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updatePreset' smart constructor.
-data UpdatePreset = UpdatePreset'
-  { _upSettings    :: !(Maybe PresetSettings)
-  , _upCategory    :: !(Maybe Text)
-  , _upDescription :: !(Maybe Text)
-  , _upName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePreset = UpdatePreset'{_upSettings ::
+                                  !(Maybe PresetSettings),
+                                  _upCategory :: !(Maybe Text),
+                                  _upDescription :: !(Maybe Text),
+                                  _upName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePreset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upSettings' - Undocumented member.
+-- * 'upSettings' - Settings for preset
 --
 -- * 'upCategory' - The new category for the preset, if you are changing it.
 --
@@ -68,16 +67,12 @@ data UpdatePreset = UpdatePreset'
 updatePreset
     :: Text -- ^ 'upName'
     -> UpdatePreset
-updatePreset pName_ =
-  UpdatePreset'
-    { _upSettings = Nothing
-    , _upCategory = Nothing
-    , _upDescription = Nothing
-    , _upName = pName_
-    }
+updatePreset pName_
+  = UpdatePreset'{_upSettings = Nothing,
+                  _upCategory = Nothing, _upDescription = Nothing,
+                  _upName = pName_}
 
-
--- | Undocumented member.
+-- | Settings for preset
 upSettings :: Lens' UpdatePreset (Maybe PresetSettings)
 upSettings = lens _upSettings (\ s a -> s{_upSettings = a})
 
@@ -129,28 +124,26 @@ instance ToQuery UpdatePreset where
         toQuery = const mempty
 
 -- | /See:/ 'updatePresetResponse' smart constructor.
-data UpdatePresetResponse = UpdatePresetResponse'
-  { _uprsPreset         :: !(Maybe Preset)
-  , _uprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePresetResponse = UpdatePresetResponse'{_uprsPreset
+                                                  :: !(Maybe Preset),
+                                                  _uprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePresetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uprsPreset' - Undocumented member.
+-- * 'uprsPreset' - A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
 --
 -- * 'uprsResponseStatus' - -- | The response status code.
 updatePresetResponse
     :: Int -- ^ 'uprsResponseStatus'
     -> UpdatePresetResponse
-updatePresetResponse pResponseStatus_ =
-  UpdatePresetResponse'
-    {_uprsPreset = Nothing, _uprsResponseStatus = pResponseStatus_}
+updatePresetResponse pResponseStatus_
+  = UpdatePresetResponse'{_uprsPreset = Nothing,
+                          _uprsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process.
 uprsPreset :: Lens' UpdatePresetResponse (Maybe Preset)
 uprsPreset = lens _uprsPreset (\ s a -> s{_uprsPreset = a})
 

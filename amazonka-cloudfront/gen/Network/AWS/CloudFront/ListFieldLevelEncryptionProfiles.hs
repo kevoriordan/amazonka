@@ -46,31 +46,36 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listFieldLevelEncryptionProfiles' smart constructor.
-data ListFieldLevelEncryptionProfiles = ListFieldLevelEncryptionProfiles'
-  { _lflepMarker   :: !(Maybe Text)
-  , _lflepMaxItems :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFieldLevelEncryptionProfiles = ListFieldLevelEncryptionProfiles'{_lflepMarker
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _lflepMaxItems
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text)}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'ListFieldLevelEncryptionProfiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lflepMarker' - Use this when paginating results to indicate where to begin in your list of profiles. The results include profiles in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last profile on that page).
+-- * 'lflepMarker' - Use this when paginating results to indicate where to begin in your list of profiles. The results include profiles in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last profile on that page). 
 --
--- * 'lflepMaxItems' - The maximum number of field-level encryption profiles you want in the response body.
+-- * 'lflepMaxItems' - The maximum number of field-level encryption profiles you want in the response body. 
 listFieldLevelEncryptionProfiles
     :: ListFieldLevelEncryptionProfiles
-listFieldLevelEncryptionProfiles =
-  ListFieldLevelEncryptionProfiles'
-    {_lflepMarker = Nothing, _lflepMaxItems = Nothing}
+listFieldLevelEncryptionProfiles
+  = ListFieldLevelEncryptionProfiles'{_lflepMarker =
+                                        Nothing,
+                                      _lflepMaxItems = Nothing}
 
-
--- | Use this when paginating results to indicate where to begin in your list of profiles. The results include profiles in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last profile on that page).
+-- | Use this when paginating results to indicate where to begin in your list of profiles. The results include profiles in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last profile on that page). 
 lflepMarker :: Lens' ListFieldLevelEncryptionProfiles (Maybe Text)
 lflepMarker = lens _lflepMarker (\ s a -> s{_lflepMarker = a})
 
--- | The maximum number of field-level encryption profiles you want in the response body.
+-- | The maximum number of field-level encryption profiles you want in the response body. 
 lflepMaxItems :: Lens' ListFieldLevelEncryptionProfiles (Maybe Text)
 lflepMaxItems = lens _lflepMaxItems (\ s a -> s{_lflepMaxItems = a})
 
@@ -98,7 +103,7 @@ instance ToHeaders ListFieldLevelEncryptionProfiles
 instance ToPath ListFieldLevelEncryptionProfiles
          where
         toPath
-          = const "/2017-10-30/field-level-encryption-profile"
+          = const "/2019-03-26/field-level-encryption-profile"
 
 instance ToQuery ListFieldLevelEncryptionProfiles
          where
@@ -108,11 +113,16 @@ instance ToQuery ListFieldLevelEncryptionProfiles
                "MaxItems" =: _lflepMaxItems]
 
 -- | /See:/ 'listFieldLevelEncryptionProfilesResponse' smart constructor.
-data ListFieldLevelEncryptionProfilesResponse = ListFieldLevelEncryptionProfilesResponse'
-  { _lfleprsFieldLevelEncryptionProfileList :: !(Maybe FieldLevelEncryptionProfileList)
-  , _lfleprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFieldLevelEncryptionProfilesResponse = ListFieldLevelEncryptionProfilesResponse'{_lfleprsFieldLevelEncryptionProfileList
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              FieldLevelEncryptionProfileList),
+                                                                                          _lfleprsResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'ListFieldLevelEncryptionProfilesResponse' with the minimum fields required to make a request.
 --
@@ -124,12 +134,12 @@ data ListFieldLevelEncryptionProfilesResponse = ListFieldLevelEncryptionProfiles
 listFieldLevelEncryptionProfilesResponse
     :: Int -- ^ 'lfleprsResponseStatus'
     -> ListFieldLevelEncryptionProfilesResponse
-listFieldLevelEncryptionProfilesResponse pResponseStatus_ =
-  ListFieldLevelEncryptionProfilesResponse'
-    { _lfleprsFieldLevelEncryptionProfileList = Nothing
-    , _lfleprsResponseStatus = pResponseStatus_
-    }
-
+listFieldLevelEncryptionProfilesResponse
+  pResponseStatus_
+  = ListFieldLevelEncryptionProfilesResponse'{_lfleprsFieldLevelEncryptionProfileList
+                                                = Nothing,
+                                              _lfleprsResponseStatus =
+                                                pResponseStatus_}
 
 -- | Returns a list of the field-level encryption profiles that have been created in CloudFront for this account.
 lfleprsFieldLevelEncryptionProfileList :: Lens' ListFieldLevelEncryptionProfilesResponse (Maybe FieldLevelEncryptionProfileList)

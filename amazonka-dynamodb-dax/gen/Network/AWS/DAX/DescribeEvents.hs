@@ -21,8 +21,10 @@
 -- Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter.
 --
 --
--- By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
+-- By default, only the events occurring within the last 24 hours are returned; however, you can retrieve up to 14 days' worth of events if necessary.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DAX.DescribeEvents
     (
     -- * Creating a Request
@@ -49,21 +51,21 @@ module Network.AWS.DAX.DescribeEvents
 import Network.AWS.DAX.Types
 import Network.AWS.DAX.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEvents' smart constructor.
-data DescribeEvents = DescribeEvents'
-  { _deSourceName :: !(Maybe Text)
-  , _deStartTime  :: !(Maybe POSIX)
-  , _deSourceType :: !(Maybe SourceType)
-  , _deNextToken  :: !(Maybe Text)
-  , _deEndTime    :: !(Maybe POSIX)
-  , _deDuration   :: !(Maybe Int)
-  , _deMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEvents = DescribeEvents'{_deSourceName
+                                      :: !(Maybe Text),
+                                      _deStartTime :: !(Maybe POSIX),
+                                      _deSourceType :: !(Maybe SourceType),
+                                      _deNextToken :: !(Maybe Text),
+                                      _deEndTime :: !(Maybe POSIX),
+                                      _deDuration :: !(Maybe Int),
+                                      _deMaxResults :: !(Maybe Int)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEvents' with the minimum fields required to make a request.
 --
@@ -84,17 +86,11 @@ data DescribeEvents = DescribeEvents'
 -- * 'deMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. The value for @MaxResults@ must be between 20 and 100.
 describeEvents
     :: DescribeEvents
-describeEvents =
-  DescribeEvents'
-    { _deSourceName = Nothing
-    , _deStartTime = Nothing
-    , _deSourceType = Nothing
-    , _deNextToken = Nothing
-    , _deEndTime = Nothing
-    , _deDuration = Nothing
-    , _deMaxResults = Nothing
-    }
-
+describeEvents
+  = DescribeEvents'{_deSourceName = Nothing,
+                    _deStartTime = Nothing, _deSourceType = Nothing,
+                    _deNextToken = Nothing, _deEndTime = Nothing,
+                    _deDuration = Nothing, _deMaxResults = Nothing}
 
 -- | The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response.
 deSourceName :: Lens' DescribeEvents (Maybe Text)
@@ -123,6 +119,13 @@ deDuration = lens _deDuration (\ s a -> s{_deDuration = a})
 -- | The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. The value for @MaxResults@ must be between 20 and 100.
 deMaxResults :: Lens' DescribeEvents (Maybe Int)
 deMaxResults = lens _deMaxResults (\ s a -> s{_deMaxResults = a})
+
+instance AWSPager DescribeEvents where
+        page rq rs
+          | stop (rs ^. dersNextToken) = Nothing
+          | stop (rs ^. dersEvents) = Nothing
+          | otherwise =
+            Just $ rq & deNextToken .~ rs ^. dersNextToken
 
 instance AWSRequest DescribeEvents where
         type Rs DescribeEvents = DescribeEventsResponse
@@ -166,12 +169,14 @@ instance ToQuery DescribeEvents where
         toQuery = const mempty
 
 -- | /See:/ 'describeEventsResponse' smart constructor.
-data DescribeEventsResponse = DescribeEventsResponse'
-  { _dersNextToken      :: !(Maybe Text)
-  , _dersEvents         :: !(Maybe [Event])
-  , _dersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventsResponse = DescribeEventsResponse'{_dersNextToken
+                                                      :: !(Maybe Text),
+                                                      _dersEvents ::
+                                                      !(Maybe [Event]),
+                                                      _dersResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeEventsResponse' with the minimum fields required to make a request.
 --
@@ -185,13 +190,10 @@ data DescribeEventsResponse = DescribeEventsResponse'
 describeEventsResponse
     :: Int -- ^ 'dersResponseStatus'
     -> DescribeEventsResponse
-describeEventsResponse pResponseStatus_ =
-  DescribeEventsResponse'
-    { _dersNextToken = Nothing
-    , _dersEvents = Nothing
-    , _dersResponseStatus = pResponseStatus_
-    }
-
+describeEventsResponse pResponseStatus_
+  = DescribeEventsResponse'{_dersNextToken = Nothing,
+                            _dersEvents = Nothing,
+                            _dersResponseStatus = pResponseStatus_}
 
 -- | Provides an identifier to allow retrieval of paginated results.
 dersNextToken :: Lens' DescribeEventsResponse (Maybe Text)

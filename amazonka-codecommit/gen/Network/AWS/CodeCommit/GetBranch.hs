@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getBranch' smart constructor.
-data GetBranch = GetBranch'
-  { _gbBranchName     :: !(Maybe Text)
-  , _gbRepositoryName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBranch = GetBranch'{_gbBranchName ::
+                            !(Maybe Text),
+                            _gbRepositoryName :: !(Maybe Text)}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBranch' with the minimum fields required to make a request.
 --
@@ -65,8 +64,9 @@ data GetBranch = GetBranch'
 -- * 'gbRepositoryName' - The name of the repository that contains the branch for which you want to retrieve information.
 getBranch
     :: GetBranch
-getBranch = GetBranch' {_gbBranchName = Nothing, _gbRepositoryName = Nothing}
-
+getBranch
+  = GetBranch'{_gbBranchName = Nothing,
+               _gbRepositoryName = Nothing}
 
 -- | The name of the branch for which you want to retrieve information.
 gbBranchName :: Lens' GetBranch (Maybe Text)
@@ -116,11 +116,10 @@ instance ToQuery GetBranch where
 --
 --
 -- /See:/ 'getBranchResponse' smart constructor.
-data GetBranchResponse = GetBranchResponse'
-  { _grsBranch         :: !(Maybe BranchInfo)
-  , _grsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBranchResponse = GetBranchResponse'{_grsBranch
+                                            :: !(Maybe BranchInfo),
+                                            _grsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBranchResponse' with the minimum fields required to make a request.
 --
@@ -132,10 +131,9 @@ data GetBranchResponse = GetBranchResponse'
 getBranchResponse
     :: Int -- ^ 'grsResponseStatus'
     -> GetBranchResponse
-getBranchResponse pResponseStatus_ =
-  GetBranchResponse'
-    {_grsBranch = Nothing, _grsResponseStatus = pResponseStatus_}
-
+getBranchResponse pResponseStatus_
+  = GetBranchResponse'{_grsBranch = Nothing,
+                       _grsResponseStatus = pResponseStatus_}
 
 -- | The name of the branch.
 grsBranch :: Lens' GetBranchResponse (Maybe BranchInfo)

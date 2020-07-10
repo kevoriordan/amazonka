@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an index object. See <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html Indexing> for more information.
+-- Creates an index object. See <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html Indexing and search> for more information.
 --
 --
 module Network.AWS.CloudDirectory.CreateIndex
@@ -49,14 +49,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createIndex' smart constructor.
-data CreateIndex = CreateIndex'
-  { _ciParentReference             :: !(Maybe ObjectReference)
-  , _ciLinkName                    :: !(Maybe Text)
-  , _ciDirectoryARN                :: !Text
-  , _ciOrderedIndexedAttributeList :: ![AttributeKey]
-  , _ciIsUnique                    :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateIndex = CreateIndex'{_ciParentReference ::
+                                !(Maybe ObjectReference),
+                                _ciLinkName :: !(Maybe Text),
+                                _ciDirectoryARN :: !Text,
+                                _ciOrderedIndexedAttributeList ::
+                                ![AttributeKey],
+                                _ciIsUnique :: !Bool}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateIndex' with the minimum fields required to make a request.
 --
@@ -75,15 +75,12 @@ createIndex
     :: Text -- ^ 'ciDirectoryARN'
     -> Bool -- ^ 'ciIsUnique'
     -> CreateIndex
-createIndex pDirectoryARN_ pIsUnique_ =
-  CreateIndex'
-    { _ciParentReference = Nothing
-    , _ciLinkName = Nothing
-    , _ciDirectoryARN = pDirectoryARN_
-    , _ciOrderedIndexedAttributeList = mempty
-    , _ciIsUnique = pIsUnique_
-    }
-
+createIndex pDirectoryARN_ pIsUnique_
+  = CreateIndex'{_ciParentReference = Nothing,
+                 _ciLinkName = Nothing,
+                 _ciDirectoryARN = pDirectoryARN_,
+                 _ciOrderedIndexedAttributeList = mempty,
+                 _ciIsUnique = pIsUnique_}
 
 -- | A reference to the parent object that contains the index object.
 ciParentReference :: Lens' CreateIndex (Maybe ObjectReference)
@@ -141,11 +138,10 @@ instance ToQuery CreateIndex where
         toQuery = const mempty
 
 -- | /See:/ 'createIndexResponse' smart constructor.
-data CreateIndexResponse = CreateIndexResponse'
-  { _cirsObjectIdentifier :: !(Maybe Text)
-  , _cirsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateIndexResponse = CreateIndexResponse'{_cirsObjectIdentifier
+                                                :: !(Maybe Text),
+                                                _cirsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateIndexResponse' with the minimum fields required to make a request.
 --
@@ -157,10 +153,10 @@ data CreateIndexResponse = CreateIndexResponse'
 createIndexResponse
     :: Int -- ^ 'cirsResponseStatus'
     -> CreateIndexResponse
-createIndexResponse pResponseStatus_ =
-  CreateIndexResponse'
-    {_cirsObjectIdentifier = Nothing, _cirsResponseStatus = pResponseStatus_}
-
+createIndexResponse pResponseStatus_
+  = CreateIndexResponse'{_cirsObjectIdentifier =
+                           Nothing,
+                         _cirsResponseStatus = pResponseStatus_}
 
 -- | The @ObjectIdentifier@ of the index created by this operation.
 cirsObjectIdentifier :: Lens' CreateIndexResponse (Maybe Text)

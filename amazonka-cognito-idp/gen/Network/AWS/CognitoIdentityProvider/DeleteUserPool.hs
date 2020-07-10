@@ -46,10 +46,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteUserPool' smart constructor.
-newtype DeleteUserPool = DeleteUserPool'
-  { _dupUserPoolId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteUserPool = DeleteUserPool'{_dupUserPoolId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUserPool' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype DeleteUserPool = DeleteUserPool'
 deleteUserPool
     :: Text -- ^ 'dupUserPoolId'
     -> DeleteUserPool
-deleteUserPool pUserPoolId_ = DeleteUserPool' {_dupUserPoolId = pUserPoolId_}
-
+deleteUserPool pUserPoolId_
+  = DeleteUserPool'{_dupUserPoolId = pUserPoolId_}
 
 -- | The user pool ID for the user pool you want to delete.
 dupUserPoolId :: Lens' DeleteUserPool Text
@@ -97,16 +96,14 @@ instance ToQuery DeleteUserPool where
         toQuery = const mempty
 
 -- | /See:/ 'deleteUserPoolResponse' smart constructor.
-data DeleteUserPoolResponse =
-  DeleteUserPoolResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUserPoolResponse = DeleteUserPoolResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteUserPoolResponse' with the minimum fields required to make a request.
 --
 deleteUserPoolResponse
     :: DeleteUserPoolResponse
 deleteUserPoolResponse = DeleteUserPoolResponse'
-
 
 instance NFData DeleteUserPoolResponse where

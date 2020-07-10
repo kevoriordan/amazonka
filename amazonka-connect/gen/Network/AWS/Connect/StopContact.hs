@@ -18,10 +18,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Ends the contact initiated by the @StartOutboundVoiceContact@ operation.
+-- Ends the specified contact.
 --
---
--- If you are using an IAM account, it must have permissions to the @connect:StopContact@ operation.
 --
 module Network.AWS.Connect.StopContact
     (
@@ -47,32 +45,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopContact' smart constructor.
-data StopContact = StopContact'
-  { _scContactId  :: !Text
-  , _scInstanceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopContact = StopContact'{_scContactId ::
+                                !Text,
+                                _scInstanceId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopContact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scContactId' - The unique identifier of the contact to end. This is the @ContactId@ value returned from the @StartOutboundVoiceContact@ operation.
+-- * 'scContactId' - The ID of the contact.
 --
--- * 'scInstanceId' - The identifier of the Amazon Connect instance in which the contact is active.
+-- * 'scInstanceId' - The identifier of the Amazon Connect instance.
 stopContact
     :: Text -- ^ 'scContactId'
     -> Text -- ^ 'scInstanceId'
     -> StopContact
-stopContact pContactId_ pInstanceId_ =
-  StopContact' {_scContactId = pContactId_, _scInstanceId = pInstanceId_}
+stopContact pContactId_ pInstanceId_
+  = StopContact'{_scContactId = pContactId_,
+                 _scInstanceId = pInstanceId_}
 
-
--- | The unique identifier of the contact to end. This is the @ContactId@ value returned from the @StartOutboundVoiceContact@ operation.
+-- | The ID of the contact.
 scContactId :: Lens' StopContact Text
 scContactId = lens _scContactId (\ s a -> s{_scContactId = a})
 
--- | The identifier of the Amazon Connect instance in which the contact is active.
+-- | The identifier of the Amazon Connect instance.
 scInstanceId :: Lens' StopContact Text
 scInstanceId = lens _scInstanceId (\ s a -> s{_scInstanceId = a})
 
@@ -109,10 +106,10 @@ instance ToQuery StopContact where
         toQuery = const mempty
 
 -- | /See:/ 'stopContactResponse' smart constructor.
-newtype StopContactResponse = StopContactResponse'
-  { _scrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopContactResponse = StopContactResponse'{_scrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StopContactResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +119,9 @@ newtype StopContactResponse = StopContactResponse'
 stopContactResponse
     :: Int -- ^ 'scrsResponseStatus'
     -> StopContactResponse
-stopContactResponse pResponseStatus_ =
-  StopContactResponse' {_scrsResponseStatus = pResponseStatus_}
-
+stopContactResponse pResponseStatus_
+  = StopContactResponse'{_scrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 scrsResponseStatus :: Lens' StopContactResponse Int

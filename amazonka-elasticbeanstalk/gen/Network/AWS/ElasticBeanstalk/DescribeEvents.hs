@@ -64,21 +64,20 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeEvents' smart constructor.
-data DescribeEvents = DescribeEvents'
-  { _deRequestId       :: !(Maybe Text)
-  , _deTemplateName    :: !(Maybe Text)
-  , _deStartTime       :: !(Maybe ISO8601)
-  , _deSeverity        :: !(Maybe EventSeverity)
-  , _deNextToken       :: !(Maybe Text)
-  , _deVersionLabel    :: !(Maybe Text)
-  , _dePlatformARN     :: !(Maybe Text)
-  , _deEnvironmentName :: !(Maybe Text)
-  , _deMaxRecords      :: !(Maybe Nat)
-  , _deEndTime         :: !(Maybe ISO8601)
-  , _deApplicationName :: !(Maybe Text)
-  , _deEnvironmentId   :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEvents = DescribeEvents'{_deRequestId ::
+                                      !(Maybe Text),
+                                      _deTemplateName :: !(Maybe Text),
+                                      _deStartTime :: !(Maybe ISO8601),
+                                      _deSeverity :: !(Maybe EventSeverity),
+                                      _deNextToken :: !(Maybe Text),
+                                      _deVersionLabel :: !(Maybe Text),
+                                      _dePlatformARN :: !(Maybe Text),
+                                      _deEnvironmentName :: !(Maybe Text),
+                                      _deMaxRecords :: !(Maybe Nat),
+                                      _deEndTime :: !(Maybe ISO8601),
+                                      _deApplicationName :: !(Maybe Text),
+                                      _deEnvironmentId :: !(Maybe Text)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEvents' with the minimum fields required to make a request.
 --
@@ -96,35 +95,28 @@ data DescribeEvents = DescribeEvents'
 --
 -- * 'deVersionLabel' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this application version.
 --
--- * 'dePlatformARN' - The ARN of the version of the custom platform.
+-- * 'dePlatformARN' - The ARN of a custom platform version. If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this custom platform version.
 --
 -- * 'deEnvironmentName' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.
 --
 -- * 'deMaxRecords' - Specifies the maximum number of events that can be returned, beginning with the most recent event.
 --
--- * 'deEndTime' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the @EndTime@ .
+-- * 'deEndTime' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the @EndTime@ . 
 --
 -- * 'deApplicationName' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to include only those associated with this application.
 --
 -- * 'deEnvironmentId' - If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this environment.
 describeEvents
     :: DescribeEvents
-describeEvents =
-  DescribeEvents'
-    { _deRequestId = Nothing
-    , _deTemplateName = Nothing
-    , _deStartTime = Nothing
-    , _deSeverity = Nothing
-    , _deNextToken = Nothing
-    , _deVersionLabel = Nothing
-    , _dePlatformARN = Nothing
-    , _deEnvironmentName = Nothing
-    , _deMaxRecords = Nothing
-    , _deEndTime = Nothing
-    , _deApplicationName = Nothing
-    , _deEnvironmentId = Nothing
-    }
-
+describeEvents
+  = DescribeEvents'{_deRequestId = Nothing,
+                    _deTemplateName = Nothing, _deStartTime = Nothing,
+                    _deSeverity = Nothing, _deNextToken = Nothing,
+                    _deVersionLabel = Nothing, _dePlatformARN = Nothing,
+                    _deEnvironmentName = Nothing,
+                    _deMaxRecords = Nothing, _deEndTime = Nothing,
+                    _deApplicationName = Nothing,
+                    _deEnvironmentId = Nothing}
 
 -- | If specified, AWS Elastic Beanstalk restricts the described events to include only those associated with this request ID.
 deRequestId :: Lens' DescribeEvents (Maybe Text)
@@ -150,7 +142,7 @@ deNextToken = lens _deNextToken (\ s a -> s{_deNextToken = a})
 deVersionLabel :: Lens' DescribeEvents (Maybe Text)
 deVersionLabel = lens _deVersionLabel (\ s a -> s{_deVersionLabel = a})
 
--- | The ARN of the version of the custom platform.
+-- | The ARN of a custom platform version. If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this custom platform version.
 dePlatformARN :: Lens' DescribeEvents (Maybe Text)
 dePlatformARN = lens _dePlatformARN (\ s a -> s{_dePlatformARN = a})
 
@@ -162,7 +154,7 @@ deEnvironmentName = lens _deEnvironmentName (\ s a -> s{_deEnvironmentName = a})
 deMaxRecords :: Lens' DescribeEvents (Maybe Natural)
 deMaxRecords = lens _deMaxRecords (\ s a -> s{_deMaxRecords = a}) . mapping _Nat
 
--- | If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the @EndTime@ .
+-- | If specified, AWS Elastic Beanstalk restricts the returned descriptions to those that occur up to, but not including, the @EndTime@ . 
 deEndTime :: Lens' DescribeEvents (Maybe UTCTime)
 deEndTime = lens _deEndTime (\ s a -> s{_deEndTime = a}) . mapping _Time
 
@@ -226,38 +218,38 @@ instance ToQuery DescribeEvents where
 --
 --
 -- /See:/ 'describeEventsResponse' smart constructor.
-data DescribeEventsResponse = DescribeEventsResponse'
-  { _dersNextToken      :: !(Maybe Text)
-  , _dersEvents         :: !(Maybe [EventDescription])
-  , _dersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventsResponse = DescribeEventsResponse'{_dersNextToken
+                                                      :: !(Maybe Text),
+                                                      _dersEvents ::
+                                                      !(Maybe
+                                                          [EventDescription]),
+                                                      _dersResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeEventsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dersNextToken' - If returned, this indicates that there are more results to obtain. Use this token in the next 'DescribeEvents' call to get the next batch of events.
+-- * 'dersNextToken' - If returned, this indicates that there are more results to obtain. Use this token in the next 'DescribeEvents' call to get the next batch of events. 
 --
--- * 'dersEvents' - A list of 'EventDescription' .
+-- * 'dersEvents' - A list of 'EventDescription' . 
 --
 -- * 'dersResponseStatus' - -- | The response status code.
 describeEventsResponse
     :: Int -- ^ 'dersResponseStatus'
     -> DescribeEventsResponse
-describeEventsResponse pResponseStatus_ =
-  DescribeEventsResponse'
-    { _dersNextToken = Nothing
-    , _dersEvents = Nothing
-    , _dersResponseStatus = pResponseStatus_
-    }
+describeEventsResponse pResponseStatus_
+  = DescribeEventsResponse'{_dersNextToken = Nothing,
+                            _dersEvents = Nothing,
+                            _dersResponseStatus = pResponseStatus_}
 
-
--- | If returned, this indicates that there are more results to obtain. Use this token in the next 'DescribeEvents' call to get the next batch of events.
+-- | If returned, this indicates that there are more results to obtain. Use this token in the next 'DescribeEvents' call to get the next batch of events. 
 dersNextToken :: Lens' DescribeEventsResponse (Maybe Text)
 dersNextToken = lens _dersNextToken (\ s a -> s{_dersNextToken = a})
 
--- | A list of 'EventDescription' .
+-- | A list of 'EventDescription' . 
 dersEvents :: Lens' DescribeEventsResponse [EventDescription]
 dersEvents = lens _dersEvents (\ s a -> s{_dersEvents = a}) . _Default . _Coerce
 

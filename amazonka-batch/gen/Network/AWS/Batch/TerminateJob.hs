@@ -45,11 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'terminateJob' smart constructor.
-data TerminateJob = TerminateJob'
-  { _tjJobId  :: !Text
-  , _tjReason :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TerminateJob = TerminateJob'{_tjJobId :: !Text,
+                                  _tjReason :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TerminateJob' with the minimum fields required to make a request.
 --
@@ -62,9 +60,9 @@ terminateJob
     :: Text -- ^ 'tjJobId'
     -> Text -- ^ 'tjReason'
     -> TerminateJob
-terminateJob pJobId_ pReason_ =
-  TerminateJob' {_tjJobId = pJobId_, _tjReason = pReason_}
-
+terminateJob pJobId_ pReason_
+  = TerminateJob'{_tjJobId = pJobId_,
+                  _tjReason = pReason_}
 
 -- | The AWS Batch job ID of the job to terminate.
 tjJobId :: Lens' TerminateJob Text
@@ -107,10 +105,10 @@ instance ToQuery TerminateJob where
         toQuery = const mempty
 
 -- | /See:/ 'terminateJobResponse' smart constructor.
-newtype TerminateJobResponse = TerminateJobResponse'
-  { _tjrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype TerminateJobResponse = TerminateJobResponse'{_tjrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'TerminateJobResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +118,9 @@ newtype TerminateJobResponse = TerminateJobResponse'
 terminateJobResponse
     :: Int -- ^ 'tjrsResponseStatus'
     -> TerminateJobResponse
-terminateJobResponse pResponseStatus_ =
-  TerminateJobResponse' {_tjrsResponseStatus = pResponseStatus_}
-
+terminateJobResponse pResponseStatus_
+  = TerminateJobResponse'{_tjrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 tjrsResponseStatus :: Lens' TerminateJobResponse Int

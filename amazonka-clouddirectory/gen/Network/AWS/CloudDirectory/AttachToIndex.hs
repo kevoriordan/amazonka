@@ -47,12 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachToIndex' smart constructor.
-data AttachToIndex = AttachToIndex'
-  { _atiDirectoryARN    :: !Text
-  , _atiIndexReference  :: !ObjectReference
-  , _atiTargetReference :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachToIndex = AttachToIndex'{_atiDirectoryARN
+                                    :: !Text,
+                                    _atiIndexReference :: !ObjectReference,
+                                    _atiTargetReference :: !ObjectReference}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachToIndex' with the minimum fields required to make a request.
 --
@@ -68,13 +67,11 @@ attachToIndex
     -> ObjectReference -- ^ 'atiIndexReference'
     -> ObjectReference -- ^ 'atiTargetReference'
     -> AttachToIndex
-attachToIndex pDirectoryARN_ pIndexReference_ pTargetReference_ =
-  AttachToIndex'
-    { _atiDirectoryARN = pDirectoryARN_
-    , _atiIndexReference = pIndexReference_
-    , _atiTargetReference = pTargetReference_
-    }
-
+attachToIndex pDirectoryARN_ pIndexReference_
+  pTargetReference_
+  = AttachToIndex'{_atiDirectoryARN = pDirectoryARN_,
+                   _atiIndexReference = pIndexReference_,
+                   _atiTargetReference = pTargetReference_}
 
 -- | The Amazon Resource Name (ARN) of the directory where the object and index exist.
 atiDirectoryARN :: Lens' AttachToIndex Text
@@ -123,11 +120,12 @@ instance ToQuery AttachToIndex where
         toQuery = const mempty
 
 -- | /See:/ 'attachToIndexResponse' smart constructor.
-data AttachToIndexResponse = AttachToIndexResponse'
-  { _atirsAttachedObjectIdentifier :: !(Maybe Text)
-  , _atirsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachToIndexResponse = AttachToIndexResponse'{_atirsAttachedObjectIdentifier
+                                                    :: !(Maybe Text),
+                                                    _atirsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'AttachToIndexResponse' with the minimum fields required to make a request.
 --
@@ -139,12 +137,10 @@ data AttachToIndexResponse = AttachToIndexResponse'
 attachToIndexResponse
     :: Int -- ^ 'atirsResponseStatus'
     -> AttachToIndexResponse
-attachToIndexResponse pResponseStatus_ =
-  AttachToIndexResponse'
-    { _atirsAttachedObjectIdentifier = Nothing
-    , _atirsResponseStatus = pResponseStatus_
-    }
-
+attachToIndexResponse pResponseStatus_
+  = AttachToIndexResponse'{_atirsAttachedObjectIdentifier
+                             = Nothing,
+                           _atirsResponseStatus = pResponseStatus_}
 
 -- | The @ObjectIdentifier@ of the object that was attached to the index.
 atirsAttachedObjectIdentifier :: Lens' AttachToIndexResponse (Maybe Text)

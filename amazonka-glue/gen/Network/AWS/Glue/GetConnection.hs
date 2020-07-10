@@ -28,14 +28,15 @@ module Network.AWS.Glue.GetConnection
     , GetConnection
     -- * Request Lenses
     , gCatalogId
+    , gHidePassword
     , gName
 
     -- * Destructuring the Response
     , getConnectionResponse
     , GetConnectionResponse
     -- * Response Lenses
-    , getrsConnection
-    , getrsResponseStatus
+    , gtcnnctnrsConnection
+    , gtcnnctnrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -46,28 +47,35 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getConnection' smart constructor.
-data GetConnection = GetConnection'
-  { _gCatalogId :: !(Maybe Text)
-  , _gName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetConnection = GetConnection'{_gCatalogId ::
+                                    !(Maybe Text),
+                                    _gHidePassword :: !(Maybe Bool),
+                                    _gName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetConnection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gCatalogId' - The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+-- * 'gCatalogId' - The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
+--
+-- * 'gHidePassword' - Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
 --
 -- * 'gName' - The name of the connection definition to retrieve.
 getConnection
     :: Text -- ^ 'gName'
     -> GetConnection
-getConnection pName_ = GetConnection' {_gCatalogId = Nothing, _gName = pName_}
+getConnection pName_
+  = GetConnection'{_gCatalogId = Nothing,
+                   _gHidePassword = Nothing, _gName = pName_}
 
-
--- | The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
 gCatalogId :: Lens' GetConnection (Maybe Text)
 gCatalogId = lens _gCatalogId (\ s a -> s{_gCatalogId = a})
+
+-- | Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
+gHidePassword :: Lens' GetConnection (Maybe Bool)
+gHidePassword = lens _gHidePassword (\ s a -> s{_gHidePassword = a})
 
 -- | The name of the connection definition to retrieve.
 gName :: Lens' GetConnection Text
@@ -100,6 +108,7 @@ instance ToJSON GetConnection where
           = object
               (catMaybes
                  [("CatalogId" .=) <$> _gCatalogId,
+                  ("HidePassword" .=) <$> _gHidePassword,
                   Just ("Name" .= _gName)])
 
 instance ToPath GetConnection where
@@ -109,33 +118,34 @@ instance ToQuery GetConnection where
         toQuery = const mempty
 
 -- | /See:/ 'getConnectionResponse' smart constructor.
-data GetConnectionResponse = GetConnectionResponse'
-  { _getrsConnection     :: !(Maybe Connection)
-  , _getrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetConnectionResponse = GetConnectionResponse'{_gtcnnctnrsConnection
+                                                    :: !(Maybe Connection),
+                                                    _gtcnnctnrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetConnectionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'getrsConnection' - The requested connection definition.
+-- * 'gtcnnctnrsConnection' - The requested connection definition.
 --
--- * 'getrsResponseStatus' - -- | The response status code.
+-- * 'gtcnnctnrsResponseStatus' - -- | The response status code.
 getConnectionResponse
-    :: Int -- ^ 'getrsResponseStatus'
+    :: Int -- ^ 'gtcnnctnrsResponseStatus'
     -> GetConnectionResponse
-getConnectionResponse pResponseStatus_ =
-  GetConnectionResponse'
-    {_getrsConnection = Nothing, _getrsResponseStatus = pResponseStatus_}
-
+getConnectionResponse pResponseStatus_
+  = GetConnectionResponse'{_gtcnnctnrsConnection =
+                             Nothing,
+                           _gtcnnctnrsResponseStatus = pResponseStatus_}
 
 -- | The requested connection definition.
-getrsConnection :: Lens' GetConnectionResponse (Maybe Connection)
-getrsConnection = lens _getrsConnection (\ s a -> s{_getrsConnection = a})
+gtcnnctnrsConnection :: Lens' GetConnectionResponse (Maybe Connection)
+gtcnnctnrsConnection = lens _gtcnnctnrsConnection (\ s a -> s{_gtcnnctnrsConnection = a})
 
 -- | -- | The response status code.
-getrsResponseStatus :: Lens' GetConnectionResponse Int
-getrsResponseStatus = lens _getrsResponseStatus (\ s a -> s{_getrsResponseStatus = a})
+gtcnnctnrsResponseStatus :: Lens' GetConnectionResponse Int
+gtcnnctnrsResponseStatus = lens _gtcnnctnrsResponseStatus (\ s a -> s{_gtcnnctnrsResponseStatus = a})
 
 instance NFData GetConnectionResponse where

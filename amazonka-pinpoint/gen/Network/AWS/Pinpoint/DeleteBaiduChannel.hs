@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete a BAIDU GCM channel
+-- Disables the Baidu channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteBaiduChannel
     (
     -- * Creating a Request
@@ -43,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteBaiduChannel' smart constructor.
-newtype DeleteBaiduChannel = DeleteBaiduChannel'
-  { _dbcApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBaiduChannel = DeleteBaiduChannel'{_dbcApplicationId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteBaiduChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbcApplicationId' - Undocumented member.
+-- * 'dbcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteBaiduChannel
     :: Text -- ^ 'dbcApplicationId'
     -> DeleteBaiduChannel
-deleteBaiduChannel pApplicationId_ =
-  DeleteBaiduChannel' {_dbcApplicationId = pApplicationId_}
+deleteBaiduChannel pApplicationId_
+  = DeleteBaiduChannel'{_dbcApplicationId =
+                          pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 dbcApplicationId :: Lens' DeleteBaiduChannel Text
 dbcApplicationId = lens _dbcApplicationId (\ s a -> s{_dbcApplicationId = a})
 
@@ -95,11 +97,13 @@ instance ToQuery DeleteBaiduChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteBaiduChannelResponse' smart constructor.
-data DeleteBaiduChannelResponse = DeleteBaiduChannelResponse'
-  { _dbcrsResponseStatus       :: !Int
-  , _dbcrsBaiduChannelResponse :: !BaiduChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBaiduChannelResponse = DeleteBaiduChannelResponse'{_dbcrsResponseStatus
+                                                              :: !Int,
+                                                              _dbcrsBaiduChannelResponse
+                                                              ::
+                                                              !BaiduChannelResponse}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteBaiduChannelResponse' with the minimum fields required to make a request.
 --
@@ -112,12 +116,12 @@ deleteBaiduChannelResponse
     :: Int -- ^ 'dbcrsResponseStatus'
     -> BaiduChannelResponse -- ^ 'dbcrsBaiduChannelResponse'
     -> DeleteBaiduChannelResponse
-deleteBaiduChannelResponse pResponseStatus_ pBaiduChannelResponse_ =
-  DeleteBaiduChannelResponse'
-    { _dbcrsResponseStatus = pResponseStatus_
-    , _dbcrsBaiduChannelResponse = pBaiduChannelResponse_
-    }
-
+deleteBaiduChannelResponse pResponseStatus_
+  pBaiduChannelResponse_
+  = DeleteBaiduChannelResponse'{_dbcrsResponseStatus =
+                                  pResponseStatus_,
+                                _dbcrsBaiduChannelResponse =
+                                  pBaiduChannelResponse_}
 
 -- | -- | The response status code.
 dbcrsResponseStatus :: Lens' DeleteBaiduChannelResponse Int

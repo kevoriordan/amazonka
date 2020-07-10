@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'startUserImportJob' smart constructor.
-data StartUserImportJob = StartUserImportJob'
-  { _suijUserPoolId :: !Text
-  , _suijJobId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartUserImportJob = StartUserImportJob'{_suijUserPoolId
+                                              :: !Text,
+                                              _suijJobId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartUserImportJob' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ startUserImportJob
     :: Text -- ^ 'suijUserPoolId'
     -> Text -- ^ 'suijJobId'
     -> StartUserImportJob
-startUserImportJob pUserPoolId_ pJobId_ =
-  StartUserImportJob' {_suijUserPoolId = pUserPoolId_, _suijJobId = pJobId_}
-
+startUserImportJob pUserPoolId_ pJobId_
+  = StartUserImportJob'{_suijUserPoolId = pUserPoolId_,
+                        _suijJobId = pJobId_}
 
 -- | The user pool ID for the user pool that the users are being imported into.
 suijUserPoolId :: Lens' StartUserImportJob Text
@@ -121,11 +120,14 @@ instance ToQuery StartUserImportJob where
 --
 --
 -- /See:/ 'startUserImportJobResponse' smart constructor.
-data StartUserImportJobResponse = StartUserImportJobResponse'
-  { _suijrsUserImportJob  :: !(Maybe UserImportJobType)
-  , _suijrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartUserImportJobResponse = StartUserImportJobResponse'{_suijrsUserImportJob
+                                                              ::
+                                                              !(Maybe
+                                                                  UserImportJobType),
+                                                              _suijrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'StartUserImportJobResponse' with the minimum fields required to make a request.
 --
@@ -137,10 +139,10 @@ data StartUserImportJobResponse = StartUserImportJobResponse'
 startUserImportJobResponse
     :: Int -- ^ 'suijrsResponseStatus'
     -> StartUserImportJobResponse
-startUserImportJobResponse pResponseStatus_ =
-  StartUserImportJobResponse'
-    {_suijrsUserImportJob = Nothing, _suijrsResponseStatus = pResponseStatus_}
-
+startUserImportJobResponse pResponseStatus_
+  = StartUserImportJobResponse'{_suijrsUserImportJob =
+                                  Nothing,
+                                _suijrsResponseStatus = pResponseStatus_}
 
 -- | The job object that represents the user import job.
 suijrsUserImportJob :: Lens' StartUserImportJobResponse (Maybe UserImportJobType)

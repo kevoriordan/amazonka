@@ -51,12 +51,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createUserImportJob' smart constructor.
-data CreateUserImportJob = CreateUserImportJob'
-  { _cuijJobName               :: !Text
-  , _cuijUserPoolId            :: !Text
-  , _cuijCloudWatchLogsRoleARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserImportJob = CreateUserImportJob'{_cuijJobName
+                                                :: !Text,
+                                                _cuijUserPoolId :: !Text,
+                                                _cuijCloudWatchLogsRoleARN ::
+                                                !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUserImportJob' with the minimum fields required to make a request.
 --
@@ -72,13 +72,11 @@ createUserImportJob
     -> Text -- ^ 'cuijUserPoolId'
     -> Text -- ^ 'cuijCloudWatchLogsRoleARN'
     -> CreateUserImportJob
-createUserImportJob pJobName_ pUserPoolId_ pCloudWatchLogsRoleARN_ =
-  CreateUserImportJob'
-    { _cuijJobName = pJobName_
-    , _cuijUserPoolId = pUserPoolId_
-    , _cuijCloudWatchLogsRoleARN = pCloudWatchLogsRoleARN_
-    }
-
+createUserImportJob pJobName_ pUserPoolId_
+  pCloudWatchLogsRoleARN_
+  = CreateUserImportJob'{_cuijJobName = pJobName_,
+                         _cuijUserPoolId = pUserPoolId_,
+                         _cuijCloudWatchLogsRoleARN = pCloudWatchLogsRoleARN_}
 
 -- | The job name for the user import job.
 cuijJobName :: Lens' CreateUserImportJob Text
@@ -137,11 +135,14 @@ instance ToQuery CreateUserImportJob where
 --
 --
 -- /See:/ 'createUserImportJobResponse' smart constructor.
-data CreateUserImportJobResponse = CreateUserImportJobResponse'
-  { _cuijrsUserImportJob  :: !(Maybe UserImportJobType)
-  , _cuijrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserImportJobResponse = CreateUserImportJobResponse'{_cuijrsUserImportJob
+                                                                ::
+                                                                !(Maybe
+                                                                    UserImportJobType),
+                                                                _cuijrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateUserImportJobResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +154,10 @@ data CreateUserImportJobResponse = CreateUserImportJobResponse'
 createUserImportJobResponse
     :: Int -- ^ 'cuijrsResponseStatus'
     -> CreateUserImportJobResponse
-createUserImportJobResponse pResponseStatus_ =
-  CreateUserImportJobResponse'
-    {_cuijrsUserImportJob = Nothing, _cuijrsResponseStatus = pResponseStatus_}
-
+createUserImportJobResponse pResponseStatus_
+  = CreateUserImportJobResponse'{_cuijrsUserImportJob =
+                                   Nothing,
+                                 _cuijrsResponseStatus = pResponseStatus_}
 
 -- | The job object that represents the user import job.
 cuijrsUserImportJob :: Lens' CreateUserImportJobResponse (Maybe UserImportJobType)

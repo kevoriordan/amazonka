@@ -47,26 +47,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeClusters' smart constructor.
-data DescribeClusters = DescribeClusters'
-  { _dcInclude  :: !(Maybe [ClusterField])
-  , _dcClusters :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClusters = DescribeClusters'{_dcInclude
+                                          :: !(Maybe [ClusterField]),
+                                          _dcClusters :: !(Maybe [Text])}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeClusters' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcInclude' - Additional information about your clusters to be separated by launch type, including:     * runningEC2TasksCount     * runningFargateTasksCount     * pendingEC2TasksCount     * pendingFargateTasksCount     * activeEC2ServiceCount     * activeFargateServiceCount     * drainingEC2ServiceCount     * drainingFargateServiceCount
+-- * 'dcInclude' - Whether to include additional information about your clusters in the response. If this field is omitted, the attachments, statistics, and tags are not included. If @ATTACHMENTS@ is specified, the attachments for the container instances or tasks within the cluster are included. If @SETTINGS@ is specified, the settings for the cluster are included. If @STATISTICS@ is specified, the following additional information, separated by launch type, is included:     * runningEC2TasksCount     * runningFargateTasksCount     * pendingEC2TasksCount     * pendingFargateTasksCount     * activeEC2ServiceCount     * activeFargateServiceCount     * drainingEC2ServiceCount     * drainingFargateServiceCount If @TAGS@ is specified, the metadata tags associated with the cluster are included.
 --
 -- * 'dcClusters' - A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN) entries. If you do not specify a cluster, the default cluster is assumed.
 describeClusters
     :: DescribeClusters
-describeClusters =
-  DescribeClusters' {_dcInclude = Nothing, _dcClusters = Nothing}
+describeClusters
+  = DescribeClusters'{_dcInclude = Nothing,
+                      _dcClusters = Nothing}
 
-
--- | Additional information about your clusters to be separated by launch type, including:     * runningEC2TasksCount     * runningFargateTasksCount     * pendingEC2TasksCount     * pendingFargateTasksCount     * activeEC2ServiceCount     * activeFargateServiceCount     * drainingEC2ServiceCount     * drainingFargateServiceCount
+-- | Whether to include additional information about your clusters in the response. If this field is omitted, the attachments, statistics, and tags are not included. If @ATTACHMENTS@ is specified, the attachments for the container instances or tasks within the cluster are included. If @SETTINGS@ is specified, the settings for the cluster are included. If @STATISTICS@ is specified, the following additional information, separated by launch type, is included:     * runningEC2TasksCount     * runningFargateTasksCount     * pendingEC2TasksCount     * pendingFargateTasksCount     * activeEC2ServiceCount     * activeFargateServiceCount     * drainingEC2ServiceCount     * drainingFargateServiceCount If @TAGS@ is specified, the metadata tags associated with the cluster are included.
 dcInclude :: Lens' DescribeClusters [ClusterField]
 dcInclude = lens _dcInclude (\ s a -> s{_dcInclude = a}) . _Default . _Coerce
 
@@ -113,12 +112,14 @@ instance ToQuery DescribeClusters where
         toQuery = const mempty
 
 -- | /See:/ 'describeClustersResponse' smart constructor.
-data DescribeClustersResponse = DescribeClustersResponse'
-  { _dcrsFailures       :: !(Maybe [Failure])
-  , _dcrsClusters       :: !(Maybe [Cluster])
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeClustersResponse = DescribeClustersResponse'{_dcrsFailures
+                                                          :: !(Maybe [Failure]),
+                                                          _dcrsClusters ::
+                                                          !(Maybe [Cluster]),
+                                                          _dcrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeClustersResponse' with the minimum fields required to make a request.
 --
@@ -132,13 +133,10 @@ data DescribeClustersResponse = DescribeClustersResponse'
 describeClustersResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeClustersResponse
-describeClustersResponse pResponseStatus_ =
-  DescribeClustersResponse'
-    { _dcrsFailures = Nothing
-    , _dcrsClusters = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
-
+describeClustersResponse pResponseStatus_
+  = DescribeClustersResponse'{_dcrsFailures = Nothing,
+                              _dcrsClusters = Nothing,
+                              _dcrsResponseStatus = pResponseStatus_}
 
 -- | Any failures associated with the call.
 dcrsFailures :: Lens' DescribeClustersResponse [Failure]

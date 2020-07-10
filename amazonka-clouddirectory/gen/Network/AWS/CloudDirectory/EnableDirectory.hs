@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'enableDirectory' smart constructor.
-newtype EnableDirectory = EnableDirectory'
-  { _edDirectoryARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype EnableDirectory = EnableDirectory'{_edDirectoryARN
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableDirectory' with the minimum fields required to make a request.
 --
@@ -58,9 +57,8 @@ newtype EnableDirectory = EnableDirectory'
 enableDirectory
     :: Text -- ^ 'edDirectoryARN'
     -> EnableDirectory
-enableDirectory pDirectoryARN_ =
-  EnableDirectory' {_edDirectoryARN = pDirectoryARN_}
-
+enableDirectory pDirectoryARN_
+  = EnableDirectory'{_edDirectoryARN = pDirectoryARN_}
 
 -- | The ARN of the directory to enable.
 edDirectoryARN :: Lens' EnableDirectory Text
@@ -95,11 +93,12 @@ instance ToQuery EnableDirectory where
         toQuery = const mempty
 
 -- | /See:/ 'enableDirectoryResponse' smart constructor.
-data EnableDirectoryResponse = EnableDirectoryResponse'
-  { _edrsResponseStatus :: !Int
-  , _edrsDirectoryARN   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableDirectoryResponse = EnableDirectoryResponse'{_edrsResponseStatus
+                                                        :: !Int,
+                                                        _edrsDirectoryARN ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'EnableDirectoryResponse' with the minimum fields required to make a request.
 --
@@ -112,10 +111,11 @@ enableDirectoryResponse
     :: Int -- ^ 'edrsResponseStatus'
     -> Text -- ^ 'edrsDirectoryARN'
     -> EnableDirectoryResponse
-enableDirectoryResponse pResponseStatus_ pDirectoryARN_ =
-  EnableDirectoryResponse'
-    {_edrsResponseStatus = pResponseStatus_, _edrsDirectoryARN = pDirectoryARN_}
-
+enableDirectoryResponse pResponseStatus_
+  pDirectoryARN_
+  = EnableDirectoryResponse'{_edrsResponseStatus =
+                               pResponseStatus_,
+                             _edrsDirectoryARN = pDirectoryARN_}
 
 -- | -- | The response status code.
 edrsResponseStatus :: Lens' EnableDirectoryResponse Int

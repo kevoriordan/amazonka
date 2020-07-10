@@ -49,10 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteBatchPrediction' smart constructor.
-newtype DeleteBatchPrediction = DeleteBatchPrediction'
-  { _dbpBatchPredictionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBatchPrediction = DeleteBatchPrediction'{_dbpBatchPredictionId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteBatchPrediction' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype DeleteBatchPrediction = DeleteBatchPrediction'
 deleteBatchPrediction
     :: Text -- ^ 'dbpBatchPredictionId'
     -> DeleteBatchPrediction
-deleteBatchPrediction pBatchPredictionId_ =
-  DeleteBatchPrediction' {_dbpBatchPredictionId = pBatchPredictionId_}
-
+deleteBatchPrediction pBatchPredictionId_
+  = DeleteBatchPrediction'{_dbpBatchPredictionId =
+                             pBatchPredictionId_}
 
 -- | A user-supplied ID that uniquely identifies the @BatchPrediction@ .
 dbpBatchPredictionId :: Lens' DeleteBatchPrediction Text
@@ -114,11 +114,14 @@ instance ToQuery DeleteBatchPrediction where
 --
 --
 -- /See:/ 'deleteBatchPredictionResponse' smart constructor.
-data DeleteBatchPredictionResponse = DeleteBatchPredictionResponse'
-  { _dbprsBatchPredictionId :: !(Maybe Text)
-  , _dbprsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBatchPredictionResponse = DeleteBatchPredictionResponse'{_dbprsBatchPredictionId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dbprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteBatchPredictionResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +133,10 @@ data DeleteBatchPredictionResponse = DeleteBatchPredictionResponse'
 deleteBatchPredictionResponse
     :: Int -- ^ 'dbprsResponseStatus'
     -> DeleteBatchPredictionResponse
-deleteBatchPredictionResponse pResponseStatus_ =
-  DeleteBatchPredictionResponse'
-    {_dbprsBatchPredictionId = Nothing, _dbprsResponseStatus = pResponseStatus_}
-
+deleteBatchPredictionResponse pResponseStatus_
+  = DeleteBatchPredictionResponse'{_dbprsBatchPredictionId
+                                     = Nothing,
+                                   _dbprsResponseStatus = pResponseStatus_}
 
 -- | A user-supplied ID that uniquely identifies the @BatchPrediction@ . This value should be identical to the value of the @BatchPredictionID@ in the request.
 dbprsBatchPredictionId :: Lens' DeleteBatchPredictionResponse (Maybe Text)

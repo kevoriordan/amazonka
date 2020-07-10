@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Specify the load-based auto scaling configuration for a specified layer. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html Managing Load with Time-based and Load-based Instances> .
+-- Specify the load-based auto scaling configuration for a specified layer. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html Managing Load with Time-based and Load-based Instances> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.SetLoadBasedAutoScaling
     (
@@ -47,13 +47,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setLoadBasedAutoScaling' smart constructor.
-data SetLoadBasedAutoScaling = SetLoadBasedAutoScaling'
-  { _slbasUpScaling   :: !(Maybe AutoScalingThresholds)
-  , _slbasEnable      :: !(Maybe Bool)
-  , _slbasDownScaling :: !(Maybe AutoScalingThresholds)
-  , _slbasLayerId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetLoadBasedAutoScaling = SetLoadBasedAutoScaling'{_slbasUpScaling
+                                                        ::
+                                                        !(Maybe
+                                                            AutoScalingThresholds),
+                                                        _slbasEnable ::
+                                                        !(Maybe Bool),
+                                                        _slbasDownScaling ::
+                                                        !(Maybe
+                                                            AutoScalingThresholds),
+                                                        _slbasLayerId :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'SetLoadBasedAutoScaling' with the minimum fields required to make a request.
 --
@@ -69,14 +74,11 @@ data SetLoadBasedAutoScaling = SetLoadBasedAutoScaling'
 setLoadBasedAutoScaling
     :: Text -- ^ 'slbasLayerId'
     -> SetLoadBasedAutoScaling
-setLoadBasedAutoScaling pLayerId_ =
-  SetLoadBasedAutoScaling'
-    { _slbasUpScaling = Nothing
-    , _slbasEnable = Nothing
-    , _slbasDownScaling = Nothing
-    , _slbasLayerId = pLayerId_
-    }
-
+setLoadBasedAutoScaling pLayerId_
+  = SetLoadBasedAutoScaling'{_slbasUpScaling = Nothing,
+                             _slbasEnable = Nothing,
+                             _slbasDownScaling = Nothing,
+                             _slbasLayerId = pLayerId_}
 
 -- | An @AutoScalingThresholds@ object with the upscaling threshold configuration. If the load exceeds these thresholds for a specified amount of time, AWS OpsWorks Stacks starts a specified number of instances.
 slbasUpScaling :: Lens' SetLoadBasedAutoScaling (Maybe AutoScalingThresholds)
@@ -131,16 +133,15 @@ instance ToQuery SetLoadBasedAutoScaling where
         toQuery = const mempty
 
 -- | /See:/ 'setLoadBasedAutoScalingResponse' smart constructor.
-data SetLoadBasedAutoScalingResponse =
-  SetLoadBasedAutoScalingResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetLoadBasedAutoScalingResponse = SetLoadBasedAutoScalingResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'SetLoadBasedAutoScalingResponse' with the minimum fields required to make a request.
 --
 setLoadBasedAutoScalingResponse
     :: SetLoadBasedAutoScalingResponse
-setLoadBasedAutoScalingResponse = SetLoadBasedAutoScalingResponse'
-
+setLoadBasedAutoScalingResponse
+  = SetLoadBasedAutoScalingResponse'
 
 instance NFData SetLoadBasedAutoScalingResponse where

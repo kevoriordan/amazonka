@@ -21,6 +21,8 @@
 -- Lists logging levels.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListV2LoggingLevels
     (
     -- * Creating a Request
@@ -43,17 +45,17 @@ module Network.AWS.IoT.ListV2LoggingLevels
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listV2LoggingLevels' smart constructor.
-data ListV2LoggingLevels = ListV2LoggingLevels'
-  { _lvllTargetType :: !(Maybe LogTargetType)
-  , _lvllNextToken  :: !(Maybe Text)
-  , _lvllMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListV2LoggingLevels = ListV2LoggingLevels'{_lvllTargetType
+                                                :: !(Maybe LogTargetType),
+                                                _lvllNextToken :: !(Maybe Text),
+                                                _lvllMaxResults :: !(Maybe Nat)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListV2LoggingLevels' with the minimum fields required to make a request.
 --
@@ -66,13 +68,9 @@ data ListV2LoggingLevels = ListV2LoggingLevels'
 -- * 'lvllMaxResults' - The maximum number of results to return at one time.
 listV2LoggingLevels
     :: ListV2LoggingLevels
-listV2LoggingLevels =
-  ListV2LoggingLevels'
-    { _lvllTargetType = Nothing
-    , _lvllNextToken = Nothing
-    , _lvllMaxResults = Nothing
-    }
-
+listV2LoggingLevels
+  = ListV2LoggingLevels'{_lvllTargetType = Nothing,
+                         _lvllNextToken = Nothing, _lvllMaxResults = Nothing}
 
 -- | The type of resource for which you are configuring logging. Must be @THING_Group@ .
 lvllTargetType :: Lens' ListV2LoggingLevels (Maybe LogTargetType)
@@ -85,6 +83,14 @@ lvllNextToken = lens _lvllNextToken (\ s a -> s{_lvllNextToken = a})
 -- | The maximum number of results to return at one time.
 lvllMaxResults :: Lens' ListV2LoggingLevels (Maybe Natural)
 lvllMaxResults = lens _lvllMaxResults (\ s a -> s{_lvllMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListV2LoggingLevels where
+        page rq rs
+          | stop (rs ^. lvllrsNextToken) = Nothing
+          | stop (rs ^. lvllrsLogTargetConfigurations) =
+            Nothing
+          | otherwise =
+            Just $ rq & lvllNextToken .~ rs ^. lvllrsNextToken
 
 instance AWSRequest ListV2LoggingLevels where
         type Rs ListV2LoggingLevels =
@@ -116,12 +122,17 @@ instance ToQuery ListV2LoggingLevels where
                "maxResults" =: _lvllMaxResults]
 
 -- | /See:/ 'listV2LoggingLevelsResponse' smart constructor.
-data ListV2LoggingLevelsResponse = ListV2LoggingLevelsResponse'
-  { _lvllrsLogTargetConfigurations :: !(Maybe [LogTargetConfiguration])
-  , _lvllrsNextToken               :: !(Maybe Text)
-  , _lvllrsResponseStatus          :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListV2LoggingLevelsResponse = ListV2LoggingLevelsResponse'{_lvllrsLogTargetConfigurations
+                                                                ::
+                                                                !(Maybe
+                                                                    [LogTargetConfiguration]),
+                                                                _lvllrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lvllrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListV2LoggingLevelsResponse' with the minimum fields required to make a request.
 --
@@ -135,13 +146,11 @@ data ListV2LoggingLevelsResponse = ListV2LoggingLevelsResponse'
 listV2LoggingLevelsResponse
     :: Int -- ^ 'lvllrsResponseStatus'
     -> ListV2LoggingLevelsResponse
-listV2LoggingLevelsResponse pResponseStatus_ =
-  ListV2LoggingLevelsResponse'
-    { _lvllrsLogTargetConfigurations = Nothing
-    , _lvllrsNextToken = Nothing
-    , _lvllrsResponseStatus = pResponseStatus_
-    }
-
+listV2LoggingLevelsResponse pResponseStatus_
+  = ListV2LoggingLevelsResponse'{_lvllrsLogTargetConfigurations
+                                   = Nothing,
+                                 _lvllrsNextToken = Nothing,
+                                 _lvllrsResponseStatus = pResponseStatus_}
 
 -- | The logging configuration for a target.
 lvllrsLogTargetConfigurations :: Lens' ListV2LoggingLevelsResponse [LogTargetConfiguration]

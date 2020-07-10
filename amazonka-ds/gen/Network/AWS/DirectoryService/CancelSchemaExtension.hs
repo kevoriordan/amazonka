@@ -45,11 +45,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'cancelSchemaExtension' smart constructor.
-data CancelSchemaExtension = CancelSchemaExtension'
-  { _cseDirectoryId       :: !Text
-  , _cseSchemaExtensionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelSchemaExtension = CancelSchemaExtension'{_cseDirectoryId
+                                                    :: !Text,
+                                                    _cseSchemaExtensionId ::
+                                                    !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CancelSchemaExtension' with the minimum fields required to make a request.
 --
@@ -62,12 +63,11 @@ cancelSchemaExtension
     :: Text -- ^ 'cseDirectoryId'
     -> Text -- ^ 'cseSchemaExtensionId'
     -> CancelSchemaExtension
-cancelSchemaExtension pDirectoryId_ pSchemaExtensionId_ =
-  CancelSchemaExtension'
-    { _cseDirectoryId = pDirectoryId_
-    , _cseSchemaExtensionId = pSchemaExtensionId_
-    }
-
+cancelSchemaExtension pDirectoryId_
+  pSchemaExtensionId_
+  = CancelSchemaExtension'{_cseDirectoryId =
+                             pDirectoryId_,
+                           _cseSchemaExtensionId = pSchemaExtensionId_}
 
 -- | The identifier of the directory whose schema extension will be canceled.
 cseDirectoryId :: Lens' CancelSchemaExtension Text
@@ -115,10 +115,10 @@ instance ToQuery CancelSchemaExtension where
         toQuery = const mempty
 
 -- | /See:/ 'cancelSchemaExtensionResponse' smart constructor.
-newtype CancelSchemaExtensionResponse = CancelSchemaExtensionResponse'
-  { _csersResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelSchemaExtensionResponse = CancelSchemaExtensionResponse'{_csersResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'CancelSchemaExtensionResponse' with the minimum fields required to make a request.
 --
@@ -128,9 +128,9 @@ newtype CancelSchemaExtensionResponse = CancelSchemaExtensionResponse'
 cancelSchemaExtensionResponse
     :: Int -- ^ 'csersResponseStatus'
     -> CancelSchemaExtensionResponse
-cancelSchemaExtensionResponse pResponseStatus_ =
-  CancelSchemaExtensionResponse' {_csersResponseStatus = pResponseStatus_}
-
+cancelSchemaExtensionResponse pResponseStatus_
+  = CancelSchemaExtensionResponse'{_csersResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 csersResponseStatus :: Lens' CancelSchemaExtensionResponse Int

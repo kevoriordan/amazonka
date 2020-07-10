@@ -53,14 +53,13 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listCommands' smart constructor.
-data ListCommands = ListCommands'
-  { _lcInstanceId :: !(Maybe Text)
-  , _lcFilters    :: !(Maybe (List1 CommandFilter))
-  , _lcNextToken  :: !(Maybe Text)
-  , _lcCommandId  :: !(Maybe Text)
-  , _lcMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCommands = ListCommands'{_lcInstanceId ::
+                                  !(Maybe Text),
+                                  _lcFilters :: !(Maybe (List1 CommandFilter)),
+                                  _lcNextToken :: !(Maybe Text),
+                                  _lcCommandId :: !(Maybe Text),
+                                  _lcMaxResults :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCommands' with the minimum fields required to make a request.
 --
@@ -68,7 +67,7 @@ data ListCommands = ListCommands'
 --
 -- * 'lcInstanceId' - (Optional) Lists commands issued against this instance ID.
 --
--- * 'lcFilters' - (Optional) One or more filters. Use a filter to return a more specific list of results.
+-- * 'lcFilters' - (Optional) One or more filters. Use a filter to return a more specific list of results. 
 --
 -- * 'lcNextToken' - (Optional) The token for the next set of items to return. (You received this token from a previous call.)
 --
@@ -77,21 +76,16 @@ data ListCommands = ListCommands'
 -- * 'lcMaxResults' - (Optional) The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 listCommands
     :: ListCommands
-listCommands =
-  ListCommands'
-    { _lcInstanceId = Nothing
-    , _lcFilters = Nothing
-    , _lcNextToken = Nothing
-    , _lcCommandId = Nothing
-    , _lcMaxResults = Nothing
-    }
-
+listCommands
+  = ListCommands'{_lcInstanceId = Nothing,
+                  _lcFilters = Nothing, _lcNextToken = Nothing,
+                  _lcCommandId = Nothing, _lcMaxResults = Nothing}
 
 -- | (Optional) Lists commands issued against this instance ID.
 lcInstanceId :: Lens' ListCommands (Maybe Text)
 lcInstanceId = lens _lcInstanceId (\ s a -> s{_lcInstanceId = a})
 
--- | (Optional) One or more filters. Use a filter to return a more specific list of results.
+-- | (Optional) One or more filters. Use a filter to return a more specific list of results. 
 lcFilters :: Lens' ListCommands (Maybe (NonEmpty CommandFilter))
 lcFilters = lens _lcFilters (\ s a -> s{_lcFilters = a}) . mapping _List1
 
@@ -154,18 +148,18 @@ instance ToQuery ListCommands where
         toQuery = const mempty
 
 -- | /See:/ 'listCommandsResponse' smart constructor.
-data ListCommandsResponse = ListCommandsResponse'
-  { _lcrsCommands       :: !(Maybe [Command])
-  , _lcrsNextToken      :: !(Maybe Text)
-  , _lcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListCommandsResponse = ListCommandsResponse'{_lcrsCommands
+                                                  :: !(Maybe [Command]),
+                                                  _lcrsNextToken ::
+                                                  !(Maybe Text),
+                                                  _lcrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListCommandsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lcrsCommands' - (Optional) The list of commands requested by the user.
+-- * 'lcrsCommands' - (Optional) The list of commands requested by the user. 
 --
 -- * 'lcrsNextToken' - (Optional) The token for the next set of items to return. (You received this token from a previous call.)
 --
@@ -173,15 +167,12 @@ data ListCommandsResponse = ListCommandsResponse'
 listCommandsResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListCommandsResponse
-listCommandsResponse pResponseStatus_ =
-  ListCommandsResponse'
-    { _lcrsCommands = Nothing
-    , _lcrsNextToken = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
+listCommandsResponse pResponseStatus_
+  = ListCommandsResponse'{_lcrsCommands = Nothing,
+                          _lcrsNextToken = Nothing,
+                          _lcrsResponseStatus = pResponseStatus_}
 
-
--- | (Optional) The list of commands requested by the user.
+-- | (Optional) The list of commands requested by the user. 
 lcrsCommands :: Lens' ListCommandsResponse [Command]
 lcrsCommands = lens _lcrsCommands (\ s a -> s{_lcrsCommands = a}) . _Default . _Coerce
 

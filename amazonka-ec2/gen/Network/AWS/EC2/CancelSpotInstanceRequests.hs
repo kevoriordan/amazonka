@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels one or more Spot Instance requests. Spot Instances are instances that Amazon EC2 starts on your behalf when the maximum price that you specify exceeds the current Spot price. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html Spot Instance Requests> in the /Amazon EC2 User Guide for Linux Instances/ .
+-- Cancels one or more Spot Instance requests.
 --
 --
 -- /Important:/ Canceling a Spot Instance request does not terminate running Spot Instances associated with the request.
@@ -52,11 +52,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'cancelSpotInstanceRequests' smart constructor.
-data CancelSpotInstanceRequests = CancelSpotInstanceRequests'
-  { _csirDryRun                 :: !(Maybe Bool)
-  , _csirSpotInstanceRequestIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelSpotInstanceRequests = CancelSpotInstanceRequests'{_csirDryRun
+                                                              :: !(Maybe Bool),
+                                                              _csirSpotInstanceRequestIds
+                                                              :: ![Text]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'CancelSpotInstanceRequests' with the minimum fields required to make a request.
 --
@@ -67,10 +68,9 @@ data CancelSpotInstanceRequests = CancelSpotInstanceRequests'
 -- * 'csirSpotInstanceRequestIds' - One or more Spot Instance request IDs.
 cancelSpotInstanceRequests
     :: CancelSpotInstanceRequests
-cancelSpotInstanceRequests =
-  CancelSpotInstanceRequests'
-    {_csirDryRun = Nothing, _csirSpotInstanceRequestIds = mempty}
-
+cancelSpotInstanceRequests
+  = CancelSpotInstanceRequests'{_csirDryRun = Nothing,
+                                _csirSpotInstanceRequestIds = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 csirDryRun :: Lens' CancelSpotInstanceRequests (Maybe Bool)
@@ -117,11 +117,15 @@ instance ToQuery CancelSpotInstanceRequests where
 --
 --
 -- /See:/ 'cancelSpotInstanceRequestsResponse' smart constructor.
-data CancelSpotInstanceRequestsResponse = CancelSpotInstanceRequestsResponse'
-  { _csirrsCancelledSpotInstanceRequests :: !(Maybe [CancelledSpotInstanceRequest])
-  , _csirrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelSpotInstanceRequestsResponse = CancelSpotInstanceRequestsResponse'{_csirrsCancelledSpotInstanceRequests
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [CancelledSpotInstanceRequest]),
+                                                                              _csirrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'CancelSpotInstanceRequestsResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +137,11 @@ data CancelSpotInstanceRequestsResponse = CancelSpotInstanceRequestsResponse'
 cancelSpotInstanceRequestsResponse
     :: Int -- ^ 'csirrsResponseStatus'
     -> CancelSpotInstanceRequestsResponse
-cancelSpotInstanceRequestsResponse pResponseStatus_ =
-  CancelSpotInstanceRequestsResponse'
-    { _csirrsCancelledSpotInstanceRequests = Nothing
-    , _csirrsResponseStatus = pResponseStatus_
-    }
-
+cancelSpotInstanceRequestsResponse pResponseStatus_
+  = CancelSpotInstanceRequestsResponse'{_csirrsCancelledSpotInstanceRequests
+                                          = Nothing,
+                                        _csirrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | One or more Spot Instance requests.
 csirrsCancelledSpotInstanceRequests :: Lens' CancelSpotInstanceRequestsResponse [CancelledSpotInstanceRequest]

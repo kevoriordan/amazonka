@@ -21,6 +21,8 @@
 -- Stops a specific Amazon Lightsail instance that is currently running.
 --
 --
+-- The @stop instance@ operation supports tag-based access control via resource tags applied to the resource identified by @instance name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.StopInstance
     (
     -- * Creating a Request
@@ -46,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopInstance' smart constructor.
-data StopInstance = StopInstance'
-  { _siForce        :: !(Maybe Bool)
-  , _siInstanceName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopInstance = StopInstance'{_siForce ::
+                                  !(Maybe Bool),
+                                  _siInstanceName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopInstance' with the minimum fields required to make a request.
 --
@@ -62,9 +63,9 @@ data StopInstance = StopInstance'
 stopInstance
     :: Text -- ^ 'siInstanceName'
     -> StopInstance
-stopInstance pInstanceName_ =
-  StopInstance' {_siForce = Nothing, _siInstanceName = pInstanceName_}
-
+stopInstance pInstanceName_
+  = StopInstance'{_siForce = Nothing,
+                  _siInstanceName = pInstanceName_}
 
 -- | When set to @True@ , forces a Lightsail instance that is stuck in a @stopping@ state to stop. /Important:/ Only use the @force@ parameter if your instance is stuck in the @stopping@ state. In any other state, your instance should stop normally without adding this parameter to your API request.
 siForce :: Lens' StopInstance (Maybe Bool)
@@ -111,28 +112,26 @@ instance ToQuery StopInstance where
         toQuery = const mempty
 
 -- | /See:/ 'stopInstanceResponse' smart constructor.
-data StopInstanceResponse = StopInstanceResponse'
-  { _sirsOperations     :: !(Maybe [Operation])
-  , _sirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopInstanceResponse = StopInstanceResponse'{_sirsOperations
+                                                  :: !(Maybe [Operation]),
+                                                  _sirsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopInstanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sirsOperations' - An array of key-value pairs containing information about the request operation.
+-- * 'sirsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'sirsResponseStatus' - -- | The response status code.
 stopInstanceResponse
     :: Int -- ^ 'sirsResponseStatus'
     -> StopInstanceResponse
-stopInstanceResponse pResponseStatus_ =
-  StopInstanceResponse'
-    {_sirsOperations = Nothing, _sirsResponseStatus = pResponseStatus_}
+stopInstanceResponse pResponseStatus_
+  = StopInstanceResponse'{_sirsOperations = Nothing,
+                          _sirsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the request operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 sirsOperations :: Lens' StopInstanceResponse [Operation]
 sirsOperations = lens _sirsOperations (\ s a -> s{_sirsOperations = a}) . _Default . _Coerce
 

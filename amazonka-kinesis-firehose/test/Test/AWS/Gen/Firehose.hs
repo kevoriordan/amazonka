@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Firehose where
 
 import Data.Proxy
-import Network.AWS.Firehose
-import Test.AWS.Firehose.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.Firehose
+import Test.AWS.Firehose.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -30,6 +30,9 @@ import Test.Tasty
 --     [ testGroup "request"
 --         [ requestPutRecord $
 --             putRecord
+--
+--         , requestStopDeliveryStreamEncryption $
+--             stopDeliveryStreamEncryption
 --
 --         , requestTagDeliveryStream $
 --             tagDeliveryStream
@@ -45,6 +48,9 @@ import Test.Tasty
 --
 --         , requestCreateDeliveryStream $
 --             createDeliveryStream
+--
+--         , requestStartDeliveryStreamEncryption $
+--             startDeliveryStreamEncryption
 --
 --         , requestDescribeDeliveryStream $
 --             describeDeliveryStream
@@ -64,6 +70,9 @@ import Test.Tasty
 --         [ responsePutRecord $
 --             putRecordResponse
 --
+--         , responseStopDeliveryStreamEncryption $
+--             stopDeliveryStreamEncryptionResponse
+--
 --         , responseTagDeliveryStream $
 --             tagDeliveryStreamResponse
 --
@@ -78,6 +87,9 @@ import Test.Tasty
 --
 --         , responseCreateDeliveryStream $
 --             createDeliveryStreamResponse
+--
+--         , responseStartDeliveryStreamEncryption $
+--             startDeliveryStreamEncryptionResponse
 --
 --         , responseDescribeDeliveryStream $
 --             describeDeliveryStreamResponse
@@ -100,6 +112,11 @@ requestPutRecord :: PutRecord -> TestTree
 requestPutRecord = req
     "PutRecord"
     "fixture/PutRecord.yaml"
+
+requestStopDeliveryStreamEncryption :: StopDeliveryStreamEncryption -> TestTree
+requestStopDeliveryStreamEncryption = req
+    "StopDeliveryStreamEncryption"
+    "fixture/StopDeliveryStreamEncryption.yaml"
 
 requestTagDeliveryStream :: TagDeliveryStream -> TestTree
 requestTagDeliveryStream = req
@@ -125,6 +142,11 @@ requestCreateDeliveryStream :: CreateDeliveryStream -> TestTree
 requestCreateDeliveryStream = req
     "CreateDeliveryStream"
     "fixture/CreateDeliveryStream.yaml"
+
+requestStartDeliveryStreamEncryption :: StartDeliveryStreamEncryption -> TestTree
+requestStartDeliveryStreamEncryption = req
+    "StartDeliveryStreamEncryption"
+    "fixture/StartDeliveryStreamEncryption.yaml"
 
 requestDescribeDeliveryStream :: DescribeDeliveryStream -> TestTree
 requestDescribeDeliveryStream = req
@@ -154,6 +176,13 @@ responsePutRecord = res
     "fixture/PutRecordResponse.proto"
     firehose
     (Proxy :: Proxy PutRecord)
+
+responseStopDeliveryStreamEncryption :: StopDeliveryStreamEncryptionResponse -> TestTree
+responseStopDeliveryStreamEncryption = res
+    "StopDeliveryStreamEncryptionResponse"
+    "fixture/StopDeliveryStreamEncryptionResponse.proto"
+    firehose
+    (Proxy :: Proxy StopDeliveryStreamEncryption)
 
 responseTagDeliveryStream :: TagDeliveryStreamResponse -> TestTree
 responseTagDeliveryStream = res
@@ -189,6 +218,13 @@ responseCreateDeliveryStream = res
     "fixture/CreateDeliveryStreamResponse.proto"
     firehose
     (Proxy :: Proxy CreateDeliveryStream)
+
+responseStartDeliveryStreamEncryption :: StartDeliveryStreamEncryptionResponse -> TestTree
+responseStartDeliveryStreamEncryption = res
+    "StartDeliveryStreamEncryptionResponse"
+    "fixture/StartDeliveryStreamEncryptionResponse.proto"
+    firehose
+    (Proxy :: Proxy StartDeliveryStreamEncryption)
 
 responseDescribeDeliveryStream :: DescribeDeliveryStreamResponse -> TestTree
 responseDescribeDeliveryStream = res

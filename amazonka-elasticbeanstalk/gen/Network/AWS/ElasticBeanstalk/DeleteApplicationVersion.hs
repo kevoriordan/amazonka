@@ -48,12 +48,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteApplicationVersion' smart constructor.
-data DeleteApplicationVersion = DeleteApplicationVersion'
-  { _davDeleteSourceBundle :: !(Maybe Bool)
-  , _davApplicationName    :: !Text
-  , _davVersionLabel       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplicationVersion = DeleteApplicationVersion'{_davDeleteSourceBundle
+                                                          :: !(Maybe Bool),
+                                                          _davApplicationName ::
+                                                          !Text,
+                                                          _davVersionLabel ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteApplicationVersion' with the minimum fields required to make a request.
 --
@@ -68,13 +70,12 @@ deleteApplicationVersion
     :: Text -- ^ 'davApplicationName'
     -> Text -- ^ 'davVersionLabel'
     -> DeleteApplicationVersion
-deleteApplicationVersion pApplicationName_ pVersionLabel_ =
-  DeleteApplicationVersion'
-    { _davDeleteSourceBundle = Nothing
-    , _davApplicationName = pApplicationName_
-    , _davVersionLabel = pVersionLabel_
-    }
-
+deleteApplicationVersion pApplicationName_
+  pVersionLabel_
+  = DeleteApplicationVersion'{_davDeleteSourceBundle =
+                                Nothing,
+                              _davApplicationName = pApplicationName_,
+                              _davVersionLabel = pVersionLabel_}
 
 -- | Set to @true@ to delete the source bundle from your storage bucket. Otherwise, the application version is deleted only from Elastic Beanstalk and the source bundle remains in Amazon S3.
 davDeleteSourceBundle :: Lens' DeleteApplicationVersion (Maybe Bool)
@@ -116,17 +117,16 @@ instance ToQuery DeleteApplicationVersion where
                "VersionLabel" =: _davVersionLabel]
 
 -- | /See:/ 'deleteApplicationVersionResponse' smart constructor.
-data DeleteApplicationVersionResponse =
-  DeleteApplicationVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteApplicationVersionResponse = DeleteApplicationVersionResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteApplicationVersionResponse' with the minimum fields required to make a request.
 --
 deleteApplicationVersionResponse
     :: DeleteApplicationVersionResponse
-deleteApplicationVersionResponse = DeleteApplicationVersionResponse'
-
+deleteApplicationVersionResponse
+  = DeleteApplicationVersionResponse'
 
 instance NFData DeleteApplicationVersionResponse
          where

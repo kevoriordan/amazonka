@@ -50,17 +50,16 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'enableLogging' smart constructor.
-data EnableLogging = EnableLogging'
-  { _elS3KeyPrefix       :: !(Maybe Text)
-  , _elClusterIdentifier :: !Text
-  , _elBucketName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableLogging = EnableLogging'{_elS3KeyPrefix ::
+                                    !(Maybe Text),
+                                    _elClusterIdentifier :: !Text,
+                                    _elBucketName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableLogging' with the minimum fields required to make a request.
 --
@@ -68,26 +67,23 @@ data EnableLogging = EnableLogging'
 --
 -- * 'elS3KeyPrefix' - The prefix applied to the log file names. Constraints:     * Cannot exceed 512 characters     * Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash (\), or control characters. The hexadecimal codes for invalid characters are:      * x00 to x20     * x22     * x27     * x5c     * x7f or larger
 --
--- * 'elClusterIdentifier' - The identifier of the cluster on which logging is to be started. Example: @examplecluster@
+-- * 'elClusterIdentifier' - The identifier of the cluster on which logging is to be started. Example: @examplecluster@ 
 --
 -- * 'elBucketName' - The name of an existing S3 bucket where the log files are to be stored. Constraints:     * Must be in the same region as the cluster     * The cluster must have read bucket and put object permissions
 enableLogging
     :: Text -- ^ 'elClusterIdentifier'
     -> Text -- ^ 'elBucketName'
     -> EnableLogging
-enableLogging pClusterIdentifier_ pBucketName_ =
-  EnableLogging'
-    { _elS3KeyPrefix = Nothing
-    , _elClusterIdentifier = pClusterIdentifier_
-    , _elBucketName = pBucketName_
-    }
-
+enableLogging pClusterIdentifier_ pBucketName_
+  = EnableLogging'{_elS3KeyPrefix = Nothing,
+                   _elClusterIdentifier = pClusterIdentifier_,
+                   _elBucketName = pBucketName_}
 
 -- | The prefix applied to the log file names. Constraints:     * Cannot exceed 512 characters     * Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash (\), or control characters. The hexadecimal codes for invalid characters are:      * x00 to x20     * x22     * x27     * x5c     * x7f or larger
 elS3KeyPrefix :: Lens' EnableLogging (Maybe Text)
 elS3KeyPrefix = lens _elS3KeyPrefix (\ s a -> s{_elS3KeyPrefix = a})
 
--- | The identifier of the cluster on which logging is to be started. Example: @examplecluster@
+-- | The identifier of the cluster on which logging is to be started. Example: @examplecluster@ 
 elClusterIdentifier :: Lens' EnableLogging Text
 elClusterIdentifier = lens _elClusterIdentifier (\ s a -> s{_elClusterIdentifier = a})
 

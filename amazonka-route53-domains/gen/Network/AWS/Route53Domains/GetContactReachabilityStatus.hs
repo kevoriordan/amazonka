@@ -48,10 +48,11 @@ import Network.AWS.Route53Domains.Types
 import Network.AWS.Route53Domains.Types.Product
 
 -- | /See:/ 'getContactReachabilityStatus' smart constructor.
-newtype GetContactReachabilityStatus = GetContactReachabilityStatus'
-  { _gcrsDomainName :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetContactReachabilityStatus = GetContactReachabilityStatus'{_gcrsDomainName
+                                                                     ::
+                                                                     Maybe Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'GetContactReachabilityStatus' with the minimum fields required to make a request.
 --
@@ -60,9 +61,9 @@ newtype GetContactReachabilityStatus = GetContactReachabilityStatus'
 -- * 'gcrsDomainName' - The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.
 getContactReachabilityStatus
     :: GetContactReachabilityStatus
-getContactReachabilityStatus =
-  GetContactReachabilityStatus' {_gcrsDomainName = Nothing}
-
+getContactReachabilityStatus
+  = GetContactReachabilityStatus'{_gcrsDomainName =
+                                    Nothing}
 
 -- | The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.
 gcrsDomainName :: Lens' GetContactReachabilityStatus (Maybe Text)
@@ -106,12 +107,19 @@ instance ToQuery GetContactReachabilityStatus where
         toQuery = const mempty
 
 -- | /See:/ 'getContactReachabilityStatusResponse' smart constructor.
-data GetContactReachabilityStatusResponse = GetContactReachabilityStatusResponse'
-  { _gcrsrsStatus         :: !(Maybe ReachabilityStatus)
-  , _gcrsrsDomainName     :: !(Maybe Text)
-  , _gcrsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetContactReachabilityStatusResponse = GetContactReachabilityStatusResponse'{_gcrsrsStatus
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      ReachabilityStatus),
+                                                                                  _gcrsrsDomainName
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _gcrsrsResponseStatus
+                                                                                  ::
+                                                                                  !Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'GetContactReachabilityStatusResponse' with the minimum fields required to make a request.
 --
@@ -125,13 +133,12 @@ data GetContactReachabilityStatusResponse = GetContactReachabilityStatusResponse
 getContactReachabilityStatusResponse
     :: Int -- ^ 'gcrsrsResponseStatus'
     -> GetContactReachabilityStatusResponse
-getContactReachabilityStatusResponse pResponseStatus_ =
-  GetContactReachabilityStatusResponse'
-    { _gcrsrsStatus = Nothing
-    , _gcrsrsDomainName = Nothing
-    , _gcrsrsResponseStatus = pResponseStatus_
-    }
-
+getContactReachabilityStatusResponse pResponseStatus_
+  = GetContactReachabilityStatusResponse'{_gcrsrsStatus
+                                            = Nothing,
+                                          _gcrsrsDomainName = Nothing,
+                                          _gcrsrsResponseStatus =
+                                            pResponseStatus_}
 
 -- | Whether the registrant contact has responded. Values include the following:     * PENDING    * We sent the confirmation email and haven't received a response yet.     * DONE    * We sent the email and got confirmation from the registrant contact.     * EXPIRED    * The time limit expired before the registrant contact responded.
 gcrsrsStatus :: Lens' GetContactReachabilityStatusResponse (Maybe ReachabilityStatus)

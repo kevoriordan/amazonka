@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disableDirectory' smart constructor.
-newtype DisableDirectory = DisableDirectory'
-  { _ddDirectoryARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableDirectory = DisableDirectory'{_ddDirectoryARN
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisableDirectory' with the minimum fields required to make a request.
 --
@@ -58,9 +57,8 @@ newtype DisableDirectory = DisableDirectory'
 disableDirectory
     :: Text -- ^ 'ddDirectoryARN'
     -> DisableDirectory
-disableDirectory pDirectoryARN_ =
-  DisableDirectory' {_ddDirectoryARN = pDirectoryARN_}
-
+disableDirectory pDirectoryARN_
+  = DisableDirectory'{_ddDirectoryARN = pDirectoryARN_}
 
 -- | The ARN of the directory to disable.
 ddDirectoryARN :: Lens' DisableDirectory Text
@@ -95,11 +93,12 @@ instance ToQuery DisableDirectory where
         toQuery = const mempty
 
 -- | /See:/ 'disableDirectoryResponse' smart constructor.
-data DisableDirectoryResponse = DisableDirectoryResponse'
-  { _drsResponseStatus :: !Int
-  , _drsDirectoryARN   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisableDirectoryResponse = DisableDirectoryResponse'{_drsResponseStatus
+                                                          :: !Int,
+                                                          _drsDirectoryARN ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DisableDirectoryResponse' with the minimum fields required to make a request.
 --
@@ -112,10 +111,11 @@ disableDirectoryResponse
     :: Int -- ^ 'drsResponseStatus'
     -> Text -- ^ 'drsDirectoryARN'
     -> DisableDirectoryResponse
-disableDirectoryResponse pResponseStatus_ pDirectoryARN_ =
-  DisableDirectoryResponse'
-    {_drsResponseStatus = pResponseStatus_, _drsDirectoryARN = pDirectoryARN_}
-
+disableDirectoryResponse pResponseStatus_
+  pDirectoryARN_
+  = DisableDirectoryResponse'{_drsResponseStatus =
+                                pResponseStatus_,
+                              _drsDirectoryARN = pDirectoryARN_}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DisableDirectoryResponse Int

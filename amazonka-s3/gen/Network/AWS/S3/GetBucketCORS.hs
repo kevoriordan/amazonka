@@ -18,7 +18,21 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the cors configuration for the bucket.
+-- Returns the cors configuration information set for the bucket.
+--
+--
+-- To use this operation, you must have permission to perform the s3:GetBucketCORS action. By default, the bucket owner has this permission and can grant it to others.
+--
+-- For more information about cors, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html Enabling Cross-Origin Resource Sharing> .
+--
+-- The following operations are related to @GetBucketCors@ :
+--
+--     * 'PutBucketCors' 
+--
+--     * 'DeleteBucketCors' 
+--
+--
+--
 module Network.AWS.S3.GetBucketCORS
     (
     -- * Creating a Request
@@ -43,23 +57,22 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'getBucketCORS' smart constructor.
-newtype GetBucketCORS = GetBucketCORS'
-  { _gbcBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBucketCORS = GetBucketCORS'{_gbcBucket ::
+                                       BucketName}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBucketCORS' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbcBucket' - Undocumented member.
+-- * 'gbcBucket' - The bucket name for which to get the cors configuration.
 getBucketCORS
     :: BucketName -- ^ 'gbcBucket'
     -> GetBucketCORS
-getBucketCORS pBucket_ = GetBucketCORS' {_gbcBucket = pBucket_}
+getBucketCORS pBucket_
+  = GetBucketCORS'{_gbcBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name for which to get the cors configuration.
 gbcBucket :: Lens' GetBucketCORS BucketName
 gbcBucket = lens _gbcBucket (\ s a -> s{_gbcBucket = a})
 
@@ -88,28 +101,28 @@ instance ToQuery GetBucketCORS where
         toQuery = const (mconcat ["cors"])
 
 -- | /See:/ 'getBucketCORSResponse' smart constructor.
-data GetBucketCORSResponse = GetBucketCORSResponse'
-  { _gbcrsCORSRules      :: !(Maybe [CORSRule])
-  , _gbcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBucketCORSResponse = GetBucketCORSResponse'{_gbcrsCORSRules
+                                                    :: !(Maybe [CORSRule]),
+                                                    _gbcrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetBucketCORSResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbcrsCORSRules' - Undocumented member.
+-- * 'gbcrsCORSRules' - A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.
 --
 -- * 'gbcrsResponseStatus' - -- | The response status code.
 getBucketCORSResponse
     :: Int -- ^ 'gbcrsResponseStatus'
     -> GetBucketCORSResponse
-getBucketCORSResponse pResponseStatus_ =
-  GetBucketCORSResponse'
-    {_gbcrsCORSRules = Nothing, _gbcrsResponseStatus = pResponseStatus_}
+getBucketCORSResponse pResponseStatus_
+  = GetBucketCORSResponse'{_gbcrsCORSRules = Nothing,
+                           _gbcrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.
 gbcrsCORSRules :: Lens' GetBucketCORSResponse [CORSRule]
 gbcrsCORSRules = lens _gbcrsCORSRules (\ s a -> s{_gbcrsCORSRules = a}) . _Default . _Coerce
 

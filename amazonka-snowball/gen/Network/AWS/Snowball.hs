@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- AWS Snowball is a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The Snowball commands described here provide access to the same functionality that is available in the AWS Snowball Management Console, which enables you to create and manage jobs for Snowball. To transfer data locally with a Snowball appliance, you'll need to use the Snowball client or the Amazon S3 API adapter for Snowball. For more information, see the <http://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html User Guide> .
+-- AWS Snowball is a petabyte-scale data transport solution that uses secure devices to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The Snowball commands described here provide access to the same functionality that is available in the AWS Snowball Management Console, which enables you to create and manage jobs for Snowball. To transfer data locally with a Snowball device, you'll need to use the Snowball client or the Amazon S3 API adapter for Snowball. For more information, see the <https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html User Guide> .
 --
 --
 module Network.AWS.Snowball
@@ -22,29 +22,32 @@ module Network.AWS.Snowball
     -- * Errors
     -- $errors
 
-    -- ** InvalidResourceException
-    , _InvalidResourceException
+    -- ** KMSRequestFailedException
+    , _KMSRequestFailedException
 
     -- ** UnsupportedAddressException
     , _UnsupportedAddressException
 
-    -- ** KMSRequestFailedException
-    , _KMSRequestFailedException
+    -- ** InvalidInputCombinationException
+    , _InvalidInputCombinationException
 
     -- ** InvalidJobStateException
     , _InvalidJobStateException
 
-    -- ** InvalidInputCombinationException
-    , _InvalidInputCombinationException
-
-    -- ** InvalidNextTokenException
-    , _InvalidNextTokenException
+    -- ** ClusterLimitExceededException
+    , _ClusterLimitExceededException
 
     -- ** InvalidAddressException
     , _InvalidAddressException
 
-    -- ** ClusterLimitExceededException
-    , _ClusterLimitExceededException
+    -- ** InvalidNextTokenException
+    , _InvalidNextTokenException
+
+    -- ** InvalidResourceException
+    , _InvalidResourceException
+
+    -- ** EC2RequestFailedException
+    , _EC2RequestFailedException
 
     -- * Waiters
     -- $waiters
@@ -52,55 +55,61 @@ module Network.AWS.Snowball
     -- * Operations
     -- $operations
 
-    -- ** CancelCluster
+    -- ** CancelCluster 
     , module Network.AWS.Snowball.CancelCluster
 
-    -- ** DescribeCluster
+    -- ** DescribeCluster 
     , module Network.AWS.Snowball.DescribeCluster
 
-    -- ** CreateAddress
+    -- ** CreateAddress 
     , module Network.AWS.Snowball.CreateAddress
 
-    -- ** GetSnowballUsage
+    -- ** GetSnowballUsage 
     , module Network.AWS.Snowball.GetSnowballUsage
 
     -- ** DescribeAddresses (Paginated)
     , module Network.AWS.Snowball.DescribeAddresses
 
-    -- ** UpdateCluster
+    -- ** ListCompatibleImages (Paginated)
+    , module Network.AWS.Snowball.ListCompatibleImages
+
+    -- ** UpdateCluster 
     , module Network.AWS.Snowball.UpdateCluster
 
-    -- ** CreateJob
+    -- ** GetSoftwareUpdates 
+    , module Network.AWS.Snowball.GetSoftwareUpdates
+
+    -- ** CreateJob 
     , module Network.AWS.Snowball.CreateJob
 
-    -- ** GetJobManifest
+    -- ** GetJobManifest 
     , module Network.AWS.Snowball.GetJobManifest
 
-    -- ** CreateCluster
+    -- ** CreateCluster 
     , module Network.AWS.Snowball.CreateCluster
 
     -- ** ListJobs (Paginated)
     , module Network.AWS.Snowball.ListJobs
 
-    -- ** UpdateJob
+    -- ** UpdateJob 
     , module Network.AWS.Snowball.UpdateJob
 
-    -- ** GetJobUnlockCode
+    -- ** GetJobUnlockCode 
     , module Network.AWS.Snowball.GetJobUnlockCode
 
-    -- ** ListClusterJobs
+    -- ** ListClusterJobs (Paginated)
     , module Network.AWS.Snowball.ListClusterJobs
 
-    -- ** DescribeJob
+    -- ** DescribeJob 
     , module Network.AWS.Snowball.DescribeJob
 
-    -- ** ListClusters
+    -- ** ListClusters (Paginated)
     , module Network.AWS.Snowball.ListClusters
 
-    -- ** DescribeAddress
+    -- ** DescribeAddress 
     , module Network.AWS.Snowball.DescribeAddress
 
-    -- ** CancelJob
+    -- ** CancelJob 
     , module Network.AWS.Snowball.CancelJob
 
     -- * Types
@@ -164,7 +173,14 @@ module Network.AWS.Snowball
     , cmClusterId
     , cmCreationDate
     , cmDescription
+    , cmTaxDocuments
     , cmRoleARN
+
+    -- ** CompatibleImage
+    , CompatibleImage
+    , compatibleImage
+    , ciName
+    , ciAMIId
 
     -- ** DataTransfer
     , DataTransfer
@@ -174,10 +190,21 @@ module Network.AWS.Snowball
     , dtObjectsTransferred
     , dtBytesTransferred
 
+    -- ** EC2AMIResource
+    , EC2AMIResource
+    , ec2AMIResource
+    , earSnowballAMIId
+    , earAMIId
+
     -- ** EventTriggerDefinition
     , EventTriggerDefinition
     , eventTriggerDefinition
     , etdEventResourceARN
+
+    -- ** INDTaxDocuments
+    , INDTaxDocuments
+    , iNDTaxDocuments
+    , indtdGSTIN
 
     -- ** JobListEntry
     , JobListEntry
@@ -215,12 +242,14 @@ module Network.AWS.Snowball
     , jmClusterId
     , jmCreationDate
     , jmDescription
+    , jmTaxDocuments
     , jmRoleARN
     , jmSnowballCapacityPreference
 
     -- ** JobResource
     , JobResource
     , jobResource
+    , jrEC2AMIResources
     , jrLambdaResources
     , jrS3Resources
 
@@ -261,6 +290,11 @@ module Network.AWS.Snowball
     , sdShippingOption
     , sdOutboundShipment
     , sdInboundShipment
+
+    -- ** TaxDocuments
+    , TaxDocuments
+    , taxDocuments
+    , tdIND
     ) where
 
 import Network.AWS.Snowball.CancelCluster
@@ -275,8 +309,10 @@ import Network.AWS.Snowball.DescribeJob
 import Network.AWS.Snowball.GetJobManifest
 import Network.AWS.Snowball.GetJobUnlockCode
 import Network.AWS.Snowball.GetSnowballUsage
+import Network.AWS.Snowball.GetSoftwareUpdates
 import Network.AWS.Snowball.ListClusterJobs
 import Network.AWS.Snowball.ListClusters
+import Network.AWS.Snowball.ListCompatibleImages
 import Network.AWS.Snowball.ListJobs
 import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.UpdateCluster

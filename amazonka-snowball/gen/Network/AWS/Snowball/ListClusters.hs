@@ -21,6 +21,8 @@
 -- Returns an array of @ClusterListEntry@ objects of the specified length. Each @ClusterListEntry@ object contains a cluster's state, a cluster's ID, and other important status information.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.Snowball.ListClusters
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.Snowball.ListClusters
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -47,11 +50,10 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'listClusters' smart constructor.
-data ListClusters = ListClusters'
-  { _lcNextToken  :: !(Maybe Text)
-  , _lcMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClusters = ListClusters'{_lcNextToken ::
+                                  !(Maybe Text),
+                                  _lcMaxResults :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListClusters' with the minimum fields required to make a request.
 --
@@ -62,8 +64,9 @@ data ListClusters = ListClusters'
 -- * 'lcMaxResults' - The number of @ClusterListEntry@ objects to return.
 listClusters
     :: ListClusters
-listClusters = ListClusters' {_lcNextToken = Nothing, _lcMaxResults = Nothing}
-
+listClusters
+  = ListClusters'{_lcNextToken = Nothing,
+                  _lcMaxResults = Nothing}
 
 -- | HTTP requests are stateless. To identify what object comes "next" in the list of @ClusterListEntry@ objects, you have the option of specifying @NextToken@ as the starting point for your returned list.
 lcNextToken :: Lens' ListClusters (Maybe Text)
@@ -72,6 +75,13 @@ lcNextToken = lens _lcNextToken (\ s a -> s{_lcNextToken = a})
 -- | The number of @ClusterListEntry@ objects to return.
 lcMaxResults :: Lens' ListClusters (Maybe Natural)
 lcMaxResults = lens _lcMaxResults (\ s a -> s{_lcMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListClusters where
+        page rq rs
+          | stop (rs ^. lcrsNextToken) = Nothing
+          | stop (rs ^. lcrsClusterListEntries) = Nothing
+          | otherwise =
+            Just $ rq & lcNextToken .~ rs ^. lcrsNextToken
 
 instance AWSRequest ListClusters where
         type Rs ListClusters = ListClustersResponse
@@ -112,12 +122,13 @@ instance ToQuery ListClusters where
         toQuery = const mempty
 
 -- | /See:/ 'listClustersResponse' smart constructor.
-data ListClustersResponse = ListClustersResponse'
-  { _lcrsClusterListEntries :: !(Maybe [ClusterListEntry])
-  , _lcrsNextToken          :: !(Maybe Text)
-  , _lcrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListClustersResponse = ListClustersResponse'{_lcrsClusterListEntries
+                                                  ::
+                                                  !(Maybe [ClusterListEntry]),
+                                                  _lcrsNextToken ::
+                                                  !(Maybe Text),
+                                                  _lcrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
 --
@@ -131,13 +142,11 @@ data ListClustersResponse = ListClustersResponse'
 listClustersResponse
     :: Int -- ^ 'lcrsResponseStatus'
     -> ListClustersResponse
-listClustersResponse pResponseStatus_ =
-  ListClustersResponse'
-    { _lcrsClusterListEntries = Nothing
-    , _lcrsNextToken = Nothing
-    , _lcrsResponseStatus = pResponseStatus_
-    }
-
+listClustersResponse pResponseStatus_
+  = ListClustersResponse'{_lcrsClusterListEntries =
+                            Nothing,
+                          _lcrsNextToken = Nothing,
+                          _lcrsResponseStatus = pResponseStatus_}
 
 -- | Each @ClusterListEntry@ object contains a cluster's state, a cluster's ID, and other important status information.
 lcrsClusterListEntries :: Lens' ListClustersResponse [ClusterListEntry]

@@ -43,32 +43,31 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'addUserToGroup' smart constructor.
-data AddUserToGroup = AddUserToGroup'
-  { _autgGroupName :: !Text
-  , _autgUserName  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddUserToGroup = AddUserToGroup'{_autgGroupName
+                                      :: !Text,
+                                      _autgUserName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddUserToGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'autgGroupName' - The name of the group to update. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'autgGroupName' - The name of the group to update. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 --
--- * 'autgUserName' - The name of the user to add. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'autgUserName' - The name of the user to add. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 addUserToGroup
     :: Text -- ^ 'autgGroupName'
     -> Text -- ^ 'autgUserName'
     -> AddUserToGroup
-addUserToGroup pGroupName_ pUserName_ =
-  AddUserToGroup' {_autgGroupName = pGroupName_, _autgUserName = pUserName_}
+addUserToGroup pGroupName_ pUserName_
+  = AddUserToGroup'{_autgGroupName = pGroupName_,
+                    _autgUserName = pUserName_}
 
-
--- | The name of the group to update. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name of the group to update. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 autgGroupName :: Lens' AddUserToGroup Text
 autgGroupName = lens _autgGroupName (\ s a -> s{_autgGroupName = a})
 
--- | The name of the user to add. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name of the user to add. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 autgUserName :: Lens' AddUserToGroup Text
 autgUserName = lens _autgUserName (\ s a -> s{_autgUserName = a})
 
@@ -96,16 +95,14 @@ instance ToQuery AddUserToGroup where
                "UserName" =: _autgUserName]
 
 -- | /See:/ 'addUserToGroupResponse' smart constructor.
-data AddUserToGroupResponse =
-  AddUserToGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddUserToGroupResponse = AddUserToGroupResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AddUserToGroupResponse' with the minimum fields required to make a request.
 --
 addUserToGroupResponse
     :: AddUserToGroupResponse
 addUserToGroupResponse = AddUserToGroupResponse'
-
 
 instance NFData AddUserToGroupResponse where

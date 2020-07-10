@@ -48,11 +48,12 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'describeCopyProductStatus' smart constructor.
-data DescribeCopyProductStatus = DescribeCopyProductStatus'
-  { _dcpsAcceptLanguage   :: !(Maybe Text)
-  , _dcpsCopyProductToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCopyProductStatus = DescribeCopyProductStatus'{_dcpsAcceptLanguage
+                                                            :: !(Maybe Text),
+                                                            _dcpsCopyProductToken
+                                                            :: !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeCopyProductStatus' with the minimum fields required to make a request.
 --
@@ -64,10 +65,10 @@ data DescribeCopyProductStatus = DescribeCopyProductStatus'
 describeCopyProductStatus
     :: Text -- ^ 'dcpsCopyProductToken'
     -> DescribeCopyProductStatus
-describeCopyProductStatus pCopyProductToken_ =
-  DescribeCopyProductStatus'
-    {_dcpsAcceptLanguage = Nothing, _dcpsCopyProductToken = pCopyProductToken_}
-
+describeCopyProductStatus pCopyProductToken_
+  = DescribeCopyProductStatus'{_dcpsAcceptLanguage =
+                                 Nothing,
+                               _dcpsCopyProductToken = pCopyProductToken_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 dcpsAcceptLanguage :: Lens' DescribeCopyProductStatus (Maybe Text)
@@ -118,13 +119,23 @@ instance ToQuery DescribeCopyProductStatus where
         toQuery = const mempty
 
 -- | /See:/ 'describeCopyProductStatusResponse' smart constructor.
-data DescribeCopyProductStatusResponse = DescribeCopyProductStatusResponse'
-  { _dcpsrsTargetProductId   :: !(Maybe Text)
-  , _dcpsrsCopyProductStatus :: !(Maybe CopyProductStatus)
-  , _dcpsrsStatusDetail      :: !(Maybe Text)
-  , _dcpsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCopyProductStatusResponse = DescribeCopyProductStatusResponse'{_dcpsrsTargetProductId
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _dcpsrsCopyProductStatus
+                                                                            ::
+                                                                            !(Maybe
+                                                                                CopyProductStatus),
+                                                                            _dcpsrsStatusDetail
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _dcpsrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeCopyProductStatusResponse' with the minimum fields required to make a request.
 --
@@ -140,14 +151,12 @@ data DescribeCopyProductStatusResponse = DescribeCopyProductStatusResponse'
 describeCopyProductStatusResponse
     :: Int -- ^ 'dcpsrsResponseStatus'
     -> DescribeCopyProductStatusResponse
-describeCopyProductStatusResponse pResponseStatus_ =
-  DescribeCopyProductStatusResponse'
-    { _dcpsrsTargetProductId = Nothing
-    , _dcpsrsCopyProductStatus = Nothing
-    , _dcpsrsStatusDetail = Nothing
-    , _dcpsrsResponseStatus = pResponseStatus_
-    }
-
+describeCopyProductStatusResponse pResponseStatus_
+  = DescribeCopyProductStatusResponse'{_dcpsrsTargetProductId
+                                         = Nothing,
+                                       _dcpsrsCopyProductStatus = Nothing,
+                                       _dcpsrsStatusDetail = Nothing,
+                                       _dcpsrsResponseStatus = pResponseStatus_}
 
 -- | The identifier of the copied product.
 dcpsrsTargetProductId :: Lens' DescribeCopyProductStatusResponse (Maybe Text)

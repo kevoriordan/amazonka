@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete an APNS VoIP channel
+-- Disables the APNs VoIP channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteAPNSVoipChannel
     (
     -- * Creating a Request
@@ -43,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAPNSVoipChannel' smart constructor.
-newtype DeleteAPNSVoipChannel = DeleteAPNSVoipChannel'
-  { _davcApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAPNSVoipChannel = DeleteAPNSVoipChannel'{_davcApplicationId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteAPNSVoipChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'davcApplicationId' - Undocumented member.
+-- * 'davcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteAPNSVoipChannel
     :: Text -- ^ 'davcApplicationId'
     -> DeleteAPNSVoipChannel
-deleteAPNSVoipChannel pApplicationId_ =
-  DeleteAPNSVoipChannel' {_davcApplicationId = pApplicationId_}
+deleteAPNSVoipChannel pApplicationId_
+  = DeleteAPNSVoipChannel'{_davcApplicationId =
+                             pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 davcApplicationId :: Lens' DeleteAPNSVoipChannel Text
 davcApplicationId = lens _davcApplicationId (\ s a -> s{_davcApplicationId = a})
 
@@ -95,11 +97,13 @@ instance ToQuery DeleteAPNSVoipChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAPNSVoipChannelResponse' smart constructor.
-data DeleteAPNSVoipChannelResponse = DeleteAPNSVoipChannelResponse'
-  { _davcrsResponseStatus          :: !Int
-  , _davcrsAPNSVoipChannelResponse :: !APNSVoipChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAPNSVoipChannelResponse = DeleteAPNSVoipChannelResponse'{_davcrsResponseStatus
+                                                                    :: !Int,
+                                                                    _davcrsAPNSVoipChannelResponse
+                                                                    ::
+                                                                    !APNSVoipChannelResponse}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteAPNSVoipChannelResponse' with the minimum fields required to make a request.
 --
@@ -112,12 +116,12 @@ deleteAPNSVoipChannelResponse
     :: Int -- ^ 'davcrsResponseStatus'
     -> APNSVoipChannelResponse -- ^ 'davcrsAPNSVoipChannelResponse'
     -> DeleteAPNSVoipChannelResponse
-deleteAPNSVoipChannelResponse pResponseStatus_ pAPNSVoipChannelResponse_ =
-  DeleteAPNSVoipChannelResponse'
-    { _davcrsResponseStatus = pResponseStatus_
-    , _davcrsAPNSVoipChannelResponse = pAPNSVoipChannelResponse_
-    }
-
+deleteAPNSVoipChannelResponse pResponseStatus_
+  pAPNSVoipChannelResponse_
+  = DeleteAPNSVoipChannelResponse'{_davcrsResponseStatus
+                                     = pResponseStatus_,
+                                   _davcrsAPNSVoipChannelResponse =
+                                     pAPNSVoipChannelResponse_}
 
 -- | -- | The response status code.
 davcrsResponseStatus :: Lens' DeleteAPNSVoipChannelResponse Int

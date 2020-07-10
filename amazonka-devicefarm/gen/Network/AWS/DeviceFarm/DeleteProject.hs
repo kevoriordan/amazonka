@@ -21,7 +21,7 @@
 -- Deletes an AWS Device Farm project, given the project ARN.
 --
 --
--- __Note__ Deleting this resource does not stop an in-progress run.
+-- Deleting this resource does not stop an in-progress run.
 --
 module Network.AWS.DeviceFarm.DeleteProject
     (
@@ -50,23 +50,21 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteProject' smart constructor.
-newtype DeleteProject = DeleteProject'
-  { _dpArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteProject = DeleteProject'{_dpArn ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteProject' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpArn' - Represents the Amazon Resource Name (ARN) of the Device Farm project you wish to delete.
+-- * 'dpArn' - Represents the Amazon Resource Name (ARN) of the Device Farm project to delete.
 deleteProject
     :: Text -- ^ 'dpArn'
     -> DeleteProject
-deleteProject pArn_ = DeleteProject' {_dpArn = pArn_}
+deleteProject pArn_ = DeleteProject'{_dpArn = pArn_}
 
-
--- | Represents the Amazon Resource Name (ARN) of the Device Farm project you wish to delete.
+-- | Represents the Amazon Resource Name (ARN) of the Device Farm project to delete.
 dpArn :: Lens' DeleteProject Text
 dpArn = lens _dpArn (\ s a -> s{_dpArn = a})
 
@@ -106,10 +104,10 @@ instance ToQuery DeleteProject where
 --
 --
 -- /See:/ 'deleteProjectResponse' smart constructor.
-newtype DeleteProjectResponse = DeleteProjectResponse'
-  { _dprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteProjectResponse = DeleteProjectResponse'{_dprsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteProjectResponse' with the minimum fields required to make a request.
 --
@@ -119,9 +117,9 @@ newtype DeleteProjectResponse = DeleteProjectResponse'
 deleteProjectResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DeleteProjectResponse
-deleteProjectResponse pResponseStatus_ =
-  DeleteProjectResponse' {_dprsResponseStatus = pResponseStatus_}
-
+deleteProjectResponse pResponseStatus_
+  = DeleteProjectResponse'{_dprsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 dprsResponseStatus :: Lens' DeleteProjectResponse Int

@@ -47,12 +47,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateObjectAttributes' smart constructor.
-data UpdateObjectAttributes = UpdateObjectAttributes'
-  { _uoaDirectoryARN     :: !Text
-  , _uoaObjectReference  :: !ObjectReference
-  , _uoaAttributeUpdates :: ![ObjectAttributeUpdate]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateObjectAttributes = UpdateObjectAttributes'{_uoaDirectoryARN
+                                                      :: !Text,
+                                                      _uoaObjectReference ::
+                                                      !ObjectReference,
+                                                      _uoaAttributeUpdates ::
+                                                      ![ObjectAttributeUpdate]}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateObjectAttributes' with the minimum fields required to make a request.
 --
@@ -67,13 +69,12 @@ updateObjectAttributes
     :: Text -- ^ 'uoaDirectoryARN'
     -> ObjectReference -- ^ 'uoaObjectReference'
     -> UpdateObjectAttributes
-updateObjectAttributes pDirectoryARN_ pObjectReference_ =
-  UpdateObjectAttributes'
-    { _uoaDirectoryARN = pDirectoryARN_
-    , _uoaObjectReference = pObjectReference_
-    , _uoaAttributeUpdates = mempty
-    }
-
+updateObjectAttributes pDirectoryARN_
+  pObjectReference_
+  = UpdateObjectAttributes'{_uoaDirectoryARN =
+                              pDirectoryARN_,
+                            _uoaObjectReference = pObjectReference_,
+                            _uoaAttributeUpdates = mempty}
 
 -- | The Amazon Resource Name (ARN) that is associated with the 'Directory' where the object resides. For more information, see 'arns' .
 uoaDirectoryARN :: Lens' UpdateObjectAttributes Text
@@ -122,11 +123,14 @@ instance ToQuery UpdateObjectAttributes where
         toQuery = const mempty
 
 -- | /See:/ 'updateObjectAttributesResponse' smart constructor.
-data UpdateObjectAttributesResponse = UpdateObjectAttributesResponse'
-  { _uoarsObjectIdentifier :: !(Maybe Text)
-  , _uoarsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateObjectAttributesResponse = UpdateObjectAttributesResponse'{_uoarsObjectIdentifier
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _uoarsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpdateObjectAttributesResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +142,10 @@ data UpdateObjectAttributesResponse = UpdateObjectAttributesResponse'
 updateObjectAttributesResponse
     :: Int -- ^ 'uoarsResponseStatus'
     -> UpdateObjectAttributesResponse
-updateObjectAttributesResponse pResponseStatus_ =
-  UpdateObjectAttributesResponse'
-    {_uoarsObjectIdentifier = Nothing, _uoarsResponseStatus = pResponseStatus_}
-
+updateObjectAttributesResponse pResponseStatus_
+  = UpdateObjectAttributesResponse'{_uoarsObjectIdentifier
+                                      = Nothing,
+                                    _uoarsResponseStatus = pResponseStatus_}
 
 -- | The @ObjectIdentifier@ of the updated object.
 uoarsObjectIdentifier :: Lens' UpdateObjectAttributesResponse (Maybe Text)

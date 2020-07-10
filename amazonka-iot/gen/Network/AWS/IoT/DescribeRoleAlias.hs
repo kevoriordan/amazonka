@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeRoleAlias' smart constructor.
-newtype DescribeRoleAlias = DescribeRoleAlias'
-  { _draRoleAlias :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeRoleAlias = DescribeRoleAlias'{_draRoleAlias
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeRoleAlias' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype DescribeRoleAlias = DescribeRoleAlias'
 describeRoleAlias
     :: Text -- ^ 'draRoleAlias'
     -> DescribeRoleAlias
-describeRoleAlias pRoleAlias_ = DescribeRoleAlias' {_draRoleAlias = pRoleAlias_}
-
+describeRoleAlias pRoleAlias_
+  = DescribeRoleAlias'{_draRoleAlias = pRoleAlias_}
 
 -- | The role alias to describe.
 draRoleAlias :: Lens' DescribeRoleAlias Text
@@ -90,11 +89,14 @@ instance ToQuery DescribeRoleAlias where
         toQuery = const mempty
 
 -- | /See:/ 'describeRoleAliasResponse' smart constructor.
-data DescribeRoleAliasResponse = DescribeRoleAliasResponse'
-  { _drarsRoleAliasDescription :: !(Maybe RoleAliasDescription)
-  , _drarsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRoleAliasResponse = DescribeRoleAliasResponse'{_drarsRoleAliasDescription
+                                                            ::
+                                                            !(Maybe
+                                                                RoleAliasDescription),
+                                                            _drarsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeRoleAliasResponse' with the minimum fields required to make a request.
 --
@@ -106,12 +108,10 @@ data DescribeRoleAliasResponse = DescribeRoleAliasResponse'
 describeRoleAliasResponse
     :: Int -- ^ 'drarsResponseStatus'
     -> DescribeRoleAliasResponse
-describeRoleAliasResponse pResponseStatus_ =
-  DescribeRoleAliasResponse'
-    { _drarsRoleAliasDescription = Nothing
-    , _drarsResponseStatus = pResponseStatus_
-    }
-
+describeRoleAliasResponse pResponseStatus_
+  = DescribeRoleAliasResponse'{_drarsRoleAliasDescription
+                                 = Nothing,
+                               _drarsResponseStatus = pResponseStatus_}
 
 -- | The role alias description.
 drarsRoleAliasDescription :: Lens' DescribeRoleAliasResponse (Maybe RoleAliasDescription)

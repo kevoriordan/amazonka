@@ -47,11 +47,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'removeTagsFromOnPremisesInstances' smart constructor.
-data RemoveTagsFromOnPremisesInstances = RemoveTagsFromOnPremisesInstances'
-  { _rtfopiTags          :: ![Tag]
-  , _rtfopiInstanceNames :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveTagsFromOnPremisesInstances = RemoveTagsFromOnPremisesInstances'{_rtfopiTags
+                                                                            ::
+                                                                            ![Tag],
+                                                                            _rtfopiInstanceNames
+                                                                            ::
+                                                                            ![Text]}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RemoveTagsFromOnPremisesInstances' with the minimum fields required to make a request.
 --
@@ -62,10 +65,10 @@ data RemoveTagsFromOnPremisesInstances = RemoveTagsFromOnPremisesInstances'
 -- * 'rtfopiInstanceNames' - The names of the on-premises instances from which to remove tags.
 removeTagsFromOnPremisesInstances
     :: RemoveTagsFromOnPremisesInstances
-removeTagsFromOnPremisesInstances =
-  RemoveTagsFromOnPremisesInstances'
-    {_rtfopiTags = mempty, _rtfopiInstanceNames = mempty}
-
+removeTagsFromOnPremisesInstances
+  = RemoveTagsFromOnPremisesInstances'{_rtfopiTags =
+                                         mempty,
+                                       _rtfopiInstanceNames = mempty}
 
 -- | The tag key-value pairs to remove from the on-premises instances.
 rtfopiTags :: Lens' RemoveTagsFromOnPremisesInstances [Tag]
@@ -118,18 +121,17 @@ instance ToQuery RemoveTagsFromOnPremisesInstances
         toQuery = const mempty
 
 -- | /See:/ 'removeTagsFromOnPremisesInstancesResponse' smart constructor.
-data RemoveTagsFromOnPremisesInstancesResponse =
-  RemoveTagsFromOnPremisesInstancesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveTagsFromOnPremisesInstancesResponse = RemoveTagsFromOnPremisesInstancesResponse'
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'RemoveTagsFromOnPremisesInstancesResponse' with the minimum fields required to make a request.
 --
 removeTagsFromOnPremisesInstancesResponse
     :: RemoveTagsFromOnPremisesInstancesResponse
-removeTagsFromOnPremisesInstancesResponse =
-  RemoveTagsFromOnPremisesInstancesResponse'
-
+removeTagsFromOnPremisesInstancesResponse
+  = RemoveTagsFromOnPremisesInstancesResponse'
 
 instance NFData
            RemoveTagsFromOnPremisesInstancesResponse

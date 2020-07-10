@@ -21,6 +21,8 @@
 -- Lists the specified notification subscriptions.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.WorkDocs.DescribeNotificationSubscriptions
     (
     -- * Creating a Request
@@ -41,6 +43,7 @@ module Network.AWS.WorkDocs.DescribeNotificationSubscriptions
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -48,12 +51,19 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'describeNotificationSubscriptions' smart constructor.
-data DescribeNotificationSubscriptions = DescribeNotificationSubscriptions'
-  { _dMarker         :: !(Maybe Text)
-  , _dLimit          :: !(Maybe Nat)
-  , _dOrganizationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeNotificationSubscriptions = DescribeNotificationSubscriptions'{_dMarker
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _dLimit
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Nat),
+                                                                            _dOrganizationId
+                                                                            ::
+                                                                            !Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeNotificationSubscriptions' with the minimum fields required to make a request.
 --
@@ -67,10 +77,11 @@ data DescribeNotificationSubscriptions = DescribeNotificationSubscriptions'
 describeNotificationSubscriptions
     :: Text -- ^ 'dOrganizationId'
     -> DescribeNotificationSubscriptions
-describeNotificationSubscriptions pOrganizationId_ =
-  DescribeNotificationSubscriptions'
-    {_dMarker = Nothing, _dLimit = Nothing, _dOrganizationId = pOrganizationId_}
-
+describeNotificationSubscriptions pOrganizationId_
+  = DescribeNotificationSubscriptions'{_dMarker =
+                                         Nothing,
+                                       _dLimit = Nothing,
+                                       _dOrganizationId = pOrganizationId_}
 
 -- | The marker for the next set of results. (You received this marker from a previous call.)
 dMarker :: Lens' DescribeNotificationSubscriptions (Maybe Text)
@@ -83,6 +94,14 @@ dLimit = lens _dLimit (\ s a -> s{_dLimit = a}) . mapping _Nat
 -- | The ID of the organization.
 dOrganizationId :: Lens' DescribeNotificationSubscriptions Text
 dOrganizationId = lens _dOrganizationId (\ s a -> s{_dOrganizationId = a})
+
+instance AWSPager DescribeNotificationSubscriptions
+         where
+        page rq rs
+          | stop (rs ^. dnsrsMarker) = Nothing
+          | stop (rs ^. dnsrsSubscriptions) = Nothing
+          | otherwise =
+            Just $ rq & dMarker .~ rs ^. dnsrsMarker
 
 instance AWSRequest DescribeNotificationSubscriptions
          where
@@ -124,12 +143,20 @@ instance ToQuery DescribeNotificationSubscriptions
           = mconcat ["marker" =: _dMarker, "limit" =: _dLimit]
 
 -- | /See:/ 'describeNotificationSubscriptionsResponse' smart constructor.
-data DescribeNotificationSubscriptionsResponse = DescribeNotificationSubscriptionsResponse'
-  { _dnsrsMarker         :: !(Maybe Text)
-  , _dnsrsSubscriptions  :: !(Maybe [Subscription])
-  , _dnsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeNotificationSubscriptionsResponse = DescribeNotificationSubscriptionsResponse'{_dnsrsMarker
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                Text),
+                                                                                            _dnsrsSubscriptions
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                [Subscription]),
+                                                                                            _dnsrsResponseStatus
+                                                                                            ::
+                                                                                            !Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'DescribeNotificationSubscriptionsResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +170,13 @@ data DescribeNotificationSubscriptionsResponse = DescribeNotificationSubscriptio
 describeNotificationSubscriptionsResponse
     :: Int -- ^ 'dnsrsResponseStatus'
     -> DescribeNotificationSubscriptionsResponse
-describeNotificationSubscriptionsResponse pResponseStatus_ =
-  DescribeNotificationSubscriptionsResponse'
-    { _dnsrsMarker = Nothing
-    , _dnsrsSubscriptions = Nothing
-    , _dnsrsResponseStatus = pResponseStatus_
-    }
-
+describeNotificationSubscriptionsResponse
+  pResponseStatus_
+  = DescribeNotificationSubscriptionsResponse'{_dnsrsMarker
+                                                 = Nothing,
+                                               _dnsrsSubscriptions = Nothing,
+                                               _dnsrsResponseStatus =
+                                                 pResponseStatus_}
 
 -- | The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
 dnsrsMarker :: Lens' DescribeNotificationSubscriptionsResponse (Maybe Text)

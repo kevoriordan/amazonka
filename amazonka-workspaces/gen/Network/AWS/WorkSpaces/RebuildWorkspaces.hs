@@ -21,9 +21,9 @@
 -- Rebuilds the specified WorkSpace.
 --
 --
--- You cannot rebuild a WorkSpace unless its state is @AVAILABLE@ , @ERROR@ , or @UNHEALTHY@ .
+-- You cannot rebuild a WorkSpace unless its state is @AVAILABLE@ , @ERROR@ , @UNHEALTHY@ , or @STOPPED@ .
 --
--- Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html Rebuild a WorkSpace> .
+-- Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html Rebuild a WorkSpace> .
 --
 -- This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
 --
@@ -51,10 +51,9 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'rebuildWorkspaces' smart constructor.
-newtype RebuildWorkspaces = RebuildWorkspaces'
-  { _rwRebuildWorkspaceRequests :: List1 RebuildRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RebuildWorkspaces = RebuildWorkspaces'{_rwRebuildWorkspaceRequests
+                                               :: List1 RebuildRequest}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RebuildWorkspaces' with the minimum fields required to make a request.
 --
@@ -64,10 +63,9 @@ newtype RebuildWorkspaces = RebuildWorkspaces'
 rebuildWorkspaces
     :: NonEmpty RebuildRequest -- ^ 'rwRebuildWorkspaceRequests'
     -> RebuildWorkspaces
-rebuildWorkspaces pRebuildWorkspaceRequests_ =
-  RebuildWorkspaces'
-    {_rwRebuildWorkspaceRequests = _List1 # pRebuildWorkspaceRequests_}
-
+rebuildWorkspaces pRebuildWorkspaceRequests_
+  = RebuildWorkspaces'{_rwRebuildWorkspaceRequests =
+                         _List1 # pRebuildWorkspaceRequests_}
 
 -- | The WorkSpace to rebuild. You can specify a single WorkSpace.
 rwRebuildWorkspaceRequests :: Lens' RebuildWorkspaces (NonEmpty RebuildRequest)
@@ -112,28 +110,31 @@ instance ToQuery RebuildWorkspaces where
         toQuery = const mempty
 
 -- | /See:/ 'rebuildWorkspacesResponse' smart constructor.
-data RebuildWorkspacesResponse = RebuildWorkspacesResponse'
-  { _rwrsFailedRequests :: !(Maybe [FailedWorkspaceChangeRequest])
-  , _rwrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RebuildWorkspacesResponse = RebuildWorkspacesResponse'{_rwrsFailedRequests
+                                                            ::
+                                                            !(Maybe
+                                                                [FailedWorkspaceChangeRequest]),
+                                                            _rwrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'RebuildWorkspacesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rwrsFailedRequests' - Information about the WorkSpace if it could not be rebuilt.
+-- * 'rwrsFailedRequests' - Information about the WorkSpace that could not be rebuilt.
 --
 -- * 'rwrsResponseStatus' - -- | The response status code.
 rebuildWorkspacesResponse
     :: Int -- ^ 'rwrsResponseStatus'
     -> RebuildWorkspacesResponse
-rebuildWorkspacesResponse pResponseStatus_ =
-  RebuildWorkspacesResponse'
-    {_rwrsFailedRequests = Nothing, _rwrsResponseStatus = pResponseStatus_}
+rebuildWorkspacesResponse pResponseStatus_
+  = RebuildWorkspacesResponse'{_rwrsFailedRequests =
+                                 Nothing,
+                               _rwrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the WorkSpace if it could not be rebuilt.
+-- | Information about the WorkSpace that could not be rebuilt.
 rwrsFailedRequests :: Lens' RebuildWorkspacesResponse [FailedWorkspaceChangeRequest]
 rwrsFailedRequests = lens _rwrsFailedRequests (\ s a -> s{_rwrsFailedRequests = a}) . _Default . _Coerce
 

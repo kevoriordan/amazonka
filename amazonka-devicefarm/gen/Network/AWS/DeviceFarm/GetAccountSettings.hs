@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
+-- Returns the number of unmetered iOS or unmetered Android devices that have been purchased by the account.
 --
 --
 module Network.AWS.DeviceFarm.GetAccountSettings
@@ -47,17 +47,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getAccountSettings' smart constructor.
-data GetAccountSettings =
-  GetAccountSettings'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountSettings = GetAccountSettings'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAccountSettings' with the minimum fields required to make a request.
 --
 getAccountSettings
     :: GetAccountSettings
 getAccountSettings = GetAccountSettings'
-
 
 instance AWSRequest GetAccountSettings where
         type Rs GetAccountSettings =
@@ -97,11 +94,14 @@ instance ToQuery GetAccountSettings where
 --
 --
 -- /See:/ 'getAccountSettingsResponse' smart constructor.
-data GetAccountSettingsResponse = GetAccountSettingsResponse'
-  { _gasrsAccountSettings :: !(Maybe AccountSettings)
-  , _gasrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAccountSettingsResponse = GetAccountSettingsResponse'{_gasrsAccountSettings
+                                                              ::
+                                                              !(Maybe
+                                                                  AccountSettings),
+                                                              _gasrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetAccountSettingsResponse' with the minimum fields required to make a request.
 --
@@ -113,10 +113,10 @@ data GetAccountSettingsResponse = GetAccountSettingsResponse'
 getAccountSettingsResponse
     :: Int -- ^ 'gasrsResponseStatus'
     -> GetAccountSettingsResponse
-getAccountSettingsResponse pResponseStatus_ =
-  GetAccountSettingsResponse'
-    {_gasrsAccountSettings = Nothing, _gasrsResponseStatus = pResponseStatus_}
-
+getAccountSettingsResponse pResponseStatus_
+  = GetAccountSettingsResponse'{_gasrsAccountSettings =
+                                  Nothing,
+                                _gasrsResponseStatus = pResponseStatus_}
 
 -- | The account settings.
 gasrsAccountSettings :: Lens' GetAccountSettingsResponse (Maybe AccountSettings)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling 'DeprecateThingType' , then remove any associated things by calling 'UpdateThing' to change the thing type on any associated thing, and finally use 'DeleteThingType' to delete the thing type.
+-- Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling 'DeprecateThingType' , then remove any associated things by calling 'UpdateThing' to change the thing type on any associated thing, and finally use 'DeleteThingType' to delete the thing type.
 --
 --
 module Network.AWS.IoT.DeleteThingType
@@ -48,10 +48,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteThingType' smart constructor.
-newtype DeleteThingType = DeleteThingType'
-  { _dttThingTypeName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteThingType = DeleteThingType'{_dttThingTypeName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteThingType' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ newtype DeleteThingType = DeleteThingType'
 deleteThingType
     :: Text -- ^ 'dttThingTypeName'
     -> DeleteThingType
-deleteThingType pThingTypeName_ =
-  DeleteThingType' {_dttThingTypeName = pThingTypeName_}
-
+deleteThingType pThingTypeName_
+  = DeleteThingType'{_dttThingTypeName =
+                       pThingTypeName_}
 
 -- | The name of the thing type.
 dttThingTypeName :: Lens' DeleteThingType Text
@@ -96,10 +95,10 @@ instance ToQuery DeleteThingType where
 --
 --
 -- /See:/ 'deleteThingTypeResponse' smart constructor.
-newtype DeleteThingTypeResponse = DeleteThingTypeResponse'
-  { _dttrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteThingTypeResponse = DeleteThingTypeResponse'{_dttrsResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteThingTypeResponse' with the minimum fields required to make a request.
 --
@@ -109,9 +108,9 @@ newtype DeleteThingTypeResponse = DeleteThingTypeResponse'
 deleteThingTypeResponse
     :: Int -- ^ 'dttrsResponseStatus'
     -> DeleteThingTypeResponse
-deleteThingTypeResponse pResponseStatus_ =
-  DeleteThingTypeResponse' {_dttrsResponseStatus = pResponseStatus_}
-
+deleteThingTypeResponse pResponseStatus_
+  = DeleteThingTypeResponse'{_dttrsResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 dttrsResponseStatus :: Lens' DeleteThingTypeResponse Int

@@ -34,8 +34,8 @@ module Network.AWS.EC2.DeleteFpgaImage
     , deleteFpgaImageResponse
     , DeleteFpgaImageResponse
     -- * Response Lenses
-    , delrsReturn
-    , delrsResponseStatus
+    , dltfpgimgrsReturn
+    , dltfpgimgrsResponseStatus
     ) where
 
 import Network.AWS.EC2.Types
@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteFpgaImage' smart constructor.
-data DeleteFpgaImage = DeleteFpgaImage'
-  { _dfiDryRun      :: !(Maybe Bool)
-  , _dfiFpgaImageId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFpgaImage = DeleteFpgaImage'{_dfiDryRun ::
+                                        !(Maybe Bool),
+                                        _dfiFpgaImageId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFpgaImage' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ data DeleteFpgaImage = DeleteFpgaImage'
 deleteFpgaImage
     :: Text -- ^ 'dfiFpgaImageId'
     -> DeleteFpgaImage
-deleteFpgaImage pFpgaImageId_ =
-  DeleteFpgaImage' {_dfiDryRun = Nothing, _dfiFpgaImageId = pFpgaImageId_}
-
+deleteFpgaImage pFpgaImageId_
+  = DeleteFpgaImage'{_dfiDryRun = Nothing,
+                     _dfiFpgaImageId = pFpgaImageId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 dfiDryRun :: Lens' DeleteFpgaImage (Maybe Bool)
@@ -102,33 +101,34 @@ instance ToQuery DeleteFpgaImage where
                "FpgaImageId" =: _dfiFpgaImageId]
 
 -- | /See:/ 'deleteFpgaImageResponse' smart constructor.
-data DeleteFpgaImageResponse = DeleteFpgaImageResponse'
-  { _delrsReturn         :: !(Maybe Bool)
-  , _delrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFpgaImageResponse = DeleteFpgaImageResponse'{_dltfpgimgrsReturn
+                                                        :: !(Maybe Bool),
+                                                        _dltfpgimgrsResponseStatus
+                                                        :: !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteFpgaImageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'delrsReturn' - Is @true@ if the request succeeds, and an error otherwise.
+-- * 'dltfpgimgrsReturn' - Is @true@ if the request succeeds, and an error otherwise.
 --
--- * 'delrsResponseStatus' - -- | The response status code.
+-- * 'dltfpgimgrsResponseStatus' - -- | The response status code.
 deleteFpgaImageResponse
-    :: Int -- ^ 'delrsResponseStatus'
+    :: Int -- ^ 'dltfpgimgrsResponseStatus'
     -> DeleteFpgaImageResponse
-deleteFpgaImageResponse pResponseStatus_ =
-  DeleteFpgaImageResponse'
-    {_delrsReturn = Nothing, _delrsResponseStatus = pResponseStatus_}
-
+deleteFpgaImageResponse pResponseStatus_
+  = DeleteFpgaImageResponse'{_dltfpgimgrsReturn =
+                               Nothing,
+                             _dltfpgimgrsResponseStatus = pResponseStatus_}
 
 -- | Is @true@ if the request succeeds, and an error otherwise.
-delrsReturn :: Lens' DeleteFpgaImageResponse (Maybe Bool)
-delrsReturn = lens _delrsReturn (\ s a -> s{_delrsReturn = a})
+dltfpgimgrsReturn :: Lens' DeleteFpgaImageResponse (Maybe Bool)
+dltfpgimgrsReturn = lens _dltfpgimgrsReturn (\ s a -> s{_dltfpgimgrsReturn = a})
 
 -- | -- | The response status code.
-delrsResponseStatus :: Lens' DeleteFpgaImageResponse Int
-delrsResponseStatus = lens _delrsResponseStatus (\ s a -> s{_delrsResponseStatus = a})
+dltfpgimgrsResponseStatus :: Lens' DeleteFpgaImageResponse Int
+dltfpgimgrsResponseStatus = lens _dltfpgimgrsResponseStatus (\ s a -> s{_dltfpgimgrsResponseStatus = a})
 
 instance NFData DeleteFpgaImageResponse where

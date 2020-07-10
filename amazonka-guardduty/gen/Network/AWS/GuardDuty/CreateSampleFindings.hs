@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates example findings of types specified by the list of finding types. If 'NULL' is specified for findingTypes, the API generates example findings of all supported finding types.
+-- Generates example findings of types specified by the list of finding types. If 'NULL' is specified for @findingTypes@ , the API generates example findings of all supported finding types.
+--
+--
 module Network.AWS.GuardDuty.CreateSampleFindings
     (
     -- * Creating a Request
@@ -42,31 +44,27 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | CreateSampleFindings request body.
---
--- /See:/ 'createSampleFindings' smart constructor.
-data CreateSampleFindings = CreateSampleFindings'
-  { _csfFindingTypes :: !(Maybe [Text])
-  , _csfDetectorId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createSampleFindings' smart constructor.
+data CreateSampleFindings = CreateSampleFindings'{_csfFindingTypes
+                                                  :: !(Maybe [Text]),
+                                                  _csfDetectorId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSampleFindings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csfFindingTypes' - Types of sample findings that you want to generate.
+-- * 'csfFindingTypes' - The types of sample findings to generate.
 --
 -- * 'csfDetectorId' - The ID of the detector to create sample findings for.
 createSampleFindings
     :: Text -- ^ 'csfDetectorId'
     -> CreateSampleFindings
-createSampleFindings pDetectorId_ =
-  CreateSampleFindings'
-    {_csfFindingTypes = Nothing, _csfDetectorId = pDetectorId_}
+createSampleFindings pDetectorId_
+  = CreateSampleFindings'{_csfFindingTypes = Nothing,
+                          _csfDetectorId = pDetectorId_}
 
-
--- | Types of sample findings that you want to generate.
+-- | The types of sample findings to generate.
 csfFindingTypes :: Lens' CreateSampleFindings [Text]
 csfFindingTypes = lens _csfFindingTypes (\ s a -> s{_csfFindingTypes = a}) . _Default . _Coerce
 
@@ -111,10 +109,10 @@ instance ToQuery CreateSampleFindings where
         toQuery = const mempty
 
 -- | /See:/ 'createSampleFindingsResponse' smart constructor.
-newtype CreateSampleFindingsResponse = CreateSampleFindingsResponse'
-  { _csfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateSampleFindingsResponse = CreateSampleFindingsResponse'{_csfrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateSampleFindingsResponse' with the minimum fields required to make a request.
 --
@@ -124,9 +122,9 @@ newtype CreateSampleFindingsResponse = CreateSampleFindingsResponse'
 createSampleFindingsResponse
     :: Int -- ^ 'csfrsResponseStatus'
     -> CreateSampleFindingsResponse
-createSampleFindingsResponse pResponseStatus_ =
-  CreateSampleFindingsResponse' {_csfrsResponseStatus = pResponseStatus_}
-
+createSampleFindingsResponse pResponseStatus_
+  = CreateSampleFindingsResponse'{_csfrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 csfrsResponseStatus :: Lens' CreateSampleFindingsResponse Int

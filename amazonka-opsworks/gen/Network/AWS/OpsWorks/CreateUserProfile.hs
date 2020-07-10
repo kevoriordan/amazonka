@@ -21,7 +21,7 @@
 -- Creates a new user profile.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.CreateUserProfile
     (
@@ -50,38 +50,35 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createUserProfile' smart constructor.
-data CreateUserProfile = CreateUserProfile'
-  { _cupAllowSelfManagement :: !(Maybe Bool)
-  , _cupSSHPublicKey        :: !(Maybe Text)
-  , _cupSSHUsername         :: !(Maybe Text)
-  , _cupIAMUserARN          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserProfile = CreateUserProfile'{_cupAllowSelfManagement
+                                            :: !(Maybe Bool),
+                                            _cupSSHPublicKey :: !(Maybe Text),
+                                            _cupSSHUsername :: !(Maybe Text),
+                                            _cupIAMUserARN :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUserProfile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cupAllowSelfManagement' - Whether users can specify their own SSH public key through the My Settings page. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Setting an IAM User's Public SSH Key> .
+-- * 'cupAllowSelfManagement' - Whether users can specify their own SSH public key through the My Settings page. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Setting an IAM User's Public SSH Key> .
 --
 -- * 'cupSSHPublicKey' - The user's public SSH key.
 --
--- * 'cupSSHUsername' - The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name.
+-- * 'cupSSHUsername' - The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name. 
 --
 -- * 'cupIAMUserARN' - The user's IAM ARN; this can also be a federated user's ARN.
 createUserProfile
     :: Text -- ^ 'cupIAMUserARN'
     -> CreateUserProfile
-createUserProfile pIAMUserARN_ =
-  CreateUserProfile'
-    { _cupAllowSelfManagement = Nothing
-    , _cupSSHPublicKey = Nothing
-    , _cupSSHUsername = Nothing
-    , _cupIAMUserARN = pIAMUserARN_
-    }
+createUserProfile pIAMUserARN_
+  = CreateUserProfile'{_cupAllowSelfManagement =
+                         Nothing,
+                       _cupSSHPublicKey = Nothing,
+                       _cupSSHUsername = Nothing,
+                       _cupIAMUserARN = pIAMUserARN_}
 
-
--- | Whether users can specify their own SSH public key through the My Settings page. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Setting an IAM User's Public SSH Key> .
+-- | Whether users can specify their own SSH public key through the My Settings page. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html Setting an IAM User's Public SSH Key> .
 cupAllowSelfManagement :: Lens' CreateUserProfile (Maybe Bool)
 cupAllowSelfManagement = lens _cupAllowSelfManagement (\ s a -> s{_cupAllowSelfManagement = a})
 
@@ -89,7 +86,7 @@ cupAllowSelfManagement = lens _cupAllowSelfManagement (\ s a -> s{_cupAllowSelfM
 cupSSHPublicKey :: Lens' CreateUserProfile (Maybe Text)
 cupSSHPublicKey = lens _cupSSHPublicKey (\ s a -> s{_cupSSHPublicKey = a})
 
--- | The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name.
+-- | The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-', and '_'. If the specified name includes other punctuation marks, AWS OpsWorks Stacks removes them. For example, @my.name@ will be changed to @myname@ . If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM user name. 
 cupSSHUsername :: Lens' CreateUserProfile (Maybe Text)
 cupSSHUsername = lens _cupSSHUsername (\ s a -> s{_cupSSHUsername = a})
 
@@ -141,11 +138,12 @@ instance ToQuery CreateUserProfile where
 --
 --
 -- /See:/ 'createUserProfileResponse' smart constructor.
-data CreateUserProfileResponse = CreateUserProfileResponse'
-  { _cuprsIAMUserARN     :: !(Maybe Text)
-  , _cuprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserProfileResponse = CreateUserProfileResponse'{_cuprsIAMUserARN
+                                                            :: !(Maybe Text),
+                                                            _cuprsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateUserProfileResponse' with the minimum fields required to make a request.
 --
@@ -157,10 +155,10 @@ data CreateUserProfileResponse = CreateUserProfileResponse'
 createUserProfileResponse
     :: Int -- ^ 'cuprsResponseStatus'
     -> CreateUserProfileResponse
-createUserProfileResponse pResponseStatus_ =
-  CreateUserProfileResponse'
-    {_cuprsIAMUserARN = Nothing, _cuprsResponseStatus = pResponseStatus_}
-
+createUserProfileResponse pResponseStatus_
+  = CreateUserProfileResponse'{_cuprsIAMUserARN =
+                                 Nothing,
+                               _cuprsResponseStatus = pResponseStatus_}
 
 -- | The user's IAM ARN.
 cuprsIAMUserARN :: Lens' CreateUserProfileResponse (Maybe Text)

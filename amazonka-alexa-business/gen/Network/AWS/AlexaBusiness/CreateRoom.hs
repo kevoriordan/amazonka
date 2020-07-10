@@ -50,15 +50,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createRoom' smart constructor.
-data CreateRoom = CreateRoom'
-  { _crProfileARN         :: !(Maybe Text)
-  , _crProviderCalendarId :: !(Maybe Text)
-  , _crClientRequestToken :: !(Maybe Text)
-  , _crDescription        :: !(Maybe Text)
-  , _crTags               :: !(Maybe [Tag])
-  , _crRoomName           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateRoom = CreateRoom'{_crProfileARN ::
+                              !(Maybe Text),
+                              _crProviderCalendarId :: !(Maybe Text),
+                              _crClientRequestToken :: !(Maybe Text),
+                              _crDescription :: !(Maybe Text),
+                              _crTags :: !(Maybe [Tag]), _crRoomName :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateRoom' with the minimum fields required to make a request.
 --
@@ -68,7 +66,7 @@ data CreateRoom = CreateRoom'
 --
 -- * 'crProviderCalendarId' - The calendar ARN for the room.
 --
--- * 'crClientRequestToken' - A unique, user-specified identifier for this request that ensures idempotency.
+-- * 'crClientRequestToken' - A unique, user-specified identifier for this request that ensures idempotency. 
 --
 -- * 'crDescription' - The description for the room.
 --
@@ -78,16 +76,12 @@ data CreateRoom = CreateRoom'
 createRoom
     :: Text -- ^ 'crRoomName'
     -> CreateRoom
-createRoom pRoomName_ =
-  CreateRoom'
-    { _crProfileARN = Nothing
-    , _crProviderCalendarId = Nothing
-    , _crClientRequestToken = Nothing
-    , _crDescription = Nothing
-    , _crTags = Nothing
-    , _crRoomName = pRoomName_
-    }
-
+createRoom pRoomName_
+  = CreateRoom'{_crProfileARN = Nothing,
+                _crProviderCalendarId = Nothing,
+                _crClientRequestToken = Nothing,
+                _crDescription = Nothing, _crTags = Nothing,
+                _crRoomName = pRoomName_}
 
 -- | The profile ARN for the room.
 crProfileARN :: Lens' CreateRoom (Maybe Text)
@@ -97,7 +91,7 @@ crProfileARN = lens _crProfileARN (\ s a -> s{_crProfileARN = a})
 crProviderCalendarId :: Lens' CreateRoom (Maybe Text)
 crProviderCalendarId = lens _crProviderCalendarId (\ s a -> s{_crProviderCalendarId = a})
 
--- | A unique, user-specified identifier for this request that ensures idempotency.
+-- | A unique, user-specified identifier for this request that ensures idempotency. 
 crClientRequestToken :: Lens' CreateRoom (Maybe Text)
 crClientRequestToken = lens _crClientRequestToken (\ s a -> s{_crClientRequestToken = a})
 
@@ -153,11 +147,10 @@ instance ToQuery CreateRoom where
         toQuery = const mempty
 
 -- | /See:/ 'createRoomResponse' smart constructor.
-data CreateRoomResponse = CreateRoomResponse'
-  { _crrsRoomARN        :: !(Maybe Text)
-  , _crrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateRoomResponse = CreateRoomResponse'{_crrsRoomARN
+                                              :: !(Maybe Text),
+                                              _crrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateRoomResponse' with the minimum fields required to make a request.
 --
@@ -169,10 +162,9 @@ data CreateRoomResponse = CreateRoomResponse'
 createRoomResponse
     :: Int -- ^ 'crrsResponseStatus'
     -> CreateRoomResponse
-createRoomResponse pResponseStatus_ =
-  CreateRoomResponse'
-    {_crrsRoomARN = Nothing, _crrsResponseStatus = pResponseStatus_}
-
+createRoomResponse pResponseStatus_
+  = CreateRoomResponse'{_crrsRoomARN = Nothing,
+                        _crrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the newly created room in the response.
 crrsRoomARN :: Lens' CreateRoomResponse (Maybe Text)

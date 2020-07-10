@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Replaces all triggers for a repository. This can be used to create or delete triggers.
+-- Replaces all triggers for a repository. Used to create or delete triggers.
 --
 --
 module Network.AWS.CodeCommit.PutRepositoryTriggers
@@ -45,16 +45,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input ofa put repository triggers operation.
+-- | Represents the input of a put repository triggers operation.
 --
 --
 --
 -- /See:/ 'putRepositoryTriggers' smart constructor.
-data PutRepositoryTriggers = PutRepositoryTriggers'
-  { _pRepositoryName :: !Text
-  , _pTriggers       :: ![RepositoryTrigger]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRepositoryTriggers = PutRepositoryTriggers'{_pRepositoryName
+                                                    :: !Text,
+                                                    _pTriggers ::
+                                                    ![RepositoryTrigger]}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'PutRepositoryTriggers' with the minimum fields required to make a request.
 --
@@ -66,10 +67,10 @@ data PutRepositoryTriggers = PutRepositoryTriggers'
 putRepositoryTriggers
     :: Text -- ^ 'pRepositoryName'
     -> PutRepositoryTriggers
-putRepositoryTriggers pRepositoryName_ =
-  PutRepositoryTriggers'
-    {_pRepositoryName = pRepositoryName_, _pTriggers = mempty}
-
+putRepositoryTriggers pRepositoryName_
+  = PutRepositoryTriggers'{_pRepositoryName =
+                             pRepositoryName_,
+                           _pTriggers = mempty}
 
 -- | The name of the repository where you want to create or update the trigger.
 pRepositoryName :: Lens' PutRepositoryTriggers Text
@@ -121,11 +122,14 @@ instance ToQuery PutRepositoryTriggers where
 --
 --
 -- /See:/ 'putRepositoryTriggersResponse' smart constructor.
-data PutRepositoryTriggersResponse = PutRepositoryTriggersResponse'
-  { _prtrsConfigurationId :: !(Maybe Text)
-  , _prtrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRepositoryTriggersResponse = PutRepositoryTriggersResponse'{_prtrsConfigurationId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _prtrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'PutRepositoryTriggersResponse' with the minimum fields required to make a request.
 --
@@ -137,10 +141,10 @@ data PutRepositoryTriggersResponse = PutRepositoryTriggersResponse'
 putRepositoryTriggersResponse
     :: Int -- ^ 'prtrsResponseStatus'
     -> PutRepositoryTriggersResponse
-putRepositoryTriggersResponse pResponseStatus_ =
-  PutRepositoryTriggersResponse'
-    {_prtrsConfigurationId = Nothing, _prtrsResponseStatus = pResponseStatus_}
-
+putRepositoryTriggersResponse pResponseStatus_
+  = PutRepositoryTriggersResponse'{_prtrsConfigurationId
+                                     = Nothing,
+                                   _prtrsResponseStatus = pResponseStatus_}
 
 -- | The system-generated unique ID for the create or update operation.
 prtrsConfigurationId :: Lens' PutRepositoryTriggersResponse (Maybe Text)

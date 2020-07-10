@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the termination policies supported by Auto Scaling.
+-- Describes the termination policies supported by Amazon EC2 Auto Scaling.
 --
+--
+-- For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html Controlling Which Auto Scaling Instances Terminate During Scale In> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.DescribeTerminationPolicyTypes
     (
@@ -43,17 +45,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeTerminationPolicyTypes' smart constructor.
-data DescribeTerminationPolicyTypes =
-  DescribeTerminationPolicyTypes'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTerminationPolicyTypes = DescribeTerminationPolicyTypes'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeTerminationPolicyTypes' with the minimum fields required to make a request.
 --
 describeTerminationPolicyTypes
     :: DescribeTerminationPolicyTypes
-describeTerminationPolicyTypes = DescribeTerminationPolicyTypes'
-
+describeTerminationPolicyTypes
+  = DescribeTerminationPolicyTypes'
 
 instance AWSRequest DescribeTerminationPolicyTypes
          where
@@ -90,30 +91,34 @@ instance ToQuery DescribeTerminationPolicyTypes where
                   "Version" =: ("2011-01-01" :: ByteString)])
 
 -- | /See:/ 'describeTerminationPolicyTypesResponse' smart constructor.
-data DescribeTerminationPolicyTypesResponse = DescribeTerminationPolicyTypesResponse'
-  { _dtptrsTerminationPolicyTypes :: !(Maybe [Text])
-  , _dtptrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTerminationPolicyTypesResponse = DescribeTerminationPolicyTypesResponse'{_dtptrsTerminationPolicyTypes
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [Text]),
+                                                                                      _dtptrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DescribeTerminationPolicyTypesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtptrsTerminationPolicyTypes' - The termination policies supported by Auto Scaling (@OldestInstance@ , @OldestLaunchConfiguration@ , @NewestInstance@ , @ClosestToNextInstanceHour@ , and @Default@ ).
+-- * 'dtptrsTerminationPolicyTypes' - The termination policies supported by Amazon EC2 Auto Scaling: @OldestInstance@ , @OldestLaunchConfiguration@ , @NewestInstance@ , @ClosestToNextInstanceHour@ , @Default@ , @OldestLaunchTemplate@ , and @AllocationStrategy@ .
 --
 -- * 'dtptrsResponseStatus' - -- | The response status code.
 describeTerminationPolicyTypesResponse
     :: Int -- ^ 'dtptrsResponseStatus'
     -> DescribeTerminationPolicyTypesResponse
-describeTerminationPolicyTypesResponse pResponseStatus_ =
-  DescribeTerminationPolicyTypesResponse'
-    { _dtptrsTerminationPolicyTypes = Nothing
-    , _dtptrsResponseStatus = pResponseStatus_
-    }
+describeTerminationPolicyTypesResponse
+  pResponseStatus_
+  = DescribeTerminationPolicyTypesResponse'{_dtptrsTerminationPolicyTypes
+                                              = Nothing,
+                                            _dtptrsResponseStatus =
+                                              pResponseStatus_}
 
-
--- | The termination policies supported by Auto Scaling (@OldestInstance@ , @OldestLaunchConfiguration@ , @NewestInstance@ , @ClosestToNextInstanceHour@ , and @Default@ ).
+-- | The termination policies supported by Amazon EC2 Auto Scaling: @OldestInstance@ , @OldestLaunchConfiguration@ , @NewestInstance@ , @ClosestToNextInstanceHour@ , @Default@ , @OldestLaunchTemplate@ , and @AllocationStrategy@ .
 dtptrsTerminationPolicyTypes :: Lens' DescribeTerminationPolicyTypesResponse [Text]
 dtptrsTerminationPolicyTypes = lens _dtptrsTerminationPolicyTypes (\ s a -> s{_dtptrsTerminationPolicyTypes = a}) . _Default . _Coerce
 

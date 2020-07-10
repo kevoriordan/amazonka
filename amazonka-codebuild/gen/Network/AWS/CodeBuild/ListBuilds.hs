@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listBuilds' smart constructor.
-data ListBuilds = ListBuilds'
-  { _lbSortOrder :: !(Maybe SortOrderType)
-  , _lbNextToken :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBuilds = ListBuilds'{_lbSortOrder ::
+                              !(Maybe SortOrderType),
+                              _lbNextToken :: !(Maybe Text)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBuilds' with the minimum fields required to make a request.
 --
@@ -62,17 +61,18 @@ data ListBuilds = ListBuilds'
 --
 -- * 'lbSortOrder' - The order to list build IDs. Valid values include:     * @ASCENDING@ : List the build IDs in ascending order by build ID.     * @DESCENDING@ : List the build IDs in descending order by build ID.
 --
--- * 'lbNextToken' - During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /next token/ . To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
+-- * 'lbNextToken' - During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /nextToken/ . To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
 listBuilds
     :: ListBuilds
-listBuilds = ListBuilds' {_lbSortOrder = Nothing, _lbNextToken = Nothing}
-
+listBuilds
+  = ListBuilds'{_lbSortOrder = Nothing,
+                _lbNextToken = Nothing}
 
 -- | The order to list build IDs. Valid values include:     * @ASCENDING@ : List the build IDs in ascending order by build ID.     * @DESCENDING@ : List the build IDs in descending order by build ID.
 lbSortOrder :: Lens' ListBuilds (Maybe SortOrderType)
 lbSortOrder = lens _lbSortOrder (\ s a -> s{_lbSortOrder = a})
 
--- | During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /next token/ . To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
+-- | During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /nextToken/ . To get the next batch of items in the list, call this operation again, adding the next token to the call. To get all of the items in the list, keep calling this operation with each subsequent next token that is returned, until no more next tokens are returned.
 lbNextToken :: Lens' ListBuilds (Maybe Text)
 lbNextToken = lens _lbNextToken (\ s a -> s{_lbNextToken = a})
 
@@ -120,12 +120,11 @@ instance ToQuery ListBuilds where
         toQuery = const mempty
 
 -- | /See:/ 'listBuildsResponse' smart constructor.
-data ListBuildsResponse = ListBuildsResponse'
-  { _lbrsIds            :: !(Maybe (List1 Text))
-  , _lbrsNextToken      :: !(Maybe Text)
-  , _lbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBuildsResponse = ListBuildsResponse'{_lbrsIds
+                                              :: !(Maybe (List1 Text)),
+                                              _lbrsNextToken :: !(Maybe Text),
+                                              _lbrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBuildsResponse' with the minimum fields required to make a request.
 --
@@ -133,25 +132,22 @@ data ListBuildsResponse = ListBuildsResponse'
 --
 -- * 'lbrsIds' - A list of build IDs, with each build ID representing a single build.
 --
--- * 'lbrsNextToken' - If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /next token/ . To get the next batch of items in the list, call this operation again, adding the next token to the call.
+-- * 'lbrsNextToken' - If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /nextToken/ . To get the next batch of items in the list, call this operation again, adding the next token to the call.
 --
 -- * 'lbrsResponseStatus' - -- | The response status code.
 listBuildsResponse
     :: Int -- ^ 'lbrsResponseStatus'
     -> ListBuildsResponse
-listBuildsResponse pResponseStatus_ =
-  ListBuildsResponse'
-    { _lbrsIds = Nothing
-    , _lbrsNextToken = Nothing
-    , _lbrsResponseStatus = pResponseStatus_
-    }
-
+listBuildsResponse pResponseStatus_
+  = ListBuildsResponse'{_lbrsIds = Nothing,
+                        _lbrsNextToken = Nothing,
+                        _lbrsResponseStatus = pResponseStatus_}
 
 -- | A list of build IDs, with each build ID representing a single build.
 lbrsIds :: Lens' ListBuildsResponse (Maybe (NonEmpty Text))
 lbrsIds = lens _lbrsIds (\ s a -> s{_lbrsIds = a}) . mapping _List1
 
--- | If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /next token/ . To get the next batch of items in the list, call this operation again, adding the next token to the call.
+-- | If there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a /nextToken/ . To get the next batch of items in the list, call this operation again, adding the next token to the call.
 lbrsNextToken :: Lens' ListBuildsResponse (Maybe Text)
 lbrsNextToken = lens _lbrsNextToken (\ s a -> s{_lbrsNextToken = a})
 

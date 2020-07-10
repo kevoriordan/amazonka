@@ -56,19 +56,18 @@ import Network.AWS.Response
 import Network.AWS.Support.Types
 import Network.AWS.Support.Types.Product
 
--- |
---
---
---
--- /See:/ 'describeCommunications' smart constructor.
-data DescribeCommunications = DescribeCommunications'
-  { _dAfterTime  :: !(Maybe Text)
-  , _dBeforeTime :: !(Maybe Text)
-  , _dNextToken  :: !(Maybe Text)
-  , _dMaxResults :: !(Maybe Nat)
-  , _dCaseId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeCommunications' smart constructor.
+data DescribeCommunications = DescribeCommunications'{_dAfterTime
+                                                      :: !(Maybe Text),
+                                                      _dBeforeTime ::
+                                                      !(Maybe Text),
+                                                      _dNextToken ::
+                                                      !(Maybe Text),
+                                                      _dMaxResults ::
+                                                      !(Maybe Nat),
+                                                      _dCaseId :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeCommunications' with the minimum fields required to make a request.
 --
@@ -82,19 +81,14 @@ data DescribeCommunications = DescribeCommunications'
 --
 -- * 'dMaxResults' - The maximum number of results to return before paginating.
 --
--- * 'dCaseId' - The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/
+-- * 'dCaseId' - The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/ 
 describeCommunications
     :: Text -- ^ 'dCaseId'
     -> DescribeCommunications
-describeCommunications pCaseId_ =
-  DescribeCommunications'
-    { _dAfterTime = Nothing
-    , _dBeforeTime = Nothing
-    , _dNextToken = Nothing
-    , _dMaxResults = Nothing
-    , _dCaseId = pCaseId_
-    }
-
+describeCommunications pCaseId_
+  = DescribeCommunications'{_dAfterTime = Nothing,
+                            _dBeforeTime = Nothing, _dNextToken = Nothing,
+                            _dMaxResults = Nothing, _dCaseId = pCaseId_}
 
 -- | The start date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
 dAfterTime :: Lens' DescribeCommunications (Maybe Text)
@@ -112,7 +106,7 @@ dNextToken = lens _dNextToken (\ s a -> s{_dNextToken = a})
 dMaxResults :: Lens' DescribeCommunications (Maybe Natural)
 dMaxResults = lens _dMaxResults (\ s a -> s{_dMaxResults = a}) . mapping _Nat
 
--- | The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/
+-- | The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/ 
 dCaseId :: Lens' DescribeCommunications Text
 dCaseId = lens _dCaseId (\ s a -> s{_dCaseId = a})
 
@@ -170,12 +164,18 @@ instance ToQuery DescribeCommunications where
 --
 --
 -- /See:/ 'describeCommunicationsResponse' smart constructor.
-data DescribeCommunicationsResponse = DescribeCommunicationsResponse'
-  { _dcrsNextToken      :: !(Maybe Text)
-  , _dcrsCommunications :: !(Maybe [Communication])
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCommunicationsResponse = DescribeCommunicationsResponse'{_dcrsNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _dcrsCommunications
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [Communication]),
+                                                                      _dcrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeCommunicationsResponse' with the minimum fields required to make a request.
 --
@@ -189,13 +189,11 @@ data DescribeCommunicationsResponse = DescribeCommunicationsResponse'
 describeCommunicationsResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeCommunicationsResponse
-describeCommunicationsResponse pResponseStatus_ =
-  DescribeCommunicationsResponse'
-    { _dcrsNextToken = Nothing
-    , _dcrsCommunications = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
-
+describeCommunicationsResponse pResponseStatus_
+  = DescribeCommunicationsResponse'{_dcrsNextToken =
+                                      Nothing,
+                                    _dcrsCommunications = Nothing,
+                                    _dcrsResponseStatus = pResponseStatus_}
 
 -- | A resumption point for pagination.
 dcrsNextToken :: Lens' DescribeCommunicationsResponse (Maybe Text)

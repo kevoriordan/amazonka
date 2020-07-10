@@ -21,9 +21,9 @@
 -- Deletes the specified server certificate.
 --
 --
--- For more information about working with server certificates, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html Working with Server Certificates> in the /IAM User Guide/ . This topic also includes a list of AWS services that can use the server certificates that you manage with IAM.
+-- For more information about working with server certificates, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html Working with Server Certificates> in the /IAM User Guide/ . This topic also includes a list of AWS services that can use the server certificates that you manage with IAM.
 --
--- /Important:/ If you are using a server certificate with Elastic Load Balancing, deleting the certificate could have implications for your application. If Elastic Load Balancing doesn't detect the deletion of bound certificates, it may continue to use the certificates. This could cause Elastic Load Balancing to stop accepting traffic. We recommend that you remove the reference to the certificate from Elastic Load Balancing before using this command to delete the certificate. For more information, go to <http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html DeleteLoadBalancerListeners> in the /Elastic Load Balancing API Reference/ .
+-- /Important:/ If you are using a server certificate with Elastic Load Balancing, deleting the certificate could have implications for your application. If Elastic Load Balancing doesn't detect the deletion of bound certificates, it may continue to use the certificates. This could cause Elastic Load Balancing to stop accepting traffic. We recommend that you remove the reference to the certificate from Elastic Load Balancing before using this command to delete the certificate. For more information, go to <https://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html DeleteLoadBalancerListeners> in the /Elastic Load Balancing API Reference/ .
 --
 module Network.AWS.IAM.DeleteServerCertificate
     (
@@ -46,24 +46,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteServerCertificate' smart constructor.
-newtype DeleteServerCertificate = DeleteServerCertificate'
-  { _dscServerCertificateName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteServerCertificate = DeleteServerCertificate'{_dscServerCertificateName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteServerCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dscServerCertificateName' - The name of the server certificate you want to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'dscServerCertificateName' - The name of the server certificate you want to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 deleteServerCertificate
     :: Text -- ^ 'dscServerCertificateName'
     -> DeleteServerCertificate
-deleteServerCertificate pServerCertificateName_ =
-  DeleteServerCertificate' {_dscServerCertificateName = pServerCertificateName_}
+deleteServerCertificate pServerCertificateName_
+  = DeleteServerCertificate'{_dscServerCertificateName
+                               = pServerCertificateName_}
 
-
--- | The name of the server certificate you want to delete. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name of the server certificate you want to delete. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 dscServerCertificateName :: Lens' DeleteServerCertificate Text
 dscServerCertificateName = lens _dscServerCertificateName (\ s a -> s{_dscServerCertificateName = a})
 
@@ -93,16 +93,15 @@ instance ToQuery DeleteServerCertificate where
                "ServerCertificateName" =: _dscServerCertificateName]
 
 -- | /See:/ 'deleteServerCertificateResponse' smart constructor.
-data DeleteServerCertificateResponse =
-  DeleteServerCertificateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteServerCertificateResponse = DeleteServerCertificateResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteServerCertificateResponse' with the minimum fields required to make a request.
 --
 deleteServerCertificateResponse
     :: DeleteServerCertificateResponse
-deleteServerCertificateResponse = DeleteServerCertificateResponse'
-
+deleteServerCertificateResponse
+  = DeleteServerCertificateResponse'
 
 instance NFData DeleteServerCertificateResponse where

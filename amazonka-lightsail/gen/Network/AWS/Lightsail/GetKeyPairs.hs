@@ -49,22 +49,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getKeyPairs' smart constructor.
-newtype GetKeyPairs = GetKeyPairs'
-  { _gkpPageToken :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetKeyPairs = GetKeyPairs'{_gkpPageToken ::
+                                   Maybe Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetKeyPairs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gkpPageToken' - A token used for advancing to the next page of results from your get key pairs request.
+-- * 'gkpPageToken' - The token to advance to the next page of results from your request. To get a page token, perform an initial @GetKeyPairs@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 getKeyPairs
     :: GetKeyPairs
-getKeyPairs = GetKeyPairs' {_gkpPageToken = Nothing}
+getKeyPairs = GetKeyPairs'{_gkpPageToken = Nothing}
 
-
--- | A token used for advancing to the next page of results from your get key pairs request.
+-- | The token to advance to the next page of results from your request. To get a page token, perform an initial @GetKeyPairs@ request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
 gkpPageToken :: Lens' GetKeyPairs (Maybe Text)
 gkpPageToken = lens _gkpPageToken (\ s a -> s{_gkpPageToken = a})
 
@@ -111,18 +109,18 @@ instance ToQuery GetKeyPairs where
         toQuery = const mempty
 
 -- | /See:/ 'getKeyPairsResponse' smart constructor.
-data GetKeyPairsResponse = GetKeyPairsResponse'
-  { _gkpsrsNextPageToken  :: !(Maybe Text)
-  , _gkpsrsKeyPairs       :: !(Maybe [KeyPair])
-  , _gkpsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetKeyPairsResponse = GetKeyPairsResponse'{_gkpsrsNextPageToken
+                                                :: !(Maybe Text),
+                                                _gkpsrsKeyPairs ::
+                                                !(Maybe [KeyPair]),
+                                                _gkpsrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetKeyPairsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gkpsrsNextPageToken' - A token used for advancing to the next page of results from your get key pairs request.
+-- * 'gkpsrsNextPageToken' - The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetKeyPairs@ request and specify the next page token using the @pageToken@ parameter.
 --
 -- * 'gkpsrsKeyPairs' - An array of key-value pairs containing information about the key pairs.
 --
@@ -130,15 +128,13 @@ data GetKeyPairsResponse = GetKeyPairsResponse'
 getKeyPairsResponse
     :: Int -- ^ 'gkpsrsResponseStatus'
     -> GetKeyPairsResponse
-getKeyPairsResponse pResponseStatus_ =
-  GetKeyPairsResponse'
-    { _gkpsrsNextPageToken = Nothing
-    , _gkpsrsKeyPairs = Nothing
-    , _gkpsrsResponseStatus = pResponseStatus_
-    }
+getKeyPairsResponse pResponseStatus_
+  = GetKeyPairsResponse'{_gkpsrsNextPageToken =
+                           Nothing,
+                         _gkpsrsKeyPairs = Nothing,
+                         _gkpsrsResponseStatus = pResponseStatus_}
 
-
--- | A token used for advancing to the next page of results from your get key pairs request.
+-- | The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another @GetKeyPairs@ request and specify the next page token using the @pageToken@ parameter.
 gkpsrsNextPageToken :: Lens' GetKeyPairsResponse (Maybe Text)
 gkpsrsNextPageToken = lens _gkpsrsNextPageToken (\ s a -> s{_gkpsrsNextPageToken = a})
 

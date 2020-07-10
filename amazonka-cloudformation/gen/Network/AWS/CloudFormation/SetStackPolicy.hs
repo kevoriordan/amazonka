@@ -48,38 +48,34 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setStackPolicy' smart constructor.
-data SetStackPolicy = SetStackPolicy'
-  { _sspStackPolicyBody :: !(Maybe Text)
-  , _sspStackPolicyURL  :: !(Maybe Text)
-  , _sspStackName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetStackPolicy = SetStackPolicy'{_sspStackPolicyBody
+                                      :: !(Maybe Text),
+                                      _sspStackPolicyURL :: !(Maybe Text),
+                                      _sspStackName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetStackPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sspStackPolicyBody' - Structure containing the stack policy body. For more information, go to <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html Prevent Updates to Stack Resources> in the AWS CloudFormation User Guide. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
+-- * 'sspStackPolicyBody' - Structure containing the stack policy body. For more information, go to <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html Prevent Updates to Stack Resources> in the AWS CloudFormation User Guide. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
 --
--- * 'sspStackPolicyURL' - Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same region as the stack. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
+-- * 'sspStackPolicyURL' - Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
 --
 -- * 'sspStackName' - The name or unique stack ID that you want to associate a policy with.
 setStackPolicy
     :: Text -- ^ 'sspStackName'
     -> SetStackPolicy
-setStackPolicy pStackName_ =
-  SetStackPolicy'
-    { _sspStackPolicyBody = Nothing
-    , _sspStackPolicyURL = Nothing
-    , _sspStackName = pStackName_
-    }
+setStackPolicy pStackName_
+  = SetStackPolicy'{_sspStackPolicyBody = Nothing,
+                    _sspStackPolicyURL = Nothing,
+                    _sspStackName = pStackName_}
 
-
--- | Structure containing the stack policy body. For more information, go to <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html Prevent Updates to Stack Resources> in the AWS CloudFormation User Guide. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
+-- | Structure containing the stack policy body. For more information, go to <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html Prevent Updates to Stack Resources> in the AWS CloudFormation User Guide. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
 sspStackPolicyBody :: Lens' SetStackPolicy (Maybe Text)
 sspStackPolicyBody = lens _sspStackPolicyBody (\ s a -> s{_sspStackPolicyBody = a})
 
--- | Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same region as the stack. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
+-- | Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can specify either the @StackPolicyBody@ or the @StackPolicyURL@ parameter, but not both.
 sspStackPolicyURL :: Lens' SetStackPolicy (Maybe Text)
 sspStackPolicyURL = lens _sspStackPolicyURL (\ s a -> s{_sspStackPolicyURL = a})
 
@@ -112,16 +108,14 @@ instance ToQuery SetStackPolicy where
                "StackName" =: _sspStackName]
 
 -- | /See:/ 'setStackPolicyResponse' smart constructor.
-data SetStackPolicyResponse =
-  SetStackPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetStackPolicyResponse = SetStackPolicyResponse'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'SetStackPolicyResponse' with the minimum fields required to make a request.
 --
 setStackPolicyResponse
     :: SetStackPolicyResponse
 setStackPolicyResponse = SetStackPolicyResponse'
-
 
 instance NFData SetStackPolicyResponse where

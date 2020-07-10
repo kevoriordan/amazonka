@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Amazon Mechanical Turk API Reference__
+-- __Amazon Mechanical Turk API Reference__ 
 module Network.AWS.MechanicalTurk
     (
     -- * Service Configuration
@@ -20,11 +20,11 @@ module Network.AWS.MechanicalTurk
     -- * Errors
     -- $errors
 
-    -- ** ServiceFault
-    , _ServiceFault
-
     -- ** RequestError
     , _RequestError
+
+    -- ** ServiceFault
+    , _ServiceFault
 
     -- * Waiters
     -- $waiters
@@ -32,10 +32,10 @@ module Network.AWS.MechanicalTurk
     -- * Operations
     -- $operations
 
-    -- ** ApproveAssignment
+    -- ** ApproveAssignment 
     , module Network.AWS.MechanicalTurk.ApproveAssignment
 
-    -- ** ListReviewPolicyResultsForHIT
+    -- ** ListReviewPolicyResultsForHIT 
     , module Network.AWS.MechanicalTurk.ListReviewPolicyResultsForHIT
 
     -- ** ListHITs (Paginated)
@@ -44,85 +44,85 @@ module Network.AWS.MechanicalTurk
     -- ** ListWorkersWithQualificationType (Paginated)
     , module Network.AWS.MechanicalTurk.ListWorkersWithQualificationType
 
-    -- ** DeleteHIT
+    -- ** DeleteHIT 
     , module Network.AWS.MechanicalTurk.DeleteHIT
 
     -- ** ListReviewableHITs (Paginated)
     , module Network.AWS.MechanicalTurk.ListReviewableHITs
 
-    -- ** GetAssignment
+    -- ** GetAssignment 
     , module Network.AWS.MechanicalTurk.GetAssignment
 
-    -- ** DeleteQualificationType
+    -- ** DeleteQualificationType 
     , module Network.AWS.MechanicalTurk.DeleteQualificationType
 
-    -- ** UpdateQualificationType
+    -- ** UpdateQualificationType 
     , module Network.AWS.MechanicalTurk.UpdateQualificationType
 
     -- ** ListQualificationTypes (Paginated)
     , module Network.AWS.MechanicalTurk.ListQualificationTypes
 
-    -- ** UpdateHITTypeOfHIT
+    -- ** UpdateHITTypeOfHIT 
     , module Network.AWS.MechanicalTurk.UpdateHITTypeOfHIT
 
-    -- ** DisassociateQualificationFromWorker
+    -- ** DisassociateQualificationFromWorker 
     , module Network.AWS.MechanicalTurk.DisassociateQualificationFromWorker
 
-    -- ** SendTestEventNotification
+    -- ** SendTestEventNotification 
     , module Network.AWS.MechanicalTurk.SendTestEventNotification
 
-    -- ** NotifyWorkers
+    -- ** NotifyWorkers 
     , module Network.AWS.MechanicalTurk.NotifyWorkers
 
-    -- ** CreateHITWithHITType
+    -- ** CreateHITWithHITType 
     , module Network.AWS.MechanicalTurk.CreateHITWithHITType
 
-    -- ** CreateHITType
+    -- ** CreateHITType 
     , module Network.AWS.MechanicalTurk.CreateHITType
 
-    -- ** SendBonus
+    -- ** SendBonus 
     , module Network.AWS.MechanicalTurk.SendBonus
 
     -- ** ListQualificationRequests (Paginated)
     , module Network.AWS.MechanicalTurk.ListQualificationRequests
 
-    -- ** UpdateExpirationForHIT
+    -- ** UpdateExpirationForHIT 
     , module Network.AWS.MechanicalTurk.UpdateExpirationForHIT
 
-    -- ** RejectAssignment
+    -- ** RejectAssignment 
     , module Network.AWS.MechanicalTurk.RejectAssignment
 
     -- ** ListAssignmentsForHIT (Paginated)
     , module Network.AWS.MechanicalTurk.ListAssignmentsForHIT
 
-    -- ** RejectQualificationRequest
+    -- ** RejectQualificationRequest 
     , module Network.AWS.MechanicalTurk.RejectQualificationRequest
 
-    -- ** GetQualificationScore
+    -- ** GetQualificationScore 
     , module Network.AWS.MechanicalTurk.GetQualificationScore
 
-    -- ** GetQualificationType
+    -- ** GetQualificationType 
     , module Network.AWS.MechanicalTurk.GetQualificationType
 
-    -- ** UpdateHITReviewStatus
+    -- ** UpdateHITReviewStatus 
     , module Network.AWS.MechanicalTurk.UpdateHITReviewStatus
 
-    -- ** CreateQualificationType
+    -- ** CreateQualificationType 
     , module Network.AWS.MechanicalTurk.CreateQualificationType
 
-    -- ** AcceptQualificationRequest
+    -- ** AcceptQualificationRequest 
     , module Network.AWS.MechanicalTurk.AcceptQualificationRequest
 
-    -- ** GetFileUploadURL
+    -- ** GetFileUploadURL 
     , module Network.AWS.MechanicalTurk.GetFileUploadURL
 
-    -- ** CreateAdditionalAssignmentsForHIT
+    -- ** CreateAdditionalAssignmentsForHIT 
     , module Network.AWS.MechanicalTurk.CreateAdditionalAssignmentsForHIT
 
-    -- ** GetHIT
+    -- ** GetHIT 
     , module Network.AWS.MechanicalTurk.GetHIT
 
-    -- ** CreateWorkerBlock
+    -- ** CreateWorkerBlock 
     , module Network.AWS.MechanicalTurk.CreateWorkerBlock
 
     -- ** ListHITsForQualificationType (Paginated)
@@ -134,19 +134,19 @@ module Network.AWS.MechanicalTurk
     -- ** ListWorkerBlocks (Paginated)
     , module Network.AWS.MechanicalTurk.ListWorkerBlocks
 
-    -- ** DeleteWorkerBlock
+    -- ** DeleteWorkerBlock 
     , module Network.AWS.MechanicalTurk.DeleteWorkerBlock
 
-    -- ** UpdateNotificationSettings
+    -- ** UpdateNotificationSettings 
     , module Network.AWS.MechanicalTurk.UpdateNotificationSettings
 
-    -- ** AssociateQualificationWithWorker
+    -- ** AssociateQualificationWithWorker 
     , module Network.AWS.MechanicalTurk.AssociateQualificationWithWorker
 
-    -- ** CreateHIT
+    -- ** CreateHIT 
     , module Network.AWS.MechanicalTurk.CreateHIT
 
-    -- ** GetAccountBalance
+    -- ** GetAccountBalance 
     , module Network.AWS.MechanicalTurk.GetAccountBalance
 
     -- * Types
@@ -393,8 +393,8 @@ import Network.AWS.MechanicalTurk.ListHITs
 import Network.AWS.MechanicalTurk.ListHITsForQualificationType
 import Network.AWS.MechanicalTurk.ListQualificationRequests
 import Network.AWS.MechanicalTurk.ListQualificationTypes
-import Network.AWS.MechanicalTurk.ListReviewableHITs
 import Network.AWS.MechanicalTurk.ListReviewPolicyResultsForHIT
+import Network.AWS.MechanicalTurk.ListReviewableHITs
 import Network.AWS.MechanicalTurk.ListWorkerBlocks
 import Network.AWS.MechanicalTurk.ListWorkersWithQualificationType
 import Network.AWS.MechanicalTurk.NotifyWorkers

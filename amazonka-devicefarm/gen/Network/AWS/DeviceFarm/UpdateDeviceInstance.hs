@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates information about an existing private device instance.
+-- Updates information about a private device instance.
 --
 --
 module Network.AWS.DeviceFarm.UpdateDeviceInstance
@@ -47,18 +47,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDeviceInstance' smart constructor.
-data UpdateDeviceInstance = UpdateDeviceInstance'
-  { _udiProfileARN :: !(Maybe Text)
-  , _udiLabels     :: !(Maybe [Text])
-  , _udiArn        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDeviceInstance = UpdateDeviceInstance'{_udiProfileARN
+                                                  :: !(Maybe Text),
+                                                  _udiLabels :: !(Maybe [Text]),
+                                                  _udiArn :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDeviceInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udiProfileARN' - The Amazon Resource Name (ARN) of the profile that you want to associate with the device instance.
+-- * 'udiProfileARN' - The ARN of the profile that you want to associate with the device instance.
 --
 -- * 'udiLabels' - An array of strings that you want to associate with the device instance.
 --
@@ -66,12 +65,11 @@ data UpdateDeviceInstance = UpdateDeviceInstance'
 updateDeviceInstance
     :: Text -- ^ 'udiArn'
     -> UpdateDeviceInstance
-updateDeviceInstance pArn_ =
-  UpdateDeviceInstance'
-    {_udiProfileARN = Nothing, _udiLabels = Nothing, _udiArn = pArn_}
+updateDeviceInstance pArn_
+  = UpdateDeviceInstance'{_udiProfileARN = Nothing,
+                          _udiLabels = Nothing, _udiArn = pArn_}
 
-
--- | The Amazon Resource Name (ARN) of the profile that you want to associate with the device instance.
+-- | The ARN of the profile that you want to associate with the device instance.
 udiProfileARN :: Lens' UpdateDeviceInstance (Maybe Text)
 udiProfileARN = lens _udiProfileARN (\ s a -> s{_udiProfileARN = a})
 
@@ -122,28 +120,31 @@ instance ToQuery UpdateDeviceInstance where
         toQuery = const mempty
 
 -- | /See:/ 'updateDeviceInstanceResponse' smart constructor.
-data UpdateDeviceInstanceResponse = UpdateDeviceInstanceResponse'
-  { _udirsDeviceInstance :: !(Maybe DeviceInstance)
-  , _udirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDeviceInstanceResponse = UpdateDeviceInstanceResponse'{_udirsDeviceInstance
+                                                                  ::
+                                                                  !(Maybe
+                                                                      DeviceInstance),
+                                                                  _udirsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateDeviceInstanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udirsDeviceInstance' - An object containing information about your device instance.
+-- * 'udirsDeviceInstance' - An object that contains information about your device instance.
 --
 -- * 'udirsResponseStatus' - -- | The response status code.
 updateDeviceInstanceResponse
     :: Int -- ^ 'udirsResponseStatus'
     -> UpdateDeviceInstanceResponse
-updateDeviceInstanceResponse pResponseStatus_ =
-  UpdateDeviceInstanceResponse'
-    {_udirsDeviceInstance = Nothing, _udirsResponseStatus = pResponseStatus_}
+updateDeviceInstanceResponse pResponseStatus_
+  = UpdateDeviceInstanceResponse'{_udirsDeviceInstance
+                                    = Nothing,
+                                  _udirsResponseStatus = pResponseStatus_}
 
-
--- | An object containing information about your device instance.
+-- | An object that contains information about your device instance.
 udirsDeviceInstance :: Lens' UpdateDeviceInstanceResponse (Maybe DeviceInstance)
 udirsDeviceInstance = lens _udirsDeviceInstance (\ s a -> s{_udirsDeviceInstance = a})
 

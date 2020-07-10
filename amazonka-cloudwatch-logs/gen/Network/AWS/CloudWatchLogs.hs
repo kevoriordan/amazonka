@@ -32,32 +32,38 @@ module Network.AWS.CloudWatchLogs
     -- * Errors
     -- $errors
 
-    -- ** InvalidParameterException
-    , _InvalidParameterException
+    -- ** DataAlreadyAcceptedException
+    , _DataAlreadyAcceptedException
+
+    -- ** UnrecognizedClientException
+    , _UnrecognizedClientException
 
     -- ** InvalidSequenceTokenException
     , _InvalidSequenceTokenException
 
-    -- ** ResourceAlreadyExistsException
-    , _ResourceAlreadyExistsException
-
-    -- ** OperationAbortedException
-    , _OperationAbortedException
-
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
-
-    -- ** DataAlreadyAcceptedException
-    , _DataAlreadyAcceptedException
-
-    -- ** InvalidOperationException
-    , _InvalidOperationException
+    -- ** InvalidParameterException
+    , _InvalidParameterException
 
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
 
+    -- ** ResourceAlreadyExistsException
+    , _ResourceAlreadyExistsException
+
+    -- ** InvalidOperationException
+    , _InvalidOperationException
+
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
+
+    -- ** MalformedQueryException
+    , _MalformedQueryException
+
     -- ** LimitExceededException
     , _LimitExceededException
+
+    -- ** OperationAbortedException
+    , _OperationAbortedException
 
     -- * Waiters
     -- $waiters
@@ -65,101 +71,119 @@ module Network.AWS.CloudWatchLogs
     -- * Operations
     -- $operations
 
+    -- ** GetLogGroupFields 
+    , module Network.AWS.CloudWatchLogs.GetLogGroupFields
+
+    -- ** GetLogRecord 
+    , module Network.AWS.CloudWatchLogs.GetLogRecord
+
     -- ** DescribeDestinations (Paginated)
     , module Network.AWS.CloudWatchLogs.DescribeDestinations
 
-    -- ** UntagLogGroup
+    -- ** UntagLogGroup 
     , module Network.AWS.CloudWatchLogs.UntagLogGroup
 
-    -- ** CreateExportTask
+    -- ** StopQuery 
+    , module Network.AWS.CloudWatchLogs.StopQuery
+
+    -- ** CreateExportTask 
     , module Network.AWS.CloudWatchLogs.CreateExportTask
 
-    -- ** PutDestination
+    -- ** PutDestination 
     , module Network.AWS.CloudWatchLogs.PutDestination
 
     -- ** DescribeSubscriptionFilters (Paginated)
     , module Network.AWS.CloudWatchLogs.DescribeSubscriptionFilters
 
-    -- ** GetLogEvents
+    -- ** GetLogEvents 
     , module Network.AWS.CloudWatchLogs.GetLogEvents
 
     -- ** DescribeLogGroups (Paginated)
     , module Network.AWS.CloudWatchLogs.DescribeLogGroups
 
-    -- ** DeleteDestination
+    -- ** DeleteDestination 
     , module Network.AWS.CloudWatchLogs.DeleteDestination
 
-    -- ** DisassociateKMSKey
+    -- ** DisassociateKMSKey 
     , module Network.AWS.CloudWatchLogs.DisassociateKMSKey
 
     -- ** FilterLogEvents (Paginated)
     , module Network.AWS.CloudWatchLogs.FilterLogEvents
 
-    -- ** TagLogGroup
+    -- ** TagLogGroup 
     , module Network.AWS.CloudWatchLogs.TagLogGroup
 
-    -- ** DescribeResourcePolicies
+    -- ** DescribeResourcePolicies (Paginated)
     , module Network.AWS.CloudWatchLogs.DescribeResourcePolicies
 
-    -- ** DeleteLogStream
+    -- ** DeleteLogStream 
     , module Network.AWS.CloudWatchLogs.DeleteLogStream
 
-    -- ** CreateLogStream
+    -- ** DescribeQueries (Paginated)
+    , module Network.AWS.CloudWatchLogs.DescribeQueries
+
+    -- ** CreateLogStream 
     , module Network.AWS.CloudWatchLogs.CreateLogStream
 
-    -- ** CreateLogGroup
+    -- ** CreateLogGroup 
     , module Network.AWS.CloudWatchLogs.CreateLogGroup
 
-    -- ** DescribeExportTasks
+    -- ** DescribeExportTasks (Paginated)
     , module Network.AWS.CloudWatchLogs.DescribeExportTasks
 
-    -- ** CancelExportTask
+    -- ** CancelExportTask 
     , module Network.AWS.CloudWatchLogs.CancelExportTask
 
-    -- ** PutSubscriptionFilter
+    -- ** PutSubscriptionFilter 
     , module Network.AWS.CloudWatchLogs.PutSubscriptionFilter
 
-    -- ** DeleteLogGroup
+    -- ** StartQuery 
+    , module Network.AWS.CloudWatchLogs.StartQuery
+
+    -- ** DeleteLogGroup 
     , module Network.AWS.CloudWatchLogs.DeleteLogGroup
 
-    -- ** DeleteSubscriptionFilter
+    -- ** DeleteSubscriptionFilter 
     , module Network.AWS.CloudWatchLogs.DeleteSubscriptionFilter
 
-    -- ** PutLogEvents
+    -- ** PutLogEvents 
     , module Network.AWS.CloudWatchLogs.PutLogEvents
 
     -- ** DescribeMetricFilters (Paginated)
     , module Network.AWS.CloudWatchLogs.DescribeMetricFilters
 
-    -- ** TestMetricFilter
+    -- ** TestMetricFilter 
     , module Network.AWS.CloudWatchLogs.TestMetricFilter
 
-    -- ** PutDestinationPolicy
+    -- ** PutDestinationPolicy 
     , module Network.AWS.CloudWatchLogs.PutDestinationPolicy
 
-    -- ** PutMetricFilter
+    -- ** PutMetricFilter 
     , module Network.AWS.CloudWatchLogs.PutMetricFilter
 
-    -- ** DeleteRetentionPolicy
+    -- ** DeleteRetentionPolicy 
     , module Network.AWS.CloudWatchLogs.DeleteRetentionPolicy
 
-    -- ** DeleteMetricFilter
+    -- ** DeleteMetricFilter 
     , module Network.AWS.CloudWatchLogs.DeleteMetricFilter
 
-    -- ** PutRetentionPolicy
+    -- ** PutRetentionPolicy 
     , module Network.AWS.CloudWatchLogs.PutRetentionPolicy
 
-    -- ** ListTagsLogGroup
+    -- ** ListTagsLogGroup 
     , module Network.AWS.CloudWatchLogs.ListTagsLogGroup
 
-    -- ** PutResourcePolicy
+    -- ** PutResourcePolicy 
     , module Network.AWS.CloudWatchLogs.PutResourcePolicy
 
-    -- ** DeleteResourcePolicy
+    -- ** DeleteResourcePolicy 
     , module Network.AWS.CloudWatchLogs.DeleteResourcePolicy
 
-    -- ** AssociateKMSKey
+    -- ** AssociateKMSKey 
     , module Network.AWS.CloudWatchLogs.AssociateKMSKey
+
+    -- ** GetQueryResults 
+    , module Network.AWS.CloudWatchLogs.GetQueryResults
 
     -- ** DescribeLogStreams (Paginated)
     , module Network.AWS.CloudWatchLogs.DescribeLogStreams
@@ -174,6 +198,9 @@ module Network.AWS.CloudWatchLogs
 
     -- ** OrderBy
     , OrderBy (..)
+
+    -- ** QueryStatus
+    , QueryStatus (..)
 
     -- ** Destination
     , Destination
@@ -236,6 +263,12 @@ module Network.AWS.CloudWatchLogs
     , lgKmsKeyId
     , lgStoredBytes
 
+    -- ** LogGroupField
+    , LogGroupField
+    , logGroupField
+    , lgfPercent
+    , lgfName
+
     -- ** LogStream
     , LogStream
     , logStream
@@ -279,6 +312,22 @@ module Network.AWS.CloudWatchLogs
     , oleMessage
     , oleTimestamp
 
+    -- ** QueryInfo
+    , QueryInfo
+    , queryInfo
+    , qiStatus
+    , qiQueryId
+    , qiLogGroupName
+    , qiQueryString
+    , qiCreateTime
+
+    -- ** QueryStatistics
+    , QueryStatistics
+    , queryStatistics
+    , qsRecordsScanned
+    , qsBytesScanned
+    , qsRecordsMatched
+
     -- ** RejectedLogEventsInfo
     , RejectedLogEventsInfo
     , rejectedLogEventsInfo
@@ -292,6 +341,12 @@ module Network.AWS.CloudWatchLogs
     , rpPolicyName
     , rpPolicyDocument
     , rpLastUpdatedTime
+
+    -- ** ResultField
+    , ResultField
+    , resultField
+    , rfField
+    , rfValue
 
     -- ** SearchedLogStream
     , SearchedLogStream
@@ -328,11 +383,15 @@ import Network.AWS.CloudWatchLogs.DescribeExportTasks
 import Network.AWS.CloudWatchLogs.DescribeLogGroups
 import Network.AWS.CloudWatchLogs.DescribeLogStreams
 import Network.AWS.CloudWatchLogs.DescribeMetricFilters
+import Network.AWS.CloudWatchLogs.DescribeQueries
 import Network.AWS.CloudWatchLogs.DescribeResourcePolicies
 import Network.AWS.CloudWatchLogs.DescribeSubscriptionFilters
 import Network.AWS.CloudWatchLogs.DisassociateKMSKey
 import Network.AWS.CloudWatchLogs.FilterLogEvents
 import Network.AWS.CloudWatchLogs.GetLogEvents
+import Network.AWS.CloudWatchLogs.GetLogGroupFields
+import Network.AWS.CloudWatchLogs.GetLogRecord
+import Network.AWS.CloudWatchLogs.GetQueryResults
 import Network.AWS.CloudWatchLogs.ListTagsLogGroup
 import Network.AWS.CloudWatchLogs.PutDestination
 import Network.AWS.CloudWatchLogs.PutDestinationPolicy
@@ -341,6 +400,8 @@ import Network.AWS.CloudWatchLogs.PutMetricFilter
 import Network.AWS.CloudWatchLogs.PutResourcePolicy
 import Network.AWS.CloudWatchLogs.PutRetentionPolicy
 import Network.AWS.CloudWatchLogs.PutSubscriptionFilter
+import Network.AWS.CloudWatchLogs.StartQuery
+import Network.AWS.CloudWatchLogs.StopQuery
 import Network.AWS.CloudWatchLogs.TagLogGroup
 import Network.AWS.CloudWatchLogs.TestMetricFilter
 import Network.AWS.CloudWatchLogs.Types

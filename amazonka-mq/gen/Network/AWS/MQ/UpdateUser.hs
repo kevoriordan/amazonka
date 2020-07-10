@@ -48,14 +48,12 @@ import Network.AWS.Response
 -- | Updates the information for an ActiveMQ user.
 --
 -- /See:/ 'updateUser' smart constructor.
-data UpdateUser = UpdateUser'
-  { _uuGroups        :: !(Maybe [Text])
-  , _uuConsoleAccess :: !(Maybe Bool)
-  , _uuPassword      :: !(Maybe Text)
-  , _uuUsername      :: !Text
-  , _uuBrokerId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateUser = UpdateUser'{_uuGroups ::
+                              !(Maybe [Text]),
+                              _uuConsoleAccess :: !(Maybe Bool),
+                              _uuPassword :: !(Maybe Text),
+                              _uuUsername :: !Text, _uuBrokerId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateUser' with the minimum fields required to make a request.
 --
@@ -74,15 +72,10 @@ updateUser
     :: Text -- ^ 'uuUsername'
     -> Text -- ^ 'uuBrokerId'
     -> UpdateUser
-updateUser pUsername_ pBrokerId_ =
-  UpdateUser'
-    { _uuGroups = Nothing
-    , _uuConsoleAccess = Nothing
-    , _uuPassword = Nothing
-    , _uuUsername = pUsername_
-    , _uuBrokerId = pBrokerId_
-    }
-
+updateUser pUsername_ pBrokerId_
+  = UpdateUser'{_uuGroups = Nothing,
+                _uuConsoleAccess = Nothing, _uuPassword = Nothing,
+                _uuUsername = pUsername_, _uuBrokerId = pBrokerId_}
 
 -- | The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
 uuGroups :: Lens' UpdateUser [Text]
@@ -141,10 +134,10 @@ instance ToQuery UpdateUser where
         toQuery = const mempty
 
 -- | /See:/ 'updateUserResponse' smart constructor.
-newtype UpdateUserResponse = UpdateUserResponse'
-  { _uursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateUserResponse = UpdateUserResponse'{_uursResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateUserResponse' with the minimum fields required to make a request.
 --
@@ -154,9 +147,9 @@ newtype UpdateUserResponse = UpdateUserResponse'
 updateUserResponse
     :: Int -- ^ 'uursResponseStatus'
     -> UpdateUserResponse
-updateUserResponse pResponseStatus_ =
-  UpdateUserResponse' {_uursResponseStatus = pResponseStatus_}
-
+updateUserResponse pResponseStatus_
+  = UpdateUserResponse'{_uursResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 uursResponseStatus :: Lens' UpdateUserResponse Int

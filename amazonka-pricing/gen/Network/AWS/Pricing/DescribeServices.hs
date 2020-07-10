@@ -53,19 +53,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeServices' smart constructor.
-data DescribeServices = DescribeServices'
-  { _dsFormatVersion :: !(Maybe Text)
-  , _dsNextToken     :: !(Maybe Text)
-  , _dsServiceCode   :: !(Maybe Text)
-  , _dsMaxResults    :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeServices = DescribeServices'{_dsFormatVersion
+                                          :: !(Maybe Text),
+                                          _dsNextToken :: !(Maybe Text),
+                                          _dsServiceCode :: !(Maybe Text),
+                                          _dsMaxResults :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeServices' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsFormatVersion' - The format version that you want the response to be in. Valid values are: @aws_v1@
+-- * 'dsFormatVersion' - The format version that you want the response to be in. Valid values are: @aws_v1@ 
 --
 -- * 'dsNextToken' - The pagination token that indicates the next set of results that you want to retrieve.
 --
@@ -74,16 +73,12 @@ data DescribeServices = DescribeServices'
 -- * 'dsMaxResults' - The maximum number of results that you want returned in the response.
 describeServices
     :: DescribeServices
-describeServices =
-  DescribeServices'
-    { _dsFormatVersion = Nothing
-    , _dsNextToken = Nothing
-    , _dsServiceCode = Nothing
-    , _dsMaxResults = Nothing
-    }
+describeServices
+  = DescribeServices'{_dsFormatVersion = Nothing,
+                      _dsNextToken = Nothing, _dsServiceCode = Nothing,
+                      _dsMaxResults = Nothing}
 
-
--- | The format version that you want the response to be in. Valid values are: @aws_v1@
+-- | The format version that you want the response to be in. Valid values are: @aws_v1@ 
 dsFormatVersion :: Lens' DescribeServices (Maybe Text)
 dsFormatVersion = lens _dsFormatVersion (\ s a -> s{_dsFormatVersion = a})
 
@@ -147,13 +142,17 @@ instance ToQuery DescribeServices where
         toQuery = const mempty
 
 -- | /See:/ 'describeServicesResponse' smart constructor.
-data DescribeServicesResponse = DescribeServicesResponse'
-  { _dsrsFormatVersion  :: !(Maybe Text)
-  , _dsrsNextToken      :: !(Maybe Text)
-  , _dsrsServices       :: !(Maybe [PricingService])
-  , _dsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeServicesResponse = DescribeServicesResponse'{_dsrsFormatVersion
+                                                          :: !(Maybe Text),
+                                                          _dsrsNextToken ::
+                                                          !(Maybe Text),
+                                                          _dsrsServices ::
+                                                          !(Maybe
+                                                              [PricingService]),
+                                                          _dsrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeServicesResponse' with the minimum fields required to make a request.
 --
@@ -169,14 +168,11 @@ data DescribeServicesResponse = DescribeServicesResponse'
 describeServicesResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DescribeServicesResponse
-describeServicesResponse pResponseStatus_ =
-  DescribeServicesResponse'
-    { _dsrsFormatVersion = Nothing
-    , _dsrsNextToken = Nothing
-    , _dsrsServices = Nothing
-    , _dsrsResponseStatus = pResponseStatus_
-    }
-
+describeServicesResponse pResponseStatus_
+  = DescribeServicesResponse'{_dsrsFormatVersion =
+                                Nothing,
+                              _dsrsNextToken = Nothing, _dsrsServices = Nothing,
+                              _dsrsResponseStatus = pResponseStatus_}
 
 -- | The format version of the response. For example, @aws_v1@ .
 dsrsFormatVersion :: Lens' DescribeServicesResponse (Maybe Text)

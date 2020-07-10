@@ -53,18 +53,30 @@ library
         , Network.AWS.Cloud9.DescribeEnvironmentStatus
         , Network.AWS.Cloud9.DescribeEnvironments
         , Network.AWS.Cloud9.ListEnvironments
+        , Network.AWS.Cloud9.ListTagsForResource
+        , Network.AWS.Cloud9.TagResource
         , Network.AWS.Cloud9.Types
+        , Network.AWS.Cloud9.UntagResource
         , Network.AWS.Cloud9.UpdateEnvironment
         , Network.AWS.Cloud9.UpdateEnvironmentMembership
         , Network.AWS.Cloud9.Waiters
 
     other-modules:
-          Network.AWS.Cloud9.Types.Product
-        , Network.AWS.Cloud9.Types.Sum
+          Network.AWS.Cloud9.Types.Environment
+        , Network.AWS.Cloud9.Types.EnvironmentLifecycle
+        , Network.AWS.Cloud9.Types.EnvironmentLifecycleStatus
+        , Network.AWS.Cloud9.Types.EnvironmentMember
+        , Network.AWS.Cloud9.Types.EnvironmentStatus
+        , Network.AWS.Cloud9.Types.EnvironmentType
+        , Network.AWS.Cloud9.Types.MemberPermissions
+        , Network.AWS.Cloud9.Types.Permissions
+        , Network.AWS.Cloud9.Types.Product
+        , Network.AWS.Cloud9.Types.Tag
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cloud9-test
     type:              exitcode-stdio-1.0
@@ -88,6 +100,7 @@ test-suite amazonka-cloud9-test
         , amazonka-cloud9
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

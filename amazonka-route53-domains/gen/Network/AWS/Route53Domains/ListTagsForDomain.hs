@@ -51,10 +51,9 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'listTagsForDomain' smart constructor.
-newtype ListTagsForDomain = ListTagsForDomain'
-  { _ltfdDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ListTagsForDomain = ListTagsForDomain'{_ltfdDomainName
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsForDomain' with the minimum fields required to make a request.
 --
@@ -64,9 +63,8 @@ newtype ListTagsForDomain = ListTagsForDomain'
 listTagsForDomain
     :: Text -- ^ 'ltfdDomainName'
     -> ListTagsForDomain
-listTagsForDomain pDomainName_ =
-  ListTagsForDomain' {_ltfdDomainName = pDomainName_}
-
+listTagsForDomain pDomainName_
+  = ListTagsForDomain'{_ltfdDomainName = pDomainName_}
 
 -- | The domain for which you want to get a list of tags.
 ltfdDomainName :: Lens' ListTagsForDomain Text
@@ -111,11 +109,12 @@ instance ToQuery ListTagsForDomain where
 --
 --
 -- /See:/ 'listTagsForDomainResponse' smart constructor.
-data ListTagsForDomainResponse = ListTagsForDomainResponse'
-  { _ltfdrsResponseStatus :: !Int
-  , _ltfdrsTagList        :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForDomainResponse = ListTagsForDomainResponse'{_ltfdrsResponseStatus
+                                                            :: !Int,
+                                                            _ltfdrsTagList ::
+                                                            ![Tag]}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListTagsForDomainResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +126,10 @@ data ListTagsForDomainResponse = ListTagsForDomainResponse'
 listTagsForDomainResponse
     :: Int -- ^ 'ltfdrsResponseStatus'
     -> ListTagsForDomainResponse
-listTagsForDomainResponse pResponseStatus_ =
-  ListTagsForDomainResponse'
-    {_ltfdrsResponseStatus = pResponseStatus_, _ltfdrsTagList = mempty}
-
+listTagsForDomainResponse pResponseStatus_
+  = ListTagsForDomainResponse'{_ltfdrsResponseStatus =
+                                 pResponseStatus_,
+                               _ltfdrsTagList = mempty}
 
 -- | -- | The response status code.
 ltfdrsResponseStatus :: Lens' ListTagsForDomainResponse Int

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Requests the details of a job for a third party action. Only used for partner actions.
+-- Requests the details of a job for a third party action. Used for partner actions only.
 --
 --
--- /Important:/ When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action.
+-- /Important:/ When this API is called, AWS CodePipeline returns temporary credentials for the S3 bucket used to store artifacts for the pipeline, if the action requires access to that S3 bucket for input or output artifacts. This API also returns any secret values defined for the action.
 --
 module Network.AWS.CodePipeline.GetThirdPartyJobDetails
     (
@@ -47,16 +47,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a GetThirdPartyJobDetails action.
+-- | Represents the input of a @GetThirdPartyJobDetails@ action.
 --
 --
 --
 -- /See:/ 'getThirdPartyJobDetails' smart constructor.
-data GetThirdPartyJobDetails = GetThirdPartyJobDetails'
-  { _gtpjdJobId       :: !Text
-  , _gtpjdClientToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetThirdPartyJobDetails = GetThirdPartyJobDetails'{_gtpjdJobId
+                                                        :: !Text,
+                                                        _gtpjdClientToken ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetThirdPartyJobDetails' with the minimum fields required to make a request.
 --
@@ -69,10 +70,9 @@ getThirdPartyJobDetails
     :: Text -- ^ 'gtpjdJobId'
     -> Text -- ^ 'gtpjdClientToken'
     -> GetThirdPartyJobDetails
-getThirdPartyJobDetails pJobId_ pClientToken_ =
-  GetThirdPartyJobDetails'
-    {_gtpjdJobId = pJobId_, _gtpjdClientToken = pClientToken_}
-
+getThirdPartyJobDetails pJobId_ pClientToken_
+  = GetThirdPartyJobDetails'{_gtpjdJobId = pJobId_,
+                             _gtpjdClientToken = pClientToken_}
 
 -- | The unique system-generated ID used for identifying the job.
 gtpjdJobId :: Lens' GetThirdPartyJobDetails Text
@@ -119,16 +119,19 @@ instance ToPath GetThirdPartyJobDetails where
 instance ToQuery GetThirdPartyJobDetails where
         toQuery = const mempty
 
--- | Represents the output of a GetThirdPartyJobDetails action.
+-- | Represents the output of a @GetThirdPartyJobDetails@ action.
 --
 --
 --
 -- /See:/ 'getThirdPartyJobDetailsResponse' smart constructor.
-data GetThirdPartyJobDetailsResponse = GetThirdPartyJobDetailsResponse'
-  { _gtpjdrsJobDetails     :: !(Maybe ThirdPartyJobDetails)
-  , _gtpjdrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetThirdPartyJobDetailsResponse = GetThirdPartyJobDetailsResponse'{_gtpjdrsJobDetails
+                                                                        ::
+                                                                        !(Maybe
+                                                                            ThirdPartyJobDetails),
+                                                                        _gtpjdrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Show, Data, Typeable,
+                                                   Generic)
 
 -- | Creates a value of 'GetThirdPartyJobDetailsResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +143,10 @@ data GetThirdPartyJobDetailsResponse = GetThirdPartyJobDetailsResponse'
 getThirdPartyJobDetailsResponse
     :: Int -- ^ 'gtpjdrsResponseStatus'
     -> GetThirdPartyJobDetailsResponse
-getThirdPartyJobDetailsResponse pResponseStatus_ =
-  GetThirdPartyJobDetailsResponse'
-    {_gtpjdrsJobDetails = Nothing, _gtpjdrsResponseStatus = pResponseStatus_}
-
+getThirdPartyJobDetailsResponse pResponseStatus_
+  = GetThirdPartyJobDetailsResponse'{_gtpjdrsJobDetails
+                                       = Nothing,
+                                     _gtpjdrsResponseStatus = pResponseStatus_}
 
 -- | The details of the job, including any protected values defined for the job.
 gtpjdrsJobDetails :: Lens' GetThirdPartyJobDetailsResponse (Maybe ThirdPartyJobDetails)

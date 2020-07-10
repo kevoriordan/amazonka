@@ -52,12 +52,11 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'createTrafficPolicy' smart constructor.
-data CreateTrafficPolicy = CreateTrafficPolicy'
-  { _ctpComment  :: !(Maybe Text)
-  , _ctpName     :: !Text
-  , _ctpDocument :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTrafficPolicy = CreateTrafficPolicy'{_ctpComment
+                                                :: !(Maybe Text),
+                                                _ctpName :: !Text,
+                                                _ctpDocument :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTrafficPolicy' with the minimum fields required to make a request.
 --
@@ -67,15 +66,14 @@ data CreateTrafficPolicy = CreateTrafficPolicy'
 --
 -- * 'ctpName' - The name of the traffic policy.
 --
--- * 'ctpDocument' - The definition of this traffic policy in JSON format. For more information, see <http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html Traffic Policy Document Format> .
+-- * 'ctpDocument' - The definition of this traffic policy in JSON format. For more information, see <https://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html Traffic Policy Document Format> .
 createTrafficPolicy
     :: Text -- ^ 'ctpName'
     -> Text -- ^ 'ctpDocument'
     -> CreateTrafficPolicy
-createTrafficPolicy pName_ pDocument_ =
-  CreateTrafficPolicy'
-    {_ctpComment = Nothing, _ctpName = pName_, _ctpDocument = pDocument_}
-
+createTrafficPolicy pName_ pDocument_
+  = CreateTrafficPolicy'{_ctpComment = Nothing,
+                         _ctpName = pName_, _ctpDocument = pDocument_}
 
 -- | (Optional) Any comments that you want to include about the traffic policy.
 ctpComment :: Lens' CreateTrafficPolicy (Maybe Text)
@@ -85,7 +83,7 @@ ctpComment = lens _ctpComment (\ s a -> s{_ctpComment = a})
 ctpName :: Lens' CreateTrafficPolicy Text
 ctpName = lens _ctpName (\ s a -> s{_ctpName = a})
 
--- | The definition of this traffic policy in JSON format. For more information, see <http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html Traffic Policy Document Format> .
+-- | The definition of this traffic policy in JSON format. For more information, see <https://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html Traffic Policy Document Format> .
 ctpDocument :: Lens' CreateTrafficPolicy Text
 ctpDocument = lens _ctpDocument (\ s a -> s{_ctpDocument = a})
 
@@ -129,12 +127,15 @@ instance ToXML CreateTrafficPolicy where
 --
 --
 -- /See:/ 'createTrafficPolicyResponse' smart constructor.
-data CreateTrafficPolicyResponse = CreateTrafficPolicyResponse'
-  { _ctprsResponseStatus :: !Int
-  , _ctprsTrafficPolicy  :: !TrafficPolicy
-  , _ctprsLocation       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTrafficPolicyResponse = CreateTrafficPolicyResponse'{_ctprsResponseStatus
+                                                                :: !Int,
+                                                                _ctprsTrafficPolicy
+                                                                ::
+                                                                !TrafficPolicy,
+                                                                _ctprsLocation
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateTrafficPolicyResponse' with the minimum fields required to make a request.
 --
@@ -150,13 +151,12 @@ createTrafficPolicyResponse
     -> TrafficPolicy -- ^ 'ctprsTrafficPolicy'
     -> Text -- ^ 'ctprsLocation'
     -> CreateTrafficPolicyResponse
-createTrafficPolicyResponse pResponseStatus_ pTrafficPolicy_ pLocation_ =
-  CreateTrafficPolicyResponse'
-    { _ctprsResponseStatus = pResponseStatus_
-    , _ctprsTrafficPolicy = pTrafficPolicy_
-    , _ctprsLocation = pLocation_
-    }
-
+createTrafficPolicyResponse pResponseStatus_
+  pTrafficPolicy_ pLocation_
+  = CreateTrafficPolicyResponse'{_ctprsResponseStatus =
+                                   pResponseStatus_,
+                                 _ctprsTrafficPolicy = pTrafficPolicy_,
+                                 _ctprsLocation = pLocation_}
 
 -- | -- | The response status code.
 ctprsResponseStatus :: Lens' CreateTrafficPolicyResponse Int

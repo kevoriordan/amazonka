@@ -21,7 +21,7 @@
 -- Deletes an existing 'Authorizer' resource.
 --
 --
--- <http://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html AWS CLI>
+-- <https://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html AWS CLI> 
 module Network.AWS.APIGateway.DeleteAuthorizer
     (
     -- * Creating a Request
@@ -48,11 +48,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteAuthorizer' smart constructor.
-data DeleteAuthorizer = DeleteAuthorizer'
-  { _daRestAPIId    :: !Text
-  , _daAuthorizerId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAuthorizer = DeleteAuthorizer'{_daRestAPIId
+                                          :: !Text,
+                                          _daAuthorizerId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAuthorizer' with the minimum fields required to make a request.
 --
@@ -65,10 +64,9 @@ deleteAuthorizer
     :: Text -- ^ 'daRestAPIId'
     -> Text -- ^ 'daAuthorizerId'
     -> DeleteAuthorizer
-deleteAuthorizer pRestAPIId_ pAuthorizerId_ =
-  DeleteAuthorizer'
-    {_daRestAPIId = pRestAPIId_, _daAuthorizerId = pAuthorizerId_}
-
+deleteAuthorizer pRestAPIId_ pAuthorizerId_
+  = DeleteAuthorizer'{_daRestAPIId = pRestAPIId_,
+                      _daAuthorizerId = pAuthorizerId_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 daRestAPIId :: Lens' DeleteAuthorizer Text
@@ -103,16 +101,14 @@ instance ToQuery DeleteAuthorizer where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAuthorizerResponse' smart constructor.
-data DeleteAuthorizerResponse =
-  DeleteAuthorizerResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAuthorizerResponse = DeleteAuthorizerResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteAuthorizerResponse' with the minimum fields required to make a request.
 --
 deleteAuthorizerResponse
     :: DeleteAuthorizerResponse
 deleteAuthorizerResponse = DeleteAuthorizerResponse'
-
 
 instance NFData DeleteAuthorizerResponse where

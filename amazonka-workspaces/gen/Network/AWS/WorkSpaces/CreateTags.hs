@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates the specified tags for the specified WorkSpace.
+-- Creates the specified tags for the specified WorkSpaces resource.
 --
 --
 module Network.AWS.WorkSpaces.CreateTags
@@ -45,31 +45,29 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'createTags' smart constructor.
-data CreateTags = CreateTags'
-  { _ctResourceId :: !Text
-  , _ctTags       :: ![Tag]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateTags = CreateTags'{_ctResourceId :: !Text,
+                              _ctTags :: ![Tag]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ctResourceId' - The ID of the WorkSpace. To find this ID, use 'DescribeWorkspaces' .
+-- * 'ctResourceId' - The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
 --
--- * 'ctTags' - The tags. Each WorkSpace can have a maximum of 50 tags.
+-- * 'ctTags' - The tags. Each WorkSpaces resource can have a maximum of 50 tags. If you want to add new tags to a set of existing tags, you must submit all of the existing tags along with the new ones.
 createTags
     :: Text -- ^ 'ctResourceId'
     -> CreateTags
-createTags pResourceId_ =
-  CreateTags' {_ctResourceId = pResourceId_, _ctTags = mempty}
+createTags pResourceId_
+  = CreateTags'{_ctResourceId = pResourceId_,
+                _ctTags = mempty}
 
-
--- | The ID of the WorkSpace. To find this ID, use 'DescribeWorkspaces' .
+-- | The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
 ctResourceId :: Lens' CreateTags Text
 ctResourceId = lens _ctResourceId (\ s a -> s{_ctResourceId = a})
 
--- | The tags. Each WorkSpace can have a maximum of 50 tags.
+-- | The tags. Each WorkSpaces resource can have a maximum of 50 tags. If you want to add new tags to a set of existing tags, you must submit all of the existing tags along with the new ones.
 ctTags :: Lens' CreateTags [Tag]
 ctTags = lens _ctTags (\ s a -> s{_ctTags = a}) . _Coerce
 
@@ -108,10 +106,10 @@ instance ToQuery CreateTags where
         toQuery = const mempty
 
 -- | /See:/ 'createTagsResponse' smart constructor.
-newtype CreateTagsResponse = CreateTagsResponse'
-  { _ctrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateTagsResponse = CreateTagsResponse'{_ctrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateTagsResponse' with the minimum fields required to make a request.
 --
@@ -121,9 +119,9 @@ newtype CreateTagsResponse = CreateTagsResponse'
 createTagsResponse
     :: Int -- ^ 'ctrsResponseStatus'
     -> CreateTagsResponse
-createTagsResponse pResponseStatus_ =
-  CreateTagsResponse' {_ctrsResponseStatus = pResponseStatus_}
-
+createTagsResponse pResponseStatus_
+  = CreateTagsResponse'{_ctrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 ctrsResponseStatus :: Lens' CreateTagsResponse Int

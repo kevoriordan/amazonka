@@ -45,11 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAPIKey' smart constructor.
-data DeleteAPIKey = DeleteAPIKey'
-  { _dakApiId :: !Text
-  , _dakId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAPIKey = DeleteAPIKey'{_dakApiId :: !Text,
+                                  _dakId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAPIKey' with the minimum fields required to make a request.
 --
@@ -62,8 +60,8 @@ deleteAPIKey
     :: Text -- ^ 'dakApiId'
     -> Text -- ^ 'dakId'
     -> DeleteAPIKey
-deleteAPIKey pApiId_ pId_ = DeleteAPIKey' {_dakApiId = pApiId_, _dakId = pId_}
-
+deleteAPIKey pApiId_ pId_
+  = DeleteAPIKey'{_dakApiId = pApiId_, _dakId = pId_}
 
 -- | The API ID.
 dakApiId :: Lens' DeleteAPIKey Text
@@ -102,10 +100,10 @@ instance ToQuery DeleteAPIKey where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAPIKeyResponse' smart constructor.
-newtype DeleteAPIKeyResponse = DeleteAPIKeyResponse'
-  { _dakrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAPIKeyResponse = DeleteAPIKeyResponse'{_dakrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteAPIKeyResponse' with the minimum fields required to make a request.
 --
@@ -115,9 +113,9 @@ newtype DeleteAPIKeyResponse = DeleteAPIKeyResponse'
 deleteAPIKeyResponse
     :: Int -- ^ 'dakrsResponseStatus'
     -> DeleteAPIKeyResponse
-deleteAPIKeyResponse pResponseStatus_ =
-  DeleteAPIKeyResponse' {_dakrsResponseStatus = pResponseStatus_}
-
+deleteAPIKeyResponse pResponseStatus_
+  = DeleteAPIKeyResponse'{_dakrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dakrsResponseStatus :: Lens' DeleteAPIKeyResponse Int

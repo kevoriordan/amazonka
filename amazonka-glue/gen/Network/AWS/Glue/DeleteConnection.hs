@@ -45,28 +45,26 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteConnection' smart constructor.
-data DeleteConnection = DeleteConnection'
-  { _dcCatalogId      :: !(Maybe Text)
-  , _dcConnectionName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConnection = DeleteConnection'{_dcCatalogId
+                                          :: !(Maybe Text),
+                                          _dcConnectionName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteConnection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcCatalogId' - The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+-- * 'dcCatalogId' - The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
 --
 -- * 'dcConnectionName' - The name of the connection to delete.
 deleteConnection
     :: Text -- ^ 'dcConnectionName'
     -> DeleteConnection
-deleteConnection pConnectionName_ =
-  DeleteConnection'
-    {_dcCatalogId = Nothing, _dcConnectionName = pConnectionName_}
+deleteConnection pConnectionName_
+  = DeleteConnection'{_dcCatalogId = Nothing,
+                      _dcConnectionName = pConnectionName_}
 
-
--- | The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
 dcCatalogId :: Lens' DeleteConnection (Maybe Text)
 dcCatalogId = lens _dcCatalogId (\ s a -> s{_dcCatalogId = a})
 
@@ -109,10 +107,10 @@ instance ToQuery DeleteConnection where
         toQuery = const mempty
 
 -- | /See:/ 'deleteConnectionResponse' smart constructor.
-newtype DeleteConnectionResponse = DeleteConnectionResponse'
-  { _dcrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConnectionResponse = DeleteConnectionResponse'{_dcrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteConnectionResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +120,9 @@ newtype DeleteConnectionResponse = DeleteConnectionResponse'
 deleteConnectionResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DeleteConnectionResponse
-deleteConnectionResponse pResponseStatus_ =
-  DeleteConnectionResponse' {_dcrsResponseStatus = pResponseStatus_}
-
+deleteConnectionResponse pResponseStatus_
+  = DeleteConnectionResponse'{_dcrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 dcrsResponseStatus :: Lens' DeleteConnectionResponse Int

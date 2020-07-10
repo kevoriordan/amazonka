@@ -48,12 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listUsers' smart constructor.
-data ListUsers = ListUsers'
-  { _luNextToken  :: !(Maybe Text)
-  , _luMaxResults :: !(Maybe Nat)
-  , _luBrokerId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListUsers = ListUsers'{_luNextToken ::
+                            !(Maybe Text),
+                            _luMaxResults :: !(Maybe Nat), _luBrokerId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListUsers' with the minimum fields required to make a request.
 --
@@ -67,10 +65,9 @@ data ListUsers = ListUsers'
 listUsers
     :: Text -- ^ 'luBrokerId'
     -> ListUsers
-listUsers pBrokerId_ =
-  ListUsers'
-    {_luNextToken = Nothing, _luMaxResults = Nothing, _luBrokerId = pBrokerId_}
-
+listUsers pBrokerId_
+  = ListUsers'{_luNextToken = Nothing,
+               _luMaxResults = Nothing, _luBrokerId = pBrokerId_}
 
 -- | The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
 luNextToken :: Lens' ListUsers (Maybe Text)
@@ -119,14 +116,13 @@ instance ToQuery ListUsers where
                "maxResults" =: _luMaxResults]
 
 -- | /See:/ 'listUsersResponse' smart constructor.
-data ListUsersResponse = ListUsersResponse'
-  { _lursUsers          :: !(Maybe [UserSummary])
-  , _lursNextToken      :: !(Maybe Text)
-  , _lursBrokerId       :: !(Maybe Text)
-  , _lursMaxResults     :: !(Maybe Int)
-  , _lursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListUsersResponse = ListUsersResponse'{_lursUsers
+                                            :: !(Maybe [UserSummary]),
+                                            _lursNextToken :: !(Maybe Text),
+                                            _lursBrokerId :: !(Maybe Text),
+                                            _lursMaxResults :: !(Maybe Nat),
+                                            _lursResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListUsersResponse' with the minimum fields required to make a request.
 --
@@ -144,15 +140,11 @@ data ListUsersResponse = ListUsersResponse'
 listUsersResponse
     :: Int -- ^ 'lursResponseStatus'
     -> ListUsersResponse
-listUsersResponse pResponseStatus_ =
-  ListUsersResponse'
-    { _lursUsers = Nothing
-    , _lursNextToken = Nothing
-    , _lursBrokerId = Nothing
-    , _lursMaxResults = Nothing
-    , _lursResponseStatus = pResponseStatus_
-    }
-
+listUsersResponse pResponseStatus_
+  = ListUsersResponse'{_lursUsers = Nothing,
+                       _lursNextToken = Nothing, _lursBrokerId = Nothing,
+                       _lursMaxResults = Nothing,
+                       _lursResponseStatus = pResponseStatus_}
 
 -- | Required. The list of all ActiveMQ usernames for the specified broker.
 lursUsers :: Lens' ListUsersResponse [UserSummary]
@@ -167,8 +159,8 @@ lursBrokerId :: Lens' ListUsersResponse (Maybe Text)
 lursBrokerId = lens _lursBrokerId (\ s a -> s{_lursBrokerId = a})
 
 -- | Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
-lursMaxResults :: Lens' ListUsersResponse (Maybe Int)
-lursMaxResults = lens _lursMaxResults (\ s a -> s{_lursMaxResults = a})
+lursMaxResults :: Lens' ListUsersResponse (Maybe Natural)
+lursMaxResults = lens _lursMaxResults (\ s a -> s{_lursMaxResults = a}) . mapping _Nat
 
 -- | -- | The response status code.
 lursResponseStatus :: Lens' ListUsersResponse Int

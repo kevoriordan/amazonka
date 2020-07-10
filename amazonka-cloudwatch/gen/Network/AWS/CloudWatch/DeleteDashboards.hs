@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteDashboards' smart constructor.
-newtype DeleteDashboards = DeleteDashboards'
-  { _ddDashboardNames :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDashboards = DeleteDashboards'{_ddDashboardNames
+                                             :: [Text]}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDashboards' with the minimum fields required to make a request.
 --
@@ -56,8 +55,8 @@ newtype DeleteDashboards = DeleteDashboards'
 -- * 'ddDashboardNames' - The dashboards to be deleted. This parameter is required.
 deleteDashboards
     :: DeleteDashboards
-deleteDashboards = DeleteDashboards' {_ddDashboardNames = mempty}
-
+deleteDashboards
+  = DeleteDashboards'{_ddDashboardNames = mempty}
 
 -- | The dashboards to be deleted. This parameter is required.
 ddDashboardNames :: Lens' DeleteDashboards [Text]
@@ -90,10 +89,10 @@ instance ToQuery DeleteDashboards where
                  toQueryList "member" _ddDashboardNames]
 
 -- | /See:/ 'deleteDashboardsResponse' smart constructor.
-newtype DeleteDashboardsResponse = DeleteDashboardsResponse'
-  { _ddrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDashboardsResponse = DeleteDashboardsResponse'{_ddrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteDashboardsResponse' with the minimum fields required to make a request.
 --
@@ -103,9 +102,9 @@ newtype DeleteDashboardsResponse = DeleteDashboardsResponse'
 deleteDashboardsResponse
     :: Int -- ^ 'ddrsResponseStatus'
     -> DeleteDashboardsResponse
-deleteDashboardsResponse pResponseStatus_ =
-  DeleteDashboardsResponse' {_ddrsResponseStatus = pResponseStatus_}
-
+deleteDashboardsResponse pResponseStatus_
+  = DeleteDashboardsResponse'{_ddrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 ddrsResponseStatus :: Lens' DeleteDashboardsResponse Int

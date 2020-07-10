@@ -47,12 +47,11 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'updateTagOption' smart constructor.
-data UpdateTagOption = UpdateTagOption'
-  { _utoValue  :: !(Maybe Text)
-  , _utoActive :: !(Maybe Bool)
-  , _utoId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTagOption = UpdateTagOption'{_utoValue ::
+                                        !(Maybe Text),
+                                        _utoActive :: !(Maybe Bool),
+                                        _utoId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTagOption' with the minimum fields required to make a request.
 --
@@ -66,9 +65,9 @@ data UpdateTagOption = UpdateTagOption'
 updateTagOption
     :: Text -- ^ 'utoId'
     -> UpdateTagOption
-updateTagOption pId_ =
-  UpdateTagOption' {_utoValue = Nothing, _utoActive = Nothing, _utoId = pId_}
-
+updateTagOption pId_
+  = UpdateTagOption'{_utoValue = Nothing,
+                     _utoActive = Nothing, _utoId = pId_}
 
 -- | The updated value.
 utoValue :: Lens' UpdateTagOption (Maybe Text)
@@ -119,11 +118,14 @@ instance ToQuery UpdateTagOption where
         toQuery = const mempty
 
 -- | /See:/ 'updateTagOptionResponse' smart constructor.
-data UpdateTagOptionResponse = UpdateTagOptionResponse'
-  { _utorsTagOptionDetail :: !(Maybe TagOptionDetail)
-  , _utorsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTagOptionResponse = UpdateTagOptionResponse'{_utorsTagOptionDetail
+                                                        ::
+                                                        !(Maybe
+                                                            TagOptionDetail),
+                                                        _utorsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateTagOptionResponse' with the minimum fields required to make a request.
 --
@@ -135,10 +137,10 @@ data UpdateTagOptionResponse = UpdateTagOptionResponse'
 updateTagOptionResponse
     :: Int -- ^ 'utorsResponseStatus'
     -> UpdateTagOptionResponse
-updateTagOptionResponse pResponseStatus_ =
-  UpdateTagOptionResponse'
-    {_utorsTagOptionDetail = Nothing, _utorsResponseStatus = pResponseStatus_}
-
+updateTagOptionResponse pResponseStatus_
+  = UpdateTagOptionResponse'{_utorsTagOptionDetail =
+                               Nothing,
+                             _utorsResponseStatus = pResponseStatus_}
 
 -- | Information about the TagOption.
 utorsTagOptionDetail :: Lens' UpdateTagOptionResponse (Maybe TagOptionDetail)

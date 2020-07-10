@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -16,12 +16,17 @@ module Network.AWS.DeviceFarm.Types
       deviceFarm
 
     -- * Errors
-    , _NotEligibleException
-    , _IdempotencyException
-    , _ArgumentException
-    , _NotFoundException
-    , _ServiceAccountException
+    , _TagPolicyException
+    , _InternalServiceException
+    , _CannotDeleteException
+    , _TooManyTagsException
     , _InvalidOperationException
+    , _ServiceAccountException
+    , _TagOperationException
+    , _IdempotencyException
+    , _NotEligibleException
+    , _NotFoundException
+    , _ArgumentException
     , _LimitExceededException
 
     -- * ArtifactCategory
@@ -38,6 +43,12 @@ module Network.AWS.DeviceFarm.Types
 
     -- * DeviceAttribute
     , DeviceAttribute (..)
+
+    -- * DeviceAvailability
+    , DeviceAvailability (..)
+
+    -- * DeviceFilterAttribute
+    , DeviceFilterAttribute (..)
 
     -- * DeviceFormFactor
     , DeviceFormFactor (..)
@@ -81,8 +92,20 @@ module Network.AWS.DeviceFarm.Types
     -- * SampleType
     , SampleType (..)
 
+    -- * TestGridSessionArtifactCategory
+    , TestGridSessionArtifactCategory (..)
+
+    -- * TestGridSessionArtifactType
+    , TestGridSessionArtifactType (..)
+
+    -- * TestGridSessionStatus
+    , TestGridSessionStatus (..)
+
     -- * TestType
     , TestType (..)
+
+    -- * UploadCategory
+    , UploadCategory (..)
 
     -- * UploadStatus
     , UploadStatus (..)
@@ -133,6 +156,7 @@ module Network.AWS.DeviceFarm.Types
     , CreateRemoteAccessSessionConfiguration
     , createRemoteAccessSessionConfiguration
     , crascBillingMethod
+    , crascVpceConfigurationARNs
 
     -- * CustomerArtifactPaths
     , CustomerArtifactPaths
@@ -144,26 +168,34 @@ module Network.AWS.DeviceFarm.Types
     -- * Device
     , Device
     , device
-    , devCarrier
-    , devImage
-    , devManufacturer
-    , devPlatform
-    , devModelId
-    , devRemoteAccessEnabled
-    , devArn
-    , devFormFactor
-    , devFleetType
-    , devResolution
-    , devMemory
-    , devRadio
-    , devOs
-    , devName
-    , devModel
-    , devInstances
-    , devRemoteDebugEnabled
-    , devCpu
-    , devHeapSize
-    , devFleetName
+    , dCarrier
+    , dImage
+    , dManufacturer
+    , dPlatform
+    , dModelId
+    , dRemoteAccessEnabled
+    , dArn
+    , dFormFactor
+    , dFleetType
+    , dResolution
+    , dAvailability
+    , dMemory
+    , dRadio
+    , dOs
+    , dName
+    , dModel
+    , dInstances
+    , dRemoteDebugEnabled
+    , dCpu
+    , dHeapSize
+    , dFleetName
+
+    -- * DeviceFilter
+    , DeviceFilter
+    , deviceFilter
+    , dfAttribute
+    , dfOperator
+    , dfValues
 
     -- * DeviceInstance
     , DeviceInstance
@@ -185,11 +217,12 @@ module Network.AWS.DeviceFarm.Types
     -- * DevicePool
     , DevicePool
     , devicePool
-    , dArn
-    , dRules
-    , dName
-    , dType
-    , dDescription
+    , devArn
+    , devRules
+    , devName
+    , devMaxDevices
+    , devType
+    , devDescription
 
     -- * DevicePoolCompatibilityResult
     , DevicePoolCompatibilityResult
@@ -198,6 +231,19 @@ module Network.AWS.DeviceFarm.Types
     , dpcrCompatible
     , dpcrIncompatibilityMessages
 
+    -- * DeviceSelectionConfiguration
+    , DeviceSelectionConfiguration
+    , deviceSelectionConfiguration
+    , dscFilters
+    , dscMaxDevices
+
+    -- * DeviceSelectionResult
+    , DeviceSelectionResult
+    , deviceSelectionResult
+    , dsrMatchedDevicesCount
+    , dsrFilters
+    , dsrMaxDevices
+
     -- * ExecutionConfiguration
     , ExecutionConfiguration
     , executionConfiguration
@@ -205,6 +251,7 @@ module Network.AWS.DeviceFarm.Types
     , ecAccountsCleanup
     , ecAppPackagesCleanup
     , ecJobTimeoutMinutes
+    , ecVideoCapture
 
     -- * IncompatibilityMessage
     , IncompatibilityMessage
@@ -234,7 +281,9 @@ module Network.AWS.DeviceFarm.Types
     , jobStopped
     , jobResult
     , jobName
+    , jobVideoEndpoint
     , jobDeviceMinutes
+    , jobVideoCapture
     , jobType
     , jobMessage
     , jobStarted
@@ -392,6 +441,7 @@ module Network.AWS.DeviceFarm.Types
     , runLocation
     , runCreated
     , runLocale
+    , runTestSpecARN
     , runStopped
     , runResult
     , runJobTimeoutMinutes
@@ -408,6 +458,7 @@ module Network.AWS.DeviceFarm.Types
     , runTotalJobs
     , runDevicePoolARN
     , runStarted
+    , runDeviceSelectionResult
 
     -- * Sample
     , Sample
@@ -432,6 +483,7 @@ module Network.AWS.DeviceFarm.Types
     -- * ScheduleRunTest
     , ScheduleRunTest
     , scheduleRunTest
+    , srtTestSpecARN
     , srtTestPackageARN
     , srtParameters
     , srtFilter
@@ -452,6 +504,12 @@ module Network.AWS.DeviceFarm.Types
     , sMessage
     , sStarted
 
+    -- * Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
+
     -- * Test
     , Test
     , test
@@ -466,6 +524,40 @@ module Network.AWS.DeviceFarm.Types
     , tType
     , tMessage
     , tStarted
+
+    -- * TestGridProject
+    , TestGridProject
+    , testGridProject
+    , tgpArn
+    , tgpCreated
+    , tgpName
+    , tgpDescription
+
+    -- * TestGridSession
+    , TestGridSession
+    , testGridSession
+    , tgsStatus
+    , tgsArn
+    , tgsCreated
+    , tgsBillingMinutes
+    , tgsEnded
+    , tgsSeleniumProperties
+
+    -- * TestGridSessionAction
+    , TestGridSessionAction
+    , testGridSessionAction
+    , tgsaAction
+    , tgsaDuration
+    , tgsaRequestMethod
+    , tgsaStarted
+    , tgsaStatusCode
+
+    -- * TestGridSessionArtifact
+    , TestGridSessionArtifact
+    , testGridSessionArtifact
+    , tgsaUrl
+    , tgsaType
+    , tgsaFilename
 
     -- * TrialMinutes
     , TrialMinutes
@@ -485,6 +577,7 @@ module Network.AWS.DeviceFarm.Types
     , uStatus
     , uArn
     , uCreated
+    , uCategory
     , uUrl
     , uName
     , uMetadata
@@ -502,98 +595,214 @@ module Network.AWS.DeviceFarm.Types
     , vecVpceConfigurationDescription
     ) where
 
-import Network.AWS.DeviceFarm.Types.Product
-import Network.AWS.DeviceFarm.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
+import Network.AWS.DeviceFarm.Types.ArtifactCategory
+import Network.AWS.DeviceFarm.Types.ArtifactType
+import Network.AWS.DeviceFarm.Types.BillingMethod
+import Network.AWS.DeviceFarm.Types.CurrencyCode
+import Network.AWS.DeviceFarm.Types.DeviceAttribute
+import Network.AWS.DeviceFarm.Types.DeviceAvailability
+import Network.AWS.DeviceFarm.Types.DeviceFilterAttribute
+import Network.AWS.DeviceFarm.Types.DeviceFormFactor
+import Network.AWS.DeviceFarm.Types.DevicePlatform
+import Network.AWS.DeviceFarm.Types.DevicePoolType
+import Network.AWS.DeviceFarm.Types.ExecutionResult
+import Network.AWS.DeviceFarm.Types.ExecutionResultCode
+import Network.AWS.DeviceFarm.Types.ExecutionStatus
+import Network.AWS.DeviceFarm.Types.InstanceStatus
+import Network.AWS.DeviceFarm.Types.InteractionMode
+import Network.AWS.DeviceFarm.Types.NetworkProfileType
+import Network.AWS.DeviceFarm.Types.OfferingTransactionType
+import Network.AWS.DeviceFarm.Types.OfferingType
+import Network.AWS.DeviceFarm.Types.RecurringChargeFrequency
+import Network.AWS.DeviceFarm.Types.RuleOperator
+import Network.AWS.DeviceFarm.Types.SampleType
+import Network.AWS.DeviceFarm.Types.TestGridSessionArtifactCategory
+import Network.AWS.DeviceFarm.Types.TestGridSessionArtifactType
+import Network.AWS.DeviceFarm.Types.TestGridSessionStatus
+import Network.AWS.DeviceFarm.Types.TestType
+import Network.AWS.DeviceFarm.Types.UploadCategory
+import Network.AWS.DeviceFarm.Types.UploadStatus
+import Network.AWS.DeviceFarm.Types.UploadType
+import Network.AWS.DeviceFarm.Types.AccountSettings
+import Network.AWS.DeviceFarm.Types.Artifact
+import Network.AWS.DeviceFarm.Types.CPU
+import Network.AWS.DeviceFarm.Types.Counters
+import Network.AWS.DeviceFarm.Types.CreateRemoteAccessSessionConfiguration
+import Network.AWS.DeviceFarm.Types.CustomerArtifactPaths
+import Network.AWS.DeviceFarm.Types.Device
+import Network.AWS.DeviceFarm.Types.DeviceFilter
+import Network.AWS.DeviceFarm.Types.DeviceInstance
+import Network.AWS.DeviceFarm.Types.DeviceMinutes
+import Network.AWS.DeviceFarm.Types.DevicePool
+import Network.AWS.DeviceFarm.Types.DevicePoolCompatibilityResult
+import Network.AWS.DeviceFarm.Types.DeviceSelectionConfiguration
+import Network.AWS.DeviceFarm.Types.DeviceSelectionResult
+import Network.AWS.DeviceFarm.Types.ExecutionConfiguration
+import Network.AWS.DeviceFarm.Types.IncompatibilityMessage
+import Network.AWS.DeviceFarm.Types.InstanceProfile
+import Network.AWS.DeviceFarm.Types.Job
+import Network.AWS.DeviceFarm.Types.Location
+import Network.AWS.DeviceFarm.Types.MonetaryAmount
+import Network.AWS.DeviceFarm.Types.NetworkProfile
+import Network.AWS.DeviceFarm.Types.Offering
+import Network.AWS.DeviceFarm.Types.OfferingPromotion
+import Network.AWS.DeviceFarm.Types.OfferingStatus
+import Network.AWS.DeviceFarm.Types.OfferingTransaction
+import Network.AWS.DeviceFarm.Types.Problem
+import Network.AWS.DeviceFarm.Types.ProblemDetail
+import Network.AWS.DeviceFarm.Types.Project
+import Network.AWS.DeviceFarm.Types.Radios
+import Network.AWS.DeviceFarm.Types.RecurringCharge
+import Network.AWS.DeviceFarm.Types.RemoteAccessSession
+import Network.AWS.DeviceFarm.Types.Resolution
+import Network.AWS.DeviceFarm.Types.Rule
+import Network.AWS.DeviceFarm.Types.Run
+import Network.AWS.DeviceFarm.Types.Sample
+import Network.AWS.DeviceFarm.Types.ScheduleRunConfiguration
+import Network.AWS.DeviceFarm.Types.ScheduleRunTest
+import Network.AWS.DeviceFarm.Types.Suite
+import Network.AWS.DeviceFarm.Types.Tag
+import Network.AWS.DeviceFarm.Types.Test
+import Network.AWS.DeviceFarm.Types.TestGridProject
+import Network.AWS.DeviceFarm.Types.TestGridSession
+import Network.AWS.DeviceFarm.Types.TestGridSessionAction
+import Network.AWS.DeviceFarm.Types.TestGridSessionArtifact
+import Network.AWS.DeviceFarm.Types.TrialMinutes
+import Network.AWS.DeviceFarm.Types.UniqueProblem
+import Network.AWS.DeviceFarm.Types.Upload
+import Network.AWS.DeviceFarm.Types.VPCEConfiguration
 
 -- | API version @2015-06-23@ of the Amazon Device Farm SDK configuration.
 deviceFarm :: Service
-deviceFarm =
-  Service
-    { _svcAbbrev = "DeviceFarm"
-    , _svcSigner = v4
-    , _svcPrefix = "devicefarm"
-    , _svcVersion = "2015-06-23"
-    , _svcEndpoint = defaultEndpoint deviceFarm
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "DeviceFarm"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
+deviceFarm
+  = Service{_svcAbbrev = "DeviceFarm", _svcSigner = v4,
+            _svcPrefix = "devicefarm",
+            _svcVersion = "2015-06-23",
+            _svcEndpoint = defaultEndpoint deviceFarm,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "DeviceFarm",
+            _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
-
--- | Exception gets thrown when a user is not eligible to perform the specified transaction.
+-- | The request doesn't comply with the AWS Identity and Access Management (IAM) tag policy. Correct your request and then retry it.
 --
 --
-_NotEligibleException :: AsError a => Getting (First ServiceError) a ServiceError
-_NotEligibleException = _MatchServiceError deviceFarm "NotEligibleException"
+_TagPolicyException :: AsError a => Getting (First ServiceError) a ServiceError
+_TagPolicyException
+  = _MatchServiceError deviceFarm "TagPolicyException"
 
-
--- | An entity with the same name already exists.
+-- | An internal exception was raised in the service. Contact <mailto:aws-devicefarm-support@amazon.com aws-devicefarm-support@amazon.com> if you see this error. 
 --
 --
-_IdempotencyException :: AsError a => Getting (First ServiceError) a ServiceError
-_IdempotencyException = _MatchServiceError deviceFarm "IdempotencyException"
+_InternalServiceException :: AsError a => Getting (First ServiceError) a ServiceError
+_InternalServiceException
+  = _MatchServiceError deviceFarm
+      "InternalServiceException"
 
-
--- | An invalid argument was specified.
+-- | The requested object could not be deleted.
 --
 --
-_ArgumentException :: AsError a => Getting (First ServiceError) a ServiceError
-_ArgumentException = _MatchServiceError deviceFarm "ArgumentException"
+_CannotDeleteException :: AsError a => Getting (First ServiceError) a ServiceError
+_CannotDeleteException
+  = _MatchServiceError deviceFarm
+      "CannotDeleteException"
 
-
--- | The specified entity was not found.
+-- | The list of tags on the repository is over the limit. The maximum number of tags that can be applied to a repository is 50. 
 --
 --
-_NotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
-_NotFoundException = _MatchServiceError deviceFarm "NotFoundException"
-
-
--- | There was a problem with the service account.
---
---
-_ServiceAccountException :: AsError a => Getting (First ServiceError) a ServiceError
-_ServiceAccountException =
-  _MatchServiceError deviceFarm "ServiceAccountException"
-
+_TooManyTagsException :: AsError a => Getting (First ServiceError) a ServiceError
+_TooManyTagsException
+  = _MatchServiceError deviceFarm
+      "TooManyTagsException"
 
 -- | There was an error with the update request, or you do not have sufficient permissions to update this VPC endpoint configuration.
 --
 --
 _InvalidOperationException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidOperationException =
-  _MatchServiceError deviceFarm "InvalidOperationException"
+_InvalidOperationException
+  = _MatchServiceError deviceFarm
+      "InvalidOperationException"
 
+-- | There was a problem with the service account.
+--
+--
+_ServiceAccountException :: AsError a => Getting (First ServiceError) a ServiceError
+_ServiceAccountException
+  = _MatchServiceError deviceFarm
+      "ServiceAccountException"
+
+-- | The operation was not successful. Try again.
+--
+--
+_TagOperationException :: AsError a => Getting (First ServiceError) a ServiceError
+_TagOperationException
+  = _MatchServiceError deviceFarm
+      "TagOperationException"
+
+-- | An entity with the same name already exists.
+--
+--
+_IdempotencyException :: AsError a => Getting (First ServiceError) a ServiceError
+_IdempotencyException
+  = _MatchServiceError deviceFarm
+      "IdempotencyException"
+
+-- | Exception gets thrown when a user is not eligible to perform the specified transaction.
+--
+--
+_NotEligibleException :: AsError a => Getting (First ServiceError) a ServiceError
+_NotEligibleException
+  = _MatchServiceError deviceFarm
+      "NotEligibleException"
+
+-- | The specified entity was not found.
+--
+--
+_NotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
+_NotFoundException
+  = _MatchServiceError deviceFarm "NotFoundException"
+
+-- | An invalid argument was specified.
+--
+--
+_ArgumentException :: AsError a => Getting (First ServiceError) a ServiceError
+_ArgumentException
+  = _MatchServiceError deviceFarm "ArgumentException"
 
 -- | A limit was exceeded.
 --
 --
 _LimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
-_LimitExceededException = _MatchServiceError deviceFarm "LimitExceededException"
-
+_LimitExceededException
+  = _MatchServiceError deviceFarm
+      "LimitExceededException"

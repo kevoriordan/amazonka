@@ -21,17 +21,15 @@
 -- Creates a security group.
 --
 --
--- A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html Amazon EC2 Security Groups> in the /Amazon Elastic Compute Cloud User Guide/ and <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html Security Groups for Your VPC> in the /Amazon Virtual Private Cloud User Guide/ .
---
--- /Important:/ EC2-Classic: You can have up to 500 security groups.
---
--- EC2-VPC: You can create up to 500 security groups per VPC.
+-- A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html Amazon EC2 Security Groups> in the /Amazon Elastic Compute Cloud User Guide/ and <https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html Security Groups for Your VPC> in the /Amazon Virtual Private Cloud User Guide/ .
 --
 -- When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name.
 --
 -- You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other.
 --
 -- You can add or remove rules from your security groups using 'AuthorizeSecurityGroupIngress' , 'AuthorizeSecurityGroupEgress' , 'RevokeSecurityGroupIngress' , and 'RevokeSecurityGroupEgress' .
+--
+-- For more information about VPC security group limits, see <https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html Amazon VPC Limits> .
 --
 module Network.AWS.EC2.CreateSecurityGroup
     (
@@ -59,18 +57,13 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CreateSecurityGroup.
---
---
---
--- /See:/ 'createSecurityGroup' smart constructor.
-data CreateSecurityGroup = CreateSecurityGroup'
-  { _csgVPCId       :: !(Maybe Text)
-  , _csgDryRun      :: !(Maybe Bool)
-  , _csgDescription :: !Text
-  , _csgGroupName   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createSecurityGroup' smart constructor.
+data CreateSecurityGroup = CreateSecurityGroup'{_csgVPCId
+                                                :: !(Maybe Text),
+                                                _csgDryRun :: !(Maybe Bool),
+                                                _csgDescription :: !Text,
+                                                _csgGroupName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateSecurityGroup' with the minimum fields required to make a request.
 --
@@ -87,14 +80,11 @@ createSecurityGroup
     :: Text -- ^ 'csgDescription'
     -> Text -- ^ 'csgGroupName'
     -> CreateSecurityGroup
-createSecurityGroup pDescription_ pGroupName_ =
-  CreateSecurityGroup'
-    { _csgVPCId = Nothing
-    , _csgDryRun = Nothing
-    , _csgDescription = pDescription_
-    , _csgGroupName = pGroupName_
-    }
-
+createSecurityGroup pDescription_ pGroupName_
+  = CreateSecurityGroup'{_csgVPCId = Nothing,
+                         _csgDryRun = Nothing,
+                         _csgDescription = pDescription_,
+                         _csgGroupName = pGroupName_}
 
 -- | [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
 csgVPCId :: Lens' CreateSecurityGroup (Maybe Text)
@@ -141,16 +131,13 @@ instance ToQuery CreateSecurityGroup where
                "GroupDescription" =: _csgDescription,
                "GroupName" =: _csgGroupName]
 
--- | Contains the output of CreateSecurityGroup.
---
---
---
--- /See:/ 'createSecurityGroupResponse' smart constructor.
-data CreateSecurityGroupResponse = CreateSecurityGroupResponse'
-  { _csgrsResponseStatus :: !Int
-  , _csgrsGroupId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createSecurityGroupResponse' smart constructor.
+data CreateSecurityGroupResponse = CreateSecurityGroupResponse'{_csgrsResponseStatus
+                                                                :: !Int,
+                                                                _csgrsGroupId ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateSecurityGroupResponse' with the minimum fields required to make a request.
 --
@@ -163,10 +150,11 @@ createSecurityGroupResponse
     :: Int -- ^ 'csgrsResponseStatus'
     -> Text -- ^ 'csgrsGroupId'
     -> CreateSecurityGroupResponse
-createSecurityGroupResponse pResponseStatus_ pGroupId_ =
-  CreateSecurityGroupResponse'
-    {_csgrsResponseStatus = pResponseStatus_, _csgrsGroupId = pGroupId_}
-
+createSecurityGroupResponse pResponseStatus_
+  pGroupId_
+  = CreateSecurityGroupResponse'{_csgrsResponseStatus =
+                                   pResponseStatus_,
+                                 _csgrsGroupId = pGroupId_}
 
 -- | -- | The response status code.
 csgrsResponseStatus :: Lens' CreateSecurityGroupResponse Int

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Specify the time-based auto scaling configuration for a specified instance. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html Managing Load with Time-based and Load-based Instances> .
+-- Specify the time-based auto scaling configuration for a specified instance. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html Managing Load with Time-based and Load-based Instances> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.SetTimeBasedAutoScaling
     (
@@ -45,11 +45,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setTimeBasedAutoScaling' smart constructor.
-data SetTimeBasedAutoScaling = SetTimeBasedAutoScaling'
-  { _stbasAutoScalingSchedule :: !(Maybe WeeklyAutoScalingSchedule)
-  , _stbasInstanceId          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetTimeBasedAutoScaling = SetTimeBasedAutoScaling'{_stbasAutoScalingSchedule
+                                                        ::
+                                                        !(Maybe
+                                                            WeeklyAutoScalingSchedule),
+                                                        _stbasInstanceId ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'SetTimeBasedAutoScaling' with the minimum fields required to make a request.
 --
@@ -61,10 +64,10 @@ data SetTimeBasedAutoScaling = SetTimeBasedAutoScaling'
 setTimeBasedAutoScaling
     :: Text -- ^ 'stbasInstanceId'
     -> SetTimeBasedAutoScaling
-setTimeBasedAutoScaling pInstanceId_ =
-  SetTimeBasedAutoScaling'
-    {_stbasAutoScalingSchedule = Nothing, _stbasInstanceId = pInstanceId_}
-
+setTimeBasedAutoScaling pInstanceId_
+  = SetTimeBasedAutoScaling'{_stbasAutoScalingSchedule
+                               = Nothing,
+                             _stbasInstanceId = pInstanceId_}
 
 -- | An @AutoScalingSchedule@ with the instance schedule.
 stbasAutoScalingSchedule :: Lens' SetTimeBasedAutoScaling (Maybe WeeklyAutoScalingSchedule)
@@ -110,16 +113,15 @@ instance ToQuery SetTimeBasedAutoScaling where
         toQuery = const mempty
 
 -- | /See:/ 'setTimeBasedAutoScalingResponse' smart constructor.
-data SetTimeBasedAutoScalingResponse =
-  SetTimeBasedAutoScalingResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetTimeBasedAutoScalingResponse = SetTimeBasedAutoScalingResponse'
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'SetTimeBasedAutoScalingResponse' with the minimum fields required to make a request.
 --
 setTimeBasedAutoScalingResponse
     :: SetTimeBasedAutoScalingResponse
-setTimeBasedAutoScalingResponse = SetTimeBasedAutoScalingResponse'
-
+setTimeBasedAutoScalingResponse
+  = SetTimeBasedAutoScalingResponse'
 
 instance NFData SetTimeBasedAutoScalingResponse where

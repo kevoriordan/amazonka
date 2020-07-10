@@ -25,7 +25,7 @@
 --
 --     * Disable the RTMP distribution.
 --
---     * Submit a @GET Streaming Distribution Config@ request to get the current configuration and the @Etag@ header for the distribution.
+--     * Submit a @GET Streaming Distribution Config@ request to get the current configuration and the @Etag@ header for the distribution. 
 --
 --     * Update the XML document that was returned in the response to your @GET Streaming Distribution Config@ request to change the value of @Enabled@ to @false@ .
 --
@@ -41,7 +41,7 @@
 --
 --
 --
--- For information about deleting a distribution using the CloudFront console, see <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html Deleting a Distribution> in the /Amazon CloudFront Developer Guide/ .
+-- For information about deleting a distribution using the CloudFront console, see <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html Deleting a Distribution> in the /Amazon CloudFront Developer Guide/ .
 --
 module Network.AWS.CloudFront.DeleteStreamingDistribution
     (
@@ -69,11 +69,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteStreamingDistribution' smart constructor.
-data DeleteStreamingDistribution = DeleteStreamingDistribution'
-  { _dsdIfMatch :: !(Maybe Text)
-  , _dsdId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteStreamingDistribution = DeleteStreamingDistribution'{_dsdIfMatch
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dsdId :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteStreamingDistribution' with the minimum fields required to make a request.
 --
@@ -81,19 +82,19 @@ data DeleteStreamingDistribution = DeleteStreamingDistribution'
 --
 -- * 'dsdIfMatch' - The value of the @ETag@ header that you received when you disabled the streaming distribution. For example: @E2QWRUHAPOMQZL@ .
 --
--- * 'dsdId' - The distribution ID.
+-- * 'dsdId' - The distribution ID. 
 deleteStreamingDistribution
     :: Text -- ^ 'dsdId'
     -> DeleteStreamingDistribution
-deleteStreamingDistribution pId_ =
-  DeleteStreamingDistribution' {_dsdIfMatch = Nothing, _dsdId = pId_}
-
+deleteStreamingDistribution pId_
+  = DeleteStreamingDistribution'{_dsdIfMatch = Nothing,
+                                 _dsdId = pId_}
 
 -- | The value of the @ETag@ header that you received when you disabled the streaming distribution. For example: @E2QWRUHAPOMQZL@ .
 dsdIfMatch :: Lens' DeleteStreamingDistribution (Maybe Text)
 dsdIfMatch = lens _dsdIfMatch (\ s a -> s{_dsdIfMatch = a})
 
--- | The distribution ID.
+-- | The distribution ID. 
 dsdId :: Lens' DeleteStreamingDistribution Text
 dsdId = lens _dsdId (\ s a -> s{_dsdId = a})
 
@@ -115,23 +116,22 @@ instance ToHeaders DeleteStreamingDistribution where
 instance ToPath DeleteStreamingDistribution where
         toPath DeleteStreamingDistribution'{..}
           = mconcat
-              ["/2017-10-30/streaming-distribution/", toBS _dsdId]
+              ["/2019-03-26/streaming-distribution/", toBS _dsdId]
 
 instance ToQuery DeleteStreamingDistribution where
         toQuery = const mempty
 
 -- | /See:/ 'deleteStreamingDistributionResponse' smart constructor.
-data DeleteStreamingDistributionResponse =
-  DeleteStreamingDistributionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteStreamingDistributionResponse = DeleteStreamingDistributionResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteStreamingDistributionResponse' with the minimum fields required to make a request.
 --
 deleteStreamingDistributionResponse
     :: DeleteStreamingDistributionResponse
-deleteStreamingDistributionResponse = DeleteStreamingDistributionResponse'
-
+deleteStreamingDistributionResponse
+  = DeleteStreamingDistributionResponse'
 
 instance NFData DeleteStreamingDistributionResponse
          where

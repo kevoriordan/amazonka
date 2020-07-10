@@ -29,10 +29,10 @@ module Network.AWS.MarketplaceAnalytics
     -- * Operations
     -- $operations
 
-    -- ** StartSupportDataExport
+    -- ** StartSupportDataExport 
     , module Network.AWS.MarketplaceAnalytics.StartSupportDataExport
 
-    -- ** GenerateDataSet
+    -- ** GenerateDataSet 
     , module Network.AWS.MarketplaceAnalytics.GenerateDataSet
 
     -- * Types

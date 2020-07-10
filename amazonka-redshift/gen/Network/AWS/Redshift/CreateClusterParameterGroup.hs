@@ -21,9 +21,9 @@
 -- Creates an Amazon Redshift parameter group.
 --
 --
--- Creating parameter groups is independent of creating clusters. You can associate a cluster with a parameter group when you create the cluster. You can also associate an existing cluster with a parameter group after the cluster is created by using 'ModifyCluster' .
+-- Creating parameter groups is independent of creating clusters. You can associate a cluster with a parameter group when you create the cluster. You can also associate an existing cluster with a parameter group after the cluster is created by using 'ModifyCluster' . 
 --
--- Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html Amazon Redshift Parameter Groups> in the /Amazon Redshift Cluster Management Guide/ .
+-- Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html Amazon Redshift Parameter Groups> in the /Amazon Redshift Cluster Management Guide/ .
 --
 module Network.AWS.Redshift.CreateClusterParameterGroup
     (
@@ -51,18 +51,22 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'createClusterParameterGroup' smart constructor.
-data CreateClusterParameterGroup = CreateClusterParameterGroup'
-  { _ccpgTags                 :: !(Maybe [Tag])
-  , _ccpgParameterGroupName   :: !Text
-  , _ccpgParameterGroupFamily :: !Text
-  , _ccpgDescription          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateClusterParameterGroup = CreateClusterParameterGroup'{_ccpgTags
+                                                                ::
+                                                                !(Maybe [Tag]),
+                                                                _ccpgParameterGroupName
+                                                                :: !Text,
+                                                                _ccpgParameterGroupFamily
+                                                                :: !Text,
+                                                                _ccpgDescription
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateClusterParameterGroup' with the minimum fields required to make a request.
 --
@@ -72,7 +76,7 @@ data CreateClusterParameterGroup = CreateClusterParameterGroup'
 --
 -- * 'ccpgParameterGroupName' - The name of the cluster parameter group. Constraints:     * Must be 1 to 255 alphanumeric characters or hyphens     * First character must be a letter.     * Cannot end with a hyphen or contain two consecutive hyphens.     * Must be unique withing your AWS account.
 --
--- * 'ccpgParameterGroupFamily' - The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters. To get a list of valid parameter group family names, you can call 'DescribeClusterParameterGroups' . By default, Amazon Redshift returns a list of all the parameter groups that are owned by your AWS account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0".
+-- * 'ccpgParameterGroupFamily' - The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters. To get a list of valid parameter group family names, you can call 'DescribeClusterParameterGroups' . By default, Amazon Redshift returns a list of all the parameter groups that are owned by your AWS account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". 
 --
 -- * 'ccpgDescription' - A description of the parameter group.
 createClusterParameterGroup
@@ -80,14 +84,13 @@ createClusterParameterGroup
     -> Text -- ^ 'ccpgParameterGroupFamily'
     -> Text -- ^ 'ccpgDescription'
     -> CreateClusterParameterGroup
-createClusterParameterGroup pParameterGroupName_ pParameterGroupFamily_ pDescription_ =
-  CreateClusterParameterGroup'
-    { _ccpgTags = Nothing
-    , _ccpgParameterGroupName = pParameterGroupName_
-    , _ccpgParameterGroupFamily = pParameterGroupFamily_
-    , _ccpgDescription = pDescription_
-    }
-
+createClusterParameterGroup pParameterGroupName_
+  pParameterGroupFamily_ pDescription_
+  = CreateClusterParameterGroup'{_ccpgTags = Nothing,
+                                 _ccpgParameterGroupName = pParameterGroupName_,
+                                 _ccpgParameterGroupFamily =
+                                   pParameterGroupFamily_,
+                                 _ccpgDescription = pDescription_}
 
 -- | A list of tag instances.
 ccpgTags :: Lens' CreateClusterParameterGroup [Tag]
@@ -97,7 +100,7 @@ ccpgTags = lens _ccpgTags (\ s a -> s{_ccpgTags = a}) . _Default . _Coerce
 ccpgParameterGroupName :: Lens' CreateClusterParameterGroup Text
 ccpgParameterGroupName = lens _ccpgParameterGroupName (\ s a -> s{_ccpgParameterGroupName = a})
 
--- | The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters. To get a list of valid parameter group family names, you can call 'DescribeClusterParameterGroups' . By default, Amazon Redshift returns a list of all the parameter groups that are owned by your AWS account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0".
+-- | The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters. To get a list of valid parameter group family names, you can call 'DescribeClusterParameterGroups' . By default, Amazon Redshift returns a list of all the parameter groups that are owned by your AWS account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". 
 ccpgParameterGroupFamily :: Lens' CreateClusterParameterGroup Text
 ccpgParameterGroupFamily = lens _ccpgParameterGroupFamily (\ s a -> s{_ccpgParameterGroupFamily = a})
 
@@ -139,11 +142,15 @@ instance ToQuery CreateClusterParameterGroup where
                "Description" =: _ccpgDescription]
 
 -- | /See:/ 'createClusterParameterGroupResponse' smart constructor.
-data CreateClusterParameterGroupResponse = CreateClusterParameterGroupResponse'
-  { _ccpgrsClusterParameterGroup :: !(Maybe ClusterParameterGroup)
-  , _ccpgrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateClusterParameterGroupResponse = CreateClusterParameterGroupResponse'{_ccpgrsClusterParameterGroup
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    ClusterParameterGroup),
+                                                                                _ccpgrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'CreateClusterParameterGroupResponse' with the minimum fields required to make a request.
 --
@@ -155,12 +162,11 @@ data CreateClusterParameterGroupResponse = CreateClusterParameterGroupResponse'
 createClusterParameterGroupResponse
     :: Int -- ^ 'ccpgrsResponseStatus'
     -> CreateClusterParameterGroupResponse
-createClusterParameterGroupResponse pResponseStatus_ =
-  CreateClusterParameterGroupResponse'
-    { _ccpgrsClusterParameterGroup = Nothing
-    , _ccpgrsResponseStatus = pResponseStatus_
-    }
-
+createClusterParameterGroupResponse pResponseStatus_
+  = CreateClusterParameterGroupResponse'{_ccpgrsClusterParameterGroup
+                                           = Nothing,
+                                         _ccpgrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Undocumented member.
 ccpgrsClusterParameterGroup :: Lens' CreateClusterParameterGroupResponse (Maybe ClusterParameterGroup)

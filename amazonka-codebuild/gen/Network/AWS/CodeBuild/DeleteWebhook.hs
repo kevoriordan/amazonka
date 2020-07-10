@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- For an existing AWS CodeBuild build project that has its source code stored in a GitHub repository, stops AWS CodeBuild from automatically rebuilding the source code every time a code change is pushed to the repository.
+-- For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
 --
 --
 module Network.AWS.CodeBuild.DeleteWebhook
@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteWebhook' smart constructor.
-newtype DeleteWebhook = DeleteWebhook'
-  { _dwProjectName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteWebhook = DeleteWebhook'{_dwProjectName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteWebhook' with the minimum fields required to make a request.
 --
@@ -57,8 +56,8 @@ newtype DeleteWebhook = DeleteWebhook'
 deleteWebhook
     :: Text -- ^ 'dwProjectName'
     -> DeleteWebhook
-deleteWebhook pProjectName_ = DeleteWebhook' {_dwProjectName = pProjectName_}
-
+deleteWebhook pProjectName_
+  = DeleteWebhook'{_dwProjectName = pProjectName_}
 
 -- | The name of the AWS CodeBuild project.
 dwProjectName :: Lens' DeleteWebhook Text
@@ -97,10 +96,10 @@ instance ToQuery DeleteWebhook where
         toQuery = const mempty
 
 -- | /See:/ 'deleteWebhookResponse' smart constructor.
-newtype DeleteWebhookResponse = DeleteWebhookResponse'
-  { _dwrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteWebhookResponse = DeleteWebhookResponse'{_dwrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteWebhookResponse' with the minimum fields required to make a request.
 --
@@ -110,9 +109,9 @@ newtype DeleteWebhookResponse = DeleteWebhookResponse'
 deleteWebhookResponse
     :: Int -- ^ 'dwrsResponseStatus'
     -> DeleteWebhookResponse
-deleteWebhookResponse pResponseStatus_ =
-  DeleteWebhookResponse' {_dwrsResponseStatus = pResponseStatus_}
-
+deleteWebhookResponse pResponseStatus_
+  = DeleteWebhookResponse'{_dwrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 dwrsResponseStatus :: Lens' DeleteWebhookResponse Int

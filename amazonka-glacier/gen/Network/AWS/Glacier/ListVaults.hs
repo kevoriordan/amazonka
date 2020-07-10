@@ -21,11 +21,11 @@
 -- This operation lists all vaults owned by the calling user's account. The list returned in the response is ASCII-sorted by vault name.
 --
 --
--- By default, this operation returns up to 1,000 items. If there are more vaults to list, the response @marker@ field contains the vault Amazon Resource Name (ARN) at which to continue the list with a new List Vaults request; otherwise, the @marker@ field is @null@ . To return a list of vaults that begins at a specific vault, set the @marker@ request parameter to the vault ARN you obtained from a previous List Vaults request. You can also limit the number of vaults returned in the response by specifying the @limit@ parameter in the request.
+-- By default, this operation returns up to 10 items. If there are more vaults to list, the response @marker@ field contains the vault Amazon Resource Name (ARN) at which to continue the list with a new List Vaults request; otherwise, the @marker@ field is @null@ . To return a list of vaults that begins at a specific vault, set the @marker@ request parameter to the vault ARN you obtained from a previous List Vaults request. You can also limit the number of vaults returned in the response by specifying the @limit@ parameter in the request. 
 --
--- An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html Access Control Using AWS Identity and Access Management (IAM)> .
+-- An AWS account has full permission to perform all operations (actions). However, AWS Identity and Access Management (IAM) users don't have any permissions by default. You must grant them explicit permission to perform specific actions. For more information, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html Access Control Using AWS Identity and Access Management (IAM)> .
 --
--- For conceptual information and underlying REST API, see <http://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html Retrieving Vault Metadata in Amazon Glacier> and <http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html List Vaults > in the /Amazon Glacier Developer Guide/ .
+-- For conceptual information and underlying REST API, see <https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html Retrieving Vault Metadata in Amazon S3 Glacier> and <https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html List Vaults > in the /Amazon Glacier Developer Guide/ . 
 --
 --
 -- This operation returns paginated results.
@@ -61,12 +61,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listVaults' smart constructor.
-data ListVaults = ListVaults'
-  { _lvMarker    :: !(Maybe Text)
-  , _lvLimit     :: !(Maybe Text)
-  , _lvAccountId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVaults = ListVaults'{_lvMarker ::
+                              !(Maybe Text),
+                              _lvLimit :: !(Maybe Text), _lvAccountId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVaults' with the minimum fields required to make a request.
 --
@@ -74,22 +72,21 @@ data ListVaults = ListVaults'
 --
 -- * 'lvMarker' - A string used for pagination. The marker specifies the vault ARN after which the listing of vaults should begin.
 --
--- * 'lvLimit' - The maximum number of vaults to be returned. The default limit is 1000. The number of vaults returned might be fewer than the specified limit, but the number of returned vaults never exceeds the limit.
+-- * 'lvLimit' - The maximum number of vaults to be returned. The default limit is 10. The number of vaults returned might be fewer than the specified limit, but the number of returned vaults never exceeds the limit.
 --
 -- * 'lvAccountId' - The @AccountId@ value is the AWS account ID. This value must match the AWS account ID associated with the credentials used to sign the request. You can either specify an AWS account ID or optionally a single '@-@ ' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you specify your account ID, do not include any hyphens ('-') in the ID.
 listVaults
     :: Text -- ^ 'lvAccountId'
     -> ListVaults
-listVaults pAccountId_ =
-  ListVaults'
-    {_lvMarker = Nothing, _lvLimit = Nothing, _lvAccountId = pAccountId_}
-
+listVaults pAccountId_
+  = ListVaults'{_lvMarker = Nothing,
+                _lvLimit = Nothing, _lvAccountId = pAccountId_}
 
 -- | A string used for pagination. The marker specifies the vault ARN after which the listing of vaults should begin.
 lvMarker :: Lens' ListVaults (Maybe Text)
 lvMarker = lens _lvMarker (\ s a -> s{_lvMarker = a})
 
--- | The maximum number of vaults to be returned. The default limit is 1000. The number of vaults returned might be fewer than the specified limit, but the number of returned vaults never exceeds the limit.
+-- | The maximum number of vaults to be returned. The default limit is 10. The number of vaults returned might be fewer than the specified limit, but the number of returned vaults never exceeds the limit.
 lvLimit :: Lens' ListVaults (Maybe Text)
 lvLimit = lens _lvLimit (\ s a -> s{_lvLimit = a})
 
@@ -130,17 +127,17 @@ instance ToQuery ListVaults where
           = mconcat
               ["marker" =: _lvMarker, "limit" =: _lvLimit]
 
--- | Contains the Amazon Glacier response to your request.
+-- | Contains the Amazon S3 Glacier response to your request.
 --
 --
 --
 -- /See:/ 'listVaultsResponse' smart constructor.
-data ListVaultsResponse = ListVaultsResponse'
-  { _lvrsMarker         :: !(Maybe Text)
-  , _lvrsVaultList      :: !(Maybe [DescribeVaultOutput])
-  , _lvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVaultsResponse = ListVaultsResponse'{_lvrsMarker
+                                              :: !(Maybe Text),
+                                              _lvrsVaultList ::
+                                              !(Maybe [DescribeVaultOutput]),
+                                              _lvrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVaultsResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +151,10 @@ data ListVaultsResponse = ListVaultsResponse'
 listVaultsResponse
     :: Int -- ^ 'lvrsResponseStatus'
     -> ListVaultsResponse
-listVaultsResponse pResponseStatus_ =
-  ListVaultsResponse'
-    { _lvrsMarker = Nothing
-    , _lvrsVaultList = Nothing
-    , _lvrsResponseStatus = pResponseStatus_
-    }
-
+listVaultsResponse pResponseStatus_
+  = ListVaultsResponse'{_lvrsMarker = Nothing,
+                        _lvrsVaultList = Nothing,
+                        _lvrsResponseStatus = pResponseStatus_}
 
 -- | The vault ARN at which to continue pagination of the results. You use the marker in another List Vaults request to obtain more vaults in the list.
 lvrsMarker :: Lens' ListVaultsResponse (Maybe Text)

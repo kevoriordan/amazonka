@@ -47,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getCORSPolicy' smart constructor.
-newtype GetCORSPolicy = GetCORSPolicy'
-  { _gcpContainerName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetCORSPolicy = GetCORSPolicy'{_gcpContainerName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCORSPolicy' with the minimum fields required to make a request.
 --
@@ -60,9 +59,8 @@ newtype GetCORSPolicy = GetCORSPolicy'
 getCORSPolicy
     :: Text -- ^ 'gcpContainerName'
     -> GetCORSPolicy
-getCORSPolicy pContainerName_ =
-  GetCORSPolicy' {_gcpContainerName = pContainerName_}
-
+getCORSPolicy pContainerName_
+  = GetCORSPolicy'{_gcpContainerName = pContainerName_}
 
 -- | The name of the container that the policy is assigned to.
 gcpContainerName :: Lens' GetCORSPolicy Text
@@ -103,11 +101,12 @@ instance ToQuery GetCORSPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'getCORSPolicyResponse' smart constructor.
-data GetCORSPolicyResponse = GetCORSPolicyResponse'
-  { _gcorsprsResponseStatus :: !Int
-  , _gcorsprsCORSPolicy     :: !(List1 CORSRule)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCORSPolicyResponse = GetCORSPolicyResponse'{_gcorsprsResponseStatus
+                                                    :: !Int,
+                                                    _gcorsprsCORSPolicy ::
+                                                    !(List1 CORSRule)}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetCORSPolicyResponse' with the minimum fields required to make a request.
 --
@@ -115,23 +114,21 @@ data GetCORSPolicyResponse = GetCORSPolicyResponse'
 --
 -- * 'gcorsprsResponseStatus' - -- | The response status code.
 --
--- * 'gcorsprsCORSPolicy' - Undocumented member.
+-- * 'gcorsprsCORSPolicy' - The CORS policy assigned to the container.
 getCORSPolicyResponse
     :: Int -- ^ 'gcorsprsResponseStatus'
     -> NonEmpty CORSRule -- ^ 'gcorsprsCORSPolicy'
     -> GetCORSPolicyResponse
-getCORSPolicyResponse pResponseStatus_ pCORSPolicy_ =
-  GetCORSPolicyResponse'
-    { _gcorsprsResponseStatus = pResponseStatus_
-    , _gcorsprsCORSPolicy = _List1 # pCORSPolicy_
-    }
-
+getCORSPolicyResponse pResponseStatus_ pCORSPolicy_
+  = GetCORSPolicyResponse'{_gcorsprsResponseStatus =
+                             pResponseStatus_,
+                           _gcorsprsCORSPolicy = _List1 # pCORSPolicy_}
 
 -- | -- | The response status code.
 gcorsprsResponseStatus :: Lens' GetCORSPolicyResponse Int
 gcorsprsResponseStatus = lens _gcorsprsResponseStatus (\ s a -> s{_gcorsprsResponseStatus = a})
 
--- | Undocumented member.
+-- | The CORS policy assigned to the container.
 gcorsprsCORSPolicy :: Lens' GetCORSPolicyResponse (NonEmpty CORSRule)
 gcorsprsCORSPolicy = lens _gcorsprsCORSPolicy (\ s a -> s{_gcorsprsCORSPolicy = a}) . _List1
 

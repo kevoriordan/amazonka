@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new Amazon WorkMail resource. The available types are equipment and room.
+-- Creates a new Amazon WorkMail resource. 
 --
 --
 module Network.AWS.WorkMail.CreateResource
@@ -47,12 +47,11 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'createResource' smart constructor.
-data CreateResource = CreateResource'
-  { _crOrganizationId :: !Text
-  , _crName           :: !Text
-  , _crType           :: !ResourceType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateResource = CreateResource'{_crOrganizationId
+                                      :: !Text,
+                                      _crName :: !Text,
+                                      _crType :: !ResourceType}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateResource' with the minimum fields required to make a request.
 --
@@ -60,28 +59,28 @@ data CreateResource = CreateResource'
 --
 -- * 'crOrganizationId' - The identifier associated with the organization for which the resource is created.
 --
--- * 'crName' - The name of the created resource.
+-- * 'crName' - The name of the new resource.
 --
--- * 'crType' - The type of the created resource.
+-- * 'crType' - The type of the new resource. The available types are @equipment@ and @room@ .
 createResource
     :: Text -- ^ 'crOrganizationId'
     -> Text -- ^ 'crName'
     -> ResourceType -- ^ 'crType'
     -> CreateResource
-createResource pOrganizationId_ pName_ pType_ =
-  CreateResource'
-    {_crOrganizationId = pOrganizationId_, _crName = pName_, _crType = pType_}
-
+createResource pOrganizationId_ pName_ pType_
+  = CreateResource'{_crOrganizationId =
+                      pOrganizationId_,
+                    _crName = pName_, _crType = pType_}
 
 -- | The identifier associated with the organization for which the resource is created.
 crOrganizationId :: Lens' CreateResource Text
 crOrganizationId = lens _crOrganizationId (\ s a -> s{_crOrganizationId = a})
 
--- | The name of the created resource.
+-- | The name of the new resource.
 crName :: Lens' CreateResource Text
 crName = lens _crName (\ s a -> s{_crName = a})
 
--- | The type of the created resource.
+-- | The type of the new resource. The available types are @equipment@ and @room@ .
 crType :: Lens' CreateResource ResourceType
 crType = lens _crType (\ s a -> s{_crType = a})
 
@@ -121,28 +120,28 @@ instance ToQuery CreateResource where
         toQuery = const mempty
 
 -- | /See:/ 'createResourceResponse' smart constructor.
-data CreateResourceResponse = CreateResourceResponse'
-  { _crrsResourceId     :: !(Maybe Text)
-  , _crrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateResourceResponse = CreateResourceResponse'{_crrsResourceId
+                                                      :: !(Maybe Text),
+                                                      _crrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateResourceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'crrsResourceId' - The identifier of the created resource.
+-- * 'crrsResourceId' - The identifier of the new resource.
 --
 -- * 'crrsResponseStatus' - -- | The response status code.
 createResourceResponse
     :: Int -- ^ 'crrsResponseStatus'
     -> CreateResourceResponse
-createResourceResponse pResponseStatus_ =
-  CreateResourceResponse'
-    {_crrsResourceId = Nothing, _crrsResponseStatus = pResponseStatus_}
+createResourceResponse pResponseStatus_
+  = CreateResourceResponse'{_crrsResourceId = Nothing,
+                            _crrsResponseStatus = pResponseStatus_}
 
-
--- | The identifier of the created resource.
+-- | The identifier of the new resource.
 crrsResourceId :: Lens' CreateResourceResponse (Maybe Text)
 crrsResourceId = lens _crrsResourceId (\ s a -> s{_crrsResourceId = a})
 

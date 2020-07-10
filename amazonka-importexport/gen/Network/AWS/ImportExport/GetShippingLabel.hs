@@ -55,21 +55,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getShippingLabel' smart constructor.
-data GetShippingLabel = GetShippingLabel'
-  { _gslStreet3         :: !(Maybe Text)
-  , _gslAPIVersion      :: !(Maybe Text)
-  , _gslCountry         :: !(Maybe Text)
-  , _gslStateOrProvince :: !(Maybe Text)
-  , _gslPostalCode      :: !(Maybe Text)
-  , _gslStreet2         :: !(Maybe Text)
-  , _gslName            :: !(Maybe Text)
-  , _gslCompany         :: !(Maybe Text)
-  , _gslPhoneNumber     :: !(Maybe Text)
-  , _gslCity            :: !(Maybe Text)
-  , _gslStreet1         :: !(Maybe Text)
-  , _gslJobIds          :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetShippingLabel = GetShippingLabel'{_gslStreet3
+                                          :: !(Maybe Text),
+                                          _gslAPIVersion :: !(Maybe Text),
+                                          _gslCountry :: !(Maybe Text),
+                                          _gslStateOrProvince :: !(Maybe Text),
+                                          _gslPostalCode :: !(Maybe Text),
+                                          _gslStreet2 :: !(Maybe Text),
+                                          _gslName :: !(Maybe Text),
+                                          _gslCompany :: !(Maybe Text),
+                                          _gslPhoneNumber :: !(Maybe Text),
+                                          _gslCity :: !(Maybe Text),
+                                          _gslStreet1 :: !(Maybe Text),
+                                          _gslJobIds :: ![Text]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetShippingLabel' with the minimum fields required to make a request.
 --
@@ -100,22 +99,14 @@ data GetShippingLabel = GetShippingLabel'
 -- * 'gslJobIds' - Undocumented member.
 getShippingLabel
     :: GetShippingLabel
-getShippingLabel =
-  GetShippingLabel'
-    { _gslStreet3 = Nothing
-    , _gslAPIVersion = Nothing
-    , _gslCountry = Nothing
-    , _gslStateOrProvince = Nothing
-    , _gslPostalCode = Nothing
-    , _gslStreet2 = Nothing
-    , _gslName = Nothing
-    , _gslCompany = Nothing
-    , _gslPhoneNumber = Nothing
-    , _gslCity = Nothing
-    , _gslStreet1 = Nothing
-    , _gslJobIds = mempty
-    }
-
+getShippingLabel
+  = GetShippingLabel'{_gslStreet3 = Nothing,
+                      _gslAPIVersion = Nothing, _gslCountry = Nothing,
+                      _gslStateOrProvince = Nothing,
+                      _gslPostalCode = Nothing, _gslStreet2 = Nothing,
+                      _gslName = Nothing, _gslCompany = Nothing,
+                      _gslPhoneNumber = Nothing, _gslCity = Nothing,
+                      _gslStreet1 = Nothing, _gslJobIds = mempty}
 
 -- | Undocumented member.
 gslStreet3 :: Lens' GetShippingLabel (Maybe Text)
@@ -203,12 +194,14 @@ instance ToQuery GetShippingLabel where
                "jobIds" =: toQueryList "member" _gslJobIds]
 
 -- | /See:/ 'getShippingLabelResponse' smart constructor.
-data GetShippingLabelResponse = GetShippingLabelResponse'
-  { _gslrsShippingLabelURL :: !(Maybe Text)
-  , _gslrsWarning          :: !(Maybe Text)
-  , _gslrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetShippingLabelResponse = GetShippingLabelResponse'{_gslrsShippingLabelURL
+                                                          :: !(Maybe Text),
+                                                          _gslrsWarning ::
+                                                          !(Maybe Text),
+                                                          _gslrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetShippingLabelResponse' with the minimum fields required to make a request.
 --
@@ -222,13 +215,11 @@ data GetShippingLabelResponse = GetShippingLabelResponse'
 getShippingLabelResponse
     :: Int -- ^ 'gslrsResponseStatus'
     -> GetShippingLabelResponse
-getShippingLabelResponse pResponseStatus_ =
-  GetShippingLabelResponse'
-    { _gslrsShippingLabelURL = Nothing
-    , _gslrsWarning = Nothing
-    , _gslrsResponseStatus = pResponseStatus_
-    }
-
+getShippingLabelResponse pResponseStatus_
+  = GetShippingLabelResponse'{_gslrsShippingLabelURL =
+                                Nothing,
+                              _gslrsWarning = Nothing,
+                              _gslrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 gslrsShippingLabelURL :: Lens' GetShippingLabelResponse (Maybe Text)

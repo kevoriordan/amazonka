@@ -47,16 +47,11 @@ import Network.AWS.Response
 import Network.AWS.Support.Types
 import Network.AWS.Support.Types.Product
 
--- |
---
---
---
--- /See:/ 'describeServices' smart constructor.
-data DescribeServices = DescribeServices'
-  { _dsServiceCodeList :: !(Maybe [Text])
-  , _dsLanguage        :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeServices' smart constructor.
+data DescribeServices = DescribeServices'{_dsServiceCodeList
+                                          :: !(Maybe [Text]),
+                                          _dsLanguage :: !(Maybe Text)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeServices' with the minimum fields required to make a request.
 --
@@ -67,9 +62,9 @@ data DescribeServices = DescribeServices'
 -- * 'dsLanguage' - The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
 describeServices
     :: DescribeServices
-describeServices =
-  DescribeServices' {_dsServiceCodeList = Nothing, _dsLanguage = Nothing}
-
+describeServices
+  = DescribeServices'{_dsServiceCodeList = Nothing,
+                      _dsLanguage = Nothing}
 
 -- | A JSON-formatted list of service codes available for AWS services.
 dsServiceCodeList :: Lens' DescribeServices [Text]
@@ -121,11 +116,14 @@ instance ToQuery DescribeServices where
 --
 --
 -- /See:/ 'describeServicesResponse' smart constructor.
-data DescribeServicesResponse = DescribeServicesResponse'
-  { _dsrsServices       :: !(Maybe [SupportService])
-  , _dsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeServicesResponse = DescribeServicesResponse'{_dsrsServices
+                                                          ::
+                                                          !(Maybe
+                                                              [SupportService]),
+                                                          _dsrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeServicesResponse' with the minimum fields required to make a request.
 --
@@ -137,10 +135,9 @@ data DescribeServicesResponse = DescribeServicesResponse'
 describeServicesResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DescribeServicesResponse
-describeServicesResponse pResponseStatus_ =
-  DescribeServicesResponse'
-    {_dsrsServices = Nothing, _dsrsResponseStatus = pResponseStatus_}
-
+describeServicesResponse pResponseStatus_
+  = DescribeServicesResponse'{_dsrsServices = Nothing,
+                              _dsrsResponseStatus = pResponseStatus_}
 
 -- | A JSON-formatted list of AWS services.
 dsrsServices :: Lens' DescribeServicesResponse [SupportService]

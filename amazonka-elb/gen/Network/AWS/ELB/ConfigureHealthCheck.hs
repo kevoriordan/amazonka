@@ -21,7 +21,7 @@
 -- Specifies the health check settings to use when evaluating the health state of your EC2 instances.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html Configure Health Checks for Your Load Balancer> in the /Classic Load Balancer Guide/ .
+-- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html Configure Health Checks for Your Load Balancer> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.ConfigureHealthCheck
     (
@@ -52,11 +52,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'configureHealthCheck' smart constructor.
-data ConfigureHealthCheck = ConfigureHealthCheck'
-  { _chcLoadBalancerName :: !Text
-  , _chcHealthCheck      :: !HealthCheck
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ConfigureHealthCheck = ConfigureHealthCheck'{_chcLoadBalancerName
+                                                  :: !Text,
+                                                  _chcHealthCheck ::
+                                                  !HealthCheck}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ConfigureHealthCheck' with the minimum fields required to make a request.
 --
@@ -69,10 +69,10 @@ configureHealthCheck
     :: Text -- ^ 'chcLoadBalancerName'
     -> HealthCheck -- ^ 'chcHealthCheck'
     -> ConfigureHealthCheck
-configureHealthCheck pLoadBalancerName_ pHealthCheck_ =
-  ConfigureHealthCheck'
-    {_chcLoadBalancerName = pLoadBalancerName_, _chcHealthCheck = pHealthCheck_}
-
+configureHealthCheck pLoadBalancerName_ pHealthCheck_
+  = ConfigureHealthCheck'{_chcLoadBalancerName =
+                            pLoadBalancerName_,
+                          _chcHealthCheck = pHealthCheck_}
 
 -- | The name of the load balancer.
 chcLoadBalancerName :: Lens' ConfigureHealthCheck Text
@@ -115,11 +115,14 @@ instance ToQuery ConfigureHealthCheck where
 --
 --
 -- /See:/ 'configureHealthCheckResponse' smart constructor.
-data ConfigureHealthCheckResponse = ConfigureHealthCheckResponse'
-  { _chcrsHealthCheck    :: !(Maybe HealthCheck)
-  , _chcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ConfigureHealthCheckResponse = ConfigureHealthCheckResponse'{_chcrsHealthCheck
+                                                                  ::
+                                                                  !(Maybe
+                                                                      HealthCheck),
+                                                                  _chcrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ConfigureHealthCheckResponse' with the minimum fields required to make a request.
 --
@@ -131,10 +134,10 @@ data ConfigureHealthCheckResponse = ConfigureHealthCheckResponse'
 configureHealthCheckResponse
     :: Int -- ^ 'chcrsResponseStatus'
     -> ConfigureHealthCheckResponse
-configureHealthCheckResponse pResponseStatus_ =
-  ConfigureHealthCheckResponse'
-    {_chcrsHealthCheck = Nothing, _chcrsResponseStatus = pResponseStatus_}
-
+configureHealthCheckResponse pResponseStatus_
+  = ConfigureHealthCheckResponse'{_chcrsHealthCheck =
+                                    Nothing,
+                                  _chcrsResponseStatus = pResponseStatus_}
 
 -- | The updated health check.
 chcrsHealthCheck :: Lens' ConfigureHealthCheckResponse (Maybe HealthCheck)

@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -16,10 +16,10 @@ module Network.AWS.DirectConnect.Types
       directConnect
 
     -- * Errors
+    , _DirectConnectServerException
+    , _TooManyTagsException
     , _DirectConnectClientException
     , _DuplicateTagKeysException
-    , _TooManyTagsException
-    , _DirectConnectServerException
 
     -- * AddressFamily
     , AddressFamily (..)
@@ -33,14 +33,26 @@ module Network.AWS.DirectConnect.Types
     -- * ConnectionState
     , ConnectionState (..)
 
+    -- * DirectConnectGatewayAssociationProposalState
+    , DirectConnectGatewayAssociationProposalState (..)
+
     -- * DirectConnectGatewayAssociationState
     , DirectConnectGatewayAssociationState (..)
 
     -- * DirectConnectGatewayAttachmentState
     , DirectConnectGatewayAttachmentState (..)
 
+    -- * DirectConnectGatewayAttachmentType
+    , DirectConnectGatewayAttachmentType (..)
+
     -- * DirectConnectGatewayState
     , DirectConnectGatewayState (..)
+
+    -- * GatewayType
+    , GatewayType (..)
+
+    -- * HasLogicalRedundancy
+    , HasLogicalRedundancy (..)
 
     -- * InterconnectState
     , InterconnectState (..)
@@ -54,6 +66,14 @@ module Network.AWS.DirectConnect.Types
     -- * VirtualInterfaceState
     , VirtualInterfaceState (..)
 
+    -- * AssociatedGateway
+    , AssociatedGateway
+    , associatedGateway
+    , agId
+    , agOwnerAccount
+    , agRegion
+    , agType
+
     -- * BGPPeer
     , BGPPeer
     , bgpPeer
@@ -63,7 +83,9 @@ module Network.AWS.DirectConnect.Types
     , bpBgpStatus
     , bpAsn
     , bpAuthKey
+    , bpBgpPeerId
     , bpBgpPeerState
+    , bpAwsDeviceV2
 
     -- * Connection
     , Connection
@@ -72,14 +94,19 @@ module Network.AWS.DirectConnect.Types
     , cVlan
     , cLocation
     , cAwsDevice
+    , cHasLogicalRedundancy
     , cConnectionId
     , cLoaIssueTime
     , cPartnerName
     , cConnectionName
     , cBandwidth
+    , cJumboFrameCapable
     , cOwnerAccount
     , cRegion
+    , cProviderName
+    , cAwsDeviceV2
     , cConnectionState
+    , cTags
 
     -- * Connections
     , Connections
@@ -100,11 +127,26 @@ module Network.AWS.DirectConnect.Types
     , DirectConnectGatewayAssociation
     , directConnectGatewayAssociation
     , dcgaVirtualGatewayId
+    , dcgaAssociationId
     , dcgaDirectConnectGatewayId
     , dcgaVirtualGatewayOwnerAccount
     , dcgaStateChangeError
     , dcgaVirtualGatewayRegion
+    , dcgaAssociatedGateway
+    , dcgaDirectConnectGatewayOwnerAccount
+    , dcgaAllowedPrefixesToDirectConnectGateway
     , dcgaAssociationState
+
+    -- * DirectConnectGatewayAssociationProposal
+    , DirectConnectGatewayAssociationProposal
+    , directConnectGatewayAssociationProposal
+    , dcgapExistingAllowedPrefixesToDirectConnectGateway
+    , dcgapDirectConnectGatewayId
+    , dcgapProposalId
+    , dcgapAssociatedGateway
+    , dcgapProposalState
+    , dcgapDirectConnectGatewayOwnerAccount
+    , dcgapRequestedAllowedPrefixesToDirectConnectGateway
 
     -- * DirectConnectGatewayAttachment
     , DirectConnectGatewayAttachment
@@ -115,6 +157,7 @@ module Network.AWS.DirectConnect.Types
     , dVirtualInterfaceRegion
     , dVirtualInterfaceOwnerAccount
     , dVirtualInterfaceId
+    , dAttachmentType
 
     -- * Interconnect
     , Interconnect
@@ -124,10 +167,15 @@ module Network.AWS.DirectConnect.Types
     , iLocation
     , iInterconnectName
     , iAwsDevice
+    , iHasLogicalRedundancy
     , iLoaIssueTime
     , iBandwidth
+    , iJumboFrameCapable
     , iInterconnectState
     , iRegion
+    , iProviderName
+    , iAwsDeviceV2
+    , iTags
 
     -- * Lag
     , Lag
@@ -139,17 +187,25 @@ module Network.AWS.DirectConnect.Types
     , lagLocation
     , lagConnections
     , lagAwsDevice
+    , lagHasLogicalRedundancy
     , lagAllowsHostedConnections
     , lagNumberOfConnections
+    , lagJumboFrameCapable
     , lagLagState
     , lagOwnerAccount
     , lagRegion
+    , lagProviderName
+    , lagAwsDeviceV2
+    , lagTags
 
     -- * Location
     , Location
     , location
+    , lAvailablePortSpeeds
     , lLocationName
     , lLocationCode
+    , lRegion
+    , lAvailableProviders
 
     -- * NewBGPPeer
     , NewBGPPeer
@@ -164,11 +220,13 @@ module Network.AWS.DirectConnect.Types
     , NewPrivateVirtualInterface
     , newPrivateVirtualInterface
     , nVirtualGatewayId
+    , nMtu
     , nCustomerAddress
     , nAmazonAddress
     , nAddressFamily
     , nDirectConnectGatewayId
     , nAuthKey
+    , nTags
     , nVirtualInterfaceName
     , nVlan
     , nAsn
@@ -176,10 +234,12 @@ module Network.AWS.DirectConnect.Types
     -- * NewPrivateVirtualInterfaceAllocation
     , NewPrivateVirtualInterfaceAllocation
     , newPrivateVirtualInterfaceAllocation
+    , npviaMtu
     , npviaCustomerAddress
     , npviaAmazonAddress
     , npviaAddressFamily
     , npviaAuthKey
+    , npviaTags
     , npviaVirtualInterfaceName
     , npviaVlan
     , npviaAsn
@@ -192,6 +252,7 @@ module Network.AWS.DirectConnect.Types
     , npviAmazonAddress
     , npviAddressFamily
     , npviAuthKey
+    , npviTags
     , npviVirtualInterfaceName
     , npviVlan
     , npviAsn
@@ -204,9 +265,37 @@ module Network.AWS.DirectConnect.Types
     , newAmazonAddress
     , newAddressFamily
     , newAuthKey
+    , newTags
     , newVirtualInterfaceName
     , newVlan
     , newAsn
+
+    -- * NewTransitVirtualInterface
+    , NewTransitVirtualInterface
+    , newTransitVirtualInterface
+    , ntviMtu
+    , ntviCustomerAddress
+    , ntviVlan
+    , ntviAmazonAddress
+    , ntviAddressFamily
+    , ntviDirectConnectGatewayId
+    , ntviAsn
+    , ntviAuthKey
+    , ntviVirtualInterfaceName
+    , ntviTags
+
+    -- * NewTransitVirtualInterfaceAllocation
+    , NewTransitVirtualInterfaceAllocation
+    , newTransitVirtualInterfaceAllocation
+    , ntviaMtu
+    , ntviaCustomerAddress
+    , ntviaVlan
+    , ntviaAmazonAddress
+    , ntviaAddressFamily
+    , ntviaAsn
+    , ntviaAuthKey
+    , ntviaVirtualInterfaceName
+    , ntviaTags
 
     -- * ResourceTag
     , ResourceTag
@@ -236,6 +325,7 @@ module Network.AWS.DirectConnect.Types
     , virtualInterface
     , viBgpPeers
     , viVirtualGatewayId
+    , viMtu
     , viRouteFilterPrefixes
     , viCustomerAddress
     , viVlan
@@ -249,84 +339,125 @@ module Network.AWS.DirectConnect.Types
     , viVirtualInterfaceType
     , viAsn
     , viAuthKey
+    , viJumboFrameCapable
     , viCustomerRouterConfig
     , viOwnerAccount
+    , viRegion
     , viVirtualInterfaceName
+    , viAwsDeviceV2
     , viVirtualInterfaceId
+    , viTags
     ) where
 
-import Network.AWS.DirectConnect.Types.Product
-import Network.AWS.DirectConnect.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
+import Network.AWS.DirectConnect.Types.AddressFamily
+import Network.AWS.DirectConnect.Types.BGPPeerState
+import Network.AWS.DirectConnect.Types.BGPStatus
+import Network.AWS.DirectConnect.Types.ConnectionState
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayAssociationProposalState
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayAssociationState
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayAttachmentState
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayAttachmentType
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayState
+import Network.AWS.DirectConnect.Types.GatewayType
+import Network.AWS.DirectConnect.Types.HasLogicalRedundancy
+import Network.AWS.DirectConnect.Types.InterconnectState
+import Network.AWS.DirectConnect.Types.LagState
+import Network.AWS.DirectConnect.Types.LoaContentType
+import Network.AWS.DirectConnect.Types.VirtualInterfaceState
+import Network.AWS.DirectConnect.Types.AssociatedGateway
+import Network.AWS.DirectConnect.Types.BGPPeer
+import Network.AWS.DirectConnect.Types.Connection
+import Network.AWS.DirectConnect.Types.Connections
+import Network.AWS.DirectConnect.Types.DirectConnectGateway
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayAssociation
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayAssociationProposal
+import Network.AWS.DirectConnect.Types.DirectConnectGatewayAttachment
+import Network.AWS.DirectConnect.Types.Interconnect
+import Network.AWS.DirectConnect.Types.Lag
+import Network.AWS.DirectConnect.Types.Location
+import Network.AWS.DirectConnect.Types.NewBGPPeer
+import Network.AWS.DirectConnect.Types.NewPrivateVirtualInterface
+import Network.AWS.DirectConnect.Types.NewPrivateVirtualInterfaceAllocation
+import Network.AWS.DirectConnect.Types.NewPublicVirtualInterface
+import Network.AWS.DirectConnect.Types.NewPublicVirtualInterfaceAllocation
+import Network.AWS.DirectConnect.Types.NewTransitVirtualInterface
+import Network.AWS.DirectConnect.Types.NewTransitVirtualInterfaceAllocation
+import Network.AWS.DirectConnect.Types.ResourceTag
+import Network.AWS.DirectConnect.Types.RouteFilterPrefix
+import Network.AWS.DirectConnect.Types.Tag
+import Network.AWS.DirectConnect.Types.VirtualGateway
+import Network.AWS.DirectConnect.Types.VirtualInterface
 
 -- | API version @2012-10-25@ of the Amazon Direct Connect SDK configuration.
 directConnect :: Service
-directConnect =
-  Service
-    { _svcAbbrev = "DirectConnect"
-    , _svcSigner = v4
-    , _svcPrefix = "directconnect"
-    , _svcVersion = "2012-10-25"
-    , _svcEndpoint = defaultEndpoint directConnect
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "DirectConnect"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
+directConnect
+  = Service{_svcAbbrev = "DirectConnect",
+            _svcSigner = v4, _svcPrefix = "directconnect",
+            _svcVersion = "2012-10-25",
+            _svcEndpoint = defaultEndpoint directConnect,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "DirectConnect",
+            _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
+-- | A server-side error occurred.
+--
+--
+_DirectConnectServerException :: AsError a => Getting (First ServiceError) a ServiceError
+_DirectConnectServerException
+  = _MatchServiceError directConnect
+      "DirectConnectServerException"
 
--- | The API was called with invalid parameters. The error message will contain additional details about the cause.
+-- | You have reached the limit on the number of tags that can be assigned.
+--
+--
+_TooManyTagsException :: AsError a => Getting (First ServiceError) a ServiceError
+_TooManyTagsException
+  = _MatchServiceError directConnect
+      "TooManyTagsException"
+
+-- | One or more parameters are not valid.
 --
 --
 _DirectConnectClientException :: AsError a => Getting (First ServiceError) a ServiceError
-_DirectConnectClientException =
-  _MatchServiceError directConnect "DirectConnectClientException"
-
+_DirectConnectClientException
+  = _MatchServiceError directConnect
+      "DirectConnectClientException"
 
 -- | A tag key was specified more than once.
 --
 --
 _DuplicateTagKeysException :: AsError a => Getting (First ServiceError) a ServiceError
-_DuplicateTagKeysException =
-  _MatchServiceError directConnect "DuplicateTagKeysException"
-
-
--- | You have reached the limit on the number of tags that can be assigned to a Direct Connect resource.
---
---
-_TooManyTagsException :: AsError a => Getting (First ServiceError) a ServiceError
-_TooManyTagsException = _MatchServiceError directConnect "TooManyTagsException"
-
-
--- | A server-side error occurred during the API call. The error message will contain additional details about the cause.
---
---
-_DirectConnectServerException :: AsError a => Getting (First ServiceError) a ServiceError
-_DirectConnectServerException =
-  _MatchServiceError directConnect "DirectConnectServerException"
-
+_DuplicateTagKeysException
+  = _MatchServiceError directConnect
+      "DuplicateTagKeysException"

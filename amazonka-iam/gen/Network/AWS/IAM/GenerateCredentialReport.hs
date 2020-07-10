@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates a credential report for the AWS account. For more information about the credential report, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html Getting Credential Reports> in the /IAM User Guide/ .
+-- Generates a credential report for the AWS account. For more information about the credential report, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html Getting Credential Reports> in the /IAM User Guide/ .
 --
 --
 module Network.AWS.IAM.GenerateCredentialReport
@@ -44,17 +44,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'generateCredentialReport' smart constructor.
-data GenerateCredentialReport =
-  GenerateCredentialReport'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GenerateCredentialReport = GenerateCredentialReport'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GenerateCredentialReport' with the minimum fields required to make a request.
 --
 generateCredentialReport
     :: GenerateCredentialReport
 generateCredentialReport = GenerateCredentialReport'
-
 
 instance AWSRequest GenerateCredentialReport where
         type Rs GenerateCredentialReport =
@@ -85,17 +83,24 @@ instance ToQuery GenerateCredentialReport where
                     ("GenerateCredentialReport" :: ByteString),
                   "Version" =: ("2010-05-08" :: ByteString)])
 
--- | Contains the response to a successful 'GenerateCredentialReport' request.
+-- | Contains the response to a successful 'GenerateCredentialReport' request. 
 --
 --
 --
 -- /See:/ 'generateCredentialReportResponse' smart constructor.
-data GenerateCredentialReportResponse = GenerateCredentialReportResponse'
-  { _gcrrsState          :: !(Maybe ReportStateType)
-  , _gcrrsDescription    :: !(Maybe Text)
-  , _gcrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GenerateCredentialReportResponse = GenerateCredentialReportResponse'{_gcrrsState
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ReportStateType),
+                                                                          _gcrrsDescription
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _gcrrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'GenerateCredentialReportResponse' with the minimum fields required to make a request.
 --
@@ -109,13 +114,11 @@ data GenerateCredentialReportResponse = GenerateCredentialReportResponse'
 generateCredentialReportResponse
     :: Int -- ^ 'gcrrsResponseStatus'
     -> GenerateCredentialReportResponse
-generateCredentialReportResponse pResponseStatus_ =
-  GenerateCredentialReportResponse'
-    { _gcrrsState = Nothing
-    , _gcrrsDescription = Nothing
-    , _gcrrsResponseStatus = pResponseStatus_
-    }
-
+generateCredentialReportResponse pResponseStatus_
+  = GenerateCredentialReportResponse'{_gcrrsState =
+                                        Nothing,
+                                      _gcrrsDescription = Nothing,
+                                      _gcrrsResponseStatus = pResponseStatus_}
 
 -- | Information about the state of the credential report.
 gcrrsState :: Lens' GenerateCredentialReportResponse (Maybe ReportStateType)

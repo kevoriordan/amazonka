@@ -46,23 +46,83 @@ library
     exposed-modules:
           Network.AWS.XRay
         , Network.AWS.XRay.BatchGetTraces
+        , Network.AWS.XRay.CreateGroup
+        , Network.AWS.XRay.CreateSamplingRule
+        , Network.AWS.XRay.DeleteGroup
+        , Network.AWS.XRay.DeleteSamplingRule
         , Network.AWS.XRay.GetEncryptionConfig
+        , Network.AWS.XRay.GetGroup
+        , Network.AWS.XRay.GetGroups
+        , Network.AWS.XRay.GetSamplingRules
+        , Network.AWS.XRay.GetSamplingStatisticSummaries
+        , Network.AWS.XRay.GetSamplingTargets
         , Network.AWS.XRay.GetServiceGraph
+        , Network.AWS.XRay.GetTimeSeriesServiceStatistics
         , Network.AWS.XRay.GetTraceGraph
         , Network.AWS.XRay.GetTraceSummaries
         , Network.AWS.XRay.PutEncryptionConfig
         , Network.AWS.XRay.PutTelemetryRecords
         , Network.AWS.XRay.PutTraceSegments
         , Network.AWS.XRay.Types
+        , Network.AWS.XRay.UpdateGroup
+        , Network.AWS.XRay.UpdateSamplingRule
         , Network.AWS.XRay.Waiters
 
     other-modules:
-          Network.AWS.XRay.Types.Product
-        , Network.AWS.XRay.Types.Sum
+          Network.AWS.XRay.Types.Alias
+        , Network.AWS.XRay.Types.AnnotationValue
+        , Network.AWS.XRay.Types.AvailabilityZoneDetail
+        , Network.AWS.XRay.Types.BackendConnectionErrors
+        , Network.AWS.XRay.Types.Edge
+        , Network.AWS.XRay.Types.EdgeStatistics
+        , Network.AWS.XRay.Types.EncryptionConfig
+        , Network.AWS.XRay.Types.EncryptionStatus
+        , Network.AWS.XRay.Types.EncryptionType
+        , Network.AWS.XRay.Types.ErrorRootCause
+        , Network.AWS.XRay.Types.ErrorRootCauseEntity
+        , Network.AWS.XRay.Types.ErrorRootCauseService
+        , Network.AWS.XRay.Types.ErrorStatistics
+        , Network.AWS.XRay.Types.FaultRootCause
+        , Network.AWS.XRay.Types.FaultRootCauseEntity
+        , Network.AWS.XRay.Types.FaultRootCauseService
+        , Network.AWS.XRay.Types.FaultStatistics
+        , Network.AWS.XRay.Types.Group
+        , Network.AWS.XRay.Types.GroupSummary
+        , Network.AWS.XRay.Types.HTTP
+        , Network.AWS.XRay.Types.HistogramEntry
+        , Network.AWS.XRay.Types.InstanceIdDetail
+        , Network.AWS.XRay.Types.Product
+        , Network.AWS.XRay.Types.ResourceARNDetail
+        , Network.AWS.XRay.Types.ResponseTimeRootCause
+        , Network.AWS.XRay.Types.ResponseTimeRootCauseEntity
+        , Network.AWS.XRay.Types.ResponseTimeRootCauseService
+        , Network.AWS.XRay.Types.RootCauseException
+        , Network.AWS.XRay.Types.SamplingRule
+        , Network.AWS.XRay.Types.SamplingRuleRecord
+        , Network.AWS.XRay.Types.SamplingRuleUpdate
+        , Network.AWS.XRay.Types.SamplingStatisticSummary
+        , Network.AWS.XRay.Types.SamplingStatisticsDocument
+        , Network.AWS.XRay.Types.SamplingStrategy
+        , Network.AWS.XRay.Types.SamplingStrategyName
+        , Network.AWS.XRay.Types.SamplingTargetDocument
+        , Network.AWS.XRay.Types.Segment
+        , Network.AWS.XRay.Types.ServiceId
+        , Network.AWS.XRay.Types.ServiceInfo
+        , Network.AWS.XRay.Types.ServiceStatistics
+        , Network.AWS.XRay.Types.TelemetryRecord
+        , Network.AWS.XRay.Types.TimeRangeType
+        , Network.AWS.XRay.Types.TimeSeriesServiceStatistics
+        , Network.AWS.XRay.Types.Trace
+        , Network.AWS.XRay.Types.TraceSummary
+        , Network.AWS.XRay.Types.TraceUser
+        , Network.AWS.XRay.Types.UnprocessedStatistics
+        , Network.AWS.XRay.Types.UnprocessedTraceSegment
+        , Network.AWS.XRay.Types.ValueWithServiceIds
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-xray-test
     type:              exitcode-stdio-1.0
@@ -86,6 +146,7 @@ test-suite amazonka-xray-test
         , amazonka-xray
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

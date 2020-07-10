@@ -50,10 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteConfigurationRecorder' smart constructor.
-newtype DeleteConfigurationRecorder = DeleteConfigurationRecorder'
-  { _dcrConfigurationRecorderName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConfigurationRecorder = DeleteConfigurationRecorder'{_dcrConfigurationRecorderName
+                                                                   :: Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteConfigurationRecorder' with the minimum fields required to make a request.
 --
@@ -63,10 +63,10 @@ newtype DeleteConfigurationRecorder = DeleteConfigurationRecorder'
 deleteConfigurationRecorder
     :: Text -- ^ 'dcrConfigurationRecorderName'
     -> DeleteConfigurationRecorder
-deleteConfigurationRecorder pConfigurationRecorderName_ =
-  DeleteConfigurationRecorder'
-    {_dcrConfigurationRecorderName = pConfigurationRecorderName_}
-
+deleteConfigurationRecorder
+  pConfigurationRecorderName_
+  = DeleteConfigurationRecorder'{_dcrConfigurationRecorderName
+                                   = pConfigurationRecorderName_}
 
 -- | The name of the configuration recorder to be deleted. You can retrieve the name of your configuration recorder by using the @DescribeConfigurationRecorders@ action.
 dcrConfigurationRecorderName :: Lens' DeleteConfigurationRecorder Text
@@ -108,17 +108,16 @@ instance ToQuery DeleteConfigurationRecorder where
         toQuery = const mempty
 
 -- | /See:/ 'deleteConfigurationRecorderResponse' smart constructor.
-data DeleteConfigurationRecorderResponse =
-  DeleteConfigurationRecorderResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConfigurationRecorderResponse = DeleteConfigurationRecorderResponse'
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteConfigurationRecorderResponse' with the minimum fields required to make a request.
 --
 deleteConfigurationRecorderResponse
     :: DeleteConfigurationRecorderResponse
-deleteConfigurationRecorderResponse = DeleteConfigurationRecorderResponse'
-
+deleteConfigurationRecorderResponse
+  = DeleteConfigurationRecorderResponse'
 
 instance NFData DeleteConfigurationRecorderResponse
          where

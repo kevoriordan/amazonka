@@ -43,27 +43,26 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteFolder' smart constructor.
-data DeleteFolder = DeleteFolder'
-  { _dfAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _dfFolderId            :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteFolder = DeleteFolder'{_dfAuthenticationToken
+                                  :: !(Maybe (Sensitive Text)),
+                                  _dfFolderId :: !Text}
+                      deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFolder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dfAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'dfAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'dfFolderId' - The ID of the folder.
 deleteFolder
     :: Text -- ^ 'dfFolderId'
     -> DeleteFolder
-deleteFolder pFolderId_ =
-  DeleteFolder' {_dfAuthenticationToken = Nothing, _dfFolderId = pFolderId_}
+deleteFolder pFolderId_
+  = DeleteFolder'{_dfAuthenticationToken = Nothing,
+                  _dfFolderId = pFolderId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 dfAuthenticationToken :: Lens' DeleteFolder (Maybe Text)
 dfAuthenticationToken = lens _dfAuthenticationToken (\ s a -> s{_dfAuthenticationToken = a}) . mapping _Sensitive
 
@@ -95,16 +94,13 @@ instance ToQuery DeleteFolder where
         toQuery = const mempty
 
 -- | /See:/ 'deleteFolderResponse' smart constructor.
-data DeleteFolderResponse =
-  DeleteFolderResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteFolderResponse = DeleteFolderResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteFolderResponse' with the minimum fields required to make a request.
 --
 deleteFolderResponse
     :: DeleteFolderResponse
 deleteFolderResponse = DeleteFolderResponse'
-
 
 instance NFData DeleteFolderResponse where

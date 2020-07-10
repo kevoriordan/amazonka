@@ -54,12 +54,16 @@ library
         , Network.AWS.MediaStoreData.Waiters
 
     other-modules:
-          Network.AWS.MediaStoreData.Types.Product
-        , Network.AWS.MediaStoreData.Types.Sum
+          Network.AWS.MediaStoreData.Types.Item
+        , Network.AWS.MediaStoreData.Types.ItemType
+        , Network.AWS.MediaStoreData.Types.Product
+        , Network.AWS.MediaStoreData.Types.StorageClass
+        , Network.AWS.MediaStoreData.Types.UploadAvailability
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-mediastore-dataplane-test
     type:              exitcode-stdio-1.0
@@ -83,6 +87,7 @@ test-suite amazonka-mediastore-dataplane-test
         , amazonka-mediastore-dataplane
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

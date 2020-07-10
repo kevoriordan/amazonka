@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about the domain, including when the domain was created, the number of items and attributes in the domain, and the size of the attribute names and values.
+-- Returns information about the domain, including when the domain was created, the number of items and attributes in the domain, and the size of the attribute names and values. 
 --
 --
 module Network.AWS.SDB.DomainMetadata
@@ -51,10 +51,9 @@ import Network.AWS.SDB.Types
 import Network.AWS.SDB.Types.Product
 
 -- | /See:/ 'domainMetadata' smart constructor.
-newtype DomainMetadata = DomainMetadata'
-  { _dmDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DomainMetadata = DomainMetadata'{_dmDomainName
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DomainMetadata' with the minimum fields required to make a request.
 --
@@ -64,8 +63,8 @@ newtype DomainMetadata = DomainMetadata'
 domainMetadata
     :: Text -- ^ 'dmDomainName'
     -> DomainMetadata
-domainMetadata pDomainName_ = DomainMetadata' {_dmDomainName = pDomainName_}
-
+domainMetadata pDomainName_
+  = DomainMetadata'{_dmDomainName = pDomainName_}
 
 -- | The name of the domain for which to display the metadata of.
 dmDomainName :: Lens' DomainMetadata Text
@@ -105,17 +104,24 @@ instance ToQuery DomainMetadata where
                "DomainName" =: _dmDomainName]
 
 -- | /See:/ 'domainMetadataResponse' smart constructor.
-data DomainMetadataResponse = DomainMetadataResponse'
-  { _dmrsItemNamesSizeBytes       :: !(Maybe Integer)
-  , _dmrsAttributeValuesSizeBytes :: !(Maybe Integer)
-  , _dmrsAttributeNameCount       :: !(Maybe Int)
-  , _dmrsAttributeNamesSizeBytes  :: !(Maybe Integer)
-  , _dmrsAttributeValueCount      :: !(Maybe Int)
-  , _dmrsItemCount                :: !(Maybe Int)
-  , _dmrsTimestamp                :: !(Maybe Int)
-  , _dmrsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DomainMetadataResponse = DomainMetadataResponse'{_dmrsItemNamesSizeBytes
+                                                      :: !(Maybe Integer),
+                                                      _dmrsAttributeValuesSizeBytes
+                                                      :: !(Maybe Integer),
+                                                      _dmrsAttributeNameCount ::
+                                                      !(Maybe Int),
+                                                      _dmrsAttributeNamesSizeBytes
+                                                      :: !(Maybe Integer),
+                                                      _dmrsAttributeValueCount
+                                                      :: !(Maybe Int),
+                                                      _dmrsItemCount ::
+                                                      !(Maybe Int),
+                                                      _dmrsTimestamp ::
+                                                      !(Maybe Int),
+                                                      _dmrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DomainMetadataResponse' with the minimum fields required to make a request.
 --
@@ -139,18 +145,15 @@ data DomainMetadataResponse = DomainMetadataResponse'
 domainMetadataResponse
     :: Int -- ^ 'dmrsResponseStatus'
     -> DomainMetadataResponse
-domainMetadataResponse pResponseStatus_ =
-  DomainMetadataResponse'
-    { _dmrsItemNamesSizeBytes = Nothing
-    , _dmrsAttributeValuesSizeBytes = Nothing
-    , _dmrsAttributeNameCount = Nothing
-    , _dmrsAttributeNamesSizeBytes = Nothing
-    , _dmrsAttributeValueCount = Nothing
-    , _dmrsItemCount = Nothing
-    , _dmrsTimestamp = Nothing
-    , _dmrsResponseStatus = pResponseStatus_
-    }
-
+domainMetadataResponse pResponseStatus_
+  = DomainMetadataResponse'{_dmrsItemNamesSizeBytes =
+                              Nothing,
+                            _dmrsAttributeValuesSizeBytes = Nothing,
+                            _dmrsAttributeNameCount = Nothing,
+                            _dmrsAttributeNamesSizeBytes = Nothing,
+                            _dmrsAttributeValueCount = Nothing,
+                            _dmrsItemCount = Nothing, _dmrsTimestamp = Nothing,
+                            _dmrsResponseStatus = pResponseStatus_}
 
 -- | The total size of all item names in the domain, in bytes.
 dmrsItemNamesSizeBytes :: Lens' DomainMetadataResponse (Maybe Integer)

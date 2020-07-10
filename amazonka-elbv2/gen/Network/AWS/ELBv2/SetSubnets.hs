@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables the Availability Zone for the specified public subnets for the specified Application Load Balancer. The specified subnets replace the previously enabled subnets.
+-- Enables the Availability Zones for the specified public subnets for the specified load balancer. The specified subnets replace the previously enabled subnets.
 --
 --
--- Note that you can't change the subnets for a Network Load Balancer.
+-- When you specify subnets for a Network Load Balancer, you must include all subnets that were enabled previously, with their existing configurations, plus any additional subnets.
 --
 module Network.AWS.ELBv2.SetSubnets
     (
@@ -30,8 +30,8 @@ module Network.AWS.ELBv2.SetSubnets
     , SetSubnets
     -- * Request Lenses
     , ssSubnetMappings
-    , ssLoadBalancerARN
     , ssSubnets
+    , ssLoadBalancerARN
 
     -- * Destructuring the Response
     , setSubnetsResponse
@@ -49,44 +49,40 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setSubnets' smart constructor.
-data SetSubnets = SetSubnets'
-  { _ssSubnetMappings  :: !(Maybe [SubnetMapping])
-  , _ssLoadBalancerARN :: !Text
-  , _ssSubnets         :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetSubnets = SetSubnets'{_ssSubnetMappings ::
+                              !(Maybe [SubnetMapping]),
+                              _ssSubnets :: !(Maybe [Text]),
+                              _ssLoadBalancerARN :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetSubnets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssSubnetMappings' - The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. You cannot specify Elastic IP addresses for your subnets.
---
--- * 'ssLoadBalancerARN' - The Amazon Resource Name (ARN) of the load balancer.
+-- * 'ssSubnetMappings' - The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets. [Network Load Balancers] You can specify subnets from one or more Availability Zones. If you need static IP addresses for your internet-facing load balancer, you can specify one Elastic IP address per subnet. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.
 --
 -- * 'ssSubnets' - The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
+--
+-- * 'ssLoadBalancerARN' - The Amazon Resource Name (ARN) of the load balancer.
 setSubnets
     :: Text -- ^ 'ssLoadBalancerARN'
     -> SetSubnets
-setSubnets pLoadBalancerARN_ =
-  SetSubnets'
-    { _ssSubnetMappings = Nothing
-    , _ssLoadBalancerARN = pLoadBalancerARN_
-    , _ssSubnets = mempty
-    }
+setSubnets pLoadBalancerARN_
+  = SetSubnets'{_ssSubnetMappings = Nothing,
+                _ssSubnets = Nothing,
+                _ssLoadBalancerARN = pLoadBalancerARN_}
 
-
--- | The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. You cannot specify Elastic IP addresses for your subnets.
+-- | The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings. [Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets. [Network Load Balancers] You can specify subnets from one or more Availability Zones. If you need static IP addresses for your internet-facing load balancer, you can specify one Elastic IP address per subnet. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.
 ssSubnetMappings :: Lens' SetSubnets [SubnetMapping]
 ssSubnetMappings = lens _ssSubnetMappings (\ s a -> s{_ssSubnetMappings = a}) . _Default . _Coerce
+
+-- | The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
+ssSubnets :: Lens' SetSubnets [Text]
+ssSubnets = lens _ssSubnets (\ s a -> s{_ssSubnets = a}) . _Default . _Coerce
 
 -- | The Amazon Resource Name (ARN) of the load balancer.
 ssLoadBalancerARN :: Lens' SetSubnets Text
 ssLoadBalancerARN = lens _ssLoadBalancerARN (\ s a -> s{_ssLoadBalancerARN = a})
-
--- | The IDs of the public subnets. You must specify subnets from at least two Availability Zones. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.
-ssSubnets :: Lens' SetSubnets [Text]
-ssSubnets = lens _ssSubnets (\ s a -> s{_ssSubnets = a}) . _Coerce
 
 instance AWSRequest SetSubnets where
         type Rs SetSubnets = SetSubnetsResponse
@@ -116,15 +112,15 @@ instance ToQuery SetSubnets where
                "Version" =: ("2015-12-01" :: ByteString),
                "SubnetMappings" =:
                  toQuery (toQueryList "member" <$> _ssSubnetMappings),
-               "LoadBalancerArn" =: _ssLoadBalancerARN,
-               "Subnets" =: toQueryList "member" _ssSubnets]
+               "Subnets" =:
+                 toQuery (toQueryList "member" <$> _ssSubnets),
+               "LoadBalancerArn" =: _ssLoadBalancerARN]
 
 -- | /See:/ 'setSubnetsResponse' smart constructor.
-data SetSubnetsResponse = SetSubnetsResponse'
-  { _ssrsAvailabilityZones :: !(Maybe [AvailabilityZone])
-  , _ssrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetSubnetsResponse = SetSubnetsResponse'{_ssrsAvailabilityZones
+                                              :: !(Maybe [AvailabilityZone]),
+                                              _ssrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetSubnetsResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +132,10 @@ data SetSubnetsResponse = SetSubnetsResponse'
 setSubnetsResponse
     :: Int -- ^ 'ssrsResponseStatus'
     -> SetSubnetsResponse
-setSubnetsResponse pResponseStatus_ =
-  SetSubnetsResponse'
-    {_ssrsAvailabilityZones = Nothing, _ssrsResponseStatus = pResponseStatus_}
-
+setSubnetsResponse pResponseStatus_
+  = SetSubnetsResponse'{_ssrsAvailabilityZones =
+                          Nothing,
+                        _ssrsResponseStatus = pResponseStatus_}
 
 -- | Information about the subnet and Availability Zone.
 ssrsAvailabilityZones :: Lens' SetSubnetsResponse [AvailabilityZone]

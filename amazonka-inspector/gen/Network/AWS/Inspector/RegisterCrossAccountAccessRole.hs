@@ -42,24 +42,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'registerCrossAccountAccessRole' smart constructor.
-newtype RegisterCrossAccountAccessRole = RegisterCrossAccountAccessRole'
-  { _rcaarRoleARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RegisterCrossAccountAccessRole = RegisterCrossAccountAccessRole'{_rcaarRoleARN
+                                                                         ::
+                                                                         Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RegisterCrossAccountAccessRole' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcaarRoleARN' - The ARN of the IAM role that grants Amazon Inspector access to AWS Services needed to perform security assessments.
+-- * 'rcaarRoleARN' - The ARN of the IAM role that grants Amazon Inspector access to AWS Services needed to perform security assessments. 
 registerCrossAccountAccessRole
     :: Text -- ^ 'rcaarRoleARN'
     -> RegisterCrossAccountAccessRole
-registerCrossAccountAccessRole pRoleARN_ =
-  RegisterCrossAccountAccessRole' {_rcaarRoleARN = pRoleARN_}
+registerCrossAccountAccessRole pRoleARN_
+  = RegisterCrossAccountAccessRole'{_rcaarRoleARN =
+                                      pRoleARN_}
 
-
--- | The ARN of the IAM role that grants Amazon Inspector access to AWS Services needed to perform security assessments.
+-- | The ARN of the IAM role that grants Amazon Inspector access to AWS Services needed to perform security assessments. 
 rcaarRoleARN :: Lens' RegisterCrossAccountAccessRole Text
 rcaarRoleARN = lens _rcaarRoleARN (\ s a -> s{_rcaarRoleARN = a})
 
@@ -99,17 +100,16 @@ instance ToQuery RegisterCrossAccountAccessRole where
         toQuery = const mempty
 
 -- | /See:/ 'registerCrossAccountAccessRoleResponse' smart constructor.
-data RegisterCrossAccountAccessRoleResponse =
-  RegisterCrossAccountAccessRoleResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterCrossAccountAccessRoleResponse = RegisterCrossAccountAccessRoleResponse'
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'RegisterCrossAccountAccessRoleResponse' with the minimum fields required to make a request.
 --
 registerCrossAccountAccessRoleResponse
     :: RegisterCrossAccountAccessRoleResponse
-registerCrossAccountAccessRoleResponse = RegisterCrossAccountAccessRoleResponse'
-
+registerCrossAccountAccessRoleResponse
+  = RegisterCrossAccountAccessRoleResponse'
 
 instance NFData
            RegisterCrossAccountAccessRoleResponse

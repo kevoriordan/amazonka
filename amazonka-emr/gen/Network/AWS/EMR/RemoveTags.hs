@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html Tag Clusters> .
+-- Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html Tag Clusters> . 
 --
 --
 -- The following example removes the stack tag with value Prod from a cluster:
@@ -51,11 +51,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'removeTags' smart constructor.
-data RemoveTags = RemoveTags'
-  { _rtResourceId :: !Text
-  , _rtTagKeys    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveTags = RemoveTags'{_rtResourceId :: !Text,
+                              _rtTagKeys :: ![Text]}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RemoveTags' with the minimum fields required to make a request.
 --
@@ -67,9 +65,9 @@ data RemoveTags = RemoveTags'
 removeTags
     :: Text -- ^ 'rtResourceId'
     -> RemoveTags
-removeTags pResourceId_ =
-  RemoveTags' {_rtResourceId = pResourceId_, _rtTagKeys = mempty}
-
+removeTags pResourceId_
+  = RemoveTags'{_rtResourceId = pResourceId_,
+                _rtTagKeys = mempty}
 
 -- | The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.
 rtResourceId :: Lens' RemoveTags Text
@@ -118,10 +116,10 @@ instance ToQuery RemoveTags where
 --
 --
 -- /See:/ 'removeTagsResponse' smart constructor.
-newtype RemoveTagsResponse = RemoveTagsResponse'
-  { _rtrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RemoveTagsResponse = RemoveTagsResponse'{_rtrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RemoveTagsResponse' with the minimum fields required to make a request.
 --
@@ -131,9 +129,9 @@ newtype RemoveTagsResponse = RemoveTagsResponse'
 removeTagsResponse
     :: Int -- ^ 'rtrsResponseStatus'
     -> RemoveTagsResponse
-removeTagsResponse pResponseStatus_ =
-  RemoveTagsResponse' {_rtrsResponseStatus = pResponseStatus_}
-
+removeTagsResponse pResponseStatus_
+  = RemoveTagsResponse'{_rtrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 rtrsResponseStatus :: Lens' RemoveTagsResponse Int

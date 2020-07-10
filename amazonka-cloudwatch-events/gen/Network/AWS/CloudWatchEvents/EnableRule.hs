@@ -21,7 +21,7 @@
 -- Enables the specified rule. If the rule does not exist, the operation fails.
 --
 --
--- When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Please allow a short period of time for changes to take effect.
+-- When you enable a rule, incoming events might not immediately start matching to a newly enabled rule. Allow a short period of time for changes to take effect.
 --
 module Network.AWS.CloudWatchEvents.EnableRule
     (
@@ -29,6 +29,7 @@ module Network.AWS.CloudWatchEvents.EnableRule
       enableRule
     , EnableRule
     -- * Request Lenses
+    , erEventBusName
     , erName
 
     -- * Destructuring the Response
@@ -44,21 +45,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'enableRule' smart constructor.
-newtype EnableRule = EnableRule'
-  { _erName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableRule = EnableRule'{_erEventBusName ::
+                              !(Maybe Text),
+                              _erName :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableRule' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'erEventBusName' - The event bus associated with the rule. If you omit this, the default event bus is used.
+--
 -- * 'erName' - The name of the rule.
 enableRule
     :: Text -- ^ 'erName'
     -> EnableRule
-enableRule pName_ = EnableRule' {_erName = pName_}
+enableRule pName_
+  = EnableRule'{_erEventBusName = Nothing,
+                _erName = pName_}
 
+-- | The event bus associated with the rule. If you omit this, the default event bus is used.
+erEventBusName :: Lens' EnableRule (Maybe Text)
+erEventBusName = lens _erEventBusName (\ s a -> s{_erEventBusName = a})
 
 -- | The name of the rule.
 erName :: Lens' EnableRule Text
@@ -84,7 +92,10 @@ instance ToHeaders EnableRule where
 
 instance ToJSON EnableRule where
         toJSON EnableRule'{..}
-          = object (catMaybes [Just ("Name" .= _erName)])
+          = object
+              (catMaybes
+                 [("EventBusName" .=) <$> _erEventBusName,
+                  Just ("Name" .= _erName)])
 
 instance ToPath EnableRule where
         toPath = const "/"
@@ -93,16 +104,13 @@ instance ToQuery EnableRule where
         toQuery = const mempty
 
 -- | /See:/ 'enableRuleResponse' smart constructor.
-data EnableRuleResponse =
-  EnableRuleResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data EnableRuleResponse = EnableRuleResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableRuleResponse' with the minimum fields required to make a request.
 --
 enableRuleResponse
     :: EnableRuleResponse
 enableRuleResponse = EnableRuleResponse'
-
 
 instance NFData EnableRuleResponse where

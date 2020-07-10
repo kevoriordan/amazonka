@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @NotifyWorkers@ operation sends an email to one or more Workers that you specify with the Worker ID. You can specify up to 100 Worker IDs to send the same message with a single call to the NotifyWorkers operation. The NotifyWorkers operation will send a notification email to a Worker only if you have previously approved or rejected work from the Worker.
+-- The @NotifyWorkers@ operation sends an email to one or more Workers that you specify with the Worker ID. You can specify up to 100 Worker IDs to send the same message with a single call to the NotifyWorkers operation. The NotifyWorkers operation will send a notification email to a Worker only if you have previously approved or rejected work from the Worker. 
 --
 --
 module Network.AWS.MechanicalTurk.NotifyWorkers
@@ -47,12 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'notifyWorkers' smart constructor.
-data NotifyWorkers = NotifyWorkers'
-  { _nwSubject     :: !Text
-  , _nwMessageText :: !Text
-  , _nwWorkerIds   :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data NotifyWorkers = NotifyWorkers'{_nwSubject ::
+                                    !Text,
+                                    _nwMessageText :: !Text,
+                                    _nwWorkerIds :: ![Text]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'NotifyWorkers' with the minimum fields required to make a request.
 --
@@ -67,13 +66,10 @@ notifyWorkers
     :: Text -- ^ 'nwSubject'
     -> Text -- ^ 'nwMessageText'
     -> NotifyWorkers
-notifyWorkers pSubject_ pMessageText_ =
-  NotifyWorkers'
-    { _nwSubject = pSubject_
-    , _nwMessageText = pMessageText_
-    , _nwWorkerIds = mempty
-    }
-
+notifyWorkers pSubject_ pMessageText_
+  = NotifyWorkers'{_nwSubject = pSubject_,
+                   _nwMessageText = pMessageText_,
+                   _nwWorkerIds = mempty}
 
 -- | The subject line of the email message to send. Can include up to 200 characters.
 nwSubject :: Lens' NotifyWorkers Text
@@ -126,30 +122,30 @@ instance ToQuery NotifyWorkers where
         toQuery = const mempty
 
 -- | /See:/ 'notifyWorkersResponse' smart constructor.
-data NotifyWorkersResponse = NotifyWorkersResponse'
-  { _nwrsNotifyWorkersFailureStatuses :: !(Maybe [NotifyWorkersFailureStatus])
-  , _nwrsResponseStatus               :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data NotifyWorkersResponse = NotifyWorkersResponse'{_nwrsNotifyWorkersFailureStatuses
+                                                    ::
+                                                    !(Maybe
+                                                        [NotifyWorkersFailureStatus]),
+                                                    _nwrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'NotifyWorkersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'nwrsNotifyWorkersFailureStatuses' - When MTurk sends notifications to the list of Workers, it returns back any failures it encounters in this list of NotifyWorkersFailureStatus objects.
+-- * 'nwrsNotifyWorkersFailureStatuses' - When MTurk sends notifications to the list of Workers, it returns back any failures it encounters in this list of NotifyWorkersFailureStatus objects. 
 --
 -- * 'nwrsResponseStatus' - -- | The response status code.
 notifyWorkersResponse
     :: Int -- ^ 'nwrsResponseStatus'
     -> NotifyWorkersResponse
-notifyWorkersResponse pResponseStatus_ =
-  NotifyWorkersResponse'
-    { _nwrsNotifyWorkersFailureStatuses = Nothing
-    , _nwrsResponseStatus = pResponseStatus_
-    }
+notifyWorkersResponse pResponseStatus_
+  = NotifyWorkersResponse'{_nwrsNotifyWorkersFailureStatuses
+                             = Nothing,
+                           _nwrsResponseStatus = pResponseStatus_}
 
-
--- | When MTurk sends notifications to the list of Workers, it returns back any failures it encounters in this list of NotifyWorkersFailureStatus objects.
+-- | When MTurk sends notifications to the list of Workers, it returns back any failures it encounters in this list of NotifyWorkersFailureStatus objects. 
 nwrsNotifyWorkersFailureStatuses :: Lens' NotifyWorkersResponse [NotifyWorkersFailureStatus]
 nwrsNotifyWorkersFailureStatuses = lens _nwrsNotifyWorkersFailureStatuses (\ s a -> s{_nwrsNotifyWorkersFailureStatuses = a}) . _Default . _Coerce
 

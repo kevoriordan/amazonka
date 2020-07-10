@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified stack.
+-- Updates the specified fields for the specified stack.
 --
 --
 module Network.AWS.AppStream.UpdateStack
@@ -27,11 +27,15 @@ module Network.AWS.AppStream.UpdateStack
       updateStack
     , UpdateStack
     -- * Request Lenses
+    , usUserSettings
+    , usApplicationSettings
     , usFeedbackURL
     , usAttributesToDelete
     , usDeleteStorageConnectors
     , usStorageConnectors
+    , usAccessEndpoints
     , usDisplayName
+    , usEmbedHostDomains
     , usDescription
     , usRedirectURL
     , usName
@@ -52,23 +56,34 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateStack' smart constructor.
-data UpdateStack = UpdateStack'
-  { _usFeedbackURL             :: !(Maybe Text)
-  , _usAttributesToDelete      :: !(Maybe [StackAttribute])
-  , _usDeleteStorageConnectors :: !(Maybe Bool)
-  , _usStorageConnectors       :: !(Maybe [StorageConnector])
-  , _usDisplayName             :: !(Maybe Text)
-  , _usDescription             :: !(Maybe Text)
-  , _usRedirectURL             :: !(Maybe Text)
-  , _usName                    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateStack = UpdateStack'{_usUserSettings ::
+                                !(Maybe (List1 UserSetting)),
+                                _usApplicationSettings ::
+                                !(Maybe ApplicationSettings),
+                                _usFeedbackURL :: !(Maybe Text),
+                                _usAttributesToDelete ::
+                                !(Maybe [StackAttribute]),
+                                _usDeleteStorageConnectors :: !(Maybe Bool),
+                                _usStorageConnectors ::
+                                !(Maybe [StorageConnector]),
+                                _usAccessEndpoints ::
+                                !(Maybe (List1 AccessEndpoint)),
+                                _usDisplayName :: !(Maybe Text),
+                                _usEmbedHostDomains :: !(Maybe (List1 Text)),
+                                _usDescription :: !(Maybe Text),
+                                _usRedirectURL :: !(Maybe Text),
+                                _usName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateStack' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'usFeedbackURL' - The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
+-- * 'usUserSettings' - The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.
+--
+-- * 'usApplicationSettings' - The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
+--
+-- * 'usFeedbackURL' - The URL that users are redirected to after they choose the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
 --
 -- * 'usAttributesToDelete' - The stack attributes to delete.
 --
@@ -76,9 +91,13 @@ data UpdateStack = UpdateStack'
 --
 -- * 'usStorageConnectors' - The storage connectors to enable.
 --
--- * 'usDisplayName' - The stack name for display.
+-- * 'usAccessEndpoints' - The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
 --
--- * 'usDescription' - The description for display.
+-- * 'usDisplayName' - The stack name to display.
+--
+-- * 'usEmbedHostDomains' - The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+--
+-- * 'usDescription' - The description to display.
 --
 -- * 'usRedirectURL' - The URL that users are redirected to after their streaming session ends.
 --
@@ -86,20 +105,28 @@ data UpdateStack = UpdateStack'
 updateStack
     :: Text -- ^ 'usName'
     -> UpdateStack
-updateStack pName_ =
-  UpdateStack'
-    { _usFeedbackURL = Nothing
-    , _usAttributesToDelete = Nothing
-    , _usDeleteStorageConnectors = Nothing
-    , _usStorageConnectors = Nothing
-    , _usDisplayName = Nothing
-    , _usDescription = Nothing
-    , _usRedirectURL = Nothing
-    , _usName = pName_
-    }
+updateStack pName_
+  = UpdateStack'{_usUserSettings = Nothing,
+                 _usApplicationSettings = Nothing,
+                 _usFeedbackURL = Nothing,
+                 _usAttributesToDelete = Nothing,
+                 _usDeleteStorageConnectors = Nothing,
+                 _usStorageConnectors = Nothing,
+                 _usAccessEndpoints = Nothing,
+                 _usDisplayName = Nothing,
+                 _usEmbedHostDomains = Nothing,
+                 _usDescription = Nothing, _usRedirectURL = Nothing,
+                 _usName = pName_}
 
+-- | The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.
+usUserSettings :: Lens' UpdateStack (Maybe (NonEmpty UserSetting))
+usUserSettings = lens _usUserSettings (\ s a -> s{_usUserSettings = a}) . mapping _List1
 
--- | The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
+-- | The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
+usApplicationSettings :: Lens' UpdateStack (Maybe ApplicationSettings)
+usApplicationSettings = lens _usApplicationSettings (\ s a -> s{_usApplicationSettings = a})
+
+-- | The URL that users are redirected to after they choose the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
 usFeedbackURL :: Lens' UpdateStack (Maybe Text)
 usFeedbackURL = lens _usFeedbackURL (\ s a -> s{_usFeedbackURL = a})
 
@@ -115,11 +142,19 @@ usDeleteStorageConnectors = lens _usDeleteStorageConnectors (\ s a -> s{_usDelet
 usStorageConnectors :: Lens' UpdateStack [StorageConnector]
 usStorageConnectors = lens _usStorageConnectors (\ s a -> s{_usStorageConnectors = a}) . _Default . _Coerce
 
--- | The stack name for display.
+-- | The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
+usAccessEndpoints :: Lens' UpdateStack (Maybe (NonEmpty AccessEndpoint))
+usAccessEndpoints = lens _usAccessEndpoints (\ s a -> s{_usAccessEndpoints = a}) . mapping _List1
+
+-- | The stack name to display.
 usDisplayName :: Lens' UpdateStack (Maybe Text)
 usDisplayName = lens _usDisplayName (\ s a -> s{_usDisplayName = a})
 
--- | The description for display.
+-- | The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+usEmbedHostDomains :: Lens' UpdateStack (Maybe (NonEmpty Text))
+usEmbedHostDomains = lens _usEmbedHostDomains (\ s a -> s{_usEmbedHostDomains = a}) . mapping _List1
+
+-- | The description to display.
 usDescription :: Lens' UpdateStack (Maybe Text)
 usDescription = lens _usDescription (\ s a -> s{_usDescription = a})
 
@@ -158,12 +193,17 @@ instance ToJSON UpdateStack where
         toJSON UpdateStack'{..}
           = object
               (catMaybes
-                 [("FeedbackURL" .=) <$> _usFeedbackURL,
+                 [("UserSettings" .=) <$> _usUserSettings,
+                  ("ApplicationSettings" .=) <$>
+                    _usApplicationSettings,
+                  ("FeedbackURL" .=) <$> _usFeedbackURL,
                   ("AttributesToDelete" .=) <$> _usAttributesToDelete,
                   ("DeleteStorageConnectors" .=) <$>
                     _usDeleteStorageConnectors,
                   ("StorageConnectors" .=) <$> _usStorageConnectors,
+                  ("AccessEndpoints" .=) <$> _usAccessEndpoints,
                   ("DisplayName" .=) <$> _usDisplayName,
+                  ("EmbedHostDomains" .=) <$> _usEmbedHostDomains,
                   ("Description" .=) <$> _usDescription,
                   ("RedirectURL" .=) <$> _usRedirectURL,
                   Just ("Name" .= _usName)])
@@ -175,11 +215,10 @@ instance ToQuery UpdateStack where
         toQuery = const mempty
 
 -- | /See:/ 'updateStackResponse' smart constructor.
-data UpdateStackResponse = UpdateStackResponse'
-  { _usrsStack          :: !(Maybe Stack)
-  , _usrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateStackResponse = UpdateStackResponse'{_usrsStack
+                                                :: !(Maybe Stack),
+                                                _usrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateStackResponse' with the minimum fields required to make a request.
 --
@@ -191,10 +230,9 @@ data UpdateStackResponse = UpdateStackResponse'
 updateStackResponse
     :: Int -- ^ 'usrsResponseStatus'
     -> UpdateStackResponse
-updateStackResponse pResponseStatus_ =
-  UpdateStackResponse'
-    {_usrsStack = Nothing, _usrsResponseStatus = pResponseStatus_}
-
+updateStackResponse pResponseStatus_
+  = UpdateStackResponse'{_usrsStack = Nothing,
+                         _usrsResponseStatus = pResponseStatus_}
 
 -- | Information about the stack.
 usrsStack :: Lens' UpdateStackResponse (Maybe Stack)

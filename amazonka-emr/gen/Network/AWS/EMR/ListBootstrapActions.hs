@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listBootstrapActions' smart constructor.
-data ListBootstrapActions = ListBootstrapActions'
-  { _lbaMarker    :: !(Maybe Text)
-  , _lbaClusterId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBootstrapActions = ListBootstrapActions'{_lbaMarker
+                                                  :: !(Maybe Text),
+                                                  _lbaClusterId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListBootstrapActions' with the minimum fields required to make a request.
 --
@@ -70,9 +69,9 @@ data ListBootstrapActions = ListBootstrapActions'
 listBootstrapActions
     :: Text -- ^ 'lbaClusterId'
     -> ListBootstrapActions
-listBootstrapActions pClusterId_ =
-  ListBootstrapActions' {_lbaMarker = Nothing, _lbaClusterId = pClusterId_}
-
+listBootstrapActions pClusterId_
+  = ListBootstrapActions'{_lbaMarker = Nothing,
+                          _lbaClusterId = pClusterId_}
 
 -- | The pagination token that indicates the next set of results to retrieve.
 lbaMarker :: Lens' ListBootstrapActions (Maybe Text)
@@ -133,12 +132,17 @@ instance ToQuery ListBootstrapActions where
 --
 --
 -- /See:/ 'listBootstrapActionsResponse' smart constructor.
-data ListBootstrapActionsResponse = ListBootstrapActionsResponse'
-  { _lbarsBootstrapActions :: !(Maybe [Command])
-  , _lbarsMarker           :: !(Maybe Text)
-  , _lbarsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListBootstrapActionsResponse = ListBootstrapActionsResponse'{_lbarsBootstrapActions
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Command]),
+                                                                  _lbarsMarker
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _lbarsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListBootstrapActionsResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +156,11 @@ data ListBootstrapActionsResponse = ListBootstrapActionsResponse'
 listBootstrapActionsResponse
     :: Int -- ^ 'lbarsResponseStatus'
     -> ListBootstrapActionsResponse
-listBootstrapActionsResponse pResponseStatus_ =
-  ListBootstrapActionsResponse'
-    { _lbarsBootstrapActions = Nothing
-    , _lbarsMarker = Nothing
-    , _lbarsResponseStatus = pResponseStatus_
-    }
-
+listBootstrapActionsResponse pResponseStatus_
+  = ListBootstrapActionsResponse'{_lbarsBootstrapActions
+                                    = Nothing,
+                                  _lbarsMarker = Nothing,
+                                  _lbarsResponseStatus = pResponseStatus_}
 
 -- | The bootstrap actions associated with the cluster.
 lbarsBootstrapActions :: Lens' ListBootstrapActionsResponse [Command]

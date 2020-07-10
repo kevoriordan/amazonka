@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the specified image builders or all image builders in the account.
+-- Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AppStream.DescribeImageBuilders
     (
     -- * Creating a Request
@@ -43,17 +45,20 @@ module Network.AWS.AppStream.DescribeImageBuilders
 import Network.AWS.AppStream.Types
 import Network.AWS.AppStream.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeImageBuilders' smart constructor.
-data DescribeImageBuilders = DescribeImageBuilders'
-  { _dibNextToken  :: !(Maybe Text)
-  , _dibNames      :: !(Maybe [Text])
-  , _dibMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeImageBuilders = DescribeImageBuilders'{_dibNextToken
+                                                    :: !(Maybe Text),
+                                                    _dibNames ::
+                                                    !(Maybe [Text]),
+                                                    _dibMaxResults ::
+                                                    !(Maybe Int)}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeImageBuilders' with the minimum fields required to make a request.
 --
@@ -66,10 +71,9 @@ data DescribeImageBuilders = DescribeImageBuilders'
 -- * 'dibMaxResults' - The maximum size of each page of results.
 describeImageBuilders
     :: DescribeImageBuilders
-describeImageBuilders =
-  DescribeImageBuilders'
-    {_dibNextToken = Nothing, _dibNames = Nothing, _dibMaxResults = Nothing}
-
+describeImageBuilders
+  = DescribeImageBuilders'{_dibNextToken = Nothing,
+                           _dibNames = Nothing, _dibMaxResults = Nothing}
 
 -- | The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
 dibNextToken :: Lens' DescribeImageBuilders (Maybe Text)
@@ -82,6 +86,13 @@ dibNames = lens _dibNames (\ s a -> s{_dibNames = a}) . _Default . _Coerce
 -- | The maximum size of each page of results.
 dibMaxResults :: Lens' DescribeImageBuilders (Maybe Int)
 dibMaxResults = lens _dibMaxResults (\ s a -> s{_dibMaxResults = a})
+
+instance AWSPager DescribeImageBuilders where
+        page rq rs
+          | stop (rs ^. dibsrsNextToken) = Nothing
+          | stop (rs ^. dibsrsImageBuilders) = Nothing
+          | otherwise =
+            Just $ rq & dibNextToken .~ rs ^. dibsrsNextToken
 
 instance AWSRequest DescribeImageBuilders where
         type Rs DescribeImageBuilders =
@@ -124,12 +135,18 @@ instance ToQuery DescribeImageBuilders where
         toQuery = const mempty
 
 -- | /See:/ 'describeImageBuildersResponse' smart constructor.
-data DescribeImageBuildersResponse = DescribeImageBuildersResponse'
-  { _dibsrsImageBuilders  :: !(Maybe [ImageBuilder])
-  , _dibsrsNextToken      :: !(Maybe Text)
-  , _dibsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeImageBuildersResponse = DescribeImageBuildersResponse'{_dibsrsImageBuilders
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [ImageBuilder]),
+                                                                    _dibsrsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dibsrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeImageBuildersResponse' with the minimum fields required to make a request.
 --
@@ -143,13 +160,11 @@ data DescribeImageBuildersResponse = DescribeImageBuildersResponse'
 describeImageBuildersResponse
     :: Int -- ^ 'dibsrsResponseStatus'
     -> DescribeImageBuildersResponse
-describeImageBuildersResponse pResponseStatus_ =
-  DescribeImageBuildersResponse'
-    { _dibsrsImageBuilders = Nothing
-    , _dibsrsNextToken = Nothing
-    , _dibsrsResponseStatus = pResponseStatus_
-    }
-
+describeImageBuildersResponse pResponseStatus_
+  = DescribeImageBuildersResponse'{_dibsrsImageBuilders
+                                     = Nothing,
+                                   _dibsrsNextToken = Nothing,
+                                   _dibsrsResponseStatus = pResponseStatus_}
 
 -- | Information about the image builders.
 dibsrsImageBuilders :: Lens' DescribeImageBuildersResponse [ImageBuilder]

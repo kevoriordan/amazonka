@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeResourceGroups' smart constructor.
-newtype DescribeResourceGroups = DescribeResourceGroups'
-  { _drgResourceGroupARNs :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeResourceGroups = DescribeResourceGroups'{_drgResourceGroupARNs
+                                                         :: List1 Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeResourceGroups' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DescribeResourceGroups = DescribeResourceGroups'
 describeResourceGroups
     :: NonEmpty Text -- ^ 'drgResourceGroupARNs'
     -> DescribeResourceGroups
-describeResourceGroups pResourceGroupARNs_ =
-  DescribeResourceGroups' {_drgResourceGroupARNs = _List1 # pResourceGroupARNs_}
-
+describeResourceGroups pResourceGroupARNs_
+  = DescribeResourceGroups'{_drgResourceGroupARNs =
+                              _List1 # pResourceGroupARNs_}
 
 -- | The ARN that specifies the resource group that you want to describe.
 drgResourceGroupARNs :: Lens' DescribeResourceGroups (NonEmpty Text)
@@ -107,12 +107,17 @@ instance ToQuery DescribeResourceGroups where
         toQuery = const mempty
 
 -- | /See:/ 'describeResourceGroupsResponse' smart constructor.
-data DescribeResourceGroupsResponse = DescribeResourceGroupsResponse'
-  { _drgrsResponseStatus :: !Int
-  , _drgrsResourceGroups :: ![ResourceGroup]
-  , _drgrsFailedItems    :: !(Map Text FailedItemDetails)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeResourceGroupsResponse = DescribeResourceGroupsResponse'{_drgrsResponseStatus
+                                                                      :: !Int,
+                                                                      _drgrsResourceGroups
+                                                                      ::
+                                                                      ![ResourceGroup],
+                                                                      _drgrsFailedItems
+                                                                      ::
+                                                                      !(Map Text
+                                                                          FailedItemDetails)}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeResourceGroupsResponse' with the minimum fields required to make a request.
 --
@@ -126,13 +131,11 @@ data DescribeResourceGroupsResponse = DescribeResourceGroupsResponse'
 describeResourceGroupsResponse
     :: Int -- ^ 'drgrsResponseStatus'
     -> DescribeResourceGroupsResponse
-describeResourceGroupsResponse pResponseStatus_ =
-  DescribeResourceGroupsResponse'
-    { _drgrsResponseStatus = pResponseStatus_
-    , _drgrsResourceGroups = mempty
-    , _drgrsFailedItems = mempty
-    }
-
+describeResourceGroupsResponse pResponseStatus_
+  = DescribeResourceGroupsResponse'{_drgrsResponseStatus
+                                      = pResponseStatus_,
+                                    _drgrsResourceGroups = mempty,
+                                    _drgrsFailedItems = mempty}
 
 -- | -- | The response status code.
 drgrsResponseStatus :: Lens' DescribeResourceGroupsResponse Int

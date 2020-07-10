@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts the asynchronous tracking of persons in a stored video.
+-- Starts the asynchronous tracking of a person's path in a stored video.
 --
 --
--- Rekognition Video can track persons in a video stored in an Amazon S3 bucket. Use 'Video' to specify the bucket name and the filename of the video. @StartPersonTracking@ returns a job identifier (@JobId@ ) which you use to get the results of the operation. When label detection is finished, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic that you specify in @NotificationChannel@ .
+-- Amazon Rekognition Video can track the path of people in a video stored in an Amazon S3 bucket. Use 'Video' to specify the bucket name and the filename of the video. @StartPersonTracking@ returns a job identifier (@JobId@ ) which you use to get the results of the operation. When label detection is finished, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic that you specify in @NotificationChannel@ . 
 --
--- To get the results of the person detection operation, first check that the status value published to the Amazon SNS topic is @SUCCEEDED@ . If so, call and pass the job identifier (@JobId@ ) from the initial call to @StartPersonTracking@ .
+-- To get the results of the person detection operation, first check that the status value published to the Amazon SNS topic is @SUCCEEDED@ . If so, call 'GetPersonTracking' and pass the job identifier (@JobId@ ) from the initial call to @StartPersonTracking@ .
 --
 module Network.AWS.Rekognition.StartPersonTracking
     (
@@ -52,46 +52,44 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startPersonTracking' smart constructor.
-data StartPersonTracking = StartPersonTracking'
-  { _sptJobTag              :: !(Maybe Text)
-  , _sptNotificationChannel :: !(Maybe NotificationChannel)
-  , _sptClientRequestToken  :: !(Maybe Text)
-  , _sptVideo               :: !Video
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartPersonTracking = StartPersonTracking'{_sptJobTag
+                                                :: !(Maybe Text),
+                                                _sptNotificationChannel ::
+                                                !(Maybe NotificationChannel),
+                                                _sptClientRequestToken ::
+                                                !(Maybe Text),
+                                                _sptVideo :: !Video}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartPersonTracking' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sptJobTag' - Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic.
+-- * 'sptJobTag' - An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic. For example, you can use @JobTag@ to group related jobs and identify them in the completion notification.
 --
--- * 'sptNotificationChannel' - The Amazon SNS topic ARN you want Rekognition Video to publish the completion status of the people detection operation to.
+-- * 'sptNotificationChannel' - The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.
 --
--- * 'sptClientRequestToken' - Idempotent token used to identify the start request. If you use the same token with multiple @StartPersonTracking@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once.
+-- * 'sptClientRequestToken' - Idempotent token used to identify the start request. If you use the same token with multiple @StartPersonTracking@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once. 
 --
 -- * 'sptVideo' - The video in which you want to detect people. The video must be stored in an Amazon S3 bucket.
 startPersonTracking
     :: Video -- ^ 'sptVideo'
     -> StartPersonTracking
-startPersonTracking pVideo_ =
-  StartPersonTracking'
-    { _sptJobTag = Nothing
-    , _sptNotificationChannel = Nothing
-    , _sptClientRequestToken = Nothing
-    , _sptVideo = pVideo_
-    }
+startPersonTracking pVideo_
+  = StartPersonTracking'{_sptJobTag = Nothing,
+                         _sptNotificationChannel = Nothing,
+                         _sptClientRequestToken = Nothing,
+                         _sptVideo = pVideo_}
 
-
--- | Unique identifier you specify to identify the job in the completion status published to the Amazon Simple Notification Service topic.
+-- | An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic. For example, you can use @JobTag@ to group related jobs and identify them in the completion notification.
 sptJobTag :: Lens' StartPersonTracking (Maybe Text)
 sptJobTag = lens _sptJobTag (\ s a -> s{_sptJobTag = a})
 
--- | The Amazon SNS topic ARN you want Rekognition Video to publish the completion status of the people detection operation to.
+-- | The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.
 sptNotificationChannel :: Lens' StartPersonTracking (Maybe NotificationChannel)
 sptNotificationChannel = lens _sptNotificationChannel (\ s a -> s{_sptNotificationChannel = a})
 
--- | Idempotent token used to identify the start request. If you use the same token with multiple @StartPersonTracking@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once.
+-- | Idempotent token used to identify the start request. If you use the same token with multiple @StartPersonTracking@ requests, the same @JobId@ is returned. Use @ClientRequestToken@ to prevent the same job from being accidently started more than once. 
 sptClientRequestToken :: Lens' StartPersonTracking (Maybe Text)
 sptClientRequestToken = lens _sptClientRequestToken (\ s a -> s{_sptClientRequestToken = a})
 
@@ -140,11 +138,13 @@ instance ToQuery StartPersonTracking where
         toQuery = const mempty
 
 -- | /See:/ 'startPersonTrackingResponse' smart constructor.
-data StartPersonTrackingResponse = StartPersonTrackingResponse'
-  { _sptrsJobId          :: !(Maybe Text)
-  , _sptrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartPersonTrackingResponse = StartPersonTrackingResponse'{_sptrsJobId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _sptrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'StartPersonTrackingResponse' with the minimum fields required to make a request.
 --
@@ -156,10 +156,9 @@ data StartPersonTrackingResponse = StartPersonTrackingResponse'
 startPersonTrackingResponse
     :: Int -- ^ 'sptrsResponseStatus'
     -> StartPersonTrackingResponse
-startPersonTrackingResponse pResponseStatus_ =
-  StartPersonTrackingResponse'
-    {_sptrsJobId = Nothing, _sptrsResponseStatus = pResponseStatus_}
-
+startPersonTrackingResponse pResponseStatus_
+  = StartPersonTrackingResponse'{_sptrsJobId = Nothing,
+                                 _sptrsResponseStatus = pResponseStatus_}
 
 -- | The identifier for the person detection job. Use @JobId@ to identify the job in a subsequent call to @GetPersonTracking@ .
 sptrsJobId :: Lens' StartPersonTrackingResponse (Maybe Text)

@@ -21,6 +21,8 @@
 -- For a specified resource ID, this API action returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.ListComplianceItems
     (
     -- * Creating a Request
@@ -43,6 +45,7 @@ module Network.AWS.SSM.ListComplianceItems
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -50,14 +53,16 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listComplianceItems' smart constructor.
-data ListComplianceItems = ListComplianceItems'
-  { _lResourceIds   :: !(Maybe (List1 Text))
-  , _lFilters       :: !(Maybe [ComplianceStringFilter])
-  , _lNextToken     :: !(Maybe Text)
-  , _lMaxResults    :: !(Maybe Nat)
-  , _lResourceTypes :: !(Maybe (List1 Text))
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListComplianceItems = ListComplianceItems'{_lResourceIds
+                                                :: !(Maybe (List1 Text)),
+                                                _lFilters ::
+                                                !(Maybe
+                                                    [ComplianceStringFilter]),
+                                                _lNextToken :: !(Maybe Text),
+                                                _lMaxResults :: !(Maybe Nat),
+                                                _lResourceTypes ::
+                                                !(Maybe (List1 Text))}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListComplianceItems' with the minimum fields required to make a request.
 --
@@ -67,22 +72,17 @@ data ListComplianceItems = ListComplianceItems'
 --
 -- * 'lFilters' - One or more compliance filters. Use a filter to return a more specific list of results.
 --
--- * 'lNextToken' - A token to start the list. Use this token to get the next set of results.
+-- * 'lNextToken' - A token to start the list. Use this token to get the next set of results. 
 --
 -- * 'lMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 --
 -- * 'lResourceTypes' - The type of resource from which to get compliance information. Currently, the only supported resource type is @ManagedInstance@ .
 listComplianceItems
     :: ListComplianceItems
-listComplianceItems =
-  ListComplianceItems'
-    { _lResourceIds = Nothing
-    , _lFilters = Nothing
-    , _lNextToken = Nothing
-    , _lMaxResults = Nothing
-    , _lResourceTypes = Nothing
-    }
-
+listComplianceItems
+  = ListComplianceItems'{_lResourceIds = Nothing,
+                         _lFilters = Nothing, _lNextToken = Nothing,
+                         _lMaxResults = Nothing, _lResourceTypes = Nothing}
 
 -- | The ID for the resources from which to get compliance information. Currently, you can only specify one resource ID.
 lResourceIds :: Lens' ListComplianceItems (Maybe (NonEmpty Text))
@@ -92,7 +92,7 @@ lResourceIds = lens _lResourceIds (\ s a -> s{_lResourceIds = a}) . mapping _Lis
 lFilters :: Lens' ListComplianceItems [ComplianceStringFilter]
 lFilters = lens _lFilters (\ s a -> s{_lFilters = a}) . _Default . _Coerce
 
--- | A token to start the list. Use this token to get the next set of results.
+-- | A token to start the list. Use this token to get the next set of results. 
 lNextToken :: Lens' ListComplianceItems (Maybe Text)
 lNextToken = lens _lNextToken (\ s a -> s{_lNextToken = a})
 
@@ -103,6 +103,13 @@ lMaxResults = lens _lMaxResults (\ s a -> s{_lMaxResults = a}) . mapping _Nat
 -- | The type of resource from which to get compliance information. Currently, the only supported resource type is @ManagedInstance@ .
 lResourceTypes :: Lens' ListComplianceItems (Maybe (NonEmpty Text))
 lResourceTypes = lens _lResourceTypes (\ s a -> s{_lResourceTypes = a}) . mapping _List1
+
+instance AWSPager ListComplianceItems where
+        page rq rs
+          | stop (rs ^. lcirsNextToken) = Nothing
+          | stop (rs ^. lcirsComplianceItems) = Nothing
+          | otherwise =
+            Just $ rq & lNextToken .~ rs ^. lcirsNextToken
 
 instance AWSRequest ListComplianceItems where
         type Rs ListComplianceItems =
@@ -146,18 +153,23 @@ instance ToQuery ListComplianceItems where
         toQuery = const mempty
 
 -- | /See:/ 'listComplianceItemsResponse' smart constructor.
-data ListComplianceItemsResponse = ListComplianceItemsResponse'
-  { _lcirsComplianceItems :: !(Maybe [ComplianceItem])
-  , _lcirsNextToken       :: !(Maybe Text)
-  , _lcirsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListComplianceItemsResponse = ListComplianceItemsResponse'{_lcirsComplianceItems
+                                                                ::
+                                                                !(Maybe
+                                                                    [ComplianceItem]),
+                                                                _lcirsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _lcirsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListComplianceItemsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lcirsComplianceItems' - A list of compliance information for the specified resource ID.
+-- * 'lcirsComplianceItems' - A list of compliance information for the specified resource ID. 
 --
 -- * 'lcirsNextToken' - The token for the next set of items to return. Use this token to get the next set of results.
 --
@@ -165,15 +177,13 @@ data ListComplianceItemsResponse = ListComplianceItemsResponse'
 listComplianceItemsResponse
     :: Int -- ^ 'lcirsResponseStatus'
     -> ListComplianceItemsResponse
-listComplianceItemsResponse pResponseStatus_ =
-  ListComplianceItemsResponse'
-    { _lcirsComplianceItems = Nothing
-    , _lcirsNextToken = Nothing
-    , _lcirsResponseStatus = pResponseStatus_
-    }
+listComplianceItemsResponse pResponseStatus_
+  = ListComplianceItemsResponse'{_lcirsComplianceItems
+                                   = Nothing,
+                                 _lcirsNextToken = Nothing,
+                                 _lcirsResponseStatus = pResponseStatus_}
 
-
--- | A list of compliance information for the specified resource ID.
+-- | A list of compliance information for the specified resource ID. 
 lcirsComplianceItems :: Lens' ListComplianceItemsResponse [ComplianceItem]
 lcirsComplianceItems = lens _lcirsComplianceItems (\ s a -> s{_lcirsComplianceItems = a}) . _Default . _Coerce
 

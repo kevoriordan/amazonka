@@ -11,10 +11,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Amazon SimpleDB is a web service providing the core database functions of data indexing and querying in the cloud. By offloading the time and effort associated with building and operating a web-scale database, SimpleDB provides developers the freedom to focus on application development. A traditional, clustered relational database requires a sizable upfront capital outlay, is complex to design, and often requires extensive and repetitive database administration. Amazon SimpleDB is dramatically simpler, requiring no schema, automatically indexing your data and providing a simple API for storage and access. This approach eliminates the administrative burden of data modeling, index maintenance, and performance tuning. Developers gain access to this functionality within Amazon's proven computing environment, are able to scale instantly, and pay only for what they use.
+-- Amazon SimpleDB is a web service providing the core database functions of data indexing and querying in the cloud. By offloading the time and effort associated with building and operating a web-scale database, SimpleDB provides developers the freedom to focus on application development. A traditional, clustered relational database requires a sizable upfront capital outlay, is complex to design, and often requires extensive and repetitive database administration. Amazon SimpleDB is dramatically simpler, requiring no schema, automatically indexing your data and providing a simple API for storage and access. This approach eliminates the administrative burden of data modeling, index maintenance, and performance tuning. Developers gain access to this functionality within Amazon's proven computing environment, are able to scale instantly, and pay only for what they use. 
 --
 --
--- Visit <http://aws.amazon.com/simpledb/ http://aws.amazon.com/simpledb/> for more information.
+-- Visit <http://aws.amazon.com/simpledb/ http://aws.amazon.com/simpledb/> for more information. 
 --
 module Network.AWS.SDB
     (
@@ -24,32 +24,14 @@ module Network.AWS.SDB
     -- * Errors
     -- $errors
 
-    -- ** InvalidNumberValueTests
-    , _InvalidNumberValueTests
+    -- ** InvalidParameterValue
+    , _InvalidParameterValue
 
-    -- ** NoSuchDomain
-    , _NoSuchDomain
-
-    -- ** NumberSubmittedItemsExceeded
-    , _NumberSubmittedItemsExceeded
-
-    -- ** AttributeDoesNotExist
-    , _AttributeDoesNotExist
-
-    -- ** NumberDomainAttributesExceeded
-    , _NumberDomainAttributesExceeded
+    -- ** TooManyRequestedAttributes
+    , _TooManyRequestedAttributes
 
     -- ** DuplicateItemName
     , _DuplicateItemName
-
-    -- ** MissingParameter
-    , _MissingParameter
-
-    -- ** InvalidNextToken
-    , _InvalidNextToken
-
-    -- ** InvalidParameterValue
-    , _InvalidParameterValue
 
     -- ** NumberItemAttributesExceeded
     , _NumberItemAttributesExceeded
@@ -57,20 +39,38 @@ module Network.AWS.SDB
     -- ** RequestTimeout
     , _RequestTimeout
 
-    -- ** TooManyRequestedAttributes
-    , _TooManyRequestedAttributes
+    -- ** AttributeDoesNotExist
+    , _AttributeDoesNotExist
 
-    -- ** InvalidNumberPredicates
-    , _InvalidNumberPredicates
+    -- ** InvalidNumberValueTests
+    , _InvalidNumberValueTests
 
-    -- ** NumberDomainsExceeded
-    , _NumberDomainsExceeded
+    -- ** NumberDomainBytesExceeded
+    , _NumberDomainBytesExceeded
 
     -- ** NumberSubmittedAttributesExceeded
     , _NumberSubmittedAttributesExceeded
 
-    -- ** NumberDomainBytesExceeded
-    , _NumberDomainBytesExceeded
+    -- ** NumberDomainsExceeded
+    , _NumberDomainsExceeded
+
+    -- ** InvalidNumberPredicates
+    , _InvalidNumberPredicates
+
+    -- ** InvalidNextToken
+    , _InvalidNextToken
+
+    -- ** MissingParameter
+    , _MissingParameter
+
+    -- ** NumberDomainAttributesExceeded
+    , _NumberDomainAttributesExceeded
+
+    -- ** NumberSubmittedItemsExceeded
+    , _NumberSubmittedItemsExceeded
+
+    -- ** NoSuchDomain
+    , _NoSuchDomain
 
     -- ** InvalidQueryExpression
     , _InvalidQueryExpression
@@ -81,31 +81,31 @@ module Network.AWS.SDB
     -- * Operations
     -- $operations
 
-    -- ** BatchDeleteAttributes
+    -- ** BatchDeleteAttributes 
     , module Network.AWS.SDB.BatchDeleteAttributes
 
-    -- ** BatchPutAttributes
+    -- ** BatchPutAttributes 
     , module Network.AWS.SDB.BatchPutAttributes
 
-    -- ** GetAttributes
+    -- ** GetAttributes 
     , module Network.AWS.SDB.GetAttributes
 
-    -- ** CreateDomain
+    -- ** CreateDomain 
     , module Network.AWS.SDB.CreateDomain
 
-    -- ** DomainMetadata
+    -- ** DomainMetadata 
     , module Network.AWS.SDB.DomainMetadata
 
     -- ** Select (Paginated)
     , module Network.AWS.SDB.Select
 
-    -- ** DeleteAttributes
+    -- ** DeleteAttributes 
     , module Network.AWS.SDB.DeleteAttributes
 
-    -- ** PutAttributes
+    -- ** PutAttributes 
     , module Network.AWS.SDB.PutAttributes
 
-    -- ** DeleteDomain
+    -- ** DeleteDomain 
     , module Network.AWS.SDB.DeleteDomain
 
     -- ** ListDomains (Paginated)

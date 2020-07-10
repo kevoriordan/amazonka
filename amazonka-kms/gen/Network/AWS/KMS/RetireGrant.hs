@@ -54,30 +54,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'retireGrant' smart constructor.
-data RetireGrant = RetireGrant'
-  { _rgKeyId      :: !(Maybe Text)
-  , _rgGrantId    :: !(Maybe Text)
-  , _rgGrantToken :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetireGrant = RetireGrant'{_rgKeyId ::
+                                !(Maybe Text),
+                                _rgGrantId :: !(Maybe Text),
+                                _rgGrantToken :: !(Maybe Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RetireGrant' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgKeyId' - The Amazon Resource Name (ARN) of the CMK associated with the grant.  For example: @arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab@
+-- * 'rgKeyId' - The Amazon Resource Name (ARN) of the CMK associated with the grant.  For example: @arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab@ 
 --
 -- * 'rgGrantId' - Unique identifier of the grant to retire. The grant ID is returned in the response to a @CreateGrant@ operation.     * Grant ID Example - 0123456789012345678901234567890123456789012345678901234567890123
 --
 -- * 'rgGrantToken' - Token that identifies the grant to be retired.
 retireGrant
     :: RetireGrant
-retireGrant =
-  RetireGrant'
-    {_rgKeyId = Nothing, _rgGrantId = Nothing, _rgGrantToken = Nothing}
+retireGrant
+  = RetireGrant'{_rgKeyId = Nothing,
+                 _rgGrantId = Nothing, _rgGrantToken = Nothing}
 
-
--- | The Amazon Resource Name (ARN) of the CMK associated with the grant.  For example: @arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab@
+-- | The Amazon Resource Name (ARN) of the CMK associated with the grant.  For example: @arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab@ 
 rgKeyId :: Lens' RetireGrant (Maybe Text)
 rgKeyId = lens _rgKeyId (\ s a -> s{_rgKeyId = a})
 
@@ -122,16 +120,13 @@ instance ToQuery RetireGrant where
         toQuery = const mempty
 
 -- | /See:/ 'retireGrantResponse' smart constructor.
-data RetireGrantResponse =
-  RetireGrantResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RetireGrantResponse = RetireGrantResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RetireGrantResponse' with the minimum fields required to make a request.
 --
 retireGrantResponse
     :: RetireGrantResponse
 retireGrantResponse = RetireGrantResponse'
-
 
 instance NFData RetireGrantResponse where

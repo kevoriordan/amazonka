@@ -48,23 +48,20 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteUpload' smart constructor.
-newtype DeleteUpload = DeleteUpload'
-  { _duArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteUpload = DeleteUpload'{_duArn :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'duArn' - Represents the Amazon Resource Name (ARN) of the Device Farm upload you wish to delete.
+-- * 'duArn' - Represents the Amazon Resource Name (ARN) of the Device Farm upload to delete.
 deleteUpload
     :: Text -- ^ 'duArn'
     -> DeleteUpload
-deleteUpload pArn_ = DeleteUpload' {_duArn = pArn_}
+deleteUpload pArn_ = DeleteUpload'{_duArn = pArn_}
 
-
--- | Represents the Amazon Resource Name (ARN) of the Device Farm upload you wish to delete.
+-- | Represents the Amazon Resource Name (ARN) of the Device Farm upload to delete.
 duArn :: Lens' DeleteUpload Text
 duArn = lens _duArn (\ s a -> s{_duArn = a})
 
@@ -104,10 +101,10 @@ instance ToQuery DeleteUpload where
 --
 --
 -- /See:/ 'deleteUploadResponse' smart constructor.
-newtype DeleteUploadResponse = DeleteUploadResponse'
-  { _dursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteUploadResponse = DeleteUploadResponse'{_dursResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteUploadResponse' with the minimum fields required to make a request.
 --
@@ -117,9 +114,9 @@ newtype DeleteUploadResponse = DeleteUploadResponse'
 deleteUploadResponse
     :: Int -- ^ 'dursResponseStatus'
     -> DeleteUploadResponse
-deleteUploadResponse pResponseStatus_ =
-  DeleteUploadResponse' {_dursResponseStatus = pResponseStatus_}
-
+deleteUploadResponse pResponseStatus_
+  = DeleteUploadResponse'{_dursResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dursResponseStatus :: Lens' DeleteUploadResponse Int

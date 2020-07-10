@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a user who can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
+-- Creates a user who can be used in Amazon WorkMail by calling the 'RegisterToWorkMail' operation.
 --
 --
 module Network.AWS.WorkMail.CreateUser
@@ -48,13 +48,11 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'createUser' smart constructor.
-data CreateUser = CreateUser'
-  { _cuOrganizationId :: !Text
-  , _cuName           :: !Text
-  , _cuDisplayName    :: !Text
-  , _cuPassword       :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateUser = CreateUser'{_cuOrganizationId ::
+                              !Text,
+                              _cuName :: !Text, _cuDisplayName :: !Text,
+                              _cuPassword :: !(Sensitive Text)}
+                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUser' with the minimum fields required to make a request.
 --
@@ -62,39 +60,36 @@ data CreateUser = CreateUser'
 --
 -- * 'cuOrganizationId' - The identifier of the organization for which the user is created.
 --
--- * 'cuName' - The name for the user to be created.
+-- * 'cuName' - The name for the new user. Simple AD or AD Connector user names have a maximum length of 20. All others have a maximum length of 64.
 --
--- * 'cuDisplayName' - The display name for the user to be created.
+-- * 'cuDisplayName' - The display name for the new user.
 --
--- * 'cuPassword' - The password for the user to be created.
+-- * 'cuPassword' - The password for the new user.
 createUser
     :: Text -- ^ 'cuOrganizationId'
     -> Text -- ^ 'cuName'
     -> Text -- ^ 'cuDisplayName'
     -> Text -- ^ 'cuPassword'
     -> CreateUser
-createUser pOrganizationId_ pName_ pDisplayName_ pPassword_ =
-  CreateUser'
-    { _cuOrganizationId = pOrganizationId_
-    , _cuName = pName_
-    , _cuDisplayName = pDisplayName_
-    , _cuPassword = _Sensitive # pPassword_
-    }
-
+createUser pOrganizationId_ pName_ pDisplayName_
+  pPassword_
+  = CreateUser'{_cuOrganizationId = pOrganizationId_,
+                _cuName = pName_, _cuDisplayName = pDisplayName_,
+                _cuPassword = _Sensitive # pPassword_}
 
 -- | The identifier of the organization for which the user is created.
 cuOrganizationId :: Lens' CreateUser Text
 cuOrganizationId = lens _cuOrganizationId (\ s a -> s{_cuOrganizationId = a})
 
--- | The name for the user to be created.
+-- | The name for the new user. Simple AD or AD Connector user names have a maximum length of 20. All others have a maximum length of 64.
 cuName :: Lens' CreateUser Text
 cuName = lens _cuName (\ s a -> s{_cuName = a})
 
--- | The display name for the user to be created.
+-- | The display name for the new user.
 cuDisplayName :: Lens' CreateUser Text
 cuDisplayName = lens _cuDisplayName (\ s a -> s{_cuDisplayName = a})
 
--- | The password for the user to be created.
+-- | The password for the new user.
 cuPassword :: Lens' CreateUser Text
 cuPassword = lens _cuPassword (\ s a -> s{_cuPassword = a}) . _Sensitive
 
@@ -136,28 +131,26 @@ instance ToQuery CreateUser where
         toQuery = const mempty
 
 -- | /See:/ 'createUserResponse' smart constructor.
-data CreateUserResponse = CreateUserResponse'
-  { _cursUserId         :: !(Maybe Text)
-  , _cursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserResponse = CreateUserResponse'{_cursUserId
+                                              :: !(Maybe Text),
+                                              _cursResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUserResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cursUserId' - The information regarding the newly created user.
+-- * 'cursUserId' - The identifier for the new user.
 --
 -- * 'cursResponseStatus' - -- | The response status code.
 createUserResponse
     :: Int -- ^ 'cursResponseStatus'
     -> CreateUserResponse
-createUserResponse pResponseStatus_ =
-  CreateUserResponse'
-    {_cursUserId = Nothing, _cursResponseStatus = pResponseStatus_}
+createUserResponse pResponseStatus_
+  = CreateUserResponse'{_cursUserId = Nothing,
+                        _cursResponseStatus = pResponseStatus_}
 
-
--- | The information regarding the newly created user.
+-- | The identifier for the new user.
 cursUserId :: Lens' CreateUserResponse (Maybe Text)
 cursUserId = lens _cursUserId (\ s a -> s{_cursUserId = a})
 

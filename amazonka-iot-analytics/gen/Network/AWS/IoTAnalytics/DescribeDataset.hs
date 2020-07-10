@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeDataset' smart constructor.
-newtype DescribeDataset = DescribeDataset'
-  { _ddDatasetName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeDataset = DescribeDataset'{_ddDatasetName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeDataset' with the minimum fields required to make a request.
 --
@@ -58,9 +57,8 @@ newtype DescribeDataset = DescribeDataset'
 describeDataset
     :: Text -- ^ 'ddDatasetName'
     -> DescribeDataset
-describeDataset pDatasetName_ =
-  DescribeDataset' {_ddDatasetName = pDatasetName_}
-
+describeDataset pDatasetName_
+  = DescribeDataset'{_ddDatasetName = pDatasetName_}
 
 -- | The name of the data set whose information is retrieved.
 ddDatasetName :: Lens' DescribeDataset Text
@@ -90,11 +88,12 @@ instance ToQuery DescribeDataset where
         toQuery = const mempty
 
 -- | /See:/ 'describeDatasetResponse' smart constructor.
-data DescribeDatasetResponse = DescribeDatasetResponse'
-  { _ddrsDataset        :: !(Maybe Dataset)
-  , _ddrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDatasetResponse = DescribeDatasetResponse'{_ddrsDataset
+                                                        :: !(Maybe Dataset),
+                                                        _ddrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeDatasetResponse' with the minimum fields required to make a request.
 --
@@ -106,10 +105,9 @@ data DescribeDatasetResponse = DescribeDatasetResponse'
 describeDatasetResponse
     :: Int -- ^ 'ddrsResponseStatus'
     -> DescribeDatasetResponse
-describeDatasetResponse pResponseStatus_ =
-  DescribeDatasetResponse'
-    {_ddrsDataset = Nothing, _ddrsResponseStatus = pResponseStatus_}
-
+describeDatasetResponse pResponseStatus_
+  = DescribeDatasetResponse'{_ddrsDataset = Nothing,
+                             _ddrsResponseStatus = pResponseStatus_}
 
 -- | An object that contains information about the data set.
 ddrsDataset :: Lens' DescribeDatasetResponse (Maybe Dataset)

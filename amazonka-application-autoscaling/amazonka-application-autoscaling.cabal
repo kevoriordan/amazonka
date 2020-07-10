@@ -59,12 +59,33 @@ library
         , Network.AWS.ApplicationAutoScaling.Waiters
 
     other-modules:
-          Network.AWS.ApplicationAutoScaling.Types.Product
-        , Network.AWS.ApplicationAutoScaling.Types.Sum
+          Network.AWS.ApplicationAutoScaling.Types.AdjustmentType
+        , Network.AWS.ApplicationAutoScaling.Types.Alarm
+        , Network.AWS.ApplicationAutoScaling.Types.CustomizedMetricSpecification
+        , Network.AWS.ApplicationAutoScaling.Types.MetricAggregationType
+        , Network.AWS.ApplicationAutoScaling.Types.MetricDimension
+        , Network.AWS.ApplicationAutoScaling.Types.MetricStatistic
+        , Network.AWS.ApplicationAutoScaling.Types.MetricType
+        , Network.AWS.ApplicationAutoScaling.Types.PolicyType
+        , Network.AWS.ApplicationAutoScaling.Types.PredefinedMetricSpecification
+        , Network.AWS.ApplicationAutoScaling.Types.Product
+        , Network.AWS.ApplicationAutoScaling.Types.ScalableDimension
+        , Network.AWS.ApplicationAutoScaling.Types.ScalableTarget
+        , Network.AWS.ApplicationAutoScaling.Types.ScalableTargetAction
+        , Network.AWS.ApplicationAutoScaling.Types.ScalingActivity
+        , Network.AWS.ApplicationAutoScaling.Types.ScalingActivityStatusCode
+        , Network.AWS.ApplicationAutoScaling.Types.ScalingPolicy
+        , Network.AWS.ApplicationAutoScaling.Types.ScheduledAction
+        , Network.AWS.ApplicationAutoScaling.Types.ServiceNamespace
+        , Network.AWS.ApplicationAutoScaling.Types.StepAdjustment
+        , Network.AWS.ApplicationAutoScaling.Types.StepScalingPolicyConfiguration
+        , Network.AWS.ApplicationAutoScaling.Types.SuspendedState
+        , Network.AWS.ApplicationAutoScaling.Types.TargetTrackingScalingPolicyConfiguration
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-application-autoscaling-test
     type:              exitcode-stdio-1.0
@@ -88,6 +109,7 @@ test-suite amazonka-application-autoscaling-test
         , amazonka-application-autoscaling
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

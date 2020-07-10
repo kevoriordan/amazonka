@@ -52,12 +52,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listTagsForStream' smart constructor.
-data ListTagsForStream = ListTagsForStream'
-  { _ltfsLimit                :: !(Maybe Nat)
-  , _ltfsExclusiveStartTagKey :: !(Maybe Text)
-  , _ltfsStreamName           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForStream = ListTagsForStream'{_ltfsLimit
+                                            :: !(Maybe Nat),
+                                            _ltfsExclusiveStartTagKey ::
+                                            !(Maybe Text),
+                                            _ltfsStreamName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsForStream' with the minimum fields required to make a request.
 --
@@ -65,25 +65,22 @@ data ListTagsForStream = ListTagsForStream'
 --
 -- * 'ltfsLimit' - The number of tags to return. If this number is less than the total number of tags associated with the stream, @HasMoreTags@ is set to @true@ . To list additional tags, set @ExclusiveStartTagKey@ to the last key in the response.
 --
--- * 'ltfsExclusiveStartTagKey' - The key to use as the starting point for the list of tags. If this parameter is set, @ListTagsForStream@ gets all tags that occur after @ExclusiveStartTagKey@ .
+-- * 'ltfsExclusiveStartTagKey' - The key to use as the starting point for the list of tags. If this parameter is set, @ListTagsForStream@ gets all tags that occur after @ExclusiveStartTagKey@ . 
 --
 -- * 'ltfsStreamName' - The name of the stream.
 listTagsForStream
     :: Text -- ^ 'ltfsStreamName'
     -> ListTagsForStream
-listTagsForStream pStreamName_ =
-  ListTagsForStream'
-    { _ltfsLimit = Nothing
-    , _ltfsExclusiveStartTagKey = Nothing
-    , _ltfsStreamName = pStreamName_
-    }
-
+listTagsForStream pStreamName_
+  = ListTagsForStream'{_ltfsLimit = Nothing,
+                       _ltfsExclusiveStartTagKey = Nothing,
+                       _ltfsStreamName = pStreamName_}
 
 -- | The number of tags to return. If this number is less than the total number of tags associated with the stream, @HasMoreTags@ is set to @true@ . To list additional tags, set @ExclusiveStartTagKey@ to the last key in the response.
 ltfsLimit :: Lens' ListTagsForStream (Maybe Natural)
 ltfsLimit = lens _ltfsLimit (\ s a -> s{_ltfsLimit = a}) . mapping _Nat
 
--- | The key to use as the starting point for the list of tags. If this parameter is set, @ListTagsForStream@ gets all tags that occur after @ExclusiveStartTagKey@ .
+-- | The key to use as the starting point for the list of tags. If this parameter is set, @ListTagsForStream@ gets all tags that occur after @ExclusiveStartTagKey@ . 
 ltfsExclusiveStartTagKey :: Lens' ListTagsForStream (Maybe Text)
 ltfsExclusiveStartTagKey = lens _ltfsExclusiveStartTagKey (\ s a -> s{_ltfsExclusiveStartTagKey = a})
 
@@ -134,12 +131,14 @@ instance ToQuery ListTagsForStream where
 --
 --
 -- /See:/ 'listTagsForStreamResponse' smart constructor.
-data ListTagsForStreamResponse = ListTagsForStreamResponse'
-  { _ltfsrsResponseStatus :: !Int
-  , _ltfsrsTags           :: ![Tag]
-  , _ltfsrsHasMoreTags    :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForStreamResponse = ListTagsForStreamResponse'{_ltfsrsResponseStatus
+                                                            :: !Int,
+                                                            _ltfsrsTags ::
+                                                            ![Tag],
+                                                            _ltfsrsHasMoreTags
+                                                            :: !Bool}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListTagsForStreamResponse' with the minimum fields required to make a request.
 --
@@ -147,26 +146,25 @@ data ListTagsForStreamResponse = ListTagsForStreamResponse'
 --
 -- * 'ltfsrsResponseStatus' - -- | The response status code.
 --
--- * 'ltfsrsTags' - A list of tags associated with @StreamName@ , starting with the first tag after @ExclusiveStartTagKey@ and up to the specified @Limit@ .
+-- * 'ltfsrsTags' - A list of tags associated with @StreamName@ , starting with the first tag after @ExclusiveStartTagKey@ and up to the specified @Limit@ . 
 --
 -- * 'ltfsrsHasMoreTags' - If set to @true@ , more tags are available. To request additional tags, set @ExclusiveStartTagKey@ to the key of the last tag returned.
 listTagsForStreamResponse
     :: Int -- ^ 'ltfsrsResponseStatus'
     -> Bool -- ^ 'ltfsrsHasMoreTags'
     -> ListTagsForStreamResponse
-listTagsForStreamResponse pResponseStatus_ pHasMoreTags_ =
-  ListTagsForStreamResponse'
-    { _ltfsrsResponseStatus = pResponseStatus_
-    , _ltfsrsTags = mempty
-    , _ltfsrsHasMoreTags = pHasMoreTags_
-    }
-
+listTagsForStreamResponse pResponseStatus_
+  pHasMoreTags_
+  = ListTagsForStreamResponse'{_ltfsrsResponseStatus =
+                                 pResponseStatus_,
+                               _ltfsrsTags = mempty,
+                               _ltfsrsHasMoreTags = pHasMoreTags_}
 
 -- | -- | The response status code.
 ltfsrsResponseStatus :: Lens' ListTagsForStreamResponse Int
 ltfsrsResponseStatus = lens _ltfsrsResponseStatus (\ s a -> s{_ltfsrsResponseStatus = a})
 
--- | A list of tags associated with @StreamName@ , starting with the first tag after @ExclusiveStartTagKey@ and up to the specified @Limit@ .
+-- | A list of tags associated with @StreamName@ , starting with the first tag after @ExclusiveStartTagKey@ and up to the specified @Limit@ . 
 ltfsrsTags :: Lens' ListTagsForStreamResponse [Tag]
 ltfsrsTags = lens _ltfsrsTags (\ s a -> s{_ltfsrsTags = a}) . _Coerce
 

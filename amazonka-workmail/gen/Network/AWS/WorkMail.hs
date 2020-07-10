@@ -11,10 +11,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or their native iOS and Android email applications. You can integrate Amazon WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.
+-- Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or other native iOS and Android email applications. You can integrate WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.
 --
 --
--- The Amazon WorkMail API is designed for the following scenarios:
+-- The WorkMail API is designed for the following scenarios:
 --
 --     * Listing and describing organizations
 --
@@ -32,7 +32,7 @@
 --
 --
 --
--- All Amazon WorkMail API actions are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkMail site, the IAM user gains full administrative visibility into the entire Amazon WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.
+-- All WorkMail API operations are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the WorkMail site, the IAM user gains full administrative visibility into the entire WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.
 --
 module Network.AWS.WorkMail
     (
@@ -42,8 +42,11 @@ module Network.AWS.WorkMail
     -- * Errors
     -- $errors
 
-    -- ** DirectoryUnavailableException
-    , _DirectoryUnavailableException
+    -- ** DirectoryServiceAuthenticationFailedException
+    , _DirectoryServiceAuthenticationFailedException
+
+    -- ** EntityAlreadyRegisteredException
+    , _EntityAlreadyRegisteredException
 
     -- ** InvalidParameterException
     , _InvalidParameterException
@@ -51,8 +54,20 @@ module Network.AWS.WorkMail
     -- ** UnsupportedOperationException
     , _UnsupportedOperationException
 
-    -- ** DirectoryServiceAuthenticationFailedException
-    , _DirectoryServiceAuthenticationFailedException
+    -- ** DirectoryUnavailableException
+    , _DirectoryUnavailableException
+
+    -- ** MailDomainStateException
+    , _MailDomainStateException
+
+    -- ** TooManyTagsException
+    , _TooManyTagsException
+
+    -- ** NameAvailabilityException
+    , _NameAvailabilityException
+
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
 
     -- ** OrganizationStateException
     , _OrganizationStateException
@@ -60,35 +75,29 @@ module Network.AWS.WorkMail
     -- ** EntityStateException
     , _EntityStateException
 
-    -- ** InvalidConfigurationException
-    , _InvalidConfigurationException
-
-    -- ** MailDomainStateException
-    , _MailDomainStateException
-
-    -- ** ReservedNameException
-    , _ReservedNameException
-
-    -- ** OrganizationNotFoundException
-    , _OrganizationNotFoundException
+    -- ** MailDomainNotFoundException
+    , _MailDomainNotFoundException
 
     -- ** EntityNotFoundException
     , _EntityNotFoundException
 
-    -- ** EntityAlreadyRegisteredException
-    , _EntityAlreadyRegisteredException
+    -- ** OrganizationNotFoundException
+    , _OrganizationNotFoundException
 
-    -- ** MailDomainNotFoundException
-    , _MailDomainNotFoundException
+    -- ** ReservedNameException
+    , _ReservedNameException
+
+    -- ** LimitExceededException
+    , _LimitExceededException
 
     -- ** EmailAddressInUseException
     , _EmailAddressInUseException
 
-    -- ** NameAvailabilityException
-    , _NameAvailabilityException
-
     -- ** InvalidPasswordException
     , _InvalidPasswordException
+
+    -- ** InvalidConfigurationException
+    , _InvalidConfigurationException
 
     -- * Waiters
     -- $waiters
@@ -96,100 +105,130 @@ module Network.AWS.WorkMail
     -- * Operations
     -- $operations
 
-    -- ** UpdatePrimaryEmailAddress
+    -- ** UpdatePrimaryEmailAddress 
     , module Network.AWS.WorkMail.UpdatePrimaryEmailAddress
 
-    -- ** DescribeResource
+    -- ** DescribeResource 
     , module Network.AWS.WorkMail.DescribeResource
 
-    -- ** CreateAlias
+    -- ** CreateAlias 
     , module Network.AWS.WorkMail.CreateAlias
 
-    -- ** ResetPassword
+    -- ** ResetPassword 
     , module Network.AWS.WorkMail.ResetPassword
 
-    -- ** DescribeGroup
+    -- ** DescribeGroup 
     , module Network.AWS.WorkMail.DescribeGroup
 
-    -- ** RegisterToWorkMail
+    -- ** ListTagsForResource 
+    , module Network.AWS.WorkMail.ListTagsForResource
+
+    -- ** RegisterToWorkMail 
     , module Network.AWS.WorkMail.RegisterToWorkMail
 
     -- ** ListAliases (Paginated)
     , module Network.AWS.WorkMail.ListAliases
 
-    -- ** PutMailboxPermissions
+    -- ** PutMailboxPermissions 
     , module Network.AWS.WorkMail.PutMailboxPermissions
 
-    -- ** DeleteMailboxPermissions
+    -- ** DeleteMailboxPermissions 
     , module Network.AWS.WorkMail.DeleteMailboxPermissions
 
     -- ** ListUsers (Paginated)
     , module Network.AWS.WorkMail.ListUsers
 
-    -- ** AssociateMemberToGroup
+    -- ** GetMailboxDetails 
+    , module Network.AWS.WorkMail.GetMailboxDetails
+
+    -- ** AssociateMemberToGroup 
     , module Network.AWS.WorkMail.AssociateMemberToGroup
 
-    -- ** DeleteResource
+    -- ** DeleteResource 
     , module Network.AWS.WorkMail.DeleteResource
 
-    -- ** UpdateResource
+    -- ** UpdateResource 
     , module Network.AWS.WorkMail.UpdateResource
 
-    -- ** DisassociateMemberFromGroup
+    -- ** DisassociateMemberFromGroup 
     , module Network.AWS.WorkMail.DisassociateMemberFromGroup
 
     -- ** ListResources (Paginated)
     , module Network.AWS.WorkMail.ListResources
 
-    -- ** DeregisterFromWorkMail
+    -- ** DeregisterFromWorkMail 
     , module Network.AWS.WorkMail.DeregisterFromWorkMail
 
-    -- ** ListMailboxPermissions
+    -- ** ListMailboxPermissions (Paginated)
     , module Network.AWS.WorkMail.ListMailboxPermissions
 
     -- ** ListGroupMembers (Paginated)
     , module Network.AWS.WorkMail.ListGroupMembers
 
-    -- ** DisassociateDelegateFromResource
+    -- ** DisassociateDelegateFromResource 
     , module Network.AWS.WorkMail.DisassociateDelegateFromResource
 
-    -- ** ListResourceDelegates
+    -- ** DeleteAccessControlRule 
+    , module Network.AWS.WorkMail.DeleteAccessControlRule
+
+    -- ** ListResourceDelegates (Paginated)
     , module Network.AWS.WorkMail.ListResourceDelegates
 
-    -- ** DescribeUser
+    -- ** ListAccessControlRules 
+    , module Network.AWS.WorkMail.ListAccessControlRules
+
+    -- ** DescribeUser 
     , module Network.AWS.WorkMail.DescribeUser
 
-    -- ** DeleteAlias
+    -- ** PutAccessControlRule 
+    , module Network.AWS.WorkMail.PutAccessControlRule
+
+    -- ** DeleteAlias 
     , module Network.AWS.WorkMail.DeleteAlias
 
     -- ** ListOrganizations (Paginated)
     , module Network.AWS.WorkMail.ListOrganizations
 
-    -- ** AssociateDelegateToResource
+    -- ** AssociateDelegateToResource 
     , module Network.AWS.WorkMail.AssociateDelegateToResource
 
-    -- ** CreateUser
+    -- ** GetAccessControlEffect 
+    , module Network.AWS.WorkMail.GetAccessControlEffect
+
+    -- ** CreateUser 
     , module Network.AWS.WorkMail.CreateUser
 
-    -- ** DeleteUser
+    -- ** DeleteUser 
     , module Network.AWS.WorkMail.DeleteUser
 
-    -- ** CreateGroup
+    -- ** TagResource 
+    , module Network.AWS.WorkMail.TagResource
+
+    -- ** CreateGroup 
     , module Network.AWS.WorkMail.CreateGroup
 
-    -- ** DeleteGroup
+    -- ** UpdateMailboxQuota 
+    , module Network.AWS.WorkMail.UpdateMailboxQuota
+
+    -- ** UntagResource 
+    , module Network.AWS.WorkMail.UntagResource
+
+    -- ** DeleteGroup 
     , module Network.AWS.WorkMail.DeleteGroup
 
     -- ** ListGroups (Paginated)
     , module Network.AWS.WorkMail.ListGroups
 
-    -- ** DescribeOrganization
+    -- ** DescribeOrganization 
     , module Network.AWS.WorkMail.DescribeOrganization
 
-    -- ** CreateResource
+    -- ** CreateResource 
     , module Network.AWS.WorkMail.CreateResource
 
     -- * Types
+
+    -- ** AccessControlRuleEffect
+    , AccessControlRuleEffect (..)
 
     -- ** EntityState
     , EntityState (..)
@@ -205,6 +244,21 @@ module Network.AWS.WorkMail
 
     -- ** UserRole
     , UserRole (..)
+
+    -- ** AccessControlRule
+    , AccessControlRule
+    , accessControlRule
+    , acrEffect
+    , acrUserIds
+    , acrActions
+    , acrDateCreated
+    , acrName
+    , acrNotUserIds
+    , acrDateModified
+    , acrIPRanges
+    , acrNotIPRanges
+    , acrNotActions
+    , acrDescription
 
     -- ** BookingOptions
     , BookingOptions
@@ -265,6 +319,12 @@ module Network.AWS.WorkMail
     , rType
     , rEnabledDate
 
+    -- ** Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
+
     -- ** User
     , User
     , user
@@ -284,6 +344,7 @@ import Network.AWS.WorkMail.CreateAlias
 import Network.AWS.WorkMail.CreateGroup
 import Network.AWS.WorkMail.CreateResource
 import Network.AWS.WorkMail.CreateUser
+import Network.AWS.WorkMail.DeleteAccessControlRule
 import Network.AWS.WorkMail.DeleteAlias
 import Network.AWS.WorkMail.DeleteGroup
 import Network.AWS.WorkMail.DeleteMailboxPermissions
@@ -296,6 +357,9 @@ import Network.AWS.WorkMail.DescribeResource
 import Network.AWS.WorkMail.DescribeUser
 import Network.AWS.WorkMail.DisassociateDelegateFromResource
 import Network.AWS.WorkMail.DisassociateMemberFromGroup
+import Network.AWS.WorkMail.GetAccessControlEffect
+import Network.AWS.WorkMail.GetMailboxDetails
+import Network.AWS.WorkMail.ListAccessControlRules
 import Network.AWS.WorkMail.ListAliases
 import Network.AWS.WorkMail.ListGroupMembers
 import Network.AWS.WorkMail.ListGroups
@@ -303,11 +367,16 @@ import Network.AWS.WorkMail.ListMailboxPermissions
 import Network.AWS.WorkMail.ListOrganizations
 import Network.AWS.WorkMail.ListResourceDelegates
 import Network.AWS.WorkMail.ListResources
+import Network.AWS.WorkMail.ListTagsForResource
 import Network.AWS.WorkMail.ListUsers
+import Network.AWS.WorkMail.PutAccessControlRule
 import Network.AWS.WorkMail.PutMailboxPermissions
 import Network.AWS.WorkMail.RegisterToWorkMail
 import Network.AWS.WorkMail.ResetPassword
+import Network.AWS.WorkMail.TagResource
 import Network.AWS.WorkMail.Types
+import Network.AWS.WorkMail.UntagResource
+import Network.AWS.WorkMail.UpdateMailboxQuota
 import Network.AWS.WorkMail.UpdatePrimaryEmailAddress
 import Network.AWS.WorkMail.UpdateResource
 import Network.AWS.WorkMail.Waiters

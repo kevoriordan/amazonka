@@ -48,23 +48,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteRemoteAccessSession' smart constructor.
-newtype DeleteRemoteAccessSession = DeleteRemoteAccessSession'
-  { _drasArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRemoteAccessSession = DeleteRemoteAccessSession'{_drasArn
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteRemoteAccessSession' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drasArn' - The Amazon Resource Name (ARN) of the sesssion for which you want to delete remote access.
+-- * 'drasArn' - The Amazon Resource Name (ARN) of the session for which you want to delete remote access.
 deleteRemoteAccessSession
     :: Text -- ^ 'drasArn'
     -> DeleteRemoteAccessSession
-deleteRemoteAccessSession pArn_ = DeleteRemoteAccessSession' {_drasArn = pArn_}
+deleteRemoteAccessSession pArn_
+  = DeleteRemoteAccessSession'{_drasArn = pArn_}
 
-
--- | The Amazon Resource Name (ARN) of the sesssion for which you want to delete remote access.
+-- | The Amazon Resource Name (ARN) of the session for which you want to delete remote access.
 drasArn :: Lens' DeleteRemoteAccessSession Text
 drasArn = lens _drasArn (\ s a -> s{_drasArn = a})
 
@@ -107,10 +107,11 @@ instance ToQuery DeleteRemoteAccessSession where
 --
 --
 -- /See:/ 'deleteRemoteAccessSessionResponse' smart constructor.
-newtype DeleteRemoteAccessSessionResponse = DeleteRemoteAccessSessionResponse'
-  { _drasrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteRemoteAccessSessionResponse = DeleteRemoteAccessSessionResponse'{_drasrsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'DeleteRemoteAccessSessionResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +121,9 @@ newtype DeleteRemoteAccessSessionResponse = DeleteRemoteAccessSessionResponse'
 deleteRemoteAccessSessionResponse
     :: Int -- ^ 'drasrsResponseStatus'
     -> DeleteRemoteAccessSessionResponse
-deleteRemoteAccessSessionResponse pResponseStatus_ =
-  DeleteRemoteAccessSessionResponse' {_drasrsResponseStatus = pResponseStatus_}
-
+deleteRemoteAccessSessionResponse pResponseStatus_
+  = DeleteRemoteAccessSessionResponse'{_drasrsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 drasrsResponseStatus :: Lens' DeleteRemoteAccessSessionResponse Int

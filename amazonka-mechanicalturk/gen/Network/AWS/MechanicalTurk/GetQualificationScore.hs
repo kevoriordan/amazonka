@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @GetQualificationScore@ operation returns the value of a Worker's Qualification for a given Qualification type.
+-- The @GetQualificationScore@ operation returns the value of a Worker's Qualification for a given Qualification type. 
 --
 --
--- To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID is included in the assignment data returned by the @ListAssignmentsForHIT@ operation.
+-- To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID is included in the assignment data returned by the @ListAssignmentsForHIT@ operation. 
 --
 -- Only the owner of a Qualification type can query the value of a Worker's Qualification of that type.
 --
@@ -50,11 +50,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getQualificationScore' smart constructor.
-data GetQualificationScore = GetQualificationScore'
-  { _gqsQualificationTypeId :: !Text
-  , _gqsWorkerId            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQualificationScore = GetQualificationScore'{_gqsQualificationTypeId
+                                                    :: !Text,
+                                                    _gqsWorkerId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetQualificationScore' with the minimum fields required to make a request.
 --
@@ -67,10 +67,11 @@ getQualificationScore
     :: Text -- ^ 'gqsQualificationTypeId'
     -> Text -- ^ 'gqsWorkerId'
     -> GetQualificationScore
-getQualificationScore pQualificationTypeId_ pWorkerId_ =
-  GetQualificationScore'
-    {_gqsQualificationTypeId = pQualificationTypeId_, _gqsWorkerId = pWorkerId_}
-
+getQualificationScore pQualificationTypeId_
+  pWorkerId_
+  = GetQualificationScore'{_gqsQualificationTypeId =
+                             pQualificationTypeId_,
+                           _gqsWorkerId = pWorkerId_}
 
 -- | The ID of the QualificationType.
 gqsQualificationTypeId :: Lens' GetQualificationScore Text
@@ -119,28 +120,31 @@ instance ToQuery GetQualificationScore where
         toQuery = const mempty
 
 -- | /See:/ 'getQualificationScoreResponse' smart constructor.
-data GetQualificationScoreResponse = GetQualificationScoreResponse'
-  { _gqsrsQualification  :: !(Maybe Qualification)
-  , _gqsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQualificationScoreResponse = GetQualificationScoreResponse'{_gqsrsQualification
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Qualification),
+                                                                    _gqsrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetQualificationScoreResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gqsrsQualification' - The Qualification data structure of the Qualification assigned to a user, including the Qualification type and the value (score).
+-- * 'gqsrsQualification' - The Qualification data structure of the Qualification assigned to a user, including the Qualification type and the value (score). 
 --
 -- * 'gqsrsResponseStatus' - -- | The response status code.
 getQualificationScoreResponse
     :: Int -- ^ 'gqsrsResponseStatus'
     -> GetQualificationScoreResponse
-getQualificationScoreResponse pResponseStatus_ =
-  GetQualificationScoreResponse'
-    {_gqsrsQualification = Nothing, _gqsrsResponseStatus = pResponseStatus_}
+getQualificationScoreResponse pResponseStatus_
+  = GetQualificationScoreResponse'{_gqsrsQualification
+                                     = Nothing,
+                                   _gqsrsResponseStatus = pResponseStatus_}
 
-
--- | The Qualification data structure of the Qualification assigned to a user, including the Qualification type and the value (score).
+-- | The Qualification data structure of the Qualification assigned to a user, including the Qualification type and the value (score). 
 gqsrsQualification :: Lens' GetQualificationScoreResponse (Maybe Qualification)
 gqsrsQualification = lens _gqsrsQualification (\ s a -> s{_gqsrsQualification = a})
 

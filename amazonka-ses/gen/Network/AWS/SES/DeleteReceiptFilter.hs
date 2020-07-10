@@ -21,7 +21,7 @@
 -- Deletes the specified IP address filter.
 --
 --
--- For information about managing IP address filters, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html Amazon SES Developer Guide> .
+-- For information about managing IP address filters, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
@@ -47,15 +47,15 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to delete an IP address filter. You use IP address filters when you receive email with Amazon SES. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
+-- | Represents a request to delete an IP address filter. You use IP address filters when you receive email with Amazon SES. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'deleteReceiptFilter' smart constructor.
-newtype DeleteReceiptFilter = DeleteReceiptFilter'
-  { _drfFilterName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReceiptFilter = DeleteReceiptFilter'{_drfFilterName
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteReceiptFilter' with the minimum fields required to make a request.
 --
@@ -65,9 +65,8 @@ newtype DeleteReceiptFilter = DeleteReceiptFilter'
 deleteReceiptFilter
     :: Text -- ^ 'drfFilterName'
     -> DeleteReceiptFilter
-deleteReceiptFilter pFilterName_ =
-  DeleteReceiptFilter' {_drfFilterName = pFilterName_}
-
+deleteReceiptFilter pFilterName_
+  = DeleteReceiptFilter'{_drfFilterName = pFilterName_}
 
 -- | The name of the IP address filter to delete.
 drfFilterName :: Lens' DeleteReceiptFilter Text
@@ -104,10 +103,10 @@ instance ToQuery DeleteReceiptFilter where
 --
 --
 -- /See:/ 'deleteReceiptFilterResponse' smart constructor.
-newtype DeleteReceiptFilterResponse = DeleteReceiptFilterResponse'
-  { _drfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReceiptFilterResponse = DeleteReceiptFilterResponse'{_drfrsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteReceiptFilterResponse' with the minimum fields required to make a request.
 --
@@ -117,9 +116,9 @@ newtype DeleteReceiptFilterResponse = DeleteReceiptFilterResponse'
 deleteReceiptFilterResponse
     :: Int -- ^ 'drfrsResponseStatus'
     -> DeleteReceiptFilterResponse
-deleteReceiptFilterResponse pResponseStatus_ =
-  DeleteReceiptFilterResponse' {_drfrsResponseStatus = pResponseStatus_}
-
+deleteReceiptFilterResponse pResponseStatus_
+  = DeleteReceiptFilterResponse'{_drfrsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 drfrsResponseStatus :: Lens' DeleteReceiptFilterResponse Int

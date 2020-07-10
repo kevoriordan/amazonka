@@ -42,10 +42,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteDestination' smart constructor.
-newtype DeleteDestination = DeleteDestination'
-  { _ddDestinationName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteDestination = DeleteDestination'{_ddDestinationName
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteDestination' with the minimum fields required to make a request.
 --
@@ -55,9 +54,9 @@ newtype DeleteDestination = DeleteDestination'
 deleteDestination
     :: Text -- ^ 'ddDestinationName'
     -> DeleteDestination
-deleteDestination pDestinationName_ =
-  DeleteDestination' {_ddDestinationName = pDestinationName_}
-
+deleteDestination pDestinationName_
+  = DeleteDestination'{_ddDestinationName =
+                         pDestinationName_}
 
 -- | The name of the destination.
 ddDestinationName :: Lens' DeleteDestination Text
@@ -94,16 +93,15 @@ instance ToQuery DeleteDestination where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDestinationResponse' smart constructor.
-data DeleteDestinationResponse =
-  DeleteDestinationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDestinationResponse = DeleteDestinationResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteDestinationResponse' with the minimum fields required to make a request.
 --
 deleteDestinationResponse
     :: DeleteDestinationResponse
-deleteDestinationResponse = DeleteDestinationResponse'
-
+deleteDestinationResponse
+  = DeleteDestinationResponse'
 
 instance NFData DeleteDestinationResponse where

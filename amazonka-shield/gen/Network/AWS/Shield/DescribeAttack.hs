@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the details of a DDoS attack.
+-- Describes the details of a DDoS attack. 
 --
 --
 module Network.AWS.Shield.DescribeAttack
@@ -45,10 +45,9 @@ import Network.AWS.Shield.Types
 import Network.AWS.Shield.Types.Product
 
 -- | /See:/ 'describeAttack' smart constructor.
-newtype DescribeAttack = DescribeAttack'
-  { _daAttackId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeAttack = DescribeAttack'{_daAttackId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeAttack' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype DescribeAttack = DescribeAttack'
 describeAttack
     :: Text -- ^ 'daAttackId'
     -> DescribeAttack
-describeAttack pAttackId_ = DescribeAttack' {_daAttackId = pAttackId_}
-
+describeAttack pAttackId_
+  = DescribeAttack'{_daAttackId = pAttackId_}
 
 -- | The unique identifier (ID) for the attack that to be described.
 daAttackId :: Lens' DescribeAttack Text
@@ -99,11 +98,12 @@ instance ToQuery DescribeAttack where
         toQuery = const mempty
 
 -- | /See:/ 'describeAttackResponse' smart constructor.
-data DescribeAttackResponse = DescribeAttackResponse'
-  { _darsAttack         :: !(Maybe AttackDetail)
-  , _darsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAttackResponse = DescribeAttackResponse'{_darsAttack
+                                                      :: !(Maybe AttackDetail),
+                                                      _darsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeAttackResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +115,9 @@ data DescribeAttackResponse = DescribeAttackResponse'
 describeAttackResponse
     :: Int -- ^ 'darsResponseStatus'
     -> DescribeAttackResponse
-describeAttackResponse pResponseStatus_ =
-  DescribeAttackResponse'
-    {_darsAttack = Nothing, _darsResponseStatus = pResponseStatus_}
-
+describeAttackResponse pResponseStatus_
+  = DescribeAttackResponse'{_darsAttack = Nothing,
+                            _darsResponseStatus = pResponseStatus_}
 
 -- | The attack that is described.
 darsAttack :: Lens' DescribeAttackResponse (Maybe AttackDetail)

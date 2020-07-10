@@ -53,13 +53,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getMethodResponse' smart constructor.
-data GetMethodResponse = GetMethodResponse'
-  { _gmRestAPIId  :: !Text
-  , _gmResourceId :: !Text
-  , _gmHttpMethod :: !Text
-  , _gmStatusCode :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetMethodResponse = GetMethodResponse'{_gmRestAPIId
+                                            :: !Text,
+                                            _gmResourceId :: !Text,
+                                            _gmHttpMethod :: !Text,
+                                            _gmStatusCode :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetMethodResponse' with the minimum fields required to make a request.
 --
@@ -78,14 +77,12 @@ getMethodResponse
     -> Text -- ^ 'gmHttpMethod'
     -> Text -- ^ 'gmStatusCode'
     -> GetMethodResponse
-getMethodResponse pRestAPIId_ pResourceId_ pHttpMethod_ pStatusCode_ =
-  GetMethodResponse'
-    { _gmRestAPIId = pRestAPIId_
-    , _gmResourceId = pResourceId_
-    , _gmHttpMethod = pHttpMethod_
-    , _gmStatusCode = pStatusCode_
-    }
-
+getMethodResponse pRestAPIId_ pResourceId_
+  pHttpMethod_ pStatusCode_
+  = GetMethodResponse'{_gmRestAPIId = pRestAPIId_,
+                       _gmResourceId = pResourceId_,
+                       _gmHttpMethod = pHttpMethod_,
+                       _gmStatusCode = pStatusCode_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 gmRestAPIId :: Lens' GetMethodResponse Text

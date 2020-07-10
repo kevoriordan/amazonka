@@ -48,12 +48,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'registerOnPremisesInstance' smart constructor.
-data RegisterOnPremisesInstance = RegisterOnPremisesInstance'
-  { _ropiIamUserARN    :: !(Maybe Text)
-  , _ropiIamSessionARN :: !(Maybe Text)
-  , _ropiInstanceName  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterOnPremisesInstance = RegisterOnPremisesInstance'{_ropiIamUserARN
+                                                              :: !(Maybe Text),
+                                                              _ropiIamSessionARN
+                                                              :: !(Maybe Text),
+                                                              _ropiInstanceName
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'RegisterOnPremisesInstance' with the minimum fields required to make a request.
 --
@@ -67,13 +69,11 @@ data RegisterOnPremisesInstance = RegisterOnPremisesInstance'
 registerOnPremisesInstance
     :: Text -- ^ 'ropiInstanceName'
     -> RegisterOnPremisesInstance
-registerOnPremisesInstance pInstanceName_ =
-  RegisterOnPremisesInstance'
-    { _ropiIamUserARN = Nothing
-    , _ropiIamSessionARN = Nothing
-    , _ropiInstanceName = pInstanceName_
-    }
-
+registerOnPremisesInstance pInstanceName_
+  = RegisterOnPremisesInstance'{_ropiIamUserARN =
+                                  Nothing,
+                                _ropiIamSessionARN = Nothing,
+                                _ropiInstanceName = pInstanceName_}
 
 -- | The ARN of the IAM user to associate with the on-premises instance.
 ropiIamUserARN :: Lens' RegisterOnPremisesInstance (Maybe Text)
@@ -123,17 +123,16 @@ instance ToQuery RegisterOnPremisesInstance where
         toQuery = const mempty
 
 -- | /See:/ 'registerOnPremisesInstanceResponse' smart constructor.
-data RegisterOnPremisesInstanceResponse =
-  RegisterOnPremisesInstanceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterOnPremisesInstanceResponse = RegisterOnPremisesInstanceResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'RegisterOnPremisesInstanceResponse' with the minimum fields required to make a request.
 --
 registerOnPremisesInstanceResponse
     :: RegisterOnPremisesInstanceResponse
-registerOnPremisesInstanceResponse = RegisterOnPremisesInstanceResponse'
-
+registerOnPremisesInstanceResponse
+  = RegisterOnPremisesInstanceResponse'
 
 instance NFData RegisterOnPremisesInstanceResponse
          where

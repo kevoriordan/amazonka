@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes one or more of your Systems Manager documents.
+-- Returns all Systems Manager (SSM) documents in the current AWS account and Region. You can limit the results of this request by using a filter.
 --
 --
 --
@@ -52,41 +52,37 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'listDocuments' smart constructor.
-data ListDocuments = ListDocuments'
-  { _ldDocumentFilterList :: !(Maybe (List1 DocumentFilter))
-  , _ldFilters            :: !(Maybe [DocumentKeyValuesFilter])
-  , _ldNextToken          :: !(Maybe Text)
-  , _ldMaxResults         :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDocuments = ListDocuments'{_ldDocumentFilterList
+                                    :: !(Maybe (List1 DocumentFilter)),
+                                    _ldFilters ::
+                                    !(Maybe [DocumentKeyValuesFilter]),
+                                    _ldNextToken :: !(Maybe Text),
+                                    _ldMaxResults :: !(Maybe Nat)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDocuments' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldDocumentFilterList' - One or more filters. Use a filter to return a more specific list of results.
+-- * 'ldDocumentFilterList' - This data type is deprecated. Instead, use @Filters@ .
 --
--- * 'ldFilters' - One or more filters. Use a filter to return a more specific list of results.
+-- * 'ldFilters' - One or more DocumentKeyValuesFilter objects. Use a filter to return a more specific list of results. For keys, you can specify one or more key-value pair tags that have been applied to a document. Other valid keys include @Owner@ , @Name@ , @PlatformTypes@ , @DocumentType@ , and @TargetType@ . For example, to return documents you own use @Key=Owner,Values=Self@ . To specify a custom key-value pair, use the format @Key=tag:tagName,Values=valueName@ .
 --
 -- * 'ldNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
 -- * 'ldMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 listDocuments
     :: ListDocuments
-listDocuments =
-  ListDocuments'
-    { _ldDocumentFilterList = Nothing
-    , _ldFilters = Nothing
-    , _ldNextToken = Nothing
-    , _ldMaxResults = Nothing
-    }
+listDocuments
+  = ListDocuments'{_ldDocumentFilterList = Nothing,
+                   _ldFilters = Nothing, _ldNextToken = Nothing,
+                   _ldMaxResults = Nothing}
 
-
--- | One or more filters. Use a filter to return a more specific list of results.
+-- | This data type is deprecated. Instead, use @Filters@ .
 ldDocumentFilterList :: Lens' ListDocuments (Maybe (NonEmpty DocumentFilter))
 ldDocumentFilterList = lens _ldDocumentFilterList (\ s a -> s{_ldDocumentFilterList = a}) . mapping _List1
 
--- | One or more filters. Use a filter to return a more specific list of results.
+-- | One or more DocumentKeyValuesFilter objects. Use a filter to return a more specific list of results. For keys, you can specify one or more key-value pair tags that have been applied to a document. Other valid keys include @Owner@ , @Name@ , @PlatformTypes@ , @DocumentType@ , and @TargetType@ . For example, to return documents you own use @Key=Owner,Values=Self@ . To specify a custom key-value pair, use the format @Key=tag:tagName,Values=valueName@ .
 ldFilters :: Lens' ListDocuments [DocumentKeyValuesFilter]
 ldFilters = lens _ldFilters (\ s a -> s{_ldFilters = a}) . _Default . _Coerce
 
@@ -145,12 +141,15 @@ instance ToQuery ListDocuments where
         toQuery = const mempty
 
 -- | /See:/ 'listDocumentsResponse' smart constructor.
-data ListDocumentsResponse = ListDocumentsResponse'
-  { _ldrsDocumentIdentifiers :: !(Maybe [DocumentIdentifier])
-  , _ldrsNextToken           :: !(Maybe Text)
-  , _ldrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDocumentsResponse = ListDocumentsResponse'{_ldrsDocumentIdentifiers
+                                                    ::
+                                                    !(Maybe
+                                                        [DocumentIdentifier]),
+                                                    _ldrsNextToken ::
+                                                    !(Maybe Text),
+                                                    _ldrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListDocumentsResponse' with the minimum fields required to make a request.
 --
@@ -164,13 +163,11 @@ data ListDocumentsResponse = ListDocumentsResponse'
 listDocumentsResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDocumentsResponse
-listDocumentsResponse pResponseStatus_ =
-  ListDocumentsResponse'
-    { _ldrsDocumentIdentifiers = Nothing
-    , _ldrsNextToken = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    }
-
+listDocumentsResponse pResponseStatus_
+  = ListDocumentsResponse'{_ldrsDocumentIdentifiers =
+                             Nothing,
+                           _ldrsNextToken = Nothing,
+                           _ldrsResponseStatus = pResponseStatus_}
 
 -- | The names of the Systems Manager documents.
 ldrsDocumentIdentifiers :: Lens' ListDocumentsResponse [DocumentIdentifier]

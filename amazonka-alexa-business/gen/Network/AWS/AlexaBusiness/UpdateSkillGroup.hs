@@ -46,33 +46,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateSkillGroup' smart constructor.
-data UpdateSkillGroup = UpdateSkillGroup'
-  { _usgSkillGroupARN  :: !(Maybe Text)
-  , _usgDescription    :: !(Maybe Text)
-  , _usgSkillGroupName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSkillGroup = UpdateSkillGroup'{_usgSkillGroupARN
+                                          :: !(Maybe Text),
+                                          _usgDescription :: !(Maybe Text),
+                                          _usgSkillGroupName :: !(Maybe Text)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSkillGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'usgSkillGroupARN' - The ARN of the skill group to update.
+-- * 'usgSkillGroupARN' - The ARN of the skill group to update. 
 --
 -- * 'usgDescription' - The updated description for the skill group.
 --
 -- * 'usgSkillGroupName' - The updated name for the skill group.
 updateSkillGroup
     :: UpdateSkillGroup
-updateSkillGroup =
-  UpdateSkillGroup'
-    { _usgSkillGroupARN = Nothing
-    , _usgDescription = Nothing
-    , _usgSkillGroupName = Nothing
-    }
+updateSkillGroup
+  = UpdateSkillGroup'{_usgSkillGroupARN = Nothing,
+                      _usgDescription = Nothing,
+                      _usgSkillGroupName = Nothing}
 
-
--- | The ARN of the skill group to update.
+-- | The ARN of the skill group to update. 
 usgSkillGroupARN :: Lens' UpdateSkillGroup (Maybe Text)
 usgSkillGroupARN = lens _usgSkillGroupARN (\ s a -> s{_usgSkillGroupARN = a})
 
@@ -120,10 +116,10 @@ instance ToQuery UpdateSkillGroup where
         toQuery = const mempty
 
 -- | /See:/ 'updateSkillGroupResponse' smart constructor.
-newtype UpdateSkillGroupResponse = UpdateSkillGroupResponse'
-  { _usgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateSkillGroupResponse = UpdateSkillGroupResponse'{_usgrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateSkillGroupResponse' with the minimum fields required to make a request.
 --
@@ -133,9 +129,9 @@ newtype UpdateSkillGroupResponse = UpdateSkillGroupResponse'
 updateSkillGroupResponse
     :: Int -- ^ 'usgrsResponseStatus'
     -> UpdateSkillGroupResponse
-updateSkillGroupResponse pResponseStatus_ =
-  UpdateSkillGroupResponse' {_usgrsResponseStatus = pResponseStatus_}
-
+updateSkillGroupResponse pResponseStatus_
+  = UpdateSkillGroupResponse'{_usgrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 usgrsResponseStatus :: Lens' UpdateSkillGroupResponse Int

@@ -11,13 +11,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS CloudTrail__
+-- __AWS CloudTrail__ 
 --
 -- This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.
 --
 -- CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.
 --
--- See the <http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html AWS CloudTrail User Guide> for information about the data that is included with each AWS API call listed in the log files.
+-- See the <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html AWS CloudTrail User Guide> for information about the data that is included with each AWS API call listed in the log files.
 --
 module Network.AWS.CloudTrail
     (
@@ -27,20 +27,20 @@ module Network.AWS.CloudTrail
     -- * Errors
     -- $errors
 
-    -- ** InvalidTimeRangeException
-    , _InvalidTimeRangeException
+    -- ** InvalidTrailNameException
+    , _InvalidTrailNameException
 
-    -- ** InsufficientS3BucketPolicyException
-    , _InsufficientS3BucketPolicyException
+    -- ** InvalidMaxResultsException
+    , _InvalidMaxResultsException
 
-    -- ** MaximumNumberOfTrailsExceededException
-    , _MaximumNumberOfTrailsExceededException
+    -- ** InvalidCloudWatchLogsRoleARNException
+    , _InvalidCloudWatchLogsRoleARNException
 
-    -- ** UnsupportedOperationException
-    , _UnsupportedOperationException
+    -- ** CloudTrailAccessNotEnabledException
+    , _CloudTrailAccessNotEnabledException
 
-    -- ** KMSKeyDisabledException
-    , _KMSKeyDisabledException
+    -- ** CloudTrailARNInvalidException
+    , _CloudTrailARNInvalidException
 
     -- ** InsufficientEncryptionPolicyException
     , _InsufficientEncryptionPolicyException
@@ -48,50 +48,68 @@ module Network.AWS.CloudTrail
     -- ** InsufficientSNSTopicPolicyException
     , _InsufficientSNSTopicPolicyException
 
-    -- ** InvalidCloudWatchLogsRoleARNException
-    , _InvalidCloudWatchLogsRoleARNException
+    -- ** InvalidTagParameterException
+    , _InvalidTagParameterException
 
-    -- ** TagsLimitExceededException
-    , _TagsLimitExceededException
+    -- ** OperationNotPermittedException
+    , _OperationNotPermittedException
 
-    -- ** CloudTrailARNInvalidException
-    , _CloudTrailARNInvalidException
+    -- ** KMSKeyDisabledException
+    , _KMSKeyDisabledException
 
-    -- ** InvalidLookupAttributesException
-    , _InvalidLookupAttributesException
+    -- ** KMSException
+    , _KMSException
 
-    -- ** InvalidTrailNameException
-    , _InvalidTrailNameException
-
-    -- ** InvalidSNSTopicNameException
-    , _InvalidSNSTopicNameException
-
-    -- ** ResourceTypeNotSupportedException
-    , _ResourceTypeNotSupportedException
-
-    -- ** CloudWatchLogsDeliveryUnavailableException
-    , _CloudWatchLogsDeliveryUnavailableException
-
-    -- ** KMSKeyNotFoundException
-    , _KMSKeyNotFoundException
-
-    -- ** TrailNotFoundException
-    , _TrailNotFoundException
-
-    -- ** InvalidEventSelectorsException
-    , _InvalidEventSelectorsException
-
-    -- ** TrailNotProvidedException
-    , _TrailNotProvidedException
+    -- ** InvalidEventCategoryException
+    , _InvalidEventCategoryException
 
     -- ** InvalidS3BucketNameException
     , _InvalidS3BucketNameException
 
-    -- ** InvalidCloudWatchLogsLogGroupARNException
-    , _InvalidCloudWatchLogsLogGroupARNException
+    -- ** UnsupportedOperationException
+    , _UnsupportedOperationException
 
-    -- ** KMSException
-    , _KMSException
+    -- ** InvalidTimeRangeException
+    , _InvalidTimeRangeException
+
+    -- ** InsufficientS3BucketPolicyException
+    , _InsufficientS3BucketPolicyException
+
+    -- ** InvalidEventSelectorsException
+    , _InvalidEventSelectorsException
+
+    -- ** InsightNotEnabledException
+    , _InsightNotEnabledException
+
+    -- ** TrailNotFoundException
+    , _TrailNotFoundException
+
+    -- ** CloudWatchLogsDeliveryUnavailableException
+    , _CloudWatchLogsDeliveryUnavailableException
+
+    -- ** OrganizationsNotInUseException
+    , _OrganizationsNotInUseException
+
+    -- ** InvalidSNSTopicNameException
+    , _InvalidSNSTopicNameException
+
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
+
+    -- ** InvalidLookupAttributesException
+    , _InvalidLookupAttributesException
+
+    -- ** OrganizationNotInAllFeaturesModeException
+    , _OrganizationNotInAllFeaturesModeException
+
+    -- ** TrailAlreadyExistsException
+    , _TrailAlreadyExistsException
+
+    -- ** TagsLimitExceededException
+    , _TagsLimitExceededException
+
+    -- ** InvalidTokenException
+    , _InvalidTokenException
 
     -- ** S3BucketDoesNotExistException
     , _S3BucketDoesNotExistException
@@ -99,29 +117,20 @@ module Network.AWS.CloudTrail
     -- ** InvalidNextTokenException
     , _InvalidNextTokenException
 
-    -- ** InvalidTagParameterException
-    , _InvalidTagParameterException
+    -- ** InvalidCloudWatchLogsLogGroupARNException
+    , _InvalidCloudWatchLogsLogGroupARNException
 
-    -- ** OperationNotPermittedException
-    , _OperationNotPermittedException
+    -- ** MaximumNumberOfTrailsExceededException
+    , _MaximumNumberOfTrailsExceededException
 
-    -- ** InvalidTokenException
-    , _InvalidTokenException
+    -- ** TrailNotProvidedException
+    , _TrailNotProvidedException
 
-    -- ** InvalidMaxResultsException
-    , _InvalidMaxResultsException
+    -- ** InsufficientDependencyServiceAccessPermissionException
+    , _InsufficientDependencyServiceAccessPermissionException
 
-    -- ** TrailAlreadyExistsException
-    , _TrailAlreadyExistsException
-
-    -- ** InvalidS3PrefixException
-    , _InvalidS3PrefixException
-
-    -- ** ResourceNotFoundException
-    , _ResourceNotFoundException
-
-    -- ** InvalidParameterCombinationException
-    , _InvalidParameterCombinationException
+    -- ** NotOrganizationMasterAccountException
+    , _NotOrganizationMasterAccountException
 
     -- ** InvalidKMSKeyIdException
     , _InvalidKMSKeyIdException
@@ -129,55 +138,88 @@ module Network.AWS.CloudTrail
     -- ** InvalidHomeRegionException
     , _InvalidHomeRegionException
 
+    -- ** KMSKeyNotFoundException
+    , _KMSKeyNotFoundException
+
+    -- ** ResourceTypeNotSupportedException
+    , _ResourceTypeNotSupportedException
+
+    -- ** InvalidParameterCombinationException
+    , _InvalidParameterCombinationException
+
+    -- ** InvalidS3PrefixException
+    , _InvalidS3PrefixException
+
+    -- ** InvalidInsightSelectorsException
+    , _InvalidInsightSelectorsException
+
     -- * Waiters
     -- $waiters
 
     -- * Operations
     -- $operations
 
-    -- ** DescribeTrails
+    -- ** DescribeTrails 
     , module Network.AWS.CloudTrail.DescribeTrails
 
-    -- ** ListPublicKeys
+    -- ** ListPublicKeys (Paginated)
     , module Network.AWS.CloudTrail.ListPublicKeys
 
-    -- ** RemoveTags
+    -- ** RemoveTags 
     , module Network.AWS.CloudTrail.RemoveTags
 
     -- ** LookupEvents (Paginated)
     , module Network.AWS.CloudTrail.LookupEvents
 
-    -- ** StopLogging
+    -- ** StopLogging 
     , module Network.AWS.CloudTrail.StopLogging
 
-    -- ** DeleteTrail
+    -- ** DeleteTrail 
     , module Network.AWS.CloudTrail.DeleteTrail
 
-    -- ** UpdateTrail
+    -- ** UpdateTrail 
     , module Network.AWS.CloudTrail.UpdateTrail
 
-    -- ** CreateTrail
+    -- ** CreateTrail 
     , module Network.AWS.CloudTrail.CreateTrail
 
-    -- ** GetEventSelectors
+    -- ** PutInsightSelectors 
+    , module Network.AWS.CloudTrail.PutInsightSelectors
+
+    -- ** GetEventSelectors 
     , module Network.AWS.CloudTrail.GetEventSelectors
 
-    -- ** GetTrailStatus
+    -- ** GetTrail 
+    , module Network.AWS.CloudTrail.GetTrail
+
+    -- ** GetTrailStatus 
     , module Network.AWS.CloudTrail.GetTrailStatus
 
-    -- ** AddTags
+    -- ** AddTags 
     , module Network.AWS.CloudTrail.AddTags
 
-    -- ** ListTags
+    -- ** ListTags (Paginated)
     , module Network.AWS.CloudTrail.ListTags
 
-    -- ** PutEventSelectors
+    -- ** PutEventSelectors 
     , module Network.AWS.CloudTrail.PutEventSelectors
 
-    -- ** StartLogging
+    -- ** StartLogging 
     , module Network.AWS.CloudTrail.StartLogging
 
+    -- ** ListTrails (Paginated)
+    , module Network.AWS.CloudTrail.ListTrails
+
+    -- ** GetInsightSelectors 
+    , module Network.AWS.CloudTrail.GetInsightSelectors
+
     -- * Types
+
+    -- ** EventCategory
+    , EventCategory (..)
+
+    -- ** InsightType
+    , InsightType (..)
 
     -- ** LookupAttributeKey
     , LookupAttributeKey (..)
@@ -199,6 +241,8 @@ module Network.AWS.CloudTrail
     , eEventTime
     , eCloudTrailEvent
     , eEventName
+    , eReadOnly
+    , eAccessKeyId
     , eEventSource
     , eEventId
 
@@ -207,7 +251,13 @@ module Network.AWS.CloudTrail
     , eventSelector
     , esDataResources
     , esReadWriteType
+    , esExcludeManagementEventSources
     , esIncludeManagementEvents
+
+    -- ** InsightSelector
+    , InsightSelector
+    , insightSelector
+    , isInsightType
 
     -- ** LookupAttribute
     , LookupAttribute
@@ -247,6 +297,7 @@ module Network.AWS.CloudTrail
     , tLogFileValidationEnabled
     , tTrailARN
     , tS3KeyPrefix
+    , tHasInsightSelectors
     , tSNSTopicARN
     , tSNSTopicName
     , tCloudWatchLogsLogGroupARN
@@ -255,9 +306,17 @@ module Network.AWS.CloudTrail
     , tName
     , tIncludeGlobalServiceEvents
     , tHasCustomEventSelectors
+    , tIsOrganizationTrail
     , tCloudWatchLogsRoleARN
     , tS3BucketName
     , tIsMultiRegionTrail
+
+    -- ** TrailInfo
+    , TrailInfo
+    , trailInfo
+    , tiTrailARN
+    , tiHomeRegion
+    , tiName
     ) where
 
 import Network.AWS.CloudTrail.AddTags
@@ -265,11 +324,15 @@ import Network.AWS.CloudTrail.CreateTrail
 import Network.AWS.CloudTrail.DeleteTrail
 import Network.AWS.CloudTrail.DescribeTrails
 import Network.AWS.CloudTrail.GetEventSelectors
+import Network.AWS.CloudTrail.GetInsightSelectors
+import Network.AWS.CloudTrail.GetTrail
 import Network.AWS.CloudTrail.GetTrailStatus
 import Network.AWS.CloudTrail.ListPublicKeys
 import Network.AWS.CloudTrail.ListTags
+import Network.AWS.CloudTrail.ListTrails
 import Network.AWS.CloudTrail.LookupEvents
 import Network.AWS.CloudTrail.PutEventSelectors
+import Network.AWS.CloudTrail.PutInsightSelectors
 import Network.AWS.CloudTrail.RemoveTags
 import Network.AWS.CloudTrail.StartLogging
 import Network.AWS.CloudTrail.StopLogging

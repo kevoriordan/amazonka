@@ -54,11 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listTables' smart constructor.
-data ListTables = ListTables'
-  { _ltExclusiveStartTableName :: !(Maybe Text)
-  , _ltLimit                   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTables = ListTables'{_ltExclusiveStartTableName
+                              :: !(Maybe Text),
+                              _ltLimit :: !(Maybe Nat)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTables' with the minimum fields required to make a request.
 --
@@ -69,9 +68,9 @@ data ListTables = ListTables'
 -- * 'ltLimit' - A maximum number of table names to return. If this parameter is not specified, the limit is 100.
 listTables
     :: ListTables
-listTables =
-  ListTables' {_ltExclusiveStartTableName = Nothing, _ltLimit = Nothing}
-
+listTables
+  = ListTables'{_ltExclusiveStartTableName = Nothing,
+                _ltLimit = Nothing}
 
 -- | The first table name that this operation will evaluate. Use the value that was returned for @LastEvaluatedTableName@ in a previous operation, so that you can obtain the next page of results.
 ltExclusiveStartTableName :: Lens' ListTables (Maybe Text)
@@ -133,12 +132,12 @@ instance ToQuery ListTables where
 --
 --
 -- /See:/ 'listTablesResponse' smart constructor.
-data ListTablesResponse = ListTablesResponse'
-  { _ltrsLastEvaluatedTableName :: !(Maybe Text)
-  , _ltrsTableNames             :: !(Maybe [Text])
-  , _ltrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTablesResponse = ListTablesResponse'{_ltrsLastEvaluatedTableName
+                                              :: !(Maybe Text),
+                                              _ltrsTableNames ::
+                                              !(Maybe [Text]),
+                                              _ltrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTablesResponse' with the minimum fields required to make a request.
 --
@@ -152,13 +151,11 @@ data ListTablesResponse = ListTablesResponse'
 listTablesResponse
     :: Int -- ^ 'ltrsResponseStatus'
     -> ListTablesResponse
-listTablesResponse pResponseStatus_ =
-  ListTablesResponse'
-    { _ltrsLastEvaluatedTableName = Nothing
-    , _ltrsTableNames = Nothing
-    , _ltrsResponseStatus = pResponseStatus_
-    }
-
+listTablesResponse pResponseStatus_
+  = ListTablesResponse'{_ltrsLastEvaluatedTableName =
+                          Nothing,
+                        _ltrsTableNames = Nothing,
+                        _ltrsResponseStatus = pResponseStatus_}
 
 -- | The name of the last table in the current page of results. Use this value as the @ExclusiveStartTableName@ in a new request to obtain the next page of results, until all the table names are returned. If you do not receive a @LastEvaluatedTableName@ value in the response, this means that there are no more table names to be retrieved.
 ltrsLastEvaluatedTableName :: Lens' ListTablesResponse (Maybe Text)

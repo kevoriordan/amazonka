@@ -67,11 +67,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDataSource' smart constructor.
-data GetDataSource = GetDataSource'
-  { _gdsVerbose      :: !(Maybe Bool)
-  , _gdsDataSourceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDataSource = GetDataSource'{_gdsVerbose ::
+                                    !(Maybe Bool),
+                                    _gdsDataSourceId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDataSource' with the minimum fields required to make a request.
 --
@@ -83,9 +82,9 @@ data GetDataSource = GetDataSource'
 getDataSource
     :: Text -- ^ 'gdsDataSourceId'
     -> GetDataSource
-getDataSource pDataSourceId_ =
-  GetDataSource' {_gdsVerbose = Nothing, _gdsDataSourceId = pDataSourceId_}
-
+getDataSource pDataSourceId_
+  = GetDataSource'{_gdsVerbose = Nothing,
+                   _gdsDataSourceId = pDataSourceId_}
 
 -- | Specifies whether the @GetDataSource@ operation should return @DataSourceSchema@ . If true, @DataSourceSchema@ is returned. If false, @DataSourceSchema@ is not returned.
 gdsVerbose :: Lens' GetDataSource (Maybe Bool)
@@ -154,30 +153,49 @@ instance ToQuery GetDataSource where
 --
 --
 -- /See:/ 'getDataSourceResponse' smart constructor.
-data GetDataSourceResponse = GetDataSourceResponse'
-  { _gdsrsStatus            :: !(Maybe EntityStatus)
-  , _gdsrsNumberOfFiles     :: !(Maybe Integer)
-  , _gdsrsLastUpdatedAt     :: !(Maybe POSIX)
-  , _gdsrsCreatedAt         :: !(Maybe POSIX)
-  , _gdsrsComputeTime       :: !(Maybe Integer)
-  , _gdsrsDataSourceId      :: !(Maybe Text)
-  , _gdsrsRDSMetadata       :: !(Maybe RDSMetadata)
-  , _gdsrsDataSizeInBytes   :: !(Maybe Integer)
-  , _gdsrsDataSourceSchema  :: !(Maybe Text)
-  , _gdsrsStartedAt         :: !(Maybe POSIX)
-  , _gdsrsFinishedAt        :: !(Maybe POSIX)
-  , _gdsrsCreatedByIAMUser  :: !(Maybe Text)
-  , _gdsrsName              :: !(Maybe Text)
-  , _gdsrsLogURI            :: !(Maybe Text)
-  , _gdsrsDataLocationS3    :: !(Maybe Text)
-  , _gdsrsComputeStatistics :: !(Maybe Bool)
-  , _gdsrsMessage           :: !(Maybe Text)
-  , _gdsrsRedshiftMetadata  :: !(Maybe RedshiftMetadata)
-  , _gdsrsDataRearrangement :: !(Maybe Text)
-  , _gdsrsRoleARN           :: !(Maybe Text)
-  , _gdsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDataSourceResponse = GetDataSourceResponse'{_gdsrsStatus
+                                                    :: !(Maybe EntityStatus),
+                                                    _gdsrsNumberOfFiles ::
+                                                    !(Maybe Integer),
+                                                    _gdsrsLastUpdatedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gdsrsCreatedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gdsrsComputeTime ::
+                                                    !(Maybe Integer),
+                                                    _gdsrsDataSourceId ::
+                                                    !(Maybe Text),
+                                                    _gdsrsRDSMetadata ::
+                                                    !(Maybe RDSMetadata),
+                                                    _gdsrsDataSizeInBytes ::
+                                                    !(Maybe Integer),
+                                                    _gdsrsDataSourceSchema ::
+                                                    !(Maybe Text),
+                                                    _gdsrsStartedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gdsrsFinishedAt ::
+                                                    !(Maybe POSIX),
+                                                    _gdsrsCreatedByIAMUser ::
+                                                    !(Maybe Text),
+                                                    _gdsrsName :: !(Maybe Text),
+                                                    _gdsrsLogURI ::
+                                                    !(Maybe Text),
+                                                    _gdsrsDataLocationS3 ::
+                                                    !(Maybe Text),
+                                                    _gdsrsComputeStatistics ::
+                                                    !(Maybe Bool),
+                                                    _gdsrsMessage ::
+                                                    !(Maybe Text),
+                                                    _gdsrsRedshiftMetadata ::
+                                                    !(Maybe RedshiftMetadata),
+                                                    _gdsrsDataRearrangement ::
+                                                    !(Maybe Text),
+                                                    _gdsrsRoleARN ::
+                                                    !(Maybe Text),
+                                                    _gdsrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -213,7 +231,7 @@ data GetDataSourceResponse = GetDataSourceResponse'
 --
 -- * 'gdsrsDataLocationS3' - The location of the data file or directory in Amazon Simple Storage Service (Amazon S3).
 --
--- * 'gdsrsComputeStatistics' - The parameter is @true@ if statistics need to be generated from the observation data.
+-- * 'gdsrsComputeStatistics' - The parameter is @true@ if statistics need to be generated from the observation data. 
 --
 -- * 'gdsrsMessage' - The user-supplied description of the most recent details about creating the @DataSource@ .
 --
@@ -227,31 +245,27 @@ data GetDataSourceResponse = GetDataSourceResponse'
 getDataSourceResponse
     :: Int -- ^ 'gdsrsResponseStatus'
     -> GetDataSourceResponse
-getDataSourceResponse pResponseStatus_ =
-  GetDataSourceResponse'
-    { _gdsrsStatus = Nothing
-    , _gdsrsNumberOfFiles = Nothing
-    , _gdsrsLastUpdatedAt = Nothing
-    , _gdsrsCreatedAt = Nothing
-    , _gdsrsComputeTime = Nothing
-    , _gdsrsDataSourceId = Nothing
-    , _gdsrsRDSMetadata = Nothing
-    , _gdsrsDataSizeInBytes = Nothing
-    , _gdsrsDataSourceSchema = Nothing
-    , _gdsrsStartedAt = Nothing
-    , _gdsrsFinishedAt = Nothing
-    , _gdsrsCreatedByIAMUser = Nothing
-    , _gdsrsName = Nothing
-    , _gdsrsLogURI = Nothing
-    , _gdsrsDataLocationS3 = Nothing
-    , _gdsrsComputeStatistics = Nothing
-    , _gdsrsMessage = Nothing
-    , _gdsrsRedshiftMetadata = Nothing
-    , _gdsrsDataRearrangement = Nothing
-    , _gdsrsRoleARN = Nothing
-    , _gdsrsResponseStatus = pResponseStatus_
-    }
-
+getDataSourceResponse pResponseStatus_
+  = GetDataSourceResponse'{_gdsrsStatus = Nothing,
+                           _gdsrsNumberOfFiles = Nothing,
+                           _gdsrsLastUpdatedAt = Nothing,
+                           _gdsrsCreatedAt = Nothing,
+                           _gdsrsComputeTime = Nothing,
+                           _gdsrsDataSourceId = Nothing,
+                           _gdsrsRDSMetadata = Nothing,
+                           _gdsrsDataSizeInBytes = Nothing,
+                           _gdsrsDataSourceSchema = Nothing,
+                           _gdsrsStartedAt = Nothing,
+                           _gdsrsFinishedAt = Nothing,
+                           _gdsrsCreatedByIAMUser = Nothing,
+                           _gdsrsName = Nothing, _gdsrsLogURI = Nothing,
+                           _gdsrsDataLocationS3 = Nothing,
+                           _gdsrsComputeStatistics = Nothing,
+                           _gdsrsMessage = Nothing,
+                           _gdsrsRedshiftMetadata = Nothing,
+                           _gdsrsDataRearrangement = Nothing,
+                           _gdsrsRoleARN = Nothing,
+                           _gdsrsResponseStatus = pResponseStatus_}
 
 -- | The current status of the @DataSource@ . This element can have one of the following values:     * @PENDING@ - Amazon ML submitted a request to create a @DataSource@ .    * @INPROGRESS@ - The creation process is underway.    * @FAILED@ - The request to create a @DataSource@ did not run to completion. It is not usable.    * @COMPLETED@ - The creation process completed successfully.    * @DELETED@ - The @DataSource@ is marked as deleted. It is not usable.
 gdsrsStatus :: Lens' GetDataSourceResponse (Maybe EntityStatus)
@@ -313,7 +327,7 @@ gdsrsLogURI = lens _gdsrsLogURI (\ s a -> s{_gdsrsLogURI = a})
 gdsrsDataLocationS3 :: Lens' GetDataSourceResponse (Maybe Text)
 gdsrsDataLocationS3 = lens _gdsrsDataLocationS3 (\ s a -> s{_gdsrsDataLocationS3 = a})
 
--- | The parameter is @true@ if statistics need to be generated from the observation data.
+-- | The parameter is @true@ if statistics need to be generated from the observation data. 
 gdsrsComputeStatistics :: Lens' GetDataSourceResponse (Maybe Bool)
 gdsrsComputeStatistics = lens _gdsrsComputeStatistics (\ s a -> s{_gdsrsComputeStatistics = a})
 

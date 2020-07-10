@@ -43,34 +43,38 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteServiceSpecificCredential' smart constructor.
-data DeleteServiceSpecificCredential = DeleteServiceSpecificCredential'
-  { _dsscUserName                    :: !(Maybe Text)
-  , _dsscServiceSpecificCredentialId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteServiceSpecificCredential = DeleteServiceSpecificCredential'{_dsscUserName
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dsscServiceSpecificCredentialId
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteServiceSpecificCredential' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsscUserName' - The name of the IAM user associated with the service-specific credential. If this value is not specified, then the operation assumes the user whose credentials are used to call the operation. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- * 'dsscUserName' - The name of the IAM user associated with the service-specific credential. If this value is not specified, then the operation assumes the user whose credentials are used to call the operation. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 --
--- * 'dsscServiceSpecificCredentialId' - The unique identifier of the service-specific credential. You can get this value by calling 'ListServiceSpecificCredentials' . This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters that can consist of any upper or lowercased letter or digit.
+-- * 'dsscServiceSpecificCredentialId' - The unique identifier of the service-specific credential. You can get this value by calling 'ListServiceSpecificCredentials' . This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters that can consist of any upper or lowercased letter or digit.
 deleteServiceSpecificCredential
     :: Text -- ^ 'dsscServiceSpecificCredentialId'
     -> DeleteServiceSpecificCredential
-deleteServiceSpecificCredential pServiceSpecificCredentialId_ =
-  DeleteServiceSpecificCredential'
-    { _dsscUserName = Nothing
-    , _dsscServiceSpecificCredentialId = pServiceSpecificCredentialId_
-    }
+deleteServiceSpecificCredential
+  pServiceSpecificCredentialId_
+  = DeleteServiceSpecificCredential'{_dsscUserName =
+                                       Nothing,
+                                     _dsscServiceSpecificCredentialId =
+                                       pServiceSpecificCredentialId_}
 
-
--- | The name of the IAM user associated with the service-specific credential. If this value is not specified, then the operation assumes the user whose credentials are used to call the operation. This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
+-- | The name of the IAM user associated with the service-specific credential. If this value is not specified, then the operation assumes the user whose credentials are used to call the operation. This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-
 dsscUserName :: Lens' DeleteServiceSpecificCredential (Maybe Text)
 dsscUserName = lens _dsscUserName (\ s a -> s{_dsscUserName = a})
 
--- | The unique identifier of the service-specific credential. You can get this value by calling 'ListServiceSpecificCredentials' . This parameter allows (per its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters that can consist of any upper or lowercased letter or digit.
+-- | The unique identifier of the service-specific credential. You can get this value by calling 'ListServiceSpecificCredentials' . This parameter allows (through its <http://wikipedia.org/wiki/regex regex pattern> ) a string of characters that can consist of any upper or lowercased letter or digit.
 dsscServiceSpecificCredentialId :: Lens' DeleteServiceSpecificCredential Text
 dsscServiceSpecificCredentialId = lens _dsscServiceSpecificCredentialId (\ s a -> s{_dsscServiceSpecificCredentialId = a})
 
@@ -107,18 +111,16 @@ instance ToQuery DeleteServiceSpecificCredential
                  _dsscServiceSpecificCredentialId]
 
 -- | /See:/ 'deleteServiceSpecificCredentialResponse' smart constructor.
-data DeleteServiceSpecificCredentialResponse =
-  DeleteServiceSpecificCredentialResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteServiceSpecificCredentialResponse = DeleteServiceSpecificCredentialResponse'
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DeleteServiceSpecificCredentialResponse' with the minimum fields required to make a request.
 --
 deleteServiceSpecificCredentialResponse
     :: DeleteServiceSpecificCredentialResponse
-deleteServiceSpecificCredentialResponse =
-  DeleteServiceSpecificCredentialResponse'
-
+deleteServiceSpecificCredentialResponse
+  = DeleteServiceSpecificCredentialResponse'
 
 instance NFData
            DeleteServiceSpecificCredentialResponse

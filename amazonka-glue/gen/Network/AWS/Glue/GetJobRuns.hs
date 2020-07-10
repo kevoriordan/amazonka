@@ -51,12 +51,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getJobRuns' smart constructor.
-data GetJobRuns = GetJobRuns'
-  { _gjrNextToken  :: !(Maybe Text)
-  , _gjrMaxResults :: !(Maybe Nat)
-  , _gjrJobName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetJobRuns = GetJobRuns'{_gjrNextToken ::
+                              !(Maybe Text),
+                              _gjrMaxResults :: !(Maybe Nat),
+                              _gjrJobName :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobRuns' with the minimum fields required to make a request.
 --
@@ -70,10 +69,9 @@ data GetJobRuns = GetJobRuns'
 getJobRuns
     :: Text -- ^ 'gjrJobName'
     -> GetJobRuns
-getJobRuns pJobName_ =
-  GetJobRuns'
-    {_gjrNextToken = Nothing, _gjrMaxResults = Nothing, _gjrJobName = pJobName_}
-
+getJobRuns pJobName_
+  = GetJobRuns'{_gjrNextToken = Nothing,
+                _gjrMaxResults = Nothing, _gjrJobName = pJobName_}
 
 -- | A continuation token, if this is a continuation call.
 gjrNextToken :: Lens' GetJobRuns (Maybe Text)
@@ -132,38 +130,35 @@ instance ToQuery GetJobRuns where
         toQuery = const mempty
 
 -- | /See:/ 'getJobRunsResponse' smart constructor.
-data GetJobRunsResponse = GetJobRunsResponse'
-  { _gjrrsNextToken      :: !(Maybe Text)
-  , _gjrrsJobRuns        :: !(Maybe [JobRun])
-  , _gjrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetJobRunsResponse = GetJobRunsResponse'{_gjrrsNextToken
+                                              :: !(Maybe Text),
+                                              _gjrrsJobRuns ::
+                                              !(Maybe [JobRun]),
+                                              _gjrrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobRunsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gjrrsNextToken' - A continuation token, if not all reequested job runs have been returned.
+-- * 'gjrrsNextToken' - A continuation token, if not all requested job runs have been returned.
 --
--- * 'gjrrsJobRuns' - A list of job-run metatdata objects.
+-- * 'gjrrsJobRuns' - A list of job-run metadata objects.
 --
 -- * 'gjrrsResponseStatus' - -- | The response status code.
 getJobRunsResponse
     :: Int -- ^ 'gjrrsResponseStatus'
     -> GetJobRunsResponse
-getJobRunsResponse pResponseStatus_ =
-  GetJobRunsResponse'
-    { _gjrrsNextToken = Nothing
-    , _gjrrsJobRuns = Nothing
-    , _gjrrsResponseStatus = pResponseStatus_
-    }
+getJobRunsResponse pResponseStatus_
+  = GetJobRunsResponse'{_gjrrsNextToken = Nothing,
+                        _gjrrsJobRuns = Nothing,
+                        _gjrrsResponseStatus = pResponseStatus_}
 
-
--- | A continuation token, if not all reequested job runs have been returned.
+-- | A continuation token, if not all requested job runs have been returned.
 gjrrsNextToken :: Lens' GetJobRunsResponse (Maybe Text)
 gjrrsNextToken = lens _gjrrsNextToken (\ s a -> s{_gjrrsNextToken = a})
 
--- | A list of job-run metatdata objects.
+-- | A list of job-run metadata objects.
 gjrrsJobRuns :: Lens' GetJobRunsResponse [JobRun]
 gjrrsJobRuns = lens _gjrrsJobRuns (\ s a -> s{_gjrrsJobRuns = a}) . _Default . _Coerce
 

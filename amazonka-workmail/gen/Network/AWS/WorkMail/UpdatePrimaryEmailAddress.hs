@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the primary email for an entity. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email) and the email provided in the input is promoted as the primary.
+-- Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.
 --
 --
 module Network.AWS.WorkMail.UpdatePrimaryEmailAddress
@@ -46,20 +46,21 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'updatePrimaryEmailAddress' smart constructor.
-data UpdatePrimaryEmailAddress = UpdatePrimaryEmailAddress'
-  { _upeaOrganizationId :: !Text
-  , _upeaEntityId       :: !Text
-  , _upeaEmail          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePrimaryEmailAddress = UpdatePrimaryEmailAddress'{_upeaOrganizationId
+                                                            :: !Text,
+                                                            _upeaEntityId ::
+                                                            !Text,
+                                                            _upeaEmail :: !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdatePrimaryEmailAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upeaOrganizationId' - The organization that contains the entity to update.
+-- * 'upeaOrganizationId' - The organization that contains the user, group, or resource to update.
 --
--- * 'upeaEntityId' - The entity to update (user, group, or resource).
+-- * 'upeaEntityId' - The user, group, or resource to update.
 --
 -- * 'upeaEmail' - The value of the email to be updated as primary.
 updatePrimaryEmailAddress
@@ -67,19 +68,17 @@ updatePrimaryEmailAddress
     -> Text -- ^ 'upeaEntityId'
     -> Text -- ^ 'upeaEmail'
     -> UpdatePrimaryEmailAddress
-updatePrimaryEmailAddress pOrganizationId_ pEntityId_ pEmail_ =
-  UpdatePrimaryEmailAddress'
-    { _upeaOrganizationId = pOrganizationId_
-    , _upeaEntityId = pEntityId_
-    , _upeaEmail = pEmail_
-    }
+updatePrimaryEmailAddress pOrganizationId_ pEntityId_
+  pEmail_
+  = UpdatePrimaryEmailAddress'{_upeaOrganizationId =
+                                 pOrganizationId_,
+                               _upeaEntityId = pEntityId_, _upeaEmail = pEmail_}
 
-
--- | The organization that contains the entity to update.
+-- | The organization that contains the user, group, or resource to update.
 upeaOrganizationId :: Lens' UpdatePrimaryEmailAddress Text
 upeaOrganizationId = lens _upeaOrganizationId (\ s a -> s{_upeaOrganizationId = a})
 
--- | The entity to update (user, group, or resource).
+-- | The user, group, or resource to update.
 upeaEntityId :: Lens' UpdatePrimaryEmailAddress Text
 upeaEntityId = lens _upeaEntityId (\ s a -> s{_upeaEntityId = a})
 
@@ -126,10 +125,11 @@ instance ToQuery UpdatePrimaryEmailAddress where
         toQuery = const mempty
 
 -- | /See:/ 'updatePrimaryEmailAddressResponse' smart constructor.
-newtype UpdatePrimaryEmailAddressResponse = UpdatePrimaryEmailAddressResponse'
-  { _upearsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdatePrimaryEmailAddressResponse = UpdatePrimaryEmailAddressResponse'{_upearsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'UpdatePrimaryEmailAddressResponse' with the minimum fields required to make a request.
 --
@@ -139,9 +139,9 @@ newtype UpdatePrimaryEmailAddressResponse = UpdatePrimaryEmailAddressResponse'
 updatePrimaryEmailAddressResponse
     :: Int -- ^ 'upearsResponseStatus'
     -> UpdatePrimaryEmailAddressResponse
-updatePrimaryEmailAddressResponse pResponseStatus_ =
-  UpdatePrimaryEmailAddressResponse' {_upearsResponseStatus = pResponseStatus_}
-
+updatePrimaryEmailAddressResponse pResponseStatus_
+  = UpdatePrimaryEmailAddressResponse'{_upearsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 upearsResponseStatus :: Lens' UpdatePrimaryEmailAddressResponse Int

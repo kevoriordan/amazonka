@@ -48,11 +48,10 @@ import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
 -- | /See:/ 'testRenderTemplate' smart constructor.
-data TestRenderTemplate = TestRenderTemplate'
-  { _trtTemplateName :: !Text
-  , _trtTemplateData :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestRenderTemplate = TestRenderTemplate'{_trtTemplateName
+                                              :: !Text,
+                                              _trtTemplateData :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestRenderTemplate' with the minimum fields required to make a request.
 --
@@ -65,10 +64,10 @@ testRenderTemplate
     :: Text -- ^ 'trtTemplateName'
     -> Text -- ^ 'trtTemplateData'
     -> TestRenderTemplate
-testRenderTemplate pTemplateName_ pTemplateData_ =
-  TestRenderTemplate'
-    {_trtTemplateName = pTemplateName_, _trtTemplateData = pTemplateData_}
-
+testRenderTemplate pTemplateName_ pTemplateData_
+  = TestRenderTemplate'{_trtTemplateName =
+                          pTemplateName_,
+                        _trtTemplateData = pTemplateData_}
 
 -- | The name of the template that you want to render.
 trtTemplateName :: Lens' TestRenderTemplate Text
@@ -107,11 +106,12 @@ instance ToQuery TestRenderTemplate where
                "TemplateData" =: _trtTemplateData]
 
 -- | /See:/ 'testRenderTemplateResponse' smart constructor.
-data TestRenderTemplateResponse = TestRenderTemplateResponse'
-  { _trtrsRenderedTemplate :: !(Maybe Text)
-  , _trtrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestRenderTemplateResponse = TestRenderTemplateResponse'{_trtrsRenderedTemplate
+                                                              :: !(Maybe Text),
+                                                              _trtrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'TestRenderTemplateResponse' with the minimum fields required to make a request.
 --
@@ -123,10 +123,10 @@ data TestRenderTemplateResponse = TestRenderTemplateResponse'
 testRenderTemplateResponse
     :: Int -- ^ 'trtrsResponseStatus'
     -> TestRenderTemplateResponse
-testRenderTemplateResponse pResponseStatus_ =
-  TestRenderTemplateResponse'
-    {_trtrsRenderedTemplate = Nothing, _trtrsResponseStatus = pResponseStatus_}
-
+testRenderTemplateResponse pResponseStatus_
+  = TestRenderTemplateResponse'{_trtrsRenderedTemplate
+                                  = Nothing,
+                                _trtrsResponseStatus = pResponseStatus_}
 
 -- | The complete MIME message rendered by applying the data in the TemplateData parameter to the template specified in the TemplateName parameter.
 trtrsRenderedTemplate :: Lens' TestRenderTemplateResponse (Maybe Text)

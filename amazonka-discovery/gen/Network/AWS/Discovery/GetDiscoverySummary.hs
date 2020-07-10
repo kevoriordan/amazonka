@@ -21,6 +21,8 @@
 -- Retrieves a short summary of discovered assets.
 --
 --
+-- This API operation takes no request parameters and is called as is at the command prompt as shown in the example.
+--
 module Network.AWS.Discovery.GetDiscoverySummary
     (
     -- * Creating a Request
@@ -48,17 +50,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDiscoverySummary' smart constructor.
-data GetDiscoverySummary =
-  GetDiscoverySummary'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDiscoverySummary = GetDiscoverySummary'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDiscoverySummary' with the minimum fields required to make a request.
 --
 getDiscoverySummary
     :: GetDiscoverySummary
 getDiscoverySummary = GetDiscoverySummary'
-
 
 instance AWSRequest GetDiscoverySummary where
         type Rs GetDiscoverySummary =
@@ -99,16 +98,34 @@ instance ToQuery GetDiscoverySummary where
         toQuery = const mempty
 
 -- | /See:/ 'getDiscoverySummaryResponse' smart constructor.
-data GetDiscoverySummaryResponse = GetDiscoverySummaryResponse'
-  { _gdsrsServers                     :: !(Maybe Integer)
-  , _gdsrsServersMappedtoTags         :: !(Maybe Integer)
-  , _gdsrsServersMappedToApplications :: !(Maybe Integer)
-  , _gdsrsConnectorSummary            :: !(Maybe CustomerConnectorInfo)
-  , _gdsrsAgentSummary                :: !(Maybe CustomerAgentInfo)
-  , _gdsrsApplications                :: !(Maybe Integer)
-  , _gdsrsResponseStatus              :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDiscoverySummaryResponse = GetDiscoverySummaryResponse'{_gdsrsServers
+                                                                ::
+                                                                !(Maybe
+                                                                    Integer),
+                                                                _gdsrsServersMappedtoTags
+                                                                ::
+                                                                !(Maybe
+                                                                    Integer),
+                                                                _gdsrsServersMappedToApplications
+                                                                ::
+                                                                !(Maybe
+                                                                    Integer),
+                                                                _gdsrsConnectorSummary
+                                                                ::
+                                                                !(Maybe
+                                                                    CustomerConnectorInfo),
+                                                                _gdsrsAgentSummary
+                                                                ::
+                                                                !(Maybe
+                                                                    CustomerAgentInfo),
+                                                                _gdsrsApplications
+                                                                ::
+                                                                !(Maybe
+                                                                    Integer),
+                                                                _gdsrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetDiscoverySummaryResponse' with the minimum fields required to make a request.
 --
@@ -130,17 +147,15 @@ data GetDiscoverySummaryResponse = GetDiscoverySummaryResponse'
 getDiscoverySummaryResponse
     :: Int -- ^ 'gdsrsResponseStatus'
     -> GetDiscoverySummaryResponse
-getDiscoverySummaryResponse pResponseStatus_ =
-  GetDiscoverySummaryResponse'
-    { _gdsrsServers = Nothing
-    , _gdsrsServersMappedtoTags = Nothing
-    , _gdsrsServersMappedToApplications = Nothing
-    , _gdsrsConnectorSummary = Nothing
-    , _gdsrsAgentSummary = Nothing
-    , _gdsrsApplications = Nothing
-    , _gdsrsResponseStatus = pResponseStatus_
-    }
-
+getDiscoverySummaryResponse pResponseStatus_
+  = GetDiscoverySummaryResponse'{_gdsrsServers =
+                                   Nothing,
+                                 _gdsrsServersMappedtoTags = Nothing,
+                                 _gdsrsServersMappedToApplications = Nothing,
+                                 _gdsrsConnectorSummary = Nothing,
+                                 _gdsrsAgentSummary = Nothing,
+                                 _gdsrsApplications = Nothing,
+                                 _gdsrsResponseStatus = pResponseStatus_}
 
 -- | The number of servers discovered.
 gdsrsServers :: Lens' GetDiscoverySummaryResponse (Maybe Integer)

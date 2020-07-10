@@ -48,19 +48,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getPartition' smart constructor.
-data GetPartition = GetPartition'
-  { _gpCatalogId       :: !(Maybe Text)
-  , _gpDatabaseName    :: !Text
-  , _gpTableName       :: !Text
-  , _gpPartitionValues :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPartition = GetPartition'{_gpCatalogId ::
+                                  !(Maybe Text),
+                                  _gpDatabaseName :: !Text,
+                                  _gpTableName :: !Text,
+                                  _gpPartitionValues :: ![Text]}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPartition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gpCatalogId' - The ID of the Data Catalog where the partition in question resides. If none is supplied, the AWS account ID is used by default.
+-- * 'gpCatalogId' - The ID of the Data Catalog where the partition in question resides. If none is provided, the AWS account ID is used by default.
 --
 -- * 'gpDatabaseName' - The name of the catalog database where the partition resides.
 --
@@ -71,16 +70,13 @@ getPartition
     :: Text -- ^ 'gpDatabaseName'
     -> Text -- ^ 'gpTableName'
     -> GetPartition
-getPartition pDatabaseName_ pTableName_ =
-  GetPartition'
-    { _gpCatalogId = Nothing
-    , _gpDatabaseName = pDatabaseName_
-    , _gpTableName = pTableName_
-    , _gpPartitionValues = mempty
-    }
+getPartition pDatabaseName_ pTableName_
+  = GetPartition'{_gpCatalogId = Nothing,
+                  _gpDatabaseName = pDatabaseName_,
+                  _gpTableName = pTableName_,
+                  _gpPartitionValues = mempty}
 
-
--- | The ID of the Data Catalog where the partition in question resides. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the partition in question resides. If none is provided, the AWS account ID is used by default.
 gpCatalogId :: Lens' GetPartition (Maybe Text)
 gpCatalogId = lens _gpCatalogId (\ s a -> s{_gpCatalogId = a})
 
@@ -134,11 +130,10 @@ instance ToQuery GetPartition where
         toQuery = const mempty
 
 -- | /See:/ 'getPartitionResponse' smart constructor.
-data GetPartitionResponse = GetPartitionResponse'
-  { _gprsPartition      :: !(Maybe Partition)
-  , _gprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPartitionResponse = GetPartitionResponse'{_gprsPartition
+                                                  :: !(Maybe Partition),
+                                                  _gprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPartitionResponse' with the minimum fields required to make a request.
 --
@@ -150,10 +145,9 @@ data GetPartitionResponse = GetPartitionResponse'
 getPartitionResponse
     :: Int -- ^ 'gprsResponseStatus'
     -> GetPartitionResponse
-getPartitionResponse pResponseStatus_ =
-  GetPartitionResponse'
-    {_gprsPartition = Nothing, _gprsResponseStatus = pResponseStatus_}
-
+getPartitionResponse pResponseStatus_
+  = GetPartitionResponse'{_gprsPartition = Nothing,
+                          _gprsResponseStatus = pResponseStatus_}
 
 -- | The requested information, in the form of a @Partition@ object.
 gprsPartition :: Lens' GetPartitionResponse (Maybe Partition)

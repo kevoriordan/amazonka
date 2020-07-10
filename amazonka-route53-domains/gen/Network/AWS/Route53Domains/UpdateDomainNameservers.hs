@@ -51,16 +51,17 @@ import Network.AWS.Route53Domains.Types.Product
 -- | Replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain.
 --
 --
--- If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+-- If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email. 
 --
 --
 -- /See:/ 'updateDomainNameservers' smart constructor.
-data UpdateDomainNameservers = UpdateDomainNameservers'
-  { _udnFIAuthKey   :: !(Maybe Text)
-  , _udnDomainName  :: !Text
-  , _udnNameservers :: ![Nameserver]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDomainNameservers = UpdateDomainNameservers'{_udnFIAuthKey
+                                                        :: !(Maybe Text),
+                                                        _udnDomainName :: !Text,
+                                                        _udnNameservers ::
+                                                        ![Nameserver]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateDomainNameservers' with the minimum fields required to make a request.
 --
@@ -74,13 +75,10 @@ data UpdateDomainNameservers = UpdateDomainNameservers'
 updateDomainNameservers
     :: Text -- ^ 'udnDomainName'
     -> UpdateDomainNameservers
-updateDomainNameservers pDomainName_ =
-  UpdateDomainNameservers'
-    { _udnFIAuthKey = Nothing
-    , _udnDomainName = pDomainName_
-    , _udnNameservers = mempty
-    }
-
+updateDomainNameservers pDomainName_
+  = UpdateDomainNameservers'{_udnFIAuthKey = Nothing,
+                             _udnDomainName = pDomainName_,
+                             _udnNameservers = mempty}
 
 -- | The authorization key for .fi domains
 udnFIAuthKey :: Lens' UpdateDomainNameservers (Maybe Text)
@@ -137,11 +135,13 @@ instance ToQuery UpdateDomainNameservers where
 --
 --
 -- /See:/ 'updateDomainNameserversResponse' smart constructor.
-data UpdateDomainNameserversResponse = UpdateDomainNameserversResponse'
-  { _udnrsResponseStatus :: !Int
-  , _udnrsOperationId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDomainNameserversResponse = UpdateDomainNameserversResponse'{_udnrsResponseStatus
+                                                                        :: !Int,
+                                                                        _udnrsOperationId
+                                                                        ::
+                                                                        !Text}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateDomainNameserversResponse' with the minimum fields required to make a request.
 --
@@ -149,21 +149,22 @@ data UpdateDomainNameserversResponse = UpdateDomainNameserversResponse'
 --
 -- * 'udnrsResponseStatus' - -- | The response status code.
 --
--- * 'udnrsOperationId' - Identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- * 'udnrsOperationId' - Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 updateDomainNameserversResponse
     :: Int -- ^ 'udnrsResponseStatus'
     -> Text -- ^ 'udnrsOperationId'
     -> UpdateDomainNameserversResponse
-updateDomainNameserversResponse pResponseStatus_ pOperationId_ =
-  UpdateDomainNameserversResponse'
-    {_udnrsResponseStatus = pResponseStatus_, _udnrsOperationId = pOperationId_}
-
+updateDomainNameserversResponse pResponseStatus_
+  pOperationId_
+  = UpdateDomainNameserversResponse'{_udnrsResponseStatus
+                                       = pResponseStatus_,
+                                     _udnrsOperationId = pOperationId_}
 
 -- | -- | The response status code.
 udnrsResponseStatus :: Lens' UpdateDomainNameserversResponse Int
 udnrsResponseStatus = lens _udnrsResponseStatus (\ s a -> s{_udnrsResponseStatus = a})
 
--- | Identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- | Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 udnrsOperationId :: Lens' UpdateDomainNameserversResponse Text
 udnrsOperationId = lens _udnrsOperationId (\ s a -> s{_udnrsOperationId = a})
 

@@ -38,6 +38,7 @@ module Network.AWS.Greengrass.GetResourceDefinition
     , grdrsId
     , grdrsLatestVersion
     , grdrsLastUpdatedTimestamp
+    , grdrsTags
     , grdrsResponseStatus
     ) where
 
@@ -49,10 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getResourceDefinition' smart constructor.
-newtype GetResourceDefinition = GetResourceDefinition'
-  { _grdResourceDefinitionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetResourceDefinition = GetResourceDefinition'{_grdResourceDefinitionId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetResourceDefinition' with the minimum fields required to make a request.
 --
@@ -62,9 +63,9 @@ newtype GetResourceDefinition = GetResourceDefinition'
 getResourceDefinition
     :: Text -- ^ 'grdResourceDefinitionId'
     -> GetResourceDefinition
-getResourceDefinition pResourceDefinitionId_ =
-  GetResourceDefinition' {_grdResourceDefinitionId = pResourceDefinitionId_}
-
+getResourceDefinition pResourceDefinitionId_
+  = GetResourceDefinition'{_grdResourceDefinitionId =
+                             pResourceDefinitionId_}
 
 -- | The ID of the resource definition.
 grdResourceDefinitionId :: Lens' GetResourceDefinition Text
@@ -84,6 +85,7 @@ instance AWSRequest GetResourceDefinition where
                      <*> (x .?> "Id")
                      <*> (x .?> "LatestVersion")
                      <*> (x .?> "LastUpdatedTimestamp")
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable GetResourceDefinition where
@@ -107,23 +109,48 @@ instance ToQuery GetResourceDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'getResourceDefinitionResponse' smart constructor.
-data GetResourceDefinitionResponse = GetResourceDefinitionResponse'
-  { _grdrsLatestVersionARN     :: !(Maybe Text)
-  , _grdrsARN                  :: !(Maybe Text)
-  , _grdrsName                 :: !(Maybe Text)
-  , _grdrsCreationTimestamp    :: !(Maybe Text)
-  , _grdrsId                   :: !(Maybe Text)
-  , _grdrsLatestVersion        :: !(Maybe Text)
-  , _grdrsLastUpdatedTimestamp :: !(Maybe Text)
-  , _grdrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetResourceDefinitionResponse = GetResourceDefinitionResponse'{_grdrsLatestVersionARN
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _grdrsARN ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _grdrsName
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _grdrsCreationTimestamp
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _grdrsId ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _grdrsLatestVersion
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _grdrsLastUpdatedTimestamp
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _grdrsTags
+                                                                    ::
+                                                                    !(Maybe
+                                                                        (Map
+                                                                           Text
+                                                                           Text)),
+                                                                    _grdrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetResourceDefinitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grdrsLatestVersionARN' - The ARN of the latest version of the definition.
+-- * 'grdrsLatestVersionARN' - The ARN of the latest version associated with the definition.
 --
 -- * 'grdrsARN' - The ARN of the definition.
 --
@@ -133,28 +160,28 @@ data GetResourceDefinitionResponse = GetResourceDefinitionResponse'
 --
 -- * 'grdrsId' - The ID of the definition.
 --
--- * 'grdrsLatestVersion' - The latest version of the definition.
+-- * 'grdrsLatestVersion' - The ID of the latest version associated with the definition.
 --
 -- * 'grdrsLastUpdatedTimestamp' - The time, in milliseconds since the epoch, when the definition was last updated.
+--
+-- * 'grdrsTags' - Tag(s) attached to the resource arn.
 --
 -- * 'grdrsResponseStatus' - -- | The response status code.
 getResourceDefinitionResponse
     :: Int -- ^ 'grdrsResponseStatus'
     -> GetResourceDefinitionResponse
-getResourceDefinitionResponse pResponseStatus_ =
-  GetResourceDefinitionResponse'
-    { _grdrsLatestVersionARN = Nothing
-    , _grdrsARN = Nothing
-    , _grdrsName = Nothing
-    , _grdrsCreationTimestamp = Nothing
-    , _grdrsId = Nothing
-    , _grdrsLatestVersion = Nothing
-    , _grdrsLastUpdatedTimestamp = Nothing
-    , _grdrsResponseStatus = pResponseStatus_
-    }
+getResourceDefinitionResponse pResponseStatus_
+  = GetResourceDefinitionResponse'{_grdrsLatestVersionARN
+                                     = Nothing,
+                                   _grdrsARN = Nothing, _grdrsName = Nothing,
+                                   _grdrsCreationTimestamp = Nothing,
+                                   _grdrsId = Nothing,
+                                   _grdrsLatestVersion = Nothing,
+                                   _grdrsLastUpdatedTimestamp = Nothing,
+                                   _grdrsTags = Nothing,
+                                   _grdrsResponseStatus = pResponseStatus_}
 
-
--- | The ARN of the latest version of the definition.
+-- | The ARN of the latest version associated with the definition.
 grdrsLatestVersionARN :: Lens' GetResourceDefinitionResponse (Maybe Text)
 grdrsLatestVersionARN = lens _grdrsLatestVersionARN (\ s a -> s{_grdrsLatestVersionARN = a})
 
@@ -174,13 +201,17 @@ grdrsCreationTimestamp = lens _grdrsCreationTimestamp (\ s a -> s{_grdrsCreation
 grdrsId :: Lens' GetResourceDefinitionResponse (Maybe Text)
 grdrsId = lens _grdrsId (\ s a -> s{_grdrsId = a})
 
--- | The latest version of the definition.
+-- | The ID of the latest version associated with the definition.
 grdrsLatestVersion :: Lens' GetResourceDefinitionResponse (Maybe Text)
 grdrsLatestVersion = lens _grdrsLatestVersion (\ s a -> s{_grdrsLatestVersion = a})
 
 -- | The time, in milliseconds since the epoch, when the definition was last updated.
 grdrsLastUpdatedTimestamp :: Lens' GetResourceDefinitionResponse (Maybe Text)
 grdrsLastUpdatedTimestamp = lens _grdrsLastUpdatedTimestamp (\ s a -> s{_grdrsLastUpdatedTimestamp = a})
+
+-- | Tag(s) attached to the resource arn.
+grdrsTags :: Lens' GetResourceDefinitionResponse (HashMap Text Text)
+grdrsTags = lens _grdrsTags (\ s a -> s{_grdrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 grdrsResponseStatus :: Lens' GetResourceDefinitionResponse Int

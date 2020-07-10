@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Writes multiple data records into a Kinesis data stream in a single call (also referred to as a @PutRecords@ request). Use this operation to send data into the stream for data ingestion and processing.
+-- Writes multiple data records into a Kinesis data stream in a single call (also referred to as a @PutRecords@ request). Use this operation to send data into the stream for data ingestion and processing. 
 --
 --
 -- Each @PutRecords@ request can support up to 500 records. Each record in the request can be as large as 1 MB, up to a limit of 5 MB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MB per second.
@@ -72,11 +72,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'putRecords' smart constructor.
-data PutRecords = PutRecords'
-  { _pRecordEntries :: !(List1 PutRecordsRequestEntry)
-  , _pStreamName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRecords = PutRecords'{_pRecordEntries ::
+                              !(List1 PutRecordsRequestEntry),
+                              _pStreamName :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutRecords' with the minimum fields required to make a request.
 --
@@ -89,10 +88,10 @@ putRecords
     :: NonEmpty PutRecordsRequestEntry -- ^ 'pRecordEntries'
     -> Text -- ^ 'pStreamName'
     -> PutRecords
-putRecords pRecordEntries_ pStreamName_ =
-  PutRecords'
-    {_pRecordEntries = _List1 # pRecordEntries_, _pStreamName = pStreamName_}
-
+putRecords pRecordEntries_ pStreamName_
+  = PutRecords'{_pRecordEntries =
+                  _List1 # pRecordEntries_,
+                _pStreamName = pStreamName_}
 
 -- | The records associated with the request.
 pRecordEntries :: Lens' PutRecords (NonEmpty PutRecordsRequestEntry)
@@ -145,13 +144,14 @@ instance ToQuery PutRecords where
 --
 --
 -- /See:/ 'putRecordsResponse' smart constructor.
-data PutRecordsResponse = PutRecordsResponse'
-  { _prsEncryptionType    :: !(Maybe EncryptionType)
-  , _prsFailedRecordCount :: !(Maybe Nat)
-  , _prsResponseStatus    :: !Int
-  , _prsRecords           :: !(List1 PutRecordsResultEntry)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutRecordsResponse = PutRecordsResponse'{_prsEncryptionType
+                                              :: !(Maybe EncryptionType),
+                                              _prsFailedRecordCount ::
+                                              !(Maybe Nat),
+                                              _prsResponseStatus :: !Int,
+                                              _prsRecords ::
+                                              !(List1 PutRecordsResultEntry)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutRecordsResponse' with the minimum fields required to make a request.
 --
@@ -168,14 +168,11 @@ putRecordsResponse
     :: Int -- ^ 'prsResponseStatus'
     -> NonEmpty PutRecordsResultEntry -- ^ 'prsRecords'
     -> PutRecordsResponse
-putRecordsResponse pResponseStatus_ pRecords_ =
-  PutRecordsResponse'
-    { _prsEncryptionType = Nothing
-    , _prsFailedRecordCount = Nothing
-    , _prsResponseStatus = pResponseStatus_
-    , _prsRecords = _List1 # pRecords_
-    }
-
+putRecordsResponse pResponseStatus_ pRecords_
+  = PutRecordsResponse'{_prsEncryptionType = Nothing,
+                        _prsFailedRecordCount = Nothing,
+                        _prsResponseStatus = pResponseStatus_,
+                        _prsRecords = _List1 # pRecords_}
 
 -- | The encryption type used on the records. This parameter can be one of the following values:     * @NONE@ : Do not encrypt the records.     * @KMS@ : Use server-side encryption on the records using a customer-managed AWS KMS key.
 prsEncryptionType :: Lens' PutRecordsResponse (Maybe EncryptionType)

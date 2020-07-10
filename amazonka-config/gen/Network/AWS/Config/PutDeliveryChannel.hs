@@ -50,10 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'putDeliveryChannel' smart constructor.
-newtype PutDeliveryChannel = PutDeliveryChannel'
-  { _pdcDeliveryChannel :: DeliveryChannel
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype PutDeliveryChannel = PutDeliveryChannel'{_pdcDeliveryChannel
+                                                 :: DeliveryChannel}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'PutDeliveryChannel' with the minimum fields required to make a request.
 --
@@ -63,9 +63,9 @@ newtype PutDeliveryChannel = PutDeliveryChannel'
 putDeliveryChannel
     :: DeliveryChannel -- ^ 'pdcDeliveryChannel'
     -> PutDeliveryChannel
-putDeliveryChannel pDeliveryChannel_ =
-  PutDeliveryChannel' {_pdcDeliveryChannel = pDeliveryChannel_}
-
+putDeliveryChannel pDeliveryChannel_
+  = PutDeliveryChannel'{_pdcDeliveryChannel =
+                          pDeliveryChannel_}
 
 -- | The configuration delivery channel object that delivers the configuration information to an Amazon S3 bucket and to an Amazon SNS topic.
 pdcDeliveryChannel :: Lens' PutDeliveryChannel DeliveryChannel
@@ -104,16 +104,15 @@ instance ToQuery PutDeliveryChannel where
         toQuery = const mempty
 
 -- | /See:/ 'putDeliveryChannelResponse' smart constructor.
-data PutDeliveryChannelResponse =
-  PutDeliveryChannelResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutDeliveryChannelResponse = PutDeliveryChannelResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'PutDeliveryChannelResponse' with the minimum fields required to make a request.
 --
 putDeliveryChannelResponse
     :: PutDeliveryChannelResponse
-putDeliveryChannelResponse = PutDeliveryChannelResponse'
-
+putDeliveryChannelResponse
+  = PutDeliveryChannelResponse'
 
 instance NFData PutDeliveryChannelResponse where

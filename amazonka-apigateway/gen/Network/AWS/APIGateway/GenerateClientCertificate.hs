@@ -28,6 +28,7 @@ module Network.AWS.APIGateway.GenerateClientCertificate
     , GenerateClientCertificate
     -- * Request Lenses
     , gccDescription
+    , gccTags
 
     -- * Destructuring the Response
     , clientCertificate
@@ -38,6 +39,7 @@ module Network.AWS.APIGateway.GenerateClientCertificate
     , ccCreatedDate
     , ccExpirationDate
     , ccDescription
+    , ccTags
     ) where
 
 import Network.AWS.APIGateway.Types
@@ -52,25 +54,36 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'generateClientCertificate' smart constructor.
-newtype GenerateClientCertificate = GenerateClientCertificate'
-  { _gccDescription :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GenerateClientCertificate = GenerateClientCertificate'{_gccDescription
+                                                            :: !(Maybe Text),
+                                                            _gccTags ::
+                                                            !(Maybe
+                                                                (Map Text
+                                                                   Text))}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GenerateClientCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gccDescription' - The description of the 'ClientCertificate' .
+--
+-- * 'gccTags' - The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with @aws:@ . The tag value can be up to 256 characters.
 generateClientCertificate
     :: GenerateClientCertificate
-generateClientCertificate =
-  GenerateClientCertificate' {_gccDescription = Nothing}
-
+generateClientCertificate
+  = GenerateClientCertificate'{_gccDescription =
+                                 Nothing,
+                               _gccTags = Nothing}
 
 -- | The description of the 'ClientCertificate' .
 gccDescription :: Lens' GenerateClientCertificate (Maybe Text)
 gccDescription = lens _gccDescription (\ s a -> s{_gccDescription = a})
+
+-- | The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with @aws:@ . The tag value can be up to 256 characters.
+gccTags :: Lens' GenerateClientCertificate (HashMap Text Text)
+gccTags = lens _gccTags (\ s a -> s{_gccTags = a}) . _Default . _Map
 
 instance AWSRequest GenerateClientCertificate where
         type Rs GenerateClientCertificate = ClientCertificate
@@ -90,7 +103,9 @@ instance ToHeaders GenerateClientCertificate where
 instance ToJSON GenerateClientCertificate where
         toJSON GenerateClientCertificate'{..}
           = object
-              (catMaybes [("description" .=) <$> _gccDescription])
+              (catMaybes
+                 [("description" .=) <$> _gccDescription,
+                  ("tags" .=) <$> _gccTags])
 
 instance ToPath GenerateClientCertificate where
         toPath = const "/clientcertificates"

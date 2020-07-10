@@ -18,14 +18,18 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports the following attributes:
+-- Looks up <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events management events> or <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events CloudTrail Insights events> that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:
 --
+--
+--     * AWS access key
 --
 --     * Event ID
 --
 --     * Event name
 --
 --     * Event source
+--
+--     * Read only
 --
 --     * Resource name
 --
@@ -35,11 +39,19 @@
 --
 --
 --
--- All attributes are optional. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.
+-- Lookup supports the following attributes for Insights events:
 --
--- /Important:/ The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs.
+--     * Event ID
 --
--- /Important:/ Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred.
+--     * Event name
+--
+--     * Event source
+--
+--
+--
+-- All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.
+--
+-- /Important:/ The rate of lookup requests is limited to two per second per account. If this limit is exceeded, a throttling error occurs.
 --
 --
 -- This operation returns paginated results.
@@ -49,6 +61,7 @@ module Network.AWS.CloudTrail.LookupEvents
       lookupEvents
     , LookupEvents
     -- * Request Lenses
+    , leEventCategory
     , leStartTime
     , leLookupAttributes
     , leNextToken
@@ -77,18 +90,21 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'lookupEvents' smart constructor.
-data LookupEvents = LookupEvents'
-  { _leStartTime        :: !(Maybe POSIX)
-  , _leLookupAttributes :: !(Maybe [LookupAttribute])
-  , _leNextToken        :: !(Maybe Text)
-  , _leEndTime          :: !(Maybe POSIX)
-  , _leMaxResults       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data LookupEvents = LookupEvents'{_leEventCategory ::
+                                  !(Maybe EventCategory),
+                                  _leStartTime :: !(Maybe POSIX),
+                                  _leLookupAttributes ::
+                                  !(Maybe [LookupAttribute]),
+                                  _leNextToken :: !(Maybe Text),
+                                  _leEndTime :: !(Maybe POSIX),
+                                  _leMaxResults :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LookupEvents' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'leEventCategory' - Specifies the event category. If you do not specify an event category, events of the category are not returned in the response. For example, if you do not specify @insight@ as the value of @EventCategory@ , no Insights events are returned.
 --
 -- * 'leStartTime' - Specifies that only events that occur after or at the specified time are returned. If the specified start time is after the specified end time, an error is returned.
 --
@@ -98,18 +114,19 @@ data LookupEvents = LookupEvents'
 --
 -- * 'leEndTime' - Specifies that only events that occur before or at the specified time are returned. If the specified end time is before the specified start time, an error is returned.
 --
--- * 'leMaxResults' - The number of events to return. Possible values are 1 through 50. The default is 10.
+-- * 'leMaxResults' - The number of events to return. Possible values are 1 through 50. The default is 50.
 lookupEvents
     :: LookupEvents
-lookupEvents =
-  LookupEvents'
-    { _leStartTime = Nothing
-    , _leLookupAttributes = Nothing
-    , _leNextToken = Nothing
-    , _leEndTime = Nothing
-    , _leMaxResults = Nothing
-    }
+lookupEvents
+  = LookupEvents'{_leEventCategory = Nothing,
+                  _leStartTime = Nothing,
+                  _leLookupAttributes = Nothing,
+                  _leNextToken = Nothing, _leEndTime = Nothing,
+                  _leMaxResults = Nothing}
 
+-- | Specifies the event category. If you do not specify an event category, events of the category are not returned in the response. For example, if you do not specify @insight@ as the value of @EventCategory@ , no Insights events are returned.
+leEventCategory :: Lens' LookupEvents (Maybe EventCategory)
+leEventCategory = lens _leEventCategory (\ s a -> s{_leEventCategory = a})
 
 -- | Specifies that only events that occur after or at the specified time are returned. If the specified start time is after the specified end time, an error is returned.
 leStartTime :: Lens' LookupEvents (Maybe UTCTime)
@@ -127,7 +144,7 @@ leNextToken = lens _leNextToken (\ s a -> s{_leNextToken = a})
 leEndTime :: Lens' LookupEvents (Maybe UTCTime)
 leEndTime = lens _leEndTime (\ s a -> s{_leEndTime = a}) . mapping _Time
 
--- | The number of events to return. Possible values are 1 through 50. The default is 10.
+-- | The number of events to return. Possible values are 1 through 50. The default is 50.
 leMaxResults :: Lens' LookupEvents (Maybe Natural)
 leMaxResults = lens _leMaxResults (\ s a -> s{_leMaxResults = a}) . mapping _Nat
 
@@ -166,7 +183,8 @@ instance ToJSON LookupEvents where
         toJSON LookupEvents'{..}
           = object
               (catMaybes
-                 [("StartTime" .=) <$> _leStartTime,
+                 [("EventCategory" .=) <$> _leEventCategory,
+                  ("StartTime" .=) <$> _leStartTime,
                   ("LookupAttributes" .=) <$> _leLookupAttributes,
                   ("NextToken" .=) <$> _leNextToken,
                   ("EndTime" .=) <$> _leEndTime,
@@ -183,12 +201,12 @@ instance ToQuery LookupEvents where
 --
 --
 -- /See:/ 'lookupEventsResponse' smart constructor.
-data LookupEventsResponse = LookupEventsResponse'
-  { _lersNextToken      :: !(Maybe Text)
-  , _lersEvents         :: !(Maybe [Event])
-  , _lersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data LookupEventsResponse = LookupEventsResponse'{_lersNextToken
+                                                  :: !(Maybe Text),
+                                                  _lersEvents ::
+                                                  !(Maybe [Event]),
+                                                  _lersResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'LookupEventsResponse' with the minimum fields required to make a request.
 --
@@ -202,13 +220,10 @@ data LookupEventsResponse = LookupEventsResponse'
 lookupEventsResponse
     :: Int -- ^ 'lersResponseStatus'
     -> LookupEventsResponse
-lookupEventsResponse pResponseStatus_ =
-  LookupEventsResponse'
-    { _lersNextToken = Nothing
-    , _lersEvents = Nothing
-    , _lersResponseStatus = pResponseStatus_
-    }
-
+lookupEventsResponse pResponseStatus_
+  = LookupEventsResponse'{_lersNextToken = Nothing,
+                          _lersEvents = Nothing,
+                          _lersResponseStatus = pResponseStatus_}
 
 -- | The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
 lersNextToken :: Lens' LookupEventsResponse (Maybe Text)

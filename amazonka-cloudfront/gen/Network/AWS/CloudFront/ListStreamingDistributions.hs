@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List streaming distributions.
+-- List streaming distributions. 
 --
 --
 --
@@ -48,16 +48,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | The request to list your streaming distributions.
+-- | The request to list your streaming distributions. 
 --
 --
 --
 -- /See:/ 'listStreamingDistributions' smart constructor.
-data ListStreamingDistributions = ListStreamingDistributions'
-  { _lsdMarker   :: !(Maybe Text)
-  , _lsdMaxItems :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreamingDistributions = ListStreamingDistributions'{_lsdMarker
+                                                              :: !(Maybe Text),
+                                                              _lsdMaxItems ::
+                                                              !(Maybe Text)}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListStreamingDistributions' with the minimum fields required to make a request.
 --
@@ -68,9 +69,9 @@ data ListStreamingDistributions = ListStreamingDistributions'
 -- * 'lsdMaxItems' - The value that you provided for the @MaxItems@ request parameter.
 listStreamingDistributions
     :: ListStreamingDistributions
-listStreamingDistributions =
-  ListStreamingDistributions' {_lsdMarker = Nothing, _lsdMaxItems = Nothing}
-
+listStreamingDistributions
+  = ListStreamingDistributions'{_lsdMarker = Nothing,
+                                _lsdMaxItems = Nothing}
 
 -- | The value that you provided for the @Marker@ request parameter.
 lsdMarker :: Lens' ListStreamingDistributions (Maybe Text)
@@ -116,23 +117,26 @@ instance ToHeaders ListStreamingDistributions where
         toHeaders = const mempty
 
 instance ToPath ListStreamingDistributions where
-        toPath = const "/2017-10-30/streaming-distribution"
+        toPath = const "/2019-03-26/streaming-distribution"
 
 instance ToQuery ListStreamingDistributions where
         toQuery ListStreamingDistributions'{..}
           = mconcat
               ["Marker" =: _lsdMarker, "MaxItems" =: _lsdMaxItems]
 
--- | The returned result of the corresponding request.
+-- | The returned result of the corresponding request. 
 --
 --
 --
 -- /See:/ 'listStreamingDistributionsResponse' smart constructor.
-data ListStreamingDistributionsResponse = ListStreamingDistributionsResponse'
-  { _lsdrsResponseStatus            :: !Int
-  , _lsdrsStreamingDistributionList :: !StreamingDistributionList
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStreamingDistributionsResponse = ListStreamingDistributionsResponse'{_lsdrsResponseStatus
+                                                                              ::
+                                                                              !Int,
+                                                                              _lsdrsStreamingDistributionList
+                                                                              ::
+                                                                              !StreamingDistributionList}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'ListStreamingDistributionsResponse' with the minimum fields required to make a request.
 --
@@ -140,23 +144,23 @@ data ListStreamingDistributionsResponse = ListStreamingDistributionsResponse'
 --
 -- * 'lsdrsResponseStatus' - -- | The response status code.
 --
--- * 'lsdrsStreamingDistributionList' - The @StreamingDistributionList@ type.
+-- * 'lsdrsStreamingDistributionList' - The @StreamingDistributionList@ type. 
 listStreamingDistributionsResponse
     :: Int -- ^ 'lsdrsResponseStatus'
     -> StreamingDistributionList -- ^ 'lsdrsStreamingDistributionList'
     -> ListStreamingDistributionsResponse
-listStreamingDistributionsResponse pResponseStatus_ pStreamingDistributionList_ =
-  ListStreamingDistributionsResponse'
-    { _lsdrsResponseStatus = pResponseStatus_
-    , _lsdrsStreamingDistributionList = pStreamingDistributionList_
-    }
-
+listStreamingDistributionsResponse pResponseStatus_
+  pStreamingDistributionList_
+  = ListStreamingDistributionsResponse'{_lsdrsResponseStatus
+                                          = pResponseStatus_,
+                                        _lsdrsStreamingDistributionList =
+                                          pStreamingDistributionList_}
 
 -- | -- | The response status code.
 lsdrsResponseStatus :: Lens' ListStreamingDistributionsResponse Int
 lsdrsResponseStatus = lens _lsdrsResponseStatus (\ s a -> s{_lsdrsResponseStatus = a})
 
--- | The @StreamingDistributionList@ type.
+-- | The @StreamingDistributionList@ type. 
 lsdrsStreamingDistributionList :: Lens' ListStreamingDistributionsResponse StreamingDistributionList
 lsdrsStreamingDistributionList = lens _lsdrsStreamingDistributionList (\ s a -> s{_lsdrsStreamingDistributionList = a})
 

@@ -44,6 +44,7 @@ module Network.AWS.APIGateway.GetRestAPI
     , raPolicy
     , raEndpointConfiguration
     , raDescription
+    , raTags
     ) where
 
 import Network.AWS.APIGateway.Types
@@ -53,15 +54,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | The GET request to list an existing 'RestApi' defined for your collection.
+-- | The GET request to list an existing 'RestApi' defined for your collection. 
 --
 --
 --
 -- /See:/ 'getRestAPI' smart constructor.
-newtype GetRestAPI = GetRestAPI'
-  { _graRestAPIId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetRestAPI = GetRestAPI'{_graRestAPIId ::
+                                 Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRestAPI' with the minimum fields required to make a request.
 --
@@ -71,8 +71,8 @@ newtype GetRestAPI = GetRestAPI'
 getRestAPI
     :: Text -- ^ 'graRestAPIId'
     -> GetRestAPI
-getRestAPI pRestAPIId_ = GetRestAPI' {_graRestAPIId = pRestAPIId_}
-
+getRestAPI pRestAPIId_
+  = GetRestAPI'{_graRestAPIId = pRestAPIId_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 graRestAPIId :: Lens' GetRestAPI Text

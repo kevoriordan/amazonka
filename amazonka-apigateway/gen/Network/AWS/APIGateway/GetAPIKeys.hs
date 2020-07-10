@@ -58,14 +58,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getAPIKeys' smart constructor.
-data GetAPIKeys = GetAPIKeys'
-  { _gakIncludeValues :: !(Maybe Bool)
-  , _gakCustomerId    :: !(Maybe Text)
-  , _gakNameQuery     :: !(Maybe Text)
-  , _gakLimit         :: !(Maybe Int)
-  , _gakPosition      :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAPIKeys = GetAPIKeys'{_gakIncludeValues ::
+                              !(Maybe Bool),
+                              _gakCustomerId :: !(Maybe Text),
+                              _gakNameQuery :: !(Maybe Text),
+                              _gakLimit :: !(Maybe Int),
+                              _gakPosition :: !(Maybe Text)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAPIKeys' with the minimum fields required to make a request.
 --
@@ -82,15 +81,10 @@ data GetAPIKeys = GetAPIKeys'
 -- * 'gakPosition' - The current pagination position in the paged result set.
 getAPIKeys
     :: GetAPIKeys
-getAPIKeys =
-  GetAPIKeys'
-    { _gakIncludeValues = Nothing
-    , _gakCustomerId = Nothing
-    , _gakNameQuery = Nothing
-    , _gakLimit = Nothing
-    , _gakPosition = Nothing
-    }
-
+getAPIKeys
+  = GetAPIKeys'{_gakIncludeValues = Nothing,
+                _gakCustomerId = Nothing, _gakNameQuery = Nothing,
+                _gakLimit = Nothing, _gakPosition = Nothing}
 
 -- | A boolean flag to specify whether (@true@ ) or not (@false@ ) the result contains key values.
 gakIncludeValues :: Lens' GetAPIKeys (Maybe Bool)
@@ -155,16 +149,15 @@ instance ToQuery GetAPIKeys where
 -- | Represents a collection of API keys as represented by an 'ApiKeys' resource.
 --
 --
--- <http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html Use API Keys>
+-- <https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html Use API Keys> 
 --
 -- /See:/ 'getAPIKeysResponse' smart constructor.
-data GetAPIKeysResponse = GetAPIKeysResponse'
-  { _gakrsItems          :: !(Maybe [APIKey])
-  , _gakrsWarnings       :: !(Maybe [Text])
-  , _gakrsPosition       :: !(Maybe Text)
-  , _gakrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAPIKeysResponse = GetAPIKeysResponse'{_gakrsItems
+                                              :: !(Maybe [APIKey]),
+                                              _gakrsWarnings :: !(Maybe [Text]),
+                                              _gakrsPosition :: !(Maybe Text),
+                                              _gakrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAPIKeysResponse' with the minimum fields required to make a request.
 --
@@ -180,14 +173,10 @@ data GetAPIKeysResponse = GetAPIKeysResponse'
 getAPIKeysResponse
     :: Int -- ^ 'gakrsResponseStatus'
     -> GetAPIKeysResponse
-getAPIKeysResponse pResponseStatus_ =
-  GetAPIKeysResponse'
-    { _gakrsItems = Nothing
-    , _gakrsWarnings = Nothing
-    , _gakrsPosition = Nothing
-    , _gakrsResponseStatus = pResponseStatus_
-    }
-
+getAPIKeysResponse pResponseStatus_
+  = GetAPIKeysResponse'{_gakrsItems = Nothing,
+                        _gakrsWarnings = Nothing, _gakrsPosition = Nothing,
+                        _gakrsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gakrsItems :: Lens' GetAPIKeysResponse [APIKey]

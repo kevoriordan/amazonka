@@ -21,7 +21,7 @@
 -- Returns information about the specified workflow execution including its type and some statistics.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -33,7 +33,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.DescribeWorkflowExecution
     (
@@ -64,11 +64,12 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'describeWorkflowExecution' smart constructor.
-data DescribeWorkflowExecution = DescribeWorkflowExecution'
-  { _dweDomain    :: !Text
-  , _dweExecution :: !WorkflowExecution
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeWorkflowExecution = DescribeWorkflowExecution'{_dweDomain
+                                                            :: !Text,
+                                                            _dweExecution ::
+                                                            !WorkflowExecution}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DescribeWorkflowExecution' with the minimum fields required to make a request.
 --
@@ -81,10 +82,9 @@ describeWorkflowExecution
     :: Text -- ^ 'dweDomain'
     -> WorkflowExecution -- ^ 'dweExecution'
     -> DescribeWorkflowExecution
-describeWorkflowExecution pDomain_ pExecution_ =
-  DescribeWorkflowExecution'
-    {_dweDomain = pDomain_, _dweExecution = pExecution_}
-
+describeWorkflowExecution pDomain_ pExecution_
+  = DescribeWorkflowExecution'{_dweDomain = pDomain_,
+                               _dweExecution = pExecution_}
 
 -- | The name of the domain containing the workflow execution.
 dweDomain :: Lens' DescribeWorkflowExecution Text
@@ -141,15 +141,28 @@ instance ToQuery DescribeWorkflowExecution where
 --
 --
 -- /See:/ 'describeWorkflowExecutionResponse' smart constructor.
-data DescribeWorkflowExecutionResponse = DescribeWorkflowExecutionResponse'
-  { _dwersLatestActivityTaskTimestamp :: !(Maybe POSIX)
-  , _dwersLatestExecutionContext      :: !(Maybe Text)
-  , _dwersResponseStatus              :: !Int
-  , _dwersExecutionInfo               :: !WorkflowExecutionInfo
-  , _dwersExecutionConfiguration      :: !WorkflowExecutionConfiguration
-  , _dwersOpenCounts                  :: !WorkflowExecutionOpenCounts
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeWorkflowExecutionResponse = DescribeWorkflowExecutionResponse'{_dwersLatestActivityTaskTimestamp
+                                                                            ::
+                                                                            !(Maybe
+                                                                                POSIX),
+                                                                            _dwersLatestExecutionContext
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _dwersResponseStatus
+                                                                            ::
+                                                                            !Int,
+                                                                            _dwersExecutionInfo
+                                                                            ::
+                                                                            !WorkflowExecutionInfo,
+                                                                            _dwersExecutionConfiguration
+                                                                            ::
+                                                                            !WorkflowExecutionConfiguration,
+                                                                            _dwersOpenCounts
+                                                                            ::
+                                                                            !WorkflowExecutionOpenCounts}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DescribeWorkflowExecutionResponse' with the minimum fields required to make a request.
 --
@@ -172,16 +185,16 @@ describeWorkflowExecutionResponse
     -> WorkflowExecutionConfiguration -- ^ 'dwersExecutionConfiguration'
     -> WorkflowExecutionOpenCounts -- ^ 'dwersOpenCounts'
     -> DescribeWorkflowExecutionResponse
-describeWorkflowExecutionResponse pResponseStatus_ pExecutionInfo_ pExecutionConfiguration_ pOpenCounts_ =
-  DescribeWorkflowExecutionResponse'
-    { _dwersLatestActivityTaskTimestamp = Nothing
-    , _dwersLatestExecutionContext = Nothing
-    , _dwersResponseStatus = pResponseStatus_
-    , _dwersExecutionInfo = pExecutionInfo_
-    , _dwersExecutionConfiguration = pExecutionConfiguration_
-    , _dwersOpenCounts = pOpenCounts_
-    }
-
+describeWorkflowExecutionResponse pResponseStatus_
+  pExecutionInfo_ pExecutionConfiguration_ pOpenCounts_
+  = DescribeWorkflowExecutionResponse'{_dwersLatestActivityTaskTimestamp
+                                         = Nothing,
+                                       _dwersLatestExecutionContext = Nothing,
+                                       _dwersResponseStatus = pResponseStatus_,
+                                       _dwersExecutionInfo = pExecutionInfo_,
+                                       _dwersExecutionConfiguration =
+                                         pExecutionConfiguration_,
+                                       _dwersOpenCounts = pOpenCounts_}
 
 -- | The time when the last activity task was scheduled for this workflow execution. You can use this information to determine if the workflow has not made progress for an unusually long period of time and might require a corrective action.
 dwersLatestActivityTaskTimestamp :: Lens' DescribeWorkflowExecutionResponse (Maybe UTCTime)

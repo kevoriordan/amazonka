@@ -21,7 +21,7 @@
 -- Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the <https://aws.amazon.com/documentation/iam/ AWS Identity and Access Management User Guide> .
 --
 --
--- For this release of the REST API, you can create only one policy for a container. If you enter @PutContainerPolicy@ twice, the second command modifies the existing policy.
+-- For this release of the REST API, you can create only one policy for a container. If you enter @PutContainerPolicy@ twice, the second command modifies the existing policy. 
 --
 module Network.AWS.MediaStore.PutContainerPolicy
     (
@@ -47,11 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putContainerPolicy' smart constructor.
-data PutContainerPolicy = PutContainerPolicy'
-  { _pContainerName :: !Text
-  , _pPolicy        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutContainerPolicy = PutContainerPolicy'{_pContainerName
+                                              :: !Text,
+                                              _pPolicy :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutContainerPolicy' with the minimum fields required to make a request.
 --
@@ -64,9 +63,10 @@ putContainerPolicy
     :: Text -- ^ 'pContainerName'
     -> Text -- ^ 'pPolicy'
     -> PutContainerPolicy
-putContainerPolicy pContainerName_ pPolicy_ =
-  PutContainerPolicy' {_pContainerName = pContainerName_, _pPolicy = pPolicy_}
-
+putContainerPolicy pContainerName_ pPolicy_
+  = PutContainerPolicy'{_pContainerName =
+                          pContainerName_,
+                        _pPolicy = pPolicy_}
 
 -- | The name of the container.
 pContainerName :: Lens' PutContainerPolicy Text
@@ -113,10 +113,10 @@ instance ToQuery PutContainerPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'putContainerPolicyResponse' smart constructor.
-newtype PutContainerPolicyResponse = PutContainerPolicyResponse'
-  { _pcprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype PutContainerPolicyResponse = PutContainerPolicyResponse'{_pcprsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'PutContainerPolicyResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +126,9 @@ newtype PutContainerPolicyResponse = PutContainerPolicyResponse'
 putContainerPolicyResponse
     :: Int -- ^ 'pcprsResponseStatus'
     -> PutContainerPolicyResponse
-putContainerPolicyResponse pResponseStatus_ =
-  PutContainerPolicyResponse' {_pcprsResponseStatus = pResponseStatus_}
-
+putContainerPolicyResponse pResponseStatus_
+  = PutContainerPolicyResponse'{_pcprsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 pcprsResponseStatus :: Lens' PutContainerPolicyResponse Int

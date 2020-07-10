@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Starts a DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. For more information, see Stopping and Starting a DB instance in the AWS RDS user guide.
+-- Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. 
 --
+--
+-- For more information, see <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html Starting an Amazon RDS DB instance That Was Previously Stopped> in the /Amazon RDS User Guide./ 
 --
 module Network.AWS.RDS.StartDBInstance
     (
@@ -45,24 +47,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startDBInstance' smart constructor.
-newtype StartDBInstance = StartDBInstance'
-  { _sdbiDBInstanceIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartDBInstance = StartDBInstance'{_sdbiDBInstanceIdentifier
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartDBInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdbiDBInstanceIdentifier' - The user-supplied instance identifier.
+-- * 'sdbiDBInstanceIdentifier' - The user-supplied instance identifier. 
 startDBInstance
     :: Text -- ^ 'sdbiDBInstanceIdentifier'
     -> StartDBInstance
-startDBInstance pDBInstanceIdentifier_ =
-  StartDBInstance' {_sdbiDBInstanceIdentifier = pDBInstanceIdentifier_}
+startDBInstance pDBInstanceIdentifier_
+  = StartDBInstance'{_sdbiDBInstanceIdentifier =
+                       pDBInstanceIdentifier_}
 
-
--- | The user-supplied instance identifier.
+-- | The user-supplied instance identifier. 
 sdbiDBInstanceIdentifier :: Lens' StartDBInstance Text
 sdbiDBInstanceIdentifier = lens _sdbiDBInstanceIdentifier (\ s a -> s{_sdbiDBInstanceIdentifier = a})
 
@@ -93,11 +94,12 @@ instance ToQuery StartDBInstance where
                "DBInstanceIdentifier" =: _sdbiDBInstanceIdentifier]
 
 -- | /See:/ 'startDBInstanceResponse' smart constructor.
-data StartDBInstanceResponse = StartDBInstanceResponse'
-  { _sdbirsDBInstance     :: !(Maybe DBInstance)
-  , _sdbirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartDBInstanceResponse = StartDBInstanceResponse'{_sdbirsDBInstance
+                                                        :: !(Maybe DBInstance),
+                                                        _sdbirsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'StartDBInstanceResponse' with the minimum fields required to make a request.
 --
@@ -109,10 +111,10 @@ data StartDBInstanceResponse = StartDBInstanceResponse'
 startDBInstanceResponse
     :: Int -- ^ 'sdbirsResponseStatus'
     -> StartDBInstanceResponse
-startDBInstanceResponse pResponseStatus_ =
-  StartDBInstanceResponse'
-    {_sdbirsDBInstance = Nothing, _sdbirsResponseStatus = pResponseStatus_}
-
+startDBInstanceResponse pResponseStatus_
+  = StartDBInstanceResponse'{_sdbirsDBInstance =
+                               Nothing,
+                             _sdbirsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 sdbirsDBInstance :: Lens' StartDBInstanceResponse (Maybe DBInstance)

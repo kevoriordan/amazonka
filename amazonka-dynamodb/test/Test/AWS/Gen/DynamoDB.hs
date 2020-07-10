@@ -14,11 +14,11 @@
 module Test.AWS.Gen.DynamoDB where
 
 import Data.Proxy
-import Network.AWS.DynamoDB
-import Test.AWS.DynamoDB.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.DynamoDB
+import Test.AWS.DynamoDB.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -61,6 +61,9 @@ import Test.Tasty
 --         , requestCreateBackup $
 --             createBackup
 --
+--         , requestUpdateTableReplicaAutoScaling $
+--             updateTableReplicaAutoScaling
+--
 --         , requestDescribeGlobalTableSettings $
 --             describeGlobalTableSettings
 --
@@ -82,11 +85,23 @@ import Test.Tasty
 --         , requestDescribeBackup $
 --             describeBackup
 --
+--         , requestDescribeTableReplicaAutoScaling $
+--             describeTableReplicaAutoScaling
+--
 --         , requestUpdateGlobalTableSettings $
 --             updateGlobalTableSettings
 --
+--         , requestTransactGetItems $
+--             transactGetItems
+--
+--         , requestListContributorInsights $
+--             listContributorInsights
+--
 --         , requestBatchWriteItem $
 --             batchWriteItem
+--
+--         , requestTransactWriteItems $
+--             transactWriteItems
 --
 --         , requestListTables $
 --             listTables
@@ -94,11 +109,17 @@ import Test.Tasty
 --         , requestScan $
 --             scan
 --
+--         , requestUpdateContributorInsights $
+--             updateContributorInsights
+--
 --         , requestQuery $
 --             query
 --
 --         , requestCreateTable $
 --             createTable
+--
+--         , requestDescribeEndpoints $
+--             describeEndpoints
 --
 --         , requestDescribeTimeToLive $
 --             describeTimeToLive
@@ -108,6 +129,9 @@ import Test.Tasty
 --
 --         , requestTagResource $
 --             tagResource
+--
+--         , requestDescribeContributorInsights $
+--             describeContributorInsights
 --
 --         , requestUntagResource $
 --             untagResource
@@ -163,6 +187,9 @@ import Test.Tasty
 --         , responseCreateBackup $
 --             createBackupResponse
 --
+--         , responseUpdateTableReplicaAutoScaling $
+--             updateTableReplicaAutoScalingResponse
+--
 --         , responseDescribeGlobalTableSettings $
 --             describeGlobalTableSettingsResponse
 --
@@ -184,11 +211,23 @@ import Test.Tasty
 --         , responseDescribeBackup $
 --             describeBackupResponse
 --
+--         , responseDescribeTableReplicaAutoScaling $
+--             describeTableReplicaAutoScalingResponse
+--
 --         , responseUpdateGlobalTableSettings $
 --             updateGlobalTableSettingsResponse
 --
+--         , responseTransactGetItems $
+--             transactGetItemsResponse
+--
+--         , responseListContributorInsights $
+--             listContributorInsightsResponse
+--
 --         , responseBatchWriteItem $
 --             batchWriteItemResponse
+--
+--         , responseTransactWriteItems $
+--             transactWriteItemsResponse
 --
 --         , responseListTables $
 --             listTablesResponse
@@ -196,11 +235,17 @@ import Test.Tasty
 --         , responseScan $
 --             scanResponse
 --
+--         , responseUpdateContributorInsights $
+--             updateContributorInsightsResponse
+--
 --         , responseQuery $
 --             queryResponse
 --
 --         , responseCreateTable $
 --             createTableResponse
+--
+--         , responseDescribeEndpoints $
+--             describeEndpointsResponse
 --
 --         , responseDescribeTimeToLive $
 --             describeTimeToLiveResponse
@@ -210,6 +255,9 @@ import Test.Tasty
 --
 --         , responseTagResource $
 --             tagResourceResponse
+--
+--         , responseDescribeContributorInsights $
+--             describeContributorInsightsResponse
 --
 --         , responseUntagResource $
 --             untagResourceResponse
@@ -289,6 +337,11 @@ requestCreateBackup = req
     "CreateBackup"
     "fixture/CreateBackup.yaml"
 
+requestUpdateTableReplicaAutoScaling :: UpdateTableReplicaAutoScaling -> TestTree
+requestUpdateTableReplicaAutoScaling = req
+    "UpdateTableReplicaAutoScaling"
+    "fixture/UpdateTableReplicaAutoScaling.yaml"
+
 requestDescribeGlobalTableSettings :: DescribeGlobalTableSettings -> TestTree
 requestDescribeGlobalTableSettings = req
     "DescribeGlobalTableSettings"
@@ -324,15 +377,35 @@ requestDescribeBackup = req
     "DescribeBackup"
     "fixture/DescribeBackup.yaml"
 
+requestDescribeTableReplicaAutoScaling :: DescribeTableReplicaAutoScaling -> TestTree
+requestDescribeTableReplicaAutoScaling = req
+    "DescribeTableReplicaAutoScaling"
+    "fixture/DescribeTableReplicaAutoScaling.yaml"
+
 requestUpdateGlobalTableSettings :: UpdateGlobalTableSettings -> TestTree
 requestUpdateGlobalTableSettings = req
     "UpdateGlobalTableSettings"
     "fixture/UpdateGlobalTableSettings.yaml"
 
+requestTransactGetItems :: TransactGetItems -> TestTree
+requestTransactGetItems = req
+    "TransactGetItems"
+    "fixture/TransactGetItems.yaml"
+
+requestListContributorInsights :: ListContributorInsights -> TestTree
+requestListContributorInsights = req
+    "ListContributorInsights"
+    "fixture/ListContributorInsights.yaml"
+
 requestBatchWriteItem :: BatchWriteItem -> TestTree
 requestBatchWriteItem = req
     "BatchWriteItem"
     "fixture/BatchWriteItem.yaml"
+
+requestTransactWriteItems :: TransactWriteItems -> TestTree
+requestTransactWriteItems = req
+    "TransactWriteItems"
+    "fixture/TransactWriteItems.yaml"
 
 requestListTables :: ListTables -> TestTree
 requestListTables = req
@@ -344,6 +417,11 @@ requestScan = req
     "Scan"
     "fixture/Scan.yaml"
 
+requestUpdateContributorInsights :: UpdateContributorInsights -> TestTree
+requestUpdateContributorInsights = req
+    "UpdateContributorInsights"
+    "fixture/UpdateContributorInsights.yaml"
+
 requestQuery :: Query -> TestTree
 requestQuery = req
     "Query"
@@ -353,6 +431,11 @@ requestCreateTable :: CreateTable -> TestTree
 requestCreateTable = req
     "CreateTable"
     "fixture/CreateTable.yaml"
+
+requestDescribeEndpoints :: DescribeEndpoints -> TestTree
+requestDescribeEndpoints = req
+    "DescribeEndpoints"
+    "fixture/DescribeEndpoints.yaml"
 
 requestDescribeTimeToLive :: DescribeTimeToLive -> TestTree
 requestDescribeTimeToLive = req
@@ -368,6 +451,11 @@ requestTagResource :: TagResource -> TestTree
 requestTagResource = req
     "TagResource"
     "fixture/TagResource.yaml"
+
+requestDescribeContributorInsights :: DescribeContributorInsights -> TestTree
+requestDescribeContributorInsights = req
+    "DescribeContributorInsights"
+    "fixture/DescribeContributorInsights.yaml"
 
 requestUntagResource :: UntagResource -> TestTree
 requestUntagResource = req
@@ -478,6 +566,13 @@ responseCreateBackup = res
     dynamoDB
     (Proxy :: Proxy CreateBackup)
 
+responseUpdateTableReplicaAutoScaling :: UpdateTableReplicaAutoScalingResponse -> TestTree
+responseUpdateTableReplicaAutoScaling = res
+    "UpdateTableReplicaAutoScalingResponse"
+    "fixture/UpdateTableReplicaAutoScalingResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy UpdateTableReplicaAutoScaling)
+
 responseDescribeGlobalTableSettings :: DescribeGlobalTableSettingsResponse -> TestTree
 responseDescribeGlobalTableSettings = res
     "DescribeGlobalTableSettingsResponse"
@@ -527,6 +622,13 @@ responseDescribeBackup = res
     dynamoDB
     (Proxy :: Proxy DescribeBackup)
 
+responseDescribeTableReplicaAutoScaling :: DescribeTableReplicaAutoScalingResponse -> TestTree
+responseDescribeTableReplicaAutoScaling = res
+    "DescribeTableReplicaAutoScalingResponse"
+    "fixture/DescribeTableReplicaAutoScalingResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy DescribeTableReplicaAutoScaling)
+
 responseUpdateGlobalTableSettings :: UpdateGlobalTableSettingsResponse -> TestTree
 responseUpdateGlobalTableSettings = res
     "UpdateGlobalTableSettingsResponse"
@@ -534,12 +636,33 @@ responseUpdateGlobalTableSettings = res
     dynamoDB
     (Proxy :: Proxy UpdateGlobalTableSettings)
 
+responseTransactGetItems :: TransactGetItemsResponse -> TestTree
+responseTransactGetItems = res
+    "TransactGetItemsResponse"
+    "fixture/TransactGetItemsResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy TransactGetItems)
+
+responseListContributorInsights :: ListContributorInsightsResponse -> TestTree
+responseListContributorInsights = res
+    "ListContributorInsightsResponse"
+    "fixture/ListContributorInsightsResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy ListContributorInsights)
+
 responseBatchWriteItem :: BatchWriteItemResponse -> TestTree
 responseBatchWriteItem = res
     "BatchWriteItemResponse"
     "fixture/BatchWriteItemResponse.proto"
     dynamoDB
     (Proxy :: Proxy BatchWriteItem)
+
+responseTransactWriteItems :: TransactWriteItemsResponse -> TestTree
+responseTransactWriteItems = res
+    "TransactWriteItemsResponse"
+    "fixture/TransactWriteItemsResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy TransactWriteItems)
 
 responseListTables :: ListTablesResponse -> TestTree
 responseListTables = res
@@ -555,6 +678,13 @@ responseScan = res
     dynamoDB
     (Proxy :: Proxy Scan)
 
+responseUpdateContributorInsights :: UpdateContributorInsightsResponse -> TestTree
+responseUpdateContributorInsights = res
+    "UpdateContributorInsightsResponse"
+    "fixture/UpdateContributorInsightsResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy UpdateContributorInsights)
+
 responseQuery :: QueryResponse -> TestTree
 responseQuery = res
     "QueryResponse"
@@ -568,6 +698,13 @@ responseCreateTable = res
     "fixture/CreateTableResponse.proto"
     dynamoDB
     (Proxy :: Proxy CreateTable)
+
+responseDescribeEndpoints :: DescribeEndpointsResponse -> TestTree
+responseDescribeEndpoints = res
+    "DescribeEndpointsResponse"
+    "fixture/DescribeEndpointsResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy DescribeEndpoints)
 
 responseDescribeTimeToLive :: DescribeTimeToLiveResponse -> TestTree
 responseDescribeTimeToLive = res
@@ -589,6 +726,13 @@ responseTagResource = res
     "fixture/TagResourceResponse.proto"
     dynamoDB
     (Proxy :: Proxy TagResource)
+
+responseDescribeContributorInsights :: DescribeContributorInsightsResponse -> TestTree
+responseDescribeContributorInsights = res
+    "DescribeContributorInsightsResponse"
+    "fixture/DescribeContributorInsightsResponse.proto"
+    dynamoDB
+    (Proxy :: Proxy DescribeContributorInsights)
 
 responseUntagResource :: UntagResourceResponse -> TestTree
 responseUntagResource = res

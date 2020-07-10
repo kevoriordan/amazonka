@@ -49,11 +49,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteUserAttributes' smart constructor.
-data DeleteUserAttributes = DeleteUserAttributes'
-  { _duaUserAttributeNames :: ![Text]
-  , _duaAccessToken        :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteUserAttributes = DeleteUserAttributes'{_duaUserAttributeNames
+                                                  :: ![Text],
+                                                  _duaAccessToken ::
+                                                  !(Sensitive Text)}
+                              deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUserAttributes' with the minimum fields required to make a request.
 --
@@ -65,12 +65,10 @@ data DeleteUserAttributes = DeleteUserAttributes'
 deleteUserAttributes
     :: Text -- ^ 'duaAccessToken'
     -> DeleteUserAttributes
-deleteUserAttributes pAccessToken_ =
-  DeleteUserAttributes'
-    { _duaUserAttributeNames = mempty
-    , _duaAccessToken = _Sensitive # pAccessToken_
-    }
-
+deleteUserAttributes pAccessToken_
+  = DeleteUserAttributes'{_duaUserAttributeNames =
+                            mempty,
+                          _duaAccessToken = _Sensitive # pAccessToken_}
 
 -- | An array of strings representing the user attribute names you wish to delete. For custom attributes, you must prepend the @custom:@ prefix to the attribute name.
 duaUserAttributeNames :: Lens' DeleteUserAttributes [Text]
@@ -123,10 +121,10 @@ instance ToQuery DeleteUserAttributes where
 --
 --
 -- /See:/ 'deleteUserAttributesResponse' smart constructor.
-newtype DeleteUserAttributesResponse = DeleteUserAttributesResponse'
-  { _duarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteUserAttributesResponse = DeleteUserAttributesResponse'{_duarsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteUserAttributesResponse' with the minimum fields required to make a request.
 --
@@ -136,9 +134,9 @@ newtype DeleteUserAttributesResponse = DeleteUserAttributesResponse'
 deleteUserAttributesResponse
     :: Int -- ^ 'duarsResponseStatus'
     -> DeleteUserAttributesResponse
-deleteUserAttributesResponse pResponseStatus_ =
-  DeleteUserAttributesResponse' {_duarsResponseStatus = pResponseStatus_}
-
+deleteUserAttributesResponse pResponseStatus_
+  = DeleteUserAttributesResponse'{_duarsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 duarsResponseStatus :: Lens' DeleteUserAttributesResponse Int

@@ -48,12 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateRoleAlias' smart constructor.
-data UpdateRoleAlias = UpdateRoleAlias'
-  { _uraCredentialDurationSeconds :: !(Maybe Nat)
-  , _uraRoleARN                   :: !(Maybe Text)
-  , _uraRoleAlias                 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRoleAlias = UpdateRoleAlias'{_uraCredentialDurationSeconds
+                                        :: !(Maybe Nat),
+                                        _uraRoleARN :: !(Maybe Text),
+                                        _uraRoleAlias :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRoleAlias' with the minimum fields required to make a request.
 --
@@ -67,13 +66,10 @@ data UpdateRoleAlias = UpdateRoleAlias'
 updateRoleAlias
     :: Text -- ^ 'uraRoleAlias'
     -> UpdateRoleAlias
-updateRoleAlias pRoleAlias_ =
-  UpdateRoleAlias'
-    { _uraCredentialDurationSeconds = Nothing
-    , _uraRoleARN = Nothing
-    , _uraRoleAlias = pRoleAlias_
-    }
-
+updateRoleAlias pRoleAlias_
+  = UpdateRoleAlias'{_uraCredentialDurationSeconds =
+                       Nothing,
+                     _uraRoleARN = Nothing, _uraRoleAlias = pRoleAlias_}
 
 -- | The number of seconds the credential will be valid.
 uraCredentialDurationSeconds :: Lens' UpdateRoleAlias (Maybe Natural)
@@ -120,12 +116,14 @@ instance ToQuery UpdateRoleAlias where
         toQuery = const mempty
 
 -- | /See:/ 'updateRoleAliasResponse' smart constructor.
-data UpdateRoleAliasResponse = UpdateRoleAliasResponse'
-  { _urarsRoleAliasARN   :: !(Maybe Text)
-  , _urarsRoleAlias      :: !(Maybe Text)
-  , _urarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRoleAliasResponse = UpdateRoleAliasResponse'{_urarsRoleAliasARN
+                                                        :: !(Maybe Text),
+                                                        _urarsRoleAlias ::
+                                                        !(Maybe Text),
+                                                        _urarsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdateRoleAliasResponse' with the minimum fields required to make a request.
 --
@@ -139,13 +137,11 @@ data UpdateRoleAliasResponse = UpdateRoleAliasResponse'
 updateRoleAliasResponse
     :: Int -- ^ 'urarsResponseStatus'
     -> UpdateRoleAliasResponse
-updateRoleAliasResponse pResponseStatus_ =
-  UpdateRoleAliasResponse'
-    { _urarsRoleAliasARN = Nothing
-    , _urarsRoleAlias = Nothing
-    , _urarsResponseStatus = pResponseStatus_
-    }
-
+updateRoleAliasResponse pResponseStatus_
+  = UpdateRoleAliasResponse'{_urarsRoleAliasARN =
+                               Nothing,
+                             _urarsRoleAlias = Nothing,
+                             _urarsResponseStatus = pResponseStatus_}
 
 -- | The role alias ARN.
 urarsRoleAliasARN :: Lens' UpdateRoleAliasResponse (Maybe Text)

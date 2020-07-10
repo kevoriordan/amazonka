@@ -33,7 +33,7 @@ module Network.AWS.SSM.DeleteActivation
     , deleteActivationResponse
     , DeleteActivationResponse
     -- * Response Lenses
-    , delersResponseStatus
+    , dltactvtnrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -44,10 +44,9 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'deleteActivation' smart constructor.
-newtype DeleteActivation = DeleteActivation'
-  { _daActivationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteActivation = DeleteActivation'{_daActivationId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteActivation' with the minimum fields required to make a request.
 --
@@ -57,9 +56,8 @@ newtype DeleteActivation = DeleteActivation'
 deleteActivation
     :: Text -- ^ 'daActivationId'
     -> DeleteActivation
-deleteActivation pActivationId_ =
-  DeleteActivation' {_daActivationId = pActivationId_}
-
+deleteActivation pActivationId_
+  = DeleteActivation'{_daActivationId = pActivationId_}
 
 -- | The ID of the activation that you want to delete.
 daActivationId :: Lens' DeleteActivation Text
@@ -99,25 +97,25 @@ instance ToQuery DeleteActivation where
         toQuery = const mempty
 
 -- | /See:/ 'deleteActivationResponse' smart constructor.
-newtype DeleteActivationResponse = DeleteActivationResponse'
-  { _delersResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteActivationResponse = DeleteActivationResponse'{_dltactvtnrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteActivationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'delersResponseStatus' - -- | The response status code.
+-- * 'dltactvtnrsResponseStatus' - -- | The response status code.
 deleteActivationResponse
-    :: Int -- ^ 'delersResponseStatus'
+    :: Int -- ^ 'dltactvtnrsResponseStatus'
     -> DeleteActivationResponse
-deleteActivationResponse pResponseStatus_ =
-  DeleteActivationResponse' {_delersResponseStatus = pResponseStatus_}
-
+deleteActivationResponse pResponseStatus_
+  = DeleteActivationResponse'{_dltactvtnrsResponseStatus
+                                = pResponseStatus_}
 
 -- | -- | The response status code.
-delersResponseStatus :: Lens' DeleteActivationResponse Int
-delersResponseStatus = lens _delersResponseStatus (\ s a -> s{_delersResponseStatus = a})
+dltactvtnrsResponseStatus :: Lens' DeleteActivationResponse Int
+dltactvtnrsResponseStatus = lens _dltactvtnrsResponseStatus (\ s a -> s{_dltactvtnrsResponseStatus = a})
 
 instance NFData DeleteActivationResponse where

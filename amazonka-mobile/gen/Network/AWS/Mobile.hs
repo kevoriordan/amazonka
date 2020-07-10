@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- AWS Mobile Service provides mobile app and website developers with capabilities required to configure AWS resources and bootstrap their developer desktop projects with the necessary SDKs, constants, tools and samples to make use of those resources.
+-- AWS Mobile Service provides mobile app and website developers with capabilities required to configure AWS resources and bootstrap their developer desktop projects with the necessary SDKs, constants, tools and samples to make use of those resources. 
 --
 --
 module Network.AWS.Mobile
@@ -22,23 +22,23 @@ module Network.AWS.Mobile
     -- * Errors
     -- $errors
 
-    -- ** NotFoundException
-    , _NotFoundException
+    -- ** InternalFailureException
+    , _InternalFailureException
 
     -- ** TooManyRequestsException
     , _TooManyRequestsException
 
-    -- ** InternalFailureException
-    , _InternalFailureException
-
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
+    -- ** BadRequestException
+    , _BadRequestException
 
     -- ** UnauthorizedException
     , _UnauthorizedException
 
-    -- ** BadRequestException
-    , _BadRequestException
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
+
+    -- ** NotFoundException
+    , _NotFoundException
 
     -- ** LimitExceededException
     , _LimitExceededException
@@ -55,28 +55,28 @@ module Network.AWS.Mobile
     -- ** ListProjects (Paginated)
     , module Network.AWS.Mobile.ListProjects
 
-    -- ** DeleteProject
+    -- ** DeleteProject 
     , module Network.AWS.Mobile.DeleteProject
 
-    -- ** UpdateProject
+    -- ** UpdateProject 
     , module Network.AWS.Mobile.UpdateProject
 
     -- ** ListBundles (Paginated)
     , module Network.AWS.Mobile.ListBundles
 
-    -- ** DescribeProject
+    -- ** DescribeProject 
     , module Network.AWS.Mobile.DescribeProject
 
-    -- ** ExportProject
+    -- ** ExportProject 
     , module Network.AWS.Mobile.ExportProject
 
-    -- ** DescribeBundle
+    -- ** DescribeBundle 
     , module Network.AWS.Mobile.DescribeBundle
 
-    -- ** ExportBundle
+    -- ** ExportBundle 
     , module Network.AWS.Mobile.ExportBundle
 
-    -- ** CreateProject
+    -- ** CreateProject 
     , module Network.AWS.Mobile.CreateProject
 
     -- * Types

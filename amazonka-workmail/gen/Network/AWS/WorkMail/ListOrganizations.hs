@@ -50,11 +50,10 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'listOrganizations' smart constructor.
-data ListOrganizations = ListOrganizations'
-  { _loNextToken  :: !(Maybe Text)
-  , _loMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOrganizations = ListOrganizations'{_loNextToken
+                                            :: !(Maybe Text),
+                                            _loMaxResults :: !(Maybe Nat)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListOrganizations' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data ListOrganizations = ListOrganizations'
 -- * 'loMaxResults' - The maximum number of results to return in a single call.
 listOrganizations
     :: ListOrganizations
-listOrganizations =
-  ListOrganizations' {_loNextToken = Nothing, _loMaxResults = Nothing}
-
+listOrganizations
+  = ListOrganizations'{_loNextToken = Nothing,
+                       _loMaxResults = Nothing}
 
 -- | The token to use to retrieve the next page of results. The first call does not contain any tokens.
 loNextToken :: Lens' ListOrganizations (Maybe Text)
@@ -122,12 +121,16 @@ instance ToQuery ListOrganizations where
         toQuery = const mempty
 
 -- | /See:/ 'listOrganizationsResponse' smart constructor.
-data ListOrganizationsResponse = ListOrganizationsResponse'
-  { _lorsNextToken             :: !(Maybe Text)
-  , _lorsOrganizationSummaries :: !(Maybe [OrganizationSummary])
-  , _lorsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListOrganizationsResponse = ListOrganizationsResponse'{_lorsNextToken
+                                                            :: !(Maybe Text),
+                                                            _lorsOrganizationSummaries
+                                                            ::
+                                                            !(Maybe
+                                                                [OrganizationSummary]),
+                                                            _lorsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListOrganizationsResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +144,11 @@ data ListOrganizationsResponse = ListOrganizationsResponse'
 listOrganizationsResponse
     :: Int -- ^ 'lorsResponseStatus'
     -> ListOrganizationsResponse
-listOrganizationsResponse pResponseStatus_ =
-  ListOrganizationsResponse'
-    { _lorsNextToken = Nothing
-    , _lorsOrganizationSummaries = Nothing
-    , _lorsResponseStatus = pResponseStatus_
-    }
-
+listOrganizationsResponse pResponseStatus_
+  = ListOrganizationsResponse'{_lorsNextToken =
+                                 Nothing,
+                               _lorsOrganizationSummaries = Nothing,
+                               _lorsResponseStatus = pResponseStatus_}
 
 -- | The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
 lorsNextToken :: Lens' ListOrganizationsResponse (Maybe Text)

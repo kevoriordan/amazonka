@@ -18,7 +18,27 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.
+-- Returns some or all (up to 1,000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. A @200 OK@ response can contain valid or invalid XML. Make sure to design your application to parse the contents of the response and handle it appropriately.
+--
+--
+-- To use this operation, you must have READ access to the bucket.
+--
+-- To use this operation in an AWS Identity and Access Management (IAM) policy, you must have permissions to perform the @s3:ListBucket@ action. The bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources> .
+--
+-- /Important:/ This section describes the latest revision of the API. We recommend that you use this revised API for application development. For backward compatibility, Amazon S3 continues to support the prior version of this API, 'ListObjects' .
+--
+-- To get a list of your buckets, see 'ListBuckets' .
+--
+-- The following operations are related to @ListObjectsV2@ :
+--
+--     * 'GetObject' 
+--
+--     * 'PutObject' 
+--
+--     * 'CreateBucket' 
+--
+--
+--
 --
 -- This operation returns paginated results.
 module Network.AWS.S3.ListObjectsV2
@@ -65,28 +85,27 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'listObjectsV2' smart constructor.
-data ListObjectsV2 = ListObjectsV2'
-  { _lovStartAfter        :: !(Maybe Text)
-  , _lovContinuationToken :: !(Maybe Text)
-  , _lovFetchOwner        :: !(Maybe Bool)
-  , _lovPrefix            :: !(Maybe Text)
-  , _lovEncodingType      :: !(Maybe EncodingType)
-  , _lovRequestPayer      :: !(Maybe RequestPayer)
-  , _lovMaxKeys           :: !(Maybe Int)
-  , _lovDelimiter         :: !(Maybe Delimiter)
-  , _lovBucket            :: !BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectsV2 = ListObjectsV2'{_lovStartAfter ::
+                                    !(Maybe Text),
+                                    _lovContinuationToken :: !(Maybe Text),
+                                    _lovFetchOwner :: !(Maybe Bool),
+                                    _lovPrefix :: !(Maybe Text),
+                                    _lovEncodingType :: !(Maybe EncodingType),
+                                    _lovRequestPayer :: !(Maybe RequestPayer),
+                                    _lovMaxKeys :: !(Maybe Int),
+                                    _lovDelimiter :: !(Maybe Delimiter),
+                                    _lovBucket :: !BucketName}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListObjectsV2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lovStartAfter' - StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
+-- * 'lovStartAfter' - StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket.
 --
--- * 'lovContinuationToken' - ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
+-- * 'lovContinuationToken' - ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key.
 --
--- * 'lovFetchOwner' - The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true
+-- * 'lovFetchOwner' - The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true.
 --
 -- * 'lovPrefix' - Limits the response to keys that begin with the specified prefix.
 --
@@ -98,33 +117,27 @@ data ListObjectsV2 = ListObjectsV2'
 --
 -- * 'lovDelimiter' - A delimiter is a character you use to group keys.
 --
--- * 'lovBucket' - Name of the bucket to list.
+-- * 'lovBucket' - Bucket name to list.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form /AccessPointName/ -/AccountId/ .s3-accesspoint./Region/ .amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html Using Access Points> in the /Amazon Simple Storage Service Developer Guide/ .
 listObjectsV2
     :: BucketName -- ^ 'lovBucket'
     -> ListObjectsV2
-listObjectsV2 pBucket_ =
-  ListObjectsV2'
-    { _lovStartAfter = Nothing
-    , _lovContinuationToken = Nothing
-    , _lovFetchOwner = Nothing
-    , _lovPrefix = Nothing
-    , _lovEncodingType = Nothing
-    , _lovRequestPayer = Nothing
-    , _lovMaxKeys = Nothing
-    , _lovDelimiter = Nothing
-    , _lovBucket = pBucket_
-    }
+listObjectsV2 pBucket_
+  = ListObjectsV2'{_lovStartAfter = Nothing,
+                   _lovContinuationToken = Nothing,
+                   _lovFetchOwner = Nothing, _lovPrefix = Nothing,
+                   _lovEncodingType = Nothing,
+                   _lovRequestPayer = Nothing, _lovMaxKeys = Nothing,
+                   _lovDelimiter = Nothing, _lovBucket = pBucket_}
 
-
--- | StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
+-- | StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket.
 lovStartAfter :: Lens' ListObjectsV2 (Maybe Text)
 lovStartAfter = lens _lovStartAfter (\ s a -> s{_lovStartAfter = a})
 
--- | ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
+-- | ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key.
 lovContinuationToken :: Lens' ListObjectsV2 (Maybe Text)
 lovContinuationToken = lens _lovContinuationToken (\ s a -> s{_lovContinuationToken = a})
 
--- | The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true
+-- | The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true.
 lovFetchOwner :: Lens' ListObjectsV2 (Maybe Bool)
 lovFetchOwner = lens _lovFetchOwner (\ s a -> s{_lovFetchOwner = a})
 
@@ -148,7 +161,7 @@ lovMaxKeys = lens _lovMaxKeys (\ s a -> s{_lovMaxKeys = a})
 lovDelimiter :: Lens' ListObjectsV2 (Maybe Delimiter)
 lovDelimiter = lens _lovDelimiter (\ s a -> s{_lovDelimiter = a})
 
--- | Name of the bucket to list.
+-- | Bucket name to list.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form /AccessPointName/ -/AccountId/ .s3-accesspoint./Region/ .amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html Using Access Points> in the /Amazon Simple Storage Service Developer Guide/ .
 lovBucket :: Lens' ListObjectsV2 BucketName
 lovBucket = lens _lovBucket (\ s a -> s{_lovBucket = a})
 
@@ -206,78 +219,84 @@ instance ToQuery ListObjectsV2 where
                "delimiter" =: _lovDelimiter, "list-type=2"]
 
 -- | /See:/ 'listObjectsV2Response' smart constructor.
-data ListObjectsV2Response = ListObjectsV2Response'
-  { _lovrsStartAfter            :: !(Maybe Text)
-  , _lovrsKeyCount              :: !(Maybe Int)
-  , _lovrsContents              :: !(Maybe [Object])
-  , _lovrsContinuationToken     :: !(Maybe Text)
-  , _lovrsPrefix                :: !(Maybe Text)
-  , _lovrsCommonPrefixes        :: !(Maybe [CommonPrefix])
-  , _lovrsEncodingType          :: !(Maybe EncodingType)
-  , _lovrsName                  :: !(Maybe BucketName)
-  , _lovrsNextContinuationToken :: !(Maybe Text)
-  , _lovrsMaxKeys               :: !(Maybe Int)
-  , _lovrsIsTruncated           :: !(Maybe Bool)
-  , _lovrsDelimiter             :: !(Maybe Delimiter)
-  , _lovrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListObjectsV2Response = ListObjectsV2Response'{_lovrsStartAfter
+                                                    :: !(Maybe Text),
+                                                    _lovrsKeyCount ::
+                                                    !(Maybe Int),
+                                                    _lovrsContents ::
+                                                    !(Maybe [Object]),
+                                                    _lovrsContinuationToken ::
+                                                    !(Maybe Text),
+                                                    _lovrsPrefix ::
+                                                    !(Maybe Text),
+                                                    _lovrsCommonPrefixes ::
+                                                    !(Maybe [CommonPrefix]),
+                                                    _lovrsEncodingType ::
+                                                    !(Maybe EncodingType),
+                                                    _lovrsName ::
+                                                    !(Maybe BucketName),
+                                                    _lovrsNextContinuationToken
+                                                    :: !(Maybe Text),
+                                                    _lovrsMaxKeys ::
+                                                    !(Maybe Int),
+                                                    _lovrsIsTruncated ::
+                                                    !(Maybe Bool),
+                                                    _lovrsDelimiter ::
+                                                    !(Maybe Delimiter),
+                                                    _lovrsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListObjectsV2Response' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lovrsStartAfter' - StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
+-- * 'lovrsStartAfter' - If StartAfter was sent with the request, it is included in the response.
 --
--- * 'lovrsKeyCount' - KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys
+-- * 'lovrsKeyCount' - KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys 
 --
 -- * 'lovrsContents' - Metadata about each object returned.
 --
--- * 'lovrsContinuationToken' - ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
+-- * 'lovrsContinuationToken' - If ContinuationToken was sent with the request, it is included in the response.
 --
--- * 'lovrsPrefix' - Limits the response to keys that begin with the specified prefix.
+-- * 'lovrsPrefix' - Keys that begin with the indicated prefix.
 --
--- * 'lovrsCommonPrefixes' - CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter
+-- * 'lovrsCommonPrefixes' - All of the keys rolled up into a common prefix count as a single return when calculating the number of returns. A response can contain @CommonPrefixes@ only if you specify a delimiter. @CommonPrefixes@ contains all (if there are any) keys between @Prefix@ and the next occurrence of the string specified by a delimiter. @CommonPrefixes@ lists keys that act like subdirectories in the directory specified by @Prefix@ . For example, if the prefix is @notes/@ and the delimiter is a slash (@/@ ) as in @notes/summer/july@ , the common prefix is @notes/summer/@ . All of the keys that roll up into a common prefix count as a single return when calculating the number of returns. 
 --
--- * 'lovrsEncodingType' - Encoding type used by Amazon S3 to encode object keys in the response.
+-- * 'lovrsEncodingType' - Encoding type used by Amazon S3 to encode object key names in the XML response. If you specify the encoding-type request parameter, Amazon S3 includes this element in the response, and returns encoded key name values in the following response elements: @Delimiter, Prefix, Key,@ and @StartAfter@ .
 --
--- * 'lovrsName' - Name of the bucket to list.
+-- * 'lovrsName' - Bucket name.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form /AccessPointName/ -/AccountId/ .s3-accesspoint./Region/ .amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html Using Access Points> in the /Amazon Simple Storage Service Developer Guide/ .
 --
--- * 'lovrsNextContinuationToken' - NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key
+-- * 'lovrsNextContinuationToken' - @NextContinuationToken@ is sent when @isTruncated@ is true, which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this @NextContinuationToken@ . @NextContinuationToken@ is obfuscated and is not a real key
 --
 -- * 'lovrsMaxKeys' - Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
 --
--- * 'lovrsIsTruncated' - A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+-- * 'lovrsIsTruncated' - Set to false if all of the results were returned. Set to true if more keys are available to return. If the number of results exceeds that specified by MaxKeys, all of the results might not be returned.
 --
--- * 'lovrsDelimiter' - A delimiter is a character you use to group keys.
+-- * 'lovrsDelimiter' - Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response. Each rolled-up result counts as only one return against the @MaxKeys@ value.
 --
 -- * 'lovrsResponseStatus' - -- | The response status code.
 listObjectsV2Response
     :: Int -- ^ 'lovrsResponseStatus'
     -> ListObjectsV2Response
-listObjectsV2Response pResponseStatus_ =
-  ListObjectsV2Response'
-    { _lovrsStartAfter = Nothing
-    , _lovrsKeyCount = Nothing
-    , _lovrsContents = Nothing
-    , _lovrsContinuationToken = Nothing
-    , _lovrsPrefix = Nothing
-    , _lovrsCommonPrefixes = Nothing
-    , _lovrsEncodingType = Nothing
-    , _lovrsName = Nothing
-    , _lovrsNextContinuationToken = Nothing
-    , _lovrsMaxKeys = Nothing
-    , _lovrsIsTruncated = Nothing
-    , _lovrsDelimiter = Nothing
-    , _lovrsResponseStatus = pResponseStatus_
-    }
+listObjectsV2Response pResponseStatus_
+  = ListObjectsV2Response'{_lovrsStartAfter = Nothing,
+                           _lovrsKeyCount = Nothing, _lovrsContents = Nothing,
+                           _lovrsContinuationToken = Nothing,
+                           _lovrsPrefix = Nothing,
+                           _lovrsCommonPrefixes = Nothing,
+                           _lovrsEncodingType = Nothing, _lovrsName = Nothing,
+                           _lovrsNextContinuationToken = Nothing,
+                           _lovrsMaxKeys = Nothing, _lovrsIsTruncated = Nothing,
+                           _lovrsDelimiter = Nothing,
+                           _lovrsResponseStatus = pResponseStatus_}
 
-
--- | StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
+-- | If StartAfter was sent with the request, it is included in the response.
 lovrsStartAfter :: Lens' ListObjectsV2Response (Maybe Text)
 lovrsStartAfter = lens _lovrsStartAfter (\ s a -> s{_lovrsStartAfter = a})
 
--- | KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys
+-- | KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys 
 lovrsKeyCount :: Lens' ListObjectsV2Response (Maybe Int)
 lovrsKeyCount = lens _lovrsKeyCount (\ s a -> s{_lovrsKeyCount = a})
 
@@ -285,27 +304,27 @@ lovrsKeyCount = lens _lovrsKeyCount (\ s a -> s{_lovrsKeyCount = a})
 lovrsContents :: Lens' ListObjectsV2Response [Object]
 lovrsContents = lens _lovrsContents (\ s a -> s{_lovrsContents = a}) . _Default . _Coerce
 
--- | ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
+-- | If ContinuationToken was sent with the request, it is included in the response.
 lovrsContinuationToken :: Lens' ListObjectsV2Response (Maybe Text)
 lovrsContinuationToken = lens _lovrsContinuationToken (\ s a -> s{_lovrsContinuationToken = a})
 
--- | Limits the response to keys that begin with the specified prefix.
+-- | Keys that begin with the indicated prefix.
 lovrsPrefix :: Lens' ListObjectsV2Response (Maybe Text)
 lovrsPrefix = lens _lovrsPrefix (\ s a -> s{_lovrsPrefix = a})
 
--- | CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter
+-- | All of the keys rolled up into a common prefix count as a single return when calculating the number of returns. A response can contain @CommonPrefixes@ only if you specify a delimiter. @CommonPrefixes@ contains all (if there are any) keys between @Prefix@ and the next occurrence of the string specified by a delimiter. @CommonPrefixes@ lists keys that act like subdirectories in the directory specified by @Prefix@ . For example, if the prefix is @notes/@ and the delimiter is a slash (@/@ ) as in @notes/summer/july@ , the common prefix is @notes/summer/@ . All of the keys that roll up into a common prefix count as a single return when calculating the number of returns. 
 lovrsCommonPrefixes :: Lens' ListObjectsV2Response [CommonPrefix]
 lovrsCommonPrefixes = lens _lovrsCommonPrefixes (\ s a -> s{_lovrsCommonPrefixes = a}) . _Default . _Coerce
 
--- | Encoding type used by Amazon S3 to encode object keys in the response.
+-- | Encoding type used by Amazon S3 to encode object key names in the XML response. If you specify the encoding-type request parameter, Amazon S3 includes this element in the response, and returns encoded key name values in the following response elements: @Delimiter, Prefix, Key,@ and @StartAfter@ .
 lovrsEncodingType :: Lens' ListObjectsV2Response (Maybe EncodingType)
 lovrsEncodingType = lens _lovrsEncodingType (\ s a -> s{_lovrsEncodingType = a})
 
--- | Name of the bucket to list.
+-- | Bucket name.  When using this API with an access point, you must direct requests to the access point hostname. The access point hostname takes the form /AccessPointName/ -/AccountId/ .s3-accesspoint./Region/ .amazonaws.com. When using this operation using an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html Using Access Points> in the /Amazon Simple Storage Service Developer Guide/ .
 lovrsName :: Lens' ListObjectsV2Response (Maybe BucketName)
 lovrsName = lens _lovrsName (\ s a -> s{_lovrsName = a})
 
--- | NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key
+-- | @NextContinuationToken@ is sent when @isTruncated@ is true, which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this @NextContinuationToken@ . @NextContinuationToken@ is obfuscated and is not a real key
 lovrsNextContinuationToken :: Lens' ListObjectsV2Response (Maybe Text)
 lovrsNextContinuationToken = lens _lovrsNextContinuationToken (\ s a -> s{_lovrsNextContinuationToken = a})
 
@@ -313,11 +332,11 @@ lovrsNextContinuationToken = lens _lovrsNextContinuationToken (\ s a -> s{_lovrs
 lovrsMaxKeys :: Lens' ListObjectsV2Response (Maybe Int)
 lovrsMaxKeys = lens _lovrsMaxKeys (\ s a -> s{_lovrsMaxKeys = a})
 
--- | A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+-- | Set to false if all of the results were returned. Set to true if more keys are available to return. If the number of results exceeds that specified by MaxKeys, all of the results might not be returned.
 lovrsIsTruncated :: Lens' ListObjectsV2Response (Maybe Bool)
 lovrsIsTruncated = lens _lovrsIsTruncated (\ s a -> s{_lovrsIsTruncated = a})
 
--- | A delimiter is a character you use to group keys.
+-- | Causes keys that contain the same string between the prefix and the first occurrence of the delimiter to be rolled up into a single result element in the CommonPrefixes collection. These rolled-up keys are not returned elsewhere in the response. Each rolled-up result counts as only one return against the @MaxKeys@ value.
 lovrsDelimiter :: Lens' ListObjectsV2Response (Maybe Delimiter)
 lovrsDelimiter = lens _lovrsDelimiter (\ s a -> s{_lovrsDelimiter = a})
 

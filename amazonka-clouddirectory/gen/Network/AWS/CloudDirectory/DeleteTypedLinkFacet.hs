@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a 'TypedLinkFacet' . For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- Deletes a 'TypedLinkFacet' . For more information, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 --
 --
 module Network.AWS.CloudDirectory.DeleteTypedLinkFacet
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteTypedLinkFacet' smart constructor.
-data DeleteTypedLinkFacet = DeleteTypedLinkFacet'
-  { _dtlfSchemaARN :: !Text
-  , _dtlfName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTypedLinkFacet = DeleteTypedLinkFacet'{_dtlfSchemaARN
+                                                  :: !Text,
+                                                  _dtlfName :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTypedLinkFacet' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ deleteTypedLinkFacet
     :: Text -- ^ 'dtlfSchemaARN'
     -> Text -- ^ 'dtlfName'
     -> DeleteTypedLinkFacet
-deleteTypedLinkFacet pSchemaARN_ pName_ =
-  DeleteTypedLinkFacet' {_dtlfSchemaARN = pSchemaARN_, _dtlfName = pName_}
-
+deleteTypedLinkFacet pSchemaARN_ pName_
+  = DeleteTypedLinkFacet'{_dtlfSchemaARN = pSchemaARN_,
+                          _dtlfName = pName_}
 
 -- | The Amazon Resource Name (ARN) that is associated with the schema. For more information, see 'arns' .
 dtlfSchemaARN :: Lens' DeleteTypedLinkFacet Text
@@ -105,10 +104,10 @@ instance ToQuery DeleteTypedLinkFacet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTypedLinkFacetResponse' smart constructor.
-newtype DeleteTypedLinkFacetResponse = DeleteTypedLinkFacetResponse'
-  { _dtlfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTypedLinkFacetResponse = DeleteTypedLinkFacetResponse'{_dtlfrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteTypedLinkFacetResponse' with the minimum fields required to make a request.
 --
@@ -118,9 +117,9 @@ newtype DeleteTypedLinkFacetResponse = DeleteTypedLinkFacetResponse'
 deleteTypedLinkFacetResponse
     :: Int -- ^ 'dtlfrsResponseStatus'
     -> DeleteTypedLinkFacetResponse
-deleteTypedLinkFacetResponse pResponseStatus_ =
-  DeleteTypedLinkFacetResponse' {_dtlfrsResponseStatus = pResponseStatus_}
-
+deleteTypedLinkFacetResponse pResponseStatus_
+  = DeleteTypedLinkFacetResponse'{_dtlfrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 dtlfrsResponseStatus :: Lens' DeleteTypedLinkFacetResponse Int

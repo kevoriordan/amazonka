@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disassociate an Application Discovery Service (ADS) discovered resource from a migration task.
+-- Disassociate an Application Discovery Service discovered resource from a migration task.
 --
 --
 module Network.AWS.MigrationHub.DisassociateDiscoveredResource
@@ -47,13 +47,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateDiscoveredResource' smart constructor.
-data DisassociateDiscoveredResource = DisassociateDiscoveredResource'
-  { _ddrDryRun               :: !(Maybe Bool)
-  , _ddrProgressUpdateStream :: !Text
-  , _ddrMigrationTaskName    :: !Text
-  , _ddrConfigurationId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateDiscoveredResource = DisassociateDiscoveredResource'{_ddrDryRun
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Bool),
+                                                                      _ddrProgressUpdateStream
+                                                                      :: !Text,
+                                                                      _ddrMigrationTaskName
+                                                                      :: !Text,
+                                                                      _ddrConfigurationId
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DisassociateDiscoveredResource' with the minimum fields required to make a request.
 --
@@ -63,22 +68,22 @@ data DisassociateDiscoveredResource = DisassociateDiscoveredResource'
 --
 -- * 'ddrProgressUpdateStream' - The name of the ProgressUpdateStream.
 --
--- * 'ddrMigrationTaskName' - The identifier given to the MigrationTask.
+-- * 'ddrMigrationTaskName' - The identifier given to the MigrationTask. /Do not store personal data in this field./ 
 --
--- * 'ddrConfigurationId' - ConfigurationId of the ADS resource to be disassociated.
+-- * 'ddrConfigurationId' - ConfigurationId of the Application Discovery Service resource to be disassociated.
 disassociateDiscoveredResource
     :: Text -- ^ 'ddrProgressUpdateStream'
     -> Text -- ^ 'ddrMigrationTaskName'
     -> Text -- ^ 'ddrConfigurationId'
     -> DisassociateDiscoveredResource
-disassociateDiscoveredResource pProgressUpdateStream_ pMigrationTaskName_ pConfigurationId_ =
-  DisassociateDiscoveredResource'
-    { _ddrDryRun = Nothing
-    , _ddrProgressUpdateStream = pProgressUpdateStream_
-    , _ddrMigrationTaskName = pMigrationTaskName_
-    , _ddrConfigurationId = pConfigurationId_
-    }
-
+disassociateDiscoveredResource pProgressUpdateStream_
+  pMigrationTaskName_ pConfigurationId_
+  = DisassociateDiscoveredResource'{_ddrDryRun =
+                                      Nothing,
+                                    _ddrProgressUpdateStream =
+                                      pProgressUpdateStream_,
+                                    _ddrMigrationTaskName = pMigrationTaskName_,
+                                    _ddrConfigurationId = pConfigurationId_}
 
 -- | Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
 ddrDryRun :: Lens' DisassociateDiscoveredResource (Maybe Bool)
@@ -88,11 +93,11 @@ ddrDryRun = lens _ddrDryRun (\ s a -> s{_ddrDryRun = a})
 ddrProgressUpdateStream :: Lens' DisassociateDiscoveredResource Text
 ddrProgressUpdateStream = lens _ddrProgressUpdateStream (\ s a -> s{_ddrProgressUpdateStream = a})
 
--- | The identifier given to the MigrationTask.
+-- | The identifier given to the MigrationTask. /Do not store personal data in this field./ 
 ddrMigrationTaskName :: Lens' DisassociateDiscoveredResource Text
 ddrMigrationTaskName = lens _ddrMigrationTaskName (\ s a -> s{_ddrMigrationTaskName = a})
 
--- | ConfigurationId of the ADS resource to be disassociated.
+-- | ConfigurationId of the Application Discovery Service resource to be disassociated.
 ddrConfigurationId :: Lens' DisassociateDiscoveredResource Text
 ddrConfigurationId = lens _ddrConfigurationId (\ s a -> s{_ddrConfigurationId = a})
 
@@ -140,10 +145,12 @@ instance ToQuery DisassociateDiscoveredResource where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateDiscoveredResourceResponse' smart constructor.
-newtype DisassociateDiscoveredResourceResponse = DisassociateDiscoveredResourceResponse'
-  { _ddrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateDiscoveredResourceResponse = DisassociateDiscoveredResourceResponse'{_ddrrsResponseStatus
+                                                                                         ::
+                                                                                         Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'DisassociateDiscoveredResourceResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +160,10 @@ newtype DisassociateDiscoveredResourceResponse = DisassociateDiscoveredResourceR
 disassociateDiscoveredResourceResponse
     :: Int -- ^ 'ddrrsResponseStatus'
     -> DisassociateDiscoveredResourceResponse
-disassociateDiscoveredResourceResponse pResponseStatus_ =
-  DisassociateDiscoveredResourceResponse'
-    {_ddrrsResponseStatus = pResponseStatus_}
-
+disassociateDiscoveredResourceResponse
+  pResponseStatus_
+  = DisassociateDiscoveredResourceResponse'{_ddrrsResponseStatus
+                                              = pResponseStatus_}
 
 -- | -- | The response status code.
 ddrrsResponseStatus :: Lens' DisassociateDiscoveredResourceResponse Int

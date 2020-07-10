@@ -14,11 +14,11 @@
 module Test.AWS.Gen.RDS where
 
 import Data.Proxy
-import Network.AWS.RDS
 import Test.AWS.Fixture
 import Test.AWS.Prelude
-import Test.AWS.RDS.Internal
 import Test.Tasty
+import Network.AWS.RDS
+import Test.AWS.RDS.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,7 +28,10 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestDescribeDBClusterParameterGroups $
+--         [ requestStartDBCluster $
+--             startDBCluster
+--
+--         , requestDescribeDBClusterParameterGroups $
 --             describeDBClusterParameterGroups
 --
 --         , requestPromoteReadReplica $
@@ -39,6 +42,9 @@ import Test.Tasty
 --
 --         , requestStopDBInstance $
 --             stopDBInstance
+--
+--         , requestModifyDBClusterEndpoint $
+--             modifyDBClusterEndpoint
 --
 --         , requestCopyDBSnapshot $
 --             copyDBSnapshot
@@ -54,6 +60,9 @@ import Test.Tasty
 --
 --         , requestResetDBClusterParameterGroup $
 --             resetDBClusterParameterGroup
+--
+--         , requestDescribeCustomAvailabilityZones $
+--             describeCustomAvailabilityZones
 --
 --         , requestRestoreDBClusterFromS3 $
 --             restoreDBClusterFromS3
@@ -94,14 +103,26 @@ import Test.Tasty
 --         , requestRemoveSourceIdentifierFromSubscription $
 --             removeSourceIdentifierFromSubscription
 --
+--         , requestDeleteCustomAvailabilityZone $
+--             deleteCustomAvailabilityZone
+--
+--         , requestDescribeDBProxyTargets $
+--             describeDBProxyTargets
+--
 --         , requestDescribeEngineDefaultClusterParameters $
 --             describeEngineDefaultClusterParameters
 --
 --         , requestDescribeDBSnapshotAttributes $
 --             describeDBSnapshotAttributes
 --
+--         , requestCreateCustomAvailabilityZone $
+--             createCustomAvailabilityZone
+--
 --         , requestBacktrackDBCluster $
 --             backtrackDBCluster
+--
+--         , requestDeleteGlobalCluster $
+--             deleteGlobalCluster
 --
 --         , requestPromoteReadReplicaDBCluster $
 --             promoteReadReplicaDBCluster
@@ -111,6 +132,9 @@ import Test.Tasty
 --
 --         , requestRestoreDBInstanceFromDBSnapshot $
 --             restoreDBInstanceFromDBSnapshot
+--
+--         , requestDeleteDBProxy $
+--             deleteDBProxy
 --
 --         , requestCreateEventSubscription $
 --             createEventSubscription
@@ -130,14 +154,29 @@ import Test.Tasty
 --         , requestAuthorizeDBSecurityGroupIngress $
 --             authorizeDBSecurityGroupIngress
 --
+--         , requestRemoveRoleFromDBInstance $
+--             removeRoleFromDBInstance
+--
 --         , requestDescribeSourceRegions $
 --             describeSourceRegions
+--
+--         , requestCreateDBClusterEndpoint $
+--             createDBClusterEndpoint
 --
 --         , requestRestoreDBClusterFromSnapshot $
 --             restoreDBClusterFromSnapshot
 --
 --         , requestDescribeOrderableDBInstanceOptions $
 --             describeOrderableDBInstanceOptions
+--
+--         , requestDeleteDBClusterEndpoint $
+--             deleteDBClusterEndpoint
+--
+--         , requestCreateDBProxy $
+--             createDBProxy
+--
+--         , requestDeleteDBInstanceAutomatedBackup $
+--             deleteDBInstanceAutomatedBackup
 --
 --         , requestCreateDBClusterParameterGroup $
 --             createDBClusterParameterGroup
@@ -157,11 +196,23 @@ import Test.Tasty
 --         , requestModifyDBSnapshotAttribute $
 --             modifyDBSnapshotAttribute
 --
+--         , requestDescribeDBInstanceAutomatedBackups $
+--             describeDBInstanceAutomatedBackups
+--
+--         , requestRemoveFromGlobalCluster $
+--             removeFromGlobalCluster
+--
+--         , requestAddRoleToDBInstance $
+--             addRoleToDBInstance
+--
 --         , requestDeleteDBClusterSnapshot $
 --             deleteDBClusterSnapshot
 --
 --         , requestDescribeValidDBInstanceModifications $
 --             describeValidDBInstanceModifications
+--
+--         , requestDescribeDBClusterEndpoints $
+--             describeDBClusterEndpoints
 --
 --         , requestDescribeOptionGroupOptions $
 --             describeOptionGroupOptions
@@ -175,17 +226,26 @@ import Test.Tasty
 --         , requestDescribeDBParameters $
 --             describeDBParameters
 --
+--         , requestStopActivityStream $
+--             stopActivityStream
+--
 --         , requestCreateDBClusterSnapshot $
 --             createDBClusterSnapshot
 --
 --         , requestDescribeDBSnapshots $
 --             describeDBSnapshots
 --
+--         , requestModifyDBProxyTargetGroup $
+--             modifyDBProxyTargetGroup
+--
 --         , requestDescribeDBSubnetGroups $
 --             describeDBSubnetGroups
 --
 --         , requestModifyOptionGroup $
 --             modifyOptionGroup
+--
+--         , requestStopDBCluster $
+--             stopDBCluster
 --
 --         , requestCreateDBParameterGroup $
 --             createDBParameterGroup
@@ -202,8 +262,17 @@ import Test.Tasty
 --         , requestDescribeEventCategories $
 --             describeEventCategories
 --
+--         , requestDescribeGlobalClusters $
+--             describeGlobalClusters
+--
 --         , requestStartDBInstance $
 --             startDBInstance
+--
+--         , requestDescribeExportTasks $
+--             describeExportTasks
+--
+--         , requestCancelExportTask $
+--             cancelExportTask
 --
 --         , requestModifyDBClusterParameterGroup $
 --             modifyDBClusterParameterGroup
@@ -217,6 +286,12 @@ import Test.Tasty
 --         , requestModifyDBSnapshot $
 --             modifyDBSnapshot
 --
+--         , requestDescribeDBProxyTargetGroups $
+--             describeDBProxyTargetGroups
+--
+--         , requestModifyDBProxy $
+--             modifyDBProxy
+--
 --         , requestDescribePendingMaintenanceActions $
 --             describePendingMaintenanceActions
 --
@@ -226,8 +301,20 @@ import Test.Tasty
 --         , requestCopyDBClusterSnapshot $
 --             copyDBClusterSnapshot
 --
+--         , requestImportInstallationMedia $
+--             importInstallationMedia
+--
+--         , requestCreateGlobalCluster $
+--             createGlobalCluster
+--
 --         , requestResetDBParameterGroup $
 --             resetDBParameterGroup
+--
+--         , requestDescribeInstallationMedia $
+--             describeInstallationMedia
+--
+--         , requestDeregisterDBProxyTargets $
+--             deregisterDBProxyTargets
 --
 --         , requestCreateDBCluster $
 --             createDBCluster
@@ -265,6 +352,9 @@ import Test.Tasty
 --         , requestCreateDBSecurityGroup $
 --             createDBSecurityGroup
 --
+--         , requestModifyCertificates $
+--             modifyCertificates
+--
 --         , requestDescribeDBClusterSnapshots $
 --             describeDBClusterSnapshots
 --
@@ -283,11 +373,23 @@ import Test.Tasty
 --         , requestDeleteDBInstance $
 --             deleteDBInstance
 --
+--         , requestStartActivityStream $
+--             startActivityStream
+--
 --         , requestCreateDBInstanceReadReplica $
 --             createDBInstanceReadReplica
 --
 --         , requestDeleteDBParameterGroup $
 --             deleteDBParameterGroup
+--
+--         , requestModifyCurrentDBClusterCapacity $
+--             modifyCurrentDBClusterCapacity
+--
+--         , requestModifyGlobalCluster $
+--             modifyGlobalCluster
+--
+--         , requestRegisterDBProxyTargets $
+--             registerDBProxyTargets
 --
 --         , requestDescribeDBSecurityGroups $
 --             describeDBSecurityGroups
@@ -298,6 +400,9 @@ import Test.Tasty
 --         , requestRestoreDBClusterToPointInTime $
 --             restoreDBClusterToPointInTime
 --
+--         , requestDeleteInstallationMedia $
+--             deleteInstallationMedia
+--
 --         , requestDescribeDBInstances $
 --             describeDBInstances
 --
@@ -307,10 +412,19 @@ import Test.Tasty
 --         , requestDownloadDBLogFilePortion $
 --             downloadDBLogFilePortion
 --
+--         , requestDescribeDBProxies $
+--             describeDBProxies
+--
+--         , requestStartExportTask $
+--             startExportTask
+--
 --           ]
 
 --     , testGroup "response"
---         [ responseDescribeDBClusterParameterGroups $
+--         [ responseStartDBCluster $
+--             startDBClusterResponse
+--
+--         , responseDescribeDBClusterParameterGroups $
 --             describeDBClusterParameterGroupsResponse
 --
 --         , responsePromoteReadReplica $
@@ -321,6 +435,9 @@ import Test.Tasty
 --
 --         , responseStopDBInstance $
 --             stopDBInstanceResponse
+--
+--         , responseModifyDBClusterEndpoint $
+--             dbClusterEndpoint
 --
 --         , responseCopyDBSnapshot $
 --             copyDBSnapshotResponse
@@ -336,6 +453,9 @@ import Test.Tasty
 --
 --         , responseResetDBClusterParameterGroup $
 --             dbClusterParameterGroupNameMessage
+--
+--         , responseDescribeCustomAvailabilityZones $
+--             describeCustomAvailabilityZonesResponse
 --
 --         , responseRestoreDBClusterFromS3 $
 --             restoreDBClusterFromS3Response
@@ -376,14 +496,26 @@ import Test.Tasty
 --         , responseRemoveSourceIdentifierFromSubscription $
 --             removeSourceIdentifierFromSubscriptionResponse
 --
+--         , responseDeleteCustomAvailabilityZone $
+--             deleteCustomAvailabilityZoneResponse
+--
+--         , responseDescribeDBProxyTargets $
+--             describeDBProxyTargetsResponse
+--
 --         , responseDescribeEngineDefaultClusterParameters $
 --             describeEngineDefaultClusterParametersResponse
 --
 --         , responseDescribeDBSnapshotAttributes $
 --             describeDBSnapshotAttributesResponse
 --
+--         , responseCreateCustomAvailabilityZone $
+--             createCustomAvailabilityZoneResponse
+--
 --         , responseBacktrackDBCluster $
 --             dbClusterBacktrack
+--
+--         , responseDeleteGlobalCluster $
+--             deleteGlobalClusterResponse
 --
 --         , responsePromoteReadReplicaDBCluster $
 --             promoteReadReplicaDBClusterResponse
@@ -393,6 +525,9 @@ import Test.Tasty
 --
 --         , responseRestoreDBInstanceFromDBSnapshot $
 --             restoreDBInstanceFromDBSnapshotResponse
+--
+--         , responseDeleteDBProxy $
+--             deleteDBProxyResponse
 --
 --         , responseCreateEventSubscription $
 --             createEventSubscriptionResponse
@@ -412,14 +547,29 @@ import Test.Tasty
 --         , responseAuthorizeDBSecurityGroupIngress $
 --             authorizeDBSecurityGroupIngressResponse
 --
+--         , responseRemoveRoleFromDBInstance $
+--             removeRoleFromDBInstanceResponse
+--
 --         , responseDescribeSourceRegions $
 --             describeSourceRegionsResponse
+--
+--         , responseCreateDBClusterEndpoint $
+--             dbClusterEndpoint
 --
 --         , responseRestoreDBClusterFromSnapshot $
 --             restoreDBClusterFromSnapshotResponse
 --
 --         , responseDescribeOrderableDBInstanceOptions $
 --             describeOrderableDBInstanceOptionsResponse
+--
+--         , responseDeleteDBClusterEndpoint $
+--             dbClusterEndpoint
+--
+--         , responseCreateDBProxy $
+--             createDBProxyResponse
+--
+--         , responseDeleteDBInstanceAutomatedBackup $
+--             deleteDBInstanceAutomatedBackupResponse
 --
 --         , responseCreateDBClusterParameterGroup $
 --             createDBClusterParameterGroupResponse
@@ -439,11 +589,23 @@ import Test.Tasty
 --         , responseModifyDBSnapshotAttribute $
 --             modifyDBSnapshotAttributeResponse
 --
+--         , responseDescribeDBInstanceAutomatedBackups $
+--             describeDBInstanceAutomatedBackupsResponse
+--
+--         , responseRemoveFromGlobalCluster $
+--             removeFromGlobalClusterResponse
+--
+--         , responseAddRoleToDBInstance $
+--             addRoleToDBInstanceResponse
+--
 --         , responseDeleteDBClusterSnapshot $
 --             deleteDBClusterSnapshotResponse
 --
 --         , responseDescribeValidDBInstanceModifications $
 --             describeValidDBInstanceModificationsResponse
+--
+--         , responseDescribeDBClusterEndpoints $
+--             describeDBClusterEndpointsResponse
 --
 --         , responseDescribeOptionGroupOptions $
 --             describeOptionGroupOptionsResponse
@@ -457,17 +619,26 @@ import Test.Tasty
 --         , responseDescribeDBParameters $
 --             describeDBParametersResponse
 --
+--         , responseStopActivityStream $
+--             stopActivityStreamResponse
+--
 --         , responseCreateDBClusterSnapshot $
 --             createDBClusterSnapshotResponse
 --
 --         , responseDescribeDBSnapshots $
 --             describeDBSnapshotsResponse
 --
+--         , responseModifyDBProxyTargetGroup $
+--             modifyDBProxyTargetGroupResponse
+--
 --         , responseDescribeDBSubnetGroups $
 --             describeDBSubnetGroupsResponse
 --
 --         , responseModifyOptionGroup $
 --             modifyOptionGroupResponse
+--
+--         , responseStopDBCluster $
+--             stopDBClusterResponse
 --
 --         , responseCreateDBParameterGroup $
 --             createDBParameterGroupResponse
@@ -484,8 +655,17 @@ import Test.Tasty
 --         , responseDescribeEventCategories $
 --             describeEventCategoriesResponse
 --
+--         , responseDescribeGlobalClusters $
+--             describeGlobalClustersResponse
+--
 --         , responseStartDBInstance $
 --             startDBInstanceResponse
+--
+--         , responseDescribeExportTasks $
+--             describeExportTasksResponse
+--
+--         , responseCancelExportTask $
+--             exportTask
 --
 --         , responseModifyDBClusterParameterGroup $
 --             dbClusterParameterGroupNameMessage
@@ -499,6 +679,12 @@ import Test.Tasty
 --         , responseModifyDBSnapshot $
 --             modifyDBSnapshotResponse
 --
+--         , responseDescribeDBProxyTargetGroups $
+--             describeDBProxyTargetGroupsResponse
+--
+--         , responseModifyDBProxy $
+--             modifyDBProxyResponse
+--
 --         , responseDescribePendingMaintenanceActions $
 --             describePendingMaintenanceActionsResponse
 --
@@ -508,8 +694,20 @@ import Test.Tasty
 --         , responseCopyDBClusterSnapshot $
 --             copyDBClusterSnapshotResponse
 --
+--         , responseImportInstallationMedia $
+--             installationMedia
+--
+--         , responseCreateGlobalCluster $
+--             createGlobalClusterResponse
+--
 --         , responseResetDBParameterGroup $
 --             dbParameterGroupNameMessage
+--
+--         , responseDescribeInstallationMedia $
+--             describeInstallationMediaResponse
+--
+--         , responseDeregisterDBProxyTargets $
+--             deregisterDBProxyTargetsResponse
 --
 --         , responseCreateDBCluster $
 --             createDBClusterResponse
@@ -547,6 +745,9 @@ import Test.Tasty
 --         , responseCreateDBSecurityGroup $
 --             createDBSecurityGroupResponse
 --
+--         , responseModifyCertificates $
+--             modifyCertificatesResponse
+--
 --         , responseDescribeDBClusterSnapshots $
 --             describeDBClusterSnapshotsResponse
 --
@@ -565,11 +766,23 @@ import Test.Tasty
 --         , responseDeleteDBInstance $
 --             deleteDBInstanceResponse
 --
+--         , responseStartActivityStream $
+--             startActivityStreamResponse
+--
 --         , responseCreateDBInstanceReadReplica $
 --             createDBInstanceReadReplicaResponse
 --
 --         , responseDeleteDBParameterGroup $
 --             deleteDBParameterGroupResponse
+--
+--         , responseModifyCurrentDBClusterCapacity $
+--             modifyCurrentDBClusterCapacityResponse
+--
+--         , responseModifyGlobalCluster $
+--             modifyGlobalClusterResponse
+--
+--         , responseRegisterDBProxyTargets $
+--             registerDBProxyTargetsResponse
 --
 --         , responseDescribeDBSecurityGroups $
 --             describeDBSecurityGroupsResponse
@@ -580,6 +793,9 @@ import Test.Tasty
 --         , responseRestoreDBClusterToPointInTime $
 --             restoreDBClusterToPointInTimeResponse
 --
+--         , responseDeleteInstallationMedia $
+--             installationMedia
+--
 --         , responseDescribeDBInstances $
 --             describeDBInstancesResponse
 --
@@ -589,10 +805,21 @@ import Test.Tasty
 --         , responseDownloadDBLogFilePortion $
 --             downloadDBLogFilePortionResponse
 --
+--         , responseDescribeDBProxies $
+--             describeDBProxiesResponse
+--
+--         , responseStartExportTask $
+--             exportTask
+--
 --           ]
 --     ]
 
 -- Requests
+
+requestStartDBCluster :: StartDBCluster -> TestTree
+requestStartDBCluster = req
+    "StartDBCluster"
+    "fixture/StartDBCluster.yaml"
 
 requestDescribeDBClusterParameterGroups :: DescribeDBClusterParameterGroups -> TestTree
 requestDescribeDBClusterParameterGroups = req
@@ -613,6 +840,11 @@ requestStopDBInstance :: StopDBInstance -> TestTree
 requestStopDBInstance = req
     "StopDBInstance"
     "fixture/StopDBInstance.yaml"
+
+requestModifyDBClusterEndpoint :: ModifyDBClusterEndpoint -> TestTree
+requestModifyDBClusterEndpoint = req
+    "ModifyDBClusterEndpoint"
+    "fixture/ModifyDBClusterEndpoint.yaml"
 
 requestCopyDBSnapshot :: CopyDBSnapshot -> TestTree
 requestCopyDBSnapshot = req
@@ -638,6 +870,11 @@ requestResetDBClusterParameterGroup :: ResetDBClusterParameterGroup -> TestTree
 requestResetDBClusterParameterGroup = req
     "ResetDBClusterParameterGroup"
     "fixture/ResetDBClusterParameterGroup.yaml"
+
+requestDescribeCustomAvailabilityZones :: DescribeCustomAvailabilityZones -> TestTree
+requestDescribeCustomAvailabilityZones = req
+    "DescribeCustomAvailabilityZones"
+    "fixture/DescribeCustomAvailabilityZones.yaml"
 
 requestRestoreDBClusterFromS3 :: RestoreDBClusterFromS3 -> TestTree
 requestRestoreDBClusterFromS3 = req
@@ -704,6 +941,16 @@ requestRemoveSourceIdentifierFromSubscription = req
     "RemoveSourceIdentifierFromSubscription"
     "fixture/RemoveSourceIdentifierFromSubscription.yaml"
 
+requestDeleteCustomAvailabilityZone :: DeleteCustomAvailabilityZone -> TestTree
+requestDeleteCustomAvailabilityZone = req
+    "DeleteCustomAvailabilityZone"
+    "fixture/DeleteCustomAvailabilityZone.yaml"
+
+requestDescribeDBProxyTargets :: DescribeDBProxyTargets -> TestTree
+requestDescribeDBProxyTargets = req
+    "DescribeDBProxyTargets"
+    "fixture/DescribeDBProxyTargets.yaml"
+
 requestDescribeEngineDefaultClusterParameters :: DescribeEngineDefaultClusterParameters -> TestTree
 requestDescribeEngineDefaultClusterParameters = req
     "DescribeEngineDefaultClusterParameters"
@@ -714,10 +961,20 @@ requestDescribeDBSnapshotAttributes = req
     "DescribeDBSnapshotAttributes"
     "fixture/DescribeDBSnapshotAttributes.yaml"
 
+requestCreateCustomAvailabilityZone :: CreateCustomAvailabilityZone -> TestTree
+requestCreateCustomAvailabilityZone = req
+    "CreateCustomAvailabilityZone"
+    "fixture/CreateCustomAvailabilityZone.yaml"
+
 requestBacktrackDBCluster :: BacktrackDBCluster -> TestTree
 requestBacktrackDBCluster = req
     "BacktrackDBCluster"
     "fixture/BacktrackDBCluster.yaml"
+
+requestDeleteGlobalCluster :: DeleteGlobalCluster -> TestTree
+requestDeleteGlobalCluster = req
+    "DeleteGlobalCluster"
+    "fixture/DeleteGlobalCluster.yaml"
 
 requestPromoteReadReplicaDBCluster :: PromoteReadReplicaDBCluster -> TestTree
 requestPromoteReadReplicaDBCluster = req
@@ -733,6 +990,11 @@ requestRestoreDBInstanceFromDBSnapshot :: RestoreDBInstanceFromDBSnapshot -> Tes
 requestRestoreDBInstanceFromDBSnapshot = req
     "RestoreDBInstanceFromDBSnapshot"
     "fixture/RestoreDBInstanceFromDBSnapshot.yaml"
+
+requestDeleteDBProxy :: DeleteDBProxy -> TestTree
+requestDeleteDBProxy = req
+    "DeleteDBProxy"
+    "fixture/DeleteDBProxy.yaml"
 
 requestCreateEventSubscription :: CreateEventSubscription -> TestTree
 requestCreateEventSubscription = req
@@ -764,10 +1026,20 @@ requestAuthorizeDBSecurityGroupIngress = req
     "AuthorizeDBSecurityGroupIngress"
     "fixture/AuthorizeDBSecurityGroupIngress.yaml"
 
+requestRemoveRoleFromDBInstance :: RemoveRoleFromDBInstance -> TestTree
+requestRemoveRoleFromDBInstance = req
+    "RemoveRoleFromDBInstance"
+    "fixture/RemoveRoleFromDBInstance.yaml"
+
 requestDescribeSourceRegions :: DescribeSourceRegions -> TestTree
 requestDescribeSourceRegions = req
     "DescribeSourceRegions"
     "fixture/DescribeSourceRegions.yaml"
+
+requestCreateDBClusterEndpoint :: CreateDBClusterEndpoint -> TestTree
+requestCreateDBClusterEndpoint = req
+    "CreateDBClusterEndpoint"
+    "fixture/CreateDBClusterEndpoint.yaml"
 
 requestRestoreDBClusterFromSnapshot :: RestoreDBClusterFromSnapshot -> TestTree
 requestRestoreDBClusterFromSnapshot = req
@@ -778,6 +1050,21 @@ requestDescribeOrderableDBInstanceOptions :: DescribeOrderableDBInstanceOptions 
 requestDescribeOrderableDBInstanceOptions = req
     "DescribeOrderableDBInstanceOptions"
     "fixture/DescribeOrderableDBInstanceOptions.yaml"
+
+requestDeleteDBClusterEndpoint :: DeleteDBClusterEndpoint -> TestTree
+requestDeleteDBClusterEndpoint = req
+    "DeleteDBClusterEndpoint"
+    "fixture/DeleteDBClusterEndpoint.yaml"
+
+requestCreateDBProxy :: CreateDBProxy -> TestTree
+requestCreateDBProxy = req
+    "CreateDBProxy"
+    "fixture/CreateDBProxy.yaml"
+
+requestDeleteDBInstanceAutomatedBackup :: DeleteDBInstanceAutomatedBackup -> TestTree
+requestDeleteDBInstanceAutomatedBackup = req
+    "DeleteDBInstanceAutomatedBackup"
+    "fixture/DeleteDBInstanceAutomatedBackup.yaml"
 
 requestCreateDBClusterParameterGroup :: CreateDBClusterParameterGroup -> TestTree
 requestCreateDBClusterParameterGroup = req
@@ -809,6 +1096,21 @@ requestModifyDBSnapshotAttribute = req
     "ModifyDBSnapshotAttribute"
     "fixture/ModifyDBSnapshotAttribute.yaml"
 
+requestDescribeDBInstanceAutomatedBackups :: DescribeDBInstanceAutomatedBackups -> TestTree
+requestDescribeDBInstanceAutomatedBackups = req
+    "DescribeDBInstanceAutomatedBackups"
+    "fixture/DescribeDBInstanceAutomatedBackups.yaml"
+
+requestRemoveFromGlobalCluster :: RemoveFromGlobalCluster -> TestTree
+requestRemoveFromGlobalCluster = req
+    "RemoveFromGlobalCluster"
+    "fixture/RemoveFromGlobalCluster.yaml"
+
+requestAddRoleToDBInstance :: AddRoleToDBInstance -> TestTree
+requestAddRoleToDBInstance = req
+    "AddRoleToDBInstance"
+    "fixture/AddRoleToDBInstance.yaml"
+
 requestDeleteDBClusterSnapshot :: DeleteDBClusterSnapshot -> TestTree
 requestDeleteDBClusterSnapshot = req
     "DeleteDBClusterSnapshot"
@@ -818,6 +1120,11 @@ requestDescribeValidDBInstanceModifications :: DescribeValidDBInstanceModificati
 requestDescribeValidDBInstanceModifications = req
     "DescribeValidDBInstanceModifications"
     "fixture/DescribeValidDBInstanceModifications.yaml"
+
+requestDescribeDBClusterEndpoints :: DescribeDBClusterEndpoints -> TestTree
+requestDescribeDBClusterEndpoints = req
+    "DescribeDBClusterEndpoints"
+    "fixture/DescribeDBClusterEndpoints.yaml"
 
 requestDescribeOptionGroupOptions :: DescribeOptionGroupOptions -> TestTree
 requestDescribeOptionGroupOptions = req
@@ -839,6 +1146,11 @@ requestDescribeDBParameters = req
     "DescribeDBParameters"
     "fixture/DescribeDBParameters.yaml"
 
+requestStopActivityStream :: StopActivityStream -> TestTree
+requestStopActivityStream = req
+    "StopActivityStream"
+    "fixture/StopActivityStream.yaml"
+
 requestCreateDBClusterSnapshot :: CreateDBClusterSnapshot -> TestTree
 requestCreateDBClusterSnapshot = req
     "CreateDBClusterSnapshot"
@@ -849,6 +1161,11 @@ requestDescribeDBSnapshots = req
     "DescribeDBSnapshots"
     "fixture/DescribeDBSnapshots.yaml"
 
+requestModifyDBProxyTargetGroup :: ModifyDBProxyTargetGroup -> TestTree
+requestModifyDBProxyTargetGroup = req
+    "ModifyDBProxyTargetGroup"
+    "fixture/ModifyDBProxyTargetGroup.yaml"
+
 requestDescribeDBSubnetGroups :: DescribeDBSubnetGroups -> TestTree
 requestDescribeDBSubnetGroups = req
     "DescribeDBSubnetGroups"
@@ -858,6 +1175,11 @@ requestModifyOptionGroup :: ModifyOptionGroup -> TestTree
 requestModifyOptionGroup = req
     "ModifyOptionGroup"
     "fixture/ModifyOptionGroup.yaml"
+
+requestStopDBCluster :: StopDBCluster -> TestTree
+requestStopDBCluster = req
+    "StopDBCluster"
+    "fixture/StopDBCluster.yaml"
 
 requestCreateDBParameterGroup :: CreateDBParameterGroup -> TestTree
 requestCreateDBParameterGroup = req
@@ -884,10 +1206,25 @@ requestDescribeEventCategories = req
     "DescribeEventCategories"
     "fixture/DescribeEventCategories.yaml"
 
+requestDescribeGlobalClusters :: DescribeGlobalClusters -> TestTree
+requestDescribeGlobalClusters = req
+    "DescribeGlobalClusters"
+    "fixture/DescribeGlobalClusters.yaml"
+
 requestStartDBInstance :: StartDBInstance -> TestTree
 requestStartDBInstance = req
     "StartDBInstance"
     "fixture/StartDBInstance.yaml"
+
+requestDescribeExportTasks :: DescribeExportTasks -> TestTree
+requestDescribeExportTasks = req
+    "DescribeExportTasks"
+    "fixture/DescribeExportTasks.yaml"
+
+requestCancelExportTask :: CancelExportTask -> TestTree
+requestCancelExportTask = req
+    "CancelExportTask"
+    "fixture/CancelExportTask.yaml"
 
 requestModifyDBClusterParameterGroup :: ModifyDBClusterParameterGroup -> TestTree
 requestModifyDBClusterParameterGroup = req
@@ -909,6 +1246,16 @@ requestModifyDBSnapshot = req
     "ModifyDBSnapshot"
     "fixture/ModifyDBSnapshot.yaml"
 
+requestDescribeDBProxyTargetGroups :: DescribeDBProxyTargetGroups -> TestTree
+requestDescribeDBProxyTargetGroups = req
+    "DescribeDBProxyTargetGroups"
+    "fixture/DescribeDBProxyTargetGroups.yaml"
+
+requestModifyDBProxy :: ModifyDBProxy -> TestTree
+requestModifyDBProxy = req
+    "ModifyDBProxy"
+    "fixture/ModifyDBProxy.yaml"
+
 requestDescribePendingMaintenanceActions :: DescribePendingMaintenanceActions -> TestTree
 requestDescribePendingMaintenanceActions = req
     "DescribePendingMaintenanceActions"
@@ -924,10 +1271,30 @@ requestCopyDBClusterSnapshot = req
     "CopyDBClusterSnapshot"
     "fixture/CopyDBClusterSnapshot.yaml"
 
+requestImportInstallationMedia :: ImportInstallationMedia -> TestTree
+requestImportInstallationMedia = req
+    "ImportInstallationMedia"
+    "fixture/ImportInstallationMedia.yaml"
+
+requestCreateGlobalCluster :: CreateGlobalCluster -> TestTree
+requestCreateGlobalCluster = req
+    "CreateGlobalCluster"
+    "fixture/CreateGlobalCluster.yaml"
+
 requestResetDBParameterGroup :: ResetDBParameterGroup -> TestTree
 requestResetDBParameterGroup = req
     "ResetDBParameterGroup"
     "fixture/ResetDBParameterGroup.yaml"
+
+requestDescribeInstallationMedia :: DescribeInstallationMedia -> TestTree
+requestDescribeInstallationMedia = req
+    "DescribeInstallationMedia"
+    "fixture/DescribeInstallationMedia.yaml"
+
+requestDeregisterDBProxyTargets :: DeregisterDBProxyTargets -> TestTree
+requestDeregisterDBProxyTargets = req
+    "DeregisterDBProxyTargets"
+    "fixture/DeregisterDBProxyTargets.yaml"
 
 requestCreateDBCluster :: CreateDBCluster -> TestTree
 requestCreateDBCluster = req
@@ -989,6 +1356,11 @@ requestCreateDBSecurityGroup = req
     "CreateDBSecurityGroup"
     "fixture/CreateDBSecurityGroup.yaml"
 
+requestModifyCertificates :: ModifyCertificates -> TestTree
+requestModifyCertificates = req
+    "ModifyCertificates"
+    "fixture/ModifyCertificates.yaml"
+
 requestDescribeDBClusterSnapshots :: DescribeDBClusterSnapshots -> TestTree
 requestDescribeDBClusterSnapshots = req
     "DescribeDBClusterSnapshots"
@@ -1019,6 +1391,11 @@ requestDeleteDBInstance = req
     "DeleteDBInstance"
     "fixture/DeleteDBInstance.yaml"
 
+requestStartActivityStream :: StartActivityStream -> TestTree
+requestStartActivityStream = req
+    "StartActivityStream"
+    "fixture/StartActivityStream.yaml"
+
 requestCreateDBInstanceReadReplica :: CreateDBInstanceReadReplica -> TestTree
 requestCreateDBInstanceReadReplica = req
     "CreateDBInstanceReadReplica"
@@ -1028,6 +1405,21 @@ requestDeleteDBParameterGroup :: DeleteDBParameterGroup -> TestTree
 requestDeleteDBParameterGroup = req
     "DeleteDBParameterGroup"
     "fixture/DeleteDBParameterGroup.yaml"
+
+requestModifyCurrentDBClusterCapacity :: ModifyCurrentDBClusterCapacity -> TestTree
+requestModifyCurrentDBClusterCapacity = req
+    "ModifyCurrentDBClusterCapacity"
+    "fixture/ModifyCurrentDBClusterCapacity.yaml"
+
+requestModifyGlobalCluster :: ModifyGlobalCluster -> TestTree
+requestModifyGlobalCluster = req
+    "ModifyGlobalCluster"
+    "fixture/ModifyGlobalCluster.yaml"
+
+requestRegisterDBProxyTargets :: RegisterDBProxyTargets -> TestTree
+requestRegisterDBProxyTargets = req
+    "RegisterDBProxyTargets"
+    "fixture/RegisterDBProxyTargets.yaml"
 
 requestDescribeDBSecurityGroups :: DescribeDBSecurityGroups -> TestTree
 requestDescribeDBSecurityGroups = req
@@ -1044,6 +1436,11 @@ requestRestoreDBClusterToPointInTime = req
     "RestoreDBClusterToPointInTime"
     "fixture/RestoreDBClusterToPointInTime.yaml"
 
+requestDeleteInstallationMedia :: DeleteInstallationMedia -> TestTree
+requestDeleteInstallationMedia = req
+    "DeleteInstallationMedia"
+    "fixture/DeleteInstallationMedia.yaml"
+
 requestDescribeDBInstances :: DescribeDBInstances -> TestTree
 requestDescribeDBInstances = req
     "DescribeDBInstances"
@@ -1059,7 +1456,24 @@ requestDownloadDBLogFilePortion = req
     "DownloadDBLogFilePortion"
     "fixture/DownloadDBLogFilePortion.yaml"
 
+requestDescribeDBProxies :: DescribeDBProxies -> TestTree
+requestDescribeDBProxies = req
+    "DescribeDBProxies"
+    "fixture/DescribeDBProxies.yaml"
+
+requestStartExportTask :: StartExportTask -> TestTree
+requestStartExportTask = req
+    "StartExportTask"
+    "fixture/StartExportTask.yaml"
+
 -- Responses
+
+responseStartDBCluster :: StartDBClusterResponse -> TestTree
+responseStartDBCluster = res
+    "StartDBClusterResponse"
+    "fixture/StartDBClusterResponse.proto"
+    rds
+    (Proxy :: Proxy StartDBCluster)
 
 responseDescribeDBClusterParameterGroups :: DescribeDBClusterParameterGroupsResponse -> TestTree
 responseDescribeDBClusterParameterGroups = res
@@ -1088,6 +1502,13 @@ responseStopDBInstance = res
     "fixture/StopDBInstanceResponse.proto"
     rds
     (Proxy :: Proxy StopDBInstance)
+
+responseModifyDBClusterEndpoint :: DBClusterEndpoint -> TestTree
+responseModifyDBClusterEndpoint = res
+    "ModifyDBClusterEndpointResponse"
+    "fixture/ModifyDBClusterEndpointResponse.proto"
+    rds
+    (Proxy :: Proxy ModifyDBClusterEndpoint)
 
 responseCopyDBSnapshot :: CopyDBSnapshotResponse -> TestTree
 responseCopyDBSnapshot = res
@@ -1123,6 +1544,13 @@ responseResetDBClusterParameterGroup = res
     "fixture/ResetDBClusterParameterGroupResponse.proto"
     rds
     (Proxy :: Proxy ResetDBClusterParameterGroup)
+
+responseDescribeCustomAvailabilityZones :: DescribeCustomAvailabilityZonesResponse -> TestTree
+responseDescribeCustomAvailabilityZones = res
+    "DescribeCustomAvailabilityZonesResponse"
+    "fixture/DescribeCustomAvailabilityZonesResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeCustomAvailabilityZones)
 
 responseRestoreDBClusterFromS3 :: RestoreDBClusterFromS3Response -> TestTree
 responseRestoreDBClusterFromS3 = res
@@ -1215,6 +1643,20 @@ responseRemoveSourceIdentifierFromSubscription = res
     rds
     (Proxy :: Proxy RemoveSourceIdentifierFromSubscription)
 
+responseDeleteCustomAvailabilityZone :: DeleteCustomAvailabilityZoneResponse -> TestTree
+responseDeleteCustomAvailabilityZone = res
+    "DeleteCustomAvailabilityZoneResponse"
+    "fixture/DeleteCustomAvailabilityZoneResponse.proto"
+    rds
+    (Proxy :: Proxy DeleteCustomAvailabilityZone)
+
+responseDescribeDBProxyTargets :: DescribeDBProxyTargetsResponse -> TestTree
+responseDescribeDBProxyTargets = res
+    "DescribeDBProxyTargetsResponse"
+    "fixture/DescribeDBProxyTargetsResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeDBProxyTargets)
+
 responseDescribeEngineDefaultClusterParameters :: DescribeEngineDefaultClusterParametersResponse -> TestTree
 responseDescribeEngineDefaultClusterParameters = res
     "DescribeEngineDefaultClusterParametersResponse"
@@ -1229,12 +1671,26 @@ responseDescribeDBSnapshotAttributes = res
     rds
     (Proxy :: Proxy DescribeDBSnapshotAttributes)
 
+responseCreateCustomAvailabilityZone :: CreateCustomAvailabilityZoneResponse -> TestTree
+responseCreateCustomAvailabilityZone = res
+    "CreateCustomAvailabilityZoneResponse"
+    "fixture/CreateCustomAvailabilityZoneResponse.proto"
+    rds
+    (Proxy :: Proxy CreateCustomAvailabilityZone)
+
 responseBacktrackDBCluster :: DBClusterBacktrack -> TestTree
 responseBacktrackDBCluster = res
     "BacktrackDBClusterResponse"
     "fixture/BacktrackDBClusterResponse.proto"
     rds
     (Proxy :: Proxy BacktrackDBCluster)
+
+responseDeleteGlobalCluster :: DeleteGlobalClusterResponse -> TestTree
+responseDeleteGlobalCluster = res
+    "DeleteGlobalClusterResponse"
+    "fixture/DeleteGlobalClusterResponse.proto"
+    rds
+    (Proxy :: Proxy DeleteGlobalCluster)
 
 responsePromoteReadReplicaDBCluster :: PromoteReadReplicaDBClusterResponse -> TestTree
 responsePromoteReadReplicaDBCluster = res
@@ -1256,6 +1712,13 @@ responseRestoreDBInstanceFromDBSnapshot = res
     "fixture/RestoreDBInstanceFromDBSnapshotResponse.proto"
     rds
     (Proxy :: Proxy RestoreDBInstanceFromDBSnapshot)
+
+responseDeleteDBProxy :: DeleteDBProxyResponse -> TestTree
+responseDeleteDBProxy = res
+    "DeleteDBProxyResponse"
+    "fixture/DeleteDBProxyResponse.proto"
+    rds
+    (Proxy :: Proxy DeleteDBProxy)
 
 responseCreateEventSubscription :: CreateEventSubscriptionResponse -> TestTree
 responseCreateEventSubscription = res
@@ -1299,12 +1762,26 @@ responseAuthorizeDBSecurityGroupIngress = res
     rds
     (Proxy :: Proxy AuthorizeDBSecurityGroupIngress)
 
+responseRemoveRoleFromDBInstance :: RemoveRoleFromDBInstanceResponse -> TestTree
+responseRemoveRoleFromDBInstance = res
+    "RemoveRoleFromDBInstanceResponse"
+    "fixture/RemoveRoleFromDBInstanceResponse.proto"
+    rds
+    (Proxy :: Proxy RemoveRoleFromDBInstance)
+
 responseDescribeSourceRegions :: DescribeSourceRegionsResponse -> TestTree
 responseDescribeSourceRegions = res
     "DescribeSourceRegionsResponse"
     "fixture/DescribeSourceRegionsResponse.proto"
     rds
     (Proxy :: Proxy DescribeSourceRegions)
+
+responseCreateDBClusterEndpoint :: DBClusterEndpoint -> TestTree
+responseCreateDBClusterEndpoint = res
+    "CreateDBClusterEndpointResponse"
+    "fixture/CreateDBClusterEndpointResponse.proto"
+    rds
+    (Proxy :: Proxy CreateDBClusterEndpoint)
 
 responseRestoreDBClusterFromSnapshot :: RestoreDBClusterFromSnapshotResponse -> TestTree
 responseRestoreDBClusterFromSnapshot = res
@@ -1319,6 +1796,27 @@ responseDescribeOrderableDBInstanceOptions = res
     "fixture/DescribeOrderableDBInstanceOptionsResponse.proto"
     rds
     (Proxy :: Proxy DescribeOrderableDBInstanceOptions)
+
+responseDeleteDBClusterEndpoint :: DBClusterEndpoint -> TestTree
+responseDeleteDBClusterEndpoint = res
+    "DeleteDBClusterEndpointResponse"
+    "fixture/DeleteDBClusterEndpointResponse.proto"
+    rds
+    (Proxy :: Proxy DeleteDBClusterEndpoint)
+
+responseCreateDBProxy :: CreateDBProxyResponse -> TestTree
+responseCreateDBProxy = res
+    "CreateDBProxyResponse"
+    "fixture/CreateDBProxyResponse.proto"
+    rds
+    (Proxy :: Proxy CreateDBProxy)
+
+responseDeleteDBInstanceAutomatedBackup :: DeleteDBInstanceAutomatedBackupResponse -> TestTree
+responseDeleteDBInstanceAutomatedBackup = res
+    "DeleteDBInstanceAutomatedBackupResponse"
+    "fixture/DeleteDBInstanceAutomatedBackupResponse.proto"
+    rds
+    (Proxy :: Proxy DeleteDBInstanceAutomatedBackup)
 
 responseCreateDBClusterParameterGroup :: CreateDBClusterParameterGroupResponse -> TestTree
 responseCreateDBClusterParameterGroup = res
@@ -1362,6 +1860,27 @@ responseModifyDBSnapshotAttribute = res
     rds
     (Proxy :: Proxy ModifyDBSnapshotAttribute)
 
+responseDescribeDBInstanceAutomatedBackups :: DescribeDBInstanceAutomatedBackupsResponse -> TestTree
+responseDescribeDBInstanceAutomatedBackups = res
+    "DescribeDBInstanceAutomatedBackupsResponse"
+    "fixture/DescribeDBInstanceAutomatedBackupsResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeDBInstanceAutomatedBackups)
+
+responseRemoveFromGlobalCluster :: RemoveFromGlobalClusterResponse -> TestTree
+responseRemoveFromGlobalCluster = res
+    "RemoveFromGlobalClusterResponse"
+    "fixture/RemoveFromGlobalClusterResponse.proto"
+    rds
+    (Proxy :: Proxy RemoveFromGlobalCluster)
+
+responseAddRoleToDBInstance :: AddRoleToDBInstanceResponse -> TestTree
+responseAddRoleToDBInstance = res
+    "AddRoleToDBInstanceResponse"
+    "fixture/AddRoleToDBInstanceResponse.proto"
+    rds
+    (Proxy :: Proxy AddRoleToDBInstance)
+
 responseDeleteDBClusterSnapshot :: DeleteDBClusterSnapshotResponse -> TestTree
 responseDeleteDBClusterSnapshot = res
     "DeleteDBClusterSnapshotResponse"
@@ -1375,6 +1894,13 @@ responseDescribeValidDBInstanceModifications = res
     "fixture/DescribeValidDBInstanceModificationsResponse.proto"
     rds
     (Proxy :: Proxy DescribeValidDBInstanceModifications)
+
+responseDescribeDBClusterEndpoints :: DescribeDBClusterEndpointsResponse -> TestTree
+responseDescribeDBClusterEndpoints = res
+    "DescribeDBClusterEndpointsResponse"
+    "fixture/DescribeDBClusterEndpointsResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeDBClusterEndpoints)
 
 responseDescribeOptionGroupOptions :: DescribeOptionGroupOptionsResponse -> TestTree
 responseDescribeOptionGroupOptions = res
@@ -1404,6 +1930,13 @@ responseDescribeDBParameters = res
     rds
     (Proxy :: Proxy DescribeDBParameters)
 
+responseStopActivityStream :: StopActivityStreamResponse -> TestTree
+responseStopActivityStream = res
+    "StopActivityStreamResponse"
+    "fixture/StopActivityStreamResponse.proto"
+    rds
+    (Proxy :: Proxy StopActivityStream)
+
 responseCreateDBClusterSnapshot :: CreateDBClusterSnapshotResponse -> TestTree
 responseCreateDBClusterSnapshot = res
     "CreateDBClusterSnapshotResponse"
@@ -1418,6 +1951,13 @@ responseDescribeDBSnapshots = res
     rds
     (Proxy :: Proxy DescribeDBSnapshots)
 
+responseModifyDBProxyTargetGroup :: ModifyDBProxyTargetGroupResponse -> TestTree
+responseModifyDBProxyTargetGroup = res
+    "ModifyDBProxyTargetGroupResponse"
+    "fixture/ModifyDBProxyTargetGroupResponse.proto"
+    rds
+    (Proxy :: Proxy ModifyDBProxyTargetGroup)
+
 responseDescribeDBSubnetGroups :: DescribeDBSubnetGroupsResponse -> TestTree
 responseDescribeDBSubnetGroups = res
     "DescribeDBSubnetGroupsResponse"
@@ -1431,6 +1971,13 @@ responseModifyOptionGroup = res
     "fixture/ModifyOptionGroupResponse.proto"
     rds
     (Proxy :: Proxy ModifyOptionGroup)
+
+responseStopDBCluster :: StopDBClusterResponse -> TestTree
+responseStopDBCluster = res
+    "StopDBClusterResponse"
+    "fixture/StopDBClusterResponse.proto"
+    rds
+    (Proxy :: Proxy StopDBCluster)
 
 responseCreateDBParameterGroup :: CreateDBParameterGroupResponse -> TestTree
 responseCreateDBParameterGroup = res
@@ -1467,12 +2014,33 @@ responseDescribeEventCategories = res
     rds
     (Proxy :: Proxy DescribeEventCategories)
 
+responseDescribeGlobalClusters :: DescribeGlobalClustersResponse -> TestTree
+responseDescribeGlobalClusters = res
+    "DescribeGlobalClustersResponse"
+    "fixture/DescribeGlobalClustersResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeGlobalClusters)
+
 responseStartDBInstance :: StartDBInstanceResponse -> TestTree
 responseStartDBInstance = res
     "StartDBInstanceResponse"
     "fixture/StartDBInstanceResponse.proto"
     rds
     (Proxy :: Proxy StartDBInstance)
+
+responseDescribeExportTasks :: DescribeExportTasksResponse -> TestTree
+responseDescribeExportTasks = res
+    "DescribeExportTasksResponse"
+    "fixture/DescribeExportTasksResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeExportTasks)
+
+responseCancelExportTask :: ExportTask -> TestTree
+responseCancelExportTask = res
+    "CancelExportTaskResponse"
+    "fixture/CancelExportTaskResponse.proto"
+    rds
+    (Proxy :: Proxy CancelExportTask)
 
 responseModifyDBClusterParameterGroup :: DBClusterParameterGroupNameMessage -> TestTree
 responseModifyDBClusterParameterGroup = res
@@ -1502,6 +2070,20 @@ responseModifyDBSnapshot = res
     rds
     (Proxy :: Proxy ModifyDBSnapshot)
 
+responseDescribeDBProxyTargetGroups :: DescribeDBProxyTargetGroupsResponse -> TestTree
+responseDescribeDBProxyTargetGroups = res
+    "DescribeDBProxyTargetGroupsResponse"
+    "fixture/DescribeDBProxyTargetGroupsResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeDBProxyTargetGroups)
+
+responseModifyDBProxy :: ModifyDBProxyResponse -> TestTree
+responseModifyDBProxy = res
+    "ModifyDBProxyResponse"
+    "fixture/ModifyDBProxyResponse.proto"
+    rds
+    (Proxy :: Proxy ModifyDBProxy)
+
 responseDescribePendingMaintenanceActions :: DescribePendingMaintenanceActionsResponse -> TestTree
 responseDescribePendingMaintenanceActions = res
     "DescribePendingMaintenanceActionsResponse"
@@ -1523,12 +2105,40 @@ responseCopyDBClusterSnapshot = res
     rds
     (Proxy :: Proxy CopyDBClusterSnapshot)
 
+responseImportInstallationMedia :: InstallationMedia -> TestTree
+responseImportInstallationMedia = res
+    "ImportInstallationMediaResponse"
+    "fixture/ImportInstallationMediaResponse.proto"
+    rds
+    (Proxy :: Proxy ImportInstallationMedia)
+
+responseCreateGlobalCluster :: CreateGlobalClusterResponse -> TestTree
+responseCreateGlobalCluster = res
+    "CreateGlobalClusterResponse"
+    "fixture/CreateGlobalClusterResponse.proto"
+    rds
+    (Proxy :: Proxy CreateGlobalCluster)
+
 responseResetDBParameterGroup :: DBParameterGroupNameMessage -> TestTree
 responseResetDBParameterGroup = res
     "ResetDBParameterGroupResponse"
     "fixture/ResetDBParameterGroupResponse.proto"
     rds
     (Proxy :: Proxy ResetDBParameterGroup)
+
+responseDescribeInstallationMedia :: DescribeInstallationMediaResponse -> TestTree
+responseDescribeInstallationMedia = res
+    "DescribeInstallationMediaResponse"
+    "fixture/DescribeInstallationMediaResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeInstallationMedia)
+
+responseDeregisterDBProxyTargets :: DeregisterDBProxyTargetsResponse -> TestTree
+responseDeregisterDBProxyTargets = res
+    "DeregisterDBProxyTargetsResponse"
+    "fixture/DeregisterDBProxyTargetsResponse.proto"
+    rds
+    (Proxy :: Proxy DeregisterDBProxyTargets)
 
 responseCreateDBCluster :: CreateDBClusterResponse -> TestTree
 responseCreateDBCluster = res
@@ -1614,6 +2224,13 @@ responseCreateDBSecurityGroup = res
     rds
     (Proxy :: Proxy CreateDBSecurityGroup)
 
+responseModifyCertificates :: ModifyCertificatesResponse -> TestTree
+responseModifyCertificates = res
+    "ModifyCertificatesResponse"
+    "fixture/ModifyCertificatesResponse.proto"
+    rds
+    (Proxy :: Proxy ModifyCertificates)
+
 responseDescribeDBClusterSnapshots :: DescribeDBClusterSnapshotsResponse -> TestTree
 responseDescribeDBClusterSnapshots = res
     "DescribeDBClusterSnapshotsResponse"
@@ -1656,6 +2273,13 @@ responseDeleteDBInstance = res
     rds
     (Proxy :: Proxy DeleteDBInstance)
 
+responseStartActivityStream :: StartActivityStreamResponse -> TestTree
+responseStartActivityStream = res
+    "StartActivityStreamResponse"
+    "fixture/StartActivityStreamResponse.proto"
+    rds
+    (Proxy :: Proxy StartActivityStream)
+
 responseCreateDBInstanceReadReplica :: CreateDBInstanceReadReplicaResponse -> TestTree
 responseCreateDBInstanceReadReplica = res
     "CreateDBInstanceReadReplicaResponse"
@@ -1669,6 +2293,27 @@ responseDeleteDBParameterGroup = res
     "fixture/DeleteDBParameterGroupResponse.proto"
     rds
     (Proxy :: Proxy DeleteDBParameterGroup)
+
+responseModifyCurrentDBClusterCapacity :: ModifyCurrentDBClusterCapacityResponse -> TestTree
+responseModifyCurrentDBClusterCapacity = res
+    "ModifyCurrentDBClusterCapacityResponse"
+    "fixture/ModifyCurrentDBClusterCapacityResponse.proto"
+    rds
+    (Proxy :: Proxy ModifyCurrentDBClusterCapacity)
+
+responseModifyGlobalCluster :: ModifyGlobalClusterResponse -> TestTree
+responseModifyGlobalCluster = res
+    "ModifyGlobalClusterResponse"
+    "fixture/ModifyGlobalClusterResponse.proto"
+    rds
+    (Proxy :: Proxy ModifyGlobalCluster)
+
+responseRegisterDBProxyTargets :: RegisterDBProxyTargetsResponse -> TestTree
+responseRegisterDBProxyTargets = res
+    "RegisterDBProxyTargetsResponse"
+    "fixture/RegisterDBProxyTargetsResponse.proto"
+    rds
+    (Proxy :: Proxy RegisterDBProxyTargets)
 
 responseDescribeDBSecurityGroups :: DescribeDBSecurityGroupsResponse -> TestTree
 responseDescribeDBSecurityGroups = res
@@ -1691,6 +2336,13 @@ responseRestoreDBClusterToPointInTime = res
     rds
     (Proxy :: Proxy RestoreDBClusterToPointInTime)
 
+responseDeleteInstallationMedia :: InstallationMedia -> TestTree
+responseDeleteInstallationMedia = res
+    "DeleteInstallationMediaResponse"
+    "fixture/DeleteInstallationMediaResponse.proto"
+    rds
+    (Proxy :: Proxy DeleteInstallationMedia)
+
 responseDescribeDBInstances :: DescribeDBInstancesResponse -> TestTree
 responseDescribeDBInstances = res
     "DescribeDBInstancesResponse"
@@ -1711,3 +2363,17 @@ responseDownloadDBLogFilePortion = res
     "fixture/DownloadDBLogFilePortionResponse.proto"
     rds
     (Proxy :: Proxy DownloadDBLogFilePortion)
+
+responseDescribeDBProxies :: DescribeDBProxiesResponse -> TestTree
+responseDescribeDBProxies = res
+    "DescribeDBProxiesResponse"
+    "fixture/DescribeDBProxiesResponse.proto"
+    rds
+    (Proxy :: Proxy DescribeDBProxies)
+
+responseStartExportTask :: ExportTask -> TestTree
+responseStartExportTask = res
+    "StartExportTaskResponse"
+    "fixture/StartExportTaskResponse.proto"
+    rds
+    (Proxy :: Proxy StartExportTask)

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Assigns one of the stack's registered Amazon EBS volumes to a specified instance. The volume must first be registered with the stack by calling 'RegisterVolume' . After you register the volume, you must call 'UpdateVolume' to specify a mount point before calling @AssignVolume@ . For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html Resource Management> .
+-- Assigns one of the stack's registered Amazon EBS volumes to a specified instance. The volume must first be registered with the stack by calling 'RegisterVolume' . After you register the volume, you must call 'UpdateVolume' to specify a mount point before calling @AssignVolume@ . For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html Resource Management> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.AssignVolume
     (
@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'assignVolume' smart constructor.
-data AssignVolume = AssignVolume'
-  { _avInstanceId :: !(Maybe Text)
-  , _avVolumeId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssignVolume = AssignVolume'{_avInstanceId ::
+                                  !(Maybe Text),
+                                  _avVolumeId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssignVolume' with the minimum fields required to make a request.
 --
@@ -61,9 +60,9 @@ data AssignVolume = AssignVolume'
 assignVolume
     :: Text -- ^ 'avVolumeId'
     -> AssignVolume
-assignVolume pVolumeId_ =
-  AssignVolume' {_avInstanceId = Nothing, _avVolumeId = pVolumeId_}
-
+assignVolume pVolumeId_
+  = AssignVolume'{_avInstanceId = Nothing,
+                  _avVolumeId = pVolumeId_}
 
 -- | The instance ID.
 avInstanceId :: Lens' AssignVolume (Maybe Text)
@@ -105,16 +104,13 @@ instance ToQuery AssignVolume where
         toQuery = const mempty
 
 -- | /See:/ 'assignVolumeResponse' smart constructor.
-data AssignVolumeResponse =
-  AssignVolumeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssignVolumeResponse = AssignVolumeResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssignVolumeResponse' with the minimum fields required to make a request.
 --
 assignVolumeResponse
     :: AssignVolumeResponse
 assignVolumeResponse = AssignVolumeResponse'
-
 
 instance NFData AssignVolumeResponse where

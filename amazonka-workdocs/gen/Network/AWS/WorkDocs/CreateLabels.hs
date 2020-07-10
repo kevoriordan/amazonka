@@ -46,18 +46,16 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'createLabels' smart constructor.
-data CreateLabels = CreateLabels'
-  { _clAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _clResourceId          :: !Text
-  , _clLabels              :: ![Text]
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateLabels = CreateLabels'{_clAuthenticationToken
+                                  :: !(Maybe (Sensitive Text)),
+                                  _clResourceId :: !Text, _clLabels :: ![Text]}
+                      deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateLabels' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'clAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'clResourceId' - The ID of the resource.
 --
@@ -65,15 +63,11 @@ data CreateLabels = CreateLabels'
 createLabels
     :: Text -- ^ 'clResourceId'
     -> CreateLabels
-createLabels pResourceId_ =
-  CreateLabels'
-    { _clAuthenticationToken = Nothing
-    , _clResourceId = pResourceId_
-    , _clLabels = mempty
-    }
+createLabels pResourceId_
+  = CreateLabels'{_clAuthenticationToken = Nothing,
+                  _clResourceId = pResourceId_, _clLabels = mempty}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 clAuthenticationToken :: Lens' CreateLabels (Maybe Text)
 clAuthenticationToken = lens _clAuthenticationToken (\ s a -> s{_clAuthenticationToken = a}) . mapping _Sensitive
 
@@ -117,10 +111,10 @@ instance ToQuery CreateLabels where
         toQuery = const mempty
 
 -- | /See:/ 'createLabelsResponse' smart constructor.
-newtype CreateLabelsResponse = CreateLabelsResponse'
-  { _clrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateLabelsResponse = CreateLabelsResponse'{_clrsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateLabelsResponse' with the minimum fields required to make a request.
 --
@@ -130,9 +124,9 @@ newtype CreateLabelsResponse = CreateLabelsResponse'
 createLabelsResponse
     :: Int -- ^ 'clrsResponseStatus'
     -> CreateLabelsResponse
-createLabelsResponse pResponseStatus_ =
-  CreateLabelsResponse' {_clrsResponseStatus = pResponseStatus_}
-
+createLabelsResponse pResponseStatus_
+  = CreateLabelsResponse'{_clrsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 clrsResponseStatus :: Lens' CreateLabelsResponse Int

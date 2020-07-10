@@ -1,7 +1,8 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE LambdaCase         #-}
 {-# LANGUAGE OverloadedStrings  #-}
-{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE PatternSynonyms    #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -15,8 +16,30 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-module Network.AWS.Translate.Types.Product where
+module Network.AWS.Translate.Types.Product (
+    module Network.AWS.Translate.Types.AppliedTerminology,
+    module Network.AWS.Translate.Types.EncryptionKey,
+    module Network.AWS.Translate.Types.InputDataConfig,
+    module Network.AWS.Translate.Types.JobDetails,
+    module Network.AWS.Translate.Types.OutputDataConfig,
+    module Network.AWS.Translate.Types.Term,
+    module Network.AWS.Translate.Types.TerminologyData,
+    module Network.AWS.Translate.Types.TerminologyDataLocation,
+    module Network.AWS.Translate.Types.TerminologyProperties,
+    module Network.AWS.Translate.Types.TextTranslationJobFilter,
+    module Network.AWS.Translate.Types.TextTranslationJobProperties
+  ) where
 
 import Network.AWS.Lens
 import Network.AWS.Prelude
-import Network.AWS.Translate.Types.Sum
+import Network.AWS.Translate.Types.AppliedTerminology
+import Network.AWS.Translate.Types.EncryptionKey
+import Network.AWS.Translate.Types.InputDataConfig
+import Network.AWS.Translate.Types.JobDetails
+import Network.AWS.Translate.Types.OutputDataConfig
+import Network.AWS.Translate.Types.Term
+import Network.AWS.Translate.Types.TerminologyData
+import Network.AWS.Translate.Types.TerminologyDataLocation
+import Network.AWS.Translate.Types.TerminologyProperties
+import Network.AWS.Translate.Types.TextTranslationJobFilter
+import Network.AWS.Translate.Types.TextTranslationJobProperties

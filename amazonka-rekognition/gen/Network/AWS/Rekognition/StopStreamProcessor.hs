@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops a running stream processor that was created by .
+-- Stops a running stream processor that was created by 'CreateStreamProcessor' .
 --
 --
 module Network.AWS.Rekognition.StopStreamProcessor
@@ -44,23 +44,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopStreamProcessor' smart constructor.
-newtype StopStreamProcessor = StopStreamProcessor'
-  { _sspName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopStreamProcessor = StopStreamProcessor'{_sspName
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StopStreamProcessor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sspName' - The name of a stream processor created by .
+-- * 'sspName' - The name of a stream processor created by 'CreateStreamProcessor' .
 stopStreamProcessor
     :: Text -- ^ 'sspName'
     -> StopStreamProcessor
-stopStreamProcessor pName_ = StopStreamProcessor' {_sspName = pName_}
+stopStreamProcessor pName_
+  = StopStreamProcessor'{_sspName = pName_}
 
-
--- | The name of a stream processor created by .
+-- | The name of a stream processor created by 'CreateStreamProcessor' .
 sspName :: Lens' StopStreamProcessor Text
 sspName = lens _sspName (\ s a -> s{_sspName = a})
 
@@ -98,10 +98,10 @@ instance ToQuery StopStreamProcessor where
         toQuery = const mempty
 
 -- | /See:/ 'stopStreamProcessorResponse' smart constructor.
-newtype StopStreamProcessorResponse = StopStreamProcessorResponse'
-  { _ssprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopStreamProcessorResponse = StopStreamProcessorResponse'{_ssprsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'StopStreamProcessorResponse' with the minimum fields required to make a request.
 --
@@ -111,9 +111,9 @@ newtype StopStreamProcessorResponse = StopStreamProcessorResponse'
 stopStreamProcessorResponse
     :: Int -- ^ 'ssprsResponseStatus'
     -> StopStreamProcessorResponse
-stopStreamProcessorResponse pResponseStatus_ =
-  StopStreamProcessorResponse' {_ssprsResponseStatus = pResponseStatus_}
-
+stopStreamProcessorResponse pResponseStatus_
+  = StopStreamProcessorResponse'{_ssprsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 ssprsResponseStatus :: Lens' StopStreamProcessorResponse Int

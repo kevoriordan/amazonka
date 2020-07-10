@@ -34,10 +34,14 @@ module Network.AWS.MQ.CreateBroker
     , cbSubnetIds
     , cbCreatorRequestId
     , cbMaintenanceWindowStartTime
+    , cbLogs
+    , cbEncryptionOptions
     , cbDeploymentMode
     , cbConfiguration
     , cbEngineType
+    , cbTags
     , cbHostInstanceType
+    , cbStorageType
 
     -- * Destructuring the Response
     , createBrokerResponse
@@ -58,22 +62,27 @@ import Network.AWS.Response
 -- | Creates a broker using the specified properties.
 --
 -- /See:/ 'createBroker' smart constructor.
-data CreateBroker = CreateBroker'
-  { _cbBrokerName                 :: !(Maybe Text)
-  , _cbEngineVersion              :: !(Maybe Text)
-  , _cbPubliclyAccessible         :: !(Maybe Bool)
-  , _cbAutoMinorVersionUpgrade    :: !(Maybe Bool)
-  , _cbSecurityGroups             :: !(Maybe [Text])
-  , _cbUsers                      :: !(Maybe [User])
-  , _cbSubnetIds                  :: !(Maybe [Text])
-  , _cbCreatorRequestId           :: !(Maybe Text)
-  , _cbMaintenanceWindowStartTime :: !(Maybe WeeklyStartTime)
-  , _cbDeploymentMode             :: !(Maybe DeploymentMode)
-  , _cbConfiguration              :: !(Maybe ConfigurationId)
-  , _cbEngineType                 :: !(Maybe EngineType)
-  , _cbHostInstanceType           :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBroker = CreateBroker'{_cbBrokerName ::
+                                  !(Maybe Text),
+                                  _cbEngineVersion :: !(Maybe Text),
+                                  _cbPubliclyAccessible :: !(Maybe Bool),
+                                  _cbAutoMinorVersionUpgrade :: !(Maybe Bool),
+                                  _cbSecurityGroups :: !(Maybe [Text]),
+                                  _cbUsers :: !(Maybe [User]),
+                                  _cbSubnetIds :: !(Maybe [Text]),
+                                  _cbCreatorRequestId :: !(Maybe Text),
+                                  _cbMaintenanceWindowStartTime ::
+                                  !(Maybe WeeklyStartTime),
+                                  _cbLogs :: !(Maybe Logs),
+                                  _cbEncryptionOptions ::
+                                  !(Maybe EncryptionOptions),
+                                  _cbDeploymentMode :: !(Maybe DeploymentMode),
+                                  _cbConfiguration :: !(Maybe ConfigurationId),
+                                  _cbEngineType :: !(Maybe EngineType),
+                                  _cbTags :: !(Maybe (Map Text Text)),
+                                  _cbHostInstanceType :: !(Maybe Text),
+                                  _cbStorageType :: !(Maybe BrokerStorageType)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBroker' with the minimum fields required to make a request.
 --
@@ -81,54 +90,59 @@ data CreateBroker = CreateBroker'
 --
 -- * 'cbBrokerName' - Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
 --
--- * 'cbEngineVersion' - Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+-- * 'cbEngineVersion' - Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 --
 -- * 'cbPubliclyAccessible' - Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
 --
 -- * 'cbAutoMinorVersionUpgrade' - Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
 --
--- * 'cbSecurityGroups' - Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+-- * 'cbSecurityGroups' - The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
 --
 -- * 'cbUsers' - Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
 --
--- * 'cbSubnetIds' - Required. The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
+-- * 'cbSubnetIds' - The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
 --
 -- * 'cbCreatorRequestId' - The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.
 --
 -- * 'cbMaintenanceWindowStartTime' - The parameters that determine the WeeklyStartTime.
 --
--- * 'cbDeploymentMode' - Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.
+-- * 'cbLogs' - Enables Amazon CloudWatch logging for brokers.
+--
+-- * 'cbEncryptionOptions' - Encryption options for the broker.
+--
+-- * 'cbDeploymentMode' - Required. The deployment mode of the broker.
 --
 -- * 'cbConfiguration' - A list of information about the configuration.
 --
 -- * 'cbEngineType' - Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
 --
--- * 'cbHostInstanceType' - Required. The broker's instance type. Possible values: mq.t2.micro, mq.m4.large
+-- * 'cbTags' - Create tags when creating the broker.
+--
+-- * 'cbHostInstanceType' - Required. The broker's instance type.
+--
+-- * 'cbStorageType' - The broker's storage type.
 createBroker
     :: CreateBroker
-createBroker =
-  CreateBroker'
-    { _cbBrokerName = Nothing
-    , _cbEngineVersion = Nothing
-    , _cbPubliclyAccessible = Nothing
-    , _cbAutoMinorVersionUpgrade = Nothing
-    , _cbSecurityGroups = Nothing
-    , _cbUsers = Nothing
-    , _cbSubnetIds = Nothing
-    , _cbCreatorRequestId = Nothing
-    , _cbMaintenanceWindowStartTime = Nothing
-    , _cbDeploymentMode = Nothing
-    , _cbConfiguration = Nothing
-    , _cbEngineType = Nothing
-    , _cbHostInstanceType = Nothing
-    }
-
+createBroker
+  = CreateBroker'{_cbBrokerName = Nothing,
+                  _cbEngineVersion = Nothing,
+                  _cbPubliclyAccessible = Nothing,
+                  _cbAutoMinorVersionUpgrade = Nothing,
+                  _cbSecurityGroups = Nothing, _cbUsers = Nothing,
+                  _cbSubnetIds = Nothing,
+                  _cbCreatorRequestId = Nothing,
+                  _cbMaintenanceWindowStartTime = Nothing,
+                  _cbLogs = Nothing, _cbEncryptionOptions = Nothing,
+                  _cbDeploymentMode = Nothing,
+                  _cbConfiguration = Nothing, _cbEngineType = Nothing,
+                  _cbTags = Nothing, _cbHostInstanceType = Nothing,
+                  _cbStorageType = Nothing}
 
 -- | Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
 cbBrokerName :: Lens' CreateBroker (Maybe Text)
 cbBrokerName = lens _cbBrokerName (\ s a -> s{_cbBrokerName = a})
 
--- | Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+-- | Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 cbEngineVersion :: Lens' CreateBroker (Maybe Text)
 cbEngineVersion = lens _cbEngineVersion (\ s a -> s{_cbEngineVersion = a})
 
@@ -140,7 +154,7 @@ cbPubliclyAccessible = lens _cbPubliclyAccessible (\ s a -> s{_cbPubliclyAccessi
 cbAutoMinorVersionUpgrade :: Lens' CreateBroker (Maybe Bool)
 cbAutoMinorVersionUpgrade = lens _cbAutoMinorVersionUpgrade (\ s a -> s{_cbAutoMinorVersionUpgrade = a})
 
--- | Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+-- | The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
 cbSecurityGroups :: Lens' CreateBroker [Text]
 cbSecurityGroups = lens _cbSecurityGroups (\ s a -> s{_cbSecurityGroups = a}) . _Default . _Coerce
 
@@ -148,7 +162,7 @@ cbSecurityGroups = lens _cbSecurityGroups (\ s a -> s{_cbSecurityGroups = a}) . 
 cbUsers :: Lens' CreateBroker [User]
 cbUsers = lens _cbUsers (\ s a -> s{_cbUsers = a}) . _Default . _Coerce
 
--- | Required. The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
+-- | The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
 cbSubnetIds :: Lens' CreateBroker [Text]
 cbSubnetIds = lens _cbSubnetIds (\ s a -> s{_cbSubnetIds = a}) . _Default . _Coerce
 
@@ -160,7 +174,15 @@ cbCreatorRequestId = lens _cbCreatorRequestId (\ s a -> s{_cbCreatorRequestId = 
 cbMaintenanceWindowStartTime :: Lens' CreateBroker (Maybe WeeklyStartTime)
 cbMaintenanceWindowStartTime = lens _cbMaintenanceWindowStartTime (\ s a -> s{_cbMaintenanceWindowStartTime = a})
 
--- | Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.
+-- | Enables Amazon CloudWatch logging for brokers.
+cbLogs :: Lens' CreateBroker (Maybe Logs)
+cbLogs = lens _cbLogs (\ s a -> s{_cbLogs = a})
+
+-- | Encryption options for the broker.
+cbEncryptionOptions :: Lens' CreateBroker (Maybe EncryptionOptions)
+cbEncryptionOptions = lens _cbEncryptionOptions (\ s a -> s{_cbEncryptionOptions = a})
+
+-- | Required. The deployment mode of the broker.
 cbDeploymentMode :: Lens' CreateBroker (Maybe DeploymentMode)
 cbDeploymentMode = lens _cbDeploymentMode (\ s a -> s{_cbDeploymentMode = a})
 
@@ -172,9 +194,17 @@ cbConfiguration = lens _cbConfiguration (\ s a -> s{_cbConfiguration = a})
 cbEngineType :: Lens' CreateBroker (Maybe EngineType)
 cbEngineType = lens _cbEngineType (\ s a -> s{_cbEngineType = a})
 
--- | Required. The broker's instance type. Possible values: mq.t2.micro, mq.m4.large
+-- | Create tags when creating the broker.
+cbTags :: Lens' CreateBroker (HashMap Text Text)
+cbTags = lens _cbTags (\ s a -> s{_cbTags = a}) . _Default . _Map
+
+-- | Required. The broker's instance type.
 cbHostInstanceType :: Lens' CreateBroker (Maybe Text)
 cbHostInstanceType = lens _cbHostInstanceType (\ s a -> s{_cbHostInstanceType = a})
+
+-- | The broker's storage type.
+cbStorageType :: Lens' CreateBroker (Maybe BrokerStorageType)
+cbStorageType = lens _cbStorageType (\ s a -> s{_cbStorageType = a})
 
 instance AWSRequest CreateBroker where
         type Rs CreateBroker = CreateBrokerResponse
@@ -212,10 +242,14 @@ instance ToJSON CreateBroker where
                   ("creatorRequestId" .=) <$> _cbCreatorRequestId,
                   ("maintenanceWindowStartTime" .=) <$>
                     _cbMaintenanceWindowStartTime,
+                  ("logs" .=) <$> _cbLogs,
+                  ("encryptionOptions" .=) <$> _cbEncryptionOptions,
                   ("deploymentMode" .=) <$> _cbDeploymentMode,
                   ("configuration" .=) <$> _cbConfiguration,
                   ("engineType" .=) <$> _cbEngineType,
-                  ("hostInstanceType" .=) <$> _cbHostInstanceType])
+                  ("tags" .=) <$> _cbTags,
+                  ("hostInstanceType" .=) <$> _cbHostInstanceType,
+                  ("storageType" .=) <$> _cbStorageType])
 
 instance ToPath CreateBroker where
         toPath = const "/v1/brokers"
@@ -224,12 +258,12 @@ instance ToQuery CreateBroker where
         toQuery = const mempty
 
 -- | /See:/ 'createBrokerResponse' smart constructor.
-data CreateBrokerResponse = CreateBrokerResponse'
-  { _cbrsBrokerId       :: !(Maybe Text)
-  , _cbrsBrokerARN      :: !(Maybe Text)
-  , _cbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBrokerResponse = CreateBrokerResponse'{_cbrsBrokerId
+                                                  :: !(Maybe Text),
+                                                  _cbrsBrokerARN ::
+                                                  !(Maybe Text),
+                                                  _cbrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBrokerResponse' with the minimum fields required to make a request.
 --
@@ -243,13 +277,10 @@ data CreateBrokerResponse = CreateBrokerResponse'
 createBrokerResponse
     :: Int -- ^ 'cbrsResponseStatus'
     -> CreateBrokerResponse
-createBrokerResponse pResponseStatus_ =
-  CreateBrokerResponse'
-    { _cbrsBrokerId = Nothing
-    , _cbrsBrokerARN = Nothing
-    , _cbrsResponseStatus = pResponseStatus_
-    }
-
+createBrokerResponse pResponseStatus_
+  = CreateBrokerResponse'{_cbrsBrokerId = Nothing,
+                          _cbrsBrokerARN = Nothing,
+                          _cbrsResponseStatus = pResponseStatus_}
 
 -- | The unique ID that Amazon MQ generates for the broker.
 cbrsBrokerId :: Lens' CreateBrokerResponse (Maybe Text)

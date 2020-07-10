@@ -33,8 +33,8 @@ module Network.AWS.Glue.GetTrigger
     , getTriggerResponse
     , GetTriggerResponse
     -- * Response Lenses
-    , gtrsTrigger
-    , gtrsResponseStatus
+    , getrsTrigger
+    , getrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -45,10 +45,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getTrigger' smart constructor.
-newtype GetTrigger = GetTrigger'
-  { _gtName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetTrigger = GetTrigger'{_gtName :: Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTrigger' with the minimum fields required to make a request.
 --
@@ -58,8 +56,7 @@ newtype GetTrigger = GetTrigger'
 getTrigger
     :: Text -- ^ 'gtName'
     -> GetTrigger
-getTrigger pName_ = GetTrigger' {_gtName = pName_}
-
+getTrigger pName_ = GetTrigger'{_gtName = pName_}
 
 -- | The name of the trigger to retrieve.
 gtName :: Lens' GetTrigger Text
@@ -98,33 +95,31 @@ instance ToQuery GetTrigger where
         toQuery = const mempty
 
 -- | /See:/ 'getTriggerResponse' smart constructor.
-data GetTriggerResponse = GetTriggerResponse'
-  { _gtrsTrigger        :: !(Maybe Trigger)
-  , _gtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTriggerResponse = GetTriggerResponse'{_getrsTrigger
+                                              :: !(Maybe Trigger),
+                                              _getrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTriggerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtrsTrigger' - The requested trigger definition.
+-- * 'getrsTrigger' - The requested trigger definition.
 --
--- * 'gtrsResponseStatus' - -- | The response status code.
+-- * 'getrsResponseStatus' - -- | The response status code.
 getTriggerResponse
-    :: Int -- ^ 'gtrsResponseStatus'
+    :: Int -- ^ 'getrsResponseStatus'
     -> GetTriggerResponse
-getTriggerResponse pResponseStatus_ =
-  GetTriggerResponse'
-    {_gtrsTrigger = Nothing, _gtrsResponseStatus = pResponseStatus_}
-
+getTriggerResponse pResponseStatus_
+  = GetTriggerResponse'{_getrsTrigger = Nothing,
+                        _getrsResponseStatus = pResponseStatus_}
 
 -- | The requested trigger definition.
-gtrsTrigger :: Lens' GetTriggerResponse (Maybe Trigger)
-gtrsTrigger = lens _gtrsTrigger (\ s a -> s{_gtrsTrigger = a})
+getrsTrigger :: Lens' GetTriggerResponse (Maybe Trigger)
+getrsTrigger = lens _getrsTrigger (\ s a -> s{_getrsTrigger = a})
 
 -- | -- | The response status code.
-gtrsResponseStatus :: Lens' GetTriggerResponse Int
-gtrsResponseStatus = lens _gtrsResponseStatus (\ s a -> s{_gtrsResponseStatus = a})
+getrsResponseStatus :: Lens' GetTriggerResponse Int
+getrsResponseStatus = lens _getrsResponseStatus (\ s a -> s{_getrsResponseStatus = a})
 
 instance NFData GetTriggerResponse where

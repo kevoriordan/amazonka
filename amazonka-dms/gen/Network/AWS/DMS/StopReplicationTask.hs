@@ -46,15 +46,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'stopReplicationTask' smart constructor.
-newtype StopReplicationTask = StopReplicationTask'
-  { _sReplicationTaskARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopReplicationTask = StopReplicationTask'{_sReplicationTaskARN
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StopReplicationTask' with the minimum fields required to make a request.
 --
@@ -64,9 +64,9 @@ newtype StopReplicationTask = StopReplicationTask'
 stopReplicationTask
     :: Text -- ^ 'sReplicationTaskARN'
     -> StopReplicationTask
-stopReplicationTask pReplicationTaskARN_ =
-  StopReplicationTask' {_sReplicationTaskARN = pReplicationTaskARN_}
-
+stopReplicationTask pReplicationTaskARN_
+  = StopReplicationTask'{_sReplicationTaskARN =
+                           pReplicationTaskARN_}
 
 -- | The Amazon Resource Name(ARN) of the replication task to be stopped.
 sReplicationTaskARN :: Lens' StopReplicationTask Text
@@ -109,16 +109,19 @@ instance ToPath StopReplicationTask where
 instance ToQuery StopReplicationTask where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'stopReplicationTaskResponse' smart constructor.
-data StopReplicationTaskResponse = StopReplicationTaskResponse'
-  { _srsReplicationTask :: !(Maybe ReplicationTask)
-  , _srsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopReplicationTaskResponse = StopReplicationTaskResponse'{_srsReplicationTask
+                                                                ::
+                                                                !(Maybe
+                                                                    ReplicationTask),
+                                                                _srsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'StopReplicationTaskResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +133,10 @@ data StopReplicationTaskResponse = StopReplicationTaskResponse'
 stopReplicationTaskResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopReplicationTaskResponse
-stopReplicationTaskResponse pResponseStatus_ =
-  StopReplicationTaskResponse'
-    {_srsReplicationTask = Nothing, _srsResponseStatus = pResponseStatus_}
-
+stopReplicationTaskResponse pResponseStatus_
+  = StopReplicationTaskResponse'{_srsReplicationTask =
+                                   Nothing,
+                                 _srsResponseStatus = pResponseStatus_}
 
 -- | The replication task stopped.
 srsReplicationTask :: Lens' StopReplicationTaskResponse (Maybe ReplicationTask)

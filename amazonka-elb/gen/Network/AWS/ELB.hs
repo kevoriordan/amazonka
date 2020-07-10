@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Elastic Load Balancing__
+-- __Elastic Load Balancing__ 
 --
 -- A load balancer can distribute incoming traffic across your EC2 instances. This enables you to increase the availability of your application. The load balancer also monitors the health of its registered instances and ensures that it routes traffic only to healthy instances. You configure your load balancer to accept incoming traffic by specifying one or more listeners, which are configured with a protocol and port number for connections from clients to the load balancer and a protocol and port number for connections from the load balancer to the instances.
 --
@@ -31,50 +31,11 @@ module Network.AWS.ELB
     -- * Errors
     -- $errors
 
-    -- ** PolicyNotFoundException
-    , _PolicyNotFoundException
+    -- ** TooManyAccessPointsException
+    , _TooManyAccessPointsException
 
-    -- ** AccessPointNotFoundException
-    , _AccessPointNotFoundException
-
-    -- ** DuplicatePolicyNameException
-    , _DuplicatePolicyNameException
-
-    -- ** InvalidConfigurationRequestException
-    , _InvalidConfigurationRequestException
-
-    -- ** SubnetNotFoundException
-    , _SubnetNotFoundException
-
-    -- ** LoadBalancerAttributeNotFoundException
-    , _LoadBalancerAttributeNotFoundException
-
-    -- ** InvalidSubnetException
-    , _InvalidSubnetException
-
-    -- ** DuplicateTagKeysException
-    , _DuplicateTagKeysException
-
-    -- ** DuplicateListenerException
-    , _DuplicateListenerException
-
-    -- ** TooManyTagsException
-    , _TooManyTagsException
-
-    -- ** PolicyTypeNotFoundException
-    , _PolicyTypeNotFoundException
-
-    -- ** UnsupportedProtocolException
-    , _UnsupportedProtocolException
-
-    -- ** DuplicateAccessPointNameException
-    , _DuplicateAccessPointNameException
-
-    -- ** InvalidSecurityGroupException
-    , _InvalidSecurityGroupException
-
-    -- ** ListenerNotFoundException
-    , _ListenerNotFoundException
+    -- ** InvalidSchemeException
+    , _InvalidSchemeException
 
     -- ** InvalidEndPointException
     , _InvalidEndPointException
@@ -82,20 +43,59 @@ module Network.AWS.ELB
     -- ** OperationNotPermittedException
     , _OperationNotPermittedException
 
+    -- ** SubnetNotFoundException
+    , _SubnetNotFoundException
+
+    -- ** PolicyNotFoundException
+    , _PolicyNotFoundException
+
+    -- ** UnsupportedProtocolException
+    , _UnsupportedProtocolException
+
+    -- ** TooManyTagsException
+    , _TooManyTagsException
+
+    -- ** DuplicateListenerException
+    , _DuplicateListenerException
+
     -- ** DependencyThrottleException
     , _DependencyThrottleException
 
-    -- ** InvalidSchemeException
-    , _InvalidSchemeException
+    -- ** InvalidSubnetException
+    , _InvalidSubnetException
 
-    -- ** TooManyAccessPointsException
-    , _TooManyAccessPointsException
+    -- ** ListenerNotFoundException
+    , _ListenerNotFoundException
+
+    -- ** LoadBalancerAttributeNotFoundException
+    , _LoadBalancerAttributeNotFoundException
+
+    -- ** DuplicateAccessPointNameException
+    , _DuplicateAccessPointNameException
+
+    -- ** DuplicatePolicyNameException
+    , _DuplicatePolicyNameException
+
+    -- ** InvalidConfigurationRequestException
+    , _InvalidConfigurationRequestException
+
+    -- ** InvalidSecurityGroupException
+    , _InvalidSecurityGroupException
+
+    -- ** AccessPointNotFoundException
+    , _AccessPointNotFoundException
+
+    -- ** PolicyTypeNotFoundException
+    , _PolicyTypeNotFoundException
+
+    -- ** CertificateNotFoundException
+    , _CertificateNotFoundException
 
     -- ** TooManyPoliciesException
     , _TooManyPoliciesException
 
-    -- ** CertificateNotFoundException
-    , _CertificateNotFoundException
+    -- ** DuplicateTagKeysException
+    , _DuplicateTagKeysException
 
     -- * Waiters
     -- $waiters
@@ -115,88 +115,88 @@ module Network.AWS.ELB
     -- ** DescribeLoadBalancers (Paginated)
     , module Network.AWS.ELB.DescribeLoadBalancers
 
-    -- ** DescribeTags
+    -- ** DescribeTags 
     , module Network.AWS.ELB.DescribeTags
 
-    -- ** DescribeLoadBalancerPolicyTypes
+    -- ** DescribeLoadBalancerPolicyTypes 
     , module Network.AWS.ELB.DescribeLoadBalancerPolicyTypes
 
-    -- ** ApplySecurityGroupsToLoadBalancer
+    -- ** ApplySecurityGroupsToLoadBalancer 
     , module Network.AWS.ELB.ApplySecurityGroupsToLoadBalancer
 
-    -- ** RemoveTags
+    -- ** RemoveTags 
     , module Network.AWS.ELB.RemoveTags
 
-    -- ** CreateLBCookieStickinessPolicy
+    -- ** CreateLBCookieStickinessPolicy 
     , module Network.AWS.ELB.CreateLBCookieStickinessPolicy
 
-    -- ** DeleteLoadBalancer
+    -- ** DeleteLoadBalancer 
     , module Network.AWS.ELB.DeleteLoadBalancer
 
-    -- ** DeregisterInstancesFromLoadBalancer
+    -- ** DeregisterInstancesFromLoadBalancer 
     , module Network.AWS.ELB.DeregisterInstancesFromLoadBalancer
 
-    -- ** CreateLoadBalancerPolicy
+    -- ** CreateLoadBalancerPolicy 
     , module Network.AWS.ELB.CreateLoadBalancerPolicy
 
-    -- ** DescribeLoadBalancerPolicies
+    -- ** DescribeLoadBalancerPolicies 
     , module Network.AWS.ELB.DescribeLoadBalancerPolicies
 
-    -- ** DisableAvailabilityZonesForLoadBalancer
+    -- ** DisableAvailabilityZonesForLoadBalancer 
     , module Network.AWS.ELB.DisableAvailabilityZonesForLoadBalancer
 
-    -- ** EnableAvailabilityZonesForLoadBalancer
+    -- ** EnableAvailabilityZonesForLoadBalancer 
     , module Network.AWS.ELB.EnableAvailabilityZonesForLoadBalancer
 
-    -- ** SetLoadBalancerPoliciesForBackendServer
+    -- ** SetLoadBalancerPoliciesForBackendServer 
     , module Network.AWS.ELB.SetLoadBalancerPoliciesForBackendServer
 
-    -- ** SetLoadBalancerListenerSSLCertificate
+    -- ** SetLoadBalancerListenerSSLCertificate 
     , module Network.AWS.ELB.SetLoadBalancerListenerSSLCertificate
 
-    -- ** DescribeAccountLimits
+    -- ** DescribeAccountLimits (Paginated)
     , module Network.AWS.ELB.DescribeAccountLimits
 
-    -- ** AttachLoadBalancerToSubnets
+    -- ** AttachLoadBalancerToSubnets 
     , module Network.AWS.ELB.AttachLoadBalancerToSubnets
 
-    -- ** ConfigureHealthCheck
+    -- ** ConfigureHealthCheck 
     , module Network.AWS.ELB.ConfigureHealthCheck
 
-    -- ** ModifyLoadBalancerAttributes
+    -- ** ModifyLoadBalancerAttributes 
     , module Network.AWS.ELB.ModifyLoadBalancerAttributes
 
-    -- ** CreateAppCookieStickinessPolicy
+    -- ** CreateAppCookieStickinessPolicy 
     , module Network.AWS.ELB.CreateAppCookieStickinessPolicy
 
-    -- ** DescribeInstanceHealth
+    -- ** DescribeInstanceHealth 
     , module Network.AWS.ELB.DescribeInstanceHealth
 
-    -- ** AddTags
+    -- ** AddTags 
     , module Network.AWS.ELB.AddTags
 
-    -- ** DescribeLoadBalancerAttributes
+    -- ** DescribeLoadBalancerAttributes 
     , module Network.AWS.ELB.DescribeLoadBalancerAttributes
 
-    -- ** CreateLoadBalancerListeners
+    -- ** CreateLoadBalancerListeners 
     , module Network.AWS.ELB.CreateLoadBalancerListeners
 
-    -- ** DeleteLoadBalancerPolicy
+    -- ** DeleteLoadBalancerPolicy 
     , module Network.AWS.ELB.DeleteLoadBalancerPolicy
 
-    -- ** DetachLoadBalancerFromSubnets
+    -- ** DetachLoadBalancerFromSubnets 
     , module Network.AWS.ELB.DetachLoadBalancerFromSubnets
 
-    -- ** RegisterInstancesWithLoadBalancer
+    -- ** RegisterInstancesWithLoadBalancer 
     , module Network.AWS.ELB.RegisterInstancesWithLoadBalancer
 
-    -- ** CreateLoadBalancer
+    -- ** CreateLoadBalancer 
     , module Network.AWS.ELB.CreateLoadBalancer
 
-    -- ** DeleteLoadBalancerListeners
+    -- ** DeleteLoadBalancerListeners 
     , module Network.AWS.ELB.DeleteLoadBalancerListeners
 
-    -- ** SetLoadBalancerPoliciesOfListener
+    -- ** SetLoadBalancerPoliciesOfListener 
     , module Network.AWS.ELB.SetLoadBalancerPoliciesOfListener
 
     -- * Types
@@ -413,7 +413,6 @@ import Network.AWS.ELB.DescribeTags
 import Network.AWS.ELB.DetachLoadBalancerFromSubnets
 import Network.AWS.ELB.DisableAvailabilityZonesForLoadBalancer
 import Network.AWS.ELB.EnableAvailabilityZonesForLoadBalancer
-import Network.AWS.ELB.Internal
 import Network.AWS.ELB.ModifyLoadBalancerAttributes
 import Network.AWS.ELB.RegisterInstancesWithLoadBalancer
 import Network.AWS.ELB.RemoveTags
@@ -422,6 +421,7 @@ import Network.AWS.ELB.SetLoadBalancerPoliciesForBackendServer
 import Network.AWS.ELB.SetLoadBalancerPoliciesOfListener
 import Network.AWS.ELB.Types
 import Network.AWS.ELB.Waiters
+import Network.AWS.ELB.Internal
 
 {- $errors
 Error matchers are designed for use with the functions provided by

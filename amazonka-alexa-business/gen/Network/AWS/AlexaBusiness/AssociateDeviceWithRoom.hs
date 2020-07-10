@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required.
+-- Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. 
 --
 --
 module Network.AWS.AlexaBusiness.AssociateDeviceWithRoom
@@ -45,11 +45,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateDeviceWithRoom' smart constructor.
-data AssociateDeviceWithRoom = AssociateDeviceWithRoom'
-  { _adwrDeviceARN :: !(Maybe Text)
-  , _adwrRoomARN   :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateDeviceWithRoom = AssociateDeviceWithRoom'{_adwrDeviceARN
+                                                        :: !(Maybe Text),
+                                                        _adwrRoomARN ::
+                                                        !(Maybe Text)}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AssociateDeviceWithRoom' with the minimum fields required to make a request.
 --
@@ -60,9 +61,9 @@ data AssociateDeviceWithRoom = AssociateDeviceWithRoom'
 -- * 'adwrRoomARN' - The ARN of the room with which to associate the device. Required.
 associateDeviceWithRoom
     :: AssociateDeviceWithRoom
-associateDeviceWithRoom =
-  AssociateDeviceWithRoom' {_adwrDeviceARN = Nothing, _adwrRoomARN = Nothing}
-
+associateDeviceWithRoom
+  = AssociateDeviceWithRoom'{_adwrDeviceARN = Nothing,
+                             _adwrRoomARN = Nothing}
 
 -- | The ARN of the device to associate to a room. Required.
 adwrDeviceARN :: Lens' AssociateDeviceWithRoom (Maybe Text)
@@ -110,10 +111,11 @@ instance ToQuery AssociateDeviceWithRoom where
         toQuery = const mempty
 
 -- | /See:/ 'associateDeviceWithRoomResponse' smart constructor.
-newtype AssociateDeviceWithRoomResponse = AssociateDeviceWithRoomResponse'
-  { _adwrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateDeviceWithRoomResponse = AssociateDeviceWithRoomResponse'{_adwrrsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'AssociateDeviceWithRoomResponse' with the minimum fields required to make a request.
 --
@@ -123,9 +125,9 @@ newtype AssociateDeviceWithRoomResponse = AssociateDeviceWithRoomResponse'
 associateDeviceWithRoomResponse
     :: Int -- ^ 'adwrrsResponseStatus'
     -> AssociateDeviceWithRoomResponse
-associateDeviceWithRoomResponse pResponseStatus_ =
-  AssociateDeviceWithRoomResponse' {_adwrrsResponseStatus = pResponseStatus_}
-
+associateDeviceWithRoomResponse pResponseStatus_
+  = AssociateDeviceWithRoomResponse'{_adwrrsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 adwrrsResponseStatus :: Lens' AssociateDeviceWithRoomResponse Int

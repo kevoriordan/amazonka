@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified Internet gateway. You must detach the Internet gateway from the VPC before you can delete it.
+-- Deletes the specified internet gateway. You must detach the internet gateway from the VPC before you can delete it.
 --
 --
 module Network.AWS.EC2.DeleteInternetGateway
@@ -27,8 +27,8 @@ module Network.AWS.EC2.DeleteInternetGateway
       deleteInternetGateway
     , DeleteInternetGateway
     -- * Request Lenses
-    , digiDryRun
-    , digiInternetGatewayId
+    , dltintrntgtwyDryRun
+    , dltintrntgtwyInternetGatewayId
 
     -- * Destructuring the Response
     , deleteInternetGatewayResponse
@@ -42,39 +42,37 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DeleteInternetGateway.
---
---
---
--- /See:/ 'deleteInternetGateway' smart constructor.
-data DeleteInternetGateway = DeleteInternetGateway'
-  { _digiDryRun            :: !(Maybe Bool)
-  , _digiInternetGatewayId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteInternetGateway' smart constructor.
+data DeleteInternetGateway = DeleteInternetGateway'{_dltintrntgtwyDryRun
+                                                    :: !(Maybe Bool),
+                                                    _dltintrntgtwyInternetGatewayId
+                                                    :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteInternetGateway' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'digiDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
+-- * 'dltintrntgtwyDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'digiInternetGatewayId' - The ID of the Internet gateway.
+-- * 'dltintrntgtwyInternetGatewayId' - The ID of the internet gateway.
 deleteInternetGateway
-    :: Text -- ^ 'digiInternetGatewayId'
+    :: Text -- ^ 'dltintrntgtwyInternetGatewayId'
     -> DeleteInternetGateway
-deleteInternetGateway pInternetGatewayId_ =
-  DeleteInternetGateway'
-    {_digiDryRun = Nothing, _digiInternetGatewayId = pInternetGatewayId_}
-
+deleteInternetGateway pInternetGatewayId_
+  = DeleteInternetGateway'{_dltintrntgtwyDryRun =
+                             Nothing,
+                           _dltintrntgtwyInternetGatewayId =
+                             pInternetGatewayId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
-digiDryRun :: Lens' DeleteInternetGateway (Maybe Bool)
-digiDryRun = lens _digiDryRun (\ s a -> s{_digiDryRun = a})
+dltintrntgtwyDryRun :: Lens' DeleteInternetGateway (Maybe Bool)
+dltintrntgtwyDryRun = lens _dltintrntgtwyDryRun (\ s a -> s{_dltintrntgtwyDryRun = a})
 
--- | The ID of the Internet gateway.
-digiInternetGatewayId :: Lens' DeleteInternetGateway Text
-digiInternetGatewayId = lens _digiInternetGatewayId (\ s a -> s{_digiInternetGatewayId = a})
+-- | The ID of the internet gateway.
+dltintrntgtwyInternetGatewayId :: Lens' DeleteInternetGateway Text
+dltintrntgtwyInternetGatewayId = lens _dltintrntgtwyInternetGatewayId (\ s a -> s{_dltintrntgtwyInternetGatewayId = a})
 
 instance AWSRequest DeleteInternetGateway where
         type Rs DeleteInternetGateway =
@@ -97,20 +95,20 @@ instance ToQuery DeleteInternetGateway where
           = mconcat
               ["Action" =: ("DeleteInternetGateway" :: ByteString),
                "Version" =: ("2016-11-15" :: ByteString),
-               "DryRun" =: _digiDryRun,
-               "InternetGatewayId" =: _digiInternetGatewayId]
+               "DryRun" =: _dltintrntgtwyDryRun,
+               "InternetGatewayId" =:
+                 _dltintrntgtwyInternetGatewayId]
 
 -- | /See:/ 'deleteInternetGatewayResponse' smart constructor.
-data DeleteInternetGatewayResponse =
-  DeleteInternetGatewayResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteInternetGatewayResponse = DeleteInternetGatewayResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteInternetGatewayResponse' with the minimum fields required to make a request.
 --
 deleteInternetGatewayResponse
     :: DeleteInternetGatewayResponse
-deleteInternetGatewayResponse = DeleteInternetGatewayResponse'
-
+deleteInternetGatewayResponse
+  = DeleteInternetGatewayResponse'
 
 instance NFData DeleteInternetGatewayResponse where

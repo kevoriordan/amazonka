@@ -64,6 +64,7 @@ library
         , Network.AWS.SNS.ListPlatformApplications
         , Network.AWS.SNS.ListSubscriptions
         , Network.AWS.SNS.ListSubscriptionsByTopic
+        , Network.AWS.SNS.ListTagsForResource
         , Network.AWS.SNS.ListTopics
         , Network.AWS.SNS.OptInPhoneNumber
         , Network.AWS.SNS.Publish
@@ -74,17 +75,25 @@ library
         , Network.AWS.SNS.SetSubscriptionAttributes
         , Network.AWS.SNS.SetTopicAttributes
         , Network.AWS.SNS.Subscribe
+        , Network.AWS.SNS.TagResource
         , Network.AWS.SNS.Types
         , Network.AWS.SNS.Unsubscribe
+        , Network.AWS.SNS.UntagResource
         , Network.AWS.SNS.Waiters
 
     other-modules:
-          Network.AWS.SNS.Types.Product
-        , Network.AWS.SNS.Types.Sum
+          Network.AWS.SNS.Types.Endpoint
+        , Network.AWS.SNS.Types.MessageAttributeValue
+        , Network.AWS.SNS.Types.PlatformApplication
+        , Network.AWS.SNS.Types.Product
+        , Network.AWS.SNS.Types.Subscription
+        , Network.AWS.SNS.Types.Tag
+        , Network.AWS.SNS.Types.Topic
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-sns-test
     type:              exitcode-stdio-1.0
@@ -108,6 +117,7 @@ test-suite amazonka-sns-test
         , amazonka-sns
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

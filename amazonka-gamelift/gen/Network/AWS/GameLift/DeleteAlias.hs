@@ -21,19 +21,17 @@
 -- Deletes an alias. This action removes all record of the alias. Game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.
 --
 --
--- Alias-related operations include:
+--     * 'CreateAlias' 
 --
---     * 'CreateAlias'
+--     * 'ListAliases' 
 --
---     * 'ListAliases'
+--     * 'DescribeAlias' 
 --
---     * 'DescribeAlias'
+--     * 'UpdateAlias' 
 --
---     * 'UpdateAlias'
+--     * 'DeleteAlias' 
 --
---     * 'DeleteAlias'
---
---     * 'ResolveAlias'
+--     * 'ResolveAlias' 
 --
 --
 --
@@ -62,23 +60,22 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteAlias' smart constructor.
-newtype DeleteAlias = DeleteAlias'
-  { _daAliasId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAlias = DeleteAlias'{_daAliasId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAlias' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daAliasId' - Unique identifier for a fleet alias. Specify the alias you want to delete.
+-- * 'daAliasId' - A unique identifier of the alias that you want to delete. You can use either the alias ID or ARN value.
 deleteAlias
     :: Text -- ^ 'daAliasId'
     -> DeleteAlias
-deleteAlias pAliasId_ = DeleteAlias' {_daAliasId = pAliasId_}
+deleteAlias pAliasId_
+  = DeleteAlias'{_daAliasId = pAliasId_}
 
-
--- | Unique identifier for a fleet alias. Specify the alias you want to delete.
+-- | A unique identifier of the alias that you want to delete. You can use either the alias ID or ARN value.
 daAliasId :: Lens' DeleteAlias Text
 daAliasId = lens _daAliasId (\ s a -> s{_daAliasId = a})
 
@@ -111,16 +108,13 @@ instance ToQuery DeleteAlias where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAliasResponse' smart constructor.
-data DeleteAliasResponse =
-  DeleteAliasResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAliasResponse = DeleteAliasResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAliasResponse' with the minimum fields required to make a request.
 --
 deleteAliasResponse
     :: DeleteAliasResponse
 deleteAliasResponse = DeleteAliasResponse'
-
 
 instance NFData DeleteAliasResponse where

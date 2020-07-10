@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves all Databases defined in a given Data Catalog.
+-- Retrieves all databases defined in a given Data Catalog.
 --
 --
 --
@@ -51,30 +51,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDatabases' smart constructor.
-data GetDatabases = GetDatabases'
-  { _gdCatalogId  :: !(Maybe Text)
-  , _gdNextToken  :: !(Maybe Text)
-  , _gdMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDatabases = GetDatabases'{_gdCatalogId ::
+                                  !(Maybe Text),
+                                  _gdNextToken :: !(Maybe Text),
+                                  _gdMaxResults :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDatabases' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdCatalogId' - The ID of the Data Catalog from which to retrieve @Databases@ . If none is supplied, the AWS account ID is used by default.
+-- * 'gdCatalogId' - The ID of the Data Catalog from which to retrieve @Databases@ . If none is provided, the AWS account ID is used by default.
 --
 -- * 'gdNextToken' - A continuation token, if this is a continuation call.
 --
 -- * 'gdMaxResults' - The maximum number of databases to return in one response.
 getDatabases
     :: GetDatabases
-getDatabases =
-  GetDatabases'
-    {_gdCatalogId = Nothing, _gdNextToken = Nothing, _gdMaxResults = Nothing}
+getDatabases
+  = GetDatabases'{_gdCatalogId = Nothing,
+                  _gdNextToken = Nothing, _gdMaxResults = Nothing}
 
-
--- | The ID of the Data Catalog from which to retrieve @Databases@ . If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog from which to retrieve @Databases@ . If none is provided, the AWS account ID is used by default.
 gdCatalogId :: Lens' GetDatabases (Maybe Text)
 gdCatalogId = lens _gdCatalogId (\ s a -> s{_gdCatalogId = a})
 
@@ -131,12 +129,12 @@ instance ToQuery GetDatabases where
         toQuery = const mempty
 
 -- | /See:/ 'getDatabasesResponse' smart constructor.
-data GetDatabasesResponse = GetDatabasesResponse'
-  { _gdsrsNextToken      :: !(Maybe Text)
-  , _gdsrsResponseStatus :: !Int
-  , _gdsrsDatabaseList   :: ![Database]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDatabasesResponse = GetDatabasesResponse'{_gdsrsNextToken
+                                                  :: !(Maybe Text),
+                                                  _gdsrsResponseStatus :: !Int,
+                                                  _gdsrsDatabaseList ::
+                                                  ![Database]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDatabasesResponse' with the minimum fields required to make a request.
 --
@@ -150,13 +148,10 @@ data GetDatabasesResponse = GetDatabasesResponse'
 getDatabasesResponse
     :: Int -- ^ 'gdsrsResponseStatus'
     -> GetDatabasesResponse
-getDatabasesResponse pResponseStatus_ =
-  GetDatabasesResponse'
-    { _gdsrsNextToken = Nothing
-    , _gdsrsResponseStatus = pResponseStatus_
-    , _gdsrsDatabaseList = mempty
-    }
-
+getDatabasesResponse pResponseStatus_
+  = GetDatabasesResponse'{_gdsrsNextToken = Nothing,
+                          _gdsrsResponseStatus = pResponseStatus_,
+                          _gdsrsDatabaseList = mempty}
 
 -- | A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.
 gdsrsNextToken :: Lens' GetDatabasesResponse (Maybe Text)

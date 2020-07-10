@@ -46,12 +46,14 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'disassociateMemberFromGroup' smart constructor.
-data DisassociateMemberFromGroup = DisassociateMemberFromGroup'
-  { _dmfgOrganizationId :: !Text
-  , _dmfgGroupId        :: !Text
-  , _dmfgMemberId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateMemberFromGroup = DisassociateMemberFromGroup'{_dmfgOrganizationId
+                                                                :: !Text,
+                                                                _dmfgGroupId ::
+                                                                !Text,
+                                                                _dmfgMemberId ::
+                                                                !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DisassociateMemberFromGroup' with the minimum fields required to make a request.
 --
@@ -67,13 +69,12 @@ disassociateMemberFromGroup
     -> Text -- ^ 'dmfgGroupId'
     -> Text -- ^ 'dmfgMemberId'
     -> DisassociateMemberFromGroup
-disassociateMemberFromGroup pOrganizationId_ pGroupId_ pMemberId_ =
-  DisassociateMemberFromGroup'
-    { _dmfgOrganizationId = pOrganizationId_
-    , _dmfgGroupId = pGroupId_
-    , _dmfgMemberId = pMemberId_
-    }
-
+disassociateMemberFromGroup pOrganizationId_
+  pGroupId_ pMemberId_
+  = DisassociateMemberFromGroup'{_dmfgOrganizationId =
+                                   pOrganizationId_,
+                                 _dmfgGroupId = pGroupId_,
+                                 _dmfgMemberId = pMemberId_}
 
 -- | The identifier for the organization under which the group exists.
 dmfgOrganizationId :: Lens' DisassociateMemberFromGroup Text
@@ -126,10 +127,11 @@ instance ToQuery DisassociateMemberFromGroup where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateMemberFromGroupResponse' smart constructor.
-newtype DisassociateMemberFromGroupResponse = DisassociateMemberFromGroupResponse'
-  { _dmfgrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateMemberFromGroupResponse = DisassociateMemberFromGroupResponse'{_dmfgrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DisassociateMemberFromGroupResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +141,9 @@ newtype DisassociateMemberFromGroupResponse = DisassociateMemberFromGroupRespons
 disassociateMemberFromGroupResponse
     :: Int -- ^ 'dmfgrsResponseStatus'
     -> DisassociateMemberFromGroupResponse
-disassociateMemberFromGroupResponse pResponseStatus_ =
-  DisassociateMemberFromGroupResponse'
-    {_dmfgrsResponseStatus = pResponseStatus_}
-
+disassociateMemberFromGroupResponse pResponseStatus_
+  = DisassociateMemberFromGroupResponse'{_dmfgrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 dmfgrsResponseStatus :: Lens' DisassociateMemberFromGroupResponse Int

@@ -49,11 +49,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteLoadBalancerListeners' smart constructor.
-data DeleteLoadBalancerListeners = DeleteLoadBalancerListeners'
-  { _dlblLoadBalancerName  :: !Text
-  , _dlblLoadBalancerPorts :: ![Int]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLoadBalancerListeners = DeleteLoadBalancerListeners'{_dlblLoadBalancerName
+                                                                :: !Text,
+                                                                _dlblLoadBalancerPorts
+                                                                :: ![Int]}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteLoadBalancerListeners' with the minimum fields required to make a request.
 --
@@ -65,12 +66,10 @@ data DeleteLoadBalancerListeners = DeleteLoadBalancerListeners'
 deleteLoadBalancerListeners
     :: Text -- ^ 'dlblLoadBalancerName'
     -> DeleteLoadBalancerListeners
-deleteLoadBalancerListeners pLoadBalancerName_ =
-  DeleteLoadBalancerListeners'
-    { _dlblLoadBalancerName = pLoadBalancerName_
-    , _dlblLoadBalancerPorts = mempty
-    }
-
+deleteLoadBalancerListeners pLoadBalancerName_
+  = DeleteLoadBalancerListeners'{_dlblLoadBalancerName
+                                   = pLoadBalancerName_,
+                                 _dlblLoadBalancerPorts = mempty}
 
 -- | The name of the load balancer.
 dlblLoadBalancerName :: Lens' DeleteLoadBalancerListeners Text
@@ -116,10 +115,11 @@ instance ToQuery DeleteLoadBalancerListeners where
 --
 --
 -- /See:/ 'deleteLoadBalancerListenersResponse' smart constructor.
-newtype DeleteLoadBalancerListenersResponse = DeleteLoadBalancerListenersResponse'
-  { _dlblrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLoadBalancerListenersResponse = DeleteLoadBalancerListenersResponse'{_dlblrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteLoadBalancerListenersResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +129,9 @@ newtype DeleteLoadBalancerListenersResponse = DeleteLoadBalancerListenersRespons
 deleteLoadBalancerListenersResponse
     :: Int -- ^ 'dlblrsResponseStatus'
     -> DeleteLoadBalancerListenersResponse
-deleteLoadBalancerListenersResponse pResponseStatus_ =
-  DeleteLoadBalancerListenersResponse'
-    {_dlblrsResponseStatus = pResponseStatus_}
-
+deleteLoadBalancerListenersResponse pResponseStatus_
+  = DeleteLoadBalancerListenersResponse'{_dlblrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 dlblrsResponseStatus :: Lens' DeleteLoadBalancerListenersResponse Int

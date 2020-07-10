@@ -14,11 +14,11 @@
 module Test.AWS.Gen.DeviceFarm where
 
 import Data.Proxy
-import Network.AWS.DeviceFarm
-import Test.AWS.DeviceFarm.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.DeviceFarm
+import Test.AWS.DeviceFarm.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -55,17 +55,41 @@ import Test.Tasty
 --         , requestListArtifacts $
 --             listArtifacts
 --
+--         , requestListTestGridSessionActions $
+--             listTestGridSessionActions
+--
 --         , requestCreateUpload $
 --             createUpload
 --
 --         , requestGetDeviceInstance $
 --             getDeviceInstance
 --
+--         , requestStopJob $
+--             stopJob
+--
 --         , requestDeleteRemoteAccessSession $
 --             deleteRemoteAccessSession
 --
+--         , requestListTestGridSessionArtifacts $
+--             listTestGridSessionArtifacts
+--
+--         , requestListTestGridProjects $
+--             listTestGridProjects
+--
 --         , requestDeleteUpload $
 --             deleteUpload
+--
+--         , requestUpdateUpload $
+--             updateUpload
+--
+--         , requestDeleteTestGridProject $
+--             deleteTestGridProject
+--
+--         , requestUpdateTestGridProject $
+--             updateTestGridProject
+--
+--         , requestListTagsForResource $
+--             listTagsForResource
 --
 --         , requestGetDevicePool $
 --             getDevicePool
@@ -121,6 +145,9 @@ import Test.Tasty
 --         , requestListJobs $
 --             listJobs
 --
+--         , requestGetTestGridSession $
+--             getTestGridSession
+--
 --         , requestGetVPCEConfiguration $
 --             getVPCEConfiguration
 --
@@ -151,6 +178,9 @@ import Test.Tasty
 --         , requestScheduleRun $
 --             scheduleRun
 --
+--         , requestCreateTestGridProject $
+--             createTestGridProject
+--
 --         , requestGetRun $
 --             getRun
 --
@@ -178,8 +208,14 @@ import Test.Tasty
 --         , requestListUploads $
 --             listUploads
 --
+--         , requestGetTestGridProject $
+--             getTestGridProject
+--
 --         , requestGetSuite $
 --             getSuite
+--
+--         , requestTagResource $
+--             tagResource
 --
 --         , requestGetRemoteAccessSession $
 --             getRemoteAccessSession
@@ -192,6 +228,9 @@ import Test.Tasty
 --
 --         , requestListInstanceProfiles $
 --             listInstanceProfiles
+--
+--         , requestUntagResource $
+--             untagResource
 --
 --         , requestGetProject $
 --             getProject
@@ -210,6 +249,12 @@ import Test.Tasty
 --
 --         , requestCreateProject $
 --             createProject
+--
+--         , requestListTestGridSessions $
+--             listTestGridSessions
+--
+--         , requestCreateTestGridURL $
+--             createTestGridURL
 --
 --         , requestListOfferings $
 --             listOfferings
@@ -244,17 +289,41 @@ import Test.Tasty
 --         , responseListArtifacts $
 --             listArtifactsResponse
 --
+--         , responseListTestGridSessionActions $
+--             listTestGridSessionActionsResponse
+--
 --         , responseCreateUpload $
 --             createUploadResponse
 --
 --         , responseGetDeviceInstance $
 --             getDeviceInstanceResponse
 --
+--         , responseStopJob $
+--             stopJobResponse
+--
 --         , responseDeleteRemoteAccessSession $
 --             deleteRemoteAccessSessionResponse
 --
+--         , responseListTestGridSessionArtifacts $
+--             listTestGridSessionArtifactsResponse
+--
+--         , responseListTestGridProjects $
+--             listTestGridProjectsResponse
+--
 --         , responseDeleteUpload $
 --             deleteUploadResponse
+--
+--         , responseUpdateUpload $
+--             updateUploadResponse
+--
+--         , responseDeleteTestGridProject $
+--             deleteTestGridProjectResponse
+--
+--         , responseUpdateTestGridProject $
+--             updateTestGridProjectResponse
+--
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
 --
 --         , responseGetDevicePool $
 --             getDevicePoolResponse
@@ -310,6 +379,9 @@ import Test.Tasty
 --         , responseListJobs $
 --             listJobsResponse
 --
+--         , responseGetTestGridSession $
+--             getTestGridSessionResponse
+--
 --         , responseGetVPCEConfiguration $
 --             getVPCEConfigurationResponse
 --
@@ -340,6 +412,9 @@ import Test.Tasty
 --         , responseScheduleRun $
 --             scheduleRunResponse
 --
+--         , responseCreateTestGridProject $
+--             createTestGridProjectResponse
+--
 --         , responseGetRun $
 --             getRunResponse
 --
@@ -367,8 +442,14 @@ import Test.Tasty
 --         , responseListUploads $
 --             listUploadsResponse
 --
+--         , responseGetTestGridProject $
+--             getTestGridProjectResponse
+--
 --         , responseGetSuite $
 --             getSuiteResponse
+--
+--         , responseTagResource $
+--             tagResourceResponse
 --
 --         , responseGetRemoteAccessSession $
 --             getRemoteAccessSessionResponse
@@ -381,6 +462,9 @@ import Test.Tasty
 --
 --         , responseListInstanceProfiles $
 --             listInstanceProfilesResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
 --
 --         , responseGetProject $
 --             getProjectResponse
@@ -399,6 +483,12 @@ import Test.Tasty
 --
 --         , responseCreateProject $
 --             createProjectResponse
+--
+--         , responseListTestGridSessions $
+--             listTestGridSessionsResponse
+--
+--         , responseCreateTestGridURL $
+--             createTestGridURLResponse
 --
 --         , responseListOfferings $
 --             listOfferingsResponse
@@ -453,6 +543,11 @@ requestListArtifacts = req
     "ListArtifacts"
     "fixture/ListArtifacts.yaml"
 
+requestListTestGridSessionActions :: ListTestGridSessionActions -> TestTree
+requestListTestGridSessionActions = req
+    "ListTestGridSessionActions"
+    "fixture/ListTestGridSessionActions.yaml"
+
 requestCreateUpload :: CreateUpload -> TestTree
 requestCreateUpload = req
     "CreateUpload"
@@ -463,15 +558,50 @@ requestGetDeviceInstance = req
     "GetDeviceInstance"
     "fixture/GetDeviceInstance.yaml"
 
+requestStopJob :: StopJob -> TestTree
+requestStopJob = req
+    "StopJob"
+    "fixture/StopJob.yaml"
+
 requestDeleteRemoteAccessSession :: DeleteRemoteAccessSession -> TestTree
 requestDeleteRemoteAccessSession = req
     "DeleteRemoteAccessSession"
     "fixture/DeleteRemoteAccessSession.yaml"
 
+requestListTestGridSessionArtifacts :: ListTestGridSessionArtifacts -> TestTree
+requestListTestGridSessionArtifacts = req
+    "ListTestGridSessionArtifacts"
+    "fixture/ListTestGridSessionArtifacts.yaml"
+
+requestListTestGridProjects :: ListTestGridProjects -> TestTree
+requestListTestGridProjects = req
+    "ListTestGridProjects"
+    "fixture/ListTestGridProjects.yaml"
+
 requestDeleteUpload :: DeleteUpload -> TestTree
 requestDeleteUpload = req
     "DeleteUpload"
     "fixture/DeleteUpload.yaml"
+
+requestUpdateUpload :: UpdateUpload -> TestTree
+requestUpdateUpload = req
+    "UpdateUpload"
+    "fixture/UpdateUpload.yaml"
+
+requestDeleteTestGridProject :: DeleteTestGridProject -> TestTree
+requestDeleteTestGridProject = req
+    "DeleteTestGridProject"
+    "fixture/DeleteTestGridProject.yaml"
+
+requestUpdateTestGridProject :: UpdateTestGridProject -> TestTree
+requestUpdateTestGridProject = req
+    "UpdateTestGridProject"
+    "fixture/UpdateTestGridProject.yaml"
+
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
 
 requestGetDevicePool :: GetDevicePool -> TestTree
 requestGetDevicePool = req
@@ -563,6 +693,11 @@ requestListJobs = req
     "ListJobs"
     "fixture/ListJobs.yaml"
 
+requestGetTestGridSession :: GetTestGridSession -> TestTree
+requestGetTestGridSession = req
+    "GetTestGridSession"
+    "fixture/GetTestGridSession.yaml"
+
 requestGetVPCEConfiguration :: GetVPCEConfiguration -> TestTree
 requestGetVPCEConfiguration = req
     "GetVPCEConfiguration"
@@ -613,6 +748,11 @@ requestScheduleRun = req
     "ScheduleRun"
     "fixture/ScheduleRun.yaml"
 
+requestCreateTestGridProject :: CreateTestGridProject -> TestTree
+requestCreateTestGridProject = req
+    "CreateTestGridProject"
+    "fixture/CreateTestGridProject.yaml"
+
 requestGetRun :: GetRun -> TestTree
 requestGetRun = req
     "GetRun"
@@ -658,10 +798,20 @@ requestListUploads = req
     "ListUploads"
     "fixture/ListUploads.yaml"
 
+requestGetTestGridProject :: GetTestGridProject -> TestTree
+requestGetTestGridProject = req
+    "GetTestGridProject"
+    "fixture/GetTestGridProject.yaml"
+
 requestGetSuite :: GetSuite -> TestTree
 requestGetSuite = req
     "GetSuite"
     "fixture/GetSuite.yaml"
+
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
 
 requestGetRemoteAccessSession :: GetRemoteAccessSession -> TestTree
 requestGetRemoteAccessSession = req
@@ -682,6 +832,11 @@ requestListInstanceProfiles :: ListInstanceProfiles -> TestTree
 requestListInstanceProfiles = req
     "ListInstanceProfiles"
     "fixture/ListInstanceProfiles.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
 
 requestGetProject :: GetProject -> TestTree
 requestGetProject = req
@@ -712,6 +867,16 @@ requestCreateProject :: CreateProject -> TestTree
 requestCreateProject = req
     "CreateProject"
     "fixture/CreateProject.yaml"
+
+requestListTestGridSessions :: ListTestGridSessions -> TestTree
+requestListTestGridSessions = req
+    "ListTestGridSessions"
+    "fixture/ListTestGridSessions.yaml"
+
+requestCreateTestGridURL :: CreateTestGridURL -> TestTree
+requestCreateTestGridURL = req
+    "CreateTestGridURL"
+    "fixture/CreateTestGridURL.yaml"
 
 requestListOfferings :: ListOfferings -> TestTree
 requestListOfferings = req
@@ -783,6 +948,13 @@ responseListArtifacts = res
     deviceFarm
     (Proxy :: Proxy ListArtifacts)
 
+responseListTestGridSessionActions :: ListTestGridSessionActionsResponse -> TestTree
+responseListTestGridSessionActions = res
+    "ListTestGridSessionActionsResponse"
+    "fixture/ListTestGridSessionActionsResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy ListTestGridSessionActions)
+
 responseCreateUpload :: CreateUploadResponse -> TestTree
 responseCreateUpload = res
     "CreateUploadResponse"
@@ -797,6 +969,13 @@ responseGetDeviceInstance = res
     deviceFarm
     (Proxy :: Proxy GetDeviceInstance)
 
+responseStopJob :: StopJobResponse -> TestTree
+responseStopJob = res
+    "StopJobResponse"
+    "fixture/StopJobResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy StopJob)
+
 responseDeleteRemoteAccessSession :: DeleteRemoteAccessSessionResponse -> TestTree
 responseDeleteRemoteAccessSession = res
     "DeleteRemoteAccessSessionResponse"
@@ -804,12 +983,54 @@ responseDeleteRemoteAccessSession = res
     deviceFarm
     (Proxy :: Proxy DeleteRemoteAccessSession)
 
+responseListTestGridSessionArtifacts :: ListTestGridSessionArtifactsResponse -> TestTree
+responseListTestGridSessionArtifacts = res
+    "ListTestGridSessionArtifactsResponse"
+    "fixture/ListTestGridSessionArtifactsResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy ListTestGridSessionArtifacts)
+
+responseListTestGridProjects :: ListTestGridProjectsResponse -> TestTree
+responseListTestGridProjects = res
+    "ListTestGridProjectsResponse"
+    "fixture/ListTestGridProjectsResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy ListTestGridProjects)
+
 responseDeleteUpload :: DeleteUploadResponse -> TestTree
 responseDeleteUpload = res
     "DeleteUploadResponse"
     "fixture/DeleteUploadResponse.proto"
     deviceFarm
     (Proxy :: Proxy DeleteUpload)
+
+responseUpdateUpload :: UpdateUploadResponse -> TestTree
+responseUpdateUpload = res
+    "UpdateUploadResponse"
+    "fixture/UpdateUploadResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy UpdateUpload)
+
+responseDeleteTestGridProject :: DeleteTestGridProjectResponse -> TestTree
+responseDeleteTestGridProject = res
+    "DeleteTestGridProjectResponse"
+    "fixture/DeleteTestGridProjectResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy DeleteTestGridProject)
+
+responseUpdateTestGridProject :: UpdateTestGridProjectResponse -> TestTree
+responseUpdateTestGridProject = res
+    "UpdateTestGridProjectResponse"
+    "fixture/UpdateTestGridProjectResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy UpdateTestGridProject)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy ListTagsForResource)
 
 responseGetDevicePool :: GetDevicePoolResponse -> TestTree
 responseGetDevicePool = res
@@ -937,6 +1158,13 @@ responseListJobs = res
     deviceFarm
     (Proxy :: Proxy ListJobs)
 
+responseGetTestGridSession :: GetTestGridSessionResponse -> TestTree
+responseGetTestGridSession = res
+    "GetTestGridSessionResponse"
+    "fixture/GetTestGridSessionResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy GetTestGridSession)
+
 responseGetVPCEConfiguration :: GetVPCEConfigurationResponse -> TestTree
 responseGetVPCEConfiguration = res
     "GetVPCEConfigurationResponse"
@@ -1007,6 +1235,13 @@ responseScheduleRun = res
     deviceFarm
     (Proxy :: Proxy ScheduleRun)
 
+responseCreateTestGridProject :: CreateTestGridProjectResponse -> TestTree
+responseCreateTestGridProject = res
+    "CreateTestGridProjectResponse"
+    "fixture/CreateTestGridProjectResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy CreateTestGridProject)
+
 responseGetRun :: GetRunResponse -> TestTree
 responseGetRun = res
     "GetRunResponse"
@@ -1070,12 +1305,26 @@ responseListUploads = res
     deviceFarm
     (Proxy :: Proxy ListUploads)
 
+responseGetTestGridProject :: GetTestGridProjectResponse -> TestTree
+responseGetTestGridProject = res
+    "GetTestGridProjectResponse"
+    "fixture/GetTestGridProjectResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy GetTestGridProject)
+
 responseGetSuite :: GetSuiteResponse -> TestTree
 responseGetSuite = res
     "GetSuiteResponse"
     "fixture/GetSuiteResponse.proto"
     deviceFarm
     (Proxy :: Proxy GetSuite)
+
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy TagResource)
 
 responseGetRemoteAccessSession :: GetRemoteAccessSessionResponse -> TestTree
 responseGetRemoteAccessSession = res
@@ -1104,6 +1353,13 @@ responseListInstanceProfiles = res
     "fixture/ListInstanceProfilesResponse.proto"
     deviceFarm
     (Proxy :: Proxy ListInstanceProfiles)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy UntagResource)
 
 responseGetProject :: GetProjectResponse -> TestTree
 responseGetProject = res
@@ -1146,6 +1402,20 @@ responseCreateProject = res
     "fixture/CreateProjectResponse.proto"
     deviceFarm
     (Proxy :: Proxy CreateProject)
+
+responseListTestGridSessions :: ListTestGridSessionsResponse -> TestTree
+responseListTestGridSessions = res
+    "ListTestGridSessionsResponse"
+    "fixture/ListTestGridSessionsResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy ListTestGridSessions)
+
+responseCreateTestGridURL :: CreateTestGridURLResponse -> TestTree
+responseCreateTestGridURL = res
+    "CreateTestGridURLResponse"
+    "fixture/CreateTestGridURLResponse.proto"
+    deviceFarm
+    (Proxy :: Proxy CreateTestGridURL)
 
 responseListOfferings :: ListOfferingsResponse -> TestTree
 responseListOfferings = res

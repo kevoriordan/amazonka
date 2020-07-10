@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a named query.
+-- Deletes the named query if you have access to the workgroup in which the query was saved.
 --
 --
 -- For code samples using the AWS SDK for Java, see <http://docs.aws.amazon.com/athena/latest/ug/code-samples.html Examples and Code Samples> in the /Amazon Athena User Guide/ .
@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteNamedQuery' smart constructor.
-newtype DeleteNamedQuery = DeleteNamedQuery'
-  { _dnqNamedQueryId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteNamedQuery = DeleteNamedQuery'{_dnqNamedQueryId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteNamedQuery' with the minimum fields required to make a request.
 --
@@ -59,9 +58,9 @@ newtype DeleteNamedQuery = DeleteNamedQuery'
 deleteNamedQuery
     :: Text -- ^ 'dnqNamedQueryId'
     -> DeleteNamedQuery
-deleteNamedQuery pNamedQueryId_ =
-  DeleteNamedQuery' {_dnqNamedQueryId = pNamedQueryId_}
-
+deleteNamedQuery pNamedQueryId_
+  = DeleteNamedQuery'{_dnqNamedQueryId =
+                        pNamedQueryId_}
 
 -- | The unique ID of the query to delete.
 dnqNamedQueryId :: Lens' DeleteNamedQuery Text
@@ -101,10 +100,10 @@ instance ToQuery DeleteNamedQuery where
         toQuery = const mempty
 
 -- | /See:/ 'deleteNamedQueryResponse' smart constructor.
-newtype DeleteNamedQueryResponse = DeleteNamedQueryResponse'
-  { _dnqrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteNamedQueryResponse = DeleteNamedQueryResponse'{_dnqrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteNamedQueryResponse' with the minimum fields required to make a request.
 --
@@ -114,9 +113,9 @@ newtype DeleteNamedQueryResponse = DeleteNamedQueryResponse'
 deleteNamedQueryResponse
     :: Int -- ^ 'dnqrsResponseStatus'
     -> DeleteNamedQueryResponse
-deleteNamedQueryResponse pResponseStatus_ =
-  DeleteNamedQueryResponse' {_dnqrsResponseStatus = pResponseStatus_}
-
+deleteNamedQueryResponse pResponseStatus_
+  = DeleteNamedQueryResponse'{_dnqrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 dnqrsResponseStatus :: Lens' DeleteNamedQueryResponse Int

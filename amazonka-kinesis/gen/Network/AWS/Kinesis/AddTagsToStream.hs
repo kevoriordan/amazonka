@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds or updates tags for the specified Kinesis data stream. Each stream can have up to 10 tags.
+-- Adds or updates tags for the specified Kinesis data stream. Each time you invoke this operation, you can specify up to 10 tags. If you want to add more than 10 tags to your stream, you can invoke this operation multiple times. In total, each stream can have up to 50 tags.
 --
 --
 -- If tags have already been assigned to the stream, @AddTagsToStream@ overwrites any existing tags that correspond to the specified tag keys.
@@ -51,11 +51,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'addTagsToStream' smart constructor.
-data AddTagsToStream = AddTagsToStream'
-  { _attsStreamName :: !Text
-  , _attsTags       :: !(Map Text Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToStream = AddTagsToStream'{_attsStreamName
+                                        :: !Text,
+                                        _attsTags :: !(Map Text Text)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddTagsToStream' with the minimum fields required to make a request.
 --
@@ -63,19 +62,19 @@ data AddTagsToStream = AddTagsToStream'
 --
 -- * 'attsStreamName' - The name of the stream.
 --
--- * 'attsTags' - The set of key-value pairs to use to create the tags.
+-- * 'attsTags' - A set of up to 10 key-value pairs to use to create the tags.
 addTagsToStream
     :: Text -- ^ 'attsStreamName'
     -> AddTagsToStream
-addTagsToStream pStreamName_ =
-  AddTagsToStream' {_attsStreamName = pStreamName_, _attsTags = mempty}
-
+addTagsToStream pStreamName_
+  = AddTagsToStream'{_attsStreamName = pStreamName_,
+                     _attsTags = mempty}
 
 -- | The name of the stream.
 attsStreamName :: Lens' AddTagsToStream Text
 attsStreamName = lens _attsStreamName (\ s a -> s{_attsStreamName = a})
 
--- | The set of key-value pairs to use to create the tags.
+-- | A set of up to 10 key-value pairs to use to create the tags.
 attsTags :: Lens' AddTagsToStream (HashMap Text Text)
 attsTags = lens _attsTags (\ s a -> s{_attsTags = a}) . _Map
 
@@ -111,16 +110,14 @@ instance ToQuery AddTagsToStream where
         toQuery = const mempty
 
 -- | /See:/ 'addTagsToStreamResponse' smart constructor.
-data AddTagsToStreamResponse =
-  AddTagsToStreamResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddTagsToStreamResponse = AddTagsToStreamResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AddTagsToStreamResponse' with the minimum fields required to make a request.
 --
 addTagsToStreamResponse
     :: AddTagsToStreamResponse
 addTagsToStreamResponse = AddTagsToStreamResponse'
-
 
 instance NFData AddTagsToStreamResponse where

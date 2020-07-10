@@ -46,16 +46,19 @@ import Network.AWS.Response
 import Network.AWS.Route53.Types
 import Network.AWS.Route53.Types.Product
 
--- | A complex type that contains information about the request to remove authorization to associate a VPC that was created by one AWS account with a hosted zone that was created with a different AWS account.
+-- | A complex type that contains information about the request to remove authorization to associate a VPC that was created by one AWS account with a hosted zone that was created with a different AWS account. 
 --
 --
 --
 -- /See:/ 'deleteVPCAssociationAuthorization' smart constructor.
-data DeleteVPCAssociationAuthorization = DeleteVPCAssociationAuthorization'
-  { _dvaaHostedZoneId :: !ResourceId
-  , _dvaaVPC          :: !VPC
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPCAssociationAuthorization = DeleteVPCAssociationAuthorization'{_dvaaHostedZoneId
+                                                                            ::
+                                                                            !ResourceId,
+                                                                            _dvaaVPC
+                                                                            ::
+                                                                            !VPC}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteVPCAssociationAuthorization' with the minimum fields required to make a request.
 --
@@ -68,10 +71,11 @@ deleteVPCAssociationAuthorization
     :: ResourceId -- ^ 'dvaaHostedZoneId'
     -> VPC -- ^ 'dvaaVPC'
     -> DeleteVPCAssociationAuthorization
-deleteVPCAssociationAuthorization pHostedZoneId_ pVPC_ =
-  DeleteVPCAssociationAuthorization'
-    {_dvaaHostedZoneId = pHostedZoneId_, _dvaaVPC = pVPC_}
-
+deleteVPCAssociationAuthorization pHostedZoneId_
+  pVPC_
+  = DeleteVPCAssociationAuthorization'{_dvaaHostedZoneId
+                                         = pHostedZoneId_,
+                                       _dvaaVPC = pVPC_}
 
 -- | When removing authorization to associate a VPC that was created by one AWS account with a hosted zone that was created with a different AWS account, the ID of the hosted zone.
 dvaaHostedZoneId :: Lens' DeleteVPCAssociationAuthorization ResourceId
@@ -129,10 +133,12 @@ instance ToXML DeleteVPCAssociationAuthorization
 --
 --
 -- /See:/ 'deleteVPCAssociationAuthorizationResponse' smart constructor.
-newtype DeleteVPCAssociationAuthorizationResponse = DeleteVPCAssociationAuthorizationResponse'
-  { _dvaarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteVPCAssociationAuthorizationResponse = DeleteVPCAssociationAuthorizationResponse'{_dvaarsResponseStatus
+                                                                                               ::
+                                                                                               Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'DeleteVPCAssociationAuthorizationResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +148,10 @@ newtype DeleteVPCAssociationAuthorizationResponse = DeleteVPCAssociationAuthoriz
 deleteVPCAssociationAuthorizationResponse
     :: Int -- ^ 'dvaarsResponseStatus'
     -> DeleteVPCAssociationAuthorizationResponse
-deleteVPCAssociationAuthorizationResponse pResponseStatus_ =
-  DeleteVPCAssociationAuthorizationResponse'
-    {_dvaarsResponseStatus = pResponseStatus_}
-
+deleteVPCAssociationAuthorizationResponse
+  pResponseStatus_
+  = DeleteVPCAssociationAuthorizationResponse'{_dvaarsResponseStatus
+                                                 = pResponseStatus_}
 
 -- | -- | The response status code.
 dvaarsResponseStatus :: Lens' DeleteVPCAssociationAuthorizationResponse Int

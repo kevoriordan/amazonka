@@ -50,11 +50,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateAvailabilityOptions' smart constructor.
-data UpdateAvailabilityOptions = UpdateAvailabilityOptions'
-  { _uaoDomainName :: !Text
-  , _uaoMultiAZ    :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAvailabilityOptions = UpdateAvailabilityOptions'{_uaoDomainName
+                                                            :: !Text,
+                                                            _uaoMultiAZ ::
+                                                            !Bool}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateAvailabilityOptions' with the minimum fields required to make a request.
 --
@@ -62,21 +63,21 @@ data UpdateAvailabilityOptions = UpdateAvailabilityOptions'
 --
 -- * 'uaoDomainName' - Undocumented member.
 --
--- * 'uaoMultiAZ' - You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to @false@ .
+-- * 'uaoMultiAZ' - You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to @false@ . 
 updateAvailabilityOptions
     :: Text -- ^ 'uaoDomainName'
     -> Bool -- ^ 'uaoMultiAZ'
     -> UpdateAvailabilityOptions
-updateAvailabilityOptions pDomainName_ pMultiAZ_ =
-  UpdateAvailabilityOptions'
-    {_uaoDomainName = pDomainName_, _uaoMultiAZ = pMultiAZ_}
-
+updateAvailabilityOptions pDomainName_ pMultiAZ_
+  = UpdateAvailabilityOptions'{_uaoDomainName =
+                                 pDomainName_,
+                               _uaoMultiAZ = pMultiAZ_}
 
 -- | Undocumented member.
 uaoDomainName :: Lens' UpdateAvailabilityOptions Text
 uaoDomainName = lens _uaoDomainName (\ s a -> s{_uaoDomainName = a})
 
--- | You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to @false@ .
+-- | You expand an existing search domain to a second Availability Zone by setting the Multi-AZ option to true. Similarly, you can turn off the Multi-AZ option to downgrade the domain to a single Availability Zone by setting the Multi-AZ option to @false@ . 
 uaoMultiAZ :: Lens' UpdateAvailabilityOptions Bool
 uaoMultiAZ = lens _uaoMultiAZ (\ s a -> s{_uaoMultiAZ = a})
 
@@ -110,35 +111,37 @@ instance ToQuery UpdateAvailabilityOptions where
                "DomainName" =: _uaoDomainName,
                "MultiAZ" =: _uaoMultiAZ]
 
--- | The result of a @UpdateAvailabilityOptions@ request. Contains the status of the domain's availability options.
+-- | The result of a @UpdateAvailabilityOptions@ request. Contains the status of the domain's availability options. 
 --
 --
 --
 -- /See:/ 'updateAvailabilityOptionsResponse' smart constructor.
-data UpdateAvailabilityOptionsResponse = UpdateAvailabilityOptionsResponse'
-  { _uaorsAvailabilityOptions :: !(Maybe AvailabilityOptionsStatus)
-  , _uaorsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAvailabilityOptionsResponse = UpdateAvailabilityOptionsResponse'{_uaorsAvailabilityOptions
+                                                                            ::
+                                                                            !(Maybe
+                                                                                AvailabilityOptionsStatus),
+                                                                            _uaorsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'UpdateAvailabilityOptionsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uaorsAvailabilityOptions' - The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain.
+-- * 'uaorsAvailabilityOptions' - The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. 
 --
 -- * 'uaorsResponseStatus' - -- | The response status code.
 updateAvailabilityOptionsResponse
     :: Int -- ^ 'uaorsResponseStatus'
     -> UpdateAvailabilityOptionsResponse
-updateAvailabilityOptionsResponse pResponseStatus_ =
-  UpdateAvailabilityOptionsResponse'
-    { _uaorsAvailabilityOptions = Nothing
-    , _uaorsResponseStatus = pResponseStatus_
-    }
+updateAvailabilityOptionsResponse pResponseStatus_
+  = UpdateAvailabilityOptionsResponse'{_uaorsAvailabilityOptions
+                                         = Nothing,
+                                       _uaorsResponseStatus = pResponseStatus_}
 
-
--- | The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain.
+-- | The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. 
 uaorsAvailabilityOptions :: Lens' UpdateAvailabilityOptionsResponse (Maybe AvailabilityOptionsStatus)
 uaorsAvailabilityOptions = lens _uaorsAvailabilityOptions (\ s a -> s{_uaorsAvailabilityOptions = a})
 

@@ -36,6 +36,7 @@ module Network.AWS.MediaLive.DescribeInputSecurityGroup
     , desrsInputs
     , desrsId
     , desrsWhitelistRules
+    , desrsTags
     , desrsResponseStatus
     ) where
 
@@ -49,10 +50,10 @@ import Network.AWS.Response
 -- | Placeholder documentation for DescribeInputSecurityGroupRequest
 --
 -- /See:/ 'describeInputSecurityGroup' smart constructor.
-newtype DescribeInputSecurityGroup = DescribeInputSecurityGroup'
-  { _disgInputSecurityGroupId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeInputSecurityGroup = DescribeInputSecurityGroup'{_disgInputSecurityGroupId
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeInputSecurityGroup' with the minimum fields required to make a request.
 --
@@ -62,10 +63,9 @@ newtype DescribeInputSecurityGroup = DescribeInputSecurityGroup'
 describeInputSecurityGroup
     :: Text -- ^ 'disgInputSecurityGroupId'
     -> DescribeInputSecurityGroup
-describeInputSecurityGroup pInputSecurityGroupId_ =
-  DescribeInputSecurityGroup'
-    {_disgInputSecurityGroupId = pInputSecurityGroupId_}
-
+describeInputSecurityGroup pInputSecurityGroupId_
+  = DescribeInputSecurityGroup'{_disgInputSecurityGroupId
+                                  = pInputSecurityGroupId_}
 
 -- | The id of the Input Security Group to describe
 disgInputSecurityGroupId :: Lens' DescribeInputSecurityGroup Text
@@ -83,6 +83,7 @@ instance AWSRequest DescribeInputSecurityGroup where
                      (x .?> "inputs" .!@ mempty)
                      <*> (x .?> "id")
                      <*> (x .?> "whitelistRules" .!@ mempty)
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable DescribeInputSecurityGroup where
@@ -108,15 +109,37 @@ instance ToQuery DescribeInputSecurityGroup where
 -- | Placeholder documentation for DescribeInputSecurityGroupResponse
 --
 -- /See:/ 'describeInputSecurityGroupResponse' smart constructor.
-data DescribeInputSecurityGroupResponse = DescribeInputSecurityGroupResponse'
-  { _desrsState          :: !(Maybe InputSecurityGroupState)
-  , _desrsARN            :: !(Maybe Text)
-  , _desrsInputs         :: !(Maybe [Text])
-  , _desrsId             :: !(Maybe Text)
-  , _desrsWhitelistRules :: !(Maybe [InputWhitelistRule])
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInputSecurityGroupResponse = DescribeInputSecurityGroupResponse'{_desrsState
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  InputSecurityGroupState),
+                                                                              _desrsARN
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _desrsInputs
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [Text]),
+                                                                              _desrsId
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _desrsWhitelistRules
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  [InputWhitelistRule]),
+                                                                              _desrsTags
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  (Map
+                                                                                     Text
+                                                                                     Text)),
+                                                                              _desrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DescribeInputSecurityGroupResponse' with the minimum fields required to make a request.
 --
@@ -132,20 +155,21 @@ data DescribeInputSecurityGroupResponse = DescribeInputSecurityGroupResponse'
 --
 -- * 'desrsWhitelistRules' - Whitelist rules and their sync status
 --
+-- * 'desrsTags' - A collection of key-value pairs.
+--
 -- * 'desrsResponseStatus' - -- | The response status code.
 describeInputSecurityGroupResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeInputSecurityGroupResponse
-describeInputSecurityGroupResponse pResponseStatus_ =
-  DescribeInputSecurityGroupResponse'
-    { _desrsState = Nothing
-    , _desrsARN = Nothing
-    , _desrsInputs = Nothing
-    , _desrsId = Nothing
-    , _desrsWhitelistRules = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
-
+describeInputSecurityGroupResponse pResponseStatus_
+  = DescribeInputSecurityGroupResponse'{_desrsState =
+                                          Nothing,
+                                        _desrsARN = Nothing,
+                                        _desrsInputs = Nothing,
+                                        _desrsId = Nothing,
+                                        _desrsWhitelistRules = Nothing,
+                                        _desrsTags = Nothing,
+                                        _desrsResponseStatus = pResponseStatus_}
 
 -- | The current state of the Input Security Group.
 desrsState :: Lens' DescribeInputSecurityGroupResponse (Maybe InputSecurityGroupState)
@@ -166,6 +190,10 @@ desrsId = lens _desrsId (\ s a -> s{_desrsId = a})
 -- | Whitelist rules and their sync status
 desrsWhitelistRules :: Lens' DescribeInputSecurityGroupResponse [InputWhitelistRule]
 desrsWhitelistRules = lens _desrsWhitelistRules (\ s a -> s{_desrsWhitelistRules = a}) . _Default . _Coerce
+
+-- | A collection of key-value pairs.
+desrsTags :: Lens' DescribeInputSecurityGroupResponse (HashMap Text Text)
+desrsTags = lens _desrsTags (\ s a -> s{_desrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 desrsResponseStatus :: Lens' DescribeInputSecurityGroupResponse Int

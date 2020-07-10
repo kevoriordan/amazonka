@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Modifies a task assigned to a Maintenance Window. You can't change the task type, but you can change the following values:
+-- Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:
 --
 --
 --     * TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.
@@ -86,29 +86,58 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'updateMaintenanceWindowTask' smart constructor.
-data UpdateMaintenanceWindowTask = UpdateMaintenanceWindowTask'
-  { _umwtServiceRoleARN :: !(Maybe Text)
-  , _umwtReplace :: !(Maybe Bool)
-  , _umwtTaskParameters :: !(Maybe (Sensitive (Map Text (Sensitive MaintenanceWindowTaskParameterValueExpression))))
-  , _umwtPriority :: !(Maybe Nat)
-  , _umwtTaskARN :: !(Maybe Text)
-  , _umwtMaxErrors :: !(Maybe Text)
-  , _umwtTaskInvocationParameters :: !(Maybe MaintenanceWindowTaskInvocationParameters)
-  , _umwtName :: !(Maybe Text)
-  , _umwtTargets :: !(Maybe [Target])
-  , _umwtLoggingInfo :: !(Maybe LoggingInfo)
-  , _umwtDescription :: !(Maybe (Sensitive Text))
-  , _umwtMaxConcurrency :: !(Maybe Text)
-  , _umwtWindowId :: !Text
-  , _umwtWindowTaskId :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateMaintenanceWindowTask = UpdateMaintenanceWindowTask'{_umwtServiceRoleARN
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _umwtReplace ::
+                                                                !(Maybe Bool),
+                                                                _umwtTaskParameters
+                                                                ::
+                                                                !(Maybe
+                                                                    (Sensitive
+                                                                       (Map Text
+                                                                          (Sensitive
+                                                                             MaintenanceWindowTaskParameterValueExpression)))),
+                                                                _umwtPriority ::
+                                                                !(Maybe Nat),
+                                                                _umwtTaskARN ::
+                                                                !(Maybe Text),
+                                                                _umwtMaxErrors
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _umwtTaskInvocationParameters
+                                                                ::
+                                                                !(Maybe
+                                                                    MaintenanceWindowTaskInvocationParameters),
+                                                                _umwtName ::
+                                                                !(Maybe Text),
+                                                                _umwtTargets ::
+                                                                !(Maybe
+                                                                    [Target]),
+                                                                _umwtLoggingInfo
+                                                                ::
+                                                                !(Maybe
+                                                                    LoggingInfo),
+                                                                _umwtDescription
+                                                                ::
+                                                                !(Maybe
+                                                                    (Sensitive
+                                                                       Text)),
+                                                                _umwtMaxConcurrency
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _umwtWindowId ::
+                                                                !Text,
+                                                                _umwtWindowTaskId
+                                                                :: !Text}
+                                     deriving (Eq, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateMaintenanceWindowTask' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'umwtServiceRoleARN' - The IAM service role ARN to modify. The system assumes this role during task execution.
+-- * 'umwtServiceRoleARN' - The ARN of the IAM service role for Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run @RegisterTaskWithMaintenanceWindow@ . For more information, see the following topics in the in the /AWS Systems Manager User Guide/ :     * <https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions Using service-linked roles for Systems Manager>      * <https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role Should I use a service-linked role or a custom service role to run maintenance window tasks? > 
 --
 -- * 'umwtReplace' - If True, then all fields that are required by the RegisterTaskWithMaintenanceWndow action are also required for this API request. Optional fields that are not specified are set to null.
 --
@@ -124,7 +153,7 @@ data UpdateMaintenanceWindowTask = UpdateMaintenanceWindowTask'
 --
 -- * 'umwtName' - The new task name to specify.
 --
--- * 'umwtTargets' - The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value.
+-- * 'umwtTargets' - The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. 
 --
 -- * 'umwtLoggingInfo' - The new logging location in Amazon S3 to specify.
 --
@@ -132,33 +161,30 @@ data UpdateMaintenanceWindowTask = UpdateMaintenanceWindowTask'
 --
 -- * 'umwtMaxConcurrency' - The new @MaxConcurrency@ value you want to specify. @MaxConcurrency@ is the number of targets that are allowed to run this task in parallel.
 --
--- * 'umwtWindowId' - The Maintenance Window ID that contains the task to modify.
+-- * 'umwtWindowId' - The maintenance window ID that contains the task to modify.
 --
 -- * 'umwtWindowTaskId' - The task ID to modify.
 updateMaintenanceWindowTask
     :: Text -- ^ 'umwtWindowId'
     -> Text -- ^ 'umwtWindowTaskId'
     -> UpdateMaintenanceWindowTask
-updateMaintenanceWindowTask pWindowId_ pWindowTaskId_ =
-  UpdateMaintenanceWindowTask'
-    { _umwtServiceRoleARN = Nothing
-    , _umwtReplace = Nothing
-    , _umwtTaskParameters = Nothing
-    , _umwtPriority = Nothing
-    , _umwtTaskARN = Nothing
-    , _umwtMaxErrors = Nothing
-    , _umwtTaskInvocationParameters = Nothing
-    , _umwtName = Nothing
-    , _umwtTargets = Nothing
-    , _umwtLoggingInfo = Nothing
-    , _umwtDescription = Nothing
-    , _umwtMaxConcurrency = Nothing
-    , _umwtWindowId = pWindowId_
-    , _umwtWindowTaskId = pWindowTaskId_
-    }
+updateMaintenanceWindowTask pWindowId_ pWindowTaskId_
+  = UpdateMaintenanceWindowTask'{_umwtServiceRoleARN =
+                                   Nothing,
+                                 _umwtReplace = Nothing,
+                                 _umwtTaskParameters = Nothing,
+                                 _umwtPriority = Nothing,
+                                 _umwtTaskARN = Nothing,
+                                 _umwtMaxErrors = Nothing,
+                                 _umwtTaskInvocationParameters = Nothing,
+                                 _umwtName = Nothing, _umwtTargets = Nothing,
+                                 _umwtLoggingInfo = Nothing,
+                                 _umwtDescription = Nothing,
+                                 _umwtMaxConcurrency = Nothing,
+                                 _umwtWindowId = pWindowId_,
+                                 _umwtWindowTaskId = pWindowTaskId_}
 
-
--- | The IAM service role ARN to modify. The system assumes this role during task execution.
+-- | The ARN of the IAM service role for Systems Manager to assume when running a maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created when you run @RegisterTaskWithMaintenanceWindow@ . For more information, see the following topics in the in the /AWS Systems Manager User Guide/ :     * <https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions Using service-linked roles for Systems Manager>      * <https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role Should I use a service-linked role or a custom service role to run maintenance window tasks? > 
 umwtServiceRoleARN :: Lens' UpdateMaintenanceWindowTask (Maybe Text)
 umwtServiceRoleARN = lens _umwtServiceRoleARN (\ s a -> s{_umwtServiceRoleARN = a})
 
@@ -190,7 +216,7 @@ umwtTaskInvocationParameters = lens _umwtTaskInvocationParameters (\ s a -> s{_u
 umwtName :: Lens' UpdateMaintenanceWindowTask (Maybe Text)
 umwtName = lens _umwtName (\ s a -> s{_umwtName = a})
 
--- | The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value.
+-- | The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. 
 umwtTargets :: Lens' UpdateMaintenanceWindowTask [Target]
 umwtTargets = lens _umwtTargets (\ s a -> s{_umwtTargets = a}) . _Default . _Coerce
 
@@ -206,7 +232,7 @@ umwtDescription = lens _umwtDescription (\ s a -> s{_umwtDescription = a}) . map
 umwtMaxConcurrency :: Lens' UpdateMaintenanceWindowTask (Maybe Text)
 umwtMaxConcurrency = lens _umwtMaxConcurrency (\ s a -> s{_umwtMaxConcurrency = a})
 
--- | The Maintenance Window ID that contains the task to modify.
+-- | The maintenance window ID that contains the task to modify.
 umwtWindowId :: Lens' UpdateMaintenanceWindowTask Text
 umwtWindowId = lens _umwtWindowId (\ s a -> s{_umwtWindowId = a})
 
@@ -277,31 +303,76 @@ instance ToQuery UpdateMaintenanceWindowTask where
         toQuery = const mempty
 
 -- | /See:/ 'updateMaintenanceWindowTaskResponse' smart constructor.
-data UpdateMaintenanceWindowTaskResponse = UpdateMaintenanceWindowTaskResponse'
-  { _umwtrsServiceRoleARN :: !(Maybe Text)
-  , _umwtrsWindowTaskId :: !(Maybe Text)
-  , _umwtrsTaskParameters :: !(Maybe (Sensitive (Map Text (Sensitive MaintenanceWindowTaskParameterValueExpression))))
-  , _umwtrsPriority :: !(Maybe Nat)
-  , _umwtrsTaskARN :: !(Maybe Text)
-  , _umwtrsMaxErrors :: !(Maybe Text)
-  , _umwtrsTaskInvocationParameters :: !(Maybe MaintenanceWindowTaskInvocationParameters)
-  , _umwtrsName :: !(Maybe Text)
-  , _umwtrsTargets :: !(Maybe [Target])
-  , _umwtrsLoggingInfo :: !(Maybe LoggingInfo)
-  , _umwtrsDescription :: !(Maybe (Sensitive Text))
-  , _umwtrsMaxConcurrency :: !(Maybe Text)
-  , _umwtrsWindowId :: !(Maybe Text)
-  , _umwtrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateMaintenanceWindowTaskResponse = UpdateMaintenanceWindowTaskResponse'{_umwtrsServiceRoleARN
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _umwtrsWindowTaskId
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _umwtrsTaskParameters
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    (Sensitive
+                                                                                       (Map
+                                                                                          Text
+                                                                                          (Sensitive
+                                                                                             MaintenanceWindowTaskParameterValueExpression)))),
+                                                                                _umwtrsPriority
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Nat),
+                                                                                _umwtrsTaskARN
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _umwtrsMaxErrors
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _umwtrsTaskInvocationParameters
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    MaintenanceWindowTaskInvocationParameters),
+                                                                                _umwtrsName
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _umwtrsTargets
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    [Target]),
+                                                                                _umwtrsLoggingInfo
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    LoggingInfo),
+                                                                                _umwtrsDescription
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    (Sensitive
+                                                                                       Text)),
+                                                                                _umwtrsMaxConcurrency
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _umwtrsWindowId
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _umwtrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Show, Data, Typeable,
+                                                       Generic)
 
 -- | Creates a value of 'UpdateMaintenanceWindowTaskResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'umwtrsServiceRoleARN' - The updated service role ARN value.
+-- * 'umwtrsServiceRoleARN' - The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 --
--- * 'umwtrsWindowTaskId' - The task ID of the Maintenance Window that was updated.
+-- * 'umwtrsWindowTaskId' - The task ID of the maintenance window that was updated.
 --
 -- * 'umwtrsTaskParameters' - The updated parameter values.
 --
@@ -323,36 +394,36 @@ data UpdateMaintenanceWindowTaskResponse = UpdateMaintenanceWindowTaskResponse'
 --
 -- * 'umwtrsMaxConcurrency' - The updated MaxConcurrency value.
 --
--- * 'umwtrsWindowId' - The ID of the Maintenance Window that was updated.
+-- * 'umwtrsWindowId' - The ID of the maintenance window that was updated.
 --
 -- * 'umwtrsResponseStatus' - -- | The response status code.
 updateMaintenanceWindowTaskResponse
     :: Int -- ^ 'umwtrsResponseStatus'
     -> UpdateMaintenanceWindowTaskResponse
-updateMaintenanceWindowTaskResponse pResponseStatus_ =
-  UpdateMaintenanceWindowTaskResponse'
-    { _umwtrsServiceRoleARN = Nothing
-    , _umwtrsWindowTaskId = Nothing
-    , _umwtrsTaskParameters = Nothing
-    , _umwtrsPriority = Nothing
-    , _umwtrsTaskARN = Nothing
-    , _umwtrsMaxErrors = Nothing
-    , _umwtrsTaskInvocationParameters = Nothing
-    , _umwtrsName = Nothing
-    , _umwtrsTargets = Nothing
-    , _umwtrsLoggingInfo = Nothing
-    , _umwtrsDescription = Nothing
-    , _umwtrsMaxConcurrency = Nothing
-    , _umwtrsWindowId = Nothing
-    , _umwtrsResponseStatus = pResponseStatus_
-    }
+updateMaintenanceWindowTaskResponse pResponseStatus_
+  = UpdateMaintenanceWindowTaskResponse'{_umwtrsServiceRoleARN
+                                           = Nothing,
+                                         _umwtrsWindowTaskId = Nothing,
+                                         _umwtrsTaskParameters = Nothing,
+                                         _umwtrsPriority = Nothing,
+                                         _umwtrsTaskARN = Nothing,
+                                         _umwtrsMaxErrors = Nothing,
+                                         _umwtrsTaskInvocationParameters =
+                                           Nothing,
+                                         _umwtrsName = Nothing,
+                                         _umwtrsTargets = Nothing,
+                                         _umwtrsLoggingInfo = Nothing,
+                                         _umwtrsDescription = Nothing,
+                                         _umwtrsMaxConcurrency = Nothing,
+                                         _umwtrsWindowId = Nothing,
+                                         _umwtrsResponseStatus =
+                                           pResponseStatus_}
 
-
--- | The updated service role ARN value.
+-- | The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 umwtrsServiceRoleARN :: Lens' UpdateMaintenanceWindowTaskResponse (Maybe Text)
 umwtrsServiceRoleARN = lens _umwtrsServiceRoleARN (\ s a -> s{_umwtrsServiceRoleARN = a})
 
--- | The task ID of the Maintenance Window that was updated.
+-- | The task ID of the maintenance window that was updated.
 umwtrsWindowTaskId :: Lens' UpdateMaintenanceWindowTaskResponse (Maybe Text)
 umwtrsWindowTaskId = lens _umwtrsWindowTaskId (\ s a -> s{_umwtrsWindowTaskId = a})
 
@@ -396,7 +467,7 @@ umwtrsDescription = lens _umwtrsDescription (\ s a -> s{_umwtrsDescription = a})
 umwtrsMaxConcurrency :: Lens' UpdateMaintenanceWindowTaskResponse (Maybe Text)
 umwtrsMaxConcurrency = lens _umwtrsMaxConcurrency (\ s a -> s{_umwtrsMaxConcurrency = a})
 
--- | The ID of the Maintenance Window that was updated.
+-- | The ID of the maintenance window that was updated.
 umwtrsWindowId :: Lens' UpdateMaintenanceWindowTaskResponse (Maybe Text)
 umwtrsWindowId = lens _umwtrsWindowId (\ s a -> s{_umwtrsWindowId = a})
 

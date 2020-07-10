@@ -47,11 +47,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'cancelUpdateStack' smart constructor.
-data CancelUpdateStack = CancelUpdateStack'
-  { _cusClientRequestToken :: !(Maybe Text)
-  , _cusStackName          :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelUpdateStack = CancelUpdateStack'{_cusClientRequestToken
+                                            :: !(Maybe Text),
+                                            _cusStackName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelUpdateStack' with the minimum fields required to make a request.
 --
@@ -63,10 +62,10 @@ data CancelUpdateStack = CancelUpdateStack'
 cancelUpdateStack
     :: Text -- ^ 'cusStackName'
     -> CancelUpdateStack
-cancelUpdateStack pStackName_ =
-  CancelUpdateStack'
-    {_cusClientRequestToken = Nothing, _cusStackName = pStackName_}
-
+cancelUpdateStack pStackName_
+  = CancelUpdateStack'{_cusClientRequestToken =
+                         Nothing,
+                       _cusStackName = pStackName_}
 
 -- | A unique identifier for this @CancelUpdateStack@ request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to cancel an update on a stack with the same name. You might retry @CancelUpdateStack@ requests to ensure that AWS CloudFormation successfully received them.
 cusClientRequestToken :: Lens' CancelUpdateStack (Maybe Text)
@@ -100,16 +99,15 @@ instance ToQuery CancelUpdateStack where
                "StackName" =: _cusStackName]
 
 -- | /See:/ 'cancelUpdateStackResponse' smart constructor.
-data CancelUpdateStackResponse =
-  CancelUpdateStackResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelUpdateStackResponse = CancelUpdateStackResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CancelUpdateStackResponse' with the minimum fields required to make a request.
 --
 cancelUpdateStackResponse
     :: CancelUpdateStackResponse
-cancelUpdateStackResponse = CancelUpdateStackResponse'
-
+cancelUpdateStackResponse
+  = CancelUpdateStackResponse'
 
 instance NFData CancelUpdateStackResponse where

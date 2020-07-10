@@ -27,14 +27,14 @@ module Network.AWS.Glue.GetCrawler
       getCrawler
     , GetCrawler
     -- * Request Lenses
-    , gccName
+    , gtcrwlrName
 
     -- * Destructuring the Response
     , getCrawlerResponse
     , GetCrawlerResponse
     -- * Response Lenses
-    , getersCrawler
-    , getersResponseStatus
+    , gtcrwlrrsCrawler
+    , gtcrwlrrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -45,25 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getCrawler' smart constructor.
-newtype GetCrawler = GetCrawler'
-  { _gccName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetCrawler = GetCrawler'{_gtcrwlrName ::
+                                 Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCrawler' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gccName' - Name of the crawler to retrieve metadata for.
+-- * 'gtcrwlrName' - The name of the crawler to retrieve metadata for.
 getCrawler
-    :: Text -- ^ 'gccName'
+    :: Text -- ^ 'gtcrwlrName'
     -> GetCrawler
-getCrawler pName_ = GetCrawler' {_gccName = pName_}
+getCrawler pName_
+  = GetCrawler'{_gtcrwlrName = pName_}
 
-
--- | Name of the crawler to retrieve metadata for.
-gccName :: Lens' GetCrawler Text
-gccName = lens _gccName (\ s a -> s{_gccName = a})
+-- | The name of the crawler to retrieve metadata for.
+gtcrwlrName :: Lens' GetCrawler Text
+gtcrwlrName = lens _gtcrwlrName (\ s a -> s{_gtcrwlrName = a})
 
 instance AWSRequest GetCrawler where
         type Rs GetCrawler = GetCrawlerResponse
@@ -89,7 +88,7 @@ instance ToHeaders GetCrawler where
 
 instance ToJSON GetCrawler where
         toJSON GetCrawler'{..}
-          = object (catMaybes [Just ("Name" .= _gccName)])
+          = object (catMaybes [Just ("Name" .= _gtcrwlrName)])
 
 instance ToPath GetCrawler where
         toPath = const "/"
@@ -98,33 +97,31 @@ instance ToQuery GetCrawler where
         toQuery = const mempty
 
 -- | /See:/ 'getCrawlerResponse' smart constructor.
-data GetCrawlerResponse = GetCrawlerResponse'
-  { _getersCrawler        :: !(Maybe Crawler)
-  , _getersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCrawlerResponse = GetCrawlerResponse'{_gtcrwlrrsCrawler
+                                              :: !(Maybe Crawler),
+                                              _gtcrwlrrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetCrawlerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'getersCrawler' - The metadata for the specified crawler.
+-- * 'gtcrwlrrsCrawler' - The metadata for the specified crawler.
 --
--- * 'getersResponseStatus' - -- | The response status code.
+-- * 'gtcrwlrrsResponseStatus' - -- | The response status code.
 getCrawlerResponse
-    :: Int -- ^ 'getersResponseStatus'
+    :: Int -- ^ 'gtcrwlrrsResponseStatus'
     -> GetCrawlerResponse
-getCrawlerResponse pResponseStatus_ =
-  GetCrawlerResponse'
-    {_getersCrawler = Nothing, _getersResponseStatus = pResponseStatus_}
-
+getCrawlerResponse pResponseStatus_
+  = GetCrawlerResponse'{_gtcrwlrrsCrawler = Nothing,
+                        _gtcrwlrrsResponseStatus = pResponseStatus_}
 
 -- | The metadata for the specified crawler.
-getersCrawler :: Lens' GetCrawlerResponse (Maybe Crawler)
-getersCrawler = lens _getersCrawler (\ s a -> s{_getersCrawler = a})
+gtcrwlrrsCrawler :: Lens' GetCrawlerResponse (Maybe Crawler)
+gtcrwlrrsCrawler = lens _gtcrwlrrsCrawler (\ s a -> s{_gtcrwlrrsCrawler = a})
 
 -- | -- | The response status code.
-getersResponseStatus :: Lens' GetCrawlerResponse Int
-getersResponseStatus = lens _getersResponseStatus (\ s a -> s{_getersResponseStatus = a})
+gtcrwlrrsResponseStatus :: Lens' GetCrawlerResponse Int
+gtcrwlrrsResponseStatus = lens _gtcrwlrrsResponseStatus (\ s a -> s{_gtcrwlrrsResponseStatus = a})
 
 instance NFData GetCrawlerResponse where

@@ -14,11 +14,11 @@
 module Test.AWS.Gen.DMS where
 
 import Data.Proxy
-import Network.AWS.DMS
-import Test.AWS.DMS.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.DMS
+import Test.AWS.DMS.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -45,6 +45,9 @@ import Test.Tasty
 --
 --         , requestDescribeSchemas $
 --             describeSchemas
+--
+--         , requestDeleteConnection $
+--             deleteConnection
 --
 --         , requestModifyEventSubscription $
 --             modifyEventSubscription
@@ -124,6 +127,9 @@ import Test.Tasty
 --         , requestDescribeOrderableReplicationInstances $
 --             describeOrderableReplicationInstances
 --
+--         , requestDescribePendingMaintenanceActions $
+--             describePendingMaintenanceActions
+--
 --         , requestCreateReplicationTask $
 --             createReplicationTask
 --
@@ -138,6 +144,9 @@ import Test.Tasty
 --
 --         , requestModifyReplicationSubnetGroup $
 --             modifyReplicationSubnetGroup
+--
+--         , requestApplyPendingMaintenanceAction $
+--             applyPendingMaintenanceAction
 --
 --         , requestDescribeAccountAttributes $
 --             describeAccountAttributes
@@ -180,6 +189,9 @@ import Test.Tasty
 --
 --         , responseDescribeSchemas $
 --             describeSchemasResponse
+--
+--         , responseDeleteConnection $
+--             deleteConnectionResponse
 --
 --         , responseModifyEventSubscription $
 --             modifyEventSubscriptionResponse
@@ -259,6 +271,9 @@ import Test.Tasty
 --         , responseDescribeOrderableReplicationInstances $
 --             describeOrderableReplicationInstancesResponse
 --
+--         , responseDescribePendingMaintenanceActions $
+--             describePendingMaintenanceActionsResponse
+--
 --         , responseCreateReplicationTask $
 --             createReplicationTaskResponse
 --
@@ -273,6 +288,9 @@ import Test.Tasty
 --
 --         , responseModifyReplicationSubnetGroup $
 --             modifyReplicationSubnetGroupResponse
+--
+--         , responseApplyPendingMaintenanceAction $
+--             applyPendingMaintenanceActionResponse
 --
 --         , responseDescribeAccountAttributes $
 --             describeAccountAttributesResponse
@@ -329,6 +347,11 @@ requestDescribeSchemas :: DescribeSchemas -> TestTree
 requestDescribeSchemas = req
     "DescribeSchemas"
     "fixture/DescribeSchemas.yaml"
+
+requestDeleteConnection :: DeleteConnection -> TestTree
+requestDeleteConnection = req
+    "DeleteConnection"
+    "fixture/DeleteConnection.yaml"
 
 requestModifyEventSubscription :: ModifyEventSubscription -> TestTree
 requestModifyEventSubscription = req
@@ -460,6 +483,11 @@ requestDescribeOrderableReplicationInstances = req
     "DescribeOrderableReplicationInstances"
     "fixture/DescribeOrderableReplicationInstances.yaml"
 
+requestDescribePendingMaintenanceActions :: DescribePendingMaintenanceActions -> TestTree
+requestDescribePendingMaintenanceActions = req
+    "DescribePendingMaintenanceActions"
+    "fixture/DescribePendingMaintenanceActions.yaml"
+
 requestCreateReplicationTask :: CreateReplicationTask -> TestTree
 requestCreateReplicationTask = req
     "CreateReplicationTask"
@@ -484,6 +512,11 @@ requestModifyReplicationSubnetGroup :: ModifyReplicationSubnetGroup -> TestTree
 requestModifyReplicationSubnetGroup = req
     "ModifyReplicationSubnetGroup"
     "fixture/ModifyReplicationSubnetGroup.yaml"
+
+requestApplyPendingMaintenanceAction :: ApplyPendingMaintenanceAction -> TestTree
+requestApplyPendingMaintenanceAction = req
+    "ApplyPendingMaintenanceAction"
+    "fixture/ApplyPendingMaintenanceAction.yaml"
 
 requestDescribeAccountAttributes :: DescribeAccountAttributes -> TestTree
 requestDescribeAccountAttributes = req
@@ -563,6 +596,13 @@ responseDescribeSchemas = res
     "fixture/DescribeSchemasResponse.proto"
     dms
     (Proxy :: Proxy DescribeSchemas)
+
+responseDeleteConnection :: DeleteConnectionResponse -> TestTree
+responseDeleteConnection = res
+    "DeleteConnectionResponse"
+    "fixture/DeleteConnectionResponse.proto"
+    dms
+    (Proxy :: Proxy DeleteConnection)
 
 responseModifyEventSubscription :: ModifyEventSubscriptionResponse -> TestTree
 responseModifyEventSubscription = res
@@ -746,6 +786,13 @@ responseDescribeOrderableReplicationInstances = res
     dms
     (Proxy :: Proxy DescribeOrderableReplicationInstances)
 
+responseDescribePendingMaintenanceActions :: DescribePendingMaintenanceActionsResponse -> TestTree
+responseDescribePendingMaintenanceActions = res
+    "DescribePendingMaintenanceActionsResponse"
+    "fixture/DescribePendingMaintenanceActionsResponse.proto"
+    dms
+    (Proxy :: Proxy DescribePendingMaintenanceActions)
+
 responseCreateReplicationTask :: CreateReplicationTaskResponse -> TestTree
 responseCreateReplicationTask = res
     "CreateReplicationTaskResponse"
@@ -780,6 +827,13 @@ responseModifyReplicationSubnetGroup = res
     "fixture/ModifyReplicationSubnetGroupResponse.proto"
     dms
     (Proxy :: Proxy ModifyReplicationSubnetGroup)
+
+responseApplyPendingMaintenanceAction :: ApplyPendingMaintenanceActionResponse -> TestTree
+responseApplyPendingMaintenanceAction = res
+    "ApplyPendingMaintenanceActionResponse"
+    "fixture/ApplyPendingMaintenanceActionResponse.proto"
+    dms
+    (Proxy :: Proxy ApplyPendingMaintenanceAction)
 
 responseDescribeAccountAttributes :: DescribeAccountAttributesResponse -> TestTree
 responseDescribeAccountAttributes = res

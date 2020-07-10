@@ -18,14 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new Kinesis video stream.
+-- Creates a new Kinesis video stream. 
 --
 --
--- When you create a new stream, Kinesis Video Streams assigns it a version number. When you change the stream's metadata, Kinesis Video Streams updates the version.
+-- When you create a new stream, Kinesis Video Streams assigns it a version number. When you change the stream's metadata, Kinesis Video Streams updates the version. 
 --
 -- @CreateStream@ is an asynchronous operation.
 --
--- For information about how the service works, see <http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html How it Works> .
+-- For information about how the service works, see <https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html How it Works> . 
 --
 -- You must have permissions for the @KinesisVideo:CreateStream@ action.
 --
@@ -39,6 +39,7 @@ module Network.AWS.KinesisVideo.CreateStream
     , csDataRetentionInHours
     , csKMSKeyId
     , csDeviceName
+    , csTags
     , csStreamName
 
     -- * Destructuring the Response
@@ -57,56 +58,58 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createStream' smart constructor.
-data CreateStream = CreateStream'
-  { _csMediaType            :: !(Maybe Text)
-  , _csDataRetentionInHours :: !(Maybe Nat)
-  , _csKMSKeyId             :: !(Maybe Text)
-  , _csDeviceName           :: !(Maybe Text)
-  , _csStreamName           :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStream = CreateStream'{_csMediaType ::
+                                  !(Maybe Text),
+                                  _csDataRetentionInHours :: !(Maybe Nat),
+                                  _csKMSKeyId :: !(Maybe Text),
+                                  _csDeviceName :: !(Maybe Text),
+                                  _csTags :: !(Maybe (Map Text Text)),
+                                  _csStreamName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'csMediaType' - The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <http://www.iana.org/assignments/media-types/media-types.xhtml Media Types> . If you choose to specify the @MediaType@ , see <https://tools.ietf.org/html/rfc6838#section-4.2 Naming Requirements> for guidelines. To play video on the console, the media must be H.264 encoded, and you need to specify this video type in this parameter as @video/h264@ .  This parameter is optional; the default value is @null@ (or empty in JSON).
+-- * 'csMediaType' - The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <http://www.iana.org/assignments/media-types/media-types.xhtml Media Types> . If you choose to specify the @MediaType@ , see <https://tools.ietf.org/html/rfc6838#section-4.2 Naming Requirements> for guidelines. Example valid values include "video/h264" and "video/h264,audio/aac". This parameter is optional; the default value is @null@ (or empty in JSON).
 --
--- * 'csDataRetentionInHours' - The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+-- * 'csDataRetentionInHours' - The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data. When the @DataRetentionInHours@ value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.
 --
--- * 'csKMSKeyId' - The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (@aws/kinesisvideo@ ) is used. For more information, see <http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters DescribeKey> .
+-- * 'csKMSKeyId' - The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (@aws/kinesisvideo@ ) is used. For more information, see <https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters DescribeKey> . 
 --
--- * 'csDeviceName' - The name of the device that is writing to the stream.
+-- * 'csDeviceName' - The name of the device that is writing to the stream. 
+--
+-- * 'csTags' - A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
 --
 -- * 'csStreamName' - A name for the stream that you are creating. The stream name is an identifier for the stream, and must be unique for each account and region.
 createStream
     :: Text -- ^ 'csStreamName'
     -> CreateStream
-createStream pStreamName_ =
-  CreateStream'
-    { _csMediaType = Nothing
-    , _csDataRetentionInHours = Nothing
-    , _csKMSKeyId = Nothing
-    , _csDeviceName = Nothing
-    , _csStreamName = pStreamName_
-    }
+createStream pStreamName_
+  = CreateStream'{_csMediaType = Nothing,
+                  _csDataRetentionInHours = Nothing,
+                  _csKMSKeyId = Nothing, _csDeviceName = Nothing,
+                  _csTags = Nothing, _csStreamName = pStreamName_}
 
-
--- | The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <http://www.iana.org/assignments/media-types/media-types.xhtml Media Types> . If you choose to specify the @MediaType@ , see <https://tools.ietf.org/html/rfc6838#section-4.2 Naming Requirements> for guidelines. To play video on the console, the media must be H.264 encoded, and you need to specify this video type in this parameter as @video/h264@ .  This parameter is optional; the default value is @null@ (or empty in JSON).
+-- | The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <http://www.iana.org/assignments/media-types/media-types.xhtml Media Types> . If you choose to specify the @MediaType@ , see <https://tools.ietf.org/html/rfc6838#section-4.2 Naming Requirements> for guidelines. Example valid values include "video/h264" and "video/h264,audio/aac". This parameter is optional; the default value is @null@ (or empty in JSON).
 csMediaType :: Lens' CreateStream (Maybe Text)
 csMediaType = lens _csMediaType (\ s a -> s{_csMediaType = a})
 
--- | The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data.
+-- | The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data. When the @DataRetentionInHours@ value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.
 csDataRetentionInHours :: Lens' CreateStream (Maybe Natural)
 csDataRetentionInHours = lens _csDataRetentionInHours (\ s a -> s{_csDataRetentionInHours = a}) . mapping _Nat
 
--- | The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (@aws/kinesisvideo@ ) is used. For more information, see <http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters DescribeKey> .
+-- | The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (@aws/kinesisvideo@ ) is used. For more information, see <https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters DescribeKey> . 
 csKMSKeyId :: Lens' CreateStream (Maybe Text)
 csKMSKeyId = lens _csKMSKeyId (\ s a -> s{_csKMSKeyId = a})
 
--- | The name of the device that is writing to the stream.
+-- | The name of the device that is writing to the stream. 
 csDeviceName :: Lens' CreateStream (Maybe Text)
 csDeviceName = lens _csDeviceName (\ s a -> s{_csDeviceName = a})
+
+-- | A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
+csTags :: Lens' CreateStream (HashMap Text Text)
+csTags = lens _csTags (\ s a -> s{_csTags = a}) . _Default . _Map
 
 -- | A name for the stream that you are creating. The stream name is an identifier for the stream, and must be unique for each account and region.
 csStreamName :: Lens' CreateStream Text
@@ -137,6 +140,7 @@ instance ToJSON CreateStream where
                     _csDataRetentionInHours,
                   ("KmsKeyId" .=) <$> _csKMSKeyId,
                   ("DeviceName" .=) <$> _csDeviceName,
+                  ("Tags" .=) <$> _csTags,
                   Just ("StreamName" .= _csStreamName)])
 
 instance ToPath CreateStream where
@@ -146,11 +150,10 @@ instance ToQuery CreateStream where
         toQuery = const mempty
 
 -- | /See:/ 'createStreamResponse' smart constructor.
-data CreateStreamResponse = CreateStreamResponse'
-  { _csrsStreamARN      :: !(Maybe Text)
-  , _csrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateStreamResponse = CreateStreamResponse'{_csrsStreamARN
+                                                  :: !(Maybe Text),
+                                                  _csrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateStreamResponse' with the minimum fields required to make a request.
 --
@@ -162,10 +165,9 @@ data CreateStreamResponse = CreateStreamResponse'
 createStreamResponse
     :: Int -- ^ 'csrsResponseStatus'
     -> CreateStreamResponse
-createStreamResponse pResponseStatus_ =
-  CreateStreamResponse'
-    {_csrsStreamARN = Nothing, _csrsResponseStatus = pResponseStatus_}
-
+createStreamResponse pResponseStatus_
+  = CreateStreamResponse'{_csrsStreamARN = Nothing,
+                          _csrsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the stream.
 csrsStreamARN :: Lens' CreateStreamResponse (Maybe Text)

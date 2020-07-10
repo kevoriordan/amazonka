@@ -27,6 +27,7 @@ module Network.AWS.IoT.UpdateIndexingConfiguration
       updateIndexingConfiguration
     , UpdateIndexingConfiguration
     -- * Request Lenses
+    , uicThingGroupIndexingConfiguration
     , uicThingIndexingConfiguration
 
     -- * Destructuring the Response
@@ -44,21 +45,34 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateIndexingConfiguration' smart constructor.
-newtype UpdateIndexingConfiguration = UpdateIndexingConfiguration'
-  { _uicThingIndexingConfiguration :: Maybe ThingIndexingConfiguration
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateIndexingConfiguration = UpdateIndexingConfiguration'{_uicThingGroupIndexingConfiguration
+                                                                ::
+                                                                !(Maybe
+                                                                    ThingGroupIndexingConfiguration),
+                                                                _uicThingIndexingConfiguration
+                                                                ::
+                                                                !(Maybe
+                                                                    ThingIndexingConfiguration)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateIndexingConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'uicThingGroupIndexingConfiguration' - Thing group indexing configuration.
+--
 -- * 'uicThingIndexingConfiguration' - Thing indexing configuration.
 updateIndexingConfiguration
     :: UpdateIndexingConfiguration
-updateIndexingConfiguration =
-  UpdateIndexingConfiguration' {_uicThingIndexingConfiguration = Nothing}
+updateIndexingConfiguration
+  = UpdateIndexingConfiguration'{_uicThingGroupIndexingConfiguration
+                                   = Nothing,
+                                 _uicThingIndexingConfiguration = Nothing}
 
+-- | Thing group indexing configuration.
+uicThingGroupIndexingConfiguration :: Lens' UpdateIndexingConfiguration (Maybe ThingGroupIndexingConfiguration)
+uicThingGroupIndexingConfiguration = lens _uicThingGroupIndexingConfiguration (\ s a -> s{_uicThingGroupIndexingConfiguration = a})
 
 -- | Thing indexing configuration.
 uicThingIndexingConfiguration :: Lens' UpdateIndexingConfiguration (Maybe ThingIndexingConfiguration)
@@ -85,7 +99,9 @@ instance ToJSON UpdateIndexingConfiguration where
         toJSON UpdateIndexingConfiguration'{..}
           = object
               (catMaybes
-                 [("thingIndexingConfiguration" .=) <$>
+                 [("thingGroupIndexingConfiguration" .=) <$>
+                    _uicThingGroupIndexingConfiguration,
+                  ("thingIndexingConfiguration" .=) <$>
                     _uicThingIndexingConfiguration])
 
 instance ToPath UpdateIndexingConfiguration where
@@ -95,10 +111,11 @@ instance ToQuery UpdateIndexingConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'updateIndexingConfigurationResponse' smart constructor.
-newtype UpdateIndexingConfigurationResponse = UpdateIndexingConfigurationResponse'
-  { _uicrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateIndexingConfigurationResponse = UpdateIndexingConfigurationResponse'{_uicrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'UpdateIndexingConfigurationResponse' with the minimum fields required to make a request.
 --
@@ -108,9 +125,9 @@ newtype UpdateIndexingConfigurationResponse = UpdateIndexingConfigurationRespons
 updateIndexingConfigurationResponse
     :: Int -- ^ 'uicrsResponseStatus'
     -> UpdateIndexingConfigurationResponse
-updateIndexingConfigurationResponse pResponseStatus_ =
-  UpdateIndexingConfigurationResponse' {_uicrsResponseStatus = pResponseStatus_}
-
+updateIndexingConfigurationResponse pResponseStatus_
+  = UpdateIndexingConfigurationResponse'{_uicrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 uicrsResponseStatus :: Lens' UpdateIndexingConfigurationResponse Int

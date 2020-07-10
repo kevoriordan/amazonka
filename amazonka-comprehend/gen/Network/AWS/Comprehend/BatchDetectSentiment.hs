@@ -47,11 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchDetectSentiment' smart constructor.
-data BatchDetectSentiment = BatchDetectSentiment'
-  { _bdsTextList     :: ![Text]
-  , _bdsLanguageCode :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDetectSentiment = BatchDetectSentiment'{_bdsTextList
+                                                  :: ![Text],
+                                                  _bdsLanguageCode ::
+                                                  !LanguageCode}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchDetectSentiment' with the minimum fields required to make a request.
 --
@@ -59,21 +59,20 @@ data BatchDetectSentiment = BatchDetectSentiment'
 --
 -- * 'bdsTextList' - A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
 --
--- * 'bdsLanguageCode' - The language of the input documents. All documents must be in the same language.
+-- * 'bdsLanguageCode' - The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
 batchDetectSentiment
-    :: Text -- ^ 'bdsLanguageCode'
+    :: LanguageCode -- ^ 'bdsLanguageCode'
     -> BatchDetectSentiment
-batchDetectSentiment pLanguageCode_ =
-  BatchDetectSentiment'
-    {_bdsTextList = mempty, _bdsLanguageCode = pLanguageCode_}
-
+batchDetectSentiment pLanguageCode_
+  = BatchDetectSentiment'{_bdsTextList = mempty,
+                          _bdsLanguageCode = pLanguageCode_}
 
 -- | A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
 bdsTextList :: Lens' BatchDetectSentiment [Text]
 bdsTextList = lens _bdsTextList (\ s a -> s{_bdsTextList = a}) . _Coerce
 
--- | The language of the input documents. All documents must be in the same language.
-bdsLanguageCode :: Lens' BatchDetectSentiment Text
+-- | The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
+bdsLanguageCode :: Lens' BatchDetectSentiment LanguageCode
 bdsLanguageCode = lens _bdsLanguageCode (\ s a -> s{_bdsLanguageCode = a})
 
 instance AWSRequest BatchDetectSentiment where
@@ -116,12 +115,16 @@ instance ToQuery BatchDetectSentiment where
         toQuery = const mempty
 
 -- | /See:/ 'batchDetectSentimentResponse' smart constructor.
-data BatchDetectSentimentResponse = BatchDetectSentimentResponse'
-  { _bdsrsResponseStatus :: !Int
-  , _bdsrsResultList     :: ![BatchDetectSentimentItemResult]
-  , _bdsrsErrorList      :: ![BatchItemError]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDetectSentimentResponse = BatchDetectSentimentResponse'{_bdsrsResponseStatus
+                                                                  :: !Int,
+                                                                  _bdsrsResultList
+                                                                  ::
+                                                                  ![BatchDetectSentimentItemResult],
+                                                                  _bdsrsErrorList
+                                                                  ::
+                                                                  ![BatchItemError]}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'BatchDetectSentimentResponse' with the minimum fields required to make a request.
 --
@@ -135,13 +138,11 @@ data BatchDetectSentimentResponse = BatchDetectSentimentResponse'
 batchDetectSentimentResponse
     :: Int -- ^ 'bdsrsResponseStatus'
     -> BatchDetectSentimentResponse
-batchDetectSentimentResponse pResponseStatus_ =
-  BatchDetectSentimentResponse'
-    { _bdsrsResponseStatus = pResponseStatus_
-    , _bdsrsResultList = mempty
-    , _bdsrsErrorList = mempty
-    }
-
+batchDetectSentimentResponse pResponseStatus_
+  = BatchDetectSentimentResponse'{_bdsrsResponseStatus
+                                    = pResponseStatus_,
+                                  _bdsrsResultList = mempty,
+                                  _bdsrsErrorList = mempty}
 
 -- | -- | The response status code.
 bdsrsResponseStatus :: Lens' BatchDetectSentimentResponse Int

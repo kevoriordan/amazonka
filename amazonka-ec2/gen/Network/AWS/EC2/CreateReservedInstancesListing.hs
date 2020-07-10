@@ -25,7 +25,7 @@
 --
 -- To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the 'DescribeReservedInstancesListings' operation.
 --
--- For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html Reserved Instance Marketplace> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html Reserved Instance Marketplace> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 module Network.AWS.EC2.CreateReservedInstancesListing
     (
@@ -42,8 +42,8 @@ module Network.AWS.EC2.CreateReservedInstancesListing
     , createReservedInstancesListingResponse
     , CreateReservedInstancesListingResponse
     -- * Response Lenses
-    , crilrrsReservedInstancesListings
-    , crilrrsResponseStatus
+    , crtrsrvdinstncslstngrsReservedInstancesListings
+    , crtrsrvdinstncslstngrsResponseStatus
     ) where
 
 import Network.AWS.EC2.Types
@@ -58,19 +58,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createReservedInstancesListing' smart constructor.
-data CreateReservedInstancesListing = CreateReservedInstancesListing'
-  { _crilClientToken         :: !Text
-  , _crilInstanceCount       :: !Int
-  , _crilPriceSchedules      :: ![PriceScheduleSpecification]
-  , _crilReservedInstancesId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateReservedInstancesListing = CreateReservedInstancesListing'{_crilClientToken
+                                                                      :: !Text,
+                                                                      _crilInstanceCount
+                                                                      :: !Int,
+                                                                      _crilPriceSchedules
+                                                                      ::
+                                                                      ![PriceScheduleSpecification],
+                                                                      _crilReservedInstancesId
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateReservedInstancesListing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'crilClientToken' - Unique, case-sensitive identifier you provide to ensure idempotency of your listings. This helps avoid duplicate listings. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- * 'crilClientToken' - Unique, case-sensitive identifier you provide to ensure idempotency of your listings. This helps avoid duplicate listings. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
 --
 -- * 'crilInstanceCount' - The number of instances that are a part of a Reserved Instance account to be listed in the Reserved Instance Marketplace. This number should be less than or equal to the instance count associated with the Reserved Instance ID specified in this call.
 --
@@ -82,16 +86,16 @@ createReservedInstancesListing
     -> Int -- ^ 'crilInstanceCount'
     -> Text -- ^ 'crilReservedInstancesId'
     -> CreateReservedInstancesListing
-createReservedInstancesListing pClientToken_ pInstanceCount_ pReservedInstancesId_ =
-  CreateReservedInstancesListing'
-    { _crilClientToken = pClientToken_
-    , _crilInstanceCount = pInstanceCount_
-    , _crilPriceSchedules = mempty
-    , _crilReservedInstancesId = pReservedInstancesId_
-    }
+createReservedInstancesListing pClientToken_
+  pInstanceCount_ pReservedInstancesId_
+  = CreateReservedInstancesListing'{_crilClientToken =
+                                      pClientToken_,
+                                    _crilInstanceCount = pInstanceCount_,
+                                    _crilPriceSchedules = mempty,
+                                    _crilReservedInstancesId =
+                                      pReservedInstancesId_}
 
-
--- | Unique, case-sensitive identifier you provide to ensure idempotency of your listings. This helps avoid duplicate listings. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- | Unique, case-sensitive identifier you provide to ensure idempotency of your listings. This helps avoid duplicate listings. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
 crilClientToken :: Lens' CreateReservedInstancesListing Text
 crilClientToken = lens _crilClientToken (\ s a -> s{_crilClientToken = a})
 
@@ -148,36 +152,40 @@ instance ToQuery CreateReservedInstancesListing where
 --
 --
 -- /See:/ 'createReservedInstancesListingResponse' smart constructor.
-data CreateReservedInstancesListingResponse = CreateReservedInstancesListingResponse'
-  { _crilrrsReservedInstancesListings :: !(Maybe [ReservedInstancesListing])
-  , _crilrrsResponseStatus            :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateReservedInstancesListingResponse = CreateReservedInstancesListingResponse'{_crtrsrvdinstncslstngrsReservedInstancesListings
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          [ReservedInstancesListing]),
+                                                                                      _crtrsrvdinstncslstngrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'CreateReservedInstancesListingResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'crilrrsReservedInstancesListings' - Information about the Standard Reserved Instance listing.
+-- * 'crtrsrvdinstncslstngrsReservedInstancesListings' - Information about the Standard Reserved Instance listing.
 --
--- * 'crilrrsResponseStatus' - -- | The response status code.
+-- * 'crtrsrvdinstncslstngrsResponseStatus' - -- | The response status code.
 createReservedInstancesListingResponse
-    :: Int -- ^ 'crilrrsResponseStatus'
+    :: Int -- ^ 'crtrsrvdinstncslstngrsResponseStatus'
     -> CreateReservedInstancesListingResponse
-createReservedInstancesListingResponse pResponseStatus_ =
-  CreateReservedInstancesListingResponse'
-    { _crilrrsReservedInstancesListings = Nothing
-    , _crilrrsResponseStatus = pResponseStatus_
-    }
-
+createReservedInstancesListingResponse
+  pResponseStatus_
+  = CreateReservedInstancesListingResponse'{_crtrsrvdinstncslstngrsReservedInstancesListings
+                                              = Nothing,
+                                            _crtrsrvdinstncslstngrsResponseStatus
+                                              = pResponseStatus_}
 
 -- | Information about the Standard Reserved Instance listing.
-crilrrsReservedInstancesListings :: Lens' CreateReservedInstancesListingResponse [ReservedInstancesListing]
-crilrrsReservedInstancesListings = lens _crilrrsReservedInstancesListings (\ s a -> s{_crilrrsReservedInstancesListings = a}) . _Default . _Coerce
+crtrsrvdinstncslstngrsReservedInstancesListings :: Lens' CreateReservedInstancesListingResponse [ReservedInstancesListing]
+crtrsrvdinstncslstngrsReservedInstancesListings = lens _crtrsrvdinstncslstngrsReservedInstancesListings (\ s a -> s{_crtrsrvdinstncslstngrsReservedInstancesListings = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
-crilrrsResponseStatus :: Lens' CreateReservedInstancesListingResponse Int
-crilrrsResponseStatus = lens _crilrrsResponseStatus (\ s a -> s{_crilrrsResponseStatus = a})
+crtrsrvdinstncslstngrsResponseStatus :: Lens' CreateReservedInstancesListingResponse Int
+crtrsrvdinstncslstngrsResponseStatus = lens _crtrsrvdinstncslstngrsResponseStatus (\ s a -> s{_crtrsrvdinstncslstngrsResponseStatus = a})
 
 instance NFData
            CreateReservedInstancesListingResponse

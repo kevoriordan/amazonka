@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool.
+-- Deletes an identity pool. Once a pool is deleted, users will not be able to authenticate with the pool.
 --
 --
 -- You must use AWS Developer credentials to call this API.
@@ -48,10 +48,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteIdentityPool' smart constructor.
-newtype DeleteIdentityPool = DeleteIdentityPool'
-  { _dIdentityPoolId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteIdentityPool = DeleteIdentityPool'{_dIdentityPoolId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteIdentityPool' with the minimum fields required to make a request.
 --
@@ -61,9 +61,9 @@ newtype DeleteIdentityPool = DeleteIdentityPool'
 deleteIdentityPool
     :: Text -- ^ 'dIdentityPoolId'
     -> DeleteIdentityPool
-deleteIdentityPool pIdentityPoolId_ =
-  DeleteIdentityPool' {_dIdentityPoolId = pIdentityPoolId_}
-
+deleteIdentityPool pIdentityPoolId_
+  = DeleteIdentityPool'{_dIdentityPoolId =
+                          pIdentityPoolId_}
 
 -- | An identity pool ID in the format REGION:GUID.
 dIdentityPoolId :: Lens' DeleteIdentityPool Text
@@ -102,16 +102,15 @@ instance ToQuery DeleteIdentityPool where
         toQuery = const mempty
 
 -- | /See:/ 'deleteIdentityPoolResponse' smart constructor.
-data DeleteIdentityPoolResponse =
-  DeleteIdentityPoolResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIdentityPoolResponse = DeleteIdentityPoolResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteIdentityPoolResponse' with the minimum fields required to make a request.
 --
 deleteIdentityPoolResponse
     :: DeleteIdentityPoolResponse
-deleteIdentityPoolResponse = DeleteIdentityPoolResponse'
-
+deleteIdentityPoolResponse
+  = DeleteIdentityPoolResponse'
 
 instance NFData DeleteIdentityPoolResponse where

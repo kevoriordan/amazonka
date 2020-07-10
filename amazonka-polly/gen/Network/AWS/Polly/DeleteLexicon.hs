@@ -21,7 +21,7 @@
 -- Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the @GetLexicon@ or @ListLexicon@ APIs.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html Managing Lexicons> .
+-- For more information, see <https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html Managing Lexicons> .
 --
 module Network.AWS.Polly.DeleteLexicon
     (
@@ -46,10 +46,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLexicon' smart constructor.
-newtype DeleteLexicon = DeleteLexicon'
-  { _dlName :: Sensitive Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+newtype DeleteLexicon = DeleteLexicon'{_dlName ::
+                                       Sensitive Text}
+                          deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteLexicon' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype DeleteLexicon = DeleteLexicon'
 deleteLexicon
     :: Text -- ^ 'dlName'
     -> DeleteLexicon
-deleteLexicon pName_ = DeleteLexicon' {_dlName = _Sensitive # pName_}
-
+deleteLexicon pName_
+  = DeleteLexicon'{_dlName = _Sensitive # pName_}
 
 -- | The name of the lexicon to delete. Must be an existing lexicon in the region.
 dlName :: Lens' DeleteLexicon Text
@@ -89,10 +88,10 @@ instance ToQuery DeleteLexicon where
         toQuery = const mempty
 
 -- | /See:/ 'deleteLexiconResponse' smart constructor.
-newtype DeleteLexiconResponse = DeleteLexiconResponse'
-  { _dlrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteLexiconResponse = DeleteLexiconResponse'{_dlrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteLexiconResponse' with the minimum fields required to make a request.
 --
@@ -102,9 +101,9 @@ newtype DeleteLexiconResponse = DeleteLexiconResponse'
 deleteLexiconResponse
     :: Int -- ^ 'dlrsResponseStatus'
     -> DeleteLexiconResponse
-deleteLexiconResponse pResponseStatus_ =
-  DeleteLexiconResponse' {_dlrsResponseStatus = pResponseStatus_}
-
+deleteLexiconResponse pResponseStatus_
+  = DeleteLexiconResponse'{_dlrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 dlrsResponseStatus :: Lens' DeleteLexiconResponse Int

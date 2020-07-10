@@ -58,11 +58,12 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'deleteSizeConstraintSet' smart constructor.
-data DeleteSizeConstraintSet = DeleteSizeConstraintSet'
-  { _dscsSizeConstraintSetId :: !Text
-  , _dscsChangeToken         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSizeConstraintSet = DeleteSizeConstraintSet'{_dscsSizeConstraintSetId
+                                                        :: !Text,
+                                                        _dscsChangeToken ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteSizeConstraintSet' with the minimum fields required to make a request.
 --
@@ -75,12 +76,11 @@ deleteSizeConstraintSet
     :: Text -- ^ 'dscsSizeConstraintSetId'
     -> Text -- ^ 'dscsChangeToken'
     -> DeleteSizeConstraintSet
-deleteSizeConstraintSet pSizeConstraintSetId_ pChangeToken_ =
-  DeleteSizeConstraintSet'
-    { _dscsSizeConstraintSetId = pSizeConstraintSetId_
-    , _dscsChangeToken = pChangeToken_
-    }
-
+deleteSizeConstraintSet pSizeConstraintSetId_
+  pChangeToken_
+  = DeleteSizeConstraintSet'{_dscsSizeConstraintSetId =
+                               pSizeConstraintSetId_,
+                             _dscsChangeToken = pChangeToken_}
 
 -- | The @SizeConstraintSetId@ of the 'SizeConstraintSet' that you want to delete. @SizeConstraintSetId@ is returned by 'CreateSizeConstraintSet' and by 'ListSizeConstraintSets' .
 dscsSizeConstraintSetId :: Lens' DeleteSizeConstraintSet Text
@@ -129,11 +129,14 @@ instance ToQuery DeleteSizeConstraintSet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteSizeConstraintSetResponse' smart constructor.
-data DeleteSizeConstraintSetResponse = DeleteSizeConstraintSetResponse'
-  { _dscsrsChangeToken    :: !(Maybe Text)
-  , _dscsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSizeConstraintSetResponse = DeleteSizeConstraintSetResponse'{_dscsrsChangeToken
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _dscsrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteSizeConstraintSetResponse' with the minimum fields required to make a request.
 --
@@ -145,10 +148,10 @@ data DeleteSizeConstraintSetResponse = DeleteSizeConstraintSetResponse'
 deleteSizeConstraintSetResponse
     :: Int -- ^ 'dscsrsResponseStatus'
     -> DeleteSizeConstraintSetResponse
-deleteSizeConstraintSetResponse pResponseStatus_ =
-  DeleteSizeConstraintSetResponse'
-    {_dscsrsChangeToken = Nothing, _dscsrsResponseStatus = pResponseStatus_}
-
+deleteSizeConstraintSetResponse pResponseStatus_
+  = DeleteSizeConstraintSetResponse'{_dscsrsChangeToken
+                                       = Nothing,
+                                     _dscsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteSizeConstraintSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 dscsrsChangeToken :: Lens' DeleteSizeConstraintSetResponse (Maybe Text)

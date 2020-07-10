@@ -54,12 +54,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getResource' smart constructor.
-data GetResource = GetResource'
-  { _grEmbed      :: !(Maybe [Text])
-  , _grRestAPIId  :: !Text
-  , _grResourceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetResource = GetResource'{_grEmbed ::
+                                !(Maybe [Text]),
+                                _grRestAPIId :: !Text, _grResourceId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetResource' with the minimum fields required to make a request.
 --
@@ -74,13 +72,10 @@ getResource
     :: Text -- ^ 'grRestAPIId'
     -> Text -- ^ 'grResourceId'
     -> GetResource
-getResource pRestAPIId_ pResourceId_ =
-  GetResource'
-    { _grEmbed = Nothing
-    , _grRestAPIId = pRestAPIId_
-    , _grResourceId = pResourceId_
-    }
-
+getResource pRestAPIId_ pResourceId_
+  = GetResource'{_grEmbed = Nothing,
+                 _grRestAPIId = pRestAPIId_,
+                 _grResourceId = pResourceId_}
 
 -- | A query parameter to retrieve the specified resources embedded in the returned 'Resource' representation in the response. This @embed@ parameter value is a list of comma-separated strings. Currently, the request supports only retrieval of the embedded 'Method' resources this way. The query parameter value must be a single-valued list and contain the @"methods"@ string. For example, @GET /restapis/{restapi_id}/resources/{resource_id}?embed=methods@ .
 grEmbed :: Lens' GetResource [Text]

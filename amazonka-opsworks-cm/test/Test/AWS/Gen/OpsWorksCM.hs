@@ -14,11 +14,11 @@
 module Test.AWS.Gen.OpsWorksCM where
 
 import Data.Proxy
-import Network.AWS.OpsWorksCM
 import Test.AWS.Fixture
-import Test.AWS.OpsWorksCM.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.OpsWorksCM
+import Test.AWS.OpsWorksCM.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -46,6 +46,9 @@ import Test.Tasty
 --         , requestDisassociateNode $
 --             disassociateNode
 --
+--         , requestListTagsForResource $
+--             listTagsForResource
+--
 --         , requestCreateBackup $
 --             createBackup
 --
@@ -67,11 +70,20 @@ import Test.Tasty
 --         , requestDescribeNodeAssociationStatus $
 --             describeNodeAssociationStatus
 --
+--         , requestTagResource $
+--             tagResource
+--
 --         , requestDescribeAccountAttributes $
 --             describeAccountAttributes
 --
+--         , requestUntagResource $
+--             untagResource
+--
 --         , requestDescribeServers $
 --             describeServers
+--
+--         , requestExportServerEngineAttribute $
+--             exportServerEngineAttribute
 --
 --           ]
 
@@ -94,6 +106,9 @@ import Test.Tasty
 --         , responseDisassociateNode $
 --             disassociateNodeResponse
 --
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
+--
 --         , responseCreateBackup $
 --             createBackupResponse
 --
@@ -115,11 +130,20 @@ import Test.Tasty
 --         , responseDescribeNodeAssociationStatus $
 --             describeNodeAssociationStatusResponse
 --
+--         , responseTagResource $
+--             tagResourceResponse
+--
 --         , responseDescribeAccountAttributes $
 --             describeAccountAttributesResponse
 --
+--         , responseUntagResource $
+--             untagResourceResponse
+--
 --         , responseDescribeServers $
 --             describeServersResponse
+--
+--         , responseExportServerEngineAttribute $
+--             exportServerEngineAttributeResponse
 --
 --           ]
 --     ]
@@ -156,6 +180,11 @@ requestDisassociateNode = req
     "DisassociateNode"
     "fixture/DisassociateNode.yaml"
 
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
+
 requestCreateBackup :: CreateBackup -> TestTree
 requestCreateBackup = req
     "CreateBackup"
@@ -191,15 +220,30 @@ requestDescribeNodeAssociationStatus = req
     "DescribeNodeAssociationStatus"
     "fixture/DescribeNodeAssociationStatus.yaml"
 
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
+
 requestDescribeAccountAttributes :: DescribeAccountAttributes -> TestTree
 requestDescribeAccountAttributes = req
     "DescribeAccountAttributes"
     "fixture/DescribeAccountAttributes.yaml"
 
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
+
 requestDescribeServers :: DescribeServers -> TestTree
 requestDescribeServers = req
     "DescribeServers"
     "fixture/DescribeServers.yaml"
+
+requestExportServerEngineAttribute :: ExportServerEngineAttribute -> TestTree
+requestExportServerEngineAttribute = req
+    "ExportServerEngineAttribute"
+    "fixture/ExportServerEngineAttribute.yaml"
 
 -- Responses
 
@@ -244,6 +288,13 @@ responseDisassociateNode = res
     "fixture/DisassociateNodeResponse.proto"
     opsWorksCM
     (Proxy :: Proxy DisassociateNode)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    opsWorksCM
+    (Proxy :: Proxy ListTagsForResource)
 
 responseCreateBackup :: CreateBackupResponse -> TestTree
 responseCreateBackup = res
@@ -294,6 +345,13 @@ responseDescribeNodeAssociationStatus = res
     opsWorksCM
     (Proxy :: Proxy DescribeNodeAssociationStatus)
 
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    opsWorksCM
+    (Proxy :: Proxy TagResource)
+
 responseDescribeAccountAttributes :: DescribeAccountAttributesResponse -> TestTree
 responseDescribeAccountAttributes = res
     "DescribeAccountAttributesResponse"
@@ -301,9 +359,23 @@ responseDescribeAccountAttributes = res
     opsWorksCM
     (Proxy :: Proxy DescribeAccountAttributes)
 
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    opsWorksCM
+    (Proxy :: Proxy UntagResource)
+
 responseDescribeServers :: DescribeServersResponse -> TestTree
 responseDescribeServers = res
     "DescribeServersResponse"
     "fixture/DescribeServersResponse.proto"
     opsWorksCM
     (Proxy :: Proxy DescribeServers)
+
+responseExportServerEngineAttribute :: ExportServerEngineAttributeResponse -> TestTree
+responseExportServerEngineAttribute = res
+    "ExportServerEngineAttributeResponse"
+    "fixture/ExportServerEngineAttributeResponse.proto"
+    opsWorksCM
+    (Proxy :: Proxy ExportServerEngineAttribute)

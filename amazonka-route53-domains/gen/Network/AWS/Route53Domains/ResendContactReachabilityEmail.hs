@@ -47,23 +47,25 @@ import Network.AWS.Route53Domains.Types
 import Network.AWS.Route53Domains.Types.Product
 
 -- | /See:/ 'resendContactReachabilityEmail' smart constructor.
-newtype ResendContactReachabilityEmail = ResendContactReachabilityEmail'
-  { _rcreDomainName :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ResendContactReachabilityEmail = ResendContactReachabilityEmail'{_rcreDomainName
+                                                                         ::
+                                                                         Maybe
+                                                                           Text}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'ResendContactReachabilityEmail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcreDomainName' - The name of the domain for which you want Amazon Route 53 to resend a confirmation email to the registrant contact.
+-- * 'rcreDomainName' - The name of the domain for which you want Route 53 to resend a confirmation email to the registrant contact.
 resendContactReachabilityEmail
     :: ResendContactReachabilityEmail
-resendContactReachabilityEmail =
-  ResendContactReachabilityEmail' {_rcreDomainName = Nothing}
+resendContactReachabilityEmail
+  = ResendContactReachabilityEmail'{_rcreDomainName =
+                                      Nothing}
 
-
--- | The name of the domain for which you want Amazon Route 53 to resend a confirmation email to the registrant contact.
+-- | The name of the domain for which you want Route 53 to resend a confirmation email to the registrant contact.
 rcreDomainName :: Lens' ResendContactReachabilityEmail (Maybe Text)
 rcreDomainName = lens _rcreDomainName (\ s a -> s{_rcreDomainName = a})
 
@@ -108,13 +110,23 @@ instance ToQuery ResendContactReachabilityEmail where
         toQuery = const mempty
 
 -- | /See:/ 'resendContactReachabilityEmailResponse' smart constructor.
-data ResendContactReachabilityEmailResponse = ResendContactReachabilityEmailResponse'
-  { _rcrersDomainName        :: !(Maybe Text)
-  , _rcrersEmailAddress      :: !(Maybe Text)
-  , _rcrersIsAlreadyVerified :: !(Maybe Bool)
-  , _rcrersResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ResendContactReachabilityEmailResponse = ResendContactReachabilityEmailResponse'{_rcrersDomainName
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _rcrersEmailAddress
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Text),
+                                                                                      _rcrersIsAlreadyVerified
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          Bool),
+                                                                                      _rcrersResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'ResendContactReachabilityEmailResponse' with the minimum fields required to make a request.
 --
@@ -130,14 +142,14 @@ data ResendContactReachabilityEmailResponse = ResendContactReachabilityEmailResp
 resendContactReachabilityEmailResponse
     :: Int -- ^ 'rcrersResponseStatus'
     -> ResendContactReachabilityEmailResponse
-resendContactReachabilityEmailResponse pResponseStatus_ =
-  ResendContactReachabilityEmailResponse'
-    { _rcrersDomainName = Nothing
-    , _rcrersEmailAddress = Nothing
-    , _rcrersIsAlreadyVerified = Nothing
-    , _rcrersResponseStatus = pResponseStatus_
-    }
-
+resendContactReachabilityEmailResponse
+  pResponseStatus_
+  = ResendContactReachabilityEmailResponse'{_rcrersDomainName
+                                              = Nothing,
+                                            _rcrersEmailAddress = Nothing,
+                                            _rcrersIsAlreadyVerified = Nothing,
+                                            _rcrersResponseStatus =
+                                              pResponseStatus_}
 
 -- | The domain name for which you requested a confirmation email.
 rcrersDomainName :: Lens' ResendContactReachabilityEmailResponse (Maybe Text)

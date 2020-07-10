@@ -14,11 +14,11 @@
 module Test.AWS.Gen.CostAndUsageReport where
 
 import Data.Proxy
-import Network.AWS.CostAndUsageReport
-import Test.AWS.CostAndUsageReport.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.CostAndUsageReport
+import Test.AWS.CostAndUsageReport.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -34,6 +34,9 @@ import Test.Tasty
 --         , requestDeleteReportDefinition $
 --             deleteReportDefinition
 --
+--         , requestModifyReportDefinition $
+--             modifyReportDefinition
+--
 --         , requestDescribeReportDefinitions $
 --             describeReportDefinitions
 --
@@ -45,6 +48,9 @@ import Test.Tasty
 --
 --         , responseDeleteReportDefinition $
 --             deleteReportDefinitionResponse
+--
+--         , responseModifyReportDefinition $
+--             modifyReportDefinitionResponse
 --
 --         , responseDescribeReportDefinitions $
 --             describeReportDefinitionsResponse
@@ -63,6 +69,11 @@ requestDeleteReportDefinition :: DeleteReportDefinition -> TestTree
 requestDeleteReportDefinition = req
     "DeleteReportDefinition"
     "fixture/DeleteReportDefinition.yaml"
+
+requestModifyReportDefinition :: ModifyReportDefinition -> TestTree
+requestModifyReportDefinition = req
+    "ModifyReportDefinition"
+    "fixture/ModifyReportDefinition.yaml"
 
 requestDescribeReportDefinitions :: DescribeReportDefinitions -> TestTree
 requestDescribeReportDefinitions = req
@@ -84,6 +95,13 @@ responseDeleteReportDefinition = res
     "fixture/DeleteReportDefinitionResponse.proto"
     costAndUsageReport
     (Proxy :: Proxy DeleteReportDefinition)
+
+responseModifyReportDefinition :: ModifyReportDefinitionResponse -> TestTree
+responseModifyReportDefinition = res
+    "ModifyReportDefinitionResponse"
+    "fixture/ModifyReportDefinitionResponse.proto"
+    costAndUsageReport
+    (Proxy :: Proxy ModifyReportDefinition)
 
 responseDescribeReportDefinitions :: DescribeReportDefinitionsResponse -> TestTree
 responseDescribeReportDefinitions = res

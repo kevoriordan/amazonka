@@ -58,11 +58,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'deleteByteMatchSet' smart constructor.
-data DeleteByteMatchSet = DeleteByteMatchSet'
-  { _dbmsByteMatchSetId :: !Text
-  , _dbmsChangeToken    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteByteMatchSet = DeleteByteMatchSet'{_dbmsByteMatchSetId
+                                              :: !Text,
+                                              _dbmsChangeToken :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteByteMatchSet' with the minimum fields required to make a request.
 --
@@ -75,10 +74,10 @@ deleteByteMatchSet
     :: Text -- ^ 'dbmsByteMatchSetId'
     -> Text -- ^ 'dbmsChangeToken'
     -> DeleteByteMatchSet
-deleteByteMatchSet pByteMatchSetId_ pChangeToken_ =
-  DeleteByteMatchSet'
-    {_dbmsByteMatchSetId = pByteMatchSetId_, _dbmsChangeToken = pChangeToken_}
-
+deleteByteMatchSet pByteMatchSetId_ pChangeToken_
+  = DeleteByteMatchSet'{_dbmsByteMatchSetId =
+                          pByteMatchSetId_,
+                        _dbmsChangeToken = pChangeToken_}
 
 -- | The @ByteMatchSetId@ of the 'ByteMatchSet' that you want to delete. @ByteMatchSetId@ is returned by 'CreateByteMatchSet' and by 'ListByteMatchSets' .
 dbmsByteMatchSetId :: Lens' DeleteByteMatchSet Text
@@ -126,11 +125,12 @@ instance ToQuery DeleteByteMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteByteMatchSetResponse' smart constructor.
-data DeleteByteMatchSetResponse = DeleteByteMatchSetResponse'
-  { _dbmsrsChangeToken    :: !(Maybe Text)
-  , _dbmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteByteMatchSetResponse = DeleteByteMatchSetResponse'{_dbmsrsChangeToken
+                                                              :: !(Maybe Text),
+                                                              _dbmsrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteByteMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -142,10 +142,10 @@ data DeleteByteMatchSetResponse = DeleteByteMatchSetResponse'
 deleteByteMatchSetResponse
     :: Int -- ^ 'dbmsrsResponseStatus'
     -> DeleteByteMatchSetResponse
-deleteByteMatchSetResponse pResponseStatus_ =
-  DeleteByteMatchSetResponse'
-    {_dbmsrsChangeToken = Nothing, _dbmsrsResponseStatus = pResponseStatus_}
-
+deleteByteMatchSetResponse pResponseStatus_
+  = DeleteByteMatchSetResponse'{_dbmsrsChangeToken =
+                                  Nothing,
+                                _dbmsrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteByteMatchSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 dbmsrsChangeToken :: Lens' DeleteByteMatchSetResponse (Maybe Text)

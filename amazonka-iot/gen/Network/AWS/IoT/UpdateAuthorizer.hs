@@ -50,14 +50,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateAuthorizer' smart constructor.
-data UpdateAuthorizer = UpdateAuthorizer'
-  { _uaStatus                 :: !(Maybe AuthorizerStatus)
-  , _uaAuthorizerFunctionARN  :: !(Maybe Text)
-  , _uaTokenSigningPublicKeys :: !(Maybe (Map Text Text))
-  , _uaTokenKeyName           :: !(Maybe Text)
-  , _uaAuthorizerName         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAuthorizer = UpdateAuthorizer'{_uaStatus
+                                          :: !(Maybe AuthorizerStatus),
+                                          _uaAuthorizerFunctionARN ::
+                                          !(Maybe Text),
+                                          _uaTokenSigningPublicKeys ::
+                                          !(Maybe (Map Text Text)),
+                                          _uaTokenKeyName :: !(Maybe Text),
+                                          _uaAuthorizerName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateAuthorizer' with the minimum fields required to make a request.
 --
@@ -69,21 +70,18 @@ data UpdateAuthorizer = UpdateAuthorizer'
 --
 -- * 'uaTokenSigningPublicKeys' - The public keys used to verify the token signature.
 --
--- * 'uaTokenKeyName' - The key used to extract the token from the HTTP headers.
+-- * 'uaTokenKeyName' - The key used to extract the token from the HTTP headers. 
 --
 -- * 'uaAuthorizerName' - The authorizer name.
 updateAuthorizer
     :: Text -- ^ 'uaAuthorizerName'
     -> UpdateAuthorizer
-updateAuthorizer pAuthorizerName_ =
-  UpdateAuthorizer'
-    { _uaStatus = Nothing
-    , _uaAuthorizerFunctionARN = Nothing
-    , _uaTokenSigningPublicKeys = Nothing
-    , _uaTokenKeyName = Nothing
-    , _uaAuthorizerName = pAuthorizerName_
-    }
-
+updateAuthorizer pAuthorizerName_
+  = UpdateAuthorizer'{_uaStatus = Nothing,
+                      _uaAuthorizerFunctionARN = Nothing,
+                      _uaTokenSigningPublicKeys = Nothing,
+                      _uaTokenKeyName = Nothing,
+                      _uaAuthorizerName = pAuthorizerName_}
 
 -- | The status of the update authorizer request.
 uaStatus :: Lens' UpdateAuthorizer (Maybe AuthorizerStatus)
@@ -97,7 +95,7 @@ uaAuthorizerFunctionARN = lens _uaAuthorizerFunctionARN (\ s a -> s{_uaAuthorize
 uaTokenSigningPublicKeys :: Lens' UpdateAuthorizer (HashMap Text Text)
 uaTokenSigningPublicKeys = lens _uaTokenSigningPublicKeys (\ s a -> s{_uaTokenSigningPublicKeys = a}) . _Default . _Map
 
--- | The key used to extract the token from the HTTP headers.
+-- | The key used to extract the token from the HTTP headers. 
 uaTokenKeyName :: Lens' UpdateAuthorizer (Maybe Text)
 uaTokenKeyName = lens _uaTokenKeyName (\ s a -> s{_uaTokenKeyName = a})
 
@@ -141,12 +139,14 @@ instance ToQuery UpdateAuthorizer where
         toQuery = const mempty
 
 -- | /See:/ 'updateAuthorizerResponse' smart constructor.
-data UpdateAuthorizerResponse = UpdateAuthorizerResponse'
-  { _uarsAuthorizerName :: !(Maybe Text)
-  , _uarsAuthorizerARN  :: !(Maybe Text)
-  , _uarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateAuthorizerResponse = UpdateAuthorizerResponse'{_uarsAuthorizerName
+                                                          :: !(Maybe Text),
+                                                          _uarsAuthorizerARN ::
+                                                          !(Maybe Text),
+                                                          _uarsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateAuthorizerResponse' with the minimum fields required to make a request.
 --
@@ -160,13 +160,11 @@ data UpdateAuthorizerResponse = UpdateAuthorizerResponse'
 updateAuthorizerResponse
     :: Int -- ^ 'uarsResponseStatus'
     -> UpdateAuthorizerResponse
-updateAuthorizerResponse pResponseStatus_ =
-  UpdateAuthorizerResponse'
-    { _uarsAuthorizerName = Nothing
-    , _uarsAuthorizerARN = Nothing
-    , _uarsResponseStatus = pResponseStatus_
-    }
-
+updateAuthorizerResponse pResponseStatus_
+  = UpdateAuthorizerResponse'{_uarsAuthorizerName =
+                                Nothing,
+                              _uarsAuthorizerARN = Nothing,
+                              _uarsResponseStatus = pResponseStatus_}
 
 -- | The authorizer name.
 uarsAuthorizerName :: Lens' UpdateAuthorizerResponse (Maybe Text)

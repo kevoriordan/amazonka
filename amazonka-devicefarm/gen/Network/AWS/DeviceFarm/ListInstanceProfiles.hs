@@ -21,6 +21,8 @@
 -- Returns information about all the instance profiles in an AWS account.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.DeviceFarm.ListInstanceProfiles
     (
     -- * Creating a Request
@@ -42,16 +44,17 @@ module Network.AWS.DeviceFarm.ListInstanceProfiles
 import Network.AWS.DeviceFarm.Types
 import Network.AWS.DeviceFarm.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listInstanceProfiles' smart constructor.
-data ListInstanceProfiles = ListInstanceProfiles'
-  { _lipNextToken  :: !(Maybe Text)
-  , _lipMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInstanceProfiles = ListInstanceProfiles'{_lipNextToken
+                                                  :: !(Maybe Text),
+                                                  _lipMaxResults ::
+                                                  !(Maybe Int)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInstanceProfiles' with the minimum fields required to make a request.
 --
@@ -59,20 +62,27 @@ data ListInstanceProfiles = ListInstanceProfiles'
 --
 -- * 'lipNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 --
--- * 'lipMaxResults' - An integer specifying the maximum number of items you want to return in the API response.
+-- * 'lipMaxResults' - An integer that specifies the maximum number of items you want to return in the API response.
 listInstanceProfiles
     :: ListInstanceProfiles
-listInstanceProfiles =
-  ListInstanceProfiles' {_lipNextToken = Nothing, _lipMaxResults = Nothing}
-
+listInstanceProfiles
+  = ListInstanceProfiles'{_lipNextToken = Nothing,
+                          _lipMaxResults = Nothing}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 lipNextToken :: Lens' ListInstanceProfiles (Maybe Text)
 lipNextToken = lens _lipNextToken (\ s a -> s{_lipNextToken = a})
 
--- | An integer specifying the maximum number of items you want to return in the API response.
+-- | An integer that specifies the maximum number of items you want to return in the API response.
 lipMaxResults :: Lens' ListInstanceProfiles (Maybe Int)
 lipMaxResults = lens _lipMaxResults (\ s a -> s{_lipMaxResults = a})
+
+instance AWSPager ListInstanceProfiles where
+        page rq rs
+          | stop (rs ^. liprsNextToken) = Nothing
+          | stop (rs ^. liprsInstanceProfiles) = Nothing
+          | otherwise =
+            Just $ rq & lipNextToken .~ rs ^. liprsNextToken
 
 instance AWSRequest ListInstanceProfiles where
         type Rs ListInstanceProfiles =
@@ -114,12 +124,17 @@ instance ToQuery ListInstanceProfiles where
         toQuery = const mempty
 
 -- | /See:/ 'listInstanceProfilesResponse' smart constructor.
-data ListInstanceProfilesResponse = ListInstanceProfilesResponse'
-  { _liprsNextToken        :: !(Maybe Text)
-  , _liprsInstanceProfiles :: !(Maybe [InstanceProfile])
-  , _liprsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInstanceProfilesResponse = ListInstanceProfilesResponse'{_liprsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _liprsInstanceProfiles
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [InstanceProfile]),
+                                                                  _liprsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListInstanceProfilesResponse' with the minimum fields required to make a request.
 --
@@ -127,25 +142,23 @@ data ListInstanceProfilesResponse = ListInstanceProfilesResponse'
 --
 -- * 'liprsNextToken' - An identifier that can be used in the next call to this operation to return the next set of items in the list.
 --
--- * 'liprsInstanceProfiles' - An object containing information about your instance profiles.
+-- * 'liprsInstanceProfiles' - An object that contains information about your instance profiles.
 --
 -- * 'liprsResponseStatus' - -- | The response status code.
 listInstanceProfilesResponse
     :: Int -- ^ 'liprsResponseStatus'
     -> ListInstanceProfilesResponse
-listInstanceProfilesResponse pResponseStatus_ =
-  ListInstanceProfilesResponse'
-    { _liprsNextToken = Nothing
-    , _liprsInstanceProfiles = Nothing
-    , _liprsResponseStatus = pResponseStatus_
-    }
-
+listInstanceProfilesResponse pResponseStatus_
+  = ListInstanceProfilesResponse'{_liprsNextToken =
+                                    Nothing,
+                                  _liprsInstanceProfiles = Nothing,
+                                  _liprsResponseStatus = pResponseStatus_}
 
 -- | An identifier that can be used in the next call to this operation to return the next set of items in the list.
 liprsNextToken :: Lens' ListInstanceProfilesResponse (Maybe Text)
 liprsNextToken = lens _liprsNextToken (\ s a -> s{_liprsNextToken = a})
 
--- | An object containing information about your instance profiles.
+-- | An object that contains information about your instance profiles.
 liprsInstanceProfiles :: Lens' ListInstanceProfilesResponse [InstanceProfile]
 liprsInstanceProfiles = lens _liprsInstanceProfiles (\ s a -> s{_liprsInstanceProfiles = a}) . _Default . _Coerce
 

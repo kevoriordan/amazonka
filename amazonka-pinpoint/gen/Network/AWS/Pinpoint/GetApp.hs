@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about an app.
+-- Retrieves information about an application.
+--
+--
 module Network.AWS.Pinpoint.GetApp
     (
     -- * Creating a Request
@@ -43,23 +45,21 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getApp' smart constructor.
-newtype GetApp = GetApp'
-  { _gaApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetApp = GetApp'{_gaApplicationId :: Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetApp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gaApplicationId' - Undocumented member.
+-- * 'gaApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getApp
     :: Text -- ^ 'gaApplicationId'
     -> GetApp
-getApp pApplicationId_ = GetApp' {_gaApplicationId = pApplicationId_}
+getApp pApplicationId_
+  = GetApp'{_gaApplicationId = pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gaApplicationId :: Lens' GetApp Text
 gaApplicationId = lens _gaApplicationId (\ s a -> s{_gaApplicationId = a})
 
@@ -91,11 +91,11 @@ instance ToQuery GetApp where
         toQuery = const mempty
 
 -- | /See:/ 'getAppResponse' smart constructor.
-data GetAppResponse = GetAppResponse'
-  { _garsResponseStatus      :: !Int
-  , _garsApplicationResponse :: !ApplicationResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAppResponse = GetAppResponse'{_garsResponseStatus
+                                      :: !Int,
+                                      _garsApplicationResponse ::
+                                      !ApplicationResponse}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAppResponse' with the minimum fields required to make a request.
 --
@@ -108,12 +108,10 @@ getAppResponse
     :: Int -- ^ 'garsResponseStatus'
     -> ApplicationResponse -- ^ 'garsApplicationResponse'
     -> GetAppResponse
-getAppResponse pResponseStatus_ pApplicationResponse_ =
-  GetAppResponse'
-    { _garsResponseStatus = pResponseStatus_
-    , _garsApplicationResponse = pApplicationResponse_
-    }
-
+getAppResponse pResponseStatus_ pApplicationResponse_
+  = GetAppResponse'{_garsResponseStatus =
+                      pResponseStatus_,
+                    _garsApplicationResponse = pApplicationResponse_}
 
 -- | -- | The response status code.
 garsResponseStatus :: Lens' GetAppResponse Int

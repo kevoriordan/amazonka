@@ -48,12 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updatePublicKey' smart constructor.
-data UpdatePublicKey = UpdatePublicKey'
-  { _upkIfMatch         :: !(Maybe Text)
-  , _upkPublicKeyConfig :: !PublicKeyConfig
-  , _upkId              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePublicKey = UpdatePublicKey'{_upkIfMatch
+                                        :: !(Maybe Text),
+                                        _upkPublicKeyConfig :: !PublicKeyConfig,
+                                        _upkId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdatePublicKey' with the minimum fields required to make a request.
 --
@@ -68,13 +67,10 @@ updatePublicKey
     :: PublicKeyConfig -- ^ 'upkPublicKeyConfig'
     -> Text -- ^ 'upkId'
     -> UpdatePublicKey
-updatePublicKey pPublicKeyConfig_ pId_ =
-  UpdatePublicKey'
-    { _upkIfMatch = Nothing
-    , _upkPublicKeyConfig = pPublicKeyConfig_
-    , _upkId = pId_
-    }
-
+updatePublicKey pPublicKeyConfig_ pId_
+  = UpdatePublicKey'{_upkIfMatch = Nothing,
+                     _upkPublicKeyConfig = pPublicKeyConfig_,
+                     _upkId = pId_}
 
 -- | The value of the @ETag@ header that you received when retrieving the public key to update. For example: @E2QWRUHAPOMQZL@ .
 upkIfMatch :: Lens' UpdatePublicKey (Maybe Text)
@@ -105,7 +101,7 @@ instance NFData UpdatePublicKey where
 instance ToElement UpdatePublicKey where
         toElement
           = mkElement
-              "{http://cloudfront.amazonaws.com/doc/2017-10-30/}PublicKeyConfig"
+              "{http://cloudfront.amazonaws.com/doc/2019-03-26/}PublicKeyConfig"
               .
               _upkPublicKeyConfig
 
@@ -116,18 +112,20 @@ instance ToHeaders UpdatePublicKey where
 instance ToPath UpdatePublicKey where
         toPath UpdatePublicKey'{..}
           = mconcat
-              ["/2017-10-30/public-key/", toBS _upkId, "/config"]
+              ["/2019-03-26/public-key/", toBS _upkId, "/config"]
 
 instance ToQuery UpdatePublicKey where
         toQuery = const mempty
 
 -- | /See:/ 'updatePublicKeyResponse' smart constructor.
-data UpdatePublicKeyResponse = UpdatePublicKeyResponse'
-  { _upkrsETag           :: !(Maybe Text)
-  , _upkrsPublicKey      :: !(Maybe PublicKey)
-  , _upkrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePublicKeyResponse = UpdatePublicKeyResponse'{_upkrsETag
+                                                        :: !(Maybe Text),
+                                                        _upkrsPublicKey ::
+                                                        !(Maybe PublicKey),
+                                                        _upkrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'UpdatePublicKeyResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +139,10 @@ data UpdatePublicKeyResponse = UpdatePublicKeyResponse'
 updatePublicKeyResponse
     :: Int -- ^ 'upkrsResponseStatus'
     -> UpdatePublicKeyResponse
-updatePublicKeyResponse pResponseStatus_ =
-  UpdatePublicKeyResponse'
-    { _upkrsETag = Nothing
-    , _upkrsPublicKey = Nothing
-    , _upkrsResponseStatus = pResponseStatus_
-    }
-
+updatePublicKeyResponse pResponseStatus_
+  = UpdatePublicKeyResponse'{_upkrsETag = Nothing,
+                             _upkrsPublicKey = Nothing,
+                             _upkrsResponseStatus = pResponseStatus_}
 
 -- | The current version of the update public key result. For example: @E2QWRUHAPOMQZL@ .
 upkrsETag :: Lens' UpdatePublicKeyResponse (Maybe Text)

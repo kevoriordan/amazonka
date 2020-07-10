@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified thing.
+-- Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
 --
 --
 module Network.AWS.IoT.DeleteThing
@@ -34,7 +34,7 @@ module Network.AWS.IoT.DeleteThing
     , deleteThingResponse
     , DeleteThingResponse
     -- * Response Lenses
-    , ddrsResponseStatus
+    , dltthngrsResponseStatus
     ) where
 
 import Network.AWS.IoT.Types
@@ -49,11 +49,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteThing' smart constructor.
-data DeleteThing = DeleteThing'
-  { _dtExpectedVersion :: !(Maybe Integer)
-  , _dtThingName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteThing = DeleteThing'{_dtExpectedVersion ::
+                                !(Maybe Integer),
+                                _dtThingName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteThing' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data DeleteThing = DeleteThing'
 deleteThing
     :: Text -- ^ 'dtThingName'
     -> DeleteThing
-deleteThing pThingName_ =
-  DeleteThing' {_dtExpectedVersion = Nothing, _dtThingName = pThingName_}
-
+deleteThing pThingName_
+  = DeleteThing'{_dtExpectedVersion = Nothing,
+                 _dtThingName = pThingName_}
 
 -- | The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the @DeleteThing@ request is rejected with a @VersionConflictException@ .
 dtExpectedVersion :: Lens' DeleteThing (Maybe Integer)
@@ -105,25 +104,25 @@ instance ToQuery DeleteThing where
 --
 --
 -- /See:/ 'deleteThingResponse' smart constructor.
-newtype DeleteThingResponse = DeleteThingResponse'
-  { _ddrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteThingResponse = DeleteThingResponse'{_dltthngrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteThingResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddrsResponseStatus' - -- | The response status code.
+-- * 'dltthngrsResponseStatus' - -- | The response status code.
 deleteThingResponse
-    :: Int -- ^ 'ddrsResponseStatus'
+    :: Int -- ^ 'dltthngrsResponseStatus'
     -> DeleteThingResponse
-deleteThingResponse pResponseStatus_ =
-  DeleteThingResponse' {_ddrsResponseStatus = pResponseStatus_}
-
+deleteThingResponse pResponseStatus_
+  = DeleteThingResponse'{_dltthngrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
-ddrsResponseStatus :: Lens' DeleteThingResponse Int
-ddrsResponseStatus = lens _ddrsResponseStatus (\ s a -> s{_ddrsResponseStatus = a})
+dltthngrsResponseStatus :: Lens' DeleteThingResponse Int
+dltthngrsResponseStatus = lens _dltthngrsResponseStatus (\ s a -> s{_dltthngrsResponseStatus = a})
 
 instance NFData DeleteThingResponse where

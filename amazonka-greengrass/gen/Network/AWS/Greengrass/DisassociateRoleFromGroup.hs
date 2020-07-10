@@ -43,24 +43,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateRoleFromGroup' smart constructor.
-newtype DisassociateRoleFromGroup = DisassociateRoleFromGroup'
-  { _drfgGroupId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateRoleFromGroup = DisassociateRoleFromGroup'{_drfgGroupId
+                                                               :: Text}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DisassociateRoleFromGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drfgGroupId' - The ID of the AWS Greengrass group.
+-- * 'drfgGroupId' - The ID of the Greengrass group.
 disassociateRoleFromGroup
     :: Text -- ^ 'drfgGroupId'
     -> DisassociateRoleFromGroup
-disassociateRoleFromGroup pGroupId_ =
-  DisassociateRoleFromGroup' {_drfgGroupId = pGroupId_}
+disassociateRoleFromGroup pGroupId_
+  = DisassociateRoleFromGroup'{_drfgGroupId =
+                                 pGroupId_}
 
-
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 drfgGroupId :: Lens' DisassociateRoleFromGroup Text
 drfgGroupId = lens _drfgGroupId (\ s a -> s{_drfgGroupId = a})
 
@@ -94,11 +94,15 @@ instance ToQuery DisassociateRoleFromGroup where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateRoleFromGroupResponse' smart constructor.
-data DisassociateRoleFromGroupResponse = DisassociateRoleFromGroupResponse'
-  { _drfgrsDisassociatedAt :: !(Maybe Text)
-  , _drfgrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateRoleFromGroupResponse = DisassociateRoleFromGroupResponse'{_drfgrsDisassociatedAt
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _drfgrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DisassociateRoleFromGroupResponse' with the minimum fields required to make a request.
 --
@@ -110,10 +114,10 @@ data DisassociateRoleFromGroupResponse = DisassociateRoleFromGroupResponse'
 disassociateRoleFromGroupResponse
     :: Int -- ^ 'drfgrsResponseStatus'
     -> DisassociateRoleFromGroupResponse
-disassociateRoleFromGroupResponse pResponseStatus_ =
-  DisassociateRoleFromGroupResponse'
-    {_drfgrsDisassociatedAt = Nothing, _drfgrsResponseStatus = pResponseStatus_}
-
+disassociateRoleFromGroupResponse pResponseStatus_
+  = DisassociateRoleFromGroupResponse'{_drfgrsDisassociatedAt
+                                         = Nothing,
+                                       _drfgrsResponseStatus = pResponseStatus_}
 
 -- | The time, in milliseconds since the epoch, when the role was disassociated from the group.
 drfgrsDisassociatedAt :: Lens' DisassociateRoleFromGroupResponse (Maybe Text)

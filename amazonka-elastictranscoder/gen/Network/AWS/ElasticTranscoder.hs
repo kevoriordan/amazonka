@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS Elastic Transcoder Service__
+-- __AWS Elastic Transcoder Service__ 
 --
 -- The AWS Elastic Transcoder Service.
 --
@@ -23,20 +23,20 @@ module Network.AWS.ElasticTranscoder
     -- * Errors
     -- $errors
 
-    -- ** IncompatibleVersionException
-    , _IncompatibleVersionException
-
-    -- ** ValidationException
-    , _ValidationException
+    -- ** InternalServiceException
+    , _InternalServiceException
 
     -- ** AccessDeniedException
     , _AccessDeniedException
 
-    -- ** InternalServiceException
-    , _InternalServiceException
+    -- ** ValidationException
+    , _ValidationException
 
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
+
+    -- ** IncompatibleVersionException
+    , _IncompatibleVersionException
 
     -- ** LimitExceededException
     , _LimitExceededException
@@ -53,52 +53,52 @@ module Network.AWS.ElasticTranscoder
     -- * Operations
     -- $operations
 
-    -- ** DeletePreset
+    -- ** DeletePreset 
     , module Network.AWS.ElasticTranscoder.DeletePreset
 
-    -- ** UpdatePipelineStatus
+    -- ** UpdatePipelineStatus 
     , module Network.AWS.ElasticTranscoder.UpdatePipelineStatus
 
     -- ** ListJobsByPipeline (Paginated)
     , module Network.AWS.ElasticTranscoder.ListJobsByPipeline
 
-    -- ** UpdatePipeline
+    -- ** UpdatePipeline 
     , module Network.AWS.ElasticTranscoder.UpdatePipeline
 
-    -- ** DeletePipeline
+    -- ** DeletePipeline 
     , module Network.AWS.ElasticTranscoder.DeletePipeline
 
-    -- ** CreateJob
+    -- ** CreateJob 
     , module Network.AWS.ElasticTranscoder.CreateJob
 
     -- ** ListPipelines (Paginated)
     , module Network.AWS.ElasticTranscoder.ListPipelines
 
-    -- ** CreatePreset
+    -- ** CreatePreset 
     , module Network.AWS.ElasticTranscoder.CreatePreset
 
     -- ** ListPresets (Paginated)
     , module Network.AWS.ElasticTranscoder.ListPresets
 
-    -- ** ReadPreset
+    -- ** ReadPreset 
     , module Network.AWS.ElasticTranscoder.ReadPreset
 
-    -- ** ReadJob
+    -- ** ReadJob 
     , module Network.AWS.ElasticTranscoder.ReadJob
 
-    -- ** UpdatePipelineNotifications
+    -- ** UpdatePipelineNotifications 
     , module Network.AWS.ElasticTranscoder.UpdatePipelineNotifications
 
-    -- ** ReadPipeline
+    -- ** ReadPipeline 
     , module Network.AWS.ElasticTranscoder.ReadPipeline
 
-    -- ** CreatePipeline
+    -- ** CreatePipeline 
     , module Network.AWS.ElasticTranscoder.CreatePipeline
 
     -- ** ListJobsByStatus (Paginated)
     , module Network.AWS.ElasticTranscoder.ListJobsByStatus
 
-    -- ** CancelJob
+    -- ** CancelJob 
     , module Network.AWS.ElasticTranscoder.CancelJob
 
     -- * Types

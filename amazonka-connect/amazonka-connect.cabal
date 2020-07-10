@@ -45,18 +45,85 @@ library
 
     exposed-modules:
           Network.AWS.Connect
+        , Network.AWS.Connect.CreateUser
+        , Network.AWS.Connect.DeleteUser
+        , Network.AWS.Connect.DescribeUser
+        , Network.AWS.Connect.DescribeUserHierarchyGroup
+        , Network.AWS.Connect.DescribeUserHierarchyStructure
+        , Network.AWS.Connect.GetContactAttributes
+        , Network.AWS.Connect.GetCurrentMetricData
+        , Network.AWS.Connect.GetFederationToken
+        , Network.AWS.Connect.GetMetricData
+        , Network.AWS.Connect.ListContactFlows
+        , Network.AWS.Connect.ListHoursOfOperations
+        , Network.AWS.Connect.ListPhoneNumbers
+        , Network.AWS.Connect.ListQueues
+        , Network.AWS.Connect.ListRoutingProfiles
+        , Network.AWS.Connect.ListSecurityProfiles
+        , Network.AWS.Connect.ListTagsForResource
+        , Network.AWS.Connect.ListUserHierarchyGroups
+        , Network.AWS.Connect.ListUsers
+        , Network.AWS.Connect.StartChatContact
         , Network.AWS.Connect.StartOutboundVoiceContact
         , Network.AWS.Connect.StopContact
+        , Network.AWS.Connect.TagResource
         , Network.AWS.Connect.Types
+        , Network.AWS.Connect.UntagResource
+        , Network.AWS.Connect.UpdateContactAttributes
+        , Network.AWS.Connect.UpdateUserHierarchy
+        , Network.AWS.Connect.UpdateUserIdentityInfo
+        , Network.AWS.Connect.UpdateUserPhoneConfig
+        , Network.AWS.Connect.UpdateUserRoutingProfile
+        , Network.AWS.Connect.UpdateUserSecurityProfiles
         , Network.AWS.Connect.Waiters
 
     other-modules:
-          Network.AWS.Connect.Types.Product
-        , Network.AWS.Connect.Types.Sum
+          Network.AWS.Connect.Types.Channel
+        , Network.AWS.Connect.Types.ChatMessage
+        , Network.AWS.Connect.Types.Comparison
+        , Network.AWS.Connect.Types.ContactFlowSummary
+        , Network.AWS.Connect.Types.ContactFlowType
+        , Network.AWS.Connect.Types.Credentials
+        , Network.AWS.Connect.Types.CurrentMetric
+        , Network.AWS.Connect.Types.CurrentMetricData
+        , Network.AWS.Connect.Types.CurrentMetricName
+        , Network.AWS.Connect.Types.CurrentMetricResult
+        , Network.AWS.Connect.Types.Dimensions
+        , Network.AWS.Connect.Types.Filters
+        , Network.AWS.Connect.Types.Grouping
+        , Network.AWS.Connect.Types.HierarchyGroup
+        , Network.AWS.Connect.Types.HierarchyGroupSummary
+        , Network.AWS.Connect.Types.HierarchyLevel
+        , Network.AWS.Connect.Types.HierarchyPath
+        , Network.AWS.Connect.Types.HierarchyStructure
+        , Network.AWS.Connect.Types.HistoricalMetric
+        , Network.AWS.Connect.Types.HistoricalMetricData
+        , Network.AWS.Connect.Types.HistoricalMetricName
+        , Network.AWS.Connect.Types.HistoricalMetricResult
+        , Network.AWS.Connect.Types.HoursOfOperationSummary
+        , Network.AWS.Connect.Types.ParticipantDetails
+        , Network.AWS.Connect.Types.PhoneNumberCountryCode
+        , Network.AWS.Connect.Types.PhoneNumberSummary
+        , Network.AWS.Connect.Types.PhoneNumberType
+        , Network.AWS.Connect.Types.PhoneType
+        , Network.AWS.Connect.Types.Product
+        , Network.AWS.Connect.Types.QueueReference
+        , Network.AWS.Connect.Types.QueueSummary
+        , Network.AWS.Connect.Types.QueueType
+        , Network.AWS.Connect.Types.RoutingProfileSummary
+        , Network.AWS.Connect.Types.SecurityProfileSummary
+        , Network.AWS.Connect.Types.Statistic
+        , Network.AWS.Connect.Types.Threshold
+        , Network.AWS.Connect.Types.Unit
+        , Network.AWS.Connect.Types.User
+        , Network.AWS.Connect.Types.UserIdentityInfo
+        , Network.AWS.Connect.Types.UserPhoneConfig
+        , Network.AWS.Connect.Types.UserSummary
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-connect-test
     type:              exitcode-stdio-1.0
@@ -80,6 +147,7 @@ test-suite amazonka-connect-test
         , amazonka-connect
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

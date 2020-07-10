@@ -44,23 +44,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAssociatedRole' smart constructor.
-newtype GetAssociatedRole = GetAssociatedRole'
-  { _garGroupId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetAssociatedRole = GetAssociatedRole'{_garGroupId
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAssociatedRole' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'garGroupId' - The ID of the AWS Greengrass group.
+-- * 'garGroupId' - The ID of the Greengrass group.
 getAssociatedRole
     :: Text -- ^ 'garGroupId'
     -> GetAssociatedRole
-getAssociatedRole pGroupId_ = GetAssociatedRole' {_garGroupId = pGroupId_}
+getAssociatedRole pGroupId_
+  = GetAssociatedRole'{_garGroupId = pGroupId_}
 
-
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 garGroupId :: Lens' GetAssociatedRole Text
 garGroupId = lens _garGroupId (\ s a -> s{_garGroupId = a})
 
@@ -94,12 +93,14 @@ instance ToQuery GetAssociatedRole where
         toQuery = const mempty
 
 -- | /See:/ 'getAssociatedRoleResponse' smart constructor.
-data GetAssociatedRoleResponse = GetAssociatedRoleResponse'
-  { _garrsAssociatedAt   :: !(Maybe Text)
-  , _garrsRoleARN        :: !(Maybe Text)
-  , _garrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAssociatedRoleResponse = GetAssociatedRoleResponse'{_garrsAssociatedAt
+                                                            :: !(Maybe Text),
+                                                            _garrsRoleARN ::
+                                                            !(Maybe Text),
+                                                            _garrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'GetAssociatedRoleResponse' with the minimum fields required to make a request.
 --
@@ -113,13 +114,11 @@ data GetAssociatedRoleResponse = GetAssociatedRoleResponse'
 getAssociatedRoleResponse
     :: Int -- ^ 'garrsResponseStatus'
     -> GetAssociatedRoleResponse
-getAssociatedRoleResponse pResponseStatus_ =
-  GetAssociatedRoleResponse'
-    { _garrsAssociatedAt = Nothing
-    , _garrsRoleARN = Nothing
-    , _garrsResponseStatus = pResponseStatus_
-    }
-
+getAssociatedRoleResponse pResponseStatus_
+  = GetAssociatedRoleResponse'{_garrsAssociatedAt =
+                                 Nothing,
+                               _garrsRoleARN = Nothing,
+                               _garrsResponseStatus = pResponseStatus_}
 
 -- | The time when the role was associated with the group.
 garrsAssociatedAt :: Lens' GetAssociatedRoleResponse (Maybe Text)

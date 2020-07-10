@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'testMetricFilter' smart constructor.
-data TestMetricFilter = TestMetricFilter'
-  { _tmfFilterPattern    :: !Text
-  , _tmfLogEventMessages :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestMetricFilter = TestMetricFilter'{_tmfFilterPattern
+                                          :: !Text,
+                                          _tmfLogEventMessages :: !(List1 Text)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestMetricFilter' with the minimum fields required to make a request.
 --
@@ -63,12 +62,10 @@ testMetricFilter
     :: Text -- ^ 'tmfFilterPattern'
     -> NonEmpty Text -- ^ 'tmfLogEventMessages'
     -> TestMetricFilter
-testMetricFilter pFilterPattern_ pLogEventMessages_ =
-  TestMetricFilter'
-    { _tmfFilterPattern = pFilterPattern_
-    , _tmfLogEventMessages = _List1 # pLogEventMessages_
-    }
-
+testMetricFilter pFilterPattern_ pLogEventMessages_
+  = TestMetricFilter'{_tmfFilterPattern =
+                        pFilterPattern_,
+                      _tmfLogEventMessages = _List1 # pLogEventMessages_}
 
 -- | Undocumented member.
 tmfFilterPattern :: Lens' TestMetricFilter Text
@@ -114,11 +111,14 @@ instance ToQuery TestMetricFilter where
         toQuery = const mempty
 
 -- | /See:/ 'testMetricFilterResponse' smart constructor.
-data TestMetricFilterResponse = TestMetricFilterResponse'
-  { _tmfrsMatches        :: !(Maybe [MetricFilterMatchRecord])
-  , _tmfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestMetricFilterResponse = TestMetricFilterResponse'{_tmfrsMatches
+                                                          ::
+                                                          !(Maybe
+                                                              [MetricFilterMatchRecord]),
+                                                          _tmfrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'TestMetricFilterResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +130,9 @@ data TestMetricFilterResponse = TestMetricFilterResponse'
 testMetricFilterResponse
     :: Int -- ^ 'tmfrsResponseStatus'
     -> TestMetricFilterResponse
-testMetricFilterResponse pResponseStatus_ =
-  TestMetricFilterResponse'
-    {_tmfrsMatches = Nothing, _tmfrsResponseStatus = pResponseStatus_}
-
+testMetricFilterResponse pResponseStatus_
+  = TestMetricFilterResponse'{_tmfrsMatches = Nothing,
+                              _tmfrsResponseStatus = pResponseStatus_}
 
 -- | The matched events.
 tmfrsMatches :: Lens' TestMetricFilterResponse [MetricFilterMatchRecord]

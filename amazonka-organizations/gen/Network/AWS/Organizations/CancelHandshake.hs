@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels a handshake. Canceling a handshake sets the handshake state to @CANCELED@ .
+-- Cancels a handshake. Canceling a handshake sets the handshake state to @CANCELED@ . 
 --
 --
 -- This operation can be called only from the account that originated the handshake. The recipient of the handshake can't cancel it, but can use 'DeclineHandshake' instead. After a handshake is canceled, the recipient can no longer respond to that handshake.
 --
--- After you cancel a handshake, it continues to appear in the results of relevant APIs for only 30 days. After that it is deleted.
+-- After you cancel a handshake, it continues to appear in the results of relevant APIs for only 30 days. After that, it's deleted.
 --
 module Network.AWS.Organizations.CancelHandshake
     (
@@ -49,24 +49,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'cancelHandshake' smart constructor.
-newtype CancelHandshake = CancelHandshake'
-  { _chHandshakeId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelHandshake = CancelHandshake'{_chHandshakeId
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelHandshake' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chHandshakeId' - The unique identifier (ID) of the handshake that you want to cancel. You can get the ID from the 'ListHandshakesForOrganization' operation. The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.
+-- * 'chHandshakeId' - The unique identifier (ID) of the handshake that you want to cancel. You can get the ID from the 'ListHandshakesForOrganization' operation. The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lowercase letters or digits.
 cancelHandshake
     :: Text -- ^ 'chHandshakeId'
     -> CancelHandshake
-cancelHandshake pHandshakeId_ =
-  CancelHandshake' {_chHandshakeId = pHandshakeId_}
+cancelHandshake pHandshakeId_
+  = CancelHandshake'{_chHandshakeId = pHandshakeId_}
 
-
--- | The unique identifier (ID) of the handshake that you want to cancel. You can get the ID from the 'ListHandshakesForOrganization' operation. The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.
+-- | The unique identifier (ID) of the handshake that you want to cancel. You can get the ID from the 'ListHandshakesForOrganization' operation. The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lowercase letters or digits.
 chHandshakeId :: Lens' CancelHandshake Text
 chHandshakeId = lens _chHandshakeId (\ s a -> s{_chHandshakeId = a})
 
@@ -105,11 +103,11 @@ instance ToQuery CancelHandshake where
         toQuery = const mempty
 
 -- | /See:/ 'cancelHandshakeResponse' smart constructor.
-data CancelHandshakeResponse = CancelHandshakeResponse'
-  { _chrsHandshake      :: !(Maybe Handshake)
-  , _chrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CancelHandshakeResponse = CancelHandshakeResponse'{_chrsHandshake
+                                                        :: !(Maybe Handshake),
+                                                        _chrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelHandshakeResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +119,9 @@ data CancelHandshakeResponse = CancelHandshakeResponse'
 cancelHandshakeResponse
     :: Int -- ^ 'chrsResponseStatus'
     -> CancelHandshakeResponse
-cancelHandshakeResponse pResponseStatus_ =
-  CancelHandshakeResponse'
-    {_chrsHandshake = Nothing, _chrsResponseStatus = pResponseStatus_}
-
+cancelHandshakeResponse pResponseStatus_
+  = CancelHandshakeResponse'{_chrsHandshake = Nothing,
+                             _chrsResponseStatus = pResponseStatus_}
 
 -- | A structure that contains details about the handshake that you canceled.
 chrsHandshake :: Lens' CancelHandshakeResponse (Maybe Handshake)

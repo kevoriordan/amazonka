@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html Events> topic in the /Amazon RDS User Guide./
+-- Displays a list of categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in the <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html Events> topic in the /Amazon RDS User Guide./ 
 --
 --
 module Network.AWS.RDS.DescribeEventCategories
@@ -45,16 +45,17 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeEventCategories' smart constructor.
-data DescribeEventCategories = DescribeEventCategories'
-  { _decSourceType :: !(Maybe Text)
-  , _decFilters    :: !(Maybe [Filter])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventCategories = DescribeEventCategories'{_decSourceType
+                                                        :: !(Maybe Text),
+                                                        _decFilters ::
+                                                        !(Maybe [Filter])}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeEventCategories' with the minimum fields required to make a request.
 --
@@ -62,18 +63,18 @@ data DescribeEventCategories = DescribeEventCategories'
 --
 -- * 'decSourceType' - The type of source that is generating the events. Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot
 --
--- * 'decFilters' - This parameter is not currently supported.
+-- * 'decFilters' - This parameter isn't currently supported.
 describeEventCategories
     :: DescribeEventCategories
-describeEventCategories =
-  DescribeEventCategories' {_decSourceType = Nothing, _decFilters = Nothing}
-
+describeEventCategories
+  = DescribeEventCategories'{_decSourceType = Nothing,
+                             _decFilters = Nothing}
 
 -- | The type of source that is generating the events. Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot
 decSourceType :: Lens' DescribeEventCategories (Maybe Text)
 decSourceType = lens _decSourceType (\ s a -> s{_decSourceType = a})
 
--- | This parameter is not currently supported.
+-- | This parameter isn't currently supported.
 decFilters :: Lens' DescribeEventCategories [Filter]
 decFilters = lens _decFilters (\ s a -> s{_decFilters = a}) . _Default . _Coerce
 
@@ -114,11 +115,14 @@ instance ToQuery DescribeEventCategories where
 --
 --
 -- /See:/ 'describeEventCategoriesResponse' smart constructor.
-data DescribeEventCategoriesResponse = DescribeEventCategoriesResponse'
-  { _decrsEventCategoriesMapList :: !(Maybe [EventCategoriesMap])
-  , _decrsResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventCategoriesResponse = DescribeEventCategoriesResponse'{_decrsEventCategoriesMapList
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [EventCategoriesMap]),
+                                                                        _decrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeEventCategoriesResponse' with the minimum fields required to make a request.
 --
@@ -130,12 +134,10 @@ data DescribeEventCategoriesResponse = DescribeEventCategoriesResponse'
 describeEventCategoriesResponse
     :: Int -- ^ 'decrsResponseStatus'
     -> DescribeEventCategoriesResponse
-describeEventCategoriesResponse pResponseStatus_ =
-  DescribeEventCategoriesResponse'
-    { _decrsEventCategoriesMapList = Nothing
-    , _decrsResponseStatus = pResponseStatus_
-    }
-
+describeEventCategoriesResponse pResponseStatus_
+  = DescribeEventCategoriesResponse'{_decrsEventCategoriesMapList
+                                       = Nothing,
+                                     _decrsResponseStatus = pResponseStatus_}
 
 -- | A list of EventCategoriesMap data types.
 decrsEventCategoriesMapList :: Lens' DescribeEventCategoriesResponse [EventCategoriesMap]

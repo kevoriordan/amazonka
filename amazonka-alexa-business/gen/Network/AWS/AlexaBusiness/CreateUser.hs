@@ -50,15 +50,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createUser' smart constructor.
-data CreateUser = CreateUser'
-  { _cuEmail              :: !(Maybe Text)
-  , _cuLastName           :: !(Maybe Text)
-  , _cuFirstName          :: !(Maybe Text)
-  , _cuClientRequestToken :: !(Maybe Text)
-  , _cuTags               :: !(Maybe [Tag])
-  , _cuUserId             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUser = CreateUser'{_cuEmail ::
+                              !(Maybe Text),
+                              _cuLastName :: !(Maybe Text),
+                              _cuFirstName :: !(Maybe Text),
+                              _cuClientRequestToken :: !(Maybe Text),
+                              _cuTags :: !(Maybe [Tag]), _cuUserId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUser' with the minimum fields required to make a request.
 --
@@ -70,7 +68,7 @@ data CreateUser = CreateUser'
 --
 -- * 'cuFirstName' - The first name for the user.
 --
--- * 'cuClientRequestToken' - A unique, user-specified identifier for this request that ensures idempotency.
+-- * 'cuClientRequestToken' - A unique, user-specified identifier for this request that ensures idempotency. 
 --
 -- * 'cuTags' - The tags for the user.
 --
@@ -78,16 +76,11 @@ data CreateUser = CreateUser'
 createUser
     :: Text -- ^ 'cuUserId'
     -> CreateUser
-createUser pUserId_ =
-  CreateUser'
-    { _cuEmail = Nothing
-    , _cuLastName = Nothing
-    , _cuFirstName = Nothing
-    , _cuClientRequestToken = Nothing
-    , _cuTags = Nothing
-    , _cuUserId = pUserId_
-    }
-
+createUser pUserId_
+  = CreateUser'{_cuEmail = Nothing,
+                _cuLastName = Nothing, _cuFirstName = Nothing,
+                _cuClientRequestToken = Nothing, _cuTags = Nothing,
+                _cuUserId = pUserId_}
 
 -- | The email address for the user.
 cuEmail :: Lens' CreateUser (Maybe Text)
@@ -101,7 +94,7 @@ cuLastName = lens _cuLastName (\ s a -> s{_cuLastName = a})
 cuFirstName :: Lens' CreateUser (Maybe Text)
 cuFirstName = lens _cuFirstName (\ s a -> s{_cuFirstName = a})
 
--- | A unique, user-specified identifier for this request that ensures idempotency.
+-- | A unique, user-specified identifier for this request that ensures idempotency. 
 cuClientRequestToken :: Lens' CreateUser (Maybe Text)
 cuClientRequestToken = lens _cuClientRequestToken (\ s a -> s{_cuClientRequestToken = a})
 
@@ -153,11 +146,10 @@ instance ToQuery CreateUser where
         toQuery = const mempty
 
 -- | /See:/ 'createUserResponse' smart constructor.
-data CreateUserResponse = CreateUserResponse'
-  { _cursUserARN        :: !(Maybe Text)
-  , _cursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateUserResponse = CreateUserResponse'{_cursUserARN
+                                              :: !(Maybe Text),
+                                              _cursResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateUserResponse' with the minimum fields required to make a request.
 --
@@ -169,10 +161,9 @@ data CreateUserResponse = CreateUserResponse'
 createUserResponse
     :: Int -- ^ 'cursResponseStatus'
     -> CreateUserResponse
-createUserResponse pResponseStatus_ =
-  CreateUserResponse'
-    {_cursUserARN = Nothing, _cursResponseStatus = pResponseStatus_}
-
+createUserResponse pResponseStatus_
+  = CreateUserResponse'{_cursUserARN = Nothing,
+                        _cursResponseStatus = pResponseStatus_}
 
 -- | The ARN of the newly created user in the response.
 cursUserARN :: Lens' CreateUserResponse (Maybe Text)

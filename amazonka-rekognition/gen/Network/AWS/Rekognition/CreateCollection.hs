@@ -18,10 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a collection in an AWS Region. You can add faces to the collection using the operation.
+-- Creates a collection in an AWS Region. You can add faces to the collection using the 'IndexFaces' operation. 
 --
 --
--- For example, you might create collections, one for each of your application users. A user can then index faces using the @IndexFaces@ operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container.
+-- For example, you might create collections, one for each of your application users. A user can then index faces using the @IndexFaces@ operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. 
+--
+-- When you create a collection, it is associated with the latest version of the face model version.
 --
 -- This operation requires permissions to perform the @rekognition:CreateCollection@ action.
 --
@@ -51,10 +53,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createCollection' smart constructor.
-newtype CreateCollection = CreateCollection'
-  { _ccCollectionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateCollection = CreateCollection'{_ccCollectionId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCollection' with the minimum fields required to make a request.
 --
@@ -64,9 +65,8 @@ newtype CreateCollection = CreateCollection'
 createCollection
     :: Text -- ^ 'ccCollectionId'
     -> CreateCollection
-createCollection pCollectionId_ =
-  CreateCollection' {_ccCollectionId = pCollectionId_}
-
+createCollection pCollectionId_
+  = CreateCollection'{_ccCollectionId = pCollectionId_}
 
 -- | ID for the collection that you are creating.
 ccCollectionId :: Lens' CreateCollection Text
@@ -111,13 +111,16 @@ instance ToQuery CreateCollection where
         toQuery = const mempty
 
 -- | /See:/ 'createCollectionResponse' smart constructor.
-data CreateCollectionResponse = CreateCollectionResponse'
-  { _ccrsFaceModelVersion :: !(Maybe Text)
-  , _ccrsCollectionARN    :: !(Maybe Text)
-  , _ccrsStatusCode       :: !(Maybe Nat)
-  , _ccrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCollectionResponse = CreateCollectionResponse'{_ccrsFaceModelVersion
+                                                          :: !(Maybe Text),
+                                                          _ccrsCollectionARN ::
+                                                          !(Maybe Text),
+                                                          _ccrsStatusCode ::
+                                                          !(Maybe Nat),
+                                                          _ccrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateCollectionResponse' with the minimum fields required to make a request.
 --
@@ -125,7 +128,7 @@ data CreateCollectionResponse = CreateCollectionResponse'
 --
 -- * 'ccrsFaceModelVersion' - Version number of the face detection model associated with the collection you are creating.
 --
--- * 'ccrsCollectionARN' - Amazon Resource Name (ARN) of the collection. You can use this to manage permissions on your resources.
+-- * 'ccrsCollectionARN' - Amazon Resource Name (ARN) of the collection. You can use this to manage permissions on your resources. 
 --
 -- * 'ccrsStatusCode' - HTTP status code indicating the result of the operation.
 --
@@ -133,20 +136,18 @@ data CreateCollectionResponse = CreateCollectionResponse'
 createCollectionResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CreateCollectionResponse
-createCollectionResponse pResponseStatus_ =
-  CreateCollectionResponse'
-    { _ccrsFaceModelVersion = Nothing
-    , _ccrsCollectionARN = Nothing
-    , _ccrsStatusCode = Nothing
-    , _ccrsResponseStatus = pResponseStatus_
-    }
-
+createCollectionResponse pResponseStatus_
+  = CreateCollectionResponse'{_ccrsFaceModelVersion =
+                                Nothing,
+                              _ccrsCollectionARN = Nothing,
+                              _ccrsStatusCode = Nothing,
+                              _ccrsResponseStatus = pResponseStatus_}
 
 -- | Version number of the face detection model associated with the collection you are creating.
 ccrsFaceModelVersion :: Lens' CreateCollectionResponse (Maybe Text)
 ccrsFaceModelVersion = lens _ccrsFaceModelVersion (\ s a -> s{_ccrsFaceModelVersion = a})
 
--- | Amazon Resource Name (ARN) of the collection. You can use this to manage permissions on your resources.
+-- | Amazon Resource Name (ARN) of the collection. You can use this to manage permissions on your resources. 
 ccrsCollectionARN :: Lens' CreateCollectionResponse (Maybe Text)
 ccrsCollectionARN = lens _ccrsCollectionARN (\ s a -> s{_ccrsCollectionARN = a})
 

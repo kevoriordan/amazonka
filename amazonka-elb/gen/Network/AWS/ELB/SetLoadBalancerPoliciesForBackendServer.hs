@@ -25,7 +25,7 @@
 --
 -- You can use 'DescribeLoadBalancers' or 'DescribeLoadBalancerPolicies' to verify that the policy is associated with the EC2 instance.
 --
--- For more information about enabling back-end instance authentication, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt Configure Back-end Instance Authentication> in the /Classic Load Balancer Guide/ . For more information about Proxy Protocol, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html Configure Proxy Protocol Support> in the /Classic Load Balancer Guide/ .
+-- For more information about enabling back-end instance authentication, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt Configure Back-end Instance Authentication> in the /Classic Load Balancers Guide/ . For more information about Proxy Protocol, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html Configure Proxy Protocol Support> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.SetLoadBalancerPoliciesForBackendServer
     (
@@ -56,12 +56,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'setLoadBalancerPoliciesForBackendServer' smart constructor.
-data SetLoadBalancerPoliciesForBackendServer = SetLoadBalancerPoliciesForBackendServer'
-  { _slbpfbsLoadBalancerName :: !Text
-  , _slbpfbsInstancePort     :: !Int
-  , _slbpfbsPolicyNames      :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetLoadBalancerPoliciesForBackendServer = SetLoadBalancerPoliciesForBackendServer'{_slbpfbsLoadBalancerName
+                                                                                        ::
+                                                                                        !Text,
+                                                                                        _slbpfbsInstancePort
+                                                                                        ::
+                                                                                        !Int,
+                                                                                        _slbpfbsPolicyNames
+                                                                                        ::
+                                                                                        ![Text]}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'SetLoadBalancerPoliciesForBackendServer' with the minimum fields required to make a request.
 --
@@ -76,13 +81,13 @@ setLoadBalancerPoliciesForBackendServer
     :: Text -- ^ 'slbpfbsLoadBalancerName'
     -> Int -- ^ 'slbpfbsInstancePort'
     -> SetLoadBalancerPoliciesForBackendServer
-setLoadBalancerPoliciesForBackendServer pLoadBalancerName_ pInstancePort_ =
-  SetLoadBalancerPoliciesForBackendServer'
-    { _slbpfbsLoadBalancerName = pLoadBalancerName_
-    , _slbpfbsInstancePort = pInstancePort_
-    , _slbpfbsPolicyNames = mempty
-    }
-
+setLoadBalancerPoliciesForBackendServer
+  pLoadBalancerName_ pInstancePort_
+  = SetLoadBalancerPoliciesForBackendServer'{_slbpfbsLoadBalancerName
+                                               = pLoadBalancerName_,
+                                             _slbpfbsInstancePort =
+                                               pInstancePort_,
+                                             _slbpfbsPolicyNames = mempty}
 
 -- | The name of the load balancer.
 slbpfbsLoadBalancerName :: Lens' SetLoadBalancerPoliciesForBackendServer Text
@@ -146,10 +151,14 @@ instance ToQuery
 --
 --
 -- /See:/ 'setLoadBalancerPoliciesForBackendServerResponse' smart constructor.
-newtype SetLoadBalancerPoliciesForBackendServerResponse = SetLoadBalancerPoliciesForBackendServerResponse'
-  { _slbpfbsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetLoadBalancerPoliciesForBackendServerResponse = SetLoadBalancerPoliciesForBackendServerResponse'{_slbpfbsrsResponseStatus
+                                                                                                           ::
+                                                                                                           Int}
+                                                            deriving (Eq, Read,
+                                                                      Show,
+                                                                      Data,
+                                                                      Typeable,
+                                                                      Generic)
 
 -- | Creates a value of 'SetLoadBalancerPoliciesForBackendServerResponse' with the minimum fields required to make a request.
 --
@@ -159,10 +168,10 @@ newtype SetLoadBalancerPoliciesForBackendServerResponse = SetLoadBalancerPolicie
 setLoadBalancerPoliciesForBackendServerResponse
     :: Int -- ^ 'slbpfbsrsResponseStatus'
     -> SetLoadBalancerPoliciesForBackendServerResponse
-setLoadBalancerPoliciesForBackendServerResponse pResponseStatus_ =
-  SetLoadBalancerPoliciesForBackendServerResponse'
-    {_slbpfbsrsResponseStatus = pResponseStatus_}
-
+setLoadBalancerPoliciesForBackendServerResponse
+  pResponseStatus_
+  = SetLoadBalancerPoliciesForBackendServerResponse'{_slbpfbsrsResponseStatus
+                                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 slbpfbsrsResponseStatus :: Lens' SetLoadBalancerPoliciesForBackendServerResponse Int

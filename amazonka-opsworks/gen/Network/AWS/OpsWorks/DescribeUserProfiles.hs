@@ -21,7 +21,7 @@
 -- Describe specified users.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeUserProfiles
     (
@@ -47,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeUserProfiles' smart constructor.
-newtype DescribeUserProfiles = DescribeUserProfiles'
-  { _dupIAMUserARNs :: Maybe [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeUserProfiles = DescribeUserProfiles'{_dupIAMUserARNs
+                                                     :: Maybe [Text]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeUserProfiles' with the minimum fields required to make a request.
 --
@@ -59,8 +59,8 @@ newtype DescribeUserProfiles = DescribeUserProfiles'
 -- * 'dupIAMUserARNs' - An array of IAM or federated user ARNs that identify the users to be described.
 describeUserProfiles
     :: DescribeUserProfiles
-describeUserProfiles = DescribeUserProfiles' {_dupIAMUserARNs = Nothing}
-
+describeUserProfiles
+  = DescribeUserProfiles'{_dupIAMUserARNs = Nothing}
 
 -- | An array of IAM or federated user ARNs that identify the users to be described.
 dupIAMUserARNs :: Lens' DescribeUserProfiles [Text]
@@ -107,11 +107,14 @@ instance ToQuery DescribeUserProfiles where
 --
 --
 -- /See:/ 'describeUserProfilesResponse' smart constructor.
-data DescribeUserProfilesResponse = DescribeUserProfilesResponse'
-  { _duprsUserProfiles   :: !(Maybe [UserProfile])
-  , _duprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUserProfilesResponse = DescribeUserProfilesResponse'{_duprsUserProfiles
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [UserProfile]),
+                                                                  _duprsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeUserProfilesResponse' with the minimum fields required to make a request.
 --
@@ -123,10 +126,10 @@ data DescribeUserProfilesResponse = DescribeUserProfilesResponse'
 describeUserProfilesResponse
     :: Int -- ^ 'duprsResponseStatus'
     -> DescribeUserProfilesResponse
-describeUserProfilesResponse pResponseStatus_ =
-  DescribeUserProfilesResponse'
-    {_duprsUserProfiles = Nothing, _duprsResponseStatus = pResponseStatus_}
-
+describeUserProfilesResponse pResponseStatus_
+  = DescribeUserProfilesResponse'{_duprsUserProfiles =
+                                    Nothing,
+                                  _duprsResponseStatus = pResponseStatus_}
 
 -- | A @Users@ object that describes the specified users.
 duprsUserProfiles :: Lens' DescribeUserProfilesResponse [UserProfile]

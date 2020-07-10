@@ -55,15 +55,26 @@ import Network.AWS.SES.Types.Product
 --
 --
 -- /See:/ 'createCustomVerificationEmailTemplate' smart constructor.
-data CreateCustomVerificationEmailTemplate = CreateCustomVerificationEmailTemplate'
-  { _ccvetTemplateName          :: !Text
-  , _ccvetFromEmailAddress      :: !Text
-  , _ccvetTemplateSubject       :: !Text
-  , _ccvetTemplateContent       :: !Text
-  , _ccvetSuccessRedirectionURL :: !Text
-  , _ccvetFailureRedirectionURL :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCustomVerificationEmailTemplate = CreateCustomVerificationEmailTemplate'{_ccvetTemplateName
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ccvetFromEmailAddress
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ccvetTemplateSubject
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ccvetTemplateContent
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ccvetSuccessRedirectionURL
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _ccvetFailureRedirectionURL
+                                                                                    ::
+                                                                                    !Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'CreateCustomVerificationEmailTemplate' with the minimum fields required to make a request.
 --
@@ -75,7 +86,7 @@ data CreateCustomVerificationEmailTemplate = CreateCustomVerificationEmailTempla
 --
 -- * 'ccvetTemplateSubject' - The subject line of the custom verification email.
 --
--- * 'ccvetTemplateContent' - The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq Custom Verification Email Frequently Asked Questions> in the /Amazon SES Developer Guide/ .
+-- * 'ccvetTemplateContent' - The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq Custom Verification Email Frequently Asked Questions> in the /Amazon SES Developer Guide/ .
 --
 -- * 'ccvetSuccessRedirectionURL' - The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
 --
@@ -88,16 +99,22 @@ createCustomVerificationEmailTemplate
     -> Text -- ^ 'ccvetSuccessRedirectionURL'
     -> Text -- ^ 'ccvetFailureRedirectionURL'
     -> CreateCustomVerificationEmailTemplate
-createCustomVerificationEmailTemplate pTemplateName_ pFromEmailAddress_ pTemplateSubject_ pTemplateContent_ pSuccessRedirectionURL_ pFailureRedirectionURL_ =
-  CreateCustomVerificationEmailTemplate'
-    { _ccvetTemplateName = pTemplateName_
-    , _ccvetFromEmailAddress = pFromEmailAddress_
-    , _ccvetTemplateSubject = pTemplateSubject_
-    , _ccvetTemplateContent = pTemplateContent_
-    , _ccvetSuccessRedirectionURL = pSuccessRedirectionURL_
-    , _ccvetFailureRedirectionURL = pFailureRedirectionURL_
-    }
-
+createCustomVerificationEmailTemplate pTemplateName_
+  pFromEmailAddress_ pTemplateSubject_
+  pTemplateContent_ pSuccessRedirectionURL_
+  pFailureRedirectionURL_
+  = CreateCustomVerificationEmailTemplate'{_ccvetTemplateName
+                                             = pTemplateName_,
+                                           _ccvetFromEmailAddress =
+                                             pFromEmailAddress_,
+                                           _ccvetTemplateSubject =
+                                             pTemplateSubject_,
+                                           _ccvetTemplateContent =
+                                             pTemplateContent_,
+                                           _ccvetSuccessRedirectionURL =
+                                             pSuccessRedirectionURL_,
+                                           _ccvetFailureRedirectionURL =
+                                             pFailureRedirectionURL_}
 
 -- | The name of the custom verification email template.
 ccvetTemplateName :: Lens' CreateCustomVerificationEmailTemplate Text
@@ -111,7 +128,7 @@ ccvetFromEmailAddress = lens _ccvetFromEmailAddress (\ s a -> s{_ccvetFromEmailA
 ccvetTemplateSubject :: Lens' CreateCustomVerificationEmailTemplate Text
 ccvetTemplateSubject = lens _ccvetTemplateSubject (\ s a -> s{_ccvetTemplateSubject = a})
 
--- | The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq Custom Verification Email Frequently Asked Questions> in the /Amazon SES Developer Guide/ .
+-- | The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq Custom Verification Email Frequently Asked Questions> in the /Amazon SES Developer Guide/ .
 ccvetTemplateContent :: Lens' CreateCustomVerificationEmailTemplate Text
 ccvetTemplateContent = lens _ccvetTemplateContent (\ s a -> s{_ccvetTemplateContent = a})
 
@@ -168,18 +185,17 @@ instance ToQuery
                  _ccvetFailureRedirectionURL]
 
 -- | /See:/ 'createCustomVerificationEmailTemplateResponse' smart constructor.
-data CreateCustomVerificationEmailTemplateResponse =
-  CreateCustomVerificationEmailTemplateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCustomVerificationEmailTemplateResponse = CreateCustomVerificationEmailTemplateResponse'
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'CreateCustomVerificationEmailTemplateResponse' with the minimum fields required to make a request.
 --
 createCustomVerificationEmailTemplateResponse
     :: CreateCustomVerificationEmailTemplateResponse
-createCustomVerificationEmailTemplateResponse =
-  CreateCustomVerificationEmailTemplateResponse'
-
+createCustomVerificationEmailTemplateResponse
+  = CreateCustomVerificationEmailTemplateResponse'
 
 instance NFData
            CreateCustomVerificationEmailTemplateResponse

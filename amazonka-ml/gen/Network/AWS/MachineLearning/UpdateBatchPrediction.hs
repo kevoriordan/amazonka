@@ -48,11 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateBatchPrediction' smart constructor.
-data UpdateBatchPrediction = UpdateBatchPrediction'
-  { _ubpBatchPredictionId   :: !Text
-  , _ubpBatchPredictionName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateBatchPrediction = UpdateBatchPrediction'{_ubpBatchPredictionId
+                                                    :: !Text,
+                                                    _ubpBatchPredictionName ::
+                                                    !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateBatchPrediction' with the minimum fields required to make a request.
 --
@@ -65,12 +66,11 @@ updateBatchPrediction
     :: Text -- ^ 'ubpBatchPredictionId'
     -> Text -- ^ 'ubpBatchPredictionName'
     -> UpdateBatchPrediction
-updateBatchPrediction pBatchPredictionId_ pBatchPredictionName_ =
-  UpdateBatchPrediction'
-    { _ubpBatchPredictionId = pBatchPredictionId_
-    , _ubpBatchPredictionName = pBatchPredictionName_
-    }
-
+updateBatchPrediction pBatchPredictionId_
+  pBatchPredictionName_
+  = UpdateBatchPrediction'{_ubpBatchPredictionId =
+                             pBatchPredictionId_,
+                           _ubpBatchPredictionName = pBatchPredictionName_}
 
 -- | The ID assigned to the @BatchPrediction@ during creation.
 ubpBatchPredictionId :: Lens' UpdateBatchPrediction Text
@@ -125,11 +125,14 @@ instance ToQuery UpdateBatchPrediction where
 --
 --
 -- /See:/ 'updateBatchPredictionResponse' smart constructor.
-data UpdateBatchPredictionResponse = UpdateBatchPredictionResponse'
-  { _ubprsBatchPredictionId :: !(Maybe Text)
-  , _ubprsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateBatchPredictionResponse = UpdateBatchPredictionResponse'{_ubprsBatchPredictionId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _ubprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'UpdateBatchPredictionResponse' with the minimum fields required to make a request.
 --
@@ -141,10 +144,10 @@ data UpdateBatchPredictionResponse = UpdateBatchPredictionResponse'
 updateBatchPredictionResponse
     :: Int -- ^ 'ubprsResponseStatus'
     -> UpdateBatchPredictionResponse
-updateBatchPredictionResponse pResponseStatus_ =
-  UpdateBatchPredictionResponse'
-    {_ubprsBatchPredictionId = Nothing, _ubprsResponseStatus = pResponseStatus_}
-
+updateBatchPredictionResponse pResponseStatus_
+  = UpdateBatchPredictionResponse'{_ubprsBatchPredictionId
+                                     = Nothing,
+                                   _ubprsResponseStatus = pResponseStatus_}
 
 -- | The ID assigned to the @BatchPrediction@ during creation. This value should be identical to the value of the @BatchPredictionId@ in the request.
 ubprsBatchPredictionId :: Lens' UpdateBatchPredictionResponse (Maybe Text)

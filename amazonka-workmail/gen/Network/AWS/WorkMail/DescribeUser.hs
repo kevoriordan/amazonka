@@ -53,11 +53,10 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'describeUser' smart constructor.
-data DescribeUser = DescribeUser'
-  { _duOrganizationId :: !Text
-  , _duUserId         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUser = DescribeUser'{_duOrganizationId
+                                  :: !Text,
+                                  _duUserId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeUser' with the minimum fields required to make a request.
 --
@@ -70,9 +69,9 @@ describeUser
     :: Text -- ^ 'duOrganizationId'
     -> Text -- ^ 'duUserId'
     -> DescribeUser
-describeUser pOrganizationId_ pUserId_ =
-  DescribeUser' {_duOrganizationId = pOrganizationId_, _duUserId = pUserId_}
-
+describeUser pOrganizationId_ pUserId_
+  = DescribeUser'{_duOrganizationId = pOrganizationId_,
+                  _duUserId = pUserId_}
 
 -- | The identifier for the organization under which the user exists.
 duOrganizationId :: Lens' DescribeUser Text
@@ -125,18 +124,22 @@ instance ToQuery DescribeUser where
         toQuery = const mempty
 
 -- | /See:/ 'describeUserResponse' smart constructor.
-data DescribeUserResponse = DescribeUserResponse'
-  { _dursEmail          :: !(Maybe Text)
-  , _dursState          :: !(Maybe EntityState)
-  , _dursUserId         :: !(Maybe Text)
-  , _dursDisabledDate   :: !(Maybe POSIX)
-  , _dursName           :: !(Maybe Text)
-  , _dursDisplayName    :: !(Maybe Text)
-  , _dursUserRole       :: !(Maybe UserRole)
-  , _dursEnabledDate    :: !(Maybe POSIX)
-  , _dursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeUserResponse = DescribeUserResponse'{_dursEmail
+                                                  :: !(Maybe Text),
+                                                  _dursState ::
+                                                  !(Maybe EntityState),
+                                                  _dursUserId :: !(Maybe Text),
+                                                  _dursDisabledDate ::
+                                                  !(Maybe POSIX),
+                                                  _dursName :: !(Maybe Text),
+                                                  _dursDisplayName ::
+                                                  !(Maybe Text),
+                                                  _dursUserRole ::
+                                                  !(Maybe UserRole),
+                                                  _dursEnabledDate ::
+                                                  !(Maybe POSIX),
+                                                  _dursResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeUserResponse' with the minimum fields required to make a request.
 --
@@ -144,7 +147,7 @@ data DescribeUserResponse = DescribeUserResponse'
 --
 -- * 'dursEmail' - The email of the user.
 --
--- * 'dursState' - The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).
+-- * 'dursState' - The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).
 --
 -- * 'dursUserId' - The identifier for the described user.
 --
@@ -154,7 +157,7 @@ data DescribeUserResponse = DescribeUserResponse'
 --
 -- * 'dursDisplayName' - The display name of the user.
 --
--- * 'dursUserRole' - In certain cases other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different Amazon WorkMail organizations rely on different directory types, administrators can distinguish between a user that is not registered to Amazon WorkMail (is disabled and has a user role) and the administrative users of the directory. The values are USER, RESOURCE, and SYSTEM_USER.
+-- * 'dursUserRole' - In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.
 --
 -- * 'dursEnabledDate' - The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.
 --
@@ -162,25 +165,19 @@ data DescribeUserResponse = DescribeUserResponse'
 describeUserResponse
     :: Int -- ^ 'dursResponseStatus'
     -> DescribeUserResponse
-describeUserResponse pResponseStatus_ =
-  DescribeUserResponse'
-    { _dursEmail = Nothing
-    , _dursState = Nothing
-    , _dursUserId = Nothing
-    , _dursDisabledDate = Nothing
-    , _dursName = Nothing
-    , _dursDisplayName = Nothing
-    , _dursUserRole = Nothing
-    , _dursEnabledDate = Nothing
-    , _dursResponseStatus = pResponseStatus_
-    }
-
+describeUserResponse pResponseStatus_
+  = DescribeUserResponse'{_dursEmail = Nothing,
+                          _dursState = Nothing, _dursUserId = Nothing,
+                          _dursDisabledDate = Nothing, _dursName = Nothing,
+                          _dursDisplayName = Nothing, _dursUserRole = Nothing,
+                          _dursEnabledDate = Nothing,
+                          _dursResponseStatus = pResponseStatus_}
 
 -- | The email of the user.
 dursEmail :: Lens' DescribeUserResponse (Maybe Text)
 dursEmail = lens _dursEmail (\ s a -> s{_dursEmail = a})
 
--- | The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to Amazon WorkMail).
+-- | The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).
 dursState :: Lens' DescribeUserResponse (Maybe EntityState)
 dursState = lens _dursState (\ s a -> s{_dursState = a})
 
@@ -200,7 +197,7 @@ dursName = lens _dursName (\ s a -> s{_dursName = a})
 dursDisplayName :: Lens' DescribeUserResponse (Maybe Text)
 dursDisplayName = lens _dursDisplayName (\ s a -> s{_dursDisplayName = a})
 
--- | In certain cases other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different Amazon WorkMail organizations rely on different directory types, administrators can distinguish between a user that is not registered to Amazon WorkMail (is disabled and has a user role) and the administrative users of the directory. The values are USER, RESOURCE, and SYSTEM_USER.
+-- | In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.
 dursUserRole :: Lens' DescribeUserResponse (Maybe UserRole)
 dursUserRole = lens _dursUserRole (\ s a -> s{_dursUserRole = a})
 

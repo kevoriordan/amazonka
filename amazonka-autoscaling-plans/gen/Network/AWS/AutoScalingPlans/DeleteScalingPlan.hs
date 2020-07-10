@@ -21,6 +21,10 @@
 -- Deletes the specified scaling plan.
 --
 --
+-- Deleting a scaling plan deletes the underlying 'ScalingInstruction' for all of the scalable resources that are covered by the plan.
+--
+-- If the plan has launched resources or has scaling activities in progress, you must delete those resources separately.
+--
 module Network.AWS.AutoScalingPlans.DeleteScalingPlan
     (
     -- * Creating a Request
@@ -45,11 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteScalingPlan' smart constructor.
-data DeleteScalingPlan = DeleteScalingPlan'
-  { _dspScalingPlanName    :: !Text
-  , _dspScalingPlanVersion :: !Integer
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteScalingPlan = DeleteScalingPlan'{_dspScalingPlanName
+                                            :: !Text,
+                                            _dspScalingPlanVersion :: !Integer}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteScalingPlan' with the minimum fields required to make a request.
 --
@@ -57,23 +60,22 @@ data DeleteScalingPlan = DeleteScalingPlan'
 --
 -- * 'dspScalingPlanName' - The name of the scaling plan.
 --
--- * 'dspScalingPlanVersion' - The version of the scaling plan.
+-- * 'dspScalingPlanVersion' - The version number of the scaling plan.
 deleteScalingPlan
     :: Text -- ^ 'dspScalingPlanName'
     -> Integer -- ^ 'dspScalingPlanVersion'
     -> DeleteScalingPlan
-deleteScalingPlan pScalingPlanName_ pScalingPlanVersion_ =
-  DeleteScalingPlan'
-    { _dspScalingPlanName = pScalingPlanName_
-    , _dspScalingPlanVersion = pScalingPlanVersion_
-    }
-
+deleteScalingPlan pScalingPlanName_
+  pScalingPlanVersion_
+  = DeleteScalingPlan'{_dspScalingPlanName =
+                         pScalingPlanName_,
+                       _dspScalingPlanVersion = pScalingPlanVersion_}
 
 -- | The name of the scaling plan.
 dspScalingPlanName :: Lens' DeleteScalingPlan Text
 dspScalingPlanName = lens _dspScalingPlanName (\ s a -> s{_dspScalingPlanName = a})
 
--- | The version of the scaling plan.
+-- | The version number of the scaling plan.
 dspScalingPlanVersion :: Lens' DeleteScalingPlan Integer
 dspScalingPlanVersion = lens _dspScalingPlanVersion (\ s a -> s{_dspScalingPlanVersion = a})
 
@@ -114,10 +116,10 @@ instance ToQuery DeleteScalingPlan where
         toQuery = const mempty
 
 -- | /See:/ 'deleteScalingPlanResponse' smart constructor.
-newtype DeleteScalingPlanResponse = DeleteScalingPlanResponse'
-  { _dsprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteScalingPlanResponse = DeleteScalingPlanResponse'{_dsprsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteScalingPlanResponse' with the minimum fields required to make a request.
 --
@@ -127,9 +129,9 @@ newtype DeleteScalingPlanResponse = DeleteScalingPlanResponse'
 deleteScalingPlanResponse
     :: Int -- ^ 'dsprsResponseStatus'
     -> DeleteScalingPlanResponse
-deleteScalingPlanResponse pResponseStatus_ =
-  DeleteScalingPlanResponse' {_dsprsResponseStatus = pResponseStatus_}
-
+deleteScalingPlanResponse pResponseStatus_
+  = DeleteScalingPlanResponse'{_dsprsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 dsprsResponseStatus :: Lens' DeleteScalingPlanResponse Int

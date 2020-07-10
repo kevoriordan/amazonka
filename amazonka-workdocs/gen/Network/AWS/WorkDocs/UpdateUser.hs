@@ -53,18 +53,19 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'updateUser' smart constructor.
-data UpdateUser = UpdateUser'
-  { _uuGivenName                :: !(Maybe Text)
-  , _uuGrantPoweruserPrivileges :: !(Maybe BooleanEnumType)
-  , _uuLocale                   :: !(Maybe LocaleType)
-  , _uuAuthenticationToken      :: !(Maybe (Sensitive Text))
-  , _uuStorageRule              :: !(Maybe StorageRuleType)
-  , _uuType                     :: !(Maybe UserType)
-  , _uuSurname                  :: !(Maybe Text)
-  , _uuTimeZoneId               :: !(Maybe Text)
-  , _uuUserId                   :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateUser = UpdateUser'{_uuGivenName ::
+                              !(Maybe Text),
+                              _uuGrantPoweruserPrivileges ::
+                              !(Maybe BooleanEnumType),
+                              _uuLocale :: !(Maybe LocaleType),
+                              _uuAuthenticationToken ::
+                              !(Maybe (Sensitive Text)),
+                              _uuStorageRule :: !(Maybe StorageRuleType),
+                              _uuType :: !(Maybe UserType),
+                              _uuSurname :: !(Maybe Text),
+                              _uuTimeZoneId :: !(Maybe Text),
+                              _uuUserId :: !Text}
+                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateUser' with the minimum fields required to make a request.
 --
@@ -76,7 +77,7 @@ data UpdateUser = UpdateUser'
 --
 -- * 'uuLocale' - The locale of the user.
 --
--- * 'uuAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'uuAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'uuStorageRule' - The amount of storage for the user.
 --
@@ -90,19 +91,14 @@ data UpdateUser = UpdateUser'
 updateUser
     :: Text -- ^ 'uuUserId'
     -> UpdateUser
-updateUser pUserId_ =
-  UpdateUser'
-    { _uuGivenName = Nothing
-    , _uuGrantPoweruserPrivileges = Nothing
-    , _uuLocale = Nothing
-    , _uuAuthenticationToken = Nothing
-    , _uuStorageRule = Nothing
-    , _uuType = Nothing
-    , _uuSurname = Nothing
-    , _uuTimeZoneId = Nothing
-    , _uuUserId = pUserId_
-    }
-
+updateUser pUserId_
+  = UpdateUser'{_uuGivenName = Nothing,
+                _uuGrantPoweruserPrivileges = Nothing,
+                _uuLocale = Nothing,
+                _uuAuthenticationToken = Nothing,
+                _uuStorageRule = Nothing, _uuType = Nothing,
+                _uuSurname = Nothing, _uuTimeZoneId = Nothing,
+                _uuUserId = pUserId_}
 
 -- | The given name of the user.
 uuGivenName :: Lens' UpdateUser (Maybe Text)
@@ -116,7 +112,7 @@ uuGrantPoweruserPrivileges = lens _uuGrantPoweruserPrivileges (\ s a -> s{_uuGra
 uuLocale :: Lens' UpdateUser (Maybe LocaleType)
 uuLocale = lens _uuLocale (\ s a -> s{_uuLocale = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 uuAuthenticationToken :: Lens' UpdateUser (Maybe Text)
 uuAuthenticationToken = lens _uuAuthenticationToken (\ s a -> s{_uuAuthenticationToken = a}) . mapping _Sensitive
 
@@ -181,11 +177,10 @@ instance ToQuery UpdateUser where
         toQuery = const mempty
 
 -- | /See:/ 'updateUserResponse' smart constructor.
-data UpdateUserResponse = UpdateUserResponse'
-  { _uursUser           :: !(Maybe User)
-  , _uursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateUserResponse = UpdateUserResponse'{_uursUser
+                                              :: !(Maybe User),
+                                              _uursResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateUserResponse' with the minimum fields required to make a request.
 --
@@ -197,10 +192,9 @@ data UpdateUserResponse = UpdateUserResponse'
 updateUserResponse
     :: Int -- ^ 'uursResponseStatus'
     -> UpdateUserResponse
-updateUserResponse pResponseStatus_ =
-  UpdateUserResponse'
-    {_uursUser = Nothing, _uursResponseStatus = pResponseStatus_}
-
+updateUserResponse pResponseStatus_
+  = UpdateUserResponse'{_uursUser = Nothing,
+                        _uursResponseStatus = pResponseStatus_}
 
 -- | The user information.
 uursUser :: Lens' UpdateUserResponse (Maybe User)

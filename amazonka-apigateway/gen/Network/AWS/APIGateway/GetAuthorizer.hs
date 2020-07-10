@@ -21,15 +21,15 @@
 -- Describe an existing 'Authorizer' resource.
 --
 --
--- <http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html AWS CLI>
+-- <https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html AWS CLI> 
 module Network.AWS.APIGateway.GetAuthorizer
     (
     -- * Creating a Request
       getAuthorizer
     , GetAuthorizer
     -- * Request Lenses
-    , gaaRestAPIId
-    , gaaAuthorizerId
+    , gtathrzrRestAPIId
+    , gtathrzrAuthorizerId
 
     -- * Destructuring the Response
     , authorizer
@@ -59,35 +59,33 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getAuthorizer' smart constructor.
-data GetAuthorizer = GetAuthorizer'
-  { _gaaRestAPIId    :: !Text
-  , _gaaAuthorizerId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAuthorizer = GetAuthorizer'{_gtathrzrRestAPIId
+                                    :: !Text,
+                                    _gtathrzrAuthorizerId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAuthorizer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gaaRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
+-- * 'gtathrzrRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
--- * 'gaaAuthorizerId' - [Required] The identifier of the 'Authorizer' resource.
+-- * 'gtathrzrAuthorizerId' - [Required] The identifier of the 'Authorizer' resource.
 getAuthorizer
-    :: Text -- ^ 'gaaRestAPIId'
-    -> Text -- ^ 'gaaAuthorizerId'
+    :: Text -- ^ 'gtathrzrRestAPIId'
+    -> Text -- ^ 'gtathrzrAuthorizerId'
     -> GetAuthorizer
-getAuthorizer pRestAPIId_ pAuthorizerId_ =
-  GetAuthorizer'
-    {_gaaRestAPIId = pRestAPIId_, _gaaAuthorizerId = pAuthorizerId_}
-
+getAuthorizer pRestAPIId_ pAuthorizerId_
+  = GetAuthorizer'{_gtathrzrRestAPIId = pRestAPIId_,
+                   _gtathrzrAuthorizerId = pAuthorizerId_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
-gaaRestAPIId :: Lens' GetAuthorizer Text
-gaaRestAPIId = lens _gaaRestAPIId (\ s a -> s{_gaaRestAPIId = a})
+gtathrzrRestAPIId :: Lens' GetAuthorizer Text
+gtathrzrRestAPIId = lens _gtathrzrRestAPIId (\ s a -> s{_gtathrzrRestAPIId = a})
 
 -- | [Required] The identifier of the 'Authorizer' resource.
-gaaAuthorizerId :: Lens' GetAuthorizer Text
-gaaAuthorizerId = lens _gaaAuthorizerId (\ s a -> s{_gaaAuthorizerId = a})
+gtathrzrAuthorizerId :: Lens' GetAuthorizer Text
+gtathrzrAuthorizerId = lens _gtathrzrAuthorizerId (\ s a -> s{_gtathrzrAuthorizerId = a})
 
 instance AWSRequest GetAuthorizer where
         type Rs GetAuthorizer = Authorizer
@@ -107,8 +105,8 @@ instance ToHeaders GetAuthorizer where
 instance ToPath GetAuthorizer where
         toPath GetAuthorizer'{..}
           = mconcat
-              ["/restapis/", toBS _gaaRestAPIId, "/authorizers/",
-               toBS _gaaAuthorizerId]
+              ["/restapis/", toBS _gtathrzrRestAPIId,
+               "/authorizers/", toBS _gtathrzrAuthorizerId]
 
 instance ToQuery GetAuthorizer where
         toQuery = const mempty

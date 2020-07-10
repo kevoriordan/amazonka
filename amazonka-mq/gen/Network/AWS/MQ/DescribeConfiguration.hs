@@ -34,10 +34,12 @@ module Network.AWS.MQ.DescribeConfiguration
     , dcrsEngineVersion
     , dcrsARN
     , dcrsLatestRevision
+    , dcrsCreated
     , dcrsName
     , dcrsId
     , dcrsDescription
     , dcrsEngineType
+    , dcrsTags
     , dcrsResponseStatus
     ) where
 
@@ -49,10 +51,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeConfiguration' smart constructor.
-newtype DescribeConfiguration = DescribeConfiguration'
-  { _dcConfigurationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeConfiguration = DescribeConfiguration'{_dcConfigurationId
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeConfiguration' with the minimum fields required to make a request.
 --
@@ -62,9 +64,9 @@ newtype DescribeConfiguration = DescribeConfiguration'
 describeConfiguration
     :: Text -- ^ 'dcConfigurationId'
     -> DescribeConfiguration
-describeConfiguration pConfigurationId_ =
-  DescribeConfiguration' {_dcConfigurationId = pConfigurationId_}
-
+describeConfiguration pConfigurationId_
+  = DescribeConfiguration'{_dcConfigurationId =
+                             pConfigurationId_}
 
 -- | The unique ID that Amazon MQ generates for the configuration.
 dcConfigurationId :: Lens' DescribeConfiguration Text
@@ -80,10 +82,12 @@ instance AWSRequest DescribeConfiguration where
                  DescribeConfigurationResponse' <$>
                    (x .?> "engineVersion") <*> (x .?> "arn") <*>
                      (x .?> "latestRevision")
+                     <*> (x .?> "created")
                      <*> (x .?> "name")
                      <*> (x .?> "id")
                      <*> (x .?> "description")
                      <*> (x .?> "engineType")
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (pure (fromEnum s)))
 
 instance Hashable DescribeConfiguration where
@@ -106,27 +110,56 @@ instance ToQuery DescribeConfiguration where
         toQuery = const mempty
 
 -- | /See:/ 'describeConfigurationResponse' smart constructor.
-data DescribeConfigurationResponse = DescribeConfigurationResponse'
-  { _dcrsEngineVersion  :: !(Maybe Text)
-  , _dcrsARN            :: !(Maybe Text)
-  , _dcrsLatestRevision :: !(Maybe ConfigurationRevision)
-  , _dcrsName           :: !(Maybe Text)
-  , _dcrsId             :: !(Maybe Text)
-  , _dcrsDescription    :: !(Maybe Text)
-  , _dcrsEngineType     :: !(Maybe EngineType)
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConfigurationResponse = DescribeConfigurationResponse'{_dcrsEngineVersion
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dcrsARN ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dcrsLatestRevision
+                                                                    ::
+                                                                    !(Maybe
+                                                                        ConfigurationRevision),
+                                                                    _dcrsCreated
+                                                                    ::
+                                                                    !(Maybe
+                                                                        POSIX),
+                                                                    _dcrsName ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dcrsId ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dcrsDescription
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dcrsEngineType
+                                                                    ::
+                                                                    !(Maybe
+                                                                        EngineType),
+                                                                    _dcrsTags ::
+                                                                    !(Maybe
+                                                                        (Map
+                                                                           Text
+                                                                           Text)),
+                                                                    _dcrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeConfigurationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcrsEngineVersion' - Required. The version of the broker engine.
+-- * 'dcrsEngineVersion' - Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 --
 -- * 'dcrsARN' - Required. The ARN of the configuration.
 --
 -- * 'dcrsLatestRevision' - Required. The latest revision of the configuration.
+--
+-- * 'dcrsCreated' - Required. The date and time of the configuration revision.
 --
 -- * 'dcrsName' - Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
 --
@@ -136,24 +169,25 @@ data DescribeConfigurationResponse = DescribeConfigurationResponse'
 --
 -- * 'dcrsEngineType' - Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
 --
+-- * 'dcrsTags' - The list of all tags associated with this configuration.
+--
 -- * 'dcrsResponseStatus' - -- | The response status code.
 describeConfigurationResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeConfigurationResponse
-describeConfigurationResponse pResponseStatus_ =
-  DescribeConfigurationResponse'
-    { _dcrsEngineVersion = Nothing
-    , _dcrsARN = Nothing
-    , _dcrsLatestRevision = Nothing
-    , _dcrsName = Nothing
-    , _dcrsId = Nothing
-    , _dcrsDescription = Nothing
-    , _dcrsEngineType = Nothing
-    , _dcrsResponseStatus = pResponseStatus_
-    }
+describeConfigurationResponse pResponseStatus_
+  = DescribeConfigurationResponse'{_dcrsEngineVersion =
+                                     Nothing,
+                                   _dcrsARN = Nothing,
+                                   _dcrsLatestRevision = Nothing,
+                                   _dcrsCreated = Nothing, _dcrsName = Nothing,
+                                   _dcrsId = Nothing,
+                                   _dcrsDescription = Nothing,
+                                   _dcrsEngineType = Nothing,
+                                   _dcrsTags = Nothing,
+                                   _dcrsResponseStatus = pResponseStatus_}
 
-
--- | Required. The version of the broker engine.
+-- | Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 dcrsEngineVersion :: Lens' DescribeConfigurationResponse (Maybe Text)
 dcrsEngineVersion = lens _dcrsEngineVersion (\ s a -> s{_dcrsEngineVersion = a})
 
@@ -164,6 +198,10 @@ dcrsARN = lens _dcrsARN (\ s a -> s{_dcrsARN = a})
 -- | Required. The latest revision of the configuration.
 dcrsLatestRevision :: Lens' DescribeConfigurationResponse (Maybe ConfigurationRevision)
 dcrsLatestRevision = lens _dcrsLatestRevision (\ s a -> s{_dcrsLatestRevision = a})
+
+-- | Required. The date and time of the configuration revision.
+dcrsCreated :: Lens' DescribeConfigurationResponse (Maybe UTCTime)
+dcrsCreated = lens _dcrsCreated (\ s a -> s{_dcrsCreated = a}) . mapping _Time
 
 -- | Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
 dcrsName :: Lens' DescribeConfigurationResponse (Maybe Text)
@@ -180,6 +218,10 @@ dcrsDescription = lens _dcrsDescription (\ s a -> s{_dcrsDescription = a})
 -- | Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
 dcrsEngineType :: Lens' DescribeConfigurationResponse (Maybe EngineType)
 dcrsEngineType = lens _dcrsEngineType (\ s a -> s{_dcrsEngineType = a})
+
+-- | The list of all tags associated with this configuration.
+dcrsTags :: Lens' DescribeConfigurationResponse (HashMap Text Text)
+dcrsTags = lens _dcrsTags (\ s a -> s{_dcrsTags = a}) . _Default . _Map
 
 -- | -- | The response status code.
 dcrsResponseStatus :: Lens' DescribeConfigurationResponse Int

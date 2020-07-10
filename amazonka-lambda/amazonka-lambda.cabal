@@ -45,6 +45,7 @@ library
 
     exposed-modules:
           Network.AWS.Lambda
+        , Network.AWS.Lambda.AddLayerVersionPermission
         , Network.AWS.Lambda.AddPermission
         , Network.AWS.Lambda.CreateAlias
         , Network.AWS.Lambda.CreateEventSourceMapping
@@ -53,20 +54,37 @@ library
         , Network.AWS.Lambda.DeleteEventSourceMapping
         , Network.AWS.Lambda.DeleteFunction
         , Network.AWS.Lambda.DeleteFunctionConcurrency
+        , Network.AWS.Lambda.DeleteFunctionEventInvokeConfig
+        , Network.AWS.Lambda.DeleteLayerVersion
+        , Network.AWS.Lambda.DeleteProvisionedConcurrencyConfig
         , Network.AWS.Lambda.GetAccountSettings
         , Network.AWS.Lambda.GetAlias
         , Network.AWS.Lambda.GetEventSourceMapping
         , Network.AWS.Lambda.GetFunction
+        , Network.AWS.Lambda.GetFunctionConcurrency
         , Network.AWS.Lambda.GetFunctionConfiguration
+        , Network.AWS.Lambda.GetFunctionEventInvokeConfig
+        , Network.AWS.Lambda.GetLayerVersion
+        , Network.AWS.Lambda.GetLayerVersionByARN
+        , Network.AWS.Lambda.GetLayerVersionPolicy
         , Network.AWS.Lambda.GetPolicy
+        , Network.AWS.Lambda.GetProvisionedConcurrencyConfig
         , Network.AWS.Lambda.Invoke
         , Network.AWS.Lambda.ListAliases
         , Network.AWS.Lambda.ListEventSourceMappings
+        , Network.AWS.Lambda.ListFunctionEventInvokeConfigs
         , Network.AWS.Lambda.ListFunctions
+        , Network.AWS.Lambda.ListLayerVersions
+        , Network.AWS.Lambda.ListLayers
+        , Network.AWS.Lambda.ListProvisionedConcurrencyConfigs
         , Network.AWS.Lambda.ListTags
         , Network.AWS.Lambda.ListVersionsByFunction
+        , Network.AWS.Lambda.PublishLayerVersion
         , Network.AWS.Lambda.PublishVersion
         , Network.AWS.Lambda.PutFunctionConcurrency
+        , Network.AWS.Lambda.PutFunctionEventInvokeConfig
+        , Network.AWS.Lambda.PutProvisionedConcurrencyConfig
+        , Network.AWS.Lambda.RemoveLayerVersionPermission
         , Network.AWS.Lambda.RemovePermission
         , Network.AWS.Lambda.TagResource
         , Network.AWS.Lambda.Types
@@ -75,15 +93,55 @@ library
         , Network.AWS.Lambda.UpdateEventSourceMapping
         , Network.AWS.Lambda.UpdateFunctionCode
         , Network.AWS.Lambda.UpdateFunctionConfiguration
+        , Network.AWS.Lambda.UpdateFunctionEventInvokeConfig
         , Network.AWS.Lambda.Waiters
 
     other-modules:
-          Network.AWS.Lambda.Types.Product
-        , Network.AWS.Lambda.Types.Sum
+          Network.AWS.Lambda.Types.AccountLimit
+        , Network.AWS.Lambda.Types.AccountUsage
+        , Network.AWS.Lambda.Types.AliasConfiguration
+        , Network.AWS.Lambda.Types.AliasRoutingConfiguration
+        , Network.AWS.Lambda.Types.Concurrency
+        , Network.AWS.Lambda.Types.DeadLetterConfig
+        , Network.AWS.Lambda.Types.DestinationConfig
+        , Network.AWS.Lambda.Types.Environment
+        , Network.AWS.Lambda.Types.EnvironmentError
+        , Network.AWS.Lambda.Types.EnvironmentResponse
+        , Network.AWS.Lambda.Types.EventSourceMappingConfiguration
+        , Network.AWS.Lambda.Types.EventSourcePosition
+        , Network.AWS.Lambda.Types.FunctionCode
+        , Network.AWS.Lambda.Types.FunctionCodeLocation
+        , Network.AWS.Lambda.Types.FunctionConfiguration
+        , Network.AWS.Lambda.Types.FunctionEventInvokeConfig
+        , Network.AWS.Lambda.Types.FunctionVersion
+        , Network.AWS.Lambda.Types.GetLayerVersionResponse
+        , Network.AWS.Lambda.Types.InvocationType
+        , Network.AWS.Lambda.Types.LastUpdateStatus
+        , Network.AWS.Lambda.Types.LastUpdateStatusReasonCode
+        , Network.AWS.Lambda.Types.Layer
+        , Network.AWS.Lambda.Types.LayerVersionContentInput
+        , Network.AWS.Lambda.Types.LayerVersionContentOutput
+        , Network.AWS.Lambda.Types.LayerVersionsListItem
+        , Network.AWS.Lambda.Types.LayersListItem
+        , Network.AWS.Lambda.Types.LogType
+        , Network.AWS.Lambda.Types.OnFailure
+        , Network.AWS.Lambda.Types.OnSuccess
+        , Network.AWS.Lambda.Types.Product
+        , Network.AWS.Lambda.Types.ProvisionedConcurrencyConfigListItem
+        , Network.AWS.Lambda.Types.ProvisionedConcurrencyStatusEnum
+        , Network.AWS.Lambda.Types.Runtime
+        , Network.AWS.Lambda.Types.State
+        , Network.AWS.Lambda.Types.StateReasonCode
+        , Network.AWS.Lambda.Types.TracingConfig
+        , Network.AWS.Lambda.Types.TracingConfigResponse
+        , Network.AWS.Lambda.Types.TracingMode
+        , Network.AWS.Lambda.Types.VPCConfig
+        , Network.AWS.Lambda.Types.VPCConfigResponse
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-lambda-test
     type:              exitcode-stdio-1.0
@@ -107,6 +165,7 @@ test-suite amazonka-lambda-test
         , amazonka-lambda
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

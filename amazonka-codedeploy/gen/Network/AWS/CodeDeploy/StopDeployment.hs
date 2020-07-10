@@ -46,37 +46,35 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a StopDeployment operation.
+-- | Represents the input of a StopDeployment operation. 
 --
 --
 --
 -- /See:/ 'stopDeployment' smart constructor.
-data StopDeployment = StopDeployment'
-  { _sdAutoRollbackEnabled :: !(Maybe Bool)
-  , _sdDeploymentId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopDeployment = StopDeployment'{_sdAutoRollbackEnabled
+                                      :: !(Maybe Bool),
+                                      _sdDeploymentId :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopDeployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdAutoRollbackEnabled' - Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.
+-- * 'sdAutoRollbackEnabled' - Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision. 
 --
--- * 'sdDeploymentId' - The unique ID of a deployment.
+-- * 'sdDeploymentId' - The unique ID of a deployment. 
 stopDeployment
     :: Text -- ^ 'sdDeploymentId'
     -> StopDeployment
-stopDeployment pDeploymentId_ =
-  StopDeployment'
-    {_sdAutoRollbackEnabled = Nothing, _sdDeploymentId = pDeploymentId_}
+stopDeployment pDeploymentId_
+  = StopDeployment'{_sdAutoRollbackEnabled = Nothing,
+                    _sdDeploymentId = pDeploymentId_}
 
-
--- | Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.
+-- | Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision. 
 sdAutoRollbackEnabled :: Lens' StopDeployment (Maybe Bool)
 sdAutoRollbackEnabled = lens _sdAutoRollbackEnabled (\ s a -> s{_sdAutoRollbackEnabled = a})
 
--- | The unique ID of a deployment.
+-- | The unique ID of a deployment. 
 sdDeploymentId :: Lens' StopDeployment Text
 sdDeploymentId = lens _sdDeploymentId (\ s a -> s{_sdDeploymentId = a})
 
@@ -117,17 +115,19 @@ instance ToPath StopDeployment where
 instance ToQuery StopDeployment where
         toQuery = const mempty
 
--- | Represents the output of a StopDeployment operation.
+-- | Represents the output of a StopDeployment operation. 
 --
 --
 --
 -- /See:/ 'stopDeploymentResponse' smart constructor.
-data StopDeploymentResponse = StopDeploymentResponse'
-  { _sdrsStatus         :: !(Maybe StopStatus)
-  , _sdrsStatusMessage  :: !(Maybe Text)
-  , _sdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopDeploymentResponse = StopDeploymentResponse'{_sdrsStatus
+                                                      :: !(Maybe StopStatus),
+                                                      _sdrsStatusMessage ::
+                                                      !(Maybe Text),
+                                                      _sdrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'StopDeploymentResponse' with the minimum fields required to make a request.
 --
@@ -141,13 +141,10 @@ data StopDeploymentResponse = StopDeploymentResponse'
 stopDeploymentResponse
     :: Int -- ^ 'sdrsResponseStatus'
     -> StopDeploymentResponse
-stopDeploymentResponse pResponseStatus_ =
-  StopDeploymentResponse'
-    { _sdrsStatus = Nothing
-    , _sdrsStatusMessage = Nothing
-    , _sdrsResponseStatus = pResponseStatus_
-    }
-
+stopDeploymentResponse pResponseStatus_
+  = StopDeploymentResponse'{_sdrsStatus = Nothing,
+                            _sdrsStatusMessage = Nothing,
+                            _sdrsResponseStatus = pResponseStatus_}
 
 -- | The status of the stop deployment operation:     * Pending: The stop operation is pending.     * Succeeded: The stop operation was successful.
 sdrsStatus :: Lens' StopDeploymentResponse (Maybe StopStatus)

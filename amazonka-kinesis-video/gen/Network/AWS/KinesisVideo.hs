@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
---
+-- 
 --
 --
 module Network.AWS.KinesisVideo
@@ -22,35 +22,41 @@ module Network.AWS.KinesisVideo
     -- * Errors
     -- $errors
 
-    -- ** InvalidArgumentException
-    , _InvalidArgumentException
-
     -- ** TagsPerResourceExceededLimitException
     , _TagsPerResourceExceededLimitException
-
-    -- ** NotAuthorizedException
-    , _NotAuthorizedException
-
-    -- ** ClientLimitExceededException
-    , _ClientLimitExceededException
-
-    -- ** InvalidDeviceException
-    , _InvalidDeviceException
-
-    -- ** VersionMismatchException
-    , _VersionMismatchException
-
-    -- ** AccountStreamLimitExceededException
-    , _AccountStreamLimitExceededException
-
-    -- ** InvalidResourceFormatException
-    , _InvalidResourceFormatException
 
     -- ** DeviceStreamLimitExceededException
     , _DeviceStreamLimitExceededException
 
+    -- ** InvalidResourceFormatException
+    , _InvalidResourceFormatException
+
+    -- ** AccessDeniedException
+    , _AccessDeniedException
+
+    -- ** VersionMismatchException
+    , _VersionMismatchException
+
+    -- ** InvalidDeviceException
+    , _InvalidDeviceException
+
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
+
+    -- ** AccountChannelLimitExceededException
+    , _AccountChannelLimitExceededException
+
+    -- ** ClientLimitExceededException
+    , _ClientLimitExceededException
+
+    -- ** InvalidArgumentException
+    , _InvalidArgumentException
+
+    -- ** NotAuthorizedException
+    , _NotAuthorizedException
+
+    -- ** AccountStreamLimitExceededException
+    , _AccountStreamLimitExceededException
 
     -- ** ResourceInUseException
     , _ResourceInUseException
@@ -61,40 +67,76 @@ module Network.AWS.KinesisVideo
     -- * Operations
     -- $operations
 
-    -- ** UntagStream
+    -- ** ListSignalingChannels (Paginated)
+    , module Network.AWS.KinesisVideo.ListSignalingChannels
+
+    -- ** ListTagsForResource 
+    , module Network.AWS.KinesisVideo.ListTagsForResource
+
+    -- ** UntagStream 
     , module Network.AWS.KinesisVideo.UntagStream
 
-    -- ** UpdateDataRetention
+    -- ** UpdateDataRetention 
     , module Network.AWS.KinesisVideo.UpdateDataRetention
 
-    -- ** GetDataEndpoint
+    -- ** GetDataEndpoint 
     , module Network.AWS.KinesisVideo.GetDataEndpoint
 
-    -- ** ListTagsForStream
+    -- ** GetSignalingChannelEndpoint 
+    , module Network.AWS.KinesisVideo.GetSignalingChannelEndpoint
+
+    -- ** ListTagsForStream 
     , module Network.AWS.KinesisVideo.ListTagsForStream
 
-    -- ** UpdateStream
+    -- ** DeleteSignalingChannel 
+    , module Network.AWS.KinesisVideo.DeleteSignalingChannel
+
+    -- ** UpdateSignalingChannel 
+    , module Network.AWS.KinesisVideo.UpdateSignalingChannel
+
+    -- ** UpdateStream 
     , module Network.AWS.KinesisVideo.UpdateStream
 
-    -- ** DeleteStream
+    -- ** DeleteStream 
     , module Network.AWS.KinesisVideo.DeleteStream
 
-    -- ** ListStreams
+    -- ** ListStreams (Paginated)
     , module Network.AWS.KinesisVideo.ListStreams
 
-    -- ** CreateStream
+    -- ** CreateStream 
     , module Network.AWS.KinesisVideo.CreateStream
 
-    -- ** TagStream
+    -- ** DescribeSignalingChannel 
+    , module Network.AWS.KinesisVideo.DescribeSignalingChannel
+
+    -- ** TagResource 
+    , module Network.AWS.KinesisVideo.TagResource
+
+    -- ** UntagResource 
+    , module Network.AWS.KinesisVideo.UntagResource
+
+    -- ** TagStream 
     , module Network.AWS.KinesisVideo.TagStream
 
-    -- ** DescribeStream
+    -- ** CreateSignalingChannel 
+    , module Network.AWS.KinesisVideo.CreateSignalingChannel
+
+    -- ** DescribeStream 
     , module Network.AWS.KinesisVideo.DescribeStream
 
     -- * Types
 
     -- ** APIName
     , APIName (..)
+
+    -- ** ChannelProtocol
+    , ChannelProtocol (..)
+
+    -- ** ChannelRole
+    , ChannelRole (..)
+
+    -- ** ChannelType
+    , ChannelType (..)
 
     -- ** ComparisonOperator
     , ComparisonOperator (..)
@@ -104,6 +146,40 @@ module Network.AWS.KinesisVideo
 
     -- ** UpdateDataRetentionOperation
     , UpdateDataRetentionOperation (..)
+
+    -- ** ChannelInfo
+    , ChannelInfo
+    , channelInfo
+    , ciCreationTime
+    , ciChannelStatus
+    , ciChannelARN
+    , ciSingleMasterConfiguration
+    , ciChannelName
+    , ciVersion
+    , ciChannelType
+
+    -- ** ChannelNameCondition
+    , ChannelNameCondition
+    , channelNameCondition
+    , cncComparisonOperator
+    , cncComparisonValue
+
+    -- ** ResourceEndpointListItem
+    , ResourceEndpointListItem
+    , resourceEndpointListItem
+    , reliProtocol
+    , reliResourceEndpoint
+
+    -- ** SingleMasterChannelEndpointConfiguration
+    , SingleMasterChannelEndpointConfiguration
+    , singleMasterChannelEndpointConfiguration
+    , smcecProtocols
+    , smcecRole
+
+    -- ** SingleMasterConfiguration
+    , SingleMasterConfiguration
+    , singleMasterConfiguration
+    , smcMessageTtlSeconds
 
     -- ** StreamInfo
     , StreamInfo
@@ -123,18 +199,33 @@ module Network.AWS.KinesisVideo
     , streamNameCondition
     , sncComparisonOperator
     , sncComparisonValue
+
+    -- ** Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
     ) where
 
+import Network.AWS.KinesisVideo.CreateSignalingChannel
 import Network.AWS.KinesisVideo.CreateStream
+import Network.AWS.KinesisVideo.DeleteSignalingChannel
 import Network.AWS.KinesisVideo.DeleteStream
+import Network.AWS.KinesisVideo.DescribeSignalingChannel
 import Network.AWS.KinesisVideo.DescribeStream
 import Network.AWS.KinesisVideo.GetDataEndpoint
+import Network.AWS.KinesisVideo.GetSignalingChannelEndpoint
+import Network.AWS.KinesisVideo.ListSignalingChannels
 import Network.AWS.KinesisVideo.ListStreams
+import Network.AWS.KinesisVideo.ListTagsForResource
 import Network.AWS.KinesisVideo.ListTagsForStream
+import Network.AWS.KinesisVideo.TagResource
 import Network.AWS.KinesisVideo.TagStream
 import Network.AWS.KinesisVideo.Types
+import Network.AWS.KinesisVideo.UntagResource
 import Network.AWS.KinesisVideo.UntagStream
 import Network.AWS.KinesisVideo.UpdateDataRetention
+import Network.AWS.KinesisVideo.UpdateSignalingChannel
 import Network.AWS.KinesisVideo.UpdateStream
 import Network.AWS.KinesisVideo.Waiters
 

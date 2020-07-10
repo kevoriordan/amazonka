@@ -48,29 +48,28 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'disableLogging' smart constructor.
-newtype DisableLogging = DisableLogging'
-  { _dlClusterIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableLogging = DisableLogging'{_dlClusterIdentifier
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisableLogging' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlClusterIdentifier' - The identifier of the cluster on which logging is to be stopped. Example: @examplecluster@
+-- * 'dlClusterIdentifier' - The identifier of the cluster on which logging is to be stopped. Example: @examplecluster@ 
 disableLogging
     :: Text -- ^ 'dlClusterIdentifier'
     -> DisableLogging
-disableLogging pClusterIdentifier_ =
-  DisableLogging' {_dlClusterIdentifier = pClusterIdentifier_}
+disableLogging pClusterIdentifier_
+  = DisableLogging'{_dlClusterIdentifier =
+                      pClusterIdentifier_}
 
-
--- | The identifier of the cluster on which logging is to be stopped. Example: @examplecluster@
+-- | The identifier of the cluster on which logging is to be stopped. Example: @examplecluster@ 
 dlClusterIdentifier :: Lens' DisableLogging Text
 dlClusterIdentifier = lens _dlClusterIdentifier (\ s a -> s{_dlClusterIdentifier = a})
 

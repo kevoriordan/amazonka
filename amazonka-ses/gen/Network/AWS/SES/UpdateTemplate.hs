@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
+-- Updates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html Amazon SES Developer Guide> .
 --
 --
 -- You can execute this operation no more than once per second.
@@ -46,10 +46,9 @@ import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
 -- | /See:/ 'updateTemplate' smart constructor.
-newtype UpdateTemplate = UpdateTemplate'
-  { _utTemplate :: Template
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateTemplate = UpdateTemplate'{_utTemplate
+                                         :: Template}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTemplate' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype UpdateTemplate = UpdateTemplate'
 updateTemplate
     :: Template -- ^ 'utTemplate'
     -> UpdateTemplate
-updateTemplate pTemplate_ = UpdateTemplate' {_utTemplate = pTemplate_}
-
+updateTemplate pTemplate_
+  = UpdateTemplate'{_utTemplate = pTemplate_}
 
 -- | Undocumented member.
 utTemplate :: Lens' UpdateTemplate Template
@@ -92,10 +91,10 @@ instance ToQuery UpdateTemplate where
                "Template" =: _utTemplate]
 
 -- | /See:/ 'updateTemplateResponse' smart constructor.
-newtype UpdateTemplateResponse = UpdateTemplateResponse'
-  { _utrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateTemplateResponse = UpdateTemplateResponse'{_utrsResponseStatus
+                                                         :: Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'UpdateTemplateResponse' with the minimum fields required to make a request.
 --
@@ -105,9 +104,9 @@ newtype UpdateTemplateResponse = UpdateTemplateResponse'
 updateTemplateResponse
     :: Int -- ^ 'utrsResponseStatus'
     -> UpdateTemplateResponse
-updateTemplateResponse pResponseStatus_ =
-  UpdateTemplateResponse' {_utrsResponseStatus = pResponseStatus_}
-
+updateTemplateResponse pResponseStatus_
+  = UpdateTemplateResponse'{_utrsResponseStatus =
+                              pResponseStatus_}
 
 -- | -- | The response status code.
 utrsResponseStatus :: Lens' UpdateTemplateResponse Int

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs deployment or stack commands. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html Deploying Apps> and <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html Run Stack Commands> .
+-- Runs deployment or stack commands. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html Deploying Apps> and <https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html Run Stack Commands> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.CreateDeployment
     (
@@ -53,22 +53,21 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createDeployment' smart constructor.
-data CreateDeployment = CreateDeployment'
-  { _cdCustomJSON  :: !(Maybe Text)
-  , _cdAppId       :: !(Maybe Text)
-  , _cdInstanceIds :: !(Maybe [Text])
-  , _cdLayerIds    :: !(Maybe [Text])
-  , _cdComment     :: !(Maybe Text)
-  , _cdStackId     :: !Text
-  , _cdCommand     :: !DeploymentCommand
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeployment = CreateDeployment'{_cdCustomJSON
+                                          :: !(Maybe Text),
+                                          _cdAppId :: !(Maybe Text),
+                                          _cdInstanceIds :: !(Maybe [Text]),
+                                          _cdLayerIds :: !(Maybe [Text]),
+                                          _cdComment :: !(Maybe Text),
+                                          _cdStackId :: !Text,
+                                          _cdCommand :: !DeploymentCommand}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDeployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdCustomJSON' - A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format: @"{\"key1\": \"value1\", \"key2\": \"value2\",...}"@  For more information on custom JSON, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html Use Custom JSON to Modify the Stack Configuration Attributes> .
+-- * 'cdCustomJSON' - A string that contains user-defined, custom JSON. You can use this parameter to override some corresponding default stack configuration JSON values. The string should be in the following format: @"{\"key1\": \"value1\", \"key2\": \"value2\",...}"@  For more information about custom JSON, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html Use Custom JSON to Modify the Stack Configuration Attributes> and <https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html Overriding Attributes With Custom JSON> .
 --
 -- * 'cdAppId' - The app ID. This parameter is required for app deployments, but not for other deployment commands.
 --
@@ -85,19 +84,13 @@ createDeployment
     :: Text -- ^ 'cdStackId'
     -> DeploymentCommand -- ^ 'cdCommand'
     -> CreateDeployment
-createDeployment pStackId_ pCommand_ =
-  CreateDeployment'
-    { _cdCustomJSON = Nothing
-    , _cdAppId = Nothing
-    , _cdInstanceIds = Nothing
-    , _cdLayerIds = Nothing
-    , _cdComment = Nothing
-    , _cdStackId = pStackId_
-    , _cdCommand = pCommand_
-    }
+createDeployment pStackId_ pCommand_
+  = CreateDeployment'{_cdCustomJSON = Nothing,
+                      _cdAppId = Nothing, _cdInstanceIds = Nothing,
+                      _cdLayerIds = Nothing, _cdComment = Nothing,
+                      _cdStackId = pStackId_, _cdCommand = pCommand_}
 
-
--- | A string that contains user-defined, custom JSON. It is used to override the corresponding default stack configuration JSON values. The string should be in the following format: @"{\"key1\": \"value1\", \"key2\": \"value2\",...}"@  For more information on custom JSON, see <http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html Use Custom JSON to Modify the Stack Configuration Attributes> .
+-- | A string that contains user-defined, custom JSON. You can use this parameter to override some corresponding default stack configuration JSON values. The string should be in the following format: @"{\"key1\": \"value1\", \"key2\": \"value2\",...}"@  For more information about custom JSON, see <https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html Use Custom JSON to Modify the Stack Configuration Attributes> and <https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html Overriding Attributes With Custom JSON> .
 cdCustomJSON :: Lens' CreateDeployment (Maybe Text)
 cdCustomJSON = lens _cdCustomJSON (\ s a -> s{_cdCustomJSON = a})
 
@@ -170,11 +163,12 @@ instance ToQuery CreateDeployment where
 --
 --
 -- /See:/ 'createDeploymentResponse' smart constructor.
-data CreateDeploymentResponse = CreateDeploymentResponse'
-  { _cdrsDeploymentId   :: !(Maybe Text)
-  , _cdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDeploymentResponse = CreateDeploymentResponse'{_cdrsDeploymentId
+                                                          :: !(Maybe Text),
+                                                          _cdrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateDeploymentResponse' with the minimum fields required to make a request.
 --
@@ -186,10 +180,10 @@ data CreateDeploymentResponse = CreateDeploymentResponse'
 createDeploymentResponse
     :: Int -- ^ 'cdrsResponseStatus'
     -> CreateDeploymentResponse
-createDeploymentResponse pResponseStatus_ =
-  CreateDeploymentResponse'
-    {_cdrsDeploymentId = Nothing, _cdrsResponseStatus = pResponseStatus_}
-
+createDeploymentResponse pResponseStatus_
+  = CreateDeploymentResponse'{_cdrsDeploymentId =
+                                Nothing,
+                              _cdrsResponseStatus = pResponseStatus_}
 
 -- | The deployment ID, which can be used with other requests to identify the deployment.
 cdrsDeploymentId :: Lens' CreateDeploymentResponse (Maybe Text)

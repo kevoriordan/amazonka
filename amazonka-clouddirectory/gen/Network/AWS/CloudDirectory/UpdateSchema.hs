@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateSchema' smart constructor.
-data UpdateSchema = UpdateSchema'
-  { _usSchemaARN :: !Text
-  , _usName      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSchema = UpdateSchema'{_usSchemaARN ::
+                                  !Text,
+                                  _usName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSchema' with the minimum fields required to make a request.
 --
@@ -63,9 +62,9 @@ updateSchema
     :: Text -- ^ 'usSchemaARN'
     -> Text -- ^ 'usName'
     -> UpdateSchema
-updateSchema pSchemaARN_ pName_ =
-  UpdateSchema' {_usSchemaARN = pSchemaARN_, _usName = pName_}
-
+updateSchema pSchemaARN_ pName_
+  = UpdateSchema'{_usSchemaARN = pSchemaARN_,
+                  _usName = pName_}
 
 -- | The Amazon Resource Name (ARN) of the development schema. For more information, see 'arns' .
 usSchemaARN :: Lens' UpdateSchema Text
@@ -105,11 +104,10 @@ instance ToQuery UpdateSchema where
         toQuery = const mempty
 
 -- | /See:/ 'updateSchemaResponse' smart constructor.
-data UpdateSchemaResponse = UpdateSchemaResponse'
-  { _usrsSchemaARN      :: !(Maybe Text)
-  , _usrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateSchemaResponse = UpdateSchemaResponse'{_usrsSchemaARN
+                                                  :: !(Maybe Text),
+                                                  _usrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateSchemaResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +119,9 @@ data UpdateSchemaResponse = UpdateSchemaResponse'
 updateSchemaResponse
     :: Int -- ^ 'usrsResponseStatus'
     -> UpdateSchemaResponse
-updateSchemaResponse pResponseStatus_ =
-  UpdateSchemaResponse'
-    {_usrsSchemaARN = Nothing, _usrsResponseStatus = pResponseStatus_}
-
+updateSchemaResponse pResponseStatus_
+  = UpdateSchemaResponse'{_usrsSchemaARN = Nothing,
+                          _usrsResponseStatus = pResponseStatus_}
 
 -- | The ARN that is associated with the updated schema. For more information, see 'arns' .
 usrsSchemaARN :: Lens' UpdateSchemaResponse (Maybe Text)

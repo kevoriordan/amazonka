@@ -21,6 +21,8 @@
 -- Merges two users having different @IdentityId@ s, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (@SourceUserIdentifier@ ) with the @IdentityId@ of the @DestinationUserIdentifier@ . Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown.
 --
 --
+-- The number of linked logins is limited to 20. So, the number of linked logins for the source user, @SourceUserIdentifier@ , and the destination user, @DestinationUserIdentifier@ , together should not be larger than 20. Otherwise, an exception will be thrown.
+--
 -- You must use AWS Developer credentials to call this API.
 --
 module Network.AWS.CognitoIdentity.MergeDeveloperIdentities
@@ -54,13 +56,16 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'mergeDeveloperIdentities' smart constructor.
-data MergeDeveloperIdentities = MergeDeveloperIdentities'
-  { _mdiSourceUserIdentifier      :: !Text
-  , _mdiDestinationUserIdentifier :: !Text
-  , _mdiDeveloperProviderName     :: !Text
-  , _mdiIdentityPoolId            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data MergeDeveloperIdentities = MergeDeveloperIdentities'{_mdiSourceUserIdentifier
+                                                          :: !Text,
+                                                          _mdiDestinationUserIdentifier
+                                                          :: !Text,
+                                                          _mdiDeveloperProviderName
+                                                          :: !Text,
+                                                          _mdiIdentityPoolId ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'MergeDeveloperIdentities' with the minimum fields required to make a request.
 --
@@ -79,14 +84,16 @@ mergeDeveloperIdentities
     -> Text -- ^ 'mdiDeveloperProviderName'
     -> Text -- ^ 'mdiIdentityPoolId'
     -> MergeDeveloperIdentities
-mergeDeveloperIdentities pSourceUserIdentifier_ pDestinationUserIdentifier_ pDeveloperProviderName_ pIdentityPoolId_ =
-  MergeDeveloperIdentities'
-    { _mdiSourceUserIdentifier = pSourceUserIdentifier_
-    , _mdiDestinationUserIdentifier = pDestinationUserIdentifier_
-    , _mdiDeveloperProviderName = pDeveloperProviderName_
-    , _mdiIdentityPoolId = pIdentityPoolId_
-    }
-
+mergeDeveloperIdentities pSourceUserIdentifier_
+  pDestinationUserIdentifier_ pDeveloperProviderName_
+  pIdentityPoolId_
+  = MergeDeveloperIdentities'{_mdiSourceUserIdentifier
+                                = pSourceUserIdentifier_,
+                              _mdiDestinationUserIdentifier =
+                                pDestinationUserIdentifier_,
+                              _mdiDeveloperProviderName =
+                                pDeveloperProviderName_,
+                              _mdiIdentityPoolId = pIdentityPoolId_}
 
 -- | User identifier for the source user. The value should be a @DeveloperUserIdentifier@ .
 mdiSourceUserIdentifier :: Lens' MergeDeveloperIdentities Text
@@ -153,11 +160,15 @@ instance ToQuery MergeDeveloperIdentities where
 --
 --
 -- /See:/ 'mergeDeveloperIdentitiesResponse' smart constructor.
-data MergeDeveloperIdentitiesResponse = MergeDeveloperIdentitiesResponse'
-  { _mdirsIdentityId     :: !(Maybe Text)
-  , _mdirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data MergeDeveloperIdentitiesResponse = MergeDeveloperIdentitiesResponse'{_mdirsIdentityId
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _mdirsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'MergeDeveloperIdentitiesResponse' with the minimum fields required to make a request.
 --
@@ -169,10 +180,10 @@ data MergeDeveloperIdentitiesResponse = MergeDeveloperIdentitiesResponse'
 mergeDeveloperIdentitiesResponse
     :: Int -- ^ 'mdirsResponseStatus'
     -> MergeDeveloperIdentitiesResponse
-mergeDeveloperIdentitiesResponse pResponseStatus_ =
-  MergeDeveloperIdentitiesResponse'
-    {_mdirsIdentityId = Nothing, _mdirsResponseStatus = pResponseStatus_}
-
+mergeDeveloperIdentitiesResponse pResponseStatus_
+  = MergeDeveloperIdentitiesResponse'{_mdirsIdentityId
+                                        = Nothing,
+                                      _mdirsResponseStatus = pResponseStatus_}
 
 -- | A unique identifier in the format REGION:GUID.
 mdirsIdentityId :: Lens' MergeDeveloperIdentitiesResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about the Amazon Simple Notification Service (SNS) topic that is used to record AWS Firewall Manager SNS logs.
+-- Information about the Amazon Simple Notification Service (SNS) topic that is used to record AWS Firewall Manager SNS logs.
 --
 --
 module Network.AWS.FMS.GetNotificationChannel
@@ -44,17 +44,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getNotificationChannel' smart constructor.
-data GetNotificationChannel =
-  GetNotificationChannel'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetNotificationChannel = GetNotificationChannel'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetNotificationChannel' with the minimum fields required to make a request.
 --
 getNotificationChannel
     :: GetNotificationChannel
 getNotificationChannel = GetNotificationChannel'
-
 
 instance AWSRequest GetNotificationChannel where
         type Rs GetNotificationChannel =
@@ -91,18 +89,24 @@ instance ToQuery GetNotificationChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getNotificationChannelResponse' smart constructor.
-data GetNotificationChannelResponse = GetNotificationChannelResponse'
-  { _gncrsSNSTopicARN    :: !(Maybe Text)
-  , _gncrsSNSRoleName    :: !(Maybe Text)
-  , _gncrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetNotificationChannelResponse = GetNotificationChannelResponse'{_gncrsSNSTopicARN
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _gncrsSNSRoleName
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _gncrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'GetNotificationChannelResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gncrsSNSTopicARN' - The SNS topic that records AWS Firewall Manager activity.
+-- * 'gncrsSNSTopicARN' - The SNS topic that records AWS Firewall Manager activity. 
 --
 -- * 'gncrsSNSRoleName' - The IAM role that is used by AWS Firewall Manager to record activity to SNS.
 --
@@ -110,15 +114,13 @@ data GetNotificationChannelResponse = GetNotificationChannelResponse'
 getNotificationChannelResponse
     :: Int -- ^ 'gncrsResponseStatus'
     -> GetNotificationChannelResponse
-getNotificationChannelResponse pResponseStatus_ =
-  GetNotificationChannelResponse'
-    { _gncrsSNSTopicARN = Nothing
-    , _gncrsSNSRoleName = Nothing
-    , _gncrsResponseStatus = pResponseStatus_
-    }
+getNotificationChannelResponse pResponseStatus_
+  = GetNotificationChannelResponse'{_gncrsSNSTopicARN =
+                                      Nothing,
+                                    _gncrsSNSRoleName = Nothing,
+                                    _gncrsResponseStatus = pResponseStatus_}
 
-
--- | The SNS topic that records AWS Firewall Manager activity.
+-- | The SNS topic that records AWS Firewall Manager activity. 
 gncrsSNSTopicARN :: Lens' GetNotificationChannelResponse (Maybe Text)
 gncrsSNSTopicARN = lens _gncrsSNSTopicARN (\ s a -> s{_gncrsSNSTopicARN = a})
 

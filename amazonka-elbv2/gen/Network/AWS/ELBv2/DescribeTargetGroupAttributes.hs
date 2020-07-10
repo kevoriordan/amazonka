@@ -21,6 +21,8 @@
 -- Describes the attributes for the specified target group.
 --
 --
+-- For more information, see <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes Target Group Attributes> in the /Application Load Balancers Guide/ or <https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes Target Group Attributes> in the /Network Load Balancers Guide/ .
+--
 module Network.AWS.ELBv2.DescribeTargetGroupAttributes
     (
     -- * Creating a Request
@@ -45,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeTargetGroupAttributes' smart constructor.
-newtype DescribeTargetGroupAttributes = DescribeTargetGroupAttributes'
-  { _dtgaTargetGroupARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeTargetGroupAttributes = DescribeTargetGroupAttributes'{_dtgaTargetGroupARN
+                                                                       :: Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeTargetGroupAttributes' with the minimum fields required to make a request.
 --
@@ -58,9 +60,9 @@ newtype DescribeTargetGroupAttributes = DescribeTargetGroupAttributes'
 describeTargetGroupAttributes
     :: Text -- ^ 'dtgaTargetGroupARN'
     -> DescribeTargetGroupAttributes
-describeTargetGroupAttributes pTargetGroupARN_ =
-  DescribeTargetGroupAttributes' {_dtgaTargetGroupARN = pTargetGroupARN_}
-
+describeTargetGroupAttributes pTargetGroupARN_
+  = DescribeTargetGroupAttributes'{_dtgaTargetGroupARN
+                                     = pTargetGroupARN_}
 
 -- | The Amazon Resource Name (ARN) of the target group.
 dtgaTargetGroupARN :: Lens' DescribeTargetGroupAttributes Text
@@ -100,11 +102,15 @@ instance ToQuery DescribeTargetGroupAttributes where
                "TargetGroupArn" =: _dtgaTargetGroupARN]
 
 -- | /See:/ 'describeTargetGroupAttributesResponse' smart constructor.
-data DescribeTargetGroupAttributesResponse = DescribeTargetGroupAttributesResponse'
-  { _dtgarsAttributes     :: !(Maybe [TargetGroupAttribute])
-  , _dtgarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTargetGroupAttributesResponse = DescribeTargetGroupAttributesResponse'{_dtgarsAttributes
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [TargetGroupAttribute]),
+                                                                                    _dtgarsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeTargetGroupAttributesResponse' with the minimum fields required to make a request.
 --
@@ -116,10 +122,12 @@ data DescribeTargetGroupAttributesResponse = DescribeTargetGroupAttributesRespon
 describeTargetGroupAttributesResponse
     :: Int -- ^ 'dtgarsResponseStatus'
     -> DescribeTargetGroupAttributesResponse
-describeTargetGroupAttributesResponse pResponseStatus_ =
-  DescribeTargetGroupAttributesResponse'
-    {_dtgarsAttributes = Nothing, _dtgarsResponseStatus = pResponseStatus_}
-
+describeTargetGroupAttributesResponse
+  pResponseStatus_
+  = DescribeTargetGroupAttributesResponse'{_dtgarsAttributes
+                                             = Nothing,
+                                           _dtgarsResponseStatus =
+                                             pResponseStatus_}
 
 -- | Information about the target group attributes
 dtgarsAttributes :: Lens' DescribeTargetGroupAttributesResponse [TargetGroupAttribute]

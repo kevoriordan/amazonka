@@ -49,11 +49,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'addCustomAttributes' smart constructor.
-data AddCustomAttributes = AddCustomAttributes'
-  { _acaUserPoolId       :: !Text
-  , _acaCustomAttributes :: !(List1 SchemaAttributeType)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddCustomAttributes = AddCustomAttributes'{_acaUserPoolId
+                                                :: !Text,
+                                                _acaCustomAttributes ::
+                                                !(List1 SchemaAttributeType)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AddCustomAttributes' with the minimum fields required to make a request.
 --
@@ -66,12 +66,9 @@ addCustomAttributes
     :: Text -- ^ 'acaUserPoolId'
     -> NonEmpty SchemaAttributeType -- ^ 'acaCustomAttributes'
     -> AddCustomAttributes
-addCustomAttributes pUserPoolId_ pCustomAttributes_ =
-  AddCustomAttributes'
-    { _acaUserPoolId = pUserPoolId_
-    , _acaCustomAttributes = _List1 # pCustomAttributes_
-    }
-
+addCustomAttributes pUserPoolId_ pCustomAttributes_
+  = AddCustomAttributes'{_acaUserPoolId = pUserPoolId_,
+                         _acaCustomAttributes = _List1 # pCustomAttributes_}
 
 -- | The user pool ID for the user pool where you want to add custom attributes.
 acaUserPoolId :: Lens' AddCustomAttributes Text
@@ -122,10 +119,10 @@ instance ToQuery AddCustomAttributes where
 --
 --
 -- /See:/ 'addCustomAttributesResponse' smart constructor.
-newtype AddCustomAttributesResponse = AddCustomAttributesResponse'
-  { _acarsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AddCustomAttributesResponse = AddCustomAttributesResponse'{_acarsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'AddCustomAttributesResponse' with the minimum fields required to make a request.
 --
@@ -135,9 +132,9 @@ newtype AddCustomAttributesResponse = AddCustomAttributesResponse'
 addCustomAttributesResponse
     :: Int -- ^ 'acarsResponseStatus'
     -> AddCustomAttributesResponse
-addCustomAttributesResponse pResponseStatus_ =
-  AddCustomAttributesResponse' {_acarsResponseStatus = pResponseStatus_}
-
+addCustomAttributesResponse pResponseStatus_
+  = AddCustomAttributesResponse'{_acarsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 acarsResponseStatus :: Lens' AddCustomAttributesResponse Int

@@ -45,10 +45,10 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'deletePatchBaseline' smart constructor.
-newtype DeletePatchBaseline = DeletePatchBaseline'
-  { _dpbBaselineId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePatchBaseline = DeletePatchBaseline'{_dpbBaselineId
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeletePatchBaseline' with the minimum fields required to make a request.
 --
@@ -58,9 +58,8 @@ newtype DeletePatchBaseline = DeletePatchBaseline'
 deletePatchBaseline
     :: Text -- ^ 'dpbBaselineId'
     -> DeletePatchBaseline
-deletePatchBaseline pBaselineId_ =
-  DeletePatchBaseline' {_dpbBaselineId = pBaselineId_}
-
+deletePatchBaseline pBaselineId_
+  = DeletePatchBaseline'{_dpbBaselineId = pBaselineId_}
 
 -- | The ID of the patch baseline to delete.
 dpbBaselineId :: Lens' DeletePatchBaseline Text
@@ -101,11 +100,13 @@ instance ToQuery DeletePatchBaseline where
         toQuery = const mempty
 
 -- | /See:/ 'deletePatchBaselineResponse' smart constructor.
-data DeletePatchBaselineResponse = DeletePatchBaselineResponse'
-  { _dpbrsBaselineId     :: !(Maybe Text)
-  , _dpbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePatchBaselineResponse = DeletePatchBaselineResponse'{_dpbrsBaselineId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _dpbrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeletePatchBaselineResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +118,10 @@ data DeletePatchBaselineResponse = DeletePatchBaselineResponse'
 deletePatchBaselineResponse
     :: Int -- ^ 'dpbrsResponseStatus'
     -> DeletePatchBaselineResponse
-deletePatchBaselineResponse pResponseStatus_ =
-  DeletePatchBaselineResponse'
-    {_dpbrsBaselineId = Nothing, _dpbrsResponseStatus = pResponseStatus_}
-
+deletePatchBaselineResponse pResponseStatus_
+  = DeletePatchBaselineResponse'{_dpbrsBaselineId =
+                                   Nothing,
+                                 _dpbrsResponseStatus = pResponseStatus_}
 
 -- | The ID of the deleted patch baseline.
 dpbrsBaselineId :: Lens' DeletePatchBaselineResponse (Maybe Text)

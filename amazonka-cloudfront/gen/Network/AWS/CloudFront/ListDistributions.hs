@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List distributions.
+-- List CloudFront distributions.
 --
 --
 --
@@ -48,16 +48,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | The request to list your distributions.
+-- | The request to list your distributions. 
 --
 --
 --
 -- /See:/ 'listDistributions' smart constructor.
-data ListDistributions = ListDistributions'
-  { _ldMarker   :: !(Maybe Text)
-  , _ldMaxItems :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDistributions = ListDistributions'{_ldMarker
+                                            :: !(Maybe Text),
+                                            _ldMaxItems :: !(Maybe Text)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDistributions' with the minimum fields required to make a request.
 --
@@ -68,9 +67,9 @@ data ListDistributions = ListDistributions'
 -- * 'ldMaxItems' - The maximum number of distributions you want in the response body.
 listDistributions
     :: ListDistributions
-listDistributions =
-  ListDistributions' {_ldMarker = Nothing, _ldMaxItems = Nothing}
-
+listDistributions
+  = ListDistributions'{_ldMarker = Nothing,
+                       _ldMaxItems = Nothing}
 
 -- | Use this when paginating results to indicate where to begin in your list of distributions. The results include distributions in the list that occur after the marker. To get the next page of results, set the @Marker@ to the value of the @NextMarker@ from the current page's response (which is also the ID of the last distribution on that page).
 ldMarker :: Lens' ListDistributions (Maybe Text)
@@ -109,23 +108,25 @@ instance ToHeaders ListDistributions where
         toHeaders = const mempty
 
 instance ToPath ListDistributions where
-        toPath = const "/2017-10-30/distribution"
+        toPath = const "/2019-03-26/distribution"
 
 instance ToQuery ListDistributions where
         toQuery ListDistributions'{..}
           = mconcat
               ["Marker" =: _ldMarker, "MaxItems" =: _ldMaxItems]
 
--- | The returned result of the corresponding request.
+-- | The returned result of the corresponding request. 
 --
 --
 --
 -- /See:/ 'listDistributionsResponse' smart constructor.
-data ListDistributionsResponse = ListDistributionsResponse'
-  { _ldrsResponseStatus   :: !Int
-  , _ldrsDistributionList :: !DistributionList
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDistributionsResponse = ListDistributionsResponse'{_ldrsResponseStatus
+                                                            :: !Int,
+                                                            _ldrsDistributionList
+                                                            ::
+                                                            !DistributionList}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListDistributionsResponse' with the minimum fields required to make a request.
 --
@@ -133,23 +134,22 @@ data ListDistributionsResponse = ListDistributionsResponse'
 --
 -- * 'ldrsResponseStatus' - -- | The response status code.
 --
--- * 'ldrsDistributionList' - The @DistributionList@ type.
+-- * 'ldrsDistributionList' - The @DistributionList@ type. 
 listDistributionsResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> DistributionList -- ^ 'ldrsDistributionList'
     -> ListDistributionsResponse
-listDistributionsResponse pResponseStatus_ pDistributionList_ =
-  ListDistributionsResponse'
-    { _ldrsResponseStatus = pResponseStatus_
-    , _ldrsDistributionList = pDistributionList_
-    }
-
+listDistributionsResponse pResponseStatus_
+  pDistributionList_
+  = ListDistributionsResponse'{_ldrsResponseStatus =
+                                 pResponseStatus_,
+                               _ldrsDistributionList = pDistributionList_}
 
 -- | -- | The response status code.
 ldrsResponseStatus :: Lens' ListDistributionsResponse Int
 ldrsResponseStatus = lens _ldrsResponseStatus (\ s a -> s{_ldrsResponseStatus = a})
 
--- | The @DistributionList@ type.
+-- | The @DistributionList@ type. 
 ldrsDistributionList :: Lens' ListDistributionsResponse DistributionList
 ldrsDistributionList = lens _ldrsDistributionList (\ s a -> s{_ldrsDistributionList = a})
 

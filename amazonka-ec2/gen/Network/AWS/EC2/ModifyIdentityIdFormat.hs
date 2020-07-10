@@ -18,14 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created.
+-- Modifies the ID format of a resource for a specified IAM user, IAM role, or the root user for an account; or all IAM users, IAM roles, and the root user for an account. You can specify that resources should receive longer IDs (17-character IDs) when they are created. 
 --
 --
--- This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: @bundle@ | @conversion-task@ | @customer-gateway@ | @dhcp-options@ | @elastic-ip-allocation@ | @elastic-ip-association@ | @export-task@ | @flow-log@ | @image@ | @import-task@ | @internet-gateway@ | @network-acl@ | @network-acl-association@ | @network-interface@ | @network-interface-attachment@ | @prefix-list@ | @route-table@ | @route-table-association@ | @security-group@ | @subnet@ | @subnet-cidr-block-association@ | @vpc@ | @vpc-cidr-block-association@ | @vpc-endpoint@ | @vpc-peering-connection@ | @vpn-connection@ | @vpn-gateway@ .
+-- This request can only be used to modify longer ID settings for resource types that are within the opt-in period. Resources currently in their opt-in period include: @bundle@ | @conversion-task@ | @customer-gateway@ | @dhcp-options@ | @elastic-ip-allocation@ | @elastic-ip-association@ | @export-task@ | @flow-log@ | @image@ | @import-task@ | @internet-gateway@ | @network-acl@ | @network-acl-association@ | @network-interface@ | @network-interface-attachment@ | @prefix-list@ | @route-table@ | @route-table-association@ | @security-group@ | @subnet@ | @subnet-cidr-block-association@ | @vpc@ | @vpc-cidr-block-association@ | @vpc-endpoint@ | @vpc-peering-connection@ | @vpn-connection@ | @vpn-gateway@ . 
 --
--- For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html Resource IDs> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html Resource IDs> in the /Amazon Elastic Compute Cloud User Guide/ . 
 --
--- This setting applies to the principal specified in the request; it does not apply to the principal that makes the request.
+-- This setting applies to the principal specified in the request; it does not apply to the principal that makes the request. 
 --
 -- Resources created with longer IDs are visible to all IAM roles and users, regardless of these settings and provided that they have permission to use the relevant @Describe@ command for the resource type.
 --
@@ -51,17 +51,13 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters of ModifyIdentityIdFormat.
---
---
---
--- /See:/ 'modifyIdentityIdFormat' smart constructor.
-data ModifyIdentityIdFormat = ModifyIdentityIdFormat'
-  { _miifPrincipalARN :: !Text
-  , _miifResource     :: !Text
-  , _miifUseLongIds   :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'modifyIdentityIdFormat' smart constructor.
+data ModifyIdentityIdFormat = ModifyIdentityIdFormat'{_miifPrincipalARN
+                                                      :: !Text,
+                                                      _miifResource :: !Text,
+                                                      _miifUseLongIds :: !Bool}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ModifyIdentityIdFormat' with the minimum fields required to make a request.
 --
@@ -77,13 +73,12 @@ modifyIdentityIdFormat
     -> Text -- ^ 'miifResource'
     -> Bool -- ^ 'miifUseLongIds'
     -> ModifyIdentityIdFormat
-modifyIdentityIdFormat pPrincipalARN_ pResource_ pUseLongIds_ =
-  ModifyIdentityIdFormat'
-    { _miifPrincipalARN = pPrincipalARN_
-    , _miifResource = pResource_
-    , _miifUseLongIds = pUseLongIds_
-    }
-
+modifyIdentityIdFormat pPrincipalARN_ pResource_
+  pUseLongIds_
+  = ModifyIdentityIdFormat'{_miifPrincipalARN =
+                              pPrincipalARN_,
+                            _miifResource = pResource_,
+                            _miifUseLongIds = pUseLongIds_}
 
 -- | The ARN of the principal, which can be an IAM user, IAM role, or the root user. Specify @all@ to modify the ID format for all IAM users, IAM roles, and the root user of the account.
 miifPrincipalARN :: Lens' ModifyIdentityIdFormat Text
@@ -125,16 +120,15 @@ instance ToQuery ModifyIdentityIdFormat where
                "UseLongIds" =: _miifUseLongIds]
 
 -- | /See:/ 'modifyIdentityIdFormatResponse' smart constructor.
-data ModifyIdentityIdFormatResponse =
-  ModifyIdentityIdFormatResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyIdentityIdFormatResponse = ModifyIdentityIdFormatResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ModifyIdentityIdFormatResponse' with the minimum fields required to make a request.
 --
 modifyIdentityIdFormatResponse
     :: ModifyIdentityIdFormatResponse
-modifyIdentityIdFormatResponse = ModifyIdentityIdFormatResponse'
-
+modifyIdentityIdFormatResponse
+  = ModifyIdentityIdFormatResponse'
 
 instance NFData ModifyIdentityIdFormatResponse where

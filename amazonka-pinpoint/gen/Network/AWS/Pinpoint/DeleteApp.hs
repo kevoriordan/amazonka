@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an app.
+-- Deletes an application.
+--
+--
 module Network.AWS.Pinpoint.DeleteApp
     (
     -- * Creating a Request
@@ -43,23 +45,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteApp' smart constructor.
-newtype DeleteApp = DeleteApp'
-  { _daApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteApp = DeleteApp'{_daApplicationId ::
+                               Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteApp' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daApplicationId' - Undocumented member.
+-- * 'daApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteApp
     :: Text -- ^ 'daApplicationId'
     -> DeleteApp
-deleteApp pApplicationId_ = DeleteApp' {_daApplicationId = pApplicationId_}
+deleteApp pApplicationId_
+  = DeleteApp'{_daApplicationId = pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 daApplicationId :: Lens' DeleteApp Text
 daApplicationId = lens _daApplicationId (\ s a -> s{_daApplicationId = a})
 
@@ -91,11 +92,11 @@ instance ToQuery DeleteApp where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAppResponse' smart constructor.
-data DeleteAppResponse = DeleteAppResponse'
-  { _darsResponseStatus      :: !Int
-  , _darsApplicationResponse :: !ApplicationResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAppResponse = DeleteAppResponse'{_darsResponseStatus
+                                            :: !Int,
+                                            _darsApplicationResponse ::
+                                            !ApplicationResponse}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAppResponse' with the minimum fields required to make a request.
 --
@@ -108,12 +109,11 @@ deleteAppResponse
     :: Int -- ^ 'darsResponseStatus'
     -> ApplicationResponse -- ^ 'darsApplicationResponse'
     -> DeleteAppResponse
-deleteAppResponse pResponseStatus_ pApplicationResponse_ =
-  DeleteAppResponse'
-    { _darsResponseStatus = pResponseStatus_
-    , _darsApplicationResponse = pApplicationResponse_
-    }
-
+deleteAppResponse pResponseStatus_
+  pApplicationResponse_
+  = DeleteAppResponse'{_darsResponseStatus =
+                         pResponseStatus_,
+                       _darsApplicationResponse = pApplicationResponse_}
 
 -- | -- | The response status code.
 darsResponseStatus :: Lens' DeleteAppResponse Int

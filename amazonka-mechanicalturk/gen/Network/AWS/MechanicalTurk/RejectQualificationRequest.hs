@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @RejectQualificationRequest@ operation rejects a user's request for a Qualification.
+-- The @RejectQualificationRequest@ operation rejects a user's request for a Qualification. 
 --
 --
 -- You can provide a text message explaining why the request was rejected. The Worker who made the request can see this message.
@@ -47,11 +47,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'rejectQualificationRequest' smart constructor.
-data RejectQualificationRequest = RejectQualificationRequest'
-  { _rqrReason                 :: !(Maybe Text)
-  , _rqrQualificationRequestId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RejectQualificationRequest = RejectQualificationRequest'{_rqrReason
+                                                              :: !(Maybe Text),
+                                                              _rqrQualificationRequestId
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'RejectQualificationRequest' with the minimum fields required to make a request.
 --
@@ -59,22 +60,20 @@ data RejectQualificationRequest = RejectQualificationRequest'
 --
 -- * 'rqrReason' - A text message explaining why the request was rejected, to be shown to the Worker who made the request.
 --
--- * 'rqrQualificationRequestId' - The ID of the Qualification request, as returned by the @ListQualificationRequests@ operation.
+-- * 'rqrQualificationRequestId' - The ID of the Qualification request, as returned by the @ListQualificationRequests@ operation. 
 rejectQualificationRequest
     :: Text -- ^ 'rqrQualificationRequestId'
     -> RejectQualificationRequest
-rejectQualificationRequest pQualificationRequestId_ =
-  RejectQualificationRequest'
-    { _rqrReason = Nothing
-    , _rqrQualificationRequestId = pQualificationRequestId_
-    }
-
+rejectQualificationRequest pQualificationRequestId_
+  = RejectQualificationRequest'{_rqrReason = Nothing,
+                                _rqrQualificationRequestId =
+                                  pQualificationRequestId_}
 
 -- | A text message explaining why the request was rejected, to be shown to the Worker who made the request.
 rqrReason :: Lens' RejectQualificationRequest (Maybe Text)
 rqrReason = lens _rqrReason (\ s a -> s{_rqrReason = a})
 
--- | The ID of the Qualification request, as returned by the @ListQualificationRequests@ operation.
+-- | The ID of the Qualification request, as returned by the @ListQualificationRequests@ operation. 
 rqrQualificationRequestId :: Lens' RejectQualificationRequest Text
 rqrQualificationRequestId = lens _rqrQualificationRequestId (\ s a -> s{_rqrQualificationRequestId = a})
 
@@ -118,10 +117,11 @@ instance ToQuery RejectQualificationRequest where
         toQuery = const mempty
 
 -- | /See:/ 'rejectQualificationRequestResponse' smart constructor.
-newtype RejectQualificationRequestResponse = RejectQualificationRequestResponse'
-  { _rqrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RejectQualificationRequestResponse = RejectQualificationRequestResponse'{_rqrrsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'RejectQualificationRequestResponse' with the minimum fields required to make a request.
 --
@@ -131,9 +131,9 @@ newtype RejectQualificationRequestResponse = RejectQualificationRequestResponse'
 rejectQualificationRequestResponse
     :: Int -- ^ 'rqrrsResponseStatus'
     -> RejectQualificationRequestResponse
-rejectQualificationRequestResponse pResponseStatus_ =
-  RejectQualificationRequestResponse' {_rqrrsResponseStatus = pResponseStatus_}
-
+rejectQualificationRequestResponse pResponseStatus_
+  = RejectQualificationRequestResponse'{_rqrrsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 rqrrsResponseStatus :: Lens' RejectQualificationRequestResponse Int

@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteCluster' smart constructor.
-newtype DeleteCluster = DeleteCluster'
-  { _dcClusterId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCluster = DeleteCluster'{_dcClusterId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteCluster' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype DeleteCluster = DeleteCluster'
 deleteCluster
     :: Text -- ^ 'dcClusterId'
     -> DeleteCluster
-deleteCluster pClusterId_ = DeleteCluster' {_dcClusterId = pClusterId_}
-
+deleteCluster pClusterId_
+  = DeleteCluster'{_dcClusterId = pClusterId_}
 
 -- | The identifier (ID) of the cluster that you are deleting. To find the cluster ID, use 'DescribeClusters' .
 dcClusterId :: Lens' DeleteCluster Text
@@ -99,11 +98,11 @@ instance ToQuery DeleteCluster where
         toQuery = const mempty
 
 -- | /See:/ 'deleteClusterResponse' smart constructor.
-data DeleteClusterResponse = DeleteClusterResponse'
-  { _drsCluster        :: !(Maybe Cluster)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteClusterResponse = DeleteClusterResponse'{_drsCluster
+                                                    :: !(Maybe Cluster),
+                                                    _drsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteClusterResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +114,9 @@ data DeleteClusterResponse = DeleteClusterResponse'
 deleteClusterResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteClusterResponse
-deleteClusterResponse pResponseStatus_ =
-  DeleteClusterResponse'
-    {_drsCluster = Nothing, _drsResponseStatus = pResponseStatus_}
-
+deleteClusterResponse pResponseStatus_
+  = DeleteClusterResponse'{_drsCluster = Nothing,
+                           _drsResponseStatus = pResponseStatus_}
 
 -- | Information about the cluster that was deleted.
 drsCluster :: Lens' DeleteClusterResponse (Maybe Cluster)

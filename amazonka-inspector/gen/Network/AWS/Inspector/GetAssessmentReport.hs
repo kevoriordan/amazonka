@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Produces an assessment report that includes detailed and comprehensive results of a specified assessment run.
+-- Produces an assessment report that includes detailed and comprehensive results of a specified assessment run. 
 --
 --
 module Network.AWS.Inspector.GetAssessmentReport
@@ -48,12 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getAssessmentReport' smart constructor.
-data GetAssessmentReport = GetAssessmentReport'
-  { _garAssessmentRunARN :: !Text
-  , _garReportFileFormat :: !ReportFileFormat
-  , _garReportType       :: !ReportType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAssessmentReport = GetAssessmentReport'{_garAssessmentRunARN
+                                                :: !Text,
+                                                _garReportFileFormat ::
+                                                !ReportFileFormat,
+                                                _garReportType :: !ReportType}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetAssessmentReport' with the minimum fields required to make a request.
 --
@@ -63,19 +63,18 @@ data GetAssessmentReport = GetAssessmentReport'
 --
 -- * 'garReportFileFormat' - Specifies the file format (html or pdf) of the assessment report that you want to generate.
 --
--- * 'garReportType' - Specifies the type of the assessment report that you want to generate. There are two types of assessment reports: a finding report and a full report. For more information, see <http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html Assessment Reports> .
+-- * 'garReportType' - Specifies the type of the assessment report that you want to generate. There are two types of assessment reports: a finding report and a full report. For more information, see <https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html Assessment Reports> . 
 getAssessmentReport
     :: Text -- ^ 'garAssessmentRunARN'
     -> ReportFileFormat -- ^ 'garReportFileFormat'
     -> ReportType -- ^ 'garReportType'
     -> GetAssessmentReport
-getAssessmentReport pAssessmentRunARN_ pReportFileFormat_ pReportType_ =
-  GetAssessmentReport'
-    { _garAssessmentRunARN = pAssessmentRunARN_
-    , _garReportFileFormat = pReportFileFormat_
-    , _garReportType = pReportType_
-    }
-
+getAssessmentReport pAssessmentRunARN_
+  pReportFileFormat_ pReportType_
+  = GetAssessmentReport'{_garAssessmentRunARN =
+                           pAssessmentRunARN_,
+                         _garReportFileFormat = pReportFileFormat_,
+                         _garReportType = pReportType_}
 
 -- | The ARN that specifies the assessment run for which you want to generate a report.
 garAssessmentRunARN :: Lens' GetAssessmentReport Text
@@ -85,7 +84,7 @@ garAssessmentRunARN = lens _garAssessmentRunARN (\ s a -> s{_garAssessmentRunARN
 garReportFileFormat :: Lens' GetAssessmentReport ReportFileFormat
 garReportFileFormat = lens _garReportFileFormat (\ s a -> s{_garReportFileFormat = a})
 
--- | Specifies the type of the assessment report that you want to generate. There are two types of assessment reports: a finding report and a full report. For more information, see <http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html Assessment Reports> .
+-- | Specifies the type of the assessment report that you want to generate. There are two types of assessment reports: a finding report and a full report. For more information, see <https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html Assessment Reports> . 
 garReportType :: Lens' GetAssessmentReport ReportType
 garReportType = lens _garReportType (\ s a -> s{_garReportType = a})
 
@@ -129,12 +128,15 @@ instance ToQuery GetAssessmentReport where
         toQuery = const mempty
 
 -- | /See:/ 'getAssessmentReportResponse' smart constructor.
-data GetAssessmentReportResponse = GetAssessmentReportResponse'
-  { _garrsUrl            :: !(Maybe Text)
-  , _garrsResponseStatus :: !Int
-  , _garrsStatus         :: !ReportStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetAssessmentReportResponse = GetAssessmentReportResponse'{_garrsUrl
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _garrsResponseStatus
+                                                                :: !Int,
+                                                                _garrsStatus ::
+                                                                !ReportStatus}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetAssessmentReportResponse' with the minimum fields required to make a request.
 --
@@ -144,18 +146,15 @@ data GetAssessmentReportResponse = GetAssessmentReportResponse'
 --
 -- * 'garrsResponseStatus' - -- | The response status code.
 --
--- * 'garrsStatus' - Specifies the status of the request to generate an assessment report.
+-- * 'garrsStatus' - Specifies the status of the request to generate an assessment report. 
 getAssessmentReportResponse
     :: Int -- ^ 'garrsResponseStatus'
     -> ReportStatus -- ^ 'garrsStatus'
     -> GetAssessmentReportResponse
-getAssessmentReportResponse pResponseStatus_ pStatus_ =
-  GetAssessmentReportResponse'
-    { _garrsUrl = Nothing
-    , _garrsResponseStatus = pResponseStatus_
-    , _garrsStatus = pStatus_
-    }
-
+getAssessmentReportResponse pResponseStatus_ pStatus_
+  = GetAssessmentReportResponse'{_garrsUrl = Nothing,
+                                 _garrsResponseStatus = pResponseStatus_,
+                                 _garrsStatus = pStatus_}
 
 -- | Specifies the URL where you can find the generated assessment report. This parameter is only returned if the report is successfully generated.
 garrsUrl :: Lens' GetAssessmentReportResponse (Maybe Text)
@@ -165,7 +164,7 @@ garrsUrl = lens _garrsUrl (\ s a -> s{_garrsUrl = a})
 garrsResponseStatus :: Lens' GetAssessmentReportResponse Int
 garrsResponseStatus = lens _garrsResponseStatus (\ s a -> s{_garrsResponseStatus = a})
 
--- | Specifies the status of the request to generate an assessment report.
+-- | Specifies the status of the request to generate an assessment report. 
 garrsStatus :: Lens' GetAssessmentReportResponse ReportStatus
 garrsStatus = lens _garrsStatus (\ s a -> s{_garrsStatus = a})
 

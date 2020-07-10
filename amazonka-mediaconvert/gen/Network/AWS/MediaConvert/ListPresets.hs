@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieve a JSON array of up to twenty of your presets. This will return the presets themselves, not just a list of them. To retrieve the next twenty presets, use the nextToken string returned with the array.
+--
+-- This operation returns paginated results.
 module Network.AWS.MediaConvert.ListPresets
     (
     -- * Creating a Request
@@ -43,19 +45,19 @@ module Network.AWS.MediaConvert.ListPresets
 import Network.AWS.Lens
 import Network.AWS.MediaConvert.Types
 import Network.AWS.MediaConvert.Types.Product
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listPresets' smart constructor.
-data ListPresets = ListPresets'
-  { _lpCategory   :: !(Maybe Text)
-  , _lpListBy     :: !(Maybe PresetListBy)
-  , _lpNextToken  :: !(Maybe Text)
-  , _lpOrder      :: !(Maybe Order)
-  , _lpMaxResults :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPresets = ListPresets'{_lpCategory ::
+                                !(Maybe Text),
+                                _lpListBy :: !(Maybe PresetListBy),
+                                _lpNextToken :: !(Maybe Text),
+                                _lpOrder :: !(Maybe Order),
+                                _lpMaxResults :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPresets' with the minimum fields required to make a request.
 --
@@ -63,30 +65,25 @@ data ListPresets = ListPresets'
 --
 -- * 'lpCategory' - Optionally, specify a preset category to limit responses to only presets from that category.
 --
--- * 'lpListBy' - Undocumented member.
+-- * 'lpListBy' - Optional. When you request a list of presets, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don't specify, the service will list them by name.
 --
 -- * 'lpNextToken' - Use this string, provided with the response to a previous request, to request the next batch of presets.
 --
--- * 'lpOrder' - Undocumented member.
+-- * 'lpOrder' - Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 --
 -- * 'lpMaxResults' - Optional. Number of presets, up to twenty, that will be returned at one time
 listPresets
     :: ListPresets
-listPresets =
-  ListPresets'
-    { _lpCategory = Nothing
-    , _lpListBy = Nothing
-    , _lpNextToken = Nothing
-    , _lpOrder = Nothing
-    , _lpMaxResults = Nothing
-    }
-
+listPresets
+  = ListPresets'{_lpCategory = Nothing,
+                 _lpListBy = Nothing, _lpNextToken = Nothing,
+                 _lpOrder = Nothing, _lpMaxResults = Nothing}
 
 -- | Optionally, specify a preset category to limit responses to only presets from that category.
 lpCategory :: Lens' ListPresets (Maybe Text)
 lpCategory = lens _lpCategory (\ s a -> s{_lpCategory = a})
 
--- | Undocumented member.
+-- | Optional. When you request a list of presets, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don't specify, the service will list them by name.
 lpListBy :: Lens' ListPresets (Maybe PresetListBy)
 lpListBy = lens _lpListBy (\ s a -> s{_lpListBy = a})
 
@@ -94,13 +91,20 @@ lpListBy = lens _lpListBy (\ s a -> s{_lpListBy = a})
 lpNextToken :: Lens' ListPresets (Maybe Text)
 lpNextToken = lens _lpNextToken (\ s a -> s{_lpNextToken = a})
 
--- | Undocumented member.
+-- | Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
 lpOrder :: Lens' ListPresets (Maybe Order)
 lpOrder = lens _lpOrder (\ s a -> s{_lpOrder = a})
 
 -- | Optional. Number of presets, up to twenty, that will be returned at one time
-lpMaxResults :: Lens' ListPresets (Maybe Int)
-lpMaxResults = lens _lpMaxResults (\ s a -> s{_lpMaxResults = a})
+lpMaxResults :: Lens' ListPresets (Maybe Natural)
+lpMaxResults = lens _lpMaxResults (\ s a -> s{_lpMaxResults = a}) . mapping _Nat
+
+instance AWSPager ListPresets where
+        page rq rs
+          | stop (rs ^. lprsNextToken) = Nothing
+          | stop (rs ^. lprsPresets) = Nothing
+          | otherwise =
+            Just $ rq & lpNextToken .~ rs ^. lprsNextToken
 
 instance AWSRequest ListPresets where
         type Rs ListPresets = ListPresetsResponse
@@ -134,12 +138,11 @@ instance ToQuery ListPresets where
                "maxResults" =: _lpMaxResults]
 
 -- | /See:/ 'listPresetsResponse' smart constructor.
-data ListPresetsResponse = ListPresetsResponse'
-  { _lprsPresets        :: !(Maybe [Preset])
-  , _lprsNextToken      :: !(Maybe Text)
-  , _lprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPresetsResponse = ListPresetsResponse'{_lprsPresets
+                                                :: !(Maybe [Preset]),
+                                                _lprsNextToken :: !(Maybe Text),
+                                                _lprsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPresetsResponse' with the minimum fields required to make a request.
 --
@@ -153,13 +156,10 @@ data ListPresetsResponse = ListPresetsResponse'
 listPresetsResponse
     :: Int -- ^ 'lprsResponseStatus'
     -> ListPresetsResponse
-listPresetsResponse pResponseStatus_ =
-  ListPresetsResponse'
-    { _lprsPresets = Nothing
-    , _lprsNextToken = Nothing
-    , _lprsResponseStatus = pResponseStatus_
-    }
-
+listPresetsResponse pResponseStatus_
+  = ListPresetsResponse'{_lprsPresets = Nothing,
+                         _lprsNextToken = Nothing,
+                         _lprsResponseStatus = pResponseStatus_}
 
 -- | List of presets
 lprsPresets :: Lens' ListPresetsResponse [Preset]

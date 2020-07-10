@@ -52,13 +52,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAppliedSchemaARNs' smart constructor.
-data ListAppliedSchemaARNs = ListAppliedSchemaARNs'
-  { _lasaNextToken    :: !(Maybe Text)
-  , _lasaSchemaARN    :: !(Maybe Text)
-  , _lasaMaxResults   :: !(Maybe Nat)
-  , _lasaDirectoryARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAppliedSchemaARNs = ListAppliedSchemaARNs'{_lasaNextToken
+                                                    :: !(Maybe Text),
+                                                    _lasaSchemaARN ::
+                                                    !(Maybe Text),
+                                                    _lasaMaxResults ::
+                                                    !(Maybe Nat),
+                                                    _lasaDirectoryARN :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListAppliedSchemaARNs' with the minimum fields required to make a request.
 --
@@ -74,14 +76,10 @@ data ListAppliedSchemaARNs = ListAppliedSchemaARNs'
 listAppliedSchemaARNs
     :: Text -- ^ 'lasaDirectoryARN'
     -> ListAppliedSchemaARNs
-listAppliedSchemaARNs pDirectoryARN_ =
-  ListAppliedSchemaARNs'
-    { _lasaNextToken = Nothing
-    , _lasaSchemaARN = Nothing
-    , _lasaMaxResults = Nothing
-    , _lasaDirectoryARN = pDirectoryARN_
-    }
-
+listAppliedSchemaARNs pDirectoryARN_
+  = ListAppliedSchemaARNs'{_lasaNextToken = Nothing,
+                           _lasaSchemaARN = Nothing, _lasaMaxResults = Nothing,
+                           _lasaDirectoryARN = pDirectoryARN_}
 
 -- | The pagination token.
 lasaNextToken :: Lens' ListAppliedSchemaARNs (Maybe Text)
@@ -143,12 +141,18 @@ instance ToQuery ListAppliedSchemaARNs where
         toQuery = const mempty
 
 -- | /See:/ 'listAppliedSchemaARNsResponse' smart constructor.
-data ListAppliedSchemaARNsResponse = ListAppliedSchemaARNsResponse'
-  { _lasarsSchemaARNs     :: !(Maybe [Text])
-  , _lasarsNextToken      :: !(Maybe Text)
-  , _lasarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAppliedSchemaARNsResponse = ListAppliedSchemaARNsResponse'{_lasarsSchemaARNs
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [Text]),
+                                                                    _lasarsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _lasarsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListAppliedSchemaARNsResponse' with the minimum fields required to make a request.
 --
@@ -162,13 +166,11 @@ data ListAppliedSchemaARNsResponse = ListAppliedSchemaARNsResponse'
 listAppliedSchemaARNsResponse
     :: Int -- ^ 'lasarsResponseStatus'
     -> ListAppliedSchemaARNsResponse
-listAppliedSchemaARNsResponse pResponseStatus_ =
-  ListAppliedSchemaARNsResponse'
-    { _lasarsSchemaARNs = Nothing
-    , _lasarsNextToken = Nothing
-    , _lasarsResponseStatus = pResponseStatus_
-    }
-
+listAppliedSchemaARNsResponse pResponseStatus_
+  = ListAppliedSchemaARNsResponse'{_lasarsSchemaARNs =
+                                     Nothing,
+                                   _lasarsNextToken = Nothing,
+                                   _lasarsResponseStatus = pResponseStatus_}
 
 -- | The ARNs of schemas that are applied to the directory.
 lasarsSchemaARNs :: Lens' ListAppliedSchemaARNsResponse [Text]

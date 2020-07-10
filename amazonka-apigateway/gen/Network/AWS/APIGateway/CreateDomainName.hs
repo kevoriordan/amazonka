@@ -30,11 +30,13 @@ module Network.AWS.APIGateway.CreateDomainName
     , cdnCertificateName
     , cdnRegionalCertificateARN
     , cdnCertificateARN
+    , cdnSecurityPolicy
     , cdnCertificatePrivateKey
     , cdnRegionalCertificateName
     , cdnCertificateBody
     , cdnCertificateChain
     , cdnEndpointConfiguration
+    , cdnTags
     , cdnDomainName
 
     -- * Destructuring the Response
@@ -46,12 +48,16 @@ module Network.AWS.APIGateway.CreateDomainName
     , dnRegionalCertificateARN
     , dnCertificateARN
     , dnDistributionHostedZoneId
+    , dnSecurityPolicy
     , dnDomainName
     , dnRegionalCertificateName
     , dnRegionalDomainName
     , dnCertificateUploadDate
     , dnDistributionDomainName
+    , dnDomainNameStatusMessage
     , dnEndpointConfiguration
+    , dnDomainNameStatus
+    , dnTags
     ) where
 
 import Network.AWS.APIGateway.Types
@@ -66,18 +72,24 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createDomainName' smart constructor.
-data CreateDomainName = CreateDomainName'
-  { _cdnCertificateName         :: !(Maybe Text)
-  , _cdnRegionalCertificateARN  :: !(Maybe Text)
-  , _cdnCertificateARN          :: !(Maybe Text)
-  , _cdnCertificatePrivateKey   :: !(Maybe Text)
-  , _cdnRegionalCertificateName :: !(Maybe Text)
-  , _cdnCertificateBody         :: !(Maybe Text)
-  , _cdnCertificateChain        :: !(Maybe Text)
-  , _cdnEndpointConfiguration   :: !(Maybe EndpointConfiguration)
-  , _cdnDomainName              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDomainName = CreateDomainName'{_cdnCertificateName
+                                          :: !(Maybe Text),
+                                          _cdnRegionalCertificateARN ::
+                                          !(Maybe Text),
+                                          _cdnCertificateARN :: !(Maybe Text),
+                                          _cdnSecurityPolicy ::
+                                          !(Maybe SecurityPolicy),
+                                          _cdnCertificatePrivateKey ::
+                                          !(Maybe Text),
+                                          _cdnRegionalCertificateName ::
+                                          !(Maybe Text),
+                                          _cdnCertificateBody :: !(Maybe Text),
+                                          _cdnCertificateChain :: !(Maybe Text),
+                                          _cdnEndpointConfiguration ::
+                                          !(Maybe EndpointConfiguration),
+                                          _cdnTags :: !(Maybe (Map Text Text)),
+                                          _cdnDomainName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDomainName' with the minimum fields required to make a request.
 --
@@ -89,6 +101,8 @@ data CreateDomainName = CreateDomainName'
 --
 -- * 'cdnCertificateARN' - The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
 --
+-- * 'cdnSecurityPolicy' - The Transport Layer Security (TLS) version + cipher suite for this 'DomainName' . The valid values are @TLS_1_0@ and @TLS_1_2@ .
+--
 -- * 'cdnCertificatePrivateKey' - [Deprecated] Your edge-optimized endpoint's domain name certificate's private key.
 --
 -- * 'cdnRegionalCertificateName' - The user-friendly name of the certificate that will be used by regional endpoint for this domain name.
@@ -97,25 +111,25 @@ data CreateDomainName = CreateDomainName'
 --
 -- * 'cdnCertificateChain' - [Deprecated] The intermediate certificates and optionally the root certificate, one after the other without any blank lines, used by an edge-optimized endpoint for this domain name. If you include the root certificate, your certificate chain must start with intermediate certificates and end with the root certificate. Use the intermediate certificates that were provided by your certificate authority. Do not include any intermediaries that are not in the chain of trust path.
 --
--- * 'cdnEndpointConfiguration' - The endpoint configuration of this 'DomainName' showing the endpoint types of the domain name.
+-- * 'cdnEndpointConfiguration' - The endpoint configuration of this 'DomainName' showing the endpoint types of the domain name. 
+--
+-- * 'cdnTags' - The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with @aws:@ . The tag value can be up to 256 characters.
 --
 -- * 'cdnDomainName' - [Required] The name of the 'DomainName' resource.
 createDomainName
     :: Text -- ^ 'cdnDomainName'
     -> CreateDomainName
-createDomainName pDomainName_ =
-  CreateDomainName'
-    { _cdnCertificateName = Nothing
-    , _cdnRegionalCertificateARN = Nothing
-    , _cdnCertificateARN = Nothing
-    , _cdnCertificatePrivateKey = Nothing
-    , _cdnRegionalCertificateName = Nothing
-    , _cdnCertificateBody = Nothing
-    , _cdnCertificateChain = Nothing
-    , _cdnEndpointConfiguration = Nothing
-    , _cdnDomainName = pDomainName_
-    }
-
+createDomainName pDomainName_
+  = CreateDomainName'{_cdnCertificateName = Nothing,
+                      _cdnRegionalCertificateARN = Nothing,
+                      _cdnCertificateARN = Nothing,
+                      _cdnSecurityPolicy = Nothing,
+                      _cdnCertificatePrivateKey = Nothing,
+                      _cdnRegionalCertificateName = Nothing,
+                      _cdnCertificateBody = Nothing,
+                      _cdnCertificateChain = Nothing,
+                      _cdnEndpointConfiguration = Nothing,
+                      _cdnTags = Nothing, _cdnDomainName = pDomainName_}
 
 -- | The user-friendly name of the certificate that will be used by edge-optimized endpoint for this domain name.
 cdnCertificateName :: Lens' CreateDomainName (Maybe Text)
@@ -128,6 +142,10 @@ cdnRegionalCertificateARN = lens _cdnRegionalCertificateARN (\ s a -> s{_cdnRegi
 -- | The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
 cdnCertificateARN :: Lens' CreateDomainName (Maybe Text)
 cdnCertificateARN = lens _cdnCertificateARN (\ s a -> s{_cdnCertificateARN = a})
+
+-- | The Transport Layer Security (TLS) version + cipher suite for this 'DomainName' . The valid values are @TLS_1_0@ and @TLS_1_2@ .
+cdnSecurityPolicy :: Lens' CreateDomainName (Maybe SecurityPolicy)
+cdnSecurityPolicy = lens _cdnSecurityPolicy (\ s a -> s{_cdnSecurityPolicy = a})
 
 -- | [Deprecated] Your edge-optimized endpoint's domain name certificate's private key.
 cdnCertificatePrivateKey :: Lens' CreateDomainName (Maybe Text)
@@ -145,9 +163,13 @@ cdnCertificateBody = lens _cdnCertificateBody (\ s a -> s{_cdnCertificateBody = 
 cdnCertificateChain :: Lens' CreateDomainName (Maybe Text)
 cdnCertificateChain = lens _cdnCertificateChain (\ s a -> s{_cdnCertificateChain = a})
 
--- | The endpoint configuration of this 'DomainName' showing the endpoint types of the domain name.
+-- | The endpoint configuration of this 'DomainName' showing the endpoint types of the domain name. 
 cdnEndpointConfiguration :: Lens' CreateDomainName (Maybe EndpointConfiguration)
 cdnEndpointConfiguration = lens _cdnEndpointConfiguration (\ s a -> s{_cdnEndpointConfiguration = a})
+
+-- | The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with @aws:@ . The tag value can be up to 256 characters.
+cdnTags :: Lens' CreateDomainName (HashMap Text Text)
+cdnTags = lens _cdnTags (\ s a -> s{_cdnTags = a}) . _Default . _Map
 
 -- | [Required] The name of the 'DomainName' resource.
 cdnDomainName :: Lens' CreateDomainName Text
@@ -176,6 +198,7 @@ instance ToJSON CreateDomainName where
                   ("regionalCertificateArn" .=) <$>
                     _cdnRegionalCertificateARN,
                   ("certificateArn" .=) <$> _cdnCertificateARN,
+                  ("securityPolicy" .=) <$> _cdnSecurityPolicy,
                   ("certificatePrivateKey" .=) <$>
                     _cdnCertificatePrivateKey,
                   ("regionalCertificateName" .=) <$>
@@ -184,6 +207,7 @@ instance ToJSON CreateDomainName where
                   ("certificateChain" .=) <$> _cdnCertificateChain,
                   ("endpointConfiguration" .=) <$>
                     _cdnEndpointConfiguration,
+                  ("tags" .=) <$> _cdnTags,
                   Just ("domainName" .= _cdnDomainName)])
 
 instance ToPath CreateDomainName where

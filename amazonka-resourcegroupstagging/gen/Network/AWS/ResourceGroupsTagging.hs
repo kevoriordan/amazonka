@@ -11,29 +11,235 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Resource Groups Tagging API__
+-- __Resource Groups Tagging API__ 
 --
 -- This guide describes the API operations for the resource groups tagging.
 --
 -- A tag is a label that you assign to an AWS resource. A tag consists of a key and a value, both of which you define. For example, if you have two Amazon EC2 instances, you might assign both a tag key of "Stack." But the value of "Stack" might be "Testing" for one and "Production" for the other.
 --
--- Tagging can help you organize your resources and enables you to simplify resource management, access management and cost allocation. For more information about tagging, see <http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html Working with Tag Editor> and <http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html Working with Resource Groups> . For more information about permissions you need to use the resource groups tagging APIs, see <http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-resource-groups.html Obtaining Permissions for Resource Groups > and <http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html Obtaining Permissions for Tagging > .
+-- Tagging can help you organize your resources and enables you to simplify resource management, access management and cost allocation. 
 --
--- You can use the resource groups tagging APIs to complete the following tasks:
+-- You can use the resource groups tagging API operations to complete the following tasks:
 --
---     * Tag and untag supported resources located in the specified region for the AWS account
+--     * Tag and untag supported resources located in the specified Region for the AWS account.
 --
---     * Use tag-based filters to search for resources located in the specified region for the AWS account
+--     * Use tag-based filters to search for resources located in the specified Region for the AWS account.
 --
---     * List all existing tag keys in the specified region for the AWS account
+--     * List all existing tag keys in the specified Region for the AWS account.
 --
---     * List all existing values for the specified key in the specified region for the AWS account
+--     * List all existing values for the specified key in the specified Region for the AWS account.
 --
 --
 --
--- Not all resources can have tags. For a lists of resources that you can tag, see <http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/supported-resources.html Supported Resources> in the /AWS Resource Groups and Tag Editor User Guide/ .
+-- To use resource groups tagging API operations, you must add the following permissions to your IAM policy:
 --
--- To make full use of the resource groups tagging APIs, you might need additional IAM permissions, including permission to access the resources of individual services as well as permission to view and apply tags to those resources. For more information, see <http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html Obtaining Permissions for Tagging> in the /AWS Resource Groups and Tag Editor User Guide/ .
+--     * @tag:GetResources@ 
+--
+--     * @tag:TagResources@ 
+--
+--     * @tag:UntagResources@ 
+--
+--     * @tag:GetTagKeys@ 
+--
+--     * @tag:GetTagValues@ 
+--
+--
+--
+-- You'll also need permissions to access the resources of individual services so that you can tag and untag those resources.
+--
+-- For more information on IAM policies, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html Managing IAM Policies> in the /IAM User Guide/ .
+--
+-- You can use the Resource Groups Tagging API to tag resources for the following AWS services.
+--
+--     * Alexa for Business (a4b)
+--
+--     * API Gateway
+--
+--     * Amazon AppStream
+--
+--     * AWS AppSync
+--
+--     * AWS App Mesh
+--
+--     * Amazon Athena
+--
+--     * Amazon Aurora
+--
+--     * AWS Backup
+--
+--     * AWS Certificate Manager
+--
+--     * AWS Certificate Manager Private CA
+--
+--     * Amazon Cloud Directory
+--
+--     * AWS CloudFormation
+--
+--     * Amazon CloudFront
+--
+--     * AWS CloudHSM
+--
+--     * AWS CloudTrail
+--
+--     * Amazon CloudWatch (alarms only)
+--
+--     * Amazon CloudWatch Events
+--
+--     * Amazon CloudWatch Logs
+--
+--     * AWS CodeBuild
+--
+--     * AWS CodeCommit
+--
+--     * AWS CodePipeline
+--
+--     * AWS CodeStar
+--
+--     * Amazon Cognito Identity
+--
+--     * Amazon Cognito User Pools
+--
+--     * Amazon Comprehend
+--
+--     * AWS Config
+--
+--     * AWS Data Exchange
+--
+--     * AWS Data Pipeline
+--
+--     * AWS Database Migration Service
+--
+--     * AWS DataSync
+--
+--     * AWS Device Farm
+--
+--     * AWS Direct Connect
+--
+--     * AWS Directory Service
+--
+--     * Amazon DynamoDB
+--
+--     * Amazon EBS
+--
+--     * Amazon EC2
+--
+--     * Amazon ECR
+--
+--     * Amazon ECS
+--
+--     * Amazon EKS
+--
+--     * AWS Elastic Beanstalk
+--
+--     * Amazon Elastic File System
+--
+--     * Elastic Load Balancing
+--
+--     * Amazon ElastiCache
+--
+--     * Amazon Elasticsearch Service
+--
+--     * AWS Elemental MediaLive
+--
+--     * AWS Elemental MediaPackage
+--
+--     * AWS Elemental MediaTailor
+--
+--     * Amazon EMR
+--
+--     * Amazon FSx
+--
+--     * Amazon S3 Glacier
+--
+--     * AWS Glue
+--
+--     * Amazon GuardDuty
+--
+--     * Amazon Inspector
+--
+--     * AWS IoT Analytics
+--
+--     * AWS IoT Core
+--
+--     * AWS IoT Device Defender
+--
+--     * AWS IoT Device Management
+--
+--     * AWS IoT Events
+--
+--     * AWS IoT Greengrass
+--
+--     * AWS IoT 1-Click
+--
+--     * AWS Key Management Service
+--
+--     * Amazon Kinesis
+--
+--     * Amazon Kinesis Data Analytics
+--
+--     * Amazon Kinesis Data Firehose
+--
+--     * AWS Lambda
+--
+--     * AWS License Manager
+--
+--     * Amazon Machine Learning
+--
+--     * Amazon MQ
+--
+--     * Amazon MSK
+--
+--     * Amazon Neptune
+--
+--     * AWS OpsWorks
+--
+--     * AWS Organizations
+--
+--     * Amazon Quantum Ledger Database (QLDB)
+--
+--     * Amazon RDS
+--
+--     * Amazon Redshift
+--
+--     * AWS Resource Access Manager
+--
+--     * AWS Resource Groups
+--
+--     * AWS RoboMaker
+--
+--     * Amazon Route 53
+--
+--     * Amazon Route 53 Resolver
+--
+--     * Amazon S3 (buckets only)
+--
+--     * Amazon SageMaker
+--
+--     * AWS Secrets Manager
+--
+--     * AWS Security Hub
+--
+--     * AWS Service Catalog
+--
+--     * Amazon Simple Notification Service (SNS)
+--
+--     * Amazon Simple Queue Service (SQS)
+--
+--     * Amazon Simple Workflow Service
+--
+--     * AWS Step Functions
+--
+--     * AWS Storage Gateway
+--
+--     * AWS Systems Manager
+--
+--     * AWS Transfer for SFTP
+--
+--     * Amazon VPC
+--
+--     * Amazon WorkSpaces
+--
+--
 --
 module Network.AWS.ResourceGroupsTagging
     (
@@ -43,17 +249,23 @@ module Network.AWS.ResourceGroupsTagging
     -- * Errors
     -- $errors
 
+    -- ** InternalServiceException
+    , _InternalServiceException
+
     -- ** InvalidParameterException
     , _InvalidParameterException
+
+    -- ** ConstraintViolationException
+    , _ConstraintViolationException
 
     -- ** ThrottledException
     , _ThrottledException
 
+    -- ** ConcurrentModificationException
+    , _ConcurrentModificationException
+
     -- ** PaginationTokenExpiredException
     , _PaginationTokenExpiredException
-
-    -- ** InternalServiceException
-    , _InternalServiceException
 
     -- * Waiters
     -- $waiters
@@ -61,25 +273,47 @@ module Network.AWS.ResourceGroupsTagging
     -- * Operations
     -- $operations
 
+    -- ** GetComplianceSummary (Paginated)
+    , module Network.AWS.ResourceGroupsTagging.GetComplianceSummary
+
+    -- ** DescribeReportCreation 
+    , module Network.AWS.ResourceGroupsTagging.DescribeReportCreation
+
     -- ** GetTagKeys (Paginated)
     , module Network.AWS.ResourceGroupsTagging.GetTagKeys
 
-    -- ** TagResources
+    -- ** TagResources 
     , module Network.AWS.ResourceGroupsTagging.TagResources
 
     -- ** GetTagValues (Paginated)
     , module Network.AWS.ResourceGroupsTagging.GetTagValues
 
+    -- ** StartReportCreation 
+    , module Network.AWS.ResourceGroupsTagging.StartReportCreation
+
     -- ** GetResources (Paginated)
     , module Network.AWS.ResourceGroupsTagging.GetResources
 
-    -- ** UntagResources
+    -- ** UntagResources 
     , module Network.AWS.ResourceGroupsTagging.UntagResources
 
     -- * Types
 
+    -- ** GroupByAttribute
+    , GroupByAttribute (..)
+
     -- ** ResourceErrorCode
     , ResourceErrorCode (..)
+
+    -- ** TargetIdType
+    , TargetIdType (..)
+
+    -- ** ComplianceDetails
+    , ComplianceDetails
+    , complianceDetails
+    , cdKeysWithNoncompliantValues
+    , cdComplianceStatus
+    , cdNoncompliantKeys
 
     -- ** FailureInfo
     , FailureInfo
@@ -91,8 +325,19 @@ module Network.AWS.ResourceGroupsTagging
     -- ** ResourceTagMapping
     , ResourceTagMapping
     , resourceTagMapping
+    , rtmComplianceDetails
     , rtmResourceARN
     , rtmTags
+
+    -- ** Summary
+    , Summary
+    , summary
+    , sTargetId
+    , sLastUpdated
+    , sResourceType
+    , sNonCompliantResources
+    , sTargetIdType
+    , sRegion
 
     -- ** Tag
     , Tag
@@ -107,9 +352,12 @@ module Network.AWS.ResourceGroupsTagging
     , tfKey
     ) where
 
+import Network.AWS.ResourceGroupsTagging.DescribeReportCreation
+import Network.AWS.ResourceGroupsTagging.GetComplianceSummary
 import Network.AWS.ResourceGroupsTagging.GetResources
 import Network.AWS.ResourceGroupsTagging.GetTagKeys
 import Network.AWS.ResourceGroupsTagging.GetTagValues
+import Network.AWS.ResourceGroupsTagging.StartReportCreation
 import Network.AWS.ResourceGroupsTagging.TagResources
 import Network.AWS.ResourceGroupsTagging.Types
 import Network.AWS.ResourceGroupsTagging.UntagResources

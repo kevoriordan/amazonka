@@ -21,7 +21,7 @@
 -- Gets information about all of the versions of a bot.
 --
 --
--- The @GetBotVersions@ operation returns a @BotMetadata@ object for each version of a bot. For example, if a bot has three numbered versions, the @GetBotVersions@ operation returns four @BotMetadata@ objects in the response, one for each numbered version and one for the @> LATEST@ version.
+-- The @GetBotVersions@ operation returns a @BotMetadata@ object for each version of a bot. For example, if a bot has three numbered versions, the @GetBotVersions@ operation returns four @BotMetadata@ objects in the response, one for each numbered version and one for the @> LATEST@ version. 
 --
 -- The @GetBotVersions@ operation always returns at least one version, the @> LATEST@ version.
 --
@@ -57,18 +57,17 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getBotVersions' smart constructor.
-data GetBotVersions = GetBotVersions'
-  { _gbvNextToken  :: !(Maybe Text)
-  , _gbvMaxResults :: !(Maybe Nat)
-  , _gbvName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBotVersions = GetBotVersions'{_gbvNextToken
+                                      :: !(Maybe Text),
+                                      _gbvMaxResults :: !(Maybe Nat),
+                                      _gbvName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBotVersions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbvNextToken' - A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- * 'gbvNextToken' - A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 --
 -- * 'gbvMaxResults' - The maximum number of bot versions to return in the response. The default is 10.
 --
@@ -76,12 +75,11 @@ data GetBotVersions = GetBotVersions'
 getBotVersions
     :: Text -- ^ 'gbvName'
     -> GetBotVersions
-getBotVersions pName_ =
-  GetBotVersions'
-    {_gbvNextToken = Nothing, _gbvMaxResults = Nothing, _gbvName = pName_}
+getBotVersions pName_
+  = GetBotVersions'{_gbvNextToken = Nothing,
+                    _gbvMaxResults = Nothing, _gbvName = pName_}
 
-
--- | A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- | A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 gbvNextToken :: Lens' GetBotVersions (Maybe Text)
 gbvNextToken = lens _gbvNextToken (\ s a -> s{_gbvNextToken = a})
 
@@ -132,12 +130,14 @@ instance ToQuery GetBotVersions where
                "maxResults" =: _gbvMaxResults]
 
 -- | /See:/ 'getBotVersionsResponse' smart constructor.
-data GetBotVersionsResponse = GetBotVersionsResponse'
-  { _gbvrsBots           :: !(Maybe [BotMetadata])
-  , _gbvrsNextToken      :: !(Maybe Text)
-  , _gbvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetBotVersionsResponse = GetBotVersionsResponse'{_gbvrsBots
+                                                      :: !(Maybe [BotMetadata]),
+                                                      _gbvrsNextToken ::
+                                                      !(Maybe Text),
+                                                      _gbvrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetBotVersionsResponse' with the minimum fields required to make a request.
 --
@@ -145,25 +145,22 @@ data GetBotVersionsResponse = GetBotVersionsResponse'
 --
 -- * 'gbvrsBots' - An array of @BotMetadata@ objects, one for each numbered version of the bot plus one for the @> LATEST@ version.
 --
--- * 'gbvrsNextToken' - A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- * 'gbvrsNextToken' - A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 --
 -- * 'gbvrsResponseStatus' - -- | The response status code.
 getBotVersionsResponse
     :: Int -- ^ 'gbvrsResponseStatus'
     -> GetBotVersionsResponse
-getBotVersionsResponse pResponseStatus_ =
-  GetBotVersionsResponse'
-    { _gbvrsBots = Nothing
-    , _gbvrsNextToken = Nothing
-    , _gbvrsResponseStatus = pResponseStatus_
-    }
-
+getBotVersionsResponse pResponseStatus_
+  = GetBotVersionsResponse'{_gbvrsBots = Nothing,
+                            _gbvrsNextToken = Nothing,
+                            _gbvrsResponseStatus = pResponseStatus_}
 
 -- | An array of @BotMetadata@ objects, one for each numbered version of the bot plus one for the @> LATEST@ version.
 gbvrsBots :: Lens' GetBotVersionsResponse [BotMetadata]
 gbvrsBots = lens _gbvrsBots (\ s a -> s{_gbvrsBots = a}) . _Default . _Coerce
 
--- | A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request.
+-- | A pagination token for fetching the next page of bot versions. If the response to this call is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of versions, specify the pagination token in the next request. 
 gbvrsNextToken :: Lens' GetBotVersionsResponse (Maybe Text)
 gbvrsNextToken = lens _gbvrsNextToken (\ s a -> s{_gbvrsNextToken = a})
 

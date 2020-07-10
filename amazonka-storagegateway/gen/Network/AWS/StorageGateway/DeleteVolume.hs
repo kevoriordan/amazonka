@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified storage volume that you previously created using the 'CreateCachediSCSIVolume' or 'CreateStorediSCSIVolume' API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume.
+-- Deletes the specified storage volume that you previously created using the 'CreateCachediSCSIVolume' or 'CreateStorediSCSIVolume' API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. 
 --
 --
--- Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
+-- Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
 --
 -- In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.
 --
@@ -31,14 +31,14 @@ module Network.AWS.StorageGateway.DeleteVolume
       deleteVolume
     , DeleteVolume
     -- * Request Lenses
-    , dvVolumeARN
+    , delVolumeARN
 
     -- * Destructuring the Response
     , deleteVolumeResponse
     , DeleteVolumeResponse
     -- * Response Lenses
-    , dvrsVolumeARN
-    , dvrsResponseStatus
+    , dltvlmrsVolumeARN
+    , dltvlmrsResponseStatus
     ) where
 
 import Network.AWS.Lens
@@ -53,25 +53,24 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'deleteVolume' smart constructor.
-newtype DeleteVolume = DeleteVolume'
-  { _dvVolumeARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteVolume = DeleteVolume'{_delVolumeARN ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvVolumeARN' - The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
+-- * 'delVolumeARN' - The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
 deleteVolume
-    :: Text -- ^ 'dvVolumeARN'
+    :: Text -- ^ 'delVolumeARN'
     -> DeleteVolume
-deleteVolume pVolumeARN_ = DeleteVolume' {_dvVolumeARN = pVolumeARN_}
-
+deleteVolume pVolumeARN_
+  = DeleteVolume'{_delVolumeARN = pVolumeARN_}
 
 -- | The Amazon Resource Name (ARN) of the volume. Use the 'ListVolumes' operation to return a list of gateway volumes.
-dvVolumeARN :: Lens' DeleteVolume Text
-dvVolumeARN = lens _dvVolumeARN (\ s a -> s{_dvVolumeARN = a})
+delVolumeARN :: Lens' DeleteVolume Text
+delVolumeARN = lens _delVolumeARN (\ s a -> s{_delVolumeARN = a})
 
 instance AWSRequest DeleteVolume where
         type Rs DeleteVolume = DeleteVolumeResponse
@@ -99,7 +98,7 @@ instance ToHeaders DeleteVolume where
 instance ToJSON DeleteVolume where
         toJSON DeleteVolume'{..}
           = object
-              (catMaybes [Just ("VolumeARN" .= _dvVolumeARN)])
+              (catMaybes [Just ("VolumeARN" .= _delVolumeARN)])
 
 instance ToPath DeleteVolume where
         toPath = const "/"
@@ -107,38 +106,37 @@ instance ToPath DeleteVolume where
 instance ToQuery DeleteVolume where
         toQuery = const mempty
 
--- | A JSON object containing the of the storage volume that was deleted
+-- | A JSON object containing the Amazon Resource Name (ARN) of the storage volume that was deleted
 --
 --
 --
 -- /See:/ 'deleteVolumeResponse' smart constructor.
-data DeleteVolumeResponse = DeleteVolumeResponse'
-  { _dvrsVolumeARN      :: !(Maybe Text)
-  , _dvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVolumeResponse = DeleteVolumeResponse'{_dltvlmrsVolumeARN
+                                                  :: !(Maybe Text),
+                                                  _dltvlmrsResponseStatus ::
+                                                  !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteVolumeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dvrsVolumeARN' - The Amazon Resource Name (ARN) of the storage volume that was deleted. It is the same ARN you provided in the request.
+-- * 'dltvlmrsVolumeARN' - The Amazon Resource Name (ARN) of the storage volume that was deleted. It is the same ARN you provided in the request.
 --
--- * 'dvrsResponseStatus' - -- | The response status code.
+-- * 'dltvlmrsResponseStatus' - -- | The response status code.
 deleteVolumeResponse
-    :: Int -- ^ 'dvrsResponseStatus'
+    :: Int -- ^ 'dltvlmrsResponseStatus'
     -> DeleteVolumeResponse
-deleteVolumeResponse pResponseStatus_ =
-  DeleteVolumeResponse'
-    {_dvrsVolumeARN = Nothing, _dvrsResponseStatus = pResponseStatus_}
-
+deleteVolumeResponse pResponseStatus_
+  = DeleteVolumeResponse'{_dltvlmrsVolumeARN = Nothing,
+                          _dltvlmrsResponseStatus = pResponseStatus_}
 
 -- | The Amazon Resource Name (ARN) of the storage volume that was deleted. It is the same ARN you provided in the request.
-dvrsVolumeARN :: Lens' DeleteVolumeResponse (Maybe Text)
-dvrsVolumeARN = lens _dvrsVolumeARN (\ s a -> s{_dvrsVolumeARN = a})
+dltvlmrsVolumeARN :: Lens' DeleteVolumeResponse (Maybe Text)
+dltvlmrsVolumeARN = lens _dltvlmrsVolumeARN (\ s a -> s{_dltvlmrsVolumeARN = a})
 
 -- | -- | The response status code.
-dvrsResponseStatus :: Lens' DeleteVolumeResponse Int
-dvrsResponseStatus = lens _dvrsResponseStatus (\ s a -> s{_dvrsResponseStatus = a})
+dltvlmrsResponseStatus :: Lens' DeleteVolumeResponse Int
+dltvlmrsResponseStatus = lens _dltvlmrsResponseStatus (\ s a -> s{_dltvlmrsResponseStatus = a})
 
 instance NFData DeleteVolumeResponse where

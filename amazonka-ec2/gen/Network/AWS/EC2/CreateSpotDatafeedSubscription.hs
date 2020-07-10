@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html Spot Instance Data Feed> in the /Amazon EC2 User Guide for Linux Instances/ .
+-- Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html Spot Instance Data Feed> in the /Amazon EC2 User Guide for Linux Instances/ .
 --
 --
 module Network.AWS.EC2.CreateSpotDatafeedSubscription
@@ -51,12 +51,18 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createSpotDatafeedSubscription' smart constructor.
-data CreateSpotDatafeedSubscription = CreateSpotDatafeedSubscription'
-  { _csdsPrefix :: !(Maybe Text)
-  , _csdsDryRun :: !(Maybe Bool)
-  , _csdsBucket :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSpotDatafeedSubscription = CreateSpotDatafeedSubscription'{_csdsPrefix
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _csdsDryRun
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Bool),
+                                                                      _csdsBucket
+                                                                      :: !Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateSpotDatafeedSubscription' with the minimum fields required to make a request.
 --
@@ -70,10 +76,11 @@ data CreateSpotDatafeedSubscription = CreateSpotDatafeedSubscription'
 createSpotDatafeedSubscription
     :: Text -- ^ 'csdsBucket'
     -> CreateSpotDatafeedSubscription
-createSpotDatafeedSubscription pBucket_ =
-  CreateSpotDatafeedSubscription'
-    {_csdsPrefix = Nothing, _csdsDryRun = Nothing, _csdsBucket = pBucket_}
-
+createSpotDatafeedSubscription pBucket_
+  = CreateSpotDatafeedSubscription'{_csdsPrefix =
+                                      Nothing,
+                                    _csdsDryRun = Nothing,
+                                    _csdsBucket = pBucket_}
 
 -- | A prefix for the data feed file names.
 csdsPrefix :: Lens' CreateSpotDatafeedSubscription (Maybe Text)
@@ -125,11 +132,15 @@ instance ToQuery CreateSpotDatafeedSubscription where
 --
 --
 -- /See:/ 'createSpotDatafeedSubscriptionResponse' smart constructor.
-data CreateSpotDatafeedSubscriptionResponse = CreateSpotDatafeedSubscriptionResponse'
-  { _csdsrsSpotDatafeedSubscription :: !(Maybe SpotDatafeedSubscription)
-  , _csdsrsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateSpotDatafeedSubscriptionResponse = CreateSpotDatafeedSubscriptionResponse'{_csdsrsSpotDatafeedSubscription
+                                                                                      ::
+                                                                                      !(Maybe
+                                                                                          SpotDatafeedSubscription),
+                                                                                      _csdsrsResponseStatus
+                                                                                      ::
+                                                                                      !Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'CreateSpotDatafeedSubscriptionResponse' with the minimum fields required to make a request.
 --
@@ -141,12 +152,12 @@ data CreateSpotDatafeedSubscriptionResponse = CreateSpotDatafeedSubscriptionResp
 createSpotDatafeedSubscriptionResponse
     :: Int -- ^ 'csdsrsResponseStatus'
     -> CreateSpotDatafeedSubscriptionResponse
-createSpotDatafeedSubscriptionResponse pResponseStatus_ =
-  CreateSpotDatafeedSubscriptionResponse'
-    { _csdsrsSpotDatafeedSubscription = Nothing
-    , _csdsrsResponseStatus = pResponseStatus_
-    }
-
+createSpotDatafeedSubscriptionResponse
+  pResponseStatus_
+  = CreateSpotDatafeedSubscriptionResponse'{_csdsrsSpotDatafeedSubscription
+                                              = Nothing,
+                                            _csdsrsResponseStatus =
+                                              pResponseStatus_}
 
 -- | The Spot Instance data feed subscription.
 csdsrsSpotDatafeedSubscription :: Lens' CreateSpotDatafeedSubscriptionResponse (Maybe SpotDatafeedSubscription)

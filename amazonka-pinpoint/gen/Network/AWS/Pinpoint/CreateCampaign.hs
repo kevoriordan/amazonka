@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates a campaign.
+-- Creates a new campaign for an application or updates the settings of an existing campaign for an application.
+--
+--
 module Network.AWS.Pinpoint.CreateCampaign
     (
     -- * Creating a Request
@@ -44,31 +46,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createCampaign' smart constructor.
-data CreateCampaign = CreateCampaign'
-  { _ccApplicationId        :: !Text
-  , _ccWriteCampaignRequest :: !WriteCampaignRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCampaign = CreateCampaign'{_ccApplicationId
+                                      :: !Text,
+                                      _ccWriteCampaignRequest ::
+                                      !WriteCampaignRequest}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCampaign' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccApplicationId' - Undocumented member.
+-- * 'ccApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'ccWriteCampaignRequest' - Undocumented member.
 createCampaign
     :: Text -- ^ 'ccApplicationId'
     -> WriteCampaignRequest -- ^ 'ccWriteCampaignRequest'
     -> CreateCampaign
-createCampaign pApplicationId_ pWriteCampaignRequest_ =
-  CreateCampaign'
-    { _ccApplicationId = pApplicationId_
-    , _ccWriteCampaignRequest = pWriteCampaignRequest_
-    }
+createCampaign pApplicationId_ pWriteCampaignRequest_
+  = CreateCampaign'{_ccApplicationId = pApplicationId_,
+                    _ccWriteCampaignRequest = pWriteCampaignRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 ccApplicationId :: Lens' CreateCampaign Text
 ccApplicationId = lens _ccApplicationId (\ s a -> s{_ccApplicationId = a})
 
@@ -112,11 +111,12 @@ instance ToQuery CreateCampaign where
         toQuery = const mempty
 
 -- | /See:/ 'createCampaignResponse' smart constructor.
-data CreateCampaignResponse = CreateCampaignResponse'
-  { _ccrsResponseStatus   :: !Int
-  , _ccrsCampaignResponse :: !CampaignResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCampaignResponse = CreateCampaignResponse'{_ccrsResponseStatus
+                                                      :: !Int,
+                                                      _ccrsCampaignResponse ::
+                                                      !CampaignResponse}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateCampaignResponse' with the minimum fields required to make a request.
 --
@@ -129,12 +129,11 @@ createCampaignResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CampaignResponse -- ^ 'ccrsCampaignResponse'
     -> CreateCampaignResponse
-createCampaignResponse pResponseStatus_ pCampaignResponse_ =
-  CreateCampaignResponse'
-    { _ccrsResponseStatus = pResponseStatus_
-    , _ccrsCampaignResponse = pCampaignResponse_
-    }
-
+createCampaignResponse pResponseStatus_
+  pCampaignResponse_
+  = CreateCampaignResponse'{_ccrsResponseStatus =
+                              pResponseStatus_,
+                            _ccrsCampaignResponse = pCampaignResponse_}
 
 -- | -- | The response status code.
 ccrsResponseStatus :: Lens' CreateCampaignResponse Int

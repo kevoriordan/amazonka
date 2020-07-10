@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Send a batch of messages
+-- Creates and sends a direct message.
+--
+--
 module Network.AWS.Pinpoint.SendMessages
     (
     -- * Creating a Request
@@ -44,29 +46,27 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'sendMessages' smart constructor.
-data SendMessages = SendMessages'
-  { _smApplicationId  :: !Text
-  , _smMessageRequest :: !MessageRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SendMessages = SendMessages'{_smApplicationId ::
+                                  !Text,
+                                  _smMessageRequest :: !MessageRequest}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SendMessages' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'smApplicationId' - Undocumented member.
+-- * 'smApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'smMessageRequest' - Undocumented member.
 sendMessages
     :: Text -- ^ 'smApplicationId'
     -> MessageRequest -- ^ 'smMessageRequest'
     -> SendMessages
-sendMessages pApplicationId_ pMessageRequest_ =
-  SendMessages'
-    {_smApplicationId = pApplicationId_, _smMessageRequest = pMessageRequest_}
+sendMessages pApplicationId_ pMessageRequest_
+  = SendMessages'{_smApplicationId = pApplicationId_,
+                  _smMessageRequest = pMessageRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 smApplicationId :: Lens' SendMessages Text
 smApplicationId = lens _smApplicationId (\ s a -> s{_smApplicationId = a})
 
@@ -109,11 +109,11 @@ instance ToQuery SendMessages where
         toQuery = const mempty
 
 -- | /See:/ 'sendMessagesResponse' smart constructor.
-data SendMessagesResponse = SendMessagesResponse'
-  { _smrsResponseStatus  :: !Int
-  , _smrsMessageResponse :: !MessageResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SendMessagesResponse = SendMessagesResponse'{_smrsResponseStatus
+                                                  :: !Int,
+                                                  _smrsMessageResponse ::
+                                                  !MessageResponse}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SendMessagesResponse' with the minimum fields required to make a request.
 --
@@ -126,12 +126,11 @@ sendMessagesResponse
     :: Int -- ^ 'smrsResponseStatus'
     -> MessageResponse -- ^ 'smrsMessageResponse'
     -> SendMessagesResponse
-sendMessagesResponse pResponseStatus_ pMessageResponse_ =
-  SendMessagesResponse'
-    { _smrsResponseStatus = pResponseStatus_
-    , _smrsMessageResponse = pMessageResponse_
-    }
-
+sendMessagesResponse pResponseStatus_
+  pMessageResponse_
+  = SendMessagesResponse'{_smrsResponseStatus =
+                            pResponseStatus_,
+                          _smrsMessageResponse = pMessageResponse_}
 
 -- | -- | The response status code.
 smrsResponseStatus :: Lens' SendMessagesResponse Int

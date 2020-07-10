@@ -48,12 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'initializeCluster' smart constructor.
-data InitializeCluster = InitializeCluster'
-  { _icClusterId   :: !Text
-  , _icSignedCert  :: !Text
-  , _icTrustAnchor :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data InitializeCluster = InitializeCluster'{_icClusterId
+                                            :: !Text,
+                                            _icSignedCert :: !Text,
+                                            _icTrustAnchor :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'InitializeCluster' with the minimum fields required to make a request.
 --
@@ -63,19 +62,17 @@ data InitializeCluster = InitializeCluster'
 --
 -- * 'icSignedCert' - The cluster certificate issued (signed) by your issuing certificate authority (CA). The certificate must be in PEM format and can contain a maximum of 5000 characters.
 --
--- * 'icTrustAnchor' - The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
+-- * 'icTrustAnchor' - The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. You must use a self-signed certificate. The certificate used to sign the HSM CSR must be directly available, and thus must be the root certificate. The certificate must be in PEM format and can contain a maximum of 5000 characters.
 initializeCluster
     :: Text -- ^ 'icClusterId'
     -> Text -- ^ 'icSignedCert'
     -> Text -- ^ 'icTrustAnchor'
     -> InitializeCluster
-initializeCluster pClusterId_ pSignedCert_ pTrustAnchor_ =
-  InitializeCluster'
-    { _icClusterId = pClusterId_
-    , _icSignedCert = pSignedCert_
-    , _icTrustAnchor = pTrustAnchor_
-    }
-
+initializeCluster pClusterId_ pSignedCert_
+  pTrustAnchor_
+  = InitializeCluster'{_icClusterId = pClusterId_,
+                       _icSignedCert = pSignedCert_,
+                       _icTrustAnchor = pTrustAnchor_}
 
 -- | The identifier (ID) of the cluster that you are claiming. To find the cluster ID, use 'DescribeClusters' .
 icClusterId :: Lens' InitializeCluster Text
@@ -85,7 +82,7 @@ icClusterId = lens _icClusterId (\ s a -> s{_icClusterId = a})
 icSignedCert :: Lens' InitializeCluster Text
 icSignedCert = lens _icSignedCert (\ s a -> s{_icSignedCert = a})
 
--- | The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. This can be a root (self-signed) certificate or a certificate chain that begins with the certificate that issued the cluster certificate and ends with a root certificate. The certificate or certificate chain must be in PEM format and can contain a maximum of 5000 characters.
+-- | The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate. You must use a self-signed certificate. The certificate used to sign the HSM CSR must be directly available, and thus must be the root certificate. The certificate must be in PEM format and can contain a maximum of 5000 characters.
 icTrustAnchor :: Lens' InitializeCluster Text
 icTrustAnchor = lens _icTrustAnchor (\ s a -> s{_icTrustAnchor = a})
 
@@ -127,12 +124,15 @@ instance ToQuery InitializeCluster where
         toQuery = const mempty
 
 -- | /See:/ 'initializeClusterResponse' smart constructor.
-data InitializeClusterResponse = InitializeClusterResponse'
-  { _icrsStateMessage   :: !(Maybe Text)
-  , _icrsState          :: !(Maybe ClusterState)
-  , _icrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data InitializeClusterResponse = InitializeClusterResponse'{_icrsStateMessage
+                                                            :: !(Maybe Text),
+                                                            _icrsState ::
+                                                            !(Maybe
+                                                                ClusterState),
+                                                            _icrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'InitializeClusterResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +146,11 @@ data InitializeClusterResponse = InitializeClusterResponse'
 initializeClusterResponse
     :: Int -- ^ 'icrsResponseStatus'
     -> InitializeClusterResponse
-initializeClusterResponse pResponseStatus_ =
-  InitializeClusterResponse'
-    { _icrsStateMessage = Nothing
-    , _icrsState = Nothing
-    , _icrsResponseStatus = pResponseStatus_
-    }
-
+initializeClusterResponse pResponseStatus_
+  = InitializeClusterResponse'{_icrsStateMessage =
+                                 Nothing,
+                               _icrsState = Nothing,
+                               _icrsResponseStatus = pResponseStatus_}
 
 -- | A description of the cluster's state.
 icrsStateMessage :: Lens' InitializeClusterResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about a specific job including shipping information, job status, and other important metadata.
+-- Returns information about a specific job including shipping information, job status, and other important metadata. 
 --
 --
 module Network.AWS.Snowball.DescribeJob
@@ -46,10 +46,8 @@ import Network.AWS.Snowball.Types
 import Network.AWS.Snowball.Types.Product
 
 -- | /See:/ 'describeJob' smart constructor.
-newtype DescribeJob = DescribeJob'
-  { _djJobId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeJob = DescribeJob'{_djJobId :: Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeJob' with the minimum fields required to make a request.
 --
@@ -59,8 +57,8 @@ newtype DescribeJob = DescribeJob'
 describeJob
     :: Text -- ^ 'djJobId'
     -> DescribeJob
-describeJob pJobId_ = DescribeJob' {_djJobId = pJobId_}
-
+describeJob pJobId_
+  = DescribeJob'{_djJobId = pJobId_}
 
 -- | The automatically generated ID for a job, for example @JID123e4567-e89b-12d3-a456-426655440000@ .
 djJobId :: Lens' DescribeJob Text
@@ -102,12 +100,12 @@ instance ToQuery DescribeJob where
         toQuery = const mempty
 
 -- | /See:/ 'describeJobResponse' smart constructor.
-data DescribeJobResponse = DescribeJobResponse'
-  { _djrsJobMetadata    :: !(Maybe JobMetadata)
-  , _djrsSubJobMetadata :: !(Maybe [JobMetadata])
-  , _djrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeJobResponse = DescribeJobResponse'{_djrsJobMetadata
+                                                :: !(Maybe JobMetadata),
+                                                _djrsSubJobMetadata ::
+                                                !(Maybe [JobMetadata]),
+                                                _djrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeJobResponse' with the minimum fields required to make a request.
 --
@@ -121,13 +119,10 @@ data DescribeJobResponse = DescribeJobResponse'
 describeJobResponse
     :: Int -- ^ 'djrsResponseStatus'
     -> DescribeJobResponse
-describeJobResponse pResponseStatus_ =
-  DescribeJobResponse'
-    { _djrsJobMetadata = Nothing
-    , _djrsSubJobMetadata = Nothing
-    , _djrsResponseStatus = pResponseStatus_
-    }
-
+describeJobResponse pResponseStatus_
+  = DescribeJobResponse'{_djrsJobMetadata = Nothing,
+                         _djrsSubJobMetadata = Nothing,
+                         _djrsResponseStatus = pResponseStatus_}
 
 -- | Information about a specific job, including shipping information, job status, and other important metadata.
 djrsJobMetadata :: Lens' DescribeJobResponse (Maybe JobMetadata)

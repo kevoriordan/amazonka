@@ -48,10 +48,8 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deletePreset' smart constructor.
-newtype DeletePreset = DeletePreset'
-  { _dpId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePreset = DeletePreset'{_dpId :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePreset' with the minimum fields required to make a request.
 --
@@ -61,8 +59,7 @@ newtype DeletePreset = DeletePreset'
 deletePreset
     :: Text -- ^ 'dpId'
     -> DeletePreset
-deletePreset pId_ = DeletePreset' {_dpId = pId_}
-
+deletePreset pId_ = DeletePreset'{_dpId = pId_}
 
 -- | The identifier of the preset for which you want to get detailed information.
 dpId :: Lens' DeletePreset Text
@@ -95,10 +92,10 @@ instance ToQuery DeletePreset where
 --
 --
 -- /See:/ 'deletePresetResponse' smart constructor.
-newtype DeletePresetResponse = DeletePresetResponse'
-  { _dprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeletePresetResponse = DeletePresetResponse'{_dprsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeletePresetResponse' with the minimum fields required to make a request.
 --
@@ -108,9 +105,9 @@ newtype DeletePresetResponse = DeletePresetResponse'
 deletePresetResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DeletePresetResponse
-deletePresetResponse pResponseStatus_ =
-  DeletePresetResponse' {_dprsResponseStatus = pResponseStatus_}
-
+deletePresetResponse pResponseStatus_
+  = DeletePresetResponse'{_dprsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dprsResponseStatus :: Lens' DeletePresetResponse Int

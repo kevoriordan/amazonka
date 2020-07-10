@@ -18,8 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of the dashboards for your account. If you include @DashboardNamePrefix@ , only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed.
+-- Returns a list of the dashboards for your account. If you include @DashboardNamePrefix@ , only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed. 
 --
+--
+-- @ListDashboards@ returns up to 1000 results on one page. If there are more than 1000 dashboards, you can call @ListDashboards@ again and include the value you received for @NextToken@ in the first call, to receive the next 1000 results.
 --
 --
 -- This operation returns paginated results.
@@ -50,26 +52,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDashboards' smart constructor.
-data ListDashboards = ListDashboards'
-  { _ldDashboardNamePrefix :: !(Maybe Text)
-  , _ldNextToken           :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDashboards = ListDashboards'{_ldDashboardNamePrefix
+                                      :: !(Maybe Text),
+                                      _ldNextToken :: !(Maybe Text)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListDashboards' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldDashboardNamePrefix' - If you specify this parameter, only the dashboards with names starting with the specified string are listed. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, ".", "-", and "_".
+-- * 'ldDashboardNamePrefix' - If you specify this parameter, only the dashboards with names starting with the specified string are listed. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, ".", "-", and "_". 
 --
 -- * 'ldNextToken' - The token returned by a previous call to indicate that there is more data available.
 listDashboards
     :: ListDashboards
-listDashboards =
-  ListDashboards' {_ldDashboardNamePrefix = Nothing, _ldNextToken = Nothing}
+listDashboards
+  = ListDashboards'{_ldDashboardNamePrefix = Nothing,
+                    _ldNextToken = Nothing}
 
-
--- | If you specify this parameter, only the dashboards with names starting with the specified string are listed. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, ".", "-", and "_".
+-- | If you specify this parameter, only the dashboards with names starting with the specified string are listed. The maximum length is 255, and valid characters are A-Z, a-z, 0-9, ".", "-", and "_". 
 ldDashboardNamePrefix :: Lens' ListDashboards (Maybe Text)
 ldDashboardNamePrefix = lens _ldDashboardNamePrefix (\ s a -> s{_ldDashboardNamePrefix = a})
 
@@ -115,12 +116,15 @@ instance ToQuery ListDashboards where
                "NextToken" =: _ldNextToken]
 
 -- | /See:/ 'listDashboardsResponse' smart constructor.
-data ListDashboardsResponse = ListDashboardsResponse'
-  { _ldrsDashboardEntries :: !(Maybe [DashboardEntry])
-  , _ldrsNextToken        :: !(Maybe Text)
-  , _ldrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDashboardsResponse = ListDashboardsResponse'{_ldrsDashboardEntries
+                                                      ::
+                                                      !(Maybe [DashboardEntry]),
+                                                      _ldrsNextToken ::
+                                                      !(Maybe Text),
+                                                      _ldrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListDashboardsResponse' with the minimum fields required to make a request.
 --
@@ -134,13 +138,11 @@ data ListDashboardsResponse = ListDashboardsResponse'
 listDashboardsResponse
     :: Int -- ^ 'ldrsResponseStatus'
     -> ListDashboardsResponse
-listDashboardsResponse pResponseStatus_ =
-  ListDashboardsResponse'
-    { _ldrsDashboardEntries = Nothing
-    , _ldrsNextToken = Nothing
-    , _ldrsResponseStatus = pResponseStatus_
-    }
-
+listDashboardsResponse pResponseStatus_
+  = ListDashboardsResponse'{_ldrsDashboardEntries =
+                              Nothing,
+                            _ldrsNextToken = Nothing,
+                            _ldrsResponseStatus = pResponseStatus_}
 
 -- | The list of matching dashboards.
 ldrsDashboardEntries :: Lens' ListDashboardsResponse [DashboardEntry]

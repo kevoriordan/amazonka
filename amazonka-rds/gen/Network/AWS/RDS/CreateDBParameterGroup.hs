@@ -21,7 +21,7 @@
 -- Creates a new DB parameter group.
 --
 --
--- A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using /ModifyDBParameterGroup/ . Once you've created a DB parameter group, you need to associate it with your DB instance using /ModifyDBInstance/ . When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.
+-- A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using /ModifyDBParameterGroup/ . Once you've created a DB parameter group, you need to associate it with your DB instance using /ModifyDBInstance/ . When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect. 
 --
 -- /Important:/ After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the @character_set_database@ parameter. You can use the /Parameter Groups/ option of the <https://console.aws.amazon.com/rds/ Amazon RDS console> or the /DescribeDBParameters/ command to verify that your DB parameter group has been created or modified.
 --
@@ -51,28 +51,31 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'createDBParameterGroup' smart constructor.
-data CreateDBParameterGroup = CreateDBParameterGroup'
-  { _cdbpgTags                   :: !(Maybe [Tag])
-  , _cdbpgDBParameterGroupName   :: !Text
-  , _cdbpgDBParameterGroupFamily :: !Text
-  , _cdbpgDescription            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDBParameterGroup = CreateDBParameterGroup'{_cdbpgTags
+                                                      :: !(Maybe [Tag]),
+                                                      _cdbpgDBParameterGroupName
+                                                      :: !Text,
+                                                      _cdbpgDBParameterGroupFamily
+                                                      :: !Text,
+                                                      _cdbpgDescription ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'CreateDBParameterGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdbpgTags' - Undocumented member.
+-- * 'cdbpgTags' - Tags to assign to the DB parameter group.
 --
--- * 'cdbpgDBParameterGroupName' - The name of the DB parameter group. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens
+-- * 'cdbpgDBParameterGroupName' - The name of the DB parameter group. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Can't end with a hyphen or contain two consecutive hyphens
 --
--- * 'cdbpgDBParameterGroupFamily' - The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.
+-- * 'cdbpgDBParameterGroupFamily' - The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family. To list all of the available parameter group families, use the following command: @aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"@ 
 --
 -- * 'cdbpgDescription' - The description for the DB parameter group.
 createDBParameterGroup
@@ -80,24 +83,23 @@ createDBParameterGroup
     -> Text -- ^ 'cdbpgDBParameterGroupFamily'
     -> Text -- ^ 'cdbpgDescription'
     -> CreateDBParameterGroup
-createDBParameterGroup pDBParameterGroupName_ pDBParameterGroupFamily_ pDescription_ =
-  CreateDBParameterGroup'
-    { _cdbpgTags = Nothing
-    , _cdbpgDBParameterGroupName = pDBParameterGroupName_
-    , _cdbpgDBParameterGroupFamily = pDBParameterGroupFamily_
-    , _cdbpgDescription = pDescription_
-    }
+createDBParameterGroup pDBParameterGroupName_
+  pDBParameterGroupFamily_ pDescription_
+  = CreateDBParameterGroup'{_cdbpgTags = Nothing,
+                            _cdbpgDBParameterGroupName = pDBParameterGroupName_,
+                            _cdbpgDBParameterGroupFamily =
+                              pDBParameterGroupFamily_,
+                            _cdbpgDescription = pDescription_}
 
-
--- | Undocumented member.
+-- | Tags to assign to the DB parameter group.
 cdbpgTags :: Lens' CreateDBParameterGroup [Tag]
 cdbpgTags = lens _cdbpgTags (\ s a -> s{_cdbpgTags = a}) . _Default . _Coerce
 
--- | The name of the DB parameter group. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens
+-- | The name of the DB parameter group. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Can't end with a hyphen or contain two consecutive hyphens
 cdbpgDBParameterGroupName :: Lens' CreateDBParameterGroup Text
 cdbpgDBParameterGroupName = lens _cdbpgDBParameterGroupName (\ s a -> s{_cdbpgDBParameterGroupName = a})
 
--- | The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family.
+-- | The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family. To list all of the available parameter group families, use the following command: @aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"@ 
 cdbpgDBParameterGroupFamily :: Lens' CreateDBParameterGroup Text
 cdbpgDBParameterGroupFamily = lens _cdbpgDBParameterGroupFamily (\ s a -> s{_cdbpgDBParameterGroupFamily = a})
 
@@ -138,11 +140,14 @@ instance ToQuery CreateDBParameterGroup where
                "Description" =: _cdbpgDescription]
 
 -- | /See:/ 'createDBParameterGroupResponse' smart constructor.
-data CreateDBParameterGroupResponse = CreateDBParameterGroupResponse'
-  { _cdpgrsDBParameterGroup :: !(Maybe DBParameterGroup)
-  , _cdpgrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDBParameterGroupResponse = CreateDBParameterGroupResponse'{_cdpgrsDBParameterGroup
+                                                                      ::
+                                                                      !(Maybe
+                                                                          DBParameterGroup),
+                                                                      _cdpgrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'CreateDBParameterGroupResponse' with the minimum fields required to make a request.
 --
@@ -154,12 +159,10 @@ data CreateDBParameterGroupResponse = CreateDBParameterGroupResponse'
 createDBParameterGroupResponse
     :: Int -- ^ 'cdpgrsResponseStatus'
     -> CreateDBParameterGroupResponse
-createDBParameterGroupResponse pResponseStatus_ =
-  CreateDBParameterGroupResponse'
-    { _cdpgrsDBParameterGroup = Nothing
-    , _cdpgrsResponseStatus = pResponseStatus_
-    }
-
+createDBParameterGroupResponse pResponseStatus_
+  = CreateDBParameterGroupResponse'{_cdpgrsDBParameterGroup
+                                      = Nothing,
+                                    _cdpgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 cdpgrsDBParameterGroup :: Lens' CreateDBParameterGroupResponse (Maybe DBParameterGroup)

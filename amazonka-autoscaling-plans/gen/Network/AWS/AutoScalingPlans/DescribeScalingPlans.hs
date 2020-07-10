@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the specified scaling plans or all of your scaling plans.
+-- Describes one or more of your scaling plans.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AutoScalingPlans.DescribeScalingPlans
     (
     -- * Creating a Request
@@ -45,25 +47,27 @@ module Network.AWS.AutoScalingPlans.DescribeScalingPlans
 import Network.AWS.AutoScalingPlans.Types
 import Network.AWS.AutoScalingPlans.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeScalingPlans' smart constructor.
-data DescribeScalingPlans = DescribeScalingPlans'
-  { _dScalingPlanVersion :: !(Maybe Integer)
-  , _dScalingPlanNames   :: !(Maybe [Text])
-  , _dNextToken          :: !(Maybe Text)
-  , _dApplicationSources :: !(Maybe [ApplicationSource])
-  , _dMaxResults         :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeScalingPlans = DescribeScalingPlans'{_dScalingPlanVersion
+                                                  :: !(Maybe Integer),
+                                                  _dScalingPlanNames ::
+                                                  !(Maybe [Text]),
+                                                  _dNextToken :: !(Maybe Text),
+                                                  _dApplicationSources ::
+                                                  !(Maybe [ApplicationSource]),
+                                                  _dMaxResults :: !(Maybe Int)}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeScalingPlans' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dScalingPlanVersion' - The version of the scaling plan. If you specify a scaling plan version, you must also specify a scaling plan name.
+-- * 'dScalingPlanVersion' - The version number of the scaling plan. If you specify a scaling plan version, you must also specify a scaling plan name.
 --
 -- * 'dScalingPlanNames' - The names of the scaling plans (up to 10). If you specify application sources, you cannot specify scaling plan names.
 --
@@ -74,17 +78,14 @@ data DescribeScalingPlans = DescribeScalingPlans'
 -- * 'dMaxResults' - The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
 describeScalingPlans
     :: DescribeScalingPlans
-describeScalingPlans =
-  DescribeScalingPlans'
-    { _dScalingPlanVersion = Nothing
-    , _dScalingPlanNames = Nothing
-    , _dNextToken = Nothing
-    , _dApplicationSources = Nothing
-    , _dMaxResults = Nothing
-    }
+describeScalingPlans
+  = DescribeScalingPlans'{_dScalingPlanVersion =
+                            Nothing,
+                          _dScalingPlanNames = Nothing, _dNextToken = Nothing,
+                          _dApplicationSources = Nothing,
+                          _dMaxResults = Nothing}
 
-
--- | The version of the scaling plan. If you specify a scaling plan version, you must also specify a scaling plan name.
+-- | The version number of the scaling plan. If you specify a scaling plan version, you must also specify a scaling plan name.
 dScalingPlanVersion :: Lens' DescribeScalingPlans (Maybe Integer)
 dScalingPlanVersion = lens _dScalingPlanVersion (\ s a -> s{_dScalingPlanVersion = a})
 
@@ -103,6 +104,13 @@ dApplicationSources = lens _dApplicationSources (\ s a -> s{_dApplicationSources
 -- | The maximum number of scalable resources to return. This value can be between 1 and 50. The default value is 50.
 dMaxResults :: Lens' DescribeScalingPlans (Maybe Int)
 dMaxResults = lens _dMaxResults (\ s a -> s{_dMaxResults = a})
+
+instance AWSPager DescribeScalingPlans where
+        page rq rs
+          | stop (rs ^. drsNextToken) = Nothing
+          | stop (rs ^. drsScalingPlans) = Nothing
+          | otherwise =
+            Just $ rq & dNextToken .~ rs ^. drsNextToken
 
 instance AWSRequest DescribeScalingPlans where
         type Rs DescribeScalingPlans =
@@ -147,12 +155,17 @@ instance ToQuery DescribeScalingPlans where
         toQuery = const mempty
 
 -- | /See:/ 'describeScalingPlansResponse' smart constructor.
-data DescribeScalingPlansResponse = DescribeScalingPlansResponse'
-  { _drsScalingPlans   :: !(Maybe [ScalingPlan])
-  , _drsNextToken      :: !(Maybe Text)
-  , _drsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeScalingPlansResponse = DescribeScalingPlansResponse'{_drsScalingPlans
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [ScalingPlan]),
+                                                                  _drsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _drsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeScalingPlansResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +179,11 @@ data DescribeScalingPlansResponse = DescribeScalingPlansResponse'
 describeScalingPlansResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DescribeScalingPlansResponse
-describeScalingPlansResponse pResponseStatus_ =
-  DescribeScalingPlansResponse'
-    { _drsScalingPlans = Nothing
-    , _drsNextToken = Nothing
-    , _drsResponseStatus = pResponseStatus_
-    }
-
+describeScalingPlansResponse pResponseStatus_
+  = DescribeScalingPlansResponse'{_drsScalingPlans =
+                                    Nothing,
+                                  _drsNextToken = Nothing,
+                                  _drsResponseStatus = pResponseStatus_}
 
 -- | Information about the scaling plans.
 drsScalingPlans :: Lens' DescribeScalingPlansResponse [ScalingPlan]

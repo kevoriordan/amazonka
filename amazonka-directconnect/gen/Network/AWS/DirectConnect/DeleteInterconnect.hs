@@ -44,29 +44,25 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the DeleteInterconnect operation.
---
---
---
--- /See:/ 'deleteInterconnect' smart constructor.
-newtype DeleteInterconnect = DeleteInterconnect'
-  { _dInterconnectId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteInterconnect' smart constructor.
+newtype DeleteInterconnect = DeleteInterconnect'{_dInterconnectId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteInterconnect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dInterconnectId' - Undocumented member.
+-- * 'dInterconnectId' - The ID of the interconnect.
 deleteInterconnect
     :: Text -- ^ 'dInterconnectId'
     -> DeleteInterconnect
-deleteInterconnect pInterconnectId_ =
-  DeleteInterconnect' {_dInterconnectId = pInterconnectId_}
+deleteInterconnect pInterconnectId_
+  = DeleteInterconnect'{_dInterconnectId =
+                          pInterconnectId_}
 
-
--- | Undocumented member.
+-- | The ID of the interconnect.
 dInterconnectId :: Lens' DeleteInterconnect Text
 dInterconnectId = lens _dInterconnectId (\ s a -> s{_dInterconnectId = a})
 
@@ -105,33 +101,32 @@ instance ToPath DeleteInterconnect where
 instance ToQuery DeleteInterconnect where
         toQuery = const mempty
 
--- | The response received when DeleteInterconnect is called.
---
---
---
--- /See:/ 'deleteInterconnectResponse' smart constructor.
-data DeleteInterconnectResponse = DeleteInterconnectResponse'
-  { _drsInterconnectState :: !(Maybe InterconnectState)
-  , _drsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteInterconnectResponse' smart constructor.
+data DeleteInterconnectResponse = DeleteInterconnectResponse'{_drsInterconnectState
+                                                              ::
+                                                              !(Maybe
+                                                                  InterconnectState),
+                                                              _drsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteInterconnectResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drsInterconnectState' - Undocumented member.
+-- * 'drsInterconnectState' - The state of the interconnect. The following are the possible values:     * @requested@ : The initial state of an interconnect. The interconnect stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.     * @pending@ : The interconnect is approved, and is being initialized.     * @available@ : The network link is up, and the interconnect is ready for use.     * @down@ : The network link is down.     * @deleting@ : The interconnect is being deleted.     * @deleted@ : The interconnect is deleted.     * @unknown@ : The state of the interconnect is not available.
 --
 -- * 'drsResponseStatus' - -- | The response status code.
 deleteInterconnectResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteInterconnectResponse
-deleteInterconnectResponse pResponseStatus_ =
-  DeleteInterconnectResponse'
-    {_drsInterconnectState = Nothing, _drsResponseStatus = pResponseStatus_}
+deleteInterconnectResponse pResponseStatus_
+  = DeleteInterconnectResponse'{_drsInterconnectState =
+                                  Nothing,
+                                _drsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | The state of the interconnect. The following are the possible values:     * @requested@ : The initial state of an interconnect. The interconnect stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.     * @pending@ : The interconnect is approved, and is being initialized.     * @available@ : The network link is up, and the interconnect is ready for use.     * @down@ : The network link is down.     * @deleting@ : The interconnect is being deleted.     * @deleted@ : The interconnect is deleted.     * @unknown@ : The state of the interconnect is not available.
 drsInterconnectState :: Lens' DeleteInterconnectResponse (Maybe InterconnectState)
 drsInterconnectState = lens _drsInterconnectState (\ s a -> s{_drsInterconnectState = a})
 

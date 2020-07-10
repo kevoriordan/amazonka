@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes the association of tags from a DAX resource. You can call @UntagResource@ up to 5 times per second, per account.
+-- Removes the association of tags from a DAX resource. You can call @UntagResource@ up to 5 times per second, per account. 
 --
 --
 module Network.AWS.DAX.UntagResource
@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'untagResource' smart constructor.
-data UntagResource = UntagResource'
-  { _urResourceName :: !Text
-  , _urTagKeys      :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagResource = UntagResource'{_urResourceName
+                                    :: !Text,
+                                    _urTagKeys :: ![Text]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UntagResource' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ data UntagResource = UntagResource'
 untagResource
     :: Text -- ^ 'urResourceName'
     -> UntagResource
-untagResource pResourceName_ =
-  UntagResource' {_urResourceName = pResourceName_, _urTagKeys = mempty}
-
+untagResource pResourceName_
+  = UntagResource'{_urResourceName = pResourceName_,
+                   _urTagKeys = mempty}
 
 -- | The name of the DAX resource from which the tags should be removed.
 urResourceName :: Lens' UntagResource Text
@@ -110,11 +109,11 @@ instance ToQuery UntagResource where
         toQuery = const mempty
 
 -- | /See:/ 'untagResourceResponse' smart constructor.
-data UntagResourceResponse = UntagResourceResponse'
-  { _urrsTags           :: !(Maybe [Tag])
-  , _urrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UntagResourceResponse = UntagResourceResponse'{_urrsTags
+                                                    :: !(Maybe [Tag]),
+                                                    _urrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UntagResourceResponse' with the minimum fields required to make a request.
 --
@@ -126,10 +125,9 @@ data UntagResourceResponse = UntagResourceResponse'
 untagResourceResponse
     :: Int -- ^ 'urrsResponseStatus'
     -> UntagResourceResponse
-untagResourceResponse pResponseStatus_ =
-  UntagResourceResponse'
-    {_urrsTags = Nothing, _urrsResponseStatus = pResponseStatus_}
-
+untagResourceResponse pResponseStatus_
+  = UntagResourceResponse'{_urrsTags = Nothing,
+                           _urrsResponseStatus = pResponseStatus_}
 
 -- | The tag keys that have been removed from the cluster.
 urrsTags :: Lens' UntagResourceResponse [Tag]

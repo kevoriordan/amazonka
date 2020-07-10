@@ -68,12 +68,29 @@ library
         , Network.AWS.DataPipeline.Waiters
 
     other-modules:
-          Network.AWS.DataPipeline.Types.Product
-        , Network.AWS.DataPipeline.Types.Sum
+          Network.AWS.DataPipeline.Types.Field
+        , Network.AWS.DataPipeline.Types.InstanceIdentity
+        , Network.AWS.DataPipeline.Types.Operator
+        , Network.AWS.DataPipeline.Types.OperatorType
+        , Network.AWS.DataPipeline.Types.ParameterAttribute
+        , Network.AWS.DataPipeline.Types.ParameterObject
+        , Network.AWS.DataPipeline.Types.ParameterValue
+        , Network.AWS.DataPipeline.Types.PipelineDescription
+        , Network.AWS.DataPipeline.Types.PipelineIdName
+        , Network.AWS.DataPipeline.Types.PipelineObject
+        , Network.AWS.DataPipeline.Types.Product
+        , Network.AWS.DataPipeline.Types.Query
+        , Network.AWS.DataPipeline.Types.Selector
+        , Network.AWS.DataPipeline.Types.Tag
+        , Network.AWS.DataPipeline.Types.TaskObject
+        , Network.AWS.DataPipeline.Types.TaskStatus
+        , Network.AWS.DataPipeline.Types.ValidationError
+        , Network.AWS.DataPipeline.Types.ValidationWarning
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-datapipeline-test
     type:              exitcode-stdio-1.0
@@ -97,6 +114,7 @@ test-suite amazonka-datapipeline-test
         , amazonka-datapipeline
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

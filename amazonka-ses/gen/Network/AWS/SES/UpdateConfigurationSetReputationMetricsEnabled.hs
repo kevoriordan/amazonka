@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed a certain threshold.
+-- Enables or disables the publishing of reputation metrics for emails sent using a specific configuration set in a given AWS Region. Reputation metrics include bounce and complaint rates. These metrics are published to Amazon CloudWatch. By using CloudWatch, you can create alarms when bounce or complaint rates exceed certain thresholds.
 --
 --
 -- You can execute this operation no more than once per second.
@@ -49,11 +49,16 @@ import Network.AWS.SES.Types.Product
 --
 --
 -- /See:/ 'updateConfigurationSetReputationMetricsEnabled' smart constructor.
-data UpdateConfigurationSetReputationMetricsEnabled = UpdateConfigurationSetReputationMetricsEnabled'
-  { _ucsrmeConfigurationSetName :: !Text
-  , _ucsrmeEnabled              :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConfigurationSetReputationMetricsEnabled = UpdateConfigurationSetReputationMetricsEnabled'{_ucsrmeConfigurationSetName
+                                                                                                      ::
+                                                                                                      !Text,
+                                                                                                      _ucsrmeEnabled
+                                                                                                      ::
+                                                                                                      !Bool}
+                                                        deriving (Eq, Read,
+                                                                  Show, Data,
+                                                                  Typeable,
+                                                                  Generic)
 
 -- | Creates a value of 'UpdateConfigurationSetReputationMetricsEnabled' with the minimum fields required to make a request.
 --
@@ -66,12 +71,11 @@ updateConfigurationSetReputationMetricsEnabled
     :: Text -- ^ 'ucsrmeConfigurationSetName'
     -> Bool -- ^ 'ucsrmeEnabled'
     -> UpdateConfigurationSetReputationMetricsEnabled
-updateConfigurationSetReputationMetricsEnabled pConfigurationSetName_ pEnabled_ =
-  UpdateConfigurationSetReputationMetricsEnabled'
-    { _ucsrmeConfigurationSetName = pConfigurationSetName_
-    , _ucsrmeEnabled = pEnabled_
-    }
-
+updateConfigurationSetReputationMetricsEnabled
+  pConfigurationSetName_ pEnabled_
+  = UpdateConfigurationSetReputationMetricsEnabled'{_ucsrmeConfigurationSetName
+                                                      = pConfigurationSetName_,
+                                                    _ucsrmeEnabled = pEnabled_}
 
 -- | The name of the configuration set that you want to update.
 ucsrmeConfigurationSetName :: Lens' UpdateConfigurationSetReputationMetricsEnabled Text
@@ -126,18 +130,20 @@ instance ToQuery
                "Enabled" =: _ucsrmeEnabled]
 
 -- | /See:/ 'updateConfigurationSetReputationMetricsEnabledResponse' smart constructor.
-data UpdateConfigurationSetReputationMetricsEnabledResponse =
-  UpdateConfigurationSetReputationMetricsEnabledResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateConfigurationSetReputationMetricsEnabledResponse = UpdateConfigurationSetReputationMetricsEnabledResponse'
+                                                                deriving (Eq,
+                                                                          Read,
+                                                                          Show,
+                                                                          Data,
+                                                                          Typeable,
+                                                                          Generic)
 
 -- | Creates a value of 'UpdateConfigurationSetReputationMetricsEnabledResponse' with the minimum fields required to make a request.
 --
 updateConfigurationSetReputationMetricsEnabledResponse
     :: UpdateConfigurationSetReputationMetricsEnabledResponse
-updateConfigurationSetReputationMetricsEnabledResponse =
-  UpdateConfigurationSetReputationMetricsEnabledResponse'
-
+updateConfigurationSetReputationMetricsEnabledResponse
+  = UpdateConfigurationSetReputationMetricsEnabledResponse'
 
 instance NFData
            UpdateConfigurationSetReputationMetricsEnabledResponse

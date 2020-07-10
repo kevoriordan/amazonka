@@ -49,13 +49,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateComputeEnvironment' smart constructor.
-data UpdateComputeEnvironment = UpdateComputeEnvironment'
-  { _uceState              :: !(Maybe CEState)
-  , _uceComputeResources   :: !(Maybe ComputeResourceUpdate)
-  , _uceServiceRole        :: !(Maybe Text)
-  , _uceComputeEnvironment :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateComputeEnvironment = UpdateComputeEnvironment'{_uceState
+                                                          :: !(Maybe CEState),
+                                                          _uceComputeResources
+                                                          ::
+                                                          !(Maybe
+                                                              ComputeResourceUpdate),
+                                                          _uceServiceRole ::
+                                                          !(Maybe Text),
+                                                          _uceComputeEnvironment
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateComputeEnvironment' with the minimum fields required to make a request.
 --
@@ -71,14 +76,11 @@ data UpdateComputeEnvironment = UpdateComputeEnvironment'
 updateComputeEnvironment
     :: Text -- ^ 'uceComputeEnvironment'
     -> UpdateComputeEnvironment
-updateComputeEnvironment pComputeEnvironment_ =
-  UpdateComputeEnvironment'
-    { _uceState = Nothing
-    , _uceComputeResources = Nothing
-    , _uceServiceRole = Nothing
-    , _uceComputeEnvironment = pComputeEnvironment_
-    }
-
+updateComputeEnvironment pComputeEnvironment_
+  = UpdateComputeEnvironment'{_uceState = Nothing,
+                              _uceComputeResources = Nothing,
+                              _uceServiceRole = Nothing,
+                              _uceComputeEnvironment = pComputeEnvironment_}
 
 -- | The state of the compute environment. Compute environments in the @ENABLED@ state can accept jobs from a queue and scale in or out automatically based on the workload demand of its associated queues.
 uceState :: Lens' UpdateComputeEnvironment (Maybe CEState)
@@ -136,18 +138,25 @@ instance ToQuery UpdateComputeEnvironment where
         toQuery = const mempty
 
 -- | /See:/ 'updateComputeEnvironmentResponse' smart constructor.
-data UpdateComputeEnvironmentResponse = UpdateComputeEnvironmentResponse'
-  { _ucersComputeEnvironmentName :: !(Maybe Text)
-  , _ucersComputeEnvironmentARN  :: !(Maybe Text)
-  , _ucersResponseStatus         :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateComputeEnvironmentResponse = UpdateComputeEnvironmentResponse'{_ucersComputeEnvironmentName
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ucersComputeEnvironmentARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ucersResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'UpdateComputeEnvironmentResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ucersComputeEnvironmentName' - The name of compute environment.
+-- * 'ucersComputeEnvironmentName' - The name of the compute environment.
 --
 -- * 'ucersComputeEnvironmentARN' - The Amazon Resource Name (ARN) of the compute environment.
 --
@@ -155,15 +164,13 @@ data UpdateComputeEnvironmentResponse = UpdateComputeEnvironmentResponse'
 updateComputeEnvironmentResponse
     :: Int -- ^ 'ucersResponseStatus'
     -> UpdateComputeEnvironmentResponse
-updateComputeEnvironmentResponse pResponseStatus_ =
-  UpdateComputeEnvironmentResponse'
-    { _ucersComputeEnvironmentName = Nothing
-    , _ucersComputeEnvironmentARN = Nothing
-    , _ucersResponseStatus = pResponseStatus_
-    }
+updateComputeEnvironmentResponse pResponseStatus_
+  = UpdateComputeEnvironmentResponse'{_ucersComputeEnvironmentName
+                                        = Nothing,
+                                      _ucersComputeEnvironmentARN = Nothing,
+                                      _ucersResponseStatus = pResponseStatus_}
 
-
--- | The name of compute environment.
+-- | The name of the compute environment.
 ucersComputeEnvironmentName :: Lens' UpdateComputeEnvironmentResponse (Maybe Text)
 ucersComputeEnvironmentName = lens _ucersComputeEnvironmentName (\ s a -> s{_ucersComputeEnvironmentName = a})
 

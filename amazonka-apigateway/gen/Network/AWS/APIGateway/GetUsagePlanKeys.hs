@@ -56,13 +56,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getUsagePlanKeys' smart constructor.
-data GetUsagePlanKeys = GetUsagePlanKeys'
-  { _gupkNameQuery   :: !(Maybe Text)
-  , _gupkLimit       :: !(Maybe Int)
-  , _gupkPosition    :: !(Maybe Text)
-  , _gupkUsagePlanId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUsagePlanKeys = GetUsagePlanKeys'{_gupkNameQuery
+                                          :: !(Maybe Text),
+                                          _gupkLimit :: !(Maybe Int),
+                                          _gupkPosition :: !(Maybe Text),
+                                          _gupkUsagePlanId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetUsagePlanKeys' with the minimum fields required to make a request.
 --
@@ -78,14 +77,10 @@ data GetUsagePlanKeys = GetUsagePlanKeys'
 getUsagePlanKeys
     :: Text -- ^ 'gupkUsagePlanId'
     -> GetUsagePlanKeys
-getUsagePlanKeys pUsagePlanId_ =
-  GetUsagePlanKeys'
-    { _gupkNameQuery = Nothing
-    , _gupkLimit = Nothing
-    , _gupkPosition = Nothing
-    , _gupkUsagePlanId = pUsagePlanId_
-    }
-
+getUsagePlanKeys pUsagePlanId_
+  = GetUsagePlanKeys'{_gupkNameQuery = Nothing,
+                      _gupkLimit = Nothing, _gupkPosition = Nothing,
+                      _gupkUsagePlanId = pUsagePlanId_}
 
 -- | A query parameter specifying the name of the to-be-returned usage plan keys.
 gupkNameQuery :: Lens' GetUsagePlanKeys (Maybe Text)
@@ -144,15 +139,19 @@ instance ToQuery GetUsagePlanKeys where
 -- | Represents the collection of usage plan keys added to usage plans for the associated API keys and, possibly, other types of keys.
 --
 --
--- <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html Create and Use Usage Plans>
+-- <https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html Create and Use Usage Plans> 
 --
 -- /See:/ 'getUsagePlanKeysResponse' smart constructor.
-data GetUsagePlanKeysResponse = GetUsagePlanKeysResponse'
-  { _gupkrsItems          :: !(Maybe [UsagePlanKey])
-  , _gupkrsPosition       :: !(Maybe Text)
-  , _gupkrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUsagePlanKeysResponse = GetUsagePlanKeysResponse'{_gupkrsItems
+                                                          ::
+                                                          !(Maybe
+                                                              [UsagePlanKey]),
+                                                          _gupkrsPosition ::
+                                                          !(Maybe Text),
+                                                          _gupkrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetUsagePlanKeysResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +165,10 @@ data GetUsagePlanKeysResponse = GetUsagePlanKeysResponse'
 getUsagePlanKeysResponse
     :: Int -- ^ 'gupkrsResponseStatus'
     -> GetUsagePlanKeysResponse
-getUsagePlanKeysResponse pResponseStatus_ =
-  GetUsagePlanKeysResponse'
-    { _gupkrsItems = Nothing
-    , _gupkrsPosition = Nothing
-    , _gupkrsResponseStatus = pResponseStatus_
-    }
-
+getUsagePlanKeysResponse pResponseStatus_
+  = GetUsagePlanKeysResponse'{_gupkrsItems = Nothing,
+                              _gupkrsPosition = Nothing,
+                              _gupkrsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gupkrsItems :: Lens' GetUsagePlanKeysResponse [UsagePlanKey]

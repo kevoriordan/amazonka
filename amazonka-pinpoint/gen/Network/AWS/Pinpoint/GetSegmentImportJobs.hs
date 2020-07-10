@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of import jobs for a specific segment.
+-- Retrieves information about the status and settings of the import jobs for a segment.
+--
+--
 module Network.AWS.Pinpoint.GetSegmentImportJobs
     (
     -- * Creating a Request
@@ -46,51 +48,48 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getSegmentImportJobs' smart constructor.
-data GetSegmentImportJobs = GetSegmentImportJobs'
-  { _gsijToken         :: !(Maybe Text)
-  , _gsijPageSize      :: !(Maybe Text)
-  , _gsijSegmentId     :: !Text
-  , _gsijApplicationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSegmentImportJobs = GetSegmentImportJobs'{_gsijToken
+                                                  :: !(Maybe Text),
+                                                  _gsijPageSize ::
+                                                  !(Maybe Text),
+                                                  _gsijSegmentId :: !Text,
+                                                  _gsijApplicationId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSegmentImportJobs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsijToken' - The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'gsijToken' - The NextToken string that specifies which page of results to return in a paginated response.
 --
--- * 'gsijPageSize' - The number of entries you want on each page in the response.
+-- * 'gsijPageSize' - The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 --
--- * 'gsijSegmentId' - Undocumented member.
+-- * 'gsijSegmentId' - The unique identifier for the segment.
 --
--- * 'gsijApplicationId' - Undocumented member.
+-- * 'gsijApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getSegmentImportJobs
     :: Text -- ^ 'gsijSegmentId'
     -> Text -- ^ 'gsijApplicationId'
     -> GetSegmentImportJobs
-getSegmentImportJobs pSegmentId_ pApplicationId_ =
-  GetSegmentImportJobs'
-    { _gsijToken = Nothing
-    , _gsijPageSize = Nothing
-    , _gsijSegmentId = pSegmentId_
-    , _gsijApplicationId = pApplicationId_
-    }
+getSegmentImportJobs pSegmentId_ pApplicationId_
+  = GetSegmentImportJobs'{_gsijToken = Nothing,
+                          _gsijPageSize = Nothing,
+                          _gsijSegmentId = pSegmentId_,
+                          _gsijApplicationId = pApplicationId_}
 
-
--- | The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The NextToken string that specifies which page of results to return in a paginated response.
 gsijToken :: Lens' GetSegmentImportJobs (Maybe Text)
 gsijToken = lens _gsijToken (\ s a -> s{_gsijToken = a})
 
--- | The number of entries you want on each page in the response.
+-- | The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 gsijPageSize :: Lens' GetSegmentImportJobs (Maybe Text)
 gsijPageSize = lens _gsijPageSize (\ s a -> s{_gsijPageSize = a})
 
--- | Undocumented member.
+-- | The unique identifier for the segment.
 gsijSegmentId :: Lens' GetSegmentImportJobs Text
 gsijSegmentId = lens _gsijSegmentId (\ s a -> s{_gsijSegmentId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gsijApplicationId :: Lens' GetSegmentImportJobs Text
 gsijApplicationId = lens _gsijApplicationId (\ s a -> s{_gsijApplicationId = a})
 
@@ -127,11 +126,13 @@ instance ToQuery GetSegmentImportJobs where
               ["token" =: _gsijToken, "page-size" =: _gsijPageSize]
 
 -- | /See:/ 'getSegmentImportJobsResponse' smart constructor.
-data GetSegmentImportJobsResponse = GetSegmentImportJobsResponse'
-  { _gsijrsResponseStatus     :: !Int
-  , _gsijrsImportJobsResponse :: !ImportJobsResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSegmentImportJobsResponse = GetSegmentImportJobsResponse'{_gsijrsResponseStatus
+                                                                  :: !Int,
+                                                                  _gsijrsImportJobsResponse
+                                                                  ::
+                                                                  !ImportJobsResponse}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'GetSegmentImportJobsResponse' with the minimum fields required to make a request.
 --
@@ -144,12 +145,12 @@ getSegmentImportJobsResponse
     :: Int -- ^ 'gsijrsResponseStatus'
     -> ImportJobsResponse -- ^ 'gsijrsImportJobsResponse'
     -> GetSegmentImportJobsResponse
-getSegmentImportJobsResponse pResponseStatus_ pImportJobsResponse_ =
-  GetSegmentImportJobsResponse'
-    { _gsijrsResponseStatus = pResponseStatus_
-    , _gsijrsImportJobsResponse = pImportJobsResponse_
-    }
-
+getSegmentImportJobsResponse pResponseStatus_
+  pImportJobsResponse_
+  = GetSegmentImportJobsResponse'{_gsijrsResponseStatus
+                                    = pResponseStatus_,
+                                  _gsijrsImportJobsResponse =
+                                    pImportJobsResponse_}
 
 -- | -- | The response status code.
 gsijrsResponseStatus :: Lens' GetSegmentImportJobsResponse Int

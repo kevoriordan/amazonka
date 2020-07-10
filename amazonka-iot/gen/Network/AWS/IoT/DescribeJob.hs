@@ -27,7 +27,7 @@ module Network.AWS.IoT.DescribeJob
       describeJob
     , DescribeJob
     -- * Request Lenses
-    , djJobId
+    , desJobId
 
     -- * Destructuring the Response
     , describeJobResponse
@@ -46,25 +46,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeJob' smart constructor.
-newtype DescribeJob = DescribeJob'
-  { _djJobId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeJob = DescribeJob'{_desJobId :: Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'djJobId' - The unique identifier you assigned to this job when it was created.
+-- * 'desJobId' - The unique identifier you assigned to this job when it was created.
 describeJob
-    :: Text -- ^ 'djJobId'
+    :: Text -- ^ 'desJobId'
     -> DescribeJob
-describeJob pJobId_ = DescribeJob' {_djJobId = pJobId_}
-
+describeJob pJobId_
+  = DescribeJob'{_desJobId = pJobId_}
 
 -- | The unique identifier you assigned to this job when it was created.
-djJobId :: Lens' DescribeJob Text
-djJobId = lens _djJobId (\ s a -> s{_djJobId = a})
+desJobId :: Lens' DescribeJob Text
+desJobId = lens _desJobId (\ s a -> s{_desJobId = a})
 
 instance AWSRequest DescribeJob where
         type Rs DescribeJob = DescribeJobResponse
@@ -85,18 +83,17 @@ instance ToHeaders DescribeJob where
 
 instance ToPath DescribeJob where
         toPath DescribeJob'{..}
-          = mconcat ["/jobs/", toBS _djJobId]
+          = mconcat ["/jobs/", toBS _desJobId]
 
 instance ToQuery DescribeJob where
         toQuery = const mempty
 
 -- | /See:/ 'describeJobResponse' smart constructor.
-data DescribeJobResponse = DescribeJobResponse'
-  { _djrsDocumentSource :: !(Maybe Text)
-  , _djrsJob            :: !(Maybe Job)
-  , _djrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeJobResponse = DescribeJobResponse'{_djrsDocumentSource
+                                                :: !(Maybe Text),
+                                                _djrsJob :: !(Maybe Job),
+                                                _djrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeJobResponse' with the minimum fields required to make a request.
 --
@@ -110,13 +107,10 @@ data DescribeJobResponse = DescribeJobResponse'
 describeJobResponse
     :: Int -- ^ 'djrsResponseStatus'
     -> DescribeJobResponse
-describeJobResponse pResponseStatus_ =
-  DescribeJobResponse'
-    { _djrsDocumentSource = Nothing
-    , _djrsJob = Nothing
-    , _djrsResponseStatus = pResponseStatus_
-    }
-
+describeJobResponse pResponseStatus_
+  = DescribeJobResponse'{_djrsDocumentSource = Nothing,
+                         _djrsJob = Nothing,
+                         _djrsResponseStatus = pResponseStatus_}
 
 -- | An S3 link to the job document.
 djrsDocumentSource :: Lens' DescribeJobResponse (Maybe Text)

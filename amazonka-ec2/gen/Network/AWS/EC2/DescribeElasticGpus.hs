@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see <http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-gpus.html Amazon EC2 Elastic GPUs> .
+-- Describes the Elastic Graphics accelerator associated with your instances. For more information about Elastic Graphics, see <https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html Amazon Elastic Graphics> .
 --
 --
 module Network.AWS.EC2.DescribeElasticGpus
@@ -51,20 +51,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeElasticGpus' smart constructor.
-data DescribeElasticGpus = DescribeElasticGpus'
-  { _degFilters       :: !(Maybe [Filter])
-  , _degNextToken     :: !(Maybe Text)
-  , _degDryRun        :: !(Maybe Bool)
-  , _degMaxResults    :: !(Maybe Int)
-  , _degElasticGpuIds :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticGpus = DescribeElasticGpus'{_degFilters
+                                                :: !(Maybe [Filter]),
+                                                _degNextToken :: !(Maybe Text),
+                                                _degDryRun :: !(Maybe Bool),
+                                                _degMaxResults :: !(Maybe Nat),
+                                                _degElasticGpuIds ::
+                                                !(Maybe [Text])}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeElasticGpus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'degFilters' - One or more filters.     * @availability-zone@ - The Availability Zone in which the Elastic GPU resides.     * @elastic-gpu-health@ - The status of the Elastic GPU (@OK@ | @IMPAIRED@ ).     * @elastic-gpu-state@ - The state of the Elastic GPU (@ATTACHED@ ).     * @elastic-gpu-type@ - The type of Elastic GPU; for example, @eg1.medium@ .     * @instance-id@ - The ID of the instance to which the Elastic GPU is associated.
+-- * 'degFilters' - The filters.     * @availability-zone@ - The Availability Zone in which the Elastic Graphics accelerator resides.     * @elastic-gpu-health@ - The status of the Elastic Graphics accelerator (@OK@ | @IMPAIRED@ ).     * @elastic-gpu-state@ - The state of the Elastic Graphics accelerator (@ATTACHED@ ).     * @elastic-gpu-type@ - The type of Elastic Graphics accelerator; for example, @eg1.medium@ .     * @instance-id@ - The ID of the instance to which the Elastic Graphics accelerator is associated.
 --
 -- * 'degNextToken' - The token to request the next page of results.
 --
@@ -72,20 +72,16 @@ data DescribeElasticGpus = DescribeElasticGpus'
 --
 -- * 'degMaxResults' - The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 5 and 1000.
 --
--- * 'degElasticGpuIds' - One or more Elastic GPU IDs.
+-- * 'degElasticGpuIds' - The Elastic Graphics accelerator IDs.
 describeElasticGpus
     :: DescribeElasticGpus
-describeElasticGpus =
-  DescribeElasticGpus'
-    { _degFilters = Nothing
-    , _degNextToken = Nothing
-    , _degDryRun = Nothing
-    , _degMaxResults = Nothing
-    , _degElasticGpuIds = Nothing
-    }
+describeElasticGpus
+  = DescribeElasticGpus'{_degFilters = Nothing,
+                         _degNextToken = Nothing, _degDryRun = Nothing,
+                         _degMaxResults = Nothing,
+                         _degElasticGpuIds = Nothing}
 
-
--- | One or more filters.     * @availability-zone@ - The Availability Zone in which the Elastic GPU resides.     * @elastic-gpu-health@ - The status of the Elastic GPU (@OK@ | @IMPAIRED@ ).     * @elastic-gpu-state@ - The state of the Elastic GPU (@ATTACHED@ ).     * @elastic-gpu-type@ - The type of Elastic GPU; for example, @eg1.medium@ .     * @instance-id@ - The ID of the instance to which the Elastic GPU is associated.
+-- | The filters.     * @availability-zone@ - The Availability Zone in which the Elastic Graphics accelerator resides.     * @elastic-gpu-health@ - The status of the Elastic Graphics accelerator (@OK@ | @IMPAIRED@ ).     * @elastic-gpu-state@ - The state of the Elastic Graphics accelerator (@ATTACHED@ ).     * @elastic-gpu-type@ - The type of Elastic Graphics accelerator; for example, @eg1.medium@ .     * @instance-id@ - The ID of the instance to which the Elastic Graphics accelerator is associated.
 degFilters :: Lens' DescribeElasticGpus [Filter]
 degFilters = lens _degFilters (\ s a -> s{_degFilters = a}) . _Default . _Coerce
 
@@ -98,10 +94,10 @@ degDryRun :: Lens' DescribeElasticGpus (Maybe Bool)
 degDryRun = lens _degDryRun (\ s a -> s{_degDryRun = a})
 
 -- | The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned @NextToken@ value. This value can be between 5 and 1000.
-degMaxResults :: Lens' DescribeElasticGpus (Maybe Int)
-degMaxResults = lens _degMaxResults (\ s a -> s{_degMaxResults = a})
+degMaxResults :: Lens' DescribeElasticGpus (Maybe Natural)
+degMaxResults = lens _degMaxResults (\ s a -> s{_degMaxResults = a}) . mapping _Nat
 
--- | One or more Elastic GPU IDs.
+-- | The Elastic Graphics accelerator IDs.
 degElasticGpuIds :: Lens' DescribeElasticGpus [Text]
 degElasticGpuIds = lens _degElasticGpuIds (\ s a -> s{_degElasticGpuIds = a}) . _Default . _Coerce
 
@@ -141,19 +137,25 @@ instance ToQuery DescribeElasticGpus where
                  (toQueryList "ElasticGpuId" <$> _degElasticGpuIds)]
 
 -- | /See:/ 'describeElasticGpusResponse' smart constructor.
-data DescribeElasticGpusResponse = DescribeElasticGpusResponse'
-  { _degrsElasticGpuSet  :: !(Maybe [ElasticGpus])
-  , _degrsNextToken      :: !(Maybe Text)
-  , _degrsMaxResults     :: !(Maybe Int)
-  , _degrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticGpusResponse = DescribeElasticGpusResponse'{_degrsElasticGpuSet
+                                                                ::
+                                                                !(Maybe
+                                                                    [ElasticGpus]),
+                                                                _degrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _degrsMaxResults
+                                                                :: !(Maybe Int),
+                                                                _degrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeElasticGpusResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'degrsElasticGpuSet' - Information about the Elastic GPUs.
+-- * 'degrsElasticGpuSet' - Information about the Elastic Graphics accelerators.
 --
 -- * 'degrsNextToken' - The token to use to retrieve the next page of results. This value is @null@ when there are no more results to return.
 --
@@ -163,16 +165,14 @@ data DescribeElasticGpusResponse = DescribeElasticGpusResponse'
 describeElasticGpusResponse
     :: Int -- ^ 'degrsResponseStatus'
     -> DescribeElasticGpusResponse
-describeElasticGpusResponse pResponseStatus_ =
-  DescribeElasticGpusResponse'
-    { _degrsElasticGpuSet = Nothing
-    , _degrsNextToken = Nothing
-    , _degrsMaxResults = Nothing
-    , _degrsResponseStatus = pResponseStatus_
-    }
+describeElasticGpusResponse pResponseStatus_
+  = DescribeElasticGpusResponse'{_degrsElasticGpuSet =
+                                   Nothing,
+                                 _degrsNextToken = Nothing,
+                                 _degrsMaxResults = Nothing,
+                                 _degrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the Elastic GPUs.
+-- | Information about the Elastic Graphics accelerators.
 degrsElasticGpuSet :: Lens' DescribeElasticGpusResponse [ElasticGpus]
 degrsElasticGpuSet = lens _degrsElasticGpuSet (\ s a -> s{_degrsElasticGpuSet = a}) . _Default . _Coerce
 

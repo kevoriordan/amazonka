@@ -50,11 +50,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeInstanceHealth' smart constructor.
-data DescribeInstanceHealth = DescribeInstanceHealth'
-  { _dihInstances        :: !(Maybe [Instance])
-  , _dihLoadBalancerName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstanceHealth = DescribeInstanceHealth'{_dihInstances
+                                                      :: !(Maybe [Instance]),
+                                                      _dihLoadBalancerName ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeInstanceHealth' with the minimum fields required to make a request.
 --
@@ -66,10 +67,9 @@ data DescribeInstanceHealth = DescribeInstanceHealth'
 describeInstanceHealth
     :: Text -- ^ 'dihLoadBalancerName'
     -> DescribeInstanceHealth
-describeInstanceHealth pLoadBalancerName_ =
-  DescribeInstanceHealth'
-    {_dihInstances = Nothing, _dihLoadBalancerName = pLoadBalancerName_}
-
+describeInstanceHealth pLoadBalancerName_
+  = DescribeInstanceHealth'{_dihInstances = Nothing,
+                            _dihLoadBalancerName = pLoadBalancerName_}
 
 -- | The IDs of the instances.
 dihInstances :: Lens' DescribeInstanceHealth [Instance]
@@ -116,11 +116,14 @@ instance ToQuery DescribeInstanceHealth where
 --
 --
 -- /See:/ 'describeInstanceHealthResponse' smart constructor.
-data DescribeInstanceHealthResponse = DescribeInstanceHealthResponse'
-  { _dihrsInstanceStates :: !(Maybe [InstanceState])
-  , _dihrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeInstanceHealthResponse = DescribeInstanceHealthResponse'{_dihrsInstanceStates
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [InstanceState]),
+                                                                      _dihrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeInstanceHealthResponse' with the minimum fields required to make a request.
 --
@@ -132,10 +135,10 @@ data DescribeInstanceHealthResponse = DescribeInstanceHealthResponse'
 describeInstanceHealthResponse
     :: Int -- ^ 'dihrsResponseStatus'
     -> DescribeInstanceHealthResponse
-describeInstanceHealthResponse pResponseStatus_ =
-  DescribeInstanceHealthResponse'
-    {_dihrsInstanceStates = Nothing, _dihrsResponseStatus = pResponseStatus_}
-
+describeInstanceHealthResponse pResponseStatus_
+  = DescribeInstanceHealthResponse'{_dihrsInstanceStates
+                                      = Nothing,
+                                    _dihrsResponseStatus = pResponseStatus_}
 
 -- | Information about the health of the instances.
 dihrsInstanceStates :: Lens' DescribeInstanceHealthResponse [InstanceState]

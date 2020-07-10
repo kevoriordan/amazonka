@@ -51,12 +51,14 @@ library
         , Network.AWS.MarketplaceAnalytics.Waiters
 
     other-modules:
-          Network.AWS.MarketplaceAnalytics.Types.Product
-        , Network.AWS.MarketplaceAnalytics.Types.Sum
+          Network.AWS.MarketplaceAnalytics.Types.DataSetType
+        , Network.AWS.MarketplaceAnalytics.Types.Product
+        , Network.AWS.MarketplaceAnalytics.Types.SupportDataSetType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-marketplace-analytics-test
     type:              exitcode-stdio-1.0
@@ -80,6 +82,7 @@ test-suite amazonka-marketplace-analytics-test
         , amazonka-marketplace-analytics
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

@@ -18,26 +18,32 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers a player's acceptance or rejection of a proposed FlexMatch match. A matchmaking configuration may require player acceptance; if so, then matches built with that configuration cannot be completed unless all players accept the proposed match within a specified time limit.
+-- Registers a player's acceptance or rejection of a proposed FlexMatch match. A matchmaking configuration may require player acceptance; if so, then matches built with that configuration cannot be completed unless all players accept the proposed match within a specified time limit. 
 --
 --
 -- When FlexMatch builds a match, all the matchmaking tickets involved in the proposed match are placed into status @REQUIRES_ACCEPTANCE@ . This is a trigger for your game to get acceptance from all players in the ticket. Acceptances are only valid for tickets when they are in this status; all other acceptances result in an error.
 --
--- To register acceptance, specify the ticket ID, a response, and one or more players. Once all players have registered acceptance, the matchmaking tickets advance to status @PLACING@ , where a new game session is created for the match.
+-- To register acceptance, specify the ticket ID, a response, and one or more players. Once all players have registered acceptance, the matchmaking tickets advance to status @PLACING@ , where a new game session is created for the match. 
 --
--- If any player rejects the match, or if acceptances are not received before a specified timeout, the proposed match is dropped. The matchmaking tickets are then handled in one of two ways: For tickets where all players accepted the match, the ticket status is returned to @SEARCHING@ to find a new match. For tickets where one or more players failed to accept the match, the ticket status is set to @FAILED@ , and processing is terminated. A new matchmaking request for these players can be submitted as needed.
+-- If any player rejects the match, or if acceptances are not received before a specified timeout, the proposed match is dropped. The matchmaking tickets are then handled in one of two ways: For tickets where one or more players rejected the match, the ticket status is returned to @SEARCHING@ to find a new match. For tickets where one or more players failed to respond, the ticket status is set to @CANCELLED@ , and processing is terminated. A new matchmaking request for these players can be submitted as needed. 
 --
--- Matchmaking-related operations include:
+-- __Learn more__ 
 --
---     * 'StartMatchmaking'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html Add FlexMatch to a Game Client> 
 --
---     * 'DescribeMatchmaking'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-events.html FlexMatch Events Reference> 
 --
---     * 'StopMatchmaking'
+-- __Related operations__ 
 --
---     * 'AcceptMatch'
+--     * 'StartMatchmaking' 
 --
---     * 'StartMatchBackfill'
+--     * 'DescribeMatchmaking' 
+--
+--     * 'StopMatchmaking' 
+--
+--     * 'AcceptMatch' 
+--
+--     * 'StartMatchBackfill' 
 --
 --
 --
@@ -70,39 +76,34 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'acceptMatch' smart constructor.
-data AcceptMatch = AcceptMatch'
-  { _amTicketId       :: !Text
-  , _amPlayerIds      :: ![Text]
-  , _amAcceptanceType :: !AcceptanceType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptMatch = AcceptMatch'{_amTicketId :: !Text,
+                                _amPlayerIds :: ![Text],
+                                _amAcceptanceType :: !AcceptanceType}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AcceptMatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'amTicketId' - Unique identifier for a matchmaking ticket. The ticket must be in status @REQUIRES_ACCEPTANCE@ ; otherwise this request will fail.
+-- * 'amTicketId' - A unique identifier for a matchmaking ticket. The ticket must be in status @REQUIRES_ACCEPTANCE@ ; otherwise this request will fail.
 --
--- * 'amPlayerIds' - Unique identifier for a player delivering the response. This parameter can include one or multiple player IDs.
+-- * 'amPlayerIds' - A unique identifier for a player delivering the response. This parameter can include one or multiple player IDs.
 --
 -- * 'amAcceptanceType' - Player response to the proposed match.
 acceptMatch
     :: Text -- ^ 'amTicketId'
     -> AcceptanceType -- ^ 'amAcceptanceType'
     -> AcceptMatch
-acceptMatch pTicketId_ pAcceptanceType_ =
-  AcceptMatch'
-    { _amTicketId = pTicketId_
-    , _amPlayerIds = mempty
-    , _amAcceptanceType = pAcceptanceType_
-    }
+acceptMatch pTicketId_ pAcceptanceType_
+  = AcceptMatch'{_amTicketId = pTicketId_,
+                 _amPlayerIds = mempty,
+                 _amAcceptanceType = pAcceptanceType_}
 
-
--- | Unique identifier for a matchmaking ticket. The ticket must be in status @REQUIRES_ACCEPTANCE@ ; otherwise this request will fail.
+-- | A unique identifier for a matchmaking ticket. The ticket must be in status @REQUIRES_ACCEPTANCE@ ; otherwise this request will fail.
 amTicketId :: Lens' AcceptMatch Text
 amTicketId = lens _amTicketId (\ s a -> s{_amTicketId = a})
 
--- | Unique identifier for a player delivering the response. This parameter can include one or multiple player IDs.
+-- | A unique identifier for a player delivering the response. This parameter can include one or multiple player IDs.
 amPlayerIds :: Lens' AcceptMatch [Text]
 amPlayerIds = lens _amPlayerIds (\ s a -> s{_amPlayerIds = a}) . _Coerce
 
@@ -146,10 +147,10 @@ instance ToQuery AcceptMatch where
         toQuery = const mempty
 
 -- | /See:/ 'acceptMatchResponse' smart constructor.
-newtype AcceptMatchResponse = AcceptMatchResponse'
-  { _amrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AcceptMatchResponse = AcceptMatchResponse'{_amrsResponseStatus
+                                                   :: Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AcceptMatchResponse' with the minimum fields required to make a request.
 --
@@ -159,9 +160,9 @@ newtype AcceptMatchResponse = AcceptMatchResponse'
 acceptMatchResponse
     :: Int -- ^ 'amrsResponseStatus'
     -> AcceptMatchResponse
-acceptMatchResponse pResponseStatus_ =
-  AcceptMatchResponse' {_amrsResponseStatus = pResponseStatus_}
-
+acceptMatchResponse pResponseStatus_
+  = AcceptMatchResponse'{_amrsResponseStatus =
+                           pResponseStatus_}
 
 -- | -- | The response status code.
 amrsResponseStatus :: Lens' AcceptMatchResponse Int

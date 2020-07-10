@@ -18,14 +18,24 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html Creating Your Own AMIs> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html Creating Your Own AMIs> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 --
--- You can also use @RegisterImage@ to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html Launching a Linux Instance from a Backup> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- You can also use @RegisterImage@ to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html Launching a Linux Instance from a Backup> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 -- You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes.
 --
--- Some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. Creating an AMI from an EBS snapshot does not maintain this billing code, and subsequent instances launched from such an AMI will not be able to connect to package update infrastructure. To create an AMI that must retain billing codes, see 'CreateImage' .
+-- Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:
+--
+--     * Launch an instance from an existing AMI with that billing product code.
+--
+--     * Customize the instance.
+--
+--     * Create an AMI from the instance using 'CreateImage' .
+--
+--
+--
+-- If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html Obtaining Billing Information> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 -- If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.
 --
@@ -69,30 +79,31 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'registerImage' smart constructor.
-data RegisterImage = RegisterImage'
-  { _riVirtualizationType  :: !(Maybe Text)
-  , _riImageLocation       :: !(Maybe Text)
-  , _riEnaSupport          :: !(Maybe Bool)
-  , _riBillingProducts     :: !(Maybe [Text])
-  , _riRAMDiskId           :: !(Maybe Text)
-  , _riKernelId            :: !(Maybe Text)
-  , _riRootDeviceName      :: !(Maybe Text)
-  , _riSRIOVNetSupport     :: !(Maybe Text)
-  , _riArchitecture        :: !(Maybe ArchitectureValues)
-  , _riDescription         :: !(Maybe Text)
-  , _riBlockDeviceMappings :: !(Maybe [BlockDeviceMapping])
-  , _riDryRun              :: !(Maybe Bool)
-  , _riName                :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterImage = RegisterImage'{_riVirtualizationType
+                                    :: !(Maybe Text),
+                                    _riImageLocation :: !(Maybe Text),
+                                    _riEnaSupport :: !(Maybe Bool),
+                                    _riBillingProducts :: !(Maybe [Text]),
+                                    _riRAMDiskId :: !(Maybe Text),
+                                    _riKernelId :: !(Maybe Text),
+                                    _riRootDeviceName :: !(Maybe Text),
+                                    _riSRIOVNetSupport :: !(Maybe Text),
+                                    _riArchitecture ::
+                                    !(Maybe ArchitectureValues),
+                                    _riDescription :: !(Maybe Text),
+                                    _riBlockDeviceMappings ::
+                                    !(Maybe [BlockDeviceMapping]),
+                                    _riDryRun :: !(Maybe Bool),
+                                    _riName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RegisterImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'riVirtualizationType' - The type of virtualization (@hvm@ | @paravirtual@ ). Default: @paravirtual@
+-- * 'riVirtualizationType' - The type of virtualization (@hvm@ | @paravirtual@ ). Default: @paravirtual@ 
 --
--- * 'riImageLocation' - The full path to your AMI manifest in Amazon S3 storage.
+-- * 'riImageLocation' - The full path to your AMI manifest in Amazon S3 storage. The specified bucket must have the @aws-exec-read@ canned access control list (ACL) to ensure that it can be accessed by Amazon EC2. For more information, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl Canned ACLs> in the /Amazon S3 Service Developer Guide/ .
 --
 -- * 'riEnaSupport' - Set to @true@ to enable enhanced networking with ENA for the AMI and any instances that you launch from the AMI. This option is supported only for HVM AMIs. Specifying this option with a PV AMI can make instances launched from the AMI unreachable.
 --
@@ -110,7 +121,7 @@ data RegisterImage = RegisterImage'
 --
 -- * 'riDescription' - A description for your AMI.
 --
--- * 'riBlockDeviceMappings' - One or more block device mapping entries.
+-- * 'riBlockDeviceMappings' - The block device mapping entries.
 --
 -- * 'riDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
@@ -118,29 +129,21 @@ data RegisterImage = RegisterImage'
 registerImage
     :: Text -- ^ 'riName'
     -> RegisterImage
-registerImage pName_ =
-  RegisterImage'
-    { _riVirtualizationType = Nothing
-    , _riImageLocation = Nothing
-    , _riEnaSupport = Nothing
-    , _riBillingProducts = Nothing
-    , _riRAMDiskId = Nothing
-    , _riKernelId = Nothing
-    , _riRootDeviceName = Nothing
-    , _riSRIOVNetSupport = Nothing
-    , _riArchitecture = Nothing
-    , _riDescription = Nothing
-    , _riBlockDeviceMappings = Nothing
-    , _riDryRun = Nothing
-    , _riName = pName_
-    }
+registerImage pName_
+  = RegisterImage'{_riVirtualizationType = Nothing,
+                   _riImageLocation = Nothing, _riEnaSupport = Nothing,
+                   _riBillingProducts = Nothing, _riRAMDiskId = Nothing,
+                   _riKernelId = Nothing, _riRootDeviceName = Nothing,
+                   _riSRIOVNetSupport = Nothing,
+                   _riArchitecture = Nothing, _riDescription = Nothing,
+                   _riBlockDeviceMappings = Nothing,
+                   _riDryRun = Nothing, _riName = pName_}
 
-
--- | The type of virtualization (@hvm@ | @paravirtual@ ). Default: @paravirtual@
+-- | The type of virtualization (@hvm@ | @paravirtual@ ). Default: @paravirtual@ 
 riVirtualizationType :: Lens' RegisterImage (Maybe Text)
 riVirtualizationType = lens _riVirtualizationType (\ s a -> s{_riVirtualizationType = a})
 
--- | The full path to your AMI manifest in Amazon S3 storage.
+-- | The full path to your AMI manifest in Amazon S3 storage. The specified bucket must have the @aws-exec-read@ canned access control list (ACL) to ensure that it can be accessed by Amazon EC2. For more information, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl Canned ACLs> in the /Amazon S3 Service Developer Guide/ .
 riImageLocation :: Lens' RegisterImage (Maybe Text)
 riImageLocation = lens _riImageLocation (\ s a -> s{_riImageLocation = a})
 
@@ -176,7 +179,7 @@ riArchitecture = lens _riArchitecture (\ s a -> s{_riArchitecture = a})
 riDescription :: Lens' RegisterImage (Maybe Text)
 riDescription = lens _riDescription (\ s a -> s{_riDescription = a})
 
--- | One or more block device mapping entries.
+-- | The block device mapping entries.
 riBlockDeviceMappings :: Lens' RegisterImage [BlockDeviceMapping]
 riBlockDeviceMappings = lens _riBlockDeviceMappings (\ s a -> s{_riBlockDeviceMappings = a}) . _Default . _Coerce
 
@@ -234,11 +237,11 @@ instance ToQuery RegisterImage where
 --
 --
 -- /See:/ 'registerImageResponse' smart constructor.
-data RegisterImageResponse = RegisterImageResponse'
-  { _rirsImageId        :: !(Maybe Text)
-  , _rirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterImageResponse = RegisterImageResponse'{_rirsImageId
+                                                    :: !(Maybe Text),
+                                                    _rirsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'RegisterImageResponse' with the minimum fields required to make a request.
 --
@@ -250,10 +253,9 @@ data RegisterImageResponse = RegisterImageResponse'
 registerImageResponse
     :: Int -- ^ 'rirsResponseStatus'
     -> RegisterImageResponse
-registerImageResponse pResponseStatus_ =
-  RegisterImageResponse'
-    {_rirsImageId = Nothing, _rirsResponseStatus = pResponseStatus_}
-
+registerImageResponse pResponseStatus_
+  = RegisterImageResponse'{_rirsImageId = Nothing,
+                           _rirsResponseStatus = pResponseStatus_}
 
 -- | The ID of the newly registered AMI.
 rirsImageId :: Lens' RegisterImageResponse (Maybe Text)

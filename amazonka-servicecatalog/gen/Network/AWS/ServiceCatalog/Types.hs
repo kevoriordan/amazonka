@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -16,16 +16,20 @@ module Network.AWS.ServiceCatalog.Types
       serviceCatalog
 
     -- * Errors
-    , _InvalidParametersException
-    , _DuplicateResourceException
-    , _TagOptionNotMigratedException
-    , _ResourceNotFoundException
     , _InvalidStateException
+    , _OperationNotSupportedException
+    , _ResourceNotFoundException
+    , _TagOptionNotMigratedException
+    , _DuplicateResourceException
+    , _InvalidParametersException
     , _LimitExceededException
     , _ResourceInUseException
 
     -- * AccessLevelFilterKey
     , AccessLevelFilterKey (..)
+
+    -- * AccessStatus
+    , AccessStatus (..)
 
     -- * ChangeAction
     , ChangeAction (..)
@@ -38,6 +42,12 @@ module Network.AWS.ServiceCatalog.Types
 
     -- * EvaluationType
     , EvaluationType (..)
+
+    -- * OrganizationNodeType
+    , OrganizationNodeType (..)
+
+    -- * PortfolioShareType
+    , PortfolioShareType (..)
 
     -- * PrincipalType
     , PrincipalType (..)
@@ -54,6 +64,9 @@ module Network.AWS.ServiceCatalog.Types
     -- * ProductViewSortBy
     , ProductViewSortBy (..)
 
+    -- * PropertyKey
+    , PropertyKey (..)
+
     -- * ProvisionedProductPlanStatus
     , ProvisionedProductPlanStatus (..)
 
@@ -65,6 +78,9 @@ module Network.AWS.ServiceCatalog.Types
 
     -- * ProvisionedProductViewFilterBy
     , ProvisionedProductViewFilterBy (..)
+
+    -- * ProvisioningArtifactGuidance
+    , ProvisioningArtifactGuidance (..)
 
     -- * ProvisioningArtifactPropertyName
     , ProvisioningArtifactPropertyName (..)
@@ -87,14 +103,37 @@ module Network.AWS.ServiceCatalog.Types
     -- * ResourceAttribute
     , ResourceAttribute (..)
 
+    -- * ServiceActionAssociationErrorCode
+    , ServiceActionAssociationErrorCode (..)
+
+    -- * ServiceActionDefinitionKey
+    , ServiceActionDefinitionKey (..)
+
+    -- * ServiceActionDefinitionType
+    , ServiceActionDefinitionType (..)
+
+    -- * ShareStatus
+    , ShareStatus (..)
+
     -- * SortOrder
     , SortOrder (..)
+
+    -- * StackInstanceStatus
+    , StackInstanceStatus (..)
+
+    -- * StackSetOperationType
+    , StackSetOperationType (..)
 
     -- * AccessLevelFilter
     , AccessLevelFilter
     , accessLevelFilter
     , alfValue
     , alfKey
+
+    -- * BudgetDetail
+    , BudgetDetail
+    , budgetDetail
+    , bdBudgetName
 
     -- * CloudWatchDashboard
     , CloudWatchDashboard
@@ -104,16 +143,34 @@ module Network.AWS.ServiceCatalog.Types
     -- * ConstraintDetail
     , ConstraintDetail
     , constraintDetail
+    , cdPortfolioId
     , cdConstraintId
     , cdOwner
     , cdType
     , cdDescription
+    , cdProductId
 
     -- * ConstraintSummary
     , ConstraintSummary
     , constraintSummary
     , csType
     , csDescription
+
+    -- * ExecutionParameter
+    , ExecutionParameter
+    , executionParameter
+    , epDefaultValues
+    , epName
+    , epType
+
+    -- * FailedServiceActionAssociation
+    , FailedServiceActionAssociation
+    , failedServiceActionAssociation
+    , fsaaProvisioningArtifactId
+    , fsaaErrorCode
+    , fsaaErrorMessage
+    , fsaaServiceActionId
+    , fsaaProductId
 
     -- * LaunchPathSummary
     , LaunchPathSummary
@@ -135,6 +192,12 @@ module Network.AWS.ServiceCatalog.Types
     , ltofValue
     , ltofActive
     , ltofKey
+
+    -- * OrganizationNode
+    , OrganizationNode
+    , organizationNode
+    , onValue
+    , onType
 
     -- * ParameterConstraints
     , ParameterConstraints
@@ -210,6 +273,7 @@ module Network.AWS.ServiceCatalog.Types
     , provisionedProductDetail
     , ppdIdempotencyToken
     , ppdStatus
+    , ppdProvisioningArtifactId
     , ppdARN
     , ppdCreatedTime
     , ppdStatusMessage
@@ -217,6 +281,7 @@ module Network.AWS.ServiceCatalog.Types
     , ppdLastRecordId
     , ppdId
     , ppdType
+    , ppdProductId
 
     -- * ProvisionedProductPlanDetails
     , ProvisionedProductPlanDetails
@@ -253,6 +318,7 @@ module Network.AWS.ServiceCatalog.Types
     , paCreatedTime
     , paName
     , paId
+    , paGuidance
     , paDescription
 
     -- * ProvisioningArtifactDetail
@@ -263,6 +329,7 @@ module Network.AWS.ServiceCatalog.Types
     , padName
     , padId
     , padType
+    , padGuidance
     , padDescription
 
     -- * ProvisioningArtifactParameter
@@ -275,9 +342,16 @@ module Network.AWS.ServiceCatalog.Types
     , pDefaultValue
     , pDescription
 
+    -- * ProvisioningArtifactPreferences
+    , ProvisioningArtifactPreferences
+    , provisioningArtifactPreferences
+    , papStackSetRegions
+    , papStackSetAccounts
+
     -- * ProvisioningArtifactProperties
     , ProvisioningArtifactProperties
     , provisioningArtifactProperties
+    , papDisableTemplateValidation
     , papName
     , papType
     , papDescription
@@ -292,11 +366,27 @@ module Network.AWS.ServiceCatalog.Types
     , pasId
     , pasDescription
 
+    -- * ProvisioningArtifactView
+    , ProvisioningArtifactView
+    , provisioningArtifactView
+    , pavProductViewSummary
+    , pavProvisioningArtifact
+
     -- * ProvisioningParameter
     , ProvisioningParameter
     , provisioningParameter
     , ppValue
     , ppKey
+
+    -- * ProvisioningPreferences
+    , ProvisioningPreferences
+    , provisioningPreferences
+    , ppStackSetRegions
+    , ppStackSetMaxConcurrencyPercentage
+    , ppStackSetFailureToleranceCount
+    , ppStackSetFailureTolerancePercentage
+    , ppStackSetAccounts
+    , ppStackSetMaxConcurrencyCount
 
     -- * RecordDetail
     , RecordDetail
@@ -368,6 +458,47 @@ module Network.AWS.ServiceCatalog.Types
     , rtdRequiresRecreation
     , rtdName
 
+    -- * ServiceActionAssociation
+    , ServiceActionAssociation
+    , serviceActionAssociation
+    , saaServiceActionId
+    , saaProductId
+    , saaProvisioningArtifactId
+
+    -- * ServiceActionDetail
+    , ServiceActionDetail
+    , serviceActionDetail
+    , sadServiceActionSummary
+    , sadDefinition
+
+    -- * ServiceActionSummary
+    , ServiceActionSummary
+    , serviceActionSummary
+    , sasName
+    , sasId
+    , sasDefinitionType
+    , sasDescription
+
+    -- * ShareDetails
+    , ShareDetails
+    , shareDetails
+    , sdShareErrors
+    , sdSuccessfulShares
+
+    -- * ShareError
+    , ShareError
+    , shareError
+    , seAccounts
+    , seError
+    , seMessage
+
+    -- * StackInstance
+    , StackInstance
+    , stackInstance
+    , siAccount
+    , siRegion
+    , siStackInstanceStatus
+
     -- * Tag
     , Tag
     , tag
@@ -395,6 +526,17 @@ module Network.AWS.ServiceCatalog.Types
     , uppKey
     , uppUsePreviousValue
 
+    -- * UpdateProvisioningPreferences
+    , UpdateProvisioningPreferences
+    , updateProvisioningPreferences
+    , uppStackSetRegions
+    , uppStackSetMaxConcurrencyPercentage
+    , uppStackSetFailureToleranceCount
+    , uppStackSetFailureTolerancePercentage
+    , uppStackSetAccounts
+    , uppStackSetMaxConcurrencyCount
+    , uppStackSetOperationType
+
     -- * UsageInstruction
     , UsageInstruction
     , usageInstruction
@@ -404,101 +546,190 @@ module Network.AWS.ServiceCatalog.Types
 
 import Network.AWS.Lens
 import Network.AWS.Prelude
-import Network.AWS.ServiceCatalog.Types.Product
-import Network.AWS.ServiceCatalog.Types.Sum
 import Network.AWS.Sign.V4
+import Network.AWS.ServiceCatalog.Types.AccessLevelFilterKey
+import Network.AWS.ServiceCatalog.Types.AccessStatus
+import Network.AWS.ServiceCatalog.Types.ChangeAction
+import Network.AWS.ServiceCatalog.Types.CopyOption
+import Network.AWS.ServiceCatalog.Types.CopyProductStatus
+import Network.AWS.ServiceCatalog.Types.EvaluationType
+import Network.AWS.ServiceCatalog.Types.OrganizationNodeType
+import Network.AWS.ServiceCatalog.Types.PortfolioShareType
+import Network.AWS.ServiceCatalog.Types.PrincipalType
+import Network.AWS.ServiceCatalog.Types.ProductSource
+import Network.AWS.ServiceCatalog.Types.ProductType
+import Network.AWS.ServiceCatalog.Types.ProductViewFilterBy
+import Network.AWS.ServiceCatalog.Types.ProductViewSortBy
+import Network.AWS.ServiceCatalog.Types.PropertyKey
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductPlanStatus
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductPlanType
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductStatus
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductViewFilterBy
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactGuidance
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactPropertyName
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactType
+import Network.AWS.ServiceCatalog.Types.RecordStatus
+import Network.AWS.ServiceCatalog.Types.Replacement
+import Network.AWS.ServiceCatalog.Types.RequestStatus
+import Network.AWS.ServiceCatalog.Types.RequiresRecreation
+import Network.AWS.ServiceCatalog.Types.ResourceAttribute
+import Network.AWS.ServiceCatalog.Types.ServiceActionAssociationErrorCode
+import Network.AWS.ServiceCatalog.Types.ServiceActionDefinitionKey
+import Network.AWS.ServiceCatalog.Types.ServiceActionDefinitionType
+import Network.AWS.ServiceCatalog.Types.ShareStatus
+import Network.AWS.ServiceCatalog.Types.SortOrder
+import Network.AWS.ServiceCatalog.Types.StackInstanceStatus
+import Network.AWS.ServiceCatalog.Types.StackSetOperationType
+import Network.AWS.ServiceCatalog.Types.AccessLevelFilter
+import Network.AWS.ServiceCatalog.Types.BudgetDetail
+import Network.AWS.ServiceCatalog.Types.CloudWatchDashboard
+import Network.AWS.ServiceCatalog.Types.ConstraintDetail
+import Network.AWS.ServiceCatalog.Types.ConstraintSummary
+import Network.AWS.ServiceCatalog.Types.ExecutionParameter
+import Network.AWS.ServiceCatalog.Types.FailedServiceActionAssociation
+import Network.AWS.ServiceCatalog.Types.LaunchPathSummary
+import Network.AWS.ServiceCatalog.Types.ListRecordHistorySearchFilter
+import Network.AWS.ServiceCatalog.Types.ListTagOptionsFilters
+import Network.AWS.ServiceCatalog.Types.OrganizationNode
+import Network.AWS.ServiceCatalog.Types.ParameterConstraints
+import Network.AWS.ServiceCatalog.Types.PortfolioDetail
+import Network.AWS.ServiceCatalog.Types.Principal
+import Network.AWS.ServiceCatalog.Types.ProductViewAggregationValue
+import Network.AWS.ServiceCatalog.Types.ProductViewDetail
+import Network.AWS.ServiceCatalog.Types.ProductViewSummary
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductAttribute
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductDetail
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductPlanDetails
+import Network.AWS.ServiceCatalog.Types.ProvisionedProductPlanSummary
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifact
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactDetail
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactParameter
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactPreferences
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactProperties
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactSummary
+import Network.AWS.ServiceCatalog.Types.ProvisioningArtifactView
+import Network.AWS.ServiceCatalog.Types.ProvisioningParameter
+import Network.AWS.ServiceCatalog.Types.ProvisioningPreferences
+import Network.AWS.ServiceCatalog.Types.RecordDetail
+import Network.AWS.ServiceCatalog.Types.RecordError
+import Network.AWS.ServiceCatalog.Types.RecordOutput
+import Network.AWS.ServiceCatalog.Types.RecordTag
+import Network.AWS.ServiceCatalog.Types.ResourceChange
+import Network.AWS.ServiceCatalog.Types.ResourceChangeDetail
+import Network.AWS.ServiceCatalog.Types.ResourceDetail
+import Network.AWS.ServiceCatalog.Types.ResourceTargetDefinition
+import Network.AWS.ServiceCatalog.Types.ServiceActionAssociation
+import Network.AWS.ServiceCatalog.Types.ServiceActionDetail
+import Network.AWS.ServiceCatalog.Types.ServiceActionSummary
+import Network.AWS.ServiceCatalog.Types.ShareDetails
+import Network.AWS.ServiceCatalog.Types.ShareError
+import Network.AWS.ServiceCatalog.Types.StackInstance
+import Network.AWS.ServiceCatalog.Types.Tag
+import Network.AWS.ServiceCatalog.Types.TagOptionDetail
+import Network.AWS.ServiceCatalog.Types.TagOptionSummary
+import Network.AWS.ServiceCatalog.Types.UpdateProvisioningParameter
+import Network.AWS.ServiceCatalog.Types.UpdateProvisioningPreferences
+import Network.AWS.ServiceCatalog.Types.UsageInstruction
 
 -- | API version @2015-12-10@ of the Amazon Service Catalog SDK configuration.
 serviceCatalog :: Service
-serviceCatalog =
-  Service
-    { _svcAbbrev = "ServiceCatalog"
-    , _svcSigner = v4
-    , _svcPrefix = "servicecatalog"
-    , _svcVersion = "2015-12-10"
-    , _svcEndpoint = defaultEndpoint serviceCatalog
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "ServiceCatalog"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
-
-
--- | One or more parameters provided to the operation are not valid.
---
---
-_InvalidParametersException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidParametersException =
-  _MatchServiceError serviceCatalog "InvalidParametersException"
-
-
--- | The specified resource is a duplicate.
---
---
-_DuplicateResourceException :: AsError a => Getting (First ServiceError) a ServiceError
-_DuplicateResourceException =
-  _MatchServiceError serviceCatalog "DuplicateResourceException"
-
-
--- | An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Please use the AWS console to perform the migration process before retrying the operation.
---
---
-_TagOptionNotMigratedException :: AsError a => Getting (First ServiceError) a ServiceError
-_TagOptionNotMigratedException =
-  _MatchServiceError serviceCatalog "TagOptionNotMigratedException"
-
-
--- | The specified resource was not found.
---
---
-_ResourceNotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceNotFoundException =
-  _MatchServiceError serviceCatalog "ResourceNotFoundException"
-
+serviceCatalog
+  = Service{_svcAbbrev = "ServiceCatalog",
+            _svcSigner = v4, _svcPrefix = "servicecatalog",
+            _svcVersion = "2015-12-10",
+            _svcEndpoint = defaultEndpoint serviceCatalog,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "ServiceCatalog",
+            _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
 -- | An attempt was made to modify a resource that is in a state that is not valid. Check your resources to ensure that they are in valid states before retrying the operation.
 --
 --
 _InvalidStateException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidStateException =
-  _MatchServiceError serviceCatalog "InvalidStateException"
+_InvalidStateException
+  = _MatchServiceError serviceCatalog
+      "InvalidStateException"
 
+-- | The operation is not supported.
+--
+--
+_OperationNotSupportedException :: AsError a => Getting (First ServiceError) a ServiceError
+_OperationNotSupportedException
+  = _MatchServiceError serviceCatalog
+      "OperationNotSupportedException"
+
+-- | The specified resource was not found.
+--
+--
+_ResourceNotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
+_ResourceNotFoundException
+  = _MatchServiceError serviceCatalog
+      "ResourceNotFoundException"
+
+-- | An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Please use the AWS console to perform the migration process before retrying the operation.
+--
+--
+_TagOptionNotMigratedException :: AsError a => Getting (First ServiceError) a ServiceError
+_TagOptionNotMigratedException
+  = _MatchServiceError serviceCatalog
+      "TagOptionNotMigratedException"
+
+-- | The specified resource is a duplicate.
+--
+--
+_DuplicateResourceException :: AsError a => Getting (First ServiceError) a ServiceError
+_DuplicateResourceException
+  = _MatchServiceError serviceCatalog
+      "DuplicateResourceException"
+
+-- | One or more parameters provided to the operation are not valid.
+--
+--
+_InvalidParametersException :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidParametersException
+  = _MatchServiceError serviceCatalog
+      "InvalidParametersException"
 
 -- | The current limits of the service would have been exceeded by this operation. Decrease your resource use or increase your service limits and retry the operation.
 --
 --
 _LimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
-_LimitExceededException =
-  _MatchServiceError serviceCatalog "LimitExceededException"
-
+_LimitExceededException
+  = _MatchServiceError serviceCatalog
+      "LimitExceededException"
 
 -- | A resource that is currently in use. Ensure that the resource is not in use and retry the operation.
 --
 --
 _ResourceInUseException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceInUseException =
-  _MatchServiceError serviceCatalog "ResourceInUseException"
-
+_ResourceInUseException
+  = _MatchServiceError serviceCatalog
+      "ResourceInUseException"

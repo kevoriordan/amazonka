@@ -14,11 +14,11 @@
 module Test.AWS.Gen.CognitoIdentityProvider where
 
 import Data.Proxy
-import Network.AWS.CognitoIdentityProvider
-import Test.AWS.CognitoIdentityProvider.Internal
 import Test.AWS.Fixture
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.CognitoIdentityProvider
+import Test.AWS.CognitoIdentityProvider.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -33,6 +33,9 @@ import Test.Tasty
 --
 --         , requestUpdateUserPool $
 --             updateUserPool
+--
+--         , requestUpdateUserPoolDomain $
+--             updateUserPoolDomain
 --
 --         , requestDeleteUserPoolDomain $
 --             deleteUserPoolDomain
@@ -72,6 +75,9 @@ import Test.Tasty
 --
 --         , requestListUserImportJobs $
 --             listUserImportJobs
+--
+--         , requestListTagsForResource $
+--             listTagsForResource
 --
 --         , requestDescribeIdentityProvider $
 --             describeIdentityProvider
@@ -120,6 +126,9 @@ import Test.Tasty
 --
 --         , requestAdminUpdateAuthEventFeedback $
 --             adminUpdateAuthEventFeedback
+--
+--         , requestAdminSetUserPassword $
+--             adminSetUserPassword
 --
 --         , requestStartUserImportJob $
 --             startUserImportJob
@@ -238,6 +247,9 @@ import Test.Tasty
 --         , requestDeleteUser $
 --             deleteUser
 --
+--         , requestTagResource $
+--             tagResource
+--
 --         , requestCreateUserPoolClient $
 --             createUserPoolClient
 --
@@ -258,6 +270,9 @@ import Test.Tasty
 --
 --         , requestVerifySoftwareToken $
 --             verifySoftwareToken
+--
+--         , requestUntagResource $
+--             untagResource
 --
 --         , requestStopUserImportJob $
 --             stopUserImportJob
@@ -322,6 +337,9 @@ import Test.Tasty
 --         , responseUpdateUserPool $
 --             updateUserPoolResponse
 --
+--         , responseUpdateUserPoolDomain $
+--             updateUserPoolDomainResponse
+--
 --         , responseDeleteUserPoolDomain $
 --             deleteUserPoolDomainResponse
 --
@@ -360,6 +378,9 @@ import Test.Tasty
 --
 --         , responseListUserImportJobs $
 --             listUserImportJobsResponse
+--
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
 --
 --         , responseDescribeIdentityProvider $
 --             describeIdentityProviderResponse
@@ -408,6 +429,9 @@ import Test.Tasty
 --
 --         , responseAdminUpdateAuthEventFeedback $
 --             adminUpdateAuthEventFeedbackResponse
+--
+--         , responseAdminSetUserPassword $
+--             adminSetUserPasswordResponse
 --
 --         , responseStartUserImportJob $
 --             startUserImportJobResponse
@@ -526,6 +550,9 @@ import Test.Tasty
 --         , responseDeleteUser $
 --             deleteUserResponse
 --
+--         , responseTagResource $
+--             tagResourceResponse
+--
 --         , responseCreateUserPoolClient $
 --             createUserPoolClientResponse
 --
@@ -546,6 +573,9 @@ import Test.Tasty
 --
 --         , responseVerifySoftwareToken $
 --             verifySoftwareTokenResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
 --
 --         , responseStopUserImportJob $
 --             stopUserImportJobResponse
@@ -616,6 +646,11 @@ requestUpdateUserPool = req
     "UpdateUserPool"
     "fixture/UpdateUserPool.yaml"
 
+requestUpdateUserPoolDomain :: UpdateUserPoolDomain -> TestTree
+requestUpdateUserPoolDomain = req
+    "UpdateUserPoolDomain"
+    "fixture/UpdateUserPoolDomain.yaml"
+
 requestDeleteUserPoolDomain :: DeleteUserPoolDomain -> TestTree
 requestDeleteUserPoolDomain = req
     "DeleteUserPoolDomain"
@@ -680,6 +715,11 @@ requestListUserImportJobs :: ListUserImportJobs -> TestTree
 requestListUserImportJobs = req
     "ListUserImportJobs"
     "fixture/ListUserImportJobs.yaml"
+
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
 
 requestDescribeIdentityProvider :: DescribeIdentityProvider -> TestTree
 requestDescribeIdentityProvider = req
@@ -760,6 +800,11 @@ requestAdminUpdateAuthEventFeedback :: AdminUpdateAuthEventFeedback -> TestTree
 requestAdminUpdateAuthEventFeedback = req
     "AdminUpdateAuthEventFeedback"
     "fixture/AdminUpdateAuthEventFeedback.yaml"
+
+requestAdminSetUserPassword :: AdminSetUserPassword -> TestTree
+requestAdminSetUserPassword = req
+    "AdminSetUserPassword"
+    "fixture/AdminSetUserPassword.yaml"
 
 requestStartUserImportJob :: StartUserImportJob -> TestTree
 requestStartUserImportJob = req
@@ -956,6 +1001,11 @@ requestDeleteUser = req
     "DeleteUser"
     "fixture/DeleteUser.yaml"
 
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
+
 requestCreateUserPoolClient :: CreateUserPoolClient -> TestTree
 requestCreateUserPoolClient = req
     "CreateUserPoolClient"
@@ -990,6 +1040,11 @@ requestVerifySoftwareToken :: VerifySoftwareToken -> TestTree
 requestVerifySoftwareToken = req
     "VerifySoftwareToken"
     "fixture/VerifySoftwareToken.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
 
 requestStopUserImportJob :: StopUserImportJob -> TestTree
 requestStopUserImportJob = req
@@ -1097,6 +1152,13 @@ responseUpdateUserPool = res
     cognitoIdentityProvider
     (Proxy :: Proxy UpdateUserPool)
 
+responseUpdateUserPoolDomain :: UpdateUserPoolDomainResponse -> TestTree
+responseUpdateUserPoolDomain = res
+    "UpdateUserPoolDomainResponse"
+    "fixture/UpdateUserPoolDomainResponse.proto"
+    cognitoIdentityProvider
+    (Proxy :: Proxy UpdateUserPoolDomain)
+
 responseDeleteUserPoolDomain :: DeleteUserPoolDomainResponse -> TestTree
 responseDeleteUserPoolDomain = res
     "DeleteUserPoolDomainResponse"
@@ -1187,6 +1249,13 @@ responseListUserImportJobs = res
     "fixture/ListUserImportJobsResponse.proto"
     cognitoIdentityProvider
     (Proxy :: Proxy ListUserImportJobs)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    cognitoIdentityProvider
+    (Proxy :: Proxy ListTagsForResource)
 
 responseDescribeIdentityProvider :: DescribeIdentityProviderResponse -> TestTree
 responseDescribeIdentityProvider = res
@@ -1299,6 +1368,13 @@ responseAdminUpdateAuthEventFeedback = res
     "fixture/AdminUpdateAuthEventFeedbackResponse.proto"
     cognitoIdentityProvider
     (Proxy :: Proxy AdminUpdateAuthEventFeedback)
+
+responseAdminSetUserPassword :: AdminSetUserPasswordResponse -> TestTree
+responseAdminSetUserPassword = res
+    "AdminSetUserPasswordResponse"
+    "fixture/AdminSetUserPasswordResponse.proto"
+    cognitoIdentityProvider
+    (Proxy :: Proxy AdminSetUserPassword)
 
 responseStartUserImportJob :: StartUserImportJobResponse -> TestTree
 responseStartUserImportJob = res
@@ -1573,6 +1649,13 @@ responseDeleteUser = res
     cognitoIdentityProvider
     (Proxy :: Proxy DeleteUser)
 
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    cognitoIdentityProvider
+    (Proxy :: Proxy TagResource)
+
 responseCreateUserPoolClient :: CreateUserPoolClientResponse -> TestTree
 responseCreateUserPoolClient = res
     "CreateUserPoolClientResponse"
@@ -1621,6 +1704,13 @@ responseVerifySoftwareToken = res
     "fixture/VerifySoftwareTokenResponse.proto"
     cognitoIdentityProvider
     (Proxy :: Proxy VerifySoftwareToken)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    cognitoIdentityProvider
+    (Proxy :: Proxy UntagResource)
 
 responseStopUserImportJob :: StopUserImportJobResponse -> TestTree
 responseStopUserImportJob = res

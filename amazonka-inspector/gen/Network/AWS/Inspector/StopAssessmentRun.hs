@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopAssessmentRun' smart constructor.
-data StopAssessmentRun = StopAssessmentRun'
-  { _sarStopAction       :: !(Maybe StopAction)
-  , _sarAssessmentRunARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopAssessmentRun = StopAssessmentRun'{_sarStopAction
+                                            :: !(Maybe StopAction),
+                                            _sarAssessmentRunARN :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopAssessmentRun' with the minimum fields required to make a request.
 --
@@ -59,10 +58,9 @@ data StopAssessmentRun = StopAssessmentRun'
 stopAssessmentRun
     :: Text -- ^ 'sarAssessmentRunARN'
     -> StopAssessmentRun
-stopAssessmentRun pAssessmentRunARN_ =
-  StopAssessmentRun'
-    {_sarStopAction = Nothing, _sarAssessmentRunARN = pAssessmentRunARN_}
-
+stopAssessmentRun pAssessmentRunARN_
+  = StopAssessmentRun'{_sarStopAction = Nothing,
+                       _sarAssessmentRunARN = pAssessmentRunARN_}
 
 -- | An input option that can be set to either START_EVALUATION or SKIP_EVALUATION. START_EVALUATION (the default value), stops the AWS agent from collecting data and begins the results evaluation and the findings generation process. SKIP_EVALUATION cancels the assessment run immediately, after which no findings are generated.
 sarStopAction :: Lens' StopAssessmentRun (Maybe StopAction)
@@ -104,16 +102,15 @@ instance ToQuery StopAssessmentRun where
         toQuery = const mempty
 
 -- | /See:/ 'stopAssessmentRunResponse' smart constructor.
-data StopAssessmentRunResponse =
-  StopAssessmentRunResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopAssessmentRunResponse = StopAssessmentRunResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'StopAssessmentRunResponse' with the minimum fields required to make a request.
 --
 stopAssessmentRunResponse
     :: StopAssessmentRunResponse
-stopAssessmentRunResponse = StopAssessmentRunResponse'
-
+stopAssessmentRunResponse
+  = StopAssessmentRunResponse'
 
 instance NFData StopAssessmentRunResponse where

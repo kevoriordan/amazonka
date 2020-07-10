@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stops an in-progress operation on a stack set and its associated stack instances.
+-- Stops an in-progress operation on a stack set and its associated stack instances. 
 --
 --
 module Network.AWS.CloudFormation.StopStackSetOperation
@@ -45,11 +45,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'stopStackSetOperation' smart constructor.
-data StopStackSetOperation = StopStackSetOperation'
-  { _sssoStackSetName :: !Text
-  , _sssoOperationId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopStackSetOperation = StopStackSetOperation'{_sssoStackSetName
+                                                    :: !Text,
+                                                    _sssoOperationId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'StopStackSetOperation' with the minimum fields required to make a request.
 --
@@ -57,21 +57,21 @@ data StopStackSetOperation = StopStackSetOperation'
 --
 -- * 'sssoStackSetName' - The name or unique ID of the stack set that you want to stop the operation for.
 --
--- * 'sssoOperationId' - The ID of the stack operation.
+-- * 'sssoOperationId' - The ID of the stack operation. 
 stopStackSetOperation
     :: Text -- ^ 'sssoStackSetName'
     -> Text -- ^ 'sssoOperationId'
     -> StopStackSetOperation
-stopStackSetOperation pStackSetName_ pOperationId_ =
-  StopStackSetOperation'
-    {_sssoStackSetName = pStackSetName_, _sssoOperationId = pOperationId_}
-
+stopStackSetOperation pStackSetName_ pOperationId_
+  = StopStackSetOperation'{_sssoStackSetName =
+                             pStackSetName_,
+                           _sssoOperationId = pOperationId_}
 
 -- | The name or unique ID of the stack set that you want to stop the operation for.
 sssoStackSetName :: Lens' StopStackSetOperation Text
 sssoStackSetName = lens _sssoStackSetName (\ s a -> s{_sssoStackSetName = a})
 
--- | The ID of the stack operation.
+-- | The ID of the stack operation. 
 sssoOperationId :: Lens' StopStackSetOperation Text
 sssoOperationId = lens _sssoOperationId (\ s a -> s{_sssoOperationId = a})
 
@@ -104,10 +104,10 @@ instance ToQuery StopStackSetOperation where
                "OperationId" =: _sssoOperationId]
 
 -- | /See:/ 'stopStackSetOperationResponse' smart constructor.
-newtype StopStackSetOperationResponse = StopStackSetOperationResponse'
-  { _sssorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopStackSetOperationResponse = StopStackSetOperationResponse'{_sssorsResponseStatus
+                                                                       :: Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'StopStackSetOperationResponse' with the minimum fields required to make a request.
 --
@@ -117,9 +117,9 @@ newtype StopStackSetOperationResponse = StopStackSetOperationResponse'
 stopStackSetOperationResponse
     :: Int -- ^ 'sssorsResponseStatus'
     -> StopStackSetOperationResponse
-stopStackSetOperationResponse pResponseStatus_ =
-  StopStackSetOperationResponse' {_sssorsResponseStatus = pResponseStatus_}
-
+stopStackSetOperationResponse pResponseStatus_
+  = StopStackSetOperationResponse'{_sssorsResponseStatus
+                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 sssorsResponseStatus :: Lens' StopStackSetOperationResponse Int

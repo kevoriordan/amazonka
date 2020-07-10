@@ -21,7 +21,7 @@
 -- Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.
 --
 --
--- /Important:/ A software update forces a system restart of your gateway. You can minimize the chance of any disruption to your applications by increasing your iSCSI Initiators' timeouts. For more information about increasing iSCSI Initiator timeouts for Windows and Linux, see <http://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings Customizing Your Windows iSCSI Settings> and <http://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings Customizing Your Linux iSCSI Settings> , respectively.
+-- /Important:/ A software update forces a system restart of your gateway. You can minimize the chance of any disruption to your applications by increasing your iSCSI Initiators' timeouts. For more information about increasing iSCSI Initiator timeouts for Windows and Linux, see <https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings Customizing Your Windows iSCSI Settings> and <https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings Customizing Your Linux iSCSI Settings> , respectively.
 --
 module Network.AWS.StorageGateway.UpdateGatewaySoftwareNow
     (
@@ -46,15 +46,15 @@ import Network.AWS.Response
 import Network.AWS.StorageGateway.Types
 import Network.AWS.StorageGateway.Types.Product
 
--- | A JSON object containing the of the gateway to update.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway to update.
 --
 --
 --
 -- /See:/ 'updateGatewaySoftwareNow' smart constructor.
-newtype UpdateGatewaySoftwareNow = UpdateGatewaySoftwareNow'
-  { _ugsnGatewayARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateGatewaySoftwareNow = UpdateGatewaySoftwareNow'{_ugsnGatewayARN
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateGatewaySoftwareNow' with the minimum fields required to make a request.
 --
@@ -64,9 +64,9 @@ newtype UpdateGatewaySoftwareNow = UpdateGatewaySoftwareNow'
 updateGatewaySoftwareNow
     :: Text -- ^ 'ugsnGatewayARN'
     -> UpdateGatewaySoftwareNow
-updateGatewaySoftwareNow pGatewayARN_ =
-  UpdateGatewaySoftwareNow' {_ugsnGatewayARN = pGatewayARN_}
-
+updateGatewaySoftwareNow pGatewayARN_
+  = UpdateGatewaySoftwareNow'{_ugsnGatewayARN =
+                                pGatewayARN_}
 
 -- | Undocumented member.
 ugsnGatewayARN :: Lens' UpdateGatewaySoftwareNow Text
@@ -107,16 +107,20 @@ instance ToPath UpdateGatewaySoftwareNow where
 instance ToQuery UpdateGatewaySoftwareNow where
         toQuery = const mempty
 
--- | A JSON object containing the of the gateway that was updated.
+-- | A JSON object containing the Amazon Resource Name (ARN) of the gateway that was updated.
 --
 --
 --
 -- /See:/ 'updateGatewaySoftwareNowResponse' smart constructor.
-data UpdateGatewaySoftwareNowResponse = UpdateGatewaySoftwareNowResponse'
-  { _ugsnrsGatewayARN     :: !(Maybe Text)
-  , _ugsnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGatewaySoftwareNowResponse = UpdateGatewaySoftwareNowResponse'{_ugsnrsGatewayARN
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _ugsnrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'UpdateGatewaySoftwareNowResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +132,10 @@ data UpdateGatewaySoftwareNowResponse = UpdateGatewaySoftwareNowResponse'
 updateGatewaySoftwareNowResponse
     :: Int -- ^ 'ugsnrsResponseStatus'
     -> UpdateGatewaySoftwareNowResponse
-updateGatewaySoftwareNowResponse pResponseStatus_ =
-  UpdateGatewaySoftwareNowResponse'
-    {_ugsnrsGatewayARN = Nothing, _ugsnrsResponseStatus = pResponseStatus_}
-
+updateGatewaySoftwareNowResponse pResponseStatus_
+  = UpdateGatewaySoftwareNowResponse'{_ugsnrsGatewayARN
+                                        = Nothing,
+                                      _ugsnrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ugsnrsGatewayARN :: Lens' UpdateGatewaySoftwareNowResponse (Maybe Text)

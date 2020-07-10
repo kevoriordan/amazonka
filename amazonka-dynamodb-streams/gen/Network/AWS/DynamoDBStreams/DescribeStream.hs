@@ -53,18 +53,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeStream' smart constructor.
-data DescribeStream = DescribeStream'
-  { _dsExclusiveStartShardId :: !(Maybe Text)
-  , _dsLimit                 :: !(Maybe Nat)
-  , _dsStreamARN             :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStream = DescribeStream'{_dsExclusiveStartShardId
+                                      :: !(Maybe Text),
+                                      _dsLimit :: !(Maybe Nat),
+                                      _dsStreamARN :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsExclusiveStartShardId' - The shard ID of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedShardId@ in the previous operation.
+-- * 'dsExclusiveStartShardId' - The shard ID of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedShardId@ in the previous operation. 
 --
 -- * 'dsLimit' - The maximum number of shard objects to return. The upper limit is 100.
 --
@@ -72,15 +71,11 @@ data DescribeStream = DescribeStream'
 describeStream
     :: Text -- ^ 'dsStreamARN'
     -> DescribeStream
-describeStream pStreamARN_ =
-  DescribeStream'
-    { _dsExclusiveStartShardId = Nothing
-    , _dsLimit = Nothing
-    , _dsStreamARN = pStreamARN_
-    }
+describeStream pStreamARN_
+  = DescribeStream'{_dsExclusiveStartShardId = Nothing,
+                    _dsLimit = Nothing, _dsStreamARN = pStreamARN_}
 
-
--- | The shard ID of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedShardId@ in the previous operation.
+-- | The shard ID of the first item that this operation will evaluate. Use the value that was returned for @LastEvaluatedShardId@ in the previous operation. 
 dsExclusiveStartShardId :: Lens' DescribeStream (Maybe Text)
 dsExclusiveStartShardId = lens _dsExclusiveStartShardId (\ s a -> s{_dsExclusiveStartShardId = a})
 
@@ -135,11 +130,14 @@ instance ToQuery DescribeStream where
 --
 --
 -- /See:/ 'describeStreamResponse' smart constructor.
-data DescribeStreamResponse = DescribeStreamResponse'
-  { _dsrsStreamDescription :: !(Maybe StreamDescription)
-  , _dsrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStreamResponse = DescribeStreamResponse'{_dsrsStreamDescription
+                                                      ::
+                                                      !(Maybe
+                                                          StreamDescription),
+                                                      _dsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeStreamResponse' with the minimum fields required to make a request.
 --
@@ -151,10 +149,10 @@ data DescribeStreamResponse = DescribeStreamResponse'
 describeStreamResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DescribeStreamResponse
-describeStreamResponse pResponseStatus_ =
-  DescribeStreamResponse'
-    {_dsrsStreamDescription = Nothing, _dsrsResponseStatus = pResponseStatus_}
-
+describeStreamResponse pResponseStatus_
+  = DescribeStreamResponse'{_dsrsStreamDescription =
+                              Nothing,
+                            _dsrsResponseStatus = pResponseStatus_}
 
 -- | A complete description of the stream, including its creation date and time, the DynamoDB table associated with the stream, the shard IDs within the stream, and the beginning and ending sequence numbers of stream records within the shards.
 dsrsStreamDescription :: Lens' DescribeStreamResponse (Maybe StreamDescription)

@@ -51,12 +51,11 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'listInstances' smart constructor.
-data ListInstances = ListInstances'
-  { _liNextToken  :: !(Maybe Text)
-  , _liMaxResults :: !(Maybe Nat)
-  , _liServiceId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInstances = ListInstances'{_liNextToken ::
+                                    !(Maybe Text),
+                                    _liMaxResults :: !(Maybe Nat),
+                                    _liServiceId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListInstances' with the minimum fields required to make a request.
 --
@@ -64,25 +63,21 @@ data ListInstances = ListInstances'
 --
 -- * 'liNextToken' - For the first @ListInstances@ request, omit this value. If more than @MaxResults@ instances match the specified criteria, you can submit another @ListInstances@ request to get the next group of results. Specify the value of @NextToken@ from the previous response in the next request.
 --
--- * 'liMaxResults' - The maximum number of instances that you want Amazon Route 53 to return in the response to a @ListInstances@ request. If you don't specify a value for @MaxResults@ , Route 53 returns up to 100 instances.
+-- * 'liMaxResults' - The maximum number of instances that you want AWS Cloud Map to return in the response to a @ListInstances@ request. If you don't specify a value for @MaxResults@ , AWS Cloud Map returns up to 100 instances.
 --
 -- * 'liServiceId' - The ID of the service that you want to list instances for.
 listInstances
     :: Text -- ^ 'liServiceId'
     -> ListInstances
-listInstances pServiceId_ =
-  ListInstances'
-    { _liNextToken = Nothing
-    , _liMaxResults = Nothing
-    , _liServiceId = pServiceId_
-    }
-
+listInstances pServiceId_
+  = ListInstances'{_liNextToken = Nothing,
+                   _liMaxResults = Nothing, _liServiceId = pServiceId_}
 
 -- | For the first @ListInstances@ request, omit this value. If more than @MaxResults@ instances match the specified criteria, you can submit another @ListInstances@ request to get the next group of results. Specify the value of @NextToken@ from the previous response in the next request.
 liNextToken :: Lens' ListInstances (Maybe Text)
 liNextToken = lens _liNextToken (\ s a -> s{_liNextToken = a})
 
--- | The maximum number of instances that you want Amazon Route 53 to return in the response to a @ListInstances@ request. If you don't specify a value for @MaxResults@ , Route 53 returns up to 100 instances.
+-- | The maximum number of instances that you want AWS Cloud Map to return in the response to a @ListInstances@ request. If you don't specify a value for @MaxResults@ , AWS Cloud Map returns up to 100 instances.
 liMaxResults :: Lens' ListInstances (Maybe Natural)
 liMaxResults = lens _liMaxResults (\ s a -> s{_liMaxResults = a}) . mapping _Nat
 
@@ -137,12 +132,13 @@ instance ToQuery ListInstances where
         toQuery = const mempty
 
 -- | /See:/ 'listInstancesResponse' smart constructor.
-data ListInstancesResponse = ListInstancesResponse'
-  { _lirsNextToken      :: !(Maybe Text)
-  , _lirsInstances      :: !(Maybe [InstanceSummary])
-  , _lirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListInstancesResponse = ListInstancesResponse'{_lirsNextToken
+                                                    :: !(Maybe Text),
+                                                    _lirsInstances ::
+                                                    !(Maybe [InstanceSummary]),
+                                                    _lirsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
 --
@@ -156,13 +152,10 @@ data ListInstancesResponse = ListInstancesResponse'
 listInstancesResponse
     :: Int -- ^ 'lirsResponseStatus'
     -> ListInstancesResponse
-listInstancesResponse pResponseStatus_ =
-  ListInstancesResponse'
-    { _lirsNextToken = Nothing
-    , _lirsInstances = Nothing
-    , _lirsResponseStatus = pResponseStatus_
-    }
-
+listInstancesResponse pResponseStatus_
+  = ListInstancesResponse'{_lirsNextToken = Nothing,
+                           _lirsInstances = Nothing,
+                           _lirsResponseStatus = pResponseStatus_}
 
 -- | If more than @MaxResults@ instances match the specified criteria, you can submit another @ListInstances@ request to get the next group of results. Specify the value of @NextToken@ from the previous response in the next request.
 lirsNextToken :: Lens' ListInstancesResponse (Maybe Text)

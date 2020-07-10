@@ -45,11 +45,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateSkillGroupWithRoom' smart constructor.
-data AssociateSkillGroupWithRoom = AssociateSkillGroupWithRoom'
-  { _asgwrSkillGroupARN :: !(Maybe Text)
-  , _asgwrRoomARN       :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateSkillGroupWithRoom = AssociateSkillGroupWithRoom'{_asgwrSkillGroupARN
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _asgwrRoomARN ::
+                                                                !(Maybe Text)}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AssociateSkillGroupWithRoom' with the minimum fields required to make a request.
 --
@@ -60,10 +62,10 @@ data AssociateSkillGroupWithRoom = AssociateSkillGroupWithRoom'
 -- * 'asgwrRoomARN' - The ARN of the room with which to associate the skill group. Required.
 associateSkillGroupWithRoom
     :: AssociateSkillGroupWithRoom
-associateSkillGroupWithRoom =
-  AssociateSkillGroupWithRoom'
-    {_asgwrSkillGroupARN = Nothing, _asgwrRoomARN = Nothing}
-
+associateSkillGroupWithRoom
+  = AssociateSkillGroupWithRoom'{_asgwrSkillGroupARN =
+                                   Nothing,
+                                 _asgwrRoomARN = Nothing}
 
 -- | The ARN of the skill group to associate with a room. Required.
 asgwrSkillGroupARN :: Lens' AssociateSkillGroupWithRoom (Maybe Text)
@@ -111,10 +113,11 @@ instance ToQuery AssociateSkillGroupWithRoom where
         toQuery = const mempty
 
 -- | /See:/ 'associateSkillGroupWithRoomResponse' smart constructor.
-newtype AssociateSkillGroupWithRoomResponse = AssociateSkillGroupWithRoomResponse'
-  { _asgwrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AssociateSkillGroupWithRoomResponse = AssociateSkillGroupWithRoomResponse'{_asgwrrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'AssociateSkillGroupWithRoomResponse' with the minimum fields required to make a request.
 --
@@ -124,10 +127,9 @@ newtype AssociateSkillGroupWithRoomResponse = AssociateSkillGroupWithRoomRespons
 associateSkillGroupWithRoomResponse
     :: Int -- ^ 'asgwrrsResponseStatus'
     -> AssociateSkillGroupWithRoomResponse
-associateSkillGroupWithRoomResponse pResponseStatus_ =
-  AssociateSkillGroupWithRoomResponse'
-    {_asgwrrsResponseStatus = pResponseStatus_}
-
+associateSkillGroupWithRoomResponse pResponseStatus_
+  = AssociateSkillGroupWithRoomResponse'{_asgwrrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 asgwrrsResponseStatus :: Lens' AssociateSkillGroupWithRoomResponse Int

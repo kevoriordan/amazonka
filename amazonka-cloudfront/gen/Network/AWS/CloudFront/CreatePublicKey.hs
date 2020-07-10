@@ -47,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createPublicKey' smart constructor.
-newtype CreatePublicKey = CreatePublicKey'
-  { _cpkPublicKeyConfig :: PublicKeyConfig
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreatePublicKey = CreatePublicKey'{_cpkPublicKeyConfig
+                                           :: PublicKeyConfig}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreatePublicKey' with the minimum fields required to make a request.
 --
@@ -60,9 +59,9 @@ newtype CreatePublicKey = CreatePublicKey'
 createPublicKey
     :: PublicKeyConfig -- ^ 'cpkPublicKeyConfig'
     -> CreatePublicKey
-createPublicKey pPublicKeyConfig_ =
-  CreatePublicKey' {_cpkPublicKeyConfig = pPublicKeyConfig_}
-
+createPublicKey pPublicKeyConfig_
+  = CreatePublicKey'{_cpkPublicKeyConfig =
+                       pPublicKeyConfig_}
 
 -- | The request to add a public key to CloudFront.
 cpkPublicKeyConfig :: Lens' CreatePublicKey PublicKeyConfig
@@ -86,7 +85,7 @@ instance NFData CreatePublicKey where
 instance ToElement CreatePublicKey where
         toElement
           = mkElement
-              "{http://cloudfront.amazonaws.com/doc/2017-10-30/}PublicKeyConfig"
+              "{http://cloudfront.amazonaws.com/doc/2019-03-26/}PublicKeyConfig"
               .
               _cpkPublicKeyConfig
 
@@ -94,19 +93,22 @@ instance ToHeaders CreatePublicKey where
         toHeaders = const mempty
 
 instance ToPath CreatePublicKey where
-        toPath = const "/2017-10-30/public-key"
+        toPath = const "/2019-03-26/public-key"
 
 instance ToQuery CreatePublicKey where
         toQuery = const mempty
 
 -- | /See:/ 'createPublicKeyResponse' smart constructor.
-data CreatePublicKeyResponse = CreatePublicKeyResponse'
-  { _cpkrsETag           :: !(Maybe Text)
-  , _cpkrsLocation       :: !(Maybe Text)
-  , _cpkrsPublicKey      :: !(Maybe PublicKey)
-  , _cpkrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreatePublicKeyResponse = CreatePublicKeyResponse'{_cpkrsETag
+                                                        :: !(Maybe Text),
+                                                        _cpkrsLocation ::
+                                                        !(Maybe Text),
+                                                        _cpkrsPublicKey ::
+                                                        !(Maybe PublicKey),
+                                                        _cpkrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreatePublicKeyResponse' with the minimum fields required to make a request.
 --
@@ -122,14 +124,11 @@ data CreatePublicKeyResponse = CreatePublicKeyResponse'
 createPublicKeyResponse
     :: Int -- ^ 'cpkrsResponseStatus'
     -> CreatePublicKeyResponse
-createPublicKeyResponse pResponseStatus_ =
-  CreatePublicKeyResponse'
-    { _cpkrsETag = Nothing
-    , _cpkrsLocation = Nothing
-    , _cpkrsPublicKey = Nothing
-    , _cpkrsResponseStatus = pResponseStatus_
-    }
-
+createPublicKeyResponse pResponseStatus_
+  = CreatePublicKeyResponse'{_cpkrsETag = Nothing,
+                             _cpkrsLocation = Nothing,
+                             _cpkrsPublicKey = Nothing,
+                             _cpkrsResponseStatus = pResponseStatus_}
 
 -- | The current version of the public key. For example: @E2QWRUHAPOMQZL@ .
 cpkrsETag :: Lens' CreatePublicKeyResponse (Maybe Text)

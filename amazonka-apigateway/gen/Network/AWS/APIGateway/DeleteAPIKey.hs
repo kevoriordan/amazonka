@@ -46,10 +46,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteAPIKey' smart constructor.
-newtype DeleteAPIKey = DeleteAPIKey'
-  { _dakApiKey :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteAPIKey = DeleteAPIKey'{_dakApiKey ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAPIKey' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype DeleteAPIKey = DeleteAPIKey'
 deleteAPIKey
     :: Text -- ^ 'dakApiKey'
     -> DeleteAPIKey
-deleteAPIKey pApiKey_ = DeleteAPIKey' {_dakApiKey = pApiKey_}
-
+deleteAPIKey pApiKey_
+  = DeleteAPIKey'{_dakApiKey = pApiKey_}
 
 -- | [Required] The identifier of the 'ApiKey' resource to be deleted.
 dakApiKey :: Lens' DeleteAPIKey Text
@@ -89,16 +88,13 @@ instance ToQuery DeleteAPIKey where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAPIKeyResponse' smart constructor.
-data DeleteAPIKeyResponse =
-  DeleteAPIKeyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAPIKeyResponse = DeleteAPIKeyResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAPIKeyResponse' with the minimum fields required to make a request.
 --
 deleteAPIKeyResponse
     :: DeleteAPIKeyResponse
 deleteAPIKeyResponse = DeleteAPIKeyResponse'
-
 
 instance NFData DeleteAPIKeyResponse where

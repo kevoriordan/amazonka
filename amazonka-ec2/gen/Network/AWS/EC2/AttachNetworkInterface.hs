@@ -52,13 +52,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'attachNetworkInterface' smart constructor.
-data AttachNetworkInterface = AttachNetworkInterface'
-  { _aniDryRun             :: !(Maybe Bool)
-  , _aniDeviceIndex        :: !Int
-  , _aniInstanceId         :: !Text
-  , _aniNetworkInterfaceId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachNetworkInterface = AttachNetworkInterface'{_aniDryRun
+                                                      :: !(Maybe Bool),
+                                                      _aniDeviceIndex :: !Int,
+                                                      _aniInstanceId :: !Text,
+                                                      _aniNetworkInterfaceId ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AttachNetworkInterface' with the minimum fields required to make a request.
 --
@@ -76,14 +77,12 @@ attachNetworkInterface
     -> Text -- ^ 'aniInstanceId'
     -> Text -- ^ 'aniNetworkInterfaceId'
     -> AttachNetworkInterface
-attachNetworkInterface pDeviceIndex_ pInstanceId_ pNetworkInterfaceId_ =
-  AttachNetworkInterface'
-    { _aniDryRun = Nothing
-    , _aniDeviceIndex = pDeviceIndex_
-    , _aniInstanceId = pInstanceId_
-    , _aniNetworkInterfaceId = pNetworkInterfaceId_
-    }
-
+attachNetworkInterface pDeviceIndex_ pInstanceId_
+  pNetworkInterfaceId_
+  = AttachNetworkInterface'{_aniDryRun = Nothing,
+                            _aniDeviceIndex = pDeviceIndex_,
+                            _aniInstanceId = pInstanceId_,
+                            _aniNetworkInterfaceId = pNetworkInterfaceId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 aniDryRun :: Lens' AttachNetworkInterface (Maybe Bool)
@@ -137,11 +136,14 @@ instance ToQuery AttachNetworkInterface where
 --
 --
 -- /See:/ 'attachNetworkInterfaceResponse' smart constructor.
-data AttachNetworkInterfaceResponse = AttachNetworkInterfaceResponse'
-  { _anirsAttachmentId   :: !(Maybe Text)
-  , _anirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachNetworkInterfaceResponse = AttachNetworkInterfaceResponse'{_anirsAttachmentId
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _anirsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'AttachNetworkInterfaceResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +155,10 @@ data AttachNetworkInterfaceResponse = AttachNetworkInterfaceResponse'
 attachNetworkInterfaceResponse
     :: Int -- ^ 'anirsResponseStatus'
     -> AttachNetworkInterfaceResponse
-attachNetworkInterfaceResponse pResponseStatus_ =
-  AttachNetworkInterfaceResponse'
-    {_anirsAttachmentId = Nothing, _anirsResponseStatus = pResponseStatus_}
-
+attachNetworkInterfaceResponse pResponseStatus_
+  = AttachNetworkInterfaceResponse'{_anirsAttachmentId
+                                      = Nothing,
+                                    _anirsResponseStatus = pResponseStatus_}
 
 -- | The ID of the network interface attachment.
 anirsAttachmentId :: Lens' AttachNetworkInterfaceResponse (Maybe Text)

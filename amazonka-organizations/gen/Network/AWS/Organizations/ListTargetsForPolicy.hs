@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all the roots, OUs, and accounts to which the specified policy is attached.
+-- Lists all the roots, organizational units (OUs), and accounts that the specified policy is attached to.
 --
 --
--- This operation can be called only from the organization's master account.
+-- This operation can be called only from the organization's master account or by a member account that is a delegated administrator for an AWS service.
 --
 --
 -- This operation returns paginated results.
@@ -53,42 +53,39 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTargetsForPolicy' smart constructor.
-data ListTargetsForPolicy = ListTargetsForPolicy'
-  { _ltfpNextToken  :: !(Maybe Text)
-  , _ltfpMaxResults :: !(Maybe Nat)
-  , _ltfpPolicyId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTargetsForPolicy = ListTargetsForPolicy'{_ltfpNextToken
+                                                  :: !(Maybe Text),
+                                                  _ltfpMaxResults ::
+                                                  !(Maybe Nat),
+                                                  _ltfpPolicyId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTargetsForPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltfpNextToken' - Use this parameter if you receive a @NextToken@ response in a previous request that indicates that there is more output available. Set it to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
+-- * 'ltfpNextToken' - The parameter for receiving additional results if you receive a @NextToken@ response in a previous request. A @NextToken@ response indicates that more output is available. Set this parameter to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
 --
--- * 'ltfpMaxResults' - (Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
+-- * 'ltfpMaxResults' - The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
 --
--- * 'ltfpPolicyId' - The unique identifier (ID) of the policy for which you want to know its attachments. The <http://wikipedia.org/wiki/regex regex pattern> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.
+-- * 'ltfpPolicyId' - The unique identifier (ID) of the policy whose attachments you want to know. The <http://wikipedia.org/wiki/regex regex pattern> for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
 listTargetsForPolicy
     :: Text -- ^ 'ltfpPolicyId'
     -> ListTargetsForPolicy
-listTargetsForPolicy pPolicyId_ =
-  ListTargetsForPolicy'
-    { _ltfpNextToken = Nothing
-    , _ltfpMaxResults = Nothing
-    , _ltfpPolicyId = pPolicyId_
-    }
+listTargetsForPolicy pPolicyId_
+  = ListTargetsForPolicy'{_ltfpNextToken = Nothing,
+                          _ltfpMaxResults = Nothing,
+                          _ltfpPolicyId = pPolicyId_}
 
-
--- | Use this parameter if you receive a @NextToken@ response in a previous request that indicates that there is more output available. Set it to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
+-- | The parameter for receiving additional results if you receive a @NextToken@ response in a previous request. A @NextToken@ response indicates that more output is available. Set this parameter to the value of the previous call's @NextToken@ response to indicate where the output should continue from.
 ltfpNextToken :: Lens' ListTargetsForPolicy (Maybe Text)
 ltfpNextToken = lens _ltfpNextToken (\ s a -> s{_ltfpNextToken = a})
 
--- | (Optional) Use this to limit the number of results you want included in the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
+-- | The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the @NextToken@ response element is present and has a value (is not null). Include that value as the @NextToken@ request parameter in the next call to the operation to get the next part of the results. Note that Organizations might return fewer results than the maximum even when there are more results available. You should check @NextToken@ after every operation to ensure that you receive all of the results.
 ltfpMaxResults :: Lens' ListTargetsForPolicy (Maybe Natural)
 ltfpMaxResults = lens _ltfpMaxResults (\ s a -> s{_ltfpMaxResults = a}) . mapping _Nat
 
--- | The unique identifier (ID) of the policy for which you want to know its attachments. The <http://wikipedia.org/wiki/regex regex pattern> for a policy ID string requires "p-" followed by from 8 to 128 lower-case letters or digits.
+-- | The unique identifier (ID) of the policy whose attachments you want to know. The <http://wikipedia.org/wiki/regex regex pattern> for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
 ltfpPolicyId :: Lens' ListTargetsForPolicy Text
 ltfpPolicyId = lens _ltfpPolicyId (\ s a -> s{_ltfpPolicyId = a})
 
@@ -139,18 +136,23 @@ instance ToQuery ListTargetsForPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'listTargetsForPolicyResponse' smart constructor.
-data ListTargetsForPolicyResponse = ListTargetsForPolicyResponse'
-  { _ltfprsNextToken      :: !(Maybe Text)
-  , _ltfprsTargets        :: !(Maybe [PolicyTargetSummary])
-  , _ltfprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTargetsForPolicyResponse = ListTargetsForPolicyResponse'{_ltfprsNextToken
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _ltfprsTargets
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [PolicyTargetSummary]),
+                                                                  _ltfprsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListTargetsForPolicyResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltfprsNextToken' - If present, this value indicates that there is more output available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
+-- * 'ltfprsNextToken' - If present, indicates that more output is available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
 --
 -- * 'ltfprsTargets' - A list of structures, each of which contains details about one of the entities to which the specified policy is attached.
 --
@@ -158,15 +160,13 @@ data ListTargetsForPolicyResponse = ListTargetsForPolicyResponse'
 listTargetsForPolicyResponse
     :: Int -- ^ 'ltfprsResponseStatus'
     -> ListTargetsForPolicyResponse
-listTargetsForPolicyResponse pResponseStatus_ =
-  ListTargetsForPolicyResponse'
-    { _ltfprsNextToken = Nothing
-    , _ltfprsTargets = Nothing
-    , _ltfprsResponseStatus = pResponseStatus_
-    }
+listTargetsForPolicyResponse pResponseStatus_
+  = ListTargetsForPolicyResponse'{_ltfprsNextToken =
+                                    Nothing,
+                                  _ltfprsTargets = Nothing,
+                                  _ltfprsResponseStatus = pResponseStatus_}
 
-
--- | If present, this value indicates that there is more output available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
+-- | If present, indicates that more output is available than is included in the current response. Use this value in the @NextToken@ request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the @NextToken@ response element comes back as @null@ .
 ltfprsNextToken :: Lens' ListTargetsForPolicyResponse (Maybe Text)
 ltfprsNextToken = lens _ltfprsNextToken (\ s a -> s{_ltfprsNextToken = a})
 

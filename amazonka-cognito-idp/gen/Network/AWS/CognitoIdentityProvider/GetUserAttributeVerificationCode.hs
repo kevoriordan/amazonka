@@ -27,6 +27,7 @@ module Network.AWS.CognitoIdentityProvider.GetUserAttributeVerificationCode
       getUserAttributeVerificationCode
     , GetUserAttributeVerificationCode
     -- * Request Lenses
+    , guavcClientMetadata
     , guavcAccessToken
     , guavcAttributeName
 
@@ -50,15 +51,27 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getUserAttributeVerificationCode' smart constructor.
-data GetUserAttributeVerificationCode = GetUserAttributeVerificationCode'
-  { _guavcAccessToken   :: !(Sensitive Text)
-  , _guavcAttributeName :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetUserAttributeVerificationCode = GetUserAttributeVerificationCode'{_guavcClientMetadata
+                                                                          ::
+                                                                          !(Maybe
+                                                                              (Map
+                                                                                 Text
+                                                                                 Text)),
+                                                                          _guavcAccessToken
+                                                                          ::
+                                                                          !(Sensitive
+                                                                              Text),
+                                                                          _guavcAttributeName
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Show, Data, Typeable,
+                                                    Generic)
 
 -- | Creates a value of 'GetUserAttributeVerificationCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'guavcClientMetadata' - A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the GetUserAttributeVerificationCode API action, Amazon Cognito invokes the function that is assigned to the /custom message/ trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a @clientMetadata@ attribute, which provides the data that you assigned to the ClientMetadata parameter in your GetUserAttributeVerificationCode request. In your function code in AWS Lambda, you can process the @clientMetadata@ value to enhance your workflow for your specific needs. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html Customizing User Pool Workflows with Lambda Triggers> in the /Amazon Cognito Developer Guide/ .
 --
 -- * 'guavcAccessToken' - The access token returned by the server response to get the user attribute verification code.
 --
@@ -67,12 +80,17 @@ getUserAttributeVerificationCode
     :: Text -- ^ 'guavcAccessToken'
     -> Text -- ^ 'guavcAttributeName'
     -> GetUserAttributeVerificationCode
-getUserAttributeVerificationCode pAccessToken_ pAttributeName_ =
-  GetUserAttributeVerificationCode'
-    { _guavcAccessToken = _Sensitive # pAccessToken_
-    , _guavcAttributeName = pAttributeName_
-    }
+getUserAttributeVerificationCode pAccessToken_
+  pAttributeName_
+  = GetUserAttributeVerificationCode'{_guavcClientMetadata
+                                        = Nothing,
+                                      _guavcAccessToken =
+                                        _Sensitive # pAccessToken_,
+                                      _guavcAttributeName = pAttributeName_}
 
+-- | A map of custom key-value pairs that you can provide as input for any custom workflows that this action triggers.  You create custom workflows by assigning AWS Lambda functions to user pool triggers. When you use the GetUserAttributeVerificationCode API action, Amazon Cognito invokes the function that is assigned to the /custom message/ trigger. When Amazon Cognito invokes this function, it passes a JSON payload, which the function receives as input. This payload contains a @clientMetadata@ attribute, which provides the data that you assigned to the ClientMetadata parameter in your GetUserAttributeVerificationCode request. In your function code in AWS Lambda, you can process the @clientMetadata@ value to enhance your workflow for your specific needs. For more information, see <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html Customizing User Pool Workflows with Lambda Triggers> in the /Amazon Cognito Developer Guide/ .
+guavcClientMetadata :: Lens' GetUserAttributeVerificationCode (HashMap Text Text)
+guavcClientMetadata = lens _guavcClientMetadata (\ s a -> s{_guavcClientMetadata = a}) . _Default . _Map
 
 -- | The access token returned by the server response to get the user attribute verification code.
 guavcAccessToken :: Lens' GetUserAttributeVerificationCode Text
@@ -116,7 +134,8 @@ instance ToJSON GetUserAttributeVerificationCode
         toJSON GetUserAttributeVerificationCode'{..}
           = object
               (catMaybes
-                 [Just ("AccessToken" .= _guavcAccessToken),
+                 [("ClientMetadata" .=) <$> _guavcClientMetadata,
+                  Just ("AccessToken" .= _guavcAccessToken),
                   Just ("AttributeName" .= _guavcAttributeName)])
 
 instance ToPath GetUserAttributeVerificationCode
@@ -132,11 +151,16 @@ instance ToQuery GetUserAttributeVerificationCode
 --
 --
 -- /See:/ 'getUserAttributeVerificationCodeResponse' smart constructor.
-data GetUserAttributeVerificationCodeResponse = GetUserAttributeVerificationCodeResponse'
-  { _guavcrsCodeDeliveryDetails :: !(Maybe CodeDeliveryDetailsType)
-  , _guavcrsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUserAttributeVerificationCodeResponse = GetUserAttributeVerificationCodeResponse'{_guavcrsCodeDeliveryDetails
+                                                                                          ::
+                                                                                          !(Maybe
+                                                                                              CodeDeliveryDetailsType),
+                                                                                          _guavcrsResponseStatus
+                                                                                          ::
+                                                                                          !Int}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'GetUserAttributeVerificationCodeResponse' with the minimum fields required to make a request.
 --
@@ -148,12 +172,12 @@ data GetUserAttributeVerificationCodeResponse = GetUserAttributeVerificationCode
 getUserAttributeVerificationCodeResponse
     :: Int -- ^ 'guavcrsResponseStatus'
     -> GetUserAttributeVerificationCodeResponse
-getUserAttributeVerificationCodeResponse pResponseStatus_ =
-  GetUserAttributeVerificationCodeResponse'
-    { _guavcrsCodeDeliveryDetails = Nothing
-    , _guavcrsResponseStatus = pResponseStatus_
-    }
-
+getUserAttributeVerificationCodeResponse
+  pResponseStatus_
+  = GetUserAttributeVerificationCodeResponse'{_guavcrsCodeDeliveryDetails
+                                                = Nothing,
+                                              _guavcrsResponseStatus =
+                                                pResponseStatus_}
 
 -- | The code delivery details returned by the server in response to the request to get the user attribute verification code.
 guavcrsCodeDeliveryDetails :: Lens' GetUserAttributeVerificationCodeResponse (Maybe CodeDeliveryDetailsType)

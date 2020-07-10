@@ -43,17 +43,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeAdjustmentTypes' smart constructor.
-data DescribeAdjustmentTypes =
-  DescribeAdjustmentTypes'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAdjustmentTypes = DescribeAdjustmentTypes'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DescribeAdjustmentTypes' with the minimum fields required to make a request.
 --
 describeAdjustmentTypes
     :: DescribeAdjustmentTypes
 describeAdjustmentTypes = DescribeAdjustmentTypes'
-
 
 instance AWSRequest DescribeAdjustmentTypes where
         type Rs DescribeAdjustmentTypes =
@@ -86,11 +84,14 @@ instance ToQuery DescribeAdjustmentTypes where
                   "Version" =: ("2011-01-01" :: ByteString)])
 
 -- | /See:/ 'describeAdjustmentTypesResponse' smart constructor.
-data DescribeAdjustmentTypesResponse = DescribeAdjustmentTypesResponse'
-  { _datrsAdjustmentTypes :: !(Maybe [AdjustmentType])
-  , _datrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeAdjustmentTypesResponse = DescribeAdjustmentTypesResponse'{_datrsAdjustmentTypes
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [AdjustmentType]),
+                                                                        _datrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeAdjustmentTypesResponse' with the minimum fields required to make a request.
 --
@@ -102,10 +103,10 @@ data DescribeAdjustmentTypesResponse = DescribeAdjustmentTypesResponse'
 describeAdjustmentTypesResponse
     :: Int -- ^ 'datrsResponseStatus'
     -> DescribeAdjustmentTypesResponse
-describeAdjustmentTypesResponse pResponseStatus_ =
-  DescribeAdjustmentTypesResponse'
-    {_datrsAdjustmentTypes = Nothing, _datrsResponseStatus = pResponseStatus_}
-
+describeAdjustmentTypesResponse pResponseStatus_
+  = DescribeAdjustmentTypesResponse'{_datrsAdjustmentTypes
+                                       = Nothing,
+                                     _datrsResponseStatus = pResponseStatus_}
 
 -- | The policy adjustment types.
 datrsAdjustmentTypes :: Lens' DescribeAdjustmentTypesResponse [AdjustmentType]

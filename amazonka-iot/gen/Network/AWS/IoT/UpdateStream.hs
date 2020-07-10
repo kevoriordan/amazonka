@@ -51,13 +51,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateStream' smart constructor.
-data UpdateStream = UpdateStream'
-  { _usFiles       :: !(Maybe (List1 StreamFile))
-  , _usDescription :: !(Maybe Text)
-  , _usRoleARN     :: !(Maybe Text)
-  , _usStreamId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateStream = UpdateStream'{_usFiles ::
+                                  !(Maybe (List1 StreamFile)),
+                                  _usDescription :: !(Maybe Text),
+                                  _usRoleARN :: !(Maybe Text),
+                                  _usStreamId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateStream' with the minimum fields required to make a request.
 --
@@ -73,14 +72,10 @@ data UpdateStream = UpdateStream'
 updateStream
     :: Text -- ^ 'usStreamId'
     -> UpdateStream
-updateStream pStreamId_ =
-  UpdateStream'
-    { _usFiles = Nothing
-    , _usDescription = Nothing
-    , _usRoleARN = Nothing
-    , _usStreamId = pStreamId_
-    }
-
+updateStream pStreamId_
+  = UpdateStream'{_usFiles = Nothing,
+                  _usDescription = Nothing, _usRoleARN = Nothing,
+                  _usStreamId = pStreamId_}
 
 -- | The files associated with the stream.
 usFiles :: Lens' UpdateStream (Maybe (NonEmpty StreamFile))
@@ -133,14 +128,16 @@ instance ToQuery UpdateStream where
         toQuery = const mempty
 
 -- | /See:/ 'updateStreamResponse' smart constructor.
-data UpdateStreamResponse = UpdateStreamResponse'
-  { _usrsStreamVersion  :: !(Maybe Nat)
-  , _usrsStreamARN      :: !(Maybe Text)
-  , _usrsDescription    :: !(Maybe Text)
-  , _usrsStreamId       :: !(Maybe Text)
-  , _usrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateStreamResponse = UpdateStreamResponse'{_usrsStreamVersion
+                                                  :: !(Maybe Nat),
+                                                  _usrsStreamARN ::
+                                                  !(Maybe Text),
+                                                  _usrsDescription ::
+                                                  !(Maybe Text),
+                                                  _usrsStreamId ::
+                                                  !(Maybe Text),
+                                                  _usrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateStreamResponse' with the minimum fields required to make a request.
 --
@@ -158,15 +155,11 @@ data UpdateStreamResponse = UpdateStreamResponse'
 updateStreamResponse
     :: Int -- ^ 'usrsResponseStatus'
     -> UpdateStreamResponse
-updateStreamResponse pResponseStatus_ =
-  UpdateStreamResponse'
-    { _usrsStreamVersion = Nothing
-    , _usrsStreamARN = Nothing
-    , _usrsDescription = Nothing
-    , _usrsStreamId = Nothing
-    , _usrsResponseStatus = pResponseStatus_
-    }
-
+updateStreamResponse pResponseStatus_
+  = UpdateStreamResponse'{_usrsStreamVersion = Nothing,
+                          _usrsStreamARN = Nothing, _usrsDescription = Nothing,
+                          _usrsStreamId = Nothing,
+                          _usrsResponseStatus = pResponseStatus_}
 
 -- | The stream version.
 usrsStreamVersion :: Lens' UpdateStreamResponse (Maybe Natural)

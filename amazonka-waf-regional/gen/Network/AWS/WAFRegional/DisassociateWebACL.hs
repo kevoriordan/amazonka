@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a web ACL from the specified resource.
+-- Removes a web ACL from the specified resource, either an application load balancer or Amazon API Gateway stage.
 --
 --
 module Network.AWS.WAFRegional.DisassociateWebACL
@@ -44,24 +44,24 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'disassociateWebACL' smart constructor.
-newtype DisassociateWebACL = DisassociateWebACL'
-  { _dwaResourceARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateWebACL = DisassociateWebACL'{_dwaResourceARN
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DisassociateWebACL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dwaResourceARN' - The ARN (Amazon Resource Name) of the resource from which the web ACL is being removed.
+-- * 'dwaResourceARN' - The ARN (Amazon Resource Name) of the resource from which the web ACL is being removed, either an application load balancer or Amazon API Gateway stage. The ARN should be in one of the following formats:     * For an Application Load Balancer: @arn:aws:elasticloadbalancing:/region/ :/account-id/ :loadbalancer/app//load-balancer-name/ //load-balancer-id/ @      * For an Amazon API Gateway stage: @arn:aws:apigateway:/region/ ::/restapis//api-id/ /stages//stage-name/ @ 
 disassociateWebACL
     :: Text -- ^ 'dwaResourceARN'
     -> DisassociateWebACL
-disassociateWebACL pResourceARN_ =
-  DisassociateWebACL' {_dwaResourceARN = pResourceARN_}
+disassociateWebACL pResourceARN_
+  = DisassociateWebACL'{_dwaResourceARN =
+                          pResourceARN_}
 
-
--- | The ARN (Amazon Resource Name) of the resource from which the web ACL is being removed.
+-- | The ARN (Amazon Resource Name) of the resource from which the web ACL is being removed, either an application load balancer or Amazon API Gateway stage. The ARN should be in one of the following formats:     * For an Application Load Balancer: @arn:aws:elasticloadbalancing:/region/ :/account-id/ :loadbalancer/app//load-balancer-name/ //load-balancer-id/ @      * For an Amazon API Gateway stage: @arn:aws:apigateway:/region/ ::/restapis//api-id/ /stages//stage-name/ @ 
 dwaResourceARN :: Lens' DisassociateWebACL Text
 dwaResourceARN = lens _dwaResourceARN (\ s a -> s{_dwaResourceARN = a})
 
@@ -100,10 +100,10 @@ instance ToQuery DisassociateWebACL where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateWebACLResponse' smart constructor.
-newtype DisassociateWebACLResponse = DisassociateWebACLResponse'
-  { _dwaclrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateWebACLResponse = DisassociateWebACLResponse'{_dwaclrsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DisassociateWebACLResponse' with the minimum fields required to make a request.
 --
@@ -113,9 +113,9 @@ newtype DisassociateWebACLResponse = DisassociateWebACLResponse'
 disassociateWebACLResponse
     :: Int -- ^ 'dwaclrsResponseStatus'
     -> DisassociateWebACLResponse
-disassociateWebACLResponse pResponseStatus_ =
-  DisassociateWebACLResponse' {_dwaclrsResponseStatus = pResponseStatus_}
-
+disassociateWebACLResponse pResponseStatus_
+  = DisassociateWebACLResponse'{_dwaclrsResponseStatus
+                                  = pResponseStatus_}
 
 -- | -- | The response status code.
 dwaclrsResponseStatus :: Lens' DisassociateWebACLResponse Int

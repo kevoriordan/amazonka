@@ -21,7 +21,7 @@
 -- Describes the results of specified commands.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeCommands
     (
@@ -49,12 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeCommands' smart constructor.
-data DescribeCommands = DescribeCommands'
-  { _dcDeploymentId :: !(Maybe Text)
-  , _dcInstanceId   :: !(Maybe Text)
-  , _dcCommandIds   :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCommands = DescribeCommands'{_dcDeploymentId
+                                          :: !(Maybe Text),
+                                          _dcInstanceId :: !(Maybe Text),
+                                          _dcCommandIds :: !(Maybe [Text])}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeCommands' with the minimum fields required to make a request.
 --
@@ -67,13 +66,9 @@ data DescribeCommands = DescribeCommands'
 -- * 'dcCommandIds' - An array of command IDs. If you include this parameter, @DescribeCommands@ returns a description of the specified commands. Otherwise, it returns a description of every command.
 describeCommands
     :: DescribeCommands
-describeCommands =
-  DescribeCommands'
-    { _dcDeploymentId = Nothing
-    , _dcInstanceId = Nothing
-    , _dcCommandIds = Nothing
-    }
-
+describeCommands
+  = DescribeCommands'{_dcDeploymentId = Nothing,
+                      _dcInstanceId = Nothing, _dcCommandIds = Nothing}
 
 -- | The deployment ID. If you include this parameter, @DescribeCommands@ returns a description of the commands associated with the specified deployment.
 dcDeploymentId :: Lens' DescribeCommands (Maybe Text)
@@ -129,11 +124,12 @@ instance ToQuery DescribeCommands where
 --
 --
 -- /See:/ 'describeCommandsResponse' smart constructor.
-data DescribeCommandsResponse = DescribeCommandsResponse'
-  { _dcrsCommands       :: !(Maybe [Command])
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCommandsResponse = DescribeCommandsResponse'{_dcrsCommands
+                                                          :: !(Maybe [Command]),
+                                                          _dcrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeCommandsResponse' with the minimum fields required to make a request.
 --
@@ -145,10 +141,9 @@ data DescribeCommandsResponse = DescribeCommandsResponse'
 describeCommandsResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeCommandsResponse
-describeCommandsResponse pResponseStatus_ =
-  DescribeCommandsResponse'
-    {_dcrsCommands = Nothing, _dcrsResponseStatus = pResponseStatus_}
-
+describeCommandsResponse pResponseStatus_
+  = DescribeCommandsResponse'{_dcrsCommands = Nothing,
+                              _dcrsResponseStatus = pResponseStatus_}
 
 -- | An array of @Command@ objects that describe each of the specified commands.
 dcrsCommands :: Lens' DescribeCommandsResponse [Command]

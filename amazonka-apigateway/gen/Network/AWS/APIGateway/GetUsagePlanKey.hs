@@ -52,11 +52,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getUsagePlanKey' smart constructor.
-data GetUsagePlanKey = GetUsagePlanKey'
-  { _gUsagePlanId :: !Text
-  , _gKeyId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUsagePlanKey = GetUsagePlanKey'{_gUsagePlanId
+                                        :: !Text,
+                                        _gKeyId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetUsagePlanKey' with the minimum fields required to make a request.
 --
@@ -69,9 +68,9 @@ getUsagePlanKey
     :: Text -- ^ 'gUsagePlanId'
     -> Text -- ^ 'gKeyId'
     -> GetUsagePlanKey
-getUsagePlanKey pUsagePlanId_ pKeyId_ =
-  GetUsagePlanKey' {_gUsagePlanId = pUsagePlanId_, _gKeyId = pKeyId_}
-
+getUsagePlanKey pUsagePlanId_ pKeyId_
+  = GetUsagePlanKey'{_gUsagePlanId = pUsagePlanId_,
+                     _gKeyId = pKeyId_}
 
 -- | [Required] The Id of the 'UsagePlan' resource representing the usage plan containing the to-be-retrieved 'UsagePlanKey' resource representing a plan customer.
 gUsagePlanId :: Lens' GetUsagePlanKey Text

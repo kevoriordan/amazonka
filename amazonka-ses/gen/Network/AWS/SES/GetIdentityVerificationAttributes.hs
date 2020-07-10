@@ -50,15 +50,16 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to return the Amazon SES verification status of a list of identities. For domain identities, this request also returns the verification token. For information about verifying identities with Amazon SES, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html Amazon SES Developer Guide> .
+-- | Represents a request to return the Amazon SES verification status of a list of identities. For domain identities, this request also returns the verification token. For information about verifying identities with Amazon SES, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'getIdentityVerificationAttributes' smart constructor.
-newtype GetIdentityVerificationAttributes = GetIdentityVerificationAttributes'
-  { _givaIdentities :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetIdentityVerificationAttributes = GetIdentityVerificationAttributes'{_givaIdentities
+                                                                               ::
+                                                                               [Text]}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'GetIdentityVerificationAttributes' with the minimum fields required to make a request.
 --
@@ -67,9 +68,9 @@ newtype GetIdentityVerificationAttributes = GetIdentityVerificationAttributes'
 -- * 'givaIdentities' - A list of identities.
 getIdentityVerificationAttributes
     :: GetIdentityVerificationAttributes
-getIdentityVerificationAttributes =
-  GetIdentityVerificationAttributes' {_givaIdentities = mempty}
-
+getIdentityVerificationAttributes
+  = GetIdentityVerificationAttributes'{_givaIdentities
+                                         = mempty}
 
 -- | A list of identities.
 givaIdentities :: Lens' GetIdentityVerificationAttributes [Text]
@@ -117,11 +118,17 @@ instance ToQuery GetIdentityVerificationAttributes
 --
 --
 -- /See:/ 'getIdentityVerificationAttributesResponse' smart constructor.
-data GetIdentityVerificationAttributesResponse = GetIdentityVerificationAttributesResponse'
-  { _givarsResponseStatus         :: !Int
-  , _givarsVerificationAttributes :: !(Map Text IdentityVerificationAttributes)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetIdentityVerificationAttributesResponse = GetIdentityVerificationAttributesResponse'{_givarsResponseStatus
+                                                                                            ::
+                                                                                            !Int,
+                                                                                            _givarsVerificationAttributes
+                                                                                            ::
+                                                                                            !(Map
+                                                                                                Text
+                                                                                                IdentityVerificationAttributes)}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'GetIdentityVerificationAttributesResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +140,12 @@ data GetIdentityVerificationAttributesResponse = GetIdentityVerificationAttribut
 getIdentityVerificationAttributesResponse
     :: Int -- ^ 'givarsResponseStatus'
     -> GetIdentityVerificationAttributesResponse
-getIdentityVerificationAttributesResponse pResponseStatus_ =
-  GetIdentityVerificationAttributesResponse'
-    { _givarsResponseStatus = pResponseStatus_
-    , _givarsVerificationAttributes = mempty
-    }
-
+getIdentityVerificationAttributesResponse
+  pResponseStatus_
+  = GetIdentityVerificationAttributesResponse'{_givarsResponseStatus
+                                                 = pResponseStatus_,
+                                               _givarsVerificationAttributes =
+                                                 mempty}
 
 -- | -- | The response status code.
 givarsResponseStatus :: Lens' GetIdentityVerificationAttributesResponse Int

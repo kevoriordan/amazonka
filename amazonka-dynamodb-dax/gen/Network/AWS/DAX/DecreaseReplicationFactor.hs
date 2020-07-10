@@ -48,13 +48,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'decreaseReplicationFactor' smart constructor.
-data DecreaseReplicationFactor = DecreaseReplicationFactor'
-  { _drfNodeIdsToRemove      :: !(Maybe [Text])
-  , _drfAvailabilityZones    :: !(Maybe [Text])
-  , _drfClusterName          :: !Text
-  , _drfNewReplicationFactor :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DecreaseReplicationFactor = DecreaseReplicationFactor'{_drfNodeIdsToRemove
+                                                            :: !(Maybe [Text]),
+                                                            _drfAvailabilityZones
+                                                            :: !(Maybe [Text]),
+                                                            _drfClusterName ::
+                                                            !Text,
+                                                            _drfNewReplicationFactor
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DecreaseReplicationFactor' with the minimum fields required to make a request.
 --
@@ -71,14 +74,14 @@ decreaseReplicationFactor
     :: Text -- ^ 'drfClusterName'
     -> Int -- ^ 'drfNewReplicationFactor'
     -> DecreaseReplicationFactor
-decreaseReplicationFactor pClusterName_ pNewReplicationFactor_ =
-  DecreaseReplicationFactor'
-    { _drfNodeIdsToRemove = Nothing
-    , _drfAvailabilityZones = Nothing
-    , _drfClusterName = pClusterName_
-    , _drfNewReplicationFactor = pNewReplicationFactor_
-    }
-
+decreaseReplicationFactor pClusterName_
+  pNewReplicationFactor_
+  = DecreaseReplicationFactor'{_drfNodeIdsToRemove =
+                                 Nothing,
+                               _drfAvailabilityZones = Nothing,
+                               _drfClusterName = pClusterName_,
+                               _drfNewReplicationFactor =
+                                 pNewReplicationFactor_}
 
 -- | The unique identifiers of the nodes to be removed from the cluster.
 drfNodeIdsToRemove :: Lens' DecreaseReplicationFactor [Text]
@@ -138,11 +141,15 @@ instance ToQuery DecreaseReplicationFactor where
         toQuery = const mempty
 
 -- | /See:/ 'decreaseReplicationFactorResponse' smart constructor.
-data DecreaseReplicationFactorResponse = DecreaseReplicationFactorResponse'
-  { _drfrsCluster        :: !(Maybe Cluster)
-  , _drfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DecreaseReplicationFactorResponse = DecreaseReplicationFactorResponse'{_drfrsCluster
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Cluster),
+                                                                            _drfrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DecreaseReplicationFactorResponse' with the minimum fields required to make a request.
 --
@@ -154,10 +161,10 @@ data DecreaseReplicationFactorResponse = DecreaseReplicationFactorResponse'
 decreaseReplicationFactorResponse
     :: Int -- ^ 'drfrsResponseStatus'
     -> DecreaseReplicationFactorResponse
-decreaseReplicationFactorResponse pResponseStatus_ =
-  DecreaseReplicationFactorResponse'
-    {_drfrsCluster = Nothing, _drfrsResponseStatus = pResponseStatus_}
-
+decreaseReplicationFactorResponse pResponseStatus_
+  = DecreaseReplicationFactorResponse'{_drfrsCluster =
+                                         Nothing,
+                                       _drfrsResponseStatus = pResponseStatus_}
 
 -- | A description of the DAX cluster, after you have decreased its replication factor.
 drfrsCluster :: Lens' DecreaseReplicationFactorResponse (Maybe Cluster)

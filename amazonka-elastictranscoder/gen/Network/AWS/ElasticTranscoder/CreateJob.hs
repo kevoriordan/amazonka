@@ -58,17 +58,16 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createJob' smart constructor.
-data CreateJob = CreateJob'
-  { _cjInputs          :: !(Maybe [JobInput])
-  , _cjInput           :: !(Maybe JobInput)
-  , _cjUserMetadata    :: !(Maybe (Map Text Text))
-  , _cjOutputs         :: !(Maybe [CreateJobOutput])
-  , _cjOutput          :: !(Maybe CreateJobOutput)
-  , _cjPlaylists       :: !(Maybe [CreateJobPlaylist])
-  , _cjOutputKeyPrefix :: !(Maybe Text)
-  , _cjPipelineId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJob = CreateJob'{_cjInputs ::
+                            !(Maybe [JobInput]),
+                            _cjInput :: !(Maybe JobInput),
+                            _cjUserMetadata :: !(Maybe (Map Text Text)),
+                            _cjOutputs :: !(Maybe [CreateJobOutput]),
+                            _cjOutput :: !(Maybe CreateJobOutput),
+                            _cjPlaylists :: !(Maybe [CreateJobPlaylist]),
+                            _cjOutputKeyPrefix :: !(Maybe Text),
+                            _cjPipelineId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJob' with the minimum fields required to make a request.
 --
@@ -80,9 +79,9 @@ data CreateJob = CreateJob'
 --
 -- * 'cjUserMetadata' - User-defined metadata that you want to associate with an Elastic Transcoder job. You specify metadata in @key/value@ pairs, and you can add up to 10 @key/value@ pairs per job. Elastic Transcoder does not guarantee that @key/value@ pairs are returned in the same order in which you specify them.
 --
--- * 'cjOutputs' - A section of the request body that provides information about the transcoded (target) files. We recommend that you use the @Outputs@ syntax instead of the @Output@ syntax.
+-- * 'cjOutputs' - A section of the request body that provides information about the transcoded (target) files. We recommend that you use the @Outputs@ syntax instead of the @Output@ syntax. 
 --
--- * 'cjOutput' - A section of the request body that provides information about the transcoded (target) file. We strongly recommend that you use the @Outputs@ syntax instead of the @Output@ syntax.
+-- * 'cjOutput' - A section of the request body that provides information about the transcoded (target) file. We strongly recommend that you use the @Outputs@ syntax instead of the @Output@ syntax. 
 --
 -- * 'cjPlaylists' - If you specify a preset in @PresetId@ for which the value of @Container@ is fmp4 (Fragmented MP4) or ts (MPEG-TS), Playlists contains information about the master playlists that you want Elastic Transcoder to create. The maximum number of master playlists in a job is 30.
 --
@@ -92,18 +91,12 @@ data CreateJob = CreateJob'
 createJob
     :: Text -- ^ 'cjPipelineId'
     -> CreateJob
-createJob pPipelineId_ =
-  CreateJob'
-    { _cjInputs = Nothing
-    , _cjInput = Nothing
-    , _cjUserMetadata = Nothing
-    , _cjOutputs = Nothing
-    , _cjOutput = Nothing
-    , _cjPlaylists = Nothing
-    , _cjOutputKeyPrefix = Nothing
-    , _cjPipelineId = pPipelineId_
-    }
-
+createJob pPipelineId_
+  = CreateJob'{_cjInputs = Nothing, _cjInput = Nothing,
+               _cjUserMetadata = Nothing, _cjOutputs = Nothing,
+               _cjOutput = Nothing, _cjPlaylists = Nothing,
+               _cjOutputKeyPrefix = Nothing,
+               _cjPipelineId = pPipelineId_}
 
 -- | A section of the request body that provides information about the files that are being transcoded.
 cjInputs :: Lens' CreateJob [JobInput]
@@ -117,11 +110,11 @@ cjInput = lens _cjInput (\ s a -> s{_cjInput = a})
 cjUserMetadata :: Lens' CreateJob (HashMap Text Text)
 cjUserMetadata = lens _cjUserMetadata (\ s a -> s{_cjUserMetadata = a}) . _Default . _Map
 
--- | A section of the request body that provides information about the transcoded (target) files. We recommend that you use the @Outputs@ syntax instead of the @Output@ syntax.
+-- | A section of the request body that provides information about the transcoded (target) files. We recommend that you use the @Outputs@ syntax instead of the @Output@ syntax. 
 cjOutputs :: Lens' CreateJob [CreateJobOutput]
 cjOutputs = lens _cjOutputs (\ s a -> s{_cjOutputs = a}) . _Default . _Coerce
 
--- | A section of the request body that provides information about the transcoded (target) file. We strongly recommend that you use the @Outputs@ syntax instead of the @Output@ syntax.
+-- | A section of the request body that provides information about the transcoded (target) file. We strongly recommend that you use the @Outputs@ syntax instead of the @Output@ syntax. 
 cjOutput :: Lens' CreateJob (Maybe CreateJobOutput)
 cjOutput = lens _cjOutput (\ s a -> s{_cjOutput = a})
 
@@ -177,11 +170,10 @@ instance ToQuery CreateJob where
 --
 --
 -- /See:/ 'createJobResponse' smart constructor.
-data CreateJobResponse = CreateJobResponse'
-  { _cjrsJob            :: !(Maybe Job')
-  , _cjrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateJobResponse = CreateJobResponse'{_cjrsJob
+                                            :: !(Maybe Job'),
+                                            _cjrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateJobResponse' with the minimum fields required to make a request.
 --
@@ -193,10 +185,9 @@ data CreateJobResponse = CreateJobResponse'
 createJobResponse
     :: Int -- ^ 'cjrsResponseStatus'
     -> CreateJobResponse
-createJobResponse pResponseStatus_ =
-  CreateJobResponse'
-    {_cjrsJob = Nothing, _cjrsResponseStatus = pResponseStatus_}
-
+createJobResponse pResponseStatus_
+  = CreateJobResponse'{_cjrsJob = Nothing,
+                       _cjrsResponseStatus = pResponseStatus_}
 
 -- | A section of the response body that provides information about the job that is created.
 cjrsJob :: Lens' CreateJobResponse (Maybe Job')

@@ -21,7 +21,7 @@
 -- Gets the specified user by user name in a user pool as an administrator. Works on any user.
 --
 --
--- Requires developer credentials.
+-- Calling this action requires developer credentials.
 --
 module Network.AWS.CognitoIdentityProvider.AdminGetUser
     (
@@ -60,11 +60,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'adminGetUser' smart constructor.
-data AdminGetUser = AdminGetUser'
-  { _aguUserPoolId :: !Text
-  , _aguUsername   :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminGetUser = AdminGetUser'{_aguUserPoolId ::
+                                  !Text,
+                                  _aguUsername :: !(Sensitive Text)}
+                      deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminGetUser' with the minimum fields required to make a request.
 --
@@ -77,10 +76,9 @@ adminGetUser
     :: Text -- ^ 'aguUserPoolId'
     -> Text -- ^ 'aguUsername'
     -> AdminGetUser
-adminGetUser pUserPoolId_ pUsername_ =
-  AdminGetUser'
-    {_aguUserPoolId = pUserPoolId_, _aguUsername = _Sensitive # pUsername_}
-
+adminGetUser pUserPoolId_ pUsername_
+  = AdminGetUser'{_aguUserPoolId = pUserPoolId_,
+                  _aguUsername = _Sensitive # pUsername_}
 
 -- | The user pool ID for the user pool where you want to get information about the user.
 aguUserPoolId :: Lens' AdminGetUser Text
@@ -139,19 +137,26 @@ instance ToQuery AdminGetUser where
 --
 --
 -- /See:/ 'adminGetUserResponse' smart constructor.
-data AdminGetUserResponse = AdminGetUserResponse'
-  { _agursEnabled              :: !(Maybe Bool)
-  , _agursUserStatus           :: !(Maybe UserStatusType)
-  , _agursUserAttributes       :: !(Maybe [AttributeType])
-  , _agursUserCreateDate       :: !(Maybe POSIX)
-  , _agursUserMFASettingList   :: !(Maybe [Text])
-  , _agursMFAOptions           :: !(Maybe [MFAOptionType])
-  , _agursUserLastModifiedDate :: !(Maybe POSIX)
-  , _agursPreferredMFASetting  :: !(Maybe Text)
-  , _agursResponseStatus       :: !Int
-  , _agursUsername             :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminGetUserResponse = AdminGetUserResponse'{_agursEnabled
+                                                  :: !(Maybe Bool),
+                                                  _agursUserStatus ::
+                                                  !(Maybe UserStatusType),
+                                                  _agursUserAttributes ::
+                                                  !(Maybe [AttributeType]),
+                                                  _agursUserCreateDate ::
+                                                  !(Maybe POSIX),
+                                                  _agursUserMFASettingList ::
+                                                  !(Maybe [Text]),
+                                                  _agursMFAOptions ::
+                                                  !(Maybe [MFAOptionType]),
+                                                  _agursUserLastModifiedDate ::
+                                                  !(Maybe POSIX),
+                                                  _agursPreferredMFASetting ::
+                                                  !(Maybe Text),
+                                                  _agursResponseStatus :: !Int,
+                                                  _agursUsername ::
+                                                  !(Sensitive Text)}
+                              deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminGetUserResponse' with the minimum fields required to make a request.
 --
@@ -159,15 +164,15 @@ data AdminGetUserResponse = AdminGetUserResponse'
 --
 -- * 'agursEnabled' - Indicates that the status is enabled.
 --
--- * 'agursUserStatus' - The user status. Can be one of the following:     * UNCONFIRMED - User has been created but not confirmed.     * CONFIRMED - User has been confirmed.     * ARCHIVED - User is no longer active.     * COMPROMISED - User is disabled due to a potential security threat.     * UNKNOWN - User status is not known.
+-- * 'agursUserStatus' - The user status. Can be one of the following:     * UNCONFIRMED - User has been created but not confirmed.     * CONFIRMED - User has been confirmed.     * ARCHIVED - User is no longer active.     * COMPROMISED - User is disabled due to a potential security threat.     * UNKNOWN - User status is not known.     * RESET_REQUIRED - User is confirmed, but the user must request a code and reset his or her password before he or she can sign in.     * FORCE_CHANGE_PASSWORD - The user is confirmed and the user can sign in using a temporary password, but on first sign-in, the user must change his or her password to a new value before doing anything else. 
 --
 -- * 'agursUserAttributes' - An array of name-value pairs representing user attributes.
 --
 -- * 'agursUserCreateDate' - The date the user was created.
 --
--- * 'agursUserMFASettingList' - The list of the user's MFA settings.
+-- * 'agursUserMFASettingList' - The MFA options that are enabled for the user. The possible values in this list are @SMS_MFA@ and @SOFTWARE_TOKEN_MFA@ .
 --
--- * 'agursMFAOptions' - Specifies the options for MFA (e.g., email or phone number).
+-- * 'agursMFAOptions' - /This response parameter is no longer supported./ It provides information only about SMS MFA configurations. It doesn't provide information about TOTP software token MFA configurations. To look up information about either type of MFA configuration, use the 'AdminGetUserResponse$UserMFASettingList' response instead.
 --
 -- * 'agursUserLastModifiedDate' - The date the user was last modified.
 --
@@ -180,26 +185,23 @@ adminGetUserResponse
     :: Int -- ^ 'agursResponseStatus'
     -> Text -- ^ 'agursUsername'
     -> AdminGetUserResponse
-adminGetUserResponse pResponseStatus_ pUsername_ =
-  AdminGetUserResponse'
-    { _agursEnabled = Nothing
-    , _agursUserStatus = Nothing
-    , _agursUserAttributes = Nothing
-    , _agursUserCreateDate = Nothing
-    , _agursUserMFASettingList = Nothing
-    , _agursMFAOptions = Nothing
-    , _agursUserLastModifiedDate = Nothing
-    , _agursPreferredMFASetting = Nothing
-    , _agursResponseStatus = pResponseStatus_
-    , _agursUsername = _Sensitive # pUsername_
-    }
-
+adminGetUserResponse pResponseStatus_ pUsername_
+  = AdminGetUserResponse'{_agursEnabled = Nothing,
+                          _agursUserStatus = Nothing,
+                          _agursUserAttributes = Nothing,
+                          _agursUserCreateDate = Nothing,
+                          _agursUserMFASettingList = Nothing,
+                          _agursMFAOptions = Nothing,
+                          _agursUserLastModifiedDate = Nothing,
+                          _agursPreferredMFASetting = Nothing,
+                          _agursResponseStatus = pResponseStatus_,
+                          _agursUsername = _Sensitive # pUsername_}
 
 -- | Indicates that the status is enabled.
 agursEnabled :: Lens' AdminGetUserResponse (Maybe Bool)
 agursEnabled = lens _agursEnabled (\ s a -> s{_agursEnabled = a})
 
--- | The user status. Can be one of the following:     * UNCONFIRMED - User has been created but not confirmed.     * CONFIRMED - User has been confirmed.     * ARCHIVED - User is no longer active.     * COMPROMISED - User is disabled due to a potential security threat.     * UNKNOWN - User status is not known.
+-- | The user status. Can be one of the following:     * UNCONFIRMED - User has been created but not confirmed.     * CONFIRMED - User has been confirmed.     * ARCHIVED - User is no longer active.     * COMPROMISED - User is disabled due to a potential security threat.     * UNKNOWN - User status is not known.     * RESET_REQUIRED - User is confirmed, but the user must request a code and reset his or her password before he or she can sign in.     * FORCE_CHANGE_PASSWORD - The user is confirmed and the user can sign in using a temporary password, but on first sign-in, the user must change his or her password to a new value before doing anything else. 
 agursUserStatus :: Lens' AdminGetUserResponse (Maybe UserStatusType)
 agursUserStatus = lens _agursUserStatus (\ s a -> s{_agursUserStatus = a})
 
@@ -211,11 +213,11 @@ agursUserAttributes = lens _agursUserAttributes (\ s a -> s{_agursUserAttributes
 agursUserCreateDate :: Lens' AdminGetUserResponse (Maybe UTCTime)
 agursUserCreateDate = lens _agursUserCreateDate (\ s a -> s{_agursUserCreateDate = a}) . mapping _Time
 
--- | The list of the user's MFA settings.
+-- | The MFA options that are enabled for the user. The possible values in this list are @SMS_MFA@ and @SOFTWARE_TOKEN_MFA@ .
 agursUserMFASettingList :: Lens' AdminGetUserResponse [Text]
 agursUserMFASettingList = lens _agursUserMFASettingList (\ s a -> s{_agursUserMFASettingList = a}) . _Default . _Coerce
 
--- | Specifies the options for MFA (e.g., email or phone number).
+-- | /This response parameter is no longer supported./ It provides information only about SMS MFA configurations. It doesn't provide information about TOTP software token MFA configurations. To look up information about either type of MFA configuration, use the 'AdminGetUserResponse$UserMFASettingList' response instead.
 agursMFAOptions :: Lens' AdminGetUserResponse [MFAOptionType]
 agursMFAOptions = lens _agursMFAOptions (\ s a -> s{_agursMFAOptions = a}) . _Default . _Coerce
 

@@ -21,7 +21,7 @@
 -- Creates a configuration set event destination.
 --
 --
--- An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
+-- An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
@@ -48,16 +48,19 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to create a configuration set event destination. A configuration set event destination, which can be either Amazon CloudWatch or Amazon Kinesis Firehose, describes an AWS service in which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
+-- | Represents a request to create a configuration set event destination. A configuration set event destination, which can be either Amazon CloudWatch or Amazon Kinesis Firehose, describes an AWS service in which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'createConfigurationSetEventDestination' smart constructor.
-data CreateConfigurationSetEventDestination = CreateConfigurationSetEventDestination'
-  { _ccsedConfigurationSetName :: !Text
-  , _ccsedEventDestination     :: !EventDestination
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateConfigurationSetEventDestination = CreateConfigurationSetEventDestination'{_ccsedConfigurationSetName
+                                                                                      ::
+                                                                                      !Text,
+                                                                                      _ccsedEventDestination
+                                                                                      ::
+                                                                                      !EventDestination}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'CreateConfigurationSetEventDestination' with the minimum fields required to make a request.
 --
@@ -70,12 +73,12 @@ createConfigurationSetEventDestination
     :: Text -- ^ 'ccsedConfigurationSetName'
     -> EventDestination -- ^ 'ccsedEventDestination'
     -> CreateConfigurationSetEventDestination
-createConfigurationSetEventDestination pConfigurationSetName_ pEventDestination_ =
-  CreateConfigurationSetEventDestination'
-    { _ccsedConfigurationSetName = pConfigurationSetName_
-    , _ccsedEventDestination = pEventDestination_
-    }
-
+createConfigurationSetEventDestination
+  pConfigurationSetName_ pEventDestination_
+  = CreateConfigurationSetEventDestination'{_ccsedConfigurationSetName
+                                              = pConfigurationSetName_,
+                                            _ccsedEventDestination =
+                                              pEventDestination_}
 
 -- | The name of the configuration set that the event destination should be associated with.
 ccsedConfigurationSetName :: Lens' CreateConfigurationSetEventDestination Text
@@ -133,10 +136,13 @@ instance ToQuery
 --
 --
 -- /See:/ 'createConfigurationSetEventDestinationResponse' smart constructor.
-newtype CreateConfigurationSetEventDestinationResponse = CreateConfigurationSetEventDestinationResponse'
-  { _ccsedrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateConfigurationSetEventDestinationResponse = CreateConfigurationSetEventDestinationResponse'{_ccsedrsResponseStatus
+                                                                                                         ::
+                                                                                                         Int}
+                                                           deriving (Eq, Read,
+                                                                     Show, Data,
+                                                                     Typeable,
+                                                                     Generic)
 
 -- | Creates a value of 'CreateConfigurationSetEventDestinationResponse' with the minimum fields required to make a request.
 --
@@ -146,10 +152,10 @@ newtype CreateConfigurationSetEventDestinationResponse = CreateConfigurationSetE
 createConfigurationSetEventDestinationResponse
     :: Int -- ^ 'ccsedrsResponseStatus'
     -> CreateConfigurationSetEventDestinationResponse
-createConfigurationSetEventDestinationResponse pResponseStatus_ =
-  CreateConfigurationSetEventDestinationResponse'
-    {_ccsedrsResponseStatus = pResponseStatus_}
-
+createConfigurationSetEventDestinationResponse
+  pResponseStatus_
+  = CreateConfigurationSetEventDestinationResponse'{_ccsedrsResponseStatus
+                                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 ccsedrsResponseStatus :: Lens' CreateConfigurationSetEventDestinationResponse Int

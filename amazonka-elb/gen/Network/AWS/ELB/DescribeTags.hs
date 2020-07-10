@@ -49,10 +49,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeTags' smart constructor.
-newtype DescribeTags = DescribeTags'
-  { _dtLoadBalancerNames :: List1 Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeTags = DescribeTags'{_dtLoadBalancerNames
+                                     :: List1 Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeTags' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ newtype DescribeTags = DescribeTags'
 describeTags
     :: NonEmpty Text -- ^ 'dtLoadBalancerNames'
     -> DescribeTags
-describeTags pLoadBalancerNames_ =
-  DescribeTags' {_dtLoadBalancerNames = _List1 # pLoadBalancerNames_}
-
+describeTags pLoadBalancerNames_
+  = DescribeTags'{_dtLoadBalancerNames =
+                    _List1 # pLoadBalancerNames_}
 
 -- | The names of the load balancers.
 dtLoadBalancerNames :: Lens' DescribeTags (NonEmpty Text)
@@ -104,11 +103,10 @@ instance ToQuery DescribeTags where
 --
 --
 -- /See:/ 'describeTagsResponse' smart constructor.
-data DescribeTagsResponse = DescribeTagsResponse'
-  { _dtrsTagDescriptions :: !(Maybe [TagDescription])
-  , _dtrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTagsResponse = DescribeTagsResponse'{_dtrsTagDescriptions
+                                                  :: !(Maybe [TagDescription]),
+                                                  _dtrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeTagsResponse' with the minimum fields required to make a request.
 --
@@ -120,10 +118,10 @@ data DescribeTagsResponse = DescribeTagsResponse'
 describeTagsResponse
     :: Int -- ^ 'dtrsResponseStatus'
     -> DescribeTagsResponse
-describeTagsResponse pResponseStatus_ =
-  DescribeTagsResponse'
-    {_dtrsTagDescriptions = Nothing, _dtrsResponseStatus = pResponseStatus_}
-
+describeTagsResponse pResponseStatus_
+  = DescribeTagsResponse'{_dtrsTagDescriptions =
+                            Nothing,
+                          _dtrsResponseStatus = pResponseStatus_}
 
 -- | Information about the tags.
 dtrsTagDescriptions :: Lens' DescribeTagsResponse [TagDescription]

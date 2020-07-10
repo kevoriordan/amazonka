@@ -44,18 +44,22 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'abortDocumentVersionUpload' smart constructor.
-data AbortDocumentVersionUpload = AbortDocumentVersionUpload'
-  { _advuAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _advuDocumentId          :: !Text
-  , _advuVersionId           :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AbortDocumentVersionUpload = AbortDocumentVersionUpload'{_advuAuthenticationToken
+                                                              ::
+                                                              !(Maybe
+                                                                  (Sensitive
+                                                                     Text)),
+                                                              _advuDocumentId ::
+                                                              !Text,
+                                                              _advuVersionId ::
+                                                              !Text}
+                                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AbortDocumentVersionUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'advuAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'advuAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'advuDocumentId' - The ID of the document.
 --
@@ -64,15 +68,13 @@ abortDocumentVersionUpload
     :: Text -- ^ 'advuDocumentId'
     -> Text -- ^ 'advuVersionId'
     -> AbortDocumentVersionUpload
-abortDocumentVersionUpload pDocumentId_ pVersionId_ =
-  AbortDocumentVersionUpload'
-    { _advuAuthenticationToken = Nothing
-    , _advuDocumentId = pDocumentId_
-    , _advuVersionId = pVersionId_
-    }
+abortDocumentVersionUpload pDocumentId_ pVersionId_
+  = AbortDocumentVersionUpload'{_advuAuthenticationToken
+                                  = Nothing,
+                                _advuDocumentId = pDocumentId_,
+                                _advuVersionId = pVersionId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 advuAuthenticationToken :: Lens' AbortDocumentVersionUpload (Maybe Text)
 advuAuthenticationToken = lens _advuAuthenticationToken (\ s a -> s{_advuAuthenticationToken = a}) . mapping _Sensitive
 
@@ -112,17 +114,16 @@ instance ToQuery AbortDocumentVersionUpload where
         toQuery = const mempty
 
 -- | /See:/ 'abortDocumentVersionUploadResponse' smart constructor.
-data AbortDocumentVersionUploadResponse =
-  AbortDocumentVersionUploadResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AbortDocumentVersionUploadResponse = AbortDocumentVersionUploadResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'AbortDocumentVersionUploadResponse' with the minimum fields required to make a request.
 --
 abortDocumentVersionUploadResponse
     :: AbortDocumentVersionUploadResponse
-abortDocumentVersionUploadResponse = AbortDocumentVersionUploadResponse'
-
+abortDocumentVersionUploadResponse
+  = AbortDocumentVersionUploadResponse'
 
 instance NFData AbortDocumentVersionUploadResponse
          where

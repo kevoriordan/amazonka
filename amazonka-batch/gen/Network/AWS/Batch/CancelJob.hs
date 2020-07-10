@@ -45,11 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'cancelJob' smart constructor.
-data CancelJob = CancelJob'
-  { _cjJobId  :: !Text
-  , _cjReason :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CancelJob = CancelJob'{_cjJobId :: !Text,
+                            _cjReason :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJob' with the minimum fields required to make a request.
 --
@@ -62,9 +60,9 @@ cancelJob
     :: Text -- ^ 'cjJobId'
     -> Text -- ^ 'cjReason'
     -> CancelJob
-cancelJob pJobId_ pReason_ =
-  CancelJob' {_cjJobId = pJobId_, _cjReason = pReason_}
-
+cancelJob pJobId_ pReason_
+  = CancelJob'{_cjJobId = pJobId_,
+               _cjReason = pReason_}
 
 -- | The AWS Batch job ID of the job to cancel.
 cjJobId :: Lens' CancelJob Text
@@ -107,10 +105,9 @@ instance ToQuery CancelJob where
         toQuery = const mempty
 
 -- | /See:/ 'cancelJobResponse' smart constructor.
-newtype CancelJobResponse = CancelJobResponse'
-  { _cjrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CancelJobResponse = CancelJobResponse'{_cjrsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CancelJobResponse' with the minimum fields required to make a request.
 --
@@ -120,9 +117,9 @@ newtype CancelJobResponse = CancelJobResponse'
 cancelJobResponse
     :: Int -- ^ 'cjrsResponseStatus'
     -> CancelJobResponse
-cancelJobResponse pResponseStatus_ =
-  CancelJobResponse' {_cjrsResponseStatus = pResponseStatus_}
-
+cancelJobResponse pResponseStatus_
+  = CancelJobResponse'{_cjrsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 cjrsResponseStatus :: Lens' CancelJobResponse Int

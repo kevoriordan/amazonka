@@ -46,24 +46,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeApplicationState' smart constructor.
-newtype DescribeApplicationState = DescribeApplicationState'
-  { _dasApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeApplicationState = DescribeApplicationState'{_dasApplicationId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeApplicationState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dasApplicationId' - The configurationId in ADS that uniquely identifies the grouped application.
+-- * 'dasApplicationId' - The configurationId in Application Discovery Service that uniquely identifies the grouped application.
 describeApplicationState
     :: Text -- ^ 'dasApplicationId'
     -> DescribeApplicationState
-describeApplicationState pApplicationId_ =
-  DescribeApplicationState' {_dasApplicationId = pApplicationId_}
+describeApplicationState pApplicationId_
+  = DescribeApplicationState'{_dasApplicationId =
+                                pApplicationId_}
 
-
--- | The configurationId in ADS that uniquely identifies the grouped application.
+-- | The configurationId in Application Discovery Service that uniquely identifies the grouped application.
 dasApplicationId :: Lens' DescribeApplicationState Text
 dasApplicationId = lens _dasApplicationId (\ s a -> s{_dasApplicationId = a})
 
@@ -106,12 +106,19 @@ instance ToQuery DescribeApplicationState where
         toQuery = const mempty
 
 -- | /See:/ 'describeApplicationStateResponse' smart constructor.
-data DescribeApplicationStateResponse = DescribeApplicationStateResponse'
-  { _dasrsLastUpdatedTime   :: !(Maybe POSIX)
-  , _dasrsApplicationStatus :: !(Maybe ApplicationStatus)
-  , _dasrsResponseStatus    :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeApplicationStateResponse = DescribeApplicationStateResponse'{_dasrsLastUpdatedTime
+                                                                          ::
+                                                                          !(Maybe
+                                                                              POSIX),
+                                                                          _dasrsApplicationStatus
+                                                                          ::
+                                                                          !(Maybe
+                                                                              ApplicationStatus),
+                                                                          _dasrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeApplicationStateResponse' with the minimum fields required to make a request.
 --
@@ -125,13 +132,11 @@ data DescribeApplicationStateResponse = DescribeApplicationStateResponse'
 describeApplicationStateResponse
     :: Int -- ^ 'dasrsResponseStatus'
     -> DescribeApplicationStateResponse
-describeApplicationStateResponse pResponseStatus_ =
-  DescribeApplicationStateResponse'
-    { _dasrsLastUpdatedTime = Nothing
-    , _dasrsApplicationStatus = Nothing
-    , _dasrsResponseStatus = pResponseStatus_
-    }
-
+describeApplicationStateResponse pResponseStatus_
+  = DescribeApplicationStateResponse'{_dasrsLastUpdatedTime
+                                        = Nothing,
+                                      _dasrsApplicationStatus = Nothing,
+                                      _dasrsResponseStatus = pResponseStatus_}
 
 -- | The timestamp when the application status was last updated.
 dasrsLastUpdatedTime :: Lens' DescribeApplicationStateResponse (Maybe UTCTime)

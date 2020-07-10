@@ -59,17 +59,22 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'putIntegrationResponse' smart constructor.
-data PutIntegrationResponse = PutIntegrationResponse'
-  { _piContentHandling    :: !(Maybe ContentHandlingStrategy)
-  , _piResponseTemplates  :: !(Maybe (Map Text Text))
-  , _piSelectionPattern   :: !(Maybe Text)
-  , _piResponseParameters :: !(Maybe (Map Text Text))
-  , _piRestAPIId          :: !Text
-  , _piResourceId         :: !Text
-  , _piHttpMethod         :: !Text
-  , _piStatusCode         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutIntegrationResponse = PutIntegrationResponse'{_piContentHandling
+                                                      ::
+                                                      !(Maybe
+                                                          ContentHandlingStrategy),
+                                                      _piResponseTemplates ::
+                                                      !(Maybe (Map Text Text)),
+                                                      _piSelectionPattern ::
+                                                      !(Maybe Text),
+                                                      _piResponseParameters ::
+                                                      !(Maybe (Map Text Text)),
+                                                      _piRestAPIId :: !Text,
+                                                      _piResourceId :: !Text,
+                                                      _piHttpMethod :: !Text,
+                                                      _piStatusCode :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'PutIntegrationResponse' with the minimum fields required to make a request.
 --
@@ -96,18 +101,17 @@ putIntegrationResponse
     -> Text -- ^ 'piHttpMethod'
     -> Text -- ^ 'piStatusCode'
     -> PutIntegrationResponse
-putIntegrationResponse pRestAPIId_ pResourceId_ pHttpMethod_ pStatusCode_ =
-  PutIntegrationResponse'
-    { _piContentHandling = Nothing
-    , _piResponseTemplates = Nothing
-    , _piSelectionPattern = Nothing
-    , _piResponseParameters = Nothing
-    , _piRestAPIId = pRestAPIId_
-    , _piResourceId = pResourceId_
-    , _piHttpMethod = pHttpMethod_
-    , _piStatusCode = pStatusCode_
-    }
-
+putIntegrationResponse pRestAPIId_ pResourceId_
+  pHttpMethod_ pStatusCode_
+  = PutIntegrationResponse'{_piContentHandling =
+                              Nothing,
+                            _piResponseTemplates = Nothing,
+                            _piSelectionPattern = Nothing,
+                            _piResponseParameters = Nothing,
+                            _piRestAPIId = pRestAPIId_,
+                            _piResourceId = pResourceId_,
+                            _piHttpMethod = pHttpMethod_,
+                            _piStatusCode = pStatusCode_}
 
 -- | Specifies how to handle response payload content type conversions. Supported values are @CONVERT_TO_BINARY@ and @CONVERT_TO_TEXT@ , with the following behaviors:     * @CONVERT_TO_BINARY@ : Converts a response payload from a Base64-encoded string to the corresponding binary blob.     * @CONVERT_TO_TEXT@ : Converts a response payload from a binary blob to a Base64-encoded string. If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.
 piContentHandling :: Lens' PutIntegrationResponse (Maybe ContentHandlingStrategy)

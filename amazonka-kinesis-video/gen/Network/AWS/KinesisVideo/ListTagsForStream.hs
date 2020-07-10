@@ -21,7 +21,7 @@
 -- Returns a list of tags associated with the specified stream.
 --
 --
--- In the request, you must specify either the @StreamName@ or the @StreamARN@ .
+-- In the request, you must specify either the @StreamName@ or the @StreamARN@ . 
 --
 module Network.AWS.KinesisVideo.ListTagsForStream
     (
@@ -50,12 +50,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listTagsForStream' smart constructor.
-data ListTagsForStream = ListTagsForStream'
-  { _ltfsStreamARN  :: !(Maybe Text)
-  , _ltfsNextToken  :: !(Maybe Text)
-  , _ltfsStreamName :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForStream = ListTagsForStream'{_ltfsStreamARN
+                                            :: !(Maybe Text),
+                                            _ltfsNextToken :: !(Maybe Text),
+                                            _ltfsStreamName :: !(Maybe Text)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsForStream' with the minimum fields required to make a request.
 --
@@ -68,13 +67,9 @@ data ListTagsForStream = ListTagsForStream'
 -- * 'ltfsStreamName' - The name of the stream that you want to list tags for.
 listTagsForStream
     :: ListTagsForStream
-listTagsForStream =
-  ListTagsForStream'
-    { _ltfsStreamARN = Nothing
-    , _ltfsNextToken = Nothing
-    , _ltfsStreamName = Nothing
-    }
-
+listTagsForStream
+  = ListTagsForStream'{_ltfsStreamARN = Nothing,
+                       _ltfsNextToken = Nothing, _ltfsStreamName = Nothing}
 
 -- | The Amazon Resource Name (ARN) of the stream that you want to list tags for.
 ltfsStreamARN :: Lens' ListTagsForStream (Maybe Text)
@@ -120,12 +115,16 @@ instance ToQuery ListTagsForStream where
         toQuery = const mempty
 
 -- | /See:/ 'listTagsForStreamResponse' smart constructor.
-data ListTagsForStreamResponse = ListTagsForStreamResponse'
-  { _ltfsrsNextToken      :: !(Maybe Text)
-  , _ltfsrsTags           :: !(Maybe (Map Text Text))
-  , _ltfsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForStreamResponse = ListTagsForStreamResponse'{_ltfsrsNextToken
+                                                            :: !(Maybe Text),
+                                                            _ltfsrsTags ::
+                                                            !(Maybe
+                                                                (Map Text
+                                                                   Text)),
+                                                            _ltfsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListTagsForStreamResponse' with the minimum fields required to make a request.
 --
@@ -139,13 +138,11 @@ data ListTagsForStreamResponse = ListTagsForStreamResponse'
 listTagsForStreamResponse
     :: Int -- ^ 'ltfsrsResponseStatus'
     -> ListTagsForStreamResponse
-listTagsForStreamResponse pResponseStatus_ =
-  ListTagsForStreamResponse'
-    { _ltfsrsNextToken = Nothing
-    , _ltfsrsTags = Nothing
-    , _ltfsrsResponseStatus = pResponseStatus_
-    }
-
+listTagsForStreamResponse pResponseStatus_
+  = ListTagsForStreamResponse'{_ltfsrsNextToken =
+                                 Nothing,
+                               _ltfsrsTags = Nothing,
+                               _ltfsrsResponseStatus = pResponseStatus_}
 
 -- | If you specify this parameter and the result of a @ListTags@ call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags.
 ltfsrsNextToken :: Lens' ListTagsForStreamResponse (Maybe Text)

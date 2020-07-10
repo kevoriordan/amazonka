@@ -52,11 +52,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeEventTopics' smart constructor.
-data DescribeEventTopics = DescribeEventTopics'
-  { _dDirectoryId :: !(Maybe Text)
-  , _dTopicNames  :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventTopics = DescribeEventTopics'{_dDirectoryId
+                                                :: !(Maybe Text),
+                                                _dTopicNames :: !(Maybe [Text])}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEventTopics' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ data DescribeEventTopics = DescribeEventTopics'
 -- * 'dTopicNames' - A list of SNS topic names for which to obtain the information. If this member is null, all associations for the specified Directory ID are returned. An empty list results in an @InvalidParameterException@ being thrown.
 describeEventTopics
     :: DescribeEventTopics
-describeEventTopics =
-  DescribeEventTopics' {_dDirectoryId = Nothing, _dTopicNames = Nothing}
-
+describeEventTopics
+  = DescribeEventTopics'{_dDirectoryId = Nothing,
+                         _dTopicNames = Nothing}
 
 -- | The Directory ID for which to get the list of associated SNS topics. If this member is null, associations for all Directory IDs are returned.
 dDirectoryId :: Lens' DescribeEventTopics (Maybe Text)
@@ -122,11 +121,14 @@ instance ToQuery DescribeEventTopics where
 --
 --
 -- /See:/ 'describeEventTopicsResponse' smart constructor.
-data DescribeEventTopicsResponse = DescribeEventTopicsResponse'
-  { _detrsEventTopics    :: !(Maybe [EventTopic])
-  , _detrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEventTopicsResponse = DescribeEventTopicsResponse'{_detrsEventTopics
+                                                                ::
+                                                                !(Maybe
+                                                                    [EventTopic]),
+                                                                _detrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeEventTopicsResponse' with the minimum fields required to make a request.
 --
@@ -138,10 +140,10 @@ data DescribeEventTopicsResponse = DescribeEventTopicsResponse'
 describeEventTopicsResponse
     :: Int -- ^ 'detrsResponseStatus'
     -> DescribeEventTopicsResponse
-describeEventTopicsResponse pResponseStatus_ =
-  DescribeEventTopicsResponse'
-    {_detrsEventTopics = Nothing, _detrsResponseStatus = pResponseStatus_}
-
+describeEventTopicsResponse pResponseStatus_
+  = DescribeEventTopicsResponse'{_detrsEventTopics =
+                                   Nothing,
+                                 _detrsResponseStatus = pResponseStatus_}
 
 -- | A list of SNS topic names that receive status messages from the specified Directory ID.
 detrsEventTopics :: Lens' DescribeEventTopicsResponse [EventTopic]

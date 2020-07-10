@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
+-- Initiates a stop request for the current test run. AWS Device Farm immediately stops the run on devices where tests have not started. You are not billed for these devices. On devices where tests have started executing, setup suite and teardown suite tests run to completion on those devices. You are billed for setup, teardown, and any tests that were in progress or already completed.
 --
 --
 module Network.AWS.DeviceFarm.StopRun
@@ -49,23 +49,20 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'stopRun' smart constructor.
-newtype StopRun = StopRun'
-  { _srArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopRun = StopRun'{_srArn :: Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srArn' - Represents the Amazon Resource Name (ARN) of the Device Farm run you wish to stop.
+-- * 'srArn' - Represents the Amazon Resource Name (ARN) of the Device Farm run to stop.
 stopRun
     :: Text -- ^ 'srArn'
     -> StopRun
-stopRun pArn_ = StopRun' {_srArn = pArn_}
+stopRun pArn_ = StopRun'{_srArn = pArn_}
 
-
--- | Represents the Amazon Resource Name (ARN) of the Device Farm run you wish to stop.
+-- | Represents the Amazon Resource Name (ARN) of the Device Farm run to stop.
 srArn :: Lens' StopRun Text
 srArn = lens _srArn (\ s a -> s{_srArn = a})
 
@@ -106,11 +103,10 @@ instance ToQuery StopRun where
 --
 --
 -- /See:/ 'stopRunResponse' smart constructor.
-data StopRunResponse = StopRunResponse'
-  { _srsRun            :: !(Maybe Run)
-  , _srsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopRunResponse = StopRunResponse'{_srsRun ::
+                                        !(Maybe Run),
+                                        _srsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopRunResponse' with the minimum fields required to make a request.
 --
@@ -122,9 +118,9 @@ data StopRunResponse = StopRunResponse'
 stopRunResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopRunResponse
-stopRunResponse pResponseStatus_ =
-  StopRunResponse' {_srsRun = Nothing, _srsResponseStatus = pResponseStatus_}
-
+stopRunResponse pResponseStatus_
+  = StopRunResponse'{_srsRun = Nothing,
+                     _srsResponseStatus = pResponseStatus_}
 
 -- | The run that was stopped.
 srsRun :: Lens' StopRunResponse (Maybe Run)

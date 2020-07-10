@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a 'TypedLinkFacet' . For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- Updates a 'TypedLinkFacet' . For more information, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 --
 --
 module Network.AWS.CloudDirectory.UpdateTypedLinkFacet
@@ -47,13 +47,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateTypedLinkFacet' smart constructor.
-data UpdateTypedLinkFacet = UpdateTypedLinkFacet'
-  { _utlfSchemaARN              :: !Text
-  , _utlfName                   :: !Text
-  , _utlfAttributeUpdates       :: ![TypedLinkFacetAttributeUpdate]
-  , _utlfIdentityAttributeOrder :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateTypedLinkFacet = UpdateTypedLinkFacet'{_utlfSchemaARN
+                                                  :: !Text,
+                                                  _utlfName :: !Text,
+                                                  _utlfAttributeUpdates ::
+                                                  ![TypedLinkFacetAttributeUpdate],
+                                                  _utlfIdentityAttributeOrder ::
+                                                  ![Text]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateTypedLinkFacet' with the minimum fields required to make a request.
 --
@@ -65,19 +66,15 @@ data UpdateTypedLinkFacet = UpdateTypedLinkFacet'
 --
 -- * 'utlfAttributeUpdates' - Attributes update structure.
 --
--- * 'utlfIdentityAttributeOrder' - The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- * 'utlfIdentityAttributeOrder' - The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 updateTypedLinkFacet
     :: Text -- ^ 'utlfSchemaARN'
     -> Text -- ^ 'utlfName'
     -> UpdateTypedLinkFacet
-updateTypedLinkFacet pSchemaARN_ pName_ =
-  UpdateTypedLinkFacet'
-    { _utlfSchemaARN = pSchemaARN_
-    , _utlfName = pName_
-    , _utlfAttributeUpdates = mempty
-    , _utlfIdentityAttributeOrder = mempty
-    }
-
+updateTypedLinkFacet pSchemaARN_ pName_
+  = UpdateTypedLinkFacet'{_utlfSchemaARN = pSchemaARN_,
+                          _utlfName = pName_, _utlfAttributeUpdates = mempty,
+                          _utlfIdentityAttributeOrder = mempty}
 
 -- | The Amazon Resource Name (ARN) that is associated with the schema. For more information, see 'arns' .
 utlfSchemaARN :: Lens' UpdateTypedLinkFacet Text
@@ -91,7 +88,7 @@ utlfName = lens _utlfName (\ s a -> s{_utlfName = a})
 utlfAttributeUpdates :: Lens' UpdateTypedLinkFacet [TypedLinkFacetAttributeUpdate]
 utlfAttributeUpdates = lens _utlfAttributeUpdates (\ s a -> s{_utlfAttributeUpdates = a}) . _Coerce
 
--- | The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- | The order of identity attributes for the facet, from most significant to least significant. The ability to filter typed links considers the order that the attributes are defined on the typed link facet. When providing ranges to a typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range. Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls. For more information about identity attributes, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 utlfIdentityAttributeOrder :: Lens' UpdateTypedLinkFacet [Text]
 utlfIdentityAttributeOrder = lens _utlfIdentityAttributeOrder (\ s a -> s{_utlfIdentityAttributeOrder = a}) . _Coerce
 
@@ -132,10 +129,10 @@ instance ToQuery UpdateTypedLinkFacet where
         toQuery = const mempty
 
 -- | /See:/ 'updateTypedLinkFacetResponse' smart constructor.
-newtype UpdateTypedLinkFacetResponse = UpdateTypedLinkFacetResponse'
-  { _utlfrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateTypedLinkFacetResponse = UpdateTypedLinkFacetResponse'{_utlfrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateTypedLinkFacetResponse' with the minimum fields required to make a request.
 --
@@ -145,9 +142,9 @@ newtype UpdateTypedLinkFacetResponse = UpdateTypedLinkFacetResponse'
 updateTypedLinkFacetResponse
     :: Int -- ^ 'utlfrsResponseStatus'
     -> UpdateTypedLinkFacetResponse
-updateTypedLinkFacetResponse pResponseStatus_ =
-  UpdateTypedLinkFacetResponse' {_utlfrsResponseStatus = pResponseStatus_}
-
+updateTypedLinkFacetResponse pResponseStatus_
+  = UpdateTypedLinkFacetResponse'{_utlfrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 utlfrsResponseStatus :: Lens' UpdateTypedLinkFacetResponse Int

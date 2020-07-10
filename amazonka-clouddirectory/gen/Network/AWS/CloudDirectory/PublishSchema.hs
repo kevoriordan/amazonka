@@ -48,13 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'publishSchema' smart constructor.
-data PublishSchema = PublishSchema'
-  { _psMinorVersion         :: !(Maybe Text)
-  , _psName                 :: !(Maybe Text)
-  , _psDevelopmentSchemaARN :: !Text
-  , _psVersion              :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PublishSchema = PublishSchema'{_psMinorVersion
+                                    :: !(Maybe Text),
+                                    _psName :: !(Maybe Text),
+                                    _psDevelopmentSchemaARN :: !Text,
+                                    _psVersion :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PublishSchema' with the minimum fields required to make a request.
 --
@@ -71,14 +70,11 @@ publishSchema
     :: Text -- ^ 'psDevelopmentSchemaARN'
     -> Text -- ^ 'psVersion'
     -> PublishSchema
-publishSchema pDevelopmentSchemaARN_ pVersion_ =
-  PublishSchema'
-    { _psMinorVersion = Nothing
-    , _psName = Nothing
-    , _psDevelopmentSchemaARN = pDevelopmentSchemaARN_
-    , _psVersion = pVersion_
-    }
-
+publishSchema pDevelopmentSchemaARN_ pVersion_
+  = PublishSchema'{_psMinorVersion = Nothing,
+                   _psName = Nothing,
+                   _psDevelopmentSchemaARN = pDevelopmentSchemaARN_,
+                   _psVersion = pVersion_}
 
 -- | The minor version under which the schema will be published. This parameter is recommended. Schemas have both a major and minor version associated with them.
 psMinorVersion :: Lens' PublishSchema (Maybe Text)
@@ -131,11 +127,11 @@ instance ToQuery PublishSchema where
         toQuery = const mempty
 
 -- | /See:/ 'publishSchemaResponse' smart constructor.
-data PublishSchemaResponse = PublishSchemaResponse'
-  { _psrsPublishedSchemaARN :: !(Maybe Text)
-  , _psrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PublishSchemaResponse = PublishSchemaResponse'{_psrsPublishedSchemaARN
+                                                    :: !(Maybe Text),
+                                                    _psrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'PublishSchemaResponse' with the minimum fields required to make a request.
 --
@@ -147,10 +143,10 @@ data PublishSchemaResponse = PublishSchemaResponse'
 publishSchemaResponse
     :: Int -- ^ 'psrsResponseStatus'
     -> PublishSchemaResponse
-publishSchemaResponse pResponseStatus_ =
-  PublishSchemaResponse'
-    {_psrsPublishedSchemaARN = Nothing, _psrsResponseStatus = pResponseStatus_}
-
+publishSchemaResponse pResponseStatus_
+  = PublishSchemaResponse'{_psrsPublishedSchemaARN =
+                             Nothing,
+                           _psrsResponseStatus = pResponseStatus_}
 
 -- | The ARN that is associated with the published schema. For more information, see 'arns' .
 psrsPublishedSchemaARN :: Lens' PublishSchemaResponse (Maybe Text)

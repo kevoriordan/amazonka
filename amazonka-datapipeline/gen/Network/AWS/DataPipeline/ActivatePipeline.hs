@@ -54,12 +54,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'activatePipeline' smart constructor.
-data ActivatePipeline = ActivatePipeline'
-  { _apStartTimestamp  :: !(Maybe POSIX)
-  , _apParameterValues :: !(Maybe [ParameterValue])
-  , _apPipelineId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ActivatePipeline = ActivatePipeline'{_apStartTimestamp
+                                          :: !(Maybe POSIX),
+                                          _apParameterValues ::
+                                          !(Maybe [ParameterValue]),
+                                          _apPipelineId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ActivatePipeline' with the minimum fields required to make a request.
 --
@@ -73,13 +73,10 @@ data ActivatePipeline = ActivatePipeline'
 activatePipeline
     :: Text -- ^ 'apPipelineId'
     -> ActivatePipeline
-activatePipeline pPipelineId_ =
-  ActivatePipeline'
-    { _apStartTimestamp = Nothing
-    , _apParameterValues = Nothing
-    , _apPipelineId = pPipelineId_
-    }
-
+activatePipeline pPipelineId_
+  = ActivatePipeline'{_apStartTimestamp = Nothing,
+                      _apParameterValues = Nothing,
+                      _apPipelineId = pPipelineId_}
 
 -- | The date and time to resume the pipeline. By default, the pipeline resumes from the last completed execution.
 apStartTimestamp :: Lens' ActivatePipeline (Maybe UTCTime)
@@ -133,10 +130,10 @@ instance ToQuery ActivatePipeline where
 --
 --
 -- /See:/ 'activatePipelineResponse' smart constructor.
-newtype ActivatePipelineResponse = ActivatePipelineResponse'
-  { _aprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype ActivatePipelineResponse = ActivatePipelineResponse'{_aprsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ActivatePipelineResponse' with the minimum fields required to make a request.
 --
@@ -146,9 +143,9 @@ newtype ActivatePipelineResponse = ActivatePipelineResponse'
 activatePipelineResponse
     :: Int -- ^ 'aprsResponseStatus'
     -> ActivatePipelineResponse
-activatePipelineResponse pResponseStatus_ =
-  ActivatePipelineResponse' {_aprsResponseStatus = pResponseStatus_}
-
+activatePipelineResponse pResponseStatus_
+  = ActivatePipelineResponse'{_aprsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 aprsResponseStatus :: Lens' ActivatePipelineResponse Int

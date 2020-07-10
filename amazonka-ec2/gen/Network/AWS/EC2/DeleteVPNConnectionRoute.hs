@@ -47,11 +47,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteVPNConnectionRoute' smart constructor.
-data DeleteVPNConnectionRoute = DeleteVPNConnectionRoute'
-  { _dvcrDestinationCidrBlock :: !Text
-  , _dvcrVPNConnectionId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPNConnectionRoute = DeleteVPNConnectionRoute'{_dvcrDestinationCidrBlock
+                                                          :: !Text,
+                                                          _dvcrVPNConnectionId
+                                                          :: !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteVPNConnectionRoute' with the minimum fields required to make a request.
 --
@@ -64,12 +65,11 @@ deleteVPNConnectionRoute
     :: Text -- ^ 'dvcrDestinationCidrBlock'
     -> Text -- ^ 'dvcrVPNConnectionId'
     -> DeleteVPNConnectionRoute
-deleteVPNConnectionRoute pDestinationCidrBlock_ pVPNConnectionId_ =
-  DeleteVPNConnectionRoute'
-    { _dvcrDestinationCidrBlock = pDestinationCidrBlock_
-    , _dvcrVPNConnectionId = pVPNConnectionId_
-    }
-
+deleteVPNConnectionRoute pDestinationCidrBlock_
+  pVPNConnectionId_
+  = DeleteVPNConnectionRoute'{_dvcrDestinationCidrBlock
+                                = pDestinationCidrBlock_,
+                              _dvcrVPNConnectionId = pVPNConnectionId_}
 
 -- | The CIDR block associated with the local subnet of the customer network.
 dvcrDestinationCidrBlock :: Lens' DeleteVPNConnectionRoute Text
@@ -106,17 +106,16 @@ instance ToQuery DeleteVPNConnectionRoute where
                "VpnConnectionId" =: _dvcrVPNConnectionId]
 
 -- | /See:/ 'deleteVPNConnectionRouteResponse' smart constructor.
-data DeleteVPNConnectionRouteResponse =
-  DeleteVPNConnectionRouteResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteVPNConnectionRouteResponse = DeleteVPNConnectionRouteResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteVPNConnectionRouteResponse' with the minimum fields required to make a request.
 --
 deleteVPNConnectionRouteResponse
     :: DeleteVPNConnectionRouteResponse
-deleteVPNConnectionRouteResponse = DeleteVPNConnectionRouteResponse'
-
+deleteVPNConnectionRouteResponse
+  = DeleteVPNConnectionRouteResponse'
 
 instance NFData DeleteVPNConnectionRouteResponse
          where

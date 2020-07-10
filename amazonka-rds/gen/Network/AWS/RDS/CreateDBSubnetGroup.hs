@@ -47,26 +47,27 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'createDBSubnetGroup' smart constructor.
-data CreateDBSubnetGroup = CreateDBSubnetGroup'
-  { _cdbsgTags                     :: !(Maybe [Tag])
-  , _cdbsgDBSubnetGroupName        :: !Text
-  , _cdbsgDBSubnetGroupDescription :: !Text
-  , _cdbsgSubnetIds                :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDBSubnetGroup = CreateDBSubnetGroup'{_cdbsgTags
+                                                :: !(Maybe [Tag]),
+                                                _cdbsgDBSubnetGroupName ::
+                                                !Text,
+                                                _cdbsgDBSubnetGroupDescription
+                                                :: !Text,
+                                                _cdbsgSubnetIds :: ![Text]}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateDBSubnetGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdbsgTags' - Undocumented member.
+-- * 'cdbsgTags' - Tags to assign to the DB subnet group.
 --
--- * 'cdbsgDBSubnetGroupName' - The name for the DB subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens. Must not be default. Example: @mySubnetgroup@
+-- * 'cdbsgDBSubnetGroupName' - The name for the DB subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens. Must not be default. Example: @mySubnetgroup@ 
 --
 -- * 'cdbsgDBSubnetGroupDescription' - The description for the DB subnet group.
 --
@@ -75,20 +76,19 @@ createDBSubnetGroup
     :: Text -- ^ 'cdbsgDBSubnetGroupName'
     -> Text -- ^ 'cdbsgDBSubnetGroupDescription'
     -> CreateDBSubnetGroup
-createDBSubnetGroup pDBSubnetGroupName_ pDBSubnetGroupDescription_ =
-  CreateDBSubnetGroup'
-    { _cdbsgTags = Nothing
-    , _cdbsgDBSubnetGroupName = pDBSubnetGroupName_
-    , _cdbsgDBSubnetGroupDescription = pDBSubnetGroupDescription_
-    , _cdbsgSubnetIds = mempty
-    }
+createDBSubnetGroup pDBSubnetGroupName_
+  pDBSubnetGroupDescription_
+  = CreateDBSubnetGroup'{_cdbsgTags = Nothing,
+                         _cdbsgDBSubnetGroupName = pDBSubnetGroupName_,
+                         _cdbsgDBSubnetGroupDescription =
+                           pDBSubnetGroupDescription_,
+                         _cdbsgSubnetIds = mempty}
 
-
--- | Undocumented member.
+-- | Tags to assign to the DB subnet group.
 cdbsgTags :: Lens' CreateDBSubnetGroup [Tag]
 cdbsgTags = lens _cdbsgTags (\ s a -> s{_cdbsgTags = a}) . _Default . _Coerce
 
--- | The name for the DB subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens. Must not be default. Example: @mySubnetgroup@
+-- | The name for the DB subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens. Must not be default. Example: @mySubnetgroup@ 
 cdbsgDBSubnetGroupName :: Lens' CreateDBSubnetGroup Text
 cdbsgDBSubnetGroupName = lens _cdbsgDBSubnetGroupName (\ s a -> s{_cdbsgDBSubnetGroupName = a})
 
@@ -133,11 +133,14 @@ instance ToQuery CreateDBSubnetGroup where
                  toQueryList "SubnetIdentifier" _cdbsgSubnetIds]
 
 -- | /See:/ 'createDBSubnetGroupResponse' smart constructor.
-data CreateDBSubnetGroupResponse = CreateDBSubnetGroupResponse'
-  { _cdsgrsDBSubnetGroup  :: !(Maybe DBSubnetGroup)
-  , _cdsgrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDBSubnetGroupResponse = CreateDBSubnetGroupResponse'{_cdsgrsDBSubnetGroup
+                                                                ::
+                                                                !(Maybe
+                                                                    DBSubnetGroup),
+                                                                _cdsgrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateDBSubnetGroupResponse' with the minimum fields required to make a request.
 --
@@ -149,10 +152,10 @@ data CreateDBSubnetGroupResponse = CreateDBSubnetGroupResponse'
 createDBSubnetGroupResponse
     :: Int -- ^ 'cdsgrsResponseStatus'
     -> CreateDBSubnetGroupResponse
-createDBSubnetGroupResponse pResponseStatus_ =
-  CreateDBSubnetGroupResponse'
-    {_cdsgrsDBSubnetGroup = Nothing, _cdsgrsResponseStatus = pResponseStatus_}
-
+createDBSubnetGroupResponse pResponseStatus_
+  = CreateDBSubnetGroupResponse'{_cdsgrsDBSubnetGroup =
+                                   Nothing,
+                                 _cdsgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 cdsgrsDBSubnetGroup :: Lens' CreateDBSubnetGroupResponse (Maybe DBSubnetGroup)

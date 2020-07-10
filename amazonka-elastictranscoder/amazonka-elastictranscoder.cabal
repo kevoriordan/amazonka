@@ -65,12 +65,43 @@ library
         , Network.AWS.ElasticTranscoder.Waiters
 
     other-modules:
-          Network.AWS.ElasticTranscoder.Types.Product
-        , Network.AWS.ElasticTranscoder.Types.Sum
+          Network.AWS.ElasticTranscoder.Types.Artwork
+        , Network.AWS.ElasticTranscoder.Types.AudioCodecOptions
+        , Network.AWS.ElasticTranscoder.Types.AudioParameters
+        , Network.AWS.ElasticTranscoder.Types.CaptionFormat
+        , Network.AWS.ElasticTranscoder.Types.CaptionSource
+        , Network.AWS.ElasticTranscoder.Types.Captions
+        , Network.AWS.ElasticTranscoder.Types.Clip
+        , Network.AWS.ElasticTranscoder.Types.CreateJobOutput
+        , Network.AWS.ElasticTranscoder.Types.CreateJobPlaylist
+        , Network.AWS.ElasticTranscoder.Types.DetectedProperties
+        , Network.AWS.ElasticTranscoder.Types.Encryption
+        , Network.AWS.ElasticTranscoder.Types.HlsContentProtection
+        , Network.AWS.ElasticTranscoder.Types.InputCaptions
+        , Network.AWS.ElasticTranscoder.Types.Job'
+        , Network.AWS.ElasticTranscoder.Types.JobAlbumArt
+        , Network.AWS.ElasticTranscoder.Types.JobInput
+        , Network.AWS.ElasticTranscoder.Types.JobOutput
+        , Network.AWS.ElasticTranscoder.Types.JobWatermark
+        , Network.AWS.ElasticTranscoder.Types.Notifications
+        , Network.AWS.ElasticTranscoder.Types.Permission
+        , Network.AWS.ElasticTranscoder.Types.Pipeline
+        , Network.AWS.ElasticTranscoder.Types.PipelineOutputConfig
+        , Network.AWS.ElasticTranscoder.Types.PlayReadyDrm
+        , Network.AWS.ElasticTranscoder.Types.Playlist
+        , Network.AWS.ElasticTranscoder.Types.Preset
+        , Network.AWS.ElasticTranscoder.Types.PresetWatermark
+        , Network.AWS.ElasticTranscoder.Types.Product
+        , Network.AWS.ElasticTranscoder.Types.Thumbnails
+        , Network.AWS.ElasticTranscoder.Types.TimeSpan
+        , Network.AWS.ElasticTranscoder.Types.Timing
+        , Network.AWS.ElasticTranscoder.Types.VideoParameters
+        , Network.AWS.ElasticTranscoder.Types.Warning
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-elastictranscoder-test
     type:              exitcode-stdio-1.0
@@ -94,6 +125,7 @@ test-suite amazonka-elastictranscoder-test
         , amazonka-elastictranscoder
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

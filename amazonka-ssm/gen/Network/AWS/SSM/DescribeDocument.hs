@@ -27,6 +27,7 @@ module Network.AWS.SSM.DescribeDocument
       describeDocument
     , DescribeDocument
     -- * Request Lenses
+    , ddVersionName
     , ddDocumentVersion
     , ddName
 
@@ -46,15 +47,17 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeDocument' smart constructor.
-data DescribeDocument = DescribeDocument'
-  { _ddDocumentVersion :: !(Maybe Text)
-  , _ddName            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDocument = DescribeDocument'{_ddVersionName
+                                          :: !(Maybe Text),
+                                          _ddDocumentVersion :: !(Maybe Text),
+                                          _ddName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeDocument' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ddVersionName' - An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
 --
 -- * 'ddDocumentVersion' - The document version for which you want information. Can be a specific version or the default version.
 --
@@ -62,9 +65,13 @@ data DescribeDocument = DescribeDocument'
 describeDocument
     :: Text -- ^ 'ddName'
     -> DescribeDocument
-describeDocument pName_ =
-  DescribeDocument' {_ddDocumentVersion = Nothing, _ddName = pName_}
+describeDocument pName_
+  = DescribeDocument'{_ddVersionName = Nothing,
+                      _ddDocumentVersion = Nothing, _ddName = pName_}
 
+-- | An optional field specifying the version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
+ddVersionName :: Lens' DescribeDocument (Maybe Text)
+ddVersionName = lens _ddVersionName (\ s a -> s{_ddVersionName = a})
 
 -- | The document version for which you want information. Can be a specific version or the default version.
 ddDocumentVersion :: Lens' DescribeDocument (Maybe Text)
@@ -100,7 +107,8 @@ instance ToJSON DescribeDocument where
         toJSON DescribeDocument'{..}
           = object
               (catMaybes
-                 [("DocumentVersion" .=) <$> _ddDocumentVersion,
+                 [("VersionName" .=) <$> _ddVersionName,
+                  ("DocumentVersion" .=) <$> _ddDocumentVersion,
                   Just ("Name" .= _ddName)])
 
 instance ToPath DescribeDocument where
@@ -110,11 +118,14 @@ instance ToQuery DescribeDocument where
         toQuery = const mempty
 
 -- | /See:/ 'describeDocumentResponse' smart constructor.
-data DescribeDocumentResponse = DescribeDocumentResponse'
-  { _desrsDocument       :: !(Maybe DocumentDescription)
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeDocumentResponse = DescribeDocumentResponse'{_desrsDocument
+                                                          ::
+                                                          !(Maybe
+                                                              DocumentDescription),
+                                                          _desrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeDocumentResponse' with the minimum fields required to make a request.
 --
@@ -126,10 +137,9 @@ data DescribeDocumentResponse = DescribeDocumentResponse'
 describeDocumentResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeDocumentResponse
-describeDocumentResponse pResponseStatus_ =
-  DescribeDocumentResponse'
-    {_desrsDocument = Nothing, _desrsResponseStatus = pResponseStatus_}
-
+describeDocumentResponse pResponseStatus_
+  = DescribeDocumentResponse'{_desrsDocument = Nothing,
+                              _desrsResponseStatus = pResponseStatus_}
 
 -- | Information about the Systems Manager document.
 desrsDocument :: Lens' DescribeDocumentResponse (Maybe DocumentDescription)

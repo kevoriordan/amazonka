@@ -45,11 +45,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'removeAutoScalingPolicy' smart constructor.
-data RemoveAutoScalingPolicy = RemoveAutoScalingPolicy'
-  { _raspClusterId       :: !Text
-  , _raspInstanceGroupId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveAutoScalingPolicy = RemoveAutoScalingPolicy'{_raspClusterId
+                                                        :: !Text,
+                                                        _raspInstanceGroupId ::
+                                                        !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'RemoveAutoScalingPolicy' with the minimum fields required to make a request.
 --
@@ -62,10 +63,10 @@ removeAutoScalingPolicy
     :: Text -- ^ 'raspClusterId'
     -> Text -- ^ 'raspInstanceGroupId'
     -> RemoveAutoScalingPolicy
-removeAutoScalingPolicy pClusterId_ pInstanceGroupId_ =
-  RemoveAutoScalingPolicy'
-    {_raspClusterId = pClusterId_, _raspInstanceGroupId = pInstanceGroupId_}
-
+removeAutoScalingPolicy pClusterId_ pInstanceGroupId_
+  = RemoveAutoScalingPolicy'{_raspClusterId =
+                               pClusterId_,
+                             _raspInstanceGroupId = pInstanceGroupId_}
 
 -- | Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
 raspClusterId :: Lens' RemoveAutoScalingPolicy Text
@@ -113,10 +114,11 @@ instance ToQuery RemoveAutoScalingPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'removeAutoScalingPolicyResponse' smart constructor.
-newtype RemoveAutoScalingPolicyResponse = RemoveAutoScalingPolicyResponse'
-  { _rasprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RemoveAutoScalingPolicyResponse = RemoveAutoScalingPolicyResponse'{_rasprsResponseStatus
+                                                                           ::
+                                                                           Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'RemoveAutoScalingPolicyResponse' with the minimum fields required to make a request.
 --
@@ -126,9 +128,9 @@ newtype RemoveAutoScalingPolicyResponse = RemoveAutoScalingPolicyResponse'
 removeAutoScalingPolicyResponse
     :: Int -- ^ 'rasprsResponseStatus'
     -> RemoveAutoScalingPolicyResponse
-removeAutoScalingPolicyResponse pResponseStatus_ =
-  RemoveAutoScalingPolicyResponse' {_rasprsResponseStatus = pResponseStatus_}
-
+removeAutoScalingPolicyResponse pResponseStatus_
+  = RemoveAutoScalingPolicyResponse'{_rasprsResponseStatus
+                                       = pResponseStatus_}
 
 -- | -- | The response status code.
 rasprsResponseStatus :: Lens' RemoveAutoScalingPolicyResponse Int

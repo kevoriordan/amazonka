@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete an SMS channel
+-- Disables the SMS channel for an application and deletes any existing settings for the channel.
+--
+--
 module Network.AWS.Pinpoint.DeleteSmsChannel
     (
     -- * Creating a Request
@@ -43,24 +45,23 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteSmsChannel' smart constructor.
-newtype DeleteSmsChannel = DeleteSmsChannel'
-  { _dscApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSmsChannel = DeleteSmsChannel'{_dscApplicationId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSmsChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dscApplicationId' - Undocumented member.
+-- * 'dscApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 deleteSmsChannel
     :: Text -- ^ 'dscApplicationId'
     -> DeleteSmsChannel
-deleteSmsChannel pApplicationId_ =
-  DeleteSmsChannel' {_dscApplicationId = pApplicationId_}
+deleteSmsChannel pApplicationId_
+  = DeleteSmsChannel'{_dscApplicationId =
+                        pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 dscApplicationId :: Lens' DeleteSmsChannel Text
 dscApplicationId = lens _dscApplicationId (\ s a -> s{_dscApplicationId = a})
 
@@ -94,11 +95,13 @@ instance ToQuery DeleteSmsChannel where
         toQuery = const mempty
 
 -- | /See:/ 'deleteSmsChannelResponse' smart constructor.
-data DeleteSmsChannelResponse = DeleteSmsChannelResponse'
-  { _dscrsResponseStatus     :: !Int
-  , _dscrsSMSChannelResponse :: !SMSChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSmsChannelResponse = DeleteSmsChannelResponse'{_dscrsResponseStatus
+                                                          :: !Int,
+                                                          _dscrsSMSChannelResponse
+                                                          ::
+                                                          !SMSChannelResponse}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DeleteSmsChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +114,11 @@ deleteSmsChannelResponse
     :: Int -- ^ 'dscrsResponseStatus'
     -> SMSChannelResponse -- ^ 'dscrsSMSChannelResponse'
     -> DeleteSmsChannelResponse
-deleteSmsChannelResponse pResponseStatus_ pSMSChannelResponse_ =
-  DeleteSmsChannelResponse'
-    { _dscrsResponseStatus = pResponseStatus_
-    , _dscrsSMSChannelResponse = pSMSChannelResponse_
-    }
-
+deleteSmsChannelResponse pResponseStatus_
+  pSMSChannelResponse_
+  = DeleteSmsChannelResponse'{_dscrsResponseStatus =
+                                pResponseStatus_,
+                              _dscrsSMSChannelResponse = pSMSChannelResponse_}
 
 -- | -- | The response status code.
 dscrsResponseStatus :: Lens' DeleteSmsChannelResponse Int

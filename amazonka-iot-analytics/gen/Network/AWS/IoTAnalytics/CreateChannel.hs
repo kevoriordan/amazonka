@@ -28,6 +28,8 @@ module Network.AWS.IoTAnalytics.CreateChannel
     , CreateChannel
     -- * Request Lenses
     , ccRetentionPeriod
+    , ccChannelStorage
+    , ccTags
     , ccChannelName
 
     -- * Destructuring the Response
@@ -48,29 +50,44 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createChannel' smart constructor.
-data CreateChannel = CreateChannel'
-  { _ccRetentionPeriod :: !(Maybe RetentionPeriod)
-  , _ccChannelName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateChannel = CreateChannel'{_ccRetentionPeriod
+                                    :: !(Maybe RetentionPeriod),
+                                    _ccChannelStorage ::
+                                    !(Maybe ChannelStorage),
+                                    _ccTags :: !(Maybe (List1 Tag)),
+                                    _ccChannelName :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccRetentionPeriod' - How long, in days, message data is kept for the channel.
+-- * 'ccRetentionPeriod' - How long, in days, message data is kept for the channel. When "customerManagedS3" storage is selected, this parameter is ignored.
+--
+-- * 'ccChannelStorage' - Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.
+--
+-- * 'ccTags' - Metadata which can be used to manage the channel.
 --
 -- * 'ccChannelName' - The name of the channel.
 createChannel
     :: Text -- ^ 'ccChannelName'
     -> CreateChannel
-createChannel pChannelName_ =
-  CreateChannel' {_ccRetentionPeriod = Nothing, _ccChannelName = pChannelName_}
+createChannel pChannelName_
+  = CreateChannel'{_ccRetentionPeriod = Nothing,
+                   _ccChannelStorage = Nothing, _ccTags = Nothing,
+                   _ccChannelName = pChannelName_}
 
-
--- | How long, in days, message data is kept for the channel.
+-- | How long, in days, message data is kept for the channel. When "customerManagedS3" storage is selected, this parameter is ignored.
 ccRetentionPeriod :: Lens' CreateChannel (Maybe RetentionPeriod)
 ccRetentionPeriod = lens _ccRetentionPeriod (\ s a -> s{_ccRetentionPeriod = a})
+
+-- | Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.
+ccChannelStorage :: Lens' CreateChannel (Maybe ChannelStorage)
+ccChannelStorage = lens _ccChannelStorage (\ s a -> s{_ccChannelStorage = a})
+
+-- | Metadata which can be used to manage the channel.
+ccTags :: Lens' CreateChannel (Maybe (NonEmpty Tag))
+ccTags = lens _ccTags (\ s a -> s{_ccTags = a}) . mapping _List1
 
 -- | The name of the channel.
 ccChannelName :: Lens' CreateChannel Text
@@ -99,6 +116,8 @@ instance ToJSON CreateChannel where
           = object
               (catMaybes
                  [("retentionPeriod" .=) <$> _ccRetentionPeriod,
+                  ("channelStorage" .=) <$> _ccChannelStorage,
+                  ("tags" .=) <$> _ccTags,
                   Just ("channelName" .= _ccChannelName)])
 
 instance ToPath CreateChannel where
@@ -108,13 +127,15 @@ instance ToQuery CreateChannel where
         toQuery = const mempty
 
 -- | /See:/ 'createChannelResponse' smart constructor.
-data CreateChannelResponse = CreateChannelResponse'
-  { _ccrsChannelARN      :: !(Maybe Text)
-  , _ccrsRetentionPeriod :: !(Maybe RetentionPeriod)
-  , _ccrsChannelName     :: !(Maybe Text)
-  , _ccrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateChannelResponse = CreateChannelResponse'{_ccrsChannelARN
+                                                    :: !(Maybe Text),
+                                                    _ccrsRetentionPeriod ::
+                                                    !(Maybe RetentionPeriod),
+                                                    _ccrsChannelName ::
+                                                    !(Maybe Text),
+                                                    _ccrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateChannelResponse' with the minimum fields required to make a request.
 --
@@ -130,14 +151,11 @@ data CreateChannelResponse = CreateChannelResponse'
 createChannelResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CreateChannelResponse
-createChannelResponse pResponseStatus_ =
-  CreateChannelResponse'
-    { _ccrsChannelARN = Nothing
-    , _ccrsRetentionPeriod = Nothing
-    , _ccrsChannelName = Nothing
-    , _ccrsResponseStatus = pResponseStatus_
-    }
-
+createChannelResponse pResponseStatus_
+  = CreateChannelResponse'{_ccrsChannelARN = Nothing,
+                           _ccrsRetentionPeriod = Nothing,
+                           _ccrsChannelName = Nothing,
+                           _ccrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the channel.
 ccrsChannelARN :: Lens' CreateChannelResponse (Maybe Text)

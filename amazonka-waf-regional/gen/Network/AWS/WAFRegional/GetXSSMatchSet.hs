@@ -49,10 +49,9 @@ import Network.AWS.WAFRegional.Types.Product
 --
 --
 -- /See:/ 'getXSSMatchSet' smart constructor.
-newtype GetXSSMatchSet = GetXSSMatchSet'
-  { _gxmsXSSMatchSetId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetXSSMatchSet = GetXSSMatchSet'{_gxmsXSSMatchSetId
+                                         :: Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetXSSMatchSet' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ newtype GetXSSMatchSet = GetXSSMatchSet'
 getXSSMatchSet
     :: Text -- ^ 'gxmsXSSMatchSetId'
     -> GetXSSMatchSet
-getXSSMatchSet pXSSMatchSetId_ =
-  GetXSSMatchSet' {_gxmsXSSMatchSetId = pXSSMatchSetId_}
-
+getXSSMatchSet pXSSMatchSetId_
+  = GetXSSMatchSet'{_gxmsXSSMatchSetId =
+                      pXSSMatchSetId_}
 
 -- | The @XssMatchSetId@ of the 'XssMatchSet' that you want to get. @XssMatchSetId@ is returned by 'CreateXssMatchSet' and by 'ListXssMatchSets' .
 gxmsXSSMatchSetId :: Lens' GetXSSMatchSet Text
@@ -110,28 +109,29 @@ instance ToQuery GetXSSMatchSet where
 --
 --
 -- /See:/ 'getXSSMatchSetResponse' smart constructor.
-data GetXSSMatchSetResponse = GetXSSMatchSetResponse'
-  { _gxmsrsXSSMatchSet    :: !(Maybe XSSMatchSet)
-  , _gxmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetXSSMatchSetResponse = GetXSSMatchSetResponse'{_gxmsrsXSSMatchSet
+                                                      :: !(Maybe XSSMatchSet),
+                                                      _gxmsrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'GetXSSMatchSetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gxmsrsXSSMatchSet' - Information about the 'XssMatchSet' that you specified in the @GetXssMatchSet@ request. For more information, see the following topics:     * 'XssMatchSet' : Contains @Name@ , @XssMatchSetId@ , and an array of @XssMatchTuple@ objects     * 'XssMatchTuple' : Each @XssMatchTuple@ object contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- * 'gxmsrsXSSMatchSet' - Information about the 'XssMatchSet' that you specified in the @GetXssMatchSet@ request. For more information, see the following topics:     * 'XssMatchSet' : Contains @Name@ , @XssMatchSetId@ , and an array of @XssMatchTuple@ objects     * 'XssMatchTuple' : Each @XssMatchTuple@ object contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 --
 -- * 'gxmsrsResponseStatus' - -- | The response status code.
 getXSSMatchSetResponse
     :: Int -- ^ 'gxmsrsResponseStatus'
     -> GetXSSMatchSetResponse
-getXSSMatchSetResponse pResponseStatus_ =
-  GetXSSMatchSetResponse'
-    {_gxmsrsXSSMatchSet = Nothing, _gxmsrsResponseStatus = pResponseStatus_}
+getXSSMatchSetResponse pResponseStatus_
+  = GetXSSMatchSetResponse'{_gxmsrsXSSMatchSet =
+                              Nothing,
+                            _gxmsrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the 'XssMatchSet' that you specified in the @GetXssMatchSet@ request. For more information, see the following topics:     * 'XssMatchSet' : Contains @Name@ , @XssMatchSetId@ , and an array of @XssMatchTuple@ objects     * 'XssMatchTuple' : Each @XssMatchTuple@ object contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@
+-- | Information about the 'XssMatchSet' that you specified in the @GetXssMatchSet@ request. For more information, see the following topics:     * 'XssMatchSet' : Contains @Name@ , @XssMatchSetId@ , and an array of @XssMatchTuple@ objects     * 'XssMatchTuple' : Each @XssMatchTuple@ object contains @FieldToMatch@ and @TextTransformation@      * 'FieldToMatch' : Contains @Data@ and @Type@ 
 gxmsrsXSSMatchSet :: Lens' GetXSSMatchSetResponse (Maybe XSSMatchSet)
 gxmsrsXSSMatchSet = lens _gxmsrsXSSMatchSet (\ s a -> s{_gxmsrsXSSMatchSet = a})
 

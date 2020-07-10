@@ -54,13 +54,18 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'updateDomainContact' smart constructor.
-data UpdateDomainContact = UpdateDomainContact'
-  { _udcRegistrantContact :: !(Maybe (Sensitive ContactDetail))
-  , _udcAdminContact      :: !(Maybe (Sensitive ContactDetail))
-  , _udcTechContact       :: !(Maybe (Sensitive ContactDetail))
-  , _udcDomainName        :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateDomainContact = UpdateDomainContact'{_udcRegistrantContact
+                                                ::
+                                                !(Maybe
+                                                    (Sensitive ContactDetail)),
+                                                _udcAdminContact ::
+                                                !(Maybe
+                                                    (Sensitive ContactDetail)),
+                                                _udcTechContact ::
+                                                !(Maybe
+                                                    (Sensitive ContactDetail)),
+                                                _udcDomainName :: !Text}
+                             deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDomainContact' with the minimum fields required to make a request.
 --
@@ -76,14 +81,12 @@ data UpdateDomainContact = UpdateDomainContact'
 updateDomainContact
     :: Text -- ^ 'udcDomainName'
     -> UpdateDomainContact
-updateDomainContact pDomainName_ =
-  UpdateDomainContact'
-    { _udcRegistrantContact = Nothing
-    , _udcAdminContact = Nothing
-    , _udcTechContact = Nothing
-    , _udcDomainName = pDomainName_
-    }
-
+updateDomainContact pDomainName_
+  = UpdateDomainContact'{_udcRegistrantContact =
+                           Nothing,
+                         _udcAdminContact = Nothing,
+                         _udcTechContact = Nothing,
+                         _udcDomainName = pDomainName_}
 
 -- | Provides detailed contact information.
 udcRegistrantContact :: Lens' UpdateDomainContact (Maybe ContactDetail)
@@ -145,11 +148,12 @@ instance ToQuery UpdateDomainContact where
 --
 --
 -- /See:/ 'updateDomainContactResponse' smart constructor.
-data UpdateDomainContactResponse = UpdateDomainContactResponse'
-  { _udcrsResponseStatus :: !Int
-  , _udcrsOperationId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDomainContactResponse = UpdateDomainContactResponse'{_udcrsResponseStatus
+                                                                :: !Int,
+                                                                _udcrsOperationId
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateDomainContactResponse' with the minimum fields required to make a request.
 --
@@ -157,21 +161,22 @@ data UpdateDomainContactResponse = UpdateDomainContactResponse'
 --
 -- * 'udcrsResponseStatus' - -- | The response status code.
 --
--- * 'udcrsOperationId' - Identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- * 'udcrsOperationId' - Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 updateDomainContactResponse
     :: Int -- ^ 'udcrsResponseStatus'
     -> Text -- ^ 'udcrsOperationId'
     -> UpdateDomainContactResponse
-updateDomainContactResponse pResponseStatus_ pOperationId_ =
-  UpdateDomainContactResponse'
-    {_udcrsResponseStatus = pResponseStatus_, _udcrsOperationId = pOperationId_}
-
+updateDomainContactResponse pResponseStatus_
+  pOperationId_
+  = UpdateDomainContactResponse'{_udcrsResponseStatus =
+                                   pResponseStatus_,
+                                 _udcrsOperationId = pOperationId_}
 
 -- | -- | The response status code.
 udcrsResponseStatus :: Lens' UpdateDomainContactResponse Int
 udcrsResponseStatus = lens _udcrsResponseStatus (\ s a -> s{_udcrsResponseStatus = a})
 
--- | Identifier for tracking the progress of the request. To use this ID to query the operation status, use 'GetOperationDetail' .
+-- | Identifier for tracking the progress of the request. To query the operation status, use <https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html GetOperationDetail> .
 udcrsOperationId :: Lens' UpdateDomainContactResponse Text
 udcrsOperationId = lens _udcrsOperationId (\ s a -> s{_udcrsOperationId = a})
 

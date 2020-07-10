@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the certificate signing request (CSR) for your private certificate authority (CA). The CSR is created when you call the 'CreateCertificateAuthority' function. Take the CSR to your on-premises X.509 infrastructure and sign it by using your root or a subordinate CA. Then import the signed certificate back into ACM PCA by calling the 'ImportCertificateAuthorityCertificate' function. The CSR is returned as a base64 PEM-encoded string.
+-- Retrieves the certificate signing request (CSR) for your private certificate authority (CA). The CSR is created when you call the 'CreateCertificateAuthority' action. Sign the CSR with your ACM Private CA-hosted or on-premises root or subordinate CA. Then import the signed certificate back into ACM Private CA by calling the 'ImportCertificateAuthorityCertificate' action. The CSR is returned as a base64 PEM-encoded string. 
 --
 --
 module Network.AWS.CertificateManagerPCA.GetCertificateAuthorityCSR
@@ -45,25 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getCertificateAuthorityCSR' smart constructor.
-newtype GetCertificateAuthorityCSR = GetCertificateAuthorityCSR'
-  { _gcacsrCertificateAuthorityARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetCertificateAuthorityCSR = GetCertificateAuthorityCSR'{_gcacsrCertificateAuthorityARN
+                                                                 :: Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetCertificateAuthorityCSR' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gcacsrCertificateAuthorityARN' - The Amazon Resource Name (ARN) that was returned when you called the 'CreateCertificateAuthority' function. This must be of the form:  @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @
+-- * 'gcacsrCertificateAuthorityARN' - The Amazon Resource Name (ARN) that was returned when you called the 'CreateCertificateAuthority' action. This must be of the form:  @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ 
 getCertificateAuthorityCSR
     :: Text -- ^ 'gcacsrCertificateAuthorityARN'
     -> GetCertificateAuthorityCSR
-getCertificateAuthorityCSR pCertificateAuthorityARN_ =
-  GetCertificateAuthorityCSR'
-    {_gcacsrCertificateAuthorityARN = pCertificateAuthorityARN_}
+getCertificateAuthorityCSR pCertificateAuthorityARN_
+  = GetCertificateAuthorityCSR'{_gcacsrCertificateAuthorityARN
+                                  = pCertificateAuthorityARN_}
 
-
--- | The Amazon Resource Name (ARN) that was returned when you called the 'CreateCertificateAuthority' function. This must be of the form:  @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @
+-- | The Amazon Resource Name (ARN) that was returned when you called the 'CreateCertificateAuthority' action. This must be of the form:  @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ 
 gcacsrCertificateAuthorityARN :: Lens' GetCertificateAuthorityCSR Text
 gcacsrCertificateAuthorityARN = lens _gcacsrCertificateAuthorityARN (\ s a -> s{_gcacsrCertificateAuthorityARN = a})
 
@@ -106,11 +105,15 @@ instance ToQuery GetCertificateAuthorityCSR where
         toQuery = const mempty
 
 -- | /See:/ 'getCertificateAuthorityCSRResponse' smart constructor.
-data GetCertificateAuthorityCSRResponse = GetCertificateAuthorityCSRResponse'
-  { _gcacsrrsCSR            :: !(Maybe Text)
-  , _gcacsrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetCertificateAuthorityCSRResponse = GetCertificateAuthorityCSRResponse'{_gcacsrrsCSR
+                                                                              ::
+                                                                              !(Maybe
+                                                                                  Text),
+                                                                              _gcacsrrsResponseStatus
+                                                                              ::
+                                                                              !Int}
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'GetCertificateAuthorityCSRResponse' with the minimum fields required to make a request.
 --
@@ -122,10 +125,11 @@ data GetCertificateAuthorityCSRResponse = GetCertificateAuthorityCSRResponse'
 getCertificateAuthorityCSRResponse
     :: Int -- ^ 'gcacsrrsResponseStatus'
     -> GetCertificateAuthorityCSRResponse
-getCertificateAuthorityCSRResponse pResponseStatus_ =
-  GetCertificateAuthorityCSRResponse'
-    {_gcacsrrsCSR = Nothing, _gcacsrrsResponseStatus = pResponseStatus_}
-
+getCertificateAuthorityCSRResponse pResponseStatus_
+  = GetCertificateAuthorityCSRResponse'{_gcacsrrsCSR =
+                                          Nothing,
+                                        _gcacsrrsResponseStatus =
+                                          pResponseStatus_}
 
 -- | The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.
 gcacsrrsCSR :: Lens' GetCertificateAuthorityCSRResponse (Maybe Text)

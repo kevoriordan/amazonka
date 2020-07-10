@@ -22,20 +22,14 @@ module Network.AWS.DAX
     -- * Errors
     -- $errors
 
-    -- ** SubnetQuotaExceededFault
-    , _SubnetQuotaExceededFault
-
-    -- ** ParameterGroupNotFoundFault
-    , _ParameterGroupNotFoundFault
-
-    -- ** InvalidParameterGroupStateFault
-    , _InvalidParameterGroupStateFault
+    -- ** SubnetGroupNotFoundFault
+    , _SubnetGroupNotFoundFault
 
     -- ** SubnetGroupInUseFault
     , _SubnetGroupInUseFault
 
-    -- ** ParameterGroupAlreadyExistsFault
-    , _ParameterGroupAlreadyExistsFault
+    -- ** ClusterQuotaForCustomerExceededFault
+    , _ClusterQuotaForCustomerExceededFault
 
     -- ** InvalidSubnet
     , _InvalidSubnet
@@ -43,29 +37,53 @@ module Network.AWS.DAX
     -- ** TagQuotaPerResourceExceeded
     , _TagQuotaPerResourceExceeded
 
+    -- ** InvalidParameterGroupStateFault
+    , _InvalidParameterGroupStateFault
+
+    -- ** ParameterGroupNotFoundFault
+    , _ParameterGroupNotFoundFault
+
+    -- ** InvalidParameterValueException
+    , _InvalidParameterValueException
+
+    -- ** ServiceLinkedRoleNotFoundFault
+    , _ServiceLinkedRoleNotFoundFault
+
+    -- ** InsufficientClusterCapacityFault
+    , _InsufficientClusterCapacityFault
+
+    -- ** ParameterGroupQuotaExceededFault
+    , _ParameterGroupQuotaExceededFault
+
+    -- ** InvalidClusterStateFault
+    , _InvalidClusterStateFault
+
+    -- ** NodeQuotaForClusterExceededFault
+    , _NodeQuotaForClusterExceededFault
+
+    -- ** InvalidARNFault
+    , _InvalidARNFault
+
+    -- ** ClusterAlreadyExistsFault
+    , _ClusterAlreadyExistsFault
+
+    -- ** SubnetGroupQuotaExceededFault
+    , _SubnetGroupQuotaExceededFault
+
     -- ** ClusterNotFoundFault
     , _ClusterNotFoundFault
 
     -- ** TagNotFoundFault
     , _TagNotFoundFault
 
-    -- ** NodeQuotaForClusterExceededFault
-    , _NodeQuotaForClusterExceededFault
+    -- ** NodeQuotaForCustomerExceededFault
+    , _NodeQuotaForCustomerExceededFault
 
-    -- ** InvalidClusterStateFault
-    , _InvalidClusterStateFault
+    -- ** SubnetGroupAlreadyExistsFault
+    , _SubnetGroupAlreadyExistsFault
 
-    -- ** InsufficientClusterCapacityFault
-    , _InsufficientClusterCapacityFault
-
-    -- ** NodeNotFoundFault
-    , _NodeNotFoundFault
-
-    -- ** ParameterGroupQuotaExceededFault
-    , _ParameterGroupQuotaExceededFault
-
-    -- ** InvalidParameterValueException
-    , _InvalidParameterValueException
+    -- ** ParameterGroupAlreadyExistsFault
+    , _ParameterGroupAlreadyExistsFault
 
     -- ** InvalidVPCNetworkStateFault
     , _InvalidVPCNetworkStateFault
@@ -73,26 +91,11 @@ module Network.AWS.DAX
     -- ** SubnetInUse
     , _SubnetInUse
 
-    -- ** ClusterQuotaForCustomerExceededFault
-    , _ClusterQuotaForCustomerExceededFault
+    -- ** SubnetQuotaExceededFault
+    , _SubnetQuotaExceededFault
 
-    -- ** SubnetGroupNotFoundFault
-    , _SubnetGroupNotFoundFault
-
-    -- ** SubnetGroupAlreadyExistsFault
-    , _SubnetGroupAlreadyExistsFault
-
-    -- ** NodeQuotaForCustomerExceededFault
-    , _NodeQuotaForCustomerExceededFault
-
-    -- ** SubnetGroupQuotaExceededFault
-    , _SubnetGroupQuotaExceededFault
-
-    -- ** ClusterAlreadyExistsFault
-    , _ClusterAlreadyExistsFault
-
-    -- ** InvalidARNFault
-    , _InvalidARNFault
+    -- ** NodeNotFoundFault
+    , _NodeNotFoundFault
 
     -- ** InvalidParameterCombinationException
     , _InvalidParameterCombinationException
@@ -103,67 +106,67 @@ module Network.AWS.DAX
     -- * Operations
     -- $operations
 
-    -- ** DescribeClusters
+    -- ** DescribeClusters (Paginated)
     , module Network.AWS.DAX.DescribeClusters
 
-    -- ** DescribeParameters
+    -- ** DescribeParameters (Paginated)
     , module Network.AWS.DAX.DescribeParameters
 
-    -- ** DescribeEvents
+    -- ** DescribeEvents (Paginated)
     , module Network.AWS.DAX.DescribeEvents
 
-    -- ** IncreaseReplicationFactor
+    -- ** IncreaseReplicationFactor 
     , module Network.AWS.DAX.IncreaseReplicationFactor
 
-    -- ** CreateSubnetGroup
+    -- ** CreateSubnetGroup 
     , module Network.AWS.DAX.CreateSubnetGroup
 
-    -- ** DeleteCluster
+    -- ** DeleteCluster 
     , module Network.AWS.DAX.DeleteCluster
 
-    -- ** UpdateCluster
+    -- ** UpdateCluster 
     , module Network.AWS.DAX.UpdateCluster
 
-    -- ** CreateCluster
+    -- ** CreateCluster 
     , module Network.AWS.DAX.CreateCluster
 
-    -- ** DescribeDefaultParameters
+    -- ** DescribeDefaultParameters (Paginated)
     , module Network.AWS.DAX.DescribeDefaultParameters
 
-    -- ** DeleteParameterGroup
+    -- ** DeleteParameterGroup 
     , module Network.AWS.DAX.DeleteParameterGroup
 
-    -- ** UpdateParameterGroup
+    -- ** UpdateParameterGroup 
     , module Network.AWS.DAX.UpdateParameterGroup
 
-    -- ** DescribeSubnetGroups
+    -- ** DescribeSubnetGroups (Paginated)
     , module Network.AWS.DAX.DescribeSubnetGroups
 
-    -- ** CreateParameterGroup
+    -- ** CreateParameterGroup 
     , module Network.AWS.DAX.CreateParameterGroup
 
-    -- ** UpdateSubnetGroup
+    -- ** UpdateSubnetGroup 
     , module Network.AWS.DAX.UpdateSubnetGroup
 
-    -- ** DeleteSubnetGroup
+    -- ** DeleteSubnetGroup 
     , module Network.AWS.DAX.DeleteSubnetGroup
 
-    -- ** DescribeParameterGroups
+    -- ** DescribeParameterGroups (Paginated)
     , module Network.AWS.DAX.DescribeParameterGroups
 
-    -- ** TagResource
+    -- ** TagResource 
     , module Network.AWS.DAX.TagResource
 
-    -- ** ListTags
+    -- ** ListTags (Paginated)
     , module Network.AWS.DAX.ListTags
 
-    -- ** DecreaseReplicationFactor
+    -- ** DecreaseReplicationFactor 
     , module Network.AWS.DAX.DecreaseReplicationFactor
 
-    -- ** UntagResource
+    -- ** UntagResource 
     , module Network.AWS.DAX.UntagResource
 
-    -- ** RebootNode
+    -- ** RebootNode 
     , module Network.AWS.DAX.RebootNode
 
     -- * Types
@@ -176,6 +179,9 @@ module Network.AWS.DAX
 
     -- ** ParameterType
     , ParameterType (..)
+
+    -- ** SSEStatus
+    , SSEStatus (..)
 
     -- ** SourceType
     , SourceType (..)
@@ -197,6 +203,7 @@ module Network.AWS.DAX
     , cNodeType
     , cNodes
     , cClusterDiscoveryEndpoint
+    , cSSEDescription
     , cDescription
     , cParameterGroup
 
@@ -268,6 +275,16 @@ module Network.AWS.DAX
     , parameterNameValue
     , pnvParameterValue
     , pnvParameterName
+
+    -- ** SSEDescription
+    , SSEDescription
+    , sSEDescription
+    , ssedStatus
+
+    -- ** SSESpecification
+    , SSESpecification
+    , sSESpecification
+    , ssesEnabled
 
     -- ** SecurityGroupMembership
     , SecurityGroupMembership

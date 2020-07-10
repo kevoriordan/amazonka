@@ -21,6 +21,8 @@
 -- Deletes a specific SSH key pair.
 --
 --
+-- The @delete key pair@ operation supports tag-based access control via resource tags applied to the resource identified by @key pair name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.DeleteKeyPair
     (
     -- * Creating a Request
@@ -45,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteKeyPair' smart constructor.
-newtype DeleteKeyPair = DeleteKeyPair'
-  { _dkpKeyPairName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteKeyPair = DeleteKeyPair'{_dkpKeyPairName
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteKeyPair' with the minimum fields required to make a request.
 --
@@ -58,8 +59,8 @@ newtype DeleteKeyPair = DeleteKeyPair'
 deleteKeyPair
     :: Text -- ^ 'dkpKeyPairName'
     -> DeleteKeyPair
-deleteKeyPair pKeyPairName_ = DeleteKeyPair' {_dkpKeyPairName = pKeyPairName_}
-
+deleteKeyPair pKeyPairName_
+  = DeleteKeyPair'{_dkpKeyPairName = pKeyPairName_}
 
 -- | The name of the key pair to delete.
 dkpKeyPairName :: Lens' DeleteKeyPair Text
@@ -99,28 +100,28 @@ instance ToQuery DeleteKeyPair where
         toQuery = const mempty
 
 -- | /See:/ 'deleteKeyPairResponse' smart constructor.
-data DeleteKeyPairResponse = DeleteKeyPairResponse'
-  { _dkprsOperation      :: !(Maybe Operation)
-  , _dkprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteKeyPairResponse = DeleteKeyPairResponse'{_dkprsOperation
+                                                    :: !(Maybe Operation),
+                                                    _dkprsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteKeyPairResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dkprsOperation' - An array of key-value pairs containing information about the results of your delete key pair request.
+-- * 'dkprsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'dkprsResponseStatus' - -- | The response status code.
 deleteKeyPairResponse
     :: Int -- ^ 'dkprsResponseStatus'
     -> DeleteKeyPairResponse
-deleteKeyPairResponse pResponseStatus_ =
-  DeleteKeyPairResponse'
-    {_dkprsOperation = Nothing, _dkprsResponseStatus = pResponseStatus_}
+deleteKeyPairResponse pResponseStatus_
+  = DeleteKeyPairResponse'{_dkprsOperation = Nothing,
+                           _dkprsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the results of your delete key pair request.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 dkprsOperation :: Lens' DeleteKeyPairResponse (Maybe Operation)
 dkprsOperation = lens _dkprsOperation (\ s a -> s{_dkprsOperation = a})
 

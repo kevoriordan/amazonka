@@ -47,13 +47,14 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'createCustomMetadata' smart constructor.
-data CreateCustomMetadata = CreateCustomMetadata'
-  { _ccmVersionId           :: !(Maybe Text)
-  , _ccmAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _ccmResourceId          :: !Text
-  , _ccmCustomMetadata      :: !(Map Text Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateCustomMetadata = CreateCustomMetadata'{_ccmVersionId
+                                                  :: !(Maybe Text),
+                                                  _ccmAuthenticationToken ::
+                                                  !(Maybe (Sensitive Text)),
+                                                  _ccmResourceId :: !Text,
+                                                  _ccmCustomMetadata ::
+                                                  !(Map Text Text)}
+                              deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCustomMetadata' with the minimum fields required to make a request.
 --
@@ -61,7 +62,7 @@ data CreateCustomMetadata = CreateCustomMetadata'
 --
 -- * 'ccmVersionId' - The ID of the version, if the custom metadata is being added to a document version.
 --
--- * 'ccmAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'ccmAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'ccmResourceId' - The ID of the resource.
 --
@@ -69,20 +70,17 @@ data CreateCustomMetadata = CreateCustomMetadata'
 createCustomMetadata
     :: Text -- ^ 'ccmResourceId'
     -> CreateCustomMetadata
-createCustomMetadata pResourceId_ =
-  CreateCustomMetadata'
-    { _ccmVersionId = Nothing
-    , _ccmAuthenticationToken = Nothing
-    , _ccmResourceId = pResourceId_
-    , _ccmCustomMetadata = mempty
-    }
-
+createCustomMetadata pResourceId_
+  = CreateCustomMetadata'{_ccmVersionId = Nothing,
+                          _ccmAuthenticationToken = Nothing,
+                          _ccmResourceId = pResourceId_,
+                          _ccmCustomMetadata = mempty}
 
 -- | The ID of the version, if the custom metadata is being added to a document version.
 ccmVersionId :: Lens' CreateCustomMetadata (Maybe Text)
 ccmVersionId = lens _ccmVersionId (\ s a -> s{_ccmVersionId = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 ccmAuthenticationToken :: Lens' CreateCustomMetadata (Maybe Text)
 ccmAuthenticationToken = lens _ccmAuthenticationToken (\ s a -> s{_ccmAuthenticationToken = a}) . mapping _Sensitive
 
@@ -132,10 +130,10 @@ instance ToQuery CreateCustomMetadata where
           = mconcat ["versionid" =: _ccmVersionId]
 
 -- | /See:/ 'createCustomMetadataResponse' smart constructor.
-newtype CreateCustomMetadataResponse = CreateCustomMetadataResponse'
-  { _ccmrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateCustomMetadataResponse = CreateCustomMetadataResponse'{_ccmrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'CreateCustomMetadataResponse' with the minimum fields required to make a request.
 --
@@ -145,9 +143,9 @@ newtype CreateCustomMetadataResponse = CreateCustomMetadataResponse'
 createCustomMetadataResponse
     :: Int -- ^ 'ccmrsResponseStatus'
     -> CreateCustomMetadataResponse
-createCustomMetadataResponse pResponseStatus_ =
-  CreateCustomMetadataResponse' {_ccmrsResponseStatus = pResponseStatus_}
-
+createCustomMetadataResponse pResponseStatus_
+  = CreateCustomMetadataResponse'{_ccmrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 ccmrsResponseStatus :: Lens' CreateCustomMetadataResponse Int

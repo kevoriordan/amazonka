@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new origin access identity. If you're using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html Serving Private Content through CloudFront> in the /Amazon CloudFront Developer Guide/ .
+-- Creates a new origin access identity. If you're using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html Serving Private Content through CloudFront> in the /Amazon CloudFront Developer Guide/ .
 --
 --
 module Network.AWS.CloudFront.CreateCloudFrontOriginAccessIdentity
@@ -46,15 +46,16 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | The request to create a new origin access identity.
+-- | The request to create a new origin access identity (OAI). An origin access identity is a special CloudFront user that you can associate with Amazon S3 origins, so that you can secure all or just some of your Amazon S3 content. For more information, see <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html Restricting Access to Amazon S3 Content by Using an Origin Access Identity> in the /Amazon CloudFront Developer Guide/ . 
 --
 --
 --
 -- /See:/ 'createCloudFrontOriginAccessIdentity' smart constructor.
-newtype CreateCloudFrontOriginAccessIdentity = CreateCloudFrontOriginAccessIdentity'
-  { _ccfoaiCloudFrontOriginAccessIdentityConfig :: CloudFrontOriginAccessIdentityConfig
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateCloudFrontOriginAccessIdentity = CreateCloudFrontOriginAccessIdentity'{_ccfoaiCloudFrontOriginAccessIdentityConfig
+                                                                                     ::
+                                                                                     CloudFrontOriginAccessIdentityConfig}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'CreateCloudFrontOriginAccessIdentity' with the minimum fields required to make a request.
 --
@@ -64,12 +65,11 @@ newtype CreateCloudFrontOriginAccessIdentity = CreateCloudFrontOriginAccessIdent
 createCloudFrontOriginAccessIdentity
     :: CloudFrontOriginAccessIdentityConfig -- ^ 'ccfoaiCloudFrontOriginAccessIdentityConfig'
     -> CreateCloudFrontOriginAccessIdentity
-createCloudFrontOriginAccessIdentity pCloudFrontOriginAccessIdentityConfig_ =
-  CreateCloudFrontOriginAccessIdentity'
-    { _ccfoaiCloudFrontOriginAccessIdentityConfig =
-        pCloudFrontOriginAccessIdentityConfig_
-    }
-
+createCloudFrontOriginAccessIdentity
+  pCloudFrontOriginAccessIdentityConfig_
+  = CreateCloudFrontOriginAccessIdentity'{_ccfoaiCloudFrontOriginAccessIdentityConfig
+                                            =
+                                            pCloudFrontOriginAccessIdentityConfig_}
 
 -- | The current configuration information for the identity.
 ccfoaiCloudFrontOriginAccessIdentityConfig :: Lens' CreateCloudFrontOriginAccessIdentity CloudFrontOriginAccessIdentityConfig
@@ -101,7 +101,7 @@ instance ToElement
          where
         toElement
           = mkElement
-              "{http://cloudfront.amazonaws.com/doc/2017-10-30/}CloudFrontOriginAccessIdentityConfig"
+              "{http://cloudfront.amazonaws.com/doc/2019-03-26/}CloudFrontOriginAccessIdentityConfig"
               .
               _ccfoaiCloudFrontOriginAccessIdentityConfig
 
@@ -114,7 +114,7 @@ instance ToPath CreateCloudFrontOriginAccessIdentity
          where
         toPath
           = const
-              "/2017-10-30/origin-access-identity/cloudfront"
+              "/2019-03-26/origin-access-identity/cloudfront"
 
 instance ToQuery CreateCloudFrontOriginAccessIdentity
          where
@@ -125,13 +125,24 @@ instance ToQuery CreateCloudFrontOriginAccessIdentity
 --
 --
 -- /See:/ 'createCloudFrontOriginAccessIdentityResponse' smart constructor.
-data CreateCloudFrontOriginAccessIdentityResponse = CreateCloudFrontOriginAccessIdentityResponse'
-  { _ccfoairsETag :: !(Maybe Text)
-  , _ccfoairsLocation :: !(Maybe Text)
-  , _ccfoairsCloudFrontOriginAccessIdentity :: !(Maybe CloudFrontOriginAccessIdentity)
-  , _ccfoairsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCloudFrontOriginAccessIdentityResponse = CreateCloudFrontOriginAccessIdentityResponse'{_ccfoairsETag
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      Text),
+                                                                                                  _ccfoairsLocation
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      Text),
+                                                                                                  _ccfoairsCloudFrontOriginAccessIdentity
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      CloudFrontOriginAccessIdentity),
+                                                                                                  _ccfoairsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'CreateCloudFrontOriginAccessIdentityResponse' with the minimum fields required to make a request.
 --
@@ -147,14 +158,15 @@ data CreateCloudFrontOriginAccessIdentityResponse = CreateCloudFrontOriginAccess
 createCloudFrontOriginAccessIdentityResponse
     :: Int -- ^ 'ccfoairsResponseStatus'
     -> CreateCloudFrontOriginAccessIdentityResponse
-createCloudFrontOriginAccessIdentityResponse pResponseStatus_ =
-  CreateCloudFrontOriginAccessIdentityResponse'
-    { _ccfoairsETag = Nothing
-    , _ccfoairsLocation = Nothing
-    , _ccfoairsCloudFrontOriginAccessIdentity = Nothing
-    , _ccfoairsResponseStatus = pResponseStatus_
-    }
-
+createCloudFrontOriginAccessIdentityResponse
+  pResponseStatus_
+  = CreateCloudFrontOriginAccessIdentityResponse'{_ccfoairsETag
+                                                    = Nothing,
+                                                  _ccfoairsLocation = Nothing,
+                                                  _ccfoairsCloudFrontOriginAccessIdentity
+                                                    = Nothing,
+                                                  _ccfoairsResponseStatus =
+                                                    pResponseStatus_}
 
 -- | The current version of the origin access identity created.
 ccfoairsETag :: Lens' CreateCloudFrontOriginAccessIdentityResponse (Maybe Text)

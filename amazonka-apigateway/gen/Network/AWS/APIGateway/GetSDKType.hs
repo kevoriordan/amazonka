@@ -49,10 +49,8 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getSDKType' smart constructor.
-newtype GetSDKType = GetSDKType'
-  { _gstId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetSDKType = GetSDKType'{_gstId :: Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSDKType' with the minimum fields required to make a request.
 --
@@ -62,8 +60,7 @@ newtype GetSDKType = GetSDKType'
 getSDKType
     :: Text -- ^ 'gstId'
     -> GetSDKType
-getSDKType pId_ = GetSDKType' {_gstId = pId_}
-
+getSDKType pId_ = GetSDKType'{_gstId = pId_}
 
 -- | [Required] The identifier of the queried 'SdkType' instance.
 gstId :: Lens' GetSDKType Text

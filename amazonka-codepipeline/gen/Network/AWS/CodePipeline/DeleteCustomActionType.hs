@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks a custom action as deleted. PollForJobs for the custom action will fail after the action is marked for deletion. Only used for custom actions.
+-- Marks a custom action as deleted. @PollForJobs@ for the custom action fails after the action is marked for deletion. Used for custom actions only.
 --
 --
 -- /Important:/ To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field.
@@ -45,17 +45,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a DeleteCustomActionType operation. The custom action will be marked as deleted.
+-- | Represents the input of a @DeleteCustomActionType@ operation. The custom action will be marked as deleted.
 --
 --
 --
 -- /See:/ 'deleteCustomActionType' smart constructor.
-data DeleteCustomActionType = DeleteCustomActionType'
-  { _dcatCategory :: !ActionCategory
-  , _dcatProvider :: !Text
-  , _dcatVersion  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCustomActionType = DeleteCustomActionType'{_dcatCategory
+                                                      :: !ActionCategory,
+                                                      _dcatProvider :: !Text,
+                                                      _dcatVersion :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteCustomActionType' with the minimum fields required to make a request.
 --
@@ -71,13 +71,11 @@ deleteCustomActionType
     -> Text -- ^ 'dcatProvider'
     -> Text -- ^ 'dcatVersion'
     -> DeleteCustomActionType
-deleteCustomActionType pCategory_ pProvider_ pVersion_ =
-  DeleteCustomActionType'
-    { _dcatCategory = pCategory_
-    , _dcatProvider = pProvider_
-    , _dcatVersion = pVersion_
-    }
-
+deleteCustomActionType pCategory_ pProvider_
+  pVersion_
+  = DeleteCustomActionType'{_dcatCategory = pCategory_,
+                            _dcatProvider = pProvider_,
+                            _dcatVersion = pVersion_}
 
 -- | The category of the custom action that you want to delete, such as source or deploy.
 dcatCategory :: Lens' DeleteCustomActionType ActionCategory
@@ -127,16 +125,15 @@ instance ToQuery DeleteCustomActionType where
         toQuery = const mempty
 
 -- | /See:/ 'deleteCustomActionTypeResponse' smart constructor.
-data DeleteCustomActionTypeResponse =
-  DeleteCustomActionTypeResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCustomActionTypeResponse = DeleteCustomActionTypeResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteCustomActionTypeResponse' with the minimum fields required to make a request.
 --
 deleteCustomActionTypeResponse
     :: DeleteCustomActionTypeResponse
-deleteCustomActionTypeResponse = DeleteCustomActionTypeResponse'
-
+deleteCustomActionTypeResponse
+  = DeleteCustomActionTypeResponse'
 
 instance NFData DeleteCustomActionTypeResponse where

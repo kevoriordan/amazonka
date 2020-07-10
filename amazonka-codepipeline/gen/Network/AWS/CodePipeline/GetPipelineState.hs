@@ -48,15 +48,14 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input of a GetPipelineState action.
+-- | Represents the input of a @GetPipelineState@ action.
 --
 --
 --
 -- /See:/ 'getPipelineState' smart constructor.
-newtype GetPipelineState = GetPipelineState'
-  { _gpsName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetPipelineState = GetPipelineState'{_gpsName
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetPipelineState' with the minimum fields required to make a request.
 --
@@ -66,8 +65,8 @@ newtype GetPipelineState = GetPipelineState'
 getPipelineState
     :: Text -- ^ 'gpsName'
     -> GetPipelineState
-getPipelineState pName_ = GetPipelineState' {_gpsName = pName_}
-
+getPipelineState pName_
+  = GetPipelineState'{_gpsName = pName_}
 
 -- | The name of the pipeline about which you want to get information.
 gpsName :: Lens' GetPipelineState Text
@@ -110,20 +109,25 @@ instance ToPath GetPipelineState where
 instance ToQuery GetPipelineState where
         toQuery = const mempty
 
--- | Represents the output of a GetPipelineState action.
+-- | Represents the output of a @GetPipelineState@ action.
 --
 --
 --
 -- /See:/ 'getPipelineStateResponse' smart constructor.
-data GetPipelineStateResponse = GetPipelineStateResponse'
-  { _gpsrsPipelineName    :: !(Maybe Text)
-  , _gpsrsCreated         :: !(Maybe POSIX)
-  , _gpsrsStageStates     :: !(Maybe [StageState])
-  , _gpsrsPipelineVersion :: !(Maybe Nat)
-  , _gpsrsUpdated         :: !(Maybe POSIX)
-  , _gpsrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPipelineStateResponse = GetPipelineStateResponse'{_gpsrsPipelineName
+                                                          :: !(Maybe Text),
+                                                          _gpsrsCreated ::
+                                                          !(Maybe POSIX),
+                                                          _gpsrsStageStates ::
+                                                          !(Maybe [StageState]),
+                                                          _gpsrsPipelineVersion
+                                                          :: !(Maybe Nat),
+                                                          _gpsrsUpdated ::
+                                                          !(Maybe POSIX),
+                                                          _gpsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetPipelineStateResponse' with the minimum fields required to make a request.
 --
@@ -143,16 +147,14 @@ data GetPipelineStateResponse = GetPipelineStateResponse'
 getPipelineStateResponse
     :: Int -- ^ 'gpsrsResponseStatus'
     -> GetPipelineStateResponse
-getPipelineStateResponse pResponseStatus_ =
-  GetPipelineStateResponse'
-    { _gpsrsPipelineName = Nothing
-    , _gpsrsCreated = Nothing
-    , _gpsrsStageStates = Nothing
-    , _gpsrsPipelineVersion = Nothing
-    , _gpsrsUpdated = Nothing
-    , _gpsrsResponseStatus = pResponseStatus_
-    }
-
+getPipelineStateResponse pResponseStatus_
+  = GetPipelineStateResponse'{_gpsrsPipelineName =
+                                Nothing,
+                              _gpsrsCreated = Nothing,
+                              _gpsrsStageStates = Nothing,
+                              _gpsrsPipelineVersion = Nothing,
+                              _gpsrsUpdated = Nothing,
+                              _gpsrsResponseStatus = pResponseStatus_}
 
 -- | The name of the pipeline for which you want to get the state.
 gpsrsPipelineName :: Lens' GetPipelineStateResponse (Maybe Text)

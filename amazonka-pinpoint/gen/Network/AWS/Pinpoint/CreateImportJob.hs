@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates an import job.
+-- Creates an import job for an application.
+--
+--
 module Network.AWS.Pinpoint.CreateImportJob
     (
     -- * Creating a Request
@@ -44,31 +46,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createImportJob' smart constructor.
-data CreateImportJob = CreateImportJob'
-  { _cijApplicationId    :: !Text
-  , _cijImportJobRequest :: !ImportJobRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateImportJob = CreateImportJob'{_cijApplicationId
+                                        :: !Text,
+                                        _cijImportJobRequest ::
+                                        !ImportJobRequest}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateImportJob' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cijApplicationId' - Undocumented member.
+-- * 'cijApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'cijImportJobRequest' - Undocumented member.
 createImportJob
     :: Text -- ^ 'cijApplicationId'
     -> ImportJobRequest -- ^ 'cijImportJobRequest'
     -> CreateImportJob
-createImportJob pApplicationId_ pImportJobRequest_ =
-  CreateImportJob'
-    { _cijApplicationId = pApplicationId_
-    , _cijImportJobRequest = pImportJobRequest_
-    }
+createImportJob pApplicationId_ pImportJobRequest_
+  = CreateImportJob'{_cijApplicationId =
+                       pApplicationId_,
+                     _cijImportJobRequest = pImportJobRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 cijApplicationId :: Lens' CreateImportJob Text
 cijApplicationId = lens _cijApplicationId (\ s a -> s{_cijApplicationId = a})
 
@@ -111,11 +111,12 @@ instance ToQuery CreateImportJob where
         toQuery = const mempty
 
 -- | /See:/ 'createImportJobResponse' smart constructor.
-data CreateImportJobResponse = CreateImportJobResponse'
-  { _cijrsResponseStatus    :: !Int
-  , _cijrsImportJobResponse :: !ImportJobResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateImportJobResponse = CreateImportJobResponse'{_cijrsResponseStatus
+                                                        :: !Int,
+                                                        _cijrsImportJobResponse
+                                                        :: !ImportJobResponse}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'CreateImportJobResponse' with the minimum fields required to make a request.
 --
@@ -128,12 +129,11 @@ createImportJobResponse
     :: Int -- ^ 'cijrsResponseStatus'
     -> ImportJobResponse -- ^ 'cijrsImportJobResponse'
     -> CreateImportJobResponse
-createImportJobResponse pResponseStatus_ pImportJobResponse_ =
-  CreateImportJobResponse'
-    { _cijrsResponseStatus = pResponseStatus_
-    , _cijrsImportJobResponse = pImportJobResponse_
-    }
-
+createImportJobResponse pResponseStatus_
+  pImportJobResponse_
+  = CreateImportJobResponse'{_cijrsResponseStatus =
+                               pResponseStatus_,
+                             _cijrsImportJobResponse = pImportJobResponse_}
 
 -- | -- | The response status code.
 cijrsResponseStatus :: Lens' CreateImportJobResponse Int

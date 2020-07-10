@@ -47,11 +47,12 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listProvisioningArtifacts' smart constructor.
-data ListProvisioningArtifacts = ListProvisioningArtifacts'
-  { _lpaAcceptLanguage :: !(Maybe Text)
-  , _lpaProductId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListProvisioningArtifacts = ListProvisioningArtifacts'{_lpaAcceptLanguage
+                                                            :: !(Maybe Text),
+                                                            _lpaProductId ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListProvisioningArtifacts' with the minimum fields required to make a request.
 --
@@ -63,10 +64,10 @@ data ListProvisioningArtifacts = ListProvisioningArtifacts'
 listProvisioningArtifacts
     :: Text -- ^ 'lpaProductId'
     -> ListProvisioningArtifacts
-listProvisioningArtifacts pProductId_ =
-  ListProvisioningArtifacts'
-    {_lpaAcceptLanguage = Nothing, _lpaProductId = pProductId_}
-
+listProvisioningArtifacts pProductId_
+  = ListProvisioningArtifacts'{_lpaAcceptLanguage =
+                                 Nothing,
+                               _lpaProductId = pProductId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 lpaAcceptLanguage :: Lens' ListProvisioningArtifacts (Maybe Text)
@@ -116,12 +117,19 @@ instance ToQuery ListProvisioningArtifacts where
         toQuery = const mempty
 
 -- | /See:/ 'listProvisioningArtifactsResponse' smart constructor.
-data ListProvisioningArtifactsResponse = ListProvisioningArtifactsResponse'
-  { _lrsNextPageToken               :: !(Maybe Text)
-  , _lrsProvisioningArtifactDetails :: !(Maybe [ProvisioningArtifactDetail])
-  , _lrsResponseStatus              :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListProvisioningArtifactsResponse = ListProvisioningArtifactsResponse'{_lrsNextPageToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _lrsProvisioningArtifactDetails
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [ProvisioningArtifactDetail]),
+                                                                            _lrsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'ListProvisioningArtifactsResponse' with the minimum fields required to make a request.
 --
@@ -135,13 +143,12 @@ data ListProvisioningArtifactsResponse = ListProvisioningArtifactsResponse'
 listProvisioningArtifactsResponse
     :: Int -- ^ 'lrsResponseStatus'
     -> ListProvisioningArtifactsResponse
-listProvisioningArtifactsResponse pResponseStatus_ =
-  ListProvisioningArtifactsResponse'
-    { _lrsNextPageToken = Nothing
-    , _lrsProvisioningArtifactDetails = Nothing
-    , _lrsResponseStatus = pResponseStatus_
-    }
-
+listProvisioningArtifactsResponse pResponseStatus_
+  = ListProvisioningArtifactsResponse'{_lrsNextPageToken
+                                         = Nothing,
+                                       _lrsProvisioningArtifactDetails =
+                                         Nothing,
+                                       _lrsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 lrsNextPageToken :: Lens' ListProvisioningArtifactsResponse (Maybe Text)

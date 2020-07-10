@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets information about one or more applications.
+-- Gets information about one or more applications. The maximum number of applications that can be returned is 25.
 --
 --
 module Network.AWS.CodeDeploy.BatchGetApplications
@@ -49,22 +49,23 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'batchGetApplications' smart constructor.
-newtype BatchGetApplications = BatchGetApplications'
-  { _bgaApplicationNames :: [Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype BatchGetApplications = BatchGetApplications'{_bgaApplicationNames
+                                                     :: [Text]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'BatchGetApplications' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bgaApplicationNames' - A list of application names separated by spaces.
+-- * 'bgaApplicationNames' - A list of application names separated by spaces. The maximum number of application names you can specify is 25.
 batchGetApplications
     :: BatchGetApplications
-batchGetApplications = BatchGetApplications' {_bgaApplicationNames = mempty}
+batchGetApplications
+  = BatchGetApplications'{_bgaApplicationNames =
+                            mempty}
 
-
--- | A list of application names separated by spaces.
+-- | A list of application names separated by spaces. The maximum number of application names you can specify is 25.
 bgaApplicationNames :: Lens' BatchGetApplications [Text]
 bgaApplicationNames = lens _bgaApplicationNames (\ s a -> s{_bgaApplicationNames = a}) . _Coerce
 
@@ -110,11 +111,14 @@ instance ToQuery BatchGetApplications where
 --
 --
 -- /See:/ 'batchGetApplicationsResponse' smart constructor.
-data BatchGetApplicationsResponse = BatchGetApplicationsResponse'
-  { _bgarsApplicationsInfo :: !(Maybe [ApplicationInfo])
-  , _bgarsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchGetApplicationsResponse = BatchGetApplicationsResponse'{_bgarsApplicationsInfo
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [ApplicationInfo]),
+                                                                  _bgarsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'BatchGetApplicationsResponse' with the minimum fields required to make a request.
 --
@@ -126,10 +130,10 @@ data BatchGetApplicationsResponse = BatchGetApplicationsResponse'
 batchGetApplicationsResponse
     :: Int -- ^ 'bgarsResponseStatus'
     -> BatchGetApplicationsResponse
-batchGetApplicationsResponse pResponseStatus_ =
-  BatchGetApplicationsResponse'
-    {_bgarsApplicationsInfo = Nothing, _bgarsResponseStatus = pResponseStatus_}
-
+batchGetApplicationsResponse pResponseStatus_
+  = BatchGetApplicationsResponse'{_bgarsApplicationsInfo
+                                    = Nothing,
+                                  _bgarsResponseStatus = pResponseStatus_}
 
 -- | Information about the applications.
 bgarsApplicationsInfo :: Lens' BatchGetApplicationsResponse [ApplicationInfo]

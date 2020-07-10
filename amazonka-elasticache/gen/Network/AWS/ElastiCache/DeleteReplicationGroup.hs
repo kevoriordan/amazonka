@@ -53,12 +53,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteReplicationGroup' smart constructor.
-data DeleteReplicationGroup = DeleteReplicationGroup'
-  { _drgFinalSnapshotIdentifier :: !(Maybe Text)
-  , _drgRetainPrimaryCluster    :: !(Maybe Bool)
-  , _drgReplicationGroupId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteReplicationGroup = DeleteReplicationGroup'{_drgFinalSnapshotIdentifier
+                                                      :: !(Maybe Text),
+                                                      _drgRetainPrimaryCluster
+                                                      :: !(Maybe Bool),
+                                                      _drgReplicationGroupId ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteReplicationGroup' with the minimum fields required to make a request.
 --
@@ -72,13 +74,11 @@ data DeleteReplicationGroup = DeleteReplicationGroup'
 deleteReplicationGroup
     :: Text -- ^ 'drgReplicationGroupId'
     -> DeleteReplicationGroup
-deleteReplicationGroup pReplicationGroupId_ =
-  DeleteReplicationGroup'
-    { _drgFinalSnapshotIdentifier = Nothing
-    , _drgRetainPrimaryCluster = Nothing
-    , _drgReplicationGroupId = pReplicationGroupId_
-    }
-
+deleteReplicationGroup pReplicationGroupId_
+  = DeleteReplicationGroup'{_drgFinalSnapshotIdentifier
+                              = Nothing,
+                            _drgRetainPrimaryCluster = Nothing,
+                            _drgReplicationGroupId = pReplicationGroupId_}
 
 -- | The name of a final node group (shard) snapshot. ElastiCache creates the snapshot from the primary node in the cluster, rather than one of the replicas; this is to ensure that it captures the freshest data. After the final snapshot is taken, the replication group is immediately deleted.
 drgFinalSnapshotIdentifier :: Lens' DeleteReplicationGroup (Maybe Text)
@@ -124,11 +124,14 @@ instance ToQuery DeleteReplicationGroup where
                "ReplicationGroupId" =: _drgReplicationGroupId]
 
 -- | /See:/ 'deleteReplicationGroupResponse' smart constructor.
-data DeleteReplicationGroupResponse = DeleteReplicationGroupResponse'
-  { _delrsReplicationGroup :: !(Maybe ReplicationGroup)
-  , _delrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteReplicationGroupResponse = DeleteReplicationGroupResponse'{_delrsReplicationGroup
+                                                                      ::
+                                                                      !(Maybe
+                                                                          ReplicationGroup),
+                                                                      _delrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteReplicationGroupResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +143,10 @@ data DeleteReplicationGroupResponse = DeleteReplicationGroupResponse'
 deleteReplicationGroupResponse
     :: Int -- ^ 'delrsResponseStatus'
     -> DeleteReplicationGroupResponse
-deleteReplicationGroupResponse pResponseStatus_ =
-  DeleteReplicationGroupResponse'
-    {_delrsReplicationGroup = Nothing, _delrsResponseStatus = pResponseStatus_}
-
+deleteReplicationGroupResponse pResponseStatus_
+  = DeleteReplicationGroupResponse'{_delrsReplicationGroup
+                                      = Nothing,
+                                    _delrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 delrsReplicationGroup :: Lens' DeleteReplicationGroupResponse (Maybe ReplicationGroup)

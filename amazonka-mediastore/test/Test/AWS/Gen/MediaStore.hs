@@ -14,11 +14,11 @@
 module Test.AWS.Gen.MediaStore where
 
 import Data.Proxy
-import Network.AWS.MediaStore
 import Test.AWS.Fixture
-import Test.AWS.MediaStore.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.MediaStore
+import Test.AWS.MediaStore.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,7 +28,19 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestCreateContainer $
+--         [ requestStopAccessLogging $
+--             stopAccessLogging
+--
+--         , requestPutLifecyclePolicy $
+--             putLifecyclePolicy
+--
+--         , requestDeleteLifecyclePolicy $
+--             deleteLifecyclePolicy
+--
+--         , requestListTagsForResource $
+--             listTagsForResource
+--
+--         , requestCreateContainer $
 --             createContainer
 --
 --         , requestListContainers $
@@ -43,11 +55,32 @@ import Test.Tasty
 --         , requestDeleteCORSPolicy $
 --             deleteCORSPolicy
 --
+--         , requestStartAccessLogging $
+--             startAccessLogging
+--
 --         , requestDescribeContainer $
 --             describeContainer
 --
+--         , requestGetMetricPolicy $
+--             getMetricPolicy
+--
+--         , requestDeleteMetricPolicy $
+--             deleteMetricPolicy
+--
+--         , requestPutMetricPolicy $
+--             putMetricPolicy
+--
+--         , requestGetLifecyclePolicy $
+--             getLifecyclePolicy
+--
+--         , requestTagResource $
+--             tagResource
+--
 --         , requestGetCORSPolicy $
 --             getCORSPolicy
+--
+--         , requestUntagResource $
+--             untagResource
 --
 --         , requestDeleteContainerPolicy $
 --             deleteContainerPolicy
@@ -61,7 +94,19 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseCreateContainer $
+--         [ responseStopAccessLogging $
+--             stopAccessLoggingResponse
+--
+--         , responsePutLifecyclePolicy $
+--             putLifecyclePolicyResponse
+--
+--         , responseDeleteLifecyclePolicy $
+--             deleteLifecyclePolicyResponse
+--
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
+--
+--         , responseCreateContainer $
 --             createContainerResponse
 --
 --         , responseListContainers $
@@ -76,11 +121,32 @@ import Test.Tasty
 --         , responseDeleteCORSPolicy $
 --             deleteCORSPolicyResponse
 --
+--         , responseStartAccessLogging $
+--             startAccessLoggingResponse
+--
 --         , responseDescribeContainer $
 --             describeContainerResponse
 --
+--         , responseGetMetricPolicy $
+--             getMetricPolicyResponse
+--
+--         , responseDeleteMetricPolicy $
+--             deleteMetricPolicyResponse
+--
+--         , responsePutMetricPolicy $
+--             putMetricPolicyResponse
+--
+--         , responseGetLifecyclePolicy $
+--             getLifecyclePolicyResponse
+--
+--         , responseTagResource $
+--             tagResourceResponse
+--
 --         , responseGetCORSPolicy $
 --             getCORSPolicyResponse
+--
+--         , responseUntagResource $
+--             untagResourceResponse
 --
 --         , responseDeleteContainerPolicy $
 --             deleteContainerPolicyResponse
@@ -95,6 +161,26 @@ import Test.Tasty
 --     ]
 
 -- Requests
+
+requestStopAccessLogging :: StopAccessLogging -> TestTree
+requestStopAccessLogging = req
+    "StopAccessLogging"
+    "fixture/StopAccessLogging.yaml"
+
+requestPutLifecyclePolicy :: PutLifecyclePolicy -> TestTree
+requestPutLifecyclePolicy = req
+    "PutLifecyclePolicy"
+    "fixture/PutLifecyclePolicy.yaml"
+
+requestDeleteLifecyclePolicy :: DeleteLifecyclePolicy -> TestTree
+requestDeleteLifecyclePolicy = req
+    "DeleteLifecyclePolicy"
+    "fixture/DeleteLifecyclePolicy.yaml"
+
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
 
 requestCreateContainer :: CreateContainer -> TestTree
 requestCreateContainer = req
@@ -121,15 +207,50 @@ requestDeleteCORSPolicy = req
     "DeleteCORSPolicy"
     "fixture/DeleteCORSPolicy.yaml"
 
+requestStartAccessLogging :: StartAccessLogging -> TestTree
+requestStartAccessLogging = req
+    "StartAccessLogging"
+    "fixture/StartAccessLogging.yaml"
+
 requestDescribeContainer :: DescribeContainer -> TestTree
 requestDescribeContainer = req
     "DescribeContainer"
     "fixture/DescribeContainer.yaml"
 
+requestGetMetricPolicy :: GetMetricPolicy -> TestTree
+requestGetMetricPolicy = req
+    "GetMetricPolicy"
+    "fixture/GetMetricPolicy.yaml"
+
+requestDeleteMetricPolicy :: DeleteMetricPolicy -> TestTree
+requestDeleteMetricPolicy = req
+    "DeleteMetricPolicy"
+    "fixture/DeleteMetricPolicy.yaml"
+
+requestPutMetricPolicy :: PutMetricPolicy -> TestTree
+requestPutMetricPolicy = req
+    "PutMetricPolicy"
+    "fixture/PutMetricPolicy.yaml"
+
+requestGetLifecyclePolicy :: GetLifecyclePolicy -> TestTree
+requestGetLifecyclePolicy = req
+    "GetLifecyclePolicy"
+    "fixture/GetLifecyclePolicy.yaml"
+
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
+
 requestGetCORSPolicy :: GetCORSPolicy -> TestTree
 requestGetCORSPolicy = req
     "GetCORSPolicy"
     "fixture/GetCORSPolicy.yaml"
+
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
 
 requestDeleteContainerPolicy :: DeleteContainerPolicy -> TestTree
 requestDeleteContainerPolicy = req
@@ -147,6 +268,34 @@ requestGetContainerPolicy = req
     "fixture/GetContainerPolicy.yaml"
 
 -- Responses
+
+responseStopAccessLogging :: StopAccessLoggingResponse -> TestTree
+responseStopAccessLogging = res
+    "StopAccessLoggingResponse"
+    "fixture/StopAccessLoggingResponse.proto"
+    mediaStore
+    (Proxy :: Proxy StopAccessLogging)
+
+responsePutLifecyclePolicy :: PutLifecyclePolicyResponse -> TestTree
+responsePutLifecyclePolicy = res
+    "PutLifecyclePolicyResponse"
+    "fixture/PutLifecyclePolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy PutLifecyclePolicy)
+
+responseDeleteLifecyclePolicy :: DeleteLifecyclePolicyResponse -> TestTree
+responseDeleteLifecyclePolicy = res
+    "DeleteLifecyclePolicyResponse"
+    "fixture/DeleteLifecyclePolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy DeleteLifecyclePolicy)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    mediaStore
+    (Proxy :: Proxy ListTagsForResource)
 
 responseCreateContainer :: CreateContainerResponse -> TestTree
 responseCreateContainer = res
@@ -183,6 +332,13 @@ responseDeleteCORSPolicy = res
     mediaStore
     (Proxy :: Proxy DeleteCORSPolicy)
 
+responseStartAccessLogging :: StartAccessLoggingResponse -> TestTree
+responseStartAccessLogging = res
+    "StartAccessLoggingResponse"
+    "fixture/StartAccessLoggingResponse.proto"
+    mediaStore
+    (Proxy :: Proxy StartAccessLogging)
+
 responseDescribeContainer :: DescribeContainerResponse -> TestTree
 responseDescribeContainer = res
     "DescribeContainerResponse"
@@ -190,12 +346,54 @@ responseDescribeContainer = res
     mediaStore
     (Proxy :: Proxy DescribeContainer)
 
+responseGetMetricPolicy :: GetMetricPolicyResponse -> TestTree
+responseGetMetricPolicy = res
+    "GetMetricPolicyResponse"
+    "fixture/GetMetricPolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy GetMetricPolicy)
+
+responseDeleteMetricPolicy :: DeleteMetricPolicyResponse -> TestTree
+responseDeleteMetricPolicy = res
+    "DeleteMetricPolicyResponse"
+    "fixture/DeleteMetricPolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy DeleteMetricPolicy)
+
+responsePutMetricPolicy :: PutMetricPolicyResponse -> TestTree
+responsePutMetricPolicy = res
+    "PutMetricPolicyResponse"
+    "fixture/PutMetricPolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy PutMetricPolicy)
+
+responseGetLifecyclePolicy :: GetLifecyclePolicyResponse -> TestTree
+responseGetLifecyclePolicy = res
+    "GetLifecyclePolicyResponse"
+    "fixture/GetLifecyclePolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy GetLifecyclePolicy)
+
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    mediaStore
+    (Proxy :: Proxy TagResource)
+
 responseGetCORSPolicy :: GetCORSPolicyResponse -> TestTree
 responseGetCORSPolicy = res
     "GetCORSPolicyResponse"
     "fixture/GetCORSPolicyResponse.proto"
     mediaStore
     (Proxy :: Proxy GetCORSPolicy)
+
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    mediaStore
+    (Proxy :: Proxy UntagResource)
 
 responseDeleteContainerPolicy :: DeleteContainerPolicyResponse -> TestTree
 responseDeleteContainerPolicy = res

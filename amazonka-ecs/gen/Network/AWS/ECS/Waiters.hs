@@ -25,60 +25,45 @@ import Network.AWS.Waiter
 
 -- | Polls 'Network.AWS.ECS.DescribeServices' every 15 seconds until a successful state is reached. An error is returned after 40 failed checks.
 servicesInactive :: Wait DescribeServices
-servicesInactive =
-  Wait
-    { _waitName = "ServicesInactive"
-    , _waitAttempts = 40
-    , _waitDelay = 15
-    , _waitAcceptors =
-        [ matchAny
-            "MISSING"
-            AcceptFailure
-            (folding (concatOf dssrsFailures) . fReason . _Just . to toTextCI)
-        , matchAny
-            "INACTIVE"
-            AcceptSuccess
-            (folding (concatOf dssrsServices) . csStatus . _Just . to toTextCI)
-        ]
-    }
-
+servicesInactive
+  = Wait{_waitName = "ServicesInactive",
+         _waitAttempts = 40, _waitDelay = 15,
+         _waitAcceptors =
+           [matchAny "MISSING" AcceptFailure
+              (folding (concatOf (dssrsFailures . to toList)) .
+                 fReason . _Just
+                 . to toTextCI),
+            matchAny "INACTIVE" AcceptSuccess
+              (folding (concatOf (dssrsServices . to toList)) .
+                 csStatus . _Just
+                 . to toTextCI)]}
 
 -- | Polls 'Network.AWS.ECS.DescribeTasks' every 6 seconds until a successful state is reached. An error is returned after 100 failed checks.
 tasksRunning :: Wait DescribeTasks
-tasksRunning =
-  Wait
-    { _waitName = "TasksRunning"
-    , _waitAttempts = 100
-    , _waitDelay = 6
-    , _waitAcceptors =
-        [ matchAny
-            "STOPPED"
-            AcceptFailure
-            (folding (concatOf dtrsTasks) . tLastStatus . _Just . to toTextCI)
-        , matchAny
-            "MISSING"
-            AcceptFailure
-            (folding (concatOf dtrsFailures) . fReason . _Just . to toTextCI)
-        , matchAll
-            "RUNNING"
-            AcceptSuccess
-            (folding (concatOf dtrsTasks) . tLastStatus . _Just . to toTextCI)
-        ]
-    }
-
+tasksRunning
+  = Wait{_waitName = "TasksRunning",
+         _waitAttempts = 100, _waitDelay = 6,
+         _waitAcceptors =
+           [matchAny "STOPPED" AcceptFailure
+              (folding (concatOf (dtrsTasks . to toList)) .
+                 tLastStatus . _Just
+                 . to toTextCI),
+            matchAny "MISSING" AcceptFailure
+              (folding (concatOf (dtrsFailures . to toList)) .
+                 fReason . _Just
+                 . to toTextCI),
+            matchAll "RUNNING" AcceptSuccess
+              (folding (concatOf (dtrsTasks . to toList)) .
+                 tLastStatus . _Just
+                 . to toTextCI)]}
 
 -- | Polls 'Network.AWS.ECS.DescribeTasks' every 6 seconds until a successful state is reached. An error is returned after 100 failed checks.
 tasksStopped :: Wait DescribeTasks
-tasksStopped =
-  Wait
-    { _waitName = "TasksStopped"
-    , _waitAttempts = 100
-    , _waitDelay = 6
-    , _waitAcceptors =
-        [ matchAll
-            "STOPPED"
-            AcceptSuccess
-            (folding (concatOf dtrsTasks) . tLastStatus . _Just . to toTextCI)
-        ]
-    }
-
+tasksStopped
+  = Wait{_waitName = "TasksStopped",
+         _waitAttempts = 100, _waitDelay = 6,
+         _waitAcceptors =
+           [matchAll "STOPPED" AcceptSuccess
+              (folding (concatOf (dtrsTasks . to toList)) .
+                 tLastStatus . _Just
+                 . to toTextCI)]}

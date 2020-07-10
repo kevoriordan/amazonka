@@ -51,20 +51,19 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'getDocumentPath' smart constructor.
-data GetDocumentPath = GetDocumentPath'
-  { _gdpAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _gdpMarker              :: !(Maybe Text)
-  , _gdpLimit               :: !(Maybe Nat)
-  , _gdpFields              :: !(Maybe Text)
-  , _gdpDocumentId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetDocumentPath = GetDocumentPath'{_gdpAuthenticationToken
+                                        :: !(Maybe (Sensitive Text)),
+                                        _gdpMarker :: !(Maybe Text),
+                                        _gdpLimit :: !(Maybe Nat),
+                                        _gdpFields :: !(Maybe Text),
+                                        _gdpDocumentId :: !Text}
+                         deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDocumentPath' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdpAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'gdpAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'gdpMarker' - This value is not supported.
 --
@@ -76,17 +75,12 @@ data GetDocumentPath = GetDocumentPath'
 getDocumentPath
     :: Text -- ^ 'gdpDocumentId'
     -> GetDocumentPath
-getDocumentPath pDocumentId_ =
-  GetDocumentPath'
-    { _gdpAuthenticationToken = Nothing
-    , _gdpMarker = Nothing
-    , _gdpLimit = Nothing
-    , _gdpFields = Nothing
-    , _gdpDocumentId = pDocumentId_
-    }
+getDocumentPath pDocumentId_
+  = GetDocumentPath'{_gdpAuthenticationToken = Nothing,
+                     _gdpMarker = Nothing, _gdpLimit = Nothing,
+                     _gdpFields = Nothing, _gdpDocumentId = pDocumentId_}
 
-
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 gdpAuthenticationToken :: Lens' GetDocumentPath (Maybe Text)
 gdpAuthenticationToken = lens _gdpAuthenticationToken (\ s a -> s{_gdpAuthenticationToken = a}) . mapping _Sensitive
 
@@ -138,11 +132,13 @@ instance ToQuery GetDocumentPath where
                "fields" =: _gdpFields]
 
 -- | /See:/ 'getDocumentPathResponse' smart constructor.
-data GetDocumentPathResponse = GetDocumentPathResponse'
-  { _gdprsPath           :: !(Maybe ResourcePath)
-  , _gdprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDocumentPathResponse = GetDocumentPathResponse'{_gdprsPath
+                                                        ::
+                                                        !(Maybe ResourcePath),
+                                                        _gdprsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetDocumentPathResponse' with the minimum fields required to make a request.
 --
@@ -154,10 +150,9 @@ data GetDocumentPathResponse = GetDocumentPathResponse'
 getDocumentPathResponse
     :: Int -- ^ 'gdprsResponseStatus'
     -> GetDocumentPathResponse
-getDocumentPathResponse pResponseStatus_ =
-  GetDocumentPathResponse'
-    {_gdprsPath = Nothing, _gdprsResponseStatus = pResponseStatus_}
-
+getDocumentPathResponse pResponseStatus_
+  = GetDocumentPathResponse'{_gdprsPath = Nothing,
+                             _gdprsResponseStatus = pResponseStatus_}
 
 -- | The path information.
 gdprsPath :: Lens' GetDocumentPathResponse (Maybe ResourcePath)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds an email address to the list of identities for your Amazon SES account and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address.
+-- Adds an email address to the list of identities for your Amazon SES account in the current AWS region and attempts to verify it. As a result of executing this operation, a verification email is sent to the specified address.
 --
 --
 -- You can execute this operation no more than once per second.
@@ -45,15 +45,15 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html Amazon SES Developer Guide> .
+-- | Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'verifyEmailIdentity' smart constructor.
-newtype VerifyEmailIdentity = VerifyEmailIdentity'
-  { _veiEmailAddress :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype VerifyEmailIdentity = VerifyEmailIdentity'{_veiEmailAddress
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'VerifyEmailIdentity' with the minimum fields required to make a request.
 --
@@ -63,9 +63,9 @@ newtype VerifyEmailIdentity = VerifyEmailIdentity'
 verifyEmailIdentity
     :: Text -- ^ 'veiEmailAddress'
     -> VerifyEmailIdentity
-verifyEmailIdentity pEmailAddress_ =
-  VerifyEmailIdentity' {_veiEmailAddress = pEmailAddress_}
-
+verifyEmailIdentity pEmailAddress_
+  = VerifyEmailIdentity'{_veiEmailAddress =
+                           pEmailAddress_}
 
 -- | The email address to be verified.
 veiEmailAddress :: Lens' VerifyEmailIdentity Text
@@ -102,10 +102,10 @@ instance ToQuery VerifyEmailIdentity where
 --
 --
 -- /See:/ 'verifyEmailIdentityResponse' smart constructor.
-newtype VerifyEmailIdentityResponse = VerifyEmailIdentityResponse'
-  { _veirsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype VerifyEmailIdentityResponse = VerifyEmailIdentityResponse'{_veirsResponseStatus
+                                                                   :: Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'VerifyEmailIdentityResponse' with the minimum fields required to make a request.
 --
@@ -115,9 +115,9 @@ newtype VerifyEmailIdentityResponse = VerifyEmailIdentityResponse'
 verifyEmailIdentityResponse
     :: Int -- ^ 'veirsResponseStatus'
     -> VerifyEmailIdentityResponse
-verifyEmailIdentityResponse pResponseStatus_ =
-  VerifyEmailIdentityResponse' {_veirsResponseStatus = pResponseStatus_}
-
+verifyEmailIdentityResponse pResponseStatus_
+  = VerifyEmailIdentityResponse'{_veirsResponseStatus =
+                                   pResponseStatus_}
 
 -- | -- | The response status code.
 veirsResponseStatus :: Lens' VerifyEmailIdentityResponse Int

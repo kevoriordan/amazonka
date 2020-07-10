@@ -11,13 +11,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __Amazon Simple Workflow Service__
+-- __Amazon Simple Workflow Service__ 
 --
 -- The Amazon Simple Workflow Service (Amazon SWF) makes it easy to build applications that use Amazon's cloud to coordinate work across distributed components. In Amazon SWF, a /task/ represents a logical unit of work that is performed by a component of your workflow. Coordinating tasks in a workflow involves managing intertask dependencies, scheduling, and concurrency in accordance with the logical flow of the application.
 --
 -- Amazon SWF gives you full control over implementing tasks and coordinating them without worrying about underlying complexities such as tracking their progress and maintaining their state.
 --
--- This documentation serves as reference only. For a broader overview of the Amazon SWF programming model, see the /<http:\/\/docs.aws.amazon.com\/amazonswf\/latest\/developerguide\/ Amazon SWF Developer Guide> / .
+-- This documentation serves as reference only. For a broader overview of the Amazon SWF programming model, see the /<https:\/\/docs.aws.amazon.com\/amazonswf\/latest\/developerguide\/ Amazon SWF Developer Guide> / .
 --
 module Network.AWS.SWF
     (
@@ -27,32 +27,35 @@ module Network.AWS.SWF
     -- * Errors
     -- $errors
 
-    -- ** DomainAlreadyExistsFault
-    , _DomainAlreadyExistsFault
-
-    -- ** LimitExceededFault
-    , _LimitExceededFault
-
-    -- ** WorkflowExecutionAlreadyStartedFault
-    , _WorkflowExecutionAlreadyStartedFault
-
-    -- ** OperationNotPermittedFault
-    , _OperationNotPermittedFault
-
-    -- ** UnknownResourceFault
-    , _UnknownResourceFault
+    -- ** TypeDeprecatedFault
+    , _TypeDeprecatedFault
 
     -- ** DefaultUndefinedFault
     , _DefaultUndefinedFault
 
-    -- ** TypeDeprecatedFault
-    , _TypeDeprecatedFault
+    -- ** TooManyTagsFault
+    , _TooManyTagsFault
 
     -- ** TypeAlreadyExistsFault
     , _TypeAlreadyExistsFault
 
     -- ** DomainDeprecatedFault
     , _DomainDeprecatedFault
+
+    -- ** UnknownResourceFault
+    , _UnknownResourceFault
+
+    -- ** OperationNotPermittedFault
+    , _OperationNotPermittedFault
+
+    -- ** WorkflowExecutionAlreadyStartedFault
+    , _WorkflowExecutionAlreadyStartedFault
+
+    -- ** LimitExceededFault
+    , _LimitExceededFault
+
+    -- ** DomainAlreadyExistsFault
+    , _DomainAlreadyExistsFault
 
     -- * Waiters
     -- $waiters
@@ -63,88 +66,106 @@ module Network.AWS.SWF
     -- ** ListOpenWorkflowExecutions (Paginated)
     , module Network.AWS.SWF.ListOpenWorkflowExecutions
 
-    -- ** RegisterActivityType
+    -- ** RegisterActivityType 
     , module Network.AWS.SWF.RegisterActivityType
 
     -- ** ListActivityTypes (Paginated)
     , module Network.AWS.SWF.ListActivityTypes
 
-    -- ** CountPendingActivityTasks
+    -- ** CountPendingActivityTasks 
     , module Network.AWS.SWF.CountPendingActivityTasks
 
-    -- ** RegisterWorkflowType
+    -- ** RegisterWorkflowType 
     , module Network.AWS.SWF.RegisterWorkflowType
 
     -- ** ListWorkflowTypes (Paginated)
     , module Network.AWS.SWF.ListWorkflowTypes
 
-    -- ** RespondActivityTaskFailed
+    -- ** ListTagsForResource 
+    , module Network.AWS.SWF.ListTagsForResource
+
+    -- ** RespondActivityTaskFailed 
     , module Network.AWS.SWF.RespondActivityTaskFailed
 
-    -- ** CountOpenWorkflowExecutions
+    -- ** CountOpenWorkflowExecutions 
     , module Network.AWS.SWF.CountOpenWorkflowExecutions
 
-    -- ** DescribeWorkflowType
+    -- ** UndeprecateDomain 
+    , module Network.AWS.SWF.UndeprecateDomain
+
+    -- ** DescribeWorkflowType 
     , module Network.AWS.SWF.DescribeWorkflowType
 
-    -- ** DeprecateWorkflowType
+    -- ** DeprecateWorkflowType 
     , module Network.AWS.SWF.DeprecateWorkflowType
 
-    -- ** RequestCancelWorkflowExecution
+    -- ** RequestCancelWorkflowExecution 
     , module Network.AWS.SWF.RequestCancelWorkflowExecution
 
-    -- ** RegisterDomain
+    -- ** RegisterDomain 
     , module Network.AWS.SWF.RegisterDomain
 
-    -- ** RespondDecisionTaskCompleted
+    -- ** RespondDecisionTaskCompleted 
     , module Network.AWS.SWF.RespondDecisionTaskCompleted
 
-    -- ** PollForActivityTask
+    -- ** PollForActivityTask 
     , module Network.AWS.SWF.PollForActivityTask
 
-    -- ** RespondActivityTaskCompleted
+    -- ** RespondActivityTaskCompleted 
     , module Network.AWS.SWF.RespondActivityTaskCompleted
 
-    -- ** DescribeWorkflowExecution
+    -- ** DescribeWorkflowExecution 
     , module Network.AWS.SWF.DescribeWorkflowExecution
 
-    -- ** SignalWorkflowExecution
+    -- ** SignalWorkflowExecution 
     , module Network.AWS.SWF.SignalWorkflowExecution
 
-    -- ** CountPendingDecisionTasks
+    -- ** CountPendingDecisionTasks 
     , module Network.AWS.SWF.CountPendingDecisionTasks
 
     -- ** ListClosedWorkflowExecutions (Paginated)
     , module Network.AWS.SWF.ListClosedWorkflowExecutions
 
-    -- ** RecordActivityTaskHeartbeat
+    -- ** RecordActivityTaskHeartbeat 
     , module Network.AWS.SWF.RecordActivityTaskHeartbeat
 
-    -- ** DescribeDomain
+    -- ** DescribeDomain 
     , module Network.AWS.SWF.DescribeDomain
 
     -- ** GetWorkflowExecutionHistory (Paginated)
     , module Network.AWS.SWF.GetWorkflowExecutionHistory
 
-    -- ** DeprecateDomain
+    -- ** DeprecateDomain 
     , module Network.AWS.SWF.DeprecateDomain
 
-    -- ** TerminateWorkflowExecution
+    -- ** UndeprecateWorkflowType 
+    , module Network.AWS.SWF.UndeprecateWorkflowType
+
+    -- ** TerminateWorkflowExecution 
     , module Network.AWS.SWF.TerminateWorkflowExecution
 
-    -- ** DescribeActivityType
+    -- ** DescribeActivityType 
     , module Network.AWS.SWF.DescribeActivityType
 
-    -- ** DeprecateActivityType
+    -- ** TagResource 
+    , module Network.AWS.SWF.TagResource
+
+    -- ** DeprecateActivityType 
     , module Network.AWS.SWF.DeprecateActivityType
 
-    -- ** CountClosedWorkflowExecutions
+    -- ** UndeprecateActivityType 
+    , module Network.AWS.SWF.UndeprecateActivityType
+
+    -- ** CountClosedWorkflowExecutions 
     , module Network.AWS.SWF.CountClosedWorkflowExecutions
 
-    -- ** RespondActivityTaskCanceled
+    -- ** UntagResource 
+    , module Network.AWS.SWF.UntagResource
+
+    -- ** RespondActivityTaskCanceled 
     , module Network.AWS.SWF.RespondActivityTaskCanceled
 
-    -- ** StartWorkflowExecution
+    -- ** StartWorkflowExecution 
     , module Network.AWS.SWF.StartWorkflowExecution
 
     -- ** PollForDecisionTask (Paginated)
@@ -479,6 +500,7 @@ module Network.AWS.SWF
     -- ** DomainInfo
     , DomainInfo
     , domainInfo
+    , diArn
     , diDescription
     , diName
     , diStatus
@@ -673,6 +695,12 @@ module Network.AWS.SWF
     , rceweieaRunId
     , rceweieaWorkflowId
     , rceweieaDecisionTaskCompletedEventId
+
+    -- ** ResourceTag
+    , ResourceTag
+    , resourceTag
+    , rtValue
+    , rtKey
 
     -- ** ScheduleActivityTaskDecisionAttributes
     , ScheduleActivityTaskDecisionAttributes
@@ -1017,6 +1045,7 @@ import Network.AWS.SWF.ListActivityTypes
 import Network.AWS.SWF.ListClosedWorkflowExecutions
 import Network.AWS.SWF.ListDomains
 import Network.AWS.SWF.ListOpenWorkflowExecutions
+import Network.AWS.SWF.ListTagsForResource
 import Network.AWS.SWF.ListWorkflowTypes
 import Network.AWS.SWF.PollForActivityTask
 import Network.AWS.SWF.PollForDecisionTask
@@ -1031,8 +1060,13 @@ import Network.AWS.SWF.RespondActivityTaskFailed
 import Network.AWS.SWF.RespondDecisionTaskCompleted
 import Network.AWS.SWF.SignalWorkflowExecution
 import Network.AWS.SWF.StartWorkflowExecution
+import Network.AWS.SWF.TagResource
 import Network.AWS.SWF.TerminateWorkflowExecution
 import Network.AWS.SWF.Types
+import Network.AWS.SWF.UndeprecateActivityType
+import Network.AWS.SWF.UndeprecateDomain
+import Network.AWS.SWF.UndeprecateWorkflowType
+import Network.AWS.SWF.UntagResource
 import Network.AWS.SWF.Waiters
 
 {- $errors

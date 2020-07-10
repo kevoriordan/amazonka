@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- __AWS IoT__
+-- __AWS IoT__ 
 --
 -- AWS IoT-Data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. It implements a broker for applications and things to publish messages over HTTP (Publish) and retrieve, update, and delete thing shadows. A thing shadow is a persistent representation of your things and their state in the AWS cloud.
 --
@@ -23,32 +23,32 @@ module Network.AWS.IoTData
     -- * Errors
     -- $errors
 
+    -- ** InternalFailureException
+    , _InternalFailureException
+
     -- ** InvalidRequestException
     , _InvalidRequestException
-
-    -- ** ConflictException
-    , _ConflictException
 
     -- ** RequestEntityTooLargeException
     , _RequestEntityTooLargeException
 
-    -- ** ThrottlingException
-    , _ThrottlingException
-
-    -- ** MethodNotAllowedException
-    , _MethodNotAllowedException
-
-    -- ** InternalFailureException
-    , _InternalFailureException
-
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
 
     -- ** UnauthorizedException
     , _UnauthorizedException
 
-    -- ** ResourceNotFoundException
-    , _ResourceNotFoundException
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
+
+    -- ** MethodNotAllowedException
+    , _MethodNotAllowedException
+
+    -- ** ThrottlingException
+    , _ThrottlingException
+
+    -- ** ConflictException
+    , _ConflictException
 
     -- ** UnsupportedDocumentEncodingException
     , _UnsupportedDocumentEncodingException
@@ -59,16 +59,16 @@ module Network.AWS.IoTData
     -- * Operations
     -- $operations
 
-    -- ** GetThingShadow
+    -- ** GetThingShadow 
     , module Network.AWS.IoTData.GetThingShadow
 
-    -- ** DeleteThingShadow
+    -- ** DeleteThingShadow 
     , module Network.AWS.IoTData.DeleteThingShadow
 
-    -- ** UpdateThingShadow
+    -- ** UpdateThingShadow 
     , module Network.AWS.IoTData.UpdateThingShadow
 
-    -- ** Publish
+    -- ** Publish 
     , module Network.AWS.IoTData.Publish
 
     -- * Types

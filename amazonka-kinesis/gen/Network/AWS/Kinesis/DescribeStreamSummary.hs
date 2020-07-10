@@ -21,7 +21,7 @@
 -- Provides a summarized description of the specified Kinesis data stream without the shard list.
 --
 --
--- The information returned includes the stream name, Amazon Resource Name (ARN), status, record retention period, approximate creation time, monitoring, encryption details, and open shard count.
+-- The information returned includes the stream name, Amazon Resource Name (ARN), status, record retention period, approximate creation time, monitoring, encryption details, and open shard count. 
 --
 module Network.AWS.Kinesis.DescribeStreamSummary
     (
@@ -47,10 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeStreamSummary' smart constructor.
-newtype DescribeStreamSummary = DescribeStreamSummary'
-  { _dssStreamName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeStreamSummary = DescribeStreamSummary'{_dssStreamName
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeStreamSummary' with the minimum fields required to make a request.
 --
@@ -60,9 +60,9 @@ newtype DescribeStreamSummary = DescribeStreamSummary'
 describeStreamSummary
     :: Text -- ^ 'dssStreamName'
     -> DescribeStreamSummary
-describeStreamSummary pStreamName_ =
-  DescribeStreamSummary' {_dssStreamName = pStreamName_}
-
+describeStreamSummary pStreamName_
+  = DescribeStreamSummary'{_dssStreamName =
+                             pStreamName_}
 
 -- | The name of the stream to describe.
 dssStreamName :: Lens' DescribeStreamSummary Text
@@ -105,11 +105,13 @@ instance ToQuery DescribeStreamSummary where
         toQuery = const mempty
 
 -- | /See:/ 'describeStreamSummaryResponse' smart constructor.
-data DescribeStreamSummaryResponse = DescribeStreamSummaryResponse'
-  { _dssrsResponseStatus           :: !Int
-  , _dssrsStreamDescriptionSummary :: !StreamDescriptionSummary
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStreamSummaryResponse = DescribeStreamSummaryResponse'{_dssrsResponseStatus
+                                                                    :: !Int,
+                                                                    _dssrsStreamDescriptionSummary
+                                                                    ::
+                                                                    !StreamDescriptionSummary}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeStreamSummaryResponse' with the minimum fields required to make a request.
 --
@@ -122,12 +124,12 @@ describeStreamSummaryResponse
     :: Int -- ^ 'dssrsResponseStatus'
     -> StreamDescriptionSummary -- ^ 'dssrsStreamDescriptionSummary'
     -> DescribeStreamSummaryResponse
-describeStreamSummaryResponse pResponseStatus_ pStreamDescriptionSummary_ =
-  DescribeStreamSummaryResponse'
-    { _dssrsResponseStatus = pResponseStatus_
-    , _dssrsStreamDescriptionSummary = pStreamDescriptionSummary_
-    }
-
+describeStreamSummaryResponse pResponseStatus_
+  pStreamDescriptionSummary_
+  = DescribeStreamSummaryResponse'{_dssrsResponseStatus
+                                     = pResponseStatus_,
+                                   _dssrsStreamDescriptionSummary =
+                                     pStreamDescriptionSummary_}
 
 -- | -- | The response status code.
 dssrsResponseStatus :: Lens' DescribeStreamSummaryResponse Int

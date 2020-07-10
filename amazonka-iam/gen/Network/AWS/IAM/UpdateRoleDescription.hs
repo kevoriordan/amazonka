@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Use instead.
+-- Use 'UpdateRole' instead.
 --
 --
 -- Modifies only the description of a role. This operation performs the same function as the @Description@ parameter in the @UpdateRole@ operation.
@@ -48,11 +48,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateRoleDescription' smart constructor.
-data UpdateRoleDescription = UpdateRoleDescription'
-  { _urdRoleName    :: !Text
-  , _urdDescription :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRoleDescription = UpdateRoleDescription'{_urdRoleName
+                                                    :: !Text,
+                                                    _urdDescription :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateRoleDescription' with the minimum fields required to make a request.
 --
@@ -65,10 +65,9 @@ updateRoleDescription
     :: Text -- ^ 'urdRoleName'
     -> Text -- ^ 'urdDescription'
     -> UpdateRoleDescription
-updateRoleDescription pRoleName_ pDescription_ =
-  UpdateRoleDescription'
-    {_urdRoleName = pRoleName_, _urdDescription = pDescription_}
-
+updateRoleDescription pRoleName_ pDescription_
+  = UpdateRoleDescription'{_urdRoleName = pRoleName_,
+                           _urdDescription = pDescription_}
 
 -- | The name of the role that you want to modify.
 urdRoleName :: Lens' UpdateRoleDescription Text
@@ -107,11 +106,14 @@ instance ToQuery UpdateRoleDescription where
                "Description" =: _urdDescription]
 
 -- | /See:/ 'updateRoleDescriptionResponse' smart constructor.
-data UpdateRoleDescriptionResponse = UpdateRoleDescriptionResponse'
-  { _urdrsRole           :: !(Maybe Role)
-  , _urdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRoleDescriptionResponse = UpdateRoleDescriptionResponse'{_urdrsRole
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Role),
+                                                                    _urdrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'UpdateRoleDescriptionResponse' with the minimum fields required to make a request.
 --
@@ -123,10 +125,10 @@ data UpdateRoleDescriptionResponse = UpdateRoleDescriptionResponse'
 updateRoleDescriptionResponse
     :: Int -- ^ 'urdrsResponseStatus'
     -> UpdateRoleDescriptionResponse
-updateRoleDescriptionResponse pResponseStatus_ =
-  UpdateRoleDescriptionResponse'
-    {_urdrsRole = Nothing, _urdrsResponseStatus = pResponseStatus_}
-
+updateRoleDescriptionResponse pResponseStatus_
+  = UpdateRoleDescriptionResponse'{_urdrsRole =
+                                     Nothing,
+                                   _urdrsResponseStatus = pResponseStatus_}
 
 -- | A structure that contains details about the modified role.
 urdrsRole :: Lens' UpdateRoleDescriptionResponse (Maybe Role)

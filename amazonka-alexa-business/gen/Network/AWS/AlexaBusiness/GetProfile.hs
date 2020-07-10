@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getProfile' smart constructor.
-newtype GetProfile = GetProfile'
-  { _gpProfileARN :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetProfile = GetProfile'{_gpProfileARN ::
+                                 Maybe Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetProfile' with the minimum fields required to make a request.
 --
@@ -57,8 +56,7 @@ newtype GetProfile = GetProfile'
 -- * 'gpProfileARN' - The ARN of the room profile for which to request details. Required.
 getProfile
     :: GetProfile
-getProfile = GetProfile' {_gpProfileARN = Nothing}
-
+getProfile = GetProfile'{_gpProfileARN = Nothing}
 
 -- | The ARN of the room profile for which to request details. Required.
 gpProfileARN :: Lens' GetProfile (Maybe Text)
@@ -98,11 +96,10 @@ instance ToQuery GetProfile where
         toQuery = const mempty
 
 -- | /See:/ 'getProfileResponse' smart constructor.
-data GetProfileResponse = GetProfileResponse'
-  { _gprsProfile        :: !(Maybe Profile)
-  , _gprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetProfileResponse = GetProfileResponse'{_gprsProfile
+                                              :: !(Maybe Profile),
+                                              _gprsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetProfileResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +111,9 @@ data GetProfileResponse = GetProfileResponse'
 getProfileResponse
     :: Int -- ^ 'gprsResponseStatus'
     -> GetProfileResponse
-getProfileResponse pResponseStatus_ =
-  GetProfileResponse'
-    {_gprsProfile = Nothing, _gprsResponseStatus = pResponseStatus_}
-
+getProfileResponse pResponseStatus_
+  = GetProfileResponse'{_gprsProfile = Nothing,
+                        _gprsResponseStatus = pResponseStatus_}
 
 -- | The details of the room profile requested. Required.
 gprsProfile :: Lens' GetProfileResponse (Maybe Profile)

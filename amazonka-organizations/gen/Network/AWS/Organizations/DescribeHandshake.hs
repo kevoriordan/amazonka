@@ -21,7 +21,7 @@
 -- Retrieves information about a previously requested handshake. The handshake ID comes from the response to the original 'InviteAccountToOrganization' operation that generated the handshake.
 --
 --
--- You can access handshakes that are ACCEPTED, DECLINED, or CANCELED for only 30 days after they change to that state. They are then deleted and no longer accessible.
+-- You can access handshakes that are @ACCEPTED@ , @DECLINED@ , or @CANCELED@ for only 30 days after they change to that state. They're then deleted and no longer accessible.
 --
 -- This operation can be called from any account in the organization.
 --
@@ -49,24 +49,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeHandshake' smart constructor.
-newtype DescribeHandshake = DescribeHandshake'
-  { _dhHandshakeId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeHandshake = DescribeHandshake'{_dhHandshakeId
+                                               :: Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeHandshake' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dhHandshakeId' - The unique identifier (ID) of the handshake that you want information about. You can get the ID from the original call to 'InviteAccountToOrganization' , or from a call to 'ListHandshakesForAccount' or 'ListHandshakesForOrganization' . The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.
+-- * 'dhHandshakeId' - The unique identifier (ID) of the handshake that you want information about. You can get the ID from the original call to 'InviteAccountToOrganization' , or from a call to 'ListHandshakesForAccount' or 'ListHandshakesForOrganization' . The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lowercase letters or digits.
 describeHandshake
     :: Text -- ^ 'dhHandshakeId'
     -> DescribeHandshake
-describeHandshake pHandshakeId_ =
-  DescribeHandshake' {_dhHandshakeId = pHandshakeId_}
+describeHandshake pHandshakeId_
+  = DescribeHandshake'{_dhHandshakeId = pHandshakeId_}
 
-
--- | The unique identifier (ID) of the handshake that you want information about. You can get the ID from the original call to 'InviteAccountToOrganization' , or from a call to 'ListHandshakesForAccount' or 'ListHandshakesForOrganization' . The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lower-case letters or digits.
+-- | The unique identifier (ID) of the handshake that you want information about. You can get the ID from the original call to 'InviteAccountToOrganization' , or from a call to 'ListHandshakesForAccount' or 'ListHandshakesForOrganization' . The <http://wikipedia.org/wiki/regex regex pattern> for handshake ID string requires "h-" followed by from 8 to 32 lowercase letters or digits.
 dhHandshakeId :: Lens' DescribeHandshake Text
 dhHandshakeId = lens _dhHandshakeId (\ s a -> s{_dhHandshakeId = a})
 
@@ -105,11 +103,12 @@ instance ToQuery DescribeHandshake where
         toQuery = const mempty
 
 -- | /See:/ 'describeHandshakeResponse' smart constructor.
-data DescribeHandshakeResponse = DescribeHandshakeResponse'
-  { _dhrsHandshake      :: !(Maybe Handshake)
-  , _dhrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DescribeHandshakeResponse = DescribeHandshakeResponse'{_dhrsHandshake
+                                                            ::
+                                                            !(Maybe Handshake),
+                                                            _dhrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeHandshakeResponse' with the minimum fields required to make a request.
 --
@@ -121,10 +120,10 @@ data DescribeHandshakeResponse = DescribeHandshakeResponse'
 describeHandshakeResponse
     :: Int -- ^ 'dhrsResponseStatus'
     -> DescribeHandshakeResponse
-describeHandshakeResponse pResponseStatus_ =
-  DescribeHandshakeResponse'
-    {_dhrsHandshake = Nothing, _dhrsResponseStatus = pResponseStatus_}
-
+describeHandshakeResponse pResponseStatus_
+  = DescribeHandshakeResponse'{_dhrsHandshake =
+                                 Nothing,
+                               _dhrsResponseStatus = pResponseStatus_}
 
 -- | A structure that contains information about the specified handshake.
 dhrsHandshake :: Lens' DescribeHandshakeResponse (Maybe Handshake)

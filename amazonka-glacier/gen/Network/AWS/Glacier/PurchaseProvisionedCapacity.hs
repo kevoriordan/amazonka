@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This operation purchases a provisioned capacity unit for an AWS account.
+-- This operation purchases a provisioned capacity unit for an AWS account. 
 --
 --
 module Network.AWS.Glacier.PurchaseProvisionedCapacity
@@ -45,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'purchaseProvisionedCapacity' smart constructor.
-newtype PurchaseProvisionedCapacity = PurchaseProvisionedCapacity'
-  { _ppcAccountId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype PurchaseProvisionedCapacity = PurchaseProvisionedCapacity'{_ppcAccountId
+                                                                   :: Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'PurchaseProvisionedCapacity' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppcAccountId' - The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID.
+-- * 'ppcAccountId' - The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID. 
 purchaseProvisionedCapacity
     :: Text -- ^ 'ppcAccountId'
     -> PurchaseProvisionedCapacity
-purchaseProvisionedCapacity pAccountId_ =
-  PurchaseProvisionedCapacity' {_ppcAccountId = pAccountId_}
+purchaseProvisionedCapacity pAccountId_
+  = PurchaseProvisionedCapacity'{_ppcAccountId =
+                                   pAccountId_}
 
-
--- | The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID.
+-- | The AWS account ID of the account that owns the vault. You can either specify an AWS account ID or optionally a single '-' (hyphen), in which case Amazon S3 Glacier uses the AWS account ID associated with the credentials used to sign the request. If you use an account ID, don't include any hyphens ('-') in the ID. 
 ppcAccountId :: Lens' PurchaseProvisionedCapacity Text
 ppcAccountId = lens _ppcAccountId (\ s a -> s{_ppcAccountId = a})
 
@@ -95,11 +95,15 @@ instance ToQuery PurchaseProvisionedCapacity where
         toQuery = const mempty
 
 -- | /See:/ 'purchaseProvisionedCapacityResponse' smart constructor.
-data PurchaseProvisionedCapacityResponse = PurchaseProvisionedCapacityResponse'
-  { _ppcrsCapacityId     :: !(Maybe Text)
-  , _ppcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PurchaseProvisionedCapacityResponse = PurchaseProvisionedCapacityResponse'{_ppcrsCapacityId
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _ppcrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'PurchaseProvisionedCapacityResponse' with the minimum fields required to make a request.
 --
@@ -111,10 +115,11 @@ data PurchaseProvisionedCapacityResponse = PurchaseProvisionedCapacityResponse'
 purchaseProvisionedCapacityResponse
     :: Int -- ^ 'ppcrsResponseStatus'
     -> PurchaseProvisionedCapacityResponse
-purchaseProvisionedCapacityResponse pResponseStatus_ =
-  PurchaseProvisionedCapacityResponse'
-    {_ppcrsCapacityId = Nothing, _ppcrsResponseStatus = pResponseStatus_}
-
+purchaseProvisionedCapacityResponse pResponseStatus_
+  = PurchaseProvisionedCapacityResponse'{_ppcrsCapacityId
+                                           = Nothing,
+                                         _ppcrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | The ID that identifies the provisioned capacity unit.
 ppcrsCapacityId :: Lens' PurchaseProvisionedCapacityResponse (Maybe Text)

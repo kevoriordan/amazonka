@@ -27,6 +27,8 @@ module Network.AWS.IoT.DeleteOTAUpdate
       deleteOTAUpdate
     , DeleteOTAUpdate
     -- * Request Lenses
+    , dotauForceDeleteAWSJob
+    , dotauDeleteStream
     , dotauOtaUpdateId
 
     -- * Destructuring the Response
@@ -44,22 +46,36 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteOTAUpdate' smart constructor.
-newtype DeleteOTAUpdate = DeleteOTAUpdate'
-  { _dotauOtaUpdateId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteOTAUpdate = DeleteOTAUpdate'{_dotauForceDeleteAWSJob
+                                        :: !(Maybe Bool),
+                                        _dotauDeleteStream :: !(Maybe Bool),
+                                        _dotauOtaUpdateId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteOTAUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dotauForceDeleteAWSJob' - Specifies if the AWS Job associated with the OTA update should be deleted with the OTA update is deleted.
+--
+-- * 'dotauDeleteStream' - Specifies if the stream associated with an OTA update should be deleted when the OTA update is deleted.
+--
 -- * 'dotauOtaUpdateId' - The OTA update ID to delete.
 deleteOTAUpdate
     :: Text -- ^ 'dotauOtaUpdateId'
     -> DeleteOTAUpdate
-deleteOTAUpdate pOtaUpdateId_ =
-  DeleteOTAUpdate' {_dotauOtaUpdateId = pOtaUpdateId_}
+deleteOTAUpdate pOtaUpdateId_
+  = DeleteOTAUpdate'{_dotauForceDeleteAWSJob = Nothing,
+                     _dotauDeleteStream = Nothing,
+                     _dotauOtaUpdateId = pOtaUpdateId_}
 
+-- | Specifies if the AWS Job associated with the OTA update should be deleted with the OTA update is deleted.
+dotauForceDeleteAWSJob :: Lens' DeleteOTAUpdate (Maybe Bool)
+dotauForceDeleteAWSJob = lens _dotauForceDeleteAWSJob (\ s a -> s{_dotauForceDeleteAWSJob = a})
+
+-- | Specifies if the stream associated with an OTA update should be deleted when the OTA update is deleted.
+dotauDeleteStream :: Lens' DeleteOTAUpdate (Maybe Bool)
+dotauDeleteStream = lens _dotauDeleteStream (\ s a -> s{_dotauDeleteStream = a})
 
 -- | The OTA update ID to delete.
 dotauOtaUpdateId :: Lens' DeleteOTAUpdate Text
@@ -85,13 +101,16 @@ instance ToPath DeleteOTAUpdate where
           = mconcat ["/otaUpdates/", toBS _dotauOtaUpdateId]
 
 instance ToQuery DeleteOTAUpdate where
-        toQuery = const mempty
+        toQuery DeleteOTAUpdate'{..}
+          = mconcat
+              ["forceDeleteAWSJob" =: _dotauForceDeleteAWSJob,
+               "deleteStream" =: _dotauDeleteStream]
 
 -- | /See:/ 'deleteOTAUpdateResponse' smart constructor.
-newtype DeleteOTAUpdateResponse = DeleteOTAUpdateResponse'
-  { _dotaursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteOTAUpdateResponse = DeleteOTAUpdateResponse'{_dotaursResponseStatus
+                                                           :: Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteOTAUpdateResponse' with the minimum fields required to make a request.
 --
@@ -101,9 +120,9 @@ newtype DeleteOTAUpdateResponse = DeleteOTAUpdateResponse'
 deleteOTAUpdateResponse
     :: Int -- ^ 'dotaursResponseStatus'
     -> DeleteOTAUpdateResponse
-deleteOTAUpdateResponse pResponseStatus_ =
-  DeleteOTAUpdateResponse' {_dotaursResponseStatus = pResponseStatus_}
-
+deleteOTAUpdateResponse pResponseStatus_
+  = DeleteOTAUpdateResponse'{_dotaursResponseStatus =
+                               pResponseStatus_}
 
 -- | -- | The response status code.
 dotaursResponseStatus :: Lens' DeleteOTAUpdateResponse Int

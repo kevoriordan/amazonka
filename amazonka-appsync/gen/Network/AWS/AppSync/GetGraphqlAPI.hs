@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getGraphqlAPI' smart constructor.
-newtype GetGraphqlAPI = GetGraphqlAPI'
-  { _ggaApiId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetGraphqlAPI = GetGraphqlAPI'{_ggaApiId ::
+                                       Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetGraphqlAPI' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetGraphqlAPI = GetGraphqlAPI'
 getGraphqlAPI
     :: Text -- ^ 'ggaApiId'
     -> GetGraphqlAPI
-getGraphqlAPI pApiId_ = GetGraphqlAPI' {_ggaApiId = pApiId_}
-
+getGraphqlAPI pApiId_
+  = GetGraphqlAPI'{_ggaApiId = pApiId_}
 
 -- | The API ID for the GraphQL API.
 ggaApiId :: Lens' GetGraphqlAPI Text
@@ -93,11 +92,12 @@ instance ToQuery GetGraphqlAPI where
         toQuery = const mempty
 
 -- | /See:/ 'getGraphqlAPIResponse' smart constructor.
-data GetGraphqlAPIResponse = GetGraphqlAPIResponse'
-  { _ggarsGraphqlAPI     :: !(Maybe GraphqlAPI)
-  , _ggarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGraphqlAPIResponse = GetGraphqlAPIResponse'{_ggarsGraphqlAPI
+                                                    :: !(Maybe GraphqlAPI),
+                                                    _ggarsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetGraphqlAPIResponse' with the minimum fields required to make a request.
 --
@@ -109,10 +109,9 @@ data GetGraphqlAPIResponse = GetGraphqlAPIResponse'
 getGraphqlAPIResponse
     :: Int -- ^ 'ggarsResponseStatus'
     -> GetGraphqlAPIResponse
-getGraphqlAPIResponse pResponseStatus_ =
-  GetGraphqlAPIResponse'
-    {_ggarsGraphqlAPI = Nothing, _ggarsResponseStatus = pResponseStatus_}
-
+getGraphqlAPIResponse pResponseStatus_
+  = GetGraphqlAPIResponse'{_ggarsGraphqlAPI = Nothing,
+                           _ggarsResponseStatus = pResponseStatus_}
 
 -- | The @GraphqlApi@ object.
 ggarsGraphqlAPI :: Lens' GetGraphqlAPIResponse (Maybe GraphqlAPI)

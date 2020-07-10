@@ -21,7 +21,7 @@
 -- Describes the permissions for a specified stack.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribePermissions
     (
@@ -48,26 +48,25 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describePermissions' smart constructor.
-data DescribePermissions = DescribePermissions'
-  { _dpIAMUserARN :: !(Maybe Text)
-  , _dpStackId    :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePermissions = DescribePermissions'{_dpIAMUserARN
+                                                :: !(Maybe Text),
+                                                _dpStackId :: !(Maybe Text)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribePermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpIAMUserARN' - The user's IAM ARN. This can also be a federated user's ARN. For more information about IAM ARNs, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html Using Identifiers> .
+-- * 'dpIAMUserARN' - The user's IAM ARN. This can also be a federated user's ARN. For more information about IAM ARNs, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html Using Identifiers> .
 --
 -- * 'dpStackId' - The stack ID.
 describePermissions
     :: DescribePermissions
-describePermissions =
-  DescribePermissions' {_dpIAMUserARN = Nothing, _dpStackId = Nothing}
+describePermissions
+  = DescribePermissions'{_dpIAMUserARN = Nothing,
+                         _dpStackId = Nothing}
 
-
--- | The user's IAM ARN. This can also be a federated user's ARN. For more information about IAM ARNs, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html Using Identifiers> .
+-- | The user's IAM ARN. This can also be a federated user's ARN. For more information about IAM ARNs, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html Using Identifiers> .
 dpIAMUserARN :: Lens' DescribePermissions (Maybe Text)
 dpIAMUserARN = lens _dpIAMUserARN (\ s a -> s{_dpIAMUserARN = a})
 
@@ -118,11 +117,14 @@ instance ToQuery DescribePermissions where
 --
 --
 -- /See:/ 'describePermissionsResponse' smart constructor.
-data DescribePermissionsResponse = DescribePermissionsResponse'
-  { _dprsPermissions    :: !(Maybe [Permission])
-  , _dprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribePermissionsResponse = DescribePermissionsResponse'{_dprsPermissions
+                                                                ::
+                                                                !(Maybe
+                                                                    [Permission]),
+                                                                _dprsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribePermissionsResponse' with the minimum fields required to make a request.
 --
@@ -134,10 +136,10 @@ data DescribePermissionsResponse = DescribePermissionsResponse'
 describePermissionsResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DescribePermissionsResponse
-describePermissionsResponse pResponseStatus_ =
-  DescribePermissionsResponse'
-    {_dprsPermissions = Nothing, _dprsResponseStatus = pResponseStatus_}
-
+describePermissionsResponse pResponseStatus_
+  = DescribePermissionsResponse'{_dprsPermissions =
+                                   Nothing,
+                                 _dprsResponseStatus = pResponseStatus_}
 
 -- | An array of @Permission@ objects that describe the stack permissions.     * If the request object contains only a stack ID, the array contains a @Permission@ object with permissions for each of the stack IAM ARNs.     * If the request object contains only an IAM ARN, the array contains a @Permission@ object with permissions for each of the user's stack IDs.     * If the request contains a stack ID and an IAM ARN, the array contains a single @Permission@ object with permissions for the specified stack and IAM ARN.
 dprsPermissions :: Lens' DescribePermissionsResponse [Permission]

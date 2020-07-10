@@ -18,12 +18,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Given an identity (an email address or a domain), sets the Amazon Simple Notification Service (Amazon SNS) topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with that identity as the @Source@ .
+-- Sets an Amazon Simple Notification Service (Amazon SNS) topic to use when delivering notifications. When you use this operation, you specify a verified identity, such as an email address or domain. When you send an email that uses the chosen identity in the Source field, Amazon SES sends notifications to the topic you specified. You can send bounce, complaint, or delivery notifications (or any combination of the three) to the Amazon SNS topic that you specify.
 --
 --
 -- You can execute this operation no more than once per second.
 --
--- For more information about feedback notification, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html Amazon SES Developer Guide> .
+-- For more information about feedback notification, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html Amazon SES Developer Guide> .
 --
 module Network.AWS.SES.SetIdentityNotificationTopic
     (
@@ -49,17 +49,21 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to specify the Amazon SNS topic to which Amazon SES will publish bounce, complaint, or delivery notifications for emails sent with that identity as the Source. For information about Amazon SES notifications, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html Amazon SES Developer Guide> .
+-- | Represents a request to specify the Amazon SNS topic to which Amazon SES will publish bounce, complaint, or delivery notifications for emails sent with that identity as the Source. For information about Amazon SES notifications, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'setIdentityNotificationTopic' smart constructor.
-data SetIdentityNotificationTopic = SetIdentityNotificationTopic'
-  { _sintSNSTopic         :: !(Maybe Text)
-  , _sintIdentity         :: !Text
-  , _sintNotificationType :: !NotificationType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetIdentityNotificationTopic = SetIdentityNotificationTopic'{_sintSNSTopic
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _sintIdentity
+                                                                  :: !Text,
+                                                                  _sintNotificationType
+                                                                  ::
+                                                                  !NotificationType}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'SetIdentityNotificationTopic' with the minimum fields required to make a request.
 --
@@ -67,26 +71,25 @@ data SetIdentityNotificationTopic = SetIdentityNotificationTopic'
 --
 -- * 'sintSNSTopic' - The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter is omitted from the request or a null value is passed, @SnsTopic@ is cleared and publishing is disabled.
 --
--- * 'sintIdentity' - The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: @user@example.com@ , @example.com@ , @arn:aws:ses:us-east-1:123456789012:identity/example.com@ .
+-- * 'sintIdentity' - The identity (email address or domain) that you want to set the Amazon SNS topic for. /Important:/ You can only specify a verified identity for this parameter. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). The following examples are all valid identities: @sender@example.com@ , @example.com@ , @arn:aws:ses:us-east-1:123456789012:identity/example.com@ .
 --
 -- * 'sintNotificationType' - The type of notifications that will be published to the specified Amazon SNS topic.
 setIdentityNotificationTopic
     :: Text -- ^ 'sintIdentity'
     -> NotificationType -- ^ 'sintNotificationType'
     -> SetIdentityNotificationTopic
-setIdentityNotificationTopic pIdentity_ pNotificationType_ =
-  SetIdentityNotificationTopic'
-    { _sintSNSTopic = Nothing
-    , _sintIdentity = pIdentity_
-    , _sintNotificationType = pNotificationType_
-    }
-
+setIdentityNotificationTopic pIdentity_
+  pNotificationType_
+  = SetIdentityNotificationTopic'{_sintSNSTopic =
+                                    Nothing,
+                                  _sintIdentity = pIdentity_,
+                                  _sintNotificationType = pNotificationType_}
 
 -- | The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter is omitted from the request or a null value is passed, @SnsTopic@ is cleared and publishing is disabled.
 sintSNSTopic :: Lens' SetIdentityNotificationTopic (Maybe Text)
 sintSNSTopic = lens _sintSNSTopic (\ s a -> s{_sintSNSTopic = a})
 
--- | The identity for which the Amazon SNS topic will be set. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). Examples: @user@example.com@ , @example.com@ , @arn:aws:ses:us-east-1:123456789012:identity/example.com@ .
+-- | The identity (email address or domain) that you want to set the Amazon SNS topic for. /Important:/ You can only specify a verified identity for this parameter. You can specify an identity by using its name or by using its Amazon Resource Name (ARN). The following examples are all valid identities: @sender@example.com@ , @example.com@ , @arn:aws:ses:us-east-1:123456789012:identity/example.com@ .
 sintIdentity :: Lens' SetIdentityNotificationTopic Text
 sintIdentity = lens _sintIdentity (\ s a -> s{_sintIdentity = a})
 
@@ -131,10 +134,11 @@ instance ToQuery SetIdentityNotificationTopic where
 --
 --
 -- /See:/ 'setIdentityNotificationTopicResponse' smart constructor.
-newtype SetIdentityNotificationTopicResponse = SetIdentityNotificationTopicResponse'
-  { _sintrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetIdentityNotificationTopicResponse = SetIdentityNotificationTopicResponse'{_sintrsResponseStatus
+                                                                                     ::
+                                                                                     Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'SetIdentityNotificationTopicResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +148,9 @@ newtype SetIdentityNotificationTopicResponse = SetIdentityNotificationTopicRespo
 setIdentityNotificationTopicResponse
     :: Int -- ^ 'sintrsResponseStatus'
     -> SetIdentityNotificationTopicResponse
-setIdentityNotificationTopicResponse pResponseStatus_ =
-  SetIdentityNotificationTopicResponse'
-    {_sintrsResponseStatus = pResponseStatus_}
-
+setIdentityNotificationTopicResponse pResponseStatus_
+  = SetIdentityNotificationTopicResponse'{_sintrsResponseStatus
+                                            = pResponseStatus_}
 
 -- | -- | The response status code.
 sintrsResponseStatus :: Lens' SetIdentityNotificationTopicResponse Int

@@ -49,10 +49,8 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getUpload' smart constructor.
-newtype GetUpload = GetUpload'
-  { _guArn :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetUpload = GetUpload'{_guArn :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetUpload' with the minimum fields required to make a request.
 --
@@ -62,8 +60,7 @@ newtype GetUpload = GetUpload'
 getUpload
     :: Text -- ^ 'guArn'
     -> GetUpload
-getUpload pArn_ = GetUpload' {_guArn = pArn_}
-
+getUpload pArn_ = GetUpload'{_guArn = pArn_}
 
 -- | The upload's ARN.
 guArn :: Lens' GetUpload Text
@@ -106,11 +103,10 @@ instance ToQuery GetUpload where
 --
 --
 -- /See:/ 'getUploadResponse' smart constructor.
-data GetUploadResponse = GetUploadResponse'
-  { _gursUpload         :: !(Maybe Upload)
-  , _gursResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetUploadResponse = GetUploadResponse'{_gursUpload
+                                            :: !(Maybe Upload),
+                                            _gursResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetUploadResponse' with the minimum fields required to make a request.
 --
@@ -122,10 +118,9 @@ data GetUploadResponse = GetUploadResponse'
 getUploadResponse
     :: Int -- ^ 'gursResponseStatus'
     -> GetUploadResponse
-getUploadResponse pResponseStatus_ =
-  GetUploadResponse'
-    {_gursUpload = Nothing, _gursResponseStatus = pResponseStatus_}
-
+getUploadResponse pResponseStatus_
+  = GetUploadResponse'{_gursUpload = Nothing,
+                       _gursResponseStatus = pResponseStatus_}
 
 -- | An app or a set of one or more tests to upload or that have been uploaded.
 gursUpload :: Lens' GetUploadResponse (Maybe Upload)

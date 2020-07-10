@@ -36,52 +36,52 @@ module Network.AWS.Batch
     -- * Operations
     -- $operations
 
-    -- ** CreateComputeEnvironment
+    -- ** CreateComputeEnvironment 
     , module Network.AWS.Batch.CreateComputeEnvironment
 
-    -- ** RegisterJobDefinition
+    -- ** RegisterJobDefinition 
     , module Network.AWS.Batch.RegisterJobDefinition
 
-    -- ** SubmitJob
+    -- ** SubmitJob 
     , module Network.AWS.Batch.SubmitJob
 
-    -- ** ListJobs
+    -- ** ListJobs (Paginated)
     , module Network.AWS.Batch.ListJobs
 
-    -- ** TerminateJob
+    -- ** TerminateJob 
     , module Network.AWS.Batch.TerminateJob
 
-    -- ** DescribeJobs
+    -- ** DescribeJobs 
     , module Network.AWS.Batch.DescribeJobs
 
-    -- ** DeleteComputeEnvironment
+    -- ** DeleteComputeEnvironment 
     , module Network.AWS.Batch.DeleteComputeEnvironment
 
-    -- ** UpdateComputeEnvironment
+    -- ** UpdateComputeEnvironment 
     , module Network.AWS.Batch.UpdateComputeEnvironment
 
-    -- ** DescribeJobDefinitions
+    -- ** DescribeJobDefinitions (Paginated)
     , module Network.AWS.Batch.DescribeJobDefinitions
 
-    -- ** UpdateJobQueue
+    -- ** UpdateJobQueue 
     , module Network.AWS.Batch.UpdateJobQueue
 
-    -- ** DeleteJobQueue
+    -- ** DeleteJobQueue 
     , module Network.AWS.Batch.DeleteJobQueue
 
-    -- ** CreateJobQueue
+    -- ** CreateJobQueue 
     , module Network.AWS.Batch.CreateJobQueue
 
-    -- ** DeregisterJobDefinition
+    -- ** DeregisterJobDefinition 
     , module Network.AWS.Batch.DeregisterJobDefinition
 
-    -- ** DescribeJobQueues
+    -- ** DescribeJobQueues (Paginated)
     , module Network.AWS.Batch.DescribeJobQueues
 
-    -- ** DescribeComputeEnvironments
+    -- ** DescribeComputeEnvironments (Paginated)
     , module Network.AWS.Batch.DescribeComputeEnvironments
 
-    -- ** CancelJob
+    -- ** CancelJob 
     , module Network.AWS.Batch.CancelJob
 
     -- * Types
@@ -98,8 +98,14 @@ module Network.AWS.Batch
     -- ** CEType
     , CEType (..)
 
+    -- ** CRAllocationStrategy
+    , CRAllocationStrategy (..)
+
     -- ** CRType
     , CRType (..)
+
+    -- ** DeviceCgroupPermission
+    , DeviceCgroupPermission (..)
 
     -- ** JQState
     , JQState (..)
@@ -112,6 +118,9 @@ module Network.AWS.Batch
 
     -- ** JobStatus
     , JobStatus (..)
+
+    -- ** ResourceType
+    , ResourceType (..)
 
     -- ** ArrayProperties
     , ArrayProperties
@@ -134,6 +143,7 @@ module Network.AWS.Batch
     -- ** AttemptContainerDetail
     , AttemptContainerDetail
     , attemptContainerDetail
+    , acdNetworkInterfaces
     , acdTaskARN
     , acdContainerInstanceARN
     , acdReason
@@ -170,18 +180,21 @@ module Network.AWS.Batch
     -- ** ComputeResource
     , ComputeResource
     , computeResource
+    , crSecurityGroupIds
     , crEc2KeyPair
     , crBidPercentage
     , crSpotIAMFleetRole
     , crImageId
+    , crLaunchTemplate
     , crDesiredvCPUs
+    , crAllocationStrategy
+    , crPlacementGroup
     , crTags
     , crType
     , crMinvCPUs
     , crMaxvCPUs
     , crInstanceTypes
     , crSubnets
-    , crSecurityGroupIds
     , crInstanceRole
 
     -- ** ComputeResourceUpdate
@@ -197,13 +210,17 @@ module Network.AWS.Batch
     , cdImage
     , cdCommand
     , cdEnvironment
+    , cdNetworkInterfaces
     , cdTaskARN
     , cdUlimits
     , cdContainerInstanceARN
     , cdPrivileged
     , cdJobRoleARN
+    , cdResourceRequirements
+    , cdInstanceType
     , cdMemory
     , cdUser
+    , cdLinuxParameters
     , cdReason
     , cdLogStreamName
     , cdMountPoints
@@ -217,30 +234,42 @@ module Network.AWS.Batch
     , containerOverrides
     , coCommand
     , coEnvironment
+    , coResourceRequirements
+    , coInstanceType
     , coMemory
     , coVcpus
 
     -- ** ContainerProperties
     , ContainerProperties
     , containerProperties
+    , cpImage
     , cpCommand
     , cpEnvironment
     , cpUlimits
     , cpPrivileged
     , cpJobRoleARN
+    , cpResourceRequirements
+    , cpInstanceType
+    , cpMemory
     , cpUser
+    , cpLinuxParameters
     , cpMountPoints
+    , cpVcpus
     , cpReadonlyRootFilesystem
     , cpVolumes
-    , cpImage
-    , cpVcpus
-    , cpMemory
 
     -- ** ContainerSummary
     , ContainerSummary
     , containerSummary
     , csReason
     , csExitCode
+
+    -- ** Device
+    , Device
+    , device
+    , dContainerPath
+    , dPermissions
+    , dHostPath
 
     -- ** Host
     , Host
@@ -250,15 +279,16 @@ module Network.AWS.Batch
     -- ** JobDefinition
     , JobDefinition
     , jobDefinition
-    , jddStatus
-    , jddRetryStrategy
-    , jddParameters
-    , jddTimeout
-    , jddContainerProperties
-    , jddJobDefinitionName
-    , jddJobDefinitionARN
-    , jddRevision
-    , jddType
+    , jbdfntnStatus
+    , jbdfntnRetryStrategy
+    , jbdfntnParameters
+    , jbdfntnTimeout
+    , jbdfntnContainerProperties
+    , jbdfntnNodeProperties
+    , jbdfntnJobDefinitionName
+    , jbdfntnJobDefinitionARN
+    , jbdfntnRevision
+    , jbdfntnType
 
     -- ** JobDependency
     , JobDependency
@@ -273,17 +303,19 @@ module Network.AWS.Batch
     , jdCreatedAt
     , jdRetryStrategy
     , jdAttempts
+    , jdStartedAt
     , jdDependsOn
     , jdContainer
+    , jdNodeDetails
     , jdParameters
     , jdStatusReason
     , jdArrayProperties
     , jdTimeout
+    , jdNodeProperties
     , jdJobName
     , jdJobId
     , jdJobQueue
     , jdStatus
-    , jdStartedAt
     , jdJobDefinition
 
     -- ** JobQueueDetail
@@ -307,6 +339,7 @@ module Network.AWS.Batch
     , jsContainer
     , jsStatusReason
     , jsArrayProperties
+    , jsNodeProperties
     , jsJobId
     , jsJobName
 
@@ -321,12 +354,75 @@ module Network.AWS.Batch
     , kvpValue
     , kvpName
 
+    -- ** LaunchTemplateSpecification
+    , LaunchTemplateSpecification
+    , launchTemplateSpecification
+    , ltsLaunchTemplateName
+    , ltsLaunchTemplateId
+    , ltsVersion
+
+    -- ** LinuxParameters
+    , LinuxParameters
+    , linuxParameters
+    , lpDevices
+
     -- ** MountPoint
     , MountPoint
     , mountPoint
     , mpContainerPath
     , mpSourceVolume
     , mpReadOnly
+
+    -- ** NetworkInterface
+    , NetworkInterface
+    , networkInterface
+    , niIpv6Address
+    , niPrivateIPv4Address
+    , niAttachmentId
+
+    -- ** NodeDetails
+    , NodeDetails
+    , nodeDetails
+    , ndNodeIndex
+    , ndIsMainNode
+
+    -- ** NodeOverrides
+    , NodeOverrides
+    , nodeOverrides
+    , noNumNodes
+    , noNodePropertyOverrides
+
+    -- ** NodeProperties
+    , NodeProperties
+    , nodeProperties
+    , npNumNodes
+    , npMainNode
+    , npNodeRangeProperties
+
+    -- ** NodePropertiesSummary
+    , NodePropertiesSummary
+    , nodePropertiesSummary
+    , npsNumNodes
+    , npsNodeIndex
+    , npsIsMainNode
+
+    -- ** NodePropertyOverride
+    , NodePropertyOverride
+    , nodePropertyOverride
+    , npoContainerOverrides
+    , npoTargetNodes
+
+    -- ** NodeRangeProperty
+    , NodeRangeProperty
+    , nodeRangeProperty
+    , nrpContainer
+    , nrpTargetNodes
+
+    -- ** ResourceRequirement
+    , ResourceRequirement
+    , resourceRequirement
+    , rrValue
+    , rrType
 
     -- ** RetryStrategy
     , RetryStrategy

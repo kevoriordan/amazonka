@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes all tags from the specified resource.
+-- Removes tag keys from the specified resource.
 --
 --
 module Network.AWS.SSM.RemoveTagsFromResource
@@ -46,39 +46,38 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'removeTagsFromResource' smart constructor.
-data RemoveTagsFromResource = RemoveTagsFromResource'
-  { _rtfrResourceType :: !ResourceTypeForTagging
-  , _rtfrResourceId   :: !Text
-  , _rtfrTagKeys      :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RemoveTagsFromResource = RemoveTagsFromResource'{_rtfrResourceType
+                                                      ::
+                                                      !ResourceTypeForTagging,
+                                                      _rtfrResourceId :: !Text,
+                                                      _rtfrTagKeys :: ![Text]}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'RemoveTagsFromResource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rtfrResourceType' - The type of resource of which you want to remove a tag.
+-- * 'rtfrResourceType' - The type of resource from which you want to remove a tag.
 --
--- * 'rtfrResourceId' - The resource ID for which you want to remove tags. Use the ID of the resource. Here are some examples: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde For the Document and Parameter values, use the name of the resource.
+-- * 'rtfrResourceId' - The ID of the resource from which you want to remove tags. For example: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde For the Document and Parameter values, use the name of the resource.
 --
 -- * 'rtfrTagKeys' - Tag keys that you want to remove from the specified resource.
 removeTagsFromResource
     :: ResourceTypeForTagging -- ^ 'rtfrResourceType'
     -> Text -- ^ 'rtfrResourceId'
     -> RemoveTagsFromResource
-removeTagsFromResource pResourceType_ pResourceId_ =
-  RemoveTagsFromResource'
-    { _rtfrResourceType = pResourceType_
-    , _rtfrResourceId = pResourceId_
-    , _rtfrTagKeys = mempty
-    }
+removeTagsFromResource pResourceType_ pResourceId_
+  = RemoveTagsFromResource'{_rtfrResourceType =
+                              pResourceType_,
+                            _rtfrResourceId = pResourceId_,
+                            _rtfrTagKeys = mempty}
 
-
--- | The type of resource of which you want to remove a tag.
+-- | The type of resource from which you want to remove a tag.
 rtfrResourceType :: Lens' RemoveTagsFromResource ResourceTypeForTagging
 rtfrResourceType = lens _rtfrResourceType (\ s a -> s{_rtfrResourceType = a})
 
--- | The resource ID for which you want to remove tags. Use the ID of the resource. Here are some examples: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde For the Document and Parameter values, use the name of the resource.
+-- | The ID of the resource from which you want to remove tags. For example: ManagedInstance: mi-012345abcde MaintenanceWindow: mw-012345abcde PatchBaseline: pb-012345abcde For the Document and Parameter values, use the name of the resource.
 rtfrResourceId :: Lens' RemoveTagsFromResource Text
 rtfrResourceId = lens _rtfrResourceId (\ s a -> s{_rtfrResourceId = a})
 
@@ -124,10 +123,10 @@ instance ToQuery RemoveTagsFromResource where
         toQuery = const mempty
 
 -- | /See:/ 'removeTagsFromResourceResponse' smart constructor.
-newtype RemoveTagsFromResourceResponse = RemoveTagsFromResourceResponse'
-  { _rtfrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RemoveTagsFromResourceResponse = RemoveTagsFromResourceResponse'{_rtfrrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RemoveTagsFromResourceResponse' with the minimum fields required to make a request.
 --
@@ -137,9 +136,9 @@ newtype RemoveTagsFromResourceResponse = RemoveTagsFromResourceResponse'
 removeTagsFromResourceResponse
     :: Int -- ^ 'rtfrrsResponseStatus'
     -> RemoveTagsFromResourceResponse
-removeTagsFromResourceResponse pResponseStatus_ =
-  RemoveTagsFromResourceResponse' {_rtfrrsResponseStatus = pResponseStatus_}
-
+removeTagsFromResourceResponse pResponseStatus_
+  = RemoveTagsFromResourceResponse'{_rtfrrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 rtfrrsResponseStatus :: Lens' RemoveTagsFromResourceResponse Int

@@ -18,7 +18,21 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the policy of a specified bucket.
+-- Returns the policy of a specified bucket. If you are using an identity other than the root user of the AWS account that owns the bucket, the calling identity must have the @GetBucketPolicy@ permissions on the specified bucket and belong to the bucket owner's account in order to use this operation.
+--
+--
+-- If you don't have @GetBucketPolicy@ permissions, Amazon S3 returns a @403 Access Denied@ error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a @405 Method Not Allowed@ error.
+--
+-- /Important:/ As a security precaution, the root user of the AWS account that owns a bucket can always use this operation, even if the policy explicitly denies the root user the ability to perform this action.
+--
+-- For more information about bucket policies, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html Using Bucket Policies and User Policies> .
+--
+-- The following operation is related to @GetBucketPolicy@ :
+--
+--     * 'GetObject' 
+--
+--
+--
 module Network.AWS.S3.GetBucketPolicy
     (
     -- * Creating a Request
@@ -43,23 +57,22 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'getBucketPolicy' smart constructor.
-newtype GetBucketPolicy = GetBucketPolicy'
-  { _gbpBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetBucketPolicy = GetBucketPolicy'{_gbpBucket
+                                           :: BucketName}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBucketPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gbpBucket' - Undocumented member.
+-- * 'gbpBucket' - The bucket name for which to get the bucket policy.
 getBucketPolicy
     :: BucketName -- ^ 'gbpBucket'
     -> GetBucketPolicy
-getBucketPolicy pBucket_ = GetBucketPolicy' {_gbpBucket = pBucket_}
+getBucketPolicy pBucket_
+  = GetBucketPolicy'{_gbpBucket = pBucket_}
 
-
--- | Undocumented member.
+-- | The bucket name for which to get the bucket policy.
 gbpBucket :: Lens' GetBucketPolicy BucketName
 gbpBucket = lens _gbpBucket (\ s a -> s{_gbpBucket = a})
 
@@ -87,11 +100,11 @@ instance ToQuery GetBucketPolicy where
         toQuery = const (mconcat ["policy"])
 
 -- | /See:/ 'getBucketPolicyResponse' smart constructor.
-data GetBucketPolicyResponse = GetBucketPolicyResponse'
-  { _gbprsResponseStatus :: !Int
-  , _gbprsPolicy         :: !ByteString
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data GetBucketPolicyResponse = GetBucketPolicyResponse'{_gbprsResponseStatus
+                                                        :: !Int,
+                                                        _gbprsPolicy ::
+                                                        !ByteString}
+                                 deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetBucketPolicyResponse' with the minimum fields required to make a request.
 --
@@ -104,10 +117,10 @@ getBucketPolicyResponse
     :: Int -- ^ 'gbprsResponseStatus'
     -> ByteString -- ^ 'gbprsPolicy'
     -> GetBucketPolicyResponse
-getBucketPolicyResponse pResponseStatus_ pPolicy_ =
-  GetBucketPolicyResponse'
-    {_gbprsResponseStatus = pResponseStatus_, _gbprsPolicy = pPolicy_}
-
+getBucketPolicyResponse pResponseStatus_ pPolicy_
+  = GetBucketPolicyResponse'{_gbprsResponseStatus =
+                               pResponseStatus_,
+                             _gbprsPolicy = pPolicy_}
 
 -- | -- | The response status code.
 gbprsResponseStatus :: Lens' GetBucketPolicyResponse Int

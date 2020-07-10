@@ -45,11 +45,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteDocumentationVersion' smart constructor.
-data DeleteDocumentationVersion = DeleteDocumentationVersion'
-  { _ddvRestAPIId            :: !Text
-  , _ddvDocumentationVersion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDocumentationVersion = DeleteDocumentationVersion'{_ddvRestAPIId
+                                                              :: !Text,
+                                                              _ddvDocumentationVersion
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteDocumentationVersion' with the minimum fields required to make a request.
 --
@@ -62,12 +63,12 @@ deleteDocumentationVersion
     :: Text -- ^ 'ddvRestAPIId'
     -> Text -- ^ 'ddvDocumentationVersion'
     -> DeleteDocumentationVersion
-deleteDocumentationVersion pRestAPIId_ pDocumentationVersion_ =
-  DeleteDocumentationVersion'
-    { _ddvRestAPIId = pRestAPIId_
-    , _ddvDocumentationVersion = pDocumentationVersion_
-    }
-
+deleteDocumentationVersion pRestAPIId_
+  pDocumentationVersion_
+  = DeleteDocumentationVersion'{_ddvRestAPIId =
+                                  pRestAPIId_,
+                                _ddvDocumentationVersion =
+                                  pDocumentationVersion_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 ddvRestAPIId :: Lens' DeleteDocumentationVersion Text
@@ -105,17 +106,16 @@ instance ToQuery DeleteDocumentationVersion where
         toQuery = const mempty
 
 -- | /See:/ 'deleteDocumentationVersionResponse' smart constructor.
-data DeleteDocumentationVersionResponse =
-  DeleteDocumentationVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteDocumentationVersionResponse = DeleteDocumentationVersionResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DeleteDocumentationVersionResponse' with the minimum fields required to make a request.
 --
 deleteDocumentationVersionResponse
     :: DeleteDocumentationVersionResponse
-deleteDocumentationVersionResponse = DeleteDocumentationVersionResponse'
-
+deleteDocumentationVersionResponse
+  = DeleteDocumentationVersionResponse'
 
 instance NFData DeleteDocumentationVersionResponse
          where

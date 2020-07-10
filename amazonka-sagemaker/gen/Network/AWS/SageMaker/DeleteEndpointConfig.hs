@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an endpoint configuration. The @DeleteEndpoingConfig@ API deletes only the specified configuration. It does not delete endpoints created using the configuration.
+-- Deletes an endpoint configuration. The @DeleteEndpointConfig@ API deletes only the specified configuration. It does not delete endpoints created using the configuration. 
 --
 --
 module Network.AWS.SageMaker.DeleteEndpointConfig
@@ -42,10 +42,10 @@ import Network.AWS.SageMaker.Types
 import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'deleteEndpointConfig' smart constructor.
-newtype DeleteEndpointConfig = DeleteEndpointConfig'
-  { _dEndpointConfigName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteEndpointConfig = DeleteEndpointConfig'{_dEndpointConfigName
+                                                     :: Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteEndpointConfig' with the minimum fields required to make a request.
 --
@@ -55,9 +55,9 @@ newtype DeleteEndpointConfig = DeleteEndpointConfig'
 deleteEndpointConfig
     :: Text -- ^ 'dEndpointConfigName'
     -> DeleteEndpointConfig
-deleteEndpointConfig pEndpointConfigName_ =
-  DeleteEndpointConfig' {_dEndpointConfigName = pEndpointConfigName_}
-
+deleteEndpointConfig pEndpointConfigName_
+  = DeleteEndpointConfig'{_dEndpointConfigName =
+                            pEndpointConfigName_}
 
 -- | The name of the endpoint configuration that you want to delete.
 dEndpointConfigName :: Lens' DeleteEndpointConfig Text
@@ -96,16 +96,15 @@ instance ToQuery DeleteEndpointConfig where
         toQuery = const mempty
 
 -- | /See:/ 'deleteEndpointConfigResponse' smart constructor.
-data DeleteEndpointConfigResponse =
-  DeleteEndpointConfigResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteEndpointConfigResponse = DeleteEndpointConfigResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DeleteEndpointConfigResponse' with the minimum fields required to make a request.
 --
 deleteEndpointConfigResponse
     :: DeleteEndpointConfigResponse
-deleteEndpointConfigResponse = DeleteEndpointConfigResponse'
-
+deleteEndpointConfigResponse
+  = DeleteEndpointConfigResponse'
 
 instance NFData DeleteEndpointConfigResponse where

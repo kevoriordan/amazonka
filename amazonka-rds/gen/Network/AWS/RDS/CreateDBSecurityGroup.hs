@@ -46,44 +46,45 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'createDBSecurityGroup' smart constructor.
-data CreateDBSecurityGroup = CreateDBSecurityGroup'
-  { _cdsgTags                       :: !(Maybe [Tag])
-  , _cdsgDBSecurityGroupName        :: !Text
-  , _cdsgDBSecurityGroupDescription :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDBSecurityGroup = CreateDBSecurityGroup'{_cdsgTags
+                                                    :: !(Maybe [Tag]),
+                                                    _cdsgDBSecurityGroupName ::
+                                                    !Text,
+                                                    _cdsgDBSecurityGroupDescription
+                                                    :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'CreateDBSecurityGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdsgTags' - Undocumented member.
+-- * 'cdsgTags' - Tags to assign to the DB security group.
 --
--- * 'cdsgDBSecurityGroupName' - The name for the DB security group. This value is stored as a lowercase string. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens     * Must not be "Default" Example: @mysecuritygroup@
+-- * 'cdsgDBSecurityGroupName' - The name for the DB security group. This value is stored as a lowercase string. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Can't end with a hyphen or contain two consecutive hyphens     * Must not be "Default" Example: @mysecuritygroup@ 
 --
 -- * 'cdsgDBSecurityGroupDescription' - The description for the DB security group.
 createDBSecurityGroup
     :: Text -- ^ 'cdsgDBSecurityGroupName'
     -> Text -- ^ 'cdsgDBSecurityGroupDescription'
     -> CreateDBSecurityGroup
-createDBSecurityGroup pDBSecurityGroupName_ pDBSecurityGroupDescription_ =
-  CreateDBSecurityGroup'
-    { _cdsgTags = Nothing
-    , _cdsgDBSecurityGroupName = pDBSecurityGroupName_
-    , _cdsgDBSecurityGroupDescription = pDBSecurityGroupDescription_
-    }
+createDBSecurityGroup pDBSecurityGroupName_
+  pDBSecurityGroupDescription_
+  = CreateDBSecurityGroup'{_cdsgTags = Nothing,
+                           _cdsgDBSecurityGroupName = pDBSecurityGroupName_,
+                           _cdsgDBSecurityGroupDescription =
+                             pDBSecurityGroupDescription_}
 
-
--- | Undocumented member.
+-- | Tags to assign to the DB security group.
 cdsgTags :: Lens' CreateDBSecurityGroup [Tag]
 cdsgTags = lens _cdsgTags (\ s a -> s{_cdsgTags = a}) . _Default . _Coerce
 
--- | The name for the DB security group. This value is stored as a lowercase string. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens     * Must not be "Default" Example: @mysecuritygroup@
+-- | The name for the DB security group. This value is stored as a lowercase string. Constraints:     * Must be 1 to 255 letters, numbers, or hyphens.     * First character must be a letter     * Can't end with a hyphen or contain two consecutive hyphens     * Must not be "Default" Example: @mysecuritygroup@ 
 cdsgDBSecurityGroupName :: Lens' CreateDBSecurityGroup Text
 cdsgDBSecurityGroupName = lens _cdsgDBSecurityGroupName (\ s a -> s{_cdsgDBSecurityGroupName = a})
 
@@ -122,11 +123,14 @@ instance ToQuery CreateDBSecurityGroup where
                  _cdsgDBSecurityGroupDescription]
 
 -- | /See:/ 'createDBSecurityGroupResponse' smart constructor.
-data CreateDBSecurityGroupResponse = CreateDBSecurityGroupResponse'
-  { _cdbsgrsDBSecurityGroup :: !(Maybe DBSecurityGroup)
-  , _cdbsgrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateDBSecurityGroupResponse = CreateDBSecurityGroupResponse'{_cdbsgrsDBSecurityGroup
+                                                                    ::
+                                                                    !(Maybe
+                                                                        DBSecurityGroup),
+                                                                    _cdbsgrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'CreateDBSecurityGroupResponse' with the minimum fields required to make a request.
 --
@@ -138,12 +142,10 @@ data CreateDBSecurityGroupResponse = CreateDBSecurityGroupResponse'
 createDBSecurityGroupResponse
     :: Int -- ^ 'cdbsgrsResponseStatus'
     -> CreateDBSecurityGroupResponse
-createDBSecurityGroupResponse pResponseStatus_ =
-  CreateDBSecurityGroupResponse'
-    { _cdbsgrsDBSecurityGroup = Nothing
-    , _cdbsgrsResponseStatus = pResponseStatus_
-    }
-
+createDBSecurityGroupResponse pResponseStatus_
+  = CreateDBSecurityGroupResponse'{_cdbsgrsDBSecurityGroup
+                                     = Nothing,
+                                   _cdbsgrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 cdbsgrsDBSecurityGroup :: Lens' CreateDBSecurityGroupResponse (Maybe DBSecurityGroup)

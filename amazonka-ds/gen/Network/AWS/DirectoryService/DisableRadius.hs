@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector directory.
+-- Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
 --
 --
 module Network.AWS.DirectoryService.DisableRadius
@@ -48,10 +48,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'disableRadius' smart constructor.
-newtype DisableRadius = DisableRadius'
-  { _drDirectoryId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableRadius = DisableRadius'{_drDirectoryId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisableRadius' with the minimum fields required to make a request.
 --
@@ -61,8 +60,8 @@ newtype DisableRadius = DisableRadius'
 disableRadius
     :: Text -- ^ 'drDirectoryId'
     -> DisableRadius
-disableRadius pDirectoryId_ = DisableRadius' {_drDirectoryId = pDirectoryId_}
-
+disableRadius pDirectoryId_
+  = DisableRadius'{_drDirectoryId = pDirectoryId_}
 
 -- | The identifier of the directory for which to disable MFA.
 drDirectoryId :: Lens' DisableRadius Text
@@ -106,10 +105,10 @@ instance ToQuery DisableRadius where
 --
 --
 -- /See:/ 'disableRadiusResponse' smart constructor.
-newtype DisableRadiusResponse = DisableRadiusResponse'
-  { _drrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableRadiusResponse = DisableRadiusResponse'{_drrsResponseStatus
+                                                       :: Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DisableRadiusResponse' with the minimum fields required to make a request.
 --
@@ -119,9 +118,9 @@ newtype DisableRadiusResponse = DisableRadiusResponse'
 disableRadiusResponse
     :: Int -- ^ 'drrsResponseStatus'
     -> DisableRadiusResponse
-disableRadiusResponse pResponseStatus_ =
-  DisableRadiusResponse' {_drrsResponseStatus = pResponseStatus_}
-
+disableRadiusResponse pResponseStatus_
+  = DisableRadiusResponse'{_drrsResponseStatus =
+                             pResponseStatus_}
 
 -- | -- | The response status code.
 drrsResponseStatus :: Lens' DisableRadiusResponse Int

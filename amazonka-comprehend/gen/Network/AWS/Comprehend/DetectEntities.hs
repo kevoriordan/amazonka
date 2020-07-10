@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inspects text for entities, and returns information about them. For more information, about entities, see 'how-entities' .
+-- Inspects text for named entities, and returns information about them. For more information, about named entities, see 'how-entities' . 
 --
 --
 module Network.AWS.Comprehend.DetectEntities
@@ -34,8 +34,8 @@ module Network.AWS.Comprehend.DetectEntities
     , detectEntitiesResponse
     , DetectEntitiesResponse
     -- * Response Lenses
-    , dersEntities
-    , dersResponseStatus
+    , desrsEntities
+    , desrsResponseStatus
     ) where
 
 import Network.AWS.Comprehend.Types
@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'detectEntities' smart constructor.
-data DetectEntities = DetectEntities'
-  { _deText         :: !Text
-  , _deLanguageCode :: !LanguageCode
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetectEntities = DetectEntities'{_deText ::
+                                      !Text,
+                                      _deLanguageCode :: !LanguageCode}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DetectEntities' with the minimum fields required to make a request.
 --
@@ -58,20 +57,20 @@ data DetectEntities = DetectEntities'
 --
 -- * 'deText' - A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
 --
--- * 'deLanguageCode' - The RFC 5646 language code of the input text. If the request does not specify the language code, the service detects the dominant language. If you specify a language code that the service does not support, it returns @UnsupportedLanguageException@ exception. For more information about RFC 5646, see <https://tools.ietf.org/html/rfc5646 Tags for Identifying Languages> on the /IETF Tools/ web site.
+-- * 'deLanguageCode' - The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
 detectEntities
     :: Text -- ^ 'deText'
     -> LanguageCode -- ^ 'deLanguageCode'
     -> DetectEntities
-detectEntities pText_ pLanguageCode_ =
-  DetectEntities' {_deText = pText_, _deLanguageCode = pLanguageCode_}
-
+detectEntities pText_ pLanguageCode_
+  = DetectEntities'{_deText = pText_,
+                    _deLanguageCode = pLanguageCode_}
 
 -- | A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
 deText :: Lens' DetectEntities Text
 deText = lens _deText (\ s a -> s{_deText = a})
 
--- | The RFC 5646 language code of the input text. If the request does not specify the language code, the service detects the dominant language. If you specify a language code that the service does not support, it returns @UnsupportedLanguageException@ exception. For more information about RFC 5646, see <https://tools.ietf.org/html/rfc5646 Tags for Identifying Languages> on the /IETF Tools/ web site.
+-- | The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
 deLanguageCode :: Lens' DetectEntities LanguageCode
 deLanguageCode = lens _deLanguageCode (\ s a -> s{_deLanguageCode = a})
 
@@ -112,33 +111,33 @@ instance ToQuery DetectEntities where
         toQuery = const mempty
 
 -- | /See:/ 'detectEntitiesResponse' smart constructor.
-data DetectEntitiesResponse = DetectEntitiesResponse'
-  { _dersEntities       :: !(Maybe [Entity])
-  , _dersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DetectEntitiesResponse = DetectEntitiesResponse'{_desrsEntities
+                                                      :: !(Maybe [Entity]),
+                                                      _desrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DetectEntitiesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dersEntities' - A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection. For a list of entity types, see 'how-entities' .
+-- * 'desrsEntities' - A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection. For a list of entity types, see 'how-entities' . 
 --
--- * 'dersResponseStatus' - -- | The response status code.
+-- * 'desrsResponseStatus' - -- | The response status code.
 detectEntitiesResponse
-    :: Int -- ^ 'dersResponseStatus'
+    :: Int -- ^ 'desrsResponseStatus'
     -> DetectEntitiesResponse
-detectEntitiesResponse pResponseStatus_ =
-  DetectEntitiesResponse'
-    {_dersEntities = Nothing, _dersResponseStatus = pResponseStatus_}
+detectEntitiesResponse pResponseStatus_
+  = DetectEntitiesResponse'{_desrsEntities = Nothing,
+                            _desrsResponseStatus = pResponseStatus_}
 
-
--- | A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection. For a list of entity types, see 'how-entities' .
-dersEntities :: Lens' DetectEntitiesResponse [Entity]
-dersEntities = lens _dersEntities (\ s a -> s{_dersEntities = a}) . _Default . _Coerce
+-- | A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection. For a list of entity types, see 'how-entities' . 
+desrsEntities :: Lens' DetectEntitiesResponse [Entity]
+desrsEntities = lens _desrsEntities (\ s a -> s{_desrsEntities = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
-dersResponseStatus :: Lens' DetectEntitiesResponse Int
-dersResponseStatus = lens _dersResponseStatus (\ s a -> s{_dersResponseStatus = a})
+desrsResponseStatus :: Lens' DetectEntitiesResponse Int
+desrsResponseStatus = lens _desrsResponseStatus (\ s a -> s{_desrsResponseStatus = a})
 
 instance NFData DetectEntitiesResponse where

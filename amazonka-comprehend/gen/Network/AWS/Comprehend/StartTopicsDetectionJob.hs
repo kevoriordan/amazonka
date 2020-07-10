@@ -28,6 +28,8 @@ module Network.AWS.Comprehend.StartTopicsDetectionJob
     , StartTopicsDetectionJob
     -- * Request Lenses
     , stdjJobName
+    , stdjVPCConfig
+    , stdjVolumeKMSKeyId
     , stdjNumberOfTopics
     , stdjClientRequestToken
     , stdjInputDataConfig
@@ -51,15 +53,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startTopicsDetectionJob' smart constructor.
-data StartTopicsDetectionJob = StartTopicsDetectionJob'
-  { _stdjJobName            :: !(Maybe Text)
-  , _stdjNumberOfTopics     :: !(Maybe Nat)
-  , _stdjClientRequestToken :: !(Maybe Text)
-  , _stdjInputDataConfig    :: !InputDataConfig
-  , _stdjOutputDataConfig   :: !OutputDataConfig
-  , _stdjDataAccessRoleARN  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartTopicsDetectionJob = StartTopicsDetectionJob'{_stdjJobName
+                                                        :: !(Maybe Text),
+                                                        _stdjVPCConfig ::
+                                                        !(Maybe VPCConfig),
+                                                        _stdjVolumeKMSKeyId ::
+                                                        !(Maybe Text),
+                                                        _stdjNumberOfTopics ::
+                                                        !(Maybe Nat),
+                                                        _stdjClientRequestToken
+                                                        :: !(Maybe Text),
+                                                        _stdjInputDataConfig ::
+                                                        !InputDataConfig,
+                                                        _stdjOutputDataConfig ::
+                                                        !OutputDataConfig,
+                                                        _stdjDataAccessRoleARN
+                                                        :: !Text}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'StartTopicsDetectionJob' with the minimum fields required to make a request.
 --
@@ -67,34 +78,46 @@ data StartTopicsDetectionJob = StartTopicsDetectionJob'
 --
 -- * 'stdjJobName' - The identifier of the job.
 --
+-- * 'stdjVPCConfig' - Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see <https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html Amazon VPC> . 
+--
+-- * 'stdjVolumeKMSKeyId' - ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:     * KMS Key ID: @"1234abcd-12ab-34cd-56ef-1234567890ab"@      * Amazon Resource Name (ARN) of a KMS Key: @"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"@ 
+--
 -- * 'stdjNumberOfTopics' - The number of topics to detect.
 --
 -- * 'stdjClientRequestToken' - A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
 --
 -- * 'stdjInputDataConfig' - Specifies the format and location of the input data for the job.
 --
--- * 'stdjOutputDataConfig' - Specifies where to send the output files.
+-- * 'stdjOutputDataConfig' - Specifies where to send the output files. The output is a compressed archive with two files, @topic-terms.csv@ that lists the terms associated with each topic, and @doc-topics.csv@ that lists the documents associated with each topic
 --
--- * 'stdjDataAccessRoleARN' - The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+-- * 'stdjDataAccessRoleARN' - The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions> .
 startTopicsDetectionJob
     :: InputDataConfig -- ^ 'stdjInputDataConfig'
     -> OutputDataConfig -- ^ 'stdjOutputDataConfig'
     -> Text -- ^ 'stdjDataAccessRoleARN'
     -> StartTopicsDetectionJob
-startTopicsDetectionJob pInputDataConfig_ pOutputDataConfig_ pDataAccessRoleARN_ =
-  StartTopicsDetectionJob'
-    { _stdjJobName = Nothing
-    , _stdjNumberOfTopics = Nothing
-    , _stdjClientRequestToken = Nothing
-    , _stdjInputDataConfig = pInputDataConfig_
-    , _stdjOutputDataConfig = pOutputDataConfig_
-    , _stdjDataAccessRoleARN = pDataAccessRoleARN_
-    }
-
+startTopicsDetectionJob pInputDataConfig_
+  pOutputDataConfig_ pDataAccessRoleARN_
+  = StartTopicsDetectionJob'{_stdjJobName = Nothing,
+                             _stdjVPCConfig = Nothing,
+                             _stdjVolumeKMSKeyId = Nothing,
+                             _stdjNumberOfTopics = Nothing,
+                             _stdjClientRequestToken = Nothing,
+                             _stdjInputDataConfig = pInputDataConfig_,
+                             _stdjOutputDataConfig = pOutputDataConfig_,
+                             _stdjDataAccessRoleARN = pDataAccessRoleARN_}
 
 -- | The identifier of the job.
 stdjJobName :: Lens' StartTopicsDetectionJob (Maybe Text)
 stdjJobName = lens _stdjJobName (\ s a -> s{_stdjJobName = a})
+
+-- | Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see <https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html Amazon VPC> . 
+stdjVPCConfig :: Lens' StartTopicsDetectionJob (Maybe VPCConfig)
+stdjVPCConfig = lens _stdjVPCConfig (\ s a -> s{_stdjVPCConfig = a})
+
+-- | ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:     * KMS Key ID: @"1234abcd-12ab-34cd-56ef-1234567890ab"@      * Amazon Resource Name (ARN) of a KMS Key: @"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"@ 
+stdjVolumeKMSKeyId :: Lens' StartTopicsDetectionJob (Maybe Text)
+stdjVolumeKMSKeyId = lens _stdjVolumeKMSKeyId (\ s a -> s{_stdjVolumeKMSKeyId = a})
 
 -- | The number of topics to detect.
 stdjNumberOfTopics :: Lens' StartTopicsDetectionJob (Maybe Natural)
@@ -108,11 +131,11 @@ stdjClientRequestToken = lens _stdjClientRequestToken (\ s a -> s{_stdjClientReq
 stdjInputDataConfig :: Lens' StartTopicsDetectionJob InputDataConfig
 stdjInputDataConfig = lens _stdjInputDataConfig (\ s a -> s{_stdjInputDataConfig = a})
 
--- | Specifies where to send the output files.
+-- | Specifies where to send the output files. The output is a compressed archive with two files, @topic-terms.csv@ that lists the terms associated with each topic, and @doc-topics.csv@ that lists the documents associated with each topic
 stdjOutputDataConfig :: Lens' StartTopicsDetectionJob OutputDataConfig
 stdjOutputDataConfig = lens _stdjOutputDataConfig (\ s a -> s{_stdjOutputDataConfig = a})
 
--- | The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+-- | The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data. For more information, see <https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions> .
 stdjDataAccessRoleARN :: Lens' StartTopicsDetectionJob Text
 stdjDataAccessRoleARN = lens _stdjDataAccessRoleARN (\ s a -> s{_stdjDataAccessRoleARN = a})
 
@@ -146,6 +169,8 @@ instance ToJSON StartTopicsDetectionJob where
           = object
               (catMaybes
                  [("JobName" .=) <$> _stdjJobName,
+                  ("VpcConfig" .=) <$> _stdjVPCConfig,
+                  ("VolumeKmsKeyId" .=) <$> _stdjVolumeKMSKeyId,
                   ("NumberOfTopics" .=) <$> _stdjNumberOfTopics,
                   ("ClientRequestToken" .=) <$>
                     _stdjClientRequestToken,
@@ -161,12 +186,18 @@ instance ToQuery StartTopicsDetectionJob where
         toQuery = const mempty
 
 -- | /See:/ 'startTopicsDetectionJobResponse' smart constructor.
-data StartTopicsDetectionJobResponse = StartTopicsDetectionJobResponse'
-  { _stdjrsJobId          :: !(Maybe Text)
-  , _stdjrsJobStatus      :: !(Maybe JobStatus)
-  , _stdjrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartTopicsDetectionJobResponse = StartTopicsDetectionJobResponse'{_stdjrsJobId
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _stdjrsJobStatus
+                                                                        ::
+                                                                        !(Maybe
+                                                                            JobStatus),
+                                                                        _stdjrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'StartTopicsDetectionJobResponse' with the minimum fields required to make a request.
 --
@@ -180,13 +211,11 @@ data StartTopicsDetectionJobResponse = StartTopicsDetectionJobResponse'
 startTopicsDetectionJobResponse
     :: Int -- ^ 'stdjrsResponseStatus'
     -> StartTopicsDetectionJobResponse
-startTopicsDetectionJobResponse pResponseStatus_ =
-  StartTopicsDetectionJobResponse'
-    { _stdjrsJobId = Nothing
-    , _stdjrsJobStatus = Nothing
-    , _stdjrsResponseStatus = pResponseStatus_
-    }
-
+startTopicsDetectionJobResponse pResponseStatus_
+  = StartTopicsDetectionJobResponse'{_stdjrsJobId =
+                                       Nothing,
+                                     _stdjrsJobStatus = Nothing,
+                                     _stdjrsResponseStatus = pResponseStatus_}
 
 -- | The identifier generated for the job. To get the status of the job, use this identifier with the @DescribeTopicDetectionJob@ operation.
 stdjrsJobId :: Lens' StartTopicsDetectionJobResponse (Maybe Text)

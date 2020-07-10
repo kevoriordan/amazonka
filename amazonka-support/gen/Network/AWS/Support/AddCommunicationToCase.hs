@@ -56,38 +56,38 @@ import Network.AWS.Support.Types.Product
 --
 --
 -- /See:/ 'addCommunicationToCase' smart constructor.
-data AddCommunicationToCase = AddCommunicationToCase'
-  { _actcCaseId            :: !(Maybe Text)
-  , _actcCcEmailAddresses  :: !(Maybe [Text])
-  , _actcAttachmentSetId   :: !(Maybe Text)
-  , _actcCommunicationBody :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddCommunicationToCase = AddCommunicationToCase'{_actcCaseId
+                                                      :: !(Maybe Text),
+                                                      _actcCcEmailAddresses ::
+                                                      !(Maybe [Text]),
+                                                      _actcAttachmentSetId ::
+                                                      !(Maybe Text),
+                                                      _actcCommunicationBody ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AddCommunicationToCase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actcCaseId' - The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/
+-- * 'actcCaseId' - The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/ 
 --
 -- * 'actcCcEmailAddresses' - The email addresses in the CC line of an email to be added to the support case.
 --
--- * 'actcAttachmentSetId' - The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling 'AddAttachmentsToSet'
+-- * 'actcAttachmentSetId' - The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling 'AddAttachmentsToSet' 
 --
 -- * 'actcCommunicationBody' - The body of an email communication to add to the support case.
 addCommunicationToCase
     :: Text -- ^ 'actcCommunicationBody'
     -> AddCommunicationToCase
-addCommunicationToCase pCommunicationBody_ =
-  AddCommunicationToCase'
-    { _actcCaseId = Nothing
-    , _actcCcEmailAddresses = Nothing
-    , _actcAttachmentSetId = Nothing
-    , _actcCommunicationBody = pCommunicationBody_
-    }
+addCommunicationToCase pCommunicationBody_
+  = AddCommunicationToCase'{_actcCaseId = Nothing,
+                            _actcCcEmailAddresses = Nothing,
+                            _actcAttachmentSetId = Nothing,
+                            _actcCommunicationBody = pCommunicationBody_}
 
-
--- | The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/
+-- | The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-/12345678910-2013-c4c1d2bf33c5cf47/ 
 actcCaseId :: Lens' AddCommunicationToCase (Maybe Text)
 actcCaseId = lens _actcCaseId (\ s a -> s{_actcCaseId = a})
 
@@ -95,7 +95,7 @@ actcCaseId = lens _actcCaseId (\ s a -> s{_actcCaseId = a})
 actcCcEmailAddresses :: Lens' AddCommunicationToCase [Text]
 actcCcEmailAddresses = lens _actcCcEmailAddresses (\ s a -> s{_actcCcEmailAddresses = a}) . _Default . _Coerce
 
--- | The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling 'AddAttachmentsToSet'
+-- | The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling 'AddAttachmentsToSet' 
 actcAttachmentSetId :: Lens' AddCommunicationToCase (Maybe Text)
 actcAttachmentSetId = lens _actcAttachmentSetId (\ s a -> s{_actcAttachmentSetId = a})
 
@@ -148,11 +148,14 @@ instance ToQuery AddCommunicationToCase where
 --
 --
 -- /See:/ 'addCommunicationToCaseResponse' smart constructor.
-data AddCommunicationToCaseResponse = AddCommunicationToCaseResponse'
-  { _actcrsResult         :: !(Maybe Bool)
-  , _actcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddCommunicationToCaseResponse = AddCommunicationToCaseResponse'{_actcrsResult
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Bool),
+                                                                      _actcrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'AddCommunicationToCaseResponse' with the minimum fields required to make a request.
 --
@@ -164,10 +167,10 @@ data AddCommunicationToCaseResponse = AddCommunicationToCaseResponse'
 addCommunicationToCaseResponse
     :: Int -- ^ 'actcrsResponseStatus'
     -> AddCommunicationToCaseResponse
-addCommunicationToCaseResponse pResponseStatus_ =
-  AddCommunicationToCaseResponse'
-    {_actcrsResult = Nothing, _actcrsResponseStatus = pResponseStatus_}
-
+addCommunicationToCaseResponse pResponseStatus_
+  = AddCommunicationToCaseResponse'{_actcrsResult =
+                                      Nothing,
+                                    _actcrsResponseStatus = pResponseStatus_}
 
 -- | True if 'AddCommunicationToCase' succeeds. Otherwise, returns an error.
 actcrsResult :: Lens' AddCommunicationToCaseResponse (Maybe Bool)

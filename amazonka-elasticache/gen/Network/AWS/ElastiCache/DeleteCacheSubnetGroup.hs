@@ -46,10 +46,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteCacheSubnetGroup' smart constructor.
-newtype DeleteCacheSubnetGroup = DeleteCacheSubnetGroup'
-  { _dCacheSubnetGroupName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCacheSubnetGroup = DeleteCacheSubnetGroup'{_dCacheSubnetGroupName
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteCacheSubnetGroup' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype DeleteCacheSubnetGroup = DeleteCacheSubnetGroup'
 deleteCacheSubnetGroup
     :: Text -- ^ 'dCacheSubnetGroupName'
     -> DeleteCacheSubnetGroup
-deleteCacheSubnetGroup pCacheSubnetGroupName_ =
-  DeleteCacheSubnetGroup' {_dCacheSubnetGroupName = pCacheSubnetGroupName_}
-
+deleteCacheSubnetGroup pCacheSubnetGroupName_
+  = DeleteCacheSubnetGroup'{_dCacheSubnetGroupName =
+                              pCacheSubnetGroupName_}
 
 -- | The name of the cache subnet group to delete. Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
 dCacheSubnetGroupName :: Lens' DeleteCacheSubnetGroup Text
@@ -93,16 +93,15 @@ instance ToQuery DeleteCacheSubnetGroup where
                "CacheSubnetGroupName" =: _dCacheSubnetGroupName]
 
 -- | /See:/ 'deleteCacheSubnetGroupResponse' smart constructor.
-data DeleteCacheSubnetGroupResponse =
-  DeleteCacheSubnetGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCacheSubnetGroupResponse = DeleteCacheSubnetGroupResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteCacheSubnetGroupResponse' with the minimum fields required to make a request.
 --
 deleteCacheSubnetGroupResponse
     :: DeleteCacheSubnetGroupResponse
-deleteCacheSubnetGroupResponse = DeleteCacheSubnetGroupResponse'
-
+deleteCacheSubnetGroupResponse
+  = DeleteCacheSubnetGroupResponse'
 
 instance NFData DeleteCacheSubnetGroupResponse where

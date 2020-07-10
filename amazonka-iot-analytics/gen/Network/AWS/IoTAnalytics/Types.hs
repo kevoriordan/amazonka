@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -16,16 +16,22 @@ module Network.AWS.IoTAnalytics.Types
       ioTAnalytics
 
     -- * Errors
-    , _InvalidRequestException
-    , _ResourceAlreadyExistsException
-    , _ThrottlingException
     , _InternalFailureException
-    , _ServiceUnavailableException
+    , _InvalidRequestException
     , _ResourceNotFoundException
+    , _ResourceAlreadyExistsException
+    , _ServiceUnavailableException
+    , _ThrottlingException
     , _LimitExceededException
 
     -- * ChannelStatus
     , ChannelStatus (..)
+
+    -- * ComputeType
+    , ComputeType (..)
+
+    -- * DatasetActionType
+    , DatasetActionType (..)
 
     -- * DatasetContentState
     , DatasetContentState (..)
@@ -62,6 +68,7 @@ module Network.AWS.IoTAnalytics.Types
     , cCreationTime
     , cStatus
     , cArn
+    , cStorage
     , cRetentionPeriod
     , cName
     , cLastUpdateTime
@@ -73,23 +80,80 @@ module Network.AWS.IoTAnalytics.Types
     , caName
     , caChannelName
 
+    -- * ChannelStatistics
+    , ChannelStatistics
+    , channelStatistics
+    , csSize
+
+    -- * ChannelStorage
+    , ChannelStorage
+    , channelStorage
+    , csServiceManagedS3
+    , csCustomerManagedS3
+
+    -- * ChannelStorageSummary
+    , ChannelStorageSummary
+    , channelStorageSummary
+    , cssServiceManagedS3
+    , cssCustomerManagedS3
+
     -- * ChannelSummary
     , ChannelSummary
     , channelSummary
     , csCreationTime
     , csStatus
     , csChannelName
+    , csChannelStorage
     , csLastUpdateTime
+
+    -- * ContainerDatasetAction
+    , ContainerDatasetAction
+    , containerDatasetAction
+    , cdaVariables
+    , cdaImage
+    , cdaExecutionRoleARN
+    , cdaResourceConfiguration
+
+    -- * CustomerManagedChannelS3Storage
+    , CustomerManagedChannelS3Storage
+    , customerManagedChannelS3Storage
+    , cmcssKeyPrefix
+    , cmcssBucket
+    , cmcssRoleARN
+
+    -- * CustomerManagedChannelS3StorageSummary
+    , CustomerManagedChannelS3StorageSummary
+    , customerManagedChannelS3StorageSummary
+    , cmcsssBucket
+    , cmcsssKeyPrefix
+    , cmcsssRoleARN
+
+    -- * CustomerManagedDatastoreS3Storage
+    , CustomerManagedDatastoreS3Storage
+    , customerManagedDatastoreS3Storage
+    , cmdssKeyPrefix
+    , cmdssBucket
+    , cmdssRoleARN
+
+    -- * CustomerManagedDatastoreS3StorageSummary
+    , CustomerManagedDatastoreS3StorageSummary
+    , customerManagedDatastoreS3StorageSummary
+    , cmdsssBucket
+    , cmdsssKeyPrefix
+    , cmdsssRoleARN
 
     -- * Dataset
     , Dataset
     , dataset
     , dCreationTime
     , dStatus
+    , dVersioningConfiguration
     , dArn
     , dActions
     , dTriggers
+    , dRetentionPeriod
     , dName
+    , dContentDeliveryRules
     , dLastUpdateTime
 
     -- * DatasetAction
@@ -97,12 +161,45 @@ module Network.AWS.IoTAnalytics.Types
     , datasetAction
     , daQueryAction
     , daActionName
+    , daContainerAction
+
+    -- * DatasetActionSummary
+    , DatasetActionSummary
+    , datasetActionSummary
+    , dasActionName
+    , dasActionType
+
+    -- * DatasetContentDeliveryDestination
+    , DatasetContentDeliveryDestination
+    , datasetContentDeliveryDestination
+    , dcddS3DestinationConfiguration
+    , dcddIotEventsDestinationConfiguration
+
+    -- * DatasetContentDeliveryRule
+    , DatasetContentDeliveryRule
+    , datasetContentDeliveryRule
+    , dcdrEntryName
+    , dcdrDestination
 
     -- * DatasetContentStatus
     , DatasetContentStatus
     , datasetContentStatus
     , dcsState
     , dcsReason
+
+    -- * DatasetContentSummary
+    , DatasetContentSummary
+    , datasetContentSummary
+    , dcsCreationTime
+    , dcsStatus
+    , dcsScheduleTime
+    , dcsCompletionTime
+    , dcsVersion
+
+    -- * DatasetContentVersionValue
+    , DatasetContentVersionValue
+    , datasetContentVersionValue
+    , dcvvDatasetName
 
     -- * DatasetEntry
     , DatasetEntry
@@ -113,14 +210,17 @@ module Network.AWS.IoTAnalytics.Types
     -- * DatasetSummary
     , DatasetSummary
     , datasetSummary
-    , dssCreationTime
-    , dssStatus
-    , dssDatasetName
-    , dssLastUpdateTime
+    , dtstsmmryCreationTime
+    , dtstsmmryStatus
+    , dtstsmmryActions
+    , dtstsmmryTriggers
+    , dtstsmmryDatasetName
+    , dtstsmmryLastUpdateTime
 
     -- * DatasetTrigger
     , DatasetTrigger
     , datasetTrigger
+    , dtDataset
     , dtSchedule
 
     -- * Datastore
@@ -129,6 +229,7 @@ module Network.AWS.IoTAnalytics.Types
     , datCreationTime
     , datStatus
     , datArn
+    , datStorage
     , datRetentionPeriod
     , datName
     , datLastUpdateTime
@@ -139,6 +240,23 @@ module Network.AWS.IoTAnalytics.Types
     , daName
     , daDatastoreName
 
+    -- * DatastoreStatistics
+    , DatastoreStatistics
+    , datastoreStatistics
+    , dsSize
+
+    -- * DatastoreStorage
+    , DatastoreStorage
+    , datastoreStorage
+    , dsServiceManagedS3
+    , dsCustomerManagedS3
+
+    -- * DatastoreStorageSummary
+    , DatastoreStorageSummary
+    , datastoreStorageSummary
+    , dssServiceManagedS3
+    , dssCustomerManagedS3
+
     -- * DatastoreSummary
     , DatastoreSummary
     , datastoreSummary
@@ -146,6 +264,13 @@ module Network.AWS.IoTAnalytics.Types
     , dsStatus
     , dsDatastoreName
     , dsLastUpdateTime
+    , dsDatastoreStorage
+
+    -- * DeltaTime
+    , DeltaTime
+    , deltaTime
+    , dtOffsetSeconds
+    , dtTimeExpression
 
     -- * DeviceRegistryEnrichActivity
     , DeviceRegistryEnrichActivity
@@ -165,12 +290,30 @@ module Network.AWS.IoTAnalytics.Types
     , dseaThingName
     , dseaRoleARN
 
+    -- * EstimatedResourceSize
+    , EstimatedResourceSize
+    , estimatedResourceSize
+    , ersEstimatedOn
+    , ersEstimatedSizeInBytes
+
     -- * FilterActivity
     , FilterActivity
     , filterActivity
     , faNext
     , faName
     , faFilter
+
+    -- * GlueConfiguration
+    , GlueConfiguration
+    , glueConfiguration
+    , gcTableName
+    , gcDatabaseName
+
+    -- * IotEventsDestinationConfiguration
+    , IotEventsDestinationConfiguration
+    , iotEventsDestinationConfiguration
+    , iedcInputName
+    , iedcRoleARN
 
     -- * LambdaActivity
     , LambdaActivity
@@ -200,6 +343,11 @@ module Network.AWS.IoTAnalytics.Types
     , message
     , mMessageId
     , mPayload
+
+    -- * OutputFileURIValue
+    , OutputFileURIValue
+    , outputFileURIValue
+    , ofuvFileName
 
     -- * Pipeline
     , Pipeline
@@ -233,6 +381,11 @@ module Network.AWS.IoTAnalytics.Types
     , psReprocessingSummaries
     , psLastUpdateTime
 
+    -- * QueryFilter
+    , QueryFilter
+    , queryFilter
+    , qfDeltaTime
+
     -- * RemoveAttributesActivity
     , RemoveAttributesActivity
     , removeAttributesActivity
@@ -247,11 +400,25 @@ module Network.AWS.IoTAnalytics.Types
     , rsStatus
     , rsId
 
+    -- * ResourceConfiguration
+    , ResourceConfiguration
+    , resourceConfiguration
+    , rcComputeType
+    , rcVolumeSizeInGB
+
     -- * RetentionPeriod
     , RetentionPeriod
     , retentionPeriod
     , rpUnlimited
     , rpNumberOfDays
+
+    -- * S3DestinationConfiguration
+    , S3DestinationConfiguration
+    , s3DestinationConfiguration
+    , sdcGlueConfiguration
+    , sdcBucket
+    , sdcKey
+    , sdcRoleARN
 
     -- * Schedule
     , Schedule
@@ -265,110 +432,227 @@ module Network.AWS.IoTAnalytics.Types
     , saaName
     , saaAttributes
 
+    -- * ServiceManagedChannelS3Storage
+    , ServiceManagedChannelS3Storage
+    , serviceManagedChannelS3Storage
+
+    -- * ServiceManagedChannelS3StorageSummary
+    , ServiceManagedChannelS3StorageSummary
+    , serviceManagedChannelS3StorageSummary
+
+    -- * ServiceManagedDatastoreS3Storage
+    , ServiceManagedDatastoreS3Storage
+    , serviceManagedDatastoreS3Storage
+
+    -- * ServiceManagedDatastoreS3StorageSummary
+    , ServiceManagedDatastoreS3StorageSummary
+    , serviceManagedDatastoreS3StorageSummary
+
     -- * SqlQueryDatasetAction
     , SqlQueryDatasetAction
     , sqlQueryDatasetAction
+    , sqdaFilters
     , sqdaSqlQuery
+
+    -- * Tag
+    , Tag
+    , tag
+    , tagKey
+    , tagValue
+
+    -- * TriggeringDataset
+    , TriggeringDataset
+    , triggeringDataset
+    , tdName
+
+    -- * Variable
+    , Variable
+    , variable
+    , vOutputFileURIValue
+    , vDoubleValue
+    , vStringValue
+    , vDatasetContentVersionValue
+    , vName
+
+    -- * VersioningConfiguration
+    , VersioningConfiguration
+    , versioningConfiguration
+    , vcUnlimited
+    , vcMaxVersions
     ) where
 
-import Network.AWS.IoTAnalytics.Types.Product
-import Network.AWS.IoTAnalytics.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude
 import Network.AWS.Sign.V4
+import Network.AWS.IoTAnalytics.Types.ChannelStatus
+import Network.AWS.IoTAnalytics.Types.ComputeType
+import Network.AWS.IoTAnalytics.Types.DatasetActionType
+import Network.AWS.IoTAnalytics.Types.DatasetContentState
+import Network.AWS.IoTAnalytics.Types.DatasetStatus
+import Network.AWS.IoTAnalytics.Types.DatastoreStatus
+import Network.AWS.IoTAnalytics.Types.LoggingLevel
+import Network.AWS.IoTAnalytics.Types.ReprocessingStatus
+import Network.AWS.IoTAnalytics.Types.AddAttributesActivity
+import Network.AWS.IoTAnalytics.Types.BatchPutMessageErrorEntry
+import Network.AWS.IoTAnalytics.Types.Channel
+import Network.AWS.IoTAnalytics.Types.ChannelActivity
+import Network.AWS.IoTAnalytics.Types.ChannelStatistics
+import Network.AWS.IoTAnalytics.Types.ChannelStorage
+import Network.AWS.IoTAnalytics.Types.ChannelStorageSummary
+import Network.AWS.IoTAnalytics.Types.ChannelSummary
+import Network.AWS.IoTAnalytics.Types.ContainerDatasetAction
+import Network.AWS.IoTAnalytics.Types.CustomerManagedChannelS3Storage
+import Network.AWS.IoTAnalytics.Types.CustomerManagedChannelS3StorageSummary
+import Network.AWS.IoTAnalytics.Types.CustomerManagedDatastoreS3Storage
+import Network.AWS.IoTAnalytics.Types.CustomerManagedDatastoreS3StorageSummary
+import Network.AWS.IoTAnalytics.Types.Dataset
+import Network.AWS.IoTAnalytics.Types.DatasetAction
+import Network.AWS.IoTAnalytics.Types.DatasetActionSummary
+import Network.AWS.IoTAnalytics.Types.DatasetContentDeliveryDestination
+import Network.AWS.IoTAnalytics.Types.DatasetContentDeliveryRule
+import Network.AWS.IoTAnalytics.Types.DatasetContentStatus
+import Network.AWS.IoTAnalytics.Types.DatasetContentSummary
+import Network.AWS.IoTAnalytics.Types.DatasetContentVersionValue
+import Network.AWS.IoTAnalytics.Types.DatasetEntry
+import Network.AWS.IoTAnalytics.Types.DatasetSummary
+import Network.AWS.IoTAnalytics.Types.DatasetTrigger
+import Network.AWS.IoTAnalytics.Types.Datastore
+import Network.AWS.IoTAnalytics.Types.DatastoreActivity
+import Network.AWS.IoTAnalytics.Types.DatastoreStatistics
+import Network.AWS.IoTAnalytics.Types.DatastoreStorage
+import Network.AWS.IoTAnalytics.Types.DatastoreStorageSummary
+import Network.AWS.IoTAnalytics.Types.DatastoreSummary
+import Network.AWS.IoTAnalytics.Types.DeltaTime
+import Network.AWS.IoTAnalytics.Types.DeviceRegistryEnrichActivity
+import Network.AWS.IoTAnalytics.Types.DeviceShadowEnrichActivity
+import Network.AWS.IoTAnalytics.Types.EstimatedResourceSize
+import Network.AWS.IoTAnalytics.Types.FilterActivity
+import Network.AWS.IoTAnalytics.Types.GlueConfiguration
+import Network.AWS.IoTAnalytics.Types.IotEventsDestinationConfiguration
+import Network.AWS.IoTAnalytics.Types.LambdaActivity
+import Network.AWS.IoTAnalytics.Types.LoggingOptions
+import Network.AWS.IoTAnalytics.Types.MathActivity
+import Network.AWS.IoTAnalytics.Types.Message
+import Network.AWS.IoTAnalytics.Types.OutputFileURIValue
+import Network.AWS.IoTAnalytics.Types.Pipeline
+import Network.AWS.IoTAnalytics.Types.PipelineActivity
+import Network.AWS.IoTAnalytics.Types.PipelineSummary
+import Network.AWS.IoTAnalytics.Types.QueryFilter
+import Network.AWS.IoTAnalytics.Types.RemoveAttributesActivity
+import Network.AWS.IoTAnalytics.Types.ReprocessingSummary
+import Network.AWS.IoTAnalytics.Types.ResourceConfiguration
+import Network.AWS.IoTAnalytics.Types.RetentionPeriod
+import Network.AWS.IoTAnalytics.Types.S3DestinationConfiguration
+import Network.AWS.IoTAnalytics.Types.Schedule
+import Network.AWS.IoTAnalytics.Types.SelectAttributesActivity
+import Network.AWS.IoTAnalytics.Types.ServiceManagedChannelS3Storage
+import Network.AWS.IoTAnalytics.Types.ServiceManagedChannelS3StorageSummary
+import Network.AWS.IoTAnalytics.Types.ServiceManagedDatastoreS3Storage
+import Network.AWS.IoTAnalytics.Types.ServiceManagedDatastoreS3StorageSummary
+import Network.AWS.IoTAnalytics.Types.SqlQueryDatasetAction
+import Network.AWS.IoTAnalytics.Types.Tag
+import Network.AWS.IoTAnalytics.Types.TriggeringDataset
+import Network.AWS.IoTAnalytics.Types.Variable
+import Network.AWS.IoTAnalytics.Types.VersioningConfiguration
 
 -- | API version @2017-11-27@ of the Amazon IoT Analytics SDK configuration.
 ioTAnalytics :: Service
-ioTAnalytics =
-  Service
-    { _svcAbbrev = "IoTAnalytics"
-    , _svcSigner = v4
-    , _svcPrefix = "iotanalytics"
-    , _svcVersion = "2017-11-27"
-    , _svcEndpoint = defaultEndpoint ioTAnalytics
-    , _svcTimeout = Just 70
-    , _svcCheck = statusSuccess
-    , _svcError = parseJSONError "IoTAnalytics"
-    , _svcRetry = retry
-    }
-  where
-    retry =
-      Exponential
-        { _retryBase = 5.0e-2
-        , _retryGrowth = 2
-        , _retryAttempts = 5
-        , _retryCheck = check
-        }
-    check e
-      | has (hasCode "ThrottledException" . hasStatus 400) e =
-        Just "throttled_exception"
-      | has (hasStatus 429) e = Just "too_many_requests"
-      | has (hasCode "ThrottlingException" . hasStatus 400) e =
-        Just "throttling_exception"
-      | has (hasCode "Throttling" . hasStatus 400) e = Just "throttling"
-      | has (hasStatus 504) e = Just "gateway_timeout"
-      | has (hasCode "RequestThrottledException" . hasStatus 400) e =
-        Just "request_throttled_exception"
-      | has (hasStatus 502) e = Just "bad_gateway"
-      | has (hasStatus 503) e = Just "service_unavailable"
-      | has (hasStatus 500) e = Just "general_server_error"
-      | has (hasStatus 509) e = Just "limit_exceeded"
-      | otherwise = Nothing
-
-
--- | The request was not valid.
---
---
-_InvalidRequestException :: AsError a => Getting (First ServiceError) a ServiceError
-_InvalidRequestException =
-  _MatchServiceError ioTAnalytics "InvalidRequestException" . hasStatus 400
-
-
--- | A resource with the same name already exists.
---
---
-_ResourceAlreadyExistsException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceAlreadyExistsException =
-  _MatchServiceError ioTAnalytics "ResourceAlreadyExistsException" .
-  hasStatus 409
-
-
--- | The request was denied due to request throttling.
---
---
-_ThrottlingException :: AsError a => Getting (First ServiceError) a ServiceError
-_ThrottlingException =
-  _MatchServiceError ioTAnalytics "ThrottlingException" . hasStatus 429
-
+ioTAnalytics
+  = Service{_svcAbbrev = "IoTAnalytics",
+            _svcSigner = v4, _svcPrefix = "iotanalytics",
+            _svcVersion = "2017-11-27",
+            _svcEndpoint = defaultEndpoint ioTAnalytics,
+            _svcTimeout = Just 70, _svcCheck = statusSuccess,
+            _svcError = parseJSONError "IoTAnalytics",
+            _svcRetry = retry}
+  where retry
+          = Exponential{_retryBase = 5.0e-2, _retryGrowth = 2,
+                        _retryAttempts = 5, _retryCheck = check}
+        check e
+          | has (hasCode "ThrottledException" . hasStatus 400)
+              e
+            = Just "throttled_exception"
+          | has (hasStatus 429) e = Just "too_many_requests"
+          | has (hasCode "ThrottlingException" . hasStatus 400)
+              e
+            = Just "throttling_exception"
+          | has (hasCode "Throttling" . hasStatus 400) e =
+            Just "throttling"
+          | has
+              (hasCode "ProvisionedThroughputExceededException" .
+                 hasStatus 400)
+              e
+            = Just "throughput_exceeded"
+          | has (hasStatus 504) e = Just "gateway_timeout"
+          | has
+              (hasCode "RequestThrottledException" . hasStatus 400)
+              e
+            = Just "request_throttled_exception"
+          | has (hasStatus 502) e = Just "bad_gateway"
+          | has (hasStatus 503) e = Just "service_unavailable"
+          | has (hasStatus 500) e = Just "general_server_error"
+          | has (hasStatus 509) e = Just "limit_exceeded"
+          | otherwise = Nothing
 
 -- | There was an internal failure.
 --
 --
 _InternalFailureException :: AsError a => Getting (First ServiceError) a ServiceError
-_InternalFailureException =
-  _MatchServiceError ioTAnalytics "InternalFailureException" . hasStatus 500
+_InternalFailureException
+  = _MatchServiceError ioTAnalytics
+      "InternalFailureException"
+      . hasStatus 500
 
-
--- | The service is temporarily unavailable.
+-- | The request was not valid.
 --
 --
-_ServiceUnavailableException :: AsError a => Getting (First ServiceError) a ServiceError
-_ServiceUnavailableException =
-  _MatchServiceError ioTAnalytics "ServiceUnavailableException" . hasStatus 503
-
+_InvalidRequestException :: AsError a => Getting (First ServiceError) a ServiceError
+_InvalidRequestException
+  = _MatchServiceError ioTAnalytics
+      "InvalidRequestException"
+      . hasStatus 400
 
 -- | A resource with the specified name could not be found.
 --
 --
 _ResourceNotFoundException :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceNotFoundException =
-  _MatchServiceError ioTAnalytics "ResourceNotFoundException" . hasStatus 404
+_ResourceNotFoundException
+  = _MatchServiceError ioTAnalytics
+      "ResourceNotFoundException"
+      . hasStatus 404
 
+-- | A resource with the same name already exists.
+--
+--
+_ResourceAlreadyExistsException :: AsError a => Getting (First ServiceError) a ServiceError
+_ResourceAlreadyExistsException
+  = _MatchServiceError ioTAnalytics
+      "ResourceAlreadyExistsException"
+      . hasStatus 409
+
+-- | The service is temporarily unavailable.
+--
+--
+_ServiceUnavailableException :: AsError a => Getting (First ServiceError) a ServiceError
+_ServiceUnavailableException
+  = _MatchServiceError ioTAnalytics
+      "ServiceUnavailableException"
+      . hasStatus 503
+
+-- | The request was denied due to request throttling.
+--
+--
+_ThrottlingException :: AsError a => Getting (First ServiceError) a ServiceError
+_ThrottlingException
+  = _MatchServiceError ioTAnalytics
+      "ThrottlingException"
+      . hasStatus 429
 
 -- | The command caused an internal limit to be exceeded.
 --
 --
 _LimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
-_LimitExceededException =
-  _MatchServiceError ioTAnalytics "LimitExceededException" . hasStatus 410
-
+_LimitExceededException
+  = _MatchServiceError ioTAnalytics
+      "LimitExceededException"
+      . hasStatus 410

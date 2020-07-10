@@ -43,17 +43,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLoggingOptions' smart constructor.
-data DescribeLoggingOptions =
-  DescribeLoggingOptions'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoggingOptions = DescribeLoggingOptions'
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeLoggingOptions' with the minimum fields required to make a request.
 --
 describeLoggingOptions
     :: DescribeLoggingOptions
 describeLoggingOptions = DescribeLoggingOptions'
-
 
 instance AWSRequest DescribeLoggingOptions where
         type Rs DescribeLoggingOptions =
@@ -79,11 +77,14 @@ instance ToQuery DescribeLoggingOptions where
         toQuery = const mempty
 
 -- | /See:/ 'describeLoggingOptionsResponse' smart constructor.
-data DescribeLoggingOptionsResponse = DescribeLoggingOptionsResponse'
-  { _dlorsLoggingOptions :: !(Maybe LoggingOptions)
-  , _dlorsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLoggingOptionsResponse = DescribeLoggingOptionsResponse'{_dlorsLoggingOptions
+                                                                      ::
+                                                                      !(Maybe
+                                                                          LoggingOptions),
+                                                                      _dlorsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeLoggingOptionsResponse' with the minimum fields required to make a request.
 --
@@ -95,10 +96,10 @@ data DescribeLoggingOptionsResponse = DescribeLoggingOptionsResponse'
 describeLoggingOptionsResponse
     :: Int -- ^ 'dlorsResponseStatus'
     -> DescribeLoggingOptionsResponse
-describeLoggingOptionsResponse pResponseStatus_ =
-  DescribeLoggingOptionsResponse'
-    {_dlorsLoggingOptions = Nothing, _dlorsResponseStatus = pResponseStatus_}
-
+describeLoggingOptionsResponse pResponseStatus_
+  = DescribeLoggingOptionsResponse'{_dlorsLoggingOptions
+                                      = Nothing,
+                                    _dlorsResponseStatus = pResponseStatus_}
 
 -- | The current settings of the AWS IoT Analytics logging options.
 dlorsLoggingOptions :: Lens' DescribeLoggingOptionsResponse (Maybe LoggingOptions)

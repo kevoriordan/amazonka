@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Create or update an attribute on an Amazon ECS resource. If the attribute does not exist, it is created. If the attribute exists, its value is replaced with the specified value. To delete an attribute, use 'DeleteAttributes' . For more information, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes Attributes> in the /Amazon Elastic Container Service Developer Guide/ .
+-- Create or update an attribute on an Amazon ECS resource. If the attribute does not exist, it is created. If the attribute exists, its value is replaced with the specified value. To delete an attribute, use 'DeleteAttributes' . For more information, see <https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes Attributes> in the /Amazon Elastic Container Service Developer Guide/ .
 --
 --
 module Network.AWS.ECS.PutAttributes
@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putAttributes' smart constructor.
-data PutAttributes = PutAttributes'
-  { _paCluster    :: !(Maybe Text)
-  , _paAttributes :: ![Attribute]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutAttributes = PutAttributes'{_paCluster ::
+                                    !(Maybe Text),
+                                    _paAttributes :: ![Attribute]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutAttributes' with the minimum fields required to make a request.
 --
@@ -61,8 +60,9 @@ data PutAttributes = PutAttributes'
 -- * 'paAttributes' - The attributes to apply to your resource. You can specify up to 10 custom attributes per resource. You can specify up to 10 attributes in a single call.
 putAttributes
     :: PutAttributes
-putAttributes = PutAttributes' {_paCluster = Nothing, _paAttributes = mempty}
-
+putAttributes
+  = PutAttributes'{_paCluster = Nothing,
+                   _paAttributes = mempty}
 
 -- | The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to apply attributes. If you do not specify a cluster, the default cluster is assumed.
 paCluster :: Lens' PutAttributes (Maybe Text)
@@ -110,11 +110,11 @@ instance ToQuery PutAttributes where
         toQuery = const mempty
 
 -- | /See:/ 'putAttributesResponse' smart constructor.
-data PutAttributesResponse = PutAttributesResponse'
-  { _parsAttributes     :: !(Maybe [Attribute])
-  , _parsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutAttributesResponse = PutAttributesResponse'{_parsAttributes
+                                                    :: !(Maybe [Attribute]),
+                                                    _parsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'PutAttributesResponse' with the minimum fields required to make a request.
 --
@@ -126,10 +126,9 @@ data PutAttributesResponse = PutAttributesResponse'
 putAttributesResponse
     :: Int -- ^ 'parsResponseStatus'
     -> PutAttributesResponse
-putAttributesResponse pResponseStatus_ =
-  PutAttributesResponse'
-    {_parsAttributes = Nothing, _parsResponseStatus = pResponseStatus_}
-
+putAttributesResponse pResponseStatus_
+  = PutAttributesResponse'{_parsAttributes = Nothing,
+                           _parsResponseStatus = pResponseStatus_}
 
 -- | The attributes applied to your resource.
 parsAttributes :: Lens' PutAttributesResponse [Attribute]

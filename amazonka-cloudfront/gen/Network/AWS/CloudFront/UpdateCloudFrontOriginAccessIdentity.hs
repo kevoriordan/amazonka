@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update an origin access identity.
+-- Update an origin access identity. 
 --
 --
 module Network.AWS.CloudFront.UpdateCloudFrontOriginAccessIdentity
@@ -52,12 +52,18 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateCloudFrontOriginAccessIdentity' smart constructor.
-data UpdateCloudFrontOriginAccessIdentity = UpdateCloudFrontOriginAccessIdentity'
-  { _ucfoaiIfMatch :: !(Maybe Text)
-  , _ucfoaiCloudFrontOriginAccessIdentityConfig :: !CloudFrontOriginAccessIdentityConfig
-  , _ucfoaiId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCloudFrontOriginAccessIdentity = UpdateCloudFrontOriginAccessIdentity'{_ucfoaiIfMatch
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Text),
+                                                                                  _ucfoaiCloudFrontOriginAccessIdentityConfig
+                                                                                  ::
+                                                                                  !CloudFrontOriginAccessIdentityConfig,
+                                                                                  _ucfoaiId
+                                                                                  ::
+                                                                                  !Text}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'UpdateCloudFrontOriginAccessIdentity' with the minimum fields required to make a request.
 --
@@ -72,14 +78,14 @@ updateCloudFrontOriginAccessIdentity
     :: CloudFrontOriginAccessIdentityConfig -- ^ 'ucfoaiCloudFrontOriginAccessIdentityConfig'
     -> Text -- ^ 'ucfoaiId'
     -> UpdateCloudFrontOriginAccessIdentity
-updateCloudFrontOriginAccessIdentity pCloudFrontOriginAccessIdentityConfig_ pId_ =
-  UpdateCloudFrontOriginAccessIdentity'
-    { _ucfoaiIfMatch = Nothing
-    , _ucfoaiCloudFrontOriginAccessIdentityConfig =
-        pCloudFrontOriginAccessIdentityConfig_
-    , _ucfoaiId = pId_
-    }
-
+updateCloudFrontOriginAccessIdentity
+  pCloudFrontOriginAccessIdentityConfig_ pId_
+  = UpdateCloudFrontOriginAccessIdentity'{_ucfoaiIfMatch
+                                            = Nothing,
+                                          _ucfoaiCloudFrontOriginAccessIdentityConfig
+                                            =
+                                            pCloudFrontOriginAccessIdentityConfig_,
+                                          _ucfoaiId = pId_}
 
 -- | The value of the @ETag@ header that you received when retrieving the identity's configuration. For example: @E2QWRUHAPOMQZL@ .
 ucfoaiIfMatch :: Lens' UpdateCloudFrontOriginAccessIdentity (Maybe Text)
@@ -118,7 +124,7 @@ instance ToElement
          where
         toElement
           = mkElement
-              "{http://cloudfront.amazonaws.com/doc/2017-10-30/}CloudFrontOriginAccessIdentityConfig"
+              "{http://cloudfront.amazonaws.com/doc/2019-03-26/}CloudFrontOriginAccessIdentityConfig"
               .
               _ucfoaiCloudFrontOriginAccessIdentityConfig
 
@@ -132,7 +138,7 @@ instance ToPath UpdateCloudFrontOriginAccessIdentity
          where
         toPath UpdateCloudFrontOriginAccessIdentity'{..}
           = mconcat
-              ["/2017-10-30/origin-access-identity/cloudfront/",
+              ["/2019-03-26/origin-access-identity/cloudfront/",
                toBS _ucfoaiId, "/config"]
 
 instance ToQuery UpdateCloudFrontOriginAccessIdentity
@@ -144,12 +150,20 @@ instance ToQuery UpdateCloudFrontOriginAccessIdentity
 --
 --
 -- /See:/ 'updateCloudFrontOriginAccessIdentityResponse' smart constructor.
-data UpdateCloudFrontOriginAccessIdentityResponse = UpdateCloudFrontOriginAccessIdentityResponse'
-  { _ucfoairsETag :: !(Maybe Text)
-  , _ucfoairsCloudFrontOriginAccessIdentity :: !(Maybe CloudFrontOriginAccessIdentity)
-  , _ucfoairsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCloudFrontOriginAccessIdentityResponse = UpdateCloudFrontOriginAccessIdentityResponse'{_ucfoairsETag
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      Text),
+                                                                                                  _ucfoairsCloudFrontOriginAccessIdentity
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      CloudFrontOriginAccessIdentity),
+                                                                                                  _ucfoairsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'UpdateCloudFrontOriginAccessIdentityResponse' with the minimum fields required to make a request.
 --
@@ -163,13 +177,14 @@ data UpdateCloudFrontOriginAccessIdentityResponse = UpdateCloudFrontOriginAccess
 updateCloudFrontOriginAccessIdentityResponse
     :: Int -- ^ 'ucfoairsResponseStatus'
     -> UpdateCloudFrontOriginAccessIdentityResponse
-updateCloudFrontOriginAccessIdentityResponse pResponseStatus_ =
-  UpdateCloudFrontOriginAccessIdentityResponse'
-    { _ucfoairsETag = Nothing
-    , _ucfoairsCloudFrontOriginAccessIdentity = Nothing
-    , _ucfoairsResponseStatus = pResponseStatus_
-    }
-
+updateCloudFrontOriginAccessIdentityResponse
+  pResponseStatus_
+  = UpdateCloudFrontOriginAccessIdentityResponse'{_ucfoairsETag
+                                                    = Nothing,
+                                                  _ucfoairsCloudFrontOriginAccessIdentity
+                                                    = Nothing,
+                                                  _ucfoairsResponseStatus =
+                                                    pResponseStatus_}
 
 -- | The current version of the configuration. For example: @E2QWRUHAPOMQZL@ .
 ucfoairsETag :: Lens' UpdateCloudFrontOriginAccessIdentityResponse (Maybe Text)

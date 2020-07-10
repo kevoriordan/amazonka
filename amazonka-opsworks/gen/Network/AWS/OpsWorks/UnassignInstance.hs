@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Unassigns a registered instance from all of it's layers. The instance remains in the stack as an unassigned instance and can be assigned to another layer, as needed. You cannot use this action with instances that were created with AWS OpsWorks Stacks.
+-- Unassigns a registered instance from all layers that are using the instance. The instance remains in the stack as an unassigned instance, and can be assigned to another layer as needed. You cannot use this action with instances that were created with AWS OpsWorks Stacks.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.UnassignInstance
     (
@@ -44,10 +44,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'unassignInstance' smart constructor.
-newtype UnassignInstance = UnassignInstance'
-  { _uInstanceId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UnassignInstance = UnassignInstance'{_uInstanceId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UnassignInstance' with the minimum fields required to make a request.
 --
@@ -57,8 +56,8 @@ newtype UnassignInstance = UnassignInstance'
 unassignInstance
     :: Text -- ^ 'uInstanceId'
     -> UnassignInstance
-unassignInstance pInstanceId_ = UnassignInstance' {_uInstanceId = pInstanceId_}
-
+unassignInstance pInstanceId_
+  = UnassignInstance'{_uInstanceId = pInstanceId_}
 
 -- | The instance ID.
 uInstanceId :: Lens' UnassignInstance Text
@@ -94,16 +93,14 @@ instance ToQuery UnassignInstance where
         toQuery = const mempty
 
 -- | /See:/ 'unassignInstanceResponse' smart constructor.
-data UnassignInstanceResponse =
-  UnassignInstanceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UnassignInstanceResponse = UnassignInstanceResponse'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UnassignInstanceResponse' with the minimum fields required to make a request.
 --
 unassignInstanceResponse
     :: UnassignInstanceResponse
 unassignInstanceResponse = UnassignInstanceResponse'
-
 
 instance NFData UnassignInstanceResponse where

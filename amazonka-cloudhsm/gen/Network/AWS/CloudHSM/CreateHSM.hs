@@ -64,17 +64,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createHSM' smart constructor.
-data CreateHSM = CreateHSM'
-  { _chClientToken      :: !(Maybe Text)
-  , _chSyslogIP         :: !(Maybe Text)
-  , _chExternalId       :: !(Maybe Text)
-  , _chEniIP            :: !(Maybe Text)
-  , _chSubnetId         :: !Text
-  , _chSSHKey           :: !Text
-  , _chIAMRoleARN       :: !Text
-  , _chSubscriptionType :: !SubscriptionType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSM = CreateHSM'{_chClientToken ::
+                            !(Maybe Text),
+                            _chSyslogIP :: !(Maybe Text),
+                            _chExternalId :: !(Maybe Text),
+                            _chEniIP :: !(Maybe Text), _chSubnetId :: !Text,
+                            _chSSHKey :: !Text, _chIAMRoleARN :: !Text,
+                            _chSubscriptionType :: !SubscriptionType}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateHSM' with the minimum fields required to make a request.
 --
@@ -101,18 +98,13 @@ createHSM
     -> Text -- ^ 'chIAMRoleARN'
     -> SubscriptionType -- ^ 'chSubscriptionType'
     -> CreateHSM
-createHSM pSubnetId_ pSSHKey_ pIAMRoleARN_ pSubscriptionType_ =
-  CreateHSM'
-    { _chClientToken = Nothing
-    , _chSyslogIP = Nothing
-    , _chExternalId = Nothing
-    , _chEniIP = Nothing
-    , _chSubnetId = pSubnetId_
-    , _chSSHKey = pSSHKey_
-    , _chIAMRoleARN = pIAMRoleARN_
-    , _chSubscriptionType = pSubscriptionType_
-    }
-
+createHSM pSubnetId_ pSSHKey_ pIAMRoleARN_
+  pSubscriptionType_
+  = CreateHSM'{_chClientToken = Nothing,
+               _chSyslogIP = Nothing, _chExternalId = Nothing,
+               _chEniIP = Nothing, _chSubnetId = pSubnetId_,
+               _chSSHKey = pSSHKey_, _chIAMRoleARN = pIAMRoleARN_,
+               _chSubscriptionType = pSubscriptionType_}
 
 -- | A user-defined token to ensure idempotence. Subsequent calls to this operation with the same token will be ignored.
 chClientToken :: Lens' CreateHSM (Maybe Text)
@@ -192,11 +184,10 @@ instance ToQuery CreateHSM where
 --
 --
 -- /See:/ 'createHSMResponse' smart constructor.
-data CreateHSMResponse = CreateHSMResponse'
-  { _chrsHSMARN         :: !(Maybe Text)
-  , _chrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateHSMResponse = CreateHSMResponse'{_chrsHSMARN
+                                            :: !(Maybe Text),
+                                            _chrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateHSMResponse' with the minimum fields required to make a request.
 --
@@ -208,10 +199,9 @@ data CreateHSMResponse = CreateHSMResponse'
 createHSMResponse
     :: Int -- ^ 'chrsResponseStatus'
     -> CreateHSMResponse
-createHSMResponse pResponseStatus_ =
-  CreateHSMResponse'
-    {_chrsHSMARN = Nothing, _chrsResponseStatus = pResponseStatus_}
-
+createHSMResponse pResponseStatus_
+  = CreateHSMResponse'{_chrsHSMARN = Nothing,
+                       _chrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the HSM.
 chrsHSMARN :: Lens' CreateHSMResponse (Maybe Text)

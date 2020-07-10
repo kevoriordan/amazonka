@@ -21,7 +21,7 @@
 -- Deletes a subscriber.
 --
 --
--- __Deleting the last subscriber to a notification also deletes the notification.__
+-- /Important:/ Deleting the last subscriber to a notification also deletes the notification.
 --
 module Network.AWS.Budgets.DeleteSubscriber
     (
@@ -48,18 +48,17 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request of DeleteSubscriber
+-- | Request of DeleteSubscriber 
 --
 --
 --
 -- /See:/ 'deleteSubscriber' smart constructor.
-data DeleteSubscriber = DeleteSubscriber'
-  { _dsAccountId    :: !Text
-  , _dsBudgetName   :: !Text
-  , _dsNotification :: !Notification
-  , _dsSubscriber   :: !Subscriber
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteSubscriber = DeleteSubscriber'{_dsAccountId
+                                          :: !Text,
+                                          _dsBudgetName :: !Text,
+                                          _dsNotification :: !Notification,
+                                          _dsSubscriber :: !Subscriber}
+                          deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteSubscriber' with the minimum fields required to make a request.
 --
@@ -78,14 +77,12 @@ deleteSubscriber
     -> Notification -- ^ 'dsNotification'
     -> Subscriber -- ^ 'dsSubscriber'
     -> DeleteSubscriber
-deleteSubscriber pAccountId_ pBudgetName_ pNotification_ pSubscriber_ =
-  DeleteSubscriber'
-    { _dsAccountId = pAccountId_
-    , _dsBudgetName = pBudgetName_
-    , _dsNotification = pNotification_
-    , _dsSubscriber = pSubscriber_
-    }
-
+deleteSubscriber pAccountId_ pBudgetName_
+  pNotification_ pSubscriber_
+  = DeleteSubscriber'{_dsAccountId = pAccountId_,
+                      _dsBudgetName = pBudgetName_,
+                      _dsNotification = pNotification_,
+                      _dsSubscriber = pSubscriber_}
 
 -- | The @accountId@ that is associated with the budget whose subscriber you want to delete.
 dsAccountId :: Lens' DeleteSubscriber Text
@@ -140,15 +137,15 @@ instance ToPath DeleteSubscriber where
 instance ToQuery DeleteSubscriber where
         toQuery = const mempty
 
--- | Response of DeleteSubscriber
+-- | Response of DeleteSubscriber 
 --
 --
 --
 -- /See:/ 'deleteSubscriberResponse' smart constructor.
-newtype DeleteSubscriberResponse = DeleteSubscriberResponse'
-  { _dsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteSubscriberResponse = DeleteSubscriberResponse'{_dsrsResponseStatus
+                                                             :: Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteSubscriberResponse' with the minimum fields required to make a request.
 --
@@ -158,9 +155,9 @@ newtype DeleteSubscriberResponse = DeleteSubscriberResponse'
 deleteSubscriberResponse
     :: Int -- ^ 'dsrsResponseStatus'
     -> DeleteSubscriberResponse
-deleteSubscriberResponse pResponseStatus_ =
-  DeleteSubscriberResponse' {_dsrsResponseStatus = pResponseStatus_}
-
+deleteSubscriberResponse pResponseStatus_
+  = DeleteSubscriberResponse'{_dsrsResponseStatus =
+                                pResponseStatus_}
 
 -- | -- | The response status code.
 dsrsResponseStatus :: Lens' DeleteSubscriberResponse Int

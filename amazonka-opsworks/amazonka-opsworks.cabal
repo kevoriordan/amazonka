@@ -123,12 +123,70 @@ library
         , Network.AWS.OpsWorks.Waiters
 
     other-modules:
-          Network.AWS.OpsWorks.Types.Product
-        , Network.AWS.OpsWorks.Types.Sum
+          Network.AWS.OpsWorks.Types.AgentVersion
+        , Network.AWS.OpsWorks.Types.App
+        , Network.AWS.OpsWorks.Types.AppAttributesKeys
+        , Network.AWS.OpsWorks.Types.AppType
+        , Network.AWS.OpsWorks.Types.Architecture
+        , Network.AWS.OpsWorks.Types.AutoScalingThresholds
+        , Network.AWS.OpsWorks.Types.AutoScalingType
+        , Network.AWS.OpsWorks.Types.BlockDeviceMapping
+        , Network.AWS.OpsWorks.Types.ChefConfiguration
+        , Network.AWS.OpsWorks.Types.CloudWatchLogsConfiguration
+        , Network.AWS.OpsWorks.Types.CloudWatchLogsEncoding
+        , Network.AWS.OpsWorks.Types.CloudWatchLogsInitialPosition
+        , Network.AWS.OpsWorks.Types.CloudWatchLogsLogStream
+        , Network.AWS.OpsWorks.Types.CloudWatchLogsTimeZone
+        , Network.AWS.OpsWorks.Types.Command
+        , Network.AWS.OpsWorks.Types.DataSource
+        , Network.AWS.OpsWorks.Types.Deployment
+        , Network.AWS.OpsWorks.Types.DeploymentCommand
+        , Network.AWS.OpsWorks.Types.DeploymentCommandName
+        , Network.AWS.OpsWorks.Types.EBSBlockDevice
+        , Network.AWS.OpsWorks.Types.EcsCluster
+        , Network.AWS.OpsWorks.Types.ElasticIP
+        , Network.AWS.OpsWorks.Types.ElasticLoadBalancer
+        , Network.AWS.OpsWorks.Types.EnvironmentVariable
+        , Network.AWS.OpsWorks.Types.Instance
+        , Network.AWS.OpsWorks.Types.InstanceIdentity
+        , Network.AWS.OpsWorks.Types.InstancesCount
+        , Network.AWS.OpsWorks.Types.Layer
+        , Network.AWS.OpsWorks.Types.LayerAttributesKeys
+        , Network.AWS.OpsWorks.Types.LayerType
+        , Network.AWS.OpsWorks.Types.LifecycleEventConfiguration
+        , Network.AWS.OpsWorks.Types.LoadBasedAutoScalingConfiguration
+        , Network.AWS.OpsWorks.Types.OperatingSystem
+        , Network.AWS.OpsWorks.Types.OperatingSystemConfigurationManager
+        , Network.AWS.OpsWorks.Types.Permission
+        , Network.AWS.OpsWorks.Types.Product
+        , Network.AWS.OpsWorks.Types.RAIdArray
+        , Network.AWS.OpsWorks.Types.RDSDBInstance
+        , Network.AWS.OpsWorks.Types.Recipes
+        , Network.AWS.OpsWorks.Types.ReportedOS
+        , Network.AWS.OpsWorks.Types.RootDeviceType
+        , Network.AWS.OpsWorks.Types.SSLConfiguration
+        , Network.AWS.OpsWorks.Types.SelfUserProfile
+        , Network.AWS.OpsWorks.Types.ServiceError'
+        , Network.AWS.OpsWorks.Types.ShutdownEventConfiguration
+        , Network.AWS.OpsWorks.Types.Source
+        , Network.AWS.OpsWorks.Types.SourceType
+        , Network.AWS.OpsWorks.Types.Stack
+        , Network.AWS.OpsWorks.Types.StackAttributesKeys
+        , Network.AWS.OpsWorks.Types.StackConfigurationManager
+        , Network.AWS.OpsWorks.Types.StackSummary
+        , Network.AWS.OpsWorks.Types.TemporaryCredential
+        , Network.AWS.OpsWorks.Types.TimeBasedAutoScalingConfiguration
+        , Network.AWS.OpsWorks.Types.UserProfile
+        , Network.AWS.OpsWorks.Types.VirtualizationType
+        , Network.AWS.OpsWorks.Types.Volume
+        , Network.AWS.OpsWorks.Types.VolumeConfiguration
+        , Network.AWS.OpsWorks.Types.VolumeType
+        , Network.AWS.OpsWorks.Types.WeeklyAutoScalingSchedule
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-opsworks-test
     type:              exitcode-stdio-1.0
@@ -152,6 +210,7 @@ test-suite amazonka-opsworks-test
         , amazonka-opsworks
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

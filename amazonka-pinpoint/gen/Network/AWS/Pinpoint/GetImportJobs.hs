@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about your import jobs.
+-- Retrieves information about the status and settings of all the import jobs for an application.
+--
+--
 module Network.AWS.Pinpoint.GetImportJobs
     (
     -- * Creating a Request
@@ -45,42 +47,38 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getImportJobs' smart constructor.
-data GetImportJobs = GetImportJobs'
-  { _gijsToken         :: !(Maybe Text)
-  , _gijsPageSize      :: !(Maybe Text)
-  , _gijsApplicationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetImportJobs = GetImportJobs'{_gijsToken ::
+                                    !(Maybe Text),
+                                    _gijsPageSize :: !(Maybe Text),
+                                    _gijsApplicationId :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetImportJobs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gijsToken' - The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'gijsToken' - The NextToken string that specifies which page of results to return in a paginated response.
 --
--- * 'gijsPageSize' - The number of entries you want on each page in the response.
+-- * 'gijsPageSize' - The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 --
--- * 'gijsApplicationId' - Undocumented member.
+-- * 'gijsApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getImportJobs
     :: Text -- ^ 'gijsApplicationId'
     -> GetImportJobs
-getImportJobs pApplicationId_ =
-  GetImportJobs'
-    { _gijsToken = Nothing
-    , _gijsPageSize = Nothing
-    , _gijsApplicationId = pApplicationId_
-    }
+getImportJobs pApplicationId_
+  = GetImportJobs'{_gijsToken = Nothing,
+                   _gijsPageSize = Nothing,
+                   _gijsApplicationId = pApplicationId_}
 
-
--- | The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The NextToken string that specifies which page of results to return in a paginated response.
 gijsToken :: Lens' GetImportJobs (Maybe Text)
 gijsToken = lens _gijsToken (\ s a -> s{_gijsToken = a})
 
--- | The number of entries you want on each page in the response.
+-- | The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 gijsPageSize :: Lens' GetImportJobs (Maybe Text)
 gijsPageSize = lens _gijsPageSize (\ s a -> s{_gijsPageSize = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gijsApplicationId :: Lens' GetImportJobs Text
 gijsApplicationId = lens _gijsApplicationId (\ s a -> s{_gijsApplicationId = a})
 
@@ -116,11 +114,12 @@ instance ToQuery GetImportJobs where
               ["token" =: _gijsToken, "page-size" =: _gijsPageSize]
 
 -- | /See:/ 'getImportJobsResponse' smart constructor.
-data GetImportJobsResponse = GetImportJobsResponse'
-  { _gijsrsResponseStatus     :: !Int
-  , _gijsrsImportJobsResponse :: !ImportJobsResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetImportJobsResponse = GetImportJobsResponse'{_gijsrsResponseStatus
+                                                    :: !Int,
+                                                    _gijsrsImportJobsResponse ::
+                                                    !ImportJobsResponse}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetImportJobsResponse' with the minimum fields required to make a request.
 --
@@ -133,12 +132,11 @@ getImportJobsResponse
     :: Int -- ^ 'gijsrsResponseStatus'
     -> ImportJobsResponse -- ^ 'gijsrsImportJobsResponse'
     -> GetImportJobsResponse
-getImportJobsResponse pResponseStatus_ pImportJobsResponse_ =
-  GetImportJobsResponse'
-    { _gijsrsResponseStatus = pResponseStatus_
-    , _gijsrsImportJobsResponse = pImportJobsResponse_
-    }
-
+getImportJobsResponse pResponseStatus_
+  pImportJobsResponse_
+  = GetImportJobsResponse'{_gijsrsResponseStatus =
+                             pResponseStatus_,
+                           _gijsrsImportJobsResponse = pImportJobsResponse_}
 
 -- | -- | The response status code.
 gijsrsResponseStatus :: Lens' GetImportJobsResponse Int

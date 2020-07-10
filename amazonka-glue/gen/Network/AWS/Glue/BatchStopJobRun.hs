@@ -47,11 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchStopJobRun' smart constructor.
-data BatchStopJobRun = BatchStopJobRun'
-  { _bsjrJobName   :: !Text
-  , _bsjrJobRunIds :: !(List1 Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchStopJobRun = BatchStopJobRun'{_bsjrJobName
+                                        :: !Text,
+                                        _bsjrJobRunIds :: !(List1 Text)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchStopJobRun' with the minimum fields required to make a request.
 --
@@ -59,21 +58,20 @@ data BatchStopJobRun = BatchStopJobRun'
 --
 -- * 'bsjrJobName' - The name of the job definition for which to stop job runs.
 --
--- * 'bsjrJobRunIds' - A list of the JobRunIds that should be stopped for that job definition.
+-- * 'bsjrJobRunIds' - A list of the @JobRunIds@ that should be stopped for that job definition.
 batchStopJobRun
     :: Text -- ^ 'bsjrJobName'
     -> NonEmpty Text -- ^ 'bsjrJobRunIds'
     -> BatchStopJobRun
-batchStopJobRun pJobName_ pJobRunIds_ =
-  BatchStopJobRun'
-    {_bsjrJobName = pJobName_, _bsjrJobRunIds = _List1 # pJobRunIds_}
-
+batchStopJobRun pJobName_ pJobRunIds_
+  = BatchStopJobRun'{_bsjrJobName = pJobName_,
+                     _bsjrJobRunIds = _List1 # pJobRunIds_}
 
 -- | The name of the job definition for which to stop job runs.
 bsjrJobName :: Lens' BatchStopJobRun Text
 bsjrJobName = lens _bsjrJobName (\ s a -> s{_bsjrJobName = a})
 
--- | A list of the JobRunIds that should be stopped for that job definition.
+-- | A list of the @JobRunIds@ that should be stopped for that job definition.
 bsjrJobRunIds :: Lens' BatchStopJobRun (NonEmpty Text)
 bsjrJobRunIds = lens _bsjrJobRunIds (\ s a -> s{_bsjrJobRunIds = a}) . _List1
 
@@ -115,12 +113,17 @@ instance ToQuery BatchStopJobRun where
         toQuery = const mempty
 
 -- | /See:/ 'batchStopJobRunResponse' smart constructor.
-data BatchStopJobRunResponse = BatchStopJobRunResponse'
-  { _bsjrrsSuccessfulSubmissions :: !(Maybe [BatchStopJobRunSuccessfulSubmission])
-  , _bsjrrsErrors :: !(Maybe [BatchStopJobRunError])
-  , _bsjrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchStopJobRunResponse = BatchStopJobRunResponse'{_bsjrrsSuccessfulSubmissions
+                                                        ::
+                                                        !(Maybe
+                                                            [BatchStopJobRunSuccessfulSubmission]),
+                                                        _bsjrrsErrors ::
+                                                        !(Maybe
+                                                            [BatchStopJobRunError]),
+                                                        _bsjrrsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'BatchStopJobRunResponse' with the minimum fields required to make a request.
 --
@@ -128,25 +131,23 @@ data BatchStopJobRunResponse = BatchStopJobRunResponse'
 --
 -- * 'bsjrrsSuccessfulSubmissions' - A list of the JobRuns that were successfully submitted for stopping.
 --
--- * 'bsjrrsErrors' - A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
+-- * 'bsjrrsErrors' - A list of the errors that were encountered in trying to stop @JobRuns@ , including the @JobRunId@ for which each error was encountered and details about the error.
 --
 -- * 'bsjrrsResponseStatus' - -- | The response status code.
 batchStopJobRunResponse
     :: Int -- ^ 'bsjrrsResponseStatus'
     -> BatchStopJobRunResponse
-batchStopJobRunResponse pResponseStatus_ =
-  BatchStopJobRunResponse'
-    { _bsjrrsSuccessfulSubmissions = Nothing
-    , _bsjrrsErrors = Nothing
-    , _bsjrrsResponseStatus = pResponseStatus_
-    }
-
+batchStopJobRunResponse pResponseStatus_
+  = BatchStopJobRunResponse'{_bsjrrsSuccessfulSubmissions
+                               = Nothing,
+                             _bsjrrsErrors = Nothing,
+                             _bsjrrsResponseStatus = pResponseStatus_}
 
 -- | A list of the JobRuns that were successfully submitted for stopping.
 bsjrrsSuccessfulSubmissions :: Lens' BatchStopJobRunResponse [BatchStopJobRunSuccessfulSubmission]
 bsjrrsSuccessfulSubmissions = lens _bsjrrsSuccessfulSubmissions (\ s a -> s{_bsjrrsSuccessfulSubmissions = a}) . _Default . _Coerce
 
--- | A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
+-- | A list of the errors that were encountered in trying to stop @JobRuns@ , including the @JobRunId@ for which each error was encountered and details about the error.
 bsjrrsErrors :: Lens' BatchStopJobRunResponse [BatchStopJobRunError]
 bsjrrsErrors = lens _bsjrrsErrors (\ s a -> s{_bsjrrsErrors = a}) . _Default . _Coerce
 

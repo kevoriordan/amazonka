@@ -49,7 +49,7 @@ library
         , Network.AWS.CodeDeploy.BatchGetApplicationRevisions
         , Network.AWS.CodeDeploy.BatchGetApplications
         , Network.AWS.CodeDeploy.BatchGetDeploymentGroups
-        , Network.AWS.CodeDeploy.BatchGetDeploymentInstances
+        , Network.AWS.CodeDeploy.BatchGetDeploymentTargets
         , Network.AWS.CodeDeploy.BatchGetDeployments
         , Network.AWS.CodeDeploy.BatchGetOnPremisesInstances
         , Network.AWS.CodeDeploy.ContinueDeployment
@@ -67,34 +67,117 @@ library
         , Network.AWS.CodeDeploy.GetDeployment
         , Network.AWS.CodeDeploy.GetDeploymentConfig
         , Network.AWS.CodeDeploy.GetDeploymentGroup
-        , Network.AWS.CodeDeploy.GetDeploymentInstance
+        , Network.AWS.CodeDeploy.GetDeploymentTarget
         , Network.AWS.CodeDeploy.GetOnPremisesInstance
         , Network.AWS.CodeDeploy.ListApplicationRevisions
         , Network.AWS.CodeDeploy.ListApplications
         , Network.AWS.CodeDeploy.ListDeploymentConfigs
         , Network.AWS.CodeDeploy.ListDeploymentGroups
-        , Network.AWS.CodeDeploy.ListDeploymentInstances
+        , Network.AWS.CodeDeploy.ListDeploymentTargets
         , Network.AWS.CodeDeploy.ListDeployments
         , Network.AWS.CodeDeploy.ListGitHubAccountTokenNames
         , Network.AWS.CodeDeploy.ListOnPremisesInstances
+        , Network.AWS.CodeDeploy.ListTagsForResource
         , Network.AWS.CodeDeploy.PutLifecycleEventHookExecutionStatus
         , Network.AWS.CodeDeploy.RegisterApplicationRevision
         , Network.AWS.CodeDeploy.RegisterOnPremisesInstance
         , Network.AWS.CodeDeploy.RemoveTagsFromOnPremisesInstances
-        , Network.AWS.CodeDeploy.SkipWaitTimeForInstanceTermination
         , Network.AWS.CodeDeploy.StopDeployment
+        , Network.AWS.CodeDeploy.TagResource
         , Network.AWS.CodeDeploy.Types
+        , Network.AWS.CodeDeploy.UntagResource
         , Network.AWS.CodeDeploy.UpdateApplication
         , Network.AWS.CodeDeploy.UpdateDeploymentGroup
         , Network.AWS.CodeDeploy.Waiters
 
     other-modules:
-          Network.AWS.CodeDeploy.Types.Product
-        , Network.AWS.CodeDeploy.Types.Sum
+          Network.AWS.CodeDeploy.Types.Alarm
+        , Network.AWS.CodeDeploy.Types.AlarmConfiguration
+        , Network.AWS.CodeDeploy.Types.AppSpecContent
+        , Network.AWS.CodeDeploy.Types.ApplicationInfo
+        , Network.AWS.CodeDeploy.Types.ApplicationRevisionSortBy
+        , Network.AWS.CodeDeploy.Types.AutoRollbackConfiguration
+        , Network.AWS.CodeDeploy.Types.AutoRollbackEvent
+        , Network.AWS.CodeDeploy.Types.AutoScalingGroup
+        , Network.AWS.CodeDeploy.Types.BlueGreenDeploymentConfiguration
+        , Network.AWS.CodeDeploy.Types.BlueInstanceTerminationOption
+        , Network.AWS.CodeDeploy.Types.BundleType
+        , Network.AWS.CodeDeploy.Types.ComputePlatform
+        , Network.AWS.CodeDeploy.Types.DeployErrorCode
+        , Network.AWS.CodeDeploy.Types.DeploymentConfigInfo
+        , Network.AWS.CodeDeploy.Types.DeploymentCreator
+        , Network.AWS.CodeDeploy.Types.DeploymentGroupInfo
+        , Network.AWS.CodeDeploy.Types.DeploymentInfo
+        , Network.AWS.CodeDeploy.Types.DeploymentOption
+        , Network.AWS.CodeDeploy.Types.DeploymentOverview
+        , Network.AWS.CodeDeploy.Types.DeploymentReadyAction
+        , Network.AWS.CodeDeploy.Types.DeploymentReadyOption
+        , Network.AWS.CodeDeploy.Types.DeploymentStatus
+        , Network.AWS.CodeDeploy.Types.DeploymentStyle
+        , Network.AWS.CodeDeploy.Types.DeploymentTarget
+        , Network.AWS.CodeDeploy.Types.DeploymentTargetType
+        , Network.AWS.CodeDeploy.Types.DeploymentType
+        , Network.AWS.CodeDeploy.Types.DeploymentWaitType
+        , Network.AWS.CodeDeploy.Types.Diagnostics
+        , Network.AWS.CodeDeploy.Types.EC2TagFilter
+        , Network.AWS.CodeDeploy.Types.EC2TagFilterType
+        , Network.AWS.CodeDeploy.Types.EC2TagSet
+        , Network.AWS.CodeDeploy.Types.ECSService
+        , Network.AWS.CodeDeploy.Types.ECSTarget
+        , Network.AWS.CodeDeploy.Types.ECSTaskSet
+        , Network.AWS.CodeDeploy.Types.ELBInfo
+        , Network.AWS.CodeDeploy.Types.ErrorInformation
+        , Network.AWS.CodeDeploy.Types.FileExistsBehavior
+        , Network.AWS.CodeDeploy.Types.GenericRevisionInfo
+        , Network.AWS.CodeDeploy.Types.GitHubLocation
+        , Network.AWS.CodeDeploy.Types.GreenFleetProvisioningAction
+        , Network.AWS.CodeDeploy.Types.GreenFleetProvisioningOption
+        , Network.AWS.CodeDeploy.Types.InstanceAction
+        , Network.AWS.CodeDeploy.Types.InstanceInfo
+        , Network.AWS.CodeDeploy.Types.InstanceTarget
+        , Network.AWS.CodeDeploy.Types.LambdaFunctionInfo
+        , Network.AWS.CodeDeploy.Types.LambdaTarget
+        , Network.AWS.CodeDeploy.Types.LastDeploymentInfo
+        , Network.AWS.CodeDeploy.Types.LifecycleErrorCode
+        , Network.AWS.CodeDeploy.Types.LifecycleEvent
+        , Network.AWS.CodeDeploy.Types.LifecycleEventStatus
+        , Network.AWS.CodeDeploy.Types.ListStateFilterAction
+        , Network.AWS.CodeDeploy.Types.LoadBalancerInfo
+        , Network.AWS.CodeDeploy.Types.MinimumHealthyHosts
+        , Network.AWS.CodeDeploy.Types.MinimumHealthyHostsType
+        , Network.AWS.CodeDeploy.Types.OnPremisesTagSet
+        , Network.AWS.CodeDeploy.Types.Product
+        , Network.AWS.CodeDeploy.Types.RawString
+        , Network.AWS.CodeDeploy.Types.RegistrationStatus
+        , Network.AWS.CodeDeploy.Types.RevisionInfo
+        , Network.AWS.CodeDeploy.Types.RevisionLocation
+        , Network.AWS.CodeDeploy.Types.RevisionLocationType
+        , Network.AWS.CodeDeploy.Types.RollbackInfo
+        , Network.AWS.CodeDeploy.Types.S3Location
+        , Network.AWS.CodeDeploy.Types.SortOrder
+        , Network.AWS.CodeDeploy.Types.StopStatus
+        , Network.AWS.CodeDeploy.Types.Tag
+        , Network.AWS.CodeDeploy.Types.TagFilter
+        , Network.AWS.CodeDeploy.Types.TagFilterType
+        , Network.AWS.CodeDeploy.Types.TargetFilterName
+        , Network.AWS.CodeDeploy.Types.TargetGroupInfo
+        , Network.AWS.CodeDeploy.Types.TargetGroupPairInfo
+        , Network.AWS.CodeDeploy.Types.TargetInstances
+        , Network.AWS.CodeDeploy.Types.TargetLabel
+        , Network.AWS.CodeDeploy.Types.TargetStatus
+        , Network.AWS.CodeDeploy.Types.TimeBasedCanary
+        , Network.AWS.CodeDeploy.Types.TimeBasedLinear
+        , Network.AWS.CodeDeploy.Types.TimeRange
+        , Network.AWS.CodeDeploy.Types.TrafficRoute
+        , Network.AWS.CodeDeploy.Types.TrafficRoutingConfig
+        , Network.AWS.CodeDeploy.Types.TrafficRoutingType
+        , Network.AWS.CodeDeploy.Types.TriggerConfig
+        , Network.AWS.CodeDeploy.Types.TriggerEventType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-codedeploy-test
     type:              exitcode-stdio-1.0
@@ -118,6 +201,7 @@ test-suite amazonka-codedeploy-test
         , amazonka-codedeploy
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

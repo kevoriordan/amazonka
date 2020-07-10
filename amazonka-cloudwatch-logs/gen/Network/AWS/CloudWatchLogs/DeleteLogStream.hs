@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLogStream' smart constructor.
-data DeleteLogStream = DeleteLogStream'
-  { _dlsLogGroupName  :: !Text
-  , _dlsLogStreamName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLogStream = DeleteLogStream'{_dlsLogGroupName
+                                        :: !Text,
+                                        _dlsLogStreamName :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteLogStream' with the minimum fields required to make a request.
 --
@@ -60,10 +59,9 @@ deleteLogStream
     :: Text -- ^ 'dlsLogGroupName'
     -> Text -- ^ 'dlsLogStreamName'
     -> DeleteLogStream
-deleteLogStream pLogGroupName_ pLogStreamName_ =
-  DeleteLogStream'
-    {_dlsLogGroupName = pLogGroupName_, _dlsLogStreamName = pLogStreamName_}
-
+deleteLogStream pLogGroupName_ pLogStreamName_
+  = DeleteLogStream'{_dlsLogGroupName = pLogGroupName_,
+                     _dlsLogStreamName = pLogStreamName_}
 
 -- | The name of the log group.
 dlsLogGroupName :: Lens' DeleteLogStream Text
@@ -105,16 +103,14 @@ instance ToQuery DeleteLogStream where
         toQuery = const mempty
 
 -- | /See:/ 'deleteLogStreamResponse' smart constructor.
-data DeleteLogStreamResponse =
-  DeleteLogStreamResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLogStreamResponse = DeleteLogStreamResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteLogStreamResponse' with the minimum fields required to make a request.
 --
 deleteLogStreamResponse
     :: DeleteLogStreamResponse
 deleteLogStreamResponse = DeleteLogStreamResponse'
-
 
 instance NFData DeleteLogStreamResponse where

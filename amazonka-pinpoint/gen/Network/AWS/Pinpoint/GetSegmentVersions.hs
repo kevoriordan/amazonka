@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about your segment versions.
+-- Retrieves information about the configuration, dimension, and other settings for all the versions of a specific segment that's associated with an application.
+--
+--
 module Network.AWS.Pinpoint.GetSegmentVersions
     (
     -- * Creating a Request
@@ -46,51 +48,46 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getSegmentVersions' smart constructor.
-data GetSegmentVersions = GetSegmentVersions'
-  { _gsvToken         :: !(Maybe Text)
-  , _gsvPageSize      :: !(Maybe Text)
-  , _gsvSegmentId     :: !Text
-  , _gsvApplicationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSegmentVersions = GetSegmentVersions'{_gsvToken
+                                              :: !(Maybe Text),
+                                              _gsvPageSize :: !(Maybe Text),
+                                              _gsvSegmentId :: !Text,
+                                              _gsvApplicationId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSegmentVersions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsvToken' - The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- * 'gsvToken' - The NextToken string that specifies which page of results to return in a paginated response.
 --
--- * 'gsvPageSize' - The number of entries you want on each page in the response.
+-- * 'gsvPageSize' - The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 --
--- * 'gsvSegmentId' - Undocumented member.
+-- * 'gsvSegmentId' - The unique identifier for the segment.
 --
--- * 'gsvApplicationId' - Undocumented member.
+-- * 'gsvApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getSegmentVersions
     :: Text -- ^ 'gsvSegmentId'
     -> Text -- ^ 'gsvApplicationId'
     -> GetSegmentVersions
-getSegmentVersions pSegmentId_ pApplicationId_ =
-  GetSegmentVersions'
-    { _gsvToken = Nothing
-    , _gsvPageSize = Nothing
-    , _gsvSegmentId = pSegmentId_
-    , _gsvApplicationId = pApplicationId_
-    }
+getSegmentVersions pSegmentId_ pApplicationId_
+  = GetSegmentVersions'{_gsvToken = Nothing,
+                        _gsvPageSize = Nothing, _gsvSegmentId = pSegmentId_,
+                        _gsvApplicationId = pApplicationId_}
 
-
--- | The NextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+-- | The NextToken string that specifies which page of results to return in a paginated response.
 gsvToken :: Lens' GetSegmentVersions (Maybe Text)
 gsvToken = lens _gsvToken (\ s a -> s{_gsvToken = a})
 
--- | The number of entries you want on each page in the response.
+-- | The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
 gsvPageSize :: Lens' GetSegmentVersions (Maybe Text)
 gsvPageSize = lens _gsvPageSize (\ s a -> s{_gsvPageSize = a})
 
--- | Undocumented member.
+-- | The unique identifier for the segment.
 gsvSegmentId :: Lens' GetSegmentVersions Text
 gsvSegmentId = lens _gsvSegmentId (\ s a -> s{_gsvSegmentId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gsvApplicationId :: Lens' GetSegmentVersions Text
 gsvApplicationId = lens _gsvApplicationId (\ s a -> s{_gsvApplicationId = a})
 
@@ -127,11 +124,13 @@ instance ToQuery GetSegmentVersions where
               ["token" =: _gsvToken, "page-size" =: _gsvPageSize]
 
 -- | /See:/ 'getSegmentVersionsResponse' smart constructor.
-data GetSegmentVersionsResponse = GetSegmentVersionsResponse'
-  { _grsResponseStatus   :: !Int
-  , _grsSegmentsResponse :: !SegmentsResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSegmentVersionsResponse = GetSegmentVersionsResponse'{_grsResponseStatus
+                                                              :: !Int,
+                                                              _grsSegmentsResponse
+                                                              ::
+                                                              !SegmentsResponse}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetSegmentVersionsResponse' with the minimum fields required to make a request.
 --
@@ -144,12 +143,11 @@ getSegmentVersionsResponse
     :: Int -- ^ 'grsResponseStatus'
     -> SegmentsResponse -- ^ 'grsSegmentsResponse'
     -> GetSegmentVersionsResponse
-getSegmentVersionsResponse pResponseStatus_ pSegmentsResponse_ =
-  GetSegmentVersionsResponse'
-    { _grsResponseStatus = pResponseStatus_
-    , _grsSegmentsResponse = pSegmentsResponse_
-    }
-
+getSegmentVersionsResponse pResponseStatus_
+  pSegmentsResponse_
+  = GetSegmentVersionsResponse'{_grsResponseStatus =
+                                  pResponseStatus_,
+                                _grsSegmentsResponse = pSegmentsResponse_}
 
 -- | -- | The response status code.
 grsResponseStatus :: Lens' GetSegmentVersionsResponse Int

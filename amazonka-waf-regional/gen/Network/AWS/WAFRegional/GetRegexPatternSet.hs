@@ -45,10 +45,10 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'getRegexPatternSet' smart constructor.
-newtype GetRegexPatternSet = GetRegexPatternSet'
-  { _grpsRegexPatternSetId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetRegexPatternSet = GetRegexPatternSet'{_grpsRegexPatternSetId
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetRegexPatternSet' with the minimum fields required to make a request.
 --
@@ -58,9 +58,9 @@ newtype GetRegexPatternSet = GetRegexPatternSet'
 getRegexPatternSet
     :: Text -- ^ 'grpsRegexPatternSetId'
     -> GetRegexPatternSet
-getRegexPatternSet pRegexPatternSetId_ =
-  GetRegexPatternSet' {_grpsRegexPatternSetId = pRegexPatternSetId_}
-
+getRegexPatternSet pRegexPatternSetId_
+  = GetRegexPatternSet'{_grpsRegexPatternSetId =
+                          pRegexPatternSetId_}
 
 -- | The @RegexPatternSetId@ of the 'RegexPatternSet' that you want to get. @RegexPatternSetId@ is returned by 'CreateRegexPatternSet' and by 'ListRegexPatternSets' .
 grpsRegexPatternSetId :: Lens' GetRegexPatternSet Text
@@ -104,28 +104,31 @@ instance ToQuery GetRegexPatternSet where
         toQuery = const mempty
 
 -- | /See:/ 'getRegexPatternSetResponse' smart constructor.
-data GetRegexPatternSetResponse = GetRegexPatternSetResponse'
-  { _grpsrsRegexPatternSet :: !(Maybe RegexPatternSet)
-  , _grpsrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRegexPatternSetResponse = GetRegexPatternSetResponse'{_grpsrsRegexPatternSet
+                                                              ::
+                                                              !(Maybe
+                                                                  RegexPatternSet),
+                                                              _grpsrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetRegexPatternSetResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grpsrsRegexPatternSet' - Information about the 'RegexPatternSet' that you specified in the @GetRegexPatternSet@ request, including the identifier of the pattern set and the regular expression patterns you want AWS WAF to search for.
+-- * 'grpsrsRegexPatternSet' - Information about the 'RegexPatternSet' that you specified in the @GetRegexPatternSet@ request, including the identifier of the pattern set and the regular expression patterns you want AWS WAF to search for. 
 --
 -- * 'grpsrsResponseStatus' - -- | The response status code.
 getRegexPatternSetResponse
     :: Int -- ^ 'grpsrsResponseStatus'
     -> GetRegexPatternSetResponse
-getRegexPatternSetResponse pResponseStatus_ =
-  GetRegexPatternSetResponse'
-    {_grpsrsRegexPatternSet = Nothing, _grpsrsResponseStatus = pResponseStatus_}
+getRegexPatternSetResponse pResponseStatus_
+  = GetRegexPatternSetResponse'{_grpsrsRegexPatternSet
+                                  = Nothing,
+                                _grpsrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the 'RegexPatternSet' that you specified in the @GetRegexPatternSet@ request, including the identifier of the pattern set and the regular expression patterns you want AWS WAF to search for.
+-- | Information about the 'RegexPatternSet' that you specified in the @GetRegexPatternSet@ request, including the identifier of the pattern set and the regular expression patterns you want AWS WAF to search for. 
 grpsrsRegexPatternSet :: Lens' GetRegexPatternSetResponse (Maybe RegexPatternSet)
 grpsrsRegexPatternSet = lens _grpsrsRegexPatternSet (\ s a -> s{_grpsrsRegexPatternSet = a})
 

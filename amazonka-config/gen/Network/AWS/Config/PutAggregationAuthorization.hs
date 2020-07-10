@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Authorizes the aggregator account and region to collect data from the source account and region.
+-- Authorizes the aggregator account and region to collect data from the source account and region. 
 --
 --
 module Network.AWS.Config.PutAggregationAuthorization
@@ -27,6 +27,7 @@ module Network.AWS.Config.PutAggregationAuthorization
       putAggregationAuthorization
     , PutAggregationAuthorization
     -- * Request Lenses
+    , paaTags
     , paaAuthorizedAccountId
     , paaAuthorizedAWSRegion
 
@@ -46,15 +47,21 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putAggregationAuthorization' smart constructor.
-data PutAggregationAuthorization = PutAggregationAuthorization'
-  { _paaAuthorizedAccountId :: !Text
-  , _paaAuthorizedAWSRegion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutAggregationAuthorization = PutAggregationAuthorization'{_paaTags
+                                                                ::
+                                                                !(Maybe [Tag]),
+                                                                _paaAuthorizedAccountId
+                                                                :: !Text,
+                                                                _paaAuthorizedAWSRegion
+                                                                :: !Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'PutAggregationAuthorization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'paaTags' - An array of tag object.
 --
 -- * 'paaAuthorizedAccountId' - The 12-digit account ID of the account authorized to aggregate data.
 --
@@ -63,12 +70,17 @@ putAggregationAuthorization
     :: Text -- ^ 'paaAuthorizedAccountId'
     -> Text -- ^ 'paaAuthorizedAWSRegion'
     -> PutAggregationAuthorization
-putAggregationAuthorization pAuthorizedAccountId_ pAuthorizedAWSRegion_ =
-  PutAggregationAuthorization'
-    { _paaAuthorizedAccountId = pAuthorizedAccountId_
-    , _paaAuthorizedAWSRegion = pAuthorizedAWSRegion_
-    }
+putAggregationAuthorization pAuthorizedAccountId_
+  pAuthorizedAWSRegion_
+  = PutAggregationAuthorization'{_paaTags = Nothing,
+                                 _paaAuthorizedAccountId =
+                                   pAuthorizedAccountId_,
+                                 _paaAuthorizedAWSRegion =
+                                   pAuthorizedAWSRegion_}
 
+-- | An array of tag object.
+paaTags :: Lens' PutAggregationAuthorization [Tag]
+paaTags = lens _paaTags (\ s a -> s{_paaTags = a}) . _Default . _Coerce
 
 -- | The 12-digit account ID of the account authorized to aggregate data.
 paaAuthorizedAccountId :: Lens' PutAggregationAuthorization Text
@@ -107,7 +119,8 @@ instance ToJSON PutAggregationAuthorization where
         toJSON PutAggregationAuthorization'{..}
           = object
               (catMaybes
-                 [Just
+                 [("Tags" .=) <$> _paaTags,
+                  Just
                     ("AuthorizedAccountId" .= _paaAuthorizedAccountId),
                   Just
                     ("AuthorizedAwsRegion" .= _paaAuthorizedAWSRegion)])
@@ -119,30 +132,33 @@ instance ToQuery PutAggregationAuthorization where
         toQuery = const mempty
 
 -- | /See:/ 'putAggregationAuthorizationResponse' smart constructor.
-data PutAggregationAuthorizationResponse = PutAggregationAuthorizationResponse'
-  { _paarsAggregationAuthorization :: !(Maybe AggregationAuthorization)
-  , _paarsResponseStatus           :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutAggregationAuthorizationResponse = PutAggregationAuthorizationResponse'{_paarsAggregationAuthorization
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    AggregationAuthorization),
+                                                                                _paarsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'PutAggregationAuthorizationResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'paarsAggregationAuthorization' - Returns an AggregationAuthorization object.
+-- * 'paarsAggregationAuthorization' - Returns an AggregationAuthorization object. 
 --
 -- * 'paarsResponseStatus' - -- | The response status code.
 putAggregationAuthorizationResponse
     :: Int -- ^ 'paarsResponseStatus'
     -> PutAggregationAuthorizationResponse
-putAggregationAuthorizationResponse pResponseStatus_ =
-  PutAggregationAuthorizationResponse'
-    { _paarsAggregationAuthorization = Nothing
-    , _paarsResponseStatus = pResponseStatus_
-    }
+putAggregationAuthorizationResponse pResponseStatus_
+  = PutAggregationAuthorizationResponse'{_paarsAggregationAuthorization
+                                           = Nothing,
+                                         _paarsResponseStatus =
+                                           pResponseStatus_}
 
-
--- | Returns an AggregationAuthorization object.
+-- | Returns an AggregationAuthorization object. 
 paarsAggregationAuthorization :: Lens' PutAggregationAuthorizationResponse (Maybe AggregationAuthorization)
 paarsAggregationAuthorization = lens _paarsAggregationAuthorization (\ s a -> s{_paarsAggregationAuthorization = a})
 

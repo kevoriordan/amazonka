@@ -46,11 +46,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeLifecycleHooks' smart constructor.
-data DescribeLifecycleHooks = DescribeLifecycleHooks'
-  { _dlhLifecycleHookNames   :: !(Maybe [Text])
-  , _dlhAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLifecycleHooks = DescribeLifecycleHooks'{_dlhLifecycleHookNames
+                                                      :: !(Maybe [Text]),
+                                                      _dlhAutoScalingGroupName
+                                                      :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeLifecycleHooks' with the minimum fields required to make a request.
 --
@@ -62,12 +63,10 @@ data DescribeLifecycleHooks = DescribeLifecycleHooks'
 describeLifecycleHooks
     :: Text -- ^ 'dlhAutoScalingGroupName'
     -> DescribeLifecycleHooks
-describeLifecycleHooks pAutoScalingGroupName_ =
-  DescribeLifecycleHooks'
-    { _dlhLifecycleHookNames = Nothing
-    , _dlhAutoScalingGroupName = pAutoScalingGroupName_
-    }
-
+describeLifecycleHooks pAutoScalingGroupName_
+  = DescribeLifecycleHooks'{_dlhLifecycleHookNames =
+                              Nothing,
+                            _dlhAutoScalingGroupName = pAutoScalingGroupName_}
 
 -- | The names of one or more lifecycle hooks. If you omit this parameter, all lifecycle hooks are described.
 dlhLifecycleHookNames :: Lens' DescribeLifecycleHooks [Text]
@@ -111,11 +110,14 @@ instance ToQuery DescribeLifecycleHooks where
                "AutoScalingGroupName" =: _dlhAutoScalingGroupName]
 
 -- | /See:/ 'describeLifecycleHooksResponse' smart constructor.
-data DescribeLifecycleHooksResponse = DescribeLifecycleHooksResponse'
-  { _dlhrsLifecycleHooks :: !(Maybe [LifecycleHook])
-  , _dlhrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeLifecycleHooksResponse = DescribeLifecycleHooksResponse'{_dlhrsLifecycleHooks
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [LifecycleHook]),
+                                                                      _dlhrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeLifecycleHooksResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +129,10 @@ data DescribeLifecycleHooksResponse = DescribeLifecycleHooksResponse'
 describeLifecycleHooksResponse
     :: Int -- ^ 'dlhrsResponseStatus'
     -> DescribeLifecycleHooksResponse
-describeLifecycleHooksResponse pResponseStatus_ =
-  DescribeLifecycleHooksResponse'
-    {_dlhrsLifecycleHooks = Nothing, _dlhrsResponseStatus = pResponseStatus_}
-
+describeLifecycleHooksResponse pResponseStatus_
+  = DescribeLifecycleHooksResponse'{_dlhrsLifecycleHooks
+                                      = Nothing,
+                                    _dlhrsResponseStatus = pResponseStatus_}
 
 -- | The lifecycle hooks for the specified group.
 dlhrsLifecycleHooks :: Lens' DescribeLifecycleHooksResponse [LifecycleHook]

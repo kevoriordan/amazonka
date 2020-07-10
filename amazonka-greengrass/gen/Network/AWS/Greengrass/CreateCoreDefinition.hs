@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+-- Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
 module Network.AWS.Greengrass.CreateCoreDefinition
     (
     -- * Creating a Request
@@ -28,6 +28,7 @@ module Network.AWS.Greengrass.CreateCoreDefinition
     , ccdAmznClientToken
     , ccdInitialVersion
     , ccdName
+    , ccdTags
 
     -- * Destructuring the Response
     , createCoreDefinitionResponse
@@ -53,12 +54,15 @@ import Network.AWS.Response
 -- | Information needed to create a core definition.
 --
 -- /See:/ 'createCoreDefinition' smart constructor.
-data CreateCoreDefinition = CreateCoreDefinition'
-  { _ccdAmznClientToken :: !(Maybe Text)
-  , _ccdInitialVersion  :: !(Maybe CoreDefinitionVersion)
-  , _ccdName            :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCoreDefinition = CreateCoreDefinition'{_ccdAmznClientToken
+                                                  :: !(Maybe Text),
+                                                  _ccdInitialVersion ::
+                                                  !(Maybe
+                                                      CoreDefinitionVersion),
+                                                  _ccdName :: !(Maybe Text),
+                                                  _ccdTags ::
+                                                  !(Maybe (Map Text Text))}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCoreDefinition' with the minimum fields required to make a request.
 --
@@ -69,15 +73,15 @@ data CreateCoreDefinition = CreateCoreDefinition'
 -- * 'ccdInitialVersion' - Information about the initial version of the core definition.
 --
 -- * 'ccdName' - The name of the core definition.
+--
+-- * 'ccdTags' - Tag(s) to add to the new resource.
 createCoreDefinition
     :: CreateCoreDefinition
-createCoreDefinition =
-  CreateCoreDefinition'
-    { _ccdAmznClientToken = Nothing
-    , _ccdInitialVersion = Nothing
-    , _ccdName = Nothing
-    }
-
+createCoreDefinition
+  = CreateCoreDefinition'{_ccdAmznClientToken =
+                            Nothing,
+                          _ccdInitialVersion = Nothing, _ccdName = Nothing,
+                          _ccdTags = Nothing}
 
 -- | A client token used to correlate requests and responses.
 ccdAmznClientToken :: Lens' CreateCoreDefinition (Maybe Text)
@@ -90,6 +94,10 @@ ccdInitialVersion = lens _ccdInitialVersion (\ s a -> s{_ccdInitialVersion = a})
 -- | The name of the core definition.
 ccdName :: Lens' CreateCoreDefinition (Maybe Text)
 ccdName = lens _ccdName (\ s a -> s{_ccdName = a})
+
+-- | Tag(s) to add to the new resource.
+ccdTags :: Lens' CreateCoreDefinition (HashMap Text Text)
+ccdTags = lens _ccdTags (\ s a -> s{_ccdTags = a}) . _Default . _Map
 
 instance AWSRequest CreateCoreDefinition where
         type Rs CreateCoreDefinition =
@@ -123,7 +131,7 @@ instance ToJSON CreateCoreDefinition where
           = object
               (catMaybes
                  [("InitialVersion" .=) <$> _ccdInitialVersion,
-                  ("Name" .=) <$> _ccdName])
+                  ("Name" .=) <$> _ccdName, ("tags" .=) <$> _ccdTags])
 
 instance ToPath CreateCoreDefinition where
         toPath = const "/greengrass/definition/cores"
@@ -132,23 +140,34 @@ instance ToQuery CreateCoreDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'createCoreDefinitionResponse' smart constructor.
-data CreateCoreDefinitionResponse = CreateCoreDefinitionResponse'
-  { _ccdrsLatestVersionARN     :: !(Maybe Text)
-  , _ccdrsARN                  :: !(Maybe Text)
-  , _ccdrsName                 :: !(Maybe Text)
-  , _ccdrsCreationTimestamp    :: !(Maybe Text)
-  , _ccdrsId                   :: !(Maybe Text)
-  , _ccdrsLatestVersion        :: !(Maybe Text)
-  , _ccdrsLastUpdatedTimestamp :: !(Maybe Text)
-  , _ccdrsResponseStatus       :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateCoreDefinitionResponse = CreateCoreDefinitionResponse'{_ccdrsLatestVersionARN
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _ccdrsARN ::
+                                                                  !(Maybe Text),
+                                                                  _ccdrsName ::
+                                                                  !(Maybe Text),
+                                                                  _ccdrsCreationTimestamp
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _ccdrsId ::
+                                                                  !(Maybe Text),
+                                                                  _ccdrsLatestVersion
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _ccdrsLastUpdatedTimestamp
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _ccdrsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'CreateCoreDefinitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccdrsLatestVersionARN' - The ARN of the latest version of the definition.
+-- * 'ccdrsLatestVersionARN' - The ARN of the latest version associated with the definition.
 --
 -- * 'ccdrsARN' - The ARN of the definition.
 --
@@ -158,7 +177,7 @@ data CreateCoreDefinitionResponse = CreateCoreDefinitionResponse'
 --
 -- * 'ccdrsId' - The ID of the definition.
 --
--- * 'ccdrsLatestVersion' - The latest version of the definition.
+-- * 'ccdrsLatestVersion' - The ID of the latest version associated with the definition.
 --
 -- * 'ccdrsLastUpdatedTimestamp' - The time, in milliseconds since the epoch, when the definition was last updated.
 --
@@ -166,20 +185,17 @@ data CreateCoreDefinitionResponse = CreateCoreDefinitionResponse'
 createCoreDefinitionResponse
     :: Int -- ^ 'ccdrsResponseStatus'
     -> CreateCoreDefinitionResponse
-createCoreDefinitionResponse pResponseStatus_ =
-  CreateCoreDefinitionResponse'
-    { _ccdrsLatestVersionARN = Nothing
-    , _ccdrsARN = Nothing
-    , _ccdrsName = Nothing
-    , _ccdrsCreationTimestamp = Nothing
-    , _ccdrsId = Nothing
-    , _ccdrsLatestVersion = Nothing
-    , _ccdrsLastUpdatedTimestamp = Nothing
-    , _ccdrsResponseStatus = pResponseStatus_
-    }
+createCoreDefinitionResponse pResponseStatus_
+  = CreateCoreDefinitionResponse'{_ccdrsLatestVersionARN
+                                    = Nothing,
+                                  _ccdrsARN = Nothing, _ccdrsName = Nothing,
+                                  _ccdrsCreationTimestamp = Nothing,
+                                  _ccdrsId = Nothing,
+                                  _ccdrsLatestVersion = Nothing,
+                                  _ccdrsLastUpdatedTimestamp = Nothing,
+                                  _ccdrsResponseStatus = pResponseStatus_}
 
-
--- | The ARN of the latest version of the definition.
+-- | The ARN of the latest version associated with the definition.
 ccdrsLatestVersionARN :: Lens' CreateCoreDefinitionResponse (Maybe Text)
 ccdrsLatestVersionARN = lens _ccdrsLatestVersionARN (\ s a -> s{_ccdrsLatestVersionARN = a})
 
@@ -199,7 +215,7 @@ ccdrsCreationTimestamp = lens _ccdrsCreationTimestamp (\ s a -> s{_ccdrsCreation
 ccdrsId :: Lens' CreateCoreDefinitionResponse (Maybe Text)
 ccdrsId = lens _ccdrsId (\ s a -> s{_ccdrsId = a})
 
--- | The latest version of the definition.
+-- | The ID of the latest version associated with the definition.
 ccdrsLatestVersion :: Lens' CreateCoreDefinitionResponse (Maybe Text)
 ccdrsLatestVersion = lens _ccdrsLatestVersion (\ s a -> s{_ccdrsLatestVersion = a})
 

@@ -48,39 +48,38 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'batchDeleteTableVersion' smart constructor.
-data BatchDeleteTableVersion = BatchDeleteTableVersion'
-  { _bdtvCatalogId    :: !(Maybe Text)
-  , _bdtvDatabaseName :: !Text
-  , _bdtvTableName    :: !Text
-  , _bdtvVersionIds   :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeleteTableVersion = BatchDeleteTableVersion'{_bdtvCatalogId
+                                                        :: !(Maybe Text),
+                                                        _bdtvDatabaseName ::
+                                                        !Text,
+                                                        _bdtvTableName :: !Text,
+                                                        _bdtvVersionIds ::
+                                                        ![Text]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'BatchDeleteTableVersion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bdtvCatalogId' - The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+-- * 'bdtvCatalogId' - The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
 --
 -- * 'bdtvDatabaseName' - The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.
 --
 -- * 'bdtvTableName' - The name of the table. For Hive compatibility, this name is entirely lowercase.
 --
--- * 'bdtvVersionIds' - A list of the IDs of versions to be deleted.
+-- * 'bdtvVersionIds' - A list of the IDs of versions to be deleted. A @VersionId@ is a string representation of an integer. Each version is incremented by 1.
 batchDeleteTableVersion
     :: Text -- ^ 'bdtvDatabaseName'
     -> Text -- ^ 'bdtvTableName'
     -> BatchDeleteTableVersion
-batchDeleteTableVersion pDatabaseName_ pTableName_ =
-  BatchDeleteTableVersion'
-    { _bdtvCatalogId = Nothing
-    , _bdtvDatabaseName = pDatabaseName_
-    , _bdtvTableName = pTableName_
-    , _bdtvVersionIds = mempty
-    }
+batchDeleteTableVersion pDatabaseName_ pTableName_
+  = BatchDeleteTableVersion'{_bdtvCatalogId = Nothing,
+                             _bdtvDatabaseName = pDatabaseName_,
+                             _bdtvTableName = pTableName_,
+                             _bdtvVersionIds = mempty}
 
-
--- | The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+-- | The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
 bdtvCatalogId :: Lens' BatchDeleteTableVersion (Maybe Text)
 bdtvCatalogId = lens _bdtvCatalogId (\ s a -> s{_bdtvCatalogId = a})
 
@@ -92,7 +91,7 @@ bdtvDatabaseName = lens _bdtvDatabaseName (\ s a -> s{_bdtvDatabaseName = a})
 bdtvTableName :: Lens' BatchDeleteTableVersion Text
 bdtvTableName = lens _bdtvTableName (\ s a -> s{_bdtvTableName = a})
 
--- | A list of the IDs of versions to be deleted.
+-- | A list of the IDs of versions to be deleted. A @VersionId@ is a string representation of an integer. Each version is incremented by 1.
 bdtvVersionIds :: Lens' BatchDeleteTableVersion [Text]
 bdtvVersionIds = lens _bdtvVersionIds (\ s a -> s{_bdtvVersionIds = a}) . _Coerce
 
@@ -135,11 +134,14 @@ instance ToQuery BatchDeleteTableVersion where
         toQuery = const mempty
 
 -- | /See:/ 'batchDeleteTableVersionResponse' smart constructor.
-data BatchDeleteTableVersionResponse = BatchDeleteTableVersionResponse'
-  { _bdtvrsErrors         :: !(Maybe [TableVersionError])
-  , _bdtvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeleteTableVersionResponse = BatchDeleteTableVersionResponse'{_bdtvrsErrors
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [TableVersionError]),
+                                                                        _bdtvrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'BatchDeleteTableVersionResponse' with the minimum fields required to make a request.
 --
@@ -151,10 +153,10 @@ data BatchDeleteTableVersionResponse = BatchDeleteTableVersionResponse'
 batchDeleteTableVersionResponse
     :: Int -- ^ 'bdtvrsResponseStatus'
     -> BatchDeleteTableVersionResponse
-batchDeleteTableVersionResponse pResponseStatus_ =
-  BatchDeleteTableVersionResponse'
-    {_bdtvrsErrors = Nothing, _bdtvrsResponseStatus = pResponseStatus_}
-
+batchDeleteTableVersionResponse pResponseStatus_
+  = BatchDeleteTableVersionResponse'{_bdtvrsErrors =
+                                       Nothing,
+                                     _bdtvrsResponseStatus = pResponseStatus_}
 
 -- | A list of errors encountered while trying to delete the specified table versions.
 bdtvrsErrors :: Lens' BatchDeleteTableVersionResponse [TableVersionError]

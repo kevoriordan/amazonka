@@ -54,12 +54,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createResource' smart constructor.
-data CreateResource = CreateResource'
-  { _crRestAPIId :: !Text
-  , _crParentId  :: !Text
-  , _crPathPart  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateResource = CreateResource'{_crRestAPIId ::
+                                      !Text,
+                                      _crParentId :: !Text,
+                                      _crPathPart :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateResource' with the minimum fields required to make a request.
 --
@@ -75,13 +74,9 @@ createResource
     -> Text -- ^ 'crParentId'
     -> Text -- ^ 'crPathPart'
     -> CreateResource
-createResource pRestAPIId_ pParentId_ pPathPart_ =
-  CreateResource'
-    { _crRestAPIId = pRestAPIId_
-    , _crParentId = pParentId_
-    , _crPathPart = pPathPart_
-    }
-
+createResource pRestAPIId_ pParentId_ pPathPart_
+  = CreateResource'{_crRestAPIId = pRestAPIId_,
+                    _crParentId = pParentId_, _crPathPart = pPathPart_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
 crRestAPIId :: Lens' CreateResource Text

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disassociates the account that has been set as the AWS Firewall Manager administrator account. You will need to submit an @AssociateAdminAccount@ request to set a new account as the AWS Firewall administrator.
+-- Disassociates the account that has been set as the AWS Firewall Manager administrator account. To set a different account as the administrator account, you must submit an @AssociateAdminAccount@ request.
 --
 --
 module Network.AWS.FMS.DisassociateAdminAccount
@@ -40,17 +40,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateAdminAccount' smart constructor.
-data DisassociateAdminAccount =
-  DisassociateAdminAccount'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateAdminAccount = DisassociateAdminAccount'
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DisassociateAdminAccount' with the minimum fields required to make a request.
 --
 disassociateAdminAccount
     :: DisassociateAdminAccount
 disassociateAdminAccount = DisassociateAdminAccount'
-
 
 instance AWSRequest DisassociateAdminAccount where
         type Rs DisassociateAdminAccount =
@@ -83,17 +81,16 @@ instance ToQuery DisassociateAdminAccount where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateAdminAccountResponse' smart constructor.
-data DisassociateAdminAccountResponse =
-  DisassociateAdminAccountResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateAdminAccountResponse = DisassociateAdminAccountResponse'
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DisassociateAdminAccountResponse' with the minimum fields required to make a request.
 --
 disassociateAdminAccountResponse
     :: DisassociateAdminAccountResponse
-disassociateAdminAccountResponse = DisassociateAdminAccountResponse'
-
+disassociateAdminAccountResponse
+  = DisassociateAdminAccountResponse'
 
 instance NFData DisassociateAdminAccountResponse
          where

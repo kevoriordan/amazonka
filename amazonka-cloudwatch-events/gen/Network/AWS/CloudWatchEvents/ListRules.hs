@@ -18,9 +18,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists your Amazon CloudWatch Events rules. You can either list all the rules or you can provide a prefix to match to the rule names.
+-- Lists your Amazon EventBridge rules. You can either list all the rules or you can provide a prefix to match to the rule names.
 --
 --
+-- ListRules does not list the targets of a rule. To see the targets associated with a rule, use 'ListTargetsByRule' .
+--
+--
+-- This operation returns paginated results.
 module Network.AWS.CloudWatchEvents.ListRules
     (
     -- * Creating a Request
@@ -28,6 +32,7 @@ module Network.AWS.CloudWatchEvents.ListRules
     , ListRules
     -- * Request Lenses
     , lrNextToken
+    , lrEventBusName
     , lrNamePrefix
     , lrLimit
 
@@ -43,17 +48,18 @@ module Network.AWS.CloudWatchEvents.ListRules
 import Network.AWS.CloudWatchEvents.Types
 import Network.AWS.CloudWatchEvents.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listRules' smart constructor.
-data ListRules = ListRules'
-  { _lrNextToken  :: !(Maybe Text)
-  , _lrNamePrefix :: !(Maybe Text)
-  , _lrLimit      :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRules = ListRules'{_lrNextToken ::
+                            !(Maybe Text),
+                            _lrEventBusName :: !(Maybe Text),
+                            _lrNamePrefix :: !(Maybe Text),
+                            _lrLimit :: !(Maybe Nat)}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRules' with the minimum fields required to make a request.
 --
@@ -61,19 +67,25 @@ data ListRules = ListRules'
 --
 -- * 'lrNextToken' - The token returned by a previous call to retrieve the next set of results.
 --
+-- * 'lrEventBusName' - Limits the results to show only the rules associated with the specified event bus.
+--
 -- * 'lrNamePrefix' - The prefix matching the rule name.
 --
 -- * 'lrLimit' - The maximum number of results to return.
 listRules
     :: ListRules
-listRules =
-  ListRules'
-    {_lrNextToken = Nothing, _lrNamePrefix = Nothing, _lrLimit = Nothing}
-
+listRules
+  = ListRules'{_lrNextToken = Nothing,
+               _lrEventBusName = Nothing, _lrNamePrefix = Nothing,
+               _lrLimit = Nothing}
 
 -- | The token returned by a previous call to retrieve the next set of results.
 lrNextToken :: Lens' ListRules (Maybe Text)
 lrNextToken = lens _lrNextToken (\ s a -> s{_lrNextToken = a})
+
+-- | Limits the results to show only the rules associated with the specified event bus.
+lrEventBusName :: Lens' ListRules (Maybe Text)
+lrEventBusName = lens _lrEventBusName (\ s a -> s{_lrEventBusName = a})
 
 -- | The prefix matching the rule name.
 lrNamePrefix :: Lens' ListRules (Maybe Text)
@@ -82,6 +94,13 @@ lrNamePrefix = lens _lrNamePrefix (\ s a -> s{_lrNamePrefix = a})
 -- | The maximum number of results to return.
 lrLimit :: Lens' ListRules (Maybe Natural)
 lrLimit = lens _lrLimit (\ s a -> s{_lrLimit = a}) . mapping _Nat
+
+instance AWSPager ListRules where
+        page rq rs
+          | stop (rs ^. lrrsNextToken) = Nothing
+          | stop (rs ^. lrrsRules) = Nothing
+          | otherwise =
+            Just $ rq & lrNextToken .~ rs ^. lrrsNextToken
 
 instance AWSRequest ListRules where
         type Rs ListRules = ListRulesResponse
@@ -111,6 +130,7 @@ instance ToJSON ListRules where
           = object
               (catMaybes
                  [("NextToken" .=) <$> _lrNextToken,
+                  ("EventBusName" .=) <$> _lrEventBusName,
                   ("NamePrefix" .=) <$> _lrNamePrefix,
                   ("Limit" .=) <$> _lrLimit])
 
@@ -121,12 +141,11 @@ instance ToQuery ListRules where
         toQuery = const mempty
 
 -- | /See:/ 'listRulesResponse' smart constructor.
-data ListRulesResponse = ListRulesResponse'
-  { _lrrsRules          :: !(Maybe [Rule])
-  , _lrrsNextToken      :: !(Maybe Text)
-  , _lrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListRulesResponse = ListRulesResponse'{_lrrsRules
+                                            :: !(Maybe [Rule]),
+                                            _lrrsNextToken :: !(Maybe Text),
+                                            _lrrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListRulesResponse' with the minimum fields required to make a request.
 --
@@ -140,13 +159,10 @@ data ListRulesResponse = ListRulesResponse'
 listRulesResponse
     :: Int -- ^ 'lrrsResponseStatus'
     -> ListRulesResponse
-listRulesResponse pResponseStatus_ =
-  ListRulesResponse'
-    { _lrrsRules = Nothing
-    , _lrrsNextToken = Nothing
-    , _lrrsResponseStatus = pResponseStatus_
-    }
-
+listRulesResponse pResponseStatus_
+  = ListRulesResponse'{_lrrsRules = Nothing,
+                       _lrrsNextToken = Nothing,
+                       _lrrsResponseStatus = pResponseStatus_}
 
 -- | The rules that match the specified criteria.
 lrrsRules :: Lens' ListRulesResponse [Rule]

@@ -21,11 +21,11 @@
 -- Attaches one or more EC2 instances to the specified Auto Scaling group.
 --
 --
--- When you attach instances, Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.
+-- When you attach instances, Amazon EC2 Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.
 --
 -- If there is a Classic Load Balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.
 --
--- For more information, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html Attach EC2 Instances to Your Auto Scaling Group> in the /Auto Scaling User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html Attach EC2 Instances to Your Auto Scaling Group> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.AttachInstances
     (
@@ -49,11 +49,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachInstances' smart constructor.
-data AttachInstances = AttachInstances'
-  { _aiInstanceIds          :: !(Maybe [Text])
-  , _aiAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachInstances = AttachInstances'{_aiInstanceIds
+                                        :: !(Maybe [Text]),
+                                        _aiAutoScalingGroupName :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachInstances' with the minimum fields required to make a request.
 --
@@ -65,10 +64,9 @@ data AttachInstances = AttachInstances'
 attachInstances
     :: Text -- ^ 'aiAutoScalingGroupName'
     -> AttachInstances
-attachInstances pAutoScalingGroupName_ =
-  AttachInstances'
-    {_aiInstanceIds = Nothing, _aiAutoScalingGroupName = pAutoScalingGroupName_}
-
+attachInstances pAutoScalingGroupName_
+  = AttachInstances'{_aiInstanceIds = Nothing,
+                     _aiAutoScalingGroupName = pAutoScalingGroupName_}
 
 -- | The IDs of the instances. You can specify up to 20 instances.
 aiInstanceIds :: Lens' AttachInstances [Text]
@@ -103,16 +101,14 @@ instance ToQuery AttachInstances where
                "AutoScalingGroupName" =: _aiAutoScalingGroupName]
 
 -- | /See:/ 'attachInstancesResponse' smart constructor.
-data AttachInstancesResponse =
-  AttachInstancesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachInstancesResponse = AttachInstancesResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AttachInstancesResponse' with the minimum fields required to make a request.
 --
 attachInstancesResponse
     :: AttachInstancesResponse
 attachInstancesResponse = AttachInstancesResponse'
-
 
 instance NFData AttachInstancesResponse where

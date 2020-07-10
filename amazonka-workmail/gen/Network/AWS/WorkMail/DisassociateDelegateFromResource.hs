@@ -46,12 +46,17 @@ import Network.AWS.WorkMail.Types
 import Network.AWS.WorkMail.Types.Product
 
 -- | /See:/ 'disassociateDelegateFromResource' smart constructor.
-data DisassociateDelegateFromResource = DisassociateDelegateFromResource'
-  { _ddfrOrganizationId :: !Text
-  , _ddfrResourceId     :: !Text
-  , _ddfrEntityId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateDelegateFromResource = DisassociateDelegateFromResource'{_ddfrOrganizationId
+                                                                          ::
+                                                                          !Text,
+                                                                          _ddfrResourceId
+                                                                          ::
+                                                                          !Text,
+                                                                          _ddfrEntityId
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DisassociateDelegateFromResource' with the minimum fields required to make a request.
 --
@@ -59,7 +64,7 @@ data DisassociateDelegateFromResource = DisassociateDelegateFromResource'
 --
 -- * 'ddfrOrganizationId' - The identifier for the organization under which the resource exists.
 --
--- * 'ddfrResourceId' - The identifier of the resource from which delegates' set members are removed.
+-- * 'ddfrResourceId' - The identifier of the resource from which delegates' set members are removed. 
 --
 -- * 'ddfrEntityId' - The identifier for the member (user, group) to be removed from the resource's delegates.
 disassociateDelegateFromResource
@@ -67,19 +72,18 @@ disassociateDelegateFromResource
     -> Text -- ^ 'ddfrResourceId'
     -> Text -- ^ 'ddfrEntityId'
     -> DisassociateDelegateFromResource
-disassociateDelegateFromResource pOrganizationId_ pResourceId_ pEntityId_ =
-  DisassociateDelegateFromResource'
-    { _ddfrOrganizationId = pOrganizationId_
-    , _ddfrResourceId = pResourceId_
-    , _ddfrEntityId = pEntityId_
-    }
-
+disassociateDelegateFromResource pOrganizationId_
+  pResourceId_ pEntityId_
+  = DisassociateDelegateFromResource'{_ddfrOrganizationId
+                                        = pOrganizationId_,
+                                      _ddfrResourceId = pResourceId_,
+                                      _ddfrEntityId = pEntityId_}
 
 -- | The identifier for the organization under which the resource exists.
 ddfrOrganizationId :: Lens' DisassociateDelegateFromResource Text
 ddfrOrganizationId = lens _ddfrOrganizationId (\ s a -> s{_ddfrOrganizationId = a})
 
--- | The identifier of the resource from which delegates' set members are removed.
+-- | The identifier of the resource from which delegates' set members are removed. 
 ddfrResourceId :: Lens' DisassociateDelegateFromResource Text
 ddfrResourceId = lens _ddfrResourceId (\ s a -> s{_ddfrResourceId = a})
 
@@ -133,10 +137,12 @@ instance ToQuery DisassociateDelegateFromResource
         toQuery = const mempty
 
 -- | /See:/ 'disassociateDelegateFromResourceResponse' smart constructor.
-newtype DisassociateDelegateFromResourceResponse = DisassociateDelegateFromResourceResponse'
-  { _ddfrrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateDelegateFromResourceResponse = DisassociateDelegateFromResourceResponse'{_ddfrrsResponseStatus
+                                                                                             ::
+                                                                                             Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DisassociateDelegateFromResourceResponse' with the minimum fields required to make a request.
 --
@@ -146,10 +152,10 @@ newtype DisassociateDelegateFromResourceResponse = DisassociateDelegateFromResou
 disassociateDelegateFromResourceResponse
     :: Int -- ^ 'ddfrrsResponseStatus'
     -> DisassociateDelegateFromResourceResponse
-disassociateDelegateFromResourceResponse pResponseStatus_ =
-  DisassociateDelegateFromResourceResponse'
-    {_ddfrrsResponseStatus = pResponseStatus_}
-
+disassociateDelegateFromResourceResponse
+  pResponseStatus_
+  = DisassociateDelegateFromResourceResponse'{_ddfrrsResponseStatus
+                                                = pResponseStatus_}
 
 -- | -- | The response status code.
 ddfrrsResponseStatus :: Lens' DisassociateDelegateFromResourceResponse Int

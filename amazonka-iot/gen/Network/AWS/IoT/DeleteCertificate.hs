@@ -21,7 +21,7 @@
 -- Deletes the specified certificate.
 --
 --
--- A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the 'DetachPrincipalPolicy' API to detach all policies. Next, use the 'UpdateCertificate' API to set the certificate to the INACTIVE status.
+-- A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the 'DetachPrincipalPolicy' API to detach all policies. Next, use the 'UpdateCertificate' API to set the certificate to the INACTIVE status.
 --
 module Network.AWS.IoT.DeleteCertificate
     (
@@ -49,28 +49,26 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteCertificate' smart constructor.
-data DeleteCertificate = DeleteCertificate'
-  { _dcForceDelete   :: !(Maybe Bool)
-  , _dcCertificateId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCertificate = DeleteCertificate'{_dcForceDelete
+                                            :: !(Maybe Bool),
+                                            _dcCertificateId :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dcForceDelete' - Forces a certificate request to be deleted.
+-- * 'dcForceDelete' - Forces the deletion of a certificate if it is inactive and is not attached to an IoT thing.
 --
 -- * 'dcCertificateId' - The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
 deleteCertificate
     :: Text -- ^ 'dcCertificateId'
     -> DeleteCertificate
-deleteCertificate pCertificateId_ =
-  DeleteCertificate'
-    {_dcForceDelete = Nothing, _dcCertificateId = pCertificateId_}
+deleteCertificate pCertificateId_
+  = DeleteCertificate'{_dcForceDelete = Nothing,
+                       _dcCertificateId = pCertificateId_}
 
-
--- | Forces a certificate request to be deleted.
+-- | Forces the deletion of a certificate if it is inactive and is not attached to an IoT thing.
 dcForceDelete :: Lens' DeleteCertificate (Maybe Bool)
 dcForceDelete = lens _dcForceDelete (\ s a -> s{_dcForceDelete = a})
 
@@ -99,16 +97,15 @@ instance ToQuery DeleteCertificate where
           = mconcat ["forceDelete" =: _dcForceDelete]
 
 -- | /See:/ 'deleteCertificateResponse' smart constructor.
-data DeleteCertificateResponse =
-  DeleteCertificateResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteCertificateResponse = DeleteCertificateResponse'
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteCertificateResponse' with the minimum fields required to make a request.
 --
 deleteCertificateResponse
     :: DeleteCertificateResponse
-deleteCertificateResponse = DeleteCertificateResponse'
-
+deleteCertificateResponse
+  = DeleteCertificateResponse'
 
 instance NFData DeleteCertificateResponse where

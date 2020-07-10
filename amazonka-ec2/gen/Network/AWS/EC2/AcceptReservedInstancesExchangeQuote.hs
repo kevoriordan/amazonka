@@ -51,12 +51,19 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'acceptReservedInstancesExchangeQuote' smart constructor.
-data AcceptReservedInstancesExchangeQuote = AcceptReservedInstancesExchangeQuote'
-  { _arieqTargetConfigurations :: !(Maybe [TargetConfigurationRequest])
-  , _arieqDryRun               :: !(Maybe Bool)
-  , _arieqReservedInstanceIds  :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptReservedInstancesExchangeQuote = AcceptReservedInstancesExchangeQuote'{_arieqTargetConfigurations
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      [TargetConfigurationRequest]),
+                                                                                  _arieqDryRun
+                                                                                  ::
+                                                                                  !(Maybe
+                                                                                      Bool),
+                                                                                  _arieqReservedInstanceIds
+                                                                                  ::
+                                                                                  ![Text]}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'AcceptReservedInstancesExchangeQuote' with the minimum fields required to make a request.
 --
@@ -69,13 +76,11 @@ data AcceptReservedInstancesExchangeQuote = AcceptReservedInstancesExchangeQuote
 -- * 'arieqReservedInstanceIds' - The IDs of the Convertible Reserved Instances to exchange for another Convertible Reserved Instance of the same or higher value.
 acceptReservedInstancesExchangeQuote
     :: AcceptReservedInstancesExchangeQuote
-acceptReservedInstancesExchangeQuote =
-  AcceptReservedInstancesExchangeQuote'
-    { _arieqTargetConfigurations = Nothing
-    , _arieqDryRun = Nothing
-    , _arieqReservedInstanceIds = mempty
-    }
-
+acceptReservedInstancesExchangeQuote
+  = AcceptReservedInstancesExchangeQuote'{_arieqTargetConfigurations
+                                            = Nothing,
+                                          _arieqDryRun = Nothing,
+                                          _arieqReservedInstanceIds = mempty}
 
 -- | The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
 arieqTargetConfigurations :: Lens' AcceptReservedInstancesExchangeQuote [TargetConfigurationRequest]
@@ -137,11 +142,16 @@ instance ToQuery AcceptReservedInstancesExchangeQuote
 --
 --
 -- /See:/ 'acceptReservedInstancesExchangeQuoteResponse' smart constructor.
-data AcceptReservedInstancesExchangeQuoteResponse = AcceptReservedInstancesExchangeQuoteResponse'
-  { _arieqrsExchangeId     :: !(Maybe Text)
-  , _arieqrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AcceptReservedInstancesExchangeQuoteResponse = AcceptReservedInstancesExchangeQuoteResponse'{_arieqrsExchangeId
+                                                                                                  ::
+                                                                                                  !(Maybe
+                                                                                                      Text),
+                                                                                                  _arieqrsResponseStatus
+                                                                                                  ::
+                                                                                                  !Int}
+                                                      deriving (Eq, Read, Show,
+                                                                Data, Typeable,
+                                                                Generic)
 
 -- | Creates a value of 'AcceptReservedInstancesExchangeQuoteResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +163,12 @@ data AcceptReservedInstancesExchangeQuoteResponse = AcceptReservedInstancesExcha
 acceptReservedInstancesExchangeQuoteResponse
     :: Int -- ^ 'arieqrsResponseStatus'
     -> AcceptReservedInstancesExchangeQuoteResponse
-acceptReservedInstancesExchangeQuoteResponse pResponseStatus_ =
-  AcceptReservedInstancesExchangeQuoteResponse'
-    {_arieqrsExchangeId = Nothing, _arieqrsResponseStatus = pResponseStatus_}
-
+acceptReservedInstancesExchangeQuoteResponse
+  pResponseStatus_
+  = AcceptReservedInstancesExchangeQuoteResponse'{_arieqrsExchangeId
+                                                    = Nothing,
+                                                  _arieqrsResponseStatus =
+                                                    pResponseStatus_}
 
 -- | The ID of the successful exchange.
 arieqrsExchangeId :: Lens' AcceptReservedInstancesExchangeQuoteResponse (Maybe Text)

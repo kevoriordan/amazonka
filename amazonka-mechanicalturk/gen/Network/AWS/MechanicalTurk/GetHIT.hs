@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @GetHIT@ operation retrieves the details of the specified HIT.
+-- The @GetHIT@ operation retrieves the details of the specified HIT. 
 --
 --
 module Network.AWS.MechanicalTurk.GetHIT
@@ -45,10 +45,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getHIT' smart constructor.
-newtype GetHIT = GetHIT'
-  { _ghitHITId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetHIT = GetHIT'{_ghitHITId :: Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetHIT' with the minimum fields required to make a request.
 --
@@ -58,8 +56,7 @@ newtype GetHIT = GetHIT'
 getHIT
     :: Text -- ^ 'ghitHITId'
     -> GetHIT
-getHIT pHITId_ = GetHIT' {_ghitHITId = pHITId_}
-
+getHIT pHITId_ = GetHIT'{_ghitHITId = pHITId_}
 
 -- | The ID of the HIT to be retrieved.
 ghitHITId :: Lens' GetHIT Text
@@ -99,11 +96,10 @@ instance ToQuery GetHIT where
         toQuery = const mempty
 
 -- | /See:/ 'getHITResponse' smart constructor.
-data GetHITResponse = GetHITResponse'
-  { _ghitrsHIT            :: !(Maybe HIT)
-  , _ghitrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetHITResponse = GetHITResponse'{_ghitrsHIT ::
+                                      !(Maybe HIT),
+                                      _ghitrsResponseStatus :: !Int}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetHITResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +111,9 @@ data GetHITResponse = GetHITResponse'
 getHITResponse
     :: Int -- ^ 'ghitrsResponseStatus'
     -> GetHITResponse
-getHITResponse pResponseStatus_ =
-  GetHITResponse'
-    {_ghitrsHIT = Nothing, _ghitrsResponseStatus = pResponseStatus_}
-
+getHITResponse pResponseStatus_
+  = GetHITResponse'{_ghitrsHIT = Nothing,
+                    _ghitrsResponseStatus = pResponseStatus_}
 
 -- | Contains the requested HIT data.
 ghitrsHIT :: Lens' GetHITResponse (Maybe HIT)

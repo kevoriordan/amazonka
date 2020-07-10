@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Applies a repository policy on a specified repository to control access permissions.
+-- Applies a repository policy to the specified repository to control access permissions. For more information, see <https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html Amazon ECR Repository Policies> in the /Amazon Elastic Container Registry User Guide/ .
 --
 --
 module Network.AWS.ECR.SetRepositoryPolicy
@@ -50,13 +50,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setRepositoryPolicy' smart constructor.
-data SetRepositoryPolicy = SetRepositoryPolicy'
-  { _srpForce          :: !(Maybe Bool)
-  , _srpRegistryId     :: !(Maybe Text)
-  , _srpRepositoryName :: !Text
-  , _srpPolicyText     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetRepositoryPolicy = SetRepositoryPolicy'{_srpForce
+                                                :: !(Maybe Bool),
+                                                _srpRegistryId :: !(Maybe Text),
+                                                _srpRepositoryName :: !Text,
+                                                _srpPolicyText :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetRepositoryPolicy' with the minimum fields required to make a request.
 --
@@ -68,19 +67,16 @@ data SetRepositoryPolicy = SetRepositoryPolicy'
 --
 -- * 'srpRepositoryName' - The name of the repository to receive the policy.
 --
--- * 'srpPolicyText' - The JSON repository policy text to apply to the repository.
+-- * 'srpPolicyText' - The JSON repository policy text to apply to the repository. For more information, see <https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html Amazon ECR Repository Policy Examples> in the /Amazon Elastic Container Registry User Guide/ .
 setRepositoryPolicy
     :: Text -- ^ 'srpRepositoryName'
     -> Text -- ^ 'srpPolicyText'
     -> SetRepositoryPolicy
-setRepositoryPolicy pRepositoryName_ pPolicyText_ =
-  SetRepositoryPolicy'
-    { _srpForce = Nothing
-    , _srpRegistryId = Nothing
-    , _srpRepositoryName = pRepositoryName_
-    , _srpPolicyText = pPolicyText_
-    }
-
+setRepositoryPolicy pRepositoryName_ pPolicyText_
+  = SetRepositoryPolicy'{_srpForce = Nothing,
+                         _srpRegistryId = Nothing,
+                         _srpRepositoryName = pRepositoryName_,
+                         _srpPolicyText = pPolicyText_}
 
 -- | If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the 'SetRepositoryPolicy' operation. This is intended to prevent accidental repository lock outs.
 srpForce :: Lens' SetRepositoryPolicy (Maybe Bool)
@@ -94,7 +90,7 @@ srpRegistryId = lens _srpRegistryId (\ s a -> s{_srpRegistryId = a})
 srpRepositoryName :: Lens' SetRepositoryPolicy Text
 srpRepositoryName = lens _srpRepositoryName (\ s a -> s{_srpRepositoryName = a})
 
--- | The JSON repository policy text to apply to the repository.
+-- | The JSON repository policy text to apply to the repository. For more information, see <https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html Amazon ECR Repository Policy Examples> in the /Amazon Elastic Container Registry User Guide/ .
 srpPolicyText :: Lens' SetRepositoryPolicy Text
 srpPolicyText = lens _srpPolicyText (\ s a -> s{_srpPolicyText = a})
 
@@ -140,13 +136,19 @@ instance ToQuery SetRepositoryPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'setRepositoryPolicyResponse' smart constructor.
-data SetRepositoryPolicyResponse = SetRepositoryPolicyResponse'
-  { _srprsRegistryId     :: !(Maybe Text)
-  , _srprsRepositoryName :: !(Maybe Text)
-  , _srprsPolicyText     :: !(Maybe Text)
-  , _srprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetRepositoryPolicyResponse = SetRepositoryPolicyResponse'{_srprsRegistryId
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _srprsRepositoryName
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _srprsPolicyText
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _srprsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'SetRepositoryPolicyResponse' with the minimum fields required to make a request.
 --
@@ -162,14 +164,12 @@ data SetRepositoryPolicyResponse = SetRepositoryPolicyResponse'
 setRepositoryPolicyResponse
     :: Int -- ^ 'srprsResponseStatus'
     -> SetRepositoryPolicyResponse
-setRepositoryPolicyResponse pResponseStatus_ =
-  SetRepositoryPolicyResponse'
-    { _srprsRegistryId = Nothing
-    , _srprsRepositoryName = Nothing
-    , _srprsPolicyText = Nothing
-    , _srprsResponseStatus = pResponseStatus_
-    }
-
+setRepositoryPolicyResponse pResponseStatus_
+  = SetRepositoryPolicyResponse'{_srprsRegistryId =
+                                   Nothing,
+                                 _srprsRepositoryName = Nothing,
+                                 _srprsPolicyText = Nothing,
+                                 _srprsResponseStatus = pResponseStatus_}
 
 -- | The registry ID associated with the request.
 srprsRegistryId :: Lens' SetRepositoryPolicyResponse (Maybe Text)

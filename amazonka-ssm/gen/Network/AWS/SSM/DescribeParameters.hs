@@ -21,8 +21,6 @@
 -- Get information about a parameter.
 --
 --
--- Request results are returned on a best-effort basis. If you specify @MaxResults@ in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of @MaxResults@ . If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a @NextToken@ . You can specify the @NextToken@ in a subsequent call to get the next set of results.
---
 --
 -- This operation returns paginated results.
 module Network.AWS.SSM.DescribeParameters
@@ -54,13 +52,14 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'describeParameters' smart constructor.
-data DescribeParameters = DescribeParameters'
-  { _dpParameterFilters :: !(Maybe [ParameterStringFilter])
-  , _dpFilters          :: !(Maybe [ParametersFilter])
-  , _dpNextToken        :: !(Maybe Text)
-  , _dpMaxResults       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeParameters = DescribeParameters'{_dpParameterFilters
+                                              ::
+                                              !(Maybe [ParameterStringFilter]),
+                                              _dpFilters ::
+                                              !(Maybe [ParametersFilter]),
+                                              _dpNextToken :: !(Maybe Text),
+                                              _dpMaxResults :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeParameters' with the minimum fields required to make a request.
 --
@@ -68,27 +67,23 @@ data DescribeParameters = DescribeParameters'
 --
 -- * 'dpParameterFilters' - Filters to limit the request results.
 --
--- * 'dpFilters' - One or more filters. Use a filter to return a more specific list of results.
+-- * 'dpFilters' - This data type is deprecated. Instead, use @ParameterFilters@ .
 --
 -- * 'dpNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
 -- * 'dpMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 describeParameters
     :: DescribeParameters
-describeParameters =
-  DescribeParameters'
-    { _dpParameterFilters = Nothing
-    , _dpFilters = Nothing
-    , _dpNextToken = Nothing
-    , _dpMaxResults = Nothing
-    }
-
+describeParameters
+  = DescribeParameters'{_dpParameterFilters = Nothing,
+                        _dpFilters = Nothing, _dpNextToken = Nothing,
+                        _dpMaxResults = Nothing}
 
 -- | Filters to limit the request results.
 dpParameterFilters :: Lens' DescribeParameters [ParameterStringFilter]
 dpParameterFilters = lens _dpParameterFilters (\ s a -> s{_dpParameterFilters = a}) . _Default . _Coerce
 
--- | One or more filters. Use a filter to return a more specific list of results.
+-- | This data type is deprecated. Instead, use @ParameterFilters@ .
 dpFilters :: Lens' DescribeParameters [ParametersFilter]
 dpFilters = lens _dpFilters (\ s a -> s{_dpFilters = a}) . _Default . _Coerce
 
@@ -148,18 +143,21 @@ instance ToQuery DescribeParameters where
         toQuery = const mempty
 
 -- | /See:/ 'describeParametersResponse' smart constructor.
-data DescribeParametersResponse = DescribeParametersResponse'
-  { _dprsNextToken      :: !(Maybe Text)
-  , _dprsParameters     :: !(Maybe [ParameterMetadata])
-  , _dprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeParametersResponse = DescribeParametersResponse'{_dprsNextToken
+                                                              :: !(Maybe Text),
+                                                              _dprsParameters ::
+                                                              !(Maybe
+                                                                  [ParameterMetadata]),
+                                                              _dprsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeParametersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dprsNextToken' - The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- * 'dprsNextToken' - The token to use when requesting the next set of items.
 --
 -- * 'dprsParameters' - Parameters returned by the request.
 --
@@ -167,15 +165,13 @@ data DescribeParametersResponse = DescribeParametersResponse'
 describeParametersResponse
     :: Int -- ^ 'dprsResponseStatus'
     -> DescribeParametersResponse
-describeParametersResponse pResponseStatus_ =
-  DescribeParametersResponse'
-    { _dprsNextToken = Nothing
-    , _dprsParameters = Nothing
-    , _dprsResponseStatus = pResponseStatus_
-    }
+describeParametersResponse pResponseStatus_
+  = DescribeParametersResponse'{_dprsNextToken =
+                                  Nothing,
+                                _dprsParameters = Nothing,
+                                _dprsResponseStatus = pResponseStatus_}
 
-
--- | The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+-- | The token to use when requesting the next set of items.
 dprsNextToken :: Lens' DescribeParametersResponse (Maybe Text)
 dprsNextToken = lens _dprsNextToken (\ s a -> s{_dprsNextToken = a})
 

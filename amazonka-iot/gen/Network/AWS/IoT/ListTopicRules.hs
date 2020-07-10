@@ -56,13 +56,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listTopicRules' smart constructor.
-data ListTopicRules = ListTopicRules'
-  { _ltrRuleDisabled :: !(Maybe Bool)
-  , _ltrTopic        :: !(Maybe Text)
-  , _ltrNextToken    :: !(Maybe Text)
-  , _ltrMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTopicRules = ListTopicRules'{_ltrRuleDisabled
+                                      :: !(Maybe Bool),
+                                      _ltrTopic :: !(Maybe Text),
+                                      _ltrNextToken :: !(Maybe Text),
+                                      _ltrMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTopicRules' with the minimum fields required to make a request.
 --
@@ -77,14 +76,10 @@ data ListTopicRules = ListTopicRules'
 -- * 'ltrMaxResults' - The maximum number of results to return.
 listTopicRules
     :: ListTopicRules
-listTopicRules =
-  ListTopicRules'
-    { _ltrRuleDisabled = Nothing
-    , _ltrTopic = Nothing
-    , _ltrNextToken = Nothing
-    , _ltrMaxResults = Nothing
-    }
-
+listTopicRules
+  = ListTopicRules'{_ltrRuleDisabled = Nothing,
+                    _ltrTopic = Nothing, _ltrNextToken = Nothing,
+                    _ltrMaxResults = Nothing}
 
 -- | Specifies whether the rule is disabled.
 ltrRuleDisabled :: Lens' ListTopicRules (Maybe Bool)
@@ -141,12 +136,16 @@ instance ToQuery ListTopicRules where
 --
 --
 -- /See:/ 'listTopicRulesResponse' smart constructor.
-data ListTopicRulesResponse = ListTopicRulesResponse'
-  { _ltrrsRules          :: !(Maybe [TopicRuleListItem])
-  , _ltrrsNextToken      :: !(Maybe Text)
-  , _ltrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTopicRulesResponse = ListTopicRulesResponse'{_ltrrsRules
+                                                      ::
+                                                      !(Maybe
+                                                          [TopicRuleListItem]),
+                                                      _ltrrsNextToken ::
+                                                      !(Maybe Text),
+                                                      _ltrrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListTopicRulesResponse' with the minimum fields required to make a request.
 --
@@ -160,13 +159,10 @@ data ListTopicRulesResponse = ListTopicRulesResponse'
 listTopicRulesResponse
     :: Int -- ^ 'ltrrsResponseStatus'
     -> ListTopicRulesResponse
-listTopicRulesResponse pResponseStatus_ =
-  ListTopicRulesResponse'
-    { _ltrrsRules = Nothing
-    , _ltrrsNextToken = Nothing
-    , _ltrrsResponseStatus = pResponseStatus_
-    }
-
+listTopicRulesResponse pResponseStatus_
+  = ListTopicRulesResponse'{_ltrrsRules = Nothing,
+                            _ltrrsNextToken = Nothing,
+                            _ltrrsResponseStatus = pResponseStatus_}
 
 -- | The rules.
 ltrrsRules :: Lens' ListTopicRulesResponse [TopicRuleListItem]

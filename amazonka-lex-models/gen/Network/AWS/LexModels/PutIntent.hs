@@ -21,7 +21,7 @@
 -- Creates an intent or replaces an existing intent.
 --
 --
--- To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an @OrderPizza@ intent.
+-- To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an @OrderPizza@ intent. 
 --
 -- To create an intent or replace an existing intent, you must provide the following:
 --
@@ -31,7 +31,7 @@
 --
 --     * Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.
 --
---     * How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.
+--     * How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application. 
 --
 --
 --
@@ -102,48 +102,46 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putIntent' smart constructor.
-data PutIntent = PutIntent'
-  { _piFulfillmentActivity   :: !(Maybe FulfillmentActivity)
-  , _piSlots                 :: !(Maybe [Slot])
-  , _piRejectionStatement    :: !(Maybe Statement)
-  , _piChecksum              :: !(Maybe Text)
-  , _piConclusionStatement   :: !(Maybe Statement)
-  , _piSampleUtterances      :: !(Maybe [Text])
-  , _piParentIntentSignature :: !(Maybe Text)
-  , _piFollowUpPrompt        :: !(Maybe FollowUpPrompt)
-  , _piConfirmationPrompt    :: !(Maybe Prompt)
-  , _piCreateVersion         :: !(Maybe Bool)
-  , _piDialogCodeHook        :: !(Maybe CodeHook)
-  , _piDescription           :: !(Maybe Text)
-  , _piName                  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutIntent = PutIntent'{_piFulfillmentActivity ::
+                            !(Maybe FulfillmentActivity),
+                            _piSlots :: !(Maybe [Slot]),
+                            _piRejectionStatement :: !(Maybe Statement),
+                            _piChecksum :: !(Maybe Text),
+                            _piConclusionStatement :: !(Maybe Statement),
+                            _piSampleUtterances :: !(Maybe [Text]),
+                            _piParentIntentSignature :: !(Maybe Text),
+                            _piFollowUpPrompt :: !(Maybe FollowUpPrompt),
+                            _piConfirmationPrompt :: !(Maybe Prompt),
+                            _piCreateVersion :: !(Maybe Bool),
+                            _piDialogCodeHook :: !(Maybe CodeHook),
+                            _piDescription :: !(Maybe Text), _piName :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutIntent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piFulfillmentActivity' - Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, @fulfillmentActivity@ defines how the bot places an order with a local pizza store.  You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria).
+-- * 'piFulfillmentActivity' - Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, @fulfillmentActivity@ defines how the bot places an order with a local pizza store.  You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). 
 --
--- * 'piSlots' - An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see 'how-it-works' .
+-- * 'piSlots' - An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see 'how-it-works' . 
 --
--- * 'piRejectionStatement' - When the user answers "no" to the question defined in @confirmationPrompt@ , Amazon Lex responds with this statement to acknowledge that the intent was canceled.
+-- * 'piRejectionStatement' - When the user answers "no" to the question defined in @confirmationPrompt@ , Amazon Lex responds with this statement to acknowledge that the intent was canceled. 
 --
 -- * 'piChecksum' - Identifies a specific revision of the @> LATEST@ version. When you create a new intent, leave the @checksum@ field blank. If you specify a checksum you get a @BadRequestException@ exception. When you want to update a intent, set the @checksum@ field to the checksum of the most recent revision of the @> LATEST@ version. If you don't specify the @checksum@ field, or if the checksum does not match the @> LATEST@ version, you get a @PreconditionFailedException@ exception.
 --
 -- * 'piConclusionStatement' - The statement that you want Amazon Lex to convey to the user after the intent is successfully fulfilled by the Lambda function.  This element is relevant only if you provide a Lambda function in the @fulfillmentActivity@ . If you return the intent to the client application, you can't specify this element.
 --
--- * 'piSampleUtterances' - An array of utterances (strings) that a user might say to signal the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".  In each utterance, a slot name is enclosed in curly braces.
+-- * 'piSampleUtterances' - An array of utterances (strings) that a user might say to signal the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".  In each utterance, a slot name is enclosed in curly braces. 
 --
 -- * 'piParentIntentSignature' - A unique identifier for the built-in intent to base this intent on. To find the signature for an intent, see <https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents Standard Built-in Intents> in the /Alexa Skills Kit/ .
 --
--- * 'piFollowUpPrompt' - Amazon Lex uses this prompt to solicit additional activity after fulfilling an intent. For example, after the @OrderPizza@ intent is fulfilled, you might prompt the user to order a drink. The action that Amazon Lex takes depends on the user's response, as follows:     * If the user says "Yes" it responds with the clarification prompt that is configured for the bot.     * if the user says "Yes" and continues with an utterance that triggers an intent it starts a conversation for the intent.     * If the user says "No" it responds with the rejection statement configured for the the follow-up prompt.     * If it doesn't recognize the utterance it repeats the follow-up prompt again. The @followUpPrompt@ field and the @conclusionStatement@ field are mutually exclusive. You can specify only one.
+-- * 'piFollowUpPrompt' - Amazon Lex uses this prompt to solicit additional activity after fulfilling an intent. For example, after the @OrderPizza@ intent is fulfilled, you might prompt the user to order a drink. The action that Amazon Lex takes depends on the user's response, as follows:     * If the user says "Yes" it responds with the clarification prompt that is configured for the bot.     * if the user says "Yes" and continues with an utterance that triggers an intent it starts a conversation for the intent.     * If the user says "No" it responds with the rejection statement configured for the the follow-up prompt.     * If it doesn't recognize the utterance it repeats the follow-up prompt again. The @followUpPrompt@ field and the @conclusionStatement@ field are mutually exclusive. You can specify only one. 
 --
--- * 'piConfirmationPrompt' - Prompts the user to confirm the intent. This question should have a yes or no answer. Amazon Lex uses this prompt to ensure that the user acknowledges that the intent is ready for fulfillment. For example, with the @OrderPizza@ intent, you might want to confirm that the order is correct before placing it. For other intents, such as intents that simply respond to user questions, you might not need to ask the user for confirmation before providing the information.
+-- * 'piConfirmationPrompt' - Prompts the user to confirm the intent. This question should have a yes or no answer. Amazon Lex uses this prompt to ensure that the user acknowledges that the intent is ready for fulfillment. For example, with the @OrderPizza@ intent, you might want to confirm that the order is correct before placing it. For other intents, such as intents that simply respond to user questions, you might not need to ask the user for confirmation before providing the information. 
 --
--- * 'piCreateVersion' - Undocumented member.
+-- * 'piCreateVersion' - When set to @true@ a new numbered version of the intent is created. This is the same as calling the @CreateIntentVersion@ operation. If you do not specify @createVersion@ , the default is @false@ .
 --
--- * 'piDialogCodeHook' - Specifies a Lambda function to invoke for each user input. You can invoke this Lambda function to personalize user interaction.  For example, suppose your bot determines that the user is John. Your Lambda function might retrieve John's information from a backend database and prepopulate some of the values. For example, if you find that John is gluten intolerant, you might set the corresponding intent slot, @GlutenIntolerant@ , to true. You might find John's phone number and set the corresponding session attribute.
+-- * 'piDialogCodeHook' - Specifies a Lambda function to invoke for each user input. You can invoke this Lambda function to personalize user interaction.  For example, suppose your bot determines that the user is John. Your Lambda function might retrieve John's information from a backend database and prepopulate some of the values. For example, if you find that John is gluten intolerant, you might set the corresponding intent slot, @GlutenIntolerant@ , to true. You might find John's phone number and set the corresponding session attribute. 
 --
 -- * 'piDescription' - A description of the intent.
 --
@@ -151,33 +149,28 @@ data PutIntent = PutIntent'
 putIntent
     :: Text -- ^ 'piName'
     -> PutIntent
-putIntent pName_ =
-  PutIntent'
-    { _piFulfillmentActivity = Nothing
-    , _piSlots = Nothing
-    , _piRejectionStatement = Nothing
-    , _piChecksum = Nothing
-    , _piConclusionStatement = Nothing
-    , _piSampleUtterances = Nothing
-    , _piParentIntentSignature = Nothing
-    , _piFollowUpPrompt = Nothing
-    , _piConfirmationPrompt = Nothing
-    , _piCreateVersion = Nothing
-    , _piDialogCodeHook = Nothing
-    , _piDescription = Nothing
-    , _piName = pName_
-    }
+putIntent pName_
+  = PutIntent'{_piFulfillmentActivity = Nothing,
+               _piSlots = Nothing, _piRejectionStatement = Nothing,
+               _piChecksum = Nothing,
+               _piConclusionStatement = Nothing,
+               _piSampleUtterances = Nothing,
+               _piParentIntentSignature = Nothing,
+               _piFollowUpPrompt = Nothing,
+               _piConfirmationPrompt = Nothing,
+               _piCreateVersion = Nothing,
+               _piDialogCodeHook = Nothing,
+               _piDescription = Nothing, _piName = pName_}
 
-
--- | Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, @fulfillmentActivity@ defines how the bot places an order with a local pizza store.  You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria).
+-- | Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, @fulfillmentActivity@ defines how the bot places an order with a local pizza store.  You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). 
 piFulfillmentActivity :: Lens' PutIntent (Maybe FulfillmentActivity)
 piFulfillmentActivity = lens _piFulfillmentActivity (\ s a -> s{_piFulfillmentActivity = a})
 
--- | An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see 'how-it-works' .
+-- | An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see 'how-it-works' . 
 piSlots :: Lens' PutIntent [Slot]
 piSlots = lens _piSlots (\ s a -> s{_piSlots = a}) . _Default . _Coerce
 
--- | When the user answers "no" to the question defined in @confirmationPrompt@ , Amazon Lex responds with this statement to acknowledge that the intent was canceled.
+-- | When the user answers "no" to the question defined in @confirmationPrompt@ , Amazon Lex responds with this statement to acknowledge that the intent was canceled. 
 piRejectionStatement :: Lens' PutIntent (Maybe Statement)
 piRejectionStatement = lens _piRejectionStatement (\ s a -> s{_piRejectionStatement = a})
 
@@ -189,7 +182,7 @@ piChecksum = lens _piChecksum (\ s a -> s{_piChecksum = a})
 piConclusionStatement :: Lens' PutIntent (Maybe Statement)
 piConclusionStatement = lens _piConclusionStatement (\ s a -> s{_piConclusionStatement = a})
 
--- | An array of utterances (strings) that a user might say to signal the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".  In each utterance, a slot name is enclosed in curly braces.
+-- | An array of utterances (strings) that a user might say to signal the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".  In each utterance, a slot name is enclosed in curly braces. 
 piSampleUtterances :: Lens' PutIntent [Text]
 piSampleUtterances = lens _piSampleUtterances (\ s a -> s{_piSampleUtterances = a}) . _Default . _Coerce
 
@@ -197,19 +190,19 @@ piSampleUtterances = lens _piSampleUtterances (\ s a -> s{_piSampleUtterances = 
 piParentIntentSignature :: Lens' PutIntent (Maybe Text)
 piParentIntentSignature = lens _piParentIntentSignature (\ s a -> s{_piParentIntentSignature = a})
 
--- | Amazon Lex uses this prompt to solicit additional activity after fulfilling an intent. For example, after the @OrderPizza@ intent is fulfilled, you might prompt the user to order a drink. The action that Amazon Lex takes depends on the user's response, as follows:     * If the user says "Yes" it responds with the clarification prompt that is configured for the bot.     * if the user says "Yes" and continues with an utterance that triggers an intent it starts a conversation for the intent.     * If the user says "No" it responds with the rejection statement configured for the the follow-up prompt.     * If it doesn't recognize the utterance it repeats the follow-up prompt again. The @followUpPrompt@ field and the @conclusionStatement@ field are mutually exclusive. You can specify only one.
+-- | Amazon Lex uses this prompt to solicit additional activity after fulfilling an intent. For example, after the @OrderPizza@ intent is fulfilled, you might prompt the user to order a drink. The action that Amazon Lex takes depends on the user's response, as follows:     * If the user says "Yes" it responds with the clarification prompt that is configured for the bot.     * if the user says "Yes" and continues with an utterance that triggers an intent it starts a conversation for the intent.     * If the user says "No" it responds with the rejection statement configured for the the follow-up prompt.     * If it doesn't recognize the utterance it repeats the follow-up prompt again. The @followUpPrompt@ field and the @conclusionStatement@ field are mutually exclusive. You can specify only one. 
 piFollowUpPrompt :: Lens' PutIntent (Maybe FollowUpPrompt)
 piFollowUpPrompt = lens _piFollowUpPrompt (\ s a -> s{_piFollowUpPrompt = a})
 
--- | Prompts the user to confirm the intent. This question should have a yes or no answer. Amazon Lex uses this prompt to ensure that the user acknowledges that the intent is ready for fulfillment. For example, with the @OrderPizza@ intent, you might want to confirm that the order is correct before placing it. For other intents, such as intents that simply respond to user questions, you might not need to ask the user for confirmation before providing the information.
+-- | Prompts the user to confirm the intent. This question should have a yes or no answer. Amazon Lex uses this prompt to ensure that the user acknowledges that the intent is ready for fulfillment. For example, with the @OrderPizza@ intent, you might want to confirm that the order is correct before placing it. For other intents, such as intents that simply respond to user questions, you might not need to ask the user for confirmation before providing the information. 
 piConfirmationPrompt :: Lens' PutIntent (Maybe Prompt)
 piConfirmationPrompt = lens _piConfirmationPrompt (\ s a -> s{_piConfirmationPrompt = a})
 
--- | Undocumented member.
+-- | When set to @true@ a new numbered version of the intent is created. This is the same as calling the @CreateIntentVersion@ operation. If you do not specify @createVersion@ , the default is @false@ .
 piCreateVersion :: Lens' PutIntent (Maybe Bool)
 piCreateVersion = lens _piCreateVersion (\ s a -> s{_piCreateVersion = a})
 
--- | Specifies a Lambda function to invoke for each user input. You can invoke this Lambda function to personalize user interaction.  For example, suppose your bot determines that the user is John. Your Lambda function might retrieve John's information from a backend database and prepopulate some of the values. For example, if you find that John is gluten intolerant, you might set the corresponding intent slot, @GlutenIntolerant@ , to true. You might find John's phone number and set the corresponding session attribute.
+-- | Specifies a Lambda function to invoke for each user input. You can invoke this Lambda function to personalize user interaction.  For example, suppose your bot determines that the user is John. Your Lambda function might retrieve John's information from a backend database and prepopulate some of the values. For example, if you find that John is gluten intolerant, you might set the corresponding intent slot, @GlutenIntolerant@ , to true. You might find John's phone number and set the corresponding session attribute. 
 piDialogCodeHook :: Lens' PutIntent (Maybe CodeHook)
 piDialogCodeHook = lens _piDialogCodeHook (\ s a -> s{_piDialogCodeHook = a})
 
@@ -286,26 +279,33 @@ instance ToQuery PutIntent where
         toQuery = const mempty
 
 -- | /See:/ 'putIntentResponse' smart constructor.
-data PutIntentResponse = PutIntentResponse'
-  { _pirsFulfillmentActivity   :: !(Maybe FulfillmentActivity)
-  , _pirsSlots                 :: !(Maybe [Slot])
-  , _pirsRejectionStatement    :: !(Maybe Statement)
-  , _pirsChecksum              :: !(Maybe Text)
-  , _pirsConclusionStatement   :: !(Maybe Statement)
-  , _pirsSampleUtterances      :: !(Maybe [Text])
-  , _pirsParentIntentSignature :: !(Maybe Text)
-  , _pirsCreatedDate           :: !(Maybe POSIX)
-  , _pirsName                  :: !(Maybe Text)
-  , _pirsVersion               :: !(Maybe Text)
-  , _pirsFollowUpPrompt        :: !(Maybe FollowUpPrompt)
-  , _pirsLastUpdatedDate       :: !(Maybe POSIX)
-  , _pirsConfirmationPrompt    :: !(Maybe Prompt)
-  , _pirsCreateVersion         :: !(Maybe Bool)
-  , _pirsDialogCodeHook        :: !(Maybe CodeHook)
-  , _pirsDescription           :: !(Maybe Text)
-  , _pirsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutIntentResponse = PutIntentResponse'{_pirsFulfillmentActivity
+                                            :: !(Maybe FulfillmentActivity),
+                                            _pirsSlots :: !(Maybe [Slot]),
+                                            _pirsRejectionStatement ::
+                                            !(Maybe Statement),
+                                            _pirsChecksum :: !(Maybe Text),
+                                            _pirsConclusionStatement ::
+                                            !(Maybe Statement),
+                                            _pirsSampleUtterances ::
+                                            !(Maybe [Text]),
+                                            _pirsParentIntentSignature ::
+                                            !(Maybe Text),
+                                            _pirsCreatedDate :: !(Maybe POSIX),
+                                            _pirsName :: !(Maybe Text),
+                                            _pirsVersion :: !(Maybe Text),
+                                            _pirsFollowUpPrompt ::
+                                            !(Maybe FollowUpPrompt),
+                                            _pirsLastUpdatedDate ::
+                                            !(Maybe POSIX),
+                                            _pirsConfirmationPrompt ::
+                                            !(Maybe Prompt),
+                                            _pirsCreateVersion :: !(Maybe Bool),
+                                            _pirsDialogCodeHook ::
+                                            !(Maybe CodeHook),
+                                            _pirsDescription :: !(Maybe Text),
+                                            _pirsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutIntentResponse' with the minimum fields required to make a request.
 --
@@ -315,13 +315,13 @@ data PutIntentResponse = PutIntentResponse'
 --
 -- * 'pirsSlots' - An array of intent slots that are configured for the intent.
 --
--- * 'pirsRejectionStatement' - If the user answers "no" to the question defined in @confirmationPrompt@ Amazon Lex responds with this statement to acknowledge that the intent was canceled.
+-- * 'pirsRejectionStatement' - If the user answers "no" to the question defined in @confirmationPrompt@ Amazon Lex responds with this statement to acknowledge that the intent was canceled. 
 --
 -- * 'pirsChecksum' - Checksum of the @> LATEST@ version of the intent created or updated.
 --
 -- * 'pirsConclusionStatement' - After the Lambda function specified in the@fulfillmentActivity@ intent fulfills the intent, Amazon Lex conveys this statement to the user.
 --
--- * 'pirsSampleUtterances' - An array of sample utterances that are configured for the intent.
+-- * 'pirsSampleUtterances' - An array of sample utterances that are configured for the intent. 
 --
 -- * 'pirsParentIntentSignature' - A unique identifier for the built-in intent that this intent is based on.
 --
@@ -337,7 +337,7 @@ data PutIntentResponse = PutIntentResponse'
 --
 -- * 'pirsConfirmationPrompt' - If defined in the intent, Amazon Lex prompts the user to confirm the intent before fulfilling it.
 --
--- * 'pirsCreateVersion' - Undocumented member.
+-- * 'pirsCreateVersion' - @True@ if a new version of the intent was created. If the @createVersion@ field was not specified in the request, the @createVersion@ field is set to false in the response.
 --
 -- * 'pirsDialogCodeHook' - If defined in the intent, Amazon Lex invokes this Lambda function for each user input.
 --
@@ -347,27 +347,24 @@ data PutIntentResponse = PutIntentResponse'
 putIntentResponse
     :: Int -- ^ 'pirsResponseStatus'
     -> PutIntentResponse
-putIntentResponse pResponseStatus_ =
-  PutIntentResponse'
-    { _pirsFulfillmentActivity = Nothing
-    , _pirsSlots = Nothing
-    , _pirsRejectionStatement = Nothing
-    , _pirsChecksum = Nothing
-    , _pirsConclusionStatement = Nothing
-    , _pirsSampleUtterances = Nothing
-    , _pirsParentIntentSignature = Nothing
-    , _pirsCreatedDate = Nothing
-    , _pirsName = Nothing
-    , _pirsVersion = Nothing
-    , _pirsFollowUpPrompt = Nothing
-    , _pirsLastUpdatedDate = Nothing
-    , _pirsConfirmationPrompt = Nothing
-    , _pirsCreateVersion = Nothing
-    , _pirsDialogCodeHook = Nothing
-    , _pirsDescription = Nothing
-    , _pirsResponseStatus = pResponseStatus_
-    }
-
+putIntentResponse pResponseStatus_
+  = PutIntentResponse'{_pirsFulfillmentActivity =
+                         Nothing,
+                       _pirsSlots = Nothing,
+                       _pirsRejectionStatement = Nothing,
+                       _pirsChecksum = Nothing,
+                       _pirsConclusionStatement = Nothing,
+                       _pirsSampleUtterances = Nothing,
+                       _pirsParentIntentSignature = Nothing,
+                       _pirsCreatedDate = Nothing, _pirsName = Nothing,
+                       _pirsVersion = Nothing,
+                       _pirsFollowUpPrompt = Nothing,
+                       _pirsLastUpdatedDate = Nothing,
+                       _pirsConfirmationPrompt = Nothing,
+                       _pirsCreateVersion = Nothing,
+                       _pirsDialogCodeHook = Nothing,
+                       _pirsDescription = Nothing,
+                       _pirsResponseStatus = pResponseStatus_}
 
 -- | If defined in the intent, Amazon Lex invokes this Lambda function to fulfill the intent after the user provides all of the information required by the intent.
 pirsFulfillmentActivity :: Lens' PutIntentResponse (Maybe FulfillmentActivity)
@@ -377,7 +374,7 @@ pirsFulfillmentActivity = lens _pirsFulfillmentActivity (\ s a -> s{_pirsFulfill
 pirsSlots :: Lens' PutIntentResponse [Slot]
 pirsSlots = lens _pirsSlots (\ s a -> s{_pirsSlots = a}) . _Default . _Coerce
 
--- | If the user answers "no" to the question defined in @confirmationPrompt@ Amazon Lex responds with this statement to acknowledge that the intent was canceled.
+-- | If the user answers "no" to the question defined in @confirmationPrompt@ Amazon Lex responds with this statement to acknowledge that the intent was canceled. 
 pirsRejectionStatement :: Lens' PutIntentResponse (Maybe Statement)
 pirsRejectionStatement = lens _pirsRejectionStatement (\ s a -> s{_pirsRejectionStatement = a})
 
@@ -389,7 +386,7 @@ pirsChecksum = lens _pirsChecksum (\ s a -> s{_pirsChecksum = a})
 pirsConclusionStatement :: Lens' PutIntentResponse (Maybe Statement)
 pirsConclusionStatement = lens _pirsConclusionStatement (\ s a -> s{_pirsConclusionStatement = a})
 
--- | An array of sample utterances that are configured for the intent.
+-- | An array of sample utterances that are configured for the intent. 
 pirsSampleUtterances :: Lens' PutIntentResponse [Text]
 pirsSampleUtterances = lens _pirsSampleUtterances (\ s a -> s{_pirsSampleUtterances = a}) . _Default . _Coerce
 
@@ -421,7 +418,7 @@ pirsLastUpdatedDate = lens _pirsLastUpdatedDate (\ s a -> s{_pirsLastUpdatedDate
 pirsConfirmationPrompt :: Lens' PutIntentResponse (Maybe Prompt)
 pirsConfirmationPrompt = lens _pirsConfirmationPrompt (\ s a -> s{_pirsConfirmationPrompt = a})
 
--- | Undocumented member.
+-- | @True@ if a new version of the intent was created. If the @createVersion@ field was not specified in the request, the @createVersion@ field is set to false in the response.
 pirsCreateVersion :: Lens' PutIntentResponse (Maybe Bool)
 pirsCreateVersion = lens _pirsCreateVersion (\ s a -> s{_pirsCreateVersion = a})
 

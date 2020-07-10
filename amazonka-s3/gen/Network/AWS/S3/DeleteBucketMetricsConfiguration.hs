@@ -18,7 +18,25 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
+-- Deletes a metrics configuration for the Amazon CloudWatch request metrics (specified by the metrics configuration ID) from the bucket. Note that this doesn't include the daily storage metrics.
+--
+--
+-- To use this operation, you must have permissions to perform the @s3:PutMetricsConfiguration@ action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources> .
+--
+-- For information about CloudWatch request metrics for Amazon S3, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html Monitoring Metrics with Amazon CloudWatch> . 
+--
+-- The following operations are related to @DeleteBucketMetricsConfiguration@ :
+--
+--     * 'GetBucketMetricsConfiguration' 
+--
+--     * 'PutBucketMetricsConfiguration' 
+--
+--     * 'ListBucketMetricsConfigurations' 
+--
+--     * <https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html Monitoring Metrics with Amazon CloudWatch> 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketMetricsConfiguration
     (
     -- * Creating a Request
@@ -41,11 +59,14 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketMetricsConfiguration' smart constructor.
-data DeleteBucketMetricsConfiguration = DeleteBucketMetricsConfiguration'
-  { _dbmcBucket :: !BucketName
-  , _dbmcId     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketMetricsConfiguration = DeleteBucketMetricsConfiguration'{_dbmcBucket
+                                                                          ::
+                                                                          !BucketName,
+                                                                          _dbmcId
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DeleteBucketMetricsConfiguration' with the minimum fields required to make a request.
 --
@@ -58,9 +79,10 @@ deleteBucketMetricsConfiguration
     :: BucketName -- ^ 'dbmcBucket'
     -> Text -- ^ 'dbmcId'
     -> DeleteBucketMetricsConfiguration
-deleteBucketMetricsConfiguration pBucket_ pId_ =
-  DeleteBucketMetricsConfiguration' {_dbmcBucket = pBucket_, _dbmcId = pId_}
-
+deleteBucketMetricsConfiguration pBucket_ pId_
+  = DeleteBucketMetricsConfiguration'{_dbmcBucket =
+                                        pBucket_,
+                                      _dbmcId = pId_}
 
 -- | The name of the bucket containing the metrics configuration to delete.
 dbmcBucket :: Lens' DeleteBucketMetricsConfiguration BucketName
@@ -100,18 +122,17 @@ instance ToQuery DeleteBucketMetricsConfiguration
           = mconcat ["id" =: _dbmcId, "metrics"]
 
 -- | /See:/ 'deleteBucketMetricsConfigurationResponse' smart constructor.
-data DeleteBucketMetricsConfigurationResponse =
-  DeleteBucketMetricsConfigurationResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketMetricsConfigurationResponse = DeleteBucketMetricsConfigurationResponse'
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DeleteBucketMetricsConfigurationResponse' with the minimum fields required to make a request.
 --
 deleteBucketMetricsConfigurationResponse
     :: DeleteBucketMetricsConfigurationResponse
-deleteBucketMetricsConfigurationResponse =
-  DeleteBucketMetricsConfigurationResponse'
-
+deleteBucketMetricsConfigurationResponse
+  = DeleteBucketMetricsConfigurationResponse'
 
 instance NFData
            DeleteBucketMetricsConfigurationResponse

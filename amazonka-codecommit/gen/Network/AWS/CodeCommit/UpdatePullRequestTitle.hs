@@ -46,11 +46,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updatePullRequestTitle' smart constructor.
-data UpdatePullRequestTitle = UpdatePullRequestTitle'
-  { _uprtPullRequestId :: !Text
-  , _uprtTitle         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePullRequestTitle = UpdatePullRequestTitle'{_uprtPullRequestId
+                                                      :: !Text,
+                                                      _uprtTitle :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdatePullRequestTitle' with the minimum fields required to make a request.
 --
@@ -58,21 +58,21 @@ data UpdatePullRequestTitle = UpdatePullRequestTitle'
 --
 -- * 'uprtPullRequestId' - The system-generated ID of the pull request. To get this ID, use 'ListPullRequests' .
 --
--- * 'uprtTitle' - The updated title of the pull request. This will replace the existing title.
+-- * 'uprtTitle' - The updated title of the pull request. This replaces the existing title.
 updatePullRequestTitle
     :: Text -- ^ 'uprtPullRequestId'
     -> Text -- ^ 'uprtTitle'
     -> UpdatePullRequestTitle
-updatePullRequestTitle pPullRequestId_ pTitle_ =
-  UpdatePullRequestTitle'
-    {_uprtPullRequestId = pPullRequestId_, _uprtTitle = pTitle_}
-
+updatePullRequestTitle pPullRequestId_ pTitle_
+  = UpdatePullRequestTitle'{_uprtPullRequestId =
+                              pPullRequestId_,
+                            _uprtTitle = pTitle_}
 
 -- | The system-generated ID of the pull request. To get this ID, use 'ListPullRequests' .
 uprtPullRequestId :: Lens' UpdatePullRequestTitle Text
 uprtPullRequestId = lens _uprtPullRequestId (\ s a -> s{_uprtPullRequestId = a})
 
--- | The updated title of the pull request. This will replace the existing title.
+-- | The updated title of the pull request. This replaces the existing title.
 uprtTitle :: Lens' UpdatePullRequestTitle Text
 uprtTitle = lens _uprtTitle (\ s a -> s{_uprtTitle = a})
 
@@ -114,11 +114,13 @@ instance ToQuery UpdatePullRequestTitle where
         toQuery = const mempty
 
 -- | /See:/ 'updatePullRequestTitleResponse' smart constructor.
-data UpdatePullRequestTitleResponse = UpdatePullRequestTitleResponse'
-  { _uprtrsResponseStatus :: !Int
-  , _uprtrsPullRequest    :: !PullRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdatePullRequestTitleResponse = UpdatePullRequestTitleResponse'{_uprtrsResponseStatus
+                                                                      :: !Int,
+                                                                      _uprtrsPullRequest
+                                                                      ::
+                                                                      !PullRequest}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpdatePullRequestTitleResponse' with the minimum fields required to make a request.
 --
@@ -131,12 +133,11 @@ updatePullRequestTitleResponse
     :: Int -- ^ 'uprtrsResponseStatus'
     -> PullRequest -- ^ 'uprtrsPullRequest'
     -> UpdatePullRequestTitleResponse
-updatePullRequestTitleResponse pResponseStatus_ pPullRequest_ =
-  UpdatePullRequestTitleResponse'
-    { _uprtrsResponseStatus = pResponseStatus_
-    , _uprtrsPullRequest = pPullRequest_
-    }
-
+updatePullRequestTitleResponse pResponseStatus_
+  pPullRequest_
+  = UpdatePullRequestTitleResponse'{_uprtrsResponseStatus
+                                      = pResponseStatus_,
+                                    _uprtrsPullRequest = pPullRequest_}
 
 -- | -- | The response status code.
 uprtrsResponseStatus :: Lens' UpdatePullRequestTitleResponse Int

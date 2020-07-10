@@ -43,23 +43,20 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getQueue' smart constructor.
-newtype GetQueue = GetQueue'
-  { _gqName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetQueue = GetQueue'{_gqName :: Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetQueue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gqName' - The name of the queue.
+-- * 'gqName' - The name of the queue that you want information about.
 getQueue
     :: Text -- ^ 'gqName'
     -> GetQueue
-getQueue pName_ = GetQueue' {_gqName = pName_}
+getQueue pName_ = GetQueue'{_gqName = pName_}
 
-
--- | The name of the queue.
+-- | The name of the queue that you want information about.
 gqName :: Lens' GetQueue Text
 gqName = lens _gqName (\ s a -> s{_gqName = a})
 
@@ -91,28 +88,26 @@ instance ToQuery GetQueue where
         toQuery = const mempty
 
 -- | /See:/ 'getQueueResponse' smart constructor.
-data GetQueueResponse = GetQueueResponse'
-  { _gqrsQueue          :: !(Maybe Queue)
-  , _gqrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetQueueResponse = GetQueueResponse'{_gqrsQueue
+                                          :: !(Maybe Queue),
+                                          _gqrsResponseStatus :: !Int}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetQueueResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gqrsQueue' - Undocumented member.
+-- * 'gqrsQueue' - You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
 --
 -- * 'gqrsResponseStatus' - -- | The response status code.
 getQueueResponse
     :: Int -- ^ 'gqrsResponseStatus'
     -> GetQueueResponse
-getQueueResponse pResponseStatus_ =
-  GetQueueResponse'
-    {_gqrsQueue = Nothing, _gqrsResponseStatus = pResponseStatus_}
+getQueueResponse pResponseStatus_
+  = GetQueueResponse'{_gqrsQueue = Nothing,
+                      _gqrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
 gqrsQueue :: Lens' GetQueueResponse (Maybe Queue)
 gqrsQueue = lens _gqrsQueue (\ s a -> s{_gqrsQueue = a})
 

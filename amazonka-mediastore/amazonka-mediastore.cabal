@@ -49,22 +49,41 @@ library
         , Network.AWS.MediaStore.DeleteCORSPolicy
         , Network.AWS.MediaStore.DeleteContainer
         , Network.AWS.MediaStore.DeleteContainerPolicy
+        , Network.AWS.MediaStore.DeleteLifecyclePolicy
+        , Network.AWS.MediaStore.DeleteMetricPolicy
         , Network.AWS.MediaStore.DescribeContainer
         , Network.AWS.MediaStore.GetCORSPolicy
         , Network.AWS.MediaStore.GetContainerPolicy
+        , Network.AWS.MediaStore.GetLifecyclePolicy
+        , Network.AWS.MediaStore.GetMetricPolicy
         , Network.AWS.MediaStore.ListContainers
+        , Network.AWS.MediaStore.ListTagsForResource
         , Network.AWS.MediaStore.PutCORSPolicy
         , Network.AWS.MediaStore.PutContainerPolicy
+        , Network.AWS.MediaStore.PutLifecyclePolicy
+        , Network.AWS.MediaStore.PutMetricPolicy
+        , Network.AWS.MediaStore.StartAccessLogging
+        , Network.AWS.MediaStore.StopAccessLogging
+        , Network.AWS.MediaStore.TagResource
         , Network.AWS.MediaStore.Types
+        , Network.AWS.MediaStore.UntagResource
         , Network.AWS.MediaStore.Waiters
 
     other-modules:
-          Network.AWS.MediaStore.Types.Product
-        , Network.AWS.MediaStore.Types.Sum
+          Network.AWS.MediaStore.Types.CORSRule
+        , Network.AWS.MediaStore.Types.Container
+        , Network.AWS.MediaStore.Types.ContainerLevelMetrics
+        , Network.AWS.MediaStore.Types.ContainerStatus
+        , Network.AWS.MediaStore.Types.MethodName
+        , Network.AWS.MediaStore.Types.MetricPolicy
+        , Network.AWS.MediaStore.Types.MetricPolicyRule
+        , Network.AWS.MediaStore.Types.Product
+        , Network.AWS.MediaStore.Types.Tag
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-mediastore-test
     type:              exitcode-stdio-1.0
@@ -88,6 +107,7 @@ test-suite amazonka-mediastore-test
         , amazonka-mediastore
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

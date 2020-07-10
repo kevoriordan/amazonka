@@ -21,7 +21,7 @@
 -- Deletes an association between a configuration set and a custom domain for open and click event tracking.
 --
 --
--- By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using configuration sets, see <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html Configuring Custom Domains to Handle Open and Click Tracking> in the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html Amazon SES Developer Guide> .
+-- By default, images and links used for tracking open and click events are hosted on domains operated by Amazon SES. You can configure a subdomain of your own to handle these events. For information about using custom domains, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html Amazon SES Developer Guide> .
 --
 module Network.AWS.SES.DeleteConfigurationSetTrackingOptions
     (
@@ -45,15 +45,17 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to delete open and click tracking options in a configuration set.
+-- | Represents a request to delete open and click tracking options in a configuration set. 
 --
 --
 --
 -- /See:/ 'deleteConfigurationSetTrackingOptions' smart constructor.
-newtype DeleteConfigurationSetTrackingOptions = DeleteConfigurationSetTrackingOptions'
-  { _dcstoConfigurationSetName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConfigurationSetTrackingOptions = DeleteConfigurationSetTrackingOptions'{_dcstoConfigurationSetName
+                                                                                       ::
+                                                                                       Text}
+                                                  deriving (Eq, Read, Show,
+                                                            Data, Typeable,
+                                                            Generic)
 
 -- | Creates a value of 'DeleteConfigurationSetTrackingOptions' with the minimum fields required to make a request.
 --
@@ -63,10 +65,10 @@ newtype DeleteConfigurationSetTrackingOptions = DeleteConfigurationSetTrackingOp
 deleteConfigurationSetTrackingOptions
     :: Text -- ^ 'dcstoConfigurationSetName'
     -> DeleteConfigurationSetTrackingOptions
-deleteConfigurationSetTrackingOptions pConfigurationSetName_ =
-  DeleteConfigurationSetTrackingOptions'
-    {_dcstoConfigurationSetName = pConfigurationSetName_}
-
+deleteConfigurationSetTrackingOptions
+  pConfigurationSetName_
+  = DeleteConfigurationSetTrackingOptions'{_dcstoConfigurationSetName
+                                             = pConfigurationSetName_}
 
 -- | The name of the configuration set from which you want to delete the tracking options.
 dcstoConfigurationSetName :: Lens' DeleteConfigurationSetTrackingOptions Text
@@ -117,10 +119,13 @@ instance ToQuery
 --
 --
 -- /See:/ 'deleteConfigurationSetTrackingOptionsResponse' smart constructor.
-newtype DeleteConfigurationSetTrackingOptionsResponse = DeleteConfigurationSetTrackingOptionsResponse'
-  { _dcstorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConfigurationSetTrackingOptionsResponse = DeleteConfigurationSetTrackingOptionsResponse'{_dcstorsResponseStatus
+                                                                                                       ::
+                                                                                                       Int}
+                                                          deriving (Eq, Read,
+                                                                    Show, Data,
+                                                                    Typeable,
+                                                                    Generic)
 
 -- | Creates a value of 'DeleteConfigurationSetTrackingOptionsResponse' with the minimum fields required to make a request.
 --
@@ -130,10 +135,10 @@ newtype DeleteConfigurationSetTrackingOptionsResponse = DeleteConfigurationSetTr
 deleteConfigurationSetTrackingOptionsResponse
     :: Int -- ^ 'dcstorsResponseStatus'
     -> DeleteConfigurationSetTrackingOptionsResponse
-deleteConfigurationSetTrackingOptionsResponse pResponseStatus_ =
-  DeleteConfigurationSetTrackingOptionsResponse'
-    {_dcstorsResponseStatus = pResponseStatus_}
-
+deleteConfigurationSetTrackingOptionsResponse
+  pResponseStatus_
+  = DeleteConfigurationSetTrackingOptionsResponse'{_dcstorsResponseStatus
+                                                     = pResponseStatus_}
 
 -- | -- | The response status code.
 dcstorsResponseStatus :: Lens' DeleteConfigurationSetTrackingOptionsResponse Int

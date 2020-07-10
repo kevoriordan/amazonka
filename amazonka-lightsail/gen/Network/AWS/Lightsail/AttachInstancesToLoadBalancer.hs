@@ -23,6 +23,8 @@
 --
 -- After some time, the instances are attached to the load balancer and the health check status is available.
 --
+-- The @attach instances to load balancer@ operation supports tag-based access control via resource tags applied to the resource identified by @load balancer name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.AttachInstancesToLoadBalancer
     (
     -- * Creating a Request
@@ -48,11 +50,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachInstancesToLoadBalancer' smart constructor.
-data AttachInstancesToLoadBalancer = AttachInstancesToLoadBalancer'
-  { _aitlbLoadBalancerName :: !Text
-  , _aitlbInstanceNames    :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachInstancesToLoadBalancer = AttachInstancesToLoadBalancer'{_aitlbLoadBalancerName
+                                                                    :: !Text,
+                                                                    _aitlbInstanceNames
+                                                                    :: ![Text]}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'AttachInstancesToLoadBalancer' with the minimum fields required to make a request.
 --
@@ -64,10 +67,10 @@ data AttachInstancesToLoadBalancer = AttachInstancesToLoadBalancer'
 attachInstancesToLoadBalancer
     :: Text -- ^ 'aitlbLoadBalancerName'
     -> AttachInstancesToLoadBalancer
-attachInstancesToLoadBalancer pLoadBalancerName_ =
-  AttachInstancesToLoadBalancer'
-    {_aitlbLoadBalancerName = pLoadBalancerName_, _aitlbInstanceNames = mempty}
-
+attachInstancesToLoadBalancer pLoadBalancerName_
+  = AttachInstancesToLoadBalancer'{_aitlbLoadBalancerName
+                                     = pLoadBalancerName_,
+                                   _aitlbInstanceNames = mempty}
 
 -- | The name of the load balancer.
 aitlbLoadBalancerName :: Lens' AttachInstancesToLoadBalancer Text
@@ -118,28 +121,34 @@ instance ToQuery AttachInstancesToLoadBalancer where
         toQuery = const mempty
 
 -- | /See:/ 'attachInstancesToLoadBalancerResponse' smart constructor.
-data AttachInstancesToLoadBalancerResponse = AttachInstancesToLoadBalancerResponse'
-  { _aitlbrsOperations     :: !(Maybe [Operation])
-  , _aitlbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachInstancesToLoadBalancerResponse = AttachInstancesToLoadBalancerResponse'{_aitlbrsOperations
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        [Operation]),
+                                                                                    _aitlbrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'AttachInstancesToLoadBalancerResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aitlbrsOperations' - An object representing the API operations.
+-- * 'aitlbrsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'aitlbrsResponseStatus' - -- | The response status code.
 attachInstancesToLoadBalancerResponse
     :: Int -- ^ 'aitlbrsResponseStatus'
     -> AttachInstancesToLoadBalancerResponse
-attachInstancesToLoadBalancerResponse pResponseStatus_ =
-  AttachInstancesToLoadBalancerResponse'
-    {_aitlbrsOperations = Nothing, _aitlbrsResponseStatus = pResponseStatus_}
+attachInstancesToLoadBalancerResponse
+  pResponseStatus_
+  = AttachInstancesToLoadBalancerResponse'{_aitlbrsOperations
+                                             = Nothing,
+                                           _aitlbrsResponseStatus =
+                                             pResponseStatus_}
 
-
--- | An object representing the API operations.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 aitlbrsOperations :: Lens' AttachInstancesToLoadBalancerResponse [Operation]
 aitlbrsOperations = lens _aitlbrsOperations (\ s a -> s{_aitlbrsOperations = a}) . _Default . _Coerce
 

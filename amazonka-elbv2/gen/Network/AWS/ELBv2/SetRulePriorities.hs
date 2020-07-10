@@ -47,10 +47,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setRulePriorities' smart constructor.
-newtype SetRulePriorities = SetRulePriorities'
-  { _srpRulePriorities :: [RulePriorityPair]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SetRulePriorities = SetRulePriorities'{_srpRulePriorities
+                                               :: [RulePriorityPair]}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetRulePriorities' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype SetRulePriorities = SetRulePriorities'
 -- * 'srpRulePriorities' - The rule priorities.
 setRulePriorities
     :: SetRulePriorities
-setRulePriorities = SetRulePriorities' {_srpRulePriorities = mempty}
-
+setRulePriorities
+  = SetRulePriorities'{_srpRulePriorities = mempty}
 
 -- | The rule priorities.
 srpRulePriorities :: Lens' SetRulePriorities [RulePriorityPair]
@@ -96,11 +95,12 @@ instance ToQuery SetRulePriorities where
                  toQueryList "member" _srpRulePriorities]
 
 -- | /See:/ 'setRulePrioritiesResponse' smart constructor.
-data SetRulePrioritiesResponse = SetRulePrioritiesResponse'
-  { _srprsRules          :: !(Maybe [Rule])
-  , _srprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetRulePrioritiesResponse = SetRulePrioritiesResponse'{_srprsRules
+                                                            :: !(Maybe [Rule]),
+                                                            _srprsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'SetRulePrioritiesResponse' with the minimum fields required to make a request.
 --
@@ -112,10 +112,9 @@ data SetRulePrioritiesResponse = SetRulePrioritiesResponse'
 setRulePrioritiesResponse
     :: Int -- ^ 'srprsResponseStatus'
     -> SetRulePrioritiesResponse
-setRulePrioritiesResponse pResponseStatus_ =
-  SetRulePrioritiesResponse'
-    {_srprsRules = Nothing, _srprsResponseStatus = pResponseStatus_}
-
+setRulePrioritiesResponse pResponseStatus_
+  = SetRulePrioritiesResponse'{_srprsRules = Nothing,
+                               _srprsResponseStatus = pResponseStatus_}
 
 -- | Information about the rules.
 srprsRules :: Lens' SetRulePrioritiesResponse [Rule]

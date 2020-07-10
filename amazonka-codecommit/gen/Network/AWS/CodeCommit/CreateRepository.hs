@@ -28,6 +28,7 @@ module Network.AWS.CodeCommit.CreateRepository
     , CreateRepository
     -- * Request Lenses
     , crRepositoryDescription
+    , crTags
     , crRepositoryName
 
     -- * Destructuring the Response
@@ -50,11 +51,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createRepository' smart constructor.
-data CreateRepository = CreateRepository'
-  { _crRepositoryDescription :: !(Maybe Text)
-  , _crRepositoryName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateRepository = CreateRepository'{_crRepositoryDescription
+                                          :: !(Maybe Text),
+                                          _crTags :: !(Maybe (Map Text Text)),
+                                          _crRepositoryName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateRepository' with the minimum fields required to make a request.
 --
@@ -62,18 +63,25 @@ data CreateRepository = CreateRepository'
 --
 -- * 'crRepositoryDescription' - A comment or description about the new repository.
 --
+-- * 'crTags' - One or more tag key-value pairs to use when tagging this repository.
+--
 -- * 'crRepositoryName' - The name of the new repository to be created.
 createRepository
     :: Text -- ^ 'crRepositoryName'
     -> CreateRepository
-createRepository pRepositoryName_ =
-  CreateRepository'
-    {_crRepositoryDescription = Nothing, _crRepositoryName = pRepositoryName_}
-
+createRepository pRepositoryName_
+  = CreateRepository'{_crRepositoryDescription =
+                        Nothing,
+                      _crTags = Nothing,
+                      _crRepositoryName = pRepositoryName_}
 
 -- | A comment or description about the new repository.
 crRepositoryDescription :: Lens' CreateRepository (Maybe Text)
 crRepositoryDescription = lens _crRepositoryDescription (\ s a -> s{_crRepositoryDescription = a})
+
+-- | One or more tag key-value pairs to use when tagging this repository.
+crTags :: Lens' CreateRepository (HashMap Text Text)
+crTags = lens _crTags (\ s a -> s{_crTags = a}) . _Default . _Map
 
 -- | The name of the new repository to be created.
 crRepositoryName :: Lens' CreateRepository Text
@@ -108,6 +116,7 @@ instance ToJSON CreateRepository where
               (catMaybes
                  [("repositoryDescription" .=) <$>
                     _crRepositoryDescription,
+                  ("tags" .=) <$> _crTags,
                   Just ("repositoryName" .= _crRepositoryName)])
 
 instance ToPath CreateRepository where
@@ -121,11 +130,14 @@ instance ToQuery CreateRepository where
 --
 --
 -- /See:/ 'createRepositoryResponse' smart constructor.
-data CreateRepositoryResponse = CreateRepositoryResponse'
-  { _crrsRepositoryMetadata :: !(Maybe RepositoryMetadata)
-  , _crrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateRepositoryResponse = CreateRepositoryResponse'{_crrsRepositoryMetadata
+                                                          ::
+                                                          !(Maybe
+                                                              RepositoryMetadata),
+                                                          _crrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateRepositoryResponse' with the minimum fields required to make a request.
 --
@@ -137,10 +149,10 @@ data CreateRepositoryResponse = CreateRepositoryResponse'
 createRepositoryResponse
     :: Int -- ^ 'crrsResponseStatus'
     -> CreateRepositoryResponse
-createRepositoryResponse pResponseStatus_ =
-  CreateRepositoryResponse'
-    {_crrsRepositoryMetadata = Nothing, _crrsResponseStatus = pResponseStatus_}
-
+createRepositoryResponse pResponseStatus_
+  = CreateRepositoryResponse'{_crrsRepositoryMetadata =
+                                Nothing,
+                              _crrsResponseStatus = pResponseStatus_}
 
 -- | Information about the newly created repository.
 crrsRepositoryMetadata :: Lens' CreateRepositoryResponse (Maybe RepositoryMetadata)

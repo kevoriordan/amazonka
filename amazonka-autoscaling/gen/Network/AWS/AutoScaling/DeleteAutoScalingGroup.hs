@@ -25,7 +25,7 @@
 --
 -- If the group has policies, deleting the group deletes the policies, the underlying alarm actions, and any alarm that no longer has an associated action.
 --
--- To remove instances from the Auto Scaling group before deleting it, call 'DetachInstances' with the list of instances and the option to decrement the desired capacity so that Auto Scaling does not launch replacement instances.
+-- To remove instances from the Auto Scaling group before deleting it, call 'DetachInstances' with the list of instances and the option to decrement the desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch replacement instances.
 --
 -- To terminate all instances before deleting the Auto Scaling group, call 'UpdateAutoScalingGroup' and set the minimum size and desired capacity of the Auto Scaling group to zero.
 --
@@ -51,30 +51,28 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteAutoScalingGroup' smart constructor.
-data DeleteAutoScalingGroup = DeleteAutoScalingGroup'
-  { _dasgForceDelete          :: !(Maybe Bool)
-  , _dasgAutoScalingGroupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAutoScalingGroup = DeleteAutoScalingGroup'{_dasgForceDelete
+                                                      :: !(Maybe Bool),
+                                                      _dasgAutoScalingGroupName
+                                                      :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DeleteAutoScalingGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dasgForceDelete' - Specifies that the group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.
+-- * 'dasgForceDelete' - Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.
 --
 -- * 'dasgAutoScalingGroupName' - The name of the Auto Scaling group.
 deleteAutoScalingGroup
     :: Text -- ^ 'dasgAutoScalingGroupName'
     -> DeleteAutoScalingGroup
-deleteAutoScalingGroup pAutoScalingGroupName_ =
-  DeleteAutoScalingGroup'
-    { _dasgForceDelete = Nothing
-    , _dasgAutoScalingGroupName = pAutoScalingGroupName_
-    }
+deleteAutoScalingGroup pAutoScalingGroupName_
+  = DeleteAutoScalingGroup'{_dasgForceDelete = Nothing,
+                            _dasgAutoScalingGroupName = pAutoScalingGroupName_}
 
-
--- | Specifies that the group will be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.
+-- | Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated. This parameter also deletes any lifecycle actions associated with the group.
 dasgForceDelete :: Lens' DeleteAutoScalingGroup (Maybe Bool)
 dasgForceDelete = lens _dasgForceDelete (\ s a -> s{_dasgForceDelete = a})
 
@@ -109,16 +107,15 @@ instance ToQuery DeleteAutoScalingGroup where
                "AutoScalingGroupName" =: _dasgAutoScalingGroupName]
 
 -- | /See:/ 'deleteAutoScalingGroupResponse' smart constructor.
-data DeleteAutoScalingGroupResponse =
-  DeleteAutoScalingGroupResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAutoScalingGroupResponse = DeleteAutoScalingGroupResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteAutoScalingGroupResponse' with the minimum fields required to make a request.
 --
 deleteAutoScalingGroupResponse
     :: DeleteAutoScalingGroupResponse
-deleteAutoScalingGroupResponse = DeleteAutoScalingGroupResponse'
-
+deleteAutoScalingGroupResponse
+  = DeleteAutoScalingGroupResponse'
 
 instance NFData DeleteAutoScalingGroupResponse where

@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disassociates an Elastic IP address from its instance. The address remains registered with the stack. For more information, see <http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html Resource Management> .
+-- Disassociates an Elastic IP address from its instance. The address remains registered with the stack. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html Resource Management> .
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DisassociateElasticIP
     (
@@ -44,10 +44,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateElasticIP' smart constructor.
-newtype DisassociateElasticIP = DisassociateElasticIP'
-  { _deiElasticIP :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateElasticIP = DisassociateElasticIP'{_deiElasticIP
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DisassociateElasticIP' with the minimum fields required to make a request.
 --
@@ -57,9 +57,8 @@ newtype DisassociateElasticIP = DisassociateElasticIP'
 disassociateElasticIP
     :: Text -- ^ 'deiElasticIP'
     -> DisassociateElasticIP
-disassociateElasticIP pElasticIP_ =
-  DisassociateElasticIP' {_deiElasticIP = pElasticIP_}
-
+disassociateElasticIP pElasticIP_
+  = DisassociateElasticIP'{_deiElasticIP = pElasticIP_}
 
 -- | The Elastic IP address.
 deiElasticIP :: Lens' DisassociateElasticIP Text
@@ -97,16 +96,15 @@ instance ToQuery DisassociateElasticIP where
         toQuery = const mempty
 
 -- | /See:/ 'disassociateElasticIPResponse' smart constructor.
-data DisassociateElasticIPResponse =
-  DisassociateElasticIPResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateElasticIPResponse = DisassociateElasticIPResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DisassociateElasticIPResponse' with the minimum fields required to make a request.
 --
 disassociateElasticIPResponse
     :: DisassociateElasticIPResponse
-disassociateElasticIPResponse = DisassociateElasticIPResponse'
-
+disassociateElasticIPResponse
+  = DisassociateElasticIPResponse'
 
 instance NFData DisassociateElasticIPResponse where

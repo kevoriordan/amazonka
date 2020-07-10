@@ -59,20 +59,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeEvaluations' smart constructor.
-data DescribeEvaluations = DescribeEvaluations'
-  { _deEQ             :: !(Maybe Text)
-  , _deGE             :: !(Maybe Text)
-  , _dePrefix         :: !(Maybe Text)
-  , _deGT             :: !(Maybe Text)
-  , _deNE             :: !(Maybe Text)
-  , _deNextToken      :: !(Maybe Text)
-  , _deSortOrder      :: !(Maybe SortOrder)
-  , _deLimit          :: !(Maybe Nat)
-  , _deLT             :: !(Maybe Text)
-  , _deFilterVariable :: !(Maybe EvaluationFilterVariable)
-  , _deLE             :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEvaluations = DescribeEvaluations'{_deEQ
+                                                :: !(Maybe Text),
+                                                _deGE :: !(Maybe Text),
+                                                _dePrefix :: !(Maybe Text),
+                                                _deGT :: !(Maybe Text),
+                                                _deNE :: !(Maybe Text),
+                                                _deNextToken :: !(Maybe Text),
+                                                _deSortOrder ::
+                                                !(Maybe SortOrder),
+                                                _deLimit :: !(Maybe Nat),
+                                                _deLT :: !(Maybe Text),
+                                                _deFilterVariable ::
+                                                !(Maybe
+                                                    EvaluationFilterVariable),
+                                                _deLE :: !(Maybe Text)}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeEvaluations' with the minimum fields required to make a request.
 --
@@ -80,7 +82,7 @@ data DescribeEvaluations = DescribeEvaluations'
 --
 -- * 'deEQ' - The equal to operator. The @Evaluation@ results will have @FilterVariable@ values that exactly match the value specified with @EQ@ .
 --
--- * 'deGE' - The greater than or equal to operator. The @Evaluation@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ .
+-- * 'deGE' - The greater than or equal to operator. The @Evaluation@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ . 
 --
 -- * 'dePrefix' - A string that is found at the beginning of a variable, such as @Name@ or @Id@ . For example, an @Evaluation@ could have the @Name@ @2014-09-09-HolidayGiftMailer@ . To search for this @Evaluation@ , select @Name@ for the @FilterVariable@ and any of the following strings for the @Prefix@ :      * 2014-09     * 2014-09-09     * 2014-09-09-Holiday
 --
@@ -101,27 +103,19 @@ data DescribeEvaluations = DescribeEvaluations'
 -- * 'deLE' - The less than or equal to operator. The @Evaluation@ results will have @FilterVariable@ values that are less than or equal to the value specified with @LE@ .
 describeEvaluations
     :: DescribeEvaluations
-describeEvaluations =
-  DescribeEvaluations'
-    { _deEQ = Nothing
-    , _deGE = Nothing
-    , _dePrefix = Nothing
-    , _deGT = Nothing
-    , _deNE = Nothing
-    , _deNextToken = Nothing
-    , _deSortOrder = Nothing
-    , _deLimit = Nothing
-    , _deLT = Nothing
-    , _deFilterVariable = Nothing
-    , _deLE = Nothing
-    }
-
+describeEvaluations
+  = DescribeEvaluations'{_deEQ = Nothing,
+                         _deGE = Nothing, _dePrefix = Nothing,
+                         _deGT = Nothing, _deNE = Nothing,
+                         _deNextToken = Nothing, _deSortOrder = Nothing,
+                         _deLimit = Nothing, _deLT = Nothing,
+                         _deFilterVariable = Nothing, _deLE = Nothing}
 
 -- | The equal to operator. The @Evaluation@ results will have @FilterVariable@ values that exactly match the value specified with @EQ@ .
 deEQ :: Lens' DescribeEvaluations (Maybe Text)
 deEQ = lens _deEQ (\ s a -> s{_deEQ = a})
 
--- | The greater than or equal to operator. The @Evaluation@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ .
+-- | The greater than or equal to operator. The @Evaluation@ results will have @FilterVariable@ values that are greater than or equal to the value specified with @GE@ . 
 deGE :: Lens' DescribeEvaluations (Maybe Text)
 deGE = lens _deGE (\ s a -> s{_deGE = a})
 
@@ -217,18 +211,23 @@ instance ToQuery DescribeEvaluations where
 --
 --
 -- /See:/ 'describeEvaluationsResponse' smart constructor.
-data DescribeEvaluationsResponse = DescribeEvaluationsResponse'
-  { _desrsResults        :: !(Maybe [Evaluation])
-  , _desrsNextToken      :: !(Maybe Text)
-  , _desrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeEvaluationsResponse = DescribeEvaluationsResponse'{_desrsResults
+                                                                ::
+                                                                !(Maybe
+                                                                    [Evaluation]),
+                                                                _desrsNextToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _desrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeEvaluationsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'desrsResults' - A list of @Evaluation@ that meet the search criteria.
+-- * 'desrsResults' - A list of @Evaluation@ that meet the search criteria. 
 --
 -- * 'desrsNextToken' - The ID of the next page in the paginated results that indicates at least one more page follows.
 --
@@ -236,15 +235,13 @@ data DescribeEvaluationsResponse = DescribeEvaluationsResponse'
 describeEvaluationsResponse
     :: Int -- ^ 'desrsResponseStatus'
     -> DescribeEvaluationsResponse
-describeEvaluationsResponse pResponseStatus_ =
-  DescribeEvaluationsResponse'
-    { _desrsResults = Nothing
-    , _desrsNextToken = Nothing
-    , _desrsResponseStatus = pResponseStatus_
-    }
+describeEvaluationsResponse pResponseStatus_
+  = DescribeEvaluationsResponse'{_desrsResults =
+                                   Nothing,
+                                 _desrsNextToken = Nothing,
+                                 _desrsResponseStatus = pResponseStatus_}
 
-
--- | A list of @Evaluation@ that meet the search criteria.
+-- | A list of @Evaluation@ that meet the search criteria. 
 desrsResults :: Lens' DescribeEvaluationsResponse [Evaluation]
 desrsResults = lens _desrsResults (\ s a -> s{_desrsResults = a}) . _Default . _Coerce
 

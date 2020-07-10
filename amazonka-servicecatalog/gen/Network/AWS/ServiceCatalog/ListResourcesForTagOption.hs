@@ -52,19 +52,22 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listResourcesForTagOption' smart constructor.
-data ListResourcesForTagOption = ListResourcesForTagOption'
-  { _lrftoResourceType :: !(Maybe Text)
-  , _lrftoPageToken    :: !(Maybe Text)
-  , _lrftoPageSize     :: !(Maybe Nat)
-  , _lrftoTagOptionId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourcesForTagOption = ListResourcesForTagOption'{_lrftoResourceType
+                                                            :: !(Maybe Text),
+                                                            _lrftoPageToken ::
+                                                            !(Maybe Text),
+                                                            _lrftoPageSize ::
+                                                            !(Maybe Nat),
+                                                            _lrftoTagOptionId ::
+                                                            !Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'ListResourcesForTagOption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lrftoResourceType' - The resource type.     * @Portfolio@      * @Product@
+-- * 'lrftoResourceType' - The resource type.     * @Portfolio@      * @Product@ 
 --
 -- * 'lrftoPageToken' - The page token for the next set of results. To retrieve the first set of results, use null.
 --
@@ -74,16 +77,14 @@ data ListResourcesForTagOption = ListResourcesForTagOption'
 listResourcesForTagOption
     :: Text -- ^ 'lrftoTagOptionId'
     -> ListResourcesForTagOption
-listResourcesForTagOption pTagOptionId_ =
-  ListResourcesForTagOption'
-    { _lrftoResourceType = Nothing
-    , _lrftoPageToken = Nothing
-    , _lrftoPageSize = Nothing
-    , _lrftoTagOptionId = pTagOptionId_
-    }
+listResourcesForTagOption pTagOptionId_
+  = ListResourcesForTagOption'{_lrftoResourceType =
+                                 Nothing,
+                               _lrftoPageToken = Nothing,
+                               _lrftoPageSize = Nothing,
+                               _lrftoTagOptionId = pTagOptionId_}
 
-
--- | The resource type.     * @Portfolio@      * @Product@
+-- | The resource type.     * @Portfolio@      * @Product@ 
 lrftoResourceType :: Lens' ListResourcesForTagOption (Maybe Text)
 lrftoResourceType = lens _lrftoResourceType (\ s a -> s{_lrftoResourceType = a})
 
@@ -148,12 +149,19 @@ instance ToQuery ListResourcesForTagOption where
         toQuery = const mempty
 
 -- | /See:/ 'listResourcesForTagOptionResponse' smart constructor.
-data ListResourcesForTagOptionResponse = ListResourcesForTagOptionResponse'
-  { _lrftorsResourceDetails :: !(Maybe [ResourceDetail])
-  , _lrftorsPageToken       :: !(Maybe Text)
-  , _lrftorsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListResourcesForTagOptionResponse = ListResourcesForTagOptionResponse'{_lrftorsResourceDetails
+                                                                            ::
+                                                                            !(Maybe
+                                                                                [ResourceDetail]),
+                                                                            _lrftorsPageToken
+                                                                            ::
+                                                                            !(Maybe
+                                                                                Text),
+                                                                            _lrftorsResponseStatus
+                                                                            ::
+                                                                            !Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'ListResourcesForTagOptionResponse' with the minimum fields required to make a request.
 --
@@ -167,13 +175,12 @@ data ListResourcesForTagOptionResponse = ListResourcesForTagOptionResponse'
 listResourcesForTagOptionResponse
     :: Int -- ^ 'lrftorsResponseStatus'
     -> ListResourcesForTagOptionResponse
-listResourcesForTagOptionResponse pResponseStatus_ =
-  ListResourcesForTagOptionResponse'
-    { _lrftorsResourceDetails = Nothing
-    , _lrftorsPageToken = Nothing
-    , _lrftorsResponseStatus = pResponseStatus_
-    }
-
+listResourcesForTagOptionResponse pResponseStatus_
+  = ListResourcesForTagOptionResponse'{_lrftorsResourceDetails
+                                         = Nothing,
+                                       _lrftorsPageToken = Nothing,
+                                       _lrftorsResponseStatus =
+                                         pResponseStatus_}
 
 -- | Information about the resources.
 lrftorsResourceDetails :: Lens' ListResourcesForTagOptionResponse [ResourceDetail]

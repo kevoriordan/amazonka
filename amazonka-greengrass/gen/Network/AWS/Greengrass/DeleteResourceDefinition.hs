@@ -42,10 +42,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteResourceDefinition' smart constructor.
-newtype DeleteResourceDefinition = DeleteResourceDefinition'
-  { _drdResourceDefinitionId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteResourceDefinition = DeleteResourceDefinition'{_drdResourceDefinitionId
+                                                             :: Text}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteResourceDefinition' with the minimum fields required to make a request.
 --
@@ -55,9 +55,9 @@ newtype DeleteResourceDefinition = DeleteResourceDefinition'
 deleteResourceDefinition
     :: Text -- ^ 'drdResourceDefinitionId'
     -> DeleteResourceDefinition
-deleteResourceDefinition pResourceDefinitionId_ =
-  DeleteResourceDefinition' {_drdResourceDefinitionId = pResourceDefinitionId_}
-
+deleteResourceDefinition pResourceDefinitionId_
+  = DeleteResourceDefinition'{_drdResourceDefinitionId
+                                = pResourceDefinitionId_}
 
 -- | The ID of the resource definition.
 drdResourceDefinitionId :: Lens' DeleteResourceDefinition Text
@@ -94,10 +94,11 @@ instance ToQuery DeleteResourceDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'deleteResourceDefinitionResponse' smart constructor.
-newtype DeleteResourceDefinitionResponse = DeleteResourceDefinitionResponse'
-  { _drdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteResourceDefinitionResponse = DeleteResourceDefinitionResponse'{_drdrsResponseStatus
+                                                                             ::
+                                                                             Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'DeleteResourceDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -107,9 +108,9 @@ newtype DeleteResourceDefinitionResponse = DeleteResourceDefinitionResponse'
 deleteResourceDefinitionResponse
     :: Int -- ^ 'drdrsResponseStatus'
     -> DeleteResourceDefinitionResponse
-deleteResourceDefinitionResponse pResponseStatus_ =
-  DeleteResourceDefinitionResponse' {_drdrsResponseStatus = pResponseStatus_}
-
+deleteResourceDefinitionResponse pResponseStatus_
+  = DeleteResourceDefinitionResponse'{_drdrsResponseStatus
+                                        = pResponseStatus_}
 
 -- | -- | The response status code.
 drdrsResponseStatus :: Lens' DeleteResourceDefinitionResponse Int

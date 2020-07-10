@@ -14,11 +14,11 @@
 module Test.AWS.Gen.Glue where
 
 import Data.Proxy
-import Network.AWS.Glue
 import Test.AWS.Fixture
-import Test.AWS.Glue.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.Glue
+import Test.AWS.Glue.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,11 +28,23 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestStartCrawler $
+--         [ requestStartImportLabelsTaskRun $
+--             startImportLabelsTaskRun
+--
+--         , requestUpdateMLTransform $
+--             updateMLTransform
+--
+--         , requestDeleteMLTransform $
+--             deleteMLTransform
+--
+--         , requestStartCrawler $
 --             startCrawler
 --
 --         , requestGetCatalogImportStatus $
 --             getCatalogImportStatus
+--
+--         , requestListMLTransforms $
+--             listMLTransforms
 --
 --         , requestGetPartition $
 --             getPartition
@@ -46,6 +58,12 @@ import Test.Tasty
 --         , requestUpdateTable $
 --             updateTable
 --
+--         , requestGetWorkflowRuns $
+--             getWorkflowRuns
+--
+--         , requestCreateWorkflow $
+--             createWorkflow
+--
 --         , requestDeleteConnection $
 --             deleteConnection
 --
@@ -55,23 +73,50 @@ import Test.Tasty
 --         , requestGetUserDefinedFunctions $
 --             getUserDefinedFunctions
 --
+--         , requestGetTags $
+--             getTags
+--
+--         , requestGetDataCatalogEncryptionSettings $
+--             getDataCatalogEncryptionSettings
+--
 --         , requestBatchCreatePartition $
 --             batchCreatePartition
 --
 --         , requestGetMapping $
 --             getMapping
 --
+--         , requestDeleteWorkflow $
+--             deleteWorkflow
+--
+--         , requestUpdateWorkflow $
+--             updateWorkflow
+--
 --         , requestGetTableVersion $
 --             getTableVersion
 --
+--         , requestCreateSecurityConfiguration $
+--             createSecurityConfiguration
+--
+--         , requestStartWorkflowRun $
+--             startWorkflowRun
+--
 --         , requestGetJobs $
 --             getJobs
+--
+--         , requestBatchGetWorkflows $
+--             batchGetWorkflows
 --
 --         , requestGetClassifiers $
 --             getClassifiers
 --
 --         , requestCreateConnection $
 --             createConnection
+--
+--         , requestGetWorkflowRunProperties $
+--             getWorkflowRunProperties
+--
+--         , requestBatchGetDevEndpoints $
+--             batchGetDevEndpoints
 --
 --         , requestDeleteTableVersion $
 --             deleteTableVersion
@@ -82,11 +127,26 @@ import Test.Tasty
 --         , requestUpdateDevEndpoint $
 --             updateDevEndpoint
 --
+--         , requestGetWorkflow $
+--             getWorkflow
+--
+--         , requestBatchGetCrawlers $
+--             batchGetCrawlers
+--
+--         , requestGetJobBookmark $
+--             getJobBookmark
+--
 --         , requestDeleteCrawler $
 --             deleteCrawler
 --
 --         , requestUpdateCrawler $
 --             updateCrawler
+--
+--         , requestStartExportLabelsTaskRun $
+--             startExportLabelsTaskRun
+--
+--         , requestGetSecurityConfiguration $
+--             getSecurityConfiguration
 --
 --         , requestGetConnection $
 --             getConnection
@@ -100,6 +160,9 @@ import Test.Tasty
 --         , requestUpdateCrawlerSchedule $
 --             updateCrawlerSchedule
 --
+--         , requestStartMLEvaluationTaskRun $
+--             startMLEvaluationTaskRun
+--
 --         , requestDeleteUserDefinedFunction $
 --             deleteUserDefinedFunction
 --
@@ -108,6 +171,9 @@ import Test.Tasty
 --
 --         , requestBatchDeleteTable $
 --             batchDeleteTable
+--
+--         , requestCancelMLTaskRun $
+--             cancelMLTaskRun
 --
 --         , requestGetTables $
 --             getTables
@@ -130,6 +196,9 @@ import Test.Tasty
 --         , requestResetJobBookmark $
 --             resetJobBookmark
 --
+--         , requestListJobs $
+--             listJobs
+--
 --         , requestDeleteJob $
 --             deleteJob
 --
@@ -138,6 +207,9 @@ import Test.Tasty
 --
 --         , requestGetCrawlers $
 --             getCrawlers
+--
+--         , requestListTriggers $
+--             listTriggers
 --
 --         , requestGetClassifier $
 --             getClassifier
@@ -157,6 +229,12 @@ import Test.Tasty
 --         , requestGetUserDefinedFunction $
 --             getUserDefinedFunction
 --
+--         , requestGetResourcePolicy $
+--             getResourcePolicy
+--
+--         , requestGetWorkflowRun $
+--             getWorkflowRun
+--
 --         , requestDeleteDatabase $
 --             deleteDatabase
 --
@@ -166,14 +244,23 @@ import Test.Tasty
 --         , requestStopCrawler $
 --             stopCrawler
 --
+--         , requestDeleteSecurityConfiguration $
+--             deleteSecurityConfiguration
+--
 --         , requestGetPartitions $
 --             getPartitions
 --
 --         , requestBatchDeletePartition $
 --             batchDeletePartition
 --
+--         , requestStartMLLabelingSetGenerationTaskRun $
+--             startMLLabelingSetGenerationTaskRun
+--
 --         , requestGetCrawler $
 --             getCrawler
+--
+--         , requestListWorkflows $
+--             listWorkflows
 --
 --         , requestBatchStopJobRun $
 --             batchStopJobRun
@@ -181,8 +268,14 @@ import Test.Tasty
 --         , requestGetDevEndpoint $
 --             getDevEndpoint
 --
+--         , requestPutWorkflowRunProperties $
+--             putWorkflowRunProperties
+--
 --         , requestCreateTable $
 --             createTable
+--
+--         , requestListCrawlers $
+--             listCrawlers
 --
 --         , requestGetCrawlerMetrics $
 --             getCrawlerMetrics
@@ -192,6 +285,9 @@ import Test.Tasty
 --
 --         , requestGetTriggers $
 --             getTriggers
+--
+--         , requestListDevEndpoints $
+--             listDevEndpoints
 --
 --         , requestStartTrigger $
 --             startTrigger
@@ -214,8 +310,23 @@ import Test.Tasty
 --         , requestCreateDevEndpoint $
 --             createDevEndpoint
 --
+--         , requestGetMLTaskRuns $
+--             getMLTaskRuns
+--
+--         , requestTagResource $
+--             tagResource
+--
+--         , requestPutDataCatalogEncryptionSettings $
+--             putDataCatalogEncryptionSettings
+--
+--         , requestGetMLTransforms $
+--             getMLTransforms
+--
 --         , requestGetDatabase $
 --             getDatabase
+--
+--         , requestGetMLTaskRun $
+--             getMLTaskRun
 --
 --         , requestDeletePartition $
 --             deletePartition
@@ -223,14 +334,35 @@ import Test.Tasty
 --         , requestUpdatePartition $
 --             updatePartition
 --
+--         , requestGetMLTransform $
+--             getMLTransform
+--
 --         , requestCreateScript $
 --             createScript
+--
+--         , requestPutResourcePolicy $
+--             putResourcePolicy
+--
+--         , requestGetSecurityConfigurations $
+--             getSecurityConfigurations
+--
+--         , requestDeleteResourcePolicy $
+--             deleteResourcePolicy
 --
 --         , requestGetConnections $
 --             getConnections
 --
+--         , requestUntagResource $
+--             untagResource
+--
+--         , requestSearchTables $
+--             searchTables
+--
 --         , requestGetTrigger $
 --             getTrigger
+--
+--         , requestBatchGetJobs $
+--             batchGetJobs
 --
 --         , requestImportCatalogToGlue $
 --             importCatalogToGlue
@@ -247,6 +379,9 @@ import Test.Tasty
 --         , requestCreatePartition $
 --             createPartition
 --
+--         , requestBatchGetTriggers $
+--             batchGetTriggers
+--
 --         , requestStopCrawlerSchedule $
 --             stopCrawlerSchedule
 --
@@ -255,6 +390,9 @@ import Test.Tasty
 --
 --         , requestGetTableVersions $
 --             getTableVersions
+--
+--         , requestCreateMLTransform $
+--             createMLTransform
 --
 --         , requestDeleteTrigger $
 --             deleteTrigger
@@ -265,11 +403,23 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseStartCrawler $
+--         [ responseStartImportLabelsTaskRun $
+--             startImportLabelsTaskRunResponse
+--
+--         , responseUpdateMLTransform $
+--             updateMLTransformResponse
+--
+--         , responseDeleteMLTransform $
+--             deleteMLTransformResponse
+--
+--         , responseStartCrawler $
 --             startCrawlerResponse
 --
 --         , responseGetCatalogImportStatus $
 --             getCatalogImportStatusResponse
+--
+--         , responseListMLTransforms $
+--             listMLTransformsResponse
 --
 --         , responseGetPartition $
 --             getPartitionResponse
@@ -283,6 +433,12 @@ import Test.Tasty
 --         , responseUpdateTable $
 --             updateTableResponse
 --
+--         , responseGetWorkflowRuns $
+--             getWorkflowRunsResponse
+--
+--         , responseCreateWorkflow $
+--             createWorkflowResponse
+--
 --         , responseDeleteConnection $
 --             deleteConnectionResponse
 --
@@ -292,23 +448,50 @@ import Test.Tasty
 --         , responseGetUserDefinedFunctions $
 --             getUserDefinedFunctionsResponse
 --
+--         , responseGetTags $
+--             getTagsResponse
+--
+--         , responseGetDataCatalogEncryptionSettings $
+--             getDataCatalogEncryptionSettingsResponse
+--
 --         , responseBatchCreatePartition $
 --             batchCreatePartitionResponse
 --
 --         , responseGetMapping $
 --             getMappingResponse
 --
+--         , responseDeleteWorkflow $
+--             deleteWorkflowResponse
+--
+--         , responseUpdateWorkflow $
+--             updateWorkflowResponse
+--
 --         , responseGetTableVersion $
 --             getTableVersionResponse
 --
+--         , responseCreateSecurityConfiguration $
+--             createSecurityConfigurationResponse
+--
+--         , responseStartWorkflowRun $
+--             startWorkflowRunResponse
+--
 --         , responseGetJobs $
 --             getJobsResponse
+--
+--         , responseBatchGetWorkflows $
+--             batchGetWorkflowsResponse
 --
 --         , responseGetClassifiers $
 --             getClassifiersResponse
 --
 --         , responseCreateConnection $
 --             createConnectionResponse
+--
+--         , responseGetWorkflowRunProperties $
+--             getWorkflowRunPropertiesResponse
+--
+--         , responseBatchGetDevEndpoints $
+--             batchGetDevEndpointsResponse
 --
 --         , responseDeleteTableVersion $
 --             deleteTableVersionResponse
@@ -319,11 +502,26 @@ import Test.Tasty
 --         , responseUpdateDevEndpoint $
 --             updateDevEndpointResponse
 --
+--         , responseGetWorkflow $
+--             getWorkflowResponse
+--
+--         , responseBatchGetCrawlers $
+--             batchGetCrawlersResponse
+--
+--         , responseGetJobBookmark $
+--             getJobBookmarkResponse
+--
 --         , responseDeleteCrawler $
 --             deleteCrawlerResponse
 --
 --         , responseUpdateCrawler $
 --             updateCrawlerResponse
+--
+--         , responseStartExportLabelsTaskRun $
+--             startExportLabelsTaskRunResponse
+--
+--         , responseGetSecurityConfiguration $
+--             getSecurityConfigurationResponse
 --
 --         , responseGetConnection $
 --             getConnectionResponse
@@ -337,6 +535,9 @@ import Test.Tasty
 --         , responseUpdateCrawlerSchedule $
 --             updateCrawlerScheduleResponse
 --
+--         , responseStartMLEvaluationTaskRun $
+--             startMLEvaluationTaskRunResponse
+--
 --         , responseDeleteUserDefinedFunction $
 --             deleteUserDefinedFunctionResponse
 --
@@ -345,6 +546,9 @@ import Test.Tasty
 --
 --         , responseBatchDeleteTable $
 --             batchDeleteTableResponse
+--
+--         , responseCancelMLTaskRun $
+--             cancelMLTaskRunResponse
 --
 --         , responseGetTables $
 --             getTablesResponse
@@ -367,6 +571,9 @@ import Test.Tasty
 --         , responseResetJobBookmark $
 --             resetJobBookmarkResponse
 --
+--         , responseListJobs $
+--             listJobsResponse
+--
 --         , responseDeleteJob $
 --             deleteJobResponse
 --
@@ -375,6 +582,9 @@ import Test.Tasty
 --
 --         , responseGetCrawlers $
 --             getCrawlersResponse
+--
+--         , responseListTriggers $
+--             listTriggersResponse
 --
 --         , responseGetClassifier $
 --             getClassifierResponse
@@ -394,6 +604,12 @@ import Test.Tasty
 --         , responseGetUserDefinedFunction $
 --             getUserDefinedFunctionResponse
 --
+--         , responseGetResourcePolicy $
+--             getResourcePolicyResponse
+--
+--         , responseGetWorkflowRun $
+--             getWorkflowRunResponse
+--
 --         , responseDeleteDatabase $
 --             deleteDatabaseResponse
 --
@@ -403,14 +619,23 @@ import Test.Tasty
 --         , responseStopCrawler $
 --             stopCrawlerResponse
 --
+--         , responseDeleteSecurityConfiguration $
+--             deleteSecurityConfigurationResponse
+--
 --         , responseGetPartitions $
 --             getPartitionsResponse
 --
 --         , responseBatchDeletePartition $
 --             batchDeletePartitionResponse
 --
+--         , responseStartMLLabelingSetGenerationTaskRun $
+--             startMLLabelingSetGenerationTaskRunResponse
+--
 --         , responseGetCrawler $
 --             getCrawlerResponse
+--
+--         , responseListWorkflows $
+--             listWorkflowsResponse
 --
 --         , responseBatchStopJobRun $
 --             batchStopJobRunResponse
@@ -418,8 +643,14 @@ import Test.Tasty
 --         , responseGetDevEndpoint $
 --             getDevEndpointResponse
 --
+--         , responsePutWorkflowRunProperties $
+--             putWorkflowRunPropertiesResponse
+--
 --         , responseCreateTable $
 --             createTableResponse
+--
+--         , responseListCrawlers $
+--             listCrawlersResponse
 --
 --         , responseGetCrawlerMetrics $
 --             getCrawlerMetricsResponse
@@ -429,6 +660,9 @@ import Test.Tasty
 --
 --         , responseGetTriggers $
 --             getTriggersResponse
+--
+--         , responseListDevEndpoints $
+--             listDevEndpointsResponse
 --
 --         , responseStartTrigger $
 --             startTriggerResponse
@@ -451,8 +685,23 @@ import Test.Tasty
 --         , responseCreateDevEndpoint $
 --             createDevEndpointResponse
 --
+--         , responseGetMLTaskRuns $
+--             getMLTaskRunsResponse
+--
+--         , responseTagResource $
+--             tagResourceResponse
+--
+--         , responsePutDataCatalogEncryptionSettings $
+--             putDataCatalogEncryptionSettingsResponse
+--
+--         , responseGetMLTransforms $
+--             getMLTransformsResponse
+--
 --         , responseGetDatabase $
 --             getDatabaseResponse
+--
+--         , responseGetMLTaskRun $
+--             getMLTaskRunResponse
 --
 --         , responseDeletePartition $
 --             deletePartitionResponse
@@ -460,14 +709,35 @@ import Test.Tasty
 --         , responseUpdatePartition $
 --             updatePartitionResponse
 --
+--         , responseGetMLTransform $
+--             getMLTransformResponse
+--
 --         , responseCreateScript $
 --             createScriptResponse
+--
+--         , responsePutResourcePolicy $
+--             putResourcePolicyResponse
+--
+--         , responseGetSecurityConfigurations $
+--             getSecurityConfigurationsResponse
+--
+--         , responseDeleteResourcePolicy $
+--             deleteResourcePolicyResponse
 --
 --         , responseGetConnections $
 --             getConnectionsResponse
 --
+--         , responseUntagResource $
+--             untagResourceResponse
+--
+--         , responseSearchTables $
+--             searchTablesResponse
+--
 --         , responseGetTrigger $
 --             getTriggerResponse
+--
+--         , responseBatchGetJobs $
+--             batchGetJobsResponse
 --
 --         , responseImportCatalogToGlue $
 --             importCatalogToGlueResponse
@@ -484,6 +754,9 @@ import Test.Tasty
 --         , responseCreatePartition $
 --             createPartitionResponse
 --
+--         , responseBatchGetTriggers $
+--             batchGetTriggersResponse
+--
 --         , responseStopCrawlerSchedule $
 --             stopCrawlerScheduleResponse
 --
@@ -492,6 +765,9 @@ import Test.Tasty
 --
 --         , responseGetTableVersions $
 --             getTableVersionsResponse
+--
+--         , responseCreateMLTransform $
+--             createMLTransformResponse
 --
 --         , responseDeleteTrigger $
 --             deleteTriggerResponse
@@ -504,6 +780,21 @@ import Test.Tasty
 
 -- Requests
 
+requestStartImportLabelsTaskRun :: StartImportLabelsTaskRun -> TestTree
+requestStartImportLabelsTaskRun = req
+    "StartImportLabelsTaskRun"
+    "fixture/StartImportLabelsTaskRun.yaml"
+
+requestUpdateMLTransform :: UpdateMLTransform -> TestTree
+requestUpdateMLTransform = req
+    "UpdateMLTransform"
+    "fixture/UpdateMLTransform.yaml"
+
+requestDeleteMLTransform :: DeleteMLTransform -> TestTree
+requestDeleteMLTransform = req
+    "DeleteMLTransform"
+    "fixture/DeleteMLTransform.yaml"
+
 requestStartCrawler :: StartCrawler -> TestTree
 requestStartCrawler = req
     "StartCrawler"
@@ -513,6 +804,11 @@ requestGetCatalogImportStatus :: GetCatalogImportStatus -> TestTree
 requestGetCatalogImportStatus = req
     "GetCatalogImportStatus"
     "fixture/GetCatalogImportStatus.yaml"
+
+requestListMLTransforms :: ListMLTransforms -> TestTree
+requestListMLTransforms = req
+    "ListMLTransforms"
+    "fixture/ListMLTransforms.yaml"
 
 requestGetPartition :: GetPartition -> TestTree
 requestGetPartition = req
@@ -534,6 +830,16 @@ requestUpdateTable = req
     "UpdateTable"
     "fixture/UpdateTable.yaml"
 
+requestGetWorkflowRuns :: GetWorkflowRuns -> TestTree
+requestGetWorkflowRuns = req
+    "GetWorkflowRuns"
+    "fixture/GetWorkflowRuns.yaml"
+
+requestCreateWorkflow :: CreateWorkflow -> TestTree
+requestCreateWorkflow = req
+    "CreateWorkflow"
+    "fixture/CreateWorkflow.yaml"
+
 requestDeleteConnection :: DeleteConnection -> TestTree
 requestDeleteConnection = req
     "DeleteConnection"
@@ -549,6 +855,16 @@ requestGetUserDefinedFunctions = req
     "GetUserDefinedFunctions"
     "fixture/GetUserDefinedFunctions.yaml"
 
+requestGetTags :: GetTags -> TestTree
+requestGetTags = req
+    "GetTags"
+    "fixture/GetTags.yaml"
+
+requestGetDataCatalogEncryptionSettings :: GetDataCatalogEncryptionSettings -> TestTree
+requestGetDataCatalogEncryptionSettings = req
+    "GetDataCatalogEncryptionSettings"
+    "fixture/GetDataCatalogEncryptionSettings.yaml"
+
 requestBatchCreatePartition :: BatchCreatePartition -> TestTree
 requestBatchCreatePartition = req
     "BatchCreatePartition"
@@ -559,15 +875,40 @@ requestGetMapping = req
     "GetMapping"
     "fixture/GetMapping.yaml"
 
+requestDeleteWorkflow :: DeleteWorkflow -> TestTree
+requestDeleteWorkflow = req
+    "DeleteWorkflow"
+    "fixture/DeleteWorkflow.yaml"
+
+requestUpdateWorkflow :: UpdateWorkflow -> TestTree
+requestUpdateWorkflow = req
+    "UpdateWorkflow"
+    "fixture/UpdateWorkflow.yaml"
+
 requestGetTableVersion :: GetTableVersion -> TestTree
 requestGetTableVersion = req
     "GetTableVersion"
     "fixture/GetTableVersion.yaml"
 
+requestCreateSecurityConfiguration :: CreateSecurityConfiguration -> TestTree
+requestCreateSecurityConfiguration = req
+    "CreateSecurityConfiguration"
+    "fixture/CreateSecurityConfiguration.yaml"
+
+requestStartWorkflowRun :: StartWorkflowRun -> TestTree
+requestStartWorkflowRun = req
+    "StartWorkflowRun"
+    "fixture/StartWorkflowRun.yaml"
+
 requestGetJobs :: GetJobs -> TestTree
 requestGetJobs = req
     "GetJobs"
     "fixture/GetJobs.yaml"
+
+requestBatchGetWorkflows :: BatchGetWorkflows -> TestTree
+requestBatchGetWorkflows = req
+    "BatchGetWorkflows"
+    "fixture/BatchGetWorkflows.yaml"
 
 requestGetClassifiers :: GetClassifiers -> TestTree
 requestGetClassifiers = req
@@ -578,6 +919,16 @@ requestCreateConnection :: CreateConnection -> TestTree
 requestCreateConnection = req
     "CreateConnection"
     "fixture/CreateConnection.yaml"
+
+requestGetWorkflowRunProperties :: GetWorkflowRunProperties -> TestTree
+requestGetWorkflowRunProperties = req
+    "GetWorkflowRunProperties"
+    "fixture/GetWorkflowRunProperties.yaml"
+
+requestBatchGetDevEndpoints :: BatchGetDevEndpoints -> TestTree
+requestBatchGetDevEndpoints = req
+    "BatchGetDevEndpoints"
+    "fixture/BatchGetDevEndpoints.yaml"
 
 requestDeleteTableVersion :: DeleteTableVersion -> TestTree
 requestDeleteTableVersion = req
@@ -594,6 +945,21 @@ requestUpdateDevEndpoint = req
     "UpdateDevEndpoint"
     "fixture/UpdateDevEndpoint.yaml"
 
+requestGetWorkflow :: GetWorkflow -> TestTree
+requestGetWorkflow = req
+    "GetWorkflow"
+    "fixture/GetWorkflow.yaml"
+
+requestBatchGetCrawlers :: BatchGetCrawlers -> TestTree
+requestBatchGetCrawlers = req
+    "BatchGetCrawlers"
+    "fixture/BatchGetCrawlers.yaml"
+
+requestGetJobBookmark :: GetJobBookmark -> TestTree
+requestGetJobBookmark = req
+    "GetJobBookmark"
+    "fixture/GetJobBookmark.yaml"
+
 requestDeleteCrawler :: DeleteCrawler -> TestTree
 requestDeleteCrawler = req
     "DeleteCrawler"
@@ -603,6 +969,16 @@ requestUpdateCrawler :: UpdateCrawler -> TestTree
 requestUpdateCrawler = req
     "UpdateCrawler"
     "fixture/UpdateCrawler.yaml"
+
+requestStartExportLabelsTaskRun :: StartExportLabelsTaskRun -> TestTree
+requestStartExportLabelsTaskRun = req
+    "StartExportLabelsTaskRun"
+    "fixture/StartExportLabelsTaskRun.yaml"
+
+requestGetSecurityConfiguration :: GetSecurityConfiguration -> TestTree
+requestGetSecurityConfiguration = req
+    "GetSecurityConfiguration"
+    "fixture/GetSecurityConfiguration.yaml"
 
 requestGetConnection :: GetConnection -> TestTree
 requestGetConnection = req
@@ -624,6 +1000,11 @@ requestUpdateCrawlerSchedule = req
     "UpdateCrawlerSchedule"
     "fixture/UpdateCrawlerSchedule.yaml"
 
+requestStartMLEvaluationTaskRun :: StartMLEvaluationTaskRun -> TestTree
+requestStartMLEvaluationTaskRun = req
+    "StartMLEvaluationTaskRun"
+    "fixture/StartMLEvaluationTaskRun.yaml"
+
 requestDeleteUserDefinedFunction :: DeleteUserDefinedFunction -> TestTree
 requestDeleteUserDefinedFunction = req
     "DeleteUserDefinedFunction"
@@ -638,6 +1019,11 @@ requestBatchDeleteTable :: BatchDeleteTable -> TestTree
 requestBatchDeleteTable = req
     "BatchDeleteTable"
     "fixture/BatchDeleteTable.yaml"
+
+requestCancelMLTaskRun :: CancelMLTaskRun -> TestTree
+requestCancelMLTaskRun = req
+    "CancelMLTaskRun"
+    "fixture/CancelMLTaskRun.yaml"
 
 requestGetTables :: GetTables -> TestTree
 requestGetTables = req
@@ -674,6 +1060,11 @@ requestResetJobBookmark = req
     "ResetJobBookmark"
     "fixture/ResetJobBookmark.yaml"
 
+requestListJobs :: ListJobs -> TestTree
+requestListJobs = req
+    "ListJobs"
+    "fixture/ListJobs.yaml"
+
 requestDeleteJob :: DeleteJob -> TestTree
 requestDeleteJob = req
     "DeleteJob"
@@ -688,6 +1079,11 @@ requestGetCrawlers :: GetCrawlers -> TestTree
 requestGetCrawlers = req
     "GetCrawlers"
     "fixture/GetCrawlers.yaml"
+
+requestListTriggers :: ListTriggers -> TestTree
+requestListTriggers = req
+    "ListTriggers"
+    "fixture/ListTriggers.yaml"
 
 requestGetClassifier :: GetClassifier -> TestTree
 requestGetClassifier = req
@@ -719,6 +1115,16 @@ requestGetUserDefinedFunction = req
     "GetUserDefinedFunction"
     "fixture/GetUserDefinedFunction.yaml"
 
+requestGetResourcePolicy :: GetResourcePolicy -> TestTree
+requestGetResourcePolicy = req
+    "GetResourcePolicy"
+    "fixture/GetResourcePolicy.yaml"
+
+requestGetWorkflowRun :: GetWorkflowRun -> TestTree
+requestGetWorkflowRun = req
+    "GetWorkflowRun"
+    "fixture/GetWorkflowRun.yaml"
+
 requestDeleteDatabase :: DeleteDatabase -> TestTree
 requestDeleteDatabase = req
     "DeleteDatabase"
@@ -734,6 +1140,11 @@ requestStopCrawler = req
     "StopCrawler"
     "fixture/StopCrawler.yaml"
 
+requestDeleteSecurityConfiguration :: DeleteSecurityConfiguration -> TestTree
+requestDeleteSecurityConfiguration = req
+    "DeleteSecurityConfiguration"
+    "fixture/DeleteSecurityConfiguration.yaml"
+
 requestGetPartitions :: GetPartitions -> TestTree
 requestGetPartitions = req
     "GetPartitions"
@@ -744,10 +1155,20 @@ requestBatchDeletePartition = req
     "BatchDeletePartition"
     "fixture/BatchDeletePartition.yaml"
 
+requestStartMLLabelingSetGenerationTaskRun :: StartMLLabelingSetGenerationTaskRun -> TestTree
+requestStartMLLabelingSetGenerationTaskRun = req
+    "StartMLLabelingSetGenerationTaskRun"
+    "fixture/StartMLLabelingSetGenerationTaskRun.yaml"
+
 requestGetCrawler :: GetCrawler -> TestTree
 requestGetCrawler = req
     "GetCrawler"
     "fixture/GetCrawler.yaml"
+
+requestListWorkflows :: ListWorkflows -> TestTree
+requestListWorkflows = req
+    "ListWorkflows"
+    "fixture/ListWorkflows.yaml"
 
 requestBatchStopJobRun :: BatchStopJobRun -> TestTree
 requestBatchStopJobRun = req
@@ -759,10 +1180,20 @@ requestGetDevEndpoint = req
     "GetDevEndpoint"
     "fixture/GetDevEndpoint.yaml"
 
+requestPutWorkflowRunProperties :: PutWorkflowRunProperties -> TestTree
+requestPutWorkflowRunProperties = req
+    "PutWorkflowRunProperties"
+    "fixture/PutWorkflowRunProperties.yaml"
+
 requestCreateTable :: CreateTable -> TestTree
 requestCreateTable = req
     "CreateTable"
     "fixture/CreateTable.yaml"
+
+requestListCrawlers :: ListCrawlers -> TestTree
+requestListCrawlers = req
+    "ListCrawlers"
+    "fixture/ListCrawlers.yaml"
 
 requestGetCrawlerMetrics :: GetCrawlerMetrics -> TestTree
 requestGetCrawlerMetrics = req
@@ -778,6 +1209,11 @@ requestGetTriggers :: GetTriggers -> TestTree
 requestGetTriggers = req
     "GetTriggers"
     "fixture/GetTriggers.yaml"
+
+requestListDevEndpoints :: ListDevEndpoints -> TestTree
+requestListDevEndpoints = req
+    "ListDevEndpoints"
+    "fixture/ListDevEndpoints.yaml"
 
 requestStartTrigger :: StartTrigger -> TestTree
 requestStartTrigger = req
@@ -814,10 +1250,35 @@ requestCreateDevEndpoint = req
     "CreateDevEndpoint"
     "fixture/CreateDevEndpoint.yaml"
 
+requestGetMLTaskRuns :: GetMLTaskRuns -> TestTree
+requestGetMLTaskRuns = req
+    "GetMLTaskRuns"
+    "fixture/GetMLTaskRuns.yaml"
+
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
+
+requestPutDataCatalogEncryptionSettings :: PutDataCatalogEncryptionSettings -> TestTree
+requestPutDataCatalogEncryptionSettings = req
+    "PutDataCatalogEncryptionSettings"
+    "fixture/PutDataCatalogEncryptionSettings.yaml"
+
+requestGetMLTransforms :: GetMLTransforms -> TestTree
+requestGetMLTransforms = req
+    "GetMLTransforms"
+    "fixture/GetMLTransforms.yaml"
+
 requestGetDatabase :: GetDatabase -> TestTree
 requestGetDatabase = req
     "GetDatabase"
     "fixture/GetDatabase.yaml"
+
+requestGetMLTaskRun :: GetMLTaskRun -> TestTree
+requestGetMLTaskRun = req
+    "GetMLTaskRun"
+    "fixture/GetMLTaskRun.yaml"
 
 requestDeletePartition :: DeletePartition -> TestTree
 requestDeletePartition = req
@@ -829,20 +1290,55 @@ requestUpdatePartition = req
     "UpdatePartition"
     "fixture/UpdatePartition.yaml"
 
+requestGetMLTransform :: GetMLTransform -> TestTree
+requestGetMLTransform = req
+    "GetMLTransform"
+    "fixture/GetMLTransform.yaml"
+
 requestCreateScript :: CreateScript -> TestTree
 requestCreateScript = req
     "CreateScript"
     "fixture/CreateScript.yaml"
+
+requestPutResourcePolicy :: PutResourcePolicy -> TestTree
+requestPutResourcePolicy = req
+    "PutResourcePolicy"
+    "fixture/PutResourcePolicy.yaml"
+
+requestGetSecurityConfigurations :: GetSecurityConfigurations -> TestTree
+requestGetSecurityConfigurations = req
+    "GetSecurityConfigurations"
+    "fixture/GetSecurityConfigurations.yaml"
+
+requestDeleteResourcePolicy :: DeleteResourcePolicy -> TestTree
+requestDeleteResourcePolicy = req
+    "DeleteResourcePolicy"
+    "fixture/DeleteResourcePolicy.yaml"
 
 requestGetConnections :: GetConnections -> TestTree
 requestGetConnections = req
     "GetConnections"
     "fixture/GetConnections.yaml"
 
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
+
+requestSearchTables :: SearchTables -> TestTree
+requestSearchTables = req
+    "SearchTables"
+    "fixture/SearchTables.yaml"
+
 requestGetTrigger :: GetTrigger -> TestTree
 requestGetTrigger = req
     "GetTrigger"
     "fixture/GetTrigger.yaml"
+
+requestBatchGetJobs :: BatchGetJobs -> TestTree
+requestBatchGetJobs = req
+    "BatchGetJobs"
+    "fixture/BatchGetJobs.yaml"
 
 requestImportCatalogToGlue :: ImportCatalogToGlue -> TestTree
 requestImportCatalogToGlue = req
@@ -869,6 +1365,11 @@ requestCreatePartition = req
     "CreatePartition"
     "fixture/CreatePartition.yaml"
 
+requestBatchGetTriggers :: BatchGetTriggers -> TestTree
+requestBatchGetTriggers = req
+    "BatchGetTriggers"
+    "fixture/BatchGetTriggers.yaml"
+
 requestStopCrawlerSchedule :: StopCrawlerSchedule -> TestTree
 requestStopCrawlerSchedule = req
     "StopCrawlerSchedule"
@@ -884,6 +1385,11 @@ requestGetTableVersions = req
     "GetTableVersions"
     "fixture/GetTableVersions.yaml"
 
+requestCreateMLTransform :: CreateMLTransform -> TestTree
+requestCreateMLTransform = req
+    "CreateMLTransform"
+    "fixture/CreateMLTransform.yaml"
+
 requestDeleteTrigger :: DeleteTrigger -> TestTree
 requestDeleteTrigger = req
     "DeleteTrigger"
@@ -895,6 +1401,27 @@ requestUpdateTrigger = req
     "fixture/UpdateTrigger.yaml"
 
 -- Responses
+
+responseStartImportLabelsTaskRun :: StartImportLabelsTaskRunResponse -> TestTree
+responseStartImportLabelsTaskRun = res
+    "StartImportLabelsTaskRunResponse"
+    "fixture/StartImportLabelsTaskRunResponse.proto"
+    glue
+    (Proxy :: Proxy StartImportLabelsTaskRun)
+
+responseUpdateMLTransform :: UpdateMLTransformResponse -> TestTree
+responseUpdateMLTransform = res
+    "UpdateMLTransformResponse"
+    "fixture/UpdateMLTransformResponse.proto"
+    glue
+    (Proxy :: Proxy UpdateMLTransform)
+
+responseDeleteMLTransform :: DeleteMLTransformResponse -> TestTree
+responseDeleteMLTransform = res
+    "DeleteMLTransformResponse"
+    "fixture/DeleteMLTransformResponse.proto"
+    glue
+    (Proxy :: Proxy DeleteMLTransform)
 
 responseStartCrawler :: StartCrawlerResponse -> TestTree
 responseStartCrawler = res
@@ -909,6 +1436,13 @@ responseGetCatalogImportStatus = res
     "fixture/GetCatalogImportStatusResponse.proto"
     glue
     (Proxy :: Proxy GetCatalogImportStatus)
+
+responseListMLTransforms :: ListMLTransformsResponse -> TestTree
+responseListMLTransforms = res
+    "ListMLTransformsResponse"
+    "fixture/ListMLTransformsResponse.proto"
+    glue
+    (Proxy :: Proxy ListMLTransforms)
 
 responseGetPartition :: GetPartitionResponse -> TestTree
 responseGetPartition = res
@@ -938,6 +1472,20 @@ responseUpdateTable = res
     glue
     (Proxy :: Proxy UpdateTable)
 
+responseGetWorkflowRuns :: GetWorkflowRunsResponse -> TestTree
+responseGetWorkflowRuns = res
+    "GetWorkflowRunsResponse"
+    "fixture/GetWorkflowRunsResponse.proto"
+    glue
+    (Proxy :: Proxy GetWorkflowRuns)
+
+responseCreateWorkflow :: CreateWorkflowResponse -> TestTree
+responseCreateWorkflow = res
+    "CreateWorkflowResponse"
+    "fixture/CreateWorkflowResponse.proto"
+    glue
+    (Proxy :: Proxy CreateWorkflow)
+
 responseDeleteConnection :: DeleteConnectionResponse -> TestTree
 responseDeleteConnection = res
     "DeleteConnectionResponse"
@@ -959,6 +1507,20 @@ responseGetUserDefinedFunctions = res
     glue
     (Proxy :: Proxy GetUserDefinedFunctions)
 
+responseGetTags :: GetTagsResponse -> TestTree
+responseGetTags = res
+    "GetTagsResponse"
+    "fixture/GetTagsResponse.proto"
+    glue
+    (Proxy :: Proxy GetTags)
+
+responseGetDataCatalogEncryptionSettings :: GetDataCatalogEncryptionSettingsResponse -> TestTree
+responseGetDataCatalogEncryptionSettings = res
+    "GetDataCatalogEncryptionSettingsResponse"
+    "fixture/GetDataCatalogEncryptionSettingsResponse.proto"
+    glue
+    (Proxy :: Proxy GetDataCatalogEncryptionSettings)
+
 responseBatchCreatePartition :: BatchCreatePartitionResponse -> TestTree
 responseBatchCreatePartition = res
     "BatchCreatePartitionResponse"
@@ -973,6 +1535,20 @@ responseGetMapping = res
     glue
     (Proxy :: Proxy GetMapping)
 
+responseDeleteWorkflow :: DeleteWorkflowResponse -> TestTree
+responseDeleteWorkflow = res
+    "DeleteWorkflowResponse"
+    "fixture/DeleteWorkflowResponse.proto"
+    glue
+    (Proxy :: Proxy DeleteWorkflow)
+
+responseUpdateWorkflow :: UpdateWorkflowResponse -> TestTree
+responseUpdateWorkflow = res
+    "UpdateWorkflowResponse"
+    "fixture/UpdateWorkflowResponse.proto"
+    glue
+    (Proxy :: Proxy UpdateWorkflow)
+
 responseGetTableVersion :: GetTableVersionResponse -> TestTree
 responseGetTableVersion = res
     "GetTableVersionResponse"
@@ -980,12 +1556,33 @@ responseGetTableVersion = res
     glue
     (Proxy :: Proxy GetTableVersion)
 
+responseCreateSecurityConfiguration :: CreateSecurityConfigurationResponse -> TestTree
+responseCreateSecurityConfiguration = res
+    "CreateSecurityConfigurationResponse"
+    "fixture/CreateSecurityConfigurationResponse.proto"
+    glue
+    (Proxy :: Proxy CreateSecurityConfiguration)
+
+responseStartWorkflowRun :: StartWorkflowRunResponse -> TestTree
+responseStartWorkflowRun = res
+    "StartWorkflowRunResponse"
+    "fixture/StartWorkflowRunResponse.proto"
+    glue
+    (Proxy :: Proxy StartWorkflowRun)
+
 responseGetJobs :: GetJobsResponse -> TestTree
 responseGetJobs = res
     "GetJobsResponse"
     "fixture/GetJobsResponse.proto"
     glue
     (Proxy :: Proxy GetJobs)
+
+responseBatchGetWorkflows :: BatchGetWorkflowsResponse -> TestTree
+responseBatchGetWorkflows = res
+    "BatchGetWorkflowsResponse"
+    "fixture/BatchGetWorkflowsResponse.proto"
+    glue
+    (Proxy :: Proxy BatchGetWorkflows)
 
 responseGetClassifiers :: GetClassifiersResponse -> TestTree
 responseGetClassifiers = res
@@ -1000,6 +1597,20 @@ responseCreateConnection = res
     "fixture/CreateConnectionResponse.proto"
     glue
     (Proxy :: Proxy CreateConnection)
+
+responseGetWorkflowRunProperties :: GetWorkflowRunPropertiesResponse -> TestTree
+responseGetWorkflowRunProperties = res
+    "GetWorkflowRunPropertiesResponse"
+    "fixture/GetWorkflowRunPropertiesResponse.proto"
+    glue
+    (Proxy :: Proxy GetWorkflowRunProperties)
+
+responseBatchGetDevEndpoints :: BatchGetDevEndpointsResponse -> TestTree
+responseBatchGetDevEndpoints = res
+    "BatchGetDevEndpointsResponse"
+    "fixture/BatchGetDevEndpointsResponse.proto"
+    glue
+    (Proxy :: Proxy BatchGetDevEndpoints)
 
 responseDeleteTableVersion :: DeleteTableVersionResponse -> TestTree
 responseDeleteTableVersion = res
@@ -1022,6 +1633,27 @@ responseUpdateDevEndpoint = res
     glue
     (Proxy :: Proxy UpdateDevEndpoint)
 
+responseGetWorkflow :: GetWorkflowResponse -> TestTree
+responseGetWorkflow = res
+    "GetWorkflowResponse"
+    "fixture/GetWorkflowResponse.proto"
+    glue
+    (Proxy :: Proxy GetWorkflow)
+
+responseBatchGetCrawlers :: BatchGetCrawlersResponse -> TestTree
+responseBatchGetCrawlers = res
+    "BatchGetCrawlersResponse"
+    "fixture/BatchGetCrawlersResponse.proto"
+    glue
+    (Proxy :: Proxy BatchGetCrawlers)
+
+responseGetJobBookmark :: GetJobBookmarkResponse -> TestTree
+responseGetJobBookmark = res
+    "GetJobBookmarkResponse"
+    "fixture/GetJobBookmarkResponse.proto"
+    glue
+    (Proxy :: Proxy GetJobBookmark)
+
 responseDeleteCrawler :: DeleteCrawlerResponse -> TestTree
 responseDeleteCrawler = res
     "DeleteCrawlerResponse"
@@ -1035,6 +1667,20 @@ responseUpdateCrawler = res
     "fixture/UpdateCrawlerResponse.proto"
     glue
     (Proxy :: Proxy UpdateCrawler)
+
+responseStartExportLabelsTaskRun :: StartExportLabelsTaskRunResponse -> TestTree
+responseStartExportLabelsTaskRun = res
+    "StartExportLabelsTaskRunResponse"
+    "fixture/StartExportLabelsTaskRunResponse.proto"
+    glue
+    (Proxy :: Proxy StartExportLabelsTaskRun)
+
+responseGetSecurityConfiguration :: GetSecurityConfigurationResponse -> TestTree
+responseGetSecurityConfiguration = res
+    "GetSecurityConfigurationResponse"
+    "fixture/GetSecurityConfigurationResponse.proto"
+    glue
+    (Proxy :: Proxy GetSecurityConfiguration)
 
 responseGetConnection :: GetConnectionResponse -> TestTree
 responseGetConnection = res
@@ -1064,6 +1710,13 @@ responseUpdateCrawlerSchedule = res
     glue
     (Proxy :: Proxy UpdateCrawlerSchedule)
 
+responseStartMLEvaluationTaskRun :: StartMLEvaluationTaskRunResponse -> TestTree
+responseStartMLEvaluationTaskRun = res
+    "StartMLEvaluationTaskRunResponse"
+    "fixture/StartMLEvaluationTaskRunResponse.proto"
+    glue
+    (Proxy :: Proxy StartMLEvaluationTaskRun)
+
 responseDeleteUserDefinedFunction :: DeleteUserDefinedFunctionResponse -> TestTree
 responseDeleteUserDefinedFunction = res
     "DeleteUserDefinedFunctionResponse"
@@ -1084,6 +1737,13 @@ responseBatchDeleteTable = res
     "fixture/BatchDeleteTableResponse.proto"
     glue
     (Proxy :: Proxy BatchDeleteTable)
+
+responseCancelMLTaskRun :: CancelMLTaskRunResponse -> TestTree
+responseCancelMLTaskRun = res
+    "CancelMLTaskRunResponse"
+    "fixture/CancelMLTaskRunResponse.proto"
+    glue
+    (Proxy :: Proxy CancelMLTaskRun)
 
 responseGetTables :: GetTablesResponse -> TestTree
 responseGetTables = res
@@ -1134,6 +1794,13 @@ responseResetJobBookmark = res
     glue
     (Proxy :: Proxy ResetJobBookmark)
 
+responseListJobs :: ListJobsResponse -> TestTree
+responseListJobs = res
+    "ListJobsResponse"
+    "fixture/ListJobsResponse.proto"
+    glue
+    (Proxy :: Proxy ListJobs)
+
 responseDeleteJob :: DeleteJobResponse -> TestTree
 responseDeleteJob = res
     "DeleteJobResponse"
@@ -1154,6 +1821,13 @@ responseGetCrawlers = res
     "fixture/GetCrawlersResponse.proto"
     glue
     (Proxy :: Proxy GetCrawlers)
+
+responseListTriggers :: ListTriggersResponse -> TestTree
+responseListTriggers = res
+    "ListTriggersResponse"
+    "fixture/ListTriggersResponse.proto"
+    glue
+    (Proxy :: Proxy ListTriggers)
 
 responseGetClassifier :: GetClassifierResponse -> TestTree
 responseGetClassifier = res
@@ -1197,6 +1871,20 @@ responseGetUserDefinedFunction = res
     glue
     (Proxy :: Proxy GetUserDefinedFunction)
 
+responseGetResourcePolicy :: GetResourcePolicyResponse -> TestTree
+responseGetResourcePolicy = res
+    "GetResourcePolicyResponse"
+    "fixture/GetResourcePolicyResponse.proto"
+    glue
+    (Proxy :: Proxy GetResourcePolicy)
+
+responseGetWorkflowRun :: GetWorkflowRunResponse -> TestTree
+responseGetWorkflowRun = res
+    "GetWorkflowRunResponse"
+    "fixture/GetWorkflowRunResponse.proto"
+    glue
+    (Proxy :: Proxy GetWorkflowRun)
+
 responseDeleteDatabase :: DeleteDatabaseResponse -> TestTree
 responseDeleteDatabase = res
     "DeleteDatabaseResponse"
@@ -1218,6 +1906,13 @@ responseStopCrawler = res
     glue
     (Proxy :: Proxy StopCrawler)
 
+responseDeleteSecurityConfiguration :: DeleteSecurityConfigurationResponse -> TestTree
+responseDeleteSecurityConfiguration = res
+    "DeleteSecurityConfigurationResponse"
+    "fixture/DeleteSecurityConfigurationResponse.proto"
+    glue
+    (Proxy :: Proxy DeleteSecurityConfiguration)
+
 responseGetPartitions :: GetPartitionsResponse -> TestTree
 responseGetPartitions = res
     "GetPartitionsResponse"
@@ -1232,12 +1927,26 @@ responseBatchDeletePartition = res
     glue
     (Proxy :: Proxy BatchDeletePartition)
 
+responseStartMLLabelingSetGenerationTaskRun :: StartMLLabelingSetGenerationTaskRunResponse -> TestTree
+responseStartMLLabelingSetGenerationTaskRun = res
+    "StartMLLabelingSetGenerationTaskRunResponse"
+    "fixture/StartMLLabelingSetGenerationTaskRunResponse.proto"
+    glue
+    (Proxy :: Proxy StartMLLabelingSetGenerationTaskRun)
+
 responseGetCrawler :: GetCrawlerResponse -> TestTree
 responseGetCrawler = res
     "GetCrawlerResponse"
     "fixture/GetCrawlerResponse.proto"
     glue
     (Proxy :: Proxy GetCrawler)
+
+responseListWorkflows :: ListWorkflowsResponse -> TestTree
+responseListWorkflows = res
+    "ListWorkflowsResponse"
+    "fixture/ListWorkflowsResponse.proto"
+    glue
+    (Proxy :: Proxy ListWorkflows)
 
 responseBatchStopJobRun :: BatchStopJobRunResponse -> TestTree
 responseBatchStopJobRun = res
@@ -1253,12 +1962,26 @@ responseGetDevEndpoint = res
     glue
     (Proxy :: Proxy GetDevEndpoint)
 
+responsePutWorkflowRunProperties :: PutWorkflowRunPropertiesResponse -> TestTree
+responsePutWorkflowRunProperties = res
+    "PutWorkflowRunPropertiesResponse"
+    "fixture/PutWorkflowRunPropertiesResponse.proto"
+    glue
+    (Proxy :: Proxy PutWorkflowRunProperties)
+
 responseCreateTable :: CreateTableResponse -> TestTree
 responseCreateTable = res
     "CreateTableResponse"
     "fixture/CreateTableResponse.proto"
     glue
     (Proxy :: Proxy CreateTable)
+
+responseListCrawlers :: ListCrawlersResponse -> TestTree
+responseListCrawlers = res
+    "ListCrawlersResponse"
+    "fixture/ListCrawlersResponse.proto"
+    glue
+    (Proxy :: Proxy ListCrawlers)
 
 responseGetCrawlerMetrics :: GetCrawlerMetricsResponse -> TestTree
 responseGetCrawlerMetrics = res
@@ -1280,6 +2003,13 @@ responseGetTriggers = res
     "fixture/GetTriggersResponse.proto"
     glue
     (Proxy :: Proxy GetTriggers)
+
+responseListDevEndpoints :: ListDevEndpointsResponse -> TestTree
+responseListDevEndpoints = res
+    "ListDevEndpointsResponse"
+    "fixture/ListDevEndpointsResponse.proto"
+    glue
+    (Proxy :: Proxy ListDevEndpoints)
 
 responseStartTrigger :: StartTriggerResponse -> TestTree
 responseStartTrigger = res
@@ -1330,12 +2060,47 @@ responseCreateDevEndpoint = res
     glue
     (Proxy :: Proxy CreateDevEndpoint)
 
+responseGetMLTaskRuns :: GetMLTaskRunsResponse -> TestTree
+responseGetMLTaskRuns = res
+    "GetMLTaskRunsResponse"
+    "fixture/GetMLTaskRunsResponse.proto"
+    glue
+    (Proxy :: Proxy GetMLTaskRuns)
+
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    glue
+    (Proxy :: Proxy TagResource)
+
+responsePutDataCatalogEncryptionSettings :: PutDataCatalogEncryptionSettingsResponse -> TestTree
+responsePutDataCatalogEncryptionSettings = res
+    "PutDataCatalogEncryptionSettingsResponse"
+    "fixture/PutDataCatalogEncryptionSettingsResponse.proto"
+    glue
+    (Proxy :: Proxy PutDataCatalogEncryptionSettings)
+
+responseGetMLTransforms :: GetMLTransformsResponse -> TestTree
+responseGetMLTransforms = res
+    "GetMLTransformsResponse"
+    "fixture/GetMLTransformsResponse.proto"
+    glue
+    (Proxy :: Proxy GetMLTransforms)
+
 responseGetDatabase :: GetDatabaseResponse -> TestTree
 responseGetDatabase = res
     "GetDatabaseResponse"
     "fixture/GetDatabaseResponse.proto"
     glue
     (Proxy :: Proxy GetDatabase)
+
+responseGetMLTaskRun :: GetMLTaskRunResponse -> TestTree
+responseGetMLTaskRun = res
+    "GetMLTaskRunResponse"
+    "fixture/GetMLTaskRunResponse.proto"
+    glue
+    (Proxy :: Proxy GetMLTaskRun)
 
 responseDeletePartition :: DeletePartitionResponse -> TestTree
 responseDeletePartition = res
@@ -1351,12 +2116,40 @@ responseUpdatePartition = res
     glue
     (Proxy :: Proxy UpdatePartition)
 
+responseGetMLTransform :: GetMLTransformResponse -> TestTree
+responseGetMLTransform = res
+    "GetMLTransformResponse"
+    "fixture/GetMLTransformResponse.proto"
+    glue
+    (Proxy :: Proxy GetMLTransform)
+
 responseCreateScript :: CreateScriptResponse -> TestTree
 responseCreateScript = res
     "CreateScriptResponse"
     "fixture/CreateScriptResponse.proto"
     glue
     (Proxy :: Proxy CreateScript)
+
+responsePutResourcePolicy :: PutResourcePolicyResponse -> TestTree
+responsePutResourcePolicy = res
+    "PutResourcePolicyResponse"
+    "fixture/PutResourcePolicyResponse.proto"
+    glue
+    (Proxy :: Proxy PutResourcePolicy)
+
+responseGetSecurityConfigurations :: GetSecurityConfigurationsResponse -> TestTree
+responseGetSecurityConfigurations = res
+    "GetSecurityConfigurationsResponse"
+    "fixture/GetSecurityConfigurationsResponse.proto"
+    glue
+    (Proxy :: Proxy GetSecurityConfigurations)
+
+responseDeleteResourcePolicy :: DeleteResourcePolicyResponse -> TestTree
+responseDeleteResourcePolicy = res
+    "DeleteResourcePolicyResponse"
+    "fixture/DeleteResourcePolicyResponse.proto"
+    glue
+    (Proxy :: Proxy DeleteResourcePolicy)
 
 responseGetConnections :: GetConnectionsResponse -> TestTree
 responseGetConnections = res
@@ -1365,12 +2158,33 @@ responseGetConnections = res
     glue
     (Proxy :: Proxy GetConnections)
 
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    glue
+    (Proxy :: Proxy UntagResource)
+
+responseSearchTables :: SearchTablesResponse -> TestTree
+responseSearchTables = res
+    "SearchTablesResponse"
+    "fixture/SearchTablesResponse.proto"
+    glue
+    (Proxy :: Proxy SearchTables)
+
 responseGetTrigger :: GetTriggerResponse -> TestTree
 responseGetTrigger = res
     "GetTriggerResponse"
     "fixture/GetTriggerResponse.proto"
     glue
     (Proxy :: Proxy GetTrigger)
+
+responseBatchGetJobs :: BatchGetJobsResponse -> TestTree
+responseBatchGetJobs = res
+    "BatchGetJobsResponse"
+    "fixture/BatchGetJobsResponse.proto"
+    glue
+    (Proxy :: Proxy BatchGetJobs)
 
 responseImportCatalogToGlue :: ImportCatalogToGlueResponse -> TestTree
 responseImportCatalogToGlue = res
@@ -1407,6 +2221,13 @@ responseCreatePartition = res
     glue
     (Proxy :: Proxy CreatePartition)
 
+responseBatchGetTriggers :: BatchGetTriggersResponse -> TestTree
+responseBatchGetTriggers = res
+    "BatchGetTriggersResponse"
+    "fixture/BatchGetTriggersResponse.proto"
+    glue
+    (Proxy :: Proxy BatchGetTriggers)
+
 responseStopCrawlerSchedule :: StopCrawlerScheduleResponse -> TestTree
 responseStopCrawlerSchedule = res
     "StopCrawlerScheduleResponse"
@@ -1427,6 +2248,13 @@ responseGetTableVersions = res
     "fixture/GetTableVersionsResponse.proto"
     glue
     (Proxy :: Proxy GetTableVersions)
+
+responseCreateMLTransform :: CreateMLTransformResponse -> TestTree
+responseCreateMLTransform = res
+    "CreateMLTransformResponse"
+    "fixture/CreateMLTransformResponse.proto"
+    glue
+    (Proxy :: Proxy CreateMLTransform)
 
 responseDeleteTrigger :: DeleteTriggerResponse -> TestTree
 responseDeleteTrigger = res

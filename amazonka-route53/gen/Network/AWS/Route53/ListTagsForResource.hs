@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists tags for one health check or hosted zone.
+-- Lists tags for one health check or hosted zone. 
 --
 --
--- For information about using tags for cost allocation, see <http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the /AWS Billing and Cost Management User Guide/ .
+-- For information about using tags for cost allocation, see <https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html Using Cost Allocation Tags> in the /AWS Billing and Cost Management User Guide/ .
 --
 module Network.AWS.Route53.ListTagsForResource
     (
@@ -52,11 +52,10 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'listTagsForResource' smart constructor.
-data ListTagsForResource = ListTagsForResource'
-  { _ltfrResourceType :: !TagResourceType
-  , _ltfrResourceId   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForResource = ListTagsForResource'{_ltfrResourceType
+                                                :: !TagResourceType,
+                                                _ltfrResourceId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListTagsForResource' with the minimum fields required to make a request.
 --
@@ -69,10 +68,10 @@ listTagsForResource
     :: TagResourceType -- ^ 'ltfrResourceType'
     -> Text -- ^ 'ltfrResourceId'
     -> ListTagsForResource
-listTagsForResource pResourceType_ pResourceId_ =
-  ListTagsForResource'
-    {_ltfrResourceType = pResourceType_, _ltfrResourceId = pResourceId_}
-
+listTagsForResource pResourceType_ pResourceId_
+  = ListTagsForResource'{_ltfrResourceType =
+                           pResourceType_,
+                         _ltfrResourceId = pResourceId_}
 
 -- | The type of the resource.     * The resource type for health checks is @healthcheck@ .     * The resource type for hosted zones is @hostedzone@ .
 ltfrResourceType :: Lens' ListTagsForResource TagResourceType
@@ -113,11 +112,13 @@ instance ToQuery ListTagsForResource where
 --
 --
 -- /See:/ 'listTagsForResourceResponse' smart constructor.
-data ListTagsForResourceResponse = ListTagsForResourceResponse'
-  { _ltfrrsResponseStatus :: !Int
-  , _ltfrrsResourceTagSet :: !ResourceTagSet
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListTagsForResourceResponse = ListTagsForResourceResponse'{_ltfrrsResponseStatus
+                                                                :: !Int,
+                                                                _ltfrrsResourceTagSet
+                                                                ::
+                                                                !ResourceTagSet}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ListTagsForResourceResponse' with the minimum fields required to make a request.
 --
@@ -130,12 +131,11 @@ listTagsForResourceResponse
     :: Int -- ^ 'ltfrrsResponseStatus'
     -> ResourceTagSet -- ^ 'ltfrrsResourceTagSet'
     -> ListTagsForResourceResponse
-listTagsForResourceResponse pResponseStatus_ pResourceTagSet_ =
-  ListTagsForResourceResponse'
-    { _ltfrrsResponseStatus = pResponseStatus_
-    , _ltfrrsResourceTagSet = pResourceTagSet_
-    }
-
+listTagsForResourceResponse pResponseStatus_
+  pResourceTagSet_
+  = ListTagsForResourceResponse'{_ltfrrsResponseStatus
+                                   = pResponseStatus_,
+                                 _ltfrrsResourceTagSet = pResourceTagSet_}
 
 -- | -- | The response status code.
 ltfrrsResponseStatus :: Lens' ListTagsForResourceResponse Int

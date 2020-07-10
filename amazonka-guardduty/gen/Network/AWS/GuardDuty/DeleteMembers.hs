@@ -19,21 +19,23 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+--
+--
 module Network.AWS.GuardDuty.DeleteMembers
     (
     -- * Creating a Request
       deleteMembers
     , DeleteMembers
     -- * Request Lenses
-    , dmAccountIds
     , dmDetectorId
+    , dmAccountIds
 
     -- * Destructuring the Response
     , deleteMembersResponse
     , DeleteMembersResponse
     -- * Response Lenses
-    , drsUnprocessedAccounts
     , drsResponseStatus
+    , drsUnprocessedAccounts
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -43,36 +45,34 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | DeleteMembers request body.
---
--- /See:/ 'deleteMembers' smart constructor.
-data DeleteMembers = DeleteMembers'
-  { _dmAccountIds :: !(Maybe [Text])
-  , _dmDetectorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'deleteMembers' smart constructor.
+data DeleteMembers = DeleteMembers'{_dmDetectorId ::
+                                    !Text,
+                                    _dmAccountIds :: !(List1 Text)}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteMembers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmAccountIds' - A list of account IDs of the GuardDuty member accounts that you want to delete.
---
 -- * 'dmDetectorId' - The unique ID of the detector of the GuardDuty account whose members you want to delete.
+--
+-- * 'dmAccountIds' - A list of account IDs of the GuardDuty member accounts that you want to delete.
 deleteMembers
     :: Text -- ^ 'dmDetectorId'
+    -> NonEmpty Text -- ^ 'dmAccountIds'
     -> DeleteMembers
-deleteMembers pDetectorId_ =
-  DeleteMembers' {_dmAccountIds = Nothing, _dmDetectorId = pDetectorId_}
-
-
--- | A list of account IDs of the GuardDuty member accounts that you want to delete.
-dmAccountIds :: Lens' DeleteMembers [Text]
-dmAccountIds = lens _dmAccountIds (\ s a -> s{_dmAccountIds = a}) . _Default . _Coerce
+deleteMembers pDetectorId_ pAccountIds_
+  = DeleteMembers'{_dmDetectorId = pDetectorId_,
+                   _dmAccountIds = _List1 # pAccountIds_}
 
 -- | The unique ID of the detector of the GuardDuty account whose members you want to delete.
 dmDetectorId :: Lens' DeleteMembers Text
 dmDetectorId = lens _dmDetectorId (\ s a -> s{_dmDetectorId = a})
+
+-- | A list of account IDs of the GuardDuty member accounts that you want to delete.
+dmAccountIds :: Lens' DeleteMembers (NonEmpty Text)
+dmAccountIds = lens _dmAccountIds (\ s a -> s{_dmAccountIds = a}) . _List1
 
 instance AWSRequest DeleteMembers where
         type Rs DeleteMembers = DeleteMembersResponse
@@ -81,8 +81,8 @@ instance AWSRequest DeleteMembers where
           = receiveJSON
               (\ s h x ->
                  DeleteMembersResponse' <$>
-                   (x .?> "unprocessedAccounts" .!@ mempty) <*>
-                     (pure (fromEnum s)))
+                   (pure (fromEnum s)) <*>
+                     (x .?> "unprocessedAccounts" .!@ mempty))
 
 instance Hashable DeleteMembers where
 
@@ -98,7 +98,7 @@ instance ToHeaders DeleteMembers where
 instance ToJSON DeleteMembers where
         toJSON DeleteMembers'{..}
           = object
-              (catMaybes [("accountIds" .=) <$> _dmAccountIds])
+              (catMaybes [Just ("accountIds" .= _dmAccountIds)])
 
 instance ToPath DeleteMembers where
         toPath DeleteMembers'{..}
@@ -109,33 +109,34 @@ instance ToQuery DeleteMembers where
         toQuery = const mempty
 
 -- | /See:/ 'deleteMembersResponse' smart constructor.
-data DeleteMembersResponse = DeleteMembersResponse'
-  { _drsUnprocessedAccounts :: !(Maybe [UnprocessedAccount])
-  , _drsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteMembersResponse = DeleteMembersResponse'{_drsResponseStatus
+                                                    :: !Int,
+                                                    _drsUnprocessedAccounts ::
+                                                    ![UnprocessedAccount]}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteMembersResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drsUnprocessedAccounts' - A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
---
 -- * 'drsResponseStatus' - -- | The response status code.
+--
+-- * 'drsUnprocessedAccounts' - The accounts that could not be processed.
 deleteMembersResponse
     :: Int -- ^ 'drsResponseStatus'
     -> DeleteMembersResponse
-deleteMembersResponse pResponseStatus_ =
-  DeleteMembersResponse'
-    {_drsUnprocessedAccounts = Nothing, _drsResponseStatus = pResponseStatus_}
-
-
--- | A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
-drsUnprocessedAccounts :: Lens' DeleteMembersResponse [UnprocessedAccount]
-drsUnprocessedAccounts = lens _drsUnprocessedAccounts (\ s a -> s{_drsUnprocessedAccounts = a}) . _Default . _Coerce
+deleteMembersResponse pResponseStatus_
+  = DeleteMembersResponse'{_drsResponseStatus =
+                             pResponseStatus_,
+                           _drsUnprocessedAccounts = mempty}
 
 -- | -- | The response status code.
 drsResponseStatus :: Lens' DeleteMembersResponse Int
 drsResponseStatus = lens _drsResponseStatus (\ s a -> s{_drsResponseStatus = a})
+
+-- | The accounts that could not be processed.
+drsUnprocessedAccounts :: Lens' DeleteMembersResponse [UnprocessedAccount]
+drsUnprocessedAccounts = lens _drsUnprocessedAccounts (\ s a -> s{_drsUnprocessedAccounts = a}) . _Coerce
 
 instance NFData DeleteMembersResponse where

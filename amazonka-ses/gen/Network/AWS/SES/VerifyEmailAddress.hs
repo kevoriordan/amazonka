@@ -41,15 +41,15 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html Amazon SES Developer Guide> .
+-- | Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'verifyEmailAddress' smart constructor.
-newtype VerifyEmailAddress = VerifyEmailAddress'
-  { _veaEmailAddress :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype VerifyEmailAddress = VerifyEmailAddress'{_veaEmailAddress
+                                                 :: Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'VerifyEmailAddress' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype VerifyEmailAddress = VerifyEmailAddress'
 verifyEmailAddress
     :: Text -- ^ 'veaEmailAddress'
     -> VerifyEmailAddress
-verifyEmailAddress pEmailAddress_ =
-  VerifyEmailAddress' {_veaEmailAddress = pEmailAddress_}
-
+verifyEmailAddress pEmailAddress_
+  = VerifyEmailAddress'{_veaEmailAddress =
+                          pEmailAddress_}
 
 -- | The email address to be verified.
 veaEmailAddress :: Lens' VerifyEmailAddress Text
@@ -91,16 +91,15 @@ instance ToQuery VerifyEmailAddress where
                "EmailAddress" =: _veaEmailAddress]
 
 -- | /See:/ 'verifyEmailAddressResponse' smart constructor.
-data VerifyEmailAddressResponse =
-  VerifyEmailAddressResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data VerifyEmailAddressResponse = VerifyEmailAddressResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'VerifyEmailAddressResponse' with the minimum fields required to make a request.
 --
 verifyEmailAddressResponse
     :: VerifyEmailAddressResponse
-verifyEmailAddressResponse = VerifyEmailAddressResponse'
-
+verifyEmailAddressResponse
+  = VerifyEmailAddressResponse'
 
 instance NFData VerifyEmailAddressResponse where

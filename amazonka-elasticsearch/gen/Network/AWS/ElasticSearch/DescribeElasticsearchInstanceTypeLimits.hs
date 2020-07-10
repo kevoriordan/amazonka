@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the @'DomainName' @ to know what Limits are supported for modifying.
+-- Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the @'DomainName' @ to know what Limits are supported for modifying. 
 --
 --
 module Network.AWS.ElasticSearch.DescribeElasticsearchInstanceTypeLimits
@@ -46,48 +46,55 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to @'DescribeElasticsearchInstanceTypeLimits' @ operation.
+-- | Container for the parameters to @'DescribeElasticsearchInstanceTypeLimits' @ operation. 
 --
 --
 --
 -- /See:/ 'describeElasticsearchInstanceTypeLimits' smart constructor.
-data DescribeElasticsearchInstanceTypeLimits = DescribeElasticsearchInstanceTypeLimits'
-  { _deitlDomainName           :: !(Maybe Text)
-  , _deitlInstanceType         :: !ESPartitionInstanceType
-  , _deitlElasticsearchVersion :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticsearchInstanceTypeLimits = DescribeElasticsearchInstanceTypeLimits'{_deitlDomainName
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            Text),
+                                                                                        _deitlInstanceType
+                                                                                        ::
+                                                                                        !ESPartitionInstanceType,
+                                                                                        _deitlElasticsearchVersion
+                                                                                        ::
+                                                                                        !Text}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DescribeElasticsearchInstanceTypeLimits' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'deitlDomainName' - DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for Elasticsearch @'Limits' @ for existing domain.
+-- * 'deitlDomainName' - DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for Elasticsearch @'Limits' @ for existing domain. 
 --
--- * 'deitlInstanceType' - The instance type for an Elasticsearch cluster for which Elasticsearch @'Limits' @ are needed.
+-- * 'deitlInstanceType' - The instance type for an Elasticsearch cluster for which Elasticsearch @'Limits' @ are needed. 
 --
--- * 'deitlElasticsearchVersion' - Version of Elasticsearch for which @'Limits' @ are needed.
+-- * 'deitlElasticsearchVersion' - Version of Elasticsearch for which @'Limits' @ are needed. 
 describeElasticsearchInstanceTypeLimits
     :: ESPartitionInstanceType -- ^ 'deitlInstanceType'
     -> Text -- ^ 'deitlElasticsearchVersion'
     -> DescribeElasticsearchInstanceTypeLimits
-describeElasticsearchInstanceTypeLimits pInstanceType_ pElasticsearchVersion_ =
-  DescribeElasticsearchInstanceTypeLimits'
-    { _deitlDomainName = Nothing
-    , _deitlInstanceType = pInstanceType_
-    , _deitlElasticsearchVersion = pElasticsearchVersion_
-    }
+describeElasticsearchInstanceTypeLimits
+  pInstanceType_ pElasticsearchVersion_
+  = DescribeElasticsearchInstanceTypeLimits'{_deitlDomainName
+                                               = Nothing,
+                                             _deitlInstanceType =
+                                               pInstanceType_,
+                                             _deitlElasticsearchVersion =
+                                               pElasticsearchVersion_}
 
-
--- | DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for Elasticsearch @'Limits' @ for existing domain.
+-- | DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are querying for Elasticsearch @'Limits' @ for existing domain. 
 deitlDomainName :: Lens' DescribeElasticsearchInstanceTypeLimits (Maybe Text)
 deitlDomainName = lens _deitlDomainName (\ s a -> s{_deitlDomainName = a})
 
--- | The instance type for an Elasticsearch cluster for which Elasticsearch @'Limits' @ are needed.
+-- | The instance type for an Elasticsearch cluster for which Elasticsearch @'Limits' @ are needed. 
 deitlInstanceType :: Lens' DescribeElasticsearchInstanceTypeLimits ESPartitionInstanceType
 deitlInstanceType = lens _deitlInstanceType (\ s a -> s{_deitlInstanceType = a})
 
--- | Version of Elasticsearch for which @'Limits' @ are needed.
+-- | Version of Elasticsearch for which @'Limits' @ are needed. 
 deitlElasticsearchVersion :: Lens' DescribeElasticsearchInstanceTypeLimits Text
 deitlElasticsearchVersion = lens _deitlElasticsearchVersion (\ s a -> s{_deitlElasticsearchVersion = a})
 
@@ -132,16 +139,24 @@ instance ToQuery
         toQuery DescribeElasticsearchInstanceTypeLimits'{..}
           = mconcat ["domainName" =: _deitlDomainName]
 
--- | Container for the parameters received from @'DescribeElasticsearchInstanceTypeLimits' @ operation.
+-- | Container for the parameters received from @'DescribeElasticsearchInstanceTypeLimits' @ operation. 
 --
 --
 --
 -- /See:/ 'describeElasticsearchInstanceTypeLimitsResponse' smart constructor.
-data DescribeElasticsearchInstanceTypeLimitsResponse = DescribeElasticsearchInstanceTypeLimitsResponse'
-  { _deitlrsLimitsByRole   :: !(Maybe (Map Text Limits))
-  , _deitlrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeElasticsearchInstanceTypeLimitsResponse = DescribeElasticsearchInstanceTypeLimitsResponse'{_deitlrsLimitsByRole
+                                                                                                        ::
+                                                                                                        !(Maybe
+                                                                                                            (Map
+                                                                                                               Text
+                                                                                                               Limits)),
+                                                                                                        _deitlrsResponseStatus
+                                                                                                        ::
+                                                                                                        !Int}
+                                                         deriving (Eq, Read,
+                                                                   Show, Data,
+                                                                   Typeable,
+                                                                   Generic)
 
 -- | Creates a value of 'DescribeElasticsearchInstanceTypeLimitsResponse' with the minimum fields required to make a request.
 --
@@ -153,10 +168,12 @@ data DescribeElasticsearchInstanceTypeLimitsResponse = DescribeElasticsearchInst
 describeElasticsearchInstanceTypeLimitsResponse
     :: Int -- ^ 'deitlrsResponseStatus'
     -> DescribeElasticsearchInstanceTypeLimitsResponse
-describeElasticsearchInstanceTypeLimitsResponse pResponseStatus_ =
-  DescribeElasticsearchInstanceTypeLimitsResponse'
-    {_deitlrsLimitsByRole = Nothing, _deitlrsResponseStatus = pResponseStatus_}
-
+describeElasticsearchInstanceTypeLimitsResponse
+  pResponseStatus_
+  = DescribeElasticsearchInstanceTypeLimitsResponse'{_deitlrsLimitsByRole
+                                                       = Nothing,
+                                                     _deitlrsResponseStatus =
+                                                       pResponseStatus_}
 
 -- | Undocumented member.
 deitlrsLimitsByRole :: Lens' DescribeElasticsearchInstanceTypeLimitsResponse (HashMap Text Limits)

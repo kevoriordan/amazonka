@@ -21,17 +21,17 @@
 -- Creates a backup for an existing table.
 --
 --
--- Each time you create an On-Demand Backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.
+-- Each time you create an on-demand backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken. 
 --
--- When you create an On-Demand Backup, a time marker of the request is cataloged, and the backup is created asynchronously, by applying all changes until the time of the request to the last full table snapshot. Backup requests are processed instantaneously and become available for restore within minutes.
+-- When you create an on-demand backup, a time marker of the request is cataloged, and the backup is created asynchronously, by applying all changes until the time of the request to the last full table snapshot. Backup requests are processed instantaneously and become available for restore within minutes. 
 --
 -- You can call @CreateBackup@ at a maximum rate of 50 times per second.
 --
 -- All backups in DynamoDB work without consuming any provisioned throughput on the table.
 --
--- If you submit a backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup may or may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal consistency.
+-- If you submit a backup request on 2018-12-14 at 14:25:00, the backup is guaranteed to contain all data committed to the table up to 14:24:00, and data committed after 14:26:00 will not be. The backup might contain data modifications made between 14:24:00 and 14:26:00. On-demand backup does not support causal consistency. 
 --
--- Along with data, the following are also included on the backups:
+-- Along with data, the following are also included on the backups: 
 --
 --     * Global secondary indexes (GSIs)
 --
@@ -68,11 +68,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createBackup' smart constructor.
-data CreateBackup = CreateBackup'
-  { _cbTableName  :: !Text
-  , _cbBackupName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBackup = CreateBackup'{_cbTableName ::
+                                  !Text,
+                                  _cbBackupName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBackup' with the minimum fields required to make a request.
 --
@@ -85,9 +84,9 @@ createBackup
     :: Text -- ^ 'cbTableName'
     -> Text -- ^ 'cbBackupName'
     -> CreateBackup
-createBackup pTableName_ pBackupName_ =
-  CreateBackup' {_cbTableName = pTableName_, _cbBackupName = pBackupName_}
-
+createBackup pTableName_ pBackupName_
+  = CreateBackup'{_cbTableName = pTableName_,
+                  _cbBackupName = pBackupName_}
 
 -- | The name of the table.
 cbTableName :: Lens' CreateBackup Text
@@ -133,11 +132,10 @@ instance ToQuery CreateBackup where
         toQuery = const mempty
 
 -- | /See:/ 'createBackupResponse' smart constructor.
-data CreateBackupResponse = CreateBackupResponse'
-  { _cbrsBackupDetails  :: !(Maybe BackupDetails)
-  , _cbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBackupResponse = CreateBackupResponse'{_cbrsBackupDetails
+                                                  :: !(Maybe BackupDetails),
+                                                  _cbrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBackupResponse' with the minimum fields required to make a request.
 --
@@ -149,10 +147,9 @@ data CreateBackupResponse = CreateBackupResponse'
 createBackupResponse
     :: Int -- ^ 'cbrsResponseStatus'
     -> CreateBackupResponse
-createBackupResponse pResponseStatus_ =
-  CreateBackupResponse'
-    {_cbrsBackupDetails = Nothing, _cbrsResponseStatus = pResponseStatus_}
-
+createBackupResponse pResponseStatus_
+  = CreateBackupResponse'{_cbrsBackupDetails = Nothing,
+                          _cbrsResponseStatus = pResponseStatus_}
 
 -- | Contains the details of the backup created for the table.
 cbrsBackupDetails :: Lens' CreateBackupResponse (Maybe BackupDetails)

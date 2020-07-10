@@ -45,24 +45,24 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeCertificate' smart constructor.
-newtype DescribeCertificate = DescribeCertificate'
-  { _dCertificateARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeCertificate = DescribeCertificate'{_dCertificateARN
+                                                   :: Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeCertificate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dCertificateARN' - The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form: @arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012@  For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
+-- * 'dCertificateARN' - The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form: @arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012@  For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
 describeCertificate
     :: Text -- ^ 'dCertificateARN'
     -> DescribeCertificate
-describeCertificate pCertificateARN_ =
-  DescribeCertificate' {_dCertificateARN = pCertificateARN_}
+describeCertificate pCertificateARN_
+  = DescribeCertificate'{_dCertificateARN =
+                           pCertificateARN_}
 
-
--- | The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form: @arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012@  For more information about ARNs, see <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
+-- | The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have the following form: @arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012@  For more information about ARNs, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
 dCertificateARN :: Lens' DescribeCertificate Text
 dCertificateARN = lens _dCertificateARN (\ s a -> s{_dCertificateARN = a})
 
@@ -103,11 +103,14 @@ instance ToQuery DescribeCertificate where
         toQuery = const mempty
 
 -- | /See:/ 'describeCertificateResponse' smart constructor.
-data DescribeCertificateResponse = DescribeCertificateResponse'
-  { _dcrsCertificate    :: !(Maybe CertificateDetail)
-  , _dcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeCertificateResponse = DescribeCertificateResponse'{_dcrsCertificate
+                                                                ::
+                                                                !(Maybe
+                                                                    CertificateDetail),
+                                                                _dcrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeCertificateResponse' with the minimum fields required to make a request.
 --
@@ -119,10 +122,10 @@ data DescribeCertificateResponse = DescribeCertificateResponse'
 describeCertificateResponse
     :: Int -- ^ 'dcrsResponseStatus'
     -> DescribeCertificateResponse
-describeCertificateResponse pResponseStatus_ =
-  DescribeCertificateResponse'
-    {_dcrsCertificate = Nothing, _dcrsResponseStatus = pResponseStatus_}
-
+describeCertificateResponse pResponseStatus_
+  = DescribeCertificateResponse'{_dcrsCertificate =
+                                   Nothing,
+                                 _dcrsResponseStatus = pResponseStatus_}
 
 -- | Metadata about an ACM certificate.
 dcrsCertificate :: Lens' DescribeCertificateResponse (Maybe CertificateDetail)

@@ -53,19 +53,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'searchProfiles' smart constructor.
-data SearchProfiles = SearchProfiles'
-  { _spFilters      :: !(Maybe [Filter])
-  , _spSortCriteria :: !(Maybe [Sort])
-  , _spNextToken    :: !(Maybe Text)
-  , _spMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProfiles = SearchProfiles'{_spFilters ::
+                                      !(Maybe [Filter]),
+                                      _spSortCriteria :: !(Maybe [Sort]),
+                                      _spNextToken :: !(Maybe Text),
+                                      _spMaxResults :: !(Maybe Nat)}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchProfiles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'spFilters' - The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required.
+-- * 'spFilters' - The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required. 
 --
 -- * 'spSortCriteria' - The sort order to use in listing the specified set of room profiles. Supported sort keys are ProfileName and Address.
 --
@@ -74,16 +73,12 @@ data SearchProfiles = SearchProfiles'
 -- * 'spMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved.
 searchProfiles
     :: SearchProfiles
-searchProfiles =
-  SearchProfiles'
-    { _spFilters = Nothing
-    , _spSortCriteria = Nothing
-    , _spNextToken = Nothing
-    , _spMaxResults = Nothing
-    }
+searchProfiles
+  = SearchProfiles'{_spFilters = Nothing,
+                    _spSortCriteria = Nothing, _spNextToken = Nothing,
+                    _spMaxResults = Nothing}
 
-
--- | The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required.
+-- | The filters to use to list a specified set of room profiles. Supported filter keys are ProfileName and Address. Required. 
 spFilters :: Lens' SearchProfiles [Filter]
 spFilters = lens _spFilters (\ s a -> s{_spFilters = a}) . _Default . _Coerce
 
@@ -146,13 +141,16 @@ instance ToQuery SearchProfiles where
         toQuery = const mempty
 
 -- | /See:/ 'searchProfilesResponse' smart constructor.
-data SearchProfilesResponse = SearchProfilesResponse'
-  { _sprsProfiles       :: !(Maybe [ProfileData])
-  , _sprsNextToken      :: !(Maybe Text)
-  , _sprsTotalCount     :: !(Maybe Int)
-  , _sprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchProfilesResponse = SearchProfilesResponse'{_sprsProfiles
+                                                      :: !(Maybe [ProfileData]),
+                                                      _sprsNextToken ::
+                                                      !(Maybe Text),
+                                                      _sprsTotalCount ::
+                                                      !(Maybe Int),
+                                                      _sprsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'SearchProfilesResponse' with the minimum fields required to make a request.
 --
@@ -168,14 +166,10 @@ data SearchProfilesResponse = SearchProfilesResponse'
 searchProfilesResponse
     :: Int -- ^ 'sprsResponseStatus'
     -> SearchProfilesResponse
-searchProfilesResponse pResponseStatus_ =
-  SearchProfilesResponse'
-    { _sprsProfiles = Nothing
-    , _sprsNextToken = Nothing
-    , _sprsTotalCount = Nothing
-    , _sprsResponseStatus = pResponseStatus_
-    }
-
+searchProfilesResponse pResponseStatus_
+  = SearchProfilesResponse'{_sprsProfiles = Nothing,
+                            _sprsNextToken = Nothing, _sprsTotalCount = Nothing,
+                            _sprsResponseStatus = pResponseStatus_}
 
 -- | The profiles that meet the specified set of filter criteria, in sort order.
 sprsProfiles :: Lens' SearchProfilesResponse [ProfileData]

@@ -59,12 +59,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'transferCertificate' smart constructor.
-data TransferCertificate = TransferCertificate'
-  { _tcTransferMessage  :: !(Maybe Text)
-  , _tcCertificateId    :: !Text
-  , _tcTargetAWSAccount :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TransferCertificate = TransferCertificate'{_tcTransferMessage
+                                                :: !(Maybe Text),
+                                                _tcCertificateId :: !Text,
+                                                _tcTargetAWSAccount :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TransferCertificate' with the minimum fields required to make a request.
 --
@@ -79,13 +78,11 @@ transferCertificate
     :: Text -- ^ 'tcCertificateId'
     -> Text -- ^ 'tcTargetAWSAccount'
     -> TransferCertificate
-transferCertificate pCertificateId_ pTargetAWSAccount_ =
-  TransferCertificate'
-    { _tcTransferMessage = Nothing
-    , _tcCertificateId = pCertificateId_
-    , _tcTargetAWSAccount = pTargetAWSAccount_
-    }
-
+transferCertificate pCertificateId_
+  pTargetAWSAccount_
+  = TransferCertificate'{_tcTransferMessage = Nothing,
+                         _tcCertificateId = pCertificateId_,
+                         _tcTargetAWSAccount = pTargetAWSAccount_}
 
 -- | The transfer message.
 tcTransferMessage :: Lens' TransferCertificate (Maybe Text)
@@ -137,11 +134,13 @@ instance ToQuery TransferCertificate where
 --
 --
 -- /See:/ 'transferCertificateResponse' smart constructor.
-data TransferCertificateResponse = TransferCertificateResponse'
-  { _tcrsTransferredCertificateARN :: !(Maybe Text)
-  , _tcrsResponseStatus            :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TransferCertificateResponse = TransferCertificateResponse'{_tcrsTransferredCertificateARN
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _tcrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'TransferCertificateResponse' with the minimum fields required to make a request.
 --
@@ -153,12 +152,10 @@ data TransferCertificateResponse = TransferCertificateResponse'
 transferCertificateResponse
     :: Int -- ^ 'tcrsResponseStatus'
     -> TransferCertificateResponse
-transferCertificateResponse pResponseStatus_ =
-  TransferCertificateResponse'
-    { _tcrsTransferredCertificateARN = Nothing
-    , _tcrsResponseStatus = pResponseStatus_
-    }
-
+transferCertificateResponse pResponseStatus_
+  = TransferCertificateResponse'{_tcrsTransferredCertificateARN
+                                   = Nothing,
+                                 _tcrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the certificate.
 tcrsTransferredCertificateARN :: Lens' TransferCertificateResponse (Maybe Text)

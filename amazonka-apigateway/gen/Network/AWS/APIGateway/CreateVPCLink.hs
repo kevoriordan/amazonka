@@ -28,6 +28,7 @@ module Network.AWS.APIGateway.CreateVPCLink
     , CreateVPCLink
     -- * Request Lenses
     , cvlDescription
+    , cvlTags
     , cvlName
     , cvlTargetARNs
 
@@ -41,6 +42,7 @@ module Network.AWS.APIGateway.CreateVPCLink
     , vlStatusMessage
     , vlId
     , vlDescription
+    , vlTags
     ) where
 
 import Network.AWS.APIGateway.Types
@@ -55,12 +57,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createVPCLink' smart constructor.
-data CreateVPCLink = CreateVPCLink'
-  { _cvlDescription :: !(Maybe Text)
-  , _cvlName        :: !Text
-  , _cvlTargetARNs  :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateVPCLink = CreateVPCLink'{_cvlDescription
+                                    :: !(Maybe Text),
+                                    _cvlTags :: !(Maybe (Map Text Text)),
+                                    _cvlName :: !Text,
+                                    _cvlTargetARNs :: ![Text]}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateVPCLink' with the minimum fields required to make a request.
 --
@@ -68,26 +70,32 @@ data CreateVPCLink = CreateVPCLink'
 --
 -- * 'cvlDescription' - The description of the VPC link.
 --
+-- * 'cvlTags' - The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with @aws:@ . The tag value can be up to 256 characters.
+--
 -- * 'cvlName' - [Required] The name used to label and identify the VPC link.
 --
--- * 'cvlTargetARNs' - [Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
+-- * 'cvlTargetARNs' - [Required] The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
 createVPCLink
     :: Text -- ^ 'cvlName'
     -> CreateVPCLink
-createVPCLink pName_ =
-  CreateVPCLink'
-    {_cvlDescription = Nothing, _cvlName = pName_, _cvlTargetARNs = mempty}
-
+createVPCLink pName_
+  = CreateVPCLink'{_cvlDescription = Nothing,
+                   _cvlTags = Nothing, _cvlName = pName_,
+                   _cvlTargetARNs = mempty}
 
 -- | The description of the VPC link.
 cvlDescription :: Lens' CreateVPCLink (Maybe Text)
 cvlDescription = lens _cvlDescription (\ s a -> s{_cvlDescription = a})
 
+-- | The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with @aws:@ . The tag value can be up to 256 characters.
+cvlTags :: Lens' CreateVPCLink (HashMap Text Text)
+cvlTags = lens _cvlTags (\ s a -> s{_cvlTags = a}) . _Default . _Map
+
 -- | [Required] The name used to label and identify the VPC link.
 cvlName :: Lens' CreateVPCLink Text
 cvlName = lens _cvlName (\ s a -> s{_cvlName = a})
 
--- | [Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
+-- | [Required] The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
 cvlTargetARNs :: Lens' CreateVPCLink [Text]
 cvlTargetARNs = lens _cvlTargetARNs (\ s a -> s{_cvlTargetARNs = a}) . _Coerce
 
@@ -111,7 +119,7 @@ instance ToJSON CreateVPCLink where
           = object
               (catMaybes
                  [("description" .=) <$> _cvlDescription,
-                  Just ("name" .= _cvlName),
+                  ("tags" .=) <$> _cvlTags, Just ("name" .= _cvlName),
                   Just ("targetArns" .= _cvlTargetARNs)])
 
 instance ToPath CreateVPCLink where

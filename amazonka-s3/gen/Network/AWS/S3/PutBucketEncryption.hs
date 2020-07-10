@@ -18,7 +18,23 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new server-side encryption configuration (or replaces an existing one, if present).
+-- This implementation of the @PUT@ operation uses the @encryption@ subresource to set the default encryption state of an existing bucket.
+--
+--
+-- This implementation of the @PUT@ operation sets default encryption for a bucket using server-side encryption with Amazon S3-managed keys SSE-S3 or AWS KMS customer master keys (CMKs) (SSE-KMS).
+--
+-- /Important:/ This operation requires AWS Signature Version 4. For more information, see <sig-v4-authenticating-requests.html Authenticating Requests (AWS Signature Version 4)> . 
+--
+-- To use this operation, you must have permissions to perform the @s3:PutEncryptionConfiguration@ action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources> in the Amazon Simple Storage Service Developer Guide. 
+--
+-- __Related Resources__ 
+--
+--     * 'GetBucketEncryption' 
+--
+--     * 'DeleteBucketEncryption' 
+--
+--
+--
 module Network.AWS.S3.PutBucketEncryption
     (
     -- * Creating a Request
@@ -42,40 +58,39 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'putBucketEncryption' smart constructor.
-data PutBucketEncryption = PutBucketEncryption'
-  { _pbeContentMD5                        :: !(Maybe Text)
-  , _pbeBucket                            :: !BucketName
-  , _pbeServerSideEncryptionConfiguration :: !ServerSideEncryptionConfiguration
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data PutBucketEncryption = PutBucketEncryption'{_pbeContentMD5
+                                                :: !(Maybe Text),
+                                                _pbeBucket :: !BucketName,
+                                                _pbeServerSideEncryptionConfiguration
+                                                ::
+                                                !ServerSideEncryptionConfiguration}
+                             deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutBucketEncryption' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pbeContentMD5' - The base64-encoded 128-bit MD5 digest of the server-side encryption configuration.
+-- * 'pbeContentMD5' - The base64-encoded 128-bit MD5 digest of the server-side encryption configuration. This parameter is auto-populated when using the command from the CLI.
 --
--- * 'pbeBucket' - The name of the bucket for which the server-side encryption configuration is set.
+-- * 'pbeBucket' - Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3) or customer master keys stored in AWS KMS (SSE-KMS). For information about the Amazon S3 default encryption feature, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html Amazon S3 Default Bucket Encryption> in the /Amazon Simple Storage Service Developer Guide/ .
 --
 -- * 'pbeServerSideEncryptionConfiguration' - Undocumented member.
 putBucketEncryption
     :: BucketName -- ^ 'pbeBucket'
     -> ServerSideEncryptionConfiguration -- ^ 'pbeServerSideEncryptionConfiguration'
     -> PutBucketEncryption
-putBucketEncryption pBucket_ pServerSideEncryptionConfiguration_ =
-  PutBucketEncryption'
-    { _pbeContentMD5 = Nothing
-    , _pbeBucket = pBucket_
-    , _pbeServerSideEncryptionConfiguration =
-        pServerSideEncryptionConfiguration_
-    }
+putBucketEncryption pBucket_
+  pServerSideEncryptionConfiguration_
+  = PutBucketEncryption'{_pbeContentMD5 = Nothing,
+                         _pbeBucket = pBucket_,
+                         _pbeServerSideEncryptionConfiguration =
+                           pServerSideEncryptionConfiguration_}
 
-
--- | The base64-encoded 128-bit MD5 digest of the server-side encryption configuration.
+-- | The base64-encoded 128-bit MD5 digest of the server-side encryption configuration. This parameter is auto-populated when using the command from the CLI.
 pbeContentMD5 :: Lens' PutBucketEncryption (Maybe Text)
 pbeContentMD5 = lens _pbeContentMD5 (\ s a -> s{_pbeContentMD5 = a})
 
--- | The name of the bucket for which the server-side encryption configuration is set.
+-- | Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3) or customer master keys stored in AWS KMS (SSE-KMS). For information about the Amazon S3 default encryption feature, see <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html Amazon S3 Default Bucket Encryption> in the /Amazon Simple Storage Service Developer Guide/ .
 pbeBucket :: Lens' PutBucketEncryption BucketName
 pbeBucket = lens _pbeBucket (\ s a -> s{_pbeBucket = a})
 
@@ -112,16 +127,15 @@ instance ToQuery PutBucketEncryption where
         toQuery = const (mconcat ["encryption"])
 
 -- | /See:/ 'putBucketEncryptionResponse' smart constructor.
-data PutBucketEncryptionResponse =
-  PutBucketEncryptionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutBucketEncryptionResponse = PutBucketEncryptionResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'PutBucketEncryptionResponse' with the minimum fields required to make a request.
 --
 putBucketEncryptionResponse
     :: PutBucketEncryptionResponse
-putBucketEncryptionResponse = PutBucketEncryptionResponse'
-
+putBucketEncryptionResponse
+  = PutBucketEncryptionResponse'
 
 instance NFData PutBucketEncryptionResponse where

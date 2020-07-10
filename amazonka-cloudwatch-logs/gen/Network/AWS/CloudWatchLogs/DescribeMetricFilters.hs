@@ -54,15 +54,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeMetricFilters' smart constructor.
-data DescribeMetricFilters = DescribeMetricFilters'
-  { _dmfFilterNamePrefix :: !(Maybe Text)
-  , _dmfMetricName       :: !(Maybe Text)
-  , _dmfLogGroupName     :: !(Maybe Text)
-  , _dmfNextToken        :: !(Maybe Text)
-  , _dmfMetricNamespace  :: !(Maybe Text)
-  , _dmfLimit            :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMetricFilters = DescribeMetricFilters'{_dmfFilterNamePrefix
+                                                    :: !(Maybe Text),
+                                                    _dmfMetricName ::
+                                                    !(Maybe Text),
+                                                    _dmfLogGroupName ::
+                                                    !(Maybe Text),
+                                                    _dmfNextToken ::
+                                                    !(Maybe Text),
+                                                    _dmfMetricNamespace ::
+                                                    !(Maybe Text),
+                                                    _dmfLimit :: !(Maybe Nat)}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DescribeMetricFilters' with the minimum fields required to make a request.
 --
@@ -70,33 +74,29 @@ data DescribeMetricFilters = DescribeMetricFilters'
 --
 -- * 'dmfFilterNamePrefix' - The prefix to match.
 --
--- * 'dmfMetricName' - Undocumented member.
+-- * 'dmfMetricName' - Filters results to include only those with the specified metric name. If you include this parameter in your request, you must also include the @metricNamespace@ parameter.
 --
 -- * 'dmfLogGroupName' - The name of the log group.
 --
 -- * 'dmfNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
--- * 'dmfMetricNamespace' - The namespace of the CloudWatch metric.
+-- * 'dmfMetricNamespace' - Filters results to include only those in the specified namespace. If you include this parameter in your request, you must also include the @metricName@ parameter.
 --
 -- * 'dmfLimit' - The maximum number of items returned. If you don't specify a value, the default is up to 50 items.
 describeMetricFilters
     :: DescribeMetricFilters
-describeMetricFilters =
-  DescribeMetricFilters'
-    { _dmfFilterNamePrefix = Nothing
-    , _dmfMetricName = Nothing
-    , _dmfLogGroupName = Nothing
-    , _dmfNextToken = Nothing
-    , _dmfMetricNamespace = Nothing
-    , _dmfLimit = Nothing
-    }
-
+describeMetricFilters
+  = DescribeMetricFilters'{_dmfFilterNamePrefix =
+                             Nothing,
+                           _dmfMetricName = Nothing, _dmfLogGroupName = Nothing,
+                           _dmfNextToken = Nothing,
+                           _dmfMetricNamespace = Nothing, _dmfLimit = Nothing}
 
 -- | The prefix to match.
 dmfFilterNamePrefix :: Lens' DescribeMetricFilters (Maybe Text)
 dmfFilterNamePrefix = lens _dmfFilterNamePrefix (\ s a -> s{_dmfFilterNamePrefix = a})
 
--- | Undocumented member.
+-- | Filters results to include only those with the specified metric name. If you include this parameter in your request, you must also include the @metricNamespace@ parameter.
 dmfMetricName :: Lens' DescribeMetricFilters (Maybe Text)
 dmfMetricName = lens _dmfMetricName (\ s a -> s{_dmfMetricName = a})
 
@@ -108,7 +108,7 @@ dmfLogGroupName = lens _dmfLogGroupName (\ s a -> s{_dmfLogGroupName = a})
 dmfNextToken :: Lens' DescribeMetricFilters (Maybe Text)
 dmfNextToken = lens _dmfNextToken (\ s a -> s{_dmfNextToken = a})
 
--- | The namespace of the CloudWatch metric.
+-- | Filters results to include only those in the specified namespace. If you include this parameter in your request, you must also include the @metricName@ parameter.
 dmfMetricNamespace :: Lens' DescribeMetricFilters (Maybe Text)
 dmfMetricNamespace = lens _dmfMetricNamespace (\ s a -> s{_dmfMetricNamespace = a})
 
@@ -167,12 +167,18 @@ instance ToQuery DescribeMetricFilters where
         toQuery = const mempty
 
 -- | /See:/ 'describeMetricFiltersResponse' smart constructor.
-data DescribeMetricFiltersResponse = DescribeMetricFiltersResponse'
-  { _dmfrsNextToken      :: !(Maybe Text)
-  , _dmfrsMetricFilters  :: !(Maybe [MetricFilter])
-  , _dmfrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeMetricFiltersResponse = DescribeMetricFiltersResponse'{_dmfrsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dmfrsMetricFilters
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [MetricFilter]),
+                                                                    _dmfrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeMetricFiltersResponse' with the minimum fields required to make a request.
 --
@@ -186,13 +192,11 @@ data DescribeMetricFiltersResponse = DescribeMetricFiltersResponse'
 describeMetricFiltersResponse
     :: Int -- ^ 'dmfrsResponseStatus'
     -> DescribeMetricFiltersResponse
-describeMetricFiltersResponse pResponseStatus_ =
-  DescribeMetricFiltersResponse'
-    { _dmfrsNextToken = Nothing
-    , _dmfrsMetricFilters = Nothing
-    , _dmfrsResponseStatus = pResponseStatus_
-    }
-
+describeMetricFiltersResponse pResponseStatus_
+  = DescribeMetricFiltersResponse'{_dmfrsNextToken =
+                                     Nothing,
+                                   _dmfrsMetricFilters = Nothing,
+                                   _dmfrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 dmfrsNextToken :: Lens' DescribeMetricFiltersResponse (Maybe Text)

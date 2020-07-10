@@ -48,14 +48,15 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteCustomMetadata' smart constructor.
-data DeleteCustomMetadata = DeleteCustomMetadata'
-  { _dcmVersionId           :: !(Maybe Text)
-  , _dcmDeleteAll           :: !(Maybe Bool)
-  , _dcmAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _dcmKeys                :: !(Maybe [Text])
-  , _dcmResourceId          :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteCustomMetadata = DeleteCustomMetadata'{_dcmVersionId
+                                                  :: !(Maybe Text),
+                                                  _dcmDeleteAll ::
+                                                  !(Maybe Bool),
+                                                  _dcmAuthenticationToken ::
+                                                  !(Maybe (Sensitive Text)),
+                                                  _dcmKeys :: !(Maybe [Text]),
+                                                  _dcmResourceId :: !Text}
+                              deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteCustomMetadata' with the minimum fields required to make a request.
 --
@@ -65,7 +66,7 @@ data DeleteCustomMetadata = DeleteCustomMetadata'
 --
 -- * 'dcmDeleteAll' - Flag to indicate removal of all custom metadata properties from the specified resource.
 --
--- * 'dcmAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'dcmAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'dcmKeys' - List of properties to remove.
 --
@@ -73,15 +74,11 @@ data DeleteCustomMetadata = DeleteCustomMetadata'
 deleteCustomMetadata
     :: Text -- ^ 'dcmResourceId'
     -> DeleteCustomMetadata
-deleteCustomMetadata pResourceId_ =
-  DeleteCustomMetadata'
-    { _dcmVersionId = Nothing
-    , _dcmDeleteAll = Nothing
-    , _dcmAuthenticationToken = Nothing
-    , _dcmKeys = Nothing
-    , _dcmResourceId = pResourceId_
-    }
-
+deleteCustomMetadata pResourceId_
+  = DeleteCustomMetadata'{_dcmVersionId = Nothing,
+                          _dcmDeleteAll = Nothing,
+                          _dcmAuthenticationToken = Nothing,
+                          _dcmKeys = Nothing, _dcmResourceId = pResourceId_}
 
 -- | The ID of the version, if the custom metadata is being deleted from a document version.
 dcmVersionId :: Lens' DeleteCustomMetadata (Maybe Text)
@@ -91,7 +88,7 @@ dcmVersionId = lens _dcmVersionId (\ s a -> s{_dcmVersionId = a})
 dcmDeleteAll :: Lens' DeleteCustomMetadata (Maybe Bool)
 dcmDeleteAll = lens _dcmDeleteAll (\ s a -> s{_dcmDeleteAll = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 dcmAuthenticationToken :: Lens' DeleteCustomMetadata (Maybe Text)
 dcmAuthenticationToken = lens _dcmAuthenticationToken (\ s a -> s{_dcmAuthenticationToken = a}) . mapping _Sensitive
 
@@ -139,10 +136,10 @@ instance ToQuery DeleteCustomMetadata where
                  toQuery (toQueryList "member" <$> _dcmKeys)]
 
 -- | /See:/ 'deleteCustomMetadataResponse' smart constructor.
-newtype DeleteCustomMetadataResponse = DeleteCustomMetadataResponse'
-  { _dcmrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteCustomMetadataResponse = DeleteCustomMetadataResponse'{_dcmrsResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DeleteCustomMetadataResponse' with the minimum fields required to make a request.
 --
@@ -152,9 +149,9 @@ newtype DeleteCustomMetadataResponse = DeleteCustomMetadataResponse'
 deleteCustomMetadataResponse
     :: Int -- ^ 'dcmrsResponseStatus'
     -> DeleteCustomMetadataResponse
-deleteCustomMetadataResponse pResponseStatus_ =
-  DeleteCustomMetadataResponse' {_dcmrsResponseStatus = pResponseStatus_}
-
+deleteCustomMetadataResponse pResponseStatus_
+  = DeleteCustomMetadataResponse'{_dcmrsResponseStatus
+                                    = pResponseStatus_}
 
 -- | -- | The response status code.
 dcmrsResponseStatus :: Lens' DeleteCustomMetadataResponse Int

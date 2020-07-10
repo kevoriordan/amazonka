@@ -27,8 +27,8 @@ module Network.AWS.WorkDocs.DeleteUser
       deleteUser
     , DeleteUser
     -- * Request Lenses
-    , duuAuthenticationToken
-    , duuUserId
+    , dltusrAuthenticationToken
+    , dltusrUserId
 
     -- * Destructuring the Response
     , deleteUserResponse
@@ -43,33 +43,32 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'deleteUser' smart constructor.
-data DeleteUser = DeleteUser'
-  { _duuAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _duuUserId              :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DeleteUser = DeleteUser'{_dltusrAuthenticationToken
+                              :: !(Maybe (Sensitive Text)),
+                              _dltusrUserId :: !Text}
+                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'duuAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'dltusrAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
 --
--- * 'duuUserId' - The ID of the user.
+-- * 'dltusrUserId' - The ID of the user.
 deleteUser
-    :: Text -- ^ 'duuUserId'
+    :: Text -- ^ 'dltusrUserId'
     -> DeleteUser
-deleteUser pUserId_ =
-  DeleteUser' {_duuAuthenticationToken = Nothing, _duuUserId = pUserId_}
-
+deleteUser pUserId_
+  = DeleteUser'{_dltusrAuthenticationToken = Nothing,
+                _dltusrUserId = pUserId_}
 
 -- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
-duuAuthenticationToken :: Lens' DeleteUser (Maybe Text)
-duuAuthenticationToken = lens _duuAuthenticationToken (\ s a -> s{_duuAuthenticationToken = a}) . mapping _Sensitive
+dltusrAuthenticationToken :: Lens' DeleteUser (Maybe Text)
+dltusrAuthenticationToken = lens _dltusrAuthenticationToken (\ s a -> s{_dltusrAuthenticationToken = a}) . mapping _Sensitive
 
 -- | The ID of the user.
-duuUserId :: Lens' DeleteUser Text
-duuUserId = lens _duuUserId (\ s a -> s{_duuUserId = a})
+dltusrUserId :: Lens' DeleteUser Text
+dltusrUserId = lens _dltusrUserId (\ s a -> s{_dltusrUserId = a})
 
 instance AWSRequest DeleteUser where
         type Rs DeleteUser = DeleteUserResponse
@@ -83,28 +82,25 @@ instance NFData DeleteUser where
 instance ToHeaders DeleteUser where
         toHeaders DeleteUser'{..}
           = mconcat
-              ["Authentication" =# _duuAuthenticationToken,
+              ["Authentication" =# _dltusrAuthenticationToken,
                "Content-Type" =#
                  ("application/x-amz-json-1.1" :: ByteString)]
 
 instance ToPath DeleteUser where
         toPath DeleteUser'{..}
-          = mconcat ["/api/v1/users/", toBS _duuUserId]
+          = mconcat ["/api/v1/users/", toBS _dltusrUserId]
 
 instance ToQuery DeleteUser where
         toQuery = const mempty
 
 -- | /See:/ 'deleteUserResponse' smart constructor.
-data DeleteUserResponse =
-  DeleteUserResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteUserResponse = DeleteUserResponse'
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteUserResponse' with the minimum fields required to make a request.
 --
 deleteUserResponse
     :: DeleteUserResponse
 deleteUserResponse = DeleteUserResponse'
-
 
 instance NFData DeleteUserResponse where

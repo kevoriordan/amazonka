@@ -45,10 +45,9 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDevice' smart constructor.
-newtype GetDevice = GetDevice'
-  { _gdDeviceARN :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetDevice = GetDevice'{_gdDeviceARN ::
+                               Maybe Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDevice' with the minimum fields required to make a request.
 --
@@ -57,8 +56,7 @@ newtype GetDevice = GetDevice'
 -- * 'gdDeviceARN' - The ARN of the device for which to request details. Required.
 getDevice
     :: GetDevice
-getDevice = GetDevice' {_gdDeviceARN = Nothing}
-
+getDevice = GetDevice'{_gdDeviceARN = Nothing}
 
 -- | The ARN of the device for which to request details. Required.
 gdDeviceARN :: Lens' GetDevice (Maybe Text)
@@ -98,11 +96,10 @@ instance ToQuery GetDevice where
         toQuery = const mempty
 
 -- | /See:/ 'getDeviceResponse' smart constructor.
-data GetDeviceResponse = GetDeviceResponse'
-  { _gdrsDevice         :: !(Maybe Device)
-  , _gdrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeviceResponse = GetDeviceResponse'{_gdrsDevice
+                                            :: !(Maybe Device),
+                                            _gdrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDeviceResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +111,9 @@ data GetDeviceResponse = GetDeviceResponse'
 getDeviceResponse
     :: Int -- ^ 'gdrsResponseStatus'
     -> GetDeviceResponse
-getDeviceResponse pResponseStatus_ =
-  GetDeviceResponse'
-    {_gdrsDevice = Nothing, _gdrsResponseStatus = pResponseStatus_}
-
+getDeviceResponse pResponseStatus_
+  = GetDeviceResponse'{_gdrsDevice = Nothing,
+                       _gdrsResponseStatus = pResponseStatus_}
 
 -- | The details of the device requested. Required.
 gdrsDevice :: Lens' GetDeviceResponse (Maybe Device)

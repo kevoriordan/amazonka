@@ -46,12 +46,14 @@ library
     exposed-modules:
           Network.AWS.DMS
         , Network.AWS.DMS.AddTagsToResource
+        , Network.AWS.DMS.ApplyPendingMaintenanceAction
         , Network.AWS.DMS.CreateEndpoint
         , Network.AWS.DMS.CreateEventSubscription
         , Network.AWS.DMS.CreateReplicationInstance
         , Network.AWS.DMS.CreateReplicationSubnetGroup
         , Network.AWS.DMS.CreateReplicationTask
         , Network.AWS.DMS.DeleteCertificate
+        , Network.AWS.DMS.DeleteConnection
         , Network.AWS.DMS.DeleteEndpoint
         , Network.AWS.DMS.DeleteEventSubscription
         , Network.AWS.DMS.DeleteReplicationInstance
@@ -66,6 +68,7 @@ library
         , Network.AWS.DMS.DescribeEventSubscriptions
         , Network.AWS.DMS.DescribeEvents
         , Network.AWS.DMS.DescribeOrderableReplicationInstances
+        , Network.AWS.DMS.DescribePendingMaintenanceActions
         , Network.AWS.DMS.DescribeRefreshSchemasStatus
         , Network.AWS.DMS.DescribeReplicationInstanceTaskLogs
         , Network.AWS.DMS.DescribeReplicationInstances
@@ -93,12 +96,64 @@ library
         , Network.AWS.DMS.Waiters
 
     other-modules:
-          Network.AWS.DMS.Types.Product
-        , Network.AWS.DMS.Types.Sum
+          Network.AWS.DMS.Types.AccountQuota
+        , Network.AWS.DMS.Types.AuthMechanismValue
+        , Network.AWS.DMS.Types.AuthTypeValue
+        , Network.AWS.DMS.Types.AvailabilityZone
+        , Network.AWS.DMS.Types.Certificate
+        , Network.AWS.DMS.Types.CompressionTypeValue
+        , Network.AWS.DMS.Types.Connection
+        , Network.AWS.DMS.Types.DataFormatValue
+        , Network.AWS.DMS.Types.DmsSSLModeValue
+        , Network.AWS.DMS.Types.DmsTransferSettings
+        , Network.AWS.DMS.Types.DynamoDBSettings
+        , Network.AWS.DMS.Types.ElasticsearchSettings
+        , Network.AWS.DMS.Types.EncodingTypeValue
+        , Network.AWS.DMS.Types.EncryptionModeValue
+        , Network.AWS.DMS.Types.Endpoint
+        , Network.AWS.DMS.Types.Event
+        , Network.AWS.DMS.Types.EventCategoryGroup
+        , Network.AWS.DMS.Types.EventSubscription
+        , Network.AWS.DMS.Types.Filter
+        , Network.AWS.DMS.Types.KafkaSettings
+        , Network.AWS.DMS.Types.KinesisSettings
+        , Network.AWS.DMS.Types.MessageFormatValue
+        , Network.AWS.DMS.Types.MigrationTypeValue
+        , Network.AWS.DMS.Types.MongoDBSettings
+        , Network.AWS.DMS.Types.NeptuneSettings
+        , Network.AWS.DMS.Types.NestingLevelValue
+        , Network.AWS.DMS.Types.OrderableReplicationInstance
+        , Network.AWS.DMS.Types.ParquetVersionValue
+        , Network.AWS.DMS.Types.PendingMaintenanceAction
+        , Network.AWS.DMS.Types.Product
+        , Network.AWS.DMS.Types.RedshiftSettings
+        , Network.AWS.DMS.Types.RefreshSchemasStatus
+        , Network.AWS.DMS.Types.RefreshSchemasStatusTypeValue
+        , Network.AWS.DMS.Types.ReleaseStatusValues
+        , Network.AWS.DMS.Types.ReloadOptionValue
+        , Network.AWS.DMS.Types.ReplicationEndpointTypeValue
+        , Network.AWS.DMS.Types.ReplicationInstance
+        , Network.AWS.DMS.Types.ReplicationInstanceTaskLog
+        , Network.AWS.DMS.Types.ReplicationPendingModifiedValues
+        , Network.AWS.DMS.Types.ReplicationSubnetGroup
+        , Network.AWS.DMS.Types.ReplicationTask
+        , Network.AWS.DMS.Types.ReplicationTaskAssessmentResult
+        , Network.AWS.DMS.Types.ReplicationTaskStats
+        , Network.AWS.DMS.Types.ResourcePendingMaintenanceActions
+        , Network.AWS.DMS.Types.S3Settings
+        , Network.AWS.DMS.Types.SourceType
+        , Network.AWS.DMS.Types.StartReplicationTaskTypeValue
+        , Network.AWS.DMS.Types.Subnet
+        , Network.AWS.DMS.Types.SupportedEndpointType
+        , Network.AWS.DMS.Types.TableStatistics
+        , Network.AWS.DMS.Types.TableToReload
+        , Network.AWS.DMS.Types.Tag
+        , Network.AWS.DMS.Types.VPCSecurityGroupMembership
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-dms-test
     type:              exitcode-stdio-1.0
@@ -122,6 +177,7 @@ test-suite amazonka-dms-test
         , amazonka-dms
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

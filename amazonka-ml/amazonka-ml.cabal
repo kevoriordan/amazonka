@@ -77,12 +77,40 @@ library
         , Network.AWS.MachineLearning.Waiters
 
     other-modules:
-          Network.AWS.MachineLearning.Types.Product
-        , Network.AWS.MachineLearning.Types.Sum
+          Network.AWS.MachineLearning.Types.Algorithm
+        , Network.AWS.MachineLearning.Types.BatchPrediction
+        , Network.AWS.MachineLearning.Types.BatchPredictionFilterVariable
+        , Network.AWS.MachineLearning.Types.DataSource
+        , Network.AWS.MachineLearning.Types.DataSourceFilterVariable
+        , Network.AWS.MachineLearning.Types.DetailsAttributes
+        , Network.AWS.MachineLearning.Types.EntityStatus
+        , Network.AWS.MachineLearning.Types.Evaluation
+        , Network.AWS.MachineLearning.Types.EvaluationFilterVariable
+        , Network.AWS.MachineLearning.Types.MLModel
+        , Network.AWS.MachineLearning.Types.MLModelFilterVariable
+        , Network.AWS.MachineLearning.Types.MLModelType
+        , Network.AWS.MachineLearning.Types.PerformanceMetrics
+        , Network.AWS.MachineLearning.Types.Prediction
+        , Network.AWS.MachineLearning.Types.Product
+        , Network.AWS.MachineLearning.Types.RDSDataSpec
+        , Network.AWS.MachineLearning.Types.RDSDatabase
+        , Network.AWS.MachineLearning.Types.RDSDatabaseCredentials
+        , Network.AWS.MachineLearning.Types.RDSMetadata
+        , Network.AWS.MachineLearning.Types.RealtimeEndpointInfo
+        , Network.AWS.MachineLearning.Types.RealtimeEndpointStatus
+        , Network.AWS.MachineLearning.Types.RedshiftDataSpec
+        , Network.AWS.MachineLearning.Types.RedshiftDatabase
+        , Network.AWS.MachineLearning.Types.RedshiftDatabaseCredentials
+        , Network.AWS.MachineLearning.Types.RedshiftMetadata
+        , Network.AWS.MachineLearning.Types.S3DataSpec
+        , Network.AWS.MachineLearning.Types.SortOrder
+        , Network.AWS.MachineLearning.Types.Tag
+        , Network.AWS.MachineLearning.Types.TaggableResourceType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-ml-test
     type:              exitcode-stdio-1.0
@@ -106,6 +134,7 @@ test-suite amazonka-ml-test
         , amazonka-ml
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

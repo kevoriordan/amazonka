@@ -45,10 +45,9 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'getRateBasedRule' smart constructor.
-newtype GetRateBasedRule = GetRateBasedRule'
-  { _grbrRuleId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetRateBasedRule = GetRateBasedRule'{_grbrRuleId
+                                             :: Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRateBasedRule' with the minimum fields required to make a request.
 --
@@ -58,8 +57,8 @@ newtype GetRateBasedRule = GetRateBasedRule'
 getRateBasedRule
     :: Text -- ^ 'grbrRuleId'
     -> GetRateBasedRule
-getRateBasedRule pRuleId_ = GetRateBasedRule' {_grbrRuleId = pRuleId_}
-
+getRateBasedRule pRuleId_
+  = GetRateBasedRule'{_grbrRuleId = pRuleId_}
 
 -- | The @RuleId@ of the 'RateBasedRule' that you want to get. @RuleId@ is returned by 'CreateRateBasedRule' and by 'ListRateBasedRules' .
 grbrRuleId :: Lens' GetRateBasedRule Text
@@ -98,11 +97,14 @@ instance ToQuery GetRateBasedRule where
         toQuery = const mempty
 
 -- | /See:/ 'getRateBasedRuleResponse' smart constructor.
-data GetRateBasedRuleResponse = GetRateBasedRuleResponse'
-  { _grbrrsRule           :: !(Maybe RateBasedRule)
-  , _grbrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRateBasedRuleResponse = GetRateBasedRuleResponse'{_grbrrsRule
+                                                          ::
+                                                          !(Maybe
+                                                              RateBasedRule),
+                                                          _grbrrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'GetRateBasedRuleResponse' with the minimum fields required to make a request.
 --
@@ -114,10 +116,9 @@ data GetRateBasedRuleResponse = GetRateBasedRuleResponse'
 getRateBasedRuleResponse
     :: Int -- ^ 'grbrrsResponseStatus'
     -> GetRateBasedRuleResponse
-getRateBasedRuleResponse pResponseStatus_ =
-  GetRateBasedRuleResponse'
-    {_grbrrsRule = Nothing, _grbrrsResponseStatus = pResponseStatus_}
-
+getRateBasedRuleResponse pResponseStatus_
+  = GetRateBasedRuleResponse'{_grbrrsRule = Nothing,
+                              _grbrrsResponseStatus = pResponseStatus_}
 
 -- | Information about the 'RateBasedRule' that you specified in the @GetRateBasedRule@ request.
 grbrrsRule :: Lens' GetRateBasedRuleResponse (Maybe RateBasedRule)

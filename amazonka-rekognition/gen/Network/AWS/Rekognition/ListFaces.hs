@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns metadata for faces in the specified collection. This metadata includes information such as the bounding box coordinates, the confidence (that the bounding box contains a face), and face ID. For an example, see 'list-faces-in-collection-procedure' .
+-- Returns metadata for faces in the specified collection. This metadata includes information such as the bounding box coordinates, the confidence (that the bounding box contains a face), and face ID. For an example, see Listing Faces in a Collection in the Amazon Rekognition Developer Guide.
 --
 --
 -- This operation requires permissions to perform the @rekognition:ListFaces@ action.
@@ -54,12 +54,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listFaces' smart constructor.
-data ListFaces = ListFaces'
-  { _lfNextToken    :: !(Maybe Text)
-  , _lfMaxResults   :: !(Maybe Nat)
-  , _lfCollectionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFaces = ListFaces'{_lfNextToken ::
+                            !(Maybe Text),
+                            _lfMaxResults :: !(Maybe Nat),
+                            _lfCollectionId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFaces' with the minimum fields required to make a request.
 --
@@ -73,13 +72,10 @@ data ListFaces = ListFaces'
 listFaces
     :: Text -- ^ 'lfCollectionId'
     -> ListFaces
-listFaces pCollectionId_ =
-  ListFaces'
-    { _lfNextToken = Nothing
-    , _lfMaxResults = Nothing
-    , _lfCollectionId = pCollectionId_
-    }
-
+listFaces pCollectionId_
+  = ListFaces'{_lfNextToken = Nothing,
+               _lfMaxResults = Nothing,
+               _lfCollectionId = pCollectionId_}
 
 -- | If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of faces.
 lfNextToken :: Lens' ListFaces (Maybe Text)
@@ -139,13 +135,12 @@ instance ToQuery ListFaces where
         toQuery = const mempty
 
 -- | /See:/ 'listFacesResponse' smart constructor.
-data ListFacesResponse = ListFacesResponse'
-  { _lfrsFaceModelVersion :: !(Maybe Text)
-  , _lfrsNextToken        :: !(Maybe Text)
-  , _lfrsFaces            :: !(Maybe [Face])
-  , _lfrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFacesResponse = ListFacesResponse'{_lfrsFaceModelVersion
+                                            :: !(Maybe Text),
+                                            _lfrsNextToken :: !(Maybe Text),
+                                            _lfrsFaces :: !(Maybe [Face]),
+                                            _lfrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFacesResponse' with the minimum fields required to make a request.
 --
@@ -155,20 +150,16 @@ data ListFacesResponse = ListFacesResponse'
 --
 -- * 'lfrsNextToken' - If the response is truncated, Amazon Rekognition returns this token that you can use in the subsequent request to retrieve the next set of faces.
 --
--- * 'lfrsFaces' - An array of @Face@ objects.
+-- * 'lfrsFaces' - An array of @Face@ objects. 
 --
 -- * 'lfrsResponseStatus' - -- | The response status code.
 listFacesResponse
     :: Int -- ^ 'lfrsResponseStatus'
     -> ListFacesResponse
-listFacesResponse pResponseStatus_ =
-  ListFacesResponse'
-    { _lfrsFaceModelVersion = Nothing
-    , _lfrsNextToken = Nothing
-    , _lfrsFaces = Nothing
-    , _lfrsResponseStatus = pResponseStatus_
-    }
-
+listFacesResponse pResponseStatus_
+  = ListFacesResponse'{_lfrsFaceModelVersion = Nothing,
+                       _lfrsNextToken = Nothing, _lfrsFaces = Nothing,
+                       _lfrsResponseStatus = pResponseStatus_}
 
 -- | Version number of the face detection model associated with the input collection (@CollectionId@ ).
 lfrsFaceModelVersion :: Lens' ListFacesResponse (Maybe Text)
@@ -178,7 +169,7 @@ lfrsFaceModelVersion = lens _lfrsFaceModelVersion (\ s a -> s{_lfrsFaceModelVers
 lfrsNextToken :: Lens' ListFacesResponse (Maybe Text)
 lfrsNextToken = lens _lfrsNextToken (\ s a -> s{_lfrsNextToken = a})
 
--- | An array of @Face@ objects.
+-- | An array of @Face@ objects. 
 lfrsFaces :: Lens' ListFacesResponse [Face]
 lfrsFaces = lens _lfrsFaces (\ s a -> s{_lfrsFaces = a}) . _Default . _Coerce
 

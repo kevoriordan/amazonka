@@ -14,11 +14,11 @@
 module Test.AWS.Gen.LexRuntime where
 
 import Data.Proxy
-import Network.AWS.LexRuntime
 import Test.AWS.Fixture
-import Test.AWS.LexRuntime.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.LexRuntime
+import Test.AWS.LexRuntime.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,32 +28,72 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestPostText $
+--         [ requestPutSession $
+--             putSession
+--
+--         , requestDeleteSession $
+--             deleteSession
+--
+--         , requestPostText $
 --             postText
 --
 --         , requestPostContent $
 --             postContent
 --
+--         , requestGetSession $
+--             getSession
+--
 --           ]
 
 --     , testGroup "response"
---         [ responsePostText $
+--         [ responsePutSession $
+--             putSessionResponse
+--
+--         , responseDeleteSession $
+--             deleteSessionResponse
+--
+--         , responsePostText $
 --             postTextResponse
 --
 --         , responsePostContent $
 --             postContentResponse
+--
+--         , responseGetSession $
+--             getSessionResponse
 --
 --           ]
 --     ]
 
 -- Requests
 
+requestPutSession :: PutSession -> TestTree
+requestPutSession = req
+    "PutSession"
+    "fixture/PutSession.yaml"
+
+requestDeleteSession :: DeleteSession -> TestTree
+requestDeleteSession = req
+    "DeleteSession"
+    "fixture/DeleteSession.yaml"
+
 requestPostText :: PostText -> TestTree
 requestPostText = req
     "PostText"
     "fixture/PostText.yaml"
 
+requestGetSession :: GetSession -> TestTree
+requestGetSession = req
+    "GetSession"
+    "fixture/GetSession.yaml"
+
 -- Responses
+
+responseDeleteSession :: DeleteSessionResponse -> TestTree
+responseDeleteSession = res
+    "DeleteSessionResponse"
+    "fixture/DeleteSessionResponse.proto"
+    lexRuntime
+    (Proxy :: Proxy DeleteSession)
 
 responsePostText :: PostTextResponse -> TestTree
 responsePostText = res
@@ -61,3 +101,10 @@ responsePostText = res
     "fixture/PostTextResponse.proto"
     lexRuntime
     (Proxy :: Proxy PostText)
+
+responseGetSession :: GetSessionResponse -> TestTree
+responseGetSession = res
+    "GetSessionResponse"
+    "fixture/GetSessionResponse.proto"
+    lexRuntime
+    (Proxy :: Proxy GetSession)

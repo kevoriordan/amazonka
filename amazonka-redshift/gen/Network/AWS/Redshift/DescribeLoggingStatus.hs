@@ -48,29 +48,29 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'describeLoggingStatus' smart constructor.
-newtype DescribeLoggingStatus = DescribeLoggingStatus'
-  { _dlsClusterIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DescribeLoggingStatus = DescribeLoggingStatus'{_dlsClusterIdentifier
+                                                       :: Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeLoggingStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlsClusterIdentifier' - The identifier of the cluster from which to get the logging status. Example: @examplecluster@
+-- * 'dlsClusterIdentifier' - The identifier of the cluster from which to get the logging status. Example: @examplecluster@ 
 describeLoggingStatus
     :: Text -- ^ 'dlsClusterIdentifier'
     -> DescribeLoggingStatus
-describeLoggingStatus pClusterIdentifier_ =
-  DescribeLoggingStatus' {_dlsClusterIdentifier = pClusterIdentifier_}
+describeLoggingStatus pClusterIdentifier_
+  = DescribeLoggingStatus'{_dlsClusterIdentifier =
+                             pClusterIdentifier_}
 
-
--- | The identifier of the cluster from which to get the logging status. Example: @examplecluster@
+-- | The identifier of the cluster from which to get the logging status. Example: @examplecluster@ 
 dlsClusterIdentifier :: Lens' DescribeLoggingStatus Text
 dlsClusterIdentifier = lens _dlsClusterIdentifier (\ s a -> s{_dlsClusterIdentifier = a})
 

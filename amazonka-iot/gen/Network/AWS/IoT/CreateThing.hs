@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a thing record in the registry.
+-- Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a @ResourceAlreadyExistsException@ is thrown.
 --
 --
 module Network.AWS.IoT.CreateThing
@@ -29,6 +29,7 @@ module Network.AWS.IoT.CreateThing
     -- * Request Lenses
     , ctThingTypeName
     , ctAttributePayload
+    , ctBillingGroupName
     , ctThingName
 
     -- * Destructuring the Response
@@ -53,12 +54,13 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createThing' smart constructor.
-data CreateThing = CreateThing'
-  { _ctThingTypeName    :: !(Maybe Text)
-  , _ctAttributePayload :: !(Maybe AttributePayload)
-  , _ctThingName        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateThing = CreateThing'{_ctThingTypeName ::
+                                !(Maybe Text),
+                                _ctAttributePayload ::
+                                !(Maybe AttributePayload),
+                                _ctBillingGroupName :: !(Maybe Text),
+                                _ctThingName :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateThing' with the minimum fields required to make a request.
 --
@@ -66,29 +68,33 @@ data CreateThing = CreateThing'
 --
 -- * 'ctThingTypeName' - The name of the thing type associated with the new thing.
 --
--- * 'ctAttributePayload' - The attribute payload, which consists of up to three name/value pairs in a JSON document. For example: @{\"attributes\":{\"string1\":\"string2\"}}@
+-- * 'ctAttributePayload' - The attribute payload, which consists of up to three name/value pairs in a JSON document. For example: @{\"attributes\":{\"string1\":\"string2\"}}@ 
 --
--- * 'ctThingName' - The name of the thing to create.
+-- * 'ctBillingGroupName' - The name of the billing group the thing will be added to.
+--
+-- * 'ctThingName' - The name of the thing to create. You can't change a thing's name after you create it. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
 createThing
     :: Text -- ^ 'ctThingName'
     -> CreateThing
-createThing pThingName_ =
-  CreateThing'
-    { _ctThingTypeName = Nothing
-    , _ctAttributePayload = Nothing
-    , _ctThingName = pThingName_
-    }
-
+createThing pThingName_
+  = CreateThing'{_ctThingTypeName = Nothing,
+                 _ctAttributePayload = Nothing,
+                 _ctBillingGroupName = Nothing,
+                 _ctThingName = pThingName_}
 
 -- | The name of the thing type associated with the new thing.
 ctThingTypeName :: Lens' CreateThing (Maybe Text)
 ctThingTypeName = lens _ctThingTypeName (\ s a -> s{_ctThingTypeName = a})
 
--- | The attribute payload, which consists of up to three name/value pairs in a JSON document. For example: @{\"attributes\":{\"string1\":\"string2\"}}@
+-- | The attribute payload, which consists of up to three name/value pairs in a JSON document. For example: @{\"attributes\":{\"string1\":\"string2\"}}@ 
 ctAttributePayload :: Lens' CreateThing (Maybe AttributePayload)
 ctAttributePayload = lens _ctAttributePayload (\ s a -> s{_ctAttributePayload = a})
 
--- | The name of the thing to create.
+-- | The name of the billing group the thing will be added to.
+ctBillingGroupName :: Lens' CreateThing (Maybe Text)
+ctBillingGroupName = lens _ctBillingGroupName (\ s a -> s{_ctBillingGroupName = a})
+
+-- | The name of the thing to create. You can't change a thing's name after you create it. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
 ctThingName :: Lens' CreateThing Text
 ctThingName = lens _ctThingName (\ s a -> s{_ctThingName = a})
 
@@ -115,7 +121,8 @@ instance ToJSON CreateThing where
           = object
               (catMaybes
                  [("thingTypeName" .=) <$> _ctThingTypeName,
-                  ("attributePayload" .=) <$> _ctAttributePayload])
+                  ("attributePayload" .=) <$> _ctAttributePayload,
+                  ("billingGroupName" .=) <$> _ctBillingGroupName])
 
 instance ToPath CreateThing where
         toPath CreateThing'{..}
@@ -129,13 +136,12 @@ instance ToQuery CreateThing where
 --
 --
 -- /See:/ 'createThingResponse' smart constructor.
-data CreateThingResponse = CreateThingResponse'
-  { _ctrsThingARN       :: !(Maybe Text)
-  , _ctrsThingName      :: !(Maybe Text)
-  , _ctrsThingId        :: !(Maybe Text)
-  , _ctrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateThingResponse = CreateThingResponse'{_ctrsThingARN
+                                                :: !(Maybe Text),
+                                                _ctrsThingName :: !(Maybe Text),
+                                                _ctrsThingId :: !(Maybe Text),
+                                                _ctrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateThingResponse' with the minimum fields required to make a request.
 --
@@ -151,14 +157,10 @@ data CreateThingResponse = CreateThingResponse'
 createThingResponse
     :: Int -- ^ 'ctrsResponseStatus'
     -> CreateThingResponse
-createThingResponse pResponseStatus_ =
-  CreateThingResponse'
-    { _ctrsThingARN = Nothing
-    , _ctrsThingName = Nothing
-    , _ctrsThingId = Nothing
-    , _ctrsResponseStatus = pResponseStatus_
-    }
-
+createThingResponse pResponseStatus_
+  = CreateThingResponse'{_ctrsThingARN = Nothing,
+                         _ctrsThingName = Nothing, _ctrsThingId = Nothing,
+                         _ctrsResponseStatus = pResponseStatus_}
 
 -- | The ARN of the new thing.
 ctrsThingARN :: Lens' CreateThingResponse (Maybe Text)

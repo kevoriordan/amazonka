@@ -21,6 +21,8 @@
 -- Closes the public ports on a specific Amazon Lightsail instance.
 --
 --
+-- The @close instance public ports@ operation supports tag-based access control via resource tags applied to the resource identified by @instance name@ . For more information, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags Lightsail Dev Guide> .
+--
 module Network.AWS.Lightsail.CloseInstancePublicPorts
     (
     -- * Creating a Request
@@ -46,11 +48,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'closeInstancePublicPorts' smart constructor.
-data CloseInstancePublicPorts = CloseInstancePublicPorts'
-  { _cippPortInfo     :: !PortInfo
-  , _cippInstanceName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CloseInstancePublicPorts = CloseInstancePublicPorts'{_cippPortInfo
+                                                          :: !PortInfo,
+                                                          _cippInstanceName ::
+                                                          !Text}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CloseInstancePublicPorts' with the minimum fields required to make a request.
 --
@@ -63,10 +66,10 @@ closeInstancePublicPorts
     :: PortInfo -- ^ 'cippPortInfo'
     -> Text -- ^ 'cippInstanceName'
     -> CloseInstancePublicPorts
-closeInstancePublicPorts pPortInfo_ pInstanceName_ =
-  CloseInstancePublicPorts'
-    {_cippPortInfo = pPortInfo_, _cippInstanceName = pInstanceName_}
-
+closeInstancePublicPorts pPortInfo_ pInstanceName_
+  = CloseInstancePublicPorts'{_cippPortInfo =
+                                pPortInfo_,
+                              _cippInstanceName = pInstanceName_}
 
 -- | Information about the public port you are trying to close.
 cippPortInfo :: Lens' CloseInstancePublicPorts PortInfo
@@ -114,28 +117,32 @@ instance ToQuery CloseInstancePublicPorts where
         toQuery = const mempty
 
 -- | /See:/ 'closeInstancePublicPortsResponse' smart constructor.
-data CloseInstancePublicPortsResponse = CloseInstancePublicPortsResponse'
-  { _cipprsOperation      :: !(Maybe Operation)
-  , _cipprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CloseInstancePublicPortsResponse = CloseInstancePublicPortsResponse'{_cipprsOperation
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Operation),
+                                                                          _cipprsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'CloseInstancePublicPortsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cipprsOperation' - An array of key-value pairs that contains information about the operation.
+-- * 'cipprsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'cipprsResponseStatus' - -- | The response status code.
 closeInstancePublicPortsResponse
     :: Int -- ^ 'cipprsResponseStatus'
     -> CloseInstancePublicPortsResponse
-closeInstancePublicPortsResponse pResponseStatus_ =
-  CloseInstancePublicPortsResponse'
-    {_cipprsOperation = Nothing, _cipprsResponseStatus = pResponseStatus_}
+closeInstancePublicPortsResponse pResponseStatus_
+  = CloseInstancePublicPortsResponse'{_cipprsOperation
+                                        = Nothing,
+                                      _cipprsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs that contains information about the operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 cipprsOperation :: Lens' CloseInstancePublicPortsResponse (Maybe Operation)
 cipprsOperation = lens _cipprsOperation (\ s a -> s{_cipprsOperation = a})
 

@@ -47,12 +47,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createAPIKey' smart constructor.
-data CreateAPIKey = CreateAPIKey'
-  { _cakExpires     :: !(Maybe Integer)
-  , _cakDescription :: !(Maybe Text)
-  , _cakApiId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAPIKey = CreateAPIKey'{_cakExpires ::
+                                  !(Maybe Integer),
+                                  _cakDescription :: !(Maybe Text),
+                                  _cakApiId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateAPIKey' with the minimum fields required to make a request.
 --
@@ -66,10 +65,9 @@ data CreateAPIKey = CreateAPIKey'
 createAPIKey
     :: Text -- ^ 'cakApiId'
     -> CreateAPIKey
-createAPIKey pApiId_ =
-  CreateAPIKey'
-    {_cakExpires = Nothing, _cakDescription = Nothing, _cakApiId = pApiId_}
-
+createAPIKey pApiId_
+  = CreateAPIKey'{_cakExpires = Nothing,
+                  _cakDescription = Nothing, _cakApiId = pApiId_}
 
 -- | The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .
 cakExpires :: Lens' CreateAPIKey (Maybe Integer)
@@ -118,11 +116,10 @@ instance ToQuery CreateAPIKey where
         toQuery = const mempty
 
 -- | /See:/ 'createAPIKeyResponse' smart constructor.
-data CreateAPIKeyResponse = CreateAPIKeyResponse'
-  { _cakrsApiKey         :: !(Maybe APIKey)
-  , _cakrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateAPIKeyResponse = CreateAPIKeyResponse'{_cakrsApiKey
+                                                  :: !(Maybe APIKey),
+                                                  _cakrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateAPIKeyResponse' with the minimum fields required to make a request.
 --
@@ -134,10 +131,9 @@ data CreateAPIKeyResponse = CreateAPIKeyResponse'
 createAPIKeyResponse
     :: Int -- ^ 'cakrsResponseStatus'
     -> CreateAPIKeyResponse
-createAPIKeyResponse pResponseStatus_ =
-  CreateAPIKeyResponse'
-    {_cakrsApiKey = Nothing, _cakrsResponseStatus = pResponseStatus_}
-
+createAPIKeyResponse pResponseStatus_
+  = CreateAPIKeyResponse'{_cakrsApiKey = Nothing,
+                          _cakrsResponseStatus = pResponseStatus_}
 
 -- | The API key.
 cakrsApiKey :: Lens' CreateAPIKeyResponse (Maybe APIKey)

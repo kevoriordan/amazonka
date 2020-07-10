@@ -11,8 +11,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.
+-- __Amazon Elastic Container Registry__ 
 --
+-- Amazon Elastic Container Registry (Amazon ECR) is a managed Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.
 --
 module Network.AWS.ECR
     (
@@ -22,133 +23,178 @@ module Network.AWS.ECR
     -- * Errors
     -- $errors
 
-    -- ** LayersNotFoundException
-    , _LayersNotFoundException
-
-    -- ** InvalidParameterException
-    , _InvalidParameterException
-
-    -- ** LayerAlreadyExistsException
-    , _LayerAlreadyExistsException
-
-    -- ** ServerException
-    , _ServerException
-
-    -- ** LayerInaccessibleException
-    , _LayerInaccessibleException
-
-    -- ** InvalidLayerException
-    , _InvalidLayerException
-
-    -- ** LayerPartTooSmallException
-    , _LayerPartTooSmallException
+    -- ** RepositoryAlreadyExistsException
+    , _RepositoryAlreadyExistsException
 
     -- ** LifecyclePolicyPreviewNotFoundException
     , _LifecyclePolicyPreviewNotFoundException
 
-    -- ** ImageNotFoundException
-    , _ImageNotFoundException
+    -- ** InvalidTagParameterException
+    , _InvalidTagParameterException
 
-    -- ** ImageAlreadyExistsException
-    , _ImageAlreadyExistsException
+    -- ** InvalidLayerException
+    , _InvalidLayerException
 
-    -- ** RepositoryNotFoundException
-    , _RepositoryNotFoundException
+    -- ** ServerException
+    , _ServerException
 
-    -- ** LifecyclePolicyPreviewInProgressException
-    , _LifecyclePolicyPreviewInProgressException
-
-    -- ** UploadNotFoundException
-    , _UploadNotFoundException
+    -- ** LayerAlreadyExistsException
+    , _LayerAlreadyExistsException
 
     -- ** LifecyclePolicyNotFoundException
     , _LifecyclePolicyNotFoundException
 
-    -- ** InvalidLayerPartException
-    , _InvalidLayerPartException
+    -- ** InvalidParameterException
+    , _InvalidParameterException
 
-    -- ** RepositoryNotEmptyException
-    , _RepositoryNotEmptyException
+    -- ** ReferencedImagesNotFoundException
+    , _ReferencedImagesNotFoundException
 
-    -- ** RepositoryAlreadyExistsException
-    , _RepositoryAlreadyExistsException
+    -- ** LayersNotFoundException
+    , _LayersNotFoundException
+
+    -- ** TooManyTagsException
+    , _TooManyTagsException
 
     -- ** RepositoryPolicyNotFoundException
     , _RepositoryPolicyNotFoundException
 
-    -- ** EmptyUploadException
-    , _EmptyUploadException
+    -- ** ScanNotFoundException
+    , _ScanNotFoundException
+
+    -- ** ImageNotFoundException
+    , _ImageNotFoundException
+
+    -- ** LayerPartTooSmallException
+    , _LayerPartTooSmallException
+
+    -- ** RepositoryNotEmptyException
+    , _RepositoryNotEmptyException
+
+    -- ** UnsupportedImageTypeException
+    , _UnsupportedImageTypeException
+
+    -- ** LayerInaccessibleException
+    , _LayerInaccessibleException
+
+    -- ** InvalidLayerPartException
+    , _InvalidLayerPartException
+
+    -- ** UploadNotFoundException
+    , _UploadNotFoundException
+
+    -- ** ImageTagAlreadyExistsException
+    , _ImageTagAlreadyExistsException
 
     -- ** LimitExceededException
     , _LimitExceededException
 
+    -- ** LifecyclePolicyPreviewInProgressException
+    , _LifecyclePolicyPreviewInProgressException
+
+    -- ** EmptyUploadException
+    , _EmptyUploadException
+
+    -- ** RepositoryNotFoundException
+    , _RepositoryNotFoundException
+
+    -- ** ImageAlreadyExistsException
+    , _ImageAlreadyExistsException
+
     -- * Waiters
     -- $waiters
+
+    -- ** LifecyclePolicyPreviewComplete
+    , lifecyclePolicyPreviewComplete
+
+    -- ** ImageScanComplete
+    , imageScanComplete
 
     -- * Operations
     -- $operations
 
-    -- ** GetRepositoryPolicy
+    -- ** GetRepositoryPolicy 
     , module Network.AWS.ECR.GetRepositoryPolicy
 
-    -- ** PutLifecyclePolicy
+    -- ** PutImageScanningConfiguration 
+    , module Network.AWS.ECR.PutImageScanningConfiguration
+
+    -- ** PutLifecyclePolicy 
     , module Network.AWS.ECR.PutLifecyclePolicy
 
-    -- ** DeleteLifecyclePolicy
+    -- ** DeleteLifecyclePolicy 
     , module Network.AWS.ECR.DeleteLifecyclePolicy
 
-    -- ** BatchDeleteImage
+    -- ** PutImageTagMutability 
+    , module Network.AWS.ECR.PutImageTagMutability
+
+    -- ** BatchDeleteImage 
     , module Network.AWS.ECR.BatchDeleteImage
 
-    -- ** GetLifecyclePolicyPreview
+    -- ** ListTagsForResource 
+    , module Network.AWS.ECR.ListTagsForResource
+
+    -- ** GetLifecyclePolicyPreview (Paginated)
     , module Network.AWS.ECR.GetLifecyclePolicyPreview
 
-    -- ** BatchCheckLayerAvailability
+    -- ** BatchCheckLayerAvailability 
     , module Network.AWS.ECR.BatchCheckLayerAvailability
 
-    -- ** DeleteRepositoryPolicy
+    -- ** DeleteRepositoryPolicy 
     , module Network.AWS.ECR.DeleteRepositoryPolicy
 
-    -- ** CreateRepository
+    -- ** CreateRepository 
     , module Network.AWS.ECR.CreateRepository
 
-    -- ** CompleteLayerUpload
+    -- ** CompleteLayerUpload 
     , module Network.AWS.ECR.CompleteLayerUpload
 
     -- ** DescribeRepositories (Paginated)
     , module Network.AWS.ECR.DescribeRepositories
 
-    -- ** StartLifecyclePolicyPreview
+    -- ** StartLifecyclePolicyPreview 
     , module Network.AWS.ECR.StartLifecyclePolicyPreview
 
-    -- ** UploadLayerPart
+    -- ** UploadLayerPart 
     , module Network.AWS.ECR.UploadLayerPart
 
-    -- ** BatchGetImage
+    -- ** BatchGetImage 
     , module Network.AWS.ECR.BatchGetImage
 
-    -- ** GetLifecyclePolicy
+    -- ** StartImageScan 
+    , module Network.AWS.ECR.StartImageScan
+
+    -- ** GetLifecyclePolicy 
     , module Network.AWS.ECR.GetLifecyclePolicy
 
-    -- ** SetRepositoryPolicy
+    -- ** TagResource 
+    , module Network.AWS.ECR.TagResource
+
+    -- ** SetRepositoryPolicy 
     , module Network.AWS.ECR.SetRepositoryPolicy
 
-    -- ** InitiateLayerUpload
+    -- ** DescribeImageScanFindings (Paginated)
+    , module Network.AWS.ECR.DescribeImageScanFindings
+
+    -- ** InitiateLayerUpload 
     , module Network.AWS.ECR.InitiateLayerUpload
 
-    -- ** DeleteRepository
+    -- ** UntagResource 
+    , module Network.AWS.ECR.UntagResource
+
+    -- ** DeleteRepository 
     , module Network.AWS.ECR.DeleteRepository
 
-    -- ** PutImage
+    -- ** PutImage 
     , module Network.AWS.ECR.PutImage
 
     -- ** ListImages (Paginated)
     , module Network.AWS.ECR.ListImages
 
-    -- ** GetAuthorizationToken
+    -- ** GetAuthorizationToken 
     , module Network.AWS.ECR.GetAuthorizationToken
 
-    -- ** GetDownloadURLForLayer
+    -- ** GetDownloadURLForLayer 
     , module Network.AWS.ECR.GetDownloadURLForLayer
 
     -- ** DescribeImages (Paginated)
@@ -156,11 +202,17 @@ module Network.AWS.ECR
 
     -- * Types
 
+    -- ** FindingSeverity
+    , FindingSeverity (..)
+
     -- ** ImageActionType
     , ImageActionType (..)
 
     -- ** ImageFailureCode
     , ImageFailureCode (..)
+
+    -- ** ImageTagMutability
+    , ImageTagMutability (..)
 
     -- ** LayerAvailability
     , LayerAvailability (..)
@@ -171,8 +223,17 @@ module Network.AWS.ECR
     -- ** LifecyclePolicyPreviewStatus
     , LifecyclePolicyPreviewStatus (..)
 
+    -- ** ScanStatus
+    , ScanStatus (..)
+
     -- ** TagStatus
     , TagStatus (..)
+
+    -- ** Attribute
+    , Attribute
+    , attribute
+    , aValue
+    , aKey
 
     -- ** AuthorizationData
     , AuthorizationData
@@ -199,8 +260,10 @@ module Network.AWS.ECR
     , imageDetail
     , idRegistryId
     , idImageTags
+    , idImageScanStatus
     , idImageSizeInBytes
     , idImageDigest
+    , idImageScanFindingsSummary
     , idImagePushedAt
     , idRepositoryName
 
@@ -216,6 +279,41 @@ module Network.AWS.ECR
     , imageIdentifier
     , iiImageDigest
     , iiImageTag
+
+    -- ** ImageScanFinding
+    , ImageScanFinding
+    , imageScanFinding
+    , isfSeverity
+    , isfUri
+    , isfName
+    , isfAttributes
+    , isfDescription
+
+    -- ** ImageScanFindings
+    , ImageScanFindings
+    , imageScanFindings
+    , isfImageScanCompletedAt
+    , isfFindings
+    , isfFindingSeverityCounts
+    , isfVulnerabilitySourceUpdatedAt
+
+    -- ** ImageScanFindingsSummary
+    , ImageScanFindingsSummary
+    , imageScanFindingsSummary
+    , isfsImageScanCompletedAt
+    , isfsFindingSeverityCounts
+    , isfsVulnerabilitySourceUpdatedAt
+
+    -- ** ImageScanStatus
+    , ImageScanStatus
+    , imageScanStatus
+    , issStatus
+    , issDescription
+
+    -- ** ImageScanningConfiguration
+    , ImageScanningConfiguration
+    , imageScanningConfiguration
+    , iscScanOnPush
 
     -- ** Layer
     , Layer
@@ -267,8 +365,16 @@ module Network.AWS.ECR
     , rRepositoryARN
     , rCreatedAt
     , rRegistryId
+    , rImageScanningConfiguration
     , rRepositoryURI
     , rRepositoryName
+    , rImageTagMutability
+
+    -- ** Tag
+    , Tag
+    , tag
+    , tagValue
+    , tagKey
     ) where
 
 import Network.AWS.ECR.BatchCheckLayerAvailability
@@ -279,6 +385,7 @@ import Network.AWS.ECR.CreateRepository
 import Network.AWS.ECR.DeleteLifecyclePolicy
 import Network.AWS.ECR.DeleteRepository
 import Network.AWS.ECR.DeleteRepositoryPolicy
+import Network.AWS.ECR.DescribeImageScanFindings
 import Network.AWS.ECR.DescribeImages
 import Network.AWS.ECR.DescribeRepositories
 import Network.AWS.ECR.GetAuthorizationToken
@@ -288,11 +395,17 @@ import Network.AWS.ECR.GetLifecyclePolicyPreview
 import Network.AWS.ECR.GetRepositoryPolicy
 import Network.AWS.ECR.InitiateLayerUpload
 import Network.AWS.ECR.ListImages
+import Network.AWS.ECR.ListTagsForResource
 import Network.AWS.ECR.PutImage
+import Network.AWS.ECR.PutImageScanningConfiguration
+import Network.AWS.ECR.PutImageTagMutability
 import Network.AWS.ECR.PutLifecyclePolicy
 import Network.AWS.ECR.SetRepositoryPolicy
+import Network.AWS.ECR.StartImageScan
 import Network.AWS.ECR.StartLifecyclePolicyPreview
+import Network.AWS.ECR.TagResource
 import Network.AWS.ECR.Types
+import Network.AWS.ECR.UntagResource
 import Network.AWS.ECR.UploadLayerPart
 import Network.AWS.ECR.Waiters
 

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a specified DevEndpoint.
+-- Updates a specified development endpoint.
 --
 --
 module Network.AWS.Glue.UpdateDevEndpoint
@@ -27,9 +27,13 @@ module Network.AWS.Glue.UpdateDevEndpoint
       updateDevEndpoint
     , UpdateDevEndpoint
     -- * Request Lenses
+    , udeAddPublicKeys
     , udeCustomLibraries
     , udePublicKey
+    , udeDeleteArguments
+    , udeDeletePublicKeys
     , udeUpdateEtlLibraries
+    , udeAddArguments
     , udeEndpointName
 
     -- * Destructuring the Response
@@ -47,50 +51,83 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDevEndpoint' smart constructor.
-data UpdateDevEndpoint = UpdateDevEndpoint'
-  { _udeCustomLibraries    :: !(Maybe DevEndpointCustomLibraries)
-  , _udePublicKey          :: !(Maybe Text)
-  , _udeUpdateEtlLibraries :: !(Maybe Bool)
-  , _udeEndpointName       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDevEndpoint = UpdateDevEndpoint'{_udeAddPublicKeys
+                                            :: !(Maybe [Text]),
+                                            _udeCustomLibraries ::
+                                            !(Maybe DevEndpointCustomLibraries),
+                                            _udePublicKey :: !(Maybe Text),
+                                            _udeDeleteArguments ::
+                                            !(Maybe [Text]),
+                                            _udeDeletePublicKeys ::
+                                            !(Maybe [Text]),
+                                            _udeUpdateEtlLibraries ::
+                                            !(Maybe Bool),
+                                            _udeAddArguments ::
+                                            !(Maybe (Map Text Text)),
+                                            _udeEndpointName :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDevEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udeCustomLibraries' - Custom Python or Java libraries to be loaded in the DevEndpoint.
+-- * 'udeAddPublicKeys' - The list of public keys for the @DevEndpoint@ to use.
 --
--- * 'udePublicKey' - The public key for the DevEndpoint to use.
+-- * 'udeCustomLibraries' - Custom Python or Java libraries to be loaded in the @DevEndpoint@ .
 --
--- * 'udeUpdateEtlLibraries' - True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
+-- * 'udePublicKey' - The public key for the @DevEndpoint@ to use.
 --
--- * 'udeEndpointName' - The name of the DevEndpoint to be updated.
+-- * 'udeDeleteArguments' - The list of argument keys to be deleted from the map of arguments used to configure the @DevEndpoint@ .
+--
+-- * 'udeDeletePublicKeys' - The list of public keys to be deleted from the @DevEndpoint@ .
+--
+-- * 'udeUpdateEtlLibraries' - @True@ if the list of custom libraries to be loaded in the development endpoint needs to be updated, or @False@ if otherwise.
+--
+-- * 'udeAddArguments' - The map of arguments to add the map of arguments used to configure the @DevEndpoint@ . Valid arguments are:     * @"--enable-glue-datacatalog": ""@      * @"GLUE_PYTHON_VERSION": "3"@      * @"GLUE_PYTHON_VERSION": "2"@  You can specify a version of Python support for development endpoints by using the @Arguments@ parameter in the @CreateDevEndpoint@ or @UpdateDevEndpoint@ APIs. If no arguments are provided, the version defaults to Python 2.
+--
+-- * 'udeEndpointName' - The name of the @DevEndpoint@ to be updated.
 updateDevEndpoint
     :: Text -- ^ 'udeEndpointName'
     -> UpdateDevEndpoint
-updateDevEndpoint pEndpointName_ =
-  UpdateDevEndpoint'
-    { _udeCustomLibraries = Nothing
-    , _udePublicKey = Nothing
-    , _udeUpdateEtlLibraries = Nothing
-    , _udeEndpointName = pEndpointName_
-    }
+updateDevEndpoint pEndpointName_
+  = UpdateDevEndpoint'{_udeAddPublicKeys = Nothing,
+                       _udeCustomLibraries = Nothing,
+                       _udePublicKey = Nothing,
+                       _udeDeleteArguments = Nothing,
+                       _udeDeletePublicKeys = Nothing,
+                       _udeUpdateEtlLibraries = Nothing,
+                       _udeAddArguments = Nothing,
+                       _udeEndpointName = pEndpointName_}
 
+-- | The list of public keys for the @DevEndpoint@ to use.
+udeAddPublicKeys :: Lens' UpdateDevEndpoint [Text]
+udeAddPublicKeys = lens _udeAddPublicKeys (\ s a -> s{_udeAddPublicKeys = a}) . _Default . _Coerce
 
--- | Custom Python or Java libraries to be loaded in the DevEndpoint.
+-- | Custom Python or Java libraries to be loaded in the @DevEndpoint@ .
 udeCustomLibraries :: Lens' UpdateDevEndpoint (Maybe DevEndpointCustomLibraries)
 udeCustomLibraries = lens _udeCustomLibraries (\ s a -> s{_udeCustomLibraries = a})
 
--- | The public key for the DevEndpoint to use.
+-- | The public key for the @DevEndpoint@ to use.
 udePublicKey :: Lens' UpdateDevEndpoint (Maybe Text)
 udePublicKey = lens _udePublicKey (\ s a -> s{_udePublicKey = a})
 
--- | True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
+-- | The list of argument keys to be deleted from the map of arguments used to configure the @DevEndpoint@ .
+udeDeleteArguments :: Lens' UpdateDevEndpoint [Text]
+udeDeleteArguments = lens _udeDeleteArguments (\ s a -> s{_udeDeleteArguments = a}) . _Default . _Coerce
+
+-- | The list of public keys to be deleted from the @DevEndpoint@ .
+udeDeletePublicKeys :: Lens' UpdateDevEndpoint [Text]
+udeDeletePublicKeys = lens _udeDeletePublicKeys (\ s a -> s{_udeDeletePublicKeys = a}) . _Default . _Coerce
+
+-- | @True@ if the list of custom libraries to be loaded in the development endpoint needs to be updated, or @False@ if otherwise.
 udeUpdateEtlLibraries :: Lens' UpdateDevEndpoint (Maybe Bool)
 udeUpdateEtlLibraries = lens _udeUpdateEtlLibraries (\ s a -> s{_udeUpdateEtlLibraries = a})
 
--- | The name of the DevEndpoint to be updated.
+-- | The map of arguments to add the map of arguments used to configure the @DevEndpoint@ . Valid arguments are:     * @"--enable-glue-datacatalog": ""@      * @"GLUE_PYTHON_VERSION": "3"@      * @"GLUE_PYTHON_VERSION": "2"@  You can specify a version of Python support for development endpoints by using the @Arguments@ parameter in the @CreateDevEndpoint@ or @UpdateDevEndpoint@ APIs. If no arguments are provided, the version defaults to Python 2.
+udeAddArguments :: Lens' UpdateDevEndpoint (HashMap Text Text)
+udeAddArguments = lens _udeAddArguments (\ s a -> s{_udeAddArguments = a}) . _Default . _Map
+
+-- | The name of the @DevEndpoint@ to be updated.
 udeEndpointName :: Lens' UpdateDevEndpoint Text
 udeEndpointName = lens _udeEndpointName (\ s a -> s{_udeEndpointName = a})
 
@@ -119,9 +156,13 @@ instance ToJSON UpdateDevEndpoint where
         toJSON UpdateDevEndpoint'{..}
           = object
               (catMaybes
-                 [("CustomLibraries" .=) <$> _udeCustomLibraries,
+                 [("AddPublicKeys" .=) <$> _udeAddPublicKeys,
+                  ("CustomLibraries" .=) <$> _udeCustomLibraries,
                   ("PublicKey" .=) <$> _udePublicKey,
+                  ("DeleteArguments" .=) <$> _udeDeleteArguments,
+                  ("DeletePublicKeys" .=) <$> _udeDeletePublicKeys,
                   ("UpdateEtlLibraries" .=) <$> _udeUpdateEtlLibraries,
+                  ("AddArguments" .=) <$> _udeAddArguments,
                   Just ("EndpointName" .= _udeEndpointName)])
 
 instance ToPath UpdateDevEndpoint where
@@ -131,10 +172,10 @@ instance ToQuery UpdateDevEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'updateDevEndpointResponse' smart constructor.
-newtype UpdateDevEndpointResponse = UpdateDevEndpointResponse'
-  { _udersResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateDevEndpointResponse = UpdateDevEndpointResponse'{_udersResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateDevEndpointResponse' with the minimum fields required to make a request.
 --
@@ -144,9 +185,9 @@ newtype UpdateDevEndpointResponse = UpdateDevEndpointResponse'
 updateDevEndpointResponse
     :: Int -- ^ 'udersResponseStatus'
     -> UpdateDevEndpointResponse
-updateDevEndpointResponse pResponseStatus_ =
-  UpdateDevEndpointResponse' {_udersResponseStatus = pResponseStatus_}
-
+updateDevEndpointResponse pResponseStatus_
+  = UpdateDevEndpointResponse'{_udersResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 udersResponseStatus :: Lens' UpdateDevEndpointResponse Int

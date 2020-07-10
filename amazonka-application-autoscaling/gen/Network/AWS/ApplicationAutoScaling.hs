@@ -11,40 +11,46 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- With Application Auto Scaling, you can configure automatic scaling for your scalable AWS resources. You can use Application Auto Scaling to accomplish the following tasks:
+-- With Application Auto Scaling, you can configure automatic scaling for the following resources:
 --
 --
---     * Define scaling policies to automatically scale your AWS resources
+--     * Amazon ECS services
 --
---     * Scale your resources in response to CloudWatch alarms
+--     * Amazon EC2 Spot Fleet requests
 --
---     * Schedule one-time or recurring scaling actions
+--     * Amazon EMR clusters
 --
---     * View the history of your scaling events
+--     * Amazon AppStream 2.0 fleets
 --
+--     * Amazon DynamoDB tables and global secondary indexes throughput capacity
 --
+--     * Amazon Aurora Replicas
 --
--- Application Auto Scaling can scale the following AWS resources:
+--     * Amazon SageMaker endpoint variants
 --
---     * Amazon ECS services. For more information, see <http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html Service Auto Scaling> in the /Amazon Elastic Container Service Developer Guide/ .
+--     * Custom resources provided by your own applications or services
 --
---     * Amazon EC2 Spot fleets. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-auto-scaling.html Automatic Scaling for Spot Fleet> in the /Amazon EC2 User Guide/ .
+--     * Amazon Comprehend document classification endpoints
 --
---     * Amazon EMR clusters. For more information, see <http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-automatic-scaling.html Using Automatic Scaling in Amazon EMR> in the /Amazon EMR Management Guide/ .
+--     * AWS Lambda function provisioned concurrency
 --
---     * AppStream 2.0 fleets. For more information, see <http://docs.aws.amazon.com/appstream2/latest/developerguide/autoscaling.html Fleet Auto Scaling for Amazon AppStream 2.0> in the /Amazon AppStream 2.0 Developer Guide/ .
---
---     * Provisioned read and write capacity for Amazon DynamoDB tables and global secondary indexes. For more information, see <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AutoScaling.html Managing Throughput Capacity Automatically with DynamoDB Auto Scaling> in the /Amazon DynamoDB Developer Guide/ .
---
---     * Amazon Aurora Replicas. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Integrating.AutoScaling.html Using Amazon Aurora Auto Scaling with Aurora Replicas> .
---
---     * Amazon SageMaker endpoints. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/endpoint-auto-scaling.html Automatically Scaling Amazon SageMaker Models> .
+--     * Amazon Keyspaces for Apache Cassandra tables
 --
 --
 --
--- To configure automatic scaling for multiple resources across multiple services, use AWS Auto Scaling to create a scaling plan for your application. For more information, see <http://aws.amazon.com/autoscaling AWS Auto Scaling> .
+-- __API Summary__ 
 --
--- For a list of supported regions, see <http://docs.aws.amazon.com/general/latest/gr/rande.html#as-app_region AWS Regions and Endpoints: Application Auto Scaling> in the /AWS General Reference/ .
+-- The Application Auto Scaling service API includes three key sets of actions: 
+--
+--     * Register and manage scalable targets - Register AWS or custom resources as scalable targets (a resource that Application Auto Scaling can scale), set minimum and maximum capacity limits, and retrieve information on existing scalable targets.
+--
+--     * Configure and manage automatic scaling - Define scaling policies to dynamically scale your resources in response to CloudWatch alarms, schedule one-time or recurring scaling actions, and retrieve your recent scaling activity history.
+--
+--     * Suspend and resume scaling - Temporarily suspend and later resume automatic scaling by calling the <https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html RegisterScalableTarget> API action for any Application Auto Scaling scalable target. You can suspend and resume (individually or in combination) scale-out activities that are triggered by a scaling policy, scale-in activities that are triggered by a scaling policy, and scheduled scaling.
+--
+--
+--
+-- To learn more about Application Auto Scaling, including information about granting IAM users required permissions for Application Auto Scaling actions, see the <https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html Application Auto Scaling User Guide> .
 --
 module Network.AWS.ApplicationAutoScaling
     (
@@ -54,23 +60,23 @@ module Network.AWS.ApplicationAutoScaling
     -- * Errors
     -- $errors
 
+    -- ** InternalServiceException
+    , _InternalServiceException
+
     -- ** ValidationException
     , _ValidationException
+
+    -- ** ObjectNotFoundException
+    , _ObjectNotFoundException
+
+    -- ** ConcurrentUpdateException
+    , _ConcurrentUpdateException
 
     -- ** FailedResourceAccessException
     , _FailedResourceAccessException
 
     -- ** InvalidNextTokenException
     , _InvalidNextTokenException
-
-    -- ** ConcurrentUpdateException
-    , _ConcurrentUpdateException
-
-    -- ** InternalServiceException
-    , _InternalServiceException
-
-    -- ** ObjectNotFoundException
-    , _ObjectNotFoundException
 
     -- ** LimitExceededException
     , _LimitExceededException
@@ -81,25 +87,25 @@ module Network.AWS.ApplicationAutoScaling
     -- * Operations
     -- $operations
 
-    -- ** DeleteScalingPolicy
+    -- ** DeleteScalingPolicy 
     , module Network.AWS.ApplicationAutoScaling.DeleteScalingPolicy
 
-    -- ** PutScalingPolicy
+    -- ** PutScalingPolicy 
     , module Network.AWS.ApplicationAutoScaling.PutScalingPolicy
 
-    -- ** RegisterScalableTarget
+    -- ** RegisterScalableTarget 
     , module Network.AWS.ApplicationAutoScaling.RegisterScalableTarget
 
     -- ** DescribeScalingPolicies (Paginated)
     , module Network.AWS.ApplicationAutoScaling.DescribeScalingPolicies
 
-    -- ** PutScheduledAction
+    -- ** PutScheduledAction 
     , module Network.AWS.ApplicationAutoScaling.PutScheduledAction
 
-    -- ** DeleteScheduledAction
+    -- ** DeleteScheduledAction 
     , module Network.AWS.ApplicationAutoScaling.DeleteScheduledAction
 
-    -- ** DescribeScheduledActions
+    -- ** DescribeScheduledActions (Paginated)
     , module Network.AWS.ApplicationAutoScaling.DescribeScheduledActions
 
     -- ** DescribeScalableTargets (Paginated)
@@ -108,7 +114,7 @@ module Network.AWS.ApplicationAutoScaling
     -- ** DescribeScalingActivities (Paginated)
     , module Network.AWS.ApplicationAutoScaling.DescribeScalingActivities
 
-    -- ** DeregisterScalableTarget
+    -- ** DeregisterScalableTarget 
     , module Network.AWS.ApplicationAutoScaling.DeregisterScalableTarget
 
     -- * Types
@@ -167,6 +173,7 @@ module Network.AWS.ApplicationAutoScaling
     -- ** ScalableTarget
     , ScalableTarget
     , scalableTarget
+    , stSuspendedState
     , stServiceNamespace
     , stResourceId
     , stScalableDimension
@@ -239,6 +246,13 @@ module Network.AWS.ApplicationAutoScaling
     , sspcCooldown
     , sspcMetricAggregationType
     , sspcMinAdjustmentMagnitude
+
+    -- ** SuspendedState
+    , SuspendedState
+    , suspendedState
+    , ssDynamicScalingInSuspended
+    , ssScheduledScalingSuspended
+    , ssDynamicScalingOutSuspended
 
     -- ** TargetTrackingScalingPolicyConfiguration
     , TargetTrackingScalingPolicyConfiguration

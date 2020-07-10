@@ -47,12 +47,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateEnvironmentMembership' smart constructor.
-data UpdateEnvironmentMembership = UpdateEnvironmentMembership'
-  { _uemEnvironmentId :: !Text
-  , _uemUserARN       :: !Text
-  , _uemPermissions   :: !MemberPermissions
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEnvironmentMembership = UpdateEnvironmentMembership'{_uemEnvironmentId
+                                                                :: !Text,
+                                                                _uemUserARN ::
+                                                                !Text,
+                                                                _uemPermissions
+                                                                ::
+                                                                !MemberPermissions}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateEnvironmentMembership' with the minimum fields required to make a request.
 --
@@ -68,13 +71,12 @@ updateEnvironmentMembership
     -> Text -- ^ 'uemUserARN'
     -> MemberPermissions -- ^ 'uemPermissions'
     -> UpdateEnvironmentMembership
-updateEnvironmentMembership pEnvironmentId_ pUserARN_ pPermissions_ =
-  UpdateEnvironmentMembership'
-    { _uemEnvironmentId = pEnvironmentId_
-    , _uemUserARN = pUserARN_
-    , _uemPermissions = pPermissions_
-    }
-
+updateEnvironmentMembership pEnvironmentId_ pUserARN_
+  pPermissions_
+  = UpdateEnvironmentMembership'{_uemEnvironmentId =
+                                   pEnvironmentId_,
+                                 _uemUserARN = pUserARN_,
+                                 _uemPermissions = pPermissions_}
 
 -- | The ID of the environment for the environment member whose settings you want to change.
 uemEnvironmentId :: Lens' UpdateEnvironmentMembership Text
@@ -127,11 +129,15 @@ instance ToQuery UpdateEnvironmentMembership where
         toQuery = const mempty
 
 -- | /See:/ 'updateEnvironmentMembershipResponse' smart constructor.
-data UpdateEnvironmentMembershipResponse = UpdateEnvironmentMembershipResponse'
-  { _uemrsMembership     :: !(Maybe EnvironmentMember)
-  , _uemrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEnvironmentMembershipResponse = UpdateEnvironmentMembershipResponse'{_uemrsMembership
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    EnvironmentMember),
+                                                                                _uemrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'UpdateEnvironmentMembershipResponse' with the minimum fields required to make a request.
 --
@@ -143,10 +149,11 @@ data UpdateEnvironmentMembershipResponse = UpdateEnvironmentMembershipResponse'
 updateEnvironmentMembershipResponse
     :: Int -- ^ 'uemrsResponseStatus'
     -> UpdateEnvironmentMembershipResponse
-updateEnvironmentMembershipResponse pResponseStatus_ =
-  UpdateEnvironmentMembershipResponse'
-    {_uemrsMembership = Nothing, _uemrsResponseStatus = pResponseStatus_}
-
+updateEnvironmentMembershipResponse pResponseStatus_
+  = UpdateEnvironmentMembershipResponse'{_uemrsMembership
+                                           = Nothing,
+                                         _uemrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Information about the environment member whose settings were changed.
 uemrsMembership :: Lens' UpdateEnvironmentMembershipResponse (Maybe EnvironmentMember)

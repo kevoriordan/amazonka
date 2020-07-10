@@ -61,11 +61,10 @@ import Network.AWS.Response
 -- | Input structure for the GetStatus operation.
 --
 -- /See:/ 'getStatus' smart constructor.
-data GetStatus = GetStatus'
-  { _gsAPIVersion :: !(Maybe Text)
-  , _gsJobId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetStatus = GetStatus'{_gsAPIVersion ::
+                            !(Maybe Text),
+                            _gsJobId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetStatus' with the minimum fields required to make a request.
 --
@@ -77,8 +76,9 @@ data GetStatus = GetStatus'
 getStatus
     :: Text -- ^ 'gsJobId'
     -> GetStatus
-getStatus pJobId_ = GetStatus' {_gsAPIVersion = Nothing, _gsJobId = pJobId_}
-
+getStatus pJobId_
+  = GetStatus'{_gsAPIVersion = Nothing,
+               _gsJobId = pJobId_}
 
 -- | Undocumented member.
 gsAPIVersion :: Lens' GetStatus (Maybe Text)
@@ -135,26 +135,32 @@ instance ToQuery GetStatus where
 -- | Output structure for the GetStatus operation.
 --
 -- /See:/ 'getStatusResponse' smart constructor.
-data GetStatusResponse = GetStatusResponse'
-  { _gsrsCarrier               :: !(Maybe Text)
-  , _gsrsTrackingNumber        :: !(Maybe Text)
-  , _gsrsSignature             :: !(Maybe Text)
-  , _gsrsJobType               :: !(Maybe JobType)
-  , _gsrsJobId                 :: !(Maybe Text)
-  , _gsrsSignatureFileContents :: !(Maybe Text)
-  , _gsrsErrorCount            :: !(Maybe Int)
-  , _gsrsCurrentManifest       :: !(Maybe Text)
-  , _gsrsArtifactList          :: !(Maybe [Artifact])
-  , _gsrsLogBucket             :: !(Maybe Text)
-  , _gsrsCreationDate          :: !(Maybe ISO8601)
-  , _gsrsProgressCode          :: !(Maybe Text)
-  , _gsrsLocationCode          :: !(Maybe Text)
-  , _gsrsLogKey                :: !(Maybe Text)
-  , _gsrsLocationMessage       :: !(Maybe Text)
-  , _gsrsProgressMessage       :: !(Maybe Text)
-  , _gsrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetStatusResponse = GetStatusResponse'{_gsrsCarrier
+                                            :: !(Maybe Text),
+                                            _gsrsTrackingNumber ::
+                                            !(Maybe Text),
+                                            _gsrsSignature :: !(Maybe Text),
+                                            _gsrsJobType :: !(Maybe JobType),
+                                            _gsrsJobId :: !(Maybe Text),
+                                            _gsrsSignatureFileContents ::
+                                            !(Maybe Text),
+                                            _gsrsErrorCount :: !(Maybe Int),
+                                            _gsrsCurrentManifest ::
+                                            !(Maybe Text),
+                                            _gsrsArtifactList ::
+                                            !(Maybe [Artifact]),
+                                            _gsrsLogBucket :: !(Maybe Text),
+                                            _gsrsCreationDate ::
+                                            !(Maybe ISO8601),
+                                            _gsrsProgressCode :: !(Maybe Text),
+                                            _gsrsLocationCode :: !(Maybe Text),
+                                            _gsrsLogKey :: !(Maybe Text),
+                                            _gsrsLocationMessage ::
+                                            !(Maybe Text),
+                                            _gsrsProgressMessage ::
+                                            !(Maybe Text),
+                                            _gsrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetStatusResponse' with the minimum fields required to make a request.
 --
@@ -196,27 +202,22 @@ data GetStatusResponse = GetStatusResponse'
 getStatusResponse
     :: Int -- ^ 'gsrsResponseStatus'
     -> GetStatusResponse
-getStatusResponse pResponseStatus_ =
-  GetStatusResponse'
-    { _gsrsCarrier = Nothing
-    , _gsrsTrackingNumber = Nothing
-    , _gsrsSignature = Nothing
-    , _gsrsJobType = Nothing
-    , _gsrsJobId = Nothing
-    , _gsrsSignatureFileContents = Nothing
-    , _gsrsErrorCount = Nothing
-    , _gsrsCurrentManifest = Nothing
-    , _gsrsArtifactList = Nothing
-    , _gsrsLogBucket = Nothing
-    , _gsrsCreationDate = Nothing
-    , _gsrsProgressCode = Nothing
-    , _gsrsLocationCode = Nothing
-    , _gsrsLogKey = Nothing
-    , _gsrsLocationMessage = Nothing
-    , _gsrsProgressMessage = Nothing
-    , _gsrsResponseStatus = pResponseStatus_
-    }
-
+getStatusResponse pResponseStatus_
+  = GetStatusResponse'{_gsrsCarrier = Nothing,
+                       _gsrsTrackingNumber = Nothing,
+                       _gsrsSignature = Nothing, _gsrsJobType = Nothing,
+                       _gsrsJobId = Nothing,
+                       _gsrsSignatureFileContents = Nothing,
+                       _gsrsErrorCount = Nothing,
+                       _gsrsCurrentManifest = Nothing,
+                       _gsrsArtifactList = Nothing,
+                       _gsrsLogBucket = Nothing,
+                       _gsrsCreationDate = Nothing,
+                       _gsrsProgressCode = Nothing,
+                       _gsrsLocationCode = Nothing, _gsrsLogKey = Nothing,
+                       _gsrsLocationMessage = Nothing,
+                       _gsrsProgressMessage = Nothing,
+                       _gsrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 gsrsCarrier :: Lens' GetStatusResponse (Maybe Text)

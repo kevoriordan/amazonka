@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- [EC2-VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
+-- [VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
 --
 --
 module Network.AWS.EC2.DescribeSecurityGroupReferences
@@ -46,31 +46,35 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeSecurityGroupReferences' smart constructor.
-data DescribeSecurityGroupReferences = DescribeSecurityGroupReferences'
-  { _dsgrDryRun  :: !(Maybe Bool)
-  , _dsgrGroupId :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSecurityGroupReferences = DescribeSecurityGroupReferences'{_dsgrDryRun
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Bool),
+                                                                        _dsgrGroupId
+                                                                        ::
+                                                                        ![Text]}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'DescribeSecurityGroupReferences' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsgrDryRun' - Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+-- * 'dsgrDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'dsgrGroupId' - One or more security group IDs in your account.
+-- * 'dsgrGroupId' - The IDs of the security groups in your account.
 describeSecurityGroupReferences
     :: DescribeSecurityGroupReferences
-describeSecurityGroupReferences =
-  DescribeSecurityGroupReferences'
-    {_dsgrDryRun = Nothing, _dsgrGroupId = mempty}
+describeSecurityGroupReferences
+  = DescribeSecurityGroupReferences'{_dsgrDryRun =
+                                       Nothing,
+                                     _dsgrGroupId = mempty}
 
-
--- | Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+-- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 dsgrDryRun :: Lens' DescribeSecurityGroupReferences (Maybe Bool)
 dsgrDryRun = lens _dsgrDryRun (\ s a -> s{_dsgrDryRun = a})
 
--- | One or more security group IDs in your account.
+-- | The IDs of the security groups in your account.
 dsgrGroupId :: Lens' DescribeSecurityGroupReferences [Text]
 dsgrGroupId = lens _dsgrGroupId (\ s a -> s{_dsgrGroupId = a}) . _Coerce
 
@@ -110,11 +114,15 @@ instance ToQuery DescribeSecurityGroupReferences
                toQueryList "GroupId" _dsgrGroupId]
 
 -- | /See:/ 'describeSecurityGroupReferencesResponse' smart constructor.
-data DescribeSecurityGroupReferencesResponse = DescribeSecurityGroupReferencesResponse'
-  { _dsgrrsSecurityGroupReferenceSet :: !(Maybe [SecurityGroupReference])
-  , _dsgrrsResponseStatus            :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeSecurityGroupReferencesResponse = DescribeSecurityGroupReferencesResponse'{_dsgrrsSecurityGroupReferenceSet
+                                                                                        ::
+                                                                                        !(Maybe
+                                                                                            [SecurityGroupReference]),
+                                                                                        _dsgrrsResponseStatus
+                                                                                        ::
+                                                                                        !Int}
+                                                 deriving (Eq, Read, Show, Data,
+                                                           Typeable, Generic)
 
 -- | Creates a value of 'DescribeSecurityGroupReferencesResponse' with the minimum fields required to make a request.
 --
@@ -126,12 +134,12 @@ data DescribeSecurityGroupReferencesResponse = DescribeSecurityGroupReferencesRe
 describeSecurityGroupReferencesResponse
     :: Int -- ^ 'dsgrrsResponseStatus'
     -> DescribeSecurityGroupReferencesResponse
-describeSecurityGroupReferencesResponse pResponseStatus_ =
-  DescribeSecurityGroupReferencesResponse'
-    { _dsgrrsSecurityGroupReferenceSet = Nothing
-    , _dsgrrsResponseStatus = pResponseStatus_
-    }
-
+describeSecurityGroupReferencesResponse
+  pResponseStatus_
+  = DescribeSecurityGroupReferencesResponse'{_dsgrrsSecurityGroupReferenceSet
+                                               = Nothing,
+                                             _dsgrrsResponseStatus =
+                                               pResponseStatus_}
 
 -- | Information about the VPCs with the referencing security groups.
 dsgrrsSecurityGroupReferenceSet :: Lens' DescribeSecurityGroupReferencesResponse [SecurityGroupReference]

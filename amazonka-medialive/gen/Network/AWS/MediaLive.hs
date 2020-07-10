@@ -20,38 +20,71 @@ module Network.AWS.MediaLive
     -- * Errors
     -- $errors
 
-    -- ** GatewayTimeoutException
-    , _GatewayTimeoutException
-
-    -- ** UnprocessableEntityException
-    , _UnprocessableEntityException
-
-    -- ** ConflictException
-    , _ConflictException
-
-    -- ** ForbiddenException
-    , _ForbiddenException
-
-    -- ** NotFoundException
-    , _NotFoundException
+    -- ** InternalServerErrorException
+    , _InternalServerErrorException
 
     -- ** TooManyRequestsException
     , _TooManyRequestsException
 
-    -- ** InternalServerErrorException
-    , _InternalServerErrorException
+    -- ** GatewayTimeoutException
+    , _GatewayTimeoutException
 
-    -- ** BadGatewayException
-    , _BadGatewayException
+    -- ** ForbiddenException
+    , _ForbiddenException
 
     -- ** BadRequestException
     , _BadRequestException
 
+    -- ** UnprocessableEntityException
+    , _UnprocessableEntityException
+
+    -- ** BadGatewayException
+    , _BadGatewayException
+
+    -- ** NotFoundException
+    , _NotFoundException
+
+    -- ** ConflictException
+    , _ConflictException
+
     -- * Waiters
     -- $waiters
 
+    -- ** ChannelRunning
+    , channelRunning
+
+    -- ** MultiplexRunning
+    , multiplexRunning
+
+    -- ** MultiplexDeleted
+    , multiplexDeleted
+
+    -- ** ChannelStopped
+    , channelStopped
+
+    -- ** MultiplexCreated
+    , multiplexCreated
+
+    -- ** ChannelCreated
+    , channelCreated
+
+    -- ** ChannelDeleted
+    , channelDeleted
+
+    -- ** MultiplexStopped
+    , multiplexStopped
+
     -- * Operations
     -- $operations
+
+    -- ** UpdateChannelClass 
+    , module Network.AWS.MediaLive.UpdateChannelClass
+
+    -- ** ListMultiplexes (Paginated)
+    , module Network.AWS.MediaLive.ListMultiplexes
+
+    -- ** CreateMultiplex 
+    , module Network.AWS.MediaLive.CreateMultiplex
 
     -- ** ListInputs (Paginated)
     , module Network.AWS.MediaLive.ListInputs
@@ -59,50 +92,119 @@ module Network.AWS.MediaLive
     -- ** ListChannels (Paginated)
     , module Network.AWS.MediaLive.ListChannels
 
-    -- ** DescribeInputSecurityGroup
+    -- ** DescribeInputSecurityGroup 
     , module Network.AWS.MediaLive.DescribeInputSecurityGroup
 
-    -- ** CreateInput
+    -- ** CreateInput 
     , module Network.AWS.MediaLive.CreateInput
 
-    -- ** DeleteChannel
+    -- ** ListTagsForResource 
+    , module Network.AWS.MediaLive.ListTagsForResource
+
+    -- ** DeleteChannel 
     , module Network.AWS.MediaLive.DeleteChannel
 
-    -- ** UpdateChannel
+    -- ** UpdateChannel 
     , module Network.AWS.MediaLive.UpdateChannel
 
-    -- ** CreateInputSecurityGroup
+    -- ** DescribeReservation 
+    , module Network.AWS.MediaLive.DescribeReservation
+
+    -- ** CreateTags 
+    , module Network.AWS.MediaLive.CreateTags
+
+    -- ** StopMultiplex 
+    , module Network.AWS.MediaLive.StopMultiplex
+
+    -- ** DeleteTags 
+    , module Network.AWS.MediaLive.DeleteTags
+
+    -- ** CreateInputSecurityGroup 
     , module Network.AWS.MediaLive.CreateInputSecurityGroup
 
-    -- ** StartChannel
+    -- ** StartChannel 
     , module Network.AWS.MediaLive.StartChannel
 
     -- ** ListInputSecurityGroups (Paginated)
     , module Network.AWS.MediaLive.ListInputSecurityGroups
 
-    -- ** CreateChannel
+    -- ** DeleteReservation 
+    , module Network.AWS.MediaLive.DeleteReservation
+
+    -- ** UpdateReservation 
+    , module Network.AWS.MediaLive.UpdateReservation
+
+    -- ** DeleteSchedule 
+    , module Network.AWS.MediaLive.DeleteSchedule
+
+    -- ** CreateChannel 
     , module Network.AWS.MediaLive.CreateChannel
 
-    -- ** DeleteInput
+    -- ** DeleteInput 
     , module Network.AWS.MediaLive.DeleteInput
 
-    -- ** UpdateInput
+    -- ** UpdateInput 
     , module Network.AWS.MediaLive.UpdateInput
 
-    -- ** StopChannel
+    -- ** DescribeOffering 
+    , module Network.AWS.MediaLive.DescribeOffering
+
+    -- ** DeleteMultiplexProgram 
+    , module Network.AWS.MediaLive.DeleteMultiplexProgram
+
+    -- ** UpdateMultiplexProgram 
+    , module Network.AWS.MediaLive.UpdateMultiplexProgram
+
+    -- ** ListMultiplexPrograms (Paginated)
+    , module Network.AWS.MediaLive.ListMultiplexPrograms
+
+    -- ** DescribeMultiplex 
+    , module Network.AWS.MediaLive.DescribeMultiplex
+
+    -- ** BatchUpdateSchedule 
+    , module Network.AWS.MediaLive.BatchUpdateSchedule
+
+    -- ** CreateMultiplexProgram 
+    , module Network.AWS.MediaLive.CreateMultiplexProgram
+
+    -- ** DescribeSchedule (Paginated)
+    , module Network.AWS.MediaLive.DescribeSchedule
+
+    -- ** StartMultiplex 
+    , module Network.AWS.MediaLive.StartMultiplex
+
+    -- ** StopChannel 
     , module Network.AWS.MediaLive.StopChannel
 
-    -- ** DescribeInput
+    -- ** DescribeInput 
     , module Network.AWS.MediaLive.DescribeInput
 
-    -- ** DescribeChannel
+    -- ** PurchaseOffering 
+    , module Network.AWS.MediaLive.PurchaseOffering
+
+    -- ** DescribeChannel 
     , module Network.AWS.MediaLive.DescribeChannel
 
-    -- ** UpdateInputSecurityGroup
+    -- ** UpdateInputSecurityGroup 
     , module Network.AWS.MediaLive.UpdateInputSecurityGroup
 
-    -- ** DeleteInputSecurityGroup
+    -- ** DeleteInputSecurityGroup 
     , module Network.AWS.MediaLive.DeleteInputSecurityGroup
+
+    -- ** ListReservations (Paginated)
+    , module Network.AWS.MediaLive.ListReservations
+
+    -- ** DeleteMultiplex 
+    , module Network.AWS.MediaLive.DeleteMultiplex
+
+    -- ** UpdateMultiplex 
+    , module Network.AWS.MediaLive.UpdateMultiplex
+
+    -- ** DescribeMultiplexProgram 
+    , module Network.AWS.MediaLive.DescribeMultiplexProgram
+
+    -- ** ListOfferings (Paginated)
+    , module Network.AWS.MediaLive.ListOfferings
 
     -- * Types
 
@@ -160,6 +262,9 @@ module Network.AWS.MediaLive
     -- ** AudioNormalizationAlgorithmControl
     , AudioNormalizationAlgorithmControl (..)
 
+    -- ** AudioOnlyHlsSegmentType
+    , AudioOnlyHlsSegmentType (..)
+
     -- ** AudioOnlyHlsTrackType
     , AudioOnlyHlsTrackType (..)
 
@@ -195,6 +300,9 @@ module Network.AWS.MediaLive
 
     -- ** BurnInTeletextGridControl
     , BurnInTeletextGridControl (..)
+
+    -- ** ChannelClass
+    , ChannelClass (..)
 
     -- ** ChannelState
     , ChannelState (..)
@@ -274,11 +382,26 @@ module Network.AWS.MediaLive
     -- ** FixedAfd
     , FixedAfd (..)
 
+    -- ** Fmp4NielsenId3Behavior
+    , Fmp4NielsenId3Behavior (..)
+
+    -- ** Fmp4TimedMetadataBehavior
+    , Fmp4TimedMetadataBehavior (..)
+
+    -- ** FollowPoint
+    , FollowPoint (..)
+
+    -- ** FrameCaptureIntervalUnit
+    , FrameCaptureIntervalUnit (..)
+
     -- ** GlobalConfigurationInputEndAction
     , GlobalConfigurationInputEndAction (..)
 
     -- ** GlobalConfigurationLowFramerateInputs
     , GlobalConfigurationLowFramerateInputs (..)
+
+    -- ** GlobalConfigurationOutputLockingMode
+    , GlobalConfigurationOutputLockingMode (..)
 
     -- ** GlobalConfigurationOutputTimingSource
     , GlobalConfigurationOutputTimingSource (..)
@@ -294,6 +417,9 @@ module Network.AWS.MediaLive
 
     -- ** H264FlickerAq
     , H264FlickerAq (..)
+
+    -- ** H264ForceFieldPictures
+    , H264ForceFieldPictures (..)
 
     -- ** H264FramerateControl
     , H264FramerateControl (..)
@@ -316,6 +442,9 @@ module Network.AWS.MediaLive
     -- ** H264Profile
     , H264Profile (..)
 
+    -- ** H264QualityLevel
+    , H264QualityLevel (..)
+
     -- ** H264RateControlMode
     , H264RateControlMode (..)
 
@@ -328,6 +457,9 @@ module Network.AWS.MediaLive
     -- ** H264SpatialAq
     , H264SpatialAq (..)
 
+    -- ** H264SubGopLength
+    , H264SubGopLength (..)
+
     -- ** H264Syntax
     , H264Syntax (..)
 
@@ -336,6 +468,45 @@ module Network.AWS.MediaLive
 
     -- ** H264TimecodeInsertionBehavior
     , H264TimecodeInsertionBehavior (..)
+
+    -- ** H265AdaptiveQuantization
+    , H265AdaptiveQuantization (..)
+
+    -- ** H265AlternativeTransferFunction
+    , H265AlternativeTransferFunction (..)
+
+    -- ** H265ColorMetadata
+    , H265ColorMetadata (..)
+
+    -- ** H265FlickerAq
+    , H265FlickerAq (..)
+
+    -- ** H265GopSizeUnits
+    , H265GopSizeUnits (..)
+
+    -- ** H265Level
+    , H265Level (..)
+
+    -- ** H265LookAheadRateControl
+    , H265LookAheadRateControl (..)
+
+    -- ** H265Profile
+    , H265Profile (..)
+
+    -- ** H265RateControlMode
+    , H265RateControlMode (..)
+
+    -- ** H265ScanType
+    , H265ScanType (..)
+
+    -- ** H265SceneChangeDetect
+    , H265SceneChangeDetect (..)
+
+    -- ** H265Tier
+    , H265Tier (..)
+
+    -- ** H265TimecodeInsertionBehavior
+    , H265TimecodeInsertionBehavior (..)
 
     -- ** HlsAdMarkers
     , HlsAdMarkers (..)
@@ -357,6 +528,12 @@ module Network.AWS.MediaLive
 
     -- ** HlsEncryptionType
     , HlsEncryptionType (..)
+
+    -- ** HlsH265PackagingType
+    , HlsH265PackagingType (..)
+
+    -- ** HlsId3SegmentTaggingState
+    , HlsId3SegmentTaggingState (..)
 
     -- ** HlsIvInManifest
     , HlsIvInManifest (..)
@@ -382,6 +559,9 @@ module Network.AWS.MediaLive
     -- ** HlsProgramDateTime
     , HlsProgramDateTime (..)
 
+    -- ** HlsRedundantManifest
+    , HlsRedundantManifest (..)
+
     -- ** HlsSegmentationMode
     , HlsSegmentationMode (..)
 
@@ -396,6 +576,12 @@ module Network.AWS.MediaLive
 
     -- ** HlsWebdavHTTPTransferMode
     , HlsWebdavHTTPTransferMode (..)
+
+    -- ** IFrameOnlyPlaylistType
+    , IFrameOnlyPlaylistType (..)
+
+    -- ** InputClass
+    , InputClass (..)
 
     -- ** InputCodec
     , InputCodec (..)
@@ -415,6 +601,9 @@ module Network.AWS.MediaLive
     -- ** InputLossActionForMsSmoothOut
     , InputLossActionForMsSmoothOut (..)
 
+    -- ** InputLossActionForRtmpOut
+    , InputLossActionForRtmpOut (..)
+
     -- ** InputLossActionForUdpOut
     , InputLossActionForUdpOut (..)
 
@@ -423,6 +612,9 @@ module Network.AWS.MediaLive
 
     -- ** InputMaximumBitrate
     , InputMaximumBitrate (..)
+
+    -- ** InputPreference
+    , InputPreference (..)
 
     -- ** InputResolution
     , InputResolution (..)
@@ -433,11 +625,23 @@ module Network.AWS.MediaLive
     -- ** InputSourceEndBehavior
     , InputSourceEndBehavior (..)
 
+    -- ** InputSourceType
+    , InputSourceType (..)
+
     -- ** InputState
     , InputState (..)
 
+    -- ** InputTimecodeSource
+    , InputTimecodeSource (..)
+
     -- ** InputType
     , InputType (..)
+
+    -- ** LastFrameClippingBehavior
+    , LastFrameClippingBehavior (..)
+
+    -- ** LogLevel
+    , LogLevel (..)
 
     -- ** M2tsAbsentInputAudioBehavior
     , M2tsAbsentInputAudioBehavior (..)
@@ -475,6 +679,9 @@ module Network.AWS.MediaLive
     -- ** M2tsKlv
     , M2tsKlv (..)
 
+    -- ** M2tsNielsenId3Behavior
+    , M2tsNielsenId3Behavior (..)
+
     -- ** M2tsPcrControl
     , M2tsPcrControl (..)
 
@@ -493,6 +700,9 @@ module Network.AWS.MediaLive
     -- ** M2tsTimedMetadataBehavior
     , M2tsTimedMetadataBehavior (..)
 
+    -- ** M3u8NielsenId3Behavior
+    , M3u8NielsenId3Behavior (..)
+
     -- ** M3u8PcrControl
     , M3u8PcrControl (..)
 
@@ -505,8 +715,53 @@ module Network.AWS.MediaLive
     -- ** Mp2CodingMode
     , Mp2CodingMode (..)
 
+    -- ** MsSmoothH265PackagingType
+    , MsSmoothH265PackagingType (..)
+
+    -- ** MultiplexState
+    , MultiplexState (..)
+
     -- ** NetworkInputServerValidation
     , NetworkInputServerValidation (..)
+
+    -- ** NielsenPcmToId3TaggingState
+    , NielsenPcmToId3TaggingState (..)
+
+    -- ** OfferingDurationUnits
+    , OfferingDurationUnits (..)
+
+    -- ** OfferingType
+    , OfferingType (..)
+
+    -- ** PipelineId
+    , PipelineId (..)
+
+    -- ** PreferredChannelPipeline
+    , PreferredChannelPipeline (..)
+
+    -- ** ReservationCodec
+    , ReservationCodec (..)
+
+    -- ** ReservationMaximumBitrate
+    , ReservationMaximumBitrate (..)
+
+    -- ** ReservationMaximumFramerate
+    , ReservationMaximumFramerate (..)
+
+    -- ** ReservationResolution
+    , ReservationResolution (..)
+
+    -- ** ReservationResourceType
+    , ReservationResourceType (..)
+
+    -- ** ReservationSpecialFeature
+    , ReservationSpecialFeature (..)
+
+    -- ** ReservationState
+    , ReservationState (..)
+
+    -- ** ReservationVideoQuality
+    , ReservationVideoQuality (..)
 
     -- ** RtmpCacheFullBehavior
     , RtmpCacheFullBehavior (..)
@@ -526,11 +781,26 @@ module Network.AWS.MediaLive
     -- ** Scte35AposWebDeliveryAllowedBehavior
     , Scte35AposWebDeliveryAllowedBehavior (..)
 
+    -- ** Scte35ArchiveAllowedFlag
+    , Scte35ArchiveAllowedFlag (..)
+
+    -- ** Scte35DeviceRestrictions
+    , Scte35DeviceRestrictions (..)
+
+    -- ** Scte35NoRegionalBlackoutFlag
+    , Scte35NoRegionalBlackoutFlag (..)
+
+    -- ** Scte35SegmentationCancelIndicator
+    , Scte35SegmentationCancelIndicator (..)
+
     -- ** Scte35SpliceInsertNoRegionalBlackoutBehavior
     , Scte35SpliceInsertNoRegionalBlackoutBehavior (..)
 
     -- ** Scte35SpliceInsertWebDeliveryAllowedBehavior
     , Scte35SpliceInsertWebDeliveryAllowedBehavior (..)
+
+    -- ** Scte35WebDeliveryAllowedFlag
+    , Scte35WebDeliveryAllowedFlag (..)
 
     -- ** SmoothGroupAudioOnlyTimecodeControl
     , SmoothGroupAudioOnlyTimecodeControl (..)
@@ -555,6 +825,12 @@ module Network.AWS.MediaLive
 
     -- ** SmoothGroupTimestampOffsetMode
     , SmoothGroupTimestampOffsetMode (..)
+
+    -- ** TemporalFilterPostFilterSharpening
+    , TemporalFilterPostFilterSharpening (..)
+
+    -- ** TemporalFilterStrength
+    , TemporalFilterStrength (..)
 
     -- ** TimecodeConfigSource
     , TimecodeConfigSource (..)
@@ -673,6 +949,7 @@ module Network.AWS.MediaLive
     , AudioOnlyHlsSettings
     , audioOnlyHlsSettings
     , aohsAudioOnlyImage
+    , aohsSegmentType
     , aohsAudioGroupId
     , aohsAudioTrackType
 
@@ -691,7 +968,24 @@ module Network.AWS.MediaLive
     , AudioSelectorSettings
     , audioSelectorSettings
     , assAudioLanguageSelection
+    , assAudioTrackSelection
     , assAudioPidSelection
+
+    -- ** AudioTrack
+    , AudioTrack
+    , audioTrack
+    , atTrack
+
+    -- ** AudioTrackSelection
+    , AudioTrackSelection
+    , audioTrackSelection
+    , atsTracks
+
+    -- ** AutomaticInputFailoverSettings
+    , AutomaticInputFailoverSettings
+    , automaticInputFailoverSettings
+    , aifsInputPreference
+    , aifsSecondaryInputId
 
     -- ** AvailBlanking
     , AvailBlanking
@@ -709,6 +1003,26 @@ module Network.AWS.MediaLive
     , availSettings
     , asScte35SpliceInsert
     , asScte35TimeSignalApos
+
+    -- ** BatchScheduleActionCreateRequest
+    , BatchScheduleActionCreateRequest
+    , batchScheduleActionCreateRequest
+    , bsacrScheduleActions
+
+    -- ** BatchScheduleActionCreateResult
+    , BatchScheduleActionCreateResult
+    , batchScheduleActionCreateResult
+    , bScheduleActions
+
+    -- ** BatchScheduleActionDeleteRequest
+    , BatchScheduleActionDeleteRequest
+    , batchScheduleActionDeleteRequest
+    , bsadrActionNames
+
+    -- ** BatchScheduleActionDeleteResult
+    , BatchScheduleActionDeleteResult
+    , batchScheduleActionDeleteResult
+    , bsadrScheduleActions
 
     -- ** BlackoutSlate
     , BlackoutSlate
@@ -793,14 +1107,18 @@ module Network.AWS.MediaLive
     , Channel
     , channel
     , cState
+    , cLogLevel
     , cARN
     , cPipelinesRunningCount
+    , cPipelineDetails
     , cInputSpecification
     , cInputAttachments
     , cDestinations
     , cName
     , cId
+    , cChannelClass
     , cEgressEndpoints
+    , cTags
     , cEncoderSettings
     , cRoleARN
 
@@ -813,6 +1131,7 @@ module Network.AWS.MediaLive
     , ChannelSummary
     , channelSummary
     , chaState
+    , chaLogLevel
     , chaARN
     , chaPipelinesRunningCount
     , chaInputSpecification
@@ -820,8 +1139,14 @@ module Network.AWS.MediaLive
     , chaDestinations
     , chaName
     , chaId
+    , chaChannelClass
     , chaEgressEndpoints
+    , chaTags
     , chaRoleARN
+
+    -- ** ColorSpacePassthroughSettings
+    , ColorSpacePassthroughSettings
+    , colorSpacePassthroughSettings
 
     -- ** DvbNitSettings
     , DvbNitSettings
@@ -914,6 +1239,7 @@ module Network.AWS.MediaLive
     , encoderSettings
     , esCaptionDescriptions
     , esAvailConfiguration
+    , esNielsenConfiguration
     , esAvailBlanking
     , esGlobalConfiguration
     , esBlackoutSlate
@@ -929,19 +1255,118 @@ module Network.AWS.MediaLive
     , fosIncludeFec
     , fosColumnDepth
 
+    -- ** FixedModeScheduleActionStartSettings
+    , FixedModeScheduleActionStartSettings
+    , fixedModeScheduleActionStartSettings
+    , fmsassTime
+
+    -- ** Fmp4HlsSettings
+    , Fmp4HlsSettings
+    , fmp4HlsSettings
+    , fhsNielsenId3Behavior
+    , fhsAudioRenditionSets
+    , fhsTimedMetadataBehavior
+
+    -- ** FollowModeScheduleActionStartSettings
+    , FollowModeScheduleActionStartSettings
+    , followModeScheduleActionStartSettings
+    , fmsassReferenceActionName
+    , fmsassFollowPoint
+
+    -- ** FrameCaptureGroupSettings
+    , FrameCaptureGroupSettings
+    , frameCaptureGroupSettings
+    , fcgsDestination
+
+    -- ** FrameCaptureOutputSettings
+    , FrameCaptureOutputSettings
+    , frameCaptureOutputSettings
+    , fcosNameModifier
+
+    -- ** FrameCaptureSettings
+    , FrameCaptureSettings
+    , frameCaptureSettings
+    , fcsCaptureIntervalUnits
+    , fcsCaptureInterval
+
     -- ** GlobalConfiguration
     , GlobalConfiguration
     , globalConfiguration
+    , gcOutputLockingMode
     , gcInputLossBehavior
     , gcInitialAudioGain
     , gcSupportLowFramerateInputs
     , gcInputEndAction
     , gcOutputTimingSource
 
+    -- ** H264ColorSpaceSettings
+    , H264ColorSpaceSettings
+    , h264ColorSpaceSettings
+    , hRec709Settings
+    , hRec601Settings
+    , hColorSpacePassthroughSettings
+
+    -- ** H264FilterSettings
+    , H264FilterSettings
+    , h264FilterSettings
+    , hfsTemporalFilterSettings
+
     -- ** H264Settings
     , H264Settings
     , h264Settings
-    , hsTemporalAq
+    , hssTemporalAq
+    , hssSceneChangeDetect
+    , hssScanType
+    , hssTimecodeInsertion
+    , hssParNumerator
+    , hssAfdSignaling
+    , hssGopSize
+    , hssGopSizeUnits
+    , hssSubgopLength
+    , hssQualityLevel
+    , hssSlices
+    , hssProfile
+    , hssRateControlMode
+    , hssMinIInterval
+    , hssQvbrQualityLevel
+    , hssColorSpaceSettings
+    , hssParControl
+    , hssFlickerAq
+    , hssBufSize
+    , hssSpatialAq
+    , hssGopNumBFrames
+    , hssFixedAfd
+    , hssSoftness
+    , hssFilterSettings
+    , hssBitrate
+    , hssFramerateDenominator
+    , hssForceFieldPictures
+    , hssEntropyEncoding
+    , hssFramerateControl
+    , hssColorMetadata
+    , hssLookAheadRateControl
+    , hssAdaptiveQuantization
+    , hssFramerateNumerator
+    , hssLevel
+    , hssGopBReference
+    , hssMaxBitrate
+    , hssSyntax
+    , hssBufFillPct
+    , hssGopClosedCadence
+    , hssNumRefFrames
+    , hssParDenominator
+
+    -- ** H265ColorSpaceSettings
+    , H265ColorSpaceSettings
+    , h265ColorSpaceSettings
+    , hcssHdr10Settings
+    , hcssRec709Settings
+    , hcssRec601Settings
+    , hcssColorSpacePassthroughSettings
+
+    -- ** H265Settings
+    , H265Settings
+    , h265Settings
     , hsSceneChangeDetect
     , hsScanType
     , hsTimecodeInsertion
@@ -951,31 +1376,31 @@ module Network.AWS.MediaLive
     , hsGopSizeUnits
     , hsSlices
     , hsProfile
+    , hsAlternativeTransferFunction
     , hsRateControlMode
     , hsMinIInterval
-    , hsParControl
+    , hsQvbrQualityLevel
+    , hsColorSpaceSettings
     , hsFlickerAq
     , hsBufSize
-    , hsSpatialAq
-    , hsGopNumBFrames
+    , hsTier
     , hsFixedAfd
-    , hsSoftness
     , hsBitrate
-    , hsFramerateDenominator
-    , hsEntropyEncoding
-    , hsFramerateControl
     , hsColorMetadata
     , hsLookAheadRateControl
     , hsAdaptiveQuantization
-    , hsFramerateNumerator
     , hsLevel
-    , hsGopBReference
     , hsMaxBitrate
-    , hsSyntax
-    , hsBufFillPct
     , hsGopClosedCadence
-    , hsNumRefFrames
     , hsParDenominator
+    , hsFramerateNumerator
+    , hsFramerateDenominator
+
+    -- ** Hdr10Settings
+    , Hdr10Settings
+    , hdr10Settings
+    , hsMaxFall
+    , hsMaxCll
 
     -- ** HlsAkamaiSettings
     , HlsAkamaiSettings
@@ -1013,6 +1438,7 @@ module Network.AWS.MediaLive
     , hgsIvInManifest
     , hgsTsFileMode
     , hgsMinSegmentLength
+    , hgsIFrameOnlyPlaylists
     , hgsProgramDateTime
     , hgsIndexNSegments
     , hgsProgramDateTimePeriod
@@ -1027,6 +1453,7 @@ module Network.AWS.MediaLive
     , hgsAdMarkers
     , hgsKeyFormat
     , hgsSegmentLength
+    , hgsHlsId3SegmentTagging
     , hgsTimedMetadataId3Frame
     , hgsBaseURLContent
     , hgsOutputSelection
@@ -1038,10 +1465,18 @@ module Network.AWS.MediaLive
     , hgsKeyFormatVersions
     , hgsClientCache
     , hgsTimestampDeltaMilliseconds
+    , hgsBaseURLManifest1
+    , hgsRedundantManifest
     , hgsStreamInfResolution
     , hgsKeepSegments
+    , hgsBaseURLContent1
     , hgsManifestCompression
     , hgsDestination
+
+    -- ** HlsId3SegmentTaggingScheduleActionSettings
+    , HlsId3SegmentTaggingScheduleActionSettings
+    , hlsId3SegmentTaggingScheduleActionSettings
+    , histsasTag
 
     -- ** HlsInputSettings
     , HlsInputSettings
@@ -1063,6 +1498,7 @@ module Network.AWS.MediaLive
     -- ** HlsOutputSettings
     , HlsOutputSettings
     , hlsOutputSettings
+    , hosH265PackagingType
     , hosSegmentModifier
     , hosNameModifier
     , hosHlsSettings
@@ -1070,8 +1506,14 @@ module Network.AWS.MediaLive
     -- ** HlsSettings
     , HlsSettings
     , hlsSettings
+    , hsFmp4HlsSettings
     , hsAudioOnlyHlsSettings
     , hsStandardHlsSettings
+
+    -- ** HlsTimedMetadataScheduleActionSettings
+    , HlsTimedMetadataScheduleActionSettings
+    , hlsTimedMetadataScheduleActionSettings
+    , htmsasId3
 
     -- ** HlsWebdavSettings
     , HlsWebdavSettings
@@ -1081,6 +1523,10 @@ module Network.AWS.MediaLive
     , hwsConnectionRetryInterval
     , hwsFilecacheDuration
     , hwsRestartDelay
+
+    -- ** ImmediateModeScheduleActionStartSettings
+    , ImmediateModeScheduleActionStartSettings
+    , immediateModeScheduleActionStartSettings
 
     -- ** Input
     , Input
@@ -1093,12 +1539,19 @@ module Network.AWS.MediaLive
     , iName
     , iAttachedChannels
     , iId
+    , iInputClass
     , iType
+    , iMediaConnectFlows
+    , iInputSourceType
+    , iTags
+    , iRoleARN
 
     -- ** InputAttachment
     , InputAttachment
     , inputAttachment
+    , iaInputAttachmentName
     , iaInputId
+    , iaAutomaticInputFailoverSettings
     , iaInputSettings
 
     -- ** InputChannelLevel
@@ -1107,17 +1560,31 @@ module Network.AWS.MediaLive
     , iclInputChannel
     , iclGain
 
+    -- ** InputClippingSettings
+    , InputClippingSettings
+    , inputClippingSettings
+    , icsStopTimecode
+    , icsStartTimecode
+    , icsInputTimecodeSource
+
     -- ** InputDestination
     , InputDestination
     , inputDestination
     , idURL
     , idIP
+    , idVPC
     , idPort
 
     -- ** InputDestinationRequest
     , InputDestinationRequest
     , inputDestinationRequest
     , idrStreamName
+
+    -- ** InputDestinationVPC
+    , InputDestinationVPC
+    , inputDestinationVPC
+    , idvNetworkInterfaceId
+    , idvAvailabilityZone
 
     -- ** InputLocation
     , InputLocation
@@ -1143,6 +1610,7 @@ module Network.AWS.MediaLive
     , isgInputs
     , isgId
     , isgWhitelistRules
+    , isgTags
 
     -- ** InputSettings
     , InputSettings
@@ -1178,6 +1646,19 @@ module Network.AWS.MediaLive
     , isCodec
     , isMaximumBitrate
 
+    -- ** InputSwitchScheduleActionSettings
+    , InputSwitchScheduleActionSettings
+    , inputSwitchScheduleActionSettings
+    , issasInputClippingSettings
+    , issasURLPath
+    , issasInputAttachmentNameReference
+
+    -- ** InputVPCRequest
+    , InputVPCRequest
+    , inputVPCRequest
+    , ivrSecurityGroupIds
+    , ivrSubnetIds
+
     -- ** InputWhitelistRule
     , InputWhitelistRule
     , inputWhitelistRule
@@ -1199,6 +1680,7 @@ module Network.AWS.MediaLive
     , msPmtPid
     , msEtvSignalPid
     , msVideoPid
+    , msNielsenId3Behavior
     , msBufferModel
     , msScte35Pid
     , msTransportStreamId
@@ -1248,6 +1730,7 @@ module Network.AWS.MediaLive
     , m3u8Settings
     , mPmtPid
     , mVideoPid
+    , mNielsenId3Behavior
     , mScte35Pid
     , mTransportStreamId
     , mProgramNum
@@ -1262,6 +1745,30 @@ module Network.AWS.MediaLive
     , mAudioPids
     , mScte35Behavior
     , mPcrControl
+
+    -- ** MediaConnectFlow
+    , MediaConnectFlow
+    , mediaConnectFlow
+    , mcfFlowARN
+
+    -- ** MediaConnectFlowRequest
+    , MediaConnectFlowRequest
+    , mediaConnectFlowRequest
+    , mcfrFlowARN
+
+    -- ** MediaPackageGroupSettings
+    , MediaPackageGroupSettings
+    , mediaPackageGroupSettings
+    , mpgsDestination
+
+    -- ** MediaPackageOutputDestinationSettings
+    , MediaPackageOutputDestinationSettings
+    , mediaPackageOutputDestinationSettings
+    , mpodsChannelId
+
+    -- ** MediaPackageOutputSettings
+    , MediaPackageOutputSettings
+    , mediaPackageOutputSettings
 
     -- ** Mp2Settings
     , Mp2Settings
@@ -1296,13 +1803,157 @@ module Network.AWS.MediaLive
     -- ** MsSmoothOutputSettings
     , MsSmoothOutputSettings
     , msSmoothOutputSettings
+    , msosH265PackagingType
     , msosNameModifier
+
+    -- ** Multiplex
+    , Multiplex
+    , multiplex
+    , mState
+    , mARN
+    , mPipelinesRunningCount
+    , mAvailabilityZones
+    , mProgramCount
+    , mDestinations
+    , mName
+    , mId
+    , mMultiplexSettings
+    , mTags
+
+    -- ** MultiplexGroupSettings
+    , MultiplexGroupSettings
+    , multiplexGroupSettings
+
+    -- ** MultiplexMediaConnectOutputDestinationSettings
+    , MultiplexMediaConnectOutputDestinationSettings
+    , multiplexMediaConnectOutputDestinationSettings
+    , mmcodsEntitlementARN
+
+    -- ** MultiplexOutputDestination
+    , MultiplexOutputDestination
+    , multiplexOutputDestination
+    , modMediaConnectSettings
+
+    -- ** MultiplexOutputSettings
+    , MultiplexOutputSettings
+    , multiplexOutputSettings
+    , mosDestination
+
+    -- ** MultiplexProgram
+    , MultiplexProgram
+    , multiplexProgram
+    , mpPacketIdentifiersMap
+    , mpProgramName
+    , mpChannelId
+    , mpMultiplexProgramSettings
+
+    -- ** MultiplexProgramChannelDestinationSettings
+    , MultiplexProgramChannelDestinationSettings
+    , multiplexProgramChannelDestinationSettings
+    , mpcdsMultiplexId
+    , mpcdsProgramName
+
+    -- ** MultiplexProgramPacketIdentifiersMap
+    , MultiplexProgramPacketIdentifiersMap
+    , multiplexProgramPacketIdentifiersMap
+    , mppimPmtPid
+    , mppimEtvSignalPid
+    , mppimVideoPid
+    , mppimScte35Pid
+    , mppimPrivateMetadataPid
+    , mppimTimedMetadataPid
+    , mppimPcrPid
+    , mppimKlvDataPids
+    , mppimDvbSubPids
+    , mppimScte27Pids
+    , mppimEtvPlatformPid
+    , mppimAudioPids
+    , mppimDvbTeletextPid
+
+    -- ** MultiplexProgramServiceDescriptor
+    , MultiplexProgramServiceDescriptor
+    , multiplexProgramServiceDescriptor
+    , mpsdProviderName
+    , mpsdServiceName
+
+    -- ** MultiplexProgramSettings
+    , MultiplexProgramSettings
+    , multiplexProgramSettings
+    , mpsPreferredChannelPipeline
+    , mpsVideoSettings
+    , mpsServiceDescriptor
+    , mpsProgramNumber
+
+    -- ** MultiplexProgramSummary
+    , MultiplexProgramSummary
+    , multiplexProgramSummary
+    , mpsProgramName
+    , mpsChannelId
+
+    -- ** MultiplexSettings
+    , MultiplexSettings
+    , multiplexSettings
+    , mssMaximumVideoBufferDelayMilliseconds
+    , mssTransportStreamReservedBitrate
+    , mssTransportStreamBitrate
+    , mssTransportStreamId
+
+    -- ** MultiplexSettingsSummary
+    , MultiplexSettingsSummary
+    , multiplexSettingsSummary
+    , mTransportStreamBitrate
+
+    -- ** MultiplexStatmuxVideoSettings
+    , MultiplexStatmuxVideoSettings
+    , multiplexStatmuxVideoSettings
+    , msvsMinimumBitrate
+    , msvsMaximumBitrate
+
+    -- ** MultiplexSummary
+    , MultiplexSummary
+    , multiplexSummary
+    , msState
+    , msARN
+    , msPipelinesRunningCount
+    , msAvailabilityZones
+    , msProgramCount
+    , msName
+    , msId
+    , msMultiplexSettings
+    , msTags
+
+    -- ** MultiplexVideoSettings
+    , MultiplexVideoSettings
+    , multiplexVideoSettings
+    , mvsStatmuxSettings
+    , mvsConstantBitrate
 
     -- ** NetworkInputSettings
     , NetworkInputSettings
     , networkInputSettings
     , nisHlsInputSettings
     , nisServerValidation
+
+    -- ** NielsenConfiguration
+    , NielsenConfiguration
+    , nielsenConfiguration
+    , ncDistributorId
+    , ncNielsenPcmToId3Tagging
+
+    -- ** Offering
+    , Offering
+    , offering
+    , oResourceSpecification
+    , oCurrencyCode
+    , oARN
+    , oOfferingId
+    , oRegion
+    , oOfferingType
+    , oUsagePrice
+    , oFixedPrice
+    , oDurationUnits
+    , oOfferingDescription
+    , oDuration
 
     -- ** Output
     , Output
@@ -1317,7 +1968,9 @@ module Network.AWS.MediaLive
     , OutputDestination
     , outputDestination
     , odSettings
+    , odMediaPackageSettings
     , odId
+    , odMultiplexSettings
 
     -- ** OutputDestinationSettings
     , OutputDestinationSettings
@@ -1337,11 +1990,14 @@ module Network.AWS.MediaLive
     -- ** OutputGroupSettings
     , OutputGroupSettings
     , outputGroupSettings
+    , ogsMediaPackageGroupSettings
     , ogsMsSmoothGroupSettings
     , ogsRtmpGroupSettings
+    , ogsMultiplexGroupSettings
     , ogsHlsGroupSettings
     , ogsArchiveGroupSettings
     , ogsUdpGroupSettings
+    , ogsFrameCaptureGroupSettings
 
     -- ** OutputLocationRef
     , OutputLocationRef
@@ -1351,15 +2007,43 @@ module Network.AWS.MediaLive
     -- ** OutputSettings
     , OutputSettings
     , outputSettings
+    , osMultiplexOutputSettings
     , osArchiveOutputSettings
     , osRtmpOutputSettings
+    , osMediaPackageOutputSettings
     , osHlsOutputSettings
+    , osFrameCaptureOutputSettings
     , osUdpOutputSettings
     , osMsSmoothOutputSettings
 
     -- ** PassThroughSettings
     , PassThroughSettings
     , passThroughSettings
+
+    -- ** PauseStateScheduleActionSettings
+    , PauseStateScheduleActionSettings
+    , pauseStateScheduleActionSettings
+    , pssasPipelines
+
+    -- ** PipelineDetail
+    , PipelineDetail
+    , pipelineDetail
+    , pdPipelineId
+    , pdActiveInputSwitchActionName
+    , pdActiveInputAttachmentName
+
+    -- ** PipelinePauseStateSettings
+    , PipelinePauseStateSettings
+    , pipelinePauseStateSettings
+    , ppssPipelineId
+
+    -- ** Rec601Settings
+    , Rec601Settings
+    , rec601Settings
+
+    -- ** Rec709Settings
+    , Rec709Settings
+    , rec709Settings
 
     -- ** RemixSettings
     , RemixSettings
@@ -1368,6 +2052,40 @@ module Network.AWS.MediaLive
     , rsChannelsOut
     , rsChannelMappings
 
+    -- ** Reservation
+    , Reservation
+    , reservation
+    , rState
+    , rResourceSpecification
+    , rCurrencyCode
+    , rARN
+    , rStart
+    , rCount
+    , rEnd
+    , rName
+    , rReservationId
+    , rOfferingId
+    , rRegion
+    , rOfferingType
+    , rUsagePrice
+    , rFixedPrice
+    , rDurationUnits
+    , rOfferingDescription
+    , rDuration
+    , rTags
+
+    -- ** ReservationResourceSpecification
+    , ReservationResourceSpecification
+    , reservationResourceSpecification
+    , rrsVideoQuality
+    , rrsMaximumFramerate
+    , rrsResourceType
+    , rrsResolution
+    , rrsCodec
+    , rrsSpecialFeature
+    , rrsChannelClass
+    , rrsMaximumBitrate
+
     -- ** RtmpCaptionInfoDestinationSettings
     , RtmpCaptionInfoDestinationSettings
     , rtmpCaptionInfoDestinationSettings
@@ -1375,6 +2093,7 @@ module Network.AWS.MediaLive
     -- ** RtmpGroupSettings
     , RtmpGroupSettings
     , rtmpGroupSettings
+    , rgsInputLossAction
     , rgsCaptionData
     , rgsRestartDelay
     , rgsAuthenticationScheme
@@ -1388,6 +2107,33 @@ module Network.AWS.MediaLive
     , rosCertificateMode
     , rosConnectionRetryInterval
     , rosDestination
+
+    -- ** ScheduleAction
+    , ScheduleAction
+    , scheduleAction
+    , saActionName
+    , saScheduleActionStartSettings
+    , saScheduleActionSettings
+
+    -- ** ScheduleActionSettings
+    , ScheduleActionSettings
+    , scheduleActionSettings
+    , sasStaticImageDeactivateSettings
+    , sasScte35SpliceInsertSettings
+    , sasStaticImageActivateSettings
+    , sasScte35TimeSignalSettings
+    , sasHlsId3SegmentTaggingSettings
+    , sasScte35ReturnToNetworkSettings
+    , sasPauseStateSettings
+    , sasHlsTimedMetadataSettings
+    , sasInputSwitchSettings
+
+    -- ** ScheduleActionStartSettings
+    , ScheduleActionStartSettings
+    , scheduleActionStartSettings
+    , sassImmediateModeScheduleActionStartSettings
+    , sassFollowModeScheduleActionStartSettings
+    , sassFixedModeScheduleActionStartSettings
 
     -- ** Scte20PlusEmbeddedDestinationSettings
     , Scte20PlusEmbeddedDestinationSettings
@@ -1408,6 +2154,44 @@ module Network.AWS.MediaLive
     , scte27SourceSettings
     , sssPid
 
+    -- ** Scte35DeliveryRestrictions
+    , Scte35DeliveryRestrictions
+    , scte35DeliveryRestrictions
+    , sdrDeviceRestrictions
+    , sdrArchiveAllowedFlag
+    , sdrWebDeliveryAllowedFlag
+    , sdrNoRegionalBlackoutFlag
+
+    -- ** Scte35Descriptor
+    , Scte35Descriptor
+    , scte35Descriptor
+    , sdScte35DescriptorSettings
+
+    -- ** Scte35DescriptorSettings
+    , Scte35DescriptorSettings
+    , scte35DescriptorSettings
+    , sdsSegmentationDescriptorScte35DescriptorSettings
+
+    -- ** Scte35ReturnToNetworkScheduleActionSettings
+    , Scte35ReturnToNetworkScheduleActionSettings
+    , scte35ReturnToNetworkScheduleActionSettings
+    , srtnsasSpliceEventId
+
+    -- ** Scte35SegmentationDescriptor
+    , Scte35SegmentationDescriptor
+    , scte35SegmentationDescriptor
+    , ssdSegmentationUpidType
+    , ssdSegmentsExpected
+    , ssdSubSegmentsExpected
+    , ssdSegmentNum
+    , ssdSegmentationDuration
+    , ssdSegmentationTypeId
+    , ssdDeliveryRestrictions
+    , ssdSegmentationUpid
+    , ssdSubSegmentNum
+    , ssdSegmentationEventId
+    , ssdSegmentationCancelIndicator
+
     -- ** Scte35SpliceInsert
     , Scte35SpliceInsert
     , scte35SpliceInsert
@@ -1415,12 +2199,23 @@ module Network.AWS.MediaLive
     , ssiAdAvailOffset
     , ssiNoRegionalBlackoutFlag
 
+    -- ** Scte35SpliceInsertScheduleActionSettings
+    , Scte35SpliceInsertScheduleActionSettings
+    , scte35SpliceInsertScheduleActionSettings
+    , ssisasDuration
+    , ssisasSpliceEventId
+
     -- ** Scte35TimeSignalApos
     , Scte35TimeSignalApos
     , scte35TimeSignalApos
     , stsaWebDeliveryAllowedFlag
     , stsaAdAvailOffset
     , stsaNoRegionalBlackoutFlag
+
+    -- ** Scte35TimeSignalScheduleActionSettings
+    , Scte35TimeSignalScheduleActionSettings
+    , scte35TimeSignalScheduleActionSettings
+    , stssasScte35Descriptors
 
     -- ** SmpteTtDestinationSettings
     , SmpteTtDestinationSettings
@@ -1432,11 +2227,42 @@ module Network.AWS.MediaLive
     , shsAudioRenditionSets
     , shsM3u8Settings
 
+    -- ** StartTimecode
+    , StartTimecode
+    , startTimecode
+    , sTimecode
+
+    -- ** StaticImageActivateScheduleActionSettings
+    , StaticImageActivateScheduleActionSettings
+    , staticImageActivateScheduleActionSettings
+    , siasasImageX
+    , siasasHeight
+    , siasasFadeOut
+    , siasasWidth
+    , siasasOpacity
+    , siasasLayer
+    , siasasDuration
+    , siasasImageY
+    , siasasFadeIn
+    , siasasImage
+
+    -- ** StaticImageDeactivateScheduleActionSettings
+    , StaticImageDeactivateScheduleActionSettings
+    , staticImageDeactivateScheduleActionSettings
+    , sidsasFadeOut
+    , sidsasLayer
+
     -- ** StaticKeySettings
     , StaticKeySettings
     , staticKeySettings
     , sksKeyProviderServer
     , sksStaticKeyValue
+
+    -- ** StopTimecode
+    , StopTimecode
+    , stopTimecode
+    , stLastFrameClippingBehavior
+    , stTimecode
 
     -- ** TeletextDestinationSettings
     , TeletextDestinationSettings
@@ -1446,6 +2272,12 @@ module Network.AWS.MediaLive
     , TeletextSourceSettings
     , teletextSourceSettings
     , tssPageNumber
+
+    -- ** TemporalFilterSettings
+    , TemporalFilterSettings
+    , temporalFilterSettings
+    , tfsStrength
+    , tfsPostFilterSharpening
 
     -- ** TimecodeConfig
     , TimecodeConfig
@@ -1481,6 +2313,8 @@ module Network.AWS.MediaLive
     -- ** VideoCodecSettings
     , VideoCodecSettings
     , videoCodecSettings
+    , vcsFrameCaptureSettings
+    , vcsH265Settings
     , vcsH264Settings
 
     -- ** VideoDescription
@@ -1522,24 +2356,50 @@ module Network.AWS.MediaLive
     , webvttDestinationSettings
     ) where
 
+import Network.AWS.MediaLive.BatchUpdateSchedule
 import Network.AWS.MediaLive.CreateChannel
 import Network.AWS.MediaLive.CreateInput
 import Network.AWS.MediaLive.CreateInputSecurityGroup
+import Network.AWS.MediaLive.CreateMultiplex
+import Network.AWS.MediaLive.CreateMultiplexProgram
+import Network.AWS.MediaLive.CreateTags
 import Network.AWS.MediaLive.DeleteChannel
 import Network.AWS.MediaLive.DeleteInput
 import Network.AWS.MediaLive.DeleteInputSecurityGroup
+import Network.AWS.MediaLive.DeleteMultiplex
+import Network.AWS.MediaLive.DeleteMultiplexProgram
+import Network.AWS.MediaLive.DeleteReservation
+import Network.AWS.MediaLive.DeleteSchedule
+import Network.AWS.MediaLive.DeleteTags
 import Network.AWS.MediaLive.DescribeChannel
 import Network.AWS.MediaLive.DescribeInput
 import Network.AWS.MediaLive.DescribeInputSecurityGroup
+import Network.AWS.MediaLive.DescribeMultiplex
+import Network.AWS.MediaLive.DescribeMultiplexProgram
+import Network.AWS.MediaLive.DescribeOffering
+import Network.AWS.MediaLive.DescribeReservation
+import Network.AWS.MediaLive.DescribeSchedule
 import Network.AWS.MediaLive.ListChannels
-import Network.AWS.MediaLive.ListInputs
 import Network.AWS.MediaLive.ListInputSecurityGroups
+import Network.AWS.MediaLive.ListInputs
+import Network.AWS.MediaLive.ListMultiplexPrograms
+import Network.AWS.MediaLive.ListMultiplexes
+import Network.AWS.MediaLive.ListOfferings
+import Network.AWS.MediaLive.ListReservations
+import Network.AWS.MediaLive.ListTagsForResource
+import Network.AWS.MediaLive.PurchaseOffering
 import Network.AWS.MediaLive.StartChannel
+import Network.AWS.MediaLive.StartMultiplex
 import Network.AWS.MediaLive.StopChannel
+import Network.AWS.MediaLive.StopMultiplex
 import Network.AWS.MediaLive.Types
 import Network.AWS.MediaLive.UpdateChannel
+import Network.AWS.MediaLive.UpdateChannelClass
 import Network.AWS.MediaLive.UpdateInput
 import Network.AWS.MediaLive.UpdateInputSecurityGroup
+import Network.AWS.MediaLive.UpdateMultiplex
+import Network.AWS.MediaLive.UpdateMultiplexProgram
+import Network.AWS.MediaLive.UpdateReservation
 import Network.AWS.MediaLive.Waiters
 
 {- $errors

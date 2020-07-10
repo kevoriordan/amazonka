@@ -45,22 +45,51 @@ library
 
     exposed-modules:
           Network.AWS.AWSHealth
+        , Network.AWS.AWSHealth.DescribeAffectedAccountsForOrganization
         , Network.AWS.AWSHealth.DescribeAffectedEntities
+        , Network.AWS.AWSHealth.DescribeAffectedEntitiesForOrganization
         , Network.AWS.AWSHealth.DescribeEntityAggregates
         , Network.AWS.AWSHealth.DescribeEventAggregates
         , Network.AWS.AWSHealth.DescribeEventDetails
+        , Network.AWS.AWSHealth.DescribeEventDetailsForOrganization
         , Network.AWS.AWSHealth.DescribeEventTypes
         , Network.AWS.AWSHealth.DescribeEvents
+        , Network.AWS.AWSHealth.DescribeEventsForOrganization
+        , Network.AWS.AWSHealth.DescribeHealthServiceStatusForOrganization
+        , Network.AWS.AWSHealth.DisableHealthServiceAccessForOrganization
+        , Network.AWS.AWSHealth.EnableHealthServiceAccessForOrganization
         , Network.AWS.AWSHealth.Types
         , Network.AWS.AWSHealth.Waiters
 
     other-modules:
-          Network.AWS.AWSHealth.Types.Product
-        , Network.AWS.AWSHealth.Types.Sum
+          Network.AWS.AWSHealth.Types.AffectedEntity
+        , Network.AWS.AWSHealth.Types.DateTimeRange
+        , Network.AWS.AWSHealth.Types.EntityAggregate
+        , Network.AWS.AWSHealth.Types.EntityFilter
+        , Network.AWS.AWSHealth.Types.EntityStatusCode
+        , Network.AWS.AWSHealth.Types.Event
+        , Network.AWS.AWSHealth.Types.EventAccountFilter
+        , Network.AWS.AWSHealth.Types.EventAggregate
+        , Network.AWS.AWSHealth.Types.EventAggregateField
+        , Network.AWS.AWSHealth.Types.EventDescription
+        , Network.AWS.AWSHealth.Types.EventDetails
+        , Network.AWS.AWSHealth.Types.EventDetailsErrorItem
+        , Network.AWS.AWSHealth.Types.EventFilter
+        , Network.AWS.AWSHealth.Types.EventStatusCode
+        , Network.AWS.AWSHealth.Types.EventType
+        , Network.AWS.AWSHealth.Types.EventTypeCategory
+        , Network.AWS.AWSHealth.Types.EventTypeFilter
+        , Network.AWS.AWSHealth.Types.OrganizationAffectedEntitiesErrorItem
+        , Network.AWS.AWSHealth.Types.OrganizationEvent
+        , Network.AWS.AWSHealth.Types.OrganizationEventDetails
+        , Network.AWS.AWSHealth.Types.OrganizationEventDetailsErrorItem
+        , Network.AWS.AWSHealth.Types.OrganizationEventFilter
+        , Network.AWS.AWSHealth.Types.Product
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-health-test
     type:              exitcode-stdio-1.0
@@ -84,6 +113,7 @@ test-suite amazonka-health-test
         , amazonka-health
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

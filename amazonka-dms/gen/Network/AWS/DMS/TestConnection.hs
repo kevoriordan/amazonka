@@ -45,16 +45,15 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'testConnection' smart constructor.
-data TestConnection = TestConnection'
-  { _tcReplicationInstanceARN :: !Text
-  , _tcEndpointARN            :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestConnection = TestConnection'{_tcReplicationInstanceARN
+                                      :: !Text,
+                                      _tcEndpointARN :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'TestConnection' with the minimum fields required to make a request.
 --
@@ -67,12 +66,10 @@ testConnection
     :: Text -- ^ 'tcReplicationInstanceARN'
     -> Text -- ^ 'tcEndpointARN'
     -> TestConnection
-testConnection pReplicationInstanceARN_ pEndpointARN_ =
-  TestConnection'
-    { _tcReplicationInstanceARN = pReplicationInstanceARN_
-    , _tcEndpointARN = pEndpointARN_
-    }
-
+testConnection pReplicationInstanceARN_ pEndpointARN_
+  = TestConnection'{_tcReplicationInstanceARN =
+                      pReplicationInstanceARN_,
+                    _tcEndpointARN = pEndpointARN_}
 
 -- | The Amazon Resource Name (ARN) of the replication instance.
 tcReplicationInstanceARN :: Lens' TestConnection Text
@@ -119,16 +116,17 @@ instance ToPath TestConnection where
 instance ToQuery TestConnection where
         toQuery = const mempty
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'testConnectionResponse' smart constructor.
-data TestConnectionResponse = TestConnectionResponse'
-  { _tcrsConnection     :: !(Maybe Connection)
-  , _tcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data TestConnectionResponse = TestConnectionResponse'{_tcrsConnection
+                                                      :: !(Maybe Connection),
+                                                      _tcrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'TestConnectionResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +138,9 @@ data TestConnectionResponse = TestConnectionResponse'
 testConnectionResponse
     :: Int -- ^ 'tcrsResponseStatus'
     -> TestConnectionResponse
-testConnectionResponse pResponseStatus_ =
-  TestConnectionResponse'
-    {_tcrsConnection = Nothing, _tcrsResponseStatus = pResponseStatus_}
-
+testConnectionResponse pResponseStatus_
+  = TestConnectionResponse'{_tcrsConnection = Nothing,
+                            _tcrsResponseStatus = pResponseStatus_}
 
 -- | The connection tested.
 tcrsConnection :: Lens' TestConnectionResponse (Maybe Connection)

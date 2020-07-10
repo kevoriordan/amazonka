@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+-- Provides a list of steps for the cluster in reverse order unless you specify @stepIds@ with the request of filter by @StepStates@ . You can specify a maximum of ten @stepIDs@ .
 --
 --
 --
@@ -56,19 +56,17 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listSteps' smart constructor.
-data ListSteps = ListSteps'
-  { _lsStepIds    :: !(Maybe [Text])
-  , _lsStepStates :: !(Maybe [StepState])
-  , _lsMarker     :: !(Maybe Text)
-  , _lsClusterId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListSteps = ListSteps'{_lsStepIds ::
+                            !(Maybe [Text]),
+                            _lsStepStates :: !(Maybe [StepState]),
+                            _lsMarker :: !(Maybe Text), _lsClusterId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListSteps' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lsStepIds' - The filter to limit the step list based on the identifier of the steps.
+-- * 'lsStepIds' - The filter to limit the step list based on the identifier of the steps. You can specify a maximum of ten Step IDs. The character constraint applies to the overall length of the array.
 --
 -- * 'lsStepStates' - The filter to limit the step list based on certain states.
 --
@@ -78,16 +76,12 @@ data ListSteps = ListSteps'
 listSteps
     :: Text -- ^ 'lsClusterId'
     -> ListSteps
-listSteps pClusterId_ =
-  ListSteps'
-    { _lsStepIds = Nothing
-    , _lsStepStates = Nothing
-    , _lsMarker = Nothing
-    , _lsClusterId = pClusterId_
-    }
+listSteps pClusterId_
+  = ListSteps'{_lsStepIds = Nothing,
+               _lsStepStates = Nothing, _lsMarker = Nothing,
+               _lsClusterId = pClusterId_}
 
-
--- | The filter to limit the step list based on the identifier of the steps.
+-- | The filter to limit the step list based on the identifier of the steps. You can specify a maximum of ten Step IDs. The character constraint applies to the overall length of the array.
 lsStepIds :: Lens' ListSteps [Text]
 lsStepIds = lens _lsStepIds (\ s a -> s{_lsStepIds = a}) . _Default . _Coerce
 
@@ -153,12 +147,11 @@ instance ToQuery ListSteps where
 --
 --
 -- /See:/ 'listStepsResponse' smart constructor.
-data ListStepsResponse = ListStepsResponse'
-  { _lsrsSteps          :: !(Maybe [StepSummary])
-  , _lsrsMarker         :: !(Maybe Text)
-  , _lsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListStepsResponse = ListStepsResponse'{_lsrsSteps
+                                            :: !(Maybe [StepSummary]),
+                                            _lsrsMarker :: !(Maybe Text),
+                                            _lsrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListStepsResponse' with the minimum fields required to make a request.
 --
@@ -172,13 +165,10 @@ data ListStepsResponse = ListStepsResponse'
 listStepsResponse
     :: Int -- ^ 'lsrsResponseStatus'
     -> ListStepsResponse
-listStepsResponse pResponseStatus_ =
-  ListStepsResponse'
-    { _lsrsSteps = Nothing
-    , _lsrsMarker = Nothing
-    , _lsrsResponseStatus = pResponseStatus_
-    }
-
+listStepsResponse pResponseStatus_
+  = ListStepsResponse'{_lsrsSteps = Nothing,
+                       _lsrsMarker = Nothing,
+                       _lsrsResponseStatus = pResponseStatus_}
 
 -- | The filtered list of steps for the cluster.
 lsrsSteps :: Lens' ListStepsResponse [StepSummary]

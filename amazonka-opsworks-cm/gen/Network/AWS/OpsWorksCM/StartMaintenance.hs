@@ -18,10 +18,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server is in an @UNDER_MAINTENANCE@ state while maintenance is in progress.
+-- Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server is in an @UNDER_MAINTENANCE@ state while maintenance is in progress. 
 --
 --
--- Maintenance can only be started on servers in @HEALTHY@ and @UNHEALTHY@ states. Otherwise, an @InvalidStateException@ is thrown. A @ResourceNotFoundException@ is thrown when the server does not exist. A @ValidationException@ is raised when parameters of the request are not valid.
+-- Maintenance can only be started on servers in @HEALTHY@ and @UNHEALTHY@ states. Otherwise, an @InvalidStateException@ is thrown. A @ResourceNotFoundException@ is thrown when the server does not exist. A @ValidationException@ is raised when parameters of the request are not valid. 
 --
 module Network.AWS.OpsWorksCM.StartMaintenance
     (
@@ -48,32 +48,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'startMaintenance' smart constructor.
-data StartMaintenance = StartMaintenance'
-  { _smEngineAttributes :: !(Maybe [EngineAttribute])
-  , _smServerName       :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data StartMaintenance = StartMaintenance'{_smEngineAttributes
+                                          :: !(Maybe [EngineAttribute]),
+                                          _smServerName :: !Text}
+                          deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartMaintenance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'smEngineAttributes' - Engine attributes that are specific to the server on which you want to run maintenance.
+-- * 'smEngineAttributes' - Engine attributes that are specific to the server on which you want to run maintenance. __Attributes accepted in a StartMaintenance request for Chef__      * @CHEF_MAJOR_UPGRADE@ : If a Chef Automate server is eligible for upgrade to Chef Automate 2, add this engine attribute to a @StartMaintenance@ request and set the value to @true@ to upgrade the server to Chef Automate 2. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2> . 
 --
--- * 'smServerName' - The name of the server on which to run maintenance.
+-- * 'smServerName' - The name of the server on which to run maintenance. 
 startMaintenance
     :: Text -- ^ 'smServerName'
     -> StartMaintenance
-startMaintenance pServerName_ =
-  StartMaintenance'
-    {_smEngineAttributes = Nothing, _smServerName = pServerName_}
+startMaintenance pServerName_
+  = StartMaintenance'{_smEngineAttributes = Nothing,
+                      _smServerName = pServerName_}
 
-
--- | Engine attributes that are specific to the server on which you want to run maintenance.
+-- | Engine attributes that are specific to the server on which you want to run maintenance. __Attributes accepted in a StartMaintenance request for Chef__      * @CHEF_MAJOR_UPGRADE@ : If a Chef Automate server is eligible for upgrade to Chef Automate 2, add this engine attribute to a @StartMaintenance@ request and set the value to @true@ to upgrade the server to Chef Automate 2. For more information, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2> . 
 smEngineAttributes :: Lens' StartMaintenance [EngineAttribute]
 smEngineAttributes = lens _smEngineAttributes (\ s a -> s{_smEngineAttributes = a}) . _Default . _Coerce
 
--- | The name of the server on which to run maintenance.
+-- | The name of the server on which to run maintenance. 
 smServerName :: Lens' StartMaintenance Text
 smServerName = lens _smServerName (\ s a -> s{_smServerName = a})
 
@@ -114,28 +112,27 @@ instance ToQuery StartMaintenance where
         toQuery = const mempty
 
 -- | /See:/ 'startMaintenanceResponse' smart constructor.
-data StartMaintenanceResponse = StartMaintenanceResponse'
-  { _smrsServer         :: !(Maybe Server)
-  , _smrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data StartMaintenanceResponse = StartMaintenanceResponse'{_smrsServer
+                                                          :: !(Maybe Server),
+                                                          _smrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartMaintenanceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'smrsServer' - Contains the response to a @StartMaintenance@ request.
+-- * 'smrsServer' - Contains the response to a @StartMaintenance@ request. 
 --
 -- * 'smrsResponseStatus' - -- | The response status code.
 startMaintenanceResponse
     :: Int -- ^ 'smrsResponseStatus'
     -> StartMaintenanceResponse
-startMaintenanceResponse pResponseStatus_ =
-  StartMaintenanceResponse'
-    {_smrsServer = Nothing, _smrsResponseStatus = pResponseStatus_}
+startMaintenanceResponse pResponseStatus_
+  = StartMaintenanceResponse'{_smrsServer = Nothing,
+                              _smrsResponseStatus = pResponseStatus_}
 
-
--- | Contains the response to a @StartMaintenance@ request.
+-- | Contains the response to a @StartMaintenance@ request. 
 smrsServer :: Lens' StartMaintenanceResponse (Maybe Server)
 smrsServer = lens _smrsServer (\ s a -> s{_smrsServer = a})
 

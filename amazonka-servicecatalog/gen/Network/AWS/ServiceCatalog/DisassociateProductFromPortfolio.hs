@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Disassociates the specified product from the specified portfolio.
+-- Disassociates the specified product from the specified portfolio. 
 --
 --
 module Network.AWS.ServiceCatalog.DisassociateProductFromPortfolio
@@ -46,12 +46,18 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'disassociateProductFromPortfolio' smart constructor.
-data DisassociateProductFromPortfolio = DisassociateProductFromPortfolio'
-  { _dpfpAcceptLanguage :: !(Maybe Text)
-  , _dpfpProductId      :: !Text
-  , _dpfpPortfolioId    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateProductFromPortfolio = DisassociateProductFromPortfolio'{_dpfpAcceptLanguage
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dpfpProductId
+                                                                          ::
+                                                                          !Text,
+                                                                          _dpfpPortfolioId
+                                                                          ::
+                                                                          !Text}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DisassociateProductFromPortfolio' with the minimum fields required to make a request.
 --
@@ -66,13 +72,12 @@ disassociateProductFromPortfolio
     :: Text -- ^ 'dpfpProductId'
     -> Text -- ^ 'dpfpPortfolioId'
     -> DisassociateProductFromPortfolio
-disassociateProductFromPortfolio pProductId_ pPortfolioId_ =
-  DisassociateProductFromPortfolio'
-    { _dpfpAcceptLanguage = Nothing
-    , _dpfpProductId = pProductId_
-    , _dpfpPortfolioId = pPortfolioId_
-    }
-
+disassociateProductFromPortfolio pProductId_
+  pPortfolioId_
+  = DisassociateProductFromPortfolio'{_dpfpAcceptLanguage
+                                        = Nothing,
+                                      _dpfpProductId = pProductId_,
+                                      _dpfpPortfolioId = pPortfolioId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 dpfpAcceptLanguage :: Lens' DisassociateProductFromPortfolio (Maybe Text)
@@ -132,10 +137,12 @@ instance ToQuery DisassociateProductFromPortfolio
         toQuery = const mempty
 
 -- | /See:/ 'disassociateProductFromPortfolioResponse' smart constructor.
-newtype DisassociateProductFromPortfolioResponse = DisassociateProductFromPortfolioResponse'
-  { _disrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisassociateProductFromPortfolioResponse = DisassociateProductFromPortfolioResponse'{_disrsResponseStatus
+                                                                                             ::
+                                                                                             Int}
+                                                     deriving (Eq, Read, Show,
+                                                               Data, Typeable,
+                                                               Generic)
 
 -- | Creates a value of 'DisassociateProductFromPortfolioResponse' with the minimum fields required to make a request.
 --
@@ -145,10 +152,10 @@ newtype DisassociateProductFromPortfolioResponse = DisassociateProductFromPortfo
 disassociateProductFromPortfolioResponse
     :: Int -- ^ 'disrsResponseStatus'
     -> DisassociateProductFromPortfolioResponse
-disassociateProductFromPortfolioResponse pResponseStatus_ =
-  DisassociateProductFromPortfolioResponse'
-    {_disrsResponseStatus = pResponseStatus_}
-
+disassociateProductFromPortfolioResponse
+  pResponseStatus_
+  = DisassociateProductFromPortfolioResponse'{_disrsResponseStatus
+                                                = pResponseStatus_}
 
 -- | -- | The response status code.
 disrsResponseStatus :: Lens' DisassociateProductFromPortfolioResponse Int

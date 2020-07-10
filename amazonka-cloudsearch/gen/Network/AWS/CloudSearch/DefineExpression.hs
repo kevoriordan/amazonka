@@ -50,11 +50,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'defineExpression' smart constructor.
-data DefineExpression = DefineExpression'
-  { _dDomainName :: !Text
-  , _dExpression :: !Expression
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DefineExpression = DefineExpression'{_dDomainName
+                                          :: !Text,
+                                          _dExpression :: !Expression}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DefineExpression' with the minimum fields required to make a request.
 --
@@ -67,9 +66,9 @@ defineExpression
     :: Text -- ^ 'dDomainName'
     -> Expression -- ^ 'dExpression'
     -> DefineExpression
-defineExpression pDomainName_ pExpression_ =
-  DefineExpression' {_dDomainName = pDomainName_, _dExpression = pExpression_}
-
+defineExpression pDomainName_ pExpression_
+  = DefineExpression'{_dDomainName = pDomainName_,
+                      _dExpression = pExpression_}
 
 -- | Undocumented member.
 dDomainName :: Lens' DefineExpression Text
@@ -111,11 +110,12 @@ instance ToQuery DefineExpression where
 --
 --
 -- /See:/ 'defineExpressionResponse' smart constructor.
-data DefineExpressionResponse = DefineExpressionResponse'
-  { _dersResponseStatus :: !Int
-  , _dersExpression     :: !ExpressionStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DefineExpressionResponse = DefineExpressionResponse'{_dersResponseStatus
+                                                          :: !Int,
+                                                          _dersExpression ::
+                                                          !ExpressionStatus}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DefineExpressionResponse' with the minimum fields required to make a request.
 --
@@ -128,10 +128,11 @@ defineExpressionResponse
     :: Int -- ^ 'dersResponseStatus'
     -> ExpressionStatus -- ^ 'dersExpression'
     -> DefineExpressionResponse
-defineExpressionResponse pResponseStatus_ pExpression_ =
-  DefineExpressionResponse'
-    {_dersResponseStatus = pResponseStatus_, _dersExpression = pExpression_}
-
+defineExpressionResponse pResponseStatus_
+  pExpression_
+  = DefineExpressionResponse'{_dersResponseStatus =
+                                pResponseStatus_,
+                              _dersExpression = pExpression_}
 
 -- | -- | The response status code.
 dersResponseStatus :: Lens' DefineExpressionResponse Int

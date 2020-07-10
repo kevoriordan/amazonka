@@ -21,7 +21,7 @@
 -- Returns the number of open workflow executions within the given domain that meet the specified filtering criteria.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -41,7 +41,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 module Network.AWS.SWF.CountOpenWorkflowExecutions
     (
@@ -71,14 +71,25 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'countOpenWorkflowExecutions' smart constructor.
-data CountOpenWorkflowExecutions = CountOpenWorkflowExecutions'
-  { _coweExecutionFilter :: !(Maybe WorkflowExecutionFilter)
-  , _coweTypeFilter      :: !(Maybe WorkflowTypeFilter)
-  , _coweTagFilter       :: !(Maybe TagFilter)
-  , _coweDomain          :: !Text
-  , _coweStartTimeFilter :: !ExecutionTimeFilter
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CountOpenWorkflowExecutions = CountOpenWorkflowExecutions'{_coweExecutionFilter
+                                                                ::
+                                                                !(Maybe
+                                                                    WorkflowExecutionFilter),
+                                                                _coweTypeFilter
+                                                                ::
+                                                                !(Maybe
+                                                                    WorkflowTypeFilter),
+                                                                _coweTagFilter
+                                                                ::
+                                                                !(Maybe
+                                                                    TagFilter),
+                                                                _coweDomain ::
+                                                                !Text,
+                                                                _coweStartTimeFilter
+                                                                ::
+                                                                !ExecutionTimeFilter}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CountOpenWorkflowExecutions' with the minimum fields required to make a request.
 --
@@ -97,15 +108,14 @@ countOpenWorkflowExecutions
     :: Text -- ^ 'coweDomain'
     -> ExecutionTimeFilter -- ^ 'coweStartTimeFilter'
     -> CountOpenWorkflowExecutions
-countOpenWorkflowExecutions pDomain_ pStartTimeFilter_ =
-  CountOpenWorkflowExecutions'
-    { _coweExecutionFilter = Nothing
-    , _coweTypeFilter = Nothing
-    , _coweTagFilter = Nothing
-    , _coweDomain = pDomain_
-    , _coweStartTimeFilter = pStartTimeFilter_
-    }
-
+countOpenWorkflowExecutions pDomain_
+  pStartTimeFilter_
+  = CountOpenWorkflowExecutions'{_coweExecutionFilter =
+                                   Nothing,
+                                 _coweTypeFilter = Nothing,
+                                 _coweTagFilter = Nothing,
+                                 _coweDomain = pDomain_,
+                                 _coweStartTimeFilter = pStartTimeFilter_}
 
 -- | If specified, only workflow executions matching the @WorkflowId@ in the filter are counted.
 coweExecutionFilter :: Lens' CountOpenWorkflowExecutions (Maybe WorkflowExecutionFilter)

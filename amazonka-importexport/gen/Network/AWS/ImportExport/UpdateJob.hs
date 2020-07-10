@@ -51,14 +51,11 @@ import Network.AWS.Response
 -- | Input structure for the UpateJob operation.
 --
 -- /See:/ 'updateJob' smart constructor.
-data UpdateJob = UpdateJob'
-  { _ujAPIVersion   :: !(Maybe Text)
-  , _ujJobId        :: !Text
-  , _ujManifest     :: !Text
-  , _ujJobType      :: !JobType
-  , _ujValidateOnly :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateJob = UpdateJob'{_ujAPIVersion ::
+                            !(Maybe Text),
+                            _ujJobId :: !Text, _ujManifest :: !Text,
+                            _ujJobType :: !JobType, _ujValidateOnly :: !Bool}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateJob' with the minimum fields required to make a request.
 --
@@ -79,15 +76,11 @@ updateJob
     -> JobType -- ^ 'ujJobType'
     -> Bool -- ^ 'ujValidateOnly'
     -> UpdateJob
-updateJob pJobId_ pManifest_ pJobType_ pValidateOnly_ =
-  UpdateJob'
-    { _ujAPIVersion = Nothing
-    , _ujJobId = pJobId_
-    , _ujManifest = pManifest_
-    , _ujJobType = pJobType_
-    , _ujValidateOnly = pValidateOnly_
-    }
-
+updateJob pJobId_ pManifest_ pJobType_ pValidateOnly_
+  = UpdateJob'{_ujAPIVersion = Nothing,
+               _ujJobId = pJobId_, _ujManifest = pManifest_,
+               _ujJobType = pJobType_,
+               _ujValidateOnly = pValidateOnly_}
 
 -- | Undocumented member.
 ujAPIVersion :: Lens' UpdateJob (Maybe Text)
@@ -144,13 +137,14 @@ instance ToQuery UpdateJob where
 -- | Output structure for the UpateJob operation.
 --
 -- /See:/ 'updateJobResponse' smart constructor.
-data UpdateJobResponse = UpdateJobResponse'
-  { _ujrsSuccess        :: !(Maybe Bool)
-  , _ujrsWarningMessage :: !(Maybe Text)
-  , _ujrsArtifactList   :: !(Maybe [Artifact])
-  , _ujrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateJobResponse = UpdateJobResponse'{_ujrsSuccess
+                                            :: !(Maybe Bool),
+                                            _ujrsWarningMessage ::
+                                            !(Maybe Text),
+                                            _ujrsArtifactList ::
+                                            !(Maybe [Artifact]),
+                                            _ujrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateJobResponse' with the minimum fields required to make a request.
 --
@@ -166,14 +160,11 @@ data UpdateJobResponse = UpdateJobResponse'
 updateJobResponse
     :: Int -- ^ 'ujrsResponseStatus'
     -> UpdateJobResponse
-updateJobResponse pResponseStatus_ =
-  UpdateJobResponse'
-    { _ujrsSuccess = Nothing
-    , _ujrsWarningMessage = Nothing
-    , _ujrsArtifactList = Nothing
-    , _ujrsResponseStatus = pResponseStatus_
-    }
-
+updateJobResponse pResponseStatus_
+  = UpdateJobResponse'{_ujrsSuccess = Nothing,
+                       _ujrsWarningMessage = Nothing,
+                       _ujrsArtifactList = Nothing,
+                       _ujrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 ujrsSuccess :: Lens' UpdateJobResponse (Maybe Bool)

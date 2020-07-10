@@ -21,6 +21,8 @@
 -- Lists applications owned by the requester.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.ServerlessApplicationRepository.ListApplications
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.ServerlessApplicationRepository.ListApplications
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -47,11 +50,10 @@ import Network.AWS.ServerlessApplicationRepository.Types
 import Network.AWS.ServerlessApplicationRepository.Types.Product
 
 -- | /See:/ 'listApplications' smart constructor.
-data ListApplications = ListApplications'
-  { _laNextToken :: !(Maybe Text)
-  , _laMaxItems  :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListApplications = ListApplications'{_laNextToken
+                                          :: !(Maybe Text),
+                                          _laMaxItems :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListApplications' with the minimum fields required to make a request.
 --
@@ -62,9 +64,9 @@ data ListApplications = ListApplications'
 -- * 'laMaxItems' - The total number of items to return.
 listApplications
     :: ListApplications
-listApplications =
-  ListApplications' {_laNextToken = Nothing, _laMaxItems = Nothing}
-
+listApplications
+  = ListApplications'{_laNextToken = Nothing,
+                      _laMaxItems = Nothing}
 
 -- | A token to specify where to start paginating.
 laNextToken :: Lens' ListApplications (Maybe Text)
@@ -73,6 +75,13 @@ laNextToken = lens _laNextToken (\ s a -> s{_laNextToken = a})
 -- | The total number of items to return.
 laMaxItems :: Lens' ListApplications (Maybe Natural)
 laMaxItems = lens _laMaxItems (\ s a -> s{_laMaxItems = a}) . mapping _Nat
+
+instance AWSPager ListApplications where
+        page rq rs
+          | stop (rs ^. larsNextToken) = Nothing
+          | stop (rs ^. larsApplications) = Nothing
+          | otherwise =
+            Just $ rq & laNextToken .~ rs ^. larsNextToken
 
 instance AWSRequest ListApplications where
         type Rs ListApplications = ListApplicationsResponse
@@ -106,12 +115,15 @@ instance ToQuery ListApplications where
                "maxItems" =: _laMaxItems]
 
 -- | /See:/ 'listApplicationsResponse' smart constructor.
-data ListApplicationsResponse = ListApplicationsResponse'
-  { _larsNextToken      :: !(Maybe Text)
-  , _larsApplications   :: !(Maybe [ApplicationSummary])
-  , _larsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListApplicationsResponse = ListApplicationsResponse'{_larsNextToken
+                                                          :: !(Maybe Text),
+                                                          _larsApplications ::
+                                                          !(Maybe
+                                                              [ApplicationSummary]),
+                                                          _larsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListApplicationsResponse' with the minimum fields required to make a request.
 --
@@ -119,25 +131,22 @@ data ListApplicationsResponse = ListApplicationsResponse'
 --
 -- * 'larsNextToken' - The token to request the next page of results.
 --
--- * 'larsApplications' - Array of application summaries.
+-- * 'larsApplications' - An array of application summaries.
 --
 -- * 'larsResponseStatus' - -- | The response status code.
 listApplicationsResponse
     :: Int -- ^ 'larsResponseStatus'
     -> ListApplicationsResponse
-listApplicationsResponse pResponseStatus_ =
-  ListApplicationsResponse'
-    { _larsNextToken = Nothing
-    , _larsApplications = Nothing
-    , _larsResponseStatus = pResponseStatus_
-    }
-
+listApplicationsResponse pResponseStatus_
+  = ListApplicationsResponse'{_larsNextToken = Nothing,
+                              _larsApplications = Nothing,
+                              _larsResponseStatus = pResponseStatus_}
 
 -- | The token to request the next page of results.
 larsNextToken :: Lens' ListApplicationsResponse (Maybe Text)
 larsNextToken = lens _larsNextToken (\ s a -> s{_larsNextToken = a})
 
--- | Array of application summaries.
+-- | An array of application summaries.
 larsApplications :: Lens' ListApplicationsResponse [ApplicationSummary]
 larsApplications = lens _larsApplications (\ s a -> s{_larsApplications = a}) . _Default . _Coerce
 

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the available WorkSpace bundles.
+-- Retrieves a list that describes the available WorkSpace bundles.
 --
 --
 -- You can filter the results using either bundle ID or owner, but not both.
@@ -53,34 +53,36 @@ import Network.AWS.WorkSpaces.Types
 import Network.AWS.WorkSpaces.Types.Product
 
 -- | /See:/ 'describeWorkspaceBundles' smart constructor.
-data DescribeWorkspaceBundles = DescribeWorkspaceBundles'
-  { _dwbBundleIds :: !(Maybe (List1 Text))
-  , _dwbOwner     :: !(Maybe Text)
-  , _dwbNextToken :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeWorkspaceBundles = DescribeWorkspaceBundles'{_dwbBundleIds
+                                                          ::
+                                                          !(Maybe (List1 Text)),
+                                                          _dwbOwner ::
+                                                          !(Maybe Text),
+                                                          _dwbNextToken ::
+                                                          !(Maybe Text)}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'DescribeWorkspaceBundles' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dwbBundleIds' - The IDs of the bundles. This parameter cannot be combined with any other filter.
+-- * 'dwbBundleIds' - The identifiers of the bundles. You cannot combine this parameter with any other filter.
 --
--- * 'dwbOwner' - The owner of the bundles. This parameter cannot be combined with any other filter. Specify @AMAZON@ to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
+-- * 'dwbOwner' - The owner of the bundles. You cannot combine this parameter with any other filter. Specify @AMAZON@ to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
 --
 -- * 'dwbNextToken' - The token for the next set of results. (You received this token from a previous call.)
 describeWorkspaceBundles
     :: DescribeWorkspaceBundles
-describeWorkspaceBundles =
-  DescribeWorkspaceBundles'
-    {_dwbBundleIds = Nothing, _dwbOwner = Nothing, _dwbNextToken = Nothing}
+describeWorkspaceBundles
+  = DescribeWorkspaceBundles'{_dwbBundleIds = Nothing,
+                              _dwbOwner = Nothing, _dwbNextToken = Nothing}
 
-
--- | The IDs of the bundles. This parameter cannot be combined with any other filter.
+-- | The identifiers of the bundles. You cannot combine this parameter with any other filter.
 dwbBundleIds :: Lens' DescribeWorkspaceBundles (Maybe (NonEmpty Text))
 dwbBundleIds = lens _dwbBundleIds (\ s a -> s{_dwbBundleIds = a}) . mapping _List1
 
--- | The owner of the bundles. This parameter cannot be combined with any other filter. Specify @AMAZON@ to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
+-- | The owner of the bundles. You cannot combine this parameter with any other filter. Specify @AMAZON@ to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
 dwbOwner :: Lens' DescribeWorkspaceBundles (Maybe Text)
 dwbOwner = lens _dwbOwner (\ s a -> s{_dwbOwner = a})
 
@@ -135,12 +137,19 @@ instance ToQuery DescribeWorkspaceBundles where
         toQuery = const mempty
 
 -- | /See:/ 'describeWorkspaceBundlesResponse' smart constructor.
-data DescribeWorkspaceBundlesResponse = DescribeWorkspaceBundlesResponse'
-  { _dwbrsBundles        :: !(Maybe [WorkspaceBundle])
-  , _dwbrsNextToken      :: !(Maybe Text)
-  , _dwbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeWorkspaceBundlesResponse = DescribeWorkspaceBundlesResponse'{_dwbrsBundles
+                                                                          ::
+                                                                          !(Maybe
+                                                                              [WorkspaceBundle]),
+                                                                          _dwbrsNextToken
+                                                                          ::
+                                                                          !(Maybe
+                                                                              Text),
+                                                                          _dwbrsResponseStatus
+                                                                          ::
+                                                                          !Int}
+                                          deriving (Eq, Read, Show, Data,
+                                                    Typeable, Generic)
 
 -- | Creates a value of 'DescribeWorkspaceBundlesResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +163,11 @@ data DescribeWorkspaceBundlesResponse = DescribeWorkspaceBundlesResponse'
 describeWorkspaceBundlesResponse
     :: Int -- ^ 'dwbrsResponseStatus'
     -> DescribeWorkspaceBundlesResponse
-describeWorkspaceBundlesResponse pResponseStatus_ =
-  DescribeWorkspaceBundlesResponse'
-    { _dwbrsBundles = Nothing
-    , _dwbrsNextToken = Nothing
-    , _dwbrsResponseStatus = pResponseStatus_
-    }
-
+describeWorkspaceBundlesResponse pResponseStatus_
+  = DescribeWorkspaceBundlesResponse'{_dwbrsBundles =
+                                        Nothing,
+                                      _dwbrsNextToken = Nothing,
+                                      _dwbrsResponseStatus = pResponseStatus_}
 
 -- | Information about the bundles.
 dwbrsBundles :: Lens' DescribeWorkspaceBundlesResponse [WorkspaceBundle]

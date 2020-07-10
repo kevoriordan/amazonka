@@ -27,8 +27,8 @@ module Network.AWS.APIGateway.GetRequestValidator
       getRequestValidator
     , GetRequestValidator
     -- * Request Lenses
-    , grvrRestAPIId
-    , grvrRequestValidatorId
+    , gtrqstvldtrRestAPIId
+    , gtrqstvldtrRequestValidatorId
 
     -- * Destructuring the Response
     , requestValidator
@@ -52,37 +52,36 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getRequestValidator' smart constructor.
-data GetRequestValidator = GetRequestValidator'
-  { _grvrRestAPIId          :: !Text
-  , _grvrRequestValidatorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetRequestValidator = GetRequestValidator'{_gtrqstvldtrRestAPIId
+                                                :: !Text,
+                                                _gtrqstvldtrRequestValidatorId
+                                                :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetRequestValidator' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grvrRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
+-- * 'gtrqstvldtrRestAPIId' - [Required] The string identifier of the associated 'RestApi' .
 --
--- * 'grvrRequestValidatorId' - [Required] The identifier of the 'RequestValidator' to be retrieved.
+-- * 'gtrqstvldtrRequestValidatorId' - [Required] The identifier of the 'RequestValidator' to be retrieved.
 getRequestValidator
-    :: Text -- ^ 'grvrRestAPIId'
-    -> Text -- ^ 'grvrRequestValidatorId'
+    :: Text -- ^ 'gtrqstvldtrRestAPIId'
+    -> Text -- ^ 'gtrqstvldtrRequestValidatorId'
     -> GetRequestValidator
-getRequestValidator pRestAPIId_ pRequestValidatorId_ =
-  GetRequestValidator'
-    { _grvrRestAPIId = pRestAPIId_
-    , _grvrRequestValidatorId = pRequestValidatorId_
-    }
-
+getRequestValidator pRestAPIId_ pRequestValidatorId_
+  = GetRequestValidator'{_gtrqstvldtrRestAPIId =
+                           pRestAPIId_,
+                         _gtrqstvldtrRequestValidatorId =
+                           pRequestValidatorId_}
 
 -- | [Required] The string identifier of the associated 'RestApi' .
-grvrRestAPIId :: Lens' GetRequestValidator Text
-grvrRestAPIId = lens _grvrRestAPIId (\ s a -> s{_grvrRestAPIId = a})
+gtrqstvldtrRestAPIId :: Lens' GetRequestValidator Text
+gtrqstvldtrRestAPIId = lens _gtrqstvldtrRestAPIId (\ s a -> s{_gtrqstvldtrRestAPIId = a})
 
 -- | [Required] The identifier of the 'RequestValidator' to be retrieved.
-grvrRequestValidatorId :: Lens' GetRequestValidator Text
-grvrRequestValidatorId = lens _grvrRequestValidatorId (\ s a -> s{_grvrRequestValidatorId = a})
+gtrqstvldtrRequestValidatorId :: Lens' GetRequestValidator Text
+gtrqstvldtrRequestValidatorId = lens _gtrqstvldtrRequestValidatorId (\ s a -> s{_gtrqstvldtrRequestValidatorId = a})
 
 instance AWSRequest GetRequestValidator where
         type Rs GetRequestValidator = RequestValidator
@@ -102,8 +101,9 @@ instance ToHeaders GetRequestValidator where
 instance ToPath GetRequestValidator where
         toPath GetRequestValidator'{..}
           = mconcat
-              ["/restapis/", toBS _grvrRestAPIId,
-               "/requestvalidators/", toBS _grvrRequestValidatorId]
+              ["/restapis/", toBS _gtrqstvldtrRestAPIId,
+               "/requestvalidators/",
+               toBS _gtrqstvldtrRequestValidatorId]
 
 instance ToQuery GetRequestValidator where
         toQuery = const mempty

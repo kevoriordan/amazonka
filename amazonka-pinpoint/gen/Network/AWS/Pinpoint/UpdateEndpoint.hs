@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Use to update an endpoint.
+-- Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes for an endpoint. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
+--
+--
 module Network.AWS.Pinpoint.UpdateEndpoint
     (
     -- * Creating a Request
@@ -45,20 +47,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateEndpoint' smart constructor.
-data UpdateEndpoint = UpdateEndpoint'
-  { _ueApplicationId   :: !Text
-  , _ueEndpointId      :: !Text
-  , _ueEndpointRequest :: !EndpointRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEndpoint = UpdateEndpoint'{_ueApplicationId
+                                      :: !Text,
+                                      _ueEndpointId :: !Text,
+                                      _ueEndpointRequest :: !EndpointRequest}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateEndpoint' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ueApplicationId' - Undocumented member.
+-- * 'ueApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
--- * 'ueEndpointId' - Undocumented member.
+-- * 'ueEndpointId' - The unique identifier for the endpoint.
 --
 -- * 'ueEndpointRequest' - Undocumented member.
 updateEndpoint
@@ -66,19 +67,17 @@ updateEndpoint
     -> Text -- ^ 'ueEndpointId'
     -> EndpointRequest -- ^ 'ueEndpointRequest'
     -> UpdateEndpoint
-updateEndpoint pApplicationId_ pEndpointId_ pEndpointRequest_ =
-  UpdateEndpoint'
-    { _ueApplicationId = pApplicationId_
-    , _ueEndpointId = pEndpointId_
-    , _ueEndpointRequest = pEndpointRequest_
-    }
+updateEndpoint pApplicationId_ pEndpointId_
+  pEndpointRequest_
+  = UpdateEndpoint'{_ueApplicationId = pApplicationId_,
+                    _ueEndpointId = pEndpointId_,
+                    _ueEndpointRequest = pEndpointRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 ueApplicationId :: Lens' UpdateEndpoint Text
 ueApplicationId = lens _ueApplicationId (\ s a -> s{_ueApplicationId = a})
 
--- | Undocumented member.
+-- | The unique identifier for the endpoint.
 ueEndpointId :: Lens' UpdateEndpoint Text
 ueEndpointId = lens _ueEndpointId (\ s a -> s{_ueEndpointId = a})
 
@@ -122,11 +121,12 @@ instance ToQuery UpdateEndpoint where
         toQuery = const mempty
 
 -- | /See:/ 'updateEndpointResponse' smart constructor.
-data UpdateEndpointResponse = UpdateEndpointResponse'
-  { _uersResponseStatus :: !Int
-  , _uersMessageBody    :: !MessageBody
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateEndpointResponse = UpdateEndpointResponse'{_uersResponseStatus
+                                                      :: !Int,
+                                                      _uersMessageBody ::
+                                                      !MessageBody}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateEndpointResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +139,10 @@ updateEndpointResponse
     :: Int -- ^ 'uersResponseStatus'
     -> MessageBody -- ^ 'uersMessageBody'
     -> UpdateEndpointResponse
-updateEndpointResponse pResponseStatus_ pMessageBody_ =
-  UpdateEndpointResponse'
-    {_uersResponseStatus = pResponseStatus_, _uersMessageBody = pMessageBody_}
-
+updateEndpointResponse pResponseStatus_ pMessageBody_
+  = UpdateEndpointResponse'{_uersResponseStatus =
+                              pResponseStatus_,
+                            _uersMessageBody = pMessageBody_}
 
 -- | -- | The response status code.
 uersResponseStatus :: Lens' UpdateEndpointResponse Int

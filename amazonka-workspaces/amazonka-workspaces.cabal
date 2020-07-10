@@ -47,22 +47,40 @@ library
           Network.AWS.WorkSpaces
         , Network.AWS.WorkSpaces.AssociateIPGroups
         , Network.AWS.WorkSpaces.AuthorizeIPRules
+        , Network.AWS.WorkSpaces.CopyWorkspaceImage
         , Network.AWS.WorkSpaces.CreateIPGroup
         , Network.AWS.WorkSpaces.CreateTags
         , Network.AWS.WorkSpaces.CreateWorkspaces
         , Network.AWS.WorkSpaces.DeleteIPGroup
         , Network.AWS.WorkSpaces.DeleteTags
+        , Network.AWS.WorkSpaces.DeleteWorkspaceImage
+        , Network.AWS.WorkSpaces.DeregisterWorkspaceDirectory
+        , Network.AWS.WorkSpaces.DescribeAccount
+        , Network.AWS.WorkSpaces.DescribeAccountModifications
+        , Network.AWS.WorkSpaces.DescribeClientProperties
         , Network.AWS.WorkSpaces.DescribeIPGroups
         , Network.AWS.WorkSpaces.DescribeTags
         , Network.AWS.WorkSpaces.DescribeWorkspaceBundles
         , Network.AWS.WorkSpaces.DescribeWorkspaceDirectories
+        , Network.AWS.WorkSpaces.DescribeWorkspaceImages
+        , Network.AWS.WorkSpaces.DescribeWorkspaceSnapshots
         , Network.AWS.WorkSpaces.DescribeWorkspaces
         , Network.AWS.WorkSpaces.DescribeWorkspacesConnectionStatus
         , Network.AWS.WorkSpaces.DisassociateIPGroups
+        , Network.AWS.WorkSpaces.ImportWorkspaceImage
+        , Network.AWS.WorkSpaces.ListAvailableManagementCidrRanges
+        , Network.AWS.WorkSpaces.MigrateWorkspace
+        , Network.AWS.WorkSpaces.ModifyAccount
+        , Network.AWS.WorkSpaces.ModifyClientProperties
+        , Network.AWS.WorkSpaces.ModifySelfservicePermissions
+        , Network.AWS.WorkSpaces.ModifyWorkspaceAccessProperties
+        , Network.AWS.WorkSpaces.ModifyWorkspaceCreationProperties
         , Network.AWS.WorkSpaces.ModifyWorkspaceProperties
         , Network.AWS.WorkSpaces.ModifyWorkspaceState
         , Network.AWS.WorkSpaces.RebootWorkspaces
         , Network.AWS.WorkSpaces.RebuildWorkspaces
+        , Network.AWS.WorkSpaces.RegisterWorkspaceDirectory
+        , Network.AWS.WorkSpaces.RestoreWorkspace
         , Network.AWS.WorkSpaces.RevokeIPRules
         , Network.AWS.WorkSpaces.StartWorkspaces
         , Network.AWS.WorkSpaces.StopWorkspaces
@@ -72,12 +90,61 @@ library
         , Network.AWS.WorkSpaces.Waiters
 
     other-modules:
-          Network.AWS.WorkSpaces.Types.Product
-        , Network.AWS.WorkSpaces.Types.Sum
+          Network.AWS.WorkSpaces.Types.AccessPropertyValue
+        , Network.AWS.WorkSpaces.Types.AccountModification
+        , Network.AWS.WorkSpaces.Types.ClientProperties
+        , Network.AWS.WorkSpaces.Types.ClientPropertiesResult
+        , Network.AWS.WorkSpaces.Types.Compute
+        , Network.AWS.WorkSpaces.Types.ComputeType
+        , Network.AWS.WorkSpaces.Types.ConnectionState
+        , Network.AWS.WorkSpaces.Types.DedicatedTenancyModificationStateEnum
+        , Network.AWS.WorkSpaces.Types.DedicatedTenancySupportEnum
+        , Network.AWS.WorkSpaces.Types.DedicatedTenancySupportResultEnum
+        , Network.AWS.WorkSpaces.Types.DefaultWorkspaceCreationProperties
+        , Network.AWS.WorkSpaces.Types.FailedCreateWorkspaceRequest
+        , Network.AWS.WorkSpaces.Types.FailedWorkspaceChangeRequest
+        , Network.AWS.WorkSpaces.Types.IPRuleItem
+        , Network.AWS.WorkSpaces.Types.ModificationResourceEnum
+        , Network.AWS.WorkSpaces.Types.ModificationState
+        , Network.AWS.WorkSpaces.Types.ModificationStateEnum
+        , Network.AWS.WorkSpaces.Types.OperatingSystem
+        , Network.AWS.WorkSpaces.Types.OperatingSystemType
+        , Network.AWS.WorkSpaces.Types.Product
+        , Network.AWS.WorkSpaces.Types.RebootRequest
+        , Network.AWS.WorkSpaces.Types.RebuildRequest
+        , Network.AWS.WorkSpaces.Types.ReconnectEnum
+        , Network.AWS.WorkSpaces.Types.RootStorage
+        , Network.AWS.WorkSpaces.Types.RunningMode
+        , Network.AWS.WorkSpaces.Types.SelfservicePermissions
+        , Network.AWS.WorkSpaces.Types.Snapshot
+        , Network.AWS.WorkSpaces.Types.StartRequest
+        , Network.AWS.WorkSpaces.Types.StopRequest
+        , Network.AWS.WorkSpaces.Types.Tag
+        , Network.AWS.WorkSpaces.Types.TargetWorkspaceState
+        , Network.AWS.WorkSpaces.Types.Tenancy
+        , Network.AWS.WorkSpaces.Types.TerminateRequest
+        , Network.AWS.WorkSpaces.Types.UserStorage
+        , Network.AWS.WorkSpaces.Types.Workspace
+        , Network.AWS.WorkSpaces.Types.WorkspaceAccessProperties
+        , Network.AWS.WorkSpaces.Types.WorkspaceBundle
+        , Network.AWS.WorkSpaces.Types.WorkspaceConnectionStatus
+        , Network.AWS.WorkSpaces.Types.WorkspaceCreationProperties
+        , Network.AWS.WorkSpaces.Types.WorkspaceDirectory
+        , Network.AWS.WorkSpaces.Types.WorkspaceDirectoryState
+        , Network.AWS.WorkSpaces.Types.WorkspaceDirectoryType
+        , Network.AWS.WorkSpaces.Types.WorkspaceImage
+        , Network.AWS.WorkSpaces.Types.WorkspaceImageIngestionProcess
+        , Network.AWS.WorkSpaces.Types.WorkspaceImageRequiredTenancy
+        , Network.AWS.WorkSpaces.Types.WorkspaceImageState
+        , Network.AWS.WorkSpaces.Types.WorkspaceProperties
+        , Network.AWS.WorkSpaces.Types.WorkspaceRequest
+        , Network.AWS.WorkSpaces.Types.WorkspaceState
+        , Network.AWS.WorkSpaces.Types.WorkspacesIPGroup
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-workspaces-test
     type:              exitcode-stdio-1.0
@@ -101,6 +168,7 @@ test-suite amazonka-workspaces-test
         , amazonka-workspaces
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

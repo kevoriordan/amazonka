@@ -18,12 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds the specified certificate to the specified secure listener.
+-- Adds the specified SSL server certificate to the certificate list for the specified HTTPS or TLS listener.
 --
 --
--- If the certificate was already added, the call is successful but the certificate is not added again.
+-- If the certificate in already in the certificate list, the call is successful but the certificate is not added again.
 --
--- To list the certificates for your listener, use 'DescribeListenerCertificates' . To remove certificates from your listener, use 'RemoveListenerCertificates' .
+-- To get the certificate list for a listener, use 'DescribeListenerCertificates' . To remove certificates from the certificate list for a listener, use 'RemoveListenerCertificates' . To replace the default certificate for a listener, use 'ModifyListener' .
+--
+-- For more information, see <https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates SSL Certificates> in the /Application Load Balancers Guide/ .
 --
 module Network.AWS.ELBv2.AddListenerCertificates
     (
@@ -50,11 +52,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'addListenerCertificates' smart constructor.
-data AddListenerCertificates = AddListenerCertificates'
-  { _alcListenerARN  :: !Text
-  , _alcCertificates :: ![Certificate]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddListenerCertificates = AddListenerCertificates'{_alcListenerARN
+                                                        :: !Text,
+                                                        _alcCertificates ::
+                                                        ![Certificate]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'AddListenerCertificates' with the minimum fields required to make a request.
 --
@@ -62,20 +65,20 @@ data AddListenerCertificates = AddListenerCertificates'
 --
 -- * 'alcListenerARN' - The Amazon Resource Name (ARN) of the listener.
 --
--- * 'alcCertificates' - The certificate to add. You can specify one certificate per call.
+-- * 'alcCertificates' - The certificate to add. You can specify one certificate per call. Set @CertificateArn@ to the certificate ARN but do not set @IsDefault@ .
 addListenerCertificates
     :: Text -- ^ 'alcListenerARN'
     -> AddListenerCertificates
-addListenerCertificates pListenerARN_ =
-  AddListenerCertificates'
-    {_alcListenerARN = pListenerARN_, _alcCertificates = mempty}
-
+addListenerCertificates pListenerARN_
+  = AddListenerCertificates'{_alcListenerARN =
+                               pListenerARN_,
+                             _alcCertificates = mempty}
 
 -- | The Amazon Resource Name (ARN) of the listener.
 alcListenerARN :: Lens' AddListenerCertificates Text
 alcListenerARN = lens _alcListenerARN (\ s a -> s{_alcListenerARN = a})
 
--- | The certificate to add. You can specify one certificate per call.
+-- | The certificate to add. You can specify one certificate per call. Set @CertificateArn@ to the certificate ARN but do not set @IsDefault@ .
 alcCertificates :: Lens' AddListenerCertificates [Certificate]
 alcCertificates = lens _alcCertificates (\ s a -> s{_alcCertificates = a}) . _Coerce
 
@@ -112,28 +115,31 @@ instance ToQuery AddListenerCertificates where
                  toQueryList "member" _alcCertificates]
 
 -- | /See:/ 'addListenerCertificatesResponse' smart constructor.
-data AddListenerCertificatesResponse = AddListenerCertificatesResponse'
-  { _alcrsCertificates   :: !(Maybe [Certificate])
-  , _alcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AddListenerCertificatesResponse = AddListenerCertificatesResponse'{_alcrsCertificates
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [Certificate]),
+                                                                        _alcrsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'AddListenerCertificatesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alcrsCertificates' - Information about the certificates.
+-- * 'alcrsCertificates' - Information about the certificates in the certificate list.
 --
 -- * 'alcrsResponseStatus' - -- | The response status code.
 addListenerCertificatesResponse
     :: Int -- ^ 'alcrsResponseStatus'
     -> AddListenerCertificatesResponse
-addListenerCertificatesResponse pResponseStatus_ =
-  AddListenerCertificatesResponse'
-    {_alcrsCertificates = Nothing, _alcrsResponseStatus = pResponseStatus_}
+addListenerCertificatesResponse pResponseStatus_
+  = AddListenerCertificatesResponse'{_alcrsCertificates
+                                       = Nothing,
+                                     _alcrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the certificates.
+-- | Information about the certificates in the certificate list.
 alcrsCertificates :: Lens' AddListenerCertificatesResponse [Certificate]
 alcrsCertificates = lens _alcrsCertificates (\ s a -> s{_alcrsCertificates = a}) . _Default . _Coerce
 

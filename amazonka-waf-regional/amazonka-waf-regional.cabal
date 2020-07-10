@@ -57,10 +57,12 @@ library
         , Network.AWS.WAFRegional.CreateSizeConstraintSet
         , Network.AWS.WAFRegional.CreateSqlInjectionMatchSet
         , Network.AWS.WAFRegional.CreateWebACL
+        , Network.AWS.WAFRegional.CreateWebACLMigrationStack
         , Network.AWS.WAFRegional.CreateXSSMatchSet
         , Network.AWS.WAFRegional.DeleteByteMatchSet
         , Network.AWS.WAFRegional.DeleteGeoMatchSet
         , Network.AWS.WAFRegional.DeleteIPSet
+        , Network.AWS.WAFRegional.DeleteLoggingConfiguration
         , Network.AWS.WAFRegional.DeletePermissionPolicy
         , Network.AWS.WAFRegional.DeleteRateBasedRule
         , Network.AWS.WAFRegional.DeleteRegexMatchSet
@@ -77,6 +79,7 @@ library
         , Network.AWS.WAFRegional.GetChangeTokenStatus
         , Network.AWS.WAFRegional.GetGeoMatchSet
         , Network.AWS.WAFRegional.GetIPSet
+        , Network.AWS.WAFRegional.GetLoggingConfiguration
         , Network.AWS.WAFRegional.GetPermissionPolicy
         , Network.AWS.WAFRegional.GetRateBasedRule
         , Network.AWS.WAFRegional.GetRateBasedRuleManagedKeys
@@ -94,6 +97,7 @@ library
         , Network.AWS.WAFRegional.ListByteMatchSets
         , Network.AWS.WAFRegional.ListGeoMatchSets
         , Network.AWS.WAFRegional.ListIPSets
+        , Network.AWS.WAFRegional.ListLoggingConfigurations
         , Network.AWS.WAFRegional.ListRateBasedRules
         , Network.AWS.WAFRegional.ListRegexMatchSets
         , Network.AWS.WAFRegional.ListRegexPatternSets
@@ -103,10 +107,14 @@ library
         , Network.AWS.WAFRegional.ListSizeConstraintSets
         , Network.AWS.WAFRegional.ListSqlInjectionMatchSets
         , Network.AWS.WAFRegional.ListSubscribedRuleGroups
+        , Network.AWS.WAFRegional.ListTagsForResource
         , Network.AWS.WAFRegional.ListWebACLs
         , Network.AWS.WAFRegional.ListXSSMatchSets
+        , Network.AWS.WAFRegional.PutLoggingConfiguration
         , Network.AWS.WAFRegional.PutPermissionPolicy
+        , Network.AWS.WAFRegional.TagResource
         , Network.AWS.WAFRegional.Types
+        , Network.AWS.WAFRegional.UntagResource
         , Network.AWS.WAFRegional.UpdateByteMatchSet
         , Network.AWS.WAFRegional.UpdateGeoMatchSet
         , Network.AWS.WAFRegional.UpdateIPSet
@@ -122,12 +130,82 @@ library
         , Network.AWS.WAFRegional.Waiters
 
     other-modules:
-          Network.AWS.WAFRegional.Types.Product
-        , Network.AWS.WAFRegional.Types.Sum
+          Network.AWS.WAFRegional.Types.ActivatedRule
+        , Network.AWS.WAFRegional.Types.ByteMatchSet
+        , Network.AWS.WAFRegional.Types.ByteMatchSetSummary
+        , Network.AWS.WAFRegional.Types.ByteMatchSetUpdate
+        , Network.AWS.WAFRegional.Types.ByteMatchTuple
+        , Network.AWS.WAFRegional.Types.ChangeAction
+        , Network.AWS.WAFRegional.Types.ChangeTokenStatus
+        , Network.AWS.WAFRegional.Types.ComparisonOperator
+        , Network.AWS.WAFRegional.Types.ExcludedRule
+        , Network.AWS.WAFRegional.Types.FieldToMatch
+        , Network.AWS.WAFRegional.Types.GeoMatchConstraint
+        , Network.AWS.WAFRegional.Types.GeoMatchConstraintType
+        , Network.AWS.WAFRegional.Types.GeoMatchConstraintValue
+        , Network.AWS.WAFRegional.Types.GeoMatchSet
+        , Network.AWS.WAFRegional.Types.GeoMatchSetSummary
+        , Network.AWS.WAFRegional.Types.GeoMatchSetUpdate
+        , Network.AWS.WAFRegional.Types.HTTPHeader
+        , Network.AWS.WAFRegional.Types.HTTPRequest
+        , Network.AWS.WAFRegional.Types.IPSet
+        , Network.AWS.WAFRegional.Types.IPSetDescriptor
+        , Network.AWS.WAFRegional.Types.IPSetDescriptorType
+        , Network.AWS.WAFRegional.Types.IPSetSummary
+        , Network.AWS.WAFRegional.Types.IPSetUpdate
+        , Network.AWS.WAFRegional.Types.LoggingConfiguration
+        , Network.AWS.WAFRegional.Types.MatchFieldType
+        , Network.AWS.WAFRegional.Types.PositionalConstraint
+        , Network.AWS.WAFRegional.Types.Predicate
+        , Network.AWS.WAFRegional.Types.PredicateType
+        , Network.AWS.WAFRegional.Types.Product
+        , Network.AWS.WAFRegional.Types.RateBasedRule
+        , Network.AWS.WAFRegional.Types.RateKey
+        , Network.AWS.WAFRegional.Types.RegexMatchSet
+        , Network.AWS.WAFRegional.Types.RegexMatchSetSummary
+        , Network.AWS.WAFRegional.Types.RegexMatchSetUpdate
+        , Network.AWS.WAFRegional.Types.RegexMatchTuple
+        , Network.AWS.WAFRegional.Types.RegexPatternSet
+        , Network.AWS.WAFRegional.Types.RegexPatternSetSummary
+        , Network.AWS.WAFRegional.Types.RegexPatternSetUpdate
+        , Network.AWS.WAFRegional.Types.ResourceType
+        , Network.AWS.WAFRegional.Types.Rule
+        , Network.AWS.WAFRegional.Types.RuleGroup
+        , Network.AWS.WAFRegional.Types.RuleGroupSummary
+        , Network.AWS.WAFRegional.Types.RuleGroupUpdate
+        , Network.AWS.WAFRegional.Types.RuleSummary
+        , Network.AWS.WAFRegional.Types.RuleUpdate
+        , Network.AWS.WAFRegional.Types.SampledHTTPRequest
+        , Network.AWS.WAFRegional.Types.SizeConstraint
+        , Network.AWS.WAFRegional.Types.SizeConstraintSet
+        , Network.AWS.WAFRegional.Types.SizeConstraintSetSummary
+        , Network.AWS.WAFRegional.Types.SizeConstraintSetUpdate
+        , Network.AWS.WAFRegional.Types.SqlInjectionMatchSet
+        , Network.AWS.WAFRegional.Types.SqlInjectionMatchSetSummary
+        , Network.AWS.WAFRegional.Types.SqlInjectionMatchSetUpdate
+        , Network.AWS.WAFRegional.Types.SqlInjectionMatchTuple
+        , Network.AWS.WAFRegional.Types.SubscribedRuleGroupSummary
+        , Network.AWS.WAFRegional.Types.Tag
+        , Network.AWS.WAFRegional.Types.TagInfoForResource
+        , Network.AWS.WAFRegional.Types.TextTransformation
+        , Network.AWS.WAFRegional.Types.TimeWindow
+        , Network.AWS.WAFRegional.Types.WafAction
+        , Network.AWS.WAFRegional.Types.WafActionType
+        , Network.AWS.WAFRegional.Types.WafOverrideAction
+        , Network.AWS.WAFRegional.Types.WafOverrideActionType
+        , Network.AWS.WAFRegional.Types.WafRuleType
+        , Network.AWS.WAFRegional.Types.WebACL
+        , Network.AWS.WAFRegional.Types.WebACLSummary
+        , Network.AWS.WAFRegional.Types.WebACLUpdate
+        , Network.AWS.WAFRegional.Types.XSSMatchSet
+        , Network.AWS.WAFRegional.Types.XSSMatchSetSummary
+        , Network.AWS.WAFRegional.Types.XSSMatchSetUpdate
+        , Network.AWS.WAFRegional.Types.XSSMatchTuple
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-waf-regional-test
     type:              exitcode-stdio-1.0
@@ -151,6 +229,7 @@ test-suite amazonka-waf-regional-test
         , amazonka-waf-regional
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

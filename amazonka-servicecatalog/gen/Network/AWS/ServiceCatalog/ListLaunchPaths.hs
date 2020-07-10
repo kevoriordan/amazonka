@@ -52,13 +52,12 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'listLaunchPaths' smart constructor.
-data ListLaunchPaths = ListLaunchPaths'
-  { _llpAcceptLanguage :: !(Maybe Text)
-  , _llpPageToken      :: !(Maybe Text)
-  , _llpPageSize       :: !(Maybe Nat)
-  , _llpProductId      :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListLaunchPaths = ListLaunchPaths'{_llpAcceptLanguage
+                                        :: !(Maybe Text),
+                                        _llpPageToken :: !(Maybe Text),
+                                        _llpPageSize :: !(Maybe Nat),
+                                        _llpProductId :: !Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListLaunchPaths' with the minimum fields required to make a request.
 --
@@ -74,14 +73,10 @@ data ListLaunchPaths = ListLaunchPaths'
 listLaunchPaths
     :: Text -- ^ 'llpProductId'
     -> ListLaunchPaths
-listLaunchPaths pProductId_ =
-  ListLaunchPaths'
-    { _llpAcceptLanguage = Nothing
-    , _llpPageToken = Nothing
-    , _llpPageSize = Nothing
-    , _llpProductId = pProductId_
-    }
-
+listLaunchPaths pProductId_
+  = ListLaunchPaths'{_llpAcceptLanguage = Nothing,
+                     _llpPageToken = Nothing, _llpPageSize = Nothing,
+                     _llpProductId = pProductId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 llpAcceptLanguage :: Lens' ListLaunchPaths (Maybe Text)
@@ -147,12 +142,16 @@ instance ToQuery ListLaunchPaths where
         toQuery = const mempty
 
 -- | /See:/ 'listLaunchPathsResponse' smart constructor.
-data ListLaunchPathsResponse = ListLaunchPathsResponse'
-  { _llprsNextPageToken       :: !(Maybe Text)
-  , _llprsLaunchPathSummaries :: !(Maybe [LaunchPathSummary])
-  , _llprsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListLaunchPathsResponse = ListLaunchPathsResponse'{_llprsNextPageToken
+                                                        :: !(Maybe Text),
+                                                        _llprsLaunchPathSummaries
+                                                        ::
+                                                        !(Maybe
+                                                            [LaunchPathSummary]),
+                                                        _llprsResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ListLaunchPathsResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +165,11 @@ data ListLaunchPathsResponse = ListLaunchPathsResponse'
 listLaunchPathsResponse
     :: Int -- ^ 'llprsResponseStatus'
     -> ListLaunchPathsResponse
-listLaunchPathsResponse pResponseStatus_ =
-  ListLaunchPathsResponse'
-    { _llprsNextPageToken = Nothing
-    , _llprsLaunchPathSummaries = Nothing
-    , _llprsResponseStatus = pResponseStatus_
-    }
-
+listLaunchPathsResponse pResponseStatus_
+  = ListLaunchPathsResponse'{_llprsNextPageToken =
+                               Nothing,
+                             _llprsLaunchPathSummaries = Nothing,
+                             _llprsResponseStatus = pResponseStatus_}
 
 -- | The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
 llprsNextPageToken :: Lens' ListLaunchPathsResponse (Maybe Text)

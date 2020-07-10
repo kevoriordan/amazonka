@@ -47,17 +47,24 @@ library
           Network.AWS.ElastiCache
         , Network.AWS.ElastiCache.AddTagsToResource
         , Network.AWS.ElastiCache.AuthorizeCacheSecurityGroupIngress
+        , Network.AWS.ElastiCache.BatchApplyUpdateAction
+        , Network.AWS.ElastiCache.BatchStopUpdateAction
+        , Network.AWS.ElastiCache.CompleteMigration
         , Network.AWS.ElastiCache.CopySnapshot
         , Network.AWS.ElastiCache.CreateCacheCluster
         , Network.AWS.ElastiCache.CreateCacheParameterGroup
         , Network.AWS.ElastiCache.CreateCacheSecurityGroup
         , Network.AWS.ElastiCache.CreateCacheSubnetGroup
+        , Network.AWS.ElastiCache.CreateGlobalReplicationGroup
         , Network.AWS.ElastiCache.CreateReplicationGroup
         , Network.AWS.ElastiCache.CreateSnapshot
+        , Network.AWS.ElastiCache.DecreaseNodeGroupsInGlobalReplicationGroup
+        , Network.AWS.ElastiCache.DecreaseReplicaCount
         , Network.AWS.ElastiCache.DeleteCacheCluster
         , Network.AWS.ElastiCache.DeleteCacheParameterGroup
         , Network.AWS.ElastiCache.DeleteCacheSecurityGroup
         , Network.AWS.ElastiCache.DeleteCacheSubnetGroup
+        , Network.AWS.ElastiCache.DeleteGlobalReplicationGroup
         , Network.AWS.ElastiCache.DeleteReplicationGroup
         , Network.AWS.ElastiCache.DeleteSnapshot
         , Network.AWS.ElastiCache.DescribeCacheClusters
@@ -68,33 +75,110 @@ library
         , Network.AWS.ElastiCache.DescribeCacheSubnetGroups
         , Network.AWS.ElastiCache.DescribeEngineDefaultParameters
         , Network.AWS.ElastiCache.DescribeEvents
+        , Network.AWS.ElastiCache.DescribeGlobalReplicationGroups
         , Network.AWS.ElastiCache.DescribeReplicationGroups
         , Network.AWS.ElastiCache.DescribeReservedCacheNodes
         , Network.AWS.ElastiCache.DescribeReservedCacheNodesOfferings
+        , Network.AWS.ElastiCache.DescribeServiceUpdates
         , Network.AWS.ElastiCache.DescribeSnapshots
+        , Network.AWS.ElastiCache.DescribeUpdateActions
+        , Network.AWS.ElastiCache.DisassociateGlobalReplicationGroup
+        , Network.AWS.ElastiCache.FailoverGlobalReplicationGroup
+        , Network.AWS.ElastiCache.IncreaseNodeGroupsInGlobalReplicationGroup
+        , Network.AWS.ElastiCache.IncreaseReplicaCount
         , Network.AWS.ElastiCache.ListAllowedNodeTypeModifications
         , Network.AWS.ElastiCache.ListTagsForResource
         , Network.AWS.ElastiCache.ModifyCacheCluster
         , Network.AWS.ElastiCache.ModifyCacheParameterGroup
         , Network.AWS.ElastiCache.ModifyCacheSubnetGroup
+        , Network.AWS.ElastiCache.ModifyGlobalReplicationGroup
         , Network.AWS.ElastiCache.ModifyReplicationGroup
         , Network.AWS.ElastiCache.ModifyReplicationGroupShardConfiguration
         , Network.AWS.ElastiCache.PurchaseReservedCacheNodesOffering
+        , Network.AWS.ElastiCache.RebalanceSlotsInGlobalReplicationGroup
         , Network.AWS.ElastiCache.RebootCacheCluster
         , Network.AWS.ElastiCache.RemoveTagsFromResource
         , Network.AWS.ElastiCache.ResetCacheParameterGroup
         , Network.AWS.ElastiCache.RevokeCacheSecurityGroupIngress
+        , Network.AWS.ElastiCache.StartMigration
         , Network.AWS.ElastiCache.TestFailover
         , Network.AWS.ElastiCache.Types
         , Network.AWS.ElastiCache.Waiters
 
     other-modules:
-          Network.AWS.ElastiCache.Types.Product
-        , Network.AWS.ElastiCache.Types.Sum
+          Network.AWS.ElastiCache.Types.AZMode
+        , Network.AWS.ElastiCache.Types.AuthTokenUpdateStatus
+        , Network.AWS.ElastiCache.Types.AuthTokenUpdateStrategyType
+        , Network.AWS.ElastiCache.Types.AutomaticFailoverStatus
+        , Network.AWS.ElastiCache.Types.AvailabilityZone
+        , Network.AWS.ElastiCache.Types.CacheCluster
+        , Network.AWS.ElastiCache.Types.CacheEngineVersion
+        , Network.AWS.ElastiCache.Types.CacheNode
+        , Network.AWS.ElastiCache.Types.CacheNodeTypeSpecificParameter
+        , Network.AWS.ElastiCache.Types.CacheNodeTypeSpecificValue
+        , Network.AWS.ElastiCache.Types.CacheNodeUpdateStatus
+        , Network.AWS.ElastiCache.Types.CacheParameterGroup
+        , Network.AWS.ElastiCache.Types.CacheParameterGroupNameMessage
+        , Network.AWS.ElastiCache.Types.CacheParameterGroupStatus
+        , Network.AWS.ElastiCache.Types.CacheSecurityGroup
+        , Network.AWS.ElastiCache.Types.CacheSecurityGroupMembership
+        , Network.AWS.ElastiCache.Types.CacheSubnetGroup
+        , Network.AWS.ElastiCache.Types.ChangeType
+        , Network.AWS.ElastiCache.Types.ConfigureShard
+        , Network.AWS.ElastiCache.Types.CustomerNodeEndpoint
+        , Network.AWS.ElastiCache.Types.EC2SecurityGroup
+        , Network.AWS.ElastiCache.Types.Endpoint
+        , Network.AWS.ElastiCache.Types.EngineDefaults
+        , Network.AWS.ElastiCache.Types.Event
+        , Network.AWS.ElastiCache.Types.GlobalNodeGroup
+        , Network.AWS.ElastiCache.Types.GlobalReplicationGroup
+        , Network.AWS.ElastiCache.Types.GlobalReplicationGroupInfo
+        , Network.AWS.ElastiCache.Types.GlobalReplicationGroupMember
+        , Network.AWS.ElastiCache.Types.NodeGroup
+        , Network.AWS.ElastiCache.Types.NodeGroupConfiguration
+        , Network.AWS.ElastiCache.Types.NodeGroupMember
+        , Network.AWS.ElastiCache.Types.NodeGroupMemberUpdateStatus
+        , Network.AWS.ElastiCache.Types.NodeGroupUpdateStatus
+        , Network.AWS.ElastiCache.Types.NodeSnapshot
+        , Network.AWS.ElastiCache.Types.NodeUpdateInitiatedBy
+        , Network.AWS.ElastiCache.Types.NodeUpdateStatus
+        , Network.AWS.ElastiCache.Types.NotificationConfiguration
+        , Network.AWS.ElastiCache.Types.Parameter
+        , Network.AWS.ElastiCache.Types.ParameterNameValue
+        , Network.AWS.ElastiCache.Types.PendingAutomaticFailoverStatus
+        , Network.AWS.ElastiCache.Types.PendingModifiedValues
+        , Network.AWS.ElastiCache.Types.ProcessedUpdateAction
+        , Network.AWS.ElastiCache.Types.Product
+        , Network.AWS.ElastiCache.Types.RecurringCharge
+        , Network.AWS.ElastiCache.Types.RegionalConfiguration
+        , Network.AWS.ElastiCache.Types.ReplicationGroup
+        , Network.AWS.ElastiCache.Types.ReplicationGroupPendingModifiedValues
+        , Network.AWS.ElastiCache.Types.ReservedCacheNode
+        , Network.AWS.ElastiCache.Types.ReservedCacheNodesOffering
+        , Network.AWS.ElastiCache.Types.ReshardingConfiguration
+        , Network.AWS.ElastiCache.Types.ReshardingStatus
+        , Network.AWS.ElastiCache.Types.SecurityGroupMembership
+        , Network.AWS.ElastiCache.Types.ServiceUpdate
+        , Network.AWS.ElastiCache.Types.ServiceUpdateSeverity
+        , Network.AWS.ElastiCache.Types.ServiceUpdateStatus
+        , Network.AWS.ElastiCache.Types.ServiceUpdateType
+        , Network.AWS.ElastiCache.Types.SlaMet
+        , Network.AWS.ElastiCache.Types.SlotMigration
+        , Network.AWS.ElastiCache.Types.Snapshot
+        , Network.AWS.ElastiCache.Types.SourceType
+        , Network.AWS.ElastiCache.Types.Subnet
+        , Network.AWS.ElastiCache.Types.Tag
+        , Network.AWS.ElastiCache.Types.TagListMessage
+        , Network.AWS.ElastiCache.Types.TimeRangeFilter
+        , Network.AWS.ElastiCache.Types.UnprocessedUpdateAction
+        , Network.AWS.ElastiCache.Types.UpdateAction
+        , Network.AWS.ElastiCache.Types.UpdateActionResultsMessage
+        , Network.AWS.ElastiCache.Types.UpdateActionStatus
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-elasticache-test
     type:              exitcode-stdio-1.0
@@ -118,6 +202,7 @@ test-suite amazonka-elasticache-test
         , amazonka-elasticache
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

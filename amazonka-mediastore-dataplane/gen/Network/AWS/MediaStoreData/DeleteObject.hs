@@ -44,10 +44,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteObject' smart constructor.
-newtype DeleteObject = DeleteObject'
-  { _doPath :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteObject = DeleteObject'{_doPath :: Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteObject' with the minimum fields required to make a request.
 --
@@ -57,8 +55,7 @@ newtype DeleteObject = DeleteObject'
 deleteObject
     :: Text -- ^ 'doPath'
     -> DeleteObject
-deleteObject pPath_ = DeleteObject' {_doPath = pPath_}
-
+deleteObject pPath_ = DeleteObject'{_doPath = pPath_}
 
 -- | The path (including the file name) where the object is stored in the container. Format: <folder name>/<folder name>/<file name>
 doPath :: Lens' DeleteObject Text
@@ -87,10 +84,10 @@ instance ToQuery DeleteObject where
         toQuery = const mempty
 
 -- | /See:/ 'deleteObjectResponse' smart constructor.
-newtype DeleteObjectResponse = DeleteObjectResponse'
-  { _dorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteObjectResponse = DeleteObjectResponse'{_dorsResponseStatus
+                                                     :: Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteObjectResponse' with the minimum fields required to make a request.
 --
@@ -100,9 +97,9 @@ newtype DeleteObjectResponse = DeleteObjectResponse'
 deleteObjectResponse
     :: Int -- ^ 'dorsResponseStatus'
     -> DeleteObjectResponse
-deleteObjectResponse pResponseStatus_ =
-  DeleteObjectResponse' {_dorsResponseStatus = pResponseStatus_}
-
+deleteObjectResponse pResponseStatus_
+  = DeleteObjectResponse'{_dorsResponseStatus =
+                            pResponseStatus_}
 
 -- | -- | The response status code.
 dorsResponseStatus :: Lens' DeleteObjectResponse Int

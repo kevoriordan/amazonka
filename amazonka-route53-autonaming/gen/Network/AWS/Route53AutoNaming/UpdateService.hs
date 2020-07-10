@@ -21,17 +21,21 @@
 -- Submits a request to perform the following operations:
 --
 --
---     * Add or delete @DnsRecords@ configurations
---
 --     * Update the TTL setting for existing @DnsRecords@ configurations
 --
 --     * Add, update, or delete @HealthCheckConfig@ for a specified service
 --
 --
 --
--- You must specify all @DnsRecords@ configurations (and, optionally, @HealthCheckConfig@ ) that you want to appear in the updated service. Any current configurations that don't appear in an @UpdateService@ request are deleted.
+-- For public and private DNS namespaces, note the following:
 --
--- When you update the TTL setting for a service, Amazon Route 53 also updates the corresponding settings in all the records and health checks that were created by using the specified service.
+--     * If you omit any existing @DnsRecords@ or @HealthCheckConfig@ configurations from an @UpdateService@ request, the configurations are deleted from the service.
+--
+--     * If you omit an existing @HealthCheckCustomConfig@ configuration from an @UpdateService@ request, the configuration is not deleted from the service.
+--
+--
+--
+-- When you update settings for a service, AWS Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.
 --
 module Network.AWS.Route53AutoNaming.UpdateService
     (
@@ -58,11 +62,9 @@ import Network.AWS.Route53AutoNaming.Types
 import Network.AWS.Route53AutoNaming.Types.Product
 
 -- | /See:/ 'updateService' smart constructor.
-data UpdateService = UpdateService'
-  { _usId      :: !Text
-  , _usService :: !ServiceChange
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateService = UpdateService'{_usId :: !Text,
+                                    _usService :: !ServiceChange}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateService' with the minimum fields required to make a request.
 --
@@ -75,9 +77,9 @@ updateService
     :: Text -- ^ 'usId'
     -> ServiceChange -- ^ 'usService'
     -> UpdateService
-updateService pId_ pService_ =
-  UpdateService' {_usId = pId_, _usService = pService_}
-
+updateService pId_ pService_
+  = UpdateService'{_usId = pId_,
+                   _usService = pService_}
 
 -- | The ID of the service that you want to update.
 usId :: Lens' UpdateService Text
@@ -124,28 +126,27 @@ instance ToQuery UpdateService where
         toQuery = const mempty
 
 -- | /See:/ 'updateServiceResponse' smart constructor.
-data UpdateServiceResponse = UpdateServiceResponse'
-  { _usrsOperationId    :: !(Maybe Text)
-  , _usrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateServiceResponse = UpdateServiceResponse'{_usrsOperationId
+                                                    :: !(Maybe Text),
+                                                    _usrsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateServiceResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'usrsOperationId' - A value that you can use to determine whether the request completed successfully. To get the status of the operation, see 'GetOperation' .
+-- * 'usrsOperationId' - A value that you can use to determine whether the request completed successfully. To get the status of the operation, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
 --
 -- * 'usrsResponseStatus' - -- | The response status code.
 updateServiceResponse
     :: Int -- ^ 'usrsResponseStatus'
     -> UpdateServiceResponse
-updateServiceResponse pResponseStatus_ =
-  UpdateServiceResponse'
-    {_usrsOperationId = Nothing, _usrsResponseStatus = pResponseStatus_}
+updateServiceResponse pResponseStatus_
+  = UpdateServiceResponse'{_usrsOperationId = Nothing,
+                           _usrsResponseStatus = pResponseStatus_}
 
-
--- | A value that you can use to determine whether the request completed successfully. To get the status of the operation, see 'GetOperation' .
+-- | A value that you can use to determine whether the request completed successfully. To get the status of the operation, see <https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html GetOperation> .
 usrsOperationId :: Lens' UpdateServiceResponse (Maybe Text)
 usrsOperationId = lens _usrsOperationId (\ s a -> s{_usrsOperationId = a})
 

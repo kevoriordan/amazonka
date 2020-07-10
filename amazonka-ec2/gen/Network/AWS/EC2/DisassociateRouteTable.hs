@@ -21,7 +21,7 @@
 -- Disassociates a subnet from a route table.
 --
 --
--- After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html Route Tables> in the /Amazon Virtual Private Cloud User Guide/ .
+-- After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see <https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html Route Tables> in the /Amazon Virtual Private Cloud User Guide/ .
 --
 module Network.AWS.EC2.DisassociateRouteTable
     (
@@ -44,16 +44,13 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DisassociateRouteTable.
---
---
---
--- /See:/ 'disassociateRouteTable' smart constructor.
-data DisassociateRouteTable = DisassociateRouteTable'
-  { _drtDryRun        :: !(Maybe Bool)
-  , _drtAssociationId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'disassociateRouteTable' smart constructor.
+data DisassociateRouteTable = DisassociateRouteTable'{_drtDryRun
+                                                      :: !(Maybe Bool),
+                                                      _drtAssociationId ::
+                                                      !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DisassociateRouteTable' with the minimum fields required to make a request.
 --
@@ -65,10 +62,9 @@ data DisassociateRouteTable = DisassociateRouteTable'
 disassociateRouteTable
     :: Text -- ^ 'drtAssociationId'
     -> DisassociateRouteTable
-disassociateRouteTable pAssociationId_ =
-  DisassociateRouteTable'
-    {_drtDryRun = Nothing, _drtAssociationId = pAssociationId_}
-
+disassociateRouteTable pAssociationId_
+  = DisassociateRouteTable'{_drtDryRun = Nothing,
+                            _drtAssociationId = pAssociationId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 drtDryRun :: Lens' DisassociateRouteTable (Maybe Bool)
@@ -105,16 +101,15 @@ instance ToQuery DisassociateRouteTable where
                "AssociationId" =: _drtAssociationId]
 
 -- | /See:/ 'disassociateRouteTableResponse' smart constructor.
-data DisassociateRouteTableResponse =
-  DisassociateRouteTableResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateRouteTableResponse = DisassociateRouteTableResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DisassociateRouteTableResponse' with the minimum fields required to make a request.
 --
 disassociateRouteTableResponse
     :: DisassociateRouteTableResponse
-disassociateRouteTableResponse = DisassociateRouteTableResponse'
-
+disassociateRouteTableResponse
+  = DisassociateRouteTableResponse'
 
 instance NFData DisassociateRouteTableResponse where

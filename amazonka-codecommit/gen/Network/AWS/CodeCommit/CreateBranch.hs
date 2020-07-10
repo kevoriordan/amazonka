@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new branch in a repository and points the branch to a commit.
+-- Creates a branch in a repository and points the branch to a commit.
 --
 --
 module Network.AWS.CodeCommit.CreateBranch
@@ -48,12 +48,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'createBranch' smart constructor.
-data CreateBranch = CreateBranch'
-  { _cbRepositoryName :: !Text
-  , _cbBranchName     :: !Text
-  , _cbCommitId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBranch = CreateBranch'{_cbRepositoryName
+                                  :: !Text,
+                                  _cbBranchName :: !Text, _cbCommitId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBranch' with the minimum fields required to make a request.
 --
@@ -69,13 +67,10 @@ createBranch
     -> Text -- ^ 'cbBranchName'
     -> Text -- ^ 'cbCommitId'
     -> CreateBranch
-createBranch pRepositoryName_ pBranchName_ pCommitId_ =
-  CreateBranch'
-    { _cbRepositoryName = pRepositoryName_
-    , _cbBranchName = pBranchName_
-    , _cbCommitId = pCommitId_
-    }
-
+createBranch pRepositoryName_ pBranchName_ pCommitId_
+  = CreateBranch'{_cbRepositoryName = pRepositoryName_,
+                  _cbBranchName = pBranchName_,
+                  _cbCommitId = pCommitId_}
 
 -- | The name of the repository in which you want to create the new branch.
 cbRepositoryName :: Lens' CreateBranch Text
@@ -122,16 +117,13 @@ instance ToQuery CreateBranch where
         toQuery = const mempty
 
 -- | /See:/ 'createBranchResponse' smart constructor.
-data CreateBranchResponse =
-  CreateBranchResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateBranchResponse = CreateBranchResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateBranchResponse' with the minimum fields required to make a request.
 --
 createBranchResponse
     :: CreateBranchResponse
 createBranchResponse = CreateBranchResponse'
-
 
 instance NFData CreateBranchResponse where

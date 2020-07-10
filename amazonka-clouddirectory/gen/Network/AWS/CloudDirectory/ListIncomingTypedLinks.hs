@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a paginated list of all the incoming 'TypedLinkSpecifier' information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
+-- Returns a paginated list of all the incoming 'TypedLinkSpecifier' information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink Typed Links> .
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.CloudDirectory.ListIncomingTypedLinks
     (
     -- * Creating a Request
@@ -47,21 +49,31 @@ module Network.AWS.CloudDirectory.ListIncomingTypedLinks
 import Network.AWS.CloudDirectory.Types
 import Network.AWS.CloudDirectory.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listIncomingTypedLinks' smart constructor.
-data ListIncomingTypedLinks = ListIncomingTypedLinks'
-  { _litlFilterAttributeRanges :: !(Maybe [TypedLinkAttributeRange])
-  , _litlConsistencyLevel      :: !(Maybe ConsistencyLevel)
-  , _litlNextToken             :: !(Maybe Text)
-  , _litlFilterTypedLink       :: !(Maybe TypedLinkSchemaAndFacetName)
-  , _litlMaxResults            :: !(Maybe Nat)
-  , _litlDirectoryARN          :: !Text
-  , _litlObjectReference       :: !ObjectReference
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListIncomingTypedLinks = ListIncomingTypedLinks'{_litlFilterAttributeRanges
+                                                      ::
+                                                      !(Maybe
+                                                          [TypedLinkAttributeRange]),
+                                                      _litlConsistencyLevel ::
+                                                      !(Maybe ConsistencyLevel),
+                                                      _litlNextToken ::
+                                                      !(Maybe Text),
+                                                      _litlFilterTypedLink ::
+                                                      !(Maybe
+                                                          TypedLinkSchemaAndFacetName),
+                                                      _litlMaxResults ::
+                                                      !(Maybe Nat),
+                                                      _litlDirectoryARN ::
+                                                      !Text,
+                                                      _litlObjectReference ::
+                                                      !ObjectReference}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListIncomingTypedLinks' with the minimum fields required to make a request.
 --
@@ -84,17 +96,16 @@ listIncomingTypedLinks
     :: Text -- ^ 'litlDirectoryARN'
     -> ObjectReference -- ^ 'litlObjectReference'
     -> ListIncomingTypedLinks
-listIncomingTypedLinks pDirectoryARN_ pObjectReference_ =
-  ListIncomingTypedLinks'
-    { _litlFilterAttributeRanges = Nothing
-    , _litlConsistencyLevel = Nothing
-    , _litlNextToken = Nothing
-    , _litlFilterTypedLink = Nothing
-    , _litlMaxResults = Nothing
-    , _litlDirectoryARN = pDirectoryARN_
-    , _litlObjectReference = pObjectReference_
-    }
-
+listIncomingTypedLinks pDirectoryARN_
+  pObjectReference_
+  = ListIncomingTypedLinks'{_litlFilterAttributeRanges
+                              = Nothing,
+                            _litlConsistencyLevel = Nothing,
+                            _litlNextToken = Nothing,
+                            _litlFilterTypedLink = Nothing,
+                            _litlMaxResults = Nothing,
+                            _litlDirectoryARN = pDirectoryARN_,
+                            _litlObjectReference = pObjectReference_}
 
 -- | Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.
 litlFilterAttributeRanges :: Lens' ListIncomingTypedLinks [TypedLinkAttributeRange]
@@ -123,6 +134,13 @@ litlDirectoryARN = lens _litlDirectoryARN (\ s a -> s{_litlDirectoryARN = a})
 -- | Reference that identifies the object whose attributes will be listed.
 litlObjectReference :: Lens' ListIncomingTypedLinks ObjectReference
 litlObjectReference = lens _litlObjectReference (\ s a -> s{_litlObjectReference = a})
+
+instance AWSPager ListIncomingTypedLinks where
+        page rq rs
+          | stop (rs ^. litlrsNextToken) = Nothing
+          | stop (rs ^. litlrsLinkSpecifiers) = Nothing
+          | otherwise =
+            Just $ rq & litlNextToken .~ rs ^. litlrsNextToken
 
 instance AWSRequest ListIncomingTypedLinks where
         type Rs ListIncomingTypedLinks =
@@ -166,12 +184,18 @@ instance ToQuery ListIncomingTypedLinks where
         toQuery = const mempty
 
 -- | /See:/ 'listIncomingTypedLinksResponse' smart constructor.
-data ListIncomingTypedLinksResponse = ListIncomingTypedLinksResponse'
-  { _litlrsLinkSpecifiers :: !(Maybe [TypedLinkSpecifier])
-  , _litlrsNextToken      :: !(Maybe Text)
-  , _litlrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListIncomingTypedLinksResponse = ListIncomingTypedLinksResponse'{_litlrsLinkSpecifiers
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [TypedLinkSpecifier]),
+                                                                      _litlrsNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _litlrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ListIncomingTypedLinksResponse' with the minimum fields required to make a request.
 --
@@ -185,13 +209,11 @@ data ListIncomingTypedLinksResponse = ListIncomingTypedLinksResponse'
 listIncomingTypedLinksResponse
     :: Int -- ^ 'litlrsResponseStatus'
     -> ListIncomingTypedLinksResponse
-listIncomingTypedLinksResponse pResponseStatus_ =
-  ListIncomingTypedLinksResponse'
-    { _litlrsLinkSpecifiers = Nothing
-    , _litlrsNextToken = Nothing
-    , _litlrsResponseStatus = pResponseStatus_
-    }
-
+listIncomingTypedLinksResponse pResponseStatus_
+  = ListIncomingTypedLinksResponse'{_litlrsLinkSpecifiers
+                                      = Nothing,
+                                    _litlrsNextToken = Nothing,
+                                    _litlrsResponseStatus = pResponseStatus_}
 
 -- | Returns one or more typed link specifiers as output.
 litlrsLinkSpecifiers :: Lens' ListIncomingTypedLinksResponse [TypedLinkSpecifier]

@@ -23,7 +23,7 @@
 --
 -- For deleted stacks, @DescribeStackResources@ returns resource information for up to 90 days after the stack has been deleted.
 --
--- You must specify either @StackName@ or @PhysicalResourceId@ , but not both. In addition, you can specify @LogicalResourceId@ to filter the returned result. For more information about resources, the @LogicalResourceId@ and @PhysicalResourceId@ , go to the <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/ AWS CloudFormation User Guide> .
+-- You must specify either @StackName@ or @PhysicalResourceId@ , but not both. In addition, you can specify @LogicalResourceId@ to filter the returned result. For more information about resources, the @LogicalResourceId@ and @PhysicalResourceId@ , go to the <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/ AWS CloudFormation User Guide> .
 --
 module Network.AWS.CloudFormation.DescribeStackResources
     (
@@ -55,12 +55,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'describeStackResources' smart constructor.
-data DescribeStackResources = DescribeStackResources'
-  { _dsrLogicalResourceId  :: !(Maybe Text)
-  , _dsrPhysicalResourceId :: !(Maybe Text)
-  , _dsrStackName          :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackResources = DescribeStackResources'{_dsrLogicalResourceId
+                                                      :: !(Maybe Text),
+                                                      _dsrPhysicalResourceId ::
+                                                      !(Maybe Text),
+                                                      _dsrStackName ::
+                                                      !(Maybe Text)}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeStackResources' with the minimum fields required to make a request.
 --
@@ -73,13 +75,11 @@ data DescribeStackResources = DescribeStackResources'
 -- * 'dsrStackName' - The name or the unique stack ID that is associated with the stack, which are not always interchangeable:     * Running stacks: You can specify either the stack's name or its unique stack ID.     * Deleted stacks: You must specify the unique stack ID. Default: There is no default value. Required: Conditional. If you do not specify @StackName@ , you must specify @PhysicalResourceId@ .
 describeStackResources
     :: DescribeStackResources
-describeStackResources =
-  DescribeStackResources'
-    { _dsrLogicalResourceId = Nothing
-    , _dsrPhysicalResourceId = Nothing
-    , _dsrStackName = Nothing
-    }
-
+describeStackResources
+  = DescribeStackResources'{_dsrLogicalResourceId =
+                              Nothing,
+                            _dsrPhysicalResourceId = Nothing,
+                            _dsrStackName = Nothing}
 
 -- | The logical name of the resource as specified in the template. Default: There is no default value.
 dsrLogicalResourceId :: Lens' DescribeStackResources (Maybe Text)
@@ -130,11 +130,14 @@ instance ToQuery DescribeStackResources where
 --
 --
 -- /See:/ 'describeStackResourcesResponse' smart constructor.
-data DescribeStackResourcesResponse = DescribeStackResourcesResponse'
-  { _dsrsrsStackResources :: !(Maybe [StackResource])
-  , _dsrsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeStackResourcesResponse = DescribeStackResourcesResponse'{_dsrsrsStackResources
+                                                                      ::
+                                                                      !(Maybe
+                                                                          [StackResource]),
+                                                                      _dsrsrsResponseStatus
+                                                                      :: !Int}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DescribeStackResourcesResponse' with the minimum fields required to make a request.
 --
@@ -146,10 +149,10 @@ data DescribeStackResourcesResponse = DescribeStackResourcesResponse'
 describeStackResourcesResponse
     :: Int -- ^ 'dsrsrsResponseStatus'
     -> DescribeStackResourcesResponse
-describeStackResourcesResponse pResponseStatus_ =
-  DescribeStackResourcesResponse'
-    {_dsrsrsStackResources = Nothing, _dsrsrsResponseStatus = pResponseStatus_}
-
+describeStackResourcesResponse pResponseStatus_
+  = DescribeStackResourcesResponse'{_dsrsrsStackResources
+                                      = Nothing,
+                                    _dsrsrsResponseStatus = pResponseStatus_}
 
 -- | A list of @StackResource@ structures.
 dsrsrsStackResources :: Lens' DescribeStackResourcesResponse [StackResource]

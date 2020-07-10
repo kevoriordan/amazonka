@@ -47,12 +47,15 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createEnvironmentMembership' smart constructor.
-data CreateEnvironmentMembership = CreateEnvironmentMembership'
-  { _cemEnvironmentId :: !Text
-  , _cemUserARN       :: !Text
-  , _cemPermissions   :: !MemberPermissions
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateEnvironmentMembership = CreateEnvironmentMembership'{_cemEnvironmentId
+                                                                :: !Text,
+                                                                _cemUserARN ::
+                                                                !Text,
+                                                                _cemPermissions
+                                                                ::
+                                                                !MemberPermissions}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'CreateEnvironmentMembership' with the minimum fields required to make a request.
 --
@@ -68,13 +71,12 @@ createEnvironmentMembership
     -> Text -- ^ 'cemUserARN'
     -> MemberPermissions -- ^ 'cemPermissions'
     -> CreateEnvironmentMembership
-createEnvironmentMembership pEnvironmentId_ pUserARN_ pPermissions_ =
-  CreateEnvironmentMembership'
-    { _cemEnvironmentId = pEnvironmentId_
-    , _cemUserARN = pUserARN_
-    , _cemPermissions = pPermissions_
-    }
-
+createEnvironmentMembership pEnvironmentId_ pUserARN_
+  pPermissions_
+  = CreateEnvironmentMembership'{_cemEnvironmentId =
+                                   pEnvironmentId_,
+                                 _cemUserARN = pUserARN_,
+                                 _cemPermissions = pPermissions_}
 
 -- | The ID of the environment that contains the environment member you want to add.
 cemEnvironmentId :: Lens' CreateEnvironmentMembership Text
@@ -127,11 +129,15 @@ instance ToQuery CreateEnvironmentMembership where
         toQuery = const mempty
 
 -- | /See:/ 'createEnvironmentMembershipResponse' smart constructor.
-data CreateEnvironmentMembershipResponse = CreateEnvironmentMembershipResponse'
-  { _cemrsMembership     :: !(Maybe EnvironmentMember)
-  , _cemrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateEnvironmentMembershipResponse = CreateEnvironmentMembershipResponse'{_cemrsMembership
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    EnvironmentMember),
+                                                                                _cemrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'CreateEnvironmentMembershipResponse' with the minimum fields required to make a request.
 --
@@ -143,10 +149,11 @@ data CreateEnvironmentMembershipResponse = CreateEnvironmentMembershipResponse'
 createEnvironmentMembershipResponse
     :: Int -- ^ 'cemrsResponseStatus'
     -> CreateEnvironmentMembershipResponse
-createEnvironmentMembershipResponse pResponseStatus_ =
-  CreateEnvironmentMembershipResponse'
-    {_cemrsMembership = Nothing, _cemrsResponseStatus = pResponseStatus_}
-
+createEnvironmentMembershipResponse pResponseStatus_
+  = CreateEnvironmentMembershipResponse'{_cemrsMembership
+                                           = Nothing,
+                                         _cemrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Information about the environment member that was added.
 cemrsMembership :: Lens' CreateEnvironmentMembershipResponse (Maybe EnvironmentMember)

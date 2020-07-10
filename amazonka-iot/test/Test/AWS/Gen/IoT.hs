@@ -14,11 +14,11 @@
 module Test.AWS.Gen.IoT where
 
 import Data.Proxy
-import Network.AWS.IoT
 import Test.AWS.Fixture
-import Test.AWS.IoT.Internal
 import Test.AWS.Prelude
 import Test.Tasty
+import Network.AWS.IoT
+import Test.AWS.IoT.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -28,8 +28,35 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestListPolicies $
+--         [ requestGetCardinality $
+--             getCardinality
+--
+--         , requestCreateDomainConfiguration $
+--             createDomainConfiguration
+--
+--         , requestDeleteSecurityProfile $
+--             deleteSecurityProfile
+--
+--         , requestUpdateSecurityProfile $
+--             updateSecurityProfile
+--
+--         , requestListSecurityProfiles $
+--             listSecurityProfiles
+--
+--         , requestListPolicies $
 --             listPolicies
+--
+--         , requestDescribeProvisioningTemplate $
+--             describeProvisioningTemplate
+--
+--         , requestUpdateMitigationAction $
+--             updateMitigationAction
+--
+--         , requestDeleteMitigationAction $
+--             deleteMitigationAction
+--
+--         , requestDeleteJobExecution $
+--             deleteJobExecution
 --
 --         , requestCreatePolicy $
 --             createPolicy
@@ -37,17 +64,29 @@ import Test.Tasty
 --         , requestRegisterCertificate $
 --             registerCertificate
 --
+--         , requestDeleteDynamicThingGroup $
+--             deleteDynamicThingGroup
+--
 --         , requestListThingPrincipals $
 --             listThingPrincipals
 --
+--         , requestUpdateDynamicThingGroup $
+--             updateDynamicThingGroup
+--
 --         , requestDescribeRoleAlias $
 --             describeRoleAlias
+--
+--         , requestCreateProvisioningTemplateVersion $
+--             createProvisioningTemplateVersion
 --
 --         , requestCreateOTAUpdate $
 --             createOTAUpdate
 --
 --         , requestDescribeDefaultAuthorizer $
 --             describeDefaultAuthorizer
+--
+--         , requestListAuditMitigationActionsTasks $
+--             listAuditMitigationActionsTasks
 --
 --         , requestListThingRegistrationTaskReports $
 --             listThingRegistrationTaskReports
@@ -61,14 +100,44 @@ import Test.Tasty
 --         , requestDescribeEventConfigurations $
 --             describeEventConfigurations
 --
+--         , requestListTopicRuleDestinations $
+--             listTopicRuleDestinations
+--
+--         , requestRegisterCertificateWithoutCA $
+--             registerCertificateWithoutCA
+--
+--         , requestListTagsForResource $
+--             listTagsForResource
+--
 --         , requestListThingGroups $
 --             listThingGroups
+--
+--         , requestListScheduledAudits $
+--             listScheduledAudits
 --
 --         , requestDescribeThingRegistrationTask $
 --             describeThingRegistrationTask
 --
+--         , requestUpdateScheduledAudit $
+--             updateScheduledAudit
+--
+--         , requestDeleteScheduledAudit $
+--             deleteScheduledAudit
+--
+--         , requestDescribeAuditFinding $
+--             describeAuditFinding
+--
+--         , requestDescribeDimension $
+--             describeDimension
+--
 --         , requestGetLoggingOptions $
 --             getLoggingOptions
+--
+--         , requestDeleteAccountAuditConfiguration $
+--             deleteAccountAuditConfiguration
+--
+--         , requestUpdateAccountAuditConfiguration $
+--             updateAccountAuditConfiguration
 --
 --         , requestGetOTAUpdate $
 --             getOTAUpdate
@@ -82,6 +151,9 @@ import Test.Tasty
 --         , requestSetV2LoggingOptions $
 --             setV2LoggingOptions
 --
+--         , requestCreateProvisioningTemplate $
+--             createProvisioningTemplate
+--
 --         , requestListThingGroupsForThing $
 --             listThingGroupsForThing
 --
@@ -94,8 +166,20 @@ import Test.Tasty
 --         , requestUpdateThing $
 --             updateThing
 --
+--         , requestDeleteProvisioningTemplate $
+--             deleteProvisioningTemplate
+--
+--         , requestUpdateProvisioningTemplate $
+--             updateProvisioningTemplate
+--
+--         , requestDescribeMitigationAction $
+--             describeMitigationAction
+--
 --         , requestStartThingRegistrationTask $
 --             startThingRegistrationTask
+--
+--         , requestCreateScheduledAudit $
+--             createScheduledAudit
 --
 --         , requestListAuthorizers $
 --             listAuthorizers
@@ -103,11 +187,17 @@ import Test.Tasty
 --         , requestListJobExecutionsForJob $
 --             listJobExecutionsForJob
 --
+--         , requestRemoveThingFromBillingGroup $
+--             removeThingFromBillingGroup
+--
 --         , requestSearchIndex $
 --             searchIndex
 --
 --         , requestCreateThingType $
 --             createThingType
+--
+--         , requestDescribeSecurityProfile $
+--             describeSecurityProfile
 --
 --         , requestDeleteV2LoggingLevel $
 --             deleteV2LoggingLevel
@@ -123,6 +213,15 @@ import Test.Tasty
 --
 --         , requestGetIndexingConfiguration $
 --             getIndexingConfiguration
+--
+--         , requestListAuditMitigationActionsExecutions $
+--             listAuditMitigationActionsExecutions
+--
+--         , requestDescribeAuditMitigationActionsTask $
+--             describeAuditMitigationActionsTask
+--
+--         , requestGetStatistics $
+--             getStatistics
 --
 --         , requestDeleteRoleAlias $
 --             deleteRoleAlias
@@ -148,6 +247,9 @@ import Test.Tasty
 --         , requestAssociateTargetsWithJob $
 --             associateTargetsWithJob
 --
+--         , requestAttachSecurityProfile $
+--             attachSecurityProfile
+--
 --         , requestListAttachedPolicies $
 --             listAttachedPolicies
 --
@@ -162,6 +264,12 @@ import Test.Tasty
 --
 --         , requestGetJobDocument $
 --             getJobDocument
+--
+--         , requestDescribeProvisioningTemplateVersion $
+--             describeProvisioningTemplateVersion
+--
+--         , requestCancelAuditTask $
+--             cancelAuditTask
 --
 --         , requestCreateRoleAlias $
 --             createRoleAlias
@@ -184,8 +292,23 @@ import Test.Tasty
 --         , requestListRoleAliases $
 --             listRoleAliases
 --
+--         , requestStartOnDemandAuditTask $
+--             startOnDemandAuditTask
+--
 --         , requestDescribeThingGroup $
 --             describeThingGroup
+--
+--         , requestDeleteJob $
+--             deleteJob
+--
+--         , requestListTargetsForSecurityProfile $
+--             listTargetsForSecurityProfile
+--
+--         , requestUpdateJob $
+--             updateJob
+--
+--         , requestStartAuditMitigationActionsTask $
+--             startAuditMitigationActionsTask
 --
 --         , requestGetTopicRule $
 --             getTopicRule
@@ -193,14 +316,44 @@ import Test.Tasty
 --         , requestDescribeThing $
 --             describeThing
 --
+--         , requestListDomainConfigurations $
+--             listDomainConfigurations
+--
+--         , requestListAuditTasks $
+--             listAuditTasks
+--
+--         , requestDescribeAccountAuditConfiguration $
+--             describeAccountAuditConfiguration
+--
+--         , requestDeleteDimension $
+--             deleteDimension
+--
+--         , requestUpdateDimension $
+--             updateDimension
+--
 --         , requestDeletePolicy $
 --             deletePolicy
 --
 --         , requestListThingsInThingGroup $
 --             listThingsInThingGroup
 --
+--         , requestListAuditFindings $
+--             listAuditFindings
+--
+--         , requestDescribeScheduledAudit $
+--             describeScheduledAudit
+--
+--         , requestCreateMitigationAction $
+--             createMitigationAction
+--
+--         , requestConfirmTopicRuleDestination $
+--             confirmTopicRuleDestination
+--
 --         , requestListCertificates $
 --             listCertificates
+--
+--         , requestListMitigationActions $
+--             listMitigationActions
 --
 --         , requestDescribeAuthorizer $
 --             describeAuthorizer
@@ -208,14 +361,29 @@ import Test.Tasty
 --         , requestGetPolicyVersion $
 --             getPolicyVersion
 --
+--         , requestListActiveViolations $
+--             listActiveViolations
+--
+--         , requestValidateSecurityProfileBehaviors $
+--             validateSecurityProfileBehaviors
+--
+--         , requestListViolationEvents $
+--             listViolationEvents
+--
 --         , requestDeleteCertificate $
 --             deleteCertificate
 --
 --         , requestUpdateCertificate $
 --             updateCertificate
 --
+--         , requestCreateDimension $
+--             createDimension
+--
 --         , requestUpdateIndexingConfiguration $
 --             updateIndexingConfiguration
+--
+--         , requestCreateProvisioningClaim $
+--             createProvisioningClaim
 --
 --         , requestTestInvokeAuthorizer $
 --             testInvokeAuthorizer
@@ -223,11 +391,23 @@ import Test.Tasty
 --         , requestCreateThingGroup $
 --             createThingGroup
 --
+--         , requestCreateTopicRuleDestination $
+--             createTopicRuleDestination
+--
 --         , requestDetachPolicy $
 --             detachPolicy
 --
 --         , requestDescribeJob $
 --             describeJob
+--
+--         , requestAddThingToBillingGroup $
+--             addThingToBillingGroup
+--
+--         , requestUpdateTopicRuleDestination $
+--             updateTopicRuleDestination
+--
+--         , requestDeleteTopicRuleDestination $
+--             deleteTopicRuleDestination
 --
 --         , requestDeleteThingGroup $
 --             deleteThingGroup
@@ -241,20 +421,44 @@ import Test.Tasty
 --         , requestDeleteOTAUpdate $
 --             deleteOTAUpdate
 --
+--         , requestCreateDynamicThingGroup $
+--             createDynamicThingGroup
+--
+--         , requestDetachSecurityProfile $
+--             detachSecurityProfile
+--
 --         , requestListOutgoingCertificates $
 --             listOutgoingCertificates
+--
+--         , requestDeleteProvisioningTemplateVersion $
+--             deleteProvisioningTemplateVersion
 --
 --         , requestDescribeCACertificate $
 --             describeCACertificate
 --
+--         , requestListProvisioningTemplateVersions $
+--             listProvisioningTemplateVersions
+--
 --         , requestGetRegistrationCode $
 --             getRegistrationCode
+--
+--         , requestListBillingGroups $
+--             listBillingGroups
 --
 --         , requestDeleteThingType $
 --             deleteThingType
 --
+--         , requestDeleteBillingGroup $
+--             deleteBillingGroup
+--
 --         , requestAddThingToThingGroup $
 --             addThingToThingGroup
+--
+--         , requestUpdateBillingGroup $
+--             updateBillingGroup
+--
+--         , requestGetTopicRuleDestination $
+--             getTopicRuleDestination
 --
 --         , requestListCertificatesByCA $
 --             listCertificatesByCA
@@ -267,6 +471,12 @@ import Test.Tasty
 --
 --         , requestRegisterThing $
 --             registerThing
+--
+--         , requestDescribeDomainConfiguration $
+--             describeDomainConfiguration
+--
+--         , requestDescribeAuditTask $
+--             describeAuditTask
 --
 --         , requestDeleteRegistrationCode $
 --             deleteRegistrationCode
@@ -301,8 +511,20 @@ import Test.Tasty
 --         , requestCreateStream $
 --             createStream
 --
+--         , requestCancelAuditMitigationActionsTask $
+--             cancelAuditMitigationActionsTask
+--
+--         , requestCreateBillingGroup $
+--             createBillingGroup
+--
+--         , requestListProvisioningTemplates $
+--             listProvisioningTemplates
+--
 --         , requestListV2LoggingLevels $
 --             listV2LoggingLevels
+--
+--         , requestTagResource $
+--             tagResource
 --
 --         , requestStopThingRegistrationTask $
 --             stopThingRegistrationTask
@@ -319,8 +541,14 @@ import Test.Tasty
 --         , requestReplaceTopicRule $
 --             replaceTopicRule
 --
+--         , requestUntagResource $
+--             untagResource
+--
 --         , requestSetDefaultPolicyVersion $
 --             setDefaultPolicyVersion
+--
+--         , requestCancelJobExecution $
+--             cancelJobExecution
 --
 --         , requestListPolicyVersions $
 --             listPolicyVersions
@@ -337,6 +565,9 @@ import Test.Tasty
 --         , requestCreateKeysAndCertificate $
 --             createKeysAndCertificate
 --
+--         , requestListThingsInBillingGroup $
+--             listThingsInBillingGroup
+--
 --         , requestUpdateThingGroupsForThing $
 --             updateThingGroupsForThing
 --
@@ -346,11 +577,17 @@ import Test.Tasty
 --         , requestAcceptCertificateTransfer $
 --             acceptCertificateTransfer
 --
+--         , requestGetPercentiles $
+--             getPercentiles
+--
 --         , requestGetPolicy $
 --             getPolicy
 --
 --         , requestDescribeEndpoint $
 --             describeEndpoint
+--
+--         , requestListSecurityProfilesForTarget $
+--             listSecurityProfilesForTarget
 --
 --         , requestUpdateEventConfigurations $
 --             updateEventConfigurations
@@ -358,11 +595,20 @@ import Test.Tasty
 --         , requestRegisterCACertificate $
 --             registerCACertificate
 --
+--         , requestDeleteDomainConfiguration $
+--             deleteDomainConfiguration
+--
+--         , requestUpdateDomainConfiguration $
+--             updateDomainConfiguration
+--
 --         , requestSetLoggingOptions $
 --             setLoggingOptions
 --
 --         , requestDescribeThingType $
 --             describeThingType
+--
+--         , requestListDimensions $
+--             listDimensions
 --
 --         , requestGetV2LoggingOptions $
 --             getV2LoggingOptions
@@ -376,6 +622,12 @@ import Test.Tasty
 --         , requestDescribeStream $
 --             describeStream
 --
+--         , requestCreateSecurityProfile $
+--             createSecurityProfile
+--
+--         , requestDescribeBillingGroup $
+--             describeBillingGroup
+--
 --         , requestDetachThingPrincipal $
 --             detachThingPrincipal
 --
@@ -388,8 +640,35 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseListPolicies $
+--         [ responseGetCardinality $
+--             getCardinalityResponse
+--
+--         , responseCreateDomainConfiguration $
+--             createDomainConfigurationResponse
+--
+--         , responseDeleteSecurityProfile $
+--             deleteSecurityProfileResponse
+--
+--         , responseUpdateSecurityProfile $
+--             updateSecurityProfileResponse
+--
+--         , responseListSecurityProfiles $
+--             listSecurityProfilesResponse
+--
+--         , responseListPolicies $
 --             listPoliciesResponse
+--
+--         , responseDescribeProvisioningTemplate $
+--             describeProvisioningTemplateResponse
+--
+--         , responseUpdateMitigationAction $
+--             updateMitigationActionResponse
+--
+--         , responseDeleteMitigationAction $
+--             deleteMitigationActionResponse
+--
+--         , responseDeleteJobExecution $
+--             deleteJobExecutionResponse
 --
 --         , responseCreatePolicy $
 --             createPolicyResponse
@@ -397,17 +676,29 @@ import Test.Tasty
 --         , responseRegisterCertificate $
 --             registerCertificateResponse
 --
+--         , responseDeleteDynamicThingGroup $
+--             deleteDynamicThingGroupResponse
+--
 --         , responseListThingPrincipals $
 --             listThingPrincipalsResponse
 --
+--         , responseUpdateDynamicThingGroup $
+--             updateDynamicThingGroupResponse
+--
 --         , responseDescribeRoleAlias $
 --             describeRoleAliasResponse
+--
+--         , responseCreateProvisioningTemplateVersion $
+--             createProvisioningTemplateVersionResponse
 --
 --         , responseCreateOTAUpdate $
 --             createOTAUpdateResponse
 --
 --         , responseDescribeDefaultAuthorizer $
 --             describeDefaultAuthorizerResponse
+--
+--         , responseListAuditMitigationActionsTasks $
+--             listAuditMitigationActionsTasksResponse
 --
 --         , responseListThingRegistrationTaskReports $
 --             listThingRegistrationTaskReportsResponse
@@ -421,14 +712,44 @@ import Test.Tasty
 --         , responseDescribeEventConfigurations $
 --             describeEventConfigurationsResponse
 --
+--         , responseListTopicRuleDestinations $
+--             listTopicRuleDestinationsResponse
+--
+--         , responseRegisterCertificateWithoutCA $
+--             registerCertificateWithoutCAResponse
+--
+--         , responseListTagsForResource $
+--             listTagsForResourceResponse
+--
 --         , responseListThingGroups $
 --             listThingGroupsResponse
+--
+--         , responseListScheduledAudits $
+--             listScheduledAuditsResponse
 --
 --         , responseDescribeThingRegistrationTask $
 --             describeThingRegistrationTaskResponse
 --
+--         , responseUpdateScheduledAudit $
+--             updateScheduledAuditResponse
+--
+--         , responseDeleteScheduledAudit $
+--             deleteScheduledAuditResponse
+--
+--         , responseDescribeAuditFinding $
+--             describeAuditFindingResponse
+--
+--         , responseDescribeDimension $
+--             describeDimensionResponse
+--
 --         , responseGetLoggingOptions $
 --             getLoggingOptionsResponse
+--
+--         , responseDeleteAccountAuditConfiguration $
+--             deleteAccountAuditConfigurationResponse
+--
+--         , responseUpdateAccountAuditConfiguration $
+--             updateAccountAuditConfigurationResponse
 --
 --         , responseGetOTAUpdate $
 --             getOTAUpdateResponse
@@ -442,6 +763,9 @@ import Test.Tasty
 --         , responseSetV2LoggingOptions $
 --             setV2LoggingOptionsResponse
 --
+--         , responseCreateProvisioningTemplate $
+--             createProvisioningTemplateResponse
+--
 --         , responseListThingGroupsForThing $
 --             listThingGroupsForThingResponse
 --
@@ -454,8 +778,20 @@ import Test.Tasty
 --         , responseUpdateThing $
 --             updateThingResponse
 --
+--         , responseDeleteProvisioningTemplate $
+--             deleteProvisioningTemplateResponse
+--
+--         , responseUpdateProvisioningTemplate $
+--             updateProvisioningTemplateResponse
+--
+--         , responseDescribeMitigationAction $
+--             describeMitigationActionResponse
+--
 --         , responseStartThingRegistrationTask $
 --             startThingRegistrationTaskResponse
+--
+--         , responseCreateScheduledAudit $
+--             createScheduledAuditResponse
 --
 --         , responseListAuthorizers $
 --             listAuthorizersResponse
@@ -463,11 +799,17 @@ import Test.Tasty
 --         , responseListJobExecutionsForJob $
 --             listJobExecutionsForJobResponse
 --
+--         , responseRemoveThingFromBillingGroup $
+--             removeThingFromBillingGroupResponse
+--
 --         , responseSearchIndex $
 --             searchIndexResponse
 --
 --         , responseCreateThingType $
 --             createThingTypeResponse
+--
+--         , responseDescribeSecurityProfile $
+--             describeSecurityProfileResponse
 --
 --         , responseDeleteV2LoggingLevel $
 --             deleteV2LoggingLevelResponse
@@ -483,6 +825,15 @@ import Test.Tasty
 --
 --         , responseGetIndexingConfiguration $
 --             getIndexingConfigurationResponse
+--
+--         , responseListAuditMitigationActionsExecutions $
+--             listAuditMitigationActionsExecutionsResponse
+--
+--         , responseDescribeAuditMitigationActionsTask $
+--             describeAuditMitigationActionsTaskResponse
+--
+--         , responseGetStatistics $
+--             getStatisticsResponse
 --
 --         , responseDeleteRoleAlias $
 --             deleteRoleAliasResponse
@@ -508,6 +859,9 @@ import Test.Tasty
 --         , responseAssociateTargetsWithJob $
 --             associateTargetsWithJobResponse
 --
+--         , responseAttachSecurityProfile $
+--             attachSecurityProfileResponse
+--
 --         , responseListAttachedPolicies $
 --             listAttachedPoliciesResponse
 --
@@ -522,6 +876,12 @@ import Test.Tasty
 --
 --         , responseGetJobDocument $
 --             getJobDocumentResponse
+--
+--         , responseDescribeProvisioningTemplateVersion $
+--             describeProvisioningTemplateVersionResponse
+--
+--         , responseCancelAuditTask $
+--             cancelAuditTaskResponse
 --
 --         , responseCreateRoleAlias $
 --             createRoleAliasResponse
@@ -544,8 +904,23 @@ import Test.Tasty
 --         , responseListRoleAliases $
 --             listRoleAliasesResponse
 --
+--         , responseStartOnDemandAuditTask $
+--             startOnDemandAuditTaskResponse
+--
 --         , responseDescribeThingGroup $
 --             describeThingGroupResponse
+--
+--         , responseDeleteJob $
+--             deleteJobResponse
+--
+--         , responseListTargetsForSecurityProfile $
+--             listTargetsForSecurityProfileResponse
+--
+--         , responseUpdateJob $
+--             updateJobResponse
+--
+--         , responseStartAuditMitigationActionsTask $
+--             startAuditMitigationActionsTaskResponse
 --
 --         , responseGetTopicRule $
 --             getTopicRuleResponse
@@ -553,14 +928,44 @@ import Test.Tasty
 --         , responseDescribeThing $
 --             describeThingResponse
 --
+--         , responseListDomainConfigurations $
+--             listDomainConfigurationsResponse
+--
+--         , responseListAuditTasks $
+--             listAuditTasksResponse
+--
+--         , responseDescribeAccountAuditConfiguration $
+--             describeAccountAuditConfigurationResponse
+--
+--         , responseDeleteDimension $
+--             deleteDimensionResponse
+--
+--         , responseUpdateDimension $
+--             updateDimensionResponse
+--
 --         , responseDeletePolicy $
 --             deletePolicyResponse
 --
 --         , responseListThingsInThingGroup $
 --             listThingsInThingGroupResponse
 --
+--         , responseListAuditFindings $
+--             listAuditFindingsResponse
+--
+--         , responseDescribeScheduledAudit $
+--             describeScheduledAuditResponse
+--
+--         , responseCreateMitigationAction $
+--             createMitigationActionResponse
+--
+--         , responseConfirmTopicRuleDestination $
+--             confirmTopicRuleDestinationResponse
+--
 --         , responseListCertificates $
 --             listCertificatesResponse
+--
+--         , responseListMitigationActions $
+--             listMitigationActionsResponse
 --
 --         , responseDescribeAuthorizer $
 --             describeAuthorizerResponse
@@ -568,14 +973,29 @@ import Test.Tasty
 --         , responseGetPolicyVersion $
 --             getPolicyVersionResponse
 --
+--         , responseListActiveViolations $
+--             listActiveViolationsResponse
+--
+--         , responseValidateSecurityProfileBehaviors $
+--             validateSecurityProfileBehaviorsResponse
+--
+--         , responseListViolationEvents $
+--             listViolationEventsResponse
+--
 --         , responseDeleteCertificate $
 --             deleteCertificateResponse
 --
 --         , responseUpdateCertificate $
 --             updateCertificateResponse
 --
+--         , responseCreateDimension $
+--             createDimensionResponse
+--
 --         , responseUpdateIndexingConfiguration $
 --             updateIndexingConfigurationResponse
+--
+--         , responseCreateProvisioningClaim $
+--             createProvisioningClaimResponse
 --
 --         , responseTestInvokeAuthorizer $
 --             testInvokeAuthorizerResponse
@@ -583,11 +1003,23 @@ import Test.Tasty
 --         , responseCreateThingGroup $
 --             createThingGroupResponse
 --
+--         , responseCreateTopicRuleDestination $
+--             createTopicRuleDestinationResponse
+--
 --         , responseDetachPolicy $
 --             detachPolicyResponse
 --
 --         , responseDescribeJob $
 --             describeJobResponse
+--
+--         , responseAddThingToBillingGroup $
+--             addThingToBillingGroupResponse
+--
+--         , responseUpdateTopicRuleDestination $
+--             updateTopicRuleDestinationResponse
+--
+--         , responseDeleteTopicRuleDestination $
+--             deleteTopicRuleDestinationResponse
 --
 --         , responseDeleteThingGroup $
 --             deleteThingGroupResponse
@@ -601,20 +1033,44 @@ import Test.Tasty
 --         , responseDeleteOTAUpdate $
 --             deleteOTAUpdateResponse
 --
+--         , responseCreateDynamicThingGroup $
+--             createDynamicThingGroupResponse
+--
+--         , responseDetachSecurityProfile $
+--             detachSecurityProfileResponse
+--
 --         , responseListOutgoingCertificates $
 --             listOutgoingCertificatesResponse
+--
+--         , responseDeleteProvisioningTemplateVersion $
+--             deleteProvisioningTemplateVersionResponse
 --
 --         , responseDescribeCACertificate $
 --             describeCACertificateResponse
 --
+--         , responseListProvisioningTemplateVersions $
+--             listProvisioningTemplateVersionsResponse
+--
 --         , responseGetRegistrationCode $
 --             getRegistrationCodeResponse
+--
+--         , responseListBillingGroups $
+--             listBillingGroupsResponse
 --
 --         , responseDeleteThingType $
 --             deleteThingTypeResponse
 --
+--         , responseDeleteBillingGroup $
+--             deleteBillingGroupResponse
+--
 --         , responseAddThingToThingGroup $
 --             addThingToThingGroupResponse
+--
+--         , responseUpdateBillingGroup $
+--             updateBillingGroupResponse
+--
+--         , responseGetTopicRuleDestination $
+--             getTopicRuleDestinationResponse
 --
 --         , responseListCertificatesByCA $
 --             listCertificatesByCAResponse
@@ -627,6 +1083,12 @@ import Test.Tasty
 --
 --         , responseRegisterThing $
 --             registerThingResponse
+--
+--         , responseDescribeDomainConfiguration $
+--             describeDomainConfigurationResponse
+--
+--         , responseDescribeAuditTask $
+--             describeAuditTaskResponse
 --
 --         , responseDeleteRegistrationCode $
 --             deleteRegistrationCodeResponse
@@ -661,8 +1123,20 @@ import Test.Tasty
 --         , responseCreateStream $
 --             createStreamResponse
 --
+--         , responseCancelAuditMitigationActionsTask $
+--             cancelAuditMitigationActionsTaskResponse
+--
+--         , responseCreateBillingGroup $
+--             createBillingGroupResponse
+--
+--         , responseListProvisioningTemplates $
+--             listProvisioningTemplatesResponse
+--
 --         , responseListV2LoggingLevels $
 --             listV2LoggingLevelsResponse
+--
+--         , responseTagResource $
+--             tagResourceResponse
 --
 --         , responseStopThingRegistrationTask $
 --             stopThingRegistrationTaskResponse
@@ -679,8 +1153,14 @@ import Test.Tasty
 --         , responseReplaceTopicRule $
 --             replaceTopicRuleResponse
 --
+--         , responseUntagResource $
+--             untagResourceResponse
+--
 --         , responseSetDefaultPolicyVersion $
 --             setDefaultPolicyVersionResponse
+--
+--         , responseCancelJobExecution $
+--             cancelJobExecutionResponse
 --
 --         , responseListPolicyVersions $
 --             listPolicyVersionsResponse
@@ -697,6 +1177,9 @@ import Test.Tasty
 --         , responseCreateKeysAndCertificate $
 --             createKeysAndCertificateResponse
 --
+--         , responseListThingsInBillingGroup $
+--             listThingsInBillingGroupResponse
+--
 --         , responseUpdateThingGroupsForThing $
 --             updateThingGroupsForThingResponse
 --
@@ -706,11 +1189,17 @@ import Test.Tasty
 --         , responseAcceptCertificateTransfer $
 --             acceptCertificateTransferResponse
 --
+--         , responseGetPercentiles $
+--             getPercentilesResponse
+--
 --         , responseGetPolicy $
 --             getPolicyResponse
 --
 --         , responseDescribeEndpoint $
 --             describeEndpointResponse
+--
+--         , responseListSecurityProfilesForTarget $
+--             listSecurityProfilesForTargetResponse
 --
 --         , responseUpdateEventConfigurations $
 --             updateEventConfigurationsResponse
@@ -718,11 +1207,20 @@ import Test.Tasty
 --         , responseRegisterCACertificate $
 --             registerCACertificateResponse
 --
+--         , responseDeleteDomainConfiguration $
+--             deleteDomainConfigurationResponse
+--
+--         , responseUpdateDomainConfiguration $
+--             updateDomainConfigurationResponse
+--
 --         , responseSetLoggingOptions $
 --             setLoggingOptionsResponse
 --
 --         , responseDescribeThingType $
 --             describeThingTypeResponse
+--
+--         , responseListDimensions $
+--             listDimensionsResponse
 --
 --         , responseGetV2LoggingOptions $
 --             getV2LoggingOptionsResponse
@@ -735,6 +1233,12 @@ import Test.Tasty
 --
 --         , responseDescribeStream $
 --             describeStreamResponse
+--
+--         , responseCreateSecurityProfile $
+--             createSecurityProfileResponse
+--
+--         , responseDescribeBillingGroup $
+--             describeBillingGroupResponse
 --
 --         , responseDetachThingPrincipal $
 --             detachThingPrincipalResponse
@@ -750,10 +1254,55 @@ import Test.Tasty
 
 -- Requests
 
+requestGetCardinality :: GetCardinality -> TestTree
+requestGetCardinality = req
+    "GetCardinality"
+    "fixture/GetCardinality.yaml"
+
+requestCreateDomainConfiguration :: CreateDomainConfiguration -> TestTree
+requestCreateDomainConfiguration = req
+    "CreateDomainConfiguration"
+    "fixture/CreateDomainConfiguration.yaml"
+
+requestDeleteSecurityProfile :: DeleteSecurityProfile -> TestTree
+requestDeleteSecurityProfile = req
+    "DeleteSecurityProfile"
+    "fixture/DeleteSecurityProfile.yaml"
+
+requestUpdateSecurityProfile :: UpdateSecurityProfile -> TestTree
+requestUpdateSecurityProfile = req
+    "UpdateSecurityProfile"
+    "fixture/UpdateSecurityProfile.yaml"
+
+requestListSecurityProfiles :: ListSecurityProfiles -> TestTree
+requestListSecurityProfiles = req
+    "ListSecurityProfiles"
+    "fixture/ListSecurityProfiles.yaml"
+
 requestListPolicies :: ListPolicies -> TestTree
 requestListPolicies = req
     "ListPolicies"
     "fixture/ListPolicies.yaml"
+
+requestDescribeProvisioningTemplate :: DescribeProvisioningTemplate -> TestTree
+requestDescribeProvisioningTemplate = req
+    "DescribeProvisioningTemplate"
+    "fixture/DescribeProvisioningTemplate.yaml"
+
+requestUpdateMitigationAction :: UpdateMitigationAction -> TestTree
+requestUpdateMitigationAction = req
+    "UpdateMitigationAction"
+    "fixture/UpdateMitigationAction.yaml"
+
+requestDeleteMitigationAction :: DeleteMitigationAction -> TestTree
+requestDeleteMitigationAction = req
+    "DeleteMitigationAction"
+    "fixture/DeleteMitigationAction.yaml"
+
+requestDeleteJobExecution :: DeleteJobExecution -> TestTree
+requestDeleteJobExecution = req
+    "DeleteJobExecution"
+    "fixture/DeleteJobExecution.yaml"
 
 requestCreatePolicy :: CreatePolicy -> TestTree
 requestCreatePolicy = req
@@ -765,15 +1314,30 @@ requestRegisterCertificate = req
     "RegisterCertificate"
     "fixture/RegisterCertificate.yaml"
 
+requestDeleteDynamicThingGroup :: DeleteDynamicThingGroup -> TestTree
+requestDeleteDynamicThingGroup = req
+    "DeleteDynamicThingGroup"
+    "fixture/DeleteDynamicThingGroup.yaml"
+
 requestListThingPrincipals :: ListThingPrincipals -> TestTree
 requestListThingPrincipals = req
     "ListThingPrincipals"
     "fixture/ListThingPrincipals.yaml"
 
+requestUpdateDynamicThingGroup :: UpdateDynamicThingGroup -> TestTree
+requestUpdateDynamicThingGroup = req
+    "UpdateDynamicThingGroup"
+    "fixture/UpdateDynamicThingGroup.yaml"
+
 requestDescribeRoleAlias :: DescribeRoleAlias -> TestTree
 requestDescribeRoleAlias = req
     "DescribeRoleAlias"
     "fixture/DescribeRoleAlias.yaml"
+
+requestCreateProvisioningTemplateVersion :: CreateProvisioningTemplateVersion -> TestTree
+requestCreateProvisioningTemplateVersion = req
+    "CreateProvisioningTemplateVersion"
+    "fixture/CreateProvisioningTemplateVersion.yaml"
 
 requestCreateOTAUpdate :: CreateOTAUpdate -> TestTree
 requestCreateOTAUpdate = req
@@ -784,6 +1348,11 @@ requestDescribeDefaultAuthorizer :: DescribeDefaultAuthorizer -> TestTree
 requestDescribeDefaultAuthorizer = req
     "DescribeDefaultAuthorizer"
     "fixture/DescribeDefaultAuthorizer.yaml"
+
+requestListAuditMitigationActionsTasks :: ListAuditMitigationActionsTasks -> TestTree
+requestListAuditMitigationActionsTasks = req
+    "ListAuditMitigationActionsTasks"
+    "fixture/ListAuditMitigationActionsTasks.yaml"
 
 requestListThingRegistrationTaskReports :: ListThingRegistrationTaskReports -> TestTree
 requestListThingRegistrationTaskReports = req
@@ -805,20 +1374,70 @@ requestDescribeEventConfigurations = req
     "DescribeEventConfigurations"
     "fixture/DescribeEventConfigurations.yaml"
 
+requestListTopicRuleDestinations :: ListTopicRuleDestinations -> TestTree
+requestListTopicRuleDestinations = req
+    "ListTopicRuleDestinations"
+    "fixture/ListTopicRuleDestinations.yaml"
+
+requestRegisterCertificateWithoutCA :: RegisterCertificateWithoutCA -> TestTree
+requestRegisterCertificateWithoutCA = req
+    "RegisterCertificateWithoutCA"
+    "fixture/RegisterCertificateWithoutCA.yaml"
+
+requestListTagsForResource :: ListTagsForResource -> TestTree
+requestListTagsForResource = req
+    "ListTagsForResource"
+    "fixture/ListTagsForResource.yaml"
+
 requestListThingGroups :: ListThingGroups -> TestTree
 requestListThingGroups = req
     "ListThingGroups"
     "fixture/ListThingGroups.yaml"
+
+requestListScheduledAudits :: ListScheduledAudits -> TestTree
+requestListScheduledAudits = req
+    "ListScheduledAudits"
+    "fixture/ListScheduledAudits.yaml"
 
 requestDescribeThingRegistrationTask :: DescribeThingRegistrationTask -> TestTree
 requestDescribeThingRegistrationTask = req
     "DescribeThingRegistrationTask"
     "fixture/DescribeThingRegistrationTask.yaml"
 
+requestUpdateScheduledAudit :: UpdateScheduledAudit -> TestTree
+requestUpdateScheduledAudit = req
+    "UpdateScheduledAudit"
+    "fixture/UpdateScheduledAudit.yaml"
+
+requestDeleteScheduledAudit :: DeleteScheduledAudit -> TestTree
+requestDeleteScheduledAudit = req
+    "DeleteScheduledAudit"
+    "fixture/DeleteScheduledAudit.yaml"
+
+requestDescribeAuditFinding :: DescribeAuditFinding -> TestTree
+requestDescribeAuditFinding = req
+    "DescribeAuditFinding"
+    "fixture/DescribeAuditFinding.yaml"
+
+requestDescribeDimension :: DescribeDimension -> TestTree
+requestDescribeDimension = req
+    "DescribeDimension"
+    "fixture/DescribeDimension.yaml"
+
 requestGetLoggingOptions :: GetLoggingOptions -> TestTree
 requestGetLoggingOptions = req
     "GetLoggingOptions"
     "fixture/GetLoggingOptions.yaml"
+
+requestDeleteAccountAuditConfiguration :: DeleteAccountAuditConfiguration -> TestTree
+requestDeleteAccountAuditConfiguration = req
+    "DeleteAccountAuditConfiguration"
+    "fixture/DeleteAccountAuditConfiguration.yaml"
+
+requestUpdateAccountAuditConfiguration :: UpdateAccountAuditConfiguration -> TestTree
+requestUpdateAccountAuditConfiguration = req
+    "UpdateAccountAuditConfiguration"
+    "fixture/UpdateAccountAuditConfiguration.yaml"
 
 requestGetOTAUpdate :: GetOTAUpdate -> TestTree
 requestGetOTAUpdate = req
@@ -840,6 +1459,11 @@ requestSetV2LoggingOptions = req
     "SetV2LoggingOptions"
     "fixture/SetV2LoggingOptions.yaml"
 
+requestCreateProvisioningTemplate :: CreateProvisioningTemplate -> TestTree
+requestCreateProvisioningTemplate = req
+    "CreateProvisioningTemplate"
+    "fixture/CreateProvisioningTemplate.yaml"
+
 requestListThingGroupsForThing :: ListThingGroupsForThing -> TestTree
 requestListThingGroupsForThing = req
     "ListThingGroupsForThing"
@@ -860,10 +1484,30 @@ requestUpdateThing = req
     "UpdateThing"
     "fixture/UpdateThing.yaml"
 
+requestDeleteProvisioningTemplate :: DeleteProvisioningTemplate -> TestTree
+requestDeleteProvisioningTemplate = req
+    "DeleteProvisioningTemplate"
+    "fixture/DeleteProvisioningTemplate.yaml"
+
+requestUpdateProvisioningTemplate :: UpdateProvisioningTemplate -> TestTree
+requestUpdateProvisioningTemplate = req
+    "UpdateProvisioningTemplate"
+    "fixture/UpdateProvisioningTemplate.yaml"
+
+requestDescribeMitigationAction :: DescribeMitigationAction -> TestTree
+requestDescribeMitigationAction = req
+    "DescribeMitigationAction"
+    "fixture/DescribeMitigationAction.yaml"
+
 requestStartThingRegistrationTask :: StartThingRegistrationTask -> TestTree
 requestStartThingRegistrationTask = req
     "StartThingRegistrationTask"
     "fixture/StartThingRegistrationTask.yaml"
+
+requestCreateScheduledAudit :: CreateScheduledAudit -> TestTree
+requestCreateScheduledAudit = req
+    "CreateScheduledAudit"
+    "fixture/CreateScheduledAudit.yaml"
 
 requestListAuthorizers :: ListAuthorizers -> TestTree
 requestListAuthorizers = req
@@ -875,6 +1519,11 @@ requestListJobExecutionsForJob = req
     "ListJobExecutionsForJob"
     "fixture/ListJobExecutionsForJob.yaml"
 
+requestRemoveThingFromBillingGroup :: RemoveThingFromBillingGroup -> TestTree
+requestRemoveThingFromBillingGroup = req
+    "RemoveThingFromBillingGroup"
+    "fixture/RemoveThingFromBillingGroup.yaml"
+
 requestSearchIndex :: SearchIndex -> TestTree
 requestSearchIndex = req
     "SearchIndex"
@@ -884,6 +1533,11 @@ requestCreateThingType :: CreateThingType -> TestTree
 requestCreateThingType = req
     "CreateThingType"
     "fixture/CreateThingType.yaml"
+
+requestDescribeSecurityProfile :: DescribeSecurityProfile -> TestTree
+requestDescribeSecurityProfile = req
+    "DescribeSecurityProfile"
+    "fixture/DescribeSecurityProfile.yaml"
 
 requestDeleteV2LoggingLevel :: DeleteV2LoggingLevel -> TestTree
 requestDeleteV2LoggingLevel = req
@@ -909,6 +1563,21 @@ requestGetIndexingConfiguration :: GetIndexingConfiguration -> TestTree
 requestGetIndexingConfiguration = req
     "GetIndexingConfiguration"
     "fixture/GetIndexingConfiguration.yaml"
+
+requestListAuditMitigationActionsExecutions :: ListAuditMitigationActionsExecutions -> TestTree
+requestListAuditMitigationActionsExecutions = req
+    "ListAuditMitigationActionsExecutions"
+    "fixture/ListAuditMitigationActionsExecutions.yaml"
+
+requestDescribeAuditMitigationActionsTask :: DescribeAuditMitigationActionsTask -> TestTree
+requestDescribeAuditMitigationActionsTask = req
+    "DescribeAuditMitigationActionsTask"
+    "fixture/DescribeAuditMitigationActionsTask.yaml"
+
+requestGetStatistics :: GetStatistics -> TestTree
+requestGetStatistics = req
+    "GetStatistics"
+    "fixture/GetStatistics.yaml"
 
 requestDeleteRoleAlias :: DeleteRoleAlias -> TestTree
 requestDeleteRoleAlias = req
@@ -950,6 +1619,11 @@ requestAssociateTargetsWithJob = req
     "AssociateTargetsWithJob"
     "fixture/AssociateTargetsWithJob.yaml"
 
+requestAttachSecurityProfile :: AttachSecurityProfile -> TestTree
+requestAttachSecurityProfile = req
+    "AttachSecurityProfile"
+    "fixture/AttachSecurityProfile.yaml"
+
 requestListAttachedPolicies :: ListAttachedPolicies -> TestTree
 requestListAttachedPolicies = req
     "ListAttachedPolicies"
@@ -974,6 +1648,16 @@ requestGetJobDocument :: GetJobDocument -> TestTree
 requestGetJobDocument = req
     "GetJobDocument"
     "fixture/GetJobDocument.yaml"
+
+requestDescribeProvisioningTemplateVersion :: DescribeProvisioningTemplateVersion -> TestTree
+requestDescribeProvisioningTemplateVersion = req
+    "DescribeProvisioningTemplateVersion"
+    "fixture/DescribeProvisioningTemplateVersion.yaml"
+
+requestCancelAuditTask :: CancelAuditTask -> TestTree
+requestCancelAuditTask = req
+    "CancelAuditTask"
+    "fixture/CancelAuditTask.yaml"
 
 requestCreateRoleAlias :: CreateRoleAlias -> TestTree
 requestCreateRoleAlias = req
@@ -1010,10 +1694,35 @@ requestListRoleAliases = req
     "ListRoleAliases"
     "fixture/ListRoleAliases.yaml"
 
+requestStartOnDemandAuditTask :: StartOnDemandAuditTask -> TestTree
+requestStartOnDemandAuditTask = req
+    "StartOnDemandAuditTask"
+    "fixture/StartOnDemandAuditTask.yaml"
+
 requestDescribeThingGroup :: DescribeThingGroup -> TestTree
 requestDescribeThingGroup = req
     "DescribeThingGroup"
     "fixture/DescribeThingGroup.yaml"
+
+requestDeleteJob :: DeleteJob -> TestTree
+requestDeleteJob = req
+    "DeleteJob"
+    "fixture/DeleteJob.yaml"
+
+requestListTargetsForSecurityProfile :: ListTargetsForSecurityProfile -> TestTree
+requestListTargetsForSecurityProfile = req
+    "ListTargetsForSecurityProfile"
+    "fixture/ListTargetsForSecurityProfile.yaml"
+
+requestUpdateJob :: UpdateJob -> TestTree
+requestUpdateJob = req
+    "UpdateJob"
+    "fixture/UpdateJob.yaml"
+
+requestStartAuditMitigationActionsTask :: StartAuditMitigationActionsTask -> TestTree
+requestStartAuditMitigationActionsTask = req
+    "StartAuditMitigationActionsTask"
+    "fixture/StartAuditMitigationActionsTask.yaml"
 
 requestGetTopicRule :: GetTopicRule -> TestTree
 requestGetTopicRule = req
@@ -1025,6 +1734,31 @@ requestDescribeThing = req
     "DescribeThing"
     "fixture/DescribeThing.yaml"
 
+requestListDomainConfigurations :: ListDomainConfigurations -> TestTree
+requestListDomainConfigurations = req
+    "ListDomainConfigurations"
+    "fixture/ListDomainConfigurations.yaml"
+
+requestListAuditTasks :: ListAuditTasks -> TestTree
+requestListAuditTasks = req
+    "ListAuditTasks"
+    "fixture/ListAuditTasks.yaml"
+
+requestDescribeAccountAuditConfiguration :: DescribeAccountAuditConfiguration -> TestTree
+requestDescribeAccountAuditConfiguration = req
+    "DescribeAccountAuditConfiguration"
+    "fixture/DescribeAccountAuditConfiguration.yaml"
+
+requestDeleteDimension :: DeleteDimension -> TestTree
+requestDeleteDimension = req
+    "DeleteDimension"
+    "fixture/DeleteDimension.yaml"
+
+requestUpdateDimension :: UpdateDimension -> TestTree
+requestUpdateDimension = req
+    "UpdateDimension"
+    "fixture/UpdateDimension.yaml"
+
 requestDeletePolicy :: DeletePolicy -> TestTree
 requestDeletePolicy = req
     "DeletePolicy"
@@ -1035,10 +1769,35 @@ requestListThingsInThingGroup = req
     "ListThingsInThingGroup"
     "fixture/ListThingsInThingGroup.yaml"
 
+requestListAuditFindings :: ListAuditFindings -> TestTree
+requestListAuditFindings = req
+    "ListAuditFindings"
+    "fixture/ListAuditFindings.yaml"
+
+requestDescribeScheduledAudit :: DescribeScheduledAudit -> TestTree
+requestDescribeScheduledAudit = req
+    "DescribeScheduledAudit"
+    "fixture/DescribeScheduledAudit.yaml"
+
+requestCreateMitigationAction :: CreateMitigationAction -> TestTree
+requestCreateMitigationAction = req
+    "CreateMitigationAction"
+    "fixture/CreateMitigationAction.yaml"
+
+requestConfirmTopicRuleDestination :: ConfirmTopicRuleDestination -> TestTree
+requestConfirmTopicRuleDestination = req
+    "ConfirmTopicRuleDestination"
+    "fixture/ConfirmTopicRuleDestination.yaml"
+
 requestListCertificates :: ListCertificates -> TestTree
 requestListCertificates = req
     "ListCertificates"
     "fixture/ListCertificates.yaml"
+
+requestListMitigationActions :: ListMitigationActions -> TestTree
+requestListMitigationActions = req
+    "ListMitigationActions"
+    "fixture/ListMitigationActions.yaml"
 
 requestDescribeAuthorizer :: DescribeAuthorizer -> TestTree
 requestDescribeAuthorizer = req
@@ -1050,6 +1809,21 @@ requestGetPolicyVersion = req
     "GetPolicyVersion"
     "fixture/GetPolicyVersion.yaml"
 
+requestListActiveViolations :: ListActiveViolations -> TestTree
+requestListActiveViolations = req
+    "ListActiveViolations"
+    "fixture/ListActiveViolations.yaml"
+
+requestValidateSecurityProfileBehaviors :: ValidateSecurityProfileBehaviors -> TestTree
+requestValidateSecurityProfileBehaviors = req
+    "ValidateSecurityProfileBehaviors"
+    "fixture/ValidateSecurityProfileBehaviors.yaml"
+
+requestListViolationEvents :: ListViolationEvents -> TestTree
+requestListViolationEvents = req
+    "ListViolationEvents"
+    "fixture/ListViolationEvents.yaml"
+
 requestDeleteCertificate :: DeleteCertificate -> TestTree
 requestDeleteCertificate = req
     "DeleteCertificate"
@@ -1060,10 +1834,20 @@ requestUpdateCertificate = req
     "UpdateCertificate"
     "fixture/UpdateCertificate.yaml"
 
+requestCreateDimension :: CreateDimension -> TestTree
+requestCreateDimension = req
+    "CreateDimension"
+    "fixture/CreateDimension.yaml"
+
 requestUpdateIndexingConfiguration :: UpdateIndexingConfiguration -> TestTree
 requestUpdateIndexingConfiguration = req
     "UpdateIndexingConfiguration"
     "fixture/UpdateIndexingConfiguration.yaml"
+
+requestCreateProvisioningClaim :: CreateProvisioningClaim -> TestTree
+requestCreateProvisioningClaim = req
+    "CreateProvisioningClaim"
+    "fixture/CreateProvisioningClaim.yaml"
 
 requestTestInvokeAuthorizer :: TestInvokeAuthorizer -> TestTree
 requestTestInvokeAuthorizer = req
@@ -1075,6 +1859,11 @@ requestCreateThingGroup = req
     "CreateThingGroup"
     "fixture/CreateThingGroup.yaml"
 
+requestCreateTopicRuleDestination :: CreateTopicRuleDestination -> TestTree
+requestCreateTopicRuleDestination = req
+    "CreateTopicRuleDestination"
+    "fixture/CreateTopicRuleDestination.yaml"
+
 requestDetachPolicy :: DetachPolicy -> TestTree
 requestDetachPolicy = req
     "DetachPolicy"
@@ -1084,6 +1873,21 @@ requestDescribeJob :: DescribeJob -> TestTree
 requestDescribeJob = req
     "DescribeJob"
     "fixture/DescribeJob.yaml"
+
+requestAddThingToBillingGroup :: AddThingToBillingGroup -> TestTree
+requestAddThingToBillingGroup = req
+    "AddThingToBillingGroup"
+    "fixture/AddThingToBillingGroup.yaml"
+
+requestUpdateTopicRuleDestination :: UpdateTopicRuleDestination -> TestTree
+requestUpdateTopicRuleDestination = req
+    "UpdateTopicRuleDestination"
+    "fixture/UpdateTopicRuleDestination.yaml"
+
+requestDeleteTopicRuleDestination :: DeleteTopicRuleDestination -> TestTree
+requestDeleteTopicRuleDestination = req
+    "DeleteTopicRuleDestination"
+    "fixture/DeleteTopicRuleDestination.yaml"
 
 requestDeleteThingGroup :: DeleteThingGroup -> TestTree
 requestDeleteThingGroup = req
@@ -1105,30 +1909,70 @@ requestDeleteOTAUpdate = req
     "DeleteOTAUpdate"
     "fixture/DeleteOTAUpdate.yaml"
 
+requestCreateDynamicThingGroup :: CreateDynamicThingGroup -> TestTree
+requestCreateDynamicThingGroup = req
+    "CreateDynamicThingGroup"
+    "fixture/CreateDynamicThingGroup.yaml"
+
+requestDetachSecurityProfile :: DetachSecurityProfile -> TestTree
+requestDetachSecurityProfile = req
+    "DetachSecurityProfile"
+    "fixture/DetachSecurityProfile.yaml"
+
 requestListOutgoingCertificates :: ListOutgoingCertificates -> TestTree
 requestListOutgoingCertificates = req
     "ListOutgoingCertificates"
     "fixture/ListOutgoingCertificates.yaml"
+
+requestDeleteProvisioningTemplateVersion :: DeleteProvisioningTemplateVersion -> TestTree
+requestDeleteProvisioningTemplateVersion = req
+    "DeleteProvisioningTemplateVersion"
+    "fixture/DeleteProvisioningTemplateVersion.yaml"
 
 requestDescribeCACertificate :: DescribeCACertificate -> TestTree
 requestDescribeCACertificate = req
     "DescribeCACertificate"
     "fixture/DescribeCACertificate.yaml"
 
+requestListProvisioningTemplateVersions :: ListProvisioningTemplateVersions -> TestTree
+requestListProvisioningTemplateVersions = req
+    "ListProvisioningTemplateVersions"
+    "fixture/ListProvisioningTemplateVersions.yaml"
+
 requestGetRegistrationCode :: GetRegistrationCode -> TestTree
 requestGetRegistrationCode = req
     "GetRegistrationCode"
     "fixture/GetRegistrationCode.yaml"
+
+requestListBillingGroups :: ListBillingGroups -> TestTree
+requestListBillingGroups = req
+    "ListBillingGroups"
+    "fixture/ListBillingGroups.yaml"
 
 requestDeleteThingType :: DeleteThingType -> TestTree
 requestDeleteThingType = req
     "DeleteThingType"
     "fixture/DeleteThingType.yaml"
 
+requestDeleteBillingGroup :: DeleteBillingGroup -> TestTree
+requestDeleteBillingGroup = req
+    "DeleteBillingGroup"
+    "fixture/DeleteBillingGroup.yaml"
+
 requestAddThingToThingGroup :: AddThingToThingGroup -> TestTree
 requestAddThingToThingGroup = req
     "AddThingToThingGroup"
     "fixture/AddThingToThingGroup.yaml"
+
+requestUpdateBillingGroup :: UpdateBillingGroup -> TestTree
+requestUpdateBillingGroup = req
+    "UpdateBillingGroup"
+    "fixture/UpdateBillingGroup.yaml"
+
+requestGetTopicRuleDestination :: GetTopicRuleDestination -> TestTree
+requestGetTopicRuleDestination = req
+    "GetTopicRuleDestination"
+    "fixture/GetTopicRuleDestination.yaml"
 
 requestListCertificatesByCA :: ListCertificatesByCA -> TestTree
 requestListCertificatesByCA = req
@@ -1149,6 +1993,16 @@ requestRegisterThing :: RegisterThing -> TestTree
 requestRegisterThing = req
     "RegisterThing"
     "fixture/RegisterThing.yaml"
+
+requestDescribeDomainConfiguration :: DescribeDomainConfiguration -> TestTree
+requestDescribeDomainConfiguration = req
+    "DescribeDomainConfiguration"
+    "fixture/DescribeDomainConfiguration.yaml"
+
+requestDescribeAuditTask :: DescribeAuditTask -> TestTree
+requestDescribeAuditTask = req
+    "DescribeAuditTask"
+    "fixture/DescribeAuditTask.yaml"
 
 requestDeleteRegistrationCode :: DeleteRegistrationCode -> TestTree
 requestDeleteRegistrationCode = req
@@ -1205,10 +2059,30 @@ requestCreateStream = req
     "CreateStream"
     "fixture/CreateStream.yaml"
 
+requestCancelAuditMitigationActionsTask :: CancelAuditMitigationActionsTask -> TestTree
+requestCancelAuditMitigationActionsTask = req
+    "CancelAuditMitigationActionsTask"
+    "fixture/CancelAuditMitigationActionsTask.yaml"
+
+requestCreateBillingGroup :: CreateBillingGroup -> TestTree
+requestCreateBillingGroup = req
+    "CreateBillingGroup"
+    "fixture/CreateBillingGroup.yaml"
+
+requestListProvisioningTemplates :: ListProvisioningTemplates -> TestTree
+requestListProvisioningTemplates = req
+    "ListProvisioningTemplates"
+    "fixture/ListProvisioningTemplates.yaml"
+
 requestListV2LoggingLevels :: ListV2LoggingLevels -> TestTree
 requestListV2LoggingLevels = req
     "ListV2LoggingLevels"
     "fixture/ListV2LoggingLevels.yaml"
+
+requestTagResource :: TagResource -> TestTree
+requestTagResource = req
+    "TagResource"
+    "fixture/TagResource.yaml"
 
 requestStopThingRegistrationTask :: StopThingRegistrationTask -> TestTree
 requestStopThingRegistrationTask = req
@@ -1235,10 +2109,20 @@ requestReplaceTopicRule = req
     "ReplaceTopicRule"
     "fixture/ReplaceTopicRule.yaml"
 
+requestUntagResource :: UntagResource -> TestTree
+requestUntagResource = req
+    "UntagResource"
+    "fixture/UntagResource.yaml"
+
 requestSetDefaultPolicyVersion :: SetDefaultPolicyVersion -> TestTree
 requestSetDefaultPolicyVersion = req
     "SetDefaultPolicyVersion"
     "fixture/SetDefaultPolicyVersion.yaml"
+
+requestCancelJobExecution :: CancelJobExecution -> TestTree
+requestCancelJobExecution = req
+    "CancelJobExecution"
+    "fixture/CancelJobExecution.yaml"
 
 requestListPolicyVersions :: ListPolicyVersions -> TestTree
 requestListPolicyVersions = req
@@ -1265,6 +2149,11 @@ requestCreateKeysAndCertificate = req
     "CreateKeysAndCertificate"
     "fixture/CreateKeysAndCertificate.yaml"
 
+requestListThingsInBillingGroup :: ListThingsInBillingGroup -> TestTree
+requestListThingsInBillingGroup = req
+    "ListThingsInBillingGroup"
+    "fixture/ListThingsInBillingGroup.yaml"
+
 requestUpdateThingGroupsForThing :: UpdateThingGroupsForThing -> TestTree
 requestUpdateThingGroupsForThing = req
     "UpdateThingGroupsForThing"
@@ -1280,6 +2169,11 @@ requestAcceptCertificateTransfer = req
     "AcceptCertificateTransfer"
     "fixture/AcceptCertificateTransfer.yaml"
 
+requestGetPercentiles :: GetPercentiles -> TestTree
+requestGetPercentiles = req
+    "GetPercentiles"
+    "fixture/GetPercentiles.yaml"
+
 requestGetPolicy :: GetPolicy -> TestTree
 requestGetPolicy = req
     "GetPolicy"
@@ -1289,6 +2183,11 @@ requestDescribeEndpoint :: DescribeEndpoint -> TestTree
 requestDescribeEndpoint = req
     "DescribeEndpoint"
     "fixture/DescribeEndpoint.yaml"
+
+requestListSecurityProfilesForTarget :: ListSecurityProfilesForTarget -> TestTree
+requestListSecurityProfilesForTarget = req
+    "ListSecurityProfilesForTarget"
+    "fixture/ListSecurityProfilesForTarget.yaml"
 
 requestUpdateEventConfigurations :: UpdateEventConfigurations -> TestTree
 requestUpdateEventConfigurations = req
@@ -1300,6 +2199,16 @@ requestRegisterCACertificate = req
     "RegisterCACertificate"
     "fixture/RegisterCACertificate.yaml"
 
+requestDeleteDomainConfiguration :: DeleteDomainConfiguration -> TestTree
+requestDeleteDomainConfiguration = req
+    "DeleteDomainConfiguration"
+    "fixture/DeleteDomainConfiguration.yaml"
+
+requestUpdateDomainConfiguration :: UpdateDomainConfiguration -> TestTree
+requestUpdateDomainConfiguration = req
+    "UpdateDomainConfiguration"
+    "fixture/UpdateDomainConfiguration.yaml"
+
 requestSetLoggingOptions :: SetLoggingOptions -> TestTree
 requestSetLoggingOptions = req
     "SetLoggingOptions"
@@ -1309,6 +2218,11 @@ requestDescribeThingType :: DescribeThingType -> TestTree
 requestDescribeThingType = req
     "DescribeThingType"
     "fixture/DescribeThingType.yaml"
+
+requestListDimensions :: ListDimensions -> TestTree
+requestListDimensions = req
+    "ListDimensions"
+    "fixture/ListDimensions.yaml"
 
 requestGetV2LoggingOptions :: GetV2LoggingOptions -> TestTree
 requestGetV2LoggingOptions = req
@@ -1330,6 +2244,16 @@ requestDescribeStream = req
     "DescribeStream"
     "fixture/DescribeStream.yaml"
 
+requestCreateSecurityProfile :: CreateSecurityProfile -> TestTree
+requestCreateSecurityProfile = req
+    "CreateSecurityProfile"
+    "fixture/CreateSecurityProfile.yaml"
+
+requestDescribeBillingGroup :: DescribeBillingGroup -> TestTree
+requestDescribeBillingGroup = req
+    "DescribeBillingGroup"
+    "fixture/DescribeBillingGroup.yaml"
+
 requestDetachThingPrincipal :: DetachThingPrincipal -> TestTree
 requestDetachThingPrincipal = req
     "DetachThingPrincipal"
@@ -1347,12 +2271,75 @@ requestDeprecateThingType = req
 
 -- Responses
 
+responseGetCardinality :: GetCardinalityResponse -> TestTree
+responseGetCardinality = res
+    "GetCardinalityResponse"
+    "fixture/GetCardinalityResponse.proto"
+    ioT
+    (Proxy :: Proxy GetCardinality)
+
+responseCreateDomainConfiguration :: CreateDomainConfigurationResponse -> TestTree
+responseCreateDomainConfiguration = res
+    "CreateDomainConfigurationResponse"
+    "fixture/CreateDomainConfigurationResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateDomainConfiguration)
+
+responseDeleteSecurityProfile :: DeleteSecurityProfileResponse -> TestTree
+responseDeleteSecurityProfile = res
+    "DeleteSecurityProfileResponse"
+    "fixture/DeleteSecurityProfileResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteSecurityProfile)
+
+responseUpdateSecurityProfile :: UpdateSecurityProfileResponse -> TestTree
+responseUpdateSecurityProfile = res
+    "UpdateSecurityProfileResponse"
+    "fixture/UpdateSecurityProfileResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateSecurityProfile)
+
+responseListSecurityProfiles :: ListSecurityProfilesResponse -> TestTree
+responseListSecurityProfiles = res
+    "ListSecurityProfilesResponse"
+    "fixture/ListSecurityProfilesResponse.proto"
+    ioT
+    (Proxy :: Proxy ListSecurityProfiles)
+
 responseListPolicies :: ListPoliciesResponse -> TestTree
 responseListPolicies = res
     "ListPoliciesResponse"
     "fixture/ListPoliciesResponse.proto"
     ioT
     (Proxy :: Proxy ListPolicies)
+
+responseDescribeProvisioningTemplate :: DescribeProvisioningTemplateResponse -> TestTree
+responseDescribeProvisioningTemplate = res
+    "DescribeProvisioningTemplateResponse"
+    "fixture/DescribeProvisioningTemplateResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeProvisioningTemplate)
+
+responseUpdateMitigationAction :: UpdateMitigationActionResponse -> TestTree
+responseUpdateMitigationAction = res
+    "UpdateMitigationActionResponse"
+    "fixture/UpdateMitigationActionResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateMitigationAction)
+
+responseDeleteMitigationAction :: DeleteMitigationActionResponse -> TestTree
+responseDeleteMitigationAction = res
+    "DeleteMitigationActionResponse"
+    "fixture/DeleteMitigationActionResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteMitigationAction)
+
+responseDeleteJobExecution :: DeleteJobExecutionResponse -> TestTree
+responseDeleteJobExecution = res
+    "DeleteJobExecutionResponse"
+    "fixture/DeleteJobExecutionResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteJobExecution)
 
 responseCreatePolicy :: CreatePolicyResponse -> TestTree
 responseCreatePolicy = res
@@ -1368,6 +2355,13 @@ responseRegisterCertificate = res
     ioT
     (Proxy :: Proxy RegisterCertificate)
 
+responseDeleteDynamicThingGroup :: DeleteDynamicThingGroupResponse -> TestTree
+responseDeleteDynamicThingGroup = res
+    "DeleteDynamicThingGroupResponse"
+    "fixture/DeleteDynamicThingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteDynamicThingGroup)
+
 responseListThingPrincipals :: ListThingPrincipalsResponse -> TestTree
 responseListThingPrincipals = res
     "ListThingPrincipalsResponse"
@@ -1375,12 +2369,26 @@ responseListThingPrincipals = res
     ioT
     (Proxy :: Proxy ListThingPrincipals)
 
+responseUpdateDynamicThingGroup :: UpdateDynamicThingGroupResponse -> TestTree
+responseUpdateDynamicThingGroup = res
+    "UpdateDynamicThingGroupResponse"
+    "fixture/UpdateDynamicThingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateDynamicThingGroup)
+
 responseDescribeRoleAlias :: DescribeRoleAliasResponse -> TestTree
 responseDescribeRoleAlias = res
     "DescribeRoleAliasResponse"
     "fixture/DescribeRoleAliasResponse.proto"
     ioT
     (Proxy :: Proxy DescribeRoleAlias)
+
+responseCreateProvisioningTemplateVersion :: CreateProvisioningTemplateVersionResponse -> TestTree
+responseCreateProvisioningTemplateVersion = res
+    "CreateProvisioningTemplateVersionResponse"
+    "fixture/CreateProvisioningTemplateVersionResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateProvisioningTemplateVersion)
 
 responseCreateOTAUpdate :: CreateOTAUpdateResponse -> TestTree
 responseCreateOTAUpdate = res
@@ -1395,6 +2403,13 @@ responseDescribeDefaultAuthorizer = res
     "fixture/DescribeDefaultAuthorizerResponse.proto"
     ioT
     (Proxy :: Proxy DescribeDefaultAuthorizer)
+
+responseListAuditMitigationActionsTasks :: ListAuditMitigationActionsTasksResponse -> TestTree
+responseListAuditMitigationActionsTasks = res
+    "ListAuditMitigationActionsTasksResponse"
+    "fixture/ListAuditMitigationActionsTasksResponse.proto"
+    ioT
+    (Proxy :: Proxy ListAuditMitigationActionsTasks)
 
 responseListThingRegistrationTaskReports :: ListThingRegistrationTaskReportsResponse -> TestTree
 responseListThingRegistrationTaskReports = res
@@ -1424,12 +2439,40 @@ responseDescribeEventConfigurations = res
     ioT
     (Proxy :: Proxy DescribeEventConfigurations)
 
+responseListTopicRuleDestinations :: ListTopicRuleDestinationsResponse -> TestTree
+responseListTopicRuleDestinations = res
+    "ListTopicRuleDestinationsResponse"
+    "fixture/ListTopicRuleDestinationsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListTopicRuleDestinations)
+
+responseRegisterCertificateWithoutCA :: RegisterCertificateWithoutCAResponse -> TestTree
+responseRegisterCertificateWithoutCA = res
+    "RegisterCertificateWithoutCAResponse"
+    "fixture/RegisterCertificateWithoutCAResponse.proto"
+    ioT
+    (Proxy :: Proxy RegisterCertificateWithoutCA)
+
+responseListTagsForResource :: ListTagsForResourceResponse -> TestTree
+responseListTagsForResource = res
+    "ListTagsForResourceResponse"
+    "fixture/ListTagsForResourceResponse.proto"
+    ioT
+    (Proxy :: Proxy ListTagsForResource)
+
 responseListThingGroups :: ListThingGroupsResponse -> TestTree
 responseListThingGroups = res
     "ListThingGroupsResponse"
     "fixture/ListThingGroupsResponse.proto"
     ioT
     (Proxy :: Proxy ListThingGroups)
+
+responseListScheduledAudits :: ListScheduledAuditsResponse -> TestTree
+responseListScheduledAudits = res
+    "ListScheduledAuditsResponse"
+    "fixture/ListScheduledAuditsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListScheduledAudits)
 
 responseDescribeThingRegistrationTask :: DescribeThingRegistrationTaskResponse -> TestTree
 responseDescribeThingRegistrationTask = res
@@ -1438,12 +2481,54 @@ responseDescribeThingRegistrationTask = res
     ioT
     (Proxy :: Proxy DescribeThingRegistrationTask)
 
+responseUpdateScheduledAudit :: UpdateScheduledAuditResponse -> TestTree
+responseUpdateScheduledAudit = res
+    "UpdateScheduledAuditResponse"
+    "fixture/UpdateScheduledAuditResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateScheduledAudit)
+
+responseDeleteScheduledAudit :: DeleteScheduledAuditResponse -> TestTree
+responseDeleteScheduledAudit = res
+    "DeleteScheduledAuditResponse"
+    "fixture/DeleteScheduledAuditResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteScheduledAudit)
+
+responseDescribeAuditFinding :: DescribeAuditFindingResponse -> TestTree
+responseDescribeAuditFinding = res
+    "DescribeAuditFindingResponse"
+    "fixture/DescribeAuditFindingResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeAuditFinding)
+
+responseDescribeDimension :: DescribeDimensionResponse -> TestTree
+responseDescribeDimension = res
+    "DescribeDimensionResponse"
+    "fixture/DescribeDimensionResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeDimension)
+
 responseGetLoggingOptions :: GetLoggingOptionsResponse -> TestTree
 responseGetLoggingOptions = res
     "GetLoggingOptionsResponse"
     "fixture/GetLoggingOptionsResponse.proto"
     ioT
     (Proxy :: Proxy GetLoggingOptions)
+
+responseDeleteAccountAuditConfiguration :: DeleteAccountAuditConfigurationResponse -> TestTree
+responseDeleteAccountAuditConfiguration = res
+    "DeleteAccountAuditConfigurationResponse"
+    "fixture/DeleteAccountAuditConfigurationResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteAccountAuditConfiguration)
+
+responseUpdateAccountAuditConfiguration :: UpdateAccountAuditConfigurationResponse -> TestTree
+responseUpdateAccountAuditConfiguration = res
+    "UpdateAccountAuditConfigurationResponse"
+    "fixture/UpdateAccountAuditConfigurationResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateAccountAuditConfiguration)
 
 responseGetOTAUpdate :: GetOTAUpdateResponse -> TestTree
 responseGetOTAUpdate = res
@@ -1473,6 +2558,13 @@ responseSetV2LoggingOptions = res
     ioT
     (Proxy :: Proxy SetV2LoggingOptions)
 
+responseCreateProvisioningTemplate :: CreateProvisioningTemplateResponse -> TestTree
+responseCreateProvisioningTemplate = res
+    "CreateProvisioningTemplateResponse"
+    "fixture/CreateProvisioningTemplateResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateProvisioningTemplate)
+
 responseListThingGroupsForThing :: ListThingGroupsForThingResponse -> TestTree
 responseListThingGroupsForThing = res
     "ListThingGroupsForThingResponse"
@@ -1501,12 +2593,40 @@ responseUpdateThing = res
     ioT
     (Proxy :: Proxy UpdateThing)
 
+responseDeleteProvisioningTemplate :: DeleteProvisioningTemplateResponse -> TestTree
+responseDeleteProvisioningTemplate = res
+    "DeleteProvisioningTemplateResponse"
+    "fixture/DeleteProvisioningTemplateResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteProvisioningTemplate)
+
+responseUpdateProvisioningTemplate :: UpdateProvisioningTemplateResponse -> TestTree
+responseUpdateProvisioningTemplate = res
+    "UpdateProvisioningTemplateResponse"
+    "fixture/UpdateProvisioningTemplateResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateProvisioningTemplate)
+
+responseDescribeMitigationAction :: DescribeMitigationActionResponse -> TestTree
+responseDescribeMitigationAction = res
+    "DescribeMitigationActionResponse"
+    "fixture/DescribeMitigationActionResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeMitigationAction)
+
 responseStartThingRegistrationTask :: StartThingRegistrationTaskResponse -> TestTree
 responseStartThingRegistrationTask = res
     "StartThingRegistrationTaskResponse"
     "fixture/StartThingRegistrationTaskResponse.proto"
     ioT
     (Proxy :: Proxy StartThingRegistrationTask)
+
+responseCreateScheduledAudit :: CreateScheduledAuditResponse -> TestTree
+responseCreateScheduledAudit = res
+    "CreateScheduledAuditResponse"
+    "fixture/CreateScheduledAuditResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateScheduledAudit)
 
 responseListAuthorizers :: ListAuthorizersResponse -> TestTree
 responseListAuthorizers = res
@@ -1522,6 +2642,13 @@ responseListJobExecutionsForJob = res
     ioT
     (Proxy :: Proxy ListJobExecutionsForJob)
 
+responseRemoveThingFromBillingGroup :: RemoveThingFromBillingGroupResponse -> TestTree
+responseRemoveThingFromBillingGroup = res
+    "RemoveThingFromBillingGroupResponse"
+    "fixture/RemoveThingFromBillingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy RemoveThingFromBillingGroup)
+
 responseSearchIndex :: SearchIndexResponse -> TestTree
 responseSearchIndex = res
     "SearchIndexResponse"
@@ -1535,6 +2662,13 @@ responseCreateThingType = res
     "fixture/CreateThingTypeResponse.proto"
     ioT
     (Proxy :: Proxy CreateThingType)
+
+responseDescribeSecurityProfile :: DescribeSecurityProfileResponse -> TestTree
+responseDescribeSecurityProfile = res
+    "DescribeSecurityProfileResponse"
+    "fixture/DescribeSecurityProfileResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeSecurityProfile)
 
 responseDeleteV2LoggingLevel :: DeleteV2LoggingLevelResponse -> TestTree
 responseDeleteV2LoggingLevel = res
@@ -1570,6 +2704,27 @@ responseGetIndexingConfiguration = res
     "fixture/GetIndexingConfigurationResponse.proto"
     ioT
     (Proxy :: Proxy GetIndexingConfiguration)
+
+responseListAuditMitigationActionsExecutions :: ListAuditMitigationActionsExecutionsResponse -> TestTree
+responseListAuditMitigationActionsExecutions = res
+    "ListAuditMitigationActionsExecutionsResponse"
+    "fixture/ListAuditMitigationActionsExecutionsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListAuditMitigationActionsExecutions)
+
+responseDescribeAuditMitigationActionsTask :: DescribeAuditMitigationActionsTaskResponse -> TestTree
+responseDescribeAuditMitigationActionsTask = res
+    "DescribeAuditMitigationActionsTaskResponse"
+    "fixture/DescribeAuditMitigationActionsTaskResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeAuditMitigationActionsTask)
+
+responseGetStatistics :: GetStatisticsResponse -> TestTree
+responseGetStatistics = res
+    "GetStatisticsResponse"
+    "fixture/GetStatisticsResponse.proto"
+    ioT
+    (Proxy :: Proxy GetStatistics)
 
 responseDeleteRoleAlias :: DeleteRoleAliasResponse -> TestTree
 responseDeleteRoleAlias = res
@@ -1627,6 +2782,13 @@ responseAssociateTargetsWithJob = res
     ioT
     (Proxy :: Proxy AssociateTargetsWithJob)
 
+responseAttachSecurityProfile :: AttachSecurityProfileResponse -> TestTree
+responseAttachSecurityProfile = res
+    "AttachSecurityProfileResponse"
+    "fixture/AttachSecurityProfileResponse.proto"
+    ioT
+    (Proxy :: Proxy AttachSecurityProfile)
+
 responseListAttachedPolicies :: ListAttachedPoliciesResponse -> TestTree
 responseListAttachedPolicies = res
     "ListAttachedPoliciesResponse"
@@ -1661,6 +2823,20 @@ responseGetJobDocument = res
     "fixture/GetJobDocumentResponse.proto"
     ioT
     (Proxy :: Proxy GetJobDocument)
+
+responseDescribeProvisioningTemplateVersion :: DescribeProvisioningTemplateVersionResponse -> TestTree
+responseDescribeProvisioningTemplateVersion = res
+    "DescribeProvisioningTemplateVersionResponse"
+    "fixture/DescribeProvisioningTemplateVersionResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeProvisioningTemplateVersion)
+
+responseCancelAuditTask :: CancelAuditTaskResponse -> TestTree
+responseCancelAuditTask = res
+    "CancelAuditTaskResponse"
+    "fixture/CancelAuditTaskResponse.proto"
+    ioT
+    (Proxy :: Proxy CancelAuditTask)
 
 responseCreateRoleAlias :: CreateRoleAliasResponse -> TestTree
 responseCreateRoleAlias = res
@@ -1711,12 +2887,47 @@ responseListRoleAliases = res
     ioT
     (Proxy :: Proxy ListRoleAliases)
 
+responseStartOnDemandAuditTask :: StartOnDemandAuditTaskResponse -> TestTree
+responseStartOnDemandAuditTask = res
+    "StartOnDemandAuditTaskResponse"
+    "fixture/StartOnDemandAuditTaskResponse.proto"
+    ioT
+    (Proxy :: Proxy StartOnDemandAuditTask)
+
 responseDescribeThingGroup :: DescribeThingGroupResponse -> TestTree
 responseDescribeThingGroup = res
     "DescribeThingGroupResponse"
     "fixture/DescribeThingGroupResponse.proto"
     ioT
     (Proxy :: Proxy DescribeThingGroup)
+
+responseDeleteJob :: DeleteJobResponse -> TestTree
+responseDeleteJob = res
+    "DeleteJobResponse"
+    "fixture/DeleteJobResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteJob)
+
+responseListTargetsForSecurityProfile :: ListTargetsForSecurityProfileResponse -> TestTree
+responseListTargetsForSecurityProfile = res
+    "ListTargetsForSecurityProfileResponse"
+    "fixture/ListTargetsForSecurityProfileResponse.proto"
+    ioT
+    (Proxy :: Proxy ListTargetsForSecurityProfile)
+
+responseUpdateJob :: UpdateJobResponse -> TestTree
+responseUpdateJob = res
+    "UpdateJobResponse"
+    "fixture/UpdateJobResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateJob)
+
+responseStartAuditMitigationActionsTask :: StartAuditMitigationActionsTaskResponse -> TestTree
+responseStartAuditMitigationActionsTask = res
+    "StartAuditMitigationActionsTaskResponse"
+    "fixture/StartAuditMitigationActionsTaskResponse.proto"
+    ioT
+    (Proxy :: Proxy StartAuditMitigationActionsTask)
 
 responseGetTopicRule :: GetTopicRuleResponse -> TestTree
 responseGetTopicRule = res
@@ -1732,6 +2943,41 @@ responseDescribeThing = res
     ioT
     (Proxy :: Proxy DescribeThing)
 
+responseListDomainConfigurations :: ListDomainConfigurationsResponse -> TestTree
+responseListDomainConfigurations = res
+    "ListDomainConfigurationsResponse"
+    "fixture/ListDomainConfigurationsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListDomainConfigurations)
+
+responseListAuditTasks :: ListAuditTasksResponse -> TestTree
+responseListAuditTasks = res
+    "ListAuditTasksResponse"
+    "fixture/ListAuditTasksResponse.proto"
+    ioT
+    (Proxy :: Proxy ListAuditTasks)
+
+responseDescribeAccountAuditConfiguration :: DescribeAccountAuditConfigurationResponse -> TestTree
+responseDescribeAccountAuditConfiguration = res
+    "DescribeAccountAuditConfigurationResponse"
+    "fixture/DescribeAccountAuditConfigurationResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeAccountAuditConfiguration)
+
+responseDeleteDimension :: DeleteDimensionResponse -> TestTree
+responseDeleteDimension = res
+    "DeleteDimensionResponse"
+    "fixture/DeleteDimensionResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteDimension)
+
+responseUpdateDimension :: UpdateDimensionResponse -> TestTree
+responseUpdateDimension = res
+    "UpdateDimensionResponse"
+    "fixture/UpdateDimensionResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateDimension)
+
 responseDeletePolicy :: DeletePolicyResponse -> TestTree
 responseDeletePolicy = res
     "DeletePolicyResponse"
@@ -1746,12 +2992,47 @@ responseListThingsInThingGroup = res
     ioT
     (Proxy :: Proxy ListThingsInThingGroup)
 
+responseListAuditFindings :: ListAuditFindingsResponse -> TestTree
+responseListAuditFindings = res
+    "ListAuditFindingsResponse"
+    "fixture/ListAuditFindingsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListAuditFindings)
+
+responseDescribeScheduledAudit :: DescribeScheduledAuditResponse -> TestTree
+responseDescribeScheduledAudit = res
+    "DescribeScheduledAuditResponse"
+    "fixture/DescribeScheduledAuditResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeScheduledAudit)
+
+responseCreateMitigationAction :: CreateMitigationActionResponse -> TestTree
+responseCreateMitigationAction = res
+    "CreateMitigationActionResponse"
+    "fixture/CreateMitigationActionResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateMitigationAction)
+
+responseConfirmTopicRuleDestination :: ConfirmTopicRuleDestinationResponse -> TestTree
+responseConfirmTopicRuleDestination = res
+    "ConfirmTopicRuleDestinationResponse"
+    "fixture/ConfirmTopicRuleDestinationResponse.proto"
+    ioT
+    (Proxy :: Proxy ConfirmTopicRuleDestination)
+
 responseListCertificates :: ListCertificatesResponse -> TestTree
 responseListCertificates = res
     "ListCertificatesResponse"
     "fixture/ListCertificatesResponse.proto"
     ioT
     (Proxy :: Proxy ListCertificates)
+
+responseListMitigationActions :: ListMitigationActionsResponse -> TestTree
+responseListMitigationActions = res
+    "ListMitigationActionsResponse"
+    "fixture/ListMitigationActionsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListMitigationActions)
 
 responseDescribeAuthorizer :: DescribeAuthorizerResponse -> TestTree
 responseDescribeAuthorizer = res
@@ -1767,6 +3048,27 @@ responseGetPolicyVersion = res
     ioT
     (Proxy :: Proxy GetPolicyVersion)
 
+responseListActiveViolations :: ListActiveViolationsResponse -> TestTree
+responseListActiveViolations = res
+    "ListActiveViolationsResponse"
+    "fixture/ListActiveViolationsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListActiveViolations)
+
+responseValidateSecurityProfileBehaviors :: ValidateSecurityProfileBehaviorsResponse -> TestTree
+responseValidateSecurityProfileBehaviors = res
+    "ValidateSecurityProfileBehaviorsResponse"
+    "fixture/ValidateSecurityProfileBehaviorsResponse.proto"
+    ioT
+    (Proxy :: Proxy ValidateSecurityProfileBehaviors)
+
+responseListViolationEvents :: ListViolationEventsResponse -> TestTree
+responseListViolationEvents = res
+    "ListViolationEventsResponse"
+    "fixture/ListViolationEventsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListViolationEvents)
+
 responseDeleteCertificate :: DeleteCertificateResponse -> TestTree
 responseDeleteCertificate = res
     "DeleteCertificateResponse"
@@ -1781,12 +3083,26 @@ responseUpdateCertificate = res
     ioT
     (Proxy :: Proxy UpdateCertificate)
 
+responseCreateDimension :: CreateDimensionResponse -> TestTree
+responseCreateDimension = res
+    "CreateDimensionResponse"
+    "fixture/CreateDimensionResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateDimension)
+
 responseUpdateIndexingConfiguration :: UpdateIndexingConfigurationResponse -> TestTree
 responseUpdateIndexingConfiguration = res
     "UpdateIndexingConfigurationResponse"
     "fixture/UpdateIndexingConfigurationResponse.proto"
     ioT
     (Proxy :: Proxy UpdateIndexingConfiguration)
+
+responseCreateProvisioningClaim :: CreateProvisioningClaimResponse -> TestTree
+responseCreateProvisioningClaim = res
+    "CreateProvisioningClaimResponse"
+    "fixture/CreateProvisioningClaimResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateProvisioningClaim)
 
 responseTestInvokeAuthorizer :: TestInvokeAuthorizerResponse -> TestTree
 responseTestInvokeAuthorizer = res
@@ -1802,6 +3118,13 @@ responseCreateThingGroup = res
     ioT
     (Proxy :: Proxy CreateThingGroup)
 
+responseCreateTopicRuleDestination :: CreateTopicRuleDestinationResponse -> TestTree
+responseCreateTopicRuleDestination = res
+    "CreateTopicRuleDestinationResponse"
+    "fixture/CreateTopicRuleDestinationResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateTopicRuleDestination)
+
 responseDetachPolicy :: DetachPolicyResponse -> TestTree
 responseDetachPolicy = res
     "DetachPolicyResponse"
@@ -1815,6 +3138,27 @@ responseDescribeJob = res
     "fixture/DescribeJobResponse.proto"
     ioT
     (Proxy :: Proxy DescribeJob)
+
+responseAddThingToBillingGroup :: AddThingToBillingGroupResponse -> TestTree
+responseAddThingToBillingGroup = res
+    "AddThingToBillingGroupResponse"
+    "fixture/AddThingToBillingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy AddThingToBillingGroup)
+
+responseUpdateTopicRuleDestination :: UpdateTopicRuleDestinationResponse -> TestTree
+responseUpdateTopicRuleDestination = res
+    "UpdateTopicRuleDestinationResponse"
+    "fixture/UpdateTopicRuleDestinationResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateTopicRuleDestination)
+
+responseDeleteTopicRuleDestination :: DeleteTopicRuleDestinationResponse -> TestTree
+responseDeleteTopicRuleDestination = res
+    "DeleteTopicRuleDestinationResponse"
+    "fixture/DeleteTopicRuleDestinationResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteTopicRuleDestination)
 
 responseDeleteThingGroup :: DeleteThingGroupResponse -> TestTree
 responseDeleteThingGroup = res
@@ -1844,12 +3188,33 @@ responseDeleteOTAUpdate = res
     ioT
     (Proxy :: Proxy DeleteOTAUpdate)
 
+responseCreateDynamicThingGroup :: CreateDynamicThingGroupResponse -> TestTree
+responseCreateDynamicThingGroup = res
+    "CreateDynamicThingGroupResponse"
+    "fixture/CreateDynamicThingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateDynamicThingGroup)
+
+responseDetachSecurityProfile :: DetachSecurityProfileResponse -> TestTree
+responseDetachSecurityProfile = res
+    "DetachSecurityProfileResponse"
+    "fixture/DetachSecurityProfileResponse.proto"
+    ioT
+    (Proxy :: Proxy DetachSecurityProfile)
+
 responseListOutgoingCertificates :: ListOutgoingCertificatesResponse -> TestTree
 responseListOutgoingCertificates = res
     "ListOutgoingCertificatesResponse"
     "fixture/ListOutgoingCertificatesResponse.proto"
     ioT
     (Proxy :: Proxy ListOutgoingCertificates)
+
+responseDeleteProvisioningTemplateVersion :: DeleteProvisioningTemplateVersionResponse -> TestTree
+responseDeleteProvisioningTemplateVersion = res
+    "DeleteProvisioningTemplateVersionResponse"
+    "fixture/DeleteProvisioningTemplateVersionResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteProvisioningTemplateVersion)
 
 responseDescribeCACertificate :: DescribeCACertificateResponse -> TestTree
 responseDescribeCACertificate = res
@@ -1858,12 +3223,26 @@ responseDescribeCACertificate = res
     ioT
     (Proxy :: Proxy DescribeCACertificate)
 
+responseListProvisioningTemplateVersions :: ListProvisioningTemplateVersionsResponse -> TestTree
+responseListProvisioningTemplateVersions = res
+    "ListProvisioningTemplateVersionsResponse"
+    "fixture/ListProvisioningTemplateVersionsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListProvisioningTemplateVersions)
+
 responseGetRegistrationCode :: GetRegistrationCodeResponse -> TestTree
 responseGetRegistrationCode = res
     "GetRegistrationCodeResponse"
     "fixture/GetRegistrationCodeResponse.proto"
     ioT
     (Proxy :: Proxy GetRegistrationCode)
+
+responseListBillingGroups :: ListBillingGroupsResponse -> TestTree
+responseListBillingGroups = res
+    "ListBillingGroupsResponse"
+    "fixture/ListBillingGroupsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListBillingGroups)
 
 responseDeleteThingType :: DeleteThingTypeResponse -> TestTree
 responseDeleteThingType = res
@@ -1872,12 +3251,33 @@ responseDeleteThingType = res
     ioT
     (Proxy :: Proxy DeleteThingType)
 
+responseDeleteBillingGroup :: DeleteBillingGroupResponse -> TestTree
+responseDeleteBillingGroup = res
+    "DeleteBillingGroupResponse"
+    "fixture/DeleteBillingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteBillingGroup)
+
 responseAddThingToThingGroup :: AddThingToThingGroupResponse -> TestTree
 responseAddThingToThingGroup = res
     "AddThingToThingGroupResponse"
     "fixture/AddThingToThingGroupResponse.proto"
     ioT
     (Proxy :: Proxy AddThingToThingGroup)
+
+responseUpdateBillingGroup :: UpdateBillingGroupResponse -> TestTree
+responseUpdateBillingGroup = res
+    "UpdateBillingGroupResponse"
+    "fixture/UpdateBillingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateBillingGroup)
+
+responseGetTopicRuleDestination :: GetTopicRuleDestinationResponse -> TestTree
+responseGetTopicRuleDestination = res
+    "GetTopicRuleDestinationResponse"
+    "fixture/GetTopicRuleDestinationResponse.proto"
+    ioT
+    (Proxy :: Proxy GetTopicRuleDestination)
 
 responseListCertificatesByCA :: ListCertificatesByCAResponse -> TestTree
 responseListCertificatesByCA = res
@@ -1906,6 +3306,20 @@ responseRegisterThing = res
     "fixture/RegisterThingResponse.proto"
     ioT
     (Proxy :: Proxy RegisterThing)
+
+responseDescribeDomainConfiguration :: DescribeDomainConfigurationResponse -> TestTree
+responseDescribeDomainConfiguration = res
+    "DescribeDomainConfigurationResponse"
+    "fixture/DescribeDomainConfigurationResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeDomainConfiguration)
+
+responseDescribeAuditTask :: DescribeAuditTaskResponse -> TestTree
+responseDescribeAuditTask = res
+    "DescribeAuditTaskResponse"
+    "fixture/DescribeAuditTaskResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeAuditTask)
 
 responseDeleteRegistrationCode :: DeleteRegistrationCodeResponse -> TestTree
 responseDeleteRegistrationCode = res
@@ -1984,12 +3398,40 @@ responseCreateStream = res
     ioT
     (Proxy :: Proxy CreateStream)
 
+responseCancelAuditMitigationActionsTask :: CancelAuditMitigationActionsTaskResponse -> TestTree
+responseCancelAuditMitigationActionsTask = res
+    "CancelAuditMitigationActionsTaskResponse"
+    "fixture/CancelAuditMitigationActionsTaskResponse.proto"
+    ioT
+    (Proxy :: Proxy CancelAuditMitigationActionsTask)
+
+responseCreateBillingGroup :: CreateBillingGroupResponse -> TestTree
+responseCreateBillingGroup = res
+    "CreateBillingGroupResponse"
+    "fixture/CreateBillingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateBillingGroup)
+
+responseListProvisioningTemplates :: ListProvisioningTemplatesResponse -> TestTree
+responseListProvisioningTemplates = res
+    "ListProvisioningTemplatesResponse"
+    "fixture/ListProvisioningTemplatesResponse.proto"
+    ioT
+    (Proxy :: Proxy ListProvisioningTemplates)
+
 responseListV2LoggingLevels :: ListV2LoggingLevelsResponse -> TestTree
 responseListV2LoggingLevels = res
     "ListV2LoggingLevelsResponse"
     "fixture/ListV2LoggingLevelsResponse.proto"
     ioT
     (Proxy :: Proxy ListV2LoggingLevels)
+
+responseTagResource :: TagResourceResponse -> TestTree
+responseTagResource = res
+    "TagResourceResponse"
+    "fixture/TagResourceResponse.proto"
+    ioT
+    (Proxy :: Proxy TagResource)
 
 responseStopThingRegistrationTask :: StopThingRegistrationTaskResponse -> TestTree
 responseStopThingRegistrationTask = res
@@ -2026,12 +3468,26 @@ responseReplaceTopicRule = res
     ioT
     (Proxy :: Proxy ReplaceTopicRule)
 
+responseUntagResource :: UntagResourceResponse -> TestTree
+responseUntagResource = res
+    "UntagResourceResponse"
+    "fixture/UntagResourceResponse.proto"
+    ioT
+    (Proxy :: Proxy UntagResource)
+
 responseSetDefaultPolicyVersion :: SetDefaultPolicyVersionResponse -> TestTree
 responseSetDefaultPolicyVersion = res
     "SetDefaultPolicyVersionResponse"
     "fixture/SetDefaultPolicyVersionResponse.proto"
     ioT
     (Proxy :: Proxy SetDefaultPolicyVersion)
+
+responseCancelJobExecution :: CancelJobExecutionResponse -> TestTree
+responseCancelJobExecution = res
+    "CancelJobExecutionResponse"
+    "fixture/CancelJobExecutionResponse.proto"
+    ioT
+    (Proxy :: Proxy CancelJobExecution)
 
 responseListPolicyVersions :: ListPolicyVersionsResponse -> TestTree
 responseListPolicyVersions = res
@@ -2068,6 +3524,13 @@ responseCreateKeysAndCertificate = res
     ioT
     (Proxy :: Proxy CreateKeysAndCertificate)
 
+responseListThingsInBillingGroup :: ListThingsInBillingGroupResponse -> TestTree
+responseListThingsInBillingGroup = res
+    "ListThingsInBillingGroupResponse"
+    "fixture/ListThingsInBillingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy ListThingsInBillingGroup)
+
 responseUpdateThingGroupsForThing :: UpdateThingGroupsForThingResponse -> TestTree
 responseUpdateThingGroupsForThing = res
     "UpdateThingGroupsForThingResponse"
@@ -2089,6 +3552,13 @@ responseAcceptCertificateTransfer = res
     ioT
     (Proxy :: Proxy AcceptCertificateTransfer)
 
+responseGetPercentiles :: GetPercentilesResponse -> TestTree
+responseGetPercentiles = res
+    "GetPercentilesResponse"
+    "fixture/GetPercentilesResponse.proto"
+    ioT
+    (Proxy :: Proxy GetPercentiles)
+
 responseGetPolicy :: GetPolicyResponse -> TestTree
 responseGetPolicy = res
     "GetPolicyResponse"
@@ -2102,6 +3572,13 @@ responseDescribeEndpoint = res
     "fixture/DescribeEndpointResponse.proto"
     ioT
     (Proxy :: Proxy DescribeEndpoint)
+
+responseListSecurityProfilesForTarget :: ListSecurityProfilesForTargetResponse -> TestTree
+responseListSecurityProfilesForTarget = res
+    "ListSecurityProfilesForTargetResponse"
+    "fixture/ListSecurityProfilesForTargetResponse.proto"
+    ioT
+    (Proxy :: Proxy ListSecurityProfilesForTarget)
 
 responseUpdateEventConfigurations :: UpdateEventConfigurationsResponse -> TestTree
 responseUpdateEventConfigurations = res
@@ -2117,6 +3594,20 @@ responseRegisterCACertificate = res
     ioT
     (Proxy :: Proxy RegisterCACertificate)
 
+responseDeleteDomainConfiguration :: DeleteDomainConfigurationResponse -> TestTree
+responseDeleteDomainConfiguration = res
+    "DeleteDomainConfigurationResponse"
+    "fixture/DeleteDomainConfigurationResponse.proto"
+    ioT
+    (Proxy :: Proxy DeleteDomainConfiguration)
+
+responseUpdateDomainConfiguration :: UpdateDomainConfigurationResponse -> TestTree
+responseUpdateDomainConfiguration = res
+    "UpdateDomainConfigurationResponse"
+    "fixture/UpdateDomainConfigurationResponse.proto"
+    ioT
+    (Proxy :: Proxy UpdateDomainConfiguration)
+
 responseSetLoggingOptions :: SetLoggingOptionsResponse -> TestTree
 responseSetLoggingOptions = res
     "SetLoggingOptionsResponse"
@@ -2130,6 +3621,13 @@ responseDescribeThingType = res
     "fixture/DescribeThingTypeResponse.proto"
     ioT
     (Proxy :: Proxy DescribeThingType)
+
+responseListDimensions :: ListDimensionsResponse -> TestTree
+responseListDimensions = res
+    "ListDimensionsResponse"
+    "fixture/ListDimensionsResponse.proto"
+    ioT
+    (Proxy :: Proxy ListDimensions)
 
 responseGetV2LoggingOptions :: GetV2LoggingOptionsResponse -> TestTree
 responseGetV2LoggingOptions = res
@@ -2158,6 +3656,20 @@ responseDescribeStream = res
     "fixture/DescribeStreamResponse.proto"
     ioT
     (Proxy :: Proxy DescribeStream)
+
+responseCreateSecurityProfile :: CreateSecurityProfileResponse -> TestTree
+responseCreateSecurityProfile = res
+    "CreateSecurityProfileResponse"
+    "fixture/CreateSecurityProfileResponse.proto"
+    ioT
+    (Proxy :: Proxy CreateSecurityProfile)
+
+responseDescribeBillingGroup :: DescribeBillingGroupResponse -> TestTree
+responseDescribeBillingGroup = res
+    "DescribeBillingGroupResponse"
+    "fixture/DescribeBillingGroupResponse.proto"
+    ioT
+    (Proxy :: Proxy DescribeBillingGroup)
 
 responseDetachThingPrincipal :: DetachThingPrincipalResponse -> TestTree
 responseDetachThingPrincipal = res

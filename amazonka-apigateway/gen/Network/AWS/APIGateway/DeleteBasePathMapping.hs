@@ -47,11 +47,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteBasePathMapping' smart constructor.
-data DeleteBasePathMapping = DeleteBasePathMapping'
-  { _dbpmDomainName :: !Text
-  , _dbpmBasePath   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBasePathMapping = DeleteBasePathMapping'{_dbpmDomainName
+                                                    :: !Text,
+                                                    _dbpmBasePath :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteBasePathMapping' with the minimum fields required to make a request.
 --
@@ -59,21 +59,21 @@ data DeleteBasePathMapping = DeleteBasePathMapping'
 --
 -- * 'dbpmDomainName' - [Required] The domain name of the 'BasePathMapping' resource to delete.
 --
--- * 'dbpmBasePath' - [Required] The base path name of the 'BasePathMapping' resource to delete.
+-- * 'dbpmBasePath' - [Required] The base path name of the 'BasePathMapping' resource to delete. To specify an empty base path, set this parameter to @'(none)'@ .
 deleteBasePathMapping
     :: Text -- ^ 'dbpmDomainName'
     -> Text -- ^ 'dbpmBasePath'
     -> DeleteBasePathMapping
-deleteBasePathMapping pDomainName_ pBasePath_ =
-  DeleteBasePathMapping'
-    {_dbpmDomainName = pDomainName_, _dbpmBasePath = pBasePath_}
-
+deleteBasePathMapping pDomainName_ pBasePath_
+  = DeleteBasePathMapping'{_dbpmDomainName =
+                             pDomainName_,
+                           _dbpmBasePath = pBasePath_}
 
 -- | [Required] The domain name of the 'BasePathMapping' resource to delete.
 dbpmDomainName :: Lens' DeleteBasePathMapping Text
 dbpmDomainName = lens _dbpmDomainName (\ s a -> s{_dbpmDomainName = a})
 
--- | [Required] The base path name of the 'BasePathMapping' resource to delete.
+-- | [Required] The base path name of the 'BasePathMapping' resource to delete. To specify an empty base path, set this parameter to @'(none)'@ .
 dbpmBasePath :: Lens' DeleteBasePathMapping Text
 dbpmBasePath = lens _dbpmBasePath (\ s a -> s{_dbpmBasePath = a})
 
@@ -103,16 +103,15 @@ instance ToQuery DeleteBasePathMapping where
         toQuery = const mempty
 
 -- | /See:/ 'deleteBasePathMappingResponse' smart constructor.
-data DeleteBasePathMappingResponse =
-  DeleteBasePathMappingResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBasePathMappingResponse = DeleteBasePathMappingResponse'
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteBasePathMappingResponse' with the minimum fields required to make a request.
 --
 deleteBasePathMappingResponse
     :: DeleteBasePathMappingResponse
-deleteBasePathMappingResponse = DeleteBasePathMappingResponse'
-
+deleteBasePathMappingResponse
+  = DeleteBasePathMappingResponse'
 
 instance NFData DeleteBasePathMappingResponse where

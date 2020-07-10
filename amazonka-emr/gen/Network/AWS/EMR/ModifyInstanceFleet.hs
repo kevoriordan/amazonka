@@ -43,11 +43,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'modifyInstanceFleet' smart constructor.
-data ModifyInstanceFleet = ModifyInstanceFleet'
-  { _mifClusterId     :: !Text
-  , _mifInstanceFleet :: !InstanceFleetModifyConfig
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyInstanceFleet = ModifyInstanceFleet'{_mifClusterId
+                                                :: !Text,
+                                                _mifInstanceFleet ::
+                                                !InstanceFleetModifyConfig}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ModifyInstanceFleet' with the minimum fields required to make a request.
 --
@@ -60,10 +60,9 @@ modifyInstanceFleet
     :: Text -- ^ 'mifClusterId'
     -> InstanceFleetModifyConfig -- ^ 'mifInstanceFleet'
     -> ModifyInstanceFleet
-modifyInstanceFleet pClusterId_ pInstanceFleet_ =
-  ModifyInstanceFleet'
-    {_mifClusterId = pClusterId_, _mifInstanceFleet = pInstanceFleet_}
-
+modifyInstanceFleet pClusterId_ pInstanceFleet_
+  = ModifyInstanceFleet'{_mifClusterId = pClusterId_,
+                         _mifInstanceFleet = pInstanceFleet_}
 
 -- | The unique identifier of the cluster.
 mifClusterId :: Lens' ModifyInstanceFleet Text
@@ -107,16 +106,15 @@ instance ToQuery ModifyInstanceFleet where
         toQuery = const mempty
 
 -- | /See:/ 'modifyInstanceFleetResponse' smart constructor.
-data ModifyInstanceFleetResponse =
-  ModifyInstanceFleetResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyInstanceFleetResponse = ModifyInstanceFleetResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'ModifyInstanceFleetResponse' with the minimum fields required to make a request.
 --
 modifyInstanceFleetResponse
     :: ModifyInstanceFleetResponse
-modifyInstanceFleetResponse = ModifyInstanceFleetResponse'
-
+modifyInstanceFleetResponse
+  = ModifyInstanceFleetResponse'
 
 instance NFData ModifyInstanceFleetResponse where

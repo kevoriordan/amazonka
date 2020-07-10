@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
+-- Deletes a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
 --
 --
 -- You can execute this operation no more than once per second.
@@ -46,16 +46,19 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to delete a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
+-- | Represents a request to delete a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'deleteConfigurationSetEventDestination' smart constructor.
-data DeleteConfigurationSetEventDestination = DeleteConfigurationSetEventDestination'
-  { _dcsedConfigurationSetName :: !Text
-  , _dcsedEventDestinationName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteConfigurationSetEventDestination = DeleteConfigurationSetEventDestination'{_dcsedConfigurationSetName
+                                                                                      ::
+                                                                                      !Text,
+                                                                                      _dcsedEventDestinationName
+                                                                                      ::
+                                                                                      !Text}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteConfigurationSetEventDestination' with the minimum fields required to make a request.
 --
@@ -68,12 +71,12 @@ deleteConfigurationSetEventDestination
     :: Text -- ^ 'dcsedConfigurationSetName'
     -> Text -- ^ 'dcsedEventDestinationName'
     -> DeleteConfigurationSetEventDestination
-deleteConfigurationSetEventDestination pConfigurationSetName_ pEventDestinationName_ =
-  DeleteConfigurationSetEventDestination'
-    { _dcsedConfigurationSetName = pConfigurationSetName_
-    , _dcsedEventDestinationName = pEventDestinationName_
-    }
-
+deleteConfigurationSetEventDestination
+  pConfigurationSetName_ pEventDestinationName_
+  = DeleteConfigurationSetEventDestination'{_dcsedConfigurationSetName
+                                              = pConfigurationSetName_,
+                                            _dcsedEventDestinationName =
+                                              pEventDestinationName_}
 
 -- | The name of the configuration set from which to delete the event destination.
 dcsedConfigurationSetName :: Lens' DeleteConfigurationSetEventDestination Text
@@ -131,10 +134,13 @@ instance ToQuery
 --
 --
 -- /See:/ 'deleteConfigurationSetEventDestinationResponse' smart constructor.
-newtype DeleteConfigurationSetEventDestinationResponse = DeleteConfigurationSetEventDestinationResponse'
-  { _dcsedrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteConfigurationSetEventDestinationResponse = DeleteConfigurationSetEventDestinationResponse'{_dcsedrsResponseStatus
+                                                                                                         ::
+                                                                                                         Int}
+                                                           deriving (Eq, Read,
+                                                                     Show, Data,
+                                                                     Typeable,
+                                                                     Generic)
 
 -- | Creates a value of 'DeleteConfigurationSetEventDestinationResponse' with the minimum fields required to make a request.
 --
@@ -144,10 +150,10 @@ newtype DeleteConfigurationSetEventDestinationResponse = DeleteConfigurationSetE
 deleteConfigurationSetEventDestinationResponse
     :: Int -- ^ 'dcsedrsResponseStatus'
     -> DeleteConfigurationSetEventDestinationResponse
-deleteConfigurationSetEventDestinationResponse pResponseStatus_ =
-  DeleteConfigurationSetEventDestinationResponse'
-    {_dcsedrsResponseStatus = pResponseStatus_}
-
+deleteConfigurationSetEventDestinationResponse
+  pResponseStatus_
+  = DeleteConfigurationSetEventDestinationResponse'{_dcsedrsResponseStatus
+                                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 dcsedrsResponseStatus :: Lens' DeleteConfigurationSetEventDestinationResponse Int

@@ -21,6 +21,8 @@
 -- Lists the policies attached to the specified thing group.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.IoT.ListAttachedPolicies
     (
     -- * Creating a Request
@@ -44,18 +46,19 @@ module Network.AWS.IoT.ListAttachedPolicies
 import Network.AWS.IoT.Types
 import Network.AWS.IoT.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAttachedPolicies' smart constructor.
-data ListAttachedPolicies = ListAttachedPolicies'
-  { _lapMarker    :: !(Maybe Text)
-  , _lapRecursive :: !(Maybe Bool)
-  , _lapPageSize  :: !(Maybe Nat)
-  , _lapTarget    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAttachedPolicies = ListAttachedPolicies'{_lapMarker
+                                                  :: !(Maybe Text),
+                                                  _lapRecursive ::
+                                                  !(Maybe Bool),
+                                                  _lapPageSize :: !(Maybe Nat),
+                                                  _lapTarget :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAttachedPolicies' with the minimum fields required to make a request.
 --
@@ -67,18 +70,14 @@ data ListAttachedPolicies = ListAttachedPolicies'
 --
 -- * 'lapPageSize' - The maximum number of results to be returned per request.
 --
--- * 'lapTarget' - The group for which the policies will be listed.
+-- * 'lapTarget' - The group or principal for which the policies will be listed.
 listAttachedPolicies
     :: Text -- ^ 'lapTarget'
     -> ListAttachedPolicies
-listAttachedPolicies pTarget_ =
-  ListAttachedPolicies'
-    { _lapMarker = Nothing
-    , _lapRecursive = Nothing
-    , _lapPageSize = Nothing
-    , _lapTarget = pTarget_
-    }
-
+listAttachedPolicies pTarget_
+  = ListAttachedPolicies'{_lapMarker = Nothing,
+                          _lapRecursive = Nothing, _lapPageSize = Nothing,
+                          _lapTarget = pTarget_}
 
 -- | The token to retrieve the next set of results.
 lapMarker :: Lens' ListAttachedPolicies (Maybe Text)
@@ -92,9 +91,16 @@ lapRecursive = lens _lapRecursive (\ s a -> s{_lapRecursive = a})
 lapPageSize :: Lens' ListAttachedPolicies (Maybe Natural)
 lapPageSize = lens _lapPageSize (\ s a -> s{_lapPageSize = a}) . mapping _Nat
 
--- | The group for which the policies will be listed.
+-- | The group or principal for which the policies will be listed.
 lapTarget :: Lens' ListAttachedPolicies Text
 lapTarget = lens _lapTarget (\ s a -> s{_lapTarget = a})
+
+instance AWSPager ListAttachedPolicies where
+        page rq rs
+          | stop (rs ^. laprsNextMarker) = Nothing
+          | stop (rs ^. laprsPolicies) = Nothing
+          | otherwise =
+            Just $ rq & lapMarker .~ rs ^. laprsNextMarker
 
 instance AWSRequest ListAttachedPolicies where
         type Rs ListAttachedPolicies =
@@ -130,12 +136,17 @@ instance ToQuery ListAttachedPolicies where
                "pageSize" =: _lapPageSize]
 
 -- | /See:/ 'listAttachedPoliciesResponse' smart constructor.
-data ListAttachedPoliciesResponse = ListAttachedPoliciesResponse'
-  { _laprsNextMarker     :: !(Maybe Text)
-  , _laprsPolicies       :: !(Maybe [Policy])
-  , _laprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAttachedPoliciesResponse = ListAttachedPoliciesResponse'{_laprsNextMarker
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _laprsPolicies
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [Policy]),
+                                                                  _laprsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'ListAttachedPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -149,13 +160,11 @@ data ListAttachedPoliciesResponse = ListAttachedPoliciesResponse'
 listAttachedPoliciesResponse
     :: Int -- ^ 'laprsResponseStatus'
     -> ListAttachedPoliciesResponse
-listAttachedPoliciesResponse pResponseStatus_ =
-  ListAttachedPoliciesResponse'
-    { _laprsNextMarker = Nothing
-    , _laprsPolicies = Nothing
-    , _laprsResponseStatus = pResponseStatus_
-    }
-
+listAttachedPoliciesResponse pResponseStatus_
+  = ListAttachedPoliciesResponse'{_laprsNextMarker =
+                                    Nothing,
+                                  _laprsPolicies = Nothing,
+                                  _laprsResponseStatus = pResponseStatus_}
 
 -- | The token to retrieve the next set of results, or ``null`` if there are no more results.
 laprsNextMarker :: Lens' ListAttachedPoliciesResponse (Maybe Text)

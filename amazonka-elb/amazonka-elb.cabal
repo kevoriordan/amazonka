@@ -79,12 +79,38 @@ library
 
     other-modules:
           Network.AWS.ELB.Internal
+        , Network.AWS.ELB.Types.AccessLog
+        , Network.AWS.ELB.Types.AdditionalAttribute
+        , Network.AWS.ELB.Types.AppCookieStickinessPolicy
+        , Network.AWS.ELB.Types.BackendServerDescription
+        , Network.AWS.ELB.Types.ConnectionDraining
+        , Network.AWS.ELB.Types.ConnectionSettings
+        , Network.AWS.ELB.Types.CrossZoneLoadBalancing
+        , Network.AWS.ELB.Types.HealthCheck
+        , Network.AWS.ELB.Types.Instance
+        , Network.AWS.ELB.Types.InstanceState
+        , Network.AWS.ELB.Types.LBCookieStickinessPolicy
+        , Network.AWS.ELB.Types.Limit
+        , Network.AWS.ELB.Types.Listener
+        , Network.AWS.ELB.Types.ListenerDescription
+        , Network.AWS.ELB.Types.LoadBalancerAttributes
+        , Network.AWS.ELB.Types.LoadBalancerDescription
+        , Network.AWS.ELB.Types.Policies
+        , Network.AWS.ELB.Types.PolicyAttribute
+        , Network.AWS.ELB.Types.PolicyAttributeDescription
+        , Network.AWS.ELB.Types.PolicyAttributeTypeDescription
+        , Network.AWS.ELB.Types.PolicyDescription
+        , Network.AWS.ELB.Types.PolicyTypeDescription
         , Network.AWS.ELB.Types.Product
-        , Network.AWS.ELB.Types.Sum
+        , Network.AWS.ELB.Types.SourceSecurityGroup
+        , Network.AWS.ELB.Types.Tag
+        , Network.AWS.ELB.Types.TagDescription
+        , Network.AWS.ELB.Types.TagKeyOnly
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-elb-test
     type:              exitcode-stdio-1.0
@@ -108,6 +134,7 @@ test-suite amazonka-elb-test
         , amazonka-elb
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

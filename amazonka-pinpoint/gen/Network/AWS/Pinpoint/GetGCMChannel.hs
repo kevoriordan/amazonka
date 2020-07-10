@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns information about the GCM channel for an app.
+-- Retrieves information about the status and settings of the GCM channel for an application.
+--
+--
 module Network.AWS.Pinpoint.GetGCMChannel
     (
     -- * Creating a Request
@@ -43,24 +45,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getGCMChannel' smart constructor.
-newtype GetGCMChannel = GetGCMChannel'
-  { _ggcApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetGCMChannel = GetGCMChannel'{_ggcApplicationId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetGCMChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ggcApplicationId' - Undocumented member.
+-- * 'ggcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getGCMChannel
     :: Text -- ^ 'ggcApplicationId'
     -> GetGCMChannel
-getGCMChannel pApplicationId_ =
-  GetGCMChannel' {_ggcApplicationId = pApplicationId_}
+getGCMChannel pApplicationId_
+  = GetGCMChannel'{_ggcApplicationId = pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 ggcApplicationId :: Lens' GetGCMChannel Text
 ggcApplicationId = lens _ggcApplicationId (\ s a -> s{_ggcApplicationId = a})
 
@@ -94,11 +94,12 @@ instance ToQuery GetGCMChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getGCMChannelResponse' smart constructor.
-data GetGCMChannelResponse = GetGCMChannelResponse'
-  { _ggcrsResponseStatus     :: !Int
-  , _ggcrsGCMChannelResponse :: !GCMChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetGCMChannelResponse = GetGCMChannelResponse'{_ggcrsResponseStatus
+                                                    :: !Int,
+                                                    _ggcrsGCMChannelResponse ::
+                                                    !GCMChannelResponse}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetGCMChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +112,11 @@ getGCMChannelResponse
     :: Int -- ^ 'ggcrsResponseStatus'
     -> GCMChannelResponse -- ^ 'ggcrsGCMChannelResponse'
     -> GetGCMChannelResponse
-getGCMChannelResponse pResponseStatus_ pGCMChannelResponse_ =
-  GetGCMChannelResponse'
-    { _ggcrsResponseStatus = pResponseStatus_
-    , _ggcrsGCMChannelResponse = pGCMChannelResponse_
-    }
-
+getGCMChannelResponse pResponseStatus_
+  pGCMChannelResponse_
+  = GetGCMChannelResponse'{_ggcrsResponseStatus =
+                             pResponseStatus_,
+                           _ggcrsGCMChannelResponse = pGCMChannelResponse_}
 
 -- | -- | The response status code.
 ggcrsResponseStatus :: Lens' GetGCMChannelResponse Int

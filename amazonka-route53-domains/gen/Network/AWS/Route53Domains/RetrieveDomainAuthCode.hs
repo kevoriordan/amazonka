@@ -49,10 +49,10 @@ import Network.AWS.Route53Domains.Types.Product
 --
 --
 -- /See:/ 'retrieveDomainAuthCode' smart constructor.
-newtype RetrieveDomainAuthCode = RetrieveDomainAuthCode'
-  { _rdacDomainName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype RetrieveDomainAuthCode = RetrieveDomainAuthCode'{_rdacDomainName
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'RetrieveDomainAuthCode' with the minimum fields required to make a request.
 --
@@ -62,9 +62,9 @@ newtype RetrieveDomainAuthCode = RetrieveDomainAuthCode'
 retrieveDomainAuthCode
     :: Text -- ^ 'rdacDomainName'
     -> RetrieveDomainAuthCode
-retrieveDomainAuthCode pDomainName_ =
-  RetrieveDomainAuthCode' {_rdacDomainName = pDomainName_}
-
+retrieveDomainAuthCode pDomainName_
+  = RetrieveDomainAuthCode'{_rdacDomainName =
+                              pDomainName_}
 
 -- | The name of the domain that you want to get an authorization code for.
 rdacDomainName :: Lens' RetrieveDomainAuthCode Text
@@ -110,11 +110,14 @@ instance ToQuery RetrieveDomainAuthCode where
 --
 --
 -- /See:/ 'retrieveDomainAuthCodeResponse' smart constructor.
-data RetrieveDomainAuthCodeResponse = RetrieveDomainAuthCodeResponse'
-  { _rdacrsResponseStatus :: !Int
-  , _rdacrsAuthCode       :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data RetrieveDomainAuthCodeResponse = RetrieveDomainAuthCodeResponse'{_rdacrsResponseStatus
+                                                                      :: !Int,
+                                                                      _rdacrsAuthCode
+                                                                      ::
+                                                                      !(Sensitive
+                                                                          Text)}
+                                        deriving (Eq, Show, Data, Typeable,
+                                                  Generic)
 
 -- | Creates a value of 'RetrieveDomainAuthCodeResponse' with the minimum fields required to make a request.
 --
@@ -127,12 +130,11 @@ retrieveDomainAuthCodeResponse
     :: Int -- ^ 'rdacrsResponseStatus'
     -> Text -- ^ 'rdacrsAuthCode'
     -> RetrieveDomainAuthCodeResponse
-retrieveDomainAuthCodeResponse pResponseStatus_ pAuthCode_ =
-  RetrieveDomainAuthCodeResponse'
-    { _rdacrsResponseStatus = pResponseStatus_
-    , _rdacrsAuthCode = _Sensitive # pAuthCode_
-    }
-
+retrieveDomainAuthCodeResponse pResponseStatus_
+  pAuthCode_
+  = RetrieveDomainAuthCodeResponse'{_rdacrsResponseStatus
+                                      = pResponseStatus_,
+                                    _rdacrsAuthCode = _Sensitive # pAuthCode_}
 
 -- | -- | The response status code.
 rdacrsResponseStatus :: Lens' RetrieveDomainAuthCodeResponse Int

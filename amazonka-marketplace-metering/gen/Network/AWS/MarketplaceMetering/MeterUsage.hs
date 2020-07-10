@@ -21,7 +21,7 @@
 -- API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID.
 --
 --
--- MeterUsage is authenticated on the buyer's AWS account, generally when running from an EC2 instance on the AWS Marketplace.
+-- MeterUsage is authenticated on the buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS pod.
 --
 module Network.AWS.MarketplaceMetering.MeterUsage
     (
@@ -29,11 +29,11 @@ module Network.AWS.MarketplaceMetering.MeterUsage
       meterUsage
     , MeterUsage
     -- * Request Lenses
+    , muUsageQuantity
+    , muDryRun
     , muProductCode
     , muTimestamp
     , muUsageDimension
-    , muUsageQuantity
-    , muDryRun
 
     -- * Destructuring the Response
     , meterUsageResponse
@@ -51,64 +51,56 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'meterUsage' smart constructor.
-data MeterUsage = MeterUsage'
-  { _muProductCode    :: !Text
-  , _muTimestamp      :: !POSIX
-  , _muUsageDimension :: !Text
-  , _muUsageQuantity  :: !Nat
-  , _muDryRun         :: !Bool
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data MeterUsage = MeterUsage'{_muUsageQuantity ::
+                              !(Maybe Nat),
+                              _muDryRun :: !(Maybe Bool),
+                              _muProductCode :: !Text, _muTimestamp :: !POSIX,
+                              _muUsageDimension :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MeterUsage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'muUsageQuantity' - Consumption value for the hour. Defaults to @0@ if not specified.
+--
+-- * 'muDryRun' - Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to @false@ if not specified.
+--
 -- * 'muProductCode' - Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
 --
--- * 'muTimestamp' - Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.
+-- * 'muTimestamp' - Timestamp, in UTC, for which the usage is being reported. Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.
 --
 -- * 'muUsageDimension' - It will be one of the fcp dimension name provided during the publishing of the product.
---
--- * 'muUsageQuantity' - Consumption value for the hour.
---
--- * 'muDryRun' - Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException.
 meterUsage
     :: Text -- ^ 'muProductCode'
     -> UTCTime -- ^ 'muTimestamp'
     -> Text -- ^ 'muUsageDimension'
-    -> Natural -- ^ 'muUsageQuantity'
-    -> Bool -- ^ 'muDryRun'
     -> MeterUsage
-meterUsage pProductCode_ pTimestamp_ pUsageDimension_ pUsageQuantity_ pDryRun_ =
-  MeterUsage'
-    { _muProductCode = pProductCode_
-    , _muTimestamp = _Time # pTimestamp_
-    , _muUsageDimension = pUsageDimension_
-    , _muUsageQuantity = _Nat # pUsageQuantity_
-    , _muDryRun = pDryRun_
-    }
+meterUsage pProductCode_ pTimestamp_ pUsageDimension_
+  = MeterUsage'{_muUsageQuantity = Nothing,
+                _muDryRun = Nothing, _muProductCode = pProductCode_,
+                _muTimestamp = _Time # pTimestamp_,
+                _muUsageDimension = pUsageDimension_}
 
+-- | Consumption value for the hour. Defaults to @0@ if not specified.
+muUsageQuantity :: Lens' MeterUsage (Maybe Natural)
+muUsageQuantity = lens _muUsageQuantity (\ s a -> s{_muUsageQuantity = a}) . mapping _Nat
+
+-- | Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to @false@ if not specified.
+muDryRun :: Lens' MeterUsage (Maybe Bool)
+muDryRun = lens _muDryRun (\ s a -> s{_muDryRun = a})
 
 -- | Product code is used to uniquely identify a product in AWS Marketplace. The product code should be the same as the one used during the publishing of a new product.
 muProductCode :: Lens' MeterUsage Text
 muProductCode = lens _muProductCode (\ s a -> s{_muProductCode = a})
 
--- | Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.
+-- | Timestamp, in UTC, for which the usage is being reported. Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.
 muTimestamp :: Lens' MeterUsage UTCTime
 muTimestamp = lens _muTimestamp (\ s a -> s{_muTimestamp = a}) . _Time
 
 -- | It will be one of the fcp dimension name provided during the publishing of the product.
 muUsageDimension :: Lens' MeterUsage Text
 muUsageDimension = lens _muUsageDimension (\ s a -> s{_muUsageDimension = a})
-
--- | Consumption value for the hour.
-muUsageQuantity :: Lens' MeterUsage Natural
-muUsageQuantity = lens _muUsageQuantity (\ s a -> s{_muUsageQuantity = a}) . _Nat
-
--- | Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException.
-muDryRun :: Lens' MeterUsage Bool
-muDryRun = lens _muDryRun (\ s a -> s{_muDryRun = a})
 
 instance AWSRequest MeterUsage where
         type Rs MeterUsage = MeterUsageResponse
@@ -136,11 +128,11 @@ instance ToJSON MeterUsage where
         toJSON MeterUsage'{..}
           = object
               (catMaybes
-                 [Just ("ProductCode" .= _muProductCode),
+                 [("UsageQuantity" .=) <$> _muUsageQuantity,
+                  ("DryRun" .=) <$> _muDryRun,
+                  Just ("ProductCode" .= _muProductCode),
                   Just ("Timestamp" .= _muTimestamp),
-                  Just ("UsageDimension" .= _muUsageDimension),
-                  Just ("UsageQuantity" .= _muUsageQuantity),
-                  Just ("DryRun" .= _muDryRun)])
+                  Just ("UsageDimension" .= _muUsageDimension)])
 
 instance ToPath MeterUsage where
         toPath = const "/"
@@ -149,28 +141,27 @@ instance ToQuery MeterUsage where
         toQuery = const mempty
 
 -- | /See:/ 'meterUsageResponse' smart constructor.
-data MeterUsageResponse = MeterUsageResponse'
-  { _mursMeteringRecordId :: !(Maybe Text)
-  , _mursResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data MeterUsageResponse = MeterUsageResponse'{_mursMeteringRecordId
+                                              :: !(Maybe Text),
+                                              _mursResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MeterUsageResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mursMeteringRecordId' - Undocumented member.
+-- * 'mursMeteringRecordId' - Metering record id.
 --
 -- * 'mursResponseStatus' - -- | The response status code.
 meterUsageResponse
     :: Int -- ^ 'mursResponseStatus'
     -> MeterUsageResponse
-meterUsageResponse pResponseStatus_ =
-  MeterUsageResponse'
-    {_mursMeteringRecordId = Nothing, _mursResponseStatus = pResponseStatus_}
+meterUsageResponse pResponseStatus_
+  = MeterUsageResponse'{_mursMeteringRecordId =
+                          Nothing,
+                        _mursResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Metering record id.
 mursMeteringRecordId :: Lens' MeterUsageResponse (Maybe Text)
 mursMeteringRecordId = lens _mursMeteringRecordId (\ s a -> s{_mursMeteringRecordId = a})
 

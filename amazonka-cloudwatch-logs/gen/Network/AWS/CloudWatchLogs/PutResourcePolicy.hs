@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates a resource policy allowing other AWS services to put log events to this account, such as Amazon Route 53. An account can have up to 50 resource policies per region.
+-- Creates or updates a resource policy allowing other AWS services to put log events to this account, such as Amazon Route 53. An account can have up to 10 resource policies per region.
 --
 --
 module Network.AWS.CloudWatchLogs.PutResourcePolicy
@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putResourcePolicy' smart constructor.
-data PutResourcePolicy = PutResourcePolicy'
-  { _prpPolicyName     :: !(Maybe Text)
-  , _prpPolicyDocument :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutResourcePolicy = PutResourcePolicy'{_prpPolicyName
+                                            :: !(Maybe Text),
+                                            _prpPolicyDocument :: !(Maybe Text)}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutResourcePolicy' with the minimum fields required to make a request.
 --
@@ -58,18 +57,18 @@ data PutResourcePolicy = PutResourcePolicy'
 --
 -- * 'prpPolicyName' - Name of the new policy. This parameter is required.
 --
--- * 'prpPolicyDocument' - Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log group or log stream. { "Version": "2012-10-17" "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": logArn } ] }
+-- * 'prpPolicyDocument' - Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. This parameter is required. The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log group or log stream. @{ "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": "logArn" } ] } @ 
 putResourcePolicy
     :: PutResourcePolicy
-putResourcePolicy =
-  PutResourcePolicy' {_prpPolicyName = Nothing, _prpPolicyDocument = Nothing}
-
+putResourcePolicy
+  = PutResourcePolicy'{_prpPolicyName = Nothing,
+                       _prpPolicyDocument = Nothing}
 
 -- | Name of the new policy. This parameter is required.
 prpPolicyName :: Lens' PutResourcePolicy (Maybe Text)
 prpPolicyName = lens _prpPolicyName (\ s a -> s{_prpPolicyName = a})
 
--- | Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log group or log stream. { "Version": "2012-10-17" "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": logArn } ] }
+-- | Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. This parameter is required. The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log group or log stream. @{ "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": "logArn" } ] } @ 
 prpPolicyDocument :: Lens' PutResourcePolicy (Maybe Text)
 prpPolicyDocument = lens _prpPolicyDocument (\ s a -> s{_prpPolicyDocument = a})
 
@@ -109,11 +108,14 @@ instance ToQuery PutResourcePolicy where
         toQuery = const mempty
 
 -- | /See:/ 'putResourcePolicyResponse' smart constructor.
-data PutResourcePolicyResponse = PutResourcePolicyResponse'
-  { _prprsResourcePolicy :: !(Maybe ResourcePolicy)
-  , _prprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutResourcePolicyResponse = PutResourcePolicyResponse'{_prprsResourcePolicy
+                                                            ::
+                                                            !(Maybe
+                                                                ResourcePolicy),
+                                                            _prprsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'PutResourcePolicyResponse' with the minimum fields required to make a request.
 --
@@ -125,10 +127,10 @@ data PutResourcePolicyResponse = PutResourcePolicyResponse'
 putResourcePolicyResponse
     :: Int -- ^ 'prprsResponseStatus'
     -> PutResourcePolicyResponse
-putResourcePolicyResponse pResponseStatus_ =
-  PutResourcePolicyResponse'
-    {_prprsResourcePolicy = Nothing, _prprsResponseStatus = pResponseStatus_}
-
+putResourcePolicyResponse pResponseStatus_
+  = PutResourcePolicyResponse'{_prprsResourcePolicy =
+                                 Nothing,
+                               _prprsResponseStatus = pResponseStatus_}
 
 -- | The new policy.
 prprsResourcePolicy :: Lens' PutResourcePolicyResponse (Maybe ResourcePolicy)

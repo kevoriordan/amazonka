@@ -50,19 +50,19 @@ import Network.AWS.Transcribe.Types
 import Network.AWS.Transcribe.Types.Product
 
 -- | /See:/ 'listVocabularies' smart constructor.
-data ListVocabularies = ListVocabularies'
-  { _lvNameContains :: !(Maybe Text)
-  , _lvNextToken    :: !(Maybe Text)
-  , _lvStateEquals  :: !(Maybe VocabularyState)
-  , _lvMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVocabularies = ListVocabularies'{_lvNameContains
+                                          :: !(Maybe Text),
+                                          _lvNextToken :: !(Maybe Text),
+                                          _lvStateEquals ::
+                                          !(Maybe VocabularyState),
+                                          _lvMaxResults :: !(Maybe Nat)}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListVocabularies' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lvNameContains' - When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, @ListVocabularies@ will return both "vocabularyname" and "VocabularyName" in the response list.
+-- * 'lvNameContains' - When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, @ListVocabularies@ returns both "vocabularyname" and "VocabularyName" in the response list.
 --
 -- * 'lvNextToken' - If the result of the previous request to @ListVocabularies@ was truncated, include the @NextToken@ to fetch the next set of jobs.
 --
@@ -71,16 +71,12 @@ data ListVocabularies = ListVocabularies'
 -- * 'lvMaxResults' - The maximum number of vocabularies to return in the response. If there are fewer results in the list, this response contains only the actual results.
 listVocabularies
     :: ListVocabularies
-listVocabularies =
-  ListVocabularies'
-    { _lvNameContains = Nothing
-    , _lvNextToken = Nothing
-    , _lvStateEquals = Nothing
-    , _lvMaxResults = Nothing
-    }
+listVocabularies
+  = ListVocabularies'{_lvNameContains = Nothing,
+                      _lvNextToken = Nothing, _lvStateEquals = Nothing,
+                      _lvMaxResults = Nothing}
 
-
--- | When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, @ListVocabularies@ will return both "vocabularyname" and "VocabularyName" in the response list.
+-- | When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, @ListVocabularies@ returns both "vocabularyname" and "VocabularyName" in the response list.
 lvNameContains :: Lens' ListVocabularies (Maybe Text)
 lvNameContains = lens _lvNameContains (\ s a -> s{_lvNameContains = a})
 
@@ -137,13 +133,19 @@ instance ToQuery ListVocabularies where
         toQuery = const mempty
 
 -- | /See:/ 'listVocabulariesResponse' smart constructor.
-data ListVocabulariesResponse = ListVocabulariesResponse'
-  { _lvrsVocabularies   :: !(Maybe [VocabularyInfo])
-  , _lvrsStatus         :: !(Maybe TranscriptionJobStatus)
-  , _lvrsNextToken      :: !(Maybe Text)
-  , _lvrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListVocabulariesResponse = ListVocabulariesResponse'{_lvrsVocabularies
+                                                          ::
+                                                          !(Maybe
+                                                              [VocabularyInfo]),
+                                                          _lvrsStatus ::
+                                                          !(Maybe
+                                                              VocabularyState),
+                                                          _lvrsNextToken ::
+                                                          !(Maybe Text),
+                                                          _lvrsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'ListVocabulariesResponse' with the minimum fields required to make a request.
 --
@@ -159,21 +161,18 @@ data ListVocabulariesResponse = ListVocabulariesResponse'
 listVocabulariesResponse
     :: Int -- ^ 'lvrsResponseStatus'
     -> ListVocabulariesResponse
-listVocabulariesResponse pResponseStatus_ =
-  ListVocabulariesResponse'
-    { _lvrsVocabularies = Nothing
-    , _lvrsStatus = Nothing
-    , _lvrsNextToken = Nothing
-    , _lvrsResponseStatus = pResponseStatus_
-    }
-
+listVocabulariesResponse pResponseStatus_
+  = ListVocabulariesResponse'{_lvrsVocabularies =
+                                Nothing,
+                              _lvrsStatus = Nothing, _lvrsNextToken = Nothing,
+                              _lvrsResponseStatus = pResponseStatus_}
 
 -- | A list of objects that describe the vocabularies that match the search criteria in the request.
 lvrsVocabularies :: Lens' ListVocabulariesResponse [VocabularyInfo]
 lvrsVocabularies = lens _lvrsVocabularies (\ s a -> s{_lvrsVocabularies = a}) . _Default . _Coerce
 
 -- | The requested vocabulary state.
-lvrsStatus :: Lens' ListVocabulariesResponse (Maybe TranscriptionJobStatus)
+lvrsStatus :: Lens' ListVocabulariesResponse (Maybe VocabularyState)
 lvrsStatus = lens _lvrsStatus (\ s a -> s{_lvrsStatus = a})
 
 -- | The @ListVocabularies@ operation returns a page of vocabularies at a time. The maximum size of the page is set by the @MaxResults@ parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the @NextPage@ token. Include the token in the next request to the @ListVocabularies@ operation to return in the next page of jobs.

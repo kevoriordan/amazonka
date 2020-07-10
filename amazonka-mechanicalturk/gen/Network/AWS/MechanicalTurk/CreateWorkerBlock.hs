@@ -45,11 +45,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'createWorkerBlock' smart constructor.
-data CreateWorkerBlock = CreateWorkerBlock'
-  { _cwbWorkerId :: !Text
-  , _cwbReason   :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateWorkerBlock = CreateWorkerBlock'{_cwbWorkerId
+                                            :: !Text,
+                                            _cwbReason :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateWorkerBlock' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ createWorkerBlock
     :: Text -- ^ 'cwbWorkerId'
     -> Text -- ^ 'cwbReason'
     -> CreateWorkerBlock
-createWorkerBlock pWorkerId_ pReason_ =
-  CreateWorkerBlock' {_cwbWorkerId = pWorkerId_, _cwbReason = pReason_}
-
+createWorkerBlock pWorkerId_ pReason_
+  = CreateWorkerBlock'{_cwbWorkerId = pWorkerId_,
+                       _cwbReason = pReason_}
 
 -- | The ID of the Worker to block.
 cwbWorkerId :: Lens' CreateWorkerBlock Text
@@ -110,10 +109,10 @@ instance ToQuery CreateWorkerBlock where
         toQuery = const mempty
 
 -- | /See:/ 'createWorkerBlockResponse' smart constructor.
-newtype CreateWorkerBlockResponse = CreateWorkerBlockResponse'
-  { _cwbrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype CreateWorkerBlockResponse = CreateWorkerBlockResponse'{_cwbrsResponseStatus
+                                                               :: Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'CreateWorkerBlockResponse' with the minimum fields required to make a request.
 --
@@ -123,9 +122,9 @@ newtype CreateWorkerBlockResponse = CreateWorkerBlockResponse'
 createWorkerBlockResponse
     :: Int -- ^ 'cwbrsResponseStatus'
     -> CreateWorkerBlockResponse
-createWorkerBlockResponse pResponseStatus_ =
-  CreateWorkerBlockResponse' {_cwbrsResponseStatus = pResponseStatus_}
-
+createWorkerBlockResponse pResponseStatus_
+  = CreateWorkerBlockResponse'{_cwbrsResponseStatus =
+                                 pResponseStatus_}
 
 -- | -- | The response status code.
 cwbrsResponseStatus :: Lens' CreateWorkerBlockResponse Int

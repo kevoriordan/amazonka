@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of device definitions.
+--
+-- This operation returns paginated results.
 module Network.AWS.Greengrass.ListDeviceDefinitions
     (
     -- * Creating a Request
@@ -40,16 +42,18 @@ module Network.AWS.Greengrass.ListDeviceDefinitions
 import Network.AWS.Greengrass.Types
 import Network.AWS.Greengrass.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listDeviceDefinitions' smart constructor.
-data ListDeviceDefinitions = ListDeviceDefinitions'
-  { _lddNextToken  :: !(Maybe Text)
-  , _lddMaxResults :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDeviceDefinitions = ListDeviceDefinitions'{_lddNextToken
+                                                    :: !(Maybe Text),
+                                                    _lddMaxResults ::
+                                                    !(Maybe Text)}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListDeviceDefinitions' with the minimum fields required to make a request.
 --
@@ -60,9 +64,9 @@ data ListDeviceDefinitions = ListDeviceDefinitions'
 -- * 'lddMaxResults' - The maximum number of results to be returned per request.
 listDeviceDefinitions
     :: ListDeviceDefinitions
-listDeviceDefinitions =
-  ListDeviceDefinitions' {_lddNextToken = Nothing, _lddMaxResults = Nothing}
-
+listDeviceDefinitions
+  = ListDeviceDefinitions'{_lddNextToken = Nothing,
+                           _lddMaxResults = Nothing}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lddNextToken :: Lens' ListDeviceDefinitions (Maybe Text)
@@ -71,6 +75,13 @@ lddNextToken = lens _lddNextToken (\ s a -> s{_lddNextToken = a})
 -- | The maximum number of results to be returned per request.
 lddMaxResults :: Lens' ListDeviceDefinitions (Maybe Text)
 lddMaxResults = lens _lddMaxResults (\ s a -> s{_lddMaxResults = a})
+
+instance AWSPager ListDeviceDefinitions where
+        page rq rs
+          | stop (rs ^. lddrsNextToken) = Nothing
+          | stop (rs ^. lddrsDefinitions) = Nothing
+          | otherwise =
+            Just $ rq & lddNextToken .~ rs ^. lddrsNextToken
 
 instance AWSRequest ListDeviceDefinitions where
         type Rs ListDeviceDefinitions =
@@ -105,12 +116,18 @@ instance ToQuery ListDeviceDefinitions where
                "MaxResults" =: _lddMaxResults]
 
 -- | /See:/ 'listDeviceDefinitionsResponse' smart constructor.
-data ListDeviceDefinitionsResponse = ListDeviceDefinitionsResponse'
-  { _lddrsNextToken      :: !(Maybe Text)
-  , _lddrsDefinitions    :: !(Maybe [DefinitionInformation])
-  , _lddrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListDeviceDefinitionsResponse = ListDeviceDefinitionsResponse'{_lddrsNextToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _lddrsDefinitions
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [DefinitionInformation]),
+                                                                    _lddrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ListDeviceDefinitionsResponse' with the minimum fields required to make a request.
 --
@@ -124,13 +141,11 @@ data ListDeviceDefinitionsResponse = ListDeviceDefinitionsResponse'
 listDeviceDefinitionsResponse
     :: Int -- ^ 'lddrsResponseStatus'
     -> ListDeviceDefinitionsResponse
-listDeviceDefinitionsResponse pResponseStatus_ =
-  ListDeviceDefinitionsResponse'
-    { _lddrsNextToken = Nothing
-    , _lddrsDefinitions = Nothing
-    , _lddrsResponseStatus = pResponseStatus_
-    }
-
+listDeviceDefinitionsResponse pResponseStatus_
+  = ListDeviceDefinitionsResponse'{_lddrsNextToken =
+                                     Nothing,
+                                   _lddrsDefinitions = Nothing,
+                                   _lddrsResponseStatus = pResponseStatus_}
 
 -- | The token for the next set of results, or ''null'' if there are no additional results.
 lddrsNextToken :: Lens' ListDeviceDefinitionsResponse (Maybe Text)

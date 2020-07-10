@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'grantAccess' smart constructor.
-data GrantAccess = GrantAccess'
-  { _gaValidForInMinutes :: !(Maybe Nat)
-  , _gaInstanceId        :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GrantAccess = GrantAccess'{_gaValidForInMinutes
+                                :: !(Maybe Nat),
+                                _gaInstanceId :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GrantAccess' with the minimum fields required to make a request.
 --
@@ -62,9 +61,9 @@ data GrantAccess = GrantAccess'
 grantAccess
     :: Text -- ^ 'gaInstanceId'
     -> GrantAccess
-grantAccess pInstanceId_ =
-  GrantAccess' {_gaValidForInMinutes = Nothing, _gaInstanceId = pInstanceId_}
-
+grantAccess pInstanceId_
+  = GrantAccess'{_gaValidForInMinutes = Nothing,
+                 _gaInstanceId = pInstanceId_}
 
 -- | The length of time (in minutes) that the grant is valid. When the grant expires at the end of this period, the user will no longer be able to use the credentials to log in. If the user is logged in at the time, he or she automatically will be logged out.
 gaValidForInMinutes :: Lens' GrantAccess (Maybe Natural)
@@ -115,11 +114,10 @@ instance ToQuery GrantAccess where
 --
 --
 -- /See:/ 'grantAccessResponse' smart constructor.
-data GrantAccessResponse = GrantAccessResponse'
-  { _garsTemporaryCredential :: !(Maybe TemporaryCredential)
-  , _garsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GrantAccessResponse = GrantAccessResponse'{_garsTemporaryCredential
+                                                :: !(Maybe TemporaryCredential),
+                                                _garsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GrantAccessResponse' with the minimum fields required to make a request.
 --
@@ -131,10 +129,10 @@ data GrantAccessResponse = GrantAccessResponse'
 grantAccessResponse
     :: Int -- ^ 'garsResponseStatus'
     -> GrantAccessResponse
-grantAccessResponse pResponseStatus_ =
-  GrantAccessResponse'
-    {_garsTemporaryCredential = Nothing, _garsResponseStatus = pResponseStatus_}
-
+grantAccessResponse pResponseStatus_
+  = GrantAccessResponse'{_garsTemporaryCredential =
+                           Nothing,
+                         _garsResponseStatus = pResponseStatus_}
 
 -- | A @TemporaryCredential@ object that contains the data needed to log in to the instance by RDP clients, such as the Microsoft Remote Desktop Connection.
 garsTemporaryCredential :: Lens' GrantAccessResponse (Maybe TemporaryCredential)

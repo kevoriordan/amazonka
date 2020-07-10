@@ -51,12 +51,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listFacetNames' smart constructor.
-data ListFacetNames = ListFacetNames'
-  { _lfnNextToken  :: !(Maybe Text)
-  , _lfnMaxResults :: !(Maybe Nat)
-  , _lfnSchemaARN  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFacetNames = ListFacetNames'{_lfnNextToken
+                                      :: !(Maybe Text),
+                                      _lfnMaxResults :: !(Maybe Nat),
+                                      _lfnSchemaARN :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListFacetNames' with the minimum fields required to make a request.
 --
@@ -70,13 +69,10 @@ data ListFacetNames = ListFacetNames'
 listFacetNames
     :: Text -- ^ 'lfnSchemaARN'
     -> ListFacetNames
-listFacetNames pSchemaARN_ =
-  ListFacetNames'
-    { _lfnNextToken = Nothing
-    , _lfnMaxResults = Nothing
-    , _lfnSchemaARN = pSchemaARN_
-    }
-
+listFacetNames pSchemaARN_
+  = ListFacetNames'{_lfnNextToken = Nothing,
+                    _lfnMaxResults = Nothing,
+                    _lfnSchemaARN = pSchemaARN_}
 
 -- | The pagination token.
 lfnNextToken :: Lens' ListFacetNames (Maybe Text)
@@ -131,12 +127,14 @@ instance ToQuery ListFacetNames where
         toQuery = const mempty
 
 -- | /See:/ 'listFacetNamesResponse' smart constructor.
-data ListFacetNamesResponse = ListFacetNamesResponse'
-  { _lfnrsNextToken      :: !(Maybe Text)
-  , _lfnrsFacetNames     :: !(Maybe [Text])
-  , _lfnrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListFacetNamesResponse = ListFacetNamesResponse'{_lfnrsNextToken
+                                                      :: !(Maybe Text),
+                                                      _lfnrsFacetNames ::
+                                                      !(Maybe [Text]),
+                                                      _lfnrsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListFacetNamesResponse' with the minimum fields required to make a request.
 --
@@ -150,13 +148,10 @@ data ListFacetNamesResponse = ListFacetNamesResponse'
 listFacetNamesResponse
     :: Int -- ^ 'lfnrsResponseStatus'
     -> ListFacetNamesResponse
-listFacetNamesResponse pResponseStatus_ =
-  ListFacetNamesResponse'
-    { _lfnrsNextToken = Nothing
-    , _lfnrsFacetNames = Nothing
-    , _lfnrsResponseStatus = pResponseStatus_
-    }
-
+listFacetNamesResponse pResponseStatus_
+  = ListFacetNamesResponse'{_lfnrsNextToken = Nothing,
+                            _lfnrsFacetNames = Nothing,
+                            _lfnrsResponseStatus = pResponseStatus_}
 
 -- | The pagination token.
 lfnrsNextToken :: Lens' ListFacetNamesResponse (Maybe Text)

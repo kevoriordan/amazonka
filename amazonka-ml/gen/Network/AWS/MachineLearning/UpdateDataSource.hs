@@ -48,11 +48,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDataSource' smart constructor.
-data UpdateDataSource = UpdateDataSource'
-  { _udsDataSourceId   :: !Text
-  , _udsDataSourceName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDataSource = UpdateDataSource'{_udsDataSourceId
+                                          :: !Text,
+                                          _udsDataSourceName :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDataSource' with the minimum fields required to make a request.
 --
@@ -60,21 +59,21 @@ data UpdateDataSource = UpdateDataSource'
 --
 -- * 'udsDataSourceId' - The ID assigned to the @DataSource@ during creation.
 --
--- * 'udsDataSourceName' - A new user-supplied name or description of the @DataSource@ that will replace the current description.
+-- * 'udsDataSourceName' - A new user-supplied name or description of the @DataSource@ that will replace the current description. 
 updateDataSource
     :: Text -- ^ 'udsDataSourceId'
     -> Text -- ^ 'udsDataSourceName'
     -> UpdateDataSource
-updateDataSource pDataSourceId_ pDataSourceName_ =
-  UpdateDataSource'
-    {_udsDataSourceId = pDataSourceId_, _udsDataSourceName = pDataSourceName_}
-
+updateDataSource pDataSourceId_ pDataSourceName_
+  = UpdateDataSource'{_udsDataSourceId =
+                        pDataSourceId_,
+                      _udsDataSourceName = pDataSourceName_}
 
 -- | The ID assigned to the @DataSource@ during creation.
 udsDataSourceId :: Lens' UpdateDataSource Text
 udsDataSourceId = lens _udsDataSourceId (\ s a -> s{_udsDataSourceId = a})
 
--- | A new user-supplied name or description of the @DataSource@ that will replace the current description.
+-- | A new user-supplied name or description of the @DataSource@ that will replace the current description. 
 udsDataSourceName :: Lens' UpdateDataSource Text
 udsDataSourceName = lens _udsDataSourceName (\ s a -> s{_udsDataSourceName = a})
 
@@ -120,11 +119,12 @@ instance ToQuery UpdateDataSource where
 --
 --
 -- /See:/ 'updateDataSourceResponse' smart constructor.
-data UpdateDataSourceResponse = UpdateDataSourceResponse'
-  { _udsrsDataSourceId   :: !(Maybe Text)
-  , _udsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateDataSourceResponse = UpdateDataSourceResponse'{_udsrsDataSourceId
+                                                          :: !(Maybe Text),
+                                                          _udsrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateDataSourceResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +136,10 @@ data UpdateDataSourceResponse = UpdateDataSourceResponse'
 updateDataSourceResponse
     :: Int -- ^ 'udsrsResponseStatus'
     -> UpdateDataSourceResponse
-updateDataSourceResponse pResponseStatus_ =
-  UpdateDataSourceResponse'
-    {_udsrsDataSourceId = Nothing, _udsrsResponseStatus = pResponseStatus_}
-
+updateDataSourceResponse pResponseStatus_
+  = UpdateDataSourceResponse'{_udsrsDataSourceId =
+                                Nothing,
+                              _udsrsResponseStatus = pResponseStatus_}
 
 -- | The ID assigned to the @DataSource@ during creation. This value should be identical to the value of the @DataSourceID@ in the request.
 udsrsDataSourceId :: Lens' UpdateDataSourceResponse (Maybe Text)

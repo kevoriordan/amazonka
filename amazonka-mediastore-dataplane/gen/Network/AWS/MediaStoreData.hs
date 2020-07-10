@@ -22,17 +22,17 @@ module Network.AWS.MediaStoreData
     -- * Errors
     -- $errors
 
-    -- ** RequestedRangeNotSatisfiableException
-    , _RequestedRangeNotSatisfiableException
-
-    -- ** InternalServerError
-    , _InternalServerError
-
     -- ** ContainerNotFoundException
     , _ContainerNotFoundException
 
     -- ** ObjectNotFoundException
     , _ObjectNotFoundException
+
+    -- ** InternalServerError
+    , _InternalServerError
+
+    -- ** RequestedRangeNotSatisfiableException
+    , _RequestedRangeNotSatisfiableException
 
     -- * Waiters
     -- $waiters
@@ -40,19 +40,19 @@ module Network.AWS.MediaStoreData
     -- * Operations
     -- $operations
 
-    -- ** PutObject
+    -- ** PutObject 
     , module Network.AWS.MediaStoreData.PutObject
 
-    -- ** DeleteObject
+    -- ** DeleteObject 
     , module Network.AWS.MediaStoreData.DeleteObject
 
-    -- ** DescribeObject
+    -- ** DescribeObject 
     , module Network.AWS.MediaStoreData.DescribeObject
 
-    -- ** GetObject
+    -- ** GetObject 
     , module Network.AWS.MediaStoreData.GetObject
 
-    -- ** ListItems
+    -- ** ListItems (Paginated)
     , module Network.AWS.MediaStoreData.ListItems
 
     -- * Types
@@ -62,6 +62,9 @@ module Network.AWS.MediaStoreData
 
     -- ** StorageClass
     , StorageClass (..)
+
+    -- ** UploadAvailability
+    , UploadAvailability (..)
 
     -- ** Item
     , Item

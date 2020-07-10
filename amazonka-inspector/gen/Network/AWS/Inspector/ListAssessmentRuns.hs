@@ -52,13 +52,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listAssessmentRuns' smart constructor.
-data ListAssessmentRuns = ListAssessmentRuns'
-  { _larNextToken              :: !(Maybe Text)
-  , _larFilter                 :: !(Maybe AssessmentRunFilter)
-  , _larAssessmentTemplateARNs :: !(Maybe [Text])
-  , _larMaxResults             :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssessmentRuns = ListAssessmentRuns'{_larNextToken
+                                              :: !(Maybe Text),
+                                              _larFilter ::
+                                              !(Maybe AssessmentRunFilter),
+                                              _larAssessmentTemplateARNs ::
+                                              !(Maybe [Text]),
+                                              _larMaxResults :: !(Maybe Int)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListAssessmentRuns' with the minimum fields required to make a request.
 --
@@ -73,14 +74,11 @@ data ListAssessmentRuns = ListAssessmentRuns'
 -- * 'larMaxResults' - You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 10. The maximum value is 500.
 listAssessmentRuns
     :: ListAssessmentRuns
-listAssessmentRuns =
-  ListAssessmentRuns'
-    { _larNextToken = Nothing
-    , _larFilter = Nothing
-    , _larAssessmentTemplateARNs = Nothing
-    , _larMaxResults = Nothing
-    }
-
+listAssessmentRuns
+  = ListAssessmentRuns'{_larNextToken = Nothing,
+                        _larFilter = Nothing,
+                        _larAssessmentTemplateARNs = Nothing,
+                        _larMaxResults = Nothing}
 
 -- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the __ListAssessmentRuns__ action. Subsequent calls to the action fill __nextToken__ in the request with the value of __NextToken__ from the previous response to continue listing data.
 larNextToken :: Lens' ListAssessmentRuns (Maybe Text)
@@ -147,12 +145,14 @@ instance ToQuery ListAssessmentRuns where
         toQuery = const mempty
 
 -- | /See:/ 'listAssessmentRunsResponse' smart constructor.
-data ListAssessmentRunsResponse = ListAssessmentRunsResponse'
-  { _larrsNextToken         :: !(Maybe Text)
-  , _larrsResponseStatus    :: !Int
-  , _larrsAssessmentRunARNs :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListAssessmentRunsResponse = ListAssessmentRunsResponse'{_larrsNextToken
+                                                              :: !(Maybe Text),
+                                                              _larrsResponseStatus
+                                                              :: !Int,
+                                                              _larrsAssessmentRunARNs
+                                                              :: ![Text]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'ListAssessmentRunsResponse' with the minimum fields required to make a request.
 --
@@ -166,13 +166,11 @@ data ListAssessmentRunsResponse = ListAssessmentRunsResponse'
 listAssessmentRunsResponse
     :: Int -- ^ 'larrsResponseStatus'
     -> ListAssessmentRunsResponse
-listAssessmentRunsResponse pResponseStatus_ =
-  ListAssessmentRunsResponse'
-    { _larrsNextToken = Nothing
-    , _larrsResponseStatus = pResponseStatus_
-    , _larrsAssessmentRunARNs = mempty
-    }
-
+listAssessmentRunsResponse pResponseStatus_
+  = ListAssessmentRunsResponse'{_larrsNextToken =
+                                  Nothing,
+                                _larrsResponseStatus = pResponseStatus_,
+                                _larrsAssessmentRunARNs = mempty}
 
 -- | When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the __nextToken__ parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.
 larrsNextToken :: Lens' ListAssessmentRunsResponse (Maybe Text)

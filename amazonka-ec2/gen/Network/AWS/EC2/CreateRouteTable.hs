@@ -21,7 +21,7 @@
 -- Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet.
 --
 --
--- For more information about route tables, see <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html Route Tables> in the /Amazon Virtual Private Cloud User Guide/ .
+-- For more information, see <https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html Route Tables> in the /Amazon Virtual Private Cloud User Guide/ .
 --
 module Network.AWS.EC2.CreateRouteTable
     (
@@ -47,16 +47,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for CreateRouteTable.
---
---
---
--- /See:/ 'createRouteTable' smart constructor.
-data CreateRouteTable = CreateRouteTable'
-  { _crtDryRun :: !(Maybe Bool)
-  , _crtVPCId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createRouteTable' smart constructor.
+data CreateRouteTable = CreateRouteTable'{_crtDryRun
+                                          :: !(Maybe Bool),
+                                          _crtVPCId :: !Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateRouteTable' with the minimum fields required to make a request.
 --
@@ -68,9 +63,9 @@ data CreateRouteTable = CreateRouteTable'
 createRouteTable
     :: Text -- ^ 'crtVPCId'
     -> CreateRouteTable
-createRouteTable pVPCId_ =
-  CreateRouteTable' {_crtDryRun = Nothing, _crtVPCId = pVPCId_}
-
+createRouteTable pVPCId_
+  = CreateRouteTable'{_crtDryRun = Nothing,
+                      _crtVPCId = pVPCId_}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 crtDryRun :: Lens' CreateRouteTable (Maybe Bool)
@@ -106,16 +101,14 @@ instance ToQuery CreateRouteTable where
                "Version" =: ("2016-11-15" :: ByteString),
                "DryRun" =: _crtDryRun, "VpcId" =: _crtVPCId]
 
--- | Contains the output of CreateRouteTable.
---
---
---
--- /See:/ 'createRouteTableResponse' smart constructor.
-data CreateRouteTableResponse = CreateRouteTableResponse'
-  { _crtrsRouteTable     :: !(Maybe RouteTable)
-  , _crtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'createRouteTableResponse' smart constructor.
+data CreateRouteTableResponse = CreateRouteTableResponse'{_crtrsRouteTable
+                                                          ::
+                                                          !(Maybe RouteTable),
+                                                          _crtrsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'CreateRouteTableResponse' with the minimum fields required to make a request.
 --
@@ -127,10 +120,10 @@ data CreateRouteTableResponse = CreateRouteTableResponse'
 createRouteTableResponse
     :: Int -- ^ 'crtrsResponseStatus'
     -> CreateRouteTableResponse
-createRouteTableResponse pResponseStatus_ =
-  CreateRouteTableResponse'
-    {_crtrsRouteTable = Nothing, _crtrsResponseStatus = pResponseStatus_}
-
+createRouteTableResponse pResponseStatus_
+  = CreateRouteTableResponse'{_crtrsRouteTable =
+                                Nothing,
+                              _crtrsResponseStatus = pResponseStatus_}
 
 -- | Information about the route table.
 crtrsRouteTable :: Lens' CreateRouteTableResponse (Maybe RouteTable)

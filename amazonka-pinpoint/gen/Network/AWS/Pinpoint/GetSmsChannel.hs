@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get an SMS channel
+-- Retrieves information about the status and settings of the SMS channel for an application.
+--
+--
 module Network.AWS.Pinpoint.GetSmsChannel
     (
     -- * Creating a Request
@@ -43,24 +45,22 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getSmsChannel' smart constructor.
-newtype GetSmsChannel = GetSmsChannel'
-  { _gscApplicationId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetSmsChannel = GetSmsChannel'{_gscApplicationId
+                                       :: Text}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSmsChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gscApplicationId' - Undocumented member.
+-- * 'gscApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 getSmsChannel
     :: Text -- ^ 'gscApplicationId'
     -> GetSmsChannel
-getSmsChannel pApplicationId_ =
-  GetSmsChannel' {_gscApplicationId = pApplicationId_}
+getSmsChannel pApplicationId_
+  = GetSmsChannel'{_gscApplicationId = pApplicationId_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 gscApplicationId :: Lens' GetSmsChannel Text
 gscApplicationId = lens _gscApplicationId (\ s a -> s{_gscApplicationId = a})
 
@@ -94,11 +94,12 @@ instance ToQuery GetSmsChannel where
         toQuery = const mempty
 
 -- | /See:/ 'getSmsChannelResponse' smart constructor.
-data GetSmsChannelResponse = GetSmsChannelResponse'
-  { _gscrsResponseStatus     :: !Int
-  , _gscrsSMSChannelResponse :: !SMSChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSmsChannelResponse = GetSmsChannelResponse'{_gscrsResponseStatus
+                                                    :: !Int,
+                                                    _gscrsSMSChannelResponse ::
+                                                    !SMSChannelResponse}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetSmsChannelResponse' with the minimum fields required to make a request.
 --
@@ -111,12 +112,11 @@ getSmsChannelResponse
     :: Int -- ^ 'gscrsResponseStatus'
     -> SMSChannelResponse -- ^ 'gscrsSMSChannelResponse'
     -> GetSmsChannelResponse
-getSmsChannelResponse pResponseStatus_ pSMSChannelResponse_ =
-  GetSmsChannelResponse'
-    { _gscrsResponseStatus = pResponseStatus_
-    , _gscrsSMSChannelResponse = pSMSChannelResponse_
-    }
-
+getSmsChannelResponse pResponseStatus_
+  pSMSChannelResponse_
+  = GetSmsChannelResponse'{_gscrsResponseStatus =
+                             pResponseStatus_,
+                           _gscrsSMSChannelResponse = pSMSChannelResponse_}
 
 -- | -- | The response status code.
 gscrsResponseStatus :: Lens' GetSmsChannelResponse Int

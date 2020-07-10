@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'setTagsForResource' smart constructor.
-data SetTagsForResource = SetTagsForResource'
-  { _stfrTags        :: !(Maybe [Tag])
-  , _stfrResourceARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetTagsForResource = SetTagsForResource'{_stfrTags
+                                              :: !(Maybe [Tag]),
+                                              _stfrResourceARN :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SetTagsForResource' with the minimum fields required to make a request.
 --
@@ -59,9 +58,9 @@ data SetTagsForResource = SetTagsForResource'
 setTagsForResource
     :: Text -- ^ 'stfrResourceARN'
     -> SetTagsForResource
-setTagsForResource pResourceARN_ =
-  SetTagsForResource' {_stfrTags = Nothing, _stfrResourceARN = pResourceARN_}
-
+setTagsForResource pResourceARN_
+  = SetTagsForResource'{_stfrTags = Nothing,
+                        _stfrResourceARN = pResourceARN_}
 
 -- | A collection of key and value pairs that you want to set to the assessment template.
 stfrTags :: Lens' SetTagsForResource [Tag]
@@ -105,16 +104,15 @@ instance ToQuery SetTagsForResource where
         toQuery = const mempty
 
 -- | /See:/ 'setTagsForResourceResponse' smart constructor.
-data SetTagsForResourceResponse =
-  SetTagsForResourceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SetTagsForResourceResponse = SetTagsForResourceResponse'
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'SetTagsForResourceResponse' with the minimum fields required to make a request.
 --
 setTagsForResourceResponse
     :: SetTagsForResourceResponse
-setTagsForResourceResponse = SetTagsForResourceResponse'
-
+setTagsForResourceResponse
+  = SetTagsForResourceResponse'
 
 instance NFData SetTagsForResourceResponse where

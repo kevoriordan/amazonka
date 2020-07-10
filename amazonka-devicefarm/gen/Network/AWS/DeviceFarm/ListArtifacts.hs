@@ -55,12 +55,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listArtifacts' smart constructor.
-data ListArtifacts = ListArtifacts'
-  { _laNextToken :: !(Maybe Text)
-  , _laArn       :: !Text
-  , _laType      :: !ArtifactCategory
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListArtifacts = ListArtifacts'{_laNextToken ::
+                                    !(Maybe Text),
+                                    _laArn :: !Text,
+                                    _laType :: !ArtifactCategory}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListArtifacts' with the minimum fields required to make a request.
 --
@@ -68,26 +67,26 @@ data ListArtifacts = ListArtifacts'
 --
 -- * 'laNextToken' - An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 --
--- * 'laArn' - The Run, Job, Suite, or Test ARN.
+-- * 'laArn' - The run, job, suite, or test ARN.
 --
--- * 'laType' - The artifacts' type. Allowed values include:     * FILE: The artifacts are files.     * LOG: The artifacts are logs.     * SCREENSHOT: The artifacts are screenshots.
+-- * 'laType' - The artifacts' type. Allowed values include:     * FILE     * LOG     * SCREENSHOT
 listArtifacts
     :: Text -- ^ 'laArn'
     -> ArtifactCategory -- ^ 'laType'
     -> ListArtifacts
-listArtifacts pArn_ pType_ =
-  ListArtifacts' {_laNextToken = Nothing, _laArn = pArn_, _laType = pType_}
-
+listArtifacts pArn_ pType_
+  = ListArtifacts'{_laNextToken = Nothing,
+                   _laArn = pArn_, _laType = pType_}
 
 -- | An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
 laNextToken :: Lens' ListArtifacts (Maybe Text)
 laNextToken = lens _laNextToken (\ s a -> s{_laNextToken = a})
 
--- | The Run, Job, Suite, or Test ARN.
+-- | The run, job, suite, or test ARN.
 laArn :: Lens' ListArtifacts Text
 laArn = lens _laArn (\ s a -> s{_laArn = a})
 
--- | The artifacts' type. Allowed values include:     * FILE: The artifacts are files.     * LOG: The artifacts are logs.     * SCREENSHOT: The artifacts are screenshots.
+-- | The artifacts' type. Allowed values include:     * FILE     * LOG     * SCREENSHOT
 laType :: Lens' ListArtifacts ArtifactCategory
 laType = lens _laType (\ s a -> s{_laType = a})
 
@@ -140,12 +139,13 @@ instance ToQuery ListArtifacts where
 --
 --
 -- /See:/ 'listArtifactsResponse' smart constructor.
-data ListArtifactsResponse = ListArtifactsResponse'
-  { _larsArtifacts      :: !(Maybe [Artifact])
-  , _larsNextToken      :: !(Maybe Text)
-  , _larsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListArtifactsResponse = ListArtifactsResponse'{_larsArtifacts
+                                                    :: !(Maybe [Artifact]),
+                                                    _larsNextToken ::
+                                                    !(Maybe Text),
+                                                    _larsResponseStatus :: !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ListArtifactsResponse' with the minimum fields required to make a request.
 --
@@ -153,25 +153,22 @@ data ListArtifactsResponse = ListArtifactsResponse'
 --
 -- * 'larsArtifacts' - Information about the artifacts.
 --
--- * 'larsNextToken' - If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+-- * 'larsNextToken' - If the number of items that are returned is significantly large, this is an identifier that is also returned. It can be used in a subsequent call to this operation to return the next set of items in the list.
 --
 -- * 'larsResponseStatus' - -- | The response status code.
 listArtifactsResponse
     :: Int -- ^ 'larsResponseStatus'
     -> ListArtifactsResponse
-listArtifactsResponse pResponseStatus_ =
-  ListArtifactsResponse'
-    { _larsArtifacts = Nothing
-    , _larsNextToken = Nothing
-    , _larsResponseStatus = pResponseStatus_
-    }
-
+listArtifactsResponse pResponseStatus_
+  = ListArtifactsResponse'{_larsArtifacts = Nothing,
+                           _larsNextToken = Nothing,
+                           _larsResponseStatus = pResponseStatus_}
 
 -- | Information about the artifacts.
 larsArtifacts :: Lens' ListArtifactsResponse [Artifact]
 larsArtifacts = lens _larsArtifacts (\ s a -> s{_larsArtifacts = a}) . _Default . _Coerce
 
--- | If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+-- | If the number of items that are returned is significantly large, this is an identifier that is also returned. It can be used in a subsequent call to this operation to return the next set of items in the list.
 larsNextToken :: Lens' ListArtifactsResponse (Maybe Text)
 larsNextToken = lens _larsNextToken (\ s a -> s{_larsNextToken = a})
 

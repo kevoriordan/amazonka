@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables single sign-on for a directory.
+-- Enables single sign-on for a directory. Single sign-on allows users in your directory to access certain AWS services from a computer joined to the directory without having to enter their credentials separately.
 --
 --
 module Network.AWS.DirectoryService.EnableSSO
@@ -50,12 +50,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'enableSSO' smart constructor.
-data EnableSSO = EnableSSO'
-  { _esUserName    :: !(Maybe Text)
-  , _esPassword    :: !(Maybe (Sensitive Text))
-  , _esDirectoryId :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data EnableSSO = EnableSSO'{_esUserName ::
+                            !(Maybe Text),
+                            _esPassword :: !(Maybe (Sensitive Text)),
+                            _esDirectoryId :: !Text}
+                   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableSSO' with the minimum fields required to make a request.
 --
@@ -69,13 +68,10 @@ data EnableSSO = EnableSSO'
 enableSSO
     :: Text -- ^ 'esDirectoryId'
     -> EnableSSO
-enableSSO pDirectoryId_ =
-  EnableSSO'
-    { _esUserName = Nothing
-    , _esPassword = Nothing
-    , _esDirectoryId = pDirectoryId_
-    }
-
+enableSSO pDirectoryId_
+  = EnableSSO'{_esUserName = Nothing,
+               _esPassword = Nothing,
+               _esDirectoryId = pDirectoryId_}
 
 -- | The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principal name. If the AD Connector service account does not have privileges to add a service principal name, you can specify an alternate account with the /UserName/ and /Password/ parameters. These credentials are only used to enable single sign-on and are not stored by the service. The AD Connector service account is not changed.
 esUserName :: Lens' EnableSSO (Maybe Text)
@@ -130,10 +126,9 @@ instance ToQuery EnableSSO where
 --
 --
 -- /See:/ 'enableSSOResponse' smart constructor.
-newtype EnableSSOResponse = EnableSSOResponse'
-  { _esrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype EnableSSOResponse = EnableSSOResponse'{_esrsResponseStatus
+                                               :: Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'EnableSSOResponse' with the minimum fields required to make a request.
 --
@@ -143,9 +138,9 @@ newtype EnableSSOResponse = EnableSSOResponse'
 enableSSOResponse
     :: Int -- ^ 'esrsResponseStatus'
     -> EnableSSOResponse
-enableSSOResponse pResponseStatus_ =
-  EnableSSOResponse' {_esrsResponseStatus = pResponseStatus_}
-
+enableSSOResponse pResponseStatus_
+  = EnableSSOResponse'{_esrsResponseStatus =
+                         pResponseStatus_}
 
 -- | -- | The response status code.
 esrsResponseStatus :: Lens' EnableSSOResponse Int

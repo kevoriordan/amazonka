@@ -32,14 +32,18 @@ module Network.AWS.MediaLive.StartChannel
     , StartChannelResponse
     -- * Response Lenses
     , scrsState
+    , scrsLogLevel
     , scrsARN
     , scrsPipelinesRunningCount
+    , scrsPipelineDetails
     , scrsInputSpecification
     , scrsInputAttachments
     , scrsDestinations
     , scrsName
     , scrsId
+    , scrsChannelClass
     , scrsEgressEndpoints
+    , scrsTags
     , scrsEncoderSettings
     , scrsRoleARN
     , scrsResponseStatus
@@ -55,10 +59,9 @@ import Network.AWS.Response
 -- | Placeholder documentation for StartChannelRequest
 --
 -- /See:/ 'startChannel' smart constructor.
-newtype StartChannel = StartChannel'
-  { _scChannelId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StartChannel = StartChannel'{_scChannelId ::
+                                     Text}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartChannel' with the minimum fields required to make a request.
 --
@@ -68,8 +71,8 @@ newtype StartChannel = StartChannel'
 startChannel
     :: Text -- ^ 'scChannelId'
     -> StartChannel
-startChannel pChannelId_ = StartChannel' {_scChannelId = pChannelId_}
-
+startChannel pChannelId_
+  = StartChannel'{_scChannelId = pChannelId_}
 
 -- | A request to start a channel
 scChannelId :: Lens' StartChannel Text
@@ -82,14 +85,18 @@ instance AWSRequest StartChannel where
           = receiveJSON
               (\ s h x ->
                  StartChannelResponse' <$>
-                   (x .?> "state") <*> (x .?> "arn") <*>
-                     (x .?> "pipelinesRunningCount")
+                   (x .?> "state") <*> (x .?> "logLevel") <*>
+                     (x .?> "arn")
+                     <*> (x .?> "pipelinesRunningCount")
+                     <*> (x .?> "pipelineDetails" .!@ mempty)
                      <*> (x .?> "inputSpecification")
                      <*> (x .?> "inputAttachments" .!@ mempty)
                      <*> (x .?> "destinations" .!@ mempty)
                      <*> (x .?> "name")
                      <*> (x .?> "id")
+                     <*> (x .?> "channelClass")
                      <*> (x .?> "egressEndpoints" .!@ mempty)
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (x .?> "encoderSettings")
                      <*> (x .?> "roleArn")
                      <*> (pure (fromEnum s)))
@@ -119,21 +126,35 @@ instance ToQuery StartChannel where
 -- | Placeholder documentation for StartChannelResponse
 --
 -- /See:/ 'startChannelResponse' smart constructor.
-data StartChannelResponse = StartChannelResponse'
-  { _scrsState                 :: !(Maybe ChannelState)
-  , _scrsARN                   :: !(Maybe Text)
-  , _scrsPipelinesRunningCount :: !(Maybe Int)
-  , _scrsInputSpecification    :: !(Maybe InputSpecification)
-  , _scrsInputAttachments      :: !(Maybe [InputAttachment])
-  , _scrsDestinations          :: !(Maybe [OutputDestination])
-  , _scrsName                  :: !(Maybe Text)
-  , _scrsId                    :: !(Maybe Text)
-  , _scrsEgressEndpoints       :: !(Maybe [ChannelEgressEndpoint])
-  , _scrsEncoderSettings       :: !(Maybe EncoderSettings)
-  , _scrsRoleARN               :: !(Maybe Text)
-  , _scrsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StartChannelResponse = StartChannelResponse'{_scrsState
+                                                  :: !(Maybe ChannelState),
+                                                  _scrsLogLevel ::
+                                                  !(Maybe LogLevel),
+                                                  _scrsARN :: !(Maybe Text),
+                                                  _scrsPipelinesRunningCount ::
+                                                  !(Maybe Int),
+                                                  _scrsPipelineDetails ::
+                                                  !(Maybe [PipelineDetail]),
+                                                  _scrsInputSpecification ::
+                                                  !(Maybe InputSpecification),
+                                                  _scrsInputAttachments ::
+                                                  !(Maybe [InputAttachment]),
+                                                  _scrsDestinations ::
+                                                  !(Maybe [OutputDestination]),
+                                                  _scrsName :: !(Maybe Text),
+                                                  _scrsId :: !(Maybe Text),
+                                                  _scrsChannelClass ::
+                                                  !(Maybe ChannelClass),
+                                                  _scrsEgressEndpoints ::
+                                                  !(Maybe
+                                                      [ChannelEgressEndpoint]),
+                                                  _scrsTags ::
+                                                  !(Maybe (Map Text Text)),
+                                                  _scrsEncoderSettings ::
+                                                  !(Maybe EncoderSettings),
+                                                  _scrsRoleARN :: !(Maybe Text),
+                                                  _scrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StartChannelResponse' with the minimum fields required to make a request.
 --
@@ -141,9 +162,13 @@ data StartChannelResponse = StartChannelResponse'
 --
 -- * 'scrsState' - Undocumented member.
 --
+-- * 'scrsLogLevel' - The log level being written to CloudWatch Logs.
+--
 -- * 'scrsARN' - The unique arn of the channel.
 --
 -- * 'scrsPipelinesRunningCount' - The number of currently healthy pipelines.
+--
+-- * 'scrsPipelineDetails' - Runtime details for the pipelines of a running channel.
 --
 -- * 'scrsInputSpecification' - Undocumented member.
 --
@@ -155,7 +180,11 @@ data StartChannelResponse = StartChannelResponse'
 --
 -- * 'scrsId' - The unique id of the channel.
 --
+-- * 'scrsChannelClass' - The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+--
 -- * 'scrsEgressEndpoints' - The endpoints where outgoing connections initiate from
+--
+-- * 'scrsTags' - A collection of key-value pairs.
 --
 -- * 'scrsEncoderSettings' - Undocumented member.
 --
@@ -165,26 +194,27 @@ data StartChannelResponse = StartChannelResponse'
 startChannelResponse
     :: Int -- ^ 'scrsResponseStatus'
     -> StartChannelResponse
-startChannelResponse pResponseStatus_ =
-  StartChannelResponse'
-    { _scrsState = Nothing
-    , _scrsARN = Nothing
-    , _scrsPipelinesRunningCount = Nothing
-    , _scrsInputSpecification = Nothing
-    , _scrsInputAttachments = Nothing
-    , _scrsDestinations = Nothing
-    , _scrsName = Nothing
-    , _scrsId = Nothing
-    , _scrsEgressEndpoints = Nothing
-    , _scrsEncoderSettings = Nothing
-    , _scrsRoleARN = Nothing
-    , _scrsResponseStatus = pResponseStatus_
-    }
-
+startChannelResponse pResponseStatus_
+  = StartChannelResponse'{_scrsState = Nothing,
+                          _scrsLogLevel = Nothing, _scrsARN = Nothing,
+                          _scrsPipelinesRunningCount = Nothing,
+                          _scrsPipelineDetails = Nothing,
+                          _scrsInputSpecification = Nothing,
+                          _scrsInputAttachments = Nothing,
+                          _scrsDestinations = Nothing, _scrsName = Nothing,
+                          _scrsId = Nothing, _scrsChannelClass = Nothing,
+                          _scrsEgressEndpoints = Nothing, _scrsTags = Nothing,
+                          _scrsEncoderSettings = Nothing,
+                          _scrsRoleARN = Nothing,
+                          _scrsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 scrsState :: Lens' StartChannelResponse (Maybe ChannelState)
 scrsState = lens _scrsState (\ s a -> s{_scrsState = a})
+
+-- | The log level being written to CloudWatch Logs.
+scrsLogLevel :: Lens' StartChannelResponse (Maybe LogLevel)
+scrsLogLevel = lens _scrsLogLevel (\ s a -> s{_scrsLogLevel = a})
 
 -- | The unique arn of the channel.
 scrsARN :: Lens' StartChannelResponse (Maybe Text)
@@ -193,6 +223,10 @@ scrsARN = lens _scrsARN (\ s a -> s{_scrsARN = a})
 -- | The number of currently healthy pipelines.
 scrsPipelinesRunningCount :: Lens' StartChannelResponse (Maybe Int)
 scrsPipelinesRunningCount = lens _scrsPipelinesRunningCount (\ s a -> s{_scrsPipelinesRunningCount = a})
+
+-- | Runtime details for the pipelines of a running channel.
+scrsPipelineDetails :: Lens' StartChannelResponse [PipelineDetail]
+scrsPipelineDetails = lens _scrsPipelineDetails (\ s a -> s{_scrsPipelineDetails = a}) . _Default . _Coerce
 
 -- | Undocumented member.
 scrsInputSpecification :: Lens' StartChannelResponse (Maybe InputSpecification)
@@ -214,9 +248,17 @@ scrsName = lens _scrsName (\ s a -> s{_scrsName = a})
 scrsId :: Lens' StartChannelResponse (Maybe Text)
 scrsId = lens _scrsId (\ s a -> s{_scrsId = a})
 
+-- | The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+scrsChannelClass :: Lens' StartChannelResponse (Maybe ChannelClass)
+scrsChannelClass = lens _scrsChannelClass (\ s a -> s{_scrsChannelClass = a})
+
 -- | The endpoints where outgoing connections initiate from
 scrsEgressEndpoints :: Lens' StartChannelResponse [ChannelEgressEndpoint]
 scrsEgressEndpoints = lens _scrsEgressEndpoints (\ s a -> s{_scrsEgressEndpoints = a}) . _Default . _Coerce
+
+-- | A collection of key-value pairs.
+scrsTags :: Lens' StartChannelResponse (HashMap Text Text)
+scrsTags = lens _scrsTags (\ s a -> s{_scrsTags = a}) . _Default . _Map
 
 -- | Undocumented member.
 scrsEncoderSettings :: Lens' StartChannelResponse (Maybe EncoderSettings)

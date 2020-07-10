@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html Monitoring Your Instances and Volumes> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html Monitoring Your Instances and Volumes> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 --
 -- To disable detailed monitoring, see .
@@ -47,16 +47,11 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for MonitorInstances.
---
---
---
--- /See:/ 'monitorInstances' smart constructor.
-data MonitorInstances = MonitorInstances'
-  { _miDryRun      :: !(Maybe Bool)
-  , _miInstanceIds :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'monitorInstances' smart constructor.
+data MonitorInstances = MonitorInstances'{_miDryRun
+                                          :: !(Maybe Bool),
+                                          _miInstanceIds :: ![Text]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'MonitorInstances' with the minimum fields required to make a request.
 --
@@ -64,18 +59,18 @@ data MonitorInstances = MonitorInstances'
 --
 -- * 'miDryRun' - Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 --
--- * 'miInstanceIds' - One or more instance IDs.
+-- * 'miInstanceIds' - The IDs of the instances.
 monitorInstances
     :: MonitorInstances
-monitorInstances =
-  MonitorInstances' {_miDryRun = Nothing, _miInstanceIds = mempty}
-
+monitorInstances
+  = MonitorInstances'{_miDryRun = Nothing,
+                      _miInstanceIds = mempty}
 
 -- | Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is @DryRunOperation@ . Otherwise, it is @UnauthorizedOperation@ .
 miDryRun :: Lens' MonitorInstances (Maybe Bool)
 miDryRun = lens _miDryRun (\ s a -> s{_miDryRun = a})
 
--- | One or more instance IDs.
+-- | The IDs of the instances.
 miInstanceIds :: Lens' MonitorInstances [Text]
 miInstanceIds = lens _miInstanceIds (\ s a -> s{_miInstanceIds = a}) . _Coerce
 
@@ -108,16 +103,15 @@ instance ToQuery MonitorInstances where
                "DryRun" =: _miDryRun,
                toQueryList "InstanceId" _miInstanceIds]
 
--- | Contains the output of MonitorInstances.
---
---
---
--- /See:/ 'monitorInstancesResponse' smart constructor.
-data MonitorInstancesResponse = MonitorInstancesResponse'
-  { _mirsInstanceMonitorings :: !(Maybe [InstanceMonitoring])
-  , _mirsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'monitorInstancesResponse' smart constructor.
+data MonitorInstancesResponse = MonitorInstancesResponse'{_mirsInstanceMonitorings
+                                                          ::
+                                                          !(Maybe
+                                                              [InstanceMonitoring]),
+                                                          _mirsResponseStatus ::
+                                                          !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'MonitorInstancesResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +123,10 @@ data MonitorInstancesResponse = MonitorInstancesResponse'
 monitorInstancesResponse
     :: Int -- ^ 'mirsResponseStatus'
     -> MonitorInstancesResponse
-monitorInstancesResponse pResponseStatus_ =
-  MonitorInstancesResponse'
-    {_mirsInstanceMonitorings = Nothing, _mirsResponseStatus = pResponseStatus_}
-
+monitorInstancesResponse pResponseStatus_
+  = MonitorInstancesResponse'{_mirsInstanceMonitorings
+                                = Nothing,
+                              _mirsResponseStatus = pResponseStatus_}
 
 -- | The monitoring information.
 mirsInstanceMonitorings :: Lens' MonitorInstancesResponse [InstanceMonitoring]

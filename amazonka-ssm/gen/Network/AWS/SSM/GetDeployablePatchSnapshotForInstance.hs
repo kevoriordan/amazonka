@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document.
+-- Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document. 
 --
 --
 module Network.AWS.SSM.GetDeployablePatchSnapshotForInstance
@@ -49,11 +49,14 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getDeployablePatchSnapshotForInstance' smart constructor.
-data GetDeployablePatchSnapshotForInstance = GetDeployablePatchSnapshotForInstance'
-  { _gdpsfiInstanceId :: !Text
-  , _gdpsfiSnapshotId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeployablePatchSnapshotForInstance = GetDeployablePatchSnapshotForInstance'{_gdpsfiInstanceId
+                                                                                    ::
+                                                                                    !Text,
+                                                                                    _gdpsfiSnapshotId
+                                                                                    ::
+                                                                                    !Text}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'GetDeployablePatchSnapshotForInstance' with the minimum fields required to make a request.
 --
@@ -66,10 +69,11 @@ getDeployablePatchSnapshotForInstance
     :: Text -- ^ 'gdpsfiInstanceId'
     -> Text -- ^ 'gdpsfiSnapshotId'
     -> GetDeployablePatchSnapshotForInstance
-getDeployablePatchSnapshotForInstance pInstanceId_ pSnapshotId_ =
-  GetDeployablePatchSnapshotForInstance'
-    {_gdpsfiInstanceId = pInstanceId_, _gdpsfiSnapshotId = pSnapshotId_}
-
+getDeployablePatchSnapshotForInstance pInstanceId_
+  pSnapshotId_
+  = GetDeployablePatchSnapshotForInstance'{_gdpsfiInstanceId
+                                             = pInstanceId_,
+                                           _gdpsfiSnapshotId = pSnapshotId_}
 
 -- | The ID of the instance for which the appropriate patch snapshot should be retrieved.
 gdpsfiInstanceId :: Lens' GetDeployablePatchSnapshotForInstance Text
@@ -131,14 +135,28 @@ instance ToQuery
         toQuery = const mempty
 
 -- | /See:/ 'getDeployablePatchSnapshotForInstanceResponse' smart constructor.
-data GetDeployablePatchSnapshotForInstanceResponse = GetDeployablePatchSnapshotForInstanceResponse'
-  { _gdpsfirsInstanceId          :: !(Maybe Text)
-  , _gdpsfirsProduct             :: !(Maybe Text)
-  , _gdpsfirsSnapshotDownloadURL :: !(Maybe Text)
-  , _gdpsfirsSnapshotId          :: !(Maybe Text)
-  , _gdpsfirsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDeployablePatchSnapshotForInstanceResponse = GetDeployablePatchSnapshotForInstanceResponse'{_gdpsfirsInstanceId
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Text),
+                                                                                                    _gdpsfirsProduct
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Text),
+                                                                                                    _gdpsfirsSnapshotDownloadURL
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Text),
+                                                                                                    _gdpsfirsSnapshotId
+                                                                                                    ::
+                                                                                                    !(Maybe
+                                                                                                        Text),
+                                                                                                    _gdpsfirsResponseStatus
+                                                                                                    ::
+                                                                                                    !Int}
+                                                       deriving (Eq, Read, Show,
+                                                                 Data, Typeable,
+                                                                 Generic)
 
 -- | Creates a value of 'GetDeployablePatchSnapshotForInstanceResponse' with the minimum fields required to make a request.
 --
@@ -156,15 +174,17 @@ data GetDeployablePatchSnapshotForInstanceResponse = GetDeployablePatchSnapshotF
 getDeployablePatchSnapshotForInstanceResponse
     :: Int -- ^ 'gdpsfirsResponseStatus'
     -> GetDeployablePatchSnapshotForInstanceResponse
-getDeployablePatchSnapshotForInstanceResponse pResponseStatus_ =
-  GetDeployablePatchSnapshotForInstanceResponse'
-    { _gdpsfirsInstanceId = Nothing
-    , _gdpsfirsProduct = Nothing
-    , _gdpsfirsSnapshotDownloadURL = Nothing
-    , _gdpsfirsSnapshotId = Nothing
-    , _gdpsfirsResponseStatus = pResponseStatus_
-    }
-
+getDeployablePatchSnapshotForInstanceResponse
+  pResponseStatus_
+  = GetDeployablePatchSnapshotForInstanceResponse'{_gdpsfirsInstanceId
+                                                     = Nothing,
+                                                   _gdpsfirsProduct = Nothing,
+                                                   _gdpsfirsSnapshotDownloadURL
+                                                     = Nothing,
+                                                   _gdpsfirsSnapshotId =
+                                                     Nothing,
+                                                   _gdpsfirsResponseStatus =
+                                                     pResponseStatus_}
 
 -- | The ID of the instance.
 gdpsfirsInstanceId :: Lens' GetDeployablePatchSnapshotForInstanceResponse (Maybe Text)

@@ -18,22 +18,26 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a build. This action permanently deletes the build record and any uploaded build files.
+-- Deletes a build. This action permanently deletes the build resource and any uploaded build files. Deleting a build does not affect the status of any active fleets using the build, but you can no longer create new fleets with the deleted build.
 --
 --
--- To delete a build, specify its ID. Deleting a build does not affect the status of any active fleets using the build, but you can no longer create new fleets with the deleted build.
+-- To delete a build, specify the build ID. 
 --
--- Build-related operations include:
+-- __Learn more__ 
 --
---     * 'CreateBuild'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html Upload a Custom Server Build> 
 --
---     * 'ListBuilds'
+-- __Related operations__ 
 --
---     * 'DescribeBuild'
+--     * 'CreateBuild' 
 --
---     * 'UpdateBuild'
+--     * 'ListBuilds' 
 --
---     * 'DeleteBuild'
+--     * 'DescribeBuild' 
+--
+--     * 'UpdateBuild' 
+--
+--     * 'DeleteBuild' 
 --
 --
 --
@@ -62,23 +66,22 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteBuild' smart constructor.
-newtype DeleteBuild = DeleteBuild'
-  { _dbBuildId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBuild = DeleteBuild'{_dbBuildId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBuild' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dbBuildId' - Unique identifier for a build to delete.
+-- * 'dbBuildId' - A unique identifier for a build to delete. You can use either the build ID or ARN value. 
 deleteBuild
     :: Text -- ^ 'dbBuildId'
     -> DeleteBuild
-deleteBuild pBuildId_ = DeleteBuild' {_dbBuildId = pBuildId_}
+deleteBuild pBuildId_
+  = DeleteBuild'{_dbBuildId = pBuildId_}
 
-
--- | Unique identifier for a build to delete.
+-- | A unique identifier for a build to delete. You can use either the build ID or ARN value. 
 dbBuildId :: Lens' DeleteBuild Text
 dbBuildId = lens _dbBuildId (\ s a -> s{_dbBuildId = a})
 
@@ -111,16 +114,13 @@ instance ToQuery DeleteBuild where
         toQuery = const mempty
 
 -- | /See:/ 'deleteBuildResponse' smart constructor.
-data DeleteBuildResponse =
-  DeleteBuildResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBuildResponse = DeleteBuildResponse'
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteBuildResponse' with the minimum fields required to make a request.
 --
 deleteBuildResponse
     :: DeleteBuildResponse
 deleteBuildResponse = DeleteBuildResponse'
-
 
 instance NFData DeleteBuildResponse where

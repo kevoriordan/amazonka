@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of tags that are associated with a resource, specified by an ARN.
+-- Returns a list of tags that are associated with a resource group, specified by an ARN.
 --
 --
 module Network.AWS.ResourceGroups.GetTags
@@ -46,23 +46,20 @@ import Network.AWS.ResourceGroups.Types.Product
 import Network.AWS.Response
 
 -- | /See:/ 'getTags' smart constructor.
-newtype GetTags = GetTags'
-  { _gtARN :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetTags = GetTags'{_gtARN :: Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtARN' - The ARN of the resource for which you want a list of tags. The resource must exist within the account you are using.
+-- * 'gtARN' - The ARN of the resource group for which you want a list of tags. The resource must exist within the account you are using.
 getTags
     :: Text -- ^ 'gtARN'
     -> GetTags
-getTags pARN_ = GetTags' {_gtARN = pARN_}
+getTags pARN_ = GetTags'{_gtARN = pARN_}
 
-
--- | The ARN of the resource for which you want a list of tags. The resource must exist within the account you are using.
+-- | The ARN of the resource group for which you want a list of tags. The resource must exist within the account you are using.
 gtARN :: Lens' GetTags Text
 gtARN = lens _gtARN (\ s a -> s{_gtARN = a})
 
@@ -91,38 +88,34 @@ instance ToQuery GetTags where
         toQuery = const mempty
 
 -- | /See:/ 'getTagsResponse' smart constructor.
-data GetTagsResponse = GetTagsResponse'
-  { _gtrsARN            :: !(Maybe Text)
-  , _gtrsTags           :: !(Maybe (Map Text Text))
-  , _gtrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetTagsResponse = GetTagsResponse'{_gtrsARN ::
+                                        !(Maybe Text),
+                                        _gtrsTags :: !(Maybe (Map Text Text)),
+                                        _gtrsResponseStatus :: !Int}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetTagsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtrsARN' - The ARN of the tagged resource.
+-- * 'gtrsARN' - The ARN of the tagged resource group.
 --
--- * 'gtrsTags' - The tags associated with the specified resource.
+-- * 'gtrsTags' - The tags associated with the specified resource group.
 --
 -- * 'gtrsResponseStatus' - -- | The response status code.
 getTagsResponse
     :: Int -- ^ 'gtrsResponseStatus'
     -> GetTagsResponse
-getTagsResponse pResponseStatus_ =
-  GetTagsResponse'
-    { _gtrsARN = Nothing
-    , _gtrsTags = Nothing
-    , _gtrsResponseStatus = pResponseStatus_
-    }
+getTagsResponse pResponseStatus_
+  = GetTagsResponse'{_gtrsARN = Nothing,
+                     _gtrsTags = Nothing,
+                     _gtrsResponseStatus = pResponseStatus_}
 
-
--- | The ARN of the tagged resource.
+-- | The ARN of the tagged resource group.
 gtrsARN :: Lens' GetTagsResponse (Maybe Text)
 gtrsARN = lens _gtrsARN (\ s a -> s{_gtrsARN = a})
 
--- | The tags associated with the specified resource.
+-- | The tags associated with the specified resource group.
 gtrsTags :: Lens' GetTagsResponse (HashMap Text Text)
 gtrsTags = lens _gtrsTags (\ s a -> s{_gtrsTags = a}) . _Default . _Map
 

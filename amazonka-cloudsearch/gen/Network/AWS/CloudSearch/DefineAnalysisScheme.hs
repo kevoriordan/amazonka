@@ -27,15 +27,15 @@ module Network.AWS.CloudSearch.DefineAnalysisScheme
       defineAnalysisScheme
     , DefineAnalysisScheme
     -- * Request Lenses
-    , dasaDomainName
-    , dasaAnalysisScheme
+    , dfnanlyssschmDomainName
+    , dfnanlyssschmAnalysisScheme
 
     -- * Destructuring the Response
     , defineAnalysisSchemeResponse
     , DefineAnalysisSchemeResponse
     -- * Response Lenses
-    , defersResponseStatus
-    , defersAnalysisScheme
+    , dfnanlyssschmrsResponseStatus
+    , dfnanlyssschmrsAnalysisScheme
     ) where
 
 import Network.AWS.CloudSearch.Types
@@ -50,35 +50,35 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'defineAnalysisScheme' smart constructor.
-data DefineAnalysisScheme = DefineAnalysisScheme'
-  { _dasaDomainName     :: !Text
-  , _dasaAnalysisScheme :: !AnalysisScheme
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DefineAnalysisScheme = DefineAnalysisScheme'{_dfnanlyssschmDomainName
+                                                  :: !Text,
+                                                  _dfnanlyssschmAnalysisScheme
+                                                  :: !AnalysisScheme}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DefineAnalysisScheme' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dasaDomainName' - Undocumented member.
+-- * 'dfnanlyssschmDomainName' - Undocumented member.
 --
--- * 'dasaAnalysisScheme' - Undocumented member.
+-- * 'dfnanlyssschmAnalysisScheme' - Undocumented member.
 defineAnalysisScheme
-    :: Text -- ^ 'dasaDomainName'
-    -> AnalysisScheme -- ^ 'dasaAnalysisScheme'
+    :: Text -- ^ 'dfnanlyssschmDomainName'
+    -> AnalysisScheme -- ^ 'dfnanlyssschmAnalysisScheme'
     -> DefineAnalysisScheme
-defineAnalysisScheme pDomainName_ pAnalysisScheme_ =
-  DefineAnalysisScheme'
-    {_dasaDomainName = pDomainName_, _dasaAnalysisScheme = pAnalysisScheme_}
-
-
--- | Undocumented member.
-dasaDomainName :: Lens' DefineAnalysisScheme Text
-dasaDomainName = lens _dasaDomainName (\ s a -> s{_dasaDomainName = a})
+defineAnalysisScheme pDomainName_ pAnalysisScheme_
+  = DefineAnalysisScheme'{_dfnanlyssschmDomainName =
+                            pDomainName_,
+                          _dfnanlyssschmAnalysisScheme = pAnalysisScheme_}
 
 -- | Undocumented member.
-dasaAnalysisScheme :: Lens' DefineAnalysisScheme AnalysisScheme
-dasaAnalysisScheme = lens _dasaAnalysisScheme (\ s a -> s{_dasaAnalysisScheme = a})
+dfnanlyssschmDomainName :: Lens' DefineAnalysisScheme Text
+dfnanlyssschmDomainName = lens _dfnanlyssschmDomainName (\ s a -> s{_dfnanlyssschmDomainName = a})
+
+-- | Undocumented member.
+dfnanlyssschmAnalysisScheme :: Lens' DefineAnalysisScheme AnalysisScheme
+dfnanlyssschmAnalysisScheme = lens _dfnanlyssschmAnalysisScheme (\ s a -> s{_dfnanlyssschmAnalysisScheme = a})
 
 instance AWSRequest DefineAnalysisScheme where
         type Rs DefineAnalysisScheme =
@@ -105,44 +105,46 @@ instance ToQuery DefineAnalysisScheme where
           = mconcat
               ["Action" =: ("DefineAnalysisScheme" :: ByteString),
                "Version" =: ("2013-01-01" :: ByteString),
-               "DomainName" =: _dasaDomainName,
-               "AnalysisScheme" =: _dasaAnalysisScheme]
+               "DomainName" =: _dfnanlyssschmDomainName,
+               "AnalysisScheme" =: _dfnanlyssschmAnalysisScheme]
 
 -- | The result of a @'DefineAnalysisScheme' @ request. Contains the status of the newly-configured analysis scheme.
 --
 --
 --
 -- /See:/ 'defineAnalysisSchemeResponse' smart constructor.
-data DefineAnalysisSchemeResponse = DefineAnalysisSchemeResponse'
-  { _defersResponseStatus :: !Int
-  , _defersAnalysisScheme :: !AnalysisSchemeStatus
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DefineAnalysisSchemeResponse = DefineAnalysisSchemeResponse'{_dfnanlyssschmrsResponseStatus
+                                                                  :: !Int,
+                                                                  _dfnanlyssschmrsAnalysisScheme
+                                                                  ::
+                                                                  !AnalysisSchemeStatus}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DefineAnalysisSchemeResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'defersResponseStatus' - -- | The response status code.
+-- * 'dfnanlyssschmrsResponseStatus' - -- | The response status code.
 --
--- * 'defersAnalysisScheme' - Undocumented member.
+-- * 'dfnanlyssschmrsAnalysisScheme' - Undocumented member.
 defineAnalysisSchemeResponse
-    :: Int -- ^ 'defersResponseStatus'
-    -> AnalysisSchemeStatus -- ^ 'defersAnalysisScheme'
+    :: Int -- ^ 'dfnanlyssschmrsResponseStatus'
+    -> AnalysisSchemeStatus -- ^ 'dfnanlyssschmrsAnalysisScheme'
     -> DefineAnalysisSchemeResponse
-defineAnalysisSchemeResponse pResponseStatus_ pAnalysisScheme_ =
-  DefineAnalysisSchemeResponse'
-    { _defersResponseStatus = pResponseStatus_
-    , _defersAnalysisScheme = pAnalysisScheme_
-    }
-
+defineAnalysisSchemeResponse pResponseStatus_
+  pAnalysisScheme_
+  = DefineAnalysisSchemeResponse'{_dfnanlyssschmrsResponseStatus
+                                    = pResponseStatus_,
+                                  _dfnanlyssschmrsAnalysisScheme =
+                                    pAnalysisScheme_}
 
 -- | -- | The response status code.
-defersResponseStatus :: Lens' DefineAnalysisSchemeResponse Int
-defersResponseStatus = lens _defersResponseStatus (\ s a -> s{_defersResponseStatus = a})
+dfnanlyssschmrsResponseStatus :: Lens' DefineAnalysisSchemeResponse Int
+dfnanlyssschmrsResponseStatus = lens _dfnanlyssschmrsResponseStatus (\ s a -> s{_dfnanlyssschmrsResponseStatus = a})
 
 -- | Undocumented member.
-defersAnalysisScheme :: Lens' DefineAnalysisSchemeResponse AnalysisSchemeStatus
-defersAnalysisScheme = lens _defersAnalysisScheme (\ s a -> s{_defersAnalysisScheme = a})
+dfnanlyssschmrsAnalysisScheme :: Lens' DefineAnalysisSchemeResponse AnalysisSchemeStatus
+dfnanlyssschmrsAnalysisScheme = lens _dfnanlyssschmrsAnalysisScheme (\ s a -> s{_dfnanlyssschmrsAnalysisScheme = a})
 
 instance NFData DefineAnalysisSchemeResponse where

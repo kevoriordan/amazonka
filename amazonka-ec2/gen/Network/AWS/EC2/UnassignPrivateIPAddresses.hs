@@ -47,11 +47,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'unassignPrivateIPAddresses' smart constructor.
-data UnassignPrivateIPAddresses = UnassignPrivateIPAddresses'
-  { _upiaNetworkInterfaceId :: !Text
-  , _upiaPrivateIPAddresses :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UnassignPrivateIPAddresses = UnassignPrivateIPAddresses'{_upiaNetworkInterfaceId
+                                                              :: !Text,
+                                                              _upiaPrivateIPAddresses
+                                                              :: ![Text]}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UnassignPrivateIPAddresses' with the minimum fields required to make a request.
 --
@@ -63,12 +64,10 @@ data UnassignPrivateIPAddresses = UnassignPrivateIPAddresses'
 unassignPrivateIPAddresses
     :: Text -- ^ 'upiaNetworkInterfaceId'
     -> UnassignPrivateIPAddresses
-unassignPrivateIPAddresses pNetworkInterfaceId_ =
-  UnassignPrivateIPAddresses'
-    { _upiaNetworkInterfaceId = pNetworkInterfaceId_
-    , _upiaPrivateIPAddresses = mempty
-    }
-
+unassignPrivateIPAddresses pNetworkInterfaceId_
+  = UnassignPrivateIPAddresses'{_upiaNetworkInterfaceId
+                                  = pNetworkInterfaceId_,
+                                _upiaPrivateIPAddresses = mempty}
 
 -- | The ID of the network interface.
 upiaNetworkInterfaceId :: Lens' UnassignPrivateIPAddresses Text
@@ -106,17 +105,16 @@ instance ToQuery UnassignPrivateIPAddresses where
                  _upiaPrivateIPAddresses]
 
 -- | /See:/ 'unassignPrivateIPAddressesResponse' smart constructor.
-data UnassignPrivateIPAddressesResponse =
-  UnassignPrivateIPAddressesResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UnassignPrivateIPAddressesResponse = UnassignPrivateIPAddressesResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'UnassignPrivateIPAddressesResponse' with the minimum fields required to make a request.
 --
 unassignPrivateIPAddressesResponse
     :: UnassignPrivateIPAddressesResponse
-unassignPrivateIPAddressesResponse = UnassignPrivateIPAddressesResponse'
-
+unassignPrivateIPAddressesResponse
+  = UnassignPrivateIPAddressesResponse'
 
 instance NFData UnassignPrivateIPAddressesResponse
          where

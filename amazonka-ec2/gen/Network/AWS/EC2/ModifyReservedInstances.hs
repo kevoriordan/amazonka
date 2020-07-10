@@ -21,7 +21,7 @@
 -- Modifies the Availability Zone, instance count, instance type, or network platform (EC2-Classic or EC2-VPC) of your Reserved Instances. The Reserved Instances to be modified must be identical, except for Availability Zone, network platform, and instance type.
 --
 --
--- For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html Modifying Reserved Instances> in the Amazon Elastic Compute Cloud User Guide.
+-- For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html Modifying Reserved Instances> in the Amazon Elastic Compute Cloud User Guide.
 --
 module Network.AWS.EC2.ModifyReservedInstances
     (
@@ -53,33 +53,33 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'modifyReservedInstances' smart constructor.
-data ModifyReservedInstances = ModifyReservedInstances'
-  { _mriClientToken          :: !(Maybe Text)
-  , _mriReservedInstancesIds :: ![Text]
-  , _mriTargetConfigurations :: ![ReservedInstancesConfiguration]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyReservedInstances = ModifyReservedInstances'{_mriClientToken
+                                                        :: !(Maybe Text),
+                                                        _mriReservedInstancesIds
+                                                        :: ![Text],
+                                                        _mriTargetConfigurations
+                                                        ::
+                                                        ![ReservedInstancesConfiguration]}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'ModifyReservedInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mriClientToken' - A unique, case-sensitive token you provide to ensure idempotency of your modification request. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- * 'mriClientToken' - A unique, case-sensitive token you provide to ensure idempotency of your modification request. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
 --
 -- * 'mriReservedInstancesIds' - The IDs of the Reserved Instances to modify.
 --
 -- * 'mriTargetConfigurations' - The configuration settings for the Reserved Instances to modify.
 modifyReservedInstances
     :: ModifyReservedInstances
-modifyReservedInstances =
-  ModifyReservedInstances'
-    { _mriClientToken = Nothing
-    , _mriReservedInstancesIds = mempty
-    , _mriTargetConfigurations = mempty
-    }
+modifyReservedInstances
+  = ModifyReservedInstances'{_mriClientToken = Nothing,
+                             _mriReservedInstancesIds = mempty,
+                             _mriTargetConfigurations = mempty}
 
-
--- | A unique, case-sensitive token you provide to ensure idempotency of your modification request. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
+-- | A unique, case-sensitive token you provide to ensure idempotency of your modification request. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html Ensuring Idempotency> .
 mriClientToken :: Lens' ModifyReservedInstances (Maybe Text)
 mriClientToken = lens _mriClientToken (\ s a -> s{_mriClientToken = a})
 
@@ -130,11 +130,14 @@ instance ToQuery ModifyReservedInstances where
 --
 --
 -- /See:/ 'modifyReservedInstancesResponse' smart constructor.
-data ModifyReservedInstancesResponse = ModifyReservedInstancesResponse'
-  { _mrirsReservedInstancesModificationId :: !(Maybe Text)
-  , _mrirsResponseStatus                  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyReservedInstancesResponse = ModifyReservedInstancesResponse'{_mrirsReservedInstancesModificationId
+                                                                        ::
+                                                                        !(Maybe
+                                                                            Text),
+                                                                        _mrirsResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'ModifyReservedInstancesResponse' with the minimum fields required to make a request.
 --
@@ -146,12 +149,10 @@ data ModifyReservedInstancesResponse = ModifyReservedInstancesResponse'
 modifyReservedInstancesResponse
     :: Int -- ^ 'mrirsResponseStatus'
     -> ModifyReservedInstancesResponse
-modifyReservedInstancesResponse pResponseStatus_ =
-  ModifyReservedInstancesResponse'
-    { _mrirsReservedInstancesModificationId = Nothing
-    , _mrirsResponseStatus = pResponseStatus_
-    }
-
+modifyReservedInstancesResponse pResponseStatus_
+  = ModifyReservedInstancesResponse'{_mrirsReservedInstancesModificationId
+                                       = Nothing,
+                                     _mrirsResponseStatus = pResponseStatus_}
 
 -- | The ID for the modification.
 mrirsReservedInstancesModificationId :: Lens' ModifyReservedInstancesResponse (Maybe Text)

@@ -18,14 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The @DeleteTable@ operation deletes a table and all of its items. After a @DeleteTable@ request, the specified table is in the @DELETING@ state until DynamoDB completes the deletion. If the table is in the @ACTIVE@ state, you can delete it. If a table is in @CREATING@ or @UPDATING@ states, then DynamoDB returns a @ResourceInUseException@ . If the specified table does not exist, DynamoDB returns a @ResourceNotFoundException@ . If table is already in the @DELETING@ state, no error is returned.
+-- The @DeleteTable@ operation deletes a table and all of its items. After a @DeleteTable@ request, the specified table is in the @DELETING@ state until DynamoDB completes the deletion. If the table is in the @ACTIVE@ state, you can delete it. If a table is in @CREATING@ or @UPDATING@ states, then DynamoDB returns a @ResourceInUseException@ . If the specified table does not exist, DynamoDB returns a @ResourceNotFoundException@ . If table is already in the @DELETING@ state, no error is returned. 
 --
 --
 -- When you delete a table, any indexes on that table are also deleted.
 --
 -- If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes into the @DISABLED@ state, and the stream is automatically deleted after 24 hours.
 --
--- Use the @DescribeTable@ action to check the status of the table.
+-- Use the @DescribeTable@ action to check the status of the table. 
 --
 module Network.AWS.DynamoDB.DeleteTable
     (
@@ -55,10 +55,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteTable' smart constructor.
-newtype DeleteTable = DeleteTable'
-  { _dtTableName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTable = DeleteTable'{_dtTableName ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTable' with the minimum fields required to make a request.
 --
@@ -68,8 +67,8 @@ newtype DeleteTable = DeleteTable'
 deleteTable
     :: Text -- ^ 'dtTableName'
     -> DeleteTable
-deleteTable pTableName_ = DeleteTable' {_dtTableName = pTableName_}
-
+deleteTable pTableName_
+  = DeleteTable'{_dtTableName = pTableName_}
 
 -- | The name of the table to delete.
 dtTableName :: Lens' DeleteTable Text
@@ -113,11 +112,10 @@ instance ToQuery DeleteTable where
 --
 --
 -- /See:/ 'deleteTableResponse' smart constructor.
-data DeleteTableResponse = DeleteTableResponse'
-  { _dtrsTableDescription :: !(Maybe TableDescription)
-  , _dtrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTableResponse = DeleteTableResponse'{_dtrsTableDescription
+                                                :: !(Maybe TableDescription),
+                                                _dtrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTableResponse' with the minimum fields required to make a request.
 --
@@ -129,10 +127,10 @@ data DeleteTableResponse = DeleteTableResponse'
 deleteTableResponse
     :: Int -- ^ 'dtrsResponseStatus'
     -> DeleteTableResponse
-deleteTableResponse pResponseStatus_ =
-  DeleteTableResponse'
-    {_dtrsTableDescription = Nothing, _dtrsResponseStatus = pResponseStatus_}
-
+deleteTableResponse pResponseStatus_
+  = DeleteTableResponse'{_dtrsTableDescription =
+                           Nothing,
+                         _dtrsResponseStatus = pResponseStatus_}
 
 -- | Represents the properties of a table.
 dtrsTableDescription :: Lens' DeleteTableResponse (Maybe TableDescription)

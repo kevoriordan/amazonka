@@ -21,7 +21,7 @@
 -- Returns the history of the specified workflow execution. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the @nextPageToken@ returned by the initial call.
 --
 --
--- __Access Control__
+-- __Access Control__ 
 --
 -- You can use IAM policies to control this action's access to Amazon SWF resources as follows:
 --
@@ -33,7 +33,7 @@
 --
 --
 --
--- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
+-- If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's @cause@ parameter is set to @OPERATION_NOT_PERMITTED@ . For details and example IAM policies, see <https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html Using IAM to Manage Access to Amazon SWF Workflows> in the /Amazon SWF Developer Guide/ .
 --
 --
 -- This operation returns paginated results.
@@ -67,24 +67,31 @@ import Network.AWS.SWF.Types
 import Network.AWS.SWF.Types.Product
 
 -- | /See:/ 'getWorkflowExecutionHistory' smart constructor.
-data GetWorkflowExecutionHistory = GetWorkflowExecutionHistory'
-  { _gwehNextPageToken   :: !(Maybe Text)
-  , _gwehReverseOrder    :: !(Maybe Bool)
-  , _gwehMaximumPageSize :: !(Maybe Nat)
-  , _gwehDomain          :: !Text
-  , _gwehExecution       :: !WorkflowExecution
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetWorkflowExecutionHistory = GetWorkflowExecutionHistory'{_gwehNextPageToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _gwehReverseOrder
+                                                                ::
+                                                                !(Maybe Bool),
+                                                                _gwehMaximumPageSize
+                                                                :: !(Maybe Nat),
+                                                                _gwehDomain ::
+                                                                !Text,
+                                                                _gwehExecution
+                                                                ::
+                                                                !WorkflowExecution}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetWorkflowExecutionHistory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gwehNextPageToken' - If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
+-- * 'gwehNextPageToken' - If @NextPageToken@ is returned there are more results available. The value of @NextPageToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a @400@ error: "@Specified token has exceeded its maximum lifetime@ ".  The configured @maximumPageSize@ determines how many results can be returned in a single call. 
 --
 -- * 'gwehReverseOrder' - When set to @true@ , returns the events in reverse order. By default the results are returned in ascending order of the @eventTimeStamp@ of the events.
 --
--- * 'gwehMaximumPageSize' - The maximum number of results that are returned per call. @nextPageToken@ can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size /smaller/ than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+-- * 'gwehMaximumPageSize' - The maximum number of results that are returned per call. Use @nextPageToken@ to obtain further pages of results. 
 --
 -- * 'gwehDomain' - The name of the domain containing the workflow execution.
 --
@@ -93,17 +100,15 @@ getWorkflowExecutionHistory
     :: Text -- ^ 'gwehDomain'
     -> WorkflowExecution -- ^ 'gwehExecution'
     -> GetWorkflowExecutionHistory
-getWorkflowExecutionHistory pDomain_ pExecution_ =
-  GetWorkflowExecutionHistory'
-    { _gwehNextPageToken = Nothing
-    , _gwehReverseOrder = Nothing
-    , _gwehMaximumPageSize = Nothing
-    , _gwehDomain = pDomain_
-    , _gwehExecution = pExecution_
-    }
+getWorkflowExecutionHistory pDomain_ pExecution_
+  = GetWorkflowExecutionHistory'{_gwehNextPageToken =
+                                   Nothing,
+                                 _gwehReverseOrder = Nothing,
+                                 _gwehMaximumPageSize = Nothing,
+                                 _gwehDomain = pDomain_,
+                                 _gwehExecution = pExecution_}
 
-
--- | If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
+-- | If @NextPageToken@ is returned there are more results available. The value of @NextPageToken@ is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a @400@ error: "@Specified token has exceeded its maximum lifetime@ ".  The configured @maximumPageSize@ determines how many results can be returned in a single call. 
 gwehNextPageToken :: Lens' GetWorkflowExecutionHistory (Maybe Text)
 gwehNextPageToken = lens _gwehNextPageToken (\ s a -> s{_gwehNextPageToken = a})
 
@@ -111,7 +116,7 @@ gwehNextPageToken = lens _gwehNextPageToken (\ s a -> s{_gwehNextPageToken = a})
 gwehReverseOrder :: Lens' GetWorkflowExecutionHistory (Maybe Bool)
 gwehReverseOrder = lens _gwehReverseOrder (\ s a -> s{_gwehReverseOrder = a})
 
--- | The maximum number of results that are returned per call. @nextPageToken@ can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size /smaller/ than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+-- | The maximum number of results that are returned per call. Use @nextPageToken@ to obtain further pages of results. 
 gwehMaximumPageSize :: Lens' GetWorkflowExecutionHistory (Maybe Natural)
 gwehMaximumPageSize = lens _gwehMaximumPageSize (\ s a -> s{_gwehMaximumPageSize = a}) . mapping _Nat
 
@@ -177,12 +182,18 @@ instance ToQuery GetWorkflowExecutionHistory where
 --
 --
 -- /See:/ 'getWorkflowExecutionHistoryResponse' smart constructor.
-data GetWorkflowExecutionHistoryResponse = GetWorkflowExecutionHistoryResponse'
-  { _gwehrsNextPageToken  :: !(Maybe Text)
-  , _gwehrsResponseStatus :: !Int
-  , _gwehrsEvents         :: ![HistoryEvent]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetWorkflowExecutionHistoryResponse = GetWorkflowExecutionHistoryResponse'{_gwehrsNextPageToken
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    Text),
+                                                                                _gwehrsResponseStatus
+                                                                                ::
+                                                                                !Int,
+                                                                                _gwehrsEvents
+                                                                                ::
+                                                                                ![HistoryEvent]}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'GetWorkflowExecutionHistoryResponse' with the minimum fields required to make a request.
 --
@@ -196,13 +207,12 @@ data GetWorkflowExecutionHistoryResponse = GetWorkflowExecutionHistoryResponse'
 getWorkflowExecutionHistoryResponse
     :: Int -- ^ 'gwehrsResponseStatus'
     -> GetWorkflowExecutionHistoryResponse
-getWorkflowExecutionHistoryResponse pResponseStatus_ =
-  GetWorkflowExecutionHistoryResponse'
-    { _gwehrsNextPageToken = Nothing
-    , _gwehrsResponseStatus = pResponseStatus_
-    , _gwehrsEvents = mempty
-    }
-
+getWorkflowExecutionHistoryResponse pResponseStatus_
+  = GetWorkflowExecutionHistoryResponse'{_gwehrsNextPageToken
+                                           = Nothing,
+                                         _gwehrsResponseStatus =
+                                           pResponseStatus_,
+                                         _gwehrsEvents = mempty}
 
 -- | If a @NextPageToken@ was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in @nextPageToken@ . Keep all other arguments unchanged. The configured @maximumPageSize@ determines how many results can be returned in a single call.
 gwehrsNextPageToken :: Lens' GetWorkflowExecutionHistoryResponse (Maybe Text)

@@ -23,7 +23,7 @@
 --
 -- /Important:/ You can delete a reusable delegation set only if it isn't associated with any hosted zones.
 --
--- To verify that the reusable delegation set is not associated with any hosted zones, submit a 'GetReusableDelegationSet' request and specify the ID of the reusable delegation set that you want to delete.
+-- To verify that the reusable delegation set is not associated with any hosted zones, submit a <https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetReusableDelegationSet.html GetReusableDelegationSet> request and specify the ID of the reusable delegation set that you want to delete.
 --
 module Network.AWS.Route53.DeleteReusableDelegationSet
     (
@@ -52,10 +52,11 @@ import Network.AWS.Route53.Types.Product
 --
 --
 -- /See:/ 'deleteReusableDelegationSet' smart constructor.
-newtype DeleteReusableDelegationSet = DeleteReusableDelegationSet'
-  { _drdsId :: ResourceId
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReusableDelegationSet = DeleteReusableDelegationSet'{_drdsId
+                                                                   ::
+                                                                   ResourceId}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteReusableDelegationSet' with the minimum fields required to make a request.
 --
@@ -65,8 +66,8 @@ newtype DeleteReusableDelegationSet = DeleteReusableDelegationSet'
 deleteReusableDelegationSet
     :: ResourceId -- ^ 'drdsId'
     -> DeleteReusableDelegationSet
-deleteReusableDelegationSet pId_ = DeleteReusableDelegationSet' {_drdsId = pId_}
-
+deleteReusableDelegationSet pId_
+  = DeleteReusableDelegationSet'{_drdsId = pId_}
 
 -- | The ID of the reusable delegation set that you want to delete.
 drdsId :: Lens' DeleteReusableDelegationSet ResourceId
@@ -102,10 +103,11 @@ instance ToQuery DeleteReusableDelegationSet where
 --
 --
 -- /See:/ 'deleteReusableDelegationSetResponse' smart constructor.
-newtype DeleteReusableDelegationSetResponse = DeleteReusableDelegationSetResponse'
-  { _drdsrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteReusableDelegationSetResponse = DeleteReusableDelegationSetResponse'{_drdsrsResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'DeleteReusableDelegationSetResponse' with the minimum fields required to make a request.
 --
@@ -115,10 +117,9 @@ newtype DeleteReusableDelegationSetResponse = DeleteReusableDelegationSetRespons
 deleteReusableDelegationSetResponse
     :: Int -- ^ 'drdsrsResponseStatus'
     -> DeleteReusableDelegationSetResponse
-deleteReusableDelegationSetResponse pResponseStatus_ =
-  DeleteReusableDelegationSetResponse'
-    {_drdsrsResponseStatus = pResponseStatus_}
-
+deleteReusableDelegationSetResponse pResponseStatus_
+  = DeleteReusableDelegationSetResponse'{_drdsrsResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 drdsrsResponseStatus :: Lens' DeleteReusableDelegationSetResponse Int

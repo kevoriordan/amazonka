@@ -21,7 +21,7 @@
 -- Describe an instance's RAID arrays.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DescribeRAIdArrays
     (
@@ -49,33 +49,30 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeRAIdArrays' smart constructor.
-data DescribeRAIdArrays = DescribeRAIdArrays'
-  { _draiaInstanceId   :: !(Maybe Text)
-  , _draiaRAIdArrayIds :: !(Maybe [Text])
-  , _draiaStackId      :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRAIdArrays = DescribeRAIdArrays'{_draiaInstanceId
+                                              :: !(Maybe Text),
+                                              _draiaRAIdArrayIds ::
+                                              !(Maybe [Text]),
+                                              _draiaStackId :: !(Maybe Text)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeRAIdArrays' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'draiaInstanceId' - The instance ID. If you use this parameter, @DescribeRaidArrays@ returns descriptions of the RAID arrays associated with the specified instance.
+-- * 'draiaInstanceId' - The instance ID. If you use this parameter, @DescribeRaidArrays@ returns descriptions of the RAID arrays associated with the specified instance. 
 --
 -- * 'draiaRAIdArrayIds' - An array of RAID array IDs. If you use this parameter, @DescribeRaidArrays@ returns descriptions of the specified arrays. Otherwise, it returns a description of every array.
 --
 -- * 'draiaStackId' - The stack ID.
 describeRAIdArrays
     :: DescribeRAIdArrays
-describeRAIdArrays =
-  DescribeRAIdArrays'
-    { _draiaInstanceId = Nothing
-    , _draiaRAIdArrayIds = Nothing
-    , _draiaStackId = Nothing
-    }
+describeRAIdArrays
+  = DescribeRAIdArrays'{_draiaInstanceId = Nothing,
+                        _draiaRAIdArrayIds = Nothing,
+                        _draiaStackId = Nothing}
 
-
--- | The instance ID. If you use this parameter, @DescribeRaidArrays@ returns descriptions of the RAID arrays associated with the specified instance.
+-- | The instance ID. If you use this parameter, @DescribeRaidArrays@ returns descriptions of the RAID arrays associated with the specified instance. 
 draiaInstanceId :: Lens' DescribeRAIdArrays (Maybe Text)
 draiaInstanceId = lens _draiaInstanceId (\ s a -> s{_draiaInstanceId = a})
 
@@ -131,11 +128,14 @@ instance ToQuery DescribeRAIdArrays where
 --
 --
 -- /See:/ 'describeRAIdArraysResponse' smart constructor.
-data DescribeRAIdArraysResponse = DescribeRAIdArraysResponse'
-  { _draiarsRAIdArrays     :: !(Maybe [RAIdArray])
-  , _draiarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeRAIdArraysResponse = DescribeRAIdArraysResponse'{_draiarsRAIdArrays
+                                                              ::
+                                                              !(Maybe
+                                                                  [RAIdArray]),
+                                                              _draiarsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DescribeRAIdArraysResponse' with the minimum fields required to make a request.
 --
@@ -147,10 +147,10 @@ data DescribeRAIdArraysResponse = DescribeRAIdArraysResponse'
 describeRAIdArraysResponse
     :: Int -- ^ 'draiarsResponseStatus'
     -> DescribeRAIdArraysResponse
-describeRAIdArraysResponse pResponseStatus_ =
-  DescribeRAIdArraysResponse'
-    {_draiarsRAIdArrays = Nothing, _draiarsResponseStatus = pResponseStatus_}
-
+describeRAIdArraysResponse pResponseStatus_
+  = DescribeRAIdArraysResponse'{_draiarsRAIdArrays =
+                                  Nothing,
+                                _draiarsResponseStatus = pResponseStatus_}
 
 -- | A @RaidArrays@ object that describes the specified RAID arrays.
 draiarsRAIdArrays :: Lens' DescribeRAIdArraysResponse [RAIdArray]

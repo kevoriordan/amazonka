@@ -50,12 +50,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'disableSSO' smart constructor.
-data DisableSSO = DisableSSO'
-  { _dssoUserName    :: !(Maybe Text)
-  , _dssoPassword    :: !(Maybe (Sensitive Text))
-  , _dssoDirectoryId :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data DisableSSO = DisableSSO'{_dssoUserName ::
+                              !(Maybe Text),
+                              _dssoPassword :: !(Maybe (Sensitive Text)),
+                              _dssoDirectoryId :: !Text}
+                    deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DisableSSO' with the minimum fields required to make a request.
 --
@@ -69,13 +68,10 @@ data DisableSSO = DisableSSO'
 disableSSO
     :: Text -- ^ 'dssoDirectoryId'
     -> DisableSSO
-disableSSO pDirectoryId_ =
-  DisableSSO'
-    { _dssoUserName = Nothing
-    , _dssoPassword = Nothing
-    , _dssoDirectoryId = pDirectoryId_
-    }
-
+disableSSO pDirectoryId_
+  = DisableSSO'{_dssoUserName = Nothing,
+                _dssoPassword = Nothing,
+                _dssoDirectoryId = pDirectoryId_}
 
 -- | The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principal name. If the AD Connector service account does not have privileges to remove a service principal name, you can specify an alternate account with the /UserName/ and /Password/ parameters. These credentials are only used to disable single sign-on and are not stored by the service. The AD Connector service account is not changed.
 dssoUserName :: Lens' DisableSSO (Maybe Text)
@@ -130,10 +126,10 @@ instance ToQuery DisableSSO where
 --
 --
 -- /See:/ 'disableSSOResponse' smart constructor.
-newtype DisableSSOResponse = DisableSSOResponse'
-  { _dssorsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DisableSSOResponse = DisableSSOResponse'{_dssorsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DisableSSOResponse' with the minimum fields required to make a request.
 --
@@ -143,9 +139,9 @@ newtype DisableSSOResponse = DisableSSOResponse'
 disableSSOResponse
     :: Int -- ^ 'dssorsResponseStatus'
     -> DisableSSOResponse
-disableSSOResponse pResponseStatus_ =
-  DisableSSOResponse' {_dssorsResponseStatus = pResponseStatus_}
-
+disableSSOResponse pResponseStatus_
+  = DisableSSOResponse'{_dssorsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 dssorsResponseStatus :: Lens' DisableSSOResponse Int

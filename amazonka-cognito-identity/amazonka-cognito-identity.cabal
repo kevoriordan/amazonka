@@ -57,22 +57,38 @@ library
         , Network.AWS.CognitoIdentity.GetOpenIdTokenForDeveloperIdentity
         , Network.AWS.CognitoIdentity.ListIdentities
         , Network.AWS.CognitoIdentity.ListIdentityPools
+        , Network.AWS.CognitoIdentity.ListTagsForResource
         , Network.AWS.CognitoIdentity.LookupDeveloperIdentity
         , Network.AWS.CognitoIdentity.MergeDeveloperIdentities
         , Network.AWS.CognitoIdentity.SetIdentityPoolRoles
+        , Network.AWS.CognitoIdentity.TagResource
         , Network.AWS.CognitoIdentity.Types
         , Network.AWS.CognitoIdentity.UnlinkDeveloperIdentity
         , Network.AWS.CognitoIdentity.UnlinkIdentity
+        , Network.AWS.CognitoIdentity.UntagResource
         , Network.AWS.CognitoIdentity.UpdateIdentityPool
         , Network.AWS.CognitoIdentity.Waiters
 
     other-modules:
-          Network.AWS.CognitoIdentity.Types.Product
-        , Network.AWS.CognitoIdentity.Types.Sum
+          Network.AWS.CognitoIdentity.Types.AmbiguousRoleResolutionType
+        , Network.AWS.CognitoIdentity.Types.CognitoErrorCode
+        , Network.AWS.CognitoIdentity.Types.CognitoIdentityProvider
+        , Network.AWS.CognitoIdentity.Types.Credentials
+        , Network.AWS.CognitoIdentity.Types.IdentityDescription
+        , Network.AWS.CognitoIdentity.Types.IdentityPool
+        , Network.AWS.CognitoIdentity.Types.IdentityPoolShortDescription
+        , Network.AWS.CognitoIdentity.Types.MappingRule
+        , Network.AWS.CognitoIdentity.Types.MappingRuleMatchType
+        , Network.AWS.CognitoIdentity.Types.Product
+        , Network.AWS.CognitoIdentity.Types.RoleMapping
+        , Network.AWS.CognitoIdentity.Types.RoleMappingType
+        , Network.AWS.CognitoIdentity.Types.RulesConfigurationType
+        , Network.AWS.CognitoIdentity.Types.UnprocessedIdentityId
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-cognito-identity-test
     type:              exitcode-stdio-1.0
@@ -96,6 +112,7 @@ test-suite amazonka-cognito-identity-test
         , amazonka-cognito-identity
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

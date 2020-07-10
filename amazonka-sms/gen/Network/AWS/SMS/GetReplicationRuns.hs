@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The GetReplicationRuns API will return all ReplicationRuns for a given ReplicationJob. This API returns a paginated list, that may be consecutively called with nextToken to retrieve all ReplicationRuns for a ReplicationJob.
+-- Describes the replication runs for the specified replication job.
+--
+--
 --
 -- This operation returns paginated results.
 module Network.AWS.SMS.GetReplicationRuns
@@ -50,42 +52,38 @@ import Network.AWS.SMS.Types
 import Network.AWS.SMS.Types.Product
 
 -- | /See:/ 'getReplicationRuns' smart constructor.
-data GetReplicationRuns = GetReplicationRuns'
-  { _grrNextToken        :: !(Maybe Text)
-  , _grrMaxResults       :: !(Maybe Int)
-  , _grrReplicationJobId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetReplicationRuns = GetReplicationRuns'{_grrNextToken
+                                              :: !(Maybe Text),
+                                              _grrMaxResults :: !(Maybe Int),
+                                              _grrReplicationJobId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetReplicationRuns' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grrNextToken' - Undocumented member.
+-- * 'grrNextToken' - The token for the next set of results.
 --
--- * 'grrMaxResults' - Undocumented member.
+-- * 'grrMaxResults' - The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned @NextToken@ value.
 --
--- * 'grrReplicationJobId' - Undocumented member.
+-- * 'grrReplicationJobId' - The identifier of the replication job.
 getReplicationRuns
     :: Text -- ^ 'grrReplicationJobId'
     -> GetReplicationRuns
-getReplicationRuns pReplicationJobId_ =
-  GetReplicationRuns'
-    { _grrNextToken = Nothing
-    , _grrMaxResults = Nothing
-    , _grrReplicationJobId = pReplicationJobId_
-    }
+getReplicationRuns pReplicationJobId_
+  = GetReplicationRuns'{_grrNextToken = Nothing,
+                        _grrMaxResults = Nothing,
+                        _grrReplicationJobId = pReplicationJobId_}
 
-
--- | Undocumented member.
+-- | The token for the next set of results.
 grrNextToken :: Lens' GetReplicationRuns (Maybe Text)
 grrNextToken = lens _grrNextToken (\ s a -> s{_grrNextToken = a})
 
--- | Undocumented member.
+-- | The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned @NextToken@ value.
 grrMaxResults :: Lens' GetReplicationRuns (Maybe Int)
 grrMaxResults = lens _grrMaxResults (\ s a -> s{_grrMaxResults = a})
 
--- | Undocumented member.
+-- | The identifier of the replication job.
 grrReplicationJobId :: Lens' GetReplicationRuns Text
 grrReplicationJobId = lens _grrReplicationJobId (\ s a -> s{_grrReplicationJobId = a})
 
@@ -137,46 +135,51 @@ instance ToQuery GetReplicationRuns where
         toQuery = const mempty
 
 -- | /See:/ 'getReplicationRunsResponse' smart constructor.
-data GetReplicationRunsResponse = GetReplicationRunsResponse'
-  { _grrrsReplicationJob     :: !(Maybe ReplicationJob)
-  , _grrrsNextToken          :: !(Maybe Text)
-  , _grrrsReplicationRunList :: !(Maybe [ReplicationRun])
-  , _grrrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetReplicationRunsResponse = GetReplicationRunsResponse'{_grrrsReplicationJob
+                                                              ::
+                                                              !(Maybe
+                                                                  ReplicationJob),
+                                                              _grrrsNextToken ::
+                                                              !(Maybe Text),
+                                                              _grrrsReplicationRunList
+                                                              ::
+                                                              !(Maybe
+                                                                  [ReplicationRun]),
+                                                              _grrrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetReplicationRunsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'grrrsReplicationJob' - Undocumented member.
+-- * 'grrrsReplicationJob' - Information about the replication job.
 --
--- * 'grrrsNextToken' - Undocumented member.
+-- * 'grrrsNextToken' - The token required to retrieve the next set of results. This value is null when there are no more results to return.
 --
--- * 'grrrsReplicationRunList' - Undocumented member.
+-- * 'grrrsReplicationRunList' - Information about the replication runs.
 --
 -- * 'grrrsResponseStatus' - -- | The response status code.
 getReplicationRunsResponse
     :: Int -- ^ 'grrrsResponseStatus'
     -> GetReplicationRunsResponse
-getReplicationRunsResponse pResponseStatus_ =
-  GetReplicationRunsResponse'
-    { _grrrsReplicationJob = Nothing
-    , _grrrsNextToken = Nothing
-    , _grrrsReplicationRunList = Nothing
-    , _grrrsResponseStatus = pResponseStatus_
-    }
+getReplicationRunsResponse pResponseStatus_
+  = GetReplicationRunsResponse'{_grrrsReplicationJob =
+                                  Nothing,
+                                _grrrsNextToken = Nothing,
+                                _grrrsReplicationRunList = Nothing,
+                                _grrrsResponseStatus = pResponseStatus_}
 
-
--- | Undocumented member.
+-- | Information about the replication job.
 grrrsReplicationJob :: Lens' GetReplicationRunsResponse (Maybe ReplicationJob)
 grrrsReplicationJob = lens _grrrsReplicationJob (\ s a -> s{_grrrsReplicationJob = a})
 
--- | Undocumented member.
+-- | The token required to retrieve the next set of results. This value is null when there are no more results to return.
 grrrsNextToken :: Lens' GetReplicationRunsResponse (Maybe Text)
 grrrsNextToken = lens _grrrsNextToken (\ s a -> s{_grrrsNextToken = a})
 
--- | Undocumented member.
+-- | Information about the replication runs.
 grrrsReplicationRunList :: Lens' GetReplicationRunsResponse [ReplicationRun]
 grrrsReplicationRunList = lens _grrrsReplicationRunList (\ s a -> s{_grrrsReplicationRunList = a}) . _Default . _Coerce
 

@@ -11,7 +11,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Provides translation between English and one of six languages, or between one of the six languages and English.
+-- Provides translation between one source language and another of the same set of languages.
 --
 --
 module Network.AWS.Translate
@@ -22,26 +22,38 @@ module Network.AWS.Translate
     -- * Errors
     -- $errors
 
+    -- ** TooManyRequestsException
+    , _TooManyRequestsException
+
     -- ** InvalidRequestException
     , _InvalidRequestException
 
-    -- ** UnsupportedLanguagePairException
-    , _UnsupportedLanguagePairException
+    -- ** InvalidParameterValueException
+    , _InvalidParameterValueException
+
+    -- ** ResourceNotFoundException
+    , _ResourceNotFoundException
 
     -- ** DetectedLanguageLowConfidenceException
     , _DetectedLanguageLowConfidenceException
 
-    -- ** TooManyRequestsException
-    , _TooManyRequestsException
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
 
     -- ** InternalServerException
     , _InternalServerException
 
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
+    -- ** UnsupportedLanguagePairException
+    , _UnsupportedLanguagePairException
+
+    -- ** LimitExceededException
+    , _LimitExceededException
 
     -- ** TextSizeLimitExceededException
     , _TextSizeLimitExceededException
+
+    -- ** InvalidFilterException
+    , _InvalidFilterException
 
     -- * Waiters
     -- $waiters
@@ -49,12 +61,143 @@ module Network.AWS.Translate
     -- * Operations
     -- $operations
 
-    -- ** TranslateText
+    -- ** DescribeTextTranslationJob 
+    , module Network.AWS.Translate.DescribeTextTranslationJob
+
+    -- ** ListTerminologies (Paginated)
+    , module Network.AWS.Translate.ListTerminologies
+
+    -- ** GetTerminology 
+    , module Network.AWS.Translate.GetTerminology
+
+    -- ** TranslateText 
     , module Network.AWS.Translate.TranslateText
 
+    -- ** ImportTerminology 
+    , module Network.AWS.Translate.ImportTerminology
+
+    -- ** StopTextTranslationJob 
+    , module Network.AWS.Translate.StopTextTranslationJob
+
+    -- ** DeleteTerminology 
+    , module Network.AWS.Translate.DeleteTerminology
+
+    -- ** ListTextTranslationJobs 
+    , module Network.AWS.Translate.ListTextTranslationJobs
+
+    -- ** StartTextTranslationJob 
+    , module Network.AWS.Translate.StartTextTranslationJob
+
     -- * Types
+
+    -- ** EncryptionKeyType
+    , EncryptionKeyType (..)
+
+    -- ** JobStatus
+    , JobStatus (..)
+
+    -- ** MergeStrategy
+    , MergeStrategy (..)
+
+    -- ** TerminologyDataFormat
+    , TerminologyDataFormat (..)
+
+    -- ** AppliedTerminology
+    , AppliedTerminology
+    , appliedTerminology
+    , atTerms
+    , atName
+
+    -- ** EncryptionKey
+    , EncryptionKey
+    , encryptionKey
+    , ekType
+    , ekId
+
+    -- ** InputDataConfig
+    , InputDataConfig
+    , inputDataConfig
+    , idcS3URI
+    , idcContentType
+
+    -- ** JobDetails
+    , JobDetails
+    , jobDetails
+    , jdTranslatedDocumentsCount
+    , jdDocumentsWithErrorsCount
+    , jdInputDocumentsCount
+
+    -- ** OutputDataConfig
+    , OutputDataConfig
+    , outputDataConfig
+    , odcS3URI
+
+    -- ** Term
+    , Term
+    , term
+    , tTargetText
+    , tSourceText
+
+    -- ** TerminologyData
+    , TerminologyData
+    , terminologyData
+    , tdFile
+    , tdFormat
+
+    -- ** TerminologyDataLocation
+    , TerminologyDataLocation
+    , terminologyDataLocation
+    , tdlRepositoryType
+    , tdlLocation
+
+    -- ** TerminologyProperties
+    , TerminologyProperties
+    , terminologyProperties
+    , tpSizeBytes
+    , tpLastUpdatedAt
+    , tpARN
+    , tpTargetLanguageCodes
+    , tpCreatedAt
+    , tpName
+    , tpSourceLanguageCode
+    , tpTermCount
+    , tpEncryptionKey
+    , tpDescription
+
+    -- ** TextTranslationJobFilter
+    , TextTranslationJobFilter
+    , textTranslationJobFilter
+    , ttjfSubmittedBeforeTime
+    , ttjfSubmittedAfterTime
+    , ttjfJobName
+    , ttjfJobStatus
+
+    -- ** TextTranslationJobProperties
+    , TextTranslationJobProperties
+    , textTranslationJobProperties
+    , ttjpJobId
+    , ttjpTargetLanguageCodes
+    , ttjpJobName
+    , ttjpSubmittedTime
+    , ttjpInputDataConfig
+    , ttjpTerminologyNames
+    , ttjpSourceLanguageCode
+    , ttjpEndTime
+    , ttjpOutputDataConfig
+    , ttjpJobDetails
+    , ttjpDataAccessRoleARN
+    , ttjpJobStatus
+    , ttjpMessage
     ) where
 
+import Network.AWS.Translate.DeleteTerminology
+import Network.AWS.Translate.DescribeTextTranslationJob
+import Network.AWS.Translate.GetTerminology
+import Network.AWS.Translate.ImportTerminology
+import Network.AWS.Translate.ListTerminologies
+import Network.AWS.Translate.ListTextTranslationJobs
+import Network.AWS.Translate.StartTextTranslationJob
+import Network.AWS.Translate.StopTextTranslationJob
 import Network.AWS.Translate.TranslateText
 import Network.AWS.Translate.Types
 import Network.AWS.Translate.Waiters

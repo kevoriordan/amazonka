@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'attachStaticIP' smart constructor.
-data AttachStaticIP = AttachStaticIP'
-  { _asipStaticIPName :: !Text
-  , _asipInstanceName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachStaticIP = AttachStaticIP'{_asipStaticIPName
+                                      :: !Text,
+                                      _asipInstanceName :: !Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AttachStaticIP' with the minimum fields required to make a request.
 --
@@ -63,10 +62,9 @@ attachStaticIP
     :: Text -- ^ 'asipStaticIPName'
     -> Text -- ^ 'asipInstanceName'
     -> AttachStaticIP
-attachStaticIP pStaticIPName_ pInstanceName_ =
-  AttachStaticIP'
-    {_asipStaticIPName = pStaticIPName_, _asipInstanceName = pInstanceName_}
-
+attachStaticIP pStaticIPName_ pInstanceName_
+  = AttachStaticIP'{_asipStaticIPName = pStaticIPName_,
+                    _asipInstanceName = pInstanceName_}
 
 -- | The name of the static IP.
 asipStaticIPName :: Lens' AttachStaticIP Text
@@ -113,28 +111,29 @@ instance ToQuery AttachStaticIP where
         toQuery = const mempty
 
 -- | /See:/ 'attachStaticIPResponse' smart constructor.
-data AttachStaticIPResponse = AttachStaticIPResponse'
-  { _asiprsOperations     :: !(Maybe [Operation])
-  , _asiprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AttachStaticIPResponse = AttachStaticIPResponse'{_asiprsOperations
+                                                      :: !(Maybe [Operation]),
+                                                      _asiprsResponseStatus ::
+                                                      !Int}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'AttachStaticIPResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'asiprsOperations' - An array of key-value pairs containing information about your API operations.
+-- * 'asiprsOperations' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'asiprsResponseStatus' - -- | The response status code.
 attachStaticIPResponse
     :: Int -- ^ 'asiprsResponseStatus'
     -> AttachStaticIPResponse
-attachStaticIPResponse pResponseStatus_ =
-  AttachStaticIPResponse'
-    {_asiprsOperations = Nothing, _asiprsResponseStatus = pResponseStatus_}
+attachStaticIPResponse pResponseStatus_
+  = AttachStaticIPResponse'{_asiprsOperations =
+                              Nothing,
+                            _asiprsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about your API operations.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 asiprsOperations :: Lens' AttachStaticIPResponse [Operation]
 asiprsOperations = lens _asiprsOperations (\ s a -> s{_asiprsOperations = a}) . _Default . _Coerce
 

@@ -48,14 +48,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateRoom' smart constructor.
-data UpdateRoom = UpdateRoom'
-  { _urProfileARN         :: !(Maybe Text)
-  , _urProviderCalendarId :: !(Maybe Text)
-  , _urRoomARN            :: !(Maybe Text)
-  , _urRoomName           :: !(Maybe Text)
-  , _urDescription        :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRoom = UpdateRoom'{_urProfileARN ::
+                              !(Maybe Text),
+                              _urProviderCalendarId :: !(Maybe Text),
+                              _urRoomARN :: !(Maybe Text),
+                              _urRoomName :: !(Maybe Text),
+                              _urDescription :: !(Maybe Text)}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRoom' with the minimum fields required to make a request.
 --
@@ -65,22 +64,18 @@ data UpdateRoom = UpdateRoom'
 --
 -- * 'urProviderCalendarId' - The updated provider calendar ARN for the room.
 --
--- * 'urRoomARN' - The ARN of the room to update.
+-- * 'urRoomARN' - The ARN of the room to update. 
 --
 -- * 'urRoomName' - The updated name for the room.
 --
 -- * 'urDescription' - The updated description for the room.
 updateRoom
     :: UpdateRoom
-updateRoom =
-  UpdateRoom'
-    { _urProfileARN = Nothing
-    , _urProviderCalendarId = Nothing
-    , _urRoomARN = Nothing
-    , _urRoomName = Nothing
-    , _urDescription = Nothing
-    }
-
+updateRoom
+  = UpdateRoom'{_urProfileARN = Nothing,
+                _urProviderCalendarId = Nothing,
+                _urRoomARN = Nothing, _urRoomName = Nothing,
+                _urDescription = Nothing}
 
 -- | The updated profile ARN for the room.
 urProfileARN :: Lens' UpdateRoom (Maybe Text)
@@ -90,7 +85,7 @@ urProfileARN = lens _urProfileARN (\ s a -> s{_urProfileARN = a})
 urProviderCalendarId :: Lens' UpdateRoom (Maybe Text)
 urProviderCalendarId = lens _urProviderCalendarId (\ s a -> s{_urProviderCalendarId = a})
 
--- | The ARN of the room to update.
+-- | The ARN of the room to update. 
 urRoomARN :: Lens' UpdateRoom (Maybe Text)
 urRoomARN = lens _urRoomARN (\ s a -> s{_urRoomARN = a})
 
@@ -140,10 +135,10 @@ instance ToQuery UpdateRoom where
         toQuery = const mempty
 
 -- | /See:/ 'updateRoomResponse' smart constructor.
-newtype UpdateRoomResponse = UpdateRoomResponse'
-  { _urrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateRoomResponse = UpdateRoomResponse'{_urrsResponseStatus
+                                                 :: Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'UpdateRoomResponse' with the minimum fields required to make a request.
 --
@@ -153,9 +148,9 @@ newtype UpdateRoomResponse = UpdateRoomResponse'
 updateRoomResponse
     :: Int -- ^ 'urrsResponseStatus'
     -> UpdateRoomResponse
-updateRoomResponse pResponseStatus_ =
-  UpdateRoomResponse' {_urrsResponseStatus = pResponseStatus_}
-
+updateRoomResponse pResponseStatus_
+  = UpdateRoomResponse'{_urrsResponseStatus =
+                          pResponseStatus_}
 
 -- | -- | The response status code.
 urrsResponseStatus :: Lens' UpdateRoomResponse Int

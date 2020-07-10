@@ -52,17 +52,18 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'createComment' smart constructor.
-data CreateComment = CreateComment'
-  { _ccNotifyCollaborators :: !(Maybe Bool)
-  , _ccAuthenticationToken :: !(Maybe (Sensitive Text))
-  , _ccVisibility          :: !(Maybe CommentVisibilityType)
-  , _ccThreadId            :: !(Maybe Text)
-  , _ccParentId            :: !(Maybe Text)
-  , _ccDocumentId          :: !Text
-  , _ccVersionId           :: !Text
-  , _ccText                :: !(Sensitive Text)
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateComment = CreateComment'{_ccNotifyCollaborators
+                                    :: !(Maybe Bool),
+                                    _ccAuthenticationToken ::
+                                    !(Maybe (Sensitive Text)),
+                                    _ccVisibility ::
+                                    !(Maybe CommentVisibilityType),
+                                    _ccThreadId :: !(Maybe Text),
+                                    _ccParentId :: !(Maybe Text),
+                                    _ccDocumentId :: !Text,
+                                    _ccVersionId :: !Text,
+                                    _ccText :: !(Sensitive Text)}
+                       deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateComment' with the minimum fields required to make a request.
 --
@@ -70,7 +71,7 @@ data CreateComment = CreateComment'
 --
 -- * 'ccNotifyCollaborators' - Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
 --
--- * 'ccAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'ccAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'ccVisibility' - The visibility of the comment. Options are either PRIVATE, where the comment is visible only to the comment author and document owner and co-owners, or PUBLIC, where the comment is visible to document owners, co-owners, and contributors.
 --
@@ -88,24 +89,19 @@ createComment
     -> Text -- ^ 'ccVersionId'
     -> Text -- ^ 'ccText'
     -> CreateComment
-createComment pDocumentId_ pVersionId_ pText_ =
-  CreateComment'
-    { _ccNotifyCollaborators = Nothing
-    , _ccAuthenticationToken = Nothing
-    , _ccVisibility = Nothing
-    , _ccThreadId = Nothing
-    , _ccParentId = Nothing
-    , _ccDocumentId = pDocumentId_
-    , _ccVersionId = pVersionId_
-    , _ccText = _Sensitive # pText_
-    }
-
+createComment pDocumentId_ pVersionId_ pText_
+  = CreateComment'{_ccNotifyCollaborators = Nothing,
+                   _ccAuthenticationToken = Nothing,
+                   _ccVisibility = Nothing, _ccThreadId = Nothing,
+                   _ccParentId = Nothing, _ccDocumentId = pDocumentId_,
+                   _ccVersionId = pVersionId_,
+                   _ccText = _Sensitive # pText_}
 
 -- | Set this parameter to TRUE to send an email out to the document collaborators after the comment is created.
 ccNotifyCollaborators :: Lens' CreateComment (Maybe Bool)
 ccNotifyCollaborators = lens _ccNotifyCollaborators (\ s a -> s{_ccNotifyCollaborators = a})
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 ccAuthenticationToken :: Lens' CreateComment (Maybe Text)
 ccAuthenticationToken = lens _ccAuthenticationToken (\ s a -> s{_ccAuthenticationToken = a}) . mapping _Sensitive
 
@@ -174,11 +170,10 @@ instance ToQuery CreateComment where
         toQuery = const mempty
 
 -- | /See:/ 'createCommentResponse' smart constructor.
-data CreateCommentResponse = CreateCommentResponse'
-  { _ccrsComment        :: !(Maybe Comment)
-  , _ccrsResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data CreateCommentResponse = CreateCommentResponse'{_ccrsComment
+                                                    :: !(Maybe Comment),
+                                                    _ccrsResponseStatus :: !Int}
+                               deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateCommentResponse' with the minimum fields required to make a request.
 --
@@ -190,10 +185,9 @@ data CreateCommentResponse = CreateCommentResponse'
 createCommentResponse
     :: Int -- ^ 'ccrsResponseStatus'
     -> CreateCommentResponse
-createCommentResponse pResponseStatus_ =
-  CreateCommentResponse'
-    {_ccrsComment = Nothing, _ccrsResponseStatus = pResponseStatus_}
-
+createCommentResponse pResponseStatus_
+  = CreateCommentResponse'{_ccrsComment = Nothing,
+                           _ccrsResponseStatus = pResponseStatus_}
 
 -- | The comment that has been created.
 ccrsComment :: Lens' CreateCommentResponse (Maybe Comment)

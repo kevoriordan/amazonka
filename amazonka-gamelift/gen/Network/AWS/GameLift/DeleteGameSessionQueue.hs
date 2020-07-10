@@ -21,15 +21,19 @@
 -- Deletes a game session queue. This action means that any 'StartGameSessionPlacement' requests that reference this queue will fail. To delete a queue, specify the queue name.
 --
 --
--- Queue-related operations include:
+-- __Learn more__ 
 --
---     * 'CreateGameSessionQueue'
+-- <https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html Using Multi-Region Queues> 
 --
---     * 'DescribeGameSessionQueues'
+-- __Related operations__ 
 --
---     * 'UpdateGameSessionQueue'
+--     * 'CreateGameSessionQueue' 
 --
---     * 'DeleteGameSessionQueue'
+--     * 'DescribeGameSessionQueues' 
+--
+--     * 'UpdateGameSessionQueue' 
+--
+--     * 'DeleteGameSessionQueue' 
 --
 --
 --
@@ -55,28 +59,28 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Represents the input for a request action.
+-- | Represents the input for a request action. 
 --
 --
 --
 -- /See:/ 'deleteGameSessionQueue' smart constructor.
-newtype DeleteGameSessionQueue = DeleteGameSessionQueue'
-  { _dgsqName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteGameSessionQueue = DeleteGameSessionQueue'{_dgsqName
+                                                         :: Text}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteGameSessionQueue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dgsqName' - Descriptive label that is associated with game session queue. Queue names must be unique within each region.
+-- * 'dgsqName' - A descriptive label that is associated with game session queue. Queue names must be unique within each Region. You can use either the queue ID or ARN value. 
 deleteGameSessionQueue
     :: Text -- ^ 'dgsqName'
     -> DeleteGameSessionQueue
-deleteGameSessionQueue pName_ = DeleteGameSessionQueue' {_dgsqName = pName_}
+deleteGameSessionQueue pName_
+  = DeleteGameSessionQueue'{_dgsqName = pName_}
 
-
--- | Descriptive label that is associated with game session queue. Queue names must be unique within each region.
+-- | A descriptive label that is associated with game session queue. Queue names must be unique within each Region. You can use either the queue ID or ARN value. 
 dgsqName :: Lens' DeleteGameSessionQueue Text
 dgsqName = lens _dgsqName (\ s a -> s{_dgsqName = a})
 
@@ -114,10 +118,10 @@ instance ToQuery DeleteGameSessionQueue where
         toQuery = const mempty
 
 -- | /See:/ 'deleteGameSessionQueueResponse' smart constructor.
-newtype DeleteGameSessionQueueResponse = DeleteGameSessionQueueResponse'
-  { _dgsqrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteGameSessionQueueResponse = DeleteGameSessionQueueResponse'{_dgsqrsResponseStatus
+                                                                         :: Int}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'DeleteGameSessionQueueResponse' with the minimum fields required to make a request.
 --
@@ -127,9 +131,9 @@ newtype DeleteGameSessionQueueResponse = DeleteGameSessionQueueResponse'
 deleteGameSessionQueueResponse
     :: Int -- ^ 'dgsqrsResponseStatus'
     -> DeleteGameSessionQueueResponse
-deleteGameSessionQueueResponse pResponseStatus_ =
-  DeleteGameSessionQueueResponse' {_dgsqrsResponseStatus = pResponseStatus_}
-
+deleteGameSessionQueueResponse pResponseStatus_
+  = DeleteGameSessionQueueResponse'{_dgsqrsResponseStatus
+                                      = pResponseStatus_}
 
 -- | -- | The response status code.
 dgsqrsResponseStatus :: Lens' DeleteGameSessionQueueResponse Int

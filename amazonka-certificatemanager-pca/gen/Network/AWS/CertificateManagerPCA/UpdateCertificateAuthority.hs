@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the status or configuration of a private certificate authority (CA). Your private CA must be in the __@ACTIVE@ __ or __@DISABLED@ __ state before you can update it. You can disable a private CA that is in the __@ACTIVE@ __ state or make a CA that is in the __@DISABLED@ __ state active again.
+-- Updates the status or configuration of a private certificate authority (CA). Your private CA must be in the @ACTIVE@ or @DISABLED@ state before you can update it. You can disable a private CA that is in the @ACTIVE@ state or make a CA that is in the @DISABLED@ state active again.
 --
 --
 module Network.AWS.CertificateManagerPCA.UpdateCertificateAuthority
@@ -44,12 +44,18 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateCertificateAuthority' smart constructor.
-data UpdateCertificateAuthority = UpdateCertificateAuthority'
-  { _ucaStatus                  :: !(Maybe CertificateAuthorityStatus)
-  , _ucaRevocationConfiguration :: !(Maybe RevocationConfiguration)
-  , _ucaCertificateAuthorityARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCertificateAuthority = UpdateCertificateAuthority'{_ucaStatus
+                                                              ::
+                                                              !(Maybe
+                                                                  CertificateAuthorityStatus),
+                                                              _ucaRevocationConfiguration
+                                                              ::
+                                                              !(Maybe
+                                                                  RevocationConfiguration),
+                                                              _ucaCertificateAuthorityARN
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'UpdateCertificateAuthority' with the minimum fields required to make a request.
 --
@@ -59,17 +65,15 @@ data UpdateCertificateAuthority = UpdateCertificateAuthority'
 --
 -- * 'ucaRevocationConfiguration' - Revocation information for your private CA.
 --
--- * 'ucaCertificateAuthorityARN' - Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @
+-- * 'ucaCertificateAuthorityARN' - Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ 
 updateCertificateAuthority
     :: Text -- ^ 'ucaCertificateAuthorityARN'
     -> UpdateCertificateAuthority
-updateCertificateAuthority pCertificateAuthorityARN_ =
-  UpdateCertificateAuthority'
-    { _ucaStatus = Nothing
-    , _ucaRevocationConfiguration = Nothing
-    , _ucaCertificateAuthorityARN = pCertificateAuthorityARN_
-    }
-
+updateCertificateAuthority pCertificateAuthorityARN_
+  = UpdateCertificateAuthority'{_ucaStatus = Nothing,
+                                _ucaRevocationConfiguration = Nothing,
+                                _ucaCertificateAuthorityARN =
+                                  pCertificateAuthorityARN_}
 
 -- | Status of your private CA.
 ucaStatus :: Lens' UpdateCertificateAuthority (Maybe CertificateAuthorityStatus)
@@ -79,7 +83,7 @@ ucaStatus = lens _ucaStatus (\ s a -> s{_ucaStatus = a})
 ucaRevocationConfiguration :: Lens' UpdateCertificateAuthority (Maybe RevocationConfiguration)
 ucaRevocationConfiguration = lens _ucaRevocationConfiguration (\ s a -> s{_ucaRevocationConfiguration = a})
 
--- | Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form: @arn:aws:acm:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @
+-- | Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form: @arn:aws:acm-pca:/region/ :/account/ :certificate-authority//12345678-1234-1234-1234-123456789012/ @ 
 ucaCertificateAuthorityARN :: Lens' UpdateCertificateAuthority Text
 ucaCertificateAuthorityARN = lens _ucaCertificateAuthorityARN (\ s a -> s{_ucaCertificateAuthorityARN = a})
 
@@ -122,17 +126,16 @@ instance ToQuery UpdateCertificateAuthority where
         toQuery = const mempty
 
 -- | /See:/ 'updateCertificateAuthorityResponse' smart constructor.
-data UpdateCertificateAuthorityResponse =
-  UpdateCertificateAuthorityResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCertificateAuthorityResponse = UpdateCertificateAuthorityResponse'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'UpdateCertificateAuthorityResponse' with the minimum fields required to make a request.
 --
 updateCertificateAuthorityResponse
     :: UpdateCertificateAuthorityResponse
-updateCertificateAuthorityResponse = UpdateCertificateAuthorityResponse'
-
+updateCertificateAuthorityResponse
+  = UpdateCertificateAuthorityResponse'
 
 instance NFData UpdateCertificateAuthorityResponse
          where

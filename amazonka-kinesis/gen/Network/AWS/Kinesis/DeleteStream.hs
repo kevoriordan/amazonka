@@ -37,6 +37,7 @@ module Network.AWS.Kinesis.DeleteStream
       deleteStream
     , DeleteStream
     -- * Request Lenses
+    , dsEnforceConsumerDeletion
     , dsStreamName
 
     -- * Destructuring the Response
@@ -56,21 +57,28 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteStream' smart constructor.
-newtype DeleteStream = DeleteStream'
-  { _dsStreamName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteStream = DeleteStream'{_dsEnforceConsumerDeletion
+                                  :: !(Maybe Bool),
+                                  _dsStreamName :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteStream' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dsEnforceConsumerDeletion' - If this parameter is unset (@null@ ) or if you set it to @false@ , and the stream has registered consumers, the call to @DeleteStream@ fails with a @ResourceInUseException@ . 
+--
 -- * 'dsStreamName' - The name of the stream to delete.
 deleteStream
     :: Text -- ^ 'dsStreamName'
     -> DeleteStream
-deleteStream pStreamName_ = DeleteStream' {_dsStreamName = pStreamName_}
+deleteStream pStreamName_
+  = DeleteStream'{_dsEnforceConsumerDeletion = Nothing,
+                  _dsStreamName = pStreamName_}
 
+-- | If this parameter is unset (@null@ ) or if you set it to @false@ , and the stream has registered consumers, the call to @DeleteStream@ fails with a @ResourceInUseException@ . 
+dsEnforceConsumerDeletion :: Lens' DeleteStream (Maybe Bool)
+dsEnforceConsumerDeletion = lens _dsEnforceConsumerDeletion (\ s a -> s{_dsEnforceConsumerDeletion = a})
 
 -- | The name of the stream to delete.
 dsStreamName :: Lens' DeleteStream Text
@@ -97,7 +105,10 @@ instance ToHeaders DeleteStream where
 instance ToJSON DeleteStream where
         toJSON DeleteStream'{..}
           = object
-              (catMaybes [Just ("StreamName" .= _dsStreamName)])
+              (catMaybes
+                 [("EnforceConsumerDeletion" .=) <$>
+                    _dsEnforceConsumerDeletion,
+                  Just ("StreamName" .= _dsStreamName)])
 
 instance ToPath DeleteStream where
         toPath = const "/"
@@ -106,16 +117,13 @@ instance ToQuery DeleteStream where
         toQuery = const mempty
 
 -- | /See:/ 'deleteStreamResponse' smart constructor.
-data DeleteStreamResponse =
-  DeleteStreamResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteStreamResponse = DeleteStreamResponse'
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteStreamResponse' with the minimum fields required to make a request.
 --
 deleteStreamResponse
     :: DeleteStreamResponse
 deleteStreamResponse = DeleteStreamResponse'
-
 
 instance NFData DeleteStreamResponse where

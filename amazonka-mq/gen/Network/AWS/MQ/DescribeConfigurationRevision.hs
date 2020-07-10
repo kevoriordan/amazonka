@@ -34,6 +34,7 @@ module Network.AWS.MQ.DescribeConfigurationRevision
     -- * Response Lenses
     , dcrrsConfigurationId
     , dcrrsData
+    , dcrrsCreated
     , dcrrsDescription
     , dcrrsResponseStatus
     ) where
@@ -46,11 +47,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'describeConfigurationRevision' smart constructor.
-data DescribeConfigurationRevision = DescribeConfigurationRevision'
-  { _dcrConfigurationRevision :: !Text
-  , _dcrConfigurationId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConfigurationRevision = DescribeConfigurationRevision'{_dcrConfigurationRevision
+                                                                    :: !Text,
+                                                                    _dcrConfigurationId
+                                                                    :: !Text}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DescribeConfigurationRevision' with the minimum fields required to make a request.
 --
@@ -63,12 +65,11 @@ describeConfigurationRevision
     :: Text -- ^ 'dcrConfigurationRevision'
     -> Text -- ^ 'dcrConfigurationId'
     -> DescribeConfigurationRevision
-describeConfigurationRevision pConfigurationRevision_ pConfigurationId_ =
-  DescribeConfigurationRevision'
-    { _dcrConfigurationRevision = pConfigurationRevision_
-    , _dcrConfigurationId = pConfigurationId_
-    }
-
+describeConfigurationRevision pConfigurationRevision_
+  pConfigurationId_
+  = DescribeConfigurationRevision'{_dcrConfigurationRevision
+                                     = pConfigurationRevision_,
+                                   _dcrConfigurationId = pConfigurationId_}
 
 -- | The revision of the configuration.
 dcrConfigurationRevision :: Lens' DescribeConfigurationRevision Text
@@ -88,7 +89,8 @@ instance AWSRequest DescribeConfigurationRevision
               (\ s h x ->
                  DescribeConfigurationRevisionResponse' <$>
                    (x .?> "configurationId") <*> (x .?> "data") <*>
-                     (x .?> "description")
+                     (x .?> "created")
+                     <*> (x .?> "description")
                      <*> (pure (fromEnum s)))
 
 instance Hashable DescribeConfigurationRevision where
@@ -113,13 +115,27 @@ instance ToQuery DescribeConfigurationRevision where
         toQuery = const mempty
 
 -- | /See:/ 'describeConfigurationRevisionResponse' smart constructor.
-data DescribeConfigurationRevisionResponse = DescribeConfigurationRevisionResponse'
-  { _dcrrsConfigurationId :: !(Maybe Text)
-  , _dcrrsData            :: !(Maybe Text)
-  , _dcrrsDescription     :: !(Maybe Text)
-  , _dcrrsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeConfigurationRevisionResponse = DescribeConfigurationRevisionResponse'{_dcrrsConfigurationId
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dcrrsData
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dcrrsCreated
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        POSIX),
+                                                                                    _dcrrsDescription
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        Text),
+                                                                                    _dcrrsResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DescribeConfigurationRevisionResponse' with the minimum fields required to make a request.
 --
@@ -129,20 +145,23 @@ data DescribeConfigurationRevisionResponse = DescribeConfigurationRevisionRespon
 --
 -- * 'dcrrsData' - Required. The base64-encoded XML configuration.
 --
+-- * 'dcrrsCreated' - Required. The date and time of the configuration.
+--
 -- * 'dcrrsDescription' - The description of the configuration.
 --
 -- * 'dcrrsResponseStatus' - -- | The response status code.
 describeConfigurationRevisionResponse
     :: Int -- ^ 'dcrrsResponseStatus'
     -> DescribeConfigurationRevisionResponse
-describeConfigurationRevisionResponse pResponseStatus_ =
-  DescribeConfigurationRevisionResponse'
-    { _dcrrsConfigurationId = Nothing
-    , _dcrrsData = Nothing
-    , _dcrrsDescription = Nothing
-    , _dcrrsResponseStatus = pResponseStatus_
-    }
-
+describeConfigurationRevisionResponse
+  pResponseStatus_
+  = DescribeConfigurationRevisionResponse'{_dcrrsConfigurationId
+                                             = Nothing,
+                                           _dcrrsData = Nothing,
+                                           _dcrrsCreated = Nothing,
+                                           _dcrrsDescription = Nothing,
+                                           _dcrrsResponseStatus =
+                                             pResponseStatus_}
 
 -- | Required. The unique ID that Amazon MQ generates for the configuration.
 dcrrsConfigurationId :: Lens' DescribeConfigurationRevisionResponse (Maybe Text)
@@ -151,6 +170,10 @@ dcrrsConfigurationId = lens _dcrrsConfigurationId (\ s a -> s{_dcrrsConfiguratio
 -- | Required. The base64-encoded XML configuration.
 dcrrsData :: Lens' DescribeConfigurationRevisionResponse (Maybe Text)
 dcrrsData = lens _dcrrsData (\ s a -> s{_dcrrsData = a})
+
+-- | Required. The date and time of the configuration.
+dcrrsCreated :: Lens' DescribeConfigurationRevisionResponse (Maybe UTCTime)
+dcrrsCreated = lens _dcrrsCreated (\ s a -> s{_dcrrsCreated = a}) . mapping _Time
 
 -- | The description of the configuration.
 dcrrsDescription :: Lens' DescribeConfigurationRevisionResponse (Maybe Text)

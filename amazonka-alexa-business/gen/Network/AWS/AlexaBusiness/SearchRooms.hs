@@ -53,13 +53,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'searchRooms' smart constructor.
-data SearchRooms = SearchRooms'
-  { _srFilters      :: !(Maybe [Filter])
-  , _srSortCriteria :: !(Maybe [Sort])
-  , _srNextToken    :: !(Maybe Text)
-  , _srMaxResults   :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchRooms = SearchRooms'{_srFilters ::
+                                !(Maybe [Filter]),
+                                _srSortCriteria :: !(Maybe [Sort]),
+                                _srNextToken :: !(Maybe Text),
+                                _srMaxResults :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchRooms' with the minimum fields required to make a request.
 --
@@ -71,17 +70,13 @@ data SearchRooms = SearchRooms'
 --
 -- * 'srNextToken' - An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by @MaxResults@ .
 --
--- * 'srMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved.
+-- * 'srMaxResults' - The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. 
 searchRooms
     :: SearchRooms
-searchRooms =
-  SearchRooms'
-    { _srFilters = Nothing
-    , _srSortCriteria = Nothing
-    , _srNextToken = Nothing
-    , _srMaxResults = Nothing
-    }
-
+searchRooms
+  = SearchRooms'{_srFilters = Nothing,
+                 _srSortCriteria = Nothing, _srNextToken = Nothing,
+                 _srMaxResults = Nothing}
 
 -- | The filters to use to list a specified set of rooms. The supported filter keys are RoomName and ProfileName.
 srFilters :: Lens' SearchRooms [Filter]
@@ -95,7 +90,7 @@ srSortCriteria = lens _srSortCriteria (\ s a -> s{_srSortCriteria = a}) . _Defau
 srNextToken :: Lens' SearchRooms (Maybe Text)
 srNextToken = lens _srNextToken (\ s a -> s{_srNextToken = a})
 
--- | The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved.
+-- | The maximum number of results to include in the response. If more results exist than the specified @MaxResults@ value, a token is included in the response so that the remaining results can be retrieved. 
 srMaxResults :: Lens' SearchRooms (Maybe Natural)
 srMaxResults = lens _srMaxResults (\ s a -> s{_srMaxResults = a}) . mapping _Nat
 
@@ -146,13 +141,12 @@ instance ToQuery SearchRooms where
         toQuery = const mempty
 
 -- | /See:/ 'searchRoomsResponse' smart constructor.
-data SearchRoomsResponse = SearchRoomsResponse'
-  { _srrsRooms          :: !(Maybe [RoomData])
-  , _srrsNextToken      :: !(Maybe Text)
-  , _srrsTotalCount     :: !(Maybe Int)
-  , _srrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SearchRoomsResponse = SearchRoomsResponse'{_srrsRooms
+                                                :: !(Maybe [RoomData]),
+                                                _srrsNextToken :: !(Maybe Text),
+                                                _srrsTotalCount :: !(Maybe Int),
+                                                _srrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SearchRoomsResponse' with the minimum fields required to make a request.
 --
@@ -168,14 +162,10 @@ data SearchRoomsResponse = SearchRoomsResponse'
 searchRoomsResponse
     :: Int -- ^ 'srrsResponseStatus'
     -> SearchRoomsResponse
-searchRoomsResponse pResponseStatus_ =
-  SearchRoomsResponse'
-    { _srrsRooms = Nothing
-    , _srrsNextToken = Nothing
-    , _srrsTotalCount = Nothing
-    , _srrsResponseStatus = pResponseStatus_
-    }
-
+searchRoomsResponse pResponseStatus_
+  = SearchRoomsResponse'{_srrsRooms = Nothing,
+                         _srrsNextToken = Nothing, _srrsTotalCount = Nothing,
+                         _srrsResponseStatus = pResponseStatus_}
 
 -- | The rooms that meet the specified set of filter criteria, in sort order.
 srrsRooms :: Lens' SearchRoomsResponse [RoomData]

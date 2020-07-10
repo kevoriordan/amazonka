@@ -32,14 +32,18 @@ module Network.AWS.MediaLive.StopChannel
     , StopChannelResponse
     -- * Response Lenses
     , srsState
+    , srsLogLevel
     , srsARN
     , srsPipelinesRunningCount
+    , srsPipelineDetails
     , srsInputSpecification
     , srsInputAttachments
     , srsDestinations
     , srsName
     , srsId
+    , srsChannelClass
     , srsEgressEndpoints
+    , srsTags
     , srsEncoderSettings
     , srsRoleARN
     , srsResponseStatus
@@ -55,10 +59,9 @@ import Network.AWS.Response
 -- | Placeholder documentation for StopChannelRequest
 --
 -- /See:/ 'stopChannel' smart constructor.
-newtype StopChannel = StopChannel'
-  { _sChannelId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype StopChannel = StopChannel'{_sChannelId ::
+                                   Text}
+                        deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopChannel' with the minimum fields required to make a request.
 --
@@ -68,8 +71,8 @@ newtype StopChannel = StopChannel'
 stopChannel
     :: Text -- ^ 'sChannelId'
     -> StopChannel
-stopChannel pChannelId_ = StopChannel' {_sChannelId = pChannelId_}
-
+stopChannel pChannelId_
+  = StopChannel'{_sChannelId = pChannelId_}
 
 -- | A request to stop a running channel
 sChannelId :: Lens' StopChannel Text
@@ -82,14 +85,18 @@ instance AWSRequest StopChannel where
           = receiveJSON
               (\ s h x ->
                  StopChannelResponse' <$>
-                   (x .?> "state") <*> (x .?> "arn") <*>
-                     (x .?> "pipelinesRunningCount")
+                   (x .?> "state") <*> (x .?> "logLevel") <*>
+                     (x .?> "arn")
+                     <*> (x .?> "pipelinesRunningCount")
+                     <*> (x .?> "pipelineDetails" .!@ mempty)
                      <*> (x .?> "inputSpecification")
                      <*> (x .?> "inputAttachments" .!@ mempty)
                      <*> (x .?> "destinations" .!@ mempty)
                      <*> (x .?> "name")
                      <*> (x .?> "id")
+                     <*> (x .?> "channelClass")
                      <*> (x .?> "egressEndpoints" .!@ mempty)
+                     <*> (x .?> "tags" .!@ mempty)
                      <*> (x .?> "encoderSettings")
                      <*> (x .?> "roleArn")
                      <*> (pure (fromEnum s)))
@@ -119,21 +126,35 @@ instance ToQuery StopChannel where
 -- | Placeholder documentation for StopChannelResponse
 --
 -- /See:/ 'stopChannelResponse' smart constructor.
-data StopChannelResponse = StopChannelResponse'
-  { _srsState                 :: !(Maybe ChannelState)
-  , _srsARN                   :: !(Maybe Text)
-  , _srsPipelinesRunningCount :: !(Maybe Int)
-  , _srsInputSpecification    :: !(Maybe InputSpecification)
-  , _srsInputAttachments      :: !(Maybe [InputAttachment])
-  , _srsDestinations          :: !(Maybe [OutputDestination])
-  , _srsName                  :: !(Maybe Text)
-  , _srsId                    :: !(Maybe Text)
-  , _srsEgressEndpoints       :: !(Maybe [ChannelEgressEndpoint])
-  , _srsEncoderSettings       :: !(Maybe EncoderSettings)
-  , _srsRoleARN               :: !(Maybe Text)
-  , _srsResponseStatus        :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data StopChannelResponse = StopChannelResponse'{_srsState
+                                                :: !(Maybe ChannelState),
+                                                _srsLogLevel ::
+                                                !(Maybe LogLevel),
+                                                _srsARN :: !(Maybe Text),
+                                                _srsPipelinesRunningCount ::
+                                                !(Maybe Int),
+                                                _srsPipelineDetails ::
+                                                !(Maybe [PipelineDetail]),
+                                                _srsInputSpecification ::
+                                                !(Maybe InputSpecification),
+                                                _srsInputAttachments ::
+                                                !(Maybe [InputAttachment]),
+                                                _srsDestinations ::
+                                                !(Maybe [OutputDestination]),
+                                                _srsName :: !(Maybe Text),
+                                                _srsId :: !(Maybe Text),
+                                                _srsChannelClass ::
+                                                !(Maybe ChannelClass),
+                                                _srsEgressEndpoints ::
+                                                !(Maybe
+                                                    [ChannelEgressEndpoint]),
+                                                _srsTags ::
+                                                !(Maybe (Map Text Text)),
+                                                _srsEncoderSettings ::
+                                                !(Maybe EncoderSettings),
+                                                _srsRoleARN :: !(Maybe Text),
+                                                _srsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'StopChannelResponse' with the minimum fields required to make a request.
 --
@@ -141,9 +162,13 @@ data StopChannelResponse = StopChannelResponse'
 --
 -- * 'srsState' - Undocumented member.
 --
+-- * 'srsLogLevel' - The log level being written to CloudWatch Logs.
+--
 -- * 'srsARN' - The unique arn of the channel.
 --
 -- * 'srsPipelinesRunningCount' - The number of currently healthy pipelines.
+--
+-- * 'srsPipelineDetails' - Runtime details for the pipelines of a running channel.
 --
 -- * 'srsInputSpecification' - Undocumented member.
 --
@@ -155,7 +180,11 @@ data StopChannelResponse = StopChannelResponse'
 --
 -- * 'srsId' - The unique id of the channel.
 --
+-- * 'srsChannelClass' - The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+--
 -- * 'srsEgressEndpoints' - The endpoints where outgoing connections initiate from
+--
+-- * 'srsTags' - A collection of key-value pairs.
 --
 -- * 'srsEncoderSettings' - Undocumented member.
 --
@@ -165,26 +194,26 @@ data StopChannelResponse = StopChannelResponse'
 stopChannelResponse
     :: Int -- ^ 'srsResponseStatus'
     -> StopChannelResponse
-stopChannelResponse pResponseStatus_ =
-  StopChannelResponse'
-    { _srsState = Nothing
-    , _srsARN = Nothing
-    , _srsPipelinesRunningCount = Nothing
-    , _srsInputSpecification = Nothing
-    , _srsInputAttachments = Nothing
-    , _srsDestinations = Nothing
-    , _srsName = Nothing
-    , _srsId = Nothing
-    , _srsEgressEndpoints = Nothing
-    , _srsEncoderSettings = Nothing
-    , _srsRoleARN = Nothing
-    , _srsResponseStatus = pResponseStatus_
-    }
-
+stopChannelResponse pResponseStatus_
+  = StopChannelResponse'{_srsState = Nothing,
+                         _srsLogLevel = Nothing, _srsARN = Nothing,
+                         _srsPipelinesRunningCount = Nothing,
+                         _srsPipelineDetails = Nothing,
+                         _srsInputSpecification = Nothing,
+                         _srsInputAttachments = Nothing,
+                         _srsDestinations = Nothing, _srsName = Nothing,
+                         _srsId = Nothing, _srsChannelClass = Nothing,
+                         _srsEgressEndpoints = Nothing, _srsTags = Nothing,
+                         _srsEncoderSettings = Nothing, _srsRoleARN = Nothing,
+                         _srsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 srsState :: Lens' StopChannelResponse (Maybe ChannelState)
 srsState = lens _srsState (\ s a -> s{_srsState = a})
+
+-- | The log level being written to CloudWatch Logs.
+srsLogLevel :: Lens' StopChannelResponse (Maybe LogLevel)
+srsLogLevel = lens _srsLogLevel (\ s a -> s{_srsLogLevel = a})
 
 -- | The unique arn of the channel.
 srsARN :: Lens' StopChannelResponse (Maybe Text)
@@ -193,6 +222,10 @@ srsARN = lens _srsARN (\ s a -> s{_srsARN = a})
 -- | The number of currently healthy pipelines.
 srsPipelinesRunningCount :: Lens' StopChannelResponse (Maybe Int)
 srsPipelinesRunningCount = lens _srsPipelinesRunningCount (\ s a -> s{_srsPipelinesRunningCount = a})
+
+-- | Runtime details for the pipelines of a running channel.
+srsPipelineDetails :: Lens' StopChannelResponse [PipelineDetail]
+srsPipelineDetails = lens _srsPipelineDetails (\ s a -> s{_srsPipelineDetails = a}) . _Default . _Coerce
 
 -- | Undocumented member.
 srsInputSpecification :: Lens' StopChannelResponse (Maybe InputSpecification)
@@ -214,9 +247,17 @@ srsName = lens _srsName (\ s a -> s{_srsName = a})
 srsId :: Lens' StopChannelResponse (Maybe Text)
 srsId = lens _srsId (\ s a -> s{_srsId = a})
 
+-- | The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+srsChannelClass :: Lens' StopChannelResponse (Maybe ChannelClass)
+srsChannelClass = lens _srsChannelClass (\ s a -> s{_srsChannelClass = a})
+
 -- | The endpoints where outgoing connections initiate from
 srsEgressEndpoints :: Lens' StopChannelResponse [ChannelEgressEndpoint]
 srsEgressEndpoints = lens _srsEgressEndpoints (\ s a -> s{_srsEgressEndpoints = a}) . _Default . _Coerce
+
+-- | A collection of key-value pairs.
+srsTags :: Lens' StopChannelResponse (HashMap Text Text)
+srsTags = lens _srsTags (\ s a -> s{_srsTags = a}) . _Default . _Map
 
 -- | Undocumented member.
 srsEncoderSettings :: Lens' StopChannelResponse (Maybe EncoderSettings)

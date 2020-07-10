@@ -45,27 +45,51 @@ library
 
     exposed-modules:
           Network.AWS.EFS
+        , Network.AWS.EFS.CreateAccessPoint
         , Network.AWS.EFS.CreateFileSystem
         , Network.AWS.EFS.CreateMountTarget
-        , Network.AWS.EFS.CreateTags
+        , Network.AWS.EFS.DeleteAccessPoint
         , Network.AWS.EFS.DeleteFileSystem
+        , Network.AWS.EFS.DeleteFileSystemPolicy
         , Network.AWS.EFS.DeleteMountTarget
-        , Network.AWS.EFS.DeleteTags
+        , Network.AWS.EFS.DescribeAccessPoints
+        , Network.AWS.EFS.DescribeFileSystemPolicy
         , Network.AWS.EFS.DescribeFileSystems
+        , Network.AWS.EFS.DescribeLifecycleConfiguration
         , Network.AWS.EFS.DescribeMountTargetSecurityGroups
         , Network.AWS.EFS.DescribeMountTargets
-        , Network.AWS.EFS.DescribeTags
+        , Network.AWS.EFS.ListTagsForResource
         , Network.AWS.EFS.ModifyMountTargetSecurityGroups
+        , Network.AWS.EFS.PutFileSystemPolicy
+        , Network.AWS.EFS.PutLifecycleConfiguration
+        , Network.AWS.EFS.TagResource
         , Network.AWS.EFS.Types
+        , Network.AWS.EFS.UntagResource
+        , Network.AWS.EFS.UpdateFileSystem
         , Network.AWS.EFS.Waiters
 
     other-modules:
-          Network.AWS.EFS.Types.Product
-        , Network.AWS.EFS.Types.Sum
+          Network.AWS.EFS.Types.AccessPointDescription
+        , Network.AWS.EFS.Types.CreationInfo
+        , Network.AWS.EFS.Types.FileSystemDescription
+        , Network.AWS.EFS.Types.FileSystemPolicyDescription
+        , Network.AWS.EFS.Types.FileSystemSize
+        , Network.AWS.EFS.Types.LifeCycleState
+        , Network.AWS.EFS.Types.LifecycleConfigurationDescription
+        , Network.AWS.EFS.Types.LifecyclePolicy
+        , Network.AWS.EFS.Types.MountTargetDescription
+        , Network.AWS.EFS.Types.PerformanceMode
+        , Network.AWS.EFS.Types.PosixUser
+        , Network.AWS.EFS.Types.Product
+        , Network.AWS.EFS.Types.RootDirectory
+        , Network.AWS.EFS.Types.Tag
+        , Network.AWS.EFS.Types.ThroughputMode
+        , Network.AWS.EFS.Types.TransitionToIARules
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-efs-test
     type:              exitcode-stdio-1.0
@@ -89,6 +113,7 @@ test-suite amazonka-efs-test
         , amazonka-efs
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

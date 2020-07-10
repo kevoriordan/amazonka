@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the IPSets of the GuardDuty service specified by the detector ID.
+-- Lists the IPSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the IPSets returned are the IPSets from the associated master account.
+--
+--
 --
 -- This operation returns paginated results.
 module Network.AWS.GuardDuty.ListIPSets
@@ -36,8 +38,8 @@ module Network.AWS.GuardDuty.ListIPSets
     , ListIPSetsResponse
     -- * Response Lenses
     , lisrsNextToken
-    , lisrsIPSetIds
     , lisrsResponseStatus
+    , lisrsIPSetIds
     ) where
 
 import Network.AWS.GuardDuty.Types
@@ -49,42 +51,38 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listIPSets' smart constructor.
-data ListIPSets = ListIPSets'
-  { _lisNextToken  :: !(Maybe Text)
-  , _lisMaxResults :: !(Maybe Nat)
-  , _lisDetectorId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListIPSets = ListIPSets'{_lisNextToken ::
+                              !(Maybe Text),
+                              _lisMaxResults :: !(Maybe Nat),
+                              _lisDetectorId :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListIPSets' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lisNextToken' - You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListIPSet action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+-- * 'lisNextToken' - You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
 --
--- * 'lisMaxResults' - You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 7. The maximum value is 7.
+-- * 'lisMaxResults' - You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
 --
--- * 'lisDetectorId' - The unique ID of the detector that you want to retrieve.
+-- * 'lisDetectorId' - The unique ID of the detector that the IPSet is associated with.
 listIPSets
     :: Text -- ^ 'lisDetectorId'
     -> ListIPSets
-listIPSets pDetectorId_ =
-  ListIPSets'
-    { _lisNextToken = Nothing
-    , _lisMaxResults = Nothing
-    , _lisDetectorId = pDetectorId_
-    }
+listIPSets pDetectorId_
+  = ListIPSets'{_lisNextToken = Nothing,
+                _lisMaxResults = Nothing,
+                _lisDetectorId = pDetectorId_}
 
-
--- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListIPSet action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+-- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
 lisNextToken :: Lens' ListIPSets (Maybe Text)
 lisNextToken = lens _lisNextToken (\ s a -> s{_lisNextToken = a})
 
--- | You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 7. The maximum value is 7.
+-- | You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
 lisMaxResults :: Lens' ListIPSets (Maybe Natural)
 lisMaxResults = lens _lisMaxResults (\ s a -> s{_lisMaxResults = a}) . mapping _Nat
 
--- | The unique ID of the detector that you want to retrieve.
+-- | The unique ID of the detector that the IPSet is associated with.
 lisDetectorId :: Lens' ListIPSets Text
 lisDetectorId = lens _lisDetectorId (\ s a -> s{_lisDetectorId = a})
 
@@ -102,8 +100,8 @@ instance AWSRequest ListIPSets where
           = receiveJSON
               (\ s h x ->
                  ListIPSetsResponse' <$>
-                   (x .?> "nextToken") <*> (x .?> "ipSetIds" .!@ mempty)
-                     <*> (pure (fromEnum s)))
+                   (x .?> "nextToken") <*> (pure (fromEnum s)) <*>
+                     (x .?> "ipSetIds" .!@ mempty))
 
 instance Hashable ListIPSets where
 
@@ -128,43 +126,39 @@ instance ToQuery ListIPSets where
                "maxResults" =: _lisMaxResults]
 
 -- | /See:/ 'listIPSetsResponse' smart constructor.
-data ListIPSetsResponse = ListIPSetsResponse'
-  { _lisrsNextToken      :: !(Maybe Text)
-  , _lisrsIPSetIds       :: !(Maybe [Text])
-  , _lisrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListIPSetsResponse = ListIPSetsResponse'{_lisrsNextToken
+                                              :: !(Maybe Text),
+                                              _lisrsResponseStatus :: !Int,
+                                              _lisrsIPSetIds :: ![Text]}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListIPSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lisrsNextToken' - Undocumented member.
---
--- * 'lisrsIPSetIds' - Undocumented member.
+-- * 'lisrsNextToken' - The pagination parameter to be used on the next list operation to retrieve more items.
 --
 -- * 'lisrsResponseStatus' - -- | The response status code.
+--
+-- * 'lisrsIPSetIds' - The IDs of the IPSet resources.
 listIPSetsResponse
     :: Int -- ^ 'lisrsResponseStatus'
     -> ListIPSetsResponse
-listIPSetsResponse pResponseStatus_ =
-  ListIPSetsResponse'
-    { _lisrsNextToken = Nothing
-    , _lisrsIPSetIds = Nothing
-    , _lisrsResponseStatus = pResponseStatus_
-    }
+listIPSetsResponse pResponseStatus_
+  = ListIPSetsResponse'{_lisrsNextToken = Nothing,
+                        _lisrsResponseStatus = pResponseStatus_,
+                        _lisrsIPSetIds = mempty}
 
-
--- | Undocumented member.
+-- | The pagination parameter to be used on the next list operation to retrieve more items.
 lisrsNextToken :: Lens' ListIPSetsResponse (Maybe Text)
 lisrsNextToken = lens _lisrsNextToken (\ s a -> s{_lisrsNextToken = a})
-
--- | Undocumented member.
-lisrsIPSetIds :: Lens' ListIPSetsResponse [Text]
-lisrsIPSetIds = lens _lisrsIPSetIds (\ s a -> s{_lisrsIPSetIds = a}) . _Default . _Coerce
 
 -- | -- | The response status code.
 lisrsResponseStatus :: Lens' ListIPSetsResponse Int
 lisrsResponseStatus = lens _lisrsResponseStatus (\ s a -> s{_lisrsResponseStatus = a})
+
+-- | The IDs of the IPSet resources.
+lisrsIPSetIds :: Lens' ListIPSetsResponse [Text]
+lisrsIPSetIds = lens _lisrsIPSetIds (\ s a -> s{_lisrsIPSetIds = a}) . _Coerce
 
 instance NFData ListIPSetsResponse where

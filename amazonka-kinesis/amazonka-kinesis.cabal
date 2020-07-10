@@ -49,8 +49,10 @@ library
         , Network.AWS.Kinesis.CreateStream
         , Network.AWS.Kinesis.DecreaseStreamRetentionPeriod
         , Network.AWS.Kinesis.DeleteStream
+        , Network.AWS.Kinesis.DeregisterStreamConsumer
         , Network.AWS.Kinesis.DescribeLimits
         , Network.AWS.Kinesis.DescribeStream
+        , Network.AWS.Kinesis.DescribeStreamConsumer
         , Network.AWS.Kinesis.DescribeStreamSummary
         , Network.AWS.Kinesis.DisableEnhancedMonitoring
         , Network.AWS.Kinesis.EnableEnhancedMonitoring
@@ -58,26 +60,60 @@ library
         , Network.AWS.Kinesis.GetShardIterator
         , Network.AWS.Kinesis.IncreaseStreamRetentionPeriod
         , Network.AWS.Kinesis.ListShards
+        , Network.AWS.Kinesis.ListStreamConsumers
         , Network.AWS.Kinesis.ListStreams
         , Network.AWS.Kinesis.ListTagsForStream
         , Network.AWS.Kinesis.MergeShards
         , Network.AWS.Kinesis.PutRecord
         , Network.AWS.Kinesis.PutRecords
+        , Network.AWS.Kinesis.RegisterStreamConsumer
         , Network.AWS.Kinesis.RemoveTagsFromStream
         , Network.AWS.Kinesis.SplitShard
         , Network.AWS.Kinesis.StartStreamEncryption
         , Network.AWS.Kinesis.StopStreamEncryption
+        , Network.AWS.Kinesis.SubscribeToShard
         , Network.AWS.Kinesis.Types
         , Network.AWS.Kinesis.UpdateShardCount
         , Network.AWS.Kinesis.Waiters
 
     other-modules:
-          Network.AWS.Kinesis.Types.Product
-        , Network.AWS.Kinesis.Types.Sum
+          Network.AWS.Kinesis.Types.Consumer
+        , Network.AWS.Kinesis.Types.ConsumerDescription
+        , Network.AWS.Kinesis.Types.ConsumerStatus
+        , Network.AWS.Kinesis.Types.EncryptionType
+        , Network.AWS.Kinesis.Types.EnhancedMetrics
+        , Network.AWS.Kinesis.Types.EnhancedMonitoringOutput
+        , Network.AWS.Kinesis.Types.HashKeyRange
+        , Network.AWS.Kinesis.Types.InternalFailureException
+        , Network.AWS.Kinesis.Types.KMSAccessDeniedException
+        , Network.AWS.Kinesis.Types.KMSDisabledException
+        , Network.AWS.Kinesis.Types.KMSInvalidStateException
+        , Network.AWS.Kinesis.Types.KMSNotFoundException
+        , Network.AWS.Kinesis.Types.KMSOptInRequired
+        , Network.AWS.Kinesis.Types.KMSThrottlingException
+        , Network.AWS.Kinesis.Types.MetricsName
+        , Network.AWS.Kinesis.Types.Product
+        , Network.AWS.Kinesis.Types.PutRecordsRequestEntry
+        , Network.AWS.Kinesis.Types.PutRecordsResultEntry
+        , Network.AWS.Kinesis.Types.Record
+        , Network.AWS.Kinesis.Types.ResourceInUseException
+        , Network.AWS.Kinesis.Types.ResourceNotFoundException
+        , Network.AWS.Kinesis.Types.ScalingType
+        , Network.AWS.Kinesis.Types.SequenceNumberRange
+        , Network.AWS.Kinesis.Types.Shard
+        , Network.AWS.Kinesis.Types.ShardIteratorType
+        , Network.AWS.Kinesis.Types.StartingPosition
+        , Network.AWS.Kinesis.Types.StreamDescription
+        , Network.AWS.Kinesis.Types.StreamDescriptionSummary
+        , Network.AWS.Kinesis.Types.StreamStatus
+        , Network.AWS.Kinesis.Types.SubscribeToShardEvent
+        , Network.AWS.Kinesis.Types.SubscribeToShardEventStream
+        , Network.AWS.Kinesis.Types.Tag
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-kinesis-test
     type:              exitcode-stdio-1.0
@@ -101,6 +137,7 @@ test-suite amazonka-kinesis-test
         , amazonka-kinesis
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

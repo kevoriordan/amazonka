@@ -23,7 +23,7 @@
 --
 -- This action is enabled only for admin access and requires developer credentials.
 --
--- The @ProviderName@ must match the value specified when creating an IdP for the pool.
+-- The @ProviderName@ must match the value specified when creating an IdP for the pool. 
 --
 -- To disable a native username + password user, the @ProviderName@ value must be @Cognito@ and the @ProviderAttributeName@ must be @Cognito_Subject@ , with the @ProviderAttributeValue@ being the name that is used in the user pool for the user.
 --
@@ -55,11 +55,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'adminDisableProviderForUser' smart constructor.
-data AdminDisableProviderForUser = AdminDisableProviderForUser'
-  { _adpfuUserPoolId :: !Text
-  , _adpfuUser       :: !ProviderUserIdentifierType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AdminDisableProviderForUser = AdminDisableProviderForUser'{_adpfuUserPoolId
+                                                                :: !Text,
+                                                                _adpfuUser ::
+                                                                !ProviderUserIdentifierType}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AdminDisableProviderForUser' with the minimum fields required to make a request.
 --
@@ -72,10 +73,10 @@ adminDisableProviderForUser
     :: Text -- ^ 'adpfuUserPoolId'
     -> ProviderUserIdentifierType -- ^ 'adpfuUser'
     -> AdminDisableProviderForUser
-adminDisableProviderForUser pUserPoolId_ pUser_ =
-  AdminDisableProviderForUser'
-    {_adpfuUserPoolId = pUserPoolId_, _adpfuUser = pUser_}
-
+adminDisableProviderForUser pUserPoolId_ pUser_
+  = AdminDisableProviderForUser'{_adpfuUserPoolId =
+                                   pUserPoolId_,
+                                 _adpfuUser = pUser_}
 
 -- | The user pool ID for the user pool.
 adpfuUserPoolId :: Lens' AdminDisableProviderForUser Text
@@ -123,10 +124,11 @@ instance ToQuery AdminDisableProviderForUser where
         toQuery = const mempty
 
 -- | /See:/ 'adminDisableProviderForUserResponse' smart constructor.
-newtype AdminDisableProviderForUserResponse = AdminDisableProviderForUserResponse'
-  { _adpfursResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AdminDisableProviderForUserResponse = AdminDisableProviderForUserResponse'{_adpfursResponseStatus
+                                                                                   ::
+                                                                                   Int}
+                                                deriving (Eq, Read, Show, Data,
+                                                          Typeable, Generic)
 
 -- | Creates a value of 'AdminDisableProviderForUserResponse' with the minimum fields required to make a request.
 --
@@ -136,10 +138,9 @@ newtype AdminDisableProviderForUserResponse = AdminDisableProviderForUserRespons
 adminDisableProviderForUserResponse
     :: Int -- ^ 'adpfursResponseStatus'
     -> AdminDisableProviderForUserResponse
-adminDisableProviderForUserResponse pResponseStatus_ =
-  AdminDisableProviderForUserResponse'
-    {_adpfursResponseStatus = pResponseStatus_}
-
+adminDisableProviderForUserResponse pResponseStatus_
+  = AdminDisableProviderForUserResponse'{_adpfursResponseStatus
+                                           = pResponseStatus_}
 
 -- | -- | The response status code.
 adpfursResponseStatus :: Lens' AdminDisableProviderForUserResponse Int

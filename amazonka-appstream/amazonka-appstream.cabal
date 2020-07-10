@@ -46,6 +46,8 @@ library
     exposed-modules:
           Network.AWS.AppStream
         , Network.AWS.AppStream.AssociateFleet
+        , Network.AWS.AppStream.BatchAssociateUserStack
+        , Network.AWS.AppStream.BatchDisassociateUserStack
         , Network.AWS.AppStream.CopyImage
         , Network.AWS.AppStream.CreateDirectoryConfig
         , Network.AWS.AppStream.CreateFleet
@@ -53,18 +55,29 @@ library
         , Network.AWS.AppStream.CreateImageBuilderStreamingURL
         , Network.AWS.AppStream.CreateStack
         , Network.AWS.AppStream.CreateStreamingURL
+        , Network.AWS.AppStream.CreateUsageReportSubscription
+        , Network.AWS.AppStream.CreateUser
         , Network.AWS.AppStream.DeleteDirectoryConfig
         , Network.AWS.AppStream.DeleteFleet
         , Network.AWS.AppStream.DeleteImage
         , Network.AWS.AppStream.DeleteImageBuilder
+        , Network.AWS.AppStream.DeleteImagePermissions
         , Network.AWS.AppStream.DeleteStack
+        , Network.AWS.AppStream.DeleteUsageReportSubscription
+        , Network.AWS.AppStream.DeleteUser
         , Network.AWS.AppStream.DescribeDirectoryConfigs
         , Network.AWS.AppStream.DescribeFleets
         , Network.AWS.AppStream.DescribeImageBuilders
+        , Network.AWS.AppStream.DescribeImagePermissions
         , Network.AWS.AppStream.DescribeImages
         , Network.AWS.AppStream.DescribeSessions
         , Network.AWS.AppStream.DescribeStacks
+        , Network.AWS.AppStream.DescribeUsageReportSubscriptions
+        , Network.AWS.AppStream.DescribeUserStackAssociations
+        , Network.AWS.AppStream.DescribeUsers
+        , Network.AWS.AppStream.DisableUser
         , Network.AWS.AppStream.DisassociateFleet
+        , Network.AWS.AppStream.EnableUser
         , Network.AWS.AppStream.ExpireSession
         , Network.AWS.AppStream.ListAssociatedFleets
         , Network.AWS.AppStream.ListAssociatedStacks
@@ -78,16 +91,70 @@ library
         , Network.AWS.AppStream.UntagResource
         , Network.AWS.AppStream.UpdateDirectoryConfig
         , Network.AWS.AppStream.UpdateFleet
+        , Network.AWS.AppStream.UpdateImagePermissions
         , Network.AWS.AppStream.UpdateStack
         , Network.AWS.AppStream.Waiters
 
     other-modules:
-          Network.AWS.AppStream.Types.Product
-        , Network.AWS.AppStream.Types.Sum
+          Network.AWS.AppStream.Types.AccessEndpoint
+        , Network.AWS.AppStream.Types.AccessEndpointType
+        , Network.AWS.AppStream.Types.Action
+        , Network.AWS.AppStream.Types.Application
+        , Network.AWS.AppStream.Types.ApplicationSettings
+        , Network.AWS.AppStream.Types.ApplicationSettingsResponse
+        , Network.AWS.AppStream.Types.AuthenticationType
+        , Network.AWS.AppStream.Types.ComputeCapacity
+        , Network.AWS.AppStream.Types.ComputeCapacityStatus
+        , Network.AWS.AppStream.Types.DirectoryConfig
+        , Network.AWS.AppStream.Types.DomainJoinInfo
+        , Network.AWS.AppStream.Types.Fleet
+        , Network.AWS.AppStream.Types.FleetAttribute
+        , Network.AWS.AppStream.Types.FleetError
+        , Network.AWS.AppStream.Types.FleetErrorCode
+        , Network.AWS.AppStream.Types.FleetState
+        , Network.AWS.AppStream.Types.FleetType
+        , Network.AWS.AppStream.Types.Image
+        , Network.AWS.AppStream.Types.ImageBuilder
+        , Network.AWS.AppStream.Types.ImageBuilderState
+        , Network.AWS.AppStream.Types.ImageBuilderStateChangeReason
+        , Network.AWS.AppStream.Types.ImageBuilderStateChangeReasonCode
+        , Network.AWS.AppStream.Types.ImagePermissions
+        , Network.AWS.AppStream.Types.ImageState
+        , Network.AWS.AppStream.Types.ImageStateChangeReason
+        , Network.AWS.AppStream.Types.ImageStateChangeReasonCode
+        , Network.AWS.AppStream.Types.LastReportGenerationExecutionError
+        , Network.AWS.AppStream.Types.MessageAction
+        , Network.AWS.AppStream.Types.NetworkAccessConfiguration
+        , Network.AWS.AppStream.Types.Permission
+        , Network.AWS.AppStream.Types.PlatformType
+        , Network.AWS.AppStream.Types.Product
+        , Network.AWS.AppStream.Types.ResourceError
+        , Network.AWS.AppStream.Types.ServiceAccountCredentials
+        , Network.AWS.AppStream.Types.Session
+        , Network.AWS.AppStream.Types.SessionConnectionState
+        , Network.AWS.AppStream.Types.SessionState
+        , Network.AWS.AppStream.Types.SharedImagePermissions
+        , Network.AWS.AppStream.Types.Stack
+        , Network.AWS.AppStream.Types.StackAttribute
+        , Network.AWS.AppStream.Types.StackError
+        , Network.AWS.AppStream.Types.StackErrorCode
+        , Network.AWS.AppStream.Types.StorageConnector
+        , Network.AWS.AppStream.Types.StorageConnectorType
+        , Network.AWS.AppStream.Types.UsageReportExecutionErrorCode
+        , Network.AWS.AppStream.Types.UsageReportSchedule
+        , Network.AWS.AppStream.Types.UsageReportSubscription
+        , Network.AWS.AppStream.Types.User
+        , Network.AWS.AppStream.Types.UserSetting
+        , Network.AWS.AppStream.Types.UserStackAssociation
+        , Network.AWS.AppStream.Types.UserStackAssociationError
+        , Network.AWS.AppStream.Types.UserStackAssociationErrorCode
+        , Network.AWS.AppStream.Types.VPCConfig
+        , Network.AWS.AppStream.Types.VisibilityType
 
     build-depends:
           amazonka-core == 1.6.1.*
         , base          >= 4.7     && < 5
+        , case-insensitive
 
 test-suite amazonka-appstream-test
     type:              exitcode-stdio-1.0
@@ -111,6 +178,7 @@ test-suite amazonka-appstream-test
         , amazonka-appstream
         , base
         , bytestring
+        , case-insensitive
         , tasty
         , tasty-hunit
         , text

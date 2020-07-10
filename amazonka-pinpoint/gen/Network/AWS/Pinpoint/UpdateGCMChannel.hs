@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Use to update the GCM channel for an app.
+-- Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.
+--
+--
 module Network.AWS.Pinpoint.UpdateGCMChannel
     (
     -- * Creating a Request
@@ -44,31 +46,29 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateGCMChannel' smart constructor.
-data UpdateGCMChannel = UpdateGCMChannel'
-  { _ugcApplicationId     :: !Text
-  , _ugcGCMChannelRequest :: !GCMChannelRequest
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGCMChannel = UpdateGCMChannel'{_ugcApplicationId
+                                          :: !Text,
+                                          _ugcGCMChannelRequest ::
+                                          !GCMChannelRequest}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateGCMChannel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ugcApplicationId' - Undocumented member.
+-- * 'ugcApplicationId' - The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 --
 -- * 'ugcGCMChannelRequest' - Undocumented member.
 updateGCMChannel
     :: Text -- ^ 'ugcApplicationId'
     -> GCMChannelRequest -- ^ 'ugcGCMChannelRequest'
     -> UpdateGCMChannel
-updateGCMChannel pApplicationId_ pGCMChannelRequest_ =
-  UpdateGCMChannel'
-    { _ugcApplicationId = pApplicationId_
-    , _ugcGCMChannelRequest = pGCMChannelRequest_
-    }
+updateGCMChannel pApplicationId_ pGCMChannelRequest_
+  = UpdateGCMChannel'{_ugcApplicationId =
+                        pApplicationId_,
+                      _ugcGCMChannelRequest = pGCMChannelRequest_}
 
-
--- | Undocumented member.
+-- | The unique identifier for the application. This identifier is displayed as the __Project ID__ on the Amazon Pinpoint console.
 ugcApplicationId :: Lens' UpdateGCMChannel Text
 ugcApplicationId = lens _ugcApplicationId (\ s a -> s{_ugcApplicationId = a})
 
@@ -113,11 +113,13 @@ instance ToQuery UpdateGCMChannel where
         toQuery = const mempty
 
 -- | /See:/ 'updateGCMChannelResponse' smart constructor.
-data UpdateGCMChannelResponse = UpdateGCMChannelResponse'
-  { _ugcrsResponseStatus     :: !Int
-  , _ugcrsGCMChannelResponse :: !GCMChannelResponse
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateGCMChannelResponse = UpdateGCMChannelResponse'{_ugcrsResponseStatus
+                                                          :: !Int,
+                                                          _ugcrsGCMChannelResponse
+                                                          ::
+                                                          !GCMChannelResponse}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'UpdateGCMChannelResponse' with the minimum fields required to make a request.
 --
@@ -130,12 +132,11 @@ updateGCMChannelResponse
     :: Int -- ^ 'ugcrsResponseStatus'
     -> GCMChannelResponse -- ^ 'ugcrsGCMChannelResponse'
     -> UpdateGCMChannelResponse
-updateGCMChannelResponse pResponseStatus_ pGCMChannelResponse_ =
-  UpdateGCMChannelResponse'
-    { _ugcrsResponseStatus = pResponseStatus_
-    , _ugcrsGCMChannelResponse = pGCMChannelResponse_
-    }
-
+updateGCMChannelResponse pResponseStatus_
+  pGCMChannelResponse_
+  = UpdateGCMChannelResponse'{_ugcrsResponseStatus =
+                                pResponseStatus_,
+                              _ugcrsGCMChannelResponse = pGCMChannelResponse_}
 
 -- | -- | The response status code.
 ugcrsResponseStatus :: Lens' UpdateGCMChannelResponse Int

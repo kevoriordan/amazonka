@@ -18,10 +18,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Displays all connections in this region.
+-- Displays the specified connection or all connections in this Region.
 --
---
--- If a connection ID is provided, the call returns only that particular connection.
 --
 module Network.AWS.DirectConnect.DescribeConnections
     (
@@ -45,27 +43,23 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Container for the parameters to the DescribeConnections operation.
---
---
---
--- /See:/ 'describeConnections' smart constructor.
-newtype DescribeConnections = DescribeConnections'
-  { _dConnectionId :: Maybe Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+-- | /See:/ 'describeConnections' smart constructor.
+newtype DescribeConnections = DescribeConnections'{_dConnectionId
+                                                   :: Maybe Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'DescribeConnections' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dConnectionId' - Undocumented member.
+-- * 'dConnectionId' - The ID of the connection.
 describeConnections
     :: DescribeConnections
-describeConnections = DescribeConnections' {_dConnectionId = Nothing}
+describeConnections
+  = DescribeConnections'{_dConnectionId = Nothing}
 
-
--- | Undocumented member.
+-- | The ID of the connection.
 dConnectionId :: Lens' DescribeConnections (Maybe Text)
 dConnectionId = lens _dConnectionId (\ s a -> s{_dConnectionId = a})
 

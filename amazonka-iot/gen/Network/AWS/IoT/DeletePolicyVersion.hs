@@ -47,11 +47,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deletePolicyVersion' smart constructor.
-data DeletePolicyVersion = DeletePolicyVersion'
-  { _dpvPolicyName      :: !Text
-  , _dpvPolicyVersionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePolicyVersion = DeletePolicyVersion'{_dpvPolicyName
+                                                :: !Text,
+                                                _dpvPolicyVersionId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeletePolicyVersion' with the minimum fields required to make a request.
 --
@@ -64,10 +63,9 @@ deletePolicyVersion
     :: Text -- ^ 'dpvPolicyName'
     -> Text -- ^ 'dpvPolicyVersionId'
     -> DeletePolicyVersion
-deletePolicyVersion pPolicyName_ pPolicyVersionId_ =
-  DeletePolicyVersion'
-    {_dpvPolicyName = pPolicyName_, _dpvPolicyVersionId = pPolicyVersionId_}
-
+deletePolicyVersion pPolicyName_ pPolicyVersionId_
+  = DeletePolicyVersion'{_dpvPolicyName = pPolicyName_,
+                         _dpvPolicyVersionId = pPolicyVersionId_}
 
 -- | The name of the policy.
 dpvPolicyName :: Lens' DeletePolicyVersion Text
@@ -100,16 +98,15 @@ instance ToQuery DeletePolicyVersion where
         toQuery = const mempty
 
 -- | /See:/ 'deletePolicyVersionResponse' smart constructor.
-data DeletePolicyVersionResponse =
-  DeletePolicyVersionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeletePolicyVersionResponse = DeletePolicyVersionResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeletePolicyVersionResponse' with the minimum fields required to make a request.
 --
 deletePolicyVersionResponse
     :: DeletePolicyVersionResponse
-deletePolicyVersionResponse = DeletePolicyVersionResponse'
-
+deletePolicyVersionResponse
+  = DeletePolicyVersionResponse'
 
 instance NFData DeletePolicyVersionResponse where

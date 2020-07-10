@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves all the DevEndpoints in this AWS account.
+-- Retrieves all the development endpoints in this AWS account.
 --
 --
 --
@@ -50,11 +50,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getDevEndpoints' smart constructor.
-data GetDevEndpoints = GetDevEndpoints'
-  { _gdeNextToken  :: !(Maybe Text)
-  , _gdeMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDevEndpoints = GetDevEndpoints'{_gdeNextToken
+                                        :: !(Maybe Text),
+                                        _gdeMaxResults :: !(Maybe Nat)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetDevEndpoints' with the minimum fields required to make a request.
 --
@@ -65,9 +64,9 @@ data GetDevEndpoints = GetDevEndpoints'
 -- * 'gdeMaxResults' - The maximum size of information to return.
 getDevEndpoints
     :: GetDevEndpoints
-getDevEndpoints =
-  GetDevEndpoints' {_gdeNextToken = Nothing, _gdeMaxResults = Nothing}
-
+getDevEndpoints
+  = GetDevEndpoints'{_gdeNextToken = Nothing,
+                     _gdeMaxResults = Nothing}
 
 -- | A continuation token, if this is a continuation call.
 gdeNextToken :: Lens' GetDevEndpoints (Maybe Text)
@@ -122,38 +121,37 @@ instance ToQuery GetDevEndpoints where
         toQuery = const mempty
 
 -- | /See:/ 'getDevEndpointsResponse' smart constructor.
-data GetDevEndpointsResponse = GetDevEndpointsResponse'
-  { _gdersNextToken      :: !(Maybe Text)
-  , _gdersDevEndpoints   :: !(Maybe [DevEndpoint])
-  , _gdersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetDevEndpointsResponse = GetDevEndpointsResponse'{_gdersNextToken
+                                                        :: !(Maybe Text),
+                                                        _gdersDevEndpoints ::
+                                                        !(Maybe [DevEndpoint]),
+                                                        _gdersResponseStatus ::
+                                                        !Int}
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'GetDevEndpointsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gdersNextToken' - A continuation token, if not all DevEndpoint definitions have yet been returned.
+-- * 'gdersNextToken' - A continuation token, if not all @DevEndpoint@ definitions have yet been returned.
 --
--- * 'gdersDevEndpoints' - A list of DevEndpoint definitions.
+-- * 'gdersDevEndpoints' - A list of @DevEndpoint@ definitions.
 --
 -- * 'gdersResponseStatus' - -- | The response status code.
 getDevEndpointsResponse
     :: Int -- ^ 'gdersResponseStatus'
     -> GetDevEndpointsResponse
-getDevEndpointsResponse pResponseStatus_ =
-  GetDevEndpointsResponse'
-    { _gdersNextToken = Nothing
-    , _gdersDevEndpoints = Nothing
-    , _gdersResponseStatus = pResponseStatus_
-    }
+getDevEndpointsResponse pResponseStatus_
+  = GetDevEndpointsResponse'{_gdersNextToken = Nothing,
+                             _gdersDevEndpoints = Nothing,
+                             _gdersResponseStatus = pResponseStatus_}
 
-
--- | A continuation token, if not all DevEndpoint definitions have yet been returned.
+-- | A continuation token, if not all @DevEndpoint@ definitions have yet been returned.
 gdersNextToken :: Lens' GetDevEndpointsResponse (Maybe Text)
 gdersNextToken = lens _gdersNextToken (\ s a -> s{_gdersNextToken = a})
 
--- | A list of DevEndpoint definitions.
+-- | A list of @DevEndpoint@ definitions.
 gdersDevEndpoints :: Lens' GetDevEndpointsResponse [DevEndpoint]
 gdersDevEndpoints = lens _gdersDevEndpoints (\ s a -> s{_gdersDevEndpoints = a}) . _Default . _Coerce
 

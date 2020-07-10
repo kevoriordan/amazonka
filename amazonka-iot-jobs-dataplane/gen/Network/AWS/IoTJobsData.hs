@@ -26,20 +26,11 @@ module Network.AWS.IoTJobsData
     -- * Errors
     -- $errors
 
-    -- ** TerminalStateException
-    , _TerminalStateException
-
     -- ** InvalidRequestException
     , _InvalidRequestException
 
     -- ** CertificateValidationException
     , _CertificateValidationException
-
-    -- ** ThrottlingException
-    , _ThrottlingException
-
-    -- ** ServiceUnavailableException
-    , _ServiceUnavailableException
 
     -- ** InvalidStateTransitionException
     , _InvalidStateTransitionException
@@ -47,22 +38,31 @@ module Network.AWS.IoTJobsData
     -- ** ResourceNotFoundException
     , _ResourceNotFoundException
 
+    -- ** ServiceUnavailableException
+    , _ServiceUnavailableException
+
+    -- ** ThrottlingException
+    , _ThrottlingException
+
+    -- ** TerminalStateException
+    , _TerminalStateException
+
     -- * Waiters
     -- $waiters
 
     -- * Operations
     -- $operations
 
-    -- ** UpdateJobExecution
+    -- ** UpdateJobExecution 
     , module Network.AWS.IoTJobsData.UpdateJobExecution
 
-    -- ** StartNextPendingJobExecution
+    -- ** StartNextPendingJobExecution 
     , module Network.AWS.IoTJobsData.StartNextPendingJobExecution
 
-    -- ** DescribeJobExecution
+    -- ** DescribeJobExecution 
     , module Network.AWS.IoTJobsData.DescribeJobExecution
 
-    -- ** GetPendingJobExecutions
+    -- ** GetPendingJobExecutions 
     , module Network.AWS.IoTJobsData.GetPendingJobExecutions
 
     -- * Types
@@ -76,6 +76,7 @@ module Network.AWS.IoTJobsData
     , jeStatus
     , jeJobId
     , jeLastUpdatedAt
+    , jeApproximateSecondsBeforeTimedOut
     , jeQueuedAt
     , jeJobDocument
     , jeStatusDetails

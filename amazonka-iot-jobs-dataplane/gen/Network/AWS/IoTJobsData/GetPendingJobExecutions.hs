@@ -46,10 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getPendingJobExecutions' smart constructor.
-newtype GetPendingJobExecutions = GetPendingJobExecutions'
-  { _gpjeThingName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype GetPendingJobExecutions = GetPendingJobExecutions'{_gpjeThingName
+                                                           :: Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetPendingJobExecutions' with the minimum fields required to make a request.
 --
@@ -59,9 +59,9 @@ newtype GetPendingJobExecutions = GetPendingJobExecutions'
 getPendingJobExecutions
     :: Text -- ^ 'gpjeThingName'
     -> GetPendingJobExecutions
-getPendingJobExecutions pThingName_ =
-  GetPendingJobExecutions' {_gpjeThingName = pThingName_}
-
+getPendingJobExecutions pThingName_
+  = GetPendingJobExecutions'{_gpjeThingName =
+                               pThingName_}
 
 -- | The name of the thing that is executing the job.
 gpjeThingName :: Lens' GetPendingJobExecutions Text
@@ -94,12 +94,18 @@ instance ToQuery GetPendingJobExecutions where
         toQuery = const mempty
 
 -- | /See:/ 'getPendingJobExecutionsResponse' smart constructor.
-data GetPendingJobExecutionsResponse = GetPendingJobExecutionsResponse'
-  { _gpjersInProgressJobs :: !(Maybe [JobExecutionSummary])
-  , _gpjersQueuedJobs     :: !(Maybe [JobExecutionSummary])
-  , _gpjersResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPendingJobExecutionsResponse = GetPendingJobExecutionsResponse'{_gpjersInProgressJobs
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [JobExecutionSummary]),
+                                                                        _gpjersQueuedJobs
+                                                                        ::
+                                                                        !(Maybe
+                                                                            [JobExecutionSummary]),
+                                                                        _gpjersResponseStatus
+                                                                        :: !Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'GetPendingJobExecutionsResponse' with the minimum fields required to make a request.
 --
@@ -113,13 +119,11 @@ data GetPendingJobExecutionsResponse = GetPendingJobExecutionsResponse'
 getPendingJobExecutionsResponse
     :: Int -- ^ 'gpjersResponseStatus'
     -> GetPendingJobExecutionsResponse
-getPendingJobExecutionsResponse pResponseStatus_ =
-  GetPendingJobExecutionsResponse'
-    { _gpjersInProgressJobs = Nothing
-    , _gpjersQueuedJobs = Nothing
-    , _gpjersResponseStatus = pResponseStatus_
-    }
-
+getPendingJobExecutionsResponse pResponseStatus_
+  = GetPendingJobExecutionsResponse'{_gpjersInProgressJobs
+                                       = Nothing,
+                                     _gpjersQueuedJobs = Nothing,
+                                     _gpjersResponseStatus = pResponseStatus_}
 
 -- | A list of JobExecutionSummary objects with status IN_PROGRESS.
 gpjersInProgressJobs :: Lens' GetPendingJobExecutionsResponse [JobExecutionSummary]

@@ -32,7 +32,7 @@ module Network.AWS.Greengrass.UpdateCoreDefinition
     , updateCoreDefinitionResponse
     , UpdateCoreDefinitionResponse
     -- * Response Lenses
-    , ucdrsResponseStatus
+    , ursResponseStatus
     ) where
 
 import Network.AWS.Greengrass.Types
@@ -43,11 +43,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateCoreDefinition' smart constructor.
-data UpdateCoreDefinition = UpdateCoreDefinition'
-  { _ucdName             :: !(Maybe Text)
-  , _ucdCoreDefinitionId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateCoreDefinition = UpdateCoreDefinition'{_ucdName
+                                                  :: !(Maybe Text),
+                                                  _ucdCoreDefinitionId :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateCoreDefinition' with the minimum fields required to make a request.
 --
@@ -59,10 +58,9 @@ data UpdateCoreDefinition = UpdateCoreDefinition'
 updateCoreDefinition
     :: Text -- ^ 'ucdCoreDefinitionId'
     -> UpdateCoreDefinition
-updateCoreDefinition pCoreDefinitionId_ =
-  UpdateCoreDefinition'
-    {_ucdName = Nothing, _ucdCoreDefinitionId = pCoreDefinitionId_}
-
+updateCoreDefinition pCoreDefinitionId_
+  = UpdateCoreDefinition'{_ucdName = Nothing,
+                          _ucdCoreDefinitionId = pCoreDefinitionId_}
 
 -- | The name of the definition.
 ucdName :: Lens' UpdateCoreDefinition (Maybe Text)
@@ -107,25 +105,25 @@ instance ToQuery UpdateCoreDefinition where
         toQuery = const mempty
 
 -- | /See:/ 'updateCoreDefinitionResponse' smart constructor.
-newtype UpdateCoreDefinitionResponse = UpdateCoreDefinitionResponse'
-  { _ucdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype UpdateCoreDefinitionResponse = UpdateCoreDefinitionResponse'{_ursResponseStatus
+                                                                     :: Int}
+                                         deriving (Eq, Read, Show, Data,
+                                                   Typeable, Generic)
 
 -- | Creates a value of 'UpdateCoreDefinitionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ucdrsResponseStatus' - -- | The response status code.
+-- * 'ursResponseStatus' - -- | The response status code.
 updateCoreDefinitionResponse
-    :: Int -- ^ 'ucdrsResponseStatus'
+    :: Int -- ^ 'ursResponseStatus'
     -> UpdateCoreDefinitionResponse
-updateCoreDefinitionResponse pResponseStatus_ =
-  UpdateCoreDefinitionResponse' {_ucdrsResponseStatus = pResponseStatus_}
-
+updateCoreDefinitionResponse pResponseStatus_
+  = UpdateCoreDefinitionResponse'{_ursResponseStatus =
+                                    pResponseStatus_}
 
 -- | -- | The response status code.
-ucdrsResponseStatus :: Lens' UpdateCoreDefinitionResponse Int
-ucdrsResponseStatus = lens _ucdrsResponseStatus (\ s a -> s{_ucdrsResponseStatus = a})
+ursResponseStatus :: Lens' UpdateCoreDefinitionResponse Int
+ursResponseStatus = lens _ursResponseStatus (\ s a -> s{_ursResponseStatus = a})
 
 instance NFData UpdateCoreDefinitionResponse where

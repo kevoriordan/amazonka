@@ -29,7 +29,7 @@
 --
 -- To deregister instances from a load balancer, use 'DeregisterInstancesFromLoadBalancer' .
 --
--- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html Register or De-Register EC2 Instances> in the /Classic Load Balancer Guide/ .
+-- For more information, see <http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html Register or De-Register EC2 Instances> in the /Classic Load Balancers Guide/ .
 --
 module Network.AWS.ELB.RegisterInstancesWithLoadBalancer
     (
@@ -60,11 +60,14 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'registerInstancesWithLoadBalancer' smart constructor.
-data RegisterInstancesWithLoadBalancer = RegisterInstancesWithLoadBalancer'
-  { _riwlbLoadBalancerName :: !Text
-  , _riwlbInstances        :: ![Instance]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterInstancesWithLoadBalancer = RegisterInstancesWithLoadBalancer'{_riwlbLoadBalancerName
+                                                                            ::
+                                                                            !Text,
+                                                                            _riwlbInstances
+                                                                            ::
+                                                                            ![Instance]}
+                                           deriving (Eq, Read, Show, Data,
+                                                     Typeable, Generic)
 
 -- | Creates a value of 'RegisterInstancesWithLoadBalancer' with the minimum fields required to make a request.
 --
@@ -76,10 +79,10 @@ data RegisterInstancesWithLoadBalancer = RegisterInstancesWithLoadBalancer'
 registerInstancesWithLoadBalancer
     :: Text -- ^ 'riwlbLoadBalancerName'
     -> RegisterInstancesWithLoadBalancer
-registerInstancesWithLoadBalancer pLoadBalancerName_ =
-  RegisterInstancesWithLoadBalancer'
-    {_riwlbLoadBalancerName = pLoadBalancerName_, _riwlbInstances = mempty}
-
+registerInstancesWithLoadBalancer pLoadBalancerName_
+  = RegisterInstancesWithLoadBalancer'{_riwlbLoadBalancerName
+                                         = pLoadBalancerName_,
+                                       _riwlbInstances = mempty}
 
 -- | The name of the load balancer.
 riwlbLoadBalancerName :: Lens' RegisterInstancesWithLoadBalancer Text
@@ -132,11 +135,16 @@ instance ToQuery RegisterInstancesWithLoadBalancer
 --
 --
 -- /See:/ 'registerInstancesWithLoadBalancerResponse' smart constructor.
-data RegisterInstancesWithLoadBalancerResponse = RegisterInstancesWithLoadBalancerResponse'
-  { _riwlbrsInstances      :: !(Maybe [Instance])
-  , _riwlbrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RegisterInstancesWithLoadBalancerResponse = RegisterInstancesWithLoadBalancerResponse'{_riwlbrsInstances
+                                                                                            ::
+                                                                                            !(Maybe
+                                                                                                [Instance]),
+                                                                                            _riwlbrsResponseStatus
+                                                                                            ::
+                                                                                            !Int}
+                                                   deriving (Eq, Read, Show,
+                                                             Data, Typeable,
+                                                             Generic)
 
 -- | Creates a value of 'RegisterInstancesWithLoadBalancerResponse' with the minimum fields required to make a request.
 --
@@ -148,10 +156,12 @@ data RegisterInstancesWithLoadBalancerResponse = RegisterInstancesWithLoadBalanc
 registerInstancesWithLoadBalancerResponse
     :: Int -- ^ 'riwlbrsResponseStatus'
     -> RegisterInstancesWithLoadBalancerResponse
-registerInstancesWithLoadBalancerResponse pResponseStatus_ =
-  RegisterInstancesWithLoadBalancerResponse'
-    {_riwlbrsInstances = Nothing, _riwlbrsResponseStatus = pResponseStatus_}
-
+registerInstancesWithLoadBalancerResponse
+  pResponseStatus_
+  = RegisterInstancesWithLoadBalancerResponse'{_riwlbrsInstances
+                                                 = Nothing,
+                                               _riwlbrsResponseStatus =
+                                                 pResponseStatus_}
 
 -- | The updated list of instances for the load balancer.
 riwlbrsInstances :: Lens' RegisterInstancesWithLoadBalancerResponse [Instance]

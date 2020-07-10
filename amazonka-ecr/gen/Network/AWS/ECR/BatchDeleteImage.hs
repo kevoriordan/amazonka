@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a list of specified images within a specified repository. Images are specified with either @imageTag@ or @imageDigest@ .
+-- Deletes a list of specified images within a repository. Images are specified with either an @imageTag@ or @imageDigest@ .
 --
 --
 -- You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository.
@@ -56,12 +56,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'batchDeleteImage' smart constructor.
-data BatchDeleteImage = BatchDeleteImage'
-  { _bdiRegistryId     :: !(Maybe Text)
-  , _bdiRepositoryName :: !Text
-  , _bdiImageIds       :: ![ImageIdentifier]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeleteImage = BatchDeleteImage'{_bdiRegistryId
+                                          :: !(Maybe Text),
+                                          _bdiRepositoryName :: !Text,
+                                          _bdiImageIds :: ![ImageIdentifier]}
+                          deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'BatchDeleteImage' with the minimum fields required to make a request.
 --
@@ -75,13 +74,10 @@ data BatchDeleteImage = BatchDeleteImage'
 batchDeleteImage
     :: Text -- ^ 'bdiRepositoryName'
     -> BatchDeleteImage
-batchDeleteImage pRepositoryName_ =
-  BatchDeleteImage'
-    { _bdiRegistryId = Nothing
-    , _bdiRepositoryName = pRepositoryName_
-    , _bdiImageIds = mempty
-    }
-
+batchDeleteImage pRepositoryName_
+  = BatchDeleteImage'{_bdiRegistryId = Nothing,
+                      _bdiRepositoryName = pRepositoryName_,
+                      _bdiImageIds = mempty}
 
 -- | The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default registry is assumed.
 bdiRegistryId :: Lens' BatchDeleteImage (Maybe Text)
@@ -135,12 +131,17 @@ instance ToQuery BatchDeleteImage where
         toQuery = const mempty
 
 -- | /See:/ 'batchDeleteImageResponse' smart constructor.
-data BatchDeleteImageResponse = BatchDeleteImageResponse'
-  { _bdirsFailures       :: !(Maybe [ImageFailure])
-  , _bdirsImageIds       :: !(Maybe [ImageIdentifier])
-  , _bdirsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data BatchDeleteImageResponse = BatchDeleteImageResponse'{_bdirsFailures
+                                                          ::
+                                                          !(Maybe
+                                                              [ImageFailure]),
+                                                          _bdirsImageIds ::
+                                                          !(Maybe
+                                                              [ImageIdentifier]),
+                                                          _bdirsResponseStatus
+                                                          :: !Int}
+                                  deriving (Eq, Read, Show, Data, Typeable,
+                                            Generic)
 
 -- | Creates a value of 'BatchDeleteImageResponse' with the minimum fields required to make a request.
 --
@@ -154,13 +155,10 @@ data BatchDeleteImageResponse = BatchDeleteImageResponse'
 batchDeleteImageResponse
     :: Int -- ^ 'bdirsResponseStatus'
     -> BatchDeleteImageResponse
-batchDeleteImageResponse pResponseStatus_ =
-  BatchDeleteImageResponse'
-    { _bdirsFailures = Nothing
-    , _bdirsImageIds = Nothing
-    , _bdirsResponseStatus = pResponseStatus_
-    }
-
+batchDeleteImageResponse pResponseStatus_
+  = BatchDeleteImageResponse'{_bdirsFailures = Nothing,
+                              _bdirsImageIds = Nothing,
+                              _bdirsResponseStatus = pResponseStatus_}
 
 -- | Any failures associated with the call.
 bdirsFailures :: Lens' BatchDeleteImageResponse [ImageFailure]

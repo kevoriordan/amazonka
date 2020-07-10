@@ -35,8 +35,8 @@ module Network.AWS.Glue.GetJobRun
     , getJobRunResponse
     , GetJobRunResponse
     -- * Response Lenses
-    , gjrjrsJobRun
-    , gjrjrsResponseStatus
+    , gtjbrnrsJobRun
+    , gtjbrnrsResponseStatus
     ) where
 
 import Network.AWS.Glue.Types
@@ -47,12 +47,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getJobRun' smart constructor.
-data GetJobRun = GetJobRun'
-  { _gPredecessorsIncluded :: !(Maybe Bool)
-  , _gJobName              :: !Text
-  , _gRunId                :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetJobRun = GetJobRun'{_gPredecessorsIncluded ::
+                            !(Maybe Bool),
+                            _gJobName :: !Text, _gRunId :: !Text}
+                   deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobRun' with the minimum fields required to make a request.
 --
@@ -67,10 +65,9 @@ getJobRun
     :: Text -- ^ 'gJobName'
     -> Text -- ^ 'gRunId'
     -> GetJobRun
-getJobRun pJobName_ pRunId_ =
-  GetJobRun'
-    {_gPredecessorsIncluded = Nothing, _gJobName = pJobName_, _gRunId = pRunId_}
-
+getJobRun pJobName_ pRunId_
+  = GetJobRun'{_gPredecessorsIncluded = Nothing,
+               _gJobName = pJobName_, _gRunId = pRunId_}
 
 -- | True if a list of predecessor runs should be returned.
 gPredecessorsIncluded :: Lens' GetJobRun (Maybe Bool)
@@ -122,33 +119,31 @@ instance ToQuery GetJobRun where
         toQuery = const mempty
 
 -- | /See:/ 'getJobRunResponse' smart constructor.
-data GetJobRunResponse = GetJobRunResponse'
-  { _gjrjrsJobRun         :: !(Maybe JobRun)
-  , _gjrjrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetJobRunResponse = GetJobRunResponse'{_gtjbrnrsJobRun
+                                            :: !(Maybe JobRun),
+                                            _gtjbrnrsResponseStatus :: !Int}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetJobRunResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gjrjrsJobRun' - The requested job-run metadata.
+-- * 'gtjbrnrsJobRun' - The requested job-run metadata.
 --
--- * 'gjrjrsResponseStatus' - -- | The response status code.
+-- * 'gtjbrnrsResponseStatus' - -- | The response status code.
 getJobRunResponse
-    :: Int -- ^ 'gjrjrsResponseStatus'
+    :: Int -- ^ 'gtjbrnrsResponseStatus'
     -> GetJobRunResponse
-getJobRunResponse pResponseStatus_ =
-  GetJobRunResponse'
-    {_gjrjrsJobRun = Nothing, _gjrjrsResponseStatus = pResponseStatus_}
-
+getJobRunResponse pResponseStatus_
+  = GetJobRunResponse'{_gtjbrnrsJobRun = Nothing,
+                       _gtjbrnrsResponseStatus = pResponseStatus_}
 
 -- | The requested job-run metadata.
-gjrjrsJobRun :: Lens' GetJobRunResponse (Maybe JobRun)
-gjrjrsJobRun = lens _gjrjrsJobRun (\ s a -> s{_gjrjrsJobRun = a})
+gtjbrnrsJobRun :: Lens' GetJobRunResponse (Maybe JobRun)
+gtjbrnrsJobRun = lens _gtjbrnrsJobRun (\ s a -> s{_gtjbrnrsJobRun = a})
 
 -- | -- | The response status code.
-gjrjrsResponseStatus :: Lens' GetJobRunResponse Int
-gjrjrsResponseStatus = lens _gjrjrsResponseStatus (\ s a -> s{_gjrjrsResponseStatus = a})
+gtjbrnrsResponseStatus :: Lens' GetJobRunResponse Int
+gtjbrnrsResponseStatus = lens _gtjbrnrsResponseStatus (\ s a -> s{_gtjbrnrsResponseStatus = a})
 
 instance NFData GetJobRunResponse where

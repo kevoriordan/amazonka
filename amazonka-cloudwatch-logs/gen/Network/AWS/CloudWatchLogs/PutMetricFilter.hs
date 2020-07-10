@@ -47,13 +47,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'putMetricFilter' smart constructor.
-data PutMetricFilter = PutMetricFilter'
-  { _pmfLogGroupName          :: !Text
-  , _pmfFilterName            :: !Text
-  , _pmfFilterPattern         :: !Text
-  , _pmfMetricTransformations :: !(List1 MetricTransformation)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutMetricFilter = PutMetricFilter'{_pmfLogGroupName
+                                        :: !Text,
+                                        _pmfFilterName :: !Text,
+                                        _pmfFilterPattern :: !Text,
+                                        _pmfMetricTransformations ::
+                                        !(List1 MetricTransformation)}
+                         deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'PutMetricFilter' with the minimum fields required to make a request.
 --
@@ -72,14 +72,13 @@ putMetricFilter
     -> Text -- ^ 'pmfFilterPattern'
     -> NonEmpty MetricTransformation -- ^ 'pmfMetricTransformations'
     -> PutMetricFilter
-putMetricFilter pLogGroupName_ pFilterName_ pFilterPattern_ pMetricTransformations_ =
-  PutMetricFilter'
-    { _pmfLogGroupName = pLogGroupName_
-    , _pmfFilterName = pFilterName_
-    , _pmfFilterPattern = pFilterPattern_
-    , _pmfMetricTransformations = _List1 # pMetricTransformations_
-    }
-
+putMetricFilter pLogGroupName_ pFilterName_
+  pFilterPattern_ pMetricTransformations_
+  = PutMetricFilter'{_pmfLogGroupName = pLogGroupName_,
+                     _pmfFilterName = pFilterName_,
+                     _pmfFilterPattern = pFilterPattern_,
+                     _pmfMetricTransformations =
+                       _List1 # pMetricTransformations_}
 
 -- | The name of the log group.
 pmfLogGroupName :: Lens' PutMetricFilter Text
@@ -133,16 +132,14 @@ instance ToQuery PutMetricFilter where
         toQuery = const mempty
 
 -- | /See:/ 'putMetricFilterResponse' smart constructor.
-data PutMetricFilterResponse =
-  PutMetricFilterResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PutMetricFilterResponse = PutMetricFilterResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'PutMetricFilterResponse' with the minimum fields required to make a request.
 --
 putMetricFilterResponse
     :: PutMetricFilterResponse
 putMetricFilterResponse = PutMetricFilterResponse'
-
 
 instance NFData PutMetricFilterResponse where

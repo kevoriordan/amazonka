@@ -55,16 +55,18 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'copyProduct' smart constructor.
-data CopyProduct = CopyProduct'
-  { _cTargetProductId :: !(Maybe Text)
-  , _cSourceProvisioningArtifactIdentifiers :: !(Maybe [Map ProvisioningArtifactPropertyName Text])
-  , _cTargetProductName :: !(Maybe Text)
-  , _cCopyOptions :: !(Maybe [CopyOption])
-  , _cAcceptLanguage :: !(Maybe Text)
-  , _cSourceProductARN :: !Text
-  , _cIdempotencyToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CopyProduct = CopyProduct'{_cTargetProductId ::
+                                !(Maybe Text),
+                                _cSourceProvisioningArtifactIdentifiers ::
+                                !(Maybe
+                                    [Map ProvisioningArtifactPropertyName
+                                       Text]),
+                                _cTargetProductName :: !(Maybe Text),
+                                _cCopyOptions :: !(Maybe [CopyOption]),
+                                _cAcceptLanguage :: !(Maybe Text),
+                                _cSourceProductARN :: !Text,
+                                _cIdempotencyToken :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CopyProduct' with the minimum fields required to make a request.
 --
@@ -82,22 +84,18 @@ data CopyProduct = CopyProduct'
 --
 -- * 'cSourceProductARN' - The Amazon Resource Name (ARN) of the source product.
 --
--- * 'cIdempotencyToken' - A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+-- * 'cIdempotencyToken' - A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request. 
 copyProduct
     :: Text -- ^ 'cSourceProductARN'
     -> Text -- ^ 'cIdempotencyToken'
     -> CopyProduct
-copyProduct pSourceProductARN_ pIdempotencyToken_ =
-  CopyProduct'
-    { _cTargetProductId = Nothing
-    , _cSourceProvisioningArtifactIdentifiers = Nothing
-    , _cTargetProductName = Nothing
-    , _cCopyOptions = Nothing
-    , _cAcceptLanguage = Nothing
-    , _cSourceProductARN = pSourceProductARN_
-    , _cIdempotencyToken = pIdempotencyToken_
-    }
-
+copyProduct pSourceProductARN_ pIdempotencyToken_
+  = CopyProduct'{_cTargetProductId = Nothing,
+                 _cSourceProvisioningArtifactIdentifiers = Nothing,
+                 _cTargetProductName = Nothing,
+                 _cCopyOptions = Nothing, _cAcceptLanguage = Nothing,
+                 _cSourceProductARN = pSourceProductARN_,
+                 _cIdempotencyToken = pIdempotencyToken_}
 
 -- | The identifier of the target product. By default, a new product is created.
 cTargetProductId :: Lens' CopyProduct (Maybe Text)
@@ -123,7 +121,7 @@ cAcceptLanguage = lens _cAcceptLanguage (\ s a -> s{_cAcceptLanguage = a})
 cSourceProductARN :: Lens' CopyProduct Text
 cSourceProductARN = lens _cSourceProductARN (\ s a -> s{_cSourceProductARN = a})
 
--- | A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+-- | A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request. 
 cIdempotencyToken :: Lens' CopyProduct Text
 cIdempotencyToken = lens _cIdempotencyToken (\ s a -> s{_cIdempotencyToken = a})
 
@@ -170,11 +168,10 @@ instance ToQuery CopyProduct where
         toQuery = const mempty
 
 -- | /See:/ 'copyProductResponse' smart constructor.
-data CopyProductResponse = CopyProductResponse'
-  { _coprsCopyProductToken :: !(Maybe Text)
-  , _coprsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CopyProductResponse = CopyProductResponse'{_coprsCopyProductToken
+                                                :: !(Maybe Text),
+                                                _coprsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CopyProductResponse' with the minimum fields required to make a request.
 --
@@ -186,10 +183,10 @@ data CopyProductResponse = CopyProductResponse'
 copyProductResponse
     :: Int -- ^ 'coprsResponseStatus'
     -> CopyProductResponse
-copyProductResponse pResponseStatus_ =
-  CopyProductResponse'
-    {_coprsCopyProductToken = Nothing, _coprsResponseStatus = pResponseStatus_}
-
+copyProductResponse pResponseStatus_
+  = CopyProductResponse'{_coprsCopyProductToken =
+                           Nothing,
+                         _coprsResponseStatus = pResponseStatus_}
 
 -- | The token to use to track the progress of the operation.
 coprsCopyProductToken :: Lens' CopyProductResponse (Maybe Text)

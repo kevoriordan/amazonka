@@ -55,12 +55,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'listPolicies' smart constructor.
-data ListPolicies = ListPolicies'
-  { _lpMarker         :: !(Maybe Text)
-  , _lpAscendingOrder :: !(Maybe Bool)
-  , _lpPageSize       :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPolicies = ListPolicies'{_lpMarker ::
+                                  !(Maybe Text),
+                                  _lpAscendingOrder :: !(Maybe Bool),
+                                  _lpPageSize :: !(Maybe Nat)}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPolicies' with the minimum fields required to make a request.
 --
@@ -73,10 +72,9 @@ data ListPolicies = ListPolicies'
 -- * 'lpPageSize' - The result page size.
 listPolicies
     :: ListPolicies
-listPolicies =
-  ListPolicies'
-    {_lpMarker = Nothing, _lpAscendingOrder = Nothing, _lpPageSize = Nothing}
-
+listPolicies
+  = ListPolicies'{_lpMarker = Nothing,
+                  _lpAscendingOrder = Nothing, _lpPageSize = Nothing}
 
 -- | The marker for the next set of results.
 lpMarker :: Lens' ListPolicies (Maybe Text)
@@ -130,12 +128,12 @@ instance ToQuery ListPolicies where
 --
 --
 -- /See:/ 'listPoliciesResponse' smart constructor.
-data ListPoliciesResponse = ListPoliciesResponse'
-  { _lprsNextMarker     :: !(Maybe Text)
-  , _lprsPolicies       :: !(Maybe [Policy])
-  , _lprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListPoliciesResponse = ListPoliciesResponse'{_lprsNextMarker
+                                                  :: !(Maybe Text),
+                                                  _lprsPolicies ::
+                                                  !(Maybe [Policy]),
+                                                  _lprsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ListPoliciesResponse' with the minimum fields required to make a request.
 --
@@ -149,13 +147,10 @@ data ListPoliciesResponse = ListPoliciesResponse'
 listPoliciesResponse
     :: Int -- ^ 'lprsResponseStatus'
     -> ListPoliciesResponse
-listPoliciesResponse pResponseStatus_ =
-  ListPoliciesResponse'
-    { _lprsNextMarker = Nothing
-    , _lprsPolicies = Nothing
-    , _lprsResponseStatus = pResponseStatus_
-    }
-
+listPoliciesResponse pResponseStatus_
+  = ListPoliciesResponse'{_lprsNextMarker = Nothing,
+                          _lprsPolicies = Nothing,
+                          _lprsResponseStatus = pResponseStatus_}
 
 -- | The marker for the next set of results, or null if there are no additional results.
 lprsNextMarker :: Lens' ListPoliciesResponse (Maybe Text)

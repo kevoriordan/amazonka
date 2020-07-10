@@ -21,6 +21,8 @@
 -- Return a list of inventory type names for the account, or return a list of attribute names for a specific Inventory item type.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.SSM.GetInventorySchema
     (
     -- * Creating a Request
@@ -43,6 +45,7 @@ module Network.AWS.SSM.GetInventorySchema
     ) where
 
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -50,14 +53,13 @@ import Network.AWS.SSM.Types
 import Network.AWS.SSM.Types.Product
 
 -- | /See:/ 'getInventorySchema' smart constructor.
-data GetInventorySchema = GetInventorySchema'
-  { _gisTypeName   :: !(Maybe Text)
-  , _gisAggregator :: !(Maybe Bool)
-  , _gisNextToken  :: !(Maybe Text)
-  , _gisSubType    :: !(Maybe Bool)
-  , _gisMaxResults :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInventorySchema = GetInventorySchema'{_gisTypeName
+                                              :: !(Maybe Text),
+                                              _gisAggregator :: !(Maybe Bool),
+                                              _gisNextToken :: !(Maybe Text),
+                                              _gisSubType :: !(Maybe Bool),
+                                              _gisMaxResults :: !(Maybe Nat)}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetInventorySchema' with the minimum fields required to make a request.
 --
@@ -74,15 +76,10 @@ data GetInventorySchema = GetInventorySchema'
 -- * 'gisMaxResults' - The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 getInventorySchema
     :: GetInventorySchema
-getInventorySchema =
-  GetInventorySchema'
-    { _gisTypeName = Nothing
-    , _gisAggregator = Nothing
-    , _gisNextToken = Nothing
-    , _gisSubType = Nothing
-    , _gisMaxResults = Nothing
-    }
-
+getInventorySchema
+  = GetInventorySchema'{_gisTypeName = Nothing,
+                        _gisAggregator = Nothing, _gisNextToken = Nothing,
+                        _gisSubType = Nothing, _gisMaxResults = Nothing}
 
 -- | The type of inventory item to return.
 gisTypeName :: Lens' GetInventorySchema (Maybe Text)
@@ -103,6 +100,13 @@ gisSubType = lens _gisSubType (\ s a -> s{_gisSubType = a})
 -- | The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
 gisMaxResults :: Lens' GetInventorySchema (Maybe Natural)
 gisMaxResults = lens _gisMaxResults (\ s a -> s{_gisMaxResults = a}) . mapping _Nat
+
+instance AWSPager GetInventorySchema where
+        page rq rs
+          | stop (rs ^. gisrsNextToken) = Nothing
+          | stop (rs ^. gisrsSchemas) = Nothing
+          | otherwise =
+            Just $ rq & gisNextToken .~ rs ^. gisrsNextToken
 
 instance AWSRequest GetInventorySchema where
         type Rs GetInventorySchema =
@@ -145,12 +149,16 @@ instance ToQuery GetInventorySchema where
         toQuery = const mempty
 
 -- | /See:/ 'getInventorySchemaResponse' smart constructor.
-data GetInventorySchemaResponse = GetInventorySchemaResponse'
-  { _gisrsSchemas        :: !(Maybe [InventoryItemSchema])
-  , _gisrsNextToken      :: !(Maybe Text)
-  , _gisrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetInventorySchemaResponse = GetInventorySchemaResponse'{_gisrsSchemas
+                                                              ::
+                                                              !(Maybe
+                                                                  [InventoryItemSchema]),
+                                                              _gisrsNextToken ::
+                                                              !(Maybe Text),
+                                                              _gisrsResponseStatus
+                                                              :: !Int}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'GetInventorySchemaResponse' with the minimum fields required to make a request.
 --
@@ -164,13 +172,11 @@ data GetInventorySchemaResponse = GetInventorySchemaResponse'
 getInventorySchemaResponse
     :: Int -- ^ 'gisrsResponseStatus'
     -> GetInventorySchemaResponse
-getInventorySchemaResponse pResponseStatus_ =
-  GetInventorySchemaResponse'
-    { _gisrsSchemas = Nothing
-    , _gisrsNextToken = Nothing
-    , _gisrsResponseStatus = pResponseStatus_
-    }
-
+getInventorySchemaResponse pResponseStatus_
+  = GetInventorySchemaResponse'{_gisrsSchemas =
+                                  Nothing,
+                                _gisrsNextToken = Nothing,
+                                _gisrsResponseStatus = pResponseStatus_}
 
 -- | Inventory schemas returned by the request.
 gisrsSchemas :: Lens' GetInventorySchemaResponse [InventoryItemSchema]

@@ -21,7 +21,7 @@
 -- Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.
 --
 --
--- For more information about working with snapshots, go to <http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html Amazon Redshift Snapshots> in the /Amazon Redshift Cluster Management Guide/ .
+-- For more information about working with snapshots, go to <https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html Amazon Redshift Snapshots> in the /Amazon Redshift Cluster Management Guide/ .
 --
 module Network.AWS.Redshift.RevokeSnapshotAccess
     (
@@ -48,17 +48,18 @@ import Network.AWS.Redshift.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'revokeSnapshotAccess' smart constructor.
-data RevokeSnapshotAccess = RevokeSnapshotAccess'
-  { _rsaSnapshotClusterIdentifier :: !(Maybe Text)
-  , _rsaSnapshotIdentifier        :: !Text
-  , _rsaAccountWithRestoreAccess  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeSnapshotAccess = RevokeSnapshotAccess'{_rsaSnapshotClusterIdentifier
+                                                  :: !(Maybe Text),
+                                                  _rsaSnapshotIdentifier ::
+                                                  !Text,
+                                                  _rsaAccountWithRestoreAccess
+                                                  :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'RevokeSnapshotAccess' with the minimum fields required to make a request.
 --
@@ -73,13 +74,13 @@ revokeSnapshotAccess
     :: Text -- ^ 'rsaSnapshotIdentifier'
     -> Text -- ^ 'rsaAccountWithRestoreAccess'
     -> RevokeSnapshotAccess
-revokeSnapshotAccess pSnapshotIdentifier_ pAccountWithRestoreAccess_ =
-  RevokeSnapshotAccess'
-    { _rsaSnapshotClusterIdentifier = Nothing
-    , _rsaSnapshotIdentifier = pSnapshotIdentifier_
-    , _rsaAccountWithRestoreAccess = pAccountWithRestoreAccess_
-    }
-
+revokeSnapshotAccess pSnapshotIdentifier_
+  pAccountWithRestoreAccess_
+  = RevokeSnapshotAccess'{_rsaSnapshotClusterIdentifier
+                            = Nothing,
+                          _rsaSnapshotIdentifier = pSnapshotIdentifier_,
+                          _rsaAccountWithRestoreAccess =
+                            pAccountWithRestoreAccess_}
 
 -- | The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
 rsaSnapshotClusterIdentifier :: Lens' RevokeSnapshotAccess (Maybe Text)
@@ -125,11 +126,14 @@ instance ToQuery RevokeSnapshotAccess where
                  _rsaAccountWithRestoreAccess]
 
 -- | /See:/ 'revokeSnapshotAccessResponse' smart constructor.
-data RevokeSnapshotAccessResponse = RevokeSnapshotAccessResponse'
-  { _rsarsSnapshot       :: !(Maybe Snapshot)
-  , _rsarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data RevokeSnapshotAccessResponse = RevokeSnapshotAccessResponse'{_rsarsSnapshot
+                                                                  ::
+                                                                  !(Maybe
+                                                                      Snapshot),
+                                                                  _rsarsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'RevokeSnapshotAccessResponse' with the minimum fields required to make a request.
 --
@@ -141,10 +145,10 @@ data RevokeSnapshotAccessResponse = RevokeSnapshotAccessResponse'
 revokeSnapshotAccessResponse
     :: Int -- ^ 'rsarsResponseStatus'
     -> RevokeSnapshotAccessResponse
-revokeSnapshotAccessResponse pResponseStatus_ =
-  RevokeSnapshotAccessResponse'
-    {_rsarsSnapshot = Nothing, _rsarsResponseStatus = pResponseStatus_}
-
+revokeSnapshotAccessResponse pResponseStatus_
+  = RevokeSnapshotAccessResponse'{_rsarsSnapshot =
+                                    Nothing,
+                                  _rsarsResponseStatus = pResponseStatus_}
 
 -- | Undocumented member.
 rsarsSnapshot :: Lens' RevokeSnapshotAccessResponse (Maybe Snapshot)

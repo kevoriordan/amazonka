@@ -58,11 +58,9 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'deleteIPSet' smart constructor.
-data DeleteIPSet = DeleteIPSet'
-  { _disIPSetId     :: !Text
-  , _disChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIPSet = DeleteIPSet'{_disIPSetId :: !Text,
+                                _disChangeToken :: !Text}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIPSet' with the minimum fields required to make a request.
 --
@@ -75,9 +73,9 @@ deleteIPSet
     :: Text -- ^ 'disIPSetId'
     -> Text -- ^ 'disChangeToken'
     -> DeleteIPSet
-deleteIPSet pIPSetId_ pChangeToken_ =
-  DeleteIPSet' {_disIPSetId = pIPSetId_, _disChangeToken = pChangeToken_}
-
+deleteIPSet pIPSetId_ pChangeToken_
+  = DeleteIPSet'{_disIPSetId = pIPSetId_,
+                 _disChangeToken = pChangeToken_}
 
 -- | The @IPSetId@ of the 'IPSet' that you want to delete. @IPSetId@ is returned by 'CreateIPSet' and by 'ListIPSets' .
 disIPSetId :: Lens' DeleteIPSet Text
@@ -123,11 +121,10 @@ instance ToQuery DeleteIPSet where
         toQuery = const mempty
 
 -- | /See:/ 'deleteIPSetResponse' smart constructor.
-data DeleteIPSetResponse = DeleteIPSetResponse'
-  { _disrsChangeToken    :: !(Maybe Text)
-  , _disrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteIPSetResponse = DeleteIPSetResponse'{_disrsChangeToken
+                                                :: !(Maybe Text),
+                                                _disrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteIPSetResponse' with the minimum fields required to make a request.
 --
@@ -139,10 +136,9 @@ data DeleteIPSetResponse = DeleteIPSetResponse'
 deleteIPSetResponse
     :: Int -- ^ 'disrsResponseStatus'
     -> DeleteIPSetResponse
-deleteIPSetResponse pResponseStatus_ =
-  DeleteIPSetResponse'
-    {_disrsChangeToken = Nothing, _disrsResponseStatus = pResponseStatus_}
-
+deleteIPSetResponse pResponseStatus_
+  = DeleteIPSetResponse'{_disrsChangeToken = Nothing,
+                         _disrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteIPSet@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 disrsChangeToken :: Lens' DeleteIPSetResponse (Maybe Text)

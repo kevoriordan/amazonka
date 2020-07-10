@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources.
+-- Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. 
 --
 --
 module Network.AWS.Mobile.ExportBundle
@@ -46,44 +46,42 @@ import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Request structure used to request generation of custom SDK and tool packages required to integrate mobile web or app clients with backed AWS resources.
+-- | Request structure used to request generation of custom SDK and tool packages required to integrate mobile web or app clients with backed AWS resources. 
 --
 --
 --
 -- /See:/ 'exportBundle' smart constructor.
-data ExportBundle = ExportBundle'
-  { _ebPlatform  :: !(Maybe Platform)
-  , _ebProjectId :: !(Maybe Text)
-  , _ebBundleId  :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ExportBundle = ExportBundle'{_ebPlatform ::
+                                  !(Maybe Platform),
+                                  _ebProjectId :: !(Maybe Text),
+                                  _ebBundleId :: !Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExportBundle' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ebPlatform' - Developer desktop or target application platform.
+-- * 'ebPlatform' - Developer desktop or target application platform. 
 --
--- * 'ebProjectId' - Unique project identifier.
+-- * 'ebProjectId' - Unique project identifier. 
 --
--- * 'ebBundleId' - Unique bundle identifier.
+-- * 'ebBundleId' - Unique bundle identifier. 
 exportBundle
     :: Text -- ^ 'ebBundleId'
     -> ExportBundle
-exportBundle pBundleId_ =
-  ExportBundle'
-    {_ebPlatform = Nothing, _ebProjectId = Nothing, _ebBundleId = pBundleId_}
+exportBundle pBundleId_
+  = ExportBundle'{_ebPlatform = Nothing,
+                  _ebProjectId = Nothing, _ebBundleId = pBundleId_}
 
-
--- | Developer desktop or target application platform.
+-- | Developer desktop or target application platform. 
 ebPlatform :: Lens' ExportBundle (Maybe Platform)
 ebPlatform = lens _ebPlatform (\ s a -> s{_ebPlatform = a})
 
--- | Unique project identifier.
+-- | Unique project identifier. 
 ebProjectId :: Lens' ExportBundle (Maybe Text)
 ebProjectId = lens _ebProjectId (\ s a -> s{_ebProjectId = a})
 
--- | Unique bundle identifier.
+-- | Unique bundle identifier. 
 ebBundleId :: Lens' ExportBundle Text
 ebBundleId = lens _ebBundleId (\ s a -> s{_ebBundleId = a})
 
@@ -120,33 +118,31 @@ instance ToQuery ExportBundle where
               ["platform" =: _ebPlatform,
                "projectId" =: _ebProjectId]
 
--- | Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources.
+-- | Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources. 
 --
 --
 --
 -- /See:/ 'exportBundleResponse' smart constructor.
-data ExportBundleResponse = ExportBundleResponse'
-  { _ebrsDownloadURL    :: !(Maybe Text)
-  , _ebrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ExportBundleResponse = ExportBundleResponse'{_ebrsDownloadURL
+                                                  :: !(Maybe Text),
+                                                  _ebrsResponseStatus :: !Int}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ExportBundleResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ebrsDownloadURL' - URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project.
+-- * 'ebrsDownloadURL' - URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. 
 --
 -- * 'ebrsResponseStatus' - -- | The response status code.
 exportBundleResponse
     :: Int -- ^ 'ebrsResponseStatus'
     -> ExportBundleResponse
-exportBundleResponse pResponseStatus_ =
-  ExportBundleResponse'
-    {_ebrsDownloadURL = Nothing, _ebrsResponseStatus = pResponseStatus_}
+exportBundleResponse pResponseStatus_
+  = ExportBundleResponse'{_ebrsDownloadURL = Nothing,
+                          _ebrsResponseStatus = pResponseStatus_}
 
-
--- | URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project.
+-- | URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. 
 ebrsDownloadURL :: Lens' ExportBundleResponse (Maybe Text)
 ebrsDownloadURL = lens _ebrsDownloadURL (\ s a -> s{_ebrsDownloadURL = a})
 

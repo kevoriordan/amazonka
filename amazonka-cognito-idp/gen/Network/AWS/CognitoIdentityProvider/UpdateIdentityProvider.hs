@@ -49,14 +49,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateIdentityProvider' smart constructor.
-data UpdateIdentityProvider = UpdateIdentityProvider'
-  { _uipIdpIdentifiers   :: !(Maybe [Text])
-  , _uipAttributeMapping :: !(Maybe (Map Text Text))
-  , _uipProviderDetails  :: !(Maybe (Map Text Text))
-  , _uipUserPoolId       :: !Text
-  , _uipProviderName     :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateIdentityProvider = UpdateIdentityProvider'{_uipIdpIdentifiers
+                                                      :: !(Maybe [Text]),
+                                                      _uipAttributeMapping ::
+                                                      !(Maybe (Map Text Text)),
+                                                      _uipProviderDetails ::
+                                                      !(Maybe (Map Text Text)),
+                                                      _uipUserPoolId :: !Text,
+                                                      _uipProviderName :: !Text}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'UpdateIdentityProvider' with the minimum fields required to make a request.
 --
@@ -75,15 +77,13 @@ updateIdentityProvider
     :: Text -- ^ 'uipUserPoolId'
     -> Text -- ^ 'uipProviderName'
     -> UpdateIdentityProvider
-updateIdentityProvider pUserPoolId_ pProviderName_ =
-  UpdateIdentityProvider'
-    { _uipIdpIdentifiers = Nothing
-    , _uipAttributeMapping = Nothing
-    , _uipProviderDetails = Nothing
-    , _uipUserPoolId = pUserPoolId_
-    , _uipProviderName = pProviderName_
-    }
-
+updateIdentityProvider pUserPoolId_ pProviderName_
+  = UpdateIdentityProvider'{_uipIdpIdentifiers =
+                              Nothing,
+                            _uipAttributeMapping = Nothing,
+                            _uipProviderDetails = Nothing,
+                            _uipUserPoolId = pUserPoolId_,
+                            _uipProviderName = pProviderName_}
 
 -- | A list of identity provider identifiers.
 uipIdpIdentifiers :: Lens' UpdateIdentityProvider [Text]
@@ -146,11 +146,13 @@ instance ToQuery UpdateIdentityProvider where
         toQuery = const mempty
 
 -- | /See:/ 'updateIdentityProviderResponse' smart constructor.
-data UpdateIdentityProviderResponse = UpdateIdentityProviderResponse'
-  { _uiprsResponseStatus   :: !Int
-  , _uiprsIdentityProvider :: !IdentityProviderType
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateIdentityProviderResponse = UpdateIdentityProviderResponse'{_uiprsResponseStatus
+                                                                      :: !Int,
+                                                                      _uiprsIdentityProvider
+                                                                      ::
+                                                                      !IdentityProviderType}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'UpdateIdentityProviderResponse' with the minimum fields required to make a request.
 --
@@ -163,12 +165,11 @@ updateIdentityProviderResponse
     :: Int -- ^ 'uiprsResponseStatus'
     -> IdentityProviderType -- ^ 'uiprsIdentityProvider'
     -> UpdateIdentityProviderResponse
-updateIdentityProviderResponse pResponseStatus_ pIdentityProvider_ =
-  UpdateIdentityProviderResponse'
-    { _uiprsResponseStatus = pResponseStatus_
-    , _uiprsIdentityProvider = pIdentityProvider_
-    }
-
+updateIdentityProviderResponse pResponseStatus_
+  pIdentityProvider_
+  = UpdateIdentityProviderResponse'{_uiprsResponseStatus
+                                      = pResponseStatus_,
+                                    _uiprsIdentityProvider = pIdentityProvider_}
 
 -- | -- | The response status code.
 uiprsResponseStatus :: Lens' UpdateIdentityProviderResponse Int

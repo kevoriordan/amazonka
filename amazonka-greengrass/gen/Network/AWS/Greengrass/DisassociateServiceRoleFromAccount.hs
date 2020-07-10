@@ -41,17 +41,16 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'disassociateServiceRoleFromAccount' smart constructor.
-data DisassociateServiceRoleFromAccount =
-  DisassociateServiceRoleFromAccount'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateServiceRoleFromAccount = DisassociateServiceRoleFromAccount'
+                                            deriving (Eq, Read, Show, Data,
+                                                      Typeable, Generic)
 
 -- | Creates a value of 'DisassociateServiceRoleFromAccount' with the minimum fields required to make a request.
 --
 disassociateServiceRoleFromAccount
     :: DisassociateServiceRoleFromAccount
-disassociateServiceRoleFromAccount = DisassociateServiceRoleFromAccount'
-
+disassociateServiceRoleFromAccount
+  = DisassociateServiceRoleFromAccount'
 
 instance AWSRequest
            DisassociateServiceRoleFromAccount
@@ -88,11 +87,16 @@ instance ToQuery DisassociateServiceRoleFromAccount
         toQuery = const mempty
 
 -- | /See:/ 'disassociateServiceRoleFromAccountResponse' smart constructor.
-data DisassociateServiceRoleFromAccountResponse = DisassociateServiceRoleFromAccountResponse'
-  { _dsrfarsDisassociatedAt :: !(Maybe Text)
-  , _dsrfarsResponseStatus  :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DisassociateServiceRoleFromAccountResponse = DisassociateServiceRoleFromAccountResponse'{_dsrfarsDisassociatedAt
+                                                                                              ::
+                                                                                              !(Maybe
+                                                                                                  Text),
+                                                                                              _dsrfarsResponseStatus
+                                                                                              ::
+                                                                                              !Int}
+                                                    deriving (Eq, Read, Show,
+                                                              Data, Typeable,
+                                                              Generic)
 
 -- | Creates a value of 'DisassociateServiceRoleFromAccountResponse' with the minimum fields required to make a request.
 --
@@ -104,12 +108,12 @@ data DisassociateServiceRoleFromAccountResponse = DisassociateServiceRoleFromAcc
 disassociateServiceRoleFromAccountResponse
     :: Int -- ^ 'dsrfarsResponseStatus'
     -> DisassociateServiceRoleFromAccountResponse
-disassociateServiceRoleFromAccountResponse pResponseStatus_ =
-  DisassociateServiceRoleFromAccountResponse'
-    { _dsrfarsDisassociatedAt = Nothing
-    , _dsrfarsResponseStatus = pResponseStatus_
-    }
-
+disassociateServiceRoleFromAccountResponse
+  pResponseStatus_
+  = DisassociateServiceRoleFromAccountResponse'{_dsrfarsDisassociatedAt
+                                                  = Nothing,
+                                                _dsrfarsResponseStatus =
+                                                  pResponseStatus_}
 
 -- | The time when the service role was disassociated from the account.
 dsrfarsDisassociatedAt :: Lens' DisassociateServiceRoleFromAccountResponse (Maybe Text)

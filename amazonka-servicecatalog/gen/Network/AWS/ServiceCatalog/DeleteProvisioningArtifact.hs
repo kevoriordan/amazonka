@@ -29,9 +29,9 @@ module Network.AWS.ServiceCatalog.DeleteProvisioningArtifact
       deleteProvisioningArtifact
     , DeleteProvisioningArtifact
     -- * Request Lenses
-    , dpapAcceptLanguage
-    , dpapProductId
-    , dpapProvisioningArtifactId
+    , dltprvsnngartfctAcceptLanguage
+    , dltprvsnngartfctProductId
+    , dltprvsnngartfctProvisioningArtifactId
 
     -- * Destructuring the Response
     , deleteProvisioningArtifactResponse
@@ -48,45 +48,47 @@ import Network.AWS.ServiceCatalog.Types
 import Network.AWS.ServiceCatalog.Types.Product
 
 -- | /See:/ 'deleteProvisioningArtifact' smart constructor.
-data DeleteProvisioningArtifact = DeleteProvisioningArtifact'
-  { _dpapAcceptLanguage         :: !(Maybe Text)
-  , _dpapProductId              :: !Text
-  , _dpapProvisioningArtifactId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteProvisioningArtifact = DeleteProvisioningArtifact'{_dltprvsnngartfctAcceptLanguage
+                                                              :: !(Maybe Text),
+                                                              _dltprvsnngartfctProductId
+                                                              :: !Text,
+                                                              _dltprvsnngartfctProvisioningArtifactId
+                                                              :: !Text}
+                                    deriving (Eq, Read, Show, Data, Typeable,
+                                              Generic)
 
 -- | Creates a value of 'DeleteProvisioningArtifact' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpapAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
+-- * 'dltprvsnngartfctAcceptLanguage' - The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
 --
--- * 'dpapProductId' - The product identifier.
+-- * 'dltprvsnngartfctProductId' - The product identifier.
 --
--- * 'dpapProvisioningArtifactId' - The identifier of the provisioning artifact.
+-- * 'dltprvsnngartfctProvisioningArtifactId' - The identifier of the provisioning artifact.
 deleteProvisioningArtifact
-    :: Text -- ^ 'dpapProductId'
-    -> Text -- ^ 'dpapProvisioningArtifactId'
+    :: Text -- ^ 'dltprvsnngartfctProductId'
+    -> Text -- ^ 'dltprvsnngartfctProvisioningArtifactId'
     -> DeleteProvisioningArtifact
-deleteProvisioningArtifact pProductId_ pProvisioningArtifactId_ =
-  DeleteProvisioningArtifact'
-    { _dpapAcceptLanguage = Nothing
-    , _dpapProductId = pProductId_
-    , _dpapProvisioningArtifactId = pProvisioningArtifactId_
-    }
-
+deleteProvisioningArtifact pProductId_
+  pProvisioningArtifactId_
+  = DeleteProvisioningArtifact'{_dltprvsnngartfctAcceptLanguage
+                                  = Nothing,
+                                _dltprvsnngartfctProductId = pProductId_,
+                                _dltprvsnngartfctProvisioningArtifactId =
+                                  pProvisioningArtifactId_}
 
 -- | The language code.     * @en@ - English (default)     * @jp@ - Japanese     * @zh@ - Chinese
-dpapAcceptLanguage :: Lens' DeleteProvisioningArtifact (Maybe Text)
-dpapAcceptLanguage = lens _dpapAcceptLanguage (\ s a -> s{_dpapAcceptLanguage = a})
+dltprvsnngartfctAcceptLanguage :: Lens' DeleteProvisioningArtifact (Maybe Text)
+dltprvsnngartfctAcceptLanguage = lens _dltprvsnngartfctAcceptLanguage (\ s a -> s{_dltprvsnngartfctAcceptLanguage = a})
 
 -- | The product identifier.
-dpapProductId :: Lens' DeleteProvisioningArtifact Text
-dpapProductId = lens _dpapProductId (\ s a -> s{_dpapProductId = a})
+dltprvsnngartfctProductId :: Lens' DeleteProvisioningArtifact Text
+dltprvsnngartfctProductId = lens _dltprvsnngartfctProductId (\ s a -> s{_dltprvsnngartfctProductId = a})
 
 -- | The identifier of the provisioning artifact.
-dpapProvisioningArtifactId :: Lens' DeleteProvisioningArtifact Text
-dpapProvisioningArtifactId = lens _dpapProvisioningArtifactId (\ s a -> s{_dpapProvisioningArtifactId = a})
+dltprvsnngartfctProvisioningArtifactId :: Lens' DeleteProvisioningArtifact Text
+dltprvsnngartfctProvisioningArtifactId = lens _dltprvsnngartfctProvisioningArtifactId (\ s a -> s{_dltprvsnngartfctProvisioningArtifactId = a})
 
 instance AWSRequest DeleteProvisioningArtifact where
         type Rs DeleteProvisioningArtifact =
@@ -116,11 +118,12 @@ instance ToJSON DeleteProvisioningArtifact where
         toJSON DeleteProvisioningArtifact'{..}
           = object
               (catMaybes
-                 [("AcceptLanguage" .=) <$> _dpapAcceptLanguage,
-                  Just ("ProductId" .= _dpapProductId),
+                 [("AcceptLanguage" .=) <$>
+                    _dltprvsnngartfctAcceptLanguage,
+                  Just ("ProductId" .= _dltprvsnngartfctProductId),
                   Just
                     ("ProvisioningArtifactId" .=
-                       _dpapProvisioningArtifactId)])
+                       _dltprvsnngartfctProvisioningArtifactId)])
 
 instance ToPath DeleteProvisioningArtifact where
         toPath = const "/"
@@ -129,10 +132,11 @@ instance ToQuery DeleteProvisioningArtifact where
         toQuery = const mempty
 
 -- | /See:/ 'deleteProvisioningArtifactResponse' smart constructor.
-newtype DeleteProvisioningArtifactResponse = DeleteProvisioningArtifactResponse'
-  { _dparsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteProvisioningArtifactResponse = DeleteProvisioningArtifactResponse'{_dparsResponseStatus
+                                                                                 ::
+                                                                                 Int}
+                                               deriving (Eq, Read, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'DeleteProvisioningArtifactResponse' with the minimum fields required to make a request.
 --
@@ -142,9 +146,9 @@ newtype DeleteProvisioningArtifactResponse = DeleteProvisioningArtifactResponse'
 deleteProvisioningArtifactResponse
     :: Int -- ^ 'dparsResponseStatus'
     -> DeleteProvisioningArtifactResponse
-deleteProvisioningArtifactResponse pResponseStatus_ =
-  DeleteProvisioningArtifactResponse' {_dparsResponseStatus = pResponseStatus_}
-
+deleteProvisioningArtifactResponse pResponseStatus_
+  = DeleteProvisioningArtifactResponse'{_dparsResponseStatus
+                                          = pResponseStatus_}
 
 -- | -- | The response status code.
 dparsResponseStatus :: Lens' DeleteProvisioningArtifactResponse Int

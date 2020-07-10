@@ -54,14 +54,13 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getProducts' smart constructor.
-data GetProducts = GetProducts'
-  { _gpFilters       :: !(Maybe [Filter])
-  , _gpFormatVersion :: !(Maybe Text)
-  , _gpNextToken     :: !(Maybe Text)
-  , _gpServiceCode   :: !(Maybe Text)
-  , _gpMaxResults    :: !(Maybe Nat)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetProducts = GetProducts'{_gpFilters ::
+                                !(Maybe [Filter]),
+                                _gpFormatVersion :: !(Maybe Text),
+                                _gpNextToken :: !(Maybe Text),
+                                _gpServiceCode :: !(Maybe Text),
+                                _gpMaxResults :: !(Maybe Nat)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetProducts' with the minimum fields required to make a request.
 --
@@ -69,30 +68,25 @@ data GetProducts = GetProducts'
 --
 -- * 'gpFilters' - The list of filters that limit the returned products. only products that match all filters are returned.
 --
--- * 'gpFormatVersion' - The format version that you want the response to be in. Valid values are: @aws_v1@
+-- * 'gpFormatVersion' - The format version that you want the response to be in. Valid values are: @aws_v1@ 
 --
 -- * 'gpNextToken' - The pagination token that indicates the next set of results that you want to retrieve.
 --
--- * 'gpServiceCode' - The code for the service whose products you want to retrieve.
+-- * 'gpServiceCode' - The code for the service whose products you want to retrieve. 
 --
 -- * 'gpMaxResults' - The maximum number of results to return in the response.
 getProducts
     :: GetProducts
-getProducts =
-  GetProducts'
-    { _gpFilters = Nothing
-    , _gpFormatVersion = Nothing
-    , _gpNextToken = Nothing
-    , _gpServiceCode = Nothing
-    , _gpMaxResults = Nothing
-    }
-
+getProducts
+  = GetProducts'{_gpFilters = Nothing,
+                 _gpFormatVersion = Nothing, _gpNextToken = Nothing,
+                 _gpServiceCode = Nothing, _gpMaxResults = Nothing}
 
 -- | The list of filters that limit the returned products. only products that match all filters are returned.
 gpFilters :: Lens' GetProducts [Filter]
 gpFilters = lens _gpFilters (\ s a -> s{_gpFilters = a}) . _Default . _Coerce
 
--- | The format version that you want the response to be in. Valid values are: @aws_v1@
+-- | The format version that you want the response to be in. Valid values are: @aws_v1@ 
 gpFormatVersion :: Lens' GetProducts (Maybe Text)
 gpFormatVersion = lens _gpFormatVersion (\ s a -> s{_gpFormatVersion = a})
 
@@ -100,7 +94,7 @@ gpFormatVersion = lens _gpFormatVersion (\ s a -> s{_gpFormatVersion = a})
 gpNextToken :: Lens' GetProducts (Maybe Text)
 gpNextToken = lens _gpNextToken (\ s a -> s{_gpNextToken = a})
 
--- | The code for the service whose products you want to retrieve.
+-- | The code for the service whose products you want to retrieve. 
 gpServiceCode :: Lens' GetProducts (Maybe Text)
 gpServiceCode = lens _gpServiceCode (\ s a -> s{_gpServiceCode = a})
 
@@ -156,13 +150,13 @@ instance ToQuery GetProducts where
         toQuery = const mempty
 
 -- | /See:/ 'getProductsResponse' smart constructor.
-data GetProductsResponse = GetProductsResponse'
-  { _gprsFormatVersion  :: !(Maybe Text)
-  , _gprsNextToken      :: !(Maybe Text)
-  , _gprsPriceList      :: !(Maybe [Text])
-  , _gprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetProductsResponse = GetProductsResponse'{_gprsFormatVersion
+                                                :: !(Maybe Text),
+                                                _gprsNextToken :: !(Maybe Text),
+                                                _gprsPriceList ::
+                                                !(Maybe [Text]),
+                                                _gprsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetProductsResponse' with the minimum fields required to make a request.
 --
@@ -178,14 +172,10 @@ data GetProductsResponse = GetProductsResponse'
 getProductsResponse
     :: Int -- ^ 'gprsResponseStatus'
     -> GetProductsResponse
-getProductsResponse pResponseStatus_ =
-  GetProductsResponse'
-    { _gprsFormatVersion = Nothing
-    , _gprsNextToken = Nothing
-    , _gprsPriceList = Nothing
-    , _gprsResponseStatus = pResponseStatus_
-    }
-
+getProductsResponse pResponseStatus_
+  = GetProductsResponse'{_gprsFormatVersion = Nothing,
+                         _gprsNextToken = Nothing, _gprsPriceList = Nothing,
+                         _gprsResponseStatus = pResponseStatus_}
 
 -- | The format version of the response. For example, aws_v1.
 gprsFormatVersion :: Lens' GetProductsResponse (Maybe Text)

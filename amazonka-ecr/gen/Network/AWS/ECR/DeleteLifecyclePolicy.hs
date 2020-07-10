@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified lifecycle policy.
+-- Deletes the lifecycle policy associated with the specified repository.
 --
 --
 module Network.AWS.ECR.DeleteLifecyclePolicy
@@ -49,11 +49,11 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteLifecyclePolicy' smart constructor.
-data DeleteLifecyclePolicy = DeleteLifecyclePolicy'
-  { _dlpRegistryId     :: !(Maybe Text)
-  , _dlpRepositoryName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLifecyclePolicy = DeleteLifecyclePolicy'{_dlpRegistryId
+                                                    :: !(Maybe Text),
+                                                    _dlpRepositoryName :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'DeleteLifecyclePolicy' with the minimum fields required to make a request.
 --
@@ -65,10 +65,9 @@ data DeleteLifecyclePolicy = DeleteLifecyclePolicy'
 deleteLifecyclePolicy
     :: Text -- ^ 'dlpRepositoryName'
     -> DeleteLifecyclePolicy
-deleteLifecyclePolicy pRepositoryName_ =
-  DeleteLifecyclePolicy'
-    {_dlpRegistryId = Nothing, _dlpRepositoryName = pRepositoryName_}
-
+deleteLifecyclePolicy pRepositoryName_
+  = DeleteLifecyclePolicy'{_dlpRegistryId = Nothing,
+                           _dlpRepositoryName = pRepositoryName_}
 
 -- | The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
 dlpRegistryId :: Lens' DeleteLifecyclePolicy (Maybe Text)
@@ -119,14 +118,26 @@ instance ToQuery DeleteLifecyclePolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deleteLifecyclePolicyResponse' smart constructor.
-data DeleteLifecyclePolicyResponse = DeleteLifecyclePolicyResponse'
-  { _dlprsRegistryId          :: !(Maybe Text)
-  , _dlprsLastEvaluatedAt     :: !(Maybe POSIX)
-  , _dlprsLifecyclePolicyText :: !(Maybe Text)
-  , _dlprsRepositoryName      :: !(Maybe Text)
-  , _dlprsResponseStatus      :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteLifecyclePolicyResponse = DeleteLifecyclePolicyResponse'{_dlprsRegistryId
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dlprsLastEvaluatedAt
+                                                                    ::
+                                                                    !(Maybe
+                                                                        POSIX),
+                                                                    _dlprsLifecyclePolicyText
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dlprsRepositoryName
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _dlprsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'DeleteLifecyclePolicyResponse' with the minimum fields required to make a request.
 --
@@ -144,15 +155,13 @@ data DeleteLifecyclePolicyResponse = DeleteLifecyclePolicyResponse'
 deleteLifecyclePolicyResponse
     :: Int -- ^ 'dlprsResponseStatus'
     -> DeleteLifecyclePolicyResponse
-deleteLifecyclePolicyResponse pResponseStatus_ =
-  DeleteLifecyclePolicyResponse'
-    { _dlprsRegistryId = Nothing
-    , _dlprsLastEvaluatedAt = Nothing
-    , _dlprsLifecyclePolicyText = Nothing
-    , _dlprsRepositoryName = Nothing
-    , _dlprsResponseStatus = pResponseStatus_
-    }
-
+deleteLifecyclePolicyResponse pResponseStatus_
+  = DeleteLifecyclePolicyResponse'{_dlprsRegistryId =
+                                     Nothing,
+                                   _dlprsLastEvaluatedAt = Nothing,
+                                   _dlprsLifecyclePolicyText = Nothing,
+                                   _dlprsRepositoryName = Nothing,
+                                   _dlprsResponseStatus = pResponseStatus_}
 
 -- | The registry ID associated with the request.
 dlprsRegistryId :: Lens' DeleteLifecyclePolicyResponse (Maybe Text)

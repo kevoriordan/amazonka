@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see <http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html Limits> in the AWS CodeCommit User Guide.
+-- Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see <https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html Limits> in the AWS CodeCommit User Guide.
 --
 --
 module Network.AWS.CodeCommit.UpdateRepositoryName
@@ -47,28 +47,27 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'updateRepositoryName' smart constructor.
-data UpdateRepositoryName = UpdateRepositoryName'
-  { _urnOldName :: !Text
-  , _urnNewName :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRepositoryName = UpdateRepositoryName'{_urnOldName
+                                                  :: !Text,
+                                                  _urnNewName :: !Text}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRepositoryName' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urnOldName' - The existing name of the repository.
+-- * 'urnOldName' - The current name of the repository.
 --
 -- * 'urnNewName' - The new name for the repository.
 updateRepositoryName
     :: Text -- ^ 'urnOldName'
     -> Text -- ^ 'urnNewName'
     -> UpdateRepositoryName
-updateRepositoryName pOldName_ pNewName_ =
-  UpdateRepositoryName' {_urnOldName = pOldName_, _urnNewName = pNewName_}
+updateRepositoryName pOldName_ pNewName_
+  = UpdateRepositoryName'{_urnOldName = pOldName_,
+                          _urnNewName = pNewName_}
 
-
--- | The existing name of the repository.
+-- | The current name of the repository.
 urnOldName :: Lens' UpdateRepositoryName Text
 urnOldName = lens _urnOldName (\ s a -> s{_urnOldName = a})
 
@@ -110,16 +109,15 @@ instance ToQuery UpdateRepositoryName where
         toQuery = const mempty
 
 -- | /See:/ 'updateRepositoryNameResponse' smart constructor.
-data UpdateRepositoryNameResponse =
-  UpdateRepositoryNameResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRepositoryNameResponse = UpdateRepositoryNameResponse'
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'UpdateRepositoryNameResponse' with the minimum fields required to make a request.
 --
 updateRepositoryNameResponse
     :: UpdateRepositoryNameResponse
-updateRepositoryNameResponse = UpdateRepositoryNameResponse'
-
+updateRepositoryNameResponse
+  = UpdateRepositoryNameResponse'
 
 instance NFData UpdateRepositoryNameResponse where

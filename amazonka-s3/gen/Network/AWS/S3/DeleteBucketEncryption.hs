@@ -18,7 +18,19 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the server-side encryption configuration from the bucket.
+-- This implementation of the DELETE operation removes default encryption from the bucket. For information about the Amazon S3 default encryption feature, see <https://docs.aws.amazon.com/AmazonS3/latest/dev//bucket-encryption.html Amazon S3 Default Bucket Encryption> in the /Amazon Simple Storage Service Developer Guide/ .
+--
+--
+-- To use this operation, you must have permissions to perform the @s3:PutEncryptionConfiguration@ action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. For more information about permissions, see <https://docs.aws.amazon.com/AmazonS3/latest/dev//using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations> and <https://docs.aws.amazon.com/AmazonS3/latest/dev//s3-access-control.html Managing Access Permissions to your Amazon S3 Resources> in the /Amazon Simple Storage Service Developer Guide/ .
+--
+-- __Related Resources__ 
+--
+--     * 'PutBucketEncryption' 
+--
+--     * 'GetBucketEncryption' 
+--
+--
+--
 module Network.AWS.S3.DeleteBucketEncryption
     (
     -- * Creating a Request
@@ -40,10 +52,10 @@ import Network.AWS.S3.Types
 import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteBucketEncryption' smart constructor.
-newtype DeleteBucketEncryption = DeleteBucketEncryption'
-  { _dbeBucket :: BucketName
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteBucketEncryption = DeleteBucketEncryption'{_dbeBucket
+                                                         :: BucketName}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'DeleteBucketEncryption' with the minimum fields required to make a request.
 --
@@ -53,9 +65,8 @@ newtype DeleteBucketEncryption = DeleteBucketEncryption'
 deleteBucketEncryption
     :: BucketName -- ^ 'dbeBucket'
     -> DeleteBucketEncryption
-deleteBucketEncryption pBucket_ =
-  DeleteBucketEncryption' {_dbeBucket = pBucket_}
-
+deleteBucketEncryption pBucket_
+  = DeleteBucketEncryption'{_dbeBucket = pBucket_}
 
 -- | The name of the bucket containing the server-side encryption configuration to delete.
 dbeBucket :: Lens' DeleteBucketEncryption BucketName
@@ -83,16 +94,15 @@ instance ToQuery DeleteBucketEncryption where
         toQuery = const (mconcat ["encryption"])
 
 -- | /See:/ 'deleteBucketEncryptionResponse' smart constructor.
-data DeleteBucketEncryptionResponse =
-  DeleteBucketEncryptionResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteBucketEncryptionResponse = DeleteBucketEncryptionResponse'
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'DeleteBucketEncryptionResponse' with the minimum fields required to make a request.
 --
 deleteBucketEncryptionResponse
     :: DeleteBucketEncryptionResponse
-deleteBucketEncryptionResponse = DeleteBucketEncryptionResponse'
-
+deleteBucketEncryptionResponse
+  = DeleteBucketEncryptionResponse'
 
 instance NFData DeleteBucketEncryptionResponse where

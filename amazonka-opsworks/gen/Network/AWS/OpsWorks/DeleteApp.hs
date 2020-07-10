@@ -21,7 +21,7 @@
 -- Deletes a specified app.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.DeleteApp
     (
@@ -44,10 +44,8 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'deleteApp' smart constructor.
-newtype DeleteApp = DeleteApp'
-  { _daAppId :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteApp = DeleteApp'{_daAppId :: Text}
+                      deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteApp' with the minimum fields required to make a request.
 --
@@ -57,8 +55,7 @@ newtype DeleteApp = DeleteApp'
 deleteApp
     :: Text -- ^ 'daAppId'
     -> DeleteApp
-deleteApp pAppId_ = DeleteApp' {_daAppId = pAppId_}
-
+deleteApp pAppId_ = DeleteApp'{_daAppId = pAppId_}
 
 -- | The app ID.
 daAppId :: Lens' DeleteApp Text
@@ -93,16 +90,13 @@ instance ToQuery DeleteApp where
         toQuery = const mempty
 
 -- | /See:/ 'deleteAppResponse' smart constructor.
-data DeleteAppResponse =
-  DeleteAppResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteAppResponse = DeleteAppResponse'
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteAppResponse' with the minimum fields required to make a request.
 --
 deleteAppResponse
     :: DeleteAppResponse
 deleteAppResponse = DeleteAppResponse'
-
 
 instance NFData DeleteAppResponse where

@@ -46,10 +46,9 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteTopicRule' smart constructor.
-newtype DeleteTopicRule = DeleteTopicRule'
-  { _dRuleName :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype DeleteTopicRule = DeleteTopicRule'{_dRuleName
+                                           :: Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteTopicRule' with the minimum fields required to make a request.
 --
@@ -59,8 +58,8 @@ newtype DeleteTopicRule = DeleteTopicRule'
 deleteTopicRule
     :: Text -- ^ 'dRuleName'
     -> DeleteTopicRule
-deleteTopicRule pRuleName_ = DeleteTopicRule' {_dRuleName = pRuleName_}
-
+deleteTopicRule pRuleName_
+  = DeleteTopicRule'{_dRuleName = pRuleName_}
 
 -- | The name of the rule.
 dRuleName :: Lens' DeleteTopicRule Text
@@ -86,16 +85,14 @@ instance ToQuery DeleteTopicRule where
         toQuery = const mempty
 
 -- | /See:/ 'deleteTopicRuleResponse' smart constructor.
-data DeleteTopicRuleResponse =
-  DeleteTopicRuleResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteTopicRuleResponse = DeleteTopicRuleResponse'
+                                 deriving (Eq, Read, Show, Data, Typeable,
+                                           Generic)
 
 -- | Creates a value of 'DeleteTopicRuleResponse' with the minimum fields required to make a request.
 --
 deleteTopicRuleResponse
     :: DeleteTopicRuleResponse
 deleteTopicRuleResponse = DeleteTopicRuleResponse'
-
 
 instance NFData DeleteTopicRuleResponse where

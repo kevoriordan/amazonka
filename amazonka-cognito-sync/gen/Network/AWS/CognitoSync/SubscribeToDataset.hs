@@ -53,13 +53,12 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'subscribeToDataset' smart constructor.
-data SubscribeToDataset = SubscribeToDataset'
-  { _stdIdentityPoolId :: !Text
-  , _stdIdentityId     :: !Text
-  , _stdDatasetName    :: !Text
-  , _stdDeviceId       :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data SubscribeToDataset = SubscribeToDataset'{_stdIdentityPoolId
+                                              :: !Text,
+                                              _stdIdentityId :: !Text,
+                                              _stdDatasetName :: !Text,
+                                              _stdDeviceId :: !Text}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'SubscribeToDataset' with the minimum fields required to make a request.
 --
@@ -78,14 +77,13 @@ subscribeToDataset
     -> Text -- ^ 'stdDatasetName'
     -> Text -- ^ 'stdDeviceId'
     -> SubscribeToDataset
-subscribeToDataset pIdentityPoolId_ pIdentityId_ pDatasetName_ pDeviceId_ =
-  SubscribeToDataset'
-    { _stdIdentityPoolId = pIdentityPoolId_
-    , _stdIdentityId = pIdentityId_
-    , _stdDatasetName = pDatasetName_
-    , _stdDeviceId = pDeviceId_
-    }
-
+subscribeToDataset pIdentityPoolId_ pIdentityId_
+  pDatasetName_ pDeviceId_
+  = SubscribeToDataset'{_stdIdentityPoolId =
+                          pIdentityPoolId_,
+                        _stdIdentityId = pIdentityId_,
+                        _stdDatasetName = pDatasetName_,
+                        _stdDeviceId = pDeviceId_}
 
 -- | A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. The ID of the pool to which the identity belongs.
 stdIdentityPoolId :: Lens' SubscribeToDataset Text
@@ -142,10 +140,10 @@ instance ToQuery SubscribeToDataset where
 --
 --
 -- /See:/ 'subscribeToDatasetResponse' smart constructor.
-newtype SubscribeToDatasetResponse = SubscribeToDatasetResponse'
-  { _stdrsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype SubscribeToDatasetResponse = SubscribeToDatasetResponse'{_stdrsResponseStatus
+                                                                 :: Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'SubscribeToDatasetResponse' with the minimum fields required to make a request.
 --
@@ -155,9 +153,9 @@ newtype SubscribeToDatasetResponse = SubscribeToDatasetResponse'
 subscribeToDatasetResponse
     :: Int -- ^ 'stdrsResponseStatus'
     -> SubscribeToDatasetResponse
-subscribeToDatasetResponse pResponseStatus_ =
-  SubscribeToDatasetResponse' {_stdrsResponseStatus = pResponseStatus_}
-
+subscribeToDatasetResponse pResponseStatus_
+  = SubscribeToDatasetResponse'{_stdrsResponseStatus =
+                                  pResponseStatus_}
 
 -- | -- | The response status code.
 stdrsResponseStatus :: Lens' SubscribeToDatasetResponse Int

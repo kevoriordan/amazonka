@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Promotes a Read Replica DB cluster to a standalone DB cluster.
+-- Promotes a read replica DB cluster to a standalone DB cluster.
 --
 --
 module Network.AWS.RDS.PromoteReadReplicaDBCluster
@@ -44,30 +44,29 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'promoteReadReplicaDBCluster' smart constructor.
-newtype PromoteReadReplicaDBCluster = PromoteReadReplicaDBCluster'
-  { _prrdcDBClusterIdentifier :: Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype PromoteReadReplicaDBCluster = PromoteReadReplicaDBCluster'{_prrdcDBClusterIdentifier
+                                                                   :: Text}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'PromoteReadReplicaDBCluster' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'prrdcDBClusterIdentifier' - The identifier of the DB cluster Read Replica to promote. This parameter is not case-sensitive.  Constraints:     * Must match the identifier of an existing DBCluster Read Replica. Example: @my-cluster-replica1@
+-- * 'prrdcDBClusterIdentifier' - The identifier of the DB cluster read replica to promote. This parameter isn't case-sensitive.  Constraints:     * Must match the identifier of an existing DB cluster read replica. Example: @my-cluster-replica1@ 
 promoteReadReplicaDBCluster
     :: Text -- ^ 'prrdcDBClusterIdentifier'
     -> PromoteReadReplicaDBCluster
-promoteReadReplicaDBCluster pDBClusterIdentifier_ =
-  PromoteReadReplicaDBCluster'
-    {_prrdcDBClusterIdentifier = pDBClusterIdentifier_}
+promoteReadReplicaDBCluster pDBClusterIdentifier_
+  = PromoteReadReplicaDBCluster'{_prrdcDBClusterIdentifier
+                                   = pDBClusterIdentifier_}
 
-
--- | The identifier of the DB cluster Read Replica to promote. This parameter is not case-sensitive.  Constraints:     * Must match the identifier of an existing DBCluster Read Replica. Example: @my-cluster-replica1@
+-- | The identifier of the DB cluster read replica to promote. This parameter isn't case-sensitive.  Constraints:     * Must match the identifier of an existing DB cluster read replica. Example: @my-cluster-replica1@ 
 prrdcDBClusterIdentifier :: Lens' PromoteReadReplicaDBCluster Text
 prrdcDBClusterIdentifier = lens _prrdcDBClusterIdentifier (\ s a -> s{_prrdcDBClusterIdentifier = a})
 
@@ -101,11 +100,15 @@ instance ToQuery PromoteReadReplicaDBCluster where
                "DBClusterIdentifier" =: _prrdcDBClusterIdentifier]
 
 -- | /See:/ 'promoteReadReplicaDBClusterResponse' smart constructor.
-data PromoteReadReplicaDBClusterResponse = PromoteReadReplicaDBClusterResponse'
-  { _prrdcrsDBCluster      :: !(Maybe DBCluster)
-  , _prrdcrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data PromoteReadReplicaDBClusterResponse = PromoteReadReplicaDBClusterResponse'{_prrdcrsDBCluster
+                                                                                ::
+                                                                                !(Maybe
+                                                                                    DBCluster),
+                                                                                _prrdcrsResponseStatus
+                                                                                ::
+                                                                                !Int}
+                                             deriving (Eq, Read, Show, Data,
+                                                       Typeable, Generic)
 
 -- | Creates a value of 'PromoteReadReplicaDBClusterResponse' with the minimum fields required to make a request.
 --
@@ -117,10 +120,11 @@ data PromoteReadReplicaDBClusterResponse = PromoteReadReplicaDBClusterResponse'
 promoteReadReplicaDBClusterResponse
     :: Int -- ^ 'prrdcrsResponseStatus'
     -> PromoteReadReplicaDBClusterResponse
-promoteReadReplicaDBClusterResponse pResponseStatus_ =
-  PromoteReadReplicaDBClusterResponse'
-    {_prrdcrsDBCluster = Nothing, _prrdcrsResponseStatus = pResponseStatus_}
-
+promoteReadReplicaDBClusterResponse pResponseStatus_
+  = PromoteReadReplicaDBClusterResponse'{_prrdcrsDBCluster
+                                           = Nothing,
+                                         _prrdcrsResponseStatus =
+                                           pResponseStatus_}
 
 -- | Undocumented member.
 prrdcrsDBCluster :: Lens' PromoteReadReplicaDBClusterResponse (Maybe DBCluster)

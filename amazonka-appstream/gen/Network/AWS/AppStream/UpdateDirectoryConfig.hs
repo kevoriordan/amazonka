@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified directory configuration.
+-- Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
 --
 --
 module Network.AWS.AppStream.UpdateDirectoryConfig
@@ -47,34 +47,34 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateDirectoryConfig' smart constructor.
-data UpdateDirectoryConfig = UpdateDirectoryConfig'
-  { _udcServiceAccountCredentials :: !(Maybe ServiceAccountCredentials)
-  , _udcOrganizationalUnitDistinguishedNames :: !(Maybe [Text])
-  , _udcDirectoryName :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateDirectoryConfig = UpdateDirectoryConfig'{_udcServiceAccountCredentials
+                                                    ::
+                                                    !(Maybe
+                                                        ServiceAccountCredentials),
+                                                    _udcOrganizationalUnitDistinguishedNames
+                                                    :: !(Maybe [Text]),
+                                                    _udcDirectoryName :: !Text}
+                               deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateDirectoryConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udcServiceAccountCredentials' - The credentials for the service account used by the streaming instance to connect to the directory.
+-- * 'udcServiceAccountCredentials' - The credentials for the service account used by the fleet or image builder to connect to the directory.
 --
 -- * 'udcOrganizationalUnitDistinguishedNames' - The distinguished names of the organizational units for computer accounts.
 --
--- * 'udcDirectoryName' - The name of the directory configuration.
+-- * 'udcDirectoryName' - The name of the Directory Config object.
 updateDirectoryConfig
     :: Text -- ^ 'udcDirectoryName'
     -> UpdateDirectoryConfig
-updateDirectoryConfig pDirectoryName_ =
-  UpdateDirectoryConfig'
-    { _udcServiceAccountCredentials = Nothing
-    , _udcOrganizationalUnitDistinguishedNames = Nothing
-    , _udcDirectoryName = pDirectoryName_
-    }
+updateDirectoryConfig pDirectoryName_
+  = UpdateDirectoryConfig'{_udcServiceAccountCredentials
+                             = Nothing,
+                           _udcOrganizationalUnitDistinguishedNames = Nothing,
+                           _udcDirectoryName = pDirectoryName_}
 
-
--- | The credentials for the service account used by the streaming instance to connect to the directory.
+-- | The credentials for the service account used by the fleet or image builder to connect to the directory.
 udcServiceAccountCredentials :: Lens' UpdateDirectoryConfig (Maybe ServiceAccountCredentials)
 udcServiceAccountCredentials = lens _udcServiceAccountCredentials (\ s a -> s{_udcServiceAccountCredentials = a})
 
@@ -82,7 +82,7 @@ udcServiceAccountCredentials = lens _udcServiceAccountCredentials (\ s a -> s{_u
 udcOrganizationalUnitDistinguishedNames :: Lens' UpdateDirectoryConfig [Text]
 udcOrganizationalUnitDistinguishedNames = lens _udcOrganizationalUnitDistinguishedNames (\ s a -> s{_udcOrganizationalUnitDistinguishedNames = a}) . _Default . _Coerce
 
--- | The name of the directory configuration.
+-- | The name of the Directory Config object.
 udcDirectoryName :: Lens' UpdateDirectoryConfig Text
 udcDirectoryName = lens _udcDirectoryName (\ s a -> s{_udcDirectoryName = a})
 
@@ -127,28 +127,31 @@ instance ToQuery UpdateDirectoryConfig where
         toQuery = const mempty
 
 -- | /See:/ 'updateDirectoryConfigResponse' smart constructor.
-data UpdateDirectoryConfigResponse = UpdateDirectoryConfigResponse'
-  { _udcrsDirectoryConfig :: !(Maybe DirectoryConfig)
-  , _udcrsResponseStatus  :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data UpdateDirectoryConfigResponse = UpdateDirectoryConfigResponse'{_udcrsDirectoryConfig
+                                                                    ::
+                                                                    !(Maybe
+                                                                        DirectoryConfig),
+                                                                    _udcrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'UpdateDirectoryConfigResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udcrsDirectoryConfig' - Information about the directory configuration.
+-- * 'udcrsDirectoryConfig' - Information about the Directory Config object.
 --
 -- * 'udcrsResponseStatus' - -- | The response status code.
 updateDirectoryConfigResponse
     :: Int -- ^ 'udcrsResponseStatus'
     -> UpdateDirectoryConfigResponse
-updateDirectoryConfigResponse pResponseStatus_ =
-  UpdateDirectoryConfigResponse'
-    {_udcrsDirectoryConfig = Nothing, _udcrsResponseStatus = pResponseStatus_}
+updateDirectoryConfigResponse pResponseStatus_
+  = UpdateDirectoryConfigResponse'{_udcrsDirectoryConfig
+                                     = Nothing,
+                                   _udcrsResponseStatus = pResponseStatus_}
 
-
--- | Information about the directory configuration.
+-- | Information about the Directory Config object.
 udcrsDirectoryConfig :: Lens' UpdateDirectoryConfigResponse (Maybe DirectoryConfig)
 udcrsDirectoryConfig = lens _udcrsDirectoryConfig (\ s a -> s{_udcrsDirectoryConfig = a})
 

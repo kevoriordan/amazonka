@@ -46,11 +46,10 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'importKeyPair' smart constructor.
-data ImportKeyPair = ImportKeyPair'
-  { _ikpKeyPairName     :: !Text
-  , _ikpPublicKeyBase64 :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ImportKeyPair = ImportKeyPair'{_ikpKeyPairName
+                                    :: !Text,
+                                    _ikpPublicKeyBase64 :: !Text}
+                       deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'ImportKeyPair' with the minimum fields required to make a request.
 --
@@ -63,10 +62,9 @@ importKeyPair
     :: Text -- ^ 'ikpKeyPairName'
     -> Text -- ^ 'ikpPublicKeyBase64'
     -> ImportKeyPair
-importKeyPair pKeyPairName_ pPublicKeyBase64_ =
-  ImportKeyPair'
-    {_ikpKeyPairName = pKeyPairName_, _ikpPublicKeyBase64 = pPublicKeyBase64_}
-
+importKeyPair pKeyPairName_ pPublicKeyBase64_
+  = ImportKeyPair'{_ikpKeyPairName = pKeyPairName_,
+                   _ikpPublicKeyBase64 = pPublicKeyBase64_}
 
 -- | The name of the key pair for which you want to import the public key.
 ikpKeyPairName :: Lens' ImportKeyPair Text
@@ -112,28 +110,28 @@ instance ToQuery ImportKeyPair where
         toQuery = const mempty
 
 -- | /See:/ 'importKeyPairResponse' smart constructor.
-data ImportKeyPairResponse = ImportKeyPairResponse'
-  { _ikprsOperation      :: !(Maybe Operation)
-  , _ikprsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ImportKeyPairResponse = ImportKeyPairResponse'{_ikprsOperation
+                                                    :: !(Maybe Operation),
+                                                    _ikprsResponseStatus ::
+                                                    !Int}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'ImportKeyPairResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ikprsOperation' - An array of key-value pairs containing information about the request operation.
+-- * 'ikprsOperation' - An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 --
 -- * 'ikprsResponseStatus' - -- | The response status code.
 importKeyPairResponse
     :: Int -- ^ 'ikprsResponseStatus'
     -> ImportKeyPairResponse
-importKeyPairResponse pResponseStatus_ =
-  ImportKeyPairResponse'
-    {_ikprsOperation = Nothing, _ikprsResponseStatus = pResponseStatus_}
+importKeyPairResponse pResponseStatus_
+  = ImportKeyPairResponse'{_ikprsOperation = Nothing,
+                           _ikprsResponseStatus = pResponseStatus_}
 
-
--- | An array of key-value pairs containing information about the request operation.
+-- | An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
 ikprsOperation :: Lens' ImportKeyPairResponse (Maybe Operation)
 ikprsOperation = lens _ikprsOperation (\ s a -> s{_ikprsOperation = a})
 

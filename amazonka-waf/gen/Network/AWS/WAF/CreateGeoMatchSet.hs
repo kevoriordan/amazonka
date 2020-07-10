@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an 'GeoMatchSet' , which you use to specify which web requests you want to allow or block based on the country that the requests originate from. For example, if you're receiving a lot of requests from one or more countries and you want to block the requests, you can create an @GeoMatchSet@ that contains those countries and then configure AWS WAF to block the requests.
+-- Creates an 'GeoMatchSet' , which you use to specify which web requests you want to allow or block based on the country that the requests originate from. For example, if you're receiving a lot of requests from one or more countries and you want to block the requests, you can create an @GeoMatchSet@ that contains those countries and then configure AWS WAF to block the requests. 
 --
 --
 -- To create and configure a @GeoMatchSet@ , perform the following steps:
@@ -33,7 +33,7 @@
 --
 --
 --
--- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <http://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
+-- For more information about how to use the AWS WAF API to allow or block HTTP requests, see the <https://docs.aws.amazon.com/waf/latest/developerguide/ AWS WAF Developer Guide> .
 --
 module Network.AWS.WAF.CreateGeoMatchSet
     (
@@ -61,11 +61,10 @@ import Network.AWS.WAF.Types
 import Network.AWS.WAF.Types.Product
 
 -- | /See:/ 'createGeoMatchSet' smart constructor.
-data CreateGeoMatchSet = CreateGeoMatchSet'
-  { _cgmsName        :: !Text
-  , _cgmsChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGeoMatchSet = CreateGeoMatchSet'{_cgmsName
+                                            :: !Text,
+                                            _cgmsChangeToken :: !Text}
+                           deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'CreateGeoMatchSet' with the minimum fields required to make a request.
 --
@@ -78,9 +77,9 @@ createGeoMatchSet
     :: Text -- ^ 'cgmsName'
     -> Text -- ^ 'cgmsChangeToken'
     -> CreateGeoMatchSet
-createGeoMatchSet pName_ pChangeToken_ =
-  CreateGeoMatchSet' {_cgmsName = pName_, _cgmsChangeToken = pChangeToken_}
-
+createGeoMatchSet pName_ pChangeToken_
+  = CreateGeoMatchSet'{_cgmsName = pName_,
+                       _cgmsChangeToken = pChangeToken_}
 
 -- | A friendly name or description of the 'GeoMatchSet' . You can't change @Name@ after you create the @GeoMatchSet@ .
 cgmsName :: Lens' CreateGeoMatchSet Text
@@ -127,12 +126,16 @@ instance ToQuery CreateGeoMatchSet where
         toQuery = const mempty
 
 -- | /See:/ 'createGeoMatchSetResponse' smart constructor.
-data CreateGeoMatchSetResponse = CreateGeoMatchSetResponse'
-  { _cgmsrsGeoMatchSet    :: !(Maybe GeoMatchSet)
-  , _cgmsrsChangeToken    :: !(Maybe Text)
-  , _cgmsrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data CreateGeoMatchSetResponse = CreateGeoMatchSetResponse'{_cgmsrsGeoMatchSet
+                                                            ::
+                                                            !(Maybe
+                                                                GeoMatchSet),
+                                                            _cgmsrsChangeToken
+                                                            :: !(Maybe Text),
+                                                            _cgmsrsResponseStatus
+                                                            :: !Int}
+                                   deriving (Eq, Read, Show, Data, Typeable,
+                                             Generic)
 
 -- | Creates a value of 'CreateGeoMatchSetResponse' with the minimum fields required to make a request.
 --
@@ -146,13 +149,11 @@ data CreateGeoMatchSetResponse = CreateGeoMatchSetResponse'
 createGeoMatchSetResponse
     :: Int -- ^ 'cgmsrsResponseStatus'
     -> CreateGeoMatchSetResponse
-createGeoMatchSetResponse pResponseStatus_ =
-  CreateGeoMatchSetResponse'
-    { _cgmsrsGeoMatchSet = Nothing
-    , _cgmsrsChangeToken = Nothing
-    , _cgmsrsResponseStatus = pResponseStatus_
-    }
-
+createGeoMatchSetResponse pResponseStatus_
+  = CreateGeoMatchSetResponse'{_cgmsrsGeoMatchSet =
+                                 Nothing,
+                               _cgmsrsChangeToken = Nothing,
+                               _cgmsrsResponseStatus = pResponseStatus_}
 
 -- | The 'GeoMatchSet' returned in the @CreateGeoMatchSet@ response. The @GeoMatchSet@ contains no @GeoMatchConstraints@ .
 cgmsrsGeoMatchSet :: Lens' CreateGeoMatchSetResponse (Maybe GeoMatchSet)

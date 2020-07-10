@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Undocumented operation.
+--
+-- This operation returns paginated results.
 module Network.AWS.APIGateway.GetSDKTypes
     (
     -- * Creating a Request
@@ -40,6 +42,7 @@ module Network.AWS.APIGateway.GetSDKTypes
 import Network.AWS.APIGateway.Types
 import Network.AWS.APIGateway.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -49,11 +52,10 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getSDKTypes' smart constructor.
-data GetSDKTypes = GetSDKTypes'
-  { _gstLimit    :: !(Maybe Int)
-  , _gstPosition :: !(Maybe Text)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSDKTypes = GetSDKTypes'{_gstLimit ::
+                                !(Maybe Int),
+                                _gstPosition :: !(Maybe Text)}
+                     deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSDKTypes' with the minimum fields required to make a request.
 --
@@ -64,8 +66,9 @@ data GetSDKTypes = GetSDKTypes'
 -- * 'gstPosition' - The current pagination position in the paged result set.
 getSDKTypes
     :: GetSDKTypes
-getSDKTypes = GetSDKTypes' {_gstLimit = Nothing, _gstPosition = Nothing}
-
+getSDKTypes
+  = GetSDKTypes'{_gstLimit = Nothing,
+                 _gstPosition = Nothing}
 
 -- | The maximum number of returned results per page. The default value is 25 and the maximum value is 500.
 gstLimit :: Lens' GetSDKTypes (Maybe Int)
@@ -74,6 +77,13 @@ gstLimit = lens _gstLimit (\ s a -> s{_gstLimit = a})
 -- | The current pagination position in the paged result set.
 gstPosition :: Lens' GetSDKTypes (Maybe Text)
 gstPosition = lens _gstPosition (\ s a -> s{_gstPosition = a})
+
+instance AWSPager GetSDKTypes where
+        page rq rs
+          | stop (rs ^. gstrsPosition) = Nothing
+          | stop (rs ^. gstrsItems) = Nothing
+          | otherwise =
+            Just $ rq & gstPosition .~ rs ^. gstrsPosition
 
 instance AWSRequest GetSDKTypes where
         type Rs GetSDKTypes = GetSDKTypesResponse
@@ -108,12 +118,11 @@ instance ToQuery GetSDKTypes where
 --
 --
 -- /See:/ 'getSDKTypesResponse' smart constructor.
-data GetSDKTypesResponse = GetSDKTypesResponse'
-  { _gstrsItems          :: !(Maybe [SDKType])
-  , _gstrsPosition       :: !(Maybe Text)
-  , _gstrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetSDKTypesResponse = GetSDKTypesResponse'{_gstrsItems
+                                                :: !(Maybe [SDKType]),
+                                                _gstrsPosition :: !(Maybe Text),
+                                                _gstrsResponseStatus :: !Int}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetSDKTypesResponse' with the minimum fields required to make a request.
 --
@@ -127,13 +136,10 @@ data GetSDKTypesResponse = GetSDKTypesResponse'
 getSDKTypesResponse
     :: Int -- ^ 'gstrsResponseStatus'
     -> GetSDKTypesResponse
-getSDKTypesResponse pResponseStatus_ =
-  GetSDKTypesResponse'
-    { _gstrsItems = Nothing
-    , _gstrsPosition = Nothing
-    , _gstrsResponseStatus = pResponseStatus_
-    }
-
+getSDKTypesResponse pResponseStatus_
+  = GetSDKTypesResponse'{_gstrsItems = Nothing,
+                         _gstrsPosition = Nothing,
+                         _gstrsResponseStatus = pResponseStatus_}
 
 -- | The current page of elements from this collection.
 gstrsItems :: Lens' GetSDKTypesResponse [SDKType]

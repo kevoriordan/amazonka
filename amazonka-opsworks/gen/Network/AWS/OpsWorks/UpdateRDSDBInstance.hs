@@ -21,7 +21,7 @@
 -- Updates an Amazon RDS instance.
 --
 --
--- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
+-- __Required Permissions__ : To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see <https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html Managing User Permissions> .
 --
 module Network.AWS.OpsWorks.UpdateRDSDBInstance
     (
@@ -46,12 +46,12 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'updateRDSDBInstance' smart constructor.
-data UpdateRDSDBInstance = UpdateRDSDBInstance'
-  { _urdiDBUser           :: !(Maybe Text)
-  , _urdiDBPassword       :: !(Maybe Text)
-  , _urdiRDSDBInstanceARN :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRDSDBInstance = UpdateRDSDBInstance'{_urdiDBUser
+                                                :: !(Maybe Text),
+                                                _urdiDBPassword ::
+                                                !(Maybe Text),
+                                                _urdiRDSDBInstanceARN :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'UpdateRDSDBInstance' with the minimum fields required to make a request.
 --
@@ -65,13 +65,10 @@ data UpdateRDSDBInstance = UpdateRDSDBInstance'
 updateRDSDBInstance
     :: Text -- ^ 'urdiRDSDBInstanceARN'
     -> UpdateRDSDBInstance
-updateRDSDBInstance pRDSDBInstanceARN_ =
-  UpdateRDSDBInstance'
-    { _urdiDBUser = Nothing
-    , _urdiDBPassword = Nothing
-    , _urdiRDSDBInstanceARN = pRDSDBInstanceARN_
-    }
-
+updateRDSDBInstance pRDSDBInstanceARN_
+  = UpdateRDSDBInstance'{_urdiDBUser = Nothing,
+                         _urdiDBPassword = Nothing,
+                         _urdiRDSDBInstanceARN = pRDSDBInstanceARN_}
 
 -- | The master user name.
 urdiDBUser :: Lens' UpdateRDSDBInstance (Maybe Text)
@@ -120,16 +117,15 @@ instance ToQuery UpdateRDSDBInstance where
         toQuery = const mempty
 
 -- | /See:/ 'updateRDSDBInstanceResponse' smart constructor.
-data UpdateRDSDBInstanceResponse =
-  UpdateRDSDBInstanceResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data UpdateRDSDBInstanceResponse = UpdateRDSDBInstanceResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'UpdateRDSDBInstanceResponse' with the minimum fields required to make a request.
 --
 updateRDSDBInstanceResponse
     :: UpdateRDSDBInstanceResponse
-updateRDSDBInstanceResponse = UpdateRDSDBInstanceResponse'
-
+updateRDSDBInstanceResponse
+  = UpdateRDSDBInstanceResponse'
 
 instance NFData UpdateRDSDBInstanceResponse where

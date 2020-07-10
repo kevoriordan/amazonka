@@ -18,12 +18,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: @ParameterName@ , @ParameterValue@ , and @ApplyMethod@ . A maximum of 20 parameters can be modified in a single request.
+-- Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: @ParameterName@ , @ParameterValue@ , and @ApplyMethod@ . A maximum of 20 parameters can be modified in a single request. 
 --
 --
--- For more information on Amazon Aurora, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html Aurora on Amazon RDS> in the /Amazon RDS User Guide./
+-- For more information on Amazon Aurora, see <https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html What Is Amazon Aurora?> in the /Amazon Aurora User Guide./ 
 --
--- /Important:/ After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the @character_set_database@ parameter. You can use the /Parameter Groups/ option of the <https://console.aws.amazon.com/rds/ Amazon RDS console> or the 'DescribeDBClusterParameters' command to verify that your DB cluster parameter group has been created or modified.
+-- /Important:/ After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon RDS to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the @character_set_database@ parameter. You can use the /Parameter Groups/ option of the <https://console.aws.amazon.com/rds/ Amazon RDS console> or the @DescribeDBClusterParameters@ action to verify that your DB cluster parameter group has been created or modified.
+--
+-- If the modified DB cluster parameter group is used by an Aurora Serverless cluster, Aurora applies the update immediately. The cluster restart might interrupt your workload. In that case, your application must reopen any connections and retry any transactions that were active when the parameter changes took effect.
 --
 module Network.AWS.RDS.ModifyDBClusterParameterGroup
     (
@@ -48,16 +50,18 @@ import Network.AWS.RDS.Types.Product
 import Network.AWS.Request
 import Network.AWS.Response
 
--- |
+-- | 
 --
 --
 --
 -- /See:/ 'modifyDBClusterParameterGroup' smart constructor.
-data ModifyDBClusterParameterGroup = ModifyDBClusterParameterGroup'
-  { _mdcpgDBClusterParameterGroupName :: !Text
-  , _mdcpgParameters                  :: ![Parameter]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ModifyDBClusterParameterGroup = ModifyDBClusterParameterGroup'{_mdcpgDBClusterParameterGroupName
+                                                                    :: !Text,
+                                                                    _mdcpgParameters
+                                                                    ::
+                                                                    ![Parameter]}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'ModifyDBClusterParameterGroup' with the minimum fields required to make a request.
 --
@@ -69,12 +73,11 @@ data ModifyDBClusterParameterGroup = ModifyDBClusterParameterGroup'
 modifyDBClusterParameterGroup
     :: Text -- ^ 'mdcpgDBClusterParameterGroupName'
     -> ModifyDBClusterParameterGroup
-modifyDBClusterParameterGroup pDBClusterParameterGroupName_ =
-  ModifyDBClusterParameterGroup'
-    { _mdcpgDBClusterParameterGroupName = pDBClusterParameterGroupName_
-    , _mdcpgParameters = mempty
-    }
-
+modifyDBClusterParameterGroup
+  pDBClusterParameterGroupName_
+  = ModifyDBClusterParameterGroup'{_mdcpgDBClusterParameterGroupName
+                                     = pDBClusterParameterGroupName_,
+                                   _mdcpgParameters = mempty}
 
 -- | The name of the DB cluster parameter group to modify.
 mdcpgDBClusterParameterGroupName :: Lens' ModifyDBClusterParameterGroup Text

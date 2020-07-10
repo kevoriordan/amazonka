@@ -23,13 +23,11 @@
 --
 -- To temporarily suspend scaling policies, call 'StopFleetActions' . This operation suspends all policies for the fleet.
 --
--- Operations related to fleet capacity scaling include:
+--     * 'DescribeFleetCapacity' 
 --
---     * 'DescribeFleetCapacity'
+--     * 'UpdateFleetCapacity' 
 --
---     * 'UpdateFleetCapacity'
---
---     * 'DescribeEC2InstanceLimits'
+--     * 'DescribeEC2InstanceLimits' 
 --
 --     * Manage scaling policies:
 --
@@ -43,9 +41,9 @@
 --
 --     * Manage fleet actions:
 --
---     * 'StartFleetActions'
+--     * 'StartFleetActions' 
 --
---     * 'StopFleetActions'
+--     * 'StopFleetActions' 
 --
 --
 --
@@ -77,32 +75,31 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'deleteScalingPolicy' smart constructor.
-data DeleteScalingPolicy = DeleteScalingPolicy'
-  { _dspName    :: !Text
-  , _dspFleetId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteScalingPolicy = DeleteScalingPolicy'{_dspName
+                                                :: !Text,
+                                                _dspFleetId :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteScalingPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dspName' - Descriptive label that is associated with a scaling policy. Policy names do not need to be unique.
+-- * 'dspName' - A descriptive label that is associated with a scaling policy. Policy names do not need to be unique.
 --
--- * 'dspFleetId' - Unique identifier for a fleet to be deleted.
+-- * 'dspFleetId' - A unique identifier for a fleet to be deleted. You can use either the fleet ID or ARN value.
 deleteScalingPolicy
     :: Text -- ^ 'dspName'
     -> Text -- ^ 'dspFleetId'
     -> DeleteScalingPolicy
-deleteScalingPolicy pName_ pFleetId_ =
-  DeleteScalingPolicy' {_dspName = pName_, _dspFleetId = pFleetId_}
+deleteScalingPolicy pName_ pFleetId_
+  = DeleteScalingPolicy'{_dspName = pName_,
+                         _dspFleetId = pFleetId_}
 
-
--- | Descriptive label that is associated with a scaling policy. Policy names do not need to be unique.
+-- | A descriptive label that is associated with a scaling policy. Policy names do not need to be unique.
 dspName :: Lens' DeleteScalingPolicy Text
 dspName = lens _dspName (\ s a -> s{_dspName = a})
 
--- | Unique identifier for a fleet to be deleted.
+-- | A unique identifier for a fleet to be deleted. You can use either the fleet ID or ARN value.
 dspFleetId :: Lens' DeleteScalingPolicy Text
 dspFleetId = lens _dspFleetId (\ s a -> s{_dspFleetId = a})
 
@@ -139,16 +136,15 @@ instance ToQuery DeleteScalingPolicy where
         toQuery = const mempty
 
 -- | /See:/ 'deleteScalingPolicyResponse' smart constructor.
-data DeleteScalingPolicyResponse =
-  DeleteScalingPolicyResponse'
-  deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteScalingPolicyResponse = DeleteScalingPolicyResponse'
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DeleteScalingPolicyResponse' with the minimum fields required to make a request.
 --
 deleteScalingPolicyResponse
     :: DeleteScalingPolicyResponse
-deleteScalingPolicyResponse = DeleteScalingPolicyResponse'
-
+deleteScalingPolicyResponse
+  = DeleteScalingPolicyResponse'
 
 instance NFData DeleteScalingPolicyResponse where

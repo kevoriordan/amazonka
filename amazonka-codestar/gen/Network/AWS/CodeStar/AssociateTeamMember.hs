@@ -49,14 +49,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'associateTeamMember' smart constructor.
-data AssociateTeamMember = AssociateTeamMember'
-  { _atmRemoteAccessAllowed :: !(Maybe Bool)
-  , _atmClientRequestToken  :: !(Maybe Text)
-  , _atmProjectId           :: !Text
-  , _atmUserARN             :: !Text
-  , _atmProjectRole         :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateTeamMember = AssociateTeamMember'{_atmRemoteAccessAllowed
+                                                :: !(Maybe Bool),
+                                                _atmClientRequestToken ::
+                                                !(Maybe Text),
+                                                _atmProjectId :: !Text,
+                                                _atmUserARN :: !Text,
+                                                _atmProjectRole :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AssociateTeamMember' with the minimum fields required to make a request.
 --
@@ -76,15 +76,13 @@ associateTeamMember
     -> Text -- ^ 'atmUserARN'
     -> Text -- ^ 'atmProjectRole'
     -> AssociateTeamMember
-associateTeamMember pProjectId_ pUserARN_ pProjectRole_ =
-  AssociateTeamMember'
-    { _atmRemoteAccessAllowed = Nothing
-    , _atmClientRequestToken = Nothing
-    , _atmProjectId = pProjectId_
-    , _atmUserARN = pUserARN_
-    , _atmProjectRole = pProjectRole_
-    }
-
+associateTeamMember pProjectId_ pUserARN_
+  pProjectRole_
+  = AssociateTeamMember'{_atmRemoteAccessAllowed =
+                           Nothing,
+                         _atmClientRequestToken = Nothing,
+                         _atmProjectId = pProjectId_, _atmUserARN = pUserARN_,
+                         _atmProjectRole = pProjectRole_}
 
 -- | Whether the team member is allowed to use an SSH public/private key pair to remotely access project resources, for example Amazon EC2 instances.
 atmRemoteAccessAllowed :: Lens' AssociateTeamMember (Maybe Bool)
@@ -148,11 +146,13 @@ instance ToQuery AssociateTeamMember where
         toQuery = const mempty
 
 -- | /See:/ 'associateTeamMemberResponse' smart constructor.
-data AssociateTeamMemberResponse = AssociateTeamMemberResponse'
-  { _atmrsClientRequestToken :: !(Maybe Text)
-  , _atmrsResponseStatus     :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data AssociateTeamMemberResponse = AssociateTeamMemberResponse'{_atmrsClientRequestToken
+                                                                ::
+                                                                !(Maybe Text),
+                                                                _atmrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'AssociateTeamMemberResponse' with the minimum fields required to make a request.
 --
@@ -164,12 +164,10 @@ data AssociateTeamMemberResponse = AssociateTeamMemberResponse'
 associateTeamMemberResponse
     :: Int -- ^ 'atmrsResponseStatus'
     -> AssociateTeamMemberResponse
-associateTeamMemberResponse pResponseStatus_ =
-  AssociateTeamMemberResponse'
-    { _atmrsClientRequestToken = Nothing
-    , _atmrsResponseStatus = pResponseStatus_
-    }
-
+associateTeamMemberResponse pResponseStatus_
+  = AssociateTeamMemberResponse'{_atmrsClientRequestToken
+                                   = Nothing,
+                                 _atmrsResponseStatus = pResponseStatus_}
 
 -- | The user- or system-generated token from the initial request that can be used to repeat the request.
 atmrsClientRequestToken :: Lens' AssociateTeamMemberResponse (Maybe Text)

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the user's multi-factor authentication (MFA) preference.
+-- Sets the user's multi-factor authentication (MFA) preference, including which MFA options are enabled and if any are preferred. Only one factor can be set as preferred. The preferred MFA factor will be used to authenticate a user if multiple factors are enabled. If multiple options are enabled and no preference is set, a challenge to choose an MFA option will be returned during sign in.
 --
 --
 module Network.AWS.CognitoIdentityProvider.AdminSetUserMFAPreference
@@ -47,13 +47,19 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'adminSetUserMFAPreference' smart constructor.
-data AdminSetUserMFAPreference = AdminSetUserMFAPreference'
-  { _asumpSMSMFASettings           :: !(Maybe SMSMFASettingsType)
-  , _asumpSoftwareTokenMFASettings :: !(Maybe SoftwareTokenMFASettingsType)
-  , _asumpUsername                 :: !(Sensitive Text)
-  , _asumpUserPoolId               :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data AdminSetUserMFAPreference = AdminSetUserMFAPreference'{_asumpSMSMFASettings
+                                                            ::
+                                                            !(Maybe
+                                                                SMSMFASettingsType),
+                                                            _asumpSoftwareTokenMFASettings
+                                                            ::
+                                                            !(Maybe
+                                                                SoftwareTokenMFASettingsType),
+                                                            _asumpUsername ::
+                                                            !(Sensitive Text),
+                                                            _asumpUserPoolId ::
+                                                            !Text}
+                                   deriving (Eq, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'AdminSetUserMFAPreference' with the minimum fields required to make a request.
 --
@@ -70,14 +76,12 @@ adminSetUserMFAPreference
     :: Text -- ^ 'asumpUsername'
     -> Text -- ^ 'asumpUserPoolId'
     -> AdminSetUserMFAPreference
-adminSetUserMFAPreference pUsername_ pUserPoolId_ =
-  AdminSetUserMFAPreference'
-    { _asumpSMSMFASettings = Nothing
-    , _asumpSoftwareTokenMFASettings = Nothing
-    , _asumpUsername = _Sensitive # pUsername_
-    , _asumpUserPoolId = pUserPoolId_
-    }
-
+adminSetUserMFAPreference pUsername_ pUserPoolId_
+  = AdminSetUserMFAPreference'{_asumpSMSMFASettings =
+                                 Nothing,
+                               _asumpSoftwareTokenMFASettings = Nothing,
+                               _asumpUsername = _Sensitive # pUsername_,
+                               _asumpUserPoolId = pUserPoolId_}
 
 -- | The SMS text message MFA settings.
 asumpSMSMFASettings :: Lens' AdminSetUserMFAPreference (Maybe SMSMFASettingsType)
@@ -136,10 +140,11 @@ instance ToQuery AdminSetUserMFAPreference where
         toQuery = const mempty
 
 -- | /See:/ 'adminSetUserMFAPreferenceResponse' smart constructor.
-newtype AdminSetUserMFAPreferenceResponse = AdminSetUserMFAPreferenceResponse'
-  { _asumprsResponseStatus :: Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+newtype AdminSetUserMFAPreferenceResponse = AdminSetUserMFAPreferenceResponse'{_asumprsResponseStatus
+                                                                               ::
+                                                                               Int}
+                                              deriving (Eq, Read, Show, Data,
+                                                        Typeable, Generic)
 
 -- | Creates a value of 'AdminSetUserMFAPreferenceResponse' with the minimum fields required to make a request.
 --
@@ -149,9 +154,9 @@ newtype AdminSetUserMFAPreferenceResponse = AdminSetUserMFAPreferenceResponse'
 adminSetUserMFAPreferenceResponse
     :: Int -- ^ 'asumprsResponseStatus'
     -> AdminSetUserMFAPreferenceResponse
-adminSetUserMFAPreferenceResponse pResponseStatus_ =
-  AdminSetUserMFAPreferenceResponse' {_asumprsResponseStatus = pResponseStatus_}
-
+adminSetUserMFAPreferenceResponse pResponseStatus_
+  = AdminSetUserMFAPreferenceResponse'{_asumprsResponseStatus
+                                         = pResponseStatus_}
 
 -- | -- | The response status code.
 asumprsResponseStatus :: Lens' AdminSetUserMFAPreferenceResponse Int

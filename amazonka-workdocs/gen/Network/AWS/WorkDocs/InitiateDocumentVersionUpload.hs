@@ -57,17 +57,37 @@ import Network.AWS.WorkDocs.Types
 import Network.AWS.WorkDocs.Types.Product
 
 -- | /See:/ 'initiateDocumentVersionUpload' smart constructor.
-data InitiateDocumentVersionUpload = InitiateDocumentVersionUpload'
-  { _idvuDocumentSizeInBytes      :: !(Maybe Integer)
-  , _idvuContentCreatedTimestamp  :: !(Maybe POSIX)
-  , _idvuAuthenticationToken      :: !(Maybe (Sensitive Text))
-  , _idvuName                     :: !(Maybe Text)
-  , _idvuId                       :: !(Maybe Text)
-  , _idvuContentModifiedTimestamp :: !(Maybe POSIX)
-  , _idvuContentType              :: !(Maybe Text)
-  , _idvuParentFolderId           :: !Text
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data InitiateDocumentVersionUpload = InitiateDocumentVersionUpload'{_idvuDocumentSizeInBytes
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Integer),
+                                                                    _idvuContentCreatedTimestamp
+                                                                    ::
+                                                                    !(Maybe
+                                                                        POSIX),
+                                                                    _idvuAuthenticationToken
+                                                                    ::
+                                                                    !(Maybe
+                                                                        (Sensitive
+                                                                           Text)),
+                                                                    _idvuName ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _idvuId ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _idvuContentModifiedTimestamp
+                                                                    ::
+                                                                    !(Maybe
+                                                                        POSIX),
+                                                                    _idvuContentType
+                                                                    ::
+                                                                    !(Maybe
+                                                                        Text),
+                                                                    _idvuParentFolderId
+                                                                    :: !Text}
+                                       deriving (Eq, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'InitiateDocumentVersionUpload' with the minimum fields required to make a request.
 --
@@ -77,7 +97,7 @@ data InitiateDocumentVersionUpload = InitiateDocumentVersionUpload'
 --
 -- * 'idvuContentCreatedTimestamp' - The timestamp when the content of the document was originally created.
 --
--- * 'idvuAuthenticationToken' - Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- * 'idvuAuthenticationToken' - Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 --
 -- * 'idvuName' - The name of the document.
 --
@@ -91,18 +111,15 @@ data InitiateDocumentVersionUpload = InitiateDocumentVersionUpload'
 initiateDocumentVersionUpload
     :: Text -- ^ 'idvuParentFolderId'
     -> InitiateDocumentVersionUpload
-initiateDocumentVersionUpload pParentFolderId_ =
-  InitiateDocumentVersionUpload'
-    { _idvuDocumentSizeInBytes = Nothing
-    , _idvuContentCreatedTimestamp = Nothing
-    , _idvuAuthenticationToken = Nothing
-    , _idvuName = Nothing
-    , _idvuId = Nothing
-    , _idvuContentModifiedTimestamp = Nothing
-    , _idvuContentType = Nothing
-    , _idvuParentFolderId = pParentFolderId_
-    }
-
+initiateDocumentVersionUpload pParentFolderId_
+  = InitiateDocumentVersionUpload'{_idvuDocumentSizeInBytes
+                                     = Nothing,
+                                   _idvuContentCreatedTimestamp = Nothing,
+                                   _idvuAuthenticationToken = Nothing,
+                                   _idvuName = Nothing, _idvuId = Nothing,
+                                   _idvuContentModifiedTimestamp = Nothing,
+                                   _idvuContentType = Nothing,
+                                   _idvuParentFolderId = pParentFolderId_}
 
 -- | The size of the document, in bytes.
 idvuDocumentSizeInBytes :: Lens' InitiateDocumentVersionUpload (Maybe Integer)
@@ -112,7 +129,7 @@ idvuDocumentSizeInBytes = lens _idvuDocumentSizeInBytes (\ s a -> s{_idvuDocumen
 idvuContentCreatedTimestamp :: Lens' InitiateDocumentVersionUpload (Maybe UTCTime)
 idvuContentCreatedTimestamp = lens _idvuContentCreatedTimestamp (\ s a -> s{_idvuContentCreatedTimestamp = a}) . mapping _Time
 
--- | Amazon WorkDocs authentication token. Do not set this field when using administrative API actions, as in accessing the API using AWS credentials.
+-- | Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.
 idvuAuthenticationToken :: Lens' InitiateDocumentVersionUpload (Maybe Text)
 idvuAuthenticationToken = lens _idvuAuthenticationToken (\ s a -> s{_idvuAuthenticationToken = a}) . mapping _Sensitive
 
@@ -181,12 +198,19 @@ instance ToQuery InitiateDocumentVersionUpload where
         toQuery = const mempty
 
 -- | /See:/ 'initiateDocumentVersionUploadResponse' smart constructor.
-data InitiateDocumentVersionUploadResponse = InitiateDocumentVersionUploadResponse'
-  { _idvursMetadata       :: !(Maybe DocumentMetadata)
-  , _idvursUploadMetadata :: !(Maybe UploadMetadata)
-  , _idvursResponseStatus :: !Int
-  } deriving (Eq, Show, Data, Typeable, Generic)
-
+data InitiateDocumentVersionUploadResponse = InitiateDocumentVersionUploadResponse'{_idvursMetadata
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        DocumentMetadata),
+                                                                                    _idvursUploadMetadata
+                                                                                    ::
+                                                                                    !(Maybe
+                                                                                        UploadMetadata),
+                                                                                    _idvursResponseStatus
+                                                                                    ::
+                                                                                    !Int}
+                                               deriving (Eq, Show, Data,
+                                                         Typeable, Generic)
 
 -- | Creates a value of 'InitiateDocumentVersionUploadResponse' with the minimum fields required to make a request.
 --
@@ -200,13 +224,13 @@ data InitiateDocumentVersionUploadResponse = InitiateDocumentVersionUploadRespon
 initiateDocumentVersionUploadResponse
     :: Int -- ^ 'idvursResponseStatus'
     -> InitiateDocumentVersionUploadResponse
-initiateDocumentVersionUploadResponse pResponseStatus_ =
-  InitiateDocumentVersionUploadResponse'
-    { _idvursMetadata = Nothing
-    , _idvursUploadMetadata = Nothing
-    , _idvursResponseStatus = pResponseStatus_
-    }
-
+initiateDocumentVersionUploadResponse
+  pResponseStatus_
+  = InitiateDocumentVersionUploadResponse'{_idvursMetadata
+                                             = Nothing,
+                                           _idvursUploadMetadata = Nothing,
+                                           _idvursResponseStatus =
+                                             pResponseStatus_}
 
 -- | The document metadata.
 idvursMetadata :: Lens' InitiateDocumentVersionUploadResponse (Maybe DocumentMetadata)

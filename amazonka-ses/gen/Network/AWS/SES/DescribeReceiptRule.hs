@@ -21,7 +21,7 @@
 -- Returns the details of the specified receipt rule.
 --
 --
--- For information about setting up receipt rules, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html Amazon SES Developer Guide> .
+-- For information about setting up receipt rules, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html Amazon SES Developer Guide> .
 --
 -- You can execute this operation no more than once per second.
 --
@@ -49,16 +49,15 @@ import Network.AWS.Response
 import Network.AWS.SES.Types
 import Network.AWS.SES.Types.Product
 
--- | Represents a request to return the details of a receipt rule. You use receipt rules to receive email with Amazon SES. For more information, see the <http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
+-- | Represents a request to return the details of a receipt rule. You use receipt rules to receive email with Amazon SES. For more information, see the <https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html Amazon SES Developer Guide> .
 --
 --
 --
 -- /See:/ 'describeReceiptRule' smart constructor.
-data DescribeReceiptRule = DescribeReceiptRule'
-  { _drrRuleSetName :: !Text
-  , _drrRuleName    :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReceiptRule = DescribeReceiptRule'{_drrRuleSetName
+                                                :: !Text,
+                                                _drrRuleName :: !Text}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeReceiptRule' with the minimum fields required to make a request.
 --
@@ -71,10 +70,10 @@ describeReceiptRule
     :: Text -- ^ 'drrRuleSetName'
     -> Text -- ^ 'drrRuleName'
     -> DescribeReceiptRule
-describeReceiptRule pRuleSetName_ pRuleName_ =
-  DescribeReceiptRule'
-    {_drrRuleSetName = pRuleSetName_, _drrRuleName = pRuleName_}
-
+describeReceiptRule pRuleSetName_ pRuleName_
+  = DescribeReceiptRule'{_drrRuleSetName =
+                           pRuleSetName_,
+                         _drrRuleName = pRuleName_}
 
 -- | The name of the receipt rule set that the receipt rule belongs to.
 drrRuleSetName :: Lens' DescribeReceiptRule Text
@@ -117,11 +116,14 @@ instance ToQuery DescribeReceiptRule where
 --
 --
 -- /See:/ 'describeReceiptRuleResponse' smart constructor.
-data DescribeReceiptRuleResponse = DescribeReceiptRuleResponse'
-  { _drrrsRule           :: !(Maybe ReceiptRule)
-  , _drrrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeReceiptRuleResponse = DescribeReceiptRuleResponse'{_drrrsRule
+                                                                ::
+                                                                !(Maybe
+                                                                    ReceiptRule),
+                                                                _drrrsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'DescribeReceiptRuleResponse' with the minimum fields required to make a request.
 --
@@ -133,10 +135,9 @@ data DescribeReceiptRuleResponse = DescribeReceiptRuleResponse'
 describeReceiptRuleResponse
     :: Int -- ^ 'drrrsResponseStatus'
     -> DescribeReceiptRuleResponse
-describeReceiptRuleResponse pResponseStatus_ =
-  DescribeReceiptRuleResponse'
-    {_drrrsRule = Nothing, _drrrsResponseStatus = pResponseStatus_}
-
+describeReceiptRuleResponse pResponseStatus_
+  = DescribeReceiptRuleResponse'{_drrrsRule = Nothing,
+                                 _drrrsResponseStatus = pResponseStatus_}
 
 -- | A data structure that contains the specified receipt rule's name, actions, recipients, domains, enabled status, scan status, and Transport Layer Security (TLS) policy.
 drrrsRule :: Lens' DescribeReceiptRuleResponse (Maybe ReceiptRule)

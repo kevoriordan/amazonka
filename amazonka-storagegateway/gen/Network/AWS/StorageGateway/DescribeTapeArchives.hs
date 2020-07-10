@@ -57,12 +57,12 @@ import Network.AWS.StorageGateway.Types.Product
 --
 --
 -- /See:/ 'describeTapeArchives' smart constructor.
-data DescribeTapeArchives = DescribeTapeArchives'
-  { _dtaMarker   :: !(Maybe Text)
-  , _dtaLimit    :: !(Maybe Nat)
-  , _dtaTapeARNs :: !(Maybe [Text])
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTapeArchives = DescribeTapeArchives'{_dtaMarker
+                                                  :: !(Maybe Text),
+                                                  _dtaLimit :: !(Maybe Nat),
+                                                  _dtaTapeARNs ::
+                                                  !(Maybe [Text])}
+                              deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DescribeTapeArchives' with the minimum fields required to make a request.
 --
@@ -70,21 +70,20 @@ data DescribeTapeArchives = DescribeTapeArchives'
 --
 -- * 'dtaMarker' - An opaque string that indicates the position at which to begin describing virtual tapes.
 --
--- * 'dtaLimit' - Specifies that the number of virtual tapes descried be limited to the specified number.
+-- * 'dtaLimit' - Specifies that the number of virtual tapes described be limited to the specified number.
 --
 -- * 'dtaTapeARNs' - Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.
 describeTapeArchives
     :: DescribeTapeArchives
-describeTapeArchives =
-  DescribeTapeArchives'
-    {_dtaMarker = Nothing, _dtaLimit = Nothing, _dtaTapeARNs = Nothing}
-
+describeTapeArchives
+  = DescribeTapeArchives'{_dtaMarker = Nothing,
+                          _dtaLimit = Nothing, _dtaTapeARNs = Nothing}
 
 -- | An opaque string that indicates the position at which to begin describing virtual tapes.
 dtaMarker :: Lens' DescribeTapeArchives (Maybe Text)
 dtaMarker = lens _dtaMarker (\ s a -> s{_dtaMarker = a})
 
--- | Specifies that the number of virtual tapes descried be limited to the specified number.
+-- | Specifies that the number of virtual tapes described be limited to the specified number.
 dtaLimit :: Lens' DescribeTapeArchives (Maybe Natural)
 dtaLimit = lens _dtaLimit (\ s a -> s{_dtaLimit = a}) . mapping _Nat
 
@@ -144,18 +143,23 @@ instance ToQuery DescribeTapeArchives where
 --
 --
 -- /See:/ 'describeTapeArchivesResponse' smart constructor.
-data DescribeTapeArchivesResponse = DescribeTapeArchivesResponse'
-  { _dtarsTapeArchives   :: !(Maybe [TapeArchive])
-  , _dtarsMarker         :: !(Maybe Text)
-  , _dtarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DescribeTapeArchivesResponse = DescribeTapeArchivesResponse'{_dtarsTapeArchives
+                                                                  ::
+                                                                  !(Maybe
+                                                                      [TapeArchive]),
+                                                                  _dtarsMarker
+                                                                  ::
+                                                                  !(Maybe Text),
+                                                                  _dtarsResponseStatus
+                                                                  :: !Int}
+                                      deriving (Eq, Read, Show, Data, Typeable,
+                                                Generic)
 
 -- | Creates a value of 'DescribeTapeArchivesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dtarsTapeArchives' - An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name(ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.
+-- * 'dtarsTapeArchives' - An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name (ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.
 --
 -- * 'dtarsMarker' - An opaque string that indicates the position at which the virtual tapes that were fetched for description ended. Use this marker in your next request to fetch the next set of virtual tapes in the virtual tape shelf (VTS). If there are no more virtual tapes to describe, this field does not appear in the response.
 --
@@ -163,15 +167,13 @@ data DescribeTapeArchivesResponse = DescribeTapeArchivesResponse'
 describeTapeArchivesResponse
     :: Int -- ^ 'dtarsResponseStatus'
     -> DescribeTapeArchivesResponse
-describeTapeArchivesResponse pResponseStatus_ =
-  DescribeTapeArchivesResponse'
-    { _dtarsTapeArchives = Nothing
-    , _dtarsMarker = Nothing
-    , _dtarsResponseStatus = pResponseStatus_
-    }
+describeTapeArchivesResponse pResponseStatus_
+  = DescribeTapeArchivesResponse'{_dtarsTapeArchives =
+                                    Nothing,
+                                  _dtarsMarker = Nothing,
+                                  _dtarsResponseStatus = pResponseStatus_}
 
-
--- | An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name(ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.
+-- | An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name (ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.
 dtarsTapeArchives :: Lens' DescribeTapeArchivesResponse [TapeArchive]
 dtarsTapeArchives = lens _dtarsTapeArchives (\ s a -> s{_dtarsTapeArchives = a}) . _Default . _Coerce
 

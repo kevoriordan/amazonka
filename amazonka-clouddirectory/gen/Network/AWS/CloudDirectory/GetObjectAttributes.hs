@@ -49,14 +49,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'getObjectAttributes' smart constructor.
-data GetObjectAttributes = GetObjectAttributes'
-  { _goaConsistencyLevel :: !(Maybe ConsistencyLevel)
-  , _goaDirectoryARN     :: !Text
-  , _goaObjectReference  :: !ObjectReference
-  , _goaSchemaFacet      :: !SchemaFacet
-  , _goaAttributeNames   :: ![Text]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetObjectAttributes = GetObjectAttributes'{_goaConsistencyLevel
+                                                :: !(Maybe ConsistencyLevel),
+                                                _goaDirectoryARN :: !Text,
+                                                _goaObjectReference ::
+                                                !ObjectReference,
+                                                _goaSchemaFacet :: !SchemaFacet,
+                                                _goaAttributeNames :: ![Text]}
+                             deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'GetObjectAttributes' with the minimum fields required to make a request.
 --
@@ -76,15 +76,14 @@ getObjectAttributes
     -> ObjectReference -- ^ 'goaObjectReference'
     -> SchemaFacet -- ^ 'goaSchemaFacet'
     -> GetObjectAttributes
-getObjectAttributes pDirectoryARN_ pObjectReference_ pSchemaFacet_ =
-  GetObjectAttributes'
-    { _goaConsistencyLevel = Nothing
-    , _goaDirectoryARN = pDirectoryARN_
-    , _goaObjectReference = pObjectReference_
-    , _goaSchemaFacet = pSchemaFacet_
-    , _goaAttributeNames = mempty
-    }
-
+getObjectAttributes pDirectoryARN_ pObjectReference_
+  pSchemaFacet_
+  = GetObjectAttributes'{_goaConsistencyLevel =
+                           Nothing,
+                         _goaDirectoryARN = pDirectoryARN_,
+                         _goaObjectReference = pObjectReference_,
+                         _goaSchemaFacet = pSchemaFacet_,
+                         _goaAttributeNames = mempty}
 
 -- | The consistency level at which to retrieve the attributes on an object.
 goaConsistencyLevel :: Lens' GetObjectAttributes (Maybe ConsistencyLevel)
@@ -144,11 +143,14 @@ instance ToQuery GetObjectAttributes where
         toQuery = const mempty
 
 -- | /See:/ 'getObjectAttributesResponse' smart constructor.
-data GetObjectAttributesResponse = GetObjectAttributesResponse'
-  { _goarsAttributes     :: !(Maybe [AttributeKeyAndValue])
-  , _goarsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetObjectAttributesResponse = GetObjectAttributesResponse'{_goarsAttributes
+                                                                ::
+                                                                !(Maybe
+                                                                    [AttributeKeyAndValue]),
+                                                                _goarsResponseStatus
+                                                                :: !Int}
+                                     deriving (Eq, Read, Show, Data, Typeable,
+                                               Generic)
 
 -- | Creates a value of 'GetObjectAttributesResponse' with the minimum fields required to make a request.
 --
@@ -160,10 +162,10 @@ data GetObjectAttributesResponse = GetObjectAttributesResponse'
 getObjectAttributesResponse
     :: Int -- ^ 'goarsResponseStatus'
     -> GetObjectAttributesResponse
-getObjectAttributesResponse pResponseStatus_ =
-  GetObjectAttributesResponse'
-    {_goarsAttributes = Nothing, _goarsResponseStatus = pResponseStatus_}
-
+getObjectAttributesResponse pResponseStatus_
+  = GetObjectAttributesResponse'{_goarsAttributes =
+                                   Nothing,
+                                 _goarsResponseStatus = pResponseStatus_}
 
 -- | The attributes that are associated with the object.
 goarsAttributes :: Lens' GetObjectAttributesResponse [AttributeKeyAndValue]

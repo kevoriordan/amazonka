@@ -51,12 +51,14 @@ import Network.AWS.Request
 import Network.AWS.Response
 
 -- | /See:/ 'listEventSubscriptions' smart constructor.
-data ListEventSubscriptions = ListEventSubscriptions'
-  { _lesNextToken   :: !(Maybe Text)
-  , _lesResourceARN :: !(Maybe Text)
-  , _lesMaxResults  :: !(Maybe Int)
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListEventSubscriptions = ListEventSubscriptions'{_lesNextToken
+                                                      :: !(Maybe Text),
+                                                      _lesResourceARN ::
+                                                      !(Maybe Text),
+                                                      _lesMaxResults ::
+                                                      !(Maybe Int)}
+                                deriving (Eq, Read, Show, Data, Typeable,
+                                          Generic)
 
 -- | Creates a value of 'ListEventSubscriptions' with the minimum fields required to make a request.
 --
@@ -69,13 +71,9 @@ data ListEventSubscriptions = ListEventSubscriptions'
 -- * 'lesMaxResults' - You can use this parameter to indicate the maximum number of items you want in the response. The default value is 10. The maximum value is 500.
 listEventSubscriptions
     :: ListEventSubscriptions
-listEventSubscriptions =
-  ListEventSubscriptions'
-    { _lesNextToken = Nothing
-    , _lesResourceARN = Nothing
-    , _lesMaxResults = Nothing
-    }
-
+listEventSubscriptions
+  = ListEventSubscriptions'{_lesNextToken = Nothing,
+                            _lesResourceARN = Nothing, _lesMaxResults = Nothing}
 
 -- | You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the __ListEventSubscriptions__ action. Subsequent calls to the action fill __nextToken__ in the request with the value of __NextToken__ from the previous response to continue listing data.
 lesNextToken :: Lens' ListEventSubscriptions (Maybe Text)
@@ -136,12 +134,17 @@ instance ToQuery ListEventSubscriptions where
         toQuery = const mempty
 
 -- | /See:/ 'listEventSubscriptionsResponse' smart constructor.
-data ListEventSubscriptionsResponse = ListEventSubscriptionsResponse'
-  { _lesrsNextToken      :: !(Maybe Text)
-  , _lesrsResponseStatus :: !Int
-  , _lesrsSubscriptions  :: ![Subscription]
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data ListEventSubscriptionsResponse = ListEventSubscriptionsResponse'{_lesrsNextToken
+                                                                      ::
+                                                                      !(Maybe
+                                                                          Text),
+                                                                      _lesrsResponseStatus
+                                                                      :: !Int,
+                                                                      _lesrsSubscriptions
+                                                                      ::
+                                                                      ![Subscription]}
+                                        deriving (Eq, Read, Show, Data,
+                                                  Typeable, Generic)
 
 -- | Creates a value of 'ListEventSubscriptionsResponse' with the minimum fields required to make a request.
 --
@@ -155,13 +158,11 @@ data ListEventSubscriptionsResponse = ListEventSubscriptionsResponse'
 listEventSubscriptionsResponse
     :: Int -- ^ 'lesrsResponseStatus'
     -> ListEventSubscriptionsResponse
-listEventSubscriptionsResponse pResponseStatus_ =
-  ListEventSubscriptionsResponse'
-    { _lesrsNextToken = Nothing
-    , _lesrsResponseStatus = pResponseStatus_
-    , _lesrsSubscriptions = mempty
-    }
-
+listEventSubscriptionsResponse pResponseStatus_
+  = ListEventSubscriptionsResponse'{_lesrsNextToken =
+                                      Nothing,
+                                    _lesrsResponseStatus = pResponseStatus_,
+                                    _lesrsSubscriptions = mempty}
 
 -- | When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the __nextToken__ parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null.
 lesrsNextToken :: Lens' ListEventSubscriptionsResponse (Maybe Text)

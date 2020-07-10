@@ -58,11 +58,9 @@ import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.Types.Product
 
 -- | /See:/ 'deleteRule' smart constructor.
-data DeleteRule = DeleteRule'
-  { _drRuleId      :: !Text
-  , _drChangeToken :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRule = DeleteRule'{_drRuleId :: !Text,
+                              _drChangeToken :: !Text}
+                    deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRule' with the minimum fields required to make a request.
 --
@@ -75,9 +73,9 @@ deleteRule
     :: Text -- ^ 'drRuleId'
     -> Text -- ^ 'drChangeToken'
     -> DeleteRule
-deleteRule pRuleId_ pChangeToken_ =
-  DeleteRule' {_drRuleId = pRuleId_, _drChangeToken = pChangeToken_}
-
+deleteRule pRuleId_ pChangeToken_
+  = DeleteRule'{_drRuleId = pRuleId_,
+                _drChangeToken = pChangeToken_}
 
 -- | The @RuleId@ of the 'Rule' that you want to delete. @RuleId@ is returned by 'CreateRule' and by 'ListRules' .
 drRuleId :: Lens' DeleteRule Text
@@ -124,11 +122,10 @@ instance ToQuery DeleteRule where
         toQuery = const mempty
 
 -- | /See:/ 'deleteRuleResponse' smart constructor.
-data DeleteRuleResponse = DeleteRuleResponse'
-  { _drrsChangeToken    :: !(Maybe Text)
-  , _drrsResponseStatus :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data DeleteRuleResponse = DeleteRuleResponse'{_drrsChangeToken
+                                              :: !(Maybe Text),
+                                              _drrsResponseStatus :: !Int}
+                            deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 -- | Creates a value of 'DeleteRuleResponse' with the minimum fields required to make a request.
 --
@@ -140,10 +137,9 @@ data DeleteRuleResponse = DeleteRuleResponse'
 deleteRuleResponse
     :: Int -- ^ 'drrsResponseStatus'
     -> DeleteRuleResponse
-deleteRuleResponse pResponseStatus_ =
-  DeleteRuleResponse'
-    {_drrsChangeToken = Nothing, _drrsResponseStatus = pResponseStatus_}
-
+deleteRuleResponse pResponseStatus_
+  = DeleteRuleResponse'{_drrsChangeToken = Nothing,
+                        _drrsResponseStatus = pResponseStatus_}
 
 -- | The @ChangeToken@ that you used to submit the @DeleteRule@ request. You can also use this value to query the status of the request. For more information, see 'GetChangeTokenStatus' .
 drrsChangeToken :: Lens' DeleteRuleResponse (Maybe Text)

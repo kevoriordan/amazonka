@@ -52,11 +52,11 @@ import Network.AWS.Response
 --
 --
 -- /See:/ 'getPipelineDefinition' smart constructor.
-data GetPipelineDefinition = GetPipelineDefinition'
-  { _gpdVersion    :: !(Maybe Text)
-  , _gpdPipelineId :: !Text
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPipelineDefinition = GetPipelineDefinition'{_gpdVersion
+                                                    :: !(Maybe Text),
+                                                    _gpdPipelineId :: !Text}
+                               deriving (Eq, Read, Show, Data, Typeable,
+                                         Generic)
 
 -- | Creates a value of 'GetPipelineDefinition' with the minimum fields required to make a request.
 --
@@ -68,9 +68,9 @@ data GetPipelineDefinition = GetPipelineDefinition'
 getPipelineDefinition
     :: Text -- ^ 'gpdPipelineId'
     -> GetPipelineDefinition
-getPipelineDefinition pPipelineId_ =
-  GetPipelineDefinition' {_gpdVersion = Nothing, _gpdPipelineId = pPipelineId_}
-
+getPipelineDefinition pPipelineId_
+  = GetPipelineDefinition'{_gpdVersion = Nothing,
+                           _gpdPipelineId = pPipelineId_}
 
 -- | The version of the pipeline definition to retrieve. Set this parameter to @latest@ (default) to use the last definition saved to the pipeline or @active@ to use the last definition that was activated.
 gpdVersion :: Lens' GetPipelineDefinition (Maybe Text)
@@ -124,13 +124,22 @@ instance ToQuery GetPipelineDefinition where
 --
 --
 -- /See:/ 'getPipelineDefinitionResponse' smart constructor.
-data GetPipelineDefinitionResponse = GetPipelineDefinitionResponse'
-  { _gpdrsPipelineObjects  :: !(Maybe [PipelineObject])
-  , _gpdrsParameterObjects :: !(Maybe [ParameterObject])
-  , _gpdrsParameterValues  :: !(Maybe [ParameterValue])
-  , _gpdrsResponseStatus   :: !Int
-  } deriving (Eq, Read, Show, Data, Typeable, Generic)
-
+data GetPipelineDefinitionResponse = GetPipelineDefinitionResponse'{_gpdrsPipelineObjects
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [PipelineObject]),
+                                                                    _gpdrsParameterObjects
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [ParameterObject]),
+                                                                    _gpdrsParameterValues
+                                                                    ::
+                                                                    !(Maybe
+                                                                        [ParameterValue]),
+                                                                    _gpdrsResponseStatus
+                                                                    :: !Int}
+                                       deriving (Eq, Read, Show, Data, Typeable,
+                                                 Generic)
 
 -- | Creates a value of 'GetPipelineDefinitionResponse' with the minimum fields required to make a request.
 --
@@ -146,14 +155,12 @@ data GetPipelineDefinitionResponse = GetPipelineDefinitionResponse'
 getPipelineDefinitionResponse
     :: Int -- ^ 'gpdrsResponseStatus'
     -> GetPipelineDefinitionResponse
-getPipelineDefinitionResponse pResponseStatus_ =
-  GetPipelineDefinitionResponse'
-    { _gpdrsPipelineObjects = Nothing
-    , _gpdrsParameterObjects = Nothing
-    , _gpdrsParameterValues = Nothing
-    , _gpdrsResponseStatus = pResponseStatus_
-    }
-
+getPipelineDefinitionResponse pResponseStatus_
+  = GetPipelineDefinitionResponse'{_gpdrsPipelineObjects
+                                     = Nothing,
+                                   _gpdrsParameterObjects = Nothing,
+                                   _gpdrsParameterValues = Nothing,
+                                   _gpdrsResponseStatus = pResponseStatus_}
 
 -- | The objects defined in the pipeline.
 gpdrsPipelineObjects :: Lens' GetPipelineDefinitionResponse [PipelineObject]
